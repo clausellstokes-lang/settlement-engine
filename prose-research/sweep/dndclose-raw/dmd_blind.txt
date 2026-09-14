@@ -1,0 +1,1083 @@
+Are the Authors of the Dungeon & Dragons Hardcover Adventures Blind to the Plight of DMs? | DMDavid
+
+ Adventure paths reveal their linear design in the name: They follow a path. In a linear adventure every play group follows the same plot thread, through the same scenes, to the same conclusion. For adventure creators, linear adventures bring advantages. They’re compact. Authors can devote their energy—and a published adventure’s pages—to content that reaches play.
+
+Adventure paths are episodic campaigns that look linear from a distance. Such adventures offer choices in each episode or chapter, but at the end of each chapter, the path leads to the next chapter. This device enables an entire campaign to fit into a book.
+
+Adventure paths serve dungeon masters by making a campaign with a story arc that leads from start to finish easy to run from a book.
+
+In 2003, the Shackled City adventure path in Dungeon magazine led the format to prominence. Shackled City and its successors proved so popular that Paizo made adventure paths the foundation of their publishing strategy, and the inspiration for the name of their Pathfinder role-playing game.
+
+In the classic adventure path, each episode ends with clues or hooks that lead to the next episode. This arrangement dates to Steading of the Hill Giant Chief (1978). The steading’s treasure room contains a map of the Glacial Rift of the Frost Giant Jarl and a magic chain capable of transporting 6 to the site.
+
+When the designers of the fifth-edition Dungeons & Dragons paired a line of hardcover adventures to the game, they aimed to grant players more freedom than a classic adventure path allows. Each book finds ways to break from the adventure-path model.
+
+The early fifth-edition hardcover adventures avoided hooks connecting the adventure into a narrative. Perhaps the designers felt the lack of threads benefited the adventures by adding some of the freedom of a sandbox. Explaining his design for Hoard of the Dragon Queen, Steve Winter said, “There are specific tasks characters should undertake and a sequence in which they happen, but we don’t hand the DM a script.”
+
+Many reviewers judged this design strategy harshly. Bryce Lynch wrote that the designers of Hoard of the Dragon Queen “clearly have an idea of how the adventure should proceed, but are terrified of being accused of railroading.”
+
+The adventures that followed Hoard of the Dragon Queen avoided a specific sequence of tasks. Most chapters described locations and the designers invited players to roam.
+
+While these adventures experimented with sandboxes, they still expected a good dungeon master to prepare or improvise leads for players who need a nudge.
+
+The 2nd adventure, Princes of the Apocalypse, poses as a sandbox with strongholds to raid and ruins to explore. But the “character advancement” sections on page 41 and 75 reveal a problem with granting so much freedom. Each note lists the character level best suited to the dungeons and sites on the pages to follow. For example, one site is “appropriate” for 6th-level characters; another “works best” for 9th level characters. D&D lead designer Jeremy Crawford explained, “For a lot of our published adventures, we’ll have broad difficulty targets for different parts of the adventure. For example, we might decide that one chapter of one of our adventures is really designed to be not too much trouble for characters of 6th level. Characters of any level can go into that chapter, but really what we’re doing is we want to ensure when an optimal group is there, it’s not too much trouble.
+
+In Princes of the Apocalypse, players can stumble into areas too dangerous or too easy for their characters. “If characters aren’t careful, they can definitely ‘dig too deep,’ going down into dungeons for which they are woefully underpowered,” Mike “Sly Florish” Shea wrote. “Thus, its possible for people to go down a stairwell leading from a fourth-level dungeon to an eighth-level dungeon with just a few steps.”
+
+Jeremy Crawford and the D&D team see such design as a feature. “Our starting assumption in 5th edition is that the game is pretty open ended and sandboxy, and we often like—particularly in our published adventures—dangling out the possibility that you might wander into a fight that you can’t win. We don’t view the game as a series of combat encounters that you are expected to face in a predictable way and then march off with a set amount of experience points and treasure. We view the game as a set of potential combat encounters, some of which you might not turn into combat encounters at all.”
+
+Although mixing challenges of all threat levels feels natural and perilous, this cocktail suffers disadvantages. Weak foes force tables to waste time reaching inevitable outcomes. Overwhelming foes make players feel ineffectual, and may kill characters.
+
+Letting characters find a few mismatched encounters livens the game. Letting them stumble into entire dungeons that don’t suit them probably yields a bad session. If low-level characters go into a high-level dungeon, they can only fight to escape. No player enjoys fleeing a dungeon, and then starting a quest for weaker foes—especially if the dungeon seemed like the best route to reaching their aims.
+
+If high-level characters enter a lower-level site, then the game becomes a rout. Most players enjoy an occasional chance to dominate battles, but when I play and I’m not challenged, I’m bored—and I’m not alone. Mike Shea asked D&D players on Facebook about this topic. Would players rather (a) have their DM scale up an adventure to challenge higher-level characters or (b) keep the low-level content and let players savor their power. Of those responding, 95% preferred a scaled-up challenge. See Mixing Threats from Weak to Lethal in a Dungeons & Dragons Game
+
+Like its predecessor, the 3rd adventure, Out of the Abyss, featured loosely-tied locations, each designed to suit characters of a particular level.
+
+In a guide to Out of the Abyss, Sean “Powerscore” McGovern wrote, “This adventure thinks it is a sandbox, but really it is a railroad in serious denial.” To Tim “Neuronphaser” Bannock, the lack of story threads made Abyss resemble “a sourcebook disguised as an adventure.”
+
+The adventure leaves connecting the locations to the DM. “Be ready to build quest threads and hooks between each of the big areas so the players have one to three clear paths to take as they explore the Underdark,” Mike Shea explained.
+
+Such requirements make designers seem blind to plight of DMs running a 256-page adventure. The designers wrote the book. When they play their own material, they enjoy a deeper understanding of their scenarios than any DM can gain from the text. This mastery makes adjustment and improvisation easy for them. If they need a hook, they know just the walk-on character on page 167 who can offer it. If their players go off book in chapter 2, a designer has no fear of inventing some detail that wrecks the plot assumed in chapter 7.
+
+The designers seem to assume that DMs resist a written playbook as an unwelcome limitation, but most DMs appreciate the help. If a hook or clue doesn’t suit their game, DMs know to ignore or adapt it.
+
+The 4th adventure, Curse of Strahd, ranks as the most successful “sandboxy” design. The Tarokka card reading brings one advantage by hinting at the means to Strahd’s defeat and providing clues that might guide the adventure. The card reading assigns destinations, but as Sean McGovern explains, “it’s up to the DM to figure out how to get the group to these places, and new DMs are going to have a hard time with that. The hooks that take you from one area to another are buried deep in each chapter.” To complicate the challenge, DMs must deal with hooks likely to lead inexperienced characters to their deaths.
+
+The 5th adventure, Storm King’s Thunder, starts with sandbox exploration and finishes as a linear adventure. In between, the adventure leads through 1 of 5 possible strongholds. On the plus side, the choice of giant strongholds gives the adventure unusual variation. As a minus, the strongholds stand as a highlight, but most groups will only explore one. (Still, a party at my local game store chose to battle through them all.)
+
+Of the fifth-edition hardcover adventures, Storm King’s Thunder suffered the second-lowest rating among reviewers on enworld. Reviewers praised the strongholds while criticizing the sandbox chapters.
+
+To start, the adventure shows the menace of the giants, but leaves characters with no clear way to meet the threat. Instead, the characters run errands until they reach the adventure’s true beginning. The errands suffered from such weak hooks that DMs either need to rework them or to face players dutifully following a course because the adventure expects it. Mike Shea advised DMs to “Be ready to fill in a lot of blanks with your own stories, quests, motivations, and dungeons; particularly early on.”
+
+Weak hooks and blank spots can leave DMs to struggle. “I’ve been running Storm King’s Thunder and the first three chapters of the adventure presented nothing but trouble for me,” Snazzy wrote in comments on this site. “I basically did what the book recommended, trusting that it would make sense and my players would want to do what the book suggests. And it turns out that it doesn’t really work. Which is disheartening! I’m a pretty new DM and so when the campaign book I spent all this money on has issues which require significant patching in the very beginning, it shakes some confidence in the product. The whole point of me buying a campaign was so I could game with less prep time required.”
+
+Many experienced DMs share this dissatisfaction. Sean “Power Score” McGovern writes guides that help DMs running the adventures. “My guides to these adventures are by far the most popular articles on my site. To me, that says that DMs need help with these books. That should not be the case! The point of a published adventure is to make it so that the DM does not have to do a lot of work!
+
+“I still think they should be organizing these adventures like Pathfinder adventure paths—linear. If you want a sandbox, It’s not hard at all to make a sandbox out of a [linear adventure]. But it is very time-consuming to turn a sandbox into a path.
+
+
+
+“Every single 5e adventure requires a ridiculous amount of homework and I think that is a shame.”
+
+McGovern wrote those words in the wake of Curse of Strahd. But Storm King’s Thunder presents a flow chart to help DMs, and the latest book, Tomb of Annihilation, scored higher with reviewers than any of its predecessors. Is the fifth-edition D&D team helping DMs more? Perhaps. The hardcover line shows consistent improvement and Tomb of Annihilation rates as the entry that best serves DMs. Some of that success comes because Tomb draws from proven styles of play. The first half offers a hex crawl patterned after Isle of Dread (1981). The second half lays an adventure path through chapters inspired by classic adventures from Dwellers of the Forbidden City (1981) to Tomb of Horrors (1978). The authors Chris Perkins, Will Doyle, and Steve Winter deserve some credit too. Will Doyle once said, “Adventures are playbooks not novels.”
+
+Still, I’ve heard nothing from the D&D team that suggests they share Will’s insight. Too often, the designers seem to think DMs who read a 256-page adventure can match its author’s comfort and mastery. Sometimes, the designers have hidden linear designs like a stain of dishonor. But an adventure path offers players plenty of choice and freedom within its chapters. And besides, players don’t hate linear adventures as much as designers think.
+
+As works of imagination, the fifth-edition hardcovers contain the some of the best D&D adventures ever. They teem with vivid characters, fantastic locations, and unforgettable scenes that few DMs could match—especially throughout a campaign. But too often they work better as books to read and admire than as blueprints for DMs to run games at the table.
+
+Share this:
+Tweet
+
+ Email a link to a friend (Opens in new window)
+ Email
+
+ 26 thoughts on “Are the Authors of the Dungeon & Dragons Hardcover Adventures Blind to the Plight of DMs?” 
+
+ Our group was straight home brew. I managed to talk them into Tomb, I trusted the reviews and the Hex crawl component to keep it interesting. It really hasn’t been. For me, it’s almost too dense and difficult to deliver. For them, there is almost too much story. Part of it, I think, is on me because I struggle with delivery. Needless to say, we unanimously voted to go back to Homebrew.
+
+I think this article hits some of the issues quite nicely. My group seems to be more engaged when they have a linear arc with the freedom to get distracted for a session here and there. I also find the group dismisses information because the relevance isn’t clear because of the sandbox style. This leads to bog down because we have to go back in the story constantly and restate it.
+
+I agree the stories are awesome, but they do read like novels that the order of telling is conveniently laid out alphabetically in chapters, rather than episodic style of play. I don’t think they are awful, just don’t fit our Saturday night exhausted play style.
+
+I will say that they loved the encounters. Too big and too small came up a few times and they were always excited to engage the situation appropriately. No one died but characters dropped just enough to keep the parties on their toes. So I will take the concept that not all encounters need to be balanced to heart and use it going forward.
+
+As always, a great article and deep insight. You have a gift for reading my game table and articulating what we feel but have trouble expressing in our whisky soaked, life exauhsted brains.
+
+ Reply ↓ 
+
+ I have played since the 1970’s and DM mostly in homebrew worlds. That said, I have had a chance to play in three 5e Hardcovers (HoDQ, CoS, and SKT). In all three cases, the DM was very new (first timer). In all three cases, I knew enough of the adventures to help the DM and “lead” the party on the correct path. I also used private feedback to help them with issues. But, in hindsight, this article helps me understand more how discouraged all three would have been as new DM’s without someone helping and giving feedback. 
+
+I can also say I see another problem with this format. While it is true that it is too easy for SOME parties to get lost and need extra DM help to correctly jump it, it is also possible for some to “find” shortcuts that break the adventure. This really challenges the DM, especially an inexperienced one, to have to adapt on the fly when the links are as sparsely defined as they are. 
+
+Finally, you don’t address my biggest disappointment with the design trend: lots of wandering around until you face a BBG that is way out of your level range. For example, in SKT, the ending is the party (10th lvl) gets to watch the giants fight a CR23 dragon. The only real question is what party members accidently take a breath weapon and die before the end. Again, in the hands of inexperienced DM’s, it either results in needless deaths and/or a victory no one feels like they earned. 
+
+You are absolutely right that the maps, the texture, and the feeling of the books are awesome. But the formula does not match something I would like to DM…
+
+ Reply ↓ 
+
+ Railroading or Spoon feeding? I quit gaming recently because I’ve been spoonfeeding players for years that would wouldn’t ever get anywhere under their own steam. Too tired of it.
+
+ Reply ↓ 
+
+ I really enjoyed this article. I’ve run players through SKT and definitely experienced difficulty getting them hooked into the story based on the beginning of the book. I think some of the best parts were completely improvised while they wandered the wilderness in between set pieces. I also got more giant fights by dropping the “steal relics from tribal cultures for no reason” and having the party defeat multiple giant lords.
+
+I also agree that most published adventure paths read like a storybook more than a playbook. Curse of Strahd is great in its feel and size, but you have to have nearly memorized the book to get all the hooks and ties to fit together between chapters. I can’t imagine having to do that as a new DM, let a long a semi-experience one.
+
+ Reply ↓ 
+
+ I 100% agree with what you said, tried to run ToA recently and it wasnt really good for me as DM. I was looking for something easy to run, that wouldnt require much preparing time and ended up as a nightmare of trying to figure how to keep the adventure going
+
+ Reply ↓ 
+
+ I agree with all of this, I’m surprised about the lack of widespread criticism. I’ve bought a couple of the WOTC hardcover adventures paths and find them deeply obtuse. Interesting characters, scenarios and locales but in no way a playbook. I’m an experienced dm and usually use a mixture of home brew with some doctored modules added in. I’m used to taking things apart and building them back up again, so the AP’s should be easy for me, but nothing of the sort. The hardcovers simply don’t read as adventures, and rely on a deep knowledge of the entirety of the plot with huge amounts of preparation required. I don’t get it, Perkins is clearly a highly competent DM who has written some decent modules in the past, since 2E. WOTC are trying to get everyone to play these adventure paths and encourage new players, yet they make them impossible for new DM’s and players to take on. Take a leaf out of Paizo’s book, they know how to present large adventures/campaigns clearly, railroad or otherwise. 
+
+I’ve been playing PF for 7 years after a hiatus and was excited about 5E given the more streamlined approach but the content is simply not designed for me; I want campaign settings/ideas books and smaller modules from the main publisher and/or big 3rd party publishers. The publishing approach and schedule might be good for hasbro’s coffers but it’s not good for the game. Kobold press amongst others are doing wotc’s work for them. I guess I need to accept 5E isn’t for me, it’s become a gateway game into the genre rather than the pinnacle of fantasy tabletop RPG’s. The mechanics are elegant but the overall content is poor. 
+
+Love the blog David, keep it up – I check in weekly.
+
+ Reply ↓ 
+
+ Sorry. Agree to disagree. Go to Paizo if you want that terrible railroaded crap. Hoard of the Dragon Queen was the worst of all of the adventures because it was pretty much the same as all of those.
+
+I don’t want adventures that leave no room for me to fill in blanks, and write story elements of my own.
+
+ Reply ↓ 
+
+ Publish adventures, as I see them since I started to play in early 1990’s, are just inspirational material. I am DM’ing since 1993, and NEVER followed any adventure as it was scripted – I had always tweaked them to my own tastes, swapping enemies, changing encounters, adding or removing things. Even if a group of players enters a place which is tailored to their character levels, in a published adventure, that can be a cake walk or a torment, depending on group configuration, group resources and, plain and simple, luck with the dice.
+
+Spoilers ahead: 
+
+For example, I just started Lost Mine of Phandelver, which will be connected to Out of the Abyss.
+
+Each side quest was changed to fit the backgrounds of my group of characters (even the undead in Phamdelver will be different, a group od lost knights fighting the drow, just to fit the background of our cleric). In Phandalin, I will give them the opportunity rebuild the abandoned mansion, transform it into their base of operations, and become lord of the region, if they desire it.
+
+Instead of having one male drow bad guy at the end, in my campaign, The Spider is a Drow Priestess of Lolth, seeking the Forge of Spells so she can create a “Planar Lenses”, which will be used in a ritual to free Lolth in the Realms. The group will have some clues that the drows are there for a nefarious reason, but they won’t know exactly why.
+
+From there, they will have freedom to do what they want, but, some weeks later, they will receive an agent of king Bruennor, and they will be ambushed by drows in they way to the dwarven kingdom. This is how they will end as Prisoners of the Drow. There, they will learn the drow are getting resources and slaves build something and to make a ritual and the Vrock attack will be triggered by the drows, if the group don’t escape before that.
+
+Again, they will be free to wander and go whenever it pleases them, in the underdark or above, provided they find their way but, in the end, they will discover that the demon lord roaming the Underdark is just a ploy in the larger scheme of Lolth and they will be able to amass an army to fight the Demon Queen herself.
+
+End of Spoilers
+
+People always complained about OotA because it is “too sandboxed”. The hell it is. It is a perfect inspiration to build my own campaign upon it having less trouble. with maps and locations. I would rather stay with this “loose” approach from WotC in 5e than that model which events are fixed in stone: if I am about to follow a pre-established path, I won’t play D&D, I will run The Witcher 3 or Eleder Scrolls Online.
+
+So, stop being milk drinkers, do your homework, and everything will be ok.
+
+ Reply ↓ 
+
+ well said
+
+ Reply ↓ 
+
+ seconded…well said!
+
+ Reply ↓ 
+
+ I just have to point out that your summary which rejects “pre-established path” and a “model [in] which events are set in stone, contrasts sharply with what you post in your spoilers.
+
+I mean no disrespect. Just calling what I see here.
+
+ Reply ↓ 
+
+ I wasn’t trying to make this a PF vs 5E debate, but I felt it was relevant to point out that Paizo (amongst others) know how to produce intelligible adventures, something in my opinion wotc appear unable to do. Surely lengthy published adventures/campaigns have to be broadly railroad by design, however well disguised that is. 
+
+Irrespective of what ideas I can pilfer for my homebrew I think the hardcovers are poorly designed for their purpose, which is a huge detriment to an otherwise well considered system. Published campaigns are surely mainly for people who either don’t have the time or inclination to make their own, or are new to a system and want their hand held. I don’t see that the current adventures serves either group well. 40 years on from the inception of D&D I expect a great deal more, in terms of design and delivery. 
+
+If people enjoy them and find them easy to use, all power to them.
+
+ Reply ↓ 
+
+ Looking at the faults of each of the adventures you described, as well as the comments so far, it sounds like the problem is the staff at Wizards of the Coast are having to service a lot of masters, and they’re still figuring out how to do that well with a release schedule that allows for approximately three hardcover books, not all of which will be adventures, to be published a year. If one DM wants an adventure with a lot of space for them to shuffle events around or slip-in extra missions or role playing scenes, then that takes away from the DM who wants a tightly scripted game that takes you directly from scene A to scene B to scene C. If one DM wants a book that will provide a lot of guidance on how to run the game, another DM might want a book that doesn’t have to hand-hold them. To compound things, D&D is *the* tabletop RPG for a lot of folks, leaving them with a very large crowd with very diverse interests that they have to service with only three books a year.
+
+I suspect if D&D published more printed adventures, they could tailor them to those different interests better. They could advertise one as being “open-ended,” another as having “tight pacing,” a third as being an aide in teaching new DMs how to run a game, and so on. As it stands, I don’t imagine we’ll see that anytime soon and instead we’ll see incremental experimentation with adventures as the writers at Wizards figure out how to write one adventure that satisfies everyone’s needs.
+
+ Reply ↓ 
+
+ 100%. On. Point.
+
+ Reply ↓ 
+
+ I strictly DM 5e books and have played and completed them all, except for Princes. Abyss has been my favorite overall, while I was able to connect character story arcs the best with Curse (it was just a luck thing how it worked out). There is no way to say here are your starting points and this is your climax and it not be some version of a railroad, its just a matter of how loose the story is between the stops. My group playing SKT just so happened to have some cool side story stuff they wanted to pursue and SKT has been a great fit allowing them to explore that extra stuff. I will say that I do rely heavily on help sites and guides such as Sly, Merric, Sean McGovern and Elven Tower. I think its a case of too much fluff and not enough bone and connective tissue. Don’t give me mountains of details about stuff my players are going to walk past (just tell me its a barracks room or kitchen, I will handle the details), especially the talk boxes, and then make me dig for details that connect two things between chapter 2 and chapter 8. The hard part is the clues and foreshadowing from one session to the next. Thank goodness for Sean’s guides! The flowchart in SKT was nice, but not terribly helpful. Lost Mines of Phandelver is a great example of a smallish adventure that gives plenty of quality play but in just 64 pages, monster lists and all and is quite manageable. A beginner DM can make about two pages of notes and have a great time. (I adjust Sildar’s arc and usage and clean up the rumor list). The hooks they include with the books are ok at best, but I usually have to really dwell on how to get my players to give a crap. As far as PF vs 5E, I think a system just fits your style a play and that’s the one you gravitate to. That is the reason there are so many systems out there.
+
+ Reply ↓ 
+
+ It is something to be considered that these are less adventures, when they should perhaps be better labeled as campaigns? The dm guild appears to be serving as a place for adventures that are designed to be run by dm’s with limited prep time and or experience. Phandelver is a really well designed adventure, that is very new dm friendly. The hardbacks, significantly less so. The book of lairs 1 and 2 from either first or second edition, or a hardcover from 4e with a similar title, would offer a starting place for new dm’s to learn in a much more forgiving environment. Hooks that are suggested, a setting, all can help teach without dumbing down the content.
+
+Thoughts?
+
+ Reply ↓ 
+
+ Actually, I think that’s their problem. They might “look” like campaigns, but they aren’t. They are long “one-shots” where the characters will go from level 1 to 12 or 15, and the players will make new characters for the next AP. 
+
+There is no development of the setting or campaign outside of the single storyline and what the DM adds to flesh out the sandbox stuff, if needed. A DM who drops this into an actual campaign wouldn’t really have any issues, since they have plenty of options if the PCs wandered off track.
+
+The DMs used to be encouraged to develop their campaign world (it was pretty much required prior to the Greyhawk and later settings). Even then, Greyhwak was little more than a map and a framework of countries, and the Realms originally had space set aside (like Sembia) that TSR said they’d never develop.
+
+A sandbox does not equal a campaign, and these are definitely more sandboxy. The fact that most of them are all set in the Forgotten Realms, and that they’ve released additional products related to the Realms doesn’t make it a campaign. It provides a shared setting for the adventures.
+
+A campaign fleshes out what’s happening in the setting, and generally covers what happens to lots of characters. With the old single adventures, rather than APs, PCs would “go back to town” between adventures, and the same or different characters could take part in the next one. In general, you only advanced one level per adventure, so your 2nd level characters came back as 3rd level, but your other 2nd level (or even 1st level) weren’t far behind.With the APs, they come home at 12th to 15th level, and the next AP starts at 1st to 3rd, so the characters are essentially done. There isn’t any continuity between APs,
+
+They point to a basic framework for developing your own campaign, but the APs can’t really promote that entirely, because the PCs might choose to do something other than “Chapter 4” and never come back to the AP.
+
+The Book of Lairs products work well for a campaign. But the current publications kind of promote the opposite. It’s now more about the characters and their rise to heroes, instead of the stories of dozens of characters over many adventures in a setting or campaign.
+
+ Reply ↓ 
+
+ Really great article, I couldn’t agree more. 
+
+Putting the whole sandbox / railroad thing on the back burner, the books themselves could be better organized and more GM friendly. I still roll my eyes every time I read something like “See the spell’s description in the Player’s Handbook for full information” or “See chapter 7 of the Dungeon Master’s Guide for the mirror’s statistics.” That’s just painful! What’s wrong with PHB292 or DMG173..?
+
+I’ll resist the urge to go on full on rant about padded 256 page adventures that are only released 1-2 times a year. The books are totally stuffed with material, but it seems excessive at times and borders on expanding page count rather than making the adventure better and easier to run for the GM.
+
+ Reply ↓ 
+
+ Don’t agree entirely. For me it’s a little bit from Column A and some from Column B. I played in SKT and the DM said it was a lot of work to tie everything together as well as a lot of location info needed was spread across various books. I was the DM for PotA and didn’t have any trouble with it, in fact I loved it as it was a kind of mix between sandbox and linear. The party DID go into the dungeon that was too tough for them, but I always gave them a way to escape after having made it clear to them that they were not going to be spoonfed towards enemies they could always overcome. Even so, they got captured rather than killed and the big bad evil guy mixed some truth with lies and set them to attack his enemies (another elemental faction). They knew they were being used, but happy to get out alive. 
+
+I would say Wizards are letting small linear adventures be produced by fans and contractors on DM’s Guild, and more sandboxy epic adventures they will produce in hardback. I’d also disagree with Sean McGovern’s conclusion that the popularity of his Guide series of products proves DMs need help. I buy them because he has great ideas to value add to the product, I could certainly run the game without them. Yes, that’s only my take, but I doubt I’m the only one.
+
+Thanks for the interesting article!
+
+ Reply ↓ 
+
+ Just seems like a lot of complaining. If the group decides to play a dungeon they are overpowered for, the DM should beef up the number of minions or making it tougher. I would hardly call that wasting the groups time.
+
+ Reply ↓ 
+
+ Have you run any of the published material? I hear this same statement from many who have not. I have run every single published adventure and I can assure you amount of work required to run these can be substantial. More than just oh it’s too high level just don’t go there. I have also run all the paizo adventure paths and find them far easier to run.
+
+ Reply ↓ 
+
+ I enjoy it more when my group does take things in a completely unexpected direction, it’s what makes being a GM fun for me. I hate railroading my players – something published adventures all seem to do in my eyes. As much as I can’t stand published adventures, the 5E approach to their published adventures from WotC has moved in a direction closer to my approach as a GM – Story over detail.
+
+ Reply ↓ 
+
+ Pingback: Making the List of 10 Greatest D&D Adventures After 1985 | DMDavid 
+
+ *grognard rant incoming*
+
+I hate Adventure Paths. I really do. I learned to GM off of them, and they inspired terrible habits in me. Railroading, illusionism, the idea that all encounters have to be perfectly balanced, the idea that adventures should be about a pregenerated plot instead of plot that occurs naturally, as a result of cleverly designed adventures that spark interesting things happening. They also have terrible GM NPCs that seem designed to steal the spotlight (with the occasional rationalization on how the heroes are still the heroes, really, even though this NPC is essential to the story). 
+
+So even when considering the potential role as learner adventures, they give the GMs a fish, instead of teaching them to fish. And the fish is kinda rotten. 
+
+The 5E adventures aren’t perfect. The insistence on taking individual sandbox adventures and turning them into a linear “intended path” that will take you to, what, level 12, in a system where differences between levels are severe and monster hp scaling spikes hard, it’s a recipe for disaster. That said, I feel they’re actually salvageable, while Pathfinder adventures are… really hard to salvage. Too much dependencies between adventures, too many vital npcs running around. And the names. Oh my god, the pathfinder names. They’re neat and flavorful, but nearly impossible to remember without notes. 
+
+*grognard rant over*
+
+ Reply ↓ 
+
+ I find that the amount of work required from a DM to run the published material is far to great. I work 50+ hours per week, have kids and don’t want to be spending all my free time trying to prep for published adventures. I may as well run my own stuff which I am now doing. I am even running Pathfinder APs with on the fly conversion and my group enjoys them a lot more and I dont spend nearly as much time prepping for sessions. I am nearly done with 5e’s published stuff.
+
+ Reply ↓ 
+
+ Pingback: DwDnD#140 – Low Level Adventures – Misdirected Mark Productions 
+
+ Leave a ReplyCancel reply
+
+ My DMs Guild Adventures
+Search
+
+ Search for:
+
+ Recent Comments
+Slinky on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Joseph R. on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Ilias on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Joe on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You
+Heightdiff on The Right Monster for the Job: D&D Monsters Listed by Function
+Archives
+
+ 2026 
+
+ + 
+ August 
+
+ (1)
+
+ 2025 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ July 
+
+ (1)
+
+ + 
+ April 
+
+ (1)
+
+ + 
+ March 
+
+ (1)
+
+ + 
+ January 
+
+ (2)
+
+ 2024 
+
+ + 
+ December 
+
+ (1)
+
+ + 
+ November 
+
+ (1)
+
+ + 
+ May 
+
+ (1)
+
+ + 
+ April 
+
+ (1)
+
+ + 
+ January 
+
+ (1)
+
+ 2023 
+
+ + 
+ November 
+
+ (2)
+
+ + 
+ September 
+
+ (10)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (1)
+
+ + 
+ June 
+
+ (2)
+
+ + 
+ May 
+
+ (2)
+
+ + 
+ April 
+
+ (2)
+
+ + 
+ March 
+
+ (1)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (2)
+
+ 2022 
+
+ + 
+ December 
+
+ (2)
+
+ + 
+ November 
+
+ (2)
+
+ + 
+ October 
+
+ (1)
+
+ + 
+ September 
+
+ (2)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (2)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (4)
+
+ 2021 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (5)
+
+ + 
+ October 
+
+ (6)
+
+ + 
+ September 
+
+ (8)
+
+ + 
+ August 
+
+ (3)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (5)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (5)
+
+ + 
+ February 
+
+ (5)
+
+ + 
+ January 
+
+ (4)
+
+ 2020 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (4)
+
+ + 
+ September 
+
+ (5)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (5)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (5)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (4)
+
+ 2019 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (4)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (5)
+
+ + 
+ June 
+
+ (10)
+
+ + 
+ May 
+
+ (6)
+
+ + 
+ April 
+
+ (6)
+
+ + 
+ March 
+
+ (4)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (5)
+
+ 2018 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (5)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (2)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (3)
+
+ 2017 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (4)
+
+ + 
+ September 
+
+ (4)
+
+ + 
+ August 
+
+ (5)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (5)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (4)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (5)
+
+ 2016 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (3)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (2)
+
+ + 
+ March 
+
+ (2)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (4)
+
+ 2015 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (2)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (1)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (3)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (5)
+
+ 2014 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (5)
+
+ + 
+ August 
+
+ (6)
+
+ + 
+ July 
+
+ (6)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (6)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (7)
+
+ + 
+ February 
+
+ (5)
+
+ + 
+ January 
+
+ (6)
+
+ 2013 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (5)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (3)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (7)
+
+ 2012 
+
+ + 
+ December 
+
+ (9)
+
+ + 
+ November 
+
+ (9)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (5)
+
+ DM David
+
+ DM David
+
+ Categories
+
+ Adventurers League
+
+ Advice
+
+ Character builds
+
+ Conventions
+
+ D&D fifth edition
+
+ D&D fourth edition
+
+ Dungeon master's tools
+
+ Inspiration
+
+ Lair Assault
+
+ Living Forgotten Realms
+
+ Miniatures
+
+ Products
+
+ Reviews
+
+ Role-playing game design
+
+ Role-playing game history
+
+ Rules
+
+ Scenarios
+
+ Uncategorized
+
+ Meta
+
+ Log in
+
+ Entries feed
+
+ Comments feed
+
+ WordPress.org
+
+ Subscribe to Blog via Email
+
+ Enter your email address to subscribe to this blog and receive notifications of new posts by email.
+
+ Email Address 
+
+ Subscribe

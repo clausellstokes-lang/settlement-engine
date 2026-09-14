@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"41bb32e190","applicationID":"69536237","transactionName":"dl1cFhBdX1VSEExBW00dUA4NVRxJQgAPW0pdV1Y9El1ATURNEFpWQg==","queueTime":0,"applicationTime":153,"agent":""}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"41bb32e190",applicationID:"69536237",browserID:"325355252"};;/*! For license information please see nr-loader-rum-1.321.0.min.js.LICENSE.txt */
+(()=>{var e={8122(e,t,r){"use strict";r.d(t,{a:()=>i});var n=r(944);function i(e,t){try{if(!e||"object"!=typeof e)return(0,n.R)(3);if(!t||"object"!=typeof t)return(0,n.R)(4);const r=Object.create(Object.getPrototypeOf(t),Object.getOwnPropertyDescriptors(t)),a=0===Object.keys(r).length?e:r;for(let s in a)if(void 0!==e[s])try{if(null===e[s]){r[s]=null;continue}Array.isArray(e[s])&&Array.isArray(t[s])?r[s]=Array.from(new Set([...e[s],...t[s]])):e[s]instanceof Map||e[s]instanceof Set||e[s]instanceof Date||e[s]instanceof RegExp?r[s]=e[s]:"object"==typeof e[s]&&null!==t[s]&&"object"==typeof t[s]?r[s]=i(e[s],t[s]):r[s]=e[s]}catch(e){r[s]||(0,n.R)(1,e)}return r}catch(e){(0,n.R)(2,e)}}},2555(e,t,r){"use strict";r.d(t,{f:()=>s});var n=r(384),i=r(8122);const a={beacon:n.NT.beacon,errorBeacon:n.NT.errorBeacon,licenseKey:void 0,applicationID:void 0,sa:void 0,queueTime:void 0,applicationTime:void 0,ttGuid:void 0,user:void 0,account:void 0,product:void 0,extra:void 0,jsAttributes:{},userAttributes:void 0,atts:void 0,transactionName:void 0,tNamePlain:void 0};function s(e){try{return!!e.licenseKey&&!!e.errorBeacon&&!!e.applicationID}catch(e){return!1}}r.d(t,["D",0,e=>(0,i.a)(e,a)])},7699(e,t,r){"use strict";var n=r(860);const i={[n.K7.logging]:!0,[n.K7.genericEvents]:!0,[n.K7.jserrors]:!0,[n.K7.ajax]:!0};r.d(t,["It",0,1e6,"KC",0,i,"qh",0,"SESSION_ERROR"])},9324(e,t,r){"use strict";r.d(t,["xv",0,"1.321.0"])},981(e,t,r){"use strict";r.d(t,["R",0,{AJAX:"AjaxRequest",PA:"PageAction",UA:"UserAction",BP:"BrowserPerformance",WS:"WebSocket",SPV:"SecurityPolicyViolation",JSE:"JavaScriptError",LOG:"Log",PVE:"PageView",PVT:"PageViewTiming",SR:"SessionReplay",ST:"SessionTrace",BI:"BrowserInteraction"}])},6154(e,t,r){"use strict";var n=r(1863);const i="undefined"!=typeof window&&!!window.document,a="undefined"!=typeof WorkerGlobalScope&&("undefined"!=typeof self&&self instanceof WorkerGlobalScope&&self.navigator instanceof WorkerNavigator||"undefined"!=typeof globalThis&&globalThis instanceof WorkerGlobalScope&&globalThis.navigator instanceof WorkerNavigator),s=i?window:"undefined"!=typeof WorkerGlobalScope&&("undefined"!=typeof self&&self instanceof WorkerGlobalScope&&self||"undefined"!=typeof globalThis&&globalThis instanceof WorkerGlobalScope&&globalThis),o=Boolean("hidden"===s?.document?.visibilityState),c=""+s?.location,u=/iPad|iPhone|iPod/.test(s.navigator?.userAgent),d=u&&"undefined"==typeof SharedWorker,l=((()=>{const e=s.navigator?.userAgent?.match(/Firefox[/\s](\d+\.\d+)/);Array.isArray(e)&&e.length>=2&&e[1]})(),Date.now()-(0,n.t)());r.d(t,["OF",0,u,"RI",0,i,"WN",0,l,"bv",0,a,"gm",0,s,"m",0,c,"mw",0,o,"sb",0,d,"zk",0,()=>{const e=s?.performance?.getEntriesByType?.("navigation")?.[0];if(e&&e.responseStart>0&&e.responseStart<s.performance.now())return e}])},3241(e,t,r){"use strict";r.d(t,{W:()=>i});var n=r(6154);function i(e={}){try{n.gm.dispatchEvent(new CustomEvent("newrelic",{detail:e}))}catch(e){}}},1687(e,t,r){"use strict";r.d(t,{Ak:()=>o,Ze:()=>u,x3:()=>c});var n=r(3241),i=r(3606),a=r(860),s=r(2646);function o(e,t){if(!e)return;const r={staged:!1,priority:a.P3[t]||0};e.runtime.drainRegistry.get(t)||e.runtime.drainRegistry.set(t,r)}function c(e,t){if(!e)return;const r=e.runtime.drainRegistry;r&&(r.get(t)&&r.delete(t),l(e,t,!1),r.size&&d(e))}function u(e,t="feature",r=!1){if(e){if(!e.runtime.drainRegistry.get(t)||r)return l(e,t);e.runtime.drainRegistry.get(t).staged=!0,d(e)}}function d(e){if(!e)return;const t=Array.from(e.runtime.drainRegistry);t.every(([e,t])=>t.staged)&&(t.sort((e,t)=>e[1].priority-t[1].priority),t.forEach(([t])=>{e.runtime.drainRegistry.delete(t),l(e,t)}))}function l(e,t,r=!0){if(!e)return;const a=e.ee,o=i.i.handlers;if(a&&!a.aborted&&a.backlog&&o){if((0,n.W)({type:"lifecycle",name:"drain",feature:t}),r){const e=a.backlog[t],r=o[t];if(r){for(let t=0;e&&t<e.length;++t)f(e[t],r);Object.entries(r).forEach(([e,t])=>{Object.values(t||{}).forEach(t=>{t[0]?.on&&t[0].context()instanceof s.y&&!t[0].listeners(e).includes(t[1])&&t[0].on(e,t[1])})})}}a.isolatedBacklog||delete o[t],a.backlog[t]=null,a.emit("drain-"+t,[])}}function f(e,t){var r=e[1];Object.values(t[r]||{}).forEach(t=>{var r=e[0];if(t[0]===r){var n=t[1],i=e[3],a=e[2];n.apply(i,a)}})}},7836(e,t,r){"use strict";var n=r(384),i=r(8990),a=r(2646),s=r(5607);const o="nr@context:".concat(s.W),c=function e(t,r){var n={},s={},d={},l=!1;try{l=16===r.length&&u.initializedAgents?.[r]?.runtime.isolatedBacklog}catch(e){}var f={on:p,addEventListener:p,removeEventListener:function(e,t){var r=n[e];if(!r)return;for(var i=0;i<r.length;i++)r[i]===t&&r.splice(i,1)},emit:function(e,r,n,i,a){!1!==a&&(a=!0);if(c.aborted&&!i)return;t&&a&&t.emit(e,r,n);var o=g(n);m(e).forEach(e=>{e.apply(o,r)});var u=v()[s[e]];u&&u.push([f,e,r,o]);return o},get:h,listeners:m,context:g,buffer:function(e,t){const r=v();if(t=t||"feature",f.aborted)return;Object.entries(e||{}).forEach(([e,n])=>{s[n]=t,t in r||(r[t]=[])})},abort:function(){f._aborted=!0,Object.keys(f.backlog).forEach(e=>{delete f.backlog[e]})},isBuffering:function(e){return!!v()[s[e]]},debugId:r,backlog:l?{}:t&&"object"==typeof t.backlog?t.backlog:{},isolatedBacklog:l};return Object.defineProperty(f,"aborted",{get:()=>{let e=f._aborted||!1;return e||(t&&(e=t.aborted),e)}}),f;function g(e){return e&&e instanceof a.y?e:e?(0,i.I)(e,o,()=>new a.y(o)):new a.y(o)}function p(e,t){n[e]=m(e).concat(t)}function m(e){return n[e]||[]}function h(t){return d[t]=d[t]||e(f,t)}function v(){return f.backlog}}(void 0,"globalEE"),u=(0,n.Zm)();u.ee||(u.ee=c),r.d(t,["P",0,o,"ee",0,c])},2646(e,t,r){"use strict";r.d(t,{y:()=>n});class n{constructor(e){this.contextId=e}}},9908(e,t,r){"use strict";r.d(t,{d:()=>n,p:()=>i});var n=r(7836).ee.get("handle");function i(e,t,r,i,a){a?(a.buffer([e],i),a.emit(e,t,r)):(n.buffer([e],i),n.emit(e,t,r))}},3606(e,t,r){"use strict";r.d(t,{i:()=>a});var n=r(9908);a.on=s;var i=a.handlers={};function a(e,t,r,a){s(a||n.d,i,e,t,r)}function s(e,t,r,i,a){a||(a="feature"),e||(e=n.d);var s=t[a]=t[a]||{};(s[r]=s[r]||[]).push([e,i])}},3878(e,t,r){"use strict";function n(e,t){return{capture:e,passive:!1,signal:t}}function i(e,t,r=!1,i){window.addEventListener(e,t,n(r,i))}function a(e,t,r=!1,i){document.addEventListener(e,t,n(r,i))}r.d(t,{DD:()=>a,jT:()=>n,sp:()=>i})},5607(e,t,r){"use strict";const n=(0,r(9566).bz)();r.d(t,["W",0,n])},9566(e,t,r){"use strict";r.d(t,{LA:()=>s,bz:()=>a});var n=r(6154);function i(e,t){return e?15&e[t]:16*Math.random()|0}function a(){const e=n.gm?.crypto||n.gm?.msCrypto;let t,r=0;return e&&e.getRandomValues&&(t=e.getRandomValues(new Uint8Array(30))),"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("").map(e=>"x"===e?i(t,r++).toString(16):"y"===e?(3&i()|8).toString(16):e).join("")}function s(e){const t=n.gm?.crypto||n.gm?.msCrypto;let r,a=0;t&&t.getRandomValues&&(r=t.getRandomValues(new Uint8Array(e)));const s=[];for(var o=0;o<e;o++)s.push(i(r,a++).toString(16));return s.join("")}},2614(e,t,r){"use strict";r.d(t,["BB",0,18e5,"Wt",0,"NRBA_SESSION::","iL",0,{SAME_TAB:"same-tab",CROSS_TAB:"cross-tab"},"tS",0,{STARTED:"session-started",PAUSE:"session-pause",RESET:"session-reset",RESUME:"session-resume",UPDATE:"session-update"},"wk",0,144e5])},1863(e,t,r){"use strict";function n(){return Math.floor(performance.now())}r.d(t,{t:()=>n})},944(e,t,r){"use strict";r.d(t,{R:()=>i});var n=r(3241);function i(e,t){"function"==typeof console.debug&&(console.debug("New Relic Warning: https://github.com/newrelic/newrelic-browser-agent/blob/main/docs/warning-codes.md#".concat(e),t),(0,n.W)({drained:null,type:"data",name:"warn",feature:"warn",data:{code:e,secondary:t}}))}},8990(e,t,r){"use strict";r.d(t,{I:()=>i});var n=Object.prototype.hasOwnProperty;function i(e,t,r){if(n.call(e,t))return e[t];var i=r();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:i,writable:!0,enumerable:!1}),i}catch(e){}return e[t]=i,i}},6389(e,t,r){"use strict";function n(e,t=500,r={}){const n=r?.leading||!1;let i;return(...r)=>{n&&void 0===i&&(e.apply(this,r),i=setTimeout(()=>{i=clearTimeout(i)},t)),n||(clearTimeout(i),i=setTimeout(()=>{e.apply(this,r)},t))}}function i(e){let t=!1;return(...r)=>{t||(t=!0,e.apply(this,r))}}r.d(t,{J:()=>i,s:()=>n})},1910(e,t,r){"use strict";r.d(t,{i:()=>a});var n=r(944);const i=new Map;function a(...e){return e.every(e=>{if(i.has(e))return i.get(e);const t="function"==typeof e?e.toString():"",r=t.includes("[native code]"),a=t.includes("nrWrapper");return r||a||(0,n.R)(64,e?.name||t),i.set(e,r),r})}},5289(e,t,r){"use strict";r.d(t,{GG:()=>s,Qr:()=>c,sB:()=>o});var n=r(3878),i=r(6389);function a(){return"undefined"==typeof document||"complete"===document.readyState}function s(e,t){if(a())return e();const r=(0,i.J)(e),s=setInterval(()=>{a()&&(clearInterval(s),r())},500);(0,n.sp)("load",r,t)}function o(e){if(a())return e();(0,n.DD)("DOMContentLoaded",e)}function c(e){if(a())return e();(0,n.sp)("popstate",e)}},384(e,t,r){"use strict";r.d(t,{Zm:()=>c,bQ:()=>d,dV:()=>u,pV:()=>l});var n=r(6154),i=r(1863),a=r(944),s=r(1910);const o={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net"};function c(){return n.gm.NREUM||(n.gm.NREUM={}),void 0===n.gm.newrelic&&(n.gm.newrelic=n.gm.NREUM),n.gm.NREUM}function u(){let e=c();return e.o||(e.o={ST:n.gm.setTimeout,SI:n.gm.setImmediate||n.gm.setInterval,CT:n.gm.clearTimeout,XHR:n.gm.XMLHttpRequest,REQ:n.gm.Request,EV:n.gm.Event,PR:n.gm.Promise,MO:n.gm.MutationObserver,FETCH:n.gm.fetch,WS:n.gm.WebSocket},(0,s.i)(...Object.values(e.o))),e}function d(e,t){let r=c();r.initializedAgents??={},t.initializedAt={ms:(0,i.t)(),date:new Date},r.initializedAgents[e]=t,2===Object.keys(r.initializedAgents).length&&(0,a.R)(69)}function l(){return function(){let e=c();const t=e.info||{};e.info={beacon:o.beacon,errorBeacon:o.errorBeacon,...t}}(),function(){let e=c();const t=e.init||{};e.init={...t}}(),u(),function(){let e=c();const t=e.loader_config||{};e.loader_config={...t}}(),c()}r.d(t,["NT",0,o])},2843(e,t,r){"use strict";r.d(t,{G:()=>a,u:()=>i});var n=r(3878);function i(e,t=!1,r,i){(0,n.DD)("visibilitychange",function(){if(t)return void("hidden"===document.visibilityState&&e());e(document.visibilityState)},r,i)}function a(e,t,r){(0,n.sp)("pagehide",e,t,r)}},9300(e,t,r){"use strict";r(860).K7.ajax;r.d(t,["mo",0,{NONE:"none",FAILURES:"failures",ALL:"all"}])},3969(e,t,r){"use strict";const n=r(860).K7.metrics;r.d(t,["TZ",0,n,"XG",0,"storeEventMetrics","xV",0,"storeSupportabilityMetrics"])},6630(e,t,r){"use strict";const n=r(860).K7.pageViewEvent;r.d(t,["T",0,n])},782(e,t,r){"use strict";const n=r(860).K7.pageViewTiming;r.d(t,["T",0,n])},4234(e,t,r){"use strict";r.d(t,{W:()=>i});var n=r(1687);class i{constructor(e,t){this.agentRef=e,this.ee=e?.ee,this.featureName=t,this.blocked=!1}deregisterDrain(){(0,n.x3)(this.agentRef,this.featureName)}}},7767(e,t,r){"use strict";var n=r(6154);r.d(t,["V",0,e=>n.RI&&!0===e?.privacy.cookies_enabled])},8362(e,t,r){"use strict";r.d(t,{d:()=>a});var n=r(9566),i=r(1741);class a extends i.W{agentIdentifier=(0,n.LA)(16)}},1741(e,t,r){"use strict";r.d(t,{W:()=>a});var n=r(944),i=r(4261);class a{#e(e,...t){if(this[e]!==a.prototype[e])return this[e](...t);(0,n.R)(35,e)}addPageAction(e,t){return this.#e(i.hG,e,t)}register(e){return this.#e(i.eY,e)}recordCustomEvent(e,t){return this.#e(i.fF,e,t)}setPageViewName(e,t){return this.#e(i.Fw,e,t)}setCustomAttribute(e,t,r){return this.#e(i.cD,e,t,r)}noticeError(e,t){return this.#e(i.o5,e,t)}setUserId(e,t=!1){return this.#e(i.Dl,e,t)}setApplicationVersion(e){return this.#e(i.nb,e)}setErrorHandler(e){return this.#e(i.bt,e)}addRelease(e,t){return this.#e(i.k6,e,t)}log(e,t){return this.#e("log",e,t)}start(){return this.#e("start")}finished(e){return this.#e(i.BL,e)}recordReplay(){return this.#e(i.CH)}pauseReplay(){return this.#e(i.Tb)}addToTrace(e){return this.#e(i.U2,e)}setCurrentRouteName(e){return this.#e(i.PA,e)}interaction(e){return this.#e(i.dT,e)}wrapLogger(e,t,r){return this.#e(i.Wb,e,t,r)}measure(e,t){return this.#e(i.V1,e,t)}consent(e){return this.#e(i.Pv,e)}}},4261(e,t,r){"use strict";r.d(t,["BL",0,"finished","CH",0,"recordReplay","Dl",0,"setUserId","Fw",0,"setPageViewName","PA",0,"setCurrentRouteName","Pv",0,"consent","Tb",0,"pauseReplay","U2",0,"addToTrace","V1",0,"measure","Wb",0,"wrapLogger","bt",0,"setErrorHandler","cD",0,"setCustomAttribute","dT",0,"interaction","eY",0,"register","fF",0,"recordCustomEvent","hG",0,"addPageAction","k6",0,"addRelease","nb",0,"setApplicationVersion","o5",0,"noticeError"])},1738(e,t,r){"use strict";r.d(t,{U:()=>l,Y:()=>d});var n=r(3241),i=r(9908),a=r(1863),s=r(944),o=r(3969),c=r(8362),u=r(860);function d(e,t,r,a){const d=a||r;!d||d[e]&&d[e]!==c.d.prototype[e]||(d[e]=function(){(0,i.p)(o.xV,["API/"+e+"/called"],void 0,u.K7.metrics,r.ee),(0,n.W)({drained:!!r.runtime?.activatedFeatures,type:"data",name:"api",feature:"api-"+e,data:{}});try{return t.apply(this,arguments)}catch(e){(0,s.R)(23,e)}})}function l(e,t,r,n,s){const o=e.info;null===r?delete o.jsAttributes[t]:o.jsAttributes[t]=r,(s||null===r)&&(0,i.p)("api-"+n,[(0,a.t)(),t,r],void 0,"session",e.ee)}},8374(e,t,r){r.nc=(()=>{try{return document?.currentScript?.nonce}catch(e){}return""})()},860(e,t,r){"use strict";const n="events",i="jserrors",a="browser/blobs",s="browser/logs",o={ajax:"ajax",genericEvents:"generic_events",jserrors:i,logging:"logging",metrics:"metrics",pageAction:"page_action",pageViewEvent:"page_view_event",pageViewTiming:"page_view_timing",sessionReplay:"session_replay",sessionTrace:"session_trace",softNav:"soft_navigations"},c={[o.pageViewEvent]:1,[o.pageViewTiming]:2,[o.metrics]:3,[o.jserrors]:4,[o.softNav]:5,[o.ajax]:6,[o.sessionTrace]:7,[o.sessionReplay]:8,[o.logging]:9,[o.genericEvents]:10},u={[o.pageViewEvent]:"rum",[o.pageViewTiming]:n,[o.ajax]:n,[o.softNav]:n,[o.metrics]:i,[o.jserrors]:i,[o.sessionTrace]:a,[o.sessionReplay]:a,[o.logging]:s,[o.genericEvents]:"ins"};r.d(t,["$J",0,u,"K7",0,o,"P3",0,c,"XX",0,i,"Yy",0,s,"df",0,a,"hg",0,"connect"])}};const t={};function r(n){const i=t[n];if(void 0!==i)return i.exports;const a=t[n]={exports:{}};return e[n](a,a.exports,r),a.exports}r.m=e,r.d=(e,t)=>{if(Array.isArray(t))for(var n=0;n<t.length;){var i=t[n++],a=t[n++];r.o(e,i)?0===a&&n++:0===a?Object.defineProperty(e,i,{enumerable:!0,value:t[n++]}):Object.defineProperty(e,i,{enumerable:!0,get:a})}else for(var i in t)r.o(t,i)&&!r.o(e,i)&&Object.defineProperty(e,i,{enumerable:!0,get:t[i]})},r.f={},r.e=e=>Promise.all(Object.keys(r.f).reduce((t,n)=>(r.f[n](e,t),t),[])),r.u=e=>"nr-rum-1.321.0.min.js",r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{const e={},t="NRBA-1.321.0.PROD:";r.l=(n,i,a,s)=>{if(e[n])return void e[n].push(i);let o,c;if(void 0!==a){const e=document.getElementsByTagName("script");for(var u=0;u<e.length;u++){const r=e[u];if(r.getAttribute("src")==n||r.getAttribute("data-webpack")==t+a){o=r;break}}}if(!o){c=!0;var d={296:"sha512-auOJN989wXoxmQeiyRE/ZlrR6yqeuq5/WjLH1btsNQ6Iqm/RK+IqmjTuvad7oOBZyozPaWg6y2Uu2qAZy3e0cQ=="};o=document.createElement("script"),o.charset="utf-8",r.nc&&o.setAttribute("nonce",r.nc),o.setAttribute("data-webpack",t+a),o.src=n,0!==o.src.indexOf(window.location.origin+"/")&&(o.crossOrigin="anonymous"),d[s]&&(o.integrity=d[s])}e[n]=[i];const l=(t,r)=>{o.onerror=o.onload=null,clearTimeout(f);const i=e[n];if(delete e[n],o.parentNode?.removeChild(o),i?.forEach(e=>e(r)),t)return t(r)},f=setTimeout(l.bind(null,void 0,{type:"timeout",target:o}),12e4);o.onerror=l.bind(null,o.onerror),o.onload=l.bind(null,o.onload),c&&document.head.appendChild(o)}})(),r.r=e=>{Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.p="https://js-agent.newrelic.com/",(()=>{const e={374:0,840:0};r.f.j=(t,n)=>{let i=r.o(e,t)?e[t]:void 0;if(0!==i)if(i)n.push(i[2]);else{const a=new Promise((r,n)=>i=e[t]=[r,n]);n.push(i[2]=a);const s=r.p+r.u(t),o=new Error,c=n=>{if(r.o(e,t)&&(i=e[t],0!==i&&(e[t]=void 0),i)){const e=n&&("load"===n.type?"missing":n.type),r=n&&n.target&&n.target.src;o.message="Loading chunk "+t+" failed: ("+e+": "+r+")",o.name="ChunkLoadError",o.type=e,o.request=r,i[1](o)}};r.l(s,c,"chunk-"+t,t)}};const t=(t,n)=>{let[i,a,s]=n;var o,c,u=0;if(i.some(t=>0!==e[t])){for(o in a)r.o(a,o)&&(r.m[o]=a[o]);if(s)s(r)}for(t&&t(n);u<i.length;u++)c=i[u],r.o(e,c)&&e[c]&&e[c][0](),e[c]=0},n=self["webpackChunk:NRBA-1.321.0.PROD"]=self["webpackChunk:NRBA-1.321.0.PROD"]||[];n.forEach(t.bind(null,0)),n.push=t.bind(null,n.push.bind(n))})(),(()=>{"use strict";r(8374);var e=r(8362),t=r(860);const n=Object.values(t.K7);var i=r(384),a=r(1741);var s=r(2555),o=r(981);t.K7.genericEvents,o.R.PA,o.R.UA,o.R.BP;const c={RESOURCES:"experimental.resources",REGISTER:"register"};var u=r(9300);const d=e=>{if(!e||"string"!=typeof e)return!1;try{document.createDocumentFragment().querySelector(e)}catch{return!1}return!0};var l=r(2614),f=r(944),g=r(8122);const p="[data-nr-mask]",m=e=>(0,g.a)(e,(()=>{const e={feature_flags:[],experimental:{register:!1,resources:!1,iframe_bridge:!1,iframe_domains:[]},mask_selector:"*",block_selector:"[data-nr-block]",mask_input_options:{color:!1,date:!1,"datetime-local":!1,email:!1,month:!1,number:!1,range:!1,search:!1,tel:!1,text:!1,time:!1,url:!1,week:!1,textarea:!1,select:!1,password:!0}};return{ajax:{deny_list:void 0,block_internal:!0,enabled:!0,autoStart:!0,capture_payloads:u.mo.NONE},api:{register:{get enabled(){return e.feature_flags.includes(c.REGISTER)||e.experimental.register},set enabled(t){e.experimental.register=t},duplicate_data_to_container:!1,get allow_iframe_bridge(){return e.feature_flags.includes(c.IFRAME_BRIDGE)||e.experimental.iframe_bridge},set allow_iframe_bridge(t){e.experimental.iframe_bridge=t},get iframe_domains(){return e.experimental.iframe_domains},set iframe_domains(t){Array.isArray(t)?e.experimental.iframe_domains=t:(0,f.R)(1,t)}}},browser_consent_mode:{enabled:!1},distributed_tracing:{enabled:void 0,exclude_newrelic_header:void 0,cors_use_newrelic_header:void 0,cors_use_tracecontext_headers:void 0,allowed_origins:void 0},get feature_flags(){return e.feature_flags},set feature_flags(t){e.feature_flags=t},generic_events:{enabled:!0,autoStart:!0},harvest:{interval:30},jserrors:{enabled:!0,autoStart:!0},logging:{enabled:!0,autoStart:!0},metrics:{enabled:!0,autoStart:!0},obfuscate:void 0,page_action:{enabled:!0},page_view_event:{enabled:!0,autoStart:!0},page_view_timing:{enabled:!0,autoStart:!0},performance:{capture_marks:!1,capture_measures:!1,capture_detail:!0,resources:{get enabled(){return e.feature_flags.includes(c.RESOURCES)||e.experimental.resources},set enabled(t){e.experimental.resources=t},asset_types:[],first_party_domains:[],ignore_newrelic:!0}},privacy:{cookies_enabled:!0},proxy:{assets:void 0,beacon:void 0},session:{expiresMs:l.wk,inactiveMs:l.BB},session_replay:{autoStart:!0,enabled:!1,preload:!1,sampling_rate:10,error_sampling_rate:100,collect_fonts:!1,inline_images:!1,fix_stylesheets:!0,mask_all_inputs:!0,get mask_text_selector(){return e.mask_selector},set mask_text_selector(t){d(t)?e.mask_selector="".concat(t,",").concat(p):""===t||null===t?e.mask_selector=p:(0,f.R)(5,t)},get block_class(){return"nr-block"},get ignore_class(){return"nr-ignore"},get mask_text_class(){return"nr-mask"},get block_selector(){return e.block_selector},set block_selector(t){d(t)?e.block_selector+=",".concat(t):""!==t&&(0,f.R)(6,t)},get mask_input_options(){return e.mask_input_options},set mask_input_options(t){t&&"object"==typeof t?e.mask_input_options={...t,password:!0}:(0,f.R)(7,t)}},session_trace:{enabled:!0,autoStart:!0},soft_navigations:{enabled:!0,autoStart:!0},ssl:void 0,user_actions:{enabled:!0,elementAttributes:["id","className","tagName","type"]},web_sockets:{enabled:!1}}})());var h=r(6154),v=r(9324);let b=0;const y={buildEnv:"PROD",distMethod:"CDN",version:v.xv,originTime:h.WN},_={consented:!1},w={activatedFeatures:void 0,appMetadata:{},configured:!1,get consented(){return this.session?.state?.consent||_.consented},set consented(e){_.consented=e},customTransaction:void 0,denyList:[],disabled:!1,drainRegistry:new Map,connector:void 0,harvester:void 0,v2Target:void 0,isolatedBacklog:!1,isRecording:!1,loaderType:void 0,maxBytes:3e4,obfuscator:void 0,onerror:void 0,ptid:void 0,releaseIds:{},session:void 0,timeKeeper:void 0,registeredEntities:[],jsAttributesMetadata:{bytes:0},get harvestCount(){return++b},listeningForIframeMessages:!1},R="BA";var A=r(7836),x=r(3241);const E={accountID:void 0,trustKey:void 0,agentID:void 0,licenseKey:void 0,applicationID:void 0,xpid:void 0};var S=r(9908);const k="newrelic-iframe-";function T(e,t={},n,o){let{init:c,info:u,loader_config:d,runtime:l={},exposed:f=!0}=t;if(!u){const e=(0,i.pV)();c=e.init,u=e.info,d=e.loader_config}var p;e.init=m(c||{}),e.loader_config=(p=d||{},(0,g.a)(p,E)),u.jsAttributes??={},h.bv&&(u.jsAttributes.isWorker=!0),e.info=(0,s.D)(u);const v=e.init;e.runtime??=(e=>{const t=(0,g.a)(e,w),r=Object.keys(y).reduce((e,t)=>(e[t]={value:y[t],writable:!1,configurable:!0,enumerable:!0},e),{});return Object.defineProperties(t,r)})(l),e.runtime.v2Target??={type:R,instance:e.agentIdentifier,get id(){return e.runtime.appMetadata?.agents?.[0]?.entityGuid},get attributes(){return{"entity.guid":this.id,appId:e.info.applicationID}}},v.proxy.assets&&(e=>{const t=e.startsWith("http");e+="/",r.p=t?e:"https://"+e})(v.proxy.assets),e.runtime.configured||(Object.defineProperty(e,"beacons",{get:()=>[e.info.beacon,e.info.errorBeacon,e.init.proxy.assets,e.init.proxy.beacon].filter(Boolean)}),Object.defineProperty(e.runtime,"denyList",{get:()=>[...e.init.ajax.deny_list||[],...e.init.ajax.block_internal?e.beacons:[]]}),e.runtime.ptid=e.agentIdentifier,function(e){const t=(0,i.pV)();Object.getOwnPropertyNames(a.W.prototype).forEach(r=>{const n=a.W.prototype[r];if("function"!=typeof n||"constructor"===n)return;let i=t[r];e[r]&&!1!==e.exposed&&"micro-agent"!==e.runtime?.loaderType&&(t[r]=(...t)=>{const n=e[r](...t);return i?i(...t):n})})}(e),e.runtime.loaderType=n,e.ee=A.ee.get(e.agentIdentifier),e.exposed=f,(0,x.W)({drained:!!e.runtime.activatedFeatures,type:"lifecycle",name:"initialize",feature:void 0,data:e.config}),e.init.api.register.allow_iframe_bridge&&h.gm.addEventListener("message",t=>{"string"==typeof t.data?.type&&t.data.type.startsWith(k)&&(0,S.p)("iframe-message",[t],void 0,"IFRAME",e.ee)}),e.runtime.configured=!0)}var j=r(1863),P=r(4261),N=r(1738);var O=r(1687),M=r(4234),I=r(5289),D=r(7767);function V(e){return!!(0,i.dV)().o.MO&&(0,D.V)(e)&&!0===e?.session_trace.enabled}var W=r(6389),B=r(7699);const C=new WeakSet,K=new WeakMap;class U extends M.W{constructor(e,t){super(e,t),this.abortHandler=void 0,this.featAggregate=void 0,this.loadedSuccessfully=void 0,this.onAggregateImported=new Promise(e=>{this.loadedSuccessfully=e}),this.deferred=Promise.resolve(),!1===e.init[this.featureName].autoStart?this.deferred=new Promise((t,r)=>{this.ee.on("manual-start-all",(0,W.J)(()=>{(0,O.Ak)(e,this.featureName),t()}))}):(0,O.Ak)(e,t)}importAggregator(e,t,n={}){if(this.featAggregate)return;const i=async()=>{if(await this.deferred,this.#t(e),!(0,s.f)(e.info))return(0,f.R)(43),e.ee.abort(),void this.loadedSuccessfully(!1);try{await async function(e,t,n){if(K.has(e))return K.get(e);const i=(async()=>{if((0,D.V)(e.init))try{const{setupAgentSession:t}=await r.e(296).then(r.bind(r,8391));t(e)}catch(e){(0,f.R)(20,e),t.emit("internal-error",[e]),(0,S.p)(B.qh,[e],void 0,n,t)}if(e.init.api.register.allow_iframe_bridge)try{const{setupIframeMFEMessageListener:t}=await Promise.resolve().then(function(){const e=new Error("Cannot find module '../../loaders/configure/iframe-message-handler'");throw e.code="MODULE_NOT_FOUND",e});t(e)}catch(e){(0,f.R)(23,e)}const[{Connector:i},{Harvester:a}]=await Promise.all([r.e(296).then(r.bind(r,6589)),r.e(296).then(r.bind(r,5237))]);e.runtime.connector=new i(e),e.runtime.harvester=new a(e);const s=Object.values(e.features).filter(t=>e.runtime.drainRegistry.has(t.featureName));Promise.all(s.map(e=>e.onAggregateImported)).then(()=>e.runtime.harvester.startTimer())})();K.set(e,i),await i}(e,this.ee,this.featureName)}catch(e){return(0,f.R)(79,e),this.ee.abort(),void this.loadedSuccessfully(!1)}try{if(!this.#r(this.featureName,e.runtime.session,e.init))return this.abortHandler?.(),(0,O.Ze)(this.agentRef,this.featureName),void this.loadedSuccessfully(!1);const{Aggregate:r}=await t();this.featAggregate=new r(e,n),e.runtime.harvester.initializedAggregates.push(this.featAggregate),this.loadedSuccessfully(!0)}catch(e){(0,f.R)(34,e),this.abortHandler?.(),(0,O.Ze)(this.agentRef,this.featureName,!0),this.loadedSuccessfully(!1)}};h.RI?(0,I.GG)(()=>i(),!0):i()}#r(e,r,n){if(this.blocked)return!1;switch(e){case t.K7.sessionReplay:return V(n)&&!!r;case t.K7.sessionTrace:return!!r;default:return!0}}#t(e){if(!C.has(e)&&(C.add(e),!(0,s.f)(e.info))){const t=(0,i.pV)();let r={...t.info?.jsAttributes};try{r={...r,...e.info?.jsAttributes}}catch(e){}T(e,{...t,info:{...t.info,jsAttributes:r},runtime:e.runtime},e.runtime.loaderType)}}}var L=r(6630);class F extends U{static featureName=L.T;constructor(e){var t;super(e,L.T),this.setupInspectionEvents(),t=e,(0,N.Y)(P.Fw,function(e,r){"string"==typeof e&&("/"!==e.charAt(0)&&(e="/"+e),t.runtime.customTransaction=(r||"http://custom.transaction")+e,(0,S.p)("api-"+P.Fw,[(0,j.t)()],void 0,void 0,t.ee))},t),this.importAggregator(e,()=>e.init.feature_flags.includes("rum_v2")?r.e(296).then(r.bind(r,908)):r.e(296).then(r.bind(r,7927)))}setupInspectionEvents(){const e=(e,t)=>{e&&(0,x.W)({timeStamp:e.timeStamp,loaded:"complete"===e.target.readyState,type:"window",name:t,data:e.target.location+""})};(0,I.sB)(t=>{e(t,"DOMContentLoaded")}),(0,I.GG)(t=>{e(t,"load")}),(0,I.Qr)(t=>{e(t,"navigate")}),this.ee.on(l.tS.UPDATE,(e,t)=>{(0,x.W)({type:"lifecycle",name:"session",data:t})})}}class G extends e.d{constructor(e){var t;(super(),h.gm)?(this.features={},(0,i.bQ)(this.agentIdentifier,this),this.desiredFeatures=new Set(e.features||[]),this.desiredFeatures.add(F),T(this,e,e.loaderType||"agent"),t=this,(0,N.Y)(P.cD,function(e,r,n=!1){if("string"==typeof e){if(["string","number","boolean"].includes(typeof r)||null===r)return(0,N.U)(t,e,r,P.cD,n);(0,f.R)(40,typeof r)}else(0,f.R)(39,typeof e)},t),function(e){(0,N.Y)(P.Dl,function(t,r=!1){if("string"!=typeof t&&null!==t)return void(0,f.R)(41,typeof t);const n=e.info.jsAttributes["enduser.id"];r&&null!=n&&n!==t?(0,S.p)("api-setUserIdAndResetSession",[t],void 0,"session",e.ee):(0,N.U)(e,"enduser.id",t,P.Dl,!0)},e)}(this),function(e){(0,N.Y)(P.nb,function(t){if("string"==typeof t||null===t)return(0,N.U)(e,"application.version",t,P.nb,!1);(0,f.R)(42,typeof t)},e)}(this),function(e){(0,N.Y)("start",function(){e.ee.emit("manual-start-all")},e)}(this),function(e){(0,N.Y)(P.Pv,function(t=!0){if("boolean"==typeof t){if((0,S.p)("api-"+P.Pv,[t],void 0,"session",e.ee),e.runtime.consented=t,t){const t=e.features.page_view_event;t.onAggregateImported.then(e=>{const r=t.featAggregate;e&&!r.sentRum&&r.sendRum?.()})}}else(0,f.R)(65,typeof t)},e)}(this),this.run()):(0,f.R)(21)}get config(){return{info:this.info,init:this.init,loader_config:this.loader_config,runtime:this.runtime}}get api(){return this}run(){try{const e=function(e){const t={};return n.forEach(r=>{t[r]=!!e[r]?.enabled}),t}(this.init),r=[...this.desiredFeatures],i=this.init.feature_flags.includes("rum_v2");r.sort((e,r)=>t.P3[e.featureName]-t.P3[r.featureName]),r.forEach(r=>{if(!e[r.featureName]&&(i||r.featureName!==t.K7.pageViewEvent))return;const n=function(e){switch(e){case t.K7.ajax:return[t.K7.jserrors];case t.K7.sessionTrace:return[t.K7.ajax,t.K7.pageViewEvent];case t.K7.sessionReplay:return[t.K7.sessionTrace];case t.K7.pageViewTiming:return[t.K7.pageViewEvent];default:return[]}}(r.featureName).filter(e=>!(e in this.features));n.length>0&&(0,f.R)(36,{targetFeature:r.featureName,missingDependencies:n}),this.features[r.featureName]=new r(this)})}catch(e){(0,f.R)(22,e);for(const e in this.features)this.features[e].abortHandler?.();const t=(0,i.Zm)();delete t.initializedAgents[this.agentIdentifier]?.features,delete this.sharedAggregator;return t.ee.get(this.agentIdentifier).abort(),!1}}}var H=r(2843),z=r(782);class Y extends U{static featureName=z.T;constructor(e){super(e,z.T),h.RI&&((0,H.u)(()=>(0,S.p)("docHidden",[(0,j.t)()],void 0,z.T,this.ee),!0),(0,H.G)(()=>(0,S.p)("winPagehide",[(0,j.t)()],void 0,z.T,this.ee)),this.importAggregator(e,()=>r.e(296).then(r.bind(r,9981))))}}var Z=r(3969);class q extends U{static featureName=Z.TZ;constructor(e){super(e,Z.TZ),this.importAggregator(e,()=>r.e(296).then(r.bind(r,9623)))}}new G({features:[F,Y,q],loaderType:"lite"})})()})();</script>
+<meta content='width=device-width, initial-scale=1.0, minimum-scale=1.0' name='viewport'>
+<meta name='keywords'>
+<meta name='description'>
+<meta name='google-site-verification'>
+<meta name='date'>
+<link href='https://www.robinhobb.com/blog/posts/40869' rel='canonical'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="LK8Wwv7J3ySzWiH7oJPwnr69maE42iA96DWXBD_0vjoflXzqyADwav2DJvZp10DvlpTvi1lXftXWY7iDD1raYg" />
+<title>What Works For Me - ROBIN HOBB - Robin Hobb&#39;s Infrequent ...</title>
+<!-- / SM meta -->
+<meta content='ROBIN HOBB - Robin Hobb&#39;s Infrequent and Off Topic Blog :: What Works For Me  ' property='og:title'>
+<meta content='article' property='og:type'>
+<meta content='http://robinhobb.com/blog/posts/40869' property='og:url'>
+<meta content='And to start with, let&amp;#39;s acknowledge that what works for me may not work for you at all!  Every writer has their own tricks and starters.  Here are a few of mine:
+ 
+The Book Is Not Writing Itself
+Pretty sure you know what I mean by that.  You sit down, you have a pretty good idea of what shoul...' property='og:description'>
+<meta content='ROBIN HOBB' property='og:site_name'>
+<meta content='2022-05-20' property='article:published_time'>
+<meta content='ROBIN HOBB - Robin Hobb&#39;s Infrequent and Off Topic Blog :: What Works For Me  ' property='twitter:title'>
+<meta content='And to start with, let&amp;#39;s acknowledge that what works for me may not work for you at all!  Every writer has their own tricks and starters.  Here are a few of mine:
+ 
+The Book Is Not Writing Itself
+Pretty sure you know what I mean by that.  You sit down, you have a pretty good idea of what shoul...' property='twitter:description'>
+<meta content='http://go.authorsguild.org/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMjcwQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e0f90b6d6f83248a2219ec33ce4af215b4f0d5a1/img-20171022-101021387.jpg' property='og:image'>
+<meta content='image/jpeg' property='og:image:type'>
+<meta content='4608' property='og:image:width'>
+<meta content='3456' property='og:image:height'>
+<meta content='img-20171022-101021387.jpg' property='og:image:alt'>
+<meta content='http://go.authorsguild.org/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMjcwQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e0f90b6d6f83248a2219ec33ce4af215b4f0d5a1/img-20171022-101021387.jpg' property='twitter:image'>}</meta>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700|Open+Sans:400,300,600,700,400italic,600italic' rel='stylesheet' type='text/css'>
+<link href='https://use.typekit.net/vax7jgl.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" media="screen" href="/theme/sitebuilder.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/theme/theme.css" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  
+  ga('create', 'UA-9299342-1', 'auto');
+  ga('create', 'UA-9299342-1', 'auto', 'PublishedSiteBuilderSites');
+  ga('send', 'pageview');
+  ga('PublishedSiteBuilderSites.send', 'pageview');
+</script>
+
+</head>
+<body class='sbx publish_mode sb_layout_full_aside_right_three_columns sb_theme_background sb_palette_background_dark'>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<symbol viewBox="0 0 638 1030" aria-labelledby="bdsi-ant-caret-left-title" id="si-ant-caret-left">
+<title id="bdsi-ant-caret-left-title">icon caret-left</title>
+<path d="M570 13L12 489Q0 500 0 515t12 26l558 476q19 16 43.5 7t24.5-33V39q0-24-24.5-33T570 13z"/>
+</symbol>
+<symbol viewBox="0 0 638 1030" aria-labelledby="besi-ant-caret-right-title" id="si-ant-caret-right">
+<title id="besi-ant-caret-right-title">icon caret-right</title>
+<path d="M68 13l558 476q12 11 12 26t-12 26L68 1017q-19 16-43.5 7T0 991V39Q0 15 24.5 6T68 13z"/>
+</symbol>
+<symbol id="icon-instagram" viewBox="0 0 24 28">
+<title>instagram</title>
+<path d="M16 14c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zM18.156 14c0 3.406-2.75 6.156-6.156 6.156s-6.156-2.75-6.156-6.156 2.75-6.156 6.156-6.156 6.156 2.75 6.156 6.156zM19.844 7.594c0 0.797-0.641 1.437-1.437 1.437s-1.437-0.641-1.437-1.437 0.641-1.437 1.437-1.437 1.437 0.641 1.437 1.437zM12 4.156c-1.75 0-5.5-0.141-7.078 0.484-0.547 0.219-0.953 0.484-1.375 0.906s-0.688 0.828-0.906 1.375c-0.625 1.578-0.484 5.328-0.484 7.078s-0.141 5.5 0.484 7.078c0.219 0.547 0.484 0.953 0.906 1.375s0.828 0.688 1.375 0.906c1.578 0.625 5.328 0.484 7.078 0.484s5.5 0.141 7.078-0.484c0.547-0.219 0.953-0.484 1.375-0.906s0.688-0.828 0.906-1.375c0.625-1.578 0.484-5.328 0.484-7.078s0.141-5.5-0.484-7.078c-0.219-0.547-0.484-0.953-0.906-1.375s-0.828-0.688-1.375-0.906c-1.578-0.625-5.328-0.484-7.078-0.484zM24 14c0 1.656 0.016 3.297-0.078 4.953-0.094 1.922-0.531 3.625-1.937 5.031s-3.109 1.844-5.031 1.937c-1.656 0.094-3.297 0.078-4.953 0.078s-3.297 0.016-4.953-0.078c-1.922-0.094-3.625-0.531-5.031-1.937s-1.844-3.109-1.937-5.031c-0.094-1.656-0.078-3.297-0.078-4.953s-0.016-3.297 0.078-4.953c0.094-1.922 0.531-3.625 1.937-5.031s3.109-1.844 5.031-1.937c1.656-0.094 3.297-0.078 4.953-0.078s3.297-0.016 4.953 0.078c1.922 0.094 3.625 0.531 5.031 1.937s1.844 3.109 1.937 5.031c0.094 1.656 0.078 3.297 0.078 4.953z"></path>
+</symbol>
+<symbol id="icon-pinterest" viewBox="0 0 20 28">
+<title>pinterest</title>
+<path d="M0 9.328c0-5.766 5.281-9.328 10.625-9.328 4.906 0 9.375 3.375 9.375 8.547 0 4.859-2.484 10.25-8.016 10.25-1.313 0-2.969-0.656-3.609-1.875-1.188 4.703-1.094 5.406-3.719 9l-0.219 0.078-0.141-0.156c-0.094-0.984-0.234-1.953-0.234-2.938 0-3.187 1.469-7.797 2.188-10.891-0.391-0.797-0.5-1.766-0.5-2.641 0-1.578 1.094-3.578 2.875-3.578 1.313 0 2.016 1 2.016 2.234 0 2.031-1.375 3.938-1.375 5.906 0 1.344 1.109 2.281 2.406 2.281 3.594 0 4.703-5.187 4.703-7.953 0-3.703-2.625-5.719-6.172-5.719-4.125 0-7.313 2.969-7.313 7.156 0 2.016 1.234 3.047 1.234 3.531 0 0.406-0.297 1.844-0.812 1.844-0.078 0-0.187-0.031-0.266-0.047-2.234-0.672-3.047-3.656-3.047-5.703z"></path>
+</symbol>
+<symbol id="icon-linkedin" viewBox="0 0 24 28">
+<title>linkedin</title>
+<path d="M5.453 9.766v15.484h-5.156v-15.484h5.156zM5.781 4.984c0.016 1.484-1.109 2.672-2.906 2.672v0h-0.031c-1.734 0-2.844-1.188-2.844-2.672 0-1.516 1.156-2.672 2.906-2.672 1.766 0 2.859 1.156 2.875 2.672zM24 16.375v8.875h-5.141v-8.281c0-2.078-0.75-3.5-2.609-3.5-1.422 0-2.266 0.953-2.641 1.875-0.125 0.344-0.172 0.797-0.172 1.266v8.641h-5.141c0.063-14.031 0-15.484 0-15.484h5.141v2.25h-0.031c0.672-1.062 1.891-2.609 4.672-2.609 3.391 0 5.922 2.219 5.922 6.969z"></path>
+</symbol>
+<symbol id="icon-facebook" viewBox="0 0 16 28">
+<title>facebook</title>
+<path d="M14.984 0.187v4.125h-2.453c-1.922 0-2.281 0.922-2.281 2.25v2.953h4.578l-0.609 4.625h-3.969v11.859h-4.781v-11.859h-3.984v-4.625h3.984v-3.406c0-3.953 2.422-6.109 5.953-6.109 1.687 0 3.141 0.125 3.563 0.187z"></path>
+</symbol>
+<symbol id="icon-x" viewBox="0 0 512 512">
+<title>x</title>
+<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+</symbol>
+<symbol id="icon-goodreads" viewBox="0 0 11 20">
+<title>goodreads</title>
+<path d="M9.5 7c-0.276 0-0.5 0.224-0.5 0.5v0.732c-0.072-0.079-0.147-0.155-0.226-0.227-0.744-0.676-1.815-1.005-3.274-1.005s-2.53 0.329-3.274 1.005c-0.825 0.75-1.226 1.893-1.226 3.495s0.401 2.745 1.226 3.495c0.744 0.676 1.815 1.005 3.274 1.005s2.53-0.329 3.274-1.005c0.079-0.072 0.155-0.148 0.226-0.227v0.732c0 1.413-0.225 2.268-0.729 2.771s-1.359 0.729-2.771 0.729c-1.316 0-2.166-0.203-2.675-0.639-0.21-0.18-0.525-0.155-0.705 0.054s-0.155 0.525 0.054 0.705c0.71 0.608 1.735 0.88 3.325 0.88 3.28 0 4.5-1.22 4.5-4.5v-8c0-0.276-0.224-0.5-0.5-0.5zM8.101 14.255c-0.551 0.501-1.402 0.745-2.601 0.745s-2.050-0.244-2.601-0.745c-0.605-0.55-0.899-1.451-0.899-2.755s0.294-2.205 0.899-2.755c0.551-0.501 1.402-0.745 2.601-0.745s2.050 0.244 2.601 0.745c0.605 0.55 0.899 1.451 0.899 2.755s-0.294 2.205-0.899 2.755z"></path>
+</symbol>
+<symbol id="icon-bluesky" viewBox="0 0 512 512">
+<title>bluesky</title>
+<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"></path>
+</symbol>
+<symbol id="icon-threads" viewBox="0 0 512 512">
+<title>threads</title>
+<path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3 .5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4c-29.2-35.8-73-54.2-130.5-54.6c-57 .5-100.1 18.8-128.2 54.4C72.1 146.1 58.5 194.3 58 256c.5 61.7 14.1 109.9 40.3 143.3c28 35.6 71.2 53.9 128.2 54.4c51.4-.4 85.4-12.6 113.7-40.9c32.3-32.2 31.7-71.8 21.4-95.9c-6.1-14.2-17.1-26-31.9-34.9c-3.7 26.9-11.8 48.3-24.7 64.8c-17.1 21.8-41.4 33.6-72.7 35.3c-23.6 1.3-46.3-4.4-63.9-16c-20.8-13.8-33-34.8-34.3-59.3c-2.5-48.3 35.7-83 95.2-86.4c21.1-1.2 40.9-.3 59.2 2.8c-2.4-14.8-7.3-26.6-14.6-35.2c-10-11.7-25.6-17.7-46.2-17.8H227c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1h.8c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3c25.6-1.4 54.6-11.4 59.5-73.2c-13.2-2.9-27.8-4.4-43.4-4.4c-4.8 0-9.6 .1-14.4 .4c-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"></path>
+</symbol>
+<symbol id="icon-tiktok" viewBox="0 0 512 512">
+<title>tiktok</title>
+<path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"></path>
+</symbol>
+<symbol id="icon-circle-x" viewBox="0 0 512 512">
+<title>x circle</title>
+<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+</symbol>
+<symbol id="icon-question-circle" viewBox="0 0 512 512">
+<title>question-circle</title>
+<path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"></path>
+</symbol>
+<symbol id="icon-circle-facebook" viewBox="0 0 67 67">
+<title>facebook circle</title>
+<path d="M29.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M34,64C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z"></path>
+</symbol>
+<symbol id="icon-circle-twitter" viewBox="0 0 67 67">
+<title>twitter circle</title>
+<path d="M38.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.567  C20.775,43.256,20,43.341,20,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.674,5.657-5,6.978-8.221c0.713-1.715,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C40.766,21.902,39.131,21.944,38.167,22.283z M34,64C17.432,64,4,50.568,4,34  C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z"></path>
+</symbol>
+<symbol id="icon-circle-linkedin" viewBox="0 0 67 67">
+<title>linkedin circle</title>
+<path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"></path>
+</symbol>
+<symbol id="icon-circle-instagram" viewBox="0 0 67 67">
+<title>instagram circle</title>
+<path d="M43.271,26.578v-0.006c0.502,0,1.005,0.01,1.508-0.002  c0.646-0.016,1.172-0.57,1.172-1.217c0-0.963,0-1.927,0-2.89c0-0.691-0.547-1.24-1.236-1.241c-0.961,0-1.922-0.001-2.883,0  c-0.688,0.001-1.236,0.552-1.236,1.243c-0.001,0.955-0.004,1.91,0.003,2.865c0.001,0.143,0.028,0.291,0.073,0.426  c0.173,0.508,0.639,0.82,1.209,0.823C42.344,26.579,42.808,26.578,43.271,26.578z M34,27.817c-3.384-0.002-6.135,2.721-6.182,6.089  c-0.049,3.46,2.72,6.201,6.04,6.272c3.454,0.074,6.248-2.686,6.321-6.043C40.254,30.675,37.462,27.815,34,27.817z M22.046,31.116  v0.082c0,4.515-0.001,9.03,0,13.545c0,0.649,0.562,1.208,1.212,1.208c7.16,0.001,14.319,0.001,21.479,0  c0.656,0,1.215-0.557,1.215-1.212c0.001-4.509,0-9.02,0-13.528v-0.094h-2.912c0.411,1.314,0.537,2.651,0.376,4.014  c-0.161,1.363-0.601,2.631-1.316,3.803s-1.644,2.145-2.779,2.918c-2.944,2.006-6.821,2.182-9.946,0.428  c-1.579-0.885-2.819-2.12-3.685-3.713c-1.289-2.373-1.495-4.865-0.739-7.451C23.983,31.116,23.021,31.116,22.046,31.116z   M46.205,49.255c0.159-0.026,0.318-0.049,0.475-0.083c1.246-0.265,2.264-1.304,2.508-2.557c0.025-0.137,0.045-0.273,0.067-0.409  V21.794c-0.021-0.133-0.04-0.268-0.065-0.401c-0.268-1.367-1.396-2.428-2.78-2.618c-0.058-0.007-0.113-0.02-0.17-0.03H21.761  c-0.147,0.027-0.296,0.047-0.441,0.08c-1.352,0.308-2.352,1.396-2.545,2.766c-0.008,0.057-0.02,0.114-0.029,0.171V46.24  c0.028,0.154,0.05,0.311,0.085,0.465c0.299,1.322,1.427,2.347,2.77,2.52c0.064,0.008,0.13,0.021,0.195,0.03H46.205z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z"></path>
+</symbol>
+<symbol id="icon-circle-goodreads" viewBox="0 0 60 60">
+<title>goodreads circle</title>
+<path d="M30,60 C46.5685433,60 60,46.5685433 60,30 C60,13.4314567 46.5685433,0 30,0 C13.4314567,0 0,13.4314567 0,30 C0,46.5685433 13.4314567,60 30,60 Z" fill="var(--color-1)"></path><path d="M29.8990615,37.0028068 C33.9449077,36.9716533 36.8218615,35.0982126 38.5286769,31.3821 L38.6184,31.3821 L38.6184,37.0493448 C38.6184,37.4716478 38.5884923,38.1266405 38.5286769,39.0166306 C38.4069692,39.9381588 38.0821385,40.9293016 37.5546,41.9912129 C37.0258154,42.9904326 36.1722,43.841577 34.9954154,44.5438769 C33.8319231,45.309253 32.2086,45.7069409 30.1246154,45.738479 C28.1162308,45.738479 26.4181385,45.2542536 25.0282615,44.2861874 C23.6080615,43.3338903 22.7777077,41.7877536 22.5372,39.6493159 L20.7705692,39.6493159 C20.9516769,42.4281311 21.9095538,44.411186 23.6462769,45.5977113 C25.3368923,46.7369294 27.4815231,47.3076923 30.0793385,47.3076923 C32.646,47.3076923 34.6473231,46.8626973 36.0816462,45.9723225 C37.5006,45.1138705 38.5191231,44.0438824 39.1392923,42.7638966 C39.7582154,41.4835263 40.1279077,40.2654629 40.2483692,39.1104757 C40.3397538,37.9551039 40.3846154,37.1278054 40.3846154,36.627811 L40.3846154,13.2546091 L38.6175692,13.2546091 L38.6175692,18.4068596 L38.5278462,18.4068596 C37.8482769,16.5180344 36.7234154,15.0895887 35.1524308,14.121138 C33.5673231,13.1688409 31.8152308,12.6923077 29.8982308,12.6923077 C26.5597846,12.7549993 24.0234462,13.9492168 22.2879692,16.2757294 C20.5055538,18.5860884 19.6153846,21.4360567 19.6153846,24.824096 C19.6153846,28.3059804 20.4602769,31.186333 22.1513077,33.465923 C23.8593692,35.7932049 26.4405692,36.9720379 29.8990615,37.0028068 L29.8990615,37.0028068 Z M23.5116923,17.5411 C24.8999077,15.4330465 27.0291692,14.3403663 29.8990615,14.2622902 C32.8433077,14.3407509 35.0244923,15.4022776 36.4446923,17.4476395 C37.8636462,19.493386 38.5739538,21.9522048 38.5739538,24.8252498 C38.5739538,27.6982948 37.8636462,30.1413446 36.4446923,32.155553 C35.0244923,34.29476 32.8433077,35.3874401 29.8990615,35.4339781 C27.1205538,35.3870555 25.0058308,34.3255289 23.5565538,32.2490135 C22.0914923,30.2351897 21.3595846,27.7602172 21.3595846,24.8252498 C21.3595846,22.0768188 22.0769538,19.6487689 23.5116923,17.5411 L23.5116923,17.5411 Z" fill="var(--color-2)"></path>
+</symbol>
+<symbol id="icon-circle-pinterest" viewBox="0 0 60 60">
+<title>pinterest circle</title>
+<path d="M30,60 C46.5685433,60 60,46.5685433 60,30 C60,13.4314567 46.5685433,0 30,0 C13.4314567,0 0,13.4314567 0,30 C0,46.5685433 13.4314567,60 30,60 Z" fill="var(--color-1)"/><path d="M32.7594534,39.0844011 C39.3650607,39.0844011 43.8461538,32.9370493 43.8461538,24.7083106 C43.8461538,18.4879013 38.683296,12.6923077 30.8387325,12.6923077 C21.076393,12.6923077 16.1538462,19.8375106 16.1538462,25.7957548 C16.1538462,29.4035321 17.4908705,32.6132513 20.3616445,33.8095301 C20.831959,34.0055526 21.2533867,33.8158437 21.3903287,33.2845985 C21.4839793,32.9163046 21.7104488,31.9873019 21.8088114,31.6009691 C21.9466368,31.0748349 21.893627,30.8905376 21.5137236,30.4317486 C20.6867711,29.4341982 20.1590293,28.1453197 20.1590293,26.3176799 C20.1590293,21.0172538 24.0419955,16.2721247 30.2747673,16.2721247 C35.7910237,16.2721247 38.8240664,19.7130423 38.8240664,24.3105531 C38.8240664,30.3583905 36.2024384,35.462794 32.3094593,35.462794 C30.1590293,35.462794 28.5513606,33.648082 29.0661444,31.4226848 C29.6825303,28.7655568 30.8805513,25.8967726 30.8805513,23.9786376 C30.8805513,22.2625382 29.9779126,20.8293487 28.1090234,20.8293487 C25.9111792,20.8293487 24.1462481,23.1509534 24.1462481,26.2593542 C24.1462481,28.239122 24.8026858,29.5785093 24.8026858,29.5785093 C24.8026858,29.5785093 22.5535988,39.3053775 22.1586759,41.0082484 C21.8005654,42.5589913 21.7469667,44.2633654 21.797326,45.7037705 C21.9478148,46.9959561 23.1994346,48.0482244 24.2852515,46.6306686 C25.0485923,45.3850835 25.8693603,43.8120926 26.2940276,42.2354939 C26.5472965,41.3025828 27.7400165,36.4699652 27.7400165,36.4699652 C28.454765,37.860162 30.5412887,39.0844011 32.7594534,39.0844011 Z" fill="var(--color-2)"></path>
+</symbol>
+<symbol id="icon-circle-bluesky" viewBox="0 0 512 512">
+<title>bluesky circle</title>
+<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"></path>
+</symbol>
+<symbol id="icon-circle-threads" viewBox="0 0 512 512">
+<title>threads circle</title>
+<path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3 .5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4c-29.2-35.8-73-54.2-130.5-54.6c-57 .5-100.1 18.8-128.2 54.4C72.1 146.1 58.5 194.3 58 256c.5 61.7 14.1 109.9 40.3 143.3c28 35.6 71.2 53.9 128.2 54.4c51.4-.4 85.4-12.6 113.7-40.9c32.3-32.2 31.7-71.8 21.4-95.9c-6.1-14.2-17.1-26-31.9-34.9c-3.7 26.9-11.8 48.3-24.7 64.8c-17.1 21.8-41.4 33.6-72.7 35.3c-23.6 1.3-46.3-4.4-63.9-16c-20.8-13.8-33-34.8-34.3-59.3c-2.5-48.3 35.7-83 95.2-86.4c21.1-1.2 40.9-.3 59.2 2.8c-2.4-14.8-7.3-26.6-14.6-35.2c-10-11.7-25.6-17.7-46.2-17.8H227c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1h.8c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3c25.6-1.4 54.6-11.4 59.5-73.2c-13.2-2.9-27.8-4.4-43.4-4.4c-4.8 0-9.6 .1-14.4 .4c-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"></path>
+</symbol>
+<symbol id="icon-circle-tiktok" viewBox="0 0 512 512">
+<title>tiktok circle</title>
+<path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"></path>
+</symbol>
+
+</defs>
+</svg>
+
+<div class='site_wrapper'>
+<div class='full_aside_layout_the_content' id='full_aside_layout_the_content'>
+<div class='sbx_wrapper_header' id='sbx_wrapper_header'>
+<header id='sb_head'>
+<div class='sb_region sb_site_title_region'>
+<div class='sb_title_wrapper'>
+<a href="/blog"><h1 class='sb_title sb_has_Subtitle'>ROBIN HOBB</h1>
+<h2 class='sb_subTitle'>also writes as Megan Lindholm</h2>
+</a>
+</div>
+</div>
+<div class='nav-wrapper clearfix'>
+<nav class='sb_site_nav'>
+<div class='collapsed-menu-wrapper'>
+<a class='collapsed-menu-link' href='javascript:void(0)' id='js-collapsed-menu-link'></a>
+</div>
+<ul class='nav-menu show' id='js-nav-menu'>
+<li>
+<a href="/index.htm">Home</a>
+</li>
+<li>
+<a href="/works.htm">Works</a>
+</li>
+<li>
+<a href="/bio.htm">Biography</a>
+</li>
+<li>
+<a href="/events.htm">Events</a>
+</li>
+<li>
+<a href="/disc.htm">Questions Answered</a>
+</li>
+<li class='active'>
+<a href="/blog">Blog</a>
+</li>
+</ul>
+</nav>
+
+</div>
+</header>
+
+</div>
+<div class='sbx_wrapper_main' id='sbx_wrapper_main'>
+<main>
+<section class='main-body'>
+<aside class='column column-sidebar-01'>
+<div class='column-sidebar-01__content-wrap'>
+<div class='sb_region small_primary_before_global'>
+<div class='region-contents'>
+<div class='content-wrap'>
+<div class='content-container-wrapper'>
+<div class='content clearfix'>
+<div class='global_content_header_wrapper'>
+<div class='global_content_inner_wrapper'>
+<h3 class='MediumHeader'>Tags</h3>
+</div>
+</div>
+<ul class='blog-tag-list'>
+<li>
+<a href="/blog/tags/chocolate">chocolate
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Farseer Trilogy">Farseer Trilogy
+(2)
+</a></li>
+<li>
+<a href="/blog/tags/Folio">Folio
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/GrimOakPress">GrimOakPress
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Illustrated Edition">Illustrated Edition
+(2)
+</a></li>
+<li>
+<a href="/blog/tags/John Howe">John Howe
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Magali Villeneuve">Magali Villeneuve
+(3)
+</a></li>
+<li>
+<a href="/blog/tags/Megan Lindholm">Megan Lindholm
+(2)
+</a></li>
+<li>
+<a href="/blog/tags/Megan Lindholm Steals My Coffee">Megan Lindholm Steals My Coffee
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Molly">Molly
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Nighteyes">Nighteyes
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Office Kat Musings">Office Kat Musings
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Random Penguins">Random Penguins
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Robin Is Out of the Office">Robin Is Out of the Office
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Royal Assassin">Royal Assassin
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Subterranean Press">Subterranean Press
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/TheSignedPage">TheSignedPage
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Tommy Arnold">Tommy Arnold
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Wizard of the Pigeons">Wizard of the Pigeons
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/Wondercon">Wondercon
+(1)
+</a></li>
+<li>
+<a href="/blog/tags/zoom">zoom
+(1)
+</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class='content-wrap'>
+<div class='content clearfix'>
+<div class='global_content_header_wrapper'>
+<div class='global_content_inner_wrapper'>
+<h3 class='MediumHeader'>Archives</h3>
+</div>
+</div>
+<ul class='blog-archive-list'>
+<li>
+<a href="/blog/archives/2026-09">September 2026
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2026-07">July 2026
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2026-06">June 2026
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2026-05">May 2026
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2026-04">April 2026
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2026-03">March 2026
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2026-02">February 2026
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2026-01">January 2026
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2025-12">December 2025
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2025-11">November 2025
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2025-10">October 2025
+(4)
+</a></li>
+<li>
+<a href="/blog/archives/2025-09">September 2025
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2025-08">August 2025
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2025-07">July 2025
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2025-06">June 2025
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2025-05">May 2025
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2025-04">April 2025
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2025-03">March 2025
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2025-02">February 2025
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2025-01">January 2025
+(5)
+</a></li>
+<li>
+<a href="/blog/archives/2024-11">November 2024
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2024-10">October 2024
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2024-09">September 2024
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2024-07">July 2024
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2024-06">June 2024
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2024-05">May 2024
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2024-04">April 2024
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2024-03">March 2024
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2024-01">January 2024
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2023-12">December 2023
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2023-11">November 2023
+(5)
+</a></li>
+<li>
+<a href="/blog/archives/2023-09">September 2023
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2023-03">March 2023
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2023-02">February 2023
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2022-11">November 2022
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2022-10">October 2022
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2022-08">August 2022
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2022-06">June 2022
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2022-05">May 2022
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2022-04">April 2022
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2022-03">March 2022
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2021-11">November 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-09">September 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-08">August 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-07">July 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-05">May 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-03">March 2021
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2021-02">February 2021
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2021-01">January 2021
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2020-11">November 2020
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2020-10">October 2020
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2020-09">September 2020
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2020-07">July 2020
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2020-06">June 2020
+(5)
+</a></li>
+<li>
+<a href="/blog/archives/2020-05">May 2020
+(3)
+</a></li>
+<li>
+<a href="/blog/archives/2020-04">April 2020
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2020-03">March 2020
+(6)
+</a></li>
+<li>
+<a href="/blog/archives/2020-02">February 2020
+(1)
+</a></li>
+<li>
+<a href="/blog/archives/2020-01">January 2020
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2019-10">October 2019
+(2)
+</a></li>
+<li>
+<a href="/blog/archives/2019-09">September 2019
+(4)
+</a></li>
+</ul>
+</div>
+
+</div>
+<div class='content-wrap'>
+<div class='content-container-wrapper edit'>
+<div class='move-buttons-wrapper'>
+
+
+</div>
+<div class='content clearfix text-block'>
+<h4>Click Edit on the top toolbar to begin blogging.</h4>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+<div class='sb_region small_primary_global'>
+<div class='region-contents'>
+<div class='content-wrap'>
+<div class='content-container-wrapper'>
+<div class='content global-content clearfix' data-global-content-container>
+<div class='global_content_header_wrapper'>
+<div class='global_content_inner_wrapper'>
+<h3 class='MediumHeader'>
+Join other readers!
+</h3>
+</div>
+</div>
+<div class='inner-contents'>
+<div class='content-container-wrapper edit'>
+<div class='move-buttons-wrapper'>
+
+
+</div>
+<div class='link-block content clearfix'>
+<a target="_blank" class="link-link" href="https://www.reddit.com/r/robinhobb/">Robin Hobb Reddit</a>
+</div>
+</div>
+<div class='content-container-wrapper edit'>
+<div class='move-buttons-wrapper'>
+
+
+</div>
+<div class='link-block content clearfix'>
+<a target="_blank" class="link-link" href="https://www.goodreads.com/author/show/25307.Robin_Hobb?from_search=true">Robin Hobb&#39;s GoodReads Page</a>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class='content-wrap'>
+<div class='content-container-wrapper'>
+<div class='content selected-works clearfix'>
+<div class='global_content_header_wrapper'>
+<div class='global_content_inner_wrapper'>
+<h3 class='MediumHeader here'><p class="from_wysiwyg">Signed Books!</p></h3>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='sb_region small_primary_after_global'>
+<div class='region-contents'>
+<div class='content-wrap'>
+<div class='content-container-wrapper edit'>
+<div class='move-buttons-wrapper'>
+
+
+</div>
+<div class='content clearfix text-block'>
+<h4>Autographed Books are now Available!</h4>
+<div class='image-block-align-left small'>
+<image alt='' sizes='(min-width: 530px) 33vw, (min-width: 750px) 25vw, 100vw' src='/images/social-asset-hobb-store.jpg' srcset='/images/social-asset-hobb-store.jpg 480w, /images/social-asset-hobb-store.jpg 320w'></image>
+
+<div class='caption'>
+King Shrewd places a pin on young Fitz.
+</div>
+</div>
+<div class='text-wrapper'>
+<p class="from_wysiwyg">Readers can once more request signed and dedicated books.&nbsp; Please visit the <a href="https://signedpage.com/collections/robin-hobb">Robin Hobb Bookstore at Shawn Speakman's Signed Page</a>. While you are there, don't forget to browse all the other autograpehd fantasy ans science fiction books that are available.&nbsp; Visit <a href="https://grimoakpress.com">Grim Oak Press</a> for very special editions of fantasy books.</p>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+</aside>
+<section class='column column-primary'>
+<div class='column-primary__content-wrap'>
+<div class='sb_region sb_region_page_title'>
+<div class='sb_page_title_wrapper'>
+<h2>
+Robin Hobb's Infrequent and Off Topic Blog
+</h2>
+</div>
+
+</div>
+<div class='blog-post clearfix'>
+<div class='blog-body'>
+<h3 class='MediumHeader'><a href="/blog/posts/40869">What Works For Me</a></h3>
+<div class='blog-post-date'>May 20, 2022</div>
+<div class='blog-post-tags'>
+</div>
+<div class='post-body' data-sbx-post-href='/blog/posts/40869'>
+<div class='image-block-align-center image-add-border large'>
+<img alt="coffee cup in garden" sizes="(min-width: 940px) 66vw, 100vw" srcset="https://sbx-attachments-production.s3.us-east-2.amazonaws.com/rwiamtf7bkz6jggjsuryv4z830hj?response-content-disposition=inline%3B%20filename%3D%22img-20171022-101021387.jpg%22%3B%20filename%2A%3DUTF-8%27%27img-20171022-101021387.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA6MHW4YOXXGMMU2FH%2F20260906%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260906T121302Z&amp;X-Amz-Expires=172800&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f5cc6b297edd0b92720942e378265c8aeae5dbc7b95473b5ff15fdf1b3ca60d5 1280w, https://sbx-attachments-production.s3.us-east-2.amazonaws.com/rwiamtf7bkz6jggjsuryv4z830hj?response-content-disposition=inline%3B%20filename%3D%22img-20171022-101021387.jpg%22%3B%20filename%2A%3DUTF-8%27%27img-20171022-101021387.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA6MHW4YOXXGMMU2FH%2F20260906%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260906T121302Z&amp;X-Amz-Expires=172800&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f5cc6b297edd0b92720942e378265c8aeae5dbc7b95473b5ff15fdf1b3ca60d5 960w, https://sbx-attachments-production.s3.us-east-2.amazonaws.com/rwiamtf7bkz6jggjsuryv4z830hj?response-content-disposition=inline%3B%20filename%3D%22img-20171022-101021387.jpg%22%3B%20filename%2A%3DUTF-8%27%27img-20171022-101021387.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA6MHW4YOXXGMMU2FH%2F20260906%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260906T121302Z&amp;X-Amz-Expires=172800&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f5cc6b297edd0b92720942e378265c8aeae5dbc7b95473b5ff15fdf1b3ca60d5 640w" src="https://sbx-attachments-production.s3.us-east-2.amazonaws.com/ndsp2l5icpesld1og6lnyiucmzs2?response-content-disposition=inline%3B%20filename%3D%22img-20171022-101021387.jpg%22%3B%20filename%2A%3DUTF-8%27%27img-20171022-101021387.jpg&amp;response-content-type=image%2Fjpeg&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA6MHW4YOXXGMMU2FH%2F20260906%2Fus-east-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260906T121302Z&amp;X-Amz-Expires=172800&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f36b949bffb50c0057cdb806d5dc9fc6f6ac9d5ffc58db85cca2dd0dc02666a4" />
+<div class='caption'>
+Time to get Writing<br>&nbsp;
+</div>
+</div>
+<div class='post-text'>
+<p class="from_wysiwyg">And to start with, let's acknowledge that what works for me may not work for you at all!&nbsp; Every writer has their own tricks and starters.&nbsp; Here are a few of mine:</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg"><strong>The Book Is Not Writing Itself</strong></p>
+<p class="from_wysiwyg">Pretty sure you know what I mean by that.&nbsp; You sit down, you have a pretty good idea of what should happen next, but it's not happening.&nbsp; You need the character to walk across the room, look out the window and then pick a fight with someone else in the room.&nbsp; Maybe.&nbsp; Maybe they don't fight.&nbsp; Maybe the character makes a cup of tea instead of looking out the window.&nbsp; Maybe&nbsp; . . .&nbsp; but you've written it three ways and they all sound stupid.&nbsp; Or out of character.&nbsp; Or just wrong.</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg">I get up from the keyboard and walk away.&nbsp; (If you've got a cat and are working with a laptop, close it!)&nbsp; And I go do some other work, the mindless kind.&nbsp; Dump all the wastebaskets in the house and take the garbage out.&nbsp; Do the dishes.&nbsp; Take the dog out for a bit.&nbsp; Clean the cat box.&nbsp; Pull some weeds, mow the lawn.&nbsp; Even just take a shower.&nbsp;&nbsp;</p>
+<p class="from_wysiwyg">Often when I walk away from the story, when I come back, I can move it forward.</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg"><strong>Nope.&nbsp; I'm blocked.&nbsp; Really blocked.</strong></p>
+<p class="from_wysiwyg">Here is what almost always works for me.&nbsp; Go back four pages, or even back to the beginning of the chapter.&nbsp; Put on your editor hat and start looking at your work.&nbsp; Oh, you typed 'you' instead of 'your'.&nbsp; The car isn't red, it's candy apple red with metal flake.&nbsp; This is a run-on sentence.&nbsp; Fix all those bits as you go along. For me, what happens next is that I come to a spot where the story zigged when it should have zagged.&nbsp; I wasn't really blocked. My subconscious was nagging me that I needed to go back and fix that before I go on.&nbsp; And once I fix it, the story starts flowing again.</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg"><strong>I don't want to write the next scene.&nbsp; It's boring.</strong></p>
+<p class="from_wysiwyg">Well, if it's boring to you, your reader will toss the book to one side.&nbsp; The solution.&nbsp; Don't write it.&nbsp; But the party needs to spend four days crossing the desert or your time line for the other plot line won't work . . .&nbsp; &nbsp;It's okay.&nbsp; You can just type, "After four days of punishing travel, they reached a small holding near a water hole."&nbsp; Or something similar.&nbsp; Then get on with the story.&nbsp; You can have a one sentence chapter if you want.&nbsp; It's your book.&nbsp; Or maybe later in the writing, you'll realize something important did happen during that crossing, and you can go back and put it in.&nbsp; That's okay, too.</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg">This also applies to the 'I can't think of the right word' or 'I don't know the character's name.'.&nbsp; Move along.&nbsp; Use the almost right word and stick an asterisk * next to it.&nbsp; Later, do a search for asterisks and you'll find that spot and by then you'll know the word you wanted.&nbsp; Or maybe you just name the character Asterick.&nbsp;&nbsp;</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg">* Do you have a copy of Roget's Thesaurus?&nbsp; If not, go buy one now. A fat paper thesaurus is a treasure.&nbsp; See, if I look for a synonym for 'treasure' via the word processing program I'm using, it will show me the same synonyms that every other writer is using.&nbsp; The thesaurus will give you a lot more choices.&nbsp; Trust me. Just don't get lost in it like I do.&nbsp;&nbsp;</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg"><strong>Look at this horrible redundant three pages.&nbsp; I'm cutting them.</strong></p>
+<p class="from_wysiwyg">Wait!&nbsp; Two days from now, you will want that one sentence that you really liked.&nbsp; So in the folder where you are saving your work (and of course you are saving it to the cloud as well. . . right?) you add another file.&nbsp; Mine is called 'chopped bits.'&nbsp; So you cut those pages and paste them into the chopped bits file.&nbsp; And when you realize that it wasn't redundant after all, there it is!&nbsp; Cut and paste it back where you needed it.&nbsp;&nbsp;</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg"><strong>The story has a great beginning.&nbsp; I was so excited to write it.&nbsp; The middle works, too.&nbsp; But I can't write an ending!</strong></p>
+<p class="from_wysiwyg">I spent years writing those stories.&nbsp; I probably still have the paper copies of them somewhere.&nbsp; Lots of them.</p>
+<p class="from_wysiwyg">Here's the issue.&nbsp; You are afraid of committment.&nbsp; You know six possible ways to end the story and you don't know which one is the right one.&nbsp; The solution?&nbsp; Choose one and write it.&nbsp; Then maybe let it cool for a day or so.&nbsp; Then read the story.&nbsp; Maybe you'll love it.&nbsp; Maybe not.&nbsp; If you don't like it, choose the next ending and write that.&nbsp; Eventually, you'll find the right ending, and you'll have a finished story and you can submit it.&nbsp; Which is a lot better than having a file drawer full of stories with no endings.&nbsp; (Avoid the volcano and asteroid ending.&nbsp; I've tried those over and over, and they never seem to work.&nbsp; But maybe that's just me. What works for&nbsp; you might be very different.)</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg">So, there they are.&nbsp; And it looks like the rain has stopped and maybe I can do some gardening today.&nbsp; Which is where I do a lot of my writing.</p>
+<p class="from_wysiwyg">&nbsp;</p>
+<p class="from_wysiwyg">Just because I'm not writing doesn't mean I'm not writing.</p>
+</div>
+</div>
+<div class='post-comments-collapsed'>
+<a class="js-show-comments" id="sb_comments_40869" href="/sbx/publish/sites/robinhobb/blog/posts/40869">9 Comments
+</a></div>
+<div class='post-comments' style='display:none;'>
+<h4><a class="js-hide-comments" href="/sbx/publish/sites/robinhobb/blog/posts/40869"> Comments</a></h4>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+May 20, 2022 10:50 PM PDT
+</p>
+<p>I loved reading this. The photo of the mug in the garden is very calming ? </p>
+<p>
+-
+Sandy E
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+May 22, 2022  2:44 PM PDT
+</p>
+<p>Thank you, thank you, thank you for writing this!</p>
+<p>
+-
+K. Arthurs
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+May 26, 2022  5:53 AM PDT
+</p>
+<p>You are a fantastic writer. I'm sure if you wrote the blurbs on cereal boxes, I would read those over and over and inhabit the world you created. I appreciate you sharing your process. </p>
+<p>
+-
+Wink
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+May 26, 2022  7:52 AM PDT
+</p>
+<p>I’m so glad I searched for you Robin. Keep gardening and pottering. If the book wants to be written, it will be.</p>
+<p>
+-
+Mully Woolmer
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+May 27, 2022 10:47 PM PDT
+</p>
+<p>Thank you so much for doing this. I just started writing my first book and it’s harder than I thought. I feel like my writing is childish and unprofessional at the moment. Greatly inspired by your works, I tell everyone it’s the greatest fantasy series ever written by a long way. To think I only checked the site to see how close a new Bee book is.<br><br>I was wondering the other day if you were a fan of the beach boys, Thick reminds me of Brian Wilson a bit.</p>
+<p>
+-
+Sam G
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+Jun 06, 2022  1:30 PM PDT
+</p>
+<p>Oh this is so helpful! For so long time I was wondering how you tackle those kinds of problems in writing. (I haven't written anything I am just interested in the subject.) Thank you for sharing. If I ever write I will remember these!<br><br>On side note. I have always wondered how you were able to write exactly what is needed and nothing more but yet still write so detailed. I guess it must be cos you really don't write 20 pages of the four days journey unless it is absolutely necessary. I really adore how you also describe how the charters feel and think and not only how they look. <br><br>I actually started reading fantasy trough your books. The bad thing about that was that your writing is so detailed and the story and plot and everything so perfect that I still didn't find anyone to match. Since it is not about tossing those details everywhere. It is that you let the reader think they know it all that they had it figured out since you gave them all the details only to then make us readers realise it wasn't how we saw it and it was still right in front of our eyes but still something surprising happened. And I must must must say this. It is always a big choice to kill a character. And some writers make it so that I don't feel a thing. It was one of those characters with the ridiculously long name I kind a forgot and I ain't actually even sure who we are killing. But not with you books. I actually weep. Feel the pain of the character loosing the other character. I feel like I loose something myself.<br><br>I always wanted to write you but I didn't know exactly how. Kind a had the "writers block" on that. But your post made me realise now or never. Better do it now than make it "perfect".<br><br>It is just something the talent you have the intuition on things and the ways you describe stuff that makes me feel I am there in the world and nothing can pull me out cos it is so well written.<br><br>Thank you, thank you, thank you. Your books mean the world for me!</p>
+<p>
+-
+Rilda (Finland)
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+Jun 16, 2022  4:38 AM PDT
+</p>
+<p>This blog was a treasure to find (I need to get the thesaurus you mentioned) a real gem.  I didn’t know you had a place you shared a little window into your world.  I have returned to Fitz and the Fool at every low point in my life through decades now.  My steadfast friends who shared their tragedies and triumphs.  Thank you for sharing them with me.  Thesaurus or not there are no words to express how special they’ve been to me other than the simple, sincere, <br>Thank you. </p>
+<p>
+-
+Renee
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+Jun 18, 2022  3:16 AM PDT
+</p>
+<p>I was blocked recently and came across this:<br>"That part of your life is over. Set it aside as something you have finished. Complete or no, it is done with you. No being gets to decide what his life is "supposed to be"...'Be a man. Discover where you are now, and go on from there, making the best of things. Accept your life, and you might survive it. If you hold back from it, insisting this is not your life, not where you are meant to be, life will pass you by. You may not die from such foolishness, but you might as well be dead for all the good your life will do you or anyone else."<br>It fits perfectly with what I am looking for... inspiration is everywhere. </p>
+<p>
+-
+DSW
+</p>
+</div>
+
+</div>
+<div class='comment clearfix'>
+<div class='blog-comment-block'>
+<p class='author-notification'>
+Jul 16, 2022  4:47 PM PDT
+</p>
+<p>I have a lovely book called "The Synonym Finder" which was published in 1978 and contains over a million synonyms.  It is far better than Roget's or any other thesaurus I've ever found.  It's been with me for thirty years and I consult it at least once a week sometimes just for fun.  Your tools are your tools.  You either have the right one for the job or you should get the right tool for the job.</p>
+<p>
+-
+Cadeyrn
+</p>
+</div>
+
+</div>
+
+</div>
+<div class='post-new-comment'>
+<a data-loads-in-ajax-modal="true" href="/blog/commentable_posts/40869/comments/new">Post a comment</a>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+</section>
+</section>
+</main>
+</div>
+</div>
+<div class='full_aside_layout_the_aside' id='full_aside_layout_the_aside'>
+<aside class='column column-sidebar-02 column-last'>
+<div class='column-sidebar-02__content-wrap'>
+<div class='sb_region small_secondary_before_global'>
+<div class='region-contents'>
+<div class='content-wrap'>
+<div class='content-container-wrapper edit'>
+<div class='move-buttons-wrapper'>
+
+
+</div>
+<div class='link-block content clearfix'>
+<a target="_blank" class="link-link" href="https://www.facebook.com/robin.hobb/">Facebook</a>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div class='sb_region small_secondary_global'>
+<div class='region-contents'>
+<div class='content-wrap'>
+<div class='content-container-wrapper'>
+<div class='content global-content clearfix' data-global-content-container>
+<div class='inner-contents'>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='sb_region small_secondary_after_global'>
+<div class='region-contents'>
+</div>
+</div>
+
+
+
+</div>
+</aside>
+</div>
+<div class='sbx_wrapper_footer' id='sbx_wrapper_footer'>
+<footer>
+<div class='sb_region sb_site_copyright_region'>
+<div class='sb_copyright_wrapper'>
+<div class='footer-left'>
+<div class='copyright'>
+© @2019 Robin Hobb
+</div>
+</div>
+<div class='footer-right'>
+<ul class='social'>
+<li>
+<a target="_blank" href="https://twitter.com/robinhobb"><svg class="sb-footer-icon"><use xlink:href="#icon-x"></use></svg>
+</a></li>
+<li>
+<a target="_blank" href="https://www.facebook.com/robin.hobb/"><svg class="sb-footer-icon"><use xlink:href="#icon-facebook"></use></svg>
+</a></li>
+<li>
+<a target="_blank" href="https://www.instagram.com/therealrobinhobb/"><svg class="sb-footer-icon"><use xlink:href="#icon-instagram"></use></svg>
+</a></li>
+<li>
+<a target="_blank" href="https://www.goodreads.com/author/show/25307.Robin_Hobb?from_search=true"><svg class="sb-footer-icon"><use xlink:href="#icon-goodreads"></use></svg>
+</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+</footer>
+</div>
+<div class='modal modal-public' data-ajax-modal>
+<div class='modal-fade-screen'>
+<div class='modal-wrapper'>
+<div class='modal-inner'>
+<div data-ajax-modal-content></div>
+<div data-ajax-modal-loading>
+Loading&hellip;}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='modal' data-image-modal>
+<div class='modal-fade-screen'>
+<div class='modal-wrapper'>
+<div class='modal-inner'>
+<i class='image-modal-close ss-icon ss-delete'></i>
+<img data-image-modal-content>
+</div>
+</div>
+</div>
+</div>
+
+<script src="/theme/sitebuilder.js"></script>
+<script async defer src='https://www.google.com/recaptcha/api.js?onload=recaptcha_js_is_loaded&amp;render=explicit'></script>
+<script>
+  // rails path helpers aren't available here, though they
+  // probably could be with some work 
+  $.post("/pages/39533/record_hit")
+</script>
+
+
+</div>
+</body>
+</html>
+<script src='https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js'></script>
+<script>
+  $('body').imagesLoaded().always( function( instance ) {
+    if ($(window).width() > 767) {
+      right = $('.column-sidebar-02__content-wrap').height();
+      left = $('section.main-body').height();
+      console.log("Left-> " + left + " Right-> " + right);
+      if (left > right) {
+        $('.column-sidebar-02__content-wrap').height(left);
+      } else {
+        $('section.main-body').height(right);
+      }
+    }
+  });
+  
+  function widthResizer(){
+    var width = window.innerWidth
+    if (width <= 767) {
+      $(".column-sidebar-01__content-wrap").prependTo(".column-last");
+    } else {
+      $(".column-sidebar-01__content-wrap").prependTo(".column-sidebar-01");
+    }
+  }
+  
+  
+  $( document ).ready(function() {
+    widthResizer();
+    window.addEventListener('resize', widthResizer);
+  });
+</script>

@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 121,
+ "firstTs": "2026-09-12T10:42:57.183Z",
+ "lastTs": "2026-09-12T10:55:53.324Z",
+ "tools": {
+  "Bash": 32
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": " outside the pool's own key.\n\n**MECHANICALLY CHECKED over the twelve rows:** no em dash, no exclamation mark, no digit, no `which`-clause, no question, no second person, no future indicative; every face one or two sentences; vid 1 and vid 3 faces each carry `{settlement}`, vid 2 faces carry no slot.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "aea2c2cb54258929e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-aea2c2cb54258929e.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

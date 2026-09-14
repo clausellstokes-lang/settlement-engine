@@ -1,0 +1,85 @@
+{
+ "block": "DS-DEF-5",
+ "dock": "laneRW-DEF5",
+ "pools": [
+  {
+   "pool": "walls PRESENT",
+   "dir": "ds-def-5--walls-present",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "walls ABSENT",
+   "dir": "ds-def-5--walls-absent",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "garrison PRESENT",
+   "dir": "ds-def-5--garrison-present",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "militia PRESENT (no garrison)",
+   "dir": "ds-def-5--militia-present-no-garrison",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "watch PRESENT",
+   "dir": "ds-def-5--watch-present",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "NO organized force at all",
+   "dir": "ds-def-5--no-organized-force-at-all",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "mercenary / contracted forces PRESENT",
+   "dir": "ds-def-5--mercenary-contracted-forces-present",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "charter hall PRESENT (specialist monster response)",
+   "dir": "ds-def-5--charter-hall-present-specialist-monster-response",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "charter hall ABSENT where the country warrants one",
+   "dir": "ds-def-5--charter-hall-absent-where-the-country-warrants-o",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "arcane defense PRESENT",
+   "dir": "ds-def-5--arcane-defense-present",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "arcane defense ABSENT",
+   "dir": "ds-def-5--arcane-defense-absent",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  }
+ ],
+ "wiringDebt": [],
+ "maxRounds": 6
+}

@@ -1,0 +1,896 @@
+                                                                       Automatic Detection of Generated Text is
+                                                                          Easiest when Humans are Fooled
+
+                                                             Daphne Ippolito†‡∗                                   Daniel Duckworth‡*
+                                                         daphnei@seas.upenn.edu                                duckworthd@google.com
+
+                                                              Chris Callison-Burch†‡                                    Douglas Eck‡
+                                                             ccb@seas.upenn.edu                                      deck@google.com
+
+
+                                                                    Abstract                               (Vargo et al., 2018), influences elections (Allcott
+                                                                                                           and Gentzkow, 2017), and undermines user trust
+                                              Recent advancements in neural language mod-
+                                              elling make it possible to rapidly generate vast
+                                                                                                           (Wang et al., 2012; Song et al., 2015). Recently,
+
+
+
+
+arXiv:1911.00650v2 [cs.CL] 7 May 2020
+                                              amounts of human-sounding text. The ca-                      Adelani et al. (2020) have shown that automati-
+                                              pabilities of humans and automatic discrimi-                 cally generated reviews are perceived to be as flu-
+                                              nators to detect machine-generated text have                 ent as human-written ones. As generative tech-
+                                              been a large source of research interest, but hu-            nology matures, authors, well-meaning or other-
+                                              mans and machines rely on different cues to                  wise, will increasingly employ it to augment and
+                                              make their decisions. Here, we perform care-                 accelerate their own writing. It is more impera-
+                                              ful benchmarking and analysis of three popu-
+                                                                                                           tive now than ever for both humans and automated
+                                              lar sampling-based decoding strategies—top-
+                                              k, nucleus sampling, and untruncated random                  systems to be able to detect and identify machine-
+                                              sampling—and show that improvements in de-                   generated texts in the wild. However, there has
+                                              coding methods have primarily optimized for                  thus been little inquiry into the textual proper-
+                                              fooling humans. This comes at the expense of                 ties that cause humans to give generated text high
+                                              introducing statistical abnormalities that make              human-like ratings compared to those that cause
+                                              detection easy for automatic systems. We also                automatic systems to rate it highly.
+                                              show that though both human and automatic
+                                                                                                              To speak of texts produced by language mod-
+                                              detector performance improve with longer ex-
+                                              cerpt length, even multi-sentence excerpts can
+                                                                                                           els, we must first consider how these texts are
+                                              fool expert human raters over 30% of the time.               generated. A neural language model encodes a
+                                              Our findings reveal the importance of using                  probability distribution over the next word in a
+                                              both human and automatic detectors to assess                 sequence given the previous words.1 A decod-
+                                              the humanness of text generation systems.                    ing strategy is an algorithm that generates se-
+                                                                                                           quences from a language model by determining
+                                        1     Introduction
+                                                                                                           how words should get selected from this distribu-
+                                        State-of-the-art generative language models are                    tion. The field has largely moved toward prob-
+                                        now capable of producing multi-paragraph ex-                       abilistic decoding strategies that randomly sam-
+                                        cerpts that at a surface level are virtually indis-                ple from the output distribution token-by-token.
+                                        tinguishable from human-written content (Zellers                   However, when many low-likelihood words cu-
+                                        et al., 2019; Radford et al., 2019; Adelani et al.,                mulatively contain quite a bit of probability mass,
+                                        2020). Often, only subtle logical fallacies or id-                 choosing one of these words can lead to odd or
+                                        iosyncrasies of language give away the text as                     contradictory phrases and semantic errors. Hu-
+                                        machine-generated, errors that require a close                     mans are quick to notice these types of errors.
+                                        reading and/or domain knowledge for humans to                         For this reason, it has become common to mod-
+                                        detect.                                                            ify the language model’s output probability dis-
+                                           Deceptive text, whether human- or machine-                      tribution to increase the chance of sampling to-
+                                        generated, has entered the sphere of public con-                   kens with high likelihood according to the lan-
+                                        cern (Cooke, 2018).        It propogates quickly                   guage model. Top-k random sampling, where
+                                        (Vosoughi et al., 2018), sets political agendas                    low-likelihood words are restricted from being
+                                              ∗                                                               1
+                                                  Equal contribution, ‡Google, †University of Pennsylva-        Often these ‘words” are actually subword character se-
+                                        nia                                                                quences such as BPE tokens (Sennrich et al., 2016).
+generated, is one such method. A language model         Transformer architecture (Vaswani et al., 2017)
+that is only permitted to produce high-likelihood       are capable of generating convincing, human-like
+words is less likely to make a poor choice and cre-     excerpts up to several paragraphs in length. GPT-
+ate the type of mistakes that are easy for humans to    2 (Radford et al., 2019), G ROVER (Zellers et al.,
+detect. Since humans are not proficient at identi-      2019), and Transformer-DMCA (Liu et al., 2018)
+fying when a model subtly favors some utterances        are a few examples of large, publicly available
+more often than a human author would, they don’t        models with this ability. G ROVER, in particular,
+notice the over-representation of high-likelihood       has been shown to generate fake news that is more
+words in the generated text. In contrast, automatic     trustworthy than human-written fake news accord-
+systems excel at identifying statistical anomalies      ing to human raters.
+and struggle to build deeper semantic understand-       Human Detection The task of trying to guess
+ing. Top-k in particular creates text that is easy      whether text is coming from a robot or a fellow
+for machines to detect but very hard for humans.        human was made famous by the Turing Test (Tur-
+Thus, we observe the general trend: as the num-         ing, 1950). It continues to be used is chatbot eval-
+ber of unlikely words available to be chosen is in-     uation (Lowe et al., 2017). The related (but not
+creased, humans get better at detecting fakes while     identical) task of asking human raters to judge the
+automatic systems get worse.                            quality of machine-generated excerpts remains the
+   In this work, we study three popular random          gold-standard for evaluating open-domain genera-
+decoding strategies—top-k, nucleus, and temper-         tion systems (van der Lee et al., 2019). Kreps et al.
+ature sampling—applied to GPT-2 (Radford et al.,        (2020), Gehrmann et al. (2019), and others have
+2019). We draw a large number of excerpts gener-        stressed the importance of humans being able to
+ated by each strategy and train a family of BERT-       identify fake content on the web.
+based (Devlin et al., 2019) binary classifiers to
+                                                        Automatic Detection The rise of machine-
+label text excerpts as human-written or machine-
+                                                        generated content has led to the development of
+generated. We find large differences in human
+                                                        automated systems to identify it. G ROVER was
+rater and classifier accuracy depending on the de-
+                                                        designed to not only generate convincing news ex-
+coding strategy employed and length of the gen-
+                                                        cerpts but to also identify them using a fine-tuned
+erated sequences. Regardless of strategy, we find
+                                                        version of the generative model itself (Zellers
+human raters achieve significantly lower accuracy
+                                                        et al., 2019). GLTR, expecting attackers to use
+than the automatic discriminators. We also show
+                                                        sampling methods that favor high-likelihood to-
+that when a decoding strategy severely modifies
+                                                        kens, aims to make machine-generated text de-
+the unigram token distribution, as top-k does, hu-
+                                                        tectable by computing histograms over per-token
+mans have trouble detecting the resultant gener-
+                                                        log likelihoods (Gehrmann et al., 2019). Bakhtin
+ated text, but automatic classifiers find it the eas-
+                                                        et al. (2019) frame human-text detection as a rank-
+iest to discriminate. Worryingly, we further find
+                                                        ing task and evaluate their models’ cross-domain
+that classifiers are brittle; they generalize poorly
+                                                        and cross-model generalization, finding signifi-
+when trained to discriminate samples from one
+                                                        cant loss in quality when training on one do-
+strategy and then evaluated on samples from an-
+                                                        main and evaluating on another. Schuster et al.
+other.
+                                                        (2019) argue that the language distributional fea-
+   In summary, our contributions are:
+                                                        tures implicitly or explicitly employed by these
+   • A comprehensive study of generated text de-        detectors are insufficient; instead, one should look
+      tection systems’ sensitivity to model struc-      to explicit fact-verification models. Finally, dis-
+      ture, decoding strategy, and excerpt length.      criminators for whether text is machine-generated
+   • An analysis of human raters’ ability to iden-      are a promising research direction in adversarial
+      tify machine-generated content, and how hu-       training (Lin et al., 2017; Li et al., 2017) and in
+      man raters differ from automatic detectors.       automatic evaluation of generative model quality
+                                                        (Novikova et al., 2017; Kannan and Vinyals, 2017;
+2   Related Work                                        Lowe et al., 2017).
+Generative Language Models With a suffi-                Natural Language Understanding Automatic
+ciently large training set and number of trainable      detection of machine-generated text benefits from
+parameters, neural language models based on the         a semantic understanding of the text. Contradic-
+tions, falsehoods, and topic drift can all indicate      smaller language models.
+that an excerpt was machine-generated. Encoder-             Given an autoregressive language model that
+only Transformer models such as BERT (Devlin             defines a probability distribution over the next to-
+et al., 2019) have been shown to do very well at         ken given the previous tokens in a sequence, a
+tasks requiring this understanding. While we fine-       decoding strategy generates text by deciding how
+tune BERT for the task of classifying whether text       to output a token at each step based on the pre-
+was machine-generated, others have used the con-         dicted distributions. Perhaps the most straightfor-
+textual word embeddings from a pre-trained BERT          ward decoding strategy is to randomly choose a to-
+model without fine-tuning to compute a quality           ken with probability proportional to its likelihood.
+score for generated text (Zhang et al., 2020). It        A challenge with the random sampling approach
+is worth noting that recent work has raised ques-        is that these probability distributions often contain
+tions as to whether BERT truly builds a semantic         a long tail of vocabulary items that are individu-
+understanding to make its predictions, or whether        ally low-probability but cumulatively comprise a
+it merely takes advantage of spurious statistical        substantial amount of probability mass. Holtzman
+differences between the text of different classes        et al. (2020) observe that choosing tokens from
+(Niven and Kao, 2019).                                   this tail often leads to incoherent generations.
+                                                            Top-k sampling, nucleus sampling, and (in the
+3   Task Definition                                      extreme) beam search have all been proposed to
+We frame the detection problem as a binary clas-         heuristically promote samples with higher per-
+sification task: given an excerpt of text, label it      token likelihoods. Top-k and nucleus sampling
+as either human-written or machine-generated. In         both do so by setting the likelihood of tokens in
+particular, we are interested in how variables such      the tail of the distribution to zero. Top-k restricts
+as excerpt length and decoding strategy impact           the distribution to all but the k most likely tokens,
+performance on this classification task. We thus         where k is a constant (Fan et al., 2018). Nucleus
+create several datasets. Each is approximately           sampling, also called top-p, truncates the distribu-
+balanced between positive examples of machine-           tion at each decoding step t to the kt -most-likely
+generated text and negative examples of human-           next tokens such that the cumulative likelihood of
+written text. While they all share the same human-       these tokens is no greater than a constant p (Holtz-
+written examples, each dataset contains a different      man et al., 2020).
+set of machine-generated examples sampled using             We thus consider three different decoding strat-
+one particular decoding strategy. We also build ad-      egy settings:
+ditional datasets by truncating all of the examples          • Sample from the untruncated distribution
+to a particular sequence length,                             • Top-k, choosing k=40 (Radford et al., 2019).
+   By training a separate classifier on each dataset,        • Nucleus sampling (aka top-p), choosing
+we are able to answer questions about which de-                p=0.96 (Zellers et al., 2019).
+coding strategy results in text that is the easiest to      In addition, we form “negative” examples of
+automatically disambiguate from human-written            human-written text by taking excerpts of web text
+text. We are also able to answer questions about         that come from the same distribution as GPT-2’s
+how the length of the examples in the training set       training data.2 By picking text that resembles
+impacts our ability to automatically classify ex-        GPT-2’s train set, we ensure that our classifiers
+cerpts of that same length as either human-written       can’t simply take advantage of stylistic differences
+or machine-generated.                                    between the human-written text corpus and the
+                                                         kind of text GPT-2 was trained to generate.
+4   Dataset Methodology                                     For each decoding method, we construct a train-
+All of our generated text samples are drawn from         ing dataset by pairing 250,000 generated samples
+GPT-2, a state-of-the-art Transformer-based gen-         with 250,000 excerpts of web text. 5,000 addi-
+erative language model that was trained on text          tional paired samples are kept aside for validation
+from popular web pages (Radford et al., 2019).           and test datasets. Lastly, we filter out excerpts
+While we use the GPT-2 L ARGE model with                 with fewer than 192 WordPiece tokens (Wu et al.,
+774M parameters, we found that similar trends              2
+                                                             https://github.com/openai/
+to those reported here hold in experiments with          gpt-2-output-dataset
+2016) (excerpts might be quite short if the model       corresponds to a token in GPT-2’s 50,000 token
+produces an end-of-text token early on). See Ap-        BPE vocabulary (Sennrich et al., 2016), and we
+pendix 1 for final dataset sizes.                       count how many times that token appears in the
+   A crucial question when generating text with         text sequence. We then train a logistic regression
+a language model is whether or not to provide           binary classifier to predict human- or machine-
+a priming sequence which the language model             written given this 50,000-dimensional embedding.
+should continue. Unconditioned samples, where           We experimented with truncating embedding size
+no priming text is provided, in conjunction with        by removing entries for infrequent vocabulary
+top-k sampling, lead to pathological behavior for       words, but this did not improve performance.
+discriminators as the first token of the generated      Histogram-of-Likelihood Ranks            Following
+text will always be one of k possible options. On       GLTR (Gehrmann et al., 2019), we compute the
+the other hand, if long sequences of human text         probability distribution of the next word given the
+are used as priming, the space of possible gener-       previous words in a text sequence according to
+ated sequences is larger, but the detection problem     a trained language model (in our case the same
+shifts from one of “how human-like is the gener-        GPT-2 model that was used for generation). At
+ated text?” to “how well does the generated text        each sequence position, we rerank the vocabulary
+follow the priming sequence?”.                          words by likelihood, and record the rank of the
+   Since in this study we are interested in the         ground-truth next word within this list. These
+former simpler question, we create two datasets,        ranks are then binned. GLTR uses four bins,
+one with no priming, and one with the minimum           counting (1) the number of times the top 1 word
+amount of priming possible: a single token of web       is seen, (2) the number of times words ranked
+text. This means that for every excerpt of web text     2 through 5 are seen, (3) words ranked 6-100,
+in the training set, there is an excerpt of machine-    and (4) words ranked >100. However, we
+generated text that starts with the same token. We      observe higher accuracy when 50 bins are spread
+find that even with limited priming, the ability of     uniformly over the possible rankings. This means
+automatic detectors can be strongly impacted.           that since there are 50,000 vocabulary words, the
+   To study the effect of excerpt length, we con-       first bin counts the number of times the actual
+struct variations of the above datasets by truncat-     next word was within the 1,000 mostly likely next
+ing all excerpts to ten possible lengths ranging        words, the second bin counts the 1,001-2,000th,
+from 2 to 192 WordPiece tokens (Wu et al., 2016).       and so on. We then train logistic regression binary
+In total, we obtain sixty dataset variations: one per   classifiers to predict human- or machine-written
+sampling method, truncation length, and choice of       given either the 4-dimensional histograms or
+priming or no priming.                                  50-dimensional histograms as input.
+                                                        Total Probability Solaiman et al. (2019) pro-
+5   Automatic Detection Method                          pose a very simple baseline consisting of a thresh-
+                                                        old on the total probability of the text sequence.
+The primary discriminator we employ is a fine-          An excerpt is predicted as machine-generated if
+tuned BERT classifier (Devlin et al., 2019). We         its likelihood according to GPT-2 is closer to the
+fine-tune one instance of BERT per dataset vari-        mean likelihood over all machine-generated se-
+ation described above. For the longest sequence         quences than to the mean of human-written ones.
+length, n=192, we compare BERT’s performance
+with several simple baselines that have been pro-       6   Human Detection Method
+posed in other work.
+Fine-tuned BERT We fine-tune BERT-L ARGE                The human evaluation task is framed similarly to
+(cased) on the task of labeling a sentence as           the automatic one. We ask the raters to decide
+human- or machine- generated. The models are            whether a passage of text was written by a human
+trained for 15 epochs, with checkpoints saved ev-       or by a computer algorithm. (Full instructions are
+ery 1000 steps, and a batch size of 256. All results    in the Appendix.) Raters are allowed to choose
+are reported on the test set using the checkpoint       between four options: “definitely” or “possibly”
+for which validation accuracy was highest.              machine-generated and “definitely” or “possibly”
+Bag-of-Words For each sequence, we compute              human-written. They are first shown an excerpt
+a bag-of-words embedding where each dimension           of length 16 WordPiece tokens. After they make
+                          BERT        BagOfWords     HistGLTRBuckets     Hist50Buckets   TotalProb    Human
+    Method             acc   AUC      acc   AUC      acc     AUC         acc    AUC         acc        acc
+    k40-1wordcond      0.88 0.99      0.79  0.87     0.52    0.52        0.69    0.76      0.61        0.64
+    p0.96-1wordcond    0.81 0.89      0.60  0.65     0.53    0.56        0.54    0.56      0.63        0.77
+    p1.0-1wordcond     0.79 0.92      0.59  0.62     0.53    0.55        0.54    0.55      0.65        0.71
+
+Table 1: Performance (accuracy and AUC) of the fine-tuned BERT classifier and several simple baselines on detect-
+ing length-192 sequences generated with one word of priming (1worccond). Note that p1.0 refers to untruncated
+random sampling, where we sample from 100% of the probability mass. The last column shows human perfor-
+mance on the same task where accuracy with a 50% baseline is computed by randomly pairing samples from each
+decoding strategy with a human-written sample.
+
+
+a guess, the length of the excerpt is doubled, and        prisingly well (over 60% accuracy for all sampling
+they are asked the same question again. This con-         methods) relative to the methods which involve
+tinues until the entire passage of length 192 tokens      training logistic regression models.
+is shown. Passages are equally likely to be human-           Logistic regression on bag-of-words is the best
+written or machine-generated, with the machine-           of the baselines, beating out the histogram-based
+generated excerpts being evenly split between the         methods. While Gehrmann et al. (2019) report an
+three sampling strategies considered in this paper.       AUC of 0.87 on classifying text as real or gener-
+   Initially, Amazon Mechanical Turk (AMT)                ated using logistic regression on the four buckets
+raters were employed for this task, but rater accu-       of the GLTR system, we report AUC between 0.52
+racy was poor with over 70% of the “definitely”           and 0.56 for this task. The discrepancy is likely
+votes cast for “human” despite the classes be-            due to the fact that the human-written text in our
+ing balanced. Accuracy, even for the longest se-          discriminator training set comes from the same
+quences, hovered around 50%. The same study               distribution as the text used to train the language
+was then performed with university students who           model, while in GLTR the human text comes from
+were first walked through ten examples (see Ap-           children’s books, scientific abstracts, and news-
+pendix Table 4) as a group. Afterward, they were          paper articles. The selection of training data for
+asked to complete the same tasks that had been            learned detection systems is crucial. In real-world
+sent to the AMT workers. No additional guid-              applications, the choice ought to reflect the genres
+ance or direction was given to them after the ini-        that builders of text-generation systems are trying
+tial walk-through. We will refer to this group as         to impersonate.
+the “expert raters.” Among them, 52.1% of “def-           Fine-tuned BERT In Figure 1a, we begin by ob-
+initely” votes were cast for human, and accuracy          serving discriminator accuracy as a function of ex-
+on the longest excerpt length was over 70%.               cerpt length and sampling method. As can be in-
+   The human evaluation dataset consisted of 150          tuitively expected, as sequence length increases,
+excerpts of web text and 50 excerpts each from            so too does accuracy. For unconditioned text de-
+the three decoding strategies. Each question was          coded with nucleus (p0.96) and untruncated (p1.0)
+shown to at most three raters, leading to 900 total       random sampling, we find discriminator accuracy
+annotations from the untrained workers and 475            increases from 55%, near random, to about 81%
+from the expert raters. A more detailed breakdown         for the longest sequences tested. In contrast, dis-
+can be found in the Appendix.                             criminators trained and evaluated on top-k achieve
+                                                          over 80% accuracy even on 16-token excerpts.
+7   Automatic Detection Results
+                                                             Why are top-k’s samples so easy to detect? In
+Simple Baselines Table 1 shows the perfor-                Figure 2b, we see the percentage of probability
+mance of the baseline discriminators on length-           mass concentrated in the k most common token
+192 sequences, as compared with fine-tuned                types for each sampling method. While random
+BERT. Reassuringly, BERT far surpasses all sim-           sampling and nucleus sampling are very similar to
+ple baselines, indicating that it is not fully possi-     human-written texts, we see top-k concentrating
+ble to solve the detection problem without com-           up to 80% of its mass in the first 500 most com-
+plex sequence-based understanding. The simplest           mon tokens. The other sampling methods as well
+baseline, TotalProb, which makes a decision based         as human-written texts require at least 1,100 token
+on the likelihood of the sequence, performs sur-          types for the same. It is clear that top-k’s distribu-
+                     Accuracy of BERT Fine-tuned Discriminator
+     100%
+                                                                                           Fraction of BERT Discriminator Errors that are
+                                                                                           Machine-generated Labeled as Human-written
+           95%
+                                                                                       1
+           90%
+                                                                                     0.9
+           85%
+                                                                                     0.8
+           80%                                                                       0.7
+
+Accuracy
+           75%                                                                       0.6
+                                                                                     0.5
+           70%
+                                                                                     0.4
+           65%
+                                                                                     0.3
+           60%                                                                       0.2
+           55%                                                                       0.1
+                                                                                       0
+           50%
+                 0        32      64             96        128           160   192         2      4     8      16   32     64     96      128   160     192
+                                    Sequence length in tokens                                               Sequence length in tokens
+                               k40-1wordcond          k40-nowordcond
+                               p0.96-1wordcond        p0.96-nowordcond                         k40-1wordcond    p0.96-1wordcond        p1.0-1wordcond
+                               p1.0-1wordcond         p1.0-nowordcond
+
+
+                                                                                                                     (b)
+                                             (a)
+
+Figure 1: In (a), accuracy increases as the length of the sequences used to train the discriminator is increased.
+In (b), we see that the BERT fine-tuned discriminator predicts about the same number of false-positives as false-
+negatives when trained with samples generated using top-p sampling. However, for top-k, it more often mistakes
+machine-generated text to be human-written, while for untruncated random sampling the opposite is the case.
+
+
+tion over unigrams strongly diverges from human-                                      average more than 500. Untruncated random sam-
+written texts–an easy feature for discriminators to                                   pling always selects from the entire 50,000 word
+exploit. In fact, See et al. (2019) note that it takes                                vocabulary, whereas top-k only selects from k.
+setting k to 1000 to achieve about the same amount                                    Transferability In Table 2, we show how dis-
+of rare word usage and fraction of non-stopword                                       criminators trained with samples from one decod-
+text as as human writing.3 This makes it very easy                                    ing strategy can transfer at test time to detect-
+for the model to pick out machine-generated text                                      ing samples generated using a different decoding
+based on these distributional differences.                                            strategy. Unsurprisingly a discriminator trained on
+   One way to help resolve this problem is to add                                     top-k generalizes poorly to other sampling meth-
+priming text. Doing so causes more rare words                                         ods: accuracy drops to as low as 42.5%, worse
+to be incorporated into the top-k of the unigram                                      than chance. Conversely, training the discrimi-
+distribution. Adding even a single human word                                         nator with sequences sampled from the untrun-
+of priming significantly reduces the performance                                      cated distribution leads to little transferability to
+of detectors trained with top-k random sampling.                                      detecting top-k samples. Only the discriminator
+Without priming, a discriminator trained on se-                                       trained with nucleus sampling (a compromise be-
+quences of length 2 can classify with ∼90% ac-                                        tween unmodified sampling and top-k) was able to
+curacy the provenance of the text (Figure 1a).                                        detect sequences from the other sampling strate-
+By adding one priming token, accuracy drops to                                        gies without too much of a hit to accuracy. As ex-
+∼65%. Even on the longest 192-length sequences,                                       pected, a discriminator trained on an equal portion
+top-k discriminator accuracy is 6% lower on the                                       of data from each decoding method does reason-
+primed dataset than the unprimed one.                                                 ably at detecting all three.
+   When generating with nucleus or untruncated
+                                                                                         Perhaps this lack of transferability is related to
+random sampling, adding a priming token is not
+                                                                                      each discriminator’s calibration. Indeed, the de-
+as impactful, as these methods are already sam-
+                                                                                      gree to which a discriminator’s average predic-
+pling from a large fraction (or all) of the probabil-
+                                                                                      tion deviates from 50% is a direct indicator of
+ity distribution. This is seen in Figure 2a where
+                                                                                      its accuracy. In Table 3, we observe that of the
+at the very first step of unprimed generation, nu-
+                                                                                      three BERT discriminators, only that trained on
+cleus sampling selects from 3075 possible vocab-
+                                                                                      top-p samples predicts ‘machine-generated’ on ap-
+ulary words, and at later positions selects from on
+                                                                                      proximately 50% of in-domain examples as ex-
+   3
+     when decoding from the GPT-2 small model with 117M                               pected. This same discriminator’s behavior holds
+parameters.                                                                           on datasets generated by other sampling strategies
+                        Mean k Chosen at each Position during
+     4500                Generation with Nucleus Sampling
+                                                          p0.96-nowordcond
+                                                          p0.96-1wordcond
+                                                                                              100%
+     4000
+
+     3500                                                                                     80%
+     3000
+
+
+                                                                               % all tokens
+                                                                                              60%
+ k   2500
+
+     2000
+                                                                                              40%
+                                                                                                                                          p1.0-1wordcond
+     1500                                                                                     20%                                         k40-1wordcond
+                                                                                                                                          p0.96-1wordcond
+     1000                                                                                                                                 webtext
+                                                                                               0%
+      500                                                                                            0         500       1000        1500     2000       2500
+            0                50           100            150             200                                      k most common unique tokens
+                                  Position in sequence
+                                                                                                                               (b)
+                                         (a)
+
+Figure 2: In (a), the average (over sequences in the test set) k chosen at each step during generating with nucleus
+sampling is plotted. Adding a single word of priming strongly impacts the ks chosen for the first few positions, but
+this difference quickly dissipates. In (b), we consider the first token generated in each sequence by top-k, and plot
+what fraction of these are captured by the k most common unique tokens from the vocabulary. Overall, at its first
+step, top-k concentrates 80% of its probability mass in the 500 most common tokens from the vocabulary.
+
+
+                                                                                                                                                  ;<=1578028>2?=5-<2@<<8<:256=52=<-2A=1670-B
+                                                                                                                                                    4-0-<=5-C2D=E-3-C2=:2F/G=0BH<755-0
+                                                                                                                                              #
+                                                                                                                                           !"+
+                                                                                                                                           !"*
+                                                                                                                                           !")
+                                                                                                                                           !"(
+                                                                                                                                           !"'
+                                                                                                                                           !"&
+                                                                                                                                           !"%
+                                                                                                                                           !"$
+                                                                                                                                           !"#
+                                                                                                                                              !
+                                                                                                                                                     #(       %$       (&         #$*     #+$
+                                                                                                                                                           ,-./-01-23-04562702589-0:
+                                                                                                                                              9&!B#H8<C180C     I!"+(B#H8<C180C     I#"!B#H8<C180C
+
+
+
+                                        (a)                                                                  (b)                                                    (c)
+
+
+Figure 3: (a) and (b) show human rater accuracy of correctly identifying an excerpt as human-written or machine-
+written, shown with 80% confidence internals, in (a), broken up by decoding strategy and in (b), overall. Accuracy
+increases as raters observe more tokens. (c) shows that for short excerpts, most rater mistakes are them incorrectly
+thinking machine-generated text is human written. The two errors types become more balanced at longer lengths.
+
+
+                                                   Eval                                                                                              Eval
+                                      top-k      nucleus         random                                                               top-k        nucleus            random
+                          top-k        90.1       57.1             43.8                                                     top-k      60.9         27.9                14.5
+                Train    nucleus       79.1       81.3             78.4                                            Train   nucleus     49.2         51.7                48.9
+                         random        47.8       63.7             81.7                                                    random       7.3         22.6                38.3
+                          mixed        88.7       74.2             72.2
+                                                                                                         Table 3: Average probability of ‘machine-generated’
+Table 2: Accuracy of BERT fine-tuned discriminator                                                       according to each length-192 discriminator. The ex-
+when trained on samples from one strategy (rows) and                                                     pected in-domain probability is 0.5. One token of con-
+evaluated on another (columns). Trained on samples                                                       ditioning.
+with 192 tokens. The ‘mixed’ dataset is one containing
+an equal portion of samples from each strategy.
+
+                                                                                                         creasingly so as the number of tokens increases.
+as well. In contrast, we observe that discrimi-                                                          Human Evaluation Overall human performance
+nators trained on top-k and untruncated random                                                           across all sampling methods is shown in Figure
+samples severely underestimate the percentage                                                            3b. Even with the multi-paragraph 192-length ex-
+of machine-generated excerpts in out-of-domain                                                           cerpts, human performance is only at 71.4%, in-
+datasets. Even within domain (Figure 1b), we find                                                        dicating that even trained humans struggle to cor-
+both discriminators heavily favor a single class, in-                                                    rectly identify machine-generated text over a quar-
+ Truth Raters p1.0                        k40           p0.96                                   Truth Raters p1.0                        k40          p0.96
+ H     M      H                           H             M                                       H     H      M                           M            M
+ EDIT:OKAY!, I guess that’ll work for now. > http://www.teamfortress.com/ and then              Image copyright Getty Images Image caption Women mourn over the coffin of one of the vic-
+ go buy the game and experience some of the best online gaming I have ever played.              tim’s of Sunday’s bombing in Ankara ¶Who’d be in Turkey’s shoes right now? ¶Since July
+ ˆ ˆBoth girls had a really fun time and I had a GREAT time making both of these                last year, hundreds of soldiers and civilians have been killed in terrorist attacks. Suicide bombs
+ costumes. Everything was altered even a little bit(dying the pants a darker grey and           have torn into crowds of demonstrators and tourists. Military convoys have been targeted in
+ painting the boots and shirts) But my piece de resistance would have to be my eldest’s         the heart of the capital. ¶A long-running Kurdish insurgency, once thought to be close to
+ Medi-Gun.If you have any questions about the costumes, I would be happy to assist              resolution after years of painstaking efforts to build bridges, has erupted once more. ¶The
+ you!Oh and here’s a video of my daughter before the costume was completed.Thanks!              country is awash with Syrian and other refugees. The government has been under pressure
+                                                                                                to stop them moving on into Europe and prevent would-be jihadis travelling the other way.
+                                                                                                ¶How dangerous is Turkey’s unrest? ¶Tears and destruction amid PKK crackdown ¶Turkey
+                                                                                                v Islamic State v the Kurds
+
+ Truth Raters p1.0                        k40           p0.96                                   Truth Raters p1.0                        k40          p0.96
+ M     M      H                           -             -                                       M     M      -                           -            H
+ First off, this thread has done a pretty good job of describing in detail yet another broken   FOR ALABAMA, GOOD WEEKS ¶AND A TOUR OF CAIRO ¶THE ALABAMA COM-
+ touchscreen. That’s the difference between a smartphone and a PC with no prying eyes           MITTEE ON THE STUDY OF THE AMERICAN SECURITY AGENDA, ¶America’s fu-
+ having to snap shots for the police to find. ¶What I would like to address is the mindset      ture has been mapped out in carved stone. Metro Atlanta’s last US congressman, Bill Posey,
+ that generally surrounds Chrome OS users. To me this is analogous to saying that Apple         was a inextricable integral element of the Citadel project as it became another metaphor for
+ does“hate their Windows”, or that HP does“hate their Macs” as if http://twitter.com/)          Atlanta’s transformation from an industry backwater into the finance and information hub of
+ (and that quote is from two years ago), that anyone who covers smartphones and tablets         the nation’s capital. Meanwhile, Cobb County – Atlanta’s geode of change – is home to some
+ from a “PC” perspective is just jealous. ¶Chrome OS is for browsing the web, PC                of the largest industrial parks in the South, a regional cultural center, a 100-year-old manufac-
+ processors can do stronger things in that regard, Windows is a juggernaut on those fronts.     turing town and a potent symbol of the former city’s cherished Georgian past. The gentry still
+ This is how I see it. Yes, it can be slow. And yes, you need a fast CPU                        live there, the defunct industrial landscapes carry the names of
+
+ Truth Raters p1.0                        k40           p0.96                                   Truth Raters p1.0                        k40          p0.96
+ M     H      -                           -             M                                       M     H      -                           M            -
+ Exidentia at Eurnari, is an upcoming Cryptopia event which is currently still in devel-        Ever since the opening of the North American College of Art Education in 1990, the demand
+ opment. Be a part of the first live stream of this year’s event on 15-16 January 2016!         for art education in America has grown steadily, and in recent years we have seen the rise
+ ¶Since the release of v1.22, Exidentia has received a fair amount of user feedback. This       of students that pursue art education not in the classroom but at art academies. This year
+ event takes place in the underwater Cryptopia they have built. During this event, you          saw another 50 percent increase in the number of art academies in the United States offering
+ will learn about the ocean and areas around it, and be reached by a treasure hunter that       courses – with an additional 10 percent of students in 2017 taking art. ¶Some major changes
+ helps you explore the different areas. ¶There will be six different levels in this event       have occurred in recent years with regard to the art curriculum and the way students learn,
+ that you will become acquainted with: thought Polar Lava, Ocean Seared Cones and               and we will explore each of these in coming months as we look at the various forms of art
+ Celestine Floors, Sea Damaged Aerie Bricks, coast Puddle (congipit stopping at red             education. There is no one-size-fits-all approach for this or any other field of study, and
+ water), Shaikh Swamp and Bugmite. At rotating points, you will learn how to access             students who begin a course in art education may change their plans based on what they see
+ various types of creatures                                                                     that course, including what lessons they have completed and the resources available, to create
+                                                                                                meaningful experiences of artistic creation. ¶One important area
+
+
+Table 4: Some 192-token examples where at least two expert raters agreed with each other, but were not in agree-
+ment with the automatic discriminators. The first row shows examples where the ground-truth was human-written,
+the second shows machine-generated examples where the corresponding discriminator guessed incorrectly, and the
+third shows machine-generated examples where the discriminator was correct, but raters got it wrong.
+
+
+ter a time. However, it is worth noting that our best                                             cated distribution.
+raters achieved accuracy of 85% or higher, sug-                                                      Table 4 gives several examples where human
+gesting that it is possible for humans to do very                                                 raters and our BERT-based discriminators dis-
+well at this task. Further investigation is needed                                                agreed. When raters incorrectly labeled human-
+into how educational background, comfort with                                                     written text as machine-generated, often the ex-
+English, participation in more extensive training,                                                cerpts contained formatting failures introduced
+and other factors can impact rater performance.                                                   when the HTML was stripped out. In the mid-
+   To break up the accuracies by sampling method                                                  dle two examples, topic drift and falsehoods such
+in a way that is comparable to the results shown                                                  as Atlanta being the “information hub of the na-
+for the automatic discriminators, we pair each                                                    tion’s capital” allowed humans to correctly detect
+machine-generated example with a randomly se-                                                     the generated content. However, in the bottom
+lected one of webtext to create a balanced dataset                                                two examples, the high level of fluency left human
+for each sampling strategy. Performance is shown                                                  raters fooled.
+in Figure 3a. Top-k produces the text that is hard-                                                  Overall we find that human raters—even “ex-
+est for raters to correctly distinguish, but as shown                                             pert” trained ones—have consistently worse ac-
+in Section 7, it is the easiest for our automatic de-                                             curacy than automatic discriminators for all de-
+tection systems. Samples from untruncated ran-                                                    coding methods and excerpt lengths. In our ex-
+dom sampling and nucleus sampling with p=0.96                                                     periments, randomly-selected pairs of raters agree
+are equivalently difficult for raters to classify as                                              with each other on a mere 59% of excerpts on
+machine-generated. Our human evaluation results                                                   average. (In comparison, raters and discrimina-
+suggest that much lower p-values than the 0.92 to                                                 tors agree on 61% to 70% of excerpts depending
+0.98 range proposed in Zellers et al. (2019) might                                                on the discriminator considered). We surmise that
+be necessary in order to generate text that is con-                                               the gap between human and machine performance
+sidered significantly more human-like to human                                                    will only grow as researchers inevitably train big-
+raters than the text produced by using the untrun-                                                ger, better detection models on larger amounts of
+training data. While improved detection models           of automatic detection. We therefore suggest three
+are inevitible, it is unclear how to go about im-        prongs for future research:
+proving human performance. GLTR proposes pro-              1. Identifying ways to improve the language
+viding visual aids to humans to improve their per-            models and decoding strategies we use in or-
+formance at detecting generated-text, but it is un-           der to generate text that is both exciting (ie.
+likely that their histogram-based color-coding will           unlikely) and semantically plausible.
+continue to be effective as generative methods get         2. Building better world understanding into au-
+better at producing high-quality text that lacks sta-         tomatic discriminators so that they are more
+tistical anomalies.                                           capable of detecting the types of errors that
+                                                              humans notice.
+8   Conclusion                                             3. Developing tools and educational materi-
+                                                              als to improve humans’ ability to detect
+In this work, we study the behavior of auto-                  machine-generated text. These may include
+mated discriminators and their ability to iden-               automatic detectors with components that ex-
+tify machine-generated and human-written texts.               plain their predictions.
+We train these discriminators on balanced bi-
+                                                            Finally, we would like to note that all of our ex-
+nary classification datasets where all machine-
+                                                         periments were performed with English language
+generated excerpts are drawn from the same gener-
+                                                         models, and it remains an open question how the
+ative model but with different decoding strategies.
+                                                         trade-off between ease of human detection and
+We find that, in general, discriminators transfer
+                                                         ease of automatic detection might differ for lan-
+poorly between decoding strategies, but that train-
+                                                         guages that are very different from English.
+ing on a mix of data from methods can help. We
+also show the rate at which discriminator accuracy       Acknowledgements
+increases as excerpts are lengthened.
+   We further study the ability of expert human          This research is based upon work supported in part
+raters to perform the same task. We find that            by U.S. DARPA KAIROS Program No. FA8750-
+rater accuracy varies wildly, but has a median of        19-2-1004. The views and conclusions contained
+74%, which is less than the accuracy of our best-        herein are those of the authors and should not be
+performing discriminator. Most interestingly, we         interpreted as necessarily representing the official
+find that human raters and discriminators make de-       policies, either expressed or implied, of DARPA
+cisions based on different qualities, with humans        or the U.S. Government. The U.S. Government is
+more easily noticing semantic errors and discrimi-       authorized to reproduce and distribute reprints for
+nators picking up on statistical artifacts. In our ex-   governmental purposes notwithstanding any copy-
+periments, these artifacts are most prominent with       right annotation therein.
+top-k sampling. However, any strategy that over-            We also thank Noah Fiedel, Peter Liu, Sharan
+samples high-likelihood words is susceptible. As         Narang, Joao Sedoc, Yun William Yu, and Hugh
+the p in nucleus sampling is set increasingly lower      Zhang for their valuable feedback.
+to achieve more fluent text (some systems are al-
+ready using p as low as 0.5 (Miculicich et al.,
+2019)), the distributional deviations that plague
+                                                         References
+top-k text will surface in nucleus sampling as well.     David Ifeoluwa Adelani, Haotian Mai, Fuming Fang,
+   Holtzman et al. (2020) explain how a unique at-         Huy H Nguyen, Junichi Yamagishi, and Isao
+                                                           Echizen. 2020. Generating sentiment-preserving
+tribute of human language is that it dips in and out       fake online reviews using neural language models
+of low probability zones. This variance in likeli-         and their human-and machine-based detection. In
+hood is what makes human-written text interest-            International Conference on Advanced Information
+ing and exciting to read. Today’s generation sys-          Networking and Applications, pages 1341–1354.
+                                                           Springer.
+tems have not yet solved the problem of mimick-
+ing the human cadence without introducing poor           Hunt Allcott and Matthew Gentzkow. 2017. Social me-
+word choices that are easy for humans to detect.           dia and fake news in the 2016 election. Journal of
+Generation systems often optimize for fooling hu-          economic perspectives, 31(2):211–36.
+mans without acknowledging the trade-off that ex-        Anton Bakhtin, Sam Gross, Myle Ott, Yuntian Deng,
+ists between human perception of quality and ease          Marc’Aurelio Ranzato, and Arthur Szlam. 2019.
+  Real or fake?     learning to discriminate ma-          Ryan Lowe, Michael Noseworthy, Iulian Vlad Ser-
+  chine from human generated text. arXiv preprint           ban, Nicolas Angelard-Gontier, Yoshua Bengio, and
+  arXiv:1906.03351.                                         Joelle Pineau. 2017. Towards an automatic turing
+                                                            test: Learning to evaluate dialogue responses. In
+Nicole A Cooke. 2018. Fake news and alterna-                Proceedings of the 55th Annual Meeting of the As-
+  tive facts: Information literacy in a post-truth era.     sociation for Computational Linguistics (Volume 1:
+  American Library Association.                             Long Papers), pages 1116–1126.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and
+   Kristina Toutanova. 2019. BERT: Pre-training of        Lesly Miculicich, Marc Marone, and Hany Hassan.
+   deep bidirectional transformers for language under-      2019. Selecting, planning, and rewriting: A mod-
+   standing. In Proceedings of the 2019 Conference          ular approach for data-to-document generation and
+   of the North American Chapter of the Association         translation. EMNLP-IJCNLP 2019, page 289.
+   for Computational Linguistics: Human Language
+   Technologies, Volume 1 (Long and Short Papers),        Timothy Niven and Hung-Yu Kao. 2019. Probing neu-
+   pages 4171–4186, Minneapolis, Minnesota. Associ-         ral network comprehension of natural language ar-
+   ation for Computational Linguistics.                     guments. In Proceedings of the 57th Annual Meet-
+                                                            ing of the Association for Computational Linguis-
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018.             tics, pages 4658–4664, Florence, Italy. Association
+  Hierarchical neural story generation. In Proceed-         for Computational Linguistics.
+  ings of the 56th Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Pa-       Jekaterina Novikova, Ondřej Dušek, Amanda Cercas
+  pers), pages 889–898.                                      Curry, and Verena Rieser. 2017. Why we need
+                                                             new evaluation metrics for nlg. arXiv preprint
+Sebastian Gehrmann, Hendrik Strobelt, and Alexan-            arXiv:1707.06875.
+  der M Rush. 2019. Gltr: Statistical detection and vi-
+  sualization of generated text. In Proceedings of the
+                                                          Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+  57th Annual Meeting of the Association for Compu-
+                                                            Dario Amodei, and Ilya Sutskever. 2019. Language
+  tational Linguistics: System Demonstrations, pages
+                                                            models are unsupervised multitask learners. OpenAI
+  111–116.
+                                                            Blog, 1(8).
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+  Yejin Choi. 2020. The curious case of neural text de-   Tal Schuster, Roei Schuster, Darsh J Shah, and Regina
+  generation. In International Conference on Learn-         Barzilay. 2019. Are we safe yet? the limitations
+  ing Representations.                                      of distributional features for fake news detection.
+                                                            arXiv preprint arXiv:1908.09805.
+Anjuli Kannan and Oriol Vinyals. 2017. Adversar-
+  ial evaluation of dialogue models. arXiv preprint       Abigail See, Aneesh Pappu, Rohun Saxena, Akhila
+  arXiv:1701.08198.                                         Yerukola, and Christopher D Manning. 2019. Do
+                                                            massively pretrained language models make better
+Sarah E Kreps, Miles McCain, and Miles Brundage.
+                                                            storytellers? In Proceedings of the 23rd Confer-
+  2020. All the news thats fit to fabricate: Ai-
+                                                            ence on Computational Natural Language Learning
+  generated text as a tool of media misinformation.
+                                                            (CoNLL), pages 843–861.
+  Social Science Research Network.
+Chris van der Lee, Albert Gatt, Emiel van Miltenburg,     Rico Sennrich, Barry Haddow, and Alexandra Birch.
+  Sander Wubben, and Emiel Krahmer. 2019. Best              2016. Neural machine translation of rare words
+  practices for the human evaluation of automatically       with subword units. In Proceedings of the 54th An-
+  generated text. In Proceedings of the 12th Interna-       nual Meeting of the Association for Computational
+  tional Conference on Natural Language Generation,         Linguistics (Volume 1: Long Papers), pages 1715–
+  pages 355–368.                                            1725.
+
+Jiwei Li, Will Monroe, Tianlin Shi, Sébastien Jean,      Irene Solaiman, Miles Brundage, Jack Clark, Amanda
+   Alan Ritter, and Dan Jurafsky. 2017. Adversar-            Askell, Ariel Herbert-Voss, Jeff Wu, Alec Radford,
+   ial learning for neural dialogue generation. arXiv        and Jasmine Wang. 2019. Release strategies and the
+   preprint arXiv:1701.06547.                                social impacts of language models. arXiv preprint
+                                                             arXiv:1908.09203.
+Kevin Lin, Dianqi Li, Xiaodong He, Zhengyou Zhang,
+  and Ming-Ting Sun. 2017. Adversarial ranking for
+  language generation. In Advances in Neural Infor-       Jonghyuk Song, Sangho Lee, and Jong Kim. 2015.
+  mation Processing Systems, pages 3155–3165.               Crowdtarget: Target-based detection of crowdturf-
+                                                            ing in online social networks. In Proceedings of the
+Peter J. Liu, Mohammad Saleh, Etienne Pot, Ben              22nd ACM SIGSAC Conference on Computer and
+  Goodrich, Ryan Sepassi, Lukasz Kaiser, and Noam           Communications Security, pages 793–804. ACM.
+  Shazeer. 2018. Generating wikipedia by summariz-
+  ing long sequences. In International Conference on      Alan Turing. 1950.       Computing machinery and
+  Learning Representations.                                 intelligence-am turing. Mind, 59(236):433.
+Chris J Vargo, Lei Guo, and Michelle A Amazeen.
+  2018. The agenda-setting power of fake news: A
+  big data analysis of the online media landscape from
+  2014 to 2016. New media & society, 20(5):2028–
+  2049.
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob
+  Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz
+  Kaiser, and Illia Polosukhin. 2017. Attention is all
+  you need. In Advances in neural information pro-
+  cessing systems, pages 5998–6008.
+Soroush Vosoughi, Deb Roy, and Sinan Aral. 2018.
+  The spread of true and false news online. Science,
+  359(6380):1146–1151.
+Gang Wang, Christo Wilson, Xiaohan Zhao, Yibo Zhu,
+  Manish Mohanlal, Haitao Zheng, and Ben Y Zhao.
+  2012. Serf and turf: crowdturfing for fun and profit.
+  In Proceedings of the 21st international conference
+  on World Wide Web, pages 679–688. ACM.
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V
+  Le, Mohammad Norouzi, Wolfgang Macherey,
+  Maxim Krikun, Yuan Cao, Qin Gao, Klaus
+  Macherey, et al. 2016.       Google’s neural ma-
+  chine translation system: Bridging the gap between
+  human and machine translation. arXiv preprint
+  arXiv:1609.08144.
+Rowan Zellers, Ari Holtzman, Hannah Rashkin,
+  Yonatan Bisk, Ali Farhadi, Franziska Roesner, and
+  Yejin Choi. 2019. Defending against neural fake
+  news. CoRR, abs/1905.12616.
+Tianyi Zhang, Varsha Kishore, Felix Wu*, Kilian Q.
+   Weinberger, and Yoav Artzi. 2020. Bertscore: Eval-
+   uating text generation with bert. In International
+   Conference on Learning Representations.
+A     Appendix                                           Method                        # train   # valid   # test
+                                                         large-744M-k40-1wordcond      211148    4226      4191
+A.1    Dataset Sizes                                     large-744M-k40-nocond         218825    4362      4360
+                                                         large-744M-p0.96-1wordcond    210587    4248      4208
+Table 5 shows the number of sequences used for           large-744M-p0.96-nocond       209390    4174      4185
+training and evaluating each of the automatic dis-       large-744M-p1.0-1wordcond     209334    4169      4173
+                                                         large-744M-p1.0-nocond        208219    4187      4168
+criminators. Recall that each discriminator is           human-written                 201344    4031      4030
+trained for binary classification on an a dataset of
+machine-generated (positive) and human-written          Table 5: The number of excerpts used for training, val-
+(negative) examples. Each dataset was constructed       idation, and testing.
+by pairing the human-written excerpts (last row
+                                                          # Annotations      Expert Raters    AMT Workers
+of Table 5) with the machine-generated excerpts           webtext                     239             450
+drawn via a particular decoding algorithm (‘k40’,         k0-1wordcond                  87            150
+‘p0.96’, or ‘p1.0’) and priming strategy (‘no-            k40-1wordcond                 75            150
+                                                          p0.96-1wordcond               74            150
+cond’ or ‘1wordcond’). Originally the human-              total machine               236             450
+written set and each machine-generated set con-
+tained 250,000 training examples, 5,000 validation      Table 6: The number of human annotations collected.
+examples, and 5,000 test examples. Table 5 shows        In total, there were 50 examples from each sampling
+the resulting counts after after all excerpts with      strategy and 150 examples of web text. Each example
+                                                        was shown to at most three raters.
+sequence length shorter than 192 tokens were fil-
+tered out. Thus, the final training, validation, and
+test sets were almost, but not quite, balanced.         human-written, and as the excerpts are extended,
+                                                        raters use the extra evidence available to revise
+A.2    Further Details on Human Evaluation
+                                                        their guess. By the longest sequence length, votes
+The user interface for the human evaluation task is     for “human-written” and “machine-generated” are
+shown in Figure 6. At each step, the rater is shown     about balanced.
+additional text and asked to guess whether the             In Figure 5, we plot the frequency for each se-
+excerpt is human-written or machine-generated.          quence length that raters converged on a single
+They are able to revise their guess at each subse-      guess (either human or machine) at that point. The
+quent step. The newly appended text at each step        figure shows how it takes raters longer to converge
+is bolded in the UI. At the end, workers are told       on a decision of “machine” than to converge on a
+whether or not they got the question correct.           decision of “human.”
+   To gauge worker attention levels, 10% of ques-
+tions shown to workers explicitly stated what an-       A.3   Automatic Detection Method Reliability
+swer ought to be specified. An example of one of        In order to quantify the variance of automatic
+these “honeypot” questions is shown in Figure 7.        discriminator accuracy, we finetuned five in-
+Amazon Mechanical Turk workers got 83% accu-            dependent BERT discriminators on a ‘mixed’
+racy on these questions. Expert raters got 91.8%        dataset comprising of 50% human-written exam-
+accuracy. Table 8 shows the accuracy of each ex-        ples and 50% machine-generated examples, where
+pert rater along with the number of annotations         machine-generated examples are equally split be-
+they provided. Table 9 shows the example exerpts        tween top-k=40, top-p=0.96, and untruncated ran-
+that were used to “train” the expert raters.            dom sampling. All sequences were exactly 192
+   For both the Amazon Mechanical Turk raters           tokens. The best performing model checkpoint,
+and the expert raters initial predictions were biased   according to an in-domain validation set, was then
+towards ‘possibly human,’ and only by observing         used to evaluate out-of-domain binary classifica-
+more tokens did their predictions become more           tion datasets as in Table 2 of the main paper.
+confident. Figure 4 shows that ‘possibly human’            The results are shown in Table 7. We find out-
+is by far the most frequent answer upon observing       of-domain accuracy to be extremely reliable with
+16 tokens, and as more tokens are observed raters       a standard deviation of approximately 1% or less.
+gravitate towards ‘definitely human’ or ‘definitely
+machine.’ Even at 192 tokens, many raters are still
+uncertain. Figure 4 also shows how raters for the
+most part default to guessing short excerpts are
+                                                                                                       Dataset         µ      σ
+                                                                                                  random sampling    72.47   1.02
+                                                                                                     top-k = 40      88.06   0.59
+                                                                                                    top-p = 0.96      74.4   0.76
+
+                                                                                      Table 7: Average (µ) and standard deviation (σ) of ac-
+                                                                                      curacy on out-of-domain datasets across five runs of au-
+                                                                                      tomatic discriminator finetuning.
+
+       Figure 4: Number of votes expert raters made for each
+       label as a function of number of tokens observed. As
+       raters observe more tokens, their predictions become
+       more confident.
+
+
+                                Point of Convergence for Annotations
+                              0.45      of Human-Written Text
+                              0.40
+
+                              0.35
+
+
+
+
+Fraction of all annotations
+                              0.30
+
+                              0.25                                                                      Accuracy     Count
+                              0.20                                                                         61.3%        83
+                                                                                                           57.8%        51
+                              0.15                                                                         66.7%        51
+                                                                                                           69.8%        51
+                              0.10                                                                         79.5%        48
+                                                                                                           84.6%        40
+                              0.05
+                                                                                                           82.4%        39
+                              0.00                                                                         65.6%        36
+                                     16          32        64        128        192                        78.1%        34
+                                          Length at which rater made up their mind                         84.0%        26
+                                Point of Convergence for Annotations                                       58.8%        18
+
+                              0.30   of Machine-Generated Text                                             92.3%
+                                                                                                           90.0%
+                                                                                                                        14
+                                                                                                                        11
+                                                                                                          100.0%         9
+                                                                                                           50.0%         8
+                              0.25
+                                                                                                           60.0%         5
+                                                                                                          100.0%         5
+
+
+
+
+Fraction of all annotations
+                              0.20                                                                        100.0%         2
+                                                                                                            0.0%         2
+                                                                                                            0.0%         1
+                              0.15                                                                        100.0%         1
+                                                                                                            0.0%         1
+                              0.10
+                                                                                      Table 8: Our expert rater pool consisted of 22 raters.
+                              0.05
+                                                                                      The average accuracy of each rater on the longest ex-
+                                                                                      cerpt length (192 tokens) is shown here along with the
+                                                                                      total number of excerpts they annotated.
+                              0.00
+                                     16          32        64        128        192
+                                          Length at which rater made up their mind
+
+
+       Figure 5: On average, it takes much less text for raters
+       to decide an excerpt is human-written than to decide an
+       excerpt is machine-generated.
+   Human     I recently got the chance to try the new Oil Essentials line. With six potent blends to choose from–at $13 each–these cute little bottles offer a great, affordable way to
+             partake in the skin and hair care oil craze.
+             I tested each product in the line, massaging them onto my face every night before bed and running any leftover oil through my hair to tame frizziness. You could also
+             add a few drops to your bath, favorite moisturizer, or even your shampoo and conditioner.
+             Here’s a quick rundown of each oil.
+             Revitalize: Omega 3, 6, 9 & Evening Primrose
+             This was the first one I tried (I went in ROYGBIV order to keep things straight) and my first impression was that it smells lovely but a little strong. The fragrance
+             smells genuinely like flowers.
+   Machine   Red Lanterns, the lead exposure to a movie starring the Batman solo movie alum Margot Robbie taken under Wonder Woman’s wing have reignited that rivalry with
+             their whispery premiere. They played it as much as they possibly could, even though people who didn’t ever watch Justice League or might have missed it waiting in
+             line for the theater were still talking about as I spilled coffee.
+             The gist? An overextended (OK, a sore) Adam West films set up a Legion of Super-Heroes situation. How aggro? Super laws and paramilitary groups watch over the
+             world’s superheroes, which is a mix of that schtick ending, Planet Of The Apes II bit, and the Batman/Venom bit of last appeared in The Seventh Seal when Chris
+             O’Donnell infiltrated one of the teams at some point, also wearing Staff.
+   Machine   He is considered to be the most terrifying man on the planet and people stay away from him. A guy asks him to do something and he says, ”My girlfriend’s so
+             important to me... I don’t need to fight her any more.” And then, boom, there’s some in a corner crying inappropriately.
+             Men: It’s gone in five minutes. Why do I have to be so sad? It’s cute,” says female member, who asks to remain anonymous. ”It’s what grew up to drive me crazy
+             when I was a kid, seeing these women become the nurturing, wealthy things they are in this professional world I truly love.”
+             And it’s nothing to do with her success. These men still actively fear being around the idea of a woman who might win Oscars, make movies or be audacious drivers.
+   Human     Dropbox and Google Drive are very different services that appeal to different users. While Drive is connected to the entire Google Apps (now known as G Suite)
+             ecosystem, Dropbox is a lightweight, simple alternative for file storage. While both are useful, users need to look beyond features, and make sure the service they
+             choose can adequately protect their data. Here’s how Dropbox encryption and Google Drive encryption stack up.
+             Dropbox and Google Drive Encryption
+             To their credit, both Dropbox and Google Drive protect user files with encryption. Both also allow users to enable two-step verification, which requires an extra code
+             texted to the user’s phone to access the account, making it harder for hackers to access a user’s data.
+   Human     EVE Isk Per Hour(Eveiph) is hands down the best tool I’ve ever used to make isk in New Eden. It is a market helper program that is able to do a great deal of the work
+             that is typically done by a traders spreadsheet. I’ve used it to go from a 200m/month trading income to 3b/month on my main trading character.
+             Above you can see the blueprint manufacturing page which is located on the first tab of Eveiph. Here you can see the components required to make an item, the
+             settings for the blueprint, and a brief market analysis of what you can expect to make manufacturing the item and selling it at the market you’ve selected. You can
+             enter the amount of runs you want to make, the ME and PE of your blueprint and click add to shopping list, and it will be added to a list of items to purchase when
+             you are next at a trade hub.
+   Machine   So, not only was the speech a thoroughly mediocre diatribe about what he now thinks we should do for the next 45 minutes, but also how much credit we should give
+             to Mumford and Sons for bringing Obama to the campaign trail. Behold:
+             At the DNC, we drew strength from something even more powerful than the power of words. We drew strength from the power of families in this country. We drew
+             strength from the power of family values. We drew strength from the power of a common purpose–We drew strength from our shared commitment to fighting against
+             everything that undermines our potential in this country and our freedom. It is with that same conviction that we launch this campaign today and we urge every
+             American in America to join us tonight.
+             To allow the same attempt to succeed in this election.
+   Machine   The year is twenty-eight, and the boy is Harry, the sixth year at Hogwarts School of Witchcraft and Wizardry. He can’t walk without spells covering his feet (or in his
+             case, his feet are so badly burned that he, for practical purposes, can’t even walk for that long without them) and he’s just starting to feel more secure about things.
+             This is a pretty dull aspect of the book, I’d say. They probably spent way too much time on the fact that he can’t use the stick of silver from his wand, despite his
+             friends bewitching all the knives they had.
+             Harry had been having some difficulty getting to sleep until Hermione pulled him out of his state of near-death-conversation. Thanks to Hermione’s meddling, he’s
+             gotten some sleep for the past two days. They also learnt a fair amount about getting used to his new surroundings.
+   Machine   Coincidentally, just a few days after the first tweet came out, a fellow named Kevin McReynolds sent out an interview with GQ to promote their upcoming issue.
+             McReynolds describes himself as ”a conservative Catholic” who ”cannot fathom this guy being a real person and should be ashamed that he was able to be elected
+             president.”
+             It’s true. If you believe Hillary Clinton gave away 20 percent of the American Uranium to Russia, then you should be ashamed that you voted for Trump. No one
+             should be able to give or receive anything that’s not supposed to, so long as they have a warrant. If you’ve been in a relationship for more than six months with a
+             person who’s also convicted of being a felon (or convicted of stealing), that’s just stupid, especially as a married man. If you’re married to someone convicted of a
+             crime, and they go on their honeymoon with you, that’s a felony, not a honeymoon.
+   Human     CHIP DESIGNER Texas Instruments unveiled a family of system on chip (SoC) processors aimed at automakers today, which are designed for use in self-driving cars.
+             Named the TDA2x, the SoC family integrates safety features, such as aiding auto designers to create advanced driver assistance systems (ADAS), which in turn help
+             ”reduce the number of collisions on the road and enable autonomous driving experiences”.
+             ”TDA2x device family combines an optimal mix of high performance, vision analytics, video, graphics and general purpose processing cores in a low power envelope,
+             enabling a broad range of ADAS applications including front camera, surround view and sensor fusion,” Texas Instruments said in its release.
+   Machine   Description
+             This classic blend of coffee, cream, and sugar is the perfect drink! It is a smooth and creamy coffee with hints of cream and sweet sugar that can be enjoyed even after
+             a full day of work or playing! The sugar provides a wonderful texture to the coffee beans, so that it can be scooped out into a cup.
+             Available in four flavours: vanilla cream, caramel cream, coffee creme, and chocolate cream.
+             Note: Coffee can be prepared in less than 120 minutes. Note: Serves one.
+
+
+Table 9: The 10 examples that “expert” raters were guided through before they were asked to perform the detection
+task. These are hand-selected to showcase the spectrum of generated text and human-written text.
+Figure 6: The interface of the task used for human evaluation. Each time the user presses next, the passage’s length
+is doubled. On the left, we show the first step of evaluation, on the right, the second to last.
+
+
+
+
+Figure 7: For some of the questions, the text ”Dear AMT Worker: to show you’re reading, please select definitely
+[X] for this one.” was inserted into the last text segment, and ”Did you read carefully?” was appended to the end.
+

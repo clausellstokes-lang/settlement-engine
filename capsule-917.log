@@ -1,0 +1,2 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 12750 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at 92ebdc5e (20 figures).

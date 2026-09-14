@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script src="//digitaleditions.walsworthprintgroup.com/html5_viewer/compiled/wrapper-min.js" defer></script>
+    <link rel="canonical" href="https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html" />
+    <link type="application/rss+xml" title="RSS" rel="self" href="https://digitaleditions.walsworthprintgroup.com/publication/contents-rss.php?id_publication=7493&amp;k=419b89095179c65cbb446d3d55a6861676b3d73a" />
+    <link rel="hub" href="https://mydigitalpublication.superfeedr.com/" />
+        <title>Math Horizons • April 2016 • Network Of Thrones</title>
+    <script>
+        if (location.hostname == 'php7.mydigitalpublication.com' || location.hostname == 'testbranch.mydigitalpublication.com') {
+            var swUrl = '/html5_viewer/service-worker.php';
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register(swUrl, {scope: '/'})
+                        .then(async (reg) => {
+                            const start_url = "";
+                            // Don't attempt to register start_url if we are at it because it'll interfere with runtime caching.
+                            // It'll still get cached automatically by workbox later.
+                            let urls = [
+                                start_url,
+                                // location.origin + location.pathname + location.search,
+                            ];
+                            if (location.pathname + location.search != start_url) {
+                                // urls.push(location.pathname + location.search);
+                            }
+                            // console.log('Service worker registered.', reg);
+                            // console.log('registering', urls);
+                            const cache = await window.caches.open('workbox-runtime-' + location.origin + '/');
+                            await cache.addAll(urls);
+                        });
+                });
+            }
+        }
+
+        var time = (new Date()).getTime();
+        window.addEventListener("message", function(e) {
+            try {
+                var json = JSON.parse(e.data);
+                if (json.command == 'datachange') {
+                    if(json.data && (json.data.name == 'hideSplashScreen') && (json.data.value == true)) {
+                        document.getElementById('apploader').style.display='none';
+                    }
+                    // Hide FCP preview when page images are loaded and decoded
+                    if(json.data && (json.data.name == 'pagesloadend') && (json.data.value == true)) {
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                var fcp = document.getElementById('fcpPreview');
+                                var iframe = document.getElementById('viewerFrame');
+                                if(iframe) {
+                                    iframe.classList.add('fcp-ready');
+                                }
+                                if(fcp) {
+                                    fcp.style.display = 'none';
+                                }
+                            });
+                        });
+                    }
+                }
+            } catch(exc) {
+                // Don't crash
+            }
+        });
+    </script>
+<meta name="description" content="The international hit HBO series Game of Thrones, adapted from George R. R. Martin’s epic fantasy novel series A Song of Ice and Fire, features interweaving …">
+
+
+
+                <meta property="og:description" content="The international hit HBO series Game of Thrones, adapted from George R. R. Martin’s epic fantasy novel series A Song of Ice and Fire, features interweaving …" />
+            <meta property="twitter:description" content="The international hit HBO series Game of Thrones, adapted from George R. R. Martin’s epic fantasy novel series A Song of Ice and Fire, features interweaving …" />
+            <meta property="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Math Horizons • April 2016 • Network Of Thrones" />
+    <meta property="twitter:title" content="Network Of Thrones" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="" />
+    <meta property="twitter:image" content="" />
+    <meta property="og:url" content="https://digitaleditions.walsworthprintgroup.comhttps://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html" />
+    <link rel="image_src" href="" />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="initial-scale=1,user-scalable=yes,maximum-scale=5,width=device-width,viewport-fit=cover">
+			    
+
+    <style class="custom_css">
+            </style>
+	<style>
+        html {
+            height: 100%;
+        }
+
+		body {
+			margin: 0px;
+			padding: 0px;
+			overflow: hidden;
+			background-color: black;
+            height: 100%;
+		}
+
+		.seo {
+			z-index: -1000;
+			position: fixed;
+            color: #000;
+            background-color: #fff;
+		}
+
+		iframe {
+			width: 100%;
+			height: 100%;
+			border: 0px;
+			padding: 0px;
+			margin: 0px;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			z-index: 1000;
+			background-color: black;
+		}
+
+        #loader {
+            display: block;
+            position: fixed;
+            z-index: 1001;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+        }
+
+		div#sizer {
+			width: 100%;
+			height: 100%;
+			border: 0px;
+			padding: 0px;
+			margin: 0px;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		#printDiv {
+			display: none;
+		}
+		@media print{
+			@media (min-width: 0px) { /*Non-IE print page resizing*/
+				body * {
+					max-width: 8.10in !important;
+				}
+			}
+			body * {
+				display: none;
+                font-family: "Open Sans" ,"Helvetica Neue", Verdana, Geneva, sans-serif !important;
+			}
+            #printDiv {
+                display: block !important;
+                width: 8.50in;
+                max-width: 8.50in;
+                margin: 0;
+                padding: 0;
+                float: none;
+                text-align: center;
+                background-color: #ffffff;
+            }
+            #articleBrowser .article-content *,
+            #articleBrowser #containerTitle,
+            #articleBrowser .article-title h2,
+            #articleBrowser .article-title h3 {
+                font-family: "Open Sans" ,"Helvetica Neue", Verdana, Geneva, sans-serif !important;
+            }
+            #printDiv .print {
+                -ms-interpolation-mode: bicubic;
+                display: block;
+                max-width: 8.10in;
+                max-height: 10.60in;
+                width: auto;
+                height: auto;
+                margin: 0 auto;
+            }
+            #printDiv .pageBreak {
+                display: block;
+                page-break-after:always;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+    <style>
+        #apploaderIcon {
+            height: 60px;
+            width: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        #apploaderCoverImg {
+            max-width: 320px;
+        }
+
+        .loaderWrapper.alignmiddle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+
+        #apploader {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: 1001;
+            background-color: gray;
+            /*display: none;*/
+        }
+
+        .spinner {
+            margin: auto;
+            flex: 0 0 auto;
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* FCP Preview Styles */
+        .fcp-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        .fcp-preview__container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Cover view (no left presentation): cover's left edge at center (LTR) */
+        .fcp-preview--cover {
+            justify-content: flex-start;
+        }
+        .fcp-preview--cover .fcp-preview__container {
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+
+        /* RTL cover view: cover's right edge at center */
+        .fcp-preview--rtl.fcp-preview--cover {
+            justify-content: flex-end;
+        }
+        .fcp-preview--rtl.fcp-preview--cover .fcp-preview__container {
+            margin-left: 0;
+            margin-right: 50%;
+            justify-content: flex-end;
+        }
+
+
+        .fcp-preview__page {
+            max-height: 100%;
+            max-width: 50vw;
+            object-fit: contain;
+        }
+
+        /* Subtle loading indicator - positioned at bottom center of container */
+        .fcp-preview__loading {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fcp-preview__spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: fcp-spin 0.8s linear infinite;
+        }
+
+        @keyframes fcp-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .fcp-preview__loading-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            white-space: nowrap;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
+        /* Portrait/mobile: show single page, centered */
+        @media (orientation: portrait), (max-width: 768px) {
+            .fcp-preview,
+            .fcp-preview.fcp-preview--cover {
+                justify-content: center;
+            }
+            .fcp-preview__container,
+            .fcp-preview--cover .fcp-preview__container {
+                margin-left: 0;
+                justify-content: center;
+            }
+            .fcp-preview--rtl .fcp-preview__container,
+            .fcp-preview--rtl.fcp-preview--cover .fcp-preview__container {
+                margin-right: 0;
+            }
+            .fcp-preview__page {
+                max-width: 100vw;
+            }
+            /* Hide non-requested pages in portrait/mobile */
+            /* Default: hide first page (show last/cover) */
+            .fcp-preview__page:first-of-type:not(:last-of-type) {
+                display: none;
+            }
+            /* When left page was requested, hide second page instead */
+            .fcp-preview--requested-left .fcp-preview__page:last-of-type:not(:first-of-type) {
+                display: none;
+            }
+            .fcp-preview--requested-left .fcp-preview__page:first-of-type {
+                display: block;
+            }
+        }
+
+        /* Force single page when fcp_pp=1, centered (must override --cover) */
+        .fcp-preview--single,
+        .fcp-preview--single.fcp-preview--cover {
+            justify-content: center;
+        }
+        .fcp-preview--single .fcp-preview__container,
+        .fcp-preview--single.fcp-preview--cover .fcp-preview__container {
+            margin-left: 0;
+            margin-right: 0;
+            justify-content: center;
+        }
+        /* Hide first page when single mode and there are multiple pages */
+        .fcp-preview--single .fcp-preview__page:first-of-type:not(:last-of-type) {
+            display: none;
+        }
+
+        /* Permanent menu margins to minimize page shift */
+        .fcp-preview--permanent-menus {
+            padding-top: 48px;
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+	</style>
+
+	<script>
+
+
+    var publicationId = "";
+    var issueId = 294160;
+    var state = {"issue_id":294160};
+    var options = {"issue_id":294160,"latest":1,"article_id":"2426397","view":"articleBrowser","tempOptions":"[]","subscriptionAction":"redirect"};
+    var domain = "digitaleditions.walsworthprintgroup.com";
+    var referer = null;
+    var pageNumber = null;
+    var requestParams = {"i":294160,"article_id":"2426397","view":"articleBrowser","ver":"html5"};
+
+    var isMediaDeck = false;
+
+	</script>
+</head>
+<body>
+<script>
+    var preloadData = "{\"preload\":{\"@attributes\":{\"collection_logo\":null,\"logo\":\"https:\\\/\\\/cdn.coverstand.com\\\/7493\\\/logos\\\/logo-1126075614-5874132f91e97.jpg\",\"thumb320\":\"https:\\\/\\\/cdn.coverstand.com\\\/7493\\\/294160\\\/iphonejpg\\\/960\\\/10529017321934167596908861803-00001.jpg\",\"replica_vertical_align\":null,\"color1\":\"\",\"file\":null,\"method\":\"stretch\"}}}";
+</script>
+        <div id="loader" aria-hidden="true" tabindex="-1">
+    </div>
+    <div class="seo" aria-hidden="true" tabindex="-1">
+
+                <!-- article-->
+            
+                <h1>Math Horizons - April 2016</h1>
+                <h2>Network Of Thrones</h2>
+                <p>
+                    <i>Andrew Beveridge,Jie Shan 2016-03-15 02:24:59</i>
+                </p>
+                <p>
+                                    </p>
+                <p>The international hit HBO series Game of Thrones, adapted from George R. R. Martin’s epic fantasy novel series A Song of Ice and Fire, features interweaving plotlines and scores of characters. With so many people to keep track of in this sprawling saga, it can be a challenge to fully understand the dynamics between them.</p>
+<p>To demystify this saga, we turn to network science, a new and evolving branch of applied graph theory that brings together traditions from many disciplines, including sociology, economics, physics, computer science, and mathematics. It has been applied broadly across the sciences, the social sciences, the humanities, and in industrial settings.</p>
+<p>In this article we perform a network analysis of Game of Thrones to make sense of the intricate character relationships and their bearing on the future plot (but we promise: no spoilers!).</p>
+<p>First, a quick introduction to Game of Thrones: Westeros and Essos, separated by the Narrow Sea, are homes of several noble houses (figure 1). The narrative starts at a time of peace, with all the houses unified under the rule of King Robert Baratheon, who holds the Iron Throne. Early on, King Robert dies in a hunting accident, and the young, cruel Prince Joff rey ascends the throne, backed by his mother’s house, Lannister. However, the prince’s legitimacy, and even his identity, are seriously questioned across the kingdom. As a result, war breaks out, with multiple claimants to the Iron Throne.</p>
+<p>Driven by cause or circumstance, characters from the many noble families launch into arduous and intertwined journeys. Among these houses are the honorable Stark family (Eddard, Catelyn, Robb, Sansa, Arya, Bran, and Jon Snow), the pompous Lannisters (Tywin, Jaime, Cersei, Tyrion, and Joff rey), the slighted Baratheons (led by Robert’s brother Stannis) and the exiled Daenerys, the last of the once powerful House Targaryen.</p>
+<p>The Social Network</p>
+<p>Our first task is to turn the Game of Thrones world into a social network. Our network, shown in figure 2, has sets of vertices V and edges E. The 107 vertices represent the characters, including ladies and lords, guards and mercenaries, councilmen and consorts, villagers and savages. The vertices are joined by 353 integer-weighted edges, in which higher weights correspond to stronger relationships between those characters.</p>
+<p>We generated the edges using A Storm of Swords, the third book in the series. We opted for this volume because the main narrative has matured, with the characters scattered geographically and enmeshed in their own social circles. We parsed the ebook, incrementing the edge weight between two characters when their names (or nicknames) appeared within 15 words of one another. Afterward, we performed some manual validation and cleaning. Note that an edge between two characters doesn’t necessarily mean that they are friends—it simply means that they interact, speak of one another, or are mentioned together.</p>
+<p>The complex structure of our network reflects the interweaving plotlines of the story. Notably, we observe two characteristics found in many real-world networks. First, the network contains multiple denser subnetworks, held together by a sparser global web of edges. Second, it is organized around a subset of highly influential people, both locally and globally. We now describe how to quantify these observations using the analytical tools of network science.</p>
+<p>Community Detection</p>
+<p>The network layout and colors in figure 2 clearly identify seven communities: the Lannisters and King’s Landing, Robb’s army, Bran and friends, Arya and companions, Jon Snow and the far North, Stannis’s forces, and Daerenys and the exotic people of Essos. Remarkably, these communities were identified from only the network structure, as we explain below.</p>
+<p>We want to divide the network into coherent communities, meaning that there are many edges within communities and few edges between communities. We detect our network communities by using a global metric called modularity. Let denote the weight of the edge between vertices i and j, where when there is no edge. Let denote the weighted degree of vertex i. Intuitively, the modularity Q compares our given network to a network with the same weighted degrees, but in which all edges are rewired at random. This random network should be community-free, so it makes a good baseline for comparison.</p>
+<p>Suppose that vertices i and j belong to the same community C. We would expect that wij is at least as large as the number of edges between them in our randomly rewired network. A touch of combinatorial probability shows that the expected number of such random edges is where m is the total number of edges in the network. Summing over all vertices in a community C, we have</p>
+<p>Meanwhile, if C is not actually a community, then this quantity may be negative. The modularity Q of a vertex partition C1,…,Cl of the network is</p>
+<p>where we have normalized this quantity so that</p>
+<p>Our goal is to partition the vertices into communities so as to maximize Q. Finding this partition is computationally diffcult, so we use a fast approximation algorithm called the Louvain method.</p>
+<p>Crucially, the algorithm determines the number of communities; it is not an input. In our case, we discover the seven communities in figure 2. The King’s Landing community accounts for 37 percent of the network. When we perform community detection on this major sub network, we obtain four communities. A high resolution version of figure 2 and the network of sub communities of King’s Landing can be found at <a href="http://maa.org/math-horizons-supplements">maa.org/math-horizons-supplements</a>.</p>
+<p>Centrality Measures</p>
+<p>Network science can also identify important vertices. A person can play a central role in multiple ways. For example, she could be well connected, be centrally located, or be uniquely positioned to help disperse information or influence others. Figure 3 displays the importance of 14 prominent characters, according to six centrality measures, which we explain below.</p>
+<p>Degree centrality is the number of edges incident with the given vertex. Weighted degree centrality is defined similarly by summing the weights of the incident edges. In our network, degree centrality measures the number of connections to other characters, while weighted degree centrality measures the number of interactions.</p>
+<p>Eigenvector centrality is weighted degree centrality with a feedback loop: A vertex gets a boost for being connected to important vertices. The importance xi of vertex i is the weighted sum of the importance of its neighboring vertices: for each Solving the resulting linear system gives the eigenvector centrality. (This name comes from linear algebra: We actually find an eigenvector for eigenvalue of the matrix W with entries wij.)</p>
+<p>Let’s compare the weighted degree and eigenvector centralities for our network. The late King Robert receives a huge boost: He has only 18 connections, but half of them are to other prominent players! Most leading characters also benefit from the feedback loop, being directly involved in the political intrigue and sweeping military turmoil that grips the realm. The exceptions are isolated from the main action: Bran (presumed dead and on the run), Jon Snow (marginalized in the far North), and Daenerys (exiled across the Narrow Sea).</p>
+<p>PageRank is another variation on this theme. This measure was the founding idea behind Brin and Page’s Google search engine. Each vertex has an inherent importance along with an importance acquired from its neighbors. Unlike eigenvector centrality, a vertex does not get full credit for the total importance of its neighbors. Instead, that neighbor’s importance is divided equally among its direct connections. In other words, a vertex of very high degree passes along only a small fraction of its importance to each neighbor.</p>
+<p>The PageRank yi of vertex i is given by where and Researchers typically use to find an effective balance between inherent importance and the neighborhood boost.</p>
+<p>PageRank does not penalize our three far-flung characters and actually has the opposite effect on Daenerys. In fact, the PageRank ordering is nearly identical to the degree centrality ordering, except Daenerys jumps from 12th place to fifth place. So PageRank correctly identifies the charismatic Daenerys as one of the most important players, even though she has relatively few connections.</p>
+<p>This brings us to two centrality measures whose definitions take a more global view of the network. The closeness centrality of a vertex is the average distance from the vertex to all other vertices. (Unlike the other centrality measures, lower values correspond to greater importance.) The closeness values for our list of main characters is quite compressed, except for the faraway Daenarys. However, Tyrion and Sansa have a slight edge over everyone else.</p>
+<p>The final centrality measure is the most subtle. The betweenness centrality of a vertex measures how frequently that vertex lies on short paths between other pairs of vertices. Mathematically, the betweenness zi of vertex i is where is the number of (j,k)-shortest paths and is the number of these (j,k)-shortest paths that go through vertex i. A vertex that appears on many short paths is a broker of information in the network: Efficient communication between different parts of the network will frequently pass through such a vertex. Such connectors have the potential to be highly influential by inserting themselves into the dealings of other parties.</p>
+<p>Betweenness centrality gives a distinctive ranking of the characters. This is the only measure in which Tyrion does not come out on top: He places third, behind Jon Snow (thanks to his ties to both House Stark and the remote denizens of the North) and Robert Baratheon (the only person directly connected to all four noble houses of the leading characters). Meanwhile, Daenarys rises to fourth place (her best showing) because of the hub-and-spoke nature of the eclectic Essos community.</p>
+<p>There is no single “right” centrality measure for a network. Each measure gives complementary information, and taking them in concert can be quite revealing. In our network, three characters stand out consistently: Tyrion, Jon, and Sansa. Acting as the Hand of the King, Tyrion is thrust into the center of the political machinations of the capitol city. Our analysis suggests that he is the true protagonist of the book.</p>
+<p>Meanwhile, Jon Snow is uniquely positioned in the network, with connections to highborn lords, the Night’s Watch militia, and the savage wildlings beyond the Wall. The real surprise may be the prominence of Sansa Stark, a de facto captive in King’s Landing. However, other players are aware of her value as a Stark heir and they repeatedly use her as a pawn in their plays for power. If she can develop her cunning, then she can capitalize on her network importance to dramatic effect.</p>
+<p>Meanwhile, Robert and Daenarys stand out by overperforming in certain centrality measures. They provide a clear counterpoint to one another and return our attention to the Iron Throne itself. Robert’s memory unifies the crumbling network of the recent past, while Daenarys will surely upend the current network when she returns to Westeros in pursuit of the throne.</p>
+<p>A Networked Life</p>
+<p>We have visited the realms of Westeros and Essos to tour the basic tools of network science. We performed an empirical analysis of our network, finding communities and identifying influential people. Our network analysis confirmed some expectations and provided new insights into this richly imagined saga. We have considered a fanciful application of network science to give an enticing taste of its capabilities. More serious applications abound, and network science promises to be invaluable in understanding our modern networked life.</p>
+<p>Further Reading</p>
+<p>[1] A.-L. Barabási, Network Science. barabasilab.neu. edu/networksciencebook/downlPDF.html.</p>
+<p>[2] D. Easley, J. Kleinberg. Networks, Crowds and Markets. Cambridge University Press, Cambridge, 2010.</p>
+<p>[3] S. Fortunato. Community detection in graphs. Physics Reports 486 nos. 3–5 (2010) 75–174.</p>
+<p>[4] M. Newman, Networks: An Introduction. Oxford University Press, Oxford, 2010.</p>
+<p>Andrew Beveridge is an associate professor of mathematics at Macalester College. He plays bass guitar in a band called Math Emergency and owns the world’s only velvet Erdos painting.</p>
+<p>Email: <a href="mailto:abeverid@macalester.edu">abeverid@macalester.edu</a></p>
+<p>Jie Shan graduated from Macalester College in 2014 with majors in computer science, applied math and stats, and economics.When away from computers and numbers, he is a board game enthusiast, wannabe comic artist, and recreational soccer player.</p>
+<p>Email: <a href="mailto:jieshan22@gmail.com">jieshan22@gmail.com</a></p>
+<p><a href="http://dx.doi.org/10.4169/mathhorizons.23.4.18">http://dx.doi.org/10.4169/mathhorizons.23.4.18</a></p>                <p>©MAA. <a tabindex="-1" href="/publication/?i=294160&amp;view=contentsBrowser">View All Articles</a>.
+                <p>
+                <a tabindex="-1" href="https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html">
+                Network Of Thrones<br>
+                https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html</a>
+                </p>
+
+                
+
+<nav>Menu<br/><ul>
+<li><a tabindex="-1" href='/publication/?i=294160&amp;view=issueBrowser'>Page View</a></li>
+<li><a tabindex="-1" href='/publication/?i=294160&amp;view=contentsBrowser'>Contents View</a></li>
+<li><a tabindex="-1" href='/publication/?i=294160&amp;view=advertisersBrowser'>Advertisers</a></li>
+<li><a tabindex="-1" href='http://www.maa.org/'>Website</a></li>
+<li><a tabindex="-1" href='http://www.facebook.com/maanews?ref=nf'>Facebook</a></li>
+<li><a tabindex="-1" href='https://twitter.com/maanow'>Twitter</a></li></ul></nav>
+<main><h2>Issue List</h2><h3 style='color:#000'><a tabindex="-1" href='/publication/?i=446441'>November 2017</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=432359'>September 2017</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=393274'>April 2017</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=380132'>February 2017</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=348190'>November 2016</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=332326'>September 2016</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=294160'>April 2016</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=249983'>April 2015</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=202109'>April 2014</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=152076'>April 2013</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=144633'>February 2013</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=131602'>November 2012</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=123630'>September 2012</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=105302'>April 2012</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=99880'>February 2012</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=87750'> November 2011</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=79235'>September 2011</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=65260'>April 2011</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=60727'>February 2011</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=50242'>November 2010</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=45916'>September 2010</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=34502'>April 2010</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=32482'>February 2010</a></h3>
+<h3 style='color:#000'><a tabindex="-1" href='/publication/?i=22238'>April 2009</a></h3>
+</main>
+<footer><br /><a style="color:#000" tabindex="-1" href="/1/">Library</a></footer>            </div>	<iframe src="#" title="menus" id="viewerFrame" allowfullscreen></iframe>
+
+<script type="application/ld+json">
+{"@context":"https:\/\/schema.org","@type":"Article","name":"Network Of Thrones","description":"The international hit HBO series Game of Thrones, adapted from George R. R. Martin\u2019s epic fantasy novel series A Song of Ice and Fire, features interweaving \u2026","headline":"Network Of Thrones","author":{"@type":"Person","name":"Andrew Beveridge,Jie Shan"},"dateModified":"2016-03-15","datePublished":"2016-03-15","articleBody":"The international hit HBO series Game of Thrones, adapted from George R. R. Martin\u2019s epic fantasy novel series A Song of Ice and Fire, features interweaving plotlines and scores of characters. With so many people to keep track of in this sprawling saga, it can be a challenge to fully understand the dynamics between them.\r\n\r\nTo demystify this saga, we turn to network science, a new and evolving branch of applied graph theory that brings together traditions from many disciplines, including sociology, economics, physics, computer science, and mathematics. It has been applied broadly across the sciences, the social sciences, the humanities, and in industrial settings.\r\n\r\nIn this article we perform a network analysis of Game of Thrones to make sense of the intricate character relationships and their bearing on the future plot (but we promise: no spoilers!).\r\n\r\nFirst, a quick introduction to Game of Thrones: Westeros and Essos, separated by the Narrow Sea, are homes of several noble houses (figure 1). The narrative starts at a time of peace, with all the houses unified under the rule of King Robert Baratheon, who holds the Iron Throne. Early on, King Robert dies in a hunting accident, and the young, cruel Prince Joff rey ascends the throne, backed by his mother\u2019s house, Lannister. However, the prince\u2019s legitimacy, and even his identity, are seriously questioned across the kingdom. As a result, war breaks out, with multiple claimants to the Iron Throne.\r\n\r\nDriven by cause or circumstance, characters from the many noble families launch into arduous and intertwined journeys. Among these houses are the honorable Stark family (Eddard, Catelyn, Robb, Sansa, Arya, Bran, and Jon Snow), the pompous Lannisters (Tywin, Jaime, Cersei, Tyrion, and Joff rey), the slighted Baratheons (led by Robert\u2019s brother Stannis) and the exiled Daenerys, the last of the once powerful House Targaryen.\r\n\r\nThe Social Network\r\n\r\nOur first task is to turn the Game of Thrones world into a social network. Our network, shown in figure 2, has sets of vertices V and edges E. The 107 vertices represent the characters, including ladies and lords, guards and mercenaries, councilmen and consorts, villagers and savages. The vertices are joined by 353 integer-weighted edges, in which higher weights correspond to stronger relationships between those characters.\r\n\r\nWe generated the edges using A Storm of Swords, the third book in the series. We opted for this volume because the main narrative has matured, with the characters scattered geographically and enmeshed in their own social circles. We parsed the ebook, incrementing the edge weight between two characters when their names (or nicknames) appeared within 15 words of one another. Afterward, we performed some manual validation and cleaning. Note that an edge between two characters doesn\u2019t necessarily mean that they are friends\u2014it simply means that they interact, speak of one another, or are mentioned together.\r\n\r\nThe complex structure of our network reflects the interweaving plotlines of the story. Notably, we observe two characteristics found in many real-world networks. First, the network contains multiple denser subnetworks, held together by a sparser global web of edges. Second, it is organized around a subset of highly influential people, both locally and globally. We now describe how to quantify these observations using the analytical tools of network science.\r\n\r\nCommunity Detection\r\n\r\nThe network layout and colors in figure 2 clearly identify seven communities: the Lannisters and King\u2019s Landing, Robb\u2019s army, Bran and friends, Arya and companions, Jon Snow and the far North, Stannis\u2019s forces, and Daerenys and the exotic people of Essos. Remarkably, these communities were identified from only the network structure, as we explain below.\r\n\r\nWe want to divide the network into coherent communities, meaning that there are many edges within communities and few edges between communities. We detect our network communities by using a global metric called modularity. Let denote the weight of the edge between vertices i and j, where when there is no edge. Let denote the weighted degree of vertex i. Intuitively, the modularity Q compares our given network to a network with the same weighted degrees, but in which all edges are rewired at random. This random network should be community-free, so it makes a good baseline for comparison.\r\n\r\nSuppose that vertices i and j belong to the same community C. We would expect that wij is at least as large as the number of edges between them in our randomly rewired network. A touch of combinatorial probability shows that the expected number of such random edges is where m is the total number of edges in the network. Summing over all vertices in a community C, we have\r\n\r\nMeanwhile, if C is not actually a community, then this quantity may be negative. The modularity Q of a vertex partition C1,\u2026,Cl of the network is\r\n\r\nwhere we have normalized this quantity so that\r\n\r\nOur goal is to partition the vertices into communities so as to maximize Q. Finding this partition is computationally diffcult, so we use a fast approximation algorithm called the Louvain method.\r\n\r\nCrucially, the algorithm determines the number of communities; it is not an input. In our case, we discover the seven communities in figure 2. The King\u2019s Landing community accounts for 37 percent of the network. When we perform community detection on this major sub network, we obtain four communities. A high resolution version of figure 2 and the network of sub communities of King\u2019s Landing can be found at maa.org\/math-horizons-supplements.\r\n\r\nCentrality Measures\r\n\r\nNetwork science can also identify important vertices. A person can play a central role in multiple ways. For example, she could be well connected, be centrally located, or be uniquely positioned to help disperse information or influence others. Figure 3 displays the importance of 14 prominent characters, according to six centrality measures, which we explain below.\r\n\r\nDegree centrality is the number of edges incident with the given vertex. Weighted degree centrality is defined similarly by summing the weights of the incident edges. In our network, degree centrality measures the number of connections to other characters, while weighted degree centrality measures the number of interactions.\r\n\r\nEigenvector centrality is weighted degree centrality with a feedback loop: A vertex gets a boost for being connected to important vertices. The importance xi of vertex i is the weighted sum of the importance of its neighboring vertices: for each Solving the resulting linear system gives the eigenvector centrality. (This name comes from linear algebra: We actually find an eigenvector for eigenvalue of the matrix W with entries wij.)\r\n\r\nLet\u2019s compare the weighted degree and eigenvector centralities for our network. The late King Robert receives a huge boost: He has only 18 connections, but half of them are to other prominent players! Most leading characters also benefit from the feedback loop, being directly involved in the political intrigue and sweeping military turmoil that grips the realm. The exceptions are isolated from the main action: Bran (presumed dead and on the run), Jon Snow (marginalized in the far North), and Daenerys (exiled across the Narrow Sea).\r\n\r\nPageRank is another variation on this theme. This measure was the founding idea behind Brin and Page\u2019s Google search engine. Each vertex has an inherent importance along with an importance acquired from its neighbors. Unlike eigenvector centrality, a vertex does not get full credit for the total importance of its neighbors. Instead, that neighbor\u2019s importance is divided equally among its direct connections. In other words, a vertex of very high degree passes along only a small fraction of its importance to each neighbor.\r\n\r\nThe PageRank yi of vertex i is given by where and Researchers typically use to find an effective balance between inherent importance and the neighborhood boost.\r\n\r\nPageRank does not penalize our three far-flung characters and actually has the opposite effect on Daenerys. In fact, the PageRank ordering is nearly identical to the degree centrality ordering, except Daenerys jumps from 12th place to fifth place. So PageRank correctly identifies the charismatic Daenerys as one of the most important players, even though she has relatively few connections.\r\n\r\nThis brings us to two centrality measures whose definitions take a more global view of the network. The closeness centrality of a vertex is the average distance from the vertex to all other vertices. (Unlike the other centrality measures, lower values correspond to greater importance.) The closeness values for our list of main characters is quite compressed, except for the faraway Daenarys. However, Tyrion and Sansa have a slight edge over everyone else.\r\n\r\nThe final centrality measure is the most subtle. The betweenness centrality of a vertex measures how frequently that vertex lies on short paths between other pairs of vertices. Mathematically, the betweenness zi of vertex i is where is the number of (j,k)-shortest paths and is the number of these (j,k)-shortest paths that go through vertex i. A vertex that appears on many short paths is a broker of information in the network: Efficient communication between different parts of the network will frequently pass through such a vertex. Such connectors have the potential to be highly influential by inserting themselves into the dealings of other parties.\r\n\r\nBetweenness centrality gives a distinctive ranking of the characters. This is the only measure in which Tyrion does not come out on top: He places third, behind Jon Snow (thanks to his ties to both House Stark and the remote denizens of the North) and Robert Baratheon (the only person directly connected to all four noble houses of the leading characters). Meanwhile, Daenarys rises to fourth place (her best showing) because of the hub-and-spoke nature of the eclectic Essos community.\r\n\r\nThere is no single \u201cright\u201d centrality measure for a network. Each measure gives complementary information, and taking them in concert can be quite revealing. In our network, three characters stand out consistently: Tyrion, Jon, and Sansa. Acting as the Hand of the King, Tyrion is thrust into the center of the political machinations of the capitol city. Our analysis suggests that he is the true protagonist of the book.\r\n\r\nMeanwhile, Jon Snow is uniquely positioned in the network, with connections to highborn lords, the Night\u2019s Watch militia, and the savage wildlings beyond the Wall. The real surprise may be the prominence of Sansa Stark, a de facto captive in King\u2019s Landing. However, other players are aware of her value as a Stark heir and they repeatedly use her as a pawn in their plays for power. If she can develop her cunning, then she can capitalize on her network importance to dramatic effect.\r\n\r\nMeanwhile, Robert and Daenarys stand out by overperforming in certain centrality measures. They provide a clear counterpoint to one another and return our attention to the Iron Throne itself. Robert\u2019s memory unifies the crumbling network of the recent past, while Daenarys will surely upend the current network when she returns to Westeros in pursuit of the throne.\r\n\r\nA Networked Life\r\n\r\nWe have visited the realms of Westeros and Essos to tour the basic tools of network science. We performed an empirical analysis of our network, finding communities and identifying influential people. Our network analysis confirmed some expectations and provided new insights into this richly imagined saga. We have considered a fanciful application of network science to give an enticing taste of its capabilities. More serious applications abound, and network science promises to be invaluable in understanding our modern networked life.\r\n\r\nFurther Reading\r\n\r\n[1] A.-L. Barab\u00e1si, Network Science. barabasilab.neu. edu\/networksciencebook\/downlPDF.html.\r\n\r\n[2] D. Easley, J. Kleinberg. Networks, Crowds and Markets. Cambridge University Press, Cambridge, 2010.\r\n\r\n[3] S. Fortunato. Community detection in graphs. Physics Reports 486 nos. 3\u20135 (2010) 75\u2013174.\r\n\r\n[4] M. Newman, Networks: An Introduction. Oxford University Press, Oxford, 2010.\r\n\r\nAndrew Beveridge is an associate professor of mathematics at Macalester College. He plays bass guitar in a band called Math Emergency and owns the world\u2019s only velvet Erdos painting. \r\n\r\nEmail: abeverid@macalester.edu\r\n\r\nJie Shan graduated from Macalester College in 2014 with majors in computer science, applied math and stats, and economics.When away from computers and numbers, he is a board game enthusiast, wannabe comic artist, and recreational soccer player. \r\n\r\nEmail: jieshan22@gmail.com\r\n\r\nhttp:\/\/dx.doi.org\/10.4169\/mathhorizons.23.4.18\r\n","url":"https:\/\/digitaleditions.walsworthprintgroup.com\/article\/Network+Of+Thrones\/2426397\/294160\/article.html","publisher":{"@type":"Organization","name":"MAA","logo":{"@type":"ImageObject","url":"https:\/\/cdn.coverstand.com\/7493\/logos\/logo-1126075614-5874132f91e97.jpg","width":"265","height":"65"}},"wordCount":12883,"image":"","hasPart":[]}
+</script>
+<script type="application/ld+json">
+{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":3,"name":"Network Of Thrones","item":"https:\/\/digitaleditions.walsworthprintgroup.comhttps:\/\/digitaleditions.walsworthprintgroup.com\/article\/Network+Of+Thrones\/2426397\/294160\/article.html"},{"@type":"ListItem","position":2,"name":"Contents View","item":"https:\/\/digitaleditions.walsworthprintgroup.com\/publication\/?i=294160&view=contentsBrowser"},{"@type":"ListItem","position":1,"name":"Math Horizons \u2022 April 2016","item":"https:\/\/digitaleditions.walsworthprintgroup.com\/publication\/?i=294160"}]}
+</script>
+</body>
+</html>

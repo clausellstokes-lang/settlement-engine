@@ -1,0 +1,850 @@
+                                                        Look-back Decoding for Open-Ended Text Generation
+
+                                                           Nan Xu♢ , Chunting Zhou♠ , Asli Celikyilmaz♠ , Xuezhe Ma♢
+                                                                    ♢
+                                                                      University of Southern California, ♠ Meta AI
+                                                           ♢
+                                                             {nanx,xuezhema}@usc.edu, ♠ {chuntinz,aslic}@meta.com
+
+
+
+                                                                                                                                 (a) Current VS. History                                      (b) Current VS. Prefix       1.0
+                                                               Abstract                                                 1.0                                  1.0                  1.0
+                                                                                                                        0.8                                  0.8                  0.8                                      0.8
+
+
+                                                                                                     Normalized minKL
+                                                                                                                                                                  maxHidden
+                                                                                                                                                                                                                             maxHidden
+                                                                                                                        0.6                                  0.6                  0.6                                      0.6
+                                             Given a prefix (context), open-ended gener-
+                                                                                                                                                               Normalized minKL
+                                                                                                                        0.4                                  0.4                  0.4                                      0.4
+                                             ation aims to decode texts that are coherent,
+                                                                                                                        0.2                                  0.2                  0.2                                      0.2
+
+
+
+
+arXiv:2305.13477v2 [cs.CL] 23 Oct 2023
+                                             which do not abruptly drift from previous top-
+                                                                                                                        0.0 0    50 100 150 200 250 0.0                           0.0 0      50     100 150 200 250 0.0
+                                             ics, and informative, which do not suffer from                                        Continuation Step                                              Continuation Step
+                                             undesired repetitions. In this paper, we propose                             KL: Human             Hidden: Human                             KL: Human            Hidden: Human
+                                                                                                                          KL: Repetitive        Hidden: Repetitive                        KL: Off-topic        Hidden: Off-topic
+                                             Look-back , an improved decoding algorithm
+                                             that leverages the Kullback–Leibler divergence
+                                                                                                     Figure 1: Maximum similarity of hidden states and
+                                             to track the distribution distance between cur-
+                                                                                                     normalized minimum KL divergence between current
+                                             rent and historical decoding steps. Thus Look-
+                                                                                                     step and history (a) or prefix (b) from GPT2 on 1,000
+                                             back can automatically predict potential repeti-
+                                                                                                     instances of WikiText-103. Compared with human con-
+                                             tive phrase and topic drift, and remove tokens
+                                                                                                     tinuation, (a): repetition has much smaller minKL but
+                                             that may cause the failure modes, restricting
+                                                                                                     undistinguishable high maxHidden with history text, (b):
+                                             the next token probability distribution within a
+                                                                                                     pseudo topic drift by switching to continuation of an-
+                                             plausible distance to the history. We perform
+                                                                                                     other instance has much higher minKL but similar high
+                                             decoding experiments on document continua-
+                                                                                                     maxHidden with prefix text.
+                                             tion and story generation, and demonstrate that
+                                             Look-back is able to generate more fluent and
+                                             coherent text, outperforming other strong de-
+                                                                                                     emerged over the recent years, which can be cate-
+                                             coding methods significantly in both automatic
+                                             and human evaluations1 .
+                                                                                                     gorized into two directions: i) improved learning
+                                                                                                     proposing new learning objectives, e.g., unlikeli-
+                                         1   Introduction                                            hood training (Welleck et al., 2019), contrastive
+                                                                                                     training (Su et al., 2022) and sequence likelihood
+                                         Despite the impressive success on generating flu-           calibration (Zhao et al., 2022), to compensate for
+                                         ent and accurate sentences for low-entropy tasks            the rooted deficiency of the conventional Maxi-
+                                         such as summarization or translation, large-scale           mum Likelihood Estimation (MLE) 2 ; ii) improved
+                                         language models (LLMs) still suffer from serious            decoding remedying tedious and repetitive genera-
+                                         degeneration problems, such as undesired repeti-            tions in decoding search (Su et al., 2022; Li et al.,
+                                         tions (Holtzman et al., 2019) and unnatural topic           2022), or combating topic drifts in sampling proce-
+                                         drifts, under open-ended settings (Eikema and               dures (Hewitt et al., 2022).
+                                         Aziz, 2020). Open-ended neural text generation                 In this work, we propose a new decoding algo-
+                                         aims to generate coherent and diverse text from             rithm, named Look-back , which pays particular
+                                         LLMs, given contextual prefix (Nadeem et al.,               attention to the probability distribution disparity
+                                         2020; Dhamala et al., 2022), and has spawned a              between continuation and history text. Unlike con-
+                                         wide range of natural language applications, in-            trastive search (Su et al., 2022; Su and Xu, 2022)
+                                         cluding contextual text completion (Radford et al.,         which uses cosine similarity between the hidden
+                                         2019), story generation (Fan et al., 2018), and re-         representation, Look-back leverages the Kullback-
+                                         view generation (Cho et al., 2019).                         Leibler (KL) divergence to track the distribution
+                                            To alleviate the degeneration problem in open-           distance between current and historical decoding
+                                         ended text generation, a number of techniques have          steps. The main motivation of Look-back is that
+                                             1                                                           2
+                                               Code and resources are available at https://github.         The correlation between sequence probability and its
+                                         com/xunannancy/LookBackDecoding.                            quality for MLE trained models can be low (Liu et al., 2022).
+KL divergence defines a distance between the prob-       tween the two. Based on a BERTScore-style sim-
+ability distributions of decoding steps, which ar-       ilarity metric between model decodes and targets
+guably better aligns with the decoding practice. As      measured in the model’s latent space, Zhao et al.
+shown in Figure 1 (a), as the greedy algorithm           (2022) calibrated model-generated sequences with
+repeatedly outputs single sentences, the distance        sequence likelihood calibration to better align with
+with the closest past token distribution decreases to-   reference sequences via different types of losses
+wards 0. Besides, when the continuation switches         (e.g., rank and margin loss).
+to another topic in Figure 1 (b), the distribution
+distance of continuation with prefix obtains much        Improved Decoding Algorithms Liu et al.
+higher levels compared with topic-relevant human         (2022) observed that search methods (e.g., greedy
+continuation. Based on our prior observations, for       and beam) which optimize generation probabili-
+informative and coherent generation, the probabil-       ties may result in tedious and repetitive outputs in
+ity distribution should not be too close to history to   open-ended text generation. Su et al. (2022) com-
+guarantee diversity, but relatively close to prefix to   plemented the contrastive training with contrastive
+maintain coherence.                                      search for decoding, which selects tokens more dis-
+   Experimentally, through two tasks of open-            tingushable from previous context. Li et al. (2022)
+ended text generation, including document con-           observed that degeneration is more prevalent in
+tinuation and story generation, we demonstrate that      larger LMs than smaller ones, and proposed con-
+Look-back outperforms a variety of open-ended            trastive decoding to remove these undesired behav-
+decoding algorithms under different scales of pre-       ior by factoring out smaller LM’s behavior from the
+trained LLMs (GPT2-XL and OPT-6.7B) by pro-              larger LM. On the other hand, truncation sampling
+ducing much more coherent texts – high mauve             methods such as nucleus (Holtzman et al., 2019)
+score compared with human continuation and high          and typical (Meister et al., 2022) decoding improve
+similarity score measured against prefix, while          sample quality with more diverse samples com-
+maintaining similar level of diversity.                  pared to direct sampling, but at the expense of poor
+                                                         coherence and undesired topic drift. Hewitt et al.
+2   Related Work                                         (2022) introduced η-sampling to truncate words be-
+                                                         low an entropy-dependent probability threshold. A
+Improved Learning Algorithms Yang et al.                 concurrent work observed the strong correlation be-
+(2018); Adiwardana et al. (2020) observed that in-       tween good generation quality and narrow entropy
+creasing number of candidates in beam search or          zone, hence proposed entropy-aware decoding to
+sampling leads to worse quality of generated data.       promote good generation by constraining greedy
+They attribute this to the predominant training ob-      decoding into the narrow entropy zone (Arora et al.,
+jective (i.e., Maximum Likelihood Estimation) that       2023).
+might not accurately rank generated sequences by            Without extra effort on fine-tuning LMs, the pro-
+quality (Zhao et al., 2022). Besides, Holtzman           posed Look-back improves conventional search
+et al. (2019) found that searching for the proba-        method with reference from the given prefix and
+ble sequences always results in short and repetitive     prior generation, so that undesired repetitions and
+texts, which further motivated recent efforts to im-     topic drifts can be explicitly alleviated.
+prove generation via revised learning objectives.
+Welleck et al. (2019) proposed unlikelihood train-       3     Background
+ing to force unlikely generations to be assigned
+lower probability by the model. To alleviate de-         3.1    Open-ended Text Generation
+generation, SimCTG (Su et al., 2022) introduced
+a contrastive training objective to preserve sparse-     Given a sequence of m tokens sampled from nat-
+ness of the token similarity matrix of the generated     ural text C = {x1 . . . xm } as context or prefix, the
+text. To avoid unintentionally boosting the prob-        neural text generation is to decode a n-token contin-
+ability of other irrelevant tokens in unlikelihood       uation using the probability distribution provided
+training, Jiang et al. (2022) leveraged contrastive      by pre-trained LMs:
+token learning to explicitly teach the LLM to as-                            n
+sign negative tokens with a lower probability than       p(xm+1:m+n |C) =
+                                                                             Y
+                                                                                   P (xt |C, xm+1 . . . xm+t−1 ),
+positive tokens through more focused contrast be-                            t=1
+Degeneration   LM (Decoding) Continuation
+ Prefix: In addition to live broadcasts FIFA Fan Fests offer food and beverages, merchandise and various entertainment events by local and international
+ artists. The start of 2006 World Cup was
+               S1: (GPT2-XL greedy) marked by the FIFA Fan Fest in Sao Paulo, Brazil.\n\n The FIFA Fan Fest is a unique event that brings together
+Repetitive
+                fans from all over the world to celebrate the FIFA World Cup . The FIFA Fan Fest is a unique event that brings together fans from...
+Continuation
+               S2: (davinci-002 greedy) celebrated with a concert by Bon Jovi in Berlin.\n\n The FIFA Fan Fest in Munich was located at the Olympic
+               Park.\n\n The FIFA Fan Fest in Frankfurt was located at the Römerberg.\n\n The FIFA Fan Fest in Hamburg was located at the ...
+ Prefix: Burkan died from an attack of acute indigestion at his country home in Great Neck on June 6, 1936. Three thousand people attended his funeral at
+               S3: (ada-001 greedy) the local church.\n\n The authorities are investigating how Khedira managed to enter the house and what role he
+Off-Topic       played in the attack.
+Continuation
+               S4: (davinci-002 greedy): Temple Emanu-El in New York City... Category:1868 births\nCategory:1936 deaths\nCategory:Austro-...
+               S5: (ada-001 nucleus): aients home.\n The Lorraine weekend\nIn house of intensity and occupation, great law enforcement officers\n ...
+                                                                                                                                                    
+                Shanny Bankecived his way into the home of Runaan U Without giving any reason other than to marines and punch said home’s door ... ×2
+
+
+Table 1: Degeneration examples with typical decoding algorithms by GPT2-XL and GPT3 (ada-001 and davinci-
+002). Complete sentence repetition (S1), repetition with minor location changes (S2) or paragraph duplication (S5)
+is marked in green , while unnatural (S3&S4) or stiff (S5) topic drifts are in pink .
+
+
+where the continuation is generated token-by-token                             As shown in Table 1, given probabilities from GPT-
+using a particular decoding strategy. For instance,                            3 models, nucleus sampling fails to produce co-
+greedy algorithm selects the next token given con-                             herent generation, switching topic from Burkan’s
+text with the highest probability, while nucleus sam-                          acute indigestion to Shanny’s way to home with
+pling (Holtzman et al., 2019) restricts the plausible                          ada-001 (S5). Recent decoding algorithms depend
+area of tokens with total mass above a threshold.                              on model confidence to “guarantee” coherence
+                                                                               while resolving repetition explicitly with certain
+3.2       Degeneration Problems                                                heuristics. For example, SimCTG (Su et al., 2022)
+There are two commonly observed degeneration                                   selects from most probable candidates predicted by
+problems in open-ended text generation: repetition                             LM. Contrastive decoding (Li et al., 2022) exploits
+and incoherence.                                                               coherence nature of the expert LMs. In both S3
+                                                                               and S4 from Table 1, unfortunately, we find that the
+Repetition LLMs prefer to overestimate the prob-                               coherence hypothesis of pretrained LMs in prior
+ability of repeated sequences (Welleck et al., 2019)                           work does not always hold in practice: it is likely to
+especially for deterministic algorithms such as                                produce incoherent sentences when powerful LMs
+greedy and beam search. Although decoding algo-                                rigorously follow model confidence at each step
+rithms such as nucleus sampling (Holtzman et al.,                              with greedy algorithm.
+2019) have been proposed to interrupt repeating se-
+quences, we can still observe repetitive and tedious                            4     Proposed Method: Look-back
+continuation even from the state-of-the-art GPT-3                              As presented in Algorithm 1, Look-back first lever-
+language model (Brown et al., 2020), as shown in                               ages probability distribution distance between cur-
+Table 1. Besides the consensus that probabilities                              rent and prior steps to avoid repetitions (§4.1), then
+from conditional LMs often do not accurately rank-                             incorporates reference from given prefix to mitigate
+order generated sequences by quality (Zhao et al.,                             topic drifts (§4.2).
+2022), a recent study provides a possible way to
+explain the repetitive generation with the observed                             4.1     Alleviating Repetitions with Reference
+analogical sequence copying pattern: prefix match-                                      from Prior Texts
+ing and copying3 (Olsson et al., 2022).
+                                                                                Signal for Surface or Semantic Repetitions In
+Incoherence Sampling algorithms sacrifice co-                                   the decoding process of open-ended text genera-
+herence for alleviating repetition during decoding.                             tion, one of the plausible tokens is selected/sampled
+                                                                                according to model probability. Inspired by the
+      3
+     Prefix matching: the attention mechanism in transformer-                   decisive role of probability distribution, we inves-
+based LMs attends back to previous tokens that were followed                    tigate measuring the distance between current and
+by the current and/or recent tokens. Copying: outputs in-
+creased logit of the attended-to token or others similar in                     prior steps in disbrituion space via KL divergence:
+embedding space.                                                                DKL (pt |p′t ) for any 1 ≤ t′ < t. As the distance
+      The                             20                                             Human           GPT2-XL (greedy)
+     FIFA                                           15
+      Fan
+     Fest                             15            10
+        is                                  minKL    5
+         a
+   unique                             10
+                                                     0
+    event                                                   0             50            100             150                200             250
+     that                                                                                 Continuation Step
+   brings                             5
+ together                                                              (c) KLtmin to history by GPT2-XL (greedy)
+     fans                                                                            Human           davinci-02 (greedy)
+                  The
+                 FIFA
+                  Fan
+                                                    15
+                 Fest
+                    is
+                     a
+               unique
+                event
+                 that
+               brings
+                                                    10
+             together
+                                            minKL
+                 fans
+   (a) KL heatmap by GPT2-XL (greedy)                5
+      The                            17.5            0
+     FIFA                                                   0             50            100             150                200             250
+      Fan                            15.0                                                 Continuation Step
+     Fest                            12.5
+        in                                                             (d) KLtmin to history by davinci-002 (greedy)
+  Munich                             10.0
+     was                                                                    Human         ada-001 (nucleus)       davinci-002 (greedy)
+  located                            7.5            10.0
+       at                            5.0
+      the                                            7.5
+ Olympic
+     Park
+                                     2.5    minKL    5.0
+                                                     2.5
+               The
+              FIFA
+               Fan
+              Fest
+                 in
+                                                                140            160        180           200         220              240
+         Frankfurt
+               was
+           located
+                at
+               the
+                                                                                      Second Half Continuation Step
+              mer R
+                  ö
+              berg
+                                                                 t|C
+ (b) KL heatmap by davinci-002 (greedy)                    (e) KLmin to prefix by davinci-002 (greedy) and ada-001 (nucleus)
+
+Figure 2: Probability distribution distance of GPT2-XL measured by KL divergence for repetitive (a,b,c,d) and
+off-topic (e) continuation presented in Table 1. (a) and (b): Dark cells along diagonal indicate that steps of small
+distance with history tend to produce repetitive tokens. (c) and (d): Compared with human continuation, minimum
+distribution distance with past gradually approaches 0 (red curves) as similar phrases keep repeating during decoding.
+(e): distribution of incoherent continuation (green and blue curves) is prone to stay farther from given prefix as
+decoding proceeds.
+
+
+Algorithm 1 Look-back Decoding                                           tive (SimCTG) (Su et al., 2022) nor its contrastive
+Input: Prefix C = {x1 . . . xm }, language model                         search decoding algorithm (Su and Xu, 2022) can
+  with vocabulary V , beam size k and threshold α                        be directly applied to LLMs such as GPT3, where
+Output: Continuation G = {xm+1 . . . xm+n }                              its hidden states are inaccesible. Fortunately, we
+  G ← {}                                                                 can directly detect surface or semantic repetitions
+  for m + 1 ≤ t ≤ m + n do                                               from GPT3 by analyzing available probability dis-
+      if KLtmin ≤ α then ▷ Alleviate Repetitions                         tribution: step pairs producing either identical to-
+          for v ∈ V k do                                                 ken or tokens sharing similar semantic meaning
+                                   t+1,v|C                               are distinguishable with distribution distance. Take
+              qv = softmax(−KLmin )
+          end for                                                        Figure 2b as an instance: output token pairs from
+          xt = v ∼ qv       ▷ Improve Coherence                          decoding steps with closest probability distribu-
+      else                                                               tions are the 1st and 2nd FAN, city Munich and
+          xt = argmaxv∈V pθ (v|x<t )                                     Frankfurt, location Olympic and R of Römerberg.
+      end if                                                                As repetitive steps tend to stay extremely close
+      G ← G ∪ {xt }                                                      to prior steps with similar outputs in probability
+  end for                                                                distribution space, we calculate the probability dis-
+                                                                         tribution distance between the t-th and closest prior
+                                                                         step as KLtmin for further analysis:
+heatmap shown in Figure 2a, for steps generating
+identical tokens, their corresponding probability                              KLtmin =         min KL (p(·|x<t )∥p(·|x<j ))
+                                                                                             1≤j≤t−1
+distributions stay close to each other than those
+with dissimilar outputs.                                                 As demonstrated in Figure 2c and Figure 2d, values
+   Note that neither the contrastive training objec-                     of KLtmin become flat as repetition-style degenera-
+tion advances4 .                                                    decoding, which is frequently observed in sam-
+                                                                    pling algorithms (Eikema and Aziz, 2020; Maynez
+Alleviating Repetitions Since identical or simi-
+                                                                    et al., 2020). On the other side, the probability
+lar repetition pattern could be forecasted via proba-
+                                                                    distribution distance between current and prefix is
+blity distribution analysis, Look-back attempts to
+                                                                    able to distinguish whether the generation is on-
+avoid repetitive sentences or phrases prior to actual
+                                                                    topic or not. Therefore, Look-back wisely samples
+generation. Practically, when KLtmin has been be-
+                                                                    from the plausible candidates according to their
+low a pre-defined threshold α, an alarm is triggered
+                                                                    influence on coherence reflected by next-step dis-
+and Look-back attempts to sample a token from the
+                                                                    tribution distance with prefix:
+top-k most probable tokens from the vocabulary V
+                                                                          t+1,v|C
+rather than sticking to the top-1 token:                            KLmin = min KL (p(·|x<t+1 , v)∥p(·|x<j ))
+                                                                               1≤j≤m
+                                                                       (
+                                                                                       t+1,v|C
+     (
+       ∼ Unif(V k ),                 if KLtmin ≤ α                      ∼ softmax(−KLmin ), if KLtmin ≤ α
+ xt                                                                 xt
+       = argmaxv∈V pθ (v|x<t ), Otherwise                               = argmaxv∈V pθ (v|x<t ), Otherwise
+                                                                    where tokens with larger next-step distance to pre-
+where V k is the set of top-k most probable tokens
+                                                                    fix is less likely to be sampled given the softmax
+from the vocabulary V . To avoid false positive
+                                                                    operation upon KL divergence.
+cases where one step identified with high possibil-
+ity to repeat may not necessarily lead to undesired                 5     Experiments
+repetitions, we do not exclude its most probable
+                                                                    In this section, we first introduce the datasets (§5.1)
+token from the plausible candidate set on purpose.
+                                                                    and automatic metrics (§5.2) used to evaluate the
+4.2       Improving Coherence with Reference                        generation quality of the proposed Look-back and
+          from Given Prefix                                         other strong decoding baselines (§5.3). We then an-
+Signal for Topic Drift In open-ended generation,                    alyze experimental results evaluated by automatic
+in order to produce sentences coherent with the                     metrics (§5.5) and human evaluators (§5.6). Lastly,
+given prefix, the decoding algorithm is required to                 we show effectiveness of different techniques used
+provide further elaboration of the major topic con-                 in Look-back through detailed analyses (§5.7).
+veyed in the prefix. According to the prior obser-                  5.1    Datasets
+vations (e.g., Munich and Frankfurt in Figure 2b),
+                                                                    We consider two applications of open-ended
+decoding steps with tokens sharing similar seman-
+                                                                    text generation: 1) document continuation on
+tic meaning are close to each other with respect to
+                                                                    WikiText-103 with articles fitting the Good or
+probability distribution distance. Therefore, we ex-
+                                                                    Featured article criteria specified by editors on
+plore the KL divergence between current and prefix
+                                                                    Wikipedia (Merity et al., 2016), and 2) story gen-
+m steps that should keep to the same topic:
+                                                                    eration on WritingPrompts, which is a challenging
+             t|C
+          KLmin = min KL (p(·|x<t )∥p(·|x<j )                       task for inspiring continuations with abstract, high-
+                   1≤j≤m                                            level story prompts submitted by online users and
+                                                                    continuations responded by others freely on Red-
+When comparing distribution distance of incoher-
+                                                                    dit (Fan et al., 2018).
+ent generation with natural continuation to the same
+prefix, the probability distribution divergence main-               5.2    Evaluation Metrics
+tains a much higher level for generation with obvi-                 We adopt the following automatic metrics to evalu-
+ous topic drift, as shown in Figure 2e.                             ate generation quality:
+Improving Coherence When the model is prone                         Repetition We use rep-n to measure sequence-
+to provide repetitive tokens, one straightforward                   level repetition according to the portion of dupli-
+solution for avoiding repetition is to randomly sam-                cate n-grams (Welleck et al., 2019). For a sequence
+ple from the top-k plausible tokens. It is likely                   x, rep-n = 1.0 − |unique    n-grams(x)|
+                                                                                        |total n-grams(x) |.
+to result in unnatural topic drift due to undesired
+sampling choices accumulation over long sequence                    Diversity Following (Su et al., 2022), we ob-
+      4
+                                                                    tain an overall assessment of model repetition by
+     Spikes in Figure 2d in later decoding steps correspond
+to multiple tokens for representing one single location, e.g., ö,   consideringQ repetition at different n-gram levels:
+mer, berg for Römerberg in Figure 2b.                               diversity = 4n=2 (1.0 − rep-n).
+                                                      WikiText-103                                                       WritingPrompts
+LM         Decoding
+                        rep-2 ↓   rep-3 ↓   rep-4 ↓    diversity ↑   MAUVE ↑   coherence ↑   rep-2 ↓   rep-3 ↓   rep-4 ↓    diversity ↑   MAUVE ↑   coherence ↑
+           human         6.91      1.83      0.70         0.91          -         0.62       15.61      3.78      1.24         0.80          -         0.31
+           nucleus       5.29      1.97      1.42         0.92         0.69       0.53        5.40      2.41      1.72         0.91         0.22       0.34
+
+
+GPT2-XL
+           typical       3.61      1.07      0.73         0.95         0.70       0.50        3.60      1.51      1.10         0.94         0.19       0.30
+           η-sampling    6.25      2.49      1.80         0.90         0.68       0.55        6.17      2.88      2.16         0.89         0.17       0.35
+           SimCTG        5.37      1.97      1.46         0.91         0.72       0.53        2.84      0.36      0.19         0.97         0.18       0.31
+           Look-back     8.22      1.34      0.38         0.90         0.81       0.65        7.94      1.25      0.33         0.91         0.24       0.52
+           nucleus       6.08      2.19      1.43         0.91         0.63       0.56        5.82      3.12      2.57         0.89         0.13       0.33
+
+
+OPT-6.7B
+           typical       6.58      2.25      1.37         0.90         0.61       0.57        5.80      2.67      1.93         0.90         0.14       0.33
+           η-sampling    6.07      2.26      1.55         0.90         0.66       0.56        4.72      1.93      1.36         0.92         0.15       0.34
+           SimCTG        5.44      1.97      1.38         0.91         0.56       0.55        7.49      4.25      3.10         0.86         0.08       0.20
+           Look-back     9.21      1.74      0.53         0.89         0.80       0.65        9.77      2.18      0.74         0.88         0.19       0.43
+
+
+Table 2: Automatic evaluation results of different decoding algorithms for document continuation and story
+generation. Continuation generated by Look-back is of similar level of diversity as human texts while much more
+relevant to prefix (highest coherence) and semantically similar to human continuation (highest MAUVE).
+
+
+MAUVE By computing information divergences                                          5.4      Implementation Details
+in a quantized embedding space5 , MAUVE (Pillutla
+                                                                                    We randomly sample 1,000 instances from the orig-
+et al., 2021) directly compares the learnt distribu-
+                                                                                    inal training data of WikiText-103 and Writing-
+tion from a text generation model to the distribution
+                                                                                    Prompts as our validation and test sets. Given the
+of human-written continuation.
+                                                                                    beginning several tokens as prefix7 , we generate
+                                                                                    256 tokens with different decoding algorithms and
+Coherence The semantic coherence between pre-
+                                                                                    disregard those after the end-of-text token during
+fix and continuation is measured as the cosine sim-
+                                                                                    evaluation. Practically, we consider a sliding win-
+ilarity between their sentence embeddings repre-
+                                                                                    dow comprising 128 prior tokens to avoid unde-
+sented by SimCSE (Gao et al., 2021).
+                                                                                    sired repetitions while allow necessary repetitions
+   Results measured by all metrics range from 0
+                                                                                    of text far from the current decoding step. We
+to 1, and higher scores indicate better generation
+                                                                                    perform experiments with pre-trained LMs from
+except rep-n, for which the lower the better.
+                                                                                    different families and scales: GPT2-XL (Radford
+                                                                                    et al., 2019) and OPT-6.7B (Zhang et al., 2022).
+5.3            Decoding Baselines
+                                                                                    The same set of hyperparameters is used to de-
+Given pretrained LMs with conventional MLE, we                                      code from different LMs: the beam size for beam
+evaluate Look-back together with various decoding                                   search is 10, p = 0.95 for nucleus, τ = 0.92 for
+algorithms for fair comparisons.                                                    typical, and η = 0.0003 for η-sampling. We fol-
+                                                                                    low the recommended range for k = {5, 8, 10}
+Search Methods We consider the competitive                                          and α = [0.5, 0.9] in SimCTG and select the set
+contrastive search proposed in SimCTG (Su et al.,                                   based on their MAUVE scores on the validation
+2022) that predicts the next token based on both the                                set. For Look-back , the range of candidate amount
+output distribution and representation similarities                                 k is {5, 8, 10} and the threshold α is ranging from
+between candidates and past tokens6 .                                               [0.5, 1.6]. We select hyperparameters that result in
+                                                                                    the rep-2 score closest to human’s and the optimal
+Sampling Methods Nucleus sampling (Holtz-                                           MAUVE performance on the validation set.
+man et al., 2019) samples the next token from the
+top-p portion of the probability mass. Typical de-                                  5.5      Results
+coding (Meister et al., 2022) samples from the set
+of words whose negative log-probabilities are close                                 In Table 2, we show the performance of different
+to the conditional entropy. η-sampling (Hewitt                                      decoding algorithms as well as natural human con-
+et al., 2022) truncates any word whose probability                                  tinuation evaluated by automatic metrics. On both
+is smaller than an entropy-based threshold.                                         datasets, Look-back consistently achieves the high-
+                                                                                    est MAUVE scores and coherence scores, which in-
+           5
+       We use GPT2-XL for text sequence embedding.                                  dicates that the generation of Look-back has token
+           6
+       We disregard greedy and beam search as they kept pro-
+                                                                                        7
+ducing repetitive phrases/sentences in prior studies (Welleck                             First 32 tokens are used as prefix for WikiText-103,
+et al., 2019; Holtzman et al., 2019).                                               while the original prompts are used for WritingPrompts.
+                                                                                  (a) Current VS. History                                      (b) Current VS. Prefix
+                       Look-back better                                                                                       7
+LM         Criterion                      same   SimCTG better           4
+                          (p-value)                                                                                           6
+                                                                         3
+           Fluency       0.46 (.0127)     0.27       0.27                                                                     5
+GPT2-XL                                                          minKL   2                                            minKL
+           Coherence     0.57 (.0004)     0.16       0.27                                                                     4
+                                                                         1                                                    3
+           Fluency       0.38 (.0508)     0.37       0.25
+OPT-6.7B                                                                 0
+           Coherence     0.53 (.0078)     0.16       0.31                    0   50     100 150 200             250               0       50       100 150 200          250
+                                                                                      Continuation Step                                          Continuation Step
+                                                                                       Repetitive           nucleus                    -sampling           Look-back
+Table 3: Human Evaluation on generations from Look-                                    Off-topic            typical                   SimCTG
+back and the second best SimCTG with examples sam-
+                                                                                           (a) WikiText-103 (GPT2-XL)
+pled from WikiText-103. Continuation generated by                                 (a) Current VS. History                                      (b) Current VS. Prefix
+Look-back is preferred to SimCTG significantly by hu-                    4                                                    8
+man evaluators w.r.t both fluency and coherence.                         3
+                                                                                                                              6
+                                                                 minKL   2                                            minKL
+                                                                         1                                                    4
+distribution closeness with human continuations                          0
+                                                                             0   50     100 150 200             250               0       50       100 150 200          250
+while staying relevant to the given prefixes. Mean-                                   Continuation Step                                          Continuation Step
+                                                                                       Repetitive           nucleus                    -sampling           Look-back
+while, Look-back is capable of producing texts                                         Off-topic            typical                   SimCTG
+with similar repetition and diversity level as the
+                                                                                           (b) WikiText-103 (OPT-6.7B)
+natural human text, which implies the fluency and                                 (a) Current VS. History                                      (b) Current VS. Prefix
+                                                                                                                              7
+informativeness of the generated text. We also no-                       3
+                                                                                                                              6
+tice that generations from all decoding algorithms                       2                                                    5
+                                                                 minKL                                                minKL
+obtain relatively low MAUVE and coherence scores                         1
+                                                                                                                              4
+                                                                                                                              3
+on WritingPrompts. This is because the given pre-                        0                                                    2
+fixes are abstract and the human written references                          0   50     100 150 200             250               0       50       100 150 200          250
+                                                                                      Continuation Step                                          Continuation Step
+are diverse and varied, which results in low coher-                                    Repetitive           nucleus                    -sampling           Look-back
+                                                                                       Off-topic            typical                   SimCTG
+ence and MAUVE w.r.t. various model continua-
+tions.                                                                                    (c) WritingPrompts (GPT2-XL)
+                                                                                  (a) Current VS. History                                      (b) Current VS. Prefix
+                                                                                                                              8
+                                                                         3
+5.6   Human Evaluation                                                                                                        6
+                                                                         2
+                                                                 minKL                                                minKL
+To further evaluate the quality of generated texts,                      1                                                    4
+we randomly sample two sets of 50 examples from                          0
+WikiText-103 to produce prefixes for GPT2-XL                                 0   50     100 150 200             250               0       50       100 150 200          250
+                                                                                      Continuation Step                                          Continuation Step
+and OPT-6.7B respectively and generate continu-                                        Repetitive           nucleus                    -sampling           Look-back
+                                                                                       Off-topic            typical                   SimCTG
+ations from them. Then, we ask 3 evaluators to
+compare generated continuations from Look-back                                            (d) WritingPrompts (OPT-6.7B)
+and the second best baseline SimCTG in two di-                    Figure 3: Minimum KL divergence between current
+mensions: 1) fluency: diverse and natural content                 step and (a) history or (b) prefix from GPT2-XL and
+without repeated words, phrases or sentences; 2) co-              OPT-6.7B decoded by different algorithms on the test
+herence: well-organized and easy to follow; being                 set of WikiText103 and WritingPrompts. Probability
+consistent with the topics presented in the human-                distribution of Look-back keeps distance to history to
+written prefix without abrupt topic drifts. We ask                avoid repetitions but stays close to prefix to guarantee
+                                                                  coherence.
+annotators to choose one out of three options: the
+1st continuation is better, the 2nd is better, or the
+two are of the same quality. As presented in Ta-                 Analyzing Probability Distribution Distance.
+ble 3, for both evaluation dimensions, the content               To verify whether decoding with Look-back ap-
+generated by Look-back is preferred or marked as                 propriately constrains the probability distribution
+equally good by evaluators around or more than                   distance to past steps, we compare KLtmin to his-
+70% of the time compared with baseline, which                                  t|C
+                                                                 tory and KLmin to prefix of degeneration and dif-
+aligns well with the automatic metrics in Table 2.
+                                                                 ferent decoding algorithms in Figure 3. Although
+                                                                 all improved decoding algorithms keep distance to
+5.7   Further Analyses
+                                                                 historical probability distribution to avoid repeti-
+In this section, we analyze the effectiveness of dif-            tions compared with greedy algorithm (Repetitive
+ferent techniques used by Look-back individually.                in the left column of Figure 3, the probability dis-
+LM          Sampling    diversity    MAUVE   coherence                          SimCTG                   Look-back
+                                                                       1.0                  1.0
+                      WikiText-103
+
+                                                           diversity
+GPT2-XL
+            Uniform       0.93        0.71      0.61                   0.8                  0.8
+            Softmax       0.90        0.81      0.65
+            Uniform       0.93        0.60      0.52
+                                                                       0.6                  0.6
+OPT-6.7B
+            Softmax       0.89        0.80      0.65                         0.50    0.75         0.5      1.0       1.5
+                   WritingPrompts
+
+                                                           MAUVE
+            Uniform      0.93     0.15          0.45
+GPT2-XL
+            Softmax      0.91     0.24          0.52
+                                                                       0.5                  0.5
+            Uniform       0.91        0.14      0.29
+OPT-6.7B
+            Softmax       0.88        0.19      0.43                   0.0                  0.0
+                                                                             0.50    0.75         0.5      1.0       1.5
+Table 4: Effects of probability distribution-guided sam-               0.6                  0.6
+
+                                                           coherence
+pling of Look-back (Softmax) on generation quality.
+With similar level of diverse content as human text,                   0.4                  0.4
+Look-back samples according to softmax of negative
+distribution distance to prefix, leading to improved co-
+herence compared with Uniform.
+                                                                             0.50    0.75         0.5      1.0       1.5
+
+                                                                         k=10         k=5          k=8           Human
+tribution of Look-back (Look-back in the right col-
+umn of Figure 3 is much closer to the given prefix,        Figure 4: Impact of decoding hyperparameters on val-
+which distinguishes it from off-topic continuation         idation set of WikiText-103. Compared with the other
+                                                           search algorithm SimCTG (1st column), Look-back
+compared with other algorithms.
+                                                           (2nd column) keeps relatively higher MAUVE and co-
+                                                           herence scores regardless of plausible token amount k
+Softmax vs. Uniform. According to the soft-                and the KLtmin threshold α. See Figure 5 for more re-
+                        t|C
+max operation on KLmin introduced in §4.2, the             sults in other settings.
+closer the next step’s probability distribution to
+prefix, the more likely the corresponding plausi-
+ble token is selected to avoid undesired topic drift       α indicates the most probable token is less likely
+compared with random sampling. In Table 4, we              to be adopted, hence more diversity is obtained.
+empirically investigate the impact of plausible to-        We also observe that for Look-back , the relevance
+ken sampling, uniform vs. softmax, on generation           of generated text to prefix (high coherence) and
+quality and find Look-back significantly enhances          human continuation (high MAUVE) is much more
+coherence on both datasets compared with random            robust to various hyperparameter values compared
+sampling. Although diversity drops with distribu-          with SimCTG.
+tion distance-guided sampling in Look-back , both
+sampling strategies produce similar level of diverse
+content as human texts listed in Table 2.                  5.8          Case Study
+
+Effects of Candidate Amount and Threshold α.               Given a prefix sampled from WikiText-103, we
+In §4.1, the hyperparameter α determines whether           present truncated human continuations as well as
+the current step is likely to produce repetitive con-      generations from Look-back and SimCTG in Ta-
+tinuation while k restricts the range of plausible         ble 5 and leave more examples in Appendix Table 6.
+token candidates. The second best baseline Sim-            The prefix is talking about the design of a race car
+CTG has the similar candidate amount parameter k           game. Both human and Look-back continuations
+and the α to balance model confidence and degen-           focus on describing major difficulties encountered
+eration penalty. When GPT2-XL is used to decode            during the game design, while SimCTG switches to
+with Look-back and SimCTG on WikiText-103,                 a different topic by pointing to an online introduc-
+we visualize the impact of hyperparameters on gen-         tion of the game in the second half of continuation.
+eration quality in Figure 4 and Figure 5. The α in         Interestingly, Look-back explains how the team
+Look-back is different from that in SimCTG, but            of more than twenty people was formed, which is
+both control reliance on model confidence: a larger        coherent with the topic in the prefix.
+                       SimCTG                  Look-back                                    SimCTG               Look-back                                   SimCTG               Look-back
+            1.0                   1.0                                         1.00                     1.00                                    1.00                     1.00
+
+diversity                                                         diversity                                                        diversity
+            0.8                   0.8                                         0.75                     0.75                                    0.75                     0.75
+            0.6                   0.6                                         0.50                     0.50                                    0.50                     0.50
+                    0.50   0.75         0.5      1.0       1.5                           0.50   0.75       0.5     1.0       1.5                          0.50   0.75      0.5      1.0       1.5
+                                                                                 0.2                    0.2                                       0.2                    0.2
+MAUVE                                                                MAUVE                                                            MAUVE
+            0.5                   0.5
+                                                                                 0.1                    0.1                                       0.1                    0.1
+            0.0                   0.0                                            0.0                    0.0                                       0.0                    0.0
+                    0.50   0.75         0.5      1.0       1.5                           0.50   0.75       0.5     1.0       1.5                          0.50   0.75       0.5     1.0       1.5
+            0.6                   0.6
+
+coherence                                                            coherence                                                        coherence
+                                                                                 0.4                    0.4                                       0.4                    0.4
+            0.4                   0.4
+                                                                                 0.2                    0.2                                       0.2                    0.2
+                    0.50   0.75         0.5      1.0       1.5                           0.50   0.75       0.5     1.0       1.5                          0.50   0.75       0.5     1.0       1.5
+
+              k=10          k=5          k=8           Human                      k=10          k=5       k=8            Human                     k=10          k=5       k=8            Human
+
+                  (a) WikiText-103 (OPT-6.7B)                                    (b) WritingPrompts (GPT2-XL)                                     (c) WritingPrompts (OPT-6.7B)
+
+Figure 5: (Continuation from Figure 4) Impact of decoding hyperparameters on validation set of WikiText103 and
+WritingPrompts.
+
+
+Prefix: Ridge Racer Revolution was developed over eight months by a team of more than
+twenty people, most of whom joined just for Ridge Racer Revolution. The biggest
+                                                                                                       posed in this work can also be used for other spe-
+difficulties were                                                                                      cialized constrained decoding scenarios, such as
+Human: the link-up mode, rear-view mirror, and running the game at high speeds. Each
+member had worked on other console games, and they commented that the graphics detail                  preventing hallucination.
+showed the improvements in skill and technique. The team wanted players to enjoy a more
+in-depth game than the original, so rather than develop a port of Ridge Racer 2, as many
+features as possible were added. The early designs for the new courses were made...                    Limitations
+SimCTG: balancing the game, which had to be a mix of arcade and racing elements, along
+wtih making an open world that felt like the future of video games.\n\nIn order to do this,
+we used Unreal Engine 3, the game engine that powers ... You can learn more about the
+                                                                                                       We discuss the limitations of our work as follows:
+game by clicking here, but be warned, there are spoilers in this article. If you’re planning
+on reading this article, I suggest you stop reading now before it spoils the game for you...                  • Look-back penalizes next tokens that result
+Look-back : the lack thereof: the original game was built in a single year; Ridge Crash took
+more. The original developers were all gone, and the original team of programmers, artists,
+                                                                                                                in low KL divergence with historic output dis-
+and designers from Ridge Revolution, including the lead programmer at Capcom, had all                           tributions. However, we can not explicitly
+left the company by 2007...In the end, a new team of twenty-five employees was assembled
+for Revolution, who took nearly two years to complete the game. In all, this team of more...                    distinguish if such tokens are natural or unde-
+                                                                                                                sired repetitions. This may lead to aggressive
+Table 5: Case study of an instance sampled from
+                                                                                                                eliminations of possible outputs. We leave the
+WikiText-103 with GPT2-XL. Continuation of both
+human and Look-back discusses difficulties in game
+                                                                                                                distinction of different repetitions to future
+design, while SimCTG gradually produces less informa-                                                           work.
+tive sentences with slight topic drift to game introduc-
+                                                                                                              • Look-back tends to show a higher bi-gram
+tion (in pink ). Refer to Table 6 for more examples.
+                                                                                                                repetition score than other decoding methods
+                                                                                                                because it encourages the coherence with pre-
+6             Conclusion                                                                                        fix text at each decoding step. As we use a
+                                                                                                                short prefix text following previous evaluation
+The distance between output distributions signals                                                               protocol, which might not be sufficiently infor-
+potential failure modes of text generation, such                                                                mative, we will adopt a more comprehensive
+as dull repetition and incoherence. We propose                                                                  evaluation setup in the future or prepend rele-
+Look-back , a novel decoding algorithm that uti-                                                                vant text in the beginning at decoding time.
+lizes the KL divergence between the current and
+                                                                                                              • Most of our evaluations rely on automatic met-
+historic decoding steps, to steer the output distri-
+                                                                                                                rics, such as MAUVE scores. However, we
+bution into a plausible subspace. Look-back can
+                                                                                                                found that these metrics may not truthfully re-
+generate higher-quality text and outperforms sev-
+                                                                                                                flect the quality of text, for example, MAUVE
+eral strong decoding algorithms in both automatic
+                                                                                                                score is sensitive to the choice of sentence em-
+and human evaluation. However, KL divergence
+                                                                                                                bedding models. In general, open-ended text
+may not be the optimal measure for text output dis-
+                                                                                                                generation still poses a great challenge to the
+tributions and we leave the investigation of other
+                                                                                                                development of NLG algorithms.
+measures to future work. In addition, the idea pro-
+References                                                  Xiang Lisa Li, Ari Holtzman, Daniel Fried, Percy Liang,
+                                                              Jason Eisner, Tatsunori Hashimoto, Luke Zettle-
+Daniel Adiwardana, Minh-Thang Luong, David R So,              moyer, and Mike Lewis. 2022. Contrastive decoding:
+  Jamie Hall, Noah Fiedel, Romal Thoppilan, Zi Yang,          Open-ended text generation as optimization. arXiv
+  Apoorv Kulshreshtha, Gaurav Nemade, Yifeng Lu,              preprint arXiv:2210.15097.
+  et al. 2020. Towards a human-like open-domain chat-
+  bot. arXiv preprint arXiv:2001.09977.                     Yixin Liu, Pengfei Liu, Dragomir Radev, and Graham
+                                                              Neubig. 2022. BRIO: Bringing order to abstractive
+Kushal Arora, Timothy J O’Donnell, Doina Precup, Ja-
+                                                              summarization. In Proceedings of the 60th Annual
+  son Weston, and Jackie CK Cheung. 2023. The stable
+                                                              Meeting of the Association for Computational Lin-
+  entropy hypothesis and entropy-aware decoding: An
+                                                              guistics (Volume 1: Long Papers), pages 2890–2903,
+  analysis and algorithm for robust natural language
+                                                              Dublin, Ireland. Association for Computational Lin-
+  generation. arXiv preprint arXiv:2302.06784.
+                                                              guistics.
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie
+                                                            Joshua Maynez, Shashi Narayan, Bernd Bohnet, and
+  Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+                                                              Ryan McDonald. 2020. On faithfulness and factu-
+  Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+                                                              ality in abstractive summarization. In Proceedings
+  Askell, et al. 2020. Language models are few-shot
+                                                              of the 58th Annual Meeting of the Association for
+  learners. Advances in neural information processing
+                                                              Computational Linguistics, pages 1906–1919, On-
+  systems, 33:1877–1901.
+                                                              line. Association for Computational Linguistics.
+Woon Sang Cho, Pengchuan Zhang, Yizhe Zhang, Xiu-
+ jun Li, Michel Galley, Chris Brockett, Mengdi Wang,        Clara Meister, Tiago Pimentel, Gian Wiher, and Ryan
+ and Jianfeng Gao. 2019. Towards coherent and co-             Cotterell. 2022. Typical decoding for natural lan-
+ hesive long-form text generation. In Proceedings             guage generation. arXiv preprint arXiv:2202.00666.
+ of the First Workshop on Narrative Understanding,          Stephen Merity, Caiming Xiong, James Bradbury, and
+ pages 1–11, Minneapolis, Minnesota. Association for           Richard Socher. 2016. Pointer sentinel mixture mod-
+ Computational Linguistics.                                    els. arXiv preprint arXiv:1609.07843.
+Jwala Dhamala, Varun Kumar, Rahul Gupta, Kai-Wei            Moin Nadeem, Tianxing He, Kyunghyun Cho, and
+  Chang, and Aram Galstyan. 2022. An analysis of             James Glass. 2020. A systematic characterization
+  the effects of decoding algorithms on fairness in          of sampling algorithms for open-ended language gen-
+  open-ended language generation. arXiv preprint             eration. In Proceedings of the 1st Conference of the
+  arXiv:2210.03826.                                          Asia-Pacific Chapter of the Association for Compu-
+Bryan Eikema and Wilker Aziz. 2020. Is map de-               tational Linguistics and the 10th International Joint
+  coding all you need? the inadequacy of the mode            Conference on Natural Language Processing, pages
+  in neural machine translation. arXiv preprint              334–346, Suzhou, China. Association for Computa-
+  arXiv:2005.10283.                                          tional Linguistics.
+
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018.             Catherine Olsson, Nelson Elhage, Neel Nanda, Nicholas
+  Hierarchical neural story generation. In Proceedings        Joseph, Nova DasSarma, Tom Henighan, Ben Mann,
+  of the 56th Annual Meeting of the Association for           Amanda Askell, Yuntao Bai, Anna Chen, et al. 2022.
+  Computational Linguistics (Volume 1: Long Papers),          In-context learning and induction heads. arXiv
+  pages 889–898, Melbourne, Australia. Association            preprint arXiv:2209.11895.
+  for Computational Linguistics.
+                                                            Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+Tianyu Gao, Xingcheng Yao, and Danqi Chen. 2021.              John Thickstun, Sean Welleck, Yejin Choi, and Zaid
+  SimCSE: Simple contrastive learning of sentence em-         Harchaoui. 2021. Mauve: Measuring the gap be-
+  beddings. In Proceedings of the 2021 Conference             tween neural text and human text using divergence
+  on Empirical Methods in Natural Language Process-           frontiers. Advances in Neural Information Process-
+  ing, pages 6894–6910, Online and Punta Cana, Do-            ing Systems, 34:4816–4828.
+  minican Republic. Association for Computational
+  Linguistics.                                              Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+                                                              Dario Amodei, Ilya Sutskever, et al. 2019. Language
+John Hewitt, Christopher D Manning, and Percy Liang.          models are unsupervised multitask learners. OpenAI
+  2022. Truncation sampling as language model                 blog, 1(8):9.
+  desmoothing. arXiv preprint arXiv:2210.15191.
+                                                            Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Ling-
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and            peng Kong, and Nigel Collier. 2022. A contrastive
+  Yejin Choi. 2019. The curious case of neural text           framework for neural text generation. arXiv preprint
+  degeneration. arXiv preprint arXiv:1904.09751.              arXiv:2202.06417.
+Shaojie Jiang, Ruqing Zhang, Svitlana Vakulenko, and        Yixuan Su and Jialu Xu. 2022. An empirical study
+  Maarten de Rijke. 2022. A simple contrastive learn-         on contrastive search and contrastive decoding
+  ing objective for alleviating neural text degeneration.     for open-ended text generation. arXiv preprint
+  arXiv preprint arXiv:2205.02517.                            arXiv:2211.10797.
+Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Di-
+  nan, Kyunghyun Cho, and Jason Weston. 2019. Neu-
+  ral text generation with unlikelihood training. arXiv
+  preprint arXiv:1908.04319.
+Yilin Yang, Liang Huang, and Mingbo Ma. 2018. Break-
+   ing the beam search curse: A study of (re-)scoring
+   methods and stopping criteria for neural machine
+   translation. In Proceedings of the 2018 Conference
+   on Empirical Methods in Natural Language Process-
+   ing, pages 3054–3059, Brussels, Belgium. Associa-
+   tion for Computational Linguistics.
+Susan Zhang, Stephen Roller, Naman Goyal, Mikel
+  Artetxe, Moya Chen, Shuohui Chen, Christopher De-
+  wan, Mona Diab, Xian Li, Xi Victoria Lin, et al. 2022.
+  Opt: Open pre-trained transformer language models.
+  arXiv preprint arXiv:2205.01068.
+Yao Zhao, Misha Khalman, Rishabh Joshi, Shashi
+  Narayan, Mohammad Saleh, and Peter J Liu.
+  2022. Calibrating sequence likelihood improves
+  conditional language generation. arXiv preprint
+  arXiv:2210.00045.
+Dataset
+                            Prefix/Continuation
+(LM)
+                            Prefix: A new show in London in 1912 showcased the best of music hall\’s talent. The Royal Command Performance
+
+
+
+
+WikiText-103 (OPT-6.7B)
+                            took place at the Palace Theatre in London, which was
+                            Human: managed by Alfred Butt. The show was organised by Oswald Stoll, an Australian impresario who managed
+                            a string of West End and provincial theatres. Stoll, although a fan of Lloyd’s, disliked the vulgarity of her act and
+                            championed a return to a more family @-@ friendly atmosphere within the music hall. Because of this, and her
+                            participation in the earlier music hall war, Stoll left her out of the line @-@ up. He placed an advert in The Era on
+                            the day of the performance warning that " Coarseness and vulgarity etc are not allowed...
+                            SimCTG: one of the most popular theatres in the West End at the time.
+                            Start the conversation, or Read more at BroadwayWorld.com.</s>I have been waiting for this. Thank you for putting
+                            it together. You should cross post to /r/blunderyears as well...
+                            Look-back : the home of the Royal Commandos during the First World War. The show starred the likes of Harry Lauder, who
+                            played the role he was born to play, ’The King in Yellow’, and Fred Karno - who, as the ’King’, was the star attraction.
+                            It was a huge success, and the Royal Variety Performance took its spot in the calendar. It’s a tradition that continues
+                            to this day - and the King in Yellow is still a big draw at any show...
+                            Prefix: The world is teetering on the brink of destruction . Only 2 people remain alive , both of them old ladies . They are
+
+
+
+
+WritingPrompts (GPT2-Xl)
+                            face to face with the eldritch creature that has singlehandedly destroyed their planet . And in its terrifying presence ... they
+                            make cheeky small talk about what brought them here .
+                            Human: FADE IN : EXT . A DESOLATE LANDSCAPE - AFTERNOON *A red sky covered with black clouds hangs
+                            above an expanse of blasted countryside . Dark craters pockmark the land , and the corrupted hulks of destroyed war
+                            machines lie rusting in the acrid air . Amidst this desolation , two elderly women sit on rocking chairs that are curiously
+                            undamaged . These are DELILAH and TABITHA . A small table with a tea set is present between them . * **DELILAH :
+                            ** It ’s a bit hot today , is n’t it ?...
+                            SimCTG: <|endoftext|>A group of high school students in New York’s Nassau-Suffolkshire school district are demanding
+                            to be excused from participating in "Star Wars," "Harry Potter" and Disney movies because it’s the holiday season...
+                            Look-back : \n\nThe two old ladies, who were not named in either the book or film, had been visiting from the future when their
+                            ship was destroyed. They are not aware of this, but one has become a time traveler from Earth and knows that they were
+                            never meant be together in life but are now destined by fate together. One day they will meet again at last on some other
+                            planet where one of each woman will be born with powers over time which will allow them each one chance to save the
+                            world, which is now destined to fall into the hands of their enemy. One day both are going in the same direction. And one
+                            woman has decided that she needs to see to it that they both get there first!...
+                            Prefix: For the first time ever , a person is born with a genuine superpower . They proceed to live out their entire life without
+
+
+
+
+WritingPrompts (OPT-6.7B)
+                            noticing or realizing it .
+                            Human: For Francis , the good had always gone hand-in-hand with the bad . He had spent his life trying his best to be a good
+                            person , or at least what he believed would be a good person . He realized now that he was n’t really sure anymore . When his
+                            mother left his dad , Francis had chosen to stay with him . His friends had all told him he was smart to stay with the rich
+                            parent , but that had n’t been the reason , had it ? At the time , he had told himself that his father needed him more . He did .
+                            Dad had been really bad at taking care of himself . Without his mother , someone had to be there to deal with dad when he
+                            was lonely and angry and ...
+                            SimCTG: What if they have superpowers in real life?\nI’m going to need proof of this before I believe it. You know, for science.
+                            It’s true. I saw it on the internet. So it must be true. </s>How to Get Rid of Pimples on Forehead...
+                            Look-back : The person is born with the ability not necessarily in the form of super strength or super speed (although they may have
+                            those abilities as well) but the superpower is the ability to see the future! They see the outcomes in their life and they live their
+                            days according to the outcome they see for themselves! In other words, they plan their life out according how their futures will
+                            unfold according. They see what will happen and they do what they can so that it will come. And because they live their whole
+                            live without realizing they have this ability they are able live life to the fullest. Because the future is already set for them, their
+                            entire life unfolds according. Their whole life, from the moment of their birth, unfolds according as planned in their mind...
+
+Table 6: Case study of instances sampled from WikiText-103 and WritingPrompts. Unnatural topic drifts are
+frequently observed in generations from SimCTG (in pink ).
+

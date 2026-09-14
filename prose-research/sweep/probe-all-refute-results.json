@@ -1,0 +1,474 @@
+[
+ {
+  "family": "table",
+  "verdicts": [
+   {
+    "finding": "§3 — the whole metrics table (48 metric rows × 21 register columns) is re-derivable by §7's commands",
+    "verdict": "CONFIRMED",
+    "measured": "1,008 / 1,008 cells identical; 0 diffs",
+    "note": "Re-executed the full §7 pipeline against a pristine `git archive 6b80d1e8e` extraction (scratchpad/dock6b80), then diffed the regenerated report.table.md against the published §3 table cell-by-cell: `published rows: 49  mine rows: 49 / cells compared: 1008   diffs: 0`. Every column header n matched (R1 n=2262 … A-W n=4276, BIBLE n=67)."
+   },
+   {
+    "finding": "§3 — the table survives an INDEPENDENT re-implementation, not just a re-run of the author's own run.mjs",
+    "verdict": "CONFIRMED",
+    "measured": "560 / 560 cells identical across 28 of the 48 rows; 0 diffs",
+    "note": "Wrote sweep-table-run/indep.mjs from the printed definitions; it does NOT import metrics.mjs. Re-derived N variants, files, segments, segments/variant, terminal-stop, slot-bearing, 1-/2-/3+-segment share, words/segment mean·sd·p10·p50·p90, share<8, share>30, rather-than, gloss tail, There/It-is opener, semicolon, colon, question, parenthesis, em dashes, exclamations, digits, contraction, the-PCs — over 20 registers. `INDEPENDENT check: 560 cells over 48 published rows; diffs: 0`."
+   },
+   {
+    "finding": "§6 — the full HIGH (137) and LOW (147) outlier lists",
+    "verdict": "CONFIRMED",
+    "measured": "284 / 284 rows exact on register, metric, value, median and x-median; 0 missing, 0 unpublished",
+    "note": "`node cmp6.mjs`: `published HIGH rows: 137  LOW rows: 147 / measured outliers total: 284  high: 116  inf: 21  low: 147 / rows in measured NOT in published lists: 0 / published outlier rows checked: 284  diffs: 0`. The §6 header's 137/147 split and its 'nineteen register columns, A-W excluded, size-scaled counts excluded' rule both hold (run.mjs:99 MEDIAN_COLS, the SIZE set)."
+   },
+   {
+    "finding": "§6 — 'the ten that carry meaning' (98.2x R2 over-30, 37x R10 digits, 18.3x R6 There/It-is, 16.5x R1 gloss, 16.1x R1 rather-than, 15.5x A-U gloss, 13.9x R11 parenthesis, 13x R14 gloss, 11.6x R14 3+-segment, 8.4x R6 over-30)",
+    "verdict": "CONFIRMED",
+    "measured": "all ten rows exact on value, median and ratio",
+    "note": "Checked each against report.json.outliers: e.g. R2 0.491/0.005/98.2 measured 0.491/0.005/98.2; R6 0.11/0.006 measured ratio 18.33 (published 18.3); R11 0.222/0.016 measured 13.88 (published 13.9). Its prose gloss '255 of 2,262' for R1 rather-than is exact by my own recount: `R1 rather-than variants: 255 of 2262 rate= 0.1127`."
+   },
+   {
+    "finding": "§3/§7 — the extractor and corpus headlines behind every column (X1 2,734/786; X2 45,260/1,621/145 with all six shape tags; X3 19,329/0 fails; X4 12,809/525-of-527; X5 9,327→9,115→4,289; registers 34,508 admitted / 41,369 rejected; mechanical 53,662/153 em/0 excl)",
+    "verdict": "CONFIRMED",
+    "measured": "every headline identical at 6b80d1e8e, including all eight X1 angle counts and all six X2 shape tags",
+    "note": "`# json leaves: 2734 … pools: 786  angles: {visitor:481,ledger:763,street:690,counterforce:254,threshold:96,unfolding:303,elder:140,canonical:7}`; `# modules in scope: 1621  import failures: 145  string leaves >=12ch: 45260`; `# files parsed: 1660  parse failures: 0  in-function literals >=12ch: 19329`; `# jsx files: 527  parse failures: 0  files with prose: 525  segments >=12ch: 12809`; annex `TOTAL 9327 106 106 9115 4289 47.1`; `TOTAL admitted: 34508  rejected: 41369`; `TOTAL 53662 153 … 0`. Every per-register n in §2/§3 matched the registers.mjs print."
+   },
+   {
+    "finding": "§3 — the mechanical rows (em dashes R8=4, R11=1, R14=1, R15=71, R18=44; exclamations 0 everywhere; 'the PCs' = 1 in R8)",
+    "verdict": "CONFIRMED",
+    "measured": "4 / 1 / 1 / 71 / 44 em-dash variants; 0 exclamation-bearing rows corpus-wide; 1 the-PCs row",
+    "note": "Not taken from the aggregate — enumerated the rows directly out of corpus.json with the published regex and printed exemplars: R8's four are settlementOriginProse.js, R11's is decisionTier.js, R14's is governanceNarrative.js, R15's include entitlementLadder.js and design/organic/index.js, R18's include aiGrounding.js. `exclamation-bearing admitted rows, whole corpus: 0`; `the-PCs rows: 1  R8 src/data/historyData.js`."
+   },
+   {
+    "finding": "§6 'two structural lows' #1 — R6 share of segments under 8 words at 0.02x, median 0.381",
+    "verdict": "REFUTED",
+    "measured": "median 0.46, ratio 0.01x (value 0.005 is correct)",
+    "note": "`share<8 values (19 cols): 0.13 0.017 0.204 0.947 0.383 0.078 0.005 0.472 0.289 0.616 0.555 0.502 0.381 0.46 0.507 0.599 0.512 0.464 0.114 / median 19-col: 0.46`. 0.381 is R12's own value, not the median. §6's own full LOW list, twenty lines below, prints the correct pair `| 0.01x | R6 | share segments < 8 words | 0.005 | 0.46 |` — the highlight table contradicts the list it is drawn from. The qualitative finding survives; the two numbers do not."
+   },
+   {
+    "finding": "§6 'two structural lows' #2 — R16 pools uniform in segment count = 0.254, median 0.729, 0.25x",
+    "verdict": "REFUTED",
+    "measured": "0.242 / 0.672 / 0.36x — all three numbers wrong",
+    "note": "0.242 is what §3's own table prints, what §6's own LOW list prints (`| 0.36x | R16 | pools uniform in segment count | 0.242 | 0.672 |`), and what both my runs measure at 6b80d1e8e AND at HEAD. 0.729 reproduces under no column set I could construct: 19 cols → 0.672, 19 cols nulls-dropped → 0.714, 20 cols incl. A-W → 0.693, 17 non-null + A-W → 0.7205. The prose beside it ('R3 0.843, R8 0.892, R6 0.955, R17 1.000') IS exact."
+   },
+   {
+    "finding": "§1 annex table — RECEIPT_POOLS_DOSSIER_STATE.md wired = 2024 (99.3%)",
+    "verdict": "REFUTED",
+    "measured": "2030 (99.6%)",
+    "note": "Every other cell of the 13-row table matched, including the TOTAL 4,289 / 47.1%. The published wired column does not sum to its own total: 2024+1214+151+306+8+5+0+2+9+86+462+0+16 = 4,283 against a printed 4,289. With the measured 2030 it sums to exactly 4,289 — so the single wrong cell is provably the DOSSIER_STATE one, and the headline '4,289 wired' is right."
+   },
+   {
+    "finding": "§0 trap-2 receipt — terminal-stop share 'R8 0.469, R15 0.585, R16 0.604, R10 0.634'",
+    "verdict": "PARTLY",
+    "measured": "R8 0.469 ✓, R10 0.634 ✓, R15 0.588 (not 0.585), R16 0.615 (not 0.604)",
+    "note": "§0 disagrees with the report's own §3 table on two of its four figures; §3 is the correct one (independently re-derived by indep.mjs with 0 diffs, and by report.json: `terminal-stop share R15: 0.588  R16: 0.615`). At HEAD R15 reads 0.589 — 0.585 is unreachable at either sha."
+   },
+   {
+    "finding": "§0 trap-3 receipt — '9,700 rows arrived through a function (fn-array 8,021 + fn-template 1,701)'",
+    "verdict": "REFUTED",
+    "measured": "9,722 (the two named components, which are themselves exact); 9,903 including fn-plain 181",
+    "note": "`# shapes: {\"object-string\":15884,\"fn-array\":8021,\"fn-template\":1701,\"array-string\":16943,\"fn-plain\":181,\"slot-string\":2530}`. 8,021 + 1,701 = 9,722, not 9,700 — off by 22. The parenthetical components reproduce exactly; only the headline sum does not."
+   },
+   {
+    "finding": "§2 register roster — R16 files = 361",
+    "verdict": "REFUTED",
+    "measured": "354",
+    "note": "Contradicted by §3's own `files` row, which prints 354 for R16. registers.mjs prints `R16 sentence 2685 1512 354 354`; report.json metrics.R16.files = 354; my independent recount of distinct file values in R16 = 354; at HEAD also 354. Every other register's §2 file count agrees with §3. 361 corresponds to nothing I measured (X4 sees 527 jsx files, 525 with prose)."
+   },
+   {
+    "finding": "§6 methodology — the outlier medians treat a register with no multi-variant pools as scoring zero",
+    "verdict": "PARTLY",
+    "measured": "Number(null)=0 and Number.isFinite(0)=true, so R10/R11 nulls enter as 0: eight phantom LOW rows, and two medians shift (pools-uniform 0.672→0.714, repeated-opener 0.112→0.126 when nulls are dropped)",
+    "note": "Executed: `R10 pools obj: {\"poolsWith2Plus\":0,\"meanPoolSize\":0,\"sameSegmentCountShare\":null,\"repeatedTwoWordOpenerShare\":null,\"meanWithinPoolWordSd\":null}` and `Number(null) finite? true = 0`. §3 honestly prints those cells blank; §6 turns the same absence into rows asserting a measured 0 (R10/R11 × pools-uniform, repeated-opener, within-pool sd, plus mean-pool-size). Consequent ratio inflation: R12 repeated-opener 5.96x→5.29x, R18 5.21x→4.63x, R16 4.27x→3.79x. No outlier changes side, so no §6 conclusion flips — but the printed ratios are not ratios against a defensible median. The doc faithfully reports its instrument; the instrument is wrong here."
+   },
+   {
+    "finding": "§6 gloss — R6's 'There/It is' opener rate 0.110 is '184 of 1,659' ladder lines",
+    "verdict": "PARTLY",
+    "measured": "the cell 0.110 is exact; the ratio behind it is 185 / 1,689 segments (0.1095), not 184 / 1,659 variants (0.1109)",
+    "note": "The metric is per SEGMENT (metrics.mjs:135 `thereIsOpener: srate(...)`), so the denominator is R6's 1,689 segments, not its 1,659 variants. Measured: `R6 variants 1659 segments 1689 / R6 There/It-is opener segments: 185 rate= 0.1095`; `VARIANTS containing a There/It-is opener segment: 185`; `variants whose FIRST segment opens There/It-is: 184`. 184 is a third quantity, and 184/1,659 = 0.1109 rounds to 0.111, not the 0.110 published. The qualitative claim (strongest formula in the estate) is unaffected."
+   },
+   {
+    "finding": "§8 self-verification — the instrument reproduces the published house rates",
+    "verdict": "CONFIRMED",
+    "measured": "all sixteen rows land on the published values",
+    "note": "`node crosscheck.mjs`: `my n: 2729 (X1 raw 2734, admission dropped 5) / 1-seg: 2030 (refuter 2030)  2-seg: 688 (691)  3+: 11 (11) / R1 wps: {mean:16.8,sd:7.2,p10:7,p50:17,p90:26,under8:0.13,over30:0.021} / R1 semicolon count: 385 (386)  R2 semicolon: 168 (169) / R2 share segments >30w: 0.491 / pools uniform: 0.57 of 786; repeated 2-word opener: 0.123 / already: 26  kind/sort of: 29`, incl. the two flagged deliberate differences (quiet 59, nobody/no-one/nothing 512). 'rather than, variants in R1+R2 = 288' confirmed by my own recount: 255 + 33 = 288."
+   },
+   {
+    "finding": "Sha-sensitivity — whether the figures hold on the tree the sweep was pointed at (laneOSR18 @ fd36f0298)",
+    "verdict": "PARTLY",
+    "measured": "34,527 admitted / 41,482 rejected (vs 34,508 / 41,369); 26 of 1,008 §3 cells drift, 5 of 284 §6 rows drift, outlier membership unchanged",
+    "note": "laneOSR18 is 77 commits past the report's stated 6b80d1e8e and touches 18 src/ files (warRemembrance.js +435, HeraldRemembrance.jsx +110, simulationRules.js +185, densityCreateBoundary.js +122, …). Running §7 against HEAD alone would have produced 26 false refutations, which is why I archived 6b80d1e8e. All 26 drifting cells fall in R15/R16/R18 only — the heterogeneous catch-alls (R15 n 3883→3894, R16 2685→2688, R18 5673→5678) — and the largest rate move is 0.003. No named register moves at all. This is not a defect in the report, which named its sha; it does mean the sha is load-bearing for anyone re-deriving. Read-only discipline held: laneOSR18 `git status --porcelain` was empty and HEAD unmoved before and after every run, and I wrote no artefact into the chair's probe-all/ directory."
+   }
+  ],
+  "commandsRun": [
+   "cd $S/laneOSR18 && git log --oneline -1 && git status --porcelain | wc -l && node --version",
+   "cd $S/laneOSR18 && git diff --stat 6b80d1e8e HEAD -- src docs/content VOICE_AND_TONE.md",
+   "cd $S/laneOSR18 && git archive 6b80d1e8e | tar -x -C $S/dock6b80 && ln -sfn $S/laneOSR18/node_modules $S/dock6b80/node_modules",
+   "cp $S/prose-research/probe-all/*.mjs $S/run6b80/ ; cp $S/prose-research/probe-all/*.mjs $S/runHEAD/",
+   "cd $S/run6b80 && node x1-json-leaves.mjs $S/dock6b80 json-leaves.json",
+   "cd $S/run6b80 && node x2-walk.mjs $S/dock6b80 walk.json",
+   "cd $S/run6b80 && node x5-inline.mjs $S/dock6b80 inline.json",
+   "cd $S/run6b80 && node x7-jsx.mjs $S/dock6b80 jsx.json",
+   "cd $S/run6b80 && node x6-annex.mjs $S/dock6b80 annex.json walk.json inline.json jsx.json",
+   "cd $S/run6b80 && node registers.mjs . corpus.json",
+   "cd $S/run6b80 && node bible.mjs $S/dock6b80 bible.json",
+   "cd $S/run6b80 && node mechanical.mjs . mechanical.json",
+   "cd $S/run6b80 && node run.mjs . report",
+   "cd $S/run6b80 && node crosscheck.mjs",
+   "cd $S/sweep-table-run && node cmp3.mjs $S/prose-research/PROBE_ALL.md $S/run6b80/report.table.md   # 1008 cells, 0 diffs",
+   "cd $S/sweep-table-run && node cmp6.mjs $S/prose-research/PROBE_ALL.md $S/run6b80/report.json      # 284 rows, 0 diffs",
+   "cd $S/sweep-table-run && node indep.mjs $S/run6b80/corpus.json $S/prose-research/PROBE_ALL.md     # independent re-implementation, 560 cells, 0 diffs",
+   "cd $S/run6b80 && node --input-type=module -e '<recount R6 There/It-is per segment vs per variant vs first-segment; R1 rather-than; R1 gloss tail>'",
+   "cd $S/run6b80 && node -e '<recompute 19-col medians for share<8 and the four pool metrics, with and without null-drop>'",
+   "cd $S/run6b80 && node -e '<enumerate em-dash / exclamation / the-PCs rows out of corpus.json with exemplars>'",
+   "cd $S/run6b80 && node -e '<check the twelve highlighted §6 rows against report.json.outliers>'",
+   "cd $S/runHEAD && node x1-json-leaves.mjs $S/laneOSR18 ... && node x2-walk.mjs ... && node x5-inline.mjs ... && node x7-jsx.mjs ... && node x6-annex.mjs ... && node registers.mjs . corpus.json && node bible.mjs ... && node mechanical.mjs . mechanical.json && node run.mjs . report",
+   "cd $S/sweep-table-run && node cmp3.mjs $S/prose-research/PROBE_ALL.md $S/runHEAD/report.table.md  # 26 diffs, all R15/R16/R18",
+   "cd $S/sweep-table-run && node cmp6.mjs $S/prose-research/PROBE_ALL.md $S/runHEAD/report.json      # 10 diffs across 5 rows, membership unchanged",
+   "cd $S/laneOSR18 && git status --porcelain | wc -l && git rev-parse HEAD   # 0, fd36f0298 — read-only held"
+  ]
+ },
+ {
+  "family": "tics",
+  "verdicts": [
+   {
+    "finding": "§4 — the top-ten house tic tables, 196 rows across 20 register columns, are re-derivable from the shipped instrument",
+    "verdict": "CONFIRMED",
+    "measured": "published 196 (count|gram) rows vs regenerated 196 rows — `diff /tmp/pub.txt /tmp/mine.txt` = IDENTICAL. R6 reproduces to the row (146 it is public, 126 the syndicate, 126 public that, 95 the boss, 75 destroyed but, 73 the adept, 164 came clean, 66 the foreman, 65 the agitator, 64 is out the); lift agrees to 3 s.f. (146/4230.3 vs published 146/4227). R6 metrics exact vs §3: mean 22.6, sd 4, p10 19, p50 22, p90 28, There/It-is 0.110, semicolon 0.540.",
+    "note": "Whole pipeline re-executed against laneOSR18 at fd36f0298 (published probe read 6b80d1e8e); `git diff --stat 6b80d1e8e HEAD -- src/data/dossierStateProse src/data/dossierCausalProse.generated.js` is empty and no R6/R8 file is in the 78-file diff, so R1/R2/R6/R8 are byte-identical corpora at the two shas. Register n exact: R1 2262, R2 467, R6 1659, R8 1738, R3 1212, R5 373, R7 2169, R9 619, R17 1293, A-U 4626, A-W 4276."
+   },
+   {
+    "finding": "§6 outlier row: \"184 of 1,659 ladder lines open `It is public / It is known` — the single strongest formula in the estate\"",
+    "verdict": "PARTLY",
+    "measured": "184 confirmed as the count of `^(There|It) (is|was|were|are)` variant openers (metrics.mjs:73). But the first-three-words tally of those 184 is: It is public 143, It is out 34, It is known 4, There is nothing 2, It was the 1, There is an 1. Rows OPENING with the two named formulas = 147, not 184. \"it is known\" occurs anywhere in only 5 R6 rows, so no definition reaches 184 for the named pair.",
+    "note": "The named formulas are overstated by 37 lines (25%). Separately the row pairs a per-SEGMENT rate (0.110 = 185/1689) with a per-VARIANT count (184/1659). The underlying claim that this is the estate's strongest formula survives: 18.3x the corpus median is reproduced."
+   },
+   {
+    "finding": "§5: \"R6's … p10 19 words — the ladder has no short sentence at all\"",
+    "verdict": "REFUTED",
+    "measured": "segments under 8 words = 9, share 0.0053; min = 1 word. The nine: \"Yet.\" (1w), \"Someone will.\" (2w), \"Replenished stores ended it.\" (4w), \"The suppliers collect in favors.\" (5w), \"No one has noticed the pattern.\" (6w), \"The captain's second paymaster is public.\" (6w), \"The silence is paid for monthly.\" (6w), \"Even thieves had a catechism here once.\" (7w), \"This X's compromise (X) roots in X.\" (7w). Under 12 words: 21. Under 15: 29. p10 = 19 is itself CONFIRMED.",
+    "note": "The report contradicts itself: §6's own structural-low table publishes R6 \"share of segments under 8 words | 0.005\" — not zero — and §6's other phrasing (\"no sentence under 19 words at the tenth percentile\") is sound. §5's unqualified gloss is the false statement."
+   },
+   {
+    "finding": "§5: \"One outright bible violation, exactly one, and it is unambiguous: src/data/historyData.js:1326 — the PCs\"",
+    "verdict": "CONFIRMED",
+    "measured": "`awk 'NR==1326' src/data/historyData.js` → \"The agents' handler is someone in a position of trust, and the PCs have already met them\". `grep -rn \"the PCs\" src/ | wc -l` = 1. mechanical.json: R8 thePCs = 1, every other register 0, TOTAL 1 over 53,688 prose-shaped strings. Also re-confirmed: 0 exclamation points across all 53,688.",
+    "note": "Render path traced: enclosing template `type: 'infiltration_fear'` (historyData.js:1311, severity major) → historyGenerator.js:261 `eventTemplate.plotHooks` → :295 → rendered by pdf/sections/HistoryFounding.jsx:250-255, pdf/sections/PlotHooks.jsx and components/new/tabs/HistoryTab.jsx:241. Minor address correction only: the probe says \"read on the Timeline\"; the surfaces are the History tab and the PDF Plot Hooks / History sections."
+   },
+   {
+    "finding": "§5: \"The em-dash debt that remains is 6 strings of genuine reader prose — 4 in settlementOriginProse.js, 1 in governanceNarrative.js, 1 dev note in decisionTier.js\"",
+    "verdict": "REFUTED",
+    "measured": "The instrument figure reproduces exactly (6 strings / 7 occurrences; one settlementOriginProse string carries two dashes). But raw source: `grep -n \"—\" src/generators/power/governanceNarrative.js` returns NINE reader-facing stability labels (L250 'Unstable — criminal governance', L295 'Fractured — no stable governing authority', L298, L301, L304, L307, L313, L337, plus the counted L289), all reaching powerStructure.stability → pdf/sections/Overview.jsx:90, pdf/sections/PowerStructure.jsx:85, components/new/SummaryTab.jsx:160. Counting distinct em-dash prose strings over demonstrably reader-facing files: 57 strings / 58 occurrences — customContentSchema.js 15 (CustomContentEditor.jsx), crossSettlementConflicts.js 11 (RelationshipsTab.jsx:4, pdf/lib/viewModel.js:790), governanceNarrative.js 9, labelBands.js 5, settlementOriginProse.js 4, economicState.js 3, safetyProfile.js 3 (safetyLabel → SummaryTab.jsx:29), searchIndex.js 2, and one each in dossierViewModel, galleryUtils, foundry/moduleBuilder, foodGenerator, settlementGenerateAction.",
+    "note": "57, not 6 — 9.5x. Cause: registers.mjs sends EVERY X3 inline literal to R18 regardless of file, so a reader-facing label written as an in-function `return` lands in the bucket §5 dismisses. Also, the sixth of the published six is explicitly a dev note, so \"6 strings of genuine reader prose\" over-claims its own evidence by one. HAZARD for whoever cures these: safetyLabel is a persisted economyInputFingerprint input, so rewording those is a same-seed shift, not a text-only edit."
+   },
+   {
+    "finding": "§5: the remaining \"146 in the two heterogeneous buckets R15/R18 … are mostly AI-layer prompts, design-token descriptions and dev notes rather than reader surfaces\"",
+    "verdict": "REFUTED",
+    "measured": "R18's 57 em-dash strings across 22 files break down as: 38 reader-facing generated prose / UI labels (crossSettlementConflicts 11, governanceNarrative 9, prosperity 5, safetyProfile 5, economicState 3, moduleBuilder 2, foodGenerator 1, galleryUtils 1, settlementGenerateAction 1), 14 dev throw/guard messages, 3 AI-layer prompts, 2 ambiguous. R15's 83: 60 dev/design-token/ledger notes (habitForkRegistry 20, design/organic 24, operationGrammar 5, fieldManifest 3, …) but 23 reader-facing (customContentSchema 15, labelBands 5, searchIndex 2, dossierViewModel 1).",
+    "note": "The characterisation inverts R18's composition — 3 of 57 are AI prompts, 38 of 57 are reader surfaces. It is defensible for R15 (72% dev) but still misses 23 reader strings there."
+   },
+   {
+    "finding": "§4 preamble: \"Overlapping grams are collapsed to one row per phrase family\" (metrics.mjs:212-217)",
+    "verdict": "REFUTED",
+    "measured": "28 of 196 published tic rows have a row-set that is a subset of another row in the same top-ten. R6's is the largest in the estate: rows with \"it is public\" = 146, rows with \"public that\" = 126, rows with BOTH = 126, rows with \"public that\" but not \"it is public\" = 0, rows with \"it is public that\" = 126. Others: R10 spends four of ten slots on one sentence (be undone with 19 ⊃ undone with the 11 = with the map 11 = the map undo 11); R12 spends five on \"The week slipped by, calm and uneventful.\"; R15 pairs candidate owner/owner unsigned and surplus adequate/adequate strained; R7, R9, R11, R14, R2, R5, R17 each have one pair.",
+    "note": "Cause: the collapse at metrics.mjs:216 is a substring test on the joined gram string (`o.gram.includes(s.gram)`), which cannot see two non-overlapping fragments of one habit — the code comment cites \"it is public\" / \"public that the\" as the case it handles, and that is precisely the case it fails. Consequence: summing R6's ten gives 1000 against n=1659, but the measured union of rows triggering any of the ten is 744 (44.8%) — a 34% inflation."
+   },
+   {
+    "finding": "§4's \"tic\" column prints the register's actual phrase (implied by the table's `tic` / `one real example` framing)",
+    "verdict": "PARTLY",
+    "measured": "12 of 196 grams never occur literally in their own register (slot-tolerant regex, whitespace-only between tokens): R6 `destroyed but` n=75 literal 0 (real form `… is destroyed, but the …`), R6 `is out the` n=64 literal 0 (real form `… is out: the …` / `… is out; the …`), R10 `machinery with` 14, R15 `candidate owner` 18 and `owner unsigned` 18 (from the dev label `CANDIDATE, OWNER-UNSIGNED`), R15 `band surplus` 16, R11 `name e` 5 (from `Institution name (e.g. …)`), R12 `by calm` 4, R14 `is open the` 4, R9 `seconds then` 4, R4b `{} and` 6, R18 `{} 100` 11. Separately, 17 of 196 printed examples do not contain their own printed gram.",
+    "note": "The tokenizer replaces every non-[a-z0-9{}'] character with a space before forming n-grams, so commas, colons, semicolons and sentence boundaries silently become word joins. The habits behind R6's two are real (75 lines pivot on `, but`; 64 reveal on `: the`) — a presentation defect, not a fabrication — but the two highest-count artifacts in the estate are both R6's."
+   },
+   {
+    "finding": "Tic-detector false-positive check by hand-read, three tic-triggering rows per register",
+    "verdict": "CONFIRMED",
+    "measured": "All 19 register columns sampled at first / middle / last tic-triggering row. Zero false positives in R6: all three samples carry the credited habit verbatim (\"It is public now: the shortfall was covered with bought coin…\", \"The occupier is gone, but the agitator still leads…\", \"The syndicate is broken, but the scandal's economy survives it…\"). Genuine tics hand-confirmed in R1 (the town does, very little), R2 (for all that, older hands), R5 (came to nothing), R7 (only where, viable only), R12 (passed quietly), R17 (travellers passing), A-W (at {}, rather than). R6's habit concentration is the estate's highest among sentence registers: 744/1659 = 44.8% of lines carry one of its own ten.",
+    "note": "Three columns where the miner is mining something that is not a voice tic: R4 (n=133, phrase unit) yields stopword bigrams `on the` / `and the` / `it is` because any function word clears minCount 4 / minPools 3 in a small phrase column; R18's tics are the validation-throw vocabulary (`{} must be` 41, `must be an` 35, `must contain` 12); R15's `candidate owner`/`owner unsigned` are one hyphenated dev label. These are register-composition effects, not detector bugs."
+   },
+   {
+    "finding": "§8 — the instrument reproduces the published house rates from an independent extraction path",
+    "verdict": "CONFIRMED",
+    "measured": "`node crosscheck.mjs`: 1-seg 2030 (published 2030, exact), 2-seg 688 (691, −3), 3+ 11 (exact), R1 wps mean 16.8 / sd 7.2 / p10 7 / p50 17 / p90 26 / under8 0.130, semicolons 385 (386) and 168 (169), R2 over-30 share 0.491, pools uniform 0.575, repeated two-word opener 0.123 combined, `already` 26 (exact), `kind/sort of` 29 (exact). \"rather than\" resolves cleanly: R1+R2 rows containing it = 288 (the published table's figure, exact), occurrences = 294; R1 rows = 255, matching §6's \"255 of 2,262\".",
+    "note": "One trap for the next re-runner: §8 publishes 288 under the label \"variants\", but the shipped crosscheck.mjs:10 prints the OCCURRENCE count 294 beside the same label. Both numbers are right; the script and the table disagree in presentation and will read as a failed reproduction."
+   }
+  ],
+  "commandsRun": [
+   "cd /private/tmp/.../scratchpad/laneOSR18 && git rev-parse HEAD  # fd36f0298b1ead15f2a80eff83dafb92114a7ea4",
+   "git diff --name-only 6b80d1e8e HEAD | wc -l  # 78 (19 in src/ or docs/)",
+   "git diff --stat 6b80d1e8e HEAD -- src/data/dossierStateProse src/data/dossierCausalProse.generated.js  # empty",
+   "git status --porcelain | wc -l  # 0, before and after the run",
+   "cp scratchpad/prose-research/probe-all/*.mjs scratchpad/refute-tics/   # tools copied, laneOSR18 never written",
+   "node x1-json-leaves.mjs $DOCK json-leaves.json  # 2734 leaves / 786 pools",
+   "node x2-walk.mjs $DOCK walk.json  # 45,371 leaves, 1,622 modules, 145 import failures",
+   "node x5-inline.mjs $DOCK inline.json  # 19,342 literals, 0 parse failures",
+   "node x7-jsx.mjs $DOCK jsx.json  # 12,819 segments, 527 files, 525 with prose, 0 failures",
+   "node x6-annex.mjs $DOCK annex.json walk.json inline.json jsx.json  # 9327 -> 9115 -> 4289 wired",
+   "node registers.mjs . corpus.json  # 34,527 admitted / 41,482 rejected; R6 1659, R1 2262, R2 467, R8 1738",
+   "node bible.mjs $DOCK bible.json",
+   "node mechanical.mjs . mechanical.json  # 53,688 prose strings, 153 em dashes, 0 exclamations, 1 'the PCs'",
+   "node run.mjs . report",
+   "node crosscheck.mjs",
+   "node emit-tics.mjs   # writes /tmp/s4.md",
+   "grep -oE '^\\| *[0-9]+ \\|[^|]*\\|[^|]*\\| `[^`]*`' PROBE_ALL.md(§4) | sed ... > /tmp/pub.txt ; same over /tmp/s4.md > /tmp/mine.txt ; diff  # IDENTICAL, 196 rows",
+   "node -e 'const R=require(\"./report.json\"); R.tics.R6.forEach(t=>console.log(t.count,t.lift,t.gram))'",
+   "node -e 'const R=require(\"./report.json\"); console.log(JSON.stringify(R.metrics.R6,null,1))'",
+   "node r6.mjs  # 184 variant There/It-is openers; 147 It is public/known; 9 segments <8 words; p10 19",
+   "node pub184.mjs  # it is public anywhere 146, it is known anywhere 5, It is out openers 34",
+   "node tic-audit.mjs  # it is public 146 / public that 126 / both 126 / it is public that 126",
+   "node ctx.mjs  # 'destroyed but' 75 rows, 0 literal; 'is out the' 64 rows, 0 literal",
+   "node fp2.mjs  # 28/196 tic rows are row-set subsets of a sibling row",
+   "node fp3.mjs  # 12/196 grams never literal; 17/196 examples lack their gram",
+   "node handread.mjs  # 3 tic-triggering rows per register, all 19 columns; R6 union 744/1659 = 44.8%",
+   "node enum-em.mjs R18  # 57 strings, 22 files",
+   "node enum-em.mjs R15  # 83 strings, 17 files",
+   "node readerem.mjs  # 57 distinct reader-facing em-dash strings, 58 occurrences, 13 files",
+   "node -e '... corpus.json ...'  # R1+R2 'rather than' rows 288, occurrences 294; R1 rows 255",
+   "awk 'NR==1326' src/data/historyData.js",
+   "grep -rn 'the PCs' src/ | wc -l  # 1",
+   "grep -n '—' src/generators/power/governanceNarrative.js  # 9 reader labels + 1 header comment",
+   "grep -n '—' src/generators/narrative/settlementOriginProse.js  # 4 prose strings among 16 lines",
+   "grep -rn 'crossSettlementConflicts' src/ | grep -v '^src/generators/crossSettlementConflicts.js'",
+   "grep -rn '\\.stability\\b' src/components/ src/pdf/",
+   "grep -rn 'plotHooks' src/ | grep -v '^src/data/historyData.js'",
+   "grep -rn 'customContentSchema' src/components/ src/pdf/"
+  ]
+ },
+ {
+  "family": "extractors — PROBE_ALL §1 (the six extractors) and §2 (the register roster)",
+  "verdicts": [
+   {
+    "finding": "X1 projected JSON leaves: 2,734 leaves, 786 pools, angles ledger 763 / street 690 / visitor 481 / unfolding 303 / counterforce 254 / elder 140 / threshold 96 / canonical 7",
+    "verdict": "CONFIRMED",
+    "measured": "2,734 leaves, 786 pools, all eight angle counts identical (published 2,734 / 786 / same eight)",
+    "note": "node x1-json-leaves.mjs on a farmed checkout of the published read sha 6b80d1e8e printed '# json leaves: 2734 {\"R1\":2266,\"R2\":468}' and '# pools: 786 angles: {visitor:481,ledger:763,street:690,counterforce:254,threshold:96,unfolding:303,elder:140,canonical:7}'. Identical at the dock's current HEAD fd36f0298."
+   },
+   {
+    "finding": "X2 import-and-walk: 45,260 string leaves in 1,621 modules, 145 import failures (133 VITE_SUPABASE_*, none in data/ copy/ display/ worldPulse/ generators/), six shape tags fn-array 8,021 / fn-template 1,701 / fn-plain 181 / slot-string 2,530 / array-string 16,943 / object-string 15,884",
+    "verdict": "CONFIRMED",
+    "measured": "45,260 leaves / 1,621 modules / 145 failures; all six shape tags exact; failures 145 with 133 VITE_SUPABASE_* and 0 in the five prose dirs (published: identical)",
+    "note": "node x2-walk.mjs printed the leaf and shape lines verbatim; walk.failures.json enumerated 145 entries, 133 matching /VITE_SUPABASE/ and none under src/(data|copy|domain/display|domain/worldPulse|generators)/. At HEAD the figures move to 1,622 modules / 45,371 leaves, explained entirely by the one added src module warRemembrance.js."
+   },
+   {
+    "finding": "X3 inline in-function prose (espree): 19,329 literals over 1,660 src/**/*.js files, 0 parse failures",
+    "verdict": "CONFIRMED",
+    "measured": "19,329 literals / 1,660 files / 0 parse failures (published 19,329 / 1,660 / 0)",
+    "note": "node x5-inline.mjs printed '# files parsed: 1660 parse failures: 0 in-function literals >=12ch: 19329'. find src -name '*.js' | wc -l independently gives 1660."
+   },
+   {
+    "finding": "X4 JSX segments through the estate's own tests/helpers/jsxLiteralWalk.js: 12,809 segments in 525 of 527 files, 0 parse failures",
+    "verdict": "CONFIRMED",
+    "measured": "12,809 segments / 525 of 527 / 0 failures (published identical)",
+    "note": "node x7-jsx.mjs printed '# jsx files: 527 parse failures: 0 files with prose: 525 segments >=12ch: 12809'."
+   },
+   {
+    "finding": "X5 annex extractor per-annex table: 9,327 rows, 106 law, 106 short, 9,115 prose, 4,289 wired (47.1%), with RECEIPT_POOLS_DOSSIER_STATE.md wired = 2,024 (99.3%)",
+    "verdict": "PARTLY",
+    "measured": "9,327 / 106 / 106 / 9,115 / 4,289 (47.1%) all exact on 12 of 13 rows; DOSSIER_STATE wired measured 2,030 (99.6%), published 2,024 (99.3%)",
+    "note": "node x6-annex.mjs reproduced every other cell exactly at BOTH shas (docs/content is byte-identical between them, so the tree cannot explain it). The published rows sum to 4,283, not the 4,289 its own TOTAL states; my rows sum to 4,289 — so the DOSSIER_STATE cell is a transcription slip and the TOTAL is the correct figure."
+   },
+   {
+    "finding": "Register roster: 34,508 admitted / 41,369 rejected; 30,232 across nineteen registers plus a 4,276-row control; each column's n (R1 2262 … A-U 4626, A-W 4276)",
+    "verdict": "CONFIRMED",
+    "measured": "34,508 admitted / 41,369 rejected; 34,508 − 4,276 = 30,232; every one of the twenty column counts identical",
+    "note": "node registers.mjs . corpus.json printed 'TOTAL admitted: 34508 rejected: 41369' with R1 2262, R2 467, R3 1212, R4 133, R4b 50, R5 373, R6 1659, R7 2169, R8 1738, R9 619, R10 505, R11 216, R12 108, R14 561, R15 3883, R16 2685, R17 1293, R18 5673, A-U 4626, A-W 4276. At HEAD the total is 34,527, the +19 landing only in R15 (+11), R16 (+3), R18 (+5)."
+   },
+   {
+    "finding": "§2 roster file counts, in particular R16 = 361 files",
+    "verdict": "REFUTED",
+    "measured": "R16 = 354 files (published 361); every other roster file count exact (R15 233, R18 546, R3 12, R8 17, R9 4, …)",
+    "note": "registers.mjs printed files=354 for R16 at the published read sha. §3's own metric table in the same document also prints 354 on the 'files' row, so PROBE_ALL contradicts itself and §2's cell is the wrong one. Not a tree artefact: .jsx file count is 527 at both shas."
+   },
+   {
+    "finding": "§0 trap 2 receipt — terminal-stop share R8 0.469, R15 0.585, R16 0.604, R10 0.634",
+    "verdict": "PARTLY",
+    "measured": "R8 0.469 and R10 0.634 exact; R15 measured 0.588 (published 0.585), R16 measured 0.615 (published 0.604)",
+    "note": "node -e over report.json at the published sha. §3's table in the same document prints 0.588 and 0.615, matching my measurement — the §0 trap row is stale relative to §3."
+   },
+   {
+    "finding": "§0 trap 3 receipt — '9,700 rows arrived through a function (fn-array 8,021 + fn-template 1,701)'",
+    "verdict": "REFUTED",
+    "measured": "8,021 + 1,701 = 9,722 raw walk leaves; 2,511 admitted corpus rows carry an fn-* shape. Neither figure is 9,700",
+    "note": "The two components reproduce exactly; only the headline sum is wrong. Counted from walk.json shape tags and from corpus.json (fn-array 1,234 + fn-template 1,222 + fn-plain 55 = 2,511 admitted)."
+   },
+   {
+    "finding": "§0 trap 4 receipt — '*News.js is a router glob… only sovereigntyNews.js is in R3'; R3 = 12 files",
+    "verdict": "PARTLY",
+    "measured": "R3 = 12 files exact, but TWO *News.js files are in R3: sovereigntyNews.js and generosityNews.js",
+    "note": "Listed the distinct files of R3 from corpus.json. §2's own roster also names generosityNews.js as an R3 home, so the trap row's qualitative claim contradicts the document. Separately, R3's roster names warReceiptPools.js and sovereigntyReceiptPools.js but zero rows carry those filenames — 470 of warReceiptPools' 477 admissible leaves are re-exported through eventProse.js and dedup (register+norm, first-wins) credits them there; no prose is lost, the attribution is barrel-order-dependent."
+   },
+   {
+    "finding": "§0 traps 1, 5, 6 — R17 = 1,293 phrases with terminal-stop 0.000; build artifacts and certification rows excluded",
+    "verdict": "CONFIRMED",
+    "measured": "R17 1,293 rows, terminalStopShare 0; zero corpus rows matching compendium/generated, copy/index.js, copy/pseudo.js, sampleDossier, supabase/, certification, *.test.js or __mocks__",
+    "note": "Set-membership check over corpus.json's 1,103 distinct files."
+   },
+   {
+    "finding": "§3's metric table (50 rows × 21 register columns) and §8's cross-check against the published house rates",
+    "verdict": "CONFIRMED",
+    "measured": "Regenerated report.table.md is BYTE-IDENTICAL to the published §3 table (diff empty but for the trailing blank line); crosscheck reproduces 2030/688/11, wps 16.8/7.2/7/17/26/0.130, semicolons 385 & 168, causal >30w 0.491, pools 708, uniform 0.576 (408/708), repeated opener 0.112 (79/708), already 26, kind/sort of 29, nobody 512, quiet 59",
+    "note": "node run.mjs . report then diff against sed -n '214,264p' PROBE_ALL.md. §8's 'rather than = 288' is also exact: 288 is the VARIANT count (occurrences are 294, which is what crosscheck.mjs prints beside the label). mechanical.mjs printed TOTAL 53,662 / 153 em / 0 excl and bible.mjs 67 exemplars / 42 anti — all exact."
+   },
+   {
+    "finding": "§1 X2's claim that the 145 unimportable modules hold no missed prose because 'X5 covers them anyway'",
+    "verdict": "REFUTED",
+    "measured": "71 admitted reader-facing strings live at MODULE level inside those 145 modules and belong to no register: 38 in src/lib/emailTemplates.js, 18 in src/components/new/dailyLifeLogic.js, 5 foundersHall.js, 3 emailPreferences.js, 7 elsewhere",
+    "note": "X3 admits a literal only when its nearest enclosing scope is a FUNCTION, so a module-level table in a module X2 could not import is seen by neither. emailTemplates.js is `export const TEMPLATES = Object.freeze({…})` — the subject lines and bodies of the transactional email the reader receives. dailyLifeLogic.js holds module-level TERRAIN_CONTEXT / ROUTE_CONTEXT / DEFENSE_CONTEXT paragraphs read by tabs/DailyLifeTab.jsx. Measured with the probe's own admit() and norm(), subtracting corpus.json."
+   },
+   {
+    "finding": "The report's title claim — 'every reader-facing prose home in the estate, measured by register'",
+    "verdict": "REFUTED",
+    "measured": "364 admitted rows across 18 shipped files outside src/**/*.{js,jsx} and docs/content/RECEIPT_POOLS_*.md, carrying 7 em dashes and 3 exclamation points; conservative house-authored subset 47 rows in 10 files",
+    "note": "Scored with the probe's own admit()/norm(). House-authored: mcp-server/src/tools.js 17, public/status.html 12, api/{_galleryMeta,_metaShell,gallery-meta}.js 8, mcp-server/{server.js,bin/cli.js} 4, foundry-module/scripts 4, index.html 2. Sharpest: index.html og:title/twitter:title 'SettlementForge — Forge a settlement worth running a campaign in.' (an em dash in the most-seen string in the product) and mcp-server/src/tools.js:185 answer: 'The realm is at peace — no public siege is recorded in the ledger.' — Herald voice, Herald subject matter, in no register and invisible to the audit that reports 153 em dashes corpus-wide. §0's narrower phrasing ('every reader-facing home the inventory named') survives; the title's stronger claim does not."
+   },
+   {
+    "finding": "My own hypothesis: in-function string literals inside .jsx escape every register (X3 parses only src/**/*.js)",
+    "verdict": "REFUTED",
+    "measured": "0 admitted rows. All 527 .jsx parsed with espree (0 failures); every function-scoped Literal/TemplateLiteral passing admit() was already held by a register",
+    "note": "A negative control that strengthens the probe: the estate's own jsxLiteralWalk already covers them."
+   },
+   {
+    "finding": "My own hypothesis: src/**/*.js leaves in files matching no register regex are silently dropped (registers.mjs does `if (!R) continue`)",
+    "verdict": "REFUTED",
+    "measured": "0 leaves in 0 files. R15's file regex is literally /./ — a true catch-all",
+    "note": "A second negative control: nothing inside src/**/*.js escapes register assignment."
+   },
+   {
+    "finding": "Sha provenance — whether the published figures still hold on the tree I was given",
+    "verdict": "PARTLY",
+    "measured": "The dock is at fd36f0298, 18 src files ahead of the published read sha 6b80d1e8e. At HEAD: 34,527 admitted (not 34,508), 45,371 walk leaves, 19,342 inline literals, 12,819 jsx segments, 53,688 mechanical strings",
+    "note": "Every HEAD delta lands only in the three heterogeneous catch-alls (R15 +11, R16 +3, R18 +5 = +19) and traces to one added module, src/domain/display/warRemembrance.js, plus edits to HeraldRemembrance.jsx. The annex figures are unchanged because docs/content is untouched. The published figures are sha-bound and correct at their stated sha; I farmed 6b80d1e8e via git archive into scratch to remove the confound rather than call a false REFUTED. Dock verified untouched: git status --porcelain empty and HEAD unchanged after every run."
+   }
+  ],
+  "commandsRun": [
+   "cd .../laneOSR18 && git rev-parse HEAD  # fd36f0298b1ead15f2a80eff83dafb92114a7ea4",
+   "cd .../laneOSR18 && git status --porcelain | wc -l  # 0 (before and after every run)",
+   "cd .../laneOSR18 && git diff --stat 6b80d1e8e HEAD -- src docs/content tests/helpers",
+   "cd .../laneOSR18 && git diff --diff-filter=A --name-only 6b80d1e8e HEAD  # src/domain/display/warRemembrance.js + 8 test files",
+   "cd .../laneOSR18 && git archive 6b80d1e8e | tar -x -C $W/tree-6b80d1e8e   (farmed read-only copy; node_modules symlinked)",
+   "cp prose-research/probe-all/*.mjs $W/ and $W/old/   (shared artefact dir never written to)",
+   "cd $W/old && node x1-json-leaves.mjs $W/tree-6b80d1e8e json-leaves.json  # 2734 leaves / 786 pools",
+   "cd $W/old && node x2-walk.mjs $W/tree-6b80d1e8e walk.json  # 1621 modules / 145 failures / 45260 leaves",
+   "cd $W/old && node x5-inline.mjs $W/tree-6b80d1e8e inline.json  # 1660 files / 0 failures / 19329 literals",
+   "cd $W/old && node x7-jsx.mjs $W/tree-6b80d1e8e jsx.json  # 527 files / 0 failures / 525 with prose / 12809 segments",
+   "cd $W/old && node x6-annex.mjs $W/tree-6b80d1e8e annex.json walk.json inline.json jsx.json  # 9327/106/106/9115/4289",
+   "cd $W/old && node registers.mjs . corpus.json  # TOTAL admitted: 34508 rejected: 41369",
+   "cd $W/old && node bible.mjs $W/tree-6b80d1e8e bible.json  # 67 exemplars / 42 anti-corpus",
+   "cd $W/old && node mechanical.mjs . mechanical.json  # TOTAL 53662 / 153 em / 0 excl",
+   "cd $W/old && node run.mjs . report  # cols + outliers 284 + combined ranks",
+   "cd $W/old && node crosscheck.mjs  # every §8 row",
+   "sed -n '214,264p' PROBE_ALL.md > published.table.md && diff <(norm published.table.md) <(norm report.table.md)  # identical",
+   "cd $W && node x1-json-leaves.mjs/x2-walk.mjs/x5-inline.mjs/x7-jsx.mjs/x6-annex.mjs/registers.mjs/mechanical.mjs/run.mjs on the dock HEAD  # 34527 admitted, 45371 leaves, 53688 strings",
+   "node -e 'report.json metrics terminalStopShare for R17/R8/R15/R16/R10'  # 0 / 0.469 / 0.588 / 0.615 / 0.634",
+   "node -e 'corpus.json shape histogram'  # fn-array 1234 + fn-template 1222 + fn-plain 55 = 2511 admitted fn-* rows",
+   "node -e 'rather than occurrences vs variants over R1+R2'  # 294 occurrences / 288 variants",
+   "node -e 'walk.failures.json composition'  # 145 failures, 133 VITE_SUPABASE_*, 0 in the five prose dirs",
+   "node -e 'R3 distinct corpus files + warReceiptPools trace'  # 12 files; 470/477 admissible leaves credited to eventProse.js",
+   "cd $W/old && node jsx-inline-miss.mjs $W/tree-6b80d1e8e  # 527 parsed, 0 fails, 0 rows no register holds",
+   "cd $W/old && node --input-type=module -e 'pickReg over walk.json'  # 0 leaves in 0 files match no register; R15 regex is /./",
+   "cd $W/old && node failed-import-miss.mjs $W/tree-6b80d1e8e  # 145 modules scanned, 71 module-level admitted rows no register holds",
+   "cd $W/old && node miss-probe.mjs $W/tree-6b80d1e8e  # 364 admitted rows across 18 out-of-scope files, 7 em dashes, 3 exclamations",
+   "grep -n 'The realm is at peace' mcp-server/src/tools.js  # line 185, a returned answer value, not a comment",
+   "grep -n 'description|og:title' index.html  # lines 78-89, em dash in og:title and twitter:title"
+  ]
+ },
+ {
+  "family": "bible",
+  "verdicts": [
+   {
+    "finding": "§5 exemplar corpus: 67 exemplars / 42 anti-corpus, fingerprint wps mean 8.1 sd 6.9, p50 6, p90 17, 64.2% under eight words, segments/variant 1.00, semicolons 0, em dashes 0, exclamations 0, gloss tails 0, summarising second sentences 0, colons 0.119, parentheses 0.090",
+    "verdict": "CONFIRMED",
+    "measured": "67 / 42; source split 8/17/35/7; wps mean 8.1 sd 6.9 p50 6 p90 17 under8 0.642 over30 0.015; segsPerVariant 1; semicolon 0, glossTail 0, secondSentSummary 0, emDash 0, exclamation 0; colon 0.119, parenthesis 0.090 — every value exact",
+    "note": "`node bible.mjs <laneOSR18> bible.json`. docs/VOICE_AND_TONE.md is byte-identical between the probe's sha 6b80d1e8e and this tree's fd36f0298 (git diff --stat over that path is empty), so this is a like-for-like re-run."
+   },
+   {
+    "finding": "§5 AXIS B distances: R16 0.512, R15 0.650, R9 0.684 most bible-like; R2 2.263, R1 1.581, R6 1.421 least; R17 0.776, R11 0.777, A-U 1.176, R14 1.304, R4b 1.164",
+    "verdict": "CONFIRMED",
+    "measured": "R16 0.510, R15 0.648, R9 0.684, R18 0.754, R17 0.776, R11 0.777, R12 0.899, R7 0.909, R4 0.924, R10 0.970, R8 1.000, R3 1.029, R4b 1.164, A-U 1.176, R14 1.304, R5 1.391, R6 1.421, R1 1.581, R2 2.263",
+    "note": "`node registers.mjs`/`mechanical.mjs`/`run.mjs` over freshly re-extracted x1/x2/x3/x4/x6 artefacts. The only deltas (R16 −0.002, R15 −0.002, R5 −0.001) trace to the 18 src files that changed between 6b80d1e8e and HEAD; the driver table (R2 over30 0.491, wps 28.6, spv 1.135, semi 0.360, pet 0.713; field means 0.035/11.9/0.143/0.185; R1 gloss 0.066, rather 0.113, antithesis 0.139; R6 There-openers 0.110, semi 0.540, p10 19) is exact."
+   },
+   {
+    "finding": "The exemplar corpus is '67 sentences the bible SPEAKS rather than describes' (§5 heading), with the Don't/BEFORE halves 'kept separately as an anti-corpus, never mixed in'",
+    "verdict": "REFUTED",
+    "measured": "8 of the 67 (all of B1) are third-person META-DESCRIPTION of the archivist, not the voice speaking; and 2 of the 67 are terms the bible EXPLICITLY BANS — \"live engine,\" and \"feature flag,\" scraped out of §5 doctrine line 2 ('Never name the machinery… No \"live engine,\" \"payload,\" \"overlay,\" \"feature flag,\" \"placements.\"'). A further 8 rows have no terminal stop and 3 carry the document's own placeholder or a truncation ('This destroys X.', 'X live sieges across X settlements.', 'Something important (a resource, a prisoner) falls...')",
+    "note": "`node refute-bible.mjs`. B4b takes every quoted span in a numbered §5 line, so prohibitions enter as positives; only those two of the five banned terms got in because add()'s `length >= 12` floor admitted the two longest. The 8 B1 rows carry the published headline fingerprint from 6.5 to 8.1 words/segment — the '8.1' is inflated ~25% by rows the corpus's own definition excludes."
+   },
+   {
+    "finding": "§5's interpretive claim (labelled PLAUSIBLE by the lane): the chrome registers top Axis B *because the bible's exemplar set is itself chrome*",
+    "verdict": "PARTLY",
+    "measured": "Composition now measured, not reasoned: by the bible's own §4 surface names, 48/67 exemplars (71.6%) come from chrome surfaces and only 9 from DATA:*/dossier-content/settlement-detail. But rebuilding the exemplar set from diegetic surfaces only (n=9) moves R1 1.581 → 1.880 and R2 2.263 → 2.498 — further from the bible, not nearer; R16 leaves the podium and R4 (0.398) / R17 (0.493) take it. Spearman rho(published order, diegetic-only order) = 0.567",
+    "note": "`node refute-bible.mjs`. So the chrome hypothesis explains the TOP of Axis B and explains nothing about the bottom: R1/R2/R6's distance is a property of those registers and is stable under all six construction variants I ran. The lane's PLAUSIBLE label should be upgraded for the top half and withdrawn for the bottom half."
+   },
+   {
+    "finding": "§5's headline: 'The three most bible-like: R16 (JSX chrome), R15 (src long tail), R9 (the copy registry). The three least: R2, R1, R6'",
+    "verdict": "PARTLY",
+    "measured": "Top 3 is not robust. Dropping the 8 meta-description rows → R16/R9/R17 (R15 off). Dropping the 8 no-terminal-stop fragments → R15/R17/R9 (R16 off). Pillars-only → R17/R4/R9. Only R9 survives in the top 3 of all six variants. 400-resample bootstrap of the 67 exemplars: P(top 3) R15 80.8%, R16 64.3%, R9 43.5%, R17 38.3%, R18 30.0%, R11 29.8% — a four-way near-tie for the third slot. Bottom 3: R2 100.0%, R1 95.3%, R6 41.5%, but R5 38.5% and R14 24.5%",
+    "note": "`node refute-bible.mjs` + `node boot.mjs` (seeded LCG, 400 resamples). The defensible statement is 'R2 and R1 are the two least bible-like registers (certain); R16/R15/R9 are among the most, third slot undetermined; R6's third-from-last place is a coin flip against R5.'"
+   },
+   {
+    "finding": "Axis B is a distance over 'seventeen comparable metrics' — i.e. seventeen independent, unit-comparable axes",
+    "verdict": "REFUTED",
+    "measured": "Five of the seventeen are one construct (words/segment mean, sd, share<8w, share>30w, segments/variant). Spearman rho between the published 17-metric order and a LENGTH-FAMILY-ONLY order is 0.796; against the 12 non-length metrics 0.977. Separately, 5 of the 17 rest on <=1 observation in n=67: gloss tail, 2nd-sentence summary, semicolon and AI-tells are exact zeros, share>30w is 1/67",
+    "note": "`node refute-bible.mjs`, `node boot.mjs`. Axis B is ~80% rank-explained by sentence length alone; its effective dimensionality is nearer 13 than 17. And four of its distance poles encode 'n was too small to see one' (95% upper bound on a 0/67 rate is ~0.045) while being treated as the bible's fixed value — the report's own n=67 caveat is stated in the fingerprint paragraph and then not carried into the ranking."
+   },
+   {
+    "finding": "Axis B distances are comparable across registers of different unit (the instrument declares R4 and R17 unit:'phrase' and R17's terminal-stop share 0.000, then ranks them on the same axis)",
+    "verdict": "REFUTED",
+    "measured": "R4 and R17 are scored against the bible on five sentence-length metrics plus segments/variant, all meaningless for a sub-sentence phrase. R17 ranks 5th (0.776) on the published axis and 1st–2nd under the diegetic-exemplar variant purely because phrases are short like slogans. Their presence in the z-pool also moves every other column: removing R4/R17 shifts R16 0.510 → 0.530, R15 0.648 → 0.666, R9 0.684 → 0.707, R2 2.263 → 2.305",
+    "note": "`node refute-bible.mjs`. §0's trap-1 row is right that a sentence filter would score R17 zero, but the cure (admit phrases, publish terminal-stop share) was not carried into Axis B, which silently mixes the two units in one z-pool. The rank order survives the removal; the published numbers do not."
+   },
+   {
+    "finding": "§5 AXIS A is 'mechanical compliance with §3's hard rules', and the deep diegetic registers 'hold the bible's hard rules perfectly (breach 0.000)'",
+    "verdict": "PARTLY",
+    "measured": "breachRate sums four things (em dash, exclamation, emphasis caps, digits) plus a thePCs column. §3 also carries an en-dash prohibition, a numerals rule, a contractions rule, a 13-row terminology registry, a verb-agency rule and the real/true rule. The en-dash rule IS computed by mechanical.mjs (field `enDashConnector`) and printed nowhere: 65 breaches — R15 53, R16 7, R18 4, R8 1",
+    "note": "`node mechanical.mjs` then reading mechanical.json; cross-checked by `node refute-mech.mjs`. The claim survives narrowly for R1/R2/R6 (0 en dashes there too), but R16 — §5's #1 most-bible-like register, headlined as 'ZERO em dashes in JSX… the debt is burned down' — carries 7 unreported breaches of the third punctuation rule in the same §3 section ('A–Z index: SettlementForge Compendium', 'migrations 036–040', 'scored 0–1:', 'By invitation, I–XXX')."
+   },
+   {
+    "finding": "§3's terminology & verb registry is enforced/held (implied by 'the bible's hard rules they hold perfectly')",
+    "verdict": "REFUTED",
+    "measured": "None of the 13 registry rows is measured by Axis A. Independent count over the same row set: 'DM-private' as standalone jargon 5 (all R16, ShareToGallery.jsx / GalleryDetail.jsx), 'publicly visible'/'public-safe' 4 (all R16), 'profit enormously' 3 (R8 + R15), 'AI overlay'/'AI-narrated' 11, 'unlock/push to' 36 (R9), 'the PCs' 1, en dash as connector 65",
+    "note": "`node refute-mech.mjs`. Two of these are NOT breaches on inspection and I say so: the 7 'AI-generated' hits are all the anti-AI claim §5.2 expressly sanctions, and the 72 'supports/enables/attracts' hits fall under a stated *preference* ('prefer concrete civic verbs'), not a hard rule. The DM-private, public-safe and profit-enormously hits are registry rows with a 'Not this' column."
+   },
+   {
+    "finding": "§5: 'ZERO exclamation points in the entire reader-facing corpus — all 53,662 prose-shaped strings'",
+    "verdict": "CONFIRMED",
+    "measured": "53,688 prose-shaped strings at this sha, 0 exclamations, 153 em dashes — and across all 86,000 extracted strings only 8 contain '!', every one a regex source (e.g. `(?<![.\\w])blockadeBypass\\s*,`). Prose-shaped exclamation strings: 0",
+    "note": "`node mechanical.mjs` + `node refute-mech.mjs`. I tested the obvious circularity and it is empty here: NOISE rejects any string starting with a non-letter, so the bible's own alarm-prefix example '! Missing: {name}' would be invisible to the screen — but no such string exists in the tree, so the claim is not an artefact of its own filter."
+   },
+   {
+    "finding": "The wired-annex figure — 4,289 wired / 9,115 prose = 47.1% (and the brief's '46.4%')",
+    "verdict": "CONFIRMED",
+    "measured": "x6-annex re-run prints 9327 rows / 106 law / 106 short / 9115 prose / 4289 wired / 47.1% — every cell of the TOTAL row exact. An INDEPENDENT raw-byte scan of 2,191 src files (32.0 MB) with a punctuation-blind slot-masked word-window index — no module import, no AST, no JSX walker — returns 4,451 distinct wired texts and contains x6's 4,289 as a strict subset (0 rows wired by x6 but not by the raw scan). After auditing the 168 surplus rows (19 slot-only false positives, 51 weak 3–5-word, 98 substantive), the defensible independent range is 4,289–4,387 wired = 47.1%–48.1%, authored-unwired 4,826–4,728",
+    "note": "`node x6-annex.mjs …` and `node refute-annex.mjs <tree> <work> src`. Separately: the brief's '46.4%' is not PROBE-ALL's figure at all — it is PROSE_INVENTORY.md §3 (wired.mjs), 4,280/9,221 = 46.42%, over a different denominator and an export-only src index. That table IS internally consistent (its column sums to 4,280). Both reproduce; they are not the same measurement."
+   },
+   {
+    "finding": "§1's X5 per-annex wiring table (RECEIPT_POOLS_DOSSIER_STATE.md 2024 wired, 99.3%; RECEIPT_POOLS_CAUSAL.md 8 wired, 1.1%)",
+    "verdict": "REFUTED",
+    "measured": "The table does not add up: its wired column sums to 4,283 while its own TOTAL row says 4,289. The stale cell is DOSSIER_STATE — x6-annex prints 2030 / 99.6% and my independent raw scan also returns 2030. CAUSAL is worse: x6 says 8 (1.1%), the raw scan finds 129 (17.2%), and the cause is structural — 101 annex rows carry an un-stripped '— dir·SLOT' metadata tail (RECEIPT_POOLS_CAUSAL.md:3712 is ``1. `after the breach of` — back·N`` vs heraldCausalGrammar.js:244 `c('after the breach of', 'back', 'N')`), and 13 rows are line-wrapped and truncated by the `^(\\d+)\\. (.+)$` grammar (RECEIPT_POOLS_CAUSAL.md:4057 vs the complete sentence at heraldIntegrity.js:69)",
+    "note": "`node x6-annex.mjs`, `node refute-annex.mjs`, `node wrapcount.mjs`, plus git verification that no file under src/data/dossierStateProse/ is in the 18-file diff between 6b80d1e8e and HEAD — so 2024 is not sha drift, it is PROSE_INVENTORY's figure re-based onto the new 2039 denominator and pasted in. Consequence for the wave: RECEIPT_POOLS_CAUSAL.md is NOT the 1.1%-wired orphan §1 reports — its connective grammar and provenance sentences are live in heraldCausalGrammar.js and heraldIntegrity.js, and rewriting it as unwired text would break wired reader surfaces. The 13 truncated rows are also the text every A-U/A-W style metric in §3–§6 was computed on."
+   }
+  ],
+  "commandsRun": [
+   "cd <laneOSR18> && git rev-parse HEAD  → fd36f0298b1ead15f2a80eff83dafb92114a7ea4",
+   "git status --porcelain | wc -l  → 0 (before and after the whole run; nothing written into the read-only tree)",
+   "git diff --stat 6b80d1e8e HEAD -- docs/VOICE_AND_TONE.md docs/content/  → EMPTY (bible + annexes byte-identical at the probe's sha)",
+   "git diff --name-only 6b80d1e8e HEAD | grep '^src/'  → 18 files, none under src/data/dossierStateProse/",
+   "node bible.mjs <laneOSR18> bible.json  → 67 exemplars {B1:8,B2:17,B3/B4:35,B4b:7} / 42 anti-corpus; wps mean 8.1 sd 6.9 p50 6 p90 17 under8 0.642; semicolon/emDash/exclamation/glossTail/secondSentSummary all 0; colon 0.119 parenthesis 0.090",
+   "node x2-walk.mjs <laneOSR18> walk.json  → 1,622 modules, 145 import failures, 45,371 leaves (published 45,260)",
+   "node x5-inline.mjs <laneOSR18> inline.json  → 19,342 (published 19,329)",
+   "node x7-jsx.mjs <laneOSR18> jsx.json  → 525 files, 12,819 segments (published 12,809)",
+   "node x1-json-leaves.mjs <laneOSR18> json-leaves.json  → 2,734 leaves / 786 pools (exact)",
+   "node x6-annex.mjs <laneOSR18> annex.json walk.json inline.json jsx.json  → TOTAL 9327 rows / 106 law / 106 short / 9115 prose / 4289 wired / 47.1%; DOSSIER_STATE 2030 (99.6) not the published 2024 (99.3)",
+   "node registers.mjs <work> corpus.json  → A-U 4626, A-W 4276, R1 2262, R2 467, R3 1212, R4 133, R4b 50, R5 373, R6 1659, R7 2169, R8 1738, R9 619, R10 505, R11 216, R12 108, R14 561, R17 1293 all EXACT; R15 3894 R16 2688 R18 5678 (+11/+3/+5 sha drift); TOTAL 34,527 admitted",
+   "node mechanical.mjs <work> mechanical.json  → 53,688 prose strings, 153 em dashes, 0 exclamations, R16 em 0 over 5,445 strings, caps 31 R16 + 2 A-U, 'the PCs' 1",
+   "node run.mjs <work> report  → styleRank R16 0.510 · R15 0.648 · R9 0.684 · R18 0.754 · R17 0.776 · R11 0.777 · R12 0.899 · R7 0.909 · R4 0.924 · R10 0.970 · R8 1.000 · R3 1.029 · R4b 1.164 · A-U 1.176 · R14 1.304 · R5 1.391 · R6 1.421 · R1 1.581 · R2 2.263",
+   "node -e '…report.json…'  → R2 over30 0.491 wps 28.6 spv 1.135 semi 0.360 pet 0.713; R1 gloss 0.066 rather 0.113 antithesis 0.139; R6 thereIs 0.110 semi 0.540 p10 19; field means over30 0.035 wps 11.905 semi 0.143 pet 0.185 — all exact",
+   "node refute-mech.mjs <work>  → EN-DASH CONNECTORS 65 (R15 53, R16 7, R18 4, R8 1) computed by mechanical.mjs and printed nowhere in §5; rows containing '!' = 8, all regex sources, prose-shaped = 0; §3 registry: DM-private 5, publicly-visible/public-safe 4, profit-enormously 3, AI-overlay 11, unlock 36, the-PCs 1, AI-generated 7 (sanctioned)",
+   "node refute-bible.mjs <laneOSR18> <work>  → surfaces 48/67 chrome (71.6%) vs 9 diegetic; 2 BANNED-term exemplars ('live engine,', 'feature flag,'); 8 no-terminal-stop; 3 placeholder/truncated; V1 top3 R16/R9/R17, V3 top3 R15/R17/R9, V5 top3 R4/R17/R9; rho(17-metric, length-only)=0.796, rho(17-metric, non-length)=0.977, rho(published, V5)=0.567; R4/R17 removed from pool → R16 0.530 R15 0.666 R9 0.707 R2 2.305",
+   "node boot.mjs <work>  → 4 exact-zero + 1 single-observation metrics of the 17; 400-resample bootstrap P(top3) R15 80.8% R16 64.3% R9 43.5% R17 38.3% R18 30.0% R11 29.8%; P(bottom3) R2 100.0% R1 95.3% R6 41.5% R5 38.5% R14 24.5%",
+   "node refute-annex.mjs <laneOSR18> <work> src  → 2,191 files / 32.0MB raw-byte scan; 9,115 rows re-parsed; wired 4,451 distinct (4,457 hits) = 48.9%; WIRED BY x6 BUT NOT BY RAW SCAN = 0 (strict superset); surplus 168 = 19 false positives + 51 weak + 98 substantive; per-annex CAUSAL 8→129, LEGACY 1214→1241, DOSSIER_STATE 2030→2030, WAR 306→307; defensible range 4,289–4,387 (47.1%–48.1%)",
+   "node wrapcount.mjs <laneOSR18>  → 9,221 variant rows; 13 line-wrapped and truncated by the row grammar (11 CAUSAL, 2 DOSSIER_STATE); 101 rows carrying an un-stripped '— dir·SLOT' tail",
+   "grep -n 'after the breach of' docs/content/RECEIPT_POOLS_CAUSAL.md → 3712; grep -n 'after the breach of' src/domain/display/heraldCausalGrammar.js → 244: c('after the breach of', 'back', 'N')",
+   "grep -n 'This did not spring up' docs/content/RECEIPT_POOLS_CAUSAL.md → 4057 (wrapped); src/domain/display/heraldIntegrity.js → 69 (complete sentence)",
+   "python3 -c 'sum([2024,1214,151,306,8,5,0,2,9,462,86,0,16])' → 4283 vs published TOTAL 4289; inventory column sums to 4280 = its own TOTAL; 4280/9221=46.42%, 4289/9115=47.05%"
+  ]
+ }
+]

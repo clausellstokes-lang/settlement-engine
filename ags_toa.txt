@@ -1,0 +1,525 @@
+ 
+ Game Mechanics and Narrative as Symbiotic, Co-Constructive Elements in Tomb of Annihilation | Analog Game Studies 
+ Skip to content 
+ Analog Game Studies 
+ Search 
+ Primary Menu 
+ Home 
+ Catalog 
+ Volume I 
+ Vol. I, No. I (August 2014) 
+ Volume I, Issue II 
+ Vol. I, No. III (October 2014) 
+ Volume I, Issue IV 
+ Volume I, Issue V 
+ Volume II 
+ Analog Players, Analog Space: Video Gaming Beyond the Digital 
+ Volume II, Issue II 
+ Volume II, Issue III 
+ Volume II, Issue IV 
+ Vol. II, No. V (July 2015) 
+ Volume II, Issue VI 
+ Vol. II, No. VII (November 2015) 
+ Volume III 
+ Vol. III, No. I (January 2016) 
+ Volume III, Issue II 
+ Volume III, Issue III 
+ Volume III, Issue IV 
+ Volume III, Issue V 
+ 2016 Role-Playing Game Summit 
+ Volume IV 
+ Vol. IV, No. I (January 2017) 
+ Volume IV, Issue II 
+ Vol. IV, No. III (May 2017) 
+ Vol. IV, No. IV (July 2017) 
+ Volume IV, Issue V 
+ Volume V 
+ Vol. V, No. I (March 2018) 
+ Volume V, Issue II 
+ Vol. V, No. III (September 2018) 
+ Vol. V, No. IV (December 2018) 
+ Volume VI 
+ Volume VI, Issue I 
+ Volume VI, Issue II 
+ Vol. VI, No. III (September 2019) 
+ 2019 Role-Playing Game Summit 
+ Volume VII 
+ Special Issue: Analog Games and Translation 
+ Vol. VII, No. II (December 2020) 
+ Volume VIII 
+ Vol. VIII, No. I (March 2021) 
+ Volume VIII, Issue II 
+ Special Issue: The Fiend Folio 
+ Volume IX 
+ Volume IX, Issue I 
+ Volume IX, Issue II 
+ Volume IX, Issue III 
+ Volume IX, Issue IV 
+ Volume X 
+ Volume X, Issue I 
+ Volume X, Issue II 
+ Volume XI 
+ Volume XI, Issue I 
+ Volume XI, Issue II 
+ Special Issue: Perspectives on RPG Studies from Latin-American Scholars 
+ Vol. XI, No. IV (December 2024) 
+ Volume XII 
+ Volume XII, Issue I 
+ Special Issue: Queer Analog Game Studies 
+ Volume XII, Issue III 
+ Volume XII, Issue IV 
+ Special Issues 
+ 2016 Role-Playing Game Summit 
+ 2019 Role-Playing Game Summit 
+ Special Issue: Analog Games and Translation 
+ Analog Players, Analog Space: Video Gaming Beyond the Digital 
+ Special Issue: The Fiend Folio 
+ Special Issue: Perspectives on RPG Studies from Latin-American Scholars 
+ Special Issue: Queer Analog Game Studies 
+ In Print 
+ Generation Analog 
+ Generation Analog 2026 “GREEN” Program 
+ Generation Analog 2026 “GREEN” CFP 
+ Past Conferences 
+ The Team 
+ Editorial Board 
+ Authors (Volume 12) 
+ Authors (Volume 11) 
+ Authors (Volume 10) 
+ Authors (Volume 9) 
+ Authors (Volume 8) 
+ Authors (Volume 7) 
+ Authors (Volume 6) 
+ Authors (Volume 5) 
+ Authors (Volume 4) 
+ Authors (Volume 3) 
+ Authors (Volume 2) 
+ Authors (Volume 1) 
+ About 
+ Analog Game Studies 101 
+ Submit 
+ Special Issues 
+ Calls for Participation 
+ Contact 
+ Search for: 
+ Tabletop Role-Playing Games 
+ Game Mechanics and Narrative as Symbiotic, Co-Constructive Elements in Tomb of Annihilation
+ March 19, 2023 Mark Hines 
+ This essay examines a recent adventure module for Dungeons and Dragons Fifth Edition which employs older game mechanics and thematically overlaps with proponents of the OSR, or Old School Renaissance, 1 who also espouse fascist or GamerGate-like rhetoric. This adventure, Tomb of Annihilation, takes mechanical, narrative, and setting inspiration from earlier D&D adventures, presenting players with an adventure that is both challenging and player driven. This piece contributes to scholarship that identifies gameplay mechanics as constructs and vital contributors to storytelling in game worlds. Contrary to popular discourse which often ascribes game mechanics a moral or political neutrality, I argue game mechanics are often co-constructive with games’ narratives, settings, and aesthetics. My main tool in arguing this point is a rhetorical analysis of “alt-right” actors in the TTRPG sphere, aligning such rhetoric with Wan-Chaun’s concept of an “ethnosphere” and Whitaker’s analysis of White innocence and neutrality. The first portion of this essay will deal with online communities that encompass players and critics of TTRPGs, most notably those that prefer the original gameplay of D&D in its original, 1980s, form. In aligning the discourses of this community with corresponding political and cultural moments, most notably Gamergate and policies of the Trump administration, I argue that political neutrality is not a desirable or possible goal for games and the systems which uphold them. After examining the cultural context of the adventure, I will examine Tomb of Annihilation itself, the racist, colonialist tropes it employs, and its gameplay mechanics. In identifying the interplay between community discourse, gameplay mechanics, and explicit adventure setting and plot, I locate the lingering, rippling effects of Gamergate for both creators and communities.
+ Into the OSR 
+ A brief snippet of discourse surrounding the political stakes of D&D gameplay illustrates how creators and players read the importance of fantasy narratives while introducing one of the primary, reactionary members of the Old School Renaissance. In response to the Trump administration’s family separation policy of 2018, Dungeons and Dragons lead designer Jeremy Crawford tweeted, “If a kingdom in D&D was forcibly separating children from their parents and putting the kids in detention centers, the heroes would do everything in their power to reunite those families.” 2 In response to perceived “virtue signaling” and “politicization” of the game, Kasimir Urbanski, a.k.a. The RPGPundit, compared Jeremy Crawford and others at Wizards of the Coast to the “greedy merchants” and “fanatical cultists out to destroy civilization” often found in game worlds. 3 Urbanski would continue to insinuate that Crawford’s tweet reflected a systemic flaw in the culture of producing Dungeons and Dragons products, and he followed by asserting the need for “a #DnDGate.”
+ Urbanski is a TTRPG blogger and “defender of RPGs” whose rhetoric mirrors that of the alt-right. As an example, one of his recent posts features him happily declaring that speculation about an LGBTQ pride parade in the D&D city of Waterdeep implies that there are, canonically, “gangs of roving homophobes in Waterdeep.” 4 His hashtag’s reference to Gamergate—an online campaign of “misogynists, anti-feminists, trolls, people convinced they’re being manipulated by a left-leaning and/or corrupt press, and traditionalists who just don’t want their games to change” 5 —associates the stated and implicit goals of that movement on to the tabletop role-playing game (TTRPG) community. Scholars have linked Gamergate and its believers to the burgeoning “alt-right,” as young, White “gamers” increasingly radicalized political spheres through similar rhetoric of sexism, racism, and anti-SJWs. 6 7 8 Urbanski and others’ attempts to capitalize on the political and cultural capital in the wake of Gamergate fell flat, the hashtag being coopted by popular, left-leaning members of the TTRPG community to discuss aesthetically pleasing entrances to dungeons.
+ “tomb-raider-2” by Jon Evans on Flickr. CC BY 2.0. 
+ Urbanski, along with many others who levy criticism at perceived over-politicization and increasing “wokeness” of TTRPGs, subscribe to a movement in the TTRPG community known as the “Old School Renaissance” or OSR. While early D&D editions heavily influence OSR games, OSR encapsulates many different TTRPGs. An OSR TTRPG might focus on prolonged sessions exploring a dungeon, wherein players are more challenged and threatened by fatal traps than monsters. If they do encounter monsters, the odds will be heavily stacked against them, encouraging player ingenuity and creativity that might result in more intelligent play than characters would be capable. Such design enhances the feeling that the game is artificially crafted, testing the players rather than their characters.
+ OSR games are not inherently synonymous with the anti-feminist, anti-liberal, rhetoric described earlier, but a vocal minority of the community has created controversial impressions inside and outside the community. For reference, I am broadly including such figures here as Urbanski, who has promoted famous antifeminist Youtuber Sargon of Akkad. I am also including James Desborough, writer of the infamous “In Defence of Rape” article and publisher of “#GamerGate The Card Game,” Venger Satanis, author of the satiric blog “Your Dungeon is Racist,” Varg Vikernes, writer of the “really fucking racist” 9 TTRPG Myfarog , and Alexander Macris, former CEO of Milo Inc., with the mission statement “making the lives of journalists, professors, politicians, feminists, Black Lives Matter activists, and other professional victims a living hell.” 10 This minority shares features and strategies with many other right-wing communities on the internet: decentralized, dynamic, and rhetorically savvy. Although some see the older style of play as intrinsically linked to the survival of “free speech” as they conceptualize it, many others in the community have ostracized proponents of “anti-political” play. Indeed, individuals who often promote such ideas, like RPGPundit, have been largely shunned from the larger OSR community. His failure to generate steam for #DnDGate is a testament to the degree to which individuals like him are seen as outliers, though certainly still dangerous. On the other hand, in the words of James Desborough, Gamergate still “won, broadly…[leaving] a lot of invested and activated people though, who are now acting as watchdogs and putting on blast anything nefarious or stupid.” 11 The focus of this essay centers on these ripples, the rhetoric and goals of Gamergate which were repelled by the OSR community, as well as the connection between the ideal gameplay mechanics of OSR and the ideological underpinnings of the #DnDGate crowd. Using this as our entrance point, we can develop a meaningful difference between types of mechanics that influence gameplay in race-conscious ways.
+ The assumption and given narrative which underlies this movements is that, broadly speaking, feminists, BIPOC, leftists, and “SJWs” are using censorship and propaganda to attack First Amendment rights. Such attacks, they argue, constitute a fragment of a larger movement aimed at destroying “Western Civilization” as we know it. This supposed fear draws roots from the rhetoric of conservative writers in the 1960s as they reacted to progressive and decolonial movements in the U.S. and in Africa. 12 This narrative further aligns with research that points out how conservative writers and Youtubers reframe progressive cultural movements as attacks against “white culture,” “male culture,” or other groups that have held historic power over others. 13 . As put by The Alt-Right DM, an anonymous blogger, “Lose the game, lose the culture. Lose the culture, lose western civilization” and “Strike a blow for Christendom. Run any version of D&D published before 1989.” 14 Though many conservative commentators link older cultural artifacts to the fate of “Western Civilization,” The Alt-Right DM argues for entire gaming systems being representative of “Western Civilization” or “Christendom,” especially considering the cultural and moral panic surrounding Dungeons and Dragons in the 1980s in the United States.
+ The Alt-Right DM’s statement is strongly indicative of the larger rhetoric at play, specifically evoking Wan-Chuan’s term “ethnosphere”. In the Alt-Right DM’s syllogism, they are arguing for an “ethnosphere,” in which race, culture, heritage, ethnicity, and homeland are figured synonymous and codependent. 15 This statement taken alongside Urbanski’s earlier tweets lends credence to analyses of White fragility and perceived victimhood. By positioning themselves, their game, and their culture as victims of a malicious cultural or political offensive, White nationalists, “[reify] a connection between whiteness and suffering.” 16 Open White nationalists position their identitarian movements as neutral or reactionary, such that “any movement toward sharing status with others—must be the fault of others”. 17 These dynamics wherein White players are assumed as the neutral audience has been directly challenged by Wizard’s changes to racial worldbuilding in recent manuals. In positioning racial and moral alignment changes to Dungeons and Dragons Fifth Edition as opposed to radical conservative ideals of “Western Civilization,” the stage is set for Tomb of Annihilation , an adventure which both traffics in colonial narratives and old-school game mechanics. This particular combination proves that right-wing complaints in OSR and other fandoms have much more to do with racial justice, feminism, and social-justice-minded players than they do with a specific game mechanics.
+ A Threatening Setting 
+ Tomb of Annihilation draws heavily from the famous Tomb of Horrors module, written by D&D co-creator Gary Gygax. Authors borrowed both Gygax’s penchant for grueling, enigmatic dungeon crawls and his most cunning villain, the lich Acererak. Gygax originally wrote and published Tomb of Horrors in 1975 for play at an official D&D tournament, intentionally crafting the adventure to slay several, pesky player-characters who had consistently bested his challenges. 18 As part of converting the adventure for the fourth edition of D&D, years before the release of Tomb of Annihilation, Lawrence Schick would write that the adventure represented a thought experiment for Gygax:
+ If an undead sorcerer really wanted to keep his tomb from being plundered by greedy adventurers, how would he do it? The answer, of course, was to defend the crypt with tricks and traps designed not to challenge the intruders but to kill them dead . And furthermore, to do it in ways so horrific that all but the most determined party would give up and leave well enough alone. 19 
+ Many of the tricks and traps in Gygax’s original adventure are indiscernible, devious, fatal, and intentionally counterintuitive. Despite its enduring legacy in the TTRPG space, this style of adventure has gradually fallen out of style in favor of fifth edition’s style of heroism and clarity in description and execution of narrative.
+ “The World of Greyhawk” Image by Ed Hunsinger on Flickr. CC BY-NC 2.0 
+ While Gygax set Tomb of Horrors in his favored realm of Greyhawk, Tomb of Annihilation is set in the land of Chult of the Forgotten Realms. Chult is located far to the South of most popular adventures in the Forgotten Realms. Indeed, players are expected to begin the adventure in the Sword Coast city of Baldur’s Gate, itself the subject of numerous video game adaptations and adventure modules. While Chult is also adapted from previous novelizations and settings in earlier D&D editions, 20 those portrayals featured cringeworthy amounts of “Lost Continent” themes which contemporary writers wanted to retcon, albeit with some problems of their own. 21 Unknown to the player characters in Baldur’s Gate, Acererak is using an artifact known as a Soulmonger to create a “death curse” throughout the world, trapping the souls of the dead as food for an infant god of death. This secret development leads the player-characters into the service of Syndra Silvane, a wealthy patron who is slowly dying as a result of this death curse. This narrative hook is the diegetic means by which players are introduced to the adventure’s deadly setting. As opposed to fifth edition’s plentiful means of survival, healing, and magical resurrection, this adventure borrows from the generally unforgiving punishment for character mistakes in previous editions. There is a finality of death in Tomb of Annihilation that when combined with its sprawling, trap-laden dungeons enforces that the players being tested rather than the characters . There are few means by which the characters would be able to discern or navigate these dangerous traps and encounters, so players are implicitly encouraged to discuss strategies out of character.
+ In playing with traditional narratives of colonialist exploration, Tomb of Annihilation creates a setting and culture that is vaguely “Other,” different, and dangerous. The player-characters are expected to follow Silvane. Silvane’s contacts in a spy organization have led her to believe the Soulmonger is located in Chult, and she explains that the city of Port Nyanzaru an excellent location to begin their foray. Chult broadly, but especially Port Nyanzaru, is an amorphous conglomerate of various African, Caribbean, South American, and ancient cultures. This dynamic is especially evident with the frequency that words like “tribal,” 22 “exotic,” and “savage” crop up throughout the module, as well as repeated emphasis on the land’s climate, denizens, and culture. Player characters being outsiders from the more traditional, high fantasy setting of Waterdeep only contributes to this feeling. As such, Port Nyanzaru provides both the adventurers and our examination an ideal entrance to Chult, though but our entrance will be spent discussing the means by which Tomb of Annihilation invites players to partake in narratives of colonial exploration, exoticization, and bigotry.
+ Tomb of Annihilation reveals its anticipated audience as predominantly White by playing heavily into these themes, relying upon players’ cultural capital in fantasy media depicting colonized spaces. Upon entering Port Nyanzaru, the first instance of “flavor text”, or text that the Dungeon Master is explicitly meant to read aloud to the players, highlights dinosaurs, “Minstrels in bright clothing,” and voices speaking “in an unfamiliar language filled with clicks.” 23 Here, we begin to see how the module gestures towards vague stereotypes of the African diaspora across space and time. 24 This pattern is especially pernicious in consideration that the likely Dungeon Master of most Tomb of Annihilation tables is a White man, no Black writers or consultants worked on Tomb of Annihilation, 25 and the game’s only guidance in portraying Chultans is to emphasize “tongue clicks” and their “heavy, characteristic accent.” 26 The result is that players around the table are forced between roleplaying harmful caricatures in a roleplaying game and missing out on one of the key attractions of the game. In seeking to draw on audience expectations for the sort of narrative Wizards of the Coast wants to tell, they simultaneously must pull on our own world’s history of racism and colonialism, a history which many players want to escape. The result is generic fantasy, certainly, but is it also an idyllic fantasy? If so, whom is the assumed audience, and what makes that fantasy a desirable one?
+ After exploring Port Nyanzaru, finding a guide for the jungle, and taking on some side quests, the players are free to begin their foray into Chult. At this point, they also should have an idea that the Soulmonger is located somewhere in or beneath the “lost city” of Omu, somewhere in the jungle. Scholars have argued that this common trope in exploration narratives represents a vision of the land always centered on the perspective of the explorer or colonizer. This dynamic displaces the indigenous populations who often already live or have experience with the land. 27 When viewing colonized lands through the eyes of the would-be colonizer, there is a tendency to view the prehistoric state of the land as both “imperial desire and cultural anxiety.” 28 I argue that this phenomenon leads narratives of colonization to condense the ancient, premodern, and contemporary into one space at one time. Indeed, medieval scholars have taken this step further, arguing that the logic of Whiteness “warps the logic of periodization: succession is not temporal but spatial, and progress is nothing other than sameness.” 29 This might explain why WoTC found dinosaurs, animistic gods, and pirates as suitable narrative companions. Additionally, Omu, not surprisingly, is not “lost” or “forgotten.” The city is still populated! Although an unpopulated city might make for an unappealing or unexciting lead into the final dungeon of the adventure, the revelation mirrors contemporary narratives of colonizers “discovering” Indigenous-inhabited lands or “civilizing” lands with plenty of non-European civilization.
+ “The Gray Jungle Sky” by Albert Lam on Flickr. CC BY-NC 2.0 
+ Omu, however, is but the midpoint of the adventure. On the winding journey to the city, adventurers are liable to stumble upon voodoo, lost monarchs, pirates, and more encounters obviously inspired by narratives of exploration and colonization. Interestingly, the writers also decided to include a potential encounter with mercenaries charged with plundering the continent to send riches to Northern cities. Baldur’s Gate, the city-state which players have originally set out from, has laid claim to large swaths of Chult, and “No one (including the merchant princes of Port Nyanzaru) has the force in Chult to dispute this claim.” 30 Others have pointed out that this reference to the rulers of Port Nyanzaru as “merchant princes” who learned the art of tradesmanship from their neighbors mirrors real-world histories “in which Africa’s empires were broken by European powers and then colonized.” 31 Though Walter Rodney’s How Europe Underdeveloped Africa 32 points out the numerous ways in which narratives of African economic development are grossly mischaracterized and oversimplified from a Western perspective, I merely assert that the adventure is leaning into this stereotype in presenting a correlate for Africa to a primarily-White audience. Characters are either encouraged or intimidated by this group to buy a “charter of exploration,” paperwork which allows the characters to “explore Chult and plunder its riches, but half of an expedition’s proceeds and discoveries must be turned over.” 33 The adventure makes clear that this group is little above common brigands and pirates, groups with which the commander has secretly allied.
+ The result is a tone that is either unabashedly in favor of colonial and economic domination or absurdly unaware of the tropes and stereotypes upon which the adventure is drawing. Tables which play Tomb of Annihilation are likely engaging in Orientalism. This dynamic takes place on two levels: the player-characters travelling from a European-coded fantasy to a pan-African-coded fantasy, and the predominantly White audience engaging with the setting through roleplay. Players are liable to engage in “a relationship of power, of domination, [and] of varying degrees of a complex hegemony” as described in Said’s opus. 34 In drawing sweeping, harmful differences between the European-coded and African-coded fantasy, the players are liable to contribute to in an all-too-familiar pattern in fantasy gaming. The stereotypes and narrative devices I have described in this setting are not new. 35 36 37 I draw our attention to them so that we can more accurately observe how they intermingle with Tomb of Annihilation ’s specified mechanics, creating a solidified gameplay experience with repercussions in how we view TTRPGs and alt-right narratives of persecution.
+ Rules of Play 
+ As opposed to the narrative and setting of the adventure, gameplay mechanics can be a bit more difficult to pin down. Again, we are forced into describing tendencies and likelihoods in gameplay, and D&D is notorious in the TTRPG community for its litany of rules. I borrow from Sicart, who described game mechanics as “methods invoked by agents for interacting with the game world.” 38 In the world of D&D, these mechanics are the underlying logic by which players and DMs convert speech acts, die rolls, and rule analysis into narrative fluency. Indeed, rules in D&D cover everything from how to create a character to the proper way to roll a dice, and these rules for proper procedure and storytelling have been elaborated on and codified since D&D’s earliest days as a wargame simulator. On their own, many of these mechanics are as neutral as they are in many OSR-favorite TTRPGs. Though I would argue that some mechanics of D&D worldbuilding and gameplay—innate racial traits, racial/moral alignment, linking race and environment, etc.—are inherently problematic, the ones I discuss here are not liable to create problematic narratives by themselves. Rather, I hope to show how the colonialist tone of the setting and narrative pervade and flavor these mechanics. The result are elements of play that serve only to represent or highlight Eurocentric notions of Africa that the game is already bringing to life. Tomb of Annihilation’s emphasis on hex crawls, traps, uneven odds, gold collecting, and dungeons is only an issue when it is intermixed with some of the issues described above. This distinction will serve us importantly in analyzing the patterns in common alt-right rhetoric surrounding D&D and other cultural artifacts, but I will first offer some deeper analysis of these examples as evidence.
+ Players are likely to enter the jungle of Chult by navigating rivers à la Heart of Darkness , but they are free to move on foot if desired. Though the players may know of various settlements throughout the region, they are liable to become lost or struggle to make a direct path for their goals. The adventure writers, desiring to simulate the experience of navigating an unfamiliar environment, encourage DMs to employ a “hex crawl,” as means for explaining how characters progress through the jungle. Despite being the premier means by which D&D players simulated exploration in early iterations of the game, hex crawls were scarce by even the 2 nd edition of Advanced Dungeons and Dragons. 39 Although a great deal of mechanics is needed to run a proper hex crawl, they generally feature a large map with hex-based tiles on which certain locations, objects, or encounters are coded. Players are consistently challenged to traverse the map by analyzing rumors and clues as well as hoping for fortunate dice rolls. These dice rolls come from both the players and Dungeon Master; the players must pass survival checks to correctly navigate the jungle, avoid dehydration, and stave off disease, and the DM rolls on prescribed tables to determine potential random encounters for the party in each adventuring day.
+ In another adventure, there would be nothing at issue with using a hex crawl adventure style. One could imagine numerous adventures in which hex crawls are just a means to allow sandbox elements into TTRPGs. However, in accord with Jenkins’ thoughts on game design as “narrative architecture,” 40 I would assert that the hex crawl synthesizes with established narrative and lore to create a mechanic that only serves to heighten the player sense of colonizing the land of Chult. Consider how a majority-White player base would encounter rolling saving throws against “Mad Monkey Fever” and dehydration in a land populated by dark-skinned humanoids. Would randomly encountering cannibalistic and sadistic Batiri Goblins adorned in painted, wooden masks remind these players of Eurocentric representations of Africa, and are they likely to play into violent fantasies against such creatures? These mechanics serve to persistently reinforce a player-character psychology of being at once the invader and the invaded—a common dynamic in colonial narratives and literature. As outsiders from another continent, the adventure positions them as both perpetually under siege by the natural and pre-modern forces of the environment, all while absolving the player characters of any violence or wrongdoing they might commit in the process of the quest. Again, my point is not that Tomb of Annihilation’s emphasized mechanics are inherently problematic, but rather that game design can interweave with stylistic and narrative choices to create a ludonarrative harmony that further imparts on players their roles as exceptional saviors in foreign land.
+ To further stress this dynamic, let us turn to the role of gold and treasure in this adventure. Although a full analysis of the role of “loot” in roleplaying games is beyond the scope of this essay, it is worth noticing how this assumed, habitual mechanic in D&D is especially impactful in the greater context of the adventure. Contrary to the hex crawl, emphasis on gold, gemstones, and artifacts has been a D&D mainstay for much of the game’s publication history. In D&D’s first iteration, gold had tangible uses in buying equipment and means of transportation, but it was also directly converted into experience points by which characters grew in level and strengthened. Gold and loot were real metrics by which a player could measure their success in the game world, and they served as the primary incentives for adventurers to keep delving into dark and dangerous dungeons. Gary Gygax also intended for these literal tons of gold to be useful for adventurers in buying fleets, keeps, and armies with which to wage miniature warfare, but that macro style of play never caught on in D&D. 41 By fifth edition, gold is rarely used as experience, with most DMs preferring to level the party when they reach specific milestones or achievements in a campaign. However, the massive amounts of treasure remain a staple of most adventure modules, with detailed notes about gold and artifacts that players will find in every location in Chult. Characters may leave the final dungeon with several-hundred-thousand gold coins worth of treasure and magical artifacts (many of which are artifacts of particular cultural or religious importance), and, considering the only place to spend the coin is Port Nyanzaru, the sensation of snatching these “rewards” appears more as grave robbing or illicit looting than standard adventuring.
+ One could easily imagine the adventuring party clad in stereotypical pith helmet and tan linens, a visual which is only buoyed by the Wizards team’s inclusion of two new character backgrounds: archaeologist and anthropologist. With these character options, our gameplay mechanics begin to transition from the first type, world mechanics, into the second type, identity mechanics. As such, while the previous gameplay mechanics might be tonally neutral in most settings, this inclusion has the tendency to bring problematic play into a wide variety of adventures and settings. Character backgrounds usually function as the choice of third-most importance in creating a character, as a background usually describes their lived experience up to the point of the adventure. Again, the descriptions and suggested play styles leave little doubt that writers intended for players to envision their characters as participants in an academic adventure narrative reminiscent of Tomb Raider , The Mummy , or any Indiana Jones film.
+ It bears worth repeating that OSR-style games, which Tomb of Annihilation harkens to, don’t always encourage the character-driven roleplaying that backgrounds often convey, but these backgrounds can still have tangible effects on the gaming experience. The Archaeologist character, for example, gains bonuses to their survival and history skills, meaning they are more likely to navigate their party through the jungles of Chult and identify important details about the history therein. In addition, when an archaeologist enters ruins or dungeons, they can “correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race.” 42 Again, we see gameplay which specifically caters to dungeon crawling and, specifically, dungeons that combine race and place. This time, however, these encouraged mechanics are localized to the player character, encouraging players to adopt a certain mentality or approach to the world of Tomb of Annihilation . These mechanics blur our designation between world and character mechanics, but it is apparent that such an addition in this adventure is meant to evoke images and stereotype in the minds of players.
+ “Entrance to Ta Prohm” by Matthew Klein on Flickr. CC BY-NC-ND 2.0 “Entrance to Ta Prohm” by Matthew Klein on Flickr. CC BY-NC-ND 2.0. This Buddhist temple in Cambodia, a UNESCO World Heritage Site, was used as a location in the film Tomb Raider (2001). 
+ But That’s Just How the Game is Played! 
+ I have begun to demonstrate that, despite the Wizards of the Coast team’s efforts in retconning evidence for criticism against their product’s history, they still sell a product that can easily trap players in situations wherein they justify logics of colonialism and oppression. Here, we are seeking to differentiate or add nuance into discussions about how game mechanics impact narratives in the game world. In distinguishing between racial game mechanics and world game mechanics, we are able to more aptly criticize which elements of gameplay are inherently liable to reproduce harmful histories and those which are beholden to the fantastic world around them. Although both sorts will feature various amounts of interplay with the story being told, adding flavor to how players interpret the mechanics of the game, the degree to which they are liable to do so is a worthwhile topic for scholarly concern.
+ This distinction also shows us that, to a certain degree, Wizards of the Coast is still producing adventures that are intimately tied to the sorts championed by the OSR community and especially those in #DnDGate camp. Through analyzing the continuing problems in representing non-White peoples in fantastic worlds—a set of problems which especially plague Wizards of the Coast—it becomes even clearer what lies at the heart of right-wing, anti-feminist, anti-social justice criticism. Tomb of Annihilation sits at the center of this essay as it is the most immediate instance of long-term fan service in recent modules, owing its antagonist and emphasized gameplay to early D&D play. In delineating the differences between these mechanics and how they are liable to work in Tomb of Annihilation , we are able to draw conclusions for game studies and studies of Whiteness.
+ This adventure represents a moment when Wizards’ writers were playing with older world mechanics while revising the racial mechanics that accompanied early D&D as well. As Wizards adopts rule sets that seek to open up the game to diverse audiences, regressive audiences are hearing that this social space and game are not created with them in mind. In recent releases, Wizards has chosen to disentangle player-character attributes and play styles from their race. While previous editions would have encouraged players to create characters based on archetypes and optimized statistics, new modules allow players more freedom in customizing their class, race, and background, such that they are freer to challenge historic portrayals of race/class combinations. Considering the differences between these mechanics and those discussed with regards to Tomb of Annihilation, it becomes clear that the mechanics of racial identity are those which infuriate alt-right-leaning players. Despite Tomb being the clearest callback for the OSR community, no alt-right member mentioned or lauded the adventure. Members of the OSR community (and D&D, broadly) with alt-right sympathies are not enraged at the lack of hex crawls and permadeath mechanics in recent modules; they are enraged that they can no longer enact beliefs of racial monoliths, racial impermeability, and racial fatalism in the game world. Indeed, it is Wizard’s gradual movement towards challenging fantasies of racial hierarchies which upset these players, a hierarchy which many open White nationalists believe is “beneficial for U.S. sovereignty and a corrective roadmap for U.S. society.” 43 Backlash to this revelation cannot be directly voiced as opposition to inclusivity and consideration in racial worldbuilding, as that would immediately distance alt-right actors from their intended, persuadable audience. As such, these actors perform a familiar trick: veiling their criticisms behind a concern for free speech and First Amendment rights. In this way, such writers position their opponents as totalitarians, hiding their true desires for absolute power and censorship behind insincere concerns for social justice. As an example, take Venger Satanis’ notable blog, “ Your Dungeon is Racist ,” wherein he writes articles that use familiar rhetoric to satirize feminists, progressives, and advocates of racial justice. One article details a “White Supremacist Frog” experiencing GenCon, the largest tabletop gaming convention in North America. 44 The titular frog is likely a reference to Pepe the Frog, a meme often used by White Supremacist groups to espouse antisemitism and racism. 45 46 In the article, the frog is confronted by GenCon’s “woke, SJW, namby-pamby, snowflake.” Obviously, according to Satanis, the crowd isn’t going to support, “free speech, freedom of expression, freedom of association, anything humorous (including satire and parody), meritocracy, independence, self-reliance, America, compromise, moderation, business sense, economics, chainmail bikinis, actual justice, or really anything of value” (“White”). This pattern isn’t unique, as Satanis’ imagined political opponents are often caricatured as opposed to numerous core tenants of American conservatism and liberal democracy.
+ However, I want to bring this type of rhetoric and common arguments of alt-right figures alongside these figures’ criticisms of D&D and its mechanics. Pointing this out allows us to focus less on where such figures directly mention their grievances (mechanical systems and systems as a whole) and focus more on where such figures actually dislike how D&D games are played (identity mechanics focused on inclusivity and race as a construct). In an essay decrying the TTRPG community’s obsession with D&D Fifth Edition, Satanis equates playing the system with a slew of behaviors:
+ live in the pod, take the vaccine (and the boosters), wear the mask, obey the algorithm, tear down the statues, adhere to the gospel of Secular Progressivism, enjoy the censorship, vote the way the multi-national corporations, institutional education, the media, and Big Tech want you to, and stop criticizing politicians – they have our best interests at heart. You’ll own nothing and be happy, you fucking peasant! 47 
+ One could be forgiven for missing the slew of racist, sexist, and antisemitic dog whistles which frequent Satanis’ writing, but it is clear that a gaming system is carrying a great deal of political connotations for him and other aggrieved members in the OSR community. Satanis ends this post with a listing of approved OSR TTRPGs, and similarly to the Alt-Right DM, playing one of these systems is as much a political act of defiance as it is an act of leisure.
+ Consider, also, Satanis’ title for his blog, “Your Dungeon is Racist,” which he often alludes to in satiric articles. The title “Your Dungeon is Racist” is Satanis’ attempt at parodying his perceived enemies who he imagines label everything they dislike as racist and sexist. In response to perceived criticism that dungeon delving in TTRPGs is racist, Satanis caricatures many of the points listed in this essay while making similar points himself—experiences like dungeon adventures and hex crawls are dependent on the game world and narrative built around them in order to understand their political connotations. Saying that dungeons are unambiguously racist plays into the naïve, psychological definition of racism that I have tried to avoid. Rather, it is upon game designers to examine the context in which their dungeons occur and how players are likely to engage with them. A dungeon that encourages players to loot valuable artifacts from indigenous cultures and portray those cultures in stereotypical fashions of colonizers should lead scholars to describing such a dungeon as problematic, from both a design and player perspective. Decrying WotC and playing other systems due to the perceived political connotations of their game systems is merely awareness of this dynamic in a world influenced by GamerGate.
+ Conclusion 
+ Although Satanis and others identified in this essay are only influential in alt-right spaces, their rhetoric and criticisms serve as useful snapshots of alt-right strategies for recruitment and media manipulation. In an age of increasing White Supremacist and racist activity online and in the United States, proper understanding of how these groups utilize cultural artifacts to further their goals is paramount. In this essay, I have identified how gamers with alt-right rhetorical styles and sympathies adopt familiar strategies in criticizing Wizards of the Coast’s turns towards more inclusive racial worldbuilding. I have used WotC’s adventure, Tomb of Annihilation , as a means of differentiating between two types of game mechanics: world and identity. This distinction helped us to examine how game mechanics and encouraged methods of play may or may not take on the narrative and setting in which they are based. As such, I hope the two, main arguments of this paper serve as useful ground for future scholarship in analyzing how gameplay is constructed in TTRPGs as well as how players navigate political stakes in the worlds they imagine. While the community and Wizards of the Coast avoided a #DnDGate, the influence of GamerGate in the community is still present. In using Tomb of Annihilation as a lens into the rhetoric at hand, I hope to lay the groundwork for further analysis of how players draw from their lived experiences and the game world in creating collaborative, improvisational stories. As TTRPGs style of play often encourages limitless, unique narratives across thousands of iterations of the same campaign, this paper can serve as a useful framework in scholarly analysis of the narratives that modules and adventures are liable to produce.
+ —
+ Featured Image is “HDR Infrared Garden of the Gods Colorado.” Image by Brokentaco on Flickr CC BY 2.0. 
+ —
+ Mark Hines is a PhD student in the University of Kentucky’s English Department. He is particularly interested in how speculative games leverage players’ racial and political backgrounds in the process of worldbuilding.
+ Critical Hits!
+ The Fiend Folio’s Female Fiends: Kelpies, Vampires, and Demon Queens 
+ The Deep Ones and The Kuo-Toa: Lovecraft’s Racial Politics in… 
+ How Dungeons & Dragons Appropriated the Orient 
+ #gamergate colonialism dnd Dungeons & Dragons ethnosphere mechanics Narrative OSR race racism Tomb of Annihilation 
+ Post navigation 
+ Previous Post Depicting the Human Relationship to Nature and Culture: Transactionality and the Homo Economicus Next Post Serious Fandoms –– An Interview With Linda Codega 
+ Catalog
+ About 
+ Analog Game Studies 101 
+ Analysis 
+ Documentation 
+ Experimentation & Design 
+ Analog Game Studies has joined eScholarship! 
+ Calls for Participation 
+ CFP: Analog Games and Translation 
+ CFP: Queer Analog Game Studies 
+ CFP: Revisiting the Fiend Folio 
+ CFP: RPG Summit @ DiGRA 2019 
+ CFP: The Analog Origins of Digital Games @ FDG 2019 
+ Catalog 
+ Contact 
+ Special Issues 
+ Generation Analog 
+ Generation Analog 2021 
+ GENeration Analog 2021 Proceedings CFP 
+ Generation Analog 2022 
+ Generation Analog 2022 CFP 
+ GENeration Analog 2023 
+ GENeration Analog 2023 CFP 
+ Generation Analog 2024 "HOME" 
+ Generation Analog 2024 "HOME" CFP 
+ Generation Analog 2025 "PUNK" 
+ Generation Analog 2025 "PUNK" CFP 
+ Generation Analog 2026 "GREEN" CFP 
+ Generation Analog 2026 "GREEN" Program 
+ GENeration Analog Travel FAQ 
+ GENeration Analog: Tabletop Games and Education Conference at GenCon 2020 CFP 
+ GENeration Analog: Tabletop Games Scholarship Virtual Conference “at” Gen Con 2021 CFP 
+ In Print 
+ Join the Team! 
+ Special Issues 
+ 2016 Role-Playing Game Summit 
+ 2019 Role-Playing Game Summit 
+ Analog Players, Analog Space: Video Gaming Beyond the Digital 
+ Special Issue: Analog Games and Translation 
+ Special Issue: Perspectives on RPG Studies from Latin-American Scholars 
+ Special Issue: Queer Analog Game Studies 
+ Special Issue: The Fiend Folio 
+ Submit 
+ The Team 
+ Authors (Volume 1) 
+ Authors (Volume 10) 
+ Authors (Volume 11) 
+ Authors (Volume 12) 
+ Authors (Volume 2) 
+ Authors (Volume 3) 
+ Authors (Volume 4) 
+ Authors (Volume 5) 
+ Authors (Volume 6) 
+ Authors (Volume 7) 
+ Authors (Volume 8) 
+ Authors (Volume 9) 
+ Editorial Board 
+ Vol. I, No. I (August 2014) 
+ Vol. I, No. III (October 2014) 
+ Vol. II, No. V (July 2015) 
+ Vol. II, No. VII (November 2015) 
+ Vol. III, No. I (January 2016) 
+ Vol. IV, No. I (January 2017) 
+ Vol. IV, No. III (May 2017) 
+ Vol. IV, No. IV (July 2017) 
+ Vol. V, No. I (March 2018) 
+ Vol. V, No. III (September 2018) 
+ Vol. V, No. IV (December 2018) 
+ Vol. VI, No. III (September 2019) 
+ Vol. VII, No. II (December 2020) 
+ Vol. VIII, No. I (March 2021) 
+ Vol. XI, No. IV (December 2024) 
+ Volume I 
+ Volume I, Issue II 
+ Volume I, Issue IV 
+ Volume I, Issue V 
+ Volume II 
+ Volume II, Issue II 
+ Volume II, Issue III 
+ Volume II, Issue IV 
+ Volume II, Issue VI 
+ Volume III 
+ Volume III, Issue II 
+ Volume III, Issue III 
+ Volume III, Issue IV 
+ Volume III, Issue V 
+ Volume IV 
+ Volume IV, Issue II 
+ Volume IV, Issue V 
+ Volume IX 
+ Volume IX, Issue I 
+ Volume IX, Issue II 
+ Volume IX, Issue III 
+ Volume IX, Issue III 
+ Volume IX, Issue IV 
+ Volume V 
+ Volume V, Issue II 
+ Volume VI 
+ Volume VI, Issue I 
+ Volume VI, Issue II 
+ Volume VII 
+ Volume VIII 
+ Volume VIII, Issue II 
+ Volume X 
+ Volume X, Issue I 
+ Volume X, Issue II 
+ Volume XI 
+ Volume XI, Issue I 
+ Volume XI, Issue II 
+ Volume XII 
+ Volume XII, Issue I 
+ Volume XII, Issue III 
+ Volume XII, Issue IV 
+ More posts in…
+ Adrianna Burton 
+ Aria Chen 
+ Art and Performance Games 
+ Axiel Cazeneuve 
+ Board Games 
+ Book Review 
+ Brian C. Etheridge 
+ Card Games 
+ Chad Wilkinson 
+ Cozy Games 
+ Cristo Leon 
+ Digital Games 
+ Education & Pedagogy 
+ Environmental Play 
+ et. al. 
+ Evan Torner 
+ Interactive Fiction 
+ Interview 
+ James Lipuma 
+ Jason Cox 
+ Joseph Dumit 
+ Laura op de Beke 
+ Lead Author Shannon McDowell 
+ Live Play 
+ Live-Action Role-Playing Games 
+ Marco Arnaudo 
+ Mauricio Rangel Jimenez 
+ Miniatures 
+ Neal Baker 
+ Pedagogy 
+ Peter D. Evan 
+ Pilar Girvan 
+ Psychology 
+ Queer Game Studies 
+ Sabina Belc 
+ Scott Nicholson 
+ Solo Role-Playing Games 
+ Special Issue 
+ Special to Analog Game Studies 
+ Story Games 
+ Tabletop Role-Playing Games 
+ Theory 
+ Wargames 
+ Meta
+ Log in 
+ Entries feed 
+ Comments feed 
+ WordPress.org 
+ Maliszewski, James. “Full Circle: A History of the Old School Revival.” The Escapist Magazine . 20 Aug. 2009.
+ @JeremyECrawford. “If a kingdom in D&D was forcibly separating children from their parents and putting the kids in detention centers, the heroes would do everything in their power to reunite those families. Let’s be at least as good as the heroes in D&D. #DnD #Compassion.” Twitter , 18 Jun. 2018, 8:41 P.M., https://twitter.com/JeremyECrawford/status/1008872440544485376 .
+ @KasimirUrbanski. “And if WoTC were in D&D-land they’d be a group of greedy merchants pretending to be paladins, unwisely using some idiot mouthpieces who were secretly fanatical cultists out to destroy civilization. Even in metaphors my material is better than yours. #DnD.” Twitter , 18 Jun, 2018 11:34 P.M., https://twitter.com/KasimirUrbanski/status/1008915981283090433 .
+ RPGPundit. “My Short: The Weird Thing about Waterdeep’s Pride Parades.” My Short: The Weird Thing About Waterdeep’s Pride Parades , http://therpgpundit.blogspot.com/2022/01/my-short-weird-thing-about-waterdeeps.html .
+ Dewey, Caitlin. “The only guide to Gamergate you will ever need to read.” The Washington Post 14 (2014).
+ Bezio, Kristin MS. “Ctrl-Alt-Del: GamerGate as a Precursor to the Rise of the Alt-Right.” Leadership , vol. 14, no. 5, Oct. 2018, pp. 556–566, doi:10.1177/1742715018793744.
+ Ferguson, C. J., & Glasgow, B. Who are GamerGate? A descriptive study of individuals involved in the GamerGate controversy. Psychology of Popular Media, 10 (2), 243–247, 2021, https://doi .org/10.1037/ppm0000280.
+ Mortensen, Torill Elvira. “Anger, Fear, and Games: The Long Event of #GamerGate.” Games and Culture, vol. 13, no. 8, Dec. 2018, pp. 787–806, doi:10.1177/1555412016640408.
+ Treppel, Jeff, et al. “Advanced Discrimination & Dragons: A Critical Look at Varg Vikernes’ Myfarog RPG.” MetalSucks , 18 June 2021, https://www.metalsucks.net/2015/08/21/advanced-discrimination-dragons-critical-look-varg-vikernes-myfarog-rpg/ .
+ Roy, Jessica. “Milo Yiannopoulos to Launch Milo Inc., ‘Dedicated to the Destruction of Political Correctness’.” Los Angeles Times , Los Angeles Times, 3 May 2017, https://www.latimes.com/entertainment/gossip/la-et-mg-milo-yiannopoulos-inc-media-empire-20170502-story.html .
+ Ek, Robin. The Gaming Ground, thegg.net. “James Desborough Interview – Gamergate, Gaming and More! – TGG.” (TGG) | We Are All about Gaming and Entertainment! , 16 May 2017, http://thegg.net/interviews/james-desborough-interview-inside-gamergate-gaming-censorship-in-games-and-sjw-madness/. 
+ Curtis, Jesse, “‘Will the Jungle Take Over?’ National Review and the Defense of Western Civilization in the Era of Civil Rights and African Decolonization,” Journal of American Studies 53, no. 4 (November 2019): 997-1023.
+ Ma, Cindy. “What Is the ‘Lite’ in ‘Alt-Lite?’ The Discourse of White Vulnerability and Dominance among YouTube’s Reactionaries.” Social Media + Society, July 2021, doi:10.1177/20563051211036385.
+ “The Old School #Resistance.” The Alt-Right DM , 21 Oct. 2019, https://gamingwhileconservative.wordpress.com/2019/10/23/the-old-school-resistance/ .
+ Wan-Chuan, Kao. “Identitarian politics, precarious sovereignty.” Postmedieval , vol. 11, 4, 2020, pp. 371-383 . doi:http://dx.doi.org/10.1057/s41280-020-00202-8.
+ Whitaker, Cord J. Black Metaphors: How Modern Racism Emerged from Medieval Race- Thinking , University of Pennsylvania Press, 2019, p. 160.
+ Whitaker, Cord J. Black Metaphors: How Modern Racism Emerged from Medieval Race- Thinking , University of Pennsylvania Press, 2019.
+ Cordell, Bruce R. Return to the Tomb of Horrors . Wizards of the Coast, Inc., 1998, p. 3. 
+ Gygax, Gary, and Lawrence Schick. Dungeons of Dread: S Series Classic Adventure Compilation . Wizards of the Coast, 2013. Emphasis in original.
+ Lowder, James, and Jean Rabe. The Jungles of Chult . TSR, Inc., 1993.
+Lowder, James. The Ring of Winter . TSR, 1992.
+ D’Anastasio, Cecelia. “Dungeons & Dragons Stumbles with Its Revision of the Game’s Major Black Culture.” Kotaku , 18 Oct. 2017, https://kotaku.com/dungeons-dragons-stumbles-with-its-revision-of-the-ga-1819657235 .
+ These phrasings, in particular, drew ire from fans, leading Wizards of the Coast to change or drop a lot of this language in recently printed and online versions of the adventure. See Zambrano. Zambrano, J.R. “D&D: About Those Diversity Changes – Curse of Strahd, Tomb of Annihilation Updated.” Bell of Lost Souls , 23 June 2020, https://www.belloflostsouls.net/2020/06/dd-about-those-diversity-changes-curse-of-Strahd-tomb-of-annihilation-updated.html . 
+ Crawford, Jeremy, et al. Tomb of Annihilation . Wizards of the Coast, 2017, p. 16.
+ Jarosz, Lucy. “Constructing the dark continent: Metaphor as geographic representation of Africa.” Geografiska Annaler: Series B, Human Geography 74.2 (1992): 105-115.
+ D’Anastasio, Cecelia. “Dungeons & Dragons Stumbles with Its Revision of the Game’s Major Black Culture.” Kotaku , 18 Oct. 2017, https://kotaku.com/dungeons-dragons-stumbles-with-its-revision-of-the-ga-1819657235 .
+ Perkins, Chris. Tomb of Annihilation . Wizards of the Coast, 2017, p. 12.
+ Mackenthun, Gesa. “Hidden Cities in the American Wilderness: The Cultural Work of a Romantic Trope.” Miranda. Revue pluridisciplinaire du monde anglophone/Multidisciplinary peer-reviewed journal on the English-speaking world 11 (2015).
+ Mackenthun, Gesa. “Hidden Cities in the American Wilderness: The Cultural Work of a Romantic Trope.” Miranda. Revue pluridisciplinaire du monde anglophone/Multidisciplinary peer-reviewed journal on the English-speaking world 11 (2015).
+ Wan-Chuan, Kao. “Identitarian politics, precarious sovereignty.” Postmedieval , vol. 11, 4, 2020, pp. 371-383 . ProQuest , doi: http://dx.doi.org/10.1057/s41280-020-00202-8 .
+ Perkins, Chris, et al. Tomb of Annihilation . Wizards of the Coast, 2017, p. 54.
+ D’Anastasio, Cecelia. “Dungeons & Dragons Stumbles with Its Revision of the Game’s Major Black Culture.” Kotaku , 18 Oct. 2017, https://kotaku.com/dungeons-dragons-stumbles-with-its-revision-of-the-ga-1819657235 .
+ Rodney, Walter. How Europe Underdeveloped Africa . Bogle-L’Ouverture, 1972.
+ Perkins, Chris, et al. Tomb of Annihilation . Wizards of the Coast, 2017, p. 54.
+ Said, Edward W. Orientalism . Vintage Books, 1979, p. 13.
+ Bjørkelo, Kristian A. ““Elves are Jews with Pointy Ears and Gay Magic”: White Nationalist Readings of The Elder Scrolls V: Skyrim.” (2020).
+ Thomas, Ebony Elizabeth. The Dark Fantastic: Race and the Imagination from Harry Potter to the Hunger Games . NYU Press, 2020. 
+ Young, Helen. Race and Popular Fantasy Literature: Habits of Whiteness (Routledge Interdisciplinary Perspectives on Literature) . 1 st ed., Routledge, 2015.
+ Sicart, Miguel. “Defining game mechanics.” Game Studies 8.2 (2008): 1-14.
+ Alexander, Justin. “5E Hexcrawl.” The Alexandrian , https://thealexandrian.net/wordpress/46020/roleplaying-games/5e-hexcrawl .
+ Jenkins, Henry. “Game design as narrative architecture.” Computer 44.3 (2004): 118-130.
+ Hartlage, David. “Dungeons & Dragons Stopped Giving XP for Gold, but the Insane Economy Remains.” DMDavid , 3 Mar. 2019, https://dmdavid.com/tag/dungeons-dragons-stopped-giving-xp-for-gold-but-the-insane-economy-remains/ .
+ Perkins, Chris, et al. Tomb of Annihilation . Wizards of the Coast, 2017, p. 192. 
+ Whitaker, Cord J. Black Metaphors: How Modern Racism Emerged from Medieval Race- Thinking , University of Pennsylvania Press, 2019, p. 156.
+ Satanis, Venger. “White Supremacist Frog Not Welcome at Gencon.” Your Dungeon Is Racist, Blogger, 16 Sept. 2021, https://yourdungeonisracist.blogspot.com/2021/09/white-supremacist-frog-not-welcome-at.html .
+ “Pepe the Frog.” Anti-Defamation League , https://www.adl.org/education/references/hate-symbols/pepe-the-frog .
+ Neiwert, David. “What the KEK: Explaining the Alt-Right ‘Deity’ behind Their ‘Meme Magic’.” Southern Poverty Law Center , 9 May 2017, https://www.splcenter.org/hatewatch/2017/05/08/what-kek-explaining-alt-right-deity-behind-their-meme-magic .
+ Satanis, Venger. “If You Don’t Play D&D 5e, the World Dies.” Your Dungeon Is Racist , Blogger, 12 Oct. 2021, https://yourdungeonisracist.blogspot.com/2021/10/if-you-I-play-d-5e-world-dies.html .
+ More posts in…
+ Adrianna Burton 
+ Aria Chen 
+ Art and Performance Games 
+ Axiel Cazeneuve 
+ Board Games 
+ Book Review 
+ Brian C. Etheridge 
+ Card Games 
+ Chad Wilkinson 
+ Cozy Games 
+ Cristo Leon 
+ Digital Games 
+ Education & Pedagogy 
+ Environmental Play 
+ et. al. 
+ Evan Torner 
+ Interactive Fiction 
+ Interview 
+ James Lipuma 
+ Jason Cox 
+ Joseph Dumit 
+ Laura op de Beke 
+ Lead Author Shannon McDowell 
+ Live Play 
+ Live-Action Role-Playing Games 
+ Marco Arnaudo 
+ Mauricio Rangel Jimenez 
+ Miniatures 
+ Neal Baker 
+ Pedagogy 
+ Peter D. Evan 
+ Pilar Girvan 
+ Psychology 
+ Queer Game Studies 
+ Sabina Belc 
+ Scott Nicholson 
+ Solo Role-Playing Games 
+ Special Issue 
+ Special to Analog Game Studies 
+ Story Games 
+ Tabletop Role-Playing Games 
+ Theory 
+ Wargames 
+ Catalog
+ About 
+ Analysis 
+ Documentation 
+ Experimentation & Design 
+ Analog Game Studies 101 
+ The Team 
+ Authors (Volume 1) 
+ Authors (Volume 2) 
+ Authors (Volume 3) 
+ Authors (Volume 4) 
+ Authors (Volume 5) 
+ Editorial Board 
+ Authors (Volume 6) 
+ Authors (Volume 7) 
+ Authors (Volume 8) 
+ Authors (Volume 9) 
+ Authors (Volume 10) 
+ Authors (Volume 11) 
+ Authors (Volume 12) 
+ Submit 
+ Vol. I, No. I (August 2014) 
+ Volume I, Issue II 
+ Catalog 
+ Contact 
+ Special Issues 
+ Vol. I, No. III (October 2014) 
+ Volume I, Issue IV 
+ Volume I, Issue V 
+ Special Issues 
+ Analog Players, Analog Space: Video Gaming Beyond the Digital 
+ 2016 Role-Playing Game Summit 
+ 2019 Role-Playing Game Summit 
+ Special Issue: Analog Games and Translation 
+ Special Issue: The Fiend Folio 
+ Special Issue: Perspectives on RPG Studies from Latin-American Scholars 
+ Special Issue: Queer Analog Game Studies 
+ Volume II, Issue II 
+ Volume I 
+ Volume II 
+ Volume II, Issue III 
+ Volume II, Issue IV 
+ Vol. II, No. V (July 2015) 
+ Volume II, Issue VI 
+ Vol. II, No. VII (November 2015) 
+ Vol. III, No. I (January 2016) 
+ Volume III 
+ Volume III, Issue II 
+ Volume III, Issue III 
+ Volume III, Issue IV 
+ In Print 
+ Volume III, Issue V 
+ Vol. IV, No. I (January 2017) 
+ Volume IV 
+ Volume IV, Issue II 
+ Vol. IV, No. III (May 2017) 
+ Vol. IV, No. IV (July 2017) 
+ Volume IV, Issue V 
+ Vol. V, No. I (March 2018) 
+ Volume V 
+ Volume V, Issue II 
+ Vol. V, No. III (September 2018) 
+ Vol. V, No. IV (December 2018) 
+ Volume VI, Issue I 
+ Volume VI 
+ Volume VI, Issue II 
+ Vol. VI, No. III (September 2019) 
+ Generation Analog 
+ GENeration Analog: Tabletop Games and Education Conference at GenCon 2020 CFP 
+ GENeration Analog Travel FAQ 
+ GENeration Analog: Tabletop Games Scholarship Virtual Conference “at” Gen Con 2021 CFP 
+ GENeration Analog 2023 
+ GENeration Analog 2021 Proceedings CFP 
+ Generation Analog 2022 CFP 
+ Generation Analog 2022 
+ GENeration Analog 2023 CFP 
+ Generation Analog 2024 "HOME" CFP 
+ Generation Analog 2024 "HOME" 
+ Generation Analog 2025 "PUNK" CFP 
+ Generation Analog 2025 "PUNK" 
+ Generation Analog 2021 
+ Generation Analog 2026 "GREEN" CFP 
+ Generation Analog 2026 "GREEN" Program 
+ Volume VII 
+ Vol. VII, No. II (December 2020) 
+ Volume VIII 
+ Vol. VIII, No. I (March 2021) 
+ Volume VIII, Issue II 
+ Join the Team! 
+ Volume IX, Issue I 
+ Volume IX 
+ Volume IX, Issue II 
+ Volume IX, Issue III 
+ Volume IX, Issue IV 
+ Volume X, Issue I 
+ Volume X 
+ Volume X, Issue II 
+ Volume XI 
+ Volume XI, Issue I 
+ Calls for Participation 
+ CFP: RPG Summit @ DiGRA 2019 
+ CFP: The Analog Origins of Digital Games @ FDG 2019 
+ CFP: Analog Games and Translation 
+ CFP: Revisiting the Fiend Folio 
+ CFP: Queer Analog Game Studies 
+ Volume XI, Issue II 
+ Volume IX, Issue III 
+ Vol. XI, No. IV (December 2024) 
+ Volume XII 
+ Volume XII, Issue I 
+ Volume XII, Issue III 
+ Volume XII, Issue IV 
+ Analog Game Studies has joined eScholarship! 
+ Proudly powered by WordPress 

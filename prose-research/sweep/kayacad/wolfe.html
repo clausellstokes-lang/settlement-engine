@@ -1,0 +1,1285 @@
+    
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-ng-app="app"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-ng-app="app"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-ng-app="app"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-ng-app="app"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-ng-app="app">
+ <!--<![endif]-->
+
+<head data-ng-controller="HeadController as hc">
+        <!--according to xdomain document, it is important to include it before any other library, so put it here for now -->
+    <script src="https://qtastatic.com/content/20150805122813/XDomainJS.min.js"></script>
+    <script>
+        var slaves = {};
+                slaves["http://api.questia.com"]="/proxy.html";
+                slaves["https://api.questia.com"]="/proxy.html";
+
+
+        xdomain({
+            slaves: slaves
+        });
+
+    </script>  
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="msapplication-config" content="none" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-152x152-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144x144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-120x120-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-76x76-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
+    
+  
+
+    
+    <script type="text/javascript">
+        var jslogEnabled = false;      
+    </script>
+  
+    <link href="https://qtastatic.com/content/20150805122813/SiteCSS.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="/content/css/icon-font.css" media="all" />
+
+       
+
+    <!-- indicate to Site.Master to render LibraryCSS -->
+<link href="https://qtastatic.com/content/20150805122813/LibraryCSS.min.css" rel="stylesheet" type="text/css" media="all"/>        
+    <script src="https://qtastatic.com/content/20150805122813/SiteJS.min.js"></script>
+    <script src="https://api-messages.questia.com/events/hubs"></script>
+    <script src="https://qtastatic.com/content/20150805122813/AngularSiteJS.min.js"></script>
+    
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+
+            var serverInfo = window.serverInfo = {
+                Api: {
+                    Url: "https://api.questia.com",
+                    BrokerAddress: "https://api-messages.questia.com",
+                    Token: "",
+                    UserId: "ea6882e9-cb74-4423-9b5f-438ffecc29bc",
+                    Key: "qta.com",
+                    Version: "1.2",
+                    TokenName: "QTA" + '_AUTH_COOKIE'
+                },
+                SiteId: 7,
+                AddThisEnabled: true,
+                WebViewEnabled: false
+            };
+
+            window.scrollToHandler = ["$stateParams", "ScrollService",
+                    function($stateParams, scrollService) {
+                        var scrollTo = $stateParams.scrollTo;
+                        scrollService.scrollTo(scrollTo);
+                    }
+            ];
+
+            var app = angular.module('app', ['ui.router', 'common'])
+                .constant("ServerInfo", serverInfo)
+                .config([
+                    '$stateProvider', function($stateProvider) {
+                        $stateProvider
+                            .state('root', {
+                                url: '/:scrollTo',
+                                resolve: {
+                                    scroll: window.scrollToHandler
+                                }
+                            });
+                    }
+                ]);
+
+            Extensions.AngularBehaviorManager.setupAuthFailBehavior(app);
+            Extensions.AngularBehaviorManager.setupCacheBustingForHtmlTemplates(app, "20150805122813");
+            Extensions.AngularBehaviorManager.setupLogging(app, serverInfo.Api.Url,
+                serverInfo.Api.Key, serverInfo.Api.Version,
+                true);
+        })();
+
+</script>
+
+
+    <script src="https://qtastatic.com/content/20150805122813/LibraryJS.min.js"></script>
+
+
+
+<script type="text/javascript">
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement("script");
+    gads.async = true;
+    gads.type = "text/javascript";
+    var useSSL = "https:" == document.location.protocol;
+    gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+    var node = document.getElementsByTagName("script")[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+<script type="text/javascript">
+  googletag.cmd.push(function() {
+    googletag.pubads().set("adsense_background_color", "FFFFFF");
+  });
+</script>
+<script type="text/javascript">
+  googletag.cmd.push(function() {
+    googletag.defineSlot("/1005602/qta_article_728x90_bottom", [728,90], "div-adid-7031")
+      .addService(googletag.pubads())
+      .set("adsense_channel_ids", "2758605500")
+      .setTargeting("cat", "")
+      .setTargeting("pub", "p436556")
+      .setTargeting("page", "article")
+      .setTargeting("pos", "b1")
+      .setTargeting("sz", '728x90')
+      .setTargeting("tile", "1")
+      .setTargeting("ord", "1501789961");
+    googletag.enableServices();
+  });
+</script>
+
+    
+
+
+
+<script type="text/javascript">
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement("script");
+    gads.async = true;
+    gads.type = "text/javascript";
+    var useSSL = "https:" == document.location.protocol;
+    gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+    var node = document.getElementsByTagName("script")[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+<script type="text/javascript">
+  googletag.cmd.push(function() {
+    googletag.pubads().set("adsense_background_color", "FFFFFF");
+  });
+</script>
+<script type="text/javascript">
+  googletag.cmd.push(function() {
+    googletag.defineSlot("/1005602/qta_article_728x90_bottom", [728,90], "div-adid-7031")
+      .addService(googletag.pubads())
+      .set("adsense_channel_ids", "2758605500")
+      .setTargeting("cat", "")
+      .setTargeting("pub", "p436556")
+      .setTargeting("page", "article")
+      .setTargeting("pos", "b1")
+      .setTargeting("sz", '728x90')
+      .setTargeting("tile", "1")
+      .setTargeting("ord", "1501789961");
+    googletag.enableServices();
+  });
+</script>
+    
+    <meta name="citation_title" content="Guy Gavriel Kay: An Introduction" />
+        <meta name="citation_publisher" content="The International Association for the Fantastic in the Arts" />   
+        <meta name="citation_author" content="Wolfe, Gary K." />
+        <meta name="citation_publication_date" content="2009/03/22" />   
+        <meta name="citation_journal_title" content="Journal of the Fantastic in the Arts" />   
+        <meta name="citation_volume" content="20" />
+        <meta name="citation_issue" content="2" />
+        <meta name="citation_firstpage" content="238" />
+        <meta name="citation_language" content="eng" />
+        <meta name="citation_issn" content="0897-0521" />
+        <meta name="citation_fulltext_html_url" content="https://www.questia.com/read/1G1-223225904/guy-gavriel-kay-an-introduction" />
+        <meta name="citation_abstract_html_url" content="https://www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction" />   
+
+
+
+    <!-- indicate to Library.Master to render ProfileCSS -->
+<link href="https://qtastatic.com/content/20150805122813/ProfileCSS.min.css" rel="stylesheet" type="text/css" media="all"/>    
+        <title data-ng-bind="hc.title" data-ng-init="hc.setDefaultTitle('&quot;Guy Gavriel Kay: An Introduction&quot; by Wolfe, Gary K. - Journal of the Fantastic in the Arts, Vol. 20, Issue 2, Spring 2009 | Online Research Library: Questia')">&quot;Guy Gavriel Kay: An Introduction&quot; by Wolfe, Gary K. - Journal of the Fantastic in the Arts, Vol. 20, Issue 2, Spring 2009 | Online Research Library: Questia</title>
+    <meta name="description" content="The opening epigraph to guy Gavriel Kay&#39;s world fantasy award-winning novel Ysabel comes from..." />
+    
+    <link rel="canonical" href="https://www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction" />
+
+        <script type="text/javascript">
+            var pageName = "Article Profile";
+        </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).bind('OMNITURE_CLICK', $.proxy(function (e, data) {
+                OmnitureClick(data.actionName);
+            }, this));
+            $('#returnToSearchResults').click(function (e) {
+                e.stopPropagation();
+                $(document).trigger('OMNITURE_CLICK', { actionName: 'Header|ReturnToSearchResults' });
+            });
+        });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="/content/js/html5shiv.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body click-listener ng-cloak class=" user-abandon-non-auth" data-ng-class="{'menu-open' : menuOpen}">
+
+    <img class="print-logo" src="https://qtastatic.com/content/img/print-logo-full.jpg" alt="Questia: Trusted online research" width="183" height="45" />
+    
+    <!--- Global mBox -->
+    <div class="mboxDefault"></div>
+    <script type="text/javascript">mboxCreate('QTA_Global', 'loggedIn=False', 'partnerId=SEM_GOOGLE');</script>
+
+
+        <!-- SiteMaintenanceMessage -->
+
+        
+             
+        <div id="errorContainer">
+            
+
+           
+        </div>
+   
+    
+    
+    
+
+        <!--- Library mBox -->
+    <div class="mboxDefault"></div>
+    <script type="text/javascript">mboxCreate('QTA_SiteIndex', 'loggedIn=False', 'partnerId=SEM_GOOGLE');</script>
+
+    
+    <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+    <a onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Breadcrumbs' });" href="/">
+        Home</a> 
+    &#187; 
+    <a onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Breadcrumbs' });" href="/library">Browse</a> &#187;
+
+            <a onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Breadcrumbs' });" href="/library/academic-journal-articles">
+                Academic journals</a> 
+&#187;            <a onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Breadcrumbs' });" href="/library/t3052/literature-and-language-journals">
+                Literature and Language Journals</a> 
+&#187;            <a onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Breadcrumbs' });" href="/library/p436556/journal-of-the-fantastic-in-the-arts">
+                Journal of the Fantastic in the Arts</a> 
+&#187;            <span>Article details, &quot;Guy Gavriel Kay: An Introduction&quot;</span> 
+    </div>
+</div>
+
+
+
+    <div class="main-container" id="pageBackground"> 
+               
+        <div class="main wrapper clearfix">            
+            
+
+
+
+
+
+
+
+
+
+<!--- mBox -->
+
+<div class="mboxDefault"></div>
+<script type="text/javascript">mboxCreate('QTA_Profile', 'loggedIn=False', 'partnerId=SEM_GOOGLE');</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).bind("PROFILE_REFRESH", function (e, data) {
+            location.reload();
+        });
+    });
+</script>
+
+<div class="clearfix" id="profilePage">
+    <div class="inner-wrapper"> 
+        <section class="article profile-header-container full-width">        
+            <div class="clearfix">
+                <p class="pub-name">
+                    <span class="pub-type-label">
+                        Academic journal article
+                    </span>
+                    <em>Journal of the Fantastic in the Arts</em>
+                </p>
+
+                <h1 class="profile-title">Guy Gavriel Kay: An Introduction </h1>
+                <div class="byline">By Wolfe, Gary K.</div>
+            
+                <div class="pub-buttons">
+                    <a class="btn btn-primary btn-read-preview btn-lg" href="/read/1G1-223225904/guy-gavriel-kay-an-introduction">Read preview</a>
+                </div>
+                                            </div>  
+            </section>
+    
+        <article>   
+            <section class="article profile-header-container">                
+                <div class="clearfix">
+                    <p class="pub-name">
+                        <span class="pub-type-label">
+                            Academic journal article
+                        </span>
+                        <em>Journal of the Fantastic in the Arts</em>
+                    </p>
+
+                    <h1 class="profile-title">Guy Gavriel Kay: An Introduction </h1>
+                    <div class="byline">By Wolfe, Gary K.</div>
+            
+                    <div class="pub-buttons">
+                        <a class="btn btn-primary btn-read-preview btn-lg" href="/read/1G1-223225904/guy-gavriel-kay-an-introduction">Read preview</a>
+                    </div>
+                                                        </div>  
+                
+                </section>
+     
+            <section class="bp-synopsis">
+                    <h2>Article excerpt</h2>
+                        <div>
+                            <div><P>  The opening epigraph to guy Gavriel Kay's world fantasy award-winning novel Ysabel comes from the Robert Graves poem "To Juan at the Winter Solstice" and begins "There is one story and one story only/That will prove worth your telling." </P> <P>  It sounds like a brief proclamation or anthem of what we might expect as we launch into Kay's luminous tale of the youthful Ned and his family, who find themselves drawn into a tangle of myth, history, and legend in contemporary Provence, but at the end of the novel, Kay offers another quotation, this time from the English critic John Berger: "Never again will a single story be told / as if it were the only one." </P> <P>  To some extent, not only Ysabel but Kay's entire career as a fantasy writer inhabits the space between these two quotations, but in the end, I think John Berger wins. As privileged as story may be in his worldview, it's never an absolute, and since the beginning of his career exactly a quarter century ago, with the publication of The Summer Tree, Kay has been fascinated with the multiplicity of story, with the negotiations between new stories and old ones, between story as represented in history and story as transformed by fantasy. </P> <P>  That first trilogy, collectively titled The Fionavar Tapestry, set out to celebrate and to some degree restore the tradition of an earlier writer with similar concerns, J. R. R. Tolkien. A decade earlier, Kay had traveled to Oxford to assist Christopher Tolkien in the editing of The Silmarillion, and it is clear he has learned many lessons from the master. … </P></div>
+                        </div>
+            </section>            
+            <aside class="show-when-narrow">
+                    <div>
+                        <div class="profile-cta-container white-box">
+                            <div class="cta-inner">
+                                <a href="/subscribe" class="btn btn-cta btn-lg">SUBSCRIBE TODAY!</a>
+                                <p>Subscribe to Questia and enjoy:</p>
+                                <ul>
+                                    <li>Full access to this article and over 10 million more from academic journals, magazines, and newspapers</li>
+                                    <li>Over 83,000 books</li>
+                                    <li>Access to powerful writing and research tools</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                <div class="book-details aside-box changing-box">
+                    <h3>Article details</h3>
+                    <div class="pi-item">
+                            <p class="detail-item">
+                                <div class="peer-reviewed">
+    <span class="icon" aria-hidden="true" class="icon" data-icon="?"></span>PEER-REVIEWED PERIODICAL
+    <div class="flyout">Peer-reviewed publications on Questia are publications containing articles which were subject to evaluation for accuracy and substance by professional peers of the article's author(s).</div>
+</div>
+                            </p>
+
+                        <p class="detail-item">
+                            <span class="mobile-label">Publication:</span> <a href="/library/p436556/journal-of-the-fantastic-in-the-arts">Journal of the Fantastic in the Arts</a>
+                        </p>
+
+                            <p class="detail-item">
+                                <span class="mobile-label">Volume/issue:</span>
+                                    <a href="/library/p436556/journal-of-the-fantastic-in-the-arts/i2608950/vol-20-no-2-spring">Vol. 20, No. 2</a>
+                            </p>
+
+                        <p class="detail-item">
+                            <span class="mobile-label">Publication date:</span>
+
+Spring 2009
+                    </div>
+
+                        <div class="pi-item">
+                            <span class="mobile-label">Contributors:</span>
+                            <ul class="no-bullet-list">
+                                    <li><a href="/searchglobal#!/?contributor=Wolfe%2c%20Gary%20K.">Wolfe, Gary K.</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="pi-item">     
+                            <div show-more short-show="quick " short-hide="quick" long-show="quick" long-hide="quick"
+                             less-icon="n" more-icon="o"
+                             less-text="SHOW MORE" more-text="SHOW LESS" scroll-to-top="false">
+                            <span class="mobile-label">Subjects:</span>
+                            
+                                <ul class="no-bullet-list short">
+                                        <li>Kay, Guy Gavriel--Works</li>
+                                        <li>Novelists--Works</li>
+                                </ul>
+                            </div>     
+                        </div>
+                </div>
+            </aside>
+            <section>
+                
+                        <div class="related-books malt">
+                            <h2>Related books and articles</h2>
+                            
+<div id="maltResults" tabs>
+    <div class="tabs-container-new sr-tabs">
+        <ul id="relatedTabbedNav">
+            <li id="bookTab" class=" selected                 " ng-click="select($event)">
+                Books
+            </li>
+            <li id="academicTab" class="                " ng-click="select($event)">
+                Journals
+            </li>
+            <li id="magazineTab" class="                " ng-click="select($event)">
+                Magazines
+            </li>
+            <li id="newspaperTab" class="                " ng-click="select($event)">
+                Newspapers
+            </li>
+            <li id="encyclopediaTab" class="                " ng-click="select($event)">
+                Encyclopedia
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div id="itemList">
+            <div id="bookList" class="library-list clearfix"
+                 >
+                            <div class="list-item">
+                                <div class="list-item-details">
+                                    <a class="li-title" href="/library/1346942/asian-american-novelists-a-bio-bibliographical-critical">
+                                        Asian American Novelists: A Bio-Bibliographical Critical Sourcebook
+                                    </a>
+                                    <span class="li-author">By Emmanuel S. Nelson</span>
+                                    <span class="li-publisher">Greenwood Press, 2000</span>
+                                </div>
+                                <div class="li-controls">
+                                    <a class="btn btn-primary" href="/read/9588330/asian-american-novelists-a-bio-bibliographical-critical" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                    <a class="btn btn-default" href="/library/1346942/asian-american-novelists-a-bio-bibliographical-critical" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                    <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                         data-item-title="Asian American Novelists: A Bio-Bibliographical Critical Sourcebook"
+                                         data-item-text="Title: Asian American Novelists: A Bio-Bibliographical Critical Sourcebook
+Contributor(s): , 
+Publisher: Greenwood Press
+Year: 2000
+Page: "
+                                         data-item-action="read"
+                                         data-questia-doc-id="9588330"
+                                         data-page-number="114"></div>
+
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-details">
+                                    <a class="li-title" href="/library/101383009/contemporary-african-american-novelists-a-bio-bibliographical">
+                                        Contemporary African American Novelists: A Bio-Bibliographical Critical Sourcebook
+                                    </a>
+                                    <span class="li-author">By Emmanuel S. Nelson</span>
+                                    <span class="li-publisher">Greenwood Press, 1999</span>
+                                </div>
+                                <div class="li-controls">
+                                    <a class="btn btn-primary" href="/read/101383139/contemporary-african-american-novelists-a-bio-bibliographical" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                    <a class="btn btn-default" href="/library/101383009/contemporary-african-american-novelists-a-bio-bibliographical" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                    <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                         data-item-title="Contemporary African American Novelists: A Bio-Bibliographical Critical Sourcebook"
+                                         data-item-text="Title: Contemporary African American Novelists: A Bio-Bibliographical Critical Sourcebook
+Contributor(s): , 
+Publisher: Greenwood Press
+Year: 1999
+Page: "
+                                         data-item-action="read"
+                                         data-questia-doc-id="101383139"
+                                         data-page-number="xx"></div>
+
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-details">
+                                    <a class="li-title" href="/library/120072137/gay-fiction-speaks-conversations-with-gay-novelists">
+                                        Gay Fiction Speaks: Conversations with Gay Novelists
+                                    </a>
+                                    <span class="li-author">By Richard Canning</span>
+                                    <span class="li-publisher">Columbia University Press, 2001</span>
+                                </div>
+                                <div class="li-controls">
+                                    <a class="btn btn-primary" href="/read/120076624/gay-fiction-speaks-conversations-with-gay-novelists" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                    <a class="btn btn-default" href="/library/120072137/gay-fiction-speaks-conversations-with-gay-novelists" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                    <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                         data-item-title="Gay Fiction Speaks: Conversations with Gay Novelists"
+                                         data-item-text="Title: Gay Fiction Speaks: Conversations with Gay Novelists
+Contributor(s): , 
+Publisher: Columbia University Press
+Year: 2001
+Page: "
+                                         data-item-action="read"
+                                         data-questia-doc-id="120076624"
+                                         data-page-number="xxvi"></div>
+
+                                </div>
+                            </div>
+
+            </div>
+            <div id="academicList" class="library-list clearfix"
+                   style="display:none"   >
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/library/journal/1P3-3606168921/de-masking-institutionalised-mental-disorders-in-male-female">
+                                    De-Masking Institutionalised Mental Disorders in Male/Female Relationship: An Analysis of Some Female <b>Novelists</b>' <b>Works</b>
+                                </a>
+                                <span class="li-author">By Siwoku-Awi, Omotayo F.</span>
+                                <span class="li-publisher">Gender &amp; Behaviour, Vol. 12, No. 1, June 2014</span>
+
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1P3-3606168921/de-masking-institutionalised-mental-disorders-in-male-female" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/library/journal/1P3-3606168921/de-masking-institutionalised-mental-disorders-in-male-female" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="De-Masking Institutionalised Mental Disorders in Male/Female Relationship: An Analysis of Some Female &lt;b&gt;Novelists&lt;/b&gt;&#39; &lt;b&gt;Works&lt;/b&gt;"
+                                     data-item-text="Title: De-Masking Institutionalised Mental Disorders in Male/Female Relationship: An Analysis of Some Female &lt;b&gt;Novelists&lt;/b&gt;&#39; &lt;b&gt;Works&lt;/b&gt;
+Contributor(s): Siwoku-Awi, Omotayo F.
+Publication: Gender &amp; Behaviour 12 1 (2014): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1P3-3606168921"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/library/journal/1G1-188065410/reconstructing-arda-of-feanor-and-the-unchaining">
+                                    Reconstructing Arda: Of Feanor and the Unchaining of Melkor
+                                </a>
+                                <span class="li-author">By Kane, Douglas C.</span>
+                                <span class="li-publisher">Mythlore, Vol. 27, No. 1-2, Fall-Winter 2008</span>
+<div class="peer-reviewed">
+    <span class="icon" aria-hidden="true" class="icon" data-icon="?"></span>PEER-REVIEWED PERIODICAL
+    <div class="flyout">Peer-reviewed publications on Questia are publications containing articles which were subject to evaluation for accuracy and substance by professional peers of the article's author(s).</div>
+</div>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-188065410/reconstructing-arda-of-feanor-and-the-unchaining" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/library/journal/1G1-188065410/reconstructing-arda-of-feanor-and-the-unchaining" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Reconstructing Arda: Of Feanor and the Unchaining of Melkor"
+                                     data-item-text="Title: Reconstructing Arda: Of Feanor and the Unchaining of Melkor
+Contributor(s): Kane, Douglas C.
+Publication: Mythlore 27 1-2 (2008): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-188065410"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/library/journal/1G1-286392676/introduction-the-form-of-the-content-of-the-form">
+                                    Introduction: The Form of the Content of the Form
+                                </a>
+                                <span class="li-author">By Attebery, Brian</span>
+                                <span class="li-publisher">Journal of the Fantastic in the Arts, Vol. 19, No. 3, Fall 2008</span>
+<div class="peer-reviewed">
+    <span class="icon" aria-hidden="true" class="icon" data-icon="?"></span>PEER-REVIEWED PERIODICAL
+    <div class="flyout">Peer-reviewed publications on Questia are publications containing articles which were subject to evaluation for accuracy and substance by professional peers of the article's author(s).</div>
+</div>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-286392676/introduction-the-form-of-the-content-of-the-form" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/library/journal/1G1-286392676/introduction-the-form-of-the-content-of-the-form" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Introduction: The Form of the Content of the Form"
+                                     data-item-text="Title: Introduction: The Form of the Content of the Form
+Contributor(s): Attebery, Brian
+Publication: Journal of the Fantastic in the Arts 19 3 (2008): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-286392676"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+            </div>
+            <div id="magazineList" class="library-list clearfix"
+                   style="display:none"   >
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/article/1G1-4118415/missed-moorings-american-novelists-lose-touch">
+                                    Missed Moorings - American <b>Novelists</b> Lose Touch
+                                </a>
+                                <span class="li-author">By Lemann, Nicholas</span>
+                                <span class="li-publisher">The Washington Monthly, Vol. 18, February 1986</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-4118415/missed-moorings-american-novelists-lose-touch" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/article/1G1-4118415/missed-moorings-american-novelists-lose-touch" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Missed Moorings - American &lt;b&gt;Novelists&lt;/b&gt; Lose Touch"
+                                     data-item-text="Title: Missed Moorings - American &lt;b&gt;Novelists&lt;/b&gt; Lose Touch
+Contributor(s): Lemann, Nicholas
+Publication: The Washington Monthly 18  (1986): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-4118415"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/magazine/1P3-2108788931/mother-tongue-theologies-poets-novelists-non-western">
+                                    Mother Tongue Theologies: Poets, <b>Novelists</b>, Non-Western Christianity
+                                </a>
+                                <span class="li-author">By Iheanacho, Maureen</span>
+                                <span class="li-publisher">International Bulletin of Missionary Research, Vol. 34, No. 3, July 2010</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1P3-2108788931/mother-tongue-theologies-poets-novelists-non-western" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/magazine/1P3-2108788931/mother-tongue-theologies-poets-novelists-non-western" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Mother Tongue Theologies: Poets, &lt;b&gt;Novelists&lt;/b&gt;, Non-Western Christianity"
+                                     data-item-text="Title: Mother Tongue Theologies: Poets, &lt;b&gt;Novelists&lt;/b&gt;, Non-Western Christianity
+Contributor(s): Iheanacho, Maureen
+Publication: International Bulletin of Missionary Research 34 3 (2010): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1P3-2108788931"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-item-details">
+                                <a class="li-title" href="/article/1G1-99121721/why-british-thriller-writers-of-the-1930s-such-as">
+                                    Why British Thriller Writers of the 1930S, Such as Eric Ambler and Graham Greene, Offer a Far Better Exploration of the Nature of Freedom Than Any Other <b>Novelists</b>. (Platform)
+                                </a>
+                                <span class="li-author">By Evans, Julian</span>
+                                <span class="li-publisher">New Statesman (1996), Vol. 132, No. 4628, March 10, 2003</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-99121721/why-british-thriller-writers-of-the-1930s-such-as" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Related Books and Articles' });">Read preview</a>
+                                <a class="btn btn-default" href="/article/1G1-99121721/why-british-thriller-writers-of-the-1930s-such-as" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Why British Thriller Writers of the 1930S, Such as Eric Ambler and Graham Greene, Offer a Far Better Exploration of the Nature of Freedom Than Any Other &lt;b&gt;Novelists&lt;/b&gt;. (Platform)"
+                                     data-item-text="Title: Why British Thriller Writers of the 1930S, Such as Eric Ambler and Graham Greene, Offer a Far Better Exploration of the Nature of Freedom Than Any Other &lt;b&gt;Novelists&lt;/b&gt;. (Platform)
+Contributor(s): Evans, Julian
+Publication: New Statesman (1996) 132 4628 (2003): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-99121721"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+            </div>
+            <div id="newspaperList" class="library-list clearfix"
+                   style="display:none"   >
+                        <div class="list-item newspaper">
+                            <div class="list-item-details">
+                                <a href="/article/1G1-392007710/the-authors-who-inspired-us-to-write-they-re-enjoying" class="li-title">
+                                    The Authors Who Inspired Us to Write; They're Enjoying Success as Award-Winning Writers but Who Inspired Them to Pick Up a Pen in the First Place? as We Continue Our Celebration of Literature during Book Week, Arts Editor Karen Price Asks Four <b>Novelists</b> to Reveal Which <b>Works</b> Influenced Them
+                                </a>
+                                <span class="li-author">By </span>
+                                <span class="li-publisher">Western Mail (Cardiff, Wales), December 1, 2014</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-392007710/the-authors-who-inspired-us-to-write-they-re-enjoying">Read preview</a>
+                                <a class="btn btn-default" href="/article/1G1-392007710/the-authors-who-inspired-us-to-write-they-re-enjoying" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="The Authors Who Inspired Us to Write; They&#39;re Enjoying Success as Award-Winning Writers but Who Inspired Them to Pick Up a Pen in the First Place? as We Continue Our Celebration of Literature during Book Week, Arts Editor Karen Price Asks Four &lt;b&gt;Novelists&lt;/b&gt; to Reveal Which &lt;b&gt;Works&lt;/b&gt; Influenced Them"
+                                     data-item-text="Title: The Authors Who Inspired Us to Write; They&#39;re Enjoying Success as Award-Winning Writers but Who Inspired Them to Pick Up a Pen in the First Place? as We Continue Our Celebration of Literature during Book Week, Arts Editor Karen Price Asks Four &lt;b&gt;Novelists&lt;/b&gt; to Reveal Which &lt;b&gt;Works&lt;/b&gt; Influenced Them
+Publication: Western Mail (Cardiff, Wales)   (2014): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-392007710"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item newspaper">
+                            <div class="list-item-details">
+                                <a href="/article/1G1-382276321/fantasy-writer-graham-loses-cancer-battle-legendary" class="li-title">
+                                    Fantasy Writer Graham Loses Cancer Battle; Legendary Novelist Stephen King Leads Tributes to City-Born Author
+                                </a>
+                                <span class="li-author">By Williams, Steve</span>
+                                <span class="li-publisher">Coventry Evening Telegraph (England), September 12, 2014</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-382276321/fantasy-writer-graham-loses-cancer-battle-legendary">Read preview</a>
+                                <a class="btn btn-default" href="/article/1G1-382276321/fantasy-writer-graham-loses-cancer-battle-legendary" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Fantasy Writer Graham Loses Cancer Battle; Legendary Novelist Stephen King Leads Tributes to City-Born Author"
+                                     data-item-text="Title: Fantasy Writer Graham Loses Cancer Battle; Legendary Novelist Stephen King Leads Tributes to City-Born Author
+Contributor(s): Williams, Steve
+Publication: Coventry Evening Telegraph (England)   (2014): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-382276321"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+                        <div class="list-item newspaper">
+                            <div class="list-item-details">
+                                <a href="/newspaper/1G1-400819463/award-winning-novelists-join-global-host-of-writers" class="li-title">
+                                    Award-Winning <b>Novelists</b> Join Global Host of Writers on Folio Prize Shortlist
+                                </a>
+                                <span class="li-author">By Jury, Louise</span>
+                                <span class="li-publisher">The Evening Standard (London, England), February 9, 2015</span>
+                            </div>
+                            <div class="li-controls">
+                                <a class="btn btn-primary" href="/read/1G1-400819463/award-winning-novelists-join-global-host-of-writers">Read preview</a>
+                                <a class="btn btn-default" href="/newspaper/1G1-400819463/award-winning-novelists-join-global-host-of-writers" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'ArticleProfile|MALT' });" rel="nofollow">Overview</a>
+                                <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                     data-item-title="Award-Winning &lt;b&gt;Novelists&lt;/b&gt; Join Global Host of Writers on Folio Prize Shortlist"
+                                     data-item-text="Title: Award-Winning &lt;b&gt;Novelists&lt;/b&gt; Join Global Host of Writers on Folio Prize Shortlist
+Contributor(s): Jury, Louise
+Publication: The Evening Standard (London, England)   (2015): "
+                                     data-item-action="read"
+                                     data-questia-doc-id="1G1-400819463"
+                                     data-page-number="*"></div>
+
+                            </div>
+                        </div>
+            </div>
+            <div id="encyclopediaList" class="library-list clearfix"
+                   style="display:none"   >
+                        <div class="list-item encyclopedia">
+                            <div class="list-item-details">
+                                <span class="li-title">
+                                        <span class="free-label">FREE!</span>
+                                Polish literature
+                            </span>
+                            <span class="li-publisher">The Columbia Encyclopedia, 6th ed., 2015</span>
+                        </div>
+                        <div class="li-controls">
+                            <a class="btn btn-primary" href="/read/1E1-Polishli/polish-literature">Read</a>
+                            <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                 data-item-title="Polish literature"
+                                 data-item-text="Title: Polish literature
+Publication: The Columbia Encyclopedia, 6th ed.   (2015): "
+                                 data-item-action="read"
+                                 data-questia-doc-id="1E1-Polishli"
+                                 data-page-number="*"></div>
+
+                        </div>
+                    </div>
+                        <div class="list-item encyclopedia">
+                            <div class="list-item-details">
+                                <span class="li-title">
+                                        <span class="free-label">FREE!</span>
+                                Dutch and Flemish literature
+                            </span>
+                            <span class="li-publisher">The Columbia Encyclopedia, 6th ed., 2015</span>
+                        </div>
+                        <div class="li-controls">
+                            <a class="btn btn-primary" href="/read/1E1-DutchNFl/dutch-and-flemish-literature">Read</a>
+                            <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                 data-item-title="Dutch and Flemish literature"
+                                 data-item-text="Title: Dutch and Flemish literature
+Publication: The Columbia Encyclopedia, 6th ed.   (2015): "
+                                 data-item-action="read"
+                                 data-questia-doc-id="1E1-DutchNFl"
+                                 data-page-number="*"></div>
+
+                        </div>
+                    </div>
+                        <div class="list-item encyclopedia">
+                            <div class="list-item-details">
+                                <span class="li-title">
+                                        <span class="free-label">FREE!</span>
+                                Norwegian literature
+                            </span>
+                            <span class="li-publisher">The Columbia Encyclopedia, 6th ed., 2015</span>
+                        </div>
+                        <div class="li-controls">
+                            <a class="btn btn-primary" href="/read/1E1-Norwlit/norwegian-literature">Read</a>
+                            <div class="btn-mindtap-container" data-qt-addto-mindtap=""
+                                 data-item-title="Norwegian literature"
+                                 data-item-text="Title: Norwegian literature
+Publication: The Columbia Encyclopedia, 6th ed.   (2015): "
+                                 data-item-action="read"
+                                 data-questia-doc-id="1E1-Norwlit"
+                                 data-page-number="*"></div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="see-all-container"><a href="/searchglobal#!/?keywords=(Kay%2c%20Guy%20Gavriel%20Works)%20OR%20(Novelists%20Works)" class="btn btn-sm btn-default">VIEW ALL RELATED BOOKS AND ARTICLES</a></div>
+    </div>
+</div>
+
+
+                        </div>
+            </section>
+        </article>
+        
+        <aside id="sidebar" class="sidebar">
+            <div class="show-when-wide">
+                    <div id="QTA_ArticleProfileTop_Visitor_CTA">
+                        <div class="profile-cta-container white-box">
+                            <div class="cta-inner">
+                                <a href="/subscribe" class="btn btn-cta btn-lg">SUBSCRIBE TODAY!</a>
+                                <p>Subscribe to Questia and enjoy:</p>
+                                <ul>
+                                    <li>Full access to this article and over 10 million more from academic journals, magazines, and newspapers</li>
+                                    <li>Over 83,000 books</li>
+                                    <li>Access to powerful writing and research tools</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                <div class="book-details aside-box changing-box">
+                    <div class="inner">
+                        <h3>Article details</h3>
+
+<div class="peer-reviewed">
+    <span class="icon" aria-hidden="true" class="icon" data-icon="?"></span>PEER-REVIEWED PERIODICAL
+    <div class="flyout">Peer-reviewed publications on Questia are publications containing articles which were subject to evaluation for accuracy and substance by professional peers of the article's author(s).</div>
+</div>
+                        <p class="detail-item">
+                            <span class="mobile-label">Publication:</span> <a href="/library/p436556/journal-of-the-fantastic-in-the-arts">Journal of the Fantastic in the Arts</a>
+                        </p>
+
+
+                            <p class="detail-item">
+                                <span class="mobile-label">Volume/issue:</span>
+                                    <a href="/library/p436556/journal-of-the-fantastic-in-the-arts/i2608950/vol-20-no-2-spring">Vol. 20, No. 2</a>
+                            </p>
+
+                        <p class="detail-item">
+                            <span class="mobile-label">Publication date:</span>
+
+Spring 2009                        </p>
+
+                            <div class="detail-item">
+                                <span class="mobile-label">Contributors:</span>
+                                <ul class="no-bullet-list">
+                                        <li><a href="/searchglobal#!/?contributor=Wolfe%2c%20Gary%20K.">Wolfe, Gary K.</a></li>
+                                </ul>
+                            </div>
+
+                        <div class="detail-item">     
+                            <div show-more short-show="quick " short-hide="quick" long-show="quick" long-hide="quick"
+                             less-icon="n" more-icon="o"
+                             less-text="SHOW MORE" more-text="SHOW LESS" scroll-to-top="false">
+                            <span class="mobile-label">Subjects:</span>
+                            
+                                <ul class="no-bullet-list short">
+                                        <li>Kay, Guy Gavriel--Works</li>
+                                        <li>Novelists--Works</li>
+                                </ul>
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-sharing clear">
+                <!-- AddThis Button BEGIN -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_sharing_toolbox"></div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+
+
+            </div>
+
+
+
+                    <div id="GoogleAds" class="google-ads-wrapper aside-ad">
+                        <div class="mboxDefault">
+
+<div class="ad google textadgoogle">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- new beta test -->
+<ins class="adsbygoogle adslot_fixed"
+     style="width:300px;height:250px"
+     data-ad-client="ca-pub-1767711865744298"
+     data-ad-slot="4922687117"
+     data-override-format="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+                        </div>
+                        <script type="text/javascript">mboxCreate('QTA_ArticleProfile_TextAdRt');</script>
+                    </div>
+            
+            <div class="sidebar-sharing-mobile clear">
+                <!-- AddThis Button BEGIN -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_sharing_toolbox"></div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+
+
+            </div>
+
+        </aside> 
+    </div>
+</div>
+        </div>
+
+
+        <footer class="main-footer">
+            Questia is operated by <a href="http://www.cengage.com" target="_blank" omniture-click="Footer|Disclosure">Cengage Learning</a>.<br /> 
+            Copyright &copy; 2015. All rights reserved.
+        </footer>
+
+    </div>
+
+    
+    <header data-ng-controller="HeaderCtrl as hc" id="headerNavigation" class="header-menu main-header">
+        
+
+
+
+<nav class="main-navigation slide-navigation" data-ng-class="{'submenu-open' : (showLibraryMenu || showWritingCenterMenu)}" >
+    <label data-ng-click="$parent.menuOpen = !$parent.menuOpen; showLibraryMenu = false; showWritingCenterMenu = false;" class="nav-close clickable" id="navMenuCloseButton"><span aria-hidden="true" data-icon="Z"></span></label>
+    <div>
+        <ul class="primary no-bullet-list"> 
+            <li><a  href="/">Home</a></li>
+            <li><a class=selected data-ng-click="showLibraryMenu = !showLibraryMenu">Library <span aria-hidden="true" data-icon="h" class="chevron"></span></a></li>
+            <li><a  data-ng-click="showWritingCenterMenu = !showWritingCenterMenu">Writing Center <span aria-hidden="true" data-icon="h" class="chevron"></span></a></li>
+            <li><a  href="/research-tutorials">Tutorials</a></li>
+            <li><a  href="/projects">Projects</a></li>
+        </ul>
+    </div>
+
+
+    <div>
+        <ul class="secondary no-bullet-list">
+            <li>
+                <a  id="footerAboutUs" href="/about-questia" omniture-click="Footer|About Us">About us</a>
+            </li>
+            <li>
+                    <a id="footerTakeaTour" href="/#library" omniture-click="Footer|TakeaTour">Take a tour</a>
+            </li>
+            <li><a id="footerFeatureIndex"  href="/feature-index">Feature index</a></li>
+            <li><a id="footerEducators" href="http://landing.questia.com/educator1" target="_blank">For educators</a></li>
+            <li><a id="footerBlog" href="http://blog.questia.com/" omniture-click="Footer|Blog">Blog</a></li>
+            <li>
+                <a  id="footerAffiliates" href="/affiliates" omniture-click="Footer|Affiliate program">Affiliates</a>
+            </li>
+            <li><a  id="footerPrivacy" href="/privacy-policy" omniture-click="Footer|Privacy">Privacy policy</a></li>
+            <li><a  id="footerUserAgreement" href="/user-agreements" omniture-click="Footer|UserAgreement">User Agreements</a></li>
+            <li><a  id="footerContactUs" href="/contact-us" omniture-click="Footer|Contact Us">Contact us</a></li>
+            <li class="last"><a  id="footerHelp" href="/help" omniture-click="Footer|Help">Help</a></li>
+        </ul>
+    </div>
+
+        <div class="footer-social">
+            <a class="social-icon" href="http://www.facebook.com/QuestiaOnlineLibrary" target="_blank" title="Follow us on Facebook"><span aria-hidden="true" data-icon="&#x0052"></span></a>
+            <a class="social-icon" href="http://twitter.com/Questia" target="_blank" title="Follow us on Twitter"><span aria-hidden="true" data-icon="&#x0053"></span></a>
+            <a class="social-icon" href="https://plus.google.com/u/0/b/100840110882015019129/" target="_blank" title="Follow us on Google+"><span aria-hidden="true" data-icon="&#x0054"></span></a>
+            <a class="social-icon" href="http://www.youtube.com/questiaresearch" target="_blank" title="Follow us on You Tube"><span aria-hidden="true" data-icon="&#x0055"></span></a>
+        </div>
+</nav>
+
+<nav class="slide-navigation sub-navigation library-navigation" data-ng-class="{'submenu-open' : showLibraryMenu}">
+    <label data-ng-click="$parent.menuOpen = !menuOpen; showLibraryMenu = false; showWritingCenterMenu = false;" class="nav-close clickable"><span aria-hidden="true" data-icon="Z"></span></label>
+    <a class="back-link" data-ng-click="showLibraryMenu = false; showWritingCenterMenu = false">
+        <span aria-hidden="true" class="icon" data-icon="e"></span>
+        Back
+    </a>
+    <a class="main-nav-caps" id="navBrowse" ng-click="hc.toggleLibraryBrowse()" no-click omniture-click="Header|BrowseLibrary" class="first"><span aria-hidden="true"></span> Library</a>
+<div id="browseFlyout" class="nav-flyout browse-fo clearfix" fade data-toggle-on="hc.isLibraryBrowseVisible">
+    <div class="col-topic">
+        <h3>By topic</h3>
+        <div class="col">
+            <ul>
+                    <li><a href="/library/art-and-architecture" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Art and Architecture' });">Art and Architecture</a>
+                    </li>
+                    <li><a href="/library/communication" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Communication' });">Communication</a>
+                    </li>
+                    <li><a href="/library/controversial-topics" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Controversial Topics' });">Controversial Topics</a>
+                    </li>
+                    <li><a href="/library/criminal-justice" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Criminal Justice' });">Criminal Justice</a>
+                    </li>
+                    <li><a href="/library/economics-and-business" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Economics and Business' });">Economics and Business</a>
+                    </li>
+                    <li><a href="/library/education" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Education' });">Education</a>
+                    </li>
+                    <li><a href="/library/history" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'History' });">History</a>
+                    </li>
+                    <li><a href="/library/law" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Law' });">Law</a>
+                    </li>
+            </ul>
+        </div>
+        <div class="col">
+            <ul>
+                    <li><a href="/library/literature" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Literature' });">Literature</a>
+                    </li> 
+                    <li><a href="/library/music-and-performing-arts" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Music and Performing Arts' });">Music and Performing Arts</a>
+                    </li> 
+                    <li><a href="/library/philosophy" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Philosophy' });">Philosophy</a>
+                    </li> 
+                    <li><a href="/library/politics-and-government" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Politics and Government' });">Politics and Government</a>
+                    </li> 
+                    <li><a href="/library/psychology" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Psychology' });">Psychology</a>
+                    </li> 
+                    <li><a href="/library/religion" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Religion' });">Religion</a>
+                    </li> 
+                    <li><a href="/library/science-and-technology" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Science and Technology' });">Science and Technology</a>
+                    </li> 
+                    <li><a href="/library/sociology-and-anthropology" onclick="$(document).trigger('OMNITURE_CLICK', { actionName: 'Sociology and Anthropology' });">Sociology and Anthropology</a>
+                    </li> 
+            </ul>
+        </div>
+    </div>
+    <div class="col-pubtype">
+        <h3>By publication</h3>
+        <ul>
+            <li><a href="/library/books">Books</a>
+                <ul class="child">
+                    <li><a href="/library/free-books"><span class="tree-dash">&ndash; </span>Free books</a></li>
+                    <li><a href="/library/cliffs-notes/1"><span class="tree-dash">&ndash; </span>CliffsNotes</a></li>
+                </ul>
+            </li>
+            <li><a href="/library/academic-journal-articles">Academic journals</a> </li>
+            <li><a href="/library/magazine-articles">Magazines</a> </li>
+            <li><a href="/library/newspaper-articles">Newspapers</a></li> 
+            <li><a href="/library/peer-reviewed">Peer-reviewed periodicals</a></li>           
+        </ul>
+    </div>
+    <div class="fo-bottom-container view-all">
+        <a href="/library">View entire library</a>
+    </div>
+</div>
+</nav>
+
+<nav class="slide-navigation sub-navigation wc-navigation" data-ng-class="{'submenu-open' : showWritingCenterMenu}" >
+    <label data-ng-click="$parent.menuOpen = !$parent.menuOpen; showLibraryMenu = false; showWritingCenterMenu = false;" class="nav-close clickable"><span aria-hidden="true" data-icon="Z"></span></label>
+    <a class="back-link" data-ng-click="showLibraryMenu = false; showWritingCenterMenu = false">
+        <span aria-hidden="true" class="icon" data-icon="e"></span>
+        Back
+    </a>
+    <div class="nav-flyout browse-fo browse-fo-wc clearfix col">
+        <ul  class="secondary no-bullet-list">
+            <li><a ng-click="hc.isWritingCenterBrowseVisible = false" no-click href="/writing-center#!/">Writing Center</a> </li>
+            <li><a ng-click="hc.isWritingCenterBrowseVisible = false" no-click href="/writing-center#!/topic-ideas/">Topic finder</a></li>
+            <li><a ng-click="hc.isWritingCenterBrowseVisible = false" no-click href="/writing-center#!/9-steps-to-writing-research-paper">9 writing steps</a></li>
+            <li><a href="/research-tutorials">Tutorials</a></li>
+        </ul>
+    </div>
+</nav>
+        <div class="meta-nav">
+            <a href="/" class="hdr-logo"></a>
+            <nav>
+                <ul>
+                    <li class="menu-item search">
+                        <label id="btnSearch" ng-click="hc.toggleSearch(); focusInput=true" no-click="" class="clickable btn-search">
+                            <span class="icon" aria-hidden="true" data-icon="w"></span>
+                            <span class="text">Search</span>
+                        </label>
+                    </li> 
+                    <li class="menu-item menu">
+                        <label data-ng-click="$parent.menuOpen = !$parent.menuOpen" class="clickable">                            
+                            <span class="hamburger-icon icon">
+                                <span></span>
+                            </span>
+                            <span class="text">Menu</span>
+                        </label>
+                    </li> 
+                </ul>
+            </nav>
+        </div>        
+        <div id="globalSearchContainer" class="global-search-container" data-ng-class="{visible: hc.isSearchVisible}">
+    <form name="searchBoxForm" data-ng-submit="submitSearch(searchTerm)">
+        <div id="headerSearch" search-box data-toggle-search="hc.toggleSearch()" data-long-placeholder="Search over 10 million books and articles" data-short-placeholder="Search our library">
+           <div class="gs-searchbox-container clearfix">
+                <label class="placeholder-label" for="searchValue">Search over 10 million books and articles</label>
+                <label class="placeholder-label short-search" for="searchValueShort">Search our library</label>
+            
+                <div class="input-container">
+                    <input data-ng-model="searchTerm" name="searchInput" required type="search" id="searchValue" maxlength="200" placeholder="Search over 10 million books and articles" class="global-search-input" autofocus="autofocus" focus-me="focusInput" />
+                    <input data-ng-model="searchTerm" name="searchInput" required type="search" id="searchValueShort" maxlength="200" placeholder="Search our library" class="global-search-input short-search" />
+                </div>
+            </div>
+        
+            <div class="global-search-controls">           
+                <button class="btn btn-ghost" type="submit" value="Search">
+                    <span aria-hidden="true" data-icon="&#x0077"></span>
+                </button>
+                <span class="close-btn clickable" aria-hidden="true" data-icon="&#x005a" ng-click="hc.toggleSearch()" no-click></span>
+            </div>
+            <div class="global-search-filter-wrapper"  data-ng-class="{'open': hc.isFilterVisible == true}">
+                <a class="btn btn-default" no-click ng-click="hc.toggleFilter()">
+                    <span data-ng-bind="filterType" data-ng-hide="filterType == 'contributor'"></span>
+                    <span data-ng-show="filterType == 'contributor'">Author</span>
+                    <span aria-hidden="true" data-icon="n" class="icon"></span>
+                </a>
+                <a class="mobile-link" no-click ng-click="hc.toggleFilter()">
+                    <span>Advanced search</span>
+                    <span aria-hidden="true" data-icon="n" class="icon"></span>
+                </a>
+                <div class="gs-filter-flyout nav-flyout" fade data-toggle-on="hc.isFilterVisible">
+                    <div class="gs-filter-inner clearfix">
+                        <div class="gs-filter-col-1">
+                            <strong>Search by ...</strong>
+                            <ul class="no-bullet-list">
+                                <li ng-click="keywordClick()" ng-class="{selected: filterType == 'keywords'}" omniture-click="Results|KeywordFilter"><a>Keyword<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="titleClick()" ng-class="{selected: filterType == 'title'}" omniture-click="Results|TitleFilter"><a>Title<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="authorClick()" ng-class="{selected: filterType == 'contributor'}" omniture-click="Results|AuthorFilter"><a>Author<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="subjectClick()" ng-class="{selected: filterType == 'subject'}" omniture-click="Results|SubjectFilter"><a>Subject<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="publisherClick()" ng-class="{selected: filterType == 'publisher'}" omniture-click="Results|PublisherFilter"><a>Publisher<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="gs-filter-col-2">
+                            <strong>Results should have ...</strong>
+                            <ul class="no-bullet-list">
+                                <li ng-click="allClick()" ng-class="{selected: filterModifier == 'AllWords'}"><a>All of these words<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="anyClick()" ng-class="{selected: filterModifier == 'AnyWords'}"><a>Any of these words<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="exactClick()" ng-class="{selected: filterModifier == 'ExactPhrase'}"><a>This exact phrase<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                                <li ng-click="noneClick()" ng-class="{selected: filterModifier == 'NoWords'}"><a>None of these words<span aria-hidden="true" data-icon="W" class="icon"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="footnote" class="gs-filter-bottom-bar" ng-show="filterType == 'keywords'">
+                        Keyword searches may also use the operators
+                        AND, OR, NOT, “ ”, ( )
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </form>
+
+</div> 
+        <div class="utility-container">
+            <div class="mobile-login-controls clearfix" data-ng-controller="StatusHeaderController as shc" data-ng-hide="shc.isProcessing">
+
+    <div class="mobile-logout" data-ng-show="shc.isAuthenticated && shc.isAbandoner">
+        <a href="/logout">
+            <span class="icon-lock" aria-hidden="true" data-icon="&#x0042"></span>Log out
+        </a>
+    </div>
+    <div class="mobile-complete-reg" data-ng-show="shc.isAuthenticated && shc.isAbandoner">
+        <a id="QTA_RegCTA_Abandoner_Header_Mobile" href="/subscribe/registration2">Upgrade your membership</a>
+    </div>
+
+    <div class="mobile-login" data-ng-hide="shc.isAuthenticated">
+        <a href="/member-login">
+            <span class="icon-lock" aria-hidden="true" data-icon="&#x0042"></span>Log in
+        </a>
+    </div>
+    <div class="mobile-signup" data-ng-hide="shc.isAuthenticated">
+        <a id="QTA_RegCTA_Header_Mobile" href="/subscribe">Buy instant access</a>
+    </div>
+</div>                   
+            <div data-qt-projects-header=""></div>
+            <div data-qt-status-header=""></div>
+        </div>           
+    </header>
+
+     <a class="back-to-top" aria-hidden="true" data-icon="&#x006a"></a> 
+
+    <div id="mdModalContainer">                
+        <div class="md-overlay"></div>
+    </div>
+
+
+    <!-- SiteCatalyst code version: H.10.
+            Copyright 1997-2007 Omniture, Inc. More info available at
+            http://www.omniture.com -->
+    <script type="text/javascript">
+            var OmnitureSuite = "highbeamquestia";
+            var CustomClickPropNumber = '34';
+    </script>
+<script src="https://qtastatic.com/content/20150805122813/SiteBodyEndJS.min.js"></script>    <script type="text/javascript">
+    /*<![CDATA[*//*---->*/
+    s.pageName="Article Profile";
+    s.channel="Article Profile";
+    s.server="www.questia.com";
+        s.campaign="bp_se1";
+                s.prop10="journal";
+    s.prop20="SEM_GOOGLE";
+    s.prop21="1G1:223225904|Guy Gavriel Kay: An Introduction";
+    s.prop25="first";
+    s.prop35="";
+    s.prop38="www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction";
+    s.prop50="";
+    s.prop51="";
+    s.prop52="";
+    s.prop53="";
+    s.prop54="";
+
+    s.eVar10="journal";
+    s.eVar20="SEM_GOOGLE";
+    s.eVar21="1G1:223225904|Guy Gavriel Kay: An Introduction";
+    s.eVar25="first";
+    s.eVar43="";
+
+    s.hier2="guest";
+    s.hier4="";
+
+                var s_code=s.t();
+    if(s_code) document.write(s_code)
+    /*--*//*]]>*/
+    </script>
+    <script type="text/javascript">
+<!--
+    if (navigator.appVersion.indexOf('MSIE') >= 0) document.write(unescape('%3C') + '\!-' + '-')
+//--></script>
+    <!--/DO NOT REMOVE/-->
+    <!-- End SiteCatalyst code version: H.10. -->
+    
+    <!--/#wrapperMain-->
+
+    
+    
+    <script type="text/javascript">
+        googleDefer.srcs.push("https://s7.addthis.com/js/300/addthis_widget.js#pubid=yquintanar");
+    </script>
+
+        <script type="text/javascript">
+            function USI_installCode() {
+                var USI_headID = document.getElementsByTagName("head")[0];
+                var USI_installID = document.createElement('script');
+                USI_installID.type = 'text/javascript';
+                USI_installID.src = 'http'+ (document.location.protocol=='https:'?'s://www':'://www')+ '.upsellit.com/custom/questia.jsp';
+                USI_headID.appendChild(USI_installID);
+            }
+            if (window.addEventListener){
+                window.addEventListener('load', USI_installCode, true);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', USI_installCode);
+            } else {
+                USI_installCode();
+            }
+        </script>
+
+    <script type="text/javascript">
+        (function () {
+            var tagjs = document.createElement("script");
+            var s = document.getElementsByTagName("script")[0];
+            tagjs.async = true;
+            tagjs.src = "//s.btstatic.com/tag.js#site=FIlmgbU";
+            s.parentNode.insertBefore(tagjs, s);
+        }());
+    </script>
+    <noscript>
+        <iframe src="//s.thebrighttag.com/iframe?c=FIlmgbU" width="1" height="1" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+    </noscript>
+
+        
+<!-- You are on ohcinqtaweb07 -->
+
+
+        <div data-ng-controller="GlobalApplicationController as gac">
+            <!-- If the application fails for whatever reason, we need to provide feedback and guidance to the user. -->
+            <div data-qt-modal="gac.appFailedModal" data-title="Oops!" data-classname="global-error-modal" data-hide-close="true" data-is-small="true" data-show-title="false">
+                <h3>Oops!</h3>
+                <p>An unknown error has occurred. Please click the button below to reload the page. If the problem persists, please try again in a little while.</p>
+
+                <div class="buttons">
+                    <a class="btn btn-sm btn-primary" data-ng-click="gac.reload()"><span aria-hidden="true" data-icon="4"></span> Reload</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="ie8-modal-placeholder"></div>
+        <script>
+            $(document).ready(function(){
+                if($('html').hasClass("ie8") && sessionStorage['dismissedIE8']!=="true") {
+                    $.ajax({
+                        url: "ie8-not-supported.html",
+                        success: function(html) {
+                            $("#ie8-modal-placeholder").html(html);
+                            uiUtils.openMdModal($("#BrowserDetectionModal"));
+                        },
+                        error: function() {
+                            alert("IE 8 is not supported.");
+                        }
+                    });
+                }
+            });
+        </script>
+</body>
+</html>

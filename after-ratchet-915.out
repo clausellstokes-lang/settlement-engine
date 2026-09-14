@@ -1,0 +1,24 @@
+PREDICTED (E4, §915): totalFiles 2497 -> 2499 (+2: tests/lint/proseCorpusBytes.test.js and tests/property/dossierProseManifest.test.js), entries 3 unchanged (no owed-ledger car; no banked row moves), totalTests REFUSED 
+TRUE_EXIT=0
+MEASURED: totalTests=32237 totalFiles=2499 entries=3
+--- totals car:
+PREDICTED (E4, §915): totalFiles 2497 -> 2499 (+2: tests/lint/proseCorpusBytes.test.js and tests/property/dossierProseManifest.test.js), entries 3 unchanged (no owed-ledger car; no banked row moves),
+MEASURED: totalTests=32237 totalFiles=2499 entries=3
+totals: totalTests 32173 -> 32237 · totalFiles 2499 · entries 3 · measuredAt 88898653f
+TOTALS CAR 450934d0d committed; cars over 8522a17b2=19; sealed measure-2026-09-08
+TOTALS_EXIT=0
+totalTests (from the committed baseline) = 32237
+--- capsule car (ACTIVE at rung 18 — the OSR CLI is open):
+CAPSULE_EXIT=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 13474 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at 450934d0 (20 figures).
+capsule porcelain=[ M docs/implementation/BASE_STATE.json ]
+CAPSULE CAR -> 3b22b5c56
+CARS=20 · HEAD=3b22b5c56 · porcelain=[]
+--- re-stamp the kit at 20 cars:
+  + run-gate-915.sh run-ratchet-915.sh (fill __PREDICTION__)
+kit §915 stamped in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit: after-cas-915.sh collect-915.sh payload-915.template.json msg-915.txt · dock=laneMEASURE base=8522a17b2 seal=landing-measure-2026-09-08 cars=20 · fill __ROW__/__ROW_BODY__/__CARD__/__CARD_BODY__/__TAIL__/__TAIL_BODY__/__SUBJECT__/__BODY__/__ENROLS__
+5:D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneMEASURE
+6:BASE=8522a17b20febb07ebe16bc9d739b9ebc54411c7   # the declared base; the guards below refuse to run unless the product tip IS this sha
+SEALED measure-2026-09-08 = 3b22b5c56
+NEXT: launch run-gate-915.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-915.sh, then fill texts-915 (__CARS__=20 __ENTRIES__ __TESTS__ __TOTALS__) and collect.

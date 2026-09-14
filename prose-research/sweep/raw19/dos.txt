@@ -1,0 +1,1709 @@
+ 
+
+ Pages
+
+ Dungeon of Signs 
+
+ PDFs to download 
+
+ ASE home Campaign Play Reports 
+
+ Classic Module Reviews - The B Series 
+
+ Tomb of the Rocket Men 
+
+ Saturday, December 5, 2015 
+
+Lost Mines of Phandelver - Review
+
+ THE WORST THING ABOUT D&D 
+
+Forgotten Realms was the worst thing to happen to D&D, a terrible setting that reeks of bathos and takes itself far too seriously. It plunders everything cliched and overused from Tolkien but abandons all the strange sadness and the mythological references. It fills the land with huge civilized bastions of good/order like Waterdeep and exhaustively defines their systems of governance, but allows these nations to be plagued by trifling enemies like goblin tribes. Forgotten Realms embraces a pedantic faux-medievalism, but then uses a contemporary positivist understanding to explain magic that allows for cutesy magical technology to gloss over the inconvenient aspects of the pre-modern. Most offensively, most objectionably, Forgotten Realms is a dense, full, world - so steeped in cliched lore and laid out so extensively in dull gazetteers that there is no room for a GM's creativity without excising some of the existing setting and map.
+
+I'm not here to talk about Forgotten Realms, except as a symptom, it will always be terrible. I'm here because I've been reading the 5th edition's introductory module Lost Mines of Phandelver . I start with my objections to Forgotten Realms, because I think they are the root of the module's considerable problems. That and a player coddling, computer role-playing game derived game design ethos that limits player choice and insults player intelligence in the name of providing a consistent play experience. Many people love this module, I do not. It's not the worst thing I've ever read, it's not even close to as bad as Dragons of Flame , but its positive design and structure elements are mired in a pablum of fantasy cliche so bland that it makes for one wish for even Dragonlance's feeble gestures towards the weird and the wonderful. Fifth Edition has a certain promise to players of older editions with a step back from grid based complex combat as the center of the game, towards exploration and roleplay, and Lost Mines could be intended to be an introduction to this style of play. However, as a 'teaching' module Lost Mines is confused wreck, giving good advice about avoiding railroads one moment and then on the next page making every effort to railroad the characters. As a tool for Dungeons & Dragons pedagogy its never more then half decent and for every time it says the right words it demonstrates the concepts very badly.
+
+ LOST MINES OF PHANDELVER 
+
+ Hey look a Dragon 
+
+A glossy and sometimes lovely book with maps and art that are both inoffensive and excellently drafted. The art is relatively sparse and frequently seems designed for reuse, not showing actual events or NPC from the adventure, but rather generic fantasy monsters and vanilla fantasy adventuring archetypes engaging in non-specific adventuring tasks. In fact not a single art piece within depicts an actual event from the adventure - it's as if everything was designed to be recycled in later publications. Even the cover is a generic adventurers and dragon sort of image, yet the art and layout are inviting,simple and certainly professional looking - more digital watercolor, bland but with a bit less of the shiny over sized shoulder armor or 'dungeon punk' aesthetic of some other editions. Something a bit more characterful would be nice, but everything in its soft pastels, greys and browns is readable, clean and offers no challenges for the reader.
+
+The adventure itself is fairly long, broken into four episodes, some with multiple small keyed locations. These sections begin to feel rushed and more poorly designed as the adventure progresses, but none are unusable. First there is a section of general advice and plot overview, followed by a goblin ambush and lair, then a town with bandit trouble. Finally some other small locations, one with a dragon, a castle of goblins, and ultimately a cave complex with the regional evil mastermind hard at work exploring within. 
+
+ PLAY ADVICE AND INTRODUCTION 
+
+In a way this short section of advice and suggestions for playing Lost Mine and D&D more generally is one of the most interesting parts of the adventure. The advice in introductory modules is always a window into the game designer's mind and the system's preferred play style. In general I have enjoyed the 5th Edition of D&D's expressions of support for less structured, non-adversarial play, with more GM control and a focus on rulings and creative solutions to in game problems. The advice in Lost Mine follows this pattern with explicit and early cautions against adversarial play and encouragement towards fairness and adjudication rather then rules mastery.
+
+There is little specific advice in this section, and while it's friendlier then the introduction to something like Keep on the Borderlands (a pure expression of that Gygaxian impartial actuary of death play style) it also has less advice on running the game, running monsters and thinking about the world - in many more pages. What advice Phandelver offers however is refreshingly positive and encourages the sort of creative group story telling that only table top role playing games can deliver. It just fails to give many practical examples of this, or worse, when it does the actual adventure provided tramples all over its ideals in favor of a squishy railroad, moral judgment of player goals and forced novelistic pacing.
+
+The hooks and background of Lost Mine uninteresting - ancient mine, pact between gnomes and dwarves, and a magical forge that produced wondrous enchanted items. Of course orcs smashed it up at some point and it was forgotten. People keep trying to find the rumored treasure mine, but no one has in hundreds of years, until now - all despite its convenient location. This whole hook makes my skin itch, but worse is the disheartening level of vanilla fantasy, rulebook obsessing detail it's described with. The invading evil army is of course orcs, and of course Lost Mines has to add that 'evil mercenary wizards' were also involved. Dwarves and Gnomes are of course the original owners of the cave, and somehow lost all their maps when the mine was overrun. Why do only dwarves and gnomes ever have mines, why do ancient NPC orcs need human wizards, and why must it always be orcs destroying things. First rewrite. 
+
+" The ancient rock spirits of the Wave Echo Cave produced marvelous magical gems, occasionally trading them to the primitive tribal peoples of the Coast, but as civilization grew the spirits retreated into their wondrous mine and traded less and less. The folly of civilization is to believe it can overpower the world, and enraged by the end of trade, armies from the growing city states banded together to seize the spirits' mine and enslave it's diminutive fey workers. A great battle was fought and both mines and armies destroyed, the land around them called cursed. The surviving kings and leaders destroyed the knowledge of their defeat and the mines' sealed entrances soon became a legend. A local sage claims to have rediscovered an entrance to the caves. "
+
+This is really the first example of the core problem with Lost Mine , every situation, encounter or description that could be drained of weirdness, mystery and wonder has been and most have instead been remade with the dullest versions of standard fantasy tropes the designers could find. This problem becomes worse as the quality of the encounters and dungeons decrease in the adventure's later half. Another example of this lethal blandness is the way Lost Mines uses names. They are terrible fantasy names for the most part. The initial player hook comes from a Dwarf named "Gundrun Rockseeker" - seriously? Sure this is a fantasy cliche, but worse it's incredibly unmemorable and everyone else in here has similar terrible fantasy names - the villains "Irno 'Glassstaff' Alberk" and "Nezznar the Black Spider" as well as heroes like "Silldar Hallwinter". Gad, these are just hard to remember and overflowing with gratuitous fake Tolkien flavor.
+
+NPC names are important, but they should be memorable, as players will need to remember a lot of them to keep the story straight - especially if the adventure doesn't provide them with any memorable features (The dwarf merchant with the eye-patch is a lot easier to distinguish from other dwarves of business then "Gundrun Rockseeker"). The names provided aren't without some virtue - they tend to have good, simple, memorable elements sandwiched between nonsense fantasy sounds. "The Black Spider" is a fine name for a villain as is "Glasstaff" - no need to add names that are impossible to remember and obey grammatical rules for fictional languages not involved in the adventure. Tolkien, as a linguist and obsessive world builder could get away with strange fantasy names because they were: A) In a novel, and not important to the reader's immediate understanding or the way the story evolved. B) Part of an entire structure of fantasy languages, so they made sense in a way with an internal fantasy logic. The worst offenders, Tolkien's elven names, were mitigated through the use of a large amount of elven poetry and loan words throughout the text. Lost Mines does not create an entire fictional language, and as such it should keep its names fairly close to real world names or as rough translations. The cultural importance of names (what naming conventions say about different cultures) can be preserved without resort to piles of funny consonants, for example if you want your dwarves to be business obsessed and orderly each dwarven name is structured [inherited profession] [Employer] [Serial Number] followed by a nickname, like "Rockseeker, Blue Mine, 1251, but everyone calls me One Eye." A dwarf adventurer might be named "Axegrinder, Solo, 000" and nicknamed "Cutter" or whatever. Simple names used in a way that imply a strange world are better then strange names that imply a cliched world. 
+
+On a more positive note, the mechanical design of Lost Mine is generally decent. For example the background of the adventure is relatively concise and doesn't go into a great deal of detail (about that of the paragraph above) about unnecessary ancient events that have no impact on the adventure itself. There's about a page and a half detailing the regional present, and the situation that the players will get themselves into, but not ancient history and pointless storytelling.I note this because it is rare in WotC's never products which tend to be like Dicken's novels, giving the feeling of having been packed with pointless superfluous data to reach a specific page count. 
+
+ GOBLINS - WHY ALWAYS GOBLINS 
+
+There's actually no hook in the classic sense in Lost Mines , it almost begins in scene - one of the best ways to start a new campaign. I shouldn't say there's no hook, like most things in Phandelver , there's a gesture towards good game design, and then a snail-like retreat into the shell of cliche and vanilla fantasy. The adventure suggests letting the players figure out why they might be heading to a little town in the hills, and really the adventure begins on the road - so who's to say Phandelan is where they were heading - but then the module backs up and provides the most cliched, overused and weakest hook in RPG history - caravan guards. Yes the characters might be hired to guard a caravan, and anyone who has been alive and absorbed any fantasy RPG media since 1980 will guess what happens next. Goblin ambush ... always.
+
+This is not a positive part of the adventure, and despite the suggestion on the page before that the sub-optimal, lazy way to start Lost Mines is with a caravan escort, the adventure assumes that this is what the players and GM have elected to do. There's even a huge box of dull read along text about a mysterious dwarf merchant and his darn wagon. The Dwarf and his escort, a warrior named Silldar, aren't described - they are just "a dwarf merchant" and "a warrior", while the behavior of the oxen pulling the wagon is subject to a mini rule (they will stop unless someone holds the reins) that is entirely useless given that there is unlikely to be any ox wagon chase scene.
+
+Failure to provide interesting description for NPCs and monsters is a huge problem in Lost Mines and a bad lesson to new GMs. Description - a memorable appearance, a funny accent, odd use of language or anything else that the GM can come up with is incredibly important both to giving players a way to remember an NPC and a reason to care about their fate. Likewise, monsters are reduced to ever more boring cliches if their only description is a name from a monster guide. A "goblin" is a vaguely defined monster that low level adventurers are supposed to kill. A "4' tall thing with mottled white and lavender skin, vague drooping features, four ropy, ill matched limbs and a musty fungal odor" is a mystery to be unraveled (many people are fond of goblins as fungus - one could just as easily go moleman, evil red capped gnome, walking maggot). Even cliched goblins with pointed features and squeaky voices are better if described as such - rather then simply introduced as "goblins" and Lost Mine despite including monsters of some variety never bothers with description.
+
+After the NPCs are not introduced (despite some box text) there is the entirely predictable goblin ambush, and this is where the design of Lost Mines starts to fall apart. There's only four darn goblins - four goblins vs. 4-5 PCs (which I understand may be a general 5E power curve issue). If I were a goblin I wouldn't spring that ambush at those odds, but of course they do. The adventure includes all sorts of reminders about how to run the combat - but has the reader go to the appendix to review the goblin's stats. This is bad design, inexplicable since WOTC is so fond of side bars and should give me a sidebar for these goblins to help me run my first combat encounter, not just a wall of text that casually notes the goblins' numbers and makes no reference to their names, appearance or equipment. The instructions on running the combat - two goblins rush forward to be surrounded and hacked to pieces by 3-6 PCs and two NPCs while two others stand nearby firing on the melee that includes their fellows - are uninspiring, but presumably these goblins lack the tactical imagination of a band of 9 year-olds and have never heard the phrase "Stand and Deliver". 5E doesn't seem to have morale rules so the fight continues until three goblins are dead, when the last one automatically flees down a nice little railroad.
+
+Yet from this inauspicious start the quality of advice and adventure improves - nominally. There's ideas presented for what a captured goblin might know. There's also that hint of railroading though. Lost Mine depends on the party investigating the goblin lair, and finding out about the lost mine so despite the outward appearance of a sandbox it weaves in a path and tries to force the players back onto it. If the party beats up the goblins, laughs and move on to Phandalin they discover their patron is missing, presumed kidnapped by goblins - yawn. The players are expected to return to the ambush spot and track the goblin they were meant to follow.
+
+My issues with this set up, beyond the obvious tacky aesthetic choice of goblins and dull tactics involved in the ambush, is the assumption that the players care remotely about the fate of their employer. He promised them 10GP each to deliver the wagon. He's gone, the characters now have a wagon, two oxen and 100 GP of mining supplies. It seems to me that the party has come out ahead on the deal with Gundrun - why risk their lives fighting goblins in the woods to lose money? 
+
+Needless to say, the adventure really wants the players to find that goblin cave - it's an introductory dungeon adventure. Note that Keep on the Borderlands has no 'starter' dungeon or 'tutorial level' - the characters just get to a keep and are released onto a sandbox that contains the Caves of Chaos, where they might decide to walk right into a Minotaur lair. To me this is a far better introduction to tabletop games then spoon-feeding new players a cave exploration against the weakest opposition one can imagine. Let them know they can do anything, and that they aren't stuck on one path, but that this means they can easily do themselves in - then see where they take it.
+
+So with some chagrin here's how I'd reskin this mess:
+
+ Seeker Stone-college 732 is a dwarf scholar and explorer who is heading South along the same route the party is, he's a tough looking, one-eyed dwarf leading a pony piled in exploration equipment and wearing a dual purpose mattock/war hammer chased with silver across his back. A secretive but inoffensive traveling companion Seeker keeps to himself. At the end of the first day of travel he wants to press on past an obvious stopping point as he's in a hurry to get to Phandalin. Six travelers are already at the campsite, a band of pilgrims heading to a holy spot high in the mountains (heck maybe they are elves or some nonsense - whatever). The campers beckon the party over and they can chose between warm camp and obsessive dwarf. 
+
+If they chose the dwarf the group is ambushed by hill men bandits - say 22 of them, lean men with long hair and necklaces of carved antler that fight well with cord-backed antler bows, war clubs and spears. They aren't hardened professionals, and they aren't especially murderous. A flight of arrows from the woods and maybe one rush of warriors to try to grab anyone who's down along with any animals. They will accept surrender (Seeker won't surrender all his gear, but will give up the pony and a chunk of the supplies he carries) but want metal weapons, and equipment - they care little about money. If the party fights they can likely chase off the hillmen - who really want to avoid casualties and are a bit frightened of magic. Seeker will be thankful and may offer the party a job later. Most likely he'll lose his pony and the job will be to help him get that pony back (It has an ancient map on it to the mine).
+
+If the party chooses to camp they will hear stories about hillman bandits (and maybe rush off to save Seeker), spend the night in peace and in the morning find the sight of a fight, with a few broken arrows (hillman arrows anyone local can tell them from the antler bone points) a few miles down the track. There's a pool of blood in the road, and a mess of papers seemingly dumped from Seekers packs stuck in the brambles. Within these papers is a crude map of great age. Players can't read it unless they include a highly skilled dwarf sage (You could give them a handout though to try to puzzle out). 
+
+The town will happily encourage the party to commit hillman genocide - they have an idea where their sacred cave is. Also they pay for hillman hands - the right ones. The Hillmen though aren't really evil though... Welcome to the Frontier. 
+
+ THE GOBLIN CAVE 
+
+The Goblin cave is a small six area map, but the map itself has a nice bit of verticality and looping that is rather impressive for something so small. The introduction, listing the general descriptions and the knowledge of the inhabitants is good as well. It's a bit simplistic though - goblins are intelligent and these ones are militarized, led by a bugbear and working for a king. They should have a battle plan of some kind. Likewise an order of battle for the cave inhabitants would be excellent rather then the offhanded inclusion of goblin number in each keyed area. Again the lack of any kind of statistics is frustrating. This is sloppy design that makes using Lost Mine harder, especially for a novice GM - it's also a missed opportunity to teach new GMs that intelligent foes tend not to wait around in their individual lairs to fight plundering parties of adventurers (i.e. how to avoid the "monster zoo").
+
+ Why is it always goblins? 
+
+The keyed areas are awful. Well not awful, but boring and they include such bad design decisions such as impenetrable thickets that goblins can still see and fire arrows through. The goblins also have guards who, outnumbered, attack rather then raise the alarm. Oh of course Goblins are raising wolves to fight - because Tolkien. The wolves are chained to a wall (they will break free if the players do the smart thing and shoot them) but a fight with howling wolves and screaming goblin sentries won't alert any of the other goblins waiting in their rooms to die one by one. Finally half way into the lair a goblin will maybe spot the party (but still won't raise the alarm) and set off a trap on them with a few more of its fellows, who then line up to fight. 
+
+On the plus side the flood trap is itself a fun and good environmental trap and the possibility of negotiating with a goblin who wants to lead the band is a good one. It's also notable that while the entire point of this episode is to reveal the existence of fabulous treasure in the mines, the prisoner who can provide these hooks the best is near death and may easily die if the players don't make a shady deal with the goblin second in command. The willingness to include this possibility and not give the prisoner some sort of plot immunity is laudable, and makes me question why the adventure previously puts so much effort into getting the party into the goblin lair (unless its because the adventure assumes the party must make that deal). The lair can wait, Lost Mines has all the elements of a sandbox, but seems uncomfortable with this. Any good GM should embrace the sandbox possibilities and break up the railroad. The party may go directly from ambush to goblin cave to town and on, but it doesn't need to.
+
+There's another strange assumption of character goodness at the end of this adventure section. The goblin leader's cave is filled with stolen supplies and while correctly noting the bulk of the supplies and the need for a wagon to move them, the adventure assumes that the supplies will be returned to some unknown merchant house in Phandalin for a pitiful reward of 50GP. This is nonsense. Easy enough to fix, but hardly a likely resolution. Most players will sell the supplies rather then return them for reward. Of course some discussion of how annoyed the local merchants may become if the party floods the local market with stolen supplies might be in order, along with stats for the thugs the merchants will hire to dish out some frontier justice to the clearly larcenous party. The rest of the goblin treasure is decently described, though I have no love for the sort of setting that hands out healing potions like candy.
+
+Reskinning the cave as a hillman sacred cenote and the prisoner as having seen the stolen pony with Rockseeker's map presumably still on it or a raving Rockseeker (and overhearing some of his plans to find the mine) carried off after a brief stop would be rather easy, but I would certainly make the fanatical hillman cult here a bit better organized. Since they are human and have somewhat understandable goals (killing all the intruders on their land - the entire town of Phandalin) the possibility of negotiation might be more obvious as well.
+
+ THE TOWN AND BANDITS 
+
+Making up towns is tricky, they are instantly identifiable to players, as most of us have an innate grasp of a community of humans living together, but making them interesting without becoming the focus of the campaign is a tightrope of sorts.
+
+Phandalin has a nice general description - a rough frontier outpost built on the ruins of an ancient town, lawless and run by a bandit gang. The map is pretty (as are all the maps in Lost Mine) but it looks like a prototypical 'village' map and doesn't really match the description of a frontier town atop ancient ruins. As a setting Phandelin is the typical Western frontier mining town in a fantasy guise, which is fun. It's also a couple of days from a bustling powerful city state - which is weird - where are the foresters/soldiers of the local lord, or the guards of the merchant concern that set up such an outpost? Who taxes Phandalin and why aren't they around? 
+
+The description itself of overgrown ancient foundations and vibrant brawling new life is fine, though a bit more contrast between tumbled marble columns and rough dusty streets of drunken prospectors having their boots stolen by local children might be a nice touch. Also a unique text box for the one line "Let's find an Inn" that the rescued NPC might say is a waste, and one emblematic of Lost Mine 's odd devotion to an antiquated house style. Yes, all this sounds like a nitpick - but it's emblematic of the decent design, bland setting problem of this module - the NPC's reactions to the town are worth noting if they are special, but finding an inn is not a clue or even a bit of color worth noting. Maybe if he knew the inn's stew would give the party food poisoning or something, but as is this is a pointless waste of space.
+
+Following Lost Mine 's tradition of almost good design philosophy in the shabbiest most cliched of dressing, the town has a few point-crawl style locations and a sidebar of NPCs. The locations of course have no evocative detail despite having a paragraph each. The Inn for example is a "large newly built roadhouse of field stone and rough hewn timbers" - exactly like every other boring nondescript fantasy inn ever to appear in a pay to win phone game. It begs the question - how can a hardscrabble mountain town in a pre-industrial society afford the nails (each individually hammered out by hand) and imported timber, let alone the skilled labor, to raise a large 17th century style inn? Sure maybe that's being mean/pedantic to whine about - but wouldn't it be interesting if there'd been three seconds of thought here and the inn was something like:
+
+" The ruins of a granary once tiled blue and red serve as an inn. Two of inn's dry stone walls look new, supported by spindly local tree trunks, and its sagging domed roof is pocked with hide patched holes. "
+
+Every inn need not be a 17th century English coaching inn, every inn need not serve ale and cider and every farmer need not have a hayloft for adventurers to rest in. The town rumor and quest givers are also provided in a decent manner, but consist of local gossip rather then anything truly interesting. Each rumor isn't a hook, so much as an explanation of who else in town might provide a quest, and none of the rumors add local color or an evocative detail. There is no need to have distinct 'questgivers' along with rumors - NPCs should have goals and/or represent factions, not simply exist to hand out plot chits that allow the party to proceed to the next stage of an adventure.
+
+The NPC sidebar represents another odd juxtaposition of almost right falling into irksome. A side bar lists the important NPCs about town, but provides nothing beyond an immediately forgotten fantasy name and the note that they have a quest for the party. Some description might have really saved this waste of space, and the descriptions are later provided in the individual town locations, but a simple list of names with "has a quest for party" behind them is useless.
+
+The town is menaced by toughs, and they will show up and take the party's measure. 
+
+The Redbrand bandits could be a lovely addition to the adventure - bandit lords of the small town, but then Phandelver has to make them an enemy to fight instead of a distasteful faction. Lost Mines makes the Dragonlance mistake about moral play, by making evil something that must be confronted in 'heroic' combat rather then the everyday banality of vice and human failing. It should be easier to get along and let the Redbrand engage in their revolting parody of governance then to confront them. It should be more profitable to work with them if one can prove one's strength then to root them out. The decision to be moral should come with complications and take fortitude rather then being the most simple solution with the most benefit. Think of the movie "Yojimbo" (or "Fistful of Dollars") where the adventuring tough guy shows up in a bandit plagued town and his heroism is defined by making the hard decision to help the poor and helpless rather then support one of the bandit gangs and make a solid payday. It might even be that the Redbrands, as the only armed, organized force in town, are protecting Phandalin - for their own benefit sure - but with a nearby goblin army and Green Dragon even thuggish protectors are better then leaving the town ripe for plunder and destruction.
+
+In Phandelver though the Redbrands will always attack, and only four of them bother to do it. Again this is video game logic designed to create an adventure path rather then trusting the GM with the information to create a functional faction. It is terrible. The Redbrands are presumably not suicidal, and even though they may think they are tough, they must realize that recruiting random armed strangers, shaking them down or otherwise neutralizing them is far better then risking injury and death by simply attacking them. If they are going to attack, shouldn't they be smart about it? Kick down the doors of the inn where the party are staying in in the middle of the night. Burn down the farmer's barn where they are camping. Jump them in an alley on a six to one basis. Anything but confront them in full view of the town in small numbers and then cower in their hideout until the adventurers come to clear it room by room. Like I said - a terrible waste of opportunity for roleplay, character development and schemes.
+
+The Redbrand Hideout is another small dungeon, the cellars beneath an old manor. It has a well designed map with one level and some verticality, broken up by secret doors and a chasm. The rooms are generally sensible and naturalistic but the whole thing suffers form approaching a raid on an intelligent enemy's lair in the same manner as running a classic exploration dungeon crawl - it's another 'monster zoo'. General description and a sidebar of what the inhabitants know about the region make up it's introduction, but again an order of battle or idea of how the bandits will react to invasion is not provided. The Redbrands post no guards and take no action even if the party murders a bunch of them in town.
+
+Positive elements of this dungeon include a pit trap, the nothic - a hideous monster that wants to make a deal, and the inclusion of secret doors. Even these good elements are crippled by poor design choices and paltry. For example, the lack of actual description of the secret doors or their triggering mechanisms, beyond a general caution that they are made of stone and require some sort of skill check to find is disappointing - an artifact of 5E's over reliance on a skill system rather then role playing. The nothic is a neat enemy, but it doesn't make much sense why it's in the dungeon - a demon summoned by Glasstaff or an undead entity would both make more sense.
+
+I'd say how I'd reskin this but I'm just so tired of Phandelver that I give up - I am tired of Lost Mines stupid fantasy cliches and its bloodless box text. I won't rewrite the whole module here. All I can suggest is that I'd reskin the town by making it not terrible and putting in NPCs and factions. That's how I'd reskin it - but I'd really just toss the entire module out the window (rather burn it so some deluded child doesn't find it and ruin D&D for themselves by running it) and run Anomalous Subsurface Environment , Deep Carbon Observatory or Slumbering Ursine Dunes instead - anything but the burdensome, sickeningly sweet, uncreative gruel of the Forgotten Realms. Seriously - Dragonlance has better world building and is less tiresome. Giving me paragraph after paragraph of rote fantasy hill country is about the dullest thing I've read in months, and I have to read statutes and the tax code for pay sometimes. No more reskin! Phandelver doesn't deserve it - literally anything you , as a creative person excited about running D&D, can think up will be more evocative.
+
+ THE ALMOST SANDBOX PART 
+
+The town of Phandalin offers several missions for various NPCs, all designed to get the characters entangled with several regional organizations. It's nice to see the 'evil' Zhentarian included, but in general these organizations fall into the typical 'mysterious good order dedicated to protecting the innocent'. The little adventures themselves represent the best part of Lost Mines , a variety of small locations, lairs or encounters to explore, sometimes connected to the main Wave Echo Cave/Lost Mine plot. None of these lairs include a map, but these do have some interesting content, and also have the first random encounter table of the adventure. It's a dull enough random encounter table - just a list of monsters without any context or evocative features, though the hobgoblin bounty hunters approach interesting at least, still it's an unplanned random element that might shake up the carefully laid but largely unnecessary 'adventure path' structure of Lost Mine 's beginning sections. Also there's an owlbear, and I love owlbears. The only unfortunate element of these small quests is that they aren't actually presented as part of sandbox exploration - all locations in Phandelver are linked to clues or quests in a mechanism that would feel more at home in a video game (where a new adventure locale fades onto the map after getting a specific quest), though I suppose this is easy for any GM who is aware of sandbox style play to fix. A larger and related issue is that the locations make only mediocre one-time sandbox encounters, each representing a quest problem to be solved rather then a landmark, faction or encounter to be found that helps explain or describe the setting as a whole.
+
+The first small location is the town of Conyberry, a ruined town with the haunted bower of a banshee nearby. Little is explained, but the scene seems evocative enough and the banshee encounter itself is fine, an opportunity for the party to have a single question answered by a spooky oracle, though it disappointingly comes down to a skill check rather then negotiation or role play making the banshee another rather two dimensional NPC.
+
+Old Owl Well is a ruined tower, currently the camp of a necromancer and his zombie guards. The dark wizard is as good an NPC as Phandelver offers, being somewhat menacing, thoroughly mercenary and ultimately rather friendly, willing to trade information for favors. The adventure doesn't assume the party will leave the necromancer alone or even encourage it, succinctly providing enough information for any outcome with this interesting NPC.
+
+Thundertree is another ruined town and is actually mapped with twelve keyed locations. My least favorite map so far, the village feels rather constrained and oddly laid out, but it's functional enough. Within Thundertree are a pack of evil twig monsters, an interesting zombie variation, giant spiders, a few dragon cultists and Lost Mine 's best inclusion - a green dragon. The town is a gauntlet of monster ambushes with an NPC druid to warn the characters off and a green dragon hiding inside an ancient tower. The cultists are not immediately hostile, but plan a rather appropriate and obvious double cross. This whole section feels a bit dull and slapdash, a parade of monster encounters in featureless abandoned buildings, but it does include a dragon encounter which is a positive addition and allows me to forgive much, even if the dragon has no impact on the region as a whole or much of a personality.
+
+Wyvern Tor is an orc camp, with seven orcs, an ogre and their leader. More a random encounter then a location it serves some purpose as a pack of enemies to kill on behalf of various NPCs but has nothing evocative to offer.
+
+Cragmaw Castle is another goblin lair, home to the king of the goblins the party fought in Lost Mine 's first section. The map is decent, though a small 13 rooms, the castle is interestingly designed as a series of round towers. For the first time in Lost Mines monster guards will alert their fellows of intruders, though again no defensive plan or list of the castle's defenders is provided. The castle is fairly boring, a series of thematically unconnected chambers that are filled with goblinoids and a couple of other monsters, additionally treasure in the castle is rather simplistic and boring - uncharacteristically so for the module which seems to make some efforts to include treasures beyond coinage. It's almost as with the Cragmaw Hideout and Wave Echo Cave the writers of Lost Mines were drained of any creative spark.
+
+With these side adventures wrapped up or ignored the adventurers can move on to last section of the module - Wave Echo Cave.
+
+ A CAVE 
+
+ Not a bad map 
+
+The Wave Echo Cave is a classic dungeon map with 16 keyed locations. The map lacks the interesting looping and secret door constraints, but does have an open floor plan with lots of interconnected chambers and passages. It also actually has a wandering monster table, which is a good addition. Without wandering monsters there is little time pressure in exploration games, everything happens without any real need for timekeeping and its associated risk/reward, scarcity or supply mechanics. Making random encounter checks is an excellent means of restoring the concept of time to the game and a reminder for both players and GM that consumables are used up and recovery under 5e's generous rules might not be advisable after every encounter or obstacle. The monsters however could use description and motivation as there's just a grab bag list of various enemies previously included in the module.
+
+The primary villain of the Wave Echo Cave, and the mastermind behind the entire mess in the region of Phandalin is a drow adventurer with a silly fantasy name, also called the Black Spider. I absolutely approve of this villain except for the unnecessary and seemingly meaningless fact that he's a dark elf. A lone dark elf on the surface exploring for treasure and allied with goblins just seems unnecessarily complex. If one were to convert the goblins to angry human barbarians then an unscrupulous explorer or similar renegade makes a lot more sense. Even using goblins, there's something aggravating about the unnecessary inclusion of a random dark elf, much like the earlier random inclusion of his doppelganger assistant. Drow and shape-shifters should be mysterious and wonderful opponents with unfathomable goals from the utterly alien underdark, not just rival adventurers scrabbling for magical items. The elf is decently portrayed, a schemer and planner slowly pushing into the cave, and open to negotiation. Likewise the wraith that rules the cave's undead is described as an opportunity for roleplay rather than simply a potential opponent. This is Phandelver 's best feature, an occasional enemy that the characters can talk to, and maybe proof that at its core it doesn't want to emulate the latest computer RPG. Still while Lost Mine takes weak steps in the direction, it seems so tentative, and so afraid to be a table top roleplaying adventure rather then a pen and paper version of a branching choice computer game that it's more depressing then inspiring.
+
+The rest of the cave is a typical high fantasy dungeon crawl filled with the elf's evil bugbear minions and some undead. It tries to include interesting areas, and might even succeed on some level, but the utter predictable mediocrity of the Forgotten Realms setting, the painful calls to make DC checks to spot things, and the lack of any interesting backstory make it forgettable. 
+
+ CONCLUSION 
+
+I have no idea why I read this. It is 63 pages of bland Forgotten Realms cliches, that barely deserves the name fantasy. It has the inspiration and creativity of a tablet tower defense game and not a single evocative description or interesting NPC characterization, it is thus everything I hate about fantasy as a genre, heroic cliches wrapped up in a bathetic shell of tissue thin 'lore' that feels intentionally obtuse and predictable. Yet it's not without positive elements, it's got some good bits of advice (that it doesn't itself take) and makes feeble efforts to push new players and GMs in the direction of creativity and problem solving rather then dice based combat mechanics. I'm not angry at Lost Mines of Phandelver, but I am exhausted and a bit sad.
+
+I understand there's a lot of people who like this adventure, and a good GM might make it work beautifully. For me however there's no saving this mountain of badly polished tropes and predictable plotting without a complete reskin: including a more sensible faction structure, tearing out the subtle railroads, uprooting the lurking moral judgments and generally making it a sandbox of related locations that reveal a brewing conflict between men, forest goblins/fey/hill tribes and a dragon about to explode because of a scheming evil adventurer making trouble along the mountainous frontier. This of course would have only a vague similarity to Lost Mines of Phandelver .
+
+NOTE: May 2020 -- I've played a bit more 5E since I wrote this review, and while I still stand by it old age has made me indulgent towards the system's excesses. 5E's intent and preferred playstyle is far more linear and combat focused then I prefer, which lends itself to Adventure Path design. Lost Mines is no exception. In June 2019 WotC released an updated starter kit for 5th edition D&D, the D&D Essentials Kit that features another starter adventure set in the Phandelan area. It's very similar. The names are better, but a lot of problems are shared between the adventures and remain unresolved - despite a clear effort to make Dragon of Icespire Peak a little more of an open world or sandbox style adventure. I recently reviewed Dragon of Icespire Peak if you're interested.
+
+Posted by
+ 
+ Gus L 
+
+at
+ 
+ 10:17 PM 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Gnashing of teeth ,
+ Review 
+
+ 69 comments:
+
+ Pleonexia December 6, 2015 at 3:49 AM 
+ Don't give up the hobby! Your rewrites or reimagining of the old modules are pure gold as are your various campaign worlds and adventure set pieces. Your armillary in the Hated Pretender tower was the chief macguffin wanted by factions in a campaign I ran for 2 years, that little tower was the perfect jumpstart to that campaign! The best thing about 5E is that it is bringing new players in - I saw a 12 year lad at his sister's dance concert this morning reading through a well thumbed 5E Monster Manual. 
+ Reply Delete 
+ Replies 
+ Gus L December 6, 2015 at 11:21 AM 
+ Glad you liked the Hated Pretender, but you may have noticed things have been slow lately around here. They may stay slow. 5E is bringing in new players for sure, and it makes a lot of the right noises about creativity and collaborative storytelling and then hides in the ruined snail shell of 4E/CRPG railroading, blandness, forced ethical decisions, and monsters without descriptions that always attack. Poor 12 year old lad.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Warren Abox December 6, 2015 at 11:00 AM 
+ Have you been reading tenfootpole.org lately? All he does is review modules and old issues of Dungeon Magazine, and he just hammers away at most of the same points you do (overly verbose, poor organization for use during play, and zero creativity). I've found a lot of hidden gems of adventurers through his recommendations.
+ Reply Delete 
+ Replies 
+ Gus L December 6, 2015 at 11:19 AM 
+ I have read and had my work reviewed by tenfootpole.org. Bryce is excellent when it comes to explaining what makes a good adventure and he's been doing it for years. His reviews will teach one more about good adventure design then just about anything else on the web.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Deadtreenoshelter December 6, 2015 at 11:31 PM 
+ It will be a sad loss for our niche of the hobby if you abandon D&D. 
+
+I've run Red Demon in the Swamp several times and it is my favorite short adventure. Versions of nearly all of your adventures are on the map in the campaign I am currently running.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Dan December 7, 2015 at 1:07 AM 
+ I felt the same way you did when I first read Lost Mines, but after running it I have actually grown quite fond of it. As you say most of the problems are with Forgotten Realms rather then this adventure in particular (I think the vanilla-ness is actually a feature as it is intended to be a lot of kids first taste of D&D so a sense of familiarity helps them to tune in). It did take a bit of work on my part to tweak things, not to the extent you have (if someone thinks goblins are boring they need new goblins!) but I wrote extra random event tables, re-framed the first Redbrand encounter as a non-lethal drunken bar brawl (it was the PC's who escalated the fight to weapon-use) and just generally fleshed out the PC ties to the region and added more interesting quirks. Easy for me, but it's a shame that it wasn't there already for new DMs.
+
+Oh, and in 5E that first fight can be tough - 4 goblins have a decent chance of wiping 4 level 1 PC's if they catch them by surprise.
+
+Finally, Lost Mines is still about 10 times better than Hoard of the Dragon Queen.
+ Reply Delete 
+ Replies 
+ Gus L December 7, 2015 at 12:27 PM 
+ IT may be better than Hoard(which I will not read), but it is frustratingly bad. IT's not just the vanilla world building, it's making that vanilla boring as hell (for example not actually building on interesting idea that are glossed over - Phandalin is built on ruins? Do something with that that becomes thematic and memorable). An intro adventure should give people ideas of how to run things (make locations memorable!). There's little description, too much boxed text, the best roleplaying and ethical play options are squandered in the name of forced moral decision making and nothing acts strange. At the same time there are nods towards good adventure - a dragon! That's great, I want dragons in intro fantasy adventures! I don't want a dragon encounter that's "fight it possibly, you can only fight it, and then it will run away."
+
+It might be salvageable by a good GM (or you could just use B10), but as an introductory product it's bad - it makes the right noises but the adventure itself turns away from most of the lessons it claims to offer and does the opposite of them. 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Jim Millman December 7, 2015 at 4:16 AM 
+ I'd just like to say, I'm really glad to see you posting again. I really like your blog, and if I ever get an OSR game off the ground (you never know...) I will definitely be incorporating your ideas on resource management and ASE scenarios/supplementary material. 
+ Reply Delete 
+ Replies 
+ Gus L December 7, 2015 at 12:27 PM 
+ Thanks, glad when people enjoy my stuff.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Ifryt December 7, 2015 at 6:33 AM 
+ Personalized goals for “Lost Mines of Phandelver” are written on the pregenerated character sheets:
+http://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf
+ Reply Delete 
+ Replies 
+ Gus L December 7, 2015 at 12:28 PM 
+ Nothing wrong with that - I think 5E does a lot of things right (though these goals, character traits are terribly dull) and the traits part of chargen is good for people who aren't actually used to playing older editions and having character goals off the railroad. 
+ Delete 
+ Replies 
+ Reply 
+
+ JB December 8, 2015 at 8:18 PM 
+ @ GusL:
+
+I really appreciate critical reviews like this. Thank you.
+
+Was recently back in the States and finally had a chance to thumb through 5E (though I've yet to blog my thoughts on the subject). Are you currently playing it? If not, why are you looking at Phandelver? Just to mine it for ideas?
+
+Sorry...simply curious
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L December 8, 2015 at 8:50 PM 
+ Actually currently player Hill Canton (check out eh blog of the same name) and gearing up to run a Fallen Empire funnel using modified OD&D rules. Reading Phandelver because I like 5E - I enjoyed playing it when Necropraxis ran it early 2015, though he's a great GM and ran 'Slavers' for three session in old school style. Meaning I think 5E can be run with OSR sensibilities, and like the system. 
+
+I wanted to read Phandelver and review it because it's generally pretty well reviewed and I was curious. Part of the virulence of this review is because I was shocked how bad it was.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Unknown December 9, 2015 at 1:19 AM 
+ i have been reading out of abyss and those are partially my thoughts. there is a lot of good in there and structure is fundamentally solid but somehow drow are really bland. i think that unfortunately this is the best we'll get from wotc or paizo or any other 'big' company out there. idiosyncratic voices are relegated to the net and smaller and more intimate publishing with more specific audience. it is just matter of choice. my preferred underdark scenario would be false machine's veins + harley stroh's upcoming dcc expedition to deep agartha.
+ Reply Delete 
+ Replies 
+ Gus L December 10, 2015 at 10:55 AM 
+ Oh I don't have any doubt that the products of large companies will be vanilla fantasy and very brand protective - but that doesn't mean they need to be a confused mess that offers terrible GMing advice. Phandelver is bad as a setting because it doesn't even make itself interesting within the vanilla D&D/Forgotten Realms set of cliches. It's bad as an adventure because it gives GMing advice and then uses examples that are the opposite of that advice, leading new GMs to run bad games.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Will December 11, 2015 at 3:23 PM 
+ as someone who is unable to get a game of anything other than 4e happening (not a fan really...) 5e seems very interesting, and the starter set is probably going to be my first adventure. I quite like the realms until I read too much lore and then yeah, it's terrible. blame baldurs gate (so much better than anything greenwood came up with).
+
+Anywho I think your deconstruction is great and I'm sorry it pained you so much. My feeling is when I try to do just to get a game up, I will use this but reskin to make this more fey and mythic. Your suggestions are great food for thought. Dark elf - unseelie, doppelgänger - changelings (and do something more interesting than just be random enemies. Take the place of a quest giver or something). 
+
+ Reply Delete 
+ Replies 
+ Will December 11, 2015 at 3:26 PM 
+ I'm terrible on this tablet it seems. But what I mean is that changing the dwarves, making the enemies smarter and making things weirder rather than tolkieny are exactly what I had in mind and I just struggled with how much to keep and how much to lose. You offer great ideas for making it all gel still and making it less quest line y 
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L December 11, 2015 at 9:25 PM 
+ I personally don't dig vanilla fantasy, but that's not to say it's all bad - it's just that when the vanilla gets of overpoweringly lazy and product line based that I get really cranky.
+
+In Phandelver's case they really missed some chances to create a real mini-sandbox, with actual factions (A less idiotic and brutish Redbrands, the goblins, the necromancer, even the banshee and the dragon all make for potential allies), not just enemies and powerless townie quest givers.
+
+Fey would work well because one could set up an axis of Unseelie Mr. Spider vs. Dragon The whole lot is uneasy, but none want thier merely spooky wood turned into a dragon desolation of poisonous toadstools and rotten trees. I'd also make the dragon real menacing. The thing is that faction has internal struggle - the "goblins" aren't really baddies but Spider promises to get rid of the dragon if they work for him - they are tired of losing their fellows to in haunted buried city ruins (expand those ruins!) and to caravan ambushes gone wrong.
+
+On the other side you have Redbrand mobsters and Phadalin. The mob is taking over because there are little green men in the woods killing miners and trader - town needs a strong arm to protect it. They're thugs, but they don't actually eat people. I'd present them more as corrupt militia then a secret organization.
+
+Point being one can just open things up and it gets far more interesting, peeling away spider's allies, mass attack on dragon, undermining redbrand control by making peace with fey etc. etc.
+ Delete 
+ Replies 
+ Reply 
+
+ Will December 12, 2015 at 5:57 AM 
+ Thank you - those are great ideas and really suited to my potential players, all of whom will probably lean more social than murdery.
+
+I think the vanilla fantasy is very accessible to many, in its defense. Though when I consider it, I loved the oddness of Baldur's Gate 2 - cowled wizards, prisons of mad mages, the Underdark, skin stealing serial killers - over the staid nature of The Sword Coast. Possibly just an easy gateway and you're right, it's lazy and as you say, there are nubbins of good ideas that could be much better with a little effort (and less text). The banshee for example...
+
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Chris W. January 13, 2016 at 9:11 AM 
+ RE: Terrible Fantasy Names
+
+Hasbro has had difficulty in the past trademarking the names associated with its intellectual property. I’m sure that their legal department has instructed WotC’s content creators to stick with names that pass a simple trademark test. Every published item of content has the potential to be adapted into a Michael Bay movie, and you don’t want to have any trademark problems when it comes time to stock the Wal-Mart shelves with Silldar Hallwinter™ action playsets.
+
+I find Paizo’s names to be even worse. But, then again, I’m the guy who named an elven herbalist “Levitra Cialis.”
+
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Peter Levi February 20, 2016 at 8:23 AM 
+ If your reviews are intended for a general audience you really need to define both what you think "vanilla fantasy" is (and what it isn't). A lot of your complaints are idiosyncratic and don't touch on what the goal of the adventure is (an introduction to D&D for new players). If your blog is simply a place for your reactions, then what you've written is fine (minus the context I'm missing), but if it's meant to be a proper review then more needs to be added. It would be useful to compare it to other intro D&D adventures, as well as looking at how they were received (or for less work, look at why other people liked or disliked this adventure). All that context is incredibly useful. Incidentally, insulting people who enjoy fantasy cliches seems out of line to me (why you'd care how other people have fun is beyond me).
+ Reply Delete 
+ Replies 
+ Gus L March 22, 2016 at 9:24 AM 
+ Thank you for you condescending advice, I am sure I will redo my reviewing style and change my opinions on what makes a good published tabletop product based on the wisdom of a random internet wag.
+ Delete 
+ Replies 
+ Reply 
+
+ Frank Jones April 26, 2017 at 11:19 PM 
+ Yeah, Gus, I gotta say, this article has been the most condescendingly pretentious and pompous thing I've read in a while (including your attempt at the hipster-esque double space after most of your sentences). You seem to be upset that beginner D&D players aren't as "pro" as you are. Well, get over yourself, man; the point of this adventure was to be introductory. 
+
+For the record, I absolutely hate your idea about turning the goblins into some boring ass human bandits... I also think it's stupid that you'd want to take the Drow status away from the main villain in favor of making him some generic "unscrupulous explorer". Also, your re-naming of dwarves is borderline retarded. You seem to hate "vanilla fantasy" (laughable from a guy named Gus...) but the ideas you have to replace it are horrendously boring and bad.
+
+Also also, you've made quite a few typos, grammatical and syntax errors; you're not as good as you think you are.
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L April 27, 2017 at 9:21 AM 
+ Frank, I don't know you but if you actually want to talk about why you think LMoP I'm happy to do so. If you just came here to launch a string of childish insults ('retarded' - really in this day and age?) then I don't think I can help you. 
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous December 16, 2017 at 12:50 PM 
+ Lost Mines is terribly boring and cliche. I couldn't finish reading it. Death House seems to have much more promise.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Bryce Lynch April 20, 2016 at 6:30 AM 
+ Deep breaths Gus. :)
+
+I've found The World's Most Popular Role Playing Game it to not only be generic but aggressively generic. It's almost as if they are afraid of being specific or interesting ... except when it comes to bullshit names. Many of the poorer examples remind me of one of those big convention Minis games with the nice terrain: a generic combat with a weird rule or two. That's a compliment to mini games and complaint for something that's supposed to be an RPG.
+
+I can easily, and have, attract 50+ people to my house to play D&D ... if it's advertised as D&D. I suspect I could do something close to the same for Pathfinder. But if I announce "OSR" or something older then the audience drops off DRAMATICALLY. What this allows is what we have come to expect: crap product. The D&D Adventurers League PDF's are around 20 pages in length, with about 8-10 pages of boilerplate. The PDF's run around $4. Compare to Maze of the Blue Medusa, with 100 times the originality of the AL stuff at several hundred pages and a PDF cost of $5. 
+
+It amazes me that people put up with the big publisher bullshit. But because they do we get shit. 
+ Reply Delete 
+ Replies 
+ Gus L April 20, 2016 at 6:20 PM 
+ Still reading through Blue Medusa - it's nice, but feels very funhouse and less lyrically mournful then DCO while hanging together less soundly then RPL. Still an amazing product. Heck I'm not really worried about tabletop, I play my Fallen Empire OD@D game and Hill Cantons while I occassionally write a bit on my own adventures. All is well, but LMoP is still poop, it's not just vanilla, it's badly done vanilla.
+ Delete 
+ Replies 
+ Reply 
+
+ Edgewise July 12, 2016 at 8:50 PM 
+ Gus, I haven't read this adventure, but the things you say are such dead-on criticisms of the worst crap that WotC, and TSR before them, have churned out. Sometimes it feels like they are on a mission to choke the life out of fantasy. Likewise, Bryce, you are right that D&D strides like a giant over the scene, castings its shadow over all else.
+
+But I am too old to be bitter about these things. There's absolutely nothing new about this sort of thing...we see it in pretty much every matter of taste. A producer of bland drek manages to swamp the market in its soul-killing pablum. Music, movies, etc.
+
+And yet, there is always a niche for quality. Maze of the Blue Medusa is there for me, right next to Yoon-Suin. Even if most people are more likely to pick up a copy of Fan Delver, that doesn't have much impact on me. Sure, it's sad that Patrick and Zak aren't raking in the big bucks for their brilliant stuff, and it would be great if people generally had better taste. But I'm not going to blame this on WotC. They really didn't create the market for mediocrity. They are just supplying it.
+
+Such as it ever was. As long as there are folks enjoying making great stuff that I will enjoy, I can live with the fact that not everyone shares my exquisite taste.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Konsumterra May 17, 2016 at 9:00 AM 
+ You were a huge inspiration to me and my blog and most of your stuff fits in my Planet Psychon pretty well. Im lucky as a teen I gamed with older literate players and older wargamers that took history seriously. So at 15 I gave up reading Dragonlance and got into Herodotus and never felt I wasted my life like vanilla fantasy did. DnD has become less gonzo, more colourless and bloated crippleware to keep you buying crap. I think fantasy in novels as a genre has grown worse as the innovations of 60s and 70s were forgotten with more shadows of tolkien. Ill keep playing even if I suspect I am not the target audience any more. My players while mostly horrible break plenty of purchased adventures by befriending factions rather than fighting.
+
+Id love a compilation of your ruined damned ship stuff, your trash strewn adventures and blogs are some of my favorites.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Anonymous June 25, 2016 at 2:25 PM 
+ When we played LMoP, it was very non-linear and unexpected things happened all the time. They did everything completely out of any default "order" (for example, they didn't even go to the original cave hidout until much later, and they went to the castle before the ruined mansion, and they went to thundertree after the mines etc etc).
+The super vanilla fantasy flavor, we loved too. We had some players in the group who had never ever played an RPG.
+
+Contrary to our actually pretty sandboxy and wild experiences in the mines that surprised me as DM at every turn, we started Deep Carbon Observatory today. And. It really comes across as super linear. A stream of encounters in the city [the players aren't really aware that there's some slight branching, they just see it as a stream of encounters; and the branching isn't that big, either, the middle column is always present] is followed a linear sequence of encounters as they travel up river. Their interactions and choices do have consequences but it comes across as a heck of a lot more linear than LMoP where they were fighting along side a necromancer against some ogres etc.
+ Reply Delete 
+ Replies 
+ Gus L June 28, 2016 at 10:07 AM 
+ I'm glad your group enjoyed LMOP, it sound like you knew how to GM it to break free of its limits and ignore its bad advice, but then a good GM can do that with even something absolutely awful (King's Festival or Dragons of Flame say?)
+
+My rage at LMOP is largely frustration that it's been billed as the "good" WOTC module, and that it's basically still "orcs (or goblins) in a hole". More though even that it gives GM advice, paying lip service to sandbox and exploration style play but then tears down these suggestions with constrained combat encounter and linear story telling mechanics/instriction.
+
+My only suggestion on DCO is that the first scene of bad events is largely a way to make the players find hooks, and decide which hooks to follow - I read it not as a stream but as a mess of happenings all at once, where the players can save some but not all. The module isn't well organized, but I suspect the 'flood crawl' part is driven by its random encounters (many of which are to be avoided or lead to strange things), the Crows hunting the party, and player pursuit of any hooks obtained in the first scene.
+
+One thing I'd think would be a hard transition from LMOP to DCO, the mood alone from optimistic pop fantasy where it's possible to be the saviour/hero to grim weird fantasy where the assumed goal is wealth and the means to it are grey would be tough for me to pull off.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Eric Diaz July 17, 2016 at 3:23 PM 
+ That is a great post and it actually inspired my to write about my own re-creation of LoMP, based on your criticism. And I'm writing the second part right now. Would you mind telling me if this was edited in the last few months? I don't remember reading some of it.
+ Reply Delete 
+ Replies 
+ Gus L July 18, 2016 at 12:01 PM 
+ Nah, I'm not so much of an editor of past content. It's a long post though.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ William and Polly August 20, 2016 at 6:59 AM 
+ Hey, great review of a product I purchased and immediately shelved in favor of better options. Your review is really useful to me because I write me own games -- and some of the best advice comes in the form of criticism of cautionary examples like LMoP. It was written with no sense of a living world at all, and your counter-examples are right up my alley.
+
+People often criticize those who occupy themselves with the mechanisms of economy, weather, construction and the like. But such interest really is a solid basis for the most interesting bits of worlds. Your description of the inn, for example. If I may say so, it's just the kind of thing I'd do, and when I do, my players always say "Wow. That is really cool. Of course they'd do that." Maybe takes them out of the game a bit, but hey, it's a game, it's a movie, it's a comic book, it's a whole pile of things, right?
+ Reply Delete 
+ Replies 
+ Gus L August 20, 2016 at 4:25 PM 
+ Glad you liked the review, and I agree that the major problem with LMOP as an adventure (As an introductory adventure it has additional problems)is its lack of evocative detail. On the other hand I'm terrible at actually introducing things like weather and economy into my games - I just fall back on random tables of weather effects, because really I can't be bothered to go too far.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous October 23, 2016 at 6:50 AM 
+ Any suggestions where to begin? I'm a new DM playing with a group that hasnt played in about thirty years, looking for a ready made adventure to run. 
+
+Thanks!!
+ Reply Delete 
+ Replies 
+ Gus L October 24, 2016 at 10:10 AM 
+ Not sure - I assume you are intending on running 5E? I don't know many good 5E adventures - my own impulse is to write my own stuff, but if you want something designed to introduce (or reintroduce) the game there's plenty written for B/X and other retro-clones I'd recommend - but for 5E? Not so much.
+
+You may want to look at "Death House" the free haunted house adventure that is supposed to act as a low level teaser for Curse of Strahd - but it also has some weaknesses, some of the same - secret doors that are invisible until the players accept a "story building" negative consequence for one. CoS is generally pretty okay, but it's expensive, a bit genre specific (you have to want to play fantasy horror to like it I think), and pretty darn full of Hickmanisms.
+
+DCC also has some good intro modules - but it's not 5E. 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous November 18, 2016 at 7:12 AM 
+ I have no idea why I read this...I may have to give up this hobby entirely. 
+ 
+I completely agree with you...better to lose one person so set in his ways as to be unable to see the overall virtue of something created than lose an entirely new generation of people who don't have such a narrow view of what it "should" be.
+ Reply Delete 
+ Replies 
+ Gus L November 18, 2016 at 5:28 PM 
+ The overall virtue? I think I'm pretty clear on why I dislike Phandelver - it's a sloppy adventure, with little evocative detail, that proceeds more or less linearly. 
+
+If you think it's good - please tell me why, I suggest justifying why these are good lessons for new tabletop gamers:
+
+an overall lack of evocative detail? 
+Reliance on fantasy cliches (yes there is an answer to this one)?
+A lack of monster description or characterization?
+Forced player choice/adventure based on assumptions of player choice?
+Lack of meaningful faction play?
+
+It's great that 5E is making people want to play, it's a good system even - but LMOP is not a great adventure, and as an work to encourage new GMs it's worse, because it has the bad tendency of suggesting good GM tools in the instructional parts, but falling back on bad play habits in the the location and adventure descriptions. Frustrating.
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 8:13 AM 
+ I should start off apologizing about my terse and somewhat rude initial comment.
+
+I do realize you were originally critiquing the adventure alone but since you have touched on other aspects of Wizards/TSR and specifically asked about why I think this is good for new players I’ll start with this:
+
+The box set comes with dice...maybe a non-issue for a lot of us...new players without them however that alone would be a show stopper.
+
+The way they did the introductory rules and the pre-generated characters are excellent. It’s not a watered down or even different version...it’s a word for word extract that give new players more than enough to run the adventure. Could there be more...of course...and they point you several times to the online expanded (and FREE) version of both Players and DM’s guidebooks. Again not the complete thing...but a truly excellent step up at no cost and ...exactly the same rules from the official guides.
+
+All that and the module for less than $15. 
+
+I don’t know how you first played D&D...but I know how I started 35-years ago. With a few older kids who didn’t really know a lot about it, doing their best to figure it all out. My bet is for almost everyone back then that was a basic box set, maybe some advanced books if you liked that...and the module B2.
+
+That’s how we started, and this is where we are now, we did ok near as I can tell. And when you think back to those days that sucked us in and what we had to work with, and compare that to what Wizards has done with this “Starter Kit” I’m almost envious as to how much easier newcomers have it. And isn’t that the point of a beginners box set for 12-year olds and maybe their parents who played once upon a time but never DM’d?
+
+-Kobey (1/3)
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 8:15 AM 
+ Then to the meat of all this; Phandelver.
+
+Could it have been better...of course...almost everything can in hindsight. But better is a relative term. You have 60-pages in which you must appeal to the literally broadest range of players new and old, young and old and have to work within the very restrictive restraints you’re given.
+
+I do agree with you the lack of descriptions is frustrating at times. But then again people also hate boxed text because it limits how they think things should be. New players and DMs in particular though need that help there. The Dragon encounter is an excellent example of this failing. It’s the first dragon they encounter...for new players this is the Smaug moment on the box cover they have all been fantasizing about and there is nothing in the adventure to bring it to life and a new DM will be overwhelmed...like it was a tacked on after thought to fit a marketing idea when it could have almost been the centerpiece.
+
+Same goes with a lot of the other areas. Including the Forgotten Realms setting, but they also need to keep it familiar enough that new players can fall back on the imagery of LotRs type stuff in the beginning. But I disagree with fractions and detailed intricate backstories. These are new players and like I said more importantly new DMs who are already feeling a bit overwhelmed. They don’t need to be swamped with extra input when really this is just meant to get people and arguably younger kids rolling the dice and imagining a completely kind of game for the first time.
+
+Phandelver does introduce the ideas of backstory and hooks, it does explain concepts to the DM and the underlying reasons, it could be better, but again they managed to cross sell a single product from pre-teens through the ages to their parents at the same time, and for what it is I think it does an admirable job and is the best D&D product to come out possibly ever.
+
+They also included good maps and they made it as open to exploration as possible without having players (and DMs) lost or confused by it all, and in a way that mimics what are now several generations of PC gamers are accustomed to...get some quests wander off, hack and slash if you want but learn this is a far superior game if you stop and think about it. 
+
+Even the end had some thought put into it with the possibility to rebuild the Manor and ideas for next steps, and with Storm King out you can see how Wizards are trying to tie everything (from learning to adventure to yes, marketing and sales) together even if it is rougher then active and experienced players like. The new hardcover style adventures in general that go from 1-15 are the best idea in my opinion. Reminded me why Temple of Elemental Evil was always one of my all-time favorites despite it’s far worse shortcomings.
+
+-Kobey (2/3)
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 8:16 AM 
+ Like you I am biased in what I was looking for. I have played off and on for 35-years and even when not playing I still bought all the new editions even if I just read them and added them to the shelf. And I am lucky in that this set came out and I have 8 and 10 year old girls who were ready to be introduced to it all. And that in and of its self was equally impressive. I gave them the box and they spent almost 60-minutes just reading the 5-pre gen character sheets. Then they spent about another hour flipping through the players guide, looking at pictures and reading up stuff from comparing it back to those sheets and half of that time was spent reading spells and equipment lists.
+
+And here is the kicker...as they were doing that I was just sitting back having a beer watching them and randomly talking about the first time I made a character and played and how I was walking down a dirt road on my way to a Keep on the Borderlands when suddenly I heard a stick snap in the brush beside me.
+
+My eldest’s head snapped up and said "I’d get s spell ready" and my youngest immediately followed with "My girl has a bow that can shoot 150-feet". And there it was...they had all the rules they needed and I was just telling a story and the entire adventure of Phandelver was to follow.
+
+Maybe I’m the ideal target market...doesn’t matter...it has started a whole new generation. My daughter asked for the Monster Manual for Christmas (surprise surprise I already had bought it) and we’re actually playing D&D a couple times a month for game night because they want too, they think Phandelver is the greatest thing ever.
+
+And on top of that all last weekend at the library we came across 5 kids playing Phandelver. All of them brand new...all trying to help with DMing and debating things and the girls were stunned to see older kids playing "dads" game by themselves. It was almost painful for me to watch as those kids struggled through but you know what...they were having a blast and got into trouble a couple times for being too loud. So to that...yes the adventure falls short in some key areas as you originally stated.
+
+Here is the last thing in this monster of a reply I’d like to mention. I realize you have a phenomenal amount of experience and a wealth of knowledge in RPGs. And you spent a great deal of time writing this and responding to people. Imagine if you had used the same number of words to not to dismantle and focus on the shortcomings but instead to write improved descriptions, enhanced story lines and expanded areas for Phandelver...
+...well I’ve been wrong plenty but I’d be willing to bet if you had done that more than a few people would be willing to buy such an enhancement from you through the "Dungeons Masters Guild" if you were so inclined.
+
+You asked what made me think it was good module...well...there it is. All of that makes it a good first adventure and the sum of those parts make it better. Plus they did give us the tools to make it better still.
+
+-Kobey (3/3)
+
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L November 24, 2016 at 8:57 AM 
+ Kobey,
+
+Thanks for the responsive comment - I still stand by my opinions on Phandelver, and I'm not going to try to fix it (though I do write plenty of my own adventure locations and give them away - See the PDF's section on the bar above). You view of it being a good module seem to come from the way you've seen new players interact with it and the set it comes with. That's fine - and it likely does work to get people playing and enjoying the game. For me I'm looking at it in comparison to A) what I like in a module B) other modules out there. There's so much free Independent stuff that is 10 times more creative. 
+
+Now I can't speak to the starter set, but it sounds like a good thing and a good deal. For me the key to learning how to play (especially these days) is learning that the game is open and that you can do anything you can think of. I get that vanilla fantasy has an appeal, and that many players encountering D&D want to fight goblins in a cave. 
+
+The thing with Phandelver is it is very lazy with these tropes in entirely unnecessary ways, and that's very frustrating to me. For example, we seem to agree on description. It could be a lot better. One of the key elements to good tabletop is letting players and GMs feel wonder, both the joy of experiencing someone else's creative output and that of creating it. 
+
+I'd love to see a product that understands goblin (and caves) aren't just a stat block and a generic backdrop to fight JRPG style - a single sprite and a splash screen - but an element in the game world that the players can wonder about, and find interesting. Rather then simply say "3 goblins ambush the party" and provide stats, provide a little sidebar about how the GM should treat monsters.
+
+"Your players are about to face their first encounter, three 'goblin' robbers, and as a GM you get to decide what these creatures are and how they act." Follow this with a few potential descriptions of goblins (warty clumsy morons, weird maggot men who are always hungry - whatever) and emphasize that as a GM you want the players to engage with the monsters as strange creatures rather then simply lumps of stats to fight, and that to do this you get to decide who the goblins are.
+
+There are other similar things in Phandelver that make me cranky about it - the issues I mentioned in my reply above, and they all militate towards a style of play I find frustrating - they are also unnecessary. Yes Phandelver does some things right, but also seems to promote a lazy, CRPG emulation style of tabletop game because it doesn't wnat to treat it's audience as capable of being creative and I can't call it good because of that. 
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 10:04 AM 
+ You are right Gus, I just think the failing is more with the Monster Manual and free DMG where monster behavior and descriptions are truly lacking. Granted the pictures of said monsters are excellent and can be used to replace a lot of the descriptive text. Though even little things like they did in 3e where they would include other objects / people in pictures to give an idea of scale is missing.
+
+I agree it is a problem for new players and both an easy trap to fall into, and simply avoid in the first place. Again I think it comes down to maybe not lazy, as trying to be all things at once. The beginning descriptions for the DM are very good...and then they fall right off...experienced DMs won't suffer for this but new ones very easily could as we talked about.
+
+The adventure itself is large though and trying to put all that extra text into such a thing I could see adding 1/3 more pages. To me I think it would have been worth it since it is a product for beginners but at the end of the day would I rather have 1/3 more pages dedicated to description at the expense of 1/3 of the adventure itself if the page count is a limiting factor? That's a harder question to answer.
+
+At least they didn't fill it up with repetitive text blocks which has happened far too many times in the past.
+
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 10:44 AM 
+ ...damn...
+
+I just sat here for 30-minutes thinking about it and YES...It would be better to give up a 1/3 of the adventure for an equal number of good descriptive pages regarding monster profiles, locations and expanded details.
+
+That was the biggest single issue I saw with the new players and my own personal gripe about the Green Dragon. And as exciting as people might think it is...lvl-5s have no business running into a dragon lol.
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L November 24, 2016 at 11:41 AM 
+ I like the inclusion of the Dragon, but then I am fond of the OD&D encounter tables that throw trolls at 1st level players on a bad roll. I also approve of the world killing PCs when they act foolish. 
+
+I think the Dragon in Phandelver would make a good faction - far better then the random drow with doppelgangers (that doesn't even make sense). 
+
+I'm not sure if I said it above, but if I ran LMOP today I'd make the goblins grubby forest spirit/imp things - maybe redcaps made of gnarled wood and blood drenched leaf caps - though not really evil/bad. In the same way the Redbrands would be bandits/wildmen stumbling accidentally towards into the edges of respectability (who else is protecting Phandelen from goblins?).
+
+Black Spider could be a corrupt adventurer (a human one?) who has seized control of the goblins by promising to help them against the dragon. 
+
+The dragon would be a thing in the deep forest, corrupting it, a young wyrm that looks like a jagged rope of leaf mould, speckled with fungus orange splashes. Something poisonous and creeping, rotting and twisting trees - corrupting forest creatures and spawning off small (dog - pony sized wyrms). The players could go after it, but they'd know that the thing was a horror and I'd give it stats that could gobble them if they were dumb (better to side with the goblins, and launch a coordinated attack to drive it and its spawn off).
+
+This is what I mean by faction design - and a nice three faction conflict (town-goblins-dragon) with some subfaction allies/enemies (necromancer-orcs-banshee-black spider) creates a situation balanced at the edge of chaos - perfect GM training for running factions and thus sandbox play. 
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous November 24, 2016 at 11:54 AM 
+ lol...Total Party Kills for people enjoying D&D for the first time are a bit of a buzz kill. And it's more a reality at lvl-1 when a hand full of goblins surprise you to boot. Which is where the new overnight healing and max hp starting characters come from...and I will forever carry a couple flasks of oil cause of the wandering trolls from yesteryear.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Structural Analysis November 30, 2016 at 5:36 PM 
+ I like Goblins. I employ them. Some are leveling up nicely. My next character is going to be a Goblin who will lead his fellow Gobs against stinkin' Dwarves and their caravans. We will scalp them too. We will make those NPC wannabe player characters pay for their stupidity too. They invade our lands and break treaties. They talk with forked dicks. They are cursed.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Unknown December 26, 2016 at 1:00 PM 
+ A good read, thanks. I enjoyed your suggestions on how to improve it.
+
+May I ask, did you actually play through it as DM? I found it most fun. Also, this is supposed to be the starter pack; so of course it feels simple, basic, and a hand-holding fest - are those things you considered? I really thought this was a great starter for new players. It wasn't supposed to be a deep module for experienced players. 
+ Reply Delete 
+ Replies 
+ Gus L December 27, 2016 at 6:58 PM 
+ I haven't run Phandelver - but I don't think that it's problems are simply that it's designed for new players, or youthful players. It provides terrible GM advice: No monster descriptions, almost no encouragement of non-combat solutions, poor treasure descriptions, NPCs without personality, etc. As I said above there's some good advice handed out in the advice sections that the adventure itself promptly ignores, huddling and slinking back to scene based railroading and rules mastery based combat tests despite its own advice to would be GMs.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Curratum January 9, 2017 at 2:41 AM 
+ Thank you for a good laugh! This was the most hilarious thing I've read all month!
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Anonymous January 10, 2017 at 6:36 PM 
+ High quality back and forth between the anonymous Kobey and blogger gus. This is the kind of thing I feel new dungeon masters such as myself need to read. 
+
+Kobey almost brought tears to my eyes with his talk of the young players, gus's insistence on intimate detail is inspiring. 
+
+Please keep this kind of thing up, I think I finally found something to balance my reading of the angry gm. 
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Melan March 3, 2017 at 1:01 AM 
+ Reading this review has been more entertaining and insightful than reading the actual module - another in a line of missed opportunities to write a decent intro D&D adventure. Aggressively bland, that's also correct - for all their structural problems and lack of "beyond the dungeon" content, The Sunken Citadel and The Forge of Fury had more sense of wonder and imagination to them.
+
+All this is a puzzle, because one would think it isn't exactly rocket science to write a beginning adventure, even if we stick to generic Stupid Name fantasy. It would be so easy to stay with the same general structure and ideas and deliver something that packs a punch and makes a lasting impression. And yet it doesn't happen.
+
+Thanks for the thorough review!
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Rob May 9, 2017 at 12:05 PM 
+ I've enjoyed running and playing 5E - system-wise, it's my favourite edition of D&D. However, starting with Phandelver, WotC has hitched it to the most anondyne, bland, vanilla-fantasy setting and tone possible. They have published nothing for 5E besides the core rules that I find worth using. Strange to say, but WotC published much more imaginative content in the 4E era. Thunderspire Labyrinth, Vor Rukoth, the Madness at Gardmore Abbey - WotC has proven they can still write evocative, original adventures. But the die was cast when they announced the Forgotten Realms would be the official setting for 5E. 
+
+I agree with pretty much everything in your review, from the awful milqtoast town full of awful milqtoast NPCs to the uninspired dungeons that could have been churned out by a random dungeon generator, to the NPC and place names that make me want to stab my eyes out with a pencil. 
+
+The acclaim that Phandelver has received is just the latest blow to my already bruised confidence in the judgement of today's reviewers. I shudder to think of what adventures would be on the bad side of the ledger for Phandelver to rate so highly in their eyes.
+
+I'm not sure I even blame the authors of the adventure, who have published some imaginative adventures in the past. It seems 5E under WotC is under a mandate to peddle only the most generic and tepidly accessible setting content. I have no idea why they think that's all the tabletop fantasy wants or can handle. I just finished watching Mad Max Fury Road, and it positively crackles with Cool Shit. It also made a killing at the box office. So don't tell me weird, vibrant, dangerous fantasy has no appeal in today's market. 
+ Reply Delete 
+ Replies 
+ Gus L May 9, 2017 at 6:16 PM 
+ Well I don't like Phandelver - but I think the new Ravenloft is pretty ok, and Out of the Abyss has its weaknesses, but it's a far better adventure. What's noteworthy is that both of these break free of Forgotten Realms to a degree. Both Barovia and the Underdark are mostly free of the Greenwood curse of boring.
+
+I wish they had gone with a different game world: Darksun, Planescape, maybe Eberron? Actually a grittier version of Dragonlance would have been nice and retained the high fantasy feel.
+ Delete 
+ Replies 
+ Reply 
+
+ Rob May 10, 2017 at 5:48 AM 
+ Even the Nentir Vale setting from 4E was improvement on the Forgotten Realms. It had a small scale, lots of strange locations, and a tone of beleaguered peril.
+
+Out of the Abyss sounds like it might have some decent content. The problem I've seen raised about it (and all of the 5E's campaigns in a book), is their terrible organization, with important information buried in walls of text. This is another area where 5E products compare unfavourably with 4E. 
+
+I don't think WotC forgot how to lay out books, or lacks the budget for effective technical writing. The culprit is probably the dirty little secret of the hobby: half of these books are never used at the table, and serve as reading material for people who aren't gaming. Organization, clarity, and usability at the table doesn't matter to people who peruse these books at the kitchen table and them stick them back on the shelf along with 40 other unused books.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous June 12, 2017 at 9:30 AM 
+ I really appreciated your suggestions. I have played a good mount of 5e, but I'm new to being a DM and therefore, decided to give this module a try as it seemed popular. When I read this post I got a few ideas that I wanted to run by you if you have the time.
+
+I was thinking of having the Dragon's lair be Wave Echo Cave, and include a gemstone in the cave be imbued with part of the Dragon's power (Which can be used against him if the PCs choose to fight in the end). The Dragon just wishes to control the wealth of the mine and to grow more powerful. The Black Spider (who I changed to a human from ThuderTree)tricked the dragon, I haven't come up with exactly how yet, and as revenge the dragon destroyed the town and the Black spider's family. The black spider requested aid from Phandalin but the town refused. Therefore, the balck spider wishes to destroy the dragon and to get revenge on the people in the Phandalin who refused to help. The Redbrands, as you suggested, started out as a noble venture to bring order to the town, but over time they realized this might be impossible and instead tried to hold the town together trough force. Silldar comes to town to try and establish order like the Redbrands did as he believes it is possible, and the merchants who need order to protect and expand their business wish to help him. This leaves four factions for the PCs to join, the Dragon and its followers who represent chaos and absolute power, the Redbrands, who represent a sort of frontier justice, Sildar and the merchants who represent order,and the black spider who wishes for revenge and tries to control the town from the shadows, using the doppelgangers. If the players don't wish to choose they can simply work with Gundren to try and gain the mines wealth and leave the town to sort itself out. To support this I'm planning to flesh out some of the side areas to tie them to a faction, and to flesh out the characters to make them more memorable and more than just good or bad. I also want to make a climactic fight with the dragon at the end, but I want to include a way for the PCs to skip it and leave the dragon, and the forest spirits it has corrupted to to rampage if they please. 
+
+I think this could help bring about a more sandbox campaign, where the players can really chose how they want to interact with the town, who they want to help, and eventually why they should go to wave echo cave in the finale. If you have any suggestions or comments on my ideas I would greatly appreciate your input. Thanks. 
+ Reply Delete 
+ Replies 
+ Gus L June 13, 2017 at 7:52 AM 
+ Who am I to suggest how you run your games? I think the approach of building more factions into an adventure, and making those factions morally muddy is good.
+
+I'm not sure about moving the dragon into the cave, if I remember the undead and searching bugbears provide combat (though the thing did seem rather combat focused). For me one of the main issues with Phandelver is tone and style. Especially for new players, I think evocative detail, wonder and a sense of possibility are what make table top different and fun. Phandelver stiffles a lot of tgis with cliched enemies and crpg style quest givers rather then factions. If one can stripe away the cliches and open up the players options that's pretty good.
+
+ Delete 
+ Replies 
+ Reply 
+
+ Anonymous June 13, 2017 at 8:38 AM 
+ Thanks for the advice. I definitely am going to focus on building a rich, detailed world without cliches.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Every Comment A Poem July 5, 2017 at 5:07 PM 
+ I'd just like to say your worlds are far more believable and intriguing, although extremely bizarre, than most hollyweirdized fantasy.
+
+p.s. wizards sleep late. don't wake them up before ten bells. [-4 reaction on your 6 or something]
+ Reply Delete 
+ Replies 
+ Reply 
+
+ CoolMama September 27, 2017 at 12:28 PM 
+ I'm definitely late to the game in reading this, but I have only started playing and running 5e this year. I was interested during the playtesting, but had no group and was burned out from my last group experience, which ended badly. At any rate, you are one of a very few people willing to critique this starter adventure to such a detailed extent. Most of what I've found online is just "oh it's great". Whereas I, myself, found myself scratching my head on an all-too-frequent basis as I read it. And I continue to find "wtf" elements even months later. Why did Glasstaff leave the Lord's Alliance? Why did he feel a need to "disappear"? Why did the Redbrands form? Why are they taking over the town? Where the hell is the ticking timer, if rescuing Gundren is so important? Why not just steal his map and kill him? Why does Black Spider need the map if he's already in the cave when you get there? These questions and so many more. I have never really liked Forgotten Realms either, though I'm not as vitriolic about it as you seem to be. I just wanted to reskin this material to fit into my homebrew setting, and a still-vague overarching campaign story I'm developing. But the more I started fiddling with it, the more frustrating it became. Having read many of Justin Alexander's articles on adventure design and running the game (The Alexandrian is a treasure trove), I have begun to think that if I want to use this I may have to completely redesign the stupid thing. Which seems like a lot of work, as you stated yourself. But on the other hand, I've already come up with many of my own answers to that long list of questions, and the answers I created are actually interesting to me. So I'll probably go ahead with my reskin. Thanks again, though, for being one of a few voices in the wilderness with regard to how sloppy and disappointing this is.
+ Reply Delete 
+ Replies 
+ Gus L September 27, 2017 at 4:58 PM 
+ Glad you liked the review - I think there's something deeply flawed in Phandelver partially because it's trying so hard to be a 'starter adventure', a 'sandbox', and maintain a heroic high fantasy tone. Unfortunately somewhere in development starter adventure came to mean that it had to use the most cliched elements of fantasy, sandbox came to mean it should emulate an 'open world' videogame and heroic fantasy came to mean restricting player choice to avoid moral confusion.
+
+I suspect that the elements you mention about incongruities and plot holes are the result of the adventure emulating video game plotting, where no matter what the hero always arrives in the nick of time, even if you spent the last 30 hours farming herb drops or something. 
+
+I find Tomb of Anhillation refreshingly better the Lost Mine, so maybe WotC is learning that adventures can be more open again and one can trust the GM and players to find a story if the author just leaves enough evocative elements balanced precariously.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Tom November 17, 2017 at 5:09 AM 
+ I just found your review and really enjoyed reading it, even though I don't agree with many of your points. Here are some of my thoughts on the topic:
+
+1.) LMoP is an introductory adventure primarily aimed at novice DMs and new groups. Many of the design decisions that you criticize seem to be intended simplifications. Yes, there are a lot of clichés and overused tropes, but that's what I would expect from my first few sessions of D&D if I was a new player. Back when I played my first tabletop roleplaying game when was 13 years old, I was busy enough figuring out how to play this game.
+
+2.) Which brings me to the second point: As a player, I hate it when a DM tries to pull off "the barbarians/bandits/hillmen/etc. turn out to have a valid cause"-type-of moral dilemma. I consider this one of the most overused tropes in low fantasy settings (another overused trope is "it's easier to find an arrangement with the evil guys in control then confront them", which you also suggest). Plus, the Forgotten Realms are clearly not a low fantasy setting. Another problem is that moral disagreements can create major conflicts within the party of player characters, which a novice DM probably doesn't want to have to deal with.
+
+3.) Speaking of the Forgotten Realms, many new players already have been exposed to the setting through video games, board games or novels. The prospect of exploring this setting relatively freely can be a major selling point. Since the setting is relatively well-known and full of clichés, it tends not to distract from the actual adventure, which I appreciate.
+
+4.) This is not so much a new player thing, but I have grown an aversion to homebrew worlds and fringe campaign settings over the years. I want to play a game and have fun, not absorb a hundred pages of game world peculiarities and learn dozens of new names for races, regions and deities. The worst part of it is that these often resemble what can be found in the Forgotten Realms, except that in THIS game world, the elves are necromancers or whatever. I remember how in 3rd edition D&D they tried to make Greyhawk the default setting for D&D. I can't recall anyone from my gaming groups back then who wanted to play in that setting.
+
+5.) Back to LMoP. Yes, the adventure relies on some railroading despite having sandboxy elements. And that's great, because a novice DM would likely be overwhelmed by a full-blown sandbox. The railroading is hidden cleverly for the most part and some of the things you criticize in your review actually work in favor of the railroad-sandbox-hybrid-thing. BECAUSE there are no strong ties between the major NPCs and the player characters and BECAUSE time is not that much of the essence, the PCs can wander around the area relatively freely and may still be herded back to the major storyline. As somebody else already has pointed out, each of the pre-generated characters has built-in objectives that might well become the main objectives of the party for a while.
+
+6.) You criticize that LMoP uses video gamey elements. While I'm also not overly fond of this, I'd like to point out that many of today's new D&D players happen to come from video games and are used to quest givers standing around and monsters waiting to be slain. So I don't think they mind this much and it may even make them feel more comfortable playing this "new game" with its many new possibilities.
+
+7.) Lastly, I have to agree that a lone drow wizard as the BBEG feels forced. The one good thing I see in this regard is that he is so forgettable that he can easily be interchanged with a villain of the DM's own making or an old adversary from one of the player character's backstories.
+
+Anyway, your opinions on the module have been a great read and I really appreciate that you took the time to write these down. I bookmarked your blog and will read more articles from you. It's great to get a different perspective on roleplaying matters!
+ Reply Delete 
+ Replies 
+ Gus L November 17, 2017 at 7:33 AM 
+ Tom,
+
+Thanks for the long thoughtful response - while we obviously disagree about the utility and value of Lost Mines, let me see if I can explain my position in response to some of your points. The review is somewhat of a polemic, but there is a method to my madness (I think).
+
+1) LMoP needs to be better precisely because LMoP is introductory. Falling back on cliche and using bad design techniques (railroading, lack of non-combat options, lack of moral quandaries)manage not only to make LMoP simplistic (which may or may not be good) but tell new GMs to be simplistic and use bad narrative techniques. Worse the advice in LMoP sometimes claims that it's doing things the right way while on the next page its forcing player morality and decisions right and left.
+
+2) You may not enjoy the Hillman trope, I use it here as an example because in my own games I almost always use humans whenever there are humanoids. It's a stylistic choice, but what important to me in that example is that the foes are a faction with relations to other factions. One could use humanoids if inclined, but make them interesting and make them worth talking to - with goals and desires so the players can do more then fight if they want. Sandboxes work best when they leave options for players open, and human antagonists almost always suggest - especially to new players that the option for talk exists.
+
+3)Forgotten Realms is bad - I really don't have more to say about it, it's bad and predictable so while players may have seen it before there's no life in the setting or anything to create the wonder and excitement that I think tabletop games do best. I understand it's WoTC's flagship, and that yes approach-ability is a selling point, but it's still Greenwood's flabby writing and plundered mish-mash of idea with fixed Manichean morality and every niche filled with more lowest common denominator high fantasy muck so that it's hard to be creative with it. One of the things that makes old D&D editions delightful is that the rules and modules often actively encourage GMs to create - 5e's DMG suggests this as well, but it's adventure products are so staid and lifeless as to suggest otherwise.
+
+4) I agree. Settings shouldn't be introduced via a mountain of text and infodump. That's not necessary though - what do new players really need to know about a setting? Very little - they don't need to know I've replaced elves with half devil aristocrats until they meet one. They don't need to know that there are 10 kings and queens of the sentient undead called the Ash Plague until they stumble across that info. All they need to know is that they have been fished from the sea by men and frogmen and are now aboard a giant metal ship where they will be expected to earn their keep by plundering ancient places for valuables. Everything else is learned in play: the gods, the factions, who they can trust, the playable races, the playable classes even. This creates mystery and a sense of wonder rather then the feeling of being inside a flash game using all the high fantasy tropes. That's my take at least - there's a few posts on here about setting design if you're interested in hearing more.
+
+cont.
+ 
+ Delete 
+ Replies 
+ Reply 
+
+ Gus L November 17, 2017 at 7:34 AM 
+ 
+5 -6) Railroading is a complex issue- it's almost necessary for some systems where mechanical complexity overwhelms the GM's ability to improvise and the locus of play is shifted from exploration to tactical combat or the players' ability to adjust the narrative within the confines of genre convention. 5E though is an exploration game, and really running a sandbox isn't hard - it's how everyone did it in the 70's through mid 1980's when the scene based stuff started appearing to faithfully follow the plot of the Dragonlance novels. I'm of the opinion that railroads are always bad GMing in an exploration game, bad because player agency is what tabletop games offer that computer RPGs can't yet. This is also why I hate the forced choices that constitute LMoP's videogamey aspects - tabletop games allow for a vast amount of roleplay and moral quandaries in a way that CRPGs can't, even as they just don't live up to CRPGs in the graphics and sound department. Play to the genre's strengths.
+
+7) Yes the Spide rcan be easily swapped. I'm of the opinion that one doesn't need backstories to create characters or enemies. With a real sandbox and location based adventures the enemies will fall into place as the players confront factions and the character's stories will be written through play. That's another issue though.
+
+Glad you like the blog, thanks for reading. 
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Tom November 22, 2017 at 11:45 AM 
+ Thank you for further explaining your point of view!
+
+I’m under the impression that our different perceptions of the module have a lot to do with the kind of roleplaying games we grew up with. My first roleplaying game was the German version of The Dark Eye, which was first published in 1984. I got into it in when the 3rd edition came out in the early nineties. Till this day, the published adventures for The Dark Eye tend to be light on combat and heavy on scene-based roleplaying which was often achieved through heavy railroading. Many of these adventure modules are more like an interactive book than like a sandbox. Unsurprisingly, solo adventures have also always been an important part of The Dark Eye experience. The game world Aventuria has also been even more worked out than even the Forgotten Realms. You can buy up-to-date books with hundreds of pages on each region of the continent, region-specific equipment supplements, in-character books of faith for devotees of each of the twelve major deities, and so on.
+
+I don’t want to argue for or against this style of play, even though I drift towards a more open gaming experience, which is why I have preferred D&D over The Dark Eye for many years (even though The Dark Eye is usually pretty good at what it does). My point is: From the perspective of somebody who has grown up with a much more restrictive gaming system and philosophy, Lost Mine of Phandelver seems to be rather light on both scene-based roleplaying and railroading. It’s still full of clichés and the villain is oddly colorless, so it’s not perfect by any means. But I have seen much worse from WotC and 3rd party publishers alike. It’s easy to run and fun to play from my experience. I find it useful for starting a campaign with the notion that there is a kind of normal world out there – a notion tha I can later tear apart when the PCs delve into the underdark or end up on a less hospitable plane. :-)
+
+ Reply Delete 
+ Replies 
+ Gus L November 23, 2017 at 8:18 AM 
+ Interesting viewpoint, and I absolutely agree there's much worse from WotC (Hoard of the Dragon Queen) and obviously from others. It's shockingly hard to write a good adventure - and strangely shockingly easy to make one up to GM - but putting it into written form is tricky.
+
+I've not heard of Dark Eye - but you are write that our gaming histories must differ considerably - I broken my teeth on B2 from Moldvay's box set as a kid and then stopped for 30 years and picked up again running Anomalous Subsurface Environment. I've never not played location based games.
+
+THe polemic against LMoP is a polemic, it's angry because I think LMoP does a disservice to gamers coming to sandbox/location based games from a scene based mindset by being both muddled, and being boring and cliched.
+
+I don't want to mystify GMing either - it's not really hard, and I don't think the jump from planning/managing scene to designing/adjudicating locations is that big.
+
+Thanks for the interest - hope you'll check out some of the other stuff on this blog - it's got plenty of my own content if you're looking to critique things.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous July 27, 2024 at 4:08 PM 
+ Just thought I'd comment on the silly Dwarven names. I've worked with a lot of Chinese folk and they take on Anglo-style names so the Americans don't fumble over their names and so they don't have to explain the given name is second. I'd assumed that Dwarves do something similar and probably laugh to themselves when they hear another Dwarves chosen name repeated by a human.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Ruprecht March 26, 2025 at 11:56 AM 
+ Speaking of names. I think Phandelin and Phandelver are way to close and Neverwinter is run by Lord Neverember or something? Come on WotC, try a little harder.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Add comment 
+ 
+ Load more... 
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ All Content of Dungeon of Signs Available for Use under CC-BY-NC-SA 2.0 Liscense
+
+ https://creativecommons.org/licenses/by-nc-sa/2.0/
+
+ Popular Posts
+
+ Towards a Taxonomy of 'Trick' Monsters 
+
+ Lost Mines of Phandelver - Review 
+
+ The Hinterlands of Empire 
+
+ Gold for Experience in 5th Edition D&D 
+
+ The Oldest of the Old School (part II) - Temple of the Frog - The First Module? 
+
+ Evocative +1 Sword Replacements 
+
+ Balance, Challenge & Antagonism when Running Dungeons & Dragons 
+
+ TOMB OF ANNIHILATION - A Review 
+
+ Blog Archive
+
+ ► 
+
+2020
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+2018
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2017
+ 
+ (35) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2016
+ 
+ (14) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ▼ 
+
+2015
+ 
+ (32) 
+
+ ▼ 
+
+December
+ 
+ (4) 
+ 
+ Monster Archaeology - Large Humanoids 
+
+ The Miserycrawl, Negadungeons and Killer GMing. 
+
+ Maps maps maps. 
+
+ Lost Mines of Phandelver - Review 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2014
+ 
+ (89) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (10) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (10) 
+
+ ► 
+
+2013
+ 
+ (134) 
+
+ ► 
+
+December
+ 
+ (15) 
+
+ ► 
+
+November
+ 
+ (7) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (9) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (9) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (17) 
+
+ ► 
+
+March
+ 
+ (15) 
+
+ ► 
+
+February
+ 
+ (15) 
+
+ ► 
+
+January
+ 
+ (12) 
+
+ ► 
+
+2012
+ 
+ (212) 
+
+ ► 
+
+December
+ 
+ (14) 
+
+ ► 
+
+November
+ 
+ (19) 
+
+ ► 
+
+October
+ 
+ (19) 
+
+ ► 
+
+September
+ 
+ (23) 
+
+ ► 
+
+August
+ 
+ (32) 
+
+ ► 
+
+July
+ 
+ (35) 
+
+ ► 
+
+June
+ 
+ (54) 
+
+ ► 
+
+May
+ 
+ (16) 
+
+ More of the Same
+
+tenfootpole.org 
+
+The Swan Hollow Intrigue
+
+1 day ago
+
+Dyson's Dodecahedron 
+
+Halder’s Delve
+
+2 days ago
+
+From the Sorcerer's Skull 
+
+Some Links on Naming
+
+2 days ago
+
+Roles, Rules, and Rolls 
+
+TSR's module A3, Assault on the Aerie of the Slave Lords
+
+1 week ago
+
+Legacy of the Bieth 
+
+One Year before the Comms Array
+
+1 week ago
+
+Save vs. Total Party Kill 
+
+Some Thoughts on My Awards
+
+3 weeks ago
+
+False Machine 
+
+The Common Store of Monsters
+
+5 weeks ago
+
+Keith Davies -- In My Campaign 
+
+My New Campaign: Low Fantasy Gaming
+
+2 months ago
+
+Save vs. Worm 
+
+A Real 17th-Century Dungeon Delve
+
+2 months ago
+
+Hill Cantons 
+
+The Old School (Hyperborean) Renaissance
+
+2 months ago
+
+DIY & Dragons 
+
+My 2025 in Review
+
+3 months ago
+
+Papers & Pencils 
+
+Referee Sabotage
+
+5 months ago
+
+Goblin Punch 
+
+Divine Patronage: A Separate System for Party Advancement
+
+6 months ago
+
+Hidden in Shadows 
+
+Mapping the pre D&D Dungeon Adventure From May 25 1972, Part 1
+
+6 months ago
+
+Straits of Anián 
+
+ignore all previous instructions
+
+6 months ago
+
+The Retired Adventurer 
+
+2025 Gaming Summary and 2026 Plans
+
+8 months ago
+
+Metal Earth 
+
+Review: Cthulhu by Gaslight, Keeper’s Guide
+
+8 months ago
+
+Dreams in the Lich House 
+
+B5 Horror on the Hill - Finished!
+
+11 months ago
+
+Monster Manual Sewn From Pants 
+
+MALUSTRIOUS BROOD art book available
+
+1 year ago
+
+...and the sky full of dust. 
+
+Process Book
+
+1 year ago
+
+Wampus Country 
+
+Legends of Law: Von Hoff
+
+3 years ago
+
+Against The Wicked City 
+
+Notes on a semi-successful skill system
+
+4 years ago
+
+Necropraxis 
+
+The Worm Ouroboros
+
+4 years ago
+
+Last Gasp 
+
+As Useful As A Pile Of Dicks
+
+5 years ago
+
+Troll and Flame 
+
+Old-School Essentials Online Tools and SRD
+
+6 years ago
+
+Henchman Abuse 
+
+session recap, 1/5/2020
+
+6 years ago
+
+Hereticwerks 
+
+Twelve Re-Imagined Treasures...
+
+6 years ago
+
+Dreams of Mythic Fantasy 
+
+James's Celebration of Life
+
+7 years ago
+
+Middenmurk 
+
+A Sojourn Among Antediluvian Archæotheria
+
+7 years ago
+
+Pilgrims Guide to Zeitgeist 
+
+test for GPLUS Ragnarock
+
+7 years ago
+
+The Dungeon Dozen 
+
+How can We Destroy this Campaign World?
+
+7 years ago
+
+Wizard Thief Fighter 
+
+Vaults of Vyzor: Post-species Integration and Education Society
+
+8 years ago
+
+RENFIELD'S CAT 
+
+Rules v0.1
+
+9 years ago
+
+All Watched Over by Insane Machines in Space 
+
+Lamentations of the Flame Princess Is A Waste of Space Apparently
+
+10 years ago
+
+gamepieces 
+
+Minor Misc. Effect
+
+12 years ago
+
+Show 5
+
+Show All
+
+ Labels
+
+ HMS Apollyon 
+ (109) 
+
+ Musings 
+ (97) 
+
+ play report 
+ (86) 
+
+ Monsters 
+ (66) 
+
+ tables 
+ (59) 
+
+ Characters 
+ (54) 
+
+ Review 
+ (50) 
+
+ ASE 
+ (45) 
+
+ Adventure Locale 
+ (43) 
+
+ Maps 
+ (41) 
+
+ doodles 
+ (36) 
+
+ treasure 
+ (32) 
+
+ Pavelorn 
+ (29) 
+
+ Fallen Empire 
+ (28) 
+
+ Obelisk 
+ (28) 
+
+ Player's Guide 
+ (18) 
+
+ Wampus Country 
+ (18) 
+
+ denethix 
+ (17) 
+
+ house rule 
+ (17) 
+
+ NPCs 
+ (16) 
+
+ Megadungeon 
+ (15) 
+
+ wilderness 
+ (14) 
+
+ Spell 
+ (12) 
+
+ Flailsnails 
+ (11) 
+
+ Map 
+ (11) 
+
+ The Certopsian Plains 
+ (10) 
+
+ Tomb of the Rocketmen 
+ (9) 
+
+ Old Brewery 
+ (8) 
+
+ Contest 
+ (7) 
+
+ Divine Wight 
+ (7) 
+
+ Underdark 
+ (7) 
+
+ orbital gods 
+ (7) 
+
+ Das Ein 
+ (6) 
+
+ The Certopsian Situation 
+ (6) 
+
+ carousing 
+ (6) 
+
+ disaster 
+ (6) 
+
+ PDF 
+ (5) 
+
+ Wizards 
+ (5) 
+
+ 5th Edition 
+ (4) 
+
+ City at Night 
+ (4) 
+
+ Weird Adventures 
+ (4) 
+
+ squatch related 
+ (4) 
+
+ Carcosa 
+ (3) 
+
+ Henchman Abuse 
+ (3) 
+
+ Fetid Pit 
+ (2) 
+
+ Hill Cantons 
+ (2) 
+
+ Painted Sea 
+ (2) 
+
+ goblins 
+ (2) 
+
+ Azuth 
+ (1) 
+
+ Boot Hill 
+ (1) 
+
+ Dim Carcosa 
+ (1) 
+
+ Gnashing of teeth 
+ (1) 
+
+ Grave of Giants 
+ (1) 
+
+ Grunkies 
+ (1) 
+
+ Spelljammer 
+ (1) 
+
+ Warlock Moon 
+ (1) 
+
+ bugbears 
+ (1) 
+
+Simple theme. Powered by Blogger .
+
+ 

@@ -1,0 +1,1381 @@
+Evaluating Text Generation Quality Using Spectral Distances of Surprisal
+
+ Zhichen Liu1 ⋄, Yongyuan Li1 ⋄, Yang Xu1 †, Yu Wang 1,2 , Yingfang Yuan3 , Zuhao Yang4
+1
+  Dept. of Computer Science and Engineering, Southern University of Science and Technology
+                             2
+                               Digital Linguistic Lab, Bielefeld University
+            3
+              School of Mathematical and Computer Sciences, Heriot-Watt University
+         4
+           College of Computing and Data Science, Nanyang Technological University
+                ⋄ Co-first authors (equal contribution), † Correspondence: xuyang@sustech.edu.cn
+
+
+                      Abstract                                                  source           humansource
+                                                                                                           small          human
+                                                                                                                          medium   large small source medium
+                                                                                                                                                         human            large
+                                                                                                                                                                         small      medium   large
+
+
+
+                                                                       200                                                                          32
+
+    We propose a novel automatic evaluation met-                                           FACE-1:
+                                                                                             32                                                              FACE-2:
+    ric for open-ended text generation, which is a                     150                 Indistinguishable 🙁                                      28       Distinguishable 🙂
+
+                                                            𝑟𝑒 X𝑋(𝜔
+                                                                (ωk) ! )
+    substantial improvement of the recently devel-                                                                                        𝑋(𝜔
+                                                                                                                                         X(ω k) !
+                                                                                                 28
+    oped method, Fourier analysis of cross-entropy                     100                                                                          24
+
+
+
+    (FACE), hence, FACE-2. FACE-2 is a psy-                                              X(ωk)                                                      20
+                                                                                                                                                                         large is closest
+                                                                           50
+
+    cholinguistically inspired metric that extracts                                              24                                                                      to human
+    the dynamic patterns (spectrum) of text sur-                                  0         100          200
+                                                                                                               ωk
+                                                                                                                    300     400    500                   0   100   200
+                                                                                                                                                                         ωk
+                                                                                                                                                                              300      400   500
+
+
+    prisal. Examined with open-ended text gener-                                                 20
+
+    ation tasks, FACE-2 significantly outperforms          Figure 1: An example showing improvement of FACE-2
+    a broad set of baseline metrics in revealing the       (this study) over
+                                                                         0
+                                                                             FACE-1
+                                                                              100  200
+                                                                                      in better
+                                                                                            300
+                                                                                                  distinguishing
+                                                                                                   400    500
+                                                                                                                 texts
+    model scaling effect, which scales up to mod-          generated by models of  different
+                                                                                        ω k     sizes. “small”⇒1.5b,
+    els of 70B parameters, while many other exist-         “medium”⇒7b, “large”⇒72b, all from Qwen2 family.
+    ing metrics fail to capture this effect. We have       Curves are spectra of surprisal fit with GAM.
+    also confirmed the advantage of FACE-2 in pro-
+    ducing stronger agreement with human pref-
+    erences from a large human-annotated dataset.           time (or, the position in body of text), as the basis
+    We advocate for including metrics that mine             for evaluation. This idea has roots in psycholin-
+    the dynamics of likelihood in evaluating open-
+                                                            guistics theories about how the cognitive effort
+    ended text generation, which covers broader
+    aspects of human language than only using               for processing natural language is constrained tem-
+    static likelihood-based or semantic-based met-          porally, such as the uniform information density
+    rics. Code repository: https://github.com/              (UID) (Florian Jaeger, 2010) and entropy rate con-
+    CLCS-SUSTech/FACEScore.                                 stancy (ERC) (Genzel and Charniak, 2002) theo-
+                                                            ries. As far as we are aware of, Fourier analysis
+1   Introduction                                            of cross-entropy (FACE) (Yang et al., 2023) is the
+The surprisal (likelihood) of texts is an important         first attempt in this direction, and FourierGPT (Xu
+source of information for evaluating the outcome            et al., 2024) adopts its method for the generated
+of natural language generation tasks, especially for        text detection task.
+open-ended generation. Ever since the early works              However, while focusing on the task of evaluat-
+that directly use surprisal for evaluation, such as         ing open-ended text generation, we found that eval-
+GLTR (Gehrmann et al., 2019), Solaiman et al.               uation metrics have not kept pace with the devel-
+(2019), and Ippolito et al. (2020), more sophisti-          opment of Large Language Models (LLMs). Met-
+cated methods have been recently developed to fur-          rics like FACE and MAUVE (Pillutla et al., 2021)
+ther harness the potentials of surprisal: some utilize      have been tested mainly on older, smaller models
+the curvature of surprisal (e.g., DetectGPT and Fast-       (such as GPT-2 and OPT). In the current landscape,
+Detect) Mitchell et al. (2023); Bao et al. (2024), and      with the emergence of larger and newer models
+some rely on its variance (e.g., GPT-who) (Venka-           (like Llama3 (Touvron et al., 2023) and Qwen2
+traman et al., 2024). These works have achieved             (qwe, 2024)), their conclusions may no longer hold.
+impressive effect in telling apart model-generated          Indeed our experimental results show that many
+texts from those “authentic” human-written ones.            historically popular metrics fail to evaluate current
+   A less-taken way is to use the dynamic property          models correctly, while FACE still demonstrates a
+of surprisal, that is, how surprisal changes over           degree of effectiveness.
+                                                       2444
+               Findings of the Association for Computational Linguistics: EMNLP 2025, pages 2444–2463
+                         November 4-9, 2025 ©2025 Association for Computational Linguistics
+   To better align with the evaluation of open-ended   ments. Further, Xu and Reitter (2017) hypothesize
+text generation for modern LLMs, we introduce          that the observed convergence of surprisal can be
+FACE-2, an improved version of the original FACE       attributed to the innate periodicity of language pro-
+metric (referred as FACE-1 throughout the study).      cessing capacity limited by human cognitive load
+Our major improvements are: (i) including opti-        during communication, and back it up with evi-
+mized processing steps of surprisal which is the       dence that the spectral features of surprisal are
+basis for NLG evaluation; (ii) implementing sev-       useful predictors for success in task-oriented di-
+eral new distance functions on spectrum represen-      alogues. Similar investigations are carried out on
+tations which are mathematically more sound. We        free conversations (Maës et al., 2022), task-oriented
+conclude our contribution as follows:                  dialogues in written and spoken modalities (Giu-
+1. We rethink the limits of an existing open-ended     lianelli et al., 2021), and larger datasets (Giulianelli
+   text generation metric FACE-1, and introduce        and Fernández, 2021).
+   an upgraded metric, namely FACE-2.                     Based on the previous empirical studies on the
+                                                       surprisal, word (token) level surprisal has been
+2. We conducted experiments using some mod-
+                                                       widely used for evaluating the quality of generated
+   ern and more recent LLMs (e.g., Llama3 and
+                                                       text. Gehrmann et al. (2019) used heatmap-like
+   Qwen2) and scaled up the experiment size to
+                                                       method to directly visualize the difference in token
+   70B.
+                                                       surprisal between GPT2-generated and human writ-
+3. Our experiments on the evaluation of LLM ca-
+                                                       ten text, where high-surprisal tokens are visualized
+   pacity and alignment with human preference
+                                                       with warmer colors, i.e., the red end on spectrum,
+   show that most metrics from the past cannot cor-
+                                                       while low-surprisal tokens with colder colors.
+   rectly evaluate modern LLMs, while spectrum-
+                                                          Entering the era of large language models, the
+   based metrics still maintain some effectiveness.
+                                                       surprisal view of language started to gain more
+4. Our analysis shows that FACE-2 is much more         attention from researchers who are interested in
+   reliable than FACE-1, and the spectrum-based        developing more effective and cognitive-inspired
+   metric still has the potential to grow.             evaluation tools for natural language generation.
+                                                       An example is FACE-1 (Yang et al., 2023), which
+2     Related Work                                     adopts the spectral method in Xu and Reitter (2017)
+                                                       to the evaluation of open-ended text generation.
+2.1    Surprisal Studies in Psycholinguistics and
+                                                       Follow-up works started using the fluctuation of
+       the Related NLG Evaluation Metrics
+                                                       surprisal as an indicator of whether the text was
+Since our proposed metric FACE-2 is based on sur-      generated by model or human writers, leading to
+prisal, here we introduce the concept by reviewing     several successful psycholinguistics-inspired text
+the related linguistic studies as well as the NLG      detection methods, such as GPT-who (Venkatra-
+evaluation framework based on that.                    man et al., 2024) and FourierGPT (Xu et al., 2024).
+   Surprisal is a well studied concept in psycholin-   Among these studies, FourierGPT’s method is most
+guistics, which has been known to reflect the cog-     related to our study.
+nitive processes underlying human language usage,         While FACE-1 has previously obtained a suc-
+with evidence a wealth of corpus-based and behav-      cess in the evaluation of open-ended text genera-
+ioral studies (Jaeger and Levy, 2006; Smith and        tion, it still has some limitations:First, FACE-1 is
+Levy, 2013). The most relevant previous empiri-        mathematically flawed and its choice for distance
+cal findings for FACE-1 and this study are about       functions lacks careful curation (see Section 3).
+temporal property of surprisal, i.e., how surprisal    Secondly, it is developed and tested using GPT-2
+changes over time. The earlist work to the best of     (Radford et al., 2019) generated data, and thus the
+our knowledge, dates back to Genzel and Charniak       original conclusions on modeling scaling effects
+(2002) and also discussed in Dethlefs et al. (2016),   and sampling methods does not necessarily apply
+who find that human users to dialogue systems are      to current LLMs.
+sensitive to the peaks and troughs of entropy in
+speech. Xu and Reitter (2016) take a closer look       2.2   Limitations of Existing NLG Evaluation
+at the sub-structure of spontaneous dialogues, and           Metrics
+find that the utterance surprisal from two speakers    Besides the NLG evaluation metrics based on sur-
+converge towards each other within topical seg-        prisal, a broad set of other metrics can also be used
+                                                   2445
+for evaluating open-ended text generation: Self-
+BLEU, a lexical overlap-based metric proposed by
+Zhu et al. (2018) and based on BLEU (Papineni
+et al., 2002); Zipf score, proposed by Holtzman
+et al. (2020) (see Section 2.1); MAUVE, a metric
+based on the similarity between quantized seman-
+tic representations of texts (Pillutla et al., 2021);
+BERTScore, a semantic similarity-based metric us-
+ing pretrained BERT models (Zhang et al., 2020);
+BARTScore, a generation-based metric that uses
+the log-likelihood of generation (from source to
+target) to measure text quality (Yuan et al., 2021).
+   However, all of the above-listed metrics are de-             Figure 2: The basic workflow of the FACE-2 approach.
+veloped in the pre-ChatGPT era, at which point
+advanced techniques like data engineering, train-
+                                                                   Note that here we change the index subscript
+ing engineering, and scaling laws had not yet fully
+                                                                from i to n to avoid confusion with the imaginary
+investigated. It means that many of the current con-
+                                                                unit i, which is denoted by j instead (j 2 = −1).
+clusions about these metrics’ performances might
+                                                                Thus s(n) is equivalent to si . The obtained series
+be out-of-date. Therefore, we need a new compre-
+                                                                of complex numbers F = {X(ωk )} is the spectral
+hensive study to update our understanding of their
+                                                                representation of the original surprisal signal in
+effectiveness on more recent LLMs.
+                                                                frequency domain, where ωk = 2πk     N is the k-th
+3   FACE-2 Workflow                                             frequency component, k = 0, . . . , N − 1.
+
+The general workflow of FACE-2, as described in                 Step 3 - Spectrum preprocessing The mathe-
+Figure 2, can be summarized in the following steps:             matical definition of FACE-1 is flawed because
+                                                                it takes only real(X(ωk )) as the spectrum, ignor-
+Step 1 - Estimate surprisal Given D as text                     ing the information carried by the imaginary com-
+set, we use an language model evaluator to                      ponent. As apfix, in FACE-2 we use L2-norms
+calculate the surprisal of each sentence in D.                  ∥X(ωk )∥ = real(X(ωk ))2 + imag(X(ωk ))2 as
+For a sentence of N tokens t1 , . . . , tN , its sur-           the final spectrum representation.
+prisal sequence S = s1 , . . . , sN −1 is defined as
+si ≜ − log p(ti |t1 , . . . , ti−1 ), i.e., the negative log-   Step 4 - Measure similarity of spectrum Given
+probability for each token estimated by the lan-                text data from two sources, Dh (human written) and
+guage model. There |D| pieces of such surprisal                 Dm (model generated), and their spectra Fh and
+sequences produced at this step.                                Fm obtained from previous stages, respectively. By
+   Based on FourierGPT (Xu et al., 2024), we addi-              our assumption, the quality of generated text can be
+tionally apply a z-score normalization to the spec-             reflected in its distance from human text in spectral
+trum to improve the numerical stability of the spec-            space, that is, some distance/similarity measures
+trum value. The surprisal sequence becomes:                     between Fm and Fh . FACE-1 uses four similarity
+                                                                functions: Spectral overlap (SO), Pearson’s corre-
+                 s(n) − µ                                       lation (CORR), cosine distance, and Spearman’s
+            s̃(n) =
+                                                                correlation (SPEAR), where CORR and cosine dis-
+                 Xσ
+       where µ =    s(n)/N,                              (1)    tance are mathematically equivalent, and SPEAR
+                 X                                              performs poorly.
+             σ=     (s(n) − µ)2 /(N − 1)                           Therefore, in this study we remove the dupli-
+                                                                cate and poor-performed metric proved in FACE-
+Step 2 - Fourier transform We treat S as a sig-                 1 study, and then propose to use three new dis-
+nal in time domain, and apply the discrete Fourier              tance functions: Earth Mover’s Distance (EMD)
+transform (defined in Cooley and Tukey, 1965):                  (Rubner et al., 1998), Kullback-Leibler divergence
+                          N −1
+                                                                (KL)(Kullback and Leibler, 1951), and Jenson-
+                          X                                     Shannon divergence (JS, also named total diver-
+              X(ωk ) ≜           s̃(n)e−jωk n            (2)
+                          n=0
+                                                                gence to the average by Dagan et al., 1997). These
+                                                            2446
+functions are chosen because they are widely used          Gemma2 Llama3 Qwen2         Yi1.5
+                                                                                                          ✅: valid
+for measuring the distance between probability dis-
+                                                            ✅        ✅        ✅
+                                                                                        …      News
+                                                            s m l    s   l    s m l                       ❌: invalid
+tributions, and all come with good interpretability.            ❌    ✅        ✅
+                                                                                        …      Wiki       Qwen2        Yi1.5
+   In particular, EMD is a long-standing distance           s m l
+                                                            ✅
+                                                                     s   l
+                                                                         ❌
+                                                                              s m l
+                                                                                  ❌                        ✅
+                                                                                               Writing-
+function suitable for image retrieval with spectral         s m l    s   l    s m l
+                                                                                        …
+                                                                                               prompts     s m l
+                                                                                                                        …      News
+
+features (Rubner et al., 2000; Deborah et al., 2015),           …        …         …           PubmedQA        …               Wiki
+which motivates us to migrate it to a similar sce-
+                                                                                               LIMA                            Webnovel
+nario, that is, text similarity comparison based on
+spectral features (both image data and language                          English                               Chinese
+
+data are treated as time series). KL is an asymmet-
+                                                        Figure 3: Illustration of how the scaling effect of gener-
+ric for measuring the difference between two distri-
+                                                        ator models is analyzed. The tables represent generator
+butions, which is suitable here because a normal-       model × task combinations. The “s”, “m”, “l” indicate
+ized spectrum can be considered as a distribution.      small, medium, and large model size, respectively.
+JS is a symmetrized and smoothed version of KL,
+and it is adopted to mitigate the asymmetricality
+issue in KL.                                            1. Model scaling effect: How well do the metric
+   In sum, five metrics are adopted in FACE-2, SO,         scores align with the scaling effect of model
+CORR, EMD, KL and JS, defined as:                          size, that is, larger models are better than smaller
+                                                           ones.1 (Section 4.2)
+    SO = AUC(Fh ∩ Fm )/AUC(Fh ∪ Fm )             (3)
+                                                        2. Agreement with human preferences: How
+    CORR = cov(Fh , Fm )/σ(Fh )σ(Fm )            (4)       well do the metric scores align with human pref-
+          Z ∞
+                                                           erence for text quality. (Section 4.3)
+    EMD =      |Fh − Fm |                        (5)
+               −∞                                          The open-ended text generation can be described
+             X                       Fh (x)             as: given a sequence as the prompt, the goal is to
+    KL =               Fh (x) log(          )    (6)
+                                     Fm (x)             generate the full text (or response, for instructed
+           x∈[0,π/2]
+                                                        model) based on the prompt.Hyperparameters such
+        1                   1
+  JS = KL(Fh , Fh+m ) + KL(Fm , Fh+m ) (7)              as sampling strategies, maximum and minimum
+        2                   2                           generation lengths, and GPU hour costs are re-
+   In these formulas, Fh and Fm are the text spec-      ported in Appendix A.4.
+tra from human and models, respectively, and
+Fh+m = 12 (Fh + Fm ). The AUC in Equation (3)           4.1         Datasets and models
+refers to the area under the curve. According to
+                                                        Datasets The prompts for generation are from
+EMD’s definition in Equation (5), it reflects the
+                                                        eight datasets in two languages (English and
+amount of “work” must be done to transform one
+                                                        Chinese). The majority of data are in written
+distribution Fm into another Fh . In KL and JS,
+                                                        modality: Wiki, News, and Story, which are com-
+the spectrum is first normalized into a probability
+                                                        mon choices in previous studies (Pillutla et al.,
+distribution.
+                                                        2021; Mitchell et al., 2023; Bao et al., 2024).
+4     Experiments                                       For English, we include two extra datasets in di-
+                                                        alogue modality for an extended investigation.
+In order to bring the evaluation of open-ended text
+                                                        The three Chinese datasets are Wikipedia dump
+generation in line with the current development
+                                                        (Wikimedia-Foundation), MNBVC-News (MN-
+of LLM, we evaluate FACE-2, our main objec-
+                                                        BVC Team, 2023), and WebNovel (Jun, 2023).
+tive of experiments, a simple baseline metric, sur-
+                                                        The five English datasets are Wikipedia dump
+prisal, which directly uses the log-likelihood of
+                                                        (Wikimedia-Foundation), BBC-News (RealTime-
+the evaluator model, and all other metrics men-
+                                                        Data), and WritingPrompts (Fan et al., 2018), Pub-
+tioned in section 2.2 in our extensive large-scale
+                                                        medQA (Jin et al., 2019), a domain-specific dataset,
+experiments. Our experiment would include some
+                                                        and LIMA (Zhou et al., 2023) a general QA dataset.
+widely used LLMs range from 0.5B to 70B, and
+test these metrics’ agreement with model size and           1
+                                                              We would make a brief explanation of the scaling effects.
+human preference. We evaluate the performance of        It is a conclusion derived from Arena leaderboard (Chiang
+                                                        et al., 2024), where all LLMs are compared and rated by
+FACE-2 compared other metrics, with respect to          human preference with ELO ranking. Amount the same model
+the following two desiderata:                           family, a larger model always ranks higher.
+
+                                                    2447
+The generation tasks in written modality are as-                   1.00
+                                                                                                            surprisal
+                                                                                                                                     1
+                                                                                                                                                               FACE−2
+
+
+signed to base models, and the dialogue modality is
+for instruction-tuned models. Detailed statistics and
+                                                                   0.75                                                                                               0.67 0.67
+
+
+data cleaning steps are reported in Appendix A.2                          Chinese
+                                                                                                                              0.5                                                  0.5   0.5
+                                                                   0.50
+
+
+and Table 3.                                                       0.25
+
+                                                                                       0        0     0     0      0    0                   0     0      0      0
+
+Models The models used for text generation are:
+                                                                   0.00
+                                                           Ratio   1.00
+
+LLaMA-3 (8b, 70b) (Touvron et al., 2023) and                       0.75
+Gemma-2 (2b, 9b, 27b) (Team, 2024) for English                                                              0.6                      0.6
+                                                                                                                                                                            0.55
+                                                                          English
+generation only, and Qwen-2 (1.5b, 7b, 72b) (Yang
+                                                                   0.50                                                                          0.45
+                                                                                                                                           0.4                        0.4
+                                                                                                     0.35                     0.35                      0.35                       0.35 0.35
+
+et al., 2024) and Yi-1.5 (6b, 34b) (Young et al.,
+                                                                                     0.25 0.25                    0.25 0.25                                    0.25
+                                                                   0.25
+
+
+2024) for both English and Chinese generation.                     0.00
+
+
+The metrics will be evaluated on these generated                                    0m      4b           m
+                                                                                                    qw 3−7
+                                                                                                        en  a
+                                                                                                            2− b −80 b
+                                                                                                    qw  en _5b
+                                                                                                            2−  0
+                                                                               41          1_   a3
+                                                                                                       qw _5b
+                                                                                                     qw 2−7
+                                                                                                    py   en en2−
+                                                                                                                1
+                                                                                                                  72bb
+                                                                          ia           a−       m
+                                                                                                       th ia
+                                                                                                     py 410
+                                                                                                        th ia−−1    m
+                                                                             −                         lla _4b
+                                                                                                           m
+                                                                                                     lla 3−8  a
+
+texts. FACE-2 requires an evaluator to calculate the
+                                                                                      hi    lla          m
+                                                                                                    qw 3−7  a        b
+                                                                      pyth          py t
+                                                                                                        en
+                                                                                                    qw −0_
+                                                                                                    lla en  2
+                                                                                                            2− b
+                                                                                                       qw _5b
+                                                                                                     qw 2−7
+                                                                                                         en en  1  0b
+                                                                                                                   5
+                                                                                                                    b
+                                                                                                              2−  72 b
+                                                                                                                                     Evaluator
+surprisal as described in Section 3, we use Pythia
+(410m, 1.4b) (Biderman et al., 2023) and LLaMA3            Figure 4: Comparing the valid cell ratios of two metrics:
+(8b, 70b) as evaluator for English, and Qwen-2             surprisal and FACE-2. Larger variance can be found in
+(0.5b, 1.5b, 7b, 72b) as evaluator for both English        surprisal (left column).
+and Chinese. We did not use English model for Chi-
+nese experiments, since they are not well trained on       from the scaling laws of LLMs (Raffel et al., 2020;
+Chinese datasets, which makes them tend to behave          Kaplan et al., 2020; Brown, 2020). Under this
+in English pattern.                                        belief, a good metric that claims to characterize
+   We compare performances of different model              the model’s capability of generating “high-quality”
+families in various sizes, with details reported in        texts should be able to produce scores that rank
+Table 4 in Appendix A.3.                                   larger models higher than smaller ones. That means
+                                                           we can judge the soundness of a metric by calculat-
+4.2 Result: Model scaling effect
+                                                           ing the valid cell ratio as the basis for comparison.
+We test the degree to which “scaling law” holds            For example, if metric mA results in 7 out of 20
+to the metric scores of generated texts, by count-         valid cells for English, which out-performs the 5
+ing the number of cases that strictly satisfy the          out of 20 from another metric mB , then we can
+condition large ≻ medium ≻ small, in terms of              conclude that both are better than a random guess
+generator size, where the ≻ operator means that            (1/P33 = 1/6 ≈ 0.167), but mA is preferred over
+its left operand scores better than its right operand,     mB as the former shows stronger scaling effect.
+which is defined differently across metrics.                  We first compare FACE-2 with its predecessor
+   We consider all model family × task combi-              FACE-1 and the naive surprisal method. As shown
+nations as shown in Figure 3: the English table            in Table 1, FACE-2 has higher ratios than FACE-
+consists of 4 (column: generator models) × 5               1 and surprisal, and all metrics surpass the random
+(row: tasks) = 20 combinations; the Chinese ta-            guess baseline. The numbers in Table 1 are means
+ble consists of 2 × 3 = 6 combinations, accord-            and SDs from the 4 evaluators for each language,
+ingly. A cell of the table contains the evaluation         and thus the advantage of FACE-2 is stable and
+scores for the texts generated from three versions         significant. The best performing distance function
+of the same model: small, medium, and large (ex-           is EMD for English, and JS for Chinese.
+cept Llama3, which only has two versions). For                Then in Table 2 we compare the best perfor-
+each cell, if the scores strictly satisfy the inequality   mance (among all evaluators) of FACE-2 with those
+large ≻ medium ≻ small, we put a valid mark.               metrics that do not depend on multiple evaluator
+Otherwise, we mark that cell invalid. Finally, we          models. FACE-2 using EMD as the distance func-
+use the ratio of valid cells to indicate the degree to     tion has the highest ratio in English data, and FACE-
+which a specific metric follows the scaling law.           2 using CORR wins in Chinese. In sum, from the
+   This analysis is based on the belief that larger        two tables, we can conclude that FACE-2 can better
+models should demonstrate better overall genera-           reflect the scaling effect of model size than its pre-
+tion performance, including the open-ended text            decessor and most existing metrics, in open-ended
+generation task, which is a reasonable inference           text generation tasks. For a more intuitive presenta-
+                                                       2448
+  Lang.      Metric                      Valid Cell Ratio            Lang.     Metric             Valid Cell Ratio
+             FACE-1SO                     0.356 (0.053)                        FACE-2EMD              0.600
+             FACE-2EMD (L2)               0.388 (0.088)†                       FACE-2Ensemble-3       0.450†
+             FACE-2EMD (z + L2)           0.400 (0.173)                        FACE-2Ensemble-5       0.400
+  English    FACE-2Ensemble-3 (L2)        0.331 (0.070)              English   MAUVE                  0.200
+             FACE-2Ensemble-3 (z + L2)    0.194 (0.042)                        Zipf                   0.350
+             FACE-2Ensemble-5 (L2)        0.281 (0.065)                        Self-BLEU              0.150
+             FACE-2Ensemble-5 (z + L2)    0.175 (0.046)                        BERTScore              0.450†
+                                                                               BARTScore              0.000
+             surprisal                    0.363 (0.143)
+                                                                               FACE-2CORR             0.833
+             FACE-1SO                     0.417 (0.083)                        FACE-2EMD              0.667†
+             FACE-2SO (L2)                0.417 (0.319)                        FACE-2Ensemble-3       0.667†
+             FACE-2JS (z + L2)            0.583 (0.083)                        FACE-2Ensemble-5       0.667†
+ Chinese     FACE-2Ensemble-3 (L2)        0.292 (0.083)              Chinese
+                                                                               MAUVE                  0.333
+             FACE-2Ensemble-3 (z + L2)    0.542 (0.160)†                       Zipf                   0.333
+             FACE-2Ensemble-5 (L2)        0.292 (0.083)                        Self-BLEU              0.000
+             FACE-2Ensemble-5 (z + L2)    0.500 (0.136)                        BERTScore              0.667†
+             surprisal                    0.375 (0.415)                        BARTScore              0.167
+             random guess                  1/6 ≈ 0.167                         random guess         1/6 ≈ 0.167
+
+Table 1: FACE-2 compared to FACE-1 and surprisal in            Table 2: The valid cell ratios resulted from FACE-2 (best
+the valid cell ratio that satisfies the assumption of “large   among all evaluators) and other metrics. Best scores are
+≻ medium ≻ small” in terms of generator size. Num-             in bold, and † indicates the second best.
+bers in parentheses are standard deviations. Subscript of
+FACE indicates the distance function used, or an ensem-
+ble method. z stands for applying z-score normalization        Ablation on L2-norm The effect of L2-norm on
+on the surprisal. L2 stands for extracting L2-norm from        spectrum is not as salient. While the highest ratio
+the spectrum. Best scores for each language group are          in Table 1 is achieved in the L2-normed FACE-
+in bold, and † indicates the second best.                      2, the overall ratios across all distance functions,
+                                                               however, is almost equally good in FACE-1 (see
+                                                               Table 8 in Appendix B.3). This is counter-intuitive
+tion, we illustrate GAM-smoothed spectrum curves
+                                                               as L2-norm harnesses more spectral information
+from multiple generator model sizes, examining
+                                                               than only using the real part, and it also contra-
+whether larger models are closer to human (see
+                                                               dicts the findings in FourierGPT (Xu et al., 2024).
+Figure 5), in which FACE-2 curves indeed better
+                                                               We think this might be due to the noisy frequency
+resemble human spectrum.
+                                                               leakage problem in raw Fourier analysis, which
+   Besides the main conclusion, we also conduct                could be mitigated by adding smoothing windows
+ablation studies on the z-score normalization, the             to surprisal. We leave it to future work.
+L2-norm on spectrum, and the selection of distance
+functions, which are discussed as follows.                     Selection of distance functions In general, the
+                                                               new distance functions in FACE-2 lead to higher
+Ablation on z-score z-score normalization on                   valid cell ratios. For instance in Table 1, EMD >
+surprisal before applying Fourier transform has                SO for English and JS > SO for Chinese. For
+mostly positive effect on the outcomes: the highest            practical use, we investigate whether an ensemble
+ratios in Table 1 come from z-scored rows; z-score             method that aggregates multiple distance functions
+operation is particularly helpful to the ensemble              can still produce satisfying results. When compar-
+cases in Chinese (the meaning of ensemble will be              ing text A and B, the ensemble method is to cast
+explained later); the English ensemble cases are               majority vote among the judgements from multi-
+odd. This result sheds new light to our understand-            ple distance functions. For example, if 3 out of
+ing of surprisal in language: the “relative” values            5 agree A is better than B, then it will be the en-
+are more important than absolute ones in describ-              semble result. We experiment with Ensemble-3,
+ing the dynamic patterns of how surprisal changes              which votes among EMD, KL and JS (the three
+in text. In other words, the spectral features of sur-         new ones), and Ensemble-5, which includes all
+prisal are evaluator-independent ones, possibly re-            five distance functions. We find that Ensemble-3
+flecting some robust cognitive-load-related features           produces slightly better results. It is a complex task
+of the generated (or human-written) texts.                     to determine which distance function to use, and
+                                                            2449
+given the current results, EMD and Ensemble-3 are                                                                                                             like Qwen2-72b or Llama3-70b here, which always
+the best options for most cases.                                                                                                                              produce low surprisal scores to texts from models
+                                                                                                                                                              of similar sizes (≈70b). This, however, becomes a
+                         source        human         small     large                                source        human          small     large
+                                                                                                                                                              significant computational burden when the amount
+                                                                                                                                                              of text grows, or when even larger generator models
+          150
+                            FACE-1                                                        30
+                                                                                                        FACE-2                                                (100b+) are to be evaluated.
+                            BBC-News, Llama-3                                                           BBC-News, Llama-3
+
+
+!" X(
+   #(%
+     ω k) )                                                                    #(%                                                                            Comparison with other metrics Amount all the
+          100
+                                                                                  (ωk!)
+         !
+                                                                                X
+                                                                                          25
+
+
+
+              50
+                                                                                                                                                              other metrics, BERTScore is the only metric that
+                                                                                          20
+                                                                                                                                                              obtains the second-best performance. To our sur-
+                     0       100       200
+                                             ωk
+                                                  300        400       500                      0       100       200
+                                                                                                                        ωk
+                                                                                                                                300      400       500
+                                                                                                                                                              prise, the MAUVE ratios are pretty low: 0.200 for
+                                                                                                                                                              English and 0.333 for Chinese. It seems that the
+                   source      human         small       medium        large                   source     human         small         medium       large
+
+
+          100
+                                                                                                                                                              texts generated by models of various sizes (at least
+                            FACE-1                                                        24                                                                  within the investigation scope of this study) cannot
+              80
+                            Wiki-Chinese, Qwen-2                                                                                                              be effectively distinguished using semantic repre-
+!"X(ω
+   #(%
+         !)
+      k)                                                                       #(%                                                                            sentations, such as the clustering-based method by
+                                                                               X(ω k) !
+                                                                                          20
+              60
+
+
+
+
+              40                                                                          16                 FACE-2
+                                                                                                                                                              MAUVE. Zipf achieves comparable ratios as sur-
+                                                                                                             Wiki-Chinese, Qwen-2                             prisal, but its computational cost is expensive. The
+              20
+
+                     0       100       200
+                                             ωk
+                                                  300        400       500                      0       100       200
+                                                                                                                        ωk
+                                                                                                                                300      400       500        lowest ratios are Self-BLEU and BARTScore, both
+                                                                                                                                                              of which did not even perform better than random
+Figure 5: Exemplars of GAM smoothed spectrum plots.                                                                                                           guess.
+The spectra from FACE-2 are on the right column,
+FACE-1 on the left. FACE-2 can reveal the expected                                                                                                            Comparison with sampling methods We com-
+order: larger models produce spectrum (blue and pur-                                                                                                          pare the FACE-2 score between different sampling
+ple) that resembles human (red) more.                                                                                                                         methods in Appendix B.1, the results show that
+                                                                                                                                                              with more advanced sampling method (e.g., top-p
+                                                                                                                                                              with p = 0.95 and top-k with k = 40) have a better
+Problem of surprisal as a metric We notice that                                                                                                               FACE-2 scores.
+using pure surprisal as a metric also reaches decent
+ratios: 0.363 for English and 0.375 for Chinese,                                                                                                              4.3     Result: Agreement with human
+which are close to those of FACE-1. However, these                                                                                                                    preferences
+ratios have much larger standard deviations, which
+                                                                                                                                                              Preference Dataset in MT-Bench FACE-1 and
+are due to the usage of different evaluators: we com-
+                                                                                                                                                              MAUVE experiments used a human preference
+pute the surprisal with evaluator models of different
+                                                                                                                                                              dataset to evaluate their metric’s agreement with
+sizes, and the corresponding valid cell ratios are
+                                                                                                                                                              human preference (Pillutla et al., 2021)2 , gener-
+illustrated in Figure 4, from which we can observe
+                                                                                                                                                              ated by GPT-2. To keep the evaluation up-to-date,
+much larger variance in the ratios resulted from
+                                                                                                                                                              we use the human annotation dataset in MT-Bench
+surprisal: For Chinese data, when using surprisal
+                                                                                                                                                              (Zheng et al., 2023)3 instead. It is a larger and
+estimated by Qwen2-0.5b and -1.5b evaluators (rel-
+                                                                                                                                                              more recent dataset, containing texts generated
+atively small models) as the metric, the valid ratios
+                                                                                                                                                              by six models: GPT-4, GPT-3.5-turbo, Claude-v1,
+are as low as zero; but the ratio reaches 1.0 (100%)
+                                                                                                                                                              LlaMA-13B, Alpaca-13B, Vicuna-13B, and also
+when the largest evaluator model Qwen2-72b is
+                                                                                                                                                              pairwise comparison results of these texts given by
+used; similar results are found in English data. It in-
+                                                                                                                                                              human judges.
+dicates an apparent problem of using raw surprisal
+to evaluate text generation: surprisal scores are low                                                                                                         Preference Ranking The way of MT-Bench cal-
+(preferred) when the evaluator matches in model                                                                                                               culating its ranking is that: Given texts that are
+size with the generator; otherwise, surprisal scores                                                                                                          presented in pairs to crowd-sourced human judges,
+are high (unwanted). Therefore, using pure sur-                                                                                                               ⟨TA , TB ⟩, where TA is generated by model A and
+prisal as a metric is extremely biased towards                                                                                                                TB by model B, the judges are requested to an-
+the evaluator used, and consequently, cannot pro-
+                                                                                                                                                                  2
+duce consistent evaluation scores that meets the                                                                                                                   Available here: https://github.com/krishnap25/
+                                                                                                                                                              mauve-experiments.
+common intuition that “larger model is better”. The                                                                                                              3
+                                                                                                                                                                   https://huggingface.co/datasets/lmsys/mt_
+only solution is to always use the largest evaluator,                                                                                                         bench_human_judgments
+
+                                                                                                                                                           2450
+       r = .82, p = .09   r = .78, p = .12   r = -.71, p = .18           r = .01, p = .99   r = .21, p = .73   r = -.48, p = .41
+
+
+
+
+       r = .66, p = .22   r = .07, p = .91   r = .22, p = .73            r = .49, p = .40   r = .66, p = .23
+
+
+
+
+Figure 6: Bradley-Terry scores that reflect human preferences and evaluation metrics over model generated texts. A
+higher bar indicates the corresponding source of text is more preferred by human (dark color) or metrics (lighter
+colors). FACE score generally have higher correlations with human preferences.
+
+
+swer whether A or B wins, or if it is a tie (See Ap-                FACE-2 have stronger agreement with human
+pendix C in Zheng et al. (2023)). Then the Bradley-                 preferences than other metrics. This indicates
+Terry algorithm (Bradley and Terry, 1952) is used                   that spectrum-based methods are robust in differ-
+to convert the winning records of all models to a                   ent datasets. Among the 3 new metrics, EMD per-
+ranked list of scores (called BT scores); therefore,                forms as well as SO and CORR, while KL and JS
+we obtain a ranked list based on human preference:                  not. We argue that it is because the text length of
+SA > SB > · · · > SF . It represents the mod-                       MT-Bench dataset is relatively short, which makes
+els’ relative performances according to the human                   the spectral distances more able to be disrupted
+judges’: model A better than model B and so on.                     by noise. Except for BARTScore, all other metrics
+   Similarly, we replace human judges with scoring                  perform poorly in agreement with human prefer-
+results for each pair of texts given by a metric, so                ence. It indicates that most of their conclusions on
+that we obtain a ranked list based on the given                     human agreements have failed today. The results
+metric: SB ′ > S ′ > · · · > S ′ . The alignment
+                   F              A                                 consolidate the thought behind FACE: the human
+between these two rank lists can be measured by                     perception of text is better characterized by tempo-
+Pearson’s correlation; it tells how well the metric                 ral changes of surprisal, other than raw surprisal or
+agrees with human preferences.                                      semantic features.
+                                                                       In our further case analysis, we found that
+GPT-4 as the Approximation of Human The                             the biggest disagreement between human prefer-
+"sloppiness" in MT-Bench is that it does not con-                   ences and metrics was caused by Claude-v1, which
+tain human-written texts as groundtruth, which is                   causes low correlation scores in all cases. Ap-
+required by pairwise comparison-based metrics,                      pendix B.5 may shed some light on it.
+such as FACE-2. To deal with this, we use GPT-4’s
+responses (the model that closest to human) as the                  5   Discussion and Conclusion
+approximated human ground-truth, thereby exclud-
+ing GPT-4 in our final ranking list. Therefore, the                 In this study, we address the issue that most of
+workflow of FACE-2 within this experiment is that:                  the metrics designed for open-ended text gener-
+first compute the FACE-2 scores using the approxi-                  ation are published in the era where LLMs are
+mated human groundtruth, then conduct pairwise                      not fully developed, therefore it is necessary to
+comparison between each texts, and finally get the                  rethink their effectiveness in evaluating current
+ranking list by computing BT-Score.                                 LLMs. Spectrum-based methods exhibit high po-
+                                                                    tential; therefore, we proposed an improved version
+Agreement with Human Preferences The BT-                            of Fourier Analysis of Cross-Entropy, FACE-2, a
+scores from FACE-2, FACE-1, and the other five                      metric set to evaluate open-ended text generation
+metrics are plotted in Figure 6 in comparison with                  in the current LLM era.We also carried out large-
+those from human preferences. From the corre-                       scale experiments within up to 70B LLMs to update
+lation scores, we can see that both FACE-1 and                      the effectiveness conclusions of many old evalua-
+                                                                 2451
+tion metrics in the current LLM era. Our results         6   Limitations
+show that most of the old conclusions have failed,
+whereas spectrum-based methods maintain its ef-          There are still limits in the current study. Firstly,
+fectiveness to a certain degree. We observed the out-    larger models 100b+ parameters and commercial
+performance of FACE-2 in experiments of model            models, such as GPT-4, are not included, whose
+scaling effects, and the effectiveness and robustness    experiments are needed for further validation of
+of both spectrum-based methods in experiments of         FACE-2’s capability. Secondly, the majority of the
+agreement with human preferences.                        generator models examined are base-models but
+   When compared with its predecessor and other          not chat-models, although we believe that the foun-
+metrics, FACE-2 demonstrates the following advan-        dational generation capabilities are determined at
+tages: Firstly, it can more effectively distinguish      pre-training stage and is sufficient for current exper-
+texts generated by models of various sizes, i.e., bet-   iments, ideally, more experiments with chat-models
+ter reflecting the scaling effect. This is observed      for needed comprehensive evaluations, because
+across various model families and languages,             chat-models are the most common use cases of
+which, more impressively, is achieved without de-        LLMs. However, it is currently challenging to find
+pending on large evaluating models. Secondly,            public dialogue data with human ground-truth that
+with the newly introduced metrics (EMD, KL, and          can be directly used for generation tasks, especially
+JS) and the new z-score normalization step, it out-      for Chinese data and other languages. Thirdly, how
+performs FACE-1 and a broad set of baseline met-         to select the optimal distance function for FACE-2
+rics. Thirdly, the advantage of FACE in agreement        is yet to be determined. Our current results indicate
+with human preferences are confirmed in a larger         EMD, JS, and CORR are most promising, and a
+dataset generated by more recent models.                 simple ensemble method (Table 2) seems working,
+   In sum, the new evaluation method for open-           it still requires a systematic investigation. Lastly, it
+ended text generation, FACE-2, is effective, robust,     is not clear why the spectrum of surprisal provides
+and computationally efficient. It reaches state-of-      information can reflect the sources of generator
+the-art performance. However, no metric can fully        models. We need further evidence that map the
+capture the complex nature of human languages.           spectral features in “frequency domain” to the ob-
+As LLMs keep evolving, the gap between gener-            servable linguistic patterns in “time domain”, for
+ated and real content will keep shrink. We believe       example, sentence structure, lexical or syntactical
+that seeking metrics to magnify this gap is a mean-      choices and so on. We will try to address these
+ingful response to the eternal question of where the     limitations in the future work, and further improve
+boundary between AI and human is.                        FACE to a more interpretable method.
+
+                                                         Acknowledgments We sincerely thank all the
+                                                         reviewers for their efforts in pointing out the
+                                                         weakness in the paper and their insightful advice
+                                                         for future improvement. This work is supported
+                                                         by Shenzhen Science and Technology Program
+                                                         (No. JCYJ20240813094612017) and Huawei Tech-
+                                                         nologies Co., Ltd. (No. TC20211206598-2024-
+                                                         06). Yu Wang is supported by the Deutsche For-
+                                                         schungsgemeinschaft (DFG): TRR 318/1 2021 –
+                                                         438445824.
+
+
+                                                         References
+                                                         2024. Qwen2 technical report.
+
+                                                         Guangsheng Bao, Yanbin Zhao, Zhiyang Teng, Linyi
+                                                           Yang, and Yue Zhang. 2024. Fast-detectgpt: Effi-
+                                                           cient zero-shot detection of machine-generated text
+                                                           via conditional probability curvature. In The Twelfth
+                                                           International Conference on Learning Representa-
+                                                           tions.
+                                                     2452
+Stella Biderman, Hailey Schoelkopf, Quentin Gregory        Dmitriy Genzel and Eugene Charniak. 2002. Entropy
+  Anthony, Herbie Bradley, Kyle O’Brien, Eric Hal-          rate constancy in text. In Proceedings of the 40th An-
+   lahan, Mohammad Aflah Khan, Shivanshu Purohit,           nual Meeting of the Association for Computational
+   Usvsn Sai Prashanth, Edward Raff, Aviya Skowron,         Linguistics, pages 199–206, Philadelphia, Pennsylva-
+   Lintang Sutawika, and Oskar Van Der Wal. 2023.           nia, USA. Association for Computational Linguistics.
+   Pythia: A suite for analyzing large language models
+   across training and scaling. In Proceedings of the      Mario Giulianelli and Raquel Fernández. 2021.
+   40th International Conference on Machine Learning,       Analysing human strategies of information transmis-
+   volume 202 of Proceedings of Machine Learning            sion as a function of discourse context. In Proceed-
+  Research, pages 2397–2430. PMLR.                          ings of the 25th Conference on Computational Natu-
+                                                            ral Language Learning, pages 647–660, Online. As-
+Ralph Allan Bradley and Milton E. Terry. 1952. Rank         sociation for Computational Linguistics.
+  analysis of incomplete block designs: I. the method of
+  paired comparisons. Biometrika, 39(3/4):324–345.         Mario Giulianelli, Arabella Sinclair, and Raquel Fer-
+                                                            nández. 2021. Is information density uniform in
+Tom B Brown. 2020. Language models are few-shot             task-oriented dialogues? In Proceedings of the 2021
+  learners. arXiv preprint arXiv:2005.14165.                Conference on Empirical Methods in Natural Lan-
+                                                            guage Processing, pages 8271–8283, Online and
+Wei-Lin Chiang, Lianmin Zheng, Ying Sheng, Anasta-          Punta Cana, Dominican Republic. Association for
+  sios Nikolas Angelopoulos, Tianle Li, Dacheng Li,         Computational Linguistics.
+  Hao Zhang, Banghua Zhu, Michael Jordan, Joseph E.
+  Gonzalez, and Ion Stoica. 2024. Chatbot arena: An        Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+  open platform for evaluating llms by human prefer-         Yejin Choi. 2020. The curious case of neural text de-
+  ence. Preprint, arXiv:2403.04132.                          generation. In International Conference on Learning
+                                                             Representations.
+J. W. Cooley and J. W. Tukey. 1965. An algorithm for
+   the machine calculation of complex fourier series.      Daphne Ippolito, Daniel Duckworth, Chris Callison-
+   Mathematics of Computation, 19(90):297–301.               Burch, and Douglas Eck. 2020. Automatic detec-
+                                                             tion of generated text is easiest when humans are
+Ido Dagan, Lillian Lee, and Fernando Pereira. 1997.          fooled. In Proceedings of the 58th Annual Meeting of
+  Similarity-based methods for word sense disambigua-        the Association for Computational Linguistics, pages
+  tion. In 35th Annual Meeting of the Association for        1808–1822, Online. Association for Computational
+  Computational Linguistics and 8th Conference of            Linguistics.
+  the European Chapter of the Association for Com-
+  putational Linguistics, pages 56–63, Madrid, Spain.      T Jaeger and Roger Levy. 2006. Speakers optimize
+  Association for Computational Linguistics.                 information density through syntactic reduction. Ad-
+                                                             vances in neural information processing systems, 19.
+Hilda Deborah, Noël Richard, and Jon Yngve Harde-
+  berg. 2015. A comprehensive evaluation of spectral       Qiao Jin, Bhuwan Dhingra, Zhengping Liu, William Co-
+  distance functions and metrics for hyperspectral im-       hen, and Xinghua Lu. 2019. PubMedQA: A dataset
+  age processing. IEEE Journal of Selected Topics            for biomedical research question answering. In Pro-
+  in Applied Earth Observations and Remote Sensing,          ceedings of the 2019 Conference on Empirical Meth-
+  8(6):3224–3234.                                            ods in Natural Language Processing and the 9th In-
+                                                             ternational Joint Conference on Natural Language
+Nina Dethlefs, Helen Hastie, Heriberto Cuayáhuitl, Yan-      Processing (EMNLP-IJCNLP), pages 2567–2577,
+  chao Yu, Verena Rieser, and Oliver Lemon. 2016.            Hong Kong, China. Association for Computational
+  Information density and overlap in spoken dialogue.        Linguistics.
+  Computer Speech & Language, 37:82–97.
+                                                           Jun. 2023. webnovelc n(revision745338c).
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hi-
+  erarchical neural story generation. In Proceedings       Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B
+  of the 56th Annual Meeting of the Association for           Brown, Benjamin Chess, Rewon Child, Scott Gray,
+  Computational Linguistics (Volume 1: Long Papers),          Alec Radford, Jeffrey Wu, and Dario Amodei. 2020.
+  pages 889–898, Melbourne, Australia. Association            Scaling laws for neural language models. arXiv
+  for Computational Linguistics.                              preprint arXiv:2001.08361.
+T. Florian Jaeger. 2010. Redundancy and reduction:         Solomon Kullback and Richard A Leibler. 1951. On
+   Speakers manage syntactic information density. Cog-       information and sufficiency. The annals of mathe-
+   nitive Psychology, 61(1):23–62.                           matical statistics, 22(1):79–86.
+Sebastian Gehrmann, Hendrik Strobelt, and Alexander        Eliot Maës, Philippe Blache, and Leonor Becerra. 2022.
+  Rush. 2019. GLTR: Statistical detection and visual-         Shared knowledge in natural conversations: can en-
+  ization of generated text. In Proceedings of the 57th       tropy metrics shed light on information transfers?
+  Annual Meeting of the Association for Computational         In Proceedings of the 26th Conference on Computa-
+  Linguistics: System Demonstrations, pages 111–116,          tional Natural Language Learning (CoNLL), pages
+  Florence, Italy. Association for Computational Lin-         213–227, Abu Dhabi, United Arab Emirates (Hybrid).
+  guistics.                                                   Association for Computational Linguistics.
+                                                       2453
+Eric Mitchell, Yoonho Lee, Alexander Khazatsky,              Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier
+  Christopher D Manning, and Chelsea Finn. 2023. De-           Martinet, Marie-Anne Lachaux, Timothée Lacroix,
+  tectgpt: Zero-shot machine-generated text detection          Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal
+  using probability curvature. In International Con-           Azhar, Aurelien Rodriguez, Armand Joulin, Edouard
+  ference on Machine Learning, pages 24950–24962.              Grave, and Guillaume Lample. 2023. Llama: Open
+  PMLR.                                                        and efficient foundation language models. Preprint,
+                                                               arXiv:2302.13971.
+MNBVC Team. 2023. Mnbvc: Massive never-ending
+ bt vast chinese corpus. https://github.com/                 Saranya Venkatraman, Adaku Uchendu, and Dongwon
+ esbatmop/MNBVC.                                               Lee. 2024. GPT-who: An information density-based
+                                                               machine-generated text detector. In Findings of the
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-            Association for Computational Linguistics: NAACL
+  Jing Zhu. 2002. Bleu: a method for automatic evalu-          2024, pages 103–115, Mexico City, Mexico. Associ-
+  ation of machine translation. In Proceedings of the          ation for Computational Linguistics.
+  40th annual meeting of the Association for Computa-
+  tional Linguistics, pages 311–318.                         Wikimedia-Foundation. Wikimedia downloads. https:
+                                                               //dumps.wikimedia.org.
+Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+  John Thickstun, Sean Welleck, Yejin Choi, and Zaid         Yang Xu and David Reitter. 2016. Entropy converges
+  Harchaoui. 2021. Mauve: Measuring the gap be-                between dialogue participants: Explanations from an
+  tween neural text and human text using divergence            information-theoretic perspective. In Proceedings
+  frontiers. In Advances in Neural Information Pro-            of the 54th Annual Meeting of the Association for
+  cessing Systems, volume 34, pages 4816–4828. Cur-            Computational Linguistics (Volume 1: Long Papers),
+  ran Associates, Inc.                                         pages 537–546, Berlin, Germany. Association for
+                                                               Computational Linguistics.
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+  Dario Amodei, Ilya Sutskever, et al. 2019. Language        Yang Xu and David Reitter. 2017. Spectral analysis of
+  models are unsupervised multitask learners. OpenAI           information density in dialogue predicts collabora-
+  blog, 1(8):9.                                                tive task performance. In Proceedings of the 55th
+                                                               Annual Meeting of the Association for Computational
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine            Linguistics (Volume 1: Long Papers), pages 623–633,
+  Lee, Sharan Narang, Michael Matena, Yanqi Zhou,              Vancouver, Canada. Association for Computational
+  Wei Li, and Peter J. Liu. 2020. Exploring the lim-           Linguistics.
+  its of transfer learning with a unified text-to-text       Yang Xu, Yu Wang, Hao An, Zhichen Liu, and
+  transformer. Journal of Machine Learning Research,           Yongyuan Li. 2024. Detecting subtle differences
+  21(140):1–67.                                                between human and model languages using spec-
+                                                               trum of relative likelihood. In Proceedings of the
+RealTimeData.     bbc-news-alltime.   https:                   2024 Conference on Empirical Methods in Natural
+  //huggingface.co/datasets/RealTimeData/                      Language Processing, pages 10108–10121, Miami,
+  bbc_news_alltime.                                            Florida, USA. Association for Computational Lin-
+                                                               guistics.
+Y. Rubner, C. Tomasi, and L.J. Guibas. 1998. A metric
+   for distributions with applications to image databases.   An Yang, Baosong Yang, Binyuan Hui, Bo Zheng,
+   In Sixth International Conference on Computer Vi-           Bowen Yu, Chang Zhou, Chengpeng Li, Chengyuan
+   sion (IEEE Cat. No.98CH36271), pages 59–66, Bom-            Li, Dayiheng Liu, Fei Huang, et al. 2024. Qwen2
+   bay, India.                                                 technical report. arXiv preprint arXiv:2407.10671.
+Yossi Rubner, Carlo Tomasi, and Leonidas J Guibas.           Zuhao Yang, Yingfang Yuan, Yang Xu, SHUO ZHAN,
+  2000. The earth mover’s distance as a metric for             Huajun Bai, and Kefan Chen. 2023. Face: Evaluating
+  image retrieval. International journal of computer           natural language generation with fourier analysis of
+  vision, 40:99–121.                                           cross-entropy. In Advances in Neural Information
+                                                               Processing Systems, volume 36, pages 17038–17056.
+Nathaniel J Smith and Roger Levy. 2013. The effect             Curran Associates, Inc.
+  of word predictability on reading time is logarithmic.
+  Cognition, 128(3):302–319.                                 Alex Young, Bei Chen, Chao Li, Chengen Huang,
+                                                               Ge Zhang, Guanwei Zhang, Heng Li, Jiangcheng
+Irene Solaiman, Miles Brundage, Jack Clark, Amanda             Zhu, Jianqun Chen, Jing Chang, et al. 2024. Yi:
+   Askell, Ariel Herbert-Voss, Jeff Wu, Alec Rad-              Open foundation models by 01. ai. arXiv preprint
+   ford, Gretchen Krueger, Jong Wook Kim, Sarah                arXiv:2403.04652.
+   Kreps, et al. 2019. Release strategies and the so-
+   cial impacts of language models. arXiv preprint           Weizhe Yuan, Graham Neubig, and Pengfei Liu. 2021.
+   arXiv:1908.09203.                                          Bartscore: Evaluating generated text as text gener-
+                                                              ation. Advances in Neural Information Processing
+Gemma Team. 2024. Gemma.                                      Systems, 34:27263–27277.
+                                                         2454
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q Wein-   A     Appendix: Reproduction
+   berger, and Yoav Artzi. 2020. Bertscore: Evaluating
+   text generation with bert. In International Confer-   A.1    Other metrics
+   ence on Learning Representations.
+                                                         We compare FACE-2 with FACE-1, and other four
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan        metrics:
+  Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin,
+  Zhuohan Li, Dacheng Li, Eric Xing, Hao Zhang,          Surprisal It is straight-forward: the lower sur-
+  Joseph E Gonzalez, and Ion Stoica. 2023. Judging       prisal a text produces according to an evaluator, the
+  llm-as-a-judge with mt-bench and chatbot arena. In     better score it receives. The exponentiated average
+  Advances in Neural Information Processing Systems,
+  volume 36, pages 46595–46623. Curran Associates,       surprisal of a sequence of words is exactly how
+  Inc.                                                   perplexity is defined.
+Chunting Zhou, Pengfei Liu, Puxin Xu, Srini Iyer, Jiao   MAUVE It returns a number in the scope of [0, 1].
+  Sun, Yuning Mao, Xuezhe Ma, Avia Efrat, Ping Yu,       A larger value indicates a more similar semantic
+  Lili Yu, Susan Zhang, Gargi Ghosh, Mike Lewis,         distribution to human written texts, which indicates
+  Luke Zettlemoyer, and Omer Levy. 2023. Lima: Less
+  is more for alignment. Preprint, arXiv:2305.11206.     higher text quality. The score is computed using the
+                                                         public implementation provided by Pillutla et al.
+Yaoming Zhu, Sidi Lu, Lei Zheng, Jiaxian Guo, Weinan     (2021).
+  Zhang, Jun Wang, and Yong Yu. 2018. Texygen: A
+  benchmarking platform for text generation models.      Zipf It is the slope of the best-fit line on log-
+  In The 41st international ACM SIGIR conference
+                                                         log plot of a rank versus unigram frequency plot.
+  on research & development in information retrieval,
+  pages 1097–1100.                                       A smaller value indicates it is closer to human
+                                                         distributions, i.e., higher text quality. We use the
+                                                         open-sourced implementation from Holtzman et al.
+                                                         (2020).
+                                                         Self-BLEU This score is computed by following
+                                                         the same protocol of Holtzman et al. (2020): com-
+                                                         puting the BLEU score of each generations against
+                                                         all other generations as references. A lower final
+                                                         score suggests higher diversity of the generated
+                                                         text, which is an important indicator of text quality.
+
+                                                         A.2    Data and cleaning steps
+                                                         The mapping between domains and specific
+                                                         datasets are listed in Table 3.
+
+                                                             Language      Domain        Dataset
+                                                                             Wiki        Wikipedia-Chinese
+                                                             Chinese
+                                                                             News        MNBVC-News
+                                                                             Story       WebNovel
+                                                                             Wiki        Wikipedia-English
+
+                                                              English        News        BBC-News
+                                                                             Story       WritingPrompts
+                                                                         Domain QA       PubmedQA
+                                                                         General QA      LIMA
+
+                                                         Table 3: Both Chinese datasets and English datasets
+                                                         contain continuous writing tasks of three domains: News
+                                                         article, Wikipedia document, and Story. Additionally,
+                                                         we provide two open-ended text generation datasets for
+                                                         instructed models.
+
+                                                     2455
+ Model Cat.   Family             Size           Lang.        decimal places (≤1e-3), which can be ignored.
+              Qwen-2        1.5b, 7b, 72b                       The arguments for the sampling method in text
+                                                Chinese
+  Generator   Yi-1.5           6b, 34b                       generation are as follows:
+              Llama-3          8b, 70b
+                                                                • temperature: 1
+                                                English         • top k: 50
+              Gemma-2        2b, 9b, 27b
+                                                                • top p: 0.95
+              Qwen-2      0.5b, 1.5b, 7b, 72b   Chinese
+  Evaluator
+                                                                The estimated times for running generator and
+              Pythia         410m, 1.4b                      evaluator models is listed in Table 6. To deal with
+                                                English
+              Llama-3          8b, 70b                       an out-of-memory bug in vllm, we clear the cuda
+                                                             cache after each step of output. This slows down the
+Table 4: Models used in the experiment. For English
+                                                             speed about 20%∼30%. Taking all model family ×
+datasets, both Chinese models and English models are
+used for generation and evaluation experiments. For
+                                                             task combinations together, the total running time
+Chinese datasets, we uses Chinese generators only, and       of our experiments is about (20 + 6) × 3h ≈ 140h.
+Qwen-2 for Chinese evaluation.
+                                                             B Appendix: Results
+
+    We clean the datasets to ensure quality: repe-           B.1   Sampling methods
+titions of sentence or meaningless strings are re-           We further make some comparison on the use of
+moved; next we sample a subset from each dataset,            different sampling methods in Table 5. The results
+ensuring the texts in the subsets as controlled              in the table generally suggest that a better sampling
+variable have comparatively equal length. For all            method (p=0.95 and k=40) have better FACE-2
+datasets from the three main categories (except for          scores - the same conclusion as FACE-1.
+WritingPrompts), we split each into two parts, with
+the first half as the prompt for generation, and the         B.2   Spectrum plots
+second half as human ground-truth. The prompt                The full spectrum plots of all model family × task
+length is set to 64 tokens, and during generation,           combinations are shown in Figure 6.
+we limit the model maximum generation length to
+1024. For two QA datasets plus WritingPrompts,               B.3   Full valid cell ratios
+we directly use the prompt provide by themselves.            The full results of valid cell ratios are shown in
+The size of each subset we used are 5000, except             Table 8.
+for Wikipedia-Chinese and MNBVC-News, where
+we removes some texts containing too much En-                B.4   MT-Bench comparison
+glish. The size of Wikipedia-Chinese’s subset is             The detailed MT-Bench comparison results are
+2160, and MNBVC-News’ is 4206. LIMA origi-                   reported in Table 9. We exclude GPT-4 and re-
+nally contains 1030 groups of dialogue, we remove            compute the results of original MT-Bench human
+those excessively long dialogue, the size of remain-         preference BT-score. We also report the BT-score
+ing subset is 900.                                           of FACE-2 metrics EMD and SO, and FACE-1
+    To further ensure consistency in generation, we          SO. We see that the old metric SO performs only
+use the same tokenizer across all generator models.          slightly difference in scores, while the new metric
+For Chinese, we use the default tokenizer from               EMD is much closer to human BT-score than SO.
+Qwen2, and for English it is the Llama3 tokenizer.           Since MAUVE is not capable for pair-wise compar-
+                                                             ison, we report the raw MAUVE score over these
+A.3 Model details                                            five models directly.
+Detailed sizes of the generator and evaluator mod-
+els are listed in Table 4.                                   B.5   Case analysis for the mismatch in
+                                                                   Claude-v1 output
+A.4 GPU usage and hyper-parameters                           The mismatch between human preference and met-
+We used 4 A6000ada 48G GPU for the experiments               ric scores in Claude-v1 outputs might be due to
+in this studies. We used vllm to speed up genera-            the fact that Claude-v1 is more likely to perform
+tion and inference. We notice that vllm does not             as a chat model and outputs explanations while
+guarantee stable log probability, but this instability       others directly write what is requested. For exam-
+only affects the vocabularies’ log probabilities in          ple, we notice that, when the prompt is "Compose
+                                                          2456
+                  Sampling Method        SO ↑     EMD(×100)↓                  KL(×10) ↓       JS(×10) ↓
+                  Greedy                  0.55             6.43                 2.64              2.40
+                  Pure Sampling           0.57             1.77                 1.92              2.12
+                  Top-k (k=40)            0.57             1.72                 1.90              2.11
+                  Top-k (k=640)           0.57             1.76                 1.92              2.12
+                  Nucleus (p=0.95)        0.58             1.72                 1.91              2.11
+
+Table 5: FACE-2 score. Tested on Gen: Gemma2-2b-base, Inf: Llama3-70b-base, Data: BBC. (×n) means the metric
+value multiplied by n.
+
+
+      Task         Model Size        Running Time             solution we hoping to see. The 72b model suc-
+                                                              cessfully gives a general solution, which includes
+                      1.5b           10min∼20min              a key information ScaleType also mentioned by
+                       7b            20min∼30min              the groundtruth answer. FACE-2 scores can suc-
+ Generation
+                 30b (4×GPUs)           1h∼2h                 cessfully evaluate these models, but BERTScore
+                 70b (4×GPUs)           1h∼2h                 considers 7b model outperforms 72b (see Table 7).
+                      0.5b               5min
+                                                                  Model        BERTScore↑   FACE-2SO ↑   FACE-2EMD ↓   FACE-2JS ↓
+                      1.5b               5min
+  Evaluation                                                      Qwen 1.5b      85.30        57.53         2.41         20.83
+                       7b                10min                    Qwen 7b        88.29        60.78         1.27         20.14
+                 70b (4×GPUs)          40min∼2h                   Qwen 72b       87.85        65.57         0.82         18.81
+
+
+Table 6: Runtime of generation tasks and evaluation           Table 7: BERTScore ranks the generator models into the
+tasks for different model sizes. The runtime we reported      counter-intuitive order in terms of model size, while all
+is a rough value, which may vary according to the envi-       FACE-2 metrics result in more intuitively sound orders.
+ronment.
+
+
+an engaging travel blog post about a recent trip
+to Hawaii, highlighting cultural experiences and
+must-see attractions.", Claude-v1 first generates
+a sentence like "Here is a draft travel blog post
+about a recent trip to Hawaii:", and then gives the
+main body of post. In contrast, other models tend
+to generate the post directly. Evaluation metrics are
+sensitive to this kind of semantic changes, while hu-
+man participants of MT-Bench that are uninformed
+of model-generated texts’ features focus more on
+the content quality. Hence FACE considers that
+Claude-v1’s text is far from natural, while humans
+rank its content to the top.
+
+B.6   Case study of how FACE works better
+      than BERTScore
+We use an example from LIMA to demonstrate
+the situation that FACE-2 works better than
+BERTScore. The three models are Qwen 1.5b, 7b,
+and 72b. Comparing their outputs, we found that
+the larger model gives the better answer that close
+to LIMA’s groundtruth. The 1.5b model outputs a
+large amount of useless codes and texts. The 7b
+model gives suggestions by showing codes, which
+might solve the problem, but clearly not a general
+                                                       2457
+                                                                                 Evaluator
+    Metric       Lang.    z-score    Dist. func.                                                                        Mean (SD)
+                                                    en1      en2    en3      en4         zh1    zh2       zh3     zh4
+                                     SO             0.30    0.25    0.40     0.40       0.40    0.35     0.40    0.35      0.36(0.05)
+                                     CORR           0.30    0.30    0.30     0.30       0.30    0.30     0.30    0.30      0.30(0.00)
+                            no       EMD            0.40    0.30    0.45     0.40       0.45    0.40     0.30    0.40      0.39(0.05)
+                                     KL             0.35    0.50    0.35     0.40       0.35    0.30     0.35    0.55      0.39(0.08)
+                                     JS             0.35    0.50    0.40     0.40       0.35    0.30     0.35    0.45      0.39(0.06)
+                  en
+                                     SO             0.35    0.35    0.35     0.35       0.35    0.35     0.35    0.45      0.36(0.03)
+                                     CORR           0.25    0.50    0.20     0.20       0.10    0.05     0.15    0.55      0.25(0.17)
+                           yes       EMD            0.25    0.10    0.55     0.50       0.60    0.55     0.30    0.35      0.40(0.17)
+    FACE-1                           KL             0.20    0.35    0.20     0.20       0.25    0.20     0.15    0.30      0.23(0.06)
+   (real part)                       JS             0.25    0.35    0.20     0.20       0.20    0.15     0.25    0.30      0.24(0.06)
+                                     SO              -        -      -           -      0.50    0.50     0.33    0.33      0.42(0.08)
+                                     CORR            -        -      -           -      0.33    0.33     0.33    0.33      0.33(0.00)
+                            no       EMD             -        -      -           -      0.67    0.50     0.50    0.67      0.58(0.08)
+                                     KL              -        -      -           -      0.50    0.50     0.50    0.50      0.50(0.00)
+                                     JS              -        -      -           -      0.33    0.50     0.50    0.67      0.50(0.12)
+                  zh
+                                     SO              -        -      -           -      0.50    0.50     0.67    0.67      0.58(0.08)
+                                     CORR            -        -      -           -      0.17    0.00     0.33    0.83      0.33(0.31)
+                           yes       EMD             -        -      -           -      0.50    0.67     0.50    0.50      0.54(0.07)
+                                     KL              -        -      -           -      0.67    0.33     0.50    0.50      0.50(0.12)
+                                     JS              -        -      -           -      0.50    0.33     0.50    0.50      0.46(0.07)
+                                     SO             0.40    0.45    0.35     0.25       0.40    0.40     0.30    0.40      0.37(0.06)
+                                     CORR           0.15    0.15    0.20     0.40       0.05    0.00     0.00    0.45      0.18(0.16)
+                            no       EMD            0.40    0.45    0.35     0.25       0.40    0.55     0.35    0.35      0.39(0.08)
+                                     KL             0.35    0.35    0.25     0.35       0.30    0.35     0.45    0.45      0.36(0.06)
+                                     JS             0.15    0.25    0.30     0.35       0.30    0.25     0.35    0.50      0.31(0.09)
+                  en
+                                     SO             0.35    0.35    0.35     0.35       0.35    0.35     0.35    0.35      0.35(0.00)
+                                     CORR           0.10    0.15    0.25     0.50       0.05    0.05     0.10    0.50      0.21(0.18)
+                           yes       EMD            0.50    0.50    0.30     0.10       0.60    0.60     0.40    0.20      0.40(0.17)
+   FACE-2                            KL             0.25    0.20    0.10     0.20       0.15    0.15     0.10    0.10      0.16(0.05)
+  (L2-norm)                          JS             0.20    0.25    0.20     0.30       0.20    0.20     0.15    0.25      0.22(0.04)
+                                     SO              -        -      -           -      0.67    0.67     0.33    0.00      0.42(0.28)
+                                     CORR            -        -      -           -      0.00    0.00     0.17    0.50      0.17(0.20)
+                            no       EMD             -        -      -           -      0.33    0.17     0.17    0.50      0.29(0.14)
+                                     KL              -        -      -           -      0.33    0.33     0.33    0.33      0.33(0.00)
+                                     JS              -        -      -           -      0.33    0.50     0.17    0.33      0.33(0.12)
+                  zh
+                                     SO              -        -      -           -      0.50    0.50     0.50    0.50      0.50(0.00)
+                                     CORR            -        -      -           -      0.17    0.00     0.17    0.83      0.29(0.32)
+                           yes       EMD             -        -      -           -      0.67    0.67     0.50    0.17      0.50(0.20)
+                                     KL              -        -      -           -      0.67    0.50     0.33    0.33      0.46(0.14)
+                                     JS              -        -      -           -      0.67    0.67     0.50    0.50      0.58(0.08)
+
+Table 8: The full valid cell ratios from all experiments. Best results from each trial are highlighted. The English
+evaluator models (en1-en4) are pythia-410m, pythia-1.4b, llama3-8b, and llama3-70b. The Chinese evaluator models
+(zh1-zh4) are qwen2-0.5b, qwen2-1.5b, qwen2-7b, and qwen2-72b, respectively.
+
+
+
+
+       Human-BT                     MAUVE                  FACE2-SO-BT                FACE2-EMD-BT                FACE1-SO-BT
+     Model        Score       Model         Score          Model         Score          Model          Score       Model        Score
+  Claude-v1       0.476    Vicuna-13b       0.708    GPT3.5-turbo        0.333       GPT3.5-turbo      0.303    GPT3.5-turbo    0.344
+ GPT3.5-turbo     0.342   GPT3.5-turbo      0.644     Vicuna-13b         0.242        Claude-v1        0.273     Vicuna-13b     0.281
+  Vicuna-13b      0.130    Alpaca-13b       0.325     Claude-v1          0.182        Vicuda-13b       0.212     Claude-v1      0.188
+  Alpaca-13b      0.039    Claude-v1        0.287     Alpaca-13b         0.152        Alpaca-13b       0.121     Alpaca-13b     0.125
+  Llama-13b       0.012    Llama-13b        0.149     Llama-13b          0.091        Llama-13b        0.091     Llama-13b      0.063
+
+             Table 9: Detailed MT-Bench comparison between human preference, FACE, and MAUVE.
+
+
+                                                              2458
+              source     human         small      medium   large                source     human         small         medium   large                       source       human         small     large                                  source       human           small      large
+
+
+                                                                           45                                                                   200
+                                                                                                                                                                                                                         60
+
+        150
+                                                                           40
+                                                                                                                                                                                                                         50
+                                                                                                                                                150
+                                                                           35
+
+
+X(ωk)                                                              X(ωk)                                                                X(ωk)                                                                    X(ωk)
+        100                                                                                                                                                                                                              40
+                                                                           30                                                                   100
+
+
+                                                                           25                                                                                                                                            30
+        50
+                                                                                                                                                50
+                                                                           20
+                                                                                                                                                                                                                         20
+
+
+                0      100       200        300     400    500                   0       100       200           300      400   500                     0      100       200        300        400       500                    0          100       200            300       400           500
+                                       ωk                                                                ωk                                                                    ωk                                                                           ωk
+
+
+
+          FACE-1 Lima Qwen-2                                                    FACE-2 Lima Qwen-2                                                FACE-1 Lima Llama-3                                                         FACE-2 Lima Llama-3
+              source     human         small      medium   large                source     human         small         medium   large                       source       human         small     large                                  source       human            small         large
+
+        150
+                                                                           32
+                                                                                                                                                100
+                                                                                                                                                                                                                         25.0
+
+                                                                           28
+                                                                                                                                                80
+        100
+
+
+X(ωk)                                                              X(ωk)                                                                X(ωk)                                                                    X(ωk)   22.5
+                                                                           24                                                                   60
+
+
+
+        50                                                                                                                                      40
+                                                                           20                                                                                                                                            20.0
+
+
+
+                                                                                                                                                20
+                0      100       200        300     400    500                   0       100       200           300      400   500                     0      100       200        300        400       500                        0       100       200           300       400           500
+                                       ωk                                                                ωk                                                                    ωk                                                                            ωk
+
+
+
+    FACE-1 Wiki-EN Qwen-2                                              FACE-2 Wiki-EN Qwen-2                                                FACE-1 Wiki-EN Llama-3                                                   FACE-2 Wiki-EN Llama-3
+              source     human         small      medium   large                source     human         small         medium   large                       source       human         small     large                                  source       human           small      large
+
+
+
+        250
+                                                                                                                                                                                                                         35
+                                                                           35
+                                                                                                                                                150
+        200
+
+                                                                           30
+                                                                                                                                                                                                                         30
+
+X(ωk)                                                              X(ωk)                                                                X(ωk)                                                                    X(ωk)
+        150
+                                                                                                                                                100
+
+                                                                           25
+        100
+                                                                                                                                                                                                                         25
+
+                                                                                                                                                50
+                                                                           20
+        50
+
+                                                                                                                                                                                                                         20
+
+                0      100       200        300     400    500                   0       100       200           300      400   500                     0      100       200        300        400       500                    0          100       200            300       400           500
+                                       ωk                                                                ωk                                                                    ωk                                                                           ωk
+
+
+
+  FACE-1 WebNovel Qwen-2                                             FACE-2 WebNovel Qwen-2                                                           FACE-1 WP Llama-3                                                         FACE-2 WP Llama-3
+              source     human         small      medium   large                source     human         small         medium   large                 source     human         small       medium        large                source         human          small         medium            large
+
+
+
+                                                                                                                                                200
+        200
+
+                                                                                                                                                                                                                         30
+                                                                           30
+                                                                                                                                                150
+        150
+
+
+
+X(ωk)                                                              X(ωk)                                                                X(ωk)                                                                    X(ωk)
+                                                                                                                                                                                                                         26
+
+        100                                                                                                                                     100
+                                                                           25
+
+                                                                                                                                                                                                                         22
+        50                                                                                                                                      50
+
+
+                                                                           20
+                0      100       200        300     400    500                   0       100       200           300      400   500                     0      100       200        300        400       500                    0          100       200            300       400           500
+                                       ωk                                                                ωk                                                                    ωk                                                                           ωk
+
+
+
+ FACE-1 BBC-News Qwen-2 FACE-2 BBC-News Qwen-2                                                                                             FACE-1 ZH-News Qwen-2                                                    FACE-2 ZH-News Qwen-2
+
+Figure 7: Other spectrum plots demonstrating FACE-2 generally reflect model scaling effect better than FACE-1.
+
+
+
+         Input
+
+        In Android, I defined an “‘ImageView“‘’s “‘layout_width“‘ to be “‘fill_parent“‘ (which takes up
+        the full width of the phone).
+        If the image I put to “‘ImageView“‘ is bigger than the “‘layout_width“‘, Android will scale it,
+        right? But what about the height? When Android scales the image, will it keep the aspect ratio?
+        What I find out is that there is some white space at the top and bottom of the “‘ImageView“‘ when
+        Android scales an image which is bigger than the “‘ImageView“‘. Is that true? If yes, how can I
+        eliminate that white space?
+
+
+
+                                                                                                                                2459
+Groundtruth
+* Yes, by default Android will scale your image down to fit the ImageView, maintaining
+the aspect ratio. However, make sure you’re setting the image to the ImageView using “‘an-
+droid:src=&quot;...&quot;“‘ rather than “‘android:background=&quot;...&quot;“‘. “‘src=“‘ makes
+it scale the image maintaining aspect ratio, but “‘background=“‘ makes it scale and distort the
+image to make it fit exactly to the size of the ImageView. (You can use a background and a source
+at the same time though, which can be useful for things like displaying a frame around the main
+image, using just one ImageView.)
+* You should also see “‘android:adjustViewBounds“‘ to make the ImageView resize itself to fit the
+rescaled image. For example, if you have a rectangular image in what would normally be a square
+ImageView, adjustViewBounds=true will make it resize the ImageView to be rectangular as well.
+This then affects how other Views are laid out around the ImageView.
+Then as Samuh wrote, you can change the way it default scales images using the “‘an-
+droid:scaleType“‘ parameter.
+By the way, the easiest way to discover how this works would simply have been to experiment a
+bit yourself! Just remember to look at the layouts in the emulator itself (or an actual phone) as the
+preview in Eclipse is usually wrong.
+
+
+
+
+                                                2460
+Qwen2-1.5b Output
+
+I need to make the whole image stay in the “‘ImageView“‘ and not take the whole screen, but not
+scale it at the same time.
+< R e l a t i v e L a y o u t xmlns : a n d r o i d =" h t t p : / / s c h e m a s . a n d r o i d . com / apk /
+     res / android "
+       xmlns : t o o l s =" h t t p : / / s c h e m a s . a n d r o i d . com / t o o l s "
+        a n d r o i d : i d ="@+ i d / l a y o u t _ r o o t "
+        a n d r o i d : l a y o u t _ w i d t h =" f i l l _ p a r e n t "
+        a n d r o i d : l a y o u t _ h e i g h t =" f i l l _ p a r e n t "
+        a n d r o i d : o r i e n t a t i o n =" v e r t i c a l "
+        t o o l s : c o n t e x t =". MainActivity ">
+       <ImageView
+                 a n d r o i d : i d ="@+ i d / imageView1 "
+                 a n d r o i d : l a y o u t _ w i d t h =" f i l l _ p a r e n t "
+                 a n d r o i d : l a y o u t _ h e i g h t =" f i l l _ p a r e n t "
+                 a n d r o i d : s r c =" @drawable / b a c k g r o u n d " / >
+</ R e l a t i v e L a y o u t >
+The problem is that the image is scaled so it covers up the space in the layout.
+< R e l a t i v e L a y o u t xmlns : a n d r o i d =" h t t p : / / s c h e m a s . a n d r o i d . com / apk /
+     res / android "
+       xmlns : t o o l s =" h t t p : / / s c h e m a s . a n d r o i d . com / t o o l s "
+        a n d r o i d : i d ="@+ i d / l a y o u t _ r o o t "
+        a n d r o i d : l a y o u t _ w i d t h =" f i l l _ p a r e n t "
+        a n d r o i d : l a y o u t _ h e i g h t =" f i l l _ p a r e n t "
+        a n d r o i d : o r i e n t a t i o n =" v e r t i c a l "
+        t o o l s : c o n t e x t =". MainActivity ">
+       <ImageView
+                 a n d r o i d : i d ="@+ i d / imageView1 "
+                 a n d r o i d : l a y o u t _ w i d t h =" f i l l _ p a r e n t "
+                 a n d r o i d : l a y o u t _ h e i g h t =" f i l l _ p a r e n t "
+                 a n d r o i d : s r c =" @drawable / b a c k g r o u n d " / >
+       <ImageView
+                 a n d r o i d : i d ="@+ i d / imageView2 "
+                 a n d r o i d : l a y o u t _ w i d t h =" f i l l _ p a r e n t "
+                 a n d r o i d : l a y o u t _ h e i g h t =" f i l l _ p a r e n t "
+                 a n d r o i d : s r c =" @drawable / b a c k g r o u n d " / >
+</ R e l a t i v e L a y o u t >
+... a lot of unnecessary text and code ...
+
+
+
+
+                                                       2461
+Qwen2-7b Output
+
+And more interestingly, in iOS, when I put an image that is bigger than the layout width, there will
+ be no white space at all. Is that true?
+ If I understand the question correctly:
+When you do ‘ImageView‘’s ‘LayoutParams.width = LayoutParams.MATCH_PARENT;‘ and the
+ image width is larger than your ‘Layout‘ size (screen size), Android will resize it (stretch it) to fit
+ the ‘Layout‘.
+ But if you try to set ‘LayoutParams.height = LayoutParams.MATCH_PARENT;‘, it will set
+‘LayoutParams.height‘ to ‘ImageView‘ to 0, because ‘LayoutParams.height‘ is a ‘int‘ instead of a
+‘layout_constraintDimension‘ like ‘LayoutParams.width‘. So in this case, Android won’t scale the
+ image to keep the ratio or not. You have to control ‘LayoutParams.height‘ by layout constraints.
+ By setting ‘android:adjustViewBounds="true"‘ in ‘ImageView‘’s attribute, Android will stretch
+ images to fill the area, respecting its original aspect ratio. It won’t add extra white space. Here is
+ an example:
+<ImageView
+    a n d r o i d : i d ="@+ i d / imageView "
+    a n d r o i d : l a y o u t _ w i d t h =" m a t c h _ p a r e n t "
+    a n d r o i d : l a y o u t _ h e i g h t =" m a t c h _ p a r e n t "
+    a n d r o i d : s r c =" @drawable / some_image "
+    a n d r o i d : a d j u s t V i e w B o u n d s =" t r u e " / >
+Regarding iOS, yes, it has the same behavior. When iOS scales the image and its width exceeds the
+view’s width, it will stretch it to the width of the view, while maintaining the original aspect ratio.
+It won’t add any white space above or below the image. And there is no need to set the layout size
+to MATCH_PARENT, as by default it will take all available space. However, it is possible that you
+still see white space if you are manually setting any other constraints or attributes that affect the
+image’s dimensions. In iOS, you can also use the Auto Layout feature to set constraints for your
+‘UIImageView‘ to avoid any white spaces. The key points are:
+- Set ‘UIImageView’s contentMode‘ to ‘.scaleAspectFit‘. It adjusts the view to the given layout
+bounds while keeping the aspect ratio. - Set ‘ImageView’s constraints‘ to fill the parent view in
+both width and height. - Set the necessary auto layout constraints to position the ‘UIImageView‘.
+In both environments, you don’t have to worry about white spaces if you properly set up the
+constraints and attributes related to the image scaling and positioning. Hope this helps! If you need
+more details or examples, let me know. I’m happy to provide further assistance.
+
+
+
+
+                                                         2462
+Qwen2-72b Output
+
+You could set android:scaleType="centerCrop" on your ImageView. This will ensure that your
+image will be shown in the largest size possible in your space and maintain aspect ratio.
+Your options are:
+“‘ ImageView.ScaleType.CENTER: Scale the image to fit inside the ImageView’s bounds, centering
+it. Aspect ratio is maintained.
+ImageView.ScaleType.CENTER_CROP: Scale the image to fit inside the ImageView’s bounds,
+centering it and cropping to fit. Useful for images that are not the same aspect ratio as the
+ImageView.
+ImageView.ScaleType.CENTER_INSIDE: Scale the image so that it fits entirely inside the Im-
+ageView. Aspect ratio is maintained, and the image will not be scaled down if its smaller than the
+ImageView.
+ImageView.ScaleType.FIT_CENTER: Scale the image to fit inside the ImageView, centering and
+using the image’s top and left as a center point. This scale type is like CENTER but ensures that
+the entire image will be visible.
+ImageView.ScaleType.FIT_END: Scale the image to fit inside the ImageView, aligning the image’s
+right and bottom to the right and bottom of the ImageView. This scale type is like FIT_START but
+the alignment is at the end of the ImageView.
+ImageView.ScaleType.FIT_START: Scale the image to fit inside the ImageView, aligning the
+image’s top and left to the top and left of the ImageView.
+ImageView.ScaleType.FIT_XY: Scale the image to fit the ImageView’s bounds. The image may be
+stretched to fit in this space.
+ImageView.ScaleType.MATRIX: Uses a supplied Matrix object to scale and position the image.
+The image will be clipped by the ImageView if it extends outside the ImageView bounds.
+“‘
+See [the documentation](http://developer.android.com/reference/android/widget/ImageView.
+ScaleType.html) for a description of each one.
+
+
+
+
+                                              2463
+

@@ -1,0 +1,1881 @@
+
+	
+	
+	
+How Dungeons & Dragons Appropriated the Orient | Analog Game Studies
+	
+	
+	
+	 
+	
+	
+	 
+	
+		
+		
+					
+				
+		 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+     
+     
+     
+     
+	
+     
+     
+		 
+		 
+			 
+		
+	Skip to content
+			
+		
+			
+		
+	
+	
+	
+		
+			
+Analog Game Studies
+			
+				
+					Search				
+			
+			
+				
+Primary Menu
+				
+Home
+Catalog
+	
+Volume I
+	
+		
+Vol. I, No. I (August 2014)
+		
+Volume I, Issue II
+		
+Vol. I, No. III (October 2014)
+		
+Volume I, Issue IV
+		
+Volume I, Issue V
+	
+	
+Volume II
+	
+		
+Analog Players, Analog Space: Video Gaming Beyond the Digital
+		
+Volume II, Issue II
+		
+Volume II, Issue III
+		
+Volume II, Issue IV
+		
+Vol. II, No. V (July 2015)
+		
+Volume II, Issue VI
+		
+Vol. II, No. VII (November 2015)
+	
+	
+Volume III
+	
+		
+Vol. III, No. I (January 2016)
+		
+Volume III, Issue II
+		
+Volume III, Issue III
+		
+Volume III, Issue IV
+		
+Volume III, Issue V
+		
+2016 Role-Playing Game Summit
+	
+	
+Volume IV
+	
+		
+Vol. IV, No. I (January 2017)
+		
+Volume IV, Issue II
+		
+Vol. IV, No. III (May 2017)
+		
+Vol. IV, No. IV (July 2017)
+		
+Volume IV, Issue V
+	
+	
+Volume V
+	
+		
+Vol. V, No. I (March 2018)
+		
+Volume V, Issue II
+		
+Vol. V, No. III (September 2018)
+		
+Vol. V, No. IV (December 2018)
+	
+	
+Volume VI
+	
+		
+Volume VI, Issue I
+		
+Volume VI, Issue II
+		
+Vol. VI, No. III (September 2019)
+		
+2019 Role-Playing Game Summit
+	
+	
+Volume VII
+	
+		
+Special Issue: Analog Games and Translation
+		
+Vol. VII, No. II (December 2020)
+	
+	
+Volume VIII
+	
+		
+Vol. VIII, No. I (March 2021)
+		
+Volume VIII, Issue II
+		
+Special Issue: The Fiend Folio
+	
+	
+Volume IX
+	
+		
+Volume IX, Issue I
+		
+Volume IX, Issue II
+		
+Volume IX, Issue III
+		
+Volume IX, Issue IV
+	
+	
+Volume X
+	
+		
+Volume X, Issue I
+		
+Volume X, Issue II
+	
+	
+Volume XI
+	
+		
+Volume XI, Issue I
+		
+Volume XI, Issue II
+		
+Special Issue: Perspectives on RPG Studies from Latin-American Scholars
+		
+Vol. XI, No. IV (December 2024)
+	
+	
+Volume XII
+	
+		
+Volume XII, Issue I
+		
+Special Issue: Queer Analog Game Studies
+		
+Volume XII, Issue III
+		
+Volume XII, Issue IV
+	
+	
+Special Issues
+	
+		
+2016 Role-Playing Game Summit
+		
+2019 Role-Playing Game Summit
+		
+Special Issue: Analog Games and Translation
+		
+Analog Players, Analog Space: Video Gaming Beyond the Digital
+		
+Special Issue: The Fiend Folio
+		
+Special Issue: Perspectives on RPG Studies from Latin-American Scholars
+		
+Special Issue: Queer Analog Game Studies
+	
+In Print
+Generation Analog
+	
+Generation Analog 2026 “GREEN” Program
+	
+Generation Analog 2026 “GREEN” CFP
+	
+Past Conferences
+The Team
+	
+Editorial Board
+	
+Authors (Volume 12)
+	
+Authors (Volume 11)
+	
+Authors (Volume 10)
+	
+Authors (Volume 9)
+	
+Authors (Volume 8)
+	
+Authors (Volume 7)
+	
+Authors (Volume 6)
+	
+Authors (Volume 5)
+	
+Authors (Volume 4)
+	
+Authors (Volume 3)
+	
+Authors (Volume 2)
+	
+Authors (Volume 1)
+About
+	
+Analog Game Studies 101
+Submit
+	
+Special Issues
+	
+Calls for Participation
+Contact
+			
+		
+		
+			
+				
+				
+					
+Search for:
+					
+				
+				
+			
+			
+		
+	
+	
+	
+		
+			
+	
+		
+			
+		
+		
+	
+				
+			
+Tabletop Role-Playing Games
+		
+			
+How Dungeons & Dragons Appropriated the Orient
+		
+			
+January 11, 2016
+ 
+Aaron Trammell
+			
+15 Comments
+						
+	
+		
+		
+“…The mysterious and exotic Orient, land of spices and warlords, has at last opened her gates to the West.”
+  —
+TSR, Inc.
+1
+The above blurb was printed on the back of the 1985 “official” 
+Advanced Dungeons & Dragons
+ supplement 
+Oriental Adventures
+. Tellingly, it reveals much about the target reader. The reader here is assumed to be of western descent, specifically American, Canadian, or British.
+2
+ They find the “Orient”
+3
+ mysterious and exotic, notable for both its colonial bounty—the riches of the spice trade—and its war-torn landscape, made famous by warlords like Genghis Khan. Finally, the reader is assumed to perceive the Orient as somewhat feminized, possessing a subordinate relationship to western nations, culture, industry, and governance. A skeptical reading of this blurb suggests that the success of 
+Oriental Adventures
+ was predicated upon a racist and sexist culture of American, Canadian, and British gamers who were interested in barnstorming though the gates of the “Orient” to confront barbaric hordes in order to plunder the land’s riches. A more generous reading would suggest that a racist and sexist culture of American, Canadian, and British gamers simply wanted to develop a finer sense of appreciation for the another more “exotic” culture. Either way, it is clear that 
+Oriental Adventures
+ revels in what cultural theorist Edward Said refers to as 
+orientalism
+—a way of reducing the complexity of eastern culture to a set of problematically racist and sexist stereotypes. This essay explores how orientalism was schematized as a set of game rules in 
+Dungeons & Dragons
+ and argues that we can observe how the affiliated racist and sexist attitudes are articulated within the game’s procedural logic.
+This essay looks at how notions of race and culture inform broader practices of game design and representation. I am judiciously reviewing material from 
+Dungeons & Dragons,
+ as it was both central to discussions of role-playing in the 1980s and tremendously influential in the history of game design.
+4
+ Although some games like 2005’s 
+Jade Empire
+ 
+have followed explicitly in the tradition of 
+Oriental Adventures
+, this essay shows its impact on the discourse of game design more broadly. In particular, the influence of orientalism can be traced through game mechanics governing comeliness, non-weapon proficiencies, and alignment in games featuring role-playing elements.
+Oriental Adventures
+ was both a critically lauded and commercially successful supplement for 
+Dungeons & Dragons
+. It was rebooted in 2001 for compatibility with 
+Dungeons & Dragons 
+3
+rd
+ edition, this time winning an 
+ENnie award.
+5
+ The original 1985 supplement, as described in the introduction the 3
+rd
+ edition reboot, was influenced by the 1980 television miniseries 
+Shogun
+ and the 1979 role-playing game 
+Bushido
+. As such, 
+Oriental Adventures
+ is very much indebted to the interest in eastern culture which was popularized in America, both by Kurowsawa’s samaurai in the late 1950s, and the kung fu film genre—typified by Bruce Lee in 
+Enter the Dragon
+ (1973)—in the early 1970s.
+6
+ The game is written for a presumably western, white, male audience who is interested in exploring the cultural tropes of the eastern world. 
+Image used for purposes of critique. Mike Mearls, Jeremy Crawford, et al. Dungeons & Dragons Player’s Handbook. 5th Edition. Renton, WA: Wizards of the Coast, 2014, p. 1.
+Can 
+Dungeons & Dragons
+ even exist without Orientalism? For all of the excellent work that Mike Mearls and Jeremy Crawford have done in designing a world that fosters a more critical dialogue around gender though 5
+th
+ edition 
+Dungeons & Dragons 
+(2014)
+,
+7
+ overtones of orientalism pervade the text, adorning the 
+Player’s Handbook
+ like sequins.
+8
+ 
+ First, there are illustrations: an East Asian warlock,
+9
+ a female samurai
+,
+10
+ an Arabian princess,
+11
+ an Arab warrior,
+12
+ and a Moor in battle,
+13
+ to name a few. Then, there are mechanics: the Monk persists as a class
+14
+ replete with a spiritual connection to another world via the “ki” mechanic. Scimitars and blowguns are commonly available as weapons,
+15
+ and elephants are available for purchase as mounts for only 200 gold.
+16
+ Although all of these mechanics are presented with an earnest multiculturalist ethic of appreciation, this ethic often surreptitiously produces a problematic and fictitious exotic, Oriental figure. At this point, given the embrace of multiculturalism by the franchise, it seems that the system is designed to embrace the construction of Orientalist fictional worlds where the Orient and Occident mix, mingle, and wage war. 
+For Edward Said, “orientalism” means many different things. Orientalism is an antiquated yet pervasive (in 1978) academic way of understanding the Orient. Orientalism is also philosophical mode of comparing western (known) culture, people, customs, and society to the exotic eastern unknown. Finally, orientalism is the practice of reducing the people, religions, nations, geography, and cultures of east to a singular and stereotypical imaginary. In Said’s words, “a Western style for dominating, restructuring, and having authority over the Orient.”
+17
+ These three definitions of orientalism work together to produce an oppressive system of knowledge of around the Orient systematically reproduced in 
+institutions
+ such as academia, 
+authoritative texts
+ such as encyclopedias, dictionaries, and histories, and 
+popular culture
+ such as kung fu movies, bric-a-brac in head and curiosity shops, role-playing supplements.
+18
+ Notably, orientalism is closely related to the figure of the Orientalist—the western researcher who acquires cultural knowledge from the eastern world in order to define, restructure, and produce an authoritative vision of what the Orient is. Although we might criticize the position of authority that the Orientalist maintained as well as the stereotypes that were developed and disseminated through their work, it is important to remember that the Orientalist saw themselves as somewhat “heroic,”
+19
+ cultivating a popular appreciation for eastern culture.  
+Image used for purposes of critique. [ref]James Wyatt. Oriental Adventures. Renton, WA: Wizards of the Coast, 2001, p.28.
+In the tradition of the Orientalists, Gary Gygax—author of the first 
+Oriental Adventures
+ supplement—related a keen sense of enthusiasm in his preface to the manual. “
+Oriental Adventures
+ is a landmark work in the game system. It brings not only new information; this book adds a whole new world. As such, this is a wonderful event that brings enthusiasts the best of both worlds…literally.”
+20
+ Gygax saw the volume as an effort to make the exotic locales of the “far east” mundane, and in the spirit of the post-racial politics of Reagan’s America inject the spirit of multiculturalism into 
+Dungeons & Dragons 
+through “cross-cultural adventuring.” Gygax’s foray into chronicling the cultures of the “orient” had much to do with his appreciation of the culture.
+Image used for purposes of critique. Mike Mearls, Jeremy Crawford, et al. Dungeons & Dragons Player’s Handbook. 5th Edition. Renton, WA: Wizards of the Coast, 2014, p. 40.
+These contending factors—the related notions of appreciation and authority—are key to understanding how orientalism, despite the best intentions of Orientalist authors, persists as an ideology. Although Gary Gygax envisioned a campaign setting that brought a multicultural dimension to 
+Dungeons & Dragons
+, the reality is that by lumping together Chinese, Japanese, Korean, Mongolian, Philippine, and “Southeast Asian” lore he and co-authors David “Zeb” Cook and Francois Marcela-Froideval actually developed a campaign setting that reinforced western culture’s already racist understanding of the “Orient.” Appreciation and authority are conjured, in part, through the manual’s form. 
+Oriental Adventures
+, like all 
+Dungeons & Dragons
+ manuals is written in a comprehensive and exhaustive style that mimics the form of an encyclopedia in its organization.
+21
+ Apart from the tables, charts, and illustrations that had, at this point, become standard fare in role-playing supplements, 
+Oriental Adventures
+ also included a 72-work bibliography that simultaneously relates an appreciation of and authority over the Orient. This structure, the encyclopedic, although derived through practices of appreciation becomes ultimately an exercise in producing an authoritative source in what does and does fit into the imaginary of the game’s world.
+Although the manual’s form speaks to the interest of Gygax and company in displaying both appreciation and authority toward the Orient, it also encouraged players to develop a similar disposition. In “A Step Beyond Shogun…A Reader’s Guide to Adventuring in the Orient,” David Bunnell offers a review of the literature contained in the 
+Oriental Adventures
+ bibliography.
+22
+ In Bunnell’s words:
+All the books I have mentioned are excellent resources for the gamer who wishes to add that extra flavor to his campaign. I enjoy role-playing, and I started (as most of us did) by playing the medieval ancestors that I imagine that I once had. Now, after a great deal of reading, I am ready to try to role-play in a totally different feudal culture. I don’t know if I’ll ever truly understand the Japanese culture, but I will certainly enjoy myself while learning.
+23
+It is by learning the Orientalist texts listed in the 
+Oriental Adventures
+ bibliography that Bunnell felt able to authentically role-play characters in a non-western feudal society. Simply put: by cultivating a sense of cultural appreciation, Bunnell was able to authoritatively produce a feudal Japanese world for himself and his players. “A short survey of a few especially significant books in the field may help these bewildered [Dungeon Masters] get back on the path toward successful Oriental gaming.”
+24
+ 
+Clearly “success” for Bunnell is linked to both the appreciation of the Orientalist texts as listed in the 
+Oriental Adventures
+ bibliography and the authority that is cultivated through this form of appreciation.
+The goal of orientalism is to produce encyclopedic knowledge about an imagined and exotic other. Image used for purposes of critique. [ref]James Wyatt. Oriental Adventures. Renton, WA: Wizards of the Coast, 2001, p. 73.[/ref]
+Comeliness and Honor
+The secret to understanding the forms of racism that accompany 
+Oriental Adventures
+ is recognizing that it is assumed that the characters played will be oriental—whatever that means. This sometimes means connecting the dots and questioning why certain game mechanics have been included or altered. Take for example the new statistic that is offered: “Comeliness.” At face value, Comeliness seems like a simple modification to the game’s core mechanics, which had already been taking into account “Charisma“ for the better part of ten years. But unlike Charisma, Comeliness is meant to speak more directly to beauty: “While Charisma deals specifically with leadership and loyalty, Comeliness deals with attractiveness and first impressions.”
+25
+ Comeliness becomes a game mechanic in 
+Oriental Adventures
+ because the feminized Asian man is part of the Oriental imaginary.
+26
+ Where the assumed male player in 
+Dungeons & Dragons
+ enjoyed a Charisma score which determined the extent to which his masculine charm would win the loyalty of his men on the battlefield, the Oriental man’s beauty can be apprehended through the Comeliness statistic
+27
+—a dubious honor previously reserved only for women in Len Lakofka’s unfortunate article “Notes on Women and Magic.”
+28
+ Thus the introduction of the Orient in 
+Dungeons & Dragons 
+invokes a radical rethinking of what constitutes a “man,” and the sexist and racist precept that Oriental men must be evaluated also in terms of their physical beauty.
+ 
+Not only does 
+Oriental Adventures
+ encourage players to think through how to quantify the appearance of Oriental men and women, it also encourages players to quantify their social worth. In addition to the implementation of Comeliness, 
+Oriental Adventures 
+also presented players with a system to consider character honor. Honor in an 
+Oriental Adventures
+ campaign is related to a character’s sense of character, value to society, and overall trustworthiness. Unlike honor for a paladin in a traditional 
+Dungeons & Dragons
+ campaign, Honor in this context has been detached from the ethical matrix of alignment. Honorable characters in 
+Oriental Adventures
+ can be evil, and dishonorable characters in 
+Oriental Adventures
+ can be good. Honor, like Comeliness, is also quantified. Characters are awarded honor points by the game master: as few as zero and as many as one hundred. The imposition of an honor system within the rules of 
+Oriental Adventures
+ makes clear what had been invisible and taken for granted in Western campaign: unlike Western characters, the social worth of Oriental characters is always suspect.
+A table comparing the honor of several Oriental races. Image used for purposes of critique. [ref] Gary Gygax. Oriental Adventures. Lake Geneva, WI: TSR, Inc., 1985, p. 35.[/ref]
+Honor is a paradigm case of Orientalism in 
+Dungeons & Dragons
+, as it explicitly compares an imagined Oriental ethic and the West, epitomized by Christianity. Said explains:
+My thesis is that the essential aspects of modern Orientalist theory and praxis (from which present-day Orientalism derives) can be understood, not as a sudden access of objective knowledge about the Orient, but as a set of structures inherited from the past, secularized, redisposed, and re-formed by such disciplines as philology, which in turn are naturalized, modernized, and laicized substitutes for (or versions of) Christian supernaturalism.
+29
+The game makes clear the comparison between Oriental honor and the Christian ethic. Western honor, epitomized by the paladin, maps cleanly onto the values that we associate with good or evil in 
+Dungeons & Dragons
+ alignment system. Good players are grounded through the dogma of the Judeo-Christian imagination, which associates good deeds with the good and honorable life. By proposing a system to govern honor that operates independent from the traditional politics of alignment, 
+Oriental Adventures
+ re-forms and contorts the Oriental family to co-exist as secular within a Judeo-Christian alignment table. 
+Gygax’s invention of alignment in 
+Dungeons & Dragons
+ alone is replete with the tropes of Orientalism. It is a fascinating effort to juxtapose the exotic creatures and planes of a multicultural religious pantheon into the legal and religious framework of 1970s Lake Geneva, Wisconsin. By this I mean that 
+Dungeons & Dragons’ 
+alignment system is a uniquely American (Law vs. Chaos) and Christian (Good vs. Evil) way of understanding the world. Gygax’s early attempts to map both mythological creatures and divine landscapes upon this strata reflects this. Here, the Buddhist idea of “Nirvana” co-exist within the Christian poles of “Heaven” and “Hell”(see below). It is made to contort the polemical religious logic of Christianity. Creatures from the 
+Arabian Nights
+ mythology are also made to conform to the dynamics of alignment, yet they are placed across the grid from Christianity—away from law: Djinni are good, but chaotic; Efreeti are evil, but chaotic. Within the logic of alignment, Christian ideology is ordered, controlled, lawful while all the rest of the world skews toward the chaotic Orientalist (and mythological) pole which opposes it. 
+One exception to this analysis is Gygax’s analysis of Buddhism’s Nirvana which aligns itself with law and neutrality, while simultaneously evading the binary Christian constructions of Heaven and Hell (and therefore Good and Evil). Appreciation of Buddhism as another path toward lawful spiritual conduct is given here as Gygax simultaneously invented an authoritative guide to alignment. Because alignment has become so pervasive a mechanic for guiding consistent role-playing practices in role-playing games,
+30
+ it is important to recognize how Gygax’s work as an Orientalist has contorted non-Western spirituality and behavior into a system of knowledge that is readily adaptable for use as a game mechanic. In other words, all games which make use of an alignment system are, to some extent, relying on a system which takes Judeo-Christian values for granted and essentializes all other ethical and spiritual thinking onto a grid governed by its boundaries.
+Image used for purposes of critique. Gary Gygax, “The Meaning of Law and Chaos in Dungeons & Dragons and their Relationships to Good and Evil.” The Strategic Review 2.1 (1976), p.3.
+Image used for purposes of critique. Gary Gygax, “The Meaning of Law and Chaos in Dungeons & Dragons and their Relationships to Good and Evil.” The Strategic Review 2.1 (1976), p.4.
+Both Comeliness and honor show how Gygax’s appreciation for eastern culture is articulated through a set of game mechanics that both quantify this culture and compare it to the invisible and assumed dynamics of Western American culture. This mode of reductionism encourages players to imagine eastern culture as if it could be contained by a single text and represented through a single Oriental campaign setting. At its most problematic, 
+Oriental Adventures
+ represents a complex and multifaceted set of cultural interests through a single and singular set of game mechanics. 
+Non-Weapon Proficiencies
+Having established that the 
+Oriental Adventures 
+manual is a clear example of an Orientalist text, we can now look at the supplement’s impact on the 
+Dungeons & Dragons 
+system, the invention of “non-weapon proficiencies” in particular. Here I argue that there is an isomorphic relationship between the abstraction of culture into a reductionist Orientalist imaginary and the newly minted non-weapon proficiency that reduces culture into a controllable and quantifiable procedural function. Despite the problematic nature of this reduction, the introduction of non-weapon proficiencies allows for players to consider how the game’s mathematic world might exist outside of combat. Interestingly enough, the introduction of cultural game mechanics to 
+Dungeons & Dragons
+ prompts players to imagine how the game might transform into something more than a game derived from and simply about warfare.
+31
+Orientalism has a long and dubious history. Image taken from the public domain.
+The comparison to warfare is explicit in the manual. The section on “Non-Weapon Proficiencies” begins: “In addition to weapons, characters can learn proficiencies in various peaceful arts.”
+32
+ The logic of these peaceful proficiencies was folded into a logic parallel to that of combat or contest. Because the cultural differences of Oriental life could be accommodated by an honor system which established a value to life outside of the American standbys of wealth and eternal reward, modes of conflict that deal with honor specifically were built into the system. Gygax explains that the “victors of such contests gain honor and experience for their skill, while those defeated lose honor. The outcome of contests can greatly affect a character’s social position.”
+33
+ Within these peaceful, non-weapon profiencies is an ideal folding of an imagined Oriental everyday life into the logic of honor, social standing, and familial worth. 
+Although some of the rules that were developed around non-weapon proficiencies that would have been at home in Western settings as well (Agriculture, Running, Carpentry, and Herbalist to name a few) many are distinct to Gygax’s Orientalist world. Most notable here is the distinction of specificity between those proficiencies known by nobles and those by commoners. The implication here is that the interesting aspects of Oriental culture lie within the hands of the elites, whereas the culture of the common people is barely distinguishable from that of the Western common folk. To make this comparison compare the specificity of two lists, one made for nobles in the subset “Court Proficiencies” which includes Caligraphy, Etiquette, Falconry, Flower Arranging, Heraldry, Landscape Gardening, Noh, Oragami, Painting, Poetry, Religion, and Tea Ceremony to one made for common folk in the subset “Common Proficiencies” which includes Agriculture, Animal Handling, Cooking, Dance, Fishing, Games, Horsemanship, Hunting, Husbandry, Iaijutsu,
+34
+ Juggling, Music, Reading/Writing, Sailing Craft, Singing, Small Water Craft, and Swimming. These lists further the classist understanding that “culture” is possessed by elites and inaccessible to poor people.
+This dichotomy relates to Said’s theory of Orientalism because it reflects the sources used to produce Orientalist discourse. Because the Orientalist’s understanding of the Orient was limited to documents which were published by those in the elite sectors of eastern culture, the whole of the Oriental imagination is focused around an idea of culture which privileges the rituals of those of the upper class and court.
+Real and Symbolic Violence
+Image used for purposes of critique. [ref] James Wyatt. Oriental Adventures. Renton, WA: Wizards of the Coast, 2001, p. 59. [/ref]
+The invention of non-weapon proficiencies in 
+Oriental Adventures
+ reflects Gygax’s work as an Orientalist. Non-weapon proficiencies become a game mechanic in 
+Dungeons & Dragons
+ at the same time that Comeliness becomes a way of understanding masculinity in the game and honor becomes a way of understanding one’s social value because the work of Orientalism is to produce a reductionist understanding of all culture. Ironically, reductionism in the work of game design is often regarded as a necessary evil. Without reducing and abstracting social concepts into controllable and quantifiable game mechanics, it would be quite difficult to design games. In this sense, although Gygax’s 
+Dungeons & Dragons
+ furthered an appropriative and Orientalist discourse, it also expanded the horizons of the game far beyond combat.
+It is difficult to judge the merit of this transformation. I for one feel that it definitely cannot be seen as an adequate sense of compensation for the violence of Orientalism. Although 
+Dungeons & Dragons
+ and other role-playing games owe 
+Oriental Adventures 
+a debt of gratitude for seeding the ideas which would eventually lead to robust crafting mechanics and secular systems of character development, these systems are in truth based upon a discourse that values, appropriates, and exploits “exotic” races, customs, and cultures. For all of the life these game mechanics now breath into the games we play, they must be regarded as a final sort of symbolic violence that renders the rich traditions of Asia, the Middle East, and North Africa invisible. For example the mechanics that govern agriculture or farming in 
+Fallout 4 
+(2015)
+ have no relation to the histories of knowledge that have been lost in this process of abstraction. We forget that all of the rich ways that cooking has been developed as a mechanic in role-playing games hold an inextricable historical relationship to the ways that cooking was fundamental to the everyday life of common folk in the Orient. 
+What’s more, we lose the most important connection between non-weapon proficiencies and war: the fact that non-weapon proficiencies were initially supposed to be peaceful. Because many role-playing games seek to enfold non-weapon skills within the logics of combat and acquisition (Cooking helps to restore wealth, Etiquette may help to gain economic favor in the court or to prevent combat, Crafting is often a way to develop better weapons and armor) they participate symbolically in colonialism’s modern legacy. They reduce the richness of non-western culture to a set of “non-weapon proficiencies” which can be developed and exploited to further the Western war effort.
+Image used for purposes of critique. [ref]James Wyatt. Oriental Adventures. Renton, WA: Wizards of the Coast, 2001, p. 75[ref]
+The problem of Orientalism can very much be attributed to the ubiquity of warfare as a motif for conflict in role-playing games.
+35
+ Because the worth of characters is often related to their finesse on the battlefield, the experience of the players is also intimately connected to warfare. Warfare drives an unending need for expansion, which of course is historically connected to colonialism and the valorization of exotic goods and resources. With expansion, however, comes diaspora, which can be in the appreciation for multiculturalism in 
+Oriental Adventures
+, or more recently, 
+Dungeons & Dragons 
+5
+th
+ edition. 
+The value of multiculturalist design in role-playing games is yet to be seen, however. On the one hand, it offers a space of inclusion for players who were once stymied by the commonplace white supremacist worlds inspired by Sword & Sorcery fiction in early role-playing game design. At the same time, the ethic of multiculturalist design in role-playing games still reads as Orientalist and appropriative. A way to engineer a fiction of diversity in games engineered by white men who, much like Gary Gygax, long to enjoy and celebrate the exotic, while also profiting from it. The fiction of diversity, as Edward Said would note, is dangerous because it promotes a singular imaginary of diverse people. It allows for a singular idea of the Orient, which is always already the object of violence, appropriation, domination, and conquest.
+This essay has shown ways in which the 
+Dungeons & Dragons
+ supplement 
+Oriental Adventures
+ fits Edward Said’s criteria of an Orientalist text. It shows this by revealing how the supplement’s Comeliness and Honor mechanics are the result of a racist discourse that reads Oriental men as feminine and Oriental people against the lawful values of Christianity. Beyond this, it also considers how the invention of peaceful, non-weapon proficiencies are derived from a classist understanding of what Oriental culture is. Despite these racist, classist, and sexist values, the legacy of 
+Oriental Adventures
+ persists in many role-playing games today in the non-weapon proficiencies and skills given to characters. Finally, it argues that we must question the implementation of non-weapon proficiencies in many of today’s role-playing games because of the symbolic violence they produce when placed in a synergistic relationship with the game’s core combat mechanics. If we are to resist the legacy of Orientalism in role-playing games, we must work to recover forgotten aspects of Asian, Middle Eastern, and North African culture which have been lost within the abstraction of game design.
+–
+Featured Image “miniatures” by Allan @Flickr CC BY-NC.
+–
+Co-Editor-in-Chief, 
+Aaron Trammell, PhD
+ is a Provost’s Postdoctoral Scholar for Faculty Diversity in Informatics and Digital Knowledge at the Annenberg School for Communication and Journalism at the University of Southern California. He earned his doctorate from the Rutgers University School of Communication and Information in 2015. Aaron’s research is focused on revealing historical connections between games, play, and the United States military-industrial complex. He is interested in how military ideologies become integrated into game design and how these perspectives are negotiated within the imaginations of players. He is the Co-Editor-in-Chief of the journal 
+Analog Game Studies
+ and the Multimedia Editor of 
+Sounding Out!
+ 
+In 2014, Aaron co-edited a volume of 
+Games and Culture
+ with Anne Gilbert entitled “Extending Play to Critical Media Studies.”
+Critical Hits!
+Out of the Dungeons: Representations of Queer Sexuality in RPG…
+Misogyny and the Female Body in Dungeons & Dragons
+From Where Do Dungeons Come?
+	
+	
+	
+Aijaz Ahmad
+alignment
+Bruce Lee
+Chainmail
+charisma
+comeliness
+cultural criticism
+D&D
+David "Zeb" Cook
+Dungeons & Dragons
+Dungeons and Dragons
+Edward Said
+ENnie Award
+Francois Marcela-Froideval
+Gary Gygax
+history
+Ibn Warraq
+Jade Empire
+Jeremy Crawford
+Kurosawa
+M.A.R. Barker
+Mike Mearls
+non-weapon proficiencies
+Oriental Adventures
+orientalism
+Orientalist
+role-playing games
+Sadik Jalal al-'Azm
+sword and sorcery
+warfare
+		
+		
+			Post navigation		
+		
+			
+Previous Post
+“A Lonely Place”: An Interview with Julia Bond Ellingboe
+Next Post
+The Problematic Pleasures of Productivity and Efficiency in Goa and Navegador
+			
+		
+		
+	
+	
+		15 thoughts on “How Dungeons & Dragons Appropriated the Orient”	
+		
+	
+				
+			
+				
+					
+						
+						
+Alexander Newcombe
+ 
+says:
+					
+					
+						
+January 11, 2016 at 3:41 pm
+					
+									
+				
+					
+Really interesting piece. As a game designer and D&D fan,  there is a lot for me to think about here. 
+I didn’t realize the lasting impact of OA going into later editions. And certainly the exotic is a dangerous concept in a lot of RPGs still. 
+I don’t see the connection that you do between the non-combat mechanics and Orientalism specifically. I think you make a good point about how non-weapon proficiencies are still placed in a context of warfare, but warfare is not strictly a symptom of Orientalism. Similarly, your comment that warfare is necessarily expansionist seems to be unsupported. It could be correct, but it’s a big point to simply drop in without examination, and your connection to Orientalism seems to rely on it. 
+In regards to 5th edition, I feel that most of the exoticism has been curtailed, but you seem to feel that several features perpetuate it. However, I didn’t understand why. Does the mere presence of things like samurai in a fantasy game strike you as appropriation?
+				
+							
+		
+		
+			
+				
+					
+						
+						
+Ira Fich
+ 
+says:
+					
+					
+						
+January 22, 2016 at 4:35 pm
+					
+									
+				
+					
+I’m also curious about your criticisms of 5e. How do you think the book could have been made better?
+				
+							
+		
+		
+			
+				Pingback: 
+AdlS (02) – Expérience collective, paratexte et orientalisme | Nous sommes fans
+ 			
+		
+		
+			
+				
+					
+						
+						
+Jon Peterson
+ 
+says:
+					
+					
+						
+January 18, 2016 at 9:33 pm
+					
+									
+				
+					
+So… one of the two main pieces of evidence presented to expose the racism and so on underlying Oriental Adventures is the invention of the “comeliness” stat, but reading between the lines of the carefully-worded footnote 27, you are clearly aware that the stat previously existed. Let’s remove any ambiguity, as “comeliness” had appeared on D&D character sheets distributed by TSR a decade before Oriental Adventures; most tellingly, see Gygax’s article about comeliness as a stat three years before OA in Dragon #67, which makes it clear he saw it as neither inherently oriental nor feminizing. As such, “comeliness” is not “the result of a racist discourse that reads Oriental men as feminine.” The attempt to conceal this in footnote 27 raises the question if the argument here is actively disingenuous.
+Similarly, “non-weapon proficiency” skills were not “newly minted” for Oriental Adventures nor “derived from a classist understanding of what Oriental culture is,” they too had existed for ten years in various forms, including in AD&D, and perhaps most importantly in the prior game Bushido (which incidentally came out in 1978, not 1979). And yes, in probably their earliest form (in EPT) these proficiencies are divided by social class, though probably not because the author of that game happened to be a Muslim university professor. The assertion here that these system mechanisms were coined for Oriental Adventures especially to reflect the designer’s attitude towards the “Orient” is simply an error.
+That this study glosses over well-known examples refuting its core evidence points to a larger error of omission: its silence on the many amateur and professional experiments with various East Asian setting elements that preceded Oriental Adventures. Engaging only with a product that largely appropriates from earlier games (the quantification of honor follows the “on” of Bushido) is mismatched with the ambition of this essay; more fundamental answers about the representation of this setting lie in groundbreaking games like Bushido and Land of the Rising Sun (1980) by Lee Gold, a work that reflects the time she spent in Japan. The absence of any examination of the motives for designing these games is sorely felt: at least we must acknowledge that Gygax himself originally positioned Oriental Adventures as a way for D&D to break into the East Asia market, and that selling it to Americans, Canadians, and Brits was initially only a secondary consideration.
+I might venture that the social issues this critique strives to identify are not promoted but rather are set back by cherry-picking examples that don’t stand up to scrutiny – I gather similar concerns have been leveled at Said over the decades. There are serious questions about the reductionism and appropriation inherent in simulating both the real and the imaginary, but we can’t engage them through a distorted historical lens. This is becoming tiresomely familiar as the method by which Analog Game Studies approaches D&D.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+sjmckenzie
+ 
+says:
+					
+					
+						
+April 2, 2016 at 8:28 pm
+					
+									
+				
+					
+Well said, Jon. The reading of ‘comeliness’ as feminizing to Asian men really is clutching at straws. It sounds like the author has read Said, wants to have a go at Dungeons and Dragons through that lens, and it deliberately ignoring plain facts that stand in the way.  
+How is it known that Barker’s 1975 game  was influential in Gygax’s decision to have a Comeliness statistic? If Comeliness is inherently racist, why did TSR present it for all types of characters and not just Oriental ones? Are all modern games that have a Comeliness or equivalent attribute racist? Or is it only the presentation of that statistic in a book about Oriental Adventures that is problematic? 
+I really think there a lot of highly selective analysis going on here, to suit a decision the author has already made, before approaching the facts.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+Aaron Trammell
+ 
+says:
+					
+					
+						
+January 19, 2016 at 12:20 am
+					
+									
+				
+					
+Thanks for the feedback, Jon. I’ll take it into consideration.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+JElc
+ 
+says:
+					
+					
+						
+January 19, 2016 at 10:14 am
+					
+									
+				
+					
+This is an interesting piece. I think you make some valid points — the use of comeliness as a core stat in Oriental Adventures where it was supplemental in previous uses, and nearly dropped soon afterwards does suggest the stereotyping of East Asian cultural attitudes towards beauty. I think it is entirely possible that we are looking at a coincidence given that Gygax was trying to promote his new ideas (including comeliness and nonweapon proficiencies) prior to the publication of the book, and probably just put them in because it was the first published supplement that gave him the opportunity. But the timing was unfortunate at best.
+Moreover, you are certainly correct that there is significant stereotyping in OA, and failure to engage with the particularity of different east asian cultures — my understanding is that it was criticized at the time for merging Chinese and Japanese cultures, then using that to represent all asian cultures. I think it would have done better to present options for engaging with the history and lore of specific periods in the history of specific countries, and that the approach it chose was certainly orientalist.
+But I also have some concerns about your article.
+First, You cite visual representations of asian cultures / people of asian ethnicities in the most recent edition of D&D as evidence of continuing orientalism. I think you need to provide more evidence than simply the fact that such representations exist. I would be much more unhappy with the book if it limited itself to white people and the representation of white cultures, given that its target audience is multiracial and multicultural at this point in time. My friends who were born in east asia / of east asian descent who play with me were happy with the greater inclusivity, even if they still had objections to specific elements (such as the magical form of monk with silly faux-chinese names for martial arts maneuvers). Further — to suggest that simply the choice to represent people of colour or non-white cultures in the work is inherently orientalizing is to give up on the idea of inclusivity or cross-cultural communication.
+Secondly, your article takes the product of 197X, and treats it as though it is reflective of the game today. Your only mention of a work created after the 1980s is the brief discussion of pictures in 5e that I criticized above. You are ignoring the possibility that something could become less othering/stereotyping as time goes. Is it possible to evolve away from orientalism rather than be inexorably tainted by it? Does the fact that a farming mechanic was first implemented in the context of a work which contained orientalism inherently undermine the legitimacy of that mechanic? Without answering these questions, I think your article is overclaiming substantially.
+Relatedly, I feel like you don’t address the  the sensitivity of the project to the possibility of stereotyping that it created. I think a quote of someone saying they will never fully understand Japanese culture, but that they will enjoy trying is a weak support for the claim that this person is claiming to create an authoritative representation of that culture. Similarly, if Gygax pointed the readers to high-quality literature on the cultures he was writing about, and suggested that more / better quality representations could be created with reference to those, does that suggest an attempt at dialogue rather than an assertion of authority? D&D books (especially setting books) have always been a starting point for the creativity of the individual player rather than an assertion of authority over the game that player plays (see rule 0 — the primary rule is that if the GM doesn’t like a rule or mechanic then it doesn’t have to apply in their game).
+Lastly, I didn’t really understand your point about skills/non-weapon proficiencies reducing other cultures to a set of skills that are then used to further western colonial logics. NWPs were not intrinsically orientalist — they were simply a mechanical representation of ANY skill that was not specifically skill at swinging a weapon. I can understand discussing the specific competencies that they addressed in terms of orientalism, but the mechanical category of doing things other than swinging a weapon doesn’t seem to be intrinsically (or even contextually) orientalist to me. 
+Overall, I think your article would have done better to unpack the orientalism of specific texts more thoroughly, and substantiate in depth those specific arguments. I felt like many of your examples were hastily chosen or cherrypicked outside of your central thesis re: Oriental Adventures, and I felt like you didn’t give enough consideration to the difference between mechanical structure (i.e. NWPs) and content in deciding what qualified as orientalist.
+				
+							
+		
+		
+			
+				Pingback: 
+This Week in Video Game Blogging: The contradicting aesthetics of That Dragon, Cancer - GeekTechTalk
+ 			
+		
+		
+			
+				
+					
+						
+						
+Sturm
+ 
+says:
+					
+					
+						
+January 25, 2016 at 8:51 am
+					
+									
+				
+					
+“For Edward Said, “orientalism” means many different things. Orientalism is an antiquated yet pervasive (in 1978) academic way of understanding the Orient. Orientalism is also philosophical mode of comparing western (known) culture, people, customs, and society to the exotic eastern unknown. Finally, orientalism is the practice of reducing the people, religions, nations, geography, and cultures of east to a singular and stereotypical imaginary. In Said’s words”
+I’d like to note that Gary Gygax was an American, not European!
+European culture isn’t his culture.
+As a Pole, I find his treatment of European history and culture as no different to his treatment of Asia history and culture.
+3rd and later editions of D&D are especially offensive.
+There are few RPGs that respectfully show the European history, or even martial arts alone.
+When it comes to historical aspect, I can think only about Codex Martialis, that actually got a well-researched supplement whose action is happening in my country and who is being made by a renaissance western martial arts practitioner, not someone who is just aping Hollywood.
+When it comes to martial arts there’s also the Riddle of Steel. But it’s action also happens in a pseudo-medieval world.
+Oh, there also used to be Warhammer Fantasy which kinda had some recognisable European stuff. But then it was made by British company, so it at least has some European roots.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+voxmagi
+ 
+says:
+					
+					
+						
+March 2, 2016 at 7:16 pm
+					
+									
+				
+					
+I admit, there are thorny issues that emerge in cases like these, but we’re veering dangerously close to authentic efforts toward inclusion being treated as some sort of inherently  hostile act. The understandable reaction to the accusations made here would be a withdrawal of all inclusionary efforts and a default ‘whitening’ of game systems…which was once seen as the actual problem. 
+Players today are a far more diverse group than they were 40 years ago, with a game group at a table I’ve regularly attended reflecting that change not just in gender  (half female), or race (with about one third of players at present non-white), but also with regard to sexuality (4 out of a dozen regular players non-heterosexual and 1 not identifying with their physical or ‘birth’ gender.) If this were indeed the world of the 1970s, and the solitary purpose of the included material were for the titillation of a handful of white, male, heterosexual dilettantes…then perhaps a case for exploitation could still be made…but times have changed dramatically.
+The reality we see today at the gaming table now makes material of non-European origin essential because it is directly relevant to players who aren’t European ancestors and genuinely want material that welcomes them as different. Are we to flee from yesteryears entertainment pandering into the trap of a new era of racial exclusion because some sensibilities may be bruised in the process?
+Closed cultural enclaves ARE the breeding grounds for racism, for bigotry, and for violence inspired by same. Let’s try to let gaming be a place where all gather, not a place where many seek new ways to implement isolation or exclusion.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+Randy G
+ 
+says:
+					
+					
+						
+September 8, 2016 at 11:26 am
+					
+									
+				
+					
+David Cook has said that the vast majority of this book was written by himself and Gygax’s name was put on it before publication. Judging from the diction and style of the writing plus the similarities between the rules advanced here (eg. skill proficiences) and 2e AD&D on which Cook was head designer this sounds not only feasible but likely. If anyone is looking for a ciatation I believe it was made in his Q&A thread on the Dragonfoot forum.
+				
+							
+		
+		
+			
+				
+					
+						
+						
+Dennis Laffey
+ 
+says:
+					
+					
+						
+September 19, 2016 at 11:55 pm
+					
+									
+				
+					
+As you mention, the Honor mechanic in the original OA is a Western reductionist misunderstanding of Confucian ethics, and its successful implementation at the gaming table was dependent on the DM and players either actually studying Confucian ethics (highly unlikely for most groups), or else applying its principles through a Western (Judeo-Christian/Greek ethical) lens. 
+However, you then go on to compare it to the “Western” standard D&D alignment system, but then fail to point out how that exact same alignment system affected the classes of OA. The Honor mechanic is just a quantification of social status, as it hinges on how much respect others show you (win a contest, gain honor) as it does on how well a PC follows Confucian ethics (serve your lord/clan well, gain honor). The Eastern religious and ethical views are also represented through the traditional alignment system. All samurai characters must be lawful. Wu Jen (as outsiders to normal human society for having learned magic) may NOT be lawful. Yes, this is again reductionist, but then this is a game. It couldn’t really be any other way and still have a playable system. 
+One other point I’d like to bring up is that I wonder how well you actually understand the social structures of Ancient/Medieval China, or Medieval Japan (not to mention Korea, Vietnam, etc.). You criticize the decision to divide the NWPs into elite and common groups. Do you realize that Tang/Song China, or Japan before the Meiji Restoration were heavily stratified societies? Of course the common people had their arts and entertainments, but they were not always shared by the upper classes. Of course, Medieval Europe was much the same in that regard. 
+You make an assumption early in this essay that D&D players in the 80’s were intent to invade the barbaric Orient with their Western characters, and plunder its wealth to return to their homelands. Maybe that happened in some gaming groups, but none that I’m aware of. Most OA campaigns were set in Kara Tur (or a homebrewed Asian themed campaign world), with native characters adventuring in that setting. And a sampling of the (yes, abstracted, reduced, merged, and sometimes misunderstood) cultural systems of Kara Tur presented in the original OA (both in the campaign notes chapter, as well as inferred from details in the mechanics) show that the developers did not consider “Oriental” society to be barbaric. 
+My final note will likely read as quite passive aggressive or snarky to you, which is not my intent, so please take it as a serious question (as I hope you take my comments above as constructive criticism to improve your argument). Would you be interested in applying the same critical lens you just applied to OA to an “Occidentalist” RPG such as Sword World? I’d be interested to see how much ‘violence’ you feel it commits upon the West.
+				
+							
+		
+		
+			
+				Pingback: 
+The Psychological Abuse of Curse of Strahd | Analog Game Studies
+ 			
+		
+		
+			
+				Pingback: 
+Access to the Page: Queer and Disabled Characters in Dungeons & Dragons | Analog Game Studies
+ 			
+		
+		
+			
+				
+					
+						
+						
+POCGamer
+ 
+says:
+					
+					
+						
+March 7, 2018 at 5:01 pm
+					
+									
+				
+					
+Good essay. OA was problematic from day one, just like the inclusion of the monk. D&D has come a ways recently, but still lags badly behind other games; largely I think because of the weight of its biological determinist and essentialist baggage.
+				
+							
+		
+	
+		
+			
+Comments are closed.
+	
+	
+	
+		
+	
+	
+Catalog
+	
+About
+	
+Analog Game Studies 101
+	
+Analysis
+	
+Documentation
+	
+Experimentation & Design
+	
+Analog Game Studies has joined eScholarship!
+	
+Calls for Participation
+	
+CFP: Analog Games and Translation
+	
+CFP: Queer Analog Game Studies
+	
+CFP: Revisiting the Fiend Folio
+	
+CFP: RPG Summit @ DiGRA 2019
+	
+CFP: The Analog Origins of Digital Games @ FDG 2019
+	
+Catalog
+	
+Contact
+	
+Special Issues
+	
+Generation Analog
+	
+Generation Analog 2021
+	
+GENeration Analog 2021 Proceedings CFP
+	
+Generation Analog 2022
+	
+Generation Analog 2022 CFP
+	
+GENeration Analog 2023
+	
+GENeration Analog 2023 CFP
+	
+Generation Analog 2024 "HOME"
+	
+Generation Analog 2024 "HOME" CFP
+	
+Generation Analog 2025 "PUNK"
+	
+Generation Analog 2025 "PUNK" CFP
+	
+Generation Analog 2026 "GREEN" CFP
+	
+Generation Analog 2026 "GREEN" Program
+	
+GENeration Analog Travel FAQ
+	
+GENeration Analog: Tabletop Games and Education Conference at GenCon 2020 CFP
+	
+GENeration Analog: Tabletop Games Scholarship Virtual Conference “at” Gen Con 2021 CFP
+	
+In Print
+	
+Join the Team!
+	
+Special Issues
+	
+2016 Role-Playing Game Summit
+	
+2019 Role-Playing Game Summit
+	
+Analog Players, Analog Space: Video Gaming Beyond the Digital
+	
+Special Issue: Analog Games and Translation
+	
+Special Issue: Perspectives on RPG Studies from Latin-American Scholars
+	
+Special Issue: Queer Analog Game Studies
+	
+Special Issue: The Fiend Folio
+	
+Submit
+	
+The Team
+	
+Authors (Volume 1)
+	
+Authors (Volume 10)
+	
+Authors (Volume 11)
+	
+Authors (Volume 12)
+	
+Authors (Volume 2)
+	
+Authors (Volume 3)
+	
+Authors (Volume 4)
+	
+Authors (Volume 5)
+	
+Authors (Volume 6)
+	
+Authors (Volume 7)
+	
+Authors (Volume 8)
+	
+Authors (Volume 9)
+	
+Editorial Board
+	
+Vol. I, No. I (August 2014)
+	
+Vol. I, No. III (October 2014)
+	
+Vol. II, No. V (July 2015)
+	
+Vol. II, No. VII (November 2015)
+	
+Vol. III, No. I (January 2016)
+	
+Vol. IV, No. I (January 2017)
+	
+Vol. IV, No. III (May 2017)
+	
+Vol. IV, No. IV (July 2017)
+	
+Vol. V, No. I (March 2018)
+	
+Vol. V, No. III (September 2018)
+	
+Vol. V, No. IV (December 2018)
+	
+Vol. VI, No. III (September 2019)
+	
+Vol. VII, No. II (December 2020)
+	
+Vol. VIII, No. I (March 2021)
+	
+Vol. XI, No. IV (December 2024)
+	
+Volume I
+	
+Volume I, Issue II
+	
+Volume I, Issue IV
+	
+Volume I, Issue V
+	
+Volume II
+	
+Volume II, Issue II
+	
+Volume II, Issue III
+	
+Volume II, Issue IV
+	
+Volume II, Issue VI
+	
+Volume III
+	
+Volume III, Issue II
+	
+Volume III, Issue III
+	
+Volume III, Issue IV
+	
+Volume III, Issue V
+	
+Volume IV
+	
+Volume IV, Issue II
+	
+Volume IV, Issue V
+	
+Volume IX
+	
+Volume IX, Issue I
+	
+Volume IX, Issue II
+	
+Volume IX, Issue III
+	
+Volume IX, Issue III
+	
+Volume IX, Issue IV
+	
+Volume V
+	
+Volume V, Issue II
+	
+Volume VI
+	
+Volume VI, Issue I
+	
+Volume VI, Issue II
+	
+Volume VII
+	
+Volume VIII
+	
+Volume VIII, Issue II
+	
+Volume X
+	
+Volume X, Issue I
+	
+Volume X, Issue II
+	
+Volume XI
+	
+Volume XI, Issue I
+	
+Volume XI, Issue II
+	
+Volume XII
+	
+Volume XII, Issue I
+	
+Volume XII, Issue III
+	
+Volume XII, Issue IV
+More posts in…
+			
+					
+Adrianna Burton
+	
+Aria Chen
+	
+Art and Performance Games
+	
+Axiel Cazeneuve
+	
+Board Games
+	
+Book Review
+	
+Brian C. Etheridge
+	
+Card Games
+	
+Chad Wilkinson
+	
+Cozy Games
+	
+Cristo Leon
+	
+Digital Games
+	
+Education & Pedagogy
+	
+Environmental Play
+	
+et. al.
+	
+Evan Torner
+	
+Interactive Fiction
+	
+Interview
+	
+James Lipuma
+	
+Jason Cox
+	
+Joseph Dumit
+	
+Laura op de Beke
+	
+Lead Author Shannon McDowell
+	
+Live Play
+	
+Live-Action Role-Playing Games
+	
+Marco Arnaudo
+	
+Mauricio Rangel Jimenez
+	
+Miniatures
+	
+Neal Baker
+	
+Pedagogy
+	
+Peter D. Evan
+	
+Pilar Girvan
+	
+Psychology
+	
+Queer Game Studies
+	
+Sabina Belc
+	
+Scott Nicholson
+	
+Solo Role-Playing Games
+	
+Special Issue
+	
+Special to Analog Game Studies
+	
+Story Games
+	
+Tabletop Role-Playing Games
+	
+Theory
+	
+Wargames
+			
+			
+Meta
+		
+						
+Log in
+			
+Entries feed
+			
+Comments feed
+			
+WordPress.org
+		
+		
+			
+							
+					
+						
+Gary Gygax. 
+Oriental Adventures
+. Lake Geneva, WI: TSR Inc., 1985 [back cover].
+					
+				
+								
+					
+						
+A point which is driven home by the publishing houses used to distribute the book: Random House, Inc. (in the U.S.), Random House of Canada, Inc. (in Canada), and TSR UK Ltd. (in the U.K.).
+					
+				
+								
+					
+						
+Like Edward Said, I choose to drop the scare quotes around the Orient for the remainder of this essay. The term is highly problematic and the intent of this paper is to grant insight toward how its problematic logic is reproduced. Edward Said. 
+Orientalism. 
+London: Vintage Books, 1978.
+					
+				
+								
+					
+						
+Michael J. Tresca. 
+The Evolution of Fantasy Role-Playing Games
+. Jefferson, NC: McFarland, 2013; Jon Peterson. 
+Playing at the World
+. San Diego: Unreason Press, 2012.
+					
+				
+								
+					
+						
+The ENnies (Annual Gen Con EN World RPG Awards) are a fan moderated award system affiliated with the site 
+EN World
+ and distributed annually at the Gen Con gaming convention. For more information about the ENnies, see 
+http://www.ennie-awards.com/blog/
+					
+				
+								
+					
+						
+As this essay will later explain, orientalism appropriates East and Central Asian figures like the samurai and kung fu master under the veneer of appreciation. These figures were lauded in American cinema at the time, whereas Southeast Asian representations were generally negative due to their associations with the Vietnam War.
+					
+				
+								
+					
+						
+Mike Mearls, Jeremy Crawford, et al. 
+Dungeons and Dragons Player’s Handbook
+. 5th Edition. Renton, WA: Wizards of the Coast, 2014.
+					
+				
+								
+					
+						
+Although I focus on the 
+Player’s Handbook 
+here because it is more popular, it is worth noting that the 5
+th
+ edition 
+Dungeon Master’s Guide 
+offers a few notes on “Wuxia” as a campaign setting (p. 41)  that follows in the tradition of 
+Oriental Adventures
+ (although far more implicitly).
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook,
+ p.105.
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 140
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 148
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 156
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 188.
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, pp.76-81.
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 149
+					
+				
+								
+					
+						
+Mearls and Crawford, 
+Player’s Handbook
+, p. 156.
+					
+				
+								
+					
+						
+Said, p. 3.
+					
+				
+								
+					
+						
+Debates and discourse around orientalism have continued long after Edward Said wrote 
+Orientalism
+ in 1978. Notably, Aijaz Ahmad (
+Orientalism and After
+ (1992)), Sadik Jalal al-‘Azm (
+Orientalism and Orientalism in Reverse
+ (1980)), and Ibn Warraq (
+Defending the West 
+(2009)) have criticized Said’s work for relying too much on binary logics (Orient and Occident; east and west; self and other), an arbitrary focus on 18
+th
+, 19
+th
+, and 20
+th
+ century thought, and the paradoxical use of western methods in criticizing western thought. Despite these critiques, I choose to follow Said’s thought in this essay as I feel that it helps to provoke a critical dialogue around problems of knowledge and epistemology that lie at the heart of today’s game design practices. 
+					
+				
+								
+					
+						
+Said, p. 121.
+					
+				
+								
+					
+						
+Gygax, p. 3
+					
+				
+								
+					
+						
+To this point, TSR Hobbies at one point published a 
+Rules Cyclopedia
+ in a similar fashion to help orient players to the rules of the game.  Aaron Allston, et al. 
+Dungeons and Dragons Rules Cyclopedia
+. Lake Geneva, WI: TSR, Inc., 1991.
+					
+				
+								
+					
+						
+David Bunnell. “A Step Beyond Shogun… A Reader’s Guide to Adventuring in the Orient.” 
+Dragon
+ 122. (June 1987), pp. 18-19.
+					
+				
+								
+					
+						
+Bunnell,
+ p. 19.
+					
+				
+								
+					
+						
+Bunnell, p. 18.
+					
+				
+								
+					
+						
+Gygax, 
+Oriental Adventures
+, p. 10.
+					
+				
+								
+					
+						
+Edward Said claims that in Orientalist ideology, all of the Orient is considered weak and childlike compared to the west. Said, p. 40.
+					
+				
+								
+					
+						
+Oriental Adventures
+ was developed at TSR Inc. simultaneous to Gygax’s other supplement 
+Unearthed Arcana 
+(1985)
+, which also included a Comeliness statistic. That said, M. A. R. Barker’s game 
+Empire of the Petal Throne
+, published by TSR Hobbies in 1975, was heavily influential in Gygax’s decision to adopt a Comeliness mechanic. The world of Tékumel was highly influenced by Orientalist lore as M. A. R. Barker was a professor of Urdu and South Asian Studies at the University of Minnesota in the 1970s. Barker’s work as a game designer was heavily influenced by the cultures of India, the Middle East, Egypt, and Meso-America. His dissertation, which was written on the Klamath language, was eventually published as a grammar and a dictionary. He would be regarded as an Orientalist by Edward Said, who was critical of the academic recapitulation and restructuring of exotic cultures and languages.
+					
+				
+								
+					
+						
+Len Lakofka. “Notes on Women and Magic.” 
+The Dragon 
+3 (1976). R
+ead more about it in my previous article 
+“
+Misogyny and the Female Body in Dungeons & Dragons
+.”
+					
+				
+								
+					
+						
+Said, p. 122.
+					
+				
+								
+					
+						
+For example, a good character will not murder others for fun.
+					
+				
+								
+					
+						
+As 
+D&D
+‘s predecessor, 
+Chainmail
+, was distinctly modeled from wargames.
+					
+				
+								
+					
+						
+Gygax, p. 52.
+					
+				
+								
+					
+						
+Gygax, p. 52.
+					
+				
+								
+					
+						
+Iaijutsu is the art of fast weapon drawing. It has been implemented as a combat proficiency in later Western role-playing games as “fast draw.”
+					
+				
+								
+					
+						
+Evan Torner. “Bodies and Time in Tabletop Role-Playing Game Combat Systems.” 
+The 
+Wyrd Con Companion Book
+. 2015, pp. 160-171. 
+https://www.dropbox.com/s/xslwh0uxa544029/WCCB15-Final.pdf
+					
+				
+							
+			
+	
+	
+	
+		
+		
+			
+	
+		
+More posts in…
+			
+					
+Adrianna Burton
+	
+Aria Chen
+	
+Art and Performance Games
+	
+Axiel Cazeneuve
+	
+Board Games
+	
+Book Review
+	
+Brian C. Etheridge
+	
+Card Games
+	
+Chad Wilkinson
+	
+Cozy Games
+	
+Cristo Leon
+	
+Digital Games
+	
+Education & Pedagogy
+	
+Environmental Play
+	
+et. al.
+	
+Evan Torner
+	
+Interactive Fiction
+	
+Interview
+	
+James Lipuma
+	
+Jason Cox
+	
+Joseph Dumit
+	
+Laura op de Beke
+	
+Lead Author Shannon McDowell
+	
+Live Play
+	
+Live-Action Role-Playing Games
+	
+Marco Arnaudo
+	
+Mauricio Rangel Jimenez
+	
+Miniatures
+	
+Neal Baker
+	
+Pedagogy
+	
+Peter D. Evan
+	
+Pilar Girvan
+	
+Psychology
+	
+Queer Game Studies
+	
+Sabina Belc
+	
+Scott Nicholson
+	
+Solo Role-Playing Games
+	
+Special Issue
+	
+Special to Analog Game Studies
+	
+Story Games
+	
+Tabletop Role-Playing Games
+	
+Theory
+	
+Wargames
+			
+			
+Catalog
+	
+About
+	
+Analysis
+	
+Documentation
+	
+Experimentation & Design
+	
+Analog Game Studies 101
+	
+The Team
+	
+Authors (Volume 1)
+	
+Authors (Volume 2)
+	
+Authors (Volume 3)
+	
+Authors (Volume 4)
+	
+Authors (Volume 5)
+	
+Editorial Board
+	
+Authors (Volume 6)
+	
+Authors (Volume 7)
+	
+Authors (Volume 8)
+	
+Authors (Volume 9)
+	
+Authors (Volume 10)
+	
+Authors (Volume 11)
+	
+Authors (Volume 12)
+	
+Submit
+	
+Vol. I, No. I (August 2014)
+	
+Volume I, Issue II
+	
+Catalog
+	
+Contact
+	
+Special Issues
+	
+Vol. I, No. III (October 2014)
+	
+Volume I, Issue IV
+	
+Volume I, Issue V
+	
+Special Issues
+	
+Analog Players, Analog Space: Video Gaming Beyond the Digital
+	
+2016 Role-Playing Game Summit
+	
+2019 Role-Playing Game Summit
+	
+Special Issue: Analog Games and Translation
+	
+Special Issue: The Fiend Folio
+	
+Special Issue: Perspectives on RPG Studies from Latin-American Scholars
+	
+Special Issue: Queer Analog Game Studies
+	
+Volume II, Issue II
+	
+Volume I
+	
+Volume II
+	
+Volume II, Issue III
+	
+Volume II, Issue IV
+	
+Vol. II, No. V (July 2015)
+	
+Volume II, Issue VI
+	
+Vol. II, No. VII (November 2015)
+	
+Vol. III, No. I (January 2016)
+	
+Volume III
+	
+Volume III, Issue II
+	
+Volume III, Issue III
+	
+Volume III, Issue IV
+	
+In Print
+	
+Volume III, Issue V
+	
+Vol. IV, No. I (January 2017)
+	
+Volume IV
+	
+Volume IV, Issue II
+	
+Vol. IV, No. III (May 2017)
+	
+Vol. IV, No. IV (July 2017)
+	
+Volume IV, Issue V
+	
+Vol. V, No. I (March 2018)
+	
+Volume V
+	
+Volume V, Issue II
+	
+Vol. V, No. III (September 2018)
+	
+Vol. V, No. IV (December 2018)
+	
+Volume VI, Issue I
+	
+Volume VI
+	
+Volume VI, Issue II
+	
+Vol. VI, No. III (September 2019)
+	
+Generation Analog
+	
+GENeration Analog: Tabletop Games and Education Conference at GenCon 2020 CFP
+	
+GENeration Analog Travel FAQ
+	
+GENeration Analog: Tabletop Games Scholarship Virtual Conference “at” Gen Con 2021 CFP
+	
+GENeration Analog 2023
+	
+GENeration Analog 2021 Proceedings CFP
+	
+Generation Analog 2022 CFP
+	
+Generation Analog 2022
+	
+GENeration Analog 2023 CFP
+	
+Generation Analog 2024 "HOME" CFP
+	
+Generation Analog 2024 "HOME"
+	
+Generation Analog 2025 "PUNK" CFP
+	
+Generation Analog 2025 "PUNK"
+	
+Generation Analog 2021
+	
+Generation Analog 2026 "GREEN" CFP
+	
+Generation Analog 2026 "GREEN" Program
+	
+Volume VII
+	
+Vol. VII, No. II (December 2020)
+	
+Volume VIII
+	
+Vol. VIII, No. I (March 2021)
+	
+Volume VIII, Issue II
+	
+Join the Team!
+	
+Volume IX, Issue I
+	
+Volume IX
+	
+Volume IX, Issue II
+	
+Volume IX, Issue III
+	
+Volume IX, Issue IV
+	
+Volume X, Issue I
+	
+Volume X
+	
+Volume X, Issue II
+	
+Volume XI
+	
+Volume XI, Issue I
+	
+Calls for Participation
+	
+CFP: RPG Summit @ DiGRA 2019
+	
+CFP: The Analog Origins of Digital Games @ FDG 2019
+	
+CFP: Analog Games and Translation
+	
+CFP: Revisiting the Fiend Folio
+	
+CFP: Queer Analog Game Studies
+	
+Volume XI, Issue II
+	
+Volume IX, Issue III
+	
+Vol. XI, No. IV (December 2024)
+	
+Volume XII
+	
+Volume XII, Issue I
+	
+Volume XII, Issue III
+	
+Volume XII, Issue IV
+	
+Analog Game Studies has joined eScholarship!
+	
+			
+												
+					Proudly powered by WordPress				
+			
+		
+	
+	 
+ 
+ 
+ 
+ 
+ 

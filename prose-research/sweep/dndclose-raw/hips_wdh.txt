@@ -1,0 +1,784 @@
+Waterdeep: Dragon Heist - Review and Tips For Running
+
+ Because roleplaying is social, creative, fun… and kinda cool! 
+
+ About
+
+ My Book: The Creative GM’s Guide to Extraordinary Locations
+
+ My Bio: Duncan Rhodes
+
+Best of the Blog (Start Here!)
+
+5e Adventures
+
+NEW: Youtube!
+
+ About
+
+ My Book: The Creative GM’s Guide to Extraordinary Locations
+
+ My Bio: Duncan Rhodes
+
+Best of the Blog (Start Here!)
+
+5e Adventures
+
+NEW: Youtube!
+
+ Waterdeep: Dragon Heist – The Ultimate Guide
+
+ By duncan
+
+ On May 10, 2021
+
+ In D&D Adventures, DMs Tips, Waterdeep: Dragon Heist
+
+ The second I heard the news that Wizards of the Coast were dropping Waterdeep: Dragon Heist in 2018 I knew I had to run it for my group.
+
+Nothing gets me as excited as an urban adventure in Dungeons & Dragons. The intrigue, the politics, the skullduggery, the secret locations… city adventures are just so much more layered than wilderness crawls or dungeon hacks, and the fact that PCs are forced to play clever, and abide by the laws (or at least not get caught breaking them) and survive dealings with powerful NPCs, make them satisfying to DM. You’re not just there to give vent to the characters power-fantasies and ‘kill ’em all’ attitudes!
+
+ Table of Contents 
+ hide
+
+ My Review: Waterdeep: Dragon Heist
+
+ The Plot
+
+ The Content: Chapter Breakdown
+
+ Introduction (p.4 to 20)
+
+ Chapter 1: A Friend in Need (p.21 to 30)
+
+ Chapter 2: Trollskull Alley (p.29 to 42)
+
+ Chapter 3: Fireball (p.43 to p.55)
+
+ Chapter 4: Dragon Season (p.57 to p.98)
+
+ Chapters 5-8: The Villains’ Lairs (p.99 to p.162)
+
+ Chapters 9: Volo’s Waterdeep Enchiridion (p.163 to p.188)
+
+ Appendices
+
+ Concluding Thoughts
+
+ Pros
+
+ Cons
+
+ Final Word
+
+ Buy Waterdeep: Dragon Heist
+
+ Hipster Rehash: New & Remixed Material
+
+ Pre-Adventure
+
+ Chapter 1: Hipster Rehash
+
+ – A More Explosive Beginning
+
+ – Finding Floon: A Better Investigation
+
+ – Xanathar Guild Hideout
+
+ Chapter 2: Hipster Rehash
+
+ Chapter 3: Hipster Rehash
+
+ – Making Sense of the Fireball
+
+ Chapter 4: Hipster Rehash
+
+ Chapter 5: Hipster Rehash
+
+ General Tips: Running The Adventure
+
+ – Checklist of Knowledge To Reveal
+
+ Useful Resources
+
+ FAQs
+
+ How many sessions does it take to run Waterdeep: Dragon Heist?
+
+ Is Dragon Heist good for beginner DMs?
+
+ Is Dragon Heist good for new players?
+
+ What year is Dragon Heist set in?
+
+ Dragon Heist Sequel
+
+ More D&D Heists…
+
+On the other hand, the infinite possibilities that a city provides players can be extremely intimidating for a Dungeon Master, especially a relative newbie or perhaps a younger DM with less real life experience to help make a city come alive, with taxes, taxis, taxidermists et al.
+
+The goal of this post is to share my experience of running Dragon Heist and pass on what I learned in the process, including the resources I used to help me prep the adventure, the things that went well, the things I would do differently. I will also share some of the ideas I added to smooth over some of the adventures weaknesses and fill in missing info.
+
+Dragon Heist cover art by @jacobsontyler. All art in this post are taken from the adventure, and copyright Wizards of the Coast.
+
+Before I get to my guide on running the adventure though, I’m going to start with a full product review, so you can see what you’re getting if you do decide to buy:
+
+My Review: Waterdeep: Dragon Heist
+
+An adventure for level 1 characters (taking them to 5th level).
+
+The Plot
+
+A magic artefact, The Stone of Golorr, holds the key to the location of a vast sum of embezzled gold, buried somewhere in Waterdeep. The stone is rapidly changing hands in the city, as various villainous factions hunt it down. The investigation of a huge explosion outside their home base brings the PCs into the picture (hopefully!), after which they are led on a wild goose chase around various urban locations. The chase should lead them to the stone… and then the treasure.
+
+The Content: Chapter Breakdown
+
+The content breakdown of Waterdeep: Dragon Heist the book is worth examining a little closer, not least because the ‘Adventure Conclusion’ of the plot outlined above takes place on p.98… and this is a 224 page book.
+
+Let’s take a look at each chapter.
+
+Introduction (p.4 to 20)
+
+We get a good introduction to the storyline, the villains, DM tips on running a city adventure, the importance of grounding PCs in Waterdeep with info on noble houses and guilds, and detailed info on 8 factions the PCs might end up working for (or against). The chapter concludes with 7 ‘Familiar Faces’ that the PCs might run into at the Yawning Portal, the adventure’s starting point.
+
+Also included in this chapter is a very handy Adventure Flowchart, that also charts the events leading up to the adventure (important!), plus a lovely two-page artwork depicting Waterdeep Harbour at sunset.
+
+We also learn that a gold piece in Waterdeep is called a dragon, hence ‘Dragon Heist’. Gtk!
+
+Chapter 1: A Friend in Need (p.21 to 30)
+
+The adventure begins with a bar brawl in the Yawning Portal, that immediately introduces the party to the gang violence simmering in the background between the Xanathar Guild and a breakaway branch of The Zhentarim led by the wizard Manshoon (or rather one of his clones!). This scuffle is swiftly followed up by a troll emerging from the pub’s eponymous yawning portal (a rather random event that serves more as an intro to Dungeon of the Mad Mage than to Dragon Heist… I will reveal how I rejigged this event later). The chance for the PCs to flex their muscles is enough to win the attention of Volo Geddarm who promptly commissions them to hunt down his missing friend, Floon.
+
+Chapter 1 is essentially a starter mission during which the PCs will conduct an investigation that sees them embroiled in the gang violence of the city, and hopefully emerge with not one but two rescued captives… the second, a fellow named Renaer, is the son of Lord Neverember, the former open lord of Waterdeep who is rumoured to have embezzled a massive stash of gold in the city. For rescuing Floon (and his friend Renaer) the party are rewarded by Volo with the deeds of a disused tavern, Trollskull Manor, for their efforts.
+
+I’ve carelessly mislaid my friend….
+
+Chapter 2: Trollskull Alley (p.29 to 42)
+
+From a rather linear beginning, where a. leads to b. which leads to c., Chapter 2 opens up Waterdeep as a sandbox, with the PCs expected to make Trollskull Manor their base in the city.
+
+The book details several interesting neighbouring locations (although you could argue that it fails to give them much impetus to go there), before outlining four faction missions for seven of the factions mentioned in the previous chapter (such as Force Grey, The Harpers, The Lord’s Alliance etc.), including details of which NPCs are likely to contact the heroes and offer them these jobs.
+
+The faction missions are only seeds, and it’s not always clear if the designers expect DMs to run them as skills checks or actually roleplay them out in their entirety (in which case the DM will need to do a fair bit of extra prep… this Expanded Faction Missions product may come in handy!). At any rate, these faction missions do a lot to stir the DM’s imagination and bring the complicated machinations of Waterdeep alive, beyond the book’s main storyline.
+
+The chapter ends with a section on how the PCs might re-open the tavern for business (mundane though it appears, most groups get a big buzz from this, so plan to indulge them!), and includes various guild representatives who they will have to deal with, as well as an unsavoury business rival.
+
+Just needs a lick of paint…
+
+Chapter 3: Fireball (p.43 to p.55)
+
+Chapter 3 is when the adventure’s back story catches up with the party. The gnome spy who stole the Stone of Golorr from Xanathar (thus precipitating a gang war between Xanathar Guild and the Zhentarim, whom X. wrongly blames for the theft), decides that the newly-famous PCs might be able to help him smuggle it out of the city. However he is fireballed by a nimblewright construct in front of their tavern, before he arrives, and a member of the Zhentarim (who was also tracking the Stone) escapes with the MacGuffin. The PCs are still in the dark at this point, but the resulting investigation is designed to put them hot on the chase of the Stone.
+
+The premise is cool, but unfortunately the Chapter 3 opens up a lot of plot holes, which are rather ruthlessly exposed by The Alexandrian (a savvy blogger, whose own ideas and research I will refer to a few times in the course of this article!).
+
+As The Alexandrian points out, there’s no convincing reason why the gnome would expect the PCs to help him. And what has he been doing in the two weeks since he stole the Stone? Why would the construct hurl a fireball at the gnome when his allies were about to obtain it anyway?
+
+I will attempt to fix a few of these questions and doubts later in the article.
+
+It’s likely the PCs will end up tracing the nimblewright, but it’s only down to a massive co-incidence that this investigation also takes the PCs to the Stone… which is now held by the renegade faction of the Zhentarim, who are holed up in the villa of the Grahlunds (a noble family).
+
+A showdown at the villa ensues (in classic RPG fashion the drama unfolds the moment the party arrive!), but not before the lady of the house orders her nimblewright servant (yes the same one) to take the Stone to a certain meeting point – the location of which depends on the DM’s choice of principal villain.
+
+Holy crap! That looks like 8d6 damage at least!
+
+Chapter 4: Dragon Season (p.57 to p.98)
+
+Chapter 4 introduces us to Dragon Heist’s Unique Selling Point… the DM can now choose one of four major villains: Xanathar (beholder crime boss), The Cassalanters (noble family with a dark secret), Jarlaxle (swashbuckling drow intriguer), or Manshoon (crazy evil wizard clone).
+
+The choice also determines the season (spring, summer, autumn, and winter… each has its own unique weather conditions) and the starting point of a wild goose through the wards of Waterdeep.
+
+This chase brings us to another unique facet of the adventure. We are presented with ten different ‘generic’ urban locations (such as Mausoleum, Alley, Converted Windmill, Theatre) which are repurposed and reordered for each villain’s storyline, with the PCs visiting 8 of 10 in each scenario.
+
+Overall these USPs are simultaneously supercool and impractical. Flicking back and forth between locations to try and piece each storyline together is a major pain in the arse, and the DM is forced to leave some of their favourite bits on the cutting room floor… or spend a decent amount of time reworking the sequence of events.
+
+Another major criticism of this chapter is that the flow of events is very linear indeed, and the PCs’ choices / actions are actually designed to NOT affect the storyline (the writers include a series of contingencies that make it almost impossible for the players to get their hands on the Stone before the end of the chase).
+
+This chapter is also built on the rather weak premise that Lady Grahlund would send the stone to a hiding place instead of directly to the main villain. If we can rationalise Lady Grahlund sending the stone to a neutral meeting point, why do the couriers sent to pick it up insist on instigating a treasure hunt, instead of doing their job and just delivering the McGuffin? One needs to suspend one’s disbelief and run with the fun.
+
+Assuming all goes to plan, the PCs should end up with the Stone (they didn’t however when I ran it!) which in return reveals the location of the secret vault of half a million gold dragons. They are now free to complete a mini-dungeon and collect the money, either for themselves or the city.
+
+And this is where the adventure ends… but not the book!
+
+A night on the tiles…
+
+Chapters 5-8: The Villains’ Lairs (p.99 to p.162)
+
+The next four chapters in WDH have proven divisive amongst reviewers. Each is an in-depth look at the lairs of the four villains, be it their posh villa with unholy temple underneath (The Cassalanters) or their flagship anchored out in Waterdeep harbour (Jarlaxle).
+
+What’s the issue here? Well, nowhere in the official storyline are the PCs obliged to visit any of the lairs… and in fact the DM is warned about allowing them to enter these dangerous dens at such a low level. Then, if you consider that you’re only going to be employing one of these villains – meaning at least three of these chapters are going to waste anyway – many have argued this large page count could have been better used.
+
+I personally don’t have a problem with these chapters, and when I ran the adventure my PCs ended up in two of them… and I rather planned for them to visit three, but they declined Xanathar’s invitation for a little tete-a-tete.
+
+I can’t find the quote, but I recall Chris Perkins saying that DMs tend to prefer to adapt official adventures to their own needs, rather than run them precisely as written. These lairs provide a toolkit for doing so. Importantly, they also provide a chance for the PCs to confront their main villain… (some would say that should be written into the main storyline, but weirdly it isn’t. It’s perfectly possible for the PCs to gain the Stone and treasure without encountering them, unless they come looking for the party).
+
+A fish called Sylgar…
+
+Chapters 9: Volo’s Waterdeep Enchiridion (p.163 to p.188)
+
+The final chapter offers us what amounts to a new resident’s guide to Waterdeep, with details on laws, admin, taxes, taxis, landmarks, nobility and guilds, before we’re given an overview of each of the city’s wards. The chapter finishes with a paragraph on each of the major festivals.
+
+While it’s no match for the 3.5e City of Splendours supplement, in terms of scope and breadth, there’s enough lore here for DMs to be able to create a living, breathing city for their campaign.
+
+The one thing really missing is more details and maps on key city locations like Piergeiron’s Palace, Blackstaff tower and the major temples, that frustratingly preclude WDH doubling as a Waterdeep guide.
+
+Everyone loves a griffon cavalry fly-by…
+
+Appendices
+
+These cover a few magic items (incl. the Stone of Golorr), handouts etc., but the meat is in the ‘Monsters and NPCs’ section, which is excellent. As well as stat blocks for several of Waterdeep’s most celebrated residents, such as Jarlaxle, Durnan, Mirt, Laerel Silverhand, Varja Blackstaff, and various villainous henchmen, there are some very handy ‘new’ (at least if you don’t own Volo’s Guide to Monsters) stat blocks for generic NPCs such as: apprentice wizard, bard, drow gunslinger, griffon cavalry rider, martial arts adept, and swashbuckler.
+
+Concluding Thoughts
+
+Let me start by listing the book’s pros and cons, as I see them.
+
+Pros
+
+1. Succeeds in bringing to life the incredible city of Waterdeep, with an emphasis on how PCs might interact it with it.
+
+2. Fantastic NPCs with complex motivations.
+
+3. Jam-packed with creativity throughout: memorable encounters and locations, and any potential cliches are usually given a fresh twist.
+
+4. The tavern ownership plot point is ingenious. It gives the PCs a base together and keeps them entertained in between action scenes.
+
+5. The choose a villain ‘gimmick’ allows for greater ‘replayability’ for DMs who want to run this adventure for more than one group.
+
+6. Easily customisable. Would be very easy to throw your own material into the adventure, while the villain’s lairs allow the storyline to go off track.
+
+7. Brilliantly written. From Jarlaxle’s puissant use of a rapier to Mirt’s prodigious girth, the book is full of turns of phrases and slick prose that many fiction bestsellers could feel jealous of.
+
+8. Comes with a fantastic, full-colour, fold-out map.
+
+9. Sensational and inspiring artwork throughout (some of which is reproduced in this post!).
+
+Cons
+
+1. The complicated storyline is hard to follow at times, with so many villains, (split) factions and agents. My players got confused.
+
+2. Plot holes, inconsistencies and non sequiturs exacerbate point 1.
+
+3. The details of the backstory are left vague, leaving the DM with some work to do.
+
+4. The villains are much too powerful for the heroes to take on (although this is arguably a pro!), they may never meet the PCs, and the chapters on their lairs take up a bit too much space given they are not part of the story as written.
+
+5. Chapters 1 and 4 feel very linear, with PCs railroaded from one location to another.
+
+6. It doesn’t include a heist! (Although it’s relatively easy to engineer one, using the Villain Lairs… keep reading for more).
+
+7. The book is maybe 20-30 pages away from delivering a full city setting on Waterdeep… that’s a shame. It would have made it an invaluable resource, even ignoring the adventure.
+
+Final Word
+
+Overall I love this book… it’s a great mix of an adventure and a setting in one (an adventure has limited use once you play it, a setting alone can feel very dry reading). While the storyline is flawed, the book is fun to read and contains so many great ideas that most DMs will be super excited to get going.
+
+I think you could run this adventure exactly as written and most parties are not going to notice the plot holes, or if they do, they are going to assume that things make sense from behind the scenes.
+
+But to do the adventure justice, I think the DM will want to put in a fair bit of extra prep work – and for that reason I’d hesitate to recommend it to busy DMs or ones that want to offer a sandbox… because to do so you’ll have to create a large amount of that sandbox yourself.
+
+From a player point of view, the feedback I got was that Dragon Heist was the most successful adventure I’ve run for my regular group (I’ve only run three to be fair, as we are three DMs!), and I think any players that like to engage their grey matter a little and enjoy social interactions with NPCs will really enjoy Waterdeep: Dragon Heist.
+
+I’d give this product 8/10.
+
+Buy Waterdeep: Dragon Heist
+
+You can buy it on Amazon.com, or Amazon.co.uk.
+
+ Buy from Amazon.com (US). 
+
+ Buy from Amazon.co.uk (UK)
+
+Now, how can we make this adventure even better…
+
+Hipster Rehash: New & Remixed Material
+
+I can’t start this section without acknowledging the fine, often painstaking work, that has gone before me, in the form of The Alexandrian’s Remix. Check out his blog, or go support him on Patreon.
+
+Justin knows his stuff, and I will be pulling in many of his ideas (crediting them accordingly) into my own rehash.
+
+Why bother re-inventing the wheel? Well, if anything The Alexandrian has written a bit too much about Dragon Heist and incorporated too many new ideas! When going back and forth from his Remix and the original text, I started to get a little lost in an overlapping labyrinth of ideas… and I started to get the impression that my preparation time was increasing.
+
+If time is on your side, I still thoroughly recommend going through his posts on the matter, which he seems to have re-ordered to make more user-friendly. However, for those with a little less time on their hands, the goal of my own Rehash is to quickly address some of the biggest problems of the adventure, and include some ideas on how to improve it further.
+
+Pre-Adventure
+
+One thing I always like to as a DM is to weave my player’s back stories into any adventure I create… however, this is considerably harder when playing a published adventure where all the key players in the plot have already been decided. Therefore to tie my PCs to the plot I retro-engineered a series of incidents in their past, that coincided with events and NPCs in Dragon Heist. I didn’t want to force anything on them, so I offered them a choice of incidents that I loosely connected to the backgrounds in the Player’s Handbook.
+
+Examples:
+
+Bye-Bye Beholder (tied to Criminal background)
+
+Once upon a crime you used to run with the Xanathar Guild. Your friend, Zilo, got you involved, and to begin with you loved the adventure, and fast rewards, that the criminal underworld offered. But when Zilo got butchered by the boss for botching a mission, you discovered how brutal operating on the wrong side of the law can be. You decided to get out while you still could. That was over a year ago. Since you know the locations of most of the Guild’s Waterdeep hideouts and hang outs, you’ve managed to avoid any unpleasant reunions with your ex-colleagues, up until now.
+
+Missing Rosky (tied to Urchin background)
+
+Life on the streets is tough, but having a friend or two around to share the hard times with you has always made it bearable. That’s why it hurts that you haven’t seen your little halfling friend, Rosky, for nearly a month now. Recently he’d been spending a lot of time with a character called Kelso (another halfling – but one that you wouldn’t trust with a single nib!), but you never thought he would desert you for such a sketchy lowlife and his gang.
+
+In total I created over 30 of these ‘Background Hooks’ (as I call them) and published them on the DMs Guild. The two above worked were selected by players at my table during our campaign, and both enabled me to increase the drama at the table and to intertwine their back stories with NPCs that exist in Dragon Heist.
+
+Chapter 1: Hipster Rehash
+
+– A More Explosive Beginning
+
+As the existing bar fight written into Chapter 1 is very low stakes, and the troll is irrelevant to the Dragon Heist plotline, the first thing I wanted to fix was the adventure’s opening scene. In my Hipster Rehash, Krentz (the Xanathar agent) breaks a window of the Yawning Portal to reach in and put a knife at the throat of Davil Starsong (Zhentarim boss, who is seated in a window booth) and loudly demands to know the location of “The Stone”, while other Xanathar bandits toss a flashbang into the room and rush in to stab Yagra Stonefist, Davil’s bodyguard.
+
+I feel this is a good upgrade, because it establishes the gang warfare theme with a much higher stakes scenario AND name drops the Stone right away as something important.
+
+I’d also used my own Background Hooks product so that two of the heroes were already working with Davil – they had gone to meet him at the Yawning Portal to receive one of the faction missions in Chapter 2, while a third PC was a former Xanathar member. This really helped avoid the awkward scenario whereby the PCs don’t care to get involved. They are sitting next to Davil when Xanathar’s henchmen attack and are immediately embroiled.
+
+Battle Map: If you need a battlemap of the Yawning Portal for a virtual tabletop, or you have a colour printer, this one might be helpful.
+
+Flash Bang Mechanics: A flash bang is an explosive that takes an action to toss into the fray. Anyone within 30 feet must succeed on a DC 15 Intelligence saving throw (What an Intelligence saving throw?! I know, finally a bone for wizards and rogues to chew on!) or be blinded and deafened for one minute. Affected creatures can retake the save at the end of their next turn.
+
+Suggestion: I gave my players their second level hit points, at first level. This way they should be able to survive at least a hit or two! It’s a flaw of the game that 1st level characters are so vulnerable.
+
+I suggest beefing up the initial bar fight…
+
+– Finding Floon: A Better Investigation
+
+The first thing I did was skip the aftermath of the skirmish that “has nothing to do with Floon’s disappearance” as we’ve already demonstrated the gang warfare vibe with our new explosive beginning.
+
+Next we need to jazz up an investigation that is incredibly routine otherwise. As written, players go to The Skewered Dragon and get the clue that takes them to Candle Lane in a single charisma check. The Alexandrian has some great ideas, such as the old ‘trail of beads’ that are much more satisfying to run.
+
+I had some Zhent thugs in The Skewered Dragon that complicates the party’s investigation. As a bonus, if the heroes can’t pick up the trail the thugs follow the party and instigate a fight… giving the heroes some knowledgeable bad guys to intimidate (assuming they win the fight), and a second chance to get the info they need. (That may have been the Alexandrian’s idea as well come to think of it!).
+
+My notes read: The landlord won’t speak. If one of the tavern’s patrons tries to tell the party something, a thug with several silver teeth pats him on the shoulder and says “a stuffed duck doesn’t quack”. If the PCs keep questioning, the thug says: “you look like you’re new in town. Let me give you some advice, it doesn’t pay to ask too many questions in this part of town. We like people who mind their own business.”
+
+This little scene tells the PCs that a) the landlord has the info they need b) some of the regular tavern patrons have the info they need and that c) both will need to be convinced to give it to them. In fact, it also tells them that d) the thugs have the info they need too. We’ve now set up a tense scene with a few different solutions.
+
+– Xanathar Guild Hideout
+
+You can run the Candle Lane encounter more or less written, after which the party get their lead on Floon and have to head underground. Here they come face to face with a mindflayer and intellect devourer! Which I love! This is epic stuff and the party are way out of their depth. Luckily for them, the mindflayer is fleeing… but you will need to prep the intellect devourer so as not to ruin the game early on. For me there’s no reason why this little critter should have 21 hit points (plus those crazy resistances!)! Two hit points might be more realistic (in which case you could have two or three of them). And I would have it/them attack Floon – or Renaer if he’s with the party – as this way a) you don’t need to kill a PC during their first session of a new adventure and b) you may have a thrall NPC to play with for the rest of the campaign! Always a boon 🙂 A word on intellect devourers… the Monster Manual says they teleport into the skull of their victims. In my imagination though they go inert, leaving a dead brain on legs behind as their consciousness displaces those of their victim. I can’t really rationalise the MM’s description, as how would it devour the brain from afar? Also the dead brain it leaves behind is a nice clue to the fact that’s something’s amiss.
+
+Chapter 2: Hipster Rehash
+
+Chapter 2 is a nice sandbox with faction missions providing direction to the party, as well as the chance to renovate and customise Trollskull Manor. I also used this slower section of the adventure to develop the character’s personal story arcs and run some customised faction missions.
+
+Chapter 3: Hipster Rehash
+
+– Making Sense of the Fireball
+
+A fireball going off next to Trollskull Manor, leaving several corpses in its wake, is a cool start to this chapter. Unfortunately, as the Alexandrian points out, it doesn’t make much sense. Firstly, what has Neveremeber’s agent, Dalakar, been doing for two weeks? Surely he would have left the city by now? Secondly, why would he think that some strangers who helped his boss’s ESTRANGED son would make good allies? The fireball itself is tossed by a nimblewright at – not only the gnome agent – but also a bunch of folk about to bring the Stone back to his mistress anyhow. So that’s another non-sequitur.
+
+To make sense of this I created the back story of Dalakar’s heist in my mind. Imagining him to be a spy, I decided that he infiltrated Xanathar’s Lair, found the Stone, but got shot by a poisoned crossbow bolt by Norska (a Xanathar henchman) just before escaping using a scroll of dimension door . After spending X amount of days recuperating in a safe house, he tried to leave the city but realised that the various gates were being watched by Xanathar and Zhent spies. So, he sent a message to Neverember, who arranged for a second agent to collect the Stone from the gnome in a quiet location – Trollskull Alley. However, the gnome’s message was actually intercepted by the Zhentarim (you could change this to another faction, if you want to bring them into play) and it’s a Zhent agent, posing as a Neverember agent, that is waiting for the gnome. In my story, Dalakar realises he’s been tricked at the point of the handover and tries to flee with the Stone, which is why when the party investigate the scene of the fireball, the gnome has a knife wound in his back.
+
+I think, as well, the fireball investigation is tighter if you get rid of some of the non-relevant dead bodies. Amongst the dead should be: a) the fake Neverember agent (from whichever faction you decide) b) Dalakar c) a few of Manshoon’s Zhents who were tracking Dalakar (but not Urstul, who escapes with the Stone, as written. I had him hole up in a hospice and receive treatment for his burns before returning to the Grahlund villa, to leave a trail the party could follow and give the PCs time to conduct their investigation) and d) someone the party cares about, as per the Alexandrian’s suggestion. In my adventure that was Roscoe, the halfling street urchin (and wererat), who was sleeping the abandoned Trollskull Manor when they inherited it.
+
+I planted a few clues on the dead bodies, leaving the PCs with a choice of trying to trace Urstul’s footsteps, or track down the strange construct seen throwing the fireball from a rooftop. For the latter check out the Alexandrian’s Remix, because he manages to introduce a cool heist of Jarlaxle’s flagship.
+
+Consulting the City Watch…
+
+Chapter 4: Hipster Rehash
+
+The Alexandrian amusingly describes this chapter as a Benny Hill chase, and certainly there’s something farcical about the way this treasure hunt evolves – when surely the Stone could just be carried directly to their intended recipient. To mitigate this section’s weaknesses, I wouldn’t necessarily plan on visiting all 8 locations in your chosen chain. Start at the start and then fit in at least one chase, after which a third party (other than the heroes and the chosen villain’s henchmen) can turn up to complicate matters. Have a plan for what happens if the Stone gets away.
+
+Chapter 5: Hipster Rehash
+
+I can’t really comment on this chapter as my party failed to get the Stone and had to face off against the Cassalanters at their villa at the Founder’s Day Party (so that ‘wasted’ chapter on the villain lairs came in handy at least!). By then, the Cassalanters had already got the gold from the vault, ready to offer up to Asmodeus and the PCs had to succeed in disrupting the ceremony and preventing the gold from being given up to the arch devil. While the very end devolved into a massive fight, there was some fun social interactions and a kind of heist of the villa, as the PCs looked for answers, beforehand, which was a cool way to wrap up the adventure.
+
+General Tips: Running The Adventure
+
+One major problem I had with WDH was that the players didn’t pick up any sense of urgency about chasing the Stone. After getting their lead on the fireball-tossing nimblewright being from the Grahlund Villa, they decided to take a long rest instead of go and investigate immediately. And so, wanting to create ‘a living dungeon’ (so to speak), I ruled that events took place without them, and the next morning they had to interview the guards who had cordoned off the area after the showdown between the Grahlunds and their Zhentarim guests, which went down without them. In other words the PCs were already behind the game.
+
+After that, my party still showed no great motivation to join the race and get to the drop off point (The Mausoleum) before anyone else. So I ‘punished’ this mistake with a Xanathar Guild ambush in the City of the Dead. This however just led them wanting to take another long rest, when the chase for the MacGuffin should have been red hot.
+
+This is a general problem with D&D that frustrates. Long rest characters always want to recharge their spell slots, so push for rests even when the story demands they move forward, because time is clearly of the essence. In general, I’ve found that PCs will only forgo rests if given the stick… the carrot is rarely enough to entice them.
+
+Of course I could have ruled it’s too late to even stand a chance of catching the Stone, and that the trail had gone cold, but it doesn’t really make sense to ruin an adventure in that way. Instead I tried to punish them again, by making the next encounter harder. They had lost some 10 or 12 hours, but in the interests of trying to play out the content of the book, I only punished them with a difference of 10 or so minutes. The devils sent to collect the stone from the Converted Windmill were already inside and ready to fly out, rather than on their way in.
+
+In the end, this small change made a difference. The PCs failed to stop the Stone escaping and the rest of Chapter 4 never played out… but at least in the Villain’s Lairs I had a chance to stage a fun final showdown, with a touch of heist about it.
+
+If I was running Dragon Heist again, and my players went off tack or got distracted, I think I’d just do the obvious thing and freeze the dungeon (so to speak). After all, there was no point punishing myself with extra prep and having to reimagine events 10 hours later or whatever, and I don’t think it made the adventure any better.
+
+This might have been avoided if I had done a better job of making the PCs care more about the Stone and its significance, and that’s something you might want to think about. Waterdeep is a distracting place and sometimes your party are going to be interested in other storylines or their own personal development opportunities (as my PCs were!).
+
+A romantic sunset view over Dock Ward…
+
+Another tip I’d definitely take out of this is: URGE YOUR PLAYERS TO TAKE NOTES. Dragon Heist requires the party to be proactive at times, and they can only do so if they are able to grasp what’s going on in the city. Things like understanding that the Zhentarim have split, why the Stone might be important, knowing who Dalakar is/was all make a difference, but are details that can easily get lost in a sea of NPCs and side quests.
+
+I’d also strongly advocate only playing Dragon Heist if you are confident your group can meet regularly. If your group meets once a month, this might not be the best adventure for them as the intrigue and plot twists become hazy and confused.
+
+– Checklist of Knowledge To Reveal
+
+I found that making a list of things to reveal as the adventure continues helped me understand the key points of the story. So these might help you too:
+
+There’s a stash of gold under the city (embezzled by former Open Lord Neverember).
+
+An object called the Stone of Golorr is the key to locating the gold.
+
+The Stone used to be owned by Xanathar, who stole it from Piergeiron Palace.
+
+A Neverember agent has since stolen the Stone from Xanathar.
+
+A cloaked figure with a metal hand has formed a renegade Zhentarim.
+
+Both Xanathar and the renegade Zhents are after Stone, as is anyone else who knows about it.
+
+Various factions were hot on the gnome’s trail… a fireball was flung and one person escaped.
+
+Fireball was flung by a nimblewright (and/or the person who escaped was a member of renegade Zhentarim, who has been seen around North Ward).
+
+The Grahlunds own a nimblewright (and/or the person has been seen going in/out of Grahlund Villa)
+
+The nimblewright was given a map and told to drop off stone
+
+From here, if you place the nimblewright finder in the Grahlund villa, the PCs can find the construct, find the map, and enter the final wild goose chase.
+
+If they fail to catch up with the Stone, a heist will naturally be set up to one of the villain’s lairs to retrieve it (in the case of the Cassalanters you could stage the Founders Day Ball instead, as I did). If they succeed, you could still set up a heist by using the eyes idea from The Alexandrian (he suggests the Stone requires three ‘eyes’ to work) and placing them in the lairs (I would suggest the PCs only need retrieve one… their faction bosses or the City Guard etc. might be put in charge of obtaining the other two).
+
+Useful Resources
+
+As you probably gathered by now, The Alexandrian was my go-to website for tips on running Dragon Heist.
+
+This Facebook group is also pretty handy for sharing experiences and asking questions.
+
+I’ve also just noticed that the excellent Sly Flourish has written a series of posts on the adventure, starting with this one (shame I discovered them after I had already run it…).
+
+I also bought a number of supplements, which really helped me flesh out the adventure. Do check out my post on the subject!
+
+City Encounters is one of many great Dragon Heist supplements!
+
+I’ll leave you with a video by Dungeon Dudes as well.
+
+FAQs
+
+Find the answers to some frequently asked questions below…
+
+ How many sessions does it take to run Waterdeep: Dragon Heist?
+
+ It took me eleven 4-hour sessions to run Waterdeep: Dragon Heist for my group, so a total playing time of around 40-45 hours. This will vary a lot depending on the number of faction missions you run, and how much you customise the adventure. 
+
+ Is Dragon Heist good for beginner DMs?
+
+ I know beginner DMs who have loved and praised the adventure, however, in general I would NOT recommend Dragon Heist for beginners. The background lore you will need to know about Waterdeep, and the ability to improvise when your PCs (inevitable) go off the rails make it quite hard to do the material justice for a newbie. It's certainly doable though. 
+
+ Is Dragon Heist good for new players?
+
+ I would definitely recommend Dragon Heist for new players. It throws them into an in-depth world full of mysteries and intrigues and draws on all three main pillars of play (combat, exploration and social interaction), meaning newbies should get a well-rounded insight into Dungeons & Dragons (and hopefully be hooked!).
+
+ What year is Dragon Heist set in?
+
+ If you care about chronology, you might want to know that Dragon Heist takes place in 1492 DR (i.e. Dale Reckoning) in the Forgotten Realms. 
+
+Dragon Heist Sequel
+
+The official sequel to Waterdeep: Dragon Heist is Dungeon of the Mad Mage, however this dungeon-crawling style of adventure offers a very different style of play and may not be a good fit for a group that loved Dragon Heist…. which is why I spent 1.5 years writing DRAGONBOWL!
+
+This underground sports tournament contains as many social opportunities as bone-crushing arena fights, while intriguers such as Jarlaxle, Xanathar and Davil Starsong all attend the games looking for business opportunities. Indeed, you’ll find many nods to Dragon Heist throughout the adventure, as well as a new villain in the devious Games Master, pulling the festival’s strings in the background.
+
+It’s an absolute blast to run, with plenty of scope to take the adventure in different directions, depending on which of the 16 fully developed teams you want to pit your players against, and which ‘entanglements’ (faction missions) you wish to run… a few DMs have picked it up for professional play now and you can check out reviews etc on the DMs Guild.
+
+Don’t forget your Resurrection Insurance!
+
+More D&D Heists…
+
+If Dragon Heist got rightly criticised for not being heisty enough, no such criticism can be levelled at the excellent adventures within Keys from the Golden Vault, many of which I count amongst the best 5e D&D adventures out there! Check out my full review post with rankings and consider picking up a copy.
+
+13 epic heists for 5e D&D
+
+Meanwhile, I’ve also penned an extensive guide to designing and running your own heist adventures for D&D and other RPGs.
+
+ Related
+
+ 5e D&DDragon HeistreviewWaterdeep 
+
+ Previous
+
+ 31+ Time Pressures to Put in Your Adventure 
+
+ Next
+
+ My New 5e Adventure DRAGONBOWL is Live! 
+
+ 2 Comments 
+
+ Add Comment →
+
+ zed
+
+ I recommend using this house rule telling it to your players right of the bat at beginning of 1st game session:
+
+– Read the adventure carefully first and then you kind of “split” it into “standard adventuring days” (SAD) units. Typically 1 Chapter willl be 1 SAD, but some may be more.
+
+Per each SAD, give the party 2 (or maybe 3 if you want to help them or there are a lot of encounters) Short Rest tokens, plus 1 Long Rest token.
+
+The player must *all* agree for a rest to be able to take one.
+
+A Long Rest can be done only in specific places and times in the adventure, aka milestones, which then replenishes the rest tokens.
+
+If a Long Rest coincides with a level up, the PCs regain full new HD total.
+
+They can also spend a full Tenday in Town to Long Rest, but in this case the villain’s plans will have moved forward a lot or even be completed (i.e. mission failure).
+
+Basically, casters going niva will not have any more spells until the end of the chapter. Be firm and clear on this: casters should always keep in mind to keep their non-cantrip spells for when it will be really important, otherwise they WILL run out off spells.
+
+November 8, 2021
+
+Reply
+
+ milkermelkor
+
+ All these resources!
+
+I am still setting up, but my spin is gonna combine the alexandrian’s eyes of golorr with my reacquiring thought, why does dalakar have to die?
+
+the whole fireball thing would look to me like an escalation of the established gang violence, and wouldn’t prompt me to care
+
+so, dalakhar is after the stone and it’s eyes
+
+the stone’s location is know, the eyes not so much
+
+so dalakhar arrives and is searching out the eyes
+
+he has a purse to help fund his search
+
+so he hires the pcs at some point to find the eyes for him, establishing himself as a patreon and benefactor
+
+so i can place the theft of the stone when i please, and kidnap dalakhar as needed too!
+
+giving reason for the chase, a rescue mission! etc etc etc
+
+March 8, 2025
+
+Reply
+
+ Leave a Reply Cancel reply
+
+ Comment*
+
+ Name* 
+
+ Email* 
+
+ Website
+
+ Notify me of follow-up comments by email.
+ Notify me of new posts by email.
+
+MY ENNIE-NOMINATED BOOK OF EXTRAORDINARY LOCATIONS
+
+My book: The Creative Game Master’s Guide to Extraordinary Locations won an ENNIE nomination for Best RPG Supplement 2026 and is available to order now. It features 30 fully-developed Adventure Locations you can drop into your campaign worlds, each will a full-colour hand-drawn map. Foreword by Ed Greenwood. Check it out! $24.95.
+
+“I can’t wait to use these locations in my own campaign…. Rhodes has given every fantasy game master what they need” Justin Alexander, best-selling author.
+
+“Raw modular fuel to run a game on the fly / a masterclass on how to build your own dynamic sandboxes. 9/10.” Professor DM, of DungeonCraft. Full video review here.
+
+Video Preview of My Book!
+
+ Hi, I'm Duncan. I like craft beer, vintage clothes, street festivals... and playing Dungeons & Dragons. Welcome to my blog, and do please subscribe to stay in touch. 
+
+Subscribe To Blog
+
+ Join the 30,000 gamers that read Hipsters & Dragons every month! No paid subscription, just enter your email for FREE D&D content in your inbox. Let's stay in touch!
+
+ Enter email address 
+
+ Click here to SUBSCRIBE! 
+
+New On The Blog
+
+ Players Hate “Gotchas”… How to Surprise Them Fairly!
+
+ September 1, 2026
+
+ The 2026 ENNIES, plus “New Dawn of D&D” with Dark Sun… and Star Wars!?
+
+ August 7, 2026
+
+ Why GMs Railroad… And Techniques To Avoid It!
+
+ July 12, 2026
+
+ Game Design: In Defense of Bonus Actions
+
+ June 16, 2026
+
+ My Favourite D&D / RPG Youtubers…. Plus One!
+
+ May 22, 2026
+
+ Divine Inspiration: My Tips for Designing Temples
+
+ April 15, 2026
+
+ Running Hope’s Last Day (Alien RPG, Evolved Edition)
+
+ March 8, 2026
+
+ ALIEN Starter Set: Does It Pass the Acid Test?
+
+ February 21, 2026
+
+ 8 Bloggers Talk Fantasy Locations
+
+ February 2, 2026
+
+ Designing Extraordinary Fantasy Locations
+
+ January 1, 2026
+
+A New Key From The Golden Vault
+
+Challenge your players to infiltrate the enterprising Dragonbowl Airship and escape with the dirigible’s blueprints, in this action-packed heist that requires deception, stealth and cojones of steel. Just $4.95 on the DMs Guild.
+
+“Just finished this delightful modular addition to Keys from the Golden Vault – The Incredible Balloon Bamboozle! If you’re looking for a thrilling adventure set on a blimp, with shenanigans galore and a Beholder ready to ruin your day, check it out!” The Geekly Grind.
+
+A MURDER MYSTERY IN CANDLEKEEP
+
+When the Keeper of Tomes is murdered, and his body mutilated, on Deadwinter’s Eve, all of the Great Readers become suspects in this heinous crime. As the players get embroiled in the library’s tangled web of politics and personal enmities, dark forces are at work trying to uncover Candlekeep’s fabled Vault of Secrets. Snap up this epic adventure on the DMs Guild for just $10.
+
+“I love the murder mystery set up here… the roleplaying notes for all the NPCs are very well handled… I LOVE the Flying Iron Owlbear and the Avowed and library generators are superb. I LOVE THIS ADVENTURE!”
+
+Ed Greenwood, creator of Candlekeep and the Forgotten Realms.
+
+Welcome to DRRAGONBOOWWWL!!!!!!
+
+Don’t miss Faerûn’s action-packed sporting extravaganza in the bowels of Mount Waterdeep – where the booze and the blood flow in equal measure! Aside from taking on up to 16 gladiatorial teams in Dragonbowl Arena, there are 30+ festival locations to visit, scores of side plots to unravel and (if the players win) a confrontation with the Games Master himself at the Breakfast of Champions. This 300-page epic also works as a sequel to Waterdeep: Dragon Heist. Check out the reviews on the DMs Guild. 
+
+“One of the best adventures I have ever run!”
+
+“If you took American Gladiators, the Colosseum, and the Quidditch World Cup and then mashed them all together I imagine you’d end up with something like Dragonbowl. More than just a combat-focused adventure, Dragonbowl is a Bacchanalian-style festival with its own economy and ecology.”
+
+Video Review of DRAGONBOWL
+
+Categories
+
+ Alternative RPGS (Not D&D!) (2)
+
+ ALIEN RPG (2)
+
+ D&D Adventures (19)
+
+ Candlekeep Mysteries (3)
+
+ Curse of Strahd (1)
+
+ Journeys Through The Radiant Citadel (1)
+
+ Keys from the Golden Vault (3)
+
+ Waterdeep: Dragon Heist (2)
+
+ DMs Tips (79)
+
+ Adventure Design (12)
+
+ Running The Game (32)
+
+ World Building (3)
+
+ Game Design (1)
+
+ General Chat (12)
+
+ 2024 Rules (1)
+
+ Dungeons & Dragons Explained (3)
+
+ One D&D (3)
+
+ TTRPG News (1)
+
+ Homebrew (9)
+
+ House Rules (48)
+
+ Player Tips (20)
+
+ Character Builds (3)
+
+ Products & Publishing (20)
+
+ DMs Guild (17)
+
+ Kickstarter (1)
+
+ Resources (7)
+
+ Tools & Accessories (3)
+
+CHECK OUT MY PLATINUM BEST SELLER
+
+Bored of daggers of venom, flame tongues and vicious blades…? Grab 120 new magic weapons – at least one for each weapon type in the Player’s Handbook. The book’s “magic weapon generator” makes it easy to roll up 10,000s more… buy for just $7.95 on the DMs Guild. Also available on Fantasy Grounds.
+
+“I love all the weapons in the book, but honestly, I can’t get enough of the weapons generator…. I couldn’t recommend this guide enough.”
+
+CONFRONT ESZTEBAN IN HIS TOWER
+
+Eszteban, the Archmage of the Gossamer Robe Order, hides atop his tower in the Gleaming Cloud Citadel, denying his fellow wizards access to the knowledge of the Upper Library with a series of deadly traps and obstacles. Who will be brave enough to disarm this labyrinth, unravel the Order’s secrets, and confront the potentially deranged archmage? Buy this 5e adventure with an old school flavour for $5.95 on the DMs Guild.
+
+“I cannot recommend this HIGHLY enough. One of the finest adventures on the Guild!”
+
+Tags
+5e
+5e D&D
+2024 rules
+adventure
+adventures
+ALIEN Starter Set
+annoying players
+barbarians
+bonus actions
+Candlekeep Murders
+Candlekeep Mysteries
+combat
+D&D
+DMs Guild
+Dragon Heist
+encounters
+exhaustion
+feats
+Fireball
+grappling
+heists
+horror
+Inspiration
+Keys from the Golden Vault
+Lucky feat
+magic items
+monsters
+NPCs
+One D&D
+overpowered
+Paladin
+proficiency
+review
+Rogue Assassin
+Rogues
+RPGs
+rules
+Skill Checks
+skills
+spells
+taverns
+teleportation
+terrain
+Waterdeep
+Weapons
+
+LikeBox
+
+In The Press…
+ In 2020, Hipsters & Dragons was featured in the mainstream UK media, talking about D&D. “You’ve Got to Roll With It” was published in the national broadsheet, The Independent.
+
+ Powered by WordPress & Theme by Anders Norén
+
+ Close this module
+ SUBSCRIBE
+
+Get notified whenever Hipsters & Dragons post free D&D content...*
+
+ Email Address 
+
+ Click, then check inbox to confirm! 
+
+*WELCOME GIFT. Once subscribed, message me on duncan@hipstersanddragons.com for a 50% discount on your choice of my DMs Guild releases.
+
+ Loading Comments...
+
+ Write a Comment...
+
+ Email (Required)
+
+ Name (Required)
+
+ Website

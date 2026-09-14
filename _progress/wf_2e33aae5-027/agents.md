@@ -1,0 +1,69 @@
+# wf_2e33aae5-027 — per-agent progress, 2026-09-13 02:13:46
+    - `a8df09f92` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-11 11:12 801 KB · 43 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `a2d2b0711` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-11 11:12 667 KB · 27 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-plagued-perimeter-but-no-force-t/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `abb01c380` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-11 11:13 692 KB · 37 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `ac6e3f86c` MARKER Beasts & Monsters: frontier, credible deterrence · DONE · transcript 09-11 11:12 836 KB · 47 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `a6c9feae9` MARKER Beasts & Monsters: frontier, force without a perimeter · DONE · transcript 09-11 11:14 882 KB · 45 tool calls · files: skeleton.md, '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-monsters-frontier-force-without-a-perimet/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `a16251050` MARKER Beasts & Monsters: settled, defenses beyond the need · DONE · transcript 09-11 11:11 750 KB · 38 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `af2097f74` MARKER Beasts & Monsters: settled, nothing organized · DONE · transcript 09-11 11:20 714 KB · 35 tool calls · files: "$P/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--beasts-mons
+    - `aded159ae` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-11 11:24 1002 KB · 50 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a731e9410` MARKER Invasion & War: walls with citizen militia · DONE · transcript 09-11 11:21 810 KB · 38 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a86ab8357` MARKER Invasion & War: walls with NO force · DONE · transcript 09-11 11:22 818 KB · 45 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `af3695335` MARKER Invasion & War: force with NO walls · DONE · transcript 09-11 11:24 940 KB · 59 tool calls · files: "$D/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `adfba1272` MARKER Invasion & War: militia only · DONE · transcript 09-11 11:24 806 KB · 34 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `a6d158fc4` MARKER Invasion & War: neither walls nor force · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 829 KB · 44 tool calls
+    - `a346d9d42` MARKER Internal Security: full legal chain (court AND prison) · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 676 KB · 29 tool calls · files: "$D/skeleton.md
+    - `a7347320b` MARKER Internal Security: court without detention · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 845 KB · 39 tool calls
+    - `a1b1036b8` MARKER Internal Security: detention without process · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 632 KB · 53 tool calls
+    - `a1007aea0` MARKER Internal Security: no legal infrastructure · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:29 768 KB · 57 tool calls · files: skeleton.md
+    - `ac3d67fab` MARKER Economic Survival: STRONG · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 655 KB · 29 tool calls
+    - `a033b870a` MARKER Economic Survival: ADEQUATE · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a3e3be896` MARKER Economic Survival: WEAK · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a1529c076` MARKER Economic Survival: CRITICAL · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `acad941ed` MARKER Disasters & Famine: granary AND hospital · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a4b7ff146` MARKER Disasters & Famine: granary AND parish care only · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a87e5f28a` MARKER Disasters & Famine: granary, NO medical provision · RETRIED (a later attempt on the same key runs) · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `a39e8d3cd` MARKER Disasters & Famine: NO reserves, hospital present · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `ada807fd1` MARKER Disasters & Famine: NO reserves, NO medical provision · FAILED · transcript 09-11 11:28 100 KB · 0 tool calls
+    - `acba3cf8a` WRITER Beasts & Monsters: plagued, perimeter AND organized force r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `ad36028f6` WRITER Beasts & Monsters: plagued, perimeter but NO force to hold it r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a5f8a0c38` WRITER Beasts & Monsters: plagued, NO perimeter and NO force r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `af9d702de` WRITER Beasts & Monsters: frontier, credible deterrence r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a347c72b8` WRITER Beasts & Monsters: frontier, force without a perimeter r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `aa9970bd3` WRITER Beasts & Monsters: settled, defenses beyond the need r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a0a4598db` WRITER Beasts & Monsters: settled, nothing organized r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `aca42888b` WRITER Invasion & War: walls AND professional garrison r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a1d2855b9` WRITER Invasion & War: walls with citizen militia r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a8a75ebb9` WRITER Invasion & War: walls with NO force r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `af0641f0b` WRITER Invasion & War: force with NO walls r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a2dc68b01` WRITER Invasion & War: militia only r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `aade0024b` WRITER Invasion & War: neither walls nor force r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `af6ef6c08` WRITER Internal Security: full legal chain (court AND prison) r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `af5d86453` WRITER Internal Security: court without detention r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a00ac730e` WRITER Internal Security: detention without process r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `abef279de` WRITER Internal Security: no legal infrastructure r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `af0d6b2f5` WRITER Economic Survival: STRONG r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a8fd40867` WRITER Economic Survival: ADEQUATE r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a905a49bc` WRITER Economic Survival: WEAK r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `ad5a43a4b` WRITER Economic Survival: CRITICAL r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a39c53f19` WRITER Disasters & Famine: granary AND hospital r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a2f0c53fd` WRITER Disasters & Famine: granary AND parish care only r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a9851fc71` WRITER Disasters & Famine: granary, NO medical provision r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `ac1e8c91b` WRITER Disasters & Famine: NO reserves, hospital present r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a46cc9c75` WRITER Disasters & Famine: NO reserves, NO medical provision r1 · FAILED · transcript 09-11 11:29 124 KB · 0 tool calls
+    - `a255ec937` GATE r1 · FAILED · transcript 09-11 11:29 104 KB · 0 tool calls
+    - `a41ea02e6` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
+    - `a2e8aedb6` JUDGE r0 · FAILED · transcript 09-11 11:29 100 KB · 0 tool calls
+    - `ae38129fa` GATE · FAILED · transcript 09-11 11:29 98 KB · 0 tool calls
+    - `a64335516` MARKER Invasion & War: neither walls nor force · DONE · transcript 09-11 15:13 660 KB · 27 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--invasion-wa
+    - `afa2027ca` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-11 15:12 717 KB · 28 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `ae7156d1c` MARKER Internal Security: court without detention · DONE · transcript 09-11 15:15 824 KB · 46 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `a8e94d9ad` MARKER Internal Security: detention without process · DONE · transcript 09-11 15:13 819 KB · 56 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `ac34bafe6` MARKER Internal Security: no legal infrastructure · DONE · transcript 09-11 15:16 907 KB · 58 tool calls · files: skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--internal-se
+    - `a6a762fff` MARKER Economic Survival: STRONG · DONE · transcript 09-11 15:14 803 KB · 41 tool calls · files: "$SC/../4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/scratchpad/def2-annex.md, def2-annex.md, "$P/skeleton.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/rewrite/DS-DEF-2/ds-def-2--economic-su
+    - `a969baec2` MARKER Economic Survival: ADEQUATE · IN FLIGHT · transcript 09-11 15:20 761 KB · 38 tool calls · files: "$D/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a3a38f373` MARKER Economic Survival: WEAK · IN FLIGHT · transcript 09-11 15:20 764 KB · 34 tool calls · files: "$D/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a5dc7aa14` MARKER Economic Survival: CRITICAL · IN FLIGHT · transcript 09-11 15:20 674 KB · 33 tool calls · files: "$D/skeleton.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratc
+    - `a8a184c0e` MARKER Disasters & Famine: granary AND hospital · IN FLIGHT · transcript 09-11 15:20 744 KB · 43 tool calls · files: "$SC/rewrite/DS-DEF-2/ds-def-2--disasters-famine-granary-and-hospital/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a4651bae1` MARKER Disasters & Famine: granary AND parish care only · IN FLIGHT · transcript 09-11 15:20 592 KB · 30 tool calls · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat
+    - `a3d39f60d` MARKER Disasters & Famine: granary, NO medical provision · IN FLIGHT · transcript 09-11 15:20 608 KB · 24 tool calls · files: "$P/skeleton.md · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scrat

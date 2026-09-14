@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 230,
+ "firstTs": "2026-09-12T09:43:02.514Z",
+ "lastTs": "2026-09-12T09:56:07.170Z",
+ "tools": {
+  "Bash": 64,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet is complete: one file, 455 lines, inside my fence. No dock was entered or modified; the only execution in `laneRW-DEF2` was the read-only licence-card script.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a385201a8d34ef687",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a385201a8d34ef687.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

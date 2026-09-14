@@ -1,0 +1,955 @@
+[6] peer-reviewed | F: temporal complexity / time jumps | S: Russell et al., StoryScope (arXiv 2604.03136) | FULL | ERA: -
+  CLAIM: Human stories use chronological discontinuity, fourth-wall breaks (67% vs 39%), direct reader address (28% vs 7%) and named intertextual references (47% vs 24%) far more than AI stories.
+  TW: fourth wall (67% vs. 39%); reader directly (28% vs. 7%); specific texts (47% vs. 24%)
+  LIMB: the 'temporal complexity' framing — the verifier records that the three cited percentages are intertextuality/fourth-wall features, not temporal ones
+  NOTE: All three pairs appear exactly in §4.1 ('Human authors engage the outside world'), and 'Humans use more time jumps, flashbacks and flash-forwards, and nonlinear structure' covers chronological discont
+[8] peer-reviewed | F: discourse tells survive style polishing | S: Russell et al., StoryScope (arXiv 2604.03136) |  | ERA: -
+  CLAIM: Narrative-level features still identify AI fiction at 93.9% macro-F1 after professional-style rewriting, so surface edits do not humanize structure.
+  TW: far harder to "humanize"
+  LIMB: "professional-style rewriting" — the edit was Gemini's own LAMP span-level artifact removal, not rewriting by professionals.
+  NOTE: Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is L
+[10] peer-reviewed | F: lexical overuse (style verbs/adjectives) | S: Kobak, González-Márquez, Horvát & Lause (arXiv 2406.07016; Science Advances 2025) |  | ERA: -
+  CLAIM: LLM-processed text shows abrupt excess of style words such as delves (28x), showcasing (10x), intricate, underscores, pivotal, meticulously, realm; 2024 excess words were 66% verbs and 16% adjectives.
+  TW: delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives
+  LIMB: the 66%-verbs/16%-adjectives split holds only of the 319 excess STYLE words, and pivotal, realm and meticulously are not in Kobak's own excess list.
+  NOTE: No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real 
+[11] peer-reviewed | F: lexical overuse not inherited from training data | S: Juzek & Ward, Why Does ChatGPT Delve So Much? (arXiv 2412.11385, Dec 2024) |  | ERA: -
+  CLAIM: Twenty-one focal words (delve, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns, etc.) are overrepresented in ChatGPT output yet not in pre-LLM corpora, consistent with RLHF as the source.
+  TW: lexical overrepresentation remains a feature of current iterations of ChatGPT
+  LIMB: "consistent with RLHF as the source" — the paper reports mixed evidence, only that testing is "consistent with RLHF playing a role", not a demonstrated source.
+  NOTE: Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, int
+[12] peer-reviewed | F: reader sensitisation to tell-words | S: Juzek & Ward (arXiv 2412.11385) |  | ERA: -
+  CLAIM: Readers become wary of signature words like delve and may judge a text on those words rather than its content.
+  TW: wary of the word "delve"
+  LIMB: "readers may judge a text on those words rather than its content" — the paper says this of rushed RLHF evaluators, not of readers generally.
+  NOTE: Verbatim in the Introduction ('participants became wary of the word "delve" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word "delve"'. Caveat on the second half: the
+[22] peer-reviewed | F: novelty, surprise, diversity | S: Ismayilzada, Stevenson & van der Plas (ICCC 2025; arXiv 2411.02316) |  | ERA: -
+  CLAIM: Across 60 LLMs vs 60 humans, human five-sentence stories are more novel, more surprising and more lexically and semantically diverse (p<0.05 to p<0.0001).
+  TW: tend to fall short in terms of novelty, surprise and diversity
+  LIMB: the p<0.05-to-p<0.0001 range and the lexical-vs-semantic split of diversity appear nowhere on the cited abstract page.
+  NOTE: Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.
+[23] peer-reviewed | F: verbosity mistaken for quality | S: Ismayilzada et al. (ICCC 2025) |  | ERA: -
+  CLAIM: LLM stories are more linguistically complex and verbose (more unique words, longer dependency paths, more nouns and adjectives) but less creative than human stories.
+  TW: LLMs generate stylistically complex stories, but tend to fall short
+  LIMB: the verbosity evidence (more unique words, longer dependency paths, more nouns and adjectives) is absent from the page — zero hits on every search term.
+  NOTE: The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in t
+[33] peer-reviewed | F: nominalization and noun density | S: Reinhart et al., PNAS 2025 |  | ERA: -
+  CLAIM: Instruction-tuned LLMs use nominalizations 1.5–2x, 'that' subject clauses 2.6x and phrasal coordination 1.9x human rates, producing a noun-heavy academic style regardless of genre.
+  TW: "informationally dense, noun-heavy style"
+  LIMB: the 2.6x "that"-clause and 1.9x phrasal-coordination rates are GPT-4o-specific, not all instruction-tuned models, and "academic" is not the paper's word.
+  NOTE: Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), n
+[37] peer-reviewed | F: syntactic templates and tell-words | S: Chakrabarty, Laban & Wu (CHI 2025) |  | ERA: -
+  CLAIM: LLM prose repeats templates such as 'sense of', 'weight of', 'mix of', and the word 'unspoken' appears in about 15% of LLM outputs but rarely in human samples.
+  TW: "a word like unspoken occurs in about 15% of LLM-generated responses"
+  LIMB: "templates" — the paper files "sense of / weight of / mix of" under recurrent awkward words and phrases, reserving "syntactic templates" for its POS n-gram analysis.
+  NOTE: No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, 
+[40] peer-reviewed | F: abrupt resolution after a peak | S: Xu et al., Echoes in AI (PNAS 2025) |  | ERA: -
+  CLAIM: LLM stories show 7–9x higher 'drop ratios' than human stories, meaning a suspenseful element is resolved immediately after it peaks instead of being developed.
+  TW: "LLM-generated stories lead to 7–9 higher drop ratio than human-written ones"
+  LIMB: "resolved immediately after it peaks" — the paper's drop measures an element dropped or hastily closed off, sometimes left unresolved, not strictly resolved.
+  NOTE: No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio 
+[42] peer-reviewed | F: early climax and low suspense | S: Tian et al. (EMNLP 2024) |  | ERA: -
+  CLAIM: Major Setback and Climax arrive about 10–15% earlier in GPT-4 narratives, and human stories sustain higher suspense with the gap widening from midpoint to end.
+  TW: "a substantial advancement (i.e., early occurrence) of TP4 and TP5"
+  LIMB: "about 10–15% earlier" — the strings 10% and 15% appear nowhere in the paper; the advancement of TP4/TP5 is reported only qualitatively and in a violin plot.
+  NOTE: The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses fr
+[47] peer-reviewed | F: conflict-free social worlds | S: Nonaka & Perry (arXiv 2510.18932, Sep 2025) |  | ERA: -
+  CLAIM: LLM story character networks are denser (0.338–0.470 vs 0.182), more positive (mean edge weight 0.236–0.659 vs −0.061) and more clustered than human science-fiction, with far less variability.
+  TW: less conflict-driven social dynamics
+  LIMB: the LLM edge-weight floor is 0.235 (GPT-4o Mini), not 0.236, and "far less variability" is not borne out per-metric — human density SD (0.056) is lower than every model's.
+  NOTE: arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negat
+[52] peer-reviewed | F: atmosphere over action | S: Rohrbacher et al., How LLMs Build Fictional Worlds (arXiv 2609.02482, Sep 2026) |  | ERA: -
+  CLAIM: LLMs produce mood-laden 'perceived space' at about twice the human rate (GPT-4.1 0.47 vs human 0.19) and under-produce action space, substituting atmosphere for embodied movement.
+  TW: roughly twice the human baseline
+  LIMB: the action-space deficit is not universal — GPT 4.1 stays close to or above the human baseline; only Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it.
+  NOTE: arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this 
+[59] peer-reviewed | F: expert-judged creativity vs a novelist | S: Marco, Gonzalo, Mateo-Girona & del Castillo, Pron vs Prompt (EMNLP 2024; arXiv 2407.01119) |  | ERA: -
+  CLAIM: Six literary experts scored Patricio Pron's synopses 1.94 on creativity vs GPT-4's 0.97 (English) and 0.88 (Spanish), and style originality 1.70 vs 0.63/0.36.
+  TW: GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3
+  LIMB: the GPT-4 creativity figures 0.97 (English) and 0.88 (Spanish) do not appear anywhere in the page text; they sit inside a non-machine-readable figure.
+  NOTE: arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruit
+[62] peer-reviewed | F: coherence without surprise | S: Marco, Rello & Gonzalo (COLING 2025; arXiv 2409.11547) |  | ERA: -
+  CLAIM: GPT-4o synopses contained clichés only 26.7% of the time but surprising associations in just 1.6%, versus 15% for a fine-tuned BART.
+  TW: more predictable and formulaic narratives
+  LIMB: the framing word 'only' before 26.7% — the verifier records that this is the least-cliche result of the three models, 'not a low absolute'
+  NOTE: Quote appears word for word ('they tend to generate more predictable and formulaic narratives'). Table 3 confirms all three figures: GPT-4o 'With at least one cliché phrase' 26,7% (16); Surprising Ass
+[65] peer-reviewed | F: counter-evidence: craft mechanics | S: Gómez-Rodríguez & Williams, A Confederacy of Models (Findings EMNLP 2023) |  | ERA: -
+  CLAIM: On an epic-comedy task GPT-4 outscored five human writers overall (80.2 vs 70.1) and on epic-genre habitation (8.1 vs 4.9); humans led only on originality (8.0 vs 7.6) with humor near-tied (6.4 vs 6.0).
+  TW: Humans retain an edge in creativity
+  LIMB: "humans led only on originality" is not strictly true — humans also edged GPT-4 on humor, 6.4 vs 6.0.
+  NOTE: Quote is word for word in the abstract on the ACL Anthology landing page. That page carries the abstract only — none of the numbers are on it — so I additionally pulled the paper PDF (aclanthology.org
+[68] peer-reviewed | F: sentence-length burstiness (news) | S: Muñoz-Ortiz, Gómez-Rodríguez & Vilares, Artificial Intelligence Review 2024 |  | ERA: -
+  CLAIM: LLM sentences cluster in a 10–30 token band with less length variation than human sentences, and lexical richness is lower (STTR 0.424 vs 0.491).
+  TW: less variation when compared to human-generated sentences
+  LIMB: STTR 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the model range is 0.424–0.466.
+  NOTE: Quote is word for word. Same sentence continues: 'the models exhibit a higher frequency of sentence generation within the 10 to 30 token range compared to humans'. Caveat on the STTR pair: Table 2 giv
+[69] peer-reviewed | F: positivity and emotion narrowing (news) | S: Muñoz-Ortiz et al. 2024 |  | ERA: -
+  CLAIM: LLM text carries more joy and positive emotion while humans show more fear and disgust; LLMs also use more pronouns and magnify male-pronoun bias.
+  TW: Humans exhibit stronger fear and disgust, less joy
+  LIMB: the blanket "magnify male-pronoun bias" elides Falcon 7B, the one model that reduces the bias (by 7.5%).
+  NOTE: No quotation supplied. Conclusion states: 'Humans tend to exhibit stronger negative emotions (such as fear and disgust) and less joy compared to text generated by LLMs'; 'LLM outputs use more numbers,
+[70] peer-reviewed | F: sentence-length distribution (Portuguese news) | S: Rodrigues, Sturm & Pinheiro, iScience (Feb 2026) |  | ERA: -
+  CLAIM: Human sentence lengths show a broader, flatter distribution while AI outputs cluster around the mean; AI cuts informal expressions 54–72%, raises positive emotion 114–133% and certainty 111–152%.
+  TW: a broader and flatter distribution
+  LIMB: the 54–72% / 114–133% / 111–152% ranges hold only in the factual-news columns; the fake-news columns are materially lower (posemo +70 to +79%, certain +21 to +39%).
+  NOTE: Quote word for word: human texts 'exhibit greater variability in length, characterized by a broader and flatter distribution. In contrast, AI-generated texts ... are more uniform, clustering closely a
+[78] peer-reviewed | F: game dialogue: grounding failures | S: Akoury, Yang & Iyyer (Findings EMNLP 2023) |  | ERA: -
+  CLAIM: 32% of GPT-4 game lines were judged illogical once the next utterance appeared, and generations violated the game's faction logic (e.g. an 'ultra-liberal' character).
+  TW: illogical in hindsight
+  LIMB: "32% of GPT-4 game lines" drops the paper's "rated by at least one player" qualifier — a mild overstatement.
+  NOTE: Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game li
+[82] peer-reviewed | F: screenplay: thematic focus and character | S: Lei, Zong, Li, Zhou & Liu, Beyond Direct Generation (arXiv 2510.23163, Oct 2025) |  | ERA: -
+  CLAIM: In blind evaluation by 20+ professional TV screenwriters, direct LLM screenwriting showed lack of thematic focus, out-of-character dialogue and thin character development, mimicking screenplay style without conciseness or visual language.
+  TW: preliminary end-to-end experiments revealed these shortcomings, say the authors
+  LIMB: the defect list is misattributed — thematic focus, out-of-character dialogue and thin character development come from the authors' own preliminary experiments, not from the blind screenwriter evaluation.
+  NOTE: MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal res
+[83] peer-reviewed | F: game narrative: tone and endings | S: Valdivia & Burelli, Evaluating Quality of Gaming Narratives Co-created with AI (arXiv 2509 |  | ERA: -
+  CLAIM: Industry experts building a game-narrative quality framework record LLM outputs as unconvincing, repetitive or tonally misaligned, with overly positive or uninspired endings and genre-adherence failures.
+  TW: some studies identifying trends toward overly positive or uninspired endings
+  LIMB: misattributed — "unconvincing, repetitive, tonally misaligned" and "overly positive or uninspired endings" are the authors citing prior literature; only the genre item is an expert-panel finding.
+  NOTE: MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not somethi
+[85] novelists, | F: subtext | S: Mary Kole, developmental editor, on janefriedman.com (2026-08-13) |  | ERA: -
+  CLAIM: AI-assisted manuscripts read as polished but soulless, with no psychological reasoning or subtext beneath the surface text for an editor to draw out.
+  TW: The craft was polished ... but the humanity was difficult to find
+  LIMB: "soulless" is Josh Bernoff quoted inside the post and "no subtext, no psychological reasoning" is a reader's comment, not the cited editor's own observations.
+  NOTE: No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the human
+[87] novelists, | F: subtext | S: Neil Clarke as quoted by Matthew Vollmer, fiction writer and professor (2026-04-24) |  | ERA: -
+  CLAIM: Clarkesworld's editor found AI submissions flat and boring with no subtext or layers (secondhand: quoted by Vollmer; Clarke's own post was not readable).
+  TW: They are boring. They are flat
+  LIMB: the 'no subtext or layers' limb — the verifier does not locate it on this page, recording only that it 'appears in the other pass at the same quote'
+  NOTE: Verbatim: 'AI stories are bad in ways that no human has been bad before. They are boring. They are flat.' The 'no subtext or layers' element appears in the other pass at the same quote. Secondhand fra
+[88] novelists, | F: subtext (dialogue) | S: Matthew Vollmer (2026-04-24) |  | ERA: -
+  CLAIM: AI dialogue gives no character verbal tics, dialect, or a pattern of evasion; everyone says what they mean, and mysteries get resolved by as-you-know-Bob speech rather than action.
+  TW: No one has verbal tics, dialect, or pattern of evasion
+  LIMB: "everyone says what they mean" is the claimant's gloss and is not stated on the page.
+  NOTE: No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's defaul
+[89] novelists, | F: subtext (dialogue) | S: Russell et al., StoryScope, arXiv 2604.03136 (2026-04-03) |  | ERA: -
+  CLAIM: AI stories carry philosophical, expository dialogue 59% of the time versus 34% in human stories.
+  TW: AI dialogue serves philosophical debate more often (59% vs. 34%)
+  LIMB: "expository" is the claim's gloss; the paper's feature is "philosophical debate" as a dialogue function.
+  NOTE: No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more o
+[93] novelists, | F: specificity | S: Carrie Jones, developmental editor (2026-03-21) |  | ERA: -
+  CLAIM: AI prose stays in shallow point of view, avoids concrete sensory detail, and delivers emotions disconnected from the trigger that should have produced them.
+  TW: it will fail to have the emotion linked to it
+  LIMB: the concrete-sensory-detail limb, supported only indirectly (via a worked deep-POV rewrite) rather than by a stated rule
+  NOTE: Completeness critic: the sensory-detail limb is supported only indirectly — PARTIAL.
+[94] novelists, | F: specificity (averaging) | S: Nick Bailey, LitReactor (2026-06-18) |  | ERA: -
+  CLAIM: Every choice the prompter does not make, the model fills with the statistical average, and that average is the least interesting choice available.
+  TW: that average is equivalent to the least interesting choices possible
+  LIMB: attribution — the wording is Ted Chiang's, quoted by LitReactor from The New Yorker, not the cited author's own.
+  NOTE: ATTRIBUTION DEFECT. Quote is word for word on the LitReactor page, but the page presents it as Ted Chiang's, quoted from The New Yorker — not Nick Bailey's own wording: 'As Ted Chiang from The New Yor
+[95] novelists, | F: specificity (averaging) | S: Lincoln Michel, novelist, Counter Craft (2024-09-04) |  | ERA: -
+  CLAIM: Fiction is roughly one deliberate choice per word; a prompt makes far fewer choices, and the unmade choices come out generic and without intention.
+  TW: art is something that results from making a lot of choices
+  LIMB: attribution — both the quoted line and the one-choice-per-word arithmetic are Ted Chiang's, quoted inside Michel's essay, not Michel's.
+  NOTE: ATTRIBUTION DEFECT, same shape as index 94. Quote is word for word (source lowercases 'art') but it is Ted Chiang's line quoted inside Lincoln Michel's essay, not Michel's. The one-choice-per-word fig
+[99] novelists, | F: rhythm | S: Josh Bernoff (2026-02-05) |  | ERA: -
+  CLAIM: Generated text has a predictable, even rhythm and no emotional valence, so it lulls rather than moves the reader.
+  TW: lacks emotional valence and could lull the reader to sleep
+  LIMB: "even rhythm" — Bernoff writes "a boring, even tone", not even rhythm.
+  NOTE: Quote word for word: 'This AI "accent" creates text that lacks emotional valence and could lull the reader to sleep.' One wording drift in the claim: Bernoff writes 'A boring, even tone' and 'AI text 
+[100] novelists, | F: rhythm | S: Makin, Record Crash (2025-11-27) |  | ERA: -
+  CLAIM: AI fiction reuses identical sentence shapes over and over, which even a beginning human writer would not do.
+  TW: A novice author wouldn't repeatedly go for these sentence patterns
+  LIMB: the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis
+  NOTE: Completeness critic: the trueWordings come from Makin's PARODY passage written in the AI voice to demonstrate the tells, not from Makin's own analysis — PARTIAL on the attribution limb.
+[101] novelists, | F: rhythm | S: Makin, Record Crash (2025-11-27) |  | ERA: -
+  CLAIM: AI prose alternates mechanically between long comparisons and short stock phrases, and once it reaches a cliché it keeps drawing from the same well where a human would rest it.
+  TW: Alternating loquacious ponderous similes and tiny sentences made out of cliches
+  LIMB: the attribution limb — the wording is from Makin's parody passage written in the AI voice, not his own analysis
+  NOTE: Completeness critic: the trueWordings come from Makin's PARODY passage written in the AI voice to demonstrate the tells, not from Makin's own analysis — PARTIAL on the attribution limb.
+[102] novelists, | F: rhythm | S: Carrie Jones, developmental editor (2026-03-21) |  | ERA: -
+  CLAIM: AI plants one-sentence fragment paragraphs before scene hooks and an em-dash per paragraph, and the pattern has become recognizable to editors.
+  TW: the rhythm is becoming recognizable as an AI pattern
+  LIMB: the "becoming recognizable as an AI pattern" quote closes the COMMA + LIKE/AS IF section and does not attach to the fragment-paragraph or em-dash tells.
+  NOTE: QUOTE SPLICE. The quotation is word for word, but it belongs to a DIFFERENT tell: it closes the 'COMMA + LIKE or + AS IF' section and describes that construction's rhythm, not fragments or em-dashes. 
+[104] novelists, | F: rhythm | S: TextSight blog, vendor (2026-06-16) |  | ERA: -
+  CLAIM: Vendor measurement: about 85% of GPT-4o sentences fall in the 15-28 word range and Gemini paragraphs are nearly identical in length, versus human prose ranging 4 to 55+ words with no central cluster (unreplicated vendor figures).
+  TW: AI rhythm is the mechanical, metronomic quality of text
+  LIMB: "Gemini paragraphs are nearly identical in length" — the page reports a sentence COUNT (4–5 per paragraph), not paragraph length.
+  NOTE: Quote verbatim but truncated ('...of text generated by language models'). Figures confirmed on the page: 'GPT-4o generates approximately 85% of its sentences in the 15-28 word range' and 'Human prose,
+[105] novelists, | F: rhythm (verse) | S: The Literary Quant, poet (2026-08-14) |  | ERA: -
+  CLAIM: LLM poetry has a choppy cadence built from constant objective correlatives and persistent enjambment, which makes it recognizable.
+  TW: The constant objective correlatives and choppy cadence
+  LIMB: the causal framing (cadence "built from" objective correlatives and enjambment) is the summarizer's synthesis; the page lists them as co-occurring tells.
+  NOTE: Quote is word-for-word (page drops leading 'The'). Enjambment is separately supported on the page: 'The terse, constantly enjambed lines lacked adjectives.' The claim's causal framing (cadence 'built 
+[110] novelists, | F: tidy endings (structural root) | S: Katherine Elkins, The AI Fiction Paradox, arXiv 2603.13545 (2026-03-13) |  | ERA: -
+  CLAIM: Fiction needs events that surprise then feel inevitable, and earlier details that get re-valued by later ones; autoregressive generation coordinates neither well over length.
+  TW: fiction repeatedly requires the significance of earlier details to be reinterpreted
+  LIMB: "coordinates neither well" overstates — the abstract pins autoregression to the surprise/inevitability challenge only.
+  NOTE: Verbatim in the abstract. Surprise-then-inevitable is also supported: 'events must feel both surprising in the moment and retrospectively inevitable', with 'Standard autoregressive generation... creat
+[111] novelists, | F: tidy endings (verse) | S: The Literary Quant (2026-08-14) |  | ERA: -
+  CLAIM: LLM poems force closure with contrived mic-drop final lines.
+  TW: it loves contrived mic-drops like the last sentence
+  LIMB: "force closure" and "final lines" are the summarizer's gloss on what the source offers as a parenthetical self-referential joke.
+  NOTE: Quote verbatim within that sentence. 'Force closure' and 'final lines' are the summarizer's gloss - the source is a parenthetical self-referential joke about its own last sentence, listed among LLM-po
+[114] novelists, | F: reflexive antithesis | S: Makin, Record Crash (2025-11-27) |  | ERA: -
+  CLAIM: In AI fiction the 'not X; Y' construction feels obligatory rather than natural, often alongside stacked triplets of descriptors.
+  TW: The aforementioned "not X; Y" is still universal
+  LIMB: "feels obligatory rather than natural" is the summarizer's characterization; the page says only that the construction is "universal".
+  NOTE: No quote supplied. The page catalogues the construction and puts 'Lists of three' as the very next item in the same tell list, so the triplet adjacency holds. But the page says the construction is 'un
+[116] novelists, | F: reflexive antithesis | S: Carly Ayres (2024-12-05) |  | ERA: -
+  CLAIM: The 'isn't just X; it's Y' frame combined with a metaphor and a tricolon is a signature machine sentence that carries no content.
+  TW: it says absolutely nothing at all
+  LIMB: the "says absolutely nothing at all" line is the article's opener about machine prose generally, not about the "isn't just X; it's Y" + metaphor + tricolon template.
+  NOTE: Words appear verbatim but as a clause, not a sentence: 'The kind you skim past, then return only to discover it says absolutely nothing at all.' Referent nuance - that line is the article's opener abo
+[118] novelists, | F: the gloss | S: Dramatica blog (2026-05-29) |  | ERA: -
+  CLAIM: AI spells out meaning that human fiction leaves implied; the tell lives in the story's structure, not its word choice.
+  TW: AI explains. Humans imply.
+  LIMB: attribution — "AI explains. Humans imply." is quoted from a Mohammad Siam reply on X, not the Dramatica post's own formulation.
+  NOTE: Verbatim on the page, but second-hand: the Dramatica post quotes it from a reply by Mohammad Siam, X, May 27, 2026, not as its own formulation. The rest of the claim is the post's own thesis - it move
+[123] novelists, | F: pet words | S: Wikipedia editors, Signs of AI writing |  | ERA: -
+  CLAIM: A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.
+  TW: delve, intricate/intricacies, pivotal, tapestry, testament (realm absent)
+  LIMB: "realm" occurs zero times on the page, and "delve" is listed only for the 2023–mid-2024 era as dropping off sharply in 2025.
+  NOTE: The quotation is verbatim on the page ('An enduring testament to the influence of Italian colonial rule in Somalia'), but the claim's word cluster is not fully supported: a literal search of the raw w
+[129] novelists, | F: metaphor | S: Makin, Record Crash (2025-11-27) |  | ERA: -
+  CLAIM: AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.
+  TW: metaphors spammed in the final sentence to describe a single concept
+  LIMB: the sensory-overload ("eyeball kicks") half rests on the author's citation of Nostalgebraist rather than his own evidence, and he notes newer models have improved.
+  NOTE: No quote was supplied. Stacking is the author's own Micro-tell wording. 'Eyeball Kicks' is named as AI overuse but the author credits Nostalgebraist for the analysis rather than arguing it himself, an
+[131] novelists, | F: emotion rendering | S: Russell et al., StoryScope (2026-04-03) |  | ERA: -
+  CLAIM: AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.
+  TW: AI overwhelmingly conveys emotion through physical sensations and bodily metaphors
+  LIMB: "an inversion of the usual AI-tells-emotions assumption" is the claim author's gloss, not the paper's framing.
+  NOTE: Found in the paper's full text (arxiv.org/html/2604.03136v1), not on the /abs abstract page. Both figure pairs check out: '(81% vs. 38% human)' and 'Humans use explicit emotion labels 29% of the time 
+[138] novelists, | F: rule of three | S: tropes.fyi AI Writing Pattern Directory |  | ERA: -
+  CLAIM: Tricolon and stacked triplets of descriptors are overused as a default rhetorical shape.
+  TW: Products impress people; platforms empower them.
+  LIMB: "triplets of descriptors" — the source describes stacked tricolons (rule of three), not descriptor triplets.
+  NOTE: Quote is ALTERED, not verbatim - 'people' and 'them' were dropped. Claim substance holds: entry reads 'Overuse of the rule-of-three pattern, often extended to four or five' and 'A single tricolon is e
+[140] novelists, | F: em-dashes | S: Carrie Jones (2026-03-21) | FULL | ERA: -
+  CLAIM: Em-dashes are overused, roughly one per paragraph, and used for thought continuation rather than breaks.
+  TW: AI does this on a sentence level often with those em-dashes, declarative sentences.
+  LIMB: the quote's anchoring — it sits in the deep-POV section and is not the source's support for the em-dash claim
+  NOTE: Completeness critic: the quote sits in the deep-POV section and is not the source's support for the claim — PARTIAL (a quote splice, the rule applied to [102]).
+[141] novelists, | F: POV / pacing | S: Matthew Vollmer (2026-04-24) |  | ERA: -
+  CLAIM: AI holds an unnaturally locked point of view across scenes and paces every scene at the same rate.
+  TW: Pacing flatness: scenes unfold at a constant rate.
+  LIMB: the POV-lock limb, which Vollmer attributes to Charlie Guo rather than observing himself
+  NOTE: Completeness critic: the POV limb is attributed by Vollmer to Charlie Guo, not observed by him — PARTIAL (the rule applied to [94] and [95]).
+[143] novelists, | F: counter-evidence | S: Chakrabarty, Ginsburg, Dhillon, arXiv 2510.13939 (2025-10-15, rev 2026-03-17) | FULL | ERA: -
+  CLAIM: MFA readers strongly disfavored prompted AI pastiches on stylistic fidelity (OR 0.16), but after fine-tuning on the author's corpus both MFA and general readers preferred the AI, and it was flagged as AI only 3% of the time; the tells above characterize prompted default-register output.
+  TW: Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97% for prompting) by leading detectors.
+  LIMB: the trailing clause "the tells above characterize prompted default-register output" is the analyst's own inference and is not in the paper.
+  NOTE: Verified against raw arXiv abstract HTML, not just the fetch layer. Quote verbatim but truncated mid-parenthetical (drops 'for prompting'). OR=0.16 for MFA fidelity confirmed; 'Both groups preferred f
+[144] novelists, | F: counter-evidence | S: Sears and Weisberg (Villanova) via earth.com report (2026-08-04) |  | ERA: -
+  CLAIM: 2,587 lay readers rated ChatGPT rewrites of three published short stories higher on quality and absorption than the originals and identified authorship at chance; the researchers attribute this to AI being clearer and more predictable, which is the same property editors name as the gloss.
+  TW: Perhaps people generally prefer predictability
+  LIMB: "identified authorship at chance" — experiment 2 was 39.93%, below chance; only experiment 3 (51.97%) was at chance.
+  NOTE: Quote strips the hedge 'Perhaps', which carries the speculative force: 'Perhaps people generally prefer predictability, because difficult or subtle material requires more brain power.' Everything else
+[148] publishing | F: subplot absence / causal tidiness | S: Dramatica blog summarizing StoryScope, 2026-05-29 | FULL | ERA: -
+  CLAIM: AI fiction runs one tight causal chain with far fewer subplots and more protagonist-driven resolutions than human fiction.
+  TW: AI stories show tighter causal chains, more protagonist-driven resolutions, fewer subplots, and cleaner internal acceptance.
+  LIMB: the intensifier "far fewer subplots" is not in the source, which says only "fewer subplots" with no magnitude.
+  NOTE: Quote verbatim (same sentence as 147). Minor drift: the claim's intensifier 'far fewer subplots' is not in the source, which says only 'fewer subplots' with no magnitude. This is a secondary source gl
+[149] publishing | F: temporal flatness | S: Dramatica blog summarizing StoryScope, 2026-05-29 |  | ERA: -
+  CLAIM: Human stories use more time jumps, flashbacks and nonlinear delay of revelation; AI stories stay chronological.
+  TW: They use more temporal discontinuity, more flashbacks and nonlinear movement
+  LIMB: "AI stories stay chronological" — the source is strictly comparative (humans use MORE) and never asserts the absolute.
+  NOTE: Quote verbatim. Delay-of-revelation half also present: 'more willing to let a revelation reshape earlier material rather than simply deliver the next clean cause in a line.' Drift: the source is stric
+[150] publishing | F: dialogue as debate | S: Dramatica blog summarizing StoryScope, 2026-05-29 |  | ERA: -
+  CLAIM: AI dialogue drifts into philosophical debate rather than character-driven exchange.
+  TW: AI dialogue more often turns into philosophical debate.
+  LIMB: "rather than character-driven exchange" is the analyst's gloss; the page does not use that phrase.
+  NOTE: Dramatica blog (May 29, 2026) para on theme over-explanation carries the quoted sentence word for word. Caveat: the claim's contrast 'rather than character-driven exchange' is the analyst's gloss; the
+[153] publishing | F: cliché / fluff | S: Chakrabarty, Laban, Wu (arXiv 2409.14509) |  | ERA: -
+  CLAIM: 17% of professional edits to LLM prose removed clichés and filler.
+  TW: Clichés (17%); 'unnecessary filler' is defined under Unnecessary/Redundant Exposition (18%)
+  LIMB: "clichés and filler" at 17% conflates two categories — 17% is Clichés alone; filler sits under the 18% Unnecessary/Redundant Exposition row.
+  NOTE: SPLIT SOURCING - the two halves come from different categories. 17% is confirmed for Clichés alone (defined as overused phrases losing original impact). The verbatim phrase 'unnecessary filler' is W2'
+[156] publishing | F: lyrical nonsense | S: Lincoln Michel, 'MFA vs. LLM', Counter Craft, 2025-03-17 |  | ERA: -
+  CLAIM: LLM literary prose produces metaphors that sound profound but carry no meaning the reader can cash out.
+  TW: Grief, as I've learned, is a delta
+  LIMB: the attribution limb — the verifier records the quoted line is the OpenAI story's own text quoted by Michel, not Michel's prose (the rule applied to [100] and [101])
+  NOTE: Exact capitalisation appears as a standalone pull-quote in the essay body. Michel's cash-out argument is on the page: 'Why is it good? If "delta" refers to the geographical delta then in what way is g
+[160] publishing | F: choices per word | S: Lincoln Michel, 'Art Without Intention', 2024-09-04 | FULL | ERA: -
+  CLAIM: A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.
+  TW: The hardest and most time-consuming part of writing is shaping, honing, and refining
+  LIMB: the ten-thousand-choices arithmetic is Ted Chiang's, block-quoted by Michel, and the page says a hundred choices, not "almost none".
+  NOTE: Quote verbatim and is Michel's own sentence. PROVENANCE CAVEAT: the choices arithmetic is not Michel's - it is a block quotation from Ted Chiang's New Yorker piece 'Why A.I. Isn't Going to Make Art', 
+[166] publishing | F: AI poetry over-narrates | S: Emily Hockaday interview | FULL | ERA: -
+  CLAIM: AI poetry submissions don't make much sense and are overly narrative.
+  TW: It was didn't make much sense. And then it was overly narrative in places.
+  LIMB: scope — the poem was an AI generator's pastiche of a friend's style posted for a laugh, not a slush submission.
+  NOTE: Quote exact. CAVEAT ON SCOPE: the example is a poem an AI generator wrote in a friend's style, posted for a laugh - NOT a slush submission. Hockaday says separately 'the poems are still bad' and that 
+[167] publishing | F: bad in new ways | S: Neil Clarke, Clarkesworld Editor's Desk, April 2023 | FULL | ERA: -
+  CLAIM: Clarkesworld found generated submissions were the worst ever received and failed in ways human writing does not.
+  TW: among the worst submissions we've ever received and sometimes bad in entirely new ways
+  LIMB: "the worst ever received" overstates Clarke's "among the worst submissions we've ever received".
+  NOTE: Quote exact. Precision note: Clarke wrote 'among the worst submissions we've ever received', not 'the worst ever received' - the claim slightly overstates.
+[172] publishing | F: soulless product | S: Michael Damian Thomas, The Uncanny Valley 62, Uncanny Magazine issue 67 |  | ERA: -
+  CLAIM: Uncanny's editor says AI stories are obvious without detectors and produce a soulless product; they drove submissions to 2,800 in two weeks.
+  TW: I can't stress enough that it creates a terrible, soulless product
+  LIMB: "they drove submissions to 2,800 in two weeks" — AI is called "a big reason", not the sole cause, and the open period ran 15 days.
+  NOTE: Quote exact. 'We don't use AI detectors... AI garbage is fairly obvious' supports the no-detectors limb. Precision note: 2,800 submissions came from the open period August 25 to September 8 (15 days) 
+[174] publishing | F: undue significance | S: Wikipedia:Signs of AI writing |  | ERA: -
+  CLAIM: AI text inflates importance with 'stands as', 'is a testament', 'pivotal moment', 'broader trends'.
+  TW: is a testament/reminder
+  LIMB: the 'pivotal moment' phrase, which the verifier records is not contiguous on the page (only slash-variants appear)
+  NOTE: 'is a testament' appears contiguously inside the Words-to-watch list of the section 'Undue emphasis on significance, legacy, and broader trends'. 'stands as' appears verbatim in the copulatives list; 
+[180] publishing | F: register oscillation | S: Makin, Record Crash, 2025-11-27 |  | ERA: -
+  CLAIM: AI fiction swings between overwrought similes and tiny cliché sentences without a governing restraint.
+  TW: Alternating loquacious ponderous similes and tiny sentences
+  LIMB: "without a governing restraint" is the researcher's gloss, not the page's words.
+  NOTE: Exact substring in Makin's article (page continues 'made out of cliches?'). Makin writes it while deliberately imitating LLM tells; Gemini's own quoted reasoning corroborates the alternation as 'the t
+[188] publishing | F: low burstiness and essay shape | S: Matthew Vollmer, 'A Field Guide to AI Tells' |  | ERA: -
+  CLAIM: Uniform sentence length and a default intro/three-body/recap shape regardless of length; paragraphs close on aphoristic pull-quotes.
+  TW: high school essay vibes
+  LIMB: the attribution limb — 'high school essay vibes' is Vollmer quoting AI for Lifelong Learners, not his own coinage
+  NOTE: Completeness critic: 'high school essay vibes' is Vollmer quoting a third party (AI for Lifelong Learners) — PARTIAL on attribution.
+[189] publishing | F: characters sound alike | S: Matthew Vollmer (attributing to Neil Clarke and critical consensus) |  | ERA: -
+  CLAIM: In AI fiction characters share one voice with no idiolect or dialect, exposition arrives by explanation, and endings resolve rather than trust ambiguity.
+  TW: Dialogue flattening: characters sound alike; no distinct idiolect.
+  LIMB: the attribution to Neil Clarke — the verifier records the three bullets as the guide's own, not Clarke's words
+  NOTE: No quote was supplied, so verbatim is not assessable. All three parts verified in section 'B. In Fiction': 'characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of
+[190] publishing | F: nonsensical descriptor | S: Thousand Roads forum, 'Detecting AI Use in Fiction' (user Goolix) |  | ERA: -
+  CLAIM: Fan-fiction readers flag physically meaningless description as an AI signature.
+  TW: a jaw that was, objectively, a jaw
+  LIMB: attribution is wrong — the quoted phrase is Negrek's (thread starter, post #1), not Goolix's as the row's source states.
+  NOTE: Quote appears word for word twice on the thread page. ATTRIBUTION IS WRONG: it is in post #1 by Negrek (thread starter, Aug 18 2026), not Goolix. Negrek coins the phrase as a label ('the legendary phr
+[191] publishing | F: emotional evasion | S: Thousand Roads forum (user Negrek) |  | ERA: -
+  CLAIM: AI narration gestures at feeling without naming it, declining to examine emotion with specificity.
+  TW: Something he didn't have a good word for
+  LIMB: "declining to examine emotion with specificity" is the researcher's gloss; the source frames the tell as generic vagueness.
+  NOTE: Exact substring in Negrek's editorial note (post #1): 'Claude is often vague. Something he didn't have a good word for, something he couldn't name.' Attribution to Negrek is correct. CAVEAT: the sourc
+[193] publishing | F: 'Not...' fragment stacking | S: Thousand Roads forum (user Goolix) |  | ERA: -
+  CLAIM: Successive fragments opening with 'Not' are a common LLM pattern.
+  TW: starting a sentence with “not”–is common with LLMs
+  LIMB: the three-fragment string is a composite that appears nowhere contiguously, and both passages are Negrek's, not Goolix's.
+  NOTE: The cited three-fragment string is a COMPOSITE and appears nowhere contiguously (confirmed by raw-text scan and by independent WebFetch). The page has 'Not quite a smile.' in one excerpt and, ~10k cha
+[196] publishing | F: characterization whiplash | S: Thousand Roads forum (user Flyg0n) | FULL | ERA: -
+  CLAIM: A character shifts from heated argument to gentleness with no organic transition.
+  TW: Whitney, with startling gentleness for someone who'd been arguing about tea infusion times ninety seconds earlier
+  LIMB: the attribution limb — the quoted line comes from the AI-generated sample fic, not the commenter's own observation
+  NOTE: Completeness critic: fix the attribution per the critic — the quoted line is not the commenter's own observation.
+[197] publishing | F: over-frequent model-specific words | S: Thousand Roads forum citing sam-paech/slop-forensics |  | ERA: -
+  CLAIM: Words like 'fluorescent', 'humming', 'particular' recur at rates traceable to a specific model's slop profile.
+  TW: over-represented lexical patterns in LLM outputs
+  LIMB: fluorescent, humming and particular appear zero times on the cited repo page, and the quote illustrates only what a trigram is — the repo supports the mechanism half alone.
+  NOTE: ADVERSARIAL DOWNGRADE. 'heart pounding chest' IS verbatim on the repo page, but only as a throwaway illustration of what a trigram is: 'Trigrams (three-word combinations not including stop-words, e.g.
+[207] publishing | F: robotic but grammatical | S: Bradly Shankar, MobileSyrup, 2023-05-29 |  | ERA: -
+  CLAIM: Nvidia's ACE demo NPC lines were structurally fine yet robotic, with no personality or charm.
+  TW: they're undeniably robotic, not offering any sort of personality or charm
+  LIMB: the page never uses the brand name "ACE"; it is the Nvidia/Convai demo (Riva, NeMo, Audio2Face).
+  NOTE: Verbatim. The 'structurally fine' half immediately precedes it: "Jin's responses are functionally sound; there's nothing inherently wrong with them in terms of structure or grammar." It is the Nvidia/
+[210] publishing | F: genre and tone misalignment | S: Valdivia & Burelli, arXiv 2509.04239, 2025-09-04 |  | ERA: -
+  CLAIM: Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.
+  TW: trends toward overly positive or uninspired endings
+  LIMB: only the genre item comes from the n=10 Delphi expert panel; the endings and uneven-quality items are the paper citing prior studies, and "unconvincing, repetitive" is the authors' intro framing.
+  NOTE: arXiv 2509.04239 (Valdivia & Burelli). Quote exact in Sec. I: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]'. '
+[215] publishing | F: publisher bans are ethical not qualitative | S: Geeknative roundup |  | ERA: -
+  CLAIM: Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.
+  TW: describe algorithmic generation as the 'exact opposite of inspiration'
+  LIMB: "on ethics and livelihood grounds" is explicit for only two entries — Paizo, Chaosium, WotC, Renegade and Stonemaier are listed with no stated grounds, and Free League's stated policy is against AI art.
+  NOTE: Geeknative roundup by Andrew Girdwood, January 15, 2026. Quote verbatim; all six named publishers are on the page with bans on AI text and/or art (Free League's stated policy is against AI ART specifi
+[216] publishing | F: AI RPG text stagnant and obvious | S: EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25) |  | ERA: -
+  CLAIM: RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.
+  TW: it's been at the same level for three years
+  LIMB: "human creators now fear tripping the same alarm" — the voiced fear is about ART styles, not prose.
+  NOTE: EN World thread 'AI is destroying crowdfunding', post by Agamon dated Aug 25, 2026. Quote verbatim: 'Art, music, and I'm getting good at catching AI writing now, too. And it isn't getting any better, 
+[218] publishing | F: prompt shipped in a published novel | S: Book Riot, 'Can Kindle Unlimited Survive AI?' |  | ERA: -
+  CLAIM: A Kindle Unlimited novel (Darkhollow Academy: Year 2, June 2025) went out with an AI rewrite prompt still in the text; Amazon's AI disclosure is not shown to readers.
+  TW: an AI prompt asking for a rewrite in another author's voice
+  LIMB: the book's June 2025 publication date and its Kindle Unlimited membership, which the verifier records the page never states
+  NOTE: No quote was supplied with the claim, so no verbatim test is possible; the substance checks out. Book Riot (Jun 30, 2025): 'an AI prompt asking for a rewrite in another author's voice was accidentally
+[220] publishing | F: false-positive hazard | S: Outlook Respawn on Shrine's Legacy, 2025-12-15 |  | ERA: -
+  CLAIM: A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.
+  TW: a 'vibe' that the story felt artificial
+  LIMB: "because the story felt artificial" overstates a single causal chain — the ChatGPT accusation was one belligerent review; the felt-artificial vibe came from other reviews.
+  NOTE: Outlook Respawn, Krishna Goswami, 15 Dec 2025. Quote verbatim. Shrine's Legacy by Positive Concept Games; devs state they 'worked exclusively with human talent for everything from writing to coding' a
+[222] the | F: em dash | S: Focus Lab — Nadine Kavanaugh, 2026-02-09 |  | ERA: -
+  CLAIM: The em dash was Emily Dickinson's signature mark, restored by later editors after publishers stripped it; treating it as an AI tell confuses the tool with the intent behind it.
+  TW: Later editors put the dashes back -- because they weren't accidents
+  LIMB: the 'signature mark' limb — the page calls Dickinson 'the patron saint of the em dash' rather than saying it was her signature mark
+  NOTE: Focus Lab, Nadine Kavanaugh, February 9, 2026, 'The Em Dash Is Not an AI Tell'. Quote verbatim. Dickinson history verbatim: 'She littered her poems with bold dashes. Her original publishers hated them
+[225] the | F: em dash | S: arXiv 2603.27006 — E. M. Freeburg, The Last Fingerprint |  | ERA: -
+  CLAIM: Measured human em dash density (mean 3.23, range 0.33–17.12 per 1,000 words) envelops the LLM range (0.0–10.62 across twelve models), and the rate is a provider-specific fine-tuning artifact, with Llama's RLHF suppressing it to zero.
+  TW: a diagnostic signature of how a model was fine-tuned
+  LIMB: "envelops" overstates — the human range 0.33–17.12 does not reach the LLM floor of 0.0.
+  NOTE: Quote exact. Every figure confirmed: 'weighted mean across our sample was 3.23 per 1,000 words (median 3.83; range 0.33-17.12)'; GPT-4.1 unconstrained 10.62; 'twelve models from five providers'; 'Meta
+[227] the | F: em dash | S: Anne R. Allen, 2026-03-28 |  | ERA: -
+  CLAIM: Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.
+  TW: also be attributed to amateurish or unedited writing
+  LIMB: "flat voice" is the claim's paraphrase; the reported tell is "the narrative voice was all over the place".
+  NOTE: Quote exact (Anne R. Allen quoting Mark Williams at TNPS). New York/1990s supported: 'Because New York publishing taught us to. I first heard the term "em dash" ... in the mid-1990s. I'd scored an in-
+[231] the | F: triads / rule of three | S: GPTZero blog — Faizan Mehdi, 2024-03-04 |  | ERA: -
+  CLAIM: A detector vendor concedes that LLM triads are a reflection of effective communication strategies in human training data and that professional writing employs the rule of three for clarity.
+  TW: a reflection of effective communication strategies embedded within their training data
+  LIMB: the attribution limb — the page attributes the quoted concession to 'AI writing tools', so it is an LLM self-description relayed by the vendor, not the vendor's own finding
+  NOTE: Completeness critic: GPTZero's page attributes the quoted concession to 'AI writing tools' — an LLM self-description reported by the vendor, not the vendor's finding — PARTIAL.
+[234] the | F: detection heuristics | S: Wikipedia:Signs of AI writing |  | ERA: -
+  CLAIM: Wikipedia's guide warns that automated detectors have non-trivial error rates and cites a 2025 study finding human discrimination of LLM text no better than chance.
+  TW: Human speech and writing is being influenced by LLMs
+  LIMB: the quote's anchoring — the verifier records it sits on the convergence point rather than on either half of the claim it is attached to
+  NOTE: Quote exact. Both halves of the claim are on the page in near-identical wording: 'While they perform better than random chance, these tools have non-trivial error rates'; and 'a 2025 study has shown t
+[235] the | F: vocabulary (delve) | S: Vanguard (Nigeria), 2024-04 |  | ERA: -
+  CLAIM: Nigerian and other British-colonial-educated English speakers use 'delve' as an ordinary word from school onward, so a single-word tell convicts entire human dialects.
+  TW: no one used basic words like 'delve'
+  LIMB: "from school onward" is the claim's gloss; the article never says school.
+  NOTE: Quote exact, inside a quoted tweet: 'Imagine after being force-fed colonial languages, being forced to speak it better than its owners then being told that no one used basic words like \'delve\' in re
+[236] the | F: vocabulary (delve) — counter-counter | S: arXiv 2412.11385 — Juzek & Ward, Why Does ChatGPT 'Delve' So Much? (COLING 2025) |  | ERA: -
+  CLAIM: Corpus analysis finds the 21 LLM focal words (delve, intricate, underscore, realm...) are probably not overrepresented in training data and not especially prevalent in any human English variety, undercutting the 'it's Nigerian English' defence while confirming the base-rate shift in LLM output is real and likely post-training.
+  TW: probably not overrepresented in the training data
+  LIMB: "likely post-training" overstates the paper's hedge, that testing is only "consistent with RLHF playing a role".
+  NOTE: Quote exact. '21 focal words' exact, and delve/intricate/underscore/realm are all in the Table 2 list. Variety claim exact in substance: 'we do not find evidence that the focal words are especially pr
+[244] the | F: machine detectors (theory) | S: arXiv 2303.11156 — Sadasivan et al., Can AI-Generated Text be Reliably Detected? |  | ERA: -
+  CLAIM: Recursive paraphrasing breaks watermark, neural, zero-shot and retrieval detectors, and the best achievable detector degrades toward random as LLM text distributions approach human ones; spoofing can also make human text read as AI.
+  TW: our recursive paraphrasing method can significantly reduce detection rates
+  LIMB: "degrades toward random as LLM text distributions approach human ones" is not spelled out in the abstract now on the page, which states only an AUROC/Total-Variation theoretical framework.
+  NOTE: Quote appears word for word in the abstract, as do watermarking, neural network-based detectors, zero shot classifiers, retrieval-based detectors, and spoofing 'aimed at misclassifying human-written t
+[249] the | F: expert detection (contrast case) | S: ACL 2025 / arXiv 2501.15654 — Russell, Karpinska, Iyyer |  | ERA: -
+  CLAIM: Five heavy ChatGPT users' majority vote misclassified only 1 of 300 articles even under paraphrase and humanization, but they relied on AI vocabulary plus holistic judgments of formality, originality and clarity — not punctuation counts.
+  TW: misclassifies only 1 of 300 articles
+  LIMB: "not punctuation counts" is the researcher's own contrast; the paper never cites punctuation.
+  NOTE: Quote appears word for word: 'the majority vote among five such "expert" annotators misclassifies only 1 of 300 articles'. Also confirmed: robustness 'even in the presence of evasion tactics like para
+[253] the | F: originality (where the gap actually sits) | S: CHI 2024 / arXiv 2309.14556 — Chakrabarty et al. |  | ERA: -
+  CLAIM: Ten professional writers applying a 14-test Torrance creative-writing rubric found LLM stories pass 3–10x fewer tests than professionals', with the deficit in originality and elaboration rather than fluency or structure; LLM judges did not correlate with the experts.
+  TW: LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals
+  LIMB: the dimensional gloss is only half supported — the paper does not single out Elaboration as a deficit and frames the gap as broad rather than concentrated.
+  NOTE: Quote appears word for word. Abstract confirms 'TTCW consists of 14 binary tests', 'We recruit 10 creative writers', and 'none of the LLMs positively correlate with the expert assessments'. Caveat: th
+[254] record-register | F: plausible hoax with real anchors | S: 404 Media 2024-10 — The Editors Protecting Wikipedia from AI Hoaxes |  | ERA: -
+  CLAIM: A ~2,000-word article on an Ottoman fortress that never existed passed Articles for Creation by anchoring to a real sultan (Mehmed the Conqueror, 1466), plausible structural detail and well-formatted citations to nonexistent works, surviving from 2023-01 to 2023-12.
+  TW: hoax with well-formatted citations referencing completely nonexistent works
+  LIMB: that it passed Articles for Creation, and that it survived 2023-01 to 2023-12
+  NOTE: Raw article fetched in full (404media.co, HTTP 200, not paywalled). Quote verbatim: 'The entire thing was an AI-generated hoax, with well-formatted citations referencing completely nonexistent works.'
+[255] record-register | F: fake sources in low-checkability languages | S: Wikipedia:WikiProject AI Cleanup |  | ERA: -
+  CLAIM: The 'Leninist historiography' article carried entirely invented references in Russian and Hungarian, where fewer reviewers could check them.
+  TW: list of completely fake sources in Russian and Hungarian
+  LIMB: that Russian and Hungarian were chosen/effective because fewer reviewers could check them
+  NOTE: Wikipedia wikitext fetched via ?action=raw. Quote verbatim: 'the article Leninist historiography was entirely written by AI and included a list of completely fake sources in Russian and Hungarian at t
+[256] record-register | F: real source, wrong subject | S: Wikipedia:WikiProject AI Cleanup |  | ERA: -
+  CLAIM: AI paragraphs on the beetle Estola albosignata cited real German and French papers that were about unrelated subjects (a crab).
+  TW: real German and French sources, but completely off-topic; unrelated lifeform
+  LIMB: that the unrelated subject was a crab
+  NOTE: Wikitext fetched raw. Quote verbatim: 'While the sourced articles were real, they were completely off-topic, with the French one discussing a completely unrelated lifeform.' The page names Estola albo
+[260] record-register | F: synthesis present in no source | S: Wikipedia:Large language models |  | ERA: -
+  CLAIM: LLMs draw conclusions that appear in no single reliable source, i.e. original research delivered in encyclopedic voice.
+  TW: LLMs draw conclusions not present in any single reliable source
+  LIMB: that it is delivered in encyclopedic voice
+  NOTE: Wikitext fetched raw. Quote verbatim: 'LLMs will sometimes "draw conclusions" which, even if they seem superficially familiar, are not present in any single reliable source', and the paragraph closes 
+[261] record-register | F: neutral tone, partial substance | S: Wikipedia:Large language models |  | ERA: -
+  CLAIM: Generated text sounds neutral while its substance takes a side, which is hardest to catch in biographies.
+  TW: neutral-seeming in tone, but not necessarily in substance
+  LIMB: the superlative 'hardest to catch' and the unrestricted 'biographies' — the verifier records the page says 'especially salient' and narrows to biographies of living persons
+  NOTE: Wikitext fetched raw; the quote is verbatim in the rendered page (the wikitext splits it across a piped link: 'neutral-seeming in tone, [[Algorithmic bias|but not necessarily in substance]]'). The bio
+[263] record-register | F: obscure prompt triggers invention | S: Wikipedia:Case against LLM-generated articles |  | ERA: -
+  CLAIM: Faced with an obscure topic the model invents details rather than saying less.
+  TW: might invent details when faced with an obscure-topic prompt
+  LIMB: the 'rather than saying less' limb, which the verifier records is not stated on the page and is only inferred from inventing
+  NOTE: Wikitext fetched raw. Near-verbatim, one inflection off: the page reads 'It might even invent details when faced with a prompt on an obscure topic or a nonsensical request' - 'invent', not the claim's
+[264] record-register | F: single subtle falsehood survives review | S: Wikipedia:Case against LLM-generated articles |  | ERA: -
+  CLAIM: One subtly false claim or distorted quote embedded in otherwise correct text survives review and misinforms.
+  TW: One subtly false claim or distorted quote can misinform readers
+  LIMB: that it survives review (the page asserts only that it can misinform and damage trust)
+  NOTE: Wikitext fetched raw. Quote verbatim (sentence-initial capital only): 'One subtly false claim or distorted quote can misinform readers and damage trust.' The 'embedded in otherwise correct text' limb 
+[265] record-register | F: advertorial or partisan register | S: Wikipedia:Case against LLM-generated articles |  | ERA: -
+  CLAIM: Generated articles read like advertorials or partisan spin with promotional language mixed into facts.
+  TW: drafts often read like advertorials or partisan spins
+  LIMB: the promotional-language-mixed-into-facts limb, which the page states only as a feared hypothetical rather than an observation
+  NOTE: Wikitext fetched raw. Quote verbatim: 'editors noted how these drafts often read like advertorials or partisan spins - text that superficially met Wikipedia's guidelines in form, but not in spirit.' T
+[266] record-register | F: fabricated citations in an editor test | S: Wikipedia:Case against LLM-generated articles |  | ERA: -
+  CLAIM: In one editor's test five of seven generated citations were fabricated and others led to unrelated articles.
+  TW: seven references in one AI draft, five of those fabricated
+  LIMB: that the others led to unrelated articles - the page says the citations 'led nowhere'
+  NOTE: Wikitext fetched raw. Quote verbatim: 'In one analysis, researchers found an AI-written draft of a historical article included seven references - and five of those were fabricated.' Two divergences: (
+[269] record-register | F: rarity cliff | S: Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long F |  | ERA: -
+  CLAIM: ChatGPT's precision fell from about 80% on frequently-mentioned people to about 16% on rare ones; the pattern held for every model.
+  TW: Error rates are higher for rarer entities, consistently across all models
+  LIMB: the ~80% to ~16% ChatGPT figures — no per-frequency-bin precision numbers appear anywhere in the page text; they exist only inside Figure 2 (top), an image whose alt text is 'Refer to caption'
+  NOTE: Quote is verbatim as the Sec. 3.4 heading 'Error rates are higher for rarer entities.' The every-model limb is supported: 'There is a notable decrease in FActScore as the rarity of entities increases,
+[271] record-register | F: citations do not predict truth | S: Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long F |  | ERA: -
+  CLAIM: 36% of both supported and unsupported PerplexityAI sentences carried citations, so a citation mark is no evidence of accuracy.
+  TW: 36.0% and 37.6% of supported and unsupported sentences have citations
+  LIMB: '36% of both' — the two rates are not equal: supported sentences are 36.0% but unsupported sentences are 37.6%, not 36%
+  NOTE: No quote was supplied with this claim, so nothing could be checked word for word. The inference limb is the paper's own explicit conclusion: 'we find that, although PerplexityAI provides citations to 
+[275] record-register | F: improper inferential linking | S: Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (ST |  | ERA: -
+  CLAIM: The commonest citation error is a source that supports a neighbouring fact but not the inference drawn from it; then inaccurate paraphrase, then irrelevant sources.
+  TW: the most common errors stem from... improper inferential links
+  LIMB: the second- and third-place ranking ('then inaccurate paraphrase, then irrelevant sources') — the paper states only which error is most common; the actual distribution is in Figure 8, an image, and the text never ranks inaccurate paraphrasing above citing irrelevant sources
+  NOTE: The supplied quote 'surpassing basic fact-checking' IS on the page but belongs to a different passage — the verifiability/red-herring discussion ('addressing such verifiability issues is more nuanced,
+[278] record-register | F: verification is the only reliable detector | S: Wikipedia:WikiProject AI Cleanup/Guide and resources | FULL | ERA: -
+  CLAIM: Stylistic signs only prioritise which sentences to check; the reliable test is whether the cited sources support the text.
+  TW: often the most reliable way... is to check whether the sources support the text
+  LIMB: 'stylistic signs ONLY prioritise which sentences to check' — the page presents sign-reading as the main identification method, one that 'can produce high degrees of certainty', not merely a triage step; and it calls source-checking 'often the most reliable way', not the only reliable test
+  NOTE: Quote is verbatim: 'often the most reliable way to determine whether content is AI-generated is to check whether the sources support the text (WP:V, i.e. whether content has been hallucinated). It can
+[280] record-register | F: misquoted primary sources | S: Index on Censorship 2025-11 — History is being written by the AI victors |  | ERA: -
+  CLAIM: Instructed to cite primary sources, Copilot fabricated a paper the historian had never seen and misquoted real sources.
+  TW: instructing Copilot to cite primary sources... the bot confidently misquoted primary sources
+  LIMB: that the fabricated paper was produced under the cite-primary-sources instruction — on the page the invented paper came from the EARLIER prompt (an essay based on Kanisetti's work); only the misquoting followed the primary-sources instruction
+  NOTE: The page separates two rounds: 'He asked Copilot... to write an essay based on his work about a medieval regiment in India. In its references, the tool produced a paper by an academic Kanisetti knew o
+[293] record-register | F: negative parallelism | S: Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide) |  | ERA: -
+  CLAIM: 'Not only X but also Y' and 'not X but Y' contrasts recur far above human frequency.
+  TW: common among human writers, but stereotypically an AI sign
+  LIMB: 'recur far above human frequency' - the page asserts no frequency comparison against human writers, and explicitly says the construction is common among human writers
+  NOTE: Quote 'not only a work of self-representation, but a visual document' occurs once, in the April 2025 Self-portrait (Yayoi Kusama) example under 'Negative parallelisms' (WP:AIPARALLEL); both named shap
+[296] record-register | F: rule of three | S: Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide) |  | ERA: -
+  CLAIM: Items are grouped in threes for rhythm rather than because the record has three.
+  TW: LLMs overuse the rule of three
+  LIMB: the 'rather than because the record has three' contrast, which the verifier records the page never phrases
+  NOTE: No quotation supplied; graded on substance. The 'Rule of three' section (WP:RO3) states: 'LLMs overuse the rule of three. This can take different forms, from "adjective, adjective, adjective" to "shor
+[297] record-register | F: em-dash overuse | S: Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide) |  | ERA: -
+  CLAIM: Em dashes separate clauses at an abnormally high rate.
+  TW: uses them more often than nonprofessional human-written text of the same genre
+  LIMB: the unqualified 'abnormally high rate' — the page's baseline is nonprofessional human writing, and its own maintenance box says the sign seems less common in current LLM output
+  NOTE: No quotation supplied; graded on substance. Section 'Overuse of em dashes' (WP:AIDASH): 'LLM output uses them more often than nonprofessional human-written text of the same genre, and uses them in pla
+[298] record-register | F: section-summary recap | S: Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide) |  | ERA: -
+  CLAIM: A redundant sentence summarising the section it closes (a 2022-2024 marker now mostly gone).
+  TW: older LLMs often ended sections by summarizing and restating
+  LIMB: the '2022-2024' date window - the page attaches no date range to section summaries (the dated heading 'Didactic disclaimers (November 2022-2024)' is a different sign)
+  NOTE: No quotation supplied; graded on substance against the raw page. The 'Section summaries' subsection (WP:CONCLUSION/WP:INCONCLUSION) supports the descriptive limb: 'When generating longer outputs (such
+[303] record-register | F: agentless action | S: Wikipedia talk:Signs of AI writing |  | ERA: -
+  CLAIM: Inanimate subjects are promoted to agents (rooms tighten, maps publish) so no human actor is ever named.
+  TW: the object is promoted to subject and becomes the 'doer'
+  LIMB: the absolute 'no human actor is ever named' — the verifier records the page says LLM output 'defaults to actor-less constructions at high density'
+  NOTE: Talk section 'Suggested addition: Inanimate subjects performing human actions (dropped actors)'. 'Rooms tighten' verbatim in the example list ('"Rooms tighten and rates move" (hotels sell out and rais
+[304] record-register | F: periphrastic connection phrases | S: Wikipedia talk:Signs of AI writing |  | ERA: -
+  CLAIM: 'In connection with', 'associated with', 'involvement in' appear disproportionately; 720 Draft-space hits, many obviously AI.
+  TW: insource search of "in connection with" in Draft space returns 720 results
+  LIMB: '720 Draft-space hits' is the count for "in connection with" alone, not the three phrases together; 'disproportionately' is asserted by no measurement on the page
+  NOTE: Talk section 'Connections'. Quote 'in connection with' verbatim. Supported: all three phrases are named ('similar use of "in connection with/to" / "associated with/to" / "involvement in" language in o
+[306] record-register | F: indicator spreadsheet is variants of a core | S: Wikipedia talk:Signs of AI writing |  | ERA: -
+  CLAIM: Editors track 106 indicators, most of which are variations on a small set of core patterns.
+  TW: the spreadsheet I keep has 106 signs (sorted by strength)
+  LIMB: 'most of which' overstates the page's 'a lot of them', and it is one editor's personal spreadsheet, not 'editors' collectively tracking
+  NOTE: Talk section 'AI edit summaries section', Gnomingstuff: 'the spreadsheet I keep has 106 signs (sorted by strength) but a lot of them are variations on the same thing.' The 106 figure is exact and the 
+[309] record-register | F: copula loss at corpus scale | S: Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627) |  | ERA: -
+  CLAIM: 'is' and 'are' fell 10-17% in 2023 arXiv abstracts while 'significant' rose 99% (CS) to 308% (math).
+  TW: real 2023 abstracts: is/are 'dropped by more than 10%'; rest is simulation
+  LIMB: the 10-17% range and the 99%/308% rises are GPT-3.5 SIMULATION results (Table 1, abstracts before vs after ChatGPT processing), not measured changes in 2023 arXiv abstracts
+  NOTE: Geng & Trotta v2 fetched raw. Real-data finding: 'The counts in 10,000 abstracts of these two words were quite stable before 2023. However, the frequency of these two terms has dropped by more than 10
+[320] record-register | F: unasked-for detail | S: Automated Archival Descriptions with Federated Intelligence of LLMs (arXiv 2504.05711, 202 |  | ERA: -
+  CLAIM: Extent was rendered '3 pages, digital document (PDF)' against archivist ground truth '3 pages' — more than the record asked for.
+  TW: federated output more complete than ground truth, scored lower
+  LIMB: 'more than the record asked for' - the paper says ISAD(G)'s Extent element asks for size AND format, so the extra was beyond the archivist ground truth, not beyond the standard
+  NOTE: Sec 4: 'according to the ISAD(G) specification, the element Id:Extent describes the physical or digital size and format of the unit. For the element, our federated approach creates its content as "3 p
+[324] record-register | F: fabricated from real parts | S: Walters & Wilder 2023 — Fabrication and errors in the bibliographic citations generated by |  | ERA: -
+  CLAIM: Fabricated citations use real journals, authentic-sounding authors and plausible titles because the model treats a citation as ordinary text.
+  TW: fabricated citations include names of real journals and publishers
+  LIMB: 'authentic-sounding authors and plausible titles' - the paper never assesses author or title plausibility in fabricated citations
+  NOTE: Same page. Supported: 'most of the fabricated article, book, and website citations include the names of real journals, publishers, and organizations' (Table 3: journal fabricated in only 2% of fabrica
+[330] record-register | F: invented attraction among real ones | S: Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-exi |  | ERA: -
+  CLAIM: 'Weldborough Hot Springs' was listed beside real Tasmanian springs with AI images; coach parties detoured to a village with no springs for months.
+  TW: a group of 24 drivers ... had actually taken a detour
+  LIMB: 'coach parties' - the article reports one group of 24 DRIVERS on a trip from the mainland, not coach/bus parties
+  NOTE: euronews.com raw article fetched (browser UA). Quote verbatim: 'I said, ‘If you find the hot springs, come back and let me know and I’ll shout you beers all night’. They didn’t come back.' Supported: 
+[337] record-register | F: detector unreliability | S: Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al. |  | ERA: -
+  CLAIM: The Signpost review found the detectors black-box, disagreeing across languages, uncorrected for concept drift, with human editing reportedly raising AI scores.
+  TW: GPTZero is black-box; the second tool, Binoculars, is 'more transparent'
+  LIMB: 'the detectors black-box' (plural) - only GPTZero is; the Signpost explicitly calls the second detector, the open-source Binoculars, 'more transparent'
+  NOTE: en.wikipedia.org raw wikitext (?action=raw) fetched. Quote 'concept drift' verbatim: 'The authors are clearly aware of this [[concept drift]] problem, but only make a very perfunctory attempt to addre
+[344] games-practice | F: combat description without state | S: CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 202 |  | ERA: -
+  CLAIM: The model struggled to describe combat because it had no combat-state or map-placement information; DMs split between using output verbatim, mining vivid phrases, and rewriting entirely.
+  TW: DMs found that the model struggled sometimes to describe combat
+  LIMB: the causal 'because it had no combat-state or map-placement information' — the verifier records this is 'the paper's implication rather than its assertion'
+  NOTE: ar5iv 2308.07540 fetched raw (HTTP 200). One sentence carries every limb: 'DMs found that the model struggled sometimes to describe combat, and suggested that including more information about the comb
+[345] games-practice | F: lore-less creatures get thin text | S: CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 202 |  | ERA: -
+  CLAIM: When a monster had only numeric stats and no published prose (real animals, golems), the summariser had nothing to draw on and produced unhelpful text until prompted to use 'thematic commonsense'.
+  TW: no helpful summary when a monster had only numeric game stats
+  LIMB: the 'had nothing to draw on' limb, which overstates the paper's 'minimal external knowledge'
+  NOTE: No quote was supplied, so substance-graded. Page: 'Another common case where Calypso did not present a helpful summary was when a monster did not have a published prose description, only numeric game 
+[354] games-practice | F: long-arc incoherence | S: Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kre |  | ERA: -
+  CLAIM: LLMs are effective at open-domain story generation but struggle with long-term coherence, often failing to produce a satisfying overall arc or reader experience.
+  TW: effective at open-domain story generation ... struggle with long-term story coherence
+  LIMB: the attribution limb — the sentence is the paper's related-work framing attributed to Kreminski and Martens (2022), not a result of the cited paper
+  NOTE: arxiv 2406.00554 fetched raw. Page: 'LLMs, on the other hand, are effective at open-domain story generation. However, they tend to struggle with long-term story coherence, often failing to produce a s
+[355] games-practice | F: semantic and syntactic homogeneity | S: Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kre | FULL | ERA: -
+  CLAIM: Compared with human-written stories, LLM stories show unoriginality in both what happens and how sentences are built.
+  TW: unoriginality or homogeneity in both the semantic and syntactic aspects of generated stories
+  LIMB: the attribution limb — the page attributes the finding to Anderson et al. (2024) and Begus (2023), not to the cited paper
+  NOTE: Same sentence block: 'comparing LLM-generated to human-written stories reveals many aesthetic weaknesses ... in particular a tendency toward unoriginality or homogeneity in both the semantic and synta
+[356] games-practice | F: opening-paragraph convergence | S: Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kre |  | ERA: -
+  CLAIM: Across ten-story sets per premise, earlier paragraphs were more homogeneous than later ones whether or not ASP guidance was used — openings converge hardest.
+  TW: earlier paragraphs tended to be more homogenous than later paragraphs
+  LIMB: 'openings converge hardest' - the paper immediately qualifies the trend as 'relatively weak' and says it 'did not hold across all premises', a hedge the claim drops
+  NOTE: No quote was supplied. The measurable limbs check out: 'For each premise, we generated a set of ten seven-paragraph stories using each approach' (ten-story sets per premise, six premises) and 'We also
+[358] games-practice | F: homogeneously positive arcs | S: Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNL |  | ERA: -
+  CLAIM: Across 819 GPT-4 vs 819 human movie synopses, LLM stories are homogeneously positive and lack tension: GPT-4 produced 'Man in Hole' arcs over 50% of the time versus 28% for humans, and 'Riches to Rags' 1.3% versus 14.6%.
+  TW: Man in Hole: 30.7% of human stories versus 51.3% of GPT-4 stories
+  LIMB: '28% for humans' for Man in Hole - Figure 4 gives the human share as 30.7% (GPT-4 51.3%); no 28% figure for that arc appears anywhere in the paper
+  NOTE: HTML fetched raw, then the arXiv PDF fetched and text-extracted because the arc shares live only in the Figure 4 pie charts, whose labels survive as vector text in the PDF. Legend order 'Oedipus, Cind
+[361] games-practice | F: flat late-story arousal | S: Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNL |  | ERA: -
+  CLAIM: Human stories show higher arousal than LLM stories, and the gap widens after the midpoint toward the ending; explicit turning-point guidance raised suspense ratings ~40%.
+  TW: Human arousal higher; gap enlarges midpoint to end; +40% over vanilla
+  LIMB: the 'raised suspense ratings ~40%' limb — the verifier records the 40% as a human comparative win-rate, not a rating scale
+  NOTE: Claim carried no quote, so graded on substance. Figure 3 caption: 'Human stories consistently exhibit higher levels of suspense (greater arousal). The gap enlarges from the midpoint to the end.' Intro
+[363] games-practice | F: unmotivated character action | S: Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspect |  | ERA: -
+  CLAIM: Most failed plans were causally sound but had characters acting without valid intention — Aladdin obtains the lamp and casts a spell with no established motive.
+  TW: most failed plans causally sound, actions lacking valid intention
+  LIMB: the unscoped generalisation — the verifier records the finding is scoped to the o1 model and hedged as 'often with', where the claim states it flatly
+  NOTE: Quote 'character actions lacking valid intention' verbatim. Full page sentence: 'For the o1 model, most failed plans are causally sound, but often with character actions lacking valid intention. For i
+[365] games-practice | F: context-limit collapse | S: Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspect |  | ERA: -
+  CLAIM: Intentional-planning success drops sharply from 2 to 3 adventurers and again from 10 to 12, the latter likely from exceeding context limits; only RL-trained reasoning models handled intentionality and conflict.
+  TW: drops are in western conflict-planning with adventurers, not intentional planning
+  LIMB: the attribution of the 2-to-3 and 10-to-12 adventurer drops to intentional planning; the page reports them for the western dramatic-conflict variations
+  NOTE: The numbers are real and verbatim-adjacent, but attached to the wrong experiment. Page: 'Figure 3(c) displays the o1 model's performance on WESTERN variations with varying numbers of adventurers... Th
+[374] games-practice | F: over-compliant GM | S: Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09) | FULL | ERA: -
+  CLAIM: An LLM game master accommodates even the most bizarre player requests with little regard for predetermined events, where a human GM would curb them.
+  TW: An LLM Game Master would try to accommodate for even the most bizarre requests
+  LIMB: the indicative 'accommodates' — the verifier records the paper's verb is the conditional 'would try to'
+  NOTE: Sec. V Limitations. Raw arXiv HTML v5, exact: 'Human GMs frequently curb the more exotic player requests...' then 'An LLM Game Master would try to accommodate for even the most bizarre requests, with 
+[384] games-practice | F: unpredictable quality variance | S: Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenh |  | ERA: -
+  CLAIM: Even with well-crafted prompts, generated quality varies unpredictably across sessions, with trends toward overly positive or uninspired endings.
+  TW: Quality varies unpredictably; cited studies found overly positive endings, uneven sessions
+  LIMB: the overly-positive-endings and across-sessions limbs, which the paper reports as findings of cited studies (Taveekitworachai et al. 2023) rather than its own
+  NOTE: No quote was supplied and none is needed: every limb is on the raw page, but split across two sentences of Sec. I with different attributions. The paper's own sentence: 'Even with well-crafted prompts
+[389] games-practice | F: rules not applied | S: The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28) |  | ERA: -
+  CLAIM: ChatGPT violated the one-page ruleset's two core mechanics within the first turns (no complication after a success, arithmetic wrong on the target number).
+  TW: basic math screwed up; no complication inflicted after the success
+  LIMB: the 'two core mechanics' limb — the article's two mechanics are the action roll and Helping, and both cited violations are action-roll rules (Helping is never shown violated)
+  NOTE: Raw page fetched live (200, browser UA), dated December 28th, 2025. Both named violations are on the page in the Lasers & Feelings playtest: at character creation ChatGPT "almost immediately screws up
+[392] games-practice | F: content-free padding openers | S: tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments) |  | ERA: -
+  CLAIM: Room openers like 'Arriving at the house, the PCs see a strange sight: the structure appears to be…' say nothing and can be deleted without impact; every encounter does this.
+  TW: "Note the padding. Note how it doesn't say ANYTHING."
+  LIMB: the universal 'every encounter' — the verifier records the page phrases it as recurrence, not a literal universal
+  NOTE: Quote verbatim. The opener is on the page exactly as claimed ("Arriving at the house, the PCs see a strange sight: the structure appears to be ..." - "This then is the opening line of the first real r
+[394] games-practice | F: training corpus mediocrity | S: tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments) |  | ERA: -
+  CLAIM: Commenters note the model's style inherits the mediocrity of the typical D&D adventure writing it was trained on.
+  TW: One commenter laments the mediocre D&D corpus ChatGPT trained on
+  LIMB: "Commenters" (plural) - exactly one comment on the page makes this point (Anonymous, Nov 26 2024, 1:04 am); no second commenter says it
+  NOTE: Quote is on the page word for word, inside the whole comment: "If only the typical D&D adventure writing ChatGPT was trained on was good". The substance - style inheriting the mediocrity of the traini
+[404] games-practice | F: source confabulation | S: tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022) |  | ERA: -
+  CLAIM: Monsters were attributed to the Fiend Folio that appear in no version of it; the model knows they are discussed near the Fiend Folio without knowing its contents.
+  TW: without actually knowing what's in the Fiend Folio
+  LIMB: the flat assertion — both source statements are hedged ('as far as I can tell', 'apparently') while the claim states them flatly
+  NOTE: Raw page (curl, HTTP 200) post #67 by Hemlock: 'They all exist in the 5E MMs though. A good illustration of the limits of GPT: apparently it's aware that these monsters tend to be discussed adjacent t
+[405] games-practice | F: self-similarity across generations | S: tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022) |  | ERA: -
+  CLAIM: A 'unique' trick room repeated elements of the previous room; the experimenter concluded he would have to seed the model with his own elements.
+  TW: there were similarities with the original room
+  LIMB: the verb 'concluded' — the verifier records the page says 'I suspect ... if you use it a lot'
+  NOTE: Raw page, Beoric post #64: after asking for 'a unique encounter in the trick room', he writes 'The other is that there were similarities with the original room; I assume this is because it has a limit
+[406] games-practice | F: templated NPC blocks | S: tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022) |  | ERA: -
+  CLAIM: Beoric's module-generation transcript shows every NPC in the same template and motivations reused verbatim ('greed and loyalty to their boss'), with guard rooms repeated across levels.
+  TW: motivated by greed and loyalty to their goblin boss
+  LIMB: the 'every NPC in the same template' limb, which the verifier records holds within a key rather than across the whole transcript (and the block format was dictated by the prompter)
+  NOTE: No quote supplied, so graded on substance. Raw page 1 of the thread carries Beoric's transcript. The phrase 'They are motivated by greed and loyalty to their goblin boss' recurs verbatim across at lea
+[409] games-practice | F: length benchmark (human craft) | S: Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft bench |  | ERA: -
+  CLAIM: Shea's read-aloud standard: keep it short and powerful, know its purpose, and cut 25% of any draft — the bar generated boxed text is measured against by reviewers.
+  TW: Keep it short and keep it powerful.
+  LIMB: the bar generated boxed text is measured against by reviewers
+  NOTE: Quote is verbatim on the raw page. The craft limbs all check out: 'Know the purpose of your read-aloud text up front'; 'If you didn't edit your read-aloud text and remove 25% of what was there, you di
+[410] games-practice | F: clarity benchmark (human craft) | S: Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark |  | ERA: -
+  CLAIM: Shea's 'Tell, Don't Show': players understand about half of what is described, so state the facts that matter plainly while keeping flavour — the opposite of the padded, withholding generated style.
+  TW: Players understand about half of what we describe to them.
+  LIMB: the opposite of the padded, withholding generated style
+  NOTE: No quote supplied. Raw page ('Tell, Don't Show', by Mike on 12 February 2024) supports the reported limbs: 'Players understand about half of what we describe to them.'; a section 'Don't Hold Your Card
+[412] games-practice | F: shallow associations | S: Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18) |  | ERA: -
+  CLAIM: Deeper thematic associations ('salt is associated with archiving') needed far more training data to be remembered than surface form.
+  TW: takes more training data to tune it to remember deeper associations
+  LIMB: the 'far more' intensifier, which the verifier records as an overstatement of the page's 'more'
+  NOTE: Raw page: 'But it takes more training data to tune it to remember deeper associations and themes — like “salt is associated with archiving” or “venom is associated with drugs and bright colours.”' The
+[428] games-practice | F: reception | S: Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With | FULL | ERA: -
+  CLAIM: At launch the demo sat at Very Negative with 236 reviews; as of 2026-09-06 the Steam page shows 15% positive of 476.
+  TW: the demo now sits at a 'Very Negative' rating with a total of 236 posts from users
+  LIMB: 'as of 2026-09-06 the Steam page shows 15% positive of 476' - absent from this page (it is on the Steam store page, where I confirmed it); and the Zork quote is a reader comment, not the article
+  NOTE: Live Time Extension page fetched raw (Jack Yarwood, 24 Apr 2023 update). First limb verbatim-supported. The 2026 Steam figure is genuinely true - I fetched the Steam store page in the same pass and it
+[432] games-practice | F: unable to replace talent | S: Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable t | FULL | ERA: -
+  CLAIM: After evaluating 400+ tools and pulling bench resource from seven studios, Keywords' FY2023 report concluded the tooling was unable to replace talent; the game will not be released.
+  TW: we ultimately utilized bench resource from seven different game development studios ... the tooling was unable to replace talent
+  LIMB: the 'FY2023 report' label, which the verifier records is inferred from the March 2024 dateline rather than printed on the page
+  NOTE: Live Game Developer page (Chris Kerr, March 13 2024), raw HTML. Bodson quote carries 'over 400 tools' and 'bench resource from seven different game development studios as part of the project, as the t
+[449] peer-reviewed-absentees | F: regurgitated tropes; no surprise | S: Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve |  | ERA: -
+  CLAIM: Humour depends on surprise, and a predictive model that regurgitates tropes cannot supply it.
+  TW: AI is only adept at regurgitating tropes
+  LIMB: the evidential status — the verifier records the proposition is reported as a participant hypothesis (p15), not an authors' finding
+  NOTE: Raw arXiv HTML (2405.20956v2) fetched 200 with a browser UA. Quote exact, Sec. 4.4: 'the whole idea of humor is that it is surprising, and it is so human, and AI is only adept at regurgitating tropes'
+[456] peer-reviewed-absentees | F: subtext missing or misread | S: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on S |  | ERA: -
+  CLAIM: Models reproduce what is on the surface of a literary story while the subtext is absent or wrongly interpreted.
+  TW: the 'subtext' is either incorrectly interpreted or missing
+  LIMB: that models reproduce the surface accurately: faithfulness is the paper's LOWEST-scoring attribute — only 44% (GPT-4), 30% (Claude), 8% (Llama) of summaries are rated fully correct, and the abstract says all three 'make faithfulness mistakes in over 50% of summaries'
+  NOTE: Raw arXiv HTML (2403.01061v3) fetched 200. Quote exact, Sec. 6.2: three writers on subtext, incl. 'Subtext is missing entirely' (Llama) and, on a Claude summary, "Everything that's 'text' is accuratel
+[457] peer-reviewed-absentees | F: unreliable narrator taken at face value | S: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on S |  | ERA: -
+  CLAIM: All three models score lower on stories with unreliable narrators and repeat the narrator's self-description as fact.
+  TW: stories with unreliable narrators are harder for all three models to summarize
+  LIMB: that ALL THREE models repeat the narrator's self-description as fact — the page evidences this with one GPT-4 example only; no Claude or Llama instance is shown
+  NOTE: Quote exact, Sec. 6.3.3 (writer comment). First limb CONFIRMED by Table 6 and the authors' sentence 'All three models have lower average scores in this bucket' (reliable 3.45/3.29/2.60 vs unreliable 3
+[472] peer-reviewed-absentees | F: metaphors too simple and sensible | S: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: P |  | ERA: -
+  CLAIM: The model offered only simple, sensible metaphors where writers wanted complex or not-quite-sensible ones.
+  TW: Wordcraft generally suggests simple and sensible metaphors.
+  LIMB: the exclusivity 'only' — the page says Wordcraft 'generally' suggests simple and sensible metaphors, not that it offered nothing else
+  NOTE: Quote is verbatim in Section 8.2, attributed to JM: 'Wordcraft generally suggests simple and sensible metaphors; but sometimes one wants metaphors to be complex, or not quite sensible.' The wanting-co
+[479] peer-reviewed-absentees | F: homogenising toward dominant narratives | S: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Langua | FULL | ERA: -
+  CLAIM: Writers saw a violent homogenising pull toward the narratives of dominant powers and voices.
+  TW: “a weird and violent kind of homogenizing that steer toward the narratives of dominant powers, voices, and stories”
+  LIMB: the plural 'writers' for the dominant-powers framing, which the verifier records is participant FV's alone
+  NOTE: Quote verbatim in Sec. 6.5 weakness table (theme ‘Reliance on Cliches and Tropes’). The ‘dominant powers, voices’ framing is participant FV’s alone; the plural ‘writers’ holds for the homogenising/gen
+[480] peer-reviewed-absentees | F: weak similes and metaphors | S: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Langua | FULL | ERA: -
+  CLAIM: Figurative language was judged poor in the little the writers tested.
+  TW: MG: “Its similes and metaphors aren’t very good from the little I’ve experimented with this.”
+  LIMB: ‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group
+  NOTE: Quote is word-for-word on the page, under the ‘Lack of Nuance, Subtext or Symbolism’ theme, but it is one participant (MG) speaking in the first person about his OWN limited experimentation. No other 
+[489] peer-reviewed-absentees | F: extra editing burden on non-Western writers | S: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and  | FULL | ERA: -
+  CLAIM: Indians modified suggestions in 63.5% of tasks versus 59.4% for Americans and gained less per suggestion.
+  TW: “Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American participants modified suggestions in 59.4%”
+  LIMB: the quote's anchoring — 'Indians lose cultural nuance' comes from the introduction's cultural-gaze sentence, not from the passage carrying the 63.5%/59.4% figures
+  NOTE: Both statistics exact (t(198)=6.48, p<0.001, Cohen’s d=0.91), and the second limb is confirmed in Sec. 4.1.3: ‘Indians derived significantly less productivity per suggestion compared to Americans’ (U=
+[498] peer-reviewed-absentees | F: does not know when to stop | S: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper |  | ERA: -
+  CLAIM: Limericks and sonnets get bundled in multiples (median limerick 25 lines) because the model does not stop.
+  TW: Median limerick 25 lines; models bundle multiple poems together.
+  LIMB: the sonnet-bundling limb (stated for GPT-3.5 only) and the causal 'because the model does not stop', which the paper hedges as 'we think this tendency more likely suggests'
+  NOTE: Sec 4.1: 'the median length for both GPT models is 25 lines... both models frequently bundle multiple, appropriately-lengthed limericks together. This is also the case for GPT-3.5's atypically long so
+[501] peer-reviewed-absentees | F: unfixed, topic-based and visual forms unrecognised | S: Walsh, Preus, Antoniak — 'Sonnet or Not, Bot? Poetry Evaluation for Large Models and Datas |  | ERA: -
+  CLAIM: Models struggle with unfixed forms and those defined by topic or visual layout (ode, elegy, concrete poetry).
+  TW: Models struggle with unfixed forms; elegy is more often recognized.
+  LIMB: the parenthetical listing elegy among the forms models struggle with - the paper says forms on concrete subjects 'like death (elegy)' are MORE often recognized
+  NOTE: Quote verbatim in abstract and Sec 1: 'the models struggle to identify unfixed poetic forms, especially those based on topic or visual features.' Ode and concrete poetry are supported failure cases (S
+[506] peer-reviewed-absentees | F: the human-to-machine boundary is hard to see | S: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Hum |  | ERA: -
+  CLAIM: Annotators found the exact transition sentence only 23.4% of the time (chance 10%).
+  TW: Players selected the boundary sentence 23.4% of time, chance 10%.
+  LIMB: the framing word 'only' before 23.4% — the verifier records that the paper frames 23.4% as above chance rather than as 'only'
+  NOTE: Sec 4: 'players were significantly better than random chance at the boundary detection task, correctly selecting the boundary sentence 23.4% of the time (chance being 10%).' The paper frames 23.4% as 
+[509] peer-reviewed-absentees | F: style cues are not what readers use | S: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Hum | FULL | ERA: -
+  CLAIM: Topic control codes did not change detectability, so readers' cues were not stylistic.
+  TW: cues "may not be related to stylistic details, at least not within ... political speeches"
+  LIMB: the unhedged, unrestricted second limb "readers' cues were not stylistic" — the page says only "may not be related to stylistic details, at least not within the genre of political speeches"
+  NOTE: Quote verbatim in arXiv PDF (§5, Do control codes affect detectability?); the control-code result is also verbatim: "use of the politics control code did not significantly affect players' ability to d
+[520] peer-reviewed-absentees | F: apparent reasoning is artefact leverage | S: Bender, Koller — 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of  |  | ERA: -
+  CLAIM: BERT's 'reasoning' successes collapse under adversarial data, a mirage built on dataset artefacts.
+  TW: sometimes a mirage built on leveraging artifacts in the training data
+  LIMB: the unhedged 'a mirage' — the verifier records the page says apparent reasoning is 'sometimes a mirage', not always
+  NOTE: Quote verbatim (§2, BERTology overview). Adversarial-data limb verbatim in the preceding sentences: McCoy et al.'s syntactic-heuristic finding — "In a dataset carefully designed to frustrate such heur
+[531] peer-reviewed-absentees | F: no deep emotion | S: Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that  | FULL | ERA: -
+  CLAIM: The authors state the results do not show machine creativity, which requires expression of deep emotion.
+  TW: one of the main functions of creativity ... is the expression of (deep) emotions, a feat that machines lack (so far)
+  LIMB: the 'which requires expression of deep emotion' limb — the verifier records the paper calls deep emotion one of the main FUNCTIONS of creativity, not a requirement of it, and hedges the machine limb with '(so far)'
+  NOTE: ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. The quoted fragment 'a feat that machines lack' is verbatim and 
+[549] peer-reviewed-absentees | F: atypical-perplexity writers penalised | S: Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversari |  | ERA: -
+  CLAIM: The authors warn detectors may unfairly penalise students whose perplexity profile differs, including lower-proficiency writers.
+  TW: unfairly penalise students who write at a higher level of perplexity
+  LIMB: the generalisation to any differing 'perplexity profile' — the paper names a higher perplexity level specifically (and the quote is in the PDF body, not at the cited abs URL)
+  NOTE: Verbatim in the closing Discussion: 'the potential for such tools to unfairly penalise students who write at a higher level of perplexity (including NNESs or lower-proficiency English speakers)'. One 
+[551] counter-cases | F: counter-evidence | S: Jeanette Winterson, The Guardian (Books), 12 March 2025 |  | ERA: OpenAI's unreleased creative-writing model, observed March 2025; register measured: literary metafictional short story
+  CLAIM: Novelist Jeanette Winterson locates what is beautiful and moving in OpenAI's metafiction story in the story's awareness of its own limits, not in its scene-making or characterisation.
+  TW: its understanding of its lack of understanding
+  LIMB: not in its scene-making or characterisation - the article never discusses either, so the exclusion is inferred from silence rather than stated
+  NOTE: Quote verbatim: 'What is beautiful and moving about this story is its understanding of its lack of understanding. Its reflection on its limits.' The first limb is exact. The contrastive second limb is
+[558] counter-cases | F: counter-evidence | S: Mark Lawrence, 'AI writing results', personal blog, 14 September 2023 |  | ERA: ChatGPT 4 (paid tier), September 2023; register measured: fantasy flash fiction
+  CLAIM: Two of the three highest-rated pieces in Lawrence's reader poll were written by ChatGPT 4.
+  TW: The 2nd and 3rd highest rated pieces were AI-written
+  LIMB: written by ChatGPT 4 - the cited results page attributes the pieces only to 'AI', naming no model
+  NOTE: Item vi is verbatim and the conclusion repeats 'two of the top three rated pieces are AI written'; the results chart confirms pieces 2 and 3 (both red = AI) sit below only piece 4. But the cited resul
+[570] counter-cases | F: homogenisation | S: Sudowrite, Muse product page (vendor marketing copy) |  | ERA: Sudowrite Muse versus ChatGPT, vendor page September 2026; register measured: commercial fiction
+  CLAIM: Sudowrite's own marketing names cliché as the characteristic defect of general-purpose models.
+  TW: Basic AI spews clichés.
+  LIMB: that cliché is *the* characteristic defect — the page gives three co-equal 'Basic AI' defect headings (boring emails, clichés, happy endings), not one
+  NOTE: Quote is verbatim as an <h1> comparison heading, paired with 'Muse writes unique prose every single time'. Core is supported: the marketing does name cliché as a defect of 'Basic AI' (foil labelled Ch
+[601] counter-cases | F: abstraction over the concrete | S: Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024 |  | ERA: ChatGPT 3.5, 2024; register measured: short lyric poetry
+  CLAIM: Porter and Machery propose that readers rate AI poems higher because they find them more straightforward.
+  TW: “in part because they find AI poems more straightforward”
+  LIMB: the sole-cause reading — the verifier records the authors offer it 'in part', as a partial and not the sole explanation
+  NOTE: Discussion, raw page: “We propose that people rate AI poems more highly across all metrics in part because they find AI poems more straightforward.” Quote verbatim; every limb supported. Only softenin
+[610] counter-cases | F: steerability | S: Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1) |  | ERA: GPT-4o fine-tuned per author, January 2026; register measured: literary fiction excerpts
+  CLAIM: Chakrabarty and Dhillon attribute the expert preference shift to fine-tuning removing the stylistic tics experts had used to tell AI from human text.
+  TW: “possibly because fine-tuning eliminates the stylistic tics… experts used to distinguish”
+  LIMB: the verb 'attribute' — the verifier records the authors hedge the mechanism as 'possibly because', so the claim states it with more confidence than the page does
+  NOTE: §4.1; quote verbatim, including the em-dashed list “clíchés, awkward phrasing, overly ornamental language” and the trailing “that experts used to distinguish human from AI-generated text”. The one sof
+[615] counter-cases | F: register measured | S: Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1) |  | ERA: January 2026; register measured: literary fiction excerpts up to 450 words
+  CLAIM: The study's unit of comparison was an excerpt of up to 450 words, which the authors concede leaves plot, character and structure unmeasured.
+  TW: “plot, character development, or structure might not be accurately reflected”
+  LIMB: the 'leaves plot, character and structure unmeasured' limb, which overstates the page's hedge 'might not be accurately reflected' (and the brief was a 200-450 word excerpt, not only a 450-word ceiling)
+  NOTE: §3.1.4, raw page: “Our study examines shorter (up to 450-word) excerpts and because of this, broader creative elements such as plot, character development, or structure might not be accurately reflect
+[637] critics-direct | F: other: sentence-level choice as the locus of quality | S: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | FULL | ERA: n/a - a claim about human craft, made August 2024; register: commercial thriller fiction
+  CLAIM: Chiang argues that you could not replace every sentence of a thriller with a semantically equivalent one and have the novel remain as entertaining, so its sentences and the small-scale choices they represent determine its effectiveness.
+  TW: its sentences - and the small-scale choices they represent - help to determine the thriller's effectiveness
+  LIMB: the two dropped hedges — Chiang writes 'I doubt you could' rather than 'you could not', and 'help to determine' rather than 'determine'
+  NOTE: Page: 'I doubt you could replace every sentence in a thriller with one that is semantically equivalent and have the resulting novel be as entertaining. This means that its sentences - and the small-sc
+[690] critics-direct | F: steerability | S: Robin Sloan, novelist, newsletter, November 2022 | FULL | ERA: Google's Wordcraft, November 2022; register: a fantasy-saga litany inside a short story
+  CLAIM: Sloan reports that the project only worked once he established a fenced-in space for the AI, assigning it a litany of grisly deaths and fantasy character names to riff on rather than any structural role.
+  TW: Then, I cracked it, by establishing a fenced-in space for the AI to contribute what it could.
+  LIMB: the 'rather than any structural role' limb, which the verifier records is not phrased that way on the page and is only entailed
+  NOTE: Raw live page. Quote exact. Next paragraph supplies the assignment limbs: 'very good at riffing', 'This new story called for a litany of grisly deaths, so, I asked the AI to dream up grisly deaths. I 
+[789] steerability-mechanism | F: other: mechanism of mode collapse | S: Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025 |  | ERA: LLaMA 2 and 3.1 families, 2025; register measured: code generation
+  CLAIM: Shypula et al. found that restricted to high-quality generations only, preference-tuned models produce less semantically diverse content within that subset.
+  TW: Code generation only: within high-quality outputs, preference-tuned models less diverse.
+  LIMB: the unrestricted scope - the paper confines this finding to code generation, not generation at large
+  NOTE: Quote is verbatim in Section 1 of arXiv:2504.12522: 'A deeper analysis in code generation shows that when restricting to high-quality generations only, preference-tuned models produce less semanticall
+[796] steerability-mechanism | F: other: mechanism of mode collapse | S: janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022, with |  | ERA: text-davinci-002, observed November 2022; the correction was added later; register measured: open-ended completions, poems and random numbers
+  CLAIM: janus, who coined the mode-collapse usage, later corrected the post to say text-davinci-002 was not trained with RLHF.
+  TW: Multiple credible sources: text-davinci-002 was not trained with RLHF.
+  LIMB: that janus coined the mode-collapse usage - the page never says so, and its own prior-work section points the other way
+  NOTE: lesswrong.com returned HTTP 429 to a browser user agent, so the page was reached by two further routes: the Wayback raw capture of the exact URL (web.archive.org/web/20260725093614id_/...) and the AI 
+[820] critics-direct | F: abstraction over the concrete | S: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 |  | ERA: December 2025, ChatGPT; register measured: journalism
+  CLAIM: Mahadevan named ChatGPT's tendency to make broad, sweeping, emotional statements as the feature of AI writing he finds most jarring in journalism.
+  TW: one of the features of AI writing that Mahadevan finds most jarring
+  LIMB: the definite/superlative framing 'the feature of AI writing he finds most jarring' — the page says 'one of the features'
+  NOTE: Raw page, section 4. The quotation is verbatim: ChatGPT's tendency to 'make broad, sweeping, emotional statements', with the example 'AI in journalism isn't just a tool, it's a revolution.' But the so
+[826] critics-direct | F: detection and its failures | S: Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025 |  | ERA: December 2025; register measured: journalism and general web text
+  CLAIM: Mahadevan said he is concerned that readers fixate on quick heuristics to identify AI writing.
+  TW: I do get concerned that we fixate on these quick heuristics
+  LIMB: the actor: the source says 'we fixate', not that readers fixate — and 'to identify AI' generally, not AI writing specifically
+  NOTE: Raw page, section 3, quotation verbatim: "'I do get concerned that we fixate on these quick heuristics to identify AI,' he said, as most of them, like specific words, aren't definitive proof." But the
+[843] critics-direct | F: register measured | S: Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6 |  | ERA: April 2026; register measured: fiction only — no archival, gazetteer or civic-record register is sampled
+  CLAIM: StoryScope's human comparison corpus is 10,272 short stories extracted from Books3, so its register is published literary fiction and not any archival or record register.
+  TW: We extract 10,272 human-written stories from Books3, from short story anthologies
+  LIMB: that the corpus register is published literary fiction and not an archival or record register
+  NOTE: Raw arXiv HTML §3 'Data.': quote exact, and 'human-written short stories' plus 'we identify and extract stories from short story anthologies identified via running Gemini 2.5 Flash over titles and blu
+[885] critics-direct | F: model era drift | S: WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026 | FULL | ERA: GPT-4 2023 to mid-2024; GPT-4o mid-2024 to mid-2025; GPT-5 mid-2025 on; register measured: encyclopedic articles
+  CLAIM: The WikiProject gives three era word-lists, assigning Additionally, boasts, delve, intricate, tapestry and testament to GPT-4 in 2023 to mid-2024, and only emphasizing, enhance, highlighting and showcasing to GPT-5 from mid-2025.
+  TW: Mid-2025 and on (GPT-5): emphasizing, enhance, highlighting, showcasing (plus words associated with 'Canned emphasis on notability...')
+  LIMB: -
+  NOTE: Quote 'The words that LLMs overuse have changed over time.' is verbatim at line 332 and there are exactly three era bullets (2023 to mid-2024 / GPT-4; Mid-2024 to mid-2025 / GPT-4o; Mid-2025 and on / 
+[905] critics-direct | F: lexical tells | S: Sam Kriss, The New York Times Magazine, 2025 |  | ERA: December 2025, models unnamed for the naming habit; register measured: fiction
+  CLAIM: Kriss reports that asked for science fiction the model has an uncanny habit of naming the protagonist Elara Voss, with Kael the usual male name, and that hundreds of self-published Amazon books now use those names where before 2023 there were none.
+  TW: hundreds of Amazon books feature Elara Voss or Elena Voss
+  LIMB: that the hundreds of Amazon books use 'those names' including Kael — the page's pair is Elara Voss or Elena Voss
+  NOTE: Quote is verbatim and the Elara Voss, Kael and pre-2023 limbs all hold: 'If you ask any A.I. to write a science-fiction story for you, it has an uncanny habit of naming the protagonist Elara Voss. Mal
+[910] critics-direct | F: other: too much consistency or none | S: Sam Kriss, The New York Times Magazine, 2025 |  | ERA: ChatGPT, Grok and Claude, 2025; register measured: comic prose
+  CLAIM: Kriss argues the model cannot get the balance right: either it imposes too much consistency, making its language redundant, or too little, turning it into drivel.
+  TW: A.I. finds it very difficult to get the balance right
+  LIMB: 'the model cannot get the balance right' — the page asserts difficulty ('A.I. finds it very difficult to get the balance right'), not impossibility
+  NOTE: Quote verbatim on the page: 'Either it imposes too much consistency, in which case its language is redundant, or not enough, in which case it turns into drivel.' Both horns of the dilemma are exact. T
+[948] arch-biographical-record | F: other: hedged non-statement | S: a spam obituary quoted verbatim by Mia Sato, The Verge, 12 Feb 2024 |  | ERA: unnamed generative-AI tools, observed Feb 2024; register measured: obituary / biographical record
+  CLAIM: A generated obituary of a Calgary woman, quoted by Sato as a demonstration passage, ends by advising the public to await verified information instead of stating a fact.
+  TW: the curious and concerned public is advised to stay tuned
+  LIMB: that the quoted sentence ends the article
+  NOTE: Raw page, The Thaiger section: Sato quotes one sentence from an article on the death of a Calgary, Canada woman, telling readers updates are anticipated and to stay tuned for verified information. The
+[986] arch-biographical-record | F: other: hedged non-statement | S: a Wikipedia revision quoted as a demonstration passage in Wikipedia:Signs of AI writing, r |  | ERA: an unnamed LLM, revision dated Dec 2024; register measured: encyclopedic biography
+  CLAIM: A December 2024 revision to the Wikipedia biography 'Throwing Curves: Eva Zeisel' is given as an example of hedging that the details of the subject's resistance efforts are not widely documented.
+  TW: Though the details of these resistance efforts aren't widely documented
+  LIMB: that 'Throwing Curves: Eva Zeisel' is a Wikipedia biography — the page names it only as the article the revision belongs to, and that article is about a 2002 documentary film, not a biography
+  NOTE: Quote is verbatim in the Examples box of the knowledge-cutoff section, attributed to 'this December 2024 revision' (Special:Diff/1261964722) to Throwing Curves: Eva Zeisel, with 'aren't widely documen
+[1000] arch-biographical-record | F: other: eulogy register in the record | S: Bob Treadway, quoted by Drew Harwell, The Washington Post, 3 Aug 2025 |  | ERA: suspected AI obituaries in a local newspaper, observed mid-2025; register measured: the obituary
+  CLAIM: Treadway says the obituaries he now reads are stilted messages that read as if ripped from LinkedIn.
+  TW: stilted messages that read as if they were ripped from LinkedIn
+  LIMB: that Treadway said it — the LinkedIn simile is Harwell's paraphrase of Treadway's reaction, not words attributed to him; Treadway's own quoted line instead says the obits look like they were taken off a resume
+  NOTE: Same Wayback raw capture; section heading 'Creative ideas for a graveside service' confirmed. Quote is verbatim, in the reporter's sentence 'But he's been saddened to see so many obits get replaced by
+[1023] arch-biographical-record | F: other: neutral-seeming but not neutral | S: Wikipedia:Large language models, retrieved 6 Sep 2026 |  | ERA: LLMs generally; the page's bias note is dated 'as of 2026'; register measured: encyclopedic articles
+  CLAIM: Wikipedia's large language models policy page states LLMs can produce content neutral-seeming in tone but not in substance.
+  TW: neutral-seeming in tone, but not necessarily in substance
+  LIMB: that the cited page is a policy page - its own banner says it is not a Wikipedia policy or guideline, but an information page
+  NOTE: Fetched twice as raw text: the wikitext via action=raw and the rendered page, both 200. The quotation is verbatim on the page, in the section the claim names. The substantive limb is fully supported. 
+[1055] arch-decoding-literature | F: other: mechanism of blandness | S: Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling',  |  | ERA: information-theoretic argument about probabilistic language generators generally, 2022-2023.
+  CLAIM: Meister and colleagues argue that high-probability text reads as dull because low probability is low information content, so probable text is literally uninformative.
+  TW: why high-probability text is often dull or generic
+  LIMB: 'low probability is low information content' - the paper's relation runs the other way: high probability implies low information content
+  NOTE: arXiv 2202.00666: the quoted fragment is on the page verbatim, broken across a hyphenated line ('makes for bor-/ing, i.e., uninformative, text'), and the sentence attributes dullness to low informatio
+[1111] arch-decoding-literature | F: other: mechanism of blandness | S: Clara Meister, Gian Wiher, Tiago Pimentel and Ryan Cotterell, 'On the probability-quality  |  | ERA: theoretical claim, March 2022, offered alongside GPT-2 and BART measurements.
+  CLAIM: Meister and colleagues state that low-information strings may be seen as boring and uninformative, giving the low-probability end of the paradox a communicative rather than statistical reading.
+  TW: Introduction: "low-information strings may be seen as boring and uninformative"
+  LIMB: "the low-probability end of the paradox" - the paper places boring/uninformative strings at the LOW-INFORMATION extreme, which (information = negative log-probability) is the HIGH-probability end; the low-probability end is the one it calls "hard to process"
+  NOTE: Quote verbatim in section 1, Introduction, immediately after 'At one extreme, strings with more-than-expected information may be hard to process... At the other extreme, low-information strings may be
+[1140] arch-gazetteer-travel-history | F: other: generic superlative in the evaluative close | S: Text of an AI-suspected Lviv guidebook (May 2023), quoted by The New York Times, 5 August  |  | ERA: guidebook published May 2023, generative tool unidentified; register measured = travel-guidebook place description
+  CLAIM: A guidebook on Lviv closed by inviting the reader to an unforgettable adventure in one of Eastern Europe's most captivating destinations, a passage the reporters quote as characteristic of the books.
+  TW: Quote exact, but framed under "troubling omissions", not as close or characteristic
+  LIMB: (a) that the guidebook "closed by" this passage - the article gives no position in the book, saying only that it 'encourages readers to'; (b) that the reporters quote it 'as characteristic of the books' - it appears in the troubling-omissions-and-outdated-information paragraph, not in any discussion of house style
+  NOTE: NYT live URL returned 403; recovered via Wayback raw capture web.archive.org/web/20260207205925id_/. The quoted words appear verbatim (curly apostrophe in 'Europe's'): the Lviv guidebook 'encourages r
+[1147] arch-gazetteer-travel-history | F: other: plausible completeness that omits the important | S: User:LPfi, Wikivoyage talk:AI guidelines, 16 May 2026 |  | ERA: unnamed LLMs as of May 2026; register discussed = travel-gazetteer background sections
+  CLAIM: The same editor argued that a background section which looks complete but misses important points is as bad as a factual error about a train service.
+  TW: "as bad as telling about a train that doesn't run"
+  LIMB: the flat 'is as bad as' — the verifier records the source hedges with 'can be as bad as'
+  NOTE: Same raw wikitext, same LPfi comment: 'An Understand that looks complete but misrepresents or misses important points can be as bad as telling about a train that doesn't run or a restaurant that isn't
+[1157] arch-gazetteer-travel-history | F: other: invented particular | S: Thom Brown, Intrepid Times, 2 January 2026 |  | ERA: ChatGPT, December 2025 Tallinn trip; register measured = travel recommendation
+  CLAIM: The dishes ChatGPT recommended at the restaurant it named did not exist on that restaurant's menu.
+  TW: Menu was Pegasus's, the host's alternative after ChatGPT's pick was full
+  LIMB: "at the restaurant it named ... that restaurant's menu" - the ChatGPT-named restaurant could not seat him; the menu lacking the dishes belongs to Pegasus, a place the host recommended instead
+  NOTE: Quote verbatim: 'Naturally, the food suggestions offered by my artificial master do not exist on the menu.' But the preceding sentences read: 'the restaurant recommended by ChatGPT is overflowing with
+[1176] arch-gazetteer-travel-history | F: other: generic superlative in place description | S: AI-generated Wikipedia text from a June 2023 revision to Alamata (woreda), quoted as an ex |  | ERA: unidentified LLM of the GPT-3.5/GPT-4 era, text added to Wikipedia in June 2023; register measured = encyclopedic gazetteer entry for a small settlement
+  CLAIM: A June 2023 revision to the Wikipedia article on the Ethiopian woreda Alamata opened by saying the town stands as a vibrant town with a rich cultural heritage.
+  TW: stands as a vibrant town with a rich cultural heritage
+  LIMB: 'opened by saying' - the page never says the passage was the article's opening, and the cited revision shows it was not
+  NOTE: Quotation is verbatim on the page, in section 'Promotional and advertisement-like language' > 'Subtypes', labelled as from a June 2023 revision to Alamata (woreda). I followed the page's own diff link
+[1207] arch-gazetteer-travel-history | F: other: evaluative positivity in place description | S: Rong Zhao et al., arXiv 2604.20048v3, 8 June 2026 |  | ERA: GPT-5.2, Claude Sonnet 4 and Gemini 2.5 Flash, 2026; register measured = human versus model descriptions of British places
+  CLAIM: In the same study human place texts produced negative identity-perception indices for England, Scotland and Wales while the model estimates were systematically more elevated.
+  TW: the model estimates were systematically more elevated
+  LIMB: 'identity-perception indices' - the paper's IPI is the sentiment-based ingroup preference index, not an identity-perception index
+  NOTE: Same paragraph of arXiv 2604.20048v3: human texts gave negative IPIs for all three nations (-0.400 England, -0.256 Scotland, -0.062 Wales) on the 270-image nation-labelled Geograph subset, and the quo
+[1221] arch-historical-fact-measured | F: other: measured factual accuracy on dated historical facts | S: Kyle Wiggers, TechCrunch (19 January 2025) |  | ERA: GPT-4 Turbo, benchmarked 2024, reported January 2025; register measured: expert historical fact
+  CLAIM: TechCrunch reports the best-performing model achieved about 46 percent accuracy on the history benchmark.
+  TW: only achieved about 46% accuracy
+  LIMB: the attributed byline - the TechCrunch piece is bylined Charles Rollet, not Kyle Wiggers
+  NOTE: Live page fetched with a browser user agent. The third body paragraph names GPT-4 Turbo as the best-performing LLM and carries the quoted words, adding that this is not much higher than random guessin
+[1250] arch-historical-fact-measured | F: other: measured accuracy on archival summarisation | S: BBC and European Broadcasting Union, 'News Integrity in AI Assistants', October 2025 |  | ERA: free/consumer ChatGPT, Copilot, Perplexity, Gemini; May-June 2025; register measured: news
+  CLAIM: Accuracy accounted for 20 percent and insufficient context for 14 percent of significant issues in the BBC-EBU study.
+  TW: Accuracy (20%) and providing sufficient context (14%)
+  LIMB: the '20 percent / 14 percent OF significant issues' denominator - the report gives these as percentages of all AI responses
+  NOTE: Quote is verbatim on p.10 of the EBU report, but the sentence reads 'were the next biggest contributors to significant issues' and Appendix 3 (results table) defines both figures as the share of ALL A
+[1262] arch-historical-fact-measured | F: other: evidenced versus inferred fact | S: Wei, Karina, Chung et al. (OpenAI), 'Measuring short-form factuality in large language mod |  | ERA: benchmark design, 2024; register measured: short-form encyclopedic fact
+  CLAIM: SimpleQA questions were built so that each has only a single indisputable answer, excluding facts on which sources disagree.
+  TW: there exists only a single, indisputable answer
+  LIMB: excluding facts on which sources disagree
+  NOTE: Raw PDF arXiv:2411.04368v1. Abstract carries the quotation word for word; Sec. 2.1 'Must have a single answer' repeats it. But the paper's stated exclusion mechanism is annotator-based, not source-bas
+[1269] arch-historical-fact-measured | F: other: measured factual accuracy on dated historical facts | S: Jazwinska and Chandrasekar, Tow Center for Digital Journalism, Columbia Journalism Review, |  | ERA: Perplexity and Grok 3, tested early 2025; register measured: news-archive retrieval and citation
+  CLAIM: Error rates in the Tow Center test ranged from 37 percent of queries answered incorrectly by Perplexity to 94 percent by Grok 3.
+  TW: with Perplexity answering 37 percent of the queries incorrectly
+  LIMB: that 37% and 94% are the range endpoints across all eight tools
+  NOTE: Raw cjr.org page carries both figures word for word ('while Grok 3 had a much higher error rate, answering 94 percent of the queries incorrectly'), but never says these are the lowest and highest. Per
+[1276] arch-historical-fact-measured | F: other: measured factual accuracy on dated historical facts | S: Gao, Wang, Cai, Deng et al., 'Can LLMs Act as Historians? ProHist-Bench', arXiv 2604.24690 |  | ERA: Gemini-3-Pro-Preview, observed 2026; register measured: professional historical research
+  CLAIM: Gemini-3-Pro-Preview recorded a Rubric Score of 26.71 on ProHist-Bench, the highest of the closed-source models listed.
+  TW: Gemini-3-Pro-Preview 1.94 6.27 73.97 26.71
+  LIMB: the highest of the closed-source models listed
+  NOTE: Raw PDF arXiv:2604.24690v1, Table 4 (p.6): the row is exact, so RS 26.71 for Gemini-3-Pro-Preview is confirmed. The superlative is refuted by the same table: the Closed-Source block also lists Gemini-
+[1360] arch-worldbuilding-communities | F: other: no citation apparatus | S: r/worldbuilding moderators, subreddit rules wiki, rule 4 |  | ERA: no model named; rule text live as of the 2026-08-19 capture; register governed is amateur worldbuilding prose and art
+  CLAIM: The r/worldbuilding moderators ban AI-written worldbuilding posts on the ground that AI generators do not cite the material they were trained on, making such text incompatible with the subreddit's citation rule.
+  TW: incompatible with our policies on citation
+  LIMB: the flat 'do not cite the material they were trained on' — the verifier records the rule hedges with 'tend to provide incomplete or even no proper citation'
+  NOTE: Live old.reddit.com returned a 'Welcome to Reddit' interstitial under a browser UA, and both .json routes were blocked (403 / same interstitial), so the verdict is taken from the Wayback raw capture w
+[1366] arch-worldbuilding-communities | F: other: missing apparatus (links, citations, works list) | S: Lin Codega, Rascal News |  | ERA: model unnamed; May 2026; register measured is encyclopedic designer-profile prose presented as a historical archive
+  CLAIM: Codega reports that the generated profiles carry no internal or external links, no list of published work and no source references.
+  TW: there are no links, internal or external
+  LIMB: no source references — the page reports absent links and no list of published work, never absent citations
+  NOTE: Same rascal.news page, section opening 'what the fuck is the point of all this?': 'When you click on the profiles of any person there are no links, internal or external. No list of published work, not
+[1372] arch-worldbuilding-communities | F: other: setting-material contamination | S: Justin Alexander, comment on his own post, The Alexandrian |  | ERA: Google Gemini (shared gemini.google.com transcript), December 2025; register measured is RPG setting and play-transcript prose
+  CLAIM: Justin Alexander, testing Gemini on the one-page RPG Lasers & Feelings, found the generated mission summary had imported Star Trek setting material that is not in the game.
+  TW: It got confused and included Star Trek setting information.
+  LIMB: Alexander testing Gemini — the Gemini session was commenter anotherpanacea's shared transcript, which Alexander only analysed
+  NOTE: thealexandrian.net post fetched live; the quoted sentence is verbatim in Justin Alexander's comment, id comment-2035754, dated 'December 31st, 2025 - 3:28 pm' as the claim says, and the mission summar
+[1383] arch-worldbuilding-communities | F: other: marketplace policy | S: Timothy Linward, Wargamer, quoting the OneBookShelf policy |  | ERA: no model named; policy effective 2023-07-31; register governed is commercial RPG rulebook, adventure and supplement text
+  CLAIM: DriveThruRPG's July 2023 policy bans commercial content primarily written by AI language generators while permitting partly AI-written titles, and the platform conceded enforcement difficulty.
+  TW: commercial content primarily written by AI language generators
+  LIMB: that partly AI-written titles are permitted — page states only the ban and its 'primarily' scope, never an affirmative permission
+  NOTE: Raw fetch, HTTP 200. Quote verbatim in body para on the additional ban effective July 31; 'acknowledge[s] enforcement challenges' also verbatim, attributed to the firm (OneBookShelf), so the enforceme
+[1436] - | F: other: repetition loop mechanism | S: Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022 |  | ERA: 16-layer Transformer decoder 750M on Wikitext-103, 2022; register measured: Wikipedia encyclopedic prose
+  CLAIM: Xu and colleagues explain the effectiveness of top-k and nucleus sampling as an avoidance of the self-reinforcement effect, because a stochastically chosen token is not the maximum-probability one.
+  TW: "chosen with maximum probability which can avoid the self-reinforcement effect" (§2.2)
+  LIMB: the sole-reason framing and the dropped hedge — the verifier records the paper says the effectiveness 'may rely on' and gives two reasons, of which the claim states only the second; the quote also sits in §2.2 of the PDF, not on the cited /abs/ page
+  NOTE: Quote verbatim in §2.2 'Analyses'. Two points of nuance the claim smooths over: the paper hedges ('The effectiveness ... may rely on'), and it gives two reasons, of which the claim states only the sec
+[1440] - | F: other: repetition loop mechanism | S: Welleck, Kulikov, Kim, Pang, Cho, arXiv:2002.02492v2 (2020) |  | ERA: GPT-2 117M, observation 2020; register measured: Wikitext-103 Wikipedia articles
+  CLAIM: Welleck and colleagues measure a non-termination ratio of 37.91 per cent for greedy-decoded GPT-2 117M on Wikitext-103, meaning that share of contexts produced a continuation that had not ended within 1500 steps.
+  TW: Table 4: GPT2-117M rL 37.91%, greedy decoding, limit L = 500
+  LIMB: 'had not ended within 1500 steps' - the 37.91% figure is measured at L = 500, not 1500
+  NOTE: 37.91 is exact in Table 4 for GPT2-117M, greedy-decoded, Wikitext-103, and rL is defined in §5 as the proportion of decoded continuations at least L tokens long, so the 'share of contexts' reading is 
+[1457] - | F: steerability | S: Nadeem, He, Cho, Glass, arXiv:2009.07243v1 (2020); AACL-IJCNLP 2020 |  | ERA: GPT2-small fine-tuned on Gigaword and Wikitext-103, 2020; register measured: news sentences and Wikipedia prose
+  CLAIM: Nadeem and colleagues report that sampling algorithms violating one of their three identified properties suffered a large drop on the quality-diversity trade-off, while new algorithms satisfying all three matched the existing ones.
+  TW: violating the identified properties could lead to drastic performance degradation
+  LIMB: that violating ANY ONE of the three properties produced the large drop: Section 5.2 finds random mask sampling, which violates order preservation, on par with the existing algorithms, and concludes order preservation could be further relaxed; the degradation is attributed only to violating entropy reduction or slope preservation, and the abstract hedges with 'could lead to'.
+  NOTE: Quotation is verbatim in the abstract, and the second half of the claim (new algorithms satisfying all three perform on par with the existing ones) is supported there and in Section 5.3. Only the unqu
+[1466] - | F: uniform rhythm (low burstiness) | S: Meister, Cotterell, 'Language Model Evaluation Beyond Perplexity', arXiv:2106.00085v3 (202 |  | ERA: transformer, LSTM, CNN and trigram language models trained on Wikipedia Dumps, observation 2021; register measured: Wikipedia encyclopedic prose
+  CLAIM: Meister and Cotterell report that of the generation strategies they tested, nucleus sampling produced text whose statistical distributions sat closest to those of the human Wikipedia corpus the models were trained on.
+  TW: aligns with natural language more closely than text produced using other
+  LIMB: the superlative 'closest' — the verifier records the paper says nucleus sampling 'often' aligns more closely, and that §5.4 has LSTM text under random sampling following all three distributions the closest of any model; the quote also sits in §5.5 of the PDF, not on the cited /abs/ page
+  NOTE: Section 5.5 'Consistent Trends' of arXiv:2106.00085v3, of text generated under the nucleus sampling decoding scheme versus other generation strategies. Corpus limb confirmed under 'Natural Language Co
+[1468] - | F: other: repetition loop mechanism | S: Meister, Cotterell, arXiv:2106.00085v3 (2021); ACL 2021 |  | ERA: transformer, LSTM, CNN LMs on Wikipedia Dumps, 2021; register measured: Wikipedia encyclopedic prose
+  CLAIM: Meister and Cotterell present their rank-frequency and type-token results as quantitative evidence for the qualitative observation that transformer language models left to generate at length babble repetitively.
+  TW: we take this as quantitative evidence for recent qualitative observations
+  LIMB: the rank-frequency results: the 'this' taken as quantitative evidence for repetitive babbling is only the type-token finding of Section 5.2, namely the two transformer models' visible fall-off in unique words for longer-length sequences, described there as a deficiency seemingly specific to the transformer architecture. No rank-frequency result is cited for the babbling observation.
+  NOTE: The quoted fragment 'tend to babble repetitively' is verbatim in Section 5.2, attributed to Holtzman et al. 2020, Cohen and Beck 2019, and Eikema and Aziz 2020, with 'when left to generate lots of tex
+[1469] - | F: counter-evidence | S: Meister, Cotterell, arXiv:2106.00085v3 (2021); ACL 2021 |  | ERA: transformer, LSTM, CNN LMs on Wikipedia Dumps, 2021; register measured: Wikipedia encyclopedic prose
+  CLAIM: Meister and Cotterell conclude that adherence to Zipf's law is a poor gauge of a model's consistency with natural language, because models match the empirical rank-frequency trend well while diverging on the type-token relationship.
+  TW: the limitation of using adherence to Zipf's law as a gauge
+  LIMB: the stated reason. Section 5.1 grounds the Zipf conclusion in a rank-frequency comparison alone: models fit a Zipfian distribution no more poorly than natural language does, the qualitatively worst text (a trigram model under beam sampling) follows the power law most closely, and models nonetheless learn empirical rank-frequency trends well. Type-token divergence is not offered as the reason; Section 5.2, from which the supplied quotation comes, reports transformers under nucleus sampling matching the type-token trend most closely.
+  NOTE: Supplied quotation is verbatim but sits in Section 5.2, one section after the conclusion the claim reports. The paper does contrast the two elsewhere in 5.2 (type-token more disparate from the empiric
+[1480] - | F: counter-evidence | S: Zhou, Keuper, Fritz, arXiv:2408.13586v2 (2025) |  | ERA: Llama, Mistral, GPT-2-XL, 2024-2025; register measured: code, maths and question answering, not prose
+  CLAIM: Zhou, Keuper and Fritz report that Mirostat performed poorly across all three of their downstream tasks, which they attribute to its resting on the Zipf law of natural language.
+  TW: For all the three tasks, Mirostat does not perform well in general
+  LIMB: the unhedged 'which they attribute to' — the verifier records the source's attribution is hedged as 'probably because'; the quote also sits in §6 of the PDF, not on the cited /abs/ page
+  NOTE: LOCATOR CORRECTION FIRST: Section 6's three tasks are MBPP, HumanEval and GSM8K (Llama-2-7B, Tables 3-5). The page field's 'HumanEval, GSM8K, TruthfulQA' is wrong - TruthfulQA is the separate Section 
+[1481] - | F: homogenisation | S: Meister, Pimentel, Malagutti, Wilcox, Cotterell, 'On the Efficacy of Sampling Adapters', a |  | ERA: GPT-2 small and large, GPT-Neo, with GPT-J as reference, observation 2023; register measured: WebText and WikiText
+  CLAIM: Meister, Pimentel, Malagutti, Wilcox and Cotterell frame every truncation sampler as a precision-recall trade in which the model gives up the ability to produce certain strings in exchange for a higher rate of desirable text.
+  TW: model loses its ability to produce certain strings, its precision rate
+  LIMB: the universal 'every truncation sampler' — the verifier records the paper's own scope word is 'most', not 'every'; the exact quote also sits in §1 of the PDF, not on the cited /abs/ page
+  NOTE: Quote 'a model loses its ability to produce certain strings,' is verbatim in Section 1; the Abstract carries the near-identical 'the model loses its ability to produce certain strings, its precision r
+[1503] - | F: other: truncation-sampling mechanism | S: Ravfogel, Goldberg, Goldberger, arXiv:2305.02633v1 (2023); Findings of ACL 2023 |  | ERA: OPT family, May 2023; register measured: English Wikipedia
+  CLAIM: Ravfogel and colleagues measured calibration on ten thousand English Wikipedia items, one of the few decoding studies to work in the encyclopedic register.
+  TW: We ran the models on 10,000 English Wikipedia predictions
+  LIMB: 'one of the few decoding studies to work in the encyclopedic register' - the paper makes no comparative claim about other decoding studies' registers
+  NOTE: First limb verbatim and exact (Section 3 Setup, HuggingFace wikipedia dataset); note the paper counts 10,000 *predictions* across entropy percentiles, not 10,000 documents or 'items'. The comparative 
+[1514] - | F: other: repetition loop mechanism | S: Mahaut, Franzon, 'Repetitions are not all alike', arXiv:2504.01100v2 (2025) |  | ERA: Pythia 1.4B across training checkpoints, observation 2025; register measured: natural text prompts and in-context learning prompts
+  CLAIM: Mahaut and Franzon find that two behaviourally identical repetition loops come from different internal processes, one a learned in-context copying circuit and the other an early-emerging behaviour with no identifiable circuit.
+  TW: Repetition in this condition lacks a clearly identifiable circuit
+  LIMB: 'behaviourally identical' - the paper says 'behaviorally similar' and 'superficially similar', and Section 5 measures a behavioural difference between the two (natural repetition starts at higher, wider-spread entropy; ICL converges to near-zero entropy by cycle 4)
+  NOTE: Quote verbatim in the Discussion. The substantive limbs all hold: ICL repetition 'relies on a dedicated network of attention heads' that specialise over training, while natural repetition 'emerges ear
+[1516] - | F: other: repetition loop mechanism | S: Mahaut, Franzon, arXiv:2504.01100v2 (2025) |  | ERA: Pythia 1.4B, 1000-token greedy generations, 2025; register measured: natural text and in-context prompts
+  CLAIM: Mahaut and Franzon measure that as a repeated context lengthens over more cycles the next-token entropy falls and the probability of the repeated tokens rises.
+  TW: Sec. 5: median entropy decreases as cycles increase; probability rise cited
+  LIMB: that the authors themselves measure rising probability of the repeated tokens — the paper measures entropy only, and attributes the probability rise to prior literature ("results from the literature reporting increasing probabilities for repetition", Sec. 3; "consistent with previous findings" prefaces the quoted Discussion sentence)
+  NOTE: Raw PDF reached: https://arxiv.org/pdf/2504.01100v2 downloaded (3.2 MB, 8 pages, banner 'arXiv:2504.01100v2 [cs.CL] 4 Nov 2025'), extracted with pdftotext -layout. The quoted fragment is verbatim, in 

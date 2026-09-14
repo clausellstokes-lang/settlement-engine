@@ -1,0 +1,3443 @@
+{
+  "schemaVersion": 5,
+  "kind": "whole_world_soak",
+  "presetId": "full_simulation",
+  "seed": "lprobe-full_simulation",
+  "years": 5,
+  "settlements": 4,
+  "now": "2026-07-12T00:00:00.000Z",
+  "passed": true,
+  "properties": [
+    "no_crash",
+    "rerun_identical",
+    "seed_divergent",
+    "population_bounded",
+    "isolated_worker_executed",
+    "isolated_worker_output_identical"
+  ],
+  "seedDivergence": {
+    "executed": true,
+    "instrument": "event_type_total_variation_v1",
+    "verdict": "PASS",
+    "passed": true,
+    "instrumentExecutable": true,
+    "smallestSample": 606,
+    "minSampleEvents": 2,
+    "notExecutableReason": null,
+    "windowYears": 5,
+    "seeds": {
+      "baseline": "lprobe-full_simulation",
+      "divergent": "lprobe-full_simulation-divergent"
+    },
+    "thresholds": {
+      "minTotalVariationDistance": 0.1,
+      "minShiftedEventEquivalents": 2
+    },
+    "totalVariationDistance": 0.3729519455830155,
+    "shiftedEventEquivalents": 226.00887902330737,
+    "sampleTotals": {
+      "baseline": 901,
+      "divergent": 606
+    },
+    "distinctTypeTotals": {
+      "baseline": 67,
+      "divergent": 60
+    },
+    "topTypeShifts": [
+      {
+        "type": "trade_route_disruption",
+        "baselineCount": 34,
+        "comparisonCount": 59,
+        "baselineShare": 0.03773584905660377,
+        "comparisonShare": 0.09735973597359736,
+        "absoluteShareShift": 0.059623886916993586
+      },
+      {
+        "type": "strategy_reroute",
+        "baselineCount": 57,
+        "comparisonCount": 4,
+        "baselineShare": 0.06326304106548279,
+        "comparisonShare": 0.006600660066006601,
+        "absoluteShareShift": 0.056662380999476195
+      },
+      {
+        "type": "strategy_credit",
+        "baselineCount": 51,
+        "comparisonCount": 2,
+        "baselineShare": 0.05660377358490566,
+        "comparisonShare": 0.0033003300330033004,
+        "absoluteShareShift": 0.05330344355190236
+      },
+      {
+        "type": "npc_reform",
+        "baselineCount": 61,
+        "comparisonCount": 73,
+        "baselineShare": 0.06770255271920089,
+        "comparisonShare": 0.12046204620462046,
+        "absoluteShareShift": 0.05275949348541957
+      },
+      {
+        "type": "faction_service_bolster",
+        "baselineCount": 55,
+        "comparisonCount": 6,
+        "baselineShare": 0.06104328523862375,
+        "comparisonShare": 0.009900990099009901,
+        "absoluteShareShift": 0.051142295139613846
+      }
+    ],
+    "equalWindows": true,
+    "nonEmpty": true,
+    "invalidEntries": [],
+    "hashDiverged": true
+  },
+  "warConvergence": {
+    "schemaVersion": 5,
+    "kind": "war_convergence_observation",
+    "endingsMix": {
+      "terms": 0,
+      "exhaustion": 0,
+      "ruler_change": 0,
+      "fragmentation": 0,
+      "annihilation": 0,
+      "conquest": 1,
+      "punitive_sack_initiation": 0,
+      "punitive_sack_vengeance": 0
+    },
+    "endingsUnclassified": {
+      "not_a_closed_war": 0,
+      "no_terminal_evidence": 2,
+      "razing_road_unreconstructable": 0
+    },
+    "warDurationHistogram": {
+      "short": 2,
+      "long": 0,
+      "generational": 0,
+      "unresolved": 0,
+      "unmeasured": 1
+    },
+    "terminationDecidingTermHistogram": {
+      "cause": 0,
+      "cost_to_continue": 0,
+      "cost_to_stop": 0,
+      "momentum": 0
+    },
+    "decidingTermSampling": {
+      "censusSource": "outcome stream (every interior tick), not the year-boundary deployment ledger",
+      "closeTickResolution": "tick",
+      "observedOpenRoads": [
+        "war_layer_strategy_deploy"
+      ],
+      "observedCloseRoads": [
+        "war_layer_war_exhaustion/siege_abandoned"
+      ],
+      "unobservedRoadDurationsAre": "unmeasured",
+      "decidingTermSample": "1-in-52",
+      "decidingTermSampleReason": "warTerminationReads ride the pulse record and collapseIntervalHistory keeps only the year-final tick",
+      "samples": 0,
+      "horizonTick": 260
+    },
+    "flagCertificationRows": [
+      {
+        "rule": "warTerminationEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "dispositionChannelsEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "lineageClaimEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "coalitionLedgerEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "envoyDiplomacyEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "conquestDoctrineEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      },
+      {
+        "rule": "sovereigntyTradeEnabled",
+        "ruleState": "unknown",
+        "verdict": "UNOBSERVED"
+      }
+    ],
+    "forceEvidence": {
+      "homeFrontByDurationBand": {
+        "opening": {
+          "samples": 0,
+          "scoreTotal": 0
+        },
+        "sustained": {
+          "samples": 0,
+          "scoreTotal": 0
+        },
+        "protracted": {
+          "samples": 0,
+          "scoreTotal": 0
+        }
+      },
+      "capabilityReadings": {
+        "readings": 0,
+        "atCollapse": 0
+      },
+      "compromiseWideningSequences": [],
+      "coalitionFragmentation": {
+        "fragmentations": 0,
+        "pairwisePeaces": 0
+      }
+    }
+  },
+  "warConvergenceCensus": {
+    "countedWars": 3,
+    "closedWars": 3,
+    "aliveAtHorizonWars": 0,
+    "histogramSum": 3,
+    "endingsSum": 3,
+    "durationTotalityHolds": true,
+    "endingsTotalityHolds": true,
+    "classifiedEndings": 1,
+    "unclassifiedEndings": 2,
+    "unclassifiedReasons": {
+      "not_a_closed_war": 0,
+      "no_terminal_evidence": 2,
+      "razing_road_unreconstructable": 0
+    },
+    "unmeasuredFromUnobservedRoad": 1,
+    "unmeasuredFromAmbiguousPair": 0,
+    "decidingTermSamples": 0,
+    "horizonTick": 260,
+    "channelCoverage": {
+      "closed": "filled — a reconstructed siege-abandoned outcome, or an open whose army is gone",
+      "attackerId": "filled — reconstructed from the outcome id prefix",
+      "defenderId": "filled — reconstructed from the outcome id prefix",
+      "terminalOutcomes": "filled — conquest and razing outcomes accumulated across every interior tick",
+      "loserDied": "filled — the engine settlement death stamp, config.lifecycleDiedAtTick",
+      "treatyWritten": "filled — the treaty ledger, keyed by the real treatyPairKey minter",
+      "peaceReason": "unfilled — no peace reason reaches the composed year result; warTermination publishes bands and a deciding term, not the reason token classifyWarEnding reads",
+      "coalitionFragmented": "unfilled — coalition fracture facts need coalitionLedgerEnabled, which no shipped preset lights",
+      "seatTransitionFamily": "unfilled — the WR-5 governed families need lineageClaimEnabled, which no shipped preset lights"
+    },
+    "sampling": {
+      "censusSource": "outcome stream (every interior tick), not the year-boundary deployment ledger",
+      "closeTickResolution": "tick",
+      "observedOpenRoads": [
+        "war_layer_strategy_deploy"
+      ],
+      "observedCloseRoads": [
+        "war_layer_war_exhaustion/siege_abandoned"
+      ],
+      "unobservedRoadDurationsAre": "unmeasured",
+      "decidingTermSample": "1-in-52",
+      "decidingTermSampleReason": "warTerminationReads ride the pulse record and collapseIntervalHistory keeps only the year-final tick"
+    }
+  },
+  "finalHash": "299c16153f40020a0a8a49db0ca9b4b81381f1a0eec0963019d3050245a7dfa7",
+  "yearlyHashes": [
+    "bc147b6bb98bccdc9e97cd0386067182dc4192ba1208ce2331b858a6fa31ebe9",
+    "beb6fe62f33b9c07889c3d290cbbb603dbde335061e3f495016ce2bdf4dd23dc",
+    "7e66d4be5aaeed6b7b068e3d9ee2cc7a5958648c0fa0f54698ed321200979ed4",
+    "f43333b0001ad0c5d173a167102e7589eac05f4452b7eb65fe5d00f8819231ee",
+    "299c16153f40020a0a8a49db0ca9b4b81381f1a0eec0963019d3050245a7dfa7"
+  ],
+  "directFirstResultSha256": "920b6ddd4bac872f0fdeaaa31f0bf0e1996b58890487bbe623e04b1a33ba894b",
+  "advanceEpochs": [
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "stressorCounts": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "startPopulations": [
+    9713,
+    1815,
+    4680,
+    510
+  ],
+  "finalPopulations": [
+    9845,
+    483,
+    1141,
+    390
+  ],
+  "finalDiedFlags": [
+    false,
+    false,
+    false,
+    false
+  ],
+  "yearlyBytes": [
+    381941,
+    499730,
+    580693,
+    637889,
+    706066
+  ],
+  "yearlyRealmBytes": [
+    1102485,
+    1239155,
+    1336420,
+    1408933,
+    1480828
+  ],
+  "yearlyMs": [
+    3047,
+    3023,
+    2858,
+    2846,
+    2893
+  ],
+  "finalRealmBytes": 1659658,
+  "structuredCloneMs": 8.158457999999882,
+  "isolatedWorker": {
+    "schemaVersion": 1,
+    "kind": "isolated_advance_worker_measurement",
+    "actualExecution": true,
+    "runtime": {
+      "transport": "node:worker_threads",
+      "isolation": "separate-thread-v8-isolate",
+      "nodeVersion": "v24.12.0",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "parentThreadId": 0,
+      "parentIsMainThread": true,
+      "workerThreadId": 1,
+      "workerIsMainThread": false,
+      "browserWebWorker": false,
+      "productionBrowserTransportMeasured": false,
+      "productWorkerModule": "src/workers/advanceInterval.worker.js",
+      "domainEntry": "src/domain/worldPulse/advanceInterval.js#simulateCampaignWorldInterval"
+    },
+    "request": {
+      "interval": "one_year",
+      "jsonBytes": 638968,
+      "jsonSha256": "d2e092aaafd7bbab267f4ff7ae909d07a9d269282e6132a8025f6d1014384364"
+    },
+    "response": {
+      "status": "complete",
+      "jsonBytes": 7031103,
+      "jsonSha256": "920b6ddd4bac872f0fdeaaa31f0bf0e1996b58890487bbe623e04b1a33ba894b",
+      "progressMessages": 52,
+      "firstProgress": {
+        "ticksDone": 1,
+        "ticksTotal": 52,
+        "interval": "one_year"
+      },
+      "lastProgress": {
+        "ticksDone": 52,
+        "ticksTotal": 52,
+        "interval": "one_year"
+      }
+    },
+    "timingsMs": {
+      "workerConstructor": 0.833,
+      "workerOnlineAfterConstructionStart": 16.075,
+      "productAdapterReadyAfterConstructionStart": 292.06,
+      "coldStartToTerminal": 3998.457,
+      "requestToTerminal": 3997.624,
+      "workerHandlerToTerminalPost": 3678.702,
+      "boundaryAndBootstrapResidual": 318.921
+    },
+    "nonVacuous": true,
+    "claimBoundary": {
+      "measured": "An actual cold Node worker_threads round trip through the product advance worker module and domain entry.",
+      "notMeasured": "Browser Web Worker startup, scheduling, structured-clone implementation, or device-specific duration.",
+      "residual": "boundaryAndBootstrapResidual is an arithmetic remainder containing bootstrap, scheduling, clone, and delivery work; it is not exact transport time.",
+      "timingClass": "Host-sensitive release evidence and regression telemetry, not a cross-device performance guarantee."
+    }
+  },
+  "isolatedWorkerError": null,
+  "heapUsedBytes": 194594264,
+  "peakHeapUsedBytes": 331587312,
+  "realmScalingExercised": false,
+  "subsystems": {
+    "schemaVersion": 5,
+    "kind": "soak_subsystem_configuration",
+    "presetId": "full_simulation",
+    "observedYears": 5,
+    "ruleKeysRecorded": 57,
+    "rules": {
+      "allyDefenseEnabled": true,
+      "allyIntelSharingEnabled": true,
+      "coalitionLedgerEnabled": false,
+      "commodityFlowEnabled": true,
+      "constructiveFlowsEnabled": true,
+      "defenderAttritionEnabled": true,
+      "defenderResolveEnabled": true,
+      "demographicsEnabled": false,
+      "disastersEnabled": true,
+      "dispositionChannelsEnabled": false,
+      "distancePricedNewsEnabled": true,
+      "emergentEventsEnabled": true,
+      "envoyDiplomacyEnabled": false,
+      "factionCompetitionEnabled": true,
+      "faithSpreadEnabled": true,
+      "informationBrokeragesEnabled": false,
+      "institutionLifecycleEnabled": true,
+      "interventionEnabled": true,
+      "lineageClaimEnabled": false,
+      "magicEconomyEnabled": false,
+      "majorChangesRequireProposal": false,
+      "migrationFlowsEnabled": true,
+      "momentumEnabled": true,
+      "navalEnabled": true,
+      "npcAgencyEnabled": true,
+      "npcConsequencesEnabled": false,
+      "npcGrowthEnabled": true,
+      "npcLadderEnabled": true,
+      "peaceEngineEnabled": true,
+      "populationDynamicsEnabled": true,
+      "provenanceLedgerEnabled": true,
+      "reframeEnabled": true,
+      "relationshipDynamicsEnabled": true,
+      "religionDynamicsEnabled": true,
+      "resourceDriftEnabled": true,
+      "resourceDynamicsEnabled": true,
+      "roadsEnabled": true,
+      "routeLifecycleEnabled": false,
+      "seasonsEnabled": true,
+      "settlementLifecycleEnabled": true,
+      "settlementStrategyEnabled": true,
+      "spatialConsequenceEnabled": true,
+      "stressorsEnabled": true,
+      "supplyWebWarfareEnabled": true,
+      "tierDriftEnabled": true,
+      "townCartographyEnabled": false,
+      "tradeFlowsEnabled": true,
+      "traditionsEnabled": true,
+      "upswingArcsEnabled": true,
+      "urbanFabricEnabled": true,
+      "warDispositionEnabled": true,
+      "warEconomyDrainEnabled": true,
+      "warForageEnabled": true,
+      "warLayerEnabled": true,
+      "warLevyEnabled": true,
+      "warSupplyQualityEnabled": true,
+      "warTerminationEnabled": false
+    },
+    "stateKeysComplete": true,
+    "stateKeys": {
+      "calendar": {
+        "years": 5,
+        "maxEntries": 5,
+        "finalEntries": 5
+      },
+      "canonizedAt": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "causeLifecycle": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "conquestFeeds": {
+        "years": 1,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "defenderSiegeLedger": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 0
+      },
+      "deployments": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 0
+      },
+      "dispositionStats": {
+        "years": 5,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "factionStates": {
+        "years": 5,
+        "maxEntries": 30,
+        "finalEntries": 29
+      },
+      "mercenaryMarket": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "narrativeTempo": {
+        "years": 5,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "npcStates": {
+        "years": 5,
+        "maxEntries": 38,
+        "finalEntries": 37
+      },
+      "occupations": {
+        "years": 4,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "pendingEvents": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "proposals": {
+        "years": 5,
+        "maxEntries": 16,
+        "finalEntries": 16
+      },
+      "pulseHistory": {
+        "years": 5,
+        "maxEntries": 5,
+        "finalEntries": 5
+      },
+      "relationshipStates": {
+        "years": 5,
+        "maxEntries": 8,
+        "finalEntries": 8
+      },
+      "rngSeed": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "schemaVersion": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "settlementTickStates": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "simulationRules": {
+        "years": 5,
+        "maxEntries": 70,
+        "finalEntries": 70
+      },
+      "spatialCanonVersion": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialDigest": {
+        "years": 5,
+        "maxEntries": 14,
+        "finalEntries": 14
+      },
+      "spatialLedgers": {
+        "years": 5,
+        "maxEntries": 26,
+        "finalEntries": 20
+      },
+      "spatialLedgers.armyTransit": {
+        "years": 1,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.beliefMaps": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.bufferDiscipline": {
+        "years": 2,
+        "maxEntries": 2,
+        "finalEntries": 1
+      },
+      "spatialLedgers.commitments": {
+        "years": 1,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.commodityStocks": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.embattlement": {
+        "years": 4,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "spatialLedgers.entrepots": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.generosityWillingness": {
+        "years": 4,
+        "maxEntries": 5,
+        "finalEntries": 4
+      },
+      "spatialLedgers.merchantAppetite": {
+        "years": 5,
+        "maxEntries": 2,
+        "finalEntries": 1
+      },
+      "spatialLedgers.npcGrowth": {
+        "years": 1,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.npcLadder": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.obligations": {
+        "years": 5,
+        "maxEntries": 5,
+        "finalEntries": 4
+      },
+      "spatialLedgers.peaceReasons": {
+        "years": 1,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "spatialLedgers.provenance": {
+        "years": 5,
+        "maxEntries": 54,
+        "finalEntries": 54
+      },
+      "spatialLedgers.reframes": {
+        "years": 4,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "spatialLedgers.refugePostures": {
+        "years": 5,
+        "maxEntries": 6,
+        "finalEntries": 6
+      },
+      "spatialLedgers.roads": {
+        "years": 5,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "spatialLedgers.rumorLedgers": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.satellites": {
+        "years": 5,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "spatialLedgers.spatialArrivals": {
+        "years": 4,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.supplyShipments": {
+        "years": 5,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "spatialLedgers.tradeFlow": {
+        "years": 5,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "spatialLedgers.tradeOverture": {
+        "years": 1,
+        "maxEntries": 2,
+        "finalEntries": 2
+      },
+      "spatialLedgers.traditions": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.upswing": {
+        "years": 1,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.urbanFabric": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.warIntents": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.warReasons": {
+        "years": 5,
+        "maxEntries": 10,
+        "finalEntries": 10
+      },
+      "stressors": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 0
+      },
+      "tick": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "tradeWarState": {
+        "years": 5,
+        "maxEntries": 0,
+        "finalEntries": 0
+      },
+      "volatility": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "warExhaustion": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 0
+      },
+      "warPosture": {
+        "years": 1,
+        "maxEntries": 2,
+        "finalEntries": 2
+      }
+    }
+  },
+  "behavioral": {
+    "schemaVersion": 4,
+    "kind": "whole_world_behavioral_observation",
+    "settlementIds": [
+      "soak-a",
+      "soak-b",
+      "soak-c",
+      "soak-d"
+    ],
+    "yearly": [
+      {
+        "year": 1,
+        "eventCount": 345,
+        "majorEventCount": 53,
+        "mechanicalOutcomeCount": 445,
+        "unclassifiedEventCount": 31,
+        "eventTypeCounts": {
+          "strategy_deploy": 7,
+          "strategy_embargo": 9,
+          "npc_suppress": 16,
+          "npc_expose": 13,
+          "npc_exploit": 11,
+          "crime_pressure": 9,
+          "rival_sabotage": 12,
+          "resource_depletion": 5,
+          "strategy_sue_for_peace": 1,
+          "stressor_birth_betrayal": 12,
+          "faction_institution_capture": 20,
+          "faction_institution_suppression": 5,
+          "stressor_escalate_betrayal": 2,
+          "war_mobilization": 43,
+          "stressor_residual": 13,
+          "neutral_border_incident": 15,
+          "faction_service_bolster": 8,
+          "tier_promotion": 1,
+          "strategy_credit": 15,
+          "strategy_reroute": 22,
+          "npc_goal_rebranch": 39,
+          "war_conscription": 3,
+          "war_drain": 4,
+          "army_deployed": 2,
+          "institution_build": 1,
+          "war_exhaustion": 13,
+          "legitimacy_pressure": 3,
+          "reinforcement_cost": 3,
+          "faction_government_challenge": 3,
+          "rival_arms_race": 4,
+          "army_homecoming": 2,
+          "npc_seek_promotion": 1,
+          "stressor_spread_betrayal": 1,
+          "npc_reform": 5,
+          "npc_mobilize": 2,
+          "stressor_birth_magic_deadzone": 1,
+          "neutral_to_trade_partner": 1,
+          "trade_to_allied": 1,
+          "npc_bargain": 2,
+          "war_exhaustion_cleared": 1,
+          "faction_law_preference_push": 6,
+          "mobilization_reaction_fortify": 2,
+          "food_pressure": 2,
+          "tier_demotion": 1,
+          "flow_trade_scarcity": 2,
+          "trade_route_disruption": 1
+        },
+        "moverCounts": {
+          "pressure": 144,
+          "place": 100,
+          "population": 0,
+          "economy": 3,
+          "politics": 18,
+          "war": 17,
+          "faith": 19,
+          "people": 99,
+          "constructive": 11,
+          "knowledge": 5
+        },
+        "selectedMoverCounts": {
+          "pressure": 120,
+          "place": 80,
+          "population": 0,
+          "economy": 3,
+          "politics": 17,
+          "war": 5,
+          "faith": 5,
+          "people": 84,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 24,
+          "place": 20,
+          "population": 0,
+          "economy": 0,
+          "politics": 1,
+          "war": 12,
+          "faith": 14,
+          "people": 15,
+          "constructive": 11,
+          "knowledge": 5
+        },
+        "postApplyReceiptCount": 102,
+        "arcCounts": {
+          "constructive": 17,
+          "destructive": 72
+        },
+        "postApplyArcCounts": {
+          "constructive": 16,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 4,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 3,
+          "powerTransitions": 4,
+          "powerMoved": 3
+        },
+        "attentionCounts": {
+          "soak-b": 151,
+          "soak-c": 100,
+          "soak-a": 71,
+          "soak-d": 24
+        },
+        "succession": {
+          "pendingProposals": 3,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 3,
+          "multiParentEvents": 0,
+          "familyPairs": [
+            "place->economy",
+            "pressure->war"
+          ]
+        },
+        "chronicleSample": [
+          {
+            "id": "candidate.strategy.deploy.soak_b.1",
+            "type": "strategy_deploy",
+            "headline": "Waldhafen resolves to march",
+            "summary": "Waldhafen commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_a.3",
+            "type": "strategy_deploy",
+            "headline": "Weichsee resolves to march",
+            "summary": "Weichsee commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.5",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_c.5",
+            "type": "war_mobilization",
+            "headline": "Doirethwaite mobilizes for war",
+            "summary": "Doirethwaite is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.6",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_c.6",
+            "type": "war_mobilization",
+            "headline": "Doirethwaite mobilizes for war",
+            "summary": "Doirethwaite is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.7",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_c.7",
+            "type": "war_mobilization",
+            "headline": "Doirethwaite mobilizes for war",
+            "summary": "Doirethwaite is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.5,
+            "parentIds": []
+          }
+        ],
+        "stateVectors": {
+          "soak-a": {
+            "population": 10257,
+            "prosperity": 6,
+            "topFaction": "Thieves' Guild",
+            "powerEntropy": 0.7696455306157532
+          },
+          "soak-b": {
+            "population": 1587,
+            "prosperity": 6,
+            "topFaction": "Merchant Guilds",
+            "powerEntropy": 0.9651529867258903
+          },
+          "soak-c": {
+            "population": 3712,
+            "prosperity": 6,
+            "topFaction": "Guild Council",
+            "powerEntropy": 0.9540000042630976
+          },
+          "soak-d": {
+            "population": 500,
+            "prosperity": 4,
+            "topFaction": "Merchant Guilds",
+            "powerEntropy": 0.9722534375890534
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 492,
+          "windows": 20,
+          "exactRepeats": 296,
+          "familyRepeats": 296,
+          "exactRepeatRate": 0.6016,
+          "familyRepeatRate": 0.6016,
+          "untrackedFamilies": 492,
+          "worstWindow": {
+            "settlementId": "soak-c",
+            "window": 0,
+            "startTick": 0,
+            "endTick": 12,
+            "observations": 61,
+            "exactRepeats": 47,
+            "familyRepeats": 47,
+            "exactRepeatRate": 0.7705,
+            "familyRepeatRate": 0.7705,
+            "untrackedFamilies": 61
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 33,
+              "exactRepeats": 22,
+              "familyRepeats": 22,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 33
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 1,
+              "startTick": 13,
+              "endTick": 25,
+              "observations": 28,
+              "exactRepeats": 14,
+              "familyRepeats": 14,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 28
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 16,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.375,
+              "familyRepeatRate": 0.375,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 29,
+              "exactRepeats": 18,
+              "familyRepeats": 18,
+              "exactRepeatRate": 0.6207,
+              "familyRepeatRate": 0.6207,
+              "untrackedFamilies": 29
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 4,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 51,
+              "exactRepeats": 37,
+              "familyRepeats": 37,
+              "exactRepeatRate": 0.7255,
+              "familyRepeatRate": 0.7255,
+              "untrackedFamilies": 51
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 1,
+              "startTick": 13,
+              "endTick": 25,
+              "observations": 54,
+              "exactRepeats": 37,
+              "familyRepeats": 37,
+              "exactRepeatRate": 0.6852,
+              "familyRepeatRate": 0.6852,
+              "untrackedFamilies": 54
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 49,
+              "exactRepeats": 35,
+              "familyRepeats": 35,
+              "exactRepeatRate": 0.7143,
+              "familyRepeatRate": 0.7143,
+              "untrackedFamilies": 49
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 39,
+              "exactRepeats": 26,
+              "familyRepeats": 26,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 39
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 7,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 61,
+              "exactRepeats": 47,
+              "familyRepeats": 47,
+              "exactRepeatRate": 0.7705,
+              "familyRepeatRate": 0.7705,
+              "untrackedFamilies": 61
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 1,
+              "startTick": 13,
+              "endTick": 25,
+              "observations": 33,
+              "exactRepeats": 18,
+              "familyRepeats": 18,
+              "exactRepeatRate": 0.5455,
+              "familyRepeatRate": 0.5455,
+              "untrackedFamilies": 33
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 17,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.3529,
+              "familyRepeatRate": 0.3529,
+              "untrackedFamilies": 17
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 25,
+              "exactRepeats": 15,
+              "familyRepeats": 15,
+              "exactRepeatRate": 0.6,
+              "familyRepeatRate": 0.6,
+              "untrackedFamilies": 25
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 23,
+              "exactRepeats": 11,
+              "familyRepeats": 11,
+              "exactRepeatRate": 0.4783,
+              "familyRepeatRate": 0.4783,
+              "untrackedFamilies": 23
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 1,
+              "startTick": 13,
+              "endTick": 25,
+              "observations": 9,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2222,
+              "familyRepeatRate": 0.2222,
+              "untrackedFamilies": 9
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 4,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 435,
+          "subjectAddressed": 432,
+          "typedAction": 435,
+          "affectedSettlements": 432,
+          "reason": 423,
+          "fullyAddressed": 420,
+          "depthHistogram": {
+            "0": 3,
+            "1": 432,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 993,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 993,
+          "reasonRateMilli": 972,
+          "fullyAddressedRateMilli": 966
+        },
+        "beliefDivergence": {
+          "infoMode": "full",
+          "spatialCanonized": true,
+          "observers": 4,
+          "slots": 16,
+          "records": 45,
+          "meanConfidence01": 0.793,
+          "meanStalenessTicks": 3.1333,
+          "maxStalenessTicks": 21,
+          "relationshipComparable": 38,
+          "relationshipMismatched": 2,
+          "faithComparable": 45,
+          "faithMismatched": 0,
+          "axes": [
+            "relationship",
+            "faith"
+          ],
+          "divergence01": 0.0263
+        }
+      },
+      {
+        "year": 2,
+        "eventCount": 183,
+        "majorEventCount": 14,
+        "mechanicalOutcomeCount": 525,
+        "unclassifiedEventCount": 2,
+        "eventTypeCounts": {
+          "war_mobilization": 7,
+          "strategy_credit": 7,
+          "npc_bargain": 9,
+          "faction_service_bolster": 14,
+          "trade_route_disruption": 12,
+          "npc_reform": 11,
+          "strategy_embargo": 8,
+          "rival_arms_race": 1,
+          "strategy_reroute": 15,
+          "npc_suppress": 5,
+          "trade_pressure": 1,
+          "institution_closure": 5,
+          "faction_institution_capture": 2,
+          "conquest": 1,
+          "war_exhaustion": 4,
+          "army_homecoming": 1,
+          "faction_challenge": 1,
+          "occupation_resistance": 3,
+          "occupation_burden": 6,
+          "faction_law_preference_push": 6,
+          "rival_sabotage": 1,
+          "war_spoils": 4,
+          "tier_demotion": 3,
+          "crime_pressure": 7,
+          "resource_recovery": 1,
+          "occupation_vassalized": 1,
+          "npc_goal_culmination": 1,
+          "stressor_birth_criminal_corridor": 1,
+          "npc_goal_rebranch": 16,
+          "stressor_residual": 1,
+          "conflict_pressure": 2,
+          "legitimacy_pressure": 2,
+          "vassal_tribute_extraction": 2,
+          "vassal_overlord_weakness_memory": 6,
+          "vassal_protection_burden": 3,
+          "faction_government_challenge": 1,
+          "strategy_deploy": 4,
+          "war_exhaustion_cleared": 1,
+          "trade_smuggling_pressure": 3,
+          "npc_protect": 1,
+          "food_pressure": 1,
+          "npc_mobilize": 1,
+          "flow_trade_scarcity": 1
+        },
+        "moverCounts": {
+          "pressure": 81,
+          "place": 71,
+          "population": 0,
+          "economy": 12,
+          "politics": 37,
+          "war": 14,
+          "faith": 18,
+          "people": 56,
+          "constructive": 18,
+          "knowledge": 4
+        },
+        "selectedMoverCounts": {
+          "pressure": 52,
+          "place": 41,
+          "population": 0,
+          "economy": 12,
+          "politics": 30,
+          "war": 2,
+          "faith": 5,
+          "people": 39,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 29,
+          "place": 30,
+          "population": 0,
+          "economy": 0,
+          "politics": 7,
+          "war": 12,
+          "faith": 13,
+          "people": 17,
+          "constructive": 18,
+          "knowledge": 4
+        },
+        "postApplyReceiptCount": 130,
+        "arcCounts": {
+          "constructive": 19,
+          "destructive": 41
+        },
+        "postApplyArcCounts": {
+          "constructive": 18,
+          "destructive": 14
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 4,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 2,
+          "powerTransitions": 4,
+          "powerMoved": 4
+        },
+        "attentionCounts": {
+          "soak-b": 52,
+          "soak-c": 94,
+          "soak-a": 23,
+          "soak-d": 15
+        },
+        "succession": {
+          "pendingProposals": 1,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [
+          {
+            "id": "world_outcome.war_mobilization.soak_b.53",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.54",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.55",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.56",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.57",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.58",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.conquest.soak_b.58",
+            "type": "conquest",
+            "headline": "Doirethwaite storms Waldhafen",
+            "summary": "The siege of Waldhafen broke. Doirethwaite's army holds the walls; an occupation authority now rules in the conqueror's name.",
+            "targetSettlementIds": [
+              "soak-b",
+              "soak-c"
+            ],
+            "severity": 0.6050470858164496,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.war_mobilization.soak_b.59",
+            "type": "war_mobilization",
+            "headline": "Waldhafen mobilizes for war",
+            "summary": "Waldhafen is shifting its economy onto a war footing.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.32,
+            "parentIds": []
+          }
+        ],
+        "stateVectors": {
+          "soak-a": {
+            "population": 9773,
+            "prosperity": 5,
+            "topFaction": "Thieves' Guild",
+            "powerEntropy": 0.7987261438917718
+          },
+          "soak-b": {
+            "population": 981,
+            "prosperity": 6,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.8288144997776633
+          },
+          "soak-c": {
+            "population": 3131,
+            "prosperity": 6,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.9409067828834856
+          },
+          "soak-d": {
+            "population": 398,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7045458616656941
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 382,
+          "windows": 20,
+          "exactRepeats": 199,
+          "familyRepeats": 199,
+          "exactRepeatRate": 0.5209,
+          "familyRepeatRate": 0.5209,
+          "untrackedFamilies": 382,
+          "worstWindow": {
+            "settlementId": "soak-c",
+            "window": 5,
+            "startTick": 65,
+            "endTick": 77,
+            "observations": 52,
+            "exactRepeats": 36,
+            "familyRepeats": 36,
+            "exactRepeatRate": 0.6923,
+            "familyRepeatRate": 0.6923,
+            "untrackedFamilies": 52
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 17,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.4706,
+              "familyRepeatRate": 0.4706,
+              "untrackedFamilies": 17
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 15,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.5333,
+              "familyRepeatRate": 0.5333,
+              "untrackedFamilies": 15
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 6,
+              "startTick": 78,
+              "endTick": 90,
+              "observations": 12,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.4167,
+              "familyRepeatRate": 0.4167,
+              "untrackedFamilies": 12
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 10,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 4,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 39,
+              "exactRepeats": 26,
+              "familyRepeats": 26,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 39
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 38,
+              "exactRepeats": 21,
+              "familyRepeats": 21,
+              "exactRepeatRate": 0.5526,
+              "familyRepeatRate": 0.5526,
+              "untrackedFamilies": 38
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 6,
+              "startTick": 78,
+              "endTick": 90,
+              "observations": 30,
+              "exactRepeats": 15,
+              "familyRepeats": 15,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 30
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 16,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.125,
+              "familyRepeatRate": 0.125,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 42,
+              "exactRepeats": 27,
+              "familyRepeats": 27,
+              "exactRepeatRate": 0.6429,
+              "familyRepeatRate": 0.6429,
+              "untrackedFamilies": 42
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 52,
+              "exactRepeats": 36,
+              "familyRepeats": 36,
+              "exactRepeatRate": 0.6923,
+              "familyRepeatRate": 0.6923,
+              "untrackedFamilies": 52
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 6,
+              "startTick": 78,
+              "endTick": 90,
+              "observations": 34,
+              "exactRepeats": 23,
+              "familyRepeats": 23,
+              "exactRepeatRate": 0.6765,
+              "familyRepeatRate": 0.6765,
+              "untrackedFamilies": 34
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 20,
+              "exactRepeats": 11,
+              "familyRepeats": 11,
+              "exactRepeatRate": 0.55,
+              "familyRepeatRate": 0.55,
+              "untrackedFamilies": 20
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 18,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.4444,
+              "familyRepeatRate": 0.4444,
+              "untrackedFamilies": 18
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 15,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 15
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 6,
+              "startTick": 78,
+              "endTick": 90,
+              "observations": 11,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.1818,
+              "familyRepeatRate": 0.1818,
+              "untrackedFamilies": 11
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 3,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 303,
+          "subjectAddressed": 297,
+          "typedAction": 303,
+          "affectedSettlements": 297,
+          "reason": 291,
+          "fullyAddressed": 285,
+          "depthHistogram": {
+            "0": 6,
+            "1": 297,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 980,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 980,
+          "reasonRateMilli": 960,
+          "fullyAddressedRateMilli": 941
+        },
+        "beliefDivergence": {
+          "infoMode": "full",
+          "spatialCanonized": true,
+          "observers": 4,
+          "slots": 14,
+          "records": 37,
+          "meanConfidence01": 0.8268,
+          "meanStalenessTicks": 2.8378,
+          "maxStalenessTicks": 42,
+          "relationshipComparable": 31,
+          "relationshipMismatched": 2,
+          "faithComparable": 37,
+          "faithMismatched": 0,
+          "axes": [
+            "relationship",
+            "faith"
+          ],
+          "divergence01": 0.0323
+        }
+      },
+      {
+        "year": 3,
+        "eventCount": 137,
+        "majorEventCount": 1,
+        "mechanicalOutcomeCount": 509,
+        "unclassifiedEventCount": 2,
+        "eventTypeCounts": {
+          "strategy_embargo": 5,
+          "npc_goal_rebranch": 16,
+          "tier_demotion": 1,
+          "strategy_reroute": 5,
+          "npc_reform": 21,
+          "faction_service_bolster": 14,
+          "npc_bargain": 17,
+          "npc_mobilize": 1,
+          "resource_discovery": 1,
+          "faction_law_preference_push": 5,
+          "vassal_overlord_weakness_memory": 5,
+          "trade_pressure": 2,
+          "faction_institution_capture": 1,
+          "trade_route_disruption": 9,
+          "vassal_tribute_extraction": 1,
+          "institution_closure": 8,
+          "strategy_credit": 10,
+          "crime_pressure": 5,
+          "vassal_protection_burden": 2,
+          "trade_smuggling_pressure": 1,
+          "npc_protect": 1,
+          "strategy_deploy": 1,
+          "neutral_border_incident": 2,
+          "food_pressure": 2,
+          "flow_trade_scarcity": 1
+        },
+        "moverCounts": {
+          "pressure": 24,
+          "place": 34,
+          "population": 0,
+          "economy": 10,
+          "politics": 30,
+          "war": 0,
+          "faith": 22,
+          "people": 63,
+          "constructive": 41,
+          "knowledge": 1
+        },
+        "selectedMoverCounts": {
+          "pressure": 13,
+          "place": 31,
+          "population": 0,
+          "economy": 9,
+          "politics": 26,
+          "war": 0,
+          "faith": 9,
+          "people": 47,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 11,
+          "place": 3,
+          "population": 0,
+          "economy": 1,
+          "politics": 4,
+          "war": 0,
+          "faith": 13,
+          "people": 16,
+          "constructive": 41,
+          "knowledge": 1
+        },
+        "postApplyReceiptCount": 90,
+        "arcCounts": {
+          "constructive": 30,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 30,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 4,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 2,
+          "powerTransitions": 4,
+          "powerMoved": 2
+        },
+        "attentionCounts": {
+          "soak-c": 55,
+          "soak-a": 31,
+          "soak-d": 28,
+          "soak-b": 23
+        },
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 1,
+          "multiParentEvents": 0,
+          "familyPairs": [
+            "place->economy"
+          ]
+        },
+        "chronicleSample": [
+          {
+            "id": "candidate.strategy.deploy.soak_a.133",
+            "type": "strategy_deploy",
+            "headline": "Weichsee resolves to march",
+            "summary": "Weichsee commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.embargo.soak_c.105",
+            "type": "strategy_embargo",
+            "headline": "Doirethwaite closes its markets to Ingiholm",
+            "summary": "Doirethwaite answers Ingiholm with an embargo: economic pressure in the place of a march.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.goal_rebranch.soak_a_npc_4.105",
+            "type": "npc_goal_rebranch",
+            "headline": "Megingoz Lange redirects a long design",
+            "summary": "Megingoz Lange keeps the same character, but new circumstances now demand different aims.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.44,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.tier.demotion.soak_d.105",
+            "type": "tier_demotion",
+            "headline": "Ingiholm may fall to hamlet",
+            "summary": "Ingiholm has met combined population and support demotion eligibility for 3 consecutive advances.",
+            "targetSettlementIds": [
+              "soak-d"
+            ],
+            "severity": 0.4116782329889563,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.reroute.soak_c.106",
+            "type": "strategy_reroute",
+            "headline": "Doirethwaite reroutes its trade",
+            "summary": "Doirethwaite's merchants steer their caravans around the danger rather than answer it with steel.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.reform.soak_c_npc_3.106",
+            "type": "npc_reform",
+            "headline": "Sorcha MacCarthy may reform",
+            "summary": "Sorcha MacCarthy's survive tribute goal can advance through reform.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.6362827469637115,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.faction.faction_service_bolster.soak_d_merchant_guilds.106",
+            "type": "faction_service_bolster",
+            "headline": "Merchant Guilds may bolster its services",
+            "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
+            "targetSettlementIds": [
+              "soak-d"
+            ],
+            "severity": 0.5275530035073438,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.goal_rebranch.soak_d_npc_1.106",
+            "type": "npc_goal_rebranch",
+            "headline": "Finn Gormsson's aims turn with the times",
+            "summary": "A changed settlement has forced Finn Gormsson to reconsider what comes next.",
+            "targetSettlementIds": [
+              "soak-d"
+            ],
+            "severity": 0.44,
+            "parentIds": []
+          }
+        ],
+        "stateVectors": {
+          "soak-a": {
+            "population": 9433,
+            "prosperity": 3,
+            "topFaction": "Thieves' Guild",
+            "powerEntropy": 0.8088092125471352
+          },
+          "soak-b": {
+            "population": 696,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.8288144997776633
+          },
+          "soak-c": {
+            "population": 2573,
+            "prosperity": 6,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.6117430967502397
+          },
+          "soak-d": {
+            "population": 392,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7691928290130138
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 199,
+          "windows": 20,
+          "exactRepeats": 79,
+          "familyRepeats": 79,
+          "exactRepeatRate": 0.397,
+          "familyRepeatRate": 0.397,
+          "untrackedFamilies": 199,
+          "worstWindow": {
+            "settlementId": "soak-d",
+            "window": 8,
+            "startTick": 104,
+            "endTick": 116,
+            "observations": 18,
+            "exactRepeats": 12,
+            "familyRepeats": 12,
+            "exactRepeatRate": 0.6667,
+            "familyRepeatRate": 0.6667,
+            "untrackedFamilies": 18
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 12,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.4167,
+              "familyRepeatRate": 0.4167,
+              "untrackedFamilies": 12
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 9,
+              "startTick": 117,
+              "endTick": 129,
+              "observations": 13,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3846,
+              "familyRepeatRate": 0.3846,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 10,
+              "startTick": 130,
+              "endTick": 142,
+              "observations": 7,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2857,
+              "familyRepeatRate": 0.2857,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 11,
+              "startTick": 143,
+              "endTick": 155,
+              "observations": 17,
+              "exactRepeats": 10,
+              "familyRepeats": 10,
+              "exactRepeatRate": 0.5882,
+              "familyRepeatRate": 0.5882,
+              "untrackedFamilies": 17
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 5,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 9,
+              "startTick": 117,
+              "endTick": 129,
+              "observations": 8,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 8
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 10,
+              "startTick": 130,
+              "endTick": 142,
+              "observations": 13,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.3077,
+              "familyRepeatRate": 0.3077,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 11,
+              "startTick": 143,
+              "endTick": 155,
+              "observations": 12,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 12
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 17,
+              "exactRepeats": 9,
+              "familyRepeats": 9,
+              "exactRepeatRate": 0.5294,
+              "familyRepeatRate": 0.5294,
+              "untrackedFamilies": 17
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 9,
+              "startTick": 117,
+              "endTick": 129,
+              "observations": 25,
+              "exactRepeats": 12,
+              "familyRepeats": 12,
+              "exactRepeatRate": 0.48,
+              "familyRepeatRate": 0.48,
+              "untrackedFamilies": 25
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 10,
+              "startTick": 130,
+              "endTick": 142,
+              "observations": 14,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3571,
+              "familyRepeatRate": 0.3571,
+              "untrackedFamilies": 14
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 11,
+              "startTick": 143,
+              "endTick": 155,
+              "observations": 14,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4286,
+              "familyRepeatRate": 0.4286,
+              "untrackedFamilies": 14
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 3,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 18,
+              "exactRepeats": 12,
+              "familyRepeats": 12,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 18
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 9,
+              "startTick": 117,
+              "endTick": 129,
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 10,
+              "startTick": 130,
+              "endTick": 142,
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 11,
+              "startTick": 143,
+              "endTick": 155,
+              "observations": 4,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 222,
+          "subjectAddressed": 181,
+          "typedAction": 222,
+          "affectedSettlements": 181,
+          "reason": 215,
+          "fullyAddressed": 174,
+          "depthHistogram": {
+            "0": 41,
+            "1": 181,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 815,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 815,
+          "reasonRateMilli": 968,
+          "fullyAddressedRateMilli": 784
+        },
+        "beliefDivergence": {
+          "infoMode": "full",
+          "spatialCanonized": true,
+          "observers": 4,
+          "slots": 12,
+          "records": 36,
+          "meanConfidence01": 0.8405,
+          "meanStalenessTicks": 2.2222,
+          "maxStalenessTicks": 24,
+          "relationshipComparable": 30,
+          "relationshipMismatched": 0,
+          "faithComparable": 36,
+          "faithMismatched": 0,
+          "axes": [
+            "relationship",
+            "faith"
+          ],
+          "divergence01": 0
+        }
+      },
+      {
+        "year": 4,
+        "eventCount": 117,
+        "majorEventCount": 4,
+        "mechanicalOutcomeCount": 528,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {
+          "strategy_credit": 11,
+          "npc_bargain": 15,
+          "resource_removal": 1,
+          "npc_reform": 12,
+          "crime_pressure": 4,
+          "flow_trade_scarcity": 1,
+          "institution_closure": 5,
+          "resource_discovery": 2,
+          "npc_protect": 2,
+          "strategy_embargo": 9,
+          "faction_service_bolster": 13,
+          "vassal_overlord_weakness_memory": 8,
+          "trade_route_disruption": 5,
+          "faction_law_preference_push": 3,
+          "strategy_deploy": 4,
+          "vassal_protection_burden": 7,
+          "npc_goal_rebranch": 4,
+          "vassal_tribute_extraction": 1,
+          "strategy_reroute": 7,
+          "npc_goal_culmination": 2,
+          "trade_pressure": 1
+        },
+        "moverCounts": {
+          "pressure": 20,
+          "place": 38,
+          "population": 0,
+          "economy": 6,
+          "politics": 34,
+          "war": 0,
+          "faith": 19,
+          "people": 44,
+          "constructive": 82,
+          "knowledge": 4
+        },
+        "selectedMoverCounts": {
+          "pressure": 11,
+          "place": 35,
+          "population": 0,
+          "economy": 5,
+          "politics": 31,
+          "war": 0,
+          "faith": 6,
+          "people": 29,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 9,
+          "place": 3,
+          "population": 0,
+          "economy": 1,
+          "politics": 3,
+          "war": 0,
+          "faith": 13,
+          "people": 15,
+          "constructive": 82,
+          "knowledge": 4
+        },
+        "postApplyReceiptCount": 130,
+        "arcCounts": {
+          "constructive": 68,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 68,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 3,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 3,
+          "powerTransitions": 4,
+          "powerMoved": 3
+        },
+        "attentionCounts": {
+          "soak-c": 48,
+          "soak-b": 30,
+          "soak-d": 21,
+          "soak-a": 18
+        },
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 0,
+          "multiParentEvents": 0,
+          "familyPairs": []
+        },
+        "chronicleSample": [
+          {
+            "id": "candidate.strategy.deploy.soak_b.167",
+            "type": "strategy_deploy",
+            "headline": "Waldhafen resolves to march",
+            "summary": "Waldhafen commits to an offensive posture against Ingiholm.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_c.168",
+            "type": "strategy_deploy",
+            "headline": "Doirethwaite resolves to march",
+            "summary": "Doirethwaite commits to an offensive posture against Ingiholm.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_b.171",
+            "type": "strategy_deploy",
+            "headline": "Waldhafen resolves to march",
+            "summary": "Waldhafen commits to an offensive posture against Ingiholm.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_c.192",
+            "type": "strategy_deploy",
+            "headline": "Doirethwaite resolves to march",
+            "summary": "Doirethwaite commits to an offensive posture against Ingiholm.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.credit.soak_c.157",
+            "type": "strategy_credit",
+            "headline": "Doirethwaite extends its credit",
+            "summary": "Doirethwaite's houses underwrite their partners, buying influence with coin instead of arms.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.bargain.soak_c_npc_4.157",
+            "type": "npc_bargain",
+            "headline": "Cesair Burke may bargain",
+            "summary": "Cesair Burke's survive tribute goal can advance through bargain.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.7161347104174981,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.resource.remove.soak_b.stone_quarry.157",
+            "type": "resource_removal",
+            "headline": "Stone quarry's vein near Waldhafen fails",
+            "summary": "After a long decline the stone quarry near Waldhafen has given out. The vein is done.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.45,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.reform.soak_c_npc_3.158",
+            "type": "npc_reform",
+            "headline": "Sorcha MacCarthy may reform",
+            "summary": "Sorcha MacCarthy's survive tribute goal can advance through reform.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.7371057803955199,
+            "parentIds": []
+          }
+        ],
+        "stateVectors": {
+          "soak-a": {
+            "population": 9462,
+            "prosperity": 2,
+            "topFaction": "Thieves' Guild",
+            "powerEntropy": 0.8764058604648216
+          },
+          "soak-b": {
+            "population": 587,
+            "prosperity": 2,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.8288144997776633
+          },
+          "soak-c": {
+            "population": 1714,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.6500224216483541
+          },
+          "soak-d": {
+            "population": 392,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.7088356733321961
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 176,
+          "windows": 20,
+          "exactRepeats": 62,
+          "familyRepeats": 62,
+          "exactRepeatRate": 0.3523,
+          "familyRepeatRate": 0.3523,
+          "untrackedFamilies": 176,
+          "worstWindow": {
+            "settlementId": "soak-c",
+            "window": 12,
+            "startTick": 156,
+            "endTick": 168,
+            "observations": 19,
+            "exactRepeats": 11,
+            "familyRepeats": 11,
+            "exactRepeatRate": 0.5789,
+            "familyRepeatRate": 0.5789,
+            "untrackedFamilies": 19
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 9,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 9
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 13,
+              "startTick": 169,
+              "endTick": 181,
+              "observations": 10,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.3,
+              "familyRepeatRate": 0.3,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 14,
+              "startTick": 182,
+              "endTick": 194,
+              "observations": 7,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 15,
+              "startTick": 195,
+              "endTick": 207,
+              "observations": 7,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 13,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3846,
+              "familyRepeatRate": 0.3846,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 13,
+              "startTick": 169,
+              "endTick": 181,
+              "observations": 12,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 12
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 14,
+              "startTick": 182,
+              "endTick": 194,
+              "observations": 7,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 15,
+              "startTick": 195,
+              "endTick": 207,
+              "observations": 13,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.3077,
+              "familyRepeatRate": 0.3077,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 19,
+              "exactRepeats": 11,
+              "familyRepeats": 11,
+              "exactRepeatRate": 0.5789,
+              "familyRepeatRate": 0.5789,
+              "untrackedFamilies": 19
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 13,
+              "startTick": 169,
+              "endTick": 181,
+              "observations": 15,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.5333,
+              "familyRepeatRate": 0.5333,
+              "untrackedFamilies": 15
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 14,
+              "startTick": 182,
+              "endTick": 194,
+              "observations": 14,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4286,
+              "familyRepeatRate": 0.4286,
+              "untrackedFamilies": 14
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 15,
+              "startTick": 195,
+              "endTick": 207,
+              "observations": 13,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3846,
+              "familyRepeatRate": 0.3846,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 13,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4615,
+              "familyRepeatRate": 0.4615,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 13,
+              "startTick": 169,
+              "endTick": 181,
+              "observations": 5,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 14,
+              "startTick": 182,
+              "endTick": 194,
+              "observations": 4,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 15,
+              "startTick": 195,
+              "endTick": 207,
+              "observations": 9,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.4444,
+              "familyRepeatRate": 0.4444,
+              "untrackedFamilies": 9
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 238,
+          "subjectAddressed": 157,
+          "typedAction": 238,
+          "affectedSettlements": 157,
+          "reason": 230,
+          "fullyAddressed": 149,
+          "depthHistogram": {
+            "0": 81,
+            "1": 157,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 660,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 660,
+          "reasonRateMilli": 966,
+          "fullyAddressedRateMilli": 626
+        },
+        "beliefDivergence": {
+          "infoMode": "full",
+          "spatialCanonized": true,
+          "observers": 4,
+          "slots": 12,
+          "records": 36,
+          "meanConfidence01": 0.9282,
+          "meanStalenessTicks": 0.4444,
+          "maxStalenessTicks": 6,
+          "relationshipComparable": 30,
+          "relationshipMismatched": 0,
+          "faithComparable": 36,
+          "faithMismatched": 0,
+          "axes": [
+            "relationship",
+            "faith"
+          ],
+          "divergence01": 0
+        }
+      },
+      {
+        "year": 5,
+        "eventCount": 119,
+        "majorEventCount": 4,
+        "mechanicalOutcomeCount": 511,
+        "unclassifiedEventCount": 0,
+        "eventTypeCounts": {
+          "npc_protect": 2,
+          "resource_removal": 1,
+          "npc_bargain": 13,
+          "faction_law_preference_push": 10,
+          "strategy_embargo": 6,
+          "trade_pressure": 2,
+          "food_pressure": 2,
+          "strategy_reroute": 8,
+          "vassal_overlord_weakness_memory": 7,
+          "faction_exhaustion": 5,
+          "faction_service_bolster": 6,
+          "institution_closure": 3,
+          "strategy_credit": 8,
+          "strategy_deploy": 4,
+          "crime_pressure": 4,
+          "vassal_protection_burden": 4,
+          "trade_route_disruption": 7,
+          "faction_rival_power_contest": 2,
+          "npc_reform": 12,
+          "npc_goal_culmination": 7,
+          "npc_goal_rebranch": 5,
+          "vassal_tribute_extraction": 1
+        },
+        "moverCounts": {
+          "pressure": 22,
+          "place": 29,
+          "population": 0,
+          "economy": 7,
+          "politics": 38,
+          "war": 0,
+          "faith": 20,
+          "people": 48,
+          "constructive": 62,
+          "knowledge": 4
+        },
+        "selectedMoverCounts": {
+          "pressure": 13,
+          "place": 26,
+          "population": 0,
+          "economy": 7,
+          "politics": 34,
+          "war": 0,
+          "faith": 7,
+          "people": 32,
+          "constructive": 0,
+          "knowledge": 0
+        },
+        "postApplyMoverCounts": {
+          "pressure": 9,
+          "place": 3,
+          "population": 0,
+          "economy": 0,
+          "politics": 4,
+          "war": 0,
+          "faith": 13,
+          "people": 16,
+          "constructive": 62,
+          "knowledge": 4
+        },
+        "postApplyReceiptCount": 111,
+        "arcCounts": {
+          "constructive": 54,
+          "destructive": 0
+        },
+        "postApplyArcCounts": {
+          "constructive": 54,
+          "destructive": 0
+        },
+        "motion": {
+          "populationTransitions": 4,
+          "populationMoved": 4,
+          "prosperityTransitions": 4,
+          "prosperityMoved": 2,
+          "powerTransitions": 4,
+          "powerMoved": 2
+        },
+        "attentionCounts": {
+          "soak-b": 23,
+          "soak-a": 28,
+          "soak-d": 21,
+          "soak-c": 47
+        },
+        "succession": {
+          "pendingProposals": 0,
+          "attempts": 0,
+          "completions": 0,
+          "integrityFailures": 0,
+          "integrityFailureKinds": {}
+        },
+        "causal": {
+          "crossFamilyEdges": 1,
+          "multiParentEvents": 0,
+          "familyPairs": [
+            "place->economy"
+          ]
+        },
+        "chronicleSample": [
+          {
+            "id": "candidate.strategy.deploy.soak_a.220",
+            "type": "strategy_deploy",
+            "headline": "Weichsee resolves to march",
+            "summary": "Weichsee commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_a.229",
+            "type": "strategy_deploy",
+            "headline": "Weichsee resolves to march",
+            "summary": "Weichsee commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_a.241",
+            "type": "strategy_deploy",
+            "headline": "Weichsee resolves to march",
+            "summary": "Weichsee commits to an offensive posture against Doirethwaite.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.strategy.deploy.soak_c.247",
+            "type": "strategy_deploy",
+            "headline": "Doirethwaite resolves to march",
+            "summary": "Doirethwaite commits to an offensive posture against Ingiholm.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.72,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.protect.soak_b_npc_3.209",
+            "type": "npc_protect",
+            "headline": "Conrad Neumann may protect",
+            "summary": "Conrad Neumann's settle rivalry goal can advance through protect.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.8185729375684505,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.resource.remove.soak_b.stone_quarry.209",
+            "type": "resource_removal",
+            "headline": "The stone quarry near Waldhafen runs dry",
+            "summary": "The stone quarry near Waldhafen has been worked out. After long depletion, the vein is done.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5166666666666667,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.bargain.soak_a_npc_11.210",
+            "type": "npc_bargain",
+            "headline": "Helena Frank may bargain",
+            "summary": "Helena Frank's expand influence goal can advance through bargain.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.787419540513647,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.faction.faction_law_preference_push.soak_d_feudal_stewardship.210",
+            "type": "faction_law_preference_push",
+            "headline": "Feudal Stewardship may push its preferred laws",
+            "summary": "Feudal Stewardship sees an opening to press council rule interests.",
+            "targetSettlementIds": [
+              "soak-d"
+            ],
+            "severity": 0.516,
+            "parentIds": []
+          }
+        ],
+        "stateVectors": {
+          "soak-a": {
+            "population": 9845,
+            "prosperity": 0,
+            "topFaction": "Craft Guilds",
+            "powerEntropy": 0.8642104093364202
+          },
+          "soak-b": {
+            "population": 483,
+            "prosperity": 4,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.8288144997776633
+          },
+          "soak-c": {
+            "population": 1141,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.6500224216483541
+          },
+          "soak-d": {
+            "population": 390,
+            "prosperity": 3,
+            "topFaction": "Military/Guard",
+            "powerEntropy": 0.6161661934005355
+          }
+        },
+        "phraseRepetition": {
+          "schemaVersion": 1,
+          "kind": "phrase_repetition",
+          "windowTicks": 13,
+          "observations": 185,
+          "windows": 20,
+          "exactRepeats": 62,
+          "familyRepeats": 62,
+          "exactRepeatRate": 0.3351,
+          "familyRepeatRate": 0.3351,
+          "untrackedFamilies": 185,
+          "worstWindow": {
+            "settlementId": "soak-c",
+            "window": 17,
+            "startTick": 221,
+            "endTick": 233,
+            "observations": 20,
+            "exactRepeats": 13,
+            "familyRepeats": 13,
+            "exactRepeatRate": 0.65,
+            "familyRepeatRate": 0.65,
+            "untrackedFamilies": 20
+          },
+          "byWindow": [
+            {
+              "settlementId": "soak-a",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 11,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.3636,
+              "familyRepeatRate": 0.3636,
+              "untrackedFamilies": 11
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 17,
+              "startTick": 221,
+              "endTick": 233,
+              "observations": 16,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 16,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3125,
+              "familyRepeatRate": 0.3125,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 19,
+              "startTick": 247,
+              "endTick": 259,
+              "observations": 10,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 9,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2222,
+              "familyRepeatRate": 0.2222,
+              "untrackedFamilies": 9
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 17,
+              "startTick": 221,
+              "endTick": 233,
+              "observations": 8,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.375,
+              "familyRepeatRate": 0.375,
+              "untrackedFamilies": 8
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 7,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 19,
+              "startTick": 247,
+              "endTick": 259,
+              "observations": 11,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.0909,
+              "familyRepeatRate": 0.0909,
+              "untrackedFamilies": 11
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 10,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.3,
+              "familyRepeatRate": 0.3,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 17,
+              "startTick": 221,
+              "endTick": 233,
+              "observations": 20,
+              "exactRepeats": 13,
+              "familyRepeats": 13,
+              "exactRepeatRate": 0.65,
+              "familyRepeatRate": 0.65,
+              "untrackedFamilies": 20
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 16,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.375,
+              "familyRepeatRate": 0.375,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 19,
+              "startTick": 247,
+              "endTick": 259,
+              "observations": 15,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4,
+              "familyRepeatRate": 0.4,
+              "untrackedFamilies": 15
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 7,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2857,
+              "familyRepeatRate": 0.2857,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 17,
+              "startTick": 221,
+              "endTick": 233,
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 5,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.4,
+              "familyRepeatRate": 0.4,
+              "untrackedFamilies": 5
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 19,
+              "startTick": 247,
+              "endTick": 259,
+              "observations": 10,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.4,
+              "familyRepeatRate": 0.4,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 1,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 1
+            }
+          ]
+        },
+        "addressChain": {
+          "schemaVersion": 1,
+          "rows": 227,
+          "subjectAddressed": 166,
+          "typedAction": 227,
+          "affectedSettlements": 166,
+          "reason": 220,
+          "fullyAddressed": 159,
+          "depthHistogram": {
+            "0": 61,
+            "1": 166,
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          "subjectAddressedRateMilli": 731,
+          "typedActionRateMilli": 1000,
+          "affectedSettlementsRateMilli": 731,
+          "reasonRateMilli": 969,
+          "fullyAddressedRateMilli": 700
+        },
+        "beliefDivergence": {
+          "infoMode": "full",
+          "spatialCanonized": true,
+          "observers": 4,
+          "slots": 12,
+          "records": 36,
+          "meanConfidence01": 0.8927,
+          "meanStalenessTicks": 0.8611,
+          "maxStalenessTicks": 13,
+          "relationshipComparable": 30,
+          "relationshipMismatched": 0,
+          "faithComparable": 36,
+          "faithMismatched": 0,
+          "axes": [
+            "relationship",
+            "faith"
+          ],
+          "divergence01": 0
+        }
+      }
+    ],
+    "controls": {}
+  },
+  "runDurationsMs": {
+    "primary": 14796,
+    "replay": 14365,
+    "divergent": 14024
+  },
+  "ticksAdvanced": 780,
+  "frozenTail": false,
+  "liveness": {
+    "executable": false,
+    "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded",
+    "rows": [],
+    "failures": [],
+    "reported": {
+      "minDistinctTypesPerDecade": null,
+      "minEventsPerSettlementDecade": null,
+      "minHashMovesPerDecade": null,
+      "minMajorsPerDecade": null,
+      "majorSilentDecades": 0,
+      "majorSilentDecadeNumbers": []
+    }
+  },
+  "failures": [],
+  "notExecutable": [
+    {
+      "name": "the world keeps moving: every decade carries distinct typed events and the composite state changes every year",
+      "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
+    }
+  ],
+  "completedAt": "2026-09-07T01:36:54.478Z",
+  "nonFiniteFigures": []
+}

@@ -1,0 +1,1164 @@
+{
+ "name": "ai",
+ "writtenAt": "Mon Sep  7 03:09:55 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/critic-ai.md (mtime 2026-09-07T02:10:05-0400)",
+ "rows": [
+  {
+   "index": 571,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 591,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 661,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 670,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 817,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 832,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 842,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 881,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 890,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 891,
+   "feature": "r5",
+   "why": "sec5.A: one of the ten r5 skips the critic lists among the rows a rule depends on; the critic names no source for these, only that a rule depends on them"
+  },
+  {
+   "index": 941,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 943,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 944,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 945,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 949,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 951,
+   "feature": "34,15",
+   "why": "sec5.A: Sato's 'indelible mark' and 'untimely demise'; [944] is the obituary's own word list, which feature 15's biographical lexicon needs"
+  },
+  {
+   "index": 963,
+   "feature": "34,15",
+   "why": "sec5.A: Ward, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 964,
+   "feature": "34,15",
+   "why": "sec5.A: Cole on steerability, the counter-limb features 34 and 15 need"
+  },
+  {
+   "index": 978,
+   "feature": "34,15",
+   "why": "sec5.A: Crow, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 980,
+   "feature": "34,15",
+   "why": "sec5.A: Dyer's counter-evidence, a counter-evidence row the triage skipped and the only support for its limb"
+  },
+  {
+   "index": 981,
+   "feature": "34,15",
+   "why": "sec5.A: Dyer's counter-evidence, a counter-evidence row the triage skipped and the only support for its limb"
+  },
+  {
+   "index": 982,
+   "feature": "34,15",
+   "why": "sec5.A: the guide rows behind features 34 and 15's practice claim"
+  },
+  {
+   "index": 983,
+   "feature": "34,15",
+   "why": "sec5.A: the guide rows behind features 34 and 15's practice claim"
+  },
+  {
+   "index": 990,
+   "feature": "34,15",
+   "why": "sec5.A: the guide rows behind features 34 and 15's practice claim"
+  },
+  {
+   "index": 999,
+   "feature": "34,15",
+   "why": "sec5.A: Treadway, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 1001,
+   "feature": "34,15",
+   "why": "sec5.A: McGreevy, a named source feature 34 rests on"
+  },
+  {
+   "index": 1002,
+   "feature": "34,15",
+   "why": "sec5.A: McGreevy, a named source feature 34 rests on"
+  },
+  {
+   "index": 1003,
+   "feature": "34,15",
+   "why": "sec5.A: McGreevy, a named source feature 34 rests on"
+  },
+  {
+   "index": 1005,
+   "feature": "34,15",
+   "why": "sec5.A: Raicu, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 1032,
+   "feature": "34,15",
+   "why": "sec5.A: Min, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 1037,
+   "feature": "34,15",
+   "why": "sec5.A: Seife, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 1038,
+   "feature": "34,15",
+   "why": "sec5.A: Seife, a named source features 34 and 15 depend on"
+  },
+  {
+   "index": 1044,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1045,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1049,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1050,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1051,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1052,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1053,
+   "feature": "31,32",
+   "why": "sec5.A: Holtzman's Table 1 figures, the nucleus-sampling measurement the rule quotes; the critic's carve-out, the three verified rows 1046-1048, is excluded"
+  },
+  {
+   "index": 1056,
+   "feature": "31,32",
+   "why": "sec5.A: typical sampling, one of the decoding methods features 31 and 32 rank"
+  },
+  {
+   "index": 1057,
+   "feature": "31,32",
+   "why": "sec5.A: typical sampling, one of the decoding methods features 31 and 32 rank"
+  },
+  {
+   "index": 1058,
+   "feature": "31,32",
+   "why": "sec5.A: typical sampling, one of the decoding methods features 31 and 32 rank"
+  },
+  {
+   "index": 1059,
+   "feature": "31,32",
+   "why": "sec5.A: typical sampling, one of the decoding methods features 31 and 32 rank"
+  },
+  {
+   "index": 1061,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1062,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1063,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1064,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1065,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1066,
+   "feature": "31,32",
+   "why": "sec5.A: Nguyen et al. min-p, zero verified: the ICLR 2025 human evaluation, min-p 7.57 against standard sampling 6.83 at temperature 3, the peer-reviewed counter the section lacks"
+  },
+  {
+   "index": 1069,
+   "feature": "31,32",
+   "why": "sec5.A: Mirostat, including the model-era drift row the section itself names 'not citable'"
+  },
+  {
+   "index": 1070,
+   "feature": "31,32",
+   "why": "sec5.A: Mirostat, including the model-era drift row the section itself names 'not citable'"
+  },
+  {
+   "index": 1071,
+   "feature": "31,32",
+   "why": "sec5.A: Mirostat, including the model-era drift row the section itself names 'not citable'"
+  },
+  {
+   "index": 1072,
+   "feature": "31,32",
+   "why": "sec5.A: Mirostat, including the model-era drift row the section itself names 'not citable'"
+  },
+  {
+   "index": 1075,
+   "feature": "31,32",
+   "why": "sec5.A: Su, a contrastive-decoding primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1076,
+   "feature": "31,32",
+   "why": "sec5.A: Su, a contrastive-decoding primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1077,
+   "feature": "31,32",
+   "why": "sec5.A: Su, a contrastive-decoding primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1078,
+   "feature": "31,32",
+   "why": "sec5.A: Su, a contrastive-decoding primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1079,
+   "feature": "31,32",
+   "why": "sec5.A: Su, a contrastive-decoding primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1080,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1081,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1082,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1083,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1084,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1085,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1086,
+   "feature": "31,32",
+   "why": "sec5.A: Schaeffer et al. 'Min-p, Max Exaggeration', zero verified: the rebuttal, so the section holds neither side of the dispute it must adjudicate"
+  },
+  {
+   "index": 1087,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1088,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1089,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1090,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1091,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1092,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1093,
+   "feature": "31,32",
+   "why": "sec5.A: Antislop, a sampler the features 31 and 32 rules rest on"
+  },
+  {
+   "index": 1095,
+   "feature": "31,32",
+   "why": "sec5.A: the antislop README, the tool's own text features 31 and 32 depend on"
+  },
+  {
+   "index": 1096,
+   "feature": "31,32",
+   "why": "sec5.A: the antislop README, the tool's own text features 31 and 32 depend on"
+  },
+  {
+   "index": 1097,
+   "feature": "31,32",
+   "why": "sec5.A: Slop Score, a named slop measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1098,
+   "feature": "31,32",
+   "why": "sec5.A: Slop Score, a named slop measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1101,
+   "feature": "31,32",
+   "why": "sec5.A: Wiher, the decoding-strategy comparison features 31 and 32 depend on"
+  },
+  {
+   "index": 1102,
+   "feature": "31,32",
+   "why": "sec5.A: Wiher, the decoding-strategy comparison features 31 and 32 depend on"
+  },
+  {
+   "index": 1103,
+   "feature": "31,32",
+   "why": "sec5.A: Wiher, the decoding-strategy comparison features 31 and 32 depend on"
+  },
+  {
+   "index": 1104,
+   "feature": "31,32",
+   "why": "sec5.A: Wiher, the decoding-strategy comparison features 31 and 32 depend on"
+  },
+  {
+   "index": 1106,
+   "feature": "31,32",
+   "why": "sec5.A: Hewitt, a truncation-sampling primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1107,
+   "feature": "31,32",
+   "why": "sec5.A: Hewitt, a truncation-sampling primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1109,
+   "feature": "31,32",
+   "why": "sec5.A: Hewitt, a truncation-sampling primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1118,
+   "feature": "31,32",
+   "why": "sec5.A: Shi et al., a decoding-diversity primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1119,
+   "feature": "31,32",
+   "why": "sec5.A: Shi et al., a decoding-diversity primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1120,
+   "feature": "31,32",
+   "why": "sec5.A: Shi et al., a decoding-diversity primary features 31 and 32 depend on"
+  },
+  {
+   "index": 1124,
+   "feature": "31,32",
+   "why": "sec5.A: Zhang's Verbalized Sampling, a diversity method the features 31/32 rule cites"
+  },
+  {
+   "index": 1125,
+   "feature": "31,32",
+   "why": "sec5.A: Zhang's Verbalized Sampling, a diversity method the features 31/32 rule cites"
+  },
+  {
+   "index": 1126,
+   "feature": "31,32",
+   "why": "sec5.A: Zhang's Verbalized Sampling, a diversity method the features 31/32 rule cites"
+  },
+  {
+   "index": 1127,
+   "feature": "31,32",
+   "why": "sec5.A: Zhang's Verbalized Sampling, a diversity method the features 31/32 rule cites"
+  },
+  {
+   "index": 1128,
+   "feature": "31,32",
+   "why": "sec5.A: DivEye, a diversity measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1129,
+   "feature": "31,32",
+   "why": "sec5.A: DivEye, a diversity measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1130,
+   "feature": "31,32",
+   "why": "sec5.A: DivEye, a diversity measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1131,
+   "feature": "31,32",
+   "why": "sec5.A: DivEye, a diversity measurement features 31 and 32 depend on"
+  },
+  {
+   "index": 1149,
+   "feature": "35",
+   "why": "sec5.A: WhatamIdoing's false positive, the counter-evidence row feature 35's rule depends on"
+  },
+  {
+   "index": 1150,
+   "feature": "35",
+   "why": "sec5.A: WhatamIdoing's false positive, the counter-evidence row feature 35's rule depends on"
+  },
+  {
+   "index": 1152,
+   "feature": "35",
+   "why": "sec5.A: LPfi's draft, a policy text feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1153,
+   "feature": "35",
+   "why": "sec5.A: LPfi's draft, a policy text feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1154,
+   "feature": "35",
+   "why": "sec5.A: LPfi's draft, a policy text feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1155,
+   "feature": "35",
+   "why": "sec5.A: LPfi's draft, a policy text feature 35's omitted-war limb depends on"
+  },
+  {
+   "index": 1167,
+   "feature": "35",
+   "why": "sec5.A: Which?, a named measurement and reporting source feature 35's rule depends on"
+  },
+  {
+   "index": 1170,
+   "feature": "35",
+   "why": "sec5.A: Which?, a named measurement and reporting source feature 35's rule depends on"
+  },
+  {
+   "index": 1171,
+   "feature": "35",
+   "why": "sec5.A: Which?, a named measurement and reporting source feature 35's rule depends on"
+  },
+  {
+   "index": 1172,
+   "feature": "35",
+   "why": "sec5.A: Which?, a named measurement and reporting source feature 35's rule depends on"
+  },
+  {
+   "index": 1173,
+   "feature": "35",
+   "why": "sec5.A: Which?, a named measurement and reporting source feature 35's rule depends on"
+  },
+  {
+   "index": 1185,
+   "feature": "35",
+   "why": "sec5.A: Rettberg's mechanism and retraction; the retraction is the false positive withdrawn after the NYT confirmed the reporter used no AI (S5.B: triaged, unmentioned)"
+  },
+  {
+   "index": 1186,
+   "feature": "35",
+   "why": "sec5.A: Rettberg's mechanism and retraction; the retraction is the false positive withdrawn after the NYT confirmed the reporter used no AI (S5.B: triaged, unmentioned)"
+  },
+  {
+   "index": 1189,
+   "feature": "35",
+   "why": "sec5.A: Koehlert and Governing, reporting feature 35's rule relies on"
+  },
+  {
+   "index": 1190,
+   "feature": "35",
+   "why": "sec5.A: Koehlert and Governing, reporting feature 35's rule relies on"
+  },
+  {
+   "index": 1194,
+   "feature": "35",
+   "why": "sec5.A: Ghani, a named source feature 35's rule depends on"
+  },
+  {
+   "index": 1195,
+   "feature": "35",
+   "why": "sec5.A: the survey behind the figure feature 35's rule quotes"
+  },
+  {
+   "index": 1196,
+   "feature": "35",
+   "why": "sec5.A: the survey behind the figure feature 35's rule quotes"
+  },
+  {
+   "index": 1197,
+   "feature": "35",
+   "why": "sec5.A: the September 2025 deletion vote, a record feature 35's rule cites"
+  },
+  {
+   "index": 1199,
+   "feature": "35",
+   "why": "sec5.A: the September 2025 deletion vote, a record feature 35's rule cites"
+  },
+  {
+   "index": 1200,
+   "feature": "35",
+   "why": "sec5.A: the September 2025 deletion vote, a record feature 35's rule cites"
+  },
+  {
+   "index": 1204,
+   "feature": "35",
+   "why": "sec5.A: Zhao, a primary features 35 and 3 both lean on"
+  },
+  {
+   "index": 1205,
+   "feature": "35",
+   "why": "sec5.A: Zhao, a primary features 35 and 3 both lean on"
+  },
+  {
+   "index": 1208,
+   "feature": "35",
+   "why": "sec5.A: Zhao, a primary features 35 and 3 both lean on"
+  },
+  {
+   "index": 1209,
+   "feature": "35",
+   "why": "sec5.A: Gao, a primary feature 35's rule leans on"
+  },
+  {
+   "index": 1210,
+   "feature": "35",
+   "why": "sec5.A: Gao, a primary feature 35's rule leans on"
+  },
+  {
+   "index": 1214,
+   "feature": "36",
+   "why": "sec5.A: HiST-LLM, the historical-accuracy benchmark feature 36 depends on"
+  },
+  {
+   "index": 1216,
+   "feature": "36",
+   "why": "sec5.A: HiST-LLM, the historical-accuracy benchmark feature 36 depends on"
+  },
+  {
+   "index": 1218,
+   "feature": "36",
+   "why": "sec5.A: HiST-LLM, the historical-accuracy benchmark feature 36 depends on"
+  },
+  {
+   "index": 1219,
+   "feature": "36",
+   "why": "sec5.A: the reporting on HiST-LLM feature 36's rule depends on; 1221 (PARTIAL) and 1224 (VERIFIED_VERBATIM) fall inside the range and are excluded"
+  },
+  {
+   "index": 1220,
+   "feature": "36",
+   "why": "sec5.A: the reporting on HiST-LLM feature 36's rule depends on; 1221 (PARTIAL) and 1224 (VERIFIED_VERBATIM) fall inside the range and are excluded"
+  },
+  {
+   "index": 1222,
+   "feature": "36",
+   "why": "sec5.A: the reporting on HiST-LLM feature 36's rule depends on; 1221 (PARTIAL) and 1224 (VERIFIED_VERBATIM) fall inside the range and are excluded"
+  },
+  {
+   "index": 1223,
+   "feature": "36",
+   "why": "sec5.A: the reporting on HiST-LLM feature 36's rule depends on; 1221 (PARTIAL) and 1224 (VERIFIED_VERBATIM) fall inside the range and are excluded"
+  },
+  {
+   "index": 1225,
+   "feature": "36",
+   "why": "sec5.A: the reporting on HiST-LLM feature 36's rule depends on; 1221 (PARTIAL) and 1224 (VERIFIED_VERBATIM) fall inside the range and are excluded"
+  },
+  {
+   "index": 1228,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1229,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1230,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1231,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1234,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1235,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1239,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1240,
+   "feature": "36",
+   "why": "sec5.A: ASIC, the regulator's summarisation trial feature 36's rule depends on, fetched then left SKIPPED_TRIAGE"
+  },
+  {
+   "index": 1244,
+   "feature": "36",
+   "why": "sec5.A: the BBC study of assistant answers, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1245,
+   "feature": "36",
+   "why": "sec5.A: the BBC study of assistant answers, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1248,
+   "feature": "36",
+   "why": "sec5.A: the BBC study of assistant answers, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1249,
+   "feature": "36",
+   "why": "sec5.A: the BBC study of assistant answers, a row feature 36's rule depends on"
+  },
+  {
+   "index": 1252,
+   "feature": "36",
+   "why": "sec5.A: Dahl's temporal gradient, the measurement behind feature 36's age limb; 1255 (VERIFIED_VERBATIM) is inside the range and excluded"
+  },
+  {
+   "index": 1253,
+   "feature": "36",
+   "why": "sec5.A: Dahl's temporal gradient, the measurement behind feature 36's age limb; 1255 (VERIFIED_VERBATIM) is inside the range and excluded"
+  },
+  {
+   "index": 1254,
+   "feature": "36",
+   "why": "sec5.A: Dahl's temporal gradient, the measurement behind feature 36's age limb; 1255 (VERIFIED_VERBATIM) is inside the range and excluded"
+  },
+  {
+   "index": 1256,
+   "feature": "36",
+   "why": "sec5.A: Dahl's temporal gradient, the measurement behind feature 36's age limb; 1255 (VERIFIED_VERBATIM) is inside the range and excluded"
+  },
+  {
+   "index": 1257,
+   "feature": "36",
+   "why": "sec5.A: Dahl's temporal gradient, the measurement behind feature 36's age limb; 1255 (VERIFIED_VERBATIM) is inside the range and excluded"
+  },
+  {
+   "index": 1260,
+   "feature": "36",
+   "why": "sec5.A: SimpleQA, a factuality benchmark feature 36's rule quotes"
+  },
+  {
+   "index": 1261,
+   "feature": "36",
+   "why": "sec5.A: SimpleQA, a factuality benchmark feature 36's rule quotes"
+  },
+  {
+   "index": 1264,
+   "feature": "36",
+   "why": "sec5.A: the Lexis vendor claim feature 36's rule weighs"
+  },
+  {
+   "index": 1265,
+   "feature": "36",
+   "why": "sec5.A: the Lexis vendor claim feature 36's rule weighs"
+  },
+  {
+   "index": 1270,
+   "feature": "36",
+   "why": "sec5.A: the Tow Center measurement feature 36's rule depends on"
+  },
+  {
+   "index": 1271,
+   "feature": "36",
+   "why": "sec5.A: the Tow Center measurement feature 36's rule depends on"
+  },
+  {
+   "index": 1273,
+   "feature": "36",
+   "why": "sec5.A: the Tow Center measurement feature 36's rule depends on"
+  },
+  {
+   "index": 1274,
+   "feature": "36",
+   "why": "sec5.A: ProHist, a historical-prompting primary feature 36's rule depends on"
+  },
+  {
+   "index": 1277,
+   "feature": "36",
+   "why": "sec5.A: ProHist, a historical-prompting primary feature 36's rule depends on"
+  },
+  {
+   "index": 1278,
+   "feature": "36",
+   "why": "sec5.A: ProHist, a historical-prompting primary feature 36's rule depends on"
+  },
+  {
+   "index": 1279,
+   "feature": "36",
+   "why": "sec5.A: ProHist, a historical-prompting primary feature 36's rule depends on"
+  },
+  {
+   "index": 1280,
+   "feature": "37",
+   "why": "sec2: the live G15 policy text, fetched then triaged out; S5.C - the record-register enforcement rule has no verified row while feature 21 cites a draft"
+  },
+  {
+   "index": 1281,
+   "feature": "37",
+   "why": "sec2: the live G15 policy text, fetched then triaged out; S5.C - the record-register enforcement rule has no verified row while feature 21 cites a draft"
+  },
+  {
+   "index": 1282,
+   "feature": "37",
+   "why": "sec2: the live G15 policy text, fetched then triaged out; S5.C - the record-register enforcement rule has no verified row while feature 21 cites a draft"
+  },
+  {
+   "index": 1283,
+   "feature": "37",
+   "why": "sec2: the live G15 policy text, fetched then triaged out; S5.C - the record-register enforcement rule has no verified row while feature 21 cites a draft"
+  },
+  {
+   "index": 1294,
+   "feature": "37",
+   "why": "sec2: Herbold et al. 2023 - teachers rated ChatGPT essays a point higher on seven, words per sentence 18.60 against 19.57, 'In conclusion' opening every conclusion"
+  },
+  {
+   "index": 1295,
+   "feature": "37",
+   "why": "sec2: Herbold et al. 2023 - teachers rated ChatGPT essays a point higher on seven, words per sentence 18.60 against 19.57, 'In conclusion' opening every conclusion"
+  },
+  {
+   "index": 1296,
+   "feature": "37",
+   "why": "sec2: Herbold et al. 2023 - teachers rated ChatGPT essays a point higher on seven, words per sentence 18.60 against 19.57, 'In conclusion' opening every conclusion"
+  },
+  {
+   "index": 1297,
+   "feature": "37",
+   "why": "sec2: Herbold et al. 2023 - teachers rated ChatGPT essays a point higher on seven, words per sentence 18.60 against 19.57, 'In conclusion' opening every conclusion"
+  },
+  {
+   "index": 1298,
+   "feature": "37",
+   "why": "sec2: Herbold et al. 2023 - teachers rated ChatGPT essays a point higher on seven, words per sentence 18.60 against 19.57, 'In conclusion' opening every conclusion"
+  },
+  {
+   "index": 1299,
+   "feature": "37",
+   "why": "sec2: HC3, the human-ChatGPT comparison corpus, fetched then triaged out; the critic marks only [1301] verified, so that row is excluded"
+  },
+  {
+   "index": 1300,
+   "feature": "37",
+   "why": "sec2: HC3, the human-ChatGPT comparison corpus, fetched then triaged out; the critic marks only [1301] verified, so that row is excluded"
+  },
+  {
+   "index": 1302,
+   "feature": "37",
+   "why": "sec2: HC3, the human-ChatGPT comparison corpus, fetched then triaged out; the critic marks only [1301] verified, so that row is excluded"
+  },
+  {
+   "index": 1303,
+   "feature": "37",
+   "why": "sec2: Jentzsch and Kersting on joke diversity - 90 per cent of 1,008 jokes were 25 jokes; fetched then triaged out, still uncited"
+  },
+  {
+   "index": 1304,
+   "feature": "37",
+   "why": "sec2: Naous et al., the cultural-bias study feature 37's table lists uncited; fetched by the second-catalogue finder, then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1305,
+   "feature": "37",
+   "why": "sec2: Mohammadi, a named round-2 study whose rows carry feature 37's table; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1306,
+   "feature": "37",
+   "why": "sec2: Mohammadi, a named round-2 study whose rows carry feature 37's table; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1307,
+   "feature": "37",
+   "why": "sec2: Yakura et al., the primary behind the relay [916] the section still counts as support; fetched then skipped by the triage"
+  },
+  {
+   "index": 1308,
+   "feature": "37",
+   "why": "sec2: Yakura et al., the primary behind the relay [916] the section still counts as support; fetched then skipped by the triage"
+  },
+  {
+   "index": 1309,
+   "feature": "37",
+   "why": "sec2: Huang's Table 1, a measurement table feature 37 quotes figures from; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1310,
+   "feature": "37",
+   "why": "sec2: Huang's Table 1, a measurement table feature 37 quotes figures from; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1311,
+   "feature": "37",
+   "why": "sec2: Huang's Table 1, a measurement table feature 37 quotes figures from; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1312,
+   "feature": "37",
+   "why": "sec2: Huang's Table 1, a measurement table feature 37 quotes figures from; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1314,
+   "feature": "37",
+   "why": "sec2: Triedman and Mantzarlis, a named round-2 study fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1315,
+   "feature": "37",
+   "why": "sec2: Triedman and Mantzarlis, a named round-2 study fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1317,
+   "feature": "37",
+   "why": "sec2: the G15 RfC closes, the community record behind the live policy text; fetched then triaged out, still uncited"
+  },
+  {
+   "index": 1318,
+   "feature": "37",
+   "why": "sec2: the G15 RfC closes, the community record behind the live policy text; fetched then triaged out, still uncited"
+  },
+  {
+   "index": 1319,
+   "feature": "37",
+   "why": "sec2: the G15 RfC closes, the community record behind the live policy text; fetched then triaged out, still uncited"
+  },
+  {
+   "index": 1320,
+   "feature": "37",
+   "why": "sec2: the G15 RfC closes, the community record behind the live policy text; fetched then triaged out, still uncited"
+  },
+  {
+   "index": 1322,
+   "feature": "37",
+   "why": "sec2: the Observatoire report, a named round-2 source fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1323,
+   "feature": "37",
+   "why": "sec2: the Observatoire report, a named round-2 source fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1324,
+   "feature": "37",
+   "why": "sec2: the Observatoire report, a named round-2 source fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1325,
+   "feature": "37",
+   "why": "sec2: the Observatoire report, a named round-2 source fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1327,
+   "feature": "37",
+   "why": "sec2: the Observatoire report, a named round-2 source fetched by the second-catalogue finder then skipped by the triage"
+  },
+  {
+   "index": 1328,
+   "feature": "37",
+   "why": "sec2: the German 'Anzeichen fuer KI-generierte Inhalte' page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1329,
+   "feature": "37",
+   "why": "sec2: the German 'Anzeichen fuer KI-generierte Inhalte' page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1330,
+   "feature": "37",
+   "why": "sec2: the German 'Anzeichen fuer KI-generierte Inhalte' page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1331,
+   "feature": "37",
+   "why": "sec2: the German 'Anzeichen fuer KI-generierte Inhalte' page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1332,
+   "feature": "37",
+   "why": "sec2: the German 'Anzeichen fuer KI-generierte Inhalte' page, the third catalogue, zero verified rows"
+  },
+  {
+   "index": 1336,
+   "feature": "37",
+   "why": "sec2: Wiki Education's other rows, fetched then skipped; S3 and S5.I flag the 178-of-3,078 scope the section should carry"
+  },
+  {
+   "index": 1339,
+   "feature": "37",
+   "why": "sec2: Wiki Education's other rows, fetched then skipped; S3 and S5.I flag the 178-of-3,078 scope the section should carry"
+  },
+  {
+   "index": 1340,
+   "feature": "37",
+   "why": "sec2: Chambers and Kelley, fetched at [550], four rows triaged; S5.L says one verification closes it"
+  },
+  {
+   "index": 1341,
+   "feature": "37",
+   "why": "sec2: Chambers and Kelley, fetched at [550], four rows triaged; S5.L says one verification closes it"
+  },
+  {
+   "index": 1342,
+   "feature": "37",
+   "why": "sec2: Chambers and Kelley, fetched at [550], four rows triaged; S5.L says one verification closes it"
+  },
+  {
+   "index": 1343,
+   "feature": "37",
+   "why": "sec2: Chambers and Kelley, fetched at [550], four rows triaged; S5.L says one verification closes it"
+  },
+  {
+   "index": 1345,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1346,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1347,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1348,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1349,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1350,
+   "feature": "37",
+   "why": "sec2: Reinhart read at the PDF, the register and corpus primary; fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1351,
+   "feature": "37",
+   "why": "sec2: Kobak read at the PDF, the primary for the excess-word vocabulary finding; fetched then skipped by the triage"
+  },
+  {
+   "index": 1352,
+   "feature": "37",
+   "why": "sec2: Kobak read at the PDF, the primary for the excess-word vocabulary finding; fetched then skipped by the triage"
+  },
+  {
+   "index": 1353,
+   "feature": "37",
+   "why": "sec2: Kobak read at the PDF, the primary for the excess-word vocabulary finding; fetched then skipped by the triage"
+  },
+  {
+   "index": 1354,
+   "feature": "37",
+   "why": "sec2: Brooks re-verified at the source, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1355,
+   "feature": "37",
+   "why": "sec2: Brooks re-verified at the source, fetched then skipped by the count-keyed triage"
+  },
+  {
+   "index": 1356,
+   "feature": "37",
+   "why": "sec2: the Russell, Karpinska and Iyyer primary, behind a relay the section counts; fetched then skipped by the triage"
+  },
+  {
+   "index": 1357,
+   "feature": "37",
+   "why": "sec2: the Russell, Karpinska and Iyyer primary, behind a relay the section counts; fetched then skipped by the triage"
+  },
+  {
+   "index": 1358,
+   "feature": "37",
+   "why": "sec2: the Russell, Karpinska and Iyyer primary, behind a relay the section counts; fetched then skipped by the triage"
+  },
+  {
+   "index": 1359,
+   "feature": "37",
+   "why": "sec2: the Russell, Karpinska and Iyyer primary, behind a relay the section counts; fetched then skipped by the triage"
+  },
+  {
+   "index": 1361,
+   "feature": "38",
+   "why": "sec5.A: r/worldbuilding's rule, a community policy text feature 38 depends on, reached by the finder then skipped by the triage"
+  },
+  {
+   "index": 1363,
+   "feature": "38",
+   "why": "sec5.A: Appelcline, a named history source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1365,
+   "feature": "38",
+   "why": "sec5.A: Codega, a named reporting source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1369,
+   "feature": "38",
+   "why": "sec5.A: Codega, a named reporting source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1377,
+   "feature": "38",
+   "why": "sec5.A: Peltast, a named critique source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1380,
+   "feature": "38",
+   "why": "sec5.A: Peltast, a named critique source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1381,
+   "feature": "38",
+   "why": "sec5.A: Peltast, a named critique source feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1385,
+   "feature": "38",
+   "why": "sec5.A: Shea, a named practitioner source in the worldbuilding community feature 38's rule depends on"
+  },
+  {
+   "index": 1387,
+   "feature": "38",
+   "why": "sec5.A: Furze, a named reception source in the worldbuilding community feature 38's rule depends on"
+  },
+  {
+   "index": 1390,
+   "feature": "38",
+   "why": "sec5.A: Obsidian Portal, a community AI-policy text reached by the finder then skipped by the triage"
+  },
+  {
+   "index": 1391,
+   "feature": "38",
+   "why": "sec5.A: Tabletop Sentinel, a community AI-policy text feature 38's rule depends on"
+  },
+  {
+   "index": 1392,
+   "feature": "38",
+   "why": "sec5.A: EN World, a community reception source reached by the finder then skipped by the triage"
+  },
+  {
+   "index": 1393,
+   "feature": "38",
+   "why": "sec5.A: the itch.io jam policy, a policy text reached by the finder then skipped by the triage"
+  },
+  {
+   "index": 1395,
+   "feature": "38",
+   "why": "sec5.A: the Three Witches review, a reception primary feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1396,
+   "feature": "38",
+   "why": "sec5.A: the Three Witches review, a reception primary feature 38's generated-archive rule depends on"
+  },
+  {
+   "index": 1398,
+   "feature": "38",
+   "why": "sec5.A: the Three Witches review, a reception primary feature 38's generated-archive rule depends on"
+  }
+ ],
+ "count": 231,
+ "notes": "Method: two independent Opus readers each expanded, by script, every bracketed index in exactly two spans of critic-ai.md - the whole of section 2 (header to the '## 3.' header) and the single section-5 bullet beginning '- **A. SKIPPED_TRIAGE' - treating [a]-[b] as inclusive ranges and comma lists as singles, then applied the rule: include iff the critic names the index in those two spans as triaged-out support a rule depends on, the critic does not itself call it verified, and its verdict in state-ai.json is exactly SKIPPED_TRIAGE. The reconciler re-ran the expansion independently before comparing: 60 distinct indices in section 2, 178 in section 5.A, no index in both, 238 distinct in all - the same 238 both readers report. Of those 238 the state grades exactly 231 SKIPPED_TRIAGE; those 231 are the rows below. AGREEMENT: the two readers' row sets are identical (231 each, zero indices exclusive to either) and their per-row feature labels agree on all 231, so there was no membership dispute to adjudicate. DISPUTES RESOLVED: (1) membership - none; the reconciler nevertheless re-derived the seven exclusions from the critic's text and the state rather than inheriting them, and confirms each: [1301] excluded because the critic writes 'only [1301] verified' of HC3 (state VERIFIED_VERBATIM); [1046], [1047], [1048] excluded as the critic's own carve-out 'Holtzman's Table 1 figures ([1044]-[1053] except the three verified)', which the state resolves to exactly those three (all VERIFIED_SUBSTANCE); [1221], [1224] and [1255] excluded on the third clause alone - the critic names them inside the feature-36 ranges 'the reporting [1219]-[1225]' and 'Dahl's temporal gradient [1252]-[1257]', but their state verdicts are not SKIPPED_TRIAGE, and untriage.py would REFUSE the list if they were kept. (2) why text - the readers' prose differed on all 231 rows while asserting the same fact; resolved row-group by row-group in favour of the more specific wording, keeping each why at 200 characters or fewer and carrying the reader's figures where either reader quoted them (min-p 7.57 against 6.83; Herbold 18.60 against 19.57; Jentzsch's 25 jokes of 1,008), plus a span tag ('sec2:' or 'sec5.A:') recording which of the two critic spans named the row. Feature labels are the readers' agreed values, unchanged. NOT-SKIPPED LIST (every index both readers reported as named-but-excluded because its state verdict is not SKIPPED_TRIAGE, so nothing is dropped silently): 1221 -> PARTIAL; 1224 -> VERIFIED_VERBATIM; 1255 -> VERIFIED_VERBATIM. Both readers reported this same three-row list. The two rule-2 exclusions the critic itself calls verified, listed here for completeness with their state verdicts: 1301 -> VERIFIED_VERBATIM; 1046, 1047, 1048 -> VERIFIED_SUBSTANCE. Coverage: the 231 rows carry features 37 (section 2, 60 rows), 31/32, 34/15, 35, 36, 38 and the ten unattributed r5 skips ([571], [591], [661], [670], [817], [832], [842], [881], [890], [891]). The critic's own prescription in section 5.A is to re-key the triage so a row is never S-BOUND when it is the only support for a limb, a counter-evidence row, the primary behind a relay, a policy text, or a measurement the feature's rule quotes a figure from; this list is the verify-only pass over the rows that condition already ruined."
+}

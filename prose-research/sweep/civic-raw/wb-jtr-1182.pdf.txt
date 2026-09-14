@@ -1,0 +1,748 @@
+Journal of Tolkien Research Journal of Tolkien Research 
+Volume 9 Issue 2 Article 8 
+2020 
+‘We don’t need another hero’ – Problematic Heroes and their ‘We don’t need another hero’ – Problematic Heroes and their 
+Function in Some of Tolkien’s Works Function in Some of Tolkien’s Works 
+Thomas Honegger 
+Department of English, Friedrich-Schiller-University Jena, Germany, tm.honegger@uni-jena.de 
+Follow this and additional works at: https://scholar.valpo.edu/journaloftolkienresearch 
+ Part of the Medieval Studies Commons, and the Modern Literature Commons 
+Recommended Citation Recommended Citation 
+Honegger, Thomas (2020) "‘We don’t need another hero’ – Problematic Heroes and their Function in Some 
+of Tolkien’s Works," Journal of Tolkien Research: Vol. 9 : Iss. 2 , Article 8. 
+Available at: https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8 
+This Peer-Reviewed Article is brought to you for free and open access by the Christopher Center Library at 
+ValpoScholar. It has been accepted for inclusion in Journal of Tolkien Research by an authorized administrator of 
+ValpoScholar. For more information, please contact a ValpoScholar staff member at scholar@valpo.edu. 
+ 
+“We don’t need another hero.”1 To start a discussion of Tolkien’s heroes 2 with 
+a line from a late 1980s pop -song3 may seem a bit strange. And yet we can 
+very well imagine Bilbo saying: ‘We don’t want any heroes here, thank you! 
+Nasty disturbing uncomfortable people! May get you killed before dinner!’ 
+And not only the hobbits, whose late Third Age Shire represents an affluent 
+pastoral and utterly unh eroic society, harbour a dee p-seated mistrust against 
+some types of heroes. The surviving people of Dor -lómin, after Túrin’s 
+disastrous visit to his former homestead and Brodda’s hall, seem to share such 
+a view and bid him farewell with the following words: 
+ 
+‘Farewell now, Lord of Dor-lómin,’ said Asgon. ‘But do not forget us. 
+We shall be hunted men now; and the Wolf -folk will be crueller because 
+of your coming. Therefore go, and do not return, unless you come with 
+strength to deliver us. Farewell!’ (Children of Húrin 191) 
+ 
+Asgon’s words, though phrased politely, are in agreement with Bilbo’s 
+imagined sentiment, and point towards the potentially problematic  nature of 
+certain forms of heroism and their representatives. The problem of how to 
+contain and deal with the more aggressive forms of military prowess when its 
+energies are not currently employed on the battlefield or in fighting an 
+adversary such as a dr agon or giant is not hing new. The historical rise of the 
+new military class of the cavalry and its transformation into a social , military 
+and chivalric elite has been investigated , e.g. by C. Stephen Jaeger in his The 
+Origins of Courtliness . The domestication, ‘taming’ and civilizing of the 
+originally ferocious warriors is mirrored in and accompanied by secular texts 
+that influenced and propagated the new heroic and later chivalric ideals. 
+Already the Old English epic Beowulf puts great stress on  and gives ample 
+space to  the description of what has to be called ‘courtly manners’  and 
+ceremony. However, the harmonious fusion of physical strength, valour, 
+courage and courtliness, as exemplified in Beowulf, is not always the norm 
+ 
+1 An earlier version of this paper was presented at the 5th International Conference J.R.R. 
+Tolkien: Individual, Community, Society (Budapest, 3-4 September 2015). 
+2 Tom Shippey, in an email to me (20 March 2016), writes: “On heroes, though, what strikes 
+me is Tolkien’s reluctance to use the word! If my computer is correct, the morpheme 
+‘hero’ is NEVER used in The Silmarillion, only 5 times in The Hobbit  and 6 in LotR 
+[Blackwelder’s Thesaurus lists only 3, but then he did no t have an electronic text available 
+back then]. The word as used also shows the semantic downgrading of it laid out in the 
+OED. But it is once again NEVER  used without some sort of qualification or distancing.” 
+These philological findings are in harmony wi th my general observations as presented in 
+this paper yet would profit from an in-depth discussion in another context. 
+3 Tina Turner for the movie Mad Max: Beyond the Thunderdome  (1988) – maybe echoing 
+Pink Floyd’s ‘We don’t need no education’ from the son g ‘Another brick in the wall’ from 
+the album The Wall (1979). 
+1
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+and we have numerous medieval texts that present a more disturbing picture of 
+martial prowess and heroism.  Tolkien was  well aware of  the heterogeneous 
+characteristics and sometimes unpleasant  aspects of heroism , and Tom 
+Shippey (2007a) has discussed some aspects of Tolkien’s life-long exploration 
+of and struggle with the problems posed by heroic behaviour. In the following, 
+I would like to take up the thread and investigate some of Tolkien’s 
+problematic heroes and the underlying heroic concepts.4 
+Richard West, in his paper on Túrin’s  ofermod,5 makes two  important 
+observations. First, he places Túrin’s behaviour within the context of the 
+ofermod discussion as initiated by Tolkien’s comments on the Old English 
+poem The Battle of Maldon  and, to some extent, also on Beowulf. West, like 
+Shippey, uses Tolkien’s scholarly publications and lecture-notes to explore his 
+works of fiction and to contextuali ze Tolkien’s literary publications within a 
+larger context of medieval (mostly Germanic) literature. The story of Túrin in 
+particular is shown to be a character study  of the origins, forms and, finally, 
+consequences of ofermod. The second point in West’s e ssay concerns the 
+development of the depiction of some of Túrin’s deeds. West, by means of 
+comparing the different versions describing Túrin’s visit to his family’s former 
+home and his appearance in Brodda’s hall, notices that Tolkien continued to 
+add more and more elements that highlight the socially devastating 
+consequences of Túrin’s acts of aggression.6 
+ 
+The early version in “Turambar” does not have this wholesale slaughter 
+(only Brodda himself and one defender are killed) (II, 90 -91), nor 
+Aerin’s self-immolation (rather she gets her nephew safely away), nor 
+faithful old Sador (instead it is a stranger who directs Túrin to the hall), 
+[…]. Tolkien has gradually added all of that, the better to exemplify 
+Túrin’s pride and wrath, and honor, and their consequences.  
+(West 2000: 243) 
+ 
+The textual evidence speaks a clear language  indeed, and I would like to 
+complement West’s analysis by specifying ‘the consequences’ as, in this case, 
+predominantly social consequences, i.e. as having reverberations for the 
+people of Dor-lómin rather than for Túrin himself. I think it necessary to 
+qualify West’s statement since, to my mind, there lies the major problem with 
+Túrin’s behaviour. As Lady Aerin puts it, he is too rash and therefore does not 
+ 
+4 This paper is to some extent a companion piece to my ‘Splintered Heroes – Heroic Variety 
+and its Function in The Lord of the Rings’ (Honegger 2018). 
+5 See West (2000) and also West (2014). 
+6 Neidhardt (2014: 19f) makes a similar point for the increasingly negative development of 
+Túrin’s character by comparing the different versions of the Saeros incident. 
+2
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+take into consideration the wider effects of his actions.  Contrasting Túrin’s 
+homecoming with that of, for example, Odysseus shows this clearly. There are 
+sufficient structural resemblances and incidental parallels to evoke an  
+association between these two homecomers, such as the fact that  both are 
+recognized first by an old servant  but not by anyone else . The similarities 
+sharpen the contrast between Odysseus, who successfully wins back the 
+dominion over his lands and people after slaughtering the suitors , and Túrin, 
+who also spills a  considerable amount of blood , yet fails to re-establish his 
+rule. Túrin’s ‘homecoming’ does not end in the permanent liberation of his 
+people from the yoke of the Easterlings, but merely a ggravates the conflict 
+with and oppression by the invaders. His admittedly heroic vengeance again st 
+Brodda and his men is as ill -advised as it is rash since it is, as Tolkien wrote 
+concerning Beorhtnoth’s behaviour , “at other people’s expense” ( Tolkien 
+1988: 146).  
+Although the individual situations of Beorhtnoth and Túrin differ widely 
+– the one is an ealdorman and official leader of an Anglo -Saxon army, the 
+other treated as  a homeless vagabond  and exile  – the problematic 
+consequences of their actions are comparable and justify, in my opinion, the 
+comparison of the two figures in one central aspect: their (at least temporary) 
+disregard of the wider devastating social consequences of their deeds . Tolkien 
+is quite outspoken in the judgment of the two men , though in different ways . 
+In his essay -cum-dramatic-dialogue ‘The Homecoming of Beorhtnoth’, he 
+refers explicitly to the Anglo -Saxon leader’s moral failure when putting his 
+personal ideas of glory first:  “It was wholly unfitting that he should treat a 
+desperate battle with this sole real object [i.e. to destroy or hold off the 
+invaders] as a sporting match, to t he ruin of his purpose and duty ” (Tolkien 
+1988: 146). With Túrin, however, Tolkien refrains from explicitly criticizing 
+his deeds . In the Dor-lómin episode,  for example, he uses two other 
+protagonists, Lady Aerin and Asgon , to comment on Túrin’s appearance in  
+Brodda’s hall and the killing of its owner . While the former accuses Túrin of 
+“[r]ash […] deeds […] as if you were still but the child that I knew” ( Children 
+189), the latter is less direct but equally critical by pointing out that “[m]any a 
+man of arms misreads patience and quiet. She [Lady Aerin] did much good 
+among us at much cost . Her heart was not faint, and patience will break at the 
+last” (Children 190). Asgon’s request to Túrin “[to] go, and […] not return, 
+unless you come with strength to deliver us” ( Children 191), drives home the 
+message: heroes do have a social obligation and a re not free to go about and 
+do (presumably) heroic deeds as they please. 
+3
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+Yet while there are, as West (2000) has shown, obvious parallels 
+between the ofermod of the 10 th century Anglo -Saxon ealdorman and the 
+mindset that can be discerned as responsible for  many of  Túrin’s fateful 
+decisions, e.g. his refusal to take down the stone bridge over the Narog in spite 
+of the warnings he received from various sides, they do not turn Túrin into a 
+First Age Beorhtnoth. First of all, there is a structural difference in the position 
+of the ofermod-motivated deeds of the two men. While Beorhtnoth’s blunder 
+(if we want to call it thus) comes at the end of his heroic career (and life) and 
+is, according to Tolkien, pre sented by the poet of The Battle of Maldon  as the 
+crucial flaw in his character, ofermod is not always the motivating force 
+behind Túrin’s behaviour and deeds. He is, as chief counsellor of the king and 
+military leader , to blame for the general strategy that  led to the sack of 
+Nargothrond, and  his strategic decisions can be seen as  at least partially 
+motivated by ofermod.  
+Yet, on the other side, his actions can also be interpreted as having been 
+originally founded on mi litary (human) wisdom. Furthermore , Túrin seems 
+able to develop and learn from his mistakes – especially when he finds a new 
+home with the Men of Brethil and is re -integrated into society by means of his 
+marriage to Níniel. His heroic energy is channelled and restrained through his 
+love for his wife, so that when he sets out once more to confront the enemy , it 
+is in direct response to Dorlas’s request to defend his new home and his new 
+people:7 “Did you not ask to be counted one of our people, and no stran ger? Is 
+this peril not yours also?” ( Children 222). Yet this time he is aware of the 
+supreme threat posed by the dragon and is keen to avoid repeating th e mistake 
+made at Nargothrond . His preparations for the confrontation with Glaurung 
+show every sign of strategic circumspection and social responsibility. He is 
+aware that he cannot kill the dragon in open battle and thus opts for the 
+‘Sigurd manœuvre’. Before leaving, he  gives clear instructions to his people , 
+who remain behind , what to do in case he cannot stop the advance of the 
+worm. In this he contrasts with Beowulf who, in a similar situation, cho oses a 
+head-on confrontation with the dragon  and does not seem to spend much 
+thought on protective measures for his people .8 Túrin, f urthermore, makes a 
+point of asking for  and taking along companions , so that the deflection of the 
+threat to the people of Brethil does not rest solely on his shoulders . This way 
+the attempt to kill Glaurung becomes a communal effort , incorporating 
+ 
+7 Túrin, changing his name to Turambar, “dwelt among the woodmen, and was loved by 
+them, and he charged them to forget his name of old, and to count him as one born in 
+Brethil” (Children 196).  
+8 Beowulf’s dragon, of course, poses a special challenge since he is airborne and thus not 
+that easily evaded or waylaid and ambushed as are the earthbound Fafnir and Glaurung. 
+4
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+representatives from the different  groups of the men of Brethil . Lastly, Túrin 
+does not make Beorhtnoth’s (alleged) mistake of letting the enemy cross 
+unopposed over to the side where his people are but  he exploits , as the 
+ealdorman could, and maybe should have done, the strategic advantage 
+offered by topography. Unfortunately, circumstances and bad luck (if we want 
+to call it thus) conspire against Túrin and his companions, and he finds himself 
+facing the dragon on his own . In the end it  is only due to  his circumspect 
+choice of the place for his attack that he is able to kill his antagonist. And yet, 
+immediately after his  martial success,  fate takes its course and  his heroic 
+triumph is overshadowed by his personal tragedy.9 
+The narrative is not very clear as to what degree Melkor’s curse 
+influences or even determines the outcome of Túrin’s actions ,10 and the reader 
+knows little more  than Túrin himself , who , after Beleg’s  death,11 has been 
+bereft of a wise counsellor figure, let alone divine assistance . Old Norse 
+heroes such as Sigurd often profit from divine intercession  at key moments of 
+their career,12 and model epic heroes such as Aragorn seem to have access to, 
+and the humility and wisdom  to accept, the good advice of wise old men  such 
+as Gandalf  on a more permanent basis – which seems to make all the  
+difference for the quality of their heroic careers. 13  Aragorn, as the most 
+prominent example of a responsible and well -advised hero, is aware that he is  
+as much influenced  by what happens as he is shaping the outcome of events . 
+He also knows that he has been able to achieve his aims solely because he has 
+been helped by other people . This becomes especially clear in his relationship 
+with the members of the Fellowship  and, at his coronation ceremony, he 
+gracefully acknowledges his indebtedness  to his friends and supporters . He  
+proclaims that by “the labour and valour of many I have come into my 
+ 
+9 Comparing a work of pure fiction such as The Children of H úrin with a fictionalised 
+account of a historical event, as we have it in The Battle of Maldon , can be problematic. 
+However, in Tolkien’s case this is not only permissible but, as Tom Shippey and Michael 
+Drout and other medievalists have shown time and again, even recommendable since 
+Tolkien himself used fiction as an approach to explore problems of historical scholarship. 
+10 Mitchell (2010) discusses this aspect in some depth. See also West (2000: 242).  
+11 The importance of Beleg as friend and counsellor has been made explicit by Túrin himself: 
+“From you [i.e. Beleg] I will take whatever you give, even  rebuke. Henceforward, you 
+shall counsel me in all ways, save the road to Doriath only” (Children 140). 
+12 Thus Odin, in The Saga of the Volsungs  (Byock 1990:  63), gives the young Sigurd the 
+helpful advice to dig several ditches (and not just one) in order to avoid drowning in 
+Fafnir’s blood when killing the dragon, yet disappears from Sigurd’s life as quickly as he 
+has appeared, and fate takes its course. 
+13 See Croft’s (2011) illuminating comparison of Túrin and Aragorn.  See also Stephen (2012: 
+167-170). 
+5
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+inheritance” ( LotR 967) and calls Gandalf “the mover of all that has been 
+accomplished, and this is his victory” (LotR 968).14 
+Aragorn is also painfully aware of his limited insight into the large r 
+pattern and the potentially disastrous consequences of a wrong choice .15 Yet 
+the mere awareness that there is a larger pattern16 and that his deeds contribute 
+to and influence its development, changes the perception of individual 
+accomplishments or failures and puts them into a broader perspective. As 
+Dickerson has shown, The Lord of the Rings  avoids explicit mentions of 
+religion yet clearly follows a providential scheme. This does not mean that the 
+outcome of everything is predetermined, or that Free Will is disregarded, or 
+that the actions of the protagonists are of no significance. Rather it means that 
+a benevolent force supports those actions and protagonists that work towards 
+the greater good an d the fulfilment of an implicit divine plan. We as readers 
+may not sit in a high place and are thus not able to perceive everything, but the 
+narrator’s/narrators’ somewhat privileged view of things 17 results in a feeling 
+of coherence, meaningfulness and consolation.  
+Compared to this, the reading of The Children of Húrin  leaves us 
+disturbed or, if we are lucky, purged by the catharsis of the tragic catastroph e, 
+yet without consolation.18 This is mainly because our point of view  is limited 
+and the narrative voice does not even attempt to put the events into a wider 
+and more meaningful context . We are, to use St. Augustine’s simile from De 
+Ordine I.2, like an extremely myopic person who has to get v ery close to a 
+mosaic in order to see anything . What we then behold from up close is a 
+seemingly random arrangement of little coloured pieces and we fail to 
+perceive the beauty and harmony of the  entire mosaic. The result of such an 
+impaired view in the ca se of the story of Túrin  is an almost claustrophobic 
+narrative whose main protagonist unwit tingly hastens towards his doom. This  
+is also at least partially due to the fact that Túrin is a mortal man without even 
+ 
+14 On the other side, he is very well able to act independently and asserts his status and 
+position when, for example, questioned by Gimli about the use of the palantír (see LotR 
+780). 
+15 See his “And now may I make a right choice, and change the evil fate of  this unhappy day! 
+[…] My heart speaks clearly at last […]” (LotR 967). 
+16 See ‘The Music of the Ainur’ in The Silmarillion  for an account of the creation and 
+purpose of the universe. 
+17 It is difficult to identify clearly the identity of the narrator/narrat ors in spite of the conceit 
+of the Red Book, which simply won’t fit the deixis of the narrative. The narrator’s 
+temporary closeness to Gandalf may play an important role in the positive interpretation of 
+events. See also Thomas (2000). 
+18 See Eilmann (2020)  for a discussion of the relationship between The Children of Húrin  
+and the Aristotelian theory of tragedy. 
+6
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+Aragorn’s longevity ,19 and it takes an elvish perspective to come to a more 
+positive re-interpretation of his career. 20 Furthermore, within The Children of 
+Húrin the workings of greater powers  (mostly malevolent ones, though)  are 
+alluded to, but no coherent picture emerges and the effect is not the invocation 
+of eucatastrophe and consolation, as in The Lord of the Rings , but of loss and 
+frustration.  
+The Children of Húrin  and The Lord of the Rings  could be seen as  
+presenting two contrasting approaches to heroic narratives: on the one hand  
+we are confronted with a stark, harsh and grim heroic world  where people 
+have to flee from their homes into exile, where families are torn apart, and 
+where returns do not end with the restoration of former normality (minus a 
+few silver spoons) – it is rather a bleak version of a ‘there’ without the ‘and 
+back again’ bit . Frodo, it may be argued, cannot go ‘back again’ either , since 
+the traumatic experiences during his quest have changed him to o much. 
+However, his sacrifice has contributed to a lasting restoration of peace and 
+general prosperity, and his personal loss is given dignity and meaning by 
+becoming part of the larger pattern supported by divine providence. Frodo 
+cannot go back to his former life, but he can go on to the Undying Lands. He 
+thus contrasts with the unhappy Túrin  who, within the confines of the 
+narrative, despairs and perishes by his own hands. His posthumous fame and  
+participation in the  apocalyptic eucatastrophe announced in the Second 
+Prophecy of Mandos are of little consolation since, for him and the readers, his 
+tale has come to an end. It takes someone like Sam to realise that “the great 
+tales never end” ( LotR 712) and that they go “on past the happiness and into 
+grief and beyond it” ( LotR 712). The tale of Túrin, as told in The Children of 
+Húrin, ends with the ‘into grief’ and lacks the ‘beyond it’. 
+The difference in outlook also reflects the development of Tolkien’s 
+approach to Middle -earth and heroism . The Children of Húrin represent a n 
+earlier, heathen view of the world that is largely inspired by the Kalevala,21 
+whereas The Lord of the Rings possesses the characteristics of a proto -
+Christian fairy story  as outlined in his 1939 lecture ‘On Fairy -stories’. As a 
+consequence, the two works have a different feel  even though the world 
+ 
+19 The contrasting and to some extent opposing views due to the difference in lifespan can be 
+seen most clearly in Túrin and Gwindor’s debate about t he most appropriate strategy to 
+counter Morgoth’s threat (Children 161-163). 
+20 Elrond, for example, mentions him as one of “ the mighty elf -friends of old, Hador, and 
+Húrin, and Túrin, and Beren” (LotR 270-271), and in the Second Prophecy of Mandos, 
+Túrin shall be “coming from the halls of Mandos; and the black sword of Túrin shall deal 
+unto Morgoth his death and final end” (Tolkien 1992: 333). 
+21 See West (2000: 237-238) and Tolkien (2015). 
+7
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+outside the Shire is no less wild than many of the lands Tú rin visits, nor are 
+late-Third-Age heroes less heroic. A closer look at The Lord of the Rings  can 
+shed some light onto th e way Tolkien redeems even the heathen and 
+potentially problematic forms of heroism in his epic  and incorporates the pre -
+Christian concepts of wyrd/fate into an emerging proto-Christian framework. 
+The (northern) Germanic pre-Christian heroic attitude, as, for example,  
+expressed by Beowulf, 22 hints vaguely at the workings of wyrd/fate: wyrd oft 
+nereð // unfægne eorl,   þonne his ellen deah  (Beowulf 572b-573).23 Wyrd in 
+The Lord of the Rings , however, is clearly the result of the  hidden interaction 
+between divine Providence and Free Will . This constitutes, as Dickerson 
+(2003) and others have shown, the underlying structural pattern. It is therefore 
+not so much the typical Germanic heroic resistance against or stoic 
+acceptance24 of an (often) nihilistic wyrd that is in the foreground, though The 
+Lord of the Rings  has its ‘Germanic ’ heroic  moments. Tolkien, as almost 
+always when adapting motifs from medieval literature, does not simply copy 
+his model but alters them slightly to make his point. This can be seen  clearly 
+in Éomer’s last stand  which Tolkien exploits to create a moment of pure 
+northern heroic spirit of a leader – a moment otherwise not available in this 
+unalloyed form within the corpus of surviving Germanic poetry.25  
+The situation is as follows: the Rohirrim, after the initial success of their 
+surprise attack, have not only lost their King Théoden, but are now also cut off 
+from Prince Imrahil’s forces and in danger of being overpowered by the sheer 
+numeric predominance  of the enemy. Éomer, having inherited the kingship 
+after his uncle’s death in battle, has taken  over the command of the Rohirrim  
+and orders them to rally around his banner. When he notices  the black ships of 
+the Corsairs of Umbar , he believes the battle o f the Pelennor lost, and 
+therefore 
+ 
+thought to make a great shield -wall26 at the last, and  stand, and fight 
+there on foot till all fell, and do deeds of song on the fields of Pelennor, 
+though no man should be left in the West to remember the last King of 
+ 
+22 Beowulf uses this maxim in his account of his fight against the dangers of the sea during 
+the swimming-contest against Breca. 
+23 Tolkien (2014: 29) gives the following translation: “Fate oft saveth  a man not doomed to 
+die, when his valour fails not.” He adds a substantial comment to this enigmatic line 
+(Tolkien 2014: 256-260). 
+24 See, for example, Beowulf’s concluding Gæð a wyrd swa hio scel  (Beowulf 455b), which 
+Tolkien (2014: 26) renders as: “Fate goeth ever as she must.” 
+25 Tolkien (1988: 144) argues: “For this ‘northern heroic spirit’ is never quite pure; it is of 
+gold and an alloy […] of personal good name […].” 
+26 See Honegger (2011a) for an in -depth discussion of the Anglo -Saxon elements i n the 
+Rohirrim. 
+8
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+the Mark. So he rode to a green hillock and there set his banner, and the 
+White Horse ran rippling in the wind. 
+ 
+Out of doubt, out of dark to the day’s rising  
+I came singing in the sun, sword unsheathing.  
+To hope’s end I rode and to heart’s breaking:  
+Now for wrath, now for ruin and a red nightfall! 
+ 
+These staves he spoke, yet he laughed as he  said them. For once more 
+lust of battle was on him; and he was still unscathed, and he was young, 
+and he was king: the lord of a fell people. And lo! Even as he laughed at 
+despair he looked out again on the black ships, and he lifted up his sword 
+to defy them. (LotR 847) 
+ 
+The moment is, however, transformed by the eucatastrophic revelation of the 
+true identity of the naval force when the flagship unfurls Aragorn’s banner.  
+I have quoted this passage at length since it gives, to my mind, an 
+unprecedented emotive access to the heroic pagan mindset and, at the same 
+time, can be read as a typological comment on Christ’s resurrection  (see 
+below). Please note that Éomer is not after lof (afterfame) in the usual meaning 
+of the word. He is aware that the (very likely) annihilation of his men on the 
+battlefield not only means the end of the Rohirrim, but the end of all the Free 
+Peoples in Middle -earth – and thus the breaking of the ‘chain of songs’  that 
+has so far preserved the memory of their heroes and linked  the generations to 
+each other. As a consequence, Éomer’s defiance of defeat and despair can be  
+seen as Tolkien’s answer to Beorht wold’s famous staves in The Battle of 
+Maldon: 
+ 
+Hige sceal þe heardra,    heorte þe cenre, 
+mod sceal þe mare    þe ure maegen lytlað. 
+ 
+‘Will shall be the sterner, heart the bolder, spirit the greater as our 
+strength lessens.’ (Tolkien 1988: 124)  
+ 
+As Tolkien writes, Beorhtwold’s words “have been held to be  the finest 
+expression of the northern heroic spirit, Norse or English” (Tolkien 1988: 143) 
+– and this all the more , or rather especially so , since they were spoken  and 
+acted upon by a retainer and not a leader eager for fame and glory . Éomer, by 
+contrast, is a  leader, and Tolkien is careful to place him within a framework 
+where martial heroism does not stand in opposition to his duties to allies, 
+people or kin, so that  the gold of northern heroic courage shines in all its 
+purity, purged of any alloy of personal fame.  This way Tolkien  implicitly 
+alludes, on the one hand, to Beorhtwold’s  admirable courage and posthumous 
+9
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+loyalty and, on the other, compares Éomer favourably to Denethor, who gives 
+in to despair and ends his life in suicidal madness.27  
+As Tom Shippey (2007a) has pointed out, Tolkien felt uneasy about the 
+nature of many of the pagan heroes he encountered in the texts he studied and 
+taught as part of his syllabus at Oxford . His professional liking  for and 
+admiration of these heroes stood in opposition to his moral-religious 
+reservations about their often cruel and immoral  behaviour. Tolkien’s solution 
+to this problem was to re -create in his own fiction pagan heroes who are 
+naturaliter christiani in the manner of the Old Testament iusti, i.e. without the 
+revelation of the Christian truth.  He would intentionally create parallels and 
+similarities between exemplary figures of the European Middle Ages and his 
+own protagonists and thus connect them with the m edieval project of 
+interpreting history as a meaningful and coherent progression towards the 
+Second Coming and the establishment of the Kingdom of God on earth. 28 
+Aragron, for example, shares many characteristics with Arthur and, as 
+renovator imperii, also with Charlemagne, 29 and is thus connected implicitly 
+with the so -called Nine Worthies. First attested in the 13 th century, this idea 
+unites nine legendary, historical an d scriptural characters in groups of three. 
+Thus we have the three good pagans Hector of Troy, Alexander the Great, and 
+Julius Caesar; the three good Jewish heroes Joshua, King David, and Judas 
+Maccabeus; and the three good Christian heroes Arthur, Charlem agne, and 
+Godfrey of Bouillon. The important lesson taught by the Nine Worthies is that 
+chivalric excellence and knightly virtue are to be found throughout history and 
+among different cultures and religions. Aragorn would fit in nicely as a Fourth 
+Age prot o-worthy and thus foreshadows the actual worthies of the Middle 
+Ages30 – which brings us to Tolkien’s second strategy of appropriating  the 
+past: the typological interpretation of figures and events . This interpretative 
+technique was originally developed to  link the Old to the New Testament. 
+Events and figures in the Old Testament  are interpreted as foreshadowing 
+ 
+27 There are, of course, the widely differing biographical circumstances to be taken into 
+account. Most prominently, Éomer has a young man’s resilience and has been, most likely, 
+not yet been confronted with his natural mortality (vs. potential death in battle). 
+28 Most important are the concepts of the translatio imperii  and the sex aetates mundi  (see 
+Honegger 2011b). 
+29 See Finn (2005) and Hall (2012) on the parallels between Aragorn and Arthur, and 
+Honegger (2011b: 90-96) and Gallant (2020) for those between Aragorn and Charlemagne. 
+Tolkien would, of course, be conscious of these parallels and exploit them for his 
+construction of Aragorn as the archetypal epic hero (on archetypes in Tolkien, see O’Neill 
+1979). See also Ris den (2015: 106 -113) for a discussion of Arthur, Aragorn and the 
+monomyth pattern. 
+30 The nine walkers of the Fellowship in their diversity could be seen as a tongue -in-cheek 
+foreshadowing of the Nine Worthies. 
+10
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+analogous events and persons  in the Gospels. Thus Abraham’s journey to 
+Mount Moriah to sacrifice his only son Isaac is considered to prophetically 
+mirror Christ’s ascent to  the hill of Golgotha. Since t he b iblical typological 
+interpretation is often associative and vague and does not rely on a close one -
+to-one correspondence of elements and patterns, it is closer to  applicability 
+than to allegory31 – and literary scholars may also recognize parallels between 
+the typological interpretation and the structuralist approach . Furthermore, the 
+typological way of thinking and perceiving patterns would not only be familiar 
+to Tolkien, but also constitute a highly attractive method for linking his 
+fictional works to the revealed truth of the Gospels without having to recur to 
+blatant anachronism s or to violate the precepts of his Christian faith . And 
+lastly, it would give him the means to redeem his pagan heroes by placing 
+them within a pre -Christian framework that is nevertheless ruled by divine 
+Providence. How then, does this apply to the event s on the Pelennor fields? 32 
+To start, the cockcrow heralding daybreak and, coincidentally, the coming of 
+the Rohirrim, echoes the crowing of the cock in the Gospels (e.g. Mark 14:72). 
+More significantly, the date of the Battle of the Pelennor Fields (15 Ma rch 
+3019 TA) places it within or at least the vicinity of the general timeframe of 
+the Easter week  with the central events of Christ’s death on the cross, his 
+descent into the underworld and , finally, his triumphant resurrection on Easter 
+Monday. Aragorn’s descent into the Und erworld (‘The Paths of the Dead ’) 
+and his triumphant  emergence not only parti cipate in the archetypical pattern 
+found in numerous myths and legends, 33 but continue the Easter theme  by 
+foreshadowing Christ’s death, resurrection and triumphant return to Heaven  – 
+the eucatastrophic event in the history of mankind , as Tolkien argues in the 
+‘Epilogue’ to his lecture ‘On Fairy -stories’. Set against this bac kground we 
+can see how Éomer’s northern heroic courage is hallowed and redeemed since, 
+in opposition to Denethor’s despair, it gives Providence the necessary leverage 
+to work its redemptive magic. It would be probably too much to go on and see 
+the laughter of the Rohirrim as alluding to the risus paschalis, the Easter 
+Laughter expressing the joy and exhilaration about Christ’s tricking and 
+defeating of both Death and the Devil. 
+ 
+31 I use Tolkien’s terminology, though his under standing of allegory (cf. LotR xxiv) is 
+somewhat narrow. The actual allegorising of e.g. medieval exegetes is much more 
+associative and free ranging than theoretical studies usually suggest. 
+32 Such a reading does not mean that the allegorical domination of  the author is simply 
+substituted by a typological straitjacket – however loosely fitting this might be. Tolkien’s 
+approach is subtle and indirect, and he works more by means of suggestions and allusions 
+than by establishing clear patterns. My own reading will therefore remain equally allusive. 
+33 See Stevens (2020) for an in -depth discussion of the ‘underworld journey’ ( katabasis) in 
+Tolkien’s work. 
+11
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+Let us, to conclude, return once more to Túrin and the question of how 
+his brand of heroism differs from that of, for example, Éomer. The answer is, 
+in my opinion, to be found in the divergent views on the relationship between 
+fate, Providence, and courage that constitute the ideological frameworks for 
+their deeds. Éomer’s motivation is not explicitly given, but we can infer from 
+the songs of Rohan that, like his maternal uncle and predecessor Théoden , it 
+was the oaths taken that made him act as he did. 34 The young king of Rohan 
+simply tries to honour the obligations of solidarity and friendship with Gondor 
+in the idiom of his people – without questioning the deeper meaning and 
+import of current events on a meta-historical level.35 He does the deed at hand, 
+so to speak, implicitly trusting in the ultimate meaningfulness of the universe . 
+Túrin, on the other side, bases his behaviour on a sort of heroic existentialism, 
+as becomes evident from  his long speech in the council of Orodreth in 
+Nargothrond: 
+ 
+‘The Valar!’ said Túrin. ‘They have forsaken you, and they hold Men in 
+scorn. […] There is but one Vala with whom we have to do, and that is 
+Morgoth; and if in the end we cannot overcome him, at least we can hurt 
+him and hinder him. 36 For victory is victory, however small, nor is its 
+worth only from what follows from it. […]’ (Children 161)  
+ 
+The elf Gwindor, opposing Túrin in the council, points out that such a view is 
+too limited and that the Eldar have  
+ 
+a prophecy […] that one day a messenger from Middle -earth will come 
+through the shadows to Valinor, and Man wë will hear, and Mandos 
+relent. For that time shall we not attempt to preserve the seed of the 
+Noldor, and of the Edain also? […] You think of yourself and of your 
+own glory, and bid us do likewise; but we must think of others beside 
+ourselves, for not all can fight and fall, and those we must keep from war 
+and ruin, while we can. (Children 162)  
+ 
+It is, as we know, only after the fall of Nargothrond that Túrin has learnt his 
+lesson and starts to think of others  – but by then it seems too late for him to 
+attain personal salvation in this age , and it is no coincidence that both Túrin 
+ 
+34 See the lines in the songs of Rohan praising Théoden: “ Fealty kept he; / oaths he had 
+taken, all fulfilled them” (LotR 803). 
+35 Éomer’s words at the council after the battle of the Pelennor Fields support such an 
+interpretation: “I have little knowledge of these deep matters; but I need it not. This I 
+know, and it is enough, that as my friend Aragorn s uccoured me and my people, so I will 
+aid him when he calls. I will go” (LotR 880). 
+36 Compare this, for example, to Aragorn’s march on the Black Gate, which may look to 
+Sauron a bit like Túrin’s idea of heroism, but actually serves a higher purpose.  
+12
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+and Denethor commit suicide . Túrin is, structurally speaking, closer to 
+Denethor than to Éomer. The latter , by doing the deed at hand, provides 
+Providence with the opportunity to intercede on behalf of Men – as much as  
+Gwindor hopes to do by preserving the seed of the Noldor and Edain.  Yet it 
+would be cynical to interpret Túrin’ s tragedy as being merely a problem of 
+finding the correct approach to events – which is probably why Tolkien , by 
+means of  the elvish re -evaluation of Túrin’s deeds, provides  an alternative 
+view.  
+The value of Túrin as a problematic hero  is exactly his being 
+‘problematic’ – at least within the confines of the extant narrative as given in 
+The Children of Húrin . It highlights the necessity of a redeeming framework 
+in which a plurality of different types of heroes collaborate towards the greater 
+good and the fulfilment of the Divine Will by means of creating opportunities 
+for the benevolent intercession of Providence. This also means that heroes 
+need no longer be of the high mimetic (or higher) type but that even low 
+mimetic hobbits can contribute their share ,37 and that with these new types of 
+heroes the chances of getting invited for tea are actually greater than those of 
+getting killed before dinner. 
+ 
+ 
+ 
+ 
+List of Abbreviations 
+ 
+Children Tolkien, John R.R. 2007. The Children of Húrin . Edited by 
+Christopher Tolkien. London: HarperCollins. 
+LotR Tolkien, John R.R. 2004. The Lord of the Rings . 50 th anniversary 
+one-volume edition. Originally published in three volumes 1954 -
+55. Boston and New York: Houghton Mifflin. 
+  
+ 
+37 See also Honegger (2018). 
+13
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+Bibliography 
+ 
+Auden, W.H. 2004. ‘The Quest Hero.’  In Rose A. Zimbardo and Neil D. 
+Isaacs (eds.). Understanding The Lord of the Rings: The Best of Tolkien 
+Criticism. Boston and New York: Houghton Mifflin Company, 31 -51. 
+Originally published 1961 in Texas Quarterly 4: 81-93. 
+Blackwelder, Richard E. 1990. A Tolkien Thesaurus. London and New York: 
+Garland. 
+Byock, Jesse L. (ed. and trans.). 1990. The Saga of the Volsungs . Berkeley 
+CA: University of California Press. 
+Campbell, Joseph. 1971. The Hero With a Thousand Faces . 2 nd edition. 
+Princeton NJ: Princeton University Press. 
+Carpenter, Humphrey (ed., with the assistance of Christopher Tolkien). 2000. 
+The Letters of J.R.R. Tolkien . First published 1981. Boston and New 
+York: Houghton Mifflin. 
+Caughey, A nna. 2014. ‘The Hero’s Jo urney.’ In Stuart D. Lee (ed.). A 
+Companion to J.R.R. Tolkien. Oxford: Wiley Blackwell, 404-417. 
+Cavill, Paul. 1995. ‘Interpretation of The Battle of Maldon , Lines 84 -90: A 
+Review and Reassessment.’ Studia Neophilologica 67:149-164.  
+Chichester, Christine L. 2015. Samwise Gamgee: Beauty, Truth, and Heroism 
+in J.R.R. Tolkien’s The Lord of the Rings . MA Thesis. Lynchburg VA: 
+Liberty University.  
+Clark, George. 2000. ‘J.R.R. Tolkien and the True Hero .’ In George Clark and 
+Daniel Timmons ( eds.). J.R.R. Tolkien and His Literary Resonances . 
+Westport CT: Greenwood Press, 39-51. 
+Croft, Janet Brennan. 2011 . ‘Túrin and Aragorn: Embracing and Evading 
+Fate.’ Mythlore 29.3/4 (#113/114): 155-70. 
+Dickerson, Matthew. 2003. Following Gandalf. Epic Battles and Moral 
+Victory in The Lord of the Rings. Grand Rapids MI: Brazos Press. 
+Eilmann, Julian. 2020  (forthcoming). ‘“Horror and Fury”: J.R.R. Tolkien’s 
+The Children of Húrin  and the Aristotelian Theory of Tragedy.’ In 
+Hamish Williams (ed.). Tolkien an d the Classical World . Cormarë 
+Series 45. Zurich and Jena: Walking Tree Publishers, 247-269. 
+Finn, Richard J. 2005. ‘Arthur and Aragorn: Arthurian Influences in The Lord 
+of the Rings.’ Mallorn 43: 23-26. 
+Flieger, Verlyn. 2004. ‘Frodo and Aragorn: The Concept of the Hero.’ In Rose 
+A. Zimbardo, Rose A. and Neil D. Isaacs. Understanding The Lord of the 
+Rings: The Best of Tolkien Criticism. Boston and New York: Houghton 
+Mifflin Company, 122 -145. Originally published in Neil D. Isaacs  and 
+Rose A . Zimbardo (eds.). 1981. Tolkien: New Critical Perspectives . 
+Lexington KY: University of Press of Kentucky, 40-62.  
+–––. ‘The Music and the Task. Fate and Free Will in Middle -earth.’ Tolkien 
+Studies 6: 151-181. 
+Fornet-Ponse, Thomas. 2010. ‘“Strange and Free” – On Some Aspects of the 
+Nature of Elves and Men.’ Tolkien Studies 7: 67-89. 
+14
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8
+ 
+Gallant, Richard Z. 2014. ‘Original Sin in Heorot and Valinor.’ Tolkien 
+Studies 11: 109-129. 
+–––. 2020. ‘Elessar Telcontar Magnus, Rex Pater Gondor, Restitutor Imperii .’ 
+Journal of Tolkien Research 9.2, article 1. 
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/1 
+Hall, Mark R. 2012. ‘Gandalf and Merlin, Aragorn and Arthur: Tolkien’s 
+Transmogrification of the Arth urian Tradition and its Use as a 
+Palimpsest for The Lord of the Rings.’ Inklings Forever 8: 2-10. 
+Honegger, Thomas. 2011 a. ‘ The Rohirrim: “Anglo -Saxons on Horseback”? 
+An Inquiry into Tolkien’s Use of Sources.’ In Jason Fisher (ed.). 
+Tolkien and the Study of His Sources: Critical Essays . Jefferson NC 
+and London: McFarland, 116-132. 
+–––. 2011b. ‘Time and Tide – Medieval Patterns of Interpreting the Passing of 
+Time in Tolkien’s Work.’ Hither Shore 8: 86-99. 
+–––. 2018. ‘Splintered Heroes – Heroic Variety and its Function in The Lord 
+of the Rings .’ In John D. Rateliff (ed.). A Wilderness of Dragon s: 
+Essays in Honor of Verlyn Flieger . Wayzata MI: The Gabbro Head 
+Press, 157-175. 
+Jaeger, C. Stephen. 1985. The Origins of Courtliness – Civilizing Trends and 
+the Formation of Courtly Ideals 939-1210. Philadelphia PA: University 
+of Pennsylvania Press. 
+Mitchell, Jesse. 2010. ‘Master of Doom by Doom Mastered: Heroism, Fate, 
+and Death in The Children of Húrin .’ Mythlore 29.1/2 (#111/112): 87-
+114. 
+Neidhardt, Jenny. 2014. Representations of Heroism in J.R.R. Tolkien’s The 
+Silmarillion. BA Thesis. Heinrich-Heine-Universität Düsseldorf. 
+O’Neill, Timothy R. 1979. The Individuated Hobbit: Jung, Tolkien and the 
+Archetypes of Middle-earth. Boston MA: Houghton Mifflin. 
+Petty, Anne C. 2003. Tolkien in the Land of Heroes . Cold Spring Harbor  NY: 
+Cold Spring Press. 
+Porter, Lynnette R. 2005. Unsung Heroes of The Lord of the Rings. From the 
+Page to the Screen. Westport CT and London: Praeger. 
+Risden, Edward L. 2015. Tolkien’s Intellectual Landscape . Jefferson NC: 
+McFarland. 
+Shippey, Tom A. 2007a. ‘Heroes and Heroism: Tolkien’s Problems, Tolkien’s 
+Solutions.’ In Tom Shippey.  Roots and Branches: Selected Papers on 
+Tolkien by Tom Shippey . Cormarë Series 11. Zurich and Berne: 
+Walking Tree Publishers , 267 -283. Originally published in Lembas 
+Extra (1991), 5-17. 
+–––. 2007b. ‘Tolkien and ‘The Homecoming of Beorhtnoth’ .’ In Tom 
+Shippey. Roots and Branches: Selected Papers on Tolkien by Tom 
+Shippey. Cormarë Series 11. Zurich and Berne: Walking Tree 
+Publishers, 323 -339. Originally published 1991 in Leaves from the 
+Tree: J.R.R. Tolkien’s Shorter Fiction . London: The Tolkien Society, 
+5-16 
+15
+Honegger: Problematic Heroes and their Function in Some of Tolkien’s Works
+Published by ValpoScholar, 2020
+ 
+Stephen, Elizabeth M. 2012. Hobbit to Hero. The Making of Tolkien’s King . 
+Moreton in Marsh: ADC Publications. 
+Stevens, Benjamin Eldon. 2020  (forthcoming). ‘Middle-earth as Underworld: 
+From Katabasis to Eucatastrophe.’ In Hamish Williams (ed.). Tolkien 
+and the Classical World. Cormarë Series 45. Zurich and Jena: Walking 
+Tree Publishers, 105-130. 
+Thomas, Paul Edmund. 2000. ‘Some of Tolkien’s Narrators.’ Clar k, George 
+and Daniel Timmons (eds.). J.R.R. Tolkien and His Literary 
+Resonances. Westport CT: Greenwood Press, 161-181. 
+Tolkien, John Ronald Reuel. 1988. ‘The Homecoming of Beorhtnoth, 
+Beorhthelm’s Son.’ In Tree and Leaf. London: HarperCollins, 119-150. 
+Originally published 1953 in Essays and Studies, N.S. 6, 1-18. London: 
+John Murray.  
+–––. 1992. The Lost Road and Other Writings. (The History of Middle -earth 
+5). Edited by Christopher Tolkien. Originally published 1987. London: 
+Grafton. 
+–––. 1994. The Silmarillion. Originally published 1977. Edited by Christopher 
+Tolkien. London: HarperCollins. 
+–––. 2004. The Lord of the Rings . 50 th anniversary one -volume edition. 
+Originally published in three volumes 1954 -55. Boston and New York: 
+Houghton Mifflin. 
+–––. 2007. The Children of Húrin . Edited by Christopher Tolkien. London: 
+HarperCollins. 
+–––. 2009. ‘Fate and Free Will.’ Tolkien Studies 6: 183-188. 
+–––. 2014. Beowulf. A Translation and Commentary . Edited by Christopher 
+Tolkien. London: HarperCollins. 
+–––. 2015. The Story of Kullervo . Edited by Verlyn Flieger. London: 
+HarperCollins. 
+West, Richard C. 2000. ‘Túrin’s Ofermod. An Old English Theme in the 
+Development of the Story of Túrin.’  In Verlyn Flieger and Carl F. 
+Hostetter (eds.). Tolkien’s Legendarium. Essays on The History of 
+Middle-earth. Westport CT and London: Greenwood Press, 233-245. 
+–––. 2014. ‘“Lack of Counsel Not of Courage”: J.R.R. Tolkien’s Critique of 
+the Heroic Ethos in The Children of Húrin .’ In John Wm. Houghton, 
+Janet Brennan Croft, Nancy Martsch, John D. Rateliff and Robin Anne 
+Reid (eds.) . Tolkien in the New Century. Essays in H onor of Tom 
+Shippey. Jefferson NC: McFarland, 216-220.  
+Zahnweh, Gudrun. 1989. Heldenfiguren bei Tolkien. Die Hierarchie des 
+Heldentums im Silmarillion und im Herr der Ringe . Passau: Erster 
+Deutscher Fantasy Club e.V. 
+ 
+16
+Journal of Tolkien Research, Vol. 9 [2020], Iss. 2, Art. 8
+https://scholar.valpo.edu/journaloftolkienresearch/vol9/iss2/8

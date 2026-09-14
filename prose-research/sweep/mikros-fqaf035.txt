@@ -1,0 +1,1322 @@
+Beyond the surface: stylometric analysis of GPT-4o’s 
+capacity for literary style imitation
+George Mikros 
+1 ,
+�
+1
+Department of Middle Eastern Studies, Hamad Bin Khalifa University, LAS Building, P.O. Box. 34110 Education City, 
+Doha, Qatar
+�
+Corresponding author. Department of Middle Eastern Studies, Hamad Bin Khalifa University, LAS Building, P.O. Box. 34110 Education City, 
+Doha, Qatar. E-mail: gmikros@hbku.edu.qa
+Abstract 
+This study aims to explore the ability of GPT-4o to imitate the literary style of renowned authors. Ernest Hemingway and Mary 
+Shelley were selected due to their contrasting literary styles and their overall impact on world literature. Using three distinct 
+prompting strategies—zero-shot generation, zero-shot imitation, and in-context learning—we generated forty-five stylistic imita -
+tions and analyzed them alongside the authors’ original texts. To ensure thematic consistency, we constrained the generated 
+texts to shared narrative themes derived from the authors’ works. We used a distance-based approach to authorship attribution 
+using the 1,000 most frequent words and cosine distance to explore how the large language model’s imitations were positioned 
+in the multidimensional authorship space. Moreover, we exploited a random forest classifier and repeated the authorship attribu -
+tion task to analyze the authorship distinctiveness of the GPT imitations further. We used a combination of Textual Complexity 
+and Readability, Author Multilevel N-gram Profiles, Word Embeddings, and Linguistic Inquiry and Word Count features. t-SNE vis -
+ualizations further evaluated the stylistic alignment between original and GPT-generated texts. The findings reveal that while 
+GPT-4o captures some surface-level stylistic elements of the authors, it struggles to fully replicate the depth and uniqueness of 
+their stylometric signatures. Imitations generated via in-context learning showed improved alignment with the original authors 
+but still exhibited significant overlap with generic GPT outputs.
+Keywords: stylistic imitation; large language models (LLMs); GPT-4o; authorship attribution; stylometric analysis; in-context learning . 
+1. Introduction
+The advent of large language models (LLMs), such as the 
+Generative Pre-trained Transformer 4 Omni (GPT-4o), a 
+multimodal LLM developed by OpenAI, has trans -
+formed natural language processing, enabling the genera -
+tion of text with remarkable fluency and coherence. 
+Among the many capabilities of LLMs, stylistic imita -
+tion, the ability to replicate a target author’s distinct lin -
+guistic, structural, and tonal features, has garnered 
+increasing attention. This capability holds promise for 
+applications ranging from literary analysis and personal -
+ized communication to pedagogical tools and creative 
+writing. However, it also raises ethical concerns, includ -
+ing intellectual property violations, misinformation, and 
+impersonation risks.
+Stylistic imitation requires an LLM to go beyond gen -
+erating coherent text and align its output with a given 
+author’s specific stylistic and linguistic features. While 
+LLMs excel at mimicking surface-level attributes, such as 
+vocabulary and sentence structure, replicating deeper 
+stylistic elements, including an author’s unique narrative 
+voice and emotional spectrum, remains a significant chal -
+lenge. This study seeks to evaluate how well GPT-4o can 
+replicate the distinct stylistic profiles of two renowned 
+authors, Ernest Hemingway and Mary Shelley, whose 
+contrasting literary styles provide an ideal testbed for 
+examining the effectiveness of stylistic imitation. These 
+distinct styles offer a robust framework for testing GPT- 
+4o’s ability to adapt its tone, structure, and narrative ele -
+ments to emulate diverse authorial voices faithfully.
+The remainder of this paper is organized as follows: 
+Section 2 reviews related work on LLMs’ stylistic imita -
+tion, highlighting key methodologies and challenges in 
+the field. Section 3 outlines the study’s methodology, in -
+cluding the author selection process, thematic control, 
+prompt design, and generation procedures. Section 4 
+presents the results of stylometric analyses, including 
+distance-based authorship attribution, machine learning 
+classification, and visualization methods. Finally, Section 
+5 concludes the paper by summarizing the findings, 
+© The Author(s) 2025. Published by Oxford University Press on behalf of EADH.  
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/ 
+by/4.0/), which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+Digital Scholarship in the Humanities, 2025, 40, 587–600 
+https://doi.org/10.1093/llc/fqaf035 
+Advance access publication 23 April 2025 
+Full Paper 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+discussing the limitations of the research, and offering 
+directions for future work.
+2. Related work
+Stylistic imitation broadly entails aligning an LLM’s 
+output with particular linguistic, structural, or tonal 
+features characteristic of a chosen target, such as a re -
+nowned author, a fictional character, or a particular 
+role. This capacity not only holds promise for person -
+alized communication ( Wang et al. 2024 ), literary 
+analysis, and pedagogical tools ( Kostopolus 2025 ), but 
+also poses critical ethical and intellectual property con -
+cerns ( Lee, Hilty, and Liu 2021 ; Yan et al. 2024 ).
+Recent research has tackled stylistic imitation through 
+various methodologies—ranging from fine-tuning and 
+prompt engineering to few-shot prompting, style embed -
+dings, and role-specific benchmarks. While LLMs have 
+demonstrated remarkable proficiency in mimicking 
+surface-level stylistic attributes, challenges remain in cap -
+turing subtler qualities of human writing, including inno -
+vation, deep causal reasoning, and authentic authorial 
+voice ( Chakrabarty et al. 2024 ; Riemer and Peter 2024 ; 
+Si, Yang, and Hashimoto 2024 ).
+Fine-tuning a pre-trained LLM on a corpus of a spe -
+cific author’s work can yield highly accurate stylistic 
+imitation, capturing subtle details such as unique vo -
+cabulary choices, syntactic tendencies, and tonal quali -
+ties ( Hicke and Mimno 2023 ; Guo, Xu, and Ritter 
+2024 ). Studies have shown that even seemingly trivial 
+elements—like stop words—can be critical to main -
+taining an author’s stylistic fingerprint ( Eder 2011 ; 
+Mikros and Perifanos 2011 ). Fine-tuning, however, 
+requires substantial data from the target author and 
+can be computationally expensive, risking overfitting, 
+and limited generalization.
+Additionally, a substantial body of work focuses on 
+enabling LLMs to imitate the language and persona of 
+defined characters. Wang et al. (2024) introduced 
+RoleLLM, a framework that fine-tunes models to 
+adopt role-specific behaviors by leveraging role pro -
+files and context-based instructions. By providing cus -
+tom role prompts and creating a benchmark dataset, 
+RoleBench, this approach yields LLM responses that 
+align with predefined personalities, making them 
+valuable for dialogue systems, gaming, and immersive 
+narrative experiences. Similar endeavors using 
+prompt-based role specification have shown that mod -
+els can mimic the language styles of fictional charac -
+ters, celebrities, or historical figures ( Jiang et al. 2022 ; 
+Mou et al. 2024 ). Such techniques offer potential for 
+entertainment, education, and creative exploration 
+while also opening paths to more personalized interac -
+tion with virtual agents (S. Chen et al. 2024 ).
+Beyond literary or conversational style, LLMs have 
+been adapted for imitation learning in task-specific 
+domains, such as robotics and control tasks. Liu et al. 
+(2023) developed TAIL (Task-specific Adapters for 
+Imitation Learning), which uses parameter-efficient fine- 
+tuning techniques like Bottleneck Adapters and Low- 
+Rank Adaptation (LoRA). TAIL allows LLMs to learn 
+new tasks from limited demonstrations and mimic 
+domain-specific behaviors without catastrophic forget -
+ting, enabling refined task performance and role adapta -
+tion. Such work gives a useful framework on how 
+imitation learning can bridge the gap between linguistic 
+style imitation and practical decision-making tasks.
+Another approach to steering the stylistic output of 
+LLMs is text style transfer and adaptation. Xu et al. 
+(2023) demonstrate that smaller models with latent at -
+tribute pre-training can efficiently perform style transfer 
+while retaining key stylistic elements, highlighting that 
+smaller, specialized architectures can rival massive mod -
+els in handling complex stylistic constraints with minimal 
+computational resources. Similarly, Shao et al. (2024) ad -
+dress the limitations of LLMs in authorship style trans -
+fer, particularly when in-context demonstrations for less 
+frequent styles are scarce. To overcome these challenges, 
+they propose an inverse transfer data augmentation 
+(ITDA) method, which utilizes LLMs to generate 
+neutral-stylized text pairs by removing style attributes 
+from existing texts. By exploiting the abundance of neu -
+tral texts from pre-training corpora, this method enables 
+the creation of robust datasets for training compact mod -
+els that are both efficient for deployment and adept at 
+replicating targeted styles. Experimental results across 
+multiple authorship style datasets confirmed that ITDA 
+outperforms traditional style transfer approaches and 
+forward transfer methods using GPT-3.5, further under -
+scoring the potential of efficient, smaller-scale models in 
+achieving high-quality stylistic adaptation.
+Prompt engineering can also produce carefully crafted 
+instructions to guide an LLM’s output toward a desired 
+style. By conditioning the model’s responses on specific 
+cues, users can produce text closely aligned with a chosen 
+stylistic framework, including the language style of fic -
+tional characters or domain experts ( Berryman and 
+Ziegler 2024 ; Marvin et al. 2024 ). This technique offers 
+flexibility and resource efficiency compared to large-scale 
+fine-tuning. However, its success depends heavily on 
+prompt quality and specificity, and the approach may 
+struggle to capture the full complexity of a target 
+author’s style consistently. The presence of instructive 
+tokens or specific instruction-tuned training procedures 
+may limit style fidelity. Recent research has integrated 
+prompt engineering with role-specific cues, showing 
+that models trained for role-play respond more accu -
+rately to persona descriptions and detailed prompts 
+(N. Chen et al. 2024 ; Li et al. 2024 ; Tang et al. 2024 ; 
+588                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+Wang et al. 2024 ). While promising, prompt engineering 
+remains sensitive to prompt design and may require ex -
+tensive experimentation to achieve consistent stylis -
+tic fidelity.
+One very successful variation of prompting is in- 
+context learning. It enables LLMs to achieve stylistic 
+imitation by utilizing examples provided within a 
+prompt, allowing for on-the-fly adaptation to specific 
+writing styles without requiring additional fine-tuning. 
+LLMs can infer stylistic patterns and replicate them in 
+generated outputs by including a carefully curated ex -
+ample that showcases desired stylistic features—such 
+as tone, sentence complexity, and lexical choices. Chen 
+and Moscholios (2024) , based on this idea, developed 
+a Complex Emulation Protocol (CEP) where the LLM 
+is provided with additional author data and/or guided 
+instructions in the form of a few key linguistic features 
+that potentially demonstrate the author’s unique lin -
+guistic preferences.
+Another alternative under the broader framework of 
+prompt engineering is few-shot prompting. It provides 
+the model with a handful of examples illustrating the tar -
+get style. Even with limited data, the LLM can learn es -
+sential stylistic patterns and apply them to new text 
+generations ( Li et al. 2024 ; Liu, Diddee, and Ippolito 
+2024 ; Soto et al. 2024 ). This method reduces the need 
+for extensive datasets and computational costs, but its ef -
+fectiveness heavily depends on the quality and diversity 
+of the examples provided. This limitation may restrict 
+the model’s ability to generalize across diverse topics or 
+sustain a high-fidelity style over more extended outputs.
+Complementing few-shot prompting is the use of au -
+thor style as vector embeddings, which provide a com -
+pact and flexible mechanism for guiding text generation. 
+Style embeddings can capture a wide range of stylistic 
+features, making it possible to compare and cluster dif -
+ferent authors or to retrieve relevant text samples for 
+context ( Wegmann, Schraagen, and Nguyen 2022 ; 
+Terreau, Gourru, and Velcin 2024 ). By combining 
+embeddings with Retrieval-Augmented Generation 
+(RAG), LLMs can adapt their output to a particular style 
+more dynamically ( Luo et al. 2024 ; Neelakanteswara, 
+Chaudhari, and Zamani 2024 ). However, generating ef -
+fective style embeddings can be challenging, and their in -
+terpretation may not always be straightforward.
+Researchers have also explored ways to align gener -
+ation with an LLM’s “native” style, thereby enhancing 
+the model’s reasoning performance. Yang et al. (2024)
+introduced AlignCoT, a method for integrating in- 
+context examples that match the LLM’s inherent lin -
+guistic characteristics. By aligning output style with 
+the model’s natural tendencies, LLMs can achieve 
+more accurate and natural reasoning behaviors.
+Building on the impact of stylistic alignment, recent 
+studies have examined how humans perceive AI-generated 
+texts across different genres, often revealing a surprising 
+inability to distinguish them from human-authored con -
+tent. In some cases, readers even prefer AI-generated texts, 
+attributing higher value to them. Porter and Machery 
+(2024) recruited 1,000 participants to evaluate 100 
+poems—half by humans and half by AI. The findings 
+revealed that participants often rated AI-generated poems 
+higher than those by renowned poets like Sylvia Plath and 
+T.S. Eliot, indicating a challenge in distinguishing between 
+the two and a tendency to value AI-generated poetry 
+more. Similarly, Amirjalili, Neysani, and Nikbakht (2024)
+compared AI-generated essays to those written by students 
+and found that AI-produced texts were perceived as co -
+herent and contextually relevant. However, they lacked 
+the depth and specificity characteristic of human author -
+ship. Despite these shortcomings, the AI-generated content 
+was often rated favorably, highlighting the persuasive na -
+ture of LLM outputs in academic contexts. Moreover, in 
+the domain of news articles, Zhang et al. (2024) have 
+shown that LLMs can produce content with linguistic pat -
+terns closely mirroring human writing. This similarity 
+makes it challenging for readers to differentiate between 
+human and AI-generated news texts, potentially leading 
+to equal or greater trust in AI-produced journalism. 
+Furthermore, research into social media ( Radivojevic et al. 
+2024 ) has demonstrated that humans often struggle to 
+identify AI-generated posts. In experiments where partici -
+pants attempted to distinguish between human and 
+AI-authored social media entries, accuracy was low, sug -
+gesting that AI-generated content is perceived as authenti -
+cally human across this genre as well.
+While LLMs excel at replicating surface-level patterns, 
+studies have shown that they lag behind human children 
+in cognitive tasks requiring creative problem-solving or 
+deep causal reasoning ( Yiu, Kosoy, and Gopnik 2024 ). 
+Despite impressive linguistic mimicry, current LLMs 
+struggle with capturing the full richness and innovation 
+inherent in human writing. Bhandarkar et al. (2024)
+found that LLMs often fail to achieve effective author- 
+style emulation, and human evaluators can frequently 
+distinguish LLM-generated text from genuinely human- 
+authored text. These limitations underscore the critical 
+role of human perception in evaluating stylistic imitation. 
+Readers may recognize when style is only superficially 
+imitated—lacking depth, originality, or authentic creative 
+flair. Understanding which linguistic cues and contextual 
+factors influence human judgments of authenticity 
+remains an open research challenge. Systematic user 
+studies are needed to identify how humans perceive and 
+evaluate stylistic imitation, informing more nuanced 
+approaches to LLM training and evaluation.
+However, the ability of LLMs to replicate writing 
+styles also raises significant ethical concerns. The technol -
+ogy risks being misused for generating disinformation, 
+impersonation, or deceptive content, with intellectual 
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               589 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+property disputes arising when LLMs produce text 
+closely mirroring the style of a copyrighted author. 
+Intellectual property concerns emerge when LLMs pro -
+duce text that closely mirrors the style of a copyrighted 
+author. The “Matthew effect” ( Rigney 2010 ), whereby 
+the styles of well-known authors are more easily repli -
+cated, may worsen existing disparities in visibility and in -
+fluence. Furthermore, the creation of persuasive bots that 
+mimic specific personalities for marketing or political 
+purposes raises critical questions about authenticity, con -
+sent, and trust ( Simchon, Edwards, and Lewandowsky 
+2024 ). As LLMs are being further developed and their 
+reasoning and writing skills increase, it is important to 
+research how to balance their potential benefits with mit -
+igating risks, ensuring that ethical considerations, trans -
+parency, and safeguards against misuse guide 
+advancements in AI technology.
+3. Methodology
+3.1 LLMs and prompting
+LLMs like OpenAI’s GPT-4o are AI systems trained on 
+extensive text data to generate human-like language. 
+These systems, commonly known as chatbots, can cre -
+ate coherent text following specific instructions called 
+“prompts.” Prompts range from simple questions to 
+detailed stylistic guidelines that direct the model’s out -
+put. The effectiveness of generated text depends signif -
+icantly on prompt design, a practice termed “prompt 
+engineering.” In our research, we implemented three 
+distinct prompting strategies (zero-shot generation, 
+zero-shot imitation, and in-context learning) to evalu -
+ate how different instructional approaches affect GPT- 
+4o’s literary style imitation capabilities, providing a 
+systematic assessment under varying levels of contex -
+tual guidance.
+3.2 Author selection and rationale
+We used GPT-4o (model gpt-4o-2024-05-13) accessed 
+through the OpenAI API to create texts that imitate 
+the literary style of two well-known authors, Ernest 
+Hemingway and Mary Shelley. These two authors 
+were chosen as stylistic targets due to their well- 
+documented, distinct literary voices. Hemingway’s 
+style is characterized by economical prose, short sen -
+tences, sparse description, and emphasis on dialogue, 
+reflecting themes of stoicism, existential struggle, and 
+the human condition. In contrast, Mary Shelley’s style, 
+exemplified by works such as Frankenstein, is more 
+elaborate and descriptive, featuring emotionally 
+charged narrative passages, gothic and romantic ele -
+ments, and an exploration of scientific ambition and 
+isolation. This deliberate contrast provides a robust 
+testing ground for the GPT-4o’s ability to convincingly 
+shift its tone, narrative structure, and thematic focus in 
+response to stylistic prompts.
+To ensure that stylistic differences were not con -
+flated with thematic disparities between the authors’ 
+source texts, an additional layer of thematic control 
+was integrated into the methodology. The goal was to 
+identify narrative themes that were inherently present 
+in both Hemingway’s The Old Man and the Sea and 
+Shelley’s Frankenstein, allowing for the generation of 
+text samples that explored shared conceptual ground. 
+By constraining the thematic space, we aimed to ensure 
+that subsequent stylistic analyses would not be skewed 
+by differences in topic selection. Moreover, using this 
+approach, we were able to direct the GPT-4o model to 
+produce new text that was thematically related to the 
+author but without forcing it to recreate passages from 
+the source text.
+3.3 Topic modeling procedure
+The first step involved performing topic modeling on 
+both novels. Latent Dirichlet Allocation (LDA), a widely 
+recognized algorithm for extracting latent thematic struc -
+tures from textual data, was employed for this. Each text 
+underwent preprocessing, which included tokenization, 
+lowercasing, and removal of stopwords.
+For preprocessing, we implemented a comprehensive 
+protocol to ensure consistency and reliability. 
+Tokenization was performed using the NLTK word_ 
+tokenize function, which segments text based on white -
+space and punctuation while preserving linguistically 
+meaningful units. For stopword removal, we utilized the 
+standard English stopword list from NLTK, consisting 
+of 179 common function words that typically do not 
+contribute to thematic content. Normalization was not 
+limited to lowercase conversion; we also standardized 
+contractions, removed non-alphabetic characters except 
+for relevant punctuation marks needed for sentence 
+boundary detection, and eliminated extraneous white -
+space. Additionally, we applied lemmatization using 
+NLTK’s WordNet lemmatizer to reduce inflectional 
+word forms to their base forms, which helps consolidate 
+related terms for more coherent topic extraction.
+After these linguistic normalizations, each novel was 
+analyzed separately to extract the underlying topics. For 
+each novel, we identified twenty topics, each represented 
+by its twenty most significant keywords. This figure was 
+chosen to capture a sufficiently granular thematic repre -
+sentation, ensuring that even subtle thematic patterns 
+could surface. Once the LDA modeling was complete, 
+the resulting topics were examined. Topic interpretation 
+involved reviewing each topic’s twenty top-ranking key -
+words and representative segments. With two sets of 
+topics, twenty from Hemingway’s text and twenty from 
+Shelley’s—we proceeded to cross-reference them in 
+search of conceptual overlaps. The aim was to find 
+590                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+thematic domains that both texts addressed, albeit in 
+their distinct narrative styles. By reviewing the descriptive 
+keywords and sample passages, we identified points of 
+resonance between the two corpora. For example, The 
+Old Man and the Sea and Frankenstein both explore the 
+individual’s struggle against the natural environment, 
+though they do so in stylistically distinct ways. Similarly, 
+both works refer to themes of ambition, identity, isola -
+tion, and moral responsibility, each through their unique 
+narrative voices and fictional constructs.
+This cross-referencing stage resulted in the selection 
+of nine central themes that consistently emerged across 
+both books and are the following: (1) Nature’s Dual 
+Role as Friend and Foe, (2) Isolation, (3) The Price of 
+Ambition, (4) Man Versus Nature, (5) The Search for 
+Identity, (6) Love and Loss, (7) The Weight of Guilt, 
+these results demonstrate, (8) Mortality, and (9) 
+Knowledge as Power and Peril. The most prominent 
+topic words associated with the above themes can be 
+found in Table 1 .
+These nine themes represent the common thematic 
+ground that both Hemingway and Shelley engage 
+with, enabling the creation of prompts and generation 
+tasks that do not favor one author’s narrative concerns 
+over the other’s.
+3.4 Prompt design and text generation
+Three prompts were developed to elicit stylistically im -
+itative texts from the GPT-4o model and are de -
+scribed below:
+1) Zero-shot: We asked GPT-4o to produce short 
+novels on the nine specific topics outlined above 
+using its native style. This would produce a base -
+line of the model’s stylistic signature. The gener -
+ated texts were assigned the prefix “GPT” in their 
+filenames. The prompts used are the following: 
+Write a 2,000-word short novel on the topic 
+“[Topic Name]”. 
+2) Zero-shot (imitation): In this prompt, we specifically 
+asked for the imitation of the authors’ styles. Imitation 
+will be achieved by exploiting the overall model’s 
+knowledge about these authors and the stylistic charac -
+teristics of their works. The generated texts were 
+assigned the prefixes “GPT_Hemingway” and 
+“GPT_Shelley,” respectively, in their filenames. The 
+prompt used is the following: 
+a) Write a 2,000-word short novel on the topic 
+“[Topic Name],” imitating the literary style of 
+Ernest Hemingway. 
+b) Write a 2,000-word short novel on the topic 
+“[Topic Name],” imitating the literary style of 
+Mary Shelley. 
+3) In-context learning: For this prompt, we used a 
+15,000-word excerpt from Hemingway’s “The Old 
+Man and the Sea” and Shelley’s “Frankenstein.” This 
+excerpt was taken from the middle of each source 
+book and was used as a reference to the original 
+authors’ style. The generated texts were assigned the 
+prefixes “EnhGPT_Hemingway” and “EnhGPT_ 
+Shelley,” respectively, in their filenames. The prompt 
+used is the following: 
+You are tasked with reading a given text, imitating 
+its style, and then writing a 2,000-word short novel 
+using the learned style with the topic “[Topic 
+Name].” Follow these instructions carefully: 
+a) First, carefully read the following text: 
+<text_to_imitate> </text_to_imitate>
+b) Analyze the text thoroughly, paying close at -
+tention to: 
+i) Sentence structure and length 
+ii) Vocabulary choices 
+iii) Tone and mood 
+iv) Narrative voice (first person, third person, etc) 
+v) Use of literary devices (metaphors, similes, 
+alliteration, etc) 
+vi) Pacing and rhythm 
+vii) Dialogue style (if present) 
+viii) Descriptive techniques 
+c) Now, write a 2,000-word short novel that imitates 
+the style of the given text. Your novel should: 
+i) Have a clear beginning, middle, and end 
+ii) Include well-developed characters 
+Table 1. Key topic words associated with common themes in Shelley’s “Frankenstein” and Hemingway’s “The Old Man and the Sea.”
+Common themes Shelley Hemingway
+Nature’s Dual Role as Friend and Foe sea, ocean, snow, whale, wild shark, fish, wind, turtle, breeze
+Isolation unvisited, fearful, secret, silent, far shack, lost, fear, gone, deep
+The Price of Ambition glory, prize, success, enterprise, 
+perseverance
+yankees, league, dimaggio, team, big
+Man Versus Nature voyage, discovery, pole, dangerous, kill harpoon, caught, boat, skiff, fishermen
+The Search for Identity mind, know, brother, sister, understand boy, man, remember, i’m, thought
+Love and Loss love, loved, dear, friend, heart wife, sad, remembered, home, share
+The Weight of Guilt evil, brutality, woeful, soul, dreadfully bad, truly, scars, took, black
+Mortality life, fate, days, winter, men old, winter, eighty, time, passed
+Knowledge as Power and Peril study, read, explore, modern, projects think, newspaper, faith, means, league
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               591 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+iii) Have a coherent plot or central theme 
+iv) Maintain the identified stylistic elements 
+throughout 
+Remember, your goal is to create a new, original 
+story that feels as if it could have been written by the 
+author of the text you are imitating. Focus on captur -
+ing the essence of their style rather than copying spe -
+cific plot elements or characters.
+The linguistic measurements reported in Table 2
+represent corpus-level calculations for each author cat -
+egory rather than averages of individual texts. To pro -
+vide additional insight into the variation within each 
+category, Table 2 presents the mean and standard devi -
+ation of the following key linguistic measure calculated 
+at the individual text level:
+�
+Tokens: The total count of individual word occur -
+rences in the text, including repeated words. 
+�
+Types: The count of unique words in the text, with 
+each distinct word included in the count. 
+�
+stTTR (standardized Type-Token Ratio): A mea -
+sure of lexical diversity calculated as (Types �
+Tokens) × 100, standardized across fixed-length 
+text segments (1,000 words) to control for text 
+length effects. Higher values indicate greater lexi -
+cal diversity. 
+�
+Mean Word Length: The average number of char -
+acters per word, which can indicate complexity of 
+vocabulary or writing style. 
+�
+Mean Sentence Length: The average number of 
+words per sentence, which often correlates with 
+syntactic complexity and writing style. Shorter sen -
+tences are typically associated with Hemingway’s 
+style, while longer, more complex sentences align 
+with Shelley’s gothic prose. 
+The linguistic measurements outlined in the report 
+reflect corpus-level calculations for each author cate -
+gory, derived from the average of the nine text seg -
+ments. To enhance our understanding of the variation 
+within each category, we also included the stan -
+dard deviation:
+It is important to note that although we requested 
+2,000-word texts in our prompts to GPT-4o, the ac -
+tual output varied. The nine texts in each generated 
+category collectively range from 12,593 words (GPT) 
+to 17,917 words (EnhGPT.Shelley), averaging approx -
+imately 1,399 to 1,991 words per text—slightly below 
+the requested 2,000 words per text. This variation oc -
+curred because GPT-4o occasionally terminated text 
+generation before reaching the exact word count speci -
+fied in the prompt, particularly when reaching narra -
+tive closure points. We chose to preserve these natural 
+termination points rather than forcing additional con -
+tent, as this approach better maintained the narrative 
+integrity of the generated texts.
+Moreover, Table 2 reveals distinctive linguistic pat -
+terns across author categories. EnhGPT.Shelley texts 
+show the highest token count (1,993.78 ± 651.67), 
+approaching our 2,000-word target, while generic GPT 
+outputs contain the fewest (1,399.22 ± 115.71). Stylistic 
+patterns align with expectations: Hemingway imitations 
+feature shorter sentences (12.95-13.47 words) and words 
+(4.29-4.49 characters) compared to Shelley imitations 
+(17.70-19.75 words, 4.53-4.71 characters). However, 
+lexical diversity results are unexpected, with GPT. 
+Hemingway showing the highest diversity (47.79 ± 0.95) 
+and EnhGPT.Shelley the lowest (38.57 ± 3.48), contrary 
+to the original authors’ patterns (Hemingway: 34.62, 
+Shelley: 44.33). This suggests GPT-4o successfully cap -
+tures sentence-level stylistic traits but struggles with 
+vocabulary richness imitation.
+4. Stylometric analysis
+4.1 Profile-based authorship attribution
+Our analysis aims to systematically examine whether 
+LLMs (specifically GPT-4o) can accurately replicate an 
+author’s stylometric profile. More specifically, we seek 
+to determine whether it is possible to distinguish be -
+tween a text written by GPT-4o imitating an author and 
+Table 2. Mean and standard deviation of linguistic measures for individual texts by author category.
+Author N Tokens Types stTTR Mean word  
+length (in  
+characters)
+Mean sentence  
+length (in  
+words)
+Overall mean 47 3,710.17 ± 393.83 756.91 ± 979.03 43.77 ± 3.42 4.53 ± 0.24 15.83 ± 3.29
+EnhGPT.Hemingway 9 1,587.78 ± 393.83 537.78 ± 74.93 42.70 ± 0.48 4.29 ± 0.17 12.95 ± 2.29
+EnhGPT.Shelley 9 1,993.78 ± 651.67 662.89 ± 147.07 38.57 ± 3.48 4.53 ± 0.17 19.75 ± 2.85
+GPT.Hemingway 9 1,499 ± 219.27 541.56 ± 57.30 47.79 ± 0.95 4.49 ± 0.18 13.47 ± 1.44
+GPT.Shelley 9 1,577.22 ± 163.46 599.56 ± 68.53 45.57 ± 0.53 4.71 ± 0.13 17.70 ± 1.94
+GPT 9 1,399.22 ± 115.71 550.22 ± 50.76 44.01 ± 0.29 4.72 ± 0.17 15.01 ± 1.07
+Hemingway_The Old Man  
+and The Sea
+1 26,663 2,539 34.62 3.84 14.15
+Shelley_Frankenstein 1 75,143 7,008 44.33 4.42 41.51
+592                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+one authored by the original writer. To achieve this, 
+we treated each generated subcorpus as a distinct 
+author, resulting in five artificial authors (GPT, 
+GPT_Hemingway, GPT_Shelley, EnhGPT_Hemingway, 
+EnhGPT_Shelley) alongside two human authors 
+(Hemingway and Shelley).
+In our study, we evaluate imitation success using au -
+thorship attribution results in the above-mentioned 
+corpus. By assigning each imitation sample a virtual 
+author label, we assess the model’s ability to mimic 
+distinct stylistic features by comparing the classifica -
+tion accuracy of the imitation samples against those of 
+the original human authors.
+In our stylometric analysis, we employed the Cosine 
+Delta distance measure using the 1,000 most frequent 
+words as features. This approach offers substantial ro -
+bustness against text length variations, as it measures 
+the angular similarity between feature vectors rather 
+than their magnitudes. The frequency vectors are nor -
+malized during calculation, which further mitigates po -
+tential biases from unequal text lengths ( Evert et al. 
+2017 ). While dividing texts into equal-sized chunks 
+can be valuable in certain stylometric contexts, our use 
+of normalized frequency vectors with Cosine Delta dis -
+tance provides reliable comparative analysis despite 
+the modest variations in text length across our corpus. 
+This methodological decision is further supported by 
+previous research demonstrating the Cosine Delta dis -
+tance’s effectiveness with frequency-based stylometric 
+features in comparative analyses of texts with varying 
+lengths ( Eder, Rybicki, and Kestemont 2016 ; Evert 
+et al. 2017 ).
+For visualization, we employed hierarchical cluster 
+analysis (HCA) and principal component analysis 
+(PCA) based on matrix correlations. These methods 
+will allow us to visually represent the cosine distances, 
+where texts with similar styles are positioned closer 
+under the same branch, and those with distinct styles 
+are farther apart. The results of both analyses can be 
+seen in Fig. 1 .
+HCA reveals that while GPT-4o can approximate an 
+author’s stylistic profile, it does not fully replicate the nu -
+anced stylometric signatures of human-authored texts. 
+The original works by Hemingway and Shelley form a 
+distinct cluster, indicating that their unique styles are pre -
+served. Generated texts imitating Hemingway 
+(GPT_Hemingway and EnhGPT_Hemingway) and 
+Shelley (GPT_Shelley and EnhGPT_Shelley) show con -
+sistency within their respective groups but remain sepa -
+rate from the originals, suggesting partial replication of 
+their styles. Generic GPT outputs (GPT) are the most dis -
+tinct, lacking the stylistic features of both the original 
+and imitated texts. Enhanced imitations (EnhGPT) show 
+some improvement in stylistic alignment but do not 
+bridge the gap to the original authors. Overall, these 
+results demonstrate the LLM’s capability to imitate sty -
+listic elements but highlight its limitations in fully captur -
+ing the complexity of human-authored texts.
+The PCA analysis replicates the HCA findings. 
+Hemingway’s The Old Man and the Sea and Shelley’s 
+Frankenstein occupy distinct positions on the plot, 
+highlighting their unique stylistic signatures. The imi -
+tations of Shelley (GPT_Shelley and EnhGPT_Shelley) 
+cluster closer to Frankenstein, indicating some degree 
+of alignment with Shelley’s style, though differences re -
+main evident. Similarly, the imitations of Hemingway 
+(GPT_Hemingway and EnhGPT_Hemingway) group 
+together but are positioned away from The Old Man 
+and the Sea, suggesting partial but incomplete stylistic 
+replication. The generic GPT output (GPT) is located 
+between the imitations, demonstrating its lack of align -
+ment with either author’s stylistic features. The PCA 
+plot further underscores the limitations of LLMs in 
+fully capturing the detailed stylometric profiles of 
+human-authored texts while showing some capability 
+for stylistic approximation.
+4.2 Instance-based authorship attribution
+We repeated the authorship attribution experiment us -
+ing an instance-based approach. We trained a Random 
+Forest algorithm using the same authors set as the pre -
+vious profile-based analysis. To enhance the dataset 
+and improve the robustness of the analysis, the original 
+texts were segmented into 500-word chunks, resulting 
+in a total sample of 372 texts. Each task employed a 
+distinct group of stylometric features to capture the 
+broadest possible range of stylistic variations in the 
+texts. The specific feature groups utilized in the analy -
+sis are as follows:
+a) TCR features: We calculated seventy-four stylo -
+metric features organized in the following wider 
+thematic areas: 
+�
+Word and Sentence Lengths and standard devia -
+tions (measured in characters, words, and syllables) 
+�
+Word Frequency distribution indices such as 
+hapax legomena and dis legomena 
+�
+Quantitative aspects of text, such as entropy, per -
+plexity, and the corresponding standard deviations 
+�
+Lexical diversity indices: 
+� Text size neutralized TTR measures: log- 
+transformed TTR, root-transformed TTR, 
+Mass TTR, Mean Segmental TTR, Moving 
+Average TTR 
+� Measure of Textual Lexical Diversity (MTLD) 
+� Hypergeometric Distribution D measure 
+� Functional diversity (the ratio of content to 
+functional words) 
+�
+Readability indices: 
+� Flesch- Kincaid reading ease and grade level 
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               593 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+� SMOG 
+� Automated Readability Index 
+� Dale-Chall 
+� Linsear Write formula 
+� Gunning-Fog score 
+� Coleman-Liau index 
+�
+Metrics related to coherence, text quality, syn -
+tactic complexity, and Part-of-Speech (PoS) tags 
+frequencies 
+b) Author Multilevel N-gram Profiles (AMNP): 
+Mikros and Perifanos (2013) introduced the AMNP 
+approach, which has demonstrated significant effec -
+tiveness in authorship attribution and author profil -
+ing research ( Mikros 2013 a, 2013 b; Mikros and 
+Perifanos 2015 ; Mikros 2018 ). AMNP provides a 
+comprehensive document representation framework 
+that incorporates progressively larger n-gram units 
+at both character and word levels. 
+This dual-dimension approach ensures cover -
+age across multiple linguistic strata. The method -
+ology draws its theoretical foundation from the 
+Prague School of Linguistics and specifically the 
+concept of “double articulation” ( N €oth 1995 : 
+238). According to this principle, language oper -
+ates on two distinct structural layers: the first con -
+taining meaningful units (morphemes) that form 
+grammatical patterns, and the second comprising 
+minimal functional units (phonemes) that lack in -
+dependent meaning. The integration of elements 
+from both layers produces grammatically sound 
+linguistic output. 
+Stylistic analysis can be approached through a 
+similar framework. To effectively capture the mul -
+tidimensional nature of stylistic features, research -
+ers must identify and systematically integrate 
+characteristics across diverse linguistic levels to 
+accurately represent an author’s distinctive style. 
+For our current research, we constructed a fea -
+ture vector of 900 elements by extracting the 300 
+most frequent character bigrams (n ¼ 2), character 
+trigrams (n ¼ 3), and word unigrams. This com -
+prehensive vector constitutes the Author’s 
+Multilevel N-gram Profile (AMNP), providing a 
+document representation that simultaneously 
+encapsulates both character and word sequence 
+patterns. To eliminate potential text-length biases 
+in our subsequent analyses, we normalized the fre -
+quency calculations across all features. 
+c) Word Embeddings (WE): Word Embeddings are a 
+popular representation of a text’s vocabulary. 
+Words or phrases from the lexicon are translated 
+into vectors of real numbers and can subsequently 
+be used in language modeling and feature- 
+learning approaches. These numerical vectors can 
+capture text representations in an n-dimensional 
+space, where words with the same meaning are 
+represented similarly. This indicates that two 
+comparable words are located extremely closely 
+together in vector space and have almost identical 
+vector representations. Therefore, the objective of 
+creating a word embedding space is to record 
+some form of relationship in that space, be it 
+based on meaning, morphology, context, or an -
+other type of link. Our study utilized OpenAI’s 
+pre-trained text-embedding-3-small model to gen -
+erate word embeddings for each text. By averag -
+ing these embeddings, we represented each 
+document with a single vector that encapsulates 
+the mean of its word embeddings. 
+d) Linguistic Inquiry and Word Count (LIWC) fea -
+tures: LIWC is a text analysis tool that quantifies 
+linguistic and psychological attributes by catego -
+rizing words into predefined groups. It assesses 
+dimensions such as emotional tone, cognitive pro -
+cesses, social concerns, and perceptual processes. 
+Figure 1. HCA and PCA graphs of the 1,000 most frequent words using the cosine distance.
+594                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+In this study, we utilized LIWC-22 ( Boyd et al. 
+2022 ) to extract 115 features related to affective 
+processes (e.g., positive and negative emotions), 
+cognitive processes (e.g., insight, causation), social 
+processes (e.g., family, friends), and perceptual 
+processes (e.g., see, hear, feel). These features pro -
+vide insights into the psychological and emotional 
+aspects of the texts, complementing the other sty -
+lometric analyses. 
+For our random forest classification evaluation, we 
+employed a rigorous fivefold cross-validation ap -
+proach rather than relying solely on training perfor -
+mance metrics. The corpus was randomly partitioned 
+into five equal subsets, with four subsets (80 per cent 
+of data) used for training and one subset (20 per cent) 
+reserved for testing in each fold. This process was re -
+peated five times, with each subset serving once as the 
+test data. The performance metrics reported in Table 3
+represent the averages across all five folds, thus provid -
+ing a more reliable estimate of the model’s generaliza -
+tion capabilities. This cross-validation strategy helps 
+mitigate concerns about overfitting and ensures that 
+our evaluation reflects the model’s ability to accurately 
+classify unseen texts. All classifications were per -
+formed independently for each feature group (TCR, 
+AMNP, WE, and LIWC) to assess their individual dis -
+criminative power. The results of the authorship attri -
+bution tasks can be found in Table 3 .
+To thoroughly examine the classification results for 
+each category, we generated a detailed classification 
+report for each class (author) across the different fea -
+ture groups. The results are presented in Fig. 2 .
+From the detailed analysis of the classification met -
+rics for each author, we can explore whether these imi -
+tations successfully capture the unique stylistic 
+characteristics of the original authors. More specifi -
+cally, the original works by Shelley and Hemingway 
+are consistently well-identified across all feature 
+groups, with high precision and perfect or near-perfect 
+recall. However, GPT-generated imitations, especially 
+those using in-context learning, show varied perfor -
+mance. In-context learning imitations of Hemingway 
+(EnhGPTHemingway) are particularly difficult to clas -
+sify, with low recall in AMNP and WE features, indi -
+cating significant overlap with both original texts and 
+other imitative categories. Shelley’s in-context learning 
+imitations (EnhGPTShelley) perform slightly better but 
+still demonstrate inconsistencies in recall and preci -
+sion, suggesting only partial replication of her stylis -
+tic features.
+Generic GPT outputs perform moderately, particu -
+larly in TCR and WE, where they show noticeable 
+overlap with other categories, indicating that they lack 
+clear stylistic alignment with either original or 
+imitative profiles. LIWC features capture some psycho -
+logical and emotional details but are less effective for 
+distinguishing complex stylistic patterns in imita -
+tive texts.
+Overall, the analysis reveals that GPT-generated 
+texts approximate the original authors’ styles to some 
+degree but cannot fully replicate their unique stylomet -
+ric profiles. This highlights the current limitations of 
+GPT in accurately imitating the depth and complexity 
+of human-authored stylistic patterns, particularly for 
+enhanced imitations. While GPT can mimic surface- 
+level stylistic elements, it struggles to capture the full 
+richness of an author’s stylometric signature, making it 
+distinguishable from the originals.
+4.3 t-SNE analysis
+As a final step, we visualized the author discrimination 
+results by applying dimensionality reduction using the 
+t-SNE (t-distributed Stochastic Neighbor Embedding) 
+method for each feature group analyzed. t-SNE is a 
+non-linear dimensionality reduction technique particu -
+larly effective for visualizing high-dimensional data by 
+preserving the local structure of the data points in a 
+lower-dimensional space, making it well-suited for 
+identifying patterns and clusters within the stylometric 
+features of the texts ( Van der Maaten and Hinton 
+2008 ). The results of the analysis can be found 
+in Fig. 3 .
+The results reveal that GPT-generated imitations 
+capture some stylistic elements of the original texts, 
+but their fidelity varies significantly depending on the 
+feature group analyzed. AMNP features were the most 
+effective at differentiating between original and imita -
+tion texts. Hemingway’s and Shelley’s original texts 
+formed distinct and well-defined clusters, indicating 
+that their multilevel stylistic traits, including n-grams 
+and word patterns, were difficult for GPT-generated 
+texts to replicate fully. Enhanced in-context learning 
+models (EnhGPTHemingway and EnhGPTShelley) 
+showed moderate success in aligning with the original 
+styles but still exhibited noticeable overlap with other 
+categories, particularly for Hemingway.
+The LIWC features demonstrated that GPT imita -
+tions could capture some emotional and cognitive pro -
+cesses but struggled with more intricate stylistic 
+nuances. Shelley’s original texts showed greater disper -
+sion, and the enhanced GPT-generated texts only 
+Table 3. Classification metrics in authorship attribution using RF.
+Accuracy Recall Precision F1
+TCR 0.7984 0.7984 0.8037 0.7896
+AMNP 0.8329 0.8329 0.8447 0.8213
+WE 0.8364 0.8364 0.8637 0.8201
+LIWC 0.8403 0.8403 0.8474 0.8282
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               595 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+partially overlapped with her cluster. Hemingway’s 
+texts, on the other hand, were more distinct but still 
+showed some alignment with enhanced GPT outputs, 
+suggesting that certain psychological aspects of his 
+style are easier for GPT to emulate.
+The TCR features highlighted the complexity and 
+readability aspects of the texts. Hemingway’s texts 
+were more distinctly clustered, reflecting his character -
+istic readability and sentence-level simplicity, which 
+the GPT models approximated to a moderate degree. 
+In contrast, Shelley’s stylistic complexity resulted in 
+more dispersed clustering, with her texts overlapping 
+with both generic GPT and in-context learning imita -
+tions, suggesting challenges in replicating her unique 
+structural and lexical richness.
+The WE features offered insights into the semantic 
+alignment of the texts. Hemingway’s cluster was 
+tightly grouped and minimally overlapped with GPT 
+outputs, indicating his lexical and semantic style was 
+challenging for GPT to replicate fully. Shelley’s texts 
+exhibited slightly more dispersion, with enhanced imi -
+tative outputs clustering closer to her original works 
+than generic GPT outputs. However, overlap across 
+categories persisted, particularly with generic GPT out -
+puts, reflecting limitations in achieving high seman -
+tic fidelity.
+Overall, the effectiveness of GPT-generated texts in 
+producing stylometrically similar outputs to the origi -
+nals was moderate but incomplete. Across all feature 
+groups, the original texts by Hemingway and Shelley 
+consistently formed distinct clusters, confirming the 
+uniqueness and coherence of their stylometric profiles. 
+In-context learning outputs demonstrated closer align -
+ment to the originals compared to generic GPT out -
+puts, highlighting the value of contextual guidance in 
+improving stylistic fidelity. However, significant dis -
+persion and overlap across categories underscore the 
+ongoing limitations of GPT models in fully replicating 
+the intricacies of human-authored styles.
+GPT-generated imitations better approximated 
+Hemingway’s style, characterized by simplicity and 
+structural consistency. Shelley’s more intricate and 
+complex style posed more significant challenges, as 
+evidenced by more dispersed clustering and higher 
+overlap with GPT-generated texts. This suggests that 
+the effectiveness of GPT-generated imitations varies 
+Figure 2. Detailed classification report for each class in each feature group. Class labels: EnhGPTHemingway: 0, EnhGPTShelley: 1, GPT: 
+2, GPTHemingway: 3, GPTShelley: 4, Hemingway: 5, Shelley: 6.
+596                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+depending on the stylistic complexity and distinctive -
+ness of the original author.
+The findings demonstrate that while GPT-generated 
+texts can approximate surface-level stylistic features, 
+they struggle to replicate the depth, detail, and coher -
+ence of human-authored writing. In-context learning 
+improves stylistic alignment but cannot fully emulate 
+the unique stylometric profiles of authors like Shelley 
+and Hemingway. These limitations are particularly evi -
+dent in the more complex and semantically rich fea -
+tures, such as AMNP and WE, which require 
+capturing subtler patterns of linguistic expression.
+5. Conclusions
+This study examined the extent to which GPT-4o can 
+produce stylometrically similar texts to the original 
+works of Ernest Hemingway and Mary Shelley. Using 
+various prompting strategies, zero-shot generation, 
+zero-shot imitation, and in-context learning, we 
+generated stylistic imitations and analyzed them 
+through multiple stylometric methodologies, including 
+profile-based and instance-based authorship attribu -
+tion and t-SNE visualization across four feature 
+groups. The findings reveal that while GPT-4o demon -
+strates the ability to approximate surface-level stylistic 
+features, it falls short of fully replicating the unique 
+stylometric profiles of the human authors. Across all 
+analyses, original texts by Hemingway and Shelley 
+consistently formed distinct and well-defined clusters, 
+emphasizing the coherence and distinctiveness of their 
+stylistic signatures. In contrast, GPT-generated imita -
+tions, particularly those using in-context learning, 
+showed moderate improvement in stylistic alignment 
+but still exhibited significant overlap with generic GPT 
+outputs, underscoring their limitations.
+Hemingway’s concise and structurally consistent 
+style proved somewhat easier for GPT to emulate, as 
+reflected in the tighter clustering and greater alignment 
+of imitative outputs in TCR and WE analyses. 
+Figure 3. t-SNE plots for each feature group.
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               597 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+However, Shelley’s complex, richly descriptive style 
+posed more significant challenges, with her imitative 
+outputs showing more dispersion and overlap with ge -
+neric GPT outputs. These findings suggest that the ef -
+fectiveness of GPT-generated imitations depends 
+heavily on the stylistic complexity and distinctiveness 
+of the original author.
+The t-SNE analyses demonstrate that the fidelity of 
+GPT’s stylistic imitation is closely tied to the discrimi -
+native power of the feature group. AMNP and WE fea -
+tures, which were the most effective at distinguishing 
+between original texts and imitations, also captured 
+the most complex and multilevel stylistic traits, mak -
+ing them the hardest for GPT-generated texts to repli -
+cate. In contrast, LIWC and TCR features, while 
+offering complementary insights, were less effective in 
+differentiating original and imitative texts, suggesting 
+that the stylistic elements they capture are more easily 
+mimicked by GPT.
+Overall, GPT-4o demonstrates a promising but in -
+complete ability to imitate human literary styles. 
+Enhanced prompting strategies, such as in-context 
+learning, show potential for improving stylistic fidelity 
+but remain insufficient for fully capturing the depth, 
+coherence, and innovation of human-authored writing. 
+These limitations highlight the ongoing challenges in 
+developing LLMs capable of high-fidelity stylistic 
+replication.
+This research underscores the need for further ex -
+ploration into advanced modeling techniques, such as 
+integrating richer contextual frameworks, improving 
+feature representations, and leveraging more sophisti -
+cated learning paradigms. Additionally, the ethical 
+implications of stylistic imitation, including concerns 
+over intellectual property, authenticity, and trust, war -
+rant careful consideration as LLMs continue to ad -
+vance. Future studies should aim to refine both the 
+technical and ethical dimensions of AI-driven stylistic 
+imitation, bridging the gap between human creativity 
+and machine-generated text.
+This research has several limitations. First, the study 
+focused on only two authors with highly distinct styles, 
+limiting the generalizability of the findings to other 
+authors or genres with more subtle stylistic differences. 
+Second, the thematic control imposed on the text gen -
+eration process may have influenced the stylistic out -
+puts, potentially constraining the model’s natural 
+stylistic adaptation. Third, the study employed a single 
+LLM (GPT-4o) and specific analytical methods, which 
+may not fully capture the potential of other LLMs or 
+alternative approaches to stylistic imitation.
+Future research should explore broader authorial 
+datasets, incorporating a wider variety of styles and 
+genres to evaluate the generalizability of these findings. 
+Additionally, future studies could examine the effect of 
+thematic constraints on stylistic outputs and explore 
+the potential of advanced fine-tuning or retrieval- 
+augmented techniques for improving imitation fidelity. 
+Finally, conducting systematic user evaluations to as -
+sess human perceptions of GPT-generated stylistic imi -
+tations could provide valuable insights into the 
+authenticity and acceptability of these texts.
+Overall, while GPT-4o demonstrates the ability to 
+approximate certain stylistic traits, this study high -
+lights the challenges in replicating the full depth and 
+richness of human writing, paving the way for future 
+advancements in stylistic imitation research.
+Acknowledgments
+Open Access funding provided by the Qatar 
+National Library.
+Author contributions
+George Mikros (Conceptualization, Data curation, 
+Formal analysis, Funding acquisition, Investigation, 
+Methodology, Project administration, Resources, 
+Software, Supervision, Validation, Visualization, 
+Writing—original draft, Writing—review and editing).
+Data availability
+The data underlying this article will be shared on rea -
+sonable request to the corresponding author.
+References
+Amirjalili, F., Neysani, M., and Nikbakht, A. (2024). 
+‘Exploring the boundaries of authorship: a comparative 
+analysis of AI-generated text and human academic writing 
+in English literature [Original Research]’, Frontiers in 
+Education, 9, 1–11. https://doi.org/10.3389/feduc. 
+2024.1347421
+Berryman, J., and Ziegler, A. (2024). Prompt Engineering for 
+LLMs. Sebastopol, CA: O’Reilly Media, Inc.
+Bhandarkar, A. et al. (2024). ‘Emulating author style: a feasibil -
+ity study of prompt-enabled text stylization with 
+off-the-shelf LLMs’, in A. Deshpande et al. (Eds.), 
+Proceedings of the 1st Workshop on Personalization of 
+Generative AI Systems (PERSONALIZE 2024), pp. 76–82, 
+St. Julians, Malta: Association for Computational 
+Linguistics. https://aclanthology.org/2024.personalize-1.6
+Boyd, R. L. et al. (2022). The Development and Psychometric 
+Properties of LIWC-22. Austin, TX: University of Texas at 
+Austin. https://www.liwc.app/
+Chakrabarty, T. et al. (2024). ‘Creativity support in the age of large 
+language models: An empirical study involving professional 
+writers’, in Proceedings of the 16th Conference on Creativity 
+and Cognition, pp. 132–55. Chicago, IL: Association for 
+Computing Machinery. https://doi.org/10.1145/ 
+3635636.3656201
+598                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+Chen, N. et al. (2024). The Oscars of AI theater: A survey on 
+role-playing with language models. arXiv preprint arXiv : 
+2407.11484.
+Chen, S. et al. (2024). Apollonion: Profile-centric dialog agent. 
+arXiv preprint arXiv : 2404.08692.
+Chen, Z., and Moscholios, S. (2024). Using prompts to guide 
+Large Language Models in imitating a real person’s lan -
+guage style. arXiv preprint arXiv : 2410.03848.
+Eder, M. (2011). ‘Style-Markers in Authorship Attribution. A 
+Cross-Language Study of the Authorial Fingerprint’, Studies 
+in Polish Linguistics, 6: 99–114.
+Eder, M., Rybicki, J., and Kestemont, M. (2016). ‘Stylometry 
+with R: A Package for Computational Text Analysis’, R 
+Journal, 8: 107–21. https://journal.r-project.org/archive/ 
+2016/RJ-2016-007/index.html
+Evert, S. et al. (2017). ‘Understanding and Explaining Delta 
+Measures for Authorship Attribution’, Digital Scholarship 
+in the Humanities, 32: ii4–ii16. https://doi.org/10.1093/ 
+llc/fqx023
+Guo, R., Xu, W., and Ritter, A. (2024). “Meta-tuning LLMs to 
+leverage lexical knowledge for generalizable language style 
+understanding,” in L.-W. Ku, A. Martins, and V. Srikumar 
+(eds), Proceedings of the 62nd Annual Meeting of the 
+Association for Computational Linguistics (Volume 1: Long 
+Papers), pp. 13708–31. Bangkok, Thailand: Association for 
+Computational Linguistics. https://doi.org/10.18653/v1/ 
+2024.acl-long.740
+Hicke, R. M., and Mimno, D. (2023). ‘T5 meets Tybalt: Author 
+attribution in early modern English drama using Large 
+Language Models’, in A. 
+�
+Sel ¸a, F. Jannidis, and I. 
+Romanowska (eds), Computational Humanities Research 
+2023 (CHR 2023). Proceedings of the Computational 
+Humanities Research Conference 2023, Paris, France, 
+December 6-8, 2023, Vol. 3558, pp. 274–302. Paris: CEUR 
+Workshop Proceedings (CEUR-WS.org). https://ceur-ws. 
+org/Vol-3558/paper2757.pdf
+Jiang, E. et al. (2022). ‘PromptMaker: Prompt-based prototyp -
+ing with large language models’, in Extended Abstracts of 
+the 2022 CHI Conference on Human Factors in Computing 
+Systems, Article 35). New Orleans, LA: Association for 
+Computing Machinery. https://doi.org/10.1145/ 
+3491101.3503564
+Kostopolus, E. (2025). ‘Student use of generative AI as a compos -
+ing process supplement: Concerns for intellectual property and 
+academic honesty’, Computers and Composition, 75: 102894. 
+https://doi.org/10.1016/j.compcom.2024.102894
+Lee, J.-A., Hilty, R. M., and Liu, K.-C. (2021). ‘Roadmap to 
+Artificial Intelligence and Intellectual Property. An 
+Introduction’, in J.-A. Lee, R. M. Hilty, and K.-C. Liu (eds), 
+Artificial Intelligence and Intellectual Property, pp. 1–8. 
+Oxford: Oxford University Press. https://doi.org/10.1093/ 
+oso/9780198870944.003.0001
+Li, C. et al. (2024). ‘Learning to rewrite prompts for personal -
+ized text generation’, in Proceedings of the ACM Web 
+Conference 2024, pp. 3367–78. Singapore: Association for 
+Computing Machinery. https://doi.org/10.1145/ 
+3589334.3645408
+Liu, X., Diddee, H., and Ippolito, D. (2024). Customizing large 
+language model generation style using parameter-efficient 
+finetuning. arXiv preprint arXiv : 2409.04574.
+Liu, Z. et al. (2023). TAIL: Task-specific adapters for imitation 
+learning with large pretrained models. in Proceedings of the 
+Twelfth International Conference on Learning 
+Representations. Retrieved from https://openreview.net/fo 
+rum?id=RRayv1ZPN3 .
+Luo, M. et al. (2024). Stylus: Automatic adapter selection for 
+diffusion models. in Proceedings of the Thirty-eighth 
+Annual Conference on Neural Information Processing 
+Systems. Retrieved from https://openreview.net/forum? 
+id=3Odq2tGSpp
+Marvin, G. et al. (2024). ‘Prompt Engineering in Large 
+Language Models’, in I. J. Jacob, S. Piramuthu, and P. 
+Falkowski-Gilski (eds), Data Intelligence and Cognitive 
+Informatics, pp. 387–402. Singapore: Springer Nature. 
+https://doi.org/10.1007/978-981-99-7962-2_30
+Mikros, G. (2013a). ‘Authorship attribution and gender identifica -
+tion in greek blogs’, In I. Obradovi �c, E. Kelih, and 
+R. K €ohler (Eds.), Selected papers of the VIIIth International 
+Conference on Quantitative Linguistics (QUALICO) in 
+Belgrade, Serbia, April 16-19, 2012, pp. 21–32. Belgrade: 
+Academic Mind.
+Mikros, G. (2013b). ‘Systematic stylometric differences in men 
+and women authors: a corpus-based study’, in R. K €ohler 
+and G. Altmann (eds), Issues in Quantitative Linguistics 3. 
+Dedicated to Karl-Heinz Best on the occasion of his 70th 
+birthday, pp. 206–223. L €udenscheid: RAM—Verlag.
+Mikros, G. (2018). ‘Blended authorship attribution: Unmasking 
+Elena Ferrante combining different author profiling meth -
+ods’, in A. Tuzzi and M. Cortelazzo (eds), Drawing Elena 
+Ferrante’s Profile. Workshop Proceedings, Padova, 7 
+September 2017, pp. 85–95. Padova: Padova 
+University Press.
+Mikros, G., and Perifanos, K. (2011). ‘Authorship identification 
+in large email collections: Experiments using features that 
+belong to different linguistic levels—Notebook for PAN at 
+CLEF 2011’, in V. Petras, P. Forner, and P. D. Clough 
+(Eds.), CLEF 2011 Labs and Workshop, Notebook Papers, 
+19-22 September 2011, Amsterdam, The Netherlands, Vol. 
+1177, pp. 1–6. Amsterdam, The Netherlands: CEUR-WS. 
+org. http://ceur-ws.org/Vol-1177/CLEF2011wn-PAN- 
+MikrosEt2011.pdf
+Mikros, G., and Perifanos, K. (2013). ‘Authorship attribution 
+in greek tweets using multilevel author’s n-gram profiles’, in 
+E. Hovy, V. Markman, C. H. Martell, and D. Uthus (eds), 
+Papers from the 2013 AAAI Spring Symposium “Analyzing 
+Microtext”, 25-27 March 2013, Stanford, California, pp. 
+17–23. Palo Alto, CA: AAAI Press.
+Mikros, G., and Perifanos, K. (2015). ‘Gender Identification in 
+Modern Greek Tweets’, in A. Tuzzi, M. Bene �sov �a, and J. 
+Macutek (eds), Recent Contributions to Quantitative 
+Linguistics, Vol. 70, pp. 75–88. Berlin: De Gruyter.
+Mou, X. et al. (2024). From Individual to Society: A Survey on 
+social simulation driven by Large Language Model-based 
+agents. arXiv preprint arXiv : 2412.03563.
+Neelakanteswara, A., Chaudhari, S., and Zamani, H. (2024). 
+‘RAGs to Style: Personalizing LLMs with style embeddings’, 
+in A. Deshpande et al. (eds), Proceedings of the 1st 
+Workshop on Personalization of Generative AI Systems 
+(PERSONALIZE 2024), pp. 119–23. St. Julians, Malta: 
+Association for Computational Linguistics. https://aclanthol 
+ogy.org/2024.personalize-1.11
+Stylometric analysis of GPT-4o’s capacity                                                                                                                                               599 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026
+
+N €oth, W. (1995). Handbook of Semiotics. Bloomington: Indiana 
+University Press.
+Porter, B., and Machery, E. (2024). ‘AI-Generated Poetry is 
+Indistinguishable from Human-Written Poetry and Is Rated 
+More Favorably’, Scientific Reports, 14: 26133. https://doi. 
+org/10.1038/s41598-024-76900-1
+Radivojevic, K. et al. (2024). Human perception of 
+llm-generated text content in social media environments. 
+arXiv preprint arXiv : 2409.06653.
+Riemer, K., and Peter, S. (2024). ‘Conceptualizing Generative AI 
+as Style Engines: Application Archetypes and Implications’, 
+International Journal of Information Management, 79: 
+102824. https://doi.org/10.1016/j.ijinfomgt.2024.102824
+Rigney, D. (2010). The Matthew Effect: How Advantage Begets 
+Further Advantage. New York: Columbia University Press.
+Shao, Z. et al. (2024). ‘Authorship Style Transfer with Inverse 
+Transfer Data Augmentation’, AI Open, 5: 94–103. https:// 
+doi.org/10.1016/j.aiopen.2024.08.003
+Si, C., Yang, D., and Hashimoto, T. (2024). Can LLMs generate 
+novel research ideas? A large-scale human study with 100þ
+NLP researchers. in Proceedings of the Thirteenth 
+International Conference on Learning Representations. 
+Retrieved from https://openreview.net/forum? 
+id=M23dTGWCZy .
+Simchon, A., Edwards, M., and Lewandowsky, S. (2024). ‘The 
+persuasive Effects of Political Microtargeting in the Age of 
+Generative Artificial Intelligence’, PNAS Nexus, 3, 1–5. 
+https://doi.org/10.1093/pnasnexus/pgae035
+Soto, R. R. et al. (2024). Few-shot detection of 
+machine-generated text using style representations. in 
+Proceedings of the Twelfth International Conference on 
+Learning Representations. Retrieved from https://openre 
+view.net/forum?id=cWiEN1plhJ .
+Tang, Y. et al. (2024). ERABAL: Enhancing role-playing agents 
+through boundary-aware learning. arXiv preprint 
+arXiv: 2409.14710.
+Terreau, E., Gourru, A., and Velcin, J. (2024). Capturing style 
+in author and document representation. arXiv preprint 
+arXiv : 2407.13358.
+Van der Maaten, L., and Hinton, G. (2008). ‘Visualizing data 
+using t-SNE’, Journal of Machine Learning Research, 
+9: 2579–605.
+Wang, N. et al. (2024). ‘RoleLLM: Benchmarking, Eliciting, and 
+Enhancing Role-Playing Abilities of Large Language Models’, in 
+L.-W. Ku, A. Martins, and V. Srikumar (eds), Findings of the 
+Association for Computational Linguistics: ACL 2024, pp. 
+14743–77. Bangkok, Thailand: Association for Computational 
+Linguistics. https://doi.org/10.18653/v1/2024.findings-acl.878
+Wegmann, A., Schraagen, M., and Nguyen, D. (2022). ‘Same 
+author or just same topic? Towards content-independent 
+style representations’, in S. Gella et al. (eds), Proceedings 
+of the 7th Workshop on Representation Learning for NLP, 
+pp. 249–68. Dublin, Ireland: Association for Computational 
+Linguistics. https://doi.org/10.18653/v1/2022.repl4nlp-1.26
+Xu, R. et al. (2023). ‘Specializing Small Language Models to -
+wards complex style transfer via latent attribute pre-train -
+ing’, in 26th European Conference on Artificial Intelligence 
+(ECAI 2023), pp. 2802–9. Amsterdam: IOS Press.
+Yan, L. et al. (2024). ‘Practical and Ethical Challenges of Large 
+Language Models in Education: A Systematic Scoping 
+Review’, British Journal of Educational Technology, 55: 
+90–112. https://doi.org/10.1111/bjet.13370
+Yang, Z. et al. (2024). ‘AlignedCoT: Prompting large language 
+models via native-speaking demonstrations’, in Y. 
+Al-Onaizan, M. Bansal, and Y.-N. Chen (eds), Findings of 
+the Association for Computational Linguistics: EMNLP 
+2024, Miami, Florida, USA, pp. 2857–96. Stroudsburg, PA: 
+Association for Computational Linguistics. https://doi.org/ 
+10.18653/v1/2024.findings-emnlp.163
+Yiu, E., Kosoy, E., and Gopnik, A. (2024). ‘Transmission versus 
+Truth, Imitation versus Innovation: What Children Can Do that 
+Large Language and Language-and-Vision Models Cannot 
+(Yet)’, Perspectives on Psychological Science, 19: 874–83. 
+https://doi.org/10.1177/17456916231201401
+Zhang, T. et al. (2024). ‘Benchmarking Large Language 
+Models for News Summarization’, Transactions of the 
+Association for Computational Linguistics, 12: 39–57. 
+https://doi.org/10.1162/tacl_a_00632
+© The Author(s) 2025. Published by Oxford University Press on behalf of EADH.
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/), 
+which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+Digital Scholarship in the Humanities, 2025, 40, 587–600
+https://doi.org/10.1093/llc/fqaf035
+Full Paper
+600                                                                                                                                                                                                          G. Mikros 
+Downloaded from academic.oup.com/dsh/article/40/2/587/8118784 by guest on 07 September 2026

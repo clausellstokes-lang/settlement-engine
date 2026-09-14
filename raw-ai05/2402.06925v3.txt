@@ -1,0 +1,1806 @@
+                                            A Thorough Examination of Decoding Methods in the Era of LLMs
+
+                                                               Chufan Shi♠∗, Haoran Yang♣∗ , Deng Cai♡†,
+                                                       Zhisong Zhang♡ , Yifan Wang♠ , Yujiu Yang♠† , Wai Lam♣
+                                               ♠
+                                                 Tsinghua University ♣ The Chinese University of Hong Kong ♡ Tencent AI Lab
+                                             {scf22,wangyifa22}@mails.tsinghua.edu.cn {hryang,wlam}@se.cuhk.edu.hk
+                                                {jcykcai, zhisonzhang}@tencent.com yang.yujiu@sz.tsinghua.edu.cn
+
+
+
+                                                              Abstract                            that the choice of decoding methods can substan-
+                                                                                                  tially impact the performance of LLMs (O’Brien
+                                            Decoding methods play an indispensable role
+                                                                                                  and Lewis, 2023; Chuang et al., 2023). However,
+                                            in converting language models from next-token
+                                                                                                  these studies often focus on a narrow aspect (e.g.,
+
+
+
+
+arXiv:2402.06925v3 [cs.CL] 8 Oct 2024
+                                            predictors into practical task solvers. Prior re-
+                                            search on decoding methods, primarily focus-          factuality (Chuang et al., 2023)) and a limited set
+                                            ing on task-specific models, may not extend           of similar tasks (e.g., math problem solving (Li
+                                            to the current era of general-purpose large lan-      et al., 2023b)). Notably, Ippolito et al. (2019); Wi-
+                                            guage models (LLMs). Moreover, the recent             her et al. (2022) provide a comparative analysis
+                                            influx of decoding strategies has further com-        of various decoding methods using task-specific
+                                            plicated this landscape. This paper provides          language models. They find that deterministic de-
+                                            a comprehensive and multifaceted analysis of
+                                                                                                  coding methods (e.g., beam search) perform better
+                                            various decoding methods within the context
+                                            of LLMs, evaluating their performance, robust-        than stochastic decoding methods (e.g., top-p sam-
+                                            ness to hyperparameter changes, and decoding          pling (Holtzman et al., 2020)) in closed-ended gen-
+                                            speeds across a wide range of tasks, models,          eration tasks such as machine translation, while the
+                                            and deployment environments. Our findings             inverse is true for open-ended generation tasks such
+                                            reveal that decoding method performance is no-        as story generation. However, their findings are
+                                            tably task-dependent and influenced by factors        confined to traditional task-specific models prior to
+                                            such as alignment, model size, and quantiza-
+                                                                                                  the advent of LLMs. It is uncertain whether their
+                                            tion. Intriguingly, sensitivity analysis exposes
+                                            that certain methods achieve superior perfor-         conclusions still hold for general-purpose LLMs.
+                                            mance at the cost of extensive hyperparameter         In addition, a plethora of new decoding methods
+                                            tuning, highlighting the trade-off between at-        (Su et al., 2022; Li et al., 2023b; Yang et al., 2024;
+                                            taining optimal results and the practicality of       Meister et al., 2023; Hewitt et al., 2022; Basu et al.,
+                                            implementation in varying contexts.                   2021) have been proposed afterward, each claiming
+                                                                                                  to outperform the previous state-of-the-art in partic-
+                                        1   Introduction                                          ular tasks. Nevertheless, today’s most performant
+                                        The advent of large language models (LLMs) (Ope-          LLMs such as ChatGPT and GPT4 (OpenAI, 2022,
+                                        nAI, 2022, 2023; Touvron et al., 2023a,b, inter alia)     2023) only provide APIs for temperature and top-
+                                        has ushered in a new era of natural language pro-         p sampling, seemingly overlooking the potential
+                                        cessing (NLP). These models are trained to predict        benefits of other advanced decoding methods.
+                                        the next token on massive corpora, empowering                 The above observations raise a natural question:
+                                        them with extraordinary multitasking capabilities.        what is the best practice for choosing decoding
+                                        This enables them to perform almost all NLP tasks         methods in the era of LLMs? A thorough analysis
+                                        through the lens of text generation, distinguishing       of decoding methods is essential for researchers
+                                        them from traditional task-specific models.               and practitioners to understand the strengths and
+                                           Decoding methods, which are the bridge be-             weaknesses of different decoding methods and to
+                                        tween next-token predictors and text generators,          choose the one that best fits their needs. Our work
+                                        play an integral role in transforming LLMs into           fills this gap by providing a comprehensive study of
+                                        practical task solvers. Recent studies have shown         the performance, robustness, and speed of various
+                                            ∗                                                     decoding methods across a wide range of different
+                                              Equal Contribution. Code is available at https://
+                                        github.com/DavidFanzz/llm_decoding.git                    tasks, models, and deployment environments. We
+                                            †
+                                              Corresponding authors.                              also provide in-depth analyses to uncover the un-
+derlying reasons for the observed results. Our key     below, with detailed descriptions in Appendix A.
+findings include the following:                        The hyperparameter search range of each method
+• Overall The optimal decoding method depends          is guided by recommendations from relevant litera-
+on the task, the model, and the priority (e.g., per-   ture and common practices.
+formance vs. robustness vs. speed) in hand. There
+is no short guideline. The complexity of our re-       2.1   Deterministic Methods
+sults calls for more comprehensive evaluations in      Greedy Search selects the token with the highest
+future research on decoding methods and careful        probability at each time step.
+consideration for practitioners.                       Beam Search (BS) (Freitag and Al-Onaizan,
+• Performance The best-performing methods de-          2017) maintains a beam of the k most probable
+pend on the task at hand. However, some general        sequences at each time step, where the hyperpa-
+rules about the divide between different decoding      rameter k is referred to as the beam width. We
+methods still persist in the era of LLMs. Generally,   consider beam sizes 4 and 8 in our experiments.
+closed-ended tasks favor deterministic methods,        Diverse Beam Search (DBS) (Vijayakumar
+while open-ended tasks prefer stochastic methods       et al., 2018) is a variant of beam search that di-
+(§4.1), especially with unaligned models. The per-     vides the k most probable sequences into G groups
+formance gap between different decoding methods        and incorporates a diversity term to maximize inter-
+can be narrowed with alignment. We also pro-           group diversity. In our experiments, we configure
+vide explanations to understand these phenomena.       various (k, G) pairs of (4,2), (4,4), (8,2), (8,4).
+Moreover, it is also observed that stochastic meth-    Contrastive Search (CS)             (Su et al., 2022)
+ods with self-consistency can surpass deterministic    uses a look-ahead mechanism and penalizes to-
+ones, albeit requiring multiple runs (§5.1).           kens compromising the isotropy of the LM’s la-
+• Robustness The optimal hyperparameters for           tent space. We search the penalty degree from
+each decoding method vary according to the model,      [0.1, 0.2, 0.3, 0.4, 0.5, 0.6] in our experiments.
+task, and quantization setting. Some methods           Contrastive Decoding (CD) (Li et al., 2023b)
+achieve superior performance at the cost of exhaus-    searches for tokens that maximize the probability
+tive dataset-specific hyperparameter searches but      difference between the LLM and a weaker amateur
+fail to maintain the superiority when the hyperpa-     model. We search the the strength of the amateur
+rameter is fixed. This highlights the performance-     penalty from [0.1, 0.3, 0.5, 0.7, 0.9].
+sensitivity trade-off because LLMs are often con-      Frustratingly Simple Decoding (FSD) (Yang
+fronted with diverse user prompts (§4.2).              et al., 2024) exploits the contrasts between the
+• Speed Stochastic decoding and the recently pro-      LLM and an auxiliary anti-LM constructed based
+posed deterministic method, frustratingly simple       on the current prefix. There are two variants of
+decoding (FSD) (Yang et al., 2024), can achieve a      FSD: FSD and FSD-d depending on whether the
+similar decoding speed to greedy search. In con-       anti-LM is implemented as a vectorized or discrete
+trast, beam search, diverse beam search and other      n-gram model. We search penalty degree from
+advanced deterministic methods show markedly           [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].
+slower speeds relative to greedy search, with the      DoLa (Chuang et al., 2023) obtains the next-
+discrepancy in speed becoming more conspicuous         token distribution by contrasting the logits differ-
+as the length of generation increases for some of      ences between the last layer and a premature layer.
+those methods (§4.3).                                  The premature layer is dynamically selected from a
+                                                       pre-specified set of layers. Following Chuang et al.
+2   Decoding Methods                                   (2023), we test two sets of layers: even-numbered
+                                                       layers from [0, 16) and from [16, 32) respectively.
+Modern LLMs typically generate text in a left-to-
+right, token-by-token fashion. For each prefix, the    2.2   Stochastic Methods
+model computes a probability distribution of the
+                                                       Temperature Sampling samples tokens from the
+next token over a fixed vocabulary. A decoding
+                                                       estimated next-token distributions. The skewness
+method defines how the generated token sequence
+                                                       of distributions can be controlled using a temper-
+is derived from these probability estimations. We
+                                                       ature hyperparameter τ . We conduct our experi-
+consider decoding methods ranging from determin-
+                                                       ments for τ within the range of 0.1 to 0.9, incre-
+istic to stochastic. Each method is briefly reviewed
+                                                       menting in value of 0.1.
+Top-p Sampling (Holtzman et al., 2020) only              Factual Knowledge is crucial for fulfilling users’
+considers the minimal set of most probable tokens        informational needs. We measure this using
+that cover a specified percentage p of the distri-       FActScore (Min et al., 2023), reporting on the pro-
+bution. We examine across various p thresholds,          portion of correctly generated atomic facts.
+specifically [0.8, 0.85, 0.9, 0.95, 1].                  Instruction Following reflects the proficiency in
+Top-k Sampling (Fan et al., 2018) only samples           responding to diverse user instructions. We use
+from the top-k probable tokens. We explore a range       AlpaceEval (Li et al., 2023c) to compare model
+of k values, specifically [5, 10, 20, 50, 100].          performances, using pairwise Win Rate against the
+                                                         reference model, Text-Davinci-003.
+η-Sampling (Hewitt et al., 2022) truncates               Open-ended Text Generation measures the
+words whose probabilities are below an entropy-          model’s capability to produce fluent and coherent
+dependent threshold. The hyperparameter η is             content. We utilize datasets including Book (Zhu
+searched from [3e-4,6e-4,9e-4,2e-3,4e-3].                et al., 2015), Wikinews1 , and Wikitext (Merity
+Mirostat Sampling (Basu et al., 2021) directly           et al., 2017), and evaluate using MAUVE (Pillutla
+controls the perplexity rate of the generated text       et al., 2021). Notably, open-ended text genera-
+during sampling from top-k tokens (k is deter-           tion is the primary focus for many recent decoding
+mined automatically). We test across a range of log      methods.
+of perplexity values τ within [2.5, 3, 4, 5].               For detailed task descriptions and prompts, see
+Typical Sampling (Meister et al., 2023) sorts the        Appendix B and Appendix C. Generally, higher
+vocabulary according to the differences between          scores in respective metrics indicate better perfor-
+the distribution entropy and the token probabilities.    mance.
+In our experiments, we vary the coverage threshold       3.2      Models
+p across the values [0.2, 0.9, 0.92, 0.95].
+                                                         We primarily experiment with the Llama-2 fam-
+                                                         ily, comprising Llama2 and Llama2-chat (Tou-
+3     Evaluation Setup
+                                                         vron et al., 2023b), representing unaligned and
+3.1    Datasets                                          aligned models, respectively. Additional tests in-
+                                                         clude other popular LLMs: MPT (Team, 2023),
+Our evaluation spans a variety of tasks.                 CodeLlama (Rozière et al., 2023), Qwen (Bai
+Coding is an important application of LLMs, fa-          et al., 2023), Mistral (Jiang et al., 2023), Deepseek-
+cilitating the integration with external tools. We use   MoE (Dai et al., 2024) and Llama3 (AI@Meta,
+HumanEval (Chen et al., 2021) and MBPP (Austin           2024), along with their aligned counterparts are
+et al., 2021), reporting pass@1 accuracy.                detailed in Appendix D. Unaligned models are not
+Math Problem Solving is critical for LLMs, en-           tested on AlpaceEval and FActScore due to their
+abling them to aid users in numerical reasoning          limited instruction-following capabilities. Owing
+tasks. We employ GSM8K (Cobbe et al., 2021) for          to poor performance for WMT22 with Llama2-
+this purpose and report accuracy.                        Chat, its performance is measured only on the un-
+                                                         aligned model. Unless otherwise specified, we
+Summarization assists users in capturing the
+                                                         employ half-precision (FP16) for model inference.
+essence of a text. We use CNN/DailyMail
+(CNN/DM) (Hermann et al., 2015) and                      4       Experimental Results
+XSUM (Narayan et al., 2018), measuring
+performance with RougeL (Lin, 2004).                     We perform a thorough evaluation of various de-
+                                                         coding methods, assessing them from three critical
+Translation is a crucial NLP task to overcome            dimensions. Initially, our analysis centers on the
+linguistic barriers, thereby facilitating global com-    efficacy of these methods across a diverse range of
+munication. We benchmark it using four directions        tasks and models. Then, we delve into hyperparam-
+of WMT22 (Bojar et al., 2017) and assess the trans-      eter sensitivity and decoding efficiency.
+lation quality via BLEU (Papineni et al., 2002).
+Commonsense Reasoning is a key perspective of            4.1      Performance Analysis
+LLMs for addressing real-world problems. We as-          We present the performance of decoding meth-
+sess this using CommonsenseQA (CQA) (Talmor              ods on unaligned and aligned Llama2-7B mod-
+et al., 2019) and StrategyQA (SQA) (Geva et al.,             1
+                                                                 http://www.wikinews.org
+2021), reporting accuracy.
+                                                                        Deterministic Methods                                        Stochastic Methods
+ Model                         Dataset     Metric
+                                            Greedy              BS     DBS CS FSD FSD-d                 CD     DoLa    Temp    Top-p Top-k       η   Miro Typical
+                           HumanEval         12.80             15.24   15.24 14.63 15.24 15.24         14.02   15.24   15.24    9.15    8.54 9.15 7.93     9.76
+                                     Pass@1
+                              MBPP           17.80             19.40   18.40 17.40 19.20 21.20         18.20   18.40   17.20   14.80 10.20 9.40 7.80 12.00
+                            GSM8K      Acc   13.87             17.21   17.74 14.63 16.83 16.60         17.21   15.39   16.30   12.96 9.10 8.64 7.96 13.04
+                             XSUM            27.21             21.88   24.65 27.53 27.75 27.88         27.36   25.92   27.14   22.34 22.10 20.45 20.23 21.33
+                                       R-L
+                            CNN/DM           23.43             20.69   21.64 23.25 23.39 24.05         23.73   22.64   23.40   20.52 20.90 18.63 18.02 19.13
+                             De⇒En           28.80             30.14   28.71 28.63 28.52 28.82         28.40   25.45   28.55   22.72 20.30 18.44 18.00 20.00
+
+
+
+          Llama2-7B
+                             En⇒De           22.63             23.99   23.52 22.74 22.54 22.63         22.30   19.82   22.57   16.14 14.32 12.28 11.62 13.34
+                                       B-4
+                             Zh⇒En           19.44             20.11   18.90 19.56 19.71 20.05         19.68   17.06   19.26   13.35 12.02 10.26 9.60 10.78
+                             En⇒Zh           15.15             14.50   14.67 15.27 15.21 15.37         14.57   13.09   15.21   11.61 11.27 11.50 7.89      9.94
+                              CQA            62.90             64.37   64.21 63.72 64.05 63.72         62.65   62.00   63.72   56.51 49.47 47.17 46.11 52.91
+                                       Acc
+                              SQA            60.76             62.25   61.50 60.54 62.90 60.89         63.74   61.94   61.20   58.71 58.09 58.27 58.44 58.05
+                            Wikinews         40.10             41.33   32.02 96.66 96.42 98.40         85.17   94.44   95.40   95.19 96.47 97.48 98.51 97.67
+                            Wikitext MAUVE 23.47               27.41   22.78 93.38 92.14 92.93         85.86   85.39   94.54   96.62 96.67 93.66 93.18 93.29
+                              Book           13.10             17.54   10.18 88.41 89.07 86.69         73.30   80.54   90.62   95.99 94.84 95.31 94.25 93.98
+                           HumanEval                 12.80     14.02   13.41   13.41   15.24   13.41   14.02   15.85   14.63   13.41   14.02   12.20   12.80   12.80
+                                      Pass@1
+                             MBPP                    17.20     21.60   21.20   17.40   17.80   17.80   17.40   18.00   20.00   17.60   16.00   17.00   16.00   18.00
+                            GSM8K       Acc          24.79     28.81   26.91   25.70   25.40   24.56   26.46   22.14   25.47   24.26   24.41   25.25   23.20   24.11
+
+
+
+
+          Llama2-7B-Chat
+                             XSUM                    16.42     16.96   16.78   16.70   16.63   16.52   16.49    8.84   16.51   16.44   16.28   16.44   15.77   16.77
+                                        R-L
+                            CNN/DM                   22.59     23.71   23.54   22.54   22.40   22.64   22.65   16.92   22.71   22.67   22.03   22.34   20.60   22.42
+                              CQA                    50.61     52.99   52.83   51.43   52.66   51.11   52.01   52.74   53.56   53.15   51.76   51.52   52.66   52.91
+                                        Acc
+                              SQA                    59.89     60.41   60.59   59.97   60.32   60.37   60.19   59.62   60.19   60.28   60.80   60.10   59.41   59.14
+                            Wikinews                 58.34     71.01   74.13   70.42   76.74   81.84   74.33   63.99   83.84   76.76   79.65   72.24   70.02   72.32
+                            Wikitext MAUVE           77.69     87.20   90.27   80.16   95.10   90.47   84.59   38.76   80.45   80.51   85.63   87.52   83.48   89.77
+                              Book                   80.65     94.89   93.78   90.81   94.75   92.00   95.96   57.70   96.55   91.50   93.48   89.95   92.95   93.87
+                           FActScore   Score         44.74     47.80   47.29   46.09   46.09   46.93   46.11   36.37   45.06   44.78   44.11   46.81   44.06   46.55
+                           AlpacaEval WinRate        76.40     77.89   78.63   79.88   80.50   79.88   81.24   55.40   77.76   78.01   77.39   79.38   75.53   78.26
+Table 1: Results on Llama2-7B and Llama2-7B-Chat. Cells are colored by performance, from low to medium to
+ high performance. The corresponding hyperparameters for each decoding method are listed in Appendix E.
+
+
+                                         Llama2-7B           Llama2-7B-Chat
+             45.00
+                                                                                               in 10, 10, and 7 datasets, respectively. For open-
+                                                                                               ended text generation (Wikinews, Wikitext, and
+             30.00                                                                             Book), greedy, BS, and DBS exhibit notably lower
+RDP (%)                                                                                        MAUVE scores than other methods. The above
+             15.00
+                                                                                               observations on the disparity of deterministic and
+                  0.00                                                                         stochastic methods are consistent with the findings
+                           uman Ev                    N      A    W         A
+                                                     CN   CQ     SQ
+                                                                                               for conventional task-specific models (Wiher et al.,
+                              M BP al                              ik in ew
+                            G SM   P                               W ik ite s
+                             X   8K                                    Bo  xt
+                               SU M                                       ok
+                           H
+                                                                                               2022): stochastic methods are favorable in open-
+Figure 1: Relative deviation percentage (RDP) for each
+task on Llama2-7B and Llama2-7B-Chat.
+                                                                                               ended tasks, while heavily disfavored in others.
+                                                                                               →Phenomenon Analysis. Through a careful case
+els (Llama2-7B and Llama2-7B-Chat respectively)                                                study, we find that the outputs of greedy, BS,
+in Table 1. The reported results for each method                                               and DBS contain a considerable amount of repet-
+are obtained by utilizing the best hyperparameters                                             itive content on open-ended text generation tasks.
+tuned for each specific dataset.                                                               This suggests that the advanced unaligned LLMs
+                                                                                               still suffer from the degeneration issue (Holtzman
+For unaligned models, deterministic methods                                                    et al., 2020; Li et al., 2023a). Recent determin-
+generally perform better than stochastic meth-                                                 istic methods (CS, FSD, FSD-d, CD, and DoLa),
+ods on all tasks except open-ended text gen-                                                   which are designed to alleviate the degeneration
+eration. As shown in the upper block of Ta-                                                    issue, achieve much better results, performing only
+ble 1, for the unaligned Llama2-7B model, the                                                  slightly worse than stochastic methods. For closed-
+top-performing decoding methods on closed-ended                                                ended tasks, deterministic approaches are better
+tasks (coding, math problem solving, summariza-                                                suited to producing consistent and accurate results
+tion, translation, and commonsense reasoning) are                                              as diversity is not a primary concern.
+frequently among deterministic methods. On the
+other hand, stochastic methods often struggle with                                             Aligned models are less dependent on decod-
+the worst performance. Specifically, BS, FSD-d,                                                ing methods than unaligned models. For the
+and FSD rank in the top 3 (indicated in orange) in 8,                                          unaligned Llama2-7B model, there is a clear sepa-
+7, and 7 out of 11 datasets, respectively. Conversely,                                         ration between the highest- and lowest-performing
+mirostat, η, and typical sampling are among the                                                methods. For instance, on MBPP, the highest per-
+least effective three methods (highlighted in blue)                                            formance is at 21.20% by FSD-d, in stark contrast
+to the lowest at 7.80% by mirostat sampling. How-                 Model        GSM8K     MBPP     Wikinews
+ever, this distinction becomes less pronounced for             Llama2-7B         1.05     1.21      2.37
+the aligned Llama2-7B-Chat model. Specifically,              Llama2-7B-Chat      0.27     0.39      0.52
+on MBPP, the top performance peaks at 21.60%              Table 2: The entropy of Llama2-7B and Llama2-Chat-
+while the lowest is at 16.00%, showcasing a nar-          7B’s generation results (top-p sampling with p = 1.0)
+rowed performance range.                                  on GSM8K, MBPP and Wikinews.
+   To further substantiate this, we compute the av-
+erage µ and standard deviation σ of each dataset          following abilities. The lower block of Table 1
+across different decoding methods. We report the          also presents the results of the aligned model
+relative deviation percentage (RDP) σµ × 100%,            (Llama2-7B-Chat) on FActScore and AlpacaEval.
+of which a lower value signifies less performance         For FActScore, the top three best-performing meth-
+variation across different decoding method choices.       ods are all deterministic. For instance, beam search
+The results are depicted in Figure 1. Generally,          attains 47.80%, while mirostat and top-k sampling
+the aligned model (Llama2-7B-Chat) displays less          only achieve scores of 44.06% and 44.11%, re-
+pronounced variations compared to its unaligned           spectively. These results indicate that the choice
+counterpart (Llama2-7B), except in two summa-             of decoding method has a considerable impact on
+rization datasets (XSUM and CNN/DM) where the             the factuality of the generated text. The random-
+relative deviation percentages are close. This sug-       ness in the selection process of stochastic methods
+gests that the choice of decoding method becomes          may contribute to increased hallucinations. For
+less critical after the model is aligned. Additionally,   AlpacaEval, the general instruction-following task,
+we also notice that DoLa performs quite worse than        deterministic methods such as CS, FSD, and CD
+other methods under Llama2-7B-Chat. We check              can outperform all stochastic methods. This obser-
+its outputs and observe that DoLa fails to terminate      vation challenges the prevailing common practice
+its generation appropriately (see Appendix H).            of employing stochastic methods, particularly tem-
+→Phenomenon Analysis. The potential reasons               perature and top-p sampling, in LLMs. This sug-
+are as follows: i) The improved model confidence.         gests that deterministic methods are more reliable
+As shown in Table 2, we report the average next-          for tasks requiring high factual accuracy and pre-
+token prediction entropy of Llama2-Chat-7B and            cise adherence to instructions, warranting further
+Llama2-7B on GSM8K, MBPP, and Wikinews. It                exploration in future research.
+can be seen that the entropy of the aligned model is
+substantially lower than that of the unaligned one.       Among stochastic methods, temperature sam-
+As the model becomes more confident (concentrat-          pling generally performs better, particularly
+ing the probabilistic mass on a shortlist of tokens),     when using unaligned models. As evidenced
+there is less operating space for decoding methods.       in Table 1, temperature sampling generally outper-
+ii) The alleviated degeneration issue. We find that       forms other stochastic methods except for open-
+the aligned model produces much fewer repetitions         ended text generation. Specifically, on Llama2-
+even when using deterministic decoding methods            7B, temperature sampling emerges as the top-
+such as greedy search. This inherent improvement,         performing stochastic method across all 11 closed-
+possibly due to the high-quality data with reduced        ended tasks. Similarly, under Llama2-7B-Chat, it
+repetition employed during the instruction tuning         takes the top position in 5 out of 9 closed-ended
+phase (Li et al., 2023a), makes those decoding            tasks. We find that the best results often come from
+methods that aim to mitigate the degeneration is-         a low temperature (e.g., τ = 0.1, 0.2, see Table 27
+sue less useful. iii) The more structured writing         in Appendix E), which renders temperature sam-
+style. The aligned model typically produces more          pling more akin to deterministic decoding. It is
+well-organized responses (e.g., a list of points with     worth noting that many previous studies (Fan et al.,
+explicit discourse markers). This structural coher-       2018; Holtzman et al., 2020; Meister et al., 2023;
+ence enhances the stability of the model’s output         Hewitt et al., 2022) predominantly demonstrate the
+and reduces the variations of stochastic decoding         superiority of their proposed methods in the realm
+methods (Lin et al., 2023a).                              of open-ended text generation. However, our anal-
+                                                          ysis reveals that temperature sampling markedly
+Deterministic methods tend to generate fewer              surpasses these methods in closed-ended genera-
+hallucinations and have better instruction-               tion tasks, thereby underscoring the necessity for
+                                                                                   100
+more holistic evaluations across diverse tasks.                                                Llama2-7B              Llama2-7B-Chat
+                                                                                    95         Greedy
+                                                                                               BS
+                                                                                                             FSD-d
+                                                                                                             CD
+                                                                                                                         Top-k
+
+                                                                                               DBS           DoLa        Miro
+4.2   Hyperparameter Sensitivity                                                    90         CS
+                                                                                               FSD
+                                                                                                             Temp
+                                                                                                             Top-p
+                                                                                                                         Typical
+
+
+The results in Table 1 are obtained by searching                                    85
+                                                                   ANPfix
+for the optimal hyperparameter of each decoding                                     80
+method for each dataset. Nevertheless, hyperpa-                                     75
+rameter search is time-consuming and may not be                                     70
+plausible for open-world applications where the                                     65
+target task is not known a priori. Therefore, we                                          65   70       75    80 85              90    95 100
+                                                                                                              ANPbest
+further explore a more realistic scenario in which
+                                                         Figure 2: Hyperparameter Sensitivity. ANPbest and the
+each method uses a fixed hyperparameter across
+                                                         best ANPfix for each decoding method on Llama2-7B
+different datasets. To ensure a fair comparison that     with blue solid markers and Llama2-7B-Chat with
+accounts for various performance ranges across dif-      orange hollow markers . The ANPfix with the optimal
+ferent tasks, we first normalize the performance         hyperparameters for each decoding method are detailed
+on each dataset according to normalize(p) =              in Appendix E.
+  p
+pbest × 100%, where pbest represents the best perfor-
+                                                                                   2.00
+                                                                                               Contrastive Search
+                                                                                               Contrastive Decoding
+mance obtained in Table 1, then compute the aver-                                              Diverse Beam Search
+                                                                                   1.80        Beam Search
+age of normalized performance across all datasets,                                             DoLa
+                                                                                               FSD / FSD-d
+
+
+                                                                   Latency Ratio
+denoted by ANP. We report the best ANP us-                                         1.60
+ing task-specific hyperparameters (ANPbest ) and
+                                                                                   1.40
+a fixed hyperparameter (ANPfix ) for each decoding
+method respectively. The results on Llama2-7B                                      1.20
+family are presented in Figure 2. For Llama2-7B,
+                                                                                   1.00
+both FSD and FSD-d rank among the top-3 de-                                           128               256         512                  1024
+                                                                                                        Decoding Length
+coding methods in terms of performance, whether
+                                                         Figure 3: Decoding latency ratios. The latency is mea-
+under task-specific hyperparameters (ANPbest ) or        sured on one A6000 GPU with batch size = 1.
+one fixed hyperparameter (ANPfix ), demonstrating
+that these methods can have the ideal performance        ods mentioned in §2.2 because they achieve very
+without the need for fine-grained selection of hy-       close latency to that of greedy search. It is reason-
+perparameters for each dataset. In contrast, while       able because their sampling processes only require
+temperature sampling achieves comparable results         negligible additional computation.
+in terms of ANPbest , it shows an 11.59% decrease in        It can be observed that contrastive search is the
+ANPfix when hyperparameters are fixed, highlight-        decoding method with the slowest decoding speed.
+ing its sensitivity to hyperparameters. Similarly, for   Moreover, the latency ratio grows considerably as
+Llama2-7B-Chat, BS and DBS perform well and              generation length increases (from 1.51x to 2.00x
+are not sensitive to hyperparameters, while tem-         slower than greedy search). This is due to that
+perature sampling still exhibits a 3.90% decrease.       the look-ahead mechanism in contrastive search
+Notably, CD is also sensitive to hyperparameters,        is very time-consuming. Contrastive decoding is
+with a performance decrease of 9.42% on Llama2-          about 1.4x slower than greedy search for the addi-
+7B and 3.35% on Llama2-7B-Chat.                          tional run of a smaller amateur model. However,
+                                                         the latency ratio of contrastive decoding remains
+4.3   Decoding Speed                                     constant across different lengths, indicating better
+We assess and compare the decoding speed of var-         adaptability for long sequence generation. Beam
+ious decoding methods in Figure 3. For a more            search and diverse beam search are faster than con-
+intuitive understanding, we calculate the latency        trastive search and contrastive decoding but slower
+ratio for each decoding method by normalizing            (1.13x to 1.41x) than greedy search. Both have la-
+their latency with respect to the latency of greedy      tency ratios that grow approximately linearly with
+search. To demonstrate how their latency grows           the sequence length while diverse beam search is
+with generation lengths, we plot the latency for         slightly slower than beam search. The speed of
+generating 128, 256, 512 and 1024 tokens given           DoLa is comparable to beam search and diverse
+32 tokens using Llama2-7B. It is worth noting that       beam search when the generation is relatively short
+we omit the results of all stochastic decoding meth-     (128 and 256). Nevertheless, their difference in-
+           25.0       Top-p (p = 0.8)                  41.0         Miro ( = 5.0)
+                      Typical (p = 0.9)                             Top-k (k = 5)
+                                                                                                        terministic decoding methods (i.e., 17.74% by di-
+                       ( = 0.002)                                   Typical (p = 0.95)
+                      Top-k (k = 5)                                 Top-p (p = 0.8)                     verse beam search using Llama2-7B and 28.81%
+                      Temp ( = 0.2)                                  ( = 0.0009)
+                      Miro ( = 5.0)                                 Temp ( = 0.5)                       by beam search using Llama2-7B-Chat), denoted
+           19.0       DBS (k = 4, G = 2)               35.0         BS (k = 8)
+                                                                                                        by the gray dashed lines. The results show that sam-
+Accuracy
+                                                                                                        pling a larger number of generations consistently
+                                                                                                        leads to better performance, confirming the useful-
+           13.0                                        29.0
+                                                                                                        ness of self-consistency in taking advantage of the
+                                                                                                        diversity introduced by stochastic sampling. Ex-
+            7.0                               23.0                                                      cept for the results of mirostat sampling on Llama2-
+                  1       5        10       20 1                           5             10        20
+                                                                                                        7B, we can see that all stochastic methods even-
+                      Number of generations                         Number of generations
+                         (a) Llama2-7b                               (b) Llama2-7b-Chat                 tually surpass the best-performing deterministic
+Figure 4: Results of stochastic decoding methods with                                                   methods when the number of sampling reaches 20.
+self-consistency on GSM8K.                                                                              Note that the results in Figure 4 are obtained by
+                                                                                                        using the best hyperparameters we find in Table 1
+            Model         Temp             Top-p   Top-k        η              Miro      Typical        where only one-pass generation is allowed.
+              7B
+                          21.91            22.06   20.17       21.23           16.98     22.06             We speculate that further tuning the hyperpa-
+                          (0.7)            (0.8)    (5)       (0.004)          (4.0)     (0.95)
+                          36.92            36.85   37.68     35.63             37.76     36.92
+                                                                                                        rameters can improve the performance under the
+           7B-Chat
+                          (0.9)            (1.0)    (10)   (0.0009)            (5.0)     (0.90)         self-consistency strategy. Thus we undertake an ad-
+Table 3: Best results of different stochastic methods with                                              ditional hyperparameter search in scenarios where
+self-consistency (20 generations) setting on GSM8K                                                      the number of generations is set to 20. The highest
+for Llama2-7B family. The best hyperparameters are                                                      results along with the corresponding hyperparam-
+annotated in parentheses.                                                                               eters are reported in Table 3. Compared to the
+creases as the generation length grows because the                                                      results in Figure 4, we can see that the performance
+latency ratio of DoLa remains consistent across                                                         is boosted by employing a hyperparameter with
+different lengths. Notably, FSD and FSD-d not                                                           greater randomness or candidate pool. For exam-
+only run as fast as greedy search but also maintain                                                     ple, on Llama2-7B-Chat, the accuracy of tempera-
+a consistent latency ratio across different lengths,                                                    ture sampling increases from 34.04% (τ = 0.5) to
+underscoring their superior efficiency against other                                                    36.92% (τ = 0.9). Another interesting finding is
+advanced deterministic decoding methods.                                                                that the best hyperparameters for aligned models
+                                                                                                        typically suggest greater randomness (e.g., τ = 0.9
+5            Further Analysis                                                                           vs. τ = 0.7 for temperature sampling).
+
+5.1               Self-Consistency                                                                      5.2   Scaling Model Size
+Previous experiments demonstrate that the best-                                                         In order to investigate the impact of model scale on
+performing decoding methods are generally deter-                                                        different decoding methods, we provide further ex-
+ministic ones on closed-ended tasks, particularly                                                       periments on Llama2 family with 13B and 70B pa-
+on complex reasoning tasks such as the GSM8K                                                            rameters in 3 representative tasks: MBPP, GSM8K,
+dataset. Nonetheless, one unique advantage of                                                           and Wikinews. We present the results in Table 4.
+stochastic decoding methods is that they can pro-                                                       It can be observed that as the model’s parameters
+duce varied results through multiple runs, of which                                                     increase, the relative deviation percentage (RDP)
+one can use the self-consistency strategy (Wang                                                         of each task decreases, indicating that the differ-
+et al., 2023) for enhanced task performance. Con-                                                       ences between different decoding methods have
+cretely, self-consistency samples multiple gener-                                                       been reduced. This suggests that scaling model size
+ations and takes a majority vote to determine the                                                       can diminish the significance of decoding strate-
+final answer. To gain further insights into the poten-                                                  gies. Moreover, as the number of model parameters
+tial of stochastic decoding methods, we then delve                                                      varies, the optimal hyperparameters for each decod-
+into the experiments with self-consistency.                                                             ing method are also subject to change (detailed in
+   As illustrated in Figure 4, we plot the accuracies                                                   Appendix E). Consequently, there is also a need
+of various stochastic decoding methods on GSM8K                                                         to adjust the hyperparameters for larger-scale mod-
+with respect to varying numbers of sampled gen-                                                         els individually, rather than directly applying those
+erations (1, 5, 10, and 20). We also contrast the                                                       from smaller models. Meanwhile, the degree of
+results with the best accuracies achieved by de-                                                        impact from the model scale varies for different
+                                                       Deterministic Methods                                               Stochastic Methods
+       Model     Dataset                                                                                                                                          RDP
+                              Greedy      BS        DBS     CS       FSD   FSD-d      CD       DoLa      Temp      Top-p     Top-k     η      Miro   Typical
+                  MBPP         17.80     19.40     18.40 17.40 19.20        21.20    18.20     18.40     17.20     14.80     10.20    9.40    7.80    12.00    25.81
+        7B       GSM8K         13.87     17.21     17.74 14.63 16.83        16.60    17.21     15.39     16.30     12.96      9.10    8.64    7.96    13.04    23.06
+                 Wikinews      40.10     41.33     32.02 96.66 96.42        98.40    85.17     94.44     95.40     95.19     96.47 97.48 98.51        97.67    28.83
+                  MBPP         23.00     24.00     23.20 24.40 23.00        25.80    23.00     23.80     23.40     17.40     13.40 21.60 10.00        17.20    21.37
+        13B      GSM8K         28.81     29.64     29.19 29.42 31.99        31.16    33.36     28.58     30.02     24.94     18.20 30.10 15.39        21.76    18.74
+                 Wikinews      62.02     50.30     51.00 98.22 97.01        93.26    94.83     91.53     96.88     97.77     97.81 97.19 96.94        96.87    19.95
+                  MBPP         41.80     43.40     41.00 39.40 41.20        41.20    42.20     37.00     41.80     33.20     25.80 38.80 24.80        42.20    15.23
+        70B      GSM8K         57.39     59.44     58.76 58.91 60.73        60.42    63.91     61.33     57.47     53.37     44.20 58.53 38.36        59.89    11.92
+                 Wikinews      42.44     76.35     77.3 3 95.22 95.68       93.29     95.3     94.31     94.09     92.75     93.39 96.04 96.02        92.33    16.02
+                  MBPP         17.20     21.60     21.20 17.40 17.80        17.80    17.40     18.00     20.00     17.60     16.00 17.00 16.00        18.00    9.08
+      7B-Chat    GSM8K         24.79     28.81     26.91 25.70 25.40        24.56    26.46     22.14     25.47     24.26     24.41 25.25 23.20        24.11    6.25
+                 Wikinews      58.34     71.01     74.13 70.42 76.74        81.84    74.33     63.99     83.84     76.76     79.65 72.24 70.02        72.32    8.84
+                  MBPP         22.60     24.80     24.40 23.80 24.00        23.40    23.80     23.60     24.80     24.00     24.00 24.20 22.60        23.60    2.69
+      13B-Chat   GSM8K         34.57     39.73     38.06 36.24 36.62        36.16    36.62     33.13     36.32     36.01     35.41 35.41 36.01        36.85    4.05
+                 Wikinews      77.35     84.43     88.82 87.80 92.89        82.58    98.06     70.68     84.54     87.50     82.20 89.20 89.23        90.13    7.50
+                  MBPP         31.40     31.80     32.00 30.40 30.80        30.80    30.60     30.20     32.00     30.80     28.40 31.60 28.20        31.60    3.74
+      70B-Chat   GSM8K         51.93     50.87     53.90 53.22 52.01        52.54    52.24     48.82     52.62     52.99     51.10 52.92 51.93        52.16    2.28
+                 Wikinews      77.53     74.01     84.10 85.85 84.60        87.13    81.54     69.58     80.67     82.00     83.85 82.53 75.11        84.69    6.04
+
+Table 4: Results of Llama2 family models with different scales on MBPP, GSM8K, Wikinews datasets. We report
+the relative deviation percentage (RDP) of the performance of different decoding methods on each task in the last
+column. The corresponding hyperparameters for each decoding method are listed in Appendix E.
+                                                         Deterministic Methods                                               Stochastic Methods
+      Model         Dataset                                                                                                                                         RDP
+                                Greedy      BS       DBS      CS      FSD    FSD-d      CD       DoLa      Temp      Top-p     Top-k     η      Miro    Typical
+                    MBPP         23.00     24.60     23.00 21.20 24.60       25.20     23.00     23.00     24.00     18.40     11.40 21.00 10.40         22.60     21.28
+   13B-INT4        GSM8K         27.45     30.33     28.13 27.67 31.01       30.10     31.46     29.11     27.60     21.30     15.69 26.38 14.10         27.90     19.92
+                   Wikinews      47.41     46.61     46.70 91.21 96.11       95.91     87.51     92.83     97.79     97.99     96.70 90.32 95.67         91.02     23.28
+                    MBPP         21.60     23.20     22.20 23.20 22.60       25.20     22.80     24.00     23.00     17.60     12.60 11.80      9.60     15.40     25.46
+   13B-INT8        GSM8K         28.43     28.89     28.96 29.04 30.93       30.48     33.59     28.28     29.34     23.88     17.21 16.45 13.34         21.68     23.25
+                   Wikinews      49.24     51.92     45.56 94.39 96.99       97.18     93.96     94.06     94.81     97.71     96.33 97.28 95.60         97.15     22.62
+                    MBPP         23.80     25.60     25.80 25.40 24.80       24.60     24.40     22.80     24.80     24.40     21.60 24.00 22.40         25.40      4.97
+ 13B-Chat-INT4     GSM8K         34.12     35.71     37.45 34.50 35.33       35.41     34.42     31.61     35.33     34.27     33.97 34.04 33.74         35.33      3.64
+                   Wikinews      80.34     83.65     83.16 86.81 85.34       86.98     91.40     73.72     87.76     89.29     81.25 84.63 83.02         83.90      4.93
+                    MBPP         24.00     23.80     24.60 24.20 22.80       22.40     23.40     23.60     23.40     23.20     23.40 25.20 23.40         23.80      2.88
+ 13B-Chat-INT8     GSM8K         35.56     36.92     37.68 37.76 36.69       36.69     37.38     31.54     36.09     38.44     37.15 36.92 36.85         37.38      4.29
+                   Wikinews      73.73     83.22     88.82 91.37 85.53       81.25     89.41     57.87     90.50     88.67     87.10 82.91 84.87         81.61     10.34
+
+Table 5: Results for INT4 and INT8 quantization with Llama2 13B family on MBPP, GSM8K, Wikinews datasets.
+The corresponding hyperparameters for each decoding method are listed in Appendix E.
+
+decoding methods. For example, in MBPP, the                                            and typical sampling, there are noticeable changes
+best performance of η sampling on Llama2-7B is                                         when quantizing Llama2-13B. Taking GSM8K as
+9.40%, which is less than half of the best method                                      an example, η sampling under INT8 quantization
+FSD-d at 21.20%. However, for Llama2-13B, η                                            decreased by 13.65%, while typical sampling under
+sampling achieves 21.60%, and for Llama2-70B, it                                       INT4 quantization improved by 6.14% on GSM8K.
+reaches 38.80%, showing comparable efficacy to                                         Typical and η sampling are more influenced by
+the best decoding method. This shows η sampling                                        quantization because their computing involves nu-
+benefits greatly from a greater model scale.                                           merically unstable calculations. This may indicate
+                                                                                       that the impact of quantization on the information
+5.3      Quantization                                                                  entropy of different tokens during decoding cannot
+The large size of LLMs presents challenges for                                         be ignored.
+deployment, especially where resources are lim-
+                                                                                       6       Conclusion
+ited. Consequently, in the LLM era, it is crucial
+to examine how various decoding methods per-                                           This study offered a comprehensive analysis of di-
+form in quantization settings. We assess the perfor-                                   verse traditional and contemporary decoding meth-
+mance of decoding methods in both INT8 quanti-                                         ods in the context of LLMs. Our experiments shed
+zation (Dettmers et al., 2022) and INT4 quantiza-                                      light on the efficacy, robustness, efficiency, and uni-
+tion (Lin et al., 2023b) for Llama2-13B family. As                                     versality of these decoding methods across a range
+detailed in Table 5, compared with the FP16 13B                                        of tasks, models, and settings. One primary find-
+model in Table 4, the RDP under quantized models                                       ing is that the choice of decoding methods remains
+is larger, indicating that quantization may impact                                     crucial and different decoding methods manifests
+the models’ robustness to different decoding meth-                                     different advantages in different scenarios. How-
+ods. At the same time, different decoding methods                                      ever we still provide some practical guidelines in
+exhibit varying adaptability to quantized models.                                      Appendix I. We hope this investigation provides
+Specially, the performance changes of determinis-                                      valuable insights and guidance for practitioners and
+tic methods before and after quantization are not                                      researchers in selecting and advancing decoding
+significant for both INT4 and INT8. However, for η                                     methods for LLMs.
+Limitations                                              Sourya Basu, Govardana Sachitanandam Ramachan-
+                                                           dran, Nitish Shirish Keskar, and Lav R. Varshney.
+Despite the thoroughness of our study, there are           2021. Mirostat: a neural text decoding algorithm
+some inherent limitations. First, while we have            that directly controls perplexity. In 9th International
+                                                           Conference on Learning Representations, ICLR 2021,
+explored a variety of tasks and models, the ever-
+                                                           Virtual Event, Austria, May 3-7, 2021.
+evolving nature of LLMs implies that new models
+or tasks might display distinct behaviors. Second,       Ondřej Bojar, Rajen Chatterjee, Christian Federmann,
+although our analysis of hyperparameter sensitivity        Yvette Graham, Barry Haddow, Shujian Huang,
+                                                           Matthias Huck, Philipp Koehn, Qun Liu, Varvara
+covers a wide range of commonly used configu-              Logacheva, Christof Monz, Matteo Negri, Matt Post,
+rations, it is not exhaustive and does not account         Raphael Rubino, Lucia Specia, and Marco Turchi.
+for all possible hyperparameters. Lastly, this pa-         2017. Findings of the 2017 conference on machine
+per does not explore the integration of multiple           translation (WMT17). In Proceedings of the Second
+                                                           Conference on Machine Translation.
+decoding methods, such as combining temperature
+sampling with a repetition penalty mechanism.            Jing Chen, Xinyu Zhu, Cheng Yang, Chufan Shi,
+                                                            Yadong Xi, Yuxiang Zhang, Junjie Wang, Jiashu Pu,
+Acknowledgments                                             Rongsheng Zhang, Yujiu Yang, et al. 2024. Hollm-
+                                                            wood: Unleashing the creativity of large language
+This research is partly supported by the                    models in screenwriting via role playing. arXiv
+Shenzhen Science and Technology Program                     preprint arXiv:2406.11683.
+(JCYJ20220818101014030) and the "Graph                   Mark Chen, Jerry Tworek, Heewoo Jun, Qiming
+Neural Network Project" of Ping An Technology             Yuan, Henrique Ponde de Oliveira Pinto, Jared Ka-
+(Shenzhen) Co., Ltd. Additionally, the work               plan, Harri Edwards, Yuri Burda, Nicholas Joseph,
+                                                          Greg Brockman, et al. 2021. Evaluating large lan-
+described in this paper is substantially funded by
+                                                          guage models trained on code. ArXiv preprint,
+a grant from the Research Grant Council of the            abs/2107.03374.
+Hong Kong Special Administrative Region, China
+(Project Code: 14200620).                                Zhe Chen, Jiannan Wu, Wenhai Wang, Weijie Su,
+                                                           Guo Chen, Sen Xing, Muyan Zhong, Qinglong
+                                                           Zhang, Xizhou Zhu, Lewei Lu, Bin Li, Ping Luo,
+                                                           Tong Lu, Yu Qiao, and Jifeng Dai. 2023. Internvl:
+References                                                 Scaling up vision foundation models and aligning
+                                                           for generic visual-linguistic tasks. arXiv preprint
+AI@Meta. 2024. Llama 3 model card.
+                                                           arXiv:2312.14238.
+Jacob Austin, Augustus Odena, Maxwell Nye, Maarten       Wei-Lin Chiang, Zhuohan Li, Zi Lin, Ying Sheng,
+   Bosma, Henryk Michalewski, David Dohan, Ellen          Zhanghao Wu, Hao Zhang, Lianmin Zheng, Siyuan
+   Jiang, Carrie Cai, Michael Terry, Quoc Le, et al.      Zhuang, Yonghao Zhuang, Joseph E. Gonzalez, Ion
+   2021. Program synthesis with large language models.    Stoica, and Eric P. Xing. 2023a. Vicuna: An open-
+  ArXiv preprint, abs/2108.07732.                         source chatbot impressing gpt-4 with 90%* chatgpt
+                                                          quality.
+Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang,
+   Xiaodong Deng, Yang Fan, Wenbin Ge, Yu Han, Fei       Wei-Lin Chiang, Zhuohan Li, Zi Lin, Ying Sheng,
+   Huang, Binyuan Hui, Luo Ji, Mei Li, Junyang Lin,       Zhanghao Wu, Hao Zhang, Lianmin Zheng, Siyuan
+   Runji Lin, Dayiheng Liu, Gao Liu, Chengqiang Lu,       Zhuang, Yonghao Zhuang, Joseph E Gonzalez, et al.
+   Keming Lu, Jianxin Ma, Rui Men, Xingzhang Ren,         2023b. Vicuna: An open-source chatbot impressing
+   Xuancheng Ren, Chuanqi Tan, Sinan Tan, Jianhong        gpt-4 with 90%* chatgpt quality. See https://vicuna.
+   Tu, Peng Wang, Shijie Wang, Wei Wang, Sheng-           lmsys. org (accessed 14 April 2023).
+   guang Wu, Benfeng Xu, Jin Xu, An Yang, Hao Yang,
+   Jian Yang, Shusheng Yang, Yang Yao, Bowen Yu,         Yung-Sung Chuang, Yujia Xie, Hongyin Luo, Yoon
+   Hongyi Yuan, Zheng Yuan, Jianwei Zhang, Xingx-          Kim, James Glass, and Pengcheng He. 2023. Dola:
+   uan Zhang, Yichang Zhang, Zhenru Zhang, Chang           Decoding by contrasting layers improves factuality
+   Zhou, Jingren Zhou, Xiaohuan Zhou, and Tianhang         in large language models.
+   Zhu. 2023. Qwen technical report. ArXiv preprint,
+   abs/2309.16609.                                       Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian,
+                                                           Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias
+Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda              Plappert, Jerry Tworek, Jacob Hilton, Reiichiro
+  Askell, Anna Chen, Nova DasSarma, Dawn Drain,            Nakano, et al. 2021. Training verifiers to solve math
+  Stanislav Fort, Deep Ganguli, Tom Henighan, et al.       word problems. ArXiv preprint, abs/2110.14168.
+  2022. Training a helpful and harmless assistant with
+  reinforcement learning from human feedback. ArXiv      Damai Dai, Chengqi Deng, Chenggang Zhao, RX Xu,
+  preprint, abs/2204.05862.                                Huazuo Gao, Deli Chen, Jiashi Li, Wangding
+  Zeng, Xingkai Yu, Y Wu, et al. 2024. Deepseek-            Abdullah Barhoum, Nguyen Minh Duc, Oliver Stan-
+  moe: Towards ultimate expert specialization in            ley, Richárd Nagyfi, et al. 2023. Openassistant
+  mixture-of-experts language models. arXiv preprint        conversations–democratizing large language model
+  arXiv:2401.06066.                                         alignment. ArXiv preprint, abs/2304.07327.
+
+Tim Dettmers, Mike Lewis, Younes Belkada, and Luke        Huayang Li, Tian Lan, Zihao Fu, Deng Cai, Lemao Liu,
+  Zettlemoyer. 2022. Llm. int8 (): 8-bit matrix multi-      Nigel Collier, Taro Watanabe, and Yixuan Su. 2023a.
+  plication for transformers at scale. ArXiv preprint,      Repetition in repetition out: Towards understanding
+  abs/2208.07339.                                           neural text degeneration from the data perspective.
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018.           Siheng Li, Cheng Yang, Taiqiang Wu, Chufan Shi,
+  Hierarchical neural story generation. In Proceedings      Yuji Zhang, Xinyu Zhu, Zesen Cheng, Deng Cai,
+  of the 56th Annual Meeting of the Association for         Mo Yu, Lemao Liu, Jie Zhou, Yujiu Yang, Ngai
+  Computational Linguistics (Volume 1: Long Papers).        Wong, Xixin Wu, and Wai Lam. 2024. A survey on
+                                                            the honesty of large language models. arXiv preprint
+Markus Freitag and Yaser Al-Onaizan. 2017. Beam
+                                                            arXiv:2409.18786.
+ search strategies for neural machine translation. In
+ Proceedings of the First Workshop on Neural Ma-
+ chine Translation.                                       Xiang Lisa Li, Ari Holtzman, Daniel Fried, Percy Liang,
+                                                            Jason Eisner, Tatsunori Hashimoto, Luke Zettle-
+Xinyang Geng, Arnav Gudibande, Hao Liu, Eric Wal-           moyer, and Mike Lewis. 2023b. Contrastive decod-
+  lace, Pieter Abbeel, Sergey Levine, and Dawn Song.        ing: Open-ended text generation as optimization. In
+  2023. Koala: A dialogue model for academic re-            Proceedings of the 61st Annual Meeting of the As-
+  search. Blog post, April, 1.                              sociation for Computational Linguistics (Volume 1:
+                                                            Long Papers).
+Mor Geva, Daniel Khashabi, Elad Segal, Tushar Khot,
+ Dan Roth, and Jonathan Berant. 2021. Did aristotle       Xuechen Li, Tianyi Zhang, Yann Dubois, Rohan Taori,
+ use a laptop? a question answering benchmark with          Ishaan Gulrajani, Carlos Guestrin, Percy Liang, and
+ implicit reasoning strategies. Transactions of the         Tatsunori B Hashimoto. 2023c. Alpacaeval: An auto-
+ Association for Computational Linguistics, 9.              matic evaluator of instruction-following models.
+
+Karl Moritz Hermann, Tomás Kociský, Edward Grefen-        Bill Yuchen Lin, Abhilasha Ravichander, Ximing Lu,
+  stette, Lasse Espeholt, Will Kay, Mustafa Suleyman,       Nouha Dziri, Melanie Sclar, Khyathi Chandu, Chan-
+  and Phil Blunsom. 2015. Teaching machines to read         dra Bhagavatula, and Yejin Choi. 2023a. The un-
+  and comprehend. In Advances in Neural Information         locking spell on base llms: Rethinking alignment via
+  Processing Systems 28: Annual Conference on Neu-          in-context learning. ArXiv preprint, abs/2312.01552.
+  ral Information Processing Systems 2015, December
+  7-12, 2015, Montreal, Quebec, Canada.                   Chin-Yew Lin. 2004. ROUGE: A package for automatic
+                                                            evaluation of summaries. In Text Summarization
+John Hewitt, Christopher Manning, and Percy Liang.          Branches Out.
+  2022. Truncation sampling as language model
+  desmoothing. In Findings of the Association for Com-    Ji Lin, Jiaming Tang, Haotian Tang, Shang Yang,
+  putational Linguistics: EMNLP 2022.                        Xingyu Dang, and Song Han. 2023b.            Awq:
+                                                             Activation-aware weight quantization for llm com-
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and           pression and acceleration. arXiv.
+  Yejin Choi. 2020. The curious case of neural text
+  degeneration. In 8th International Conference on
+                                                          Alisa Liu, Maarten Sap, Ximing Lu, Swabha
+  Learning Representations, ICLR 2020, Addis Ababa,
+                                                            Swayamdipta, Chandra Bhagavatula, Noah A Smith,
+  Ethiopia, April 26-30, 2020.
+                                                            and Yejin Choi. 2021. Dexperts: Decoding-time con-
+Daphne Ippolito, Reno Kriz, João Sedoc, Maria               trolled text generation with experts and anti-experts.
+  Kustikova, and Chris Callison-Burch. 2019. Compar-        arXiv preprint arXiv:2105.03023.
+  ison of diverse decoding methods from conditional
+  language models. In Proceedings of the 57th An-         Pan Lu, Hritik Bansal, Tony Xia, Jiacheng Liu, Chun-
+  nual Meeting of the Association for Computational         yuan Li, Hannaneh Hajishirzi, Hao Cheng, Kai-
+  Linguistics.                                              Wei Chang, Michel Galley, and Jianfeng Gao. 2023.
+                                                            Mathvista: Evaluating math reasoning in visual con-
+Albert Q Jiang, Alexandre Sablayrolles, Arthur Men-         texts with gpt-4v, bard, and other large multimodal
+  sch, Chris Bamford, Devendra Singh Chaplot, Diego         models. arXiv e-prints, pages arXiv–2310.
+  de las Casas, Florian Bressand, Gianna Lengyel, Guil-
+  laume Lample, Lucile Saulnier, et al. 2023. Mistral     Ruilin Luo, Tianle Gu, Haoling Li, Junzhe Li, Zicheng
+  7b. arXiv preprint arXiv:2310.06825.                      Lin, Jiayi Li, and Yujiu Yang. 2024a. Chain of his-
+                                                            tory: Learning and forecasting with llms for tem-
+Andreas Köpf, Yannic Kilcher, Dimitri von Rütte,            poral knowledge graph completion. arXiv preprint
+  Sotiris Anagnostidis, Zhi-Rui Tam, Keith Stevens,         arXiv:2401.06072.
+Ruilin Luo, Liyuan Wang, Binghuai Lin, Zicheng Lin,         Ricardo Rei, Ana C Farinha, José G.C. de Souza, Pe-
+  and Yujiu Yang. 2024b. Ptd-sql: Partitioning and tar-       dro G. Ramos, André F.T. Martins, Luisa Coheur, and
+  geted drilling with llms in text-to-sql. arXiv preprint     Alon Lavie. 2022. Searching for COMETINHO: The
+  arXiv:2409.14082.                                           little metric that could. In Proceedings of the 23rd
+                                                              Annual Conference of the European Association for
+Clara Meister, Tiago Pimentel, Gian Wiher, and Ryan           Machine Translation, pages 61–70, Ghent, Belgium.
+  Cotterell. 2023. Locally typical sampling. Transac-         European Association for Machine Translation.
+  tions of the Association for Computational Linguis-
+  tics, 11.                                                 Baptiste Rozière, Jonas Gehring, Fabian Gloeckle, Sten
+                                                              Sootla, Itai Gat, Xiaoqing Ellen Tan, Yossi Adi,
+Stephen Merity, Caiming Xiong, James Bradbury, and            Jingyu Liu, Tal Remez, Jérémy Rapin, Artyom
+   Richard Socher. 2017. Pointer sentinel mixture mod-        Kozhevnikov, Ivan Evtimov, Joanna Bitton, Man-
+   els. In 5th International Conference on Learning           ish Bhatt, Cristian Canton-Ferrer, Aaron Grattafiori,
+  Representations, ICLR 2017, Toulon, France, April           Wenhan Xiong, Alexandre Défossez, Jade Copet,
+   24-26, 2017, Conference Track Proceedings.                 Faisal Azhar, Hugo Touvron, Louis Martin, Nico-
+                                                              las Usunier, Thomas Scialom, and Gabriel Synnaeve.
+Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike                   2023. Code llama: Open foundation models for code.
+  Lewis, Wen-tau Yih, Pang Wei Koh, Mohit Iyyer,              ArXiv preprint, abs/2308.12950.
+  Luke Zettlemoyer, and Hannaneh Hajishirzi. 2023.
+  Factscore: Fine-grained atomic evaluation of fac-         Chufan Shi, Deng Cai, and Yujiu Yang. 2024a.
+  tual precision in long form text generation. ArXiv          Lifi: lightweight controlled text generation with
+  preprint, abs/2305.14251.                                   fine-grained control codes.       arXiv preprint
+                                                              arXiv:2402.06930.
+Piotr Mirowski, Kory W Mathewson, Jaylen Pittman,
+  and Richard Evans. 2023. Co-writing screenplays           Chufan Shi, Cheng Yang, Yaxin Liu, Bo Shui, Jun-
+  and theatre scripts with language models: Evaluation        jie Wang, Mohan Jing, Linran Xu, Xinyu Zhu, Si-
+  by industry professionals. In Proceedings of the 2023       heng Li, Yuxiang Zhang, et al. 2024b. Chartmimic:
+  CHI Conference on Human Factors in Computing                Evaluating lmm’s cross-modal reasoning capabil-
+  Systems, pages 1–34.                                        ity via chart-to-code generation. arXiv preprint
+                                                              arXiv:2406.09961.
+Shashi Narayan, Shay B. Cohen, and Mirella Lapata.
+  2018. Don’t give me the details, just the summary!        Chufan Shi, Cheng Yang, Xinyu Zhu, Jiahao Wang,
+  topic-aware convolutional neural networks for ex-           Taiqiang Wu, Siheng Li, Deng Cai, Yujiu Yang, and
+  treme summarization. In Proceedings of the 2018             Yu Meng. 2024c. Unchosen experts can contribute
+  Conference on Empirical Methods in Natural Lan-             too: Unleashing moe models’ power by self-contrast.
+  guage Processing.                                           arXiv preprint arXiv:2405.14507.
+
+Sean O’Brien and Mike Lewis. 2023. Contrastive de-          Aarohi Srivastava, Abhinav Rastogi, Abhishek Rao,
+  coding improves reasoning in large language models.         Abu Awal Md Shoeb, Abubakar Abid, Adam Fisch,
+  ArXiv preprint, abs/2309.09117.                             Adam R Brown, Adam Santoro, Aditya Gupta, Adrià
+                                                              Garriga-Alonso, et al. 2022. Beyond the imitation
+OpenAI. 2022. Introducing chatgpt. https://openai.            game: Quantifying and extrapolating the capabilities
+  com/blog/chatgpt.                                           of language models. ArXiv preprint, abs/2206.04615.
+OpenAI. 2023. GPT-4 technical report. ArXiv preprint,       Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Ling-
+  abs/2303.08774.                                             peng Kong, and Nigel Collier. 2022. A contrastive
+                                                              framework for neural text generation. In Advances
+OpenAI. 2024. Gpt-4o. Accessed: 2024-05-13.                   in Neural Information Processing Systems.
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-         Alon Talmor, Jonathan Herzig, Nicholas Lourie, and
+  Jing Zhu. 2002. Bleu: a method for automatic evalu-         Jonathan Berant. 2019. CommonsenseQA: A ques-
+  ation of machine translation. In Proceedings of the         tion answering challenge targeting commonsense
+  40th Annual Meeting of the Association for Compu-           knowledge. In Proceedings of the 2019 Conference
+  tational Linguistics.                                       of the North American Chapter of the Association
+                                                              for Computational Linguistics: Human Language
+Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,          Technologies, Volume 1 (Long and Short Papers).
+  John Thickstun, Sean Welleck, Yejin Choi, and Zaïd
+  Harchaoui. 2021. MAUVE: measuring the gap be-             MosaicML NLP Team. 2023. Introducing mpt-30b:
+  tween neural text and human text using divergence          Raising the bar for open-source foundation models.
+  frontiers. In Advances in Neural Information Pro-          Accessed: 2023-06-22.
+  cessing Systems 34: Annual Conference on Neural
+  Information Processing Systems 2021, NeurIPS 2021,        Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier
+  December 6-14, 2021, virtual.                               Martinet, Marie-Anne Lachaux, Timothée Lacroix,
+                                                              Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal
+Matt Post. 2018. A call for clarity in reporting BLEU         Azhar, Aurelien Rodriguez, Armand Joulin, Edouard
+ scores. In Proceedings of the Third Conference on            Grave, and Guillaume Lample. 2023a. Llama: Open
+ Machine Translation: Research Papers.                        and efficient foundation language models.
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Al-             Evaluation (LREC-COLING 2024), pages 536–557,
+  bert, Amjad Almahairi, Yasmine Babaei, Nikolay               Torino, Italia. ELRA and ICCL.
+  Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti
+  Bhosale, Dan Bikel, Lukas Blecher, Cristian Canton         Kevin Yang and Dan Klein. 2021. Fudge: Controlled
+  Ferrer, Moya Chen, Guillem Cucurull, David Esiobu,           text generation with future discriminators. arXiv
+  Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller,          preprint arXiv:2104.05218.
+  Cynthia Gao, Vedanuj Goswami, Naman Goyal, An-
+  thony Hartshorn, Saghar Hosseini, Rui Hou, Hakan           Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran,
+  Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa,           Tom Griffiths, Yuan Cao, and Karthik Narasimhan.
+  Isabel Kloumann, Artem Korenev, Punit Singh Koura,           2024. Tree of thoughts: Deliberate problem solving
+  Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Di-           with large language models. Advances in Neural
+  ana Liskovich, Yinghai Lu, Yuning Mao, Xavier Mar-           Information Processing Systems, 36.
+  tinet, Todor Mihaylov, Pushkar Mishra, Igor Moly-          Wenxuan Zhang, Mahani Aljunied, Chang Gao,
+  bog, Yixin Nie, Andrew Poulton, Jeremy Reizen-              Yew Ken Chia, and Lidong Bing. 2023. M3exam: A
+  stein, Rashi Rungta, Kalyan Saladi, Alan Schelten,          multilingual, multimodal, multilevel benchmark for
+  Ruan Silva, Eric Michael Smith, Ranjan Subrama-             examining large language models. Advances in Neu-
+  nian, Xiaoqing Ellen Tan, Binh Tang, Ross Tay-              ral Information Processing Systems, 36:5484–5505.
+  lor, Adina Williams, Jian Xiang Kuan, Puxin Xu,
+  Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan,         Xuanyu Zhang and Qing Yang. 2023. Self-qa: Unsuper-
+  Melanie Kambadur, Sharan Narang, Aurelien Ro-                vised knowledge guided language model alignment.
+  driguez, Robert Stojnic, Sergey Edunov, and Thomas           ArXiv preprint, abs/2305.11952.
+  Scialom. 2023b. Llama 2: Open foundation and
+  fine-tuned chat models.                                    Yuxiang Zhang, Jing Chen, Junjie Wang, Yaxin Liu,
+                                                               Cheng Yang, Chufan Shi, Xinyu Zhu, Zihao Lin,
+Ashwin K. Vijayakumar, Michael Cogswell, Ram-                  Hanwen Wan, Yujiu Yang, et al. 2024. Toolbehonest:
+  prasaath R. Selvaraju, Qing Sun, Stefan Lee, David J.        A multi-level hallucination diagnostic benchmark
+  Crandall, and Dhruv Batra. 2018. Diverse beam                for tool-augmented large language models. arXiv
+  search for improved description of complex scenes.           preprint arXiv:2406.20015.
+  In Proceedings of the Thirty-Second AAAI Confer-
+  ence on Artificial Intelligence, (AAAI-18), the 30th in-   Yukun Zhu, Ryan Kiros, Richard S. Zemel, Ruslan
+  novative Applications of Artificial Intelligence (IAAI-      Salakhutdinov, Raquel Urtasun, Antonio Torralba,
+  18), and the 8th AAAI Symposium on Educational               and Sanja Fidler. 2015. Aligning books and movies:
+  Advances in Artificial Intelligence (EAAI-18), New           Towards story-like visual explanations by watching
+  Orleans, Louisiana, USA, February 2-7, 2018.                 movies and reading books. In 2015 IEEE Interna-
+                                                               tional Conference on Computer Vision, ICCV 2015,
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V Le,            Santiago, Chile, December 7-13, 2015.
+  Ed H. Chi, Sharan Narang, Aakanksha Chowdhery,
+  and Denny Zhou. 2023. Self-consistency improves
+  chain of thought reasoning in language models. In
+  The Eleventh International Conference on Learning
+  Representations.
+
+Zirui Wang, Mengzhou Xia, Luxi He, Howard Chen,
+  Yitao Liu, Richard Zhu, Kaiqu Liang, Xindi Wu,
+   Haotian Liu, Sadhika Malladi, et al. 2024. Charxiv:
+   Charting gaps in realistic chart understanding in mul-
+   timodal llms. arXiv preprint arXiv:2406.18521.
+
+Sean Welleck, Amanda Bertsch, Matthew Finlayson,
+  Hailey Schoelkopf, Alex Xie, Graham Neubig, Ilia
+  Kulikov, and Zaid Harchaoui. 2024. From de-
+  coding to meta-generation: Inference-time algo-
+  rithms for large language models. arXiv preprint
+  arXiv:2406.16838.
+
+Gian Wiher, Clara Meister, and Ryan Cotterell. 2022.
+  On decoding strategies for neural text generators.
+  Transactions of the Association for Computational
+  Linguistics, 10.
+
+Haoran Yang, Deng Cai, Huayang Li, Wei Bi, Wai Lam,
+  and Shuming Shi. 2024. A frustratingly simple de-
+  coding method for neural text generation. In Proceed-
+  ings of the 2024 Joint International Conference on
+  Computational Linguistics, Language Resources and
+A     Decoding Strategies                                    experimental setup, we configure various (k, G)
+                                                             pairs of (4,2), (4,4), (8,2), (8,4), and the diversity
+A.1    Deterministic Methods
+                                                             penalty λ is always set to 1.
+Greedy Search is arguably the simplest decod-
+ing strategy. At each time step t, it selects the token      Contrastive Search (Su et al., 2022) assumes
+with the highest probability predicted by the model          the LM has an isotropic representation space and
+from the whole vocabulary set V. Mathematically,             adds a penalty term that decreases the generation
+the chosen token yt at time t is:                            probabilities of tokens producing hidden states that
+                                                             are very similar to the previous context. Formally,
+             yt = arg max P (y|x, y<t )                (1)   given the context (x, y<t ), the selection of the out-
+                      y∈V
+                                                             put yt follows
+where x is the original input and y<t is the gen-
+                                                                      yt = arg max(1 − α)P (y|x, y<t )
+erated tokens until time t − 1. One drawback of                                y∈V k                           (5)
+greedy search is that it does not consider the global               −α max {s(hy , hv ) : v ∈ (x, y<t )}
+sequence score and can get stuck in local optima.
+This is why beam search is devised.                          where V k is the set of top-k predictions from
+Beam Search (Freitag and Al-Onaizan, 2017)                   the language model’s probability distribution
+maintains a set, or "beam", of the k most probable           P (y|x, y<t ). hv is the hidden states for the to-
+sequences at each time step, where the hyperparam-           ken v, and s is the similarity function where the
+eter k is referred to as the beam width. At time t,          cosine similarity is usually adopted. We search α
+for each y<t ∈ Bt−1 , where Bt−1 is the set of k             from [0.1, 0.2, 0.3, 0.4, 0.5, 0.6] in our experiment.
+most probable sequences at time t − 1, it calculates         Contrastive Decoding (Li et al., 2023b) em-
+a score for each token y ∈ V:                                ploys an additional amateur LM and penalizes
+                                                             undesired attributes associated with the amateur
+         score(y<t , y) = log P (y<t , y|x)            (2)
+                                                             model. Formally, for each candidate token y ∈ V c
+Then, a new set Bt is obtained:
+                                                              score((x, y<t ), y) = (1 + β) ∗ uy − β ∗ vy (6)
+          Bt =     argtopk            score(y<t , y)   (3)
+                 y<t ∈Bt−1 ,y∈V                              u and v are the logits before softmax of the expert
+                                                             and amateur models respectively. These two mod-
+We specifically test beam size 4 and 8 in our exper-         els have the same tokenizer and the expert model
+iment.                                                       is usually much larger than the amateur model. V c
+Diverse Beam Search            (Vijayakumar et al.,          is a set of candidate tokens selected based on the
+2018) is a variant of beam search and aims to im-            following criteria:
+prove the diversity among the generated sequences.           V c (x, y<t ) =
+It divides the k sequences into G groups, each with
+                                                             {y ∈ V : Pexp (y|x, y<t ) > α max Pexp (·|x, y<t )}
+a size of k/G sequences. The algorithm operates in
+a similar way to the standard beam search, but in-                                                         (7)
+stead of choosing the top-k sequences from all can-          In our experiment, we adopt TinyLlama-1.1B2
+didate sequences, it selects the top- k/G sequences          as the amateur model. We use the default set-
+for each group. The key difference lies in how the           ting with α set to 0.1 and we search β from
+scores are calculated. In diverse beam search, a             [0.1, 0.3, 0.5, 0.7, 0.9].
+penalty is added to the score of a sequence if a
+similar sequence has already been in other groups:           Frustratingly Simple Decoding (Yang et al.,
+                                                             2024) exploits the contrasts between the LLM and
+                                                             an auxiliary anti-LM constructed based on the cur-
+    score(y<t , y)y<t ∈Bt−1
+                        g   = log P (y<t , y|x)
+                                                             rent prefix. There are two variants of FSD: FSD
+                                              ′
+                             ∆((y<t , y), Btg )        (4)
+                          X
+                     −λ                                      and FSD-d depending on whether the anti-LM is
+                             g ′ <g                          implemented as a vectorized or discrete n-gram
+                         ′
+                                                             model. Specifically, the FSD score is defined as
+where ∆((y<t , y), Btg ) is a measure of similarity             2
+                                                                 https://huggingface.co/TinyLlama/TinyLlama-1.
+                                           ′
+between (y<t , y) and sequences within Btg . In our          1B-intermediate-step-955k-token-2T
+                                                         For our study, we have examined various p thresh-
+                                                         olds, specifically [0.8, 0.85, 0.9, 0.95, 1].
+   FSD(y|x, y<t ) = (1 − α)Pθ (y|x, y<t )−
+                                                  (8)
+                            α × Pω (y|x, y<t )           Typical Sampling (Meister et al., 2023) sorts the
+                                                         vocabulary according to the differences between
+where Pθ and Pω represent the LM and the anti-
+                                                         distribution entropy and probabilities. The authors
+LM respectively. The hyper-parameter α ≥ 0 is
+                                                         argue that the desired sequences should have infor-
+used to balance the two scores. In practice, it first
+                                                         mation content close to the expected information
+selects the top-k most probable tokens according
+                                                         content, i.e., the conditional entropy of the model.
+to Pθ (·|x, y<t ), denoted by V k . The token in V (k)
+                                                         The candidate set V c is a solution of the following
+with the largest FSD score is chosen as the tth to-
+                                                         problem:
+ken. We search α from [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].
+DoLa (Chuang et al., 2023) obtains the next-
+                                                                  X
+                                                            min
+                                                             c
+                                                                          |H(Yt |x, y<t ) + log P (y|x, y<t )|
+token distribution by contrasting the logits differ-         V
+                                                                  y∈V c
+ences between the last layer and a premature layer.                                     X
+                                                                                 s.t.           P (y|x, y<t ) ≥ p
+For Llama2-7b, the premature layer is dynamically
+                                                                                        y∈V c
+selected from even-numbered layers from [0, 16)
+                                                                                                                    (11)
+and [16, 32). For Llama2-13b, the ranges are
+[0, 20) and [20, 40). For Llama2-70b, the ranges
+are [0, 20) and [60, 80). They adopt the Jensen-         In our experiments, we vary the threshold p across
+Shannon divergence (JSD) as the measure of dis-          the values [0.2, 0.9, 0.92, 0.95] to examine its ef-
+tance between the next-word distributions and se-        fect on sequence generation.
+lect the layer that has the largest JSD as the prema-
+                                                         Top-η Sampling (Hewitt et al., 2022) truncates
+ture layer.
+                                                         words whose probabilities are below an entropy-
+A.2   Stochastic Methods                                 dependent threshold. The candidate set V c is deter-
+Temperature Sampling is a decoding strategy              mined by:
+to control the randomness in the sampling pro-
+cess. Instead of directly sampling tokens from            Vc =
+                                                                               √
+the predicted distribution, temperature sampling           y ∈ V|P (y|x, y<t ) ≥ η exp(−hθ,(x,y<t ) )
+introduces a hyperparameter "temperature" τ that                                                    (12)
+is used to adjust the probability distribution:
+                                                         where     hθ,(x,y<t )  is    the    entropy of
+                           exp(uy /τ )
+          P (y|x, y<t ) = P                       (9)    P (Y |x, y<t ).       η is searched from
+                            j exp(uj /τ )                [0.0003, 0.0006, 0.0009, 0.002, 0.004].
+where uy is the logit of y before softmax. We
+conduct our experiment for τ within the range of         Mirostat Sampling (Basu et al., 2021) directly
+0.1 to 0.9, incrementing in value of 0.1.                control the perplexity rate of the generated text.
+                                                         It firstly estimates the value of s assuming words
+Top-k Sampling (Fan et al., 2018) is used to             follow Zipf’s law where s is an exponent character-
+ensure that the less probable words, which are in        izing the distribution. Then it uses top-k sampling
+the unreliable tail of the distribution (Holtzman        to generate the new token where k is a function of
+et al., 2020), should not have any chance to be se-      the estimated s and of the target perplexity τ of the
+lected. Only top-k probable tokens are considered        output text. We search τ from [2.5, 3, 4, 5].
+for a generation. we explore a range of k values,        In this work, we focus solely on vanilla genera-
+specifically [5, 10, 20, 50, 100].                       tion methods. We do not discuss other model-
+Top-p Sampling (Holtzman et al., 2020) consid-           specific (Shi et al., 2024c), task-specific (Yang
+ers the minimal set of top tokens V p that cover a       and Klein, 2021; Liu et al., 2021; Shi et al., 2024a),
+specified percentage p of the distribution:              or meta-generation methods (Welleck et al., 2024)
+                                                         (e.g., Tree-of-Thoughts (Yao et al., 2024)). These
+               X
+                   P (y|x, y<t ) ≥ p          (10)       specialized decoding approaches are beyond the
+               y∈V p                                     scope of our current analysis.
+B     Evaluation Benchmarks                             CNN/DailyMail (Hermann et al., 2015) is a
+                                                        dataset with largely extractive reference summaries
+B.1    Coding                                           that contain news articles from CNN and the Dai-
+HumanEval (Chen et al., 2021), MBPP (Austin             lyMail along with highlights that act as a summary
+et al., 2021) are extensively utilized benchmarks       for the article. The test splits for the dataset are
+within the measurement of LLM’s code generat-           11.3K examples. We use 0-shot prompt for aligned
+ing ability. These benchmarks encompass a vast          models and 1-shot prompt for unaligned models.
+collection of Python programming problems.              The model-generated summary is compared against
+                                                        a human-authored reference summary using auto-
+HumanEval (Chen et al., 2021) consists of 164           mated metrics for overall quality ROUGE-L (Lin,
+original programming problems by giving doc-            2004). Note that we randomly select 1,000 cases
+strings to generate code, which has an average of       each from CNNDailyMail and XSUM for evalua-
+9.6 test cases allocated to each problem. We use        tion.
+0-shot prompt for both unaligned and aligned mod-
+els.                                                    B.4      Translation
+
+MBPP (Austin et al., 2021) focus on generating          We evaluate the translation performance on
+code based on textual descriptions, which offers a      WMT22 (Bojar et al., 2017) test sets.
+set of 500 test programming problems, accompa-          WMT22 Competition (Bojar et al., 2017) con-
+nied by three automated test cases per problem. We      structed based on more recent content from various
+use 0-shot prompt for aligned models and 3-shot         domains, including news, social, e-commerce, and
+prompt for unaligned models.                            conversational domains. The numbers of samples
+                                                        for De ⇒ En, En ⇒ De, Zh ⇒ En and En ⇒ Zh
+B.2    Math Problem Soving                              tasks are 1984, 2037, 1875 and 2037, respectively.
+We utilize GSM8K (Cobbe et al., 2021) for assess-       For automatic evaluation, we adopt BLEU (Pap-
+ing reasoning and problem-solving proficiencies         ineni et al., 2002) implementated in SacreBLEU
+within the domain of mathematics.                       (Post, 2018)3 . We use 3-shot prompt for unaligned
+                                                        models.
+GSM8K (Cobbe et al., 2021) collects 1,319
+high-quality linguistically diverse grade school        B.5      Commonsense reasoning
+math word problems as the test set, and reports         Commonsense reasoning is key for interacting with
+8-shot pass@1 accuracy. We use 0-shot prompt for        the world and is still beyond the reach of current
+aligned models and 8-shot prompt for unaligned          natural language understanding systems (Talmor
+models.                                                 et al., 2019). We consider measuring open-ended
+                                                        performance on two datasets covering a diverse
+B.3    Summarization
+                                                        range of commonsense reasoning types from BIG-
+We select the CNN/DailyMail (Hermann et al.,            Bench (Srivastava et al., 2022), CommonsenseQA
+2015) and XSUM (Narayan et al., 2018) datasets,         (Talmor et al., 2019) and StrategyQA (Geva et al.,
+which are the most well-studied datasets in the lit-    2021).
+erature on summarization faithfulness. This also
+ensures domain coverage of news-type data. Im-          CommonsenseQA (Talmor et al., 2019) asks
+portantly, these datasets differ along a central axis   commonsense questions about the world involving
+studied in summarization:                               complex semantics that often require prior knowl-
+                                                        edge. There are a total of 1.22k instances in the
+XSUM (Narayan et al., 2018) is a dataset with           CommonsenseQA validation set. We use 6-shot
+largely abstractive reference summaries (meaning        prompt for aligned models and 1-shot prompt for
+the string overlap between the document and its         unaligned models.
+summary in the dataset is relatively small on aver-
+                                                        StrategyQA (Geva et al., 2021) requires mod-
+age) which feature articles from the British Broad-
+                                                        els to infer a multi-hop strategy to answer ques-
+casting Corporation (BBC). The test splits for the
+                                                        tions. We use the open-domain setting (question-
+dataset are 11.5K examples. We use 0-shot prompt
+                                                        only set) from BIG-Bench (Srivastava et al., 2022)
+for aligned models and 1-shot prompt for unaligned
+                                                           3
+models.                                                        https://github.com/mjpost/sacrebleu
+which contains 2.29k test instances. We use 0-shot      Wikitext select 1,314 prompts from wikitext-103
+prompt for aligned models and 4-shot prompt for         (Merity et al., 2017) as the Wikipedia representative
+unaligned models. The two BIG-bench tasks do not        domain. We use 0-shot prompt for both unaligned
+have training sets, so we select the first ten exam-    and aligned models. We utilize MAUVE (Pillutla
+ples as exemplars in the evaluation set as few-shot     et al., 2021) score (the higher the better) to measure
+exemplars and report accuracy on the rest of the        the distribution similarity between the set of gener-
+evaluation set.                                         ated text and the set of gold references. Note that
+                                                        we randomly select 500 cases each from among the
+B.6      Factual Knowledge                              three domains mentioned above for evaluation.
+Factual Knowledge refers to their tendency to gen-
+                                                        C       Instruction Template
+erate factual errors. This is considered a critical
+issue in LLMs because it is challenging for users       The instruction templates for each dataset are list
+to identify and poses real-life risks.                  from Table 6 to Table 25.
+
+FActScore (Min et al., 2023) scrutinizes the fac-       D       Different Foundation Models
+tual accuracy of biographies generated by LLMs
+                                                        We extend our analysis to investigate the decod-
+for 500 specific individuals. Conducting a pipeline
+                                                        ing methods under different foundation models5 .
+to transform a long-form model generation into
+                                                        We select several representive models, includ-
+pieces of atomic statements and measure the atomic
+                                                        ing CodeLlama-7b (Rozière et al., 2023), Qwen-
+statement’s accuracy with retrieved knowledge. We
+                                                        7B (Bai et al., 2023), MPT-7b (Team, 2023),
+use 0-shot prompt for aligned models.
+                                                        Mistral-7B (Jiang et al., 2023), deepseek-moe-16b-
+B.7      Instruction Following                          base (Dai et al., 2024), Llama-3-8B (AI@Meta,
+                                                        2024) and their aligned versions. Addtionally we
+For our research, we select the representative broad-   select vicuna-7b-v1.5 (Chiang et al., 2023a) which
+coverage benchmark Alpace-eval (Li et al., 2023c).      is an SFT-ed model from llama2-7B without RHLF
+Alpace-eval (Li et al., 2023c) assess the LLM’s         for analysis. It is crucial to underscore that these
+generation quality by 805 prompts from several          models vary significantly in several aspects, such
+sources: Vicuna (Chiang et al., 2023b) (80              as pre-training data, model architecture, and etc.
+prompts), Self-instruct (Zhang and Yang, 2023)          As illustrated in Tables 26, the results observed
+(252 prompts), Open Assistant (Köpf et al.,             in §4.1 are still applicable to LLMs with different
+2023) (188 prompts), Koala (Geng et al., 2023)          architectures. Detailed as below: i) For unaligned
+(156 prompts), HH_RLHF (Bai et al., 2022)               models, deterministic methods generally perform
+(129 prompts), quantifying the pairwise Win Rate        better than stochastic methods on all tasks except
+against a reference model, Text-Davinci-003.            open-ended text generation. ii) Aligned models
+                                                        are less dependent on decoding methods than un-
+B.8      Open-ended Text Generation                     aligned models. iii) Among stochastic methods,
+                                                        temperature sampling generally performs better,
+Open-ended text generation aims to craft fluent and
+                                                        particularly when using unaligned models. Apart
+coherent textual continuations of given prompts.
+                                                        from these consistencies, it is worth noting that
+Following (Li et al., 2023b), we evaluate three
+                                                        different decoding methods may result in differ-
+domains for open-ended text generation: Book,
+                                                        ent performance rankings for LLMs. For instance,
+Wikinews, Wikitext.
+                                                        Codellama outperforms Qwen by 7.60% in the
+Book contains 1,947 prompts collected from              MBPP with top-k sampling, yet lags behind by
+BookCorpus (Zhu et al., 2015)for story genera-          2.20% with η sampling. This implies that different
+tions. We use 0-shot prompt for both unaligned          models still have varying adaptability to specific
+and aligned models.                                     decoding methods, suggesting that the selection of
+                                                        decoding strategies should be more meticulously
+Wikinews include 2,000 news articles prompts            rigorous during the evaluation of LLMs.
+collected from Wikinews4 . We use 0-shot prompt             5
+                                                             CD and DoLa are not included. Because it is challeng-
+for both unaligned and aligned models.                  ing to find an amateur model for each foundation model for
+                                                        CD, and for DoLa, it is difficult to determine the appropriate
+   4
+       http://www.wikinews.org                          number of layers for logits comparison for individual models.
+    P ROMPT FOR H UMAN E VAL
+    [DOCSTRING]
+
+                                Table 6: 0-shot prompt for HumanEval (unaligned model).
+
+    P ROMPT FOR H UMAN E VAL
+    Please complete the remaining Python function code based on the following docstring content.
+    [DOCSTRING]
+
+                                 Table 7: 0-shot prompt for HumanEval (aligned model).
+
+
+E      Settings of Hyperparameters                                cannot be overlooked. This decision is contingent
+                                                                  upon several factors, including the specific test task,
+The optimal hyperparameters for each decoding
+                                                                  the model being used, and the priority—whether
+method across different datasets and models are
+                                                                  it is performance, robustness, or speed. The core
+listed from Table 27 to Table 31.
+                                                                  contribution of our paper lies in demonstrating the
+F      Analyses of Generation Diversity                           nuanced and complex nature of decoding method
+                                                                  selection. The optimal decoding strategy is not uni-
+Diversity is a more meaningful metric for open-                   versally applicable and varies based on the afore-
+ended tasks than closed-ended ones. Therefore,                    mentioned factors. This complexity underscores
+we report the diversity scores on Wikinews us-                    the necessity for a comprehensive evaluation frame-
+ing Llama2-Chat-7B and Llama2-7B models in                        work in future research and highlights the need for
+Table 32. Specifically, we adopt the diversity mea-               practitioners to consider multiple dimensions when
+sure defined in Yang et al., 2024, which computes                 deploying LLMs. Despite the intricacies involved,
+the degree of repetition across all generations at                we offer several practical guidelines for deploying
+different n-gram levels. It can be observed that                  LLMs without extensive hyperparameter searching:
+best-performing stochastic methods do not neces-                  For quick setup, Unaligned Models (e.g., Llama2-
+sarily exhibit higher diversity than best-performing              7B): For these models, we recommend using either
+deterministic methods. Concretely, for Llama2-7B,                 FSD or FSD-d; Aligned Models (e.g., Llama2-7B-
+the diversity score of FSD is the highest, while for              Chat): BS or DBS is advised for aligned models
+Llama2-Chat, CD obtains the highest.                              to achieve satisfactory performance. When compu-
+                                                                  tational resources allow for self-consistency: Un-
+G       Analyses of COMET Score on WMT
+                                                                  aligned Models (e.g., Llama2-7B): implementing
+        tasks.
+                                                                  temperature sampling with an optimal temperature
+Both COMET (Rei et al., 2022) and BLEU (Post,                     setting of 0.7 is recommended to enhance model
+2018) are important metrics for translation tasks.                performance. Aligned Models (e.g., Llama2-7B-
+We provide the COMET results for the translation                  Chat): a higher optimal temperature of 0.9 is sug-
+tasks in Table 33. It can be observed that, simi-                 gested.
+larly, for unaligned models, deterministic methods
+generally perform better than stochastic methods
+                                                                  J    Ethics and Societal Impact
+according to the COMET metric.
+
+H       Ouput of DoLa                                             Ethical Considerations. Our work highlights the
+                                                                  importance of transparency in LLMs, particularly
+The output examples that DoLa fails to terminate                  in how decoding methods influence LLM outputs.
+its generation appropriately are listed in Table 34.              The variability in performance across tasks and
+                                                                  models underscores the need for clear communi-
+I     Practical Guidelines
+                                                                  cation about the limitations and potential biases of
+Our study underscores the significance of select-                 these systems. Researchers and practitioners must
+ing an appropriate decoding method in the era of                  be mindful that the choice of decoding method can
+large language models (LLMs). Despite the ad-                     significantly impact the generated content, poten-
+vancements in LLMs, our findings indicate that the                tially amplifying or mitigating biases present in the
+choice of decoding method remains critical and                    underlying models.
+  P ROMPT FOR MBPP
+  You are an expert Python programmer, and here is your task: Write a function to find the similar elements from the given
+  two tuple lists. Your code should pass these tests:
+  assert similar_elements((3, 4, 5, 6),(5, 7, 4, 10)) == (4, 5)
+  assert similar_elements((1, 2, 3, 4),(5, 4, 3, 7)) == (3, 4)
+  assert similar_elements((11, 12, 14, 13),(17, 15, 14, 13)) == (13, 14)
+  [BEGIN]
+  def similar_elements(test_tup1, test_tup2):
+      res = tuple(set(test_tup1) & set(test_tup2))
+      return (res)
+  [DONE]
+
+  You are an expert Python programmer, and here is your task: Write a python function to identify non-prime numbers.
+  Your code should pass these tests:
+  assert is_not_prime(2) == False
+  assert is_not_prime(10) == True
+  assert is_not_prime(35) == True
+  [BEGIN]
+  import math
+  def is_not_prime(n):
+      result = False
+      for i in range(2,int(math.sqrt(n)) + 1):
+          if n % i == 0:
+              result = True
+      return result
+  [DONE]
+
+  You are an expert Python programmer, and here is your task: Write a function to find squares of individual elements in a
+  list using lambda function. Your code should pass these tests:
+  assert square_nums([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])==[1, 4, 9, 16, 25, 36, 49, 64, 81, 100])
+  assert square_nums([10,20,30]))==([100,400,900]))
+  assert square_nums([12,15]))==([144,225]))
+  [BEGIN]
+  def square_nums(nums):
+       square_nums = list(map(lambda x: x ** 2, nums))
+       return square_nums
+  [DONE]
+
+  You are an expert Python programmer, and here is your task: [TASK_DEFINATION]. Your code should pass these tests:
+  [TEST_CASE_1]
+  [TEST_CASE_2]
+  [TEST_CASE_2]
+  [BEGIN]
+
+                                Table 8: 3-shot promp for MBPP (unaligned model).
+
+
+Societal Impact. The findings of this study have                tions where the consequences of model outputs can
+far-reaching implications for the deployment of                 be significant. Our work also highlights the po-
+LLMs in real-world applications. By elucidating                 tential for advanced decoding methods to improve
+the trade-offs between performance, robustness,                 model performance, which could accelerate the
+and speed, our work empowers developers to make                 adoption of AI technologies across various sectors
+more informed decisions when implementing these                 of society.
+models in diverse contexts. This could lead to more
+reliable and efficient AI systems in critical areas             K     Future Work
+such as healthcare, education, and public services.
+However, it also raises concerns about the potential            Holistic Evaluations Across Diverse Contexts.
+for misuse or overreliance on these systems with-               While our study sheds light on the performance,
+out a full understanding of their limitations. The              robustness, and speed of various decoding meth-
+observed task-dependency of decoding methods’                   ods, expanding these evaluations to encompass
+performance suggests that careful consideration is              even more varied tasks, languages, and dataset
+needed when applying LLMs to different domains.                 types would provide deeper insights into the gen-
+This is particularly crucial in high-stakes applica-            eralizability of our findings. This includes tasks
+  P ROMPT FOR MBPP
+  You are an expert Python programmer, and here is your task: [TASK_DEFINATION]. Your code should pass these tests:
+  [TEST_CASE_1]
+  [TEST_CASE_2]
+  [TEST_CASE_2]
+
+                                Table 9: 0-shot promp for MBPP (aligned model).
+
+
+like temporal knowledge knowledge graph com-
+pletion (Luo et al., 2024a), text-to-sql (Luo et al.,
+2024b), and etc. Additionally, testing with low-
+resource languages and under-represented dialects
+is also worth exploring (Zhang et al., 2023).
+User-Centric Evaluation Metrics. There is a
+need for developing new evaluation metrics that
+more directly reflect user satisfaction and real-
+world efficacy. Incorporating user feedback loops
+and live deployment scenarios can aid in better
+understanding the practical utility of different de-
+coding method (Mirowski et al., 2023).
+Extending to New Tasks. Although our study
+validates decoding methods across a wide range
+of tasks, the rapid evolution of LLMs introduces
+new tasks for future validation. For instance, eval-
+uating models on attributes like honesty and ex-
+ploring how different methods can contribute to
+deploying more honest and transparent models is a
+pertinent area (Li et al., 2024; Zhang et al., 2024).
+In open-ended scenarios such as human-AI col-
+laboration, beyond simple news generation from a
+prefix, LLMs need to better cooperate in creative
+processes to generate both reliable and diverse texts
+like screenwriting (Chen et al., 2024). Future de-
+coding research should thus focus on facilitating
+such cooperation.
+Extending to Large Multimodal Models.
+While our current focus is on decoding for LLMs,
+future work should extend to examining decoding
+methods in large multimodal models (OpenAI,
+2024; Chen et al., 2023). Investigating the
+effectiveness of these methods in text-to-image,
+multimodal question answering (Wang et al.,
+2024), math reasoing (Lu et al., 2023) and code
+generation (Shi et al., 2024b) necessitates the
+attention of future work.
+P ROMPT FOR GSM8K
+Question: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there
+will be 21 trees. How many trees did the grove workers plant today?
+Answer: There are 15 trees originally. Then there were 21 trees after some more were planted. So there must have been
+21 - 15 = 6. The answer is 6.
+
+Question: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?
+Answer: There are originally 3 cars. 2 more cars arrive. 3 + 2 = 5. The answer is 5.
+
+Question: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total?
+Answer: Originally, Leah had 32 chocolates. Her sister had 42. So in total they had 32 + 42 = 74. After eating 35, they
+had 74 - 35 = 39. The answer is 39.
+
+Question: Question: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many
+lollipops did Jason give to Denny?
+Answer: Jason started with 20 lollipops. Then he had 12 after giving some to Denny. So he gave Denny 20 - 12 = 8. The
+answer is 8.
+
+Question: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does he have
+now?
+Answer: Shawn started with 5 toys. If he got 2 toys each from his mom and dad, then that is 4 more toys. 5 + 4 = 9. The
+answer is 9.
+
+Question: There were nine computers in the server room. Five more computers were installed each day, from monday to
+thursday. How many computers are now in the server room?
+Answer: There were originally 9 computers. For each of 4 days, 5 more computers were added. So 5 * 4 = 20 computers
+were added. 9 + 20 is 29. The answer is 29.
+
+Question: Michael had 58 golf balls. On tuesday, he lost 23 golf balls. On wednesday, he lost 2 more. How many golf
+balls did he have at the end of wednesday?
+Answer: Michael started with 58 golf balls. After losing 23 on tuesday, he had 58 - 23 = 35. After losing 2 more, he had
+35 - 2 = 33 golf balls. The answer is 33.
+
+Question: Olivia has $23. She bought five bagels for $3 each. How much money does she have left?
+Answer: Olivia had 23 dollars. 5 bagels for 3 dollars each will be 5 x 3 = 15 dollars. So she has 23 - 15 dollars left. 23 -
+15 is 8. The answer is 8.
+
+Question: [QUESTION]
+Answer:
+
+                             Table 10: 8-shot prompt for GSM8K (unaligned model).
+
+
+
+
+P ROMPT FOR GSM8K
+Please answer the math questions below.
+[QUESTION]
+You need to first take step-by-step reasoning and then give the final result.
+
+                               Table 11: 0-shot prompt for GSM8K (aligned model).
+P ROMPT FOR X SUM
+Article: The Bath-born player, 28, has made 36 appearances for the Dragons since joining from Wasps in 2015. He is in
+his second season and signed a contract extension in December 2016. Dragons forwards coach Ceri Jones said: "It’s a big
+blow. Eddie has been excellent all year for us, he has really stepped up to the mark and will be a big loss." However, Jones
+says Jackson’s misfortune can be a chance for others to thrive. "We are very fortunate to have the likes of Ollie Griffiths,
+Harrison Keddie, James Thomas who can come into the back-row," said Jackson. "Harri has shown glimpses of what he
+can do all season and there’s definitely a player there, so this is an opportunity." Dragons travel to Munster in the Pro12 on
+Friday.
+Summarize the above article in 1 sentence.
+Newport Gwent Dragons number eight Ed Jackson has undergone shoulder surgery and faces a spell on the sidelines.
+Article: [ARTICLE]
+SSummarize the above article in 1 sentence.
+
+                              Table 12: 1-shot prompt for XSUM (unaligned model).
+
+
+
+
+P ROMPT FOR X SUM
+Article: [ARTICLE]
+
+Summarize the above article in 1 sentence.
+
+                                Table 13: 0-shot prompt for XSUM (aligned model).
+
+
+
+
+P ROMPT FOR CNNDAILYMAIL
+Article: PARIS, France (CNN) – Interpol on Monday took the unprecendented step of making a global appeal for help
+to identify a man from digitally reconstructed photos taken from the Internet that it said showed him sexually abusing
+underage boys. This moving image shows how police used software to unscramble the image. (Source: Interpol) The
+man’s face was disguised by digital alteration, but the images were capable of being restored, according to a bulletin
+from Interpol – the international police agency based in Lyon, France. Interpol Secretary General Ronald K. Noble said
+the pictures have been on the the Internet for several years, but investigators have been unable to determine the man’s
+identity or nationality. "We have tried all other means to identify and to bring him to justice, but we are now convinced
+that without the public’s help this sexual predator could continue to rape and sexually abuse young children whose ages
+appear to range from six to early teens," Noble said. He said there is "very good reason to believe that he travels the world
+in order to sexually abuse and exploit vulnerable children." Interpol has determined the photos were taken in Vietnam and
+Cambodia. "The decision to make public this man’s picture was not one which was taken lightly," said Kristin Kvigne,
+assistant director of Interpol’s Trafficking in Human Beings Unit. The suspect’s photo and more information can be seen
+online at Interpol’s Web site. E-mail to a friend .
+Summarize the above article in 3 sentences.
+Man posted photos on the Internet of himself sexually abusing underage boys . Computer experts managed to undo digital
+masking to reveal the man . Man abused 12 boys in Vietnam and Cambodia .
+
+Article: [ARTICLE]
+Summarize the above article in 3 sentences.
+
+                         Table 14: 1-shot prompt for CNN/Dailymail (unaligned model).
+
+
+
+
+P ROMPT FOR CNNDAILYMAIL
+Article: [ARTICLE]
+
+Summarize the above article in 3 sentences.
+
+                           Table 15: 0-shot prompt for CNN/Dailymail (aligned model).
+P ROMPT FOR WMT D E⇒E N
+Translate the following sentence from German to English.
+[GERMAN] Frau Schroedter, ich bin gerne bereit, die damit zusammenhängenden Fakten zu prüfen, wenn mir Ihr Brief
+vorliegt.
+[ENGLISH] Yes, Mrs Schroedter, I shall be pleased to look into the facts of this case when I have received your letter.
+
+Translate the following sentence from German to English.
+[GERMAN] Das ist der Fall von Alexander Nikitin.
+[ENGLISH] It is the case of Alexander Nikitin.
+
+Translate the following sentence from German to English.
+[GERMAN] Meine Frage betrifft eine Angelegenheit, die am Donnerstag zur Sprache kommen wird und auf die ich dann
+erneut verweisen werde.
+[ENGLISH] My question relates to something that will come up on Thursday and which I will then raise again.
+
+Translate the following sentence from German to English.
+[GERMAN] [GERMAN_TEXT]
+[ENGLISH]
+
+                        Table 16: 3-shot prompt for WMT De⇒En (unaligned model).
+
+
+
+
+P ROMPT FOR WMT E N⇒D E
+Translate the following sentence from English to German.
+[ENGLISH] Yes, Mrs Schroedter, I shall be pleased to look into the facts of this case when I have received your letter.
+[GERMAN] Frau Schroedter, ich bin gerne bereit, die damit zusammenhängenden Fakten zu prüfen, wenn mir Ihr Brief
+vorliegt.
+
+Translate the following sentence from English to German.
+[ENGLISH] It is the case of Alexander Nikitin.
+[GERMAN] Das ist der Fall von Alexander Nikitin.
+
+Translate the following sentence from English to German.
+[GERMAN] Meine Frage betrifft eine Angelegenheit, die am Donnerstag zur Sprache kommen wird und auf die ich dann
+erneut verweisen werde.
+[ENGLISH] My question relates to something that will come up on Thursday and which I will then raise again.
+
+Translate the following sentence from English to German.
+[ENGLISH] [ENGLISH_TEXT]
+[GERMAN]
+
+                        Table 17: 3-shot prompt for WMT En⇒De (unaligned model).
+P ROMPT FOR WMT Z H⇒E N
+Translate the following sentence from Chinses to English.
+[CHINESE] 柏林 — — 2008年爆发的全球金融和经济危机是自大萧条以来最严峻的一次经济压力测试，也是自
+二战以来社会和政治制度所面临的最严重挑战。
+[ENGLISH] BERLIN – The global financial and economic crisis that began in 2008 was the greatest economic stress-test
+since the Great Depression, and the greatest challenge to social and political systems since World War II.
+
+Translate the following sentence from Chinses to English.
+[CHINESE] 欧洲在避免债务和捍卫欧元的名义下正变得谨慎，而美国已经在许多方面行动起来，以利用这一
+理想的时机来实行急需的结构性改革。
+[ENGLISH] Europe is being cautious in the name of avoiding debt and defending the euro, whereas the US has moved on
+many fronts in order not to waste an ideal opportunity to implement badly needed structural reforms.
+
+Translate the following sentence from Chinses to English.
+[CHINESE] 百年愚顽
+[ENGLISH] One Hundred Years of Ineptitude
+
+Translate the following sentence from Chinses to English.
+[CHINESE] [CHINESE_TEXT]
+[ENGLISH]
+
+                        Table 18: 3-shot prompt for WMT Zh⇒En (unaligned model).
+
+
+
+
+P ROMPT FOR WMT E N⇒Z H
+Translate the following sentence from English to Chinese.
+[ENGLISH] BERLIN – The global financial and economic crisis that began in 2008 was the greatest economic stress-test
+since the Great Depression, and the greatest challenge to social and political systems since World War II.
+[CHINESE] 柏林 — — 2008年爆发的全球金融和经济危机是自大萧条以来最严峻的一次经济压力测试，也是自
+二战以来社会和政治制度所面临的最严重挑战。
+
+Translate the following sentence from English to Chinese.
+[ENGLISH] Europe is being cautious in the name of avoiding debt and defending the euro, whereas the US has moved on
+many fronts in order not to waste an ideal opportunity to implement badly needed structural reforms.
+[CHINESE] 欧洲在避免债务和捍卫欧元的名义下正变得谨慎，而美国已经在许多方面行动起来，以利用这一
+理想的时机来实行急需的结构性改革。
+
+Translate the following sentence from English to Chinese.
+[ENGLISH] One Hundred Years of Ineptitude
+[CHINESE] 百年愚顽
+
+Translate the following sentence from English to Chinese.
+[ENGLISH] [ENGLISH_TEXT]
+[CHINESE]
+
+                        Table 19: 3-shot prompt for WMT En⇒Zh (unaligned model).
+P ROMPT FOR C OMMONSENSE QA
+Question: What do people use to absorb extra ink from a fountain pen? Answer Choices: (a) shirt pocket (b) calligrapher’s
+hand (c) inkwell (d) desk drawer (e) blotter
+Answer: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So
+the answer is (e).
+
+Question: What home entertainment equipment requires cable?
+Answer Choices: (a) radio shack (b) substation (c) television (d) cabinet
+Answer: The answer must require cable. Of the above choices, only television requires cable. So the answer is (c).
+
+Question: The fox walked from the city into the forest, what was it looking for? Answer Choices: (a) pretty flowers (b)
+hen house (c) natural habitat (d) storybook
+Answer: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the
+answer is (b).
+
+Question: Sammy wanted to go to where the people were. Where might he go? Answer Choices: (a) populated areas (b)
+race track (c) desert (d) apartment (e) roadblock
+Answer: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people.
+So the answer is (a).
+
+Question: Where do you put your grapes just before checking out? Answer Choices: (a) mouth (b) grocery cart (c)super
+market (d) fruit basket (e) fruit market
+Answer: The answer should be the place where grocery items are placed before checking out. Of the above choices,
+grocery cart makes the most sense for holding grocery items. So the answer is (b).
+
+Question: Google Maps and other highway and street GPS services have replaced what? Answer Choices: (a) united
+states (b) mexico (c) countryside (d) atlas
+Answer: The answer must be something that used to do what Google Maps and GPS services do, which is to give
+directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Question: [QUESTION]
+Answer:
+
+                       Table 20: 6-shot prompt for CommonsenseQA (unaligned model).
+
+
+
+
+P ROMPT FOR C OMMONSENSE QA
+Which choice is the correct answer to the question?
+Question: [QUESTION]
+Answer: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So
+the answer is (e).
+Let’s think step by step.
+
+                        Table 21: 0-shot prompt for CommonsenseQA (aligned model).
+P ROMPT FOR S TRATEGY QA
+Question: Do hamsters provide food for any animals?
+Answer: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the
+answer is yes.
+
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Answer: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the
+University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is
+yes.
+
+Question: Yes or no: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Answer: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number
+squared is less than 5. So the answer is no.
+
+Question: Yes or no: Is it common to see frost during some college commencements?
+Answer: College commencement ceremonies can happen in December, May, and June. December is in the winter, so
+there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+
+Question: [QUESTION]
+Answer:
+
+                          Table 22: 4-shot prompt for StrategyQA (unaligned model).
+
+
+
+
+P ROMPT FOR C OMMONSENSE QA
+Which choice is the correct answer to the question?
+Question: [QUESTION]
+Answer: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So
+the answer is (e).
+Let’s think step by step.
+
+                           Table 23: 0-shot prompt for StrategyQA (aligned model).
+
+
+
+
+P ROMPT FOR B OOK , W IKI N EWS AND W IKI T EXT
+[BEGIN_OF_TEXT]
+
+                Table 24: 0-shot prompt for Book, Wikinews and Wikitext (unaligned model).
+
+
+
+
+P ROMPT FOR B OOK , W IKI N EWS AND W IKI T EXT
+Please help me complete the text continuation based on the following content.
+[BEGIN_OF_TEXT]
+
+                 Table 25: 0-shot prompt for Book, Wikinews and Wikitext (aligned model).
+                                                                Deterministic Methods                                  Stochastic Methods
+                     Model          Dataset
+                                                   Greedy     BS     DBS      CS    FSD       FSD-d    Temp    Top-p     Top-k     η      Miro   Typical
+                                    MBPP            35.40   34.20 35.00 36.00 37.00           39.60    35.00   32.80     25.40 23.60 21.20        31.80
+            CodeLlama-7b           GSM8K            11.98   13.12 12.21 12.89 13.50           13.80    12.59   12.66      8.64    7.43    6.90     8.87
+                                   Wikinews         10.49    9.81    8.85    87.99 97.19      94.35    90.89   94.63     96.69 97.59 96.34        94.06
+                                    MBPP            36.80   40.80 41.60 37.00 37.20           36.60    39.00   37.60     35.60 35.40 34.40        38.20
+ CodeLlama-7b-Instruct             GSM8K            22.14   27.75 28.35 23.28 22.67           21.91    23.96   22.14     18.04 19.26 18.27        21.99
+                                   Wikinews         90.11   96.75 85.83 90.39 92.87           92.21    87.69   89.26     90.39 90.31 94.32        84.99
+                                    MBPP            33.00   34.40 33.20 28.40 33.00           33.60    33.80   27.40     19.80 25.80 18.40        27.00
+                    Qwen-7B        GSM8K            53.22   57.32 56.56 50.04 53.53           54.59    53.90   47.46     38.67 49.05 36.24        51.86
+                                   Wikinews         50.58   61.66 51.59 94.50 94.22           95.24    94.50   94.94     95.51 96.08 93.94        94.69
+                                    MBPP            30.40   30.80 33.60 25.80 30.80           29.80    30.00   28.80     26.80 24.20 25.00        27.20
+            Qwen-7B-Chat           GSM8K            48.29   51.48 51.18 43.82 47.46           48.37    48.52   45.34     41.02 43.37 41.85        43.67
+                                   Wikinews         73.43   89.12 90.75 91.87 89.40           88.07    89.85   88.11     85.43 84.37 81.37        80.04
+                                    MBPP            18.20   22.80 21.00 21.20 21.40           21.80    19.00   14.80     11.20    8.40    6.60    11.40
+                    MPT-7b         GSM8K             8.64    9.63    9.70    10.24   8.95     10.24     9.55    6.75      6.37    5.91    5.08     5.76
+                                   Wikinews         22.44    6.08    7.30    87.85 97.96      97.58    96.89   96.19     98.56 96.95 97.83        97.80
+                                    MBPP            20.80   25.40 23.80 23.20 23.20           22.20    23.40   18.60     15.80 14.20 14.20        16.60
+         MPT-7b-Instruct           GSM8K             4.93    2.88    4.09     2.88   6.75      5.91     6.75    4.85      5.46    2.65    4.09     2.58
+                                   Wikinews         92.76   94.88 87.21 97.10 93.19           96.11    95.53   96.04     97.02 50.22 96.53        53.60
+                                    MBPP            36.40   41.80 41.60 39.60 39.20           38.60    37.40   32.60     28.00 24.20 21.80        28.40 1
+                   Mistral-7B      GSM8K            43.90   46.70 45.79 43.44 45.26           45.94    43.75   38.81     38.58 28.20 23.58        35.19
+                                   Wikinews         46.74   45.81 35.44 93.88 92.58           89.67    88.60   94.70     91.64 92.78 94.03        93.34
+                                    MBPP            29.00   28.20 27.20 27.40 27.60           27.40    28.80   28.40     27.40 26.60 25.80        26.40
+   Mistral-7B-Instruct             GSM8K            43.75   49.05 46.93 42.61 43.52           43.67    44.05   43.82     43.59 43.29 43.52        44.43
+                                   Wikinews         79.89   82.40 83.97 76.86 85.96           83.47    88.36   89.45     83.78 84.85 82.54        90.61
+                                    MBPP            35.20   36.20 35.80 34.20 36.60           36.80    28.20   26.60     19.00 18.80 21.20        28.20
+ deepseek-moe-16b-base             GSM8K            18.95   18.20 18.42 19.94 18.42           18.27     16.3   12.13     12.89 12.66 11.98        10.77
+                                   Wikinews         41.16   42.80 40.66 94.79 95.42           96.74    96.30   97.42     98.01 96.83 96.16        95.69
+                                    MBPP            41.00   41.80 41.20 39.20 39.40           38.20    36.20   36.40     31.20 33.20 31.00        32.20
+ deepseek-moe-16b-chat             GSM8K            50.11   50.64 48.90 50.95 46.25           47.61    39.50   45.41     36.77 31.69 27.14        36.09
+                                   Wikinews         75.44   80.34 87.94 92.38 83.90           91.74    90.07   89.35     92.41 91.04 91.68        90.44
+                                    MBPP            43.20   49.80 52.60 45.60 48.20           49.00    43.20   26.00     26.80 45.60 28.20        43.60
+                   Llama-3-8B      GSM8K            48.45   51.18 46.55 48.60 51.25           52.46    46.47   23.65     25.09 44.96 26.16        46.78
+                                   Wikinews         46.49   45.65 32.65 87.47 93.76           96.41    95.81   96.46     96.85 90.74 96.67        83.47
+                                    MBPP            49.60   50.00 49.00 46.80 48.60           49.20    49.00   48.40     45.80 48.20 45.60        48.80
+  Llama-3-8B-Instruct              GSM8K            69.60   71.04 69.83 68.39 70.43           68.61    68.76   65.05     65.81 68.84 64.52        69.67
+                                   Wikinews         54.13   51.81 75.72 81.81 79.41           75.28    68.23   71.36     37.08 72.35 50.53        76.55
+                                    MBPP            22.60   24.60 25.80 21.60 22.60           22.40    23.40   21.20     17.80 21.60 19.20        22.40
+            vicuna-7b-v1.5         GSM8K            18.04   25.47 21.68 20.17 19.03           19.18    19.71   18.95     16.15 20.02 15.77        19.71
+                                   Wikinews         84.63   94.43 90.19 90.70 91.37           80.70    89.47   87.65     85.33 85.02 89.58        89.22
+
+Table 26: Results for different foundation models on MBPP, GSM8K, Wikinews datasets. The corresponding
+hyperparameters for each decoding method are listed in Table 30.
+
+
+
+                                                       Deterministic Methods                                           Stochastic Methods
+ Model                  Dataset
+                                   Greedy     BS     DBS CS FSD FSD-d              CD        DoLa     Temp     Top-p    Top-k        η    Miro   Typical
+                      HumanEval      -         8     8_2    0.4   0.2     0.4      0.3      [16,32)    0.4       0.8       20     0.0006  5.0     0.95
+                         MBPP        -         4     8_2    0.3   0.2     0.4      0.3      [16,32)    0.3       0.8        5     0.002   4.0      0.9
+                       GSM8K         -         8     4_2    0.4   0.3     0.4      0.3      [0, 16)    0.2       0.8        5     0.004   5.0      0.9
+                        XSUM         -         4     4_4    0.1   0.1     0.2      0.1      [0, 16)    0.2       0.8        5     0.004   2.5     0.92
+                       CNN/DM        -         4     4_4    0.3   0.2     0.3      0.1      [0, 16)    0.4       0.8        5     0.002   2.5      0.9
+                        De⇒En        -         8     4_2    0.1   0.1     0.3      0.1      [0, 16)    0.1       0.8        5     0.004   2.5      0.9
+
+
+
+  Llama2-7B
+                        En⇒De        -         4     4_2    0.1   0.1     0.3      0.1      [0, 16)    0.1       0.8        5     0.004   2.5      0.9
+                        Zh⇒En        -         4     4_2    0.2   0.1     0.5      0.1      [0, 16)    0.1       0.8        5     0.004   2.5      0.9
+                        En⇒Zh        -         4     4_4    0.2   0.2     0.1      0.1      [16,32)    0.1       0.8        5     0.004   2.5      0.9
+                         CQA         -         4     8_4    0.4   0.2     0.2      0.1      [16,32)    0.2      0.85        5     0.004   3.0      0.9
+                         SQA         -         4     8_2    0.5   0.3     0.3      0.7      [0, 16)    0.3      0.85        5     0.0006  5.0     0.92
+                       Wikinews      -         4     8_2    0.6   0.5     0.6      0.9      [16,32)    0.8      0.85       10     0.0003  2.5     0.92
+                       Wikitext      -         4     4_2    0.6   0.4     0.6      0.9      [0, 16)    0.9       0.8       20     0.002   5.0     0.95
+                         Book        -         4     4_2    0.6   0.4     0.5      0.9      [0, 16)    0.8      0.95       50     0.0006  3.0      0.2
+                      HumanEval      -         8     8_4    0.5   0.4     0.5      0.9      [0, 16)    0.1       0.9        5     0.0003  3.0      0.9
+                         MBPP        -         8     8_2    0.3   0.2     0.2      0.1      [0, 16)    0.3       0.8        5     0.002   4.0     0.95
+                       GSM8K         -         8     4_2    0.3   0.4     0.1      0.7      [0, 16)    0.5       0.8       10     0.0009  5.0     0.95
+
+
+
+
+  Llama2-7B-Chat
+                        XSUM         -         8     8_2    0.3   0.4     0.4      0.1      [0, 16)    0.5      0.85       10     0.0009  5.0      0.2
+                       CNN/DM        -         8     8_2    0.1   0.1     0.1      0.3      [0, 16)    0.5      0.85        5     0.004   2.5     0.92
+                         CQA         -         4     8_2    0.2   0.5     0.4      0.5      [16,32)    0.5      0.85       50     0.002   4.0     0.92
+                         SQA         -         4     8_2    0.1   0.4     0.5      0.1      [0, 16)    0.1      0.85      100     0.0009  4.0     0.95
+                       Wikinews      -         4     8_2    0.4   0.5     0.3      0.9      [16,32)    0.5       0.8        5     0.002   5.0     0.95
+                       Wikitext      -         4     8_2    0.6   0.6     0.2      0.7      [16,32)    0.1      0.85       20     0.0009  4.0     0.95
+                         Book        -         8     4_2    0.4   0.4     0.5      0.7      [16,32)    0.8      0.85       10     0.002   3.0     0.95
+                      FActScore      -         8     4_2    0.1   0.2     0.4      0.9      [16,32)    0.5       0.8        5     0.0006  5.0     0.95
+                      AlpacaEval     -         8     4_2    0.1   0.2     0.4      0.9         1       0.5       0.8        5     0.0006  5.0     0.95
+
+                                               Table 27: Optimal hyperparameter settings in Table 1.
+                                       Deterministic Methods                                              Stochastic Methods
+ Model       Dataset
+                       Greedy   BS   DBS CS FSD FSD-d            CD       DoLa         Temp      Top-p      Top-k       η    Miro    Typical
+            MBPP         -       4   8_2    0.3   0.2     0.4    0.3     [16,32)        0.3        0.8         5      0.002  4.0       0.9
+  7B       GSM8K         -       8   4_2    0.4   0.3     0.4    0.3      [0,16)        0.2        0.8         5      0.004  5.0       0.9
+           Wikinews      -       4   8_2    0.6   0.5     0.6    0.9     [16,32)        0.8       0.85        10     0.0003  2.5      0.92
+            MBPP         -       4   8_2    0.2   0.3     0.4    0.3      [0,20)        0.3       0.85         5      0.002  2.5       0.2
+  13B      GSM8K         -       4   8_2    0.2   0.3     0.4    0.3      [0,20)        0.1        0.8         5      0.002  2.5       0.2
+           Wikinews      -       4   4_2    0.5   0.4     0.3    0.9      [0,20)        0.7       0.95        50      0.004  5.0       0.9
+            MBPP         -       8   4_4    0.6   0.1     0.4    0.3      [0,20)        0.1        0.8         5     0.0003  5.0       0.2
+  70B      GSM8K         -       4   4_2    0.2   0.2     0.5    0.9      [0,20)        0.4        0.8         5     0.0006  5.0       0.2
+           Wikinews      -       4   8_2    0.6   0.1     0.6    0.9     [60,80)        0.9       0.85        50      0.002  3.0       0.2
+            MBPP         -       4   8_2    0.3   0.2     0.4    0.3     [16,32)        0.3        0.8         5      0.002  4.0       0.9
+7B-chat    GSM8K         -       8   4_2    0.3   0.4     0.1    0.7      [0,16)        0.5        0.8        10     0.0009  5.0      0.95
+           Wikinews      -       4   8_2    0.4   0.5     0.3    0.9     [16,32)        0.5        0.8         5      0.002  5.0      0.95
+            MBPP         -       8   8_2    0.3   0.3     0.4    0.9     [20,40)        0.3       0.95         5     0.0003  4.0       0.2
+13B-chat   GSM8K         -       8   8_2    0.4   0.2     0.5    0.7     [20,40)        0.4        0.9        50      0.004  5.0      0.92
+           Wikinews      -       8   4_4    0.5   0.4     0.6    0.7     [20,40)        0.5        0.8        50     0.0006  3.0       0.9
+            MBPP         -       8   8_2    0.6   0.2     0.1    0.9     [60,80)        0.6        0.9         5     0.0006  2.5       0.2
+70B-chat   GSM8K         -       4   8_2    0.4   0.2     0.4    0.1     [60,80)        0.3        0.8        20      0.004  2.5       0.9
+           Wikinews      -       4   4_2    0.4   0.6     0.2    0.9      [0,20)        0.6     [60,80)        5      0.002  2.5      0.95
+
+                                 Table 28: Optimal hyperparameter settings in Table 4.
+
+
+
+
+                                            Deterministic Methods                                          Stochastic Methods
+   Model          Dataset
+                            Greedy   BS   DBS CS FSD FSD-d             CD     DoLa       Temp     Top-p     Top-k        η    Miro   Typical
+                  MBPP        -       4   4_4    0.1   0.2     0.4     0.3    [0,20)      0.3       0.8        10     0.004   4.0     0.92
+  13B-INT4       GSM8K        -       4   4_2    0.3   0.3     0.3     0.3    [0,20)      0.4       0.8         5     0.0003  2.5      0.2
+                 Wikinews     -       4   4_2    0.3   0.5     0.5     0.9    [0,20)      0.9       0.8       100     0.0006  3.0     0.95
+                  MBPP        -       4   8_4    0.5   0.3     0.4     0.3    [0,20)      0.4       0.8         5     0.0006  4.0     0.92
+  13B-INT8       GSM8K        -       4   4_2    0.6   0.2     0.5     0.3    [0,20)      0.1       0.8         5     0.004   3.0      0.9
+                 Wikinews     -       4   4_2    0.5   0.2     0.6     0.9    [0,20)      0.9      0.85        10     0.0009  3.0     0.95
+                  MBPP        -       8   8_4    0.1   0.3     0.2     0.1   [20,40)      0.1       0.9         5     0.0009  2.5      0.2
+13B-Chat-INT4    GSM8K        -       8   8_2    0.1   0.3     0.5     0.1   [20,40)      0.5      0.85        10      0.004  3.0     0.92
+                 Wikinews     -       8   4_2    0.2   0.6     0.6     0.9   [20,40)      0.7      0.95         5     0.0006  2.5      0.2
+                  MBPP        -       4   8_2    0.4   0.2     0.5     0.3   [20,40)      0.9       0.9         5     0.0009  3.0     0.92
+13B-Chat-INT8    GSM8K        -       4   8_2    0.3   0.3     0.3     0.3   [20,40)      0.5       0.8       100     0.0009  3.0     0.95
+                 Wikinews     -       8   4_4    0.5   0.1     0.4     0.7   [20,40)      0.8      0.95         5     0.002   3.0      0.2
+
+
+                                 Table 29: Optimal hyperparameter settings in Table 5.
+                                                            Deterministic Methods                                         Stochastic Methods
+           Model                Dataset
+                                                 Greedy     BS DBS CS FSD                FSD-d         Temp       Top-p    Top-k        η    Miro       Typical
+                                 MBPP              -         4   4_4     0.3   0.1        0.3           0.6         0.8        5      0.004  4.0          0.2
+     CodeLlama-7b               GSM8K              -         4   8_2     0.3   0.2        0.5           0.2         0.8        5      0.004  5.0         0.95
+                                Wikinews           -         8   4_2     0.6   0.6        0.6           0.9         0.9       50      0.004  2.5          0.2
+                                 MBPP              -         4   8_4     0.5   0.3        0.2           0.3         0.8        5      0.002  2.5          0.9
+  CodeLlama-7b-Instruct         GSM8K              -         4   8_2     0.3   0.1        0.4           0.2         0.8        5     0.0003  5.0          0.2
+                                Wikinews           -         4   8_2     0.3   0.2        0.3           0.8          1       10      0.0003  2.5         0.95
+                                 MBPP              -         4   4_2     0.3   0.1        0.1           0.1        0.85        5     0.0009  2.5          0.2
+        Qwen-7B                 GSM8K              -         4   8_2     0.5   0.1        0.5           0.1         0.8        5      0.002  2.5          0.2
+                                Wikinews           -         4   8_4     0.1   0.3        0.3           0.4         0.8       50     0.0009  2.5         0.92
+                                 MBPP              -         4   8_4     0.4   0.1        0.1           0.2        0.85       50      0.004  3.0          0.2
+     Qwen-7B-Chat               GSM8K              -         8   8_4     0.1   0.3        0.2           0.2        0.85       10     0.0009  3.0          0.2
+                                Wikinews           -         4   4_4     0.3   0.3        0.1           0.3        0.95       10     0.0006  3.0         0.92
+                                 MBPP              -         8   8_2     0.5   0.1        0.3           0.1        0.85        5      0.004  3.0         0.92
+        MPT-7b                  GSM8K              -         4   4_2     0.5   0.3        0.5           0.2         0.9        5      0.004  5.0          0.9
+                                Wikinews           -         4   8_2     0.6   0.4        0.5           0.8         0.8       50     0.0006  5.0         0.95
+                                 MBPP              -         8   8_2     0.4   0.3        0.4           0.2         0.8        5     0.0009  4.0         0.95
+     MPT-7b-Instruct            GSM8K              -         4   4_4     0.2   0.3        0.4           0.5         0.9       10     0.0006  2.5          0.2
+                                Wikinews           -         4   8_4     0.3   0.3        0.5           0.1        0.85       50      0.002  4.0          0.2
+                                 MBPP              -         4   4_4     0.1   0.1        0.4           0.9        0.95       20      0.004  2.5         0.95
+       Mistral-7B               GSM8K              -         8   8_2     0.1   0.6        0.2           0.4        0.85       20      0.002  2.5          0.2
+                                Wikinews           -         4   4_2     0.5   0.5        0.4           0.8         0.9       20     0.0009  5.0         0.95
+                                 MBPP              -         4   8_4     0.4   0.5        0.2           0.4        0.85      100      0.004  2.5         0.95
+   Mistral-7B-Instruct          GSM8K              -         4   8_2     0.3   0.1        0.6           0.5         0.8       10     0.0009  2.5          0.2
+                                Wikinews           -         4   8_4     0.5   0.2        0.1           0.7        0.95        5     0.0003  3.0          0.9
+                                 MBPP              -         4   4_2     0.4   0.3        0.1           0.3         0.9       50     0.0003  5.0          0.9
+ deepseek-moe-16b-base          GSM8K              -         4   4_2     0.5   0.3        0.2           0.4          1       10      0.004   3.0         0.95
+                                Wikinews           -         4   4_2     0.4   0.2        0.5           0.7         0.9       10     0.0003   3           0.9
+                                 MBPP              -         4   8_2     0.1   0.4        0.2           0.6         0.8        5      0.002  4.0         0.92
+ deepseek-moe-16b-chat          GSM8K              -         4   8_2     0.2   0.3        0.1           0.4         0.8        5      0.004  5.0          0.9
+                                Wikinews           -         8   4_4     0.6   0.4        0.5           0.9        0.85       50     0.0006   5          0.95
+                                 MBPP              -         4   8_2     0.3   0.2        0.3           0.9          1       20      0.002   3.0          0.2
+       Llama-3-8B               GSM8K              -         4   8_2     0.2   0.1        0.5           0.4          1       50      0.0009  4.0         0.92
+                                Wikinews           -         8   8_2     0.3   0.3        0.5           0.8         0.8      100     0.0003   3           0.2
+                                 MBPP              -         8   4_4     0.6   0.6        0.3           0.2         0.8       20     0.0006  2.5          0.2
+   Llama-3-8B-Instruct          GSM8K              -         8   4_2     0.1   0.4        0.3           0.1          1        5      0.002   3.0         0.95
+                                Wikinews           -         8   4_4     0.3   0.1        0.6           0.2         0.8      100     0.0006   5          0.95
+                                 MBPP              -         8   8_2     0.1   0.4        0.4           0.3        0.85        5     0.0006  5.0          0.9
+     vicuna-7b-v1.5             GSM8K              -         8   8_2     0.2   0.1        0.1           0.4         0.8        5     0.0009  2.5          0.2
+                                Wikinews           -         8   4_4     0.6   0.6        0.2           0.5         0.9       10     0.0009  3.0         0.95
+
+                                          Table 30: Optimal hyperparameter settings in Table 26.
+
+
+
+                                                            Deterministic Methods                                             Stochastic Methods
+     Model          Setting
+                                 Greedy      BS         DBS      CS      FSD    FSD-d     CD      DoLa      Temp      Top-p     Top-k      η     Miro   Typical
+                    Scorebest     78.47     80.97       79.26 94.49 96.71       97.52    92.90    89.94     95.36     80.61     74.70 71.44 67.68        75.68
+                    Scoreλ        78.47     80.68       76.53 91.85 94.32       94.76    83.48    86.34     83.77     79.65     71.80 69.61 64.93        74.15
+   Llama2-7B
+                    Param.          -         4          4_2     0.4       0.2    0.4     0.3       0         0.6       0.8       0.5    0.004    2.5     0.9
+                    Drop          0.00      0.29         2.74    2.64     2.39    2.76    9.42     3.60     11.59      0.96      2.89     1.83   2.76     1.53
+                    Scorebest     87.90     96.39       95.79 91.61 94.97       93.50    92.75    74.99     94.97     91.83     91.82 91.45 88.71        92.41
+                    Scoreλ        87.90     95.03       95.54 89.70 91.37       91.02    89.40    73.32     91.06     89.57     89.41 88.88 86.29        90.91
+ Llama2-7B-Chat
+                    Param.          -         8          8_2     0.2       0.3    0.3     0.7       0         0.4      0.85       0.5    0.002     4     0.95
+                    Drop          0.00      1.63         0.10    2.09     4.22    2.68    3.76     1.69      4.68      2.41      2.89    2.78    2.36    1.80
+
+Table 31: Hyperparameter Sensitivity. Scorebest and the best Scoreλ with their optimal hyperparameters on Llama2-
+7B and Llama2-7B-Chat.
+
+
+                                                           Deterministic Methods                                              Stochastic Methods
+     Model           Dataset
+                                  Greedy          BS     DBS    CS     FSD FSD-d         CD      DoLa      Temp      Top-p       Top-k    η    Miro     Typical
+    Llama2-7B       wikinews        1.8          2.9      1.5   94.0 98.9      90.5      43.7    51.7       79.9      83.2        80.8   92.3   91.9     90.9
+ Llama2-7B-Chat     wikinews       87.7          87.2    85.9 90.0 93.0        88.8      93.2    47.2       87.2      89.1        88.7   87.8   89.0     88.6
+
+                           Table 32: Results for diversity score for Llama2 7B family on wikinews.
+
+
+                                                     Deterministic Methods                                                  Stochastic Methods
+   Model       Dataset
+                              Greedy       BS      DBS    CS     FSD FSD-d            CD        DoLa      Temp      Top-p      Top-k    η    Miro       Typical
+ Llama2-7B     de2en           83.0       83.3     82.8 82.9 83.0        83.0         83.1      82.4       82.9      80.9       79.9   78.9   78.2       79.6
+ Llama2-7B     en2de           80.7       82.5     81.7 80.9 80.8        80.8         80.8      80.1       80.6      74.5       75.0   69.9   67.6       70.0
+ Llama2-7B     en2zh           79.6       81.6     80.6 80.1 80.4        80.4         79.8      79.7       79.5      73.2       73.5   68.0   64.8       69.6
+ Llama2-7B     zh2en           77.5       77.2     76.9 77.4 78.2        78.1         77.6      77.6       77.5      73.8       74.1   71.9   71.9       71.8
+
+                                   Table 33: Results for COMET score for Llama2 7B on WMT.
+GSM8K
+Instruction: Please answer the math questions below.
+Luke is buying fabric for new curtains. There are five windows. Each window is 35 inches wide and Luke needs to buy
+fabric equal to 2 times the total width of the windows. How much fabric should he buy?
+You need to first take step-by-step reasoning and then give the final result.
+Response: Sure, I’d be happy to help you with that! Here’s the step-by-step reasoning:
+1. The total width of the five windows is 5 x 35 = 175 inches.
+2. Luke needs to buy fabric equal to 2 times the total width of the windows, so he needs to buy fabric equal to 2 x 175 =
+350 inches.
+Therefore, Luke should buy 350 inches of fabric.
+I hope this helps! Let me know if you have any other questions.b-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-
+1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-
+1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-
+1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1
+
+XSUM
+Instruction: Article: The 32-year-old had been playing in the Isthmian Premier Division with Leatherhead following his
+release by Newport at the end of last season.
+Pidgeley has made 260 appearances in spells with nine clubs, including Chelsea, Watford and Millwall.
+Forest Green are currently second in the National League table, one point behind leaders Cheltenham Town.
+Pidgeley could make his Rovers debut when they host Aldershot on Friday.
+
+Summarize the above article in 1 sentence.
+Response: Former Newport player, James Pidgeley, who has played for 9 different clubs including Chelsea, Watford, and
+Millwall, has signed with Forest Green Rovers in the National League and could make his debut against Aldershot on
+Friday. (No need for a question)oundsMS)) ) ) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) ))
+)) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) ))
+)) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) ))
+)) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) ))
+)) )) )) )) )) )) )) )) )) )) )) )) )) )) )) )) ))
+
+W IKINEWS
+Instruction: Please help me complete the text continuation based on the following content.
+
+Snooker player Alex Higgins, nicknamed "Hurricane", was found dead in his apartment in Donegall Road, Belfast,
+Northern Ireland on Saturday. He was
+Response: Sure, here is a possible continuation of the text:
+Snooker player Alex Higgins, nicknamed "Hurricane", was found dead in his apartment in Donegall Road, Belfast,
+Northern Ireland on Saturday. He was 61 years old and had been struggling with health problems in recent years. The
+cause of death is currently unknown, but police are treating it as a suspicious circumstances. Higgins was one of the most
+iconic figures in snooker history, known for his flamboyant style and fierce competitiveness on the table. He won the
+World Snooker Championship four times and was inducted into the World Snooker Hall of Fame in 2004. His death has
+sent shockwaves through the snooker community, with many players and fans paying tribute to his legacy.b
+Please let me know if you would like me to make any changes or add anything else. to continue the text. To Complete the
+Text... To Complete the Text..
+I hope this helps! Let me know if you have any other questions or requests.. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS. MS.
+
+                                                     Table 34: Failed Examples of DoLa.
+

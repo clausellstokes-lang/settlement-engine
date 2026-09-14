@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 2384ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 121ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+Error: census REFROZEN at 22ff295a49866d264e8157280de0653cc1c92b43 by SEAM car 3a (Opus 5): files 2553 -> 2555, parked 375 -> 375, credited 2178 -> 2180, titles 23843 -> 23894, suiteTitles 6377 -> 6393. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT green is the proof.
+ ❯ refreezeCensusBaseline tests/lint/sovereigntyLightingContract.walker.test.js:755:9
+    753|     .map((key) => `${key} ${previous[key]} -> ${figures[key]}`)
+    754|     .join(', ');
+    755|   throw new Error(`census REFROZEN at ${next.measuredAtSha} by ${measu…
+       |         ^
+    756|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+    757|     + ' re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT …
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:3065:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 33 passed (34)
+   Start at  12:06:12
+   Duration  3.32s (transform 113ms, setup 25ms, import 812ms, tests 2.38s, environment 0ms)
+

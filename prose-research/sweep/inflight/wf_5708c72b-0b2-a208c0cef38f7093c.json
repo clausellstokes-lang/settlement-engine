@@ -1,0 +1,25 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 212,
+ "firstTs": "2026-09-12T09:19:01.016Z",
+ "lastTs": "2026-09-12T09:32:41.869Z",
+ "tools": {
+  "Bash": 57,
+  "Read": 2,
+  "Write": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-full-legal-chain-court-and-pri/skeleton.md"
+ ],
+ "lastAssistantText": "The packet is written and complete.",
+ "run": "wf_5708c72b-0b2",
+ "agent": "a208c0cef38f7093c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_5708c72b-0b2/agent-a208c0cef38f7093c.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

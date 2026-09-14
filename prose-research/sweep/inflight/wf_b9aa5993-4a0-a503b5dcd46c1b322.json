@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 130,
+ "firstTs": "2026-09-12T03:19:20.315Z",
+ "lastTs": "2026-09-12T03:25:29.518Z",
+ "tools": {
+  "Bash": 34,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": " it); and the backtick/`FACE_ROW_RE` row-form question, which is the projector lane's mechanical transform, not a re-wording.\n- A form check run over the replacement rows: no em dash, no exclamation, no digit in any sentence, no which-clause, no citation, no second angle tag.\n\nRefused targets: none.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a503b5dcd46c1b322",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a503b5dcd46c1b322.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

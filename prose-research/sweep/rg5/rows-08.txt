@@ -1,0 +1,499 @@
+### 729 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review reports that the cycle so far totals 1,742,848 words.
+TW: a mammoth novel that so far totals 1,742,848 words
+NOTE: NYT (Wayback raw): "it's just a 1,016-page installment in a mammoth novel that so far totals 1,742,848 words." The 'mammoth novel' is the cycle; figure exact.
+
+### 731 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review says the elements of fantasy exist in A Dance with Dragons but are deftly muted.
+TW: The elements of fantasy exist here but are deftly muted
+NOTE: NYT (Wayback raw): "The elements of fantasy exist here but are deftly muted, as Mr. Martin defies genre conventions." Verbatim.
+
+### 732 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review says Martin's medieval realms ring with echoes of our own time.
+TW: his medieval realms ring with echoes of our own time
+NOTE: NYT (Wayback raw): "All the while his medieval realms ring with echoes of our own time, of our modern terrorscapes that rage with liars, spies and true believers." Verbatim.
+
+### 733 [VERIFIED_VERBATIM] src=Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011
+CLAIM: Jennings's 2011 review calls Martin a literary dervish enthralled by complicated characters and vivid language.
+TW: Mr. Martin is a literary dervish, enthralled by complicated characters and vivid language
+NOTE: NYT (Wayback raw): full sentence continues "and bursting with the wild vision of the very best tale tellers." Verbatim.
+
+### 734 [VERIFIED_VERBATIM] src=Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012
+CLAIM: Jeff VanderMeer's Locus year-in-review credits A Dance with Dragons with bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North.
+TW: bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North
+NOTE: Locus (live, 200), byline 'by Jeff VanderMeer', headed 'A Dozen of the Best from 2011', dated February 5, 2012: "a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North." Author, title, date and quote all confirmed.
+
+### 735 [VERIFIED_VERBATIM] src=Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012
+CLAIM: VanderMeer's Locus year-in-review calls the stalled military campaign stuck in the dead of winter in A Dance with Dragons evocative and harrowing.
+TW: A stalled military campaign stuck in the dead of winter is also evocative and harrowing.
+NOTE: Live locusmag page fetched raw (HTTP 200, browser UA). Sentence appears word for word in the A Dance with Dragons entry; both limbs (evocative, harrowing) present.
+
+### 736 [VERIFIED_SUBSTANCE] src=Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012
+CLAIM: VanderMeer's Locus year-in-review says the Tyrion point-of-view scenes are perhaps the baggiest in A Dance with Dragons, straining at times for sardonic effect.
+TW: Scenes from the point of view of a certain famous dwarf
+NOTE: Quote is verbatim on the raw page ('are perhaps the baggiest in the novel, straining at times for sardonic effect'), but the page never writes 'Tyrion' - it says 'a certain famous dwarf'. Identification is unambiguous in context yet is the claim's wording, not VanderMeer's, so graded substance rather than verbatim.
+
+### 737 [VERIFIED_VERBATIM] src=Jeff VanderMeer, 'A Dozen of the Best from 2011', Locus, 5 February 2012
+CLAIM: VanderMeer's Locus year-in-review calls A Dance with Dragons a huge, dense novel.
+TW: a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces
+NOTE: Verbatim on the raw locusmag page in the A Dance with Dragons entry.
+
+### 738 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Adam Whitehead's 2014 review says the general prose style of The World of Ice and Fire is reasonable although prone to repetition.
+TW: The general prose style is reasonable, although prone to repetition.
+NOTE: Verbatim on the raw Wertzone page (HTTP 200, browser UA), in the paragraph following 'The book's conceit'.
+
+### 739 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review reports that in The World of Ice and Fire it is not uncommon to see a phrase used and then re-used just a few paragraphs later.
+TW: It is not uncommon to see a phrase used and then re-used just a few paragraphs later.
+NOTE: Verbatim on the raw page, the sentence immediately after the prose-style sentence of claim 738.
+
+### 740 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review says giving The World of Ice and Fire an in-universe origin — a young maester writing a brief primer for King Robert Baratheon — makes for a less dry reading experience than it might have been.
+TW: the attempt to give the text an in-universe origin (a young maester writing a brief primer on the world for the notoriously impatient King Robert Baratheon) makes for a less dry reading experience than it might have been
+NOTE: Verbatim on the raw page in the third paragraph; every limb (in-universe origin, young maester, brief primer, King Robert Baratheon, less dry) is on the page.
+
+### 741 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review says the narrator Yandel covers almost every claim in The World of Ice and Fire with lengthy caveats.
+TW: Yandel likes to cover almost every claim in the book with lengthy caveats.
+NOTE: Verbatim in the paragraph beginning 'The other problem'. Yandel's status as the book's in-world author/narrator is established earlier on the same page ('the young Maester Yandel ... has written the book').
+
+### 742 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review says the book sometimes describes an event as mythological or untrue in a way that, combined with the reader's knowledge of the novels, makes clear what conclusions the reader is being directed to.
+TW: by sometimes describing an event as mythological or untrue, but when combined with the reader's knowledge of the novels it becomes clearer what conclusions the reader is being directed to
+NOTE: Verbatim on the raw page at the end of the 'The other problem' paragraph. Claim's 'makes clear' renders the page's 'becomes clearer'; no substantive divergence.
+
+### 743 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review faults the disparity of information across regions in The World of Ice and Fire, saying the North gets short shrift while the longest region chapter goes to the ironborn.
+TW: The North gets short shrift, which is quite surprising, whilst the longest region chapter is given to the ironborn.
+NOTE: Verbatim on the raw page; the preceding sentence supplies the disparity-of-information limb ('There is also an issue with the disparity of information given on different regions').
+
+### 744 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review says the rarer excerpts from the second in-world historian, Maester Gyldayn, give some of the more evocative moments in The World of Ice and Fire.
+TW: excerpts from his work are rare ... he does give us some of the more evocative moments in the book
+NOTE: Verbatim on the raw page. The rarity limb and Gyldayn's status as the second, more authoritative in-world source are both stated. Note the page spells him 'Master Gyldayn' (apparent typo for Maester) at first mention.
+
+### 745 [VERIFIED_VERBATIM] src=Adam Whitehead, The Wertzone, 18 November 2014
+CLAIM: Whitehead's 2014 review describes The World of Ice and Fire's conceit as Maester Yandel writing a sort of Rough Guide to Westeros and Essos.
+TW: The book's conceit is that the young Maester Yandel ... has written the book a sort of Rough Guide to Westeros and Essos
+NOTE: Verbatim on the raw page (the page's own sentence has a dropped 'as' before 'a sort of').
+
+### 746 [VERIFIED_VERBATIM] src=Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015
+CLAIM: Mark Flowers's School Library Journal review of The World of Ice and Fire reports that he expected the book to be dry but was pleasantly surprised by the ease of its prose.
+TW: Going in, I was expecting something a little on the dry side-but I was pleasantly surprised by the ease of Martin, Garcia, and Antonsson's prose
+NOTE: Live blogs.slj.com returned HTTP 500 (WordPress critical error); verdict formed on the raw Wayback capture https://web.archive.org/web/20150205084238id_/http://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/ - raw archived HTML, not a summarizer. Quote verbatim in the blog preface, as the claim's page hint says.
+
+### 747 [VERIFIED_VERBATIM] src=Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015
+CLAIM: Flowers's SLJ review praises the authors' facility in conjuring epic conflicts and romances within the few sentences allotted to each entry of The World of Ice and Fire.
+TW: their facility in conjuring epic conflicts and romances in the few sentences allotted to them in various entries
+NOTE: Verbatim in the preface of the raw Wayback capture. Claim's 'each entry' renders the page's 'various entries'; the praised parties are Martin, Garcia and Antonsson.
+
+### 748 [VERIFIED_VERBATIM] src=Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015
+CLAIM: Flowers's SLJ review describes the first half of The World of Ice and Fire as a reign-by-reign account of the Targaryen dynasty.
+TW: the bulk of the book's first half is taken up by a reign-by-reign account of the Targaryen dynasty
+NOTE: Verbatim in the signed review body of the raw Wayback capture; page says 'the bulk of' the first half, which the claim compresses to 'the first half'.
+
+### 749 [VERIFIED_VERBATIM] src=Mark Flowers, School Library Journal (Adult Books 4 Teens), 8 January 2015
+CLAIM: Flowers's SLJ review says the half of The World of Ice and Fire that sketches each of the Seven Kingdoms and its ruling families has less narrative drive than the dynastic half.
+TW: The second half sketches each of the Seven Kingdoms, along with accounts of the ruling families. This half has less narrative drive
+NOTE: Verbatim in the signed review body. The comparand is implicit: the page writes an unmarked 'less narrative drive' immediately after describing the first half's reign-by-reign Targaryen account, so 'than the dynastic half' is the only available reading, not an explicit statement.
+
+### 752 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned), Fire & Blood, 19 November 2018
+CLAIM: The 2018 Publishers Weekly review says Martin's evocative storytelling style and gift for gripping narrative are mostly absent from Fire & Blood.
+TW: Martin's evocative storytelling style and gift for gripping narrative are mostly absent from this dry history
+NOTE: Live publishersweekly.com page, review dated 11/19/2018: opening sentence reads verbatim 'Martin's evocative storytelling style and gift for gripping narrative are mostly absent from this dry history of the blood-drenched Targaryens'. Quote and every limb (2018, PW, Fire & Blood) confirmed.
+
+### 755 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned), Fire & Blood, 19 November 2018
+CLAIM: The 2018 Publishers Weekly review says Martin gives equal weight to each member of the Targaryen family in Fire & Blood.
+TW: Martin gives equal weight to each member of the Targaryen family
+NOTE: Same PW page: '...concluding with the ascent of young King Aegon III..., Martin gives equal weight to each member of the Targaryen family.' Quote verbatim; the claim's 'each member of the Targaryen family' is the page's own wording.
+
+### 756 [VERIFIED_VERBATIM] src=Publishers Weekly (unsigned), Fire & Blood, 19 November 2018
+CLAIM: The 2018 Publishers Weekly review credits Fire & Blood with entertaining snatches of dialogue and detailed depictions of battles in its brief dramatic sections.
+TW: there are entertaining snatches of dialogue and detailed depictions of battles
+NOTE: Same PW page: 'Brief sections are dramatic (...) or salacious (...), and there are entertaining snatches of dialogue and detailed depictions of battles, but they only last a few pages before a return to brisk summary.' Quote verbatim and the 'brief dramatic sections' limb is the same sentence's subject. The review's qualifier (they last only a few pages) is omitted by the claim but not contradicted.
+
+### 757 [VERIFIED_VERBATIM] src=Kirkus Reviews (unsigned), Fire & Blood, posted online 20 January 2019
+CLAIM: Kirkus's 2019 review of Fire & Blood says Martin's readers are used to eldritch epochal terms such as the Doom of Valyria and the Dance of the Dragons.
+TW: Martin aficionados are used to eldritch epochal terms such as the Doom of Valyria
+NOTE: Live kirkusreviews.com page, ld+json reviewBody first sentence: 'Martin aficionados are used to eldritch epochal terms such as the Doom of Valyria and the Dance of the Dragons...'. Quote verbatim. Page metadata confirms 'Review Posted Online: Jan. 20, 2019', so the 2019 limb holds. Wording note: the review says 'Martin aficionados', not 'Martin's readers' - a faithful but slightly broadened paraphrase; quote the source as 'aficionados'.
+
+### 761 [VERIFIED_VERBATIM] src=Joseph Rex Young, quoted at p.5 in C. Palmer-Patel's review, Fafnir 9.1 (2022)
+CLAIM: Palmer-Patel quotes Young's thesis that Martin is using his genre's conventions particularly well rather than abandoning them.
+TW: rather than abandoning or subverting the conventions of his genre, is actually using them particularly well
+NOTE: Live journal.finfar.org page: 'he argues that Martin, rather than "abandoning or subverting the conventions of his genre, is actually using them particularly well" (5)'. Quote verbatim, Young's page 5 cited on the page, review signed C. Palmer-Patel, Fafnir vol. 9 iss. 1 pp. 117-121, page metadata rft.date=2022-06-29.
+
+### 762 [VERIFIED_VERBATIM] src=Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Joseph Rex Youn
+CLAIM: Higgins reports that Young finds Martin using a low mimetic register in both his characters and his descriptions.
+TW: Martin tends to use a low mimetic register in both his characters and descriptions
+NOTE: Higgins PDF (Wayback raw capture of scholar.valpo.edu viewcontent, 7-page PDF, text extracted): 'In the first chapter "The American Pratchett-Muck and Modality," Young explores how Martin tends to use a "low mimetic" register in both his characters and descriptions to bring his fantasy closer to reality.' Quote verbatim; Chapter 1 attribution confirmed.
+
+### 766 [VERIFIED_VERBATIM] src=Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Thomas Honegger
+CLAIM: Higgins reports that Honegger applies Hemingway's literary iceberg to Martin, the idea that stories are strengthened by leaving things or events out.
+TW: the literary iceberg in which stories are strengthened by leaving things or events out
+NOTE: Same Higgins PDF: 'Honegger explores Ernest Hemingway's concept in his essay "The Art of the Short Story" (1959) of the "literary iceberg" in which stories are strengthened by leaving things or events out.' Quote verbatim; applied to Martin two sentences later ('with Tolkien and Martin we are dealing with two very different icebergs' / Martin's 'literary iceberg').
+
+### 767 [VERIFIED_VERBATIM] src=Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Thomas Honegger
+CLAIM: Higgins reports Honegger's finding that Martin invented his world from the top down, with the backstories invented after the main narratives.
+TW: invented his world from the top down ... with the backstories being invented after the main narratives
+NOTE: Same Higgins PDF: 'Martin started writing A Song of Ice and Fire in the 1990's and invented his world from the top down-his "literary iceberg" was invented coterminous with the stories, with the backstories being invented after the main narratives.' Quote verbatim; sits inside the Honegger chapter discussion, so the Honegger attribution holds.
+
+### 769 [VERIFIED_VERBATIM] src=George R. R. Martin, interview quoted by Honegger at p.159, reproduced in Higgins's review
+CLAIM: Higgins reproduces Martin's own statement, cited by Honegger, that he does not have a gift for languages.
+TW: I, alas, am only a hardworking SF and Fantasy novel[ist] and I don't have a gift for languages
+NOTE: Same Higgins PDF: 'Martin was quite clear as he said in an interview that Honegger cites, "Tolkien was a philologist... I, alas, am only a hardworking SF and Fantasy novel[ist] and I don't have a gift for languages" (159).' Quote verbatim, negation correctly reported, Honegger p.159 citation present on the page.
+
+### 771 [VERIFIED_VERBATIM] src=Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)
+CLAIM: Beveridge and Shan built their A Storm of Swords character network on 107 vertices representing characters.
+TW: The 107 vertices represent the characters
+NOTE: Walsworth digital edition of Math Horizons, April 2016, section 'The Social Network': 'The 107 vertices represent the characters, including ladies and lords, guards and mercenaries...' followed by 'We generated the edges using A Storm of Swords, the third book in the series.' Quote verbatim; both limbs supported.
+
+### 773 [VERIFIED_VERBATIM] src=Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)
+CLAIM: Beveridge and Shan report that the King's Landing community accounts for 37 percent of their A Storm of Swords network.
+TW: The King's Landing community accounts for 37 percent of the network
+NOTE: Same article, Community Detection: 'In our case, we discover the seven communities in figure 2. The King's Landing community accounts for 37 percent of the network.' Quote verbatim.
+
+### 774 [VERIFIED_VERBATIM] src=Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)
+CLAIM: Beveridge and Shan report that the network layout and colours identify seven communities in A Storm of Swords.
+TW: The network layout and colors in figure 2 clearly identify seven communities
+NOTE: Same article, Community Detection opening: 'The network layout and colors in figure 2 clearly identify seven communities: the Lannisters and King's Landing, Robb's army, Bran and friends, Arya and companions, Jon Snow and the far North, Stannis's forces, and Daerenys and the exotic people of Essos.' Quote verbatim; the network is the A Storm of Swords one.
+
+### 775 [VERIFIED_VERBATIM] src=Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)
+CLAIM: Beveridge and Shan report that betweenness centrality is the only one of their measures in which Tyrion does not come out on top.
+TW: This is the only measure in which Tyrion does not come out on top
+NOTE: Same article, Centrality Measures: 'Betweenness centrality gives a distinctive ranking of the characters. This is the only measure in which Tyrion does not come out on top: He places third, behind Jon Snow ... and Robert Baratheon...'. Quote verbatim; the measure named is betweenness, as claimed.
+
+### 776 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117.46 (2020)
+CLAIM: Gessey-Jones and colleagues counted characters across the five books of whom 1,806 interact with another at least once.
+TW: From the five books containing 343 chapters, 2,007 characters were identified, of which 1,806 interact with another at least once
+NOTE: PNAS live URL returned HTTP 403; recovered via Wayback raw capture (web.archive.org/web/20250710185328id_/) - full publisher text, dc.Date 2020-11-17. Results, 'Evolution of the Social Network Structure': the sentence appears verbatim. Total identified is 2,007; 1,806 is the interacting subset, as claimed.
+
+### 777 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117.46 (2020)
+CLAIM: Gessey-Jones and colleagues found the number of characters per chapter settles at around 35 after the opening book.
+TW: the number of characters per chapter settles at around 35
+NOTE: Same PNAS Wayback raw capture: 'After a short period of growth in the first book, in which the main characters are introduced, the number of characters per chapter settles at around 35.' Quote verbatim. The paper locates the growth period inside the first book and Fig. 2 caption says it 'fluctuates around 35 by the end of A Game of Thrones', which supports the claim's 'after the opening book'.
+
+### 780 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117.46 (2020)
+CLAIM: Gessey-Jones and colleagues found the distribution of intervals between significant deaths measured in chapters to be geometric rather than power law.
+TW: "it is geometric rather than power law" (Abstract)
+NOTE: Live PNAS blocked by Cloudflare (403); read via Wayback raw capture 20250710185328id_. Abstract: 'the distribution of intervals between significant deaths in chapters is different to that for the in-story timeline; it is geometric rather than power law.' Authorship confirmed on page: Thomas Gessey-Jones, Connaughton, Dunbar, Kenna, MacCarron, O'Conchobhair, Yose, PNAS 117(46) 28582-28588, 2 Nov 2020. Results section independently confirms the geometric fit is 'the superior description of interevent times in discourse'.
+
+### 781 [VERIFIED_VERBATIM] src=Gessey-Jones et al., PNAS 117.46 (2020)
+CLAIM: Gessey-Jones and colleagues counted two characters as interacting if they directly meet or the text makes it explicitly clear they knew one another.
+TW: "if they directly meet each other or it is explicitly clear from the text they knew one another"
+NOTE: Same Wayback raw capture. Sentence sits in the Materials and Methods body (heading at line 126, text at 127): 'characters are deemed to have interacted if they directly meet each other or it is explicitly clear from the text they knew one another, even if one or both are dead by that point in the story.' Quote fragment verbatim; both limbs supported.
+
+### 782 [VERIFIED_VERBATIM] src=Don Riggs, book review, Fafnir 6.2 (2019), reporting Shiloh Carroll
+CLAIM: Riggs reports that Carroll's main thrust is that Martin uses an argument from authenticity to justify his treatment of women, violence and non-Westerosi characters.
+TW: "Martin uses an argument from 'authenticity' to justify his relegation of women..."
+NOTE: Fetched live (200). Opening body paragraph: 'the main thrust of Carroll's argument is that Martin uses an argument from "authenticity" to justify his relegation of women to traditional female roles, the validation of men through violence, and the depiction of non-Westerosi characters through tropes long associated in Western literature with "Orientalism".' Quote verbatim; the claim's compression to 'treatment of women, violence and non-Westerosi characters' fairly renders the three named targets. Byline Don Riggs, Fafnir 6.2, pp. 73-75, confirmed on page.
+
+### 785 [VERIFIED_VERBATIM] src=Shiloh Carroll, The Public Medievalist (2018)
+CLAIM: Carroll characterises Martin's way of reimagining the Middle Ages as violent, dark, brutal, and relentlessly masculine.
+TW: "his overarching way of reimaginging the Middle Ages-is violent, dark, brutal, and relentlessly masculine"
+NOTE: Fetched live (200). Opening sentence of the section headed 'Fantasy for People Who Hate Fantasy', exactly as the claim's page field states. Quote 'violent, dark, brutal, and relentlessly masculine' verbatim. Byline on page: Shiloh Carroll, 15 May 2018 (claim says 2018).
+
+### 787 [VERIFIED_VERBATIM] src=George R. R. Martin, quoted by Shiloh Carroll, The Public Medievalist (2018)
+CLAIM: Carroll quotes Martin's defence that it is fundamentally dishonest to write a war story and leave rape out.
+TW: "something fundamentally dishonest if you write a war story and you leave that out"
+NOTE: Fetched live (200). In the section headed 'A Savage Beast in Every Man', Carroll introduces the block quote with 'Even Martin argues that rape is necessary to his story he's telling, especially in times of war:' then quotes Martin: 'When I read history books, rape is a part of all these wars... It just seems to me that there's something fundamentally dishonest if you write a war story and you leave that out.' Quote verbatim; the antecedent of 'that' is rape, so the claim's 'leave rape out' is supported.
+
+### 790 [VERIFIED_VERBATIM] src=Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction
+CLAIM: Mendlesohn writes that the quest fantasy's transitional narrative forces the author to describe and explain what the point of view character sees.
+TW: "forcing the author to describe and explain what is seen by the point of view character"
+NOTE: PDF fetched (200) and text extracted with pypdf (9 pages). Introduction, 'The Portal-Quest Fantasy' section: 'In the quest fantasy we see the world through this transitional narrative: for despite the assertion that this world has always existed, the technique remains identical to that of the portal fantasy and the effect on the language of the text is the same, forcing the author to describe and explain what is seen by the point of view character as s/he negotiates the world.' Quote verbatim; both limbs supported.
+
+### 798 [VERIFIED_VERBATIM] src=Routledge publisher listing for Young, George R.R. Martin and the Fantasy Form
+CLAIM: Routledge's listing gives Young's third chapter the title 'Look with Your Eyes - Immersion and Thinning'.
+TW: 'Chapter 3: "Look with Your Eyes" - Immersion and Thinning'
+NOTE: Fetched live (200). Routledge listing for 'George R.R. Martin and the Fantasy Form' by Joseph Young (Routledge, copyright 2019, 230pp) lists in its Table of Contents: 'Chapter 3: "Look with Your Eyes" - Immersion and Thinning' (page uses an en dash where the claim uses a hyphen). Quote verbatim; chapter number, title and authorship all supported.
+
+### 799 [VERIFIED_VERBATIM] src=Matthew Voice, University of Sheffield, Nine Worlds 2014 conference abstract
+CLAIM: Voice's conference abstract states that the first four books of A Song of Ice and Fire were rendered searchable in their entirety for corpus analysis.
+TW: "the first four books of ASOIAF are rendered searchable in their entirety"
+NOTE: Live WordPress host served a JS bot challenge (403); read via Wayback raw capture 20170726070428id_. Abstract, second paragraph: 'In order to explore these questions, this talk introduces the concept of corpus linguistic analysis. With the aid of contemporary software, the first four books of ASOIAF are rendered searchable in their entirety, and quantifiable patterns of language can be extracted.' Quote verbatim; byline 'Matthew Voice, University of Sheffield' and the 2014 Nine Worlds abstract posting (15 Aug 2014) confirmed on the capture.
+
+### 802 [VERIFIED_VERBATIM] src=Cat Acree, BookPage interview feature, December 2014
+CLAIM: Acree reports that García and Antonsson pored over 10,000 pages of novels, pulling out all references to history, myths and legends, before Martin filled in the blanks.
+TW: "they pored over 10,000 pages of novels, pulling out all references to history, myths and legends"
+NOTE: Fetched live (200). Feature body: 'Elio M. Garcia and Linda Antonsson, founders of the fan site Westeros.org... As co-writers, they pored over 10,000 pages of novels, pulling out all references to history, myths and legends. After they organized and formed the book's structure, Martin stepped in to fill in the blanks.' Quote verbatim; 'Interview by Cat Acree' and 'originally published in the December 2014 issue of BookPage' both on page.
+
+### 807 [VERIFIED_VERBATIM] src=George R. R. Martin, interviewed by Jennifer Vineyard, Vulture / Slate, 7 November 2014
+CLAIM: Martin told Vulture he was supposed to write 50,000 words of text for sidebars and wrote 300,000 instead.
+TW: "I was supposed to write 50,000 words of text for sidebars, and then I wrote 300,000!"
+NOTE: Fetched live (200). Article body: '"I was supposed to write 50,000 words of text for sidebars, and then I wrote 300,000!" Martin told us recently, laughing over a slice of pizza.' Quote verbatim; page carries the byline Jennifer Vineyard and the line 'This article originally appeared in Vulture,' supporting the 'told Vulture' limb.
+
+### 808 [VERIFIED_VERBATIM] src=Erik Germani, 'Now, As We All Know', At Sea Journal
+CLAIM: Germani describes Martin as setting his narrative atop an iceberg of history and using that background to give the text solidity.
+TW: "setting your narrative atop this iceberg of history, using that background to give your text solidity"
+NOTE: Fetched live (200). Essay body: 'It's an interesting idea, setting your narrative atop this iceberg of history, using that background to give your text solidity.' Quote verbatim; both limbs supported. Authorship: the essay pages carry no byline, but their parent index (atseajournal.com/asoiaf/, fetched raw) is headed 'A Study of Ice and Fire / Erik Germani'.
+
+### 809 [VERIFIED_VERBATIM] src=Erik Germani, 'Now, As We All Know', At Sea Journal
+CLAIM: Germani writes that part of why Martin's world feels lived-in is that everyone had a life before page one.
+TW: "It's a big part of why the world feels so lived-in... Everyone had a life before page one."
+NOTE: Fetched live (200). Essay body: 'It's a big part of why the world feels so lived-in, this rich and continuous history. Everyone had a life before page one.' Quote verbatim; the lived-in limb and the before-page-one limb are adjacent sentences. Same Germani attribution route as index 808.
+
+### 815 [VERIFIED_VERBATIM] src=Erik Germani, 'George R.R. Martin, The American Homer', At Sea Journal
+CLAIM: Germani argues Martin keeps readers turning pages with a steady flow of low-density sentences.
+TW: "Martin keeps us turning pages with a steady flow of low-density sentences"
+NOTE: Fetched live (200). Essay body: 'To that end, Martin keeps us turning pages with a steady flow of low-density sentences. It's shotgun writing...' Quote verbatim (claim renders the page's 'us' as 'readers' in its own prose, not inside the quotation). Attribution via the parent index byline 'Erik Germani'.
+
+### 819 [VERIFIED_VERBATIM] src=Erik Germani, 'Linguistic Anachronism', At Sea Journal
+CLAIM: Germani writes that most fantasists settle for a few linguistic relics to give a historical veneer, and names 'must needs', 'soon or late' and 'near as' among Martin's.
+TW: "Most fantasists settle for a few linguistic relics to give a historical veneer"
+NOTE: Fetched live (200). Essay body: 'Most fantasists settle for a few linguistic relics to give a historical veneer... Martin has a few of these, like the much-teased "must needs". There's also "soon or late", "pretend to surprise", and "near as" for "nearly as".' Quote verbatim; all three archaisms the claim names are on the page (the page names a fourth, 'pretend to surprise', which the claim's 'among Martin's' does not exclude).
+
+### 820 [VERIFIED_VERBATIM] src=Erik Germani, 'Linguistic Anachronism', At Sea Journal
+CLAIM: Germani argues that what a fantasy writer needs to build is cultures rather than worlds, and that a culture is before anything else a language and a voice.
+TW: "What we need to do is build cultures, not worlds. And before anything else, culture is a language, a voice."
+NOTE: Fetched live (200). Essay body, consecutive sentences: 'What we need to do is build cultures, not worlds. And before anything else, culture is a language, a voice.' Quote verbatim; both limbs supported. The 'we' is writers/worldbuilders in context ('Worldbuilding aficionados overemphasize week one of the Almighty's to-do list').
+
+### 822 [VERIFIED_VERBATIM] src=Erik Germani, 'Punctuation', At Sea Journal
+CLAIM: Germani finds that in A Game of Thrones Martin uses semicolons and colons interchangeably.
+TW: In AGOT, Martin uses semicolons and colons interchangeably.
+NOTE: Raw HTML of atseajournal.com/asoiaf/essays/punctuation.html fetched live (HTTP 200). Opening sentence reads 'In <em>AGOT</em>, Martin uses semicolons and colons interchangeably.' Quote word for word; the AGOT limb is explicit.
+
+### 823 [VERIFIED_VERBATIM] src=Erik Germani, 'Punctuation', At Sea Journal
+CLAIM: Germani reports finding three instances of a semicolon standing where a colon belongs on a single page of his edition of A Game of Thrones.
+TW: Incredibly, there are three examples of this on one page, 239 in my edition of AGOT.
+NOTE: Same raw page. Quote verbatim. 'this' refers to the immediately preceding paragraph: 'These semicolons are not joining independent clauses, they are “illustrating or amplifying what has preceded the colon”' — i.e. a semicolon where a colon belongs; the page names p.239 of his edition, and three such quoted sentences follow.
+
+### 824 [VERIFIED_VERBATIM] src=Erik Germani, 'Compressible Paragraphs', At Sea Journal
+CLAIM: Germani likens Martin's paragraphs to Jenga towers from which several sentences can be removed before they wobble.
+TW: Martin’s paragraphs are like Jenga towers: you can pull out quite a few sentences before they start getting wobbly.
+NOTE: Raw HTML of .../compressibility.html fetched live (HTTP 200). Opening sentence; quote verbatim, and the 'several sentences removed before they wobble' limb is the second half of the same sentence.
+
+### 825 [VERIFIED_VERBATIM] src=Erik Germani, 'Compressible Paragraphs', At Sea Journal
+CLAIM: Germani assembled a readable 427-word passage out of the first sentences of 26 different paragraphs of A Game of Thrones totalling 1,897 words.
+TW: Those seven paragraphs, totalling 427 words, are actually built from the first sentences of 26 different paragraphs, totalling 1,897 words.
+NOTE: Same raw page. Quote verbatim. 427 words, 26 paragraphs and 1,897 words all present in one sentence; 'readable' is carried by the following clause 'But don’t they read smoothly?'; the source text is AGOT (Dany's second chapter).
+
+### 826 [VERIFIED_VERBATIM] src=Erik Germani, 'Imprecise Sentences', At Sea Journal
+CLAIM: Germani's verdict is that Martin is imprecise rather than incompetent as a sentence writer.
+TW: Martin is imprecise, not incompetent.
+NOTE: Raw HTML of .../imprecision.html fetched live (HTTP 200). Page reads 'Martin is imprecise, <em>not</em> incompetent.' — word for word as rendered text. The 'as a sentence writer' limb is supported by the next sentence: 'There’s no question that he can string together sentences.'
+
+### 827 [VERIFIED_VERBATIM] src=Erik Germani, 'Imprecise Sentences', At Sea Journal
+CLAIM: Germani argues that flow between sentences, rather than great individual sentences, is the litmus test for a successful author, and that Martin passes it.
+TW: Flow between sentences is the litmus test for a successful author – not great individual sentences – and Martin passes.
+NOTE: Same raw page, same paragraph as 826. Quote verbatim; both the 'rather than great individual sentences' limb and the 'Martin passes' limb are in the same sentence.
+
+### 828 [VERIFIED_VERBATIM] src=Erik Germani, 'Purple Prose in Green and Red', At Sea Journal
+CLAIM: Germani observes Martin shifting into antiquated diction in a passage describing the haunted forest.
+TW: Martin shifts into antiquated diction: “tangle of root and thorn and grasping limb”; “Knew not”; “small wonder”.
+NOTE: Raw HTML of .../purple.html fetched live (HTTP 200). Quote verbatim, and it comments directly on the block quotation above it, which ends 'It was small wonder the Night’s Watch named it the haunted forest.'
+
+### 829 [VERIFIED_VERBATIM] src=Erik Germani, 'Purple Prose in Green and Red', At Sea Journal
+CLAIM: Germani argues Martin's writing leaps into a high register when presented with the wordless sensations of nature and violence.
+TW: Presented with the overpowering and wordless sensations of nature and violence, his writing can leap into a high register.
+NOTE: Same raw page. Quote 'leap into a high register' appears verbatim inside that sentence; nature-and-violence limb explicit ('Here I’d like to point out Martin’s reasons for using it: as an ecstatic response to nature and violence'). Only softening: the page says 'can leap', the claim says 'leaps'.
+
+### 830 [VERIFIED_VERBATIM] src=Amalvy et al., Social Network Analysis and Mining 14 (2024)
+CLAIM: Amalvy and colleagues count 777 characters in the novels for their U2 period, against 199 in the TV show annotations.
+TW: For period U2, there are 777 characters in the novels, but only 199 in the TV show.
+NOTE: doi.org resolves to link.springer.com, which serves a JS bot 'Client Challenge' for both the article HTML and the text-mining PDF, and Wayback has no capture. Recovered via the authors' open-access deposit of the same DOI (CC BY-SA): https://hal.science/hal-04722579/document, PDF binary downloaded and text-extracted. Section 2.5 'Character Sets' carries the quote verbatim; Table 2 row 'U2 / All characters' gives Novels 777, TV Show 199; the section frames all counts as 'the annotated data that we use', and uses the phrase 'in the TV show annotations' two sentences later.
+
+### 833 [VERIFIED_VERBATIM] src=Erik Germani, 'Zeugma and Literary DNA', At Sea Journal
+CLAIM: Germani counts 148,130 sentences in A Song of Ice and Fire.
+TW: But Martin’s written a lot of sentences for ASOIAF – 148,130 by my count.
+NOTE: Raw HTML of .../proselike.html fetched live (HTTP 200). Quote verbatim; the figure is attached to ASOIAF, not to a single novel.
+
+### 834 [VERIFIED_VERBATIM] src=Erik Germani, 'Zeugma and Literary DNA', At Sea Journal
+CLAIM: Germani found roughly 250 examples in A Song of Ice and Fire of a zeugma structure in which one verb governs two comma-separated clauses.
+TW: when I checked for this structure I found ~250 examples of it
+NOTE: Same raw page. Quote verbatim. 'this structure' is the zeugma the page defines earlier — 'Zeugma is a rhetorical device in which one verb controls multiple phrases' — exemplified by 'His hair was black, his hands rough', i.e. one verb over two comma-separated clauses; the corpus is ASOIAF. (The page adds that the detection net caught 'any sentences with commas whose first word was repeated after the first comma', a proxy, but the ~250 count is presented as examples of the structure.)
+
+### 839 [VERIFIED_VERBATIM] src=Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal
+CLAIM: Germani defines a block characterisation as the block of description a character receives when first coming on stage.
+TW: A block characterization is that block of description characters receive when they first come on stage.
+NOTE: Same raw page, first sentence of the 'Block Characterization' section; quote verbatim.
+
+### 840 [VERIFIED_VERBATIM] src=Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal
+CLAIM: Germani judges the insistence on eye colour in Martin's block characterisations conspicuous and of dubious value.
+TW: When you line them all up, the insistence on eye color is conspicuous, and of dubious value.
+NOTE: Same raw page and section; quote verbatim. 'them' is the block characterisations being gathered up, so the 'in Martin's block characterisations' limb holds; a sidenote concedes eye description can work elsewhere.
+
+### 841 [VERIFIED_VERBATIM] src=George R. R. Martin, 2011 Vulture interview, quoted by Erik Germani, At Sea Journal
+CLAIM: Germani reproduces Martin's 2011 statement to Vulture that he is beginning to wish he had never bothered with the colour of people's eyes.
+TW: I’m beginning to wish I had never bothered with the color of people’s eyes.
+NOTE: Same raw page and section. Germani writes 'From a 2011 interview with Vulture' (linked to vulture.com/2011/10/george_rr_martin_on_his_favori.html) and block-quotes Martin's answer containing the sentence; the claim's quote fragment appears word for word inside it.
+
+### 850 [VERIFIED_VERBATIM] src=Walda, forum post in 'GRRM's prose', A Forum of Ice and Fire
+CLAIM: A reader judges Martin's prose in places uninspired, cliched and repetitive by contrast with his plotting and characters.
+TW: prose seems uninspired, cliched, repetitive, in stark contrast to plotting
+NOTE: Live page fetched raw (HTTP 200). Walda, posted 31 July 2015, page 2: "If, at the moment, there are many places where, to me, GRRM's prose seems uninspired, clichéd, repetitive, in stark contrast to his plotting and his characters, what do I know?" Quote verbatim; every limb (in places, the three adjectives, the contrast with plotting and characters) present. Context worth carrying: the judgement is explicitly provisional and the same post calls the series addictive and 'what masterful prose is supposed to do'.
+
+### 851 [VERIFIED_VERBATIM] src=Drekinn, forum post in 'GRRM's prose', A Forum of Ice and Fire
+CLAIM: A reader reports that the Romanian translation softens dialogue that reads awkwardly in Martin's English.
+TW: Romanian translation made awkward dialogues less painful, if painful at all
+NOTE: Live page fetched raw. Drekinn, posted 31 July 2015 (edited same day), page 2: "I really like the Romanian translation. Some awkward dialogues weren't as painful if at all in the translation. Like saying ''Nuncle'', fat pink mast or the infamous ''Sunset found her squatting in the grass...''" Quote verbatim as a substring; the Romanian-translation limb and the awkward-English limb both present.
+
+### 852 [VERIFIED_VERBATIM] src=Linda Antonsson, 'Sean T. Collins on ASoIaF', Westeros.org news entry 13834
+CLAIM: Westeros.org's news editor introduces Sean T. Collins's 2011 piece as covering ground from prose to themes to world-building.
+TW: A good piece, covering ground ranging from prose to themes to world-building
+NOTE: Live www.westeros.org returned HTTP 403 to curl with a browser UA; recovered via Wayback raw capture https://web.archive.org/web/20250424162321id_/https://www.westeros.org/News/Entry/13834 (raw page, not a summary). Entry dated January 18, 2011, signed "Posted at 23:40 CET by Linda" — the 2011 dating, the Collins subject and the quoted phrase are all verbatim. Caveat on attribution only: the page gives the poster as "Linda" with no surname and no role title; "news editor" and "Antonsson" come from outside this page.
+
+### 854 [VERIFIED_VERBATIM] src=Sean T. Collins, 'Playing a Game of Thrones', Attentiondeficitdisorderly
+CLAIM: Collins argues Martin's depiction of violence shows how war degrades everyone who takes part in it rather than glorifying it.
+TW: never read heroic fiction so relentlessly driving home war's degradation
+NOTE: Live page fetched raw (HTTP 200), AttentionDeficitDisorderly. Point 10: "There's basically nothing glorious or badass whatsoever about violence as portrayed in these books... I don't think I've ever read a heroic fiction that so relentlessly drives home how war and violence immiserate and degrade everyone who participates in them." Quote verbatim; the anti-glorification limb is carried by the point's first sentence.
+
+### 857 [VERIFIED_VERBATIM] src=Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com
+CLAIM: Leigh Butler, reading the Prologue for the first time, credits the writing with putting the reader inside the scene immediately.
+TW: writing did a superb job of immediately putting the reader in the moment
+NOTE: www.tor.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20240114133050id_/https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/. Byline Leigh Butler, Fri Mar 18 2011; the post states she is reading the series "for the very first time". The sentence sits in the Prologue Commentary. Quote verbatim.
+
+### 858 [VERIFIED_VERBATIM] src=Leigh Butler, 'A Read of Ice and Fire: A Game of Thrones, Part 1', Tor.com
+CLAIM: Butler praises the Prologue for supplying only enough worldbuilding detail to raise interest without exposition.
+TW: just enough worldbuilding tidbits to pique the interest without drowning you in exposition
+NOTE: Same Wayback raw capture. End of the Prologue Commentary: "Overall, nicely done, with just enough worldbuilding tidbits to pique the interest without drowning you in exposition." Quote verbatim. Use the page's own tail wording — the restraint claimed is 'without drowning you in exposition', not the absence of exposition; do not tighten it to 'without exposition' in any quoted rendering.
+
+### 861 [VERIFIED_VERBATIM] src=Leigh Butler, 'A Read of Ice and Fire: The Hedge Knight, Part 1', Tor.com
+CLAIM: The same reader describes The Hedge Knight, after A Storm of Swords, as a refreshingly simple story by comparison with the novels.
+TW: after the combine harvester that was ASOS, a refreshing break
+NOTE: Live reactormag page fetched raw (HTTP 200); reactormag.com is the renamed Tor.com, byline "By Leigh Butler", published December 5, 2013 — same reader as 857–859. Commentary: "After the combine harvester that was ASOS, a relatively simple story about a dude trying to win a joust is a refreshing break." Quote verbatim; the after-ASOS limb and the contrast-with-the-novels limb both present (she adds that Martin still layers politics and history around Dunk).
+
+### 862 [VERIFIED_VERBATIM] src=Simon, 'Some notes on George RR Martin's prose style', Books & Boots
+CLAIM: Simon of Books & Boots argues Martin's style is unstable, veering between functional modern thriller prose and fake medievalism.
+TW: his prose style is unstable; it veers between the two registers
+NOTE: Live page fetched raw (HTTP 200), Books & Boots, "by Simon on March 31, 2014". Opening paragraph: "George RR Martin's prose style ... is unstable. By this I mean it veers from purely functional modern thriller prose to prose larded with fake medievalisms, from a lexicon of short, Anglo-Saxon words to one suddenly stuffed with neoclassical and latinate vocabulary." Quote verbatim; unstable, both poles, and the fake-medievalism naming all present.
+
+### 867 [VERIFIED_VERBATIM] src=Simon, 'Some notes on George RR Martin's prose style', Books & Boots
+CLAIM: The critic argues that repetition across chapters makes Martin's slightly distorted English read as the reader's default setting.
+TW: by repetition over scores of chapters the distorted English becomes your home setting
+NOTE: Same page, section "5 Distorting English": "By repetition over the multiple scenes, and scores of chapters, Martin's slightly distorted English, and slightly amended concepts, become your home setting." Quote verbatim; the repetition-across-chapters limb and the default-setting limb both explicit. Examples given on the page: Ser, flowered, sourleaf, dreamwine.
+
+### 868 [VERIFIED_VERBATIM] src=Simon, 'Some notes on George RR Martin's prose style', Books & Boots
+CLAIM: The critic names dropping the -ly suffix from adverbs as Martin's most persistent cod-medieval mannerism, and treats it as a blemish.
+TW: most persistent of the annoying would-be medievalisms is dropping -ly
+NOTE: Same page, section "9. Cod medievalism": Martin "abandons his natural crisp, clear style to slip into pastiche medievalism" and there is "a number of would-be medievalisms which become annoying mannerisms: The most persistent one is removing the -ly suffix from adverbs." Quote verbatim; most-persistent and cod-medieval limbs explicit. On the blemish limb: the disparagement is carried here by "annoying mannerisms", while the word "blemishes" itself appears in the Conclusion attached to 'oft' and 'elsewise' — same family, adjacent sentence, so the limb holds, but do not quote 'blemish' as applied to the -ly item.
+
+### 869 [VERIFIED_VERBATIM] src=Simon, 'Some notes on George RR Martin's prose style', Books & Boots
+CLAIM: The critic concludes that the archaic feel comes from consistent Anglo-Saxon word choice, not from the occasional pseudo-medievalism.
+TW: not the occasional pseudo-medievalisms but consistent Anglo-Saxon choice gives the woodiness
+NOTE: Same page, Conclusion: "...it is not because of the occasional pseudo-medievalisms ('oft' and 'elsewise') which are in fact blemishes on his otherwise swift clear style; it is because he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate and neoclassical vocabulary, thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness." Quote verbatim; the not-X-but-Y structure of the claim matches the source exactly.
+
+### 870 [VERIFIED_VERBATIM] src=Simon, 'George RR Martin's prose style - Affixes, compound and combination words', Books &
+CLAIM: The same critic's longer study states that Martin systematically excludes almost all words of Latin, Greek or French derivation.
+TW: systematic exclusion of almost all Latin, Greek, French and loan words
+NOTE: Live page fetched raw (HTTP 200), Books & Boots, "by Simon on March 8, 2013" — same author as 862–869. Under the heading "Abstract": the series is distinguished "by a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French or other languages, or foreign loan words, or the 'neo-classical' coinages which entered the English language from the 17th century onwards." Quote verbatim; heading placement as cited.
+
+### 871 [VERIFIED_VERBATIM] src=Simon, 'Affixes, compound and combination words', Books & Boots
+CLAIM: The study reports a high frequency of Anglo-Saxon-derived words as the counterpart of that exclusion.
+TW: Instead, high frequency of Anglo-Saxon words, conspicuous in compounds
+NOTE: Same page, Abstract, the sentence immediately following the exclusion sentence: "Instead, his style shows a high frequency of words of Anglo-Saxon origin, a tendency which is particularly conspicuous in his use of compound and combination words." Quote verbatim; the 'counterpart of that exclusion' limb is carried by the page's own "Instead".
+
+### 874 [VERIFIED_VERBATIM] src=Simon, 'Affixes, compound and combination words', Books & Boots
+CLAIM: The critic reports noticing only one really Latinate word in the 770 pages of A Feast for Crows.
+TW: in 770 pages of Feast of Crows only one really Latinate word
+NOTE: Same page, under the heading "CONCLUSION": "In the 770 pages of Feast of Crows I noticed only one really Latinate word, 'intermediate'." Quote verbatim, page count and the 'only one' count both as claimed. Two source-internal wrinkles to carry if the figure is reused: the page writes the title as 'Feast of Crows' (the novel is A Feast for Crows), and elsewhere the same post names 'intermittent', 'intercession', 'fornication', 'penetrate' and 'complement' as Latinate standouts in that novel, so the 'only one' is the author's impression, not a count that survives his own post.
+
+### 875 [VERIFIED_VERBATIM] src=Simon, 'Affixes, compound and combination words', Books & Boots
+CLAIM: The study notes Martin's conspicuous use of the archaic native prefix a- for position, in atop, abed and ahorse.
+TW: he conspicuously deploys the archaic prefix 'a-' to denote position
+NOTE: Raw page (astrofella.wordpress.com, curl 200) reads: "delving beyond common speech into archaic native forms: for example, he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse". Quote byte-exact; every limb (archaic, native, prefix a-, position, atop/abed/ahorse) on the page, in section '1. The prefix'.
+
+### 876 [VERIFIED_VERBATIM] src=Simon, 'Affixes, compound and combination words', Books & Boots
+CLAIM: The study concludes that Martin's lexical choices matter as much as his subject matter in producing the novels' archaic worldview.
+TW: lexical choices as important as subject matter; brutal, archaic worldview
+NOTE: Raw page Abstract: "then conclude that the lexical choices he makes are as important as the subject matter of the stories in creating the novels' brutal, archaic worldview." Quote byte-exact; 'concludes' and 'archaic worldview' both on the page. Located in the Abstract rather than the labelled Introduction, a locator detail only.
+
+### 878 [VERIFIED_VERBATIM] src=At Sea Journal, 'George R.R. Martin, The American Homer'
+CLAIM: The essayist characterises Martin's narration as a steady flow of low-density sentences that keeps pages turning.
+TW: Martin keeps us turning pages with a steady flow of low-density sentences
+NOTE: Raw page (atseajournal.com, curl 200): "To that end, Martin keeps us turning pages with a steady flow of low-density sentences." Byte-exact; the oral-vs-textual storytelling context matches the cited section.
+
+### 879 [VERIFIED_VERBATIM] src=At Sea Journal, 'George R.R. Martin, The American Homer'
+CLAIM: The essayist calls the method shotgun writing, in which no single sentence carries the effect on its own.
+TW: It's shotgun writing: like buckshot, no single sentence is that effective
+NOTE: Raw page: "It's shotgun writing: like buckshot, no single sentence is that effective, but a full cartridge of it gets the point across." Byte-exact including the curly apostrophe. The claim's 'no single sentence carries the effect on its own' matches; the page's completing clause (the full cartridge does) is compatible, not contradictory.
+
+### 882 [VERIFIED_VERBATIM] src=At Sea Journal, 'George R.R. Martin, The American Homer'
+CLAIM: The essayist puts the non-dialogue share of the text at 60 percent and calls that prose forgettable.
+TW: the prose that constitutes the other 60% of the text is forgettable
+NOTE: Raw page, under the heading 'The con: The sentences aren't beautiful': top-voted favourite passages are all dialogue, "But the prose that constitutes the other 60% of the text is forgettable." 'the other 60%' is explicitly the non-dialogue remainder, so both limbs (60 percent share, forgettable) hold.
+
+### 883 [VERIFIED_VERBATIM] src=At Sea Journal, 'George R.R. Martin, The American Homer'
+CLAIM: The essayist argues stock phrases persist because they come easily to a writer working for flow.
+TW: for a writer, they come easily off the pen; very important for momentum
+NOTE: Raw page: "Which could be why stock phrases are so prevalent in his work... But for a writer, they come easily off the pen. Very important for maintaining momentum." preceded by "The flow is important". All limbs supported; the essayist's own framing is hedged ('could be why'), where the claim says 'argues'.
+
+### 884 [VERIFIED_VERBATIM] src=Corey Huffman, video description, '[1] The Prose of George R R Martin | How to Write Focus
+CLAIM: The author of the five-part video series on Martin's prose credits him with knowing where to end a sentence inside a long description.
+TW: Martin knows just where to drop his periods
+NOTE: Raw YouTube description (shortDescription, curl 200): "Martin knows just where to drop his periods, and is able to break up large descriptions into easily digestible sentences... help aspiring writers learn where to end their sentences". Byte-exact. The 'five-part series' limb is confirmed by the sibling raw pages I fetched: parts [1]-[5], same channel 'Corey Huffman - Writer', cross-linked; this page alone says only 'More to come'.
+
+### 885 [VERIFIED_VERBATIM] src=Corey Huffman, video description, '[1] The Prose of George R R Martin'
+CLAIM: The same video's description says Martin breaks large descriptions into easily digestible sentences.
+TW: break up large descriptions into easily digestible sentences
+NOTE: Same raw description: "is able to break up large descriptions into easily digestible sentences." Byte-exact; every limb on the page.
+
+### 886 [VERIFIED_VERBATIM] src=Corey Huffman, video description, '[2] The Prose of George R R Martin | Why You Should Con
+CLAIM: Part two of the series treats contrast as the technique that lets one Martin description do several narrative jobs at once.
+TW: contrast allows him to accomplish multiple narrative tasks simultaneously
+NOTE: Raw description of [2] (title '[2] The Prose of George R R Martin | Why You Should Contrast Your Descriptions'): "how Martin uses the literary technique of 'contrast' to enrich these descriptions, and how this technique allows him to accomplish multiple narrative tasks simultaneously." Byte-exact with curly quotes; 'several narrative jobs at once' matches 'multiple narrative tasks simultaneously'.
+
+### 887 [VERIFIED_VERBATIM] src=Corey Huffman, video description, '[3] The Prose of George R R Martin | Masterful Metaphor
+CLAIM: Part three of the series examines twenty-five metaphors and similes drawn from A Game of Thrones.
+TW: I examine twenty-five metaphors and similes... in A Game of Thrones
+NOTE: Raw description of [3]: "In this video, I examine twenty-five metaphors and similes masterfully crafted by George R R Martin in his novel, 'A Game of Thrones.'" Byte-exact; part number, count and source novel all on the page.
+
+### 888 [VERIFIED_VERBATIM] src=Corey Huffman, video description, '[4] The Prose of George R R Martin | Adjectives & The R
+CLAIM: Part four claims Martin frequently structures adjectives, nouns and clauses in threes.
+TW: he often uses "The Rule of 3" structuring adjectives, nouns, and clauses
+NOTE: Raw description of [4]: "show how he often uses \"The Rule of 3\" with regards to structuring his adjectives, nouns, and clauses." Byte-exact; 'frequently' matches 'often', and the adjective/noun/clause triple is verbatim.
+
+### 892 [VERIFIED_VERBATIM] src=Rob H. Bedford, review of Fevre Dream, SFFWorld
+CLAIM: The reviewer prefers Martin's vampire history to Anne Rice's because of what Martin leaves unsaid.
+TW: more successful than Rice's history more for what is left unsaid
+NOTE: Raw page (sffworld.com, curl 200), Rob H. Bedford's Fevre Dream review: "I find it more successful than Rice's history more for what is left unsaid and told for Rice left seemingly no stone unturned. A little bit of mystery is stronger than knowing the full scope." Byte-exact; the preference over Anne Rice and the unsaid-as-reason limb both hold.
+
+### 893 [VERIFIED_VERBATIM] src=Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk a
+CLAIM: Adam Whitehead judges The Mystery Knight to lack the elegant simplicity of The Hedge Knight.
+TW: It lacks the elegant simplicity of The Hedge Knight
+NOTE: Raw forum page (curl 200), post #1 headed 'The Mystery Knight': "It lacks the elegant simplicity of The Hedge Knight but isn't as slight as The Sworn Sword." Byte-exact. The page names the reviewer only by the handle 'Werthead' with the signature 'Visit The Wertzone for reviews of SF&F books' - it never prints 'Adam Whitehead', so the real-name attribution rests on the handle and blog signature.
+
+### 894 [VERIFIED_VERBATIM] src=Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk a
+CLAIM: The same reviewer says the novella's ending is unusually neat for Martin and lacks the messy consequences he usually favours.
+TW: an unusually neat ending by Martin's standards... lacks the messy consequences
+NOTE: Same post: "the story lacks the satisfying conclusion of The Hedge Knight, with an unusually neat ending by Martin's standards (although the final line is superb) that lacks the messy consequences he usually favours." Byte-exact; both limbs (unusually neat for Martin, missing messy consequences) verbatim. Same handle caveat as 893.
+
+### 897 [VERIFIED_VERBATIM] src=George R.R. Martin, interview reprinted at WildCardsWorld from SFFWorld
+CLAIM: Martin describes the Wild Cards non-mosaic volumes as stories threaded by an interstitial narrative he calls beads on a string.
+TW: Beads on a string: stories plus interlinking interstitial narrative
+NOTE: Live fetch, 200. Page verbatim: 'So we begin with two books of stories with an interlinking interstitial narrative, which we sometimes call the beads on a string. Where each story is a bead and the interstitial is the string that ties them all together. There are two volumes of that, with the third being the true mosaic novel.' Speaker is Martin in the SFFWorld interview reprinted at WildCardsWorld; the two non-mosaic volumes of the triad are exactly what he is describing. Every limb supported.
+
+### 902 [VERIFIED_VERBATIM] src=Publishers Weekly, review of Fire & Blood
+CLAIM: Publishers Weekly reports that the book's dramatic or salacious passages last only a few pages before returning to brisk summary.
+TW: Dramatic/salacious sections last a few pages, then brisk summary
+NOTE: Live fetch, 200. PW review of Fire & Blood (Bantam, ISBN 978-1-5247-9628-0, reviewed 11/19/2018) reads verbatim: 'Brief sections are dramatic (“the golden dragon devoured the queen in six bites”) or salacious (“it aroused the princess to watch the men disporting with one another”), and there are entertaining snatches of dialogue and detailed depictions of battles, but they only last a few pages before a return to brisk summary.' Quote exact; publication and book both correct.
+
+### 904 [VERIFIED_VERBATIM] src=Chris Lough, review of Fire & Blood, Tor.com
+CLAIM: Chris Lough describes Fire & Blood as written in a dry, staid, objective tone unlike the Song of Ice and Fire novels.
+TW: Different prose style from the novels; dry, staid, objective tone
+NOTE: Live tor.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20200116004102id_/https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/ (raw HTML, not a summarizer). Byline 'Chris Lough', Wed Nov 21 2018. Verbatim: 'Fire & Blood is also written in a different style of prose than the primary Song of Ice and Fire novels; featuring a dry, staid, objective tone...'. Both limbs (the tone, and the contrast with the ASOIAF novels) supported.
+
+### 914 [VERIFIED_VERBATIM] src=George R.R. Martin, PW interview 'Imaginary History'
+CLAIM: Martin insists Fire & Blood is not a novel but essentially a popular history, an entirely different literary form.
+TW: Not a novel; an entirely different form from popular history
+NOTE: Live fetch, 200. 'Imaginary History: PW Talks With George R.R. Martin', by Lenny Picker, Jul 16 2018. Martin verbatim: 'The important thing, as I keep stressing, is that it’s not a novel... they’re getting the latest Ice and Fire novel, which is an entirely different literary form than what’s essentially a popular history.' Quote exact. Note the page phrases the contrast the other way round (the novel is the different form from the popular history), but the claim's substance — F&B is not a novel, it is essentially a popular history, a different literary form — is fully carried.
+
+### 920 [VERIFIED_VERBATIM] src=BookPage, 'George R.R. Martin: History is written in blood'
+CLAIM: BookPage reports that Elio Garcia and Linda Antonsson read 10,000 pages of the novels to extract every reference to history, myth and legend.
+TW: Co-writers pored over 10,000 pages, pulling out all such references
+NOTE: Live fetch, 200. BookPage, 'George R.R. Martin: History is written in blood', interview by Cat Acree, December 2014. Verbatim: 'Elio M. García and Linda Antonsson, founders of the fan site Westeros.org... As co-writers, they pored over 10,000 pages of novels, pulling out all references to history, myths and legends.' Every limb supported; the book is The World of Ice and Fire.
+
+### 923 [VERIFIED_VERBATIM] src=A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'
+CLAIM: The same reading reports a lexical density score between 4 and 4.5 for A Game of Thrones.
+TW: A Game of Thrones scores between 4 and 4.5, quite low
+NOTE: Live fetch, 200. A.R. Rivera, 'A Brief Linguistic Exam of ‘A Song Of Ice And Fire’', 09/10/2023. Verbatim in the lexical-density paragraph: 'A Game of Thrones has a score between 4 and 4.5, which is quite low, compared to the first Harry Potter book...'. The preceding sentence establishes the metric is lexical density, so the claim's 'lexical density score' limb is supported.
+
+### 924 [VERIFIED_VERBATIM] src=A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'
+CLAIM: The same reading gives A Game of Thrones an Automated Readability Index score of sixth grade.
+TW: ARI score for A Game of Thrones is sixth-grade, 11-12 years old
+NOTE: Live fetch, 200. Same Rivera post. Verbatim: 'The readability factor is determined by the Automated Readability Index (ARI)... The ARI score for A Game of Thrones is sixth-grade, or 11-12 years old (medium.com).' The page itself sources the figure to medium.com, but the claim only asserts that this reading gives that score, which it does.
+
+### 926 [VERIFIED_VERBATIM] src=Matthew Voice (University of Sheffield), abstract 'Writing Westeros: a Corpus Linguistic S
+CLAIM: A conference abstract announces a corpus of the first four ASOIAF novels rendered searchable in full for stylistic analysis.
+TW: First four ASOIAF books rendered searchable in their entirety
+NOTE: Live fetch, 200. Nine Worlds Academia 2014 abstract, 'Writing Westeros: a Corpus Linguistic Study of A Song of Ice and Fire', Matthew Voice, University of Sheffield. Verbatim: 'With the aid of contemporary software, the first four books of ASOIAF are rendered searchable in their entirety, and quantifiable patterns of language can be extracted.' The stylistic-analysis limb is carried by 'Breaking down the means of stylistic analysis and characterisation' later in the same abstract.

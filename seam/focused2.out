@@ -1,0 +1,15 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+
+[drawFace] 10,000 seeds over four faces: 2448 / 2533 / 2500 / 2519 · worst deviation 1.201 SE
+
+[compose] 8496 reads over 708 pools x 2 audiences x 6 seeds · 8370 composed a unit · drift 0
+[compose] base-side synthesis checked on 73284 cells of 1050 rows · mismatches 0
+[compose] recorded cells whose authored vid and audible index differ: 0 of 73284 · mixed pools in the corpus 12 · reached by the DRIFT run 2 (DS-ECO-6 :: TIER: minor shadow activity (≥3) | DS-POW-1 :: governanceFractured true)
+
+ Test Files  4 passed (4)
+      Tests  156 passed (156)
+   Start at  12:00:12
+   Duration  12.28s (transform 2.32s, setup 116ms, import 13.36s, tests 5.86s, environment 0ms)
+

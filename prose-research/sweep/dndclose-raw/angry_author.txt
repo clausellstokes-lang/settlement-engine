@@ -1,0 +1,239 @@
+Actually… You Are an Author | The Angry GM
+
+ My hate readers all took one look at that title and screamed, “He admitted it!”
+
+If that’s you, hello and thank you. To the metrics that drive the internets, hate reading is still reading. I appreciate your custom.
+
+But don’t get too excited, because I’ll be explaining below why that title doesn’t mean what you think it means. Not that you’ll read that far. Meanwhile, I gotta explain to the people who actually want to be here about how this is introducing a new series. Because today’s a day that ends in ‘y,’ so it’s time for me to announce a new series.
+
+And here I was making such good headway with both my goal to stop arguing with my detractors and to stop over-promising. Two steps forward, one step back, huh? Or, as my therapist likes to say, “Angry, you suck at things.”
+
+Introducing: Stupid Narration Tricks
+
+I’m not as big a reader as you might think. I like reading, but I don’t read as much fiction as people think I do. The problem is that I like reading really good fantasy stories, and no one writes really good fantasy. Not anymore. Not in a long time.
+
+Don’t take that as my asking for recommendations. I’m not. I don’t need to be reminded that Butcher is still going strong because I said fantasy. I don’t need to hear about Sanderson because I said good. I don’t need to be told to read Tolkien again because I didn’t say plodding and heartless. Though, really, this is more about me being a picky bitch with really particular tastes who gets off tweaking rabid fanbases. That said…
+
+Actually, I don’t want to do this.
+
+Some authors do amazing things with their craft. You can love his stories and characters and worlds or hate them, but George R. R. Martin is a technically gifted, very talented writer. Yeah, yeah, I know, “… he used to be, but technically gifted, talented writers actually have to write and Winds of Winter is never coming, and also I don’t know the difference between an HBO sex-and-gore-em-up television series and the actual books.” Get it out of your system. I deserve it. I dunked on someone you love a paragraph ago.
+
+Actually, I don’t want to do this either.
+
+Let’s put all the useless fandom dick waving aside and agree not to dump on things other people love as a matter of taste. I want to talk about the craft of wordsmithing like adults, and adults who want to be the best damned Game Masters they can be should be willing to take good lessons from anyone at anytime, tastes aside, about the technicalities of the craft.
+
+I bring up Martin specifically, not because he’s my favorite author and I’m a raving fanboi, but because there’s this very specific skill he’s demonstrated very clearly that helped me hone something I was doing with my own narration. It’s something that lets me create good deductive and investigative gameplay with the power of my words alone.
+
+A few months ago, this dwarf queen got tricked by an imp disguised as a rat into causing a distraction so a diabolist could steal the most perfect diamond ever cut from a bunch of dwarven exiles hiking through the forgotten underhalls of knockoff Moria. In one sudden surprise turn, an innocuous rat turned into an imp, the queen was dead, the diamond was stolen, and the party was left standing stunned by the chaotic reversal. One of my players turned to the others and said, “I totally knew that was going to happen. I should have done something.” I shit you not. Well, I shit you a little. I speak in hyperbolic exaggeration for humor’s sake. The point is, in one surprise round, the adventure was totally lost forever, and my players didn’t flip the table, accuse me of a screwjob, and stomp away. No one even said, “Angry, you suck at things.” Not even my therapist, whom I probably shouldn’t let participate in my roleplaying game campaigns. Instead, all the clues clicked into place like it was the flashback montage at the end of a Nolan movie, and the players slapped their foreheads and then started making new characters.
+
+Because Martin. Because of a very specific, totally learnable narrative trick Martin uses over and over.
+
+And that’s the point of Stupid Narration Tricks.
+
+I’ve identified a few little weird tricks that have nothing to do with game design or mechanics and everything to do with what you say and how you say it, and only a few of them come from video games. They’re all totally learnable and totally useful. And maybe, by the time I’d done running you through each, I’ll have found more. Because this shit’s cool.
+
+These Stupid Narration tricks aren’t your standard narration advice. There’s already enough crappy narration advice out there to choke a the tarrasque. Do you really need someone else saying, “show, don’t tell,” or reminding you that other senses exist or admonishing you for using vapid, meaningless words like indescribable or eldritch or mysterious or non-Euclidean . Seriously, stop saying mysterious! Just say runes. Let the party decide if they represent a mystery or if they’re just expected in a magical dungeon in a world of fantasy adventure.
+
+You also don’t need me to repeat all the excellent narration advice I’ve already given about the different kinds of narration and inviting the players to act and speaking simply and clearly and so on. There’s ten years of backlog on this site to sift through for that shit. Plus, there’s a book that spells out the basics.
+
+So, in five features over the next couple of months, I’m going to introduce a handful of specific, learnable, usable narrative skills that I’ve used to up my narration game, and now I want to up yours. I’m also going to give you some drills you can run away from the table to improve your general narration skills. Improving your narration game is one of the best things you can do as a Game Master. Because, whether you realize it or not, you actually are an author.
+
+Actually… You Are an Author
+
+There’s this insult old-schoolers, open-worlders, hexcrawlers, faction players, West Marchers, and Braunstainers like to accuse us modern quest-and-goal-based actual-game-design-afficianado Game Masters. “You just want to write a fantasy novel and make the players act out the parts.” Though some of them have gotten with the times and now invoke video games instead. Now, I’m not going to argue that point because I’ve already proven it a lie time and again, and anyone who still doesn’t believe me has their own problems and no amount of reason or logic will solve them.
+
+I do not want to write a fantasy novel. I do not want to make the players play my story. I want to run a game for my players to play. But… actually, I am an author, and you are too if you run games. You have to recognize that if you want to be any good at this shit.
+
+Authorship isn’t about writing the plot and deciding what the characters have to do and figuring out how the conflicts are resolved. At least, in this context, it isn’t. When I say, “you’re an author,” what I mean is that the primary, most significant, and most important tool you use to run games is the words you write. Except, you don’t write them, you say them.
+
+Your entire game is verbiage. It’s words. Everything else is supplemental. Dice rolls and rules help you resolve action outcomes; players make character decisions; maps, grids, miniatures, and handouts are visual aids; but the actual core of the game itself is you telling the players a story. They decide what the characters do and the dice decide how it works out and you can use diagrams to make things clear, but you’re just a storyteller. That’s it.
+
+Narrative is your medium, and you are an author.
+
+The Shared Story Myth
+
+I don’t want to do the pedantic definitional thing here. I don’t want to get into proper definitions of story, narrative, plot, and so on. That said, I know I’m gonna get some pushback for calling the Game Master alone the author or the storyteller. Many folks will want to remind me that a roleplaying game is a shared story that everyone tells together. There’s a sense where that’s true. It’s true in spirit. I don’t deny it. But to arm you with the skills to pull off the Game Mastering thing, I can’t speak in spirit alone. I have to be precise.
+
+Everyone at the table contributes to the game’s story. Everyone’s contribution is important. Moreover, the balance of the contribution between the players and the Game Master varies from table to table. But, still, the Game Master has an important job that has to be held by just one person. That job is synthesis. The Game Master takes all the contributions of all the participants and weaves them into a single, coherent, sequential narrative. Even when the players are picking the goals and getting flowery and prosaic in their action descriptions, the Game Master must still provide the synthesis. Sometimes that even means overriding descriptions for the sake of the Story. The capital Story. The definitional Story. Because there’s more to a capital Story than just descriptions and events and outcomes.
+
+So, I ain’t denying every player’s contribution to or ownership of the narrative experience. But it’s still on you, the Game Master, to be the one to ingest it all, digest it all, and regurgitate it back as the best version of the story everyone’s contributing to.
+
+How Virtual Tabletops Broke Roleplaying Games
+
+Fifteen years ago, I wouldn’t have had to work to convince Game Masters they’re just verbal storytelling authors and everything else is extraneous. Fifteen years ago, none of you would have considered that a revelation. But gaming has changed. It’s way easier now to lean heavily on visual presentation. Especially when you’re gaming online. Or watching games on YouTube.
+
+The showpiece of the virtual tabletop experience is the shared map with the fog of war and the lighting and the animations and the tokens everyone can move. Meanwhile, approachable mapmaking tools have made it easier than ever to bring gorgeous visuals to your table. Plus, there are a million content creators who’ll give you all the assets you need for free or for a cheap-at-twice-the-price monthly crowdfunding subscription.
+
+I love that shit, by the way. I am not pissing and moaning that the world was better when I had to take the equivalent of an AutoCAD course to figure out how to use the only mapping software that existed, and that I had to order it from a magazine ad and get it mailed to my house on seventeen floppy disks. I even enjoy, to some extent, that players can move their tokens on a big ass map to gradually reveal a dungeon. But you gotta put first things first.
+
+To a lot of gamers these days, the narration is just flair. It’s fluff. It makes the gameplay more exciting, but the game is moving tokens on a map and revealing the space and rolling dice and picking spells. If you want to run the best game you can and you want the players to truly engage and truly love it, you have to remember it’s the other way around. The gameplay starts with the narrative, and the virtual tabletop is the fluffy flair.
+
+What Makes Good Narration
+
+This might be a little remedial, but I have to make sure we’re on the same page. Let me quickly highlight the key elements of good narration. Good narration, not just okay narration, is the baseline. You should already be doing it. If not, start. You can’t run even an okay game without good narration.
+
+So what makes good narration?
+
+First and foremost, good narration conveys information clearly and completely. As a Game Master, you must tell the players everything their characters see, hear, perceive, and know. Players can’t make gameplay decisions without clearly and completely understanding the gameplay situation. Consequently, you can’t be vague, you can’t make assumptions, and you can’t suffer confusion to live at your table. You also can’t rely on visual aids to do your job for you. You have to be able to clarify the unclear. If you aren’t conveying clear, complete information, your game is un-fucking-playable. Full stop.
+
+Second, good narration invites emotional engagement. As a Game Master, you must make the players feel the feelings your game is meant to make them feel. If the players aren’t emotionally engaged, they’re not projecting themselves on their characters or treating the world like a world. They’re not roleplaying. Consequently, your narration has to set the tone and keep the pace. Recall that tone is about the emotional feel of a scene. Pace is about the rise and fall of tension. If you don’t manage the tone and keep the pace, your players can’t fucking roleplay. Full stop.
+
+Note that those two things together add up to roleplaying gaming. But also note that, of the two, the game part is the most important part to not break. Even if the roleplaying’s only so-so, players can have a great time. But if the game isn’t playable, no one can have fun at all. Bad games suck.
+
+The point is that you can’t set the tone or control the pace at the expense of clarity, but you must sometimes, for the sake of clarity, loosen your grip on tone and pace.
+
+That’s good narration. For more, see my True Game Mastery series. Forty percent of it is just about narration and pacing management.
+
+Where Good Becomes Great
+
+Stupid Narration Tricks are very specific skills and techniques you can use to push past goodness of narration and into greatness. Good narration is about clarity, pace, and basic tone management. Great narration shores up every part of the gameplay and narrative experience.
+
+For example, I mentioned above how great narration can turn into gameplay. With the power of your words alone, you can create beatable puzzles, solvable mysteries, engaging scavenger hunts, and all manner of investigation and social interaction challenges, not one of which requires a die roll to win, but all of which can be enhanced with die rolls.
+
+Consider, for example, the classic issue of a lying non-player character. If you are strong enough in your narration that you can weave reliable signals into your game that an NPC is lying, the players have the opportunity to figure it out for themselves. If a player catches an NPC in a lie without needing an Intuition roll, you’ve now challenged the players’ skills rather than their ability to throw plastic math rocks. Of course, they can fall back on the math rocks, right? If the players miss the cues, there are still Intuition rolls that work as a safety net, so the character’s skills can shore up failures in player skill, but the players get to try their skills first. Isn’t that really the sweet spot for all mental challenges? Let the players play the challenge with their brains, but let the character’s skills shore them up when necessary.
+
+Normally, when I talk about that shit, everyone thinks it’s about portraying shifty non-player characters and deliberately cracking your voice when you speak. But good narration means you don’t have to do any of that, as a Game Master, to let the players catch a lie or, at least, think to probe for the truth. Whereas good narration lets the players use their own skills more reliably, it also means you have to rely less on your acting skills and your players’ abilities to read your over-emoting.
+
+Do you know what else narration affects heavily? Characterization. Good narration helps convey character. But here, I’m not talking about characterizing the nonplayer characters or the world or whatever. Your players are the protagonists in the story as well as the audience for it. Good authors know strong characterization starts with narrative delivery. Whenever you describe something from a character’s perspective, the words you use and the details you highlight tell the audience something about how that character sees the world. Shouldn’t you, as a Game Master, use that power to strengthen the characterization of your story’s heroes? The way you deliver narrative can give the players a stronger sense of their own characters.
+
+Those two things, narration as a means to present intellectual gameplay challenges and narration as character enhancer, represent three of the four lessons I’ve got on the roster right now. The fourth and final thing, which is actually the next lesson, has to do with the one giant-ass flaw in this whole Authorship Theory of Game Mastering Narrative.
+
+Extemporaneousness Sucks for Authors
+
+Whether your personal favorite master of technical writecraft is Martin or Sanderson or Butcher or the Corey Collective or Abercrombie, you’re at a terrible disadvantage over any of them. See, those folks get to sit at a desk and carefully, quietly practice their craft. They can go over every word as many times as they want. They can draft, rewrite, revise, restate, and replace as much as they want. They even get to send their work to another paid professional for an editing pass.
+
+You, a Game Master, get one shot. You get one take. Your narrative has to come out of your mouth on demand, and it has to be perfect. That really, truly, deeply, unfairly sucks, but it’s the life you’ve chosen. You can piss and moan about how hard it is, but you can’t change it.
+
+Lots of Game Masters hobble themselves trying to mitigate the challenge of the one-take life of the extemporaneous storyteller. They rely on prewritten scene-setting and planned-out descriptions as much as they can. You know the boxed text in modules? That’s what boxed text is.
+
+But no Game Master can run by boxed text alone. Roleplaying games are open-ended. Game Masters have to respond to their players’ actions and choices and the random whims of the plastic math rocks. Boxed text can only cover a small portion of your needs. But it often covers the most demanding and most complex needs you’ve got. That’s bad. It means you’re not practicing your off-the-cuff delivery with the stuff that would improve it the most. Worse, you’re not adapting the most important parts of your narration to what’s happening at the table.
+
+Say the party opens a door, and an ogre is waiting to club them with its club. You’ve got boxed text that describes the room and the ogre. Good for you. But let’s say the party’s having the worst adventuring day of their lives when they open that door. They’re beat to shit. And let’s say that an ogre’s not a cakewalk for a party of their level on even a good day. Do you think that might affect the emotional tone of the scene? Do you think Sanderson or Abercrombie might describe that scene differently from one in which a fresh party of overconfident heroes stumbled into an ogre’s room? What about if the party has never encountered an ogre before? What if, just by the luck of their explorations, this is the third ogre they’ve tripped over today? What if every one has wrecked them? Don’t you think the scene setting should feel at least a little different in those cases? You can’t tell the players what their characters feel, but you can sure make your description feels a certain way.
+
+Extemporaneousness sucks, but if you want to up your narrative game, you just have to git gud. You ain’t doing yourself any favors if you try to limit how much you have to rely on spitting narrative on the fly. Gitting gud happens by doing something bad a lot. That’s the only way it happens. Mostly.
+
+See, you don’t have to do this alone. Extemporaneous speaking is a learnable, practicable skill. It’s a saw you can sharpen, and that is the first Stupid Narration Trick I plan to share with you. Now that we agree this narration thing is powerful and worth gitting gud at, I’m going to spend a few thousand words teaching you some actual, practical drills you can run away from the table to get better at speaking out of your ass. I’ll even include example recordings of me running drills so you can hear what it sounds like to do something bad a lot on the way to gitting gud.
+
+But that’s coming in a week or two. Meanwhile…
+
+Homework! Huzzah!
+
+If you’re on board with this whole Stupid Narration Trick plan, then you’ve got some work to do. Starting right now and going on for the next however many weeks it takes.
+
+First, if you rely on any kind of prewritten narration at all, you don’t anymore. You’re off the boxed text sauce. Starting this minute. Dump the bottle down the sink and never take a swig again. Not ever. It’ll be hard, and it’ll suck, but it’ll do you good. There’s a purity pledge to sign on the way out.
+
+The one and only exception to that rule, and I mean it, is that you are allowed to write down the first thing you intend to say at the start of each of your next game sessions to help you get the game rolling. You can prewrite the first scene-setting of every session if that helps you start your game. But, really, if you can quit that, you should.
+
+Second, you need to read. You might already be reading, but you need to be reading right. I want you to commit fifteen minutes every day to focused reading of new fiction. What does that mean? Let me break it down.
+
+Fifteen minutes every day is what it is. You know what minutes and days are. If you can’t quite manage every day, do it most days. Everyone has a busy day. But, really, try to do it every day. If you like reading and want to do more than fifteen minutes, fine; fifteen minutes is the minimum. But you still have to do it right.
+
+New fiction means reading something you haven’t read before. You don’t need to pick a new genre or read anything you’d never choose if it wasn’t homework or anything like that. You’re just not allowed to read a book you’ve read before. No comfort reading. No revisiting an old favorite. Not for this exercise. You can still reread your favorite books, but do it on your own time, not my homework time.
+
+Also new fiction means fiction. Duh.
+
+Now, about that focus thing. I know I’m gonna get fights here. Ideally, you need to read with your eyes and not your ears. This isn’t me hating on audiobooks or saying audiobooks aren’t real reading. This isn’t an old man yelling at clouds. Audiobooks are totally fine, totally valid ways to read for pleasure. But this isn’t reading for pleasure. You process language differently when you read it, and that difference matters here. See, I’m not trying to get you to read more because reading is good for you; I’m literally trying to immerse your brain in the vocabulary, rules, and structure of narrative. Even if you aren’t consciously and deliberately reading critically and analytically, your brain is still noticing and analyzing structure and syntax, and it’s storing away vocabulary. Human brains do that kind of background linguistic analysis much better when you’re reading.
+
+Meanwhile, audiobooks are emotionally polluted. They’re tainted by the delivery. The reader imparts emotional context through their tone and pacing. That’s not inherently bad. Actually, if you’re reading for entertainment, it’s pretty good. It’s even a useful skill to pick up as a Game Master. But it’s not the skill we’re practicing today. The skills I’m talking about involve deliberately choosing the right words and stringing them together in the right sentences and paragraphs to do whatever you’re trying to do. That means you need the words and structures coming into your brain as neutrally as possible. You can’t have some human running it through an emotional parser and adding non-word context.
+
+All of that said, if you absolutely cannot read physical words with your eyeballs for just fifteen minutes most days — if the only way you can read is by listening to an audiobook — I’m not going to fight you, though I will encourage you strongly to make a good faith effort before you reject my advice. However, if you’re gonna go the audiobook route, you cannot do anything else while you’re listening. Focus matters here. Moreover, if there’s an audiobook you already listen to while you clean, play mindless video games, work, drive, or whatever, you cannot use it for this activity, too. You must pick a different audiobook that is exclusive to this activity. Then, when it comes time to do this activity every day, you need to find a quiet place, start your audiobook playing away, sit with nothing in your hands except a pleasant drink to sip, nothing in your lap except a cat, close your eyes, relax, and listen attentively to every single word.
+
+I know that sounds like torture, but heavy is the burden of the Game Master who aspires to greatness.
+
+ [jetpack_subscription_form] 
+
+ 23 thoughts on “Actually… You Are an Author” 
+
+ Rather than prewritten sentences, I like to prep scenes by writing down a few bullet points, one for each element in the scene, with a few adjectives, verbs or specific details I can pick from for my descriptions.
+
+Is this ok?
+
+ If you really want to do this right, I would suggest dropping any adjective that isn’t totally factually and that isn’t totally required for gameplay reasons.
+
+For example, unless there is a reason that you cannot forget that the chest is green due to it being part of a clue for a puzzle, don’t write “green chest,” just write “chest.” Absolutely do not describe the chest as “ornate” or “sturdy.”
+
+ Well well, if it isn’t Angry coming in clutch with the exact right article at the exact right time. You’ve just saved me from watching hours of Matt Mercer so thanks. By the way, does ASoIaF still count as ‘new fiction’ if I’ve seen the show?
+
+ YES! New and immensely better.
+
+ All of the content on this site is gold, but this in particular is so very interesting to me. (As the Resident Vampire Fanatic, most of the fantasy gameplay design talk is fascinating and enlightening, but not particularly usable at my current tables.) Narration though? Hooooo-boy
+
+This is the most excited I’ve been for a series since True Game Mastery. Looking forward to seeing what tricks and drills that you come up with!
+
+ “no one writes really good fantasy.”
+
+Isn’t that the truth! Sanderson plods, and Butcher writes slam-bang action stories with fantasy window dressing (I’m not knocking it, I’ve read and enjoyed a lot–maybe most–of his stuff, it just doesn’t read like fantasy). Best i can tell, Martin took his fat paycheck from HBO and retired (i probably would, too). Im tired of dropping twenty bucks each for paperback books that turn out to be “meh” at best, especially considering once I start a series, no matter the quality, im obsessively compelled by my disorder to finish it.
+
+You got any recommendations for us?
+
+ I’m on book 5 of the Malazan Book of the Fallen right now and am really enjoying it. Its a lot more work to read than something like Sanderson or Abercrombie, but once you get into it its a ton of fun.
+
+ Very much looking forward to this series! My improv skills are not as good as I’d like them to be, so exercises will be particularly useful.
+
+There’s one important wrinkle in this particular exercise, and I’m curious to see whether later installments address it: narration intended for the page and narration intended for the ear aren’t quite the same thing. Before I was an author, I was a folklorist, in a literal “I present papers at academic conferences” kind of way. Effective oral storytelling is different from fiction on the page, in terms of sentence structure, repetition, and so on — I legit prided myself on those conference papers being more interesting to listen to than most because I wrote them to be *heard*, not read. (Granted, that bar was so low you should probably call the gas company before digging for it . . .)
+
+So I absolutely agree you can learn a ton from reading fiction and paying attention to what it does, but that does need some adaptation for an audience of listeners instead of readers. Long, complex sentences are not your friend, but certain kinds of repetition are!
+
+ Do you think it would be beneficial to practice writing narration with a view of making it easier to improvise similar narration during sessions? Or would this be a disservice to what you’re trying to teach us?
+
+E.g. you write down the narration for the room with the troll as part of the session prep, but during the session you do NOT refer at all to what you’ve written. You try to narrate extemporaneously, and make sure the tone matches the circumstances that have arisen during play.
+
+ Writing and speaking are different. Read, listen, and speak. Don’t practice writing. If you do what you’re suggesting, you’re not practicing extemporaneous speaking. You’re practicing writing and recall.
+
+ That makes sense. Thanks.
+
+ Is there a benefit to reading fiction in the genre of your game? For example fantasy fiction for generic DnD? Or on the flipside, is it better to read outside your genre, such as Gothic horror for generic DnD? Or would that send the wrong verbal cues to your brain?
+
+ Nope. Just read. Doesn’t matter. It ain’t about verbal cues for D&D or anything like that. Reading what you enjoy works better than reading what’s right, as long as it’s not crap.
+
+ “as long as it’s not crap.”
+
+Well now, that would be the rub, wouldn’t it?
+
+Most stuff written in the last 20 years is just as you describe. As an avid reader with hundreds of thousands of books in my Library, (yes, I have an actual Library in my home with multiple aisles sorted by genre and author) that I’ve read, there aren’t a lot of options for new material that isn’t carp.
+
+Looks like maybe time for a trip to the used book store to search for SOMETHING that is at least well-written. (seriously, I’m getting sick and tired of reading modern professional authors with published and professionally edited books that contain run-on sentences, dangling participials, incomplete sentences, homonym confusion, and a general lack of understanding of the meaning of common words, let alone the meaning of more obscure verbiage… such is the life of a book snob)
+
+YMMV, as always. :^)
+
+ Would the “no boxed text rule” and the no adjectives advice from above apply to, say, a dungeon description? Like, when I key a room I should only write down the barest facts? Sounds like Shadowdark dungeon keying, which I’m not necessarily knocking.
+
+ Piggybacking on this, I am recalling in a previous article your urging DMs to drop feeling the need to have a map/visual aid for every thing, and to mark some scenes or entire encounters each session as strictly “narrative only” for essentially the same reasons.
+
+ I feel like I am working at an office and my boss has just given me permission to skip out on a bunch of paperwork in favor of Independent Reading Time. Don’t have to tell me twice!
+
+ “Because Martin. Because of a very specific, totally learnable narrative trick Martin uses over and over.” And then you don’t specify what that is. If it’s about the characterization part, that wasn’t made clear since you didn’t bring him up again in that part, as it stands the quoted sentence is left dangling.
+
+ It seemed to me like the Martin trick will be described in the next article, and a different trick will be described in each article in the series. 
+
+This article primes the series.
+
+ That leads into my explaining how I’ve identified several tricks I plan to each devote one article to. It’s actually the last of the several.
+
+ This article put me in project mode. I produced a list of twenty novels, in several genres and hopefully a variety of subgenres, no two of which had the same author, which I hoped would be entertaining for a variety of readers. 
+
+While thinking about how to format this list, I had second thoughts. Would this list be useful to anyone? 
+
+Since deciding how to format the list looks to take a few days anyway, I am asking for opinions on the list’s usefulness.
+
+Thank you.
+
+And, Angry, thank you, for writing this article.
+
+ Funnily enough before I knew about TTRPGs, me and my friends used to have one of those free forum websites where we’d co-write a story together. We kept at it for years, until most of us discovered alcohol and parties anyway. It certainly helped me not only get a lot of the really cringe-worthy teenage-drama stuff out of my system, but also I got pretty good at leaving mini cliffhangers at the end of each post for other people to pick up on. Not that any of it was any good really, but it did feel like quite a natural progression to go from enjoying that to enjoying TTRPGs. Looking forward to the next instalment of this series as a result!
+
+ I’d take the homework a step further: read out loud. Gets you used to new word choice AND narrating that flow. You’re the one with the delivery and emotional context now!
+
+ Comments are closed.
+
+ Search the Site
+
+ Search
+
+Recent Posts in this Series
+Stupid Narration Tricks: Making and Breaking Patterns Posted on: August 18, 2026
+Stupid Narration Tricks: Hidden in Plain Narrative Sight Posted on: August 11, 2026
+RPG Narration Through the Eyes of Viewpoint Characters Posted on: June 16, 2026
+Stupid Narration Tricks: Speaking Off the Cuff Posted on: April 14, 2026
+Actually... You Are an Author Posted on: March 10, 2026
+More posts: stupid narration tricks

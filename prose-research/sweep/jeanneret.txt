@@ -1,0 +1,3561 @@
+Archive ouverte UNIGE
+https://archive-ouverte.unige.ch
+
+Master
+
+2011
+
+Public access
+
+This version of the publication is provided by the author(s) and made available in accordance with the
+copyright holder(s).
+
+La traduction des noms dans les romans de fantasy sur la base du roman
+Assassin's Apprentice de Robin Hobb
+
+Jeanneret, Sarah
+
+How to cite
+JEANNERET, Sarah. La traduction des noms dans les romans de fantasy sur la base du roman Assassin’s
+Apprentice de Robin Hobb. Master, 2011.
+
+This publication URL:
+
+https://archive-ouverte.unige.ch/unige:18417
+
+© This document is protected by copyright. Please refer to copyright holder(s) for terms of use.
+Last update in Archive ouverte UNIGE on 14.03.2023 18:08
+
+SARAH JEANNERET
+
+La traduction des noms propres dans les romans de fantasy sur
+la base du roman Assassin’s Apprentice de Robin Hobb
+
+Mémoire présenté à l‟École de traduction et d‟interprétation pour l‟obtention du Master en
+traduction, mention traduction spécialisée
+
+Directrice de mémoire :
+Mme Mathilde Fontanet
+Jurée :
+Mme Giovanna Titus-Brianti
+
+Université de Genève
+Août 2011
+
+Remerciements
+
+Je tiens à adresser mes remerciements les plus sincères tout d‟abord à Mme Mathilde
+Fontanet et à Mme Giovanna Titus-Brianti pour leurs conseils et leur disponibilité tout au
+long de ce travail.
+Je remercie également ma famille pour m‟avoir soutenue et supportée pendant ces années
+d‟études et surtout pendant la réalisation de mon mémoire.
+Et finalement, je souhaite remercier mes amis, en particulier Tiffany et Florence, pour leur
+soutien, leur aide et leurs conseils.
+
+1
+
+Table des matières
+
+Introduction ........................................................................................................................... 4
+1. Présentation de l‟œuvre ..................................................................................................... 6
+1.1. Qu‟est-ce que la fantasy ? ........................................................................................... 6
+1.2. Résumé ....................................................................................................................... 9
+1.3. Présentation des personnages principaux ................................................................. 10
+1.4. Biographie de l‟auteur .............................................................................................. 13
+1.5. Biographie du traducteur français............................................................................. 14
+1.6. Biographie de la traductrice italienne ....................................................................... 14
+2. Éléments théoriques ......................................................................................................... 15
+2.1. Définition du nom propre ......................................................................................... 15
+2.2. Nomenclature............................................................................................................ 17
+2.3. Traductibilité et sens ................................................................................................. 18
+2.4. Les différents procédés de traduction du nom propre .............................................. 24
+2.4.1. Les procédés sourciers ...................................................................................... 26
+2.4.1.1. Le report ......................................................................................................... 26
+2.4.1.2. La transcription et la translittération............................................................... 26
+2.4.1.3. L‟assimilation phonétique et graphique ......................................................... 28
+2.4.2. Les procédés ciblistes ........................................................................................ 28
+2.4.2.1. La traduction plus ou moins littérale .............................................................. 29
+2.4.2.2. La désignation distincte .................................................................................. 29
+2.4.2.3. La différence de concentration ....................................................................... 30
+2.4.2.4. La création lexicale......................................................................................... 30
+
+2
+
+3. Analyse ............................................................................................................................ 32
+3.1. Introduction .............................................................................................................. 32
+3.2. Report ....................................................................................................................... 34
+3.3. Assimilation phonétique et graphique ...................................................................... 45
+3.4. Traduction plus ou moins littérale ............................................................................ 48
+3.5. Création lexicale ....................................................................................................... 55
+3.6. Mélange de stratégies ............................................................................................... 63
+3.7. Considérations dans une perspective macrotextuelle ............................................... 64
+Conclusion ........................................................................................................................... 69
+Bibliographie : ..................................................................................................................... 72
+Annexes ............................................................................................................................... 76
+
+3
+
+Introduction
+
+Nous avons choisi, pour notre travail de mémoire, d‟étudier la traduction des noms
+propres dans les romans de fantasy, en prenant comme exemple le roman de Robin Hobb
+Assassin’s apprentice (L’apprenti assassin) tiré de la saga The Farseer Trilogy (L’assassin
+royal). La question que nous allons nous poser est de savoir quels sont les procédés à
+disposition des traducteurs pour la traduction des noms propres et surtout comment le
+traducteur français et la traductrice italienne ont procédé dans le cas de cet ouvrage.
+L‟œuvre complète se décline en deux trilogies en langue originale (The Farseer Trilogy et
+The Tawny Man Trilogy) et a été traduite en français par Arnaud Mousnier-Lompré en un
+total de 13 volumes. La traduction italienne a, elle, été effectuée par Paola Bruna Cartoceti
+en 6 volumes.
+Pour notre travail, nous avons décidé de nous consacrer uniquement au premier
+volume anglais, qui correspond également au premier volume français et au premier
+volume italien. La raison principale de ce choix est le fait que ce volume constitue en
+quelque sorte une présentation du monde créé par Robin Hobb ainsi que de ses
+personnages. De fait, la majorité des personnages importants y apparaissent. Il s‟agit
+également des personnages que nous jugeons les plus intéressants au niveau de la
+traduction. De plus, l'étude de la totalité de l'œuvre aurait nécessité plus de temps et
+d‟espace que ne le permet un mémoire de master.
+Plusieurs raisons nous ont fait sélectionner ce roman en particulier parmi les
+nombreuses œuvres de fantasy écrites à ce jour. La première est qu‟il s‟agit du premier
+ouvrage de ce genre littéraire que nous avons lu ; c‟est cette œuvre qui a conduit à l‟intérêt
+que nous portons à cette littérature. La seconde est que Robin Hobb est aujourd‟hui un
+auteur important, faisant partie des grands auteurs de fantasy. La troisième raison est que
+ce récit est particulièrement pertinent pour le sujet que nous avons choisi d‟étudier, car on
+y trouve les stratégies de traduction des noms propres les plus importantes, ce qui permet
+de se faire une idée précise et complète de la difficulté liée à cet élément de traduction. En
+outre, la fantasy étant un genre de plus en plus connu aujourd‟hui, nous trouvons
+intéressant d‟analyser une partie des difficultés que peut poser ce « nouveau » genre
+littéraire aux traducteurs.
+
+4
+
+Ce travail va également nous permettre de nous pencher quelque temps sur le
+métier de traducteur littéraire. En effet, il s‟agit d‟un métier que nous avons toujours trouvé
+intéressant, mais que nous n‟avons eu que peu d‟occasions d‟étudier en raison de nos
+études, plus axées sur d‟autres spécialisations, telles que la traduction économique ou
+juridique.
+Nous tenons à préciser que nous avons eu quelques difficultés à constituer une
+bibliographie sur le sujet. En effet, il existe très peu d‟ouvrages théoriques sur la traduction
+des noms propres et aucun traitant de ce sujet dans le domaine particulier de la fantasy.
+Nous avons donc utilisé les ouvrages traitant de la traduction des noms propres en général,
+en étudiant les différentes théories et procédés pour voir s‟ils étaient applicables à la
+fantasy.
+Le premier chapitre de ce mémoire sera consacré à la présentation de l‟œuvre, dont
+nous ferons un résumé et une brève description des personnages principaux. Ensuite
+viendra une biographie de l‟auteur, Robin Hobb, ainsi que du traducteur français et de la
+traductrice italienne. Pour clore ce chapitre, nous ferons une brève présentation de la
+fantasy.
+Dans le deuxième chapitre, nous donnerons une définition du nom propre avec
+l‟explication d‟une partie des termes relatifs à l‟onomastique (c‟est-à-dire l‟étude des noms
+propres). Nous chercherons ensuite à déterminer si le nom propre doit être traduit ou, au
+contraire, conservé sous sa forme originale, ce qui nous amènera à nous interroger sur
+l‟existence (ou l‟absence) d‟un sens du nom propre, problématique que nous verrons à
+travers plusieurs théories ayant été proposées jusqu‟à aujourd‟hui. Finalement, nous
+décrirons les différents procédés dont dispose le traducteur lorsqu‟il est confronté à des
+noms propres.
+Le dernier chapitre sera consacré à l‟étude de l‟application de ces procédés dans la
+pratique. Pour cela, nous analyserons les choix effectués par les deux traducteurs
+concernant les différents noms contenus dans l‟ouvrage. Nous essayerons tout
+particulièrement de voir s‟ils ont tenté de conserver le sens de ces noms lorsqu‟il y en avait
+un dans le texte original.
+
+5
+
+1. Présentation de l’œuvre
+
+1.1. Qu’est-ce que la fantasy ?
+Le terme fantasy est un emprunt de l‟anglais. Il est apparu dans le Petit Robert 2010
+avec la définition suivante :
+Genre littéraire dans lequel l‟action se déroule dans un monde imaginaire peuplé
+d‟êtres surnaturels, mythiques ou légendaires.
+
+Bien que le dictionnaire recommande l‟utilisation du terme français « fantaisie »,
+les amateurs de ce genre littéraire utilisent presque uniquement le mot « fantasy ». Ce
+phénomène est probablement dû au fait que ce genre est beaucoup moins développé en
+Europe que dans les pays anglophones. De plus, nous avons constaté que cette acception ne
+figure pas dans la définition française du mot « fantaisie ».
+Il est difficile de dire exactement à quelle époque remonte ce genre littéraire. On
+peut cependant affirmer qu‟il s‟agit d‟une tradition très ancienne. Selon le site internet
+elbakin.net :
+l'Odyssée d'Homère n'est pas de la fantasy au sens où on l'entend aujourd'hui, pas plus
+que les romans arthuriens de Chrétien de Troyes ou les contes de Charles Perrault. La
+fantasy est cependant l'héritière de cette tradition riche de contes et légendes, des
+épopées antiques et des récits de chevalerie baignée dans le merveilleux médiéval, tout
+comme des romans de cape et d'épée.1
+
+Gilbert Millet et Denis Labbé font eux aussi remonter la naissance de ce genre littéraire à
+l‟époque médiévale. Dans leur ouvrage Les mots du fantastique et du merveilleux, ils
+écrivent :
+aux sources de ce genre : les épopées médiévales, ces chansons de geste (du latin res
+gestae ou gesta ce qui signifie action, exploit, haut fait) qui comptaient les prouesses
+de guerriers opposés aux ennemis de leur pays.2
+
+1
+2
+
+http://www.elbakin.net/fantasy/presentation/
+MILLET, Gilbert, LABBÉ, D., Les mots du merveilleux et du fantastique, 2003, p. 180.
+
+6
+
+Parmi les chansons de geste, on peut citer La chanson de Roland et le Cycle
+arthurien, les plus connues dans les pays francophones.
+La fantasy telle que nous la connaissons aujourd‟hui serait née lors de la révolution
+industrielle :
+face au positivisme, puis au développement technologique fulgurant, parfois
+inquiétant, qu'ont connu la fin du XIXème et le XXème siècle, certains écrivains y ont
+entrevu des futurs possibles, à plus ou moins long terme : ainsi est née la sciencefiction ; mais face à ce phénomène, d'autres ont voulu, non pas fuir, mais
+"réenchanter" le monde3.
+
+Bien qu‟elle existe depuis de nombreuses années, la fantasy n‟a pas eu beaucoup de succès
+en Europe avant le début des années 2000. En effet, la plupart des auteurs à succès sont
+anglo-saxons et n‟étaient pas très connus de ce côté de l‟océan Atlantique. C‟est en 2001, à
+l‟occasion de l‟adaptation au cinéma de la trilogie The Lord of the Rings de J. R. R.
+Tolkien que la fantasy s‟est retrouvée sur le devant de la scène et a connu un succès
+mondial. Suite à ce phénomène, le terme, qui ne désignait à la base que la littérature, a été
+étendu à d‟autres aspects du domaine tels que les films, les jeux vidéo et les jeux de rôle.
+La première distinction qu‟il convient de faire lorsque l‟on traite de fantasy est celle
+qui existe entre cette dernière et la science-fiction. Ces genres faisant tous deux partie de la
+littérature fantastique, il arrive qu‟ils soient confondus. Il existe cependant entre eux des
+différences majeures. Bien que tous deux aient pour décor des mondes imaginaires, les
+récits de fantasy se déroulent généralement dans le passé alors que ceux de science-fiction
+ont lieu dans le futur. Une autre différence importante est que le vecteur de la fantasy est la
+magie alors que celui de la science-fiction est la science ou la technologie.
+La seconde distinction se fait à l‟intérieur du genre lui-même. Le site elbakin.net
+recense dix sous-catégories différentes :
+
+
+l‟heroic fantasy aussi appelée Sword and sorcery (Ex : Le cycle des épées
+de Fritz Leiber)
+
+
+
+la high fantasy (Ex : Le Seigneur des Anneaux de John Ronald Reuel
+Tolkien)
+
+3
+
+http://www.elbakin.net/fantasy/presentation/
+
+7
+
+
+
+la fantasy mythique (Ex : La fille du Roi des Elfes de Lord Dunsany)
+
+
+
+la fantasy burlesque ou light fantasy (Ex : Les Annales du Disque-Monde de
+Terry Pratchett)
+
+
+
+la dark fantasy (Ex : Faerie de Raymond E. Feist)
+
+
+
+le réalisme magique (Ex : Cent Ans de Solitude de Gabriel Garcia Marquez)
+
+
+
+la fantasy urbaine (Ex : Neverwhere de Neil Gaiman)
+
+
+
+la science fantasy (Ex : Les Ballades de Pern d‟Anne MacCaffrey)
+
+
+
+la fantasy animalière (Ex : Le Vent dans les saules de Kenneth Grahame)
+
+
+
+la fantasy historique (Ex : le cycle de Téméraire de Naomi Novik)
+
+Les plus populaires étant l‟heroic fantasy et la high fantasy, nous allons nous en tenir à ces
+deux genres puisque le roman choisi pour ce travail relève des deux.
+L‟heroic fantasy se focalise sur les aventures d‟un héros qui sera amené à lutter
+contre les forces du Mal, incarnées par des êtres surnaturels tels que des magiciens, des
+démons et d‟autres monstres. Ces récits ont généralement pour cadre un monde imaginaire
+dans le passé (souvent le Moyen-âge).
+La high fantasy se déroule dans le même genre de monde que l‟heroic fantasy. La
+différence principale réside dans le fait qu‟elle se focalise non pas sur le héros, mais sur la
+lutte entre le Bien et le Mal. Le Bien triomphe généralement à la fin. La high fantasy
+présente également plus de magie, qu‟elle soit blanche ou noire. On y retrouve souvent une
+prophétie qui régit la vie et les choix du jeune héros.
+La plupart des romans de fantasy (et en particulier de high fantasy) sont des sagas
+qui se déclinent en plusieurs tomes. Une grande majorité est divisée en trilogies, mais il
+existe également des sagas plus longues, par exemple A Song of Ice and Fire (Le Trône de
+fer) de George R. R. Martin, qui compte 4 tomes traduits en 12 en français. À ce jour,
+l‟auteur a prévu d‟écrire trois tomes de plus. Un autre exemple est la série Les Chevaliers
+d’Émeraude, d‟Anne Robillard, qui compte 12 volumes.
+
+8
+
+1.2. Résumé
+L‟ouvrage raconte l‟histoire de la famille royale Loinvoyant par les yeux de Fitz,
+fils bâtard du Prince Chevalerie. Le récit se déroule dans le Royaume des Six-Duchés,
+principalement dans la citadelle de Castelcerf, où vit la famille royale. Lorsque le prince
+Chevalerie apprend l‟existence de son fils bâtard, il renonce à succéder à son père, le roi
+Subtil, sur le trône et se retire de la Cour. Fitz est alors confié à Burrich, le maître d‟écurie,
+qui l‟élèvera. Il ne connaîtra jamais son père, qui meurt quelques années plus tard.
+Fitz reçoit une formation d‟assassin dans le but de servir le roi actuel, Subtil, le père
+de Chevalerie. Il est également formé à l‟Art, la magie des Loinvoyant permettant de
+communiquer par la pensée ainsi que d‟imposer des pensées à une personne.
+L‟apprentissage de cette magie est très rude et Fitz, haï par son maître Galen, échoue et ne
+parvient à maîtriser cette magie que de façon aléatoire.
+Le royaume des Six Duchés se bat constamment contre les Pirates Outrîliens qui
+pillent les côtes et prennent des otages qu‟ils renvoient dépouillés de toute humanité. La
+famille Loinvoyant, désemparée face à cette nouvelle menace, ne sait pas comment réagir
+et le peuple commence à perdre confiance en son roi en raison de son manque de réaction.
+Afin de redonner espoir au peuple, le roi décide de marier son second fils, Vérité, à
+une princesse montagnarde. Cependant, Vérité est occupé à défendre les côtes à l‟aide de
+l‟Art en envoyant aux pirates de fausses informations, par exemple, pour les empêcher de
+voir les récifs afin qu‟ils s‟échouent. Il doit être proche de ses cibles pour pouvoir pratiquer
+la magie et ne peut donc pas quitter Castelcerf. C‟est son frère Royal qui se rend dans les
+montagnes en tant qu‟intermédiaire et le mariage est célébré par le biais de l‟Art afin que
+Vérité puisse y assister depuis la citadelle.
+Fitz est chargé d‟accompagner le prince Royal et d‟assassiner le frère de la future
+épouse de Vérité qui, selon les dires de Royal, serait malade. Le but du roi Subtil et de
+Royal est que la princesse Kettricken devienne l‟unique héritière de son royaume.
+Cependant, Fitz se rend rapidement compte qu‟il a été dupé par Royal, qui veut sa mort. Il
+refuse donc d‟accomplir sa mission et est empoisonné en même temps que le prince
+montagnard par les sbires de Royal. Ayant ingurgité moins de poison, il réussit toutefois à
+survivre, mais gardera toute sa vie des séquelles de cet empoisonnement.
+9
+
+Alors qu‟il est inconscient suite aux mauvais traitements de Royal, Fitz surprend
+une conversation d‟Art entre Galen, le maître de magie, et le prince Royal qui complotent
+pour tuer le prince Vérité. Aidé par Burrich, Fitz va réussir à déjouer le complot et à sauver
+Vérité. Royal ne réussit pas non plus à faire échouer le mariage.
+Suite au mariage, les montagnards fournissent du bois pour construire des vaisseaux
+de guerre et le roi Subtil fait construire des fortifications dans le royaume. La présence
+d‟une reine à la Cour redonne un peu espoir au peuple dans sa lutte contre les pirates.
+
+1.3. Présentation des personnages principaux
+Subtil Loinvoyant
+Roi du royaume des Six-Duchés, Subtil s‟est marié deux fois : de sa première union, avec
+la reine Constance, sont nés les princes Chevalerie et Vérité. Le prince Royal, lui, est né de
+la seconde union du roi, avec la reine Désir, qui meurt au cours de l‟histoire4. Subtil est âgé
+et commence à être malade ; il laisse donc beaucoup de responsabilités à ses fils,
+principalement à Vérité.
+C‟est lui qui ordonne que Fitz soit formé comme assassin.
+Chevalerie Loinvoyant
+Chevalerie est le premier fils du roi Subtil. Il est destiné à lui succéder mais renonce au
+trône le jour où il apprend avoir engendré un bâtard, Fitz. Chevalerie se retire alors de la
+cour avec son épouse Patience. Il meurt dans un accident de cheval quelques années plus
+tard. Burrich et Fitz soupçonneront un meurtre qui ne sera jamais prouvé. Fitz ne connaîtra
+jamais son père.
+
+4
+
+Un arbre généalogique de la famille Loinvoyant se trouve en annexe.
+
+10
+
+Dame Patience
+Elle est l‟épouse du prince Chevalerie, auquel elle ne donnera jamais d‟enfant. À la mort
+de celui-ci, elle décide de sortir de sa retraite et se rend à Castelcerf, où elle tente de se
+rapprocher de Fitz. Ils entretiennent une relation tendue mais, dans la suite de la série,
+Patience aide beaucoup Fitz à surmonter certains obstacles qu‟il rencontre.
+Vérité Loinvoyant
+Deuxième fils de Subtil, il épouse, à la fin de ce premier tome, la princesse montagnarde
+Kettricken. Lorsque son frère Chevalerie renonce à son droit au trône, il devient roi-servant
+et est chargé de nombreuses responsabilités. Il maîtrise la magie de l‟Art, ce qui lui permet
+de lutter contre les attaques des pirates outrîliens. Dans la suite de la saga, il joue un rôle
+majeur dans cette lutte.
+Royal Loinvoyant
+Il est le troisième fils de Subtil et est très attaché à sa mère. À la mort de cette dernière, il
+accuse Subtil d‟en être responsable. Il déteste son neveu Fitz et tente de se débarrasser de
+lui.
+C‟est un personnage arrogant et sûr de lui. Contrairement à ses frères, qui veillent au
+royaume avant tout, il se préoccupe beaucoup de son apparence et peu de son peuple.
+FitzChevalerie Loinvoyant
+Fitz est le héros de la saga. Il est le fils bâtard du prince Chevalerie et le petit-fils du Roi
+Subtil. Sa mère est une femme inconnue dont il n‟a aucun souvenir. Il ne connaîtra jamais
+son père et est élevé par Burrich, le maître d‟écurie de Castelcerf. Il est ensuite formé par
+Umbre pour devenir un assassin secret au service du roi Subtil.
+Il possède la magie de l‟Art mais ne parvient à l‟utiliser que de façon aléatoire. Il maîtrise
+également la magie du Vif (magie qui crée un lien entre les humains et les animaux), qu‟il
+doit cacher car cette dernière est considérée comme une tare.
+
+11
+
+Burrich
+Au début du récit, Burrich est le maître d‟écurie de Chevalerie, puis, lorsque celui-ci
+renonce à sa place à la cour, il se retrouve responsable des écuries de Castelcerf. Il est
+également responsable de Fitz qu‟il élève seul.
+Molly Chandelière
+Molly fait partie du groupe d‟enfants de Bourg de Castelcerf avec qui Fitz va jouer chaque
+fois qu‟il parvient à sortir de la citadelle. Plus tard dans la série, leur relation évolue et ils
+vivent une histoire d‟amour.
+Elle vit seule avec son père alcoolique, qui la bat. Elle s‟occupe de lui et de leur
+chandellerie depuis qu‟elle est petite.
+Le fou
+C‟est le bouffon du roi. Personne ne connaît son véritable nom ni d‟où il vient. Il a la peau
+pâle et semble ne pas vieillir au même rythme que les autres humains ; il est difficile de lui
+donner un âge. Il s‟exprime généralement par énigmes et parle à peu de monde en dehors
+du roi et de Fitz. Par la suite, il devient un ami proche de Fitz. C‟est un personnage étrange,
+difficile à cerner et même Fitz ne parvient pas réellement à le comprendre.
+Galen
+Il est le maître d‟Art (la magie des Loinvoyants) de Castelcerf. On apprend vers la fin du
+roman qu‟il est le fils bâtard de la reine Désir, donc le demi-frère du prince Royal. Il a
+formé les trois princes à l‟Art et il est également chargé de former Fitz. Cependant, il lui
+voue une profonde haine et s‟arrange pour que Fitz échoue dans son apprentissage.
+Umbre Tombétoile
+Umbre est le demi-frère du roi Subtil. Il vit caché dans le château et sert d‟assassin et
+d‟espion au roi. Ayant le visage marqué suite à une maladie et à certaines expériences
+ratées, il ne présente pas de ressemblance physique avec le roi Subtil. C‟est pourquoi les
+rares personnes qui le voient ne font pas le lien avec la famille royale et son existence a été
+oubliée de tous. Il est chargé de prendre Fitz comme apprenti et de lui enseigner
+12
+
+secrètement l‟art de l‟assassinat. Lorsqu‟il doit sortir du château pour ses missions, il se
+sert d‟un déguisement et utilise le nom de Dame Thym.
+
+1.4. Biographie de l’auteur
+Robin Hobb, de son vrai nom Margaret Astrid Lindholm Ogden, est née en Californie
+en 1952. Alors qu‟elle a 9 ans, sa famille part s‟installer en Alaska pour vivre une vie
+simple à la campagne. Puis elle part à Denver (Colorado) pour faire des études en
+communication. Ses études terminées, elle retourne en Alaska, où elle se marie avec un
+pêcheur. Ils restent quelques années en Alaska, où ils vivent sur l‟île Kodiak. Actuellement
+ils habitent à Tacoma près de Seattle (Washington). Margaret Lindholm a eu quatre enfants
+avec son mari et a déjà trois petits-enfants. Elle gagne sa vie grâce à son travail d‟auteur.
+Dans les années 70, elle publie ses premiers textes sous le nom de Margaret
+Lindholm. Ces œuvres sont bien reçues par le public et la critique mais n‟ont pas le succès
+attendu. Lorsque, en 1995, elle imagine le personnage de Fitz et son univers, elle décide,
+d‟entente avec son éditeur, d‟inventer le pseudonyme de Robin Hobb. C‟est grâce à sa
+série de l’Assassin Royal, puis des Aventuriers de la mer qu‟elle gagne une renommée
+mondiale et se fait un nom parmi les grands auteurs de fantasy, ce qui lui vaut une
+nomination pour le prix Hugo, qu‟elle n‟a pas obtenu à ce jour.
+Malgré son succès sous le nom de Robin Hobb, elle continue d‟écrire sous le nom
+de Margaret Lindholm. Ses deux noms marquent deux facettes différentes de son style,
+Margaret Lindholm écrit plutôt de la science fiction et Robin Hobb de la fantasy. Le fait de
+garder les deux noms lui permet donc d‟écrire dans deux styles différents.
+Ses œuvres sous le nom de Robin Hobb comprennent les deux cycles de l’Assassin
+Royal, le cycle des Aventuriers de la mer et celui du Soldat Chamane. Ils sont suivis de
+Dragon Keeper, un nouveau cycle, qui est en cours de traduction en français.
+
+13
+
+1.5. Biographie du traducteur français
+Arnaud Mousnier-Lompré est né en 1960. Il vit en France, près de Montpellier avec
+sa femme et leurs trois enfants. Il traduit des ouvrages de fantasy et de science-fiction.
+Il a traduit son premier roman, Galactic Pot-Healer de Philip K. Dick, à l‟âge de 17
+ans. Cette traduction n‟a pas été publiée, car le roman avait déjà été traduit. Il n‟a pas suivi
+de formation de traducteur proprement dite, mais a obtenu une licence en anglais.
+En 1988, il fait la connaissance de George W. Barlow, un traducteur qui le met en
+relation avec la maison d‟édition Presses-Pocket. Puis en 1995, il prend contact avec la
+maison d‟édition L’Atalante, pour laquelle il travaille encore aujourd‟hui, ainsi qu‟avec
+Pygmalion, éditrice de Robin Hobb, qui lui confie la traduction de l’Assassin Royal.
+Depuis, Arnaud Mousnier-Lompré traduit presque tous les romans de Robin Hobb
+(26 ouvrages) et s‟est lié d‟amitié avec elle. C‟est l‟auteur elle-même qui demande à la
+maison d‟édition de confier ses œuvres à Arnaud Mousiner-Lompré. Il traduit également
+les œuvres d‟Orson Scott Card et de Simon R. Green.
+Actuellement, il travaille sur la dernière série de Robin Hobb, Dragon Keeper.
+
+1.6. Biographie de la traductrice italienne
+Paola Bruna Cartoceti est née à Milan, où elle a fait ses études à l‟Université
+catholique du Sacré cœur (Università cattolica del Sacro Cuore). Elle réside encore à Milan
+aujourd‟hui.
+Elle traduit principalement des romans de fantasy. Elle travaille pour la maison
+d‟édition Fanuci, pour qui elle a traduit, entre autres, la trilogie de l‟Assassin Royal de
+Robin Hobb et la trilogie de La Pierre Souveraine de Margaret Weis et Tracy Hickman.
+
+14
+
+2. Éléments théoriques
+
+2.1. Définition du nom propre
+Nous allons maintenant donner une définition du nom propre. En effet, le nom
+propre est une notion très large. Tout d‟abord, il est à différencier du nom commun. La
+première différence que nous pouvons noter entre les deux sortes de noms se situe au
+niveau graphique. En effet, comme le fait remarquer Kerstin Jonasson, en français, les
+noms propres commencent généralement par une majuscule, alors que les noms communs,
+sauf lorsqu‟ils sont placés en début de phrase, commencent par une minuscule :
+Du côté graphique, par contre, le Npr [nom propre] se distingue nettement des autres
+catégories linguistiques par la majuscule.5
+
+Cependant, il existe quelques exceptions, des noms communs peuvent, dans certains cas,
+changer de catégorie et se muer en nom propre. Ils ont alors une majuscule (c‟est le cas de
+la personnification : l’Amour, le Mal) et certains noms propres peuvent commencer par une
+minuscule (lorsque le nom d‟une personne est utilisé en tant qu‟expression, par exemple :
+un don juan). Cette différence ne peut donc pas être généralisée. Nous allons étudier les
+définitions qui nous sont données par le dictionnaire Le Petit Robert afin de voir s‟il existe
+d‟autres différences:
+Nom commun : Mot servant à désigner les êtres, les choses qui appartiennent à une
+même catégorie.
+Nom propre : Mot ou groupe de mots servant à désigner un individu et à le distinguer
+des êtres de la même espèce.6
+
+Nous pouvons donc voir qu‟il existe une autre différence importante, qui, cette fois,
+se situe au niveau de la réalité désignée par l‟un et l‟autre des termes. Selon ces définitions,
+le nom commun peut être utilisé pour désigner n‟importe quelle « chose », qu‟il s‟agisse
+d‟un être vivant ou d‟un objet. Il est utilisé pour désigner tous les éléments d‟une série, par
+exemple, le mot chaise désigne n‟importe quel objet faisant partie de la catégorie chaise.
+Le nom propre, quant à lui, désigne une catégorie plus réduite : il sert à désigner un
+
+5
+6
+
+JONASSON, Kerstin, Le nom propre : Constructions et interprétations, 1994, p. 25.
+Le Petit Robert en ligne, http://pr.bvdep.com
+
+15
+
+individu, plus exactement, il sert à désigner une personne précise au sein d‟un groupe, une
+personne qui se différencie des autres éléments du groupe. Par exemple, John et Paul sont
+tous deux des individus, mais, bien qu‟ils fassent partie de la même espèce, ils sont
+différents.
+Nous pensons cependant que la définition que donne le Petit Robert du nom propre
+est un peu restrictive. En effet, le nom propre ne se limite pas aux seuls êtres humains.
+L‟onomastique couvre un domaine beaucoup plus vaste : elle traite des anthroponymes et
+des toponymes, qui sont les deux catégories principales regroupées sous le nom propre,
+mais également des ergonymes, des praxonymes, des phénonymes et des zoonymes (ces
+catégories seront définies plus en détail dans la section suivante).
+L‟anthroponymie est la branche de l‟onomastique qui va nous intéresser pour ce
+travail. Nous allons donc la définir plus précisément. Les anthroponymes peuvent être
+répartis en plusieurs sous-catégories. Le nom propre, lorsqu‟il désigne une personne, peut
+en effet revêtir différentes formes. Il peut être un prénom, un nom de famille (alors appelé
+patronyme) ou encore un surnom. Cet anthroponyme peut également inclure un titre tel que
+Docteur, Président, ou simplement Monsieur ou Madame. Il peut également, comme
+l‟indique Gerhard Bauer dans sa typologie du nom propre, être un nom de peuple ou un
+nom désignant les habitants d‟un pays. Nous étudierons en détail les stratégies de
+traduction pour les anthroponymes dans la suite de ce travail.
+Nous allons définir ici ce que désignera l‟appellation « nom propre » tout au long
+de ce travail. Bien que l‟on trouve également des toponymes et les zoonymes dans notre
+ouvrage, nous avons choisi de ne pas les prendre en considération, car il nous serait
+impossible de tous les traiter. Nous allons donc analyser uniquement les anthroponymes,
+en particulier les prénoms. Les noms de famille étant peu fréquents dans l‟ouvrage choisi
+et les surnoms étant absents, nous n‟aurons pas réellement la possibilité de les étudier. En
+effet, l‟auteur choisit d‟utiliser, la plupart du temps, uniquement les prénoms de ses
+personnages. Les noms de famille n‟apparaissent, pour la majorité, que lors de la
+présentation du personnage. En ce qui concerne les gentilés et autres ethnonymes, ils sont
+peu fréquents et sont traduits de façon littérale ou restent inchangés (le peuple Chyurda,
+par exemple, conserve son nom original et le nom du peuple des pirates – Outislander en
+anglais – est traduit littéralement en Outrîliens). Ils ne posent donc pas de problèmes de
+traduction ici, raison pour laquelle nous les laisserons de côté.
+16
+
+2.2. Nomenclature
+Nous allons ici donner quelques définitions de termes utilisés en onomastique,
+c‟est-à-dire dans l‟étude des noms propres. Pour cela, nous allons nous appuyer sur la
+typologie établie par le linguiste Gerhard Bauer et reprise par Béatrice Daille, Nordine
+Fourour et Emmanuel Morin dans l‟article Catégorisation des noms propres : une étude en
+corpus.7
+Bauer répartit les noms propres en six catégories principales :
+1. Les Anthroponymes : comprenant les personnes ou les groupes de personnes. Il existe
+plusieurs sous-catégories d‟anthroponymes : les patronymes (noms de famille), les
+prénoms, les pseudonymes, les gentilés (habitants d‟une ville ou d‟un pays), les
+hypocoristes (diminutifs, noms affectueux), les ethnonymes (noms de peuple), les noms de
+groupes musicaux modernes, d‟ensembles artistiques et d‟orchestres classiques, de partis et
+d‟organisations.
+2. Les Toponymes : comprenant les noms de lieux, dont les pays, les villes, les
+microtoponymes (noms de lieux restreints, tels que des châteaux ou des bâtiments isolés),
+les hydronymes (noms des cours d‟eau), les oronymes (noms de montagnes) et les noms
+d‟installations militaires.
+3. Les Ergonymes : c'est-à-dire les objets et les produits manufacturés et, par extension,
+les marques, entreprises, établissements d'enseignement et de recherche, les titres de livres,
+de films, de publications, d'œuvre d'art.
+4. Les Praxonymes : les faits historiques, les maladies, les événements culturels.
+5. Les Phénonymes : les ouragans, les zones de haute et de basse pressions, les astres et
+les comètes.
+6. Les Zoonymes : les noms d‟animaux familiers.
+
+7
+
+http://w3.erss.univ-tlse2.fr/textes/publications/CDG/25/CG25-7-Daille.pdf
+
+17
+
+2.3. Traductibilité et sens
+Lorsqu‟on étudie les noms propres dans le domaine de la traduction, la première
+question qui se pose est celle de leur traductibilité, pour déterminer s‟ils sont traduisibles.
+Depuis longtemps, de nombreux traductologues et linguistes (par exemple Michel Ballard)
+se demandent si les noms propres doivent être traduits ou si, au contraire, ils doivent être
+retranscrits tels quels. Pour nous, répondre à cette question exige de déterminer si le nom
+propre a un sens, une signification. En d‟autres termes, s‟il est motivé ou non. En effet, en
+traduction, le sens du texte est primordial. Le traducteur s‟efforce de traduire le sens et ne
+se contente pas uniquement de trouver des équivalents en langue cible des mots du texte
+source. Si le mot possède un sens, il est alors un élément de traduction devant être traité
+par le traducteur. C‟est en fonction de l‟existence ou de l‟absence de ce sens dans l‟original
+que le traducteur prendra la décision de traduire ou non le nom propre. Nous allons donc
+maintenant voir si ce sens, ou plutôt, en l‟occurrence, cette connotation existe.
+Selon Kerstin Jonasson il y a trois interprétations du sens du nom propre : soit il est
+considéré comme vide de sens, soit le sens correspond à une description du référent, soit il
+est considéré comme un prédicat de dénomination (c'est-à-dire que le nom propre ne décrit
+pas l‟objet mais lui confère un nom)8. La première de ces théories, qui est également la
+plus ancienne, est défendue, entre autres, par John S. Mill, Alan H. Gardiner et Knud
+Togeby. Ces linguistes estiment que le nom propre n‟est qu‟un mot servant à désigner une
+personne en particulier. Pour Mill, le nom propre est le seul mot ne possédant aucune
+connotation, aucune signification :
+The only names of objects which connote nothing are ‘ proper’ names ; and these
+have, strictly speaking, no signification.9
+
+Au XIXe siècle, on considérait généralement que le nom propre n‟était qu‟une étiquette
+attribuée à une personne, un simple référent permettant de distinguer une personne d‟une
+autre. Il n‟avait pour but que de désigner et non pas signifier, comme le souligne Maurizio
+Viezzi :
+
+8
+
+JONASSON, Kerstin, Op. Cit., 1994, p.114.
+MILL, John Stuart, A system of logic, 1851, cité d‟après BALLARD, Michel, Le nom propre en traduction,
+2001, p.77.
+9
+
+18
+
+molti studiosi, e per troppo tempo, abbiano voluto negare status linguistico ai nomi
+10
+propri, rifiutando di riconoscere ai nomi propri stessi un qualsivoglia senso.
+
+À cette époque, comme le montre André Racicot dans son article traduire le
+monde11, les traducteurs avaient tendance à traduire automatiquement et systématiquement
+les anthroponymes. C‟est ainsi que Christoforo Colombo est devenu Christophe Colomb et
+que Leonardo Da Vinci est devenu Léonard de Vinci. Une personne possédait alors des
+noms et prénoms différents dans les diverses langues.
+Plus tard, ce point de vue a changé et les linguistes se sont rendu compte que le
+nom propre pouvait être plus qu‟une simple étiquette et qu‟il pouvait posséder une
+signification ou une connotation, ainsi que l‟affirme Maurizio Viezzi dans son ouvrage
+Denominazioni proprie e traduzione:
+I nomi propri (di persone, animali, luoghi, ...), le denominazioni proprie non sono
+delle semplice etichette o delle entità la cui funzione e il cui ruolo si esauriscono nelle
+designazione; sono invece significativi, sono portatori di senso.12
+
+Cela nous mène à la seconde théorie évoquée par Jonasson, celle soutenue par
+Bertrand Russell et Gottlob Frege, par exemple, et selon laquelle le sens du nom propre
+peut être une description de son référent, c'est-à-dire de la personne qui le porte (dans le
+cas des anthroponymes). Cette théorie est pertinente dans certains des cas traités dans la
+partie pratique de ce travail, car l‟auteur a effectivement choisi certains noms en fonction
+du caractère de ses personnages. Cependant, dans un contexte plus général et, surtout, plus
+réel, cette théorie n‟est pas très pertinente en ce qui concerne les personnes, car les parents
+choisissent un prénom pour la simple raison qu‟il leur plaît et non pas parce qu‟ils pensent
+que ce prénom décrit bien leur enfant !
+La troisième théorie a été élaborée par des linguistes tels que Georges Kleiber, John
+Algeo et Tyler Burge. Ces derniers pensent que le sens du nom propre est un prédicat de
+dénomination. En d‟autres termes cela signifie qu‟il ne décrit pas son porteur mais qu‟il lui
+donne un nom. Cette théorie se situe en quelque sorte entre les deux autres dans le sens ou
+elle ne nie pas totalement l‟existence d‟un sens du nom propre mais qu‟elle ne le considère
+pas non plus comme une description de son référent. Le nom propre ici est considéré
+10
+
+VIEZZI Maurizio, Denominazioni proprie e traduzione, 2004, p. 25-26.
+RACICOT, André, traduire le monde, http://www.btb.gc.ca/btb.php?lang=fra&cont=1114, 2008
+12
+VIEZZI Maurizio, Op. Cit., 2004, p. 25-26
+11
+
+19
+
+comme ayant un sens plus général. Kleiber donne pour définition de ce sens l‟expression
+« être appelé x », le sens du nom propre pour Kleiber est qu‟il permet de désigner une
+personne précise. Cette théorie est cependant critiquable. En effet, il est possible que deux
+personnes portent le même prénom ainsi que, bien que cela soit rare, le même nom de
+famille. Le même nom propre ne se rapporte alors plus à un référent unique mais à deux
+personnes distinctes.
+Selon nous, la théorie la plus pertinente est une quatrième théorie, plus récente,
+défendue notamment par
+
+Laura Salmon Kovarski13 et selon laquelle ce sont les
+
+connotations véhiculées par le nom propre qui en composent le sens. Pour Salmon
+Kovarski, le nom propre est un indicateur du milieu social, ethnique, culturel et
+pragmatique de son porteur. À ce sujet, nous citerons Cristina Adrada Rafael :
+À l‟origine, prénoms et noms de famille étaient des descriptions qui parlaient de la
+naissance de l‟individu, de l‟histoire de sa famille, ou qui – à la façon des sobriquets –
+faisaient allusion à des traits physiques ou moraux.14
+
+Il faut néanmoins établir une différence entre fiction et réalité. En effet, les connotations ou
+indices véhiculés par les noms réels sont indépendants de la volonté du porteur du nom,
+alors que, dans la fiction, il s‟agit généralement d‟effets recherchés par l‟auteur.
+Le nom propre nous permet donc parfois d‟apprendre de nombreuses choses sur la
+personne qui le porte, comme son origine ou son milieu social. En effet, de nombreux
+prénoms donnent une indication du pays d‟où est issu son porteur. Ainsi, on présumera que
+Marie vient d‟un pays francophone et que Mary est, elle, originaire d‟un pays anglophone.
+De plus, certains noms ou prénoms sont connotés comme appartenant à une certaine classe
+sociale. Les patronymes à particule, par exemple, sont une preuve de noblesse. Même si
+c‟est moins le cas dans la société actuelle, ils restent connotés comme nobles dans la
+littérature. Les prénoms composés étaient, au début, plus fréquents dans la haute société
+alors qu‟un prénom tel qu‟Olivier ou Marcel laissait penser que la personne était d‟origine
+plus modeste. En outre, de nombreux prénoms sont connotés, en particulier ceux ayant
+
+13
+
+SALMON KOVARSKI, Laura, Anthroponyms, acronyms and allocutives in interpreting from Russian,
+2002, in GARZONE, G. et VIEZZI M., Interpreting in the 21st Century. Challenges and Opportunities, p.83
+cité d‟après VIEZZI Maurizio, denominazioni proprie e traduzione, 200, p. 28.
+14
+
+ADRADA RAFAEL, Cristina Rafael, « La traduction de la connotation onomastique en littérature » in
+BALLARD, Michel, la traduction, contact de langues et de cultures (1), 2005, p.76.
+
+20
+
+appartenus à des personnages célèbres comme des rois, des impératrices ou des présidents.
+Comme l‟écrit Kerstin Jonasson, ces connotations jouent un rôle important lors de
+l‟attribution d‟un prénom à un enfant par exemple :
+ce sens exerce une certaine influence sur l‟attribution des Npr [noms propres] aux
+enfants, aux produits, aux établissements publics etc.15
+
+Une grande partie de ce sens s‟est toutefois peu à peu perdue. Aujourd‟hui, il est
+plus difficile de deviner l‟origine d‟une personne par son nom. Cela est en partie dû au
+phénomène de mondialisation, qui met les différentes cultures en contact les unes avec les
+autres. De plus, les goûts des parents changent d‟une génération à l‟autre. Il n‟est plus
+étonnant aujourd‟hui de rencontrer une personne qui s‟appelle Ashley ou Bryan et qui
+possède uniquement la nationalité française.
+Pour cette raison, nous pensons qu‟il faut établir une différence entre les
+anthroponymes réels et les anthroponymes fictifs présents dans la littérature. Dans le
+second cas, la signification est plus fréquente et plus importante. Selon Maurizio Viezzi,
+les noms propres sont utilisés, consciemment ou non, par l‟auteur dans le but de donner
+certaines informations à son lecteur et de l‟aider dans son interprétation du récit :
+[il nome proprio] viene utilizzato dall’autore per comunicare con il lettore, o con lo
+spettatore, per fornire informazioni supplementari pertinenti alle vicende narrate o
+suggerire chiavi interpretative.16
+
+Jonasson affirme elle aussi que :
+[…] ce type de sens est souvent exploité dans la littérature fictive, où l‟auteur, s‟il
+n‟écrit pas des romans historiques ou documentaires évidemment, peut librement
+choisir le Npr [nom propre] de ses personnages en vue d‟éveiller chez le lecteur les
+réactions désirées.17
+
+Josiane Podeur poursuit dans ce sens en expliquant que l‟auteur d‟une œuvre obéit
+à certaines règles lorsqu‟il choisit les noms de ses personnages. Il se fonde sur des critères
+phonétiques, morphologiques et ethnologiques de la culture qui sert de contexte à son
+récit :
+
+15
+16
+
+17
+
+JONASSON, Kerstin, Op. Cit., 1994, p.123.
+VIEZZI, Maurizio, denominazioni proprie e traduzione, 2004, p. 32.
+JONASSON, Kerstin, Op.Cit. p.123.
+
+21
+
+l’autore di un’opera letteraria sceglierà i nomi dei suoi personaggi obbedendo a
+determinate regole fonetiche, morfologiche ed etnologiche della cultura in cui
+s’innesta.18
+
+Ces connotations culturelles ou indices sont des éléments qui permettent de donner une
+« couleur locale » au récit, de l‟ancrer dans une réalité culturelle (Dickens, par exemple,
+utilise énormément ces indices lorsqu‟il choisit les noms de ses personnages, comme celui
+de Miss Havisham dans Great Expectations). En donnant à ses personnages des prénoms
+aux consonances d‟un pays précis, l‟auteur rappelle ainsi à son lecteur l‟origine de ces
+personnages.
+Nous avons donc établi l‟existence d‟une signification du nom propre véhiculée par
+les connotations ou indices, bien que cette signification soit plus fréquente dans la fiction
+littéraire que dans le monde réel. Un dernier point que nous tenons à préciser au sujet des
+connotations est qu‟elles peuvent être très différentes d‟un pays à l‟autre ainsi que d‟un
+individu à l‟autre. En effet, les individus ont tous des connaissances encyclopédiques
+différentes en fonction de leur âge, de leur culture ou de leur classe sociale. Les
+connotations transmises par l‟auteur varient donc en fonction du lecteur, ce qui complique
+la tâche du traducteur, car il doit s‟assurer que la connotation véhiculée par le nom propre
+dans sa traduction corresponde à la connotation de la langue source.
+Nous allons maintenant nous pencher sur la question de la traductibilité de ces
+noms. Comme nous l‟avons vu précédemment avec les exemples tirés de l‟article d‟André
+Racicot (Christoforo Colombo pour Christophe Colomb et Leonardo Da Vinci pour
+Léonard de Vinci), en ce qui concerne les noms des personnes réelles, les premiers
+traducteurs avaient tendance à les traduire, pour ainsi dire, sans se poser de question.
+Plus tard, la tendance s‟est inversée et, lorsqu‟il s‟agit de personnes réelles,
+existantes ou ayant existé, les traducteurs se limitent à reporter le nom sous sa forme
+originale à moins qu‟une traduction n‟existe déjà, auquel cas le traducteur devra se
+conformer à la forme existante. On utilise aujourd‟hui généralement le report pour la raison
+somme toute assez évidente que le nom propre désigne une personne précise et unique. En
+effet, le nom d‟une personne marque son identité. Un changement de ce nom entraînerait
+
+18
+
+PODEUR, Josiane, Nomi in azione, il nome proprio nelle traduzioni dall’italiano al francese e dal
+francese all’italiano, 1999, p.121.
+
+22
+
+en quelque sorte une modification de cette identité. Ainsi, le nom George W. Bush désigne
+uniquement l‟ancien président des États-Unis (en fonction de 2001 à 2009). Ainsi, il ne
+viendrait à l‟idée d‟aucun traducteur aujourd‟hui de l‟appeler Georges W. Buisson !
+Le problème est différent en littérature, car le nom propre y possède un sens plus ou
+moins important pour le récit. La question se pose alors de savoir si le traducteur doit
+garder une certaine référence à la culture et au pays source ou s‟il doit, au contraire,
+présenter à son lecteur des prénoms plus « familiers ». Ici, la tendance varie selon les
+genres et les traducteurs. Selon Cristina Adrada Rafael,
+Le rôle du traducteur est alors de comprendre le rapport existant entre nom propre et
+personnage, sans oublier la valeur de ce nom dans la culture du texte de départ.19
+
+Lorsque le traducteur a compris ce rapport, il est en mesure de décider ce qu‟il convient de
+conserver : le nom choisi par l‟auteur, son sens, son ancrage dans une réalité culturelle ou
+politique, etc. Il est important de préciser qu‟il n‟existe aucune solution « miracle ». Le
+traducteur doit analyser les différentes possibilités qui lui sont offertes avant de prendre
+une décision, qui variera selon le contexte et le texte à traduire.
+Ce problème se pose encore un peu différemment lorsque l‟on étudie la fantasy. Les
+noms et les prénoms utilisés par les auteurs dans ce genre de roman sont souvent des noms
+issus de leur imagination, des noms inexistants dans le monde réel. Ces noms peuvent être
+des noms totalement imaginaires ou conserver un lien avec notre monde. Par exemple,
+dans l‟ouvrage que nous allons étudier, l‟auteur a choisi pour certains des protagonistes des
+noms communs, qui sont de plus des noms de vertus (Vérité, Joyeuse), alors que d‟autres
+noms ont été inventés de toute pièce. Le traducteur doit alors décider si le sens prime sur la
+forme ou si, au contraire, la forme est plus importante.
+En ce qui concerne les toponymes (autre branche importante de l‟onomastique), les
+usages de traduction sont plus ou moins fixés. En effet, une grande majorité des noms de
+lieux importants (c'est-à-dire dont le nom est connu au-delà des frontières nationales) ont
+une traduction officielle, qu‟il convient d‟utiliser dans tous les cas. Dans le cas où ce nom
+officiel n‟existe pas, la tendance est à la conservation du nom sous sa forme originale. Les
+noms de pays ou de monuments importants sont donc traduits (p. ex. Switzerland/Suisse ;
+
+19
+
+ADRADA RAFAEL, Cristina Rafael, Op. Cit., 2005, p.86.
+
+23
+
+The White House/la Maison Blanche) alors que les noms de rues sont généralement repris
+tels quels.
+Pour ce qui est des référents culturels (ce qui, chez Bauer, constitue la catégorie des
+ergonymes), les stratégies de traduction varient. Pour certains référents culturels, des
+traductions officielles recommandées existent (Easter/Pâques ; American Civil war/Guerre
+de Sécession), alors que, pour d‟autres, le choix est laissé au traducteur, qui décidera de
+traduire le nom dans certains cas et de le reprendre sans le changer dans d‟autres. Ces deux
+phénomènes se retrouvent dans la traduction des titres de film (par exemple, Alien vs.
+Predator ou Black Swan ont gardé leur titre original alors que The Lord of the Rings a été
+traduit).
+
+2.4. Les différents procédés de traduction du nom propre
+Dans ce chapitre, nous allons étudier les différentes possibilités dont dispose le
+traducteur lorsqu‟il est confronté à des noms propres. Quand on parle de traduction
+« générale », on distingue deux courants différents : certains traducteurs optent pour une
+traduction proche du texte et du public source, une traduction plus proche de la lettre de
+l‟original, alors que d‟autres axent leur traduction sur le texte et le public cible. De
+nombreux linguistes et traductologues ont analysé ce phénomène et il en ressort une
+terminologie assez variée, désignant en fin de compte des méthodes de traduction
+similaires.
+Georges Mounin, pour décrire ces deux courants, utilise l‟opposition entre « verres
+colorés » (des traductions dans lesquelles on ressent l‟intervention du traducteur à travers
+des adaptations) et « verres transparents » (c‟est-à-dire des traductions dans lesquelles le
+traducteur est invisible). Eugène Nida, quant à lui, a créé les termes « équivalence
+formelle » (c‟est à dire que le traducteur met l‟accent sur la forme et le contenu de
+l‟équivalence) et « équivalence dynamique » (pour laquelle le traducteur prend en compte
+la culture de la langue cible dans le but de produire le même effet chez le lecteur cible que
+chez le lecteur source)20. La terminologie que nous avons choisie est celle d‟un troisième
+20
+
+Notes personnelles du cours Théories contemporaines de la traduction, donné par le professeur GUIDÈRE
+Mathieu, semestre de printemps 2010.
+
+24
+
+traducteur et traductologue, Jean-René Ladmiral. Il utilise les termes « sourcier » et
+« cibliste ». Nous avons choisi ces deux termes car nous pensons que ce sont les plus
+parlants et les plus clairs. Ladmiral définit ces deux tendances ainsi :
+j‟appelle « sourciers » ceux qui, en traduction (et particulièrement en théorie de la
+traduction), s‟attachent au signifiant de la langue du texte-source qu‟il s‟agit de
+traduire ; alors que les « ciblistes » entendent respecter le signifié (ou, plus
+exactement, le sens et la « valeur ») d‟une parole qui doit advenir dans la languecible.21
+
+Les termes signifiant et signifié sont des concepts créés par le linguiste Ferdinand de
+Saussure et qui signifient respectivement l‟image acoustique d‟un mot (le mot lui-même) et
+le concept auquel il renvoie. Selon Ladmiral, les traducteurs sourciers s‟attachent au
+signifiant, ils cherchent à traduire le mot lui-même, sa forme, alors que les traducteurs
+ciblistes traduisent le concept véhiculé par le mot en question. Les premiers font donc une
+traduction plutôt littérale du texte alors que les seconds vont plus chercher à l‟interpréter et
+à en retransmettre le sens. Nous tenons cependant à préciser que selon nous, un traducteur
+n‟est pas uniquement sourcier ou cibliste. En effet, nous pensons que le traducteur opère
+des choix en fonction du texte et de son contexte. Il est donc possible qu‟à l‟intérieur d‟un
+même texte, il ait une approche parfois sourcière et parfois cibliste.
+En ce qui concerne la traduction des noms propres, nous allons reprendre les
+procédés définis par Michel Ballard dans son ouvrage Le nom propre en traduction. Les
+exemples que nous utiliserons pour illustrer ces différents procédés sont pour la plupart
+tirés de cet ouvrage. Ces procédés peuvent être répartis en deux groupes : les procédés
+sourciers, comprenant le report, la transcription et l‟assimilation phonétique ou graphique
+et les procédés ciblistes, comprenant la traduction plus ou moins littérale, la « désignation
+distincte », la « différence de concentration » et ce que nous appellerons la « création
+lexicale ».
+Nous allons commencer par les procédés sourciers, également appelés procédés de
+« non-traduction » par Michel Ballard. Comme nous l‟avons vu dans le chapitre précédent,
+ils sont utilisés lorsque le traducteur estime que la forme du nom est plus importante que
+son sens. Nous tenons à préciser que le fait de parler de procédés de « non-traduction » ne
+
+21
+
+LADMIRAL, Jean René, « Sourciers et ciblistes », in La traduction: revue d’esthétique, n° 12, 1986, p.33.
+
+25
+
+signifie pas un échec de la part du traducteur, mais qu‟il s‟agit bien d‟une décision
+délibérée de ce dernier.
+
+2.4.1. Les procédés sourciers
+2.4.1.1. Le report
+Le report est le principal procédé sourcier, ou procédé de non-traduction. Il consiste
+simplement à reprendre le nom propre sous la même forme que dans le texte source sans
+lui apporter la moindre modification. Ce procédé est utilisé, comme le dit Ballard, lorsque
+le nom propre ne peut être modifié car il désigne une personne précise :
+La raison pour laquelle on pratique le report avec un terme comme le nom propre est
+liée à sa nature de désignateur rigide qui ne saurait varier de forme, parce qu‟il renvoie
+22
+à un référent unique et ce de façon censée être stable.
+
+Comme nous l‟avons vu précédemment, le report est le procédé le plus couramment
+utilisé aujourd‟hui lorsqu‟il s‟agit de noms de personnes réelles (par exemple : Georges
+Bush, Nicolas Sarkozy). Il est également fréquemment utilisé dans la littérature, lorsque le
+traducteur décide, par exemple, de maintenir la couleur locale, et, ainsi, de rappeler
+l‟origine du personnage en question. C‟est le cas, par exemple, dans le roman de Gustave
+Flaubert, Madame Bovary, où les personnages gardent leurs prénoms français dans la
+version traduite en anglais. Cela permet d‟éviter une incohérence.
+
+2.4.1.2. La transcription et la translittération
+La transcription et la translittération sont deux procédés très proches. C‟est
+pourquoi Michel Ballard les a réunis en une seule catégorie. La transcription est le fait de
+représenter les sons effectivement prononcés23
+
+22
+
+BALLARD, Michel, Le nom propre en traduction, 2001, p.16.
+
+26
+
+alors que la translittération est le fait de
+rechercher pour chaque lettre ou suite de lettre, une lettre ou suite de lettres
+correspondantes sans s‟inquiéter des sons effectivement prononcés24.
+
+Pour illustrer cette différence, nous reprenons l‟exemple de Jean Dubois que cite Ballard
+dans son ouvrage :
+Popov est une translittération d‟un nom russe (elle suppose que le lecteur français
+sache que „v‟ se prononce „f‟ dans cette langue), Popoff est sa transcription.25
+
+Ces deux procédés sont, toujours selon les propos de Ballard, deux formes de
+report :
+la translittération et la transcription représentent donc des formes de report : la
+translittération étant un effort pour présenter une graphie doublement étrangère, la
+transcription, une tentative de préservation de la prononciation étrangère.26
+
+En effet, il ne s‟agit pas de traductions proprement dites mais d‟adaptations au système
+phonétique de la langue cible. La transcription et la translittération sont utilisées dans les
+cas ou la langue cible et la langue source utilisent des alphabets différents. Il s‟agit en fait
+de retranscrire le nom de la langue source dans l‟alphabet de la langue cible.
+Le nom propre est « adapté » à la graphie de la langue cible mais n‟est pas
+fondamentalement modifié. Ce procédé est utilisé uniquement dans le but de permettre au
+lecteur de pouvoir lire le nom dans un alphabet qu‟il maîtrise.
+La translittération est, par exemple, utilisée dans la presse pour citer des hommes
+politiques étrangers originaires de pays ayant un alphabet différent du notre (par exemple
+Путин pour Poutine et ‫ معمر القذافي‬pour Mouammar Kadhafi).
+Cette méthode peut toutefois poser des problèmes si les différents traducteurs ne
+sont pas assez vigilants. En effet, une fois qu‟un nom a été transcrit, ou translittéré, une
+23
+
+DUBOIS, Jean, GIACOMO, M., GUESPIN, L. et al., Dictionnaire de linguistique, 1973, p.498, cité
+d‟après BALLARD, Michel, Le nom propre en traduction, 2001, p.27.
+24
+DUBOIS, Jean, Op. Cit., 1973, p.498, cité d‟après BALLARD, Michel, Le nom propre en traduction,
+2001, p. 27.
+25
+
+DUBOIS, Jean, Op. Cit., 1973, p. 498, cité d‟après BALLARD, Michel, Le nom propre en traduction,
+2001, p.27.
+26
+BALLARD, Michel, Op. Cit., 2001, p. 27.
+
+27
+
+première fois, il est impératif que les autres traducteurs reprennent cette traduction et n‟en
+créent pas d‟autres. Dans le cas contraire, on trouvera plusieurs orthographes différentes
+pour le même nom, ce qui peut être cause de confusion. Pour illustrer ce problème, nous
+citerons un article que nous avons lu sur internet et qui explique que 112 manières
+différentes d‟écrire Mouammar Kadhafi ont été recensées dans la presse anglo-saxonne :
+Comme la première lettre arabe de son nom ne correspond à aucune lettre ou son dans
+l'alphabet latin (utilisé par l'anglais ou le français), on recense des centaines de
+versions. En France en revanche, les médias semblent s'accorder sur une seule
+orthographe: Kadhafi. Selon un rapport d'ABC News cité par l'Irish Times, il existerait
+112 orthographes différentes dans la langue anglaise […].27
+
+2.4.1.3. L’assimilation phonétique et graphique
+L‟assimilation phonétique et graphique n‟entraîne pas non plus de changement
+fondamental. La tâche du traducteur consiste à franciser ou à angliciser le nom à traduire.
+Comme le dit Ballard, ce procédé n‟est plus beaucoup utilisé :
+l‟assimilation phonétique affecte essentiellement les noms des personnages
+historiques, et surtout ceux qui sont pratiquement réduits à un prénom.28
+
+Dans cette catégorie, on retrouve par exemple les noms des personnages bibliques
+comme Moïse/Moses et les noms de l‟Antiquité comme Cicéron/Cicero.
+
+2.4.2. Les procédés ciblistes
+Nous allons maintenant passer à la seconde catégorie dans laquelle le traducteur
+décide de traduire le nom propre. S‟il est cibliste, il décide que le sens prime sur la forme.
+Il veut conserver le sens que l‟auteur du texte source a donné au patronyme afin que le
+lecteur cible puisse en profiter et l‟apprécier.
+
+27
+28
+
+http://www.slate.fr/lien/34639/112-maniere-ecrire-kadhafi
+BALLARD, Michel, Le nom propre en traduction, 2001, p.30.
+
+28
+
+2.4.2.1. La traduction plus ou moins littérale
+La « traduction plus ou moins littérale », comme son nom l‟indique, revient
+« simplement » à traduire mot-à-mot le nom. Cette méthode ne peut donc être utilisée que
+lorsqu‟un équivalent existe. Dans le cas contraire, le traducteur doit recourir à la création
+lexicale, procédé que nous verrons par la suite.
+La traduction littérale est fréquemment utilisée pour les lieux (la Mer Morte pour
+the Dead Sea) mais également pour les noms de personnages historiques, tels que les
+souverains ou les personnages importants (Guillaume le Conquérant pour William the
+Conqueror, Alexandre le Grand pour Alexander the Great) ainsi que pour de nombreux
+référents culturels, par exemple pour les fêtes liturgiques (Vendredi saint pour Good
+Friday) ou les événements historiques (The Thirty Years war pour La guerre de Trente
+Ans).
+Dans la littérature, ce procédé est, par exemple, utilisé pour les personnages de
+contes de fées (Cendrillon/Cinderella, Blanche-Neige/Snow-White). En effet, dans ce genre
+de récit, il s‟agit de noms « dont la composition est proche de celle du surnom29 ». Ce sont
+des noms qui décrivent leur porteur (bien qu‟il y ait quelque exceptions : la Belle au bois
+dormant par exemple), il est donc important d‟en conserver le sens.
+
+2.4.2.2. La désignation distincte
+La désignation distincte intervient principalement pour les noms de lieux et
+quelques référents culturels. Ce procédé revient à adapter un nom propre totalement
+différent de l‟original : deux termes distincts sont utilisés pour désigner la même réalité.
+Selon Ballard :
+ce phénomène est parfois révélateur d‟une appropriation linguistico-culturelle
+différente de lieux mitoyens ou ayant fait l‟objet de contestations ou de rivalités.30
+
+29
+30
+
+BALLARD, Michel, Le nom propre en traduction, 2001, p.33.
+BALLARD, Michel, Ibid, 2001, p.36.
+
+29
+
+En d‟autres mots, Ballard explique cette situation par le fait que des populations
+linguistiques différentes peuvent nommer un même lieu de façon tout à fait différente en
+raison de leur histoire ou de leur appartenance culturelle différentes.
+Voici quelques exemples de désignations distinctes tirés de l‟ouvrage de Ballard : The
+English Channel/ la Manche ; the Falklands/Les Malouines ; Easter/Pâques ; le 14
+Juillet/Bastille Day.
+
+2.4.2.3. La différence de concentration
+La différence de concentration est plus un phénomène auquel le traducteur doit
+s‟adapter qu‟un procédé de traduction. Elle s‟observe quand le nom est plus long ou plus
+court dans une langue que dans l‟autre (par exemple dans le cas de la siglaison ou de la
+troncation).
+La différence de concentration apparaît fréquemment dans le cas des sigles. Elle
+peut être utilisée pour les toponymes ainsi que pour les anthroponymes. Un exemple de
+toponyme est le sigle US, qui doit être traduit en français, soit par un autre sigle : USA, soit
+par le nom complet : Les États-Unis. Pour les anthroponymes, ce phénomène se produit
+lorsque l‟on utilise les initiales, comme dans le cas de J.F.K pour John Fitzgerald
+Kennedy.
+
+2.4.2.4. La création lexicale
+Nous souhaitons parler d‟un dernier procédé, que nous appellerons la création
+lexicale. Elle est utilisée par le traducteur pour gérer les jeux de mots ou de sons. Elle lui
+permet de traduire un nom qui n‟aurait pas d‟équivalent « officiel » tout en conservant un
+jeu de mot ou une rime par exemple.
+Il s‟agit d‟un procédé plutôt artificiel utilisé, principalement en traduction littéraire.
+On en trouve également dans les noms de marques ou de magasins. Par exemple le slogan
+de la marque de moutarde Maille : « il n‟y a que Maille qui m‟aille », celui des magasins
+Lapeyre : « Lapeyre, y‟en a pas deux ! » ou encore la ligne de magasins de chaussures
+30
+
+« Pompes funèbres ». Cependant dans le cas des marques, étant donné qu‟il s‟agit
+généralement de noms déposés, le traducteur n‟a malheureusement pas la possibilité de les
+modifier et donc de conserver le jeu de mots.
+En littérature, au contraire, ces jeux de mots et de sons peuvent être traduits, il est
+même important que le traducteur s‟efforce, dans la mesure du possible, de le faire car il y
+a là une volonté de l‟auteur. Dans cette situation, il n‟y a aucune règle fixe. C‟est au
+traducteur de décider au cas par cas et, surtout, de faire preuve de créativité.
+Ces créations sont assez fréquentes, entre autres, dans la littérature fantastique
+lorsqu‟il n‟existe aucun équivalent et que le traducteur juge qu‟il faut conserver le sens,
+comme dans le cas de certains noms propres de notre ouvrage (par exemple : Wallace).
+Cette méthode peut également être nécessaire dans la littérature enfantine, qui utilise
+souvent des jeux de mots ou de sons (Les albums illustrés Le prince de Motordu en sont
+gorgés. Le personnage fait, par exemple, des batailles de Poules de neige31).
+
+31
+
+http://fr.wikipedia.org/wiki/Prince_de_Motordu
+
+31
+
+3. Analyse
+
+3.1. Introduction
+Dans cette seconde partie, nous allons voir comment les procédés que nous avons
+présentés peuvent être appliqués dans la pratique. Plus précisément, nous allons regarder
+quels procédés ont été utilisés dans la traduction française (par Arnaud Mousnier-Lompré)
+et dans la traduction italienne (par Paola Bruna Cartoceti) du roman Assassin’s Apprentice
+de Robin Hobb. Dans un premier temps, nous allons effectuer une analyse microtextuelle
+en étudiant individuellement les différents procédés. Puis, dans un second temps, nous
+effectuerons une analyse selon une perspective macrotextuelle.
+Nous avons classé tous les noms propres relevés dans le roman en fonction des
+différents procédés détaillés dans le chapitre précédent. Les deux traducteurs n‟ayant pas
+toujours utilisé le même procédé pour un nom, nous avons fait le choix de les classer selon
+le procédé utilisé par le traducteur français et nous relèverons les différences avec la
+version italienne lorsqu‟elles apparaissent. Dans un but de clarté et de logique, nous avons
+choisi de traiter ces procédés dans le même ordre que dans le chapitre précédent, mis à part
+le fait qu‟il n‟y a aucune occurrence de transcription, de désignation distincte ni de
+différence de concentration.
+Dans certains cas, nous prendrons la catégorie dans son ensemble en relevant
+uniquement les cas que nous jugeons les plus intéressants ou représentatifs ou encore ceux
+pour lesquels on observe des différences entre les deux traductions. Dans d‟autres cas, pour
+les créations lexicales par exemple, nous analyserons les noms un par un.
+Nous préciserons également lorsque nous pensons qu‟il s‟agit de bonnes solutions
+de la part du ou des traducteurs ou lorsque nous estimons qu‟une meilleure solution aurait
+pu être trouvée. Dans ces cas-là (en ce qui concerne le français), nous nous efforcerons de
+donner notre propre traduction en expliquant pourquoi nous la préférons.
+Les traducteurs ont tous deux utilisé les deux catégories de procédés. En effet, selon
+les cas, ils ont eu une approche sourcière ou cibliste. Les stratégies les plus fréquemment
+
+32
+
+utilisées dans cet ouvrage par l‟un et l‟autre des traducteurs sont la traduction plus ou
+moins littérale (procédé plutôt cibliste) et le report (procédé plutôt sourcier).
+En ce qui concerne la version originale, nous avons constaté que l‟auteur avait
+choisi de donner un sens à la majorité des noms de ses personnages principaux. Ce
+phénomène est expliqué ainsi dans l‟introduction du roman lui-même :
+Taker his name was, quite simply, and perhaps with that naming began the tradition
+that daughters and sons of his lineage would be given names that would shape their
+lives and beings.32
+
+Il en va de même au chapitre 6 :
+There are two traditions about the custom of giving royal offspring names suggestive
+of virtues or abilities. The one that is most commonly held is that somehow these
+names are binding; that when such a name is attached to a child who will be trained
+in the Skill, somehow the Skill melds the name to the child, and the child cannot help
+but grow up to practice the virtue ascribed to him or her by name.33
+
+Comme nous l‟avons déjà indiqué dans la partie traductibilité et sens, la théorie de Frege et
+Russel est pertinente pour cet ouvrage. Ainsi, les prénoms d‟une grande partie des
+personnages sont plus ou moins des descriptions de ceux-ci.
+Nous allons analyser ces noms pour déterminer si l‟existence de ce sens est bien ce
+qui a décidé les traducteurs à traduire le nom propre. Nous verrons également, dans un
+second temps, si le sens du nom correspond à la personnalité du personnage, ce qui nous
+permettra d‟établir à quel point le traducteur doit chercher à le conserver.
+En ce qui concerne l‟approche des traducteurs en matière de noms propres dans cet
+ouvrage, nous citerons leurs propos, trouvés sur internet. Dans une interview, Arnaud
+Mousnier-Lompré explique :
+De manière générale, je m‟efforce de franciser les noms que Robin invente, qu‟ils
+soient propres ou communs, en me fondant sur l‟idée que le monde qu‟elle décrit
+n‟existe pas et qu‟on n‟y parle ni français, ni anglais, ni aucune de nos langues
+terriennes.34
+
+32
+
+HOBB, Robin, Assassin’s Apprentice, 2007, p.1.
+HOBB, Robin, Ibid, p.108.
+34
+http://www.elbakin.net/interview/exclusive/Interview-de-Arnaud-Mousnier-Lompre
+33
+
+33
+
+Il confie également, dans une autre interview sur le site fantasynet.com35, qu‟il contacte
+l‟auteur en cas de doute. Il profite en cela de la bonne relation qu‟ils entretiennent. En
+effet, au fil des années, une relation d‟amitié s‟est nouée entre eux et Robin Hobb demande
+à la maison d‟édition que ses romans soient traduits par Arnaud Mousnier-Lompré.
+Pour ce qui est de la traductrice italienne, elle explique sur son blog internet que ce
+qu‟elle a trouvé le plus difficile dans la traduction de ce roman a été la traduction des noms
+propres car, selon elle, ils sont pour la plupart motivés (c‟est-à-dire qu‟ils ont un sens
+voulu par l‟auteur). Elle ajoute que de nombreux noms font l‟objet de jeux de mots dans
+l‟un au l‟autre des tomes de la série, ce qui complique encore la tâche des traducteurs :
+Il problema principale sono stati i nomi. La maggior parte dei nomi di persona o di
+luogo in Robin Hobb significa qualcosa, e c'è un'ottima probabilità che tale significato
+sia oggetto di un gioco di parole; nel libro che si ha in mano, se si è fortunati, o due
+libri più in là in caso contrario.[...] Ho adottato il sistema di non tradurre i nomi
+palesemente "popolari" (Molly, Burrich) e invece impegnarmi su quelli che erano
+intesi per avere un significato (Sagace, Fermo) 36
+
+De même, elle explique que, pour les anthroponymes, elle n‟a pas traduit ceux qu‟elle
+jugeait « populaires » mais s‟est efforcée de traduire ceux qui, à ses yeux, avaient un sens.
+
+3.2. Report
+Comme nous l‟avons indiqué précédemment, nous respectons l‟ordre des procédés
+définis dans le chapitre théorique. Nous commencerons donc par analyser les reports. La
+première chose que nous pouvons constater est qu‟il s‟agit du procédé le plus utilisé dans
+la traduction de cet ouvrage.
+Original
+
+Traduction française
+
+Traduction italienne
+
+Burrich
+
+Burrich
+
+Burrich
+
+Dick
+
+Dick
+
+Dick
+
+King Eyod
+
+Roi Eyod
+
+Re Eyod
+
+Galen
+
+Galen
+
+Galen
+
+35
+36
+
+http://www.fantastinet.com/interview-arnaud-mousnier-lompre/
+http://sbcreations.blogspot.com/p/traduzione-robin-hobb.html
+
+34
+
+Lord Grimsby
+
+Seigneur Grimbsy
+
+Messer Grimsby
+
+Jason
+
+Jason
+
+Jason
+
+Jerdon
+
+Jerdon
+
+Jerdon
+
+Lord Jessup
+
+Seigneur Jessup
+
+Messer Jessup
+
+Jonqui
+
+Jonqui
+
+Jonqui
+
+Kerry
+
+Kerry
+
+Kerry
+
+Kettricken
+
+Kettricken
+
+Kettricken
+
+Litress
+
+Litress
+
+Litress
+
+Rurisk
+
+Rurisk
+
+Rurisk
+
+Sara
+
+Sara
+
+Sara
+
+Duke Shemshy
+
+Duc Shemshy
+
+Messer Shemshy
+
+Tilly
+
+Tilly
+
+Tilly
+
+Master Tullume
+
+Maître Tullume
+
+Mastro Tullume
+
+Nous allons commencer par les noms dénués de signification et pour lesquels les
+traducteurs ont tous deux opté pour le report. Il s‟agit, pour la plupart, de noms de
+personnages secondaires auxquels l‟auteur a choisi de ne pas donner de sens. En effet, ils
+servent uniquement d‟étiquettes permettant de nommer un personnage précis.
+Parmi ces noms, on peut distinguer deux cas de figure : les prénoms existants
+comme Sara ou Dick (ceux-ci sont en minorité, puisque l‟histoire se déroule dans un
+monde différent du nôtre, cela permet à l‟auteur de marquer la différence) et les prénoms
+inventés par l‟auteur comme Burrich ou Jonqui. Les premiers sont des noms connus qui
+sont utilisés sous la même forme dans les trois langues concernées ; le traducteur n‟a donc
+pas le choix quant à la manière de les traduire. Les seconds n‟existent pas ailleurs que dans
+le monde de Robin Hobb. Étant donné qu‟ils n‟ont pas de sens et ne constituent aucun jeu
+de mots apparent, les traducteurs n‟avaient pas de moyen de les traduire ; ils ont donc été
+contraints de les reporter.
+Nous allons maintenant analyser les autres cas de report un par un. En effet, les
+noms suivants méritent qu‟on leur prête un peu plus d‟attention. Ces noms diffèrent des
+précédents dans le sens où ils possèdent une signification, bien que, dans la plupart des cas,
+celle-ci ne soit pas évidente. Les traducteurs n‟ont pas appliqué le même procédé de
+traduction pour tous ces noms.
+35
+
+1er cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Brant
+
+Brant
+
+Brando
+
+Le prénom Brant est un prénom imaginaire. Cependant, nous avons trouvé dans le
+dictionnaire Collins que le terme brant existe en anglais avec la définition suivante :
+Small goose, Branta bernicla, that has a dark grey plumage and short neck and occurs in
+most northern coastal regions.37
+
+L‟équivalent français de l‟oie Branta bernicla38 est bernache cravant. En italien, elle
+s‟appelle oca colombaccio39. Il s‟agit cependant d‟un mot assez peu commun et nous
+pensons qu‟il est possible que les lecteurs (tant sources que cibles) ne le connaissent pas et
+n‟en comprennent donc pas le sens. C‟est peut-être pour cette raison que les traducteurs ont
+tous deux choisi de ne pas utiliser la traduction littérale et ont opté pour des solutions
+différentes.
+La traductrice italienne a choisi un mot ayant une consonance proche du mot
+anglais mais sans aucun rapport avec le sens. Le terme choisi, Brando, désigne en effet une
+sorte d‟épée. Selon nous, cette solution aurait pu être une bonne idée si le terme en
+question était en rapport avec le personnage. Malheureusement ce n‟est pas le cas.
+Nous pouvons également supposer qu‟elle n‟a pas voulu faire une traduction
+littérale mais qu‟elle a plutôt eu recours à une assimilation graphique. En effet, il est
+possible qu‟elle ait simplement adapté le prénom à la graphie italienne en faisant un calque
+et en y ajoutant le suffixe italien -do. Dans ce cas, elle ne conserve pas non plus le sens de
+l‟original mais uniquement la forme.
+Arnaud Mousnier-Lompré, quant à lui, a choisi de reporter ce nom et en perd ainsi
+le sens. Bien qu‟il s‟agisse d‟un personnage secondaire, nous pensons qu‟il aurait été
+intéressant de le conserver et ce malgré le risque que le lecteur ne le connaisse pas. En
+effet, nous pensons qu‟il y a un lien entre le prénom et son porteur. Brant est un jeune
+
+37
+
+Collins English Dictionary, 2005.
+http://www.oiseaux.net/oiseaux/bernache.cravant.html
+39
+http://avibase.bsc-eoc.org/species.jsp?lang=IT&avibaseid=3E04020B54C14FCC
+38
+
+36
+
+garçon, membre de la cour et la description d‟une petite oie correspond à certains préjugés
+au sujet des membres d‟une cour.
+Notre proposition serait d‟utiliser le nom français de cette oie : Bernache
+
+2e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Charim
+
+Charim
+
+Charim
+
+Pour ce personnage, les traducteurs ont tous deux opté pour le report. Nous tenions
+néanmoins à l‟étudier de plus près. En effet, après quelques recherches, nous avons
+découvert qu‟il possédait un sens. Le mot charim vient de l‟hébreu charam, qui signifie
+dévoué, consacré, dédié40.
+À partir de là, nous approuvons le choix des deux traducteurs de conserver le nom
+sous sa forme originale, car le personnage en question est le serviteur dévoué du prince
+Vérité. Ces adjectifs correspondent très bien à sa personnalité.
+
+3e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Cob
+
+Cob
+
+Roano
+
+Le terme anglais cob possède plusieurs sens. Nous garderons ici uniquement celui
+qui nous intéresse :
+a thickset short-legged type of riding and draught horse.41
+
+Ce terme existe également en français avec la même signification :
+Cheval demi-sang assez trapu, utilisé comme cheval de selle ou d‟attelage.42
+
+40
+41
+
+http://lexique-biblique.com/lexiques/hebreu/strong-hebreu-02766-charim+harim.html
+Collins English Dictionary, 2005.
+
+37
+
+Précisons encore que le personnage concerné est garçon d‟écurie au château. Il est donc
+important de tenter de conserver le sens de son nom, même s‟il s‟agit d‟un mot que nous
+supposons peu courant tant en anglais qu‟en français et que, par conséquent, le lecteur
+risque de ne pas le connaître.
+Le terme existant en français, le traducteur a choisi de le conserver, probablement
+parce qu‟il désigne la même réalité dans les deux langues. Nous préférons cependant la
+solution de la traductrice italienne car le lien entre le personnage et son nom nous y semble
+plus évident que dans la traduction française. La traductrice a choisi de ne pas conserver le
+terme même s‟il existe également en italien. Nous pensons qu‟elle a fait ce choix parce que
+le terme Cob, comme nous l‟avons dit ci-dessus, n‟est pas courant et qu‟il risque, de ce
+fait, de ne pas être connu du lecteur, qui passerait ainsi à côté du sens voulu par l‟auteur.
+Paola Cartoceti a donc décidé de le remplacer par un autre terme en rapport avec le milieu
+équestre : Roano (en français : Rouan).
+Nous reconnaissons cependant qu‟il est difficile de trouver un nom en français dans
+le même domaine qui puisse servir de prénom. Nous ne sommes pas parvenue à trouver
+une solution plus satisfaisante que celle proposée par le traducteur français.
+
+4e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Lady Dahlia
+
+Dame Dahlia
+
+Dama Dalia
+
+Nous avons décidé de classer ce prénom parmi les reports, bien qu‟il puisse
+également être considéré comme une traduction littérale. La raison pour laquelle nous
+avons fait ce choix est qu‟il n‟y a pas de modification orthographique entre l‟anglais et le
+français.
+Il nous faut toutefois relever que la version italienne est légèrement différente, car
+la traductrice a procédé à une traduction littérale. Le sens étant le même dans les trois
+langues et les solutions satisfaisantes, nous ne décrirons pas ce cas plus en détail.
+
+42
+
+Le Petit Robert, 1993.
+
+38
+
+5e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+FitzChivalry Farseer
+
+FitzChevalerie Loinvoyant
+
+FitzChevalier Lungavista
+
+Nous avons choisi de traiter ce prénom dans la catégorie des reports pour plusieurs
+raisons. Premièrement, il s‟agit d‟un prénom « composé » dont la partie la plus intéressante
+est le report qui constitue la première moitié du nom. Ensuite, le personnage est presque
+toujours appelé uniquement par cette première moitié (Fitz). Pour finir, la seconde partie,
+qui est une traduction plus ou moins littérale, est le nom de son père et sera donc traitée
+plus loin. Il en va de même pour le patronyme.
+On peut voir dans le cas de ce personnage, qui, de plus, est le personnage principal
+du roman, que le prénom le décrit véritablement. En effet, selon Wikipédia :
+Le préfixe Fitz- provient du mot « fils » […]. En Angleterre, il s‟applique surtout aux
+fils naturels des rois d‟Angleterre 43
+
+Nous pouvons donc constater que cela correspond très bien au personnage, qui est le fils
+naturel d‟un prince. Il s‟agit en quelque sorte d‟un surnom qui lui a été attribué puis qui est
+devenu son nom. Il décrit sa situation sociale. C‟est pour cela qu‟il est important de
+conserver le sens, car le fait qu‟il soit un bâtard est ce qui régira toute sa vie. Le traducteur
+n‟a donc pas le choix ici : il doit trouver un moyen de transmettre cette idée au lecteur
+cible.
+La raison pour laquelle le traducteur français a choisi de conserver le nom tel quel,
+bien qu‟il ait un sens, est probablement parce qu‟il n‟existe pas de terme équivalent en
+français et nous supposons qu‟il n‟a trouvé aucune création satisfaisante. Il a donc
+conservé le terme anglais et l‟a expliqué par une note du traducteur en bas de page :
+Fitz : en anglais, fils illégitime d‟un prince (N.d.T.)44
+
+C‟est le seul prénom pour lequel il a adopté cette solution qui, selon nous, n‟est pas la
+meilleure, car les notes de bas de page ont l‟inconvénient d‟interrompre la lecture et
+devraient donc être évitées le plus souvent possible dans les œuvres littéraires.
+43
+44
+
+http://fr.wikipedia.org/wiki/Fitz
+HOBB, Robin, L’apprenti assassin, 1998, p.18.
+
+39
+
+Concernant ce prénom, la traductrice italienne a également choisi de le reporter.
+Cependant, elle a adopté une stratégie différente : elle n‟a pas utilisé pas la note de bas de
+page mais une explicitation dans le texte (bastardino signifie littéralement petit bâtard,
+avec une connotation affective due au suffixe diminutif -ino):
+E allora vieni, bastardino, vieni, Fitz45
+
+Nous avons cherché une traduction qui permettrait d‟imiter la traduction italienne
+en insérant une explicitation dans le texte. Cependant, nous ne sommes pas parvenue à un
+résultat satisfaisant. En effet, le terme « bâtard » est connoté négativement et il n‟est pas
+possible en français de lui donner une valeur affective comme en italien. Hors, ici,
+l‟interjection s‟adresse à un enfant, le terme « bâtard » est trop négatif pour être utilisé.
+Nous pensons donc, comme le traducteur français l‟a estimé, que la note en bas de page est
+la seule solution possible dans ce cas.
+
+6e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Gage
+
+Gage
+
+Guanto
+
+En anglais, le terme gage est polysémique. Nous retiendrons deux définitions, qui
+correspondent aux choix des deux traducteurs :
+1. something deposited as security against the fulfillment of an obligation; pledge
+2. a glove or other object thrown down to indicate a challenge to combat46
+
+En français, le traducteur a choisi le premier sens anglais, qui correspond au terme
+français « gage », ce qui lui permet également de conserver la forme originale. En italien,
+par contre, il n‟est pas possible de conserver la forme (le terme correspondant à ce sens
+serait pegno). La traductrice a donc opté pour le deuxième sens, ce qui lui permet d‟avoir
+une forme, certes différente de l‟anglais, mais qui reste cependant assez proche : guanto
+(en français : gant).
+
+45
+46
+
+HOBB, Robin, Ibid, 1998, p. 20.
+Collins English Dictionary, 2005.
+
+40
+
+Nous pouvons constater que les traducteurs se sont efforcés de conserver le sens. À
+nos yeux, ils ont tous deux trouvé une bonne solution. Cependant, le sens que le traducteur
+français a choisi de conserver n‟est pas en lien avec le personnage. En effet, ce dernier est
+un soldat et n‟a donc aucun lien apparent avec le mot « gage ». C‟est pourquoi nous avons
+une préférence pour la solution italienne, qui, en faisant allusion au combat, conserve un
+lien entre le nom et la fonction du personnage.
+
+7e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Hod
+
+Hod
+
+Poiana
+
+Hod est un prénom imaginaire tiré d‟un terme anglais polysémique :
+1.
+2.
+
+an open metal or plastic box fitted with a handle, for carrying bricks, mortar, etc
+A tall, narrow coal scuttle47
+
+Les traductions françaises de ces deux définitions sont respectivement « oiseau »
+dont le Petit Robert donne la définition suivante : « hotte, civière qui se place sur l‟épaule
+et dans laquelle les maçons portent le mortier » et « seau à charbon ». En italien, le premier
+sens peut être traduit par sparviero (littéralement « épervier » en français). Nous pensons
+que c‟est cette traduction qui a fait choisir à la traductrice italienne le nom Poiana. En
+effet, poiana signifie « buse », or la buse, comme l‟épervier, est une espèce d‟oiseau.
+Comme nous l‟avons vu précédemment, la terminaison en -a permet au lecteur de savoir
+qu‟il s‟agit d‟une femme.
+Une fois de plus, le traducteur français a choisi de reporter alors que la traductrice
+italienne a traduit. Il peut y avoir deux raisons à ce report. Premièrement, le terme
+« oiseau » dans le sens de hotte est rare et risque de ne pas être connu du lecteur, qui
+pensera qu‟il s‟agit du sens plus commun de volatile. Deuxièmement, nous ne voyons
+aucun rapport entre le sens du mot Hod et le personnage lui-même. En effet, il s‟agit d‟une
+femme, maître d‟arme de la forteresse, alors que les différentes définitions du terme hod
+
+47
+
+Ibid.
+
+41
+
+laisseraient plutôt penser qu‟il s‟agit d‟un ouvrier. Nous trouvons donc que le traducteur a
+opté pour une bonne solution.
+
+8e et 9e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Justice
+
+Justice
+
+Giustino
+
+Jade
+
+Jade
+
+Diaspro
+
+Nous avons choisi de traiter ces deux noms ensemble, car il s‟agit de cas de figure
+très proches. Pour ces deux cas, comme nous l‟avons déjà vu avec le prénom Dahlia, il
+peut s‟agir, en français, de reports comme de traductions littérales. Nous avons choisi de
+les traiter dans cette section pour la même raison que pour ce premier prénom, à savoir que
+la graphie reste la même en français qu‟en anglais. Ce qui nous intéresse ici est le choix
+effectué en italien.
+Jade est un prénom existant dans notre culture, mais il désigne une fille ou une
+femme. Le cas est le même pour Justice car, bien qu‟il ne s‟agisse pas d‟un prénom
+existant, c‟est un terme féminin. Ce qui est surprenant est que, dans les deux cas, les
+personnages sont des hommes. Le traducteur français n‟a pas tenu compte de cette
+particularité et a reporté les noms. Le sens étant le même en français qu‟en anglais, il
+pouvait ainsi conserver le fond et la forme. Cependant cette solution est critiquable car elle
+rend la tâche du lecteur plus difficile dans le sens où il est alors obligé de s‟appuyer sur le
+contexte pour connaître le sexe du personnage.
+La traductrice italienne a appliqué une stratégie différente pour éviter ce problème.
+Les traductions italiennes de ces noms sont aussi toutes deux des féminins (respectivement
+Giada et Giustizia). Dans cette langue, la différence est encore plus marquée en raison de
+la terminaison féminine en -a. La traductrice ne pouvait donc pas les conserver sous cette
+forme sans risquer d‟induire les lecteurs en erreur sur le sexe des personnages. C‟est
+pourquoi elle a cherché des termes masculins qui lui permettent de conserver le sens
+anglais.
+
+42
+
+Pour Justice, elle a choisi Giustino, qui est l‟équivalent italien du prénom Justin.
+Cette solution lui permet de garder la racine du terme et donc d‟évoquer la notion de
+justice.
+Dans le cas de Jade, elle a cherché à conserver l‟image de la pierre précieuse, en
+utilisant une autre pierre qui a une terminaison masculine en -o. Ainsi, elle a opté pour
+diaspro (en français jaspe).
+Notre proposition serait de suivre l‟exemple de la traductrice italienne : Juste pour
+le premier et Jaspe pour le second.
+
+10e et 11e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Duke Kelvar
+
+Duc Kelvar
+
+Messer Kelvar
+
+Sig
+
+Sig
+
+Sig
+
+Bien que le terme Kelvar sorte tout droit de l‟imagination de Robin Hobb, nous
+avons noté une ressemblance avec le terme Kevlar, qui est une fibre synthétique résistante,
+dont sont faits les gilets pare-balles par exemple. Nous pensons qu‟il peut s‟agir d‟un jeu
+de mot voulu par l‟auteur. En effet, un lien peut être fait entre les propriétés résistantes de
+cette fibre et le caractère du personnage. Il s‟agit d‟un duc au caractère fort qui, lorsqu‟il
+apparaît dans le roman, est en conflit avec un autre duc contre qui il résiste et à qui il refuse
+de céder quoi que ce soit.
+En conservant le nom tel quel, les deux traducteurs conservent l‟éventuel jeu de
+mot puisque, s‟agissant d‟un nom déposé, le terme est le même dans les différentes
+langues.
+En ce qui concerne les noms marques, nous avons relevé un second prénom
+intéressant, c‟est pourquoi nous l‟avons inséré dans le même tableau. Le nom Sig est en
+effet une marque déposée. Il s‟agit du nom d‟un fabriquant d‟armes connu mondialement
+(fabriquant, par exemple, les fusils d‟assaut utilisés par l‟armée suisse). Ce qui est
+intéressant dans le cas de ce personnage puisqu‟il s‟agit d‟un soldat. Tout comme dans le
+43
+
+cas de Kelvar, il s‟agit d‟une marque déposée existant sous la même forme dans les trois
+langues ce qui permet aux traducteurs de conserver l‟allusion en opérant un report.
+
+12e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Kittne
+
+Kittne
+
+Gattina
+
+Il s‟agit d‟un terme imaginaire dont on peut supposer qu‟il est créé à partir de
+l‟anglais kitten (chaton). C‟est du moins, à notre avis, ce qu‟a supposé la traductrice
+italienne lorsqu‟elle a choisi comme prénom pour cette jeune fille : Gattina, de l‟italien
+gattino qui signifie chaton, la terminaison en –a étant la marque du féminin. Cependant,
+nous n‟avons trouvé aucun lien entre ce personnage et les chats.
+Nous pensons que c‟est en partie pour cela que le traducteur français n‟a pas
+exploité la ressemblance entre Kittne et Kitten et a simplement reporté le nom. De plus, il
+est difficile en français de trouver un nom, en lien avec le mot chat, qui ne soit pas
+connoté. Pour finir, il s‟agit d‟un personnage secondaire dont le prénom n‟apparaît qu‟une
+ou deux fois.
+S‟agissant d‟un personnage peu important, nous estimons que la solution proposée
+par Arnaud Mousnier-Lompré est satisfaisante.
+
+13e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Sevrens
+
+Sevrens
+
+Trancia
+
+Sevrens est un nom inventé par l‟auteur. Par conséquent, le traducteur français a
+effectué un report. Cependant, nous pouvons noter que la traductrice italienne a procédé à
+une traduction.
+
+44
+
+Après quelques recherches, nous avons trouvé que le terme sevrens ressemblait
+phonétiquement au terme anglais severance, qui signifie rupture. Nous pensons donc que
+Paola Cartoceti s‟est appuyée sur ce mot pour parvenir à un autre nom ayant un sens
+proche : Trancia (en français tranche).
+C‟est une bonne solution. Toutefois, le sens obtenu ne correspond en rien à la
+personnalité ou au caractère du personnage, qui est un valet du prince Royal. Selon nous, la
+solution adoptée en français est tout aussi acceptable.
+
+3.3. Assimilation phonétique et graphique
+Les systèmes phonologiques et morphologiques de l‟anglais, du français et de
+l‟italien étant proches et ces langues utilisant le même alphabet, les différences des points
+de vue graphiques et phonétiques sont rares. Les traducteurs ont, par conséquent très peu
+eu recours à l‟assimilation. Nous avons toutefois retenu quatre anthroponymes (dans la
+traduction française) pouvant être rangés dans cette catégorie. Dans les cas ci-dessous, le
+nom anglais a été adapté à la prononciation française afin qu‟il conserve sa sonorité
+d‟origine. Il s‟agit en quelque sorte de calques, c‟est-à-dire que le traducteur a copié le
+prénom original tout en l‟adaptant légèrement aux règles de la langue française.
+
+1er cas:
+Original
+
+Traduction française
+
+Traduction italienne
+
+August
+
+Auguste
+
+Augusto
+
+Le prénom August existe dans les trois langues sous des formes légèrement
+différentes. Ici, les traducteurs ont donc simplement remplacé le prénom anglais par son
+équivalent (en français comme en italien), qui correspond mieux aux habitudes d‟écriture
+et de prononciation des langues concernées.
+Cependant, le mot en anglais n‟est pas vide de sens. Il était donc important que les
+traducteurs s‟assurent que ce sens soit le même dans la langue cible. Nous avons vérifié et
+45
+
+constaté que c‟était bien le cas, dans les trois langues c‟est un adjectif qui signifie
+l‟équivalent de la définition suivante :
+Qui inspire un grand respect, de la vénération ou qui en est digne.  grand, noble,
+respectable.48
+
+Le sens est ici important car il participe à la description du personnage. En effet, il s‟agit
+d‟un membre de la famille royale, neveu du roi et cousin de Fitz. Les traducteurs ont donc
+pu conserver le sens tout en modifiant légèrement la forme.
+
+2e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Duke Brawndy
+
+Duc Brondy
+
+Duca Fortebraccio
+
+Brawndy est un nom inventé par l‟auteur, qui ne possède, à première vue, aucun
+sens. Arnaud Mousnier-Lompré a donc décidé de l‟adapter au système français en le
+transformant en Brondy, qui est plus facile à prononcer pour un lecteur français. De plus,
+Brondy est un patronyme qui existe réellement en France.
+La traductrice italienne a opté pour une autre solution. Elle a probablement
+rapproché Brawndy du mot anglais brawny (muscular and strong49) et a fait, à partir de ce
+terme, une création lexicale : Fortebraccio (littéralement « Bras fort »).
+Nous saluons son effort de recherche et de création. Cependant, nous n‟avons pas
+trouvé de rapport entre ce nom et la personnalité du duc (un simple duc, sujet du roi
+Subtil). Par conséquent, nous pensons que la solution trouvée par le traducteur français est
+suffisante, surtout dans le cas d‟un personnage secondaire tel que celui-ci.
+
+48
+49
+
+Le Petit Robert, 1993.
+Collins English Dictionary, 2005.
+
+46
+
+3e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Master Lew
+
+Maître Lou
+
+Mastro Lew
+
+Comme dans le cas du prénom August, Lew est un prénom qui existe réellement. Il
+est le diminitif de Lewis ou Louis. En français, son équivalent est Lou, qui peut être le
+diminutif de Louis ou de Louise. Aujourd‟hui, il est aussi utilisé en tant que prénom et non
+plus uniquement en tant que diminutif.
+Ce nom ne possède aucun sens dans les différentes langues. Sachant cela, il était
+logique que le traducteur choisisse de traduire Lew par son équivalent, Lou. Le seul
+problème que pourrait poser ce prénom est qu‟il peut être utilisé pour un homme comme
+pour une femme (puisqu‟il peut être le diminutif de Louis ou de Louise). Cependant, en
+l‟occurrence, chaque fois que le personnage apparaît, il est appelé par son titre (maître)
+suivi de son prénom. Le lecteur sait donc de façon sûre qu‟il s‟agit d‟un homme.
+En italien, l‟équivalent du prénom Lewis est Luigi, dont le diminutif est souvent
+Gigi. La traductrice aurait donc pu choisir cette solution. Elle a cependant décidé
+d‟effectuer un report. Le prénom n‟ayant pas de sens, le report est ici possible. Cependant,
+la graphie et la sonorité du nom Lew ne correspondent pas aux habitudes italiennes et
+risquent donc de surprendre le lecteur. Par conséquent, nous pensons qu‟il aurait été plus
+judicieux de la part de la traductrice de traduire le nom par Mastro Gigi afin de ne pas
+déstabiliser son lecteur.
+
+4e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Sherf
+
+Cherfe
+
+Sherf
+
+Sherf est également un prénom inventé par l‟auteur n‟ayant aucun sens en anglais.
+Les deux solutions qui se présentaient alors aux traducteurs étaient le report et
+l‟assimilation graphique.
+
+47
+
+Paola Cartoceti a opté pour le report. Une critique que nous pourrions émettre à
+l‟encontre de cette solution est que la graphie utilisée ici ne correspond pas à ce que l‟on
+trouve normalement en italien. Ainsi, ce nom sera lu comme étant un emprunt et non pas
+une traduction. En effet, dans cette langue, la suite de lettres « sh » est utilisée uniquement
+dans le cas d‟emprunts anglais. Le son [ e] est généralement rendu par les lettres « sce ».
+Arnaud Mousnier-Lompré a, lui, choisi l‟assimilation graphique afin que le nom
+paraisse plus familier au lecteur francophone. En effet, en français, le son [ ] s‟écrit plus
+souvent « ch » que « sh » et la terminaison en -e est également plus fréquente qu‟une
+terminaison avec une consonne.
+Le nom source n‟ayant aucun sens apparent et le personnage étant un personnage
+secondaire, nous pensons que les deux traducteurs ont fait un choix acceptable. Nous
+préférons cependant la traduction française, car, comme nous l‟avons dit, elle paraîtra plus
+naturelle au lecteur que la traduction italienne.
+
+3.4. Traduction plus ou moins littérale
+Dans cette catégorie, on retrouve principalement les noms des membres de la
+famille royale et des membres de la noblesse. Ces noms sont tous porteurs de sens ; il
+s‟agit principalement de vertus qui, comme nous l‟avons vu au début de ce chapitre, sont
+données aux enfants et qui sont censées régir leur existence. Ces noms étant tous aisément
+traduisibles en français, où ils conservent plus ou moins le même sens, ils ont été traduits
+littéralement par Arnaud Mousnier-Lompré. La traductrice italienne a également utilisé la
+traduction littérale pour bon nombre de ces noms.
+Le premier tableau ci-dessous présente les noms pour lesquels les deux traducteurs
+ont opté pour la traduction littérale.
+Original
+
+Traduction française
+
+Traduction italienne
+
+Queen Vision
+
+Reine Vision
+
+Regina Visione
+
+Lady Grace
+
+Dame Grâce
+
+Dama Grazia
+
+Solicity
+
+Sollicité
+
+Sollecita
+48
+
+Serene
+
+Sereine
+
+Serena
+
+Lady Patience
+
+Dame Patience
+
+Dama Pazienza
+
+King Ruler
+
+Roi Souverain
+
+Re Dominatore
+
+Duke Ram
+
+Duc Bélier
+
+Duca Ariete
+
+Merry
+
+Joyeuse
+
+Allegra
+
+Shrewd Farseer
+
+Subtil Loinvoyant
+
+Sagace Lungavista
+
+King Taker Farseer
+
+Roi Preneur Loinvoyant
+
+Conquistatore Lungavista
+
+La majorité de ces noms ont exactement le même sens dans les trois langues. Nous
+avons toutefois relevé des nuances légèrement différentes pour certains. Premièrement,
+nous souhaitons apporter une précision pour le nom Solicity. Il s‟agit d‟un mot qui n‟existe
+pas en anglais mais qui a été créé par l‟auteur sur la base du verbe to solicit. Le traducteur
+français s‟est également appuyé sur le verbe et a utilisé le participe passé alors qu‟en
+italien la traductrice a choisi un adjectif dérivé du même verbe. Nous avons donc décidé de
+les considérer comme des traductions plus ou moins littérales même si le terme n‟existe
+pas tel quel.
+Ensuite, pour le nom Ruler, nous avons relevé une nuance intéressante. En effet, ce
+mot désigne quelqu‟un qui est supérieur aux autres, un chef, un dirigeant et ce
+indépendamment de l‟époque, alors que le nom « souverain » s‟applique plutôt à un roi et
+concerne donc plus directement l‟époque médiévale. Nous trouvons cette nuance
+appropriée puisqu‟il s‟agit ici d‟un roi et que le récit se déroule dans une atmosphère
+médiévale.
+Nous avons également relevé une légère nuance en ce qui concerne le prénom
+« Shrewd ». La traduction française « Subtil » est en fait un synonyme de « shrewd » et
+non sa traduction exacte, qui serait « perspicace ». La nuance entre les deux termes est très
+légère, nous pensons donc qu‟il s‟agit d‟une bonne solution d‟autant plus que cela permet
+d‟avoir un prénom plus court et donc plus facilement mémorisable pour le lecteur.
+Pour finir, nous souhaitons dire quelques mots sur le nom Taker. Ce que nous
+aimerions souligner ici est la traduction italienne que nous trouvons particulièrement bien
+choisie. En effet, les noms en anglais et en français sont assez vagues puisqu‟ils désignent
+quelqu‟un qui prend un objet quelconque. En italien, par contre, le terme est plus précis. Il
+
+49
+
+désigne quelqu‟un qui prend possession d‟une terre, qui la conquiert par la force. Ce sens
+est pertinent ici car le personnage est le roi qui a conquis le royaume des Six Duchés.
+
+Le deuxième tableau présente les noms ayant également été traduits littéralement
+par les deux traducteurs mais pour lesquels la traductrice italienne a choisi une catégorie
+grammaticale différente de celle de l‟original dans le but de parvenir à un nom, soit
+masculin, soit féminin selon le sexe du personnage (avec une exception pour le nom
+Graciousness, pour lequel elle a changé la catégorie, bien que le nom italien – benevolenza
+– équivalent du terme anglais soit déjà un féminin). Cela nous permet de constater que le
+traducteur français n‟a, lui, pas pris en compte le problème du genre. En effet, certains des
+noms choisis en français sont des féminins alors que les personnages qui les portent sont
+des hommes. En anglais, cela ne pose pas de problème puisque les termes sont neutres,
+mais, une fois traduits en français, ils peuvent paraître étranges au lecteur.
+Original
+
+Traduction française
+
+Traduction italienne
+
+King Bounty
+
+Roi Bonté
+
+Re Generoso
+
+Queen Graciousness
+
+Reine Bienveillance
+
+Regina Amabile
+
+Mistress Hasty
+
+Maîtresse Pressée
+
+Madama Presta
+
+Master Tactic
+
+Maître Tactique
+
+Mastro Tattico
+
+Lord Temperance
+
+Seigneur Tempérance
+
+Messer Temperato
+
+King Wisdom
+
+Roi Sagesse
+
+Re Savio
+
+Lady Crossfire
+
+Dame Feux-Croisés
+
+Schermaglia
+
+Comme dans le tableau précédent, nous avons relevé une légère nuance pour l‟un
+des noms : Bounty. En français, la traduction littérale exacte serait «générosité », mot qui a
+de nombreux aspects différents. Le nom « bonté » est un synonyme de ce mot mais ne
+couvre qu‟un seul de ces aspects, à savoir le « sentiment d‟humanité qui porte à se montrer
+bienveillant, charitable, à pardonner, à épargner un ennemi 50». Il y a une perte de sens
+« qualité qui élève l‟homme au-dessus de lui-même et le dispose à sacrifier son intérêt
+personnel, son avantage à celui des autres51 » et « disposition à donner plus qu‟on est tenu
+
+50
+51
+
+Le Petit Robert, 1993.
+Ibid.
+
+50
+
+de le faire52 ». Il est possible que le traducteur ait choisi ce nom, comme nous l‟avons
+également supposé pour le nom Subtil, parce qu‟il est plus court et plus idiomatique.
+Cinq de ces personnages ont un nom en français dont le genre ne correspond pas à
+leur sexe, il s‟agit du Roi Bonté, de Maître Tactique, du Seigneur Tempérance et de Dame
+Feux-Croisés. Il est possible que le traducteur ait décidé de conserver ces noms malgré ce
+problème en raison du fait que leur titre permet de connaître leur sexe. En effet, il s‟agit de
+personnages secondaires qui, lorsqu‟ils apparaissent dans le récit, sont nommés par leur
+titre suivi de leur nom, ce qui permet d‟éviter toute ambiguïté.
+Cependant, nous estimons que cette situation peut être déroutante pour le lecteur et
+que d‟autres solutions auraient pu être trouvées. Nous proposons de remplacer ces noms
+par des synonymes du genre adéquat: Roi Clément pour le Roi Bonté, Maître Stratège pour
+Maître Tactique, Seigneur Modéré pour Seigneur Tempérance, Roi Sage pour le Roi
+Sagesse et Dame Escarmouche pour Dame Feux-Croisés.
+Nous reconnaissons que la dernière de nos propositions n‟est pas une traduction
+exacte. En effet, « crossfire » dont la traduction est « feux croisés » signifie « converging
+fire from one or more positions53 » alors qu‟« escarmouche » désigne un « petit
+engagement entre des tirailleurs isolés ou des détachements de deux armées54 ». Il s‟agit
+cependant de la solution la plus proche à laquelle nous sommes parvenues. Puisque nous
+n‟arrivions pas à conserver le sens exact, nous avons décidé de garder la métaphore
+militaire. La dame en question est une maîtresse de magie s‟étant battue pour son roi, cette
+proposition nous paraît donc appropriée.
+Nous avons regroupé les trois noms suivants, car il s‟agit de cas similaires. En effet,
+pour les trois, la traductrice italienne n‟a pas utilisé le mot italien équivalent alors qu‟il
+aurait été possible de le faire, selon nous.
+Original
+
+Traduction française
+
+Traduction italienne
+
+Charity
+
+Charité
+
+Charity
+
+Queen Desire
+
+Reine Désir
+
+Regina Desirée
+
+52
+
+Ibid.
+Collins English Dictionary, 2005.
+54
+Le Petit Robert, 1993.
+53
+
+51
+
+Regal Farseer
+
+Royal Loinvoyant
+
+Regal Lungavista
+
+Pour les noms Charity et Regal, elle a choisi le report, choix que nous ne
+comprenons pas puisque ces termes sont aisément traduisibles en italien (respectivement
+par Carità et Regale) et qu‟ils ne posent pas de problème de genre. Nous avons trouvé que
+le mot Charity était effectivement utilisé en italien en tant qu‟emprunt à l‟anglais, mais il a,
+dans ce cas, le sens d‟œuvre de charité, ce qui n‟est pas le sens premier du terme en anglais
+et ne peut pas correspondre au caractère d‟une personne. Le terme carità au contraire
+correspond parfaitement au terme anglais charity et aurait donc pu être utilisé par la
+traductrice.
+Dans le cas de la reine Desire, la traductrice a, pour une raison que nous ne
+comprenons pas non plus, choisi un terme français. Certes, elle ne pouvait pas le traduire
+littéralement, le terme italien correspondant étant un masculin (desiderio). Cependant, nous
+pensons qu‟une alternative aurait pu être trouvée (Desiderata, par exemple, qui signifie
+littéralement désirée).
+
+Pour la suite de cette catégorie, nous prendrons les prénoms un par un, par ordre
+alphabétique. Ils ont également tous été traduits littéralement par le traducteur français. Ce
+que nous tenons à relever sont les solutions adoptées en italien.
+
+1er et 2e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Chivalry Farseer
+
+Chevalerie Loinvoyant
+
+Chevalier Lungavista
+
+Verity Farseer
+
+Vérité Loinvoyant
+
+Veritas Lungavista
+
+Tout d‟abord, nous tenons à préciser que nous ne traitons ici que les deux prénoms ;
+le nom de famille sera traité dans la section suivante concernant la création lexicale. Nous
+avons décidé d‟aborder ces deux noms ensemble car ils sont tous deux expliqués par la
+traductrice italienne elle-même dans la citation suivante :
+
+52
+
+Potevo tenere Verity, anche se per noi sembra un nome di donna, ma temevo che
+Chivalry non avrebbe avuto per noi la stessa sfumatura "cavalleresca". Chiamarli
+Verità e Cavalleria mi sembrava improponibile. Così ho optato per Veritas (che mi
+piace molto) e Chevalier, sperando che quest'ultimo nome, in francese, richiamasse la
+"chevalerie" antica.55
+
+Elle a tout d‟abord envisagé de reporter les noms mais craignait que Verity ne fasse penser
+à une femme et que la notion de chevalerie contenue dans Chivalry ne soit pas évidente
+aux yeux de son lecteur italophone. Puis, elle explique qu‟elle a choisi de ne pas traduire
+ces noms littéralement, car les mots italiens correspondants sont, là aussi, des féminins
+(Verità et Cavalleria) qui auraient, à ses yeux, également fait penser à une femme.
+Elle a donc choisi d‟utiliser le terme français pour le premier, car elle estime que la
+notion de chevalerie est plus clairement exprimée par le terme français que par l‟anglais.
+Pour le second, elle a choisi le nom latin. Ainsi, elle conserve le sens (le terme choisi est
+proche de l‟italien et sera donc compris par le lecteur), tout en évitant la terminaison en –a,
+propre au féminin.
+Concernant la traduction française, nous constatons qu‟ici aussi, le traducteur n‟a
+pas pris en compte la question du genre. Dans la même optique que pour les prénoms
+précédents, nous proposons ici : Chevalier et Loyal (tout en reconnaissant que nous nous
+exposons par là au risque que ce nom soit confondu avec celui du prince Royal). En
+décidant de changer le nom de Chevalerie en Chevalier, nous modifions également le nom
+de son fils qui deviendrait alors FitzChevalier.
+
+3e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+The Fool
+
+Le fou
+
+Il Matto
+
+Le cas de ce personnage est un peu spécial, car il ne s‟agit pas exactement d‟un
+prénom. En effet, le nom désigne ici la fonction du personnage. Cependant, personne ne
+connaissant son vrai nom, tous l‟appellent ainsi. Il est important de conserver les deux sens
+du terme « fou » (c‟est-à-dire celui d‟une personne ayant des troubles mentaux et celui de
+
+55
+
+http://sbcreations.blogspot.com/2010/05/traduzione-robin-hobb-errata-corrige.html
+
+53
+
+bouffon du roi), car de nombreux jeux de mots sont faits sur la base de cette polysémie tout
+au long de la série.
+En français, il est possible de conserver ces deux sens par une traduction littérale,
+les termes étant équivalents. En italien, par contre, nous constatons une importante perte.
+En effet, le second sens du terme, celui de bouffon du roi, n‟est pas conservé, la traductrice
+n‟a conservé que le premier sens. Il aurait, selon nous, été plus judicieux de conserver le
+terme buffone (équivalent italien de « bouffon »), qui, ayant aussi le sens de plaisantin, de
+pitre, aurait permis au moins une partie des jeux de mots tout en conservant le rapport entre
+le nom et son porteur.
+
+4e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Lady Thyme
+
+Dame Thym
+
+Dama Maggiorana
+
+Une fois de plus, la traductrice a cherché un terme lui permettant de conserver le
+sens et le genre féminin alors que le traducteur ne l‟a pas fait. Pour cela, Paola Cartoceti a
+choisi le nom d‟une plante aromatique, certes différente, mais appartenant à la même
+famille que celle choisie dans l‟original et qui a un nom féminin.
+Nous estimons que c‟est là une bonne solution et nous proposons de suivre sa
+solution en français. De plus, cela nous permet d‟obtenir un prénom existant réellement en
+français : Marjolaine.
+
+5e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+King Victor
+
+Roi Vainqueur
+
+Re Conquistatore
+
+Nous avons décidé d‟examiner ce prénom à titre indépendant, car nous avons relevé
+ici une incohérence dans la traduction italienne. En effet, deux personnages dont les
+prénoms sont différents en anglais (et en français) possèdent le même prénom en italien. Il
+54
+
+s‟agit certes de personnages secondaires (des ancêtres du héros) qui ne sont que cités dans
+le roman et n‟ont pas de rôle à proprement parler, mais nous pensons qu‟il s‟agit d‟une
+erreur de la part de la traductrice, erreur qui peut être due à de l‟inattention. Ainsi, les
+personnages des rois Taker (Preneur en français) et Victor (Vainqueur) ont tous deux été
+traduits par Re Conquistatore. Les deux mots n‟ayant pas le même sens en italien, le
+second aurait pu être traduit littéralement par Vincitore ou encore par Vittorio qui est un
+prénom existant réellement et qui est l‟équivalent du prénom Victor en anglais et en
+français.
+
+3.5. Création lexicale
+Nous avons mis dans cette catégorie les noms traduits pour lesquels il n‟existait pas
+de traduction « toute faite » (par exemple, les cas ou deux mots sont assemblés pour créer
+un « mot-valise ») ainsi que les cas de trouvailles où le traducteur est allé plus loin que la
+simple traduction littérale.
+Cette catégorie est, selon nous, la plus intéressante. En effet, c‟est la seule qui
+permet au traducteur de faire preuve d‟inventivité et de création. À plusieurs reprises, le
+traducteur français, en particulier, ne s‟est pas limité à produire une traduction littérale
+mais a décelé des nuances intéressantes dans les termes anglais, qu‟il s‟est attaché à
+restituer. Ces noms étant tous intéressants à nos yeux, nous les étudierons un par un, mis à
+part deux noms (Sitzwell et Whitelock), qui sont des cas similaires et que nous verrons
+donc ensemble.
+
+1er cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Chade Fallstar
+
+Umbre Tombétoile
+
+Umbra Stella D'Autunno
+
+Umbre Tombétoile est, selon nous, une trouvaille de la part du traducteur français.
+Le nom original est une invention de l‟auteur, invention qui a été reprise dans les versions
+traduites, bien que de manière différente. Le prénom anglais Chade est un homonyme de
+55
+
+shade, qui signifie « ombre ». Le traducteur français a donc choisi Umbre qui, sans être un
+homonyme de « ombre » en est très proche phonétiquement. En ce qui concerne l‟italien,
+la traductrice a également joué sur les sons et a choisi Umbra (« ombre » en italien se dit
+ombra). Pour le prénom, les deux traducteurs conservent donc la notion d‟ombre puisque
+les termes choisis sont très proches phonétiquement de ce mot. Il était important de le faire
+selon nous, car cela constitue une description du personnage, qui vit caché dans le château,
+comme une ombre.
+En ce qui concerne le nom de famille, il y a deux possibilités en anglais : Fallstar
+peut être rapproché de falling star, qui évoque une étoile filante et peut être décomposé en
+deux mots distincts : fall et star. C‟est cette seconde possibilité qu‟a choisi Arnaud
+Mousnier-Lompré, il a traduit les deux morphèmes séparément pour obtenir tombe/étoile
+(le « e » final de « tombe » disparaissant lorsque les termes sont regroupés).
+La traductrice italienne, quant à elle, avoue avoir hésité longuement sur la
+traduction de ce nom. Elle explique sa démarche sur son blog :
+"Fallstar" può anche essere interpretato come "Stella Cadente" e forse sarebbe stato
+più semplice. Ma io ho scelto l'interpretazione più poetica [...].56
+
+Le terme peut, tout comme en français, signifier étoile filante (stella cadente). Paola
+Cartoceti a toutefois choisi d‟appliquer la même méthode qu‟Arnaud Mousnier-Lompré, à
+savoir décomposer le nom anglais. Elle a, par contre, choisi un autre sens du mot fall. En
+effet, ce terme peut signifier « tomber » comme l‟a pensé le traducteur français, ou
+« automne ». La traductrice a finalement opté pour cette solution, qu‟elle trouvait plus
+poétique.
+Malheureusement, son choix s‟est par la suite révélé être le mauvais, car l‟auteur lui
+a expliqué plus tard qu‟elle pensait, elle, au sens d‟étoile filante ! La traductrice reconnaît
+son erreur sur son blog internet :
+Robin Hobb in persona, a Parma Fantasy 2010, mi ha confermato che intendeva
+"stella cadente". Ooops. Però è stata carinissima nel dirmi che in fondo anche la mia
+interpretazione è plausibile, anche perché lei ama lasciare ai lettori la libertà di
+interpretare e perfino pronunciare i nomi come desiderano! 57
+
+56
+57
+
+http://sbcreations.blogspot.com/2010/05/traduzione-robin-hobb-errata-corrige.html
+Ibid.
+
+56
+
+Elle ajoute toutefois que Robin Hobb lui a dit que sa solution était acceptable et que, pour
+elle, toutes les interprétations étaient possibles, car elle aime laisser à ses lecteurs la liberté
+d‟interpréter et de prononcer les noms comme ils le souhaitent.
+
+2e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Cook
+
+Mijote
+
+La cuoca
+
+Pour ce personnage, le sens est le même dans les trois langues. Cependant, là ou le
+traducteur français a opté pour un étoffement, nous remarquons une perte du côté de
+l‟italien. En effet, la traductrice n‟utilise pas le terme cuoca en tant que nom propre ici
+mais en tant que nom commun. Ainsi, elle ne donne pas de prénom au personnage mais le
+nomme par sa fonction. Bien que le sens soit le même, nous estimons qu‟il y a là une perte,
+surtout qu‟il s‟agit d‟un personnage qui reste présent dans la suite de la saga. Même s‟il ne
+s‟agit pas d‟un personnage principal, nous pensons qu‟il aurait été intéressant de lui donner
+un prénom d‟autant plus qu‟il ne s‟agit pas d‟un mot difficile, qui n‟aurait pas
+d‟équivalent.
+Du côté de la traduction française, le prénom Mijote qui a été choisi ajoute, selon
+nous, une valeur affective au personnage et correspond bien à sa personnalité (il s‟agit de
+la cuisinière principale du château, qui s‟occupe souvent de vérifier que Fitz est bien nourri
+et qu‟il est en bonne santé). Pour nous, c‟est une très bonne solution.
+
+3e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Farseer
+
+Loinvoyant
+
+Lungavista
+
+Prenons maintenant le patronyme porté par tous les membres de la famille royale. Il
+s‟agit, pour les trois langues, d‟un mot inventé, créé à partir de deux termes existants. Les
+traducteurs ont en fait traduit plus ou moins littéralement la création de l‟auteur.
+
+57
+
+Ce nom est important car il définit les personnages comme étant porteurs de la
+magie de l‟Art. En effet, Loinvoyant signifie « capable de voir loin », pas uniquement par
+les yeux, mais également par l‟esprit. En français, la définition de « voyant » est
+équivalente à la définition anglaise :
+personne douée de seconde vue; personne qui voit.58
+
+Le nom choisi en italien a un sens similaire. La magie de l‟Art permettant, entre autres, de
+voir à une distance plus importante que la normale, nous pouvons constater qu‟il s‟agit là
+d‟une description, non pas des personnages, mais de la magie que possède toute cette
+famille. Le sens est donc important ici et nous constatons que les deux traducteurs sont
+parvenus à le conserver.
+
+4e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Fedwren
+
+Geairepu
+
+Piuma
+
+Dans le cas de ce personnage, il s‟agit également d‟une invention de l‟auteur à
+partir de deux mots existants (fed qui signifie nourri et wren, un roitelet, qui est une espèce
+d‟oiseau). En français, le traducteur a appliqué la même méthode. C'est-à-dire qu‟il a
+également composé un prénom sur la base de deux autres mots, pouvant être considérés
+comme des synonymes de ceux utilisés en anglais. En effet, « repu » désigne quelqu‟un qui
+a mangé à satiété et donc qui est bien nourri. Pour le second terme, le cas est un peu
+différent, car « roitelet » est trop long pour être utilisé en tant que deuxième partie du
+prénom. Nous supposons que c‟est pour cette raison que l‟auteur lui a préféré « geai » qui
+est aussi une espèce d‟oiseau mais qui à l‟avantage d‟être plus court.
+La traductrice italienne a opté pour une solution différente. Elle a choisi de ne pas
+reprendre la création de l‟original mais de s‟intéresser plutôt au personnage lui-même dans
+le but de trouver un nom qui le décrive. Elle a donc, de façon assez logique, opté pour le
+nom de Piuma (littéralement « plume »), ce qui correspond parfaitement au personnage
+
+58
+
+Le Petit Robert, 1993.
+
+58
+
+puisqu‟il s‟agit du maître scribe de la forteresse. Le seul problème est qu‟il s‟agit, ici aussi,
+d‟un terme féminin.
+Ici, nous trouvons que les deux solutions sont bonnes, même si elles découlent de
+deux optiques différentes. Toutefois, concernant la question du rapport entre le sens du
+nom et le personnage lui-même, la traduction italienne est la plus intéressante étant donné
+que la traduction française n‟a, elle, aucun rapport avec le personnage lui-même.
+
+5e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Hands
+
+Pognes
+
+Mani
+
+Dans le cas de ce personnage, l‟auteur a choisi un mot existant et la traductrice
+italienne a opté pour une traduction littérale. Il en va de même du traducteur français, mais
+celui-ci a également produit un étoffement. Nous trouvons que, dans ce cas, il a fait un très
+bon travail et nous estimons que sa solution est mieux adaptée à un prénom que la
+traduction littérale, qui aurait été « mains ». En effet, le mot « mains » est beaucoup plus
+fréquent que « pognes » et semblerait donc moins naturel en tant que prénom. De plus, le
+mot « pognes » est un mot familier souvent utilisé pour désigner de grandes mains, ce qui
+correspond bien à l‟idée que l‟on peut se faire de mains d‟ouvriers ou de travailleurs. Cette
+description correspond bien au personnage, qui travaille dans les écuries de Castelcerf.
+
+6e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Lacey
+
+Brodette
+
+Trina
+
+En anglais et en français, il s‟agit d‟un nom crée à partir de termes inventés. En
+italien, par contre, la traductrice a choisi un terme existant réellement. L‟auteur a choisi de
+créer ce nom à partir du terme lace, qui, en français, peut signifier « dentelle » ou « lacet ».
+Le terme choisi en italien, trina signifie « dentelle ». C‟est aussi le sens qu‟a choisi le
+
+59
+
+traducteur français. Il a apparemment estimé que reprendre le terme « dentelle » ne serait
+pas idiomatique en français et a donc cherché un autre terme issu du domaine de la couture
+qui soit plus satisfaisant. C‟est ainsi qu‟il a choisi le nom Brodette. Nous trouvons cette
+proposition appropriée, car Brodette est la femme de chambre de dame Patience, elle est
+chargée de diverses tâches, dont des activités de couture pouvant comprendre la broderie.
+
+7e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Rowd
+
+Chahu
+
+Borrasca
+
+Ce prénom a été inventé par l‟auteur à partir du mot « row ». En anglais, celui-ci peut
+avoir plusieurs sens, dont celui choisi par le traducteur français :
+a noisy quarrel or dispute, a noisy disturbance59
+
+Ce qui peut correspondre en français à « chahut », terme qu‟a choisi le traducteur en
+modifiant légèrement la graphie comme l‟a fait l‟auteur dans le texte original. Nous
+trouvons que c‟est une bonne solution, car, comme en anglais, on peut facilement
+reconnaître le mot de base.
+La traductrice italienne a choisi un nom qui n‟a apparemment aucun rapport avec le
+sens de l‟original, ou alors de très loin, si l‟on compare une bruyante dispute (définition cidessus) avec une tempête (burrasca en italien signifie : tempesta, spec. marina, con vento
+violento 60; c'est-à-dire une tempête violente). Nous remarquons également que, pour ce
+personnage, elle a conservé une terminaison féminine alors qu‟il s‟agit d‟un homme.
+
+59
+60
+
+Collins English Dictionary, 2005.
+ZINGARELLI, Nicola, Lo Zingarelli, vocabolario della lingua italiana, Zanichellli, Bologne, 2006.
+
+60
+
+8e et 9e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Sitzwell
+
+Biennassis
+
+Distinto
+
+Whitelock
+
+Boucleblanche
+
+Cioccabianca
+
+En français, ces noms ont tous deux été traduits suivant la même méthode. Parce
+qu‟ils n‟existent pas tels quels dans la langue originale, le traducteur les a décomposés afin
+d‟en extraire les différents éléments signifiants, qu‟il a traduits individuellement avant de
+les recomposer en des « nom-valises ».
+En italien, la traductrice a fait de même pour le second nom. Pour le premier, par
+contre, elle a opéré un choix que nous ne comprenons pas. Elle a opté pour un terme
+totalement différent n‟ayant apparemment aucun rapport, ni avec le terme anglais, ni avec
+le personnage lui-même (il s‟agit d‟un soldat).
+En ce qui concerne le genre des noms, nous pouvons voir que, dans le cas de
+Sitzwell, sa traduction ne pose de problème dans aucune des deux langues. La traduction
+du prénom Whitelock par contre, est un féminin dans les deux langues (Boucleblanche et
+Cioccabianca). Cependant, nous reconnaissons qu‟il est très difficile de trouver un
+équivalent satisfaisant permettant de conserver le sens en ayant le bon genre. De plus, ce
+personnage n‟est cité qu‟une fois dans le récit et n‟y joue pas vraiment de rôle. Nous
+pensons que c‟est pour cela que les traducteurs ne se sont pas attachés plus longuement à
+trouver une solution satisfaisante.
+
+10e cas :
+Original
+
+Traduction française
+
+Traduction italienne
+
+Wallace
+
+Murfès
+
+-
+
+Nous souhaitons ajouter à cette liste un personnage qui est présent uniquement dans
+la suite de la série : Wallace, qui apparaît dans le deuxième tome61, il est le serviteur du roi
+Subtil. Nous nous permettons cet écart, car nous trouvons son nom intéressant. En effet, le
+61
+
+HOBB, Robin, L’assassin du roi, 1999, p.35.
+
+61
+
+traducteur a fait un très bon travail et a créé un jeu de mot là où il n‟est pas évident que
+l‟original en recèle un, puisqu‟il s‟agit d‟un prénom existant réellement en anglais. En ce
+qui concerne la version italienne, nous ne possédons pas l‟ouvrage et ne connaissons donc
+pas la solution choisie.
+Au lieu de faire un report, qui aurait été une solution possible et assez logique, le
+traducteur français a décomposé le terme anglais comme il l‟a fait, par exemple, pour le
+nom Fallstar. Il a ainsi obtenu les termes wall et ace, qui à l‟intérieur de ce nom, se
+prononce comme ass, terme que le traducteur a choisi d‟utiliser. En prenant ensuite les
+traductions littérales de ces mots et en modifiant légèrement la graphie de « fesse » en
+« fès » (comme il l‟a fait pour ace/ass), il est parvenu au nom Murfès, faisant apparaître un
+jeu de mot qui, comme nous le disions ci-dessus, n‟est guère sensible dans le texte source,
+voire non voulu par l‟auteur.
+Nous trouvons ce nom intéressant pour une autre raison également. En effet, il nous
+permet de nous poser la question de la liberté du traducteur. C‟est une question importante
+que tout traducteur est amené à se poser. Il doit se demander jusqu‟où il est possible d‟aller
+dans la créativité sans pour autant trahir l‟original et s‟en éloigner. Il n‟existe pas de
+réponse précise à cette question. C‟est au traducteur lui-même d‟estimer en fonction de la
+situation s‟il peut se permettre une certaine distance avec le texte ou si, au contraire, il doit
+s‟y tenir à la lettre.
+Dans le cas présent, nous pensons que le traducteur pouvait se permettre d‟effectuer
+ce jeu de mots. Nous considérons ce qu‟il a fait comme une trouvaille et non comme une
+trahison, car les jeux de mots, de sons et de langue sont très présents dans l‟ouvrage. Ce
+nom s‟inscrit donc dans l‟esprit du reste de l‟œuvre. S‟il s‟était agi d‟un cas isolé, nous
+pensons qu‟il aurait alors été préférable de rester plus proche du texte source.
+
+62
+
+3.6. Mélange de stratégies
+Original
+
+Traduction française
+
+Traduction italienne
+
+Mavis Threadsnip
+
+Mavis Coupefil
+
+Mavis Tagliafilo
+
+Molly Chandler
+
+Molly Chandelière
+
+Molly la Candelaia
+
+FitzChivalry Farseer
+
+FitzChevalerie Loinvoyant
+
+FitzChevalier Lungavista
+
+Cette catégorie est un peu synthétique. Nous avons décidé de la créer dans le but de
+mettre en évidence le fait que, dans certains cas, un procédé n‟est pas suffisant, et que le
+traducteur est parfois obligé d‟en appliquer plusieurs pour un seul nom propre.
+Généralement, c‟est le cas lorsque le nom propre en question est composé d‟un prénom et
+d‟un patronyme. C‟est ce que nous voyons, par exemple, avec les noms de Molly Chandler
+et de Mavis Threadsnip.
+Dans ces deux cas, les traducteurs ont dû traiter les différentes parties séparément.
+Les prénoms ont tous deux été reportés : Molly, car il s‟agit d‟un prénom existant
+réellement et connu des lecteurs des trois langues ; Mavis, pour la même raison, bien qu‟il
+s‟agisse d‟un prénom moins connu, du moins dans la sphère francophone. De plus, ni l‟un
+ni l‟autre ne possède d‟équivalences dans les langues cibles (contrairement à ce que nous
+avons vu pour le prénom Lew).
+En ce qui concerne les deux noms de famille, les traducteurs ont utilisé les mêmes
+stratégies. Ils ont opté pour une traduction littérale pour Chandler et pour une création
+lexicale pour Threadsnip. Ce second patronyme est en effet une création de l‟auteur, sur le
+même modèle que ce que nous avons vu dans la section précédente, c'est-à-dire deux
+termes existants mis bout à bout (thread et snip). Les traducteurs ont donc, comme pour les
+noms vus précédemment, traduit littéralement les différents mots puis les ont assemblés
+pour former un « nom-valise ».
+Le cas le plus extrême est celui de FitzChevalerie Loinvoyant. Nous avons déjà vu
+les différentes parties de son nom (Fitz, Chevalerie et Loinvoyant) dans les sections
+précédentes. Cependant, en prenant le nom dans son ensemble, nous pouvons constater
+qu‟il est composé de trois parties qui ont dû être traitées séparément par les traducteurs. Ils
+ont tous deux utilisé les mêmes procédés pour les trois parties, c‟est-à-dire un report pour
+
+63
+
+« Fitz », une traduction littérale pour « Chevalerie » et une création lexicale pour
+« Loinvoyant ».
+
+3.7. Considérations dans une perspective macrotextuelle
+Nous arrivons maintenant au terme de notre analyse. Après avoir étudié chaque
+procédé individuellement, dans une perspective microtextuelle, nous aimerions faire
+quelques remarques plus générales sur l‟ensemble des noms propres étudiés dans ce
+mémoire, en adoptant une perspective macrotextuelle.
+Le premier aspect sur lequel nous aimerions nous pencher est l‟incidence qu‟a la
+présence ou l‟absence d‟un sens du nom propre sur les choix des traducteurs. Nous avons
+en effet pu noter que c‟était un facteur qui avait une incidence importante sur leurs choix
+du point de vue du procédé utilisé.
+Comme nous l‟avons vu tout au long de ce chapitre, de nombreux noms de
+personnages ont un sens dans l‟original. Deux possibilités se présentaient alors aux
+traducteurs selon les deux courants de pensée principaux en traduction : soit ils pouvaient
+décider de privilégier le sens plutôt que la forme ; soit ils pouvaient, au contraire, estimer
+que la forme était plus importante que le sens. Dans le cas de ce roman, les deux
+traducteurs ont généralement opéré le même choix, à savoir celui de privilégier le sens.
+Nous pensons qu‟il s‟agit là du choix le plus judicieux, car les noms que l‟auteur a choisis
+ont en effet un sens, mais, surtout, pour nombre d‟entre eux, ce sens est en lien avec le
+personnage lui-même. Ces noms participent à la description du personnage et sont donc
+importants. Si les traducteurs avaient décidé de privilégier la forme, ces éléments de sens
+auraient été perdus pour le lecteur. Nous avons vu que c‟est ce qu‟ont fait les deux
+traducteurs. Par exemple, le traducteur français a conservé le prénom Cob, bien qu‟il
+s‟agisse d‟un mot rare en français.
+Toujours en ce qui concerne le sens, un autre aspect est à prendre en compte. Il
+s‟agit de la notion de potentialité. Il faut tenir compte du fait que le lecteur, tant source que
+cible, ne remarquera (ou ne comprendra) pas forcément le sens « caché » dans les
+différents noms. De même, il est possible qu‟il le remarque, mais sans établir
+64
+
+consciemment de lien avec le caractère du personnage. Le sens ou les jeux de mots
+recherchés par l‟auteur peuvent ainsi passer inaperçus pour certains lecteurs. Nous pensons
+qu‟il est néanmoins important de tenter de conserver ce sens, car si certains lecteurs ne le
+remarqueront pas, d‟autres le feront et pourront donc profiter de cet aspect ludique. De
+plus, il n‟est pas exclu que, même si le lecteur n‟en est pas conscient, le nom propre
+l‟amènera à associer certaines images avec un personnage, qui peuvent contribuer à
+l‟impression générale qu‟il aura de celui-ci.
+Notre deuxième remarque porte sur le fait que, comme nous l‟avons vu dans
+l‟introduction de ce chapitre, l‟auteur a choisi de donner des noms de vertus aux
+personnages de la famille royale. Beaucoup de ces noms sont donc des substantifs en
+anglais (les autres, moins nombreux, sont des adjectifs), ce qui crée une cohérence
+sémantique entre les noms propres et donc entre les personnages. Nous avons constaté que,
+pour tous ces noms, le traducteur français s‟était efforcé de conserver cette cohérence. Il a
+traduit les substantifs par des substantifs (par exemple, Verity devient Vérité et Chivalry
+devient Chevalerie) et les adjectifs par des adjectifs (Shrewd devient Subtil et Regal
+devient Royal). Cela explique pourquoi il a choisi de ne pas prendre en compte la question
+du genre. En effet, il n‟est pas possible en français de conserver des noms de vertu tout en
+ayant des noms masculins puisque ces vertus sont toutes des substantifs féminins. Pour
+obtenir des noms du genre adéquat, il aurait fallu choisir des adjectifs. Le choix qu‟a fait
+Arnaud Mousnier-Lompré lui permet de conserver des noms de vertus et donc de rester
+cohérent avec le texte.
+En italien, par contre, la traductrice n‟a pas conservé cette cohérence sémantique
+entre les noms. Elle a traduit une grande partie des substantifs par des adjectifs (par
+exemple Bounty devient Generoso) dans le but d‟obtenir des prénoms du genre adéquat.
+Certes, les noms qu‟elle a choisis conservent une certaine cohérence entre eux puisqu‟il
+s‟agit, pour la majorité, d‟adjectifs. Toutefois, elle perd ainsi la cohérence avec le texte luimême puisqu‟elle utilise des adjectifs, qui ne sont donc plus des noms de vertus.
+Selon nous, les choix des deux traducteurs sont justifiés. Celui de Paola Cartoceti se
+justifie par le fait qu‟elle a cherché à respecter le genre en donnant aux personnages des
+noms du genre adéquat par rapport à leur sexe. D‟un autre côté, le choix du traducteur
+français permet de conserver la cohérence interne du texte, ce qui est également important.
+De plus, nous pensons que cette question de genre n‟est pas un problème très important.
+65
+
+De fait, cela ne nous a pas marquée lors de notre première lecture. C‟est uniquement en
+comparant la traduction française et la traduction italienne que nous nous sommes rendu
+compte de cette situation. Nous pensons donc que cela ne crée pas véritablement de
+problème pour le lecteur. Selon nous, la traduction française est donc légèrement meilleure
+car elle conserve la cohérence du texte original. Le lecteur italien, de son côté, risque de ne
+pas comprendre pourquoi le texte parle de vertus et de ne pas établir de lien entre celles-ci
+et les noms des personnages.
+Nous souhaitons relever un autre problème de cohérence. Ce dernier concerne la
+cohérence entre les différents noms présents dans le roman. En effet, une grande partie des
+noms ont été traduits dans les deux langues et ont, par conséquent, des sonorités
+typiquement françaises ou italiennes. Cependant, certains noms, principalement parmi ceux
+qui ont été reportés, se démarquent car ils conservent une sonorité anglaise (par exemple
+Dick ou Seigneur Shemshy). Ces noms ne sont pas très nombreux. Cependant, nous
+pensons que cette situation peut paraître étrange au lecteur. D‟autant plus que, pour
+d‟autres noms, les traducteurs se sont servis de l‟assimilation graphique dans le but de
+gommer cette différence (c‟est le cas de Sherf, par exemple, qui devient Cherfe en
+français).
+Nous nous sommes alors demandé pourquoi les traducteurs n‟avaient pas appliqué
+ce procédé aux autres noms concernés. Selon nous, il y a deux réponses possibles à cette
+question : soit ils ont jugé que cette situation ne posait pas de problème ; soit ils ne sont pas
+parvenus à trouver des solutions satisfaisantes. Ayant nous même essayé de trouver des
+solutions différentes, nous pensons qu‟il s‟agit de la seconde possibilité. En effet, il est très
+difficile, voire impossible, d‟adapter ces noms à la graphie française (ou italienne) sans
+devoir les modifier de façon importante. D‟autant plus qu‟il s‟agit pour certains (nous
+pensons ici aux prénoms Dick et Kerry) de prénoms relativement courants dans le monde
+anglophone.
+Une autre possibilité aurait été de remplacer ces prénoms aux sonorités anglaises
+par des prénoms aux sonorités françaises et italiennes (respectivement par Pierre et Paul ou
+Pietro et Paolo par exemple). Nous trouvons cependant cette solution critiquable. Selon
+nous, cela serait aller trop loin dans la liberté du traducteur dont nous parlions dans la
+section précédente. En effet, modifier les prénoms de cette manière modifierait leur origine
+et nous estimons que cela serait trop s‟éloigner de l‟original. De plus, cela placerait, par la
+66
+
+même occasion, le récit dans un contexte beaucoup plus proche du lecteur cible et
+risquerait par conséquent de rendre ce monde moins imaginaire à ses yeux. Nous pensons
+donc que, malgré le problème de cohérence que cela peut poses, les traducteurs n‟ont pas
+eu le choix et ont opté pour la meilleure des solutions.
+La dernière remarque que nous souhaitons faire est que l‟auteur s‟est servi des
+prénoms pour marquer des différences entre les divers groupes de personnages. La
+première de ces différences se situe entre les personnages principaux et les personnages
+secondaires. En effet, la plupart des personnages principaux ont des noms qui possèdent un
+sens alors que ceux des personnages secondaires en sont dénués. Dans la perspective d‟une
+stratégie globale de traduction des noms propres, il était important de répercuter cette
+distinction dans la traduction. Nous avons cependant noté deux exceptions : Molly et
+Burrich sont des personnages principaux, mais leurs noms sont dénués de sens. Cette
+différence s‟explique par la troisième distinction que nous verrons ci-dessous. En
+s‟efforçant de traduire tous les noms possédant un sens, les traducteurs ont respecté cette
+distinction ainsi que les deux exceptions.
+Nous avons par ailleurs noté une différence similaire entre les personnages
+« étrangers » et les personnages « locaux ». En effet, les personnages du peuple des
+montagnes, c‟est-à-dire originaire d‟une autre partie du Royaume, ont des noms aux
+sonorités différentes, qui n‟ont pas de sens dénotatif (par exemple, la reine Kettricken et
+son frère Rurisk). Cela permet à l‟auteur de les différencier des personnages originaires de
+la citadelle. Là aussi, il était important, par souci de cohérence globale, que les traducteurs
+respectent cette opposition.
+Pour finir, l‟auteur fait une troisième différenciation, entre les personnages de noble
+naissance (principalement ceux de la famille royale) et ceux de plus basse extraction. Les
+noms des gens de la noblesse, comme nous l‟avons vu, ont généralement un sens, alors que
+ceux des gens des classes « inférieures » en sont dénués, ce qui explique pourquoi les
+prénoms de Molly et Burrich n‟ont pas de sens bien qu‟il s‟agisse de personnages
+principaux.
+Selon nous, il est important de conserver ces différences, car elles permettent au
+lecteur de différencier les divers groupes de personnages. Comme nous l‟avons vu tout au
+long de ce chapitre, les traducteurs se sont efforcés de conserver le sens lorsqu‟il était
+67
+
+présent, ce qui leur permet de conserver également ces différenciations. Cela nous permet
+de voir qu‟il est important que, lorsque le traducteur opère un choix, il s‟y tienne tout au
+long de l‟œuvre. Il doit toujours garder à l‟esprit la globalité de sa traduction dans le but de
+conserver la cohérence macrotextuelle.
+
+68
+
+Conclusion
+
+Nous arrivons maintenant au terme de notre travail. La conclusion que nous
+pouvons en tirer est que les noms propres sont des éléments de traduction importants, qui
+doivent être pris en compte par le traducteur. De plus, nous avons vu qu‟ils requièrent de la
+part du traducteur une réflexion approfondie sur la méthode à appliquer pour les traduire.
+En effet, comme nous l‟avons vu dans le deuxième chapitre de ce mémoire, il ne s‟agit pas
+d‟une science exacte pour laquelle il n‟y a qu‟une solution correcte, mais plutôt de
+plusieurs possibilités entre lesquelles le traducteur doit choisir, ce qui complique encore sa
+tâche.
+Au cours de ce travail, nous avons découvert qu‟il existait dans la littérature de
+nombreuses significations et indices qui ne sont pas forcément (du moins consciemment)
+remarqués ou compris par le lecteur mais que le traducteur doit, selon nous, tenter de
+conserver puisqu‟ils sont voulus par l‟auteur. Dans notre ouvrage en particulier, nous nous
+sommes aperçue que beaucoup de noms ont des significations cachées. C‟est-à-dire qu‟au
+début nous pensions que ces noms n‟avaient aucun sens, mais, après avoir effectué
+quelques recherches, nous nous sommes rendu compte que ce n‟était pas le cas. Certains de
+ces noms ont une signification qui n‟est pas évidente au premier abord. Il est intéressant de
+noter que les traducteurs ont fait un travail en profondeur en recherchant dans tous les cas
+un sens éventuel, même lorsque celui-ci risquait de ne pas être compris par le lecteur (par
+exemple, pour les prénoms de Cob et de Murfès).
+Dans l‟ouvrage que nous avons étudié, nous avons vu que le sens jouait un rôle
+important dans le choix des procédés appliqués par les traducteurs. En fonction de cela,
+nous avons relevé trois catégories de noms propres : ceux qui ont un sens correspondant à
+la personnalité de leur porteur, ceux qui ont un sens sans aucun rapport avec le personnage
+et ceux qui n‟ont pas de sens. Les plus nombreux sont ceux de la première catégorie, à
+savoir ceux dont le sens a un lien avec la personnalité du personnage (Fitz, Cob, par
+exemple). Dans ces cas, il est important que le traducteur conserve ce sens et le reproduise
+dans le texte cible puisqu‟il fait partie de la description du personnage. C‟est ce que les
+deux traducteurs ont fait la plupart du temps en utilisant la traduction plus ou moins
+littérale.
+
+69
+
+La deuxième catégorie est moins importante. Il s‟agit de noms pour lesquels nous
+ne sommes pas parvenue à comprendre le lien qui existe entre le nom et le personnage, par
+exemple les prénoms Hod et Jade. Nous pensons qu‟il est possible que l‟auteur ait choisi
+ces noms au hasard, sans les rattacher au personnage à l‟aide du sens. Dans ces cas, il
+appartient au traducteur de faire un choix, soit il conserve la forme, soit il conserve le sens.
+Nous pouvons voir ici que les traducteurs ont parfois opté pour des solutions différentes.
+Pour le prénom Hod, par exemple, le traducteur a fait un report dans le but de conserver la
+forme, alors qu‟en italien, la traductrice a préféré conserver le sens et a effectué une
+traduction littérale.
+La dernière catégorie regroupe principalement des personnages secondaires. Ces
+derniers n‟apparaissent que rarement dans le récit. C‟est pourquoi nous pensons que
+l‟auteur n‟a pas jugé utile de leur donner un sens. Par conséquent, la façon dont ils sont
+traduits est également moins importante. De plus, le choix des traducteurs est ici réduit, car
+comme les noms ne signifient rien, la seule solution consiste à recourir au report ou à
+l‟assimilation graphique. Toutefois, nous relevons deux exceptions, les prénoms de Molly
+et de Burrich n‟ont pas de sens alors qu‟il s‟agit de personnages principaux. Nous pensons
+qu‟il s‟agit là d‟un choix délibéré de la part de l‟auteur dans le but de marquer la différence
+entre les personnes de noble naissance (dont les noms ont un sens comme nous l‟avons vu
+dans le chapitre précédent) et les gens de plus basse extraction.
+En ce qui concerne les méthodes choisies par les traducteurs, nous avons constaté
+que tous deux s‟étaient efforcés de conserver le sens la plupart du temps et dans la mesure
+du possible. Une différence majeure que nous avons pu relever est que la traductrice
+italienne a davantage veillé à ce que les personnages aient un nom qui corresponde à leur
+sexe. Le traducteur français, quand à lui, a peu pris en compte cette question. Nous
+pensons que cela est dû au fait qu‟en italien la différence entre le masculin et le féminin est
+fortement marquée à l‟aide des terminaisons (-o ; -a) et que cela est plus dérangeant
+qu‟avec les terminaisons plus « neutres » du français.
+Nous avons également pu constater que, dans certains cas, les traducteurs avaient
+opté pour des solutions totalement différentes sans que l‟une soit meilleure que l‟autre (par
+exemple le prénom Fedwren qui a été traduit de deux manières différentes, toutes deux
+justifiables). Cela prouve qu‟il n‟y a jamais une seule solution correcte mais bien plusieurs
+solutions possibles, qui peuvent être de même qualité. Dans l‟ensemble, nous pensons que
+70
+
+les traducteurs ont tous deux fait un bon travail. Nos préférence vont tantôt pour certaines
+trouvailles du traducteur français, tantôt pour celles de la traductrice italienne.
+Un autre point dont nous avons relevé l‟importance au cours de ce travail est le fait
+que le traducteur doit toujours garder à l‟esprit l‟effet global de ses choix. Il doit être
+cohérent et le plus constant possible. Dans le cas qui nous occupe, il doit prendre en
+compte l‟ensemble des noms propres de l‟œuvre et, lorsqu‟il opère un choix (en
+l‟occurrence celui de traduire tous les noms porteurs de sens), il doit s‟y tenir tout au long
+de l‟œuvre afin de conserver la cohérence macrotextuelle. Comme nous l‟avons vu, dans le
+cas des noms propres, cela peut permettre de renforcer des oppositions ou des symétries
+entre les personnages ou d‟établir des réseaux sémantiques plus ou moins perceptibles,
+mais potentiellement sensibles.
+D‟un point de vue personnel, nous avons trouvé ce travail très intéressant et
+enrichissant tant pour ce qui est de la recherche que de la pratique. La recherche nous a
+permis de nous rendre compte qu‟il y avait beaucoup de sens ou d‟indices cachés, c‟est-àdire volontaires de la part de l‟auteur mais auquel le lecteur lambda ne prête pas forcément
+attention. Ces indices et significations peuvent alors paraître secondaires au traducteur
+(puisque le lecteur risque de passer à côté). Cependant, celui-ci doit s‟efforcer de les
+conserver puisqu‟il s‟agit d‟éléments choisis intentionnellement par l‟auteur. Dans le cas
+de notre ouvrage, nous pensons que le sens doit être gardé puisqu‟il fait partie intégrante de
+la description du personnage.
+Au niveau de la pratique, ce mémoire nous a principalement permis de nous rendre
+compte de la difficulté du travail de traducteur littéraire, surtout en ce qui concerne la
+créativité. En effet, cette dernière constitue une part importante du travail du traducteur
+littéraire, car elle a une grande influence, selon nous, sur l‟effet que l‟ouvrage aura sur le
+lecteur. Nous avons ainsi constaté qu‟il était facile de critiquer les solutions trouvées par
+les traducteurs, mais qu‟il était cependant souvent très difficile d‟en trouver de meilleures !
+Cela nous permet également de réfléchir au fait qu‟il est possible que les traducteurs euxmêmes aient été conscients de la faiblesse de certaines de leurs solutions et qu‟ils aient dû
+s‟avouer vaincus, faute d‟avoir pu trouver mieux.
+
+71
+
+Bibliographie :
+
+Œuvres étudiées :
+
+
+HOBB, Robin, Assassin’s Apprentice, Harper Voyager, Londres, 2007, 480 p.
+
+
+
+HOBB, Robin, L’apprenti assassin, traduit de l‟anglais par Arnaud MousnierLompré, Éditions Pygmalion/Gérard Watelet, Paris, 1998, 510 p.
+
+
+
+HOBB, Robin, L’assassin du roi, traduit de l‟anglais par Arnaud MousnierLompré, Éditions France Loisirs, Paris, 1999, 437 p.
+
+
+
+HOBB, Robin, L’apprendista assassino,traduit de l‟anglais par Paola Bruna
+Cartoceti Fanucci Editore, Rome, 2005, 491 p.
+
+Ouvrages théoriques :
+
+
+ADRADA RAFAEL, Cristina, « La traduction de la connotation onomastique en
+littérature », in M. Ballard (éd), La traduction, contact de langues et de cultures
+(1), Artois Presses Universités, Arras, 2005, pp.75-89.
+
+
+
+BALLARD, Michel, Le nom propre en traduction, Ophrys, Paris, 2001, 231 p.
+
+
+
+JONASSON, Kerstin, Le nom propre : Constructions et interprétations, Duculot,
+Louvain-la-Neuve, 1994, 255 p.
+
+
+
+LADMIRAL, Jean René, « Sourciers et ciblistes », in La traduction: revue
+d’esthétique, 1986, n° 12, pp. 33-42
+
+
+
+PODEUR, Josiane, Nomi in azione, il nome proprio nelle traduczioni dall’italiano
+al francese e dal francese all’italiano, Liguori Editore, Napoli, 1999, 242 p.
+
+
+
+SALMON KOVARSKI, Laura, “Anthroponyms, acronyms and allocutives in
+interpreting from Russian”, 2002, in G.Garzone e M.Viezzi (eds.), Interpreting in
+the 21st Century. Challenges and Opportunities, Amsterdam-Philadelphia, John
+Benjamins
+
+
+
+VIEZZI, Maurizio, Denominazioni proprie e traduzione, Edizioni Universitarie de
+Lettere Economia Diritto, Milano, 2004, 200 p.
+
+72
+
+Sites internet :
+Sites utilisés pour la présentation de l’œuvre:
+
+
+<http://www.actusf.com/spip/article-7443.html>, interview consultée en novembre
+2010 pour la biographie du traducteur
+
+
+
+<http://www.cafardcosmique.com/HOBB-Robin,520>, consulté en novembre 2010,
+pour la biographie de l‟auteur
+
+
+
+<http://www.elbakin.net/fantasy/auteur/robin-hobb-282>, consulté en novembre
+2010 pour la biographie de l‟auteur
+
+
+
+<http://www.elbakin.net/fantasy/presentation>, consulté en février 2011 pour la
+définition de la fantasy
+
+
+
+<http://www.elbakin.net/interview/exclusive/Interview-de-Arnaud-MousnierLompre>, interview consultée en novembre 2010 pour la biographie du traducteur
+
+
+
+<http://www.evene.fr/celebre/biographie/robin-hobb-15144.php>,
+
+consulté
+
+en
+
+novembre 2010 pour la biographie de l‟auteur
+
+
+<http://www.fantasybookreview.co.uk/Robin-Hobb/biography.html>, consulté en
+novembre 2010 pour la biographie de l‟auteur
+
+
+
+<http://www.harpercollins.com/authors/28605/Robin_Hobb/index.aspx>, consulté
+en novembre 2010 pour la biographie de l‟auteur
+
+
+
+<http://it-it.facebook.com/people/Paola-Cartoceti/1512955293>,
+
+page
+
+facebook
+
+consultée en mai 2011 pour la biographie de la traductrice
+
+
+<http://fr.wikipedia.org/wiki/Arnaud_Mousnier-Lompr%C3%A9>,
+
+article
+
+de
+
+wikipedia, consulté en novembre 2010 pour la biographie de traducteur
+
+
+<http://fr.wikipedia.org/wiki/Robin_Hobb>, consulté en novembre 2010 pour la
+biographie de l‟auteur
+
+
+
+<http://www.worldcat.org/search?qt=worldcat_org_all&q=paola+cartoceti>,
+consulté en mai 2011 pour la biographie de la traductrice
+
+73
+
+Sites utilisés pour le chapitre théorique :
+
+
+RACICOT, André, 2008, Traduire le monde,in Bureau de la traduction,consulté en
+mars 2011, <http://www.btb.gc.ca/btb.php?lang=fra&cont=1114>,consulté en mars
+2011
+
+
+
+ZITOUNY,
+
+Ismail, 2011, <http://www.slate.fr/lien/34639/112-maniere-ecrire-
+
+kadhafi>, consulté en avril 2011
+
+
+<http://fr.wikipedia.org/wiki/Prince_de_Motordu>, consulté en mai 2011
+
+
+
+<http://w3.erss.univ-tlse2.fr/textes/publications/CDG/25/CG25-7-Daille.pdf>,
+consulté en avril 2011
+
+Sites utilisés pour le chapitre pratique :
+
+
+<http://avibase.bsc-oc.org/species.jsp?lang=IT&avibaseid=3E04020B54C14FCC>,
+consulté en mai 2011
+
+
+
+<http://www.elbakin.net/interview/exclusive/Interview-de-Arnaud-MousnierLompre>, interview consultée en novembre 2010
+
+
+
+<http://www.fantastinet.com/interview-arnaud-mousnier-lompre/>, consulté le en
+novembre 2010
+
+
+
+<http://lexique-biblique.com/lexiques/hebreu/strong-hebreu-02766charim+harim.html>, consulté en mai 2011
+
+
+
+<http://www.oiseaux.net/oiseaux/bernache.cravant.html>, consulté en mai 2011
+
+
+
+<http://sbcreations.blogspot.com/p/traduzione-robin-hobb.html>,consulté en mai
+2011
+
+
+
+<http://sbcreations.blogspot.com/2010/05/traduzione-robin-hobb-erratacorrige.html>, consulté en mai 2011
+
+
+
+<http://fr.wikipedia.org/wiki/Fitz>, consulté en mai 2011
+
+Mémoires consultés :
+
+
+SCHWASS, Mark, La traduction de la littérature enfantine : analyse critique
+de la version française de "The hobbit" de J.R.R Tolkien, Mémoire, Université
+de Genève, 2008, 76 p.
+74
+
+
+
+SONNIER, Mélanie, Traduire l'humour : analyse de " The bromeliad trilogy"
+de Terry Pratchett. - Mémoire, Université de Genève, 2007, 101 p.
+
+
+
+TRABICHET, Catherine. La traduction des noms propres dans la littérature
+d'enfance et de jeunesse, Mémoire, Université de Genève, 2002, 85 p.
+
+Dictionnaires :
+
+
+MILLET, Gilbert, LABBÉ, D., Les mots du merveilleux et du fantastique, Belin,
+Paris, 2003, 493 p.
+
+
+
+DUBOIS,Jean, GIACOMO, M., GUESPIN L. et al., Dictionnaire de linguistique,
+Paris, Larousse, 1973, in BALLARD, Michel, Le nom propre en traduction,
+Ophrys, Paris, 2001, 231 p.
+
+
+
+Collins English Dictionnary, HarperCollins Publishers, Glasgow, 2005, 1872 p.
+
+
+
+Le Grand Robert en ligne, <http://gr.bvdep.com/>
+
+
+
+Le Petit Robert, Dictionnaires le Robert, Paris, 1993, 2841 p.
+
+
+
+Le Petit Robert en ligne, <http://pr.bvdep.com>
+
+
+
+Le Robert : dictionnaire des synonymes, des nuances et contraires, France Loisirs,
+Paris. 2005, 1245 p.
+
+
+
+Le Robert & Collins, Dictionnaires Le Robert-SEJER, Paris, 2006, 2285 p.
+
+
+
+Le Robert & Signorelli, Dictionnaires le Robert, Paris, 2006, 3002 p.
+
+
+
+ZINGARELLI, Nicola, lo Zingarelli, vocabolario della lingua italiana, Zanichelli,
+Bologne, 2006, 2240 p.
+
+
+
+Wordreference, <http://www.wordreference.com/enit/>
+
+Cours :
+
+
+Cours de théories contemporaines de la traduction, semestre de printemps 2010,
+Professeur M. Guidère
+
+75
+
+Annexes
+
+Liste des personnages
+Anglais
+
+Français
+
+Italien
+
+Rôle
+
+August
+
+Auguste
+
+Augusto
+
+Cousin de Royal, puis
+membre du clan de Galen
+
+Brant
+
+Brant
+
+Brando
+
+Coursier, membre de
+laCour
+
+Burrich
+
+Burrich
+
+Burrich
+
+Maître d'écurie de
+Chevalerie
+
+Chade Fallstar
+Charim
+Charity
+Chivalry Farseer
+Cob
+Cook
+
+Umbre Tombétoile
+Charim
+Charité
+Chevalerie Loinvoyant
+Cob
+Mijote
+
+Umbra Stella D'Autunno
+Charim
+Charity
+Chevalier Lungavista
+Roano
+La cuoca
+
+Maître "d'assassinat"
+(Frère du Roi Subtil)
+Serviteur de Vérité
+Enfant
+Roi-servant, père de Fitz
+Garçon d'écurie
+Cuisinière
+
+Dick, Kerry, Kittne
+Duke Brawndy
+Duke Kelvar
+Duke Ram
+Duke Shemshy
+Fedwren
+
+Dick, Kerry, Kittne
+Duc Brondy
+Duc Kelvar
+Duc Bélier
+Duc Shemshy
+Geairepu
+
+Dick, Kerry, Gattina
+Duca Fortebraccio
+Messer Kelvar
+Duca Ariete
+Messer Shemshy
+Piuma
+
+Enfants de Bourg-de
+Castelcerf
+Duc de Béarn
+Duc de Rippon
+Duc de Labour
+Duc de Haurfond
+Scribe, maître d'écriture
+
+FitzChivalry Farseer
+Gage
+
+FitzChevalerie Loinvoyant FitzChevalier Lungavista
+Gage
+Guanto
+
+Fils bâtard de Chevalerie
+Soldat
+
+Galen
+Hands
+Hod
+Jade
+Jason
+Jerdon
+Jonqui
+Justice
+
+Galen
+Pognes
+Hod
+Jade
+Jason
+Jerdon
+Jonqui
+Justice
+
+Galen
+Mani
+Poiana
+Diaspro
+Jason
+Jerdon
+Jonqui
+Giustino
+
+Maître d'Art (demi- frère
+de Royal, haït Fitz)
+Garçon d'écurie
+Maître d'arme (f)
+Marin, cousin de Molly
+Soldat présent au début
+Musicien
+Sœur du roi Eyod
+Enfant (m)
+
+Kettricken
+King Bounty
+King Eyod
+King Ruler
+
+Kettricken
+Roi Bonté
+Roi Eyod
+Roi Souverain
+
+Kettricken
+Re Generoso
+Re Eyod
+Re Dominatore
+
+Future épouse de Vérité,
+princesse montagnarde
+Ancêtre de Fitz
+Roi montagnard
+Ancêtre de Fitz
+
+King Taker Farseer
+
+Roi Preneur Loinvoyant
+
+Re Conquistatore Lungavista Ancêtre de Fitz
+
+76
+
+King Victor
+King Wisdom
+Lacey
+Lady Crossfire
+
+Roi Vainqueur
+Roi Sagesse
+Brodette
+Dame Feux-Croisés
+
+Re Conquistatore
+Re Savio
+Trina
+Schermaglia
+
+Ancêtre de Fitz
+Ancêtre de Fitz
+Chambrière de Patience
+Artiseuse dans le passé
+
+Lady Dahlia
+Lady Grace
+Lady Patience
+Lady Thyme
+
+Dame Dahlia
+Dame Grâce
+Dame Patience
+Dame Thym
+
+Dama Dalia
+Dama Grazia
+Dama Pazienza
+Dama Maggiorana
+
+Épouse de Jessup, noble
+de la Cour
+Épouse du Duc Kelvar
+Épouse de Chevalerie
+Déguisement d’Umbre
+
+Litress
+Lord Grimsby
+Lord Jessup
+Lord Temperance
+Master Lew
+Master Tactic
+
+Litress
+Seigneur Grimbsy
+Seigneur Jessup
+Seigneur Tempérance
+Maître Lou
+Maître Tactique
+
+Litress
+Messer Grimsby
+Messer Jessup
+Messer Temperato
+Mastro Lew
+Mastro Tattico
+
+Serviteur du royaume des
+montagnes
+Noble de la Cour
+Noble de la Cour
+Noble de la Cour
+Blanchisseur
+Maître d'Art dans le passé
+
+Master Tullume
+Mavis Threadsnip
+Merry
+Mistress Hasty
+Molly Chandler
+
+Maître Tullume
+Mavis Coupefil
+Joyeuse
+Maîtresse Pressée
+Molly Chandelière
+
+Mastro Tullume
+Mavis Tagliafilo
+Allegra
+Madama Presta
+Molly la Candelaia
+
+Un maître de la forteresse
+Simple citoyenne
+Élève de Galen
+Couturière
+Amie de Fitz
+
+Queen Desire
+Reine Désir
+Queen Graciousness Reine Bienveillance
+Queen Vision
+Reine Vision
+
+Dama Desirée
+Regina Amabile
+Regina Visione
+
+Épouse de Subtil, mère de
+Royal
+Ancêtre de Fitz
+Ancêtre de Fitz
+
+Regal Farseer
+Rowd
+
+Regal Lungavista
+Borrasca
+
+Prince, demi-frère de
+Chevalerie et Vérité
+Serviteur de Royal
+
+Royal Loinvoyant
+Chahu
+
+Rurisk
+Sara
+
+Rurisk
+Sara
+
+Rurisk
+Sara
+
+Frère de Kettricken, prince
+montagnard
+Travaille aux cuisines
+
+Serene
+Sevrens
+Sherf
+Shrewd Farseer
+Sig
+Sitzwell
+
+Sereine
+Sevrens
+Cherfe
+Subtil Loinvoyant
+Sig
+Biennassis
+
+Serena
+Trancia
+Sherf
+Sagace Lungavista
+Sig
+Distinto
+
+Élève de Galen, puis
+membre de son clan
+Valet de Royal
+Soldat
+Roi, père des 3 princes
+Soldat
+Soldat de Finnebaie
+
+Solicity
+
+Sollicité
+
+Sollecita
+
+Maîtresse d'Art avant
+Galen
+
+The Fool
+
+Le fou
+
+Il Matto
+
+Bouffon du roi, plus tard
+ami de Fitz
+
+Tilly
+
+Tilly
+
+Tilly
+
+Fille qui travaille aux
+jardins du château
+
+77
+
+Verity Farseer
+
+Vérité Loinvoyant
+
+Wallace
+Whitelock
+
+Murfès
+Boucleblanche
+
+78
+
+Veritas Lungavista
+
+Prince, devient roi-servant
+quand Chevalerie renonce
+au trône
+
+Cioccabianca
+
+Serviteur de Subtil dans le
+deuxième tome (p.35)
+Soldat
+
+Arbre généalogique
+
+79
+
+

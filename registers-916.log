@@ -1,0 +1,28 @@
+REGISTER_HEAD=455ec96a4abace0ae7eb68d09e419820bacd5b5d 20:09:43
+PREDICTIONS (E4, §916): PREDICTED (predict-916.log 19:46 at 455ec96a4): lighting probe == register (2556 files / 375 parked / 2181 credited / 24031 titles / 6419 suiteTitles at f43b6bc78) -> PLAIN walker green, no chair refreeze; OSR dry 1972 exact, exit 0 (scanned-tree delta 2 paths: composedWalker.js + holderTable.js -> the chair's --write NAMES them, c-17); mounts door unchanged; prose-numerics 225 exact, no rekey; writer-reach dry 0 drift (a --write moves provenance frozenAtSha only, as at 915); tuning plain green; voice E2 = the two INHERITED banked files (labelBands em 5, generalStateProse em 3)
+=== 1. LIGHTING — PLAIN walker only (must be green; no door):
+LIGHTING_PLAIN_EXIT=0 (must be 0)
+      Tests  34 passed (34)
+=== 1b. OSR — READ ONLY (predicted: exact match, no drift):
+OSR_DRY_EXIT=0 (must be 0)
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+  drift lines (must be 0): 0
+=== 2. MOUNTS BASELINE (predicted: no change):
+MOUNTS_DOOR_EXIT=0
+  changed (must be empty): []
+=== 3. PROSE-NUMERICS re-key (dry, then --write):
+PN_DRY_EXIT=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_WRITE_EXIT=0
+  written: 0 snippets re-keyed, 0 lines moved; 0 FELL rows left for review
+=== 4. WRITER-REACH --write (shrink-only; provenance only — the dry run decides):
+WR_DRY_EXIT=0 (read the refusal text if any)
+WRITER_REACH_WRITE_EXIT=0
+writer-reach WRITE — cohort 1322 → 1322; 0 stale folded out; 0 registered rows now lit.
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_PLAIN_EXIT=0 (must be 0)
+=== 5. TUNING INVENTORY — PLAIN walker only (predicted green):
+TUNING_PLAIN_EXIT=0 (must be 0)
+      Tests  75 passed (75)
+REGISTER_PORCELAIN=[scripts/.writer-reach-baseline.json ]
+NEXT: review each changed register against PREDICTIONS; commit the register car by hand; then fill run-ratchet-916.sh's PREDICTED, run it, grep for a HELD line, after-ratchet-916.sh 2491 3.

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en-GB">
+
+	<head profile="http://gmpg.org/xfn/11">
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+
+		<title>Proving Veil&#8217;s Hypothesis: Variance Reduction Techniques, Larval Life Cycles on an East Wind, and Shadow Children Riding Mars(c)hmen in The Fifth Head of Cerberus &#8211; Ultan&#039;s Library</title>
+<meta name='robots' content='max-image-preview:large' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+<!-- Jetpack Site Verification Tags -->
+<meta name="google-site-verification" content="9SfyAN1NKiULgco77nwd3WUUivO_0oZBjHUcqSjCrAg">
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel='preconnect' href='//i0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Ultan&#039;s Library &raquo; Feed" href="https://ultan.org.uk/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Ultan&#039;s Library &raquo; Comments Feed" href="https://ultan.org.uk/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Ultan&#039;s Library &raquo; Proving Veil&#8217;s Hypothesis: Variance Reduction Techniques, Larval Life Cycles on an East Wind, and Shadow Children Riding Mars(c)hmen in The Fifth Head of Cerberus Comments Feed" href="https://ultan.org.uk/variance-reduction-techniques/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://ultan.org.uk/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fultan.org.uk%2Fvariance-reduction-techniques%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://ultan.org.uk/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fultan.org.uk%2Fvariance-reduction-techniques%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #111;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--accent: #ca2017;--wp--preset--color--dark-gray: #333;--wp--preset--color--medium-gray: #555;--wp--preset--color--light-gray: #777;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 16px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 24px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--normal: 18px;--wp--preset--font-size--larger: 27px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-color{color: var(--wp--preset--color--accent) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-color{color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-background-color{background-color: var(--wp--preset--color--accent) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-background-color{background-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-border-color{border-color: var(--wp--preset--color--accent) !important;}.has-dark-gray-border-color{border-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-border-color{border-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-border-color{border-color: var(--wp--preset--color--light-gray) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-normal-font-size{font-size: var(--wp--preset--font-size--normal) !important;}.has-larger-font-size{font-size: var(--wp--preset--font-size--larger) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='lovecraft_googlefonts-css' href='https://ultan.org.uk/wp-content/themes/lovecraft/assets/css/fonts.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='lovecraft_genericons-css' href='https://ultan.org.uk/wp-content/themes/lovecraft/assets/css/genericons.min.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='lovecraft_style-css' href='https://ultan.org.uk/wp-content/themes/lovecraft/style.css?ver=2.1.2' media='all' />
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input{width:95%}.comment-subscription-form{margin-bottom:1em}.comment-subscription-form .subscribe-label{display:inline!important}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;overflow-wrap:normal!important;padding:0;position:absolute!important;width:1px}
+/*# sourceURL=https://ultan.org.uk/wp-content/plugins/jetpack/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+<link rel='stylesheet' id='sharedaddy-css' href='https://ultan.org.uk/wp-content/plugins/jetpack/modules/sharedaddy/sharing.css?ver=16.1.3' media='all' />
+<link rel='stylesheet' id='social-logos-css' href='https://ultan.org.uk/wp-content/plugins/jetpack/_inc/build/social-logos/social-logos.css?ver=16.1.3' media='all' />
+<script id="jquery-core-js" src="https://ultan.org.uk/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://ultan.org.uk/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script id="lovecraft_doubletap-js" src="https://ultan.org.uk/wp-content/themes/lovecraft/assets/js/doubletaptogo.min.js?ver=1"></script>
+
+<!-- Google tag (gtag.js) snippet added by Site Kit -->
+<!-- Google Analytics snippet added by Site Kit -->
+<script id="google_gtagjs-js" src="https://www.googletagmanager.com/gtag/js?id=GT-WRDR5G4" async></script>
+<script id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag("set","linker",{"domains":["ultan.org.uk"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "GT-WRDR5G4");
+//# sourceURL=google_gtagjs-js-after
+</script>
+<link rel="https://api.w.org/" href="https://ultan.org.uk/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://ultan.org.uk/wp-json/wp/v2/posts/750" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ultan.org.uk/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1" />
+<link rel="canonical" href="https://ultan.org.uk/variance-reduction-techniques/" />
+<link rel='shortlink' href='https://ultan.org.uk/?p=750' />
+<meta name="generator" content="Site Kit by Google 1.186.0" />	<style>img#wpstats{display:none}</style>
+		<!-- Customizer CSS --><style type="text/css">a { color:#ca2017; }.blog-title a:hover { color:#ca2017; }.main-menu li:hover > a, .main-menu li.focus > a { color:#ca2017; }.main-menu > .menu-item-has-children > a:after { border-top-color:#ca2017; }blockquote:after { color:#ca2017; }button:hover, .button:hover, .faux-button:hover, .wp-block-button__link:hover, :root .wp-block-file__button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover { background-color:#ca2017; }.is-style-outline .wp-block-button__link:hover, .wp-block-button__link.is-style-outline:hover { color:#ca2017; }:root .has-accent-color { color:#ca2017; }:root .has-accent-background-color { background-color:#ca2017; }.post-tags a:hover { background-color:#ca2017; }.post-tags a:hover:before { border-right-color:#ca2017; }.post-content .page-links a:hover { background-color:#ca2017; }.post-navigation h4 a:hover { color:#ca2017; }.comments-title-link a { color:#ca2017; }.comments .pingbacks li a:hover { color:#ca2017; }.comment-header h4 a:hover { color:#ca2017; }.bypostauthor .comment-author-icon { background-color:#ca2017; }.form-submit #submit:hover { background-color:#ca2017; }.comments-nav a:hover { color:#ca2017; }.pingbacks-title { border-bottom-color:#ca2017; }.archive-navigation a:hover { color:#ca2017; }.widget-title { border-bottom-color:#ca2017; }.widget-content .textwidget a:hover { color:#ca2017; }.widget_archive li a:hover { color:#ca2017; }.widget_categories li a:hover { color:#ca2017; }.widget_meta li a:hover { color:#ca2017; }.widget_nav_menu li a:hover { color:#ca2017; }.widget_rss .widget-content ul a.rsswidget:hover { color:#ca2017; }#wp-calendar thead th { color:#ca2017; }#wp-calendar tfoot a:hover { color:#ca2017; }.widget .tagcloud a:hover { background-color:#ca2017; }.widget .tagcloud a:hover:before { border-right-color:#ca2017; }.footer .widget .tagcloud a:hover { background-color:#ca2017; }.footer .widget .tagcloud a:hover:before { border-right-color:#ca2017; }.credits .sep { color:#ca2017; }.credits a:hover { color:#ca2017; }.nav-toggle.active .bar { background-color:#ca2017; }.search-toggle.active .genericon { color:#ca2017; }.mobile-menu .current-menu-item:before { color:#ca2017; }.mobile-menu .current_page_item:before { color:#ca2017; }</style><!--/Customizer CSS-->
+<!-- Google Tag Manager snippet added by Site Kit -->
+<script>
+			( function( w, d, s, l, i ) {
+				w[l] = w[l] || [];
+				w[l].push( {'gtm.start': new Date().getTime(), event: 'gtm.js'} );
+				var f = d.getElementsByTagName( s )[0],
+					j = d.createElement( s ), dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore( j, f );
+			} )( window, document, 'script', 'dataLayer', 'GTM-MD5NRVD' );
+			
+</script>
+
+<!-- End Google Tag Manager snippet added by Site Kit -->
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Proving Veil&#8217;s Hypothesis: Variance Reduction Techniques, Larval Life Cycles on an East Wind, and Shadow Children Riding Mars(c)hmen in The Fifth Head of Cerberus" />
+<meta property="og:url" content="https://ultan.org.uk/variance-reduction-techniques/" />
+<meta property="og:description" content="Marc Aramini “I am exempt by reason of being a child and by reason of being an animal&#8230;” (“Marsch” on his unjust incarceration in the &#8220;V.R.T.&#8221; section of The Fifth Head of Cerberus…" />
+<meta property="article:published_time" content="2014-09-01T20:00:03+00:00" />
+<meta property="article:modified_time" content="2015-10-23T09:14:28+00:00" />
+<meta property="og:site_name" content="Ultan&#039;s Library" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:text:title" content="Proving Veil&#8217;s Hypothesis: Variance Reduction Techniques, Larval Life Cycles on an East Wind, and Shadow Children Riding Mars(c)hmen in The Fifth Head of Cerberus" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<style id="wp-custom-css">
+/*
+Welcome to Custom CSS!
+
+To learn how this works, see http://wp.me/PEmnE-Bt
+*/
+/*
+Welcome to Custom CSS!
+
+To learn how this works, see http://wp.me/PEmnE-Bt
+*/
+.post-content blockquote:after {
+	content: '“';
+	width: 90px;
+	font-family: 'Georgia', serif;
+	font-size: 72px;
+	line-height: 72px;
+	font-weight: 700;
+	font-style: normal;
+	text-align: center;
+	color: #ca2017;
+	position: absolute;
+	top: 31px;
+	left: 0;
+}
+.has-featured-image .header-image {
+    max-height: 600px;
+}
+.header-image {
+	max-height: 500px;
+}
+/* now hiding the bullet on latest post blos
+.wp-block-latest-posts.wp-block-latest-posts__list {
+	list-style: square;} */
+/*to hide the sidebar */
+.sidebar { display: none !important; }
+/*to centre the main body */
+.content {float: none; margin-left: auto; margin-right: auto;}
+
+.post-content p {line-height: 34px;
+}
+
+.post-title {font-weight: 400;}
+</style>
+
+	</head>
+
+	<body class="wp-singular post-template-default single single-post postid-750 single-format-standard wp-theme-lovecraft">
+
+				<!-- Google Tag Manager (noscript) snippet added by Site Kit -->
+		<noscript>
+			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD5NRVD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) snippet added by Site Kit -->
+		
+		<a class="skip-link button" href="#site-content">Skip to the content</a>
+
+		<header class="header-wrapper">
+
+			<div class="header section bg-white small-padding">
+
+				<div class="section-inner group">
+
+					
+						<div class="blog-title">
+							<a href="https://ultan.org.uk" rel="home">Ultan&#039;s Library</a>
+						</div>
+					
+													<h4 class="blog-tagline">a web resource for the study of Gene Wolfe</h4>
+											
+					
+				</div><!-- .section-inner -->
+
+			</div><!-- .header -->
+
+			<div class="toggles group">
+
+				<button type="button" class="nav-toggle toggle">
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<span class="screen-reader-text">Toggle the mobile menu</span>
+				</button>
+
+				<button type="button" class="search-toggle toggle">
+					<div class="genericon genericon-search"></div>
+					<span class="screen-reader-text">Toggle the search field</span>
+				</button>
+
+			</div><!-- .toggles -->
+
+		</header><!-- .header-wrapper -->
+
+		<div class="navigation bg-white no-padding">
+
+			<div class="section-inner group">
+
+				<ul class="mobile-menu">
+
+					<li id="menu-item-872" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-872"><a href="http://ultan.org.uk/">Home</a></li>
+<li id="menu-item-335" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-335"><a href="https://ultan.org.uk/category/articles/">Articles</a>
+<ul class="sub-menu">
+	<li id="menu-item-906" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-new-sun/">Book of the New Sun</a></li>
+	<li id="menu-item-907" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-907"><a href="https://ultan.org.uk/category/gene-wolfe/fifth-head-of-cerberus/">Fifth Head of Cerberus</a></li>
+	<li id="menu-item-908" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-908"><a href="https://ultan.org.uk/category/gene-wolfe/latro-soldier-novels/">Latro (Soldier) novels</a></li>
+</ul>
+</li>
+<li id="menu-item-336" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-336"><a href="https://ultan.org.uk/category/bookreviews/">Book Reviews</a></li>
+<li id="menu-item-904" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-904"><a href="https://ultan.org.uk/category/interviews/">Interviews</a></li>
+<li id="menu-item-905" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-905"><a href="https://ultan.org.uk/category/news/">News</a></li>
+<li id="menu-item-337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-337"><a href="https://ultan.org.uk/about/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-334"><a href="https://ultan.org.uk/contributors/">Contributors</a></li>
+</ul>
+</li>
+
+				</ul>
+
+				<div class="mobile-search">
+					
+<form method="get" class="search-form" id="search-form-6a9d369925f81" action="https://ultan.org.uk/">
+	<input type="search" class="search-field" placeholder="Search Form" name="s" id="s-6a9d369925f84" />
+	<button type="submit" class="search-button"><div class="genericon genericon-search"></div><span class="screen-reader-text">Search</span></button>
+</form>
+				</div><!-- .mobile-search -->
+
+				<ul class="main-menu">
+
+					<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-872"><a href="http://ultan.org.uk/">Home</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-335"><a href="https://ultan.org.uk/category/articles/">Articles</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-new-sun/">Book of the New Sun</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-907"><a href="https://ultan.org.uk/category/gene-wolfe/fifth-head-of-cerberus/">Fifth Head of Cerberus</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-908"><a href="https://ultan.org.uk/category/gene-wolfe/latro-soldier-novels/">Latro (Soldier) novels</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-336"><a href="https://ultan.org.uk/category/bookreviews/">Book Reviews</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-904"><a href="https://ultan.org.uk/category/interviews/">Interviews</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-905"><a href="https://ultan.org.uk/category/news/">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-337"><a href="https://ultan.org.uk/about/">About</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-334"><a href="https://ultan.org.uk/contributors/">Contributors</a></li>
+</ul>
+</li>
+
+				</ul><!-- .main-menu -->
+
+			</div><!-- .section-inner -->
+
+		</div><!-- .navigation -->
+
+		
+			<figure class="header-image bg-image" style="background-image: url( https://ultan.org.uk/wp-content/uploads/2015/07/poppies-banner.jpg );">
+				<img src="https://ultan.org.uk/wp-content/uploads/2015/07/poppies-banner.jpg" />
+			</figure>
+
+		
+		<main id="site-content">
+<div class="wrapper section">
+
+	<div class="section-inner group">
+
+		<div class="content">
+
+			
+					<article id="post-750" class="post single post-750 type-post status-publish format-standard hentry category-articles category-fifth-head-of-cerberus category-gene-wolfe">
+
+						<div class="post-inner">
+
+							<div class="post-header">
+
+								<h1 class="post-title"><a href="https://ultan.org.uk/variance-reduction-techniques/">Proving Veil&#8217;s Hypothesis: Variance Reduction Techniques, Larval Life Cycles on an East Wind, and Shadow Children Riding Mars(c)hmen in The Fifth Head of Cerberus</a></h1>
+
+										
+		<div class="post-meta">
+
+			<p class="post-author"><span>By </span><a href="https://ultan.org.uk/author/aramini222/" rel="author">Marc Aramini</a></p>
+
+			<p class="post-date"><span>On </span><a href="https://ultan.org.uk/variance-reduction-techniques/">1 September 2014</a></p>
+
+							<p class="post-categories"><span>In </span><a href="https://ultan.org.uk/category/articles/" rel="category tag">Articles</a>, <a href="https://ultan.org.uk/category/gene-wolfe/fifth-head-of-cerberus/" rel="category tag">Fifth Head of Cerberus</a>, <a href="https://ultan.org.uk/category/gene-wolfe/" rel="category tag">Gene Wolfe</a></p>
+			
+			
+		</div><!-- .post-meta -->
+
+		
+							</div><!-- .post-header -->
+
+							
+								<div class="post-content entry-content">
+
+									<p><strong><a href="/contributors/">Marc Aramini</a></strong></p>
+<blockquote><p><strong>“I am exempt by reason of being a child and by reason of being an animal&#8230;” </strong>(“Marsch” on his unjust incarceration in the &#8220;V.R.T.&#8221; section of <em><strong>The Fifth Head of Cerberus</strong>, p.181)</em></p></blockquote>
+<p>In the wake of the postmodern explosion that decentralizes absolutes and puts universal meaning into question, it is at times difficult to approach Gene Wolfe’s work with the actual scientific rigor it demands. <span id="more-750"></span>Even the cover blurb of <em>The Fifth Head of Cerberus </em>by Ursula Le Guin claims that the text itself is “the uncertainty principle embodied in brilliant fiction.”  While this hyperbole is perfectly acceptable in characterizing the text, there really is a consistent method of reading Wolfe’s corpus from the 1960s and 1970s that leads to definitive conclusions.  Even in a work that destabilizes identity, we can determine exactly who our narrators are and even the implied life cycles of the aborigines and Shadow Children of St. Anne. It is in fact the castrated Eastwind rather than Sandwalker who survives at the end of “A Story”, and that section not only serves to illustrate the historical French landing, but also allegorically details exactly what happens to John V. Marsch – from which we can draw the conclusion that the journals in “V.R.T.” are authored by a parasitic Shadow Child who has taken Marsch’s place instead of by Victor R. Trenchard.  This Shadow Child is held captive in a society that persecutes those they do not understand – even though, ultimately, the inhabitants of Port Mimizon do not understand their own aboriginal nature, for Veil&#8217;s Hypothesis can be proven.</p>
+<h3>Characteristics of Wolfe&#8217;s Style</h3>
+<p>To reach these conclusions, we should look at Wolfe as a Catholic dualist, but beyond that his engineering background is one that relies on applying the scientific method – and applied science outside of quantum mechanics relies upon the reproducibility of certain events; furthermore, Wolfe’s belief in the validity of that method (reaching a sound conclusion through the objective observation of phenomena) will forever prevent him from being a sincerely postmodern artist. In fiction, the reproducibility of the scientific method usually manifests itself in repeated symbols that often have a metonymic relationship to either what they come to represent in the text or to details that are placed near them repeatedly. Our approach must be rigorous in noticing these patterns, for they provide the final structure, what is “really” going on, that Wolfe often elides – perhaps because, as a spiritual writer, he can see a divine overwhelming structure that is often implied rather that consciously present in the fabric of creation.</p>
+<p>Any article on <em>The Fifth Head of Cerberus</em> must to some degree confront John Clute&#8217;s conclusions <span style="color: #3e454c;">(that Victor Trenchard imitates and replaces Marsch during his visit to Ste. Anne)</span> and to a lesser extent Robert Borski’s ”Cave Canem”, now available on the Wolfe-Wiki, which constitutes his best work, and is well worth considering. I will gloss over some of the information that Borski fleshes out more thoroughly, but there are a few things from the text that need to be emphasized.</p>
+<p>First, my philosophy on Wolfe’s stories involves repetitive symbols and the ultimate theme as keys to interpreting the actual surface level of “what happened”. In his later novels, juxtaposition of two seemingly unrelated things is also of absolute importance, though I do not think this is yet as stylistically prominent in <em>The Fifth Head of Cerberus</em>. (One such example is the dream of aboriginals that Number Five has after meeting his Aunt Jeanine for the first time). The repetitive internal symbols cannot be ignored. Borski latches onto repetitions quite a bit, but often the conclusions he reaches do not seem thematic or symbolic. Pat conclusions are available when the theme warrants it throughout Wolfe&#8217;s fiction (For example, in Wolfe&#8217;s “The HORARS of War”, our main character is both fully human and fully machine because the religious symbol of the star at Christ’s birth resonates with that theme, but in Wolfe&#8217;s “Trip, Trap”, the spiritual world is unambiguously the real world and more objective than the physical world – the blade has a point in the physical world, but our troll is not pierced, only slashed.  In the spirit world, the point is broken and the two protagonists have formed the Third Billy Goat of objective reality instead of subjective prejudice – objective outside detail is usually, in my opinion, at the heart of getting to the bottom of things in Wolfe).  In addition, in Wolfe’s “mysteries” (ironically, Wolfe usually provides his own solution in most of these genre stories) the resolution often relies on a scientific or mechanical feature that is explained at length. In the early story “The Largest Luger”, the engineering of the gun and the features of the material used to construct it help solve the mystery. In “How I Lost the Second World War and Help Turned Back the German Invasion”, the car race is set up with the principles of an operating transistor involving the probability of interference in order to defeat the German race team. Indeed, the car track BECOMES a transistor. Even corn hybridity is ultimately important in solving the mystery of location and identity in his Short Sun books (Aramini). <em>The</em> <em>Fifth Head of Cerberus</em> hinges on an engineering technique that is brought up at two different points, once directly and once indirectly that is important to our interpretation.</p>
+<h3>VRT: Victor R Trenchard or Variance Reduction Techniques?</h3>
+<p>Let&#8217;s begin with two engineering terms: relaxation and variance reduction techniques (VRT, for short). There is a particular point at the end of the first novella when Number Five confronts his father and Marsch, and identifies Marsch as an aborigine, noting his green eyes and skin once described as “so colorless of a white as almost to constitute a disfigurement” (Wolfe <em>Fifth Head</em> 36). At their final meeting, Marsch is fascinated by the original of Number Five and his father, and says:</p>
+<p style="padding-left: 30px;">There are problems which are not directly soluble, but which can be solved by a succession of approximations. In heat transfer, for example, it may not be possible to calculate initially the temperature at every point on the surface of an unusually shaped body. But the engineer … can assume reasonable temperatures, see how nearly stable the assumed values would be, then make new assumptions based on the results. As the levels of approximation progress, the successive sets become more and more similar until there is essentially no change. (73-74)</p>
+<p>This relaxation is one possible form of variance reduction technique – making successive approximations to solve a problem. Note that the title of the third novella is <em>VRT</em>. This is precisely what has happened in the opening and closing sections of the book: a series of approximations, not merely one (thus allowing our narrator’s claim of his innocence by reason of being a child and an animal to be literally true). We will return to this idea after examining some more patterns and then discuss the symbolic significance of every name in “A Story”, yet I insist that the real importance of the third title is not naming Victor R Trenchard, but in invoking our key to solving the puzzle of identity – a SERIES of approximations which will attempt to take into account the appallingly pale color and ultimate origin of the imprisoned “Marsch”. He is persecuted as an unquantifiable other by the inhabitants of Ste. Croix, and this creates two possible scenarios: he is an abo being persecuted by humans who refuse to understand him, or, if Veil&#8217;s hypothesis is true, he is something distinctly different being persecuted by abos who believe they are humans. A close look at the text reveals that there are two alien races on Ste. Anne, and this smoking gun can finally be fired when we realize that “Marsch” is a shadow child who is being held by abos (both parties in denial about their true nature). In <em>The Fifth Head of Cerberus</em>, much of the mystery is tied up in the setting itself.</p>
+<h3><strong>Literary Allusions</strong></h3>
+<p>There are other non-scientific references that also apply here. Earlier in <em>The Fifth Head of Cerberus</em>, there is a strange reference made to Kate Wilhelm’s science fictional <em>Mile Long Spaceship</em>, called “a misplaced astronautics text” (Wolfe 7) next to a volume on the murder of Trotski (surely <em>The Great Prince Dies </em>by Bernard Wolfe, though alternatively, there is a play by Peter Weiss, <em>Trotski in Exile</em>). Classifying Wilhelm’s short story collection as an astronautics text is unusual: the story is about the dreams of a human, affected by an alien intelligence, which ultimately prove to be real. If Number Five has any familiarity with the content (unless he is judging by the cover), it is a strange mistake to call such an overtly SF piece an astronautics text. Interestingly enough, the Virginia Woolf collection, <em>Monday or Tuesday</em>,  features a short pair of stories called “Blue and Green” – showing that there is at least some resonance with what is actually going on between these texts and the action of the novella with its blue and green planets. Trotski’s assassination might be the most problematic in mapping to the text, though when “Marsch” is arrested there is some suspicion of his motives for being on St. Croix, including assassination.</p>
+<p>The most important proof that these books referenced in the library actually bear relevance to the text is found in Woolf’s “Blue and Green”, an extremely short story:</p>
+<blockquote><p>Green</p>
+<p>The ported fingers of glass hang downwards. The light slides down the glass, and drops a pool of green. All day long the ten fingers of the lustre drop green upon the marble. The feathers of parakeets—their harsh cries—sharp blades of palm trees—green, too; green needles glittering in the sun. But the hard glass drips on to the marble; the pools hover above the dessert sand; the camels lurch through them; the pools settle on the marble; rushes edge them; weeds clog them; here and there a white blossom; the frog flops over; at night the stars are set there unbroken. Evening comes, and the shadow sweeps the green over the mantelpiece; the ruffled surface of ocean. No ships come; the aimless waves sway beneath the empty sky. It’s night; the needles drip blots of blue. The green’s out.</p>
+<p>Blue</p>
+<p>The snub-nosed monster rises to the surface and spouts through his blunt nostrils two columns of water, which, fiery-white in the centre, spray off into a fringe of blue beads. Strokes of blue line the black tarpaulin of his hide. Slushing the water through mouth and nostrils he sings, heavy with water, and the blue closes over him dowsing the polished pebbles of his eyes. Thrown upon the beach he lies, blunt, obtuse, shedding dry blue scales. Their metallic blue stains the rusty iron on the beach. Blue are the ribs of the wrecked rowing boat. A wave rolls beneath the blue bells. But the cathedral’s different, cold, incense laden, faint blue with the veils of madonnas.</p></blockquote>
+<p>Fascinatingly enough, the color imagery at work here mirrors several of the themes we are seeing repeated on Ste. Anne, the green and mysteriously arboreal “lost paradise” of the aborigines, and Ste. Croix, the bureaucratic and decadent blue hell that seems to show signs of decay, just as the story Blue above shows a dying sea creature. We should also emphasize the names of the planets:  St. Anne is the mother of the Virgin Mary, the Madonna, whose conception is immaculate, and obviously the name Croix implies cross, both relevant for geneticists making crosses and performing experiments and for its ultimate significance as the symbol of Christ&#8217;s execution and subsequent defeat of death. Interestingly, this covers a very particular part of Christian history, from the Immaculate Conception of Mary that sets the groundwork for God’s enfleshment, thus representing a very special beginning, juxtaposed next to the moment in time when that flesh will be put to death. Crucifixion and resurrection are also going to be invoked by the dates of Marsch’s journal: he will fall from the tree and be bitten by the infectious cat near the latest possible date for Good Friday, and three days later, on April 25<sup>th</sup>, he will make his final legitimate entry, the last date possible for Easter Sunday (or, more definitely, always the Major Day of Rogation, which will be discussed below). Of course, in most Christian doctrine, the conception and birth of Christ is not a normal sexual union but one of divinity, or perhaps even parthenogenesis, which we see at great length in <em>The Fifth Head of Cerberus</em>, whether it be cloning and Number 5 or the parthenogenesis of the part abo/part human girl grown from an arm by Cinderwalker (164-165). Additional nonsexual reproduction occurs in the experiments of Number 5: “I was stimulating unfertilized frogs’ eggs to asexual development and then doubling the chromosomes by a chemical treatment so that a further asexual generation could be produced“ (23). The priest in “A Story” even brings an otter back to life from its skull (though everything and everyone is smeared with ichor, probably from the larvae Sandwalker offers to the priest) .</p>
+<p>St. Anne, at least in “A Story”, really does seem to be a riff on the Genesis story of Eden (though in this case, a false Eden): two brothers in a wild paradise about to be subjected to the presence of man wind up killing each other, a strange herb supposedly makes Shadow Children like “god” when they chew, and there is something bizarre and important going on with all those trees (in the biblical story, it is the fruit of the tree of knowledge of good and evil that brings about the fall – the novel does not follow that route). “Paradise” is instead lost at that point when the French arrive, though there is a very distinct pronoun shift at that point in time which seems to confuse the landers with those ignorant of what open hands mean: “When he came close to them they extended hands, open, and smiled; but they did not understand open hands meant (or had meant once) that they held no weapons” (146). (This scene, which shows the just bitten Eastwind (who believes himself to be Sandwalker) approaching the French Landers, originally featured a jarring switch in perspective – the “they” with open hands is transformed mid sentence to a “they” who does not understand what open hands mean – a universal human signal.  This indicates that the landers&#8217; identities have already been stolen by the aboriginals, as the bite transformed Eastwind into Sandwalker.  Unfortunately, this “they” appears in the Ace paperback version, but later versions, possibly changed by a copy editor missing the thematic significance of this double replacement at the conclusion of “A Story”, changed the pronoun so that it reads “but he did not understand open hands meant … that they held no weapons.” Thus, the Tor and Gollancz Masterwork editions are different than the earliest versions, corrected for grammar but missing the reason for the switched perspective. Luckily, this is far from the only hint that the abos have replaced the French landers.)</p>
+<p>Note that in Virginia Woolf’s “Green”, “no ships come … The green’s out” mirrors the “unspoiled” condition of St. Anne when the Shadow Children maintained a mental screen over the planet – when it is released, it is as if the green of St. Anne is released into the world:</p>
+<p style="padding-left: 30px;">Sandwalker looked at the last Shadow child and saw that he was weeping and that his eyes held nothing at all. He felt that way himself, and turning to Cedar Branches Waving asked, “Mother, what color are my eyes now?”</p>
+<p style="padding-left: 30px;">“Green … that is the color of eyes” (143).</p>
+<p>This will also feature in the brilliant green eyes of Marsch after his trip to Ste. Anne.</p>
+<p>Contrasted against this mythical but lapsed genesis story for the abos of Ste. Anne, we have the decadent corruption of a society at the end of its rope on the sister planet of Ste. Croix. The street names (remember the planet’s name does not only summon hybridity but actually execution) reinforce this decayed imagery: the Rue D’Asticot – the street of Maggots, the Rue D’Egouts – street of sewers, and our Maison du Chien at 666 Saltimbanque – which means charlatan or fraud, located at the house number of the beast. Port Mimizon is not the word for mimicry, but it may very well be resonant with it, and mimi does mean a mime or mimic. This hellish imagery does not stop there – during Number Five’s play, he ruminates that the sky of Ste. Croix itself seems to be hellish in its strange colors.</p>
+<p>In any case, Cerberus guards the gates to Hades and also sits in the front yard of Number Five&#8217;s estate.  When you live in the House of Dogs, nicknamed Cave Canem (beware of the dog), on Charlatan street near maggots and the sewer, then associating St. Croix with death and the final stages of decadence is not difficult, and Number Five’s parthenogenetic inception is kind of a nasty turn on the normal order of things. There are a few more references that we should mention – the opening quote  from <em>The Rime of the Ancient Mariner</em> in particular: “When the ivy-tod is heavy with snow,/And the owlet whoops to the wolf below,/That eats the she wolf&#8217;s young” (1). The poem as a whole is about a ship that, because of a man’s bad decision, is doomed to a hellish half-life on the sea. This reminds one of the imagery in Number Five’s dream, where M. Million, Aunt Jeanine, and his father are on board a ship that doesn’t go anywhere because it has been anchored in place. He is bred to repeat the same murder his father and his father before him have – a repetitious hell, and even M. Million is not free, as his creation was akin to a self-destruction or suicide, leading to an eternal, mechanistic half-life. Indeed, the imagery of the entire text shows how prevalent imprisonment is – even down to symbolic representation. When “Marsch” is incarcerated, prisoner Forty Seven knocks on the pipes above to communicate. This resonates with the forty-seven pan pipes that Number Five found above the door of his room – every character is trapped, in a literal or metaphorical prison, whether they know it or not. Indeed, it is possible Number Five is incarcerated very near the anthropologist, both he and “Marsch” arrested for the same crime, suspected of killing the Maitre of the Maison du Chien. Prisoner Forty Seven is a political prisoner who states he is a member of the “Fifth of September” – lots of things happened on that date in history, but probably the French revolution is implied, as the French have now been repressed by another wave of colonization, trapped in their own society.</p>
+<p>The manner in which “Marsch” is incarcerated is strange as well, featuring a bureaucratic system that seems to play with the idea that every public servant will on any given day fulfill different roles, whether it be arrests, taking out the garbage, or driving a taxi. These three men who arrest “Marsch” all resemble each other and appear to have interchangeable roles. This seems very similar to the system which governs R. A. Lafferty’s Camiroi, of course influenced by Thomas More’s Utopia. Here, it has become much more sinister, like a web that will never lead to freedom, full of ominous threats and never ending bureaucratic red tape – M. Duclose’s room must be kept for years, in the event that “Marsch” does not return. It is truly a complicated system that seems to lead nowhere, with his possibility of guilt moot and the probability of freedom rendered equally irrelevant.  It is also unnatural, seeming more like an insectile distribution of duties where necessary rather than setting people to tasks that they are well suited to perform.  This strange bureaucratic life is no coincidence, for Ste. Croix has become more alien than is first apparent.</p>
+<h3><strong>Trees and the Life Cycles of  Ste. Anne</strong></h3>
+<p>Now that we have established Ste. Anne as a potential paradise lost, its color having something to do with the eyes of the natives itself, and Ste. Croix as a decadent, rotting place where freedom is robbed (with ships bearing names like the Slough Desmond, perhaps summoning up Bunyan’s Slough of Despond), we can establish the actual life cycles of the inhabitants of Ste. Anne.  Though not without some confusion, the text implies that the abos move from a larval state to an adult imitative imago, eventually losing mobility and developing a carapace in the final stages of their life cycle – becoming a literal tree.  Shadow Children have a much more nebulous life cycle.  It involves parasitism, invasion, and empathy – probably at the level of a microorganism. Once we understand that Shadow Children propagate through a bite, we can begin to make sense of much of the symbolism in “A Story” and even explain the deaths of Victor Trenchard, his cat, and Marsch without having to believe that those scenes are all wholesale fabrications of Trenchard.</p>
+<p>Repetitive imagery can help us to establish these Annese life cycles.. The most frequent repetition is the circle of columns or trees that appear in dream sequences for many of the main characters. Number 5, whose name is fairly definitively proven to be Wolfe through the library jaunt, has two prominent dream settings: a ship that isn’t going anywhere, helmed by M. Million, and a vast field of columns in a circle that surrounds mortuary tablets (Number Five’s various tombs) with different dates – and written on the columns are words – yet the only one Number Five remembers is carapace (45). Later, Eastwind and Sandwalker in “A Story” dream as well, and their dream takes place in a clearing surrounded by living columns – trees. This circular column suffuses all three novellas. The dreamer is surrounded by a column that extends to the sky. This appears to be the “natural” temple that appears in “V.R.T.”, made up of trees that our narrator (at that time Marsch) insists could never occur naturally, as there is one tree for every day of the Annese year.  Marsch states, “It was certainly intelligently planned, and undoubtedly predated the splashdown of the first French ship by a century or more. I counted the rings of four stumps and found the average age to be a hundred and twenty-seven Annese years” (208).</p>
+<p>Equally important is the slab of stone where God supposedly can’t see what happens, and this might be where Eastwind and Sandwalker are born, and at the very least where Marsch is first approached by the cat, probably intending to bite him, which he chases after the mules with rocks. The boy Trenchard becomes extremely excited there, and the approach of the cat is only sinister and very important in light of later events, when we can infer the exact method and timing of Marsch&#8217;s replacement (178).</p>
+<p style="padding-left: 30px;">[I] stopped to look at a stone outcrop – one of the very few to be found in the meadowmeres – which the beggar claimed was originally in the form of a seated man. There is, so he told me, a superstition … that indecent and perverse acts committed while sitting or lying in the lap of this natural statue are invisible to God. The belief is supposed to be of Annese origin, though the boy denied this. The stone is now almost completely worn away. (208)</p>
+<p>The other landmark of note is the magical cave near the river of time that Marsch and Sandwalker spend so much time seeking out, where the priest performs his strange resurrection of the otter (conceivably with the ichor and blood from the larvae that Sandwalker hands him, which smears the skull). In seeking out this cave, the boy Victor Trenchard allegedly falls to his death.  Readers such as Clute (and just about everyone since) have alluded that the death of the boy and the murder of the cat are in part or wholly fabricated by the narrator, because they assume that Marsch is replaced by Victor Trenchard.  While Wolfe definitely wants this to be the first conclusion we reach, another reading allows these final scenes to be accurate and occur exactly as written.</p>
+<p>Despite all the mystical strangeness surrounding the abos and the shadow children, the majority of this essay must confront the implied aboriginal life cycle to get beyond circular speculation about identity. This is made difficult by the confusion of the Shadow Children and their Old Wise One, or Group Norm, in identifying exactly who is being referred to at each point of the narrative in “A Story”. However, there are at least one or two sentences that indicate all life has come from a common origin, and in that sense perhaps we are simply dealing with some large larvae and some smaller ones that have developed a more parasitic life cycle. In addition, the reference to trees is unambiguously aboriginal in nature.</p>
+<p>The life cycle of the aborigines is elucidated in a series of quotes that will literally show that life is engendered by trees, involves an adult life cycle with limited ability to change features, and resolves in the final stage of immobility – a planted tree, trapped in a carapace. Female and male aborigines probably lose their ability to move freely without problem at a different stage in the life cycle. The life cycle involves a larval stage (though whether this is from imitating the Shadow Children or not is unclear). There is some hint of sexual dimorphism in the discussion between Seven Girls Waiting and Sandwalker, though this too is ambiguous. On the other hand, the probable life-cycle for the collective Shadow Children is one of infection and possible parasitism to manifest a group consciousness. The bite at the culmination of “A Story” that confuses the surviving brother highlights their method of transmission: microscopic things in the blood – many that fade into “one lonely” as the Shadow Children are said to do – enforce a change in the one bitten. Unfortunately, the empathic nature of the Shadow Children make strict perspicuous identification of the life cycle unclear, as they too remember being both descended from humans and being “long and [living] in trees” before “mankind” came to Ste. Anne. Their empathic nature forces them to grab details from others around them, and this can also explain why Marsch has a few of Victor&#8217;s memories – the empathic nature of his cat transfers something of Victor to him after the fateful bite which will end Marsch&#8217;s human life.</p>
+<p>As far as the aborigines go, David says, “they mated with trees and drowned the children to honor their rivers. That was what was important” (11). Can we take the mating with trees literally?  In “A Story”, Seven Girls Waiting has been resting with her daughter Many/Mary Pink Butterflies under a tree (The Ace edition gives her name as Many Pink Butterflies – an edition which I find thematically less corrupt than later texts.  As a side note, there is a scene in Wolfe&#8217;s <em>Exodus from the Long Sun</em> which originally read “I” when Horn entered a room, making the previously third person narrative first person, which was corrected by a copy editor to read “Horn” against Wolfe&#8217;s wishes and without his knowledge, and now the error stands in the versions printed since). The sleeping place is often difficult to find, according to Sandwalker, but he emphasizes that staying under one tree is also dangerous: “Sandwalker greeted the tree ceremoniously, … a murmuring of leaves answered him, and though he could not understand the words they did not sound angry” (98). The trees seem to actually speak and recognize the presence of aborigines, who seek to placate the trees. Sandwalker warns, “’It isn’t good to sleep where a tree is for more than one night’” Yet Seven Girls Waiting responds, ”‘Pink Butterflies is his daughter. I know because he told me in a dream a long time before she was born. He likes having her here’” (100). Here a tree seems to be speaking through dreams and claiming paternity. “Marsch” later characterizes the society of the aborigines in a very peculiar way: “I wasn’t helped by the fact that they believed them to have had a paleolithic culture, which is also incorrect – the aboriginal culture was, and is, dendritic, the stage preceding the paleolithic. One might almost say predendritic” (226). These terms (besides paleolithic, obviously) are entirely fabricated by Marsch (and Wolfe) – dendritic and predendritic are not anthropological terms. A dendrite simply implies branching like a tree. Predendritic as a term is fascinating. While some may simply infer this means that they were based around trees, or spread out in branching groups, there is a much more literal meaning that emerges, when you consider that in “A Story”, the anthropomorphized aborigines still have to scoop places to sleep out of the soil, and that if they can’t find suitable places after three days, it is implied that they will die.</p>
+<p>After Cedar Branches Waving gives birth to her twins, her mother does something very strange: “Her mother began to scoop the sand with her hands, and when she reached that which still held the strength of the dead day’s sun, she heaped it over her daughter’s legs” (84)  Later, when Sandwalker rests, he scoops out a sleeping place in the soil. That action seems pretty plantlike. There are further mystical associations made with the trees, as even the “fake” aborigine Trenchard asserts:</p>
+<p style="padding-left: 30px;">I am not, you comprehend, a Christian, but may your generosity to my poor boy be blessed by Jesus, Mary, and Joseph, or in the eventuality that you are Protestant, Monsieur, by Jesus only and by God the Father and the Holy Ghost. As my own ten-times decimated people would say, may the Mountains bless you and the River and the Trees and the Oceansea and all the stars of heaven and the gods. I speak as their religious leader. (198)</p>
+<p>Yet the strangeness of aboriginal life and its nature worship on St. Anne does not stop there, as the boy Victor asserts:</p>
+<p style="padding-left: 30px;">Many animals and birds, trees that were alive, just as you and I have traveling, … though this is still not the back of beyond where one sees gods come floating down the river on logs, and trees gone traveling, the gods with large and small heads, and blossoms of the water hydrangea in their hair, or the elk men whose heads and hair and beards and arms and bodies were like those of men, whose legs were the bodies of red elk, so that they needed to mate with the cow-woman once as beasts and once as men do. (173)</p>
+<p>In this quote, he is actually asserting that the trees can move and “have traveling”.  Yet the elk men seem a strange conglomeration, perhaps echoed in the actual story by the very large mules that Marsch takes with him. Note that he can see “the smoke of their breath hanging like a pale spirit in the cold air” (169). We will return to this vapory imagery in our discussion of the Shadow Children, but for now let us continue with the possibility of sentient trees.</p>
+<p>When the “boy” falls off the side of a cliff looking for the caves of the Vanished People, according to Marsch’s journal (after  his replacement  begins writing for him), “Downstream a long way, a big tree stood grasping the rock, with water at his feet, and had thrust out a root to catch my friend”  (261).  Note the verbiage very carefully &#8211; we have trees actually moving to save an aborigine, and here a tree associated with foot imagery as well, which is normally reserved only for Sandwalker. Also, when the Annese Robert Culot says that his grandfather saw the aborigines, he claims they looked, “sometimes like a man, but sometimes like the post of a fence. … or a dead tree … sometimes like old wood” (162). This is a pretty intimate relationship with trees. The statement that Sandwalker cannot understand the trees indicates that perhaps there is some barrier between normal adult aborigines and their next stage (if we are to take the pre-dendritic term literally, recognizing that in the dreams of Number Five the columns that take the place of the trees are designated as carapaces and also associated with his mortuary tablets).  As has already been stated, the death of Victor Trenchard the aboriginal boy has previously been considered a lie to disguise Marsch&#8217;s replacement, but another possibility exists:  the story of a tree reaching out for its young kin could have actually occurred as written.</p>
+<p>Is there a sessile stage to the aboriginal life cycle, making their adult stage pre-dendritic?  There is some indication of this:</p>
+<p style="padding-left: 30px;">When [grandfather Culot] had been but a little younger he had walked a great deal, you comprehend. Then only a few years before the last illness he ceased to do so. But now because his heart troubled him, he walked again. … My father had both his legs gone in the war; it is fortunate for me, is it not, that he did not lose certain other things as well? (162)</p>
+<p>Grandfather Culot says that he knew of the aborigines, but if the original French Landers were imitated and destroyed by Eastwind and his people, it is possible that now there are additional divagations in the aborigine population – those who believe themselves to be completely human but still suffer from some aboriginal problems, and those who still live in the back of beyond as free people and animals. Culot said that he knows of the aborigines and has seen them, but it is clear that at an advanced age he no longer got around very well. Likewise, Aunt Jeanine relies on mechanized transport to get around, and Phaedria is first seen with a cast on her leg. Some of Jeanine’s girls have thin, staff like legs, and Celestine Ettienne is described as having rather long thin legs as well. Tellingly, there is a scene  with Seven Girls Waiting and Sandwalker that might hint at sexually dimorphic leg problems:</p>
+<p style="padding-left: 30px;">“Pink Butterflies was new, and I could not walk far” [said Seven Girls Waiting] …</p>
+<p style="padding-left: 30px;">“I have never known that,’ Sandwalker said … “but I know how it must feel, sitting alone, waiting for them to come when no one comes. It must be a terrible thing.”</p>
+<p style="padding-left: 30px;">“You are a man. It will not come to you until you are old” ( 99-100).</p>
+<p>Note that Eastwind has a gait that is compared to that of a heron bird at the end of “A Story”, which have long thin legs. Celestine Etienne is compared to a stork as well. Even though we have been trained to pay attention to aboriginal hands, perhaps their legs are more important in identifying their aboriginal heritage.</p>
+<p>Sandwalker drags Seven Girls Waiting to get food, and “Seven Girls Waiting was stumbling by the time they reached it.”   They eat larva, and then her stomach gets “round and hard like a melon” – when he tries to approach her to mate, she pushes him off, saying ‘not on top of me. I’d split. I’d be sick. Like this” (103). There is at least some hint that older male aborigines will have trouble moving, and that younger females have fragile legs that don’t support extreme locomotion, though Seven Girls Waiting does succeed in traveling a bit over the course of “A Story.”</p>
+<p>For there to be any kind of unity among the three sections, other events in “A Story” should reflect what is going on in the other two novellas, in particular the true fate of Marsch, and we must note that the key event that ends Marsch’s life must have occurred on April 22 and April 23, which we must look at holistically:</p>
+<p style="padding-left: 30px;">You must excuse my writing in this entry, and I suppose some of the subsequent entries as well. An absurd accident has occurred, which I will explain when the time comes. I have killed the tire-tiger and the ghoul-bear. The latter over the tire-tiger’s body the night after. The tiger sprang at me when I climbed down from the tree, where I had waited for it all night. I suppose I should have been badly mauled, but I got nothing more than a few scratches from the thorns when the animal’s body knocked me down. (257)</p>
+<p>Of course a tree would be involved in his miraculous escape. When he returns to the camp:</p>
+<p style="padding-left: 30px;">The boy had enticed [the cat] into his lap and was sitting – as he always used to when he wasn’t cooking – with his back to the fire and the cat on his knees. I was very excited about the tire tiger, of course, and began talking about it, and went over and picked up the cat to show him where my shots had hit. The cat twisted her head around and sank her teeth into my hand. It wasn’t bad yesterday when I got the ghoul bear, but is sore today. (257)</p>
+<p>This bite is actually the pivotal moment of “V.R.T.”, just as the bite served as the thematic conclusion of “A Story” by introducing the character ambiguity between Sandwalker and Eastwind after a Shadow Child bites Eastwind. By April 26<sup>th</sup>, Marsch stops writing, and his entries are revealed to be from a month later.  Incidentally, the dates involved are possible days for Good Friday/Easter Sunday (April 25th is the last day that Easter Sunday can fall – in which case Marsch falling out of the tree could be on Good Friday (or even Easter itself, ambiguously).  In particular, the last day that we can be sure that it is not the Shadow Child Marsch writing is on April 25th, which is, in the Catholic Church, called the Major Rogation Day:</p>
+<p style="padding-left: 30px;">The first Rogation, the Greater Litanies, has been compared to the ancient Roman religious festival of the Robigalia, a ritual involving prayer and sacrifice for crops held on April 25. The first Rogation is also observed on April 25, and a direct connection has sometimes been asserted, with the &#8220;Christian substitute&#8221; following the same processional route in Rome. If Easter falls on April 24 or on this day (the latest possible date for Easter), the Rogations are transferred to the following Tuesday. (“Rogation Day”)</p>
+<p>Considering the possibility of death and resurrection and the sacrifice for crops involved in these dates, we should look and see how closely this mirrors anything in “A Story”, but first we must examine the differences between the aboriginal and the Shadow Child life cycle.</p>
+<p>Are the Shadow Children and aborigines in fact descended from a common strain (ie – is there a larval stage to the normal aborigines?  There is some confusion over this fact from the quotes we have due to the empathic confusion of the group norm). The hybrid Shadow Child who claims to be a mental combination of the “man” Sandwalker and the other Shadow children says ”We had no names before men came out of the sky … we were mostly long, and lived in holes between the roots of trees.”  (130). Unfortunately, Sandwalker immediately speculates that he thought his species was the one with that larval stage, and he even dreams of being a limbless floating worm as he reposes in the pit of sacrifice, the Other Eye. When Shadow Children are surrounded by living creatures, they imitate them mentally and become confused, just as the abos imitate others in a more physical fashion.  If Victor Trenchard was an abo, it is conceivable that the cat which bit Marsch was a host for Shadow Children, and its psychic affinity and identification with Victor could have been passed on through the bite as well, explaining the  identity confusion which Marsch feels later.</p>
+<p>In “A Story”, one Shadow Child is even corrected in its assertions of coming and going on the planet by the Old Wise One:</p>
+<p style="padding-left: 30px;">“Since first we came here &#8211; “</p>
+<p style="padding-left: 30px;">“Since first <em>they</em> came here … Now I am half a man, and know that we were always here listening to thought that did not come; listening without thought of our own to be men. Or it may be that all are one stock, half-remembering and dwindling, half forgetting and flourishing” (142)</p>
+<p>This confusion started a few pages earlier in the discussion between Sandwalker and the Old Wise One:</p>
+<blockquote><p>“We had no names before men came out of the sky,” the Old Wise one said dreamily. “We were mostly long, and lived in holes between the roots of trees.”</p></blockquote>
+<p>Sandwalker said, “I thought we were the ones.”&#8230;</p>
+<blockquote><p>“I am made of your songs. Once there was a people using their hands – when they had hands &#8211; only to take food; there came among them another who crossed from star to star. Then it was found that the first heard the songs of the second and sent them out again – greater, greater, greater than before. Then the second felt their songs more strongly in all their bones – but touched perhaps, by the first. Once I was sure I knew who the first were, and the second; now I am no longer sure” (137-8).</p></blockquote>
+<p>These quotes are vitally important because at first glance it ambiguously seems the first people use their hands only for taking food … but the second people, space faring, are not said to use their hands at all, inverting our initial understanding of the passage. This could very well indicate the floating nature of the Shadow Children, who can “infect” others and influence them, and, if they are microscopic or small enough, be space faring. The “them” pronoun is extremely ambiguous – it could refer to the songs, or to the second species itself, who could be sent out greater than before &#8211; if they were an infection that completed their life cycle inside the other species before being sent out again. In addition, any identification of species traits is further exacerbated by the empathy of the Shadow Children in claiming that they came from Sol and are descended from men – did they, or do they merely reach out with their collective consciousness and imitate humanity, making this a series of approximations just as the engineering principals of relaxation and variance reduction mentioned in the narrative indicate to reach a “solution”?</p>
+<p>Earlier the Annese certainly claimed to come from Sol, and David’s statements hinted as much as well in the opening of the novel when M. Million prompts a debate on aboriginal life and its origins. Indeed, when David is confronted with a four armed man, his love of epic poetry comes to the fore: he spins off the first lines of Virgil’s <em>Aeneid</em>: “Arms and the man  I sing who forc’d by fate” … interesting in that <em>The Aeneid</em> is a story of the founding of a second great empire after a terrible defeat, thematically joining the Greek and Roman art and history … the aboriginal is identified as a culture of cast out Greeks rather absurdly in the opening sections of the book. This is an interesting echo, nonetheless, though it is the four arms of an adversary that prompts David to recite the lines. <em>The Aeneid</em> is about one hero who escapes the shambles of the Trojan war to eventually found a new Empire, and I think that the myths of colonizers from Gondwanaland or some other primitive Earth culture coming to Ste. Anne long ago and then turning into the aborigines is in some way summoned by the allusions to the <em>Odyssey </em>and the<em> Aeneid</em> in the book. However, the life cycle and the origin of the Annese and their relationship to Earth remain ultimately mysterious. Perhaps evolution has become convergent to some degree, with larvae and shape shifters imitating humanity so well that they have indeed become indistinguishable from it, assuming and corrupting a civilization ill-suited to their natural state.</p>
+<p>There is one place that we can assert larvae are definitely present: Sandwalker eats them with Seven Girls Waiting, and their ichor seems to reanimate the skull of the otter at the hands of the mysterious priest. In addition, the pink eggs in the leaves the Shadow Children chew for a cycle of time eventually become larvae and must be spit out:  “Just so with us until our wives that were are white when we spit them into our palms, and without comfort” (130). These white larvae are called the wives of the shadow children – and furthermore, they seem to cause the “switch” in perception at the end of “A Story” after the bite. In “V.R.T.”, there are several more statements that make Shadow Children and larvae seem omnipresent and sinister. Indeed, the human features of Shadow Children in “A Story” may be anthropomorphized to some extent, or merely be detailing infected hosts. Let us look at Victor Trenchard’s description of them:</p>
+<p style="padding-left: 30px;">The Shadow Children of course came to steal by evening, riding up in the bubbles and the foam from the springs – then my mother would not let me go out from beneath her hair – this was when I was very small – after the sun set, but when I was larger I would go out and shout and make them run! – they believe – they always believe – that they’ll get all around, and then they’ll all run in at once, biting; but if you turn quickly and shout, they never do, and there are never as many of them as they think, because some are only in the minds of the others so that at the time they fight they fade back into each other and become one lonely. (173-4)</p>
+<p>Here might be the first proof that Shadow Children can float up in the foam and the bubbles – are they big at all, or are they the actually the small organisms that incubate in the mouths and bodies of their hosts?   There is at least one other mention of a parasite that is born on the wind:</p>
+<p style="padding-left: 30px;">It is produced by the young of a kind of mite which, when they have hatched from the egg sac, wait on blades of grass until they sense an updraft, then spin an invisibly slender thread which, rising like a fakir’s rope, eventually lifts them high into the air. Those who light elsewhere in the grasslands are safe and begin new lives, but every year a great many are blown out to sea, where these tangled threads, like lost memories floating on time past, form great mats as much as five kilometers long and covering hundreds of hectares … I have been told they can survive for as long as five days without oxygen – and live as parasites in the cardiovascular system of warm-blooded hosts, the slaves who do the work are not long-lived. (241)</p>
+<p>There are several vastly important points in these seemingly unrelated mites: they raise up on the wind, they parasitize living beings, and they hatch from eggs. The larvae of the Shadow Children hatch in their hosts’ mouths from the pink eggs saturating the leaves of the trees. There are even statements such as this one made in the text: ”Don’t ask me how small children are” (164). Perhaps they are microscopic, but can infect multiple creatures, such as fire-foxes and the large caribou that Marsch shoots, whose death brings the aborigine boy Victor to tears. In light of his statement about Annese Elk-men with the legs of elk, there is something curious about his large mules as well, whose breathes rise up like a spirit. Over some places on St. Anne, the “wisps of luminous gas hover like the ghosts of dead Annese” (197). Indeed, when Marsch interview Victor, there are some surprising revelations:</p>
+<blockquote><p>Self: “What have you seen – I mean, while you’ve been with me.”</p>
+<p>V.R.T.:”Birds and animals and trees living, and The Shadow Children“ (174).</p></blockquote>
+<p>At this point Marsch believes V.R.T. is referring to the constellations called the Shadow Children, but Marsch goes out into the camp and notes: “I blundered around in the brush where huge worms, luminous but of the livid color of a dead man’s lips, writhe underfoot at night” (174). In light of these livid worms, let us look again at the herbs of St. Anne in “A Story”:</p>
+<blockquote><p>Once between the full face of sisterworld and her next, a man may take the fresh leaves and folding them tightly carry them in his cheek. Then there is no woman for him, nor any meat; he is sacred then, for God walks in him. … When we die at last we have been greater than God and less than the beasts. . . when the phase comes again we find new wives, and are young, and God (130).</p></blockquote>
+<p>The herb is described as wide, warty, and yellow, the seed as pink prickled eggs. At the culmination of “A Story”, the Shadow Child bites Eastwind and says, “That which swam in my mouth swims in his veins now” (146). This allows the switching of perception between Eastwind and Sandwalker. The Shadow Children must achieve a collective, possessive consciousness through this infection. Furthermore, this switch mirrors would mirror a switch in perspective between the French Landers and the aboriginals.  Eastwind believes himself to be Sandwalker, the abos believe themselves to be human, and the infection that has replaced Marsch is writing to convince itself that it is something other than it is, whether that be Marsch or Victor Trenchard.</p>
+<h3><strong>Symbolism and Confusion in &#8220;A Story&#8221;: Who Lives? </strong></h3>
+<p>When we examine the culmination of “A Story”, it is obviously vitally important that we determine if the castrated Eastwind survives or if the aboriginal Sandwalker lives. They aid each other in flailing Last Voice to death with the roots of trees. David presaged this moment earlier in the first novella:</p>
+<p style="padding-left: 30px;">If you could have asked them, they would have told you that their magic and their religion, the songs they sang and the traditions of their people were what were important. They killed their sacrificial animals with flails of seashells that cut like razors, and they didn’t let their men father children until they had stood enough fire to cripple them for life. (11)</p>
+<p>Let’s look at the names in “A Story” and see if we can make sense of them:</p>
+<p><em>Sandwalker</em>:  every time Sandwalker appears , his feet are shown hitting the ground:</p>
+<p style="padding-left: 30px;">The second came not as they are ordinarily born – that is, head foremost as a man climbs from a lower place into a high – but feet foremost as a man lets himself down into a lower place. His grandmother was holding his brother, not knowing that two were to be born, and for that reason his feet beat the ground for a time with no one to draw him forth. (84)</p>
+<p>Later, Sandwalker descends to the holy cave “feet foremost as a man lets himself down into a lower place, [he] climbed into Thunder Always” (86). This is important for determining who dies at the end of the story, for that character’s feet are swept out from under him before he descends to a lower place. Sandwalker has a name that is echoed later in Twelvewalker (the name Trenchard assumes) and Cinderwalker, a very magical aborigine who takes “a cattle-drover’s woman [who] had her arm cut off by a train” and uses the arm to “[grow] a new woman on that so that the drover had two wives. Naturally the second one, the one Cinderwalker made, was abo except for the one arm” (164-165). There is plenty of foreshadowing to determine whether Eastwind or Sandwalker perish. Sandwalker dreams of drowning Flying Feet, and Eastwind claims that he will outlive his brother Sandwalker, but that Sandwalker will live on in dreams. Later in “V.R.T.”, Trenchard claims that it is the East Wind who greets the French Landers. All this mention of Sandwalker’s feet, the pain in the survivor’s arm after the bite of the Shadow Child, and the act of sweeping the feet out from under his brother and drowning him at the end of “A Story” leads us to conclude that Sandwalker is the drowned brother. It is Eastwind who survives. This is important for the destiny of John V. Marsch as well. Castrated Eastwind represents the parasitic airborne mite (so proficient with shooting out rope-like fiber to fly, just as the aboriginals are so proficient with ropes but not with tools).</p>
+<p><em>Cedar Branches Waving</em>: Her name is a metatextual joke – the trees wave in this story because they are more than regular trees. Her mother “plants” her legs to rejuvenate Cedar Branches Waing after she gives birth to Eastwind and Sandwalker. When the aborigines must sleep, they always scoop out some earth to “stretch” themselves into. They also seem particularly vulnerable when asleep, as Sandwalker almost falls into the pit at the bottom of The Other Eye, his legs sucked under the surface.</p>
+<p><em>Eastwind</em>: Beyond his being raised as a starwalker, whose consciousness can ascend into “space”, Eastwind&#8217;s very name is a symbol. We must remember the mites that rise on the wind and are blown out to sea, which are proficient at spinning little fibrous ropes. They often infect workers. That seems similar to the pink eggs in the leaves that the Shadow Children chew – after a phase has passed they spit out their “white wives” – a whiteness reflected in the huge larval worms that Marsch sees on St. Anne and the deformed paleness of “Marsch” himself on St. Croix. Eastwind has no testicles – the claim that he is the ancestor of the aborigines who survived by Trenchard is fascinating for this reason. Some parasites and viruses require a host to reproduce – they cannot complete their life cycle without hosts. Eastwind’s survival is a metaphor for this – it is not the land walking aborigine who survives in our novel, but the airborne, “space faring” infection, thus “A Story” is a history of both St. Anne and John V. Marsch, and Eastwind’s survival the key in determining that it is an airborne parasite who survives, one who lacks normal sexual reproduction but takes over a host instead – this is what happens to Marsch when the cat bites him, just as Eastwind is “transformed” into believing he is Sandwalker by the small creatures floating in his blood from the Shadow Child’s bite.</p>
+<p><em>Many/Mary Pink Butterflies</em>: Butterflies are the more aesthetically pleasing adult form of a larval stage. In the early Ace paperbacks, her name was Many Pink Butterflies. This might be a pretty good warning that many of our adult stage human appearing individuals with their pinkish skin might in fact have a slightly different origin, but certainly it is a symbol of metamorphosis. There may very well be a reason that there are no new buildings being built in Port Mimizon for over a century, and its very name summons mimicry, with a street named after maggots. What if the entire population has reached the decadent point where nothing new can be made, only blind mimicry and an adult stage that merely seems human?</p>
+<p><em>Seven Girls Waiting</em>: This is perhaps the most difficult name to make concrete sense of – should an expliation include characters from the story or not, such as Sweetmouth and Cedar Branches Waving?  It is after Number Five meets Aunt Jeanine and her girls, with their slender legs like “the staffs of flags” (26) that he first dreams of aborigines.</p>
+<p style="padding-left: 30px;">1)      Aunt Jeanine – waiting for Maitre to die/to get his money</p>
+<p style="padding-left: 30px;">2)      Phaedria – waiting for a good marriage</p>
+<p style="padding-left: 30px;">3)      Nerissa – waiting on the door</p>
+<p style="padding-left: 30px;">4)      Celestine Etienne/the woman in pink – waiting for “Marsch” to betray his secrets (as per Borski’s <em>Cave Canem</em>, the lady in pink is clearly Celestine Etienne, because she is a spy mistress working for the government, and Maitre <em>was</em> an important spy for them. She is also using her wiles on “Marsch” in prison. However, Borski&#8217;s essays on David and Phaedria as siblings and Celestine Etienne as their mother is less sound. There is no indication that Phaedria has not been naturally born. He also claims that David’s mother might have blue eyes, but her eyes could be as brown as Maitre’s – it only means that both would have to carry the recessive allele. Identifying Celestine Etienne as the lady in pink is vital and of course proper.)</p>
+<p style="padding-left: 30px;">6)    Casilla – waiting on the young officer and all the military, serving them sexually (note the  precautions the officer takes after having her: he bathes “prophylactically” to get her saliva off him – in “V.R.T.” a girl who paints a no and yes on her breasts leaves the imprint on the man she favors, but then goes and washes in the river – “for forgetfulness in the tales, you see.” )  The end of “A Story” and of “V.R.T.“ both indicate that saliva is dangerous, for it could carry the microscopic Shadow Child infection.  Casilla could very easily be replaced by Marydol – it is unclear how “omniscient” these naming conventions are, and “Marsch” himself could have very little conscious idea of all these girls waiting – this would be based on authorial structure outside the text itself.</p>
+<p style="padding-left: 30px;">6)    M. Duclose – waiting for her room to be usable again</p>
+<p style="padding-left: 30px;">7)    The cat – serving the Marquis de Carabas, this cat is waiting to bite and infect someone in the same fashion as the Shadow Child in the story bites Eastwind (it stalks Marsch for a bit before actually biting him). The Puss in Boots reference seems thematically important, as is the reference to <em>The Mile Long Spaceship</em>  – when the cat shows up and says that the gift is courtesy of the Marquis of Carabas, this evokes not only a sentient cat but the surrounding mythos: Puss in Boots gives gifts to the king courtesy of a peasant lad who owns him. He convinces his master to bathe in the river naked and hides his clothes while the king comes by, then convinces all the country life to say that the land belongs to the Marquis of Carabas. Next, he tricks an ogre to turn into a mouse and eats it, attaining its castle for his master. With all these elements, a river and nudity and pretending to be something other than one is, this story resonates pretty well with the St. Anne portion of the tale  (Barchilon).</p>
+<p>This is speculation – there are many other female characters, such as Cedar Branches Waving, Marydol, and V.R.T.’s  mother, who may or may not be the girl who painted two more faces on her chest.</p>
+<p>Having identified some resonance with these names from “A Story” in the biography of Marsch as well as simply retelling a historical event, of course the middle novella does not provide the closure of the final section. The moment of truth in “V.R.T.” occurs near one potential date for Good Friday. The description of Marsch falling down the tree causes the officer to look up the description of a shrike impaling a bird on a thorn bush. Marsch has miraculously escaped damage from a dangerous beast by being cut by thorns – it is that mystical foliage at work again, but it does resonate a bit with crucifixion and a crown of thorns. Being impaled by the thorn bush seems to invite that vegetative life to take an interest in what is going on. Marsch is soon doomed to perish, but it seems the true finish to his story involves the bite of the cat the very next day, just as Eastwind and Sandwalker were effectively switched by a bite and the microscopic organisms at work in the final scene of “A Story”.</p>
+<p>There are just a few more resonances in “A Story” we must discuss – the pits called The Eye, where starwalkers go forth into space, and The Other Eye, where sacrifices to the Oceansea are made. When Marsch shoots a “huge brute” similar to the caribou of ancient earth, the boy with him is “almost in tears” and he notes that “there seemed to be a heavy flow of lachrymal fluid that left broad wet streaks in the dust beneath each eye. I lifted one of the eyelids … the eyes were double pupiled” (176). Is this a sign of Shadow Child infection?  While later in prison, “Marsch” will relay dreams of  his mother and red-bearded father that are clearly of his previously life as the boy V. R. Trenchard, it is conceivable that the empathetic Shadow Children have formed a “group norm” from Marsch and Victor Trenchard, while still being distinct from both. The most definitive proof of this is in the Shadow Children in “A Story” latching onto the eyes of the marshmen and riding them on the shoulders – perhaps a very visual metaphor for what is actually happening in “V.R.T.” – Marsch being ridden by a Shadow Child.  Marsch has green eyes when Number Five sees him.  Marsch&#8217;s journal indicated that Trenchard&#8217;s eyes were a shocking green and makes little mention of Marsch&#8217;s eye color.  However, when the barrier around Ste. Anne drops in “A Story”, Sandwalker asks his mother what colors his eyes are “now”.  This implies that something on Ste. Anne can actually change eyes, and we see this in the infected animals that Marsch kills.</p>
+<p>One more bit of resemblance might seal the deal – we have already determined that our narrator in “The Fifth Head of Cerberus” is named Wolfe, and in “A Story”, one Shadow Child is known as Wolf. Otherwise they have names like Firefox, Whistler, and Swan, and a fire-fox shows up again quite extensively, along with a ghoul-bear and tire-tiger, in the hunting sequences of “V.R.T.”  A Wolfe authors the first section, and a lonely Shadow Child Wolf narrates the journal entries of the third section. If we have a Shadow Child trapped in the strange community of Port Mimizon, is there any chance that the rest of the civilization is run by aborigines and that Veil’s hypothesis is true? Let us look at Jeanine herself, called first the black queen. Number Five contrasts her with a white queen he will never meet, and even dreams of aborigines the first time he sees her. In addition, he warns her away from the original of M. Million in his dream of the stagnant ship. Coupled with her leg injuries, perhaps this is enough to at least begin to suspect that some of the aborigines succeeded in a far more effective form of mimicry than “Marsch” – and what better place for them to live than Port Mimizon, with streets named after frauds and larvae which could very well become something else? Perhaps Number Five is in a unique position – a pure human cloned over and over for strange reasons. Maitre <em>wants</em> to change and succeed, but his experiment always fails – his perfect copies are stuck in the same loop as himself and wind up in exactly the same place. While the “perfect” mimicry of the abos leads us to question who is human and who is aborigine, there is something much more spiritual at stake – why does Number Five, the perfect copy, never seem to have free will to change?  The haunting final line of the first novella, “Someday they&#8217;ll want us” might very well be Number Five&#8217;s understanding that all of the “people” on St. Anne are simply increasingly degenerate aborigines with no real people to pattern themselves after … save Number Five, preserved changeless by his father&#8217;s experiments, one of the last true humans left on the planet.</p>
+<h3><strong>Colonialism, Persecution of the Other, and Conclusions</strong></h3>
+<p>While this interpretation stresses that the aboriginals have succeeded in mimicking humanity (but not in advancing the civilization at all), we should consider another bit of Wolfean mimicry. Much has been made about the connection between the setting of <em>The Fifth Head of Cerberus</em> and Blue and Green in Wolfe’s Long and Short Sun series. There really are a lot of motifs that are repeated in the Long and Short Sun books, from tree hybrids to four-armed men to a blue and green planetary system to parthenogenetically produced offspring, but ultimately it isn’t the same solar system as Blue and Green. For the full biological hybridization scheme that explains how creatures with multiplied limbs have populated the landscape, and the manner in which inhumi are descended from liana and the Vanished People an outgrowth of the trees of Green, please reference my article “Tree Corn, Silk-Horn, and the Whorl-world Riddle of Short Sun” (Aramini). The life cycle of the aborigines and the Shadow Children are completely different, and the theme of Short Sun is simply that sometimes both an individual and his home may change so much over time that neither is recognizable – return is impossible.</p>
+<p>For <em>The Fifth Head of Cerberus, </em>the primary question then becomes, if Marsch is a Shadow Child, is every other human on St. Anne then an aborigine who has imitated humanity successfully?  The two viable interpretations of persecution of the other are as follows: an aboriginal pretending to be human is imprisoned by humans, or a Shadow Child pretending to be both abo and human is incarcerated by abos who believe themselves to be human. The Free People may simply have opted not to imitate the French Landers. In his article “Confounding the Skin and the Mask”, Peter Wright stresses the inability to differentiate between colonizer and colonized:</p>
+<p style="padding-left: 30px;">Albert Wendland’s Science, Myth, and the Fictional Creation of Alien Worlds (1985) treats <em>The Fifth Head of Cerberus</em> as a narrative raising ‘questions over identity’ and ‘personal morality’ and, more significantly perhaps, concerning ‘methods of government’ which are ‘complex and impressive.’  Wendland’s argument not only focuses on ‘the reversed outlook of object [aborigine] onto subject [coloniser] but also the complicated interaction of object and subject, and the inability to untangle the two’ that Wolfe effects through his carefully balanced deployment of ambiguity. Importantly, Wendland recognizes that ‘such ambiguity not only questions the certainty of most SF conclusions (the defining of the universe by the SF human explorers, the determination of the object by the subject), but also the whole concept of certainty itself, especially the assumed, self-contained and separate integrity of individual subjects.’  Although Wendland does not undertake a consistent postcolonial reading, he is aware that Wolfe’s examination of these admittedly ‘abstract matters’ is contextualized by setting – Sainte Croix and Sainte Anne are both Earth colonies – and by Wolfe’s treatment of the complex interaction between human colonist and aborigine. ‘The new regime’s domination is so strong that the old race, in order to survive must imitate the ways of the new rulers, become like them’, Wendland remarks, associating implicitly the physical mimicry of the Annese with the cultural mimicry found amongst many colonized peoples. Despite the pertinence of this observation, Wendland remains unwilling to apply a postcolonial critique to a text so clearly amenable to such discourse. Hence, there is a need to reconsider the narrative in the light of postcolonial theories in order to illuminate the possible purposes and consequences of Wolfe’s elaborate and mesmerizing textual puzzle. However, even at this stage it is important to understand that the existence of the puzzle is more significant that its solution, since the puzzle is where the political arguments of the novel can be found.</p>
+<p>To which I say, if we look at the interplay of all those interviewed in the text, this “impossibility” to distinguish subject and object is actually a farce. The difference between Sandwalker and Eastwind is empirically ridiculously easy to spot – it does seem that a brief bit of dialogue indicates Eastwind has NO TESTICLES, when a girl points and laughs at him and then he claims that it is bound by woman’s hair until it putrefies. The difference between Marsch and a true human is also easy – green eyes, pasty deformed pale flesh, and a complete inability to use the rifle properly. The ambiguity comes in identifying who is the conqueror – whose system has” Marsch” been cast into?  The French come down to conquer and are soon repressed by some unnamed force (Simply English speakers?  Are the French first subjugated by the aborigines, then the English?  Do the English then get replaced by the aborigines? Note that very few new buildings have been built on St. Croix in the last 144 years, according to “Marsch”. It seems that a widespread lack of manual dexterity accounts for this). If we know to look for leg problems, then the strange society of Ste. Croix actually begins to make sense – the abos have conquered the colonizers and taken their place as agents of oppression.</p>
+<p>In the discourse of the Wise Old One, who cannot distinguish between men as Shadow Children, the Free People, or those colonists, it is at least hinted that all life stems from a common origin , save perhaps that of the pink seeds in the leaves, which is key to solving the identity of “Marsch”. Dollo’s law is brought up (once a species loses the use of something it doesn’t come back; it has to adapt a new way to do the same thing) almost certainly because the offhand colonization from ancient terrestrial stock and differentiation/regression/hybridity back to an animalistic place has actually occurred. Both the stagnation of cloning in Ste. Croix and the interbreeding and hybridization of Ste. Anne has gone a long way to dehumanizing the worlds – Ste. Croix is a place that doesn’t change, nor does it move; Ste. Anne a place that is ever changeable and fluctuates with no base into the animal kingdom, so adaptable that it lacks identity. The absolute stagnation of Port Mimizon and the hints that Aunt Jeanine is the black queen to an unmet white queen, coupled with the crippled leg imagery that is at least hinted at by Seven Girls Waiting, can lead us to the conclusion that the mess of St. Croix stems from a misappropriated lifestyle, one which has been adopted by a creature that simply cannot thrive in it.</p>
+<p>Wright makes some additional points:</p>
+<p style="padding-left: 30px;">Through the interaction of Mr Million, Number Five’s father, and Number Five who are, after all, one and the same person, Wolfe appears to be advocating hybridity, diversity, and cultural exchange by showing the stifled and stifling stasis that opposes it. In many ways Maison du Chien, 666 Saltimbanque, is a rambling metaphor for cultural isolationism, on the one hand, and imperialism on the other since the act of cloning and the process of hypnopaedia are symbolic representations of colonial occupation and re-education.</p>
+<p>I also appreciate his points on hybridity:</p>
+<p style="padding-left: 30px;">Hence, the biological chameleon becomes a cultural chameleon; the shapeshifter an ideal anthropologist, an individual possessing the intelligence and insight to understand cultures alien to himself. Accordingly, the menace embodied by Marsch-Trenchard takes the form of his ability to outperform the colonial figure – Marsch – at every level. His ‘development’ as a character is a consequence, then, not of his mimicry, but of an increasing hybridity, a furthering of his own racial heterogeneity.</p>
+<p>In addition, he makes excellent points about “counting” the abos as human:</p>
+<p style="padding-left: 30px;">This is not to say that various characters do not try to construct a colonial discourse. David, Number Five’s son-come-brother, remarks how it is imperative to see the aborigines as human because, ‘If they were alive it would be dangerous to let them be human because they would ask for things, but with them dead it makes it more interesting if they were, and the settlers killed them all.’  In other words, if the aborigines are believed to be extinct, it is safe to consider them as human. However, if they are deemed to be still extant, to advocate their humanity would be to admit they would ‘ask for things’, that is be humanly materialistic, and demand a basic level of human rights. We see this attitude repeated by East Wind in his treatment of the Shadow Children, by Mrs. Blount and Dr. Hagsmith, who see the Annese as animals.</p>
+<p>In his conclusion, Wright strays too far in sympathy of local Annese culture:</p>
+<p style="padding-left: 30px;">This is the final tragedy of the collection: the solitary hybrid, untrammeled by contact with other individuals during his sojourn on Sainte Anne, understanding more than any other character about society, governance and individual and interracial interaction, is denied. His incarceration is the imprisonment of a free spirit enchained physically, spiritually and emotionally by those who suspect and fear difference. The captive John V. Marsch/Victor Trenchard, alone in his benighted cell, is the final, emotive image Wolfe provides of the actions of a species whose poisonous character holds them, like the successive clones of Mr Million’s personality, on a becalmed ship, fearing to embrace the possibilities of an empowering personal and cultural transformation.</p>
+<p>Wright’s excellent article is still ignoring something important – that both of these places, the mutable hybrid and the stagnant clone, lead to a place of moral bankruptcy and murder.  Neither is ideal, even with all the paradise imagery of Ste. Anne in “A Story” – it is still an ugly world of cannibalism and murder, where brother kills brother. It is entirely conceivable that the majority of the oppressors are actually successful aborigines, as the street name “Rue D’Asticot”, the lack of new buildings, Veil’s Hypothesis, and the wide spread strangeness associated with female leg structure, coupled with the presence of Many Pink Butterflies in “A Story”, all indicate. If there is a larval stage to aborigines, pink humans could very well wind up being the adult forms.</p>
+<p>In his response to Wright, Borski strikes a very true note on the topic of “Marsch’s” integrity:</p>
+<blockquote><p>Then there’s also the signally high level of mimesis between Number Five and Victor Trenchard. Wright, of course, fails to mention this, and perhaps rightly so, given the operative paradigms and central thrust of his arguments. But the plain truth of the matter is that there are so many correspondences between the two men that it’s hard to believe Wolfe wants us to see them as different, being in fact, if not each other’s shadow, then nearly the same character. &#8230; Victor Trenchard and Number Five are symbolic twins, with life circumstances and ultimate fates irrevocably linked. (“Desanctifying”)</p></blockquote>
+<p>For the full list of the correspondences, please see Borski’s article – they are convincing, though some of his parallels are wrong. Their names are even more closely linked than he indicates – one shadow child is called Wolf, and Number Five’s name is Wolfe. (I liken the V in John V. Marsch to Vector, even though it does summon number 5), and they wind up in the same jail for the same crime. Additionally, forty seven pan pipes above Number Five’s room resonate with prisoner forty seven tapping on the pipes above “Marsch”.</p>
+<p>As Borski has said, the two characters are mirrors of each other, even dreaming realistically in their “otherness”. I don’t see the imprisoned “Marsch” as a positive character as Wright does. The extremes, the capricious assimilation of all that the aborigines symbolize and the frigid stagnation of Ste. Croix, both lead to the pit of hell. From an even more practical thematic standpoint, the Shadow Children serve very little function in the story if they are not involved in the action somehow, and their presence allows Wolfe to create a scenario in which we can speculate whether abos would persecute one of their own in Victor Trenchard once we determine that Marsch has been replaced, still leaving us with the sense of unanswered questions.  If we believe that, then Victor&#8217;s death scene and the death of the cat might be fabrications.  Only when we see that there are two forces of mimicry at work can we begin to make sense of the significance of the Shadow Children and the purpose of “A Story” in telling Marsch&#8217;s personal tale.</p>
+<p>In light of the bizarre government of Ste. Croix, that takes the ideology of More’s Utopia or Lafferty’s Camiroi and spins them into the bureaucratic nightmare of Kafka, there are no happy endings in<em> The Fifth Head of Cerberus</em>:  both stagnation and imitation lead to an unsavory fate, as we are left with the image of a pale pasty infection scribbling for mercy, a Shadow Child and an animal, rotting in the corrupted cogs of a civilization little different from eternal damnation, salvation and survival set adrift on a sinister easterly wind in a world where no one understands what they truly are.</p>
+<p>&nbsp;</p>
+<p><strong>REFERENCES</strong></p>
+<p>Aramini, Marc Anthony. “Tree-Corn, Silk-Horn, and the Word-Whorl Riddle of the Short Sun.” Urth Mailing List. &lt;<a href="http://lists.urth.net/pipermail/urth-urth.net/2014-February/054606.html">http://lists.urth.net/pipermail/urth-urth.net/2014-February/054606.html</a>&gt;</p>
+<p>Barchilon, Jacques. <em>The Authentic Mother Goose: Fairy Tales and Nursery Rhymes</em>. Denver: Alan Swallow, 1960.</p>
+<p>Borski, Robert. “Cave Canem”. <em>WolfeWiki</em>. Jan 25, 2008. Web. May 7, 2013. &lt;<a href="http://www.wolfewiki.com/pmwiki/pmwiki.php?n=CaveCanem.Index">http://www.wolfewiki.com/pmwiki/pmwiki.php?n=CaveCanem.Index</a>&gt;</p>
+<p>Borski, Robert. “Desanctifying Victor Trenchard: Some Notes on Peter Wright’s ‘Confounding the Skin and the Mask’”. Ultan’s Library. N.d. Web. May 7, 2013. &lt;<a href="http://ultan.org.uk/desanctifying-victor-trenchard/">http://ultan.org.uk/desanctifying-victor-trenchard/</a>&gt;</p>
+<p>Clute, John. <em>Strokes: Essays and Reviews 1966-1986</em>. Seattle: Serconia Press, 1988.</p>
+<p>“Rogation Day.” Wikimedia Foundation. May 6, 2013. Web. May 11, 2013. &lt;<a href="http://en.wikipedia.org/wiki/Rogation_Day">http://en.wikipedia.org/wiki/Rogation_Day</a>&gt;</p>
+<p>Lafferty, R.A. “Polity and Custom of the Camiroi.” <em>Nine Hundred Grandmothers</em>. New York: Ace,  1970. 212-227.</p>
+<p>Wolfe, Gene. “How I Lost the Second World War and Helped Turn Back the German Invasion.” <em>Gene Wolfe’s Book of Days</em>. London: Arrow Books, 1981.</p>
+<p>Wolfe, Gene. <em>The Book of the Short Sun</em>. New York: SFBC Science Fiction Printing, 2001.</p>
+<p>Wolfe, Gene. <em>The Fifth Head of Cerberus</em>. New York: Ace Books, 1981 edition.</p>
+<p>Wolfe, Gene. “The HORRARS of War.” <em>Endangered Species</em>. New York: Tom Doherty Associates, LLC, 1989. 237-257.</p>
+<p>Wolfe, Gene. “The Largest Luger.” <em>Young Wolfe</em>. United Mythologies, 1992.</p>
+<p>Wolfe, Gene. “Trip, Trap.” <em>Storeys from the Old Hotel</em>. New York: Tom Doherty Associates, LLC, 1988,238-263.</p>
+<p>Woolf, Virginia. “Blue and Green.” <em>Monday or Tuesday</em>. New York: Harcourt, Brace and Company, 1921. Available at <a href="http://www.bartleby.com/85/6.html">http://www.bartleby.com/85/6.html</a></p>
+<p>Wright, Peter. “Counfounding the Skin and the Mask: Gene Wolfe’s The Fifth Head of Cerberus and the Politics of Ambiguity.” Ultan’s Library. N.d. Web. May 7, 2013. &lt;<a href="http://ultan.org.uk/confounding-the-skin-and-the-mask/">http://ultan.org.uk/confounding-the-skin-and-the-mask/</a>&gt;</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li><a href="#" class="sharing-anchor sd-button share-more"><span>Share</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-750"
+				class="share-email sd-button share-icon"
+				href="mailto:?subject=%5BShared%20Post%5D%20Proving%20Veil%27s%20Hypothesis%3A%20Variance%20Reduction%20Techniques%2C%20Larval%20Life%20Cycles%20on%20an%20East%20Wind%2C%20and%20Shadow%20Children%20Riding%20Mars%28c%29hmen%20in%20The%20Fifth%20Head%20of%20Cerberus&#038;body=https%3A%2F%2Fultan.org.uk%2Fvariance-reduction-techniques%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-750"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="8f17dc1cf9" data-email-share-track-url="https://ultan.org.uk/variance-reduction-techniques/?share=email">
+				<span id="sharing-email-750" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-750"
+				class="share-facebook sd-button share-icon"
+				href="https://ultan.org.uk/variance-reduction-techniques/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-750"
+				>
+				<span id="sharing-facebook-750" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-750"
+				class="share-twitter sd-button share-icon"
+				href="https://ultan.org.uk/variance-reduction-techniques/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-750"
+				>
+				<span id="sharing-twitter-750" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-tumblr-750"
+				class="share-tumblr sd-button share-icon"
+				href="https://ultan.org.uk/variance-reduction-techniques/?share=tumblr"
+				target="_blank"
+				aria-labelledby="sharing-tumblr-750"
+				>
+				<span id="sharing-tumblr-750" hidden>Share on Tumblr (Opens in new window)</span>
+				<span>Tumblr</span>
+			</a></li><li class="share-end"></li></ul></div></div></div></div></div>
+								</div><!-- .post-content -->
+
+								
+						</div><!-- .post-inner -->
+
+						
+								<div class="post-navigation">
+									<div class="post-navigation-inner group">
+
+																					<div class="post-nav-prev">
+												<p>Previous</p>
+												<h4><a href="https://ultan.org.uk/aaron-allston-1960-2014/">Aaron Allston 1960-2014</a></h4>
+											</div>
+																				
+																					<div class="post-nav-next">
+												<p>Next</p>
+												<h4><a href="https://ultan.org.uk/ultan-contributor-marc-araminis-new-video-on-gene-wolfe-and-literature/">Ultan contributor Marc Aramini&#8217;s new video on Gene Wolfe and Literature</a></h4>
+											</div>
+										
+									</div><!-- .post-navigation-inner -->
+								</div><!-- .post-navigation -->
+
+								
+	<div class="comments-container">
+
+		<div class="comments-inner">
+
+			<a name="comments"></a>
+
+			<div class="comments-title-container group">
+
+				<h2 class="comments-title">
+
+					2 Comments
+				</h2>
+
+				
+			</div><!-- .comments-title-container -->
+
+			<div class="comments">
+
+				<ol class="commentlist">
+					
+			<li class="comment even thread-even depth-1" id="li-comment-91648">
+
+				<div id="comment-91648" class="comment">
+
+					<img alt='' src='https://secure.gravatar.com/avatar/df8dd81c4ba3f9a147e237d8ff49ab14d23cbfb9b99847dc4d7f4d59987d09a5?s=160&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/df8dd81c4ba3f9a147e237d8ff49ab14d23cbfb9b99847dc4d7f4d59987d09a5?s=320&#038;d=mm&#038;r=g 2x' class='avatar avatar-160 photo' height='160' width='160' decoding='async'/>
+					<div class="comment-inner">
+
+						<div class="comment-header">
+							<h4><a href="http://joshuacottle.blogspot.com" class="url" rel="ugc external nofollow">Josh Cottle</a></h4>
+						</div><!-- .comment-header -->
+
+						<div class="comment-content post-content">
+							<p>Really good essay. Just finished, and had some vague thoughts on the matter, but focusing on the diction concerning the grubs / worms / maggots / larvae and linking it to the Shadow Children in a pretty definite way was very nice. </p>
+<p>An interesting question is raised by linking the Shadow Children parasites to the fiber-spinning mite on the water &#8211; if the slaves get sick and die from the parasites, is that a for sure thing? What does it take to &#8220;survive&#8221; a Shadow Child&#8217;s bite and be taken over / moved aside by one? Could the world be populated with sickly folks who survived their bites, so the population of, say, St. Anne, might consist of the one &#8220;pure&#8221; human, abos and Shadow Children who have taken over abos?</p>
+						</div><!-- .comment-content -->
+
+						<div class="comment-meta">
+
+							<div>
+								<div class="genericon genericon-day"></div><a class="comment-date-link" href="https://ultan.org.uk/variance-reduction-techniques/#comment-91648">17 October 2016</a>
+							</div>
+
+							
+							
+						</div><!-- .comment-meta -->
+
+					</div><!-- .comment-inner -->
+
+				</div><!-- .comment-## -->
+
+			<ul class="children">
+
+			<li class="comment odd alt depth-2" id="li-comment-93864">
+
+				<div id="comment-93864" class="comment">
+
+					<img alt='' src='https://secure.gravatar.com/avatar/9963e4f52d5a6dd855114c00e9034efa1e396548750d072f2d0565e7c1eaf1c7?s=160&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/9963e4f52d5a6dd855114c00e9034efa1e396548750d072f2d0565e7c1eaf1c7?s=320&#038;d=mm&#038;r=g 2x' class='avatar avatar-160 photo' height='160' width='160' decoding='async'/>
+					<div class="comment-inner">
+
+						<div class="comment-header">
+							<h4>Marc Aramini</h4>
+						</div><!-- .comment-header -->
+
+						<div class="comment-content post-content">
+							<p>Hi Josh. Sorry this took so long to answer you. While the gestalt mind state of the shadow children implied in the central novella might allow the original body to survive, the personality is for all intents and purposes changed and gone &#8211; while I think Eastwind survives and Sandwalker dies, Eastwind is no longer himself &#8211; the body is inhabited by something false, the original personality &#8220;dead&#8221; &#8211; I don&#8217;t think we can say that such an infestation, as you suppose,  is something that can in any meaningful way be survived, though I think the mites are a &#8220;metaphor&#8221; for what happens on Ste. Anne, and that death thematically related to what will happen to Marsch, though his body lives, as an individual he has been profoundly altered.</p>
+						</div><!-- .comment-content -->
+
+						<div class="comment-meta">
+
+							<div>
+								<div class="genericon genericon-day"></div><a class="comment-date-link" href="https://ultan.org.uk/variance-reduction-techniques/#comment-93864">5 December 2016</a>
+							</div>
+
+							
+							
+						</div><!-- .comment-meta -->
+
+					</div><!-- .comment-inner -->
+
+				</div><!-- .comment-## -->
+
+			</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+				</ol>
+
+				
+				
+			</div><!-- .comments -->
+
+		</div><!-- .comments-inner -->
+
+	</div><!-- .comments-container -->
+
+	
+					</article><!-- .post -->
+
+					
+		</div><!-- .content -->
+
+					<aside class="sidebar">
+
+	<div id="categories-6" class="widget widget_categories"><div class="widget-content"><h3 class="widget-title">Categorically:</h3>
+			<ul>
+					<li class="cat-item cat-item-26"><a href="https://ultan.org.uk/category/a-solar-labyrinth/">A Solar Labyrinth</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://ultan.org.uk/category/articles/">Articles</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://ultan.org.uk/category/bookreviews/">Book Reviews</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://ultan.org.uk/category/featured/">Featured</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://ultan.org.uk/category/gene-wolfe/">Gene Wolfe</a>
+<ul class='children'>
+	<li class="cat-item cat-item-11"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-long-sun/">Book of the Long Sun</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-new-sun/">Book of the New Sun</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-short-sun/">Book of the Short Sun</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://ultan.org.uk/category/gene-wolfe/fifth-head-of-cerberus/">Fifth Head of Cerberus</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://ultan.org.uk/category/gene-wolfe/latro-soldier-novels/">Latro (Soldier) novels</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-22"><a href="https://ultan.org.uk/category/interviews/">Interviews</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://ultan.org.uk/category/features/">Latest</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://ultan.org.uk/category/news/">News</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://ultan.org.uk/category/shadows-of-the-new-sun/">Shadows of the New Sun</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://ultan.org.uk/category/site-admin/">site admin</a>
+</li>
+			</ul>
+
+			</div></div><div id="linkcat-16" class="widget widget_links"><div class="widget-content"><h3 class="widget-title">Wolfeana</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.wolfewiki.com/pmwiki/pmwiki.php?n=CaveCanem.Index" title="Robert Borski&#8217;s site about the mystery that is the Fifth Head of Cerberus">Cave Canem</a>
+Robert Borski&#8217;s site about the mystery that is the Fifth Head of Cerberus</li>
+<li><a href="http://www.siriusfiction.com/" rel="friend" title="Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun">Sirius Fiction</a>
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun</li>
+<li><a href="http://lists.urth.net/pipermail/urth-urth.net/" rel="friend" title="Ongoing old-fashioned email discussion of Wolfe, and everything else that is important">The URTH mailing list</a>
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important</li>
+<li><a href="http://www.wolfewiki.com/pmwiki/" rel="acquaintance" title="A wiki about Gene Wolfe">Wolfewiki</a>
+A wiki about Gene Wolfe</li>
+
+	</ul>
+</div></div>
+<div id="search-3" class="widget widget_search"><div class="widget-content"><h3 class="widget-title">Search Ultan</h3>
+<form method="get" class="search-form" id="search-form-6a9d36992d751" action="https://ultan.org.uk/">
+	<input type="search" class="search-field" placeholder="Search Form" name="s" id="s-6a9d36992d753" />
+	<button type="submit" class="search-button"><div class="genericon genericon-search"></div><span class="screen-reader-text">Search</span></button>
+</form>
+</div></div><div id="categories-4" class="widget widget_categories"><div class="widget-content"><h3 class="widget-title">Categories</h3><form action="https://ultan.org.uk" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="26">A Solar Labyrinth</option>
+	<option class="level-0" value="3">Articles</option>
+	<option class="level-0" value="4">Book Reviews</option>
+	<option class="level-0" value="18">Featured</option>
+	<option class="level-0" value="5">Gene Wolfe</option>
+	<option class="level-1" value="11">&nbsp;&nbsp;&nbsp;Book of the Long Sun</option>
+	<option class="level-1" value="12">&nbsp;&nbsp;&nbsp;Book of the New Sun</option>
+	<option class="level-1" value="13">&nbsp;&nbsp;&nbsp;Book of the Short Sun</option>
+	<option class="level-1" value="14">&nbsp;&nbsp;&nbsp;Fifth Head of Cerberus</option>
+	<option class="level-1" value="7">&nbsp;&nbsp;&nbsp;Latro (Soldier) novels</option>
+	<option class="level-0" value="22">Interviews</option>
+	<option class="level-0" value="6">Latest</option>
+	<option class="level-0" value="8">News</option>
+	<option class="level-0" value="19">Shadows of the New Sun</option>
+	<option class="level-0" value="10">site admin</option>
+</select>
+</form><script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value && parseInt( dropdown.value ) > 0 && dropdown instanceof HTMLSelectElement ) {
+				dropdown.parentElement.submit();
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "cat" );
+
+//# sourceURL=WP_Widget_Categories%3A%3Awidget
+</script>
+</div></div><div id="linkcat-16" class="widget widget_links"><div class="widget-content"><h3 class="widget-title">Wolfeana</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.wolfewiki.com/pmwiki/pmwiki.php?n=CaveCanem.Index" title="Robert Borski&#8217;s site about the mystery that is the Fifth Head of Cerberus">Cave Canem</a>
+Robert Borski&#8217;s site about the mystery that is the Fifth Head of Cerberus</li>
+<li><a href="http://www.siriusfiction.com/" rel="friend" title="Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun">Sirius Fiction</a>
+Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun</li>
+<li><a href="http://lists.urth.net/pipermail/urth-urth.net/" rel="friend" title="Ongoing old-fashioned email discussion of Wolfe, and everything else that is important">The URTH mailing list</a>
+Ongoing old-fashioned email discussion of Wolfe, and everything else that is important</li>
+<li><a href="http://www.wolfewiki.com/pmwiki/" rel="acquaintance" title="A wiki about Gene Wolfe">Wolfewiki</a>
+A wiki about Gene Wolfe</li>
+
+	</ul>
+</div></div>
+<div id="categories-2" class="widget widget_categories"><div class="widget-content"><h3 class="widget-title">Categories</h3>
+			<ul>
+					<li class="cat-item cat-item-26"><a href="https://ultan.org.uk/category/a-solar-labyrinth/">A Solar Labyrinth</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://ultan.org.uk/category/articles/">Articles</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-long-sun/">Book of the Long Sun</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-new-sun/">Book of the New Sun</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://ultan.org.uk/category/gene-wolfe/book-of-the-short-sun/">Book of the Short Sun</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://ultan.org.uk/category/bookreviews/">Book Reviews</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://ultan.org.uk/category/featured/">Featured</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://ultan.org.uk/category/gene-wolfe/fifth-head-of-cerberus/">Fifth Head of Cerberus</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://ultan.org.uk/category/gene-wolfe/">Gene Wolfe</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="https://ultan.org.uk/category/interviews/">Interviews</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://ultan.org.uk/category/features/">Latest</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://ultan.org.uk/category/gene-wolfe/latro-soldier-novels/">Latro (Soldier) novels</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://ultan.org.uk/category/news/">News</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://ultan.org.uk/category/shadows-of-the-new-sun/">Shadows of the New Sun</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://ultan.org.uk/category/site-admin/">site admin</a>
+</li>
+			</ul>
+
+			</div></div><div id="linkcat-16" class="widget widget_links"><div class="widget-content"><h3 class="widget-title">Wolfeana</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.wolfewiki.com/pmwiki/pmwiki.php?n=CaveCanem.Index" title="Robert Borski&#8217;s site about the mystery that is the Fifth Head of Cerberus">Cave Canem</a></li>
+<li><a href="http://www.siriusfiction.com/" rel="friend" title="Home of Lexicon Urthus, Michael Andre-Driussi, and the forthcoming book about Book of the Long Sun">Sirius Fiction</a></li>
+<li><a href="http://lists.urth.net/pipermail/urth-urth.net/" rel="friend" title="Ongoing old-fashioned email discussion of Wolfe, and everything else that is important">The URTH mailing list</a></li>
+<li><a href="http://www.wolfewiki.com/pmwiki/" rel="acquaintance" title="A wiki about Gene Wolfe">Wolfewiki</a></li>
+
+	</ul>
+</div></div>
+<div id="meta-5" class="widget widget_meta"><div class="widget-content"><h3 class="widget-title">Meta</h3>
+		<ul>
+						<li><a href="https://ultan.org.uk/wp-login.php">Log in</a></li>
+			<li><a href="https://ultan.org.uk/feed/">Entries feed</a></li>
+			<li><a href="https://ultan.org.uk/comments/feed/">Comments feed</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</div></div>
+</aside><!-- .sidebar -->
+		
+	</div><!-- .section-inner -->
+
+</div><!-- .wrapper -->
+
+		</main><!-- #site-content -->
+
+		
+			<footer class="footer section big-padding bg-white">
+				<div class="section-inner group">
+
+											<div class="widgets"><div id="text-2" class="widget widget_text"><div class="widget-content"><h3 class="widget-title">Contact Master Ultan</h3>			<div class="textwidget"><p>Jonathan and Nigel can be contacted at:<br />
+ultan01 [at] yahoo.co.uk</p>
+</div>
+		</div></div><div id="blog_subscription-2" class="widget widget_blog_subscription jetpack_subscription_widget"><div class="widget-content"><h3 class="widget-title">Subscribe to Blog via Email</h3>
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2"
+				data-blog="50942462"
+				data-post_access_level="everybody" >
+									<div id="subscribe-text"><p>Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+</div>
+										<p id="subscribe-email">
+						<label id="jetpack-subscribe-label"
+							class="screen-reader-text"
+							for="subscribe-field-blog_subscription-2">
+							Email Address						</label>
+						<input type="email" name="email" autocomplete="email" required="required"
+																					value=""
+							id="subscribe-field-blog_subscription-2"
+							placeholder="Email Address"
+						/>
+					</p>
+
+					<p id="subscribe-submit"
+											>
+						<input type="hidden" name="action" value="subscribe"/>
+						<input type="hidden" name="source" value="https://ultan.org.uk/variance-reduction-techniques/"/>
+						<input type="hidden" name="sub-type" value="widget"/>
+						<input type="hidden" name="redirect_fragment" value="subscribe-blog-blog_subscription-2"/>
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="19fd6ff73e" /><input type="hidden" name="_wp_http_referer" value="/variance-reduction-techniques/" />						<button type="submit"
+															class="wp-block-button__link"
+																					name="jetpack_subscriptions_widget"
+						>
+							Subscribe						</button>
+					</p>
+							</form>
+							<div class="wp-block-jetpack-subscriptions__subscount">
+					Join 57 other subscribers.				</div>
+						</div>
+			
+</div></div></div>
+										
+											<div class="widgets"><div id="widget_lovecraft_recent_posts-2" class="widget Widget_Lovecraft_Recent_Posts"><div class="widget-content"><h3 class="widget-title">Recently</h3>
+				<ul class="lovecraft-widget-list">
+
+					
+						<li class="group">
+
+							<a href="https://ultan.org.uk/gene-wolfe-and-the-pocket-book-of-science-fiction/">
+
+								<div class="post-icon">
+
+									<img width="95" height="150" src="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?fit=95%2C150&amp;ssl=1" class="attachment-thumbnail size-thumbnail wp-post-image" alt="The Pocket Book of Science-Fiction" decoding="async" loading="lazy" srcset="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?w=651&amp;ssl=1 651w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?resize=191%2C300&amp;ssl=1 191w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?resize=95%2C150&amp;ssl=1 95w" sizes="auto, (max-width: 95px) 100vw, 95px" data-attachment-id="2333" data-permalink="https://ultan.org.uk/gene-wolfe-and-the-pocket-book-of-science-fiction/the-pocket-book-of-science-fiction/" data-orig-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?fit=651%2C1024&amp;ssl=1" data-orig-size="651,1024" data-comments-opened="0" data-image-title="The Pocket Book of Science Fiction" data-image-description="" data-image-caption="&lt;p&gt;&amp;#8220;The Pocket Book of Science Fiction,&amp;#8221; edited by Donald A. Wollheim (Pocket Books, 1947); cover artist unknown.&lt;/p&gt;
+" data-large-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2024/05/8455590436_e9aec2affb_o.jpg?fit=629%2C989&amp;ssl=1" />
+								</div>
+
+								<div class="inner">
+									<p class="title">Gene Wolfe and The Pocket Book of Science-Fiction</p>
+									<p class="meta">30 May 2024</p>
+								</div>
+
+							</a>
+
+						</li>
+
+						
+						<li class="group">
+
+							<a href="https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/">
+
+								<div class="post-icon">
+
+									<img width="100" height="150" src="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?fit=100%2C150&amp;ssl=1" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Cover of &quot;Gene Wolfe&#039;s First Four Novels: A Chapter Guide&quot;" decoding="async" loading="lazy" srcset="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?w=907&amp;ssl=1 907w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?resize=200%2C300&amp;ssl=1 200w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?resize=700%2C1050&amp;ssl=1 700w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?resize=100%2C150&amp;ssl=1 100w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?resize=768%2C1152&amp;ssl=1 768w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?resize=900%2C1350&amp;ssl=1 900w" sizes="auto, (max-width: 100px) 100vw, 100px" data-attachment-id="2124" data-permalink="https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/ma-d-first-four-novels-large/" data-orig-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?fit=907%2C1360&amp;ssl=1" data-orig-size="907,1360" data-comments-opened="0" data-image-title="MA-D First Four Novels large" data-image-description="" data-image-caption="" data-large-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/11/MA-D-First-Four-Novels-large.jpg?fit=629%2C944&amp;ssl=1" />
+								</div>
+
+								<div class="inner">
+									<p class="title">Micro-Wolfenomics: Joan Gordon reviews &#8216;Gene Wolfe’s First Four Novels: A Chapter Guide&#8217; by Michael Andre-Driussi</p>
+									<p class="meta">23 November 2020</p>
+								</div>
+
+							</a>
+
+						</li>
+
+						
+						<li class="group">
+
+							<a href="https://ultan.org.uk/a-curiously-conflicted-book-craig-brewer-reviews-gene-wolfes-interlibrary-loan/">
+
+								<div class="post-icon">
+
+									<img width="100" height="150" src="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?fit=100%2C150&amp;ssl=1" class="attachment-thumbnail size-thumbnail wp-post-image" alt="The front cover of &quot;Interlibrary Loan&quot;" decoding="async" loading="lazy" srcset="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?w=1650&amp;ssl=1 1650w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=200%2C300&amp;ssl=1 200w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=700%2C1050&amp;ssl=1 700w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=100%2C150&amp;ssl=1 100w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=768%2C1152&amp;ssl=1 768w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=1024%2C1536&amp;ssl=1 1024w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=1365%2C2048&amp;ssl=1 1365w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=900%2C1350&amp;ssl=1 900w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?resize=1280%2C1920&amp;ssl=1 1280w" sizes="auto, (max-width: 100px) 100vw, 100px" data-attachment-id="2069" data-permalink="https://ultan.org.uk/a-curiously-conflicted-book-craig-brewer-reviews-gene-wolfes-interlibrary-loan/interlibrary-loan/" data-orig-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?fit=1650%2C2475&amp;ssl=1" data-orig-size="1650,2475" data-comments-opened="0" data-image-title="Interlibrary Loan" data-image-description="" data-image-caption="" data-large-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/10/Interlibrary-Loan.jpg?fit=629%2C944&amp;ssl=1" />
+								</div>
+
+								<div class="inner">
+									<p class="title">A Curiously Conflicted Book: Craig Brewer reviews &#8216;Interlibrary Loan&#8217;</p>
+									<p class="meta">9 November 2020</p>
+								</div>
+
+							</a>
+
+						</li>
+
+						
+						<li class="group">
+
+							<a href="https://ultan.org.uk/a-weird-mystery-james-wynn-considers-gene-wolfes-a-borrowed-man/">
+
+								<div class="post-icon">
+
+									<img width="150" height="81" src="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?fit=150%2C81&amp;ssl=1" class="attachment-thumbnail size-thumbnail wp-post-image" alt="PS Publishing edition of &quot;A Borrowed Man&quot;" decoding="async" loading="lazy" srcset="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?w=689&amp;ssl=1 689w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?resize=300%2C162&amp;ssl=1 300w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?resize=150%2C81&amp;ssl=1 150w" sizes="auto, (max-width: 150px) 100vw, 150px" data-attachment-id="1887" data-permalink="https://ultan.org.uk/a-weird-mystery-james-wynn-considers-gene-wolfes-a-borrowed-man/ultans-library-review/" data-orig-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?fit=689%2C372&amp;ssl=1" data-orig-size="689,372" data-comments-opened="0" data-image-title="Ultan&amp;#8217;s Library review" data-image-description="" data-image-caption="" data-large-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/09/Ultans-Library-review.jpg?fit=629%2C340&amp;ssl=1" />
+								</div>
+
+								<div class="inner">
+									<p class="title">A Weird Mystery: James Wynn considers Gene Wolfe&#8217;s &#8216;A Borrowed Man&#8217;</p>
+									<p class="meta">26 October 2020</p>
+								</div>
+
+							</a>
+
+						</li>
+
+						
+						<li class="group">
+
+							<a href="https://ultan.org.uk/review-gene-wolfes-operation-ares/">
+
+								<div class="post-icon">
+
+									<img width="89" height="150" src="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?fit=89%2C150&amp;ssl=1" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Cover of Fontana paperback edition of &quot;Operation ARES&quot;" decoding="async" loading="lazy" srcset="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?w=282&amp;ssl=1 282w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?resize=178%2C300&amp;ssl=1 178w, https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?resize=89%2C150&amp;ssl=1 89w" sizes="auto, (max-width: 89px) 100vw, 89px" data-attachment-id="1859" data-permalink="https://ultan.org.uk/review-gene-wolfes-operation-ares/operation-ares/" data-orig-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?fit=282%2C475&amp;ssl=1" data-orig-size="282,475" data-comments-opened="0" data-image-title="Operation ARES" data-image-description="" data-image-caption="" data-large-file="https://i0.wp.com/ultan.org.uk/wp-content/uploads/2020/08/Operation-ARES.jpg?fit=282%2C475&amp;ssl=1" />
+								</div>
+
+								<div class="inner">
+									<p class="title">Review: Gene Wolfe’s &#8216;Operation ARES&#8217;</p>
+									<p class="meta">3 August 2020</p>
+								</div>
+
+							</a>
+
+						</li>
+
+						
+				</ul>
+
+			</div></div></div>
+					
+											<div class="widgets"><div id="meta-5" class="widget widget_meta"><div class="widget-content"><h3 class="widget-title">Meta</h3>
+		<ul>
+						<li><a href="https://ultan.org.uk/wp-login.php">Log in</a></li>
+			<li><a href="https://ultan.org.uk/feed/">Entries feed</a></li>
+			<li><a href="https://ultan.org.uk/comments/feed/">Comments feed</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</div></div></div>
+					
+				</div><!-- .section-inner -->
+			</footer><!-- .footer.section -->
+
+		
+		<div class="credits section bg-dark">
+
+			<div class="credits-inner section-inner">
+
+				<p class="powered-by">Powered by <a href="https://www.wordpress.org">WordPress</a> <span class="sep">&amp;</span> <span class="theme-by">Theme by <a href="https://andersnoren.se">Anders Nor&eacute;n</a></span></p>
+
+			</div><!-- .section-inner -->
+
+		</div><!-- .credits.section -->
+
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/lovecraft/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://ultan.org.uk/variance-reduction-techniques/":750};
+	</script>
+				<script id="lovecraft_global-js" src="https://ultan.org.uk/wp-content/themes/lovecraft/assets/js/global.js?ver=2.1.2"></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"50942462","post":"750","tz":"1","srv":"ultan.org.uk","j":"1:16.1.3"} ]);
+_stq.push([ "clickTrackerInit", "50942462", "750" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202636.js"></script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="sharing-js-js" src="https://ultan.org.uk/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=16.1.3"></script>
+<script id="sharing-js-js-after">
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-facebook' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-twitter' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-tumblr' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-tumblr' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+						return false;
+					}
+				} );
+			} )();
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://ultan.org.uk/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://ultan.org.uk/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+	</body>
+</html>

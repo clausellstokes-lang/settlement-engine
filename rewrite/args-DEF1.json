@@ -1,0 +1,64 @@
+{
+ "block": "DS-DEF-1",
+ "dock": "laneRW-DEF1",
+ "pools": [
+  {
+   "pool": "readiness STRONG",
+   "dir": "ds-def-1--readiness-strong",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  },
+  {
+   "pool": "readiness ADEQUATE",
+   "dir": "ds-def-1--readiness-adequate",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  },
+  {
+   "pool": "readiness WEAK",
+   "dir": "ds-def-1--readiness-weak",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "readiness CRITICAL",
+   "dir": "ds-def-1--readiness-critical",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "terrain FAVOURABLE to the defender",
+   "dir": "ds-def-1--terrain-favourable-to-the-defender",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "terrain EXPOSED",
+   "dir": "ds-def-1--terrain-exposed",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "strategic value HIGH",
+   "dir": "ds-def-1--strategic-value-high",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "strategic value LOW",
+   "dir": "ds-def-1--strategic-value-low",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  }
+ ],
+ "wiringDebt": [],
+ "maxRounds": 6
+}

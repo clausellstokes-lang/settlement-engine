@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 130,
+ "firstTs": "2026-09-12T01:26:12.861Z",
+ "lastTs": "2026-09-12T01:41:26.322Z",
+ "tools": {
+  "Bash": 32,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I have everything I need. Let me write the verdicts to the packet file.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a673b92c299bb231a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a673b92c299bb231a.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

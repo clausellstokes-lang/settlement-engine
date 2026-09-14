@@ -1,0 +1,611 @@
+                                                         Surprisal reveals diversity gaps in image captioning
+                                                               and different scorers change the story
+
+                                                                     Nikolai Ilinykh and Simon Dobnik
+                                                       Centre for Linguistic Theory and Studies in Probability (CLASP),
+                                                      Department of Philosophy, Linguistics and Theory of Science (FLoV),
+                                                                      University of Gothenburg, Sweden
+                                                                  {nikolai.ilinykh,simon.dobnik}@gu.se
+
+
+                                                              Abstract                          2025). However, such benchmarks assume a sin-
+                                                                                                gle ground truth and often focus on targeting this
+                                            We quantify linguistic diversity in image cap-
+
+
+
+
+arXiv:2511.04754v1 [cs.CL] 6 Nov 2025
+                                                                                                very benchmark, meeting a certain metric score
+                                            tioning with surprisal variance – the spread of
+                                            token-level negative log-probabilities within a     (Schlangen, 2021). As a result, the diversity of
+                                            caption set. On the MSCOCO test set, we com-        model language is often sidelined – even though
+                                            pare five state-of-the-art vision-and-language      prior studies argue that missing variability is criti-
+                                            LLMs, decoded with greedy and nucleus sam-          cal for evaluating multi-modal models (Castro Fer-
+                                            pling, to human captions. Measured with a           reira et al., 2016; Li et al., 2016b; van Miltenburg
+                                            caption-trained n-gram LM, humans display           et al., 2018). Existing diversity metrics for tasks
+                                            roughly twice the surprisal variance of models,
+                                                                                                such as image captioning (Shetty et al., 2017; van
+                                            but rescoring the same captions with a general-
+                                            language model reverses the pattern. Our analy-     Miltenburg et al., 2018), rely on surface counts
+                                            sis introduces the surprisal-based diversity met-   (length, type–token ratio, distinct-n) and lack a
+                                            ric for image captioning. We show that relying      principled link to linguistic processing.
+                                            on a single scorer can completely invert con-          In this study we examine diversity of image cap-
+                                            clusions, thus, robust diversity evaluation must    tions through the notion of surprisal, a probability-
+                                            report surprisal under several scorers.             weighted and context-sensitive probe. The sur-
+                                                                                                prisal, a negative log-probability of a word in con-
+                                        1   Introduction
+                                                                                                text, has been widely used in linguistic analysis to
+                                        Every person is unique in their linguistic behaviour:   quantify the processing cost of a message (Hale,
+                                        the same image may evoke many different yet valid       2001; Levy, 2008) and has proved to be a robust
+                                        descriptions depending on their different personal      metric across languages (Pimentel et al., 2021;
+                                        contexts, beliefs, attention, and background knowl-     Wilcox et al., 2023). Generic, more commonly
+                                        edge. This “natural variability” has been docu-         used words and phrases across speakers or models
+                                        mented in linguistic annotation (Plank et al., 2014;    are easier for either to produce, hence any poten-
+                                        Plank, 2022), inference (Pavlick and Kwiatkowski,       tial differences in the measured surprisal between
+                                        2019), object naming (Silberer et al., 2020), and im-   these two groups naturally reveal any differences in
+                                        age captioning (Bernardi et al., 2016). On the other    diversity of their linguistic behaviour (Gehrmann
+                                        hand, although vision-and-language models may           et al., 2019; Venkatraman et al., 2024; Xu et al.,
+                                        capture fragmets of individual styles, they are nor-    2024). We extend this line of work from text-only
+                                        mally not trained with capturing diversity in mind.     settings to image captions.
+                                        They are optimised for maximum-likelihood esti-            We estimate the probabilities used to measure
+                                        mation (MLE), a function that rewards word com-         surprisal using two probabilistic scorers (i) an n-
+                                        binations already dominant in the training corpus       gram model trained on a large corpus consisting
+                                        and penalises rarer phrasing (Devlin et al., 2015;      of a balanced collection of human and model gen-
+                                        Dai et al., 2017). Decoding tweaks (e.g. nucleus        erated image captions (in-domain expert), and (ii)
+                                        sampling (Holtzman et al., 2020)) or alternative        GPT-2 (Radford et al., 2019), a general-purpose
+                                        objectives (Welleck et al., 2020; Li et al., 2016a)     transformer trained on broad English. As we do
+                                        may mitigate this effect. Still, transformer-based      not have access to the true population of all pos-
+                                        models trained with MLE now achieve impressive          sible captions for images, we follow earlier work
+                                        accuracy on caption benchmarks (Alayrac et al.,         (Smith and Levy, 2013; Wilcox et al., 2023; Giu-
+                                        2022; Li et al., 2023; Bai et al., 2025; Zhu et al.,    lianelli et al., 2023) and approximate the underly-
+ing distribution with two different language models.         InternVL3-78B-78B-Instruct (Zhu et al., 2025),
+Inspired by the scorer-sensitivity findings of Arora         Llama-4-Scout-17B-16E-Instruct2 , Claude Sonnet
+et al. (2022), our dual-scorer design tests whether          43 , and GPT-4o (OpenAI et al., 2024). These
+conclusions about diversity change with the change           include both closed-source systems and large
+of the evaluator of surprisal.                               open-source models, all ranking among the top
+   Our research questions are:                               performers on the MMMU benchmark (Yue et al.,
+                                                             2024). Our choice of five models is intended to
+    1. Are human descriptions of individual images           correspond to five human describers per image
+       more diverse than those generated by lan-             in the MS COCO dataset (Lin et al., 2014). This
+       guage models in terms of the estimated sur-           way we attempt to mirror a scenario of difference
+       prisal of the in-domain unbiased scorer?              in experience between between different human
+    2. Do predictions of this scorer align to those of       describers, as the models are based on different
+       a general language model scorer which has             architectures and training regimes. More on
+       been trained on open text?                            technical details can be found in Appendix A.We
+                                                             produce two different sets of texts by running
+   As artificial describers (description genera-             models with two decoding algorithms: greedy
+tors) we analyse five state-of-the-art vision-and-           search and nucleus sampling (Holtzman et al.,
+language models and compare their descriptions               2020). Different decoding strategies let us assess
+with human captions. Like Zamaraeva et al. (2025),           model captions in a more nuanced way since
+who used linguistic theory to identify syntactic             decoding has a strong effect on the output in NLG
+gaps in LLM-generated news compared to human-                (Zarrieß et al., 2021).
+authored news, we resort to the linguistic theory of
+surprisal to evaluate multi-modal language, show-            2.3   Scorers of caption probability
+ing how scorer choice interacts with caption dis-                  distributions
+tributions. Our study reveals a clear difference in          Overview For each image in our dataset, we train
+surprisal and therefore diversity between human              a single Kneser–Ney-smoothed n-gram model (bi-
+and model captions, and, importantly, that the di-           and tri-) on the union of all human and model cap-
+rection of this diversity flips with the chosen scorer.      tions except those associated with that target image
+These differences between evaluation scorers un-             which will be our test set. As the probabilities es-
+derscore the need for future benchmarks to include           timated by this model are based on both human
+surprisal-based diversity scores computed under              and artificially generated captions we use this “bal-
+several, well-motivated scorers.                             anced” language model to score each of the the
+                                                             held-out captions (five human, five machine), giv-
+2       Materials and methods                                ing us one surprisal value per caption. Our zero
+2.1      Data                                                hypothesis is that this model by virtue of being bal-
+                                                             anced) will predict no differences in surprisal value
+We use the Karpathy test-split of MSCOCO (Lin
+                                                             between human and model generated captions of
+et al., 2014), which consists of 5000 images
+                                                             individual images.
+each paired with five independent human captions
+(25000 descriptions total). MSCOCO is one of                 Training details We train both bigram and tri-
+the popular and commonly used image captioning               gram models to check that our findings are ro-
+benchmarks. It provides multiple human references            bust to context size. All models are implemented
+per image – exactly what we need to quantify how             with NLTK’s KneserNeyInterpolated language
+diversely an image can be described by humans                model API (Bird et al., 2009; Kneser and Ney,
+and models1 .                                                1995). With 5000 images × 10 captions each, each
+                                                             leave-one-image-out model is trained on (5000 −
+2.2      Models
+                                                             1) × 10 = 49 990 captions. The vocabulary of the
+We   use   five  vision–language    models                   model is built from the training pool (excluding
+to generate one description per image:                       the target image). Pooling human and machine
+Qwen2.5-VL-72B-Instruct (Bai et al., 2025),                     2
+                                                                  https://ai.meta.com/blog/
+    1                                                        llama-4-multimodal-intelligence/
+    We note that MSCOCO is widely incorporated in training
+                                                                3
+of multi-modal LLMs.                                              https://www.anthropic.com/news/claude-4
+captions ensures both groups contribute the same         Source    ASL ± SDSL      #Types    TTR1      TTR2
+n-gram types and counts, so rare-word penalties          Human   10.44 ± 2.36       7,252     0.28     0.66
+are applied equally. Also, since all captions are        greedy 39.19 ± 53.35      10,783     0.29     0.66
+                                                         nucleus 40.00 ± 27.94     13,082     0.33     0.73
+scored by the same language model, per-token sur-
+prisal is directly comparable between human and         Table 1: Overall lexical statistics for human captions
+model outputs. Even if models saw MSCOCO dur-           and all model captions combined under greedy and
+ing pre-training, our leave-one-image-out n-gram        nucleus decoding. ASL = Average Sentence Length
+setup excludes each target image’s captions from        (tokens per caption), SDSL = Standard Deviation of
+training, so repeated references are still treated as   Sentence Length, #Types = number of unique word
+new, ensuring surprisal reflects style rather than      types, TTR1 = type-token ratio (per 1000 tokens), TTR2
+memorisation.                                           = bigram type–token ratio (per 1000 bigrams).
+
+2.4    Surprisal as evaluation metric
+In psycholinguistics and computational linguistics,     times longer. However, once normalised by output
+surprisal (Shannon, 1948) is a well-established         length (TTR metrics), the groups converge. This
+measure of the information conveyed by a word           interesting result suggests that the apparent rich-
+in context. Formally, the surprisal of a linguistic     ness of model vocabulary is largely an artifact of
+unit wt given preceding units w<t is defined as the     their verbosity. When captions are several times
+negative log-likelihood of the word conditioned on      longer, the chance of introducing new word types
+previous context (Hale, 2001; Levy, 2008):              naturally increases, even if much of the added mate-
+                                                        rial is repetitive. Once we control for output length,
+                                                        however, the underlying lexical behaviour looks
+           I(wt ) = − log Pθ (wt | w<t ),        (1)    remarkably similar. This convergence implies that
+                                                        models, like humans, operate within a comparable
+where P is the underlying probability distribution.     core vocabulary for the task, but their training en-
+Intuitively, treating units as words, predictable       courages them to elaborate rather than compress.
+words carry less information (lower surprisal),         In other words, verbosity does not necessarily trans-
+while unexpected words convey more (higher sur-         late to greater genuine lexical creativity – instead,
+prisal). We use surprisal to quantify linguistic un-    it may reflect a tendency to “pad” responses with
+predictability in image captions under a model θ        familiar constructions, a behaviour aligned with
+trained to approximate P . We compute word-level        next-word prediction training objectives rather than
+surprisals and average them across each caption         pragmatic efficiency in describing images.
+to estimate how predictable the caption is under a         Overall, the results in Table 2 demonstrate that
+given evaluator. Captions with higher average sur-      models lengthen their captions mostly by repeating
+prisal are considered more lexically or structurally    words known to them, so the proportion of gen-
+novel, while captions with lower surprisal follow       uinely new vocabulary remains virtually the same
+patterns captured in Pθ .                               as in the brief human captions. Such extensive text
+                                                        generation is not pragmatically required as demon-
+3     Experiments and results
+                                                        strated by the much shorter human-generated texts
+Before moving to our surprisal-based experiments,       for the captioning task. These findings can also
+we first ask if model captions even look like hu-       be linked to differences in captioning guidelines:
+man captions on lexical level. We compute several       those presented to humans for MSCOCO data col-
+metrics described in van Miltenburg et al. (2018);      lection (i.e., “focus on visual content”) versus those
+the results are shown in Table 1. A table with per      followed by instruction-tuned models, which were
+model lexical diversity metrics is available in Ap-     trained to pursue a different goal from that of hu-
+pendix C. The results show that human and model         mans. The reason for the models’ verbosity could
+captions look different. Humans produce concise,        thus be their tendency to generate texts features dif-
+about 10 words long captions with little variation,     ferent from those found in human-generated texts,
+whereas models spin out strings three to four times     including syntactic structures and vocabulary di-
+longer and far less consistent in length. Despite       versity (Muñoz-Ortiz et al., 2024) as well as gram-
+this gap, models list far more unique words than        matical differences (Zamaraeva et al., 2025). The
+humans, possibly because their captions are several     effect of the task provided to the image describers
+                                                                            Human              Model
+                     Pθ                        Data                                                            t-value      dz
+                                                                     Mean ± SD              Mean ± SD
+             Bi-gram LM                  H ∪ Mgreedy               5.20 ± 5.04             2.17 ± 2.00        40.88***     0.58
+             Tri-gram LM                 H ∪ Mgreedy               7.39 ± 6.04             3.71 ± 3.04        39.45***     0.56
+             Bi-gram LM                  H ∪Mnucleus               5.03 ± 4.95             4.08 ± 3.30        11.50***     0.16
+             Tri-gram LM                 H ∪Mnucleus               7.34 ± 6.09             6.74 ± 4.49        5.70***      0.08
+          GPT-2 (small)                  H ∪ Mgreedy               1.565 ± 1.521           2.015 ± 1.323 -16.37***         0.23
+         GPT-2 (medium)                  H ∪ Mgreedy               1.485 ± 1.420           2.016 ± 1.316 -20.31***         0.29
+           GPT-2 (XL)                    H ∪ Mgreedy               1.438 ± 1.344           1.954 ± 1.243 -20.85***         0.29
+          GPT-2 (small)                  H ∪Mnucleus               1.565 ± 1.521           2.906 ± 24.788 -3.82***         0.05
+         GPT-2 (medium)                  H ∪Mnucleus               1.485 ± 1.420           2.903 ± 24.824 -4.03***         0.06
+           GPT-2 (XL)                    H ∪Mnucleus               1.438 ± 1.344           2.911 ± 23.710 -4.39***         0.06
+
+Table 2: Variance in surprisal for human and model image descriptions (n = 5,000 images; paired t-test, df = 4 999).
+***
+   indicates p < .001. dz ≥ 0.50 indicates moderate effect size, dz < 0.20 indicates small effect size. For n-gram
+models, training data for each language-model order n (under “Data” column) is the union of the human corpus H
+and machine-generated texts M produced with the indicated decoding strategy (greedy or nucleus sampling). The
+same data was used to test pre-trained GPT-2.
+
+
+                                                                                    pear, but how unexpectedly they are combined.
+                                                                                       One striking difference is that models tend
+                                                                                    to overdescribe visual information exhaustively,
+                                                                                    while humans focus on particular elements. This se-
+      Human caption:                                                                lectivity may also allow for greater diversity since
+      “The two monitors are sitting among the laptops.”
+                                                                                    different humans can choose to highlight different
+      GPT4o:
+      “The workspace setup includes two laptops, two external monitors,
+                                                                                    aspects of an image. If humans are behaving prag-
+      two full-size keyboards, and various accessories. One laptop on the           matically, they generate optimal (concise) captions,
+      left is open and displaying a green-themed image, while another
+      on the right sits elevated on a stand showing a white car. The                and anything longer would be pragmatically inap-
+      two central monitors display websites and applications, likely
+      for multitasking. The desk also holds a pair of headphones, a                 propriate. Multi-modal LLMs, by contrast, struggle
+      computer mouse for each setup, a smartphone, and other small                  to capture captioning intent because they produce
+      electronics, indicating a high-performance workstation for media,
+      development, or design tasks.”                                                much longer texts. This is an interesting finding
+                                                                                    as it raises the question of what constitutes a good
+Figure 1: An example image from MSCOCO test set
+with one human reference and one model caption.                                     model-generated description. We leave this discus-
+                                                                                    sion for future work. Next, we move to our main
+                                                                                    experiments.
+on the properties and features of the produced cap-
+                                                                                    3.1   Surprisal within groups: in-domain
+tions is also important (Ilinykh et al., 2018). Two
+captions can be similar or different in terms of                                    We compute surprisal variance across five cap-
+length and number of types, yet be radically dif-                                   tions per group for each image and use a paired
+ferent in how predictable or information-rich they                                  t-test (Gosset, 1908) to check if human and model
+are. Look at the example in Figure 1. Both cap-                                     variances differ. As shown in Table 2, for both
+tions mention the same objects (monitors, laptops)                                  n-gram orders under both decoding methods, hu-
+and share word types, but the model’s version ex-                                   man descriptions have shown roughly two times
+plores far less frequent phrases (“workspace setup”.                                higher variance in surprisal than model descrip-
+“green-themed image”) and long chains of modi-                                      tions. Switching to nucleus narrows the gap, but
+fiers that could carry a different amount of informa-                               only slightly as humans still remain the more vari-
+tion content. Surprisal under scorers can capture                                   able group. This result suggests that different mod-
+these probability-weighted differences that surface                                 els (although the differ in size, training data and
+counts alone cannot. In other words, surprisal lets                                 performance on benchmarks) tend to generate im-
+us measure not just how many different words ap-                                    age descriptions with similar information content,
+whereas humans offer more variance in the informa-        within-domain variation, while GPT-2 highlights
+tion they express. Per model descriptive analysis is      divergence from general-purpose English usage.
+available in Appendix B.                                  The methodological implication is that conclusions
+                                                          about human–model variability depend strongly on
+3.2    Surprisal within groups: general-domain            the choice of reference probability distribution.
+The analysis in Section 3.1 characterises surprisal
+variance under the probability distribution Pθ that       4   Conclusion
+is estimated by a simple n-gram language model
+                                                          Our study provides three main messages. First, us-
+trained in-domain. While these models provide in-
+                                                          ing surprisal as a measure of diversity gap in image
+terpretable baselines, their probability estimates are
+                                                          captioning requires reporting under multiple scor-
+limited by local context and the sparsity of the cap-
+                                                          ers. Doing so will (i) prevent over-interpretation
+tion corpus. To test whether our findings generalise
+                                                          of scores tied to one distribution, and (ii) encour-
+under a richer representation of linguistic struc-
+                                                          age future models to match human-level variability
+ture, we replace the caption-trained n-gram models
+                                                          inside the caption genre rather than describing im-
+with a large pre-trained language model (GPT-2
+                                                          ages in general language. The apparent reversal in
+(Radford et al., 2019)). This substitution changes
+                                                          variance of surprisal within describer groups is a
+the underlying probability distribution to the one
+                                                          diagnostic of whose expectations one chooses as
+trained on a much broader and more expressive
+                                                          their scorer. The two different scorers we employ
+corpus, that is more of a general English corpus
+                                                          in this short study should be seen as two comple-
+rather than caption-related one. By doing so, we
+                                                          mentary metrics. Our work is thus helpful when
+can examine whether the observed human–model
+                                                          deciding which scorer to choose given a particular
+differences in surprisal variance persist when sur-
+                                                          task.
+prisal is computed under a generally more power-
+ful, but different model of language. To compute          Limitations
+surprisal with GPT-2, we use codebase provided
+by Oh et al. (2024)4 . Recently, previous research        Our analysis centers around two probability models
+has used LLMs as surprisal scorers in the context         to compute surprisal: the caption-domain n-gram
+of second-language writing development (Hu and            language model and GPT-2. Using additional scor-
+Cong, 2025). According to Table 2, when sur-              ers, including larger or instruction-tuned LLMs will
+prisal is estimated with the general English lan-         test whether the observed patterns generalise un-
+guage scorer, the trends reverse. Across all GPT-2        der different scorers. We use MSCOCO Karpathy
+configurations, human surprisal variance was lower        test split because it offers five independent human
+than model variance, with significant paired differ-      references per image. Running our experiments
+ences. One possible explanation for this reversal         on other datasets with different stylistic conven-
+lies in the training objectives and data distributions    tions and multiple references such as Flickr 30k
+of the respective models. The in-domain n-gram            (Plummer et al., 2016) would test robustness of
+model trained only on captions is highly sensitive        our method. Linking variance in surprisal to ac-
+to local lexical patterns and reflects the narrow         curacy metrics such as BERTScore (Zhang et al.,
+regularities of the captioning domain. In contrast,       2020) or MoverScore (Zhao et al., 2019) will show
+GPT-2 is trained on broad and heterogeneous cor-          whether diversity gains align with or trade off
+pora with the objective of next-word prediction.          against semantic quality. Finally, both captions and
+Under this objective, model-generated captions            scorers are English-based; the interaction between
+may appear more variable because they deviate             genre-specific and general-language scorers may
+from the stylistic and structural norms GPT-2 has         differ in morphologically richer or typologically
+internalised from general English texts, whereas          distant languages.
+human captions – short, formulaic, and pragmat-
+                                                          Acknowledgments
+ically efficient – are closer to those norms and
+thus exhibit lower surprisal variance. In this sense,     The work reported in this paper has been supported
+the two scorers are complementary rather than di-         by a grant from the Swedish Research Council (VR
+rectly comparable: the n-gram model emphasises            project 2014-39) for the establishment of the Cen-
+   4
+    The codebase is available here: https://github.com/   tre for Linguistic Theory and Studies in Probability
+byungdoh/llm_surprisal                                    (CLASP) at the University of Gothenburg. The
+computations and data storage were enabled by re-             Italy, October 22-29, 2017, pages 2989–2998. IEEE
+sources provided by the National Academic Infras-             Computer Society.
+tructure for Supercomputing in Sweden (NAISS),              Jacob Devlin, Saurabh Gupta, Ross B. Girshick, Mar-
+partially funded by the Swedish Research Council               garet Mitchell, and C. Lawrence Zitnick. 2015. Ex-
+through grant agreement no. 2022-06725.                        ploring nearest neighbor approaches for image cap-
+                                                               tioning. ArXiv, abs/1505.04467.
+                                                            Sebastian Gehrmann, Hendrik Strobelt, and Alexander
+References                                                    Rush. 2019. GLTR: Statistical detection and visual-
+                                                              ization of generated text. In Proceedings of the 57th
+Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc,             Annual Meeting of the Association for Computational
+  Antoine Miech, Iain Barr, Yana Hasson, Karel                Linguistics: System Demonstrations, pages 111–116,
+   Lenc, Arthur Mensch, Katherine Millican, Malcolm           Florence, Italy. Association for Computational Lin-
+   Reynolds, Roman Ring, Eliza Rutherford, Serkan             guistics.
+   Cabi, Tengda Han, Zhitao Gong, Sina Samangooei,
+   Marianne Monteiro, Jacob L Menick, Sebastian             Mario Giulianelli, Joris Baan, Wilker Aziz, Raquel
+   Borgeaud, and 8 others. 2022. Flamingo: a visual lan-     Fernández, and Barbara Plank. 2023. What comes
+   guage model for few-shot learning. In Advances in         next? evaluating uncertainty in neural text generators
+  Neural Information Processing Systems, volume 35,          against human production variability. In Proceed-
+   pages 23716–23736. Curran Associates, Inc.                ings of the 2023 Conference on Empirical Methods in
+                                                             Natural Language Processing, pages 14349–14371,
+Aryaman Arora, Clara Meister, and Ryan Cotterell.            Singapore. Association for Computational Linguis-
+  2022. Estimating the entropy of linguistic distri-         tics.
+  butions. In Proceedings of the 60th Annual Meet-
+  ing of the Association for Computational Linguistics      William Sealy Gosset. 1908. The probable error of a
+  (Volume 2: Short Papers), pages 175–195, Dublin,            mean. Biometrika, 6(1):1–25. Originally published
+  Ireland. Association for Computational Linguistics.         under the pseudonym “Student”.
+
+Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wen-       John Hale. 2001. A probabilistic Earley parser as a psy-
+  bin Ge, Sibo Song, Kai Dang, Peng Wang, Shi-                cholinguistic model. In Second Meeting of the North
+  jie Wang, Jun Tang, Humen Zhong, Yuanzhi Zhu,               American Chapter of the Association for Computa-
+  Mingkun Yang, Zhaohai Li, Jianqiang Wan, Pengfei            tional Linguistics.
+  Wang, Wei Ding, Zheren Fu, Yiheng Xu, and 8 oth-
+                                                            Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+  ers. 2025. Qwen2.5-vl technical report. Preprint,
+                                                              Yejin Choi. 2020. The curious case of neural text
+  arXiv:2502.13923.
+                                                              degeneration. In 8th International Conference on
+Raffaella Bernardi, Ruket Çakici, Desmond Elliott,            Learning Representations, ICLR 2020, Addis Ababa,
+  Aykut Erdem, Erkut Erdem, Nazli Ikizler-Cinbis,             Ethiopia, April 26-30, 2020. OpenReview.net.
+  Frank Keller, Adrian Muscat, and Barbara Plank.           Jingying Hu and Yan Cong. 2025. Modeling Chinese
+  2016. Automatic description generation from im-              L2 writing development: The LLM-surprisal perspec-
+  ages: A survey of models, datasets, and evaluation           tive. In Proceedings of the Workshop on Cognitive
+  measures. J. Artif. Intell. Res., 55:409–442.                Modeling and Computational Linguistics, pages 172–
+                                                               183, Albuquerque, New Mexico, USA. Association
+Steven Bird, Ewan Klein, and Edward Loper. 2009. Nat-
+                                                               for Computational Linguistics.
+   ural Language Processing with Python. O’Reilly.
+                                                            Nikolai Ilinykh, Sina Zarrieß, and David Schlangen.
+Thiago Castro Ferreira, Emiel Krahmer, and Sander             2018. The task matters: Comparing image caption-
+  Wubben. 2016. Towards more variation in text gen-           ing and task-based dialogical image description. In
+  eration: Developing and evaluating variation models         Proceedings of the 11th International Conference
+  for choice of referential form. In Proceedings of the       on Natural Language Generation, pages 397–402,
+  54th Annual Meeting of the Association for Compu-           Tilburg University, The Netherlands. Association for
+  tational Linguistics (Volume 1: Long Papers), pages         Computational Linguistics.
+  568–577, Berlin, Germany. Association for Compu-
+  tational Linguistics.                                     R. Kneser and H. Ney. 1995. Improved backing-off
+                                                              for m-gram language modeling. In 1995 Interna-
+Xinlei Chen, Hao Fang, Tsung-Yi Lin, Ramakr-                  tional Conference on Acoustics, Speech, and Signal
+  ishna Vedantam, Saurabh Gupta, Piotr Dollar, and            Processing, volume 1, pages 181–184 vol.1.
+  C. Lawrence Zitnick. 2015. Microsoft coco cap-
+  tions: Data collection and evaluation server. Preprint,   Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying
+  arXiv:1504.00325.                                          Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E.
+                                                             Gonzalez, Hao Zhang, and Ion Stoica. 2023. Effi-
+Bo Dai, Sanja Fidler, Raquel Urtasun, and Dahua Lin.         cient memory management for large language model
+  2017. Towards diverse and natural image descrip-           serving with pagedattention. In Proceedings of the
+  tions via a conditional GAN. In IEEE International         ACM SIGOPS 29th Symposium on Operating Systems
+  Conference on Computer Vision, ICCV 2017, Venice,          Principles.
+Roger Levy. 2008. Expectation-based syntactic compre-     Tiago Pimentel, Clara Meister, Elizabeth Salesky, Si-
+  hension. Cognition, 106(3):1126–1177.                     mone Teufel, Damián Blasi, and Ryan Cotterell.
+                                                            2021. A surprisal–duration trade-off across and
+Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao,      within the world’s languages. In Proceedings of the
+   and Bill Dolan. 2016a. A diversity-promoting ob-         2021 Conference on Empirical Methods in Natural
+   jective function for neural conversation models. In      Language Processing, pages 949–962, Online and
+   Proceedings of the 2016 Conference of the North          Punta Cana, Dominican Republic. Association for
+  American Chapter of the Association for Computa-          Computational Linguistics.
+   tional Linguistics: Human Language Technologies,
+   pages 110–119, San Diego, California. Association      Barbara Plank. 2022. The “problem” of human label
+   for Computational Linguistics.                           variation: On ground truth in data, modeling and
+                                                            evaluation. In Proceedings of the 2022 Conference
+Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao,      on Empirical Methods in Natural Language Process-
+   and Bill Dolan. 2016b. A diversity-promoting ob-         ing, pages 10671–10682, Abu Dhabi, United Arab
+   jective function for neural conversation models. In      Emirates. Association for Computational Linguistics.
+   Proceedings of the 2016 Conference of the North
+  American Chapter of the Association for Computa-        Barbara Plank, Dirk Hovy, and Anders Søgaard. 2014.
+   tional Linguistics: Human Language Technologies,         Linguistically debatable or just plain wrong? In
+   pages 110–119, San Diego, California. Association        Proceedings of the 52nd Annual Meeting of the As-
+   for Computational Linguistics.                           sociation for Computational Linguistics (Volume 2:
+                                                            Short Papers), pages 507–511, Baltimore, Maryland.
+Junnan Li, Dongxu Li, Silvio Savarese, and Steven C. H.     Association for Computational Linguistics.
+  Hoi. 2023. BLIP-2: bootstrapping language-image
+  pre-training with frozen image encoders and large       Bryan A. Plummer, Liwei Wang, Chris M. Cervantes,
+  language models. In International Conference on           Juan C. Caicedo, Julia Hockenmaier, and Svetlana
+  Machine Learning, ICML 2023, 23-29 July 2023,             Lazebnik. 2016. Flickr30k entities: Collecting
+  Honolulu, Hawaii, USA, volume 202 of Proceedings          region-to-phrase correspondences for richer image-
+  of Machine Learning Research, pages 19730–19742.          to-sentence models. Preprint, arXiv:1505.04870.
+  PMLR.
+                                                          Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+Tsung-Yi Lin, Michael Maire, Serge J. Belongie, James
+                                                            Dario Amodei, and Ilya Sutskever. 2019. Language
+  Hays, Pietro Perona, Deva Ramanan, Piotr Dollár,
+                                                            models are unsupervised multitask learners. OpenAI.
+  and C. Lawrence Zitnick. 2014. Microsoft COCO:
+                                                            Accessed: 2024-11-15.
+  common objects in context. In Computer Vision -
+  ECCV 2014 - 13th European Conference, Zurich,
+                                                          David Schlangen. 2021. Targeting the benchmark: On
+  Switzerland, September 6-12, 2014, Proceedings,
+                                                            methodology in current natural language processing
+  Part V, volume 8693 of Lecture Notes in Computer
+                                                            research. In Proceedings of the 59th Annual Meet-
+  Science, pages 740–755. Springer.
+                                                            ing of the Association for Computational Linguistics
+Alberto Muñoz-Ortiz, Carlos Gómez-Rodríguez, and            and the 11th International Joint Conference on Natu-
+  David Vilares. 2024. Contrasting linguistic patterns      ral Language Processing (Volume 2: Short Papers),
+  in human and llm-generated news text. Artificial          pages 670–674, Online. Association for Computa-
+  Intelligence Review, 57(10).                              tional Linguistics.
+
+Byung-Doh Oh, Shisen Yue, and William Schuler. 2024.      Claude Elwood Shannon. 1948. A mathematical the-
+  Frequency explains the inverse correlation of large       ory of communication. The Bell System Technical
+  language models’ size, training data amount, and          Journal, 27:379–423.
+  surprisal’s fit to reading times. In Proceedings of
+  the 18th Conference of the European Chapter of the      Rakshith Shetty, Marcus Rohrbach, Lisa Anne Hen-
+  Association for Computational Linguistics (Volume 1:      dricks, Mario Fritz, and Bernt Schiele. 2017. Speak-
+  Long Papers), pages 2644–2663, St. Julian’s, Malta.       ing the same language: Matching machine to hu-
+  Association for Computational Linguistics.                man captions by adversarial training. Preprint,
+                                                            arXiv:1703.10476.
+OpenAI, :, Aaron Hurst, Adam Lerer, Adam P. Goucher,
+  Adam Perelman, Aditya Ramesh, Aidan Clark,              Carina Silberer, Sina Zarrieß, Matthijs Westera, and
+  AJ Ostrow, Akila Welihinda, Alan Hayes, Alec              Gemma Boleda. 2020. Humans meet models on ob-
+  Radford, Aleksander M ˛adry, Alex Baker-Whitcomb,         ject naming: A new dataset and analysis. In Proceed-
+  Alex Beutel, Alex Borzunov, Alex Carney, Alex             ings of the 28th International Conference on Com-
+  Chow, Alex Kirillov, and 401 others. 2024. Gpt-4o         putational Linguistics, pages 1893–1905, Barcelona,
+  system card. Preprint, arXiv:2410.21276.                  Spain (Online). International Committee on Compu-
+                                                            tational Linguistics.
+Ellie Pavlick and Tom Kwiatkowski. 2019. Inherent
+   disagreements in human textual inferences. Transac-    Nathaniel J. Smith and Roger Levy. 2013. The effect
+   tions of the Association for Computational Linguis-      of word predictability on reading time is logarithmic.
+   tics, 7:677–694.                                         Cognition, 128(3):302–319.
+Emiel van Miltenburg, Desmond Elliott, and Piek                Natural Language Processing and the 9th Interna-
+  Vossen. 2018. Measuring the diversity of automatic           tional Joint Conference on Natural Language Pro-
+  image descriptions. In Proceedings of the 27th Inter-        cessing (EMNLP-IJCNLP), pages 563–578, Hong
+  national Conference on Computational Linguistics,            Kong, China. Association for Computational Lin-
+  pages 1730–1741, Santa Fe, New Mexico, USA. As-              guistics.
+  sociation for Computational Linguistics.
+                                                           Jinguo Zhu, Weiyun Wang, Zhe Chen, Zhaoyang Liu,
+Saranya Venkatraman, Adaku Uchendu, and Dongwon               Shenglong Ye, Lixin Gu, Hao Tian, Yuchen Duan,
+  Lee. 2024. GPT-who: An information density-based            Weijie Su, Jie Shao, Zhangwei Gao, Erfei Cui, Xue-
+  machine-generated text detector. In Findings of the         hui Wang, Yue Cao, Yangzhou Liu, Xingguang Wei,
+  Association for Computational Linguistics: NAACL            Hongjie Zhang, Haomin Wang, Weiye Xu, and 32
+  2024, pages 103–115, Mexico City, Mexico. Associ-           others. 2025. Internvl3: Exploring advanced train-
+  ation for Computational Linguistics.                        ing and test-time recipes for open-source multimodal
+                                                              models. Preprint, arXiv:2504.10479.
+Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Di-
+  nan, Kyunghyun Cho, and Jason Weston. 2020. Neu-         A       Technical details
+  ral text generation with unlikelihood training. In
+  8th International Conference on Learning Represen-       Each model was prompted with the following in-
+  tations, ICLR 2020, Addis Ababa, Ethiopia, April         structions:
+  26-30, 2020. OpenReview.net.
+                                                                Prompt Setup
+Ethan G. Wilcox, Tiago Pimentel, Clara Meister, Ryan
+  Cotterell, and Roger P. Levy. 2023. Testing the pre-          System prompt:
+  dictions of surprisal theory in 11 languages. Transac-
+  tions of the Association for Computational Linguis-           You are a helpful annotator tasked with de-
+  tics, 11:1451–1470.                                           scribing images. You will see one image
+                                                                and you will be asked to describe it.
+Yang Xu, Yu Wang, Hao An, Zhichen Liu, and
+  Yongyuan Li. 2024. Detecting subtle differences
+  between human and model languages using spec-                 User prompt:
+  trum of relative likelihood. In Proceedings of the            Describe all the important parts of the scene.
+  2024 Conference on Empirical Methods in Natural               Do not start the sentence with “There is”.
+  Language Processing, pages 10108–10121, Miami,                Do not describe unimportant details. Do not
+  Florida, USA. Association for Computational Lin-
+  guistics.                                                     describe things that might have happened in
+                                                                the future or past. Do not describe what a
+Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng,               person might say. Do not give people proper
+  Ruoqi Liu, Ge Zhang, Samuel Stevens, Dongfu
+                                                                names. The sentence should contain at least
+  Jiang, Weiming Ren, Yuxuan Sun, Cong Wei, Botao
+  Yu, Ruibin Yuan, Renliang Sun, Ming Yin, Boyuan               8 words.
+  Zheng, Zhenzhu Yang, Yibo Liu, Wenhao Huang, and
+  3 others. 2024. Mmmu: A massive multi-discipline            These instructions replicate those given to hu-
+  multimodal understanding and reasoning benchmark         man annotators in the MS COCO captioning
+  for expert agi. Preprint, arXiv:2311.16502.
+                                                           dataset (Chen et al., 2015). Each model received
+Olga Zamaraeva, Dan Flickinger, Francis Bond, and          both the prompt and the image as input.
+  Carlos Gómez-Rodríguez. 2025. Comparing llm-                The open-source models were loaded
+  generated and human-authored news text using for-
+  mal syntactic theory. Preprint, arXiv:2506.01407.
+                                                           from HuggingFace repositories.          We used
+                                                           OpenGVLab/InternVL3-78B-78B-Instruct and
+Sina Zarrieß, Henrik Voigt, and Simeon Schüz. 2021.        meta-llama/Llama-4-Scout-17B-16E-Instruct
+  Decoding methods in neural language generation: A        and served them locally using vLLM (Kwon et al.,
+  survey. Information, 12(9).
+                                                           2023) for efficient inference. We used the
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q.          official repository of Qwen2.5-VL5 to run
+  Weinberger, and Yoav Artzi. 2020. Bertscore: Evalu-      Qwen/Qwen2.5-VL-72B-Instruct.           We used
+  ating text generation with BERT. In 8th International
+  Conference on Learning Representations, ICLR 2020,       claude-sonnet-4-20250514 accessed through
+  Addis Ababa, Ethiopia, April 26-30, 2020. OpenRe-        the Anthropic API6 . GPT-4o was accessed
+  view.net.                                                through the OpenAI API7 , using version
+Wei Zhao, Maxime Peyrard, Fei Liu, Yang Gao, Chris-
+                                                           gpt-4o-2024-08-06.
+  tian M. Meyer, and Steffen Eger. 2019. MoverScore:           5
+                                                                https://github.com/QwenLM/Qwen2.5-VL.git
+ Text generation evaluating with contextualized em-            6
+                                                                https://docs.anthropic.com/en/api/messages
+  beddings and earth mover distance. In Proceedings           7
+                                                                https://platform.openai.com/docs/
+  of the 2019 Conference on Empirical Methods in           api-reference/
+   All open-source models were run offline on
+four NVIDIA A100 GPUs (80 GB each, except
+Qwen2.5-VL which used 4 × 40 GB). InternVL3-
+78B and Llama-4-Scout were run with a maximum
+context length of 8192 tokens. Qwen2.5-VL was
+run with a maximum output length of 300 tokens
+and a minimum of 50 new tokens. A full pass over
+5000 images took approximately 12 – 14 hours per
+model. To ensure comparability across models (in-
+cluding those without beam search support), we
+used two decoding modes for all models:
+
+    • greedy search:
+      temperature 0.0, top_p 0.0
+
+    • nucleus sampling:
+      temperature 1.0, top_p 0.92
+
+  Each generation was capped at 300 tokens. All
+runs used a fixed random seed (42) to ensure repro-
+ducibility.
+Pre-processing We observed that Qwen2.5-VL
+occasionally hallucinates, producing emoji uni-
+codes, Chinese characters, extra spaces, and line
+breaks. To clean these artifacts, we process all mod-
+els’ outputs so that they contain only ASCII letters,
+digits, standard punctuation, and spaces. We to-
+kenise all model-generated captions with PTBTo-
+kenizer (using the original MS COCO evaluation
+code8 ) so that they share exactly the same tokeni-
+sation as the human references.
+
+B       Variance in surprisal per model
+Descriptively, the models show clear differences
+in how predictable or variable their outputs are.
+Across all decoding configurations, Llama 4 Scout-
+17B-16E shows the lowest variance in surprisal sug-
+gesting more uniform descriptions across images.
+In contrast, Qwen2.5-VL-72B shows the highest
+mean surprisal and higher variance values. Claude
+Sonnet 4 and GPT4o fall in between but show an
+increase in variance from bigram to trigram con-
+texts.
+
+C       Lexical-based diversity metrics per
+        model
+
+
+
+
+    8
+        [https://github.com/tylin/coco-caption
+               Configuration                      Model               Mean surprisal Variance ± SD
+           Bi-gram LM, greedy              Claude Sonnet 4                 8.864        3.575 ± 1.891
+           Bi-gram LM, greedy                   GPT4o                      8.732        2.551 ± 1.597
+           Bi-gram LM, greedy               InternVL3-78B                  7.995        3.130 ± 1.769
+           Bi-gram LM, greedy           Llama 4 Scout-17B-16E              8.175        1.442 ± 1.201
+           Bi-gram LM, greedy              Qwen2.5-VL-72B                 10.159        3.124 ± 1.767
+           Tri-gram LM, greedy             Claude Sonnet 4                  8.385       6.106 ± 2.471
+           Tri-gram LM, greedy                  GPT4o                       8.179       4.460 ± 2.112
+           Tri-gram LM, greedy              InternVL3-78B                   7.042       5.444 ± 2.333
+           Tri-gram LM, greedy          Llama 4 Scout-17B-16E               7.316       2.876 ± 1.696
+           Tri-gram LM, greedy             Qwen2.5-VL-72B                   9.964       5.047 ± 2.246
+           Bi-gram LM, nucleus             Claude Sonnet 4                 8.742        3.311 ± 1.820
+           Bi-gram LM, nucleus                  GPT4o                      9.146        2.742 ± 1.656
+           Bi-gram LM, nucleus              InternVL3-78B                  8.837        3.866 ± 1.966
+           Bi-gram LM, nucleus          Llama 4 Scout-17B-16E              8.458        1.310 ± 1.145
+           Bi-gram LM, nucleus             Qwen2.5-VL-72B                 12.086        4.219 ± 2.054
+          Tri-gram LM, nucleus             Claude Sonnet 4                 8.269        5.763 ± 2.401
+          Tri-gram LM, nucleus                  GPT4o                      8.817        4.695 ± 2.167
+          Tri-gram LM, nucleus              InternVL3-78B                  8.329        6.253 ± 2.501
+          Tri-gram LM, nucleus          Llama 4 Scout-17B-16E              7.840        2.609 ± 1.615
+          Tri-gram LM, nucleus             Qwen2.5-VL-72B                 12.667        5.197 ± 2.280
+
+Table 3: Per-model surprisal statistics across images. For each configuration and model, the table reports the mean
+surprisal and the variance in surprisal across images with its standard deviation (shown as variance ± SD), computed
+over 5,000 images.
+
+
+
+
+                   Model                  ASL           SDSL           #Types         TTR1         TTR2
+                                                     greedy
+            Claude Sonnet 4               24.41         7.09            5,431          0.40         0.79
+                 GPT4o                    35.59        15.63            6,507          0.38         0.79
+             InternVL3-78B                15.64         7.48            3,960          0.38         0.74
+         Llama 4 Scout-17B-16E            77.08        107.82           6,702          0.27         0.64
+            Qwen2.5-VL-72B                43.23         3.99            7,021          0.46         0.86
+                                                     nucleus
+            Claude Sonnet 4               24.64          7.30           5,460          0.40         0.78
+                 GPT4o                    35.39         15.70           7,031          0.40         0.81
+             InternVL3-78B                17.77         10.36           4,991          0.41         0.80
+         Llama 4 Scout-17B-16E            79.04         33.79           7,570          0.32         0.73
+            Qwen2.5-VL-72B                43.15          8.32           8,910          0.51         0.92
+
+Table 4: Per-model lexical statistics under greedy and nucleus decoding. ASL = Average Sentence Length (tokens
+per caption), SDSL = Standard Deviation of Sentence Length, #Types = number of unique word types, TTR1 =
+type–token ratio (per 1000 tokens), TTR2 = bigram type–token ratio (per 1000 bigrams).
+

@@ -1,0 +1,9593 @@
+{
+ "generatedFrom": "probe-all",
+ "names": {
+  "R1": "dossier-native STATE",
+  "R2": "dossier-native CAUSAL JOIN",
+  "R3": "Herald receipt pools",
+  "R4": "Herald causal grammar + molds",
+  "R4b": "Herald disclosure + lifecycle",
+  "R5": "Herald crier voice",
+  "R6": "NPC cause-conjunction ladder",
+  "R7": "institution/service gazetteer",
+  "R8": "world-data prose",
+  "R9": "chrome copy registry",
+  "R10": "compendium docent",
+  "R11": "event composer / realm verbs",
+  "R12": "treaty / war-status documents",
+  "R14": "generators prose tables",
+  "R15": "src long tail",
+  "R16": "JSX + PDF chrome",
+  "R17": "legacy rumor SUBJECT PHRASES",
+  "R18": "inline in-function prose",
+  "A-U": "annex rows UNWIRED",
+  "A-W": "annex rows wired (control)"
+ },
+ "units": {
+  "R1": "sentence",
+  "R2": "sentence",
+  "R3": "sentence",
+  "R4": "phrase",
+  "R4b": "sentence",
+  "R5": "sentence",
+  "R6": "sentence",
+  "R7": "sentence",
+  "R8": "sentence",
+  "R9": "sentence",
+  "R10": "sentence",
+  "R11": "sentence",
+  "R12": "sentence",
+  "R14": "sentence",
+  "R15": "sentence",
+  "R16": "sentence",
+  "R17": "phrase",
+  "R18": "sentence",
+  "A-U": "sentence",
+  "A-W": "sentence"
+ },
+ "table": [
+  [
+   "metric",
+   "R1 (n=2262)",
+   "R2 (n=467)",
+   "R3 (n=1212)",
+   "R4 (n=133)",
+   "R4b (n=50)",
+   "R5 (n=373)",
+   "R6 (n=1659)",
+   "R7 (n=2169)",
+   "R8 (n=1738)",
+   "R9 (n=619)",
+   "R10 (n=505)",
+   "R11 (n=216)",
+   "R12 (n=108)",
+   "R14 (n=561)",
+   "R15 (n=3883)",
+   "R16 (n=2685)",
+   "R17 (n=1293)",
+   "R18 (n=5673)",
+   "A-U (n=4626)",
+   "A-W (n=4276)",
+   "BIBLE (n=67)"
+  ],
+  [
+   "N variants (deduped)",
+   "2262",
+   "467",
+   "1212",
+   "133",
+   "50",
+   "373",
+   "1659",
+   "2169",
+   "1738",
+   "619",
+   "505",
+   "216",
+   "108",
+   "561",
+   "3883",
+   "2685",
+   "1293",
+   "5673",
+   "4626",
+   "4276",
+   "67"
+  ],
+  [
+   "files",
+   "6",
+   "1",
+   "12",
+   "2",
+   "3",
+   "2",
+   "14",
+   "6",
+   "17",
+   "4",
+   "4",
+   "10",
+   "7",
+   "11",
+   "233",
+   "354",
+   "3",
+   "546",
+   "11",
+   "11",
+   "1"
+  ],
+  [
+   "unit",
+   "sentence",
+   "sentence",
+   "sentence",
+   "phrase",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence",
+   "phrase",
+   "sentence",
+   "sentence",
+   "sentence",
+   "sentence"
+  ],
+  [
+   "segments",
+   "2909",
+   "530",
+   "1418",
+   "133",
+   "60",
+   "396",
+   "1689",
+   "3245",
+   "2226",
+   "972",
+   "665",
+   "271",
+   "126",
+   "1038",
+   "4889",
+   "3944",
+   "1293",
+   "6817",
+   "5274",
+   "5033",
+   "67"
+  ],
+  [
+   "segments / variant",
+   "1.286",
+   "1.135",
+   "1.17",
+   "1",
+   "1.2",
+   "1.062",
+   "1.018",
+   "1.496",
+   "1.281",
+   "1.57",
+   "1.317",
+   "1.255",
+   "1.167",
+   "1.85",
+   "1.259",
+   "1.469",
+   "1",
+   "1.202",
+   "1.14",
+   "1.177",
+   "1"
+  ],
+  [
+   "terminal-stop share",
+   "1",
+   "1",
+   "0.847",
+   "0",
+   "0.78",
+   "1",
+   "1",
+   "0.935",
+   "0.469",
+   "0.819",
+   "0.634",
+   "0.819",
+   "0.852",
+   "0.872",
+   "0.588",
+   "0.615",
+   "0",
+   "0.66",
+   "0.993",
+   "0.748",
+   "0.881"
+  ],
+  [
+   "slot-bearing share",
+   "0.777",
+   "0.953",
+   "0.578",
+   "0.135",
+   "0.5",
+   "0.032",
+   "0.058",
+   "0",
+   "0.109",
+   "0.071",
+   "0",
+   "0.194",
+   "0.083",
+   "0.289",
+   "0.083",
+   "0.171",
+   "0.012",
+   "0.441",
+   "0.754",
+   "0.556",
+   "0"
+  ],
+  [
+   "1-segment share",
+   "0.718",
+   "0.872",
+   "0.832",
+   "1",
+   "0.8",
+   "0.938",
+   "0.983",
+   "0.58",
+   "0.783",
+   "0.538",
+   "0.739",
+   "0.787",
+   "0.852",
+   "0.431",
+   "0.783",
+   "0.651",
+   "1",
+   "0.839",
+   "0.878",
+   "0.826",
+   "1"
+  ],
+  [
+   "2-segment share",
+   "0.279",
+   "0.122",
+   "0.167",
+   "0",
+   "0.2",
+   "0.062",
+   "0.016",
+   "0.35",
+   "0.166",
+   "0.37",
+   "0.214",
+   "0.171",
+   "0.13",
+   "0.348",
+   "0.182",
+   "0.264",
+   "0",
+   "0.131",
+   "0.107",
+   "0.172",
+   "0"
+  ],
+  [
+   "3+-segment share",
+   "0.004",
+   "0.006",
+   "0.002",
+   "0",
+   "0",
+   "0",
+   "0.001",
+   "0.069",
+   "0.052",
+   "0.092",
+   "0.048",
+   "0.042",
+   "0.019",
+   "0.221",
+   "0.036",
+   "0.085",
+   "0",
+   "0.031",
+   "0.015",
+   "0.003",
+   "0"
+  ],
+  [
+   "words/segment mean",
+   "16.8",
+   "28.6",
+   "12.2",
+   "4.8",
+   "9.6",
+   "16.4",
+   "22.6",
+   "8.8",
+   "10.7",
+   "7.7",
+   "8.5",
+   "9.3",
+   "10.6",
+   "10.9",
+   "9.1",
+   "8.1",
+   "7.5",
+   "9",
+   "15",
+   "15.7",
+   "8.1"
+  ],
+  [
+   "words/segment sd",
+   "7.2",
+   "9.4",
+   "5",
+   "1.6",
+   "4.4",
+   "4.7",
+   "4",
+   "4.9",
+   "5.5",
+   "4.7",
+   "5.8",
+   "6.5",
+   "5.3",
+   "8.1",
+   "6.4",
+   "5.9",
+   "2.1",
+   "4.6",
+   "6.8",
+   "8.6",
+   "6.9"
+  ],
+  [
+   "words/segment p10",
+   "7",
+   "14",
+   "6",
+   "3",
+   "4",
+   "8",
+   "19",
+   "4",
+   "5",
+   "3",
+   "4",
+   "4",
+   "4",
+   "3",
+   "4",
+   "4",
+   "5",
+   "4",
+   "7",
+   "6",
+   "2"
+  ],
+  [
+   "words/segment p50",
+   "17",
+   "30",
+   "12",
+   "5",
+   "9",
+   "18",
+   "22",
+   "8",
+   "10",
+   "6",
+   "7",
+   "7",
+   "10",
+   "8",
+   "7",
+   "6",
+   "7",
+   "8",
+   "15",
+   "14",
+   "6"
+  ],
+  [
+   "words/segment p90",
+   "26",
+   "40",
+   "19",
+   "7",
+   "15",
+   "21",
+   "28",
+   "16",
+   "17",
+   "14",
+   "17",
+   "17",
+   "18",
+   "23",
+   "17",
+   "15",
+   "10",
+   "15",
+   "21",
+   "27",
+   "17"
+  ],
+  [
+   "share segments < 8 words",
+   "0.13",
+   "0.017",
+   "0.204",
+   "0.947",
+   "0.383",
+   "0.078",
+   "0.005",
+   "0.472",
+   "0.289",
+   "0.616",
+   "0.555",
+   "0.502",
+   "0.381",
+   "0.46",
+   "0.507",
+   "0.599",
+   "0.512",
+   "0.464",
+   "0.114",
+   "0.179",
+   "0.642"
+  ],
+  [
+   "share segments > 30 words",
+   "0.021",
+   "0.491",
+   "0.001",
+   "0",
+   "0",
+   "0",
+   "0.042",
+   "0.001",
+   "0.008",
+   "0.001",
+   "0.005",
+   "0.015",
+   "0",
+   "0.039",
+   "0.009",
+   "0.007",
+   "0",
+   "0.003",
+   "0.027",
+   "0.063",
+   "0.015"
+  ],
+  [
+   "antithesis SHAPE rate",
+   "0.139",
+   "0.077",
+   "0.012",
+   "0",
+   "0",
+   "0.005",
+   "0.007",
+   "0.019",
+   "0.025",
+   "0.024",
+   "0.018",
+   "0.042",
+   "0.009",
+   "0.052",
+   "0.024",
+   "0.023",
+   "0.016",
+   "0.025",
+   "0.019",
+   "0.082",
+   "0.045"
+  ],
+  [
+   "\"rather than\" rate",
+   "0.113",
+   "0.071",
+   "0.002",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.008",
+   "0.007",
+   "0",
+   "0.004",
+   "0.009",
+   "0",
+   "0.011",
+   "0.008",
+   "0.004",
+   "0.015",
+   "0.011",
+   "0.009",
+   "0.067",
+   "0.015"
+  ],
+  [
+   "gloss tail \", which\" rate",
+   "0.066",
+   "0.054",
+   "0.034",
+   "0",
+   "0",
+   "0",
+   "0.007",
+   "0.003",
+   "0.01",
+   "0.003",
+   "0",
+   "0",
+   "0",
+   "0.052",
+   "0.011",
+   "0.004",
+   "0.001",
+   "0.006",
+   "0.062",
+   "0.048",
+   "0"
+  ],
+  [
+   "2nd-sentence summary rate",
+   "0.035",
+   "0.021",
+   "0.016",
+   "0",
+   "0",
+   "0.003",
+   "0.001",
+   "0.031",
+   "0.017",
+   "0.019",
+   "0.063",
+   "0",
+   "0",
+   "0.02",
+   "0.008",
+   "0.024",
+   "0",
+   "0.007",
+   "0.022",
+   "0.023",
+   "0"
+  ],
+  [
+   "triad-list rate",
+   "0.011",
+   "0.056",
+   "0.012",
+   "0",
+   "0.04",
+   "0.011",
+   "0.055",
+   "0.075",
+   "0.066",
+   "0.027",
+   "0.028",
+   "0.009",
+   "0.009",
+   "0.077",
+   "0.047",
+   "0.032",
+   "0",
+   "0.006",
+   "0.009",
+   "0.014",
+   "0.03"
+  ],
+  [
+   "doubled-adjective rate",
+   "0.009",
+   "0.011",
+   "0.002",
+   "0",
+   "0",
+   "0.003",
+   "0.007",
+   "0.023",
+   "0.009",
+   "0.002",
+   "0.008",
+   "0",
+   "0.019",
+   "0.018",
+   "0.011",
+   "0.003",
+   "0.009",
+   "0.007",
+   "0.008",
+   "0.01",
+   "0"
+  ],
+  [
+   "participial-opener rate",
+   "0.012",
+   "0.002",
+   "0.008",
+   "0.008",
+   "0",
+   "0",
+   "0",
+   "0.021",
+   "0.018",
+   "0.014",
+   "0.006",
+   "0.011",
+   "0.016",
+   "0.014",
+   "0.017",
+   "0.028",
+   "0.009",
+   "0.015",
+   "0.006",
+   "0.009",
+   "0.03"
+  ],
+  [
+   "\"There/It is\" opener rate",
+   "0.051",
+   "0.019",
+   "0.02",
+   "0",
+   "0",
+   "0.008",
+   "0.11",
+   "0.004",
+   "0.013",
+   "0",
+   "0.002",
+   "0",
+   "0.032",
+   "0.02",
+   "0.004",
+   "0.006",
+   "0.002",
+   "0.005",
+   "0.038",
+   "0.033",
+   "0"
+  ],
+  [
+   "semicolon rate",
+   "0.17",
+   "0.36",
+   "0.136",
+   "0",
+   "0.26",
+   "0.198",
+   "0.54",
+   "0.015",
+   "0.055",
+   "0.053",
+   "0.133",
+   "0.13",
+   "0.176",
+   "0.102",
+   "0.074",
+   "0.053",
+   "0",
+   "0.079",
+   "0.187",
+   "0.151",
+   "0"
+  ],
+  [
+   "colon rate",
+   "0.072",
+   "0.364",
+   "0.066",
+   "0",
+   "0.28",
+   "0.029",
+   "0.138",
+   "0.051",
+   "0.071",
+   "0.057",
+   "0.036",
+   "0.116",
+   "0.102",
+   "0.178",
+   "0.079",
+   "0.101",
+   "0",
+   "0.119",
+   "0.102",
+   "0.083",
+   "0.119"
+  ],
+  [
+   "question rate",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.005",
+   "0",
+   "0",
+   "0.001",
+   "0.034",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.005",
+   "0.021",
+   "0",
+   "0.003",
+   "0",
+   "0",
+   "0.015"
+  ],
+  [
+   "parenthesis rate",
+   "0.006",
+   "0.011",
+   "0.001",
+   "0",
+   "0.02",
+   "0",
+   "0.001",
+   "0.016",
+   "0.047",
+   "0.036",
+   "0.03",
+   "0.222",
+   "0.009",
+   "0.061",
+   "0.062",
+   "0.091",
+   "0",
+   "0.064",
+   "0.006",
+   "0.004",
+   "0.09"
+  ],
+  [
+   "abstract-noun closer rate",
+   "0.044",
+   "0.028",
+   "0.038",
+   "0.008",
+   "0.033",
+   "0.02",
+   "0.078",
+   "0.086",
+   "0.084",
+   "0.057",
+   "0.114",
+   "0.122",
+   "0.04",
+   "0.091",
+   "0.095",
+   "0.068",
+   "0.029",
+   "0.092",
+   "0.029",
+   "0.038",
+   "0.06"
+  ],
+  [
+   "pronoun closer rate",
+   "0.133",
+   "0.125",
+   "0.077",
+   "0.128",
+   "0.067",
+   "0.045",
+   "0.059",
+   "0.028",
+   "0.05",
+   "0.038",
+   "0.024",
+   "0.026",
+   "0.056",
+   "0.022",
+   "0.025",
+   "0.035",
+   "0.053",
+   "0.037",
+   "0.123",
+   "0.114",
+   "0.015"
+  ],
+  [
+   "adverbs / segment",
+   "0.163",
+   "0.13",
+   "0.044",
+   "0.008",
+   "0",
+   "0.109",
+   "0.09",
+   "0.05",
+   "0.148",
+   "0.037",
+   "0.048",
+   "0.048",
+   "0.127",
+   "0.113",
+   "0.057",
+   "0.058",
+   "0.036",
+   "0.082",
+   "0.054",
+   "0.12",
+   "0.03"
+  ],
+  [
+   "em dashes (count)",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "4",
+   "0",
+   "0",
+   "1",
+   "0",
+   "1",
+   "71",
+   "0",
+   "0",
+   "44",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "exclamations (count)",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "emphasis-caps rate",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.001",
+   "0.016",
+   "0",
+   "0.042",
+   "0",
+   "0.002",
+   "0.049",
+   "0.009",
+   "0",
+   "0.02",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "digits-in-prose rate",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.03",
+   "0.003",
+   "0.032",
+   "0.111",
+   "0.014",
+   "0.009",
+   "0.039",
+   "0.054",
+   "0.019",
+   "0",
+   "0.012",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "contraction rate",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0.004",
+   "0.048",
+   "0.05",
+   "0",
+   "0",
+   "0.019",
+   "0.029",
+   "0.012",
+   "0.022",
+   "0",
+   "0.009",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "\"the PCs\" (count)",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "1",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "AI lexical tells / variant (raw)",
+   "0.008",
+   "0.015",
+   "0.006",
+   "0",
+   "0.02",
+   "0.024",
+   "0.006",
+   "0.009",
+   "0.013",
+   "0.102",
+   "0.057",
+   "0.019",
+   "0.009",
+   "0.014",
+   "0.022",
+   "0.084",
+   "0.008",
+   "0.026",
+   "0.015",
+   "0.007",
+   "0.015"
+  ],
+  [
+   "AI tells / variant EXOGENOUS",
+   "0.004",
+   "0.013",
+   "0.004",
+   "0",
+   "0.02",
+   "0.024",
+   "0.006",
+   "0.009",
+   "0.013",
+   "0.003",
+   "0.002",
+   "0.009",
+   "0.009",
+   "0.014",
+   "0.008",
+   "0.007",
+   "0.002",
+   "0.011",
+   "0.004",
+   "0.003",
+   "0"
+  ],
+  [
+   "Juzek&Ward forms (count, raw)",
+   "7",
+   "1",
+   "2",
+   "0",
+   "0",
+   "0",
+   "0",
+   "2",
+   "1",
+   "34",
+   "22",
+   "2",
+   "0",
+   "1",
+   "40",
+   "164",
+   "7",
+   "72",
+   "51",
+   "16",
+   "0"
+  ],
+  [
+   "Juzek&Ward forms EXOGENOUS (count)",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "2",
+   "1",
+   "0",
+   "0",
+   "0",
+   "0",
+   "1",
+   "1",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0",
+   "0"
+  ],
+  [
+   "rationed pet words / variant",
+   "0.536",
+   "0.713",
+   "0.176",
+   "0.06",
+   "0.08",
+   "0.174",
+   "0.291",
+   "0.069",
+   "0.128",
+   "0.094",
+   "0.03",
+   "0.079",
+   "0.176",
+   "0.246",
+   "0.08",
+   "0.106",
+   "0.101",
+   "0.095",
+   "0.287",
+   "0.411",
+   "0.06"
+  ],
+  [
+   "pools with 2+ variants",
+   "708",
+   "78",
+   "127",
+   "8",
+   "11",
+   "58",
+   "554",
+   "315",
+   "231",
+   "4",
+   "0",
+   "0",
+   "6",
+   "15",
+   "193",
+   "297",
+   "174",
+   "444",
+   "668",
+   "436",
+   "4"
+  ],
+  [
+   "mean pool size",
+   "3.2",
+   "6",
+   "3.6",
+   "3.3",
+   "3.3",
+   "6.4",
+   "2",
+   "2",
+   "3.3",
+   "4.5",
+   "0",
+   "0",
+   "4",
+   "5",
+   "2.9",
+   "8.8",
+   "6",
+   "12.5",
+   "6.9",
+   "9.8",
+   "16.8"
+  ],
+  [
+   "pools uniform in segment count",
+   "0.576",
+   "0.513",
+   "0.843",
+   "1",
+   "0.455",
+   "0.672",
+   "0.955",
+   "0.714",
+   "0.892",
+   "1",
+   "",
+   "",
+   "1",
+   "0.4",
+   "0.907",
+   "0.242",
+   "1",
+   "0.653",
+   "0.479",
+   "0.727",
+   "1"
+  ],
+  [
+   "pools w/ repeated 2-word opener",
+   "0.112",
+   "0.231",
+   "0.126",
+   "0",
+   "0",
+   "0.224",
+   "0.002",
+   "0.003",
+   "0.048",
+   "0",
+   "",
+   "",
+   "0.667",
+   "0.133",
+   "0.13",
+   "0.478",
+   "0.006",
+   "0.583",
+   "0.183",
+   "0.218",
+   "0.25"
+  ],
+  [
+   "mean within-pool word sd",
+   "2.9",
+   "5.1",
+   "2.1",
+   "0.6",
+   "2.1",
+   "1.3",
+   "1.5",
+   "1.2",
+   "1.5",
+   "0.9",
+   "",
+   "",
+   "1.1",
+   "4.8",
+   "1.2",
+   "5.8",
+   "1.5",
+   "2.9",
+   "4",
+   "2.9",
+   "6.5"
+  ]
+ ],
+ "metrics": {
+  "R1": {
+   "variants": 2262,
+   "files": 6,
+   "segments": 2909,
+   "segmentsPerVariant": 1.286,
+   "terminalStopShare": 1,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0.777,
+   "oneSegment": 0.718,
+   "twoSegments": 0.279,
+   "threePlusSegments": 0.004,
+   "wps": {
+    "mean": 16.8,
+    "sd": 7.2,
+    "p10": 7,
+    "p50": 17,
+    "p90": 26,
+    "under8": 0.13,
+    "over30": 0.021
+   },
+   "shapesRate": {
+    "antithesisShape": 0.139,
+    "ratherThan": 0.113,
+    "triadList": 0.011,
+    "doubledAdj": 0.009,
+    "participialOpener": 0.012,
+    "secondSentSummary": 0.035,
+    "glossTail": 0.066,
+    "semicolon": 0.17,
+    "colon": 0.072,
+    "question": 0,
+    "parenthesis": 0.006,
+    "thereIsOpener": 0.051,
+    "abstractCloser": 0.044,
+    "pronounCloser": 0.133,
+    "adverbsPerSegment": 0.163
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 17,
+   "tellsRate": 0.008,
+   "tellsExogenous": 10,
+   "tellsExogenousRate": 0.004,
+   "tells": {
+    "resilien": 1,
+    "stands as": 1,
+    "weight of": 3,
+    "realm": 7,
+    "speaks to": 1,
+    "journey": 2,
+    "linger": 1,
+    "the very": 1
+   },
+   "juzekTotal": 7,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 7
+   },
+   "petTotal": 1213,
+   "petRate": 0.536,
+   "pet": {
+    "nobody / no one / nothing": 371,
+    "enough to / enough that": 109,
+    "which is / which means": 110,
+    "rather than": 260,
+    "kind of / sort of": 29,
+    "whatever": 48,
+    "quiet / quietly": 44,
+    "its own": 72,
+    "already": 16,
+    "still": 91,
+    "yet": 54,
+    "no small / not a trivial": 1,
+    "own kind of": 6,
+    "the sort of X that": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 708,
+    "meanPoolSize": 3.2,
+    "sameSegmentCountShare": 0.576,
+    "repeatedTwoWordOpenerShare": 0.112,
+    "meanWithinPoolWordSd": 2.9
+   },
+   "topOpeners": [
+    [
+     "the",
+     927
+    ],
+    [
+     "x",
+     609
+    ],
+    [
+     "what",
+     232
+    ],
+    [
+     "a",
+     188
+    ],
+    [
+     "there",
+     110
+    ],
+    [
+     "x's",
+     90
+    ],
+    [
+     "nothing",
+     85
+    ],
+    [
+     "it",
+     73
+    ],
+    [
+     "this",
+     37
+    ],
+    [
+     "nobody",
+     37
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     253
+    ],
+    [
+     "x",
+     63
+    ],
+    [
+     "them",
+     53
+    ],
+    [
+     "here",
+     50
+    ],
+    [
+     "one",
+     33
+    ],
+    [
+     "not",
+     32
+    ],
+    [
+     "town",
+     30
+    ],
+    [
+     "season",
+     25
+    ],
+    [
+     "for",
+     21
+    ],
+    [
+     "on",
+     21
+    ]
+   ]
+  },
+  "R2": {
+   "variants": 467,
+   "files": 1,
+   "segments": 530,
+   "segmentsPerVariant": 1.135,
+   "terminalStopShare": 1,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0.953,
+   "oneSegment": 0.872,
+   "twoSegments": 0.122,
+   "threePlusSegments": 0.006,
+   "wps": {
+    "mean": 28.6,
+    "sd": 9.4,
+    "p10": 14,
+    "p50": 30,
+    "p90": 40,
+    "under8": 0.017,
+    "over30": 0.491
+   },
+   "shapesRate": {
+    "antithesisShape": 0.077,
+    "ratherThan": 0.071,
+    "triadList": 0.056,
+    "doubledAdj": 0.011,
+    "participialOpener": 0.002,
+    "secondSentSummary": 0.021,
+    "glossTail": 0.054,
+    "semicolon": 0.36,
+    "colon": 0.364,
+    "question": 0,
+    "parenthesis": 0.011,
+    "thereIsOpener": 0.019,
+    "abstractCloser": 0.028,
+    "pronounCloser": 0.125,
+    "adverbsPerSegment": 0.13
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 7,
+   "tellsRate": 0.015,
+   "tellsExogenous": 6,
+   "tellsExogenousRate": 0.013,
+   "tells": {
+    "realm": 1,
+    "the very": 2,
+    "journey": 2,
+    "tension": 1,
+    "stands as": 1
+   },
+   "juzekTotal": 1,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 1
+   },
+   "petTotal": 333,
+   "petRate": 0.713,
+   "pet": {
+    "nobody / no one / nothing": 141,
+    "still": 67,
+    "its own": 24,
+    "rather than": 34,
+    "quiet / quietly": 15,
+    "whatever": 5,
+    "already": 10,
+    "which is / which means": 21,
+    "enough to / enough that": 7,
+    "yet": 9
+   },
+   "pools": {
+    "poolsWith2Plus": 78,
+    "meanPoolSize": 6,
+    "sameSegmentCountShare": 0.513,
+    "repeatedTwoWordOpenerShare": 0.231,
+    "meanWithinPoolWordSd": 5.1
+   },
+   "topOpeners": [
+    [
+     "the",
+     206
+    ],
+    [
+     "x",
+     129
+    ],
+    [
+     "x's",
+     55
+    ],
+    [
+     "a",
+     41
+    ],
+    [
+     "nobody",
+     15
+    ],
+    [
+     "what",
+     10
+    ],
+    [
+     "nothing",
+     10
+    ],
+    [
+     "it",
+     10
+    ],
+    [
+     "there",
+     7
+    ],
+    [
+     "every",
+     5
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     44
+    ],
+    [
+     "them",
+     16
+    ],
+    [
+     "since",
+     16
+    ],
+    [
+     "back",
+     9
+    ],
+    [
+     "all",
+     8
+    ],
+    [
+     "x",
+     7
+    ],
+    [
+     "not",
+     6
+    ],
+    [
+     "on",
+     6
+    ],
+    [
+     "again",
+     6
+    ],
+    [
+     "one",
+     6
+    ]
+   ]
+  },
+  "R3": {
+   "variants": 1212,
+   "files": 12,
+   "segments": 1418,
+   "segmentsPerVariant": 1.17,
+   "terminalStopShare": 0.847,
+   "capitalOpenShare": 0.955,
+   "slotBearingShare": 0.578,
+   "oneSegment": 0.832,
+   "twoSegments": 0.167,
+   "threePlusSegments": 0.002,
+   "wps": {
+    "mean": 12.2,
+    "sd": 5,
+    "p10": 6,
+    "p50": 12,
+    "p90": 19,
+    "under8": 0.204,
+    "over30": 0.001
+   },
+   "shapesRate": {
+    "antithesisShape": 0.012,
+    "ratherThan": 0.002,
+    "triadList": 0.012,
+    "doubledAdj": 0.002,
+    "participialOpener": 0.008,
+    "secondSentSummary": 0.016,
+    "glossTail": 0.034,
+    "semicolon": 0.136,
+    "colon": 0.066,
+    "question": 0,
+    "parenthesis": 0.001,
+    "thereIsOpener": 0.02,
+    "abstractCloser": 0.038,
+    "pronounCloser": 0.077,
+    "adverbsPerSegment": 0.044
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 7,
+   "tellsRate": 0.006,
+   "tellsExogenous": 5,
+   "tellsExogenousRate": 0.004,
+   "tells": {
+    "journey": 4,
+    "realm": 2,
+    "shadow of": 1
+   },
+   "juzekTotal": 2,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 2
+   },
+   "petTotal": 213,
+   "petRate": 0.176,
+   "pet": {
+    "nobody / no one / nothing": 90,
+    "its own": 30,
+    "quiet / quietly": 13,
+    "already": 15,
+    "still": 17,
+    "yet": 7,
+    "which is / which means": 29,
+    "kind of / sort of": 1,
+    "whatever": 5,
+    "rather than": 3,
+    "enough to / enough that": 3
+   },
+   "pools": {
+    "poolsWith2Plus": 127,
+    "meanPoolSize": 3.6,
+    "sameSegmentCountShare": 0.843,
+    "repeatedTwoWordOpenerShare": 0.126,
+    "meanWithinPoolWordSd": 2.1
+   },
+   "topOpeners": [
+    [
+     "the",
+     474
+    ],
+    [
+     "x",
+     258
+    ],
+    [
+     "a",
+     111
+    ],
+    [
+     "x's",
+     43
+    ],
+    [
+     "what",
+     36
+    ],
+    [
+     "it",
+     33
+    ],
+    [
+     "they",
+     31
+    ],
+    [
+     "nothing",
+     18
+    ],
+    [
+     "no",
+     16
+    ],
+    [
+     "their",
+     16
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     135
+    ],
+    [
+     "it",
+     74
+    ],
+    [
+     "road",
+     23
+    ],
+    [
+     "them",
+     20
+    ],
+    [
+     "home",
+     15
+    ],
+    [
+     "out",
+     15
+    ],
+    [
+     "field",
+     14
+    ],
+    [
+     "one",
+     13
+    ],
+    [
+     "now",
+     12
+    ],
+    [
+     "war",
+     11
+    ]
+   ]
+  },
+  "R4": {
+   "variants": 133,
+   "files": 2,
+   "segments": 133,
+   "segmentsPerVariant": 1,
+   "terminalStopShare": 0,
+   "capitalOpenShare": 0,
+   "slotBearingShare": 0.135,
+   "oneSegment": 1,
+   "twoSegments": 0,
+   "threePlusSegments": 0,
+   "wps": {
+    "mean": 4.8,
+    "sd": 1.6,
+    "p10": 3,
+    "p50": 5,
+    "p90": 7,
+    "under8": 0.947,
+    "over30": 0
+   },
+   "shapesRate": {
+    "antithesisShape": 0,
+    "ratherThan": 0,
+    "triadList": 0,
+    "doubledAdj": 0,
+    "participialOpener": 0.008,
+    "secondSentSummary": 0,
+    "glossTail": 0,
+    "semicolon": 0,
+    "colon": 0,
+    "question": 0,
+    "parenthesis": 0,
+    "thereIsOpener": 0,
+    "abstractCloser": 0.008,
+    "pronounCloser": 0.128,
+    "adverbsPerSegment": 0.008
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 0,
+   "tellsRate": 0,
+   "tellsExogenous": 0,
+   "tellsExogenousRate": 0,
+   "tells": {},
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 8,
+   "petRate": 0.06,
+   "pet": {
+    "still": 2,
+    "nobody / no one / nothing": 5,
+    "yet": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 8,
+    "meanPoolSize": 3.3,
+    "sameSegmentCountShare": 1,
+    "repeatedTwoWordOpenerShare": 0,
+    "meanWithinPoolWordSd": 0.6
+   },
+   "topOpeners": [
+    [
+     "and",
+     33
+    ],
+    [
+     "the",
+     29
+    ],
+    [
+     "on",
+     11
+    ],
+    [
+     "which",
+     5
+    ],
+    [
+     "a",
+     5
+    ],
+    [
+     "after",
+     4
+    ],
+    [
+     "in",
+     3
+    ],
+    [
+     "when",
+     3
+    ],
+    [
+     "once",
+     3
+    ],
+    [
+     "not",
+     2
+    ]
+   ],
+   "topClosers": [
+    [
+     "of",
+     20
+    ],
+    [
+     "x",
+     17
+    ],
+    [
+     "that",
+     7
+    ],
+    [
+     "it",
+     6
+    ],
+    [
+     "for",
+     6
+    ],
+    [
+     "by",
+     6
+    ],
+    [
+     "from",
+     4
+    ],
+    [
+     "was",
+     4
+    ],
+    [
+     "to",
+     4
+    ],
+    [
+     "with",
+     4
+    ]
+   ]
+  },
+  "R4b": {
+   "variants": 50,
+   "files": 3,
+   "segments": 60,
+   "segmentsPerVariant": 1.2,
+   "terminalStopShare": 0.78,
+   "capitalOpenShare": 0.78,
+   "slotBearingShare": 0.5,
+   "oneSegment": 0.8,
+   "twoSegments": 0.2,
+   "threePlusSegments": 0,
+   "wps": {
+    "mean": 9.6,
+    "sd": 4.4,
+    "p10": 4,
+    "p50": 9,
+    "p90": 15,
+    "under8": 0.383,
+    "over30": 0
+   },
+   "shapesRate": {
+    "antithesisShape": 0,
+    "ratherThan": 0,
+    "triadList": 0.04,
+    "doubledAdj": 0,
+    "participialOpener": 0,
+    "secondSentSummary": 0,
+    "glossTail": 0,
+    "semicolon": 0.26,
+    "colon": 0.28,
+    "question": 0,
+    "parenthesis": 0.02,
+    "thereIsOpener": 0,
+    "abstractCloser": 0.033,
+    "pronounCloser": 0.067,
+    "adverbsPerSegment": 0
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 1,
+   "tellsRate": 0.02,
+   "tellsExogenous": 1,
+   "tellsExogenousRate": 0.02,
+   "tells": {
+    "whisper": 1
+   },
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 4,
+   "petRate": 0.08,
+   "pet": {
+    "quiet / quietly": 1,
+    "nobody / no one / nothing": 3
+   },
+   "pools": {
+    "poolsWith2Plus": 11,
+    "meanPoolSize": 3.3,
+    "sameSegmentCountShare": 0.455,
+    "repeatedTwoWordOpenerShare": 0,
+    "meanWithinPoolWordSd": 2.1
+   },
+   "topOpeners": [
+    [
+     "the",
+     27
+    ],
+    [
+     "what",
+     8
+    ],
+    [
+     "a",
+     5
+    ],
+    [
+     "this",
+     4
+    ],
+    [
+     "with",
+     2
+    ],
+    [
+     "planted",
+     2
+    ],
+    [
+     "an",
+     1
+    ],
+    [
+     "need",
+     1
+    ],
+    [
+     "one",
+     1
+    ],
+    [
+     "solecause",
+     1
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     12
+    ],
+    [
+     "over",
+     2
+    ],
+    [
+     "it",
+     2
+    ],
+    [
+     "failed",
+     1
+    ],
+    [
+     "off",
+     1
+    ],
+    [
+     "war",
+     1
+    ],
+    [
+     "out",
+     1
+    ],
+    [
+     "town",
+     1
+    ],
+    [
+     "deed",
+     1
+    ],
+    [
+     "in",
+     1
+    ]
+   ]
+  },
+  "R5": {
+   "variants": 373,
+   "files": 2,
+   "segments": 396,
+   "segmentsPerVariant": 1.062,
+   "terminalStopShare": 1,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0.032,
+   "oneSegment": 0.938,
+   "twoSegments": 0.062,
+   "threePlusSegments": 0,
+   "wps": {
+    "mean": 16.4,
+    "sd": 4.7,
+    "p10": 8,
+    "p50": 18,
+    "p90": 21,
+    "under8": 0.078,
+    "over30": 0
+   },
+   "shapesRate": {
+    "antithesisShape": 0.005,
+    "ratherThan": 0,
+    "triadList": 0.011,
+    "doubledAdj": 0.003,
+    "participialOpener": 0,
+    "secondSentSummary": 0.003,
+    "glossTail": 0,
+    "semicolon": 0.198,
+    "colon": 0.029,
+    "question": 0.005,
+    "parenthesis": 0,
+    "thereIsOpener": 0.008,
+    "abstractCloser": 0.02,
+    "pronounCloser": 0.045,
+    "adverbsPerSegment": 0.109
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 9,
+   "tellsRate": 0.024,
+   "tellsExogenous": 9,
+   "tellsExogenousRate": 0.024,
+   "tells": {
+    "whisper": 5,
+    "weight of": 1,
+    "in the end": 3
+   },
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 65,
+   "petRate": 0.174,
+   "pet": {
+    "quiet / quietly": 22,
+    "nobody / no one / nothing": 21,
+    "yet": 3,
+    "already": 4,
+    "its own": 4,
+    "whatever": 9,
+    "still": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 58,
+    "meanPoolSize": 6.4,
+    "sameSegmentCountShare": 0.672,
+    "repeatedTwoWordOpenerShare": 0.224,
+    "meanWithinPoolWordSd": 1.3
+   },
+   "topOpeners": [
+    [
+     "the",
+     248
+    ],
+    [
+     "a",
+     29
+    ],
+    [
+     "word",
+     22
+    ],
+    [
+     "it",
+     17
+    ],
+    [
+     "whatever",
+     8
+    ],
+    [
+     "news",
+     4
+    ],
+    [
+     "what",
+     3
+    ],
+    [
+     "plenty",
+     3
+    ],
+    [
+     "relief",
+     3
+    ],
+    [
+     "in",
+     2
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     11
+    ],
+    [
+     "again",
+     11
+    ],
+    [
+     "now",
+     8
+    ],
+    [
+     "more",
+     8
+    ],
+    [
+     "them",
+     6
+    ],
+    [
+     "can",
+     5
+    ],
+    [
+     "quiet",
+     4
+    ],
+    [
+     "nothing",
+     4
+    ],
+    [
+     "hold",
+     4
+    ],
+    [
+     "x",
+     4
+    ]
+   ]
+  },
+  "R6": {
+   "variants": 1659,
+   "files": 14,
+   "segments": 1689,
+   "segmentsPerVariant": 1.018,
+   "terminalStopShare": 1,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0.058,
+   "oneSegment": 0.983,
+   "twoSegments": 0.016,
+   "threePlusSegments": 0.001,
+   "wps": {
+    "mean": 22.6,
+    "sd": 4,
+    "p10": 19,
+    "p50": 22,
+    "p90": 28,
+    "under8": 0.005,
+    "over30": 0.042
+   },
+   "shapesRate": {
+    "antithesisShape": 0.007,
+    "ratherThan": 0,
+    "triadList": 0.055,
+    "doubledAdj": 0.007,
+    "participialOpener": 0,
+    "secondSentSummary": 0.001,
+    "glossTail": 0.007,
+    "semicolon": 0.54,
+    "colon": 0.138,
+    "question": 0,
+    "parenthesis": 0.001,
+    "thereIsOpener": 0.11,
+    "abstractCloser": 0.078,
+    "pronounCloser": 0.059,
+    "adverbsPerSegment": 0.09
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 10,
+   "tellsRate": 0.006,
+   "tellsExogenous": 10,
+   "tellsExogenousRate": 0.006,
+   "tells": {
+    "the very": 2,
+    "in the end": 1,
+    "echo": 1,
+    "remnant": 4,
+    "whisper": 2
+   },
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 483,
+   "petRate": 0.291,
+   "pet": {
+    "which is / which means": 9,
+    "yet": 6,
+    "still": 286,
+    "nobody / no one / nothing": 77,
+    "quiet / quietly": 51,
+    "its own": 14,
+    "whatever": 14,
+    "already": 22,
+    "enough to / enough that": 3,
+    "kind of / sort of": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 554,
+    "meanPoolSize": 2,
+    "sameSegmentCountShare": 0.955,
+    "repeatedTwoWordOpenerShare": 0.002,
+    "meanWithinPoolWordSd": 1.5
+   },
+   "topOpeners": [
+    [
+     "the",
+     1115
+    ],
+    [
+     "it",
+     185
+    ],
+    [
+     "with",
+     146
+    ],
+    [
+     "when",
+     74
+    ],
+    [
+     "what",
+     39
+    ],
+    [
+     "a",
+     25
+    ],
+    [
+     "under",
+     13
+    ],
+    [
+     "trade",
+     8
+    ],
+    [
+     "every",
+     7
+    ],
+    [
+     "since",
+     7
+    ]
+   ],
+   "topClosers": [
+    [
+     "arrangement",
+     63
+    ],
+    [
+     "it",
+     48
+    ],
+    [
+     "them",
+     38
+    ],
+    [
+     "now",
+     26
+    ],
+    [
+     "not",
+     22
+    ],
+    [
+     "again",
+     19
+    ],
+    [
+     "over",
+     19
+    ],
+    [
+     "first",
+     14
+    ],
+    [
+     "him",
+     11
+    ],
+    [
+     "door",
+     9
+    ]
+   ]
+  },
+  "R7": {
+   "variants": 2169,
+   "files": 6,
+   "segments": 3245,
+   "segmentsPerVariant": 1.496,
+   "terminalStopShare": 0.935,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0,
+   "oneSegment": 0.58,
+   "twoSegments": 0.35,
+   "threePlusSegments": 0.069,
+   "wps": {
+    "mean": 8.8,
+    "sd": 4.9,
+    "p10": 4,
+    "p50": 8,
+    "p90": 16,
+    "under8": 0.472,
+    "over30": 0.001
+   },
+   "shapesRate": {
+    "antithesisShape": 0.019,
+    "ratherThan": 0.008,
+    "triadList": 0.075,
+    "doubledAdj": 0.023,
+    "participialOpener": 0.021,
+    "secondSentSummary": 0.031,
+    "glossTail": 0.003,
+    "semicolon": 0.015,
+    "colon": 0.051,
+    "question": 0,
+    "parenthesis": 0.016,
+    "thereIsOpener": 0.004,
+    "abstractCloser": 0.086,
+    "pronounCloser": 0.028,
+    "adverbsPerSegment": 0.05
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 65,
+    "digitsRate": 0.03,
+    "contractionRate": 0.004,
+    "thePCs": 0
+   },
+   "tellsTotal": 19,
+   "tellsRate": 0.009,
+   "tellsExogenous": 19,
+   "tellsExogenousRate": 0.009,
+   "tells": {
+    "linger": 1,
+    "heart of": 3,
+    "serves as": 2,
+    "journey": 7,
+    "stands as": 1,
+    "notable": 1,
+    "navigate": 2,
+    "crucial": 1,
+    "dance": 1
+   },
+   "juzekTotal": 2,
+   "juzekExogenous": 2,
+   "juzek": {
+    "delving": 2
+   },
+   "petTotal": 150,
+   "petRate": 0.069,
+   "pet": {
+    "its own": 33,
+    "nobody / no one / nothing": 44,
+    "already": 3,
+    "enough to / enough that": 19,
+    "rather than": 18,
+    "yet": 5,
+    "quiet / quietly": 15,
+    "whatever": 6,
+    "no small / not a trivial": 1,
+    "still": 2,
+    "which is / which means": 4
+   },
+   "pools": {
+    "poolsWith2Plus": 315,
+    "meanPoolSize": 2,
+    "sameSegmentCountShare": 0.714,
+    "repeatedTwoWordOpenerShare": 0.003,
+    "meanWithinPoolWordSd": 1.2
+   },
+   "topOpeners": [
+    [
+     "a",
+     424
+    ],
+    [
+     "the",
+     205
+    ],
+    [
+     "it",
+     78
+    ],
+    [
+     "an",
+     38
+    ],
+    [
+     "no",
+     36
+    ],
+    [
+     "multiple",
+     32
+    ],
+    [
+     "where",
+     25
+    ],
+    [
+     "several",
+     24
+    ],
+    [
+     "essential",
+     23
+    ],
+    [
+     "one",
+     17
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     57
+    ],
+    [
+     "trade",
+     36
+    ],
+    [
+     "goods",
+     25
+    ],
+    [
+     "city",
+     25
+    ],
+    [
+     "scale",
+     24
+    ],
+    [
+     "work",
+     22
+    ],
+    [
+     "them",
+     16
+    ],
+    [
+     "guild",
+     14
+    ],
+    [
+     "settlement",
+     14
+    ],
+    [
+     "one",
+     13
+    ]
+   ]
+  },
+  "R8": {
+   "variants": 1738,
+   "files": 17,
+   "segments": 2226,
+   "segmentsPerVariant": 1.281,
+   "terminalStopShare": 0.469,
+   "capitalOpenShare": 0.856,
+   "slotBearingShare": 0.109,
+   "oneSegment": 0.783,
+   "twoSegments": 0.166,
+   "threePlusSegments": 0.052,
+   "wps": {
+    "mean": 10.7,
+    "sd": 5.5,
+    "p10": 5,
+    "p50": 10,
+    "p90": 17,
+    "under8": 0.289,
+    "over30": 0.008
+   },
+   "shapesRate": {
+    "antithesisShape": 0.025,
+    "ratherThan": 0.007,
+    "triadList": 0.066,
+    "doubledAdj": 0.009,
+    "participialOpener": 0.018,
+    "secondSentSummary": 0.017,
+    "glossTail": 0.01,
+    "semicolon": 0.055,
+    "colon": 0.071,
+    "question": 0.001,
+    "parenthesis": 0.047,
+    "thereIsOpener": 0.013,
+    "abstractCloser": 0.084,
+    "pronounCloser": 0.05,
+    "adverbsPerSegment": 0.148
+   },
+   "bibleHardRules": {
+    "emDash": 4,
+    "emDashRate": 0.002,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 1,
+    "emphasisCapsRate": 0.001,
+    "digitsInProse": 5,
+    "digitsRate": 0.003,
+    "contractionRate": 0.048,
+    "thePCs": 1
+   },
+   "tellsTotal": 22,
+   "tellsRate": 0.013,
+   "tellsExogenous": 22,
+   "tellsExogenousRate": 0.013,
+   "tells": {
+    "foster": 1,
+    "landscape": 2,
+    "notable": 1,
+    "beacon": 1,
+    "journey": 4,
+    "tension": 1,
+    "linger": 3,
+    "the very": 2,
+    "echo": 2,
+    "meticulous": 1,
+    "navigate": 2,
+    "whisper": 1,
+    "remnant": 1
+   },
+   "juzekTotal": 1,
+   "juzekExogenous": 1,
+   "juzek": {
+    "surpasses": 1
+   },
+   "petTotal": 222,
+   "petRate": 0.128,
+   "pet": {
+    "still": 51,
+    "rather than": 13,
+    "quiet / quietly": 30,
+    "yet": 17,
+    "nobody / no one / nothing": 44,
+    "already": 13,
+    "which is / which means": 12,
+    "enough to / enough that": 21,
+    "its own": 8,
+    "whatever": 10,
+    "kind of / sort of": 3
+   },
+   "pools": {
+    "poolsWith2Plus": 231,
+    "meanPoolSize": 3.3,
+    "sameSegmentCountShare": 0.892,
+    "repeatedTwoWordOpenerShare": 0.048,
+    "meanWithinPoolWordSd": 1.5
+   },
+   "topOpeners": [
+    [
+     "the",
+     433
+    ],
+    [
+     "a",
+     237
+    ],
+    [
+     "x",
+     61
+    ],
+    [
+     "they",
+     48
+    ],
+    [
+     "someone",
+     34
+    ],
+    [
+     "an",
+     28
+    ],
+    [
+     "it",
+     24
+    ],
+    [
+     "was",
+     24
+    ],
+    [
+     "has",
+     22
+    ],
+    [
+     "what",
+     21
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     62
+    ],
+    [
+     "them",
+     33
+    ],
+    [
+     "exhausted",
+     23
+    ],
+    [
+     "infrastructure",
+     19
+    ],
+    [
+     "access",
+     19
+    ],
+    [
+     "authority",
+     16
+    ],
+    [
+     "trade",
+     14
+    ],
+    [
+     "settlement",
+     14
+    ],
+    [
+     "grammar",
+     11
+    ],
+    [
+     "years",
+     10
+    ]
+   ]
+  },
+  "R9": {
+   "variants": 619,
+   "files": 4,
+   "segments": 972,
+   "segmentsPerVariant": 1.57,
+   "terminalStopShare": 0.819,
+   "capitalOpenShare": 0.989,
+   "slotBearingShare": 0.071,
+   "oneSegment": 0.538,
+   "twoSegments": 0.37,
+   "threePlusSegments": 0.092,
+   "wps": {
+    "mean": 7.7,
+    "sd": 4.7,
+    "p10": 3,
+    "p50": 6,
+    "p90": 14,
+    "under8": 0.616,
+    "over30": 0.001
+   },
+   "shapesRate": {
+    "antithesisShape": 0.024,
+    "ratherThan": 0,
+    "triadList": 0.027,
+    "doubledAdj": 0.002,
+    "participialOpener": 0.014,
+    "secondSentSummary": 0.019,
+    "glossTail": 0.003,
+    "semicolon": 0.053,
+    "colon": 0.057,
+    "question": 0.034,
+    "parenthesis": 0.036,
+    "thereIsOpener": 0,
+    "abstractCloser": 0.057,
+    "pronounCloser": 0.038,
+    "adverbsPerSegment": 0.037
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 10,
+    "emphasisCapsRate": 0.016,
+    "digitsInProse": 20,
+    "digitsRate": 0.032,
+    "contractionRate": 0.05,
+    "thePCs": 0
+   },
+   "tellsTotal": 63,
+   "tellsRate": 0.102,
+   "tellsExogenous": 2,
+   "tellsExogenousRate": 0.003,
+   "tells": {
+    "realm": 34,
+    "narrative": 27,
+    "tension": 2
+   },
+   "juzekTotal": 34,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 34
+   },
+   "petTotal": 58,
+   "petRate": 0.094,
+   "pet": {
+    "nobody / no one / nothing": 19,
+    "yet": 12,
+    "already": 11,
+    "still": 6,
+    "its own": 6,
+    "enough to / enough that": 2,
+    "quiet / quietly": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 4,
+    "meanPoolSize": 4.5,
+    "sameSegmentCountShare": 1,
+    "repeatedTwoWordOpenerShare": 0,
+    "meanWithinPoolWordSd": 0.9
+   },
+   "topOpeners": [
+    [
+     "the",
+     125
+    ],
+    [
+     "a",
+     43
+    ],
+    [
+     "your",
+     41
+    ],
+    [
+     "you",
+     32
+    ],
+    [
+     "try",
+     32
+    ],
+    [
+     "no",
+     25
+    ],
+    [
+     "every",
+     22
+    ],
+    [
+     "this",
+     21
+    ],
+    [
+     "that",
+     21
+    ],
+    [
+     "nothing",
+     14
+    ]
+   ],
+   "topClosers": [
+    [
+     "again",
+     19
+    ],
+    [
+     "it",
+     16
+    ],
+    [
+     "more",
+     16
+    ],
+    [
+     "settlement",
+     15
+    ],
+    [
+     "x",
+     14
+    ],
+    [
+     "account",
+     12
+    ],
+    [
+     "saved",
+     12
+    ],
+    [
+     "",
+     10
+    ],
+    [
+     "credits",
+     10
+    ],
+    [
+     "itself",
+     9
+    ]
+   ]
+  },
+  "R10": {
+   "variants": 505,
+   "files": 4,
+   "segments": 665,
+   "segmentsPerVariant": 1.317,
+   "terminalStopShare": 0.634,
+   "capitalOpenShare": 0.907,
+   "slotBearingShare": 0,
+   "oneSegment": 0.739,
+   "twoSegments": 0.214,
+   "threePlusSegments": 0.048,
+   "wps": {
+    "mean": 8.5,
+    "sd": 5.8,
+    "p10": 4,
+    "p50": 7,
+    "p90": 17,
+    "under8": 0.555,
+    "over30": 0.005
+   },
+   "shapesRate": {
+    "antithesisShape": 0.018,
+    "ratherThan": 0.004,
+    "triadList": 0.028,
+    "doubledAdj": 0.008,
+    "participialOpener": 0.006,
+    "secondSentSummary": 0.063,
+    "glossTail": 0,
+    "semicolon": 0.133,
+    "colon": 0.036,
+    "question": 0,
+    "parenthesis": 0.03,
+    "thereIsOpener": 0.002,
+    "abstractCloser": 0.114,
+    "pronounCloser": 0.024,
+    "adverbsPerSegment": 0.048
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 56,
+    "digitsRate": 0.111,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 29,
+   "tellsRate": 0.057,
+   "tellsExogenous": 1,
+   "tellsExogenousRate": 0.002,
+   "tells": {
+    "realm": 22,
+    "remnant": 1,
+    "narrative": 6
+   },
+   "juzekTotal": 22,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 22
+   },
+   "petTotal": 15,
+   "petRate": 0.03,
+   "pet": {
+    "enough to / enough that": 1,
+    "nobody / no one / nothing": 2,
+    "yet": 2,
+    "still": 2,
+    "rather than": 2,
+    "its own": 5,
+    "already": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 0,
+    "meanPoolSize": 0,
+    "sameSegmentCountShare": null,
+    "repeatedTwoWordOpenerShare": null,
+    "meanWithinPoolWordSd": null
+   },
+   "topOpeners": [
+    [
+     "a",
+     63
+    ],
+    [
+     "the",
+     52
+    ],
+    [
+     "it",
+     29
+    ],
+    [
+     "removes",
+     19
+    ],
+    [
+     "magic",
+     18
+    ],
+    [
+     "military",
+     12
+    ],
+    [
+     "set",
+     12
+    ],
+    [
+     "clears",
+     11
+    ],
+    [
+     "how",
+     10
+    ],
+    [
+     "adds",
+     9
+    ]
+   ],
+   "topClosers": [
+    [
+     "",
+     38
+    ],
+    [
+     "settlement",
+     25
+    ],
+    [
+     "map",
+     16
+    ],
+    [
+     "ui",
+     14
+    ],
+    [
+     "campaign",
+     11
+    ],
+    [
+     "undo",
+     11
+    ],
+    [
+     "session",
+     10
+    ],
+    [
+     "it",
+     8
+    ],
+    [
+     "state",
+     8
+    ],
+    [
+     "store",
+     7
+    ]
+   ]
+  },
+  "R11": {
+   "variants": 216,
+   "files": 10,
+   "segments": 271,
+   "segmentsPerVariant": 1.255,
+   "terminalStopShare": 0.819,
+   "capitalOpenShare": 1,
+   "slotBearingShare": 0.194,
+   "oneSegment": 0.787,
+   "twoSegments": 0.171,
+   "threePlusSegments": 0.042,
+   "wps": {
+    "mean": 9.3,
+    "sd": 6.5,
+    "p10": 4,
+    "p50": 7,
+    "p90": 17,
+    "under8": 0.502,
+    "over30": 0.015
+   },
+   "shapesRate": {
+    "antithesisShape": 0.042,
+    "ratherThan": 0.009,
+    "triadList": 0.009,
+    "doubledAdj": 0,
+    "participialOpener": 0.011,
+    "secondSentSummary": 0,
+    "glossTail": 0,
+    "semicolon": 0.13,
+    "colon": 0.116,
+    "question": 0,
+    "parenthesis": 0.222,
+    "thereIsOpener": 0,
+    "abstractCloser": 0.122,
+    "pronounCloser": 0.026,
+    "adverbsPerSegment": 0.048
+   },
+   "bibleHardRules": {
+    "emDash": 1,
+    "emDashRate": 0.005,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 9,
+    "emphasisCapsRate": 0.042,
+    "digitsInProse": 3,
+    "digitsRate": 0.014,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 4,
+   "tellsRate": 0.019,
+   "tellsExogenous": 2,
+   "tellsExogenousRate": 0.009,
+   "tells": {
+    "tension": 1,
+    "realm": 2,
+    "remnant": 1
+   },
+   "juzekTotal": 2,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 2
+   },
+   "petTotal": 17,
+   "petRate": 0.079,
+   "pet": {
+    "already": 7,
+    "its own": 2,
+    "yet": 4,
+    "nobody / no one / nothing": 2,
+    "rather than": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 0,
+    "meanPoolSize": 0,
+    "sameSegmentCountShare": null,
+    "repeatedTwoWordOpenerShare": null,
+    "meanWithinPoolWordSd": null
+   },
+   "topOpeners": [
+    [
+     "a",
+     61
+    ],
+    [
+     "the",
+     48
+    ],
+    [
+     "x",
+     17
+    ],
+    [
+     "an",
+     10
+    ],
+    [
+     "no",
+     7
+    ],
+    [
+     "optional",
+     7
+    ],
+    [
+     "folded",
+     6
+    ],
+    [
+     "resource",
+     4
+    ],
+    [
+     "faction",
+     4
+    ],
+    [
+     "how",
+     3
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     14
+    ],
+    [
+     "settlement",
+     9
+    ],
+    [
+     "campaign",
+     8
+    ],
+    [
+     "stressor",
+     6
+    ],
+    [
+     "eg",
+     6
+    ],
+    [
+     "first",
+     4
+    ],
+    [
+     "npc",
+     4
+    ],
+    [
+     "birth",
+     4
+    ],
+    [
+     "arc",
+     4
+    ],
+    [
+     "contest",
+     4
+    ]
+   ]
+  },
+  "R12": {
+   "variants": 108,
+   "files": 7,
+   "segments": 126,
+   "segmentsPerVariant": 1.167,
+   "terminalStopShare": 0.852,
+   "capitalOpenShare": 0.898,
+   "slotBearingShare": 0.083,
+   "oneSegment": 0.852,
+   "twoSegments": 0.13,
+   "threePlusSegments": 0.019,
+   "wps": {
+    "mean": 10.6,
+    "sd": 5.3,
+    "p10": 4,
+    "p50": 10,
+    "p90": 18,
+    "under8": 0.381,
+    "over30": 0
+   },
+   "shapesRate": {
+    "antithesisShape": 0.009,
+    "ratherThan": 0,
+    "triadList": 0.009,
+    "doubledAdj": 0.019,
+    "participialOpener": 0.016,
+    "secondSentSummary": 0,
+    "glossTail": 0,
+    "semicolon": 0.176,
+    "colon": 0.102,
+    "question": 0,
+    "parenthesis": 0.009,
+    "thereIsOpener": 0.032,
+    "abstractCloser": 0.04,
+    "pronounCloser": 0.056,
+    "adverbsPerSegment": 0.127
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 1,
+    "digitsRate": 0.009,
+    "contractionRate": 0.019,
+    "thePCs": 0
+   },
+   "tellsTotal": 1,
+   "tellsRate": 0.009,
+   "tellsExogenous": 1,
+   "tellsExogenousRate": 0.009,
+   "tells": {
+    "the very": 1
+   },
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 19,
+   "petRate": 0.176,
+   "pet": {
+    "quiet / quietly": 9,
+    "nobody / no one / nothing": 4,
+    "still": 5,
+    "already": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 6,
+    "meanPoolSize": 4,
+    "sameSegmentCountShare": 1,
+    "repeatedTwoWordOpenerShare": 0.667,
+    "meanWithinPoolWordSd": 1.1
+   },
+   "topOpeners": [
+    [
+     "the",
+     72
+    ],
+    [
+     "a",
+     8
+    ],
+    [
+     "x",
+     6
+    ],
+    [
+     "there",
+     4
+    ],
+    [
+     "nobody",
+     3
+    ],
+    [
+     "some",
+     3
+    ],
+    [
+     "stoneholt",
+     3
+    ],
+    [
+     "families",
+     2
+    ],
+    [
+     "criminal",
+     1
+    ],
+    [
+     "safe",
+     1
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     9
+    ],
+    [
+     "here",
+     5
+    ],
+    [
+     "quietly",
+     4
+    ],
+    [
+     "event",
+     4
+    ],
+    [
+     "note",
+     4
+    ],
+    [
+     "uneventful",
+     4
+    ],
+    [
+     "on",
+     4
+    ],
+    [
+     "price",
+     4
+    ],
+    [
+     "year",
+     3
+    ],
+    [
+     "leaving",
+     3
+    ]
+   ]
+  },
+  "R14": {
+   "variants": 561,
+   "files": 11,
+   "segments": 1038,
+   "segmentsPerVariant": 1.85,
+   "terminalStopShare": 0.872,
+   "capitalOpenShare": 0.998,
+   "slotBearingShare": 0.289,
+   "oneSegment": 0.431,
+   "twoSegments": 0.348,
+   "threePlusSegments": 0.221,
+   "wps": {
+    "mean": 10.9,
+    "sd": 8.1,
+    "p10": 3,
+    "p50": 8,
+    "p90": 23,
+    "under8": 0.46,
+    "over30": 0.039
+   },
+   "shapesRate": {
+    "antithesisShape": 0.052,
+    "ratherThan": 0.011,
+    "triadList": 0.077,
+    "doubledAdj": 0.018,
+    "participialOpener": 0.014,
+    "secondSentSummary": 0.02,
+    "glossTail": 0.052,
+    "semicolon": 0.102,
+    "colon": 0.178,
+    "question": 0,
+    "parenthesis": 0.061,
+    "thereIsOpener": 0.02,
+    "abstractCloser": 0.091,
+    "pronounCloser": 0.022,
+    "adverbsPerSegment": 0.113
+   },
+   "bibleHardRules": {
+    "emDash": 1,
+    "emDashRate": 0.002,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 1,
+    "emphasisCapsRate": 0.002,
+    "digitsInProse": 22,
+    "digitsRate": 0.039,
+    "contractionRate": 0.029,
+    "thePCs": 0
+   },
+   "tellsTotal": 8,
+   "tellsRate": 0.014,
+   "tellsExogenous": 8,
+   "tellsExogenousRate": 0.014,
+   "tells": {
+    "tension": 4,
+    "linger": 1,
+    "journey": 1,
+    "the very": 1,
+    "remnant": 1
+   },
+   "juzekTotal": 1,
+   "juzekExogenous": 1,
+   "juzek": {
+    "delving": 1
+   },
+   "petTotal": 138,
+   "petRate": 0.246,
+   "pet": {
+    "rather than": 7,
+    "nobody / no one / nothing": 31,
+    "which is / which means": 16,
+    "its own": 12,
+    "quiet / quietly": 12,
+    "already": 8,
+    "enough to / enough that": 11,
+    "whatever": 5,
+    "still": 17,
+    "yet": 8,
+    "kind of / sort of": 7,
+    "the sort of X that": 2,
+    "own kind of": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 15,
+    "meanPoolSize": 5,
+    "sameSegmentCountShare": 0.4,
+    "repeatedTwoWordOpenerShare": 0.133,
+    "meanWithinPoolWordSd": 4.8
+   },
+   "topOpeners": [
+    [
+     "the",
+     168
+    ],
+    [
+     "a",
+     62
+    ],
+    [
+     "x",
+     54
+    ],
+    [
+     "it",
+     17
+    ],
+    [
+     "multiple",
+     16
+    ],
+    [
+     "someone",
+     13
+    ],
+    [
+     "x's",
+     13
+    ],
+    [
+     "essential",
+     12
+    ],
+    [
+     "there",
+     12
+    ],
+    [
+     "you",
+     11
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     13
+    ],
+    [
+     "trade",
+     11
+    ],
+    [
+     "access",
+     9
+    ],
+    [
+     "one",
+     8
+    ],
+    [
+     "settlement",
+     7
+    ],
+    [
+     "authority",
+     7
+    ],
+    [
+     "production",
+     7
+    ],
+    [
+     "scale",
+     6
+    ],
+    [
+     "goods",
+     6
+    ],
+    [
+     "nothing",
+     5
+    ]
+   ]
+  },
+  "R15": {
+   "variants": 3883,
+   "files": 233,
+   "segments": 4889,
+   "segmentsPerVariant": 1.259,
+   "terminalStopShare": 0.588,
+   "capitalOpenShare": 0.813,
+   "slotBearingShare": 0.083,
+   "oneSegment": 0.783,
+   "twoSegments": 0.182,
+   "threePlusSegments": 0.036,
+   "wps": {
+    "mean": 9.1,
+    "sd": 6.4,
+    "p10": 4,
+    "p50": 7,
+    "p90": 17,
+    "under8": 0.507,
+    "over30": 0.009
+   },
+   "shapesRate": {
+    "antithesisShape": 0.024,
+    "ratherThan": 0.008,
+    "triadList": 0.047,
+    "doubledAdj": 0.011,
+    "participialOpener": 0.017,
+    "secondSentSummary": 0.008,
+    "glossTail": 0.011,
+    "semicolon": 0.074,
+    "colon": 0.079,
+    "question": 0.005,
+    "parenthesis": 0.062,
+    "thereIsOpener": 0.004,
+    "abstractCloser": 0.095,
+    "pronounCloser": 0.025,
+    "adverbsPerSegment": 0.057
+   },
+   "bibleHardRules": {
+    "emDash": 71,
+    "emDashRate": 0.018,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 189,
+    "emphasisCapsRate": 0.049,
+    "digitsInProse": 209,
+    "digitsRate": 0.054,
+    "contractionRate": 0.012,
+    "thePCs": 0
+   },
+   "tellsTotal": 84,
+   "tellsRate": 0.022,
+   "tellsExogenous": 33,
+   "tellsExogenousRate": 0.008,
+   "tells": {
+    "realm": 44,
+    "remnant": 2,
+    "navigate": 2,
+    "journey": 9,
+    "crucial": 1,
+    "serves as": 1,
+    "dance": 1,
+    "foster": 1,
+    "landscape": 2,
+    "notable": 4,
+    "beacon": 1,
+    "narrative": 7,
+    "tension": 4,
+    "resilien": 1,
+    "the very": 2,
+    "whisper": 2
+   },
+   "juzekTotal": 40,
+   "juzekExogenous": 1,
+   "juzek": {
+    "realm": 39,
+    "delving": 1
+   },
+   "petTotal": 311,
+   "petRate": 0.08,
+   "pet": {
+    "kind of / sort of": 3,
+    "rather than": 35,
+    "still": 18,
+    "nobody / no one / nothing": 111,
+    "quiet / quietly": 22,
+    "already": 39,
+    "its own": 29,
+    "yet": 16,
+    "which is / which means": 24,
+    "whatever": 4,
+    "enough to / enough that": 10
+   },
+   "pools": {
+    "poolsWith2Plus": 193,
+    "meanPoolSize": 2.9,
+    "sameSegmentCountShare": 0.907,
+    "repeatedTwoWordOpenerShare": 0.13,
+    "meanWithinPoolWordSd": 1.2
+   },
+   "topOpeners": [
+    [
+     "the",
+     775
+    ],
+    [
+     "a",
+     293
+    ],
+    [
+     "x",
+     101
+    ],
+    [
+     "no",
+     65
+    ],
+    [
+     "they",
+     56
+    ],
+    [
+     "what",
+     44
+    ],
+    [
+     "it",
+     33
+    ],
+    [
+     "has",
+     32
+    ],
+    [
+     "an",
+     31
+    ],
+    [
+     "multiple",
+     30
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     79
+    ],
+    [
+     "",
+     64
+    ],
+    [
+     "x",
+     42
+    ],
+    [
+     "settlement",
+     32
+    ],
+    [
+     "trade",
+     31
+    ],
+    [
+     "goods",
+     24
+    ],
+    [
+     "council",
+     20
+    ],
+    [
+     "road",
+     19
+    ],
+    [
+     "them",
+     19
+    ],
+    [
+     "authority",
+     19
+    ]
+   ]
+  },
+  "R16": {
+   "variants": 2685,
+   "files": 354,
+   "segments": 3944,
+   "segmentsPerVariant": 1.469,
+   "terminalStopShare": 0.615,
+   "capitalOpenShare": 0.897,
+   "slotBearingShare": 0.171,
+   "oneSegment": 0.651,
+   "twoSegments": 0.264,
+   "threePlusSegments": 0.085,
+   "wps": {
+    "mean": 8.1,
+    "sd": 5.9,
+    "p10": 4,
+    "p50": 6,
+    "p90": 15,
+    "under8": 0.599,
+    "over30": 0.007
+   },
+   "shapesRate": {
+    "antithesisShape": 0.023,
+    "ratherThan": 0.004,
+    "triadList": 0.032,
+    "doubledAdj": 0.003,
+    "participialOpener": 0.028,
+    "secondSentSummary": 0.024,
+    "glossTail": 0.004,
+    "semicolon": 0.053,
+    "colon": 0.101,
+    "question": 0.021,
+    "parenthesis": 0.091,
+    "thereIsOpener": 0.006,
+    "abstractCloser": 0.068,
+    "pronounCloser": 0.035,
+    "adverbsPerSegment": 0.058
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 24,
+    "emphasisCapsRate": 0.009,
+    "digitsInProse": 50,
+    "digitsRate": 0.019,
+    "contractionRate": 0.022,
+    "thePCs": 0
+   },
+   "tellsTotal": 225,
+   "tellsRate": 0.084,
+   "tellsExogenous": 20,
+   "tellsExogenousRate": 0.007,
+   "tells": {
+    "tension": 11,
+    "narrative": 40,
+    "realm": 165,
+    "echo": 3,
+    "resilien": 3,
+    "notable": 1,
+    "journey": 1,
+    "remnant": 1
+   },
+   "juzekTotal": 164,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 164
+   },
+   "petTotal": 285,
+   "petRate": 0.106,
+   "pet": {
+    "rather than": 10,
+    "yet": 71,
+    "quiet / quietly": 20,
+    "its own": 28,
+    "still": 52,
+    "nobody / no one / nothing": 58,
+    "already": 38,
+    "which is / which means": 4,
+    "kind of / sort of": 2,
+    "whatever": 1,
+    "enough to / enough that": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 297,
+    "meanPoolSize": 8.8,
+    "sameSegmentCountShare": 0.242,
+    "repeatedTwoWordOpenerShare": 0.478,
+    "meanWithinPoolWordSd": 5.8
+   },
+   "topOpeners": [
+    [
+     "the",
+     425
+    ],
+    [
+     "a",
+     164
+    ],
+    [
+     "x",
+     161
+    ],
+    [
+     "no",
+     141
+    ],
+    [
+     "this",
+     132
+    ],
+    [
+     "your",
+     78
+    ],
+    [
+     "you",
+     49
+    ],
+    [
+     "it",
+     49
+    ],
+    [
+     "every",
+     47
+    ],
+    [
+     "what",
+     41
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     194
+    ],
+    [
+     "",
+     70
+    ],
+    [
+     "it",
+     66
+    ],
+    [
+     "yet",
+     57
+    ],
+    [
+     "settlement",
+     48
+    ],
+    [
+     "world",
+     37
+    ],
+    [
+     "map",
+     34
+    ],
+    [
+     "again",
+     30
+    ],
+    [
+     "here",
+     29
+    ],
+    [
+     "first",
+     28
+    ]
+   ]
+  },
+  "R17": {
+   "variants": 1293,
+   "files": 3,
+   "segments": 1293,
+   "segmentsPerVariant": 1,
+   "terminalStopShare": 0,
+   "capitalOpenShare": 0.012,
+   "slotBearingShare": 0.012,
+   "oneSegment": 1,
+   "twoSegments": 0,
+   "threePlusSegments": 0,
+   "wps": {
+    "mean": 7.5,
+    "sd": 2.1,
+    "p10": 5,
+    "p50": 7,
+    "p90": 10,
+    "under8": 0.512,
+    "over30": 0
+   },
+   "shapesRate": {
+    "antithesisShape": 0.016,
+    "ratherThan": 0.015,
+    "triadList": 0,
+    "doubledAdj": 0.009,
+    "participialOpener": 0.009,
+    "secondSentSummary": 0,
+    "glossTail": 0.001,
+    "semicolon": 0,
+    "colon": 0,
+    "question": 0,
+    "parenthesis": 0,
+    "thereIsOpener": 0.002,
+    "abstractCloser": 0.029,
+    "pronounCloser": 0.053,
+    "adverbsPerSegment": 0.036
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 10,
+   "tellsRate": 0.008,
+   "tellsExogenous": 2,
+   "tellsExogenousRate": 0.002,
+   "tells": {
+    "weight of": 1,
+    "realm": 8,
+    "linger": 1
+   },
+   "juzekTotal": 7,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 7
+   },
+   "petTotal": 131,
+   "petRate": 0.101,
+   "pet": {
+    "nobody / no one / nothing": 56,
+    "quiet / quietly": 15,
+    "rather than": 19,
+    "its own": 16,
+    "already": 6,
+    "enough to / enough that": 3,
+    "yet": 3,
+    "still": 12,
+    "which is / which means": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 174,
+    "meanPoolSize": 6,
+    "sameSegmentCountShare": 1,
+    "repeatedTwoWordOpenerShare": 0.006,
+    "meanWithinPoolWordSd": 1.5
+   },
+   "topOpeners": [
+    [
+     "a",
+     633
+    ],
+    [
+     "travellers",
+     123
+    ],
+    [
+     "an",
+     105
+    ],
+    [
+     "the",
+     55
+    ],
+    [
+     "carters",
+     21
+    ],
+    [
+     "what",
+     17
+    ],
+    [
+     "word",
+     12
+    ],
+    [
+     "men",
+     11
+    ],
+    [
+     "one",
+     9
+    ],
+    [
+     "terms",
+     9
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     37
+    ],
+    [
+     "for",
+     19
+    ],
+    [
+     "war",
+     18
+    ],
+    [
+     "road",
+     16
+    ],
+    [
+     "season",
+     15
+    ],
+    [
+     "here",
+     14
+    ],
+    [
+     "x",
+     14
+    ],
+    [
+     "again",
+     13
+    ],
+    [
+     "them",
+     13
+    ],
+    [
+     "one",
+     10
+    ]
+   ]
+  },
+  "R18": {
+   "variants": 5673,
+   "files": 546,
+   "segments": 6817,
+   "segmentsPerVariant": 1.202,
+   "terminalStopShare": 0.66,
+   "capitalOpenShare": 0.849,
+   "slotBearingShare": 0.441,
+   "oneSegment": 0.839,
+   "twoSegments": 0.131,
+   "threePlusSegments": 0.031,
+   "wps": {
+    "mean": 9,
+    "sd": 4.6,
+    "p10": 4,
+    "p50": 8,
+    "p90": 15,
+    "under8": 0.464,
+    "over30": 0.003
+   },
+   "shapesRate": {
+    "antithesisShape": 0.025,
+    "ratherThan": 0.011,
+    "triadList": 0.006,
+    "doubledAdj": 0.007,
+    "participialOpener": 0.015,
+    "secondSentSummary": 0.007,
+    "glossTail": 0.006,
+    "semicolon": 0.079,
+    "colon": 0.119,
+    "question": 0.003,
+    "parenthesis": 0.064,
+    "thereIsOpener": 0.005,
+    "abstractCloser": 0.092,
+    "pronounCloser": 0.037,
+    "adverbsPerSegment": 0.082
+   },
+   "bibleHardRules": {
+    "emDash": 44,
+    "emDashRate": 0.008,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 115,
+    "emphasisCapsRate": 0.02,
+    "digitsInProse": 66,
+    "digitsRate": 0.012,
+    "contractionRate": 0.009,
+    "thePCs": 0
+   },
+   "tellsTotal": 150,
+   "tellsRate": 0.026,
+   "tellsExogenous": 64,
+   "tellsExogenousRate": 0.011,
+   "tells": {
+    "realm": 73,
+    "journey": 2,
+    "tension": 19,
+    "resilien": 6,
+    "linger": 3,
+    "whisper": 3,
+    "notable": 5,
+    "navigate": 2,
+    "remnant": 6,
+    "narrative": 13,
+    "stands as": 2,
+    "weight of": 4,
+    "shadow of": 2,
+    "in the end": 1,
+    "the very": 1,
+    "serves as": 1,
+    "echo": 3,
+    "landscape": 1,
+    "fabric of": 1,
+    "bustling": 1,
+    "heart of": 1
+   },
+   "juzekTotal": 72,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 72
+   },
+   "petTotal": 539,
+   "petRate": 0.095,
+   "pet": {
+    "nobody / no one / nothing": 93,
+    "kind of / sort of": 8,
+    "its own": 52,
+    "still": 82,
+    "yet": 59,
+    "already": 62,
+    "quiet / quietly": 60,
+    "enough to / enough that": 42,
+    "the sort of X that": 2,
+    "rather than": 63,
+    "whatever": 7,
+    "which is / which means": 9
+   },
+   "pools": {
+    "poolsWith2Plus": 444,
+    "meanPoolSize": 12.5,
+    "sameSegmentCountShare": 0.653,
+    "repeatedTwoWordOpenerShare": 0.583,
+    "meanWithinPoolWordSd": 2.9
+   },
+   "topOpeners": [
+    [
+     "x",
+     1242
+    ],
+    [
+     "the",
+     1218
+    ],
+    [
+     "a",
+     433
+    ],
+    [
+     "no",
+     159
+    ],
+    [
+     "x's",
+     131
+    ],
+    [
+     "this",
+     81
+    ],
+    [
+     "it",
+     58
+    ],
+    [
+     "an",
+     47
+    ],
+    [
+     "its",
+     45
+    ],
+    [
+     "settlement",
+     40
+    ]
+   ],
+   "topClosers": [
+    [
+     "x",
+     802
+    ],
+    [
+     "it",
+     151
+    ],
+    [
+     "them",
+     56
+    ],
+    [
+     "settlement",
+     48
+    ],
+    [
+     "authority",
+     34
+    ],
+    [
+     "xx",
+     30
+    ],
+    [
+     "now",
+     29
+    ],
+    [
+     "here",
+     28
+    ],
+    [
+     "object",
+     26
+    ],
+    [
+     "war",
+     25
+    ]
+   ]
+  },
+  "A-U": {
+   "variants": 4626,
+   "files": 11,
+   "segments": 5274,
+   "segmentsPerVariant": 1.14,
+   "terminalStopShare": 0.993,
+   "capitalOpenShare": 0.997,
+   "slotBearingShare": 0.754,
+   "oneSegment": 0.878,
+   "twoSegments": 0.107,
+   "threePlusSegments": 0.015,
+   "wps": {
+    "mean": 15,
+    "sd": 6.8,
+    "p10": 7,
+    "p50": 15,
+    "p90": 21,
+    "under8": 0.114,
+    "over30": 0.027
+   },
+   "shapesRate": {
+    "antithesisShape": 0.019,
+    "ratherThan": 0.009,
+    "triadList": 0.009,
+    "doubledAdj": 0.008,
+    "participialOpener": 0.006,
+    "secondSentSummary": 0.022,
+    "glossTail": 0.062,
+    "semicolon": 0.187,
+    "colon": 0.102,
+    "question": 0,
+    "parenthesis": 0.006,
+    "thereIsOpener": 0.038,
+    "abstractCloser": 0.029,
+    "pronounCloser": 0.123,
+    "adverbsPerSegment": 0.054
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 2,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 69,
+   "tellsRate": 0.015,
+   "tellsExogenous": 18,
+   "tellsExogenousRate": 0.004,
+   "tells": {
+    "realm": 51,
+    "journey": 4,
+    "whisper": 1,
+    "notable": 1,
+    "tension": 1,
+    "remnant": 1,
+    "stands as": 2,
+    "linger": 1,
+    "fabric of": 1,
+    "the very": 1,
+    "in the end": 3,
+    "weight of": 2
+   },
+   "juzekTotal": 51,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 51
+   },
+   "petTotal": 1329,
+   "petRate": 0.287,
+   "pet": {
+    "nobody / no one / nothing": 590,
+    "still": 178,
+    "its own": 95,
+    "rather than": 42,
+    "quiet / quietly": 70,
+    "already": 47,
+    "yet": 29,
+    "which is / which means": 200,
+    "enough to / enough that": 23,
+    "whatever": 43,
+    "kind of / sort of": 9,
+    "own kind of": 3
+   },
+   "pools": {
+    "poolsWith2Plus": 668,
+    "meanPoolSize": 6.9,
+    "sameSegmentCountShare": 0.479,
+    "repeatedTwoWordOpenerShare": 0.183,
+    "meanWithinPoolWordSd": 4
+   },
+   "topOpeners": [
+    [
+     "the",
+     1955
+    ],
+    [
+     "x",
+     1084
+    ],
+    [
+     "x's",
+     263
+    ],
+    [
+     "it",
+     241
+    ],
+    [
+     "a",
+     222
+    ],
+    [
+     "they",
+     202
+    ],
+    [
+     "what",
+     107
+    ],
+    [
+     "nothing",
+     80
+    ],
+    [
+     "there",
+     72
+    ],
+    [
+     "nobody",
+     64
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     494
+    ],
+    [
+     "x",
+     314
+    ],
+    [
+     "them",
+     89
+    ],
+    [
+     "not",
+     60
+    ],
+    [
+     "season",
+     59
+    ],
+    [
+     "now",
+     55
+    ],
+    [
+     "one",
+     54
+    ],
+    [
+     "did",
+     40
+    ],
+    [
+     "else",
+     34
+    ],
+    [
+     "since",
+     33
+    ]
+   ]
+  },
+  "A-W": {
+   "variants": 4276,
+   "files": 11,
+   "segments": 5033,
+   "segmentsPerVariant": 1.177,
+   "terminalStopShare": 0.748,
+   "capitalOpenShare": 0.751,
+   "slotBearingShare": 0.556,
+   "oneSegment": 0.826,
+   "twoSegments": 0.172,
+   "threePlusSegments": 0.003,
+   "wps": {
+    "mean": 15.7,
+    "sd": 8.6,
+    "p10": 6,
+    "p50": 14,
+    "p90": 27,
+    "under8": 0.179,
+    "over30": 0.063
+   },
+   "shapesRate": {
+    "antithesisShape": 0.082,
+    "ratherThan": 0.067,
+    "triadList": 0.014,
+    "doubledAdj": 0.01,
+    "participialOpener": 0.009,
+    "secondSentSummary": 0.023,
+    "glossTail": 0.048,
+    "semicolon": 0.151,
+    "colon": 0.083,
+    "question": 0,
+    "parenthesis": 0.004,
+    "thereIsOpener": 0.033,
+    "abstractCloser": 0.038,
+    "pronounCloser": 0.114,
+    "adverbsPerSegment": 0.12
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 30,
+   "tellsRate": 0.007,
+   "tellsExogenous": 14,
+   "tellsExogenousRate": 0.003,
+   "tells": {
+    "realm": 16,
+    "the very": 3,
+    "journey": 3,
+    "tension": 1,
+    "stands as": 2,
+    "weight of": 4,
+    "resilien": 1
+   },
+   "juzekTotal": 16,
+   "juzekExogenous": 0,
+   "juzek": {
+    "realm": 16
+   },
+   "petTotal": 1756,
+   "petRate": 0.411,
+   "pet": {
+    "nobody / no one / nothing": 623,
+    "still": 179,
+    "its own": 116,
+    "rather than": 293,
+    "quiet / quietly": 79,
+    "whatever": 56,
+    "already": 41,
+    "which is / which means": 151,
+    "enough to / enough that": 113,
+    "yet": 68,
+    "kind of / sort of": 29,
+    "own kind of": 5,
+    "no small / not a trivial": 1,
+    "the sort of X that": 2
+   },
+   "pools": {
+    "poolsWith2Plus": 436,
+    "meanPoolSize": 9.8,
+    "sameSegmentCountShare": 0.727,
+    "repeatedTwoWordOpenerShare": 0.218,
+    "meanWithinPoolWordSd": 2.9
+   },
+   "topOpeners": [
+    [
+     "the",
+     1429
+    ],
+    [
+     "a",
+     759
+    ],
+    [
+     "x",
+     738
+    ],
+    [
+     "what",
+     275
+    ],
+    [
+     "x's",
+     148
+    ],
+    [
+     "travellers",
+     127
+    ],
+    [
+     "there",
+     114
+    ],
+    [
+     "nothing",
+     108
+    ],
+    [
+     "it",
+     107
+    ],
+    [
+     "an",
+     98
+    ]
+   ],
+   "topClosers": [
+    [
+     "it",
+     369
+    ],
+    [
+     "x",
+     95
+    ],
+    [
+     "them",
+     93
+    ],
+    [
+     "here",
+     63
+    ],
+    [
+     "one",
+     52
+    ],
+    [
+     "for",
+     47
+    ],
+    [
+     "not",
+     45
+    ],
+    [
+     "season",
+     45
+    ],
+    [
+     "road",
+     39
+    ],
+    [
+     "town",
+     35
+    ]
+   ]
+  },
+  "BIBLE": {
+   "variants": 67,
+   "files": 1,
+   "segments": 67,
+   "segmentsPerVariant": 1,
+   "terminalStopShare": 0.881,
+   "capitalOpenShare": 0.91,
+   "slotBearingShare": 0,
+   "oneSegment": 1,
+   "twoSegments": 0,
+   "threePlusSegments": 0,
+   "wps": {
+    "mean": 8.1,
+    "sd": 6.9,
+    "p10": 2,
+    "p50": 6,
+    "p90": 17,
+    "under8": 0.642,
+    "over30": 0.015
+   },
+   "shapesRate": {
+    "antithesisShape": 0.045,
+    "ratherThan": 0.015,
+    "triadList": 0.03,
+    "doubledAdj": 0,
+    "participialOpener": 0.03,
+    "secondSentSummary": 0,
+    "glossTail": 0,
+    "semicolon": 0,
+    "colon": 0.119,
+    "question": 0.015,
+    "parenthesis": 0.09,
+    "thereIsOpener": 0,
+    "abstractCloser": 0.06,
+    "pronounCloser": 0.015,
+    "adverbsPerSegment": 0.03
+   },
+   "bibleHardRules": {
+    "emDash": 0,
+    "emDashRate": 0,
+    "exclamation": 0,
+    "exclamationRate": 0,
+    "emphasisCaps": 0,
+    "emphasisCapsRate": 0,
+    "digitsInProse": 0,
+    "digitsRate": 0,
+    "contractionRate": 0,
+    "thePCs": 0
+   },
+   "tellsTotal": 1,
+   "tellsRate": 0.015,
+   "tellsExogenous": 0,
+   "tellsExogenousRate": 0,
+   "tells": {
+    "narrative": 1
+   },
+   "juzekTotal": 0,
+   "juzekExogenous": 0,
+   "juzek": {},
+   "petTotal": 4,
+   "petRate": 0.06,
+   "pet": {
+    "rather than": 1,
+    "its own": 1,
+    "yet": 1,
+    "nobody / no one / nothing": 1
+   },
+   "pools": {
+    "poolsWith2Plus": 4,
+    "meanPoolSize": 16.8,
+    "sameSegmentCountShare": 1,
+    "repeatedTwoWordOpenerShare": 0.25,
+    "meanWithinPoolWordSd": 6.5
+   },
+   "topOpeners": [
+    [
+     "the",
+     8
+    ],
+    [
+     "a",
+     6
+    ],
+    [
+     "they",
+     4
+    ],
+    [
+     "when",
+     2
+    ],
+    [
+     "toggle",
+     2
+    ],
+    [
+     "something",
+     2
+    ],
+    [
+     "settlementforge",
+     1
+    ],
+    [
+     "who",
+     1
+    ],
+    [
+     "no",
+     1
+    ],
+    [
+     "fully",
+     1
+    ]
+   ],
+   "topClosers": [
+    [
+     "metropolis",
+     2
+    ],
+    [
+     "sentence",
+     1
+    ],
+    [
+     "judgment",
+     1
+    ],
+    [
+     "exclaim",
+     1
+    ],
+    [
+     "away",
+     1
+    ],
+    [
+     "terms",
+     1
+    ],
+    [
+     "on",
+     1
+    ],
+    [
+     "product",
+     1
+    ],
+    [
+     "have",
+     1
+    ],
+    [
+     "spring",
+     1
+    ]
+   ]
+  }
+ },
+ "tics": {
+  "R1": [
+   {
+    "gram": "combination at",
+    "count": 23,
+    "pools": 12,
+    "rate": 0.01,
+    "lift": 484.8,
+    "example": "No combination at {settlement} holds enough of the hall to govern it; every decision must be assembled separately, and several are not assembled at all."
+   },
+   {
+    "gram": "is arranged",
+    "count": 18,
+    "pools": 18,
+    "rate": 0.008,
+    "lift": 381.7,
+    "example": "A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met."
+   },
+   {
+    "gram": "very little",
+    "count": 15,
+    "pools": 15,
+    "rate": 0.007,
+    "lift": 319.8,
+    "example": "Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off."
+   },
+   {
+    "gram": "town at {}",
+    "count": 14,
+    "pools": 14,
+    "rate": 0.006,
+    "lift": 299.2,
+    "example": "A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring."
+   },
+   {
+    "gram": "{} and the town",
+    "count": 13,
+    "pools": 13,
+    "rate": 0.006,
+    "lift": 278.5,
+    "example": "Nothing threatens {settlement} and the town is at full strength anyway, which is a choice somebody made and is still paying for."
+   },
+   {
+    "gram": "at {} is not",
+    "count": 12,
+    "pools": 12,
+    "rate": 0.005,
+    "lift": 257.9,
+    "example": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual."
+   },
+   {
+    "gram": "the town has stopped",
+    "count": 12,
+    "pools": 12,
+    "rate": 0.005,
+    "lift": 257.9,
+    "example": "The town has stopped being able to pay for its own defense and has not yet stopped having one, and the gap between those two facts is closing."
+   },
+   {
+    "gram": "the town does",
+    "count": 27,
+    "pools": 27,
+    "rate": 0.012,
+    "lift": 189.1,
+    "example": "The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead."
+   },
+   {
+    "gram": "the combination",
+    "count": 27,
+    "pools": 15,
+    "rate": 0.012,
+    "lift": 189.1,
+    "example": "The town is carrying several pressures together at {settlement}, and it is the combination rather than any single one that is doing the damage."
+   },
+   {
+    "gram": "and finds",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.005,
+    "lift": 237.3,
+    "example": "A stranger walks the perimeter at {settlement} and finds long stretches of good work with nobody on them, in a country where that matters a great deal."
+   }
+  ],
+  "R2": [
+   {
+    "gram": "old hands",
+    "count": 16,
+    "pools": 16,
+    "rate": 0.034,
+    "lift": 1772.7,
+    "example": "The old hands at {settlement} measure a full granary against a year none of them chose: the tribute has gone out through {timeband_span}, and nobody under a certain age here has seen the stores as they stood before the terms."
+   },
+   {
+    "gram": "hands at {}",
+    "count": 10,
+    "pools": 10,
+    "rate": 0.021,
+    "lift": 1128.1,
+    "example": "The old hands at {settlement} measure a full granary against a year none of them chose: the tribute has gone out through {timeband_span}, and nobody under a certain age here has seen the stores as they stood before the terms."
+   },
+   {
+    "gram": "older hands",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.013,
+    "lift": 698.3,
+    "example": "The rite at {settlement} and the rite at {counterpart} have been one rite through {timeband_span}; nothing sacred has ever stood between the two towns to be pressed, and the older hands here take that as a fact of the place rather than a decision anyone made."
+   },
+   {
+    "gram": "for all that",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.011,
+    "lift": 590.9,
+    "example": "{settlement}'s own altars stand as they stood, for all that the town took the field and took {counterpart}: no banner ever proved a god, and nothing at all was taken from {creed}."
+   },
+   {
+    "gram": "the picture",
+    "count": 5,
+    "pools": 4,
+    "rate": 0.011,
+    "lift": 590.9,
+    "example": "The lean years turned {settlement}'s court toward {counterpart}'s valley and have not turned it back; what carries the argument is the court's own picture of that plenty, and the picture is wrong."
+   },
+   {
+    "gram": "the column that",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.011,
+    "lift": 590.9,
+    "example": "{settlement} has {band} more mouths than its last count and the {good} carts come oftener than the road was built for; the column that came up the {route} is entered as a trade flow now: the same feet, in a different book."
+   },
+   {
+    "gram": "no clerk",
+    "count": 5,
+    "pools": 4,
+    "rate": 0.011,
+    "lift": 590.9,
+    "example": "The war {settlement} fought over a creek nobody at its court had seen is closed, and its own opening receipt names a misjudgment as the deciding term; no clerk has softened it since."
+   },
+   {
+    "gram": "all that the",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.009,
+    "lift": 483.5,
+    "example": "{settlement}'s own altars stand as they stood, for all that the town took the field and took {counterpart}: no banner ever proved a god, and nothing at all was taken from {creed}."
+   },
+   {
+    "gram": "a term and",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.009,
+    "lift": 483.5,
+    "example": "{settlement} owes the {good} under a term and has never once been short of it: what the clause takes sits well above the town's own floor, and no season yet has brought the two figures near each other."
+   },
+   {
+    "gram": "{} remember",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.009,
+    "lift": 483.5,
+    "example": "The old hands at {settlement} remember when a shared rite was only a shared rite; it has been the working part of the peace with {counterpart} for {timeband_span}, and the two halls have not needed to speak directly in all of it."
+   }
+  ],
+  "R3": [
+   {
+    "gram": "free of",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.007,
+    "lift": 382.1,
+    "example": "{npc} is free of {captor} at last, and turns for {home}."
+   },
+   {
+    "gram": "settlers have",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.007,
+    "lift": 382.1,
+    "example": "{debit} settlers have raised the steading of {name} on the new {resource} workings."
+   },
+   {
+    "gram": "{} rides",
+    "count": 8,
+    "pools": 8,
+    "rate": 0.007,
+    "lift": 341.9,
+    "example": "{npc} rides out of {home}, bound for {dest}"
+   },
+   {
+    "gram": "{} near",
+    "count": 8,
+    "pools": 8,
+    "rate": 0.007,
+    "lift": 341.9,
+    "example": "Brigands waylay {npc} near {dest}"
+   },
+   {
+    "gram": "the sheet",
+    "count": 8,
+    "pools": 8,
+    "rate": 0.007,
+    "lift": 341.9,
+    "example": "The sheet was read aloud in council, and the council heard one man's account of another court."
+   },
+   {
+    "gram": "{}'s ransom",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.005,
+    "lift": 261.4,
+    "example": "Adventurers settle {npc}'s ransom to {captor}"
+   },
+   {
+    "gram": "{}'s envoy",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.005,
+    "lift": 261.4,
+    "example": "{dest} hears out {home}'s envoy"
+   },
+   {
+    "gram": "now leans",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.005,
+    "lift": 261.4,
+    "example": "{settlement}'s martial temper now leans {lean}; resolved contests changed the lesson."
+   },
+   {
+    "gram": "and its allies'",
+    "count": 6,
+    "pools": 4,
+    "rate": 0.005,
+    "lift": 261.4,
+    "example": "{name} has finished rebuilding in the year {year}, its wounds closed by its own hands and its allies'.{built}{graft}"
+   },
+   {
+    "gram": "envoy of",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.004,
+    "lift": 221.2,
+    "example": "An envoy of {home}, {npc}, is abroad toward {dest} on {purpose} business."
+   }
+  ],
+  "R4": [
+   {
+    "gram": "and it was",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.03,
+    "lift": 114.1,
+    "example": "and it was paid for when"
+   },
+   {
+    "gram": "when {}",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.03,
+    "lift": 114.1,
+    "example": "the turning when {clause}"
+   },
+   {
+    "gram": "it came",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.038,
+    "lift": 53.6,
+    "example": "and it came after"
+   },
+   {
+    "gram": "that {}",
+    "count": 5,
+    "pools": 3,
+    "rate": 0.038,
+    "lift": 32.2,
+    "example": "the truth that {clause}"
+   },
+   {
+    "gram": "on a",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.045,
+    "lift": 7,
+    "example": "on a grudge as old as"
+   },
+   {
+    "gram": "out of",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.03,
+    "lift": 3.6,
+    "example": "out of a memory of"
+   },
+   {
+    "gram": "on the",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.038,
+    "lift": 1.6,
+    "example": "on the heels of"
+   },
+   {
+    "gram": "and the",
+    "count": 14,
+    "pools": 14,
+    "rate": 0.105,
+    "lift": 0.9,
+    "example": "and the town has not let go of"
+   },
+   {
+    "gram": "it is",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.03,
+    "lift": 1.2,
+    "example": "and it is remembered still that"
+   }
+  ],
+  "R4b": [
+   {
+    "gram": "the compromise",
+    "count": 8,
+    "pools": 6,
+    "rate": 0.16,
+    "lift": 448.4,
+    "example": "The compromise here traces back to one thing: {cause}."
+   },
+   {
+    "gram": "now {}",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.08,
+    "lift": 237.4,
+    "example": "The old pressure eased, but the habit found a new home: now {cause}, and it sustains the arrangement."
+   },
+   {
+    "gram": "the ledger",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.08,
+    "lift": 49.6,
+    "example": "What began when {cause} endures out of habit; the ledger never closed."
+   },
+   {
+    "gram": "the record",
+    "count": 6,
+    "pools": 4,
+    "rate": 0.12,
+    "lift": 34.5,
+    "example": "The record carries this as it happened."
+   },
+   {
+    "gram": "the arrangement",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.08,
+    "lift": 12.2,
+    "example": "The old pressure eased, but the habit found a new home: now {cause}, and it sustains the arrangement."
+   },
+   {
+    "gram": "{} and",
+    "count": 6,
+    "pools": 3,
+    "rate": 0.12,
+    "lift": 5.4,
+    "example": "The old pressure eased, but the habit found a new home: now {cause}, and it sustains the arrangement."
+   },
+   {
+    "gram": "and the",
+    "count": 8,
+    "pools": 7,
+    "rate": 0.16,
+    "lift": 1.3,
+    "example": "This {role} is compromised, and the root of it is that {cause}."
+   }
+  ],
+  "R5": [
+   {
+    "gram": "and the country",
+    "count": 26,
+    "pools": 17,
+    "rate": 0.07,
+    "lift": 1192,
+    "example": "Word of the disaster passes from mouth to mouth, and the country reckons what it has lost."
+   },
+   {
+    "gram": "the matter of",
+    "count": 10,
+    "pools": 10,
+    "rate": 0.027,
+    "lift": 1416.9,
+    "example": "The matter of arms stands unsettled, and every ear is turned toward the marches."
+   },
+   {
+    "gram": "market roads",
+    "count": 10,
+    "pools": 9,
+    "rate": 0.027,
+    "lift": 1416.9,
+    "example": "Word of the trade moves along the market roads, and the guilds take note."
+   },
+   {
+    "gram": "came to nothing",
+    "count": 8,
+    "pools": 8,
+    "rate": 0.021,
+    "lift": 1147,
+    "example": "In the end it came to nothing."
+   },
+   {
+    "gram": "the halls of",
+    "count": 8,
+    "pools": 4,
+    "rate": 0.021,
+    "lift": 1147,
+    "example": "A restlessness moves through the halls of rule; the loyal grow uneasy and the ambitious grow bold."
+   },
+   {
+    "gram": "over the country",
+    "count": 7,
+    "pools": 6,
+    "rate": 0.019,
+    "lift": 1012.1,
+    "example": "The matter of the plague hangs over the country, and every household marks it well."
+   },
+   {
+    "gram": "halls of rule",
+    "count": 7,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 1012.1,
+    "example": "A restlessness moves through the halls of rule; the loyal grow uneasy and the ambitious grow bold."
+   },
+   {
+    "gram": "fat years",
+    "count": 6,
+    "pools": 5,
+    "rate": 0.016,
+    "lift": 877.1,
+    "example": "The matter of the fat years stirs every hearth, and the careful weigh how long the plenty will hold."
+   },
+   {
+    "gram": "the careful",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.016,
+    "lift": 877.1,
+    "example": "The matter of the fat years stirs every hearth, and the careful weigh how long the plenty will hold."
+   },
+   {
+    "gram": "is upon",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.016,
+    "lift": 877.1,
+    "example": "War has come in earnest. The fighting is upon the front, and the wounded are already carried back."
+   }
+  ],
+  "R6": [
+   {
+    "gram": "it is public",
+    "count": 146,
+    "pools": 146,
+    "rate": 0.088,
+    "lift": 4227,
+    "example": "It is public now: the shortfall was covered with bought coin, and the town is learning what the {role} sold to cover it."
+   },
+   {
+    "gram": "the syndicate",
+    "count": 126,
+    "pools": 124,
+    "rate": 0.076,
+    "lift": 3649.9,
+    "example": "The syndicate that held the arrangement is gone, but the stores are still empty, and control of what remains has taken over the debt."
+   },
+   {
+    "gram": "public that",
+    "count": 126,
+    "pools": 126,
+    "rate": 0.076,
+    "lift": 3649.9,
+    "example": "It is public that the {role} took the occupier's protection and paid for it in the town's secrets; the word for that is in the streets already."
+   },
+   {
+    "gram": "the boss",
+    "count": 95,
+    "pools": 63,
+    "rate": 0.057,
+    "lift": 2755.5,
+    "example": "The crews call the boss the power in this town, and the boss lets them; the truth sits in a ledger audited quarterly from elsewhere. The streets belong to the syndicate, and their king is a clerk."
+   },
+   {
+    "gram": "destroyed but",
+    "count": 75,
+    "pools": 75,
+    "rate": 0.045,
+    "lift": 2178.4,
+    "example": "The old patron is destroyed, but the supply lines are still cut, and whoever can move goods along them holds the {role} instead."
+   },
+   {
+    "gram": "the adept",
+    "count": 73,
+    "pools": 49,
+    "rate": 0.044,
+    "lift": 2120.7,
+    "example": "An unfunded tower is an available one: the adept works for whoever pays, and the work has drifted from what the town would recognize as lawful."
+   },
+   {
+    "gram": "came clean",
+    "count": 164,
+    "pools": 164,
+    "rate": 0.099,
+    "lift": 1582.1,
+    "example": "Full stores ended it: with nothing left to ration, the {role} gave up the trade in favors and came clean."
+   },
+   {
+    "gram": "the foreman",
+    "count": 66,
+    "pools": 42,
+    "rate": 0.04,
+    "lift": 1918.7,
+    "example": "The wages come up short every count, so the foreman grew the count; names on the crew tally that swing no hammer, and their pay packets come to him unopened."
+   },
+   {
+    "gram": "the agitator",
+    "count": 65,
+    "pools": 44,
+    "rate": 0.039,
+    "lift": 1889.9,
+    "example": "It is public, and the movement is breaking on it: the agitator sold every serious plan to the occupier before it ripened. The resistance's failures were not misfortune, they were merchandise."
+   },
+   {
+    "gram": "is out the",
+    "count": 64,
+    "pools": 64,
+    "rate": 0.039,
+    "lift": 1861,
+    "example": "What the {role} did inside the scandal's economy is out; the town learned one disgrace and found another folded inside it."
+   }
+  ],
+  "R7": [
+   {
+    "gram": "only where",
+    "count": 10,
+    "pools": 8,
+    "rate": 0.005,
+    "lift": 226.8,
+    "example": "A wholly hidden operation that moves persons across borders outside any legal channel. It arises only where no lawful slave market stands. It runs its own logistics, its own safe houses, and its own bought border officials."
+   },
+   {
+    "gram": "and mends",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.004,
+    "lift": 205.2,
+    "example": "Puts up buildings and mends them, and makes tools besides."
+   },
+   {
+    "gram": "given over",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 162,
+    "example": "Several inn districts, given over to merchants, travellers, and those who stay long."
+   },
+   {
+    "gram": "over to",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 162,
+    "example": "Several inn districts, given over to merchants, travellers, and those who stay long."
+   },
+   {
+    "gram": "and fountains",
+    "count": 7,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 162,
+    "example": "A built water supply: conduits, cisterns, and fountains."
+   },
+   {
+    "gram": "a city's",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 162,
+    "example": "Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size."
+   },
+   {
+    "gram": "viable only",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 162,
+    "example": "Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or other workable brine deposits provide a local supply."
+   },
+   {
+    "gram": "000 people",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 140.4,
+    "example": "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members."
+   },
+   {
+    "gram": "criminals and",
+    "count": 5,
+    "pools": 4,
+    "rate": 0.002,
+    "lift": 118.8,
+    "example": "Holds debtors, criminals, and political prisoners alike."
+   },
+   {
+    "gram": "worked in",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.002,
+    "lift": 118.8,
+    "example": "Strips worked in the open fields."
+   }
+  ],
+  "R8": [
+   {
+    "gram": "the accessible",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.005,
+    "lift": 260.8,
+    "example": "The accessible salt beds are exhausted or no longer workable."
+   },
+   {
+    "gram": "by someone who",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.004,
+    "lift": 205.9,
+    "example": "The threat is being exaggerated by someone who profits from wartime contracts"
+   },
+   {
+    "gram": "of someone who",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 178.4,
+    "example": "Professionally cordial: the manner of someone who deals with strangers all day and has a system for it."
+   },
+   {
+    "gram": "are exhausted",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 178.4,
+    "example": "The accessible salt beds are exhausted or no longer workable."
+   },
+   {
+    "gram": "settlement was founded",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "The original settlement was founded with a degree of independence that no longer exists. The current administration answers to outside authority."
+   },
+   {
+    "gram": "major trade routes",
+    "count": 5,
+    "pools": 3,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "grew at the intersection of two major trade routes"
+   },
+   {
+    "gram": "one of their",
+    "count": 5,
+    "pools": 4,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "One of their children is not theirs biologically, and they know it"
+   },
+   {
+    "gram": "who has been",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "Determine who has been bribing their warehouse staff"
+   },
+   {
+    "gram": "require established",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "Hundreds of professional guards require established military infrastructure."
+   },
+   {
+    "gram": "they haven't",
+    "count": 10,
+    "pools": 7,
+    "rate": 0.006,
+    "lift": 96.1,
+    "example": "The terms may mean they owe something to an enemy that they haven't paid yet"
+   }
+  ],
+  "R9": [
+   {
+    "gram": "try once",
+    "count": 12,
+    "pools": 12,
+    "rate": 0.019,
+    "lift": 1007.6,
+    "example": "The code could not be checked. Try once more."
+   },
+   {
+    "gram": "part of your",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.01,
+    "lift": 523.9,
+    "example": "Marks this town as part of your campaign world. Future changes become events on a timeline."
+   },
+   {
+    "gram": "of your campaign",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.01,
+    "lift": 523.9,
+    "example": "Marks this town as part of your campaign world. Future changes become events on a timeline."
+   },
+   {
+    "gram": "writes canon",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.008,
+    "lift": 443.3,
+    "example": "Settlements are simulated from constraints, not generated by AI. Every optional AI feature reads and proposes; only the deterministic engine writes canon."
+   },
+   {
+    "gram": "free tier",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.008,
+    "lift": 443.3,
+    "example": "You’ve hit the {limit}-save cap on the free tier."
+   },
+   {
+    "gram": "we could",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.015,
+    "lift": 255.3,
+    "example": "We could not find an account for that email address. Check the spelling, or create a new account."
+   },
+   {
+    "gram": "neighbourhood system",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.006,
+    "lift": 362.7,
+    "example": "Saves, larger settlements, and the Neighbourhood System."
+   },
+   {
+    "gram": "a new password",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.006,
+    "lift": 362.7,
+    "example": "We will email you a secure link to set a new password."
+   },
+   {
+    "gram": "your recovery",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.006,
+    "lift": 362.7,
+    "example": "Choose a new password for your account. You are signed in through your recovery link."
+   },
+   {
+    "gram": "seconds then",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.006,
+    "lift": 362.7,
+    "example": "Generate a town in seconds. Then run the region for years."
+   }
+  ],
+  "R10": [
+   {
+    "gram": "be undone with",
+    "count": 19,
+    "pools": 19,
+    "rate": 0.038,
+    "lift": 1934.7,
+    "example": "Applies a chosen event to the active save, writing the change into canon and recording it in the event log. It can be undone with Undo last event."
+   },
+   {
+    "gram": "with options",
+    "count": 14,
+    "pools": 14,
+    "rate": 0.028,
+    "lift": 1438.7,
+    "example": "A War verb the DM can apply to the settlement, with options Severity, Instigating neighbour and Souring to."
+   },
+   {
+    "gram": "machinery with",
+    "count": 14,
+    "pools": 14,
+    "rate": 0.028,
+    "lift": 1438.7,
+    "example": "A War order the DM stages as a proposal; approval applies through the world's own machinery, with options The aggrieved court, Against, The typed grievance and Severity."
+   },
+   {
+    "gram": "war order",
+    "count": 13,
+    "pools": 13,
+    "rate": 0.026,
+    "lift": 1339.4,
+    "example": "A War order the DM stages as a proposal; approval applies through the world's own machinery, with options The aggrieved court, Against, The typed grievance and Severity."
+   },
+   {
+    "gram": "options the",
+    "count": 12,
+    "pools": 12,
+    "rate": 0.024,
+    "lift": 1240.2,
+    "example": "A War order the DM stages as a proposal; approval applies through the world's own machinery, with options The aggrieved court, Against, The typed grievance and Severity."
+   },
+   {
+    "gram": "with the option",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.022,
+    "lift": 1141,
+    "example": "A Relations verb the DM can apply to the settlement, with the option New relationship."
+   },
+   {
+    "gram": "undone with the",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.022,
+    "lift": 1141,
+    "example": "Places a marker or feature on the campaign map. It can be undone with the map undo."
+   },
+   {
+    "gram": "with the map",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.022,
+    "lift": 1141,
+    "example": "Places a marker or feature on the campaign map. It can be undone with the map undo."
+   },
+   {
+    "gram": "the map undo",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.022,
+    "lift": 1141,
+    "example": "Places a marker or feature on the campaign map. It can be undone with the map undo."
+   },
+   {
+    "gram": "the settlement with",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.018,
+    "lift": 942.6,
+    "example": "A Relations verb the DM can apply to the settlement, with the option New relationship."
+   }
+  ],
+  "R11": [
+   {
+    "gram": "authored as",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.028,
+    "lift": 1521.1,
+    "example": "A leader's death is authored as Kill / remove NPC. The consequences derive from the NPC's own pillar standing."
+   },
+   {
+    "gram": "apply stressor",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.023,
+    "lift": 1287.1,
+    "example": "A refugee wave arrives via Apply stressor (migration pressure)."
+   },
+   {
+    "gram": "name e",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.023,
+    "lift": 1287.1,
+    "example": "Institution name (e.g. \"Granary\", \"Temple of Mercy\")"
+   },
+   {
+    "gram": "their faction",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 1053.1,
+    "example": "{targetId} rises within their faction, displacing a rival on the way up."
+   },
+   {
+    "gram": "institution name",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 1053.1,
+    "example": "Institution name (e.g. \"Granary\", \"Temple of Mercy\")"
+   },
+   {
+    "gram": "qualifying neighbour",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 1053.1,
+    "example": "Decree a gift of grain to a qualifying neighbour: an ally, trade partner, or vassal/patron. Only grain above the hard reserve floor can go (the DM overrides the willingness, never the law); shipping it out is charity with a political price at home."
+   },
+   {
+    "gram": "to proposal",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 1053.1,
+    "example": "Faction power shifts escalate to proposal on severity thresholds, independent of the flag."
+   },
+   {
+    "gram": "is authored",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.028,
+    "lift": 507,
+    "example": "A leader's death is authored as Kill / remove NPC. The consequences derive from the NPC's own pillar standing."
+   },
+   {
+    "gram": "folded into",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.028,
+    "lift": 507,
+    "example": "Folded into Kill / remove NPC."
+   },
+   {
+    "gram": "the flag",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.019,
+    "lift": 210.6,
+    "example": "A major population swing is a premise about the settlement’s scale; gated when the flag is on."
+   }
+  ],
+  "R12": [
+   {
+    "gram": "passed quietly",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "The week passed quietly."
+   },
+   {
+    "gram": "without event",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "The week passed without event."
+   },
+   {
+    "gram": "with little to",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "A quiet week, with little to note."
+   },
+   {
+    "gram": "little to note",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "A quiet week, with little to note."
+   },
+   {
+    "gram": "slipped by",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "The week slipped by, calm and uneventful."
+   },
+   {
+    "gram": "by calm",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "The week slipped by, calm and uneventful."
+   },
+   {
+    "gram": "and uneventful",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "The week slipped by, calm and uneventful."
+   },
+   {
+    "gram": "growing into",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "growing into its limit"
+   },
+   {
+    "gram": "usual price",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 2105.4,
+    "example": "nearly double its usual price"
+   },
+   {
+    "gram": "calm and",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.037,
+    "lift": 701.8,
+    "example": "The week slipped by, calm and uneventful."
+   }
+  ],
+  "R14": [
+   {
+    "gram": "you cannot",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.009,
+    "lift": 54.5,
+    "example": "Something happened in {a} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something: hushed conversations, people watching the street."
+   },
+   {
+    "gram": "is open the",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.007,
+    "lift": 44.6,
+    "example": "{a} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street."
+   },
+   {
+    "gram": "approach to {}",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.011,
+    "lift": 34.1,
+    "example": "The approach to {a} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls."
+   },
+   {
+    "gram": "is the point",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.007,
+    "lift": 36.5,
+    "example": "{a} is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point."
+   },
+   {
+    "gram": "it is only",
+    "count": 5,
+    "pools": 5,
+    "rate": 0.009,
+    "lift": 32.7,
+    "example": "From the road, {a} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach."
+   },
+   {
+    "gram": "the approach to",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.011,
+    "lift": 27.6,
+    "example": "The approach to {a} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls."
+   },
+   {
+    "gram": "the guards",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.007,
+    "lift": 30.9,
+    "example": "{a}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine."
+   },
+   {
+    "gram": "{}'s gate",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.012,
+    "lift": 23.1,
+    "example": "At {a}'s gate the queue divides in two: residents with papers, and everyone else. The residents' line is longer and moves slower, and no one in it complains where the soldiers can hear."
+   },
+   {
+    "gram": "essential for",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.016,
+    "lift": 18.8,
+    "example": "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations. Essential for anyone who doesn't want a long walk to the nearest bridge."
+   },
+   {
+    "gram": "going about",
+    "count": 4,
+    "pools": 4,
+    "rate": 0.007,
+    "lift": 26.7,
+    "example": "The gates of {a} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops."
+   }
+  ],
+  "R15": [
+   {
+    "gram": "war of the",
+    "count": 34,
+    "pools": 15,
+    "rate": 0.009,
+    "lift": 385.9,
+    "example": "the War of the Old Grievance"
+   },
+   {
+    "gram": "free alliance",
+    "count": 18,
+    "pools": 3,
+    "rate": 0.005,
+    "lift": 206.9,
+    "example": "A neutral figure is being pressured by both The Free Alliance and The Establishment to take a side before the next council session."
+   },
+   {
+    "gram": "candidate owner",
+    "count": 18,
+    "pools": 18,
+    "rate": 0.005,
+    "lift": 206.9,
+    "example": "CANDIDATE, OWNER-UNSIGNED (this leaf authors no magnitude; every number it returns is the register's)"
+   },
+   {
+    "gram": "owner unsigned",
+    "count": 18,
+    "pools": 18,
+    "rate": 0.005,
+    "lift": 206.9,
+    "example": "CANDIDATE, OWNER-UNSIGNED (this leaf authors no magnitude; every number it returns is the register's)"
+   },
+   {
+    "gram": "surplus adequate",
+    "count": 17,
+    "pools": 17,
+    "rate": 0.004,
+    "lift": 195.8,
+    "example": "The food security causal band (surplus/adequate/strained/critical/collapsed)."
+   },
+   {
+    "gram": "adequate strained",
+    "count": 17,
+    "pools": 17,
+    "rate": 0.004,
+    "lift": 195.8,
+    "example": "The food security causal band (surplus/adequate/strained/critical/collapsed)."
+   },
+   {
+    "gram": "band surplus",
+    "count": 16,
+    "pools": 16,
+    "rate": 0.004,
+    "lift": 184.6,
+    "example": "The food security causal band (surplus/adequate/strained/critical/collapsed)."
+   },
+   {
+    "gram": "grade a",
+    "count": 15,
+    "pools": 15,
+    "rate": 0.004,
+    "lift": 173.4,
+    "example": "grade a chosen response against the overflow band it was meant to relieve, over the horizon the band takes to move"
+   },
+   {
+    "gram": "a keyed",
+    "count": 13,
+    "pools": 13,
+    "rate": 0.003,
+    "lift": 151,
+    "example": "a keyed race inside the migration advance; the acting settlement and the action it is choosing between have not been read at the load point"
+   },
+   {
+    "gram": "keyed race",
+    "count": 12,
+    "pools": 12,
+    "rate": 0.003,
+    "lift": 139.8,
+    "example": "a keyed race inside the migration advance; the acting settlement and the action it is choosing between have not been read at the load point"
+   }
+  ],
+  "R16": [
+   {
+    "gram": "once a campaign",
+    "count": 13,
+    "pools": 7,
+    "rate": 0.005,
+    "lift": 230.4,
+    "example": "Once a campaign advances, {x} live causal variables sit under every settlement (food security, public legitimacy, defense readiness, criminal opportunity, and the rest) each with a score, a band ({x}), and named contributors. Above them ride {x} pressures: the directional strain on the settlement, each carrying its own reasons, so “high external threat” always names the deployment or the famine driving it. Advance time and they shift together: a war drains economic capacity, which lowers the settlement’s strength, which feeds the drive back toward peace. That loop is why the war layer ends its own wars; peace is the equilibrium it returns to, not a script."
+   },
+   {
+    "gram": "on desktop",
+    "count": 11,
+    "pools": 8,
+    "rate": 0.004,
+    "lift": 196.3,
+    "example": "Building institutions, deities, trade goods, and content packs takes the full authoring workspace, which has room to work on a larger screen. Your existing items are listed below to read, and you can open this on desktop to add or edit them."
+   },
+   {
+    "gram": "simulator output",
+    "count": 10,
+    "pools": 4,
+    "rate": 0.004,
+    "lift": 179.2,
+    "example": "Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
+   },
+   {
+    "gram": "your saved",
+    "count": 9,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 162.1,
+    "example": "Toggle \"Chains\" to draw supply-chain routes between exporters and importers across your saved settlements."
+   },
+   {
+    "gram": "the product",
+    "count": 9,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 162.1,
+    "example": "Because the brief the AI works from is coherent, the fiction it produces stays consistent across many queries. Everything it needs is in the brief, not in its training. And the negative space is stated plainly: no AI-generated art is passed off as the product’s own, and the maps and settlements are simulated, not painted by a model. You can verify the boundary rather than take it on faith: every operation the engine can perform, with its class and its receipt, is public in the{x} ."
+   },
+   {
+    "gram": "engine can",
+    "count": 9,
+    "pools": 4,
+    "rate": 0.003,
+    "lift": 162.1,
+    "example": "Because the brief the AI works from is coherent, the fiction it produces stays consistent across many queries. Everything it needs is in the brief, not in its training. And the negative space is stated plainly: no AI-generated art is passed off as the product’s own, and the maps and settlements are simulated, not painted by a model. You can verify the boundary rather than take it on faith: every operation the engine can perform, with its class and its receipt, is public in the{x} ."
+   },
+   {
+    "gram": "a campaign to",
+    "count": 9,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 162.1,
+    "example": "Select a campaign to share its map."
+   },
+   {
+    "gram": "to apply",
+    "count": 9,
+    "pools": 6,
+    "rate": 0.003,
+    "lift": 162.1,
+    "example": "instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply."
+   },
+   {
+    "gram": "new roll",
+    "count": 8,
+    "pools": 4,
+    "rate": 0.003,
+    "lift": 145.1,
+    "example": "What a new roll keeps"
+   },
+   {
+    "gram": "opening the",
+    "count": 8,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 145.1,
+    "example": "Opening the narrative archive…"
+   }
+  ],
+  "R17": [
+   {
+    "gram": "travellers finding",
+    "count": 29,
+    "pools": 29,
+    "rate": 0.022,
+    "lift": 1108.6,
+    "example": "travellers finding this town's soldiers billeted elsewhere"
+   },
+   {
+    "gram": "travellers told",
+    "count": 14,
+    "pools": 14,
+    "rate": 0.011,
+    "lift": 544.9,
+    "example": "travellers told whose word carries here"
+   },
+   {
+    "gram": "travellers passing",
+    "count": 11,
+    "pools": 11,
+    "rate": 0.009,
+    "lift": 432.2,
+    "example": "travellers passing this town's grain on somebody else's road"
+   },
+   {
+    "gram": "travellers advised",
+    "count": 10,
+    "pools": 10,
+    "rate": 0.008,
+    "lift": 394.6,
+    "example": "travellers advised not to mention where they came from"
+   },
+   {
+    "gram": "entered against the",
+    "count": 10,
+    "pools": 10,
+    "rate": 0.008,
+    "lift": 394.6,
+    "example": "garrisons entered against the occupier's own strength"
+   },
+   {
+    "gram": "entered against a",
+    "count": 9,
+    "pools": 9,
+    "rate": 0.007,
+    "lift": 357,
+    "example": "a raid entered against a named neighbour"
+   },
+   {
+    "gram": "finding a",
+    "count": 8,
+    "pools": 8,
+    "rate": 0.006,
+    "lift": 319.4,
+    "example": "travellers finding a crossing closed that was open last season"
+   },
+   {
+    "gram": "in which the",
+    "count": 7,
+    "pools": 7,
+    "rate": 0.005,
+    "lift": 281.8,
+    "example": "a season in which the pinch was arranged, not suffered"
+   },
+   {
+    "gram": "entered in",
+    "count": 16,
+    "pools": 16,
+    "rate": 0.012,
+    "lift": 206.7,
+    "example": "sabotage entered in the garrison's own record"
+   },
+   {
+    "gram": "that has to",
+    "count": 6,
+    "pools": 6,
+    "rate": 0.005,
+    "lift": 244.3,
+    "example": "trade that has to go the long way or not at all"
+   }
+  ],
+  "R18": [
+   {
+    "gram": "{} must be",
+    "count": 41,
+    "pools": 13,
+    "rate": 0.007,
+    "lift": 291.6,
+    "example": "{x} must be a plain object"
+   },
+   {
+    "gram": "does not match",
+    "count": 16,
+    "pools": 11,
+    "rate": 0.003,
+    "lift": 115.9,
+    "example": "does not match its declared content hash."
+   },
+   {
+    "gram": "population {}",
+    "count": 15,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 108.9,
+    "example": "Population {x} sustains a deep labor pool."
+   },
+   {
+    "gram": "must be an",
+    "count": 35,
+    "pools": 13,
+    "rate": 0.006,
+    "lift": 83.1,
+    "example": "command spec must be an object"
+   },
+   {
+    "gram": "must contain",
+    "count": 12,
+    "pools": 7,
+    "rate": 0.002,
+    "lift": 87.8,
+    "example": "{x} must contain finite numbers"
+   },
+   {
+    "gram": "{} requires",
+    "count": 12,
+    "pools": 8,
+    "rate": 0.002,
+    "lift": 87.8,
+    "example": "{x} requires arcane response."
+   },
+   {
+    "gram": "an array",
+    "count": 12,
+    "pools": 8,
+    "rate": 0.002,
+    "lift": 87.8,
+    "example": "entries must be an array of at most {x} items."
+   },
+   {
+    "gram": "{} contains",
+    "count": 11,
+    "pools": 8,
+    "rate": 0.002,
+    "lift": 80.8,
+    "example": "Refined {x} contains an entity not present in the original."
+   },
+   {
+    "gram": "pack manifest",
+    "count": 11,
+    "pools": 3,
+    "rate": 0.002,
+    "lift": 80.8,
+    "example": "pack.manifest is invalid: {x}"
+   },
+   {
+    "gram": "{} 100",
+    "count": 11,
+    "pools": 5,
+    "rate": 0.002,
+    "lift": 80.8,
+    "example": "{x} commands {x} influence at {x}/100, yet no {x} appears on the settlement roster. Power is sustained by traveling clergy / mercenary contracts / external sponsorship rather than local infrastructure."
+   }
+  ],
+  "A-U": [
+   {
+    "gram": "the hall of",
+    "count": 41,
+    "pools": 33,
+    "rate": 0.009,
+    "lift": 459.3,
+    "example": "{npc} put the question to the hall of {settlement} and got back the answer already written on the granary door."
+   },
+   {
+    "gram": "factor {}",
+    "count": 25,
+    "pools": 8,
+    "rate": 0.005,
+    "lift": 282.2,
+    "example": "{house}: {band}; the {route}, the {good} trade; Factor {npc}, abroad at {counterpart}."
+   },
+   {
+    "gram": "spring and",
+    "count": 16,
+    "pools": 16,
+    "rate": 0.003,
+    "lift": 182.6,
+    "example": "{settlement} sent {band} down the {route} in the spring and fed them through the winter regardless."
+   },
+   {
+    "gram": "is entered in",
+    "count": 15,
+    "pools": 15,
+    "rate": 0.003,
+    "lift": 171.6,
+    "example": "{settlement}'s legitimacy deficit fed the crowd's ledger through {timeband_span}; the rungs came in the order the record says they come; and what the riot cost is entered in the same books that hold every other bad season at {settlement}."
+   },
+   {
+    "gram": "clerks of",
+    "count": 15,
+    "pools": 15,
+    "rate": 0.003,
+    "lift": 171.6,
+    "example": "It was signed by hands the market can no longer name, and it kept its word as long as anybody was watching. The parchment went soft at the folds. The wagons came a little short and then a little shorter, season upon season, and the clerks of {settlement} weighed what arrived against what the {term} promised until the ledger would not close. It ended by the calendar and not by anger, and nothing written stands between the two courts now."
+   },
+   {
+    "gram": "{} venture",
+    "count": 14,
+    "pools": 5,
+    "rate": 0.003,
+    "lift": 160.5,
+    "example": "The {house} venture is lost on the {route}, and the books that carried it stand at {band} by the end of the same season."
+   },
+   {
+    "gram": "tribute of",
+    "count": 14,
+    "pools": 7,
+    "rate": 0.003,
+    "lift": 160.5,
+    "example": "{settlement}'s hall has charged the tribute of {counterpart} to its own seat; the book records both and joins neither."
+   },
+   {
+    "gram": "grudge with",
+    "count": 13,
+    "pools": 4,
+    "rate": 0.003,
+    "lift": 149.4,
+    "example": "{settlement} buried its grudge with {counterpart}; {counterpart} has buried nothing, and a decree binds only the hall that made it."
+   },
+   {
+    "gram": "seat of {}",
+    "count": 44,
+    "pools": 39,
+    "rate": 0.01,
+    "lift": 98.5,
+    "example": "{house} lent to the seat of {settlement} and asked for the {route} in the terms; the debt is a grievance now, and the {route} with it."
+   },
+   {
+    "gram": "column out",
+    "count": 12,
+    "pools": 10,
+    "rate": 0.003,
+    "lift": 138.4,
+    "example": "A column out of {settlement} took the {good} on the {route} and carried it home entire; the loss stands in {house}'s book in {house}'s own hand; and the factors who used to work {counterpart}'s side of that road now work for whoever still has a road."
+   }
+  ],
+  "A-W": [
+   {
+    "gram": "at {}",
+    "count": 703,
+    "pools": 139,
+    "rate": 0.164,
+    "lift": 5.1,
+    "example": "The market at {settlement} runs thin; the routes turned elsewhere when the {route} closed with the war, and they have not come back."
+   },
+   {
+    "gram": "a stranger",
+    "count": 178,
+    "pools": 79,
+    "rate": 0.042,
+    "lift": 5.5,
+    "example": "A stranger at {settlement} finds {creed}'s house on the main street and {rival_creed}'s feasts on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed."
+   },
+   {
+    "gram": "the hall",
+    "count": 146,
+    "pools": 59,
+    "rate": 0.034,
+    "lift": 5.6,
+    "example": "{settlement}'s embargo against {counterpart} stands and has cost the town {band} of its own custom; the hall is still being asked to say why it was worth it."
+   },
+   {
+    "gram": "the town",
+    "count": 736,
+    "pools": 163,
+    "rate": 0.172,
+    "lift": 4.1,
+    "example": "{settlement}'s embargo against {counterpart} stands and has cost the town {band} of its own custom; the hall is still being asked to say why it was worth it."
+   },
+   {
+    "gram": "stranger at",
+    "count": 53,
+    "pools": 30,
+    "rate": 0.012,
+    "lift": 6,
+    "example": "A stranger at {settlement} finds {creed}'s house on the main street and {rival_creed}'s feasts on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed."
+   },
+   {
+    "gram": "town has",
+    "count": 159,
+    "pools": 64,
+    "rate": 0.037,
+    "lift": 4.7,
+    "example": "{settlement}'s register names no patron, and {counterpart}'s names none either; the claim that turns a rite into a muster has never had a rite here to start from, and neither town has found a quarrel in the blank."
+   },
+   {
+    "gram": "the {} at",
+    "count": 43,
+    "pools": 10,
+    "rate": 0.01,
+    "lift": 5.7,
+    "example": "The quarter nearest the {route} at {settlement} stands empty and is not being rebuilt; what left it went out in columns the season of the sack, and the register names where every one of them went."
+   },
+   {
+    "gram": "rather than",
+    "count": 287,
+    "pools": 100,
+    "rate": 0.067,
+    "lift": 3.8,
+    "example": "{settlement} counts {counterpart} heretic rather than merely foreign and the muster is called on the counting; the quarrel dates from the split at {temple}, when one creed became two."
+   },
+   {
+    "gram": "and nothing",
+    "count": 83,
+    "pools": 58,
+    "rate": 0.019,
+    "lift": 4.8,
+    "example": "{settlement}'s own altars stand as they stood, for all that the town took the field and took {counterpart}: no banner ever proved a god, and nothing at all was taken from {creed}."
+   },
+   {
+    "gram": "{} keeps",
+    "count": 78,
+    "pools": 54,
+    "rate": 0.018,
+    "lift": 4.8,
+    "example": "{settlement} keeps the {route} shut against {counterpart} for {reason}, and the closing is {timeband_age}; the clerks who file the gate returns have never filed anything else."
+   }
+  ]
+ },
+ "outliers": [
+  {
+   "metric": "terminal-stop share",
+   "register": "R4",
+   "value": 0,
+   "median": 0.819,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "terminal-stop share",
+   "register": "R17",
+   "value": 0,
+   "median": 0.819,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R1",
+   "value": 0.777,
+   "median": 0.135,
+   "ratio": 5.76,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R2",
+   "value": 0.953,
+   "median": 0.135,
+   "ratio": 7.06,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R3",
+   "value": 0.578,
+   "median": 0.135,
+   "ratio": 4.28,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R4b",
+   "value": 0.5,
+   "median": 0.135,
+   "ratio": 3.7,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R5",
+   "value": 0.032,
+   "median": 0.135,
+   "ratio": 0.24,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R6",
+   "value": 0.058,
+   "median": 0.135,
+   "ratio": 0.43,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R7",
+   "value": 0,
+   "median": 0.135,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R10",
+   "value": 0,
+   "median": 0.135,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R14",
+   "value": 0.289,
+   "median": 0.135,
+   "ratio": 2.14,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R17",
+   "value": 0.012,
+   "median": 0.135,
+   "ratio": 0.09,
+   "dir": "low"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "R18",
+   "value": 0.441,
+   "median": 0.135,
+   "ratio": 3.27,
+   "dir": "high"
+  },
+  {
+   "metric": "slot-bearing share",
+   "register": "A-U",
+   "value": 0.754,
+   "median": 0.135,
+   "ratio": 5.59,
+   "dir": "high"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R4",
+   "value": 0,
+   "median": 0.167,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R5",
+   "value": 0.062,
+   "median": 0.167,
+   "ratio": 0.37,
+   "dir": "low"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R6",
+   "value": 0.016,
+   "median": 0.167,
+   "ratio": 0.1,
+   "dir": "low"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R7",
+   "value": 0.35,
+   "median": 0.167,
+   "ratio": 2.1,
+   "dir": "high"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R9",
+   "value": 0.37,
+   "median": 0.167,
+   "ratio": 2.22,
+   "dir": "high"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R14",
+   "value": 0.348,
+   "median": 0.167,
+   "ratio": 2.08,
+   "dir": "high"
+  },
+  {
+   "metric": "2-segment share",
+   "register": "R17",
+   "value": 0,
+   "median": 0.167,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R1",
+   "value": 0.004,
+   "median": 0.019,
+   "ratio": 0.21,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R2",
+   "value": 0.006,
+   "median": 0.019,
+   "ratio": 0.32,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R3",
+   "value": 0.002,
+   "median": 0.019,
+   "ratio": 0.11,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R4",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R5",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R6",
+   "value": 0.001,
+   "median": 0.019,
+   "ratio": 0.05,
+   "dir": "low"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R7",
+   "value": 0.069,
+   "median": 0.019,
+   "ratio": 3.63,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R8",
+   "value": 0.052,
+   "median": 0.019,
+   "ratio": 2.74,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R9",
+   "value": 0.092,
+   "median": 0.019,
+   "ratio": 4.84,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R10",
+   "value": 0.048,
+   "median": 0.019,
+   "ratio": 2.53,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R11",
+   "value": 0.042,
+   "median": 0.019,
+   "ratio": 2.21,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R14",
+   "value": 0.221,
+   "median": 0.019,
+   "ratio": 11.63,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R16",
+   "value": 0.085,
+   "median": 0.019,
+   "ratio": 4.47,
+   "dir": "high"
+  },
+  {
+   "metric": "3+-segment share",
+   "register": "R17",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "words/segment mean",
+   "register": "R2",
+   "value": 28.6,
+   "median": 9.6,
+   "ratio": 2.98,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment mean",
+   "register": "R6",
+   "value": 22.6,
+   "median": 9.6,
+   "ratio": 2.35,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment sd",
+   "register": "R4",
+   "value": 1.6,
+   "median": 5.3,
+   "ratio": 0.3,
+   "dir": "low"
+  },
+  {
+   "metric": "words/segment sd",
+   "register": "R17",
+   "value": 2.1,
+   "median": 5.3,
+   "ratio": 0.4,
+   "dir": "low"
+  },
+  {
+   "metric": "words/segment p10",
+   "register": "R2",
+   "value": 14,
+   "median": 4,
+   "ratio": 3.5,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p10",
+   "register": "R6",
+   "value": 19,
+   "median": 4,
+   "ratio": 4.75,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p50",
+   "register": "R1",
+   "value": 17,
+   "median": 8,
+   "ratio": 2.13,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p50",
+   "register": "R2",
+   "value": 30,
+   "median": 8,
+   "ratio": 3.75,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p50",
+   "register": "R5",
+   "value": 18,
+   "median": 8,
+   "ratio": 2.25,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p50",
+   "register": "R6",
+   "value": 22,
+   "median": 8,
+   "ratio": 2.75,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p90",
+   "register": "R2",
+   "value": 40,
+   "median": 17,
+   "ratio": 2.35,
+   "dir": "high"
+  },
+  {
+   "metric": "words/segment p90",
+   "register": "R4",
+   "value": 7,
+   "median": 17,
+   "ratio": 0.41,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R1",
+   "value": 0.13,
+   "median": 0.46,
+   "ratio": 0.28,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R2",
+   "value": 0.017,
+   "median": 0.46,
+   "ratio": 0.04,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R3",
+   "value": 0.204,
+   "median": 0.46,
+   "ratio": 0.44,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R4",
+   "value": 0.947,
+   "median": 0.46,
+   "ratio": 2.06,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R5",
+   "value": 0.078,
+   "median": 0.46,
+   "ratio": 0.17,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "R6",
+   "value": 0.005,
+   "median": 0.46,
+   "ratio": 0.01,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments < 8 words",
+   "register": "A-U",
+   "value": 0.114,
+   "median": 0.46,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R1",
+   "value": 0.021,
+   "median": 0.005,
+   "ratio": 4.2,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R2",
+   "value": 0.491,
+   "median": 0.005,
+   "ratio": 98.2,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R3",
+   "value": 0.001,
+   "median": 0.005,
+   "ratio": 0.2,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R4",
+   "value": 0,
+   "median": 0.005,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.005,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R5",
+   "value": 0,
+   "median": 0.005,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R6",
+   "value": 0.042,
+   "median": 0.005,
+   "ratio": 8.4,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R7",
+   "value": 0.001,
+   "median": 0.005,
+   "ratio": 0.2,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R9",
+   "value": 0.001,
+   "median": 0.005,
+   "ratio": 0.2,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R11",
+   "value": 0.015,
+   "median": 0.005,
+   "ratio": 3,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R12",
+   "value": 0,
+   "median": 0.005,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R14",
+   "value": 0.039,
+   "median": 0.005,
+   "ratio": 7.8,
+   "dir": "high"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "R17",
+   "value": 0,
+   "median": 0.005,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "share segments > 30 words",
+   "register": "A-U",
+   "value": 0.027,
+   "median": 0.005,
+   "ratio": 5.4,
+   "dir": "high"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R1",
+   "value": 0.139,
+   "median": 0.019,
+   "ratio": 7.32,
+   "dir": "high"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R2",
+   "value": 0.077,
+   "median": 0.019,
+   "ratio": 4.05,
+   "dir": "high"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.019,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R5",
+   "value": 0.005,
+   "median": 0.019,
+   "ratio": 0.26,
+   "dir": "low"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R6",
+   "value": 0.007,
+   "median": 0.019,
+   "ratio": 0.37,
+   "dir": "low"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R11",
+   "value": 0.042,
+   "median": 0.019,
+   "ratio": 2.21,
+   "dir": "high"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R12",
+   "value": 0.009,
+   "median": 0.019,
+   "ratio": 0.47,
+   "dir": "low"
+  },
+  {
+   "metric": "antithesis SHAPE rate",
+   "register": "R14",
+   "value": 0.052,
+   "median": 0.019,
+   "ratio": 2.74,
+   "dir": "high"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R1",
+   "value": 0.113,
+   "median": 0.007,
+   "ratio": 16.14,
+   "dir": "high"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R2",
+   "value": 0.071,
+   "median": 0.007,
+   "ratio": 10.14,
+   "dir": "high"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R3",
+   "value": 0.002,
+   "median": 0.007,
+   "ratio": 0.29,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R5",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R6",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R9",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R12",
+   "value": 0,
+   "median": 0.007,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"rather than\" rate",
+   "register": "R17",
+   "value": 0.015,
+   "median": 0.007,
+   "ratio": 2.14,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R1",
+   "value": 0.066,
+   "median": 0.004,
+   "ratio": 16.5,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R2",
+   "value": 0.054,
+   "median": 0.004,
+   "ratio": 13.5,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R3",
+   "value": 0.034,
+   "median": 0.004,
+   "ratio": 8.5,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R5",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R8",
+   "value": 0.01,
+   "median": 0.004,
+   "ratio": 2.5,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R10",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R11",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R12",
+   "value": 0,
+   "median": 0.004,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R14",
+   "value": 0.052,
+   "median": 0.004,
+   "ratio": 13,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R15",
+   "value": 0.011,
+   "median": 0.004,
+   "ratio": 2.75,
+   "dir": "high"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "R17",
+   "value": 0.001,
+   "median": 0.004,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "gloss tail \", which\" rate",
+   "register": "A-U",
+   "value": 0.062,
+   "median": 0.004,
+   "ratio": 15.5,
+   "dir": "high"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R1",
+   "value": 0.035,
+   "median": 0.016,
+   "ratio": 2.19,
+   "dir": "high"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R5",
+   "value": 0.003,
+   "median": 0.016,
+   "ratio": 0.19,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R6",
+   "value": 0.001,
+   "median": 0.016,
+   "ratio": 0.06,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R10",
+   "value": 0.063,
+   "median": 0.016,
+   "ratio": 3.94,
+   "dir": "high"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R11",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R12",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "2nd-sentence summary rate",
+   "register": "R18",
+   "value": 0.007,
+   "median": 0.016,
+   "ratio": 0.44,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R1",
+   "value": 0.011,
+   "median": 0.027,
+   "ratio": 0.41,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R2",
+   "value": 0.056,
+   "median": 0.027,
+   "ratio": 2.07,
+   "dir": "high"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R3",
+   "value": 0.012,
+   "median": 0.027,
+   "ratio": 0.44,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.027,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R5",
+   "value": 0.011,
+   "median": 0.027,
+   "ratio": 0.41,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R6",
+   "value": 0.055,
+   "median": 0.027,
+   "ratio": 2.04,
+   "dir": "high"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R7",
+   "value": 0.075,
+   "median": 0.027,
+   "ratio": 2.78,
+   "dir": "high"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R8",
+   "value": 0.066,
+   "median": 0.027,
+   "ratio": 2.44,
+   "dir": "high"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R11",
+   "value": 0.009,
+   "median": 0.027,
+   "ratio": 0.33,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R12",
+   "value": 0.009,
+   "median": 0.027,
+   "ratio": 0.33,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R14",
+   "value": 0.077,
+   "median": 0.027,
+   "ratio": 2.85,
+   "dir": "high"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.027,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "R18",
+   "value": 0.006,
+   "median": 0.027,
+   "ratio": 0.22,
+   "dir": "low"
+  },
+  {
+   "metric": "triad-list rate",
+   "register": "A-U",
+   "value": 0.009,
+   "median": 0.027,
+   "ratio": 0.33,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R3",
+   "value": 0.002,
+   "median": 0.008,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.008,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.008,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R5",
+   "value": 0.003,
+   "median": 0.008,
+   "ratio": 0.38,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R7",
+   "value": 0.023,
+   "median": 0.008,
+   "ratio": 2.88,
+   "dir": "high"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R9",
+   "value": 0.002,
+   "median": 0.008,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R11",
+   "value": 0,
+   "median": 0.008,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R12",
+   "value": 0.019,
+   "median": 0.008,
+   "ratio": 2.38,
+   "dir": "high"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R14",
+   "value": 0.018,
+   "median": 0.008,
+   "ratio": 2.25,
+   "dir": "high"
+  },
+  {
+   "metric": "doubled-adjective rate",
+   "register": "R16",
+   "value": 0.003,
+   "median": 0.008,
+   "ratio": 0.38,
+   "dir": "low"
+  },
+  {
+   "metric": "participial-opener rate",
+   "register": "R2",
+   "value": 0.002,
+   "median": 0.011,
+   "ratio": 0.18,
+   "dir": "low"
+  },
+  {
+   "metric": "participial-opener rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.011,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "participial-opener rate",
+   "register": "R5",
+   "value": 0,
+   "median": 0.011,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "participial-opener rate",
+   "register": "R6",
+   "value": 0,
+   "median": 0.011,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "participial-opener rate",
+   "register": "R16",
+   "value": 0.028,
+   "median": 0.011,
+   "ratio": 2.55,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R1",
+   "value": 0.051,
+   "median": 0.006,
+   "ratio": 8.5,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R2",
+   "value": 0.019,
+   "median": 0.006,
+   "ratio": 3.17,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R3",
+   "value": 0.02,
+   "median": 0.006,
+   "ratio": 3.33,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.006,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.006,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R6",
+   "value": 0.11,
+   "median": 0.006,
+   "ratio": 18.33,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R8",
+   "value": 0.013,
+   "median": 0.006,
+   "ratio": 2.17,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R9",
+   "value": 0,
+   "median": 0.006,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R10",
+   "value": 0.002,
+   "median": 0.006,
+   "ratio": 0.33,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R11",
+   "value": 0,
+   "median": 0.006,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R12",
+   "value": 0.032,
+   "median": 0.006,
+   "ratio": 5.33,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R14",
+   "value": 0.02,
+   "median": 0.006,
+   "ratio": 3.33,
+   "dir": "high"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "R17",
+   "value": 0.002,
+   "median": 0.006,
+   "ratio": 0.33,
+   "dir": "low"
+  },
+  {
+   "metric": "\"There/It is\" opener rate",
+   "register": "A-U",
+   "value": 0.038,
+   "median": 0.006,
+   "ratio": 6.33,
+   "dir": "high"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R2",
+   "value": 0.36,
+   "median": 0.13,
+   "ratio": 2.77,
+   "dir": "high"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.13,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R6",
+   "value": 0.54,
+   "median": 0.13,
+   "ratio": 4.15,
+   "dir": "high"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R7",
+   "value": 0.015,
+   "median": 0.13,
+   "ratio": 0.12,
+   "dir": "low"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R8",
+   "value": 0.055,
+   "median": 0.13,
+   "ratio": 0.42,
+   "dir": "low"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R9",
+   "value": 0.053,
+   "median": 0.13,
+   "ratio": 0.41,
+   "dir": "low"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R16",
+   "value": 0.053,
+   "median": 0.13,
+   "ratio": 0.41,
+   "dir": "low"
+  },
+  {
+   "metric": "semicolon rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.13,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R2",
+   "value": 0.364,
+   "median": 0.079,
+   "ratio": 4.61,
+   "dir": "high"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.079,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R4b",
+   "value": 0.28,
+   "median": 0.079,
+   "ratio": 3.54,
+   "dir": "high"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R5",
+   "value": 0.029,
+   "median": 0.079,
+   "ratio": 0.37,
+   "dir": "low"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R10",
+   "value": 0.036,
+   "median": 0.079,
+   "ratio": 0.46,
+   "dir": "low"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R14",
+   "value": 0.178,
+   "median": 0.079,
+   "ratio": 2.25,
+   "dir": "high"
+  },
+  {
+   "metric": "colon rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.079,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "question rate",
+   "register": "R5",
+   "value": 0.005,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "question rate",
+   "register": "R8",
+   "value": 0.001,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "question rate",
+   "register": "R9",
+   "value": 0.034,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "question rate",
+   "register": "R15",
+   "value": 0.005,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "question rate",
+   "register": "R16",
+   "value": 0.021,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "question rate",
+   "register": "R18",
+   "value": 0.003,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R1",
+   "value": 0.006,
+   "median": 0.016,
+   "ratio": 0.38,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R3",
+   "value": 0.001,
+   "median": 0.016,
+   "ratio": 0.06,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R5",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R6",
+   "value": 0.001,
+   "median": 0.016,
+   "ratio": 0.06,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R8",
+   "value": 0.047,
+   "median": 0.016,
+   "ratio": 2.94,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R9",
+   "value": 0.036,
+   "median": 0.016,
+   "ratio": 2.25,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R11",
+   "value": 0.222,
+   "median": 0.016,
+   "ratio": 13.88,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R14",
+   "value": 0.061,
+   "median": 0.016,
+   "ratio": 3.81,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R15",
+   "value": 0.062,
+   "median": 0.016,
+   "ratio": 3.88,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R16",
+   "value": 0.091,
+   "median": 0.016,
+   "ratio": 5.69,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.016,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "R18",
+   "value": 0.064,
+   "median": 0.016,
+   "ratio": 4,
+   "dir": "high"
+  },
+  {
+   "metric": "parenthesis rate",
+   "register": "A-U",
+   "value": 0.006,
+   "median": 0.016,
+   "ratio": 0.38,
+   "dir": "low"
+  },
+  {
+   "metric": "abstract-noun closer rate",
+   "register": "R2",
+   "value": 0.028,
+   "median": 0.057,
+   "ratio": 0.49,
+   "dir": "low"
+  },
+  {
+   "metric": "abstract-noun closer rate",
+   "register": "R4",
+   "value": 0.008,
+   "median": 0.057,
+   "ratio": 0.14,
+   "dir": "low"
+  },
+  {
+   "metric": "abstract-noun closer rate",
+   "register": "R5",
+   "value": 0.02,
+   "median": 0.057,
+   "ratio": 0.35,
+   "dir": "low"
+  },
+  {
+   "metric": "abstract-noun closer rate",
+   "register": "R11",
+   "value": 0.122,
+   "median": 0.057,
+   "ratio": 2.14,
+   "dir": "high"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "R1",
+   "value": 0.133,
+   "median": 0.05,
+   "ratio": 2.66,
+   "dir": "high"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "R2",
+   "value": 0.125,
+   "median": 0.05,
+   "ratio": 2.5,
+   "dir": "high"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "R4",
+   "value": 0.128,
+   "median": 0.05,
+   "ratio": 2.56,
+   "dir": "high"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "R10",
+   "value": 0.024,
+   "median": 0.05,
+   "ratio": 0.48,
+   "dir": "low"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "R14",
+   "value": 0.022,
+   "median": 0.05,
+   "ratio": 0.44,
+   "dir": "low"
+  },
+  {
+   "metric": "pronoun closer rate",
+   "register": "A-U",
+   "value": 0.123,
+   "median": 0.05,
+   "ratio": 2.46,
+   "dir": "high"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R1",
+   "value": 0.163,
+   "median": 0.057,
+   "ratio": 2.86,
+   "dir": "high"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R2",
+   "value": 0.13,
+   "median": 0.057,
+   "ratio": 2.28,
+   "dir": "high"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R4",
+   "value": 0.008,
+   "median": 0.057,
+   "ratio": 0.14,
+   "dir": "low"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.057,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R8",
+   "value": 0.148,
+   "median": 0.057,
+   "ratio": 2.6,
+   "dir": "high"
+  },
+  {
+   "metric": "adverbs / segment",
+   "register": "R12",
+   "value": 0.127,
+   "median": 0.057,
+   "ratio": 2.23,
+   "dir": "high"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R8",
+   "value": 0.001,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R9",
+   "value": 0.016,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R11",
+   "value": 0.042,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R14",
+   "value": 0.002,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R15",
+   "value": 0.049,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R16",
+   "value": 0.009,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "emphasis-caps rate",
+   "register": "R18",
+   "value": 0.02,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R1",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R2",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R3",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R4",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R5",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R6",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R7",
+   "value": 0.03,
+   "median": 0.003,
+   "ratio": 10,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R9",
+   "value": 0.032,
+   "median": 0.003,
+   "ratio": 10.67,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R10",
+   "value": 0.111,
+   "median": 0.003,
+   "ratio": 37,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R11",
+   "value": 0.014,
+   "median": 0.003,
+   "ratio": 4.67,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R12",
+   "value": 0.009,
+   "median": 0.003,
+   "ratio": 3,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R14",
+   "value": 0.039,
+   "median": 0.003,
+   "ratio": 13,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R15",
+   "value": 0.054,
+   "median": 0.003,
+   "ratio": 18,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R16",
+   "value": 0.019,
+   "median": 0.003,
+   "ratio": 6.33,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R17",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "R18",
+   "value": 0.012,
+   "median": 0.003,
+   "ratio": 4,
+   "dir": "high"
+  },
+  {
+   "metric": "digits-in-prose rate",
+   "register": "A-U",
+   "value": 0,
+   "median": 0.003,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R7",
+   "value": 0.004,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R8",
+   "value": 0.048,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R9",
+   "value": 0.05,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R12",
+   "value": 0.019,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R14",
+   "value": 0.029,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R15",
+   "value": 0.012,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R16",
+   "value": 0.022,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "contraction rate",
+   "register": "R18",
+   "value": 0.009,
+   "median": 0,
+   "ratio": null,
+   "dir": "high-vs-zero-median"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R3",
+   "value": 0.006,
+   "median": 0.015,
+   "ratio": 0.4,
+   "dir": "low"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R4",
+   "value": 0,
+   "median": 0.015,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R6",
+   "value": 0.006,
+   "median": 0.015,
+   "ratio": 0.4,
+   "dir": "low"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R9",
+   "value": 0.102,
+   "median": 0.015,
+   "ratio": 6.8,
+   "dir": "high"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R10",
+   "value": 0.057,
+   "median": 0.015,
+   "ratio": 3.8,
+   "dir": "high"
+  },
+  {
+   "metric": "AI lexical tells / variant (raw)",
+   "register": "R16",
+   "value": 0.084,
+   "median": 0.015,
+   "ratio": 5.6,
+   "dir": "high"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R4",
+   "value": 0,
+   "median": 0.008,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R4b",
+   "value": 0.02,
+   "median": 0.008,
+   "ratio": 2.5,
+   "dir": "high"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R5",
+   "value": 0.024,
+   "median": 0.008,
+   "ratio": 3,
+   "dir": "high"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R9",
+   "value": 0.003,
+   "median": 0.008,
+   "ratio": 0.38,
+   "dir": "low"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R10",
+   "value": 0.002,
+   "median": 0.008,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "AI tells / variant EXOGENOUS",
+   "register": "R17",
+   "value": 0.002,
+   "median": 0.008,
+   "ratio": 0.25,
+   "dir": "low"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "R1",
+   "value": 0.536,
+   "median": 0.106,
+   "ratio": 5.06,
+   "dir": "high"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "R2",
+   "value": 0.713,
+   "median": 0.106,
+   "ratio": 6.73,
+   "dir": "high"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "R6",
+   "value": 0.291,
+   "median": 0.106,
+   "ratio": 2.75,
+   "dir": "high"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "R10",
+   "value": 0.03,
+   "median": 0.106,
+   "ratio": 0.28,
+   "dir": "low"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "R14",
+   "value": 0.246,
+   "median": 0.106,
+   "ratio": 2.32,
+   "dir": "high"
+  },
+  {
+   "metric": "rationed pet words / variant",
+   "register": "A-U",
+   "value": 0.287,
+   "median": 0.106,
+   "ratio": 2.71,
+   "dir": "high"
+  },
+  {
+   "metric": "mean pool size",
+   "register": "R10",
+   "value": 0,
+   "median": 3.6,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "mean pool size",
+   "register": "R11",
+   "value": 0,
+   "median": 3.6,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "mean pool size",
+   "register": "R16",
+   "value": 8.8,
+   "median": 3.6,
+   "ratio": 2.44,
+   "dir": "high"
+  },
+  {
+   "metric": "mean pool size",
+   "register": "R18",
+   "value": 12.5,
+   "median": 3.6,
+   "ratio": 3.47,
+   "dir": "high"
+  },
+  {
+   "metric": "pools uniform in segment count",
+   "register": "R10",
+   "value": 0,
+   "median": 0.672,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools uniform in segment count",
+   "register": "R11",
+   "value": 0,
+   "median": 0.672,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools uniform in segment count",
+   "register": "R16",
+   "value": 0.242,
+   "median": 0.672,
+   "ratio": 0.36,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R2",
+   "value": 0.231,
+   "median": 0.112,
+   "ratio": 2.06,
+   "dir": "high"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R4",
+   "value": 0,
+   "median": 0.112,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R4b",
+   "value": 0,
+   "median": 0.112,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R6",
+   "value": 0.002,
+   "median": 0.112,
+   "ratio": 0.02,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R7",
+   "value": 0.003,
+   "median": 0.112,
+   "ratio": 0.03,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R8",
+   "value": 0.048,
+   "median": 0.112,
+   "ratio": 0.43,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R9",
+   "value": 0,
+   "median": 0.112,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R10",
+   "value": 0,
+   "median": 0.112,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R11",
+   "value": 0,
+   "median": 0.112,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R12",
+   "value": 0.667,
+   "median": 0.112,
+   "ratio": 5.96,
+   "dir": "high"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R16",
+   "value": 0.478,
+   "median": 0.112,
+   "ratio": 4.27,
+   "dir": "high"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R17",
+   "value": 0.006,
+   "median": 0.112,
+   "ratio": 0.05,
+   "dir": "low"
+  },
+  {
+   "metric": "pools w/ repeated 2-word opener",
+   "register": "R18",
+   "value": 0.583,
+   "median": 0.112,
+   "ratio": 5.21,
+   "dir": "high"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R2",
+   "value": 5.1,
+   "median": 1.5,
+   "ratio": 3.4,
+   "dir": "high"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R4",
+   "value": 0.6,
+   "median": 1.5,
+   "ratio": 0.4,
+   "dir": "low"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R10",
+   "value": 0,
+   "median": 1.5,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R11",
+   "value": 0,
+   "median": 1.5,
+   "ratio": 0,
+   "dir": "low"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R14",
+   "value": 4.8,
+   "median": 1.5,
+   "ratio": 3.2,
+   "dir": "high"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "R16",
+   "value": 5.8,
+   "median": 1.5,
+   "ratio": 3.87,
+   "dir": "high"
+  },
+  {
+   "metric": "mean within-pool word sd",
+   "register": "A-U",
+   "value": 4,
+   "median": 1.5,
+   "ratio": 2.67,
+   "dir": "high"
+  }
+ ],
+ "bible": {
+  "perMetricZ": {
+   "words/segment mean": {
+    "mean": 11.905,
+    "sd": 5.633,
+    "bibleZ": -0.68
+   },
+   "words/segment sd": {
+    "mean": 5.416,
+    "sd": 1.798,
+    "bibleZ": 0.83
+   },
+   "share segments < 8 words": {
+    "mean": 0.381,
+    "sd": 0.236,
+    "bibleZ": 1.1
+   },
+   "share segments > 30 words": {
+    "mean": 0.035,
+    "sd": 0.108,
+    "bibleZ": -0.19
+   },
+   "segments / variant": {
+    "mean": 1.257,
+    "sd": 0.21,
+    "bibleZ": -1.22
+   },
+   "antithesis SHAPE rate": {
+    "mean": 0.028,
+    "sd": 0.032,
+    "bibleZ": 0.53
+   },
+   "gloss tail rate": {
+    "mean": 0.016,
+    "sd": 0.023,
+    "bibleZ": -0.71
+   },
+   "2nd-sentence summary rate": {
+    "mean": 0.015,
+    "sd": 0.016,
+    "bibleZ": -0.96
+   },
+   "semicolon rate": {
+    "mean": 0.143,
+    "sd": 0.129,
+    "bibleZ": -1.11
+   },
+   "colon rate": {
+    "mean": 0.103,
+    "sd": 0.088,
+    "bibleZ": 0.18
+   },
+   "parenthesis rate": {
+    "mean": 0.036,
+    "sd": 0.051,
+    "bibleZ": 1.05
+   },
+   "abstract-noun closer rate": {
+    "mean": 0.061,
+    "sd": 0.033,
+    "bibleZ": -0.03
+   },
+   "adverbs / segment": {
+    "mean": 0.074,
+    "sd": 0.045,
+    "bibleZ": -0.97
+   },
+   "participial-opener rate": {
+    "mean": 0.011,
+    "sd": 0.007,
+    "bibleZ": 2.59
+   },
+   "triad-list rate": {
+    "mean": 0.03,
+    "sd": 0.025,
+    "bibleZ": 0
+   },
+   "rationed pet words / variant": {
+    "mean": 0.185,
+    "sd": 0.17,
+    "bibleZ": -0.74
+   },
+   "AI tells / variant EXOGENOUS": {
+    "mean": 0.009,
+    "sd": 0.006,
+    "bibleZ": -1.4
+   }
+  },
+  "styleRank": [
+   {
+    "register": "R16",
+    "meanAbsZDistance": 0.512,
+    "per": {
+     "words/segment mean": 0,
+     "words/segment sd": -0.56,
+     "share segments < 8 words": -0.18,
+     "share segments > 30 words": -0.07,
+     "segments / variant": 2.24,
+     "antithesis SHAPE rate": -0.69,
+     "gloss tail rate": 0.17,
+     "2nd-sentence summary rate": 1.52,
+     "semicolon rate": 0.41,
+     "colon rate": -0.2,
+     "parenthesis rate": 0.02,
+     "abstract-noun closer rate": 0.24,
+     "adverbs / segment": 0.62,
+     "participial-opener rate": -0.27,
+     "triad-list rate": 0.08,
+     "rationed pet words / variant": 0.27,
+     "AI tells / variant EXOGENOUS": 1.15
+    }
+   },
+   {
+    "register": "R15",
+    "meanAbsZDistance": 0.65,
+    "per": {
+     "words/segment mean": 0.18,
+     "words/segment sd": -0.28,
+     "share segments < 8 words": -0.57,
+     "share segments > 30 words": -0.06,
+     "segments / variant": 1.24,
+     "antithesis SHAPE rate": -0.66,
+     "gloss tail rate": 0.48,
+     "2nd-sentence summary rate": 0.51,
+     "semicolon rate": 0.57,
+     "colon rate": -0.46,
+     "parenthesis rate": -0.55,
+     "abstract-noun closer rate": 1.06,
+     "adverbs / segment": 0.6,
+     "participial-opener rate": -1.75,
+     "triad-list rate": 0.68,
+     "rationed pet words / variant": 0.12,
+     "AI tells / variant EXOGENOUS": 1.31
+    }
+   },
+   {
+    "register": "R9",
+    "meanAbsZDistance": 0.684,
+    "per": {
+     "words/segment mean": -0.07,
+     "words/segment sd": -1.22,
+     "share segments < 8 words": -0.11,
+     "share segments > 30 words": -0.13,
+     "segments / variant": 2.72,
+     "antithesis SHAPE rate": -0.66,
+     "gloss tail rate": 0.13,
+     "2nd-sentence summary rate": 1.2,
+     "semicolon rate": 0.41,
+     "colon rate": -0.71,
+     "parenthesis rate": -1.05,
+     "abstract-noun closer rate": -0.09,
+     "adverbs / segment": 0.15,
+     "participial-opener rate": -2.15,
+     "triad-list rate": -0.12,
+     "rationed pet words / variant": 0.2,
+     "AI tells / variant EXOGENOUS": 0.49
+    }
+   },
+   {
+    "register": "R18",
+    "meanAbsZDistance": 0.754,
+    "per": {
+     "words/segment mean": 0.16,
+     "words/segment sd": -1.28,
+     "share segments < 8 words": -0.75,
+     "share segments > 30 words": -0.11,
+     "segments / variant": 0.96,
+     "antithesis SHAPE rate": -0.63,
+     "gloss tail rate": 0.26,
+     "2nd-sentence summary rate": 0.44,
+     "semicolon rate": 0.61,
+     "colon rate": 0,
+     "parenthesis rate": -0.51,
+     "abstract-noun closer rate": 0.97,
+     "adverbs / segment": 1.15,
+     "participial-opener rate": -2.02,
+     "triad-list rate": -0.96,
+     "rationed pet words / variant": 0.21,
+     "AI tells / variant EXOGENOUS": 1.8
+    }
+   },
+   {
+    "register": "R17",
+    "meanAbsZDistance": 0.776,
+    "per": {
+     "words/segment mean": -0.11,
+     "words/segment sd": -2.67,
+     "share segments < 8 words": -0.55,
+     "share segments > 30 words": -0.14,
+     "segments / variant": 0,
+     "antithesis SHAPE rate": -0.91,
+     "gloss tail rate": 0.04,
+     "2nd-sentence summary rate": 0,
+     "semicolon rate": 0,
+     "colon rate": -1.35,
+     "parenthesis rate": -1.75,
+     "abstract-noun closer rate": -0.94,
+     "adverbs / segment": 0.13,
+     "participial-opener rate": -2.83,
+     "triad-list rate": -1.19,
+     "rationed pet words / variant": 0.24,
+     "AI tells / variant EXOGENOUS": 0.33
+    }
+   },
+   {
+    "register": "R11",
+    "meanAbsZDistance": 0.777,
+    "per": {
+     "words/segment mean": 0.21,
+     "words/segment sd": -0.22,
+     "share segments < 8 words": -0.59,
+     "share segments > 30 words": 0,
+     "segments / variant": 1.22,
+     "antithesis SHAPE rate": -0.09,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 0,
+     "semicolon rate": 1.01,
+     "colon rate": -0.03,
+     "parenthesis rate": 2.57,
+     "abstract-noun closer rate": 1.88,
+     "adverbs / segment": 0.4,
+     "participial-opener rate": -2.56,
+     "triad-list rate": -0.84,
+     "rationed pet words / variant": 0.11,
+     "AI tells / variant EXOGENOUS": 1.48
+    }
+   },
+   {
+    "register": "R12",
+    "meanAbsZDistance": 0.898,
+    "per": {
+     "words/segment mean": 0.44,
+     "words/segment sd": -0.89,
+     "share segments < 8 words": -1.1,
+     "share segments > 30 words": -0.14,
+     "segments / variant": 0.8,
+     "antithesis SHAPE rate": -1.13,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 0,
+     "semicolon rate": 1.36,
+     "colon rate": -0.19,
+     "parenthesis rate": -1.58,
+     "abstract-noun closer rate": -0.61,
+     "adverbs / segment": 2.15,
+     "participial-opener rate": -1.88,
+     "triad-list rate": -0.84,
+     "rationed pet words / variant": 0.68,
+     "AI tells / variant EXOGENOUS": 1.48
+    }
+   },
+   {
+    "register": "R7",
+    "meanAbsZDistance": 0.909,
+    "per": {
+     "words/segment mean": 0.12,
+     "words/segment sd": -1.11,
+     "share segments < 8 words": -0.72,
+     "share segments > 30 words": -0.13,
+     "segments / variant": 2.37,
+     "antithesis SHAPE rate": -0.82,
+     "gloss tail rate": 0.13,
+     "2nd-sentence summary rate": 1.96,
+     "semicolon rate": 0.12,
+     "colon rate": -0.77,
+     "parenthesis rate": -1.44,
+     "abstract-noun closer rate": 0.79,
+     "adverbs / segment": 0.44,
+     "participial-opener rate": -1.21,
+     "triad-list rate": 1.79,
+     "rationed pet words / variant": 0.05,
+     "AI tells / variant EXOGENOUS": 1.48
+    }
+   },
+   {
+    "register": "R4",
+    "meanAbsZDistance": 0.924,
+    "per": {
+     "words/segment mean": -0.59,
+     "words/segment sd": -2.95,
+     "share segments < 8 words": 1.29,
+     "share segments > 30 words": -0.14,
+     "segments / variant": 0,
+     "antithesis SHAPE rate": -1.42,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 0,
+     "semicolon rate": 0,
+     "colon rate": -1.35,
+     "parenthesis rate": -1.75,
+     "abstract-noun closer rate": -1.57,
+     "adverbs / segment": -0.49,
+     "participial-opener rate": -2.96,
+     "triad-list rate": -1.19,
+     "rationed pet words / variant": 0,
+     "AI tells / variant EXOGENOUS": 0
+    }
+   },
+   {
+    "register": "R10",
+    "meanAbsZDistance": 0.97,
+    "per": {
+     "words/segment mean": 0.07,
+     "words/segment sd": -0.61,
+     "share segments < 8 words": -0.37,
+     "share segments > 30 words": -0.09,
+     "segments / variant": 1.51,
+     "antithesis SHAPE rate": -0.85,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 3.98,
+     "semicolon rate": 1.03,
+     "colon rate": -0.94,
+     "parenthesis rate": -1.17,
+     "abstract-noun closer rate": 1.64,
+     "adverbs / segment": 0.4,
+     "participial-opener rate": -3.23,
+     "triad-list rate": -0.08,
+     "rationed pet words / variant": -0.18,
+     "AI tells / variant EXOGENOUS": 0.33
+    }
+   },
+   {
+    "register": "R8",
+    "meanAbsZDistance": 1,
+    "per": {
+     "words/segment mean": 0.46,
+     "words/segment sd": -0.78,
+     "share segments < 8 words": -1.49,
+     "share segments > 30 words": -0.06,
+     "segments / variant": 1.34,
+     "antithesis SHAPE rate": -0.63,
+     "gloss tail rate": 0.43,
+     "2nd-sentence summary rate": 1.08,
+     "semicolon rate": 0.43,
+     "colon rate": -0.55,
+     "parenthesis rate": -0.84,
+     "abstract-noun closer rate": 0.73,
+     "adverbs / segment": 2.61,
+     "participial-opener rate": -1.61,
+     "triad-list rate": 1.43,
+     "rationed pet words / variant": 0.4,
+     "AI tells / variant EXOGENOUS": 2.13
+    }
+   },
+   {
+    "register": "R3",
+    "meanAbsZDistance": 1.028,
+    "per": {
+     "words/segment mean": 0.73,
+     "words/segment sd": -1.06,
+     "share segments < 8 words": -1.85,
+     "share segments > 30 words": -0.13,
+     "segments / variant": 0.81,
+     "antithesis SHAPE rate": -1.04,
+     "gloss tail rate": 1.47,
+     "2nd-sentence summary rate": 1.01,
+     "semicolon rate": 1.05,
+     "colon rate": -0.6,
+     "parenthesis rate": -1.73,
+     "abstract-noun closer rate": -0.67,
+     "adverbs / segment": 0.31,
+     "participial-opener rate": -2.96,
+     "triad-list rate": -0.72,
+     "rationed pet words / variant": 0.68,
+     "AI tells / variant EXOGENOUS": 0.66
+    }
+   },
+   {
+    "register": "R4b",
+    "meanAbsZDistance": 1.164,
+    "per": {
+     "words/segment mean": 0.27,
+     "words/segment sd": -1.39,
+     "share segments < 8 words": -1.1,
+     "share segments > 30 words": -0.14,
+     "segments / variant": 0.95,
+     "antithesis SHAPE rate": -1.42,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 0,
+     "semicolon rate": 2.01,
+     "colon rate": 1.83,
+     "parenthesis rate": -1.36,
+     "abstract-noun closer rate": -0.82,
+     "adverbs / segment": -0.66,
+     "participial-opener rate": -4.04,
+     "triad-list rate": 0.4,
+     "rationed pet words / variant": 0.12,
+     "AI tells / variant EXOGENOUS": 3.28
+    }
+   },
+   {
+    "register": "A-U",
+    "meanAbsZDistance": 1.176,
+    "per": {
+     "words/segment mean": 1.23,
+     "words/segment sd": -0.06,
+     "share segments < 8 words": -2.23,
+     "share segments > 30 words": 0.11,
+     "segments / variant": 0.67,
+     "antithesis SHAPE rate": -0.82,
+     "gloss tail rate": 2.68,
+     "2nd-sentence summary rate": 1.39,
+     "semicolon rate": 1.45,
+     "colon rate": -0.19,
+     "parenthesis rate": -1.64,
+     "abstract-noun closer rate": -0.94,
+     "adverbs / segment": 0.53,
+     "participial-opener rate": -3.23,
+     "triad-list rate": -0.84,
+     "rationed pet words / variant": 1.34,
+     "AI tells / variant EXOGENOUS": 0.66
+    }
+   },
+   {
+    "register": "R14",
+    "meanAbsZDistance": 1.304,
+    "per": {
+     "words/segment mean": 0.5,
+     "words/segment sd": 0.67,
+     "share segments < 8 words": -0.77,
+     "share segments > 30 words": 0.22,
+     "segments / variant": 4.06,
+     "antithesis SHAPE rate": 0.22,
+     "gloss tail rate": 2.25,
+     "2nd-sentence summary rate": 1.26,
+     "semicolon rate": 0.79,
+     "colon rate": 0.67,
+     "parenthesis rate": -0.57,
+     "abstract-noun closer rate": 0.94,
+     "adverbs / segment": 1.84,
+     "participial-opener rate": -2.15,
+     "triad-list rate": 1.87,
+     "rationed pet words / variant": 1.1,
+     "AI tells / variant EXOGENOUS": 2.3
+    }
+   },
+   {
+    "register": "R5",
+    "meanAbsZDistance": 1.39,
+    "per": {
+     "words/segment mean": 1.47,
+     "words/segment sd": -1.22,
+     "share segments < 8 words": -2.39,
+     "share segments > 30 words": -0.14,
+     "segments / variant": 0.3,
+     "antithesis SHAPE rate": -1.26,
+     "gloss tail rate": 0,
+     "2nd-sentence summary rate": 0.19,
+     "semicolon rate": 1.53,
+     "colon rate": -1.02,
+     "parenthesis rate": -1.75,
+     "abstract-noun closer rate": -1.21,
+     "adverbs / segment": 1.75,
+     "participial-opener rate": -4.04,
+     "triad-list rate": -0.76,
+     "rationed pet words / variant": 0.67,
+     "AI tells / variant EXOGENOUS": 3.94
+    }
+   },
+   {
+    "register": "R6",
+    "meanAbsZDistance": 1.421,
+    "per": {
+     "words/segment mean": 2.57,
+     "words/segment sd": -1.61,
+     "share segments < 8 words": -2.69,
+     "share segments > 30 words": 0.25,
+     "segments / variant": 0.09,
+     "antithesis SHAPE rate": -1.2,
+     "gloss tail rate": 0.3,
+     "2nd-sentence summary rate": 0.06,
+     "semicolon rate": 4.18,
+     "colon rate": 0.22,
+     "parenthesis rate": -1.73,
+     "abstract-noun closer rate": 0.55,
+     "adverbs / segment": 1.33,
+     "participial-opener rate": -4.04,
+     "triad-list rate": 1,
+     "rationed pet words / variant": 1.36,
+     "AI tells / variant EXOGENOUS": 0.98
+    }
+   },
+   {
+    "register": "R1",
+    "meanAbsZDistance": 1.581,
+    "per": {
+     "words/segment mean": 1.54,
+     "words/segment sd": 0.17,
+     "share segments < 8 words": -2.17,
+     "share segments > 30 words": 0.06,
+     "segments / variant": 1.36,
+     "antithesis SHAPE rate": 2.96,
+     "gloss tail rate": 2.85,
+     "2nd-sentence summary rate": 2.21,
+     "semicolon rate": 1.32,
+     "colon rate": -0.53,
+     "parenthesis rate": -1.64,
+     "abstract-noun closer rate": -0.48,
+     "adverbs / segment": 2.94,
+     "participial-opener rate": -2.42,
+     "triad-list rate": -0.76,
+     "rationed pet words / variant": 2.81,
+     "AI tells / variant EXOGENOUS": 0.66
+    }
+   },
+   {
+    "register": "R2",
+    "meanAbsZDistance": 2.263,
+    "per": {
+     "words/segment mean": 3.64,
+     "words/segment sd": 1.39,
+     "share segments < 8 words": -2.64,
+     "share segments > 30 words": 4.4,
+     "segments / variant": 0.64,
+     "antithesis SHAPE rate": 1.01,
+     "gloss tail rate": 2.34,
+     "2nd-sentence summary rate": 1.33,
+     "semicolon rate": 2.79,
+     "colon rate": 2.79,
+     "parenthesis rate": -1.54,
+     "abstract-noun closer rate": -0.97,
+     "adverbs / segment": 2.21,
+     "participial-opener rate": -3.77,
+     "triad-list rate": 1.04,
+     "rationed pet words / variant": 3.85,
+     "AI tells / variant EXOGENOUS": 2.13
+    }
+   }
+  ],
+  "complianceRank": [
+   {
+    "register": "R1",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R2",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R3",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R4",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R4b",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R5",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R6",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R17",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "A-U",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0,
+    "thePCs": 0,
+    "breachRate": 0
+   },
+   {
+    "register": "R8",
+    "emDashRate": 0.002,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.001,
+    "digitsRate": 0.003,
+    "thePCs": 1,
+    "breachRate": 0.006
+   },
+   {
+    "register": "R12",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0.009,
+    "thePCs": 0,
+    "breachRate": 0.009
+   },
+   {
+    "register": "R16",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.009,
+    "digitsRate": 0.019,
+    "thePCs": 0,
+    "breachRate": 0.028
+   },
+   {
+    "register": "R7",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0.03,
+    "thePCs": 0,
+    "breachRate": 0.03
+   },
+   {
+    "register": "R18",
+    "emDashRate": 0.008,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.02,
+    "digitsRate": 0.012,
+    "thePCs": 0,
+    "breachRate": 0.04
+   },
+   {
+    "register": "R14",
+    "emDashRate": 0.002,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.002,
+    "digitsRate": 0.039,
+    "thePCs": 0,
+    "breachRate": 0.043
+   },
+   {
+    "register": "R9",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.016,
+    "digitsRate": 0.032,
+    "thePCs": 0,
+    "breachRate": 0.048
+   },
+   {
+    "register": "R11",
+    "emDashRate": 0.005,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.042,
+    "digitsRate": 0.014,
+    "thePCs": 0,
+    "breachRate": 0.061
+   },
+   {
+    "register": "R10",
+    "emDashRate": 0,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0,
+    "digitsRate": 0.111,
+    "thePCs": 0,
+    "breachRate": 0.111
+   },
+   {
+    "register": "R15",
+    "emDashRate": 0.018,
+    "exclamationRate": 0,
+    "emphasisCapsRate": 0.049,
+    "digitsRate": 0.054,
+    "thePCs": 0,
+    "breachRate": 0.121
+   }
+  ],
+  "combined": [
+   {
+    "register": "R4",
+    "name": "Herald causal grammar + molds",
+    "n": 133,
+    "styleRank": 9,
+    "complianceRank": 4,
+    "styleDistance": 0.924,
+    "breachRate": 0,
+    "combined": 6.5
+   },
+   {
+    "register": "R16",
+    "name": "JSX + PDF chrome",
+    "n": 2685,
+    "styleRank": 1,
+    "complianceRank": 12,
+    "styleDistance": 0.512,
+    "breachRate": 0.028,
+    "combined": 6.5
+   },
+   {
+    "register": "R17",
+    "name": "legacy rumor SUBJECT PHRASES",
+    "n": 1293,
+    "styleRank": 5,
+    "complianceRank": 8,
+    "styleDistance": 0.776,
+    "breachRate": 0,
+    "combined": 6.5
+   },
+   {
+    "register": "R3",
+    "name": "Herald receipt pools",
+    "n": 1212,
+    "styleRank": 12,
+    "complianceRank": 3,
+    "styleDistance": 1.028,
+    "breachRate": 0,
+    "combined": 7.5
+   },
+   {
+    "register": "R4b",
+    "name": "Herald disclosure + lifecycle",
+    "n": 50,
+    "styleRank": 13,
+    "complianceRank": 5,
+    "styleDistance": 1.164,
+    "breachRate": 0,
+    "combined": 9
+   },
+   {
+    "register": "R12",
+    "name": "treaty / war-status documents",
+    "n": 108,
+    "styleRank": 7,
+    "complianceRank": 11,
+    "styleDistance": 0.898,
+    "breachRate": 0.009,
+    "combined": 9
+   },
+   {
+    "register": "R18",
+    "name": "inline in-function prose",
+    "n": 5673,
+    "styleRank": 4,
+    "complianceRank": 14,
+    "styleDistance": 0.754,
+    "breachRate": 0.04,
+    "combined": 9
+   },
+   {
+    "register": "R1",
+    "name": "dossier-native STATE",
+    "n": 2262,
+    "styleRank": 18,
+    "complianceRank": 1,
+    "styleDistance": 1.581,
+    "breachRate": 0,
+    "combined": 9.5
+   },
+   {
+    "register": "R9",
+    "name": "chrome copy registry",
+    "n": 619,
+    "styleRank": 3,
+    "complianceRank": 16,
+    "styleDistance": 0.684,
+    "breachRate": 0.048,
+    "combined": 9.5
+   },
+   {
+    "register": "R2",
+    "name": "dossier-native CAUSAL JOIN",
+    "n": 467,
+    "styleRank": 19,
+    "complianceRank": 2,
+    "styleDistance": 2.263,
+    "breachRate": 0,
+    "combined": 10.5
+   },
+   {
+    "register": "R7",
+    "name": "institution/service gazetteer",
+    "n": 2169,
+    "styleRank": 8,
+    "complianceRank": 13,
+    "styleDistance": 0.909,
+    "breachRate": 0.03,
+    "combined": 10.5
+   },
+   {
+    "register": "R8",
+    "name": "world-data prose",
+    "n": 1738,
+    "styleRank": 11,
+    "complianceRank": 10,
+    "styleDistance": 1,
+    "breachRate": 0.006,
+    "combined": 10.5
+   },
+   {
+    "register": "R15",
+    "name": "src long tail",
+    "n": 3883,
+    "styleRank": 2,
+    "complianceRank": 19,
+    "styleDistance": 0.65,
+    "breachRate": 0.121,
+    "combined": 10.5
+   },
+   {
+    "register": "R5",
+    "name": "Herald crier voice",
+    "n": 373,
+    "styleRank": 16,
+    "complianceRank": 6,
+    "styleDistance": 1.39,
+    "breachRate": 0,
+    "combined": 11
+   },
+   {
+    "register": "R11",
+    "name": "event composer / realm verbs",
+    "n": 216,
+    "styleRank": 6,
+    "complianceRank": 17,
+    "styleDistance": 0.777,
+    "breachRate": 0.061,
+    "combined": 11.5
+   },
+   {
+    "register": "A-U",
+    "name": "annex rows UNWIRED",
+    "n": 4626,
+    "styleRank": 14,
+    "complianceRank": 9,
+    "styleDistance": 1.176,
+    "breachRate": 0,
+    "combined": 11.5
+   },
+   {
+    "register": "R6",
+    "name": "NPC cause-conjunction ladder",
+    "n": 1659,
+    "styleRank": 17,
+    "complianceRank": 7,
+    "styleDistance": 1.421,
+    "breachRate": 0,
+    "combined": 12
+   },
+   {
+    "register": "R10",
+    "name": "compendium docent",
+    "n": 505,
+    "styleRank": 10,
+    "complianceRank": 18,
+    "styleDistance": 0.97,
+    "breachRate": 0.111,
+    "combined": 14
+   },
+   {
+    "register": "R14",
+    "name": "generators prose tables",
+    "n": 561,
+    "styleRank": 15,
+    "complianceRank": 15,
+    "styleDistance": 1.304,
+    "breachRate": 0.043,
+    "combined": 15
+   }
+  ],
+  "exemplarN": 67,
+  "exemplarSources": {
+   "B1 §1 voice paragraph": 8,
+   "B2 pillar Do": 17,
+   "B3/B4 matrix+playbook AFTER": 35,
+   "B4b §5 doctrine quote": 7
+  }
+ }
+}

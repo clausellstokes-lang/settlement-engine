@@ -1,0 +1,361 @@
+{{Short description|Group of fictitious creatures}}
+{{DISPLAYTITLE:Monsters in ''Dungeons & Dragons''}}
+{{About|the history and cultural impact of monsters in Dungeons & Dragons|publication history and game details|Monster Manual}}
+[[File:DnD Gnoll.png|thumb|A pair of gnolls – hyena-headed humanoids]]
+{{Dungeons & Dragons sidebar}}
+	
+In the ''[[Dungeons & Dragons]]'' [[fantasy role-playing game]], the term '''monster''' refers to a variety of creatures, some adapted from folklore and legends and others invented specifically for the game. Included are traditional [[monsters]] such as [[Dragon (Dungeons & Dragons)|dragons]], supernatural creatures such as ghosts, and mundane or fantastic animals.<ref name="chrulew">{{Cite journal |last=Chrulew |first=Matthew |date=2006 |title="Masters of the Wild": Animals and the Environment in ''Dungeons & Dragons'' |url=http://www.concentric-literature.url.tw/issues/Animals/6.pdf |journal=Concentric: Literary and Cultural Studies |volume=32 |issue=1 |pages=135–168 |access-date=2019-10-03 |archive-date=2021-02-24 |archive-url=https://web.archive.org/web/20210224211146/http://www.concentric-literature.url.tw/issues/Animals/6.pdf |url-status=live }}</ref> A defining feature of the game<ref name=AA>{{cite book |title=Dungeons & Dragons Art & Arcana: a visual history |last1=Witwer |first1=Michael |last2=Newman |first2=Kyle |last3=Peterson |first3=Jonathan |last4=Witwer |first4=Sam |last5=Manganiello |first5=Joe |date=October 2018 |isbn=9780399580949 |publisher=[[Ten Speed Press]] |oclc=1033548473}}</ref>{{rp|5}} is that monsters are typically obstacles that players must overcome to progress through the game.<ref name="Di Filippo 2018 75–90">{{cite conference |url=https://hal.archives-ouvertes.fr/hal-02910410/document |title=La mythologie nordique dans Donjons & Dragons - Entre réception et stéréotypes |last=Di Filippo |first=Laurent |date=2018 |publisher=Didaskalie |book-title=Les clichés dans l'histoire |pages=75–90 |location=Chazey-sur-Ain |conference=Fest'Ain d'Histoire |language=fr |trans-title=Norse mythology in Dungeons & Dragons - Between reception and stereotypes}}</ref> Beginning with the [[Dungeons & Dragons (1974)|first edition in 1974]], a catalog of game monsters ([[bestiary]]) was included along with other game manuals, first called ''Monsters & Treasure'' and now called the ''[[Monster Manual]]''. As an essential part of ''Dungeons & Dragons'', many of its monsters have become iconic and recognizable even outside ''D&D'', becoming influential in [[video games]], [[fiction]], and [[popular culture]].<ref name="ashgate">{{Cite book |last=Forest |first=Richard W. |title=The Ashgate Encyclopedia of Literary and Cinematic Monsters |date=2014 |publisher=[[Ashgate Publishing]] |editor-last=Weinstock |editor-first=Jeffrey |chapter=Dungeons & Dragons, Monsters in}}</ref>
+
+==Origins==
+{{For|publication history|Monster Manual}}
+
+While many "bizarre and grotesque creatures" are original creations of ''Dungeons & Dragons'',<ref name=AA/>{{rp|5}}<ref name="chrulew"/> the inspiration for others includes real-world [[fauna]], [[mythology]], "bestiaries of the later Middle Ages",<ref name="chrulew" /> [[science-fiction literature|science-fiction]], [[fantasy literature]], and [[film]].<ref name="ashgate" /> Mauricio Rangel Jiménez goes so far to say that a basic knowledge of mythology, religion and fantasy is required to keep pace with the game,<ref name="MRJ">{{Cite book |last=Rangel Jiménez |first=Mauricio |date=2021 |title=Lanzando los dados: aproximaciones académicas a los juegos de rol |language=Spanish |publisher=[[Universidad Iberoamericana]] |isbn=978-607-417-763-3}}</ref> although the "creatures were unbound by time or place" of their original sources and co-creator [[Gary Gygax]] "made them coexist in a single aggregate world".<ref name=JR>{{cite web|last=Rubin |first=Jonathan |date=March 6, 2008|url=http://www.slate.com/id/2185914/ |title=Farewell to the Dungeon Master: How D&D Creator Gary Gygax Changed Geekdom Forever|archiveurl=https://web.archive.org/web/20110921065924/http://www.slate.com/id/2185914 |archivedate=2011-09-21 |website=[[Slate (magazine)|Slate]]}}</ref> With regard to pre-modern sources, scholar Laurent Di Filippo remarked that game creators often do not rely directly on original texts. Rather the material undergoes "cultural processes of transmission which go from medieval sources to the productions of contemporary cultural industries [...]. These transformations may be the result of translations or adaptations. This process of continuous evolution which involves both permanence and change is called 'work on myth [Arbeit am Mythos]' by the German philosopher [[Hans Blumenberg]]."<ref name="Di Filippo 2018 75–90"/><ref name=WSD/>
+
+Because of their broad, inclusive background, ''D&D'' monsters have been called a [[pastiche]] of sources.<ref name="chrulew" /> In some cases, this has resulted in legal battles, such as when names taken from the works of [[J. R. R. Tolkien]] had to be changed due to [[copyright]] disputes.<ref name="ashgate" />
+
+In game books, monsters are typically presented with illustrations, [[Statistic (role-playing games)|game statistics]],<ref name=WSD>{{cite conference |last=Duffy |first=William S. |year=2018 |title=20-sided monsters: The Adaptation of Greek Mythology to ''Dungeons and Dragons'' |url=https://camws.org/sites/default/files/meeting2018/panels/Gaming.02.pdf |conference=Casting Die: Classical Reception in Gaming |conference-url=https://camws.org/2018panelsworkshops |publisher=[[CAMWS]] |access-date=October 18, 2023}}</ref> and a detailed description. Monsters may be adapted to fit the needs of the game's writers and publishers, such as by describing combat abilities that may have been absent or only implied by an original source. Artistic renderings of various creatures have been a central tool for immersion in the game from the point of its creation.<ref name=AA/>{{rp|5, 19–28}}
+
+==Influence and criticism==
+The monsters of ''Dungeons & Dragons'' have significantly influenced modern fantasy fiction, ranging from licensed fiction to how monsters are portrayed in fantasy fiction generally. The scope of this influence has been compared to the works of [[J. R. R. Tolkien]].<ref name="ashgate" /> In a 2005 interview, author [[China Miéville]] stated,
+
+{{Blockquote|I use ''AD&D''-type fascination with teratology in a lot of my books, and I have the original ''Monster Manual'', and the ''Monster Manual 2'', and the ''Fiend Folio''. I still collect role-playing game bestiaries, because I find that kind of fascination with the creation of the monstrous tremendously inspiring.<ref name="mieville">{{Cite web |date=April 1, 2005 |title=An Interview with China Mieville |url=https://believermag.com/an-interview-with-china-mieville/ |archive-date=October 6, 2019 |archive-url=https://web.archive.org/web/20191006041510/https://believermag.com/an-interview-with-china-mieville/ |url-status=live |website=Believer Magazine |access-date=October 6, 2019}}</ref>}}
+
+References and homages to ''Dungeons & Dragons'' monsters can be found in works such as ''[[Adventure Time]]'', and the game's monsters have inspired tributes that both celebrate and mock various creatures. A 2013 [[io9]] retrospective detailed memorable monsters,<ref name="io9">{{Cite web |date=16 September 2013 |title=The 10 Most Memorable ''Dungeons & Dragons'' Monsters |url=https://io9.gizmodo.com/the-10-most-memorable-dungeons-dragons-monsters-1326074030 |website=io9 |access-date=3 October 2019 |archive-date=28 October 2019 |archive-url=https://web.archive.org/web/20191028031526/https://io9.gizmodo.com/the-10-most-memorable-dungeons-dragons-monsters-1326074030 |url-status=live }}</ref> and in 2018 [[SyFy Wire]] published a list of "The 9 Scariest, Most Unforgettable Monsters From Dungeons & Dragons",<ref>{{Cite web |last=Granshaw |first=Lisa |date=October 24, 2018 |title=The 9 scariest, most unforgettable monsters from Dungeons & Dragons |url=https://www.syfy.com/syfywire/the-9-scariest-most-unforgettable-monsters-from-dungeons-dragons |website=SYFY WIRE |access-date=October 7, 2019 |archive-date=April 29, 2020 |archive-url=https://web.archive.org/web/20200429125029/https://www.syfy.com/syfywire/the-9-scariest-most-unforgettable-monsters-from-dungeons-dragons |url-status=dead }}</ref> and in the same year ''[[Screen Rant]]'' published a list of the game's "10 Most Powerful (and 10 Weakest) Monsters, Ranked".<ref name=SB>{{Cite web|url=https://screenrant.com/dungeons-and-dragons-powerful-weak-monsters-ranked/|title=Dungeons & Dragons: 10 Most Powerful (And 10 Weakest) Monsters, Ranked|last=Baird|first=Scott|date=May 20, 2018|website=[[Screen Rant]]|access-date=February 21, 2022|archive-date=February 5, 2022|archive-url=https://web.archive.org/web/20220205213930/https://screenrant.com/dungeons-and-dragons-powerful-weak-monsters-ranked/|url-status=live}}</ref> Other writers have highlighted the game's more odd or eccentric creations, such as [[Geek.com]]'s list of "The most underrated monsters of Advanced Dungeons & Dragons",<ref name=Geek>{{Cite web |date=June 27, 2016 |title=The Most Underrated Monsters of ''Advanced Dungeons & Dragons'' |url=https://www.geek.com/games/underrated-monsters-of-advanced-dungeons-dragons-1659543/ |url-status=dead |archive-url=https://web.archive.org/web/20191002013452/https://www.geek.com/games/underrated-monsters-of-advanced-dungeons-dragons-1659543/ |archive-date=October 2, 2019 |access-date=April 20, 2023}}</ref> [[The Escapist (magazine)|''The Escapist'']]{{'}}s list of "The Dumbest ''Dungeons & Dragons'' Monsters Ever (And How To Use Them)",<ref>{{Cite web |date=25 April 2014 |title=The Dumbest ''Dungeons & Dragons'' Monsters Ever (And How to Use Them) &#124; Tabletop |url=https://v1.escapistmagazine.com/articles/view/tabletop/11356-The-Dumbest-Dungeons-Dragons-Monsters-Ever-And-How-To-Use-Them |website=[[The Escapist (magazine)|The Escapist]] |access-date=3 October 2019 |archive-date=30 September 2019 |archive-url=https://web.archive.org/web/20190930005909/https://v1.escapistmagazine.com/articles/view/tabletop/11356-The-Dumbest-Dungeons-Dragons-Monsters-Ever-And-How-To-Use-Them |url-status=live }}</ref> and [[Cracked.com]]'s "The 15 Most Idiotic Monsters in Dungeons & Dragons History".<ref>{{Cite web |title=The 15 Most Idiotic Monsters In Dungeons & Dragons History |url=https://www.cracked.com/article_25119_the-15-most-idiotic-monsters-in-dungeons-dragons-history.html |url-status=live |archive-date=28 October 2017 |archive-url=https://web.archive.org/web/20171028184622/https://www.cracked.com/article_25119_the-15-most-idiotic-monsters-in-dungeons-dragons-history.html |website=Cracked.com |access-date=4 August 2026}}</ref> ''D&D''{{'}}s monsters have also been licensed as toys, like in [[LJN]]'s action figures, and even candy.<ref name=AA/>{{rp|158, 161, 163}}
+
+The number and variety of different monsters contributes to keeping the game interesting and forces players to think about employing diverse strategies.<ref>{{cite magazine |last=Tessier |first=Philippe |date=November 2000 |title=Baldur's Gate II |language=fr |department=Review |magazine=Backstab |number=24 |pages=90–91}}</ref><ref name="Am">{{Cite book |last=Ammann |first=Keith |title=[[The Monsters Know What They're Doing: Combat Tactics for Dungeon Masters]] |date=2019 |publisher=[[Saga Press]] |isbn=978-1982122669}}</ref>{{rp|XIV-XI}}
+
+The monsters of ''Dungeons & Dragons'' have received [[Dungeons & Dragons controversies|criticism from multiple sources]]. In addition to other game elements, the presence of magical or demonic monsters has provoked [[moral panic]]s among religious conservatives.<ref name="religiondispatches">{{Cite web |date=September 21, 2014 |title=Monstrous Futures: Dungeons & Dragons, Harbinger of the "None" Generation, Turns 40 |url=http://religiondispatches.org/monstrous-futures-dungeons-dragons-harbinger-of-the-none-generation-turns-40/ |website=Religion Dispatches |access-date=February 9, 2015 |archive-date=March 26, 2015 |archive-url=https://web.archive.org/web/20150326212859/http://religiondispatches.org/monstrous-futures-dungeons-dragons-harbinger-of-the-none-generation-turns-40/ |url-status=live }}</ref> While some of the presented creatures are friendly or harmless,<ref name="chrulew"/> the game's emphasis on slaying monsters has also elicited negative commentary. As monsters have traditionally been defined by the number of "[[experience points]]" they award when killed, the game has been said to promote a "sociopathic" violence where the [[dungeon master]] "merely referees one imagined slaughter after another."<ref name="Slate">{{Cite web |last=Erik Sofge |date=2008-03-10 |title=With Dungeons & Dragons, Gary Gygax created a monster |url=http://www.slate.com/articles/news_and_politics/hey_wait_a_minute/2008/03/orc_holocaust.html |access-date=2019-10-03 |publisher=Slate.com |archive-date=2018-09-20 |archive-url=https://web.archive.org/web/20180920185309/http://www.slate.com/articles/news_and_politics/hey_wait_a_minute/2008/03/orc_holocaust.html |url-status=live }}</ref> Nicholas J. Mizer, in contrast, suggested that experience through combat was an in-game variation on [[Thorstein Veblen]]'s [[The Theory of the Leisure Class#Thesis|theory]] that application of the "predatory spirit" of humans to warfare could lead to high standing in society.<ref>{{Cite book |last=Mizer, Nicholas J. |title=Tabletop role-playing games and the experience of imagined worlds |date=22 November 2019 |isbn=978-3-030-29127-3 |location=Cham, Switzerland |publisher=Palgrave Macmillan|page=34 |oclc=1129162802}}</ref> [[Environmental humanities]] scholar Matthew Chrulew summarized that the impact of "such violent imaginings and enactments" has "long been a matter of dispute", and has variously been judged "inciting or cathartic".<ref name="chrulew"/>
+
+Some female monsters, such as the [[nymph]] and [[succubus]], were seen by Philip J. Clements as an instance of the sexist tropes the game draws on which presented female sexuality as inherently dangerous.<ref name=PJC>{{cite thesis|last=Clements|first=Philip J.|date=December 2019|title=Dungeons & Discourse: Intersectional Identities in Dungeons & Dragons|type=PhD|url=http://rave.ohiolink.edu/etdc/view?acc_num=bgsu1573729920432102|access-date=September 22, 2020}}</ref>
+
+==Monster types==
+Many kinds of monsters can be classified into typologies based on their common characteristics, and various books and game guides have been produced focusing on specific kinds of monsters.<ref name="HW">{{Cite book |last=Schick |first=Lawrence |title=Heroic Worlds: A History and Guide to Role-Playing Games |publisher=Prometheus Books |year=1991 |isbn=0-87975-653-5 |author-link=Lawrence Schick}}</ref>{{rp|134}}<ref name="Dragon #192">{{Cite journal |last=Swan |first=Rick |author-link=Rick Swan |date=April 1993 |title=Role-playing Reviews |journal=[[Dragon (magazine)|Dragon]] |location=[[Lake Geneva, Wisconsin|Lake Geneva]], Wisconsin |publisher=[[TSR, Inc.|TSR]] |issue=#192 |page=86}}</ref><ref>{{cite magazine |author=stylo |date=February 2001 |title=D&D: Monster Manual |url=http://www.envoyer.de/ausgaben/2001/02/Monster_Manr.html |archive-url=https://web.archive.org/web/20020530132236/http://www.envoyer.de/ausgaben/2001/02/Monster_Manr.html |archive-date=2002-05-30 |magazine=Envoyer |number=52 |publisher=FZ Werbung Hannover |language=de |issn=1433-2892 |access-date=2023-09-22 |url-status=dead }}</ref> Such groupings include [[Humanoid (Dungeons & Dragons)|humanoids]], monstrosities, dragons, [[Giant (Dungeons & Dragons)|giants]], [[undead]], aberrations, fiends, celestials, {{vanchor|fey|Fey}}, [[elemental]]s, [[Golem|constructs]], [[Slime (fantasy creature)|oozes]] and [[plant]]s; and beasts.<ref name="Am"/>{{rp|V-VII}}<ref name="chrulew"/> There is some flexibility within these groupings. For example, many kinds of creatures can become undead or can be used to form magical constructs.
+
+The 3rd edition of the game also used a broader type named "outsiders", encompassing any creature from the [[Outer Planes]]<ref>{{Cite thesis |last=Clements |first=Philip J. |title=Dungeons & Discourse: Intersectional Identities in Dungeons & Dragons |date=December 2019 |degree=PhD |url=http://rave.ohiolink.edu/etdc/view?acc_num=bgsu1573729920432102 |access-date=2020-09-22 |page=68}}</ref> or [[Inner Planes]].<ref name="MM3.5e">{{Cite book |last1=Williams |first1=Skip |title=[[Monster Manual]] |last2=Tweet |first2=Jonathan |last3=Cook |first3=Monte |date=July 2003 |publisher=[[Wizards of the Coast]] |isbn=0-7869-2893-X}}</ref>
+
+==Notable monsters==
+{{Anchor|TSR 2009 – Monster Manual (1977)}}
+
+===''Monster Manual'' (1977)===
+The ''Monster Manual'' (1977) was the initial monster book for the [[Editions of Dungeons & Dragons#Advanced Dungeons & Dragons|first edition]] of the ''Advanced [[Dungeons & Dragons]]'' game, published by [[TSR, Inc.]] in 1977. [[Gary Gygax]] wrote much of the work himself, having included and expanded most of the monsters from the previous ''D&D'' supplements. Also included are monsters originally printed in ''The Strategic Review'', as well as some originally found in early issues of ''[[Dragon (magazine)|The Dragon]]'' and other early game materials. This book expanded on the original monster format by including the stat lines on the same page as the monsters' descriptions and introducing more stats, expanding the length of most monster descriptions, and featuring illustrations for most of the monsters.<ref name=":1" /> The book contains a treasure chart and an index of major listings.<ref name=":1">{{Cite book |last=Gygax |first=Gary |title=[[Monster Manual]] |date=1977 |publisher=[[TSR Hobbies]] |isbn=0-935696-00-8 |location=Lake Geneva, WI |oclc=4592523 |author-link=Gary Gygax}}</ref>
+
+{| class="wikitable"
+! Creature !! Page !! Other appearances !! Variants !! Description
+{{D&D creature list
+|Name=[[Beholder (Dungeons & Dragons)|Beholder]]
+|PageNumber=10
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974), Dragon #76 "The Ecology of the Beholder" (1983), D&D Companion Rules (1984), MC1 – Monstrous Compendium Volume One (1989), Dungeons & Dragons Rules Cyclopedia (1991), Monstrous Manual  (1993), [[I, Tyrant]] (1996), Monster Manual (2000), Monster Manual v.3.5 (2003), D&D Miniatures: Deathknell set #32 (2005)
+|Variants=
+|Description=Hateful, aggressive, avaricious spherical monster that is most frequently found underground
+}}
+{{D&D creature list
+|id = Bulette
+|Name=Bulette
+|PageNumber=12
+|OtherAppearances=Dragon #1 (1976), Dragon #74 "The Ecology of the Bulette" (1983), MC2 – Monstrous Compendium Volume Two (1989), Monstrous Manual (1993), Monster Manual (2000), Monster Manual v.3.5 (2003), D&D Miniatures: Giants of Legend set #67 (2004)
+|Variants=
+|Description=This "slow-witted, roughly bullet-shaped" monster also known as landshark<ref name=AA/>{{rp|66}} burrows underground and feeds on humans, horses, and halflings. Originally inspired by a cheap plastic toy,<ref name="ashgate" /><ref name=AA/>{{rp|66}} the bulette was one of the first monsters specifically created for ''D&D'',<ref>{{Cite book |last=Hergenrader |first=Trent |title=Collaborative Worldbuilding for Writers and Gamers |publisher=Bloomsbury Academic |year=2019 |isbn=978-1-3500-1667-5}}</ref> and has been included in every edition of ''D&D'', although various aspects of the monster have changed from edition to edition. Author Keith Ammann called bulettes "brutes tailor-made to give your players jump scares" and found its preferences and aversions for the meat of different humanoid races "ludicrous".<ref name="Am"/>{{rp|157–158}} [https://www.belloflostsouls.net/ BoLS] writer J.R. Zambrano found it "kind of goofy" and a "really fun monster to fight".<ref>{{Cite web |last=Zambrano |first=J.R. |date=2016-12-16 |title=D&D: Monster Spotlight – Bulette |url=https://www.belloflostsouls.net/2016/12/dd-monster-spotlight-bulette.html |access-date=2020-05-10 |publisher=belloflostsouls.net |archive-date=2021-03-08 |archive-url=https://web.archive.org/web/20210308125535/https://www.belloflostsouls.net/2016/12/dd-monster-spotlight-bulette.html |url-status=live }}</ref> It has appeared in several other media.<ref>Clinton Boomer, [[Jason Bulmahn]], Joshua J. Frost, Nicolas Logue, Robert McCreary, Jason Nelson, Richard Pett, Sean K Reynolds, James L. Sutter, and [[Greg A. Vaughan]]. ''Dungeon Denizens Revisited'' (Paizo, 2009)</ref><ref>{{Cite web |last=Allender |first=Jeff |year=1997 |title=Advanced Dungeons & Dragons: TSR - 1991 |url=http://www.nslists.com/add91.htm |access-date=2010-10-13 |website=Jeff Allender's House of Checklists |archive-date=2010-11-27 |archive-url=https://web.archive.org/web/20101127011703/http://nslists.com/add91.htm |url-status=live }}</ref><ref>{{Cite web |title=Mapventures Products |url=http://www.rpgnow.com/index.php?cPath=1707 |access-date=2010-04-20 |website=RPGNow.com |archive-date=2011-06-06 |archive-url=https://web.archive.org/web/20110606103446/http://www.rpgnow.com/index.php?cPath=1707 |url-status=live }}</ref><ref>{{Cite web |title=The Oath of Kortis |url=http://www.mapventures.com/files/pdf/Oath7to9.pdf |url-status=dead |archive-url=https://web.archive.org/web/20110714032614/http://www.mapventures.com/files/pdf/Oath7to9.pdf |archive-date=2011-07-14 |access-date=2010-04-20 |website=Mapventures}}</ref><ref>{{Cite web |title=Behind the Monsters: Bulette |url=http://www.yourgamesnow.com/index.php?main_page=product_info&manufacturers_id=64&products_id=1823 |url-status=dead |archive-url=https://web.archive.org/web/20110718143534/http://www.yourgamesnow.com/index.php?main_page=product_info&manufacturers_id=64&products_id=1823 |archive-date=2011-07-18 |access-date=2010-04-20 |website=Your Games Now}}</ref><ref>{{Cite web |title=Bulette (Land Shark) |url=http://www.origami.as/gallery.php?gallery=26&image=299 |access-date=2010-04-20 |website=Joseph Wu Origami Inc. |archive-date=2010-10-09 |archive-url=https://web.archive.org/web/20101009151701/http://origami.as/gallery.php?gallery=26&image=299 |url-status=live }}</ref><ref>{{Cite web |date=2007-11-25 |title=Tricky's Complete Walkthrough for ''Eye of the Beholder II - The Legend of Darkmoon'' (PC) |url=http://www.gamefaqs.com/pc/564792-eye-of-the-beholder-ii-the-legend-of-darkmoon/faqs/50919 |access-date=2010-10-13 |website=GameFAQs |publisher=gamefaqs.com |archive-date=2010-07-24 |archive-url=https://web.archive.org/web/20100724071727/http://www.gamefaqs.com/pc/564792-eye-of-the-beholder-ii-the-legend-of-darkmoon/faqs/50919 |url-status=live }}</ref>
+}}
+{{D&D creature list
+|Name=[[Devil (Dungeons & Dragons)|Devil]]
+|PageNumber=20-23
+|OtherAppearances=
+|Variants=
+|Description=[[Don Turnbull (game designer)|Don Turnbull]] considered the devils the most prominent among the new monsters introduced in the ''[[Monster Manual]]'': "they are all pretty strong and compare not unfavourably in this respect with the Demons we already know".<ref name="WD8">{{Cite journal |last=Turnbull, Don |date=August–September 1978 |title=Open Box |journal=[[White Dwarf (magazine)|White Dwarf]] |issue=8 |pages=16–17}}</ref>
+}}
+{{D&D creature list
+|Name=Displacer beast
+|PageNumber=28
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974), D&D Basic Set (1977), D&D Expert Set (1981, 1983), ''Dragon'' #109 "The Ecology of the Displacer Beast" (1986), MC 1 – Monstrous Compendium Volume One (1989), Dungeons & Dragons Rules Cyclopedia (1991), Monstrous Manual (1993), Monster Manual (2000), Monster Manual v.3.5 (2003) (also includes a Pack Lord), D&D Miniatures: Harbinger set #41 (2003), D&D Miniatures: War of the Dragon Queen set #29 (2006) (Displacer Beast Pack Lord), D&D Miniatures: Unhallowed set #37 (2007) (Displacer Beast Manhunter)
+|Variants=
+|Description=Panther-like beast, that always appears to be three feet away from its actual position
+}}
+{{D&D creature list
+|Name=[[Gelatinous cube]]
+|PageNumber=43
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Cubic scavengers, who cleanse living organism and carrion from the floor and walls of underground passageways
+}}
+{{D&D creature list
+|Name=[[Hell hound (Dungeons & Dragons)|Hell hound]]
+|PageNumber=51
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Not from the material plane, breathes out scorching fire. [[Don Turnbull (game designer)|Don Turnbull]] noted that the breath weapon of the "much-feared" hell hound has been altered from its previous appearance.<ref name="WD8" />
+}}
+{{D&D creature list
+|Name=[[Jackalwere (Dungeons & Dragons monster)|Jackalwere]]
+|PageNumber=56
+|OtherAppearances=
+|Variants=
+|Description=An intelligent jackal with the ability to assume human and jackal-human-hybrid form and a sleep-inducing gaze.<ref name=KA>{{cite book|first=Keith|last=Ammann|date=2019|title=[[The Monsters Know What They're Doing]]|publisher=[[Saga Press]]|isbn=978-1982122669}}</ref><ref name=AA/>{{rp|133}}
+}}
+{{D&D creature list
+|Name=[[Kirin (Dungeons & Dragons monster)|Kirin]]
+|PageNumber=57
+|OtherAppearances=''Eldritch Wizardry'' (1976),<ref>{{Citation |last1=Gygax |first1=Gary |title=Eldritch Wizardry |year=1976 |edition=1 |place=Lake Geneva, Wisconsin |publisher=[[TSR, Inc.]] |last2=Blume |first2=Brian |author-link=Gary Gygax}}</ref> ''Monstrous Compendium Volume Two'' (1989),<ref>[[David Cook (game designer)|Cook, David]], et al. ''[[Monster Manual#2nd Edition Advanced Dungeons & Dragons|Monstrous Compendium Volume Two]]'' ([[TSR, Inc.|TSR]], 1989)</ref> ''Monstrous Manual'' (1993),<ref>{{Cite book |title=[[Monstrous Manual]] |date=June 1993 |publisher=[[TSR, Inc.]] |isbn=1-5607-6619-0 |editor-last=[[Doug Stewart (game designer)|Doug Stewart]]}}</ref> [[Psionics (Dungeons & Dragons)|psionic]] variant of the ki-rin in ''[[The Complete Psionics Handbook]]'' (1991),<ref>[[Steve Winter (game designer)|Winter, Steve]]. ''[[The Complete Psionics Handbook]]'' (TSR, 1991)</ref> third edition ''[[Oriental Adventures]]'' (2001)<ref>[[James Wyatt (game designer)|Wyatt, James]]. ''[[Oriental Adventures]]'' ([[Wizards of the Coast]], 2001)</ref>
+|Variants=
+|Description=Race of lawful good aerial creatures that will aid humans if the need to combat evil is great<br>An obituary to [[Gary Gygax]] specifically highlights the Ki-rin as an example of the way in which ''D&D'' embraces world culture and folklore.<ref name=JR/>
+}}
+{{D&D creature list
+|Name=[[Lich (Dungeons & Dragons)|Lich]]
+|PageNumber=61
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Created with the use of powerful and arcane magic, formerly ultra powerful magic-users now non-human and non-living
+}}
+{{D&D creature list
+|Name=[[Mimic (Dungeons & Dragons)|Mimic]]
+|PageNumber=70
+|OtherAppearances=
+|Variants=
+|Description=Subterranean creatures that are able to perfectly mimic stone and wood
+}}
+{{D&D creature list
+|Name=[[Illithid|Mind flayer]]
+|PageNumber=70
+|OtherAppearances=''Eldritch Wizardry''
+|Variants=
+|Description=Evil subterranean creature that considers humanity as cattle to feed upon, draws forth brains with its tentacles
+}}
+{{D&D creature list
+|Name=[[Mummy (Dungeons & Dragons)|Mummy]]
+|PageNumber=72
+|OtherAppearances=[[Dungeons & Dragons (1974)|''Dungeons & Dragons'' set (1974)]]
+|Variants=
+|Description=Undead humans that retain a semblance of life and seek to destroy living things. [[Don Turnbull (game designer)|Don Turnbull]] noted that the mummy was revised from its previous statistics, and could now cause paralysis on sight (as a result of fear).<ref name="WD8" />
+}}
+{{D&D creature list
+|Name=[[Night hag (Dungeons & Dragons)|Night hag]]
+|PageNumber=73
+|OtherAppearances=
+|Variants=
+|Description=Rule the convoluted planes of [[Gray Waste|Hades]], form larvae (see above) from evil persons they slay, and sell to demons and devils. [[Don Turnbull (game designer)|Don Turnbull]] referred to the night hag as "splendid" and notes that the illustration of the night hag is the best drawing in the book.<ref name="WD8" />
+}}
+{{D&D creature list
+|Name=Otyugh
+|PageNumber=77
+|OtherAppearances=
+|Variants=
+|Description=Weird omnivorous scavengers whose diet consists of dung, offal, and carrion, always found underground.  [[Don Turnbull (game designer)|Don Turnbull]] referred to the otyugh as a "most interesting creation".<ref name="WD8" /> Witwer ''et al.'' viewed its artistic rendering in 5th edition as "redesigned from prior editions to entice more Dungeon Master use."<ref name=AA/>{{rp|402-403}}
+}}
+{{D&D creature list
+|Name=[[Owlbear]]
+|PageNumber=77
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Horrible creatures that inhabit tangled forest regions, attacks with great claws and snapping beak
+}}
+{{D&D creature list
+|Name=Rust monster
+|PageNumber=83
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Large armored tick-like monster which devours metals. An original invention for the game and its artificial underground world, the appearance of the rust monster was inspired by a plastic toy from Hong Kong.<ref>{{cite web |url=https://www.blackgate.com/2014/01/28/on-the-origins-of-the-rust-monster/|title=On the Origins of the Rust Monster|last=ONeill|first=John|date=2014-01-28|website=[[Black Gate (magazine)|Black Gate]]|access-date=2022-04-06}}</ref><ref name=AA/>{{rp|66}} It was ranked among the most memorable as well as obnoxious creatures in the game, terrifying to certain characters and their players not due to their ability to fight but to destroy their items.<ref name="ashgate"/><ref name=RB>{{cite web|url=http://io9.gizmodo.com/the-10-most-memorable-dungeons-dragons-monsters-1326074030/|title=The 10 Most Memorable Dungeons & Dragons Monsters|website=[[io9]]|last=Bricken|first=Rob|date=2013-09-16|access-date=2016-01-20}}</ref><ref name=io9/><ref name=AA/>{{rp|91, 93}}<ref name=DME>{{cite book|first=David M.|last=Ewalt|author-link=David M. Ewalt|year=2013|title=Of Dice and Men: The Story of Dungeons & Dragons and the People Who Play It|publisher=Scribner|isbn=978-1-4516-4052-6|page=138}}</ref> Chris Sims of the on-line magazine ''Comics Alliance'' referred to the rust monster as "the most feared D&D monster".<ref>{{cite web|url=http://www.comicsalliance.com/2012/10/19/ask-chris-125-the-greatest-monsters-in-dungeons-and-dragons/|title=Ask Chris #125: The Greatest Monsters in 'Dungeons & Dragons'|work=Comics Alliance|last=Sims|first=Chris|date=2012-10-19|access-date=2012-11-10|archive-url=https://web.archive.org/web/20121021225320/http://www.comicsalliance.com/2012/10/19/ask-chris-125-the-greatest-monsters-in-dungeons-and-dragons|archive-date=2012-10-21}}</ref>
+}}
+{{D&D creature list
+|Name=[[Shadow (Dungeons & Dragons)|Shadow]]
+|PageNumber=86
+|OtherAppearances=''[[Supplement I: Greyhawk]]'' (1974)
+|Variants=
+|Description=Horrible undead creatures that drain strength merely by touching an opponent. [[Don Turnbull (game designer)|Don Turnbull]] noted his disappointment that the shadow in the ''[[Monster Manual]]'' is of the [[Undead (Dungeons & Dragons)|undead]] class and thus subject to a [[Cleric (Dungeons & Dragons)|cleric]]'s turn undead ability: "I used to enjoy seeing clerics vainly trying to turn what wouldn't turn, when Shadows were first met".<ref name="WD8" />
+}}
+|}
+
+{{Anchor|TSR 2012 – Fiend Folio (1981)}}
+
+===''Fiend Folio'' (1981)===
+The ''[[Fiend Folio|Fiend Folio: Tome of Creatures Malevolent and Benign]]'' was the second monster book for the first edition of ''Advanced Dungeons & Dragons'', published in 1981. The ''Fiend Folio'' consisted mostly of monsters submitted to ''[[White Dwarf (magazine)|White Dwarf]]''{{'}}s "Fiend Factory" column.  The monsters in this book are presented in the same format as those in the previous ''Monster Manual'' work, and most featured illustrations of the monsters.<ref name=":0">{{Cite book |editor-last=Turnbull |editor-first=Don |editor-link=Don Turnbull (game designer) |title=Fiend Folio |date=1981 |publisher=[[TSR Hobbies]] |url=https://anyflip.com/zfqjc/iwfa/basic |isbn=0-935696-21-0 |location=Lake Geneva, WI |oclc=11291023 |author-link=Don Turnbull (game designer)}}</ref>
+
+{| class="wikitable"
+! Creature !! Page !! Other appearances !! Variants !! Description
+|-
+{{D&D creature list
+| Name             = Al-mi'raj
+| PageNumber       = 11–12
+| OtherAppearances = MC14 – Monstrous Compendium Fiend Folio Appendix (1992)
+| Variants         =
+| Description      = Resembles yellow hare with black horn, drawn by Roger Musson,<ref>{{harvp|Turnbull|1981|pp=11–12, 120}}, artist Roger Musson.<!--artists credited in index-->.</ref> based on [[Al-mi'raj]] "in Islamic poetry, a yellow hare with a single black horn on its head."<ref name="DV">{{cite web|url=http://www.hahnlibrary.net/rpgs/sources.html|title=Literary Sources of D&D|access-date=2026-06-03|last=DeVarque|first=Aardy R.|website=Hahn Library}}</ref> Counted among the saddest, lamest creatures in ''Fiend Folio'' by artist Sean McCarthy (b. 1976), a hybrid creature with physiology resulting from maladaptation rather than evil.<ref name="SMC">{{Cite conference |last=McCarthy |first=Sean |date=2011-11-06 |title=Panel Discussion |conference=D&D in Contemporary Art |location=New York |url=https://muleabides.wordpress.com/2010/11/12/dd-in-contemporary-art-video-of-the-panel-discussion/ |editor=Allison, Tavis |access-date=2020-01-07 |archive-date=2019-12-22 |archive-url=https://web.archive.org/web/20191222154351/https://muleabides.wordpress.com/2010/11/12/dd-in-contemporary-art-video-of-the-panel-discussion/ |url-status=live }}</ref>
+}}
+{{D&D creature list
+| Name             = Carbuncle
+| PageNumber       = 17–18
+| OtherAppearances = ''White Dwarf'' #8 (1978), ''Best of White Dwarf Scenarios'' (1980), ''Tome of Horrors'' (2002)
+| Variants         =
+| Description      = The [[Carbuncle (legendary creature)|carbuncle]] of AD&D is an [[armadillo]]-like creature with a [[ruby]] in its head, drawn by Albie Fiore.<ref>{{harvp|Turnbull|1981|pp=17–18, 120}}, artist Albie Fiore <!--artists credited in index-->.</ref> The carbuncle is another among the saddest, lamest entries in ''Fiend Folio'' according to artist Sean McCarthy.<ref name="SMC" />
+}}
+{{D&D creature list
+|Name=Frost man
+|PageNumber=40
+|OtherAppearances=''[[Frostburn]]'' (2004) (as Frost folk)
+|Variants=
+|Description=''[[Geek.com]]'' included this humanoid in its list of "most underrated monsters" and commented referring to the ''Fiend Folio'' image: "with his ability to radiate Frost, well manicured beard, magnificent head of hair, hatchet, eye patch, caveman style outfit, and comfortable shoes, the Frost Man is the entire package".<ref name=Geek/>
+}}
+{{D&D creature list
+|Name=Hook horror
+|PageNumber=51
+|OtherAppearances=''White Dwarf'' #12 (1979), ''Best of White Dwarf Scenarios'' (1980), Monstrous Manual (1993)
+|Variants=
+|Description=A bipedal, subterranean monster that looks like a vulture-like humanoid with bony hooks in place of hands. The hook horror was first published in ''[[White Dwarf (magazine)|White Dwarf]]'' #12 (April–May 1979), and was originally submitted by [[Ian Livingstone]].<ref name=WD12>{{cite magazine|editor-last=Turnbull|editor-first=Don|editor-link=Don Turnbull (game designer)|title=Fiend Factory|magazine=[[White Dwarf (magazine)|White Dwarf]]|issue=12|pages=8–10|publisher=[[Games Workshop]]|date=April–May 1979|issn=0265-8712}}</ref> It was voted among the top ten monsters from the magazine's "Fiend Factory" column and reprinted in ''Best of White Dwarf Articles'' (1980).<ref name=WD18>{{cite magazine|editor-link=Don Turnbull (game designer)|editor-first=Don|editor-last=Turnbull|title=Fiend Factory|magazine=[[White Dwarf (magazine)|White Dwarf]]|volume=18|pages=22–23|date=April 1980}}</ref><ref name=BWD1>{{cite magazine|editor-link2=Don Turnbull (game designer)|editor-first=Don|editor-last=Turnbull|title=Fiend Factory|magazine=[[White Dwarf (magazine)|The Best of White Dwarf Articles]]|volume=1|pages=42–44|date=1980}}</ref><ref name=GeBWD1>{{cite web|url=https://rpggeek.com/rpgissue/52587/best-white-dwarf-articles-volume-i|title=The Best of White Dwarf Articles (Volume I)|publisher=[[BoardGameGeek]]|access-date=2021-04-22}}</ref> [[Ed Greenwood]], in his review of the ''Fiend Folio'' for ''[[Dragon (magazine)|Dragon]]'' magazine, considered the hook horror as one of the creatures with "strange appearances and little else; there is no depth to their listings" and that it was one of the creatures which "seem incomplete".<ref name=D55>{{Cite magazine|first=Ed|last=Greenwood|author-link=Ed Greenwood|editor-first=Kim|editor-last=Mohan|editor-link=Kim Mohan|title=Fiend Folio Findings: Flat taste didn't go away|magazine=[[Dragon (magazine)|Dragon]]|issue=55|date=November 1981|pages=6–7, 9–10}}</ref> Witwer ''et al.'' viewed its artistic rendering in 5th edition as "redesigned from prior editions to entice more Dungeon Master use."<ref name=AA/>{{rp|402-403}}
+}}
+|}
+
+{{Anchor|TSR 2016 – Monster Manual II (1983)}}
+
+===''Monster Manual II'' (1983)===
+''Monster Manual II'' was the third and final monster book for the first edition of ''Advanced Dungeons & Dragons'', published in 1983, and has the largest page count of the three. As with the ''Monster Manual'', this book was written primarily by [[Gary Gygax]]. This book contains a number of monsters that previously appeared in limited circulation and a large amount of its contents was entirely new at publication. The monsters in this book are presented in the same format as the ''Monster Manual'' and ''Fiend Folio''.<ref name="MMII">{{Cite book |last=Gygax |first=Gary |title=Monster Manual II |year=1983 |publisher=Wizards of the Coast |isbn=0-7869-2873-5 |author-link=Gary Gygax}}</ref>
+
+{| class="wikitable"
+! Creature !! Page !! Other appearances !! Variants !! Description
+|-
+{{D&D creature list
+| Name             = Bat, giant
+| PageNumber       = 14
+| OtherAppearances = ''D&D Basic Set'' (1981), D&D Basic Set (1983), MC1 – Monstrous Compendium Volume One (1989), ''Dungeons & Dragons Rules Cyclopedia'' (1991), ''Monstrous Manual'' (1993)
+|Variants=
+|Description= The ''giant bat'' in the ''Fiend Folio'' is exactly what its name would suggest—a giant form of [[bat]] with a 6' wingspan. ''[[White Dwarf (magazine)|White Dwarf]]'' reviewer [[Jamie Thomson (author)|Jamie Thomson]] commented on the giant bat, noting that it "seems an obvious choice for ''D&D''{{-"}}.<ref name="WD28">{{Cite journal |last=Thomson |first=Jamie |date=Dec 1981 – Jan 1982 |title=Open Box |journal=[[White Dwarf (magazine)|White Dwarf]] |type=review |publisher=[[Games Workshop]] |issue=28 |pages=14}}</ref>
+}}
+{{D&D creature list
+|Name=Death dog
+|PageNumber=23
+|OtherAppearances=
+|Variants=
+|Description=<!-- Deleted image removed: [[Image:Death dog.JPG|200px]] -->
+''[[White Dwarf (magazine)|White Dwarf]]'' reviewer Jamie Thomson commented on the death dog, which is "rumored to be a descendant of [[Cerberus]]".<ref name="WD28" />
+}}
+{{D&D creature list
+|Name=Executioner's hood
+|PageNumber=64
+|OtherAppearances=
+|Variants=
+|Description=Hood-shaped monster that functions as a trap which "envelops a victim's head and slowly strangles them". Included in [[Geek.com]]'s list of "The most underrated monsters of Advanced Dungeons & Dragons": After pouring alcohol on the creature as a creative way to defeat it, it may make "the coolest party mascot/drinking buddy in all the realms".<ref name=Geek/>
+}}
+{{D&D creature list
+|Name=[[Grue (Dungeons & Dragons)|Grue]], elemental
+|PageNumber=72–74
+|OtherAppearances=
+|Variants=
+|Description=Described are the chagrin, harginn, ildriss, and verrdig. ''[[White Dwarf (magazine)|White Dwarf]]'' reviewer Megan C. Evans referred to the grues as "a collection of terrifying beasties from the ''Elemental Planes''".<ref name="WD28" />
+}}
+{{D&D creature list
+|Name=Stegocentipede
+|PageNumber=114–115
+|OtherAppearances=
+|Variants=
+|Description=Lawrence Schick described the stegocentipede as "a giant arthropod notable for its twin row of back plates (wow!)"<ref name="HW" />{{rp|106–107}}
+}}
+{{D&D creature list
+|Name=Stench kow
+|PageNumber=115
+|OtherAppearances=''Monstrous Manual'' (1993), ''Polyhedron'' #133 (December 1998), ''Tome of Horror'' (2002), pp. 243–244 from Necromancer Games
+|Variants=
+|Description=Lawrence Schick described the stench kow as "a monstrous bison that smells ''real bad''".<ref name="HW" />
+}}
+|}
+
+===Fiends===
+{{Multiple issues|section=yes|
+{{In-universe|date=May 2023}}
+{{Overly detailed|date=May 2023}}
+}}
+
+''Fiend'' is a term used in the ''[[Dungeons & Dragons]]'' [[fantasy]] [[role-playing game]] to refer to any malicious otherworldly creatures within the ''Dungeons & Dragons'' universe. These include various races of demons and [[Devil (Dungeons & Dragons)|devils]] that are of an [[evil]] [[alignment (Dungeons & Dragons)|alignment]] and hail from the [[Outer Plane|Lower Planes]]. All fiends are extraplanar [[Outsider (Dungeons & Dragons)|outsiders]]. Fiends have been considered among "D&D's most classic monsters".<ref>{{Cite web |last=Biddle |first=Tyler |date=2016-11-15 |title=Volo's Guide to Monsters Review |url=http://www.nerdsourced.com/volos-guide-monsters-review/ |access-date=2024-01-17 |website=Nerd Sourced}}</ref>
+
+====Demons====
+Demons are a [[alignment (Dungeons & Dragons)#Chaotic evil|chaotic evil]] race native to the [[Abyss (Dungeons & Dragons)|Abyss]]; these "magical and occult" creatures<ref name="chrulew"/> are rapacious, cruel and arbitrary. They are also portrayed as more widespread than other races of fiends, as the Abyss and its population are both theoretically infinite in size. The dominant race of demons is the tanar'ri ({{IPAc-en|t|ə|ˈ|n|ɑr|i}}). "True" tanar'ri such as the balors (originally called [[Balrog]]s) and the six-armed serpentine mariliths push other weaker tanar'ri around and organize them into makeshift armies for battle. {{vanchor|Demon lords|Demon lord}} and demon princes such as {{vanchor|Orcus}},<ref>{{Cite web|last=de Hoog|first=Chris|date=January 25, 2022|title=D&D: Rules Expansion Gift Set Review - CGMagazine|url=https://www.cgmagonline.com/review/tabletop/dd-rules-expansion-gift-set-review/|access-date=June 6, 2025|website=CGMagazine}}</ref> [[Demogorgon (Dungeons & Dragons)|Demogorgon]], Juiblex, Zuggtmoy, Graz'zt,<ref name="CBR Demons">{{Cite web|url=https://www.cbr.com/dungeons-and-dragons-fearsome-demon-lords/|title=D&D: Top 10 Demon Lords Your Party Will Fear|first1=Daniel|last1=Colohan|date=June 13, 2021|website=CBR|access-date=April 8, 2022|archive-date=April 15, 2022|archive-url=https://web.archive.org/web/20220415140905/https://www.cbr.com/dungeons-and-dragons-fearsome-demon-lords/|url-status=live}}</ref> and countless others are said to rule over the demons of their individual layers of the Abyss, as much as the chaotic demons can be ruled over.
+
+====Devils====
+The [[Devil (Dungeons & Dragons)|devils]], of which the ruling type are called baatezu ({{IPAc-en|b|eɪ|ˈ|ɑː|t|ɛ|z|uː}}),<ref>{{cite book |last=LaFountain |first=J. Paul |editor-last=Brown |editor-first=Timothy B. |editor-link=Timothy Brown (game designer) |date=1991 |title=Monstrous Compendium: Outer Planes Appendix |publisher=[[TSR, Inc.]] |page=4 |isbn=1-56076-055-9}}</ref> are [[alignment (Dungeons & Dragons)#Lawful evil|lawful evil]] natives of the [[Baator|Nine Hells of Baator]]; they are said to subjugate the weak and rule tyrannically over their domains. Pit fiends are the most powerful baatezu, though even the strongest pit fiends are surpassed by the [[Lords of the Nine]], or Archdevils, whose ranks include [[Baalzebul (Dungeons & Dragons)|Baalzebul]], [[Mephistopheles (Dungeons & Dragons)|Mephistopheles]], and [[Asmodeus (Dungeons & Dragons)|Asmodeus]]. Unlike the demons, the devils are described as arranged in a strict hierarchy. Like the demons, the devils are scheming backstabbers; while a demon only keeps its words when it is convenient for it, a devil keeps its word all too well—they are said to be used to exploiting repressive bureaucratic machinations to the fullest and thus always know all ways around the letter of a contract to begin with. The tanar'ri and the baatezu hold an eternal enmity for one another and wage the [[Blood War]] against one another.
+
+====Yugoloths====
+The yugoloths (called [[daemon (mythology)|daemon]]s in 1st edition ''D&D'') are [[alignment (Dungeons & Dragons)#Neutral evil|neutral evil]] natives of the Bleak Eternity of Gehenna and the [[Gray Waste|Gray Wastes of Hades]]; they are neutral to the affairs of the other fiendish races, interfering only when they see a situation that may be profitable or a potential for the advancement of their own schemes. The yugoloths are portrayed as manipulative, secretive, and mercenary by nature, often acting as soldiers for deities in their own private wars, or even at times aiding both sides of the Blood War. In 4th Edition, the yugoloths are considered to be demons, and their previously standard naming convention of "loth" is replaced by "demon" (e.g. the Mezzoloth is the 4e Mezzodemon). In fifth edition, yugoloths are listed as neutral evil fiends under their original names.
+
+====Other fiends====
+=====Demodands=====
+The demodands are race of evil fiends that live on the plane of [[Carceri (Dungeons & Dragons)|Carceri]] (Tarterus in 1st edition ''D&D''). Demodands were introduced in the 1st edition supplement ''[[Monster Manual II]]'', renamed as ''gehreleths'' in the 2nd edition ''[[Monster Manual#Monstrous Compendium volumes issued|Monstrous Compendium Outer Planes Appendix]]'', and reintroduced as demodands in the 3rd edition sourcebook ''[[Fiend Folio]]''. In 1st edition ''D&D'', the three types of demodands from weakest to strongest were tarry, slime, and shaggy. In 2nd and 3rd editions, the three types are farastu, kelubar, and shator. "The name (changed slightly from "[[Deodand (fictional creature)|Deodand]]" to "Demodand" to add a tie to the word "demon") and evil nature are taken from the [[Dying Earth]] series by [[Jack Vance]], but everything else about them was created by TSR's writers."<ref name="DV"/>
+
+=====Hordlings=====
+The ''hordlings'' are fiends that form the hordes of the [[Gray Waste|Gray Waste of Hades]]. They first appeared in the 1st edition supplement ''[[Monster Manual II]]''. Hordlings wander the Gray Waste preying upon everything they come across, even other hordlings. Hordlings vary greatly in appearance. It is said that hordlings evolved from larvae whose hatred was so unique, their souls became individual. The hordlings can be summoned using an artifact known as the ''Bringer of Doom'', which was created around the time of the [[Invoked Devastation]] of [[Greyhawk]]. Hordlings are the most common inhabitants of the Gray Waste. They also occasionally roam the other Lower Planes as well.
+
+=====Kython=====
+The kythons (not to be confused with kytons, which are a subtype of [[baatezu]] known as "chain devils") are distinct from the other fiends in that they did not originate on any of the lower planes. When a group of fiends (the Galchutt, from [[Monte Cook]]'s ''Chaositech'' and ''[[Ptolus]]'') were trapped on the [[Material Plane]], they tried creating more of their own kind through magical means. The results were eyeless reptilian creatures with insectoid features and neutral evil traits. As the kythons matured, they took on varied forms. None of them were loyal to the fiends that created them. Because kythons originated on the Material Plane instead of the [[Abyss (plane)|Abyss]] (or another lower plane), they are also called earth-bound demons. Kythons are only interested in eating and breeding. They have spread rapidly across the [[Material Plane]]. The current hierarchy of kythons, from the weakest to the strongest is: broodlings, juveniles, adults, impalers, slaymasters, and slaughterkings. Eventually, with more time, kythons will grow into newer and more powerful forms. Kythons closely resemble [[Xenomorph (Alien)|xenomorphs]].{{cn|date=October 2025}}
+
+Cook considered renaming them to avoid confusion with "kytons".<ref>{{Cite web |last=Cook |first=Monte |author-link=Monte Cook |date=2001-04-28 |title=Ptolus |url=http://montecook.com/arch_ptolus1.html |url-status=dead |archive-url=https://web.archive.org/web/20090106044607/http://montecook.com/arch_ptolus1.html |archive-date=2009-01-06 |access-date=2008-10-07}}</ref>
+
+=====Lycanthrope=====
+Lycanthropes are humans able transform into animal form during night time.  Every type has their own language and any humanoid bitten by a lycanthrope will be infected with the disease of lycanthropy.  Types of lycanthropes include the werebear, wereboar, wererat, weretiger and werewolf.<ref>{{cite web|url=https://www.americanroads.us/DandD/ADnD_1e_Monster_Manual.pdf|website=americanroads.us|pages=63–64|title=Monster Manual: Lycanthrope|author=Gygax, Gary|authorlink=Gary Gygax}}</ref>
+
+=====Night hags=====
+Night hags are fiends from the Gray Wastes of Hades that traffic in the souls of mortals in 3rd edition sources. In 5th edition they come from the [[Feywild]] and are exiled to the [[Gray Wastes of Hades]].<ref>{{Cite book |title=D&D Monster manual. |date=2014 |publisher=Wizards of the Coast |isbn=978-0-7869-6561-8 |editor-last=Crawford |editor-first=Jeremy |edition=Fifth |page=177}}</ref><ref name=S&T>{{cite journal|last1=Stang|first1=Sarah|last2=Trammel|first2=Aaron|date=2019|title=The Ludic Bestiary: Misogynistic Tropes of Female Monstrosity in ''Dungeons & Dragons''|journal=Games and Culture|volume=15|issue=6|pages=730–747|doi=10.1177/1555412019850059|s2cid=181779195}}</ref>
+
+=====Rakshasas=====
+[[Rakshasa (Dungeons & Dragons)|Rakshasas]] are fiends (often tiger-headed) that may have originated on [[Acheron (plane)|Acheron]] according to 3rd edition sources. In 5th edition they originated in the [[Nine Hells]].<ref>{{Cite book |title=D&D Monster manual. |date=2014 |publisher=Wizards of the Coast |isbn=978-0-7869-6561-8 |editor-last=Crawford |editor-first=Jeremy |edition=Fifth |page=257}}</ref>
+
+=====Slaad=====
+In the 4th edition game, Slaadi are chaotic evil and originate out of the Elemental Chaos. This is markedly different from the portrayal of Slaadi in all prior editions of the game, when they were chaotic neutral natives of Limbo and thus not fiends.
+
+=====Half-fiends and fiendish creatures=====
+The [[Cambion (Dungeons & Dragons)|cambions]] (whose name comes from a different kind of mythological, demonic creature) are simply half-fiends; [[Hybrid (biology)|hybrids]] of fiends and non-fiendish creatures, often humans or other humanoids. Cambions are typically created through fiends raping mortals or seducing them after [[shape-shift]]ing, although some of the most depraved beings actually participate willingly. Those cambions that actually survive birth typically look like grotesque, hellish variants of their mortal progenitors, having wings, claws, fangs and often many other features that reveal their fiendish origins. Cambions are usually outcast, being feared and hated in mortal societies for their fiendish origins and being derided by pure-blooded fiends for their impure heritage. A variant of cambion called durzagon is described in 3.5 edition of the ''[[Monster Manual II]]'' and is the hybrid of a devil and an unsuspecting [[Duergar (Dungeons & Dragons)|duergar]]. The fiendish creatures are simply fiendish versions of other species in Dungeons & Dragons. They typically look like fearsome travesties of beings from the [[Plane (Dungeons & Dragons)|Material Plane]]. Most fiendish species are divided into a number of variants, usually in a [[hierarchy]] of increasing power and cunning.
+
+=====Hecatoncheires=====
+The hecatoncheires in the game is based on the [[Hecatoncheires|creature with the same name]] from [[Greek mythology]].<ref name=SB/> Like their counterparts, D&D's hecatoncheires were presented as giants with one-hundred arms and fifty heads in early editions. They also had the ability to throw a whole "barrage of boulders" at their enemies.<ref name=NM>{{Cite web|url=https://www.thegamer.com/powerful-monsters-dd-history/|title=Dungeons And Dragons: The 15 Most Powerful Monsters From D&D History|last=Montegriffo|first=Nicholas|date=December 25, 2020|website=The Gamer|access-date=February 21, 2022|archive-date=February 18, 2022|archive-url=https://web.archive.org/web/20220218093919/https://www.thegamer.com/powerful-monsters-dd-history/|url-status=live}}</ref> In later editions their description was changed to "abominations that are formed from the fusion of one-hundred beings."<ref name=SB/> In another version they were reduced in power, appearing as "a mere four-armed giant".<ref name=NM/> They were considered among the deadliest monsters of ''D&D'' by several reviewers.<ref name=SB/><ref name=NM/><ref>{{Cite web|url=https://www.cbr.com/powerful-dd-monsters-and-weakest/|title=13 Most Powerful D&D Monsters (And 12 Weakest)|last=Kantor|first=Jonathan H.|date=October 10, 2018|website=[[Screen Rant]]|access-date=February 21, 2022|archive-date=February 21, 2022|archive-url=https://web.archive.org/web/20220221121614/https://www.cbr.com/powerful-dd-monsters-and-weakest/|url-status=live}}</ref> Marley King from ''[[Screen Rant]]'' recommended the hecatoncheires for Dungeons Masters to pit against high-level parties as a monster that is not "too cliché". He commented that - aside from the monster's many attacks, and high perception - it was given "incredible martial prowess" in the game, hearkening back to the importance of [[Greek mythology#Survey of mythic history|skill in battle]] in the culture it was taken from.<ref>{{Cite web|url=https://screenrant.com/dungeons-dragons-monsters-high-level-parties-unique-dnd/|title=Best D&D Monsters For High-Level Parties That Aren't Too Cliché|last=King|first=Marley|date=December 1, 2021|website=[[Screen Rant]]|access-date=February 21, 2022|archive-date=February 18, 2022|archive-url=https://web.archive.org/web/20220218082948/https://screenrant.com/dungeons-dragons-monsters-high-level-parties-unique-dnd/|url-status=live}}</ref> Nicholas Montegriffo from ''The Gamer'' called them "worthy foes for epic heroes" and found the down-scaling of offensively usable arms sad.<ref name=NM/>
+
+====Blood War====
+The Blood War concept was introduced as part of the new background for the outer planes in 1991's ''Monstrous Compendium Volume Outer Planes Appendix''. The conflict is depicted as a bitter war of annihilation between the baatezu race and the tanar'ri; an absolute, all encompassing, and virtually eternal struggle.<ref>{{Cite journal |last=Brown |first=Timothy B. |author-link=Timothy Brown (game designer) |date=January 1991 |title=The Game Wizards |journal=Dragon |issue=165 |pages=89}}</ref>  Trenton Webb of ''Arcane'' magazine wrote, "the fate of all the planes hangs on its outcome".<ref>{{Cite journal |last=Webb |first=Trenton |date=October 1996 |title=Games Reviews |journal=Arcane |publisher=[[Future plc|Future Publishing]] |issue=11 |pages=71}}</ref>  The Blood War was thoroughly detailed in various books throughout the [[Planescape]] setting, particularly the 1996 boxed set ''[[Hellbound: The Blood War]]''.<ref name=mythology/>  The 4th edition of D&D's ''[[Manual of the Planes]]'' updated the Blood War into a smoldering cold war that was formerly an all-out war.{{Citation needed|date=April 2018}}
+
+The Blood War has been given various causes across different game books.  ''[[Fiendish Codex I: Hordes of the Abyss]]'' attributes it to an offshoot of the primordial battles between law and chaos, continued out of violent and sadistic stubbornness.<ref>[[James Jacobs (game designer)|Jacobs, James]], [[Erik Mona]], and [[Ed Stark]]. ''[[Fiendish Codex I: Hordes of the Abyss]]'' ([[Wizards of the Coast]], 2006)</ref><ref name="FC2" />  ''[[Fiendish Codex II: Tyrants of the Nine Hells]]'' depicts [[Asmodeus (Dungeons & Dragons)|Asmodeus]] as a formerly angelic being tasked with fighting an eternal war against the demons. When he and his followers take on demonic traits to better combat their foes, these angels, now deemed devils, are either exiled to or granted (depending on perspective) their own plane, where they fight the Blood War without disturbing the primordial lords of order. This is depicted as possibly being self-serving historical revisionism.<ref name="FC2">[[Robin Laws|Laws, Robin D.]], and [[Robert J. Schwalb]]. ''[[Fiendish Codex II: Tyrants of the Nine Hells]]'' (Wizards of the Coast, 2006).</ref>  The ''[[Guide to Hell]]'' instead portrays the Blood War as a distraction by Asmodeus to hide his true goal of usurping divine power and reshaping the multiverse.<ref name="GtH">Pramas, Chris. ''Guide to Hell'' (TSR, 1999)</ref> Later official materials claim Asmodeus possesses a piece of the pure elemental chaos [[Tharizdun]] used to create the Abyss. The demons are drawn to this and seek to reclaim it.<ref name="GtH" />
+
+''[[ComicBook.com]]'' contributor Christian Hoffer considered "Blood War between demons and devils" one "of the great conflicts that make up the D&D multiverse",<ref name=CH>{{cite web|url=https://comicbook.com/gaming/news/dungeons-and-dragons-mordenkainens-tome-of-foes-bestseller/|title=New 'Dungeons & Dragons' Book is Tearing Up Non-Fiction Bestseller Lists|last=Hoffer|first=Christian|date=2018-06-10|website=[[ComicBook.com]]|access-date=2024-07-01}}</ref> while ''[[Bleeding Cool]]'' editor Gavin Sheehan called it "one of the most glorified battles in all of D&D" and praised the in-depth look into its cause and background given by a [[Ken Burns]]–style narrative in ''[[Mordenkainen's Tome of Foes]]''.<ref>{{cite web|first=Gavin|last=Sheehan|url=https://www.bleedingcool.com/2018/05/29/review-dungeons-dragons-mordenkainens-tome-of-foes/|title=Review: Dungeons & Dragons — Mordenkainen's Tome of Foes|website=[[Bleeding Cool]]|date=29 May 2018|access-date=2025-03-26}}</ref> ''[[Black Gate (magazine)|Black Gate]]'' reviewer Andrew Zimmerman Jones described it as the "eternal" conflict "for who gets claim on being more evil" and praised the Blood War as a background for adventures putting the player characters between the fronts.<ref name=ZJ>{{cite web |url=https://www.blackgate.com/2018/06/12/mordenkainen/ |title=Modular: ''Mordenkainen's Tome of Foes'' Looks to the Horizon |last=Zimmermann Jones |first=Andrew |date=2018-06-12 |website=[[Black Gate (magazine)|Black Gate]] |access-date=2024-07-08}}</ref>
+
+====Controversy and related changes between editions====
+The inclusion of demons and devils proved controversial among critics of ''[[Dungeons & Dragons]]''.<ref>{{Cite web |last=Appelcline |first=Shannon |date=September 4, 2015 |title=Orcus: Demon Prince of Undeath |url=http://dnd.wizards.com/articles/features/orcus-demon-prince-undeath |access-date=April 3, 2018 |website=[[Wizards of the Coast]] |archive-date=April 4, 2018 |archive-url=https://web.archive.org/web/20180404200808/http://dnd.wizards.com/articles/features/orcus-demon-prince-undeath |url-status=dead }}</ref><ref>{{cite book |last=Laycock |first=Joseph P. |title=Dangerous Games: What the Moral Panic over Role-Playing Games Says about Play, Religion, and Imagined Worlds |date=2015 |publisher=Univ of California Press |isbn=9780520960565 |url=https://books.google.com/books?id=zvz9BQAAQBAJ&pg=PAxii |access-date=November 17, 2019 |pages=129–130}}</ref> [[TSR (company)|TSR]] eliminated most references to [[occult]] symbols, demons, and devils from the second edition of the game. When the creatures were reintroduced after a few year in the ''[[Monstrous Compendium]]'' supplement ''MC8: The Outer Planes'', the terms "baatezu", "tanar'ri", "yugoloth", and "gehreleth" were introduced and were used exclusively in place of the terms "devil", "demon", "daemon", and "demodand", respectively, but without changing the creatures fundamentally.<ref name="mythology">{{Cite web |last=Appelcline |first=Shannon |date=November 17, 2014 |title=Monster Mythology |url=http://dnd.wizards.com/articles/features/monster-mythology |access-date=April 3, 2018 |website=[[Wizards of the Coast]] |archive-date=April 4, 2018 |archive-url=https://web.archive.org/web/20180404201014/http://dnd.wizards.com/articles/features/monster-mythology |url-status=dead }}</ref><ref>{{cite book |last=Applecline |first=Shannon |date=2014 |title=Designers & Dragons: The '70s |publisher=[[Evil Hat Productions]] |pages=83–84}}</ref><ref name=AA/>{{rp|223}}
+
+Following a more relaxed attitude towards the hobby, [[Wizards of the Coast]] reinserted many of these excised references in the third edition of the game. They kept intact the terms they had been replaced with, using both when applicable to appeal both to older players and those who played in subsequent editions of the game. While the 1st edition of ''AD&D'' used the term "Daemon", all subsequent editions beginning with 2nd edition have used the term "yugoloth" for the same creatures.
+
+====Reception====
+Fiends were considered among the "standard repertoire of 'Monsters'" in the game by Fabian Perlini-Pfister.<ref>{{Cite book |editor-last1=Bornet |editor-first1=Philippe |editor-last2=Burger |editor-first2=Maya |last=Perlini-Pfister |first=Fabian |chapter-url=https://books.google.com/books?id=t3X18dopUoMC&pg=PA282 |title=Religions in play: games, rituals, and virtual worlds |publisher=Theologischer Verlag Zürich |year=2011 |isbn=978-3-290-22010-5 |chapter=Philosophers with Clubs: Negotiating Cosmology and Worldviews in ''Dungeons & Dragons'' |page=282 |access-date=5 December 2019}}</ref><ref group="note">Fabian Perlini-Pfister uses the word "demon" instead of fiend, but uses "Asmodeus and succubi" as examples.</ref> ''Black Gate'' reviewer Andrew Zimmerman Jones positively contrasted the extended description provided in ''[[Mordenkainen's Tome of Foes]]'' (2018) as compared to earlier material: "It's easy to treat demons and devils as villains just there to be killed, but after reading this chapter [on the Blood War], you'll be more inclined to treat them as unique creatures, with their own goals and motivations."<ref name=ZJ/>
+
+===Tarrasque===
+The tarrasque is a gigantic lizard-like creature which exists only to eat, kill, and destroy, "the most dreaded monster native to the [[Prime Material plane]]".<ref>{{Cite book |title=[[Monstrous Manual]] |date=June 1993 |publisher=[[TSR, Inc.]] |isbn=1-5607-6619-0 |editor-last=[[Doug Stewart (game designer)|Doug Stewart]] |page=339}}</ref> The tarrasque was introduced in 1983 in the ''[[Monster Manual II]]'', in the first edition of ''Advanced Dungeons & Dragons''.<ref name="MMII" /> It is very loosely based upon the French legend of the [[tarasque]].<ref name="DV" />
+
+It is very large, {{convert|50|ft|m|abbr=off|sp=us}} tall and {{convert|70|ft|m|abbr=off|sp=us}} long, and has a ''[[Tyrannosaurus rex]]''–like form, although it is much more broad and muscular, with a differently shaped head, and with larger and more developed front arms. It has brown skin, with scabs and warts and bits of encrusted dung all over it which are grey in color. Protecting its back and tail is a thick, glossy caramel-colored shell or carapace. It has spikes coming from its chin, the sides of the mouth, the underside of its neck, the elbows of its front arms, and its shell. The creature also has two horns projecting forwards from the top of its head.
+
+The tarrasque's skin is very hard and thick, and provides excellent armor. It is immune or resistant to most offensive magic, and regenerates damage quickly.
+
+The second edition of the game included rules for extracting treasure from the creature's carcass. In the ''[[Spelljammer]]'' series, the accessory ''[[Practical Planetology]]'' suggests the tarrasques originate from the planet Falx. Several hundred tarrasques live there,<ref>[[Nigel Findley|Findley, Nigel D.]] ''[[Practical Planetology]]'', p. 8, ([[TSR, Inc.|TSR]], 1991)</ref> where they feed upon the native Imbul, a lizard-like creature.<ref>[[Nigel Findley|Findley, Nigel D.]] ''[[Practical Planetology]]'', p. 56, ([[TSR, Inc.|TSR]], 1991)</ref> In the 4th edition of the game, the tarrasque is listed as an "abomination" and classed as a "Gargantuan elemental magical beast"—a living engine of death and destruction created by a primordial race for use as a weapon against the gods.
+
+The tarrasque has been called "a creature that embodies wanton destruction"<ref name="dummies">{{Cite book |last1=Slavicsek |first1=Bill |title=Dungeons and Dragons 4th Edition For Dummies |last2=Baker |first2=Richard |last3=Mearls |first3=Mike |date=January 2009 |publisher=John Wiley & Sons |isbn=9780470406397 |chapter=32: The Ten Best High-Level Monsters |author-link=Bill Slavicsek |author-link2=Richard Baker (game designer) |author-link3=Mike Mearls |access-date=July 3, 2012 |chapter-url=https://books.google.com/books?id=seYmKkWP0LIC&q=tarrasque&pg=PA391}}</ref> and "singularly deadly"<ref>{{Cite book |last=Wischstadt, Bryon |url=https://books.google.com/books?id=Tv2eNV79bbcC&q=tarrasque&pg=RA1-PA119 |title=Faeries |date=April 2003 |publisher=Bastion Press, Inc. |isbn=9781592630011 |page=119 |access-date=July 3, 2012}}</ref> and been compared to a ''[[kaiju]]''.<ref name="Am"/>{{rp|221}} It was ranked No. 2 on the list of the ten best high-level monsters in ''Dungeons and Dragons 4th Edition For Dummies''.<ref name=dummies/> Rob Bricken from [[io9]] named the tarrasque as the 10th most memorable D&D monster.<ref name=RB/> ''[[Screen Rant]]'' compiled a list of the game's "10 Most Powerful (And 10 Weakest) Monsters, Ranked" in 2018, calling this one of the strongest, saying "There are a lot of giant monsters that roam the various ''Dungeons & Dragons'' worlds, but none is more feared than the Tarrasque. This creature is an engine of destruction and it can crush entire cities in a single rampage."<ref name=SB/> ''[[Backstab (magazine)|Backstab]]'' reviewer Michaël Croitoriu highlights the tarrasque among the monsters rated upwards from 2nd to 3rd edition, and wishes good luck to the adventurers having the temerity to attack it.<ref>{{cite journal|last=Croitoriu|first=Michaël|date=November 2000|title=Monster Manual|url=https://archive.org/details/backstab-magazine-french-24/page/n75/mode/2up|language=French|journal=Backstab|volume=24|page=76|access-date=December 22, 2021}}</ref> ''[[Inverse (website)|Inverse]]'' reviewer Corey Plante identified the tarrasque as the most powerful creature in the 5th edition of the game next to the [[Aspect (Dungeons & Dragons)|aspect]]s of [[Bahamut (Dungeons & Dragons)|Bahamut]] and [[Tiamat (Dungeons & Dragons)|Tiamat]].<ref>{{Cite web|last=Plante|first=Corey|date=October 15, 2021|title='Fizban's Treasury of Dragons' is 2021's most important new D&D book|url=https://www.inverse.com/gaming/fizbans-treasury-dragons-dnd-preview|access-date=February 9, 2026|website=[[Inverse (website)|Inverse]]}}</ref>
+
+==See also==
+* [[Bestiary]]
+* [[Dungeons & Dragons controversies]]
+* [[List of Dungeons & Dragons monsters (1974–76)|List of ''Dungeons & Dragons'' monsters (1974–76)]]
+* [[List of Dungeons & Dragons monsters (1977–94)|List of ''Dungeons & Dragons'' monsters (1977–94)]]
+* [[List of Dungeons & Dragons 3rd edition monsters|List of ''Dungeons & Dragons'' 3rd edition monsters]]
+* [[List of Dungeons & Dragons 4th edition monsters|List of ''Dungeons & Dragons'' 4th edition monsters]]
+* [[List of Dungeons & Dragons 5th edition monsters|List of ''Dungeons & Dragons'' 5th edition monsters]]
+* [[List of species in fantasy fiction]]
+
+==Notes==
+{{Reflist|group=note}}
+
+==References==
+{{Reflist}}
+
+==Further reading==
+* {{Cite journal|last=Bryant|first=Levi R.|date=October 2012|title=Substantial Powers, Active Affects: The Intentionality of Objects|url=https://www.euppublishing.com/doi/abs/10.3366/dls.2012.0081|journal=Deleuze Studies|volume=6|issue=4|pages=529–543|doi=10.3366/dls.2012.0081|access-date=February 16, 2022|url-access=subscription}}
+* [[James Jacobs (game designer)|Jacobs, James]], [[Erik Mona]], and [[Ed Stark]] (2006). ''[[Fiendish Codex I: Hordes of the Abyss]]''. [[Wizards of the Coast]].
+* Larme, John (2000). [https://web.archive.org/web/20071127122203/http://www.members.tripod.com/anthonylarme/gc/gamesthesis.pdf ''Dangerous Games? Censorship and "Child Protection"'']. B.A. thesis.  Brisbane, QLD, Australia: University of Queensland.
+* [[Colin McComb|McComb, Colin]], [[Dale Donovan]], and [[Monte Cook]] (1995). ''[[Planes of Conflict]]''. TSR. {{ISBN|0-7869-0309-0}}.
+* [[Colin McComb|McComb, Colin]], [[Dori Jean Hein]], and [[Wolfgang Baur]] (1995). ''[[Planes of Law]]''. TSR. {{ISBN|0-7869-0093-8}}.
+* [[Colin McComb|McComb, Colin]] (1997). ''[[Faces of Evil: The Fiends]]''. TSR. {{ISBN|0-7869-0684-7}}.
+* {{Cite book |editor-last=[[Doug Stewart (game designer)|Doug Stewart]] |title=[[Monstrous Manual]] |date=June 1993 |publisher=[[TSR, Inc.]] |isbn=1-5607-6619-0}}
+* [[James Wyatt (game designer)|Wyatt, James]], and [[Rob Heinsoo]] (2001). ''[[Monstrous Compendium]]: Monsters of Faerûn''. [[Wizards of the Coast]].
+* [[James Wyatt (game designer)|Wyatt, James]], [[Ari Marmell]], and [[CA Suleiman]] (2005).  ''[[Heroes of Horror]]''. [[Wizards of the Coast]].
+
+{{D&D topics}}
+
+{{DEFAULTSORT:Monsters in Dungeons and Dragons}}
+[[Category:Dungeons & Dragons monsters| ]]
+[[Category:Monsters in popular culture|Dungeons and Dragons]]

@@ -1,0 +1,2360 @@
+Published in Transactions on Machine Learning Research (02/2026)
+Diversity Boosts AI-Generated Text Detection
+Advik Raj Basanif20221155@goa.bits-pilani.ac.in
+Birla Institute of Technology and Science, Goa
+Pin-Yu Chen pin-yu.chen@ibm.com
+IBM Research
+Reviewed on OpenReview:https: // openreview. net/ forum? id= WscAU9It1l
+Abstract
+Detecting AI-generated text is an increasing necessity to combat misuse of LLMs in educa-
+tion, business compliance, journalism, and social media, where synthetic fluency can mask
+misinformation or deception. While prior detectors often rely on token-level likelihoods or
+opaque black-box classifiers, these approaches struggle against high-quality generations and
+offer little interpretability. In this work, we proposeDivEye, a novel detection framework
+that captures how unpredictability fluctuates across a text using surprisal-based features.
+Motivated by the observation that human-authored text exhibits richer variability in lexical
+and structural unpredictability than LLM outputs,DivEyecaptures this signal through a
+set of interpretable statistical features. Our method outperforms existing zero-shot detec-
+tors by up to33.2%and achieves competitive performance with fine-tuned baselines across
+multiple benchmarks.DivEyeis robust to paraphrasing and adversarial attacks, generalizes
+well across domains and models, and improves the performance of existing detectors by up
+to18.7%when used as an auxiliary signal. Beyond detection,DivEyeprovides interpretable
+insights into why a text is flagged, pointing to rhythmic unpredictability as a powerful and
+underexplored signal for LLM detection.
+Project Website & HuggingFace Demos:https://diveye.vercel.app/
+1 Introduction
+Large Language Models (LLMs) have become deeply integrated into daily human workflows, powering appli-
+cations from personal assistants to academic writing (Alahdab, 2024; Meyer et al., 2023; Lund et al., 2023)
+and content creation (Hu et al., 2024; Yuan et al., 2022). Their fluency and generalization capabilities make
+them highly useful, but this same fluency enables a growing number of concerning applications. AI-generated
+text can now be seamlessly inserted into essays, news articles, legal briefs, scientific abstracts, and social
+media posts, often without detection (De Giorgio et al., 2025; Papageorgiou et al., 2024; Telenti et al., 2024;
+Törnberg et al., 2023).
+As LLM-generated outputs grow more sophisticated and human-like, detecting them has become an increas-
+ingly difficult challenge (Abdali et al., 2024; Gameiro et al., 2024; Wu et al., 2025; Zhang et al., 2024).
+Reliable AI-text detection is crucial for mitigating risks such as misinformation, AI-assisted academic dis-
+honesty, professional misconduct, and the inadvertent suppression of authentic human writing. Traditional
+approaches to this problem rely on supervised detectors (Shukla et al., 2024; Tolstykh et al., 2024; Wang
+et al., 2024b) trained on annotated datasets of AI and human-authored text. These models often incorporate
+rich features, ranging from stylometry and structure to information-theoretic metrics, and achieve high per-
+formance within the domain they were trained on. However, such methods struggle to generalize to unseen
+models or domains (Doughman et al., 2024; Gameiro et al., 2024), especially as new LLMs are frequently
+released. In contrast, zero-shot detectors (Bao et al., 2024; Gehrmann et al., 2019; Mitchell et al., 2023;
+1
+arXiv:2509.18880v3  [cs.CL]  25 Feb 2026
+Published in Transactions on Machine Learning Research (02/2026)
+LLM
+Split into tokens &
+compute            per token     
+Input Text Frozen LLM
+Extraction of Surprisal per Token
+Mean, Variance, Skew, Kurtosis
+First-Order Features
+Second-Order Features
+Distribution Features
+Variance-II, Entropy, Autocorrelation
+Binary Classifier
+(XGBoost)
+Human TextFeature
+Concatenation
+AI Text
+Computation of Surprisal
+via a Frozen LLM
+DivEye Feature
+Extraction
+Feature Concatenation
++ Classification
+External AI-Detection
+Framework (if any)
+Framework to be
+Boosted
+Figure 1: Overview ofDivEye.DivEyeextracts diversity-based features (see Section 3, Equation 6) from
+token-level surprisal patterns. These features can be used in two ways: (1) as a standalone detector, or (2)
+as an enhancement to existing detectors, improving their performance.
+Wang et al., 2024a) offer a promising alternative by avoiding model-specific training. These approaches
+either extract statistical cues from language model probability distributions or use LLMs themselves as
+inference-time detectors, enabling model-agnostic detection at scale. Given the increasing deployment of
+unknown or fine-tuned LLMs in the wild, zero-shot detection has become an essential tool for maintaining
+platform integrity and addressing the forensic needs of AI-era communication.
+Contributions.We introduceDivEye 1, a lightweight classifier trained on features extracted from off-the-
+shelf LLMs in a zero-shot manner. These features capture diversity-based statistics of token-level surprisal,
+which we leverage to improve AI-text detection. Our approach focuses on capturing the distributional
+irregularities in AI-generated text that arise from differences in the generative process compared to human
+writing.
+•Zero-shot diversity detection:We proposeDivEye, a lightweight classifier trained on zero-shot features
+derived from token-level surprisal diversity metrics. These metrics capture fluctuations and patterns
+that reflect the constrained and often repetitive generation process of LLMs. We provide a principled
+motivation for each feature, connecting them to known properties of human vs. machine text generation,
+and demonstrate howDivEyecan improve AI-text detection using these features.
+•Language & Model-agnostic detection:DivEyeleverages zero-shot features, requiring no access to the
+generator model’s internals or any fine-tuning. It operates purely on token probability sequences from an
+off-the-shelf language model and generalizes across different languages and model families.
+•Complementary to existing detectors:We show thatDivEyecaptures statistical patterns that are dis-
+tinct from those used by traditional detectors, which often rely on fine-tuned language representations
+or classifier-based signals. When combined with these approaches,DivEyesignificantly boosts overall ro-
+bustness, particularly against challenging high-quality generations and paraphrased adversarial examples.
+•Strong generalization across domains and attacks:Extensive evaluations across three benchmarks and
+varied testbeds reveal thatDivEyenot only achieves state-of-the-art accuracy in standard settings but
+also remains robust when tested on unseen domains and language models.
+2 Background and Problem Formulation
+The emergence of LLM has led to a new era of machine-generated text that can closely mimic human
+writing across a range of tasks. These models are trained to approximate the true conditional distribution
+of natural language, denoted asPhuman(xt|x <t), by learning from massive corpora of human-written text
+(Chen et al., 2024; Lu et al., 2025). The LLM’s learned distribution is represented asPLLM(xt|x <t), and
+1The code of our method and experiments is available athttps://github.com/IBM/diveye.
+2
+Published in Transactions on Machine Learning Research (02/2026)
+during inference, the model generates text by sampling tokens sequentially from this distribution. While
+modern LLMs achieve remarkable fluency, they still constitute an imperfect approximation:PLLM̸=P human
+in general. At inference time, an LLM selects tokens by sampling from this learned distribution (Zhou et al.,
+2024), which remains an approximation of the true distribution that governs human text generation (Ippolito
+et al., 2020; Jones et al., 2024). This approximation gap, subtle as it may be, is the crux of AI text detection.
+From a theoretical standpoint, prior works (Ghosal et al., 2023; Sadasivan et al., 2025) highlight the fun-
+damental limitations of AI text detection: as generative models approach the ideal of human-like language
+modeling, distinguishing their outputs from real text becomes increasingly difficult, if not impossible. Yet,
+as Chakraborty et al. (2023) point out, even models arbitrarily close to optimal remain statistically de-
+tectable under certain conditions, particularly when multiple samples or robust features are available. This
+theoretical detectability provides a foundation for practical detection methods that capitalize on the subtle
+imperfections in current LLM outputs.
+In practice, existing detection approaches fall into two broad categories: watermarking and zero-resource
+detection. Watermarking techniques (Block et al., 2025; Gloaguen et al., 2025; Kirchenbauer et al., 2024;
+Liang et al., 2024; Liu et al., 2024a) embed distinct patterns in generated text but necessitate access to model
+internals or fine-tuning capabilities, rendering them unsuitable for black-box or adversarial settings, as well as
+for practical cases of watermark-free AI text detection. In contrast, zero-resource detection methods require
+no prior knowledge of the target model, instead relying on statistical or learned discrepancies between human
+and AI text. These methods can be further categorized as statistical and training-based approaches.
+Statistical / Zero-shot detection methodsrefers to identifying AI-generated text without task-specific
+training, either by leveraging LLM probability cues or prompting LLMs directly as detectors. For example,
+methods like Entropy (Lavergne et al., 2008), LogRank (Ghosal et al., 2023), DetectGPT (Bao et al., 2024;
+Mitchell et al., 2023), and Binoculars (Hans et al., 2024) use off-the-shelf LLMs to evaluate the consistency
+of token predictions under masked or perturbed inputs. These methods assume that AI-generated texts
+are sampled from a narrower, more concentrated conditional probability distribution than human writing,
+resulting in greater token-level confidence and reduced lexical diversity.
+Training-based / Fine-tuned detection methods(Chen et al., 2023; Mao et al., 2024; Hu et al., 2023)
+train classifiers, such as fine-tuned transformers on a labeled corpora of human and AI text. While these
+models can be accurate, they often fail to generalize across domains or against adversarial paraphrasing,
+especially when trained on specific generators or prompts. We discuss all related works in more detail in
+Appendix A.
+Despite significant progress, no existing method fully resolves the problem of detecting AI-generated text in
+the wild. Our work addresses this gap by approaching the problem from a new angle: instead of analyzing
+individual token probabilities (Solaiman et al., 2019) in isolation, we propose to measure statistical diversity
+over token sequences, quantifying how text fluctuates in its use of surprising or predictable tokens. This
+provides a more global signature of the generative process that is robust to paraphrasing, domain shifts, and
+even partial text corruption.
+3DivEye: Methodologies
+DivEyeis built on the central observation that fluctuations in token-level surprisal provide a strong signal for
+distinguishing machine- and human-generated text. By systematically analyzing the statistical variation of
+surprisal across a sequence,DivEyecaptures distributional and temporal patterns that go beyond traditional
+likelihood-based metrics. The nameDivEyethus reflects our method’s focus on diversity-aware analysis of
+language generation behavior.
+3.1 Design Hypothesis
+A central challenge in detecting AI-generated text (Ghosal et al., 2023; Sadasivan et al., 2025) lies in the fact
+that current models, though fluent, often prioritize coherence and consistency at the cost of variability and
+3
+Published in Transactions on Machine Learning Research (02/2026)
+unpredictability. By contrast, human writers naturally introduce irregularities, such as unexpected lexical
+choices or structural shifts, that make their text inherently more diverse.
+Our hypothesis is that human-written text inherently exhibits greater stylistic diversity and
+unpredictability than AI-generated text.In everyday writing, humans make creative, spontaneous
+choices, sometimes using unexpected words or phrases, that introduce bursts of surprise amid more routine
+language. Our approach centers on the premise that AI-generated text, despite its fluency, often lacks
+the inherent diversity observed in human-written language. This divergence stems from the fundamental
+objective of LLMs: to maximize the likelihood of generated sequences within their learned probability
+distributions (Park & Choi, 2024). Consequently, AI-generated text tends to exhibit a higher degree of
+predictability, resulting in lower variability and surprisal compared to human-authored content. We support
+this hypothesis through both intuitive reasoning and empirical evidence, as detailed in Remark 1.
+Remark 1Consider a text sequenceX= (x 1,x 2,...,x n)generated either by a human or by a language
+modelM. The language model defines a probability distributionPM(X) = ∏n
+t=1PM(xt|x <t)where each
+token is chosen to maximize overall likelihood.
+Humans, however, produce language through a complex, multi-layered cognitive process that balances infor-
+mativeness, creativity, and contextual appropriateness, rather than strictly maximizing statistical likelihood.
+Formally, the surprisal of tokenxt under modelMis defined as:
+SM(xt) =−logP M(xt|x <t)
+SinceMis trained to assign high probability to plausible continuations, its outputs tend to minimize surprisal
+on average, implying that maximum likelihood generation compresses diversity:
+EX∼P M [SM(xt)]≤E X∼P H[SM(xt)]
+whereP H denotes the distribution of human-generated text.
+Similarly, human language exhibits higher variance in surprisal due to spontaneous creative choices, idiomatic
+expressions, and stylistic variation, causing:
+VarX∼P M [SM(xt)]<Var X∼P H[SM(xt)]
+We validate this theoretical intuition through empirical experiments detailed below, which confirm statis-
+tically significant differences in surprisal and diversity metrics between human-written and AI-generated
+texts.
+We collect 200 human-written essays and 200 GPT-4-Turbo-generated essays on comparable topics, pro-
+vided by BiScope (Guo et al., 2024). For each essay, we computed the token-level surprisal scores
+using a fixed language model evaluator (GPT-2) and then calculated the mean and variance of these
+surprisal values per essay. Figure 2a shows the histogram of mean surprisal scores across the two
+sets, while Figure 2b displays the histogram of surprisal variances. The human-written texts ex-
+hibit a noticeably wider spread and heavier tails in both metrics, indicating greater unpredictabil-
+ity and stylistic variability. In contrast, the AI-generated essays cluster around lower mean surprisal
+and exhibit significantly lower variance. These results empirically confirm our theoretical claim:hu-
+man language inherently reflects higher diversity and surprise, whereas AI-generated lan-
+guage, optimized for likelihood, tends toward more predictable and homogeneous patterns.
+Rather than treating token-level surprisal in isolation,DivEyeanalyzes how it varies across an entire text to
+capture higher-level stylistic patterns. By extracting global statistical features from surprisal sequences, our
+method reveals differences in the rhythm and variability of unpredictability, traits that distinguish human
+4
+Published in Transactions on Machine Learning Research (02/2026)
+2.0 2.5 3.0 3.5 4.0
+Mean Surprisal
+0.0
+0.5
+1.0
+1.5
+2.0Density
+Human
+GPT-4-T urbo
+(a) Mean Surprisal Distribution
+5 6 7 8 9 10 11 12
+Surprisal Variance
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6Density
+Human
+GPT-4-T urbo (b) Surprisal Variance Distribution
+Figure 2: Distribution of token-level surprisal metrics for human-written vs. GPT-4-Turbo-generated essays.
+The left plot shows the histogram of mean surprisal per essay, while the right plot shows the histogram of
+surprisal variance. Human-written texts exhibit higher dispersion and heavier tails in both distributions,
+suggesting greater linguistic unpredictability and stylistic diversity. In contrast, GPT-4-Turbo outputs are
+more concentrated and predictable, aligning with the likelihood-maximization objective of language models.
+7
+6
+5
+4
+3
+2
+1
+0
+Human-Written
+AI-Generated
+0.0 0.2 0.4 0.6 0.8
+10
+8
+6
+4
+2
+0 0.00 0.25 0.50 0.75
+8
+7
+6
+5
+4
+3
+2
+1
+0
+0.2 0.4 0.6 0.8
+14
+12
+10
+8
+6
+4
+2
+0
+0.00 0.25 0.50 0.75
+3.5
+3.0
+2.5
+2.0
+1.5
+1.0
+0.5
+0.0
+0.0 0.5 1.0
+2.0
+1.5
+1.0
+0.5
+0.0 0.0 0.5 1.0
+3.5
+3.0
+2.5
+2.0
+1.5
+1.0
+0.5
+0.0
+0.0 0.5 1.0
+Predicted Probability of Human Authorship
+Density
+Density
+Density
+Density
+Density
+Density
+Density
+Entropy LogRank RADAR FastDetectGPT Binoculars DetectLLM DivEye
+Human-Written
+AI-Generated
+Human-Written
+AI-Generated
+Human-Written
+AI-Generated
+Human-Written
+AI-Generated
+Human-Written
+AI-Generated
+Human-Written
+AI-Generated
+Figure 3: Distributions of predicted class probabilities for diverse AI-text detectors. Trained and evaluated
+on Testbed 4 of the MAGE benchmark,DivEyeshows stronger separation between human-written and Label
+1 AI-generated texts, indicating greater confidence and discriminative power.
+writing from the more uniform outputs of LLMs, as illustrated by the clear class separation in predicted
+probabilities shown in Figure 3.
+These features are theoretically grounded in the Uniform Information Density (UID) hypothesis, which posits
+that optimal language speakers strives to distribute information uniformly Jaeger & Levy (2006). However,
+while human speakers aim for this efficiency, empirical evidence shows that natural language remains highly
+nonstationary (Piantadosi et al., 2011) and exhibits characteristic "burstiness" due to semantic shifts (Alt-
+mann et al., 2009). In contrast, LLMs, driven by likelihood-maximization objectives, often approximate the
+theoretical UID optimum too strictly, resulting in unnaturally flat probability curves devoid of these organic
+fluctuations (Holtzman et al., 2020). Consequently, we introduce first-order and second-order derivatives of
+surprisal, as essential metrics to quantify this ’rhythmic unpredictability’, capturing the distinct structural
+variance that separates human writings from LLMs.
+3.2 Mathematical underpinning ofDivEye
+To robustly distinguish AI-generated text from human-written text, it is insufficient to rely solely on a single
+measure such as perplexity (Xu et al., 2024). Perplexity summarizes average token likelihood, but overlooks
+how unpredictability fluctuates within a text. To better capture these patterns,DivEyecomputes higher-
+order statistical features over surprisal sequences, revealing structural signals beyond aggregate likelihood.
+Surprisal.Human language is inherently diverse and unpredictable, balancing consistent patterns
+with bursts of creativity, often introducing novel expressions, grammatical deviations, and stylistic vari-
+5
+Published in Transactions on Machine Learning Research (02/2026)
+ation. These deviations result in varying levels of token predictability, which can be quantified using
+surprisal (Kuribayashi et al., 2025) - a well-known information-theoretic measure defined as the negative
+log-probability of a token under a language model:
+S(xt) =−logP(x t|x 1,x 2,...,x t−1)
+Given a text sequenceX={x 1,x 2,...,x n}, surprisal measures how "unexpected" each token is in context.
+It can be computed directly from a model’s log-probabilities, providing a principled way to quantify the local
+unpredictability of text.
+Rather than examining individual token surprisals in isolation, we summarize their behavior through ag-
+gregate metrics. The mean surprisal serves as a coarse indicator of how “expected” a text is on average:
+Lower values suggest higher conformity to the model’s learned distribution, whereas higher values point to
+more frequent unpredictability. However, as stated before, human writing is not merely unpredictable in
+aggregate; it also exhibits fluctuations in predictability that correspond to stylistic variation, topic shifts, or
+bursts of creativity. This motivates analyzing not just the mean but also the variance of surprisal, which
+captures the extent of variation in token-level surprise throughout the text. Formally, this can be represented
+as:
+Mean:µ S = 1
+n
+n∑
+t=1
+S(xt);Variance:σ 2
+S = 1
+n−1
+n∑
+t=1
+(S(xt)−µ S)2 (1)
+Mean and Variance are not sufficient.While mean and variance capture the central tendency and
+spread of surprisal values, they overlook deeper structural signals that differentiate human and AI text.
+AI-generated text is optimized for consistency, producing more symmetrical distributions centered around
+high-probability tokens (Ippolito et al., 2020). Skewness (γ1) quantifies this asymmetry: a positive skew
+suggests the presence of rare, surprising tokens typically found in human writing. Similarly, kurtosis (γ2)
+captures the frequency of extreme deviations from the norm. A high kurtosis indicates heavy-tailed behavior,
+another hallmark of authentic, stylistically diverse writing. These higher-order moments allowDivEyeto
+detect subtle irregularities and stylistic outliers that can be missed by detectors focusing only on average
+behavior.
+Skewness:γ 1 = 1
+n
+n∑
+t=1
+(S(xt)−µ S
+σS
+)3
+;Kurtosis:γ 2 = 1
+n
+n∑
+t=1
+(S(xt)−µ S
+σS
+)4
+−3.(2)
+Static metrics still miss temporal structure.While static surprisal statistics (mean, variance, skew-
+ness, kurtosis) describe the overall distribution of token-level unpredictability, they fail to capture how this
+unpredictability evolves throughout a sequence, a key trait distinguishing human and AI-generated text. To
+model these temporal dynamics, we compute the first-order difference∆St =S(x t)−S(x t−1), which reflects
+immediate changes in surprisal. The mean (∆µ) and variance (∆σ2) of∆St quantify the typical magnitude
+and variability of these shifts, capturing stylistic volatility such as abrupt topic or tone changes commonly
+found in human writing.
+We further analyze the second-order difference∆2St = ∆St−∆St−1, which tracks fluctuations in the rate of
+change of surprisal. From this sequence, we extract three metrics: (1) variance (σ2
+∆2), to capture the extent
+of rapid or erratic stylistic transitions; (2) entropy (H∆2), which reflects the irregularity of these transitions;
+and (3) autocorrelation (ρ(∆2St)), which measures whether bursts of unpredictability cluster together, often
+indicative of structured human creativity. These second-order metrics reveal rhythmic and non-stationary
+patterns in human text that are typically absent in the more homogeneous output of LLMs, providing a
+6
+Published in Transactions on Machine Learning Research (02/2026)
+richer signal for robust AI-text detection. Mathematically, these can be defined as:
+∆St =S(x t)−S(x t−1),∆µ= 1
+n−1
+n∑
+t=2
+∆St,∆σ 2 = 1
+n−2
+n∑
+t=2
+(∆St−µ ∆)2 (3)
+∆2St = ∆St−∆St−1, σ 2
+∆2 = 1
+n−3
+n∑
+t=3
+(∆2St−µ ∆2)2,H ∆2 =−
+∑
+b
+pb logpb,(4)
+ρ(∆2St) = E
+[
+(∆2St−µ ∆2)(∆2St+1−µ ∆2)
+]
+σ2
+∆2
+(5)
+whereµ ∆2 is mean of second-order differences, andpb is the empirical probability of a value falling into binb
+after discretizing∆ 2St for entropy computation. We provide empirical validation of these temporal features
+and their individual contributions to detection performance in Appendix B.
+Combinations.Collectively,DivEye, formalized as (D) in Equation 6, encapsulates critical aspects of text
+generation that distinguish human creativity from algorithmically generated predictability, thereby serving
+as a robust basis for our detection framework.
+D={µ s,σ 2
+s,γ 1,γ 2 
+Distribution
+⊕∆µ,∆σ 2
+
+1st-Order
+⊕σ 2
+∆2,H ∆2,ρ ∆2
+ 
+2nd-Order
+(6)
+Here,Dis a vector of statistical features with a dimension of9, including distributional properties, first-
+order differences, and second-order differences of the text. We can apply any autoregressive LLM to generate
+these feature vectors by passing the text tokens through the model to compute the features listed above,
+which are then concatenated into the final vectorD. We train a binary classifier usingDivEyefeatures,
+optionally combined with predictions from an AI-text detector. Implementation details are further explained
+in Algorithm 1 and Appendix C .
+DivEyeas a booster.Existing detectors, whether fine-tuned classifiers or zero-shot LLM-based methods,
+primarily rely on semantic or surface-level cues, and often falter against high-quality adversarial exam-
+ples that closely mimic human writing.DivEyeoffers a complementary signal by capturing statistical and
+temporal patterns of token-level unpredictability that are orthogonal to traditional features. We integrate
+DivEyeinto both settings by augmenting detector outputs with its feature vector and training a lightweight
+meta-classifier (e.g., XGBoost (Chen & Guestrin, 2016) or Random Forest (Breiman, 2001)) over the com-
+bined representation. Empirically, we find that this fusion significantly boosts performance, particularly
+on adversarial and out-of-distribution examples, without requiring retraining or modification of the original
+model.
+4 Experiments
+4.1 Experimental Settings
+Datasets.We evaluate ourDivEyeframework across a comprehensive suite of datasets that encompass
+a wide range of generative models, domains, and adversarial strategies. Our primary benchmark is the
+RAID dataset (Dugan et al., 2024), which consists of carefully crafted adversarial examples designed to
+evade standard detectors. To assess robustness under diverse generation conditions, we also evaluate on the
+MAGE benchmark (Li et al., 2024), which spans eight distinct testbeds targeting various domains (e.g., Yelp
+(Zhang et al., 2015), XSum (Narayan et al., 2018), SciXGen (Chen et al., 2021a), CMV (Tan et al., 2016))
+and generator families (e.g., GPT (Radford et al., 2019), OPT (Zhang et al., 2022), Bloom (et al., 2023)).
+This granular evaluation allows us to isolate and quantify the contribution of diversity metrics across specific
+domains and model types. Details about each testbed in RAID & MAGE are discussed in Appendix H.
+Additionally, we incorporate HC3 (Guo et al., 2023), a large-scale, heterogeneous corpus of human and
+machine text, which includes both English and Chinese instances of human and AI-generated Q&A data.
+The inclusion of HC3 enables us to probe cross-linguistic generalization of our method.
+7
+Published in Transactions on Machine Learning Research (02/2026)
+Table 1: Performance of zero-shot methods on 6 diverse testbeds from MAGE. The OOD settings examine
+the detection capability on texts from unseen domains or texts generated by new LLMs.
+Settings Methods HumanAcc MachineAcc AvgAcc AUROC
+Testbed 2,3,4: In-distribution detection
+Arbitrary-domains & Model-specific (GPT-J [105])
+LogRank 58.81% 63.94% 61.38% 0.67
+Entropy 76.43% 76.84% 76.64% 0.83
+DetectLLM 66.36% 62.07% 64.21% 0.72
+FastDetectGPT 62.31% 50.49% 56.4% 0.59
+Binoculars 60.11% 65.22% 62.67% 0.69
+BiScope 89.62% 84.86% 87.24% 0.93
+DivEye90.63% 88.56%89.60% 0.97
+Fixed-domain (WP [35]) & Arbitrary-models
+LogRank 89.61% 56.15% 72.88% 0.76
+Entropy 85.96% 60.4% 73.18% 0.78
+DetectLLM 88.54% 80.77% 84.66% 0.91
+FastDetectGPT 87.25% 54.08% 70.67% 0.76
+Binoculars 80.80% 62.07% 71.44% 0.77
+BiScope 91.78% 95.27% 93.53% 0.94
+DivEye92.22% 96.88%94.55% 0.99
+Arbitrary-domains & Arbitrary-models
+LogRank 84.91% 44.47% 64.69% 0.68
+Entropy 75.68% 50.04% 62.86% 0.67
+DetectLLM 64.74% 69.02% 66.88% 0.75
+FastDetectGPT 93.65% 41.73% 67.69% 0.7
+Binoculars 76.1% 54.89% 65.49% 0.71
+BiScope 91.54% 58.70% 75.12% 0.86
+DivEye73.72% 82.57%78.15% 0.88
+Testbed 5,6,8: Out-of-distribution detection
+Unseen Models (BLOOM-7B [31])
+LogRank 85.84% 19.82% 52.89% 0.52
+Entropy 77.56% 34.74% 56.15% 0.59
+DetectLLM 67.85% 58.5% 63.18% 0.68
+FastDetectGPT 94.57% 13.81% 54.19% 0.54
+Binoculars 76.10% 54.89% 65.50% 0.71
+BiScope 76.72% 50.47% 63.60% 0.72
+DivEye74.75% 77.06%75.91% 0.86
+Unseen Domains (WP [35])
+LogRank 88.57% 49.8% 69.19% 0.74
+Entropy 78.5% 58.16% 68.33% 0.74
+DetectLLM 74.15% 71.52% 72.34% 0.79
+FastDetectGPT 95.99% 47.17% 71.58% 0.74
+Binoculars 78.93% 67.8% 73.37% 0.8
+BiScope 80.1% 78.3% 79.2% 0.86
+DivEye94.64% 84.53%89.59% 0.97
+Unseen Domains & Unseen Models
+LogRank 83.87% 43.95% 63.91% 0.68
+Entropy 74.93% 50.18% 62.55% 0.66
+DetectLLM 63.66% 67.40% 65.53% 0.73
+FastDetectGPT 93.38% 41.50% 67.44% 0.70
+Binoculars 77.85% 69.39% 73.62% 0.81
+BiScope 86% 82.58%84.24% 0.92
+DivEye69.75% 83.22% 76.49% 0.87
+Baselines.We compareDivEyewith various baselines, including both traditional statistical detectors and
+recent fine-tuned models. These include RADAR (Hu et al., 2023), LogRank (Ghosal et al., 2023), Entropy
+(Lavergne et al., 2008), FastDetectGPT (Bao et al., 2024), DetectLLM (Su et al., 2023), Binoculars (Hans
+et al., 2024), RAiDAR (Mao et al., 2024), OpenAI Detector (Solaiman et al., 2019), Longformer (Beltagy
+et al., 2020), and BiScope (Guo et al., 2024). These baselines cover a range of techniques, from token-level
+likelihood-based ranking to transformer-based classification. Additionally, we evaluate our framework against
+several other open-source detectors listed on the RAID leaderboard, ensuring a fair and broad comparison
+with state-of-the-art public tools across multiple detection paradigms.
+Implementation Details & Metrics.Unless stated otherwise, we use GPT-2 to compute allDivEyefea-
+ture vectors. Regardless, we studied the effect ofDivEyewith different LLMs as base models and summarized
+the results in Section 4.6. In score-only detection scenarios, predictions are based solely over concatenated
+8
+Published in Transactions on Machine Learning Research (02/2026)
+0 20 40 60 80 100
+Average Accuracy (%)
+CMV
+Yelp
+TLDR
+SQuAD
+XSum
+HSwag
+ELI5
+SciGen
+WP
+ROCT
+85.44AUROC 0.95
+86.36AUROC 0.95
+86.69AUROC 0.95
+89.00AUROC 0.97
+93.25AUROC 0.98
+93.42AUROC 0.98
+94.62AUROC 1.00
+94.70AUROC 0.99
+95.50AUROC 0.99
+96.81AUROC 1.00
+0 20 40 60 80 100
+Average Accuracy (%)
+BLOOM-7B
+FLAN-T5-Small
+GPT-3.5-T urbo
+OPT-125M
+GPT-J
+GLB-130B
+79.08AUROC 0.88
+80.37AUROC 0.88
+84.10AUROC 0.93
+84.17AUROC 0.93
+89.59AUROC 0.97
+90.64AUROC 0.96
+Figure 4: (a) Performance ofDivEyeacross different domains, generated byGPT-J-6B. (b) Performance of
+DivEyeacross various generator models. Results are based on the MAGE benchmark.
+DivEyefeatures. For both standalone and boosted setups, we train a lightweight XGBoost (Chen & Guestrin,
+2016) classifier as a meta-model, using onlyDivEyefeatures in the former, and concatenating them with
+the original detector’s prediction scores in the latter. Each testbed in MAGE & RAID provides predefined
+training and test sets, which we use for model training and evaluation. We evaluate all models using Aver-
+age Accuracy (AvgAcc), AUROC, TPR@FPR=5% and F1 score to capture overall, threshold-independent,
+and balanced performance, respectively. For all methods, we independently optimize any required deci-
+sion thresholds for AUROC and for TPR@FPR=5%, ensuring that each model is evaluated under its most
+favorable threshold for each metric.
+4.2 Performance ofDivEye
+We evaluateDivEyeacross a wide range of challenging testbeds to assess its robustness and adaptability to
+both domain and model shifts. Table 1 presents the performance ofDivEyeon six distinct testbeds from the
+MAGE benchmark (Li et al., 2024): three in-distribution and three out-of-distribution. Across all testbeds,
+DivEyeconsistently achieves superior AUROC of0.92on average and AvgAcc compared to existing zero-shot
+baselines, showcasing its ability to generalize effectively to both seen and unseen generation settings. We
+demonstrate that human-written and machine-generated text can be distinguished based on the hypothesis
+outlined in Section 3. We further include the corresponding TPR@FPR=5% performance in Table 5.
+Table 2 benchmarksDivEyeon the RAID dataset (Dugan et al., 2024), which includes a suite of diverse
+models, domains, attacks, and decoding strategies.DivEyeoutperforms a diverse set of zero-shot methods
+by26.11%and matches the performance of generative detection baselines, reaffirming its robustness to
+evasive generation strategies. Figures 4, 7 & 8 demonstrate the performance ofDivEyeacross different
+domains and generator models, achieving competitive AUROC of0.98and0.93, respectively. These results
+highlightDivEye’s stability and high performance across heterogeneous scenarios, underscoring its domain
+and model-agnostic nature.
+Moreover, Appendix D.5 reportsDivEye’s detection rates on all major models, including GPT-3.5-Turbo
+(Brown et al., 2020) and GPT-4o (et al., 2024b), Claude-3-Opus and Sonnet (Anthropic), as well as Gemini-
+1.0-Pro (et al., 2025), demonstrating highly competitive accuracies across the board. Collectively, these
+results confirm thatDivEyeprovides a robust and adaptable foundation for detecting AI-generated text.
+4.3 Robustness to Adversarial Attacks and Multilingual Text
+To evaluate robustness, we assessDivEyeon a diverse set of adversarial attacks, including paraphrasing
+attacks from the MAGE dataset and transformation-based jailbreak attacks from the RAID benchmark.
+Table 3 shows thatDivEyeconsistently achieves strong detection performance under these challenging set-
+tings. On the MAGE benchmark,DivEyeoutperforms the fine-tuned Longformer baseline in both average
+accuracy and AUROC by10.15%and0.11respectively. On the RAID benchmark, which reports only accu-
+racy,DivEyeachieves competitive results across a range of adversarial perturbations, outperforming several
+9
+Published in Transactions on Machine Learning Research (02/2026)
+Table 2: Performance of zero-shot and open-source finetuned methods
+on RAID. Results are aggregated over 8 domains, 12 models, and 4
+decoding strategies.δdenotes difference in AUROC from benchmark
+leader.
+Frameworks Type TPR@
+FPR=5% AUROCδ
+e5-small-lora [30] Fine-tuned 93.9% 0.986 -0%
+DivEye(Ours) Classifier
+(zero-shot) 93.63% 0.984 -0.20%
+Desklib AI [28] Fine-tuned 94.9% 0.973 -1.32%
+SuperAnnotate [95] Fine-tuned 70.3% 0.910 -7.71%
+Binoculars [46] Zero-shot 79.0% 0.844 -14.40%
+RADAR [49] Fine-tuned 65.6% 0.819 -16.94%
+GLTR [39] Zero-shot 59.7% 0.727 -26.27%
+DivEye GLTR OpenAI-Detector
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0F1 Score
+0.943
+0.816
+0.8850.895
+0.617
+0.893
+English
+Chinese
+Figure 5: F1 scores on HC3 show
+thatDivEyeoutperforms GLTR [39]
+and OpenAI-Detector [93], with
+strong results across English and
+Chinese.
+zero-shot detectors, most notably surpassing Binoculars by11.2%. A more detailed breakdown of perfor-
+mance by individual attack type is provided in Appendix E.1. We also testDivEye’s robustness to diverse
+adversarial scenarios, including character- and word-level perturbations, paraphrasing via commercial tools,
+prompt obfuscations, and distributional shifts, and find that it consistently achieves exceptional detection
+performance; a consolidated overview is provided in Appendix E.
+Table 3: Performance ofDivEyeand baselines on adver-
+sarial benchmarks, MAGE & RAID. ∗ - RAID reports
+TPR@FPR=5% instead of AvgAcc.
+Settings Methods AvgAcc AUROC
+[MAGE] Testbed 8: Paraphrasing Attack
+Paraphrased via
+GPT-3.5-Turbo
+Longformer [11] 69.34% 0.76
+BiScope [45] 69.30% 0.81
+DivEye(Ours) 76.49% 0.87
+[RAID] Adversarial Attacks∗
+Paraphrase,
+Whitespace,
+Misspelling, Ho-
+moglyph, Article
+Deletion & more
+Desklib AI [28] 91.2% 0.948
+e5-small-lora [30] 85.7% 0.968
+DivEye(Ours)80.52% 0.951
+Binoculars [46] 69.32% -
+RADAR [49] 63.9% 0.819
+GLTR [39] 51.5% 0.709
+We further evaluateDivEye’s multilingual gen-
+eralizability using both English and Chinese
+splits of the HC3 dataset. Figure 5 illustrates
+thatDivEyeperforms consistently well and has
+higher F1 scores across both languages using
+GPT-2(Radfordetal.,2019)&GPT-2-Chinese
+(CKIPLAB, 2024) for English and Chinese re-
+spectively. This suggests that surprisal-based
+statistical features are not heavily language-
+specific and can generalize across languages.
+4.4 Efficiency Analysis
+In addition to accuracy, we analyze the com-
+putational efficiency ofDivEye. Figure 6b il-
+lustrates the latency of our method, showing
+thatDivEyerequires as little as0.01seconds
+per sample while outperforming several fine-
+tuned and zero-shot detectors, achieving up to
+a2971×speedup compared to RAiDAR. Be-
+causeDivEyeonly requires a single forward pass through a small GPT-2 model and performs lightweight
+statistical computations, it is significantly faster and more resource-efficient than larger fine-tuned trans-
+formers. This enables deployment in latency-sensitive environments without compromising performance.
+4.5 Effectiveness of Boosting byDivEye
+WeempiricallyverifythatDivEye-baseddiversityfeaturescanactasperformanceboostersforawiderangeof
+detection models. To integrateDivEye, we concatenate its feature vector with the original model’s prediction
+scores and train a lightweight XGBoost classifier as a meta-model.
+Table 4 illustrates improvements in AUROC and AvgAcc when diversity metrics are appended to existing
+frameworks such as RADAR, Binoculars, DetectLLM, BiScope and FastDetectGPT. Across all evaluated
+baselines, the inclusion of diversity features consistently leads to better detection scores by over18.7%. Addi-
+10
+Published in Transactions on Machine Learning Research (02/2026)
+Table 4: Integration withDivEyeconsistently boosts performance across detectors, particularly on diverse
+domains (Testbed 4) and paraphrasing attacks (Testbed 7).
+Methods HumanAcc MachineAcc AvgAcc AUROCδ: Boost
+Testbed 4: Arbitrary Domains & Arbitrary Models
+RADAR 47.74% 74.86% 61.30% 0.62 -
+DetectLLM 64.74% 69.02% 66.88% 0.75 -
+FastDetectGPT 93.65% 41.73% 67.69% 0.7 -
+Binoculars 76.1% 54.89% 65.49% 0.71 -
+BiScope 91.54% 58.70% 75.12% 0.86
+DivEye73.72% 82.57% 78.15% 0.88 -
+DivEye+RADAR 74.69% 85.31% 80% 0.9018.7%
+DivEye+DetectLLM 75.44% 84.23% 79.34% 0.9 12.96%
+DivEye+FastDetectGPT 79.42% 83.90% 81.66% 0.91 13.97%
+DivEye+Binoculars 69.81% 83.47% 76.64% 0.87 11.15%
+DivEye+BiScope 80.69% 88.31%84.5% 0.939.38%
+Testbed 7: Paraphrasing Attacks
+BiScope 48.80% 89.79% 69.30% 0.81 -
+DivEye69.75% 83.22% 76.49% 0.87 -
+DivEye+BiScope 65.38% 90.84%78.11% 0.89 8.81%
+0.7 0.8 0.9 1.0
+Score (%)
+GPT2
+GPT2-XL
+Falcon-7B
+Llama-3.1-8B
+Llama-3.2-1B
+Mistral-7B-v0.3
+0.88
+0.89
+0.90
+0.91
+0.87
+0.90
+AUROC
+(a)DivEyeusing diverse base models.
+20
+40Inference Time (s)
+1.95 1.27
+29.71
+2.19
+LogRankEntropyDivEye
+DetectLLM
+FastDetectGPTOpenAI Detector
+BiScope
+Binoculars
+RAiDARRADAR
+0.0
+0.1 0.02 0.01 0.01 0.07 0.08 0.07 (b) Inference time comparison.
+Figure 6: (a) Performance ofDivEyeacross different base models (GPT-2, GPT-2-XL, Falcon-7B). (b)
+Inference time (in sec) comparison of various methods.
+tionally, existing frameworks in combination withDivEyedemonstrate substantial performance gains when
+evaluated against paraphrasing attacks. This validates the hypothesis that static and dynamic surprisal-
+based features capture orthogonal information to traditional heuristics, making them a valuable addition
+to any detection pipeline. We also investigate how muchDivEyecontributes to the final prediction relative
+to the underlying detector. Appendix D.4 reports a detailed feature-importance analysis, highlighting the
+complementary signals captured byDivEyewithin the boosted ensembles.
+4.6 Ablation Studies
+DivEye’s Performance on Different Base Models.To assess the adaptability ofDivEyeacross
+different language model backbones, we evaluate its performance, on Testbed 4 of the MAGE benchmark,
+when instantiated with various base LLMs used to compute token-level surprisal. As shown in Figure 6a,
+DivEyeconsistently performs well across all models, achieving an AUROC of0.88withGPT2,0.91with
+Llama-3.1-8B, and0.90withFalcon-7B. Notably, even the smallest model,GPT2, performs competitively,
+and human classification accuracy improves with larger models, suggesting that higher-capacity LMs better
+capture stylistic diversity. These results highlightDivEye’s robustness and efficiency across scales, making
+it suitable for resource-constrained settings. Appendix D.3 further reports baseline andDivEyeperformance
+across various base models.
+11
+Published in Transactions on Machine Learning Research (02/2026)
+Relevance ofDivEye’s Features.DivEye’s feature set (Equation 6) captures token-level surprisal pat-
+terns across multiple orders, including distributional moments, first-order shifts, and second-order dynamics.
+To assess the contribution of each group, we compute feature importances from a trained XGBoost model.
+On average, second-order features contribute the most (39.4%), followed by distributional features (34.2%)
+and first-order differences (23.7%). The prominence of second-order features suggests that abrupt or unnat-
+ural shifts in predictability are strong indicators of machine-generated text. While traditional distributional
+statistics remain informative, they are insufficient on their own. These findings supportDivEye’s central
+claim about second-order features: modeling the evolution of surprisal yields stronger detection capabilities
+than relying solely on static measures. Additionally, Appendix D.6 contains a detailed discussion about
+the contribution of each component inDivEye, including both feature-importance estimates and statistical
+leave-one-out ablation results.
+5 Conclusion
+We introduceDivEye, a lightweight classifier for AI-text detection that leverages zero-shot diversity features
+from token-level surprisal. Our method is model-agnostic, computationally efficient, and demonstrates strong
+generalization across detectors and datasets. Appendix J provides a detailed discussion of the method’s
+limitations, broader impacts, and associated ethical considerations.
+References
+Aaditya Bhat. Gpt-wiki-intro, 2023. URLhttps://huggingface.co/datasets/aadityaubhat/
+GPT-wiki-intro.
+Sara Abdali, Richard Anarfi, CJ Barberan, and Jia He. Decoding the ai pen: Techniques and challenges in
+detecting ai-generated text, 2024. URLhttps://arxiv.org/abs/2403.05750.
+Fares Alahdab. Potential impact of large language models on academic writing.BMJ evidence-based
+Medicine, 29(3):201–202, 2024.
+Ebtesam Almazrouei, Hamza Alobeidli, Abdulaziz Alshamsi, Alessandro Cappelli, Ruxandra Cojocaru,
+Mérouane Debbah, Étienne Goffinet, Daniel Hesslow, Julien Launay, Quentin Malartic, Daniele Maz-
+zotta, Badreddine Noune, Baptiste Pannier, and Guilherme Penedo. The falcon series of open language
+models, 2023. URLhttps://arxiv.org/abs/2311.16867.
+Eduardo G. Altmann, Janet B. Pierrehumbert, and Adilson E. Motter. Beyond word frequency: Bursts, lulls,
+and scaling in the temporal distributions of words.PLoS ONE, 4(11):e7678, November 2009. ISSN 1932-
+6203. doi: 10.1371/journal.pone.0007678. URLhttp://dx.doi.org/10.1371/journal.pone.0007678.
+Anthropic. Model Card Addendum: Claude 3.5 Haiku and Upgraded Claude 3.5 Sonnet.https://assets.
+anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf.
+Micael Arman. Poems dataset (nlp).https://www.kaggle.com/datasets/michaelarman/poemsdataset,
+2020.
+Abinew Ali Ayele, Nikolay Babakov, Janek Bevendorff, Xavier Bonet Casals, Berta Chulvi, Daryna Demen-
+tieva, Ashaf Elnagar, Dayne Freitag, Maik Fröbe, Damir Korenčić, Maximilian Mayerl, Daniil Moskovskiy,
+Animesh Mukherjee, Alexander Panchenko, Martin Potthast, Francisco Rangel, Naquee Rizwan, Paolo
+Rosso, Florian Schneider, Alisa Smirnova, Efstathios Stamatatos, Elisei Stakovskii, Benno Stein, Mar-
+iona Taulé, Dmitry Ustalov, Xintong Wang, Matti Wiegmann, Seid Muhie Yimam, and Eva Zangerle.
+Overview of pan 2024: Multi-author writing style analysis, multilingual text detoxification, oppositional
+thinking analysis, and generative ai authorship verification condensed lab overview. InExperimental IR
+Meets Multilinguality, Multimodality, and Interaction: 15th International Conference of the CLEF Asso-
+ciation, CLEF 2024, Grenoble, France, September 9–12, 2024, Proceedings, Part II, pp. 231–259, Berlin,
+Heidelberg, 2024. Springer-Verlag. ISBN 978-3-031-71907-3. doi: 10.1007/978-3-031-71908-0_11. URL
+https://doi.org/10.1007/978-3-031-71908-0_11.
+12
+Published in Transactions on Machine Learning Research (02/2026)
+David Bamman and Noah A. Smith. New alignment methods for discriminative book summarization, 2013.
+Guangsheng Bao, Yanbin Zhao, Zhiyang Teng, Linyi Yang, and Yue Zhang. Fast-detectgpt: Efficient zero-
+shot detection of machine-generated text via conditional probability curvature, 2024. URLhttps://
+arxiv.org/abs/2310.05130.
+Iz Beltagy, Matthew E. Peters, and Arman Cohan. Longformer: The long-document transformer, 2020. URL
+https://arxiv.org/abs/2004.05150.
+Meghana Moorthy Bhat and Srinivasan Parthasarathy. How effectively can machines defend against machine-
+generated fake news? an empirical study. In Anna Rogers, João Sedoc, and Anna Rumshisky (eds.),
+Proceedings of the First Workshop on Insights from Negative Results in NLP, pp. 48–53, Online, November
+2020. Association for Computational Linguistics. doi: 10.18653/v1/2020.insights-1.7. URLhttps://
+aclanthology.org/2020.insights-1.7/.
+Michał Bień, Michał Gilski, Martyna Maciejewska, Wojciech Taisner, Dawid Wisniewski, and Agnieszka
+Lawrynowicz. RecipeNLG: A cooking recipes dataset for semi-structured text generation. InProceedings of
+the 13th International Conference on Natural Language Generation, pp. 22–28, Dublin, Ireland, December
+2020. Association for Computational Linguistics. URLhttps://aclanthology.org/2020.inlg-1.4.
+Adam Block, Ayush Sekhari, and Alexander Rakhlin. Gaussmark: A practical approach for structural
+watermarking of language models, 2025. URLhttps://arxiv.org/abs/2501.13941.
+Matyáš Boháček, Michal Bravanský, Filip Trhlík, and Václav Moravec. Fine-grained czech news article
+dataset: An interdisciplinary approach to trustworthiness analysis, 2022.
+Leo Breiman. Random forests.Machine Learning, 45(1):5–32, Oct 2001. ISSN 1573-0565. doi: 10.1023/A:
+1010933404324. URLhttps://doi.org/10.1023/A:1010933404324.
+Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss,
+Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens
+Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack
+Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. Language
+models are few-shot learners, 2020. URLhttps://arxiv.org/abs/2005.14165.
+Souradip Chakraborty, Amrit Singh Bedi, Sicheng Zhu, Bang An, Dinesh Manocha, and Furong Huang. On
+the possibilities of ai-generated text detection. 2023. URLhttps://arxiv.org/abs/2304.04736.
+Beiduo Chen, Xinpeng Wang, Siyao Peng, Robert Litschko, Anna Korhonen, and Barbara Plank. “seeing
+the big through the small”: Can LLMs approximate human judgment distributions on NLI from a few
+explanations? In Yaser Al-Onaizan, Mohit Bansal, and Yun-Nung Chen (eds.),Findings of the Association
+for Computational Linguistics: EMNLP 2024, pp. 14396–14419, Miami, Florida, USA, November 2024.
+Association for Computational Linguistics. doi: 10.18653/v1/2024.findings-emnlp.842. URLhttps://
+aclanthology.org/2024.findings-emnlp.842/.
+Hong Chen, Hiroya Takamura, and Hideki Nakayama. SciXGen: A scientific paper dataset for context-
+aware text generation. In Marie-Francine Moens, Xuanjing Huang, Lucia Specia, and Scott Wen-tau
+Yih (eds.),Findings of the Association for Computational Linguistics: EMNLP 2021, pp. 1483–1492,
+Punta Cana, Dominican Republic, November 2021a. Association for Computational Linguistics. doi:
+10.18653/v1/2021.findings-emnlp.128. URLhttps://aclanthology.org/2021.findings-emnlp.128/.
+Tianqi Chen and Carlos Guestrin. Xgboost: A scalable tree boosting system. InProceedings of the
+22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD ’16,
+pp. 785–794. ACM, August 2016. doi: 10.1145/2939672.2939785. URLhttp://dx.doi.org/10.1145/
+2939672.2939785.
+13
+Published in Transactions on Machine Learning Research (02/2026)
+YulongChen, YangLiu, LiangChen, andYueZhang. DialogSum: Areal-lifescenariodialoguesummarization
+dataset. In Chengqing Zong, Fei Xia, Wenjie Li, and Roberto Navigli (eds.),Findings of the Association
+for Computational Linguistics: ACL-IJCNLP 2021, pp. 5062–5074, Online, August 2021b. Association for
+Computational Linguistics. doi: 10.18653/v1/2021.findings-acl.449. URLhttps://aclanthology.org/
+2021.findings-acl.449/.
+Yutian Chen, Hao Kang, Vivian Zhai, Liangze Li, Rita Singh, and Bhiksha Raj. Token prediction as implicit
+classification to identify LLM-generated text. In Houda Bouamor, Juan Pino, and Kalika Bali (eds.),
+Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, pp. 13112–
+13120, Singapore, December 2023. Association for Computational Linguistics. doi: 10.18653/v1/2023.
+emnlp-main.810. URLhttps://aclanthology.org/2023.emnlp-main.810/.
+Hyung Won Chung, Le Hou, Shayne Longpre, Barret Zoph, Yi Tay, William Fedus, Yunxuan Li, Xuezhi
+Wang, Mostafa Dehghani, Siddhartha Brahma, Albert Webson, Shixiang Shane Gu, Zhuyun Dai, Mirac
+Suzgun, Xinyun Chen, Aakanksha Chowdhery, Alex Castro-Ros, Marie Pellat, Kevin Robinson, Dasha
+Valter, Sharan Narang, Gaurav Mishra, Adams Yu, Vincent Zhao, Yanping Huang, Andrew Dai, Hongkun
+Yu, Slav Petrov, Ed H. Chi, Jeff Dean, Jacob Devlin, Adam Roberts, Denny Zhou, Quoc V. Le, and Jason
+Wei. Scaling instruction-finetuned language models, 2022. URLhttps://arxiv.org/abs/2210.11416.
+CKIPLAB. Gpt2-chinese.https://github.com/ckiplab/ckip-transformers, 2024.
+NLP Team Cohere. World-class ai, at your command, 2024. URLhttps://cohere.com/models/command.
+Accessed: 2024-02-02.
+Andrea De Giorgio, Giacomo Matrone, and Antonio Maffei. Detecting large language models in exam essays.
+In2025 IEEE Engineering Education World Conference (EDUNINE), pp. 1–6. IEEE, 2025.
+Desklib. DeskLib: AI-Text-Detector-v1.01.https://huggingface.co/desklib/ai-text-detector-v1.
+01.
+Jad Doughman, Osama Mohammed Afzal, Hawau Olamide Toyin, Shady Shehata, Preslav Nakov, and
+Zeerak Talat. Exploring the limitations of detecting machine-generated text, 2024. URLhttps://arxiv.
+org/abs/2406.11073.
+Liam Dugan, Alyssa Hwang, Filip Trhlik, Josh Magnus Ludan, Andrew Zhu, Hainiu Xu, Daphne Ippolito,
+and Chris Callison-Burch. Raid: A shared benchmark for robust evaluation of machine-generated text
+detectors, 2024. URLhttps://arxiv.org/abs/2405.07940.
+BigScience Workshop et al. Bloom: A 176b-parameter open-access multilingual language model, 2023. URL
+https://arxiv.org/abs/2211.05100.
+Gemini Team et al. Gemini: A family of highly capable multimodal models, 2025. URLhttps://arxiv.
+org/abs/2312.11805.
+Meta et al. The llama 3 herd of models, 2024a. URLhttps://arxiv.org/abs/2407.21783.
+OpenAI et al. Gpt-4 technical report, 2024b. URLhttps://arxiv.org/abs/2303.08774.
+Angela Fan, Mike Lewis, and Yann Dauphin. Hierarchical neural story generation. In Iryna Gurevych
+and Yusuke Miyao (eds.),Proceedings of the 56th Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pp. 889–898, Melbourne, Australia, July 2018. Association for
+Computational Linguistics. doi: 10.18653/v1/P18-1082. URLhttps://aclanthology.org/P18-1082/.
+Angela Fan, Yacine Jernite, Ethan Perez, David Grangier, Jason Weston, and Michael Auli. ELI5:
+Long form question answering. In Anna Korhonen, David Traum, and Lluís Màrquez (eds.),Proceed-
+ings of the 57th Annual Meeting of the Association for Computational Linguistics, pp. 3558–3567, Flo-
+rence, Italy, July 2019. Association for Computational Linguistics. doi: 10.18653/v1/P19-1346. URL
+https://aclanthology.org/P19-1346/.
+14
+Published in Transactions on Machine Learning Research (02/2026)
+Rinaldo Gagiano, Maria Myung-Hee Kim, Xiuzhen Zhang, and Jennifer Biggs. Robustness analysis
+of grover for machine-generated news detection. In Afshin Rahimi, William Lane, and Guido Zuc-
+con (eds.),Proceedings of the 19th Annual Workshop of the Australasian Language Technology Asso-
+ciation, pp. 119–127, Online, December 2021. Australasian Language Technology Association. URL
+https://aclanthology.org/2021.alta-1.12/.
+Henrique Da Silva Gameiro, Andrei Kucharavy, and Ljiljana Dolamic. Llm detectors still fall short of real
+world: Case of llm-generated short news-like posts, 2024. URLhttps://arxiv.org/abs/2409.03291.
+Sebastian Gehrmann, Hendrik Strobelt, and Alexander M. Rush. Gltr: Statistical detection and visualization
+of generated text, 2019. URLhttps://arxiv.org/abs/1906.04043.
+Soumya Suvra Ghosal, Souradip Chakraborty, Jonas Geiping, Furong Huang, Dinesh Manocha, and Am-
+rit Singh Bedi. Towards possibilities & impossibilities of ai-generated text detection: A survey, 2023. URL
+https://arxiv.org/abs/2310.15264.
+Thibaud Gloaguen, Nikola Jovanović, Robin Staab, and Martin Vechev. Black-box detection of language
+model watermarks, 2025. URLhttps://arxiv.org/abs/2405.20777.
+Derek Greene and Pádraig Cunningham. Practical solutions to the problem of diagonal dominance in kernel
+documentclustering. InProc. 23rd International Conference on Machine learning (ICML’06), pp.377–384.
+ACM Press, 2006.
+Jesus Guerrero, Gongbo Liang, and Izzat Alsmadi. A mutation-based text generation for adversarial machine
+learning applications, 2022. URLhttps://arxiv.org/abs/2212.11808.
+Biyang Guo, Xin Zhang, Ziyuan Wang, Minqi Jiang, Jinran Nie, Yuxuan Ding, Jianwei Yue, and Yupeng
+Wu. How close is chatgpt to human experts? comparison corpus, evaluation, and detection, 2023. URL
+https://arxiv.org/abs/2301.07597.
+Hanxi Guo, Siyuan Cheng, Xiaolong Jin, ZHUO ZHANG, Kaiyuan Zhang, Guanhong Tao, Guangyu Shen,
+and Xiangyu Zhang. Biscope: AI-generated text detection by checking memorization of preceding tokens.
+InThe Thirty-eighth Annual Conference on Neural Information Processing Systems, 2024. URLhttps:
+//openreview.net/forum?id=Hew2JSDycr.
+Abhimanyu Hans, Avi Schwarzschild, Valeriia Cherepanova, Hamid Kazemi, Aniruddha Saha, Micah Gold-
+blum, Jonas Geiping, and Tom Goldstein. Spotting llms with binoculars: Zero-shot detection of machine-
+generated text, 2024. URLhttps://arxiv.org/abs/2401.12070.
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi. The curious case of neural text degener-
+ation, 2020. URLhttps://arxiv.org/abs/1904.09751.
+Jianhua Hu, Huixiang Gao, Qing Yuan, and Ganchang Shi. Dynamic content generation in large language
+models with real-time constraints. 2024.
+Xiaomeng Hu, Pin-Yu Chen, and Tsung-Yi Ho. Radar: Robust ai-text detection via adversarial learning,
+2023. URLhttps://arxiv.org/abs/2307.03838.
+Daphne Ippolito, Daniel Duckworth, Chris Callison-Burch, and Douglas Eck. Automatic detection of
+generated text is easiest when humans are fooled. In Dan Jurafsky, Joyce Chai, Natalie Schluter,
+and Joel Tetreault (eds.),Proceedings of the 58th Annual Meeting of the Association for Computa-
+tional Linguistics, pp. 1808–1822, Online, July 2020. Association for Computational Linguistics. doi:
+10.18653/v1/2020.acl-main.164. URLhttps://aclanthology.org/2020.acl-main.164/.
+T. Jaeger and Roger Levy. Speakers optimize information density through syntactic reduction. In
+B. Schölkopf, J. Platt, and T. Hoffman (eds.),Advances in Neural Information Processing Systems, vol-
+ume 19. MIT Press, 2006. URLhttps://proceedings.neurips.cc/paper_files/paper/2006/file/
+c6a01432c8138d46ba39957a8250e027-Paper.pdf.
+15
+Published in Transactions on Machine Learning Research (02/2026)
+Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego
+de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud,
+Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and
+William El Sayed. Mistral 7b, 2023.
+Qiao Jin, Bhuwan Dhingra, Zhengping Liu, William Cohen, and Xinghua Lu. PubMedQA: A dataset for
+biomedical research question answering. In Kentaro Inui, Jing Jiang, Vincent Ng, and Xiaojun Wan (eds.),
+Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th
+International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), pp. 2567–2577, Hong
+Kong, China, November 2019. Association for Computational Linguistics. doi: 10.18653/v1/D19-1259.
+URLhttps://aclanthology.org/D19-1259/.
+Cameron R. Jones, Sean Trott, and Benjamin Bergen. Comparing humans and large language models on an
+experimental protocol inventory for theory of mind evaluation (epitome).Transactions of the Association
+for Computational Linguistics, 12:803–819, 06 2024. ISSN 2307-387X. doi: 10.1162/tacl_a_00674. URL
+https://doi.org/10.1162/tacl_a_00674.
+John Kirchenbauer, Jonas Geiping, Yuxin Wen, Jonathan Katz, Ian Miers, and Tom Goldstein. A watermark
+for large language models, 2024. URLhttps://arxiv.org/abs/2301.10226.
+Kalpesh Krishna, Yixiao Song, Marzena Karpinska, John Wieting, and Mohit Iyyer. Paraphrasing evades
+detectors of ai-generated text, but retrieval is an effective defense, 2023. URLhttps://arxiv.org/abs/
+2303.13408.
+Tharindu Kumarage, Joshua Garland, Amrita Bhattacharjee, Kirill Trapeznikov, Scott Ruston, and Huan
+Liu. Stylometric detection of ai-generated text in twitter timelines, 2023. URLhttps://arxiv.org/abs/
+2303.03697.
+Tatsuki Kuribayashi, Yohei Oseki, Souhaib Ben Taieb, Kentaro Inui, and Timothy Baldwin. Large language
+models are human-like internally, 2025. URLhttps://arxiv.org/abs/2502.01615.
+Andreas Köpf, Yannic Kilcher, Dimitri von Rütte, Sotiris Anagnostidis, Zhi-Rui Tam, Keith Stevens, Ab-
+dullah Barhoum, Nguyen Minh Duc, Oliver Stanley, Richárd Nagyfi, Shahul ES, Sameer Suri, David
+Glushkov, Arnav Dantuluri, Andrew Maguire, Christoph Schuhmann, Huu Nguyen, and Alexander
+Mattick. Openassistant conversations – democratizing large language model alignment, 2023. URL
+https://arxiv.org/abs/2304.07327.
+Thomas Lavergne, Tanguy Urvoy, and François Yvon. Detecting fake content with relative entropy scoring.
+InProceedings of the 2008 International Conference on Uncovering Plagiarism, Authorship and Social
+Software Misuse - Volume 377, PAN’08, pp. 27–31, Aachen, DEU, 2008. CEUR-WS.org.
+Yafu Li, Qintong Li, Leyang Cui, Wei Bi, Zhilin Wang, Longyue Wang, Linyi Yang, Shuming Shi, and Yue
+Zhang. Mage: Machine-generated text detection in the wild, 2024. URLhttps://arxiv.org/abs/2305.
+13242.
+Gongbo Liang, Jesus Guerrero, and Izzat Alsmadi. Mutation-based adversarial attacks on neural text
+detectors, 2023a. URLhttps://arxiv.org/abs/2302.05794.
+Weixin Liang, Mert Yuksekgonul, Yining Mao, Eric Wu, and James Zou. Gpt detectors are biased against
+non-native english writers, 2023b. URLhttps://arxiv.org/abs/2304.02819.
+Yuqing Liang, Jiancheng Xiao, Wensheng Gan, and Philip S. Yu. Watermarking techniques for large language
+models: A survey, 2024. URLhttps://arxiv.org/abs/2409.00089.
+Aiwei Liu, Leyi Pan, Yijian Lu, Jingjing Li, Xuming Hu, Xi Zhang, Lijie Wen, Irwin King, Hui Xiong,
+and Philip S. Yu. A survey of text watermarking in the era of large language models, 2024a. URL
+https://arxiv.org/abs/2312.07913.
+16
+Published in Transactions on Machine Learning Research (02/2026)
+Zeyan Liu, Zijun Yao, Fengjun Li, and Bo Luo. On the detectability of chatgpt content: Benchmarking,
+methodology, and evaluation through the lens of academic writing, 2024b. URLhttps://arxiv.org/
+abs/2306.05524.
+Cristóbal Lozano, Ana Díaz-Negrillo, and Marcus Callies.Lozano, Díaz-Negrillo, Callies (2020) Designing
+and compiling a learner corpus of written and spoken narratives: COREFL, pp. 21–46. 12 2020. ISBN
+978-3-631-70185-0. doi: 10.3726/978-3-653-05182-7.
+Yuxuan Lu, Jing Huang, Yan Han, Bennet Bei, Yaochen Xie, Dakuo Wang, Jessie Wang, and Qi He.
+Llm agents that act like us: Accurate human behavior simulation with real-world data, 2025. URL
+https://arxiv.org/abs/2503.20749.
+Brady D Lund, Ting Wang, Nishith Reddy Mannuru, Bing Nie, Somipam Shimray, and Ziang Wang. Chatgpt
+and a new academic reality: Artificial intelligence-written research papers and the ethics of the large lan-
+guage models in scholarly publishing.Journal of the Association for Information Science and Technology,
+74(5):570–581, 2023.
+Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts.
+Learning word vectors for sentiment analysis. InProceedings of the 49th Annual Meeting of the Association
+for Computational Linguistics: Human Language Technologies, pp. 142–150, Portland, Oregon, USA, June
+2011. Association for Computational Linguistics. URLhttp://www.aclweb.org/anthology/P11-1015.
+Chengzhi Mao, Carl Vondrick, Hao Wang, and Junfeng Yang. Raidar: generative ai detection via rewriting,
+2024. URLhttps://arxiv.org/abs/2401.12970.
+Jesse G Meyer, Ryan J Urbanowicz, Patrick CN Martin, Karen O’Connor, Ruowang Li, Pei-Chen Peng,
+Tiffani J Bright, Nicholas Tatonetti, Kyoung Jae Won, Graciela Gonzalez-Hernandez, et al. Chatgpt and
+large language models in academia: opportunities and challenges.BioData mining, 16(1):20, 2023.
+George Mikros, Athanasios Koursaris, Dimitrios Bilianos, and George Markopoulos. Ai-writing detection
+usinganensembleoftransformersandstylometricfeatures.CEUR Workshop Proceedings, 3496, September
+2023. ISSN 1613-0073. Publisher Copyright:©2023 Copyright for this paper by its authors. Use permitted
+under Creative Commons License Attribution 4.0 International (CC BY 4.0).; 2023 Iberian Languages
+Evaluation Forum, IberLEF 2023 ; Conference date: 26-09-2023.
+Eric Mitchell, Yoonho Lee, Alexander Khazatsky, Christopher D. Manning, and Chelsea Finn. Detectgpt:
+Zero-shot machine-generated text detection using probability curvature, 2023. URLhttps://arxiv.org/
+abs/2301.11305.
+NLP Team MosaicML. Introducing mpt-30b: Raising the bar for open-source foundation models, 2023. URL
+www.mosaicml.com/blog/mpt-30b. Accessed: 2023-06-22.
+Nasrin Mostafazadeh, Nathanael Chambers, Xiaodong He, Devi Parikh, Dhruv Batra, Lucy Vanderwende,
+PushmeetKohli, andJamesAllen. Acorpusandclozeevaluationfordeeperunderstandingofcommonsense
+stories. In Kevin Knight, Ani Nenkova, and Owen Rambow (eds.),Proceedings of the 2016 Conference of
+the North American Chapter of the Association for Computational Linguistics: Human Language Tech-
+nologies, pp. 839–849, San Diego, California, June 2016. Association for Computational Linguistics. doi:
+10.18653/v1/N16-1098. URLhttps://aclanthology.org/N16-1098/.
+Shashi Narayan, Shay B. Cohen, and Mirella Lapata. Don‘t give me the details, just the summary! topic-
+aware convolutional neural networks for extreme summarization. In Ellen Riloff, David Chiang, Julia
+Hockenmaier, and Jun’ichi Tsujii (eds.),Proceedings of the 2018 Conference on Empirical Methods in
+Natural Language Processing, pp. 1797–1807, Brussels, Belgium, October-November 2018. Association for
+Computational Linguistics. doi: 10.18653/v1/D18-1206. URLhttps://aclanthology.org/D18-1206/.
+Team Olmo, :, Allyson Ettinger, Amanda Bertsch, Bailey Kuehl, David Graham, David Heineman, Dirk
+Groeneveld, Faeze Brahman, Finbarr Timbers, Hamish Ivison, Jacob Morrison, Jake Poznanski, Kyle Lo,
+Luca Soldaini, Matt Jordan, Mayee Chen, Michael Noukhovitch, Nathan Lambert, Pete Walsh, Pradeep
+17
+Published in Transactions on Machine Learning Research (02/2026)
+Dasigi, Robert Berry, Saumya Malik, Saurabh Shah, Scott Geng, Shane Arora, Shashank Gupta, Taira
+Anderson, Teng Xiao, Tyler Murray, Tyler Romero, Victoria Graf, Akari Asai, Akshita Bhagia, Alexander
+Wettig, Alisa Liu, Aman Rangapur, Chloe Anastasiades, Costa Huang, Dustin Schwenk, Harsh Trivedi,
+Ian Magnusson, Jaron Lochner, Jiacheng Liu, Lester James V. Miranda, Maarten Sap, Malia Morgan,
+Michael Schmitz, Michal Guerquin, Michael Wilson, Regan Huff, Ronan Le Bras, Rui Xin, Rulin Shao,
+Sam Skjonsberg, Shannon Zejiang Shen, Shuyue Stella Li, Tucker Wilde, Valentina Pyatkin, Will Merrill,
+Yapei Chang, Yuling Gu, Zhiyuan Zeng, Ashish Sabharwal, Luke Zettlemoyer, Pang Wei Koh, Ali Farhadi,
+Noah A. Smith, and Hannaneh Hajishirzi. Olmo 3, 2025. URLhttps://arxiv.org/abs/2512.13961.
+Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang,
+Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with
+human feedback.Advances in Neural Information Processing Systems, 35:27730–27744, 2022.
+Eleftheria Papageorgiou, Christos Chronis, Iraklis Varlamis, and Yassine Himeur. A survey on the use of
+large language models (llms) in fake news.Future Internet, 16(8):298, 2024.
+Bumjin Park and Jaesik Choi. Identifying the source of generation for large language models, 2024. URL
+https://arxiv.org/abs/2407.12846.
+SayakPaulandSoumikRakshit. arxivpaperabstracts.https://www.kaggle.com/datasets/spsayakpaul/
+arxiv-paper-abstracts, 2021.
+Steven T. Piantadosi, Harry Tily, and Edward Gibson. Word lengths are optimized for efficient commu-
+nication.Proceedings of the National Academy of Sciences, 108(9):3526–3529, 2011. doi: 10.1073/pnas.
+1012551108. URLhttps://www.pnas.org/doi/abs/10.1073/pnas.1012551108.
+Jiameng Pu, Zain Sarwar, Sifat Muhammad Abdullah, Abdullah Rehman, Yoonjin Kim, Parantapa
+Bhattacharya, Mobin Javed, and Bimal Viswanath. Deepfake text detection: Limitations and op-
+portunities. In2023 IEEE Symposium on Security and Privacy (SP), pp. 1613–1630, 2023. doi:
+10.1109/SP46215.2023.10179387.
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Lan-
+guage models are unsupervised multitask learners.OpenAI, 2019. URLhttps://cdn.openai.com/
+better-language-models/language_models_are_unsupervised_multitask_learners.pdf. Accessed:
+2024-11-15.
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. SQuAD: 100,000+ questions for
+machine comprehension of text. In Jian Su, Kevin Duh, and Xavier Carreras (eds.),Proceedings of the
+2016 Conference on Empirical Methods in Natural Language Processing, pp. 2383–2392, Austin, Texas,
+November 2016. Association for Computational Linguistics. doi: 10.18653/v1/D16-1264. URLhttps:
+//aclanthology.org/D16-1264/.
+Jie Ren, Han Xu, Yiding Liu, Yingqian Cui, Shuaiqiang Wang, Dawei Yin, and Jiliang Tang. A robust
+semantics-based watermark for large language model against paraphrasing, 2024. URLhttps://arxiv.
+org/abs/2311.08721.
+Vinu Sankar Sadasivan, Aounon Kumar, Sriram Balasubramanian, Wenxiao Wang, and Soheil Feizi. Can
+ai-generated text be reliably detected?, 2025. URLhttps://arxiv.org/abs/2303.11156.
+Victor Sanh, Albert Webson, Colin Raffel, Stephen Bach, Lintang Sutawika, Zaid Alyafeai, Antoine Chaffin,
+Arnaud Stiegler, Arun Raja, Manan Dey, M Saiful Bari, Canwen Xu, Urmish Thakker, Shanya Sharma
+Sharma, Eliza Szczechla, Taewoon Kim, Gunjan Chhablani, Nihal Nayak, Debajyoti Datta, Jonathan
+Chang, Mike Tian-Jian Jiang, Han Wang, Matteo Manica, Sheng Shen, Zheng Xin Yong, Harshit Pandey,
+Rachel Bawden, Thomas Wang, Trishala Neeraj, Jos Rozen, Abheesht Sharma, Andrea Santilli, Thibault
+Fevry, Jason Alan Fries, Ryan Teehan, Teven Le Scao, Stella Biderman, Leo Gao, Thomas Wolf, and
+Alexander M Rush. Multitask prompted training enables zero-shot task generalization. InInternational
+Conference on Learning Representations, 2022. URLhttps://openreview.net/forum?id=9Vrb9D0WI4.
+18
+Published in Transactions on Machine Learning Research (02/2026)
+Dietmar Schabus, Marcin Skowron, and Martin Trapp. One million posts: A data set of german online
+discussions. InProceedings of the 40th International ACM SIGIR Conference on Research and Development
+in Information Retrieval, SIGIR’17, pp.1241–1244, NewYork, NY,USA,2017.AssociationforComputing
+Machinery. ISBN 9781450350228. doi: 10.1145/3077136.3080711. URLhttps://doi.org/10.1145/
+3077136.3080711.
+Abigail See, Peter J. Liu, and Christopher D. Manning. Get to the point: Summarization with pointer-
+generator networks. In Regina Barzilay and Min-Yen Kan (eds.),Proceedings of the 55th Annual Meeting
+of the Association for Computational Linguistics (Volume 1: Long Papers), pp. 1073–1083, Vancouver,
+Canada, July 2017. Association for Computational Linguistics. doi: 10.18653/v1/P17-1099. URLhttps:
+//aclanthology.org/P17-1099/.
+Sanidhya Madhav Shukla, Chandni Magoo, and Puneet Garg. Comparing fine tuned-lms for detecting llm-
+generated text. In2024 3rd Edition of IEEE Delhi Section Flagship Conference (DELCON), pp. 1–8.
+IEEE, 2024.
+Irene Solaiman, Miles Brundage, Jack Clark, Amanda Askell, Ariel Herbert-Voss, Jeff Wu, Alec Radford,
+Gretchen Krueger, Jong Wook Kim, Sarah Kreps, Miles McCain, Alex Newhouse, Jason Blazakis, Kris
+McGuffie, and Jasmine Wang. Release strategies and the social impacts of language models, 2019. URL
+https://arxiv.org/abs/1908.09203.
+Jinyan Su, Terry Yue Zhuo, Di Wang, and Preslav Nakov. Detectllm: Leveraging log rank information for
+zero-shot detection of machine-generated text, 2023. URLhttps://arxiv.org/abs/2306.05540.
+SuperAnnotate. SuperAnnotate: AI-Detector.https://huggingface.co/SuperAnnotate/ai-detector.
+Chenhao Tan, Vlad Niculae, Cristian Danescu-Niculescu-Mizil, and Lillian Lee. Winning arguments: In-
+teraction dynamics and persuasion strategies in good-faith online discussions. InProceedings of the 25th
+International Conference on World Wide Web, WWW ’16. International World Wide Web Conferences
+Steering Committee, April 2016. doi: 10.1145/2872427.2883081. URLhttp://dx.doi.org/10.1145/
+2872427.2883081.
+Amalio Telenti, Michael Auli, Brian L Hie, Cyrus Maher, Suchi Saria, and John PA Ioannidis. Large language
+models for science and medicine.European journal of clinical investigation, 54(6):e14183, 2024.
+IrinaTolstykh, AleksandraTsybina, SergeyYakubson, AleksandrGordeev, VladimirDokholyan, andMaksim
+Kuprashevich. Gigacheck: Detecting llm-generated content.arXiv preprint arXiv:2410.23728, 2024.
+Petter Törnberg, Diliara Valeeva, Justus Uitermark, and Christopher Bail. Simulating social media using
+large language models to evaluate alternative news feed algorithms.arXiv preprint arXiv:2310.05984,
+2023.
+Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timothée Lacroix,
+Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin, Edouard
+Grave, and Guillaume Lample. Llama: Open and efficient foundation language models, 2023a. URL
+https://arxiv.org/abs/2302.13971.
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bash-
+lykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, Dan Bikel, Lukas Blecher, Cristian Canton Fer-
+rer, Moya Chen, Guillem Cucurull, David Esiobu, Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller,
+Cynthia Gao, Vedanuj Goswami, Naman Goyal, Anthony Hartshorn, Saghar Hosseini, Rui Hou, Hakan
+Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit Singh
+Koura, Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao,
+Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy
+Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric Michael Smith, Ranjan Subra-
+manian, Xiaoqing Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian Xiang Kuan, Puxin Xu, Zheng
+Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aurelien Rodriguez,
+Robert Stojnic, Sergey Edunov, and Thomas Scialom. Llama 2: Open foundation and fine-tuned chat
+models, 2023b.
+19
+Published in Transactions on Machine Learning Research (02/2026)
+Brian Tufts, Xuandong Zhao, and Lei Li. A practical examination of ai-generated text detectors for large
+language models, 2025. URLhttps://arxiv.org/abs/2412.05139.
+Don Tuggener, Pius von Däniken, Thomas Peetz, and Mark Cieliebak. LEDGAR: A large-scale multi-label
+corpus for text classification of legal provisions in contracts. In Nicoletta Calzolari, Frédéric Béchet,
+Philippe Blache, Khalid Choukri, Christopher Cieri, Thierry Declerck, Sara Goggi, Hitoshi Isahara, Bente
+Maegaard, Joseph Mariani, Hélène Mazo, Asuncion Moreno, Jan Odijk, and Stelios Piperidis (eds.),
+Proceedings of the Twelfth Language Resources and Evaluation Conference, pp. 1235–1241, Marseille,
+France, May 2020. European Language Resources Association. ISBN 979-10-95546-34-4. URLhttps:
+//aclanthology.org/2020.lrec-1.155/.
+Michael Völske, Martin Potthast, Shahbaz Syed, and Benno Stein. TL;DR: Mining Reddit to learn auto-
+matic summarization. InProceedings of the Workshop on New Frontiers in Summarization, pp. 59–63,
+Copenhagen, Denmark, September 2017. Association for Computational Linguistics. doi: 10.18653/v1/
+W17-4508. URLhttps://aclanthology.org/W17-4508.
+Ben Wang and Aran Komatsuzaki. GPT-J-6B: A 6 Billion Parameter Autoregressive Language Model.
+https://github.com/kingoflolz/mesh-transformer-jax, May 2021.
+Hong Wang, Xuan Luo, Weizhi Wang, and Xifeng Yan. Bot or human? detecting chatgpt imposters with a
+single question, 2024a. URLhttps://arxiv.org/abs/2305.06424.
+Rongsheng Wang, Haoming Chen, Ruizhe Zhou, Han Ma, Yaofei Duan, Yanlan Kang, Songhua Yang, Baoyu
+Fan, and Tao Tan. Llm-detector: Improving ai-generated chinese text detection with open-source llm
+instruction tuning.arXiv preprint arXiv:2402.01158, 2024b.
+Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith, Daniel Khashabi, and Hannaneh
+Hajishirzi. Self-instruct: Aligning language models with self-generated instructions, 2023. URLhttps:
+//arxiv.org/abs/2212.10560.
+Max Wolff and Stuart Wolff. Attacking neural text detectors, 2022. URLhttps://arxiv.org/abs/2002.
+11768.
+Junchao Wu, Shu Yang, Runzhe Zhan, Yulin Yuan, Lidia S. Chao, and Derek Fai Wong. A survey on llm-
+generated text detection: Necessity, methods, and future directions.Comput. Linguistics, 51(1):275–338,
+2025. doi: 10.1162/COLI\_A\_00549. URLhttps://doi.org/10.1162/coli_a_00549.
+Jinwei Xu, He Zhang, Yanjin Yang, Zeru Cheng, Jun Lyu, Bohan Liu, Xin Zhou, Lanxin Yang, Alberto
+Bacchelli, Yin Kia Chiam, and Thiam Kian Chiew. Investigating efficacy of perplexity in detecting llm-
+generated code, 2024. URLhttps://arxiv.org/abs/2412.16525.
+Ann Yuan, Andy Coenen, Emily Reif, and Daphne Ippolito. Wordcraft: story writing with large language
+models. InProceedings of the 27th International Conference on Intelligent User Interfaces, pp. 841–852,
+2022.
+Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi. HellaSwag: Can a machine
+really finish your sentence? In Anna Korhonen, David Traum, and Lluís Màrquez (eds.),Proceedings
+of the 57th Annual Meeting of the Association for Computational Linguistics, pp. 4791–4800, Florence,
+Italy, July 2019. Association for Computational Linguistics. doi: 10.18653/v1/P19-1472. URLhttps:
+//aclanthology.org/P19-1472/.
+Aohan Zeng, Xiao Liu, Zhengxiao Du, Zihan Wang, Hanyu Lai, Ming Ding, Zhuoyi Yang, Yifan Xu, Wendi
+Zheng, Xiao Xia, Weng Lam Tam, Zixuan Ma, Yufei Xue, Jidong Zhai, Wenguang Chen, Peng Zhang,
+Yuxiao Dong, and Jie Tang. Glm-130b: An open bilingual pre-trained model, 2023. URLhttps://arxiv.
+org/abs/2210.02414.
+Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christopher Dewan,
+Mona Diab, Xian Li, Xi Victoria Lin, Todor Mihaylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel
+Simig, Punit Singh Koura, Anjali Sridhar, Tianlu Wang, and Luke Zettlemoyer. Opt: Open pre-trained
+transformer language models, 2022. URLhttps://arxiv.org/abs/2205.01068.
+20
+Published in Transactions on Machine Learning Research (02/2026)
+Xiang Zhang, Junbo Zhao, and Yann LeCun. Character-level convolutional networks for text classification.
+In C. Cortes, N. Lawrence, D. Lee, M. Sugiyama, and R. Garnett (eds.),Advances in Neural Information
+Processing Systems, volume 28. Curran Associates, Inc., 2015. URLhttps://proceedings.neurips.cc/
+paper_files/paper/2015/file/250cf8b51c773f3f8dc8b4be867a9a02-Paper.pdf.
+Yuehan Zhang, Yongqiang Ma, Jiawei Liu, Xiaozhong Liu, Xiaofeng Wang, and Wei Lu. Detection vs. anti-
+detection: Is text generated by ai detectable? InInternational Conference on Information, pp. 209–222.
+Springer, 2024.
+Zixuan Zhou, Xuefei Ning, Ke Hong, Tianyu Fu, Jiaming Xu, Shiyao Li, Yuming Lou, Luning Wang, Zhihang
+Yuan, Xiuhong Li, Shengen Yan, Guohao Dai, Xiao-Ping Zhang, Yuhan Dong, and Yu Wang. A survey
+on efficient inference for large language models, 2024. URLhttps://arxiv.org/abs/2404.14294.
+21
+Published in Transactions on Machine Learning Research (02/2026)
+A More Details on Related Work
+In recent years, the challenge of identifying AI-generated text has garnered significant attention, giving
+rise to a variety of detection approaches. These methods largely fall into two categories: watermark-based
+techniques and zero-resource detection.
+Watermarking.Watermarking embeds traceable patterns in a model’s outputs during training or gener-
+ation, enabling downstream identification of machine-generated content (Ren et al., 2024; Liu et al., 2024a).
+While watermarking can be effective in controlled environments, it relies on access to or cooperation from the
+model’s developers, an assumption that frequently fails in real-world or adversarial scenarios. Furthermore,
+it is inherently unsuitable for practical situations where AI-generated text lacks any embedded watermark.
+This limitation has led to growing interest in zero-resource detection methods, which make no assumptions
+about access to the model’s internals or training data. Instead, these methods analyze the output text alone,
+offering a more flexible and broadly applicable approach. Within this space, techniques can be further cate-
+gorized into fine-tuned methods, which rely on labeled datasets, and zero-shot methods, which generalize to
+unseen models without task-specific training.
+Fine-tuned Detection.Fine-tuned detection methods represent a major strand of zero-resource detec-
+tion, often leveraging fine-tuned classifiers built atop pre-trained language models (PLMs). A pivotal de-
+velopment was the Grover model, which demonstrated that models trained on text from specific generators
+can achieve high accuracy on in-distribution data, particularly when integrating Grover-specific layers. This
+inspired a wave of PLM-based detectors, most notably OpenAI’s GPT-2 detector (Solaiman et al., 2019),
+which uses a RoBERTa classifier trained on GPT-2 outputs. However, such detectors often struggle to
+generalize across models, especially as newer LLMs introduce more fluent and coherent outputs.
+To improve generalization and robustness, recent work has focused on feature augmentation. Stylometric
+approaches, for instance, introduce handcrafted features that capture writing style discrepancies between
+humans and machines (Mikros et al., 2023). These include measures of phraseology, punctuation, linguistic
+diversity, and journalistic standards, which have proven useful for detecting AI-generated tweets and news
+articles. Additional features such as perplexity statistics, sentiment, and error-based cues like grammatical
+mistakes further enrich detection pipelines (Kumarage et al., 2023).
+Parallel efforts have explored structural features, incorporating models that explicitly account for the factual
+or contextual structure of text. Techniques such as TriFuseNet combine stylistic and contextual branches
+with fine-tuned BERT models, while others employ attentive-BiLSTMs to replace standard feedforward
+layers, enhancing interpretability and robustness (Liu et al., 2024b).
+Despite these advancements, fine-tuned detectors still require labeled training data and model-specific tuning
+of PLMs, which can limit their scalability to novel or proprietary LLMs. Although these detectors perform
+exceptionally well on data similar to their training sets, they face significant drawbacks, most notably, a
+tendency to overfit to specific domains and a reliance on retraining for every newly emerging AI model,
+which is unsustainable in light of the fast-paced evolution of generative technologies. This motivates the
+development of methods, that leverage zero-shot features, such asDivEye, that aim to detect AI-generated
+text without relying on supervised learning or access to model internals.
+Zero-shot Detection.Recent research has focused on zero-shot detection strategies that require no fine-
+tuning on labeled examples from the target generator. These methods typically leverage statistical cues from
+PLM’s output distributions or repurpose LLMs themselves as detectors.
+A prominent class of zero-shot detectors exploits the probability structure of text under language models. De-
+tectGPT (Mitchell et al., 2023) detects machine-generated text by measuring how strongly the log-likelihood
+drops under small semantic perturbations, leveraging the hypothesis that AI text lies in regions of higher
+negative curvature than human text. On the other hand, FastDetectGPT (Bao et al., 2024) eliminates the
+need for explicit perturbations by directly measuring curvature in conditional probabilities, observing that AI
+text typically exhibits sharper transitions between tokens compared to human writing. These observations
+are refined in DetectLLM (Su et al., 2023), which introduces the Log-Likelihood Log-Rank Ratio (LRR) and
+22
+Published in Transactions on Machine Learning Research (02/2026)
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+ELI5
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+CMV
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+HellaSwag
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+ROC
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+SciXGen
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+SQuAD
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+TLDR
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+WP
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+XSum
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Yelp
+Figure 7: AUROC performance profiles of seven AI-detection tools evaluated on text generated by ten diverse
+domains generated by arbitrary LLMs. Each spider plot corresponds to a specific domain, with radial axes
+representing the AUROC score (ranging from 0 to 1) and angular axes representing the detection tools:
+RADAR, Entropy, LogRank, FastDetectGPT, DetectLLM, OpenAI Detector, andDivEye.
+Normalized Perturbed log-Rank (NPR) metrics to quantify the distinguishability of AI-generated content
+using statistical features derived from token rankings.
+Another line of work focuses on token predictability and entropy. LogRank (Ghosal et al., 2023) investigates
+the use of token rank distributions and demonstrates that log-rank statistics, such as the frequency of
+top-ranked tokens, are reliable signals of AI authorship. This builds on early work such as entropy-based
+detection (Lavergne et al., 2008) and GLTR (Gehrmann et al., 2019), which showed that humans tend to
+use more surprising and diverse tokens, while LLMs often fall back on high-probability continuations.
+Moving beyond single-directional statistics, BiScope (Guo et al., 2024) proposes a bi-directional cross-entropy
+framework that measures how well a model’s predicted logits align both with the ground truth next token
+(forward loss) and with the previous token (backward loss). The key insight is that AI-generated text often
+exhibits predictable forward progression but weaker backward association due to its autoregressive nature.
+A shallow classifier trained on the joint distribution of these losses can reliably detect AI text with zero-shot
+generalization.
+Finally, Binoculars (Hans et al., 2024) offers a model-agnostic strategy by comparing the statistical disagree-
+ment between two LLMs on the same input. By contrasting the outputs of two diverse LLMs, the method
+detects anomalies in token distributions that are characteristic of synthetic text. This ensemble-based dis-
+agreement is found to correlate strongly with model-generated samples, providing a powerful signal without
+the need for training data from either model.
+Collectively, these techniques demonstrate that zero-shot detection can be achieved by carefully analyzing
+howtextalignswiththeinductivebiasesandstatisticalsignaturesoflanguagemodels, withoutanyfinetuning
+or access to the original generator. They lay the foundation for our proposed method,DivEye, which further
+capitalizes on diversity-based statistical properties to robustly differentiate AI- and human-written content.
+23
+Published in Transactions on Machine Learning Research (02/2026)
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+BLOOM-7B
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+OPT-125M
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+FLAN-T5-Small
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+GLB-130B
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+GPT-3.5-Turbo
+RADAR
+Entropy
+LogRank
+FastDetectGPT
+DetectLLM
+OpenAI Detector
+DivEye
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+GPT-J
+Figure 8: AUROC performance profiles of seven AI-detection tools evaluated on text generated by six
+different LLMs. Each spider plot corresponds to a specific language model, with radial axes representing the
+AUROC score (ranging from 0 to 1) and angular axes representing the detection tools: RADAR, Entropy,
+LogRank, FastDetectGPT, DetectLLM, OpenAI Detector, andDivEye.
+Average Accuracy AUROC (%)
+0
+20
+40
+60
+80
+100Score / Accuracy
+74.25 78.15 82.00
+88.00
+Static Only
+Static + T emporal
+Figure 9: Ablation results on Testbed 4 of the MAGE benchmark showing the impact of temporal surprisal
+features. Adding temporal dynamics to static surprisal statistics improves both accuracy (from 74.25% to
+78.15%) and AUROC (from 0.82 to 0.88), demonstrating their complementary value for robust AI-generated
+text detection.
+B Motivation Behind Temporal Features
+While static surprisal statistics such as mean, variance, skewness, and kurtosis provide useful summaries
+of token-level unpredictability, they overlook the evolution of this unpredictability over time, a dimension
+critical to distinguishing human and AI-generated text. Human authors naturally embed stylistic variability
+through temporal fluctuations, such as abrupt topic shifts, tonal changes, and bursts of creativity, which
+manifest as distinctive temporal dynamics in surprisal sequences.
+Intuitively, these temporal features, as listed in Section 3, expose rhythmic and non-stationary patterns
+characteristic of human creativity and coherence, typically absent in the more uniform output of large
+language models.
+24
+Published in Transactions on Machine Learning Research (02/2026)
+Table 5: TPR@FPR=5% on Testbed 8 (Unseen Domains & Models).
+LogRank Entropy DetectLLM FastDetect Binoculars BiScopeDivEye
+TPR47.1 30.1 51.5 76.3 68.7 99.8 99.6
+Furthermore, through an ablation study on Testbed 4 of the MAGE benchmark (Figure 9), we empirically
+show that augmenting static surprisal features with temporal metrics leads to a measurable improvement
+in classification accuracy. This highlights the complementary value of temporal dynamics in enhancing the
+robustness of AI-generated text detection. Moreover, an analysis of feature importance (Appendix D.6)
+reveals that temporal features collectively contribute more than static features, consistently ranking among
+the most informative signals for distinguishing between human and AI-generated text.
+Overall, these findings motivate the inclusion of temporal surprisal features as integral components of our
+DivEyeframework.
+C Implementation ofDivEye
+We provide a detailed description of ourDivEyeimplementation in Algorithm 1. This includes all steps from
+surprisal computation to feature extraction and final classification. We use an XGBoost classifier for binary
+classification as a preliminary choice, without extensive comparison to other classifiers, leaving exploration
+of alternative models for future work. For completeness and reproducibility, we include all additional imple-
+mentation details, such as hyperparameter configurations, model architectures, and experimental testbeds,
+in Appendix I and Appendix H.
+Algorithm 1DivEye: Algorithm for Feature Extraction & Training
+Require:Text datasetD={(x i,ℓi)}N
+i=1, wherex i is a text input andℓi∈{0,1}indicates whether it is
+human-written (ℓi = 1) or machine-generated (ℓi = 0)
+Require:Pretrained auto-regressive language modelg ϕ (e.g., GPT-2)
+Require:XGBoost classifier with hyperparametersΘ
+Ensure:Trained binary classifierf θ
+1:Initialize an empty feature matrixF←[ ]
+2:foreach(x i,ℓi)∈Ddo
+3:Compute token-level log-likelihoods:y i←g ϕ(xi)
+4:Convert to token-level surprisals:s i←−y i
+5:Compute diversity featuresDivEye(x i)∈R 9 as described in Equation 6 usingsi
+6:Append(DivEye(x i),ℓi)toF
+7:end for
+8:Train binary classifierf θ on feature setFusing XGBoost with hyperparametersΘ
+9:returnf θ
+D Additional Results
+In this section, we present additional supporting experiments that demonstrate the generalizability, robust-
+ness, and complementary strengths ofDivEyethrough various ablation studies.
+D.1 Domain-Specific Performance ofDivEye
+Figure 7 presents the AUROC performance of seven detection methods evaluated across ten text domains
+(Testbed 3 of the MAGE benchmark).DivEyeconsistently achieves the highest AUROC scores in every
+domain - reaching up to0.99in WP,0.97in CMV, and0.95in SciXGen, outperforming other detectors by a
+notable margin. This highlightsDivEye’s adaptability and robustness in capturing domain-specific writing
+25
+Published in Transactions on Machine Learning Research (02/2026)
+patterns that other methods frequently miss. These results reinforce the advantage of leveraging surprisal
+features for more generalizable and context-sensitive detection of AI-generated text.
+D.2 Model-Specific Performance ofDivEye
+Figure 8 compares the AUROC performance of seven detection methods across text on generated by six
+different large language models (Testbed 5 of the MAGE benchmark).DivEyeachieves the highest AU-
+ROC scores across all six models, demonstrating strong robustness (0.95on GLB-130B,0.89on GPT-J,
+0.85on GPT-3.5-Turbo). This consistent performance highlightsDivEye’s effectiveness in capturing tempo-
+ral surprisal patterns that generalize well across different language model architectures, making it broadly
+applicable for reliable AI-generated text detection.
+D.3 Performance against other base models
+We evaluate the robustness of all detectors across different backbone models and report results in Table 6.
+These backbone models includeGPT-2(Radford et al., 2019),GPT-2-XL(Radford et al., 2019),Falcon-7B
+(Almazrouei et al., 2023),Llama-3.2-1B(et al., 2024a),Llama-3.1-8B(et al., 2024a) andMistral-7B-v0.3
+(Jiang et al., 2023). Competing methods such as Binoculars, BiScope, and DetectLLM show moderate
+variation with backbone choice, while FastDetectGPT and LogRank generally underperform. These results
+highlight thatDivEyemaintains strong and stable detection capability regardless of the underlying base
+model.
+Table 6: Performance of different detectors across backbone models.
+Backbone Model DivEye Binoculars BiScope LogRank DetectLLM FastDetectGPT
+GPT-2 0.88 0.71 0.86 0.68 0.75 0.69
+GPT-2-XL 0.89 0.73 0.86 0.68 0.76 0.70
+Falcon-7B 0.90 0.73 0.89 0.70 0.80 0.72
+Llama-3.2-1B 0.87 0.71 0.87 0.70 0.76 0.71
+Llama-3.1-8B 0.91 0.77 0.90 0.72 0.81 0.73
+Mistral-7B-v0.3 0.90 0.76 0.90 0.71 0.80 0.72
+D.4 Relative Importance ofDivEyein a Boosted Model
+Figure 10 illustrates the relative feature importance ofDivEyewhen integrated into boosted ensembles with
+five existing AI detectors: BiScope (Guo et al., 2024), OpenAI Detector (Solaiman et al., 2019), RADAR (Hu
+etal.,2023), DetectLLM(Suetal.,2023), andBinoculars(Hansetal.,2024).DivEyecontributessignificantly
+to the overall model, with particularly high importance when combined with RADAR (91.92%), OpenAI
+Detector (90.26%), and Binoculars (89.71%). Even in ensembles with more advanced detectors like BiScope,
+DivEyestill adds valuable signal (32.93%). These results affirm the standalone strength ofDivEyeand its
+utility in hybrid detection frameworks.
+D.5 Results with Different Proprietary LLMs
+Table 7 reports AUROC scores ofDivEyeon text generated by five proprietary LLMs, Claude-3 Opus,
+Claude-3 Sonnet, Gemini 1.0-pro, GPT-3.5 Turbo, and GPT-4 Turbo, using data provided in the BiScope
+paper (Guo et al., 2024) across five domains.DivEyeachieves consistently strong performance on the Normal
+dataset(e.g.,1.000onGPT-3.5TurboforEssay)andremainsrobustunderparaphrasedinputs, withAUROC
+scores generally above0.95. These results highlightDivEye’s ability to generalize across diverse generation
+models and domains, even under text transformations.
+26
+Published in Transactions on Machine Learning Research (02/2026)
+BiScope OpenAI Detector RADAR DetectLLM Binoculars
+0
+20
+40
+60
+80
+100DivEye Feature Importance
+32.9
+90.3 91.9
+81.3
+89.7
+Figure 10: Feature importance ofDivEyewhen integrated with various existing detectors. The plot shows
+how muchDivEyecontributes to the overall detection model when combined with BiScope, OpenAI Detector,
+RADAR, DetectLLM, and Binoculars. Higher values indicate stronger complementary impact fromDivEye’s
+diversity-based features.
+Table 7: AUROC scores achieved byDivEyeon five commercial LLMs across various domains. Results are
+shown for both the Normal and Paraphrased datasets.
+Domain Normal Dataset Paraphrased DatasetClaude-3 Opus Claude-3 Sonnet Gemini 1.0-pro GPT-3.5 Turbo GPT-4 TurboClaude-3 Opus Claude-3 Sonnet Gemini 1.0-pro GPT-3.5 Turbo GPT-4 Turbo
+Arxiv 0.9942 0.9770 0.9795 0.9658 0.9793 0.9778 0.9552 0.9616 0.9689 0.9558Code 0.7528 0.8557 0.7824 0.9577 0.9044 0.8456 0.9053 0.7521 0.9279 0.9302Creative 0.9888 0.9773 0.9835 0.9951 0.9608 0.9930 0.9900 0.9957 0.9917 0.9949Essay 0.9950 0.9988 0.9972 1.0000 0.9823 0.9975 0.9877 0.9814 0.9895 0.9559Yelp 0.8855 0.8813 0.9220 0.8384 0.8942 0.9543 0.9780 0.9683 0.8524 0.9571
+D.6 Feature Importance ofDivEye
+Figure 11 presents the relative importance of each of the nine diversity-based features incorporated inDivEye,
+which are derived from surprisal statistics as detailed in Equation equation 6. The feature importances,
+ranging from approximately 8.1% to 13.0%, indicate that all features contribute meaningfully to model
+decisions, with temporal features such as,∆µ, entropy of second derivativesH∆2, and autocorrelationρ ∆2
+exhibiting the highest influence. This balanced contribution underscores the complementary nature of these
+statistical descriptors in enhancingDivEye’s detection capability when combined with existing baseline
+detectors.
+2
+ 1
+ 2
+ 2
+ 22
+ H 2
+ 2
+0
+2
+4
+6
+8
+10
+12
+14
+16Feature Importance (%)
+11.98% 11.78%
+11.19% 10.93%
+12.97%
+8.68%
+8.15%
+12.24% 12.08%
+Figure 11: Relative feature importances for the nine diversity-based features used inDivEye. The features,
+as listed in Equation equation 6, represent distinct surprisal-based statistics. Higher percentages indicate
+greater influence in model decisions when combined with existing detectors.
+27
+Published in Transactions on Machine Learning Research (02/2026)
+D.6.1 Statistical Relevance ofDivEye
+To evaluate the individual contribution of each component in our diversity vectorD(Equation 6), we
+perform a leave-one-out ablation study. Each feature is removed individually from the 9-dimensional vector,
+the classifier is retrained, and the resulting performance is measured by the drop in AUC on Testbed 4 of the
+MAGE benchmark. To also assess statistical significance, we conduct a paired bootstrap test, resampling
+the test set to compute p-values under the null hypothesis that both models perform equally well. Table 8
+summarizes both the AUC drop and the p-value for each feature.
+Table 8: Leave-one-out feature ablation and statistical significance forDivEye. Each feature’s removal leads
+to a measurable drop in AUC and is statistically significant (p<0.05).
+Feature Category AUC Drop p-value
+H∆2 2nd-Order -0.0263 0.001
+γ1 Distribution -0.0239 0.004
+ρ∆2 2nd-Order -0.0152 0.012
+σ2
+s Distribution -0.0115 0.016
+∆σ2 1st-Order -0.0103 0.017
+γ2 Distribution -0.0091 0.019
+∆µ1st-Order -0.0056 0.027
+µs Distribution -0.0013 0.032
+σ∆2 2nd-Order -0.0008 0.034
+Several key insights emerge from this analysis:
+•Second-order features are the most impactful.Removing second-order entropyH ∆2 results
+in the largest decline in AUC, followed by the second-order autocorrelationρ∆2, highlighting the
+importance of modeling higher-order dependencies in token-level surprisal dynamics.
+•Distributional features are significant.Skewness (γ 1) and variance (σ2
+s) contribute meaning-
+fully, indicating that asymmetry and dispersion in surprisal values enhanceDivEye’s discriminative
+performance.
+•First-order features contribute consistently.The mean and variance of first-order differences
+(∆µ,∆σ 2) produce measurable gains, reflecting local variation in surprisal between adjacent tokens.
+Even features with small absolute AUC drops, such asµs andσ ∆2, are statistically significant (p <0.05).
+This demonstrates that each feature contributes non-redundant information, supporting our core hypothesis
+that diversity in token-level surprisal; capturing both distributional asymmetries and temporal patterns is
+essential for detecting machine-generated text.
+D.7 Performance against same model
+To investigate whetherDivEye’s detection ability relies on a distributional mismatch between the generator
+and the surprisal model, we conducted a controlled experiment using the same model for both purposes.
+Specifically, we computed diversity-based features and trained theDivEyeclassifier using three different
+LLMs:Falcon-7B,Llama-3.1-8B, andGPT-2-XL.
+We further evaluated generalization by performing an out-of-distribution test using generations from 500
+prompts drawn from the OASST (Köpf et al., 2023) and Self-Instruct (Wang et al., 2023) datasets. Table 9
+reports the resulting AI detection accuracies.
+Despite using the same model for both generation and surprisal estimation,DivEyemaintains high clas-
+sification accuracy across all settings. This demonstrates thatDivEye’s effectiveness stems from intrinsic
+statistical patterns in the generated text rather than artifacts arising from a model mismatch.
+28
+Published in Transactions on Machine Learning Research (02/2026)
+Table 9:DivEyeperformance when using the same model for both generation and surprisal computation.
+Model AI Accuracy (%)
+Falcon-7B 98.2
+Llama-3.1-8B 96.1
+GPT-2-XL 98.8
+D.8 Performance against Longformer
+Table 10: AUROC comparison ofDivEye,DivEye(w/ BiScope), and Longformer across MAGE test settings.
+Setting LongformerDivEye DivEye(w/ BiScope)
+Fixed-domain, Model-specific 0.990 0.994 1.000
+Arbitrary-domains, Model-specific 0.990 0.972 0.991
+Fixed-domain, Arbitrary-models 0.990 0.993 0.998
+Arbitrary-domains, Arbitrary-models 0.990 0.880 0.934
+OOD: Unseen Models 0.950 0.859 0.952
+OOD: Unseen Domains 0.930 0.975 0.989
+OOD: Unseen Domains & Models 0.940 0.924 0.986
+Paraphrasing Attacks 0.750 0.870 0.923
+Longformer, being a fine-tuned detector, was not included in Table 1 since its setup differs fundamentally.
+Nonetheless, for completeness, we provide a detailed AUROC-based comparison ofDivEyeagainst Long-
+former across the 8 challenging MAGE testbeds.
+As shown in Table 10,DivEyeconsistently matches or outperforms Longformer in most settings. Even
+under OOD scenarios and paraphrasing attacks,DivEyedemonstrates strong generalization, often exceed-
+ing Longformer’s performance.DivEye(w/ BiScope) further improves AUROC across nearly all testbeds,
+highlighting the benefits of incorporating diverse zero-shot features.
+D.9 Performance across edge-cases
+D.9.1 Performance across non-native-written texts
+To evaluate potential bias against non-native speakers, a known vulnerability in many perplexity-based
+detectors, we conducted a targeted evaluation using the COREFL dataset (Lozano et al., 2020). This
+dataset consists of 1426 essays written by native German and Spanish speakers, explicitly categorized by
+their English proficiency levels (ranging from A1 to C2).
+We trained (or configured)DivEye, Binoculars and FastDetectGPT using a balanced set comprising 75% of
+the COREFL human texts and an equivalent number of AI-generated samples drawn from MAGE Testbed
+4. We evaluate performance on the held-out 25% to measure detection accuracy across proficiency brackets.
+Table 11: Detection Accuracy on Non-Native English Writing.
+Framework Average Accuracy
+Binoculars 68.34%
+FastDetectGPT 71.71%
+DivEye(Ours) 82.07%
+As shown in Table 11,DivEyesignificantly outperforms existing baselines in identifying non-native human
+text, achieving a robust 82.1% average accuracy compared to 68.34% for Binoculars and 71.7% for FastDe-
+tectGPT.
+29
+Published in Transactions on Machine Learning Research (02/2026)
+A1 A2 B1 B2 C1 C2
+English Proficiency
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0Detection Accuracy
+DivEye
+Binoculars
+FastDetectGPT
+Figure 12: Granular depiction of various frameworks performance on various non-native texts.
+Crucially, as illustrated in Figure 12, our granular analysis reveals that performance of all frameworks
+correlates with linguistic complexity: A1 texts (the most beginner class) are the most difficult to detect,
+while accuracy steadily improves as proficiency rises. As forDivEye, this suggests that detection becomes
+easier as the text exhibits the richer rhythmic signatures of advanced writing.
+D.9.2 Performance across legal & professional documents
+A common criticism in AI text detectors is their potential fragility when applied to highly formal human
+writing, such as legal contracts or technical specifications. In these domains, human writers often strive for
+low entropy and rigid structure, traits typically associated with machine generation. To address this concern,
+we evaluatedDivEyeon the LEDGAR dataset (Tuggener et al., 2020), a corpus of legal provisions extracted
+from US SEC filings.
+Table 12: Detection Accuracy on LEDGAR dataset.
+Framework Accuracy
+Binoculars 91.67%
+FastDetectGPT 94.8%
+DivEye(Ours) 99.49%
+We adopted a robust evaluation protocol using a 75-25 train-test split to ensure generalization. As shown in
+Table 12, despite the constrained and repetitive nature of contract language,DivEyesuccessfully outperforms
+other frameworks on this task. These findings provide empirical evidence thatDivEye’s core hypothesis holds
+even in challenging edge cases.
+D.9.3 Visualizing texts under observation
+Analyzing the probability distributions across domains reveals a distinct hierarchy of detectability. We have
+already seen a distribution in Figure 3 forDivEye’s effectiveness on MAGE Testbed 4.
+Contrary to the concern that formal writing might resemble algorithmic generation, we find that in Figure 13
+professional legal text (LEDGAR) is the most easily distinguishable from AI, with its probability distribution
+shifted furthest towards the human extreme.
+This suggests that while professional writing is structured, it contains sharp, domain-specific peaks in in-
+formation density that are representative of human writing. Furthermore, Standard (MAGE Testbed 8)
+and Non-Native (COREFL) texts exhibit remarkably similar distributions, effectively overlapping in the
+high-probability region. We hope to investigate this further in our future works.
+30
+Published in Transactions on Machine Learning Research (02/2026)
+0.0 0.2 0.4 0.6 0.8 1.0
+Predicted Probability of Human Authorship
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0Density
+Distribution of DivEye Scores
+(Human-Written Texts)
+Domain
+Professional (LEDGAR)
+Non-Native (COREFL)
+Standard (MAGE)
+Figure 13: Predicted distributions of predicted class probabilities for diverse human written texts. We utilize
+the LEDGAR, COREFL and the MAGE Testbed 8 texts to plot this distribution.
+0 50 100 150 200 250
+Number of T okens
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0AUROC
+0.62
+0.84
+0.88
+Figure 14:DivEye’s performance on different text lengths (characterized by tokens) on MAGE Testbed 4.
+D.9.4 Text sensitivity analysis ofDivEye
+To determine the minimum linguistic context required for reliable detection, we evaluated the performance
+ofDivEyeacross varying text lengths. We truncated test samples to specific token counts ranging from
+N= 10toN= 256and measured the AUROC at each interval. As illustrated in Figure 14, performance
+follows a predictable scaling law relative to information availability.
+Detection is constrained on extremely short fragments, yielding an AUROC of0.62at 10 tokens; this is
+expected, however, thesystemdemonstratesrapidconvergence: performanceimprovessteadilyasthecontext
+window expands, reaching a robust AUROC of0.88by 256 tokens. This confirms that whileDivEyebenefits
+from longer contexts, it effectively captures the structural signature of human writing within standard
+paragraph lengths.
+We discuss short length texts as a limitation in Appendix J.
+E Additional Adversarial Attacks onDivEye
+We evaluateDivEyeunder a range of adversarial settings, including character-level perturbations, word-
+and phrase-level edits, paraphrasing, prompt obfuscations, and distribution shifts (temperature changes and
+degenerate sampling), to comprehensively assess its robustness.
+31
+Published in Transactions on Machine Learning Research (02/2026)
+Table 13: Performance ofDivEyeand open-source baselines on all listed adversarial attacks on the RAID
+benchmark.
+Settings Methods FPR@TPR=5%
+[RAID] Adversarial Attacks
+Whitespace Attack
+Desklib AI 94.9%
+e5-small-lora 93.9%
+DivEye(Ours) 79.8%
+Binoculars 68.7%
+RADAR 61.1%
+GLTR 43.1%
+Upper-Lower Attack
+Desklib AI 87.2%
+e5-small-lora 93.9%
+DivEye(Ours) 85.3%
+Binoculars 72.8%
+RADAR 65.1%
+GLTR 45.3%
+Synonym Attack
+Desklib AI 80.6%
+e5-small-lora 85.6%
+DivEye(Ours) 67.1%
+Binoculars 42.1%
+RADAR 62.7%
+GLTR 28.7%
+Paraphrase Attack
+Desklib AI 83.7%
+e5-small-lora 85.5%
+DivEye(Ours) 74.4%
+Binoculars N/A
+RADAR 62.4%
+GLTR 43.0%
+Perplexity Misspelling
+Desklib AI 92.9%
+e5-small-lora 92.5%
+DivEye(Ours) 90.6%
+Binoculars 77.2%
+RADAR 64.3%
+GLTR 57.0%
+Settings Methods FPR@TPR=5%
+Number Attack
+Desklib AI 93.0%
+e5-small-lora 93.5%
+DivEye(Ours) 92.1%
+Binoculars 76.4%
+RADAR 65.7%
+GLTR 57.3%
+Insert Paragraph
+Desklib AI 94.9%
+e5-small-lora 93.9%
+DivEye(Ours) 92.2%
+Binoculars 70.7%
+RADAR 68.2%
+GLTR 58.3%
+Homoglyph Attack
+Desklib AI 99.7%
+e5-small-lora 11.1%
+DivEye(Ours) 61.6%
+Binoculars 36.1%
+RADAR 44.8%
+GLTR 20.3%
+Article Deletion
+Desklib AI 90.5%
+e5-small-lora 92.0%
+DivEye(Ours) 88.0%
+Binoculars 73.3%
+RADAR 63.0%
+GLTR 48.9%
+Alt. Spelling Attack
+Desklib AI 94.3%
+e5-small-lora 93.4%
+DivEye(Ours) 92.01%
+Binoculars 77.6%
+RADAR 65.5%
+GLTR 58.2%
+Zero Width Space
+Desklib AI 87.5%
+e5-small-lora 93.9%
+DivEye(Ours) 92.0%
+Binoculars 98.4%
+RADAR 78.4%
+GLTR 97.9%
+E.1 Adversarial Attack Analysis ofDivEye
+WeevaluateDivEyeagainstawiderangeofadversarialattacksusingtheRAIDbenchmark, reportingaverage
+classification accuracies across all attack categories listed in Table 13.DivEyeachieves performance on par
+with the top-performing fine-tuned models reported by the benchmark. Notably, it consistently surpasses
+all zero-shot detectors by a significant margin across every attack type, demonstrating strong robustness
+against both diverse adversarial attacks.
+E.2 Detection against other diverse online paraphrasers
+To evaluate the robustness ofDivEyeagainst paraphrasing attacks intended to "humanize" AI-generated
+text, we curate a set of 21 arXiv abstracts generated by Claude-3.5-Sonnet and paraphrase each using three
+widely used commercial tools: ZeroGPT2, GPTinf3, and QuillBot4. This results in 63 paraphrased texts (21
+per tool), each aiming to evade AI detectors through stylistic and lexical variation. We provide this smaller
+dataset in the supplementary materials and in our anonymous repository.
+2https://www.zerogpt.com/
+3https://app.gptinf.com/
+4https://quillbot.com/paraphrasing-tool
+32
+Published in Transactions on Machine Learning Research (02/2026)
+Table 14: Detection performance ofDivEyeagainst paraphrased outputs generated by three commercial
+tools. Each model was tested on 21 samples per paraphraser.
+Paraphraser MAGE Testbed 4 Model Claude-3.5-Sonnet Model
+Claude-3.5-Sonnet (original) 20 / 21 21 / 21
+GPTinf 18 / 21 19 / 21
+ZeroGPT 20 / 21 17 / 21
+QuillBot 20 / 21 17 / 21
+We assess detection performance using two XGBoost classifiers trained exclusively onDivEyefeatures: one
+trained on MAGE’s Testbed 4 (Arbitrary Models & Arbitrary Domains), and another trained on 280 Claude-
+3.5-Sonnet generated arXiv abstracts (from BiScope (Guo et al., 2024)). The results, presented in Table
+14, highlightDivEye’s ability to maintain detection accuracy even in the presence of strong paraphrasing
+transformations.
+E.3 Dependence ofDivEyeon Generation Temperature
+We investigate the influence of generation temperature onDivEye’s detection performance to evaluate its
+robustness against variations in text predictability. Specifically, we conduct two experiments on the MAGE
+benchmark: intra-model temperature variation and cross-model variable-temperature detection.
+E.3.1 Intra-Model Temperature Variation
+UsingGPT-2as the zero-shot feature generator, we evaluateDivEyeacross a wide range of sampling tem-
+peratures (defaultT= 1.0). AUROC results for selected MAGE testbeds are presented in Table 15.
+Table 15:DivEyeAUROC across different temperatures for GPT-2 generated texts.
+Testbeds / TemperaturesT= 0.1T= 0.3T= 0.5T= 0.7T= 1.0T= 1.2T= 1.4T= 1.6
+Arbitrary Domains & Arbitrary Models0.8784 0.8760 0.8776 0.8886 0.8825 0.8767 0.8842 0.8698
+Unseen Models (GPT-3.5-Turbo, OOD)0.8473 0.8432 0.8595 0.8619 0.8617 0.8583 0.8488 0.8567
+Results indicate thatDivEye’s AUROC remains consistently high across all temperatures. Even at extreme
+sampling regimes, performance does not degrade, suggestingDivEyecaptures stable distributional signals
+across different entropy levels within the same generator.
+E.3.2 Cross-Model, Variable-Temperature Detection
+We further testDivEyeonLlama-3.1-8B, generating 50 samples per temperature (rangingT= 0.1to1.6)
+using OASST prompts. This simulates an adversarial generator varying sampling temperature to evade
+detection. Table 16 summarizes AI detection accuracy.
+Table 16:DivEyeAI detection accuracy forLlama-3.1-8Bacross different temperatures.
+Temperature AI Accuracy (%)
+T= 0.1 94.0
+T= 0.3 96.0
+T= 0.5 100.0
+T= 0.7 96.0
+T= 1.0 96.0
+T= 1.2 98.0
+T= 1.4 94.0
+T= 1.6 96.0
+33
+Published in Transactions on Machine Learning Research (02/2026)
+These experiments demonstrate thatDivEyemaintains strong performance across both intra-model and
+cross-model temperature variations, consistently achieving high AUROC and detection accuracy. Even at
+high temperatures (T= 1.6), where generations are more diverse,DivEyeremains robust, highlighting its
+resilience against temperature-based evasion strategies in real-world deployment.
+E.4 Robustness ofDivEyeto low-quality LMs and Prompt-based attacks
+We further evaluateDivEye’s robustness against two challenging conditions raised by the reviewer: degen-
+erate or less predictable generators, and prompt-level adversarial obfuscations.
+E.4.1 Performance on Less Predictable Generators
+WhileDivEye’s primary focus is detecting outputs from realistic, high-quality LLMs, we also assess its behav-
+ior on weaker or degenerate text sources to explore the method’s boundaries. The RAID benchmark already
+includes a variety of degenerate and obfuscation-style perturbations - such as synonym replacement, para-
+phrasing, number swaps, homoglyph substitutions, and zero-width spaces - whichDivEyehandles effectively
+(see Table 13 for results).
+To complement these benchmark results, we evaluate two baseline degenerate generators producing 500
+samples each:
+1.Random Token Generator: uniformly samples tokens fromGPT-2’s vocabulary to generate in-
+coherent sequences without semantic structure.
+2.Keyword-Stuffing Generator: repeats high-frequency topical keywords in ungrammatical, repet-
+itive patterns.
+UsingGPT-2and Testbed 4 of the MAGE benchmark,DivEyeachieves near-perfect AI detection: 99.99% on
+the random token set and 99.95% on the keyword-stuffed set. These results indicate thatDivEyeconfidently
+flags incoherent or low-quality text as non-human-written, suggesting that it is sensitive to general non-
+human-likeness rather than relying solely on repetition or frequency patterns.
+E.4.2 Robustness to Prompt-Based Adversarial Attacks
+Wealso assessDivEyeunder adversarial prompt-basedobfuscation, designedto disruptGPT-2’s predictability
+patterns. Specifically, we generated 250 texts fromGPT-4oandLlama-3.1-8Busing the following system
+prompt to encourage unusual and unpredictable writing styles:
+"You are a highly creative and unconventional writer. Your goal is to respond with orig-
+inal, imaginative, and surprising ideas that avoid clichés, common phrases, or predictable
+completions. Do not repeat yourself or follow standard templates. Instead, embrace novelty,
+abstract connections, and lateral thinking. Unusual metaphors, unexpected analogies, and
+rare vocabulary are encouraged."
+These generations were sampled from different models and prompts, constituting a fully out-of-distribution
+evaluation. Table 17 showsDivEye’s detection performance compared to Binoculars.
+Table 17: AI detection accuracy under prompt-based adversarial attacks.
+Model DivEyeAccuracy (%) Binoculars Accuracy (%)
+Llama-3.1-8B 90.8 72.4
+GPT-4o 92.4 78.0
+Despite these obfuscation strategies,DivEyemaintains high accuracy, substantially outperforming Binocu-
+lars. This demonstrates thatDivEye’s diversity-based signals remain robust under both low-quality genera-
+tors and adversarial prompting, highlighting its resilience in real-world deployment scenarios.
+34
+Published in Transactions on Machine Learning Research (02/2026)
+Overall, these experiments confirm thatDivEyeeffectively detects both degenerate text and highly unpre-
+dictable LLM outputs, providing strong evidence of its general robustness.
+E.5 Dependence ofDivEyeon Top-pGenerations
+To ensureDivEye’s robustness extends beyond temperature scaling, we evaluated its stability under varying
+nucleus sampling (top-p) thresholds. We conducted an evaluation usingLlama-3.1-8B, generating100text
+samples per threshold across a broad spectrum of valuesp∈{0.1,0.3,0.5,0.8,0.95}. The detection results
+are summarized in Table 18.
+Table 18: Detection Accuracy ofDivEyeonLlama-3.1-8Bacross varying Top-pthresholds.
+Top-pThreshold AI Accuracy
+p= 0.196%
+p= 0.394%
+p= 0.597%
+p= 0.893%
+p= 0.9595%
+Average 95%
+As evidenced by the results,DivEyedemonstrates remarkable consistency across the entire range ofpvalues,
+with an average accuracy of 95% and negligible variance. This stability can be attributed to the nature of
+the sampling mechanism: while top-p removes low-probability tokens and may affect the absolute mean
+perplexity, it fails to emulate the unpredictability characteristic of human writing.
+F Additional Discussions
+F.1 Robustness of Binoculars under OOD Conditions
+While Binoculars achieves high performance in its original paper, with AUROC values consistently above
+0.99 (Tables 3 and 4), its robustness under out-of-distribution (OOD) conditions is substantially weaker. For
+example, Tufts et al. (2025) (Table 13) shows a noticeable drop in AUROC when Binoculars is applied to
+datasets with distributions different from its training set, despite remaining competitive. Similarly, in the
+Voight-Kampff Generative AI Authorship Verification Challenge 2024 (Ayele et al., 2024), Binoculars un-
+derperformed significantly under highly OOD conditions, failing to replicate its originally reported accuracy
+and AUROC.
+These findings are consistent with our observed AvgAcc of 79%, reflecting Binoculars’ sensitivity to domain
+shift. Importantly, our evaluation deliberately includes diverse scenarios to rigorously test generalization
+beyond training conditions. This approach better reflects real-world deployment, where robustness to OOD
+tasks is critical. Our results do not contradict prior work; rather, they reinforce the understanding of
+Binoculars’ limitations under distribution shifts.
+F.2 Practical constraints on adversarial attacks againstDivEye
+The possibility of targeted attacks that attempt to evadeDivEyeby steering autoregressive models to
+generate tokens falling in low-probability regions underGPT-2’s distribution seems like a plausible idea to
+evade detection. While such attacks are theoretically conceivable, implementing them in practice is extremely
+challenging.
+Autoregressive models do not natively support fine-grained constraints that enforce divergence from another
+model’s token-level distribution without compromising fluency or coherence. Even for large models such
+asGPT-4o, generating text that is simultaneously plausible and systematically unpredictable to a specific
+detector likeDivEyeis highly nontrivial.
+35
+Published in Transactions on Machine Learning Research (02/2026)
+Mean(S) Var(S) Skew(S) Kurt(S)Mean(
+)
+Var(
+)
+Var(
+²)
+H(
+²)
+ ( ²)
+H(
+)
+Mean(
+²)
+Mean(
+³)
+Var(
+³)
+H(
+³)
+Mean(
+)
+Var(
+)
+H(
+)
+0.50
+0.55
+0.60
+0.65
+0.70
+0.75
+0.80
+0.85
+0.90AUROC Score
+0.884
+Detection Performance
+DivEye Cutoff (9 Features)
+Figure 15: Inclusion of additional features intoDivEyeresults in diminishing returns in AUROC. This
+experiment was run on MAGE Testbed 4.
+Furthermore,DivEyeis designed to generalize across diverse model backbones. Our best-performing variant,
+for example, usesLlama-3.1-8Bas the surprisal scorer, which has a larger vocabulary and greater expressive
+capability than GPT-2. This substantially increases the difficulty for an adversary to generate text that
+appears unpredictable to the detector while remaining coherent and human-like.
+Taken together, these considerations suggest that although targeted, detector-specific attacks are theoreti-
+cally possible, they are rare and practically hard to execute in realistic generation pipelines.
+F.3 Diminishing returns in expandingDivEye
+DivEyewas deliberately designed with a concise set of nine features to balance computational efficiency
+with interpretability. While the architecture is flexible and allows researchers to integrate additional signals,
+our empirical analysis suggests that the current feature set captures the vast majority of the discriminative
+signal. To validate this design choice, we conducted a scaling law experiment evaluating the marginal utility
+of incorporating higher-order surprisal dynamics.
+We extended the original feature vector by computing third-order (∆3) and fourth-order (∆4) derivatives
+of the surprisal sequence, extracting the mean, variance, and entropy for each. We also include missing
+features, including the mean of the second-order and entropy of the first-order of the surprisal sequence.
+This resulted in an expanded candidate set of 17 features. We then trained a series of XGBoost classifiers,
+iteratively adding one feature at a time in hierarchical order and measuring the resulting AUROC on MAGE
+Testbed 4.
+As illustrated in Figure 15, the detection performance improves sharply with the inclusion of the first-order
+and second-orderDivEyefeatures, effectively plateauing at the ninth feature (second-order autocorrelation).
+The addition of third- and fourth-order features yields negligible gains, confirming a law of diminishing
+returns.
+36
+Published in Transactions on Machine Learning Research (02/2026)
+0.800 0.825 0.850 0.875 0.900 0.925 0.950 0.975 1.000
+Detection Rate
+Instruct (DPO)
+Think (DPO)
+Think (Combined)
+Think (SFT)
+Instruct (Combined)
+RLHF (Zero)
+Instruct (SFT)
+Base (Pretrained)
+Model Variant
+Objective Family
+Instruct
+Think
+RLHF
+Base
+Figure 16: Impact of post-training objectives on detectability;DivEyeconsistently maintains or slightly
+enhances detectability compared to the unaligned Base model.
+F.4 Robustness across post-training objectives
+Modern LLMs undergo extensive post-training alignment to enhance instruction following and safety. A
+critical question is whether these alignment steps alter the statistical surprisal signature of the generated
+text, potentially degrading detection performance compared to the pre-trained base model.
+To investigate this, we conducted a controlled experiment using theOLMo-3-7B(Olmo et al., 2025) model
+family, which provides open access to checkpoints at every training stage. We curated a dataset (of 600 texts
+from diverse domains, different temperatures and top-p) comprising eight distinct model variants, including
+the unaligned Base model, Instruct-tuned versions, Reasoning models, and RLVR baselines. We adopted
+a unified training strategy: a singleDivEyedetector was trained on an aggregate containing 75% of the
+data from all variants (balanced with human text), and subsequently evaluated on the held-out 25% of each
+specific variant.
+As detailed in Figure 16,DivEyedemonstrates remarkable stability across all training objectives. While one
+might hypothesize that alignment (which constrains the output space) would significantly shift the surprisal
+distribution, our results show that the core detectability remains high.
+Contrary to the intuition that aligned models might better mimic human stylistic nuances, we observe that
+alignment consistently enhances detectability. The pre-trained Base model yields the lowest (yet still robust)
+accuracy of 97.33%, whereas models fine-tuned with DPO and Thinking capabilities achieve perfect detection
+rates.
+This trend suggests that post-training interventions constrain the model’s output distribution to a highly
+structured subspace. This constraint likely dampens the natural entropic variance present in the pre-training
+data, making it easier forDivEyeto distinguish post-trained models from genuine human writing.
+G Failure of other motivational methods: LookForward
+A natural hypothesis we considered was that LLMs, being autoregressive in nature, lack global sentence-level
+planning due to their left-to-right generation paradigm. Unlike humans who often write with a sense of the
+sentence’s future, autoregressive models generate one token at a time conditioned only on the preceding
+context. Based on this, we hypothesized that detection features relying on this "lack of foresight" could
+effectively identify machine-generated text.
+This suggests that the model never observesx>t when predictingxt, whereas human writing may implicitly
+reflect awareness of future tokens. Our idea was to define a LookForward discrepancy by comparing model
+likelihoods under forward-only conditioning vs. bidirectional context.
+However, our empirical evaluations demonstrate that this feature is ineffective, achieving˜ 0.50AUROC on
+diverse testbeds. As LLMs undergo extensive training and optimization, they appear to develop strong
+37
+Published in Transactions on Machine Learning Research (02/2026)
+internal planning capabilities, even in an autoregressive setting. Despite the absence of access to future
+tokens during generation, LLMs approximate global coherence and structure remarkably well. This aligns
+with recent literature suggesting that transformers internalize hierarchical and global sentence structure
+across layers, even when trained autoregressively.
+While this method is theoretically appealing, its failure in practice highlights the difficulty of quantifying
+planning behavior in black-box LLMs. We hope this limitation can be better understood in the future
+through more fine-grained interpretability analyses of autoregressive models, which may reveal how planning
+and coherence emerge despite the lack of explicit future context.
+H Testbed Details
+We evaluateDivEyeon a comprehensive testbed spanning three major AI-text detection benchmarks, MAGE
+(Li et al., 2024), HC3 (Guo et al., 2023) & RAID (Dugan et al., 2024), covering a diverse range of domains,
+language models, and adversarial attacks. These benchmarks allow us to assess the generalizability and
+robustness of our method across realistic deployment scenarios. This section provides a comprehensive
+overview of the testbeds used in our evaluation, including all domains, language models, and adversarial
+attacks featured in the MAGE and RAID benchmarks, along with relevant configuration details.
+Details about MAGE Benchmark.The MAGE benchmark (Li et al., 2024) comprises eight diverse
+testbeds designed for evaluating machine-generated text detection. Testbeds 1 through 4 include standard
+train, validation, and test splits, while Testbeds 5 through 8 serve as out-of-distribution (OOD) datasets,
+evaluated using models trained on Testbed 4. Notably, Testbed 4, Arbitrary Domains & Arbitrary Models,
+is the most comprehensive, enabling evaluation across the full range of domains and language models listed
+in the MAGE paper. Detailed information regarding dataset splits and sample counts is available in the
+original benchmark documentation.
+MAGE covers a wide array of domains, including CMV (Tan et al., 2016), Yelp (Zhang et al., 2015), XSum
+(Narayan et al., 2018), TLDR, ELI5 (Fan et al., 2019), WP (Fan et al., 2018), ROC (Mostafazadeh et al.,
+2016), HellaSwag (Zellers et al., 2019), SQuAD (Rajpurkar et al., 2016), and SciXGen (Chen et al., 2021a).
+The OOD domains include CNN/DailyMail (See et al., 2017), DialogSum (Chen et al., 2021b), PubMedQA
+(Jin et al., 2019), and IMDb (Maas et al., 2011).
+MAGE also incorporates text generated from over 27 different LLMs (Brown et al., 2020; Chung et al., 2022;
+et al., 2023; Sanh et al., 2022; Touvron et al., 2023a; Zeng et al., 2023; Zhang et al., 2022), enabling rigorous
+and varied evaluations. For further implementation specifics, readers are encouraged to consult the MAGE
+paper.
+Details about RAID Benchmark.The RAID benchmark (Dugan et al., 2024) comprises over 6.2
+million samples, offering extensive coverage across domains, language models, sample sizes, and adversarial
+attacks. It provides a clear separation into training, validation, and testing splits to support rigorous
+evaluation. The benchmark spans a wide range of domains, including scientific abstracts (Paul & Rakshit,
+2021), book summaries (Bamman & Smith, 2013), BBC News articles (Greene & Cunningham, 2006), poems
+(Arman, 2020), recipes (Bień et al., 2020), Reddit posts (Völske et al., 2017), movie reviews (Maas et al.,
+2011), Wikipedia entries (Aaditya Bhat, 2023), Python code, Czech news (Boháček et al., 2022), and German
+news articles (Schabus et al., 2017).
+RAIDemploystextgeneratedfrom11diverseLLMs(Radfordetal.,2019;MosaicML,2023;Jiangetal.,2023;
+Cohere, 2024; Ouyang et al., 2022; Touvron et al., 2023b; et al., 2024b), ensuring broad model representation.
+Additionally, it includes over 11 adversarial attack strategies (Liang et al., 2023b;a; Wolff & Wolff, 2022;
+Bhat & Parthasarathy, 2020; Krishna et al., 2023; Pu et al., 2023; Gagiano et al., 2021; Guerrero et al.,
+2022), designed to test the robustness of detectors under challenging settings. Comprehensive descriptions
+and detailed results of these attacks are provided in Appendix E.1, with all results reported as of April 2025.
+For further implementation specifics, readers are encouraged to consult the RAID paper.
+38
+Published in Transactions on Machine Learning Research (02/2026)
+Details about HC3 Benchmark.The HC3 benchmark (Guo et al., 2023) offers a large-scale, mul-
+tilingual dataset designed to evaluate the effectiveness of detectors in distinguishing human-written text
+from AI-generated responses. It encompasses both English and Chinese content, covering a wide variety
+of domains and question types. This bilingual setup facilitates cross-linguistic performance analysis and
+underscores the difficulties of achieving generalization across different languages and cultural contexts. In
+our experiments, we adopt an 80-20 train-test split. For comprehensive dataset numbers, we refer readers
+to the original HC3 paper.
+I Hyperparameter Settings
+Table 19 outlines the hyperparameter configurations used for our experiments. We utilize the XGBoost
+classifier with standard but tuned settings to handle class imbalance and optimize detection performance.
+For our proposed methodDivEye, we set the number of bins for entropy computation to 20 and truncate
+input sequences at a maximum length of 1024 tokens. All experiments were run on a single NVIDIA DGX
+A100 (40 GB), and reported results reflect the median of three runs.
+Table 19: Hyperparameters used for the XGBoost Classifier andDivEye.
+XGBoost Hyperparameter Value
+random_state42
+scale_pos_weight(len(Y train)− ∑Ytrain)/∑Ytrain
+max_depth12
+n_estimators200
+colsample_bytree0.8
+subsample0.7
+min_child_weight5
+gamma1.0
+DivEyeParameter Value
+Entropy bins20
+Tokenizer Max Length1024 + Truncation
+J Limitations, Broad Impacts, Reproducibility & Ethical Considerations
+Future Work & Limitations.WhileDivEyedemonstrates strong generalization across domains and
+models in zero-shot settings, several limitations suggest promising directions for future work. Our approach
+relies on features derived from LLM token-level behavior, which may vary across model sizes, architectures,
+and tokenization schemes. Although our current performance is robust, it is unclear whether we are ap-
+proaching an optimal limit for AI-text detection. Moreover, our diversity metrics are less effective on very
+short texts, where statistical patterns are inherently limited. We hope to address these challenges in fu-
+ture work by exploring more adaptive teacher selection strategies and improving robustness in diverse text
+lengths.
+Broad Impacts.This work introducesDivEye, a model-agnostic, and scalable framework for detecting
+AI-generated text that remains robust across models, domains, and decoding strategies. By leveraging purely
+intrinsic statistical features, without requiring fine-tuning or access to the internals of large language models,
+DivEyeis broadly applicable and easy to deploy in real-world settings. We envision this framework as a
+practical tool to support responsible AI usage, aiding in the detection of synthetic text across domains such as
+education, journalism, and online content moderation. However, we emphasize that detection results should
+be interpreted with care and recommend usingDivEyeas one component within a broader, multi-layered
+content verification pipeline.
+39
+Published in Transactions on Machine Learning Research (02/2026)
+We deliberately restrictDivEyeto nine features, each of which is theoretically motivated and captures
+a distinct aspect of surprisal diversity. While additional features could be engineered, our preliminary
+experiments indicated diminishing returns beyond this set. This preserves interpretability, efficiency, and
+robustness, while still providing strong empirical performance. We also discuss certain concerns about our
+results and the practicality of adversarial attacks in Appendix F.
+Furthermore, our finding that a lightweight model (GPT-2) can effectively serve as an observer for state-of-
+the-art generators has significant implications for the democratization and sustainability of AI forensics. By
+demonstrating that detection does not require computational parity with the generator,DivEyeestablishes
+a strong lower bound for efficiency. However, for production environments where maximizing detection
+sensitivity is paramount, we recommend leveraging more capable LMs as the feature extractor.
+Reproducibility.We release all code and evaluation scripts to ensure full reproducibility. Detailed train-
+ing, testing and hyperparameter configurations are included in Appendices H and C.
+Ethical Considerations.As with all AI-text detectors,DivEyeis not infallible and may produce incorrect
+classifications or false positives. We emphasize that detection outputs should be treated as probabilistic sig-
+nals rather than definitive evidence. When used in high-stakes settings, such as academic integrity or content
+moderation, additional human review and validation are essential. We encourage responsible deployment of
+DivEyeto support large-scale analysis, but caution against its use in critical decision-making.
+K Illustrative cases ofDivEyewith probabilities
+We provide a few representative examples for readers in Table 20, showcasing the probability scores assigned
+byDivEyeto different text sources.
+40
+Published in Transactions on Machine Learning Research (02/2026)
+Source Text ProbabilityAI (DivEye)
+GPT-4-Turbo For centuries, the pursuit of immortality was the ul-
+timate quest, a beacon drawing the brilliant and the
+mad alike. I, Dr. Elara Mendoza, fell somewhere
+in between, teetering on the precipice of genius and
+insanity. And after countless sleepless nights, fueled
+by an obsession that bordered on madness, I finally
+did it. I unlocked the secret to immortality. In my
+laboratory bathed in the cold, metallic gleam of ar-
+tificial light, the hum of machinery breathed life into
+my creation, a serum, translucent and iridescent, a
+potion promising eternity. As the final drop fell into
+the vial, a silence descended, thick with anticipation.
+But in this moment of triumph, a chill swept through
+the room, frosting over the warmth of victory...
+0.97035
+Claude-3-Opus Dressing for Success: Budgeting for Interview At-
+tire and Work Uniforms as a Medical Office Assis-
+tant - As a medical office assistant, presenting a
+professional image is crucial for success in both the
+job interview process and daily work life. Dressing
+appropriately demonstrates respect for the health-
+care setting, instills confidence in patients, and show-
+cases a commitment to the role. However, building
+a wardrobe suitable for the medical office can be a
+financial challenge, especially for those just starting
+in the field. By developing a strategic budget plan...
+0.96279
+Human-Written Loved this tour! I grabbed a groupon and the price
+was great. It was the perfect way to explore New
+Orleans for someone who’d never been there before
+and didn’t know a lot about the history of the city.
+Our tour guide had tons of interesting tidbits about
+the city, and I really enjoyed the experience. Highly
+recommended tour. I actually thought we were just
+going to tour through the cemetery, but she took us
+around the French Quarter for the first hour, and
+the cemetery for the second half of the tour. You’ll
+meet up in front of a grocery store (seems strange at
+first, but it’s not terribly hard to find, and it’ll give
+you a chance to get some water), and you’ll stop
+at a visitor center part way through the tour for a
+bathroom break if needed. This tour was one of my
+favorite parts of my trip!
+0.09172
+Table 20: Representative examples of texts from various sources with their predicted probability of being
+AI-generated according toDivEye.
+41

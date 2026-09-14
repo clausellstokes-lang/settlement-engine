@@ -1,0 +1,757 @@
+ 
+ GROGNARDIA: Search results for boxed text 
+ Home 
+ About Me 
+ Advanced Grognardia 
+ Grognardia Games Direct 
+ Open Game License (OGL) 
+ Urheim 
+Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+ Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+ Thursday, February 9, 2023 
+ Patient Zero 
+ With the publication of the Dungeon Masters Guide in August 1979, Gary Gygax's Advanced Dungeons & Dragons project was essentially complete (though we would nevertheless see the publication of not one but two more hardback AD&D volumes over the next couple of years). Consequently, 1980 was the start of a period in TSR's history when the company shifted its focus to supporting Dungeons & Dragons in both its Basic and Advanced formats. One of the most significant ways it did so was through the publication of numerous adventure modules. Indeed, by dint of the sheer number of them released, adventure modules would effectively become TSR's signature products. Among the modules published in 1980 was Harold Johnson and Jeff R. Leason's The Hidden Shrine of Tamoachan . Designated module C1 (for "Competition"), the module is highly regarded for both its exotic Mesoamerican-inspired flavor and the cleverness of its many tricks and traps. Johnson and Leason originally wrote the module for use at the Official Advanced Dungeons & Dragons tournament at Origins '79, hence its "competition" designation. For that reason, it includes an extensive scoring system for tournament use, as well as a strict real time limit of 2 hours to complete. In addition, the module includes the following in its "Notes for the Dungeon Master:" It will be noticed that encounter descriptions are divided into boxed and open sections. The boxed sections contain information which should be read to the players; the rest is information for the DM. In most cases, the same players' description is used no matter which direction the party enters from, but 2 cases require that special descriptions be read depending on the direction from which the party approaches the encounter area. The DM should be aware of this and be careful to read the proper players' description. The players' descriptions are provided because many of the encounters require specific actions on the part of the group. Hints of what may be done are given in this text and the DM should only provide vague information if questioned. Plauers will be to see the exact contents of a room unless noted. Unless I am mistaken – and please correct me if I am – this is the very first published appearance of the dreaded boxed text in any TSR module. Within the very specific context of a module written for tournament use, particularly one with a strict real time limit, the inclusion of boxed, descriptive text makes a great deal of sense. After all, it would be unfair to the players participating in the tournament if some referees were more loquacious than others in their descriptions, time being a valuable resource. Fairness would likewise demand that each group of players be given the exact same descriptions of the dungeon's rooms. Once again, I say this makes perfect sense within this very specific context . The trouble, I think, arises when TSR, in an effort to publish a large number of modules over a short period of time, turned ever more often to those originally created for tournaments. In this way, the style and presentation of tournament modules, including read-aloud boxed text, came to be seen not as unique features of tournament modules as such but simply as features of D&D modules in general. This is especially notable in modules published for the Basic and Expert versions of D&D , but, over time, it comes to be standard even in AD&D modules. The lasting impact of the D&D tournament scene cannot be overstated. 
+Posted by
+ James Maliszewski 
+at
+ 12:38 PM 
+ 19
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ ADnD ,
+ johnson ,
+ leason ,
+ modules ,
+ old school ,
+ tournaments ,
+ tsr 
+ Monday, April 28, 2008 
+ REVIEW: The Living Room 
+ Furniture which is animated to trip, confine, and smother (rugs and carpets) or move about and hug and kick (stools, chairs, divans) or blinds and throws down (tapestries and wall hangings). (Ours is known as the "Living Room".) That's a quote from OD&D Supplement I, Greyhawk , and describes a small portion of Castle Greyhawk's environs. Last year, Rob Kuntz , player of the redoubtable Lord Robilar and co-DM of Gary Gygax's campaign, released a 7-page description (plus map) of the Living Room through his Pied Piper Publishing company. So far as I know this is the first time the Living Room has ever been described in any detail and it's a particular treat to have it described by Kuntz, its originator. I'm a sucker for gaming history -- what a surprise! -- so it was a no-brainer to pick this product up. First things first: The Living Room (or The Original Living Room as it is called in the text, though not on its cover) is not a complete adventure module nor does it purport to be. It is, in Kuntz's words, "a set-piece." The intention is clearly that a referee can drop the Living Room into an existing dungeon or ongoing campaign of his own. In this sense, it's very much a "module," but it provides little to no context or explanation for why the Living Room is as it is. For old school referees, that's a feature, not a bug, since it offers plenty of leeway to customize or augment as he wishes. The Living Room is not a bound book, but rather 9 pieces of laser-quality paper -- 7 pages of text, a single-page map by Eric Bergeron, and a credits and Open Game License page -- plus a cardstock cover illustrated by Jim Holloway , showing a band of comical and scruffy adventurers being attacked by the inhabitants of the Living Room. It's a classic Holloway piece, reminiscent of his work on Paranoia back in the day and nicely sets the tone for the product. One of the things that gamers sometimes forget is that old school gaming was suffused with humor of a sort I can only call "dark slapstick" -- the Three Stooges meets the Marquis de Sade, if you will. The Living Room is definitely in that tradition. The map of the Living Room is a very small scale one, with one square equal to 2 feet rather than the more usual 10. The map shows the location of all the Room's magical inhabitants and, given its scale, could very easily be used as the basis for a miniatures battle map for those so inclined. On the whole, I'd say the map was functional but not inspired. To some extent, that's to be expected, since it details but a single room. Nonetheless, I'll admit to being a little disappointed with the map, though, as I say, the fault is not in the cartography, which does what it needs to do, but rather in my own unreasonable expectation that, somehow, the map should be "cooler" than it is. The meat of The Living Room covers 7 pages of small type text, beginning with a history of the Living Room, including the names of individuals who played in the original campaign where it appeared. It's a who's who of old school gaming -- Ernie Gygax, Skip Williams, Tom Wham, Jim Ward, Michael Mornard, Dave LaForce and many more -- and nicely puts the Living Room in context. The product is published under the Open Game License, which would imply that it's 3e-compatible but there are in fact fairly minimal stats throughout and what stats there are seem more compatible with OD&D and AD&D , given the AC values and the use of inches for describing movement rates. At any rate, the text claims The Living Room is suitable for character levels 4-6 and that seems roughly correct for the older editions of D&D for which it was original designed. 3e characters of that level would likely have a much easier time, given their greater comparative power. For a set-piece encounter, The Living Room contains very extensive notes for use in play. There is lots of information of how the various pieces of animated furniture and items attack, how much damage they take from various weapons and spells, and any special abilities and fun features they possess. I'll say that I was a bit overwhelmed by the level of detail here, but, at the same time, gratified, since the Living Room is intended to be a memorable encounter that's far from ordinary. I expect that it'd take the referee some time to familiarize himself with all the furnishings' abilities and stats, but that doing so would make the entire encounter run more smoothly. And since this is meant to be a "dark slapstick" encounter, smooth running is essential. This is not the sort of encounter that'd benefit from having to keep referring back to the text. The Living Room feels as if it should be run quickly, almost extemporaneously. The remainder of the text describes the locations within the Living Room -- what the characters see, which furnishings are there and what triggers their attacks, etc. -- as well as any treasure to be found therein. Despite being only 7 pages long, there's a lot of text here and very little of it is wasted, although the boxed text descriptions of the locations are so minimal that I'm not certain they serve much purpose. Again, that's a taste issue, so I won't complain overly much about it. I do wish that there were more commentary or insights from Kuntz himself on the Living Room and how it was used in the old Greyhawk campaign. Subsequent publications from Pied Piper Publishing (to be reviewed here later) do in fact include such things and I'm grateful for that, but I feel they'd have been useful in The Living Room too. As a piece of gaming history, I think The Living Room is terrific. As a gaming product, I'm torn. At $9.95, I think it's pricey, especially when you consider that it has no art except the cover, no binding, and is laid out like a Microsoft Word text document. Likewise, the OGL's Section 15 isn't filled out correctly and there is no indication that anything within the text is Open Content (or Product Identity for that matter), suggesting that Pied Piper didn't quite understand how the OGL works. Honestly, I don't even think the OGL was necessary here, but, since they did include it, I'd have liked to have seen it used properly. Again, it's a quibble. However, it reinforces my impression of The Living Room as "amateurish." I do not mean that as a criticism. In this case, the product is extremely charming and I am glad I own it. It oozes with old school feel and is a reminder of a style of play that has long since disappeared from contemporary gaming. I'm glad Kuntz and Pied Piper are making products like this. I do wish that either the price had been lower or the physical qualities of the product had been higher. It's an early product of Pied Piper, though, and I am accustomed to high prices for old school products given the small audience of interested buyers, so I'm willing to overlook it in this case. Final Score: 3 out of 5 Polearms
+Posted by
+ James Maliszewski 
+at
+ 10:55 AM 
+ 9
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ kuntz ,
+ old school ,
+ pied piper publishing ,
+ review 
+ Wednesday, July 14, 2021 
+ Retrospective: Temple of the Frog 
+ By most measures, Dave Arneson's "The Temple of the Frog" is the first published Dungeons & Dragons adventure. Originally appearing in the second supplement to OD&D, Blackmoor , it's a very strange scenario – or so I thought when I first read it. As presented in its initial form, the eponymous temple is home to a weird religious order whose members have "delved into the forbidden areas of study and determined that animals have more potential to populate the world than man, who was, after all, a biological abomination which would ultimately threaten the existence of all life." To that end, the Brothers of the Temple "began developing a strain of amphibian that would combine the ferocity and killer instincts of larger mammals with the ability to move through swamps with great swiftness to strike and avoid retaliation." Weird indeed! More than this, what caught my attention all those years ago was the mysterious individual who acted as the temple's high priest, Stephen the Rock. According to Blackmoor , Stephen not only "possessed some very unusual powers," he "is not from the world of Blackmoor at all, but rather he is an intelligent humanoid from another world/dimension." We later learn that he was the member of some kind of scientific expedition to study Blackmoor and became stranded there. Owing to his origins, he brought with him advanced technological devices – the "very unusual powers" mentioned above – and used them to cow the locals and establish himself as leader of the frog-breeding Brothers, accelerating their work through the application of otherworldly science. Now, at the time, I was already quite familiar with the idea of mixing fantasy and science fiction. I'd refereed Expedition to the Barrier Peaks several times and, while I had many misgivings about it, I largely enjoyed it. Barrier Peaks is basically a dungeon filled with alien monsters and high tech "magic items." It's quite self-contained and, at least as presented, there's only minimal suggestion that the presence of an extraterrestrial starship in a fantasy world will have any long-term consequences. That's not the case with "The Temple of the Frog," where it's very explicit that Stephen the Rock and the Brothers of the Frog are involving themselves in the politics of Blackmoor, hence the need to oppose them. That probably explains why I found the scenario in Blackmoor so compelling. So, when TSR announced that they were releasing a revised and expanded version of the original scenario in 1986 as part of its new series of Blackmoor modules for D&D , I was enthusiastic. I dutifully bought Temple of the Frog and devoured it, tearing through its 48 pages in a single sitting. Developed by David J. Ritchie from the original by Arneson, I found the module is solid, if somewhat overelaborated. Like so many D&D modules at the time, it's filled with lots of boxed text, most of which, to be fair, is simply descriptive , but it does pad out the text more than I think is necessary. Less forgivable, though, are the initial dozen or so pages that sets up the adventure scenario through NPC dialog and exposition (again, presented in boxed text). The main portion of Temple of the Frog consists of detailing the temple itself, as well as its denizens and treasures. Being familiar with the 1975 version, I saw lots of similarities; it's clear that Ritchie hewed as closely to the original as possible and I appreciated that. That said – and despite what the great cover by Denis Beauvais implies – the 1986 module somehow feels much less "science fiction-y" than does the original. All the elements are still there. In fact, there are a few new high tech elements, like a cyborg, for instance, but somehow that I can't quite articulate the end result feels much less wild and transgressive than the Blackmoor version. Whether that's an actual function of the module itself or simply that, by the time I read this, I was already familiar with the concept, is hard to say. Regardless, the end result is, in my opinion, lackluster and full of unrealized potential. Even so, I retain a great fondness for Temple of the Frog. Much like Expedition to the Barrier Peaks , it played an important role in helping me to become more comfortable with mixing science fiction and fantasy. Given how much of a stick in the mud I am about such things, that's not nothing. 
+Posted by
+ James Maliszewski 
+at
+ 9:37 AM 
+ 7
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ arneson ,
+ blackmoor ,
+ DnD ,
+ odd ,
+ retrospective ,
+ tsr 
+ Saturday, August 21, 2010 
+ REVIEW: Tower of the Stargazer 
+ Tower of the Stargazer is a 16-page adventure module "for beginning players, characters, and referees" written by James Raggi and included with Lamentations of the Flame Princess Weird Fantasy Role-Playin g , although it's available separately in both print and PDF formats. The module consists a small staple-bound booklet and a detachable cover on which maps have been printed. The interior black and white artwork, by Dean Clayton, is good but, to my mind, not as evocative as that of Laura Jalo, whose illustrations have appeared in most of Raggi's earlier products and whose moody style I so strongly associate with his weird fantasy offerings. The color cover is by old school favorite Peter Mullen and is a solid effort, though, again, somehow not quite as evocative as Jalo's covers, such as that of Death Frost Doom , which remains a favorite of mine. The module's layout is more "cluttered" than the clean two-column designs of earlier Raggi products. A heavy black border around each page, the use of grayed boxed text throughout, and, on several pages, watermarked images all contributed to a less enjoyable reading experience than I've come to expect from Lamentations of the Flame Princess releases. Those esthetic criticisms aside, Tower of the Stargazer is an excellent adventure module, ideally suited for beginners, including the beginning referee. The module takes the clichéd premise of an abandoned wizard's tower and turns it into something genuinely original, playing on one's expectations to present an adventuring locale that's challenging to both the beginners for whom it was written and the old hands who are, let's face it, very likely to be the largest segment of its purchasers. That alone is a remarkable achievement. Most introductory modules are judged on how much fun they might be to true neophytes, which is as it should be. On that scale, Tower of the Stargazer already stands proud, but how many introductory modules can legitimately claim to hold the interest of experienced players, as I believe this one likely will? There are many reasons why I think this adventure will be of interest to long-time players and referees but its chief one is a feature intended for the benefit of tyros. I noted above that the module makes heavy use of grayed boxed text. This is where Raggi speaks directly to the referee, explaining the reasoning behind his having designed and presented the adventure the way he did. In the process, he puts forth a philosophy of both old school refereeing and how to evoke the weird and mysterious effectively. Not all of the advice is gold and some of it I disagree with, in principle and from experience, but I'm not ashamed to admit that I also learned a few things from Raggi's boxed discussions. I find it hard to imagine that I'm the only player/referee of long years who will find insights in these pages. Even if one doesn't find Raggi's asides insightful, the fact remains that the module's eponymous locale is a fascinating place. Consisting of just 26 rooms spread over five above-ground and two subterranean levels, the Tower is nevertheless jam-packed with cleverness. Most of its rooms are devoid of monsters but few are devoid of interest. There are lots of imaginative -- and frustrating -- tricks and traps throughout, as well as terrific little details that, while not necessarily serving any immediate purpose, help to make the Tower feel "real." A few of these details also point toward follow-up adventures or expansions for the referee, although, as an introductory module, Tower of the Stargazer is mostly self-contained and thus easily used in any fantasy campaign setting. Introductory adventures are not difficult to write, but they are difficult to write well . Most such adventures simply ape either The Keep on the Borderlands or The Village of Hommlet and expect that, because they depict a different isolated rural locale being menaced by a different set of evil humanoids, they've somehow done something original. Fortunately, Tower of the Stargazer doesn't follow in their footsteps, preferring instead to present an intriguing locale in great detail, along with some advice and suggestions to the referee before turning him loose to do with that locale as he and his players please. To my mind, it's a great approach and one that's come to define James Raggi's adventures, of which this one is yet another excellent example. Presentation: 6 out of 10 Creativity: 9 out of 10 Utility: 8 out of 10 Buy This If: You're looking for a great low-level adventure. Don't Buy This If: You don't want/need low-level adventures.
+Posted by
+ James Maliszewski 
+at
+ 10:02 PM 
+ 8
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ lotfp ,
+ modules ,
+ old school ,
+ raggi ,
+ review 
+ Wednesday, June 23, 2021 
+ Retrospective: Rahasia 
+ My feelings about the work of Tracy and Laura Hickman are more complicated than is generally assumed. While I have very little regard for the Dragonlance series and feel that it set Dungeons & Dragons down a path that isn't to my liking , I'm actually quite fond of the roughly contemporaneous Ravenloft , even though it exhibits many of the same elements I dislike in the former. This makes me wonder if many of my criticisms stem from matters of degree rather than substance. I'm not yet committed to that position by any means, but it's nevertheless been on my mind lately. To test my thesis, I re-read the 1984 D&D module, Rahasia , a lesser known work of the Hickmans. Before diving into it, a brief bit of history. The earliest version of Rahasia , which I have never seen, was self-published by the Hickmans in 1979, along with Pharaoh (another Hickman effort for which I have largely positive feelings). In 1983, Rahasia was released by the RPGA, along with its follow-up, Black Opal Eye . Then, both modules were combined under a single cover as module B7, which is the only version of these adventures I've ever seen. I understand there are a few differences in content between the various editions but they are mostly minor. If I am mistaken in this understanding, please don't hesitate to offer corrections in the comments below. Make no mistake: Rahasia is just as heavy-handed as most Hickman modules, in that there's a very definite "story" in which it intends to involve the player characters. That story begins with the PCs traveling through a "beautiful elven forest," when they come upon the body of an elf, perhaps slain by bandits. A letter is found on the body and a lengthy one at that. The contents of the letter are reproduced at the back of the module, presumably either to be read aloud to the players or photocopied so they can read it for themselves. Written by an elven maiden named Rahasia, the letter details how a handsome stranger known simply as "the Rahib" had come to the village to seek her hand in marriage. Though everyone else in the village was won over by the Rahib, Rahasia's father was not. Not long thereafter, the elven students of a nearby temple disappeared, as did Rahasia's father, who traveled to the temple to determine what happened to them. Like them, he seems to have disappeared. Disappearing along with him was his wealth, which would have been used in part for Rahasia's dowry. Rahasia's betrothed, Hasan, then sets off for the temple too and, like everyone else, does not return. That's when the Rahib reveals – surprise! – that he is behind these shenanigans. He has placed the students under his spell and will not release them until Rahasia turns herself over to him. She will not do so and seeks help from outsiders who'd be willing to brave the temple, defeat the Rahib, and free those whom he has enchanted. If you can keep all of that straight, good for you! I left out many details (such as the kidnapping of two other elven maids) in the interests of brevity and because, frankly, they only complicate what is already an unnecessarily complex scenario for 1st to 3rd level characters – or so I say. For a great many gamers, I suspect that this type of set-up is greatly appealing, because it gives their characters an obvious hook that immediately embroils them in a fantasy adventure tale filled with heaping helpings of bombast and melodrama. The boxed text scattered throughout the module is exactly what you'd expect, starting with one of the very first. In the village, the delicate elven dwellings mirror the grace of their people. Yet the faces of the villagers reveal great sadness. You soon are lead to an elven maid, whose veiled face and beauty outshines all others present as the sun outshines the stars – she is Rahasia. One either cringes at such prose or one embraces it. I fall firmly in the first camp, finding it some of the worst boxed text to appear in any D&D module, but I recognize that not everyone feels that way. Indeed, I suspect that I'm in the minority when it comes to disliking this kind of heavy-handed mawkishness. Leaving that aside, what's more frustrating to me is that, like Ravenloft and Pharaoh before it, the dungeons of Rahasia are actually quite good. Both the Temple of Gray Mountain and Elyas's Tower have interesting layouts with multiple unique encounters and traps. I was particularly struck by how often the best solution to dealing with an encounter is not violence but instead cleverness. This is a commonplace in the Hickmans' work, demonstrating, I think, that they're actually more talented dungeon designers than they're sometimes given credit for, especially in old school circles. Consequently, Rahasia only adds to my growing uncertainty about how to assess the contributions of Tracy and Laura Hickman on the development of both Dungeons & Dragons in particular and the hobby of roleplaying more generally. I don't think it's an exaggeration to say that they stand solidly alongside Gary Gygax himself when it comes to the influence their style has had on subsequent generations of roleplayers. There is little question in my mind that their emphasis on presenting coherent stories, with clear beginnings, middles, and ends, through the vehicle of modules became widely imitated to the point that it's now the unquestioned standard for such things. Regardless of one's feelings on the matter, that's the very definition of a success. 
+Posted by
+ James Maliszewski 
+at
+ 12:00 PM 
+ 15
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ DnD ,
+ hickman ,
+ retrospective 
+ Thursday, May 14, 2009 
+ REVIEW: The Spire of Iron and Crystal 
+ The Spire of Iron and Crystal is the second adventure module by Matt Finch released by Mythmere Games for use with Swords & Wizardry . Unlike its predecessor, the introductory Tomb of the Iron God , this module is intended for use with characters of somewhat higher level (5-8). Also unlike its predecessor, which drew solely on traditional swords-and-sorcery ideas and imagery, The Spire of Iron and Crystal has a slightly more science fantasy feel to it, which contributes greatly to the delightfully peculiar ambience the book exudes, from its superb cover by Peter Mullen to the interior art by Jeff Preston and author Matt Finch himself. Indeed, I'd go so far as to say that the main attraction of this adventure, above and beyond its obvious use in challenging a party of 4-6 S&W players, is its eerie, not-quite-right atmosphere. There's an unnaturalness to the module's locale that comes through very powerfully in reading the text. I was reminded a bit of having read The Vault of the Drow , with its depiction of the "dark fairyland" of Erelhei-Cinlu, which I consider a masterpiece of High Gygaxian prose. The difference, though, is that, like a good weird tale from days gone by, The Spire of Iron and Crystal conveys that unnaturalness slowly, bit by bit, making it impossible to point to a single passage or section of the text that encapsulates the overall feeling I came away with after having read it. That makes it difficult to explain, even in a lengthy review, precisely why I liked the module so much. On the face of it, The Spire of Iron and Crystal is much like dozens of other modules over the last 30+ years: the characters head off to investigate a mysterious location reputed to hold dangers and fortune and from which no others have ever returned successfully. The location in question is the eponymous Spire of Iron and Crystal, "four massive, egg-shaped crystals are mounted into a twisting, ornate structure of rounded metal girders, one crystal at the top and the other three mounted lower down." As one might expect, the Spire's four levels are inhabited, but these inhabitants are (mostly) creatures unlike any the characters have ever encountered before. Consequently, the module includes nine new monsters, including the korog, a prehuman race of subterranean beings that built the Spire. The Spire of Iron and Crystal is a "pure" adventuring locale. Although there is a brief backstory about the korog and the original purpose of the Spire, very little of that comes into play unless the referee wishes it to do so. There are no essential encounters, boxed text describing your character's feelings about this eldritch place, or dramatic speeches by the Big Bad Evil Guy. What you get instead is an extremely well presented dungeon filled with weird magic and technology, clever traps, deadly monsters, and commensurate rewards. Yes, there's some great potential here for expansion. I can easily see using this module as the kick-off of an extended campaign involving the korog and their underground civilization, but, as written, the module makes no demand that the referee or the players be interested in such things. The Spire of Iron and Crystal is thus a fine modern example of the location-based approach to adventure design that gave birth to some of the best modules in D&D history. Retailing for $9.95, this is an excellent mid-level adventure module for referees looking for a slightly more outré locale into which to throw the characters in their campaign. I suspect it will prove a very difficult challenge for many players. Finch pulled out all the stops in writing this one, creating both a truly memorable environment and filling it with obstacles to test even experienced players. If I have a complaint about The Spire of Iron and Crystal , it's that it feels a little cramped. I kept expecting there to be more than its four levels (most of which have only 15-20 rooms), but that probably speaks more to how much I enjoyed it than to any deficiencies in the text itself. And, as I said, the module gives more than enough hooks on which to hang many more follow-up adventures -- high praise for any module, especially one as unique and evocative as this one. Presentation: 7 out of 10 Creativity: 9 out of 10 Utility: 7 out of 10 Buy This If: If you're looking for a well-done mid-level fantasy adventure that offers plenty of room for expansion Don't Buy This If: You don't like location-based adventures or dislike the presence of even mild science fantasy elements in your fantasy games
+Posted by
+ James Maliszewski 
+at
+ 1:13 PM 
+ 18
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ finch ,
+ modules ,
+ mythmere games ,
+ old school ,
+ review ,
+ science fantasy ,
+ snw 
+ Sunday, September 5, 2010 
+ REVIEW: Lamentations of the Flame Princess Weird Fantasy Role-Playing (Part V) 
+ Before presenting my concluding thoughts on the entirety of Lamentations of the Flame Princess Weird Fantasy Role-Playing , I'd like to discuss a few other components of the boxed set I've not already covered. First, there's the box itself. Boxed sets seem to be a flashpoint for discussion amongst old schoolers, with some feeling that nothing short of the return of the boxed RPG will herald mainstream success for the hobby. Others simply like boxed RPGs (I fall into this category). Consequently, several OSR publishers have produced their own boxed games recently. What I've noticed is that it's apparently quite difficult to get boxes that are "just right" for RPGs -- at least not without having them specially made for the purpose. I think Brave Halfling's Swords & Wizardry White Box comes closest to "getting it right," but even it feels a bit too flimsy for long-term use. WF, on the hand, comes in what appears to be a mailing box. Initially, I wasn't too keen on it, but, having carried around with me, I've come to like it a great deal. It's sturdy and holds everything inside without any difficulty, so a big thumbs up on the box. 
+In addition to the four books and two adventures, the box also includes a single sheet OGL statement, some advertisements (for Dragonsfoot and Expeditious Retreat Press ), and a satirical warning to the reader. There are also 10 pre-printed double-sided record sheets, 5 pages of graph/hex paper (one on each side), a tiny set of polyhedral dice, and a small pencil. I appreciate that all these things were included; they ensure that the game is "complete" in a single box, but one wonders whether, for example, the pencil was really necessary. Also included was a 12-page "Recommended Reading" booklet that provides capsule biographies of many important pulp fantasy authors, in addition to a list of other noteworthy influences on WF. I really like this booklet, though (of course) I do wonder why the entry for Robert E. Howard drew attention to his suicide or why the Lovecraft entry did the same for his racism. It's a small point, I admit, but one that rankles nonetheless. 
+As a complete product, WF is certainly one of the most impressive things to come out of the old school renaissance. In terms of its physical quality alone, it's remarkable -- an attractive boxed set that really does include everything you need to play. Its esthetics are distinctive, obviously drawing on the past but doing so without the need to ape it. Likewise, James Raggi has a strong authorial voice that comes through on nearly every page of WF. He has a vision of what he likes in fantasy roleplaying and he articulates it clearly and unapologetically. More importantly, he does a fine job of giving anyone who purchases this boxed set the tools and the knowledge needed to create their own adventures and campaigns according to his own preferences. 
+As you've seen in the first four parts of this review, I have quibbles and concerns with various parts of WF, but they're mostly "in the family," which is to say, they're the kinds of concerns one makes only because one is otherwise in broad agreement with everything else the author is saying. And I am; I think WF is a very good game, one that includes a number of genuine innovations -- its approach to "thieves," for example -- that old school gamers will find of interest. That said, I think WF suffers from a bit of a split personality, seeing as its actual audience is likely to be primarily gamers of long experience, while much of its text is written as if the reader is an utter neophyte. That's not necessarily problematic. Others have pointed out that many gamers of long experience aren't really familiar with old school play and WF serves as an excellent introduction to it -- a lengthier "Old School Primer," if you will. At $65, though, WF is also expensive and that may limit its appeal, especially to newcomers. I don't deny that the price is, in fact, a bargain, considering all one gets for it, but it's still a very large outlay of cash. 
+In the final analysis, Lamentations of the Flame Princess Weird Fantasy Role-Playing is a game I cannot help but like, warts and all. It's deliciously idiosyncratic and unabashed about its idiosyncrasies. It comes across very much as a hobbyist production in the best possible sense of the term. It's very "raw" and, for lack of a better word, "real." That is, the game is the product of a single person's love for fantasy roleplaying and that love comes through on every page, perhaps most especially in those pages I least like, where it's speaking to people for whom the wonder of discovering old school gaming is happening now, not thirty years ago. Time will tell just how successful James Raggi will be in introducing new people to old school gaming, but, even if he fails, no one can say he didn't make a pretty spectacular go of it. 
+ Overall Rating 
+ Presentation: 7 out of 10 
+ Creativity: 8 out of 10 
+ Utility: 7 out of 10 
+ Buy This If: You're either looking for a new take on old school gaming or are interested in seeing what all the fuss is about old school gaming (and don't mind a hefty price tag). 
+ Don't Buy This If: You don't need yet another take on old school fantasy roleplaying.
+Posted by
+ James Maliszewski 
+at
+ 12:01 AM 
+ 24
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ lotfp ,
+ old school ,
+ pulp fantasy ,
+ raggi ,
+ review 
+ Saturday, August 22, 2009 
+ REVIEW: No Dignity in Death: The Three Brides 
+ No Dignity in Death: The Three Brides is a 40-page (including detachable maps), digest-sized adventure module for low-level characters, written by James Raggi and available as either a print product or PDF from a variety of vendors in Europe and North America. Although explicitly written for use with pre-WotC Dungeons & Dragons in its many forms, the module is rules light enough that it could be easily adapted to almost any fantasy roleplaying game without much work. Indeed, there are scarcely any game mechanics in this product at all, aside from occasion references to character classes, levels, and the use of specific polyhedral dice for random number generation. As the module's sub-title suggestions, this product is in fact three semi-linked adventures sharing common elements, chief among them being the deaths of women either newly married or about to be so. Each adventure also takes place in and around the town of Pembrooktonshire, a sleepy mountain town where things are not quite what they seem. Raggi has clearly invested a lot of imagination in bringing the adventure locale to life and Pembrooktonshire is, in many ways, as much a character as any of the individual personalities that inhabit it. The place has a creepy, Twin Peaks -ish quality to it that I personally found compelling, but these qualities probably limit the module's utility for those who prefer their fantasy settings more staid and vanilla. Moreover, Pembrooktonshire doesn't really feel very medieval at all, having a more early modern feel to it -- not that that's a bad thing, but it's another way that it might prove less useful to many referees. Like its predecessor, Death Frost Doom , Three Brides is definitely an acquired taste, having far more in common with classic early 20th century weird tales than the heroic fantasies in vogue these days. Each of the adventures can be played separately, although there are a few temporal connections between them that dictate the order in which they must be used. The first adventure, "Small Town Murder," is a fairly straightforward murder mystery in which a local bride is killed on her wedding day, throwing Pembrooktonshire into an uproar -- just as the player characters arrive in the isolated town. This adventure impressed me with its compact yet thorough presentation. Each significant locale and NPC is given a write-up, along with the information the PCs might glean from them as they investigate the murder. Among the NPCs, the Knight of Science stands out as truly inspired -- a "rationalist" Templar/inquisitor whose self-righteousness would make a traditional paladin blush. "Small Town Murder" has a default resolution, but the adventure is written loosely enough to allow for others. Raggi even provides plenty of alternatives to help referees in making the adventure their own. The second scenario, "The Great Games," isn't so much an adventure as a situation. Every ten years in Pembrooktonshire, engaged couples participate in the Great Games, in which the would-be bridegrooms undertake dangerous feats of strength. The fiancée of the first one to die in the Games is then selected as the "Spirit Bride" and led away into the mountains in order to appease the spirits and ensure another decade of peace and prosperity for the town. Naturally, there's more going on here than the people of Pembrooktonshire realize and the PCs have the chance to delve into the mystery of the Great Games to learn the truth for themselves. This scenario is the most atmospheric of the three; it reminded me of The Wicker Man and in a good way. It's by far the most unnerving and atmospheric of the three scenarios, but it's also the one in which the PCs have the least freedom of action. "The Great Games" radiates helplessness, as the characters are more observers than participants, watching a dark pagan survival unfold before the eyes and being utterly unable to stop it from happening. That helplessness may be part of the point of the scenario, but I am sure not every adventuring group will appreciate it. The third scenario, "A Lonely House on a Lonely Hill," also is not an adventure in the traditional sense. It's more of a wilderness encounter in the mountains surrounding Pembrooktonshire, although there are several leads to the encounter that the referee can use to entice the PCs into exploring it. The shortest of the three scenarios, it's also the least atmospheric, drawing on situations and imagery that have far more in common with traditional D&D lore than on the weird tales vibe to which the rest of the module pays homage. To be fair, the D&D lore in question is founded in European folk lore, but, given the unique style of the rest of Three Brides , "A Lonely House" was a bit of a let-down for me. I can see what Raggi was attempting to do here -- provide a thematic capstone to the whole module without resorting to Ravenloft -style boxed text melodrama -- and I applaud him for that, but, in this case, I think his reach exceeded his grasp. Three Brides thus ends with a whimper rather than a bang. The module's unique style is, in part, created by the excellent artwork of Laura Jalo, who also illustrated Death Frost Doom . Her black and white illustrations are otherworldly and brooding, perfectly evoking the text and greatly enhancing my enjoyment of it. The text itself is similarly excellent, marred only by a handful of errors and odd word choices by Raggi. In general, there's a studied, almost clinical style to the writing that contributes greatly to its effectiveness when it describes the peculiar, passionate, and just plain weird events in and around Pembrooktonshire. Occasionally, though, Raggi will slip into colloquialisms that, while not always inappropriate, nevertheless don't jibe with the rest of the text. There are also some ponderous sentences that make it difficult to discern his meaning. Nevertheless, Raggi effects a strong, clear authorial voice throughout and it does much to elevate this module in my estimation. Whatever their blemishes, these scenarios are ones only James Raggi could write. Taken together, Three Brides didn't quite make the same impression on me that Death Frost Doom did. Perhaps that's because I was more or less expecting the unique take on fantasy that I got this time around, whereas Death Frost Doom was more of a genuine revelation. Even so, Three Brides is another fine work of the imagination, one informed by both the literary origins of our hobby and earlier adventure modules but bound by neither. It's a bold, original product that shows off the true potential of the old school renaissance to use the wisdom of the past as a springboard for new ventures that avoid the mistakes of the past. Consequently, the module's flaws at least have the virtue of being new ones. Here's to many more new mistakes from James Raggi in the future. Presentation: 9 out of 10 Creativity: 9 out of 10 Utility: 6 out of 10 Buy This If: You're looking for moody, evocative -- and weird -- low-level adventures. Don't Buy This If: You prefer your low-level adventures to concern killing humanoids living in caves.
+Posted by
+ James Maliszewski 
+at
+ 8:05 PM 
+ 7
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ modules ,
+ old school ,
+ raggi ,
+ review 
+ Wednesday, February 25, 2026 
+ Retrospective: The Ruins of Myth Drannor 
+ I know that, for many fans of old-school Dungeons & Dragons , Ed Greenwood ’s Forgotten Realms represents a decisive (and unwelcome) break from the game’s early days, both in content and especially in presentation. I don’t agree with that assessment, though this isn’t the place to rehearse that entire argument. What I will say is that revisiting TSR’s Forgotten Realms products from the late 1980s through the 1990s, I find a body of work that is not the betrayal its detractors claim, but is instead a mixed bag – occasionally frustrating, frequently ambitious, and at times genuinely impressive. A good case in point is The Ruins of Myth Drannor , a 1993 boxed set detailing the fabled elven “City of Song.” Myth Drannor had long loomed large in the background of the setting. For years prior to this set’s release, Greenwood referenced it repeatedly as a shining example of magical harmony undone by hubris and catastrophe. Consequently, when the boxed set finally appeared, I eagerly snapped it up. From the first time I read about it, I imagined Myth Drannor as one of the great fallen cities of the Realms. Its destruction defined much of the Forgotten Realms’ melancholy grandeur. The Realms, at least as I understood them, were not a setting on the ascent but a world in decline , a place of fading glories and lingering ruins, closer in spirit to pulp fantasy than to high heroic triumphalism. Myth Drannor is where this comes into sharp focus. Transforming such a mythic ruin into a playable location was no doubt a challenge. Myth Drannor is not a megadungeon in the traditional sense. Rather, it is a shattered metropolis sprawled across the forest of Cormanthyr. Its districts, academies, towers, temples, vaults, and magical zones warped by a magic effect that once protected the city. TSR had previously attempted little else on this scale. One might point to Dwellers of the Forbidden City as an early precursor, though the comparison only goes so far. In spirit, its closest analog may be Chaosium’s Big Rubble for RuneQuest , which is still, in my opinion, the gold standard for “ruin crawl” locales. In many respects, The Ruins of Myth Drannor succeeds admirably in its goals. Greenwood presents the city as an environment . It is effectively a mini-sandbox , a vast urban wilderness suitable for exploration, salvage, factional conflict, and long-term campaigns built around survival amid arcane devastation. The conceptual foundation is solid. The boxed set offers history, factions, current inhabitants, and numerous adventure hooks. This is all good stuff. Where it falters is in execution. The set does not consistently provide the Dungeon Master with the tools necessary to bring so large a space to life in play. The maps are expansive and the descriptions evocative, but there is surprisingly little in the way of random encounter tables, stocking guidelines, event generators, or even name lists to help a referee improvise within such a vast environment. Instead, we are given several more fully fleshed-out adventures and a handful of small, somewhat uninspired mini-dungeons that can be dropped in as needed. Those adventures are serviceable, but they do not quite match the promise implied by the scale of the city itself. This absence of these kinds of referee tools is all the more striking because the physical presentation of the boxed set is impressive. The poster maps are sweeping, delineating districts and geography. They convey scale beautifully. One can easily imagine months of play wandering the overgrown avenues and shattered towers. Yet, that same scale exposes a weakness. Much of the city is described in broad strokes. The maps suggest more than the text delivers or indeed could deliver. The background material is quintessentially Greenwoodian, dense with names, lineages, magic, and history. For readers invested in the Realms as a setting, this lore is rich and rewarding. For referees seeking immediately usable material, however, it can feel overwhelming. Even as someone who once delighted in “Realmslore,” I occasionally found myself wishing that some of the word count devoted to ancient history had instead gone toward practical game tools. One element the boxed set gets absolutely right is its intended level range. The Ruins of Myth Drannor is not for novice characters. The ruins teem with formidable threats, like elven and mind flayer liches, demons, devils, magical constructs, and strange, magic-eating abominations. These are adversaries suited to mid and high-level characters. For referees who enjoy high-level play – and who know how difficult it can be to challenge powerful characters – Myth Drannor fills a genuine need. It offers a compelling and dangerous playground for experienced adventurers. In the end, I think The Ruins of Myth Drannor exemplifies much of TSR’s output during this period. It is ambitious, atmospheric, and lavishly presented. It's also frustrating . It gestures toward an open-ended and exploratory style of play that strongly matches old school sensibilities, but it stops short of fully embracing the procedural support such play demands. Even so, I still very much like this boxed set. When it was released, I used it and mined it for material to use in my campaign. Its flaws required work on my part as referee, of course, but the raw material was there, waiting to be shaped. Perhaps that is the most old-school aspect of it after all: not a perfectly engineered product, but a rich, uneven trove of ideas demanding engagement. Myth Drannor, both as a fictional city and as a boxed set, stands as a monument to a fallen age – within the Realms and within TSR itself. Imperfect, excessive, occasionally exasperating, yet grand in conception, it reminds us that decline and greatness are not mutually exclusive. Sometimes they are, in fact, the same thing viewed from different angles. 
+Posted by
+ James Maliszewski 
+at
+ 12:00 AM 
+ 12
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ 2e ,
+ ADnD ,
+ forgotten realms ,
+ greenwood ,
+ retrospective 
+ Thursday, May 21, 2009 
+ Boxed Sets 
+ In the mail today I received my long-awaited three-volume collector's edition of Jason Vey's awesome Chainmail -inspired old school game, Spellcraft & Swordplay . As you can see from the photograph to the right, the collector's edition came as a boxed set that mimics the appearance of the OD&D white box, although it includes a couple of extras, such as dice and pre-printed character sheets, that were never included with its illustrious predecessor. As I've said innumerable times on this blog, I'm actually rather negative about aping the look and feel of stuff from the 1970s. My feeling remains that, as nostalgic as I am about the old stuff I grew up with, I think it's a mistake to use those products of yore as esthetic models for contemporary old school products. I'm not talking about the art so much as the graphic design and layout, which I generally think has been improved with the passing of the years. Ultimately, I think it'll prove a costly mistake for the old school movement if it ties itself too closely to a narrow set of presentation choices that ossified around 1981. So I was a bit perplexed as to why the S&S collector's edition didn't set off the same alarm bells in my head that other old school products do. Part of it is that I got a kick out of finally acquiring a brand new White Box, one I didn't get second-hand. It was almost as if my nearly-40 year-old self was magically transported back to 1974 and I got to be one of the early adopters of this crazy new game from the Midwest. I can't really call it nostalgia, since I was five years old when OD&D was released, but, whatever one terms it, I felt an emotional rush of opening the crisp new box and pulling out its three little brown books and reading them. I should add that, having had the chance to look over this edition (whose text is identical to the revised edition ), nearly all the quibbles I had about the original release, which I reviewed last Fall , were swept away. If I weren't already playing Swords & Wizardry , I might well consider adopting S&S as my game of choice instead. Even so, there's a lot here I may adopt anyway, since one of the joys of old school gaming is the easy compatibility of all these variants. The other part -- the bigger part, I think -- of why I so fell in love with this package is that it came in nice, compact, little box. Everything I need to play the game is right in there and, while there are some expansions to S&S available, I don't need them. More to the point, the game contained within the box is straightforward and to the point, just how I prefer my games to be. Boxed sets have more or less disappeared from the RPG scene, with a few notable exceptions, and with that disappearance so too has succinctness. A box sets a physical limit on just how much verbiage a designer can churn out for a game and I think the loss of boxed sets has had a generally negative impact on game design, creating an environment in which completeness is largely a myth or, at best, a temporary state of affairs until the next hardcover volume is released in a month. You know why AD&D was released as a series of hardcover books? To accommodate the desires of Random House, who wanted to distribute Dungeons & Dragons in the US and Canada, but which balked at trying to sell tiny boxed games to retailers. Thus was born a format that made it easier to sit on a retailer's shelf and the door was opened, however slightly, to where we are today. I miss those boxed sets of old. I'd love to see them come back, but I know why they won't, both in practical and economic terms. I think it's a pity, as the joy I experienced this morning showed. Plus, I think a lot of good would come of putting RPGs back in boxes; it might help to remind people that these are games . Crazy, I know.
+Posted by
+ James Maliszewski 
+at
+ 3:54 PM 
+ 25
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ art ,
+ musings ,
+ nostalgia ,
+ old school ,
+ SnS 
+ Tuesday, August 11, 2020 
+ REVIEW: Mörk Borg 
+ What did I just read? That was my immediate thought after attempting – and failing – to read Free League ’s apocalyptic fantasy roleplaying game, Mörk Borg . As you can probably gather from its title, Mörk Borg (meaning “Dark Fort”) originates in Scandinavia, specifically Sweden, and is the brainchild of writer Pelle Nilsson and graphic designer and artist Johan Nohr. Together, they have produced, in their own words, “A doom metal album of a game. A spiked flail to the face. Rules light, heavy on everything else.” I bought Mörk Borg solely because of its physical characteristics. A local friend of mine raved about it months ago and then, while perusing Free League’s website recently, I caught a glimpse of it in all its lurid glory. I was so intrigued by its bright yellow cover and black, white, and red artwork that I ordered a copy and anxiously awaited its arrival. I was not disappointed when it appeared at last: the 96-page A5 book is sturdy and well-made, like so many European RPG books these days. Most of the paper in the book has a satin finish, but its last section, presenting an introductory adventure, has a rough, natural feel to it. The graphic design is remarkable. Scarcely a single page looks like any other, both in terms of layout or the headers, fonts, and other elements used. This gives the whole book a jumbled, chaotic feel to it, which no doubt contributed to my initial inability to make heads or tails of it. Nohr’s illustrations, whose execution runs the gamut from primitive to florid, are accentuated by a riot of bold colors – red, yellow, and pink – that contrast with the black and white pages, with occasional silver highlights, that make up the bulk of the book. The overall effect is disorienting and I expect that was intentional. Unlike most RPG rulebooks, particularly those “in the OSR genre” (as the game describes itself), Mörk Borg can’t be easily digested in a single reading. That was my mistake. Mörk Borg is laconic, even elliptical, in its prose. Much is left to the reader to infer from its short, suggestive paragraphs. This is particularly true in the early sections of the book, which introduce the game’s setting. Brief sketches are given of the major locations of the world, such as Galgenbeck, “the greatest city that ever was,” the vast cemetery of Graven-Tosk, Kergüs, ruled by Blood-Countess Anthelia, and the Valley of the Unfortunate Undead, among others. There’s a map of sorts included, but there are few details and no scale. Instead, it’s largely impressionistic, depicting relations between the named locales rather than showing how many miles Wästland is from the city-state of Grift. This should come as no surprise, as Patrick Stuart is credited with both “English writing and creative consultation.” Stuart is well known for his gnomic writing, most famously in Deep Carbon Observatory and Veins of the Earth . I must confess that the appeal of Deep Carbon Observatory eludes me, which likely speaks to my own mental dullness, but here the prose strikes the just right balance between cryptic and opaque. Rather than feeling thwarted, I felt transported and I have little doubt that Stuart played a significant role in shaping Pelle Nilsson’s words to achieve this effect. The prophecies of the recently discovered Nameless Scriptures accurately predict the coming death of this world. As events unravel, “reality decays, truth becomes dream and dream, truth. Cracks grow in the once-stable structures of the past, allowing things misshapen and vile to worm through, emerging into day’s wan light.” This is the backdrop against which Mörk Borg is set – a dark, depressing, and cruel place burdened with miseries aplenty (there are even random tables for determining which misery befalls the world each dawn, in accordance with the texts of the Nameless Scriptures ). In this respect, it’s kin to games like the venerable Warhammer Fantasy Roleplay or the more recent Shadow of the Demon Lord in being more a “pre-apocalyptic” fantasy, albeit steeped in an extra layer of Nordic gloom. The rules of Mörk Borg are where OSR influences are the most apparent. Character generation is completely random; everything from ability scores to equipment is determined by dice rolls. There are four abilities – Agility, Presence, Strength, and Toughness – whose scores range from –3 to +3. Character action (or tests) are made by rolling against a difficulty rating (DR) on a d20 and adding the appropriate ability score. The book provides numerous options for character generation, most of which are not additional or expanded rules as such but rather flavorful random tables. A notable exception are six optional character classes, each of which grants one of several random abilities and a bit of background. Even then, these abilities are more inspirational than mechanically significant. I would say that Mörk Borg is in the vicinity of Moldvay/Cook D&D in terms of its overall rules complexity, with slightly more options. Combat is handled similarly to other tests, though it is worth mentioning that players roll for both their characters’ attacks and their defense against enemies’ attacks. Armor is ablative and there are critical hits and fumbles. Hit point totals are low and, while healing through rest is available, magical curatives are uncommon. Indeed, magic of any kind (called “powers” in the game) are both unusual and comparatively weak, particularly when measured against RPGs like D&D or RuneQuest . Consequently, lethality is high, a fact the text brings up repeatedly, most memorably in the character generation section, whose fifth step reads: “Name your character if you wish. It will not save you.” Flavor and randomness are the hallmarks of Mörk Borg . The book is littered with random tables (including the front endpapers) that either aid the GM (e.g. corpse plundering or the traits of followers) or convey the feel of the setting (e.g. weather or NPC names). Table results are generally allusive and free of game mechanics, in keeping with the tenor of the game. Intriguing hints and redolent intimation are Nilsson’s idiom. In this way, he offers the GM and players free rein in deciding what it all means in their own campaigns. Readers used to more traditional RPG rulebooks might therefore find Mörk Borg frustrating at first due to its seeming disinterest in straightforward and unambiguous prose, whether in describing its setting or presenting its rules. That’s certainly how I felt initially, but it’s also why I kept picking the book up and trying again: there’s more to this game than its terse text would suggest. Mörk Borg includes twelve creatures, such as berserks, blood-drenched skeletons, undead dolls, and wyverns. Like everything else in the game, their game statistics are simple and their descriptions pregnant with inspiration. For example, each entry includes the creature’s value in silver pieces if sold, whether alive, dead, or in pieces. An adventure, entitled “Rotblack Sludge, or The Shadow King’s Lost Heir,” rounds out the book. Described as a dungeon crawl, the adventure is nicely presented, employing a series of bullet points, bold and underlined words, and boxed text to draw the GM’s attention to important details and thereby make it easier to use in play. The adventure also provides additional examples of creatures, as if to reassure the GM about the ease with which new opponents can be created. If I have any criticism of the book, it’s that, for all its mechanical simplicity, Mörk Borg is probably not a good choice for a newcomer to the hobby. The text assumes, I think, that you’re already familiar with RPGs generally and with old school Dungeons & Dragons and its derivatives in particular. Given the popular resurgence of D&D in both its contemporary and “classic” varieties, I don’t think this a damning criticism. I’m on record as doubting the efficacy of “what is a roleplaying game?” sections in RPGs anyway and believe that the best way to learn to play is to be inducted into the hobby by an existing player . As a game, Mörk Borg is no more difficult to learn than most other old school RPGs; as a rulebook, however, it’s neither an ideal introduction nor a handy reference. I struggled when writing this review, in large part because so much of what defines Mörk Borg is conveyed via art, layout, and graphical elements whose effects are hard to translate into words. Reading – and understanding – Mörk Borg is almost as much a sensory experience as it is a textual one. I’m not certain it’s possible to grasp what the game is and what it’s about without actually holding the book in your hands and reading it. Even then, I personally found it hard going; it took multiple attempts before I appreciated Mörk Borg and its unique take on fantasy roleplaying. I might have had an easier time if I had been an aficionado of metal bands. As noted earlier in this review, Mörk Borg is self-avowedly a “doom metal album of a game” and includes a list of “music that helped,” which serves as the its Appendix N . I’ve written in the past about the role played by metal and metal fans in shaping the modern conception of fantasy , but, as I said then, my direct familiarity is limited. This lacuna in my cultural education no doubt contributed to my initial confusion with Mörk Borg . Viewed through the lens of metal music and its accompanying imagery, Mörk Borg makes so much more sense. Approach it with that in mind and you’ll likely have an easier time than I did in appreciating its unique vision. Mörk Borg is not a game I would have expected to like as much as I do. So much about it, from its garish colors and “artpunk” esthetics to its gloomy, edgy tone would seem to run counter to my own personal preferences. Yet, somehow, Mörk Borg not only works on its own terms but also managed to capture my imagination. I’ve re-read it several times now, gaining new impressions each time I’ve done so, aided in part by some of the wonderful (and attractively presented) free support material available on the game’s website . This is a fantasy roleplaying game that has lodged itself in my imagination, which is a remarkable thing, after having read so many others over the course of my life. If anything I have written here intrigues you, I recommend you take a chance on Mörk Borg . Even if you never play it, the game can serve as a source of inspiration and a reminder that the old school scene is still a source of boundless creativity. 
+Posted by
+ James Maliszewski 
+at
+ 7:17 PM 
+ 8
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ free league ,
+ mörk borg ,
+ music ,
+ old school ,
+ review 
+ Sunday, December 28, 2008 
+ REVIEW: Castle Zagyg: The Upper Works (Part II of III) 
+As I noted in Part I , Castle Zagyg: The Upper Works consists of six staple-bound booklets and three glossy maps. I'd like to comment first on the physical qualities of these items before diving into a more detailed discussion of their contents. I think it's fair to say that TUW is by far the best looking and presented product Troll Lord Games has ever made. It's very clear to me that they quite correctly saw this boxed set as a prestige product and made every effort to avoid the past mistakes of earlier TLG offerings, many of which are legendary in their production missteps. That's not to say that TUW is entirely free of the gaffes I've come to expect from TLG -- there are typos, omissions, and other editorial infelicities to be found throughout, but none that I came across struck me as anything more than the kinds of errors one might reasonably expect from a product of this size and scope. Cory M. Coserta is listed as the editor for TUW and he deserves a debt of thanks for his work on it. The five booklets containing the descriptions of the Upper Works all use the same workmanlike two-column layout that TLG seems to use for all its products. It's not pretty but it's quite serviceable, particularly given the density of the text itself, which uses a very small typeface. The text is broken up by black and white art drawn by TLG stalwart Peter Bradley and Jason Walton . Of the two, I found that Walton's work was by far more to my liking. There's a sameness to Bradley's pieces that reminds me a bit of Elmore's later work, whereas Walton's pieces have a "rougher" and slightly cartoonish look that somehow struck me as more appropriate to the subject matter. Ironically, Bradley's color work for the covers of the booklets were much more in a vein I like. Art, of course, is highly subjective, so I certainly won't hold my own opinions against TUW. On the other hand, I will hold cartographic errors against TUW. Aside from lots of minor but inconvenient issues, such as inconsistent map symbols, there are a number of missing or misnumbered locations. Likewise, there are places where the maps contradict the text or where the maps were drawn in a way that I found difficult to follow. In a location-based product of this size, I would have hoped that greater care would have been taken to ensure that the maps were made as exactingly as possible and that their presentation would aid the referee in their use. The sense I get, though, is that this project was just a little too big for TLG's resources and, while they put forward a solid effort, it still wasn't quite as professional as TUW demanded. Two more brief points before proceeding: TUW includes neither an overview of the entire Castle nor an index. In themselves, neither omission is ruinous, but their lack contributed to the "drip, drip" in the back of my brain, slowly wearing down my enthusiasm for this product. An index would certainly have made using TUW much easier and an overview of the entire Castle would have given some much needed context to the material we were given in the boxed set. Combined with the unnecessary contrivance of the "Curse of Fog & Frogs," this made me wonder exactly how much of Castle Zagyg had been completed at the time TUW was published. 1. Mouths of Madness: This is the first of the six booklets included with TUW. 44 pages in length, it details the wilderness surrounding Castle Zagyg, including the eponymous Mouths of Madness, a collection caves in which dwell several different types of humanoids and other monsters. If that sounds remarkably like the set-up for Keep on the Borderlands , I'm sure that's no accident. Despite the nostalgia this elicited, I found Book 1 to be one of the weakest bits of TUW, consisting mostly of repetitive humanoid encounters. There are a number of memorable bits -- the ogre's cottage, the gateway to Barsoom -- and several references to fabled locales (such as the Black Reservoir), but these were few and far between. I suppose it didn't help that TLG had already sold me this booklet in the previously-released Eastmark Gazetteer , but I can't say I found much here that excited my imagination or inspired me. 2. Ruins of the Castle Precincts: This 48-page booklet was much more to my liking, both because it deals directly with the Castle's grounds and because the encounters within it were varied and generally interesting. There is a goodly supply of tricks, traps, and diversions amongst its monster encounters, as well as snippets of Greyhawk lore (with the serial numbers filed off, of course). It's here that you catch glimpses of the whimsy and mercilessness that are Gygaxian trademarks. There's also a fitting -- if heavy-handed -- tribute to Gary himself in the form of a goblin cobbler that seems all the more poignant in the wake of his death. 3. East Wall Towers: At 20 pages, this is the shortest of the booklets, but it hits well above its weight category in terms of allusions to Greyhawk lore. Here we encounter the brothers of the Crimson Hand, as well as a shrine to a "celestial deity" that includes a number of nice twists and turns. 4. Castle Fortress: This 44-page booklet is another excellent one, detailing the ruins of Zagyg's old surface fortress. This area of the Castle contains a goodly mix of encounters, some of them quite memorable and challenging. According to the introduction, which includes quotes from Lake Geneva campaign regular (and Gamma World designer) Jim Ward, these ruins received very little exploration in the original campaign, as the subterranean levels had "more and bigger loot," to quote The Underworld & Wilderness Adventures . Consequently, the material here is potentially quite new, in the sense that it has never before been even hinted at in earlier accounts of the Lake Geneva adventures. I found this booklet held my attention for quite some time, as I read and re-read it for details I might have missed. There's lots of inspiration to be found here. 5. Store Rooms: Another 44-page booklet, it's a mixed bag, with several interesting encounters and far too many rooms filled with humanoids barracks, armories, and storage chambers. It's probably unfair to have expected anything more from it, given its name, but I did feel a mite disappointed. I'm a fan of Gygaxian naturalism , as you know, but this section of TUW proved fairly dull because of it. The book concludes with many new magic items, monsters, and a fully-statted rival adventuring party, the latter being a very nice old school touch that I greatly appreciated. Maps & Illustrations Booklet: 36 pages in length, 20 of them is devoted to maps of the Upper Works. I've already mentioned my feelings about them above. The remainder is a series of 33 illustrations (all by Jason Walton) that are presumably intended to be shown to players at appropriate times, after the fashion of the illustration booklets of TSR modules of old. I was very taken by many of these pieces, as they nicely highlight the whimsical and deadly nature of the Castle. Just looking through them is a terrific antidote for anyone who, like me, tends to look down on the unique pleasures of funhouse dungeons. In some ways, I found it the most inspirational portion of TUW. Taken as a whole, TUW didn't shake that "drip, drip" feeling I noted earlier. Part of it was that my own expectations for this boxed set were unreasonably high. I had hoped that we'd actually get to see something of the fabled dungeons, not just the areas immediately above them. Clearly, that was never the plan and I can't hold TLG accountable for that. Gary Gygax likewise decided that, rather than attempt to recreate one of several versions of Castle Greyhawk from the past, he would instead create a new castle that was a distillation of all of them that was at the same time none of them -- a kind of Gestalt . This was certainly not my own preference, but, again, I can't blame TLG for this, since it should have been clear, after having read Yggsburgh , that the best I could hope for was an "impressionistic" approach to the Castle and its levels. Even so, TUW felt "small" and I don't just mean in the sense of its expanse, although it certainly did seem far smaller in size than I'd have expected. Rather, it felt as if there was a great deal missing from it -- its "heart," if you will. What we got in this boxed set certainly had lots of Gygaxian flourishes to it. It was hard not to recognize the spirit of the Dungeon Master hovering above it. Yet, it also had many other hovering spirits and, while I can't quite put my finger on all of them, their presence at all made me feel that TUW wasn't as good as it could have -- should have -- been. It's not as if there's not a lot to like here, because there is. I know I'll be swiping portions of it for use in my own Dwimmermount campaign . However, I was never moved to try to and run TUW straight out of the box. Indeed, I found TUW wanting compared even to the notes that loremeister Allan Grohe has assembled on his webpage . Certainly, TUW is more "complete" in the sense of containing more statted up encounters, treasures, and so forth, but there's a very real sense in which that attempt at completeness works against it. For one thing, TUW isn't complete; it's only one very small part of a much larger megadungeon that still hasn't seen publication yet. For another, it doesn't invite the kind of tinkering and personal modifications that, say, Rob Kuntz's Lake Geneva Castle & Campaign products do, which perhaps says more about my own expectations than it does about the weakness of TUW, but there it is. In the end, I like Castle Zagyg: The Upper Works . It's a worthy product and one I'm glad to own. But I don't love it; it didn't knock my socks off and I had hoped that it would. Again, maybe that's unfair, which is why the final part of this review will be a discussion of what I had hoped I would see and what that means not just for this product, but for any future publications of Gygax-derived material.
+Posted by
+ James Maliszewski 
+at
+ 12:01 AM 
+ 17
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ castle zagyg ,
+ cnc ,
+ greyhawk ,
+ gygax ,
+ musings ,
+ old school ,
+ review ,
+ talanian ,
+ troll lord 
+ Saturday, September 3, 2011 
+ REVIEW: Song of the Beast-Gods 
+ As regular readers of this blog ought to know, I haven't counted myself a fan, let alone a player, of D&D III for many years now. Indeed, it was my dissatisfaction with that game that brought me back to the games I played in my youth and that I'm playing today. Consequently, I haven't been keeping a close eye on events in the D20 world; it's generally only when someone brings one of its products to my attention that I take notice. It's rare still that I find myself enjoying a D20 product enough that I wish there were some way I could work it into my OD&D campaign -- but that's exactly how I felt after I read Morten Braten's adventure, Song of the Beast-Gods . 
+This should come as no surprise, since I'd already read and enjoyed Braten's previous adventure The Spider-God's Bride , which, like the present one, is written for the D20 system and set in a fantasy world called Xoth. Xoth is a fascinating setting, calling to mind both Howard's Hyborian Age and Clark Ashton Smith's Zothique, suffused with hints of eldritch horror. It's almost tailor-made for the kinds of pulp fantasy adventures I most enjoy. This fact probably goes a long way toward explaining why I found it easy to overlook the D20 stat blocks and related mechanics and see Song of the Beast-Gods for what it is: a fun sword-and-sorcery adventure for characters of 2nd to 3rd levels. 
+Before discussing the contents of this adventure, allow me to briefly discuss its appearance and presentation. Like its predecessor, Song of the Beast-Gods uses a two-column layout for its dense text. I occasionally found it slightly hard to read, but that probably says more about my aging eyes than the layout itself. Maps, important details, and notes to the referee are highlighted through the use of boxes. Titles and headers use evocative -- but legible -- fonts that contribute greatly to the pulp fantasy feel of the adventure, as does the artwork, which is a mix of original pieces and public domain engravings. All in all, Song of the Beast-Gods is attractive and well put together, something I find particularly impressive because it's the product of a one-man operation, with Braten acting as writer, cartographer, and graphic designer. 
+The adventure itself concerns events in the city of Khadis, where, until two decades ago, the Great Red Sphinx "was placated every year with offerings of treasure and blood." That all changed, when the High King of Yar-Ammon instituted a religious revolution that overthrew the old gods, such as the Great Red Sphinx, and replaced them with a previously unknown deity, the First One. To cement this reformation, the petty king of Khadis sacrificed his eldest daughter, who was being groomed as a priestess in the old faith, to the First One, an act that reverberates even unto the present day, when the player characters make their appearance ... 
+It's difficult to say more about the adventure without spoiling its secrets. Suffice it to say that events two decades ago did not go quite the way that history records them. This provides an opening for the PCs to become enmeshed in several plots within the city of Khadis that have far-ranging repercussions. What I most liked about Song of the Beast-Gods was that it is, at its heart, a location-based adventure . Certainly, there are plots , but these plots are the plans of various people seeking to take advantage of the situation in Khadis rather than a foreordained sequence of events the referee is expected to follow. Thus, there are no pre-arranged "scenes" or lengthy sections of boxed text to be read as long-winded NPCs try to involve the PCs in their schemes. Instead, what we get are situations , along with detailed descriptions of adventuring locales -- the city, the royal palace, dungeons -- and it's up to the players and referee to use those things to craft an adventure of their own. 
+For this reason, I think it'd be quite easy to ignore even the situations described in the adventure and simply use its maps, locales, and new monsters on their own. Of course, doing so would deprive one of what I think is a terrific scenario filled with both exuberant sword-and-sorcery excitement and the potential for further developing the fallout from the events the PCs set in motion. Song of the Beast-Gods is the kind of adventure that could easily kick off an entire campaign and a pretty interesting one at that. That alone makes it worth the $5 cost of the PDF ($12 for print). My only real qualm in recommending this adventure is that it's not specifically written for older versions of D&D and thus using it will require a certain amount of conversion but nothing too onerous. In the end, it's Morten Braten's ideas that are this product's main selling point and they're very compelling if, like me, you prefer your fantasy with a healthy dose of pulp. 
+ Presentation: 8 out of 10 
+ Creativity: 8 out of 10 
+ Utility: 8 out of 10 
+ Buy This If: You're looking for a well-done, low-level sword-and-sorcery adventure and don't mind doing a little conversion work. 
+ Don't Buy This If: You either have no interest in sword-and-sorcery or are unwilling to convert D20 mechanics to your preferred system. 
+Posted by
+ James Maliszewski 
+at
+ 11:35 PM 
+ 12
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ 3e ,
+ pathfinder rpg ,
+ pulp fantasy ,
+ review ,
+ swords-and-sorcery 
+ Wednesday, January 6, 2010 
+ Retrospective: The Lost Caverns of Tsojcanth 
+ Published at the tail end of the Golden Age , 1982's The Lost Caverns of Tsojcanth was one of my favorite modules for a long time. Even today, looking back on it, I retain a great deal of fondness for module S4, in part because I played it so often. That's something that's been missing from D&D modules for some time: replayability . Back in the day, I clearly recall using many, perhaps most, modules multiple times and not just with different groups of players or even characters. Rather, the same characters would re-visit modules in which they'd previously adventured, a phenomenon I don't recall happening during the 2e or 3e eras, when modules seemed much more "disposable" in nature. The Lost Caverns of Tsojcanth was anything but disposable. Firstly, unlike a lot of modules, this one included an extensive wilderness component, with the characters having to travel overland to reach the dungeon itself. Now, wilderness adventuring was commonplace in those days, but comparatively few AD&D modules dealt with it explicitly, focusing instead on the dungeon itself. That's probably due to the fact that a great many of these modules had their origins in tournament play, where wilderness adventuring would eat up too much time to include. Ironically, The Lost Caverns is based on a similarly-named tournament module played at WinterCon V in 1976, which did not include a wilderness component. The meat of the module itself consisted of two levels of caverns, formerly the abode of the archmage Iggwilv, binder of demons and mother of the demigod Iuz of the Greyhawk setting. Consequently, the caverns are home to all manner of strange beasts, many of them former servants (or slaves) of Iggwilv, now free to pursue their own agendas. This gives the caverns a strange, almost otherworldly flavor to it, a feeling that lingers more than two decades later. Despite this, Gygaxian naturalism is in somewhat attenuated force, with the various inhabitants of the place doing more than just hanging around awaiting the arrival of the PCs. Even so, most of the naturalism is suggestive rather than explicit, depending on the referee to expand upon the brief details given in the text. That's part of the fun of this module -- figuring out why, for example, a hill giant keeps a giant rhinoceros beetle as a pet or what the dao disguising themselves as harem girls are up to. I suppose the real draw of The Lost Caverns was its 32-page monsters and magic items supplement. Remember that this module was published in 1982, before both the Monster Manual II and Unearthed Arcana ushered in " AD&D 1.5e." Unless you were a regular reader of Dragon -- as many of my players weren't -- you weren't familiar any of the new creatures, magic items, or spells previewed there before their appearance in module S4. I'll admit that I loved most of the new material introduced here, particularly the expanded menagerie of demons and demon lords, as they were frequent antagonists in my old campaigns. I also appreciated the new magic items, particularly the Prison of Zagig, which saw much use in the hands of one of the PCs back then. For all my affection for the module, it's a tinged a bit with disappointment and not a little sadness. Like many late Gygax works, you can see a definite change in both the presentation and content. There's boxed text aplenty in The Lost Caverns and, although it's mostly innocuous (compared to, say, Isle of the Ape anyway), it nevertheless presages a shift toward a hand-holding, pre-packaged style that eventually turned me off buying TSR adventure modules at all. Likewise, while I don't generally mind " more stuff ," S4 feels a bit like an extended advertisement for upcoming products, notably Monster Manual II . The original tournament module included, so far as I can recall, no new monsters and was perfectly adequate for its purpose. But then that's the point. By 1982, TSR was changing and the purpose of adventure modules along with it, as we'd see more fully in the watershed year of 1983. That's why, much as I like The Lost Caverns of Tsojcanth , I also see it as a harbinger of much I would not like and whose effects proved far-reaching.
+Posted by
+ James Maliszewski 
+at
+ 9:40 AM 
+ 11
+comments 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ ADnD ,
+ dungeons ,
+ gygax ,
+ modules ,
+ old school ,
+ retrospective 
+ Next Posts 
+ Home 
+Subscribe to:
+ Posts (Atom) 
+ What I'm Refereeing 
+ What I'm Reading 
+ What I'm Selling 
+ Henchmen & Hirelings 
+ "Thayt Chevski, hye is ane rottah. I liketh him notte ande blayme hyme gretely. Lette hym bee beyten withe stikkes." -- Chaucer 
+ Recent Comments 
+ Loading... 
+ Donation 
+ Search Grognardia 
+ Archive of Posts 
+ ▼ 
+2026
+ (111) 
+ ▼ 
+August
+ (2) 
+ Reconsiderations: H.P. Lovecraft 
+ Help Save the REH House 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (30) 
+ ► 
+February
+ (26) 
+ ► 
+January
+ (36) 
+ ► 
+2025
+ (414) 
+ ► 
+December
+ (32) 
+ ► 
+November
+ (35) 
+ ► 
+October
+ (36) 
+ ► 
+September
+ (40) 
+ ► 
+August
+ (47) 
+ ► 
+July
+ (41) 
+ ► 
+June
+ (32) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (30) 
+ ► 
+March
+ (30) 
+ ► 
+February
+ (29) 
+ ► 
+January
+ (31) 
+ ► 
+2024
+ (302) 
+ ► 
+December
+ (31) 
+ ► 
+November
+ (23) 
+ ► 
+October
+ (31) 
+ ► 
+September
+ (31) 
+ ► 
+August
+ (34) 
+ ► 
+July
+ (33) 
+ ► 
+June
+ (29) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (30) 
+ ► 
+March
+ (14) 
+ ► 
+January
+ (15) 
+ ► 
+2023
+ (247) 
+ ► 
+December
+ (18) 
+ ► 
+November
+ (19) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (10) 
+ ► 
+August
+ (19) 
+ ► 
+July
+ (23) 
+ ► 
+June
+ (14) 
+ ► 
+May
+ (33) 
+ ► 
+April
+ (28) 
+ ► 
+March
+ (18) 
+ ► 
+February
+ (29) 
+ ► 
+January
+ (35) 
+ ► 
+2022
+ (344) 
+ ► 
+December
+ (33) 
+ ► 
+November
+ (30) 
+ ► 
+October
+ (34) 
+ ► 
+September
+ (24) 
+ ► 
+August
+ (46) 
+ ► 
+July
+ (16) 
+ ► 
+June
+ (23) 
+ ► 
+May
+ (5) 
+ ► 
+April
+ (26) 
+ ► 
+March
+ (29) 
+ ► 
+February
+ (39) 
+ ► 
+January
+ (39) 
+ ► 
+2021
+ (410) 
+ ► 
+December
+ (27) 
+ ► 
+November
+ (18) 
+ ► 
+October
+ (17) 
+ ► 
+September
+ (22) 
+ ► 
+August
+ (29) 
+ ► 
+July
+ (34) 
+ ► 
+June
+ (44) 
+ ► 
+May
+ (42) 
+ ► 
+April
+ (52) 
+ ► 
+March
+ (34) 
+ ► 
+February
+ (47) 
+ ► 
+January
+ (44) 
+ ► 
+2020
+ (309) 
+ ► 
+December
+ (38) 
+ ► 
+November
+ (62) 
+ ► 
+October
+ (85) 
+ ► 
+September
+ (95) 
+ ► 
+August
+ (29) 
+ ► 
+2012
+ (345) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (27) 
+ ► 
+October
+ (23) 
+ ► 
+September
+ (28) 
+ ► 
+August
+ (12) 
+ ► 
+July
+ (24) 
+ ► 
+June
+ (31) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (45) 
+ ► 
+March
+ (50) 
+ ► 
+February
+ (38) 
+ ► 
+January
+ (35) 
+ ► 
+2011
+ (629) 
+ ► 
+December
+ (41) 
+ ► 
+November
+ (50) 
+ ► 
+October
+ (52) 
+ ► 
+September
+ (33) 
+ ► 
+August
+ (51) 
+ ► 
+July
+ (42) 
+ ► 
+June
+ (66) 
+ ► 
+May
+ (69) 
+ ► 
+April
+ (78) 
+ ► 
+March
+ (53) 
+ ► 
+February
+ (50) 
+ ► 
+January
+ (44) 
+ ► 
+2010
+ (759) 
+ ► 
+December
+ (50) 
+ ► 
+November
+ (73) 
+ ► 
+October
+ (54) 
+ ► 
+September
+ (63) 
+ ► 
+August
+ (68) 
+ ► 
+July
+ (78) 
+ ► 
+June
+ (57) 
+ ► 
+May
+ (59) 
+ ► 
+April
+ (66) 
+ ► 
+March
+ (71) 
+ ► 
+February
+ (57) 
+ ► 
+January
+ (63) 
+ ► 
+2009
+ (669) 
+ ► 
+December
+ (43) 
+ ► 
+November
+ (60) 
+ ► 
+October
+ (43) 
+ ► 
+September
+ (50) 
+ ► 
+August
+ (69) 
+ ► 
+July
+ (56) 
+ ► 
+June
+ (60) 
+ ► 
+May
+ (44) 
+ ► 
+April
+ (62) 
+ ► 
+March
+ (72) 
+ ► 
+February
+ (53) 
+ ► 
+January
+ (57) 
+ ► 
+2008
+ (449) 
+ ► 
+December
+ (49) 
+ ► 
+November
+ (49) 
+ ► 
+October
+ (71) 
+ ► 
+September
+ (73) 
+ ► 
+August
+ (67) 
+ ► 
+July
+ (38) 
+ ► 
+June
+ (27) 
+ ► 
+May
+ (40) 
+ ► 
+April
+ (32) 
+ ► 
+March
+ (3) 
+ Popular Topics and Series 
+ history 
+ (440) 
+ retrospective 
+ (427) 
+ gygax 
+ (414) 
+ pulp fantasy library 
+ (357) 
+ dwimmermount 
+ (285) 
+ traveller 
+ (257) 
+ review 
+ (199) 
+ tekumel 
+ (181) 
+ ept 
+ (145) 
+ articles of dragon 
+ (132) 
+ house of worms 
+ (132) 
+ megadungeon 
+ (123) 
+ ads of dragon 
+ (100) 
+ interview 
+ (97) 
+ sha-arthan 
+ (91) 
+ arneson 
+ (82) 
+ grognard's grimoire 
+ (68) 
+ dungeons 
+ (66) 
+ appendix n 
+ (63) 
+ brandification 
+ (62) 
+ thousand suns 
+ (58) 
+ urheim 
+ (25) 
+ Follow Grognardia 
+Posts
+ Atom
+Posts
+All Comments
+ Atom
+All Comments
+Grognardia, Grognardia Games, and the Grognardia logo are trademarks of James Maliszewski. Tékumel is a trademark of M.A.R. Barker and is used with permission of the Tékumel Foundation . 
+Awesome Inc. theme. Powered by Blogger .
+ 

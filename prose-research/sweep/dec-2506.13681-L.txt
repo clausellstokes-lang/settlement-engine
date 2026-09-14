@@ -1,0 +1,1579 @@
+                                              Min-p, Max Exaggeration: A Critical Analysis of
+                                                   Min-p Sampling in Language Models
+
+
+                                                  Rylan Schaeffer                     Joshua Kazdan                Yegor Denisov-Blanch
+                                                 Stanford University                Stanford University             Stanford University
+                                             rschaef@cs.stanford.edu              jkazdan@stanford.edu             ydebl@stanford.edu
+
+
+
+
+arXiv:2506.13681v2 [cs.CL] 19 Jun 2025
+                                                                                      Abstract
+
+                                                  Sampling from language models impacts the quality and diversity of generated
+                                                  outputs, affecting both research and real-world applications. Recently, Nguyen
+                                                  et al. (2024)’s “Turning Up the Heat: Min-p Sampling for Creative and Coherent
+                                                  LLM Outputs” introduced a new sampler called min-p, claiming it achieves su-
+                                                  perior quality and diversity over established methods such as basic, top-k, and
+                                                  top-p sampling. The significance of these claims was underscored by the paper’s
+                                                  recognition as the 18th highest-scoring submission to ICLR 2025 and selection
+                                                  for an Oral presentation. This paper conducts a comprehensive re-examination
+                                                  of the evidence supporting min-p and reaches different conclusions across the
+                                                  original paper’s four main lines of evidence. First, the original paper’s human
+                                                  evaluations omitted data, conducted statistical tests incorrectly, and described
+                                                  qualitative feedback inaccurately; our reanalysis demonstrates min-p did not out-
+                                                  perform baseline samplers in quality, diversity, or a trade-off between quality and
+                                                  diversity. In response to our findings, the authors of the original paper conducted a
+                                                  new human evaluation using a different sampler implementation, task, and rubric
+                                                  that nevertheless provides further evidence min-p does not improve over baseline
+                                                  samplers. Second, comprehensively sweeping the original paper’s NLP benchmark
+                                                  evaluations reveals min-p does not surpass baseline samplers when controlling
+                                                  for the number of hyperparameters. Third, the original paper’s LLM-as-a-Judge
+                                                  evaluations lack methodological clarity and appear inconsistently reported: the
+                                                  higher of two scores was reported for min-p while the lower of two scores was
+                                                  reported for top-p. Fourth, community adoption claims (49k GitHub repositories,
+                                                  1.1M GitHub stars) were found to be unsubstantiated, leading to their removal from
+                                                  the ICLR 2025 Camera Ready; the revised adoption claim remains misleading. We
+                                                  conclude that evidence presented in the original paper fails to support claims that
+                                                  min-p improves quality, diversity, or a trade-off between quality and diversity.
+
+
+                                         1   Introduction
+
+                                         Large language model (LLM) capabilities have transformed numerous domains, from creative writing
+                                         to scientific research. A critical detail of LLM deployment is the sampling method: the algorithm
+                                         that determines how tokens are sampled during generation. Sampling strategies directly impact the
+                                         quality and diversity of generated outputs, making them important to both research and deployment.
+                                         Commonly used samplers include basic (temperature-only) sampling (Ackley et al., 1985), which
+                                         samples tokens based on their temperature-scaled softmax-normalized logits; top-k sampling
+                                         (Fan et al., 2018), which samples the k most probable tokens; and top-p sampling (Holtzman
+                                         et al., 2020), which samples tokens comprising the top p probability mass. Other samplers include
+                                         η-sampling, ϵ-sampling (Hewitt et al., 2022) and mirostat sampling (Basu et al., 2020).
+
+
+                                         Preprint. Under review.
+                            Metric = Quality                      Metric = Diversity                             Sampler
+                                                                                                                    Basic
+              3.0                                                                                                   Top-p
+
+
+
+Temperature                                                                                   Diversity = High
+                                                                                                                    Min-p
+              2.0
+
+
+              1.0
+
+                        2     4       6        8   10        2      4       6      8     10
+                                  Score                                 Score
+
+Figure 1: Visualizing Human Evaluators’ Scores from Nguyen et al. (2024)’s Data Demonstrates
+Min-p Does Not “Consistently" Outperform Other Samplers. Rather, the original paper’s data
+suggest min-p is largely indistinguishable from other samplers based on 95% confidence intervals.
+
+
+Recently, the paper “Turning Up the Heat: Min-P Sampling for Creative and Coherent LLM Outputs"
+(Nguyen et al., 2024) introduced a new sampling method called min-p sampling, claiming it
+produces higher quality and higher diversity outputs than other samplers. Given the potential impact
+of an improved sampling method and the paper’s exposure as the 18th highest-scoring submission
+at ICLR 20251 , we carefully scrutinized the methodologies, data, analyses, code and conclusions
+presented in support of min-p across the authors’ four lines of evidence: (1) human evaluations, (2)
+natural language processing (NLP) benchmark evaluations, (3) LLM-As-A-Judge evaluations and (4)
+community adoption metrics. Our re-analyses of the evidence lead us to conclude that relative to
+commonly used samplers, min-p does not improve quality or diversity or the trade-off between
+quality and diversity. Our code is publicly available on GitHub, as are our W&B sweeps of NLP
+benchmark evaluations.
+
+2                 Re-Analyzing Min-p’s Human Evaluations
+We began with re-analyzing the original paper’s human evaluations since human judgments are
+widely considered the gold standard for assessing language model outputs (Van Der Lee et al., 2019;
+Roller et al., 2020; Howcroft et al., 2020; Clark et al., 2021; Liang et al., 2022; Khashabi et al., 2022;
+Chiang et al., 2024; Biderman et al., 2024; Schaeffer et al., 2025b). We identified four key issues.
+
+2.1                Human evaluators’ scores for one of two baseline samplers were omitted
+
+Section 6 of Nguyen et al. (2024) states human participants evaluated min-p against a single sampler:
+top-p. Both the Oct 2024 Arxiv manuscript and ICLR OpenReview manuscript repeatedly state
+that min-p and top-p were considered, and their Table 4 presents results only for these. However,
+when examining the paper’s data, we discovered that scores for a second baseline sampler (basic
+sampling) were excluded from the methodology, the analysis and the results without mention or
+explanation. We publicly confirmed with the authors. These omitted scores comprised 1/3rd of the
+total collected scores. After we raised the issue, the omitted data were added to the Camera Ready’s
+Table 4, but the methodology, the results and the conclusions have not been correspondingly updated.
+
+2.2                Visualizations and Statistical Tests Fail to Support Claim That Min-p Outperforms Other
+                   Samplers
+
+Based on the human evaluators’ scores, Section 6 of Nguyen et al. (2024) concluded that min-p
+“consistently" outperformed top-p “across all settings":
+
+                     “Overall, min-p sampling consistently scored higher than top-p sampling across
+                     all settings [...] A paired t-test confirmed that the differences in scores between
+                     min-p and top-p sampling were statistically significant (p < 0.05).”
+              1
+                  https://papercopilot.com/statistics/iclr-statistics/iclr-2025-statistics/
+
+
+                                                              2
+                                                                                     Temperature
+         Metric               Alt. Hyp.
+                                                               τ = 1.0                 τ = 2.0             τ = 3.0
+                                                              t            p           t          p        t         p
+                              Min-p > Basic                0.33          .370       0.65         .260   3.13∗∗∗†   .001
+         Quality
+                              Min-p > Top-p                2.05∗         .023       1.18         .121    2.02∗     .025
+                              Min-p > Basic                0.31          .378      1.86∗         .034    0.85      .201
+         Diversity
+                              Min-p > Top-p               2.64∗∗         .006      1.44          .078    0.87      .195
+         ∗
+             p < 0.05, ∗∗ p < 0.01, ∗∗∗ p < 0.001, † Significant after Bonferroni correction for 12 comparisons.
+         Note: All tests were paired t-tests with df = 52, one-sided (alternative = "greater")
+
+
+Table 1: Hypothesis Testing of Human Evaluators’ Scores Fails to Support Claim that Min-p
+Consistently Outperforms Other Samplers. To test whether evidence supports the claim that min-p
+“consistently outperforms" other samplers, we conducted one-sided paired t-tests using the authors’
+published data. Without correcting for multiple comparisons, evidence exists to support min-p’s
+superiority in 5 of 12 comparisons at α = 0.05 and 2 of 12 comparisons at α = 0.01. After applying
+a Bonferroni correcting for multiple comparisons, evidence exists to support min-p’s superiority in 1
+of 12 comparisons at α = 0.05 and 0 of 12 comparisons at α = 0.01. For details, see Sec. 2.3.
+
+
+
+However, both visualizations and statistical hypothesis tests of the original human evaluation
+data suggest min-p is indistinguishable from the baselines in almost all settings.
+To briefly explain the human evaluation methodology, three samplers (basic, top-p and min-p)
+were compared in six conditions: three temperatures (1.0, 2.0, 3.0) and two diversity settings (“high"
+and “low") corresponding to different p hyperparameters. Humans were asked to score the generated
+outputs under two metrics: quality and diversity. Participants were excluded if they failed attention
+checks. For more information, please see the original manuscript.
+We focused on the “high" diversity setting for three reasons: First, the claimed advantage of min-p
+sampling is that it provides both high quality and high diversity, whereas other samplers typically
+trade one off against the other. Second, the authors publicly told us to focus on the high diversity
+setting, writing that “the low [diversity] settings were quite experimental". Third, we believe that
+top-p’s p value in the low diversity setting was poorly chosen; indeed, after we raised these concerns,
+the authors ran a new human evaluation that changed the low diversity top-p p from 0.1 to 0.9. We
+return to this second new human evaluation in Sec. 2.4.
+We began by visualizing the human evaluations’ scores from Nguyen et al. (2024). Using the original
+paper’s data, Fig. 1 reveals that the three samplers provide similar quality and similar diversity,
+with 95% confidence intervals frequently overlapping.
+To more rigorously assess the claim that min-p consistently outperforms other samplers, we con-
+ducted 12 one-sided paired t-tests for each metric (quality or diversity), temperature (1.0, 2.0, 3.0)
+and baseline sampler (min-p versus basic, min-p versus top-p). In each test, the null hypothesis
+is min-p’s score is less than or equal to the other sampler’s score, and the alternative hypothesis is
+min-p’s score is greater than the other sampler’s score. Statistical test results are displayed in Table 1.
+Without correcting for multiple comparisons, we found evidence to reject the null hypotheses in 5
+of 12 tests at α = 0.05 and 2 of 12 tests at α = 0.01. After applying a Bonferroni correction for
+multiple comparisons, we found evidence to reject the null hypothesis in 1 of 12 tests at α = 0.05
+and 0 of 12 tests at α = 0.01. Based on the original paper’s data, there is insufficient evidence to
+support the claim that min-p consistently outperforms baseline samplers across all settings.
+Furthermore, given that the original paper claims that min-p “consistently" scores higher, an
+Intersection-Union Test (IUT) may be the appropriate statistical test, where the alternative hy-
+pothesis is that min-p is better in all 12 comparisons and the null hypothesis is the set complement.
+Since the largest p-value of the 12 comparisons is 0.378, under the IUT, we again find insufficient
+evidence to reject the null hypothesis at both α = 0.05 and α = 0.01.
+The original paper’s statistical analysis reached a different conclusion for two reasons. First, despite
+claiming that min-p “consistently scored higher" “across all settings" (metric, temperature, and
+
+
+                                                                     3
+                                            Basic
+
+
+
+
+                Preferred Sampler
+                                    Basic = Min-p
+
+                                            Min-p
+
+                                    None Specified
+
+                                            Top-p
+
+                                                     0   5          10        15     20
+                                                             Num. Human Evaluators
+
+Figure 2: Manual Annotation of Human Evaluators’ Qualitative Responses Fail to Support
+Claim that Min-P Was the Preferred Sampler. We manually annotated responses from human
+annotators regarding their preferred sampler(s) at the end of the original paper’s study. The responses
+suggest min-p was not the most preferred sampler. We provide example responses in Sec. 2.3.
+
+
+diversity), the paper pooled data across all settings and performed a single t-test, which tests whether
+min-p scored higher on average. Second, pooling over all settings is misleading in that in the
+“low” diversity condition, top-p’s hyperparameter p was poorly chosen in a way that pulled top-p
+down significantly; the authors said publicly to ignore this particular low diversity condition and
+subsequently changed p in their new human experiment (Sec. 2.4). Thus, we believe the original
+paper’s statistical inferences are misleading or incorrect.
+
+2.3   Human Evaluators’ Qualitative Responses Fail to Support Claim That Min-p Is
+      Preferred Over Other Samplers
+
+At the end of the human evaluation study, the original paper asked human participants to qualitatively
+describe which sampler(s) they preferred. The paper claimed that human evaluators’ qualitative
+responses support min-p over top-p:
+
+         “Participants frequently noted that outputs generated with min-p sampling were
+         more coherent and creative, especially at higher temperatures.”
+
+However, when reading through the paper’s data, we believe that the qualitative responses suggest
+a different preference pattern. We manually annotated the qualitative responses and visualized our
+annotations of the humans’ expressed preferences (Fig. 2), and publicly posted our annotations in
+the same format as the original paper. We found two results: (1) more human evaluators explicitly
+preferred basic sampling than preferred min-p sampling, and (2) min-p was only slightly preferred
+over top-p. We provide quotations from human evaluators favoring basic sampling in Appendix A.
+
+2.4   New Human Evaluation Study Shows Min-p Does Not Outperform Baselines in Quality,
+      in Diversity, or in a Tradeoff Between Quality and Diversity
+
+In response to our feedback, the authors conducted and added a new human evaluation study to
+Appendix C.2. Their new study made multiple methodological changes:
+
+       • Different sampler implementation: switched from applying temperature after truncation to
+         applying temperature before truncation.
+       • Different distribution of human participants from Prolific.
+       • Different sampling hyperparameters for top-p: switched from 0.1 and 0.9 to 0.9 and 0.95.
+       • Different sampling hyperparameters for min-p: switched from 0.2 and 0.05 to 0.1 and 0.05.
+       • Different allotted reading time: increased from 30 minutes to 45 minutes.
+       • Different sampled text: 3 short paragraphs were replaced with a single complete story.
+
+
+                                                               4
+                               Diversity Setting = Low              Diversity Setting = High          Sampler
+                  10                                                                                  Basic
+                                                                                                      Top-p
+
+
+
+Diversity Score
+                   8
+                                                                                                      Min-p
+                   6                                                                                  Temperature
+                                                                                                      1.0
+                   4
+                                                                                                      2.0
+                   2                                                                                  3.0
+                           2       4       6        8    10     2        4       6       8     10
+                                   Quality Score                         Quality Score
+
+Figure 3: New Human Evaluation Study Suggests Min-p Does Not Outperform Baselines in
+Quality, in Diversity or in a Pareto-Optimal Tradeoff Between Quality and Diversity. Visu-
+alization of scores from Nguyen et al. (2024)’s second human experiment. Min-p’s performance
+advantage relative to basic and top-p sampling is observed in conditions (e.g., higher temperatures)
+where absolute quality and absolute diversity scores across all samplers are lower compared to other
+regimes (e.g., T = 1). For practitioners optimizing for maximal quality and maximal diversity, these
+results suggest that min-p offers no apparent advantage over basic or top-p sampling.
+
+
+                        • Different rubric for human participants to evaluate sampled outputs.
+Regarding the new human evaluation data and results, we share two discoveries here: First, we
+believe one value is incorrectly reported: in Nguyen et al. (2024)’s Table 15, the average score of
+min-p at p = 0.05 and temperature T = 2 is reported as 7.80, but based on the authors’ publicly
+posted data, we believe the correct numerical value should be 5.80. Second, more generally, the data
+show again that Min-p does not outperform baselines in quality, in diversity or in a favorable tradeoff
+between quality and diversity. In this new study, whenever min-p outperforms other samplers, it
+does so under conditions that yield lower absolute scores than other conditions (Fig. 3). For instance,
+min-p shows an advantage over the baselines in the “high" diversity setting at T = 2 and in the “low"
+diversity setting at T = 3. However, in both of these conditions, min-p receives lower quality and
+diversity scores than it does in the “high" diversity setting at T = 1 and the “low" diversity setting
+at T = 2. This shows min-p’s advantage is observed primarily under conditions that yield lower
+overall quality and diversity scores compared to other achievable conditions. For anyone seeking
+higher quality or diversity, min-p offers no apparent advantage over basic or top-p sampling.
+
+3                  Extending Min-p’s NLP Benchmark Evaluations
+We next turned to the original paper’s NLP benchmark evaluations of several models on GSM8K with
+Chain-of-Thought (Cobbe et al., 2021) and GPQA (5-shot) (Rein et al., 2023), which concluded that:
+                         “Min-p sampling achieves superior performance across benchmarks and tempera-
+                         tures.”
+
+3.1                    Thorough Hyperparameter Sweep on GSM8K Contradicts Claim of Min-p’s Superiority
+
+To test whether min-p indeed achieves superior performance, we conducted an extensive analysis on
+GSM8K CoT, sweeping the following models, samplers, hyperparameters and sampling seeds:
+                        • 9 Models: Qwen 2.5 (Qwen et al., 2025) 0.5B, 1.5B, 3B and 7B; Mistral 7Bv0.1 (Jiang
+                          et al., 2023); Llama (Grattafiori et al., 2024) 3.1 8B and 3.2 3B; Gemma 2 (Team et al.,
+                          2024) 2B and 9B.
+                        • 2 Model Stages: Pre-trained (“Base") and Post-Trained (“Instruct").
+                        • 4 Samplers: basic, top-p, top-k, min-p.
+                        • 31 Temperatures: 0.0 (“greedy") to 3.0 in increments of 0.1.
+                        • 6 Hyperparameters Per Sampler: We chose 6 hyperparameters per sampler, except for
+                          basic which has no hyperparameter beyond temperature. The values were taken from the
+                          original paper; some were lightly edited to make them more evenly distributed:
+
+
+                                                                    5
+                                                         Qwen 2.5 0.5B                       Qwen 2.5 0.5B Instruct                         Qwen 2.5 1.5B                       Qwen 2.5 1.5B Instruct
+                                                                                                                             0.6
+                                 0.25
+
+
+
+
+          Exact Match (Strict)
+                                                                                                                                                                     0.6
+                                                                                  0.3
+                                 0.20
+                                                                                                                             0.4
+                                 0.15                                             0.2                                                                                0.4
+
+                                 0.10
+                                                                                                                             0.2
+                                                                                  0.1
+                                 0.05                                                                                                                                0.2
+
+
+                                                         Qwen 2.5 3B                          Qwen 2.5 3B Instruct                          Qwen 2.5 7B                          Qwen 2.5 7B Instruct
+                                                                                                                             0.8
+                                                                                  0.4
+                                                                                                                                                                     0.8
+
+
+
+
+                   Exact Match (Strict)
+                                          0.6                                                                                0.6
+                                                                                  0.3
+                                                                                                                                                                     0.6
+
+                                          0.4                                                                                0.4
+                                                                                  0.2
+                                                                                                                                                                     0.4
+
+
+
+                                                         Mistral 7Bv0.1                      Mistral 7Bv0.1 Instruct                        Llama 3.2 3B                        Llama 3.2 3B Instruct
+                                                                                                                                                                     0.8
+                                 0.15                                             0.4
+                                                                                                                           0.100
+
+
+
+
+          Exact Match (Strict)
+                                                                                  0.3                                      0.075                                     0.6
+                                 0.10
+
+                                                                                                                           0.050
+                                                                                  0.2                                                                                0.4
+                                 0.05                                                                                      0.025
+
+
+
+                                                         Llama 3.1 8B                        Llama 3.1 8B Instruct                          Gemma 2 2B                          Gemma 2 2B Instruct
+                                 0.25
+                                                                                  0.8                                                                                0.5
+
+
+
+
+          Exact Match (Strict)
+                                 0.20                                                                                       0.06
+
+                                                                                  0.6                                                                                0.4
+                                 0.15
+                                                                                                                            0.04
+                                 0.10                                                                                                                                0.3
+                                                                                  0.4
+                                 0.05                                                                                       0.02                                     0.2
+                                                                                                                                    0            50            100          0            50            100
+                                                                                                                                   Number of Hyperparameters Swept         Number of Hyperparameters Swept
+                                                         Gemma 2 9B                          Gemma 2 9B Instruct
+                                                                                  0.8
+                                          0.3
+
+
+
+
+                   Exact Match (Strict)
+                                                                                                                                                                                        Sampler
+                                                                                  0.7
+                                                                                                                                                                                        Basic
+                                                                                                                                                                                        Top-p
+                                                                                  0.6
+                                          0.2                                                                                                                                           Top-k
+                                                                                  0.5                                                                                                   Min-p
+                                                                                                                                                                                        Model Type
+                                          0.1                                     0.4                                                                                                   Base
+                                                 0            50            100          0            50            100                                                                 Instruct
+                                                Number of Hyperparameters Swept         Number of Hyperparameters Swept
+
+
+Figure 4: Min-P Does Not Consistently Outperform Other Samplers on GSM8K When Con-
+trolling For Hyperparameter Volume. In our first analysis, we measured how the maximum
+Exact Match (Strict) for each sampler improves as the number of hyperparameters increases. Basic
+sampling has only a temperature hyperparameter, and we therefore do not sweep it to the same degree.
+
+
+                                 – basic: No hyperparameters other than temperature.
+                                 – top-k: k ∈ {10, 30, 50, 100, 150, 200}.
+                                 – top-p: p ∈ {0.99, 0.98, 0.95, 0.9, 0.8, 0.7}.
+                                 – min-p: p ∈ {0.01, 0.02, 0.05, 0.1, 0.2, 0.3}.
+      • 3 Random Seeds for Sampling: {0, 1, 2}
+
+Due to our compute budget, we only evaluated GSM8K CoT (albeit under two prompt formats, for
+reasons explained below). This sweep and the sweep below required ∼ 6000 Nvidia A100-hours.
+GSM8K contains a subset of samples with ambiguous language or incorrect labels that have since
+been identified and cleaned (Vendrow et al., 2025) and that models may have been trained on GSM8K
+(Zhang et al., 2024), but we used GSM8K nonetheless for consistency with the original paper. We
+similarly used EleutherAI’s LM Eval Harness (Gao et al., 2021; Biderman et al., 2024).
+To evaluate how performant each sampler is, we first averaged over the three sampling seeds and then
+conducted two complementary analyses:
+
+     1. For each sampler, we subsampled an equal number of hyperparameters ranging from N = 1
+        to N = 100 and computed the maximum Exact Match (Strict) score achieved by the sampled
+        subset of size N . We repeated this process 150 times, averaging over the subsampled subsets’
+        scores. This “Best-of-N" analysis (Nakano et al., 2021; Stiennon et al., 2020; Hughes et al.,
+
+
+                                                                                                                       6
+                                                            Qwen 2.5 0.5B                  Qwen 2.5 0.5B Instruct                 Qwen 2.5 1.5B                  Qwen 2.5 1.5B Instruct
+
+
+
+
+          Best Min-p - Best Other Sampler
+                                             0.1
+
+
+                                             0.0
+
+
+                                            −0.1
+
+
+                                            −0.2
+
+                                                             Qwen 2.5 3B                    Qwen 2.5 3B Instruct                   Qwen 2.5 7B                    Qwen 2.5 7B Instruct
+
+
+
+
+          Best Min-p - Best Other Sampler
+                                             0.1
+
+
+                                             0.0
+
+
+                                            −0.1
+
+
+                                            −0.2
+
+                                                            Mistral 7Bv0.1                 Mistral 7Bv0.1 Instruct                Llama 3.2 3B                    Llama 3.2 3B Instruct
+
+
+
+
+          Best Min-p - Best Other Sampler
+                                             0.1
+
+
+                                             0.0
+
+
+                                            −0.1
+
+
+                                            −0.2
+
+                                                            Llama 3.1 8B                    Llama 3.1 8B Instruct                 Gemma 2 2B                      Gemma 2 2B Instruct
+
+
+
+
+          Best Min-p - Best Other Sampler
+                                             0.1
+
+
+                                             0.0
+
+
+                                            −0.1
+
+
+                                            −0.2
+                                                                                                                         0     25      50     75      100   0     25      50     75      100
+                                                                                                                         Number of Hyperparameters Swept    Number of Hyperparameters Swept
+                                                            Gemma 2 9B                      Gemma 2 9B Instruct
+
+
+
+
+          Best Min-p - Best Other Sampler
+                                             0.1
+
+
+                                             0.0
+                                                                                                                                                                         Model Type
+                                                                                                                                                                             Base
+                                            −0.1
+                                                                                                                                                                             Instruct
+
+
+                                            −0.2
+                                                   0     25      50     75      100   0     25      50     75      100
+                                                   Number of Hyperparameters Swept    Number of Hyperparameters Swept
+
+
+Figure 5: Min-P Does Not Consistently Outperform Other Samplers on GSM8K When Control-
+ling For Hyperparameter Volume. In our second analysis, we measured how the difference between
+min-p’s highest score and the best non-min-p sampler’s highest score changes as the number of
+swept hyperparameters increases. Min-p matches or underperforms other samplers.
+
+
+         2024; Schaeffer et al., 2025a) tells us the best possible performance each sampler will likely
+         obtain as its hyperparameter space increases.
+
+      2. For N = 1 to N = 100, we subsampled N hyperparameters per sampler and computed
+         the difference of the maximum Exact Match (Strict) score achieved by min-p minus the
+         maximum score achieved by any other sampler. We repeated this process 150 times,
+         averaging over the subsampled subsets. This tells us by how much min-p outperforms all
+         other samplers, controlling for the size of hyperparameter space of each sampler.
+
+Both analyses reached consistent results: min-p does not outperform other samplers when
+equalizing the volume of hyperparameter space. Fig. 4 and Fig. 5 respectively demonstrate that
+min-p is largely indistinguishable from other samplers.
+After we showed these results to the authors, they informed us that we had run our experiments using
+the “Llama" formatting of GSM8K CoT prompts as we used the command from the authors’ public
+Colab notebook; the authors clarified that "Llama" formatting should be used only for Llama models.
+We then reran our experiments using standard formatting of GSM8K CoT prompts. The results were
+nearly identical (Appendix B), with one small difference: min-p does produce higher scores for 2 of
+12 language models. Again, we conclude min-p does not outperform other samplers on either
+formatting of GSM8K CoT when controlling for hyperparameter volume.
+
+
+                                                                                                                     7
+                                   25                                                                                    62.5                                                            Sampler
+                                                                                                                                                                                         Basic
+                                                                                                                                                                                         Top-p
+                                                                                                                         60.0                                                            Min-p
+
+
+
+
+                                                                  Length-Controlled Winrate vs. Basic(Temperature=1.0)
+                                                                                                                                                                                         Sampling Hyperparameter
+                                   20                                                                                                                                                    0.02
+                                                                                                                         57.5                                                            0.05
+
+
+
+
+      Num. Swept Hyperparameters
+                                                                                                                                                                                         0.1
+                                                                                                                                                                                         0.2
+                                                                                                                         55.0                                                            0.3
+                                   15
+                                                                                                                                                                                         0.4
+                                                                                                                                                                                         0.6
+                                                                                                                         52.5                                                            0.7
+                                                                                                                                                                                         0.8
+                                   10                                                                                                                                                    0.9
+                                                                                                                         50.0                                                            0.95
+                                                                                                                                                                                         0.98
+                                                                                                                                                                                         nan
+                                                                                                                         47.5
+                                    5
+
+
+                                                                                                                         45.0
+
+                                    0
+                                        Basic    Top-p    Min-p                                                                 0.6        1.0          1.4         1.8            2.2
+                                                Sampler                                                                         Temperature (Horizontal Offsets Added for Visibility)
+
+
+Figure 6: Nguyen et al. (2024)’s LLM-As-A-Judge Evaluations Suggest Min-p Typically Matches
+Other Samplers Despite 2× to 10× More Hyperparameter Tuning. Left: Nguyen et al. (2024)
+swept min-p with more than twice as many hyperparameters as top-p and more than ten times
+as many hyperparameters as basic. Right: Pairwise comparisons show min-p typically performs
+on-par with other samplers. Data were obtained from the first author’s public GitHub repository.
+
+
+4     Investigating Min-p’s LLM-As-A-Judge Evaluations
+
+We then turned to the original paper’s LLM-as-a-Judge evaluations (Zheng et al., 2023), specifically
+AlpacaEval creative writing evaluations (Dubois et al., 2023).
+
+
+4.1          Under-Specified and Indirect Methodology Hinders Reproduction and Interpretation
+
+In the Oct 2024 Arxiv manuscript and ICLR OpenReview manuscript, the methodology is under-
+specified in several ways: There is no mention which model(s) were sampled from, which model(s)
+served as the judge(s), or how hyperparameters were chosen or swept. Additionally, there is no
+description of uncertainty for the reported win rates, meaning readers are unable to decide whether
+win rates are statistically different from chance (50.00%).
+Furthermore, the experiment seems designed in a manner that introduces a confounder. For those
+unfamiliar, AlpacaEval reports win rates between paired comparisons. Instead of directly comparing
+min-p against other samplers, the authors compared each sampler against a common fixed sampler:
+basic(τ = 1.0). This comparison strategy is indirect since comparing directly against min-p would
+offer a clearer test of its superiority while using the same number of comparisons. The authors’
+design choice is additionally concerning because LLM-judge preferences are probably not transitive,
+as shown by recent research (Xu et al., 2025); that is, if sampler A beats sampler B, and sampler B
+beats sampler C, it does not necessarily follow that sampler A beats sampler C. Therefore, comparing
+all methods to basic(τ = 1.0) provides no reliable inference about min-p’s performance relative
+to top-p or basic at other temperatures. These under-specified aspects of the methodology,
+combined with its indirect experimental design, make drawing conclusions difficult.
+
+
+4.2          Min-p Received More Hyperparameter Tuning and Frequently Fails to Win
+
+No scores or code to create scores were provided with the original paper’s GitHub repository. While
+drafting this manuscript, we became aware of ongoing work to release code in a separate repository.
+Results from that code revealed two discoveries: First, min-p received ∼ 2× more hyperparameter
+tuning than top-p sampling and ∼ 10× more tuning than basic sampling (Fig. 6, left), potentially
+tilting the scales in its favor. Second, the win-rates show that min-p frequently fails to outperform
+top-p and basic sampling, especially when accounting for confidence intervals; we visualized the
+new data with 95% confidence intervals (with horizontal offsets added for visibility) (Fig. 6, right).
+
+
+                                                                                                                                   8
+4.3   Table 3(b) Reported The Higher of Two Scores For Min-p But the Lower of Two Scores
+      For Top-p
+
+As evidence for the LLM-As-A-Judge evaluation scores in the original paper’s Table 3(b), the first
+author publicly shared a Telegram link that showed the higher of two scores was reported for min-p
+(the reported win rate of 52.01 corresponds to p = 0.05, but p = 0.01 yields a lower win rate of
+50.14) but the lower of two score was reported for top-p (the reported win rate of 50.07 corresponds
+to p = 0.9, but p = 0.98 yields a higher win rate of 50.43).
+
+5     Substantiating Min-p’s Community Adoption Claims
+5.1   Claimed GitHub Repositories & Stars Were Unsubstantiated and Retracted
+
+The Arxiv and peer-reviewed manuscripts of Nguyen et al. (2024) included specific claims about
+min-p’s adoption in the language modeling community:
+
+         “Community Adoption: Min-p sampling has been rapidly adopted by the open-
+         source community, with over 54,000 GitHub repositories using it, amassing a
+         cumulative 1.1 million stars across these projects."
+
+We attempted to verify these numbers through analysis of major GitHub language modeling reposito-
+ries. Per our calculations, the combined GitHub stars of leading LM repositories (transformers,
+ollama, llama.cpp, vLLM, Unsloth, mamba, SGLang, llama-cpp-python) sum to 453k stars as
+of March 2025, less than half the 1.1M stars claimed by min-p alone. We could not substantiate
+either 49k GitHub repositories or 1.1M GitHub stars. When we inquired how these numbers were
+calculated, the authors publicly stated that GitHub was searched for “min-p”, which yields many false
+positives. The authors retracted both the 54k GitHub repository claim and the 1.1M GitHub
+stars claim from the ICLR 2025 Camera Ready manuscript.
+Given that the numbers have been retracted, we debated whether to include this section. We decided
+to include it for three reasons. First, we wanted to document this clear failure of the review process.
+These numbers were unsubstantiated in the manuscript, and, in our opinion, were preposterous.
+Yet three out of four reviewers and the Area Chair highly commended the community adoption as
+evidence of min-p’s superiority; for instance, the Area Chair wrote:
+
+         “[Min-p] is simple and is already widely adopted by the community (as mentioned
+         by [Reviewer] D38H, “The usage of it in 54,000 Github repositories alone is very
+         impressive”). [...] The resulting review scores reflect the high quality of the paper:
+         It presents convincing experiments, thorough analysis, and the provided method
+         has an extremely high impact."
+
+Reviewer fwNb similarly emphasized the community adoption numbers:
+
+         “[min-p] has good empirical results, both as measured on benchmarks and (more
+         important [sic]) by adoption of the community"
+
+Second, the machine learning research community may have learned of min-p before these commu-
+nity adoption numbers were retracted, e.g., when the original paper was posted to ArXiV or accepted
+at ICLR 2025. Thus, we felt a proactive clarification would better rectify the scientific record. Third,
+as we detail below, we believe the new community adoption statement remains misleading.
+
+5.2   The Revised Community Adoption Statement Inflates Min-p’s Adoption
+
+The ICLR 2025 Camera Ready now has a different statement of community adoption:
+
+         “[Min-p] is now integrated in widely used frameworks such as Hugging Face
+         Transformers, vLLM, and SGLang, which collectively have accrued over 350,000
+         GitHub stars. This integration, coupled with extensive downstream usage (e.g., over
+         290,000 dependent repositories for Transformers alone), underscores the method’s
+         practical impact."
+
+
+                                                   9
+While being integrated into such frameworks is indeed a contribution, this statement misleadingly
+represents these frameworks’ usage as min-p’s usage, rather than specifically measuring min-p’s
+usage. This new statement is akin to publishing a book and then claiming credit for the library.
+
+6       Discussion and Limitations
+Scientific Conclusions This investigation led us to conclude that the four lines of evidence presented
+by Nguyen et al. (2024) – (1) human evaluations, (2) NLP benchmark evaluations, (3) LLM-as-a-
+Judge evaluations, (4) community adoption – do not support claims of min-p’s superiority. While
+min-p is useful for providing users another options to try, the original paper’s data and our extensions
+of the original paper’s data suggest that all samplers perform roughly the same once given the same
+amount of hyperparameter tuning; however, in our view, more research would be needed to assess the
+veracity of this conclusion. The paper’s data does weakly suggest that min-p sampling can sometimes
+provide a benefit at higher temperatures, albeit with the critical caveat that absolute performance is
+meaningfully worse in this high-temperature regime than in standard temperature regimes.
+
+Key Limitation Our manuscript re-analyzes the evidence presented by the original paper (Nguyen
+et al., 2024) and additional evidence created using the original paper’s code. Conclusions here are
+based on that evidence. We emphasize that new evidence might lead to different conclusions.
+
+What Went Wrong During the ICLR 2025 Review Process? Nguyen et al. (2024)’s outstanding
+success in the ICLR 2025 review process—achieving Oral presentation status and ranking as the 18th
+highest-scoring submission2 —is difficult to reconcile with the flaws our investigation uncovered.
+The reviewers overlooked methodological issues such as which model(s) are being sampled from for
+the LLM-as-judge evals and missing/inadequate/improper consideration of uncertainty in presented
+results. Reviewers uncritically accepted the authors’ claim that "over 54,000 GitHub repositories"
+were using min-p sampling, when intuition or a quick GitHub search reveals cause for pause.
+The Area Chair’s comment also contains a clear misstatement: it highlights min-p’s success in the
+low temperature regime ("in the low temperature regime, [min-p] provides a significant advantage"),
+when the paper specifically claims benefits in the high temperature regime.
+
+
+
+
+    2
+        https://papercopilot.com/statistics/iclr-statistics/iclr-2025-statistics/
+
+
+                                                  10
+References
+David H Ackley, Geoffrey E Hinton, and Terrence J Sejnowski. A learning algorithm for boltzmann
+  machines. Cognitive science, 9(1):147–169, 1985.
+Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar, and Lav R Varshney.
+  Mirostat: A neural text decoding algorithm that directly controls perplexity. arXiv preprint
+  arXiv:2007.14966, 2020.
+Stella Biderman, Hailey Schoelkopf, Lintang Sutawika, Leo Gao, Jonathan Tow, Baber Abbasi,
+  Alham Fikri Aji, Pawan Sasanka Ammanamanchi, Sidney Black, Jordan Clive, Anthony DiPofi,
+  Julen Etxaniz, Benjamin Fattori, Jessica Zosa Forde, Charles Foster, Jeffrey Hsu, Mimansa Jaiswal,
+  Wilson Y. Lee, Haonan Li, Charles Lovering, Niklas Muennighoff, Ellie Pavlick, Jason Phang,
+  Aviya Skowron, Samson Tan, Xiangru Tang, Kevin A. Wang, Genta Indra Winata, François Yvon,
+  and Andy Zou. Lessons from the trenches on reproducible evaluation of language models, 2024.
+  URL https://arxiv.org/abs/2405.14782.
+Wei-Lin Chiang, Lianmin Zheng, Ying Sheng, Anastasios Nikolas Angelopoulos, Tianle Li, Dacheng
+ Li, Hao Zhang, Banghua Zhu, Michael Jordan, Joseph E. Gonzalez, and Ion Stoica. Chatbot arena:
+ An open platform for evaluating llms by human preference, 2024. URL https://arxiv.org/
+ abs/2403.04132.
+Elizabeth Clark, Tal August, Sofia Serrano, Nikita Haduong, Suchin Gururangan, and Noah A Smith.
+  All that’s ‘human’is not gold: Evaluating human evaluation of generated text. In Proceedings of the
+  59th Annual Meeting of the Association for Computational Linguistics and the 11th International
+  Joint Conference on Natural Language Processing (Volume 1: Long Papers), pp. 7282–7296, 2021.
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser,
+  Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, Christopher Hesse, and John
+  Schulman. Training verifiers to solve math word problems, 2021. URL https://arxiv.org/
+  abs/2110.14168.
+Yann Dubois, Chen Xuechen Li, Rohan Taori, Tianyi Zhang, Ishaan Gulrajani, Jimmy Ba, Carlos
+  Guestrin, Percy S Liang, and Tatsunori B Hashimoto. Alpacafarm: A simulation framework for
+  methods that learn from human feedback. Advances in Neural Information Processing Systems,
+  36:30039–30069, 2023.
+Angela Fan, Mike Lewis, and Yann Dauphin. Hierarchical neural story generation. arXiv preprint
+  arXiv:1805.04833, 2018.
+Leo Gao, Jonathan Tow, Stella Biderman, Sid Black, Anthony DiPofi, Charles Foster, Laurence
+  Golding, Jeffrey Hsu, Kyle McDonell, Niklas Muennighoff, et al. A framework for few-shot
+  language model evaluation. Version v0. 0.1. Sept, 10:8–9, 2021.
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad
+  Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, Amy Yang, Angela Fan,
+  Anirudh Goyal, Anthony Hartshorn, Aobo Yang, Archi Mitra, Archie Sravankumar, Artem Korenev,
+  Arthur Hinsvark, Arun Rao, Aston Zhang, Aurelien Rodriguez, Austen Gregerson, Ava Spataru,
+  Baptiste Roziere, Bethany Biron, Binh Tang, Bobbie Chern, Charlotte Caucheteux, Chaya Nayak,
+  Chloe Bi, Chris Marra, Chris McConnell, Christian Keller, Christophe Touret, Chunyang Wu,
+  Corinne Wong, Cristian Canton Ferrer, Cyrus Nikolaidis, Damien Allonsius, Daniel Song, Danielle
+  Pintz, Danny Livshits, Danny Wyatt, David Esiobu, Dhruv Choudhary, Dhruv Mahajan, Diego
+  Garcia-Olano, Diego Perino, Dieuwke Hupkes, Egor Lakomkin, Ehab AlBadawy, Elina Lobanova,
+  Emily Dinan, Eric Michael Smith, Filip Radenovic, Francisco Guzmán, Frank Zhang, Gabriel
+  Synnaeve, Gabrielle Lee, Georgia Lewis Anderson, Govind Thattai, Graeme Nail, Gregoire Mialon,
+  Guan Pang, Guillem Cucurell, Hailey Nguyen, Hannah Korevaar, Hu Xu, Hugo Touvron, Iliyan
+  Zarov, Imanol Arrieta Ibarra, Isabel Kloumann, Ishan Misra, Ivan Evtimov, Jack Zhang, Jade Copet,
+  Jaewon Lee, Jan Geffert, Jana Vranes, Jason Park, Jay Mahadeokar, Jeet Shah, Jelmer van der Linde,
+  Jennifer Billock, Jenny Hong, Jenya Lee, Jeremy Fu, Jianfeng Chi, Jianyu Huang, Jiawen Liu, Jie
+  Wang, Jiecao Yu, Joanna Bitton, Joe Spisak, Jongsoo Park, Joseph Rocca, Joshua Johnstun, Joshua
+  Saxe, Junteng Jia, Kalyan Vasuden Alwala, Karthik Prasad, Kartikeya Upasani, Kate Plawiak,
+  Ke Li, Kenneth Heafield, Kevin Stone, Khalid El-Arini, Krithika Iyer, Kshitiz Malik, Kuenley
+
+
+                                                 11
+Chiu, Kunal Bhalla, Kushal Lakhotia, Lauren Rantala-Yeary, Laurens van der Maaten, Lawrence
+Chen, Liang Tan, Liz Jenkins, Louis Martin, Lovish Madaan, Lubo Malo, Lukas Blecher, Lukas
+Landzaat, Luke de Oliveira, Madeline Muzzi, Mahesh Pasupuleti, Mannat Singh, Manohar Paluri,
+Marcin Kardas, Maria Tsimpoukelli, Mathew Oldham, Mathieu Rita, Maya Pavlova, Melanie
+Kambadur, Mike Lewis, Min Si, Mitesh Kumar Singh, Mona Hassan, Naman Goyal, Narjes
+Torabi, Nikolay Bashlykov, Nikolay Bogoychev, Niladri Chatterji, Ning Zhang, Olivier Duchenne,
+Onur Çelebi, Patrick Alrassy, Pengchuan Zhang, Pengwei Li, Petar Vasic, Peter Weng, Prajjwal
+Bhargava, Pratik Dubal, Praveen Krishnan, Punit Singh Koura, Puxin Xu, Qing He, Qingxiao Dong,
+Ragavan Srinivasan, Raj Ganapathy, Ramon Calderer, Ricardo Silveira Cabral, Robert Stojnic,
+Roberta Raileanu, Rohan Maheswari, Rohit Girdhar, Rohit Patel, Romain Sauvestre, Ronnie
+Polidoro, Roshan Sumbaly, Ross Taylor, Ruan Silva, Rui Hou, Rui Wang, Saghar Hosseini, Sahana
+Chennabasappa, Sanjay Singh, Sean Bell, Seohyun Sonia Kim, Sergey Edunov, Shaoliang Nie,
+Sharan Narang, Sharath Raparthy, Sheng Shen, Shengye Wan, Shruti Bhosale, Shun Zhang, Simon
+Vandenhende, Soumya Batra, Spencer Whitman, Sten Sootla, Stephane Collot, Suchin Gururangan,
+Sydney Borodinsky, Tamar Herman, Tara Fowler, Tarek Sheasha, Thomas Georgiou, Thomas
+Scialom, Tobias Speckbacher, Todor Mihaylov, Tong Xiao, Ujjwal Karn, Vedanuj Goswami,
+Vibhor Gupta, Vignesh Ramanathan, Viktor Kerkez, Vincent Gonguet, Virginie Do, Vish Vogeti,
+Vítor Albiero, Vladan Petrovic, Weiwei Chu, Wenhan Xiong, Wenyin Fu, Whitney Meers, Xavier
+Martinet, Xiaodong Wang, Xiaofang Wang, Xiaoqing Ellen Tan, Xide Xia, Xinfeng Xie, Xuchao
+Jia, Xuewei Wang, Yaelle Goldschlag, Yashesh Gaur, Yasmine Babaei, Yi Wen, Yiwen Song,
+Yuchen Zhang, Yue Li, Yuning Mao, Zacharie Delpierre Coudert, Zheng Yan, Zhengxing Chen, Zoe
+Papakipos, Aaditya Singh, Aayushi Srivastava, Abha Jain, Adam Kelsey, Adam Shajnfeld, Adithya
+Gangidi, Adolfo Victoria, Ahuva Goldstand, Ajay Menon, Ajay Sharma, Alex Boesenberg, Alexei
+Baevski, Allie Feinstein, Amanda Kallet, Amit Sangani, Amos Teo, Anam Yunus, Andrei Lupu,
+Andres Alvarado, Andrew Caples, Andrew Gu, Andrew Ho, Andrew Poulton, Andrew Ryan, Ankit
+Ramchandani, Annie Dong, Annie Franco, Anuj Goyal, Aparajita Saraf, Arkabandhu Chowdhury,
+Ashley Gabriel, Ashwin Bharambe, Assaf Eisenman, Azadeh Yazdan, Beau James, Ben Maurer,
+Benjamin Leonhardi, Bernie Huang, Beth Loyd, Beto De Paola, Bhargavi Paranjape, Bing Liu,
+Bo Wu, Boyu Ni, Braden Hancock, Bram Wasti, Brandon Spence, Brani Stojkovic, Brian Gamido,
+Britt Montalvo, Carl Parker, Carly Burton, Catalina Mejia, Ce Liu, Changhan Wang, Changkyu
+Kim, Chao Zhou, Chester Hu, Ching-Hsiang Chu, Chris Cai, Chris Tindal, Christoph Feichtenhofer,
+Cynthia Gao, Damon Civin, Dana Beaty, Daniel Kreymer, Daniel Li, David Adkins, David Xu,
+Davide Testuggine, Delia David, Devi Parikh, Diana Liskovich, Didem Foss, Dingkang Wang, Duc
+Le, Dustin Holland, Edward Dowling, Eissa Jamil, Elaine Montgomery, Eleonora Presani, Emily
+Hahn, Emily Wood, Eric-Tuan Le, Erik Brinkman, Esteban Arcaute, Evan Dunbar, Evan Smothers,
+Fei Sun, Felix Kreuk, Feng Tian, Filippos Kokkinos, Firat Ozgenel, Francesco Caggioni, Frank
+Kanayet, Frank Seide, Gabriela Medina Florez, Gabriella Schwarz, Gada Badeer, Georgia Swee,
+Gil Halpern, Grant Herman, Grigory Sizov, Guangyi, Zhang, Guna Lakshminarayanan, Hakan Inan,
+Hamid Shojanazeri, Han Zou, Hannah Wang, Hanwen Zha, Haroun Habeeb, Harrison Rudolph,
+Helen Suk, Henry Aspegren, Hunter Goldman, Hongyuan Zhan, Ibrahim Damlaj, Igor Molybog,
+Igor Tufanov, Ilias Leontiadis, Irina-Elena Veliche, Itai Gat, Jake Weissman, James Geboski, James
+Kohli, Janice Lam, Japhet Asher, Jean-Baptiste Gaya, Jeff Marcus, Jeff Tang, Jennifer Chan, Jenny
+Zhen, Jeremy Reizenstein, Jeremy Teboul, Jessica Zhong, Jian Jin, Jingyi Yang, Joe Cummings,
+Jon Carvill, Jon Shepard, Jonathan McPhie, Jonathan Torres, Josh Ginsburg, Junjie Wang, Kai
+Wu, Kam Hou U, Karan Saxena, Kartikay Khandelwal, Katayoun Zand, Kathy Matosich, Kaushik
+Veeraraghavan, Kelly Michelena, Keqian Li, Kiran Jagadeesh, Kun Huang, Kunal Chawla, Kyle
+Huang, Lailin Chen, Lakshya Garg, Lavender A, Leandro Silva, Lee Bell, Lei Zhang, Liangpeng
+Guo, Licheng Yu, Liron Moshkovich, Luca Wehrstedt, Madian Khabsa, Manav Avalani, Manish
+Bhatt, Martynas Mankus, Matan Hasson, Matthew Lennie, Matthias Reso, Maxim Groshev, Maxim
+Naumov, Maya Lathi, Meghan Keneally, Miao Liu, Michael L. Seltzer, Michal Valko, Michelle
+Restrepo, Mihir Patel, Mik Vyatskov, Mikayel Samvelyan, Mike Clark, Mike Macey, Mike Wang,
+Miquel Jubert Hermoso, Mo Metanat, Mohammad Rastegari, Munish Bansal, Nandhini Santhanam,
+Natascha Parks, Natasha White, Navyata Bawa, Nayan Singhal, Nick Egebo, Nicolas Usunier,
+Nikhil Mehta, Nikolay Pavlovich Laptev, Ning Dong, Norman Cheng, Oleg Chernoguz, Olivia
+Hart, Omkar Salpekar, Ozlem Kalinli, Parkin Kent, Parth Parekh, Paul Saab, Pavan Balaji, Pedro
+Rittner, Philip Bontrager, Pierre Roux, Piotr Dollar, Polina Zvyagina, Prashant Ratanchandani,
+Pritish Yuvraj, Qian Liang, Rachad Alao, Rachel Rodriguez, Rafi Ayub, Raghotham Murthy,
+Raghu Nayani, Rahul Mitra, Rangaprabhu Parthasarathy, Raymond Li, Rebekkah Hogan, Robin
+Battey, Rocky Wang, Russ Howes, Ruty Rinott, Sachin Mehta, Sachin Siby, Sai Jayesh Bondu,
+
+
+                                              12
+  Samyak Datta, Sara Chugh, Sara Hunt, Sargun Dhillon, Sasha Sidorov, Satadru Pan, Saurabh
+  Mahajan, Saurabh Verma, Seiji Yamamoto, Sharadh Ramaswamy, Shaun Lindsay, Shaun Lindsay,
+  Sheng Feng, Shenghao Lin, Shengxin Cindy Zha, Shishir Patil, Shiva Shankar, Shuqiang Zhang,
+  Shuqiang Zhang, Sinong Wang, Sneha Agarwal, Soji Sajuyigbe, Soumith Chintala, Stephanie
+  Max, Stephen Chen, Steve Kehoe, Steve Satterfield, Sudarshan Govindaprasad, Sumit Gupta,
+  Summer Deng, Sungmin Cho, Sunny Virk, Suraj Subramanian, Sy Choudhury, Sydney Goldman,
+  Tal Remez, Tamar Glaser, Tamara Best, Thilo Koehler, Thomas Robinson, Tianhe Li, Tianjun
+  Zhang, Tim Matthews, Timothy Chou, Tzook Shaked, Varun Vontimitta, Victoria Ajayi, Victoria
+  Montanez, Vijai Mohan, Vinay Satish Kumar, Vishal Mangla, Vlad Ionescu, Vlad Poenaru,
+  Vlad Tiberiu Mihailescu, Vladimir Ivanov, Wei Li, Wenchen Wang, Wenwen Jiang, Wes Bouaziz,
+  Will Constable, Xiaocheng Tang, Xiaojian Wu, Xiaolan Wang, Xilun Wu, Xinbo Gao, Yaniv
+  Kleinman, Yanjun Chen, Ye Hu, Ye Jia, Ye Qi, Yenda Li, Yilin Zhang, Ying Zhang, Yossi Adi,
+  Youngjin Nam, Yu, Wang, Yu Zhao, Yuchen Hao, Yundi Qian, Yunlu Li, Yuzi He, Zach Rait,
+  Zachary DeVito, Zef Rosnbrick, Zhaoduo Wen, Zhenyu Yang, Zhiwei Zhao, and Zhiyu Ma. The
+  llama 3 herd of models, 2024. URL https://arxiv.org/abs/2407.21783.
+John Hewitt, Christopher D Manning, and Percy Liang. Truncation sampling as language model
+  desmoothing. In Findings of the Association for Computational Linguistics: EMNLP 2022, pp.
+  3414–3427, 2022.
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi. The curious case of neural text
+  degeneration. In International Conference on Learning Representations, 2020.
+David M Howcroft, Anya Belz, Miruna Clinciu, Dimitra Gkatzia, Sadid A Hasan, Saad Mahamood,
+  Simon Mille, Emiel Van Miltenburg, Sashank Santhanam, and Verena Rieser. Twenty years of
+  confusion in human evaluation: Nlg needs evaluation sheets and standardised definitions. In 13th
+  International Conference on Natural Language Generation 2020, pp. 169–182. Association for
+  Computational Linguistics, 2020.
+John Hughes, Sara Price, Aengus Lynch, Rylan Schaeffer, Fazl Barez, Sanmi Koyejo, Henry Sleight,
+  Erik Jones, Ethan Perez, and Mrinank Sharma. Best-of-n jailbreaking, 2024. URL https:
+  //arxiv.org/abs/2412.03556.
+Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot,
+  Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier,
+  Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas
+  Wang, Timothée Lacroix, and William El Sayed. Mistral 7b, 2023. URL https://arxiv.org/
+  abs/2310.06825.
+Daniel Khashabi, Gabriel Stanovsky, Jonathan Bragg, Nicholas Lourie, Jungo Kasai, Yejin Choi,
+  Noah A. Smith, and Daniel S. Weld. Genie: Toward reproducible and standardized human
+  evaluation for text generation, 2022. URL https://arxiv.org/abs/2101.06561.
+Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras, Dilara Soylu, Michihiro Yasunaga, Yian
+  Zhang, Deepak Narayanan, Yuhuai Wu, Ananya Kumar, et al. Holistic evaluation of language
+  models. arXiv preprint arXiv:2211.09110, 2022.
+Reiichiro Nakano, Jacob Hilton, Suchir Balaji, Jeff Wu, Long Ouyang, Christina Kim, Christopher
+  Hesse, Shantanu Jain, Vineet Kosaraju, William Saunders, et al. Webgpt: Browser-assisted
+  question-answering with human feedback. arXiv preprint arXiv:2112.09332, 2021.
+Minh Nguyen, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch, and Ravid Shwartz-
+ Ziv. Turning up the heat: Min-p sampling for creative and coherent llm outputs. arXiv preprint
+ arXiv:2407.01082, 2024.
+Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan
+ Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang,
+ Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin
+ Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi
+ Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan,
+ Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu. Qwen2.5 technical report, 2025. URL
+ https://arxiv.org/abs/2412.15115.
+
+
+                                               13
+David Rein, Betty Li Hou, Asa Cooper Stickland, Jackson Petty, Richard Yuanzhe Pang, Julien Dirani,
+  Julian Michael, and Samuel R. Bowman. Gpqa: A graduate-level google-proof q&a benchmark,
+  2023. URL https://arxiv.org/abs/2311.12022.
+
+Stephen Roller, Y-Lan Boureau, Jason Weston, Antoine Bordes, Emily Dinan, Angela Fan, David
+  Gunning, Da Ju, Margaret Li, Spencer Poff, Pratik Ringshia, Kurt Shuster, Eric Michael Smith,
+  Arthur Szlam, Jack Urbanek, and Mary Williamson. Open-domain conversational agents: Current
+  progress, open problems, and future directions, 2020. URL https://arxiv.org/abs/2006.
+  12442.
+
+Rylan Schaeffer, Joshua Kazdan, John Hughes, Jordan Juravsky, Sara Price, Aengus Lynch, Erik
+  Jones, Robert Kirk, Azalia Mirhoseini, and Sanmi Koyejo. How do large language monkeys get
+  their power (laws)?, 2025a. URL https://arxiv.org/abs/2502.17578.
+
+Rylan Schaeffer, Punit Singh Koura, Binh Tang, Ranjan Subramanian, Aaditya K Singh, Todor
+  Mihaylov, Prajjwal Bhargava, Lovish Madaan, Niladri S. Chatterji, Vedanuj Goswami, Sergey
+  Edunov, Dieuwke Hupkes, Sanmi Koyejo, and Sharan Narang. Correlating and predicting human
+  evaluations of language models from natural language processing benchmarks, 2025b. URL
+  https://arxiv.org/abs/2502.18339.
+
+Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford,
+  Dario Amodei, and Paul F Christiano. Learning to summarize with human feedback. Advances in
+  neural information processing systems, 33:3008–3021, 2020.
+
+Gemma Team, Morgane Riviere, Shreya Pathak, Pier Giuseppe Sessa, Cassidy Hardin, Surya
+  Bhupatiraju, Léonard Hussenot, Thomas Mesnard, Bobak Shahriari, Alexandre Ramé, Johan
+  Ferret, Peter Liu, Pouya Tafti, Abe Friesen, Michelle Casbon, Sabela Ramos, Ravin Kumar,
+  Charline Le Lan, Sammy Jerome, Anton Tsitsulin, Nino Vieillard, Piotr Stanczyk, Sertan Girgin,
+  Nikola Momchev, Matt Hoffman, Shantanu Thakoor, Jean-Bastien Grill, Behnam Neyshabur,
+  Olivier Bachem, Alanna Walton, Aliaksei Severyn, Alicia Parrish, Aliya Ahmad, Allen Hutchison,
+  Alvin Abdagic, Amanda Carl, Amy Shen, Andy Brock, Andy Coenen, Anthony Laforge, Antonia
+  Paterson, Ben Bastian, Bilal Piot, Bo Wu, Brandon Royal, Charlie Chen, Chintu Kumar, Chris
+  Perry, Chris Welty, Christopher A. Choquette-Choo, Danila Sinopalnikov, David Weinberger,
+  Dimple Vijaykumar, Dominika Rogozińska, Dustin Herbison, Elisa Bandy, Emma Wang, Eric
+  Noland, Erica Moreira, Evan Senter, Evgenii Eltyshev, Francesco Visin, Gabriel Rasskin, Gary
+ Wei, Glenn Cameron, Gus Martins, Hadi Hashemi, Hanna Klimczak-Plucińska, Harleen Batra,
+  Harsh Dhand, Ivan Nardini, Jacinda Mein, Jack Zhou, James Svensson, Jeff Stanway, Jetha
+  Chan, Jin Peng Zhou, Joana Carrasqueira, Joana Iljazi, Jocelyn Becker, Joe Fernandez, Joost
+  van Amersfoort, Josh Gordon, Josh Lipschultz, Josh Newlan, Ju yeong Ji, Kareem Mohamed,
+  Kartikeya Badola, Kat Black, Katie Millican, Keelin McDonell, Kelvin Nguyen, Kiranbir Sodhia,
+  Kish Greene, Lars Lowe Sjoesund, Lauren Usui, Laurent Sifre, Lena Heuermann, Leticia Lago,
+  Lilly McNealus, Livio Baldini Soares, Logan Kilpatrick, Lucas Dixon, Luciano Martins, Machel
+  Reid, Manvinder Singh, Mark Iverson, Martin Görner, Mat Velloso, Mateo Wirth, Matt Davidow,
+  Matt Miller, Matthew Rahtz, Matthew Watson, Meg Risdal, Mehran Kazemi, Michael Moynihan,
+  Ming Zhang, Minsuk Kahng, Minwoo Park, Mofi Rahman, Mohit Khatwani, Natalie Dao, Nenshad
+  Bardoliwalla, Nesh Devanathan, Neta Dumai, Nilay Chauhan, Oscar Wahltinez, Pankil Botarda,
+  Parker Barnes, Paul Barham, Paul Michel, Pengchong Jin, Petko Georgiev, Phil Culliton, Pradeep
+  Kuppala, Ramona Comanescu, Ramona Merhej, Reena Jana, Reza Ardeshir Rokni, Rishabh
+  Agarwal, Ryan Mullins, Samaneh Saadat, Sara Mc Carthy, Sarah Cogan, Sarah Perrin, Sébastien
+  M. R. Arnold, Sebastian Krause, Shengyang Dai, Shruti Garg, Shruti Sheth, Sue Ronstrom, Susan
+  Chan, Timothy Jordan, Ting Yu, Tom Eccles, Tom Hennigan, Tomas Kocisky, Tulsee Doshi,
+  Vihan Jain, Vikas Yadav, Vilobh Meshram, Vishal Dharmadhikari, Warren Barkley, Wei Wei,
+ Wenming Ye, Woohyun Han, Woosuk Kwon, Xiang Xu, Zhe Shen, Zhitao Gong, Zichuan Wei,
+  Victor Cotruta, Phoebe Kirk, Anand Rao, Minh Giang, Ludovic Peran, Tris Warkentin, Eli Collins,
+  Joelle Barral, Zoubin Ghahramani, Raia Hadsell, D. Sculley, Jeanine Banks, Anca Dragan, Slav
+  Petrov, Oriol Vinyals, Jeff Dean, Demis Hassabis, Koray Kavukcuoglu, Clement Farabet, Elena
+  Buchatskaya, Sebastian Borgeaud, Noah Fiedel, Armand Joulin, Kathleen Kenealy, Robert Dadashi,
+  and Alek Andreev. Gemma 2: Improving open language models at a practical size, 2024. URL
+  https://arxiv.org/abs/2408.00118.
+
+
+                                                14
+Chris Van Der Lee, Albert Gatt, Emiel Van Miltenburg, Sander Wubben, and Emiel Krahmer. Best
+  practices for the human evaluation of automatically generated text. In Proceedings of the 12th
+  International Conference on Natural Language Generation, pp. 355–368, 2019.
+Joshua Vendrow, Edward Vendrow, Sara Beery, and Aleksander Madry. Do large language model
+  benchmarks test reliability? arXiv preprint arXiv:2502.03461, 2025.
+Yi Xu, Laura Ruis, Tim Rocktäschel, and Robert Kirk. Investigating non-transitivity in llm-as-a-judge,
+  2025. URL https://arxiv.org/abs/2502.14074.
+Hugh Zhang, Jeff Da, Dean Lee, Vaughn Robinson, Catherine Wu, William Song, Tiffany Zhao,
+  Pranav Raja, Charlotte Zhuang, Dylan Slack, et al. A careful examination of large language model
+  performance on grade school arithmetic. Advances in Neural Information Processing Systems, 37:
+ 46819–46836, 2024.
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang,
+  Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing, et al. Judging llm-as-a-judge with mt-bench and
+  chatbot arena. Advances in Neural Information Processing Systems, 36:46595–46623, 2023.
+
+
+
+
+                                                 15
+A    Examples of Human Qualitative Responses Favoring Basic Sampling Over
+     Min-P Sampling
+In Section 2.3, we described how qualitative responses from many human participants in the orig-
+inal paper’s study favored basic sampling. Direct quotes from human evaluators favoring basic
+sampling are provided below. In the study, basic sampling was called “Model A”; for clarity, we
+substituted the pseudonyms for the actual sampling methods):
+
+      • “[basic sampling] on Temp 3.0 - High Diversity setting. The stories where [sic] more
+        interenting [sic], felt more different compared to the others, which felt like the same ideia
+        [sic] just in a different format.”
+      • “I felt like [basic sampling] was most diverse and most interesting with it’s [sic] descriptions
+        of the characters and the setting. It appealed to me most and seemed to have less ’broken’
+        sentences that didn’t make sense. Descriptions were painterly [sic] and elaborate.”
+      • “[basic sampling] was more engaging, it aroused my curiosity.”
+      • “[basic sampling] provided more depth and easy to read for me and there was more
+        diversity.”
+      • “[basic sampling], they presented creative storytelling”
+      • “[basic sampling]. From the very beginning the verbiage and descriptions were very
+        creative and vivid. And each story was unique”
+      • “I believe that [basic sampling] has provided stories with more differentiation overall than
+        the other two models. From the point of view of creativity, all three models are more or less
+        equivalent as they almost always talk about stories set in extraterrestrial worlds both from a
+        physical and mental (dreams) point of view"
+      • “[Basic sampling]: Sample 2: Temperature Setting F (Temp 3.0 - High Diversity). The
+        story was captivating, it took inside the mystical land and walked you right besides all
+        the characters, you can even draw the characters from just th descriptions provided by the
+        prompt. you Could even smell them, smell the setting and be at one with the setting."
+      • “I personally preferred [basic sampling] on the setting of creative, descriptive storytelling.
+        I enjoyed how the writing was creative, showing imagination and a strong use of language.
+        The stories were quite evocative, with intriguing settings and characters that helped to draw
+        the reader in. I also appreciated the diversity of themes that were explored, from night
+        weavers to dream manipulation and mysterious libraries, which kept the stories engaging
+        and interesting."
+      • “Temporature setting C on [basic sampling] was the best. The story was fascinating and
+        very engaging. I wanted to read more."
+      • “I prefered the first [basic sampling]. Tho [basic sampling] and C seem to be very head
+        to head. But something about [basic sampling] seemed different in quality about it to me."
+
+More quotes are in the original paper’s data. We urge readers to draw their own conclusions.
+
+
+
+
+                                                 16
+B                             GSM8K Chain-of-Thought Scores with “Standard" Formatting
+At the request of Nguyen et al. (2024), we reran our GSM8K Chain-of-Thought sweeps using “stan-
+dard" formatting instead of “Llama" formatting. Both analyses reached consistent results: min-p
+does not consistently outperform other samplers when controlling the volume of hyperparame-
+ter space.
+
+
+
+
+                                      Qwen 2.5 0.5B                         Qwen 2.5 0.5B Instruct                         Qwen 2.5 1.5B                        Qwen 2.5 1.5B Instruct
+                                                                 0.3                                        0.6                                      0.4
+
+
+
+
+Exact Match (Strict)
+                       0.3
+
+                                                                 0.2                                                                                 0.3
+                                                                                                            0.4
+                       0.2
+
+                                                                                                                                                     0.2
+                                                                 0.1
+                       0.1                                                                                  0.2
+
+
+
+                                      Qwen 2.5 3B                            Qwen 2.5 3B Instruct                          Qwen 2.5 7B                           Qwen 2.5 7B Instruct
+                                                                0.06                                        0.8
+                       0.6
+
+
+
+
+Exact Match (Strict)
+                                                                                                                                                    0.30
+                                                                0.05                                        0.6
+                       0.4
+                                                                0.04                                                                                0.25
+                                                                                                            0.4
+
+                                                                0.03
+                       0.2                                                                                                                          0.20
+
+
+                                      Mistral 7Bv0.1                        Mistral 7Bv0.1 Instruct                        Llama 3.2 3B                         Llama 3.2 3B Instruct
+                       0.4                                                                                  0.3
+                                                                                                                                                     0.6
+
+
+
+
+Exact Match (Strict)
+                                                                 0.3
+                       0.3
+                                                                                                            0.2
+                                                                 0.2                                                                                 0.4
+                       0.2
+
+                                                                                                            0.1
+                       0.1                                       0.1                                                                                 0.2
+
+
+                                      Llama 3.1 8B                          Llama 3.1 8B Instruct                          Gemma 2 2B                           Gemma 2 2B Instruct
+                                                                 0.8
+                                                                                                           0.25
+                       0.5
+
+
+
+
+Exact Match (Strict)
+                                                                                                                                                    0.03
+                                                                                                           0.20
+                       0.4                                       0.6
+                                                                                                           0.15                                     0.02
+                       0.3
+                                                                 0.4                                       0.10
+                       0.2
+                                                                                                                                                    0.01
+                                                                                                           0.05
+                                                                                                                   0            50            100           0            50            100
+                                                                                                                  Number of Hyperparameters Swept          Number of Hyperparameters Swept
+                                      Gemma 2 9B                            Gemma 2 9B Instruct
+
+                       0.6                                     0.150
+
+
+
+
+Exact Match (Strict)
+                                                                                                                                                                        Sampler
+                                                                                                                                                                        Basic
+                                                               0.125
+                                                                                                                                                                        Top-p
+                       0.4
+                                                               0.100                                                                                                    Top-k
+                                                                                                                                                                        Min-p
+                                                               0.075                                                                                                    Model Type
+                       0.2
+                                                                                                                                                                        Base
+                              0            50            100            0            50            100                                                                  Instruct
+                             Number of Hyperparameters Swept           Number of Hyperparameters Swept
+
+
+Figure 7: Min-P Does Not Consistently Outperform Other Samplers on GSM8K When Control-
+ling For Hyperparameter Volume. We reran our GSM8K sweep using “standard" formatting rather
+than “Llama" formatting and observed qualitatively similar data.
+
+
+                                                                                                      17
+                                                  Qwen 2.5 0.5B                  Qwen 2.5 0.5B Instruct                  Qwen 2.5 1.5B                  Qwen 2.5 1.5B Instruct
+
+
+
+
+Best Min-p - Best Other Sampler
+                                   0.1
+
+
+                                   0.0
+
+
+                                  −0.1
+
+
+                                  −0.2
+
+                                                   Qwen 2.5 3B                    Qwen 2.5 3B Instruct                    Qwen 2.5 7B                    Qwen 2.5 7B Instruct
+
+
+
+
+Best Min-p - Best Other Sampler
+                                   0.1
+
+
+                                   0.0
+
+
+                                  −0.1
+
+
+                                  −0.2
+
+                                                  Mistral 7Bv0.1                 Mistral 7Bv0.1 Instruct                 Llama 3.2 3B                    Llama 3.2 3B Instruct
+
+
+
+
+Best Min-p - Best Other Sampler
+                                   0.1
+
+
+                                   0.0
+
+
+                                  −0.1
+
+
+                                  −0.2
+
+                                                  Llama 3.1 8B                    Llama 3.1 8B Instruct                  Gemma 2 2B                      Gemma 2 2B Instruct
+
+
+
+
+Best Min-p - Best Other Sampler
+                                   0.1
+
+
+                                   0.0
+
+
+                                  −0.1
+
+
+                                  −0.2
+                                                                                                                0     25      50     75      100   0     25      50     75      100
+                                                                                                                Number of Hyperparameters Swept    Number of Hyperparameters Swept
+                                                  Gemma 2 9B                      Gemma 2 9B Instruct
+
+
+
+
+Best Min-p - Best Other Sampler
+                                   0.1
+
+
+                                   0.0
+                                                                                                                                                                Model Type
+                                                                                                                                                                    Base
+                                  −0.1
+                                                                                                                                                                    Instruct
+
+
+                                  −0.2
+                                         0     25      50     75      100   0     25      50     75      100
+                                         Number of Hyperparameters Swept    Number of Hyperparameters Swept
+
+
+Figure 8: Min-P Does Not Consistently Outperform Other Samplers on GSM8K When Control-
+ling For Hyperparameter Volume. We reran our GSM8K sweep using “standard" formatting rather
+than “Llama" formatting and observed qualitatively similar data.
+
+
+
+
+                                                                                                           18
+C   GSM8K Scores By Model, Sampler and Hyperparameters
+
+
+                                                                                Basic                       Top-p                    Top-k                       Min-p                                        Temperature
+                                                                                                                                                                                                              0.0
+                                                        0.25                                                                                                                                                  0.5
+
+
+
+
+                                 Exact Match (Strict)
+                                                                                                                                                                                                              1.0
+                                                        0.20
+
+
+                                                                                                                                                                                    Qwen 2.5 0.5B
+                                                                                                                                                                                                              1.5
+                                                        0.15                                                                                                                                                  2.0
+                                                                                                                                                                                                              2.5
+                                                        0.10                                                                                                                                                  3.0
+                                                                                                                                                                                                              Model Type
+                                                        0.05
+                                                                                                                                                                                                              Base
+                                                        0.00                                                                                                                                                  Instruct
+
+
+
+
+                                                                                                                                                                                    Qwen 2.5 0.5B Instruct
+                                                                 0.3
+
+
+
+
+                                          Exact Match (Strict)
+                                                                 0.2
+
+
+                                                                 0.1
+
+
+                                                                 0.0
+
+                                                                 0.6
+
+                                                                 0.5
+
+
+
+
+                                          Exact Match (Strict)
+                                                                                                                                                                                    Qwen 2.5 1.5B
+                                                                 0.4
+
+                                                                 0.3
+
+                                                                 0.2
+
+                                                                 0.1
+
+                                                                 0.0
+
+
+
+                                                                 0.6
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Qwen 2.5 1.5B Instruct
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+
+
+
+
+                                          Exact Match (Strict)
+                                                                 0.6
+
+
+
+                                                                                                                                                                                    Qwen 2.5 3B
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+
+
+                                                                 0.4
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Qwen 2.5 3B Instruct
+                                                                 0.3
+
+
+                                                                 0.2
+
+
+                                                                 0.1
+
+
+                                                                 0.0
+
+                                                                 0.8
+
+
+
+
+                                          Exact Match (Strict)
+                                                                 0.6
+
+
+
+                                                                                                                                                                                    Qwen 2.5 7B
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+
+
+                                                                 0.8
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Qwen 2.5 7B Instruct
+                                                                 0.6
+
+
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+
+
+                                               0.150
+
+                                               0.125
+
+
+
+
+                        Exact Match (Strict)
+                                                                                                                                                                                    Mistral 7Bv0.1
+                                               0.100
+
+                                               0.075
+
+                                               0.050
+
+                                               0.025
+
+                                               0.000
+
+                                                                 0.4
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Mistral 7Bv0.1 Instruct
+                                                                 0.3
+
+
+                                                                 0.2
+
+
+                                                                 0.1
+
+
+                                                                 0.0
+
+                                                        0.12
+
+                                                        0.10
+
+
+
+
+                                 Exact Match (Strict)
+                                                        0.08
+
+
+                                                                                                                                                                                    Llama 3.2 3B
+                                                        0.06
+
+                                                        0.04
+
+                                                        0.02
+
+                                                        0.00
+
+                                                                 0.8
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Llama 3.2 3B Instruct
+                                                                 0.6
+
+
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+
+
+                                                        0.25
+
+
+
+
+                                 Exact Match (Strict)
+                                                        0.20
+
+
+
+                                                                                                                                                                                    Llama 3.1 8B
+                                                        0.15
+
+                                                        0.10
+
+                                                        0.05
+
+                                                        0.00
+
+
+                                                                 0.8
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Llama 3.1 8B Instruct
+                                                                 0.6
+
+                                                                 0.4
+
+                                                                 0.2
+
+                                                                 0.0
+
+
+
+
+                                                        0.06
+
+
+
+
+                                 Exact Match (Strict)
+                                                                                                                                                                                    Gemma 2 2B
+                                                        0.04
+
+
+                                                        0.02
+
+
+                                                        0.00
+
+
+                                                                 0.5
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Gemma 2 2B Instruct
+                                                                 0.4
+
+                                                                 0.3
+
+                                                                 0.2
+
+                                                                 0.1
+
+                                                                 0.0
+
+
+                                                                 0.3
+
+
+
+
+                                          Exact Match (Strict)
+                                                                                                                                                                                    Gemma 2 9B
+                                                                 0.2
+
+
+                                                                 0.1
+
+
+                                                                 0.0
+
+                                                                 0.8
+
+
+
+
+                                          Exact Match (Strict)                                                                                                                      Gemma 2 9B Instruct
+                                                                 0.6
+
+
+                                                                 0.4
+
+
+                                                                 0.2
+
+
+                                                                 0.0
+                                                                    −0.05       0.00        0.05   0.7   0.8        0.9   1.0       100          200   0.0   0.1        0.2   0.3
+                                                                            Sampler Value                Sampler Value           Sampler Value                Sampler Value
+
+
+
+
+Figure 9: GSM8K Scores By Model, Sampler and Sampler Hyperparameters. Many models
+achieve their highest scores at low temperatures across samplers.
+
+
+                                                                                                                                19
+

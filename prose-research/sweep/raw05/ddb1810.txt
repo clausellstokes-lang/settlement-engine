@@ -1,0 +1,1649 @@
+
+ Updates in the Player’s Handbook (2024) | Dungeons & Dragons 
+ Skip to Content 
+ Play D&D My Characters Create a character My Campaigns Beta Maps VTT More Tools D&D Beyond Mobile App Avrae Discord Bot Browse Homebrew My Homebrew Collection My Homebrew Creations Encounters My Dice Rules Browse Classes Backgrounds Species Feats Spells Equipment Magic Items Monsters Resources How to Play D&D D&D Beyond Basic Rules Rules Glossary D&D Character Sheets System Reference Document (SRD) Unearthed Arcana Featured Article Updating Your Campaign to the 5.5e D&D Rules Article Running Lairs: How to Make the Most of a Monster's Place of Power Library Free books View all Sign in to view your
+library & saved
+favorites. Sign in Community Support Help Portal Articles Support Forum Changelog Roadmap Creator FAQ Connect Community Update Forums Organized Play Find Players Discord Legends of Greyhawk Follow Us Featured Article Dungeon Masters: The New D&D Actual Play Marketplace Open search Toggle mobile navigation Sign in Create Account Play D&D Back Play D&D My Characters Create a character My Campaigns Maps VTT More Tools D&D Beyond Mobile App Avrae Discord Bot Browse Homebrew My Homebrew Collection My Homebrew Creations Encounters My Dice Rules Back Rules Browse Classes Backgrounds Species Feats Spells Equipment Magic Items Monsters Resources How to Play D&D D&D Beyond Basic Rules Rules Glossary D&D Character Sheets System Reference Document (SRD) Unearthed Arcana Featured Article Updating Your Campaign to the 5.5e D&D Rules Article Running Lairs: How to Make the Most of a Monster's Place of Power Library Back Library Free books Monstrous Compendium Vol. 1: Spelljammer Creatures Frozen Sick D&D Beyond Basic Rules Basic Rules (2014) Sign in to view your
+library & saved
+favorites. Sign in Community Back Community Help Portal Articles Support Forum Changelog Roadmap Creator FAQ Connect Community Update Forums Organized Play Find Players Discord Legends of Greyhawk Follow Us Featured Article Dungeon Masters: The New D&D Actual Play Marketplace Sign in Create an Account 
+ Home 
+ Posts 
+ Updates in the Player’s Handbook (2024) 
+ Updates in the Player’s Handbook (2024)
+ Updates in the Player’s Handbook (2024) 
+ by DND Staff 
+ Sep 3, 2024 
+ Category Icon 
+ Posts 
+ 34 
+ Tags 
+ Player's Handbook 
+ This article outlines what has changed between the 2014 and 2024 versions of the Player’s Handbook . For an update on changes to the D&D Beyond toolset, see the D&D Beyond changelog . 
+ Classes 
+ Origins 
+ Feats 
+ Equipment 
+ Spells 
+ Stat Blocks 
+ Rules 
+ New Terminology 
+ Using This Book with Older Books 
+ When you play D&D with the 2024 Player’s Handbook , it replaces all rules, classes, subclasses, spells, feats, equipment, species, and backgrounds in the 2014 version of the book. There are a few exceptions; the following options don’t appear in the 2024 book and are still usable from 2014: 
+ Knowledge Domain (Cleric subclass) 
+ Nature Domain (Cleric subclass) 
+ Tempest Domain (Cleric subclass) 
+ School of Conjuration (Wizard subclass) 
+ School of Enchantment (Wizard subclass) 
+ School of Necromancy (Wizard subclass) 
+ School of Transmutation (Wizard subclass) 
+ Half-Elf (species) 
+ Half-Orc (species) 
+ Dungeon Delver (feat) 
+ Linguist (feat) 
+ Martial Adept (feat) 
+ Any subclass, spell, or feat from Xanathar’s Guide to Everything or Tasha’s Cauldron of Everything that appears in this book replaces the version that appears in the Everything book. 
+ Classes 
+ The 2024 Player’s Handbook includes twelve classes for player characters, and each class includes four subclasses. 
+ New Subclass Names 
+ The Updated Subclasses table lists new names for some subclasses. 
+ Updated Subclasses 
+ Class 
+ 2014 Subclass 
+ 2024 Subclass 
+ Barbarian 
+ Path of the Totem Warrior 
+ Path of the Wild Heart 
+ Monk 
+ Way of Mercy * 
+ Warrior of Mercy 
+ Monk 
+ Way of Shadow 
+ Warrior of Shadow 
+ Monk 
+ Way of the Four Elements 
+ Warrior of the Elements 
+ Monk 
+ Way of the Open Hand 
+ Warrior of the Open Hand 
+ Sorcerer 
+ Aberrant Mind * 
+ Aberrant Sorcery 
+ Sorcerer 
+ Clockwork Soul * 
+ Clockwork Sorcery 
+ Sorcerer 
+ Draconic Bloodline 
+ Draconic Sorcery 
+ Sorcerer 
+ Wild Magic 
+ Wild Magic Sorcery 
+ Warlock 
+ The Archfey 
+ Archfey Patron 
+ Warlock 
+ The Celestial † 
+ Celestial Patron 
+ Warlock 
+ The Fiend 
+ Fiend Patron 
+ Warlock 
+ The Great Old One 
+ Great Old One Patron 
+ Wizard 
+ School of Abjuration 
+ Abjurer 
+ Wizard 
+ School of Divination 
+ Diviner 
+ Wizard 
+ School of Evocation 
+ Evoker 
+ Wizard 
+ School of Illusion 
+ Illusionist 
+ * First appeared in Tasha’s Cauldron of Everything 
+ † First appeared in Xanathar’s Guide to Everything 
+ Barbarian 
+ The Barbarian class includes the following updates: 
+ Revised starting equipment 
+ Seven new class features and seven revised class features, which are listed in the Barbarian Class Features table 
+ Barbarian Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Rage 
+ Revised 
+ 1 
+ Weapon Master 
+ New 
+ 2 
+ Danger Sense 
+ Revised 
+ 2 
+ Reckless Attack 
+ Revised 
+ 3 
+ Primal Knowledge 
+ New 
+ 7 
+ Feral Instinct 
+ Revised 
+ 7 
+ Instinctive Pounce 
+ New 
+ 9 
+ Brutal Strike 
+ New 
+ 11 
+ Relentless Rage 
+ Revised 
+ 13 
+ Improved Brutal Strike 
+ New 
+ 15 
+ Persistent Rage 
+ Revised 
+ 17 
+ Improved Brutal Strike 
+ New 
+ 18 
+ Indomitable Might 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ Subclass Changes 
+ Barbarian subclasses include the following updates: 
+ Path of the Berserker: Three revised features 
+ Path of the Wild Heart: Three revised features 
+ Path of the World Tree (New): Four new features 
+ Path of the Zealot (New): Imported from Xanathar’s Guide to Everything with one new feature and three revised features 
+ Bard 
+ The Bard class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Revised spell list 
+ Two new class features and seven revised class features, which are listed in the Bard Class Features table 
+ Bard Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Bardic Inspiration 
+ Revised 
+ 1 
+ Spellcasting 
+ Revised 
+ 2 
+ Expertise 
+ Revised 
+ 5 
+ Font of Inspiration 
+ Revised 
+ 7 
+ Countercharm 
+ Revised 
+ 10 
+ Magical Secrets 
+ Revised 
+ 18 
+ Superior Inspiration 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Words of Creation 
+ New 
+ Subclass Changes 
+ Bard subclasses include the following updates: 
+ College of Dance (New): Four new features 
+ College of Glamour (New): Imported from Xanathar’s Guide to Everything with one new feature and three revised features 
+ College of Lore: Three revised features 
+ College of Valor: Two revised features 
+ Cleric 
+ The Cleric class includes the following updates: 
+ Revised starting equipment 
+ Revised spell list 
+ Six new class features and four revised class features, which are listed in the Cleric Class Features table 
+ Cleric Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Divine Order 
+ New 
+ 1 
+ Spellcasting 
+ Revised 
+ 2 
+ Channel Divinity 
+ Revised 
+ 3 
+ Cleric Subclass 
+ Revised 
+ 5 
+ Sear Undead 
+ New 
+ 7 
+ Blessed Strikes 
+ New 
+ 10 
+ Divine Intervention 
+ Revised 
+ 14 
+ Improved Blessed Strikes 
+ New 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Greater Divine Intervention 
+ New 
+ Subclass Changes 
+ Cleric subclasses include the following updates: 
+ Life Domain: Three revised features 
+ Light Domain: Five revised features 
+ Trickery Domain: One new feature and four revised features 
+ War Domain: Five revised features 
+ Druid 
+ The Druid class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Revised armor training 
+ Revised spell list 
+ Six new class features and six revised class features, which are listed in the Druid Class Features table 
+ Druid Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Druidic 
+ Revised 
+ 1 
+ Primal Order 
+ New 
+ 1 
+ Spellcasting 
+ Revised 
+ 2 
+ Wild Companion 
+ New 
+ 2 
+ Wild Shape 
+ Revised 
+ 3 
+ Druid Subclass 
+ Revised 
+ 5 
+ Wild Resurgence 
+ New 
+ 7 
+ Elemental Fury 
+ New 
+ 15 
+ Improved Elemental Fury 
+ New 
+ 18 
+ Beast Spells 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Archdruid 
+ Revised 
+ Subclass Changes 
+ Druid subclasses include the following updates: 
+ Circle of the Land: One new feature and four revised features 
+ Circle of the Moon: Four new features and one revised feature 
+ Circle of the Sea (New): Five new features 
+ Circle of the Stars (New): Imported from Tasha’s Cauldron of Everything with one revised features 
+ Fighter 
+ The Fighter class includes the following updates: 
+ Revised starting equipment 
+ Revised skill proficiencies 
+ Six new class features and three revised class features, which are listed in the Fighter Class Features table 
+ Fighter Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Fighting Style 
+ Revised 
+ 1 
+ Second Wind 
+ Revised 
+ 1 
+ Weapon Mastery 
+ New 
+ 2 
+ Tactical Mind 
+ New 
+ 5 
+ Tactical Shift 
+ New 
+ 9 
+ Indomitable 
+ Revised 
+ 9 
+ Tactical Master 
+ New 
+ 13 
+ Studied Attacks 
+ New 
+ 19 
+ Epic Boon 
+ New 
+ Subclass Changes 
+ Fighter subclasses include the following updates: 
+ Battle Master: Three revised features, four new maneuvers, and five revised maneuvers 
+ Champion: One new feature and three revised features 
+ Eldritch Knight: Two revised features 
+ Psi Warrior (New): Imported from Tasha’s Cauldron of Everything with one revised feature 
+ Monk 
+ The Monk class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Seven new class features and eight revised class features, which are listed in the Monk Class Features table 
+ Monk Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Martial Arts 
+ Revised 
+ 1 
+ Martial Arts Die 
+ Revised 
+ 2 
+ Monk’s Focus 
+ Revised 
+ 2 
+ Uncanny Metabolism 
+ New 
+ 3 
+ Deflect Attacks 
+ Revised 
+ 5 
+ Stunning Strike 
+ Revised 
+ 6 
+ Empowered Strikes 
+ Revised 
+ 7 
+ Evasion 
+ Revised 
+ 10 
+ Heightened Focus 
+ New 
+ 10 
+ Self-Restoration 
+ New 
+ 13 
+ Deflect Energy 
+ New 
+ 15 
+ Perfect Focus 
+ Revised 
+ 18 
+ Superior Defense 
+ New 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Body and Mind 
+ New 
+ Subclass Changes 
+ Monk subclasses include the following updates: 
+ Warrior of Mercy (New): Imported from Tasha’s Cauldron of Everything with one revised feature 
+ Warrior of Shadow: One new feature and two revised features 
+ Warrior of the Elements: Five new features 
+ Warrior of the Open Hand: One new feature and three revised features 
+ Paladin 
+ The Paladin class includes the following updates: 
+ Revised starting equipment 
+ Revised spell list 
+ Six new class features and six revised class features, which are listed in the Paladin Class Features table 
+ Paladin Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Lay on Hands 
+ Revised 
+ 1 
+ Spellcasting 
+ Revised 
+ 1 
+ Weapon Mastery 
+ New 
+ 2 
+ Fighting Style 
+ Revised 
+ 2 
+ Paladin’s Smite 
+ New 
+ 3 
+ Channel Divinity 
+ Revised 
+ 5 
+ Faithful Steed 
+ New 
+ 6 
+ Aura of Protection 
+ Revised 
+ 9 
+ Abjure Foes 
+ New 
+ 10 
+ Aura of Courage 
+ Revised 
+ 14 
+ Restoring Touch 
+ New 
+ 19 
+ Epic Boon 
+ New 
+ Subclass Changes 
+ Paladin subclasses include the following updates: 
+ Oath of Devotion: One new feature and four revised features 
+ Oath of Glory (New): Imported from Tasha’s Cauldron of Everything with four revised features 
+ Oath of the Ancients: Four revised features 
+ Oath of Vengeance: Three revised features 
+ Ranger 
+ The Ranger class includes the following updates: 
+ Revised starting equipment 
+ Revised spell list 
+ Eight new class features and six revised class features, which are listed in the Ranger Class Features table 
+ Ranger Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Favored Enemy 
+ Revised 
+ 1 
+ Spellcasting 
+ Revised 
+ 1 
+ Weapon Mastery 
+ New 
+ 2 
+ Deft Explorer 
+ New 
+ 2 
+ Fighting Style 
+ Revised 
+ 6 
+ Roving 
+ New 
+ 9 
+ Expertise 
+ New 
+ 10 
+ Tireless 
+ New 
+ 13 
+ Relentless Hunter 
+ New 
+ 14 
+ Nature’s Veil 
+ Revised 
+ 17 
+ Precise Hunter 
+ New 
+ 18 
+ Feral Senses 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Foe Slayer 
+ Revised 
+ Subclass Changes 
+ Ranger subclasses include the following updates: 
+ Beastmaster: Three revised features 
+ Fey Wanderer (New): Imported from Tasha’s Cauldron of Everything with one revised feature 
+ Gloom Stalker (New): Imported from Xanathar’s Guide to Everything with four revised features 
+ Hunter: Two new features and three revised features 
+ Rogue 
+ The Rogue class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Revised skill proficiencies 
+ Six new class features and five revised class features, which are listed in the Rogue Class Features table 
+ Rogue Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Thieves’ Cant 
+ Revised 
+ 1 
+ Weapon Mastery 
+ New 
+ 3 
+ Steady Aim 
+ New 
+ 5 
+ Cunning Strike 
+ New 
+ 7 
+ Evasion 
+ Revised 
+ 7 
+ Reliable Talent 
+ Revised 
+ 11 
+ Improved Cunning Strike 
+ New 
+ 14 
+ Devious Strikes 
+ New 
+ 15 
+ Slippery Mind 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Stroke of Luck 
+ Revised 
+ Subclass Changes 
+ Rogue subclasses include the following updates: 
+ Arcane Trickster: Three revised features 
+ Assassin: One new feature and three revised features 
+ Soulknife (New): Imported from Tasha’s Cauldron of Everything with two revised features 
+ Thief: Four revised features 
+ Sorcerer 
+ The Sorcerer class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Revised spell list 
+ Two new metamagic options and six revised metamagic options 
+ Four new class features and five revised class features, which are listed in the Sorcerer Class Features table 
+ A revised Wild Magic Surge table with new options 
+ Sorcerer Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Innate Sorcery 
+ New 
+ 1 
+ Spellcasting 
+ Revised 
+ 2 
+ Font of Magic 
+ Revised 
+ 2 
+ Metamagic 
+ Revised 
+ 3 
+ Sorcerer Subclass 
+ Revised 
+ 5 
+ Sorcerous Restoration 
+ Revised 
+ 7 
+ Sorcery Incarnate 
+ New 
+ 19 
+ Epic Boon 
+ New 
+ 20 
+ Arcane Apotheosis 
+ New 
+ Subclass Changes 
+ Sorcerer subclasses include the following updates: 
+ Aberrant Sorcery (New): Imported from Tasha’s Cauldron of Everything with two revised features 
+ Clockwork Sorcery (New): Imported from Tasha’s Cauldron of Everything with two revised features 
+ Draconic Sorcery: Two new features and three revised features 
+ Wild Magic Sorcery: One new feature and three revised features 
+ Warlock 
+ The Warlock class includes the following updates: 
+ Revised starting equipment 
+ Revised spell list 
+ Ten new eldritch invocations and thirteen revised eldritch invocations 
+ Three new class features and four revised class features, which are listed in the Warlock Class Features table 
+ Warlock Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Eldritch Invocations 
+ Revised 
+ 1 
+ Pact Magic 
+ Revised 
+ 2 
+ Magical Cunning 
+ New 
+ 3 
+ Warlock Subclass 
+ Revised 
+ 9 
+ Contact Patron 
+ New 
+ 11 
+ Mystic Arcanum 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ Subclass Changes 
+ Warlock subclasses include the following updates: 
+ Archfey Patron: Two new features and three revised features 
+ Celestial Patron (New): Imported from Xanathar’s Guide to Everything with four revised features 
+ Fiend Patron: Five revised features 
+ Great Old One Patron: Three new features and two revised features 
+ Wizard 
+ The Wizard class includes the following updates: 
+ Revised starting equipment 
+ Revised weapon proficiencies 
+ Revised skill proficiencies 
+ Revised spell list 
+ Four new class features and three revised class features, which are listed in the Wizard Class Features table 
+ Wizard Class Features 
+ Level 
+ Feature 
+ Status 
+ 1 
+ Ritual Adept 
+ New 
+ 1 
+ Spellcasting 
+ Revised 
+ 2 
+ Scholar 
+ New 
+ 3 
+ Wizard Subclass 
+ Revised 
+ 5 
+ Memorize Spell 
+ New 
+ 18 
+ Spell Mastery 
+ Revised 
+ 19 
+ Epic Boon 
+ New 
+ Subclass Changes 
+ Wizard subclasses include the following updates: 
+ Abjurer: One new feature and three revised features 
+ Diviner: Two revised features 
+ Evoker: Three revised features 
+ Illusionist: Two new features and two revised features 
+ Origins 
+ The 2024 Player’s Handbook lists sixteen backgrounds and ten species for player characters, including the following new options: 
+ Backgrounds 
+ Farmer 
+ Guard 
+ Guide 
+ Merchant 
+ Scribe 
+ Wayfarer 
+ Languages 
+ Common Sign Language 
+ Species 
+ Aasimar 
+ Goliath 
+ Orc 
+ Feats 
+ The 2024 Player’s Handbook contains seventy-five feats, including thirty-seven new feats and thirty-five revised feats. Feats are divided into four categories: Origin, General, Fighting Style, and Epic Boon. 
+ Equipment 
+ The 2024 Player’s Handbook provides the following changes to equipment: 
+ Two revised weapon properties: Heavy , Light 
+ Eight new weapon mastery properties: Cleave , Graze , Nick , Push , Sap , Slow , Topple , Vex 
+ Two new weapons and three revised weapons 
+ New crafting rules for nonmagical items, Potion of Healing , and Spell Scroll . 
+ New options for using all Artisan’s Tools when taking the Utilize option 
+ Revised adventuring gear, including three new items 
+ Descriptions for all items of adventuring gear 
+ Spells 
+ The 2024 Player’s Handbook provides 391 spells, including thirty new spells. The 2024 Spells table lists new, redesigned, and revised spells. 
+ 2024 Spells 
+ Level 
+ Spell 
+ New Spells 
+ 0 
+ Elementalism 
+ 0 
+ Mind Sliver 
+ 0 
+ Sorcerous Burst 
+ 0 
+ Starry Wisp 
+ 0 
+ Thunderclap 
+ 0 
+ Toll the Dead 
+ 0 
+ Word of Radiance 
+ 1 
+ Divine Smite 
+ 1 
+ Ice Knife 
+ 2 
+ Arcane Vigor 
+ 2 
+ Dragon’s Breath 
+ 2 
+ Mind Spike 
+ 2 
+ Summon Beast 
+ 3 
+ Summon Fey 
+ 3 
+ Summon Undead 
+ 4 
+ Charm Monster 
+ 4 
+ Fount of Moonlight 
+ 4 
+ Summon Aberration 
+ 4 
+ Summon Construct 
+ 4 
+ Summon Elemental 
+ 4 
+ Vitriolic Sphere 
+ 5 
+ Jallarzi’s Storm of Radiance 
+ 5 
+ Steel Wind Strike 
+ 5 
+ Summon Celestial 
+ 5 
+ Summon Dragon 
+ 5 
+ Synaptic Static 
+ 5 
+ Yolande’s Regal Presence 
+ 6 
+ Summon Fiend 
+ 6 
+ Tasha’s Bubbling Cauldron 
+ 7 
+ Power Word Fortify 
+ Redesigned Spells 
+ 0 
+ Blade Ward 
+ 0 
+ Chill Touch 
+ 0 
+ Friends 
+ 0 
+ Guidance 
+ 0 
+ Resistance 
+ 0 
+ True Strike 
+ 1 
+ Chromatic Orb 
+ 1 
+ Color Spray 
+ 1 
+ Sleep 
+ 2 
+ Barkskin 
+ 2 
+ Enhance Ability 
+ 2 
+ Enthrall 
+ 2 
+ Find Steed 
+ 2 
+ Prayer of Healing 
+ 2 
+ Ray of Enfeeblement 
+ 3 
+ Conjure Animals 
+ 3 
+ Counterspell 
+ 4 
+ Conjure Minor Elementals 
+ 4 
+ Conjure Woodland Beings 
+ 4 
+ Giant Insect 
+ 4 
+ Grasping Vine 
+ 5 
+ Animate Objects 
+ 5 
+ Conjure Elemental 
+ 5 
+ Contagion 
+ 6 
+ Conjure Fey 
+ 7 
+ Conjure Celestial 
+ 8 
+ Befuddlement 
+ Revised Spells 
+ 0 
+ Acid Splash 
+ 0 
+ Dancing Lights 
+ 0 
+ Light 
+ 0 
+ Poison Spray 
+ 0 
+ Produce Flame 
+ 0 
+ Shillelagh 
+ 0 
+ Shocking Grasp 
+ 0 
+ Spare the Dying 
+ 0 
+ Thaumaturgy 
+ 0 
+ Vicious Mockery 
+ 1 
+ Animal Friendship 
+ 1 
+ Bless 
+ 1 
+ Command 
+ 1 
+ Compelled Duel 
+ 1 
+ Comprehend Languages 
+ 1 
+ Cure Wounds 
+ 1 
+ Dissonant Whispers 
+ 1 
+ Divine Favor 
+ 1 
+ Ensnaring Strike 
+ 1 
+ False Life 
+ 1 
+ Find Familiar 
+ 1 
+ Goodberry 
+ 1 
+ Hail of Thorns 
+ 1 
+ Healing Word 
+ 1 
+ Hex 
+ 1 
+ Hunter’s Mark 
+ 1 
+ Inflict Wounds 
+ 1 
+ Jump 
+ 1 
+ Ray of Sickness 
+ 1 
+ Searing Smite 
+ 1 
+ Speak with Animals 
+ 1 
+ Tasha’s Hideous Laughter 
+ 1 
+ Thunderous Smite 
+ 1 
+ Witch Bolt 
+ 1 
+ Wrathful Smite 
+ 2 
+ Alter Self 
+ 2 
+ Animal Messenger 
+ 2 
+ Arcane Lock 
+ 2 
+ Augury 
+ 2 
+ Beast Sense 
+ 2 
+ Blindness/Deafness 
+ 2 
+ Calm Emotions 
+ 2 
+ Cloud of Daggers 
+ 2 
+ Cordon of Arrows 
+ 2 
+ Darkvision 
+ 2 
+ Detect Thoughts 
+ 2 
+ Enlarge/Reduce 
+ 2 
+ Flame Blade 
+ 2 
+ Gust of Wind 
+ 2 
+ Lesser Restoration 
+ 2 
+ Magic Weapon 
+ 2 
+ Mirror Image 
+ 2 
+ Moonbeam 
+ 2 
+ Phantasmal Force 
+ 2 
+ Shatter 
+ 2 
+ Shining Smite 
+ 2 
+ Spider Climb 
+ 2 
+ Spike Growth 
+ 2 
+ Spiritual Weapon 
+ 2 
+ Suggestion 
+ 3 
+ Aura of Vitality 
+ 3 
+ Bestow Curse 
+ 3 
+ Blinding Smite 
+ 3 
+ Call Lightning 
+ 3 
+ Clairvoyance 
+ 3 
+ Conjure Barrage 
+ 3 
+ Crusader’s Mantle 
+ 3 
+ Daylight 
+ 3 
+ Fly 
+ 3 
+ Gaseous Form 
+ 3 
+ Haste 
+ 3 
+ Hunger of Hadar 
+ 3 
+ Leomund’s Tiny Hut 
+ 3 
+ Lightning Arrow 
+ 3 
+ Major Image 
+ 3 
+ Mass Healing Word 
+ 3 
+ Meld into Stone 
+ 3 
+ Sending 
+ 3 
+ Sleet Storm 
+ 3 
+ Slow 
+ 3 
+ Speak with Plants 
+ 3 
+ Stinking Cloud 
+ 3 
+ Tongues 
+ 3 
+ Water Walk 
+ 3 
+ Wind Wall 
+ 4 
+ Arcane Eye 
+ 4 
+ Banishment 
+ 4 
+ Blight 
+ 4 
+ Compulsion 
+ 4 
+ Confusion 
+ 4 
+ Dimension Door 
+ 4 
+ Divination 
+ 4 
+ Dominate Beast 
+ 4 
+ Evard’s Black Tentacles 
+ 4 
+ Ice Storm 
+ 4 
+ Leomund’s Secret Chest 
+ 4 
+ Locate Creature 
+ 4 
+ Mordenkainen’s Faithful Hound 
+ 4 
+ Phantasmal Killer 
+ 4 
+ Polymorph 
+ 4 
+ Staggering Smite 
+ 4 
+ Stoneskin 
+ 5 
+ Banishing Smite 
+ 5 
+ Bigby’s Hand 
+ 5 
+ Conjure Volley 
+ 5 
+ Contact Other Plane 
+ 5 
+ Dispel Evil and Good 
+ 5 
+ Dominate Person 
+ 5 
+ Dream 
+ 5 
+ Flame Strike 
+ 5 
+ Hold Monster 
+ 5 
+ Mass Cure Wounds 
+ 5 
+ Mislead 
+ 5 
+ Rary’s Telepathic Bond 
+ 5 
+ Reincarnate 
+ 5 
+ Swift Quiver 
+ 5 
+ Telekinesis 
+ 5 
+ Wall of Stone 
+ 6 
+ Blade Barrier 
+ 6 
+ Circle of Death 
+ 6 
+ Contingency 
+ 6 
+ Eyebite 
+ 6 
+ Flesh to Stone 
+ 6 
+ Globe of Invulnerability 
+ 6 
+ Guards and Wards 
+ 6 
+ Harm 
+ 6 
+ Heal 
+ 6 
+ Heroes’ Feast 
+ 6 
+ Mass Suggestion 
+ 6 
+ Otiluke’s Freezing Sphere 
+ 6 
+ Otto's Irresistible Dance 
+ 6 
+ Planar Ally 
+ 6 
+ Sunbeam 
+ 6 
+ Transport Via Plants 
+ 6 
+ Wall of Ice 
+ 6 
+ Wind Walk 
+ 7 
+ Forcecage 
+ 7 
+ Mordenkainen’s Sword 
+ 7 
+ Plane Shift 
+ 7 
+ Prismatic Spray 
+ 7 
+ Project Image 
+ 7 
+ Simulacrum 
+ 7 
+ Symbol 
+ 7 
+ Teleport 
+ 8 
+ Animal Shapes 
+ 8 
+ Antipathy/Sympathy 
+ 8 
+ Demiplane 
+ 8 
+ Dominate Monster 
+ 8 
+ Earthquake 
+ 8 
+ Holy Aura 
+ 8 
+ Power Word Stun 
+ 8 
+ Tsunami 
+ 9 
+ Imprisonment 
+ 9 
+ Mass Heal 
+ 9 
+ Power Word Heal 
+ 9 
+ Power Word Kill 
+ 9 
+ Prismatic Wall 
+ 9 
+ Shapechange 
+ 9 
+ Storm of Vengeance 
+ 9 
+ True Polymorph 
+ 9 
+ Weird 
+ 9 
+ Wish 
+ Stat Blocks 
+ The 2024 Player’s Handbook includes an appendix of fifty-one stat blocks: twenty-one new stat blocks and twenty-six revised stat blocks. There are also three stat blocks for Rangers who can summon beast companions and twelve stat blocks related to spells. 
+ Rules 
+ The Rules Glossary in the 2024 Player’s Handbook explains the following new and revised rules: 
+ New Rules 
+ Ally 
+ Attitude 
+ Bloodied 
+ Burning 
+ Curses 
+ D20 Test 
+ Dead 
+ Dehydration 
+ Emanation 
+ Enemy 
+ Expertise 
+ Friendly 
+ Hazard 
+ Hostile 
+ Illusions 
+ Indifferent 
+ Influence 
+ Magic (action) 
+ Magical Effect 
+ Malnutrition 
+ Object 
+ Occupied space 
+ Passive Perception 
+ Per day 
+ Possession 
+ Round down 
+ Shape-shifting 
+ Simultaneous effects 
+ Study 
+ Target 
+ Teleportation 
+ Unoccupied space 
+ Revised Rules 
+ Area of effect 
+ Armor training 
+ Attack action 
+ Blindsight 
+ Breaking objects 
+ Cylinder 
+ Dash 
+ Difficult Terrain 
+ Exhaustion 
+ Falling 
+ Flying 
+ Grappled 
+ Grappling 
+ Help 
+ Heroic Inspiration 
+ Hide 
+ Improvised weapons 
+ Incapacitated 
+ Initiative 
+ Invisible 
+ Knocking out a creature 
+ Long Rest 
+ Monster 
+ Nonplayer Character 
+ Opportunity Attacks 
+ Petrified 
+ Proficiency 
+ Ready 
+ Search 
+ Short Rest 
+ Speed 
+ Stat block 
+ Stunned 
+ Suffocation 
+ Surprise 
+ Telepathy 
+ Tremorsense 
+ Unarmed Strike 
+ New Terminology 
+ The 2024 Player’s Handbook uses some new terms, as shown in the Updated Terminology Table. 
+ Updated Terminology 
+ 2014 Term 
+ 2024 Term 
+ Armor proficiency 
+ Armor Training 
+ Blowgun needle 
+ Needle 
+ Branding Smite 
+ Shining Smite 
+ Cast a Spell action 
+ Magic action 
+ Cleansing Touch 
+ Restoring Touch 
+ Crossbow bolt 
+ Bolt 
+ Deflect Missiles 
+ Deflect Attacks 
+ Destroy Undead 
+ Sear Undead 
+ Diamond Soul 
+ Disciplined Survivor 
+ Empty Body 
+ Superior Defense 
+ Encumbrance 
+ Carrying capacity 
+ Feeblemind 
+ Befuddlement 
+ Flexible Casting 
+ Font of Magic 
+ Guild Artisan 
+ Artisan 
+ Guild Merchant 
+ Merchant 
+ Improved Divine Smite 
+ Radiant Strikes 
+ Inspiration 
+ Heroic Inspiration 
+ Ki 
+ Monk’s Focus 
+ Ki-Empowered Strikes 
+ Empowered Strikes 
+ Ki Points 
+ Focus Points 
+ Martial Archetype 
+ Fighter Subclass 
+ Monastic Tradition 
+ Monk Subclass 
+ Natural Explorer 
+ Deft Explorer 
+ Otherworldly Patron 
+ Warlock Subclass 
+ Path of the Totem Warrior 
+ Path of the Wild Heart 
+ Perfect Self 
+ Perfect Focus 
+ Primal Path 
+ Barbarian Subclass 
+ Race 
+ Species 
+ Sacred Oath 
+ Paladin Subclass 
+ Shoving 
+ Unarmed Strike 
+ Starvation 
+ Malnutrition 
+ Stillness of Mind, Timeless Body 
+ Self-Restoration 
+ Use an Object action 
+ Utilize action 
+ Vanish 
+ Nature’s Veil 
+ D&D Direct Recap: A Look at Two Forgotten Realms Books, a Dragon Anthology, and More 
+ by Michael Galvis 
+ The LEGO Group Releases Dungeons & Dragons Minifigures Collection 
+ by Michael Galvis 
+ Sign Up for the Project Sigil Closed Beta! 
+ by D&D Staff 
+ Tags 
+ Player's Handbook 
+ 34 
+ Comments 
+ 1 2 Next 
+ GrunTheBitter 
+ Defender 
+ Join Date:
+ 2/9/2020
+ Posts:
+ 275
+ Member Details 
+ #1 
+ GrunTheBitter 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Good list 
+ Rollback Post to Revision 
+ RollBack 
+ Stymer 
+ Gallant 
+ Join Date:
+ 8/12/2017
+ Posts:
+ 11
+ Member Details 
+ #2 
+ Stymer 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Where can I submit bug reports? 
+ Rollback Post to Revision 
+ RollBack 
+ MotoDestructo 
+ Adventurer 
+ Join Date:
+ 2/28/2018
+ Posts:
+ 2
+ Member Details 
+ #3 
+ MotoDestructo 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Bug forums 
+ Rollback Post to Revision 
+ RollBack 
+ VargoDnD 
+ Adventurer 
+ Join Date:
+ 1/15/2020
+ Posts:
+ 2
+ Member Details 
+ #4 
+ VargoDnD 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Awesome post, well done. 
+ Rollback Post to Revision 
+ RollBack 
+ levitationtomb 
+ Adventurer 
+ Join Date:
+ 9/1/2024
+ Posts:
+ 1
+ Member Details 
+ #5 
+ levitationtomb 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ You guys sure do know how to make a changelog! 
+ Rollback Post to Revision 
+ RollBack 
+ doc0bricker 
+ Acolyte 
+ Join Date:
+ 6/16/2020
+ Posts:
+ 15
+ Member Details 
+ #6 
+ doc0bricker 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Praise be to Tiamat! The digital 2024 PHB is finally here. 
+ Rollback Post to Revision 
+ RollBack 
+ Cade_Thorngauge 
+ Adventurer 
+ Join Date:
+ 2/18/2022
+ Posts:
+ 1
+ Member Details 
+ #7 
+ Cade_Thorngauge 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Can't wait for some Artificer updates! Tired of muticlassing for higher level spell slots.. 
+ Rollback Post to Revision 
+ RollBack 
+ Koren 
+ (Perfect) 
+ Join Date:
+ 3/20/2017
+ Posts:
+ 927
+ Member Details 
+ #8 
+ Koren 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ I'm hoping we see a revised Artificer sooner rather than later too, but more simply for revised spell lists with some of the new spells. 
+ Rollback Post to Revision 
+ RollBack 
+ Mortalis7 
+ Initiate 
+ Join Date:
+ 7/23/2018
+ Posts:
+ 36
+ Member Details 
+ #9 
+ Mortalis7 
+ View User Profile
+ Send Message
+ Posted Sep 3, 2024 
+ Too bad you decided to kill the resistance and blade ward cantrips again. Guess you decided they were ok not being ever used after all. 
+ Rollback Post to Revision 
+ RollBack 
+ Son_of_Destiny 
+ Adventurer 
+ Join Date:
+ 10/28/2017
+ Posts:
+ 5
+ Member Details 
+ #11 
+ Son_of_Destiny 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Huh they missed the Dodge action revision. Wonder what else they missed? 
+ Rollback Post to Revision 
+ RollBack 
+ JonaTheWise 
+ Veteran 
+ Join Date:
+ 10/28/2022
+ Posts:
+ 20
+ Member Details 
+ #12 
+ JonaTheWise 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Why they felt the need to make this new PHB, I still don't know. If it ain't broke, don't fix it... 
+ Rollback Post to Revision 
+ RollBack 
+ RadyxXarnia 
+ Adventurer 
+ Join Date:
+ 8/14/2022
+ Posts:
+ 4
+ Member Details 
+ #13 
+ RadyxXarnia 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Anyone know how to set a new warlocks pact weapon? 
+ Rollback Post to Revision 
+ RollBack 
+ Oicmorez 
+ Trickster 
+ Join Date:
+ 6/29/2021
+ Posts:
+ 51
+ Member Details 
+ #14 
+ Oicmorez 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Will there be an article listing all the erratas between the yet-to-arrive physical books and what's currently on dndbeyond? 
+ Many issues with the book were fixed here, but it's a struggle to look for what exactly 
+ Rollback Post to Revision 
+ RollBack 
+ TheShireJedi 
+ Adventurer 
+ Join Date:
+ 6/15/2019
+ Posts:
+ 1
+ Member Details 
+ #15 
+ TheShireJedi 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Spell list links to old spells. Is it intended? 
+ Rollback Post to Revision 
+ RollBack 
+ LocopocomaLoco 
+ Adventurer 
+ Join Date:
+ 3/30/2022
+ Posts:
+ 1
+ Member Details 
+ #16 
+ LocopocomaLoco 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Arcane apotheosis has made into future manuals or was it discarded? it was a cool spell for sorcerers 
+ Rollback Post to Revision 
+ RollBack 
+ Ikaros5 
+ Evoker 
+ Join Date:
+ 5/3/2019
+ Posts:
+ 16
+ Member Details 
+ #17 
+ Ikaros5 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Great changes, but since we are using a Wiki style page, it would be nice to include link to EVERYITHING you mention, for example links to where the new rules are explained, or if there are new things like "three revised weapons "just tell me which ones they are by providing the link!! 
+ It's a nice summary nonetheless, thank you :) 
+ Rollback Post to Revision 
+ RollBack 
+ FlameFinnxl 
+ Adventurer 
+ Join Date:
+ 2/6/2023
+ Posts:
+ 2
+ Member Details 
+ #18 
+ FlameFinnxl 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ Good, but i feel that you should import ALL classes and subclasses into the 2024 players handbook. Because most people wont want to buy xanathars guide or tashas cauldron just for a couple new subclasses. 
+ Rollback Post to Revision 
+ RollBack 
+ VectorVictor_72 
+ Prestidigitator 
+ Join Date:
+ 12/30/2020
+ Posts:
+ 20
+ Member Details 
+ #19 
+ VectorVictor_72 
+ View User Profile
+ Send Message
+ Posted Sep 4, 2024 
+ I think there's a LOT of good and new stuff that was updated/upgraded. Some of the things that were changed seem kind of intuitively wrong as they conflict with written lore. Is there rationale why species or races of said species, are not automatically provided the language of their sub-group?? Drow, deep gnome (can't spell the S version), Duergar for example ---> don't get "free" undercommon. Similarly for rock gnome based on clan location could be argued to have undercommon. Sea elves should be defaulted aquan too. From a "tradional lineage" perspective, species should have built-in generic rare language suggestion/auto selection based upon lore. I'm not saying that everything has to be in the canon, but please "fix" this with the DM book. Things like the drow racial specific sign language should be built in options based upon species or subclass. Similarly, Aasimar should be provided celestial. Dragonkin and kobold should have draconic. It seems like rare languages are significantly less accessible during character creation. This means that DMs must choose on how they want to do it, since it isn't a player option to choose draconic, undercommon, deep speech, or other similarly rare languages that may be setting applicable. Short of comprehend languages or tongues.... seems like a lot of the rare languages are locked away. More structured rules for creating custom backgrounds with "starter" feats with MORE options would be nice. With the new backgrounds, there are a core set of "starter" feats, but this is pretty limited. Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. Please tell me there isn't plans to re-release 2014 to 2024 campaign settings with minor updates to suit 5.5. We don't practically need a re-release of 5.5scag, 5.5eberron, 5.5fizbans, 5.5spelljammer, etc. A majority of the content would be recycled. Not trying to be a jerk but sell a digital upgrade for a small fee or even FREE for people who bought the base books already. I could see a $5 to $10 digital upgrade. Group some of the updates and release a "campaign addendum" rather than doing campaign rewrites. Quick rant about species / race / lineage / ancestry type issues. . . Tiefling may or may not have demon or devil related languages of abyssal or demonic. Tieflings were created due to a pretty intense set of unsavory interactions... Seems like there's some people that didn't like the Hadozee as released, but other races may be 1 generation from an unsavory act. It's just weird. It's strange how "race" is an ugly word, but we're playing pretend that these settings aren't violent, intense, racist, oppressive, tyrannical, fascist, etc. Example, why aren't Gully dwarves aren't a playable race? They weren't released as part of the dragonlance setting but they are ESSENTIAL in the books. Aghar are inherent to dragonlance books. You don't have to play them like the inept race they're typically seen as nothing is "black and white" -- this is a land of shades of gray. "Half races" aren't a thing and are seen as ugly. I don't get it. Gully dwarves should exist as a playable race that is half-dwarf and half gnome with features that are not gnome or dwarf. Turns out they're typically a canonically intellectually deficient. This is a lesson in "maybe some races shouldn't mate" perhaps? I get that corporate probably doesn't want to tell the story because of the sensitive subject and would try to re-write it. Woke management shouldn't be rewriting canon and shouldn't be removing "questionable" story elements. 
+ Rollback Post to Revision 
+ RollBack 
+ Kailaidescope 
+ Footpad 
+ Join Date:
+ 3/20/2024
+ Posts:
+ 174
+ Member Details 
+ #20 
+ Kailaidescope 
+ View User Profile
+ Send Message
+ Posted Sep 5, 2024 
+ Quote from VectorVictor_72 >> 
+ Hopefully the DM's guide has more "starter" feats to help explain that +1 asi aren't meant to be starter and MORE structure on how to create custom backgrounds. 
+ I’m just waiting to see how they revise Oathbreaker and Death Domain personally 
+ Rollback Post to Revision 
+ RollBack 
+ Lolgod2 
+ Adventurer 
+ Join Date:
+ 4/8/2022
+ Posts:
+ 5
+ Member Details 
+ #21 
+ Lolgod2 
+ View User Profile
+ Send Message
+ Posted Sep 5, 2024 
+ Can't believe they just added rules for 'dead' after 10 years 
+ Rollback Post to Revision 
+ RollBack 
+ To post a comment, please login or register a new account. 
+ 1 2 Next 
+ Delete 
+ Undelete 
+ Spam 
+ Not Spam 
+ Merge 
+ Apply To Selected 
+ Clear Selected 
+ Posts Quoted: 
+ Reply 
+ Clear All Quotes 
+ Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here: Terms of Service , Privacy Notice . By continuing to use the services, you agree to the new Terms.
+ Support 
+ Help Portal 
+ Support Forum 
+ System Status 
+ Do Not Sell or Share My Personal Information 
+ Your Privacy Choices 
+ Cookie Notice 
+ System Reference Document (SRD) 
+ About 
+ Contact Us 
+ Careers 
+ Wizards of the Coast 
+ Credits 
+ Find us on social media 
+ Download the D&D Beyond App 
+ © 2017- 2024 Wizards of the Coast LLC | All Rights Reserved 
+ Dungeons & Dragons, D&D Beyond, D&D, Wizards of the Coast, the dragon ampersand, and all other Wizards of the Coast product names, campaign settings, their respective logos, and The World's Greatest Roleplaying Game are © and trademark Wizards of the Coast in the U.S.A. and other countries. © 2024 Wizards. 
+ Privacy Policy
+ Terms of Service

@@ -1,0 +1,3737 @@
+RPG Writeups
+
+These writeups are extracted from the SA Forum's "FATAL & Friends" thread. Some of them are obscure RPGs. Some of them are very bad RPGs.
+
+Recent Changes (RSS, Atom, or JSON feed)
+
+ Game Reviewed
+ Reviewer
+ Status
+
+ 13th Age
+ Cease to Hope
+ completed
+
+ 3D&T Alpha
+ TheLovablePlutonis
+ abandoned
+
+ 4e Player's Handbook: A Critical Review
+ TheGreatEvilKing
+ completed
+
+ 7th Sea
+ Mors Rattus
+ completed
+
+ 7th Sea 2nd Edition
+ Mors Rattus
+ completed
+
+ Abandon All Hope
+ Hostile V
+ completed
+
+ Aberrant
+ Little Blackfly
+ abandoned
+
+ Aberrant
+ Feinne
+ abandoned
+
+ Aberrant d20 Edition
+ Night10194
+ completed
+
+ Accidents of Birth
+ PurpleXVI
+ completed
+
+ AD&D: 2nd Edition
+ PurpleXVI
+ completed
+
+ AD&D H4: Throne of Bloodstone
+ dwarf74
+ ongoing
+
+ AD&D The Deck of Encounters - Set One
+ Dallbun
+ completed
+
+ Adeptus Evangelion 2.5
+ Kitfox88
+ abandoned
+
+ Adeptus Evangelion 3e
+ Night10194
+ completed
+
+ Adventure!
+ Serf
+ abandoned
+
+ Adventure!
+ Feinne
+ abandoned
+
+ Adventure Fantasy Game
+ gradenko_2000
+ completed
+
+ Adventurer Conqueror King System
+ ZeeToo
+ completed
+
+ Aethera Campaign Setting
+ Dareon
+ abandoned
+
+ Aftermath!
+ Randalor
+ abandoned
+
+ After The Bomb
+ Eldad Assarach
+ completed
+
+ Age of Worms
+ ZeeToo
+ abandoned
+
+ Agon
+ Angrymog
+ completed
+
+ Alas Vegas
+ hyphz
+ completed
+
+ Albedo
+ Night10194
+ completed
+
+ Aletheia
+ GimpInBlack
+ completed
+
+ Alien Invasion
+ Fossilized Rappy
+ completed
+
+ Alien Summit
+ Plague of Hats
+ completed
+
+ All Flesh Must Be Eaten
+ Hostile V
+ ongoing
+
+ All of their Strengths
+ Evil Mastermind
+ completed
+
+ Almogavers
+ Traveller
+ completed
+
+ Alpha Omega: The Beginning and the End
+ EclecticTastes
+ completed
+
+ Al-Qadim: Land of Fate
+ Libertad!
+ completed
+
+ Alta Inseguridad
+ Traveller
+ completed
+
+ Alternity
+ Gerund
+ abandoned
+
+ Alternity
+ JamieTheD
+ abandoned
+
+ Alternity
+ Valatar
+ completed
+
+ Amber Diceless Roleplaying
+ Rulebook Heavily
+ completed
+
+ Ameba
+ Finlands Sexiest
+ completed
+
+ AMP: Year One
+ potatocubed
+ completed
+
+ An Echo Resounding
+ Traveller
+ completed
+
+ Anima: Beyond Fantasy
+ Ariamaki
+ abandoned
+
+ A Penny For My Thoughts
+ Dareon
+ completed
+
+ Apocalypse World
+ Evil Mastermind
+ completed
+
+ Armageddon
+ Tasoth
+ abandoned
+
+ Arrows of Indra
+ Bedlamdan
+ abandoned
+
+ Ars Magica
+ PurpleXVI
+ abandoned
+
+ Ars Magica 5th Edition
+ Mors Rattus
+ completed
+
+ Ars Magica: The Contested Isle
+ Mors Rattus
+ completed
+
+ Ars Magica: Transforming Mythic Europe
+ Mors Rattus
+ abandoned
+
+ Artesia: Adventures in the Known World
+ Doc Hawkins
+ abandoned
+
+ Ashen Stars
+ General Ironicus
+ abandoned
+
+ A Song of Ice and Fire Roleplaying
+ ThisIsNoZaku
+ abandoned
+
+ A Song of Ice and Fire Roleplay: Why Are IP Tie-In Games Always So Clunky?
+ Althalin
+ ongoing
+
+ Astraterra
+ Ratpick
+ abandoned
+
+ Atlantis: The Second Age
+ Wapole Languray
+ abandoned
+
+ Atomic Highway
+ Wapole Languray
+ abandoned
+
+ BADASS
+ CapitalistPig
+ abandoned
+
+ Ballads of Eldoru
+ JackMann
+ completed
+
+ Bastards & Bloodlines
+ GorfZaplen
+ completed
+
+ BattleTech - A Time of War
+ Doresh
+ completed
+
+ BattleTech CCG: Commander's Edition
+ ThisIsNoZaku
+ completed
+
+ Beast: The Primordial
+ Kurieg
+ completed
+
+ Beast: The Primordial: Night Horrors: Conquering Heroes
+ Kurieg
+ completed
+
+ Beast: The Primordial: Player's Guide
+ Kurieg
+ completed
+
+ Becoming Heroes
+ Mile'ionaha
+ abandoned
+
+ Bellfahle Magic Academy
+ Traveller
+ abandoned
+
+ Bellum Maga
+ Kurieg
+ completed
+
+ Betrayal At House On The Hill
+ hyphz
+ completed
+
+ Better Angels
+ unzealous
+ completed
+
+ Better Than Any Man
+ Libertad!
+ completed
+
+ Beyond Countless Doorways
+ Ettin
+ abandoned
+
+ Beyond the Mountains of Madness
+ Mr.Misfit
+ abandoned
+
+ Beyond the Supernatural
+ ForkBanger
+ completed
+
+ Beyond the Wall
+ GimpInBlack
+ completed
+
+ Beyond the Wall: Further Afield
+ GimpInBlack
+ abandoned
+
+ Big Eyes, Small Mouth
+ WhitemageofDOOM
+ completed
+
+ Big Eyes, Small Mouth 3e
+ WhitemageofDOOM
+ abandoned
+
+ Bill Webb's Book of Dirty Tricks
+ gradenko_2000
+ completed
+
+ Birthright
+ PurpleXVI
+ completed
+
+ Black Crusade
+ NGDBSS
+ abandoned
+
+ Black Streams: Solo Heroes
+ gradenko_2000
+ completed
+
+ Black Tokyo
+ homerlaw
+ abandoned
+
+ Black Tokyo
+ PurpleXVI
+ completed
+
+ Black Tokyo: Chastity & Depravity
+ Bitchtits McGee
+ completed
+
+ Black Tokyo: Races of Black Japan
+ GorfZaplen
+ completed
+
+ Black Tokyo: Races of the Tatakama
+ Bitchtits McGee
+ completed
+
+ Black Tokyo: Tales of the Tatakama
+ Bitchtits McGee
+ completed
+
+ Blade of the Iron Throne
+ hectorgrey
+ completed
+
+ Bliss Stage
+ PurpleXVI
+ completed
+
+ Blood-Dimmed Tides
+ Mors Rattus
+ completed
+
+ Blood & Honor
+ Traveller
+ completed
+
+ Blood in the Chocolate
+ hyphz
+ completed
+
+ Blue Planet
+ Wapole Languray
+ abandoned
+
+ Blue Rose
+ Kai Tave
+ abandoned
+
+ Book of Artifacts
+ SirPhoebos
+ completed
+
+ Book of Harlots
+ Libertad!
+ completed
+
+ Book of Wondrous Inventions
+ PurpleXVI
+ completed
+
+ Brave New World
+ Hostile V
+ completed
+
+ Brave New World: Bargainers
+ Hostile V
+ completed
+
+ Brave New World: Covenant
+ Hostile V
+ completed
+
+ Brave New World: Crescent City
+ Hostile V
+ completed
+
+ Brave New World: Defiants
+ Hostile V
+ completed
+
+ Brave New World: Delta Prime
+ Hostile V
+ completed
+
+ Brave New World: Evil Unlimited
+ Hostile V
+ completed
+
+ Brave New World: Glory Days
+ Hostile V
+ completed
+
+ Brave New World: Ravaged Planet
+ Hostile V
+ completed
+
+ Breachworld
+ EverettLO
+ completed
+
+ Bubblegumshoe
+ ProfessorProf
+ abandoned
+
+ Buck Rogers in the XXV Century
+ Project1
+ abandoned
+
+ Buck Rogers XXVc: The 25th Century
+ Maxwell Lord
+ ongoing
+
+ Buffy the Vampire Slayer Roleplaying Game
+ CapnAndy
+ abandoned
+
+ Bullwinkle & Rocky Role Playing Party Game
+ Sieje
+ abandoned
+
+ Burning Empires
+ Traveller
+ completed
+
+ Burning Wheel
+ hectorgrey
+ abandoned
+
+ Call of Cthulhu
+ TombsGrave
+ abandoned
+
+ Call of Cthulhu: Pursuit to Kadath
+ GorfZaplen
+ abandoned
+
+ Cannibal Sector 1
+ homerlaw
+ abandoned
+
+ Carcosa
+ Halloween Jack
+ completed
+
+ Carcosa (LotFP Add-On)
+ johntfs
+ completed
+
+ Castle Falkenstein
+ Wapole Languray
+ abandoned
+
+ Cat
+ CAPSLOCKGIRL
+ abandoned
+
+ Central Casting
+ Ariamaki
+ abandoned
+
+ Cerulean Seas
+ Fossilized Rappy
+ completed
+
+ Chainmail
+ gradenko_2000
+ abandoned
+
+ Changeling: The Dreaming
+ Yue
+ abandoned
+
+ Changeling: The Lost
+ Gerund
+ abandoned
+
+ Changing Breeds
+ Daeren
+ abandoned
+
+ Changing Breeds
+ Kurieg
+ completed
+
+ Chaos 6010 A.D
+ Masiakasaurus
+ completed
+
+ Charnel Houses of Europe: The Shoah
+ MonsieurChoc
+ completed
+
+ Chi-Chian Roleplaying Game
+ TombsGrave
+ abandoned
+
+ Chi-Chian Roleplaying Game
+ JamieTheD
+ completed
+
+ Chill: Adventures Into the Unknown
+ Halloween Jack
+ completed
+
+ Chris Field: Snapshot
+ Fossilized Rappy
+ completed
+
+ Chronicles of Darkness
+ unzealous
+ completed
+
+ Chuubo's Marvelous Wish-Granting Engine
+ Rand Brittain
+ abandoned
+
+ Circle of Hands
+ Halloween Jack
+ abandoned
+
+ Clanbook Ravnos
+ Ted_Haggard
+ abandoned
+
+ Clay-O-Rama
+ a kitten
+ completed
+
+ Cold City
+ Hostile V
+ completed
+
+ Complete Book of Elves
+ ProfessorCirno
+ abandoned
+
+ Complete Psionics Handbook
+ homeless poster
+ completed
+
+ Comrades: A Revolutionary RPG
+ HerraS
+ ongoing
+
+ Conan: The RPG
+ shotgunbadger
+ abandoned
+
+ Conspiracy X: Second Edition
+ Fossilized Rappy
+ completed
+
+ Conspiracy X: The Extraterrestrials
+ Fossilized Rappy
+ abandoned
+
+ Cᴼntinuum: Roleplaying in the Yet
+ Mors Rattus
+ completed
+
+ CORE Command Player's Handbook Deluxe Edition
+ Doresh
+ abandoned
+
+ Corporation
+ Hostile V
+ abandoned
+
+ Cosmic Patrol
+ unseenlibrarian
+ abandoned
+
+ Costume Fairy Adventures
+ hyphz
+ abandoned
+
+ Council of Wyrms
+ Mors Rattus
+ abandoned
+
+ Crimson Exodus
+ hectorgrey
+ abandoned
+
+ Croatan Song
+ pospysyl
+ abandoned
+
+ Cryptomancer
+ BinaryDoubts
+ abandoned
+
+ Crypts and Things
+ Angrymog
+ completed
+
+ Crypts & Things
+ VacuumJockey
+ completed
+
+ CthulhuTech
+ Ettin
+ completed
+
+ CthulhuTech: Ancient Enemies
+ Ettin
+ abandoned
+
+ Cthulhutech: Damnation View
+ Ettin
+ completed
+
+ Cthulhutech: Dark Passions
+ Ettin
+ completed
+
+ CthulhuTech: Mortal Remains
+ Ettin
+ completed
+
+ Cthulhutech: Racial Insecurity
+ AmiYumi
+ completed
+
+ Cthulhutech: Unveiled Threats
+ Ettin
+ completed
+
+ Cthulhutech: Vade Mecum
+ Ettin
+ completed
+
+ CyberGeneration
+ JamieTheD
+ completed
+
+ Cyberpunk 2020
+ SirPhoebos
+ completed
+
+ Cyberpunk 2020: Chromebook 1
+ SirPhoebos
+ completed
+
+ Cyberpunk 2020: Chromebook 2
+ SirPhoebos
+ completed
+
+ Cyberpunk 20XX: Solo Of Fortune
+ SirPhoebos
+ abandoned
+
+ Cyberpunk v3.0
+ Kayn Slamdyke
+ abandoned
+
+ Cypher System Corebook
+ gradenko_2000
+ abandoned
+
+ d20 Modern
+ Majuju
+ abandoned
+
+ Dallas RPG
+ Bieeardo
+ completed
+
+ Dangerous Journeys: Mythus
+ Tolan
+ abandoned
+
+ Dark Heresy Second Edition: Unpublished Beta
+ Night10194
+ completed
+
+ Dark*Matter
+ Freaking Crumbum
+ abandoned
+
+ Dark*Matter: The Killing Jar
+ Feinne
+ completed
+
+ Dark*Matter: Xenoforms
+ Feinne
+ completed
+
+ Darkpages
+ self_invention
+ abandoned
+
+ Dark Revelations
+ Barudak
+ abandoned
+
+ Dark Sun
+ PurpleXVI
+ completed
+
+ Dark Sun: Psionic Artifacts of Athas
+ oriongates
+ abandoned
+
+ Dark Sun: Wind Riders of the Jagged Cliffs
+ oriongates
+ completed
+
+ Daylight Robbery
+ gradenko_2000
+ completed
+
+ D&D 3rd Edition - The Core Books
+ hectorgrey
+ abandoned
+
+ Deadlands: Back East & The South
+ Libertad!
+ completed
+
+ Deadlands: Coffin Rock
+ Libertad!
+ completed
+
+ Deadlands: Good Intentions
+ Libertad!
+ completed
+
+ DEADLANDS: HELL ON EARTH/LOST COLONY - THE UNITY
+ Evil Mastermind
+ completed
+
+ Deadlands (Mechanics)
+ Mystic Mongol
+ abandoned
+
+ Deadlands (Metaplot)
+ homeless poster
+ abandoned
+
+ Deadlands: Stone and a Hard Place
+ Libertad!
+ completed
+
+ Deadlands: The Flood
+ Libertad!
+ completed
+
+ Deadlands: The Last Sons
+ Libertad!
+ completed
+
+ Dead Reign
+ Alien Rope Burn
+ completed
+
+ Death Frost Doom
+ Rulebook Heavily
+ completed
+
+ Deathwatch
+ Mikael Kreoss
+ abandoned
+
+ Deathwatch
+ LuiCypher
+ abandoned
+
+ Deep Carbon Observatory
+ Metallia
+ abandoned
+
+ Defenders of Tokyo: The RPG
+ Cyphoderus
+ abandoned
+
+ Degenesis
+ Last Transmission
+ abandoned
+
+ Degenesis: Rebirth
+ JcDent
+ ongoing
+
+ Deities & Demigods 1E
+ Jerik
+ ongoing
+
+ Delta Green
+ InShaneee
+ abandoned
+
+ Demon: Heirs to Hell
+ Mors Rattus
+ completed
+
+ Demon: The Descent
+ Mors Rattus
+ completed
+
+ Demon: The Descent: Night Horrors: Enemy Action
+ Mors Rattus
+ completed
+
+ Demon: The Fallen
+ Adnachiel
+ abandoned
+
+ Demon: The Fallen
+ Xand_Man
+ abandoned
+
+ Deniable Assets
+ mllaneza
+ ongoing
+
+ De Profundis
+ unzealous
+ completed
+
+ Destiny's Price
+ Ningyou
+ abandoned
+
+ Diana: Warrior Princess
+ Bag-Head
+ abandoned
+
+ Diaspora
+ Byers2142
+ abandoned
+
+ Dice & Glory
+ Bitchtits McGee
+ abandoned
+
+ Dinosaur Planet: Broncosaurus Rex
+ Fossilized Rappy
+ completed
+
+ Dirty Secrets of the Black Hand
+ DivineCoffeeBinge
+ abandoned
+
+ Doctor Who RPG
+ FrozenGoldfishGod
+ abandoned
+
+ Doctor Who RPG (1985 Edition)
+ Syrg Sapphire
+ abandoned
+
+ Dogs in the Vineyard
+ BinaryDoubts
+ abandoned
+
+ Dogs in the Vineyard
+ ProfessorProf
+ completed
+
+ Dolls: Children of the Dollhouse
+ The Chairman
+ completed
+
+ Donjon
+ Echophonic
+ abandoned
+
+ Don't Rest Your Head
+ Flavivirus
+ completed
+
+ Double Cross
+ Cyphoderus
+ completed
+
+ Double Cross
+ Night10194
+ abandoned
+
+ Double Cross - Advanced Rulebook
+ Doresh
+ completed
+
+ Double Cross - Infinity Code
+ Doresh
+ completed
+
+ Double Cross - Public Enemy
+ Doresh
+ completed
+
+ Dragonball Z: The Anime Adventure Game
+ Lynx Winters
+ abandoned
+
+ Dragonlance
+ PurpleXVI
+ ongoing
+
+ Dragonlance Adventures
+ Spoilers Below
+ abandoned
+
+ Dragonlance Campaign Setting
+ Libertad!
+ completed
+
+ Dragonlance: Dragons of Krynn
+ Libertad!
+ completed
+
+ Dragonlance: Key of Destiny Adventure Path
+ Libertad!
+ abandoned
+
+ Dragonlance: Legends of the Twins
+ Libertad!
+ completed
+
+ Dragonlance: Towers of High Sorcery
+ Libertad!
+ completed
+
+ Dragonlance: War of the Lance
+ Libertad!
+ completed
+
+ Dragonmech
+ Mors Rattus
+ completed
+
+ Dragonmech: Steam Warriors
+ Mors Rattus
+ completed
+
+ Dragons of the East
+ Mors Rattus
+ completed
+
+ Dragonstar
+ Comrade Gorbash
+ abandoned
+
+ Dragon Warriors
+ Traveller
+ abandoned
+
+ Dragonwizards RPG
+ Rasamune
+ abandoned
+
+ Dreamhounds of Paris
+ DNA Cowboys
+ abandoned
+
+ Dream Park RPG
+ Maxwell Lord
+ completed
+
+ Dresden Files RPG
+ Piell
+ abandoned
+
+ Dune: Chronicles of the Imperium
+ Halloween Jack
+ completed
+
+ Dungeon Bastards
+ Libertad!
+ completed
+
+ Dungeon Crawl Classic
+ Capfalcon
+ abandoned
+
+ Dungeon Crawl Classics Adventure Modules
+ gradenko_2000
+ abandoned
+
+ Dungeons and Dragons 3rd Edition Epic Level Handbook
+ Seatox
+ ongoing
+
+ Dungeons & Discourse
+ Kaza42
+ abandoned
+
+ Dungeons & Dragons Adventures
+ al-azad
+ completed
+
+ Dungeons & Dragons Gazetteer
+ Rulebook Heavily
+ completed
+
+ Dungeons & Dragons Rules Cyclopedia
+ Evil Mastermind
+ abandoned
+
+ Dungeonslayers
+ Wapole Languray
+ abandoned
+
+ Dungeons: the Dragoning 40k 7th Edition
+ AccidentalHipster
+ abandoned
+
+ Dungeons: the Dragoning 40k 7th Edition
+ Loki_XLII
+ abandoned
+
+ Dungeons: the Dragoning 40k 7th Edition
+ Xelkelvos
+ abandoned
+
+ Dungeons: The Dragoning: 7.5E
+ Night10194
+ completed
+
+ Dungeon World
+ Covok
+ abandoned
+
+ Earthdawn
+ dwarf74
+ abandoned
+
+ Eberron
+ Kurieg
+ abandoned
+
+ Eberron
+ Lemon Curdistan
+ abandoned
+
+ Eclipse Phase
+ Mile'ionaha
+ completed
+
+ Eclipse Phase
+ Wapole Languray
+ abandoned
+
+ Eclipse Phase: Firewall
+ StratGoatCom
+ ongoing
+
+ Eclipse Phase: Gatecrashing
+ PurpleXVI
+ ongoing
+
+ Eclipse Phase: Second Edition
+ PurpleXVI
+ completed
+
+ Eclipse Phase: X-Risks
+ juggalo baby coffin
+ completed
+
+ Eclipse Phase: Zone Stalkers
+ mellonbread
+ completed
+
+ Ehdrigohr
+ dwarf74
+ abandoned
+
+ Eldritch High
+ AccidentalHipster
+ completed
+
+ Eldritch Skies
+ Halloween Jack
+ abandoned
+
+ Empire Galactique (Galactic Empire)
+ Hulk Smash!
+ completed
+
+ Empire Of Satanis
+ Down With People
+ abandoned
+
+ Encounter Critical
+ PurpleXVI
+ abandoned
+
+ Engine Heart
+ Xelkelvos
+ completed
+
+ Eoris Essence
+ hyphz
+ abandoned
+
+ Epyllion
+ Mors Rattus
+ completed
+
+ Escape from Innsmouth
+ UndashingOne
+ abandoned
+
+ Etherscope
+ NGDBSS
+ abandoned
+
+ Everway
+ Captain Hats
+ abandoned
+
+ Everything You Know About Space Is Wrong: A Fatal & Friends Spelljammer Exploration
+ Prism
+ abandoned
+
+ Evil
+ PoptartsNinja
+ abandoned
+
+ Exalted 3e: Arms of the Chosen
+ Mors Rattus
+ completed
+
+ Exalted 3e: Fangs at the Gate
+ Mors Rattus
+ completed
+
+ Exalted 3e: What Fire Has Wrought
+ Mors Rattus
+ completed
+
+ Exalted 3rd Edition
+ Mors Rattus
+ completed
+
+ Exalted: Manual of Exalted Power, Infernal
+ CAPSLOCKGIRL
+ abandoned
+
+ Exalted: Second Edition
+ PurpleXVI
+ completed
+
+ Exalted: Third Edition
+ Monathin
+ abandoned
+
+ Exalted: Third Edition: Mechanics Fun
+ kaynorr
+ abandoned
+
+ Exemplars and Eidolons
+ Traveller
+ completed
+
+ Exodus: Post-Apocalyptic Roleplaying
+ Fossilized Rappy
+ completed
+
+ Expedition to the Barrier Peaks
+ Lucas Archer
+ abandoned
+
+ Fading Suns
+ JamieTheD
+ completed
+
+ Fairy Meat
+ AmiYumi
+ abandoned
+
+ Fantaji
+ Astus
+ abandoned
+
+ Fantasy Craft
+ Tibalt
+ abandoned
+
+ Fantasy Wargaming: The Highest Level of All
+ Mystic Mongol
+ completed
+
+ FATAL
+ Syrg Sapphire
+ abandoned
+
+ Fate: The Unauthorized Nasuverse RPG
+ Dareon
+ completed
+
+ Fellowship: Kickstarter Preview
+ Mors Rattus
+ completed
+
+ Feng Shui
+ Mors Rattus
+ completed
+
+ Feng Shui 1e
+ Night10194
+ completed
+
+ Fight! Challengers
+ Doresh
+ completed
+
+ Fighting Fantasy
+ Molly Metroid
+ completed
+
+ Fight! Round 2
+ Doresh
+ completed
+
+ Fight! - The Fighting Game RPG
+ Doresh
+ completed
+
+ Fight! The Fighting Game RPG
+ SirFozzie
+ abandoned
+
+ Final Fantasy d6
+ Leraika
+ abandoned
+
+ Final Fantasy RPG 2nd Ed.
+ ZeeToo
+ completed
+
+ Final Fantasy RPG 3e & 4e
+ WhitemageofDOOM
+ abandoned
+
+ For Gold & Glory: Old School Roleplaying
+ Siivola
+ ongoing
+
+ Forgotten Futures
+ JamieTheD
+ completed
+
+ Forgotten Realms
+ Arivia
+ abandoned
+
+ Forward to Adventure!
+ PurpleXVI
+ completed
+
+ Fragged Empire
+ Evil Mastermind
+ completed
+
+ Freebooter's Fate
+ Hedningen
+ completed
+
+ Freemarket
+ Echophonic
+ abandoned
+
+ Friday Night Firefight/Fistfight
+ hectorgrey
+ completed
+
+ Fursona
+ PurpleXVI
+ completed
+
+ Geist: the Sin-Eaters: 2nd Edition
+ That Old Tree
+ ongoing
+
+ Genesys
+ CitizenKeen
+ abandoned
+
+ Genius: The Transgression
+ Cythereal
+ completed
+
+ Giant Allege
+ ProfessorProf
+ completed
+
+ Glorantha
+ LightCastle
+ abandoned
+
+ Glorantha
+ Josef bugman
+ abandoned
+
+ GMing advice books
+ hyphz
+ ongoing
+
+ Goblinville Gazette #1
+ mllaneza
+ completed
+
+ Godbound
+ Doresh
+ completed
+
+ Godlike
+ Halloween Jack
+ completed
+
+ Golden Sky Stories
+ ProfessorProf
+ completed
+
+ GOP: Grand Ol' Predators
+ Libertad!
+ completed
+
+ Graceful Wicked Masques
+ PurpleXVI
+ abandoned
+
+ Grimm
+ Heliotrope
+ abandoned
+
+ Grimtooth's Traps
+ Asimo
+ completed
+
+ Grimtooth's Traps Too
+ Asimo
+ completed
+
+ Grunt
+ Traveller
+ completed
+
+ Guide to the Known Galaxy
+ PurpleXVI
+ completed
+
+ Guide to the Technocracy
+ Slimnoid
+ abandoned
+
+ GURPS Asparagus
+ Falconier111
+ abandoned
+
+ GURPS Autoduel
+ Alien Rope Burn
+ completed
+
+ GURPS Banestorm
+ Fossilized Rappy
+ abandoned
+
+ GURPS CthulhuPunk
+ Falconier111
+ abandoned
+
+ GURPS Fantasy II: Adventures in the Mad Lands
+ Falconier111
+ completed
+
+ GURPS Lensman
+ Nessus
+ abandoned
+
+ GURPS Reign of Steel
+ Nessus
+ abandoned
+
+ GURPS Reign of Steel
+ Hostile V
+ completed
+
+ GURPS Space
+ anagramarye
+ completed
+
+ GURPS Technomancer
+ Fossilized Rappy
+ completed
+
+ GURPS Vehicles
+ 1337JiveTurkey
+ completed
+
+ GURPS Voodoo: The Shadow War
+ Fossilized Rappy
+ completed
+
+ GURPS Zombieland, USA
+ Falconier111
+ completed
+
+ Gypsies
+ Mors Rattus
+ completed
+
+ HackMaster
+ hyphz
+ completed
+
+ HârnMaster Fantasy Roleplaying System
+ Hulk Smash!
+ completed
+
+ HARP: High Adventure Role Playing
+ gradenko_2000
+ completed
+
+ Haunted Halls of Eveningstar
+ Angrymog
+ completed
+
+ Hc Svnt Dracones
+ PurpleXVI
+ completed
+
+ Hc Svnt Dracones: Sound and Silence
+ PurpleXVI
+ completed
+
+ Heart: The City Beneath
+ LazyAngel
+ ongoing
+
+ Heavy Gear (2nd Ed.)
+ Poison Mushroom
+ abandoned
+
+ Hellas: Worlds of Sun and Stone
+ Mors Rattus
+ abandoned
+
+ Hellcats and Hockeysticks
+ Adnachiel
+ abandoned
+
+ Hengeyokai: Shapeshifers of the East
+ Goggle Fox
+ abandoned
+
+ Hengeyokai: Shapeshifers of the East
+ Kurieg
+ completed
+
+ Hercules & Xena Role-Playing Game
+ oriongates
+ completed
+
+ Heroes Unlimited
+ Captain Hats
+ completed
+
+ HeroQuest Glorantha
+ Wapole Languray
+ abandoned
+
+ Hijinx
+ Kayn Slamdyke
+ completed
+
+ Hollowpoint
+ GimpInBlack
+ completed
+
+ Hollow World
+ PurpleXVI
+ completed
+
+ Hoodoo Blues
+ Fossilized Rappy
+ completed
+
+ Horror on the Orient Express
+ Down With People
+ abandoned
+
+ Hot War
+ Hostile V
+ completed
+
+ House of Horiku
+ hyphz
+ completed
+
+ Houses of the Blooded
+ jadarx and Traveller
+ completed
+
+ Human Occupied Landfill
+ DivineCoffeeBinge
+ abandoned
+
+ Hunter: The Reckoning
+ Night10194
+ completed
+
+ Hunter: the Reckoning - Player's Guide
+ Aethyron
+ ongoing
+
+ Hunter: The Vigil
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Compacts and Conspiracies
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Mortal Remains
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Night Stalkers
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Slasher
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Spirit Slayers
+ Mors Rattus
+ completed
+
+ Hunter: The Vigil: Tooth and Nail
+ The Sin of Onan
+ abandoned
+
+ Hunter: The Vigil: Witch Finders
+ Mors Rattus
+ completed
+
+ Hybrid
+ GorfZaplen
+ completed
+
+ Illuminati University
+ Pope Guilty
+ abandoned
+
+ Imagine Role-Playing
+ doomfunk
+ abandoned
+
+ Immortals Handbook
+ NGDBSS
+ abandoned
+
+ Immortal: The Invisible War
+ Sticky Beethoven
+ abandoned
+
+ Immortal: The Invisible War
+ Halloween Jack
+ completed
+
+ In Dark Alleys
+ PurpleXVI
+ completed
+
+ Infinity
+ grassy gnoll
+ abandoned
+
+ Infinity - The Roleplaying Game
+ Tsilkani
+ ongoing
+
+ In Nomine
+ Tsed
+ abandoned
+
+ In Nomine
+ Mors Rattus
+ completed
+
+ In Nomine Angelic Player's Guide
+ Mors Rattus
+ completed
+
+ In Nomine Corporeal Player's Guide
+ Mors Rattus
+ completed
+
+ In Nomine Ethereal Player's Guide
+ Mors Rattus
+ completed
+
+ In Nomine Game Master's Guide
+ Mors Rattus
+ completed
+
+ In Nomine Infernal Player's Guide
+ Mors Rattus
+ completed
+
+ In Nomine: Liber Canticorum
+ Mors Rattus
+ completed
+
+ In Nomine: Liber Castellorum: The Book of Tethers
+ Mors Rattus
+ abandoned
+
+ In Nomine Superiors 1: War and Honor
+ Mors Rattus
+ completed
+
+ In Nomine Superiors 2: Pleasures of the Flesh
+ Mors Rattus
+ completed
+
+ In Nomine Superiors 3: Hope and Prophecy
+ Mors Rattus
+ completed
+
+ In Nomine Superiors 4: Rogues to Riches
+ Mors Rattus
+ completed
+
+ In Nomine Superiors: Asmodeus
+ Mors Rattus
+ completed
+
+ In Nomine Superiors: Eli
+ Mors Rattus
+ completed
+
+ In Nomine Superiors: Lilith
+ Mors Rattus
+ completed
+
+ In Nomine Superiors: Litheroy
+ Mors Rattus
+ completed
+
+ In Nomine Superiors: Zadkiel
+ Mors Rattus
+ completed
+
+ Inspectres
+ Green Intern
+ completed
+
+ Ironclaw
+ Little Blackfly
+ abandoned
+
+ Ironclaw
+ CommissarMega
+ abandoned
+
+ Ironclaw 1e
+ Night10194
+ completed
+
+ Ironclaw: Squaring the Circle
+ Night10194
+ completed
+
+ Ironguard
+ Angrymog
+ abandoned
+
+ Iron Heroes
+ gradenko_2000
+ completed
+
+ Iron Kingdoms
+ Gr3y
+ abandoned
+
+ Iron Kingdoms
+ Azran
+ abandoned
+
+ Ironsworn
+ Evil Mastermind
+ ongoing
+
+ JAGS Wonderland
+ DNA Cowboys
+ completed
+
+ James Bond 007: Role Playing In Her Majesty's Secret Service
+ Zorak of Michigan
+ completed
+
+ John Harper's Mini Games
+ ActingPower
+ completed
+
+ John Wick's Play Dirty
+ Alien Rope Burn
+ completed
+
+ John Wick's Play Dirty 2: Even Dirtier
+ Alien Rope Burn
+ completed
+
+ Joints & Jivers
+ Poison Mushroom
+ abandoned
+
+ Jovian Chronicles Second Edition RPG Player's Handbook
+ Doresh
+ completed
+
+ Judges Guild Supplements
+ mllaneza
+ abandoned
+
+ Kagematsu
+ Druggeddwarf
+ abandoned
+
+ Katanas & Trenchcoats - Episode 1: Welcome to Darkest Vancouver
+ GimpInBlack
+ completed
+
+ Kayfabe
+ Maxwell Lord
+ completed
+
+ KidWorld
+ Hostile V
+ completed
+
+ kill puppies for satan
+ Bitchtits McGee
+ completed
+
+ Kindred of the East
+ Mors Rattus
+ completed
+
+ Kindred of the Ebony Kingdom
+ El Estrago Bonito
+ abandoned
+
+ Kindred: The Embraced (White Wolf TV!)
+ Captain Hats
+ completed
+
+ Kingdom
+ Gantolandon
+ ongoing
+
+ King's Festival
+ Angrymog
+ completed
+
+ Knights & Legends Tabletop RPG
+ Flail Snail
+ completed
+
+ Kobolds Ate My Baby!
+ AmiYumi
+ completed
+
+ Kriegsspiel
+ HEY GAL
+ abandoned
+
+ Kromore
+ PurpleXVI
+ completed
+
+ Kult
+ PurpleXVI
+ completed
+
+ Kult: Divinity Lost
+ PurpleXVI
+ completed
+
+ Kuro
+ Hostile V
+ abandoned
+
+ Lancer's Rockers
+ Bieeardo
+ abandoned
+
+ Land of Giants
+ DivineCoffeeBinge
+ completed
+
+ Last Res0rt RPG
+ E4C85D38
+ completed
+
+ Legacy: War of Ages
+ Halloween Jack
+ completed
+
+ Legend d20
+ Covok
+ abandoned
+
+ Legend d20
+ Transient People
+ abandoned
+
+ Legend of the Aldenata RPG
+ E4C85D38
+ abandoned
+
+ Legend of the Five Rings 1e: Night of a Thousand Screams
+ EverettLO
+ completed
+
+ Legend of the Five Rings 1e: The Tomb of Iuchiban
+ EverettLO
+ abandoned
+
+ Legend of the Five Rings 5e: Emerald Empire
+ Mors Rattus
+ completed
+
+ Legend of the Five Rings: B-1 Code of Bushido
+ EverettLO
+ completed
+
+ Legend of the Five Rings: FFG Beta Edition
+ Mors Rattus
+ abandoned
+
+ Legend of the Five Rings: First Edition
+ Traveller
+ abandoned
+
+ Legends of Anglerre
+ Evil Mastermind
+ completed
+
+ Legends of the Wulin
+ Dareon
+ abandoned
+
+ Legions v0.23 & v3.13
+ PurpleXVI
+ abandoned
+
+ Les Terres d'Amarande
+ MonsieurChoc
+ abandoned
+
+ Leverage: The Roleplaying Game
+ neonchameleon
+ abandoned
+
+ Leviathan: The Tempest
+ pkfan2004
+ abandoned
+
+ Little Fears
+ Roland Jones
+ abandoned
+
+ Log Horizon
+ Xelkelvos
+ completed
+
+ LOST
+ Getsuya
+ abandoned
+
+ Low Life
+ Alien Rope Burn
+ completed
+
+ Luchador: Way of the Mask
+ ForkBanger
+ abandoned
+
+ Lusus Naturae
+ Wapole Languray
+ abandoned
+
+ Macho Women with Guns
+ Effectronica
+ abandoned
+
+ Mage: The Ascension: 20th Anniversary Edition
+ LatwPIAT
+ abandoned
+
+ Mage: The Awakening: Night Horrors: The Unbidden
+ Mors Rattus
+ abandoned
+
+ Mage: The Awakening: Second Edition
+ Mors Rattus
+ completed
+
+ Mage: The Awakening: Second Edition: Night Horrors: Nameless and Accursed
+ Mors Rattus
+ ongoing
+
+ Magical Burst
+ Dareon
+ completed
+
+ Magic of Incarnum
+ Spiderfist Island
+ abandoned
+
+ Maid RPG
+ Comment
+ completed
+
+ Marauder 2107
+ Humbug Scoolbus
+ abandoned
+
+ Mark Rein·Hagen's Exile
+ Asimo
+ completed
+
+ Marvel Heroic Roleplaying Game
+ PrincessWuffles
+ abandoned
+
+ Marvel Super Heroes Ultimate Powers
+ anagramarye
+ completed
+
+ Mazes and Minotaurs
+ Doresh
+ completed
+
+ Mecha
+ GimmickMan
+ completed
+
+ Meddling Kids
+ Eldad Assarach
+ completed
+
+ Meikyuu Kingdom
+ Bitchtits McGee
+ abandoned
+
+ Mekayana
+ CommissarMega
+ abandoned
+
+ Mekton Zeta
+ Kwyndig
+ abandoned
+
+ Mercenaries, Spies & Private Eyes
+ unseenlibrarian
+ abandoned
+
+ Metamorphosis Alpha
+ GorfZaplen
+ abandoned
+
+ Microscope
+ Tolan
+ completed
+
+ Middenarde: New Edition
+ PurpleXVI
+ completed
+
+ Middle-Earth Roleplaying
+ Plague of Hats
+ abandoned
+
+ Midgard Campaign Setting
+ Libertad!
+ completed
+
+ MiliKK
+ Traveller
+ completed
+
+ Mind's Eye Theatre: Laws of the Night
+ RocknRollaAyatollah
+ abandoned
+
+ Misspent Youth
+ Evil Mastermind
+ completed
+
+ Mistborn Adventure Game
+ berenzen
+ abandoned
+
+ Modern AGE
+ Night10194
+ completed
+
+ Modern Player's Companion
+ Fossilized Rappy
+ completed
+
+ Monastyr
+ RedSnapper
+ abandoned
+
+ Monsterhearts
+ Lady Gaga
+ abandoned
+
+ Monsterhearts
+ Ratpick
+ completed
+
+ Monsterhearts 2e and Second Skins
+ Feinne
+ completed
+
+ Monsters & Other Childish Things
+ Tollymain
+ abandoned
+
+ Monsters & Other Childish Things
+ Wapole Languray
+ completed
+
+ Monte Cook's Arcana Evolved by Monte Cook
+ Valatar
+ completed
+
+ Monte Cook's Invisible Sun
+ Wapole Languray
+ ongoing
+
+ Monte Cook's Revised Ranger
+ gradenko_2000
+ completed
+
+ MONTE COOK'S WORLD OF DARKNESS
+ Piell
+ abandoned
+
+ Montreal By Night
+ RocknRollaAyatollah
+ abandoned
+
+ MotoBushido
+ Trollhawke
+ abandoned
+
+ Mouse Guard RPG
+ Kestral
+ completed
+
+ Mummy: The Curse
+ Daeren
+ abandoned
+
+ Mutant
+ Hedningen
+ abandoned
+
+ Mutant Chronicles
+ Mr. Sunshine
+ ongoing
+
+ Mutant Epoch
+ Hostile V
+ abandoned
+
+ Mutant Future
+ PurpleXVI
+ completed
+
+ Mutant Future: Revised Edition
+ Ratpick
+ abandoned
+
+ Mutants & Masterminds 3e
+ tofuwizard
+ abandoned
+
+ Mutants & Masterminds: Golden Age
+ Fossilized Rappy
+ completed
+
+ Mutant: Undergångens Arvtagare
+ chelsea clinton
+ abandoned
+
+ My Little Pony: Roleplaying is Magic
+ Punting
+ abandoned
+
+ Myriad Song
+ Night10194
+ completed
+
+ Mythender
+ Zomborgon
+ completed
+
+ Naruto d20
+ AccidentalHipster
+ abandoned
+
+ Neotech 2
+ Cooked Auto
+ completed
+
+ Nephilim 2nd Edition Corebook
+ ganonso
+ abandoned
+
+ NERO Live Action Role-Playing (9th Edition)
+ Hedningen
+ abandoned
+
+ Neuroshima
+ Tevery Best
+ abandoned
+
+ New Horizon: A Dark Fantasy Adventure
+ Flail Snail
+ completed
+
+ Nightbane
+ Nessus
+ abandoned
+
+ Nightlife
+ Angrymog
+ abandoned
+
+ Night Reign
+ Mikan
+ abandoned
+
+ Night's Black Agents
+ GimpInBlack
+ abandoned
+
+ Night's Black Agents
+ ProfessorProf
+ completed
+
+ Night's Black Agents: The Dracula Dossier
+ ProfessorProf
+ abandoned
+
+ Ninja Crusade: Second Edition
+ Mors Rattus
+ completed
+
+ Ninja Crusade: Second Edition: Empire's Reign
+ Mors Rattus
+ completed
+
+ Ninja Crusade: Second Edition: Land of Seed and Blossom
+ Mors Rattus
+ completed
+
+ Ninja Crusade: Second Edition: The Firebrands
+ Mors Rattus
+ completed
+
+ Ninja Crusade: Second Edition: The Outsiders
+ Mors Rattus
+ completed
+
+ Ninja Crusade: Second Edition: Truth and Lies
+ Mors Rattus
+ abandoned
+
+ Nobilis 2E
+ PurpleXVI
+ completed
+
+ Noblis Essentials: Field Guide to the Powers
+ Tasoth
+ completed
+
+ Noitahovi
+ Ataxerxes
+ abandoned
+
+ Northern Crown: New World Adventures
+ Fossilized Rappy
+ completed
+
+ No Thank You, Evil!
+ hyphz
+ completed
+
+ Numenera
+ Tulul
+ abandoned
+
+ Numenera: The Ninth World Bestiary
+ juggalo baby coffin
+ completed
+
+ Nyambe: African Adventures
+ Libertad!
+ completed
+
+ Nymphology
+ Ettin
+ completed
+
+ Obsidian: The Age of Judgement: 2nd Edition
+ Barudak
+ completed
+
+ Odyssey of the Dragonlords
+ Libertad!
+ ongoing
+
+ Of Gods and Relics
+ Ulta
+ completed
+
+ Open Legend
+ Barudak
+ completed
+
+ Original D&D
+ Captain Hats
+ completed
+
+ OSR Grab Bag
+ potatocubed
+ abandoned
+
+ Other Dust
+ Doresh
+ completed
+
+ Otherverse: America
+ PurpleXVI
+ completed
+
+ Otherverse America
+ Red_Mage
+ abandoned
+
+ Oubliette
+ Wapole Languray
+ abandoned
+
+ Over the Edge
+ drunkencarp
+ completed
+
+ Over the Edge Adventures
+ drunkencarp
+ completed
+
+ Panic at the Dojo
+ ProfessorProf
+ completed
+
+ PARANOIA
+ GorfZaplen
+ abandoned
+
+ PARANOIA: Internal Security
+ pkfan2004
+ completed
+
+ Paranoia Rebooted
+ Hostile V
+ abandoned
+
+ Part-Time Gods
+ Evil Mastermind
+ completed
+
+ Pathfinder (1st Edition) Alpha Playtest Release 1
+ gradenko_2000
+ completed
+
+ Pathfinder 2
+ TheGreatEvilKing
+ abandoned
+
+ Pathfinder Adventure Path: Reign of Winter
+ MollyMetroid
+ abandoned
+
+ Pathfinder: Horror Adventures
+ Cease to Hope
+ abandoned
+
+ Pathfinder Roleplaying Game
+ Alien Rope Burn
+ completed
+
+ Pathfinder Roleplaying Game: Beginner Box
+ MollyMetroid
+ completed
+
+ Pathfinder Roleplaying Game Bestiary
+ Alien Rope Burn
+ completed
+
+ Pathfinder Roleplaying Game Bestiary 2
+ Fossilized Rappy
+ abandoned
+
+ Pathfinder Unchained
+ gradenko_2000
+ abandoned
+
+ Path of Shadows
+ Libertad!
+ completed
+
+ Path of War
+ Libertad!
+ abandoned
+
+ Pathogen: The Infected
+ Effectronica
+ completed
+
+ PATROL: Military Roleplay in the 20th Century
+ GimpInBlack
+ abandoned
+
+ PDQ: Prose Descriptive Qualities
+ oriongates
+ completed
+
+ Pendragon
+ DivineCoffeeBinge
+ completed
+
+ Phoenix Command Small Arms Combat System
+ LatwPIAT
+ completed
+
+ Planescape
+ SirPhoebos
+ completed
+
+ Planescape Campaign Expansion: The Planes of Chaos
+ SirPhoebos
+ completed
+
+ Planescape Module: Eternal Boundary
+ SirPhoebos
+ completed
+
+ Planescape: Monstrous Compendium
+ SirPhoebos
+ completed
+
+ Planescape: The Great Modron March
+ DAD LOST MY IPOD
+ completed
+
+ Players' Guide to Immortals
+ Mimir
+ abandoned
+
+ Pokemon Tabletop Adventures
+ ZeeToo
+ completed
+
+ Pokemon Tabletop United
+ ZeeToo
+ abandoned
+
+ Pokethulhu Adventure Game
+ Cyphoderus
+ abandoned
+
+ Polaris
+ Mile'ionaha
+ completed
+
+ Polaris RPG (2016)
+ Asehujiko
+ abandoned
+
+ Polychrome - A World of Steel and Stain
+ Doresh
+ abandoned
+
+ Polymorph System
+ hyphz
+ ongoing
+
+ Ponyfinder
+ Libertad!
+ completed
+
+ Powerchords
+ Daeren
+ abandoned
+
+ Powers & Perils
+ dwarf74
+ completed
+
+ Princess: The Hopeful
+ E4C85D38
+ abandoned
+
+ Princess: The Hopeful
+ McGiygas
+ abandoned
+
+ Princess: The Hopeful
+ Xelkelvos
+ abandoned
+
+ Promethean: The Created: Night Horrors: The Tormented
+ Mors Rattus
+ completed
+
+ PSIONICS: The Next Stage of Human Evolution
+ Hostile V
+ abandoned
+
+ Psi-Watch
+ PurpleXVI
+ completed
+
+ Ptolus
+ Libertad!
+ abandoned
+
+ Pugmire
+ Kurieg
+ completed
+
+ Puppetland
+ hyphz
+ completed
+
+ Qelong
+ Simian_Prime
+ abandoned
+
+ Races of Consequence
+ weso12
+ abandoned
+
+ Rage Across Australia
+ Kurieg
+ completed
+
+ Rage of the Rakasta
+ Dareon
+ completed
+
+ Ravenloft
+ MonsieurChoc
+ abandoned
+
+ Ray Winninger's UNDERGROUND
+ Young Freud
+ abandoned
+
+ Red Dwarf: The RPG
+ Forums Terrorist
+ abandoned
+
+ Red Tide
+ Traveller
+ completed
+
+ Reign: A Game of Lords and Leaders
+ unseenlibrarian
+ abandoned
+
+ Reign: A Game of Lords and Leaders
+ Wapole Languray
+ abandoned
+
+ Remnants
+ Evil Mastermind
+ completed
+
+ Return to the Temple of Elemental Evil
+ Yawgmoth
+ abandoned
+
+ Return to the Tomb of Horrors
+ DAD LOST MY IPOD
+ completed
+
+ Rifts
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 1: Sedition
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 2: Coalition Overkill
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 3: Sorcerers' Revenge
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 4: Cyber-Knights
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 5: Shadows of Evil
+ Alien Rope Burn
+ completed
+
+ Rifts Coalition Wars 6: Final Siege
+ Alien Rope Burn
+ completed
+
+ Rifts Conversion Book
+ Alien Rope Burn
+ completed
+
+ Rifts Conversion Book 2: Pantheons of the Megaverse
+ Alien Rope Burn
+ completed
+
+ Rifts Dimension Book 1: Wormwood
+ occamsnailfile
+ completed
+
+ Rifts Dimension Book 2: Phase World
+ occamsnailfile
+ completed
+
+ Rifts Dimension Book 3: Phase World Sourcebook
+ occamsnailfile
+ completed
+
+ Rifts Dimension Book 4: Skraypers
+ Alien Rope Burn
+ completed
+
+ Rifts Game Shield & Rifts Adventures
+ Alien Rope Burn
+ completed
+
+ Rifts Index & Adventures
+ Alien Rope Burn
+ completed
+
+ Rifts Mercenaries
+ Alien Rope Burn
+ completed
+
+ Rifts Sourcebook 1
+ Alien Rope Burn
+ completed
+
+ Rifts Sourcebook 2: The Mechanoids
+ occamsnailfile
+ completed
+
+ Rifts Sourcebook 3: Mindwerks
+ Alien Rope Burn
+ completed
+
+ Rifts Sourcebook 4: Coalition Navy
+ Alien Rope Burn
+ completed
+
+ Rifts Space
+ Alien Rope Burn
+ completed
+
+ Rifts: The Rifter 9½
+ Alien Rope Burn
+ completed
+
+ Rifts: The Rifter Rifts Round-Up Special '98
+ Alien Rope Burn
+ completed
+
+ Rifts: The Rifter Rifts Round-Up Special '99
+ Alien Rope Burn
+ completed
+
+ Rifts Ultimate Edition
+ Captain Hats
+ abandoned
+
+ Rifts World Book 10: Juicer Uprising
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 11: Coalition War Campaign
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 12: Psyscape
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 13: Lone Star
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 14: New West
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 15: Spirit West
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 16: Federation of Magic
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 17: Warlords of Russia
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 18: Mystic Russia
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 19: Australia
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 1: Vampire Kingdoms
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 20: Canada
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 21: Splynn Dimensional Market
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 22: Free Quebec
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 23: Xiticix Invasion
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 2: Atlantis
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 3: England
+ occamsnailfile
+ completed
+
+ Rifts World Book 4: Africa
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 5: Triax and the NGR
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 6: South America
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 7: Underseas
+ Alien Rope Burn
+ completed
+
+ Rifts World Book 8: Japan
+ occamsnailfile
+ completed
+
+ Rifts World Book 9: South America 2
+ Alien Rope Burn
+ completed
+
+ Ringworld: Roleplaying Adventure Beneath the Great Arch
+ Nessus
+ abandoned
+
+ Risus: The Anything RPG
+ Ariamaki
+ abandoned
+
+ Roan
+ Wapole Languray
+ ongoing
+
+ Rocket Age
+ Hostile V
+ completed
+
+ Rock of Tahamaat
+ Doc Hawkins
+ completed
+
+ Rolemaster
+ Spoilers Below
+ abandoned
+
+ Ron Edwards' Trollbabe
+ GimpInBlack
+ abandoned
+
+ Rule Zero: Underlings
+ Libertad!
+ completed
+
+ Runequest 2E
+ Spiderfist Island
+ abandoned
+
+ Runequest: Roleplaying in Glorantha
+ Wrestlepig
+ completed
+
+ Ryuutama
+ ProfessorProf
+ abandoned
+
+ Ryvah
+ Count Uvula
+ completed
+
+ Savage Worlds
+ JackMann
+ abandoned
+
+ Scarlet Heroes
+ Angrymog
+ completed
+
+ Scion
+ Stormgale
+ abandoned
+
+ Scion: Hero
+ Mors Rattus
+ completed
+
+ Scion: Origin
+ Mors Rattus
+ completed
+
+ Searchers of the Unknown
+ gradenko_2000
+ completed
+
+ SenZar
+ PurpleXVI
+ completed
+
+ Shadow of the Demon Lord
+ Serf & CHIMlord
+ abandoned
+
+ Shadowrun 4e
+ Crasical
+ abandoned
+
+ Shadowrun: Sixth World
+ hyphz
+ completed
+
+ Shadow Theory
+ Amechra
+ abandoned
+
+ Shatterzone
+ FourmyleCircus
+ abandoned
+
+ Shock: Social Science Fiction
+ Doc Hawkins
+ abandoned
+
+ Sig: Manual of the Primes
+ Mors Rattus
+ completed
+
+ Sigmata: This Signal Kills Fascists
+ Hostile V
+ abandoned
+
+ Silent Legions
+ Doresh
+ completed
+
+ Simple10
+ PurpleXVI
+ completed
+
+ Sisters of Rapture
+ Libertad!
+ completed
+
+ Skyrealms of Jorune
+ Hulk Smash!
+ completed
+
+ SLA Industries
+ Traveller
+ completed
+
+ SLA Industries: Karma
+ Traveller
+ completed
+
+ SLA Industries: Mort
+ Traveller
+ completed
+
+ SLA Industries: The Contact Directory
+ Traveller
+ completed
+
+ SLA Industries: The Truth
+ Traveller
+ completed
+
+ Solipsist
+ Xand_Man
+ completed
+
+ Southlands: Adventures Beneath the Pitiless Sun
+ Libertad!
+ completed
+
+ Sparks of Light
+ Doresh
+ completed
+
+ Spears of the Dawn
+ Libertad!
+ completed
+
+ Spectaculars
+ Selachian
+ ongoing
+
+ Spellbound Kingdoms
+ Nifara
+ abandoned
+
+ Spelljammer
+ Valatar
+ abandoned
+
+ Spheres of Might
+ Razakai
+ ongoing
+
+ Spheres of Power
+ gradenko_2000
+ abandoned
+
+ Spire
+ LazyAngel
+ completed
+
+ Spire and Black Magic and Strata
+ Night10194
+ completed
+
+ Spycraft
+ ThisIsNoZaku
+ completed
+
+ Spycraft 1e
+ Night10194
+ completed
+
+ Stan! Presents: Kaiju
+ Fossilized Rappy
+ completed
+
+ Starchildren: Velvet Generation
+ Benly
+ abandoned
+
+ Starfinder Alien Archive
+ Alien Rope Burn
+ completed
+
+ Starfinder Core Rulebook
+ Alien Rope Burn
+ completed
+
+ Stars Without Number
+ Doresh
+ completed
+
+ Stars Without Number: Transhuman Tech
+ Traveller
+ completed
+
+ Star Trek Adventures
+ Wikipedia Brown
+ abandoned
+
+ Star Trek: The RPG
+ Hulk Smash!
+ completed
+
+ Star Wars: Force and Destiny: Beginner Game
+ inklesspen
+ abandoned
+
+ Star Wars Planets Collection
+ Effectronica
+ completed
+
+ Star Wars Saga Edition: Unknown Regions
+ homerlaw
+ abandoned
+
+ Stats for Jesus
+ Libertad!
+ completed
+
+ Stormbringer 5th Edition / Elric
+ Traveller
+ completed
+
+ Strange Dead Love
+ insanityv2
+ abandoned
+
+ Street Fighter: The Storytelling Game
+ Halloween Jack
+ completed
+
+ Succession
+ Meinberg
+ completed
+
+ Sufficiently Advanced: A Game of the Far Future
+ EclecticTastes
+ completed
+
+ Summerland
+ Ningyou
+ abandoned
+
+ Superbabes!
+ Bieeardo
+ completed
+
+ Super Console
+ Doresh
+ completed
+
+ Supercrew!
+ Evil Mastermind
+ completed
+
+ Supernatural: The Roleplaying Game
+ Fossilized Rappy
+ completed
+
+ Swords and Six-Siders
+ gradenko_2000
+ completed
+
+ Symbaroum
+ Wrestlepig
+ completed
+
+ Tales From the Floating Vagabond
+ Tendales
+ abandoned
+
+ Tales from the Loop
+ hyphz
+ ongoing
+
+ Talislanta
+ Wapole Languray
+ abandoned
+
+ Technoir
+ GimpInBlack
+ completed
+
+ Teenage Mutant Ninja Turtles & Other Strangeness
+ ForkBanger
+ completed
+
+ Teenage Mutant Ninja Turtles & Other Strangeness
+ Alien Rope Burn
+ abandoned
+
+ Teenagers From Outer Space
+ Asimo
+ completed
+
+ Tékumel: Empire of the Petal Throne
+ Tolan
+ abandoned
+
+ Tenra Bansho Zero
+ ProfessorProf
+ abandoned
+
+ Tenra Bansho Zero
+ Doresh
+ completed
+
+ Teratic Tome
+ potatocubed
+ completed
+
+ Testament: Roleplaying in the Biblical Era
+ ZeeToo
+ completed
+
+ The Aegis Project
+ GimmickMan
+ completed
+
+ The Autumn People
+ Ningyou
+ abandoned
+
+ The Book of Experimental Might
+ gradenko_2000
+ abandoned
+
+ The Book of Iron Might
+ gradenko_2000
+ abandoned
+
+ The Book of Vile Darkness
+ Tulul
+ abandoned
+
+ The Challenge of the Bandeirantes
+ Cyphoderus
+ abandoned
+
+ The Dark Eye
+ Doresh
+ completed
+
+ The Dark Eye 4.0
+ Moldless Bread
+ ongoing
+
+ The Day After Ragnarok
+ Pththya-lyi
+ abandoned
+
+ The Dishonored Roleplaying Game
+ DigitalRaven
+ completed
+
+ The Dream Lands campaign setting
+ Horrible Lurkbeast
+ abandoned
+
+ The End
+ Humbug Scoolbus
+ abandoned
+
+ The Everlasting: Book of the Unliving
+ Halloween Jack
+ completed
+
+ The Everlasting: Book of the Unliving
+ Mormon Star Wars
+ abandoned
+
+ the farm
+ Hostile V
+ completed
+
+ The Final Fantasy RPG, Third Edition, by the Returners
+ Kobold eBooks
+ abandoned
+
+ The Genius Guide to Horrifically Overpowered Feats
+ Libertad!
+ completed
+
+ The Great Ork Gods
+ ProfessorProf
+ completed
+
+ The Guide to Glorantha
+ Mors Rattus
+ abandoned
+
+ The Kencyclopedia
+ GorfZaplen
+ abandoned
+
+ The Last Exodus
+ Barudak
+ completed
+
+ The Laundry RPG
+ RocknRollaAyatollah
+ abandoned
+
+ The Lost Caverns of Tsojconth ('76 Tournament Edition)
+ Bitchtits McGee
+ completed
+
+ The Morrow Project
+ Humbug Scoolbus
+ abandoned
+
+ The Northlands Saga Complete
+ Libertad!
+ completed
+
+ The One Ring Adventures
+ Capfalcon
+ abandoned
+
+ The One Ring Adventures
+ Egregious Offences
+ abandoned
+
+ The Play’s the Thing
+ unzealous
+ abandoned
+
+ The Realms of Atlantasia
+ shoplifter
+ abandoned
+
+ The Reign of Men
+ Libertad!
+ completed
+
+ The Riddle of Steel
+ hectorgrey
+ completed
+
+ The Riddle of Steel: The Flower of Battle
+ hectorgrey
+ completed
+
+ The Savage World of Solomon Kane
+ Pththya-lyi
+ abandoned
+
+ The Secret Fire
+ Evil Mastermind
+ completed
+
+ The Secret of Zir'An
+ Lazer Vampire Jr.
+ abandoned
+
+ The Secrets of Cats
+ Magnusth
+ abandoned
+
+ The Silver Kiss of the Magical Twilight of the Full Moon
+ inklesspen
+ abandoned
+
+ The Slayers d20
+ Waffleman_
+ abandoned
+
+ The Slayer's Guide to Female Gamers
+ Darwinism
+ abandoned
+
+ The Squared Circle: Wrestling RPG
+ dereku
+ abandoned
+
+ The Strange
+ Nuns with Guns
+ abandoned
+
+ The Sword Book
+ petrol blue
+ abandoned
+
+ The Whispering Vault
+ oriongates
+ abandoned
+
+ The World's Largest Dungeon
+ oriongates
+ completed
+
+ Thrash: Anime and Fighting Game Martial Arts RPG
+ Doresh
+ completed
+
+ Through the Breach: Into the Steam
+ Mors Rattus
+ completed
+
+ Through the Breach: The Fated Almanac
+ Mors Rattus
+ completed
+
+ Through the Breach: The Fatemaster's Almanac
+ Mors Rattus
+ completed
+
+ Tianxia: Blood, Silk & Jade
+ Wapole Languray
+ abandoned
+
+ Titan World
+ InfiniteJesters
+ completed
+
+ Tome of Battle: The Book of Nine Swords
+ Kurieg
+ completed
+
+ Tome of Magic
+ Kurieg
+ completed
+
+ Torchbearer
+ nomadotto
+ abandoned
+
+ Torchbearer
+ Xiahou Dun
+ abandoned
+
+ TORG
+ Evil Mastermind
+ completed
+
+ TORG ETERNITY
+ Evil Mastermind
+ completed
+
+ Tradition Book: Hollow Ones
+ Halloween Jack
+ completed
+
+ Tradition Book: Verbena
+ pospysyl
+ abandoned
+
+ Transdimensional Teenage Mutant Ninja Turtles
+ ForkBanger
+ abandoned
+
+ Traveller
+ mllaneza
+ abandoned
+
+ Traveller
+ gradenko_2000
+ abandoned
+
+ Traveller (Mongoose Edition)
+ Egregious Offences
+ abandoned
+
+ Tribebook: Black Furies
+ pospysyl
+ completed
+
+ Tribebook: Bone Gnawers
+ pospysyl
+ completed
+
+ "Tribebook": Bunyip
+ pospysyl
+ completed
+
+ Tribebook: Children of Gaia
+ Kurieg
+ completed
+
+ Tribebook: Children of Gaia
+ pospysyl
+ completed
+
+ TSR Catalog, 1979
+ Asimo
+ completed
+
+ TWERPS, The World's Easiest Roleplaying System
+ gradenko_2000
+ completed
+
+ Twilight 2000 v2.2
+ Rockopolis
+ abandoned
+
+ Unhallowed Metropolis
+ pkfan2004
+ completed
+
+ Unhallowed Necropolis
+ pkfan2004
+ completed
+
+ Unknown Armies
+ Test Pattern
+ abandoned
+
+ Unknown Armies
+ oriongates
+ completed
+
+ Unknown Armies 3rd Edition
+ Wapole Languray
+ abandoned
+
+ Unknown Armies: Postmodern Magick
+ oriongates
+ completed
+
+ Unknown Armies: Statosphere
+ oriongates
+ completed
+
+ Urban Jungle
+ ScolopaxMinor
+ abandoned
+
+ Urban Jungle
+ Night10194
+ completed
+
+ Valor - The Heroic Roleplay System
+ Doresh
+ completed
+
+ Vampire: The Dark Ages: 20th Anniversary Edition
+ RocknRollaAyatollah
+ abandoned
+
+ Vampire: The Masquerade
+ Halloween Jack
+ completed
+
+ Vampire: the Requiem 2nd edition
+ Mors Rattus
+ abandoned
+
+ Vampire: The Requiem: Half-Damned
+ Hattie Masters
+ ongoing
+
+ Victoriana
+ Hostile V
+ abandoned
+
+ Victoriana: Liber Magica
+ Hostile V
+ abandoned
+
+ Video Game Magic Items
+ Libertad!
+ completed
+
+ Villains and Vigilantes
+ Humbug Scoolbus
+ abandoned
+
+ Warbirds
+ Galaga Galaxian
+ abandoned
+
+ Warbirds: Space Age
+ Tasoth
+ completed
+
+ Warcraft: The Roleplaying Game
+ Kurieg
+ completed
+
+ Warhammer 40,000: Inquisitor
+ Hedningen
+ ongoing
+
+ Warhammer 40,000: Kill Team
+ MinistryofLard
+ ongoing
+
+ Warhammer 40,000 Roleplay: Black Crusade
+ Night10194
+ completed
+
+ Warhammer 40,000 Roleplay: Dark Heresy
+ Night10194
+ completed
+
+ Warhammer 40,000 Roleplay: Deathwatch and Rites of Battle
+ Night10194
+ completed
+
+ Warhammer 40,000 Roleplay: Rogue Trader
+ Night10194
+ completed
+
+ Warhammer Fantasy: Knights of the Grail
+ Night10194
+ completed
+
+ Warhammer Fantasy: Night's Dark Masters
+ Night10194
+ completed
+
+ Warhammer Fantasy: Paths of the Damned Part 1: Ashes of Middenheim
+ Night10194
+ completed
+
+ Warhammer Fantasy: Paths of the Damned Part 2: Spires of Altdorf
+ Night10194
+ completed
+
+ Warhammer Fantasy: Paths of the Damned Part 3: Forges of Nuln
+ Night10194
+ completed
+
+ Warhammer Fantasy: Realm of the Ice Queen
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 1st Edition
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay, 2e
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Career Compendium
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Children of the Horned Rat
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Lure of the Liche Lord
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Old World Armory
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Old World Bestiary
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Plundered Vaults
+ Night10194
+ ongoing
+
+ Warhammer Fantasy Roleplay 2e: Renegade Crowns
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Retrospective
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Sigmar's Heirs
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: Terror in Talabheim
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: The Thousand Thrones
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay 2e: WHFRP Companion
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay, 4th Edition
+ Mors Rattus
+ completed
+
+ Warhammer Fantasy Roleplay: Realms of Sorcery
+ Night10194
+ completed
+
+ Warhammer Fantasy Roleplay: Tome of Salvation
+ Night10194
+ completed
+
+ Warhammer Fantasy: Tome of Corruption
+ Night10194
+ completed
+
+ Warhamster Fantasy Roleplay Renegade Crowns
+ Falconier111
+ ongoing
+
+ Warmachine
+ Mors Rattus
+ abandoned
+
+ Way of the Scorpion
+ Alien Rope Burn
+ completed
+
+ Way of the Wicked
+ LongDarkNight
+ abandoned
+
+ Weird War II
+ Fossilized Rappy
+ completed
+
+ Werewolf: The Apocalypse 20th Anniversary Edition
+ Kurieg
+ abandoned
+
+ Werewolf: The Apocalypse: 20th Anniversary Edition: Book of the Wyrm
+ Kurieg
+ abandoned
+
+ Werewolf: The Forsaken: Night Horrors: Shunned by the Moon
+ Mors Rattus
+ completed
+
+ Werewolf: The Forsaken: Second Edition
+ Mors Rattus
+ completed
+
+ Wheel of Time Roleplaying Game
+ Syrg Sapphire
+ abandoned
+
+ Whitehack
+ Tolan
+ abandoned
+
+ Wilderlands of High Fantasy
+ KingKalamari
+ ongoing
+
+ Wild Lands
+ grassy gnoll
+ completed
+
+ Wisher, Theurgist, Fatalist
+ PleasingFungus
+ completed
+
+ Witch: Fated Souls
+ MollyMetroid
+ abandoned
+
+ Witch Girls Adventures
+ Adnachiel
+ completed
+
+ Witch Girls Adventures: 13 Magazine
+ FourmyleCircus
+ completed
+
+ Witch Girls Adventures: All About the Voodollars
+ FourmyleCircus
+ completed
+
+ Witch Girls Adventures: Annabelle Deville's guide to mystical mayhem: Wicked Ways
+ Adnachiel
+ completed
+
+ Witch Girls Adventures: Magical Minutia #3: Crossover
+ Adnachiel
+ completed
+
+ Witch Girls Adventures: Magical Minutia #4: Trinity Stone Academy
+ Adnachiel
+ completed
+
+ Witch Girls Adventures: Magical Minutia #5: Mortals: Seekers of Truth
+ Adnachiel
+ abandoned
+
+ Witch Girls Adventures Respelled
+ Adnachiel
+ completed
+
+ Witch Girls Adventures: The Official Guide to Coventry School for Girls
+ Adnachiel
+ completed
+
+ Wizards Presents
+ gradenko_2000
+ abandoned
+
+ Wolsung: Magia Wieku Pary (Steam Pulp Fantasy)
+ DocRanger
+ abandoned
+
+ World of Darkness: Immortals
+ Hostile V
+ completed
+
+ World of Darkness: Innocents
+ Hostile V
+ abandoned
+
+ World of Synnibarr
+ Zereth
+ completed
+
+ World of Synnibarr: Third Edition
+ Zereth
+ completed
+
+ World of Synnibarr: Ultimate Adventurer's Guide
+ Zereth
+ abandoned
+
+ World Tree: A Roleplaying Game of Species and Civilization
+ Tendales
+ abandoned
+
+ World Wide Wrestling: The Roleplaying Game
+ Galaga Galaxian
+ abandoned
+
+ Wraethu Novels
+ counterspin
+ abandoned
+
+ Wraethu RPG
+ PurpleXVI
+ completed
+
+ Wraith: The Great War
+ MonsieurChoc
+ abandoned
+
+ Wraith: The Oblivion
+ FelicityGS
+ abandoned
+
+ Würm: Role Playing in the Ice Age
+ Wapole Languray
+ abandoned
+
+ Wu Xing: The Ninja Crusade
+ ThisIsNoZaku
+ completed
+
+ WWE Roleplaying Game
+ SirPhoebos
+ completed
+
+ XCrawl
+ Ettin
+ completed
+
+ X-treme Dungeon Mastery
+ Dareon
+ completed
+
+ Yuuyake Koyake
+ demota
+ abandoned
+
+ ^PM AGEStOrm Age Master®
+ Flail Snail
+ completed

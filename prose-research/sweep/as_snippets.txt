@@ -1,0 +1,417 @@
+⌂ 
+
+ Odds and Ends
+
+ Block Characterization 
+ •
+
+ How Martin describes people when they enter a room.
+
+ (2179 words)
+
+ Almost a Bran Grown 
+ •
+
+ Take it easy on yourself, kid.
+
+ (547 words)
+
+ The Presence of Evil 
+
+ Some people claim that there are no purely evil characters in the series. That is wrong.
+
+ (1192 words)
+
+ Fast Action 
+
+ It's tough to write. I look at a few instances of it in AGOT .
+
+ (940 words)
+
+ Free Dilemmas 
+
+ I talk about Martin's strengths as a characterizer, and wend my way to a point about how you can wedge some more drama into your narrative.
+
+ (745 words)
+
+ More Psychic Distance 
+
+ A supplement to "Now As We All Know", this is a quick look at one more way to cram in extra background.
+
+ (393 words)
+
+ Older Than Their Years 
+ •
+
+ Tracking a common phrase.
+
+ (524 words)
+
+ Onomatopoeia 
+ •
+
+ A roundup of sound effects from across the series. Peeeeeeetyyyyyrrrr! 
+
+ (214 words)
+
+ A Sickening Crunch 
+ •
+
+ Tracking one particular sound effect
+
+ (354 words)
+
+ Block Characterization
+
+ A block characterization is that block of description characters receive when they first come on stage. Almost every book has them , and I like gathering them up to see different approaches.
+
+ Martin’s got an algorithm. He hits on age, hair, eyes, clothes, and physique. When you line them all up, the insistence on eye color is conspicuous, and of dubious value. Not to say that eye description never works. I’m reading a bit of In Cold Blood , and loved this part: ‘But it was her eyes, wide apart, darkly translucent, like ale held to the light, that made her immediately likable, that at once announced her lack of suspicion, her considered and yet so easily triggered kindliness.’ I’m not sure I know the eye colors of all my friends and family. It seems like Martin is now skeptical of it too. From a 2011 interview with Vulture :
+
+ How do you keep all of these details straight? Is there a huge encyclopedia or computer file that you use when you write? 
+
+ It’s mostly in my head. Elio Garcia [who runs Westeros.org] does seem to know Westeros better than I do. I’m beginning to wish I had never bothered with the color of people’s eyes. [Editor’s note: This is the subject of many convoluted fan conspiracy theories.] And that was one of the first things to go in the TV series — the purple contact lenses didn’t look good on camera.
+
+ Tywin gets a great physical description. His temperament is revealed by the choices he makes with his body. We understand he is abstemious, disciplined, impressive. My favorite bit is about his no-nonsense response to a receding hairline:
+
+ Tywin Lannister, Lord of Casterly Rock and Warden of the West, was in his middle fifties, yet hard as a man of twenty. Even seated, he was tall, with long legs, broad shoulders, a flat stomach. His thin arms were corded with muscle. When his once-thick golden hair had begun to recede, he had commanded his barber to shave his head; Lord Tywin did not believe in half measures. He razored his lip and chin as well, but kept his side-whiskers, two great thickets of wiry golden hair that covered most of his cheeks from ear to jaw. His eyes were a pale green, flecked with gold.
+
+ While Tywin looks younger than his age, Lysa Tully is the opposite. She’s histrionic, paranoid, and complacent. That is reflected in her body:
+
+ It had been five years, in truth; five cruel years, for Lysa. They had taken their toll. Her sister was two years the younger, yet she looked older now. Shorter than Catelyn, Lysa had grown thick of body, pale and puffy of face. She had the blue eyes of the Tullys, but hers were pale and watery, never still. Her small mouth had turned petulant.
+
+ Robert Baratheon has a similar downfall from stud to chub:
+
+ Fifteen years past, when they had ridden forth to win a throne, the Lord of Storm’s End had been clean-shaven, clear-eyed, and muscled like a maiden’s fantasy. Six and a half feet tall, he towered over lesser men, and when he donned his armor and the great antlered helmet of his House, he became a veritable giant. He’d had a giant’s strength too, his weapon of choice a spiked iron warhammer that Ned could scarcely lift. In those days, the smell of leather and blood had clung to him like perfume.
+
+ Now it was perfume that clung to him like perfume, and he had a girth to match his height. Ned had last seen the king nine years before during Balon Greyjoy’s rebellion, when the stag and the direwolf had joined to end the pretensions of the self-proclaimed King of the Iron Islands. Since the night they had stood side by side in Greyjoy’s fallen stronghold, where Robert had accepted the rebel lord’s surrender and Ned had taken his son Theon as hostage and ward, the king had gained at least eight stone. A beard as coarse and black as iron wire covered his jaw to hide his double chin and the sag of the royal jowls, but nothing could hide his stomach or the dark circles under his eyes.
+
+ Ser Waymar Royce was the youngest son of an ancient house with too many heirs. He was a handsome youth of eighteen, grey-eyed and graceful and slender as a knife. Mounted on his huge black destrier, the knight towered above Will and Gared on their smaller garrons. He wore black leather boots, black woolen pants, black moleskin gloves, and a fine supple coat of gleaming black ringmail over layers of black wool and boiled leather. Ser Waymar had been a Sworn Brother of the Night’s Watch for less than half a year, but no one could say he had not prepared for his vocation. At least insofar as his wardrobe was concerned.
+
+ Bran’s father sat solemnly on his horse, long brown hair stirring in the wind. His closely trimmed beard was shot with white, making him look older than his thirty-five years. He had a grim cast to his grey eyes this day, and he seemed not at all the man who would sit before the fire in the evening and talk softly of the age of heroes and the children of the forest. He had taken off Father’s face, Bran thought, and donned the face of Lord Stark of Winterfell.
+
+ Jon’s eyes were a grey so dark they seemed almost black, but there was little they did not see. He was of an age with Robb, but they did not look alike. Jon was slender where Robb was muscular, dark where Robb was fair, graceful and quick where his half brother was strong and fast.
+
+ “Regal,” Magister Illyrio said, stepping through an archway. He moved with surprising delicacy for such a massive man. Beneath loose garments of flame-colored silk, rolls of fat jiggled as he walked. Gemstones glittered on every finger, and his man had oiled his forked yellow beard until it shone like real gold. “May the Lord of Light shower you with blessings on this most fortunate day, Princess Daenerys,” the magister said as he took her hand. He bowed his head, showing a thin glimpse of crooked yellow teeth through the gold of his beard.
+
+ Illyrio is a good example of how bodies are essence in ASOIAF . 
+
+ Dany could smell the stench of Illyrio’s pallid flesh through his heavy perfumes.
+
+ [Viserys] was a gaunt young man with nervous hands and a feverish look in his pale lilac eyes.
+
+ His uncle was sharp-featured and gaunt as a mountain crag, but there was always a hint of laughter in his blue-grey eyes. He dressed in black, as befitted a man of the Night’s Watch. Tonight it was rich black velvet, with high leather boots and a wide belt with a silver buckle. A heavy silver chain was looped round his neck. Benjen watched Ghost with amusement as he ate his onion.
+
+ Tyrion Lannister, the youngest of Lord Tywin’s brood and by far the ugliest. All that the gods had given to Cersei and Jaime, they had denied Tyrion. He was a dwarf, half his brother’s height, struggling to keep pace on stunted legs. His head was too large for his body, with a brute’s squashed-in face beneath a swollen shelf of brow. One green eye and one black one peered out from under a lank fall of hair so blond it seemed white.
+
+ He was more interested in the pair that came behind him: the queen’s brothers, the Lannisters of Casterly Rock. The Lion and the Imp; there was no mistaking which was which. Ser Jaime Lannister was twin to Queen Cersei; tall and golden, with flashing green eyes and a smile that cut like a knife. He wore crimson silk, high black boots, a black satin cloak. On the breast of his tunic, the lion of his House was embroidered in gold thread, roaring its defiance. They called him the Lion of Lannister to his face and whispered “Kingslayer” behind his back.
+
+ Sansa, two years older, drew the crown prince, Joffrey Baratheon. He was twelve, younger than Jon or Robb, but taller than either, to Jon’s vast dismay. Prince Joffrey had his sister’s hair and his mother’s deep green eyes. A thick tangle of blond curls dripped down past his golden choker and high velvet collar. Sansa looked radiant as she walked beside him, but Jon did not like Joffrey’s pouty lips or the bored, disdainful way he looked at Winterfell’s Great Hall.
+
+ His lord father had come first, escorting the queen. She was as beautiful as men said. A jeweled tiara gleamed amidst her long golden hair, its emeralds a perfect match for the green of her eyes. His father helped her up the steps to the dais and led her to her seat, but the queen never so much as looked at him. Even at fourteen, Jon could see through her smile.
+
+ He had been a sly child, but after his mischiefs he always looked contrite; it was a gift he had. The years had not changed him much. Petyr had been a small boy, and he had grown into a small man, an inch or two shorter than Catelyn, slender and quick, with the sharp features she remembered and the same laughing grey-green eyes. He had a little pointed chin beard now, and threads of silver in his dark hair, though he was still shy of thirty. They went well with the silver mockingbird that fastened his cloak. Even as a child, he had always loved his silver.
+
+ The man who stepped through the door was plump, perfumed, powdered, and as hairless as an egg. He wore a vest of woven gold thread over a loose gown of purple silk, and on his feet were pointed slippers of soft velvet. “Lady Stark,” he said, taking her hand in both of his, “to see you again after so many years is such a joy.” His flesh was soft and moist, and his breath smelled of lilacs. “Oh, your poor hands. Have you burned yourself, sweet lady? The fingers are so delicate… Our good Maester Pycelle makes a marvelous salve, shall I send for a jar?”
+
+ Thorne strode toward him, crisp black leathers whispering faintly as he moved. He was a compact man of fifty years, spare and hard, with grey in his black hair and eyes like chips of onyx.
+
+ The armorer had a chest like a keg of ale and a gut to match. His nose was flat and broad, and he always seemed in need of a shave. The left sleeve of his black wool tunic was fastened at the shoulder with a silver pin in the shape of a longsword.
+
+ Jeor Mormont, Lord Commander of the Night’s Watch, was a gruff old man with an immense bald head and a shaggy grey beard.
+
+ The Grand Maester smiled gently from his tall chair at the foot of the table. “Well enough for a man of my years, my lord,” he replied, “yet I do tire easily, I fear.” Wispy strands of white hair fringed the broad bald dome of his forehead above a kindly face. His maester’s collar was no simple metal choker such as Luwin wore, but two dozen heavy chains wound together into a ponderous metal necklace that covered him from throat to breast. The links were forged of every metal known to man: black iron and red gold, bright copper and dull lead, steel and tin and pale silver, brass and bronze and platinum. Garnets and amethysts and black pearls adorned the metalwork, and here and there an emerald or ruby.
+
+ She was a very ugly old woman, Bran thought spitefully; shrunken and wrinkled, almost blind, too weak to climb stairs, with only a few wisps of white hair left to cover a mottled pink scalp. No one really knew how old she was, but his father said she’d been called Old Nan even when he was a boy. She was the oldest person in Winterfell for certain, maybe the oldest person in the Seven Kingdoms. Nan had come to the castle as a wet nurse for a Brandon Stark whose mother had died birthing him. He had been an older brother of Lord Rickard, Bran’s grandfather, or perhaps a younger brother, or a brother to Lord Rickard’s father. Sometimes Old Nan told it one way and sometimes another. In all the stories the little boy died at three of a summer chill, but Old Nan stayed on at Winterfell with her own children. She had lost both her sons to the war when King Robert won the throne, and her grandson was killed on the walls of Pyke during Balon Greyjoy’s rebellion. Her daughters had long ago married and moved away and died. All that was left of her own blood was Hodor, the simpleminded giant who worked in the stables, but Old Nan just lived on and on, doing her needlework and telling her stories.
+
+ Almost a Bran Grown
+
+ Martin’s been teased plenty for his pet phrases , and they’re hard to miss. While “words are wind” and “where do whores go?” are well known, “almost a man grown” wasn’t on my radar until I began my reread. The sentences quoted below aren’t all of them, just the ones related to Bran.
+
+ At the beginning of AGOT , Bran is eight, and hilariously, is always talking about how he’s “almost a man grown” and should stop having emotions like fear or sadness. (When I was eight I talked mostly about Power Rangers and bears.)
+
+ Assuming three years pass between AGOT and ADWD , he’s been right there at the cusp of manhood from 8 to 11. And the poor guy never gives himself a break.
+
+ His eighth name day had come and gone. He was almost a man grown now, too old to cry. “It was just a lie,” he said bitterly, remembering the crow from his dream.
+
+ It shamed him. He was only a few years younger than Robb; if his brother was almost a man grown, so was he. He should have been able to protect himself.
+
+ He could almost hear him, and their lord father as well. Winter is coming, and you are almost a man grown, Bran. You have a duty.
+
+ He might have cried then, but he couldn’t. He was the Stark in Winterfell, his father’s son and his brother’s heir, and almost a man grown. At the foot of the hall, the doors opened and a gust of cold air made the torches flame brighter for an instant.
+
+ I won’t be afraid. He was the Prince of Winterfell, Eddard Stark’s son, almost a man grown and a warg too, not some little baby boy like Rickon. Summer would not be afraid.
+
+ Bran was scared of this place, and almost as scared of admitting it to the Reeds. I’m a prince of the north, a Stark of Winterfell, almost a man grown, I have to be as brave as Robb. Jojen gazed up at him with his dark green eyes.
+
+ Back in Winterfell, Sansa had told him that the demons of the dark couldn’t touch him if he hid beneath his blanket. He almost did that now, before he remembered that he was a prince, and almost a man grown. Bran wriggled across the floor, dragging his dead legs behind him until he could reach out and touch Meera on the foot.
+
+ Something about the way the raven screamed sent a shiver running up Bran’s spine. I am almost a man grown, he had to remind himself. I have to be brave now.
+
+ What if I don’t want to remain when you are gone? he almost asked, but he swallowed the words unspoken. He was almost a man grown, and he did not want Meera to think he was some weepy babe. “Maybe you could be greenseers too,” he said instead.
+
+ Part of him wanted to shout at them for leaving him, and another part wanted to cry. He was almost a man grown, though, so he said nothing. But after they were gone, he slipped inside Hodor’s skin and followed them.
+
+ The Presence of Evil
+
+ Bryan Cogman: Most viewers get that this is a gray world and will go with it. Some don’t, and they either stop watching or they keep watching, hating the grayness. But yes, this world is gray. The terms hero and villain in our writers’ room [do] not exist. And I would say George would say the same thing about his books. There aren’t any good guys or bad guys in his books. It’s why this show speaks to more people than those who would necessarily watch a quote-unquote fantasy show, the complexity of the characters. A character starts throwing a kid out a window, and then you start liking him, and then you don’t like him very much, and then you like him again. There are no clear-cut redemption arcs. There are people who have redeeming moments and non-redeeming moments. There are people who don’t realize they’re being terrible when they’re being terrible.
+
+ That’s Bryan Cogman, a producer on Game of Thrones , in an interview with Vulture . I’m grateful to Cogman for his fine work on the series, and also for so cleanly formulating the pervasive belief that there are no black and white characters in ASOIAF – otherwise, I might be accused of setting up a strawman. Ideally I’d get this quote from the horse’s mouth, but let’s not let that stop us. Martin’s feelings on the matter aren’t all that relevant, actually; this is now a part of the series’ mystique, regardless of how true it is. And to be clear, it is kinda true, it is sometimes true. (Jaime is the poster boy, and I look at how that redemption (and it is one, I don’t care what Cogman says) is managed here .) But not categorically.
+
+ Let’s review a few of the outright villains in the series.
+
+ Rorge
+
+ “You shut your mouth!” Arya tried to think what Syrio would have done. She drew her wooden practice sword.
+
+ “Come closer,” Rorge said, “and I’ll shove that stick up your bunghole and fuck you bloody.”
+
+ The door to the inn banged open. Willow stepped out into the rain, a crossbow in her hands. The girl was shouting at the riders, but a clap of thunder rolled across the yard, drowning out her words. As it faded, Brienne heard the man in the Hound’s helm say, “Loose a quarrel at me and I’ll shove that crossbow up your cunt and fuck you with it. Then I’ll pop your fucking eyes out and make you eat them.” The fury in the man’s voice drove Willow back a step, trembling.
+
+ Joffrey
+
+ “Joffrey… I remember once, this kitchen cat… the cooks were wont to feed her scraps and fish heads. One told the boy that she had kittens in her belly, thinking he might want one. Joffrey opened up the poor thing with a dagger to see if it were true. When he found the kittens, he brought them to show to his father. Robert hit the boy so hard I thought he’d killed him.”
+
+ “Silence, fool.” Joffrey lifted his crossbow and pointed it at her face. “You Starks are as unnatural as those wolves of yours. I’ve not forgotten how your monster savaged me.”
+
+ “That was Arya’s wolf,” she said. “Lady never hurt you, but you killed her anyway.”
+
+ “No, your father did,” Joff said, “but I killed your father. I wish I’d done it myself. I killed a man last night who was bigger than your father. They came to the gate shouting my name and calling for bread like I was some baker, but I taught them better. I shot the loudest one right through the throat.”
+
+ Gregor Clegane
+
+ A woodcarver set up shop in the village under my father’s keep, and to buy favor he sent us gifts. The old man made marvelous toys. I don’t remember what I got, but it was Gregor’s gift I wanted. A wooden knight, all painted up, every joint pegged separate and fixed with strings, so you could make him fight. Gregor is five years older than me, the toy was nothing to him, he was already a squire, near six foot tall and muscled like an ox. So I took his knight, but there was no joy to it, I tell you. I was scared all the while, and true enough, he found me. There was a brazier in the room. Gregor never said a word, just picked me up under his arm and shoved the side of my face down in the burning coals and held me there while I screamed and screamed.
+
+ “Elia of Dorne,” they all heard Ser Gregor say, when they were close enough to kiss. His deep voice boomed within the helm. “I killed her screaming whelp.” He thrust his free hand into Oberyn’s unprotected face, pushing steel fingers into his eyes. “Then I raped her.” Clegane slammed his fist into the Dornishman’s mouth, making splinters of his teeth. “Then I smashed her fucking head in. Like this.”
+
+ Roose Bolton
+
+ “Has my bastard ever told you how I got him?”
+
+ That he did know, to his relief. “Yes, my … m’lord. You met his mother whilst out riding and were smitten by her beauty.”
+
+ “Smitten?” Bolton laughed. “Did he use that word? Why, the boy has a singer’s soul … though if you believe that song, you may well be dimmer than the first Reek. Even the riding part is wrong. I was hunting a fox along the Weeping Water when I chanced upon a mill and saw a young woman washing clothes in the stream. The old miller had gotten himself a new young wife, a girl not half his age. She was a tall, willowy creature, very healthy-looking. Long legs and small firm breasts, like two ripe plums. Pretty, in a common sort of way. The moment that I set eyes on her I wanted her. Such was my due. The maesters will tell you that King Jaehaerys abolished the lord’s right to the first night to appease his shrewish queen, but where the old gods rule, old customs linger. The Umbers keep the first night too, deny it as they may. Certain of the mountain clans as well, and on Skagos … well, only heart trees ever see half of what they do on Skagos. This miller’s marriage had been performed without my leave or knowledge. The man had cheated me. So I had him hanged, and claimed my rights beneath the tree where he was swaying. If truth be told, the wench was hardly worth the rope.
+
+ Ramsay Bolton
+
+ “Tell him nothing and remember every word he says. I’ll have you back, no matter what that Dustin bitch may tell you. Who are you?”
+
+ “Reek, my lord. Your man. I’m Reek, it rhymes with sneak.”
+
+ “It does. When my father brings you back, I’m going to take another finger. I’ll let you choose which one.”
+
+ Then there’s Cersei and her charming necromancer Qyburn, Rorge’s buddy Biter, Shagwell, Polliver, Rattleshirt, Kraznys the loutish slaver, Viserys, Craster, Vargo Hoat, Rickon, etc.
+
+ Fast Action
+
+ It’s hard to write about things happening quickly, because it’s the reader turning the pages. Filmmakers can show a sub-second glimpse of something; the eye is so fast and so automatic that this works, giving a good facsimile of real fast experiences. That’s how jump scares work. We can’t – LOOK OUT A MONSTER – achieve the same effect, can’t even come close. The best we can do is to goad the reader with sentence structures: either short, choppy sentences, or long ones with lots of verbs and no pauses. Unfortunately, these are not the kinds of sentences one reads quickly. Readers read fastest when the text slips into a steady flow. Ideas and events bubble up and subside in due time, sentences dissolve into their successors; connections are natural and spontaneous. Crucially, nothing jarring happens. Rapid action tends to be disconcerting, so writers settle for evoking that instead of actual speed, which may be impossible.
+
+ At the same time, literature offers the best slow-motion on the market. So long as the narrator can perceive the events, and distinguish the sequence of them, the time scale is arbitrary. Tobias Wolff has a great story called “Bullet in the Brain”, the back half of which takes place during the split second a slug is tunnelling through the protagonist’s head. See how Wolff initiates the switch in this paragraph:
+
+ The bullet smashed Anders’ skull and ploughed through his brain and exited behind his right ear, scattering shards of bone into the cerebral cortex, the corpus callosum, back toward the basal ganglia, and down into the thalamus. But before all this occurred, the first appearance of the bullet in the cerebrum set off a crackling chain of ion transports and neurotransmissions. Because of their peculiar origin these traced a peculiar patter, flukishly calling to life a summer afternoon some forty years past, and long since lost to memory. After striking the cranium the bullet was moving at 900 feet per second, a pathetically sluggish, glacial pace compared to the synaptic lighting that flashed around it. Once in the brain, that is, the bullet came under the mediation of brain time, which gave Anders plenty of leisure to contemplate the scene that, in a phrase he would have abhorred, “passed before his eyes.”
+
+ Quite a device! And not one for everyday use. But the basics are: you have to inform the reader how quickly things are happening. For this, Martin uses phrases like “half a heartbeat” (71 occurrences from AGOT to ADWD ), “for an instant” (62), and “in the blink of an eye.” (14. This one intrigues me. Unsubstantiated speculation: Martin picked it up from the Silver Age comics he read as a child.)
+
+ Let’s look at a few instance of fast action.
+
+ Ser Gregor wrenched his shield into position, juggled with his lance, and all the while fought to hold his unruly mount on a straight line, and suddenly Loras Tyrell was on him, placing the point of his lance just there, and in an eye blink the Mountain was falling.
+
+ A long sentence with three ands for velocity. The “all the while” doesn’t work for me. The wrenching of the shield into position is a completed action by the time we get this detail about keeping the horse on track. A more typical approach to this sentence might be:
+
+ (As he fought / Fighting) to keep his unruly mount running straight, Ser Gregor juggled lance and shield, and nearly had them in position when the point of Loras Tyrell’s lance…
+
+ The as is a hook on which you can hang any number of other actions, and they’ll all be simultaneous. My version gives one verb to both lance and shield, which I’m not confident about in retrospect; maybe it’s better and more hurried if they each get a verb.
+
+ One moment he’d been ordering supper, and an eye blink later he was facing a room of armed men, with Jyck reaching for a sword and the fat innkeep shrieking, “No swords, not here, please, m’lords.”
+
+ Here’s a tried-and-true sentence template: One moment, X, and the next, Y. We see another treatment of simultaneous action in that “with Jyck reaching […] the fat innkeep shrieking”.
+
+ With is a function word chosen from other possibilities ( as , while , and ) because it permits the present participles reaching and shrieking . Since our -ing verbs play out in the continuous tense, any of them that occur in one sentence will feel simultaneous to the reader.
+
+ Bran on the edge:
+
+ He must have made a noise. Suddenly her eyes opened, and she was staring right at him. She screamed.
+
+ Everything happened at once then. The woman pushed the man away wildly, shouting and pointing. Bran tried to pull himself up, bending double as he reached for the gargoyle. He was in too much of a hurry. His hand scraped uselessly across smooth stone, and in his panic his legs slipped, and suddenly he was falling. There was an instant of vertigo, a sickening lurch as the window flashed past. He shot out a hand, grabbed for the ledge, lost it, caught it again with his other hand. He swung against the building, hard. The impact took the breath out of him. Bran dangled, one-handed, panting.
+
+ Besides that double and sentence in the middle, this example is all about packing in the verbs. It’s also interesting to see how Martin plays with the punctuation to accentuate the action.
+
+ He swung against the building, hard.
+
+ That comma gives some oomph, and here
+
+ Bran dangled, one-handed, panting.
+
+ the commas adds some dead time.
+
+ Free Dilemmas
+
+ If there’s one thing Jon Snow knows (and that’s debateable), it’s dilemma. At the start of his arc in ASOIAF , he is Robb’s buddy, Arya’s beloved older brother, and Catelyn’s whipping boy. Discontent with his place at the table drives him up (to) the Wall, and he settles there into a familiar trajectory. We can call this the Hogwarts Plot or the Ender Plot, because the dynamic is the same: an outsider tries, in the face of hostility from peers and superiors, to carve out a place for himself in an insular institution. This is obviously a mode with great pedigree, but the scenes in which Jon wrestles with his vows and builds camaraderie with his new brothers are just okay, demonstrating the kind of weak contact you get from a writer swinging at stuff outside his strike zone. (If you don’t know what Martin’s is, it’s any scene with Littlefinger/Varys or someone doing a Littlefinger impression.) The reason for this is, on its face, laughable, but hear me out: Martin is not great with large groups of people.
+
+ There’s no doubt he’s skilled at developing characters, but he develops them serially, one at a time. For a Hogwarts Plot to work we need more of a sense of the institutional ecosystem, and that’s something we don’t get at Castle Black. We know many characters there, but we don’t know the schedules and rhythms of their days, what they do for recreation (beyond sneaking off to Mole’s Town), how the social hierarchy really shakes out in any detail. We know that Thorne hates Jon, and we have a sense that Jon is winning over his peers, but the antagonist cliques are ill-defined. Dudes like Rast pop up once Sam needs a torturer, but never fulfill that Draco Malfoy spot.
+
+ (I think this critique applies almost without exception in ASOIAF . Even when there are many characters in one place, the sense of community is weak, and the dramas are mostly one-on-one exchanges. The two exceptions I can think of are that journey south from Winterfell, and Winterfell itself. The whole Mycah incident worked so well because we knew all the characters in that drama, and most crucially understood their positions in the hierarchy. Winterfell also feels like the most vivid of the locales because Bran gives us a tour – from the crypts to the godswood to the broken tower, and how about that geothermal energy? – and we meet most of the staff, all your masters: the master-at-arms, the master of horse, the kennelmaster, and of course Maester Luwin.)
+
+ Once Jon gets picked for a ranging, however, Martin is back in his element, and he lobs a series of difficult ethical problems at Jon. While traversing the Skirling Pass, Jon ambushes some wildling sentries, one of whom is Ygritte. Qhorin wants no survivors, and orders Jon to execute her. It’s not a crazy request; if word of their presence reached Mance, they would be finished. But Jon lets her go. Later, with capture imminent, Qhorin commands Jon to play the double agent, and to really sell this con forces Jon to kill him in front of the wildlings.
+
+ Now the Double Agent Plot is even more venerable than the Hogwarts Plot, and it suits Martin. Jon is tempted by the free living wildlings, and Ygritte in particular. To prove himself further, Jon is dispatched back over the Wall, where he defects and flies back home to his fellow crows.
+
+ Finally we come to the dilemma that interests me. Mance has sent his horde against the Wall, and the men of the Night’s Watch have valiantly defended it. The leadership decide it’s time to parley – or that’s what they want Mance to think. Jon is the chosen emissary, but his real mission is to assassinate Rayder in his tent. Even during my reread it’s a tense moment, simply by how Martin structures it. But it’s a totally false dilemma. Jon is going to be saved by the bell/trumpets of Stannis’s host.
+
+ The takeaway here is that certain moments in your plot may afford you the opportunity to cram in some phony tension. Take those opportunities. If you know the bad guys are about burst in on the good guys, they can interrupt literally any scene, because it will never have to be resolved. So why not make it a dramatic one?
+
+ More Psychic Distance
+
+ The game of thrones is one of imperfect information: characters must bluff each other, or make risky bets on the reliability of shady operators. To support this theme, Martin chose a tightly limited third-person perspective. But it defies all of his instincts as a storyteller. Martin loves information, and the close third is best suited for communicating a small amount of information and a great deal of subjectivity. Sometimes Martin negotiates that tension clumsily, as when characters deliver monologues so worked over I suspect he simply put quotation marks around a paragraph he liked but didn’t have any place to put.
+
+ Other techniques are more subtle.
+
+ Three hundred years ago, Catelyn knew , those heights had been covered with forest, and only a handful of fisherfolk had lived on the north shore of the Blackwater Rush where that deep, swift river flowed into the sea. Then Aegon the Conqueror had sailed from Dragonstone. It was here that his army had put ashore, and there on the highest hill that he built his first crude redoubt of wood and earth.
+
+ Now the city covered the shore as far as Catelyn could see ; manses and arbors and granaries, brick storehouses and timbered inns and merchant’s stalls, taverns and graveyards and brothels, all piled one on another. She could hear the clamor of the fish market even at this distance.
+
+ Martin doesn’t want to slip into a purely expository narrator’s voice. So he’ll mark certain information as belonging to the characters with an X knew . He’ll also mark sensations. An author who reserves the right to a narrating voice can simply say “as far as you/one could see,” but Martin doesn’t have that option.
+
+ Catelyn happens to serve as a conduit for exposition yet again, when she’s thinking about her father’s bannermen:
+
+ Catelyn knew them all: the Blackwoods and the Brackens, ever enemies, whose quarrels her father was obliged to settle; Lady Whent, last of her line, who dwelt with her ghosts in the cavernous vaults of Harrenhal; irascible Lord Frey, who had outlived seven wives and filled his twin castles with children, grandchildren, and great-grandchildren, and bastards and grandbastards as well. All of them were bannermen to the Tullys, their swords sworn to the service of Riverrun.
+
+ Older Than Their Years
+
+ “He looked older than his fifteen years.”
+
+ Martin likes this construction. His series features young people in terribly adult scenarios. It’s easy to forget due to the show, but Dany is fourteen when she’s sold to Drogo. Robb has an army even though today he wouldn’t have a driver’s license.
+
+ Martin uses it for obvious reasons. It’s hard not to sympathize with someone who looks utterly overmatched by the role they’ve been assigned. He gets teased for falling in love with certain phrases, and I’ve pointed out a few, but to his credit this is not one of them. It’s largely confined to AGOT , with a few scattered reprises in the later volumes.
+
+ I find it interesting as characterization because it’s a type of description that fiction alone can do. It’s second-hand description. Usually I consider it neutral or a disadvantage that we cannot show our readers something real, but this sort of description also illuminates the describer. It tells us where Cat is at, and its strong subjectivity allows us to really see the scene from her perspective.
+
+ Robb will look younger or older than 15, depending on Cat’s confidence in him:
+
+ His auburn hair had grown shaggy and unkempt, and a reddish stubble covered his jaw, making him look older than his fifteen years.
+
+ Robb glanced from her to Greyjoy, searching for an answer and finding none. For a moment he looked even younger than his fifteen years, despite his mail and sword and the stubble on his cheeks.
+
+ When it’s used in a Bran chapter, everything I said about it illuminating the describer goes out the window. To young children, adults are not finely discriminated. Until you look like a grandparent, you look the same. So Bran isn’t the one making this observation, but Martin. For more on why that’s a problem, read this piece on psychic distance. 
+
+ Bran’s father sat solemnly on his horse, long brown hair stirring in the wind. His closely trimmed beard was shot with white, making him look older than his thirty-five years. He had a grim cast to his grey eyes this day, and he seemed not at all the man who would sit before the fire in the evening and talk softly of the age of heroes and the children of the forest. He had taken off Father’s face, Bran thought, and donned the face of Lord Stark of Winterfell.
+
+ Back out the construction of the hour. Here it’s applied to Loras the prodigy:
+
+ Out of his armor, Ser Loras Tyrell looked even younger than his sixteen years.
+
+ Joffrey the enfant terrible :
+
+ “He called me boy,” Joffrey said peevishly, sounding younger than his years.
+
+ And then miscellaneously:
+
+ His receding hair made him look older than his years, but as he turned to watch his bride approach, Jon could see the boy in him.
+
+ She felt older than her fourteen years. If ever she had truly been a girl, that time was done.
+
+ She wore her brown hair in a braid, and her eyes were older than her years.
+
+ Onomatopoeia
+
+ AHooooooooooooooooooooooo , the warhorn cried, long and low, a sound to curdle blood. Asha had begun to hate the sound of horns. On Old Wyk her uncle’s hellhorn had blown a death knell for her dreams, and now Hagen was sounding what might well be her last hour on earth.
+
+ Asha might hate it, but I think it’s charming. You can feel Martin’s enthusiam in moments like this. He’s fired up! I can picture a young George on the floor of the den, knocking together his toy knights and mumbling fanfares.
+
+ A warhorn blew. Haroooooooooooooooooooooooo, it cried, its voice as long and low and chilling as a cold wind from the north. The Lannister trumpets answered, da-DA da-DA da-DAAAAAAAAA, brazen and defiant, yet it seemed to Tyrion that they sounded somehow smaller, more anxious.
+
+ Onomoatopoeia is the closest writers can get to direct representation (outside of emoticons ;-D). Everything else is symbolic. Considering his treatment of dialect, it’s no surprise Martin does sound effects too. Here’s every word I could find that contained three consecutive, identical sets of characters. That elongated are at the bottom of the list is the dragonbinder horn, which Asha mentions in the quotation above.
+
+ oooo
+mmmm
+hmmmm
+noooo
+meeee
+ahhhh
+aieeee
+oooooo
+oooooh
+nooooo
+aaaaah
+yessss
+ooooooh
+noooooo
+hrrrred
+hmmmmed
+hmmmmmm
+daaaaaaa
+herrrrrr
+usssssss
+craaaack
+oooooooo
+oooooooh
+meeeeeee
+hoooodor
+noooooooo
+hallooooo
+baaaaaaed
+hisssssss
+hisssssed
+halloooooo
+hoooooodor
+daaaaaaaaa
+peeeeeetyr
+nooooooooo
+aahooooooo
+ahooooooooo
+hooooooodor
+oooooooooooo
+hooooodooooor
+hissssssssssss
+aahoooooooooooo
+hoooooodooooooor
+killlllllllllled
+ahooooooooooooooo
+ooooooooooooooooo
+hissssssssssssssss
+uuuuuuuhoooooooooo
+ooooooooooooooooooo
+hodorhodorhodorhodor
+ahooooooooooooooooooo
+eeeeelllllliiiiiaaaaa
+ahoooooooooooooooooooo
+mememememememememememe
+ahooooooooooooooooooooo
+ahooooooooooooooooooooooo
+aaaaahoooooooooooooooooooo
+ahooooooooooooooooooooooooo
+haroooooooooooooooooooooooo
+haaroooooooooooooooooooooooo
+uuuuuuuuuuuuhooooooooooooooo
+ahooooooooooooooooooooooooooo
+hodorhodorhodorhodorhodorhodor
+aaaaaaoooooooooooooooooooooooo
+aaaaahoooooooooooooooooooooooooo
+ahoooooooooooooooooooooooooooooo
+aaaarreeeeeeeeeeeeeeeeeeeeeeeeeeee
+aaaarrreeeeeeeeeeeeeeeeeeeeeeeeeeeee
+uuuuuuuuuuuuuuuhooooooooooooooooooooooooo
+uuuuuuuooooooooooooooooooooooooooooooooooooo
+aaaahooooooooooooooooooooooooooooooooooooooooooo
+aaaaaaarrreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+ A Sickening Crunch
+
+ What I most anticipated about the last season of Game of Thrones was the Oberyn Martell subplot. It is the Mountain/Viper duel that I most clearly remember reading, even more than the Red Wedding; I held the book away from my nose and muttered “woah”. In the book, that fight is punctuated with this.
+
+ As he drew back his huge fist, the blood on his gauntlet seemed to smoke in the cold dawn air. There was a sickening crunch . Ellaria Sand wailed in terror, and Tyrion’s breakfast came boiling back up.
+
+ But that’s not the only sickening crunch in the story – there are five more, in fact.
+
+ Jory Cassel put his heels into his mount and charged. A steel-shod hoof caught a Lannister guardsman in the face with a sickening crunch. A second man reeled away and for an instant Jory was free.
+
+ A man with an axe rushed in, shouting and heedless. Robb’s sword caught him full in the face with a sickening crunch and a spray of bright blood.
+
+ He clawed for his sword, but the morningstar was circling again, coming at his face. A sickening crunch, and he was falling. He did not recall hitting the ground, but when he looked up there was only sky above him
+
+ The Bastard’s backhand caught him square, and his cheekbone shattered with a sickening crunch beneath the lobstered steel. The world vanished in a red roar of pain.
+
+ Shagwell whirled the spiked ball once around his head and brought it down in the middle of Crabb’s face. There was a sickening crunch. In the silence that followed, Brienne could hear the sound of her own heart.
+
+ I mention this to you to make the point that memorable writing is not inherent to your phrases. In order to get this stuff to stick in the reader’s mind, you have to create the scene, make it vivid and important to them. Then, if you do that, the words will start to land with a…
+
+ Return to table of contents

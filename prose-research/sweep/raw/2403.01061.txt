@@ -1,0 +1,1004 @@
+ 
+ Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers Warning: This paper contains examples of artistic work that may include shocking or disturbing details. 
+ Report GitHub Issue 
+ × 
+ Title: 
+ Content selection saved. Describe the issue below: 
+ Description: 
+ Submit without GitHub 
+ Submit in GitHub 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ Back to arXiv 
+ Why HTML? 
+ Report Issue 
+ Back to Abstract 
+ Download PDF 
+ Abstract 
+ 1 Introduction 
+ 2 Related Work 
+ 3 Writers and Data 
+ 4 Summary Generation 
+ 5 Evaluation 
+ 5.1 Span-Level Error Categorization 
+ 5.2 Summary-Level Ratings 
+ 5.3 Story-Level Style Effects 
+ 6 Results 
+ 6.1 How good are the summaries? 
+ 6.2 What mistakes do the models make? 
+ 6.3 Do some aspects of writing style affect summary quality? 
+ 6.3.1 Length 
+ 6.3.2 Reading-Level 
+ 6.3.3 Narrating, Story, and Discourse 
+ 6.4 Can an LLM replace the writers in evaluating the summaries? 
+ 7 Discussion 
+ 8 Conclusion 
+ References 
+ A Information Sheet for Informed Consent 
+ B Model Prompts and Costs 
+ B.1 GPT-4 
+ B.2 Claude 
+ B.3 Llama 
+ C Short Story Uploader and Evaluation Interfaces 
+ D Fine-Grained Error Annotation Interface 
+ License: CC BY 4.0
+arXiv:2403.01061v3 [cs.CL] 11 Jul 2024 
+ Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers
+ Warning: This paper contains examples of artistic work that may include shocking or disturbing details. 
+ Melanie Subbiah
+ Affiliation: Department of Computer Science, Columbia University, USA {m.subbiah,srz2116}@columbia.edu , {chilton,kathy}@cs.columbia.edu 
+ Sean Zhang
+ Affiliation: Department of Computer Science, Columbia University, USA {m.subbiah,srz2116}@columbia.edu , {chilton,kathy}@cs.columbia.edu 
+ Lydia B. Chilton
+ Affiliation: Department of Computer Science, Columbia University, USA {m.subbiah,srz2116}@columbia.edu , {chilton,kathy}@cs.columbia.edu 
+ Kathleen McKeown
+ Affiliation: Department of Computer Science, Columbia University, USA {m.subbiah,srz2116}@columbia.edu , {chilton,kathy}@cs.columbia.edu 
+ Abstract 
+ We evaluate recent Large Language Models (LLMs) on the challenging task of summarizing short stories, which can be lengthy, and include nuanced subtext or scrambled timelines. Importantly, we work directly with authors to ensure that the stories have not been shared online (and therefore are unseen by the models), and to obtain informed evaluations of summary quality using judgments from the authors themselves. Through quantitative and qualitative analysis grounded in narrative theory, we compare GPT-4, Claude-2.1, and LLama-2-70B. We find that all three models make faithfulness mistakes in over 50% of summaries and struggle with specificity and interpretation of difficult subtext. We additionally demonstrate that LLM ratings and other automatic metrics for summary quality do not correlate well with the quality ratings from the writers. 
+ 1 Introduction 
+ Narrative is a fundamental part of how we communicate and make sense of our experiences. As Herman (2009) describes, “Narrative roots itself in the lived,
+felt experience of human or human-like agents interacting in an ongoing way with their surrounding environment…" Understanding narrative is, therefore, a necessary skill Large Language Models (LLMs) need in order to engage with the subtleties of human experience and communication. We test how well LLMs understand the subtleties of narrative through the task of narrative summarization, with a focus on interpreting themes and meaning in addition to capturing plot. 
+ For our narrative form, we use fiction short stories as they present several interesting challenges. Fiction writing does not follow a clear intro-body-conclusion format and instead may follow a nonlinear timeline, hint at things only abstractly, or deliberately mislead the reader. Fiction may use multiple language varieties and creative language. For example, consider this quote from Toni Morrison’s Beloved : “The pieces I am, she gather them and give them back to me in all the right order" Morrison (2004) . This sentence uses complex metaphor and African American Language Deas et al. (2023) ; Grieser (2022) from the late 1800’s to express a beautiful relationship between two characters. Finally, fiction short stories can be longer than an LLM’s context window. Here, we consider stories up to 10,000 tokens long, which fit within the context window of the paid LLMs we use but are too long for the context window of the open-source LLM we use. 
+ Evaluations of narrative summarization on long documents have been scarce due to several key challenges: 1) Narrative text is generally either in the public domain (and therefore likely in LLM training data) or under copyright, and 2) Holistic summary evaluation has been prohibitively difficult due to a lack of reliable automatic metrics Fabbri et al. (2021) ; Chang et al. (2024) and complications with human evaluation. For example, it can take someone over an hour to thoroughly read and evaluate just one story and summary, which quickly becomes expensive. 
+ Chang et al. (2024) make progress on these issues by purchasing recent books (which are less likely to be in models’ training data but may still be discussed in the training data), and developing an LLM-based metric for evaluating summary coherence. We take this a step further by working directly with experienced creative writers, and thus are able to: 1) use stories that are not discussed or present in training data, 2) expand beyond evaluation of coherence to aspects of narrative understanding like faithfulness and thematic analysis, and 3) use human rather than model judgments. 
+ We evaluate three LLMS -- GPT-4, Claude-2.1, and LLama-2-70B -- on 25 short stories. We ask authors to evaluate the summaries of their own unpublished stories 1 1 
+ 1 
+ We release our code, the writer evaluation responses, and the story/summary errors here: https://github.com/melaniesubbiah/reading-subtext 
+ since they are experts in what they have written, focusing on coherence, faithfulness, coverage of important details, and useful interpretation in the summaries. We then present an analysis of their evaluation. 
+ The key features of our work are:
+ 1.) Span-level, summary-level, and story-level evaluation of LLM summaries of short stories.
+ 2.) Experienced creative writers as evaluators and short stories unseen by LLMs.
+ 3.) Exploration of LLM ability to analyze and interpret narrative. 
+ Our key findings are:
+ 1.) GPT-4 and Claude can produce excellent summaries, but only about half the time.
+ 2.) LLMs struggle with specificity, interpreting subtext, and unreliable narrators.
+ 3.) LLM judgments cannot replace skilled human evaluators for this task. 
+ Lastly, this work demonstrates the mutual benefit of working directly with communities who have valuable data as an increasing amount of online content is consumed or generated by models. 
+ 2 Related Work 
+ Narrative Summarization. Interest in long narrative summarization has steadily grown in the last several years. Ladhak et al. (2020) first introduced the task of summarizing chapters from novels, which was then expanded into the full BookSum dataset Kryscinski et al. (2022) and used in early studies of RLHF Wu et al. (2021) . Most similar to our work is SQuALITY Wang et al. (2022) , which also focuses on short stories. However, their stories are sourced from Project Gutenberg which is likely memorized by LLMs. Across other areas of narrative understanding, recent datasets have been proposed in screenplays Chen et al. (2022) , poetry Mahbub et al. (2023) , and theory of mind evaluation Xu et al. (2024) . 
+ Summarization Evaluation. Evaluating summary quality in any of these areas is a challenge. Work such as Fabbri et al. (2021) has shown the flaws in many of the traditional automatic metrics, prompting a move toward model-based reference-free methods and fine-grained span analysis. LongEval Krishna et al. (2023) , QAFactEval Fabbri et al. (2022) , FALTE Goyal et al. (2022a) , and FActScore Min et al. (2023) have furthered methods in faithfulness, while work like SNaC Goyal et al. (2022c) and BooookScore Chang et al. (2024) have focused on coherence. Chang et al. (2024) is most similar to our work, but they focus on a GPT prompting strategy for evaluation, evaluate on recently published books, and only evaluate summary coherence. Several studies have benchmarked LLMs on summarization tasks Tang et al. (2024b) ; Zhang et al. (2023) ; Tang et al. (2023) ; Jahan et al. (2024) ; Liu et al. (2024) ; Pu et al. (2023) , including ones Zhang et al. (2024) ; Goyal et al. (2022b) that have shown performance is saturated on the commonly used CNN/DM news summarization dataset Hermann et al. (2015) . 
+ Studies with Writers. There have been some studies that collaborate with writers to address the evaluation problem. However, these all focus on narrative generation or collaborative writing and most use amateur writers or crowdworkers rather than skilled professionals Zhong et al. (2023) ; Yuan et al. (2022) ; Begus (2023) ; Chakrabarty et al. (2022) ; Padmakumar and He (2024) ; Yeh et al. (2024) . Most relevant to our work are these studies that also use professional writers but focus on narrative generation instead of summarization:
+ Chakrabarty et al. (2024) – 10 writers, 12 stories
+ Chakrabarty et al. (2023) – 17 writers, 30 stories
+ Ippolito et al. (2022) – 13 writers, 13 stories
+ Huang et al. (2023) – 8 writers, 8 stories
+ These studies use similar numbers of writers and stories as us given the challenges/cost involved. 
+ 3 Writers and Data 
+ To avoid using stories that may have contents or analysis available online, we find skilled writers with unpublished stories they are willing to share. We recruit writers through MFA listservs, posts on X, and direct emails. Once writers express interest, we screen for skill by writer education level and/or portfolio. Finally, we obtain their informed consent by sharing an infosheet on the study, which explains the task of sharing their stories and evaluating summaries, and includes how their work will be used as outlined in IRB protocol AAAU8875 (see full infosheet in Appendix A ). We ask two questions to determine the background of the writers: 1) Do you have an undergraduate or MFA writing degree?, and 2) Have you previously published any of your writing? To protect writers’ anonymity, we use anonymous IDs to collect and store all the data. In line with Chakrabarty et al. (2024) and Ippolito et al. (2022) , who use 8 and 13 writers respectively, our recruited group consists of 9 skilled writers – 8/9 possess a writing degree, and 7/9 have previously published writing. 
+ Each writer is given the opportunity to submit short stories that they have written and not published anywhere online (see interface in Appendix C ). We limit the writers to five stories at most, so one writer does not dominate the data. Four writers choose to submit five stories, and five submit one story, resulting in a dataset of 25 stories. We compensate the writers for their submitted stories and evaluations. Table 1 shows some summary statistics for this data. None of the stories exceed 9900 tokens in length, and we show statistics by different story length buckets: short (<3300 tokens), medium (3300-6600 tokens), and long (6600-9900 tokens). Token count is computed for each story as an average of the GPT-4 tokenizer 2 2 
+ 2 
+ https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken count and the Llama2 tokenizer 3 3 
+ 3 
+ https://huggingface.co/docs/transformers/model_doc/llama2#transformers.LlamaTokenizer count. Claude does not have a publicly available tokenizer, so we cannot include its token count in this average. 
+ We also explore how similar the stories may be to the LLM training data by measuring their perrplexity. We cannot compute perplexity using the GPT-4 and Claude APIs, so we get an approximate number by using Llama-2-7B (Float16), which we can run on our own compute. This model assigns perplexity scores between 9.2 and 21.6 to the stories. For reference, the first chapter of Pride and Prejudice (a story in Llama-2’s training data) has a perplexity score of 1.3, which is just under the model’s training loss. These scores therefore validate that the stories are unfamiliar to the models. 
+ 4 Summary Generation 
+ Length 
+ Stories 
+ Summary Avg. Len. 
+ Bucket 
+ # 
+ Avg. Len. 
+ GPT4 
+ Claude 
+ Llama 
+ Short 
+ 10 
+ 1854 
+ 487 
+ 397 
+ 458 
+ Medium 
+ 9 
+ 4543 
+ 500 
+ 339 
+ 482 
+ Long 
+ 6 
+ 8126 
+ 531 
+ 382 
+ 592 
+ Total 
+ 25 
+ 4327 
+ 502 
+ 373 
+ 499 
+ Table 1: For each story length bucket, we show the count (number of stories) and average length (token count) of the stories, and the average length (word count) of the summaries generated by each model for those stories. 
+ Figure 1: The two different methods we use for summarization and the associated prompts for the models. GPT-4 and Claude have sufficient input context to summarize a whole story, whereas Llama has to use a chunk-then-summarize approach for longer stories. 
+ Model 
+ Coverage 
+ Density 
+ Compression 
+ 2-grams 
+ 3-grams 
+ 4-grams 
+ 5-grams 
+ LCS 
+ GPT-4 
+ 72.52% 
+ 1.33 
+ 7.45 
+ 22.53% 
+ 5.18% 
+ 1.76% 
+ 0.71% 
+ 5.72 
+ Claude 
+ 73.65% 
+ 1.26 
+ 10.86 
+ 19.80% 
+ 3.96% 
+ 1.25% 
+ 0.50% 
+ 4.16 
+ Llama 
+ 66.09% 
+ 1.08 
+ 7.66 
+ 16.33% 
+ 3.04% 
+ 0.96% 
+ 0.32% 
+ 4.40 
+ Table 2: We report a variety of metrics for the summaries in relation to the stories: coverage, density, compression, percent of n-gram overlap, and word count of the longest common substring. Each metric is averaged across the summaries generated by each model. 
+ We evaluate automatic summarization using three recent LLMs: GPT-4 (November 2023 update), Claude-2.1 , and Llama-2-70B-chat (instruction-tuned for chat). GPT-4 OpenAI (2023) and Claude-2.1 4 4 
+ 4 
+ https://www.anthropic.com/news/claude-2-1 have very long input contexts and can ingest an entire short story. Llama-2 Touvron et al. (2023) serves as a comparison point for smaller open-source models. Chang et al. (2024) also used these three LLMs in their work on automatic coherence evaluation in long narrative summarization. 
+ Protecting the writers’ unpublished work is paramount when using each of these three models. We do not want their stories to be saved or trained on by OpenAI, Anthropic, or HuggingFace. We inform the writers of this risk in the consent form (see Appendix A ) and complete the available forms/settings with each of these companies to request our data not be stored for long periods or used for training. 
+ For each story, we then generate three summaries – one from each of the three models. For GPT-4 and Claude, we use one prompt (see Figure 1 ) as they both have a context length long enough to process a whole short story. Claude refuses to summarize two of the stories which do not meet its content restrictions 5 5 
+ 5 
+ For all of the Claude results, we remove the values for these two summaries to show representative numbers for the summaries it did produce. We also remove one coherence score which was inaccurate due to a bug in the interface. . One of these stories is about a shooting and the other involves sex and robbery. 
+ Given Llama’s short context window, we use hierarchical merging of chunk-level summaries Chang et al. (2024) for stories in the medium and long length buckets. Depending on length, we chunk each story into 1-4 chunks using section or paragraph breaks. Llama summarizes each of these chunks separately and then summarizes the concatenation of these summaries (see Figure 1 ). 
+ For all three models, we access them from December 2023 through January 2024, and we use simplified versions of Chang et al. (2024) ’s prompts (see Figure 1 ). For GPT-4 6 6 
+ 6 
+ gpt-4-1106-preview on https://platform.openai.com/ and Claude 7 7 
+ 7 
+ claude-2.1 on https://console.anthropic.com , we use max_tokens =1000 and temperature =0.3. For Llama 8 8 
+ 8 
+ meta-llama/Llama-2-70b-chat-hf on https://huggingface.co/ , we use the default settings in HuggingChat 9 9 
+ 9 
+ https://huggingface.co/chat/ . 
+ Table 1 displays summary statistics for the generated summaries. Notice that our prompt asks models to use about 400 words and Claude undershoots but comes closest to this target while GPT-4 and Llama are 100 words over on average. See Appendix B for full prompting details and costs. 
+ In Table 2 , we report the average coverage, density, and compression metrics for each model’s summaries. Coverage is the percent of words in the summary that come from the story, density is the average length of segments that directly match the story text, and compression is how many times shorter the summary is in relation to the story Fabbri et al. (2021) ; Grusky et al. (2018) . These metrics show that Llama is the least extractive and Claude compresses the information the most. 
+ In addition to these commonly used metrics, we further investigate how much the models copy directly from the stories in Table 2 . We report the average percent of n-grams in the summaries that match n-grams in the stories, and the average word count of the longest substring that exactly matches wording from the story. For the n-gram matching, we remove punctuation and lower-case and stem words. We see that GPT-4 copies a significant amount of wording from the stories. On average, it produces summaries with almost 6-word long exact-match substrings and it has the highest percentages of n-gram overlap. These numbers indicate that models are not copying long quotes, but they are copying a non-trivial amount of unique phrasing. None of the summaries use quotation marks to appropriately attribute copied text. 
+ 5 Evaluation 
+ We compare models using a combination of span-level, summary-level, and story-level evaluation. We assess summary quality in terms of four attributes:
+ Coverage – Does the summary cover the important plot points of the story?
+ Faithfulness – Does the summary misrepresent details from the story or make things up?
+ Coherence – Is the summary coherent, fluent, and readable?
+ Analysis – Does the summary provide any correct analysis of some of the main takeaways or themes from the story? 
+ Coverage , faithfulness , and coherence are commonly evaluated in summarization (e.g., Zhang et al. (2024) ), and we add analysis , which is important for capturing narrative. Each writer is shown the summaries of their own stories to evaluate as they are deeply familiar with the contents and can therefore judge aspects like faithfulness and analysis quickly and accurately. 
+ 5.1 Span-Level Error Categorization 
+ We ask the writers to highlight spans in the summaries they view as errors and categorize them (see Appendix D for interface and cost). We do not make this task mandatory as it requires significantly more time from the writers than the summary-level evaluation discussed next. 7/9 writers choose to participate, which results in 69/75 summaries with span-level annotations. 
+ For faithfulness, we use error categories inspired by elements from narrative theory for evaluating narrative understanding in children Xu et al. (2022) ; Paris and Paris (2003) ; Mandler and Johnson (1977) .
+We determine these categories are well-defined as in prior work by asking three NLP researchers to categorize a sample of 60 faithfulness errors.
+These annotators achieve moderate inter-annotator agreement for the labels (Fleiss-Kappa of .51), indicating the categories are valid. For coherence, we use categories defined and validated by Chang et al. (2024) . For coverage, we cannot highlight spans that should have been included, so we can only focus on things that should not have been included or are non-specific. The full list of error categories are defined as:
+ Coverage 
+ Insignificant - Does not need to be included and makes the summary less readable 
+ Vague - Important but covered in a vague way
+ Faithfulness 
+ Feeling - Inaccurate about a character’s emotions/reaction/internal state, incorrectly answers a question like "How did X react" or "What was X thinking?" 
+ Character - Inaccurate about the identity or nature of a character, incorrectly answers a question like "How would you describe X?" or "Who is X?" 
+ Causation - Inaccurate about the causal relationship of events, incorrectly answers a question like "Why did Y happen?" or "What was the result of Y?" 
+ Action - Inaccurate about the behavior of a character, incorrectly answers a question like "What did X do?" 
+ Setting - Inaccurate about the details of the story world and the time/place of events, incorrectly answers a question like "Where/when did X happen?" or "What is the setting of the story?"
+ Coherence 
+ Inconsistent - Inconsistent with other details in the summary 
+ Abrupt Transition - Transitions suddenly to a new scene without a relevant connection 
+ Missing Context - Introduces a new character, event, or object without enough context/detail to understand it 
+ Repetition - Unnecessary repetition of detail
+ Analysis 
+ Unsupported - Interprets the story but the conclusions do not make sense with or are unsupported by the story 
+ 5.2 Summary-Level Ratings 
+ Figure 2: Interface screenshots showing the questions writers are asked to evaluate the summaries of their stories using a 4-point Likert scale. 
+ Rating 
+ Cover. 
+ Faithful. 
+ Coher. 
+ Analys. 
+ 1 
+ 1.00 
+ 3.33 
+ - 
+ 0.00 
+ 2 
+ 1.92 
+ 1.32 
+ 1.00 
+ 2.33 
+ 3 
+ 1.48 
+ 0.87 
+ 1.36 
+ 1.50 
+ 4 
+ 0.50 
+ 0.89 
+ 0.76 
+ 1.22 
+ Table 3: Average number of span-level errors by attribute labeled in summaries given each Likert score rating for that attribute. 
+ We ask the writers to rate each of the four attributes on a Likert scale from 1 to 4 with some guidance on what each score means (see Figure 2 , full interface and cost shown in Appendix C ). This step is completed before the span-level annotation to keep conditions equal between writers who opt in or out of the span-level annotation. 
+ To help interpret the Likert scores, in Table 3 , we present a breakdown of the average number of span-level errors annotated in each attribute when a summary is given a certain Likert score rating for that attribute. We can see that for most attributes, there is an increase in average error count for an attribute as the rating assigned to that attribute decreases. The number of 1-ratings is quite small for many attributes so the relationship between number of errors and rating is noisier for that bucket. Overall, these numbers support our 4-point Likert scale and demonstrate that the summary-level ratings correspond to meaningful differences in the number of errors in a summary. 
+ Once each writer has read and evaluated each summary for a story, we ask them to rank the three summaries from the three different models in order of their preference. In addition to the ratings and ranking, the writers provide open-ended feedback on each summary, which we include quotes from throughout our discussion of the results. 
+ We also explore automatic metrics for rating summaries. We try simple automatic metrics, using ROUGE Lin (2004) and BERTScore Zhang et al. (2020) against the full story as a reference. We try recent attribute-specific metrics designed for faithfulness: AlignScore Zha et al. (2023) , UniEval Zhong et al. (2022) , and MiniCheck Tang et al. (2024a) . Finally, we ask GPT-4 and Claude (Llama’s context window is too short) the four questions shown in Figure 2 with the same wording to see how their answers compare to the opinions of the writers (see Appendix B for prompts). We run BooookScore and FABLES as another comparison point for LLM-based coherence and faithfulness evaluation respectively Chang et al. (2024) ; Kim et al. (2024) . For FABLES, we average the labels for all the claims in a summary to get a score for the whole summary. 
+ 5.3 Story-Level Style Effects 
+ Figure 3: Examples of openings from stories scored at different reading-levels by the Flesch-Kincaid score. 
+ We examine how writing style at the story level affects model summarization to see if certain types of stories are harder for models to summarize well. First, we use Genette’s model of narrative elements Piper et al. (2021) ; Genette (1980) :
+ Narrating – Narrator’s influence on style
+ Story – All the events implied by the narrative
+ Discourse – Ordering/inclusion of explicit events 
+ At the narrating level, we compare stories with an unreliable vs. reliable narrator. An unreliable narrator communicates something different from what the reader is meant to perceive Booth (1983) . For example, one narrator states early in the story, " If I were to describe myself, I would say that I am practical. I try to be logical, but that isn’t exactly what I mean. Here’s another way to put it: there are two kinds of people in the world, me and my brother Jack. " The narrator says many things without really saying anything, which gives us a clue that he may not actually be logical and practical. At the story level, we compare stories with a detailed subplot involving niche knowledge against those which focus on commonplace settings. For example, one detailed story centers on the main character sleeping with her sister’s boyfriend, but the subplot to this emotional arc involves a lot of ancient greek history. At the discourse level, we compare stories with flashbacks against those with a linear timeline. We hypothesize that reliable narrators, fewer details, and linear plots will be easier to summarize. The writer of each story verifies the labels for the story in these three categories. 
+ Finally, we analyze the complexity of the story wording using the Flesch-Kincaid readability test Kincaid et al. (1975) . This score estimates the number of years of formal education (grades 1 through 12) one might need to understand the writing easily. It is based on average word and sentence length, so while it captures something about the complexity of the wording, it is in no way a measure of the overall quality of the writing. We explore whether the reading-level of the writing affects the summary quality (see examples of writing with assigned grade levels in Figure 3 ). 
+ 6 Results 
+ 6.1 How good are the summaries? 
+ Model 
+ Cover. 
+ Faithful. 
+ Coheren. 
+ Analys. 
+ Avg. 
+ GPT-4 
+ 3.48 
+ 3.12 
+ 3.52 
+ 3.40 
+ 3.38 
+ Claude 
+ 3.17 
+ 2.65 
+ 3.41 
+ 3.26 
+ 3.12 
+ Llama 
+ 2.40 
+ 1.92 
+ 3.08 
+ 2.76 
+ 2.54 
+ GPT-4 
+ 56% 
+ 44% 
+ 60% 
+ 56% 
+ 54% 
+ Claude 
+ 39% 
+ 30% 
+ 59% 
+ 43% 
+ 43% 
+ Llama 
+ 12% 
+ 8% 
+ 32% 
+ 20% 
+ 18% 
+ Table 4: Average scores assigned to each attribute of a summary by the writers. The first set of rows are the averaged raw scores out of 4, and the second set of rows are the percent of summaries given a perfect score of 4. 
+ Figure 4: Distribution of Likert score ratings for each model’s summaries by attribute. 
+ Figure 5: Examples of some of the best analysis-focused sentences from GPT-4 and Claude summaries. 
+ Figure 6: Percent of each model’s summaries that are ranked higher than another’s in the 3-way ranking the writers are asked to do. Yellow indicates GPT-4, orange is Claude, and blue is Llama. 
+ In Table 4 , we can see that the models are capable of producing good summaries. Many of the average scores are >3, and there is a percentage of summaries in each attribute (coverage, faithfulness, coherence, and analysis) that receive a perfect rating of 4. GPT-4 summaries have the highest scores across all four attributes. However, by percentage of perfect scores, GPT-4 still makes mistakes on 46% of the summaries on average across attributes. Faithfulness is the lowest score for all three models, with only 8% rated fully correct for Llama, 30% for Claude, and 44% for GPT-4. Llama performs significantly worse than the other two models on all attributes (Wilcoxon signed-rank test, p < .05 p<.05 ). A further breakdown of rating distribution is shown in Figure 4 . 
+ Interestingly, we find that while models have the appearance of fluency, they are given a less than perfect score for coherence 40% or more of the time as there is more to a coherent narrative summary than just fluency. For analysis, writers felt that 56% of the GPT-4 summaries summarized some of the themes and interpretation they had hoped to communicate as a writer, which is a challenging task even for humans (see examples of the best analysis in Figure 5 ). However, in Table 3 , we see that summaries rated 4 for analysis actually contain at least one error in analysis on average. Furthermore, by breakdown of span-level error counts in Table 5 , we see that writers find as many errors in analysis as in faithfulness. These numbers suggest that while writers may have been impressed by the models’ ability to do any analysis in their ratings, analysis remains a challenge. 
+ In Figure 6 , we present a pairwise comparison of what percentage of the time one model outranked another when the writers ranked the summaries as first, second, and third. Claude and GPT-4 are preferred over each other equally. Claude is almost always preferred over Llama, and Llama is rarely ranked higher than the other two models. This suggests the writers evaluate both GPT-4 and Claude relatively equally (GPT-4 has higher scores, but Claude is ranked higher on average), which is also supported by GPT-4’s scores not being significantly better than Claude’s (Wilcoxon signed-rank test, p > .05 p>.05 ). It is also important to remember though that Claude refused to summarize two of the stories. 
+ Overall, GPT-4 and Claude can produce excellent summaries but only about half the time . On the best summaries, the writers commented things like: " it did analysis that even I — the writer — hadn’t done! Very clever. ", " I’m stunned at the thoughtfulness and thoroughness ", and " something that I would find on a Sparknotes website ". 
+ On the worst summaries, they commented things like: " completely misses the fundamental thread ", " tries to make too many analyses like a high school english class while missing the overall bigger feelings ", and " makes use of…stock phrases or stand-ins rather than accurate, specific summary ". Also, for one of the stories Claude refused to summarize, the writer commented, " Art is such an important tool for processing. I don’t like that the summary wasn’t able to process a recurring vague nightmare. " 
+ 6.2 What mistakes do the models make? 
+ Error Type 
+ GPT4 
+ Claude 
+ Llama 
+ Tot. 
+ Coverage: 
+ insignificant 
+ 4 
+ 2 
+ 8 
+ 14 
+ vague 
+ 15 
+ 19 
+ 30 
+ 64 
+ Sub-Total 
+ 19 
+ 21 
+ 38 
+ 78 
+ Analysis: 
+ unsupported 
+ 18 
+ 16 
+ 70 
+ 104 
+ Coherence: 
+ repetition 
+ 3 
+ 4 
+ 0 
+ 7 
+ missing context 
+ 11 
+ 11 
+ 15 
+ 37 
+ inconsistent 
+ 1 
+ 3 
+ 1 
+ 5 
+ abrupt transition 
+ 3 
+ 6 
+ 8 
+ 17 
+ Sub-Total 
+ 18 
+ 24 
+ 24 
+ 66 
+ Faithfulness: 
+ feeling 
+ 5 
+ 8 
+ 10 
+ 23 
+ Causation 
+ 2 
+ 9 
+ 4 
+ 15 
+ Action 
+ 5 
+ 6 
+ 28 
+ 39 
+ Character 
+ 2 
+ 1 
+ 15 
+ 18 
+ Setting 
+ 2 
+ 2 
+ 5 
+ 9 
+ Sub-Total 
+ 16 
+ 26 
+ 62 
+ 104 
+ Total 
+ 71 
+ 87 
+ 194 
+ Table 5: Number of errors categorized under each narrative element by the writers for each model. 
+ Figure 7: Examples of span-level errors assigned by the writers in each of the categories. 
+ In Figure 7 , we show examples of issues models have in each attribute. In general, we find that while writers rank GPT-4 and Claude summaries somewhat equally, Claude summaries often leave out important details that lower their coverage score and create issues with faithfulness as identified by the numerical scores. For example, while the GPT-4 coverage error in Figure 7 includes too many details, for one story, Claude leaves out an entire thematically important subplot. The narrator desperately needs money, and Claude fails to mention she is in debt due to a medical crisis. 
+ Looking at the categorization of errors in Table 5 , we find that vagueness is a significant issue across all three models. We see there is a large amount of unsupported analysis for all three models, and this is one of the biggest error categories overall. In coherence, the biggest error category is missing context . This overlaps with coverage and lets us know that significant details are left out or too vague to fully understand. Lastly, we find that most faithfulness errors across the models are in Action and Feeling . These errors require interpretation of what characters did and how they reacted or felt. 
+ For example, in Figure 7 , the Feeling error is a misinterpretation of who the narrator is attracted to. Claude fails to interpret phrases like " He looked nice ", and " I felt warm in the cheeks ", as signs of attraction to Arkady. Another feeling error describes a character as having a difficult relationship with their mother, when actually they are quite close, but the circumstances around their relationship have been difficult because the mother almost died from cancer. One writer comments on another summary, " The ending of contentment is supposed to be contemplation. [The summary] leaves out any feeling of hesitancy or reflection ". The action error example in Figure 7 mistakenly states that the narrator decided to stay at the summit. However, " The cold settled into me ", is meant to imply that the narrator died at the summit, which was not an action or choice. 
+ Taken in conjuction, all of these results show that models struggle with identifying the right level of specificity and with interpreting subtext . Three writers commented on subtext specifically, saying, " Subtext is missing entirely " on a Llama summary, " Everything that’s ‘text’ is accurately represented and well summarized, but the ‘subtext’ is either incorrectly interpreted or missing " on a Claude summary, and " The summary struggles with subtext " on a GPT-4 summary. 
+ However, the error distribution for each model varies. For example, Llama has a high percentage of Character errors. This is likely an artifact of the chunk-then-summarize strategy as sometimes characters are conflated or split in two as the model fails to track their details across different chunk summaries (see Character example in Figure 7 ). Chang et al. (2024) also found a similar type of error ( entity omission ) to be most common with chunk-then-summarize approaches. 
+ It is interesting to note that some faithfulness errors come from the models being overly normative as evidenced by the Claude Feeling error in Figure 7 . In this case, Claude assumes a heteronormative monogamous interpretation of the interaction instead of what is written. One writer observed this phenomenon in another summary, commenting that the summary had " a few extrapolations… which presume things about the narrative based on a hypernormative interpretive framework ". 
+ Lastly, some of the writers commented that the models would copy
+unique wording from the stories without placing it in quotations, which bordered on plagiarism. We flag this for future work and include statistics on it in Table 2 . 
+ 6.3 Do some aspects of writing style affect summary quality? 
+ 6.3.1 Length 
+ Figure 8: We plot story length (in tokens) and summary length (in word count) against writer summary ratings averaged across the four attributes. In the left plot, we show the line of best fit and Pearson’s r r with p p -value for each model individually. In the right plot, we show the correlation across the full set of summaries. 
+ In Figure 8 , we look at the correlation between story length and summary rating (left plot). We do see a downward trend for Llama. Llama’s summaries get worse as stories get longer, which is expected given the chunk-then-summarize method it employs for longer stories. However, the correlation is not quite statistically significant. For Claude and GPT-4, it seems the long-context models can summarize short and long stories equally well (up to 10,000 tokens). 
+ In Figure 8 , we also compare the average scores across different summary lengths (right plot), to check if there is a bias in ratings to shorter or longer summaries. We do not find any correlation between summary length and quality. 
+ 6.3.2 Reading-Level 
+ We plot the reading-level (estimated years of education needed to understand the wording easily) against the writer-assigned scores averaged across the four attributes for each summary. We find no significant correlation between story reading-level and writer-assigned summary scores for any of the models (GPT-4: r r .11, p p .61; Claude: r r .33, p p .12, Llama: r r .23, p p .27). The average Flesch-Kincaid grade-level for the group of stories is 6th grade. As can be seen in the 2nd grade example in Figure 3 though, which features someone being shot, this score captures an aspect of the wording but does not consider age-appropriate content or conceptual complexity. 
+ 6.3.3 Narrating, Story, and Discourse 
+ Style Element 
+ # 
+ GPT4 
+ Claude 
+ Llama 
+ Narrating : reliable 
+ 15 
+ 3.45 
+ 3.29 
+ 2.60 
+ unreliable 
+ 10 
+ 3.28 
+ 2.89 
+ 2.45 
+ Story : detail − - 
+ 16 
+ 3.42 
+ 2.98 
+ 2.59 
+ detail + + 
+ 9 
+ 3.31 
+ 3.36 
+ 2.44 
+ Discourse : linear 
+ 18 
+ 3.29 
+ 3.05 
+ 2.56 
+ nonlinear 
+ 7 
+ 3.61 
+ 3.32 
+ 2.50 
+ Table 6: Average scores for summaries of stories with different style elements. Each score is averaged across the four attributes for a summary. 
+ In Table 6 , we see that stories with unreliable narrators are harder for all three models to summarize. All three models have lower average scores in this bucket. As an example of an error due to an unreliable narrator, the same unreliable narrator who is quoted in Section 5.3 , further describes himself as wanting a " small, normal life ", and then describes his new love interest: " I met a girl… I think she’s just like me. She loves traveling… It’s pretty cool. " GPT-4 mistakenly characterizes this interaction as: " The protagonist meets [a girl]… with whom he shares… a desire for a simple life. " even though there is no evidence she likes a simple life (or even that we should believe the narrator that he does), other than that the protagonist has described her as " like [him] ". 
+ For story and discourse, the models have mixed performance across the different buckets. Llama does have lower scores in the buckets we hypothesized might be more challenging. Overall, it seems that unreliable narrators are a challenge for LLMs , whereas level of detail and flashbacks depend on the model. One writer commented directly on the issue of an unreliable narrator by observing, " there’s a second layer here that the summary misses somewhat—the narrator is not really to be trusted ". 
+ 6.4 Can an LLM replace the writers in evaluating the summaries? 
+ Figure 9: Confusion between model-assigned scores and human-assigned scores for GPT-4 and Claude. 
+ LLM 
+ ROUGE 
+ BERTScore 
+ Lla.2 
+ Faith. Metrics 
+ GPT4 
+ Clau. 
+ BkS 
+ Fab. 
+ R1 
+ R2 
+ RL 
+ RLS 
+ Prec. 
+ Rec. 
+ F1 
+ PPL 
+ AlS 
+ UnE 
+ MiC 
+ Cov. 
+ .46 ∗ .46^{*} 
+ .18 
+ - 
+ - 
+ .33 ∗ .33^{*} 
+ .36 ∗ .36^{*} 
+ .32 ∗ .32^{*} 
+ .30 ∗ .30^{*} 
+ .29 ∗ .29^{*} 
+ .21 .21 
+ .25 ∗ .25^{*} 
+ .15 
+ - 
+ - 
+ - 
+ Fai. 
+ .37 ∗ .37^{*} 
+ .05 
+ - 
+ .29 ∗ .29^{*} 
+ .18 .18 
+ .28 ∗ .28^{*} 
+ .18 .18 
+ .17 .17 
+ .27 ∗ .27^{*} 
+ .25 ∗ .25^{*} 
+ .27 ∗ .27^{*} 
+ .00 
+ -.04 
+ .32 ∗ .32^{*} 
+ .20 ∗ .20^{*} 
+ Coh. 
+ .18 
+ .02 
+ .11 
+ - 
+ .18 .18 
+ .21 .21 
+ .16 .16 
+ .16 .16 
+ .29 ∗ .29^{*} 
+ - .01 .01 
+ .09 .09 
+ -.09 
+ - 
+ - 
+ - 
+ Ana. 
+ .21 ∗ .21^{*} 
+ .02 
+ - 
+ - 
+ - .05 .05 
+ - .01 .01 
+ - .06 .06 
+ - .08 .08 
+ .15 .15 
+ .14 .14 
+ .16 .16 
+ .12 
+ - 
+ - 
+ - 
+ Avg. 
+ - 
+ - 
+ - 
+ - 
+ .21 .21 
+ .28 ∗ .28^{*} 
+ .20 .20 
+ .18 .18 
+ .32 ∗ .32^{*} 
+ .20 .20 
+ .26 ∗ .26^{*} 
+ .14 
+ - 
+ - 
+ - 
+ Table 7: Correlation between automatic metrics and writer-assigned scores. We report Pearson’s r r (* indicates p-value <.05). The ‘Avg.’ row takes the average score across the four attributes as the writer score. We do not report correlation for attributes the metrics are not designed for. Metric Key for uncommon abbreviations: BkS - BooookScore, Fab. - FABLES, RLS - ROUGE-LSum, AlS - AlignScore, UnE - UniEval, MiC - MiniCheck. 
+ In Figure 9 , we compare the GPT-4 and Claude scores to the writer scores from Table 4 , and we see considerable confusion across the ratings. Claude mostly only rates summaries as 3 or 4, causing overestimation of ratings (3.67 average score vs. 3.01 from the writers). 
+ In terms of attributes, both models rate the coherence of the summaries much higher than the writers do (average scores: GPT-4 - 3.84, Claude - 3.82, Writers - 3.33). GPT-4 largely underestimates the coverage score for all three models (average score 2.68 vs. 3.01 from the writers). Many of the writers commented that the GPT-4 summaries were too detailed, so the model may struggle with identifying what is most important to cover. Claude overestimates performance on faithfulness and analysis. It gives 85% of summaries a 4 on faithfulness on average and 85% on analysis, relative to averages of 27% and 39% respectively from the writers. GPT-4 also overestimates faithfulness performance just for itself (64% scores of 4 vs. 44% from the writers). 
+ We show the Pearson’s r r correlation between the model scores and the writers’ scores in Table 7 across attributes. We see no correlation for Claude scores and some statistically significant but weak correlation for GPT-4 scores (indicating there may be a relationship but the scores are not well calibrated). Coverage is the one attribute with moderate positive correlation. We find no significant correlation between BooookScore coherence scores and the writer coherence scores ( r r :.11, p p :.18). The average BooookScore scores are almost the same across all three models (GPT-4: .95, Claude: .93, Llama: .93), which does not capture the significant difference in coherence that the writers judged in Llama in particular. We find significant correlation between FABLES and the writer faithfulness scores but the correlation is weak and less than just using GPT-4 ( r r : .29, p p : .01). The average FABLES scores are also approximately the same across the three models (GPT-4: .99, Claude: .99, Llama: .99). Overall, these results support prior work Chakrabarty et al. (2024) , which shows that LLMs are not yet reliable evaluators for skilled writing tasks . 
+ For context, we also include simple automatic metrics and recent Faithfulness-specific finetuned models. The only metric which performs better than GPT-4 is BERTScore for coherence using the story as a reference. However, the correlation is weak, and Goyal et al. (2022c) has already shown that BERTScore does not penalize many coherence errors. We additionally include the Llama-2-7B computed perplexity scores in this correlation table to check if there is any relationship between the similarity of stories to LLM training data and attribute ratings, and we find none. 
+ 7 Discussion 
+ Our results show that, in the best summaries, models are capable of some interesting analysis of the themes present in unseen stories. When models are asked to summarize stories that may have analysis available online, it is not clear if the models are simply regurgitating analysis from the training data. Therefore, it is important to examine their capabilities on original and challenging content. Additionally, while we expected it might be challenging for LLMs to identify salient information within long stories, we find that long-context models demonstrate as good understanding of longer stories as shorter ones. 
+ The models also have notable weaknesses. We demonstrate that even the best models are making significant errors across all summary attributes on about half of summaries. They are often too vague or missing important context, and they struggle with challenging subtext, providing unsupported analysis and misinterpreting character feelings/reactions and actions. This will be an important area for future study as it demonstrates language models still struggle with aspects of theory of mind 10 10 
+ 10 
+ Theory of mind is the ”ability to understand and keep track of the mental states of others” Xu et al. (2024) . , one of the most challenging being understanding an unreliable narrator. Additionally, our analysis of LLM-based evaluation shows that they should not replace the expert human judgments. 
+ Working with writers was an efficient and mutually enjoyable method of ensuring we were not evaluating on any training data, and we were getting an informed evaluation of characteristics like faithfulness and analysis. Writers were able to complete summary ratings in a matter of minutes, whereas someone unfamiliar with the story would have taken much longer. For example, it took us, the paper authors, about 60-90 minutes to read and review the summaries for just one story, whereas it took the writers abot 5-10 minutes to do the same. Writers also left positive feedback like, " I’m glad to have read this [summary]… It shows some [weaknesses] of my story… some minor characters are more flat than I want. "
+ Limitations. We provide a first look at how LLMs summarize unseen short stories within a reasonable cost and timeframe, but the work is limited in its number of stories, ratings, and prompting techniques. A follow-up study could expand these areas, but it is challenging given that an individual author has a limited number of high-quality stories that are complete but unpublished, there are a limited number of writers willing to participate in a study involving LLMs and corporate APIs, and compensation is expensive. As a result of these challenges, our numbers of stories and writers are similar to other studies which have used experienced creative writers as shown in Section 2 .
+ Ethics. 
+We follow protocol approved by our IRB for this study. In line with the TACL code of ethics, we protect writers’ work and identities by saving data on secure servers attached only to anonymous IDs, approving any published excerpts from their work with them, and requesting our prompting data not be used for future model training. We also support the code of ethics by involving practitioners from the field influenced by our study in our work. One of the authors, Melanie Subbiah, has an equity interest in OpenAI. 
+ 8 Conclusion 
+ We work with writers to provide unpublished short stories and evaluate the quality of LLM-generated summaries of these stories. We present a holistic evaluation at the span, summary, and story level of summary quality grounded in narrative theory that is based on data LLMs did not train on. We identify that LLMs can demonstrate understanding of long narrative and thematic analysis, but they struggle with specificity and reliable interpretation of subtext and narrative voice. Our methodology sets an important example of how we can collaborate with domain experts to reach beyond the paradigm of evaluating LLMs with LLMs on data they may have been trained on. 
+ Acknowledgments 
+ We would like to express our gratitude to the short story writers for sharing their work and contributing annotations. Additionally, we would like to thank our reviewers and Action Editor for their thoughtful feedback. 
+ References 
+ Begus (2023) 
+Nina Begus. 2023.
+ Experimental Narratives: A Comparison of Human Crowdsourced
+Storytelling and AI Storytelling.
+ arXiv preprint arXiv:2310.12902 .
+ Booth (1983) 
+Wayne C. Booth. 1983.
+ The rhetoric of fiction .
+ University of Chicago Press.
+ Chakrabarty et al. (2024) 
+Tuhin Chakrabarty, Philippe Laban, Divyansh Agarwal, Smaranda Muresan, and
+Chien-Sheng Wu. 2024.
+ Art or artifice? Large language models and the false promise of
+creativity.
+ In Proceedings of the CHI Conference on Human Factors in
+Computing Systems , pages 1–34.
+ Chakrabarty et al. (2023) 
+Tuhin Chakrabarty, Vishakh Padmakumar, Faeze Brahman, and Smaranda Muresan.
+2023.
+ Creativity support in the age of large language models: An empirical
+study involving emerging writers.
+ arXiv preprint arXiv:2309.12570 .
+ Chakrabarty et al. (2022) 
+Tuhin Chakrabarty, Vishakh Padmakumar, and He He. 2022.
+ Help me
+write a Poem - Instruction Tuning as a Vehicle for Collaborative Poetry
+Writing" .
+ In Proceedings of the 2022 Conference on Empirical Methods in
+Natural Language Processing , pages 6848–6863, Abu Dhabi, United Arab
+Emirates. Association for Computational Linguistics.
+ Chang et al. (2024) 
+Yapei Chang, Kyle Lo, Tanya Goyal, and Mohit Iyyer. 2024.
+ Booookscore: A
+systematic exploration of book-length summarization in the era of LLMs .
+ In The Twelfth International Conference on Learning
+Representations .
+ Chen et al. (2022) 
+Mingda Chen, Zewei Chu, Sam Wiseman, and Kevin Gimpel. 2022.
+ SummScreen: A dataset for abstractive screenplay summarization.
+ In Proceedings of the 60th Annual Meeting of the Association
+for Computational Linguistics , pages 8602 – 8615.
+ Daudert (2020) 
+Tobias Daudert. 2020.
+ A web-based collaborative annotation and consolidation tool.
+ In Proceedings of the Twelfth Language Resources and Evaluation
+Conference , pages 7053–7059.
+ Deas et al. (2023) 
+Nicholas Deas, Jessica Grieser, Shana Kleiner, Desmond Patton, Elsbeth Turcan,
+and Kathleen McKeown. 2023.
+ Evaluation
+of African American language bias in natural language generation .
+ In Proceedings of the 2023 Conference on Empirical Methods in
+Natural Language Processing , pages 6805–6824, Singapore. Association for
+Computational Linguistics.
+ Fabbri et al. (2022) 
+Alexander Fabbri, Chien-Sheng Wu, Wenhao Liu, and Caiming Xiong. 2022.
+ QAFactEval: Improved QA-based factual consistency evaluation for
+summarization .
+ In Proceedings of the 2022 Conference of the North American
+Chapter of the Association for Computational Linguistics: Human Language
+Technologies , pages 2587–2601, Seattle, United States. Association for
+Computational Linguistics.
+ Fabbri et al. (2021) 
+Alexander R. Fabbri, Wojciech Kryściński, Bryan McCann, Caiming Xiong,
+Richard Socher, and Dragomir Radev. 2021.
+ SummEval: Re-evaluating summarization evaluation.
+ Transactions of the Association for Computational Linguistics ,
+9:391–409.
+ Genette (1980) 
+Gérard Genette. 1980.
+ Narrative discourse: An essay in method , volume 3.
+ Cornell University Press.
+ Goyal et al. (2022a) 
+Tanya Goyal, Junyi Jessy Li, and Greg Durrett. 2022a.
+ FALTE: A
+toolkit for fine-grained annotation for long text evaluation .
+ In Proceedings of the 2022 Conference on Empirical Methods in
+Natural Language Processing: System Demonstrations , pages 351–358, Abu
+Dhabi, UAE. Association for Computational Linguistics.
+ Goyal et al. (2022b) 
+Tanya Goyal, Junyi Jessy Li, and Greg Durrett. 2022b.
+ News summarization and evaluation in the era of GPT-3.
+ arXiv preprint arXiv:2209.12356 .
+ Goyal et al. (2022c) 
+Tanya Goyal, Junyi Jessy Li, and Greg Durrett. 2022c.
+ SNaC:
+Coherence error detection for narrative summarization .
+ In Proceedings of the 2022 Conference on Empirical Methods in
+Natural Language Processing , pages 444–463, Abu Dhabi, United Arab
+Emirates. Association for Computational Linguistics.
+ Grieser (2022) 
+Jessica A. Grieser. 2022.
+ The Black side of the river: Race, language, and belonging in
+Washington, DC .
+ Georgetown University Press.
+ Grusky et al. (2018) 
+Max Grusky, Mor Naaman, and Yoav Artzi. 2018.
+ Newsroom: A dataset
+of 1.3 million summaries with diverse extractive strategies .
+ In Proceedings of the 2018 Conference of the North American
+Chapter of the Association for Computational Linguistics: Human Language
+Technologies, Volume 1 (Long Papers) , pages 708–719, New Orleans,
+Louisiana. Association for Computational Linguistics.
+ Herman (2009) 
+David Herman. 2009.
+ Basic elements of narrative .
+ John Wiley & Sons.
+ Hermann et al. (2015) 
+Karl Moritz Hermann, Tomas Kocisky, Edward Grefenstette, Lasse Espeholt, Will
+Kay, Mustafa Suleyman, and Phil Blunsom. 2015.
+ Teaching machines to read and comprehend.
+ Advances in neural information processing systems , 28.
+ Huang et al. (2023) 
+Chieh-Yang Huang, Sanjana Gautam, Shannon McClellan Brooks, Ya-Fang Lin, and
+Ting-Hao ‘Kenneth’ Huang. 2023.
+ Inspo: Writing Stories with a Flock of AIs and Humans.
+ arXiv preprint arXiv:2311.16521 .
+ Ippolito et al. (2022) 
+Daphne Ippolito, Ann Yuan, Andy Coenen, and Sehmon Burnam. 2022.
+ Creative writing with an AI-powered writing assistant: Perspectives
+from professional writers.
+ arXiv preprint arXiv:2211.05030 .
+ Jahan et al. (2024) 
+Israt Jahan, Md Tahmid Rahman Laskar, Chun Peng, and Jimmy Xiangji Huang. 2024.
+ A
+comprehensive evaluation of large language models on benchmark biomedical
+text processing tasks .
+ Computers in Biology and Medicine , page 108189.
+ Kim et al. (2024) 
+Yekyung Kim, Yapei Chang, Marzena Karpinska, Aparna Garimella, Varun
+Manjunatha, Kyle Lo, Tanya Goyal, and Mohit Iyyer. 2024.
+ Fables: Evaluating faithfulness and content selection in book-length
+summarization.
+ arXiv preprint arXiv:2404.01261 .
+ Kincaid et al. (1975) 
+Peter Kincaid, Robert P. Fishburne, Richard L. Rogers, and Brad S. Chissom.
+1975.
+ Derivation
+of new readability formulas (automated readability index, fog count and
+flesch reading ease formula) for navy enlisted personnel .
+ Krishna et al. (2023) 
+Kalpesh Krishna, Erin Bransom, Bailey Kuehl, Mohit Iyyer, Pradeep Dasigi, Arman
+Cohan, and Kyle Lo. 2023.
+ LongEval:
+Guidelines for human evaluation of faithfulness in long-form summarization .
+ In Proceedings of the 17th Conference of the European Chapter
+of the Association for Computational Linguistics , pages 1650–1669,
+Dubrovnik, Croatia. Association for Computational Linguistics.
+ Kryscinski et al. (2022) 
+Wojciech Kryscinski, Nazneen Rajani, Divyansh Agarwal, Caiming Xiong, and
+Dragomir Radev. 2022.
+ BOOKSUM: A collection of datasets for long-form narrative summarization .
+ In Findings of the Association for Computational Linguistics:
+EMNLP 2022 , pages 6536–6558, Abu Dhabi, United Arab Emirates. Association
+for Computational Linguistics.
+ Ladhak et al. (2020) 
+Faisal Ladhak, Bryan Li, Yaser Al-Onaizan, and Kathleen McKeown. 2020.
+ Exploring
+content selection in summarization of novel chapters .
+ In Proceedings of the 58th Annual Meeting of the Association
+for Computational Linguistics , pages 5043–5054, Online. Association for
+Computational Linguistics.
+ Lin (2004) 
+Chin-Yew Lin. 2004.
+ Rouge: A package for automatic evaluation of summaries.
+ In Text summarization branches out , pages 74–81.
+ Liu et al. (2024) 
+Yixin Liu, Alexander Fabbri, Jiawen Chen, Yilun Zhao, Simeng Han, Shafiq Joty,
+Pengfei Liu, Dragomir Radev, Chien-Sheng Wu, and Arman Cohan. 2024.
+ Benchmarking generation and evaluation capabilities of large language models
+for instruction controllable summarization .
+ In Findings of the Association for Computational Linguistics:
+NAACL 2024 , pages 4481–4501, Mexico City, Mexico. Association for
+Computational Linguistics.
+ Mahbub et al. (2023) 
+Ridwan Mahbub, Ifrad Towhid Khan, Samiha Shafiq Anuva, Md Shihab Shahriar,
+Md Tahmid Rahman Laskar, and Sabbir Ahmed. 2023.
+ Unveiling the essence of poetry: Introducing a comprehensive dataset
+and benchmark for poem summarization.
+ In The 2023 Conference on Empirical Methods in Natural Language
+Processing .
+ Mandler and Johnson (1977) 
+Jean M Mandler and Nancy S Johnson. 1977.
+ Remembrance of things parsed: Story structure and recall.
+ Cognitive psychology , 9(1):111–151.
+ Min et al. (2023) 
+Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike Lewis, Wen-tau Yih, Pang Koh, Mohit
+Iyyer, Luke Zettlemoyer, and Hannaneh Hajishirzi. 2023.
+ FActScore: Fine-grained atomic evaluation of factual precision in long
+form text generation .
+ In Proceedings of the 2023 Conference on Empirical Methods in
+Natural Language Processing , pages 12076–12100, Singapore. Association for
+Computational Linguistics.
+ Morrison (2004) 
+Toni Morrison. 2004.
+ Beloved. 1987.
+ New York: Vintage .
+ OpenAI (2023) 
+OpenAI. 2023.
+ GPT-4 Technical Report .
+ Padmakumar and He (2024) 
+Vishakh Padmakumar and He He. 2024.
+ Does writing with
+language models reduce content diversity? 
+ In The Twelfth International Conference on Learning
+Representations .
+ Paris and Paris (2003) 
+Alison H. Paris and Scott G. Paris. 2003.
+ Assessing narrative comprehension in young children.
+ Reading Research Quarterly , 38(1):36–76.
+ Piper et al. (2021) 
+Andrew Piper, Richard Jean So, and David Bamman. 2021.
+ Narrative theory for computational narrative understanding.
+ In Proceedings of the 2021 Conference on Empirical Methods in
+Natural Language Processing , pages 298–311.
+ Pu et al. (2023) 
+Xiao Pu, Mingqi Gao, and Xiaojun Wan. 2023.
+ Summarization is (almost) dead.
+ arXiv preprint arXiv:2309.09558 .
+ Tang et al. (2023) 
+Liyan Tang, Tanya Goyal, Alex Fabbri, Philippe Laban, Jiacheng Xu, Semih Yavuz,
+Wojciech Kryscinski, Justin Rousseau, and Greg Durrett. 2023.
+ Understanding
+factual errors in summarization: Errors, summarizers, datasets, error
+detectors .
+ In Proceedings of the 61st Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Papers) , pages 11626–11644,
+Toronto, Canada. Association for Computational Linguistics.
+ Tang et al. (2024a) 
+Liyan Tang, Philippe Laban, and Greg Durrett. 2024a.
+ MiniCheck: Efficient Fact-Checking of LLMs on Grounding Documents.
+ arXiv preprint arXiv:2404.10774 .
+ Tang et al. (2024b) 
+Liyan Tang, Igor Shalyminov, Amy Wing mei Wong, Jon Burnsky, Jake W. Vincent,
+Yu’an Yang, Siffi Singh, Song Feng, Hwanjun Song, Hang Su, Lijia Sun,
+Yi Zhang, Saab Mansour, and Kathleen McKeown. 2024b.
+ Tofueval: Evaluating hallucinations of llms on topic-focused dialogue
+summarization.
+ arXiv preprint arXiv:2402.13249 .
+ Touvron et al. (2023) 
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine
+Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale,
+et al. 2023.
+ Llama 2: Open foundation and fine-tuned chat models.
+ arXiv preprint arXiv:2307.09288 .
+ Wang et al. (2022) 
+Alex Wang, Richard Yuanzhe Pang, Angelica Chen, Jason Phang, and Samuel R.
+Bowman. 2022.
+ SQuALITY:
+Building a long-document summarization dataset the hard way .
+ In Proceedings of the 2022 Conference on Empirical Methods in
+Natural Language Processing , pages 1139–1156, Abu Dhabi, United Arab
+Emirates. Association for Computational Linguistics.
+ Wu et al. (2021) 
+Jeff Wu, Long Ouyang, Daniel M. Ziegler, Nisan Stiennon, Ryan Lowe, Jan Leike,
+and Paul Christiano. 2021.
+ Recursively summarizing books with human feedback.
+ arXiv preprint arXiv:2109.10862 .
+ Xu et al. (2024) 
+Hainiu Xu, Runcong Zhao, Lixing Zhu, Jinhua Du, and Yulan He. 2024.
+ OpenToM: A Comprehensive Benchmark for Evaluating Theory-of-Mind
+Reasoning Capabilities of Large Language Models.
+ arXiv preprint arXiv:2402.06044 .
+ Xu et al. (2022) 
+Ying Xu, Dakuo Wang, Mo Yu, Daniel Ritchie, Bingsheng Yao, Tongshuang Wu, Zheng
+Zhang, Toby Li, Nora Bradford, Branda Sun, Tran Hoang, Yisi Sang, Yufang Hou,
+Xiaojuan Ma, Diyi Yang, Nanyun Peng, Zhou Yu, and Mark Warschauer. 2022.
+ Fantastic
+questions and where to find them: FairytaleQA – an authentic dataset
+for narrative comprehension .
+ In Proceedings of the 60th Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Papers) , pages 447–460,
+Dublin, Ireland. Association for Computational Linguistics.
+ Yeh et al. (2024) 
+Catherine Yeh, Gonzalo Ramos, Rachel Ng, Andy Huntington, and Richard Banks.
+2024.
+ GhostWriter: Augmenting Collaborative Human-AI Writing Experiences
+Through Personalization and Agency.
+ arXiv preprint arXiv:2402.08855 .
+ Yuan et al. (2022) 
+Ann Yuan, Andy Coenen, Emily Reif, and Daphne Ippolito. 2022.
+ Wordcraft: Story writing with large language models.
+ In 27th International Conference on Intelligent User
+Interfaces , pages 841–852.
+ Zha et al. (2023) 
+Yuheng Zha, Yichi Yang, Ruichen Li, and Zhiting Hu. 2023.
+ AlignScore: Evaluating factual consistency with a unified alignment
+function .
+ In Proceedings of the 61st Annual Meeting of the Association
+for Computational Linguistics (Volume 1: Long Papers) , pages 11328–11348,
+Toronto, Canada. Association for Computational Linguistics.
+ Zhang et al. (2023) 
+Qinglin Zhang, Chong Deng, Jiaqing Liu, Hai Yu, Qian Chen, Wen Wang, Zhijie
+Yan, Jinglin Liu, Yi Ren, and Zhou Zhao. 2023.
+ Mug: A general meeting understanding and generation benchmark.
+ In ICASSP 2023-2023 IEEE International Conference on Acoustics,
+Speech and Signal Processing (ICASSP) , pages 1–5. IEEE.
+ Zhang et al. (2020) 
+Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Weinberger, and Yoav Artzi.
+2020.
+ BERTScore:
+Evaluating Text Generation with BERT .
+ In International Conference on Learning Representations .
+ Zhang et al. (2024) 
+Tianyi Zhang, Faisal Ladhak, Esin Durmus, Percy Liang, Kathleen McKeown, and
+Tatsunori B. Hashimoto. 2024.
+ Benchmarking Large
+Language Models for News Summarization .
+ Transactions of the Association for Computational Linguistics ,
+12:39–57.
+ Zhong et al. (2022) 
+Ming Zhong, Yang Liu, Da Yin, Yuning Mao, Yizhu Jiao, Pengfei Liu, Chenguang
+Zhu, Heng Ji, and Jiawei Han. 2022.
+ Towards a
+unified multi-dimensional evaluator for text generation .
+ In Proceedings of the 2022 Conference on Empirical Methods in
+Natural Language Processing , pages 2023–2038, Abu Dhabi, United Arab
+Emirates. Association for Computational Linguistics.
+ Zhong et al. (2023) 
+Wenjie Zhong, Jason Naradowsky, Hiroya Takamura, Ichiro Kobayashi, and Yusuke
+Miyao. 2023.
+ Fiction-writing mode: An effective control for human-machine
+collaborative writing.
+ In Proceedings of the 17th Conference of the European Chapter
+of the Association for Computational Linguistics , pages 1744–1757.
+ Appendix A Information Sheet for Informed Consent 
+ Purpose of research study : We are collecting judgments from writers of how well automatic summarization models can summarize the writers’ own short stories to study the level of understanding these models demonstrate of this type of writing. 
+ Benefits : This study may not benefit you directly, although it may be interesting to see an AI model’s takeaways from your story. The study could, however, benefit society through identifying strengths/limitations of AI models when processing nuanced long text documents. 
+ Data protection : We understand it is very important to protect your unpublished short stories. We will store your stories on password-protected Columbia University computers for the duration of this study and then delete them after completion of the study. We may like to include short excerpts (<1 paragraph) from your short stories and evaluation responses in an eventual publication as examples, but we will not do so without getting your permission at that time. Other than this, we will not publish your stories in any way. We do have to run your stories through the OpenAI, Anthropic, and HuggingFace company APIs to access some of the AI models. All three companies
+state that they will not train on any data. The data may be retained at the company for 30-90 days to ensure consistency in their service but this data is not used or released by the company. 
+ Risks : Since, we have to run your unpublished short story through the OpenAI, Anthropic, and HuggingFace company APIs, there is a small risk involved with trusting these companies are doing what they say they’re doing and preventing data leaks. Anthropic is additionally HIPPAA certified for safe data handling, and one of the authors, Melanie Subbiah, has run her own unpublished short stories through these APIs. 
+ Voluntary Participation : You may stop participating at any time without penalty by emailing Kathleen McKeown (kathy@cs.columbia.edu). At that time, we will delete any short stories you may have shared with us. You will only be compensated for stories for which you complete the full evaluation process. We may end your participation if you are not following the instructions. 
+ Compensation : You will be compensated $50 for each short story/evaluation you complete in the form of a prepaid VISA card mailed to you. 
+ Confidentiality : No identifying information will be published about you. We record whether you have published a short story before and/or completed a writing program to give a general sense of our study participants. Your mailing address will be kept for the duration of the study so that we can mail your payment card to you, and then promptly deleted. All of your work will be submitted in relation to an anonymous ID so we will not be able to connect your answers to you. The Columbia University Human Research Protection Office may obtain access to the data collected for this study. 
+ COI Disclosure : Please be aware that Melanie Subbiah (an investigator on this study) has a financial interest in OpenAI, a company which makes some of the automatic summarization models which will be evaluated in this study. 
+ Questions/concerns : You may email questions to the principal investigator, Kathleen McKeown: kathy@cs.columbia.edu. If you feel you have been treated unfairly you may contact the Columbia University Institutional Review Board and reference Protocol AAAU8875. Please respond to this email by copying the below consent paragraph to indicate that you understand the information in this consent form. You have not waived any legal rights you otherwise would have as a participant in a research study. If you have any questions about your rights or responsibilities as a research participant, please contact the Columbia University HRPO office at: Phone {phone-number}; Email {email}. We recommend either printing this information sheet or taking note of this contact information before beginning the study in case of questions.
+ “I have read the above purpose of the study, and understand my role in participating in the research. I volunteer to take part in this research. I have had a chance to ask questions. If I have questions later, about the research, I can ask the investigator listed above. I understand that I may refuse to participate or withdraw from participation at any time. The investigator may withdraw me at his/her professional discretion. I certify that I am 18 years of age or older and freely give my consent to participate in this study.” 
+ Appendix B Model Prompts and Costs 
+ B.1 GPT-4 
+ Cost (experiments, summary generation, and evaluation): $58
+ Summary Generation :
+ System prompt
+ You are an expert summary-writer. Summarize the provided passage in several paragraphs using only information from the passage provided.
+ User prompt
+ Title: {title}\n\nStory:\n{story}\n\nWrite a coherent, chronological, and detailed but brief summary for this passage in several paragraphs (about 400 words). Briefly introduce key entities like characters or settings when they are mentioned in the summary, and include some analysis of the story.\nSummary:
+ Summary Evaluation :
+ System prompt
+ You are a skilled writer and editor. Evaluate the quality of a summary of a short story by answering the questions provided. Select from the four options indicated and choose whichever fits best. Be careful to evaluate the summary in relation to the short story provided.
+ User prompts (questions are asked one by one and model answers are kept in the messages) 
+ • 
+ Short Story: \n{story}\n\nSummary:\n{summary} 
+ • 
+ Does the summary cover the important plot points of the story?\n1) No - critical details are left out that are necessary to understand the story\n2) Not really - it would be hard to appreciate the story from the details provided\n3) Mostly - covers the main points but small things missing\n4) Yes - the important details of the narrative are covered 
+ • 
+ Does the summary misrepresent details from the story or make things up?\n1) Yes - the summary includes incorrect details\n2) Somewhat - the summary misrepresents details\n3) Not really - mostly accurate but some details aren’t clear\n4) No - everything is correct in relation to the story 
+ • 
+ Is the summary coherent, fluent and readable?\n1) No - contains grammar errors or non sequiturs\n2) Not really - confusing to follow but fluent\n3) Mostly - a bit clunky but coherent and fluent\n4) Yes - easy to read and understand 
+ • 
+ Does the summary provide any correct analysis of some of the main takeaways or themes from the story?\n1) No - there is no analysis in the summary\n\n2) Not really - there is some analysis but it’s not correct\n3) Somewhat - there is some correct analysis but it’s not very thoughtful\n4) Yes - the summary touches on some of the themes/feelings/interpretation that you hoped to communicate as the writer" 
+ B.2 Claude 
+ Cost (on Claude limited free plan): $0
+ from anthropic import HUMAN_PROMPT, AI_PROMPT
+ Summary Generation :
+ Prompt
+ {HUMAN_PROMPT} {gpt4_user_prompt}{AI_PROMPT}
+ Summary Evaluation :
+ Prompt (questions asked one at a time in this format)
+ {HUMAN_PROMPT} {gpt4_system_prompt}\n\n{gpt4_storysummary_user_prompt}\n\n
+ {gpt4_question_user_prompt}\n\nYou must place your score within <score><\score>tags.\n\n
+ {AI_PROMPT}
+ B.3 Llama 
+ Cost (on HuggingChat): $0
+ Summary Generation :
+ System prompt
+ You are an expert summary-writer. Summarize the provided story in several paragraphs using only information from the story provided.
+ Story-level (if the story is short enough) prompt :
+ Write a coherent, chronological, and detailed summary for this story in several paragraphs (about 400 words). Briefly introduce key entities like characters or settings when they are mentioned in the summary, and include some analysis of the story.
+ Chunk-level prompt :
+ Write a coherent, chronological, and detailed summary for this part of a story in several paragraphs (about 400 words). Briefly introduce key entities like characters or settings when they are mentioned in the summary, and include some analysis of the story.
+ Concatenated-summaries prompt :
+ Compress these summaries of several parts of a story into a couple paragraphs (about 400 words) that are a coherent, chronological, and detailed summary of the whole story. Briefly introduce key entities like characters or settings when they are mentioned in the final summary, and include some analysis of the story. 
+ Appendix C Short Story Uploader and Evaluation Interfaces 
+ See Figure 10 . 
+ Cost : $1,250 to compensate writers for their work 
+ Figure 10: Screenshots of the Streamlit apps writers use to anonymously submit stories and evaluate summaries. 
+ Appendix D Fine-Grained Error Annotation Interface 
+ See Figure 11 .
+ Cost : $1,150 to compensate writers for their work 
+ Figure 11: Top panel shows the instructions for the fine-grained error annotation task. Bottom panel shows the interface which was created using Doccano Daudert (2020) . A user can highlight a span of text and then select a label from the dropdown to assign to it. 
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ L
+ A 
+ T
+ E 
+ xml 
+ .
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ Click the "Report Issue" ( 
+ ) button, located in the page header. 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 

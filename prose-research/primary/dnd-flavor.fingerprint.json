@@ -1,0 +1,147 @@
+{
+  "label": "dnd-flavor",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/primary/raw/dnd_flavor_basic.txt"
+  ],
+  "paragraphs": 182,
+  "sentences": 610,
+  "wordsPerSentence": {
+    "mean": 18.8,
+    "sd": 8.8,
+    "p10": 8,
+    "p50": 18,
+    "p90": 30,
+    "shareUnder8": 0.0787,
+    "shareOver30": 0.0885,
+    "neighbourVariation": 0.495
+  },
+  "sentencesPerParagraph": 3.35,
+  "punctuation": {
+    "semicolonRate": 0.0148,
+    "colonRate": 0.0262,
+    "emDashRate": 0.0377,
+    "questionRate": 0.023,
+    "exclamationRate": 0.0082,
+    "parenthesisRate": 0.0525
+  },
+  "shapes": {
+    "antithesisRate": 0.0131,
+    "triadRate": 0.1443,
+    "participialOpenerRate": 0.0148,
+    "whichTailRate": 0.0066,
+    "doubledAdjectiveRate": 0.041,
+    "adverbsPerSentence": 0.228,
+    "thereIsOpenerRate": 0.0016,
+    "dialogueShare": 0.0311
+  },
+  "closers": {
+    "abstractNounRate": 0.077,
+    "pronounRate": 0.0213,
+    "topClosers": [
+      [
+        "",
+        16
+      ],
+      [
+        "races",
+        9
+      ],
+      [
+        "game",
+        8
+      ],
+      [
+        "them",
+        7
+      ],
+      [
+        "others",
+        6
+      ],
+      [
+        "world",
+        6
+      ],
+      [
+        "on",
+        4
+      ],
+      [
+        "combat",
+        4
+      ],
+      [
+        "folk",
+        4
+      ],
+      [
+        "faern",
+        4
+      ],
+      [
+        "action",
+        3
+      ],
+      [
+        "do",
+        3
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "the",
+        59
+      ],
+      [
+        "they",
+        51
+      ],
+      [
+        "in",
+        21
+      ],
+      [
+        "you",
+        17
+      ],
+      [
+        "a",
+        13
+      ],
+      [
+        "some",
+        13
+      ],
+      [
+        "but",
+        11
+      ],
+      [
+        "their",
+        11
+      ],
+      [
+        "elves",
+        11
+      ],
+      [
+        "many",
+        10
+      ],
+      [
+        "if",
+        10
+      ],
+      [
+        "for",
+        10
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.0639
+  },
+  "runsOfThreeSameLengthBand": 0.2705,
+  "presence": null,
+  "presenceReason": "the raw exemplar text is GONE from this machine — the `files` array points into the dead scratchpad d5b9a39f and 1 of 1 basename(s) do not resolve under primary/raw. Re-obtaining the text is an owner act (cost and IP); the three §13.2 lines are NULL rather than fabricated."
+}

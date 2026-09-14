@@ -1,0 +1,847 @@
+                                                       Truncation Sampling as Language Model Desmoothing
+
+                                                            John Hewitt       Christopher D. Manning      Percy Liang
+                                                                           Department of Computer Science
+                                                                                 Stanford University
+                                                                    {johnhew,manning,pliang}@cs.stanford.edu
+
+
+
+                                                               Abstract                              True Distribution       Neural LM Word Distribution
+
+
+
+
+                                             Long samples of text from neural language                                                   Truncation
+
+                                                                                                                                         Threshold
+                                             models can be of poor quality. Truncation sam-
+                                             pling algorithms–like top-p or top-k—address
+
+
+
+
+arXiv:2210.15191v1 [cs.CL] 27 Oct 2022
+                                                                                                                         +
+                                                                                                                                                0
+                                                                                                      Smoothing
+
+                                             this by setting some words’ probabilities to
+                                             zero at each step. This work provides fram-
+                                             ing for the aim of truncation, and an improved                                   Probability-Sorted Vocab
+
+                                             algorithm for that aim. We propose think-
+                                             ing of a neural language model as a mixture          Figure 1: A neural LM as a mixture of the true distribu-
+                                             of a true distribution and a smoothing distri-       tion, and a uniform-like smoothing distribution. Trun-
+                                             bution that avoids infinite perplexity. In this      cation aims to approximate the true distribution sup-
+                                             light, truncation algorithms aim to perform          port.
+                                             desmoothing, estimating a subset of the sup-
+                                             port of the true distribution. Finding a good
+                                             subset is crucial: we show that top-p unnec-         the k most likely) to complex, and all improve sam-
+                                             essarily truncates high-probability words, for       ple quality compared to direct sampling (Holtzman
+                                             example causing it to truncate all words but         et al., 2020). We ask (1) what is the aim of trunca-
+                                             Trump for a document that starts with Don-           tion and (2) how can we improve it?
+                                             ald. We introduce η-sampling, which trun-
+                                                                                                     Our key insight is to write a neural language
+                                             cates words below an entropy-dependent prob-
+                                             ability threshold. Compared to previous algo-        model’s distribution as a mixture of the true dis-
+                                             rithms, η-sampling generates more plausible          tribution and a uniform-like smoothing distribu-
+                                             long English documents according to humans,          tion. This idealized assumption is motivated by
+                                             is better at breaking out of repetition, and be-     KL-divergence: models incur large KL at test
+                                             haves more reasonably on a battery of test dis-      time when they place near zero probability on
+                                             tributions.                                          an observed word (Kang and Hashimoto, 2020).
+                                                                                                  Through this lens, the goal of truncation is to
+                                         1   Introduction                                         desmooth: to approximately recover the words on
+                                         The complex, long-range dependencies of natural          which the true distribution places some probability.
+                                         language make its generation an outstanding chal-           As a stark example of smoothing degenerating
+                                         lenge. While there has been enormous progress            sample quality, we show that a 5-gram language
+                                         on language modeling that has increased the coher-       model smoothed with the uniform distribution gen-
+                                         ence and length of generation (Brown et al., 2020;       erates nonsense as soon as a word is sampled from
+                                         Chowdhery et al., 2022), sampling directly from          outside the support of the 5-gram model (Figure 2).
+                                         a language model can still result in nonsensical         Intuitively, sampling outside the 5-gram support
+                                         output (Holtzman et al., 2020; Pillutla et al., 2021).   causes future probabilities to be poorly estimated.
+                                            The most effective heuristics for generating high        We derive principles of truncation from an ex-
+                                         quality, diverse samples fall under a category we        plicit smoothing model that formalizes the intuition
+                                         term truncation sampling. These algorithms set           that (1) words with high probability should not be
+                                         some words’ probabilities to zero when generat-          truncated, and (2) when all words in the distribution
+                                         ing each word (Fan et al., 2018; Basu et al., 2021;      have low probability, only words with low probabil-
+                                         Meister and Cotterell, 2021). Methods differ by          ity relative to the rest should be truncated. We find
+                                         their truncation criteria, ranging from simple (keep     that state-of-the-art truncation sampling algorithms
+    Unsmoothed 5-gram                                                Smoothed 5-gram
+    . . . a quadcopter flight controller (RTFQ Flip MWC) that        . . . disorder and an extreme state of dysmetabolism charac-
+    supports I2C sensors for adding thing like a barometer, mag-     terized by extensive erythema and a significant reduction
+    netometer, and GPS system. The officially supported sensor       in uncovered Hawkingû McK 400 ruled restrainedcombe-
+    block (BMP180, HMC5883L on one board) is discontinued,           blow uncle cowork Carssoild Gareth focused <@ indecentlol
+    as far as I know, everyone involved lived to sing another day.   by102 exchanged Volvo compositionsbackground prostate
+
+Figure 2: Portions of unconditional samples from an unsmoothed and uniform-smoothed 5-gram model; diver-
+gence due to leaving the support of the high-order distribution is in red.
+
+
+like top-p break these principles. For example, in                   trained to minimize the KL-divergence between (an
+top-p truncation (e.g., p = 0.95), the most likely                   empirical estimate of) the true distribution P ∗ (X)
+few words can take up p% of the distribution, caus-                  and Pθ (X). Recent language models have achieved
+ing the next-most likely word to be truncated even                   strikingly low (held-out) KL-divergence (Radford
+if it has high probability (e.g., 4%).                               et al., 2019).
+   From our two truncation principles we derive                         Language models are used not just to score the
+η-sampling, a new algorithm that truncates any                       probability of existing sequences, but to generate
+word whose probability under the LM is both (1)                      sequences as x̂ ∼ Pθ (X), a building block for tasks
+smaller than an absolute probability threshold and                   like summarization and long-form question answer-
+(2) smaller than a probability threshold that de-                    ing (Fan et al., 2019; Liu and Lapata, 2019). How-
+pends on the entropy of the distribution. As we’ll                   ever, to successfully generate high-variety, high-
+show, this ensures that, e.g., though GPT-2 large as-                quality long samples from neural LMs on high-
+signs probability 0.96 to the word Trump for a docu-                 entropy distributions, it is currently necessary to
+ment starting with Donald, η-sampling allows mul-                    reallocate probability from the tail of conditional
+tiple possible continuations, unlike top-p = 0.95.                   distributions (Holtzman et al., 2020; Pillutla et al.,
+   We extensively study the behavior of η-sampling                   2021). Intuitively, generation has different goals
+in comparison to top-p sampling and typical de-                      than scoring; whereas one wants to assign non-zero
+coding (Meister and Cotterell, 2021). Since each                     probability to low-quality outputs for ranking pur-
+method allows for a range of quality-diversity trade-                poses in scoring, one might want to only generate
+offs, we set each method’s hyperparameter by max-                    (place non-zero probability on) high-quality text.
+imizing MAUVE score (Pillutla et al., 2021). We
+find that η-sampling truncates more reasonably on                    2.2    Truncation sampling
+a CheckList-style (Ribeiro et al., 2020) battery of
+distributions. Top-p and typical decoding over-                      There are many ways to reassign probability mass
+truncate low-entropy distributions (like in the Don-                 from the tail of the word-level distributions of a
+ald example). Finally, η-sampling generates long                     model to the head—like temperature scaling—but
+documents that humans find more plausible and is                     explicit truncation of low-probability words has
+better at breaking out of repetition.1                               been shown to be the most useful (Holtzman et al.,
+                                                                     2020; Pillutla et al., 2021). Truncation sampling
+2     Background                                                     algorithms compute the following truncated distri-
+                                                                     bution at each time step:
+2.1     Language Models
+                                                                                         (
+Let random variable X = (X1 , . . . , XT ) denote a                                       Pθ (x | x<i )/Zx<i x ∈ Ax<i
+                                                                     Ptrunc (x | x<i ) =
+sequence of tokens, where each Xi is in finite vo-                                        0                   o.w.
+cabulary V. We’ll use x<i to refer to a specific pre-                                                               (1)
+fix, xi a specific word in context, and x an arbitrary
+word in V. An autoregressive language model (LM)                     where Ax<i ⊆ V we call the allowed set
+is a distribution Pθ (X) indexed QTby parameters θ                   P the algorithm for that prefix, and Zx<i =
+                                                                     for
+that is factorized as Pθ (x) = i=1 Pθ (xi | x<i ).                      x∈Ax Pθ (x | x<i ) is the renormalization term.
+                                                                              <i
+We call Pθ (Xi | x<i ) over V the conditional dis-                      The question for all truncation algorithms is how
+tribution of the LM given context x<i . An LM is                     to decide where to cut off the distribution. Top-k
+   1
+     Our code is available at https://github.com/                    sampling (Fan et al., 2018) keeps the k most likely
+john-hewitt/truncation-sampling.                                     words. Top-p sampling (Holtzman et al., 2020) im-
+proved upon it by noting that sometimes more or                  words. Consider a true conditional distribution
+fewer than k words should be in the allowed set,                 P ∗ (Xi | x<i ) over V. We think of the LM distri-
+instead allowing the minimal set of words to keep p              bution Pθ (Xi | x<i ) as the result of smoothing the
+percent of the probability. More recently, Mirostat              true distribution with a distribution Q(Xi | x<i )
+adaptively truncates so as to achieve samples of a               that is like the uniform distribution. Specifically,
+given probability (Basu et al., 2021), and typical               we pose that the neural LM is a linear interpolation:
+decoding truncates so as to locally match an infor-
+mativeness criterion (Meister et al., 2022a). We                    Pθ (Xi | x<i ) =λx<i P ∗ (Xi | x<i )
+pursue an understanding of truncation as attempt-                                          + (1 − λx<i )Q(Xi | x<i ) (3)
+ing to recover (a conservative estimate of) the true
+training distribution P ∗ .                                      where λx<i ∈ (0, 1] specifies the strength of the
+                                                                 smoothing. We assume that each word probabil-
+3       Truncation as Desmoothing                                ity under Q is bounded in its deviation from the
+                                                                 uniform distribution probability. For all x ∈ V,
+3.1      KL-divergence and mode covering                         we assume Q(x | x<i ) ∈ ( 1−δ             1+δ
+                                                                                                     |V| , |V| ) where
+Language models are trained to minimize the KL-                  δ is a constant specifying non-uniformity. We
+divergence to an empirical approximation of true                 assume constraints on λx<i that reflect how the
+distribution P ∗ (X). Recall that the KL-divergence              amount of smoothing should be (1) small and (2)
+for a model’s conditional distribution Pθ (X | x<i )             dependent on how well-estimated a given condi-
+to the true conditional distribution P ∗ (X | x<i ) is           tional distribution is. Specifically, we assume that
+                                                                 λx<i ≥ max(λ̄x<i , λ̄) where λ̄ is a constant near
+               X                          P ∗ (x | x<i )         1 (e.g., 0.8), independent of prefix. The exact
+                     P ∗ (x | x<i ) log                    (2)
+                                          Pθ (x | x<i )
+               x∈V                                               form we use for the context-dependent λ̄x<i is:
+                                                                       V α exp(−hx     )
+KL-divergence is known to be mode-covering;                      1−         1+δ
+                                                                                 <i
+                                                                                    . As we will show later, this
+it heavily penalizes errors of coverage. When                    form implies that for a distribution of entropy h,
+training from samples, an observed word xi in                    words with probability 0 under P ∗ have proba-
+context x<i causes the model to incur a loss of                  bility bounded by α exp(−h) under the language
+− log Pθ (xi | x<i ), which approaches infinity as               model.3 A simple intuition for high-entropy distri-
+the model probability approaches 0.2 Neural LMs                  butions having less smoothing is that, e.g., if the
+use shared representations to generalize beyond the              maximum likelihood estimate for an n-gram model
+training data, e.g., knowing that the word home                  is 1/k for k elements, then at least k samples were
+may appear in a context where house appeared.                    observed for the MLE.4
+However, to achieve low held-out KL-divergence,
+it must also be the case that (1) the LM determines              3.3    A local measure of truncation quality
+where the zeros of the true distribution P (X) are—              Under the smoothing model, we can make precise
+difficult due to the complexity of language—or (2)               the tradeoff between (1) truncating too little, al-
+the LM hedges against unexpected xi in any con-                  lowing words that are poor continuations, and (2)
+text x<i by placing some probability mass there.                 truncating too much and losing the diversity of the
+Intuitively, this hedging may be due to early stop-              true distribution. Let Sx∗<i = {x ∈ V | P ∗ (x |
+ping; instead of converging to the finite training               x<i ) > 0} be the true distribution support (set of
+set, often language models are trained with a sin-               words with non-zero probability) for the prefix x<i .
+gle epoch, so each KL-minimizing gradient step                       3
+                                                                       Note that exp(−h) is the probability in a uniform distri-
+is taken on new data, about which the model must                 bution of entropy h. This entropy is of P ∗ (Xi | x<i ).
+                                                                     4
+hedge.                                                                 Even with this argument, the idea that high-entropy distri-
+                                                                 butions are likely better estimated is probably the most tenuous
+3.2      A neural LM as a smoothed distribution                  assumption. However, if one believes that a language model is
+                                                                 “close” to the true distribution, then in high-entropy distribu-
+We present a framework for neural LMs wherein                    tions, the weight of uniform smoothing must be lower than in
+                                                                 low-entropy distributions; else, the high-entropy distributions
+smoothing aids in KL-divergence minimization by                  would be too far from the true distribution. Further, empir-
+placing a small amount of probability mass on all                ically, the highest-entropy distributions in language models,
+                                                                 like A . . . or The . . . are high-entropy due to exceptional
+    2
+    Likewise during evaluation, the held-out perplexity          evidence (examples) of possible continuations. Put another
+ Exi ,x<i log Pθ (xi |x<i )
+2                   is infinite if zero mass is placed on        way, this suggests the entropy is from epistemic uncertainty
+an observed word.                                                (Osband et al., 2022).
+Recall that Ax<i ⊆ V is the set of words allowed                              large probability should not be truncated, since
+by a truncation algorithm, and that Ptrunc is the dis-                        above a small probability threshold, they must be
+tribution of Pθ after truncation. Let Ax<i be the                             in the support of P ∗ .
+elements of V not in Ax<i . Then we can define the
+                                                                              Relative probability. Under our model, a distri-
+support-weighted total variation distance as
+                                                                              bution with high entropy has less smoothing, that
+       TVS (P ∗ (Xi | x<i ),Ptrunc (Xi | x<i ))                         (4)   is, λ is smaller, e.g., note the term exp(−hx<i ) in
+                                     X
+                         =βvar              P ∗ (x | x<i )                    the bound on λ. This directly results in a lower
+                                     ∗
+                                  x∈Sx        ∩Ā
+                                      <i                                      maximum probability a word outside the support
+                                    X
+                          +βsup                     Ptrunc (x | x<i )         of the true distribution can achieve:
+                                     ∗
+                                  x∈Sx        ∩A
+                                         <i
+                                                                                            max Pθ (x) ≤ α exp(−h),            (6)
+                                                                                           x6∈Sx∗<i
+The first term represents the total probability mass
+of the true distribution lost to truncation, weighted                         where exp(−hx<i ) is the probability of a word in
+by hyperparameter βvar . The second term repre-                               the uniform distribution of entropy hx<i (and α is a
+sents the total probability mass placed off the sup-                          constant). The general principle is to only truncate
+port of the true distribution (thus constituting a bad                        words whose probabilities are also low relative to
+continuation), weighted by βsup .5                                            the rest of the distribution.
+    Since the mass of a word under the true model,
+   ∗
+P (x | x<i ), may be arbitrarily close to zero, it is                         3.5      Desmoothing and n-gram models
+hard to guarantee that the first term (βvar ) is zero.                        The issue of smoothing on sample quality is ap-
+One cannot guarantee that any non-complete al-                                parent in n-gram language models. An n-gram
+lowed set A contains the full support of P ∗ . How-                           language model MLE estimate explicitly counts
+ever, the smoothing model does provide bounds on                              the number of times each (n − 1)-word phrase is
+the probabilities of words in Sx∗<i ∩ A, meaning                              followed by a word in V. To avoid infinite per-
+we can in principle avoid unnecessarily truncating                            plexity (as the count estimates are zero almost ev-
+words while still maintaining zero cost from the                              erwhere), an n-gram model is explicitly smoothed
+βsup precision term. While we cannot know the                                 (Katz, 1987; Church and Gale, 1991).
+exact properties of the unobserved smoothing dis-                                Text generated from unsmoothed n-gram mod-
+tribution, we can use this fact to design principles                          els is locally coherent.6 However, we show that
+desmoothing algorithms should follow.                                         n-gram models smoothed with the uniform distri-
+                                                                              bution generate nonsense (Figure 2). Why is this?
+3.4     Principles for truncation as desmoothing                              Consider a 5-gram LM smoothed with the uniform
+Our LM framing specifies bounds on the proba-                                 distribution. If x0 is sampled from outside the sup-
+bilities of words outside the support of the true                             port of the 5-gram model’s support, then the new
+distribution, and our TVS motivates minimizing                                history (xi−1 , x0 ) was never seen during the train-
+the difference between the allowed set Ax<i and                               ing of the 5-gram model, so now the model has
+the support Sx∗<i . We now use both of these to de-                           only the poorly estimated probabilities from the
+scribe principles for truncation; if these principles                         smoothing distribution.
+are not met, the word is in the support of Sx∗<i and
+should not be truncated.                                                      4       Methods
+Absolute probability. Under our smoothing                                     We now describe in detail two popular truncation
+model (Section 3.2), a word outside the support                               sampling algorithms, discuss how they break our
+of P ∗ (Xi | x<i ) has a bound on its probability:                            desmoothing principles, and then present two new
+                                                                              truncation sampling algorithms including our pro-
+   max Pθ (x | x<i ) ≤ (1 + δ)(1 − λ̄)/|V|, (5)
+  x6∈Sx∗<i                                                                    posed η-sampling.
+since we posited that smoothing never accounts for                            4.1      Top-p (nucleus) sampling
+more than λ̄ of the distribution. While these terms                           Top-p (nucleus) sampling truncates words that
+are not known, the bound is likely small (since δ is                          are outside the mimimal set of (most probable)
+small). Hence as a general principle, words with                                  6
+                                                                                   As noted by Yoav Goldberg https://nbviewer.org/
+   5
+     See Section A.1 for the relationship to the total variation              gist/yoavg/d76121dfde2618422139 and Jurafsky and Mar-
+distance.                                                                     tin (2000), Chapter 3: N-gram Language Models.
+words that account for at least p percent of the               GPT-2 allows over ten thousand words, but  would
+distribution. That is, the allowed set is as fol-              have to be impractically small to do so. This is a
+lows. Let x(1) , . . . , x(|V|) be the words in V              key failure akin to that of top-k sampling; when
+sorted in order of decreasing probability under                many next words are plausible, the allowed set
+Pθ (X | x<i ). Then let j be the integer such that             should reflect that.
+                      P0
+j = arg minj 0 ji=1 Pθ (x(i) | x<i ) ≥ p. The
+                                                               4.4 η-sampling (ours)
+allowed set of top-p sampling is then Ax<i =
+{x(1) , . . . , x(j) }.7 Top-p sampling breaks the abso-       Our proposed algorithm, η-sampling, composes
+lute probability principle: words with up to (1 − p)           respect for both the absolute and relative probabil-
+probability may be truncated simply because other              ity principles. Consider a conditional distribution
+high-probability words cover probability p. For the            Pθ (X | x<i ) with entropy hθ,x<i . The probability
+prompt My name, the word is is assigned 0.96 prob-             of a word in the uniform distribution of entropy
+ability by GPT-2, but less likely candidates ’s, was           hθ,x<i is exp(−hθ,x<i ). Our entropy-dependent
+and isn shouldn’t be truncated. Intuitively, (1 − p),          threshold is α exp(−hθ,x<i ) where α ∈ [0, 1].
+e.g., 0.05 or 0.01 is quite high probability given a           Combining this rule with our epsilon rule for the
+vocabulary size of, e.g., 50,000.                              absolute probability principle, we come to:
+
+4.2      Typical decoding                                              Ax<i = {x ∈ V | Pθ (x | x<i ) > η}
+                                                                                                 
+Typical decoding is motivated by local informative-                    η = min , α exp(−hθ,x<i ) }
+ness: never generate words that are too surprising
+                                                               where hθ,x<i is the entropy of Pθ (X | x<i ). In this
+or too predictable (Meister et al., 2022a). The algo-
+                                                               work, to expose a single hyperparameter, we set
+rithm sorts the vocabulary in order of the difference                √
+                                                               α = , which we find works well empirically.
+between the entropy hθ,x<i of the LM conditional
+                                                               For intuition, think of  ≈ 0.0009.
+distribution and the negative log-probability of the
+word, and takes words from this list to cover p per-           Analysis of η-sampling. Returning to our
+cent of the distribution. That is, let x(1) , . . . , x(|V|)   smoothing model, we note that η-sampling ap-
+be the words in V in sorted order of increasing                proximates optimal desmoothing in the regime that
+|hθ,x<i + log pθ (x | x<i )|.8 Then let j be the in-           the support penalty βsup dominates the variation
+                            P0
+teger j = arg minj 0 ji=1 Pθ (x(i) | x<i ) ≥ p.                penalty βvar . Consider a truncation algorithm that
+The allowed set of typical decoding is Ax<i =                  truncates as η-sampling, but sets η as:
+{x(1) , . . . , x(j) }. This breaks the absolute proba-                         (1 − λ̄)(1 + δ)                
+                                                                     η = min                    , α exp(−hx<i ) },   (8)
+bility principle for the same reason as top-p, and                                     V
+additionally can truncate the most probable words.              where hx<i is the entropy of the true distribu-
+                                                               tion, not Pθ . We’re guaranteed that the support
+4.3      -sampling (ours)                                     loss (the term weighted by βsup ) is zero, and that
+The absolute probability principle—that words out-             the variation loss (weighted by βvar ) is minimized
+side the support of the true distribution have low             relative to the constraint of zero support loss. If
+probability—suggests a simple truncation algo-                 x 6∈ Sx∗<i , then the probability of x is less than
+rithm: for some hyperparameter threshold  allow               or equal to the min of (1 − λ̄)(1 + δ)/V and
+any word with greater than  probability.                      V α exp(−hx<i )
+                                                                     1+δ       × 1+δ
+                                                                                  V = α exp(−hx<i ). So, we’re
+                                                               guaranteed that Ax<i ⊆ Sx∗<i , and truncating more
+           Ax<i = {x ∈ V : Pθ (x | x<i ) > }            (7)
+                                                               would break this guarantee.9 Our η-sampling ap-
+In the case of the prompt My name where top-p                  proximates this by using the LM entropy instead
+rejects plausible words because of the probability             of the unavailable true distribution entropy, and
+assigned to is (and ’s), -sampling allows additional          without knowing the true hyperparameters.
+words with a threshold of, e.g., 0.0003.
+                                                               5   Experiments & Results
+   However, -sampling breaks the relative prob-
+ability principle. For example, the prompt The                 Our experiments characterize η-sampling relative
+should allow many continuations, and top-p with                to the state-of-the-art top-p and typical decoding.
+   7                                                             9
+       Often, p is taken
+                     P as 0.9 or 0.95.                             See Appendix A.2 for an expanded version of this argu-
+   8
+       hθ,x<i = − x∈V Pθ (x | x<i ) log Pθ (x | x<i ).         ment.
+      Method    Hyperparameters                                                        Study 1: Human vs top-p vs η
+                                                                                      top-p      η-sampling     Human
+       top-p    {0.89, 0.9, 0.92, 0.95, 0.99}
+      typical   {0.2, 0.9, 0.92, 0.95}                          Top-p vs human      43 (43%)          —        56 (56%)
+               {0.001, 0.0009, 0.0006, 0.0003, 0.0001}         η vs human             —          42 (42%)     53 (53%)
+         η      {0.004, 0.002, 0.0009, 0.0006, 0.0003}          Top-p vs η          39 (39%)      53 (53%)         —
+
+                                                                                      Study 2: top-p vs η-sampling
+  Table 1: Hyperparameter sweep for each method.                                     Top-p      η-sampling      Equal
+                                                                Top-p vs η         118 (40%)     159 (53%)      17 (6%)
+ Method \ Model              sm    med         lg         xl
+ raw sampling †            0.589   0.373   0.845    0.882      Table 3: Human preferences of long-document plausi-
+ top-p †                   0.878   0.915   0.936    0.940      bility; we report absolute numbers of judgments, and
+ top-p (our replication)   0.874   0.917   0.932    0.944      percentages in parentheses. Judgment percents that
+ Typical Decoding          0.873   0.906   0.922    0.939
+                                                               both suffixes were too bad to judge can be inferred.
+ -sampling (ours)         0.874   0.918   0.936    0.941
+ η-sampling (ours)         0.880   0.920   0.935    0.942
+                                                               of samples from a text generation system. It was
+Table 2: Results on the MAUVE metric for open-                 shown by Pillutla et al. (2021) to correlate well
+eneded GPT-2 WebText generation. Higher is bet-                with human judgments.
+ter. The † indicates numbers drawn from Pillutla et al.
+(2021). Bold indicates best for model, not necessarily         Hyperparameters. Top-p, typical decoding, -
+significantly.                                                 sampling, and η-sampling all have a hyperparemter
+                                                               which determines the severity of truncation. The
+                                                               set we search over is given in Table 1.10 We pick
+We use MAUVE, an automatic metric for open-                    the best hyperparameter using 2–5 seeds on the
+ended generation, to find hyperparameters giv-                 validation set, and report the average performance
+ing comparable diversity-accuracy tradeoffs. η-                across 5 seeds on the test set.
+sampling behaves better in a range of settings, from
+long-document generation to more defensibly trun-              Results. The results are reported in Table 2; we
+cating low-entropy distributions.                              find that overall, the methods perform similarly,
+                                                               with typical decoding performing slightly worse
+Models & Data. In all experiments, we use all                  than top-p and our methods.
+or some subset of the four GPT-2 models (Radford
+et al., 2019) of varying sizes. Experiments are run            5.2    Human evaluation of long-document
+on in-distribution, held-out data from the validation                 suffix plausibility
+or test set of GPT-2 (WebText), since it is composed           We now study whether η-sampling leads to more
+of a wide variety of long-form documents.                      coherent long-document generations than top-p
+                                                               sampling. We omit typical decoding since it does
+5.1    Hyperparameter sweep on MAUVE                           not seem to outperform top-p on MAUVE. Consid-
+We first find hyperparameters for each of top-p,               ering that holistic evaluation of long texts is diffi-
+typical decoding, -sampling, and η-sampling that              cult for humans (Ippolito et al., 2020) we design
+maximize MAUVE score for each GPT-2 model on                   a human study to evaluate long document plau-
+WebText.                                                       sibility: given a shared document prefix, which
+                                                               method’s generated suffix (omitting the middle) is
+Setting. Following the MAUVE paper’s setting                   more reasonably from the same document? This
+exactly (Pillutla et al., 2021), we take the GPT-2             new evaluation avoids forcing humans to keep up
+family of models and 5,000 samples from their test             to 1024 words in working memory.
+data. For each sample, we prompt the model with
+35 words and generate until at most 1024 words.                Setting. For each of top-p and η-sampling,
+We study GPT-2 small (124M parameters), medium                 we sample from GPT-2 large with MAUVE-
+(355M), large (774M) and XL (1.5B) models.                     maximizing hyperparameters, conditioned on each
+                                                               prefix of 35 subword tokens from the WebText val-
+Evaluation. MAUVE attempts to measure both                     idation set. From this set we filter to prefixes for
+the precision (are samples generally like those from             10
+                                                                   The hyperparameter set for our methods was chosen to
+the true distribution) and recall (is the variability in       have similar average total variation values between pre- and
+samples like that of those from the true distribution)         post-truncation to the top-p set.
+Figure 3: Top-p sampling aggressively truncates low-entropy distributions and -sampling aggressively truncates
+high-entropy distributions, while η-sampling strikes a balance.
+
+
+which the reference and both generated documents              distribution tend to get cut by each method? In our
+are at least 900 tokens long and pass manual filter           first analysis, we study whether each method has a
+for quality.11 59 workers from the United States              tendency to aggressively truncate distributions of
+were recruited on Amazon Mechanical Turk with                 a given entropy. A low-entropy distribution might
+the Master qualification, and paid $1 per task with           be given by the prompt Barack Obama went to the
+an expected time of 3.5 to 4 minutes. We run two              White . . . , while a high-entropy distribution might
+studies.                                                      be given by the prompt My name is . . . .
+Study 1. We show a human evaluator the 35-                    Setting. For a range of hyperparameters, we plot
+token prefix, as well as the last 70 tokens of two            the average amount of truncation across all con-
+documents (of the 3 possible). The evaluator is               texts against the retained entropy for an entropy
+asked to judge which of the two suffixes may more             range. We use total variation to measure average
+reasonably be from the same document as the pre-              truncation, Ex<i ∼P (X) kPθ (Xi | x<i ) − Ptrunc (Xi |
+fix, or to note that both are too bad to judge. For           x<i )kTV . For each entropy range R, we consider
+each of the three possible pairings of top-p, η-              the set XR of prefixes x<i with pre-truncation en-
+sampling, and reference document, we elicit 100               tropy hθ,x<i in RPand compute the average remain-
+human judgments over 100 prefixes.                            ing entropy |X1R | XR htrunc,x<i after truncation.
+Study 2. We ran a second study just comparing                 Results. The results for GPT-2 XL are presented
+top-p to η-sampling to allow for larger n, since we           in Figure 3. We find that top-p sampling heav-
+had finite resources and the result that both methods         ily truncates low-entropy distributions compared
+generate text worse than humans is not at issue. To           to -sampling and η-sampling. -sampling heav-
+test whether the effect size observed was in part             ily truncates high-entropy distributions. Typical
+due to forcing evaluators to pick one of the two              behaves like top-p for low-entropy distributions,
+methods, in this study we allow human evaluators              and retains more entropy in high-entropy distribu-
+to mark that both suffixes are of equal quality.              tions.12 η-sampling strikes a good balance of not
+                                                              heavily truncating low- or high-entropy distribu-
+Results. The results are reported in Table 3. In              tions.
+Study 1, we find that human document genera-
+tions are preferred over top-p and η-sampling at              5.4    Repetition analysis
+roughly the same rate, while η-sampling is pre-               We hypothesize that the tendency of top-p sampling
+ferred over top-p (53% to 40%). In Study 2, we                to heavily truncate low-entropy distributions causes
+find that η-sampling is significantly preferred more          it to generate repetitive text by only allowing the
+frequently than top-p with a Wilcoxon paired test             repetition-continuing word. To stress test the meth-
+(p = 0.0138) at the same effect size.                         ods, we devise an adversarial setting in which the
+5.3    Entropy analysis                                       prompt has repetitions (as may be the case due to
+                                                              noisy input or natural repetition) and then deter-
+We now want to build a deeper understanding of the            mine whether the methods break the repetition.
+characteristics of the algorithms: what parts of the
+                                                                12
+                                                                  This is likely because typical decoding cuts the non-
+  11
+     We also manually filter prompts for quality, following   uniform head of the distribution, and keeps the more-uniform
+Pillutla et al. (2021). See Appendix B.3.                     middle.
+        <|endoftext|>My name ___                        <|endoftext|>My name is ___                      <|endoftext|>Donald ___
+
+
+
+
+         is                                             David
+         Yel
+           Bright
+         Trump       J
+
+                        's
+
+                                                        Michael
+       Bes
+           Woo
+                        Glover
+
+                         was
+
+                                                        John
+          SC
+            India
+                      Sterling
+
+                         isn
+
+                                                        Chris          Napoleon       Kab                         R
+                        [comma]
+     <|endoftext|>The capital of of the USA is                                                    <|endoftext|>The feeling! The feeling! The
+    Washington D.C. The capital of India is New                                                      feeling! The feeling! The feeling! The
+    Delhi. The capital of the UK is London. The                                                      feeling! The feeling! The feeling! The
+              capital of Ghana is ___                        <|endoftext|>The                         feeling! The feeling! The feeling! ___
+
+
+
+
+        Acc                                             U
+             Barbarian
+      trou
+         The         the
+
+                         K
+
+                                                        first
+         vegetarian
+    ?
+                         It
+
+                         Ab
+
+                                                        following
+     Mate
+           counsel
+                  The
+
+                         Ghana
+
+                                                        New            mic             fringe                    (
+                         Kum
+
+
+    Figure 4: Unit tests of the truncation behavior of top-p, , and η-sampling on CheckList-inspired prefixes.
+
+
+                                     Repetition Percent               percent of completions that continue to repeat.13
+  Truncation \ Model              sm   med       lg     xl
+  top-p                           54%      61%    47%    27%          Results. -sampling achieves the lowest repeti-
+  typical                         51%      61%    56%    37%          tion rate, with e.g., 23% for GPT-2 large, while
+  -sampling (ours)               28%      37%    23%    11%
+  η-sampling (ours)               37%      40%    26%    12%          η-sampling performs slightly worse (e.g., 26%).
+                                                                      Top-p causes considerably more repetition (e.g.,
+Table 4: Table showing repetition-degeneration rates                  47%). Typical sampling causes slightly more repe-
+for each method in an adversarial setting; lower is bet-              tition than top-p.14
+ter.
+                                                                      5.5     Studying individual distributions
+Setting. We take natural prompts—the first 35                         We now study specific truncation decisions made
+words of the Wikipedia biographies of the 101                         by each algorithm, to provide more detailed behav-
+people with the most-read Wikipedia pages—and                         ioral insights. We construct prompts and observe
+synthetically corrupt them by repeating the last 3                    the truncation behavior of each algorithm on the
+subword tokens 5 additional times. Even with the                      resulting distribution, treating each as a CheckList-
+existing repetition in the prompt, we want models                     like unit test (Ribeiro et al., 2020).
+to break the cycle and generate normal text again.
+Here’s an example prompt:                                             Setting. We take the GPT-2 large model, pro-
+                                                                      vide it with each of 6 prompts, and using the
+     Shawn Corey Carter (born December 4, 1969),                      MAUVE-maximizing hyperparameters we found
+     known professionally as Jay-Z, is an American                    in Section 5.1, truncate the resulting distribution.
+     rapper, songwriter, record executive, entrepreneur,              The prompts are shown in Figure 4. For this exper-
+     and media proprietor and media proprietor and
+     media proprietor and media proprietor and media                  iment we only study top-p, , and η-sampling.
+     proprietor and media proprietor
+                                                                         13
+                                                                            Any sample with less than 1 average negative log proba-
+                                                                      bility under the model is labeled a repetition. We found this
+For each prompt, we generate 5 completions of up                      more useful than n-gram repetition statistics, as, e.g., repeti-
+to 512 words. For each of the GPT-2 models, we                        tion can involve small variation.
+                                                                         14
+                                                                            This is likely because the MAUVE-maximizing hyperpa-
+take the hyperparameter for each truncation sam-                      rameter for typical sampling (e.g., 0.92 for GPT-2 large) is
+pling algorithm from Section 5.1, and compute the                     generally more conservative than that for top-p (e.g., 0.95.)
+Results. The results are visualized in Figure 4.        events from incurring arbitrarily high loss. Mohri
+We use two low-entropy prompts, My name... and          and Roark (2006) attempt to identify structural ze-
+Donald... and in both cases, find that top-p decod-     ros in the distribution of language when inducing
+ing only allows a single word continuation. Top-p       probabilistic context-free grammars.
+can only generate is after My name, and Trump
+after Donald, which we find undesirable; we would       High-entropy language generation & evalua-
+like our truncation to allow, e.g., multiple Donalds    tion. Evaluation of open-ended generation of nat-
+to be discussed. For a prompt with the phrase The       ural language is difficult; one must evaluate both
+feeling! repeated multiple times (as one might say      the quality of samples and the diversity. Qual-
+euphorically), top-p can only continue the repeti-      ity is hard to measure in high-entropy generation,
+tive pattern, unlike  and η-sampling. For a prompt     and is often not correlated with model probability
+suggesting specification of capitals of countries,      (Hashimoto et al., 2019; Meister et al., 2022b). An
+we find that top-p only allows the correct capital      emergent line of work connects human notions of
+name, whereas η-sampling and -sampling allow           quality, and human generative tendencies, with the
+different continuations which do not follow the in-     uniform information density hypothesis (e.g., lead-
+context trend, suggesting that top-p may be better      ing to typical decoding) (Wei et al., 2021; Meister
+for generating, e.g., answers to questions. We use      et al., 2021b). Both Meister and Cotterell (2021)
+two high-entropy prompts, The... and My name            and Pillutla et al. (2021) directly estimate whether
+is..., finding that η-sampling and top-p sampling al-   model samples’ statistics match those of natural
+low a range of possibilities, unlike -sampling. The    language. Nadeem et al. (2020) study properties
+behavior of -sampling in allowing fewer words in       held by successful strategies for reallocating mass
+higher entropy conditional distributions is a clear     away from the tail of LM distributions.
+failure.
+                                                        7   Conclusion
+6   Related Work
+                                                        We’ve framed the class of truncation sampling algo-
+Stochastic decoding algorithms. Stochastic de-          rithms as performing desmoothing, an insight that
+coding algorithms produce sequences from a model        led to principles for how truncation should be done
+and involve randomness. The simplest is sampling,       to recover the training distribution, a new trunca-
+sometimes called ancestral sampling, (Bishop,           tion sampling algorithm, and evaluations that show
+2006), which generates a sample from the model.         the deficiencies of existing algorithms. We find the
+Some stochastic decoding methods attempt to find        tendency of top-p decoding to over-truncate low-
+high-likelihood sequences instead of attempting to      entropy distributions to be particularly surprising.
+recreate the true distribution, like stochastic beam    We aim for these insights, and the evaluations we
+search (Kool et al., 2019) and conditional pois-        use, to drive further research in understanding and
+son stochastic beam search (Meister et al., 2021a).     improving how we generate from neural language
+Truncation sampling algorithms, like top-k (Fan         models.
+et al., 2018), top-p (Holtzman et al., 2020), and
+Mirostat (Basu et al., 2021), are intended to im-       Acknowledgements
+prove quality but keep variety. Welleck et al. (2020)
+found that truncation algorithms can lead to non-       The authors would like to thank John Thickstun,
+zero mass assigned to infinite sequences.               Rishi Bommasani, Kaitlyn Zhou, Will Merrill, Nel-
+                                                        son Liu, and Tatsunori Hashimoto for helpful dis-
+KL-divergence, language models, smoothing.              cussions on this work, and to the reviewers for
+The most famous example of methods that do not          clarifying feedback. JH was supported by an NSF
+cover every mode is GANs (Goodfellow et al.,            Graduate Research Fellowship under grant num-
+2014). In language modeling, some have pointed          ber DGE-1656518. We gratefully acknowledge the
+to the inability of the softmax function to assign 0    support of a PECASE Award.
+probability to any category as a deficiency and pro-
+posed sparse alternatives (Martins and Astudillo,       8   Limitations
+2016; Peters et al., 2019; Tezekbayev et al., 2021).
+This intuition is akin to ours, as is loss truncation   With the analysis we’ve done, we believe it to
+(Kang and Hashimoto, 2020), which keeps rare            be very difficult to derive an understanding of all
+the sequence-level effects truncation sampling al-         Paul Barham, Hyung Won Chung, Charles Sutton,
+gorithms (including ours) have: what kinds of              Sebastian Gehrmann, et al. 2022. PaLM: Scaling
+                                                           language modeling with pathways. arXiv preprint
+sequences are we disallowing? What types, or
+                                                           arXiv:2204.02311.
+sources of language are being (unknowingly) dis-
+allowed? Beyond this, we’ve only tested our al-          Kenneth W Church and William A Gale. 1991. A com-
+gorithms on English language models; the condi-            parison of the enhanced Good-Turing and deleted
+                                                           estimation methods for estimating probabilities of
+tional distributions of languages with rich morphol-       English bigrams. Computer Speech & Language,
+ogy likely have different properties (especially with      5(1):19–54.
+subword models).
+                                                         Jwala Dhamala, Varun Kumar, Rahul Gupta, Kai-Wei
+                                                           Chang, and Aram Galstyan. 2022. An analysis of
+9   Ethics Statement                                       the effects of decoding algorithms on fairness in
+                                                           open-ended language generation. In 2018 IEEE Spo-
+Any work to improve generative models of text              ken Language Technology Workshop (SLT). IEEE.
+comes with ethical concerns surrounding negative
+use cases of text generation including hate speech       Angela Fan, Yacine Jernite, Ethan Perez, David Grang-
+                                                           ier, Jason Weston, and Michael Auli. 2019. ELI5:
+and misinformation. While our algorithm does im-
+                                                           long form question answering. In Proceedings of
+prove long text generation, we hope it also provides       the 57th Conference of the Association for Compu-
+insight into the unintended and until-now unknown          tational Linguistics, ACL 2019, Florence, Italy, July
+consequences of existing truncation sampling al-           28- August 2, 2019, Volume 1: Long Papers, pages
+gorithms (including top-p). Algorithms like ours,          3558–3567. Association for Computational Linguis-
+                                                           tics.
+which reallocate probability mass from the least
+likely elements of a distribution, have a particular     Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hi-
+risk of harm in removing the ability of models to          erarchical neural story generation. In Proceedings
+                                                           of the 56th Annual Meeting of the Association for
+talk about topics or names that are already rare.          Computational Linguistics (Volume 1: Long Papers),
+Concurrent work finds that the choice of stochas-          pages 889–898, Melbourne, Australia. Association
+tic decoding algorithm affects measured fairness           for Computational Linguistics.
+metrics in open-ended generation (Dhamala et al.,        Leo Gao, Stella Biderman, Sid Black, Laurence Gold-
+2022). Our framing, and the hope for future work,          ing, Travis Hoppe, Charles Foster, Jason Phang,
+is to use truncation to recover something as close to      Horace He, Anish Thite, Noa Nabeshima, Shawn
+the training distribution as possible; of course, the      Presser, and Connor Leahy. 2021. The Pile: An
+                                                           800gb dataset of diverse text for language modeling.
+training distribution must then be chosen with care.
+                                                           CoRR, abs/2101.00027.
+Generating a word due to smoothing (noise) would
+likely mean that subsequently generated words            Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza,
+about that topic would be low-quality, which is             Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron
+                                                            Courville, and Yoshua Bengio. 2014. Generative ad-
+also undesirable.                                           versarial nets. Advances in neural information pro-
+                                                            cessing systems, 27.
+
+References                                               Tatsunori B Hashimoto, Hugh Zhang, and Percy Liang.
+                                                           2019. Unifying human and statistical evaluation for
+Sourya Basu, Govardana Sachitanandam Ramachan-             natural language generation. In Proceedings of the
+  dran, Nitish Shirish Keskar, and Lav R. Varshney.        2019 Conference of the North American Chapter of
+  2021. MIROSTAT: A neural text decoding algo-             the Association for Computational Linguistics: Hu-
+  rithm that directly controls perplexity. In Interna-     man Language Technologies, Volume 1 (Long and
+  tional Conference on Learning Representations.           Short Papers), pages 1689–1701.
+Christopher M Bishop. 2006. Pattern recognition and      Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+  machine learning. Springer.                              Yejin Choi. 2020. The curious case of neural text de-
+                                                           generation. In International Conference on Learn-
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie              ing Representations.
+  Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+  Neelakantan, Pranav Shyam, Girish Sastry, Amanda       Daphne Ippolito, Daniel Duckworth, Chris Callison-
+  Askell, et al. 2020. Language models are few-shot        Burch, and Douglas Eck. 2020. Automatic detec-
+  learners. Advances in neural information processing      tion of generated text is easiest when humans are
+  systems, 33:1877–1901.                                   fooled. In Proceedings of the 58th Annual Meet-
+                                                           ing of the Association for Computational Linguistics,
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin,          pages 1808–1822, Online. Association for Computa-
+  Maarten Bosma, Gaurav Mishra, Adam Roberts,              tional Linguistics.
+Daniel Jurafsky and James H. Martin. 2000. Speech         Clara Meister, Tiago Pimentel, Gian Wiher, and Ryan
+  and Language Processing: An Introduction to Nat-          Cotterell. 2022a. Typical decoding for natural lan-
+  ural Language Processing, Computational Linguis-          guage generation. CoRR, abs/2202.00666.
+  tics, and Speech Recognition, 1st edition. Prentice
+  Hall PTR, USA.                                          Clara Meister, Gian Wiher, Tiago Pimentel, and Ryan
+                                                            Cotterell. 2022b. On the probability–quality para-
+Daniel Kang and Tatsunori B. Hashimoto. 2020. Im-           dox in language generation. In Proceedings of the
+  proved natural language generation via loss trunca-       60th Annual Meeting of the Association for Compu-
+  tion. In Proceedings of the 58th Annual Meeting           tational Linguistics (Volume 2: Short Papers), pages
+  of the Association for Computational Linguistics,         36–45, Dublin, Ireland. Association for Computa-
+  pages 718–731, Online. Association for Computa-           tional Linguistics.
+  tional Linguistics.
+                                                          Mehryar Mohri and Brian Roark. 2006. Probabilistic
+S. Katz. 1987.      Estimation of probabilities from       context-free grammar induction based on structural
+  sparse data for the language model component of a        zeros. In Proceedings of the Human Language Tech-
+  speech recognizer. IEEE Transactions on Acoustics,       nology Conference of the NAACL, Main Conference,
+  Speech, and Signal Processing, 35(3):400–401.            pages 312–319, New York City, USA. Association
+                                                           for Computational Linguistics.
+Wouter Kool, Herke Van Hoof, and Max Welling. 2019.
+ Stochastic beams and where to find them: The             Moin Nadeem, Tianxing He, Kyunghyun Cho, and
+ Gumbel-top-k trick for sampling sequences with-           James Glass. 2020. A systematic characterization of
+ out replacement. In Proceedings of the 36th In-           sampling algorithms for open-ended language gen-
+ ternational Conference on Machine Learning, vol-          eration. In Proceedings of the 1st Conference of the
+ ume 97 of Proceedings of Machine Learning Re-             Asia-Pacific Chapter of the Association for Compu-
+ search, pages 3499–3508. PMLR.                            tational Linguistics and the 10th International Joint
+                                                           Conference on Natural Language Processing, pages
+Yang Liu and Mirella Lapata. 2019. Text summariza-         334–346.
+  tion with pretrained encoders. In Proceedings of
+  the 2019 Conference on Empirical Methods in Nat-        Ian Osband, Zheng Wen, Seyed Mohammad Asghari,
+  ural Language Processing and the 9th International         Vikranth Dwaracherla, Morteza Ibrahimi, Xiuyuan
+  Joint Conference on Natural Language Processing            Lu, and Benjamin Van Roy. 2022. Epistemic neural
+  (EMNLP-IJCNLP), pages 3730–3740, Hong Kong,                networks. arXiv preprint arXiv:2107.08924.
+  China. Association for Computational Linguistics.
+                                                          Ben Peters, Vlad Niculae, and André FT Martins. 2019.
+Andre Martins and Ramon Astudillo. 2016. From
+                                                            Sparse sequence-to-sequence models. In Proceed-
+  softmax to sparsemax: A sparse model of atten-
+                                                            ings of the 57th Annual Meeting of the Association
+  tion and multi-label classification. In International
+                                                            for Computational Linguistics, pages 1504–1519.
+  conference on machine learning, pages 1614–1623.
+  PMLR.
+                                                          Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+Clara Meister, Afra Amini, Tim Vieira, and Ryan Cot-        John Thickstun, Sean Welleck, Yejin Choi, and Zaid
+  terell. 2021a. Conditional Poisson stochastic beams.      Harchaoui. 2021. Mauve: Measuring the gap be-
+  In Proceedings of the 2021 Conference on Empiri-          tween neural text and human text using divergence
+  cal Methods in Natural Language Processing, pages         frontiers. In Advances in Neural Information Pro-
+  664–681, Online and Punta Cana, Dominican Re-             cessing Systems, volume 34, pages 4816–4828. Cur-
+  public. Association for Computational Linguistics.        ran Associates, Inc.
+
+Clara Meister and Ryan Cotterell. 2021. Language          Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+  model evaluation beyond perplexity. In Proceed-           Dario Amodei, Ilya Sutskever, et al. 2019. Lan-
+  ings of the 59th Annual Meeting of the Association        guage models are unsupervised multitask learners.
+  for Computational Linguistics and the 11th Interna-       OpenAI blog, 1(8):9.
+  tional Joint Conference on Natural Language Pro-
+  cessing (Volume 1: Long Papers), pages 5328–5339,       Marco Tulio Ribeiro, Tongshuang Wu, Carlos Guestrin,
+  Online. Association for Computational Linguistics.       and Sameer Singh. 2020. Beyond accuracy: Be-
+                                                           havioral testing of NLP models with CheckList. In
+Clara Meister, Tiago Pimentel, Patrick Haller, Lena        Proceedings of the 58th Annual Meeting of the Asso-
+  Jäger, Ryan Cotterell, and Roger Levy. 2021b. Re-        ciation for Computational Linguistics, pages 4902–
+  visiting the Uniform Information Density hypothe-        4912, Online. Association for Computational Lin-
+  sis. In Proceedings of the 2021 Conference on Em-        guistics.
+  pirical Methods in Natural Language Processing,
+  pages 963–980, Online and Punta Cana, Domini-           Maxat Tezekbayev, Vassilina Nikoulina, Matthias
+  can Republic. Association for Computational Lin-         Gallé, and Zhenisbek Assylbekov. 2021. Speeding
+  guistics.                                                up entmax. CoRR, abs/2111.06832.
+Jason Wei, Clara Meister, and Ryan Cotterell. 2021. A     that has zero probability under R (and so we move
+   cognitive regularizer for language modeling. In Pro-   off the support of R for future generation.) the
+   ceedings of the 59th Annual Meeting of the Associa-
+                                                          third term is the words that were correctly allowed:
+   tion for Computational Linguistics and the 11th In-
+   ternational Joint Conference on Natural Language                       X
+   Processing (Volume 1: Long Papers), pages 5191–                             |R(x) − Ut (x)|.           (13)
+   5202, Online. Association for Computational Lin-                         SR ∩A
+   guistics.
+                                                          In this case, Ut (x) may be an under or overesti-
+Sean Welleck, Ilia Kulikov, Jaedeok Kim,                  mate of R(x). The last term is the words that were
+  Richard Yuanzhe Pang, and Kyunghyun Cho.
+                                                          correctly truncated:
+  2020. Consistency of a recurrent language model
+  with respect to incomplete decoding. In Proceed-             X                        X
+  ings of the 2020 Conference on Empirical Methods                   |R(x) − Ut (x)| =       |0 − 0|    (14)
+  in Natural Language Processing (EMNLP), pages                 SR ∩Ā                       SR ∩Ā
+  5553–5568.
+                                                          which is identically zero.
+A     Notes                                                  To form our support-weighted total variation
+                                                          metric, we took the first two terms, which are in-
+A.1    Support-weighted total variation
+                                                          terpretable and each exactly specifies one of the
+We introduce new notation just for this section, to       two desiderata from a truncation algorithm: main-
+present support-weighted total variation in gener-        taining the variety of R, and not generating a word
+ality. Recall that the total variation distance be-       that R wouldn’t generate. However, in different
+tween discrete distribution R over space V and dis-       use cases, one or the other may be more crucial;
+crete distribution Ut , the result of truncation with     hence we give each its own hyperparameter, βvar
+allowed set A ⊆ V from a discrete distribution U          and βsup , to arrive at our metric,
+over V , is                                                                            X
+                X                                               TVS (R, Ut ) =βvar            R(x)
+                    |R(x) − Ut (x)|.              (9)
+                                                                                         x∈SR ∩Ā
+                x∈V                                                                        X
+                                                                                 +βsup              Ut (x).      (15)
+Denoting the support of R as SR , we can partition
+                                                                                         x∈SR ∩A
+V into four sets:
+                                                          A.2     Analysis of η-sampling
+                      SR ∩ Ā
+                                                          The purpose of this analysis is to show that if one
+                      SR ∩ A                              assumes our smoothing model, then an η-sampling
+                      SR ∩ A                              approximates an algorithm that avoids sampling
+                      SR ∩ Ā                     (10)    from outside the support of the true distribution
+                                                          while minimilly truncating the distribution.
+We split the sum of the total variation distance into        Consider a conditional distribution from a lan-
+these four terms.                                         guage model under our model, Pθ (Xi | x<i ). Con-
+  The first represents the words that are in the          sider an allowed set Ax<i defined via a probability
+support of R but not in the allowed set of Ut :           threshold, A = {x | Pθ (x | x<i ) > η ∗ }, where η ∗
+      X                         X                         is defined as
+           |R(x) − Ut (x)| =          R(x),     (11)                        (1 − λ̄)(1 + δ)
+                                                                η ∗ = min
+                                                                                                           
+                                                                                            , α exp(−hx<i ) }.   (16)
+      SR ∩Ā                    SR ∩Ā                                             V
+                                                           In this case, it is guaranteed that x ∈ Sx∗<i , since
+since Ut (x) = 0 if x 6∈ X . This exactly represents
+                                                          η ∗ represents the maximum probability of a word
+the total probability mass that was lost from R. The
+                                                          whose probability stems entirely from the smooth-
+second term represents the words that are not in the
+                                                          ing distribution.
+support of R but were allowed:
+                                                             If one sets a lower probability threshold η 0 =
+                                                          η ∗ − ψ for some ψ > 0 when computing the al-
+      X                         X
+            |R(x) − Ut (x)| =         Ut (x),    (12)
+                                                          lowed set, then under our model, there can be a
+      SR ∩A                     SR ∩A
+                                                          conditional distribution such that x 6∈ Sx∗<i , and
+since R(x) = 0 if x 6∈ SR . This exactly represents       Pθ (x | x<i ) > η 0 . Such an x would be incorrectly
+the total probability that we sample a word from Ut       allowed.
+ Method \Model      small     med      large       XL     B     More Experimental Details
+ Top-p                0.9     0.89       0.95      0.95
+ Typical             0.9        0.9     0.92      0.92
+                                                          B.1    Hyperparameters
+ -sampling       0.0006    0.0009    0.0003    0.0003    The MAUVE-maximizing hyperparameters for
+ η-sampling        0.002    0.0006    0.0006    0.0003
+                                                          each truncation sampling algorithm for each model
+Table 5: Best-performing hyperparameters according        are provided in Table 5.
+to MAUVE from experiments in Section 5.1.
+                                                          B.2 5-gram model
+                                                          For our small demo demonstrating the behavior
+                                                          of smoothed n-gram models, we trained a 5-gram
+                                                          model on 10,000 documents from The Pile (Gao
+   Similarly, if one sets a higher probability thresh-    et al., 2021). We smoothed the model with the
+old η 0 = η ∗ + ψ for some ψ > 0 when computing           uniform distribution.
+the allowed set, then under the model, there can be
+a conditional distribution such that x ∈ Sx∗<i , and      B.3    Amazon Mechanical Turk Details
+Pθ (x | x<i ) ∈ (η, η 0 ). Defining the allowed set       To provide more transparency into our human stud-
+with η 0 , we truncate x, which is unnecessary, since     ies, we provide the form that was shown to human
+words in Sx∗<i have probability at least η under the      annotators for both of our studies. The (similar) in-
+language model.                                           terfaces shown for Study 1 and Study 2 are shown
+                                                          in Figure 5 and Figure 6, respectively. We random-
+   This argument has considered truncation algo-          ize the ordering of presentation of the methods’
+rithms that specify their allowed set as every word       generations (note that the forms say “Option 1”
+in V with LM probability above a threshold, show-         and “Option 2”.)
+ing that setting the threshold as η ∗ guarantees (un-         Of the 59 unique workers, 44 unique workers
+der our model) that we sample from the support of         participated in study 1, and 36 unique workers par-
+the true distribution without unnecessarily truncat-      ticipated in study 2.
+ing too much. We now consider allowed set defined             We follow Pillutla et al. (2021) in manually fil-
+by algorithms other than probability thresholds. Let      tering the WebText prompts that go into our human
+the allowed set defined according to the η ∗ thresh-      study. Webtext is noisy, and not all prompts are
+old be A∗x<i . Consider an allowed set Ax<i defined       clearly natural language. Our manual filtering of
+by another truncation sampling algorithm (which           prompts led to 36 rejected prompts (of 146 con-
+may not define it via a probability threshold like. If    sidered) due to quality for study 1. Our manual
+Ax<i = A∗x<i , then the two algorithms are indistin-      filtering of prompts led to 100 rejected prompts (of
+guishable for this prefix. Otherwise, if x ∈ Ax<i         402 considered) due to quality for study 2. This
+and x 6∈ A∗x<i , then x may be outside the support        is compared to rejecting 3169 of 5000 prompts
+of the true distribution, and should have been trun-      due to quality in the original MAUVE paper; we
+cated. And if x ∈ A∗x<i and x 6∈ Ax<i , then x was        attempted to minimally filter while guaranteeing
+unnecessarily truncated.                                  that prompts were natural language. Our kept and
+                                                          filtered prompts are available in our codebase.
+   When using our η-sampling algorithm, we nei-
+ther know the true hyperparameters, nor do we have
+access to the true distribution conditional entropy,
+so η-sampling only approximates this. Specifi-
+cally, we set the hyperparameters of η-sampling
+via search on the task of interest, and we use the
+observed LM entropy instead of the true distribu-
+tion entropy in computing the relative probability
+threshold. In practice, one wants to set a threshold
+of truncation based on the needs of the task and the
+tolerance for error, so a threshold that perfectly ex-
+cludes words outside the true distribution support
+may not be optimal for the task of interest anyway.
+Figure 5: The interface shown to human annotators for Study 1.
+
+
+
+
+Figure 6: The interface shown to human annotators for Study 2.
+

@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 101,
+ "firstTs": "2026-09-12T01:18:42.152Z",
+ "lastTs": "2026-09-12T01:23:58.577Z",
+ "tools": {
+  "Bash": 19,
+  "Read": 11
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The shipped rows are CONFIRMED verbatim against the skeleton. Two reads remain, independent of each other: the saved addenda 6–12 text and MOVE-GRAMMAR §1.4.1 (the thread).",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "acc1b6f00b11f32f8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-acc1b6f00b11f32f8.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

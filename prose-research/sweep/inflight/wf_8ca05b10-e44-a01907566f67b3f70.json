@@ -1,0 +1,25 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 177,
+ "firstTs": "2026-09-10T04:06:44.065Z",
+ "lastTs": "2026-09-10T04:27:35.786Z",
+ "tools": {
+  "Bash": 44,
+  "Read": 4,
+  "Write": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/entailment/stressors.refute.md"
+ ],
+ "lastAssistantText": "Dock clean at `f2da5a3ee` (zero porcelain lines), packet written (68,095 bytes). Returning the structured verdicts.",
+ "run": "wf_8ca05b10-e44",
+ "agent": "a01907566f67b3f70",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_8ca05b10-e44/agent-a01907566f67b3f70.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 87,
+ "firstTs": "2026-09-09T16:37:26.056Z",
+ "lastTs": "2026-09-09T16:48:24.317Z",
+ "tools": {
+  "Bash": 23
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "er nineteen metrics are PLAUSIBLE-by-construction (two sentences per wording, both 8–30 words, `neighbourVariation` hand-placed in 0.40–0.70, no rare-shape punctuation, no participial or `There is` opener, no abstract-noun or pronoun closer, no repeated opener, no triad) and are the gate's to score.",
+ "run": "wf_183dda09-702",
+ "agent": "af80dceac7dbc9850",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_183dda09-702/agent-af80dceac7dbc9850.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

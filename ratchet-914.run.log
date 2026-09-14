@@ -1,0 +1,12 @@
+  probe: load=2.74 workers=0 streak=1 waited=0s
+  probe: load=2.50 workers=0 streak=2 waited=60s
+  probe: load=2.23 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=3c640f58f57ac9b1a042c9c2aafabc237e9b35e8
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED (E4, §914): totalFiles 2491 -> 2497 (+6: the six INSTR-912 tests/lint walkers — institutionTable, proseEntryContradiction, proseMeasures, proseMoveGrammar, proseRegisterLoaders, proseWiringCensus), entries 3 unchanged (no owed-ledger car; no banked row moves), totalTests REFUSED in advance — this run derives it (the lighting census credits +72 titles since §913, a hint not a prediction); NO ceiling(s) HELD line may print — a HELD line is a STOP
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 2690 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] baseline updated: 3 failing test(s) remain, 0 removed.
+TRUE_EXIT=0
+MEASURED: totalTests=32173 totalFiles=2497 entries=3
+RATCHET_PORCELAIN_POST=[1]

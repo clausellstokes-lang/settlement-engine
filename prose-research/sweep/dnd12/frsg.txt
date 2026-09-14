@@ -1,0 +1,1790 @@
+Forgotten Realms Style Guide 
+The following guidelines are true for the Forgotten Realms, the world in which most products are 
+set. 
+Tone 
+The Forgotten Realms is a hopeful setting. The good guys will eventually win. This hopeful tone 
+sets the Forgotten Realms apart from settings like Greyhawk (which is cynical) and Dragonlance 
+(which is a setting of romance and tragedy). While not every moment of a story or image in art 
+should be hopeful (the villains need their time in the spotlight, and bad things do happen), keep this 
+tone in mind. 
+Replace Your Divots 
+Stories should leave the Forgotten Realms as they found them. (Pack it in. Pack it out.) Stories set in 
+the Forgotten Realms should not definitively destroy or irrevocably change locations, people, gods, 
+planes, races as a whole, or other established elements of the setting or brand without special 
+dispensation. That doesn’t mean that stories can’t have high stakes with important things in 
+jeopardy. Players of a D&D game have the option of failure or of causing the death or destruction of 
+important elements of the IP, but there must always be the option of things being restored to order. 
+Don’t Whitewash the Realms 
+It’s easy to fall into the trap of making every character have white skin. Most models for fantasy 
+have done so. Lord of the Rings didn’t have anyone with anything other than white skin, and 
+besides, elves, dwarves, halflings, and gnomes are white, right? 
+ No. That’s not right.  
+ In fact, quite the opposite has been true for a long time in the Forgotten Realms but art has failed 
+to consistently and appropriately represent the people of the Forgotten Realms. 
+ Sun Elves. Sun elves have bronze skin. They look well-tanned all the time. Some have blond hair. 
+Many have black hair. 
+ Wood Elves. These people have coppery skin tinged with green. Their hair is brown or black. 
+ Wild Elves. Their skin is dark brown, and their hair ranges from black to light brown. 
+ Gold Dwarves. Gold dwarves have black hair and brown skin.  
+ Rock Gnomes. Their skin ranges from a light brown through white to a very light gray. 
+ Strongheart Halflings. Strongheart halflings are dusky skinned with brown or black hair (think 
+people from India for tone and color ranges). 
+ Humans. The Forgotten Realms is a huge world with many earth analogs. Turmish, Tashluta, and 
+Chult provide sources of humans with black skin and features. Kara-Tur provides all the Asian 
+ethnicities (people from Wa and Kozakura look like folk from Japan, Koryo has folk who look like 
+Koreans, and so on). Calimshan, Zakara, and Anauroch give us various Arab ethnicities. People from 
+Amn and Tethyr look like Spaniards. There are even people who look like Eskimos and Mayans. 
+Basically, any human race or ethnicity on earth has a home in the Forgotten Realms. Thayans and 
+Mulhorandi of the upper classes have yellow/sallow skin (not Asian but actually yellow, like people 
+who are extremely jaundiced). 
+ It’s important to note that such folk shouldn’t be relegated to their home regions either. When 
+you set something in Waterdeep, the most cosmopolitan city in the world, there absolutely should 
+be humans from all over the Realms and various ethnicities in Waterdavian dress. Places that might 
+seem less cosmopolitan might actually have more reason for folk of other skin colors. Cormyr 
+
+===PAGEBREAK===
+
+seems like a Camelot analog, but it’s very near Turmish, and the Old Empires (analogs of Egypt, 
+ancient Greece, and Sumer) are a boat ride away. 
+ Lastly, although someone who is not white might come from a culture different from the area 
+where your project is set, that does not mean that the person must seem like a foreigner. For 
+instance, black people from Turmish, Tashluta, and Chult have lived in Waterdeep and the North for 
+decades (if not centuries) and thus they can dress and speak as natives. 
+Gender Roles 
+As a rule, males and females should be depicted in equal measure and doing all the same jobs in 
+equal status regardless of the race or culture. The woman of the house is just as likely to go to war 
+as the man. Avoid clichés that reinforce sexist stereotypes about women: the damsel in distress, the 
+sexy barmaid, the hooker with the heart of gold, the slinky Catwoman-like thief, the woman who 
+uses enticement to sex as “empowerment,” and so on. 
+ There are two exceptions: orcs and Northlanders (the Viking types, not just people who live in the 
+North). 
+ Orcs: Orc females remain behind with the young when orcs go to war or raiding. It’s a 
+misogynistic culture. 
+ Northlanders: Northlanders expect their women and children to remain at home and not be seen 
+by outsiders (meaning anyone not of their clan). In the home, men and women do all the same 
+work—both men and women weave, cook, brew, and tend to animals—but women are expected to 
+stay home when men go fishing or raiding. 
+Sex and Sexuality 
+Depictions of sex and romance between characters should be rare in D&D stories. Novels aside, 
+D&D tends to be like an action movie without any love interests. If sex, sexual orientation, or gender 
+identity does need to be portrayed, here are the guidelines: 
+• Keep it PG. Avoid topics such as rape and molestation. 
+• Homosexuality and bisexuality are just as valid as heterosexuality and should not be depicted as 
+negative, for humor, or using stereotypes. 
+• People can have gender identities other than their physical gender, but this should not be 
+depicted as negative, for humor, or using stereotypes. 
+Violence and Gore 
+Dungeons & Dragons has violence at its core, and blood and gore will often be appropriate. As a rule 
+of thumb, keep it PG. Occasionally more gore will be called for by the subject matter (gnolls 
+decorate conquered places with slaughtered remains), but ask before you take gore into the R-rated 
+range. 
+Technology 
+While often described as Medieval fantasy, D&D has a mix of technologies from various eras. In the 
+Forgotten Realms, different locations and cultures have access to different technologies, but large 
+cities in the North generally have access to the technologies of the Renaissance and before: printing 
+presses, movable type, hourglasses (called “sandglasses”), magnifying glasses, clocks (large ones), 
+telescopes, spectacles, paper, windmills, watermills, water screws, sewers, running water (mostly 
+in nobles’ houses), fountains, and viaducts.  
+
+===PAGEBREAK===
+
+Gears, Gadgets, Clockwork, and Automatons 
+The islands of Lantan, worshipers of Gond (god of technology), and certain rock gnomes create more advanced 
+items of technology. When depicting these things, think more in terms of wood and canvass than metal and bolts. 
+These items should be more like something Leonardo Da Vinci would make, not Victorian-era steampunk.  
+ 
+Guns and Explosives 
+The Forgotten Realms has smokepowder, which is basically like gunpowder. Its creation is a secret known to only a 
+few, and it is primarily used for fireworks. People do not use guns or cannons. Smokepowder is not used as an 
+explosive except in extremely rare circumstances when justified by a story link to a smokepowder source.  
+Magic Items 
+Unlike past editions, magic items of all kinds have specific appearances that do not change. A potion 
+of healing or a vorpal sword always looks the same regardless of who made it. Watch for magic item 
+descriptions and check them against the item’s appearance in the Dungeon Master’s Guide. If the 
+item is not in that book, request a description from us.  
+Races 
+Below are some important facts to keep in mind about the D&D races. There’s much more to know 
+about them in order to depict them properly, but these facts are often overlooked. 
+Elves 
+Elves live for centuries and any elf in a story is likely a couple centuries old at least. That means the 
+elf has lived through The Retreat, when elves largely left their traditional lands for Evermeet. Ergo 
+the elf in the story either elected to stay or came back to the world for some reason. Every elf 
+should have some gravitas and a history. 
+ There are several distinct subraces of elves that are different from those described in the Player’s 
+Handbook and Monster Manual. 
+ Moon. Moon elves are neither as woodsy as wood elves, nor as magically inclined as sun elves. 
+They are generally less aloof than sun elves and more willing to engage with other races than both 
+sun and wood elves. Moon elves are the most impulsive of the elf subraces, with a strong distaste 
+for complacency and isolation. 
+ Sun. Sun elves are the most magically inclined of the elf subraces. Their wizards have been 
+performing mighty feats of arcane magic for millennia. Sun elves are also the least inclined toward 
+nature and the wilderness. Although more inclined to protect and live with the natural world than 
+the typical human or dwarf, they have built great cities of stone in the past, and they commonly 
+shape and tame nature to suit their needs. 
+ Wood. Long ago, different types of elves were forced out of their homelands and became 
+wanderers, living together amid nature as they moved rather than building new cities. These 
+peoples blended, communicated, and created their own culture, becoming wood elves over the 
+generations. As various elven empires fell—and especially with the advent of the Retreat—wood 
+elves have resettled the lands abandoned by their cousins. They see themselves as protectors of 
+these ancient elven homelands, but they are protective of elven right to the place, not the buildings 
+of the past. They have lost the urge to build and replace nature with walls and palaces; even the 
+cities built by their elven kin seem to be foolish to the wood elves. The forest is the true home of the 
+elves, and those forests are what need protecting.  
+
+===PAGEBREAK===
+
+ Wood elves aren’t as winsome and flighty as their description in the Monster Manual and Player’s 
+Handbook describes. They are are calm, serene, and difficult to surprise. Their patience is legendary. 
+As a people wood elves are largely seen as level-headed and somewhat grim. Arousing strong 
+emotions in wood elves is not something that is easily done, although many do have a strong 
+aversion for large cities.  
+ Wood elves have a notable disinterest in the arcane arts. To a wood elf, the wizard's spells are 
+little different from the mason's castle walls or the tiller's plow—a means of controlling the natural 
+world, which is contrary to the common ethic of living in harmony with nature rather than trying to 
+dominate it that so many wood elves espouse. They do however, take a great interest in the nature 
+magic of druids and thus have more druids among them than any other elves except perhaps the 
+wild elves. 
+ Drow: Drow largely map to the material in the Monster Manual but the reason for their decent 
+into the Underdark is more complex (sun elves made a genocidal attack that destroyed an entire 
+dark elf empire, thus provoking the dark elves to ally with demons). They are also very matriarchal, 
+with males subordinate and downtrodden. 
+ Wild. Wild elves are almost never seen outside their forest homes in the hot south-central areas 
+of Faerûn (Chondalwood, the Forest of Amtar, the Shaar). Like the wood elves, wild elves lost their 
+empires millennia ago, but unlike the wood elves, the wild elves severed connections from their 
+elven cousins, becoming insular and savage. The wild elves were always close to nature, even more 
+so than other elves, but they have forgotten many of the high arts and lore of their people, choosing 
+stealth and survival over building and book learning. Wild elves are a quiet, withdrawn people who 
+neither like outsiders nor tolerate any offense to their person. They are quick to violence if 
+provoked. 
+ Avariel. Avariel are winged elves and extremely small in number, coming from just one 
+settlement in the world that is far to the north of the center of Faerûn (near Sossal). They should 
+not be used in stories. 
+Dwarves 
+There are two subraces of dwarves and the duergar (or gray dwarves). 
+ Shield. Like the elves, the shield dwarves lost their great empires and kingdoms, many having 
+fallen long ago. Now they live in the remnants of those grand empires or seek to discover and 
+rebuild old glories. They tend to be irascible and boisterous when happy, and dour when not. 
+ Gold. Gold dwarves never lost their greatness. Their mighty empire in the Great Rift has 
+weathered many dangers and endured. They come mainly from south-central Faerûn and thus are 
+often foreigners to the North drawn by the opportunity to claim great wealth. Gold dwarves are 
+typically flush with cash, privilege, and pride. 
+Halflings 
+There are two halfling subraces in the Forgotten Realms. 
+ Lightfoot: The folk of Faerûn are more familiar with the lightfoot halflings than with the 
+stronghearts, primarily because the lightfoots are the most numerous and widely traveled of all the 
+halflings. Nearly every human community of any size larger than a village has at least a few halfling 
+residents. When most Faerûnians think of halflings, the lightfoots are the people that most often 
+leap to mind. 
+ Lightfoots a naturally curious people, always wondering what might lie around the next bend or 
+what stories a new person might be able to tell them. While lightfoot halflings can be as dour or sad 
+as any other race, they certainly prefer to be happy and often bounce back from emotional setbacks 
+with surprising alacrity. 
+
+===PAGEBREAK===
+
+ Members of the lightfoot subrace wander out of an innate desire. It is not unknown for individual 
+lightfoot halflings or even entire families to decide that, after living in the same place for decades, 
+they want to move on to someplace else. They seem to experience a habitual need to see many 
+different places and enjoy a variety of experiences. 
+ Strongheart: Strongheart halflings have a culture unique in the world—a semi-nomadic lifestyle, 
+in which businesses, families, and even entire clans move freely and independently from place to 
+place. They have homes, farms, and towns that they have lived in for decades and even centuries, 
+but as a people they migrate around them according to time-honored schedules, treating them as 
+shared space. This fusion of wanderlust and stability is a source of wonderment and confusion for 
+visitors, who find it difficult to comprehend how a society can enjoy such seemingly whimsical 
+mobility while retaining any viable structure. For their part, most of the stronghearts cannot 
+understand why anyone would want to tie themselves permanently to any one community or 
+structure for their entire lives. 
+ Their strange duality of nature, consisting of a desire to move about freely with a liking for 
+permanent structures and settlements, has produced some unusual outlooks among the 
+stronghearts. Their viewpoint stresses cooperation above all other traits, and the ability to work as 
+a team is the most valued behavior in their lands. Cooperation transcends many boundaries, and 
+even strangers of whom the locals are suspicious can earn themselves considerable credit and 
+tolerance by demonstrating a willingness to cooperate 
+Gnomes 
+There are two subraces of gnomes on the surface and then the subterranean svirfneblin (deep 
+gnomes). Rock gnomes are tinkerers and alchemists (not steampunk scientists) as well as 
+illusionists and tricksters. They’re intellectuals with various quirks. Forest gnomes are reclusive 
+and peaceful woodsmen and animal lovers who use illusions to hide. They’re quiet and self-
+reflective. 
+ Gnomes never play a large role in history. They have not founded nations, nor do they build great 
+cities. They are not a numerous race, and indeed, they survive and thrive by keeping a low profile. 
+Avoiding the notice of larger folk obsessed with empires and mighty magic, gnomes have quietly 
+spread across the world in tiny settlements and hidden villages that often go completely unnoticed 
+by their neighbors. 
+ Gnomes sometimes play the role of intermediary between other races or peoples. Few count the 
+gnomes as their friends, but even fewer consider the gnomes their enemies. Gnomes rarely become 
+embroiled in war, remaining neutral in such things because wars are usually fought over goals 
+about which the gnomes care little, such as rights of commerce and settlement, or the drive to 
+achieve and wield power in the world at large. 
+ Rock Gnomes: When most people think of gnomes, they think of rock gnomes. Unlike their 
+reclusive cousins, the deep gnomes and the forest gnomes, rock gnomes are an inquisitive and 
+loquacious people. They are renowned throughout the world as technicians, alchemists, and 
+inventors. Yet most do not care much for living in larger cities, where their talents are in high 
+demand, and prefer the rolling hills of the countryside. But anywhere they find themselves, they 
+display an amazing zest for life and all the pleasures it holds. 
+ Rock gnomes are far friendlier and more outgoing than the other gnome subraces. They are well 
+known for their love of jokes and pranks, as well as their fondness for finely made things.  
+ Rock gnomes are generally optimistic. They view the world as a puzzle that the gods—in their 
+infinite wisdom—have laid out before them as the ultimate challenge, one that cannot ever be fully 
+met. It is their greatest joy to be involved in the unraveling of the mysteries of creation, an act they 
+feel brings them closer to the gods with each passing day. 
+ In their adolescence, rock gnomes are encouraged to dabble in as many different things as 
+possible. Eventually, each gnome finds something that truly intrigues him or her, fires the 
+
+===PAGEBREAK===
+
+imagination, and sets the gnome on the path of a career that may last the rest of the gnome’s life. 
+Almost every rock gnome had a passion for what she does for a living, which is one of the reasons 
+that they have such positive dispositions. 
+ While most gnomes are homebodies at heart, a number simply can’t resist the urge to go out into 
+the world to explore. Inquisitive by nature, gnomes often find themselves almost compelled to do 
+everything they can to learn about anything they want.  
+ Forest Gnomes: Forest gnomes are shy and elusive, shunning contact with other races except 
+when dire emergencies threaten their beloved homes. They know the secret names and languages 
+of the forest’s creatures, and can pass through their woodlands without leaving a trace. They often 
+befriend small animals, relying on them for information about threats that might infringe on their 
+lands. 
+ Forest gnomes are so reclusive that many times bigger people have “discovered” them, only to 
+find that the forest gnomes have been living nearby for centuries. Forest gnomes are so quiet and 
+painfully shy that they go to great lengths to avoid contact with others unless there is a great need 
+to break their silence. Whereas the rock gnomes are friendly and loquacious and the deep gnomes 
+are sullen and reserved, the forest gnomes are practically invisible, the wallflowers of the gnomes. 
+They have a great love for nature, particularly deep and quiet forests far from civilization. For this 
+reason, many people—including other kinds of gnomes—have never seen a forest gnome. Most 
+forest gnomes are extremely private, preferring to simply be left alone by other peoples. When 
+among their own kind, they are a bit less reserved.  
+ Forest gnomes maintain a strong tradition of instruction in magic, particularly illusions. While not 
+all forest gnomes have the knack for wizardry, generations of devotion to the craft has put magic in 
+their blood and all forest gnomes can craft minor illusions. In private they use this ability to amuse 
+one another with simple pranks and complicated games only possible with magic, but when danger 
+threatens forest gnomes work together to make illusions that hide their homes or mislead enemies. 
+ Svirfneblin: Svirfneblin, or deep gnomes, live amid the dangers of the Underdark deep beneath 
+the surface of the world in twisting warrens and sculpted caverns. They survive by virtue of their 
+stealth, watchfulness, and tenacity.  
+ Deep gnomes are gnarled and callused folk, with little fat at all on their wiry bodies. Their skin is 
+the color of the rocks among which they live, almost as if they sprang directly from the stones 
+themselves. They have dark gray eyes, tending toward black. Their hair is of a similar color, 
+although it’s only seen on the women, as the men are entirely bald and beardless. 
+ Svirfneblin keep to themselves out of fear of outsiders—a fear born from numerous poor 
+experiences with such people. To a deep gnome, the only people you can trust are other deep 
+gnomes from your village, and preferably from your family. All others are best avoided. With 
+strangers, most deep gnomes are reserved and suspicious, almost to a fault. However, when they 
+are alone with their own kind, they are friendly and respectful to each other. Few people from 
+outside a svirfneblin community have ever seen this more pleasant side of the deep gnomes. For 
+their part, the deep gnomes would be horrified to find themselves observed by outsiders, and they 
+find such a person staring at them—or even looking directly at them—quite rude. 
+ All gnomes pay homage to a pantheon of gnome deities led by the trickster-hero, Garl Glittergold, 
+but svirfneblin are most devoted to the Deep Brother, Callarduran. Legend has it that Callarduran 
+was the first to discover the beauty of gems, having picked up a rough stone and absentmindedly 
+rubbed it to smooth brilliance in his pocket. He went into a cave in pursuit of more, and the gnomes 
+who followed him became the svirfneblin. Deep gnomes still pursue gems of all types in their 
+tunneling, having particular regard for large emeralds, which with the blessings of their priests they 
+can enchant to summon earth elementals. 
+ 
+
+===PAGEBREAK===
+
+Half-Elves 
+Half-elves aren’t the diplomats described in the Player’s Handbook and Monster Manual. They are 
+instead individuals trapped between two worlds—human and elf—neither of which entirely 
+welcomes them. 
+ Except in a few places in Faerûn, half elves do not appear in great numbers. Each is the result of a 
+union between elf and human, but such relationships often come to sad ends as an elf outlives the 
+other parent or when cultural differences drive parents apart. Some half-elves are the result of 
+briefer encounters between elf and human or between two half-elves, but this is extremely rare.  
+ This means that although there might be similar themes of prejudice, tragedy, and of homes and 
+friends left behind in youth, the upbringing of each half-elf is unique, and the way in which the half-
+elf emphasizes the qualities of one parent race or the other differ. One half-elf might think and act 
+more like an elf due to being raised among them, while another might act more like a human, and 
+still another might act more elven than an elf in order to separate himself from the humans he grew 
+up with. 
+ Half-elves have at least one elven parent or grandparent, or two half-elven parents. To put it 
+another way, the child of a half-elf and a human will be human, unless the half-elf parent was the 
+child of a full-blooded elf. Unless a half-elven line marries into other elven or half-elven families, 
+their elf characteristics fade in a couple generations. On occasion elven traits can reappear in 
+otherwise human children born several generations later, but half-elves of such remote descent are 
+very rare. 
+ While elves and half-elves are respected and admired in many parts of Faerûn, humans in lands 
+where elves are not commonly encountered can be resentful of elven blood. Elves are graceful, 
+attractive, long-lived, mysterious, and skilled with mighty magic, and humans who do not know 
+them well can easily come to regard elves—and, by extension, half-elves—with envy and fear. In 
+places such as Silverymoon or the Dalelands, a half-elf’s race is nothing remarkable, and she faces 
+little or no bigotry. In lands where there is a long history of elven-human conflict, such as Tethyr or 
+Sembia, her elven blood marks her as different and dangerous, with all the fears and suspicions one 
+might expect. On the other hand, half-elves born in elven communities almost always experience 
+patronizing prejudice instead of fear. A half-elf will not live as long, nor be as nimble, and elves 
+expect half-elves to be unwisely brash and impatient. 
+ Most half-elves are a bit distant, used to being cast in the role of outsiders. Many half-elves 
+respond to the suspicions and slights of their human neighbors by staying well away from human 
+civilization, preferring a solitary life in the wildernesses of Faerûn. Others instead take up a life of 
+travel, never staying in one spot long enough for racial prejudices to distance them from the folk 
+around them. 
+Half-Orcs 
+Half-orcs are originally the product of a union between orc and human, or more rarely orc and elf or 
+half-elf. There are rare places where orcs and barbaric humans have lived in close association 
+where such unions might occur through mutual respect, but most half-orcs have the tragedy of rape 
+in their past. However, orc blood runs strong. It takes a few generations for orc blood to be so 
+diluted that a child might be born looking fully human, and even then, a sibling might appear to be a 
+half-orc. 
+ Whether by nurture or nature, half-orcs tend to be sullen and quick-tempered. Half-orcs have 
+uphill battles to fight when interacting with most other races. Among orcs they are considered 
+weak and cowardly by nature. Among others they are feared as violent and thought to be stupid. 
+Most half-orcs react this prejudice with anger. They make friends only with difficulty. Once trust is 
+established, it is often a fleeting thing that can be fractured with one misinterpreted comment. 
+
+===PAGEBREAK===
+
+Tieflings 
+Like half-orcs and helf-elves, tieflings are quite rare. But unlike both those races, tiefling blood 
+never thins. The child of any tiefling looks like a tiefling no matter how many generations ago an 
+ancestor has congress with a devil. All tieflings are visibly touched by the evil of the Nine Hells. 
+That’s not easy to live down. The conflict their heritage causes—within themselves and with 
+others—tends to define who they are. 
+Dragonborn 
+Except for Tymanther and the region around it, dragonborn are extremely rare. 
+NPC Races 
+When choosing a race for an NPC consider the story impact of the races. Any exceptional character might be of any 
+of the races noted above, but a shopkeeper, the local sage, or other inconsequential figures in a story should be 
+from a race common to the setting, which in most cases is a human, a halfling, a dwarf, or a rock gnome. Elves, 
+half-elves, half-orcs, forest gnomes, tieflings, and dragonborn all should have some story weight and not be simply 
+a choice for the sake of variety. 
+Classes 
+There a lot more to know about the various classes of D&D, but below are some elements to keep in 
+mind when depicting characters with a D&D class in the Forgotten Realms. 
+ Spellcasters in General: Except for extremely unusual circumstances (such as a college of 
+wizardry) spellcasters are individuals. They have personalities and personal stories and unique 
+spell lists. You shouldn’t encounter the same wizard stat block in an adventure used to represent 
+different wizards, for instance. 
+ Barbarians. The Forgotten Realms has cultures described as barbarians and D&D has the class 
+called barbarian, but they are not synonymous. People with the barbarian class are special warriors 
+even in barbarian tribes.  
+ Clerics. Clerics are special individuals gifted with divine power by a deity, but they don’t have the 
+gods on speed dial nor are the gods constantly watching their every move. Clerics of a deity can go 
+astray of a deity’s ethos or even betray their deity. Judgment of such infractions might be immediate 
+or saved until the afterlife, based upon the whim of the deity.  
+ Druids. Druids are not clerics by another name and do not devote themselves to a single deity. 
+(The only exception is druids of the Moonshaes, who worship the Great Mother, a deity embodied 
+by their islands.) Instead, druids (regardless of race) pay homage to the “First Circle,” which is a 
+pantheon of human gods that represent the basic elements of the natural world (Shar for night and 
+darkness, Selune for the moon, Silvanus for forests, Talos for storms, Kossuth for fire, and so on). 
+Druids from non-human races often pay homage to nature-related deities of their own as well, but 
+the power of druidic magic stems from the First Circle. Most druid characters should acknowledge a 
+circle of druids from which they originate, the circle being a group of druids that serves all the 
+druids that are part of it as a body of wisdom, lore, and news. 
+ Monks. Monks are not monastic priests in the Christian sense, but meditative martial artists in 
+the Eastern sense. Monks are rare in Faerûn and quite common in Kara-Tur. There are dozens if not 
+hundreds of orders of monks in Kara-Tur, but Faerûn hosts only a few. Most monks of Faerûn are 
+associated with a human religious order, acting as protectors of holy sites and sometimes as 
+enforcers or assassins. Some of the few Faerûnian monastic orders are Dark Moon, Shining Hand, 
+Yielding Way, Yellow Rose, and Sun Soul. 
+ Paladins. Paladins are warriors of unusual virtue and piety rewarded by a good god with divine 
+power. Paladins follow a common code of ethics but paladins of different deities emphasize 
+different aspects. (A paladin of Sune would emphasize aspects of courtly love and courtesy, 
+
+===PAGEBREAK===
+
+whereas a paladin of Tyr would be more concerned with justice and fair treatment of foes.) As with 
+clerics, paladins can go astray of their code, but paladins are typically judged more swiftly and 
+harshly by their gods. 
+ Rangers. Low-level rangers can be depicted like mountain men and wilderness guides. Once a 
+ranger has spellcasting, that ranger has been chosen by a nature deity and granted power. Rangers 
+with spellcasting should show devotion to a specific nature deity depending on the ranger’s 
+alignment (Malar, Shaundakul, Gwaeron Windstrom. Milikki, Silvanus, Eldath, Shialia). 
+ Sorcerer. The source of a sorcerer’s power should be a significant element of the character’s 
+story.  
+ Warlocks. Warlocks always have a patron and a bargain. Those things should be a huge part of 
+such a character and that character’s part in any plot. Ask for appropriate options for a patron and 
+details. Note that not all the Great Old One patrons mentioned in the Player’s Handbook are 
+appropriate to the Forgotten Realms. Of the ones mentioned, Ghaunadar, called That Which Lurks; 
+Kezef, the Chaos Hound, and Dendar, the Night Serpent, exist in Faerûn. 
+ Wizards. In addition to a spellbook, a wizard in the Forgotten Realms crafts a sigil that is the 
+wizard’s symbol and is used in various spells and rituals to represent the wizard. Also, it is 
+extremely rare for a wizard to have a familiar. 
+Game Terms in the World 
+Most game terms like “saving throw,” “level,” and so on are obviously not something people in the 
+world use. Below are some special notes about terminology where the distinction is less clear. 
+ Adventurer. “Adventurer” is a word that describes people of a certain occupation or lifestyle, 
+that being people who brave dangers to make their fortunes. It’s a broad term, not a specific one: 
+Just as a bodyguard or assassin is a type of mercenary, tomb robber and explorer are types of 
+adventurer. 
+ Barbarian. “Barbarian” is used for anyone thought to be barbaric, not just people who have the 
+class. Individuals who have the class and can therefor enter a battle rage are often referred to by 
+another name that sets them apart (berserker, dwarven battlerager, and so on). 
+ Bard. This word is reserved for people who have the bard class. They have magical powers that 
+regular minstrels, musicians, and singers lack. 
+ Class. “Class” is not a term anyone would use to refer to people that have a class in the game 
+sense. 
+ Cleric. A priest is anyone who devotes themselves to the service of a deity and/or the 
+maintenance of a shrine or temple (to one or more deities). A “cleric” is someone who is granted 
+spells by a particular deity. People in the world would call a cleric a priest, but they would not call a 
+priest without powers a cleric. 
+ Druid. A druid is always a member of the class. People do use the word “druid” to refer to them. 
+ Fighter.  People in the world use the word “fighter” like we do. It’s a word for someone who 
+fights; a boxer is a fighter. An adventurer who has the fighter class would likely refer to himself as a 
+warrior. 
+ Forgotten Realms. “Forgotten Realms” or “the Realms” is not a term people in the world know or 
+use. 
+ Mage. “Mage” is nonspecific a term used in the world to for arcane spellcasters. It most often 
+refers to wizards, but it can be used for sorcerers and warlocks. 
+ Monk. “Monk” is a term used like we use it. It refers both to people trained in a martial art at a 
+monastery setting (and therefor a member of the monk class), and it refers to members of a 
+religious order that have a European-style monastic lifestyle. 
+ Paladin. Paladins are all members of the paladin class. They are recognized as individuals imbued 
+with special powers. 
+
+===PAGEBREAK===
+
+ Ranger. Rangers are members of the ranger class, not merely woodsmen, mountaineers, or 
+survivalists. They are imbued with special powers. 
+ Sorcerer, Warlock, and Wizard. These terms are distinct and have separate meanings, referring 
+to members of the respective classes. However, to many people in the world they are synonymous. 
+Anyone with knowledge of the arcane arts knows the distinguishing elements, but to common 
+people, any of these terms might be ascribed to an arcane spellcaster. That said, the terms should be 
+used accurately when confusion might arise: An NPC’s dialog should not say “sorcerer” when in fact 
+the person to which the NPC refers is a warlock unless the intent is to confuse the audience. 
+Religion 
+Below are a few notes to keep in mind for depictions of religion in the Forgotten Realms. 
+ Polytheism. People in the Forgotten Realms are polytheistic. They worship and acknowledge 
+many gods for a variety of reasons. Various races and cultures favor some sets of gods over others, 
+but all acknowledge the existence of other deities than those they favor. 
+ Temples and Shrines. The temples of deities in the Forgotten Realms do not look like Christian 
+churches. They do not have pews. People do not attend Sunday service. The appearance of the 
+worship place of a deity or a number of deities will depend on the deities involved. Many deities do 
+not even have structures built for worshipers to go to (Eldath is honored at sacred ponds. Talos, 
+god of storms and natural disasters, does not typically have temples built in his honor.) 
+ Priests vs. Clerics. A priest is anyone who decides to dedicate themselves to honoring a deity and 
+maintaining the rites and traditions of the religion. Most temples and shrines are attended by 
+priests, not clerics. Clerics are holy warriors specially gifted by a god (or gods) with divine power. 
+That power has a purpose, and its rare that the purpose would be to tend to a building. 
+ Distant Gods. Although gods have walked the world in the past, they are now more distant and 
+unknowable. Stories can focus on the activities of the faithful of the deities and what they do in their 
+names, but should not focus on what the gods themselves are doing or what the gods want. 
+ 
+Formerly Dead Deities: Temples and the Faithful 
+With the Sundering ending in roughly the fall of 1487, it doesn't give the faithful of the returned deities a lot of 
+time to reassert themselves. So if there's a priest of Jergal or a paladin of Tyr in a story, that person is on the 
+vanguard of the faithful who return to the worship of the god. The person either felt the touch of the diety 
+personally, met someone who had who converted them, or heard stories of the Chosen of that deity during the 
+Sundering. 
+  Similarly, if there's a temple in a location that is dedicated to one of the newly returned deities, think about its 
+origin. It’s unlikely a group “kept the faith” for more than a century. If it is from a 3E or 2E source, then it might still 
+be abandoned, taken over by some other inhabitants, or used for the worship of other similar deities in the interim. 
+If it's a new creation for the setting, then the faithful might have taken over an old structure or it might be a new 
+building. 
+ Always check if a god was dead before the Sundering. Gods known to be alive at the start of the Sundering are 
+listed in the 4th Edition Forgotten Realms Campaign Setting, but that list doesn’t contain all deities that could be 
+alive (monster deities being the most obvious exception). Please ask if you’re not certain. 
+ 
+Time and the Calendar 
+The Faerûnian year is 365 days long. The year is divided into twelve months of thirty days—loosely 
+coinciding with the waxing and waning of Selune, the moon of Toril—and five annual holidays. In 
+lieu of weeks, each month is divided into three tendays, also known as rides. Once every four years, 
+
+===PAGEBREAK===
+
+Shieldmeet is added to the Calendar of Harptos as a “leap day” immediately following Midsummer 
+night. 
+ Particular days of the tenday have no special names. Instead, days of the tenday are denoted by 
+counting from the beginning of the tenday. For example, “first day,” “second day,” “third day,” and 
+so on (or alternatively “one-day,” “two-day” etc.). There is no concept of the weekend as a special 
+time when businesses close or people stop work. 
+ Days of the month are noted as numbers followed by the month name. For example, sages might 
+record a date as occurring on “1 Mirtul” or “27 Uktar” or “Midsummer.”  
+ Days are 24 hours long. 
+ Keeping Time. Most people do not keep track of time. The sun does that for them. They are 
+typically not aware of the concept of hours or minutes. People are accustomed to loose times like 
+“mid morning” or “nigh sunset.” If two people plan to meet at a particular time, they expect it to be 
+hazy and that someone might be waiting or arrive early.  
+ The concept of “hours” and “minutes” exists in places where wealthy people use clocks, but 
+mechanical clocks are often unrealiable and they are rarely set for exactly the same time. If a local 
+temple or civic structure has a clock, people refer to hours as “bells,” as in “I’ll meet you at seven 
+bells.”  
+Flora 
+All the normal earthly plants can be found on Toril, but there are some plants unique to the setting.  
+ Blueleaf. Recognizable by the eerie, gleaming blue color of their many-pointed leaves, blueleafs 
+(not “blueleaves”) bend in winds or under ice rather than breaking, often forming snow tunnels that 
+shelter winter travelers. Blueleafs grow close together in thick stands, reaching 40 feet in height but 
+rarely attaining thick trunks. 
+ Blueleaf wood is durable, and the sap and crushed leaves yield a vivid blue dye much favored in 
+cloak making in the North. When burned, it yields beautiful leaping blue flames (prized in inns and 
+The Calendar of Harptos 
+Earth Month Faerûn Month  Common Name 
+December Hammer Deepwinter (new year starts Hammer 1) 
+ Annual Holiday: Midwinter (Winter Solstice) 
+January Alturiak The Claw of Winter 
+February Ches The Claw of Sunsets 
+March Tarsahk The Claw of Storms 
+ Annual Holiday: Greengrass (Spring Equinox) 
+April Mirtul The Melting 
+May Kythorn The Time of Flowers 
+June Flamerule Summertide 
+ Annual Holiday: Midsummer (Summer Solstice) 
+ Quadrannual Holiday: Shieldmeet   
+July Eleasis Highsun 
+August Elient The Fading 
+ Annual Holiday: Highharvestide   
+September Marpenoth Leaffall 
+October Uktar (Autumn Equinox, 1st day) The Rotting  
+ Annual Holiday: The Feast of the Moon 
+November Nightal The Drawing Down 
+ 
+
+===PAGEBREAK===
+
+taverns as “mood” illumination for tale-tellers and minstrels). Cut blueleaf has a blue hue when 
+“green” and a gray-blue color when dried. 
+ Blueleaf is found all over the north. 
+ Duskwood. Duskwood trees grow straight and tall, reaching 60’ feet in height. Their trunks are 
+dark, smooth, and bare; all of their tiny branches are in a crown at the top of each tree. They have 
+slim silvery leaves. Their name comes from the dark, eerie appearance of stands of duskwoods. 
+Under their black bark is smoky grey wood that is as hard as iron, and resistant to fire (smoldering 
+rather than blazing, so that they survive many forest fires and the axes of woodcutters seeking 
+firewood). It could be found growing all over Faerûn. They gow in densely packed groves which 
+ended up looking a bit eerie.  
+ Chuichu. Chuichu trees are found mainly in the forests of the Dalelands. They resemble miniature 
+hickories, about three feet tall. Chuichu trees produce cone-shaped yellow berries that dissolve in 
+water to make a delicious, cinnamon-flavored beverage. 
+ Helmthorn. A vinelike ground shrub that sometimes cloaks other bushes and dead trees, 
+helmthorn has dark, waxy green leaves and bristling black thorns. As long as human hands, these 
+sharp, durable thorns are often used as crude needles or dart points. Helmthorn berries are indigo 
+in hue, edible (tart in flavor), and often harvested even when frozen or withered for use in 
+winemaking. Helmthorn is very hardy and grows throughout Faerûn, providing food for many. 
+ Shadowtop. The soaring giants of Faerûnian forests, shadowtops can grow 2 feet a year and top 
+out at 90 feet. A full-grown shadowtop flares out to a diameter of 10 feet or more at its base, its 
+trunk surrounded by many pleatlike ridges. Shadowtops are named for the dense clusters of 
+feathery leaves at the tops of their trunks. Shadowtop leaves are irregular in shape and have copper 
+undersides and deep green upper surfaces. 
+ Shadow-wood is fibrous and tough, but unsuitable for carving or structural work because under 
+stress it splits down its length into splayed fibers. These fibers are valued in rope making (a few 
+added to the twist improves the strength and durability of a completed coil) and burns slowly but 
+cleanly, generating a very hot fire with little smoke. This makes it ideal for cooking. 
+ Shadow-wood is much used in the making of magical staffs, rods, and wands. Shadowtops are 
+found in all humid areas across Faerûn. 
+ Silverbark. Silverbark trees flourish in wet ground and deep shadowy ravines. They have thin 
+trunks three to four inches in diameter, are straight, and seldom grow more than a dozen feet tall—
+serving the poor as poles, staves, and (with whittled points hardened in a slow fire) spears or 
+battle-stakes. Silverbark is plentiful and grows in thickets. Its silvery bark crumbles and pulls loose 
+easily; an exposed tree dries out thoroughly, becoming brittle and weak, unsuitable for lance shafts, 
+fence rails, or building work, within a year. Its large, oval, pointed-tipped leaves are deep red 
+(purple at the roots), waxy, and durable; they are sometimes used to wrap small game, or to carry 
+twigs. 
+ Suth. Suth are graybark trees with olive-green leaves. They grow almost horizontally and then 
+double back to angle in another direction. If a few suth trees grow together, their branches 
+intertwine until they are inextricably entangled, forming a screen or wall barring passage to all 
+things that can’t fly over the tangled trees or scuttle under their lowest branches. Suth leaves are 
+long, soft, and fluffy, but spike-ended. 
+ Suth wood is very hard and durable, so hard that it’s difficult to work without the finest tools. 
+Thin sheets of this wood retain astonishing strength for decades, and thus are favored for use in 
+book covers. Suth is also the preferred wood for shields since it never shatters and doesn’t catch 
+fire if soaked in water before battle. A crushing blow might crack a suth-wood shield but won’t 
+cause it to fly apart. Suth wood is naturally a reddish brown. 
+ The name of this tree may be a corruption of the word “south.” Suth are found along the edges of 
+the Shaar, in the woods of Chondath, and farther south in Faerûn. 
+
+===PAGEBREAK===
+
+ Weirwood. Weir trees resemble oaks but have leaves that are brown (with a silver sheen) on 
+their uppers and velvety black beneath. If undisturbed, weir trees grow into huge, many-branched 
+forest giants. Weirwood won’t ignite in normal (non- magical) fire and is resilient and durable. It’s 
+favored in the making of musical instruments because of the unmistakable warm, clear tone it 
+imparts. Weirwood is a dark brown when dried. 
+ Weirwood can be used as a replacement for oak or holly in any spell. It grows throughout Faerûn 
+but is very rare. Most trees are now found deep in large forests and actively protected by dryads, 
+treants, druids, and rangers. 
+ Zalantar. Often called blackwood in the North because of its jet-black wood and bark, the 
+zalantar tree has a central root and eight or more trunks that branch out from the root at ground 
+level like the splayed fingers of a hand. The trees may reach 60 feet in height, but are usually half 
+that. Their leaves are white through beige. 
+ Zalantar wood is strong yet easily worked and sees much use in southern buildings and the 
+making of wagons, litters, and wheels. Southern wizards and sorcerers use durable and handsome 
+zalantar wood almost exclusively in the making of rods, staffs, and wands. 
+ This subtropical species is rarely seen north of the Shaar. It is plentiful along the shores of Chult 
+and the southern coasts of Faerûn and seems to grow in any terrain short of mountainous. 
+Human Languages 
+There are easily over two dozen human languages and various human dialects. But because pretty 
+much everyone speaks Common, and to make consuming a Forgotten Relams product easier, it’s 
+likely best that an electronic game, film, novel, and even D&D RPG product ignores that another 
+language is spoken unless it is using the idea to inform a spoken accent, or a language barrier is for 
+some reason desirable.  
+ Below is a sampling of the various human languages and where you can find them spoken. 
+LANGUAGE  AREA OR PEOPLE 
+Aglarondan Aglarond 
+Akûrian Samarach, Thindol, Tashluta, 
+the Black and Mhair Jungles, 
+Nanubel, Mhairhetel 
+Alzhedo Calimshan 
+Bothii Uthgardt barbarians, 
+Hartsvale 
+Chessentan   Chessenta 
+Chondathan Central Faerûn from the 
+Sword Coast to the Sea of 
+Fallen Stars (Cormyr, 
+Dalelands, Waterdeep, Sembia, 
+and so on) 
+Chultan Chult 
+Damaran Damara, Vaasa 
+Dambrathan Dambrath 
+Durpari Durpar 
+Halruaan Halruaa 
+Illuskan The North (The Savage 
+Frontier) 
+Koryo Koryo 
+Kozakuran Kozakura 
+Lantanese Lantan 
+Laothan Malatra 
+Midani  Zakhara, Bedine nomads of 
+Anauroch 
+Mulhorandi Mulhorand 
+Nexalan Maztica 
+Rashemi Rashemen 
+Reghedjic Reghedmen (Icewind Dale 
+Barbarians) 
+Shaaran The Shaar 
+Shou Shou Lung, T'u Lung, Ra-Khati, 
+Tabot 
+Tashalan  Tashalar 
+Thayan Thay 
+Thorasta Western Heartlands, Baldur’s 
+Gate 
+Tuigan Hordelands 
+Turmic Turmish 
+Uluik Ice Hunters, Ulutiun 
+Untheric Unther 
+Wa-an Wa 
+Waelan Moonshae Isles 
+
+===PAGEBREAK===
+
+The Common Tongue 
+All speaking peoples, including the humans of various lands, possess a native tongue. In addition, all humans and 
+many nonhumans speak Common as a second language. Common grew from a kind of pidgin Chondathan and is 
+most closely related to that language, but it is far simpler and less expressive. Nuances of speech, naming, and 
+phrasing are better conveyed in the older, more mature languages, since Common is little more than a trade 
+language. 
+ The great advantage of Common, of course, is its prevalence. Everybody in the Heartlands speaks Chondathan, 
+and thus speaks Common well enough to get by in any but the most esoteric conversations. Even in remote areas, 
+just about everybody knows enough Common to speak it badly.  
+ For the purposes of electronic games and film, it’s simplest to assume that Common is English, and that 
+everyone uses it as their everyday language. Other languages might be used to inform an accent or provide a 
+necessary language barrier. 
+Alphabets 
+The language symbology of earth—be it the Roman letters of English, the hieroglyphs of Egypt, or 
+kanji—does not exist in the Forgotten Realms. There are alalogous written languages of symbol for 
+many cultures (Egyptian, Chinese, Mayan, and so on), but they are not the same. Even though that is 
+true, for electronic games and other products where consumers must be able to read elements, you 
+should probably use English. In any event, none of the fantasy languages have been developed into 
+true languages (although we do have some words and phrases worked out for many of them). 
+ Thorass: Thorass is the direct ancestor of today’s Common tongue as a spoken language. Though 
+no one speaks Thorass anymore, its alphabet survives as the alphabet of Common and many other 
+tongues. 
+ Espruar: Espruar is the moon elven alphabet. It was adopted by sun elves, drow, and the other 
+elven peoples thousands of years ago.  
+ Dethek: Dethek is the dwarven runic script. Dwarves seldom write on that which can perish 
+easily. They inscribe runes on metal sheets or carve in stone. The lines in all Dethek characters are 
+straight to facilitate their being carved in stone. Aside from spaces between words and slashes 
+between sentences, punctuation is ignored. If any part of the script is painted for contrast or 
+emphasis, names of beings and places are picked out in red while the rest of the text is colored 
+black or left as unadorned grooves. 
+ Others: There are also scripts for Draconic, Celestial, and Infernal. 
+Forgotten Realms Phrases 
+Below are some phrases common to speah in the Forgotten Realms. 
+ Well met. The most often used greeting, particularly between strangers of a different race or 
+those of whom one is unsure. 
+ Well again. Between business associates or acquaintances, (i.e. we’ve greeted before—hence the 
+“again”—and you look well) is usually used; if one is annoyed, curt, or sarcastic, one usually just 
+says, “Again” (i.e. “we meet again” or “you again!”). 
+ Olore. (Oh-LOR-ay) Well met/Good day, as travelers in the Inner Sea lands say; “Olore to you, my 
+friends.” 
+ Until swords part. Warriors’ farewell throughout the Realms. 
+ Until next, may your sword be ever wet, and your bottom dry. Parting of the pirates of the 
+Inner Sea. 
+ Alavairthae! (Al-ah-VARE-thay, or “May your skill prevail”) the Red Wizards of Thay, in giving 
+their farewells. 
+
+===PAGEBREAK===
+
+ Amarast! (Ah-mah-RAST) Meaning “fare well until next we meet,” a saying of the sailors of the 
+Shining South. 
+ Sweet water and light laughter until next. A farewell used by elves. 
+ Aluve (Ah-LOO-veh) “I/we leave you” in Drow. 
+ Axe high, friend. I go. Dwarven farewell. 
+ Forges warm, friend. Gnomish farewell. 
+ Good morning, and good day after that! Don’t let anything curl your hair! (to which is 
+sometimes added) “Ware that Big Folk, and mind the goblins too!” as the Halflings speak to each 
+other. To others, they usually say, “Gods smile! (upon you).” 
+ Braeunk vhos trolkh! (If you die while I’m gone, do it quietly) Hobgoblin, with the unspoken 
+addendum “because I wouldn’t want to miss the fun.” 
+Faerûnian Names 
+Faerûn is vast. Among humans alone, its inhabitants bear literally thousands upon thousands of 
+names. Some folk have no surnames, others have a common clan name, and others have a 
+“son/daughter of” appellation.  
+ In Tharsult, Tashalar, and the Border Kingdoms, the word “sar” is much used. It means “of the 
+blood of,” and denotes a famous ancestor—or falsely claimed ancestor—so that a farmer might be 
+“Baer sar Thardizar,” after the famous warlord of centuries ago. 
+ Older usages such as “of the” and the name of a trade or place (such as Ruthrar o’ the Forge and 
+Sammert o’ the Hollow) are falling out of favor and are now rarely heard. Only wizards and the 
+most haughty adventurers use personal achievements in their names, such as Dastrin of the Three 
+Thunders or Belgaert of the Deadly Stand, and this, too, is dying out.  
+ Occupations can be seen within names, however: Tel is an old word for “works at” or “works with,” 
+forar once meant traveler or peddler, helder was a guard or warrior on patrol, turnskull was a 
+digger, and turnstone a miller. All are used as last names among, primarily among Chondathans and 
+Illuskans. 
+ The names given here are by language, since areas sharing a common tongue tend to use the same 
+names. 
+ Aglarondan: Male: Aelthas, Courynn, Folcoerr, Gaedynn, Mourgram, Sealmyd, Yuiredd. Female: 
+Blaera, Courynna, Lyn- neth, Maera, Mourna, Wydda. Surnames: Aengrilor, Dulsaer, Gel- ebraes, 
+Jacerryl, Telstaerr, Uthelienn. 
+ Alzhedo: Male: Aseir, Bardeid, Haseid, Khemed, Mehmen, Sudeiman, Zasheir. Female: Atala, Ceidil, 
+Hama, Jasmal, Meilil, Seipora, Yasheira, Zasheida. Surnames: Basha, Dumein, Jassan, Khalid, Mostana, 
+Pashar, Rein. 
+ Chessentan: Male: Aeron, Daelric, Eurid, Nicos, Oriseus, Pharaxes, Thersos, Xandos. Female: 
+Ariadne, Cylla, Eriale, Halonya, Idriane, Mera, Numestra, Sinylla. Surnames: Aporos, Corynian, 
+Heldeion, Morieth, Nathos, Sphaerideion, Zora. 
+ Chondathan: Male: Darvin, Dorn, Evendur, Gorstag, Grim, Helm, Malark, Morn, Randal, Stedd. 
+Female: Arveene, Esvele, Jhessail, Kerri, Lureene, Miri, Rowan, Shandri, Tessele. Sur- names: 
+Amblecrown, Buckman, Dundragon, Evenwood, Greycas- tle, Tallstag. 
+ Chultan: Male: Atuar, Kwalu, Losi, Mezoar, Nsi, Osaw, Selu, Weshtek. Female: Azuil, Chuil, Fipya, 
+Isi, Lorit, Mainu, Sana, Tefnek. Surnames: None. 
+ Damaran: Male: Bor, Fodel, Glar, Grigor, Igan, Ivor, Kosef, Mival, Orel, Pavel, Sergor. Female: 
+Alethra, Kara, Katernin, Mara, Natali, Olma, Tana, Zora. Surnames: Bersk, Chernin, Dotsk, Kulenov, 
+Marsk, Nemetsk, Shemov, Starag. 
+ Dambrathan: Male: Aethelmed, Houn, Rhivaun, Umbril, Waervyn, Xaemar, Zeltaebar. Female: 
+Chourm, Glouris, Maeve, Hayaera, Sevaera, Xaemarra, Zraela. Surnames: Calaumystar, Lharaendo, 
+Mristar, Talaudrym, Wyndael 
+
+===PAGEBREAK===
+
+ Durpari: Male: Charva, Duma, Hukir, Jama, Kilimut, Oskut, Pradir, Rajaput, Sikhil. Female: Apret, 
+Bask, Erilet, Fanul, Hist, Mokat, Nismet, Ril, Tiket. Surnames: Beszrizma, Datharathi, Melpurvatta, 
+Nalambar, Saqarastar, Tiliputakas. 
+ Dwarven: Male: Barundar, Dorn, Joyin, Khondar, Roryn, Storn, Thorik, Wulgar. Female: Belmara, 
+Dorna, Joylin, Kiira, Sambril, Tace, Umil. Surnames: Bladebite, Crownshield, Gor- drivver, Horn, 
+Skulldark, Stoneshield. 
+ Elven: Male: Aravilar, Faelar, Mourn, Nym, Orlpar, Saevel, Respen, Rhistel, Taeghen. Female: Amra, 
+Hacathra, Imizael, Jastra, Jhaumrithe, Quamara, Talindra, Vestele. Surnames: Amalith, Braegen, 
+Calaudra, Eveningfall, Laelithar, Moondown, Tarnruth. 
+ Elven (Drow): Male: Alak, Drizzt, Ilmryn, Merinid, Pharaun, Rizzen, Tebryn, Zaknafein. Female: 
+Akordia, Chalithra, Eclavdra, Jhaelrnya, Nedylene, Qilué, SiNafay, Vlondril. Surnames: Abaeir, 
+Coloara, Glannath, Illistyn, Pharn, Seerear, Vrinn, Xiltyn. 
+ Gnome: Male: Burgell, Colmarr, Dorgan, Falrinn, Halbrinn, Orlamm, Rondell, Stolig. Female: 
+Calanddra, Eriss, Iviss, Jaree, Lissa, Meree, Nathee, Zelazadda. Surnames: Blackrock, Blimth, 
+Greatorm, Rivenstone, Tavartarr, Uvarkk, Whitehorn. 
+ Halfling: Male: Blazanar, Corkaury, Dalabrac, Halandar, Ombert, Roberc, Thiraury, Wilimac. 
+Female: Aloniira, Calathra, Deldiira, Melinden, Olpara, Rosinden, Tara, Weninda. Surnames: Aumble, 
+Bramblefoot, Dardragon, Hardingdale, Merrymar, Starnhap. 
+ Halruaan: Male: Aldym, Chand, Hostegym, Meleghost, Presmer, Sandrue, Tethost, Uregaunt. 
+Female: Aithe, Alaethe, Chalan, Oloma, Phaele, Sarade, Vosthyl. Surnames: Avhoste, Darants, 
+Gedreghost, Maurmeril, Stamaraster, Zorastryl. 
+ Lantanese: Male: Eberc, Fodoric, Koger, Lambrac, Midoc, Norbert, Samber, Tibidoc. Female: 
+Avilda, Bersace, Charissa, Mel- sany, Phaerilda, Ravace, Umbrasy. Surnames: Angalstrand, Decirc, 
+Lamstrand, SeKorc, SeLangstra, SeMilderic. 
+ Illuskan: Male: Ander, Blath, Bran, Frath, Geth, Lander, Luth, Malcer, Stor, Taman, Urth. Female: 
+Amafrey, Betha, Cefrey, Kethra, Mara, Olga, Silifrey, Westra. Surnames: Brightwood, Helder, 
+Hornraven, Lackman, Stonar, Stormwind, Windrivver. 
+ Midani: Male: Ajaman, Alif, Assam, Bhadla, Dahalzel, Dawasir, Didaji, Farim, Haushi, Kabina, 
+Kadumi, Musalim, Nata, Rahid, Rashad, Sa’ar, Sabkhat, Utaiba, Yatagan, Zarud. Female: Abal, Aglavia, 
+Alethra, Bujauna, Dajala, Dizsa, Duthrala, Fiiriia, Ilyouma, Kalastiira, Lajarama, Nathla, Qoha’dar, 
+Rahalat, Ruha, Saalariira, Shalira, Tuibaila, Vayess, Yamala. Surnames: Surnames are not used. 
+Instead a Midani appellation is used or a matronymic or patronymic: “abd” (slave of), “al” (the), 
+“bint” (daughter of), “ibn” or “bin” (son of), the suffix “i” added to a location and preceded by “al” 
+(Rashad Al-Karji would translate into “the Rashad from Karj.”) 
+ Mulhorandi: Male: Aoth, Bareris, Ehput-Ki, Kethoth, Mumed, Ramas, So-Kehur, Thazar-De, Urhur. 
+Female: Arizima, Chathi, Nephis, Nulara, Murithi, Sefris, Thola, Umara, Zolis. Surnames: Ankhalab, 
+Anskuld, Fezim, Hahpet, Nathandem, Sepret, Uuthrakt. 
+ Orc: Male: Besk, Durth, Fang, Gothog, Harl, Kesk, Orrusk, Tharag, Thog, Ugurth. Female: Betharra, 
+Creske, Edarreske, Duvaega, Neske, Orvaega, Varra, Yeskarra. Surnames: Dummik, Horthor, Lammar, 
+Sormuzhik, Turnskull, Ulkrunnar, Zorgar. 
+ Rashemi: Male: Borivik, Faurgar, Jandar, Kanithar, Madis- lak, Ralmevik, Shaumar, Vladislak. 
+Female: Fyevarra, Hulmar- ra, Immith, Imzel, Navarra, Shevarra, Tammith, Yuldra. Surnames: 
+Chergoba, Dyernina, Iltazyara, Murnyethara, Stayanoga, Ulmokina. 
+ Shaaran: Male: Awar, Cohis, Damota, Gewar, Hapaw, Laskaw, Moktar, Senesaw, Tokhis. Female: 
+Anet, Bes, Dahvet, Faqem, Idim, Lenet, Moqem, Neghet, Sihvet. Surnames: Cor Marak, Hiaw Harr, 
+Laumee Harr, Moq Qo Harr, Taw Harr, Woraw Tarak. 
+ Tashalan: Male: Angwe, Dumai, Gharbei, Indo, Masambe, Morife, Ngongwe, Sepoto. Female: 
+Ayesha, Bhula, Lashela, Intin- gi, Mashai, Shevaya, Shesara, Ushula. Surnames: Damarthe, Ghomposo, 
+Ishivin, Jalamba, Konge, Maingwe, Wasatho. 
+
+===PAGEBREAK===
+
+ Turmic: Male: Anton, Diero, Marcon, Pieron, Rimardo, Romero, Salazar, Umbero. Female: Balama, 
+Dona, Faila, Jalana, Luisa, Marta, Quara, Selise, Vonda. Surnames: Agosto, Astorio, Calabra, Domine, 
+Falone, Marivaldi, Pisacar, Ramondo. 
+ Uluik: Male: Aklar, Hilur, Liruk, Namiir, Selmik, Uknar, Tirmuk, Wariik. Female: Chamuk, Iirkik, 
+Kagiik, Lelchik, Nirval, Talchuk, Valiir, Wenvik. Surnames: None. 
+ Untheric: Male: Azzedar, Chadrezzan, Gibbur, Horat, Kassur, Numer, Samar, Ungred. Female: 
+Chadra, Ilzza, Jezzara, Marune, Saldashune, Xuthra, Zeldara. Surnames: Seldom used, patronymics 
+preferred. 
+Fantasy Arabia and Arabic 
+The Forgotten Realms has three distinct areas that act as fantastical Arabian settings: Anauroch, Calimshan, and 
+Zakhara. Anauroch is a sandy land of desert nomads. Calimshan is a vast land of distinct city-states that has 
+elements of the Ottoman Turks as well as fantasy Arabia. Zakhara is a continent’s worth of Arabian Nights fantasy. 
+ Both the people of Anauroch and Zakhara speak Midani, a language that is virtually identical to Arabic. They do 
+not use surnames; they use follow-on descriptions to clarify differences between people with the same name. Thus 
+they have names that include Arabic-like structures such as “bint” (daughter of), “ibn” (“son of”), and “al” (the). 
+Bayzed Ibn Kull Al-Fallah would therefor mean “Bayzed, son of Kull the Fortunate.”  
+ Calishites speak Alzhedo. This is a language related to Auran, the tongue of djinn and other creatures of 
+elemental air that blends elements of Arabic, Turkish, and fantasy. It does not use Arabic structures. People have 
+surnames. 
+ 
+Fantasy Asia and Asian Languages 
+The Forgotten Realms has multiple fantasy versions of various locations and cultures in Asia at various points in 
+world history. There are two places like China, two like Japan, two like Korea. There’s a Tibet, an India, and more.  
+ When drawing from a real-world Asian culture, be sure you’re ascribing the right cultural and language trappings 
+to the right place. T’u Lung does not produce samurai. A person from Koryo would not have a Japanese name. 
+Location Adjectives 
+The adjective used for the citizens (and products) of various locations often has a unique 
+formulation as described below. 
+Aglarond Aglarondan  
+Amn Amnian  
+Anauroch Anaurian  
+Arabel Arabellan  
+Archendale Arkhen  
+Arrabar Arrabarran  
+Aryvandaar Aryvandaaran  
+Athkatla Athkatlan  
+Baldur’s Gate Baldurian  
+Berdusk Berduskan  
+Calaunt Calauntan  
+Calimshan Calishite  
+Carradoon Carradden  
+Ched Nasad Ched Nasadan  
+Chondath Chondathan  
+Chult Chultan  
+Citadel Adbar Adbarrim  
+Citadel Felbarr Felbarran  
+Citadel of the Raven Ravenar 
+Cormanthor Cormanthorian  
+Cormanthyr Cormanthyran  
+Cormyr Cormyrean  
+Daerlun Daerlunian 
+The Dalelands Dalesman/Dalesmen 
+(male), Dalesfolk (male or 
+female)  
+Damara Damaran 
+Dwarf Dwarvish (the language), 
+Dwarven (stuff) 
+Elf Elvish (the language), 
+Elven (stuff) 
+Elturel Elturian  
+Elversult Elversian  
+Eryndlyn Eryndlyrr  
+Eveningstar Evenor  
+Evermeet Evermeetian  
+Faerûn Faerûnian  
+Hillsfar Hillsfarian  
+
+===PAGEBREAK===
+
+Hulburg Hulburgan 
+Imaskar Imaskaran (stuff), 
+Imaskari (people)  
+Immersea Immersean 
+Impiltur Impilturian  
+Innarlith Innarlan  
+Iriaebor Iriaeben  
+Kozakura Kozakuran  
+Lantan Lantanna  
+Lorosfyr Lorosfyran  
+Luskan Luskar 
+Marsember Marsembian  
+Maztica Maztican  
+Melvaunt Melvauntian  
+Menzoberranzan Menzoberranyr  
+Mintarn Tarnian 
+Mirabar Mirabarran 
+Mulhorand Mulhorandi 
+Mulmaster Mulman (stuff), 
+Mulmasterite (people)  
+Myth Drannor Myth Drannan 
+Narfell Nar 
+Nesmé Nesmian 
+Neverwinter Neveren (stuff), 
+Neverwintan (people)  
+Nimbral Nimbrian (stuff), Nimbran 
+(people)  
+Ordulin Ordulan (stuff), Ordulian 
+(people)  
+Palishchuck Palishchukian(s) 
+Phlan Phlanite  
+Procampur Procampan  
+Proskur Proskurian  
+Rashemen Rashemi  
+Raumathar Raumatharii  
+Ruathym Ruathan  
+Saerloon Searloonian  
+Scornubel Scornubian 
+Selgaunt Selgite (stuff), Selgauntan 
+(people)  
+Sembia Sembian 
+Shaar Shaaran (stuff and 
+language), Shaaryan 
+(tribes and people)  
+Shade Enclave Shadovar 
+Shadowdale Grimmar (people), 
+Grimmen (stuff)  
+Shou Lung Shou 
+Sildéyuir Sildéyuiren 
+Sossal Sossar (stuff), Sossrim 
+(people)  
+Sundabar Sundabarian 
+Suzail Suzailan  
+Tantras Tantran  
+Tashluta Tashlutar  
+Tethyr Tethyrian  
+Thay Thayan T 
+hesk Theskian  
+Tilverton Tilverian  
+Turmish Turmishan  
+Unther Untherite  
+Urmlaspyr Urmlassan  
+Vaasa Vaasan 
+Waterdeep Waterdhavian  
+Yhaunn Yhauntan  
+Yûlash Yûlashi 
+Zhentil Keep Zhent (people), Zhentish 
+(stuff) 
+Zentarim Zhentarian (stuff), 
+Zhentilar (people; 
+soldiers) 
+ 
+Help us add to this list! If you find a reference to place nomenclature in any of the source material, or find yourself 
+making one up, please let us know. 
+Coin 
+Barter and coinage of all sorts are common in the Realms, and most countries and city-states mint 
+their own money. Thus coins from different places have different shapes and decoration. For most 
+purposes, a coin is worth the same regardless of its point of origin. 
+ Note that people don’t use the word “money” in the Frogotten Realms. They saiy “coin” instead.  
+ Coinage throughout the realms is customarily valued as follows: 
+ 10 copper pieces = 1 silver piece 
+ 10 silver pieces = 1 gold piece 
+ 10 gold pieces = 1 platinum piece 
+ Some places have minted electrum coins but they are uncommon (like encountering dollar coins 
+in the U.S.). 
+
+===PAGEBREAK===
+
+ 2 electrum pieces = 1 gold piece 
+Coinage in Cormyr 
+The favored manner of currency in Cormyr is the royal coinage of the Court, stamped with a dragon on one side, 
+and a treasury date mark on the other (the penalty for counterfeiting in Cormyr, and most other similar nations, is 
+death). There is no paper currency save for I.O.U.s which are known as “blood-notes,” as they must be signed in 
+blood by both (or all, if more than two) parties involved, and taken to the local Lord for the affixing of the royal 
+seal. 
+ In Cormyr, coinage terminology is as follows: 
+ copper pieces = copper thumbs 
+ silver pieces = silver falcons  
+ electrum pieces = blue eyes 
+ gold pieces = golden lions  
+ platinum pieces = tricrown 
+Other Currency 
+Many nations and people use forms of money unique to their locality. Often these forms of money 
+have less real value in gold than they represent (just as the value of the paper in a dollar is not 
+great). They are typically backed by a local government or accepted as valuable by local custom, 
+and often they have no value outside their localities. 
+ Bela. A word for paper money that refers both to bills used in the lands of Kara-Tur and more 
+recent script issued by the over-chief or khan of the tribes of the Horde. In the western Realms, it is 
+worthless, and occasionally offered as an insult. 
+ Blood Notes. Scrolls, letters, or other carvings representing IOUs and promissory notes from the 
+listed person to the holder of the note. Blood notes can be made by individuals, companies, or 
+countries and cities to cover debts, and should the debtor still be around, they are legally obligated 
+to pay when it is presented. Blood notes from individuals who are no longer alive are not binding.  
+ Trade Bar, Mirabar. Coming from the wild country north of Waterdeep, these trade bars are 
+made of black iron and shaped like rectangular spindels. They are worth 10 gp in Mirabar itself, 5 
+gp in the rest of the Realms. 
+ Trade Bar, Merchant’s. A thin, silver bar worth either 10, 20, or 50 gp each. The bar is marked at 
+one end with its value, at the other with the symbol of the trading institution or caster which 
+created it. Broken trade bars are valueless, though most merchants will continue to honor the trade 
+bars of defunct institutions.  
+ The trade bars of the Iron Throne trading group are not honored by other trading organizations, 
+as this group is considered disreputable. Merchants’ trade bars can be manufactured anywhere, but 
+an increasing number of them bear the mint mark of Baldur’s Gate. 
+ Trade Bar, Sembian. Ingot-shaped bars of silver dotted with copper and marked with the 
+symbol of Sembia, these trade bars are considered face value and backed up by the money of the 
+Merchant Kingdom. They are most often made in 10, 25, and 50 gp values. 
+ Trade Bar, Lantan. A flat, envelope-shaped bar of worked steel marked with the great wheel of 
+Gond, such bars are worth 20 gp each and are used primarily along the Sword Coast and in other 
+regions where the Lantanese normally trade. 
+ Toal, Waterdeep. A square brass coin with a hole bored in the center, commonly used in the City 
+of Splendors. In Waterdeep, it has a value similar to one electrum piece, but is considered nearly 
+worthless in places distant from the city. 
+ Harbor Moon, Waterdeep. A special Waterdhavian coin in the shape of a cresent, made of 
+platinum and inset with electrum. It is used in bulk purchases in Waterdeep, where it is worth 50 
+gp each. In lands distant from Waterdeep, its value drops to 2 gp per harbor moon. 
+
+===PAGEBREAK===
+
+ Steelpense, Sembian. A coin introduced by the Sembian government to replace silver (which the 
+government could then horde) the coin was overproduced and dropped in value until its present 
+value is 1 steelpense = 1 copper piece. The Sembian nobles have disavowed the coin’s value, but still 
+honor it grudgingly throughout the country.  
+ Shou Lung Trade Bars. A slender bar of silver, definitely Kara-Turran in origin, which has made 
+its way to the West with the occasional trader. Shou Lung trade bars are worth about 40 gp each. 
+ Tharsult Statues. Far to the south, the nation of Tharsult uses small art objects in trade. These 
+statues of ivory, jade, and serpentine are used as coinage in that region, and have reached the 
+heartlands of the Realms as curios. Typical statues are worth 15 gp each in the North, but only 5 gp 
+each in their native land. 
+ Shaar Rings. The plainsmen of the Shaar use rings made of sliced and bored ivory, hung on long 
+strings. Rings will be found in bundles, and each ring will be worth 3 gp each. 
+ Gond Bells. An odd form of money introduced by the Lantanese and used in areas of the North, in 
+particular in trade between worshippers of Gond. The small Gond bells are made of brass and 
+almost totally enclose a loose ornamental stone which causes it to clatter. Gond bells are worth 10 
+gp on the open market, 20 gp if traded to a church of Gond. 
+Adamantite and Mithral 
+There are two special metals in the Forgotten Realms. 
+ Adamantite. If you want a super hard metal, use adamantite. Adamantite is a jet-black alloy of 
+Adamant and other metals. Usually black in color, adamantite will have a green sheen when viewed 
+by candlelight or a purple-white sheen when viewed by magical light. Adamantite is incredibly 
+strong and hard. Weapons made from it can cut through weaker metals. Armor made from it is nigh 
+impenetrable. 
+ Mithral. If you want a super light metal, use mithral. Mithral is a silvery-white metal. Items made 
+out of mithral weight half as much as similar items made of steel. Pieces of armor made mostly out 
+of mithral are very light, therefore they allow the wearer to make better use of their natural agility 
+and are less restrictive on the spellcasting. 
+Gems of the Realms 
+Faerûn has all the ornamental stones and precious and semi-precious gems you’d find on Earth 
+with the addition of the following special types. 
+ Rogue Stone. Rogue stone is a small magical gemstone whose rainbow colors shift as if in liquid, 
+slowly swirling iridescently, when exposed to sunlight. They are extremely rare and repel each 
+other like magnets. 
+ King’s Tears. King's Tears are sometimes called frozen tears, or lich weepings. They are 
+transparent teardrop-shaped stones with a smooth surface and are seemingly unbreakable by 
+physical force. Folklore suggests these stones are the crystallized tears of long-dead necromancer 
+kings. In each jewel can be seen that which the weeping king loved ages ago. 
+ Beljuril. Beljuril is a deep seawater green and all known specimens are roughly the size of a 
+human fist and not quite spherical. About once every hour (rates vary from stone to stone) a beljuril 
+will absorb an undetectable amount of energy from within a thirty foot radius and re-emit that 
+energy as a flash of sparkling light without heat, sound, or electrical discharge. The light produced is 
+easily noticeable when the ambient light is dim (candlelight or lantern light) and in the dark it is 
+dazzling to the eye. Beljurils are very difficult to cut with metal tools and the stone is very durable. 
+They are sometimes claw-mounted to shoulder-plates or worn in a pectoral, or used as decorative 
+lighting or beacons by the wealthy. 
+
+===PAGEBREAK===
+
+ Amartha. Amaratha is also known as shieldstone. Found as small lumps or nodules in deep rock 
+strata, amaratha is soft and yields greenish white to pale green gemstones that can be set into body 
+jewelry or any setting where it is protected from damage or wear. Shieldstone attracts and absorbs 
+electricity in a ten foot radius, protecting all within this area until it vaporizes. A large quantity of 
+amaratha could absorb a natural or magical lightning bolt. 
+ Jasmal. Jasmal is a durable, very hard gemstone found in the form of small veins or (very rarely) 
+larger seam deposits in the Thunder Peaks and the Spine of the World. It is so hard that it can hold a 
+cutting edge and can even be worked into small nonmetallic weapons. When polished, jasmals catch 
+sunlight or torchlight and, although themselves remaining transparent and colorless, give off halos 
+of amber light. 
+ Bloodstone. Bloodstones in the Realms come from the Vaasa/Damara area, and are the chief 
+export of this region, hence their being known as the Bloodstone Lands. 
+ Laeral's Tears. The Realms name for beryllonite. Named after the sorceress Laeral Silverhand. 
+ Star Metal. The name in the Realms for a meteorite; forged with common metals to make durable 
+weapons of great strength. 
+Celestial Bodies 
+The Sun is called the Sun. The Moon is called Selûne and the Moon. The night sky is known as the 
+Sea of Night and instead of one Milky Way, there are several “rivers of stars.” The aurora borealis is 
+called Selune's Veil or the Tearfall Veil (a reference to Selune's Tears). 
+Selûne and Selûne’s Tears 
+Toril’s moon is known as Selûne. While Selûne in the sky appears no larger than a human hand held 
+at arm’s length, it is a world in its own right, easily two thousand miles across. Selûne is bright 
+enough to cast pale shadows when full. It is accompanied in the sky by the Tears of Selûne, a 
+number of smaller luminaries that spread across the sky in a great arc trailing the moon.  
+ Selûne is of course associated with the goddess of the moon, Selûne, worshipped as a goddess of 
+light, stars, and navigation. Whether the moon is named for her or vice versa is unknown. She is 
+thought by some to reside in the moon or that the moon itself is the goddess. 
+ Eclipses. Selûne’s orbit around Toril is almost in the same plane as Toril’s orbit around its sun, so 
+solar and lunar eclipses are frequent. Solar eclipses are never annular (the sun’s edge cannot be 
+seen during totality) and almost never partial, because Selûne’s shadow on Toril and Toril’s shadow 
+on Selûne are quite large. Eclipses are thus spectacular but rather commonplace. Inhabitants of any 
+particular land do not always notice such eclipses, since the rising and setting times for Selûne 
+wander across the calendar. Solar eclipses might briefly cause nocturnal beings to awaken, but they 
+quickly return to sleep once daylight returns. 
+ Selûne’s Phases. Selûne is full at exactly midnight, the first of Hammer, 1372 DR, and every thirty 
+days, ten hours, and thirty minutes thereafter. The time between successive full moons is, 
+technically speaking, one synodic month, the time from one Sun–Toril–Selûne conjunction to the 
+next. Selûne makes exactly forty-eight synodic revolutions every four calendar years on Toril. Thus, 
+Selûne is full at exactly midnight on the first day of every leap year, and has the same phase on any 
+calendar day four years forward or backward in time. 
+ One Faerûnian holiday, the Feast of the Moon, is held during a full moon that obligingly shows up 
+on or about that day. Because Selûne’s synodic period is so close to the actual length of the calendar 
+month, Selûne is full around the first day of each month or on festival days, give or take a day or so. 
+The annual festival days serve to correct discrepancies between the synodic and calendar months, 
+with Shieldmeet providing a necessary correction every fourth year to keep the full moon from 
+sliding deep into each month. 
+
+===PAGEBREAK===
+
+ Tears of Selûne. The Tears of Selûne are a collection of hundreds of very small but bright 
+celestial bodies (asteroids) that orbit Toril in Selûne’s wake. The Tears act like any such bodies in a 
+Trojan point, meaning that they do not stay in place but actually orbit around a common center in 
+whirlpool fashion. The Tears are visible as points of light like stars, too small for viewers to discern 
+their actual shapes. 
+ The individual orbits of the Tears are not exactly coplanar with the orbit of Toril and Selûne, but 
+they are close. As a result, their appearance in the night sky of Toril is that of a flattened ellipse of 
+bright “stars,” trailing Selûne by sixty degrees across the sky, along the ecliptic. Typically, an 
+average human can cover Selûne’s image with his clenched fist at arm’s length; the Tears, however, 
+appear to span an area of the night sky almost three handspans wide and about three fingers deep 
+at arm’s length. The relative positions of individual Tears change from night to night as they orbit 
+their common center. 
+ The Tears are not bright enough to be seen during the day, though Selûne often is. Though the 
+Tears are bright even when Selûne is new, they are not always visible in the night sky, since they 
+too have rising and setting times, and thus might not be up at night. The first Tear rises or sets 
+about four hours after Selûne does. Because it is so long, the full set of Tears takes about three 
+hours to rise or set, from first Tear to last. The combined effect of the Tears is not enough to cast 
+shadows at night. 
+Important Stars 
+For centuries, astrologers have observed the appearance of one or two particularly bright stars 
+close to sunrise and right after sunset. Anadia and Coliar are sometimes known as the Dawn 
+Heralds, although they might just as easily be called the Evening Heralds too.  
+ Deeper in the Sea of Night roam the Five Wanderers, inconstant stars that do not follow a yearly 
+path across the sky as the other stars do. These Wanderers are markedly different from the star-
+rivers through which they roam; they tend to be larger, brighter, and show wondrous colors. 
+Karpri, the nearest, is a sapphire orb with great whitecaps at top and bottom. Chandos, the next, is 
+a brown-green smudge whose markings change oddly over a few nights’ watching. Glyth is a dull 
+gray, but surrounded by a spectacular ring and three lesser bodies, visible only with magical aid. 
+Garden is a tiny green sparkle, rarely seen. The last, H’Catha is a gleam of diamond white. 
+ The King-Killer Star is a red star (a comet) that provokes dragons to rage when it appears in the 
+sky due to ancient elven magic. 
+ Color Spray is a pinkish star visible primarily during the spring and early summer. When seen 
+with the naked eye, but a telescope allows one to see it as a rainbow triangle, hence it being named 
+after the spell. Similarly, the Galleon is a bluish star that under magnification looks something like 
+ship. It is visible during the autumn and early winter and thus is called by many Auril’s Ship. 
+  
+Constellations 
+There are a number of constellations of note in the northern hemisphere. Their names differ by 
+culture. The constellations’ most common names are given below. Not all of the constellations are 
+visible all year round. Note that the constellations visible from the southern hemisphere are, of 
+course, different. 
+ Mystra’s Star Circle (all year). North is marked by an awesome circle of large, bright stars with 
+utter darkness between them, which is known to most folk today as Mystra’s Star Circle (her 
+floating Castle of Night, in childrens’ fairytales, is said to float in the center of the darkness). Due 
+north is marked by the brightest “Brow Star,” called Alagairtha by the Bedine, after a proud Bedine 
+sorceress who is said to have challenged the gods long, long ago, and been imprisoned in the 
+
+===PAGEBREAK===
+
+heavens as a punishment: to preserve her breathtaking beauty, but keep her forever from men). 
+Other folk in the Realms call this constellation the Crown of the North, or just the “Cold Crown.” 
+ People born under these stars (those who fall in the gaps between the other contellations) are 
+said to be inquisitive, with a strong ability to learn. Those who pursue the academics, arts, and 
+magic are said to be linked to these stars. 
+ Auroth (Winter). Down low, running horizontal close to the horizon, is a zigzag line of seventeen 
+stars that join two larger, brighter star clusters, the Head or Jaws (to the west) and the Tailknot or 
+Knotted Tail (to the east). This is Auroth, the Ice Snake of Auril, or “Old Icefangs,” also called White 
+Dragon by the elves. Said to be a beloved and faithful steed of the goddess who sacrificed himself to 
+shield Auril in a long-ago battle among the gods. From particular twinkling stars of Auroth’s body 
+come Auril’s messages, to clergy of Auril who pray to those specific stars. 
+ People born under these stars are said to have a cold, calm demeanor, but are capable in erupting 
+in a fierce anger. Some wizards and people who live a mercenary life find themselves linked to 
+these stars. 
+ Elfmaid’s Tears (Winter). The Elfmaid’s tears are visible near Mystra’s Star Circle in the 
+northern hemisphere but are considered a winter constellation when they are “up.” Formed of two 
+vertical lines of blue-white stars, of unequal length, they are said to be the tears of Sehanine 
+Moonbow, wept when Lolth and the drow turned upon the rest of elfkind. 
+ People born under these stars are said to be sensitive souls who must build up walls around their 
+hearts or remain open to many emotional wounds. 
+ The Frostqueen’s Throne (Winter). In the depths of winter in the North the Frostqueen’s 
+Throne (also called the Seat of Winter or simply Auril Frostqueen) rises. This constellation of bright 
+white stars presents the profile of a chair. Although holy to those devoted to Auril, they dare not 
+beseech Auril herself so long as Auroth remains in the sky to answer their prayers. People in more 
+southerly lands see the shape not as a chair but as a profile of a crown and know it instead as the 
+King’s Crown, with legends ascribing it to various rulers with heroic or tragic stories. 
+ People born under this star are thought to be intelligent and incisive but distant and absorbed by 
+their own thoughts most of the time.  
+ Jassa’s Dagger (Winter). Jassa’s Dagger (said to have been hurled into the heavens by the dying 
+Queen Jassa of the city of Lirremar, long ago, after she was impaled on a spear at the Battle of Biting 
+Serpents) is a dagger-shaped constellation: a line of six stars whose highest star (the Pommel) is 
+large and pink, and that is crossed two stars lower by a cross-line of four fainter stars (the Guards). 
+It hangs in the sky below and east of the Sleepless Knights, hilt uppermost and blade forming a 
+diagonal line pointing southwest, down and away from the Watchful Knights. 
+ People born under these stars are said to have pride, whether it be in their positions, possessions, 
+or accomplishments. They are also known to hold a grudge. Ambitious people and those who set 
+out on personal vendettas can be linked to these stars. 
+ Sleepless Knights (Spring). Not far south of Mystra’s Star Circle, there’s a distinctive cluster of 
+middling-brightness stars arranged just like the five pips on the “5” side of a d6. These are the 
+Sleepless Knights, also known as the Watchful Knights. They are thought to be five knights 
+oathbound to keep watch on the landscape of the North for approaching armies of foes, on behalf of 
+a long-dead king. It’s said they “rode into the sky” (off a cliff on a perilous mountain trail, in a 
+blinding, late-season blizzard) but somehow never fell.  
+ People born under these stars are said to be extremely reliable and loyal to their friends and duty. 
+Some knights and paladins can find themselves linked to these stars. 
+ The Arrows of the Gods (Spring). The Arrows of the Gods are formed of three converging lines 
+of stars, each with a cluster of stars at its outward end, or “point.” Where the three lines come 
+together points east. To folk elsewhere in the Realms, these stars are called the Atar's Arrows, the 
+Sun’s Signpost, or the Caltrop. 
+
+===PAGEBREAK===
+
+ People who are born under these stars are said to have a very blunt personality for better or 
+worse. They tend to be driven and tackle their goals and obstacles as directly as possible. 
+Independent and headstrong people tend to be linked to these stars. 
+ Lavarandar’s Lantern (Spring). Lavarandar’s Lantern (also known as “the Lamp”) is an upright 
+rectangle of stars enclosing four very bright blue-white stars, in the northern sky far south of 
+Mystra’s Star Circle and West of the Watchful Knights. Along the Sword Coast, they are thought to 
+be four sisters, who were regretfully imprisoned by the king their father when they became 
+lycanthropes. Later, an evil nephew plunged the cage into the sea to drown them, and so inherit the 
+crown, but this enraged Umberlee, and the goddess hurled the cage up out of the watery depths, but 
+too far, so it soared up into the Sea of Night and stayed there, as it does to this day. 
+ People born under these stars are said to be compassionate of others, but keep a stalwart 
+demeanor when facing their own problems. Some clerics and people who put others ahead of 
+themselves can be linked to these stars. 
+ The Scimitar (Summer). Roughly opposite in the sky from Auroth, the Scimitar is a bright starry 
+cluster followed by a curving tail of stars. The scimitar cuts its way across the sky throughout 
+summer. It is said by many in the North to be the sword fallen from Amaunator’s Belt, a 
+constellation to the north and later in the season. 
+ To the Bedine, this is the Serpent of the Sands, Urwath, “The Swallower.” The desert nomads 
+believe that this creature is wild and amoral, older than the gods, and that it swallows mountains, 
+trees, and grasses to create the desert, leaving only sand in its wake. Its presence in the southern 
+sky, most Bedine believe, means that the desert will continually expand southward, as it eats its 
+way across the world. In Tunland, Cormyr, Iriaebor, and Westgate, however, it is recognized 
+respectively as Faeraula, the Sword of the South, the Southfires, and the “Dangers of the Desert.” 
+ People born under this star are thought to be ruled by their passions, particularly lust and anger. 
+ Amaunator’s Belt (Summer). This line of six yellow-white stars appears high in the sky in the 
+far north during summer. When Amaunator was thought dead, it was said to be the sword belt he 
+failed to buckle in his haste to go to the battle in which he died.  
+ People born under these stars are said to be brave but rash. 
+ Eyes of the Watching Woman (Summer). The Eyes are two “fuzzy” clusters of blue-white stars, 
+which appear as two side-by-side crescents or arcs in the sky, points downward. To most, these are 
+Eyes of the Watching Woman, while to the Bedine they are the Two Jambiyas. 
+ People born under these stars are said to be highly sociable and the most adaptable to change. 
+Those who have a very charismatic aura about them and people who survive great events are said 
+to be linked to these stars. 
+ The Unicorn (Autumn). This constellation marks the end of summer. It is made of a number of 
+bright stars and thought to make a horse head with a point for the tip of a unicorn’s horn. It has 
+many different names. The elves call it Correlian and think of it as Correlon Larethian’s mount. 
+Many humans of the North call it Mielikki and see it as a symbol of that goddess. Others name it 
+Eachthighern, the mysterious lord of unicorns and pegasi. 
+ Folk born under this constellation are said to possess quiet strength and to be good at sensing 
+people’s emotions and changes in the weather. 
+ The Gate (Autumn). Called Esetar by the elves, this constellation is thought by many to be the 
+celestial gate from which Dendar, the Night Serpent, with someday emerge to devour the world. 
+The people of Chult believe Dendar will emerge from beneath mountain in their jungle land and 
+they instead call it the Cage and think of it as a prison in which the gods hurl the most evil souls. It 
+appears as a rectangle formed from lines of dim stars. 
+ People born under this constellation are thought to be patient, deep thinkers who are able to have 
+prescient dreams.  
+ Shard of Selûne (Autumn). This diamond-shaped constellation of many stars is highest toward 
+autumn’s end. It’s thought to be a part of Selûne cut from her in the ancient battle between Selûne 
+
+===PAGEBREAK===
+
+and her divine sister, Shar. The wound was so great it made a bright scar upon Shar as well. Some 
+say it was this wound that made the Tears of Selûne. 
+ People born when this constellation is high are said to be mercurial and have conflicting and 
+conflicted natures. It’s considered an ominous omen when twins are born under these stars 
+because it is thought that the siblings will become bitter rivals.  
+Forgotten Realms Terms 
+Banned Words  
+a.m. 
+coffee (should be “kaeth” or “kaethae”) 
+money (should be “coin”) 
+restaurant (should be “feasting hall,” or more 
+formally as “skaethar”)  
+week (should be “tenday”) 
+high elf (refer to the Forgotten Realms subraces) 
+hill dwarf (should be “shield dwarf”) 
+hourglass (should be “sandglass”) 
+mountain dwarf (should be “gold dwarf”) 
+o’clock (should be “bells” but most people don’t 
+reference time so specifically) 
+p.m. 
+aba (a loose, long shirt or tunic, which often has long 
+sleeves; worn by the Bedine) 
+Abeir 
+Abeir-Toril 
+Abyss, the 
+Academy, the (in Menzoberranzan) 
+aearee  
+afterdaze 
+Aillesel Seldarie. (“Sledarine preserve us.” In Elvish.) 
+alaé (Elvish greeting) 
+alu Tel’Quessir (“water elf” in Elvish)  
+alu’dala (“water battle” in Elvish)  
+ar Tel’Quessir (“gold or sun elf” in Elvish) 
+arael (“heart” in Elvish) 
+arael’lia (“heart oak” in Elvish)  
+arael’sha (“heart friend” in Elvish)  
+arael’vae (“heart son” in Elvish)  
+Araumycos 
+archdevil  
+arms-captain  
+arms-major 
+arselu’tel’quess (“high magic” in Elvish)  
+Art, the (magic, spellcasting) 
+Astral Sea, the 
+audience chamber (pref. over throne room) 
+authokh (coin) 
+bae’qeshel telphraezzar (aka the bae’qeshel, or the 
+Whisperers of the Dark. Drow bards.) 
+baneblade  
+barrow gold  
+barrow spirit  
+batrachi 
+battle-mistress  
+battlerager 
+beast-men: ogres (formerly used only by humans, 
+now by gnomes and halflings, too) 
+belbolt (coin) 
+beljuril (gemstone)  
+Binding, the 
+birdpipe (a set of pan pipes) 
+blacklung fever (disease)  
+blackroot (poison)  
+blacktongue (disease)  
+bladedance 
+bloodbeak (bird)  
+bloodfly (pl. bloodflies)  
+bloodpurge (medicine)  
+bloodstaunch (medicine)  
+bloodwood (tree)  
+blueleaf (a drug; also a tree) 
+brainworm  
+Bregan D’aerthe  
+broodmate 
+brittle bones: humans (used only by orcs) 
+broken bones: wounded, defeated, slaves or those 
+too weak to defend themselves or to be worthy of 
+attention. (Used of all races, including their own, but 
+only by orcs) 
+burlbush(es) (flower) 
+Castellan’s Guard (Zhentil Keep) 
+cavefly (pl. caveflies)  
+Change, the 
+changelands (a piece of terrain that clearly doesn't 
+fit in with the surrounding terrain, and therefore was 
+likely caused by the Spellplague way back when) 
+Chosen, the 
+circle, the (of high mages) 
+clearstone  
+cloudwrack 
+coin (not money)  
+coronal  
+Corpsehaven  
+crysstone 
+
+===PAGEBREAK===
+
+culler 
+dala (“battle” in Elvish)  
+daggerhedge (bush)  
+dark bolt 
+Dark Mother 
+darkblade (mercenary lacking principals) 
+darkblossom (bush) 
+darkenbeast  
+darkhall 
+darkrot (disease)  
+Darksong Knight  
+darkstone crystal(s) 
+darksword 
+dead-disk (phaerimm) 
+deadwall 
+Deep, the (or Shadow Deep, the) 
+deepbear 
+deepnight (midnight) 
+demon-boar 
+Disciples of Phelthong 
+Dome of the Stars, the (council chamber of 
+Evermeet) 
+downland (southern Cormyr) 
+dracophoenix 
+dragon scales (protection spell) 
+dragon’s-teeth (game)  
+durthan (the evil wychlaran)  
+duskwood (tree) 
+dragonbone (made of the bones of a dragon) 
+dragonkind 
+Dwarvish (the language) 
+earth node (also “nodes”) 
+earthmote (not earthberg or earth-mote) 
+Eilistraeen (worshiper of Eilistraee)  
+Eldest (Evermeet) 
+el’tael (Elvish for a master of the bladesinging art, 
+singular and plural) 
+Elemental Chaos,  
+the elfkin 
+elflord  
+elf maid 
+elfroad 
+elfsong 
+elven lodge 
+Elvish (the language) 
+Ereilir Vor (Plains of Soulfire, Demonweb Pits) 
+evenfeast (can replace “dinner”)  
+eyehead (epithet for beholder) Faerie 
+evermead (a mead crafted only in Evermeet) 
+faerielight 
+Faerûn (continent, “everywhere in Faerûn”, not “on 
+Faerûn.”)  
+Faerzress 
+Fair Folk, the: elves 
+fairlady 
+Fane of Shadow (temple on Shade Enclave)  
+Far Realm, the 
+featherlung (plague/disease)  
+featherwood (tree) 
+felsul (tree) 
+felthane 
+festhall (syn. Brothel and gambling place)  
+fey gates 
+fey mounds 
+fey sites 
+Feywild, the 
+fingertalk (sign language of thieves, not drow, see 
+also “handcant”) 
+fire-blast (n.) 
+First Hilt (leader of the bladesingers) 
+First-Speaker (leader of the Cult of the Dragon) 
+flakefungus  
+fleshmason 
+fleshwort (medicine) 
+forestmote freefolk 
+Free Folk, the: satyrs (a human term now used by all 
+races, including satyrs) 
+Fringe, the (aka Shadow Fringe, the)  
+GatherStone (phaerimm term)  
+Gauntlgrym 
+gentlesir 
+ghazneth 
+Ghazneth Scourge 
+glaur (a short, flared, and curved horn which 
+resembles a cornucopia, and is fitted with valves 
+[those without valves are known as gloons]) 
+gloryhouse  
+glowball  
+glowstone 
+godsforsaken (replaces Godforsaken) 
+gold (not money) 
+Goodman/Goodwoman (a title or form of address, 
+usu. capped) 
+goodsir (a form of address, not capped) 
+grand mage (title, Evermeet) 
+graycloth guildhouse  
+Gutbuster Brigade 
+hamach (n.) 
+Hamarfae 
+hand drum (s double-headed drum) 
+handcant (thieves’ sign language, see also 
+“fingertalk”) 
+Harper (member of organization) 
+Harpers, the (name of organization) 
+hathran (one of the leaders of the sisterhood of the 
+wychlaran) 
+
+===PAGEBREAK===
+
+heartstop (use in place of “heart attack”)  
+Hells (also, the Nine Hells) 
+hellsteed (aka nightmare)  
+Hidden One’s Gift,  
+the high loregem 
+High Council,  
+the high mage 
+high magic  
+highsun (noon) 
+Hill Elder (Evermeet, Evereska) 
+hillmote  
+hiresword 
+hin: halflings (informal but polite; everyday usage 
+among halflings) 
+homeagain (greeting: “Glad homeagain, Joe.”) 
+honeyvine (flower) 
+House (i.e.: You are a member of a noble House.)  
+House Unnamed 
+Hulorn (Lord Mayor of Selgaunt) 
+hurbryn: humans (a satyr and dryad term meaning 
+“heavy-footed ones,” now used by halflings and 
+creeping into usage by other races) 
+ildva (the bond between the wychlaran and the 
+vremyonni) 
+Infiernadex of Aesperus (book) 
+iqua Tel`Quessir 
+lanceboard (chess-like game) 
+kaer’vaelen (“First Hilt of the bladesingers” in Elvish)  
+Khazid’hea (Cattie-brie’s former sword) 
+lady’s promise (flower) 
+laspar (tree) 
+LastHome, the (aka Evereska) 
+Leaves of One Night, The (ancient religious text, 
+Shar) 
+leShay 
+lia (“oak” in Elvish)  
+Lolth 
+Lolthite (derogatory) 
+Long Watch, the (Evereska guard) 
+longbarb (aged phaerimm) 
+longhorn (a Faerûn flute) 
+loregem  
+lorestone  
+mage rune  
+marchion 
+magecraft (noun) 
+magelight 
+magelord 
+magesight 
+Manyhanded, the: humans (derived from “The 
+Manyhanded Curse,” an old elf insult about humans) 
+marsh fever (disease)  
+Master of Melee-Magthere 
+Master of Sorcere  
+Melting, the  
+menhirs 
+meat: all intelligent prey (used only by orcs) 
+middark  
+mind mage 
+Mighty, the: orcs (used only by orcs, to speak of their 
+race) 
+mindwine (narcotic wine) 
+mintwater 
+misthead (mistleaf addict) 
+mistleaf (drug) 
+morningfeast (in place of breakfast)  
+Most High, the 
+murdath 
+myrmidar (ancient Netherese warrior) 
+mythaalnirr darach (Elvish, spell of mythal-shaping) 
+mythal  
+mythalcraft  
+mythal force  
+mythal-shaping  
+mythal stone 
+mythal trap  
+mythal-weave 
+mythallar (Netheril) 
+n Tel’Quessir (“not People” in Elvish, meaning a non-
+elf)  
+Nine Hells 
+Nightshadow  
+Nightstar 
+noble fey, the 
+orc hold 
+orcling (young or small orc) 
+orcspawn (syn. half-orc) 
+orcswill (orc wine or beer, or a lie) 
+oroosh: humans (used by treants, this literally means 
+“never-stopping talkers”) 
+othlor (the elite among the hathran, othlor means 
+“true one”) 
+pack lizard 
+Palace Most High (on Shade Enclave) 
+paleblood  
+paleblooded 
+peeptalk (language of birds) 
+People, the: elves (used only by elves) 
+phaerimm (pl.: phaerimm, not phaerimms) 
+piwafwi 
+plaguechanged (someone who has been changed by 
+spellplague to a monstrous extent) 
+plaguelands (lands that still hold pockets of 
+spellplague) 
+Plaguewrought Land, the (a particular place on the 
+map that is riddled with spellplague) 
+
+===PAGEBREAK===
+
+portal-stone  
+post-tower  
+prairiemote  
+probiter 
+Proud Peoples, the: dwarves and elves, collectively 
+(used only by humans, and becoming archaic) 
+Purple Dragons  
+quarter-bench 
+Queen’s Guard (Evermeet)  
+Queen’s Spellguard (Evermeet)  
+Rage, the (in re: dragons) 
+Quiet Folk, the: gnomes 
+Rage of Dragons  
+rellana (wine)  
+Red Wizards  
+Returned Abeir  
+Reverie, the 
+ripplebark (fungus)  
+Robes of the Archmage 
+roofwrack 
+rothé  
+rothéhide  
+runner-lizard  
+sage probiter 
+sallar (typhuslike disease) 
+sarrukh  
+saurial 
+sava (chesslike game) 
+sceptrana 
+Scourged Legion 
+the Seldarine, the (elf pantheon)  
+selukiira (sing. or pl.) 
+Selûne (the goddess and the Moon) 
+Seraph 
+Seven, the (the seven liches that created 
+Crenshinibon) 
+Seven Sisters 
+sha (“friend” in Elvish) 
+sha`ir 
+Shade Enclave (what Shadovar call their city) 
+Shadow Deep, the (or Deep, the)  
+Shadowfell, the 
+Shadow Fringe, the (or Fringe, the)  
+Shadow Magic 
+shadow net  
+shadow self  
+shadow shield  
+shadowshell 
+shadowalk(ing)  
+shadow blanket  
+shadow crisis 
+shadowsilk 
+shadowstep  
+shadowstuff  
+shadowtop (tree)  
+shadow-web  
+Shadow Weave 
+Shaeradim, the 
+shaking fever (disease), the 
+Shaking Plague 
+Sha’Quessir (“elf friend” in Elvish)  
+Sharn Wall, the 
+shawm (a double-reed instrument, the ancestor of 
+the oboe and bassoon) 
+sickstone  
+silver fire  
+sky mage 
+slaugh (it is the word elves use for “pigs,” but 
+literally translates as “mud-wallowing-dogs”) 
+Sly Folk, the (halflings—mainly said by dwarves and 
+humans) 
+smallhold (modest family farm) 
+smokethorn (tree)  
+snortsnout (derogotory for orc)  
+snowfinch(es) (bird)  
+soapleaf (tree) 
+songblast songspider 
+songhorn (a recorder) 
+sorn: drow (used only by eladrin, elves, and half-
+elves, and drow themselves) 
+soulbinding  
+soultheft s 
+pellarcher  
+spellblade 
+spell-guard 
+spell-major (Myth Drannor)  
+Spellplague, the (the event itself)  
+spellplague (pockets of the spellplague)  
+spell-prison 
+spellchain 
+spellfire 
+SpellGather (phaerimm) 
+spellscar  
+spellsinger  
+spell-song 
+spellscarred (someone who has been changed by 
+spellplague, but not to a monstrous extent) 
+spellwarped (derogatory term for someone with a 
+spellscar)  
+Spirit Soaring (not the Spirit Soaring) 
+Splicing, the 
+sporeflour bread (Underdark food staple)  
+Spotted Plague (plague/disease) 
+ssri Tel’Quessir 
+standath  
+starsphere 
+
+===PAGEBREAK===
+
+Stone Guard (elite troops from Gracklstugh) 
+stonefire bomb  
+stonelore 
+storehouse (pref. over warehouse) 
+Stout Folk, the: dwarves 
+stranglecord  
+swordmagic  
+swordmaster  
+swordwight 
+sy Tel’Quessir (“green or wild elf” in Elvish) 
+Syluné (one of the Seven Sisters) 
+tael (Elvish for a student of bladesinging in Elvish, 
+singular and plural) 
+tallglass  
+tanarukk  
+taol (coin) 
+tantan (a tambourine) 
+Taumaril (Cattie-brie’s bow) 
+Tears of Selûne, the 
+telkiira (sing. or pl.) 
+telmiirkara neshyrr (Elvish, “the rite of 
+transformation.”)  
+telthor (the nature-spirits the Rashemi worship)  
+telthukiilir (High Seeing Orb) 
+tenday (never week)  
+Ten-Towns 
+teu Tel’Quessir (“silver or moon elf” in Elvish) 
+thelarr (also called the whistlecane, this is a simple 
+reed instrument) 
+theurglass 
+thinblade (elven rapier) 
+thornback (epithet for phaerimm) 
+thoughtspeech throatslake (drink)  
+thunderthrone 
+tocken (set of carved, oval, open-ended bells, played 
+like a xylophone) 
+Tomb Guard (elves only) 
+Tower (Evermeet, but only in reference to the 
+institution, not the building)  
+Tower Guard (Evermeet) 
+tradebar  
+trademeet  
+tradeyard  
+Undercity  
+Underdark, the 
+ugrukh: wounded, defeated, slaves or those too 
+weak to defend themselves or to be worthy of 
+attention. (Used of all races, including their own, but 
+only by orcs) 
+Underhalls 
+undermages  
+underpriest  
+underpriestesses 
+va (“father” in Elvish) 
+vae (“son” in Elvish) 
+vigilant sister (priestess of Shar)  
+Vyshaanti battle-platform V 
+yvadnya (Rashemen witch-lore)  
+warchief 
+WarGather (phaerimm term) 
+wargong (also called a shieldgong, the wargong is 
+often made of the shields of one’s vanquished foes. 
+It is played with mallets) 
+warmaster  
+warpriest  
+war-dog  
+war-golem  
+war-mage  
+war-mythal  
+war wizard 
+watch-wizard  
+watermote 
+weapons master (not weapon master) 
+weathercloak  
+Weave, the  
+web street 
+weirwood (tree) 
+whipblade (a sort of rapier) 
+whipdagger 
+whitewasting (leprosylike disease)  
+winterchill fever (pneumonialike disease)  
+witchfire 
+Witch-King (of Vaasa) 
+World Above (Underdark term in ref. to the surface 
+world) 
+world-window  
+worms: goblins and small or puny orcs or other 
+goblinkin (used only by orcs) 
+wristbow 
+wychlaran (Rashemi witches) 
+yaddleskwee 
+yarting (a guitar) 
+Yor’thae 
+zaen’sheaen (“all-seeing gaze” in Elvish) 
+zalanthar (tree) 
+zulkoon (a complex and semiportable pump-organ) 
+zulkoon (musical instrument)  
+zurkhwood (a rare hardwood)  
+zzar 
+ 

@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8" /><script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"NRJS-2a3c9db24d2641e24b0",applicationID:"1184416718"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n,r){return function(){return s.recordSupportability("API/"+e+"/called"),o(t+e,[u.now()].concat(c(arguments)),n?null:this,r),n?void 0:this}}var o=t("handle"),a=t(9),c=t(10),f=t("ee").get("tracer"),u=t("loader"),s=t(4),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",v=l+"ixn-";a(p,function(t,e){d[e]=i(l,e,!0,"api")}),d.addPageAction=i(l,"addPageAction",!0),d.setCurrentRouteName=i(l,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(v+"tracer",[u.now(),t,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw f.emit("fn-err",[arguments,this,t],n),t}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(v,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),s.recordSupportability("API/noticeError/called"),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){var r=!1;try{var i=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,i),window.removeEventListener("testPassive",null,i)}catch(o){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],4:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return o("storeMetric",n,null,"api"),n}function i(t,e){var n=[c,t,{name:t},e];return o("storeEventMetrics",n,null,"api"),n}var o=t("handle"),a="sm",c="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:c},recordSupportability:r,recordCustom:i}},{}],5:[function(t,e,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=t(11);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],6:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?l("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&l("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(u&&u<r.startTime)return;var i=[r],o=a({});o&&i.push(o),l("lcp",i)}}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||l("cls",[t])})}function a(t){var e=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(e)return e.type&&(t["net-type"]=e.type),e.effectiveType&&(t["net-etype"]=e.effectiveType),e.rtt&&(t["net-rtt"]=e.rtt),e.downlink&&(t["net-dlink"]=e.downlink),t}function c(t){if(t instanceof y&&!w){var e=Math.round(t.timeStamp),n={type:t.type};a(n),e<=v.now()?n.fid=v.now()-e:e>v.offset&&e<=Date.now()?(e-=v.offset,n.fid=v.now()-e):e=v.now(),w=!0,l("timing",["fi",e,n])}}function f(t){"hidden"===t&&(u=v.now(),l("pageHide",[u]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var u,s,d,p,l=t("handle"),v=t("loader"),m=t(8),g=t(3),y=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){s=new PerformanceObserver(r);try{s.observe({entryTypes:["paint"]})}catch(h){}d=new PerformanceObserver(i);try{d.observe({entryTypes:["largest-contentful-paint"]})}catch(h){}p=new PerformanceObserver(o);try{p.observe({type:"layout-shift",buffered:!0})}catch(h){}}if("addEventListener"in document){var w=!1,b=["click","keydown","mousedown","pointerdown","touchstart"];b.forEach(function(t){document.addEventListener(t,c,g(!1))})}m(f)}},{}],7:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}e.exports={agent:i,version:o,match:r}},{}],8:[function(t,e,n){function r(t){function e(){t(c&&document[c]?document[c]:document[o]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,i(!1))}var i=t(3);e.exports=r;var o,a,c;"undefined"!=typeof document.hidden?(o="hidden",a="visibilitychange",c="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",a="webkitvisibilitychange",c="webkitVisibilityState")},{}],9:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],10:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],11:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,f,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var c=e(i),f=m(n),u=f.length,s=0;s<u;s++)f[s].apply(c,r);var p=d[w[n]];return p&&p.push([b,n,r,c]),c}}function o(t,e){h[t]=m(t).concat(e)}function v(t,e){var n=h[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return h[t]||[]}function g(t){return p[t]=p[t]||i(n)}function y(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var h={},w={},b={on:o,addEventListener:o,removeEventListener:v,emit:n,get:g,listeners:m,context:e,buffer:y,abort:c,aborted:!1};return b}function o(t){return u(t,f,a)}function a(){return new r}function c(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var f="nr@context",u=t("gos"),s=t(9),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!M++){var t=T.info=NREUM.info,e=m.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();f(x,function(e,n){t[e]||(t[e]=n)});var n=a();c("mark",["onload",n+T.offset],null,"api"),c("timing",["load",n]);var r=m.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=l+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===m.readyState&&o()}function o(){c("mark",["domContent",a()+T.offset],null,"api")}var a=t(5),c=t("handle"),f=t(9),u=t("ee"),s=t(7),d=t(2),p=t(3),l=d.getConfiguration("ssl")===!1?"http":"https",v=window,m=v.document,g="addEventListener",y="attachEvent",h=v.XMLHttpRequest,w=h&&h.prototype,b=!1;NREUM.o={ST:setTimeout,SI:v.setImmediate,CT:clearTimeout,XHR:h,REQ:v.Request,EV:v.Event,PR:v.Promise,MO:v.MutationObserver};var E=""+location,x={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1216.min.js"},O=h&&w&&w[g]&&!/CriOS/.test(navigator.userAgent),T=e.exports={offset:a.getLastTimestamp(),now:a,origin:E,features:{},xhrWrappable:O,userAgent:s,disabled:b};if(!b){t(1),t(6),m[g]?(m[g]("DOMContentLoaded",o,p(!1)),v[g]("load",r,p(!1))):(m[y]("onreadystatechange",i),v[y]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var M=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,f,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,f],s],t)}c(n+"start",[o,a,f],s,u);try{return p=e.apply(a,o)}catch(v){throw c(n+"err",[o,a,v],s,u),v}finally{c(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var c,f,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)f=e[u],c=t[f],a(c)||(t[f]=n(c,s?f+r:r,i,f,o))}function c(n,r,o,a){if(!v||e){var c=v;v=!0;try{t.emit(n,r,o,e,a)}catch(f){i([f,n,r,o],t)}v=c}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function c(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function f(t,e,n){var r=t[e];t[e]=c(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(10),p="nr@original",l=Object.prototype.hasOwnProperty,v=!1;e.exports=r,e.exports.wrapFunction=c,e.exports.wrapInPlace=f,e.exports.argsToArray=u},{}]},{},["loader"]);</script>    
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<!-- OneTrust Cookies Consent Notice start for newstatesman.com -->
+<script src="https://cdn-ukwest.onetrust.com/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="2e597544-b1c7-4c28-ae67-3ba5ee5ae447" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for newstatesman.com -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v17.8 (Yoast SEO v17.8) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm</title>
+	<meta name="description" content="Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with Assassinâ?Ts Apprentice (1995) and ending with Assassinâ?Ts Fate (2017). Over the course of 20" />
+	<link rel="canonical" href="https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm" />
+	<meta property="og:description" content="The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons." />
+	<meta property="og:url" content="https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" />
+	<meta property="og:site_name" content="New Statesman" />
+	<meta property="article:published_time" content="2018-07-27T15:47:00+00:00" />
+	<meta property="article:modified_time" content="2021-06-16T08:12:09+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Pauline Bock" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="8 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.newstatesman.com/#organization","name":"New Statesman","url":"https://www.newstatesman.com/","sameAs":[],"logo":{"@type":"ImageObject","@id":"https://www.newstatesman.com/#logo","inLanguage":"en-US","url":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/New-Statesman-Logo.svg","contentUrl":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/New-Statesman-Logo.svg","caption":"New Statesman"},"image":{"@id":"https://www.newstatesman.com/#logo"}},{"@type":"WebSite","@id":"https://www.newstatesman.com/#website","url":"https://www.newstatesman.com/","name":"New Statesman","description":"New Times, New Ideas, New Statesman","publisher":{"@id":"https://www.newstatesman.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.newstatesman.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#primaryimage","inLanguage":"en-US","url":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg","contentUrl":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg","width":2560,"height":1707},{"@type":"WebPage","@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#webpage","url":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm","name":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","isPartOf":{"@id":"https://www.newstatesman.com/#website"},"primaryImageOfPage":{"@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#primaryimage"},"datePublished":"2018-07-27T15:47:00+00:00","dateModified":"2021-06-16T08:12:09+00:00","description":"Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with Assassin\u00e2?Ts Apprentice (1995) and ending with Assassin\u00e2?Ts Fate (2017). Over the course of 20","breadcrumb":{"@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"]}]},{"@type":"BreadcrumbList","@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.newstatesman.com/"},{"@type":"ListItem","position":2,"name":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm"}]},{"@type":"Article","@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#article","isPartOf":{"@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#webpage"},"author":{"@id":"https://www.newstatesman.com/#/schema/person/f1d6da32ef49b6672804b0cf0a36d56d"},"headline":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","datePublished":"2018-07-27T15:47:00+00:00","dateModified":"2021-06-16T08:12:09+00:00","mainEntityOfPage":{"@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#webpage"},"wordCount":1661,"commentCount":0,"publisher":{"@id":"https://www.newstatesman.com/#organization"},"image":{"@id":"https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#primaryimage"},"thumbnailUrl":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg","articleSection":["Long reads"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm#respond"]}],"copyrightYear":"2018","copyrightHolder":{"@id":"https://www.newstatesman.com/#organization"}},{"@type":"Person","@id":"https://www.newstatesman.com/#/schema/person/f1d6da32ef49b6672804b0cf0a36d56d","name":"Pauline Bock","image":{"@type":"ImageObject","@id":"https://www.newstatesman.com/#personlogo","inLanguage":"en-US","url":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/Author-1.png","contentUrl":"https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/Author-1.png","caption":"Pauline Bock"},"url":"https://www.newstatesman.com/author/pauline-bock"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.newstatesman.com' />
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//cdn.permutive.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="New Statesman &raquo; Feed" href="https://www.newstatesman.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="New Statesman &raquo; Comments Feed" href="https://www.newstatesman.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="New Statesman &raquo; Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm Comments Feed" href="https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm/feed" />
+<link rel='stylesheet' id='liveblog24_live_blogging_tool-cgb-style-css-css'  href='https://www.newstatesman.com/wp-content/plugins/24liveblog/dist/blocks.style.build.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-components-css'  href='https://www.newstatesman.com/wp-includes/css/dist/components/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-editor-css'  href='https://www.newstatesman.com/wp-includes/css/dist/block-editor/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-nux-css'  href='https://www.newstatesman.com/wp-includes/css/dist/nux/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-reusable-blocks-css'  href='https://www.newstatesman.com/wp-includes/css/dist/reusable-blocks/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-editor-css'  href='https://www.newstatesman.com/wp-includes/css/dist/editor/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='main-css-css'  href='https://www.newstatesman.com/wp-content/plugins/storefronts/assets/css/main_NS.css' type='text/css' media='all' />
+<link rel='stylesheet' id='figaro_css_main-css'  href='https://www.newstatesman.com/wp-content/uploads/sites/2/figaro/assets/css/main996272dbf0bd1e4b2f7392fec4c55449.css' type='text/css' media='all' />
+<link rel='stylesheet' id='figaro_css_article-css'  href='https://www.newstatesman.com/wp-content/uploads/sites/2/figaro/assets/css/article996272dbf0bd1e4b2f7392fec4c55449.css' type='text/css' media='all' />
+<link rel='stylesheet' id='tablepress-default-css'  href='https://www.newstatesman.com/wp-content/plugins/tablepress/css/default.min.css' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.newstatesman.com/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+<script type='text/javascript' id='datalayer-script-js-extra'>
+/* <![CDATA[ */
+var datalayer_script_vars = {"articleHeadline":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","contentType":"post","sponsored":"false","clientName":"pauline_bock","editorialChannel":"Long reads","channel":null,"pageName":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","metaTitle":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","articlePublishDate":"27 July 2018","ArticlePublishTime":"3:47 pm","timeSincePublication":"1780363768","authorName":"","pageId":"23017","storyType":"default","contentTags":null,"previousPage":"","domain":"https:\/\/www.newstatesman.com","platform":"website","localDate":"27th Jul 2018","navigationDestinationPage":"robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm","NavigationLinkType":"post","pageUrl":"https:\/\/www.newstatesman.com\/long-reads\/2018\/07\/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm","utmSource":null,"SubscriptionPaymentPlan":null,"SubscriptionStartDate":null,"SubscriptionEndDate":null,"UserStatus":"","EV_DID":null,"EV_SID":null};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-tracking/js/datalayer.js' id='datalayer-script-js'></script>
+<script type='text/javascript' id='crb-google-tagmanager-js-extra'>
+/* <![CDATA[ */
+var crbTracker = {"googleTagManager":{"id":"GTM-WCSDN56"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-tracking//js/googleTagManager.js' id='crb-google-tagmanager-js'></script>
+<script type='text/javascript' async src='https://cdn.permutive.com/e82dc6a7-79a5-49b7-b1ed-a89a37f2fe8b-web.js' id='crb-permutive-cdn-js'></script>
+<script type='text/javascript' id='crb-permutive-js-extra'>
+/* <![CDATA[ */
+var crbTracker = {"permutive":{"workspaceID":"e82dc6a7-79a5-49b7-b1ed-a89a37f2fe8b","publicAPIKey":"62905692-4299-42af-951f-aa610546b2b1","postTitle":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","postID":23017,"postType":"post","postDate":"27 July 2018","postAuthor":"Pauline Bock","postTags":false,"postCategories":"Long reads","collectDomains":"https:\/\/www.newstatesman.com\/wp-content\/plugins\/nsmg-tracking\/\/js\/pollsInFrame.js","pageViewEvent":{"company_name":"","post_title":"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm","post_id":23017,"categories":["Long reads"],"tags":[],"author":"Pauline Bock","post_type":"post","article_date":"2018-07-27T15:47:00Z","regions":[],"industry_taxonomy":[],"sectors":[],"report_type":""}}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-tracking//js/permutive.js' id='crb-permutive-js'></script>
+<script type='text/javascript' id='crb_segmentation-js-extra'>
+/* <![CDATA[ */
+var crbSiteData = {"ajaxURL":"https:\/\/www.newstatesman.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-tracking//js/segmentation.js' id='crb_segmentation-js'></script>
+<link rel="https://api.w.org/" href="https://www.newstatesman.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.newstatesman.com/wp-json/wp/v2/posts/23017" /><meta name="generator" content="WordPress 5.8.1" />
+<link rel='shortlink' href='https://www.newstatesman.com/?p=23017' />
+<link rel="alternate" type="application/json+oembed" href="https://www.newstatesman.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.newstatesman.com%2Flong-reads%2F2018%2F07%2Frobin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.newstatesman.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.newstatesman.com%2Flong-reads%2F2018%2F07%2Frobin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm&#038;format=xml" />
+<meta name="google-signin-client_id" content="426552080221-pvris7h58b4818a34cjqnvpaolgihb16.apps.googleusercontent.com" /> <script async src="https://news.google.com/swg/js/v1/swg-gaa.js"></script><script async subscriptions-control="manual" src="https://news.google.com/swg/js/v1/swg.js"></script><script async src="https://apis.google.com/js/platform.js"></script><style>
+.pop-up__form { height: 100% !important; }
+.pop-up__submit-box { top: auto !important; }
+
+@media (min-width: 48rem) {
+.pop-up__inner {
+padding-bottom: 40px;
+}
+}
+</style><script type="text/javascript">
+!function(){"use strict";var o=window.jstag||(window.jstag={}),r=[];function n(e){o[e]=function(){for(var n=arguments.length,t=new Array(n),i=0;i<n;i++)t[i]=arguments[i];r.push([e,t])}}n("send"),n("mock"),n("identify"),n("pageView"),n("unblock"),n("getid"),n("setid"),n("loadEntity"),n("getEntity"),n("on"),n("once"),n("call"),o.loadScript=function(n,t,i){var e=document.createElement("script");e.async=!0,e.src=n,e.onload=t,e.onerror=i;var o=document.getElementsByTagName("script")[0],r=o&&o.parentNode||document.head||document.body,c=o||r.lastChild;return null!=c?r.insertBefore(e,c):r.appendChild(e),this},o.init=function n(t){return this.config=t,this.loadScript(t.src,function(){if(o.init===n)throw new Error("Load error!");o.init(o.config),function(){for(var n=0;n<r.length;n++){var t=r[n][0],i=r[n][1];o[t].apply(o,i)}r=void 0}()}),this}}();
+// Define config and initialize Lytics tracking tag.
+jstag.init({
+  src: 'https://c.lytics.io/api/tag/20af9173a532bd00cd6ce94f30c12193/latest.min.js'
+});
+</script><link rel="preload" href="https://www.newstatesman.com/wp-content/themes/figaro/resources/images/lead-img.png" as="image" media="(min-width: 300px)">                <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+                <script>
+                      window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_LB', [[970,250]], 'div-gpt-ad-1231130-1')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_MLB', [[320,50]], 'div-gpt-ad-1231130-5')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU1', [[300,250]], 'div-gpt-ad-1231130-2')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU2', [[300,250]], 'div-gpt-ad-1231130-3')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU3', [[300,250],[300,600]], 'div-gpt-ad-1231130-4')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB1', [[970,250]], 'div-gpt-ad-1231130-6')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB2', [[970,250]], 'div-gpt-ad-1231130-7')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB3', [[970,250]], 'div-gpt-ad-1231130-8')
+             .addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });                    googletag.cmd.push(function() {
+                     googletag.pubads().setTargeting( "Author", ["Pauline Bock"] ); googletag.pubads().setTargeting( "Category", ["Long reads"] );
+                    googletag.pubads().collapseEmptyDivs();
+                    });
+                </script>
+                
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="icon" href="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/07/cropped-TNS-favicon-1-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/07/cropped-TNS-favicon-1-300x300.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/07/cropped-TNS-favicon-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/07/cropped-TNS-favicon-1-300x300.png" />
+		<style type="text/css" id="wp-custom-css">
+			.pre-footer-subscribe{display:none;}		</style>
+		</head>
+<body class="post-template-default single single-post postid-23017 single-format-standard wp-embed-responsive wrapper-has-shadow block-head-1 magazine1 is-thumb-overlay-disabled is-desktop is-header-layout-3 sidebar-right has-sidebar post-layout-1 narrow-title-narrow-media">
+            <ev-engagement group-name="nsm"></ev-engagement>    
+
+
+
+                    
+
+        <script>
+            //EV.Dab.init();
+            var params = JSON.stringify({
+                articleId: '23017',
+                site: 'New Statesman',
+                title: 'Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm',
+                authors: 'Pauline Bock',
+                section: 'Long reads',
+            geoB:'US',                               
+                category: 'Long reads', 
+                tags: '',
+                                //adblock: EV.Dab.isAdblockDetected()
+                geo: 'US',
+            });
+            var allTags = "";
+        </script>
+        <!-- Google Tag Manager (noscript) -->
+				<noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WCSDN56'
+				height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
+                        <!-- End Google Tag Manager (noscript) -->    <header class="c-header" id="c-header">
+
+    <section class="c-header__wrapper">
+
+                                 <div class="stream-item ad stream-item-above-header align-center ad-desktop">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <!-- GPT AdSlot 1 for Ad unit '/5269235/New_Statesman_2021/Top_LB' ### Size: [[970,250]] -->
+<div id='div-gpt-ad-1231130-1'>
+
+</div>
+  <script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_LB', [[970,250]], 'div-gpt-ad-1231130-1')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_MLB', [[320,50]], 'div-gpt-ad-1231130-5')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU1', [[300,250]], 'div-gpt-ad-1231130-2')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU2', [[300,250]], 'div-gpt-ad-1231130-3')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU3', [[300,250],[300,600]], 'div-gpt-ad-1231130-4')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB1', [[970,250]], 'div-gpt-ad-1231130-6')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB2', [[970,250]], 'div-gpt-ad-1231130-7')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB3', [[970,250]], 'div-gpt-ad-1231130-8')
+             .addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1231130-1'); });
+  </script>
+<!-- End AdSlot 1 -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                     <div class="stream-item ad stream-item-above-header align-center ad-mobile">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <!-- GPT AdSlot 5 for Ad unit '/5269235/New_Statesman_2021/Top_MLB' ### Size: [[320,50]] -->
+<div id='div-gpt-ad-1231130-5'>
+
+</div>
+  <script>
+ window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_LB', [[970,250]], 'div-gpt-ad-1231130-1')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_MLB', [[320,50]], 'div-gpt-ad-1231130-5')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU1', [[300,250]], 'div-gpt-ad-1231130-2')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU2', [[300,250]], 'div-gpt-ad-1231130-3')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU3', [[300,250],[300,600]], 'div-gpt-ad-1231130-4')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB1', [[970,250]], 'div-gpt-ad-1231130-6')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB2', [[970,250]], 'div-gpt-ad-1231130-7')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB3', [[970,250]], 'div-gpt-ad-1231130-8')
+             .addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1231130-5'); });
+  </script>
+<!-- End AdSlot 5 -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                            
+        <section class="c-header-title">
+            <div class="c-header-title__conversion">
+                <p class="c-header-title__tagline">Support 100 years of independent journalism.</p>
+
+                            <script>
+                    var baseHREF = "https://www.newstatesman.com";
+                </script>
+                <a  id="evSubscribe" href="https://www.newstatesman.com/subscribe/"  class="c-header__button c-header__button--subscribe ">Subscribe</a>
+                <ev-loged id="evLogedIn">
+                    <div class="c-dropdown c-header__account">
+                        <span class="c-dropdown__toggle">Account <i class="c-icon c-icon--arrow-down  "></i></span>
+                        <div class="c-dropdown__container c-dropdown__container--sm">
+                            <ul>
+                                <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=0'"  class="c-dropdown__item">My profile</li>
+                                <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=1'"  class="c-dropdown__item">Subscriptions</li>
+                                <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=2'"  class="c-dropdown__item">Newsletters</li>
+                                <li id="evLogout" onclick="EV.Core.UI.logout();setTimeout(function(){window.location='https://www.newstatesman.com/ev-login/'; },250)"  class="c-dropdown__item u-border-top">Sign out</li>
+                            </ul>
+                        </div>
+                    </div>
+                </ev-loged>
+                <ev-NotLoged  id="evNotLogedIn">
+                    <!--a class="c-header__button c-header__button--register ">Register</a-->
+                    <a id="evSignIn" href="https://www.newstatesman.com/ev-login/" class="c-header__button c-header__button--login ">Sign In</a>
+                </ev-NotLoged>
+            
+
+               
+            </div>
+            
+<div id="logo" class="c-header-title__logo " >
+
+        
+    <a title="New Statesman" href="https://www.newstatesman.com//"
+        class="header__logo">
+        <img src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/TNS_master_logo.svg" alt="New Statesman" >    </a>
+
+        
+</div><!-- #logo /-->
+
+        
+        </section>
+
+        
+            <div class="c-header-edition">
+                <ul class="c-header-edition__dropdown">
+                    <li class="c-header-edition__current">
+                        <span class="c-header-edition__dropdown-bkg"></span>
+                        <span class="c-header-edition__dropdown-link">UK Edition</span><i class="icon-chevron-down"></i>
+                        <ul class="c-header-edition__dropdown--sub">
+                                                            <li><a href="https://www.newstatesman.com/?fsedition=international">International Edition</a></li>
+                                                    </ul>
+                    </li>
+                </ul>
+            </div>
+
+            
+    </section>
+
+    <nav class="c-header-nav">
+        <div class="c-header-nav__container">
+
+            <a href="#" data-target="mega-menu" id="mega-menu-button" class="c-header__button c-header__button--mega-menu c-hamburger-btn">
+                <span class="c-hamburger-btn__bars">
+                    <span class="c-hamburger-btn__bar"></span>
+                    <span class="c-hamburger-btn__bar"></span>
+                    <span class="c-hamburger-btn__bar"></span>
+                </span>
+                <span>All Sections</span>
+            </a>
+        <div class="c-header-nav__search">
+            <div id="header-search-form" data-link="header-search" class="c-header-nav__search__form">
+                <form action="https://www.newstatesman.com/" class="c-search-form" method="get" role="search">
+    <label>
+
+        <input type="text" title="Search for:" name="s" value="" placeholder="Search &hellip;" class="c-search-form__input field" />
+    </label>
+
+    
+    <button type="submit" class="c-search-form__btn c-search-form__text icon-search">
+        Search    </button>
+</form>
+            </div>
+            <a href="#" id="header-search" class="c-header__button c-header__button--search"><i class="c-icon icon-search"></i></a>
+        </div>
+        <div class="c-header-nav__main">
+            <a href="#" id="header-dropdown" data-target="menu-main-menu-uk" class="c-header__button c-header__button--main-nav">In this section</a>
+            <div class="c-header-nav__main__container"><ul id="menu-uk" class="c-header-nav__main__nav" data-link="header-dropdown"><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/politics">Politics</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/world-affairs">World</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/culture">Culture</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/ideas">Ideas</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/long-reads">Long Reads</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/environment">Environment</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/business">Business</a><li class=""><a class="c-header-nav__main__link " href="https://sotn.newstatesman.com/">State of the Nation</a><li class=""><a class="c-header-nav__main__link " href="https://www.newstatesman.com/spotlight">Spotlight</a><li class=""><a class="c-header-nav__main__link " href="/magazine/american-darkness">Magazine</a></ul></div>
+        </div>
+        <div class="c-header-nav__profile">
+                    <div class="c-dropdown">
+                <span class="c-header-nav__profile-icon c-icon icon-account"></span>
+                <div class="c-dropdown__container c-dropdown__container--sm">
+                    <ul>
+                    <ev-loged id="evLogedIn_mm">
+                        <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=0'" class="c-dropdown__item">My profile</li>
+                        <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=1'" class="c-dropdown__item">Subscriptions</li>
+                        <li onClick="window.location='https://www.newstatesman.com/my-account/?tab=2'" class="c-dropdown__item">Newsletters</li>
+                        <li onclick="EV.Core.UI.logout();setTimeout(function(){window.location='https://www.newstatesman.com/ev-login/'; },250)"   class="c-dropdown__item u-border-top">Sign out</li>
+                    </ev-loged>
+                    <ev-NotLoged  id="evNotLogedIn_mm"> 
+                        <li onClick="window.location='https://www.newstatesman.com/subscribe/'"  class="c-dropdown__item">Subscribe</li>
+                        <li onClick="window.location='https://www.newstatesman.com/ev-login/'" class="c-dropdown__item u-border-top">Sign In</li>
+                    </ev-NotLoged>
+                    </ul>
+                </div>
+            </div>
+                    </div>
+
+
+
+
+
+        
+
+
+        <div class="c-header-nav__logo">
+            <a href="https://www.newstatesman.com//">
+                <img class="c-header__logo__img c-header__logo__img--sticky" alt="new statesman"
+                    src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/07/TNS_avatar.svg">
+            </a>
+        </div>
+
+        </div>
+        <div id="mega-menu" data-link="mega-menu-button" class="c-header-nav__mega-menu c-mega-menu">
+            <div class="c-header-nav__mega-menu__container">
+                <div class="c-header-nav__mega-menu__scroll">
+
+                    <div class="c-mega-menu__search-form">
+                        <form action="https://www.newstatesman.com/" class="c-search-form" method="get" role="search">
+    <label>
+
+        <input type="text" title="Search for:" name="s" value="" placeholder="Search &hellip;" class="c-search-form__input field" />
+    </label>
+
+    
+    <button type="submit" class="c-search-form__btn c-search-form__text icon-search">
+        Search    </button>
+</form>
+                    </div>
+
+            <div class="c-menu-tabs c-mega-menu__item">
+
+                <a href="https://www.newstatesman.com//" class="c-mega-menu__link">Home</a>
+                <ul class="c-mega-menu__sub c-mega-menu__sub--active"></ul>
+
+                <div class="menu-uk-container"><ul id="menu-uk-1" class="c-mega-menu__tabs"><li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics">Politics</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/uk-politics">UK</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/scotland">Scotland</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/wales">Wales</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/northern-ireland">Northern Ireland</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/polling">Polling</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/media">Media</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/politics/brexit">Brexit</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world-affairs">World</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/americas/north-america">US</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/europe">Europe</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/africa">Africa</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/asia">Asia</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/australasia">Australasia</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/americas">Americas</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/middle-east">Middle East</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/asia/china">China</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/world/asia/india">India</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture">Culture</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/books">Books</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/film">Film</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/tv">TV</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/music">Music</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/radio-podcasts">Radio &amp; Podcasts</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/art-design">Art &amp; Design</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/food-drink">Food &amp; Drink</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/video/video-interviews">Interviews</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/nature">Nature</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/poetry-culture">Poetry</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/culture/fiction">Fiction</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/ideas">Ideas</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/ideas/interviews-and-profiles">Interviews and Profiles</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/ideas/agora">The Agora Series</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/long-reads">Long Reads</a></li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/environment">Environment</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/environment/climate">Climate</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/environment/biodiversity">Nature</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/environment/just-transition">Just Transition</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/environment/food-farming">Food &amp; Farming</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business">Business</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/companies">Companies</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/sectors">Sectors</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/finance">Finance</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/technology">Technology</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/sustainability">Sustainability</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/economics">Economics</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/business/work">Work</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://sotn.newstatesman.com/">State of the Nation</a></li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight">Spotlight</a><a href="#" class="c-mega-menu__link__sub-link  icon-chevron-right"></a>
+<ul class="c-mega-menu__sub">
+
+<li class="c-mega-menu-nav__item__back"><a href="#" class="c-mega-menu__sub__back"><i class="c-icon icon-chevron-left"></i>Back to all sections</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/2022/02/spotlight-marketing-solutions">Spotlight Marketing Solutions</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/cyber">Cyber Security</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/healthcare">Healthcare</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/fintech">Fintech</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/energy">Energy and Climate Change</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/devolution">Regional Development</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/skills">Skills</a></li>
+<li class="c-mega-menu__sub__item sub__item"><a class="c-mega-menu__link " href="https://www.newstatesman.com/spotlight/reports">Reports</a></li>
+</ul>
+</li>
+<li class="c-mega-menu-nav__item"><a class="c-mega-menu__link " href="/magazine/american-darkness">Magazine</a></li>
+</ul></div>
+                    </div>
+
+                                <div class="c-mega-menu__item c-menu-tabs c-mega-menu__edition">
+
+                <ul class="c-mega-menu__tabs"> 
+                    <li class="c-mega-menu-nav__item">
+                        <a class="c-mega-menu__link h-strong">UK Edition</a>
+                        <a href="#" class="c-mega-menu__link__sub-link"><i class="c-icon c-icon--arrow-left c-icon--small icon-chevron-right"></i></a>
+                        <ul class="c-mega-menu__sub">
+                            <li class="c-mega-menu-nav__item__back">
+                                <a href="#" class="c-mega-menu__sub__back"><i class="c-icon c-icon--arrow-right icon-chevron-left"></i>Back to all sections</a>
+                            </li>
+                                                            <li class="c-mega-menu__sub__item sub__item">
+                                                                            <span class="c-mega-menu__link c-mega-menu__link--active" >
+                                            UK Edition                                        </span>
+                                                                    </li>
+                                                            <li class="c-mega-menu__sub__item sub__item">
+                                                                            <a class="c-mega-menu__link" href="https://www.newstatesman.com/?fsedition=international">
+                                            International Edition                                        </a>
+                                                                    </li>
+                                                    </ul>
+                    </li>
+                </ul>
+
+            </div>
+            
+                    <div class="c-mega-menu__item c-mega-menu__second">
+
+                        <h6>Explore the NS</h6>
+
+                        <div class="menu-explore-the-ns-container"><ul id="menu-explore-the-ns" class="c-mega-menu__second-nav"><li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/all-newsletters">Newsletters</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/archive">Archive</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/podcasts">Podcasts</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/video">Video</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/events">Events</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="/long-reads">Long reads</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/featured-writers">Featured writers</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/about-us-newstatesman">About us</a></li>
+<li class="c-mega-menu__second-nav__item"><a class="c-mega-menu__link" href="https://www.newstatesman.com/hexaware">Hexaware</a></li>
+</ul></div>
+                    </div>
+
+                    <div class="c-mega-menu__item">
+                        
+                <h6>Latest Magazine</h6>
+                <a href="https://www.newstatesman.com/magazine/american-darkness">
+                    <img src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202227-American-Darkness.border2-1.jpg" alt="American Darkness" class="c-magazine-segment__img">
+                </a>
+                
+                                    <a href="http://www.newstatesman.com/subscribe/" class="c-btn c-btn--outline">
+                Give a gift            </a>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</header><!-- /.c-header -->
+<div id="overlay" onclick="hidePopUp()" class="c-overlay c-overlay--mega-menu"></div>
+    <main>
+        <div class="wrapper">
+            <div class="wrapper__inner">
+
+
+<div class="main-content " role="main">
+
+    
+    <article id="the-post" class="c-article-single">
+
+        
+<header class="c-article-header
+    ">
+    <div class="c-article-header__container
+     c-article-header__container--longread c-longread    ">
+
+        <div class="c-longread__container">        
+        <div class="c-meta">
+                        <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="c-breadcrumbs"><li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="c-breadcrumbs__item">
+                                    <a itemprop="item"  href="https://www.newstatesman.com/long-reads" class="c-breadcrumbs__link"><span itemprop="name">Long reads</span>
+                                    <meta itemprop="position" content="1"></a>
+                                    <i class="c-icon icon-chevron-right"></i>
+                                </li></ol>
+            <div class="c-date"><span class="meta-item c-date__published">27 July 2018</span><span class="c-date__modified">updated 02 Aug 2018 10:20am</span></div>
+        </div>
+
+        <div class="c-longread__heading">
+        <div class="c-entry-header">
+
+            
+            
+            <h1 class="c-article-header__title">Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm</h1>
+
+                        <p class="c-article-excerpt">The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons.</p>
+            
+
+
+        </div><!-- .entry-header /-->
+
+        
+                        <p class="c-article-header__author">By
+                    <a href="https://www.newstatesman.com/author/pauline-bock" class="">Pauline Bock</a>                </p>
+                </div><div class="c-longread__ft-img">
+            <div class="c-featured-image">
+        <figure class="c-featured-image__container">
+
+        <img width="797" height="531" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg" class="attachment-3x4-medium-crop size-3x4-medium-crop wp-post-image" alt="" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-scaled.jpg 2560w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-300x200.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-1024x683.jpg 1024w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-768x512.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-1536x1024.jpg 1536w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-2048x1365.jpg 2048w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-101x67.jpg 101w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/robinhobb-397x265.jpg 397w" sizes="(max-width: 1407px) 1407px, (max-width: 335px) 335px, (max-width: 705px) 705px, (max-width: 335px) 335px, (max-width: 689px) 689px, (max-width: 336px) 336px, (max-width: 210px) 210px, (max-width: 101px) 101px, (max-width: 1024px) 1024px, (max-width: 101px) 101px, (max-width: 397px) 397px, (max-width: 464px) 464px, (max-width: 797px) 797px, (max-width: 960px) 960px, (max-width: 314px) 314px, (max-width: 464px) 464px, (max-width: 735px) 735px, (max-width: 1038px) 1038px" />
+                <figcaption class="c-featured-image__description"> (Photo By Getty)</figcaption>
+            </figure>
+    </div>
+
+</div>
+            
+    </div><!-- Normal closing div -->
+</header><!-- .entry-header-outer /-->
+    
+        <section class="c-article-content c-entry-content entry clearfix
+            ">
+            <div class="c-article-content__container">
+                <div class="c-share">
+    <ul class="c-share__list">
+        <li>
+            <a href="mailto:type%20email%20address%20here?subject=I%20wanted%20to%20share%20this%20post%20with%20you%20from%20New%20Statesman&body=Robin%20Hobb%20on%20changing%20cultures,%20writing%20about%20violence,%20and%20the%20anonymity%20of%20living%20on%20a%20farm%20-%20https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" class="c-share__link icon-email" title="Share in an email">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on LinkedIN">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-twitter" href="https://twitter.com/intent/tweet?url=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on Twitter">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on facebook">
+            </a>
+        </li>
+    </ul>
+</div>
+
+                <p>
+	Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with <em>Assassin’s Apprentice</em> (1995) and ending with <em>Assassin’s Fate</em> (2017). Over the course of 20 years, four trilogies and one quartet, characters from one book could re-appear in another, creating an ever-expanding web of complex societies, secret family lines, buried cities and uncharted islands. George RR Martin, with whom Hobb shares an editor, described her books as “diamonds in a sea of zircons”.</p>
+<p>
+	“The last books of the <em>Farseer</em> were very hard for me to write, very emotional. For a year, I stopped writing,” Hobb, 66, told the <em>New Statesman</em> at the <a href="https://www.imaginales.fr/invites/hobb-robin/">Imaginales festival in Epinal</a>, France, in May. Fans had travelled from Lille, in the north of France, and Marseilles, in the far south, to meet the author.</p>
+<p>
+	When she is not writing best sellers, she lives on a small farm near Tacoma, Washington state. Robin Hobb is a pseudonym – her real name is Margaret Lindholm Ogden – and a cape of anonymity, a disguise she seems to enjoy. “I needed to go to the grocery store and I was still in my boots, and my jeans were dirty. And that never happens, but a woman came to me and said: ‘Oh, you’re that fantasy writer! You’re Melody Young!’” She has a tranquil laugh. “I really wanted to say yes, but I said ‘No, I am the other one’.” Hobb is measured about her success; the farm, she says, is work, too.</p><div class="stream-item ad stream-item-in-post stream-item-inline-post ad ad-mobile">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- GPT AdSlot 2 for Ad unit '/5269235/New_Statesman_2021/MPU1' ### Size: [[300,250]] -->
+<div id='div-gpt-ad-1231130-2'>
+
+</div>
+  <script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_LB', [[970,250]], 'div-gpt-ad-1231130-1')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Top_MLB', [[320,50]], 'div-gpt-ad-1231130-5')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU1', [[300,250]], 'div-gpt-ad-1231130-2')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU2', [[300,250]], 'div-gpt-ad-1231130-3')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/MPU3', [[300,250],[300,600]], 'div-gpt-ad-1231130-4')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB1', [[970,250]], 'div-gpt-ad-1231130-6')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB2', [[970,250]], 'div-gpt-ad-1231130-7')
+             .addService(googletag.pubads());
+    googletag.defineSlot('/5269235/New_Statesman_2021/Article_LB3', [[970,250]], 'div-gpt-ad-1231130-8')
+             .addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1231130-2'); });
+  </script>
+<!-- End AdSlot 2 -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+<p>
+	Her books tell tales of dragons and pirates, of noblemen and royal plots, masterfully threaded with magic and adventure. The stories are immersive and the characters complex – Hobb alternates points of views from all ages, genders and social statuses with an elegant style. Set in different times and countries of the same world, the Elderlings<em> </em>epic allows Hobb to develop diverse societies – the matriarchal, business-oriented Bingtown; the macho, warring state of Chalced; the rough land of the Six Duchies; all colliding with the return of an ancient dragon race. By introducing cultural clashes between them, Hobb cleverly touches on the subjects of slavery, gender equality, political unrest and sexual violence. In Hobb’s world, whores become queens and gay characters live and love openly.</p><div id="relatedArticles" class="c-related-articles" data-position=4>
+    <div class="c-read-next">
+        <p class="c-read-next__title">Related</p>
+        
+        <div
+            class="c-read-next__article ">
+            
+			<a aria-label="Norman Scott interview: &#8220;I never loved Jeremy Thorpe, but he could be enormous fun&#8221;" href="https://www.newstatesman.com/katemossmaninterview/2022/05/norman-scott-interview-jeremy-thorpe-enormous-fun" class="c-read-next__img-link"><img width="464" height="348" class="c-read-next__article__ft-img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/05/202221-Norman-Scott-Main-NO-COLOUR-CORRECTION-464x348.jpg" alt="Norman Scott interview: &quot;I never loved Jeremy Thorpe, but he could be enormous fun&quot;" title="Norman Scott interview: &quot;I never loved Jeremy Thorpe, but he could be enormous fun&quot;" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/05/202221-Norman-Scott-Main-NO-COLOUR-CORRECTION-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/05/202221-Norman-Scott-Main-NO-COLOUR-CORRECTION-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/05/202221-Norman-Scott-Main-NO-COLOUR-CORRECTION-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/05/202221-Norman-Scott-Main-NO-COLOUR-CORRECTION-1038x778.jpg 1038w" sizes="(max-width: 464px) 100vw, 464px" /></a>            <div class="c-read-next__article__meta">
+                <a class="c-read-next__article__category post-catfigaro-cat-28985 the-global-title" href="https://www.newstatesman.com/katemossmaninterview">The Kate Mossman Interview</a>                <h5 class="c-read-next__article__headline ">
+                    <a href="https://www.newstatesman.com/katemossmaninterview/2022/05/norman-scott-interview-jeremy-thorpe-enormous-fun">Norman Scott interview: &#8220;I never loved Jeremy Thorpe, but he could be enormous fun&#8221;</a>
+                </h5>
+                <div class="c-sponsored-article__author ">
+                                    </div>
+            </div>
+
+            
+        </div>
+
+            
+        <div
+            class="c-read-next__article ">
+            
+			<a aria-label="Geoff Dyer: How to grow old in America" href="https://www.newstatesman.com/long-reads/2022/06/geoff-dyer-book-the-last-days-of-roger-federer-us-healthcare" class="c-read-next__img-link"><img width="464" height="348" class="c-read-next__article__ft-img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-464x348.jpg" alt="Geoff Dyer: How to grow old in America" title="Geoff Dyer: How to grow old in America" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-735x551.jpg 735w" sizes="(max-width: 464px) 100vw, 464px" /></a>            <div class="c-read-next__article__meta">
+                <a class="c-read-next__article__category post-catfigaro-cat-29633 the-global-title" href="https://www.newstatesman.com/long-reads">Long reads</a>                <h5 class="c-read-next__article__headline ">
+                    <a href="https://www.newstatesman.com/long-reads/2022/06/geoff-dyer-book-the-last-days-of-roger-federer-us-healthcare">Geoff Dyer: How to grow old in America</a>
+                </h5>
+                <div class="c-sponsored-article__author ">
+                                    </div>
+            </div>
+
+            
+        </div>
+
+            
+        <div
+            class="c-read-next__article ">
+            
+			<a aria-label="From aardvark to woke: inside the Oxford English Dictionary" href="https://www.newstatesman.com/long-reads/2022/06/oxford-english-dictionary-aardvark-woke-oed-history" class="c-read-next__img-link"><img width="464" height="348" class="c-read-next__article__ft-img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-464x348.jpg" alt="From aardvark to woke: inside the Oxford English Dictionary" title="From aardvark to woke: inside the Oxford English Dictionary" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-1038x778.jpg 1038w" sizes="(max-width: 464px) 100vw, 464px" /></a>            <div class="c-read-next__article__meta">
+                <a class="c-read-next__article__category post-catfigaro-cat-29633 the-global-title" href="https://www.newstatesman.com/long-reads">Long reads</a>                <h5 class="c-read-next__article__headline ">
+                    <a href="https://www.newstatesman.com/long-reads/2022/06/oxford-english-dictionary-aardvark-woke-oed-history">From aardvark to woke: inside the Oxford English Dictionary</a>
+                </h5>
+                <div class="c-sponsored-article__author ">
+                                    </div>
+            </div>
+
+            
+        </div>
+
+                </div>
+</div>
+        
+<p>
+	Five series – trilogies of the <em>Farseer</em>, <em>The Liveship Traders</em>, <em>The Tawny Man</em>, <em>The Fitz and the Fool</em>, and the four books of <em>The Rain Wild</em> chronicles – may seem too vast a reading task, but the Realm of the Elderlings can be entered by many different doors. The <em>Liveship Traders</em> trilogy, for instance, a tale of economic collapse and political crises on the high seas, can be read entirely separately from the rest of the novels set in the same world.</p>
+<div>
+<section class="newsletter-inner-container">
+    <div class="newsletter-inner-container__left">
+        
+<div id="logo" class="c-header-title__logo ">
+
+        
+    <a title="New Statesman" href="https://www.newstatesman.com//" class="header__logo">
+        <img src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/TNS_master_logo.svg" alt="New Statesman">    </a>
+
+        
+</div>
+<!-- #logo /-->
+
+                <span class="c-read-next__article__headline">Subscribe to The Crash</span>
+        <a href="https://www.newstatesman.com/all-newsletters" class="all-newsl">View all newsletters <span class="icon icon-chevron-right"></span></a>
+    </div>
+    <div class="newsletter-inner-container__right">
+        <a id="newsletter-a" onclick="showPopUp(this.id)">
+            <span class="c-read-next__article__headline">The New Statesman's weekly newsletter that helps you make sense of the economic slowdown.</span>
+            <span class="author"></span>
+            <button id="newsletter" onclick="showPopUp(this.id)">Sign up here</button>
+        </a>
+    </div>
+</section>
+<section class="pop-up" id="newsletter-pop-up">
+    <form class="pop-up__form" id="pop-up-form" method="post" target="submitFrame" action="https://go.newstatesman.com/l/509131/2021-06-07/m9pm2" onsubmit="afterSubmit()">
+        <button class="pop-up__close icon-close" onclick="hidePopUp()"></button>
+        <div class="pop-up__inner">
+            <span class="pop-up__title">Sign up for The New Statesman’s newsletters</span>
+            <span class="pop-up__semi-title">Tick the boxes of the newsletters you would like to receive.</span>
+
+                        <label for="_pardot-1"><h4>The Crash</h4>
+<input type="checkbox" id="_pardot-1" name="week_in_business" value="" required>
+            </label>
+            <span class="pop-up__label-description">A weekly newsletter helping you fit together the pieces of the global economic slowdown.</span>
+                        <label for="_pardot-2"><h4>Morning Call</h4>
+<input type="checkbox" id="_pardot-2" name="morning_call" value="" required>
+            </label>
+            <span class="pop-up__label-description">Quick and essential guide to domestic and global politics from the New Statesman's politics team. </span>
+                        <label for="_pardot-3"><h4>World Review</h4>
+<input type="checkbox" id="_pardot-3" name="world_review" value="" required>
+            </label>
+            <span class="pop-up__label-description">The New Statesman’s global affairs newsletter, every Monday and Friday. </span>
+                        <label for="_pardot-4"><h4>The New Statesman Daily</h4>
+<input type="checkbox" id="_pardot-4" name="ns_daily" value="" required>
+            </label>
+            <span class="pop-up__label-description">The best of the New Statesman, delivered to your inbox every weekday morning.</span>
+                        <label for="_pardot-5"><h4>Green Times</h4>
+<input type="checkbox" id="_pardot-5" name="green_times" value="" required>
+            </label>
+            <span class="pop-up__label-description">The New Statesman’s weekly environment email on the politics, business and culture of the climate and nature crises - in your inbox every Thursday.</span>
+                        <label for="_pardot-6"><h4>The Culture Edit</h4>
+<input type="checkbox" id="_pardot-6" name="dress_down" value="" required>
+            </label>
+            <span class="pop-up__label-description">Our weekly culture newsletter – from books and art to pop culture and memes – sent every Friday. </span>
+                        <label for="_pardot-7"><h4>Weekly Highlights</h4>
+<input type="checkbox" id="_pardot-7" name="weekly_highlights" value="" required>
+            </label>
+            <span class="pop-up__label-description">A weekly round-up of some of the best articles featured in the most recent issue of the New Statesman, sent each Saturday.</span>
+                        <label for="_pardot-8"><h4>Ideas and Letters</h4>
+<input type="checkbox" id="_pardot-8" name="ideas_letters" value="" required>
+            </label>
+            <span class="pop-up__label-description">A newsletter showcasing the finest writing from the ideas section and the NS archive, covering political ideas, philosophy, criticism and intellectual history - sent every Wednesday.</span>
+                        <label for="_pardot-9"><h4>Events and Offers</h4>
+<input type="checkbox" id="_pardot-9" name="events_offers" value="" required>
+            </label>
+            <span class="pop-up__label-description">Sign up to receive information regarding NS events, subscription offers &amp; product updates.
+</span>
+                    </div>
+        <div class="pop-up__submit-box" id="submit-box">
+            <input type="email" name="email" class="email-input" required placeholder="Email address" onkeyup="reverseColors(this.value)">
+            <span class="pop-up__error"></span>
+                        <select name="job_title" id="job-dropdown">
+                    <option value="" selected disabled hidden>Job title</option>
+                                          <option value="Administration / Office">Administration / Office</option>
+                                          <option value="Arts and Culture">Arts and Culture</option>
+                                          <option value="Board Member">Board Member</option>
+                                          <option value="Business / Corporate Services">Business / Corporate Services</option>
+                                          <option value="Client / Customer Services">Client / Customer Services</option>
+                                          <option value="Communications">Communications</option>
+                                          <option value="Construction, Works, Engineering">Construction, Works, Engineering</option>
+                                          <option value="Education, Curriculum and Teaching">Education, Curriculum and Teaching</option>
+                                          <option value="Environment, Conservation and NRM">Environment, Conservation and NRM</option>
+                                          <option value="Facility / Grounds Management and Maintenance">Facility / Grounds Management and Maintenance</option>
+                                          <option value="Finance Management">Finance Management</option>
+                                          <option value="Health - Medical and Nursing Management">Health - Medical and Nursing Management</option>
+                                          <option value="HR, Training and Organisational Development">HR, Training and Organisational Development</option>
+                                          <option value="Information and Communications Technology">Information and Communications Technology</option>
+                                          <option value="Information Services, Statistics, Records, Archives">Information Services, Statistics, Records, Archives</option>
+                                          <option value="Infrastructure Management - Transport, Utilities">Infrastructure Management - Transport, Utilities</option>
+                                          <option value="Legal Officers and Practitioners">Legal Officers and Practitioners</option>
+                                          <option value="Librarians and Library Management">Librarians and Library Management</option>
+                                          <option value="Management">Management</option>
+                                          <option value="Marketing">Marketing</option>
+                                          <option value="OH&amp;S, Risk Management">OH&amp;S, Risk Management</option>
+                                          <option value="Operations Management">Operations Management</option>
+                                          <option value="Planning, Policy, Strategy">Planning, Policy, Strategy</option>
+                                          <option value="Printing, Design, Publishing, Web">Printing, Design, Publishing, Web</option>
+                                          <option value="Projects, Programs and Advisors">Projects, Programs and Advisors</option>
+                                          <option value="Property, Assets and Fleet Management">Property, Assets and Fleet Management</option>
+                                          <option value="Public Relations and Media">Public Relations and Media</option>
+                                          <option value="Purchasing and Procurement">Purchasing and Procurement</option>
+                                          <option value="Quality Management">Quality Management</option>
+                                          <option value="Science and Technical Research and Development">Science and Technical Research and Development</option>
+                                          <option value="Security and Law Enforcement">Security and Law Enforcement</option>
+                                          <option value="Service Delivery">Service Delivery</option>
+                                          <option value="Sport and Recreation">Sport and Recreation</option>
+                                          <option value="Travel, Accommodation, Tourism">Travel, Accommodation, Tourism</option>
+                                          <option value="Wellbeing, Community / Social Services">Wellbeing, Community / Social Services</option>
+                                    </select> 
+                            <div class="pop-up__check">    
+                    <input id="privacy-check" type="checkbox" name="consent" required>
+                    <label for="privacy-check" class="span-text">
+                        I consent to New Statesman Media Group collecting my details provided via this form in accordance with the <a href="https://www.newstatesman.com/privacy-policy">Privacy Policy</a>
+                    </label>
+                    <span class="consent__error"></span>
+            </div>
+                        <div class="g-recaptcha" id="recaptch_site_key" data-sitekey="6LdVQtweAAAAAAjauy_QyK3j3z-JP6adD2MxZAzH"></div>
+            <span class="captcha__error" id="captcha_error"></span>
+                        <input type="submit" onclick="validateNewsletters(document.querySelector('#pop-up-form'), this.parentElement.querySelector('.email-input'))" class="submit reverse-colors" value="Sign up">
+        </div> 
+    </form>    
+</section>
+<section class="pop-up" id="thank-you-pop-up" style="display:none">
+    <div class="thank-you">
+        <button class="thank-you__close icon-close" onclick="hidePopUp()"></button>
+        <div class="thank-you__pic"></div>
+        <div class="thank-you__sub-header">SUBSCRIBED</div>
+        <h1 class="thank-you__header">THANK YOU</h1>
+        <span class="thank-you__text"></span> 
+    </div>
+</section>
+<!-- this iFrame is used to submit the form in it and to skip the redirect to pardot -->
+<iframe id="submitFrame" name="submitFrame"></iframe>
+</div>
+<p>
+	Like <em>Game of Thrones</em>, to which the <em>Elderlings</em> has been compared to for its tapestry of voices – although it is often more tightly threaded than <em>GoT</em>’s – the series seriously tackles political, sexual, and physical violence. Unlike <em>GoT</em>, it does so without glossing over or underplaying the consequences: “I try to express how horrifying and ugly violence is”, Hobb says. “I have read descriptions of violence in which it is almost like a beautiful, or a satisfying, or almost a sexual thing, and that always makes me uncomfortable as a reader.” Rape is present in the series, and Hobb made sure to write the scenes from the victim’s perspective. It reads as a traumatic, haunting experience that never fully leaves the characters it happens to. “I did not want it to be written as something lascivious or somehow exciting. I wanted it to be a terrible, terrible thing.”</p>
+<div class="c-sponsored-article">
+    <h6 class="c-sponsored-article__title">Content from our partners</h6>
+
+        <div class="c-sponsored-article__single">
+        
+			<a aria-label="Small businesses can be the backbone of our national recovery" href="https://www.newstatesman.com/spotlight/2022/06/small-businesses-can-be-the-backbone-of-our-national-recovery" class="c-sponsored-article__img-link"><img width="464" height="348" class="c-sponsored-article__img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_732541753-464x348.jpg" alt="Small businesses can be the backbone of our national recovery" title="Small businesses can be the backbone of our national recovery" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_732541753-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_732541753-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_732541753-735x551.jpg 735w" sizes="(max-width: 464px) 100vw, 464px" /></a>
+        <div class="c-sponsored-article__meta">
+
+            
+            <h6 class="c-sponsored-article__headline">
+                <a href="https://www.newstatesman.com/spotlight/2022/06/small-businesses-can-be-the-backbone-of-our-national-recovery">Small businesses can be the backbone of our national recovery</a>
+            </h6>
+            <div class="c-sponsored-article__author">
+                                    <span class="single-author no-avatars"><span class="meta-item meta-author-wrapper">
+                    <span class="meta-author"><span class="fa fa-user" aria-hidden="true"></span> Spotlight</span></span></span>                                </div>
+        </div>
+    </div>
+            <div class="c-sponsored-article__single">
+        
+			<a aria-label="Railways must adapt to how we live now" href="https://www.newstatesman.com/spotlight/transport/2022/06/railways-must-adapt-to-how-we-live-now" class="c-sponsored-article__img-link"><img width="464" height="348" class="c-sponsored-article__img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-464x348.jpg" alt="Railways must adapt to how we live now" title="Railways must adapt to how we live now" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-300x225.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-768x576.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-397x298.jpg 397w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-180x135.jpg 180w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/shutterstock_326370722-1.jpg 1000w" sizes="(max-width: 464px) 100vw, 464px" /></a>
+        <div class="c-sponsored-article__meta">
+
+            
+            <h6 class="c-sponsored-article__headline">
+                <a href="https://www.newstatesman.com/spotlight/transport/2022/06/railways-must-adapt-to-how-we-live-now">Railways must adapt to how we live now</a>
+            </h6>
+            <div class="c-sponsored-article__author">
+                                    <span class="single-author no-avatars"><span class="meta-item meta-author-wrapper">
+                    <span class="meta-author"><a href="https://www.newstatesman.com/author/stevehammond" class="author-name" title="Stephen Hammond"><span class="fa fa-user" aria-hidden="true"></span> Stephen Hammond</a></span></span></span>                                </div>
+        </div>
+    </div>
+            <div class="c-sponsored-article__single">
+        
+			<a aria-label="“I learn something new on every trip&#8221;" href="https://www.newstatesman.com/spotlight/transport/2022/06/i-learn-something-new-on-every-trip" class="c-sponsored-article__img-link"><img width="464" height="348" class="c-sponsored-article__img the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/Faizan-Ahmed-Uber-Fabio-De-Paola-001-464x348.jpg" alt="“I learn something new on every trip&quot;" title="“I learn something new on every trip&quot;" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/Faizan-Ahmed-Uber-Fabio-De-Paola-001-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/Faizan-Ahmed-Uber-Fabio-De-Paola-001-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/Faizan-Ahmed-Uber-Fabio-De-Paola-001-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/Faizan-Ahmed-Uber-Fabio-De-Paola-001-1038x778.jpg 1038w" sizes="(max-width: 464px) 100vw, 464px" /></a>
+        <div class="c-sponsored-article__meta">
+
+            
+            <h6 class="c-sponsored-article__headline">
+                <a href="https://www.newstatesman.com/spotlight/transport/2022/06/i-learn-something-new-on-every-trip">“I learn something new on every trip&#8221;</a>
+            </h6>
+            <div class="c-sponsored-article__author">
+                                    <span class="single-author no-avatars"><span class="meta-item meta-author-wrapper">
+                    <span class="meta-author"><span class="fa fa-user" aria-hidden="true"></span> Spotlight</span></span></span>                                </div>
+        </div>
+    </div>
+        </div>
+
+<p>
+	The brutality of conflicting regimes and the inhumane logic of for-profit economies manifest themselves in the development of a slave market. “Slavery is not really an old issue, it is an ongoing issue”, says Hobb, adding that where she lives, there have been cases of trafficked women, lured to the United States to be sexually exploited or work to repay their trip. “It is an ongoing thing, and I think it is important to remind people of what slavery is.”</p>
+<p>
+	The Elderlings books never ignore women’s stories<strong>.</strong> In the <em>Liveship Traders</em> series, Hobb paints striking portraits of three generations of women caught in a political maelstrom. The matriarch, Ronica Vestrit, “lives to the old standards, and has not relinquished her power”, Hobb says. Her daughter Keffria has married a man whom she has let control her life: “She has said: ‘I will let my husband make the decisions, it is easier.’ And so you get an imbalance”, Hobb explains. “It can be dangerous.” Teenager Malta’s certitudes are overturned when puberty hits at the same time as violent revolts in her town. “Cultures change”, Hobb says, citing the positive example of Saudi women recently winning the right to drive. “But when regimes change, sometimes there are people who lose privilege, and it can come from above, as a legal system.” Her books are set in a medieval world, but resonate in our era: sometimes, like Keffria Vestrit, “if you do not exercise your power, it goes away”, Hobb says. Just like, perhaps, when you are so sure of what the result of the presidential election will be, that you do not vote: “If you do not vote, you lose your power.” That is as close as the American author will get to Trump’s name. To anyone who has read her books, “Grab her by the pussy” certainly sounds like a brag from the misogynist nation of Chalced.</p>
+<p>
+	Unlike <em>Game of Thrones, </em>the adventures of the assassin Fitzchivalry, the dragon Tintaglia and the ship captain Althea have never been adapted for the screen. There has been a French graphic novel version of the <em>Liveship Traders</em>, but Hobb remains careful when dealing with potential adaptations. (She says she doesn’t have an agent for film or television, which complicates things.) And then, there’s the problem of the volume: “Sixteen books!” She laughs. “I think it would be very difficult series to make. You start with these characters in the<em> Farseer</em> trilogy, and then the next season they’re all gone and we have a whole new cast. You could do alternating episodes, but I think it would be very complicated.” To play the Fool, one of her most beloved characters, she imagines “a very young David Bowie”. “Of course”, she adds, “it is far too late to hope for anything like that.”</p>
+<p>
+	In Hobb’s<em> </em>Elderlings<em> </em>universe, names matter. Her own pen name was carefully chosen by checking which letter of the alphabet is better placed on libraries’ shelves. “It was H”, she says. And “Robin” is intentionally gender neutral. (In the books, The Fool is similarly careful about gender, refusing to reveal whether they are male or female.) Her process for naming characters is more obscure: “It happens in a part of my mind which I don’t have access to. They step out on to the stage with a name”, she explains with a fond smile. In her universe, names can embody a character’s virtues – like the noble brothers Chivalry, Nimble, Swift, Steady, Just and Hearth – or make them reflect poorly on their actions – like the captain Kyle Haven, whose greediness creates endless troubles for his ship and family’s business. The sailor Brashen, a character from her <em>Liveship Traders</em> series, was named after the “very best deckhands” and a colleague of Hobb’s husband, who is a marine engineer. Now, just like George RR Martin’s Khaleesi, there are children named after Brashen and his lover Althea. “It’s a very strange feeling, because I think: ‘Will the child like this when they are older?’” she worries.</p>
+<p>
+	Hobb has learned to “fit writing wherever” she can, because when she started, there was no time to waste: “I was a mother with small children, my husband was at sea and I also had a job.” Fitz and the Fool, Bee, Brashen and Althea grew up in “different pieces of time” in-between her other life, the one spent raising four children at the farm, “with chickens and ducks and things”. During the writing of <em>Assassin’s Apprentice</em>, her youngest daughter was about three years old. When approaching her deadline, Hobb made her daughter sit on a cushion on the floor and played Disney’s <em>Beauty and the Beast</em> on a loop while she wrote. Now Hobb will write over her morning coffee, then feed the farm’s animals, fix things around the farm and come back to the writing. “All the time when I am not writing, I am thinking about it. That enables me to come back and say ‘Now I know how the conversation will go,’ or ‘Now I know what they will do next’,” she explains. “So even when I am not writing, I am still writing.”</p>
+<p>
+	There are still children at the farm – they’re just her grandchildren now. “If I’m busy, I will say: ‘There’s a package of hotdogs in the refrigerator, go outside and build a little fire, find some sticks, you’ll be fine’.” She laughs: “Sometimes it’s a disaster, but often they just learn to do things for themselves and it works out.”</p>
+<p>
+	Hobb hasn’t ruled out coming back to the Elderlings, but she is currently writing something new: an urban fantasy story based near Tacoma, Washington State, where she lives. “It’s a story I have wanted to write for a long time, but I don’t know if anyone will want to publish it.” If no one does – which the <em>New Statesman</em>, and thousands of fans, highly doubt – there will always be the farm. Tending her animals, imagining dragons.</p>
+</p>                
+                <div class="c-share c-share--clear">
+    <ul class="c-share__list">
+        <li>
+            <a href="" class="c-share__link icon-email" title="Share in an email">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on LinkedIN">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-twitter"  href="https://twitter.com/intent/tweet?url=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on Twitter">
+            </a>
+        </li>
+        <li>
+            <a class="c-share__link  icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" target="_blank" title="Share on facebook">
+            </a>
+        </li>
+    </ul>
+</div>
+
+            </div>
+
+        </section><!-- .entry-content /-->
+
+        <aside id="sidebar-container" class="c-sidebar">
+    
+    <div class="c-author about-author-8349">
+        <div class="c-author__container">
+                        <div class="c-author__avatar">
+                                    <a href="https://www.newstatesman.com/author/pauline-bock">
+                                    
+                    <img alt='Photo of Pauline Bock' src='https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/Author-1.png' srcset='https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/Author-1.png 2x' class='avatar avatar-177 photo' height='177' width='177' loading='lazy'/>                
+                                    </a>
+                            </div><!-- .c-author__avatar /-->
+                            <div class="c-author__meta">
+                <h3 class="c-author__name">
+                                            <a href="https://www.newstatesman.com/author/pauline-bock">
+                    
+                        Pauline Bock
+                                            </a>
+                                    </h3>
+                
+                <div class="c-author-info">
+
+                    <div class="c-author__description">
+                                            </div><!-- .author-bio /-->
+
+                                    </div>
+            </div><!-- .author-info /-->
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- .about-author /-->
+        
+</aside>
+
+
+
+    </article><!-- #the-post /-->
+
+    
+    <div class="post-components">
+        <div class="prj--rr">
+		<div class="prj--rr-col">
+        		</div>
+</div>
+    </div><!-- .post-components /-->
+
+    
+</div><!-- .main-content -->
+
+
+<div class="footer-widgets-container">
+    <div class="container">
+        
+        <footer class="c-article-footer">
+            <div class="c-article-footer__container l-segment " data-columns=3>
+
+                                <div class="l-segment__item">
+                    <div class="c-author-related">
+    
+        <h4 class="c-author-related__title c-widget__title">More from this author <a
+            href="https://www.newstatesman.com/author/pauline-bock" class="c-widget__link--all">See All</a>
+    </h4>
+    
+    <div class="c-author-related__articles">
+        
+<div class="c-author-related__article">
+    <a href="https://www.newstatesman.com/world/europe/2019/11/post-metoo-france-fight-against-sexual-violence-continues" class="c-author-related__img-link">
+        <img width="314" height="209" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-scaled.jpg" class="attachment-4x3-xsmall-crop size-4x3-xsmall-crop wp-post-image" alt="" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-scaled.jpg 2560w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-300x200.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-1024x683.jpg 1024w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-768x512.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-1536x1024.jpg 1536w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-2048x1365.jpg 2048w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-101x67.jpg 101w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-878904214-397x265.jpg 397w" sizes="(max-width: 1407px) 1407px, (max-width: 335px) 335px, (max-width: 705px) 705px, (max-width: 335px) 335px, (max-width: 689px) 689px, (max-width: 336px) 336px, (max-width: 210px) 210px, (max-width: 101px) 101px, (max-width: 1024px) 1024px, (max-width: 101px) 101px, (max-width: 397px) 397px, (max-width: 464px) 464px, (max-width: 797px) 797px, (max-width: 960px) 960px, (max-width: 314px) 314px, (max-width: 464px) 464px, (max-width: 735px) 735px, (max-width: 1038px) 1038px" />    </a>
+    <div class="c-author-related__meta">
+                    <a href="https://www.newstatesman.com/author/pauline-bock" class="c-author-related__author-link">
+        Pauline Bock
+                    </a>
+                <h6 class="c-author-related__headline"><a href="https://www.newstatesman.com/world/europe/2019/11/post-metoo-france-fight-against-sexual-violence-continues" >In a post #MeToo France, the fight against sexual violence continues</a></h6>
+    </div>
+</div>
+
+<div class="c-author-related__article">
+    <a href="https://www.newstatesman.com/world/europe/2019/11/macron-s-supporters-are-walking-away-his-party-en-marche" class="c-author-related__img-link">
+            </a>
+    <div class="c-author-related__meta">
+                    <a href="https://www.newstatesman.com/author/pauline-bock" class="c-author-related__author-link">
+        Pauline Bock
+                    </a>
+                <h6 class="c-author-related__headline"><a href="https://www.newstatesman.com/world/europe/2019/11/macron-s-supporters-are-walking-away-his-party-en-marche" >Macron’s supporters are walking away from his party En Marche</a></h6>
+    </div>
+</div>
+
+<div class="c-author-related__article">
+    <a href="https://www.newstatesman.com/world/europe/2019/11/macron-s-military-reaction-gilets-jaunes-sign-his-government-has-lost-control" class="c-author-related__img-link">
+        <img width="314" height="209" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-scaled.jpg" class="attachment-4x3-xsmall-crop size-4x3-xsmall-crop wp-post-image" alt="" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-scaled.jpg 2560w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-300x200.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-1024x683.jpg 1024w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-768x512.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-1536x1024.jpg 1536w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-2048x1365.jpg 2048w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-101x67.jpg 101w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/06/gettyimages-1131002730_1_-397x265.jpg 397w" sizes="(max-width: 1407px) 1407px, (max-width: 335px) 335px, (max-width: 705px) 705px, (max-width: 335px) 335px, (max-width: 689px) 689px, (max-width: 336px) 336px, (max-width: 210px) 210px, (max-width: 101px) 101px, (max-width: 1024px) 1024px, (max-width: 101px) 101px, (max-width: 397px) 397px, (max-width: 464px) 464px, (max-width: 797px) 797px, (max-width: 960px) 960px, (max-width: 314px) 314px, (max-width: 464px) 464px, (max-width: 735px) 735px, (max-width: 1038px) 1038px" />    </a>
+    <div class="c-author-related__meta">
+                    <a href="https://www.newstatesman.com/author/pauline-bock" class="c-author-related__author-link">
+        Pauline Bock
+                    </a>
+                <h6 class="c-author-related__headline"><a href="https://www.newstatesman.com/world/europe/2019/11/macron-s-military-reaction-gilets-jaunes-sign-his-government-has-lost-control" >Macron’s military reaction to the gilets jaunes is a sign his government has lost control</a></h6>
+    </div>
+</div>
+    </div>
+</div>
+                </div>
+                
+                                <div class="l-segment__item">
+                    <h3 class="c-widget__title">More of this topic</h3><div id="posts-list-widget-2" class="c-container-wrapper c-widget posts-list"><div class="posts-list-items">
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="From aardvark to woke: inside the Oxford English Dictionary" href="https://www.newstatesman.com/long-reads/2022/06/oxford-english-dictionary-aardvark-woke-oed-history" class="c-af__related__img-link"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-314x235.jpg" alt="From aardvark to woke: inside the Oxford English Dictionary" title="From aardvark to woke: inside the Oxford English Dictionary" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202226-OED-1038x778.jpg 1038w" sizes="(max-width: 314px) 100vw, 314px" /></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-29633 the-global-title" href="https://www.newstatesman.com/long-reads">Long reads</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/long-reads/2022/06/oxford-english-dictionary-aardvark-woke-oed-history"
+            title="From aardvark to woke: inside the Oxford English Dictionary">From aardvark to woke: inside the Oxford English Dictionary</a></h6>
+    </div>
+    
+</div>
+
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="Geoff Dyer: How to grow old in America" href="https://www.newstatesman.com/long-reads/2022/06/geoff-dyer-book-the-last-days-of-roger-federer-us-healthcare" class="c-af__related__img-link"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-314x235.jpg" alt="Geoff Dyer: How to grow old in America" title="Geoff Dyer: How to grow old in America" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/202225-Geoff-Dyer-735x551.jpg 735w" sizes="(max-width: 314px) 100vw, 314px" /></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-29633 the-global-title" href="https://www.newstatesman.com/long-reads">Long reads</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/long-reads/2022/06/geoff-dyer-book-the-last-days-of-roger-federer-us-healthcare"
+            title="Geoff Dyer: How to grow old in America">Geoff Dyer: How to grow old in America</a></h6>
+    </div>
+    
+</div>
+
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="How did I feel when Dad died? Music helped me figure it out" href="https://www.newstatesman.com/long-reads/2022/06/pete-paphides-sudden-loss-music-grief" class="c-af__related__img-link"><div class=" c-story__image--podcast"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/image001-8-314x235.jpg" alt="How did I feel when Dad died? Music helped me figure it out" title="How did I feel when Dad died? Music helped me figure it out" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/image001-8-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/image001-8-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/image001-8-735x551.jpg 735w" sizes="(max-width: 314px) 100vw, 314px" /></div></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-29633 the-global-title" href="https://www.newstatesman.com/long-reads">Long reads</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/long-reads/2022/06/pete-paphides-sudden-loss-music-grief"
+            title="How did I feel when Dad died? Music helped me figure it out">How did I feel when Dad died? Music helped me figure it out</a></h6>
+    </div>
+    
+</div>
+</div><div class="clearfix"></div></div><!-- .widget /-->                </div>
+                
+                                <div class="l-segment__item">
+                    
+<h3 class="c-widget__title">Recent Podcasts</h3>
+<div class="posts-list-items">
+
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="China’s broken promises on Hong Kong, with Chris Patten" href="https://www.newstatesman.com/podcasts/world-review-podcast/2022/06/chinas-broken-promises-on-hong-kong-with-chris-patten" class="c-af__related__img-link"><div class=" c-story__image--podcast"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-314x235.jpg" alt="China’s broken promises on Hong Kong, with Chris Patten" title="China’s broken promises on Hong Kong, with Chris Patten" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-300x225.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-1024x768.jpg 1024w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-768x576.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-397x298.jpg 397w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-180x135.jpg 180w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image-1038x778.jpg 1038w, https://www.newstatesman.com/wp-content/uploads/sites/2/2021/09/World-Review-web-feature-image.jpg 1280w" sizes="(max-width: 314px) 100vw, 314px" /></div></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-8251 the-global-title" href="https://www.newstatesman.com/podcasts/world-review-podcast">World Review</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/podcasts/world-review-podcast/2022/06/chinas-broken-promises-on-hong-kong-with-chris-patten"
+            title="China’s broken promises on Hong Kong, with Chris Patten">China’s broken promises on Hong Kong, with Chris Patten</a></h6>
+    </div>
+    
+</div>
+
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="The psychiatrists who don’t believe in mental illness &#8211; Audio Long Reads" href="https://www.newstatesman.com/podcasts/audio-long-reads/2022/06/the-psychiatrists-who-dont-believe-in-mental-illness-audio-long-reads" class="c-af__related__img-link"><div class=" c-story__image--podcast"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/02/202207-Sophie-Mental-Health-314x235.jpg" alt="The psychiatrists who don’t believe in mental illness - Audio Long Reads" title="The psychiatrists who don’t believe in mental illness - Audio Long Reads" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/02/202207-Sophie-Mental-Health-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/02/202207-Sophie-Mental-Health-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/02/202207-Sophie-Mental-Health-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/02/202207-Sophie-Mental-Health-1038x778.jpg 1038w" sizes="(max-width: 314px) 100vw, 314px" /></div></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-29668 the-global-title" href="https://www.newstatesman.com/podcasts/audio-long-reads">Audio Long Reads</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/podcasts/audio-long-reads/2022/06/the-psychiatrists-who-dont-believe-in-mental-illness-audio-long-reads"
+            title="The psychiatrists who don’t believe in mental illness &#8211; Audio Long Reads">The psychiatrists who don’t believe in mental illness &#8211; Audio Long Reads</a></h6>
+    </div>
+    
+</div>
+
+<div class="c-af__related-article">
+    
+    
+			<a aria-label="By-election special: Is Boris Johnson doomed by the double defeat?" href="https://www.newstatesman.com/podcasts/new-statesman-podcast/2022/06/by-election-special-is-boris-johnson-doomed-by-the-double-defeat" class="c-af__related__img-link"><div class=" c-story__image--podcast"><img width="314" height="235" class="the-global-title" src="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-314x235.jpg" alt="By-election special: Is Boris Johnson doomed by the double defeat?" title="By-election special: Is Boris Johnson doomed by the double defeat?" loading="lazy" srcset="https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-314x235.jpg 314w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-300x225.jpg 300w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-768x576.jpg 768w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-397x298.jpg 397w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-180x135.jpg 180w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-464x348.jpg 464w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415-735x551.jpg 735w, https://www.newstatesman.com/wp-content/uploads/sites/2/2022/06/GettyImages-1231327415.jpg 1024w" sizes="(max-width: 314px) 100vw, 314px" /></div></a>        <div class="c-af__meta">
+        <a class="c-af__related__cat figaro-cat-922 the-global-title" href="https://www.newstatesman.com/podcasts">Podcasts</a>        <h6 class="c-af__related__headline"><a href="https://www.newstatesman.com/podcasts/new-statesman-podcast/2022/06/by-election-special-is-boris-johnson-doomed-by-the-double-defeat"
+            title="By-election special: Is Boris Johnson doomed by the double defeat?">By-election special: Is Boris Johnson doomed by the double defeat?</a></h6>
+    </div>
+    
+</div>
+</div><div class="clearfix"></div></div><!-- .widget /-->                </div>
+                
+                
+        </footer><!-- .footer-widget-area /-->
+
+                </div><!-- .container /-->
+</div><!-- #Footer-widgets-container /-->
+        
+</div><!-- /.wrapper__inner -->
+</div><!-- /.wrapper -->
+</main><!-- /.main -->
+<footer class="c-footer">
+    <div class="c-footer__container">
+                <div class="c-footer__nav">
+            <div class="c-footer__title">New Statesman</div>
+            <div class="menu-useful-links-container"><ul id="menu-useful-links" class="c-footer-menu"><li id="menu-item-203044" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-203044"><a href="https://www.newstatesman.com/about-us-newstatesman">About us</a></li>
+<li id="menu-item-202208" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202208"><a href="https://www.newstatesman.com/history-of-the-new-statesman">History</a></li>
+<li id="menu-item-202266" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202266"><a href="https://www.newstatesman.com/contact-us">Contact us</a></li>
+<li id="menu-item-215368" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-215368"><a href="https://www.newstatesman.com/advertising">Advertising</a></li>
+<li id="menu-item-202026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202026"><a href="https://www.newstatesman.com/rss-feed">RSS</a></li>
+</ul></div>        </div>
+        <div class="c-footer__social">
+            <div class="c-footer__title">Social</div>
+            <div class="c-social">
+                <ul><li class="c-social-icons-item"><a class="c-social-link facebook-social-icon" rel="external noopener nofollow" target="_blank" href="https://en-gb.facebook.com/NewStatesman/" title="Follow us on Facebook"><span class="icon-facebook"></span><span class="screen-reader-text">Facebook</span></a></li><li class="c-social-icons-item"><a class="c-social-link twitter-social-icon" rel="external noopener nofollow" target="_blank" href="https://twitter.com/newstatesman" title="Follow us on Twitter"><span class="icon-twitter"></span><span class="screen-reader-text">Twitter</span></a></li><li class="c-social-icons-item"><a class="c-social-link linkedin-social-icon" rel="external noopener nofollow" target="_blank" href="https://www.linkedin.com/company/new-statesman/" title="Follow us on LinkedIn"><span class="icon-linkedin"></span><span class="screen-reader-text">LinkedIn</span></a></li><li class="c-social-icons-item"><a class="c-social-link instagram-social-icon" rel="external noopener nofollow" target="_blank" href="https://www.instagram.com/newstatesman/?hl=en" title="Follow us on Instagram"><span class="icon-instagram"></span><span class="screen-reader-text">Instagram</span></a></li></ul> 
+            </div>
+        </div>
+                    <div class="c-footer__legal">
+                <div class="c-footer__title">Legal</div>
+                <div class="c-footer__menu"><ul id="menu-legal" class="c-footer-menu"><li id="menu-item-201116" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201116"><a href="https://www.newstatesman.com/privacy-policy">Privacy policy</a></li>
+<li id="menu-item-201117" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201117"><a href="https://www.newstatesman.com/terms-and-conditions">T&#038;Cs</a></li>
+</ul></div>            </div>
+                <div class="c-footer__copyright">
+            <div class="c-copyright-text c-copyright-text-first">New Times <br>
+New Ideas <br>
+New Statesman</div><div class="c-copyright-text c-copyright-text-second">© 2022 New Statesman</div>        </div>
+
+                    </div>
+</footer><!-- /.footer -->
+
+         <script>
+        jQuery('.c-related-companies-article__single').hover(function() { 
+        var hoverTime = 1000;
+        var elements = [].slice.apply(document.querySelectorAll('.c-related-companies-article__single'));
+        elements.forEach(function (el) {
+        var timeout;
+       el.addEventListener('mouseover', function (){
+        var match = jQuery(this).attr('data-url');
+        var hovertitle = jQuery(this).attr('data-target');
+        var curpostid = jQuery(this).attr('id');  
+        var getpostid = curpostid.replace('company', '');
+                if(!jQuery(this).hasClass("verify")){
+            jQuery(this).addClass("verify");
+            timeout = window.setTimeout(function () {
+                permutive.track('TabClick', {
+                    article: {
+                        url: match,               
+                        title:hovertitle
+                    }
+                });
+            }, hoverTime);
+        }
+      });
+      
+     });
+    
+    });
+    
+    </script>
+        <script type='text/javascript' id='nsmgscampaigns-js-extra'>
+/* <![CDATA[ */
+var nsmgscampaigns = {"ajaxurl":"https:\/\/www.newstatesman.com\/wp-admin\/admin-ajax.php","nonce":"12141bedba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-campaigns/assets/public/js/main.js?' defer id='nsmgscampaigns-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-evolok-paywall/classes/assets/js/ev-dab.min.js?rev=1.2.10' id='ns-ev-dab-min-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-evolok-paywall/classes/assets/js/ev-em.min.js?rev=3.2.10' id='ns-ev-em-min-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-evolok-paywall/classes/assets/js/ev-widgets.min.js?rev=3.11.10' id='ns-ev-widgets-min-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-evolok-paywall/classes/assets/js/ev-custom.min.js?rev=1.560' id='ns-ev-custom-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-newsletter-settings/themeAssets/figaroTheme/newstatesman/app.js' id='nsmgnewsletterFigaroTheme-js'></script>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js' id='ha-recaptcha-js'></script>
+<script type='text/javascript' id='nsmgpolls-js-extra'>
+/* <![CDATA[ */
+var nsmgpolls = {"ajaxurl":"https:\/\/www.newstatesman.com\/wp-admin\/admin-ajax.php","options":{"css":"","polls":[],"project_id_init":"","project_id":"","dataset_id":"","tablename":"","key":""},"nonce":"336cdc0b47"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-polls/assets/public/js/main.js' id='nsmgpolls-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/nsmg-tracking//js/permutiveData.js' id='crb-permutive-data-js'></script>
+<script type='text/javascript' id='figaro-scripts-js-extra'>
+/* <![CDATA[ */
+var figaro = {"is_rtl":"","ajaxurl":"https:\/\/www.newstatesman.com\/wp-admin\/admin-ajax.php","post_id":"23017","lazyload":"","ajax_loader":"<div class=\"loader-overlay\"><div class=\"spinner-circle\"><\/div><\/div>","type_to_search":""};
+/* ]]> */
+</script>
+<script type='text/javascript' defer="defer" src='https://www.newstatesman.com/wp-content/uploads/sites/2/figaro/assets/js/figaro-c54ed620e19efd53c108a9860d650fa4.js' id='figaro-scripts-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/themes/figaro/assets/dist/js/script.js' id='company-script-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/storefronts/assets/js/app.js' id='main-js-js'></script>
+<script type='text/javascript' src='https://www.newstatesman.com/wp-content/plugins/vms-automation/vms-script.js' id='my-custom-script-js'></script>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"NRJS-2a3c9db24d2641e24b0","applicationID":"1184416718","transactionName":"ZQBbMEZXDRdSUxVcXlxKeAdAXwwKHEMIW1ZeAA==","queueTime":0,"applicationTime":1971,"atts":"SUdYRg5NHhk=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+
+</html>

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+
+<script>
+let ageConfirmed;
+let ageConfirmedCookie = "_ageConfirmed";
+let date = new Date();
+
+date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+
+let expires = "; expires=" + date.toGMTString();
+    let domain = "." + window.location.hostname;
+let forceExpireDate = "Wed, 31 Oct 2012 08:50:17 GMT";
+
+function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function checkForAgeCookie() {
+  let cookieValue = getCookie(ageConfirmedCookie);
+
+        if (cookieValue == null) {
+            ageConfirmed;
+
+            const addStyle = (() => {
+                const style = document.createElement('style');
+                document.head.append(style);
+                return (styleString) => style.textContent = styleString;
+            })();
+
+            addStyle(`#onetrust-banner-sdk { display: none; }`);
+        } else if (cookieValue && cookieValue == "YES") {
+            ageConfirmed = true;
+        } else if (cookieValue && cookieValue == "NO") {
+  ageConfirmed = false;
+}
+    }
+
+function ageGate() {
+  if (!getCookie(ageConfirmedCookie)) {
+    document.getElementById("age-gate").removeAttribute("style");
+  } else {
+    document.getElementById("age-gate").style.display = "none";
+  }
+}
+
+function confirmedAge(value) {
+  document.cookie =
+    ageConfirmedCookie +
+    "=" +
+    value +
+    expires +
+    ";path=/; Samesite=Lax;domain=" +
+    domain +
+    ";";
+
+  if (value == "YES") {
+/*    document.cookie =
+      "OptanonConsent" +
+      "=" +
+      value +
+      forceExpireDate +
+      ";path=/; Samesite=Lax;domain=" +
+      domain +
+      ";";
+*/
+    ageConfirmed = true;
+            location.reload();
+  } else {
+    ageConfirmed = false;
+            let expireCookieValue = getCookie("OptanonConsent");
+          // USE THIS LINE FOR TEST
+          // document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;"; //domain=" + domain + ";";
+          // USE THIS LINE FOR PROD
+          document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;domain=" + domain + ";";
+          location.reload();
+  }
+
+  document.getElementById("age-gate").style.display = "none";
+}
+
+window.geofeed = function (options) {
+	var country = options.country.toString();
+	var state = options.state.toString();
+
+	if (country == "US") {
+		checkForAgeCookie();
+		setTimeout(ageGate, 500);
+	}
+
+};
+
+var json = document.createElement("script");
+json.setAttribute(
+  "src",
+  "https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location/geofeed"
+);
+document.head.appendChild(json);
+
+</script>
+
+<div id="age-gate" title="age gate" class="age-gate-overlay" style="display:none;">
+<div class="age-gate-content-container">
+<div class="age-gate-text">
+<p style="font-size: 1rem">For compliance with applicable privacy laws:</p>
+<p>Are you between 13-15 years old?</p><br>
+</div>
+<div class="confirm-btn-container">
+<button id="age-gate-no" onclick="window.confirmedAge('NO')">No</button>
+<button id="age-gate-yes" onclick="window.confirmedAge('YES')">Yes</button>
+</div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/d22907aa-9739-4543-a9f8-4ccac65e20a0/OtAutoBlock.js"></script>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="d22907aa-9739-4543-a9f8-4ccac65e20a0"></script>
+<script type="text/javascript">
+function OptanonWrapper() {
+if (!getCookie('_ageConfirmed')) {
+    var groupID = ['C0002', 'C0003', 'C0004'];
+    var OTdomain = OneTrust.GetDomainData().Domain;
+
+    function updateOtCookie(ID) {
+        var cookie = getCookie("OptanonConsent");
+        for (var i = 0; i < ID.length; i++) {
+            cookie = cookie.replace('%2C' + ID[i] + '%3A0', "%2C" + ID[i] + "%3A0");
+            cookie = cookie.replace('%2C' + ID[i] + '%3A1', "%2C" + ID[i] + "%3A0");
+            var cookieName = "OptanonConsent";
+            OptanonActiveGroups = OptanonActiveGroups.replace("," + ID[i] + ",", ",");
+            OnetrustActiveGroups = OnetrustActiveGroups.replace("," + ID[i] + ",", ",");
+        }
+        document.cookie = cookieName + "=" + cookie + ";path=/;domain=" + domain + ";";
+    }
+    var ageGateYes = document.getElementById("age-gate-yes");
+    ageGateYes.addEventListener('click', function handler() {
+        updateOtCookie(groupID);
+    });
+} else { //do nothing
+}
+
+}
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0" content="width=device-width, user-scalable=no" />
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-76.png">
+<link rel="apple-touch-icon" sizes="96x96" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-96.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-180.png">
+<link rel="apple-touch-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon.ico" />
+<title>Niall Alexander  |  Tor.com</title>
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://www.tor.com/wp-content/themes/tor/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W2ZGVB');</script>
+
+<meta name="robots" content="max-image-preview:large" />
+
+<meta name="google-site-verification" content="TKdgmMLGHnS29XwYAR1A9VCy1ejitKME08p83KA8bbw" />
+<meta name="p:domain_verify" content="c5fa3aa04d7b8e9504e9307da5489225" />
+<link rel="dns-prefetch" href="//www.google.com" />
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//i0.wp.com" />
+<link rel="dns-prefetch" href="//c0.wp.com" />
+<link rel="dns-prefetch" href="//widgets.wp.com" />
+<link rel="alternate" type="application/rss+xml" title="Tor.com &raquo; Posts by Niall Alexander Feed" href="https://www.tor.com/author/niall-alexander/feed/" />
+<link rel="stylesheet" id="theme-style-css" href="https://www.tor.com/wp-content/themes/tor/custom.css?ver=6.4.2" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-block-library-css" href="https://c0.wp.com/c/6.4.2/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all" />
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<style id="bp-login-form-style-inline-css" type="text/css">
+.widget_bp_core_login_widget .bp-login-widget-user-avatar{float:left}.widget_bp_core_login_widget .bp-login-widget-user-links{margin-left:70px}#bp-login-widget-form label{display:block;font-weight:600;margin:15px 0 5px;width:auto}#bp-login-widget-form input[type=password],#bp-login-widget-form input[type=text]{background-color:#fafafa;border:1px solid #d6d6d6;border-radius:0;font:inherit;font-size:100%;padding:.5em;width:100%}#bp-login-widget-form .bp-login-widget-register-link,#bp-login-widget-form .login-submit{display:inline;width:-moz-fit-content;width:fit-content}#bp-login-widget-form .bp-login-widget-register-link{margin-left:1em;vertical-align:super}#bp-login-widget-form .bp-login-widget-pwd-link{font-size:80%}
+
+</style>
+<style id="bp-member-style-inline-css" type="text/css">
+[data-type="bp/member"] input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}.bp-block-member{position:relative}.bp-block-member .member-content{display:flex}.bp-block-member .user-nicename{display:block}.bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-member .bp-profile-button{width:100%}.bp-block-member .bp-profile-button a.button{bottom:10px;display:inline-block;margin:18px 0 0;position:absolute;right:0}.bp-block-member.has-cover .item-header-avatar,.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{z-index:2}.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{padding-top:75px}.bp-block-member.has-cover .bp-member-cover-image{background-color:#c5c5c5;background-position:top;background-repeat:no-repeat;background-size:cover;border:0;display:block;height:150px;left:0;margin:0;padding:0;position:absolute;top:0;width:100%;z-index:1}.bp-block-member img.avatar{height:auto;width:auto}.bp-block-member.avatar-none .item-header-avatar{display:none}.bp-block-member.avatar-none.has-cover{min-height:200px}.bp-block-member.avatar-full{min-height:150px}.bp-block-member.avatar-full .item-header-avatar{width:180px}.bp-block-member.avatar-thumb .member-content{align-items:center;min-height:50px}.bp-block-member.avatar-thumb .item-header-avatar{width:70px}.bp-block-member.avatar-full.has-cover{min-height:300px}.bp-block-member.avatar-full.has-cover .item-header-avatar{width:200px}.bp-block-member.avatar-full.has-cover img.avatar{background:hsla(0,0%,100%,.8);border:2px solid #fff;margin-left:20px}.bp-block-member.avatar-thumb.has-cover .item-header-avatar{padding-top:75px}.entry .entry-content .bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-members-style-inline-css" type="text/css">
+[data-type="bp/members"] .components-placeholder.is-appender{min-height:0}[data-type="bp/members"] .components-placeholder.is-appender .components-placeholder__label:empty{display:none}[data-type="bp/members"] .components-placeholder input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}[data-type="bp/members"].avatar-none .member-description{width:calc(100% - 44px)}[data-type="bp/members"].avatar-full .member-description{width:calc(100% - 224px)}[data-type="bp/members"].avatar-thumb .member-description{width:calc(100% - 114px)}[data-type="bp/members"] .member-content{position:relative}[data-type="bp/members"] .member-content .is-right{position:absolute;right:2px;top:2px}[data-type="bp/members"] .columns-2 .member-content .member-description,[data-type="bp/members"] .columns-3 .member-content .member-description,[data-type="bp/members"] .columns-4 .member-content .member-description{padding-left:44px;width:calc(100% - 44px)}[data-type="bp/members"] .columns-3 .is-right{right:-10px}[data-type="bp/members"] .columns-4 .is-right{right:-50px}.bp-block-members.is-grid{display:flex;flex-wrap:wrap;padding:0}.bp-block-members.is-grid .member-content{margin:0 1.25em 1.25em 0;width:100%}@media(min-width:600px){.bp-block-members.columns-2 .member-content{width:calc(50% - .625em)}.bp-block-members.columns-2 .member-content:nth-child(2n){margin-right:0}.bp-block-members.columns-3 .member-content{width:calc(33.33333% - .83333em)}.bp-block-members.columns-3 .member-content:nth-child(3n){margin-right:0}.bp-block-members.columns-4 .member-content{width:calc(25% - .9375em)}.bp-block-members.columns-4 .member-content:nth-child(4n){margin-right:0}}.bp-block-members .member-content{display:flex;flex-direction:column;padding-bottom:1em;text-align:center}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:100%}.bp-block-members .member-content .item-header-avatar{margin:0 auto}.bp-block-members .member-content .item-header-avatar img.avatar{display:inline-block}@media(min-width:600px){.bp-block-members .member-content{flex-direction:row;text-align:left}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:auto}.bp-block-members .member-content .item-header-avatar{margin:0}}.bp-block-members .member-content .user-nicename{display:block}.bp-block-members .member-content .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-members .member-content time{color:#767676;display:block;font-size:80%}.bp-block-members.avatar-none .item-header-avatar{display:none}.bp-block-members.avatar-full{min-height:190px}.bp-block-members.avatar-full .item-header-avatar{width:180px}.bp-block-members.avatar-thumb .member-content{min-height:80px}.bp-block-members.avatar-thumb .item-header-avatar{width:70px}.bp-block-members.columns-2 .member-content,.bp-block-members.columns-3 .member-content,.bp-block-members.columns-4 .member-content{display:block;text-align:center}.bp-block-members.columns-2 .member-content .item-header-avatar,.bp-block-members.columns-3 .member-content .item-header-avatar,.bp-block-members.columns-4 .member-content .item-header-avatar{margin:0 auto}.bp-block-members img.avatar{height:auto;max-width:-moz-fit-content;max-width:fit-content;width:auto}.bp-block-members .member-content.has-activity{align-items:center}.bp-block-members .member-content.has-activity .item-header-avatar{padding-right:1em}.bp-block-members .member-content.has-activity .wp-block-quote{margin-bottom:0;text-align:left}.bp-block-members .member-content.has-activity .wp-block-quote cite a,.entry .entry-content .bp-block-members .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-dynamic-members-style-inline-css" type="text/css">
+.bp-dynamic-block-container .item-options{font-size:.5em;margin:0 0 1em;padding:1em 0}.bp-dynamic-block-container .item-options a.selected{font-weight:600}.bp-dynamic-block-container ul.item-list{list-style:none;margin:1em 0}.bp-dynamic-block-container ul.item-list li{margin-bottom:1em}.bp-dynamic-block-container ul.item-list li:after,.bp-dynamic-block-container ul.item-list li:before{content:" ";display:table}.bp-dynamic-block-container ul.item-list li:after{clear:both}.bp-dynamic-block-container ul.item-list li .item-avatar{float:left;width:60px}.bp-dynamic-block-container ul.item-list li .item{margin-left:70px}
+
+</style>
+<style id="bp-online-members-style-inline-css" type="text/css">
+[data-type="bp/online-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/online-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-active-members-style-inline-css" type="text/css">
+[data-type="bp/active-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/active-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-latest-activities-style-inline-css" type="text/css">
+.bp-latest-activities .components-flex.components-select-control select[multiple]{height:auto;padding:0 8px}.bp-latest-activities .components-flex.components-select-control select[multiple]+.components-input-control__suffix svg{display:none}.bp-latest-activities-block a,.entry .entry-content .bp-latest-activities-block a{border:none;text-decoration:none}.bp-latest-activities-block .activity-list.item-list blockquote{border:none;padding:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini){box-shadow:1px 0 4px rgba(0,0,0,.15);padding:0 1em;position:relative}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after,.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-color:transparent;border-style:solid;content:"";display:block;height:0;left:15px;position:absolute;width:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-top-color:rgba(0,0,0,.15);border-width:9px;bottom:-18px;left:14px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after{border-top-color:#fff;border-width:8px;bottom:-16px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item.mini .avatar{display:inline-block;height:20px;margin-right:2px;vertical-align:middle;width:20px}.bp-latest-activities-block .activity-list.item-list footer{align-items:center;display:flex}.bp-latest-activities-block .activity-list.item-list footer img.avatar{border:none;display:inline-block;margin-right:.5em}.bp-latest-activities-block .activity-list.item-list footer .activity-time-since{font-size:90%}.bp-latest-activities-block .widget-error{border-left:4px solid #0b80a4;box-shadow:1px 0 4px rgba(0,0,0,.15)}.bp-latest-activities-block .widget-error p{padding:0 1em}
+
+</style>
+<style id="bp-sitewide-notices-style-inline-css" type="text/css">
+[data-type="bp/sitewide-notices"] .bp-screen-reader-text{clip:rect(0 0 0 0);word-wrap:normal!important;border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}[data-type="bp/sitewide-notices"] [data-bp-tooltip]:after{word-wrap:break-word;background-color:#fff;border:1px solid #737373;border-radius:1px;box-shadow:4px 4px 8px rgba(0,0,0,.2);color:#333;content:attr(data-bp-tooltip);display:none;font-family:Helvetica Neue,Helvetica,Arial,san-serif;font-size:12px;font-weight:400;letter-spacing:normal;line-height:1.25;max-width:200px;opacity:0;padding:5px 8px;pointer-events:none;position:absolute;text-shadow:none;text-transform:none;transform:translateZ(0);transition:all 1.5s ease;visibility:hidden;white-space:nowrap;z-index:100000}[data-type="bp/sitewide-notices"] .bp-tooltip:after{left:50%;margin-top:7px;top:110%;transform:translate(-50%)}.bp-sitewide-notice-block{border-left:4px solid #ff853c;padding-left:1em;position:relative}.bp-sitewide-notice-block h2:before{background:none;border:none}.bp-sitewide-notice-block .dismiss-notice{background-color:transparent;border:1px solid #ff853c;color:#ff853c;display:block;padding:.2em .5em;position:absolute;right:.5em;top:.5em;width:-moz-fit-content;width:fit-content}.bp-sitewide-notice-block .dismiss-notice:hover{background-color:#ff853c;color:#fff}
+
+</style>
+<link rel="stylesheet" id="mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/wp-mediaelement.min.css" type="text/css" media="all" />
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="tor-merriweather-webfont-css" href="https://fonts.googleapis.com/css?family=Merriweather%3A400%2C400i%2C700%2C700i&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tor-open-sans-css" href="https://fonts.googleapis.com/css?family=Open+Sans%3A200%2C300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/tablet.css?ver=1.0.74" type="text/css" media="all and (min-width: 767px)" />
+<link rel="stylesheet" id="desktop-css" href="https://www.tor.com/wp-content/themes/tor/static/css/desktop.css?ver=1.0.74" type="text/css" media="all and (min-width: 1024px)" />
+<link rel="stylesheet" id="mobile-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mobile.css?ver=1.0.74" type="text/css" media="all and (max-width: 767px)" />
+<link rel="stylesheet" id="mini-tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mini-tablet.css?ver=1.0.74" type="text/css" media="(min-width: 641px) and (max-width: 767px)" />
+<link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/12.9.1/_inc/social-logos/social-logos.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/12.9.1/css/jetpack.css" type="text/css" media="all" />
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/vendor.bundle.js?ver=1.0.74" id="vendor-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/ga.bundle.js?ver=1.0.74" id="tor-ga-js"></script>
+<script type="text/javascript" id="sharing-js-fe-js-extra">
+/* <![CDATA[ */
+var tor_sharing_fe = ["is_logged_in",false];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/sharing.bundle.js?ver=1.0.74" id="sharing-js-fe-js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?ver=2.8.6" id="recaptcha-js"></script>
+<link rel="https://api.w.org/" href="https://www.tor.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.tor.com/wp-json/wp/v2/users/5838" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.tor.com/xmlrpc.php?rsd" />
+<script type="text/javascript">var ajaxurl = 'https://www.tor.com/wp-admin/admin-ajax.php';</script>
+
+<style type="text/css">
+ul#menu-footer-menu-small li:nth-child(2) {
+    position: relative;
+    padding-right: 30px !important;
+}
+
+
+ul#menu-footer-menu-small li:nth-child(2)::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 4px;
+    width: 27px;
+    height: 10px;
+    background-image: url("/wp-content/uploads/2023/09/privacyoptions730x350.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+</style>
+
+
+<script type="text/javascript">
+		var dfp_ad_slots = [];
+		var googletag = googletag || {};
+		googletag.cmd = googletag.cmd || [];
+		(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		gads.type = 'text/javascript';
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+		})();
+		</script>
+<script type="text/javascript">
+		googletag.cmd.push(function() {
+			var mappingtop = googletag.sizeMapping().addSize([1280,1],[[728,90]]).addSize([1024,1],[[728,90]]).addSize([850,1],[[728,90]]).addSize([768,1],[[728,90]]).addSize([0,0],[[320,50]]).build();
+var mappingright1 = googletag.sizeMapping().addSize([1280,1],[[300,250]]).addSize([1024,1],[[300,250]]).addSize([850,1],[[300,250]]).addSize([768,1],[]).addSize([0,0],[[300,250]]).build();
+dfp_ad_slots[0] = googletag.defineSlot('/21876227215/tor.com',[728,90],'div-gpt-ad-top').defineSizeMapping(mappingtop).addService(googletag.pubads()).setTargeting('pos', 'top');
+dfp_ad_slots[1] = googletag.defineSlot('/21876227215/tor.com',[300,250],'div-gpt-ad-right1').defineSizeMapping(mappingright1).addService(googletag.pubads()).setTargeting('pos', 'right1');
+			googletag.pubads().enableSingleRequest();
+			googletag.pubads().enableAsyncRendering();
+			googletag.pubads().collapseEmptyDivs( true );
+			googletag.enableServices();
+		});
+		</script>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="Tor.com" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg" />
+<meta property="og:image:alt" content />
+<meta property="og:title" content="Niall Alexander" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://www.tor.com/author/niall-alexander/" />
+<meta property="profile:first_name" content="Niall" />
+<meta property="profile:last_name" content="Alexander" />
+<meta property="fb:app_id" content="966242223397117" />
+<meta property="article:publisher" content="https://www.facebook.com/tordotcom/" />
+<meta property="author" content="Niall Alexander" />
+<meta property="article:author" content="https://www.tor.com/author/niall-alexander/" />
+<meta name="twitter:site" content="@tordotcom" />
+
+<style>
+
+	body .age-gate-overlay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483646;
+	background-color: #c1c5c899;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+body .age-gate-content-container {
+	background: #fff;
+	width: 570px;
+	padding: 30px;
+}
+
+body .age-gate-text p {
+	color: #333333;
+  font-family: "Nunito", "sans-serif";
+	font-size: 2rem;
+	font-weight: normal;
+	margin-top: 8px;
+}
+
+body .confirm-btn-container button {
+	color: #fff;
+	background: #ab0033;
+	border: none;
+	padding: 10px 20px;
+	width: 100px;
+	text-transform: uppercase;
+	display: inline-block;
+	font-weight: bold;
+}
+
+body .confirm-btn-container button:first-child {
+	margin-right: 15px;
+}
+</style>
+</head>
+<body class="bp-legacy archive author author-niall-alexander author-5838 no-js">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W2ZGVB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div id="page-wrapper">
+<header id="page-header">
+<div id="div-gpt-ad-top" class="dfp-ad dfp-top">
+<script type="text/javascript">
+		if ( typeof googletag != 'undefined' ) {
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-top'); });
+		}
+	</script>
+</div>
+<hgroup id="page-header-masthead">
+<h1 id="site-logo"><a href="https://www.tor.com/" title="Tor.com" rel="home">Tor.com</a></h1>
+<a href="#" id="menu-control" class="mobile"><i class="icon-menu"></i></a>
+<h2 id="site-description">Science fiction. Fantasy. The universe. And related subjects.</h2>
+</hgroup>
+<nav id="page-navigation">
+<h1 class="assistive-text section-heading">Main menu</h1>
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu-header-menu-container"><ul id="menu-header-menu" class="menu"><li id="menu-item-18" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18"><a href="https://www.tor.com/category/all-fiction/">Fiction</a></li>
+<li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21"><a href="/series">Series</a></li>
+<li id="menu-item-23" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23"><a target="_blank" rel="noopener" href="https://publishing.tor.com/">Publishing</a></li>
+<li id="menu-item-212027" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-212027"><a target="_blank" rel="noopener" href="https://read.macmillan.com/tordotcom/newsletter-signup/">Newsletter</a></li>
+</ul></div> <div class="search-toggle icon-search-2"></div>
+<form method="get" id="searchform" action="https://www.tor.com/search-page/">
+<label for="s" class="assistive-text">Search</label>
+<input type="text" class="field" name="s" id="s" placeholder="Search" />
+<button type="submit" class="search-submit"><i class="icon-search-2"></i><span class="assistive-text">Search</span></button>
+</form>
+<div id="account-wrapper" data-nonce="630fc5c9e6">
+<ul class="logged-out">
+<li class="login-control"><a href="#" class="login-button login">Log In</a></li>
+<li class="login-control"><a href="https://www.tor.com/register/" class="register-button">Register</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<div id="main">
+<section id="primary">
+<div id="content" class="archive">
+<header class="content-header">
+<span class="content-title author">Tor.com content by</span>
+<h1 class="author-title">Niall Alexander</h1>
+<div class="author-title-links">
+<a href="https://www.tor.com/members/niallalot/">view profile</a> |
+<a href="https://www.tor.com/author/niall-alexander/feed/">
+RSS feed </a>
+</div>
+<div class="post-section-links">
+</div>
+</header>
+<div id="all" class="author-blog-archive">
+<div id="infinite-scroll-wrapper">
+<article data-nonce="f93b348007" data-post-id="482186" id="post-482186" class="post-482186 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-becky-chambers tag-harper-voyager tag-hugo-awards-2019 tag-record-of-a-spaceborn-few tag-the-hugo-awards tag-wayfarers visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/hugo-awards-2019/" rel="category tag">Hugo Awards 2019</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2019/07/31/hugo-spotlight-becky-chambers-record-of-a-spaceborn-few/">Hugo Spotlight: Becky Chambers&#8217; <em>Record of a Spaceborn Few</em> Tackles Life As We No Longer Know It</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Wed Jul 31, 2019 12:30pm</span>
+<a href="https://www.tor.com/2019/07/31/hugo-spotlight-becky-chambers-record-of-a-spaceborn-few/#comments" class="entry-comment-count">
+8 comments </a>
+<a id="favorite-482186" href="#" data-nonce="8f317e2052" data-entity-id="482186" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2019/07/31/hugo-spotlight-becky-chambers-record-of-a-spaceborn-few/">
+<picture class="featured-image-wrapper vertical-mobile vertical" data-id="484675">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/07/SpaceborkFew-header.png?fit=600%2C360&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/07/SpaceborkFew-header.png?fit=750%2C450&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/07/SpaceborkFew-header.png?fit=750%2C450&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/07/SpaceborkFew-header.png?fit=1440%2C864&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/07/SpaceborkFew-header.png?fit=600%2C360&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="featured-image-caption caption-vertical">Image credit: NASA/JPL-Caltech/2MASS</div>
+<div class="entry-content">
+<p class="frontmatter">In the lead-up to the <a href="https://www.tor.com/tags/hugo-awards-2019" target="_blank" rel="noopener noreferrer" data-keep-unchecked="no">2019 Hugo Awards</a>, we&#8217;re taking time to appreciate this year&#8217;s novel and short fiction Finalists, and what makes each of them great.</p>
+<p>We’ve been taught to expect our novels to be predominantly narrative in nature, but Becky Chambers is here to say that there’s another way. As I wrote in my review of what is by leaps and bounds <a href="https://www.tor.com/2016/07/05/the-joy-of-the-journey-the-long-way-to-a-small-angry-planet-by-becky-chambers/">the most hectic episode</a> of the Wayfarers series so far, the plot of <em>The Long Way to a Small, Angry Planet </em>appeared almost an afterthought when all was said and done. If that proved a problem for you, <em>A Closed and Common Orbit</em>, with its still slighter storyline, would have been far from <a href="https://www.tor.com/2017/03/13/making-humans-happy-a-closed-and-common-orbit-by-becky-chambers/">the follow-up you fancied</a>—yet in its doubling down on the close, character-focused moments that made its self-published predecessor such a personable pleasure, <em>A Closed and Common Orbit</em> was, in its hearteningly humane way, no less of a success than Chambers’ multiple award-nominated darling of a debut.</p>
+<p><em>Record of a Spaceborn Few</em> is at least as remarkable, yet regrettably, isn’t going to win over anyone who’s been underwhelmed by these books before. Indeed, it’s never been clearer than it is here that this is a series about people—people as opposed to the things that happen to them, assuming anything happens to them at all. To be sure, a few things do in <em>Record of a Spaceborn Few</em>—there’s a tragic mishap at the outset, and an equally disastrous accident as the text progresses—but the third of Chambers’ loosely-connected Wayfarers works is only interested in events insofar as these events affect the five folks that are the focus of this practically pacific work of fiction.</p>
+<p> <a href="https://www.tor.com/2019/07/31/hugo-spotlight-becky-chambers-record-of-a-spaceborn-few/#more-482186" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="a17ab760e9" data-post-id="457021" id="post-457021" class="post-457021 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-a-brightness-long-ago tag-assassins tag-berkeley-press tag-book-reviews tag-guy-gavriel-kay tag-historical-fantasy tag-hodder-stoughton tag-love-stories tag-mercenaries visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2019/05/16/its-the-little-things-a-brightness-long-ago-by-guy-gavriel-kay/">It’s the Little Things: <em>A Brightness Long Ago</em> by Guy Gavriel Kay</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu May 16, 2019 2:00pm</span>
+<a href="https://www.tor.com/2019/05/16/its-the-little-things-a-brightness-long-ago-by-guy-gavriel-kay/#comments" class="entry-comment-count">
+4 comments </a>
+<a id="favorite-457021" href="#" data-nonce="bd7c501792" data-entity-id="457021" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">3 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2019/05/16/its-the-little-things-a-brightness-long-ago-by-guy-gavriel-kay/">
+<picture class="featured-image-wrapper horizontal" data-id="457867">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/05/Brightness-header.png?fit=600%2C330&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/05/Brightness-header.png?fit=750%2C413&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/05/Brightness-header.png?fit=750%2C413&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/05/Brightness-header.png?fit=1000%2C550&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/05/Brightness-header.png?fit=600%2C330&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>We all know how the story of the chosen one goes. We all know of fellowships formed around unlikely heroes who come from nothing but become something like legends when they declare against the darkness. We all know that the fate of the land, or the larger world, or perhaps the entire galaxy, hangs in the balance in this tradition of fiction. <em>A Brightness Long Ago</em> isn’t about any of that. Instead, it’s interested in what we <em>don’t</em> know—in the little things that happen to the little people, in particular.</p>
+<p> <a href="https://www.tor.com/2019/05/16/its-the-little-things-a-brightness-long-ago-by-guy-gavriel-kay/#more-457021" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="656668229c" data-post-id="444906" id="post-444906" class="post-444906 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-book-reviews tag-evil-empires tag-james-s-a-corey tag-resistance tag-reviews tag-sf tag-space-battles tag-the-expanse tag-tiamats-wrath visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2019/03/28/book-reviews-tiamats-wrath-by-james-s-a-corey/">Message in a Bottle: <em>Tiamat&#8217;s Wrath</em> by James S. A. Corey</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Mar 28, 2019 2:00pm</span>
+<a href="https://www.tor.com/2019/03/28/book-reviews-tiamats-wrath-by-james-s-a-corey/#comments" class="entry-comment-count">
+3 comments </a>
+<a id="favorite-444906" href="#" data-nonce="d1df852b5c" data-entity-id="444906" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">6 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2019/03/28/book-reviews-tiamats-wrath-by-james-s-a-corey/">
+<picture class="featured-image-wrapper horizontal" data-id="444948">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/03/Tor_com-BookReview_TiamatsWrath.jpg?fit=600%2C330&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/03/Tor_com-BookReview_TiamatsWrath.jpg?fit=750%2C413&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/03/Tor_com-BookReview_TiamatsWrath.jpg?fit=750%2C413&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/03/Tor_com-BookReview_TiamatsWrath.jpg?fit=1000%2C550&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/03/Tor_com-BookReview_TiamatsWrath.jpg?fit=600%2C330&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Time passes. The things you love lose their lustre. Your nearest and dearest die. And sooner or later, it dawns on you that you will too. So when you see the end ahead, what then? Well, if you’re anything like the friends who became a family aboard the gunship <em>Rocinante</em>, you do what you’ve always done: you fight for what’s right, even when what’s right is difficult to picture in a galaxy gone wrong on your watch.</p>
+<p>At this late stage in the high-stakes game the architects of The Expanse have been playing, Gunnery Sergeant Bobbie Draper’s greatest desire is to die “with the knowledge that humanity’s a little bit better off that it would have been if I’d never been born. A little freer. A little kinder. A little smarter. That the bullies and bastards and sadists got their teeth into a few less people because of me” is what what’s right looks like to her, and in <em>Tiamat’s Wrath</em>, the penultimate volume of James S. A. Corey’s celebrated sci-fi saga, her wish may well come true. Indeed, now that the end is near, not a few of the folks we’ve come to care for over the course of this sensational story are fixing to face the final curtain, and as sorry as readers will be to bid them goodbye, at least we’ll be able to say that hey, they did it their way.</p>
+<p> <a href="https://www.tor.com/2019/03/28/book-reviews-tiamats-wrath-by-james-s-a-corey/#more-444906" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="2e0016310d" data-post-id="431516" id="post-431516" class="post-431516 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-airships tag-book-reviews tag-fantasy tag-josiah-bancroft tag-orbit tag-reviews tag-slavery tag-the-books-of-babel tag-the-hod-king visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2019/02/08/book-reviews-the-hod-king-by-josiah-bancroft/">Breaking In: <em>The Hod King</em> by Josiah Bancroft</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Feb 8, 2019 1:30pm</span>
+<a href="https://www.tor.com/2019/02/08/book-reviews-the-hod-king-by-josiah-bancroft/#comments" class="entry-comment-count">
+4 comments </a>
+<a id="favorite-431516" href="#" data-nonce="2cf9c1206a" data-entity-id="431516" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">4 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2019/02/08/book-reviews-the-hod-king-by-josiah-bancroft/">
+<picture class="featured-image-wrapper horizontal" data-id="431864">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/02/HodKing-header.png?fit=600%2C337&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/02/HodKing-header.png?fit=750%2C422&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/02/HodKing-header.png?fit=750%2C422&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/02/HodKing-header.png?fit=900%2C506&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/02/HodKing-header.png?fit=600%2C337&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>The thrilling third volume of Josiah Bancroft&#8217;s The Books of Babel continues the incredible trajectory set by <em>Senlin Ascends</em> and sustained in its excellent successor. The first book in the series was <a href="https://www.tor.com/2018/01/17/book-reviews-senlin-ascends-by-josiah-bancroft/">tremendously inventive</a>, and a bunch of fun, but for its iffy beginning; <em>Arm of the Sphinx </em>proved <a href="https://www.tor.com/2018/03/14/book-reviews-arm-of-the-sphinx-by-josiah-bancroft/">a superlative sequel</a> in every sense, though it too suffered from a section that slowed progress; now, come <em>The Hod King</em>, there can be no denying Bancroft’s mastery of fantasy. It’s the biggest book in the saga so far, and the boldest, and, yes, the best.</p>
+<p> <a href="https://www.tor.com/2019/02/08/book-reviews-the-hod-king-by-josiah-bancroft/#more-431516" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="05832d0030" data-post-id="427573" id="post-427573" class="post-427573 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alastair-reynolds tag-book-reviews tag-orbit tag-revenger tag-reviews tag-sf tag-shadow-captain tag-sisters tag-space-pirates tag-ya tag-young-adult visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2019/01/24/book-reviews-shadow-captain-by-alastair-reynolds/">Layers of Strangeness: <em>Shadow Captain</em> by Alastair Reynolds</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Jan 24, 2019 2:00pm</span>
+<a id="favorite-427573" href="#" data-nonce="9b4d930ca1" data-entity-id="427573" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2019/01/24/book-reviews-shadow-captain-by-alastair-reynolds/">
+<picture class="featured-image-wrapper horizontal" data-id="428118">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/01/ShadowCaptain-header.png?fit=600%2C337&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/01/ShadowCaptain-header.png?fit=750%2C422&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/01/ShadowCaptain-header.png?fit=750%2C422&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/01/ShadowCaptain-header.png?fit=900%2C506&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2019/01/ShadowCaptain-header.png?fit=600%2C337&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>We all know how revenge stories start. As the protagonist of such enterprises—complete, in all probability, with a shadowy past—you’re busy living your happy little life when, what do you know, along comes a kidnapper or a killer who takes something precious from you. Be it the love of your life, some particularly precious prize, or indeed a dog, you can’t pretend this awful thing hasn’t happened, much as you mean to, and so, as sure as the sun will set, you return to your formerly wicked ways, or find hidden depths inside yourself dark enough to put you on the path to payback.</p>
+<p>We all know how revenge stories start, and we know how they end as well. Although you are very likely changed by the journey to hell and back you’ve survived by the skin of your teeth, you’ve managed, against all odds, to make the bad people pay. The justice the police or your partner or your puppy couldn’t or wouldn’t provide is ultimately done. But when you’ve gotten your revenge, what then?</p>
+<p>That’s the compelling premise British Science Fiction Award winner Alastair Reynolds posits in his second novel set in the Congregation, but whilst its exploration of the relatively uncharted aftermath of such narratives is excellent—as is its expansion of the swashbuckling backdrop that has been such a boon to these books—<em>Shadow Captain</em> has neither the edge nor the energy of its propulsive predecessor.</p>
+<p> <a href="https://www.tor.com/2019/01/24/book-reviews-shadow-captain-by-alastair-reynolds/#more-427573" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="3afe2378b3" data-post-id="405561" id="post-405561" class="post-405561 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-book-reviews tag-castle-rock tag-discrimination tag-elevation tag-mystery tag-reviews tag-scribner tag-stephen-king tag-weight-loss visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/11/01/book-reviews-elevation-by-stephen-king/">A History of Mystery: <em>Elevation</em> by Stephen King</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Nov 1, 2018 3:00pm</span>
+<a href="https://www.tor.com/2018/11/01/book-reviews-elevation-by-stephen-king/#comments" class="entry-comment-count">
+4 comments </a>
+<a id="favorite-405561" href="#" data-nonce="1013be7fba" data-entity-id="405561" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">4 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/11/01/book-reviews-elevation-by-stephen-king/">
+<picture class="featured-image-wrapper horizontal" data-id="406376">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/Elevation-header.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/Elevation-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/Elevation-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/Elevation-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/Elevation-header.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>If the upheaval of recent years has taught us anything, it’s that we, as a people, are divided, and that the division that exists between us and them, whoever they or we may be, is more marked than almost anyone had imagined. As evidenced by <em>Elevation</em>, Stephen King would love for us all just to get along, but instead of, say, scaring us back to our senses with some spiteful supernatural spectre, as you might expect from the author of <em>IT</em>, the seasoned storyteller opts to tread lightly, telling an unexpectedly touching tale about how we can be better together.</p>
+<p>That’s not to say <em>Elevation</em> lacks a speculative element. It’s even somewhat spooky. You see, Scott Carey has started to lose weight. He’s lost a little every day in the weeks leading up to the outset of the text. So far, so standard, but the thing of it is, he hasn’t lost any of his mass. He’s still exactly the same size as he was, and to make matters stranger, “whatever he wore or carried that was supposed to weigh him down&#8230; didn’t.”</p>
+<p> <a href="https://www.tor.com/2018/11/01/book-reviews-elevation-by-stephen-king/#more-405561" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="4321d0ef9c" data-post-id="403965" id="post-403965" class="post-403965 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-book-reviews tag-epic-fantasy tag-evil-empires tag-politics tag-psychological-thriller tag-reviews tag-seth-dickinson tag-the-masquerade tag-the-monster-baru-cormorant tag-the-traitor-baru-cormorant tag-tor-books visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/10/30/book-reviews-the-monster-baru-cormorant-by-seth-dickinson/">A Mask Without a Face: <em>The Monster Baru Cormorant</em> by Seth Dickinson</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Tue Oct 30, 2018 3:30pm</span>
+<a href="https://www.tor.com/2018/10/30/book-reviews-the-monster-baru-cormorant-by-seth-dickinson/#comments" class="entry-comment-count">
+1 comment </a>
+<a id="favorite-403965" href="#" data-nonce="d6a7198590" data-entity-id="403965" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/10/30/book-reviews-the-monster-baru-cormorant-by-seth-dickinson/">
+<picture class="featured-image-wrapper horizontal" data-id="356662">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/04/MonsterBaru-crop.jpg?fit=600%2C338&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/04/MonsterBaru-crop.jpg?fit=740%2C417&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/04/MonsterBaru-crop.jpg?fit=740%2C417&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/04/MonsterBaru-crop.jpg?fit=740%2C417&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/04/MonsterBaru-crop.jpg?fit=600%2C338&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Three years on from <em>The Traitor Baru Cormorant</em>, <a href="https://www.tor.com/2015/09/14/book-reviews-the-traitor-baru-cormorant-by-seth-dickinson/">a first novel so clever and subversive</a> that it bore comparison to K. J. Parker’s best and most messed-up efforts, Seth Dickinson is back at last with a book that’s bigger, if not necessarily better, than its imperiously powerful predecessor. Its setting marks a substantial expansion from the several isolated isles explored in these pages before; its <em>dramatis personae</em> takes in a whole new cast of characters in addition to the scant survivors of Dickinson’s devastating debut; and there’s certainly a lot more going on in the story: so much more, as a matter of fact, that the manuscript of <em>The Monster Baru Cormorant</em> <a href="https://www.tor.com/2018/05/01/baru-cormorant-fourth-novel-seth-dickinson-the-masquerade/">had to be cleaved in two</a>. Saying that, size isn’t everything—a sentiment I’m sure The Masquerade’s embattled protagonist would echo if she weren’t so busy bloodily betraying her every belief.</p>
+<p>Baru’s betrayals begin from the first chapter of the narrative, when, on the shore of the Elided Keep she now commands, she has her closest confidante chained to a drowning-stone, and watches as the tide takes her. Better this end, she tells herself; better even this dreadful death than the appalling alternative, which is to allow the Falcresti aggressors she ostensibly represents to take Tain Hu as a hostage whose health and welfare would be weighed against Baru’s every bid to “[disembowel] the empire from within.”</p>
+<p> <a href="https://www.tor.com/2018/10/30/book-reviews-the-monster-baru-cormorant-by-seth-dickinson/#more-403965" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="6590e96ee7" data-post-id="403972" id="post-403972" class="post-403972 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-book-reviews tag-cat-and-mouse tag-china tag-future-history tag-kim-stanley-robinson tag-near-future tag-orbit tag-politics tag-red-moon tag-reviews tag-sf tag-the-moon visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/10/25/book-reviews-red-moon-by-kim-stanley-robinson/">Between Earth and Heaven: <em>Red Moon</em> by Kim Stanley Robinson</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Oct 25, 2018 4:00pm</span>
+<a href="https://www.tor.com/2018/10/25/book-reviews-red-moon-by-kim-stanley-robinson/#comments" class="entry-comment-count">
+10 comments </a>
+<a id="favorite-403972" href="#" data-nonce="0fb1a80279" data-entity-id="403972" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/10/25/book-reviews-red-moon-by-kim-stanley-robinson/">
+<picture class="featured-image-wrapper horizontal" data-id="404618">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/RedMoon-header.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/RedMoon-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/RedMoon-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/RedMoon-header.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/10/RedMoon-header.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>I don’t know about you, but I’d go to the moon in a minute. Not necessarily right now, but if, in a few years, the trip was relatively inexpensive, and I could be assured of a safe launch and landing, then that’s a rocket I’d ride! Just to put a booted foot on that “bone-white ball” between Earth and Heaven—so near, yet so far; so familiar, yet so alien—would be the experience of a lifetime, I imagine, for me and for many.</p>
+<p>For Fred Fredericks, the point of entry perspective of Kim Stanley Robinson’s <em>Red Moon</em>, that invigorating voyage—into the black and back at seven times the speed of sound—is no more than a necessary evil. His American employer has sent him skyward simply to deliver a device to one of the moon’s Chinese masters: a secure, quantum-entangled phone that can only communicate with its equivalent on Earth. Fred plans to “make sure it’s connected with its twin and working well. After that [he’ll] head home.” Unfortunately for him, in Robinson’s torturous new novel even the best-laid plans have a habit of collapsing on Luna, so when Fred’s meeting with Governor Chang Yazu ends with the head of the special section dead, no one other than the newcomer is entirely surprised.</p>
+<p> <a href="https://www.tor.com/2018/10/25/book-reviews-red-moon-by-kim-stanley-robinson/#more-403972" class="more-link">[Alas, being confused doesn’t stop him from being accused…]</a></p>
+</div>
+</article>
+<article data-nonce="c003cb0bcf" data-post-id="387038" id="post-387038" class="post-387038 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-bloody-rose tag-book-reviews tag-books-of-the-band tag-epic-fantasy tag-family tag-funny-fiction tag-nicholas-eames tag-orbit-books tag-reviews tag-rock-and-roll visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/08/30/book-reviews-bloody-rose-by-nicholas-eames/">The Sun Always Rises: <em>Bloody Rose</em> by Nicholas Eames</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Aug 30, 2018 2:00pm</span>
+<a href="https://www.tor.com/2018/08/30/book-reviews-bloody-rose-by-nicholas-eames/#comments" class="entry-comment-count">
+1 comment </a>
+<a id="favorite-387038" href="#" data-nonce="bae6dcfd32" data-entity-id="387038" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">3 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/08/30/book-reviews-bloody-rose-by-nicholas-eames/">
+<picture class="featured-image-wrapper horizontal" data-id="387651">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/08/BloodyRose-review.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/08/BloodyRose-review.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/08/BloodyRose-review.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/08/BloodyRose-review.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/08/BloodyRose-review.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>&#8220;Writing a book as an aspiring author and writing as a published one are,&#8221; as Nicholas Eames notes in the acknowledgements of his new novel, &#8220;two very different journeys. You think you’ve got the lay of the land, but in fact the map has changed and you’re wandering blind into a territory you thought you’d conquered.&#8221; I’d extend Eames’ assertion to the process of reviewing a book, too. Though you’re critical of both, of course, you look one way at a debut—with a willingness to forgive if not forget issues that arise during what is the literary equivalent of an open-mic night—and another at a novel by an established author. Expectations have been created by that stage, so when, for instance, a familiar fault rears its hydra of heads again, you can no longer just look the other way, especially if that author has established himself with a book like <em>Kings of the Wyld</em>, <a href="https://www.tor.com/2017/02/22/book-reviews-kings-of-the-wyld-by-nicholas-eames/" target="_blank" rel="noopener">a marvellously metaphorical first novel</a> about a band of mercenaries that wield instruments of war as opposed to song. Now, on the back of &#8220;the funniest and finest fantasy debut in ages,&#8221; Eames is not the unknown quantity he was before he broke out in early 2017: rather, he’s a real rock star, and happily, that’s a part he plays with appropriate aplomb.</p>
+<p><em>Bloody Rose</em>, the second of the Books of the Band, is a bigger and by some measures better book than its predecessor. I say &#8220;some&#8221; because, as a sequel of sorts—a standalone set in the same world and featuring some of the same characters—it’s inherently less surprising than said, and like <em>Kings of the Wyld</em>, it’s awfully slow to start. That’s a far harder thing to accept here than it was there—but by all other accounts, <em>Bloody Rose </em>is bloody good fun, and rather beautiful, too.</p>
+<p> <a href="https://www.tor.com/2018/08/30/book-reviews-bloody-rose-by-nicholas-eames/#more-387038" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="ce3b60e7b0" data-post-id="378504" id="post-378504" class="post-378504 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alternate-histories tag-book-reviews tag-early-riser tag-fantasy tag-funny-fiction tag-hodder-stoughton tag-jasper-fforde tag-reviews tag-viking tag-wales visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/08/03/book-reviews-early-riser-by-jasper-fforde/">Oh What A Miserable Winter: <em>Early Riser</em> by Jasper Fforde</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Aug 3, 2018 1:30pm</span>
+<a href="https://www.tor.com/2018/08/03/book-reviews-early-riser-by-jasper-fforde/#comments" class="entry-comment-count">
+6 comments </a>
+<a id="favorite-378504" href="#" data-nonce="07284f06e3" data-entity-id="378504" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/08/03/book-reviews-early-riser-by-jasper-fforde/">
+<picture class="featured-image-wrapper horizontal" data-id="380014">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/EarlyRiser-crop.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/EarlyRiser-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C350px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/EarlyRiser-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C350px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/EarlyRiser-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C350px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/EarlyRiser-crop.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Once upon a time, not so very long ago at all, you could set your watch by Jasper Fforde. This was way back when we wore watches that needed setting, but something else was significantly different in those distant days too. Something must have been, because from his debut with <em>The Eyre Affair</em> in 2001 until relatively recently, the former focus puller managed to put out a book a year with the kind of effortless ease that made other authors look lazy. These weren’t just books, either: these were remarkably good books, clever, funny and unexpectedly authentic tales of metafictional mystery and murder most horrid lashed with literary wit and a generous helping of humour.</p>
+<p>Then came the 2014 release of the last of <em>The Last Dragonslayer</em> saga: the final volume of an arguably slighter series for younger readers that nevertheless <a href="https://www.tor.com/2014/04/07/book-review-the-eye-of-zoltar-jasper-fforde/">delighted this miserable old critic</a>. When 2015 came and went without a new book bearing the aforementioned funny man’s brand, I was crestfallen, but fine. In 2016, alas, I started to get antsy. Then came 2017: a terrible year for any number of reasons, of which perhaps the most overlooked is that it bore no new Jasper Fforde book. This year, though, the author brings his unexpected “creative hiatus” to a conclusion with <em>Early Riser</em>, a satirical standalone fantasy about social control and sleepy people which, given the length of time it took, I expected to be among his best efforts. Either that or a dreadful mess.</p>
+<p><em>Early Riser</em> is neither, which goes to show what I know. Oft-amusing, but only occasionally likely to elicit laughs, and as imaginative as anything he’s ever written, if woefully overburdened by worldbuilding, Fforde’s long-awaited new novel is ultimately a bunch of fun, yet it fails to leave a lasting impression like the likes of <em>Shades of Grey</em>, say.</p>
+<p> <a href="https://www.tor.com/2018/08/03/book-reviews-early-riser-by-jasper-fforde/#more-378504" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="80d0e2c09d" data-post-id="377659" id="post-377659" class="post-377659 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-aliens tag-becky-chambers tag-book-reviews tag-change tag-character-studies tag-generation-ships tag-record-of-a-spaceborn-few tag-reviews tag-sf tag-wayfarers visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/07/26/book-reviews-record-of-a-spaceborn-few-by-becky-chambers/">What We Will Be: <em>Record of a Spaceborn Few</em> by Becky Chambers</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu Jul 26, 2018 1:00pm</span>
+<a href="https://www.tor.com/2018/07/26/book-reviews-record-of-a-spaceborn-few-by-becky-chambers/#comments" class="entry-comment-count">
+4 comments </a>
+<a id="favorite-377659" href="#" data-nonce="ef79db3256" data-entity-id="377659" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">1 Favorite [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/07/26/book-reviews-record-of-a-spaceborn-few-by-becky-chambers/">
+<picture class="featured-image-wrapper horizontal" data-id="377981">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/SpacebornFew-ChristopherDoll.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/SpacebornFew-ChristopherDoll.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/SpacebornFew-ChristopherDoll.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/SpacebornFew-ChristopherDoll.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/07/SpacebornFew-ChristopherDoll.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="featured-image-caption caption-horizontal">Record of a Spaceborn Few cover art by Christopher Doll</div>
+<div class="entry-content">
+<p>We’ve been taught to expect our novels to be predominantly narrative in nature, but Becky Chambers is here to say that there’s another way. As I wrote in my review of what is by leaps and bounds <a href="https://www.tor.com/2016/07/05/the-joy-of-the-journey-the-long-way-to-a-small-angry-planet-by-becky-chambers/">the most hectic episode</a> of the Wayfarers series so far, the plot of <em>The Long Way to a Small, Angry Planet </em>appeared almost an afterthought when all was said and done. If that proved a problem for you, <em>A Closed and Common Orbit</em>, with its still slighter storyline, would have been far from <a href="https://www.tor.com/2017/03/13/making-humans-happy-a-closed-and-common-orbit-by-becky-chambers/">the follow-up you fancied</a>—yet in its doubling down on the close, character-focused moments that made its self-published predecessor such a personable pleasure, <em>A Closed and Common Orbit</em> was, in its hearteningly humane way, no less of a success than Chambers’ multiple award-nominated darling of a debut.</p>
+<p><em>Record of a Spaceborn Few</em> is at least as remarkable, yet regrettably, isn’t going to win over anyone who’s been underwhelmed by these books before. Indeed, it’s never been clearer than it is here that this is a series about people—people as opposed to the things that happen to them, assuming anything happens to them at all. To be sure, a few things do in <em>Record of a Spaceborn Few</em>—there’s a tragic mishap at the outset, and an equally disastrous accident as the text progresses—but the third of Chambers’ loosely-connected Wayfarers works is only interested in events insofar as these events affect the five folks that are the focus of this practically pacific work of fiction.</p>
+<p> <a href="https://www.tor.com/2018/07/26/book-reviews-record-of-a-spaceborn-few-by-becky-chambers/#more-377659" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="6a7d8edc68" data-post-id="367504" id="post-367504" class="post-367504 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alternate-history tag-biblical tag-book-reviews tag-brian-catling tag-horror tag-reviews tag-the-cloven tag-the-vorrh tag-weird-fiction visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/07/16/paradise-crossed-the-cloven-by-brian-catling/">Paradise Crossed: <em>The Cloven</em> by Brian Catling</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Mon Jul 16, 2018 2:00pm</span>
+<a href="https://www.tor.com/2018/07/16/paradise-crossed-the-cloven-by-brian-catling/#comments" class="entry-comment-count">
+2 comments </a>
+<a id="favorite-367504" href="#" data-nonce="948cc0069c" data-entity-id="367504" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/07/16/paradise-crossed-the-cloven-by-brian-catling/">
+<picture class="featured-image-wrapper vertical-mobile vertical" data-id="367518">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/06/The-Cloven-by-Brian-Catling.jpg?fit=250%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/06/The-Cloven-by-Brian-Catling.jpg?fit=250%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/06/The-Cloven-by-Brian-Catling.jpg?fit=250%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/06/The-Cloven-by-Brian-Catling.jpg?fit=250%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/06/The-Cloven-by-Brian-Catling.jpg?fit=250%2C382&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Adventurers, archaeologists and adherents alike have long sought—only to be stymied in their search for—the site of the Garden of Eden, that portion of paradise where many people believe humanity took root. In his <a href="https://www.tor.com/2012/11/19/wandering-the-weird-the-vorrh-by-b-catling/">phenomenal first novel</a>, the poet, painter, and performance artist Brian Catling posited that it might at last be located in the Vorrh, a vast (albeit fictional) forest in the heart of Africa. In the <a href="https://www.tor.com/2017/03/10/the-answer-is-trees-the-erstwhile-by-brian-catling/">ambitious if middling middle volume</a> of what in 2017 turned out to be a trilogy, he expanded the scope of his suggestive story substantially, to take in characters from Bedlam in London, the colonial compound of Essenwald and a retirement home in Heidelberg: a litany of lost souls that would only be found, finally, in or in relation to the good woodland.</p>
+<p><em>The Cloven </em>closes the book on those disconsolate characters at the same time as advancing the overarching narrative of Catling’s exceptionally weird series, which can be seen in sum as a sinister subversion of the Christian tale of creation. Adam and Eve, it has it, were never meant to be anything more than minders in the Garden of Eden—they simply grew too big for their boots when they tasted of the forbidden fruit. The knowledge it contained was meant for the trees, you see, and they, as much more multifarious beings than we mere people can see, have had a chip on their sturdy shoulders ever since. Now, though&#8230; now the time has come for them to take what’s theirs, and I dare say it won’t end well if we stand in their way.</p>
+<p> <a href="https://www.tor.com/2018/07/16/paradise-crossed-the-cloven-by-brian-catling/#more-367504" class="more-link">[Read more]</a></p>
+</div>
+</article>
+<article data-nonce="d8bdcf64fb" data-post-id="361945" id="post-361945" class="post-361945 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-84k tag-book-reviews tag-claire-north tag-dystopian-fiction tag-identity tag-missing-persons tag-nineteen-eighty-four tag-orbit-books tag-reviews tag-sf tag-thrilliers visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/05/24/disconnect-the-dots-84k-by-claire-north/">Disconnect the Dots: <em>84K</em> by Claire North</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu May 24, 2018 2:30pm</span>
+<a href="https://www.tor.com/2018/05/24/disconnect-the-dots-84k-by-claire-north/#comments" class="entry-comment-count">
+2 comments </a>
+<a id="favorite-361945" href="#" data-nonce="1c3f193f32" data-entity-id="361945" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">5 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/05/24/disconnect-the-dots-84k-by-claire-north/">
+<picture class="featured-image-wrapper horizontal" data-id="362542">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/84k_web_banner.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/84k_web_banner.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/84k_web_banner.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/84k_web_banner.png?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/84k_web_banner.png?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Having dealt so memorably with death in <em>The End of the Day</em>, Claire North sets her sights on life in <em>84K</em>, a powerful and provocative novel that nods to George Orwell at the same time as narrating a tale not even he could tell so well. It’s not an easy read—not that you’d take <em>Nineteen Eighty-Four</em> to the beach either—but buckle up, because what it is is brilliant.</p>
+<p>At the core of North’s newest is a question oft-asked yet rarely answered to anyone’s satisfaction: can you possibly put a price on something as sacred as life? In <em>84K</em> you absolutely can. You can put a price on the taking of life, and come up with numbers that basically negate any other crimes you’ve committed—and that’s exactly what the man called Theo Miller does on a daily basis.</p>
+<p>Theo—though that’s not his real name—works for the Criminal Audit Office, which &#8220;emerged some seven or so years before human rights were judged passé&#8221; and utterly disrupted a justice system that just didn’t work, according to the Company. Prison, as its inordinately influential opponents put it, &#8220;was a deeply inefficient way of rehabilitating criminals, especially given how many were clearly irredeemable, and despite privatisation efficiencies overcrowding and reoffending were a perennial problem.&#8221; Better, the alarming argument went, to assign fines to each and every illegal act, and pack off any lawbreakers who are unable to pay their way to so-called Commercial Reform Institutes, which is to say work camps where the poor can at least be trusted to be productive.</p>
+<p> <a href="https://www.tor.com/2018/05/24/disconnect-the-dots-84k-by-claire-north/#more-361945" class="more-link">[Chilling, isn’t it?]</a></p>
+</div>
+</article>
+<article data-nonce="fdc5573916" data-post-id="361946" id="post-361946" class="post-361946 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-book-reviews tag-detectives tag-doppelgangers tag-fake-news tag-murder-mysteries tag-reviews tag-stephen-king tag-the-outsider visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/05/22/book-reviews-the-outsider-by-stephen-king/">No End to the Universe: <em>The Outsider</em> by Stephen King</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Tue May 22, 2018 1:00pm</span>
+<a href="https://www.tor.com/2018/05/22/book-reviews-the-outsider-by-stephen-king/#comments" class="entry-comment-count">
+3 comments </a>
+<a id="favorite-361946" href="#" data-nonce="23a08a7b15" data-entity-id="361946" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">2 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/05/22/book-reviews-the-outsider-by-stephen-king/">
+<picture class="featured-image-wrapper horizontal" data-id="361968">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/OutsiderKing-banner.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/OutsiderKing-banner.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C371px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/OutsiderKing-banner.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C371px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/OutsiderKing-banner.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C371px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/05/OutsiderKing-banner.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>Flint City is one of those places. Unless you’re thinking of retiring, or starting a family, you drive through it, not to it. It’s big enough to have a Little League team, but small enough that everyone—and I do mean everyone: baseball’s a real big deal here—knows the coach to nod at. Terry Maitland is his name, though to most he’s Coach T. And given how well the Golden Dragons have been doing in recent years, he’s become something of a local hero.</p>
+<p>You can imagine the reaction, then—the hysteria that spreads like salmonella in street food—when Terry is arrested for the brutal rape and murder of a boy in full view of the something like sixteen hundred sports fans that had come to Estelle Barga Recreational Park to scream for the team he leads. All of a sudden they and theirs have a whole other reason to scream, and a brand new target, too.</p>
+<p>You might think the local PD had a point to prove, apprehending Coach T in such a dramatic fashion, and you’d be quite right. Flint City as a whole had been on edge since little Frank Peterson’s butchered body was found, and a very visible arrest would do wonders for the community’s sense of security—not to mention look mighty nice on certain civil servants’ résumés. But let’s not by such cynics. Detective Ralph Anderson, the closest thing <em>The Outsider</em> by Stephen King has to a protagonist, is decent police—honest and humane—and even he believed he had his man.</p>
+<p> <a href="https://www.tor.com/2018/05/22/book-reviews-the-outsider-by-stephen-king/#more-361946" class="more-link">[That he was wrong just goes to show: you really never do know.]</a></p>
+</div>
+</article>
+<article data-nonce="4f4f8cc7f2" data-post-id="349368" id="post-349368" class="post-349368 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-alien-invasion tag-book-reviews tag-endings tag-first-contact tag-giant-robots tag-only-human tag-reviews tag-sylvain-neuvel tag-the-themis-files tag-torture visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/book-reviews/" rel="category tag">book reviews</a></li></ul> <h2 class="entry-title"><a href="https://www.tor.com/2018/05/03/book-reviews-only-human-by-sylvain-neuvel/">You Break It, You Buy It: <em>Only Human</em> by Sylvain Neuvel</a></h2>
+<span class="entry-author-byline ">
+<a href="https://www.tor.com/author/niall-alexander/" title="Posts by Niall Alexander" class="entry-author" rel="author">Niall Alexander</a> </span>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Thu May 3, 2018 2:00pm</span>
+<a href="https://www.tor.com/2018/05/03/book-reviews-only-human-by-sylvain-neuvel/#comments" class="entry-comment-count">
+7 comments </a>
+<a id="favorite-349368" href="#" data-nonce="507bc7d6b7" data-entity-id="349368" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">5 Favorites [+]</a>
+</div>
+</div>
+</header>
+<a href="https://www.tor.com/2018/05/03/book-reviews-only-human-by-sylvain-neuvel/">
+<picture class="featured-image-wrapper horizontal" data-id="357391">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/03/onlyhuman-crop.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/03/onlyhuman-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/03/onlyhuman-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/03/onlyhuman-crop.jpg?fit=740%2C+9999&#038;crop=0%2C0%2C100%2C385px&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/03/onlyhuman-crop.jpg?fit=600%2C+9999&#038;crop=0%2C0%2C100%2C312px&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<div class="entry-content">
+<p>According to <em>Only Human</em>’s About the Author, Sylvain Neuvel has counted journalism, soil decontamination, furniture sales, translation and linguistics among his many and various vocations—and that’s not to mention his hobbies, which he happily admits have seen him tinkering in this and dabbling in that. In The Themis Files so far, he’s brought together most, if not all, of his areas of expertise, demonstrating a range that has certainly kept readers of said series on their feet. It was an etymological mystery one moment, an incredible mêlée of mechs the next, and after that? Why, that’s when the aliens invaded.</p>
+<p> <a href="https://www.tor.com/2018/05/03/book-reviews-only-human-by-sylvain-neuvel/#more-349368" class="more-link">[Read more]</a></p>
+</div>
+</article>
+</div>
+</div>
+<div id="page-sidebar">
+<div class="widget"><h2>Latest Posts</h2> <ul id="latest-posts">
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/author-terry-bisson-passes-away-at-age-81/">Author Terry Bisson Passes Away at Age 81</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/mariely-lares/" title="Posts by Mariely Lares" class="entry-author" rel="author">Mariely Lares</a> </span>
+<a href="https://www.tor.com/2024/01/11/excerpts-sun-of-blood-and-ruin-by-mariely-lares/">Read an Excerpt From <em>Sun of Blood and Ruin</em></a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/humanity-isnt-doing-so-well-in-halo-season-2-trailer/">Humanity Isn’t Doing So Well In <i>Halo</i> Season 2 Trailer</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/mahvesh-murad/" title="Posts by Mahvesh Murad" class="entry-author" rel="author">Mahvesh Murad</a> </span>
+<a href="https://www.tor.com/2024/01/11/book-review-somewhere-in-the-deep-by-tanvi-berwah/">Colonial Creatures: <em>Somewhere in the Deep</em> by Tanvi Berwah</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/abigail-trailer-bloodsucking-child-ballerina/"><i>Abigail</i> Trailer Reveals the Apparent Bloodsucking Side of Being A Child Ballerina</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/molly-templeton/" title="Posts by Molly Templeton" class="entry-author" rel="author">Molly Templeton</a> </span>
+<a href="https://www.tor.com/2024/01/11/the-last-of-us-has-found-its-dina-and-jesse/"><em>The Last of Us</em> Has Found Its Dina and Jesse</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/alissa-burger/" title="Posts by Alissa Burger" class="entry-author" rel="author">Alissa Burger</a> </span>
+<a href="https://www.tor.com/2024/01/11/r-l-stines-the-new-years-party-teen-horror-time-machine-review/">Not So Happy New Year: R.L. Stine’s <em>The New Year’s Party</em> </a>
+<span class="post-date">3 days ago</span>
+</li>
+</ul>
+</div><div class="widget"><h2>Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Jeff Wright</span> on <a href="https://www.tor.com/2024/01/10/bet-you-didnt-know-you-could-get-into-this-much-trouble-using-calculus-redux-algernon-blackwoods-a-victim-of-higher-space/comment-page-1/#comment-989788">Bet You Didn&#8217;t Know You Could Get Into This Much Trouble Using Calculus, Redux: Algernon Blackwood&#8217;s &#8220;A Victim of Higher Space&#8221;</a><span class="comment-widget-date"> 5 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Yale Strom</span> on <a href="https://www.tor.com/2014/05/22/a-questionable-view-of-science-stowaway-to-the-mushroom-planet/comment-page-1/#comment-989787">A Questionable View of Science: <em>Stowaway to the Mushroom Planet</em></a><span class="comment-widget-date"> 6 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">chip137</span> on <a href="https://www.tor.com/2024/01/08/fake-candidates-invented-enemies-five-fraudulent-personas-in-classic-sf/comment-page-1/#comment-989784">Fake Candidates, Invented Enemies: Five Fraudulent Personas in Classic SF</a><span class="comment-widget-date"> 10 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">AlanBrown</span> on <a href="https://www.tor.com/2024/01/08/marvels-what-if-season-2-recap-and-review/comment-page-1/#comment-989783">What If Marvel&#8217;s <em>What If&#8230;?</em> Season 2 Gave Us Four Great Episodes, and Five OK Ones?</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Carl</span> on <a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/comment-page-1/#comment-989782"><em>Elantris</em> Reread: Chapters Fifty-One and Fifty-Two</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Kikishua</span> on <a href="https://www.tor.com/2024/01/10/six-sci-fi-femme-fatales-i-would-like-to-take-out-for-a-nice-steak-dinner/comment-page-1/#comment-989781">Six Sci-Fi Femme Fatales I Would Like To Take Out for a Nice Steak Dinner</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Kikishua</span> on <a href="https://www.tor.com/2024/01/04/book-review-saevus-corax-captures-the-castle-by-k-j-parker/comment-page-1/#comment-989780">K.J. Parker Delivers a Strong Sequel With <em>Saevus Corax Captures the Castle</em></a><span class="comment-widget-date"> 14 hours ago</span></li></ul><a href="https://www.tor.com/conversations/" class="widget-view-more-link">more comments</a></div></div>
+</div>
+</section>
+</div>
+<footer id="page-footer">
+<div class="menu-footer-menu-large-container"><ul id="menu-footer-menu-large" class="menu"><li id="menu-item-155053" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155053"><a href="https://www.tor.com/about-us/">About</a></li>
+<li id="menu-item-141444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141444"><a href="https://www.tor.com/submissions-guidelines/">Submissions</a></li>
+<li id="menu-item-141443" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141443"><a href="https://www.tor.com/advertise/">Advertise</a></li>
+<li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-34"><a href="/blog-archive">Archive</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33"><a href="/search-page/">Search</a></li>
+</ul></div> <div class="share-menus">
+<ul class="footer-share menu">
+<li>
+Follow Tor.com </li>
+<li>
+<a target="_blank" href="https://twitter.com/tordotcom">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/tordotcom">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/tordotcompub/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+<li>
+<a href="https://www.tor.com/rss-feeds">
+<i class="icon-rss"></i>
+<span class="assistive-text">RSS</span>
+</a>
+</li>
+</ul>
+<ul class="footer-share german menu">
+<li>
+Follow Tor.com Germany </li>
+<li>
+<a target="_blank" href="http://www.tor-online.de/">
+<i class="icon-home"></i>
+<span class="assistive-text">Tor Germany Home</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://twitter.com/fischertor">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/FISCHERTORVERLAG/">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/fischertorverlag/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="menu-footer-menu-small-container"><ul id="menu-footer-menu-small" class="menu"><li id="menu-item-141601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141601"><a href="https://www.tor.com/privacy-notice/">Privacy Policy</a></li>
+<li id="menu-item-757512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-757512"><a href="https://www.tor.com/your-privacy-choices/">Your Privacy Choices</a></li>
+<li id="menu-item-376236" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-376236"><a href="/privacy-notice/#onlinetracking">Ads and Cookies</a></li>
+<li id="menu-item-141602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141602"><a href="https://www.tor.com/terms-of-use/">Terms of Use</a></li>
+<li id="menu-item-141600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141600"><a href="https://www.tor.com/contact-us/">Contact</a></li>
+</ul></div> <span class="copyright">&copy; 2024 Macmillan | All stories, art, and posts are the copyright of their respective authors</span>
+<a href="#" class="mobile back-to-top">Back to top</a>
+</footer>
+</div>
+<style>
+
+footer#page-footer{
+	margin-top: 296px;
+}
+	
+	
+</style>
+<script type="text/javascript">
+		var infiniteScroll = {"settings":{"id":"infinite-scroll-wrapper","ajaxurl":"https:\/\/www.tor.com\/?infinity=scrolling","type":"click","wrapper":true,"wrapper_class":"infinite-wrap","footer":false,"click_handle":"1","text":"More Posts","totop":"Scroll back to top","currentday":"03.05.18","order":"DESC","scripts":[],"styles":[],"google_analytics":false,"offset":1,"history":{"host":"www.tor.com","path":"\/author\/niall-alexander\/page\/%d\/","use_trailing_slashes":true,"parameters":""},"query_args":{"author_name":"niall-alexander","error":"","m":"","p":0,"post_parent":"","subpost":"","subpost_id":"","attachment":"","attachment_id":0,"name":"","pagename":"","page_id":0,"second":"","minute":"","hour":"","day":0,"monthnum":0,"year":0,"w":0,"category_name":"","tag":"","cat":"","tag_id":"","feed":"","tb":"","paged":0,"meta_key":"","meta_value":"","preview":"","s":"","sentence":"","title":"","fields":"","menu_order":"","embed":"","category__in":[],"category__not_in":[],"category__and":[],"post__in":[],"post__not_in":[],"post_name__in":[],"tag__in":[],"tag__not_in":[],"tag__and":[],"tag_slug__in":[],"tag_slug__and":[],"post_parent__in":[],"post_parent__not_in":[],"author__in":[],"author__not_in":[],"search_columns":[],"posts_per_page":15,"post_type":["post","sweepstakes"],"tax_query":[[{"taxonomy":"visible","field":"slug","terms":"contributor-pages","operator":"AND"}]],"ignore_sticky_posts":false,"suppress_filters":false,"cache_results":true,"update_post_term_cache":true,"update_menu_item_cache":false,"lazy_load_term_meta":true,"update_post_meta_cache":true,"nopaging":false,"comments_per_page":"75","no_found_rows":false,"taxonomy":"visible","term":"contributor-pages","order":"DESC"},"query_before":"2024-01-14 08:30:29","last_post_date":"2018-05-03 14:00:16","body_class":"infinite-scroll","loading_text":"Loading new page"}};
+		</script>
+<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-3533630-3', 'www.tor.com');
+		  		  ga('require', 'linkid', 'linkid.js');
+		  ga('require', 'displayfeatures');
+		  ga('send', 'pageview');
+		</script>
+<div id="entry-content__footer-popup" class="entry-content__footer-popup">
+<div class="entry-content__footer-popup-content">
+<i class="icon-cancel" title="Close Notification"></i>
+<p id="entry-content__footer-popup-text">
+Our <a href="https://www.tor.com/privacy-notice/" target="_blank">Privacy Notice</a> has been updated to explain how we use cookies, which you accept by continuing to use this website. To withdraw your consent, see <a href="https://www.tor.com/privacy-notice/#yourchoices" target="_blank">Your Choices</a>. </p>
+</div>
+</div>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/_inc/build/infinite-scroll/infinity.min.js" id="the-neverending-homepage-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-image-cdn/dist/image-cdn.js?minify=false&amp;ver=132249e245926ae3e188" id="jetpack-photon-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/modules/likes/queuehandler.js" id="jetpack_likes_queuehandler-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/core.min.js" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/effect.min.js" id="jquery-effects-core-js"></script>
+<script type="text/javascript" id="global-js-extra">
+/* <![CDATA[ */
+var tor_wp_vars = {"breakpoints":[{"name":"mobile","width":767},{"name":"desktop","width":9999}],"wp_ajax_url":"https:\/\/www.tor.com\/wp-admin\/admin-ajax.php","static_url":"https:\/\/www.tor.com\/wp-content\/themes\/tor\/static\/","current_url":"https:\/\/www.tor.com\/author\/niall-alexander","site_domain":"www.tor.com","is_home":false,"is_single":false,"is_user_logged_in":false,"modal":"\n<div class=\"modal-login-form\">\n\t<h2 class=\"login-form-title\">Log in to Tor.com<\/h2>\n\t<form name=\"loginform\" id=\"loginform\" action=\"https:\/\/www.tor.com\/wp-login.php?wpe-login=tormain\" method=\"post\">\n\t\t<input type=\"text\" placeholder=\"username\" name=\"log\" id=\"user\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"password\" placeholder=\"password\" name=\"pwd\" id=\"pass\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"submit\" name=\"wp-submit\" id=\"wp-submit\" class=\"button-primary\" value=\"Log In\">\n\t\t<a href=\"https:\/\/www.tor.com\/wp-login.php?action=lostpassword\" class=\"forgot-password\">Forgot Password<\/a>\n\t\t<input name=\"rememberme\" type=\"hidden\" id=\"rememberme\" value=\"forever\">\n\t\t<input type=\"hidden\" id=\"redirect_to\" name=\"redirect_to\" value=\"https:\/\/www.tor.com\/author\/niall-alexander\">\n\t\t<input type=\"hidden\" id=\"login_tracking\" name=\"login_tracking\" value=\"\" \/>\n\t<\/form>\n<\/div>\n","post_id":"","protected_content":false,"allow_tinymce":false};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/global.bundle.js?ver=1.0.74" id="global-js"></script>
+<script type="text/javascript">
+			(function() {
+				var extend = function(out) {
+					out = out || {};
+
+					for (var i = 1; i < arguments.length; i++) {
+						if (!arguments[i])
+						continue;
+
+						for (var key in arguments[i]) {
+						if (arguments[i].hasOwnProperty(key))
+							out[key] = arguments[i][key];
+						}
+					}
+
+					return out;
+				};
+				extend( window.infiniteScroll.settings.scripts, ["jquery-core","jquery-migrate","jquery","vendor","tor-ga","sharing-js-fe","recaptcha","the-neverending-homepage","jetpack-photon","jetpack_likes_queuehandler","jquery-ui-core","jquery-effects-core","global"] );
+				extend( window.infiniteScroll.settings.styles, ["theme-style","the-neverending-homepage","wp-block-library","bp-login-form-style","bp-member-style","bp-members-style","bp-dynamic-members-style","bp-online-members-style","bp-active-members-style","bp-latest-activities-style","bp-embed-activity-style","bp-sitewide-notices-style","videopress-video-style","mediaelement","wp-mediaelement","classic-theme-styles","global-styles","open-sans","jetpack_likes","tor-merriweather-webfont","tor-open-sans","tablet","desktop","mobile","mini-tablet","sharedaddy","social-logos","jetpack_css","core-block-supports-duotone"] );
+			})();
+		</script>
+<span id="infinite-aria" aria-live="assertive"></span>
+</body>
+</html>

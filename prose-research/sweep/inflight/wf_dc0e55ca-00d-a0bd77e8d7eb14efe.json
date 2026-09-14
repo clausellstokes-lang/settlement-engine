@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 89,
+ "firstTs": "2026-09-10T00:13:55.097Z",
+ "lastTs": "2026-09-10T00:25:55.140Z",
+ "tools": {
+  "Bash": 21,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "on word, builder or material; scan CONFIRMED clean of em dash, exclamation, digit, question and `which` in every sentence; lengths 10 to 18 words with the short line present. The chair's reserve on whether `may NOT: a second fact` reaches the presence read is carried forward unchanged in the packet.",
+ "run": "wf_dc0e55ca-00d",
+ "agent": "a0bd77e8d7eb14efe",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_dc0e55ca-00d/agent-a0bd77e8d7eb14efe.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

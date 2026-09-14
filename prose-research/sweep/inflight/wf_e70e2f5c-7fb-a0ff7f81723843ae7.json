@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 235,
+ "firstTs": "2026-09-09T18:14:48.132Z",
+ "lastTs": "2026-09-09T18:22:36.035Z",
+ "tools": {
+  "Bash": 60,
+  "ToolSearch": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "faces. Unchanged by this round: `git diff 8d6a8cccf HEAD -- src/data/dossierStateProse/defense.generated.js` is four wording substitutions inside existing `wordings` arrays, no count moved. The variant ratchet is green.\n\nBoth therefore read exactly as at the block dock's first commit, neither worse.",
+ "run": "wf_e70e2f5c-7fb",
+ "agent": "a0ff7f81723843ae7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_e70e2f5c-7fb/agent-a0ff7f81723843ae7.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

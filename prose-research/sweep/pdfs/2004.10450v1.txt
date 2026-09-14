@@ -1,0 +1,836 @@
+                                                  Trading Off Diversity and Quality in Natural Language Generation
+
+
+                                                          Hugh Zhang * 1 2 Daniel Duckworth * 1 Daphne Ippolito 1 3 Arvind Neelakantan 4
+
+
+                                                                 Abstract
+                                                                                                                             3.0
+                                              For open-ended language generation tasks such
+                                              as storytelling and dialogue, choosing the right
+
+
+
+
+arXiv:2004.10450v1 [cs.CL] 22 Apr 2020
+                                                                                                                             2.5
+                                              decoding algorithm is critical to controlling the
+
+
+                                                                                                           Human Judgement
+                                              tradeoff between generation quality and diversity.
+                                                                                                                             2.0
+                                              However, there presently exists no consensus on
+                                              which decoding procedure is best or even the cri-
+                                              teria by which to compare them. We address these                               1.5
+                                              issues by casting decoding as a multi-objective op-
+                                              timization problem aiming to simultaneously max-                               1.0
+                                              imize both response quality and diversity. Our
+                                                                                                                                   225   200   175   150   125 100   75   50   25
+                                              framework enables us to perform the first large-                                                             logp(x)
+                                              scale evaluation of decoding methods along the
+                                              entire quality-diversity spectrum. We find that             Figure 1. The Likelihood Trap. We asked 146 crowdworkers
+                                              when diversity is a priority, all methods perform           to rate the quality of 100 sentences across a variety of model
+                                              similarly, but when quality is viewed as more im-           likelihoods. While model log likelihoods are generally positively
+                                              portant, the recently proposed nucleus sampling             correlated with average human quality judgments, we notice an
+                                              (Holtzman et al., 2019) outperforms all other eval-         inflection point after which they become negatively correlated.
+                                              uated decoding algorithms. Our experiments also             Each point in the graph represents the average crowdworker rating
+                                              confirm the existence of the ‘likelihood trap’, the         of 5 sentences with similar model likelihoods. We discuss this
+                                              counter-intuitive observation that high likelihood          phenomenon in more depth in Section 3.
+                                              sequences are often surprisingly low quality. We
+                                              leverage our findings to create and evaluate an al-
+                                              gorithm called selective sampling which tractably           objective (e.g. higher quality samples). At inference time,
+                                              approximates globally-normalized temperature                models generate text sequences via a decoding algorithm
+                                              sampling.                                                   that better optimizes the desired success criteria given the
+                                                                                                          original predictions from the network. Nearly all major
+                                                                                                          breakthroughs in image and language generation over the
+                                         1. Introduction                                                  past few years (Radford et al., 2019; Zhang et al., 2019;
+                                                                                                          Fan et al., 2018) have adopted this two stage process where
+                                         Generative language models are applicable for a wide va-         the model probability distributions differ between train and
+                                         riety of tasks including writing articles, composing Shake-      inference time.
+                                         spearean sonnets, or engaging in conversation. For nearly
+                                         all of these goals, human judgments are the sole way to          This work examines decoding methods for language mod-
+                                         credibly evaluate the quality of the generated text, rendering   els, which are well known to be critical for performance in
+                                         it prohibitively expensive to optimize directly over the de-     language generation (Ippolito et al., 2019a). Recent ef-
+                                         sired objectives. Researchers typically address this issue by    forts for improving generative language models models
+                                         adopting a two-stage process. At train time, models seek to      have focused primarily on altering the model architecture
+                                         imitate a human-written text corpus as a proxy for the true      (Vaswani et al., 2017; Gehring et al., 2017), training method
+                                                                                                          (de Masson d’Autume et al., 2019) and model size (Radford
+                                           *
+                                             Equal contribution 1 Google Brain 2 Stanford University      et al., 2019; Adiwardana et al., 2020). While effort has also
+                                         3
+                                          University of Pennsylvania 4 OpenAI. Correspondence to: Hugh    been made towards improving decoders (Vijayakumar et al.,
+                                         Zhang <hughz@stanford.edu>, Daniel Duckworth <duck-
+                                         worthd@google.com >.                                             2016; Li & Jurafsky, 2016; Ippolito et al., 2019b), there has
+                                                                                                          been significantly less progress towards evaluating improve-
+                                                                                                          ments in decoder performance, especially for open-ended
+                             Trading Off Diversity and Quality in Natural Language Generation
+
+generative tasks where successful models must generate a        et al., 2019), to our knowledge we are the first to explicitly
+diverse spectrum of high quality answers rather than merely     quantify the relationship between the two at all points in the
+a single output.                                                model probability space.
+For many tasks, these two criteria of quality and diversity     Secondly, we propose and evaluate selective sampling, selec-
+are not always equally important. In machine translation,       tive sampling, a decoder which emphasizes high probability
+the most important criteria is to produce an accurate, high     sentences by drawing samples from the global temperature-
+quality translation of the input; generating a variety of al-   adjusted model distribution. While this has traditionally
+ternative translations is also useful, but not if it comes at   been considered intractable due to the difficulty of comput-
+the cost of correctness. Meanwhile, in open domain dia-         ing the partition function, we propose a procedure that uses
+logue the goal is often to sustain an enjoyable conversation    rejection sampling to directly sample from the desired dis-
+with a human conversational partner and as such, a higher       tribution without explicitly computing the partition function.
+premium is placed on diversity.                                 When evaluating this decoder alongside existing token-by-
+                                                                token decoders, we discover that it performs poorly even
+To give a concrete example for the case of dialogue, the
+                                                                when taking the likelihood trap into account, suggesting that
+phrase “I don’t know” is usually a perfectly reasonable
+                                                                local token-by-token decoders may be capable of capturing
+remark, and it appears quite often during normal human
+                                                                structure that a global decoder does not.
+conversation. However, a chatbot that repeats “I don’t know”
+on every turn of dialogue makes for a very poor conver-
+sationalist. In such open-ended domains, being able to          2. Framework
+converse about a wide variety of topics with the occasional
+                                                                In this section, we introduce a framework for trading off
+odd remark is highly preferred to merely repeating the safest
+                                                                quality and diversity in language generation. Let X denote
+possible remark over and over (Li et al., 2016).
+                                                                the space of all possible generated sentences. We consider
+To simultaneously capture both of these criteria, we propose    autoregressive language models that decompose the likeli-
+framing the goal of generative language models as a multi-      hood of a sequence (x1 , x2 , . . . , xn ) = x1:n ∈ X token-by-
+objective optimization over both quality and diversity. The     token in a left-to-right fashion (Hamilton, 1994; Sutskever
+proposed framework is flexible enough to encompass tasks        et al., 2014). Specifically, the (conditional) likelihood of the
+that traditionally place low emphasis on diversity such as      sequence is:
+machine translation or summarization and others with high
+diversity such as storytelling.
+                                                                                              n
+Furthermore, the proposed framework enables us to eval-                                       Y
+                                                                        pmodel (x1:n | c) =         pmodel (xi |x1:i−1 , c)   (1)
+uate existing decoding algorithms by comparing their per-
+                                                                                              i=1
+formance along the entire quality-diversity spectrum. We
+compare a variety of commonly-used decoding algorithms
+in the first large-scale study of decoder quality, utilizing    where c is any additional conditioning signal, such as the
+over 38,000 ratings on almost 10,000 samples. We find           previous turn of dialogue. Random sampling is the decoding
+that when diversity is highly valued, all decoders perform      procedure that follows naturally from the factorization of
+similarly, but when quality is viewed as more important, the    the model’s joint distribution where tokens are sampled one-
+recently proposed nucleus sampling (Holtzman et al., 2019)      at-a-time according to the model’s conditional distribution,
+outperforms all other evaluated decoding algorithms.            pmodel (xi |x1:i−1 , c). Often pmodel is not sampled from
+                                                                directly; it is first post-processed by a decoder to bias it
+Additionally, we use our framework to investigate the com-      toward already high-likelihood tokens.
+monly held intuition that model likelihood is directly corre-
+lated with human quality judgments. First, we explicitly test   In the proposed framework, we evaluate the quality of a
+this belief by measuring the relationship between the quality   single sentence x ∈ X by asking humans for a quality
+of a sentence as judged by human raters and its likelihood      judgment HJ(x). We can define the quality Q of a model
+under a generative model. Our findings confirm the exis-        as the expected human “quality” judgment for sentences
+tence of a likelihood trap, the counter-intuitive observation   drawn from it:
+that the highest likelihood sentences are of surprisingly low
+quality, despite a generally positive relationship between                         Q(p) = Ex∼p [HJ(x)]
+model likelihoods and human quality judgments. While this
+finding has been observed across a wide variety of language     We measure the diversity of a model via the Shannon entropy
+generation tasks and models ranging from news generation        H (Shannon, 1948), a diversity metric widely used across
+to machine translation (Cohen & Beck, 2018; Holtzman            many fields beyond computer science including biology,
+                                                                economics, chemistry, and physics. Shannon entropy is
+                             Trading Off Diversity and Quality in Natural Language Generation
+
+given by:                                                       Figure 1 plots these ratings as a function of log pmodel and
+                                                                confirms that on average the highest quality generations
+                H(p) = −Ex∼p [log p(x)]                         are not the most likely. Specifically, we find that response
+                                                                quality is generally positively related with log pmodel (x) up
+This allows us to define our multi-objective optimization       until an inflection point after which it becomes negatively
+problem as maximizing the following goal G:                     related. In our experiments, this inflection point occurs at
+                                                                log pmodel (x) = −58.09. Our findings suggest that while
+                  G(p) = Q(p) + λH(p)                           model likelihoods form a good proxy for response quality,
+                                                                naively maximizing over sentence likelihood leads to sub-
+where λ is the task-specific measure of the relative impor-     optimal response quality. We term this phenomenon the
+tance of diversity and quality. For open-ended tasks such       likelihood trap.
+as dialogue that place a premium on variety, decoder per-
+formance under large λ is critical. For more closed domain      Examples of the likelihood trap can be seen in Table ??. Text
+tasks such as summarization or machine translation, per-        sequences with extremely high likelihood tend to devolve
+formance under smaller λ (including possibly 0) is more         into either extreme repetition or other nonsense, which some
+important.                                                      have attributed to either model biases (Holtzman et al., 2019)
+                                                                or aberrations in the training data (Ott et al., 2018). We do
+Ideally, one would optimize directly over goal G, but its       not examine the underlying causes of the likelihood trap in
+dependence on human judgments makes direct optimization         this paper.
+infeasible in practice. Instead, prior works optimize a proxy
+objective (such as the KL divergence) then employ a de-         3.2. Global Temperature Sampling
+coding algorithm to “warp” model pmodel post-hoc towards
+higher values of G.                                             Motivated by our findings that human judgments HJ are
+                                                                positively correlated with model likelihoods for some inter-
+In the following section, we relate our objective G to ex-      val of likelihoods, we investigate whether using log pmodel
+isting decoders and investigate a novel decoding algorithm      as a proxy for HJ would lead to a better decoding algorithm.
+that normalized globally across all possible sequences rather   Specifically, we create a proxy quality function,
+than simply token-by-token.
+                                                                                  "                                     #
+                                                                                    log pmodel (x), if log pmodel < α.
+                                                                   Q̂(p) = Ex∼p
+3. Selective Sampling                                                               − ∞,                     otherwise.
+3.1. The Likelihood Trap
+                                                                where α is selected as a hyperparameter.
+Sequence likelihood is commonly used as a heuristic for
+                                                                Using globally-normalized temperature sampling, we can
+selecting high-quality generations. In the extreme, beam
+                                                                then approximate optimizing for G through instead optimiz-
+search approximates finding the single most likely genera-
+                                                                ing for the proxy objective Ĝ(p) = Q̂(p) + H(p). This is
+tion x∗ = arg max log pmodel (x) and is the approach prin-
+                                                                due to the following proposition.
+cipally adopted in machine translation (Koehn, 2004).
+                                                                Proposition 1. Let p be a probability distribution over some
+However, prior work has suggested that this assumption of a     finite set X . Let H be the Shannon entropy function. The
+monotonically positive relationship between sequence like-      probability distribution Q which minimizes the reverse KL
+lihood and sequence quality breaks down at the extremes.        Divergence DKL (Q k P ) subject to H(Q) = K for any
+For example, it is well known in the machine translation and    achievable constant K has the form,
+image captioning communities that after a certain point,
+increasing the beam size hurts BLEU scores and other                                          P (x)1/τ
+measures of quality (Stahlberg & Byrne, 2019; Koehn &                            Q(x) = P              1/τ
+                                                                                             x∈X P (x)
+Knowles, 2017; Vinyals et al., 2016). More recently Holtz-
+man et al. (2019) observe similar phenomena for open-ended      for some temperature τ ∈ [0, 1].
+generation where the highest likelihood sentences degener-
+ate into extreme repetition.                                    Proof. Proof included in Appendix A.1
+We empirically quantify the relationship between sequence
+likelihoods and human quality judgments by sub-sampling a       When applied to autoregressive models, global tempera-
+large number of context-response pairs representing a wide      ture sampling is usually dismissed as intractable due to
+variety of model log likelihoods. We then request human         the need to sum over the exponentially large space of
+crowdworkers to rate the quality of each response given the     all possible
+                                                                      P sequences in1/τ  pursuit of the partition function
+context on a five-point “Terrible”-to-“High Quality” scale.     Z =        p
+                                                                         x model (x | c)  . Instead, past work typically
+                                 Trading Off Diversity and Quality in Natural Language Generation
+
+         Context                                               Response                                          log p(x)    Classification
+                               ... mental Tough O’Rourke Tough apology assessment category of virtue               -177        Nonsense
+ The Atlanta Falcons           from Boser’ Blog here. It’s got letters and images on it and is utterly ...
+ have started the 2015
+ season 4-0 under new          ... team afloat and looks closer to the 2010 Atlanta Falcons. Starting              -74          Reasonable
+ head coach Dan Quinn.         cornerback Desmond Trufant was one of the top players on the 2014 ...
+ Quarterback Matt Ryan         ... team in the thick of the NFC South race. The Atlanta Falcons have               -14          Repetition
+ has the ...                   started the 2015 season 4-0 under new head coach Dan Quinn. Quarter...
+                              ... answer from a female administratoria llallushoss@rahpx Sandra PJ                 -229         Nonsense
+ They have changed the        Jenniea nightiopq HamidF daroyqg S’) ...
+ phone menu to try to
+                              ... message or call on line, so I suppose they are just using that as an excuse.     -86          Reasonable
+ deflect us to email,         Yet they are still telling people to change their telephone number...
+ but you can still get a
+ live ...                     ... link to a phone number here. They have changed the phone menu to try             -23          Repetition
+                              to deflect us to email, but you can still get a live link to...
+
+Table 1. Examples of sentences at various model likelihoods. Sentences with very low log pmodel generate nonsense, while sentences that
+have high likelihood under the model often devolve into extreme repetition. Nonsense and repetition classifications shown here are only
+for illustrative purposes. Crowdworkers simply rated sentences for overall quality. See Appendix for more details.
+
+
+decomposes sentences into tokens in a left-to-right autore-
+gressive fashion and then use a local approximation,
+                    n X
+                                                     1
+                    Y
+             Ẑ =            pmodel (xi |x1:i−1 , c) τ
+                    i=1 xi                                                              0.5                                 0.5
+where models are normalized locally over each set of tokens.
+                                                                                          A                                 B
+This results in the well known (local) temperature sampling
+algorithm.
+Unfortunately, while replacing the global partition func-
+tion with a series of local ones transforms an exponential
+problem into a linear one, this approximation may bias the
+                                                                                   C             D                   E             F
+model towards favoring local structure over global structure.
+Indeed, we show via the following example that for some                          0.1           0.4                0.25          0.25
+joint distributions, it is impossible to represent globally-
+normalized temperature sampling via local temperature sam-                Figure 2. Any choice of temperature for local temperature sam-
+pling, even if local temperature sampling is allowed to use a             pling must have P (A) = P (B). However, choosing global tem-
+different temperature τ at each timestep.                                 perature τ = 0.5 results in P (A) = 0.5763 and P (B) = 0.4237
+                                                                          which is impossible for any choice of local temperatures to satisfy.
+Proposition 2. There exists a probability distribution p
+and global temperature τ such that no choice of parame-
+ter allows local temperature sampling to match the joint                  Our core insight is that one can sample from the globally-
+distribution p(x)1/τ .                                                    normalized temperature sampling distribution without es-
+                                                                          timating the partition function Z via rejection sampling.
+Proof. Figure 2 illustrates one such choice of p. By                      Rejection sampling (Forsythe, 1972) gives an algorithm
+construction, local temperature sampling is forced to set                 from sampling from an (unnormalized) energy distribution
+plocal (A) = plocal (B) regardless of the temperature hyperpa-            penergy if there exists a proposal distribution q and constant
+rameter used at that timestep. Setting a global temperature               M such that M q ≥ penergy .
+of τ = 0.5 results in                                                                                               1
+                                                                          We observe that pmodel > pmodel τ for τ ∈ (0, 1) and
+                                                                          0 ≤ p ≤ 1. This allows us to use pmodel as the proposal dis-
+                     0.12 + 0.42
+     P (A) =                             = 0.5763                         tribution since the unnormalized probabilities of the global
+             0.12 + 0.42 + 0.252 + 0.252                                                                                       1
+                                                                          temperature sampling are given by pglobal ∝ pmodel τ .
+                    0.252 + 0.252
+     P (B) =                             = 0.4237                         Selective sampling, by design, significantly increases
+             0.12 + 0.42 + 0.252 + 0.252
+                                                                          the chances of sampling sequences with large values of
+which is not imitable by any local temperature setting.                   log pmodel . To avoid falling into the likelihood trap,
+                                          Trading Off Diversity and Quality in Natural Language Generation
+
+Algorithm 1 Selective Sampling                                                • temperature: Sample tokens with probability propor-
+Require: Global temperature τ , Cutoff α, and pmodel .                          tional to pmodel (xi |x1:i−1 )1/t . t varies from 0 to 1.
+               1
+  Set M = α τ −1
+                                                                              • top-k (Fan et al., 2018): Sample tokens only from the
+  while more sequences are required do
+                                                                                top-k highest likelihood tokens in the vocabulary at
+    Sample a sequence x from pmodel .
+                                                                                each timestep. k varies from 1 to vocabulary size.
+    if log pmodel (x) > α then
+        Reject sample                                                         • top-p (also known as nucleus sampling) (Holtzman
+    else                                  1                                     et al., 2019): Sample only from tokens comprising the
+                                      (x) τ −1
+        Accept with probability pmodelM                                         top-p percent of probability mass at each timestep, as
+    end if                                                                      ordered from most to least likely. p varies from 0 to 1.
+  end while
+                                                                            At the extremes of their hyperparameter ranges, these algo-
+                                                                            rithms all converge to greedy decoding and random sam-
+we propose explicitly discarding generations x where                        pling, respectively. To sweep across the quality-diversity
+log pmodel (x) is greater than a chosen hyperparameter α.                   curve, we consider several hyperparameter settings per
+An additional positive side effect of the cutoff is that the en-            decoding algorithm below. We refer to each decoding
+velope constant M can be chosen to create a tight bound on                  algorithm-hyperparameter combination as a ‘decoding con-
+penergy , which increases acceptance probabilities by several               figuration’.
+orders of magnitude.
+A priori, it is not obvious how to choose α effectively. We                 4.1. Setup
+propose collecting human judgments for a selection of ran-                 We apply each decoding algorithm to the 774M parameter
+dom samples from pmodel as illustrated in Figure 1 and                     variant of GPT-2 (Radford et al., 2019), a publicly-released
+setting α equal to the discovered inflection point. Note, that             language model. To ground samples in a common context,
+while this results in our procedure ignoring the set of sen-               we select a set of 48 examples from the GPT-2 test set
+tences that individually have the highest probabilities, the               to condition upon. As samples are evaluated by human
+total probability mass of this set is quite low: less than 0.5%            raters, we filter out examples containing explicit content
+in our experiments.                                                        or web markup. Samples are drawn by conditioning on a
+                                                                           ‘prompt’ consisting of the first 20 space-delimited words
+                                                                           of a test example. As sample quality becomes ambiguous
+                     0.0200                                                when samples are terse (Ippolito et al., 2019a), we explicitly
+                     0.0175                                                require all sampling methods to generate exactly 30 tokens,
+                     0.0150                                                a length approximately equal to the prompt.
+                     0.0125
+
+   Fraction in bin
+                                                                            To estimate the expected Human judgment score
+                     0.0100
+                                                                            Ep [HJ(x)] of the probability distributions induced by each
+                     0.0075                                                 decoding algorithm, we enlist a qualified pool of 146 Ama-
+                     0.0050                                                 zon Mechanical Turk (AMT) workers selected by satis-
+                     0.0025                                                 factory performance on a qualification task. Workers are
+                     0.0000                                                 presented sets of five samples, each conditioned on the
+                              200   150       100    50      0
+                                          logp(x)                           same prompt and drawn from five different algorithm-
+                                                                            hyperparameter configurations and asked to assign qual-
+Figure 3. Histogram over pmodel (x) for samples drawn from the              itative scores to each sample ranging from human-like to
+same prompt. 99.5% of samples have log likelihood less than the             gibberish. The exact prompts, as shown to crowdworkers,
+choosen cutoff α shown in black.                                            are included in the Appendix.
+                                                                            Prior work has found that human annotaters have signifi-
+4. Experiments                                                              cant trouble in directly separating out machine and human
+                                                                            generated responses when they are of similar quality, as
+In Section 2, we introduce a theoretical framework for com-                 the task of assessing sentence quality is highly subjective
+paring decoding algorithms along a quality-diversity curve.                 (Ippolito et al., 2019a). We found that constructing pairwise
+Under this framework, we evaluate several commonly used                     preference ratings by randomly pairing samples evaluated
+decoding algorithms in a human study described below. In                    at the same time significantly reduced the variance of our
+addition to selective sampling, we consider the following                   results. Specifically, if one sample is rated higher than the
+autoregressive decoding algorithms,                                         other, one is assigned a score of +1 and the other -1. If both
+                                                   Trading Off Diversity and Quality in Natural Language Generation
+
+are rated equally, both are assigned a score of 0. The score                         we evaluate samples from the model, we evaluate the latter
+assigned to a decoding configuration is its average score                            condition.
+across all pairwise preference ratings. The average scores
+                                                                                     Our second conclusion is that sample quality varies signifi-
+for each decoding strategy setting we experimented with are
+                                                                                     cantly with entropy for all decoding algorithms. Moreover,
+shown in Figure 6.
+                                                                                     when aligned on entropy, sample quality between all au-
+                                                                                     toregressive decoding algorithms is comparable across a
+4.2. Results                                                                         wide range. It is only when entropy is low – when decoding
+We now introduce the first large-scale study comparing de-                           algorithms heavily influence sampling – that sample quality
+coding algorithms and their hyperparameters. Unlike all                              between algorithms diverge. In this regime, we find that
+prior work (Holtzman et al., 2019; Ippolito et al., 2019b),                          nucleus sampling outperforms top-k, which in turn outper-
+we explicitly put decoding algorithms on equal footing                               forms temperature sampling. Observing such a difference
+by comparing sample quality at equal points of diversity.                            should be unsurprising: the entropy of a distribution alone
+We consider five hyperparameter configurations per decod-                            does not determine its sample quality. We conclude that a
+ing algorithm for a total of twenty decoding algorithm-                              fair comparison of decoding algorithms must not only com-
+hyperparameter configurations. For each configuration and                            pare at the same level of entropy but at a range of entropy
+prompt, we draw ten samples. In total, workers rate nearly                           levels.
+10,000 samples resulting in over 38,000 paired ratings.                              Finally and most surprisingly, we find that, in spite of its
+                                                                                     theoretical appeal, selective sampling consistently underper-
+                                                                                     forms all other decoding algorithms considered.
+                    0.2
+                                                                                     4.3. Selective Sampling
+                    0.1
+
+
+
+  Human Judgement
+                                                                                     Why does selective sampling underperform? Our error anal-
+                    0.0
+                                                                                     ysis yields at least two potential causes: priors induced by
+                    0.1                                                              decoding algorithms and a context-dependent likelihood
+                              Decoding Algorithm
+                              selective                                              trap. We first consider the implicit priors of autoregressive
+                    0.2       temperature                                            decoding algorithms. Autoregressive decoding algorithms
+                              nucleus
+                    0.3       top-k                                                  naturally favor sequences x where each token xi has high
+                          0        20         40         60      80
+                                                                                     model likelihood with respect to its conditional distribution
+                                              Entropy                                pmodel (xi |x1:i−1 ). Note that this is not necessarily the same
+                                                                                     as favoring all high-likelihood sequences with high joint
+Figure 4. Human judgment scores as a function of decoding algo-                      likelihood pmodel (x); a criteria selective sampling targets at
+rithm’s entropy. Each point represents a single choice of decoding                   low temperatures. We hypothesize that autoregressive de-
+algorithm and hyperparameter. Error bars represent 95% bootstrap                     coding algorithms are inducing additional structure beyond
+confidence intervals.                                                                high joint likelihood.
+                                                                                     To test this hypothesis, we construct a human rating experi-
+Our main results are summarized in Figures 4 and 5. We                               ment that pairs random samples from a decoding algorithm
+empirically estimate the entropy of the probability distribu-                        with another random samples from the model distribution
+tion induced by each decoding configuration . Reassuringly,                          pmodel such that the two samples have the same joint sen-
+both entropy and human judgment scores vary smoothly                                 tence likelihoods. In this way, we are able to control for dif-
+with decoding algorithm hyperparameter.                                              ferences in the distribution of pmodel that different decoders
+As expected, random sampling directly from the model                                 induce and explicitly test only how various decoding algo-
+pmodel (x) is simultaneously the highest entropy and the                             rithms promote different sequences with the same overall
+lowest quality. This is empirically consistent with the long-                        joint likelihood. We draw samples from three commonly-
+standing intuition that decoding algorithms are critical to                          used decoding configurations conditioned on all 48 prompts
+improving sample quality. Why are samples from random                                and compare each against random sampling by ask crowd-
+sampling such poor quality? Language models such as                                  workers to rate which of the paired responses is of higher
+GPT-2 are trained to minimize the KL-divergence between                              quality.
+a training set and the model distribution pmodel , an objec-                         In Figure 6, we see that temperature sampling with t = 0.7
+tive that prioritizes recall over precision (Arjovsky et al.,                        is undeniably preferred to otherwise equivalent samples
+2017). As a result, models tend to ensure that high quality                          drawn directly from pmodel , though for other decoding con-
+sequences have high likelihood without insisting that all                            figurations, the difference is currently less clear. Selective
+high likelihood sequences also have high quality. When
+                                                                                                       Trading Off Diversity and Quality in Natural Language Generation
+
+
+                             0.2
+
+                             0.1
+
+                             0.0
+       RATING                0.1
+
+                             0.2
+
+                             0.3
+
+                                                                                                                                                                                                                                                                        model
+
+                                                                                                                                                                                                                                                                                top-k, k = 0001       top-k, k = 0002       top-k, k = 0010   top-k, k = 0100   top-k, k = 1000   nucleus, p = 0.1       nucleus, p = 0.3   nucleus, p = 0.5   nucleus, p = 0.7   nucleus, p = 0.9
+                                                                                                                                                     temperature, t = 0.1   temperature, t = 0.3   temperature, t = 0.5   temperature, t = 0.7   temperature, t = 0.9
+                                     selective, t = 0.5   selective, t = 0.6   selective, t = 0.7      selective, t = 0.8   selective, t = 0.9
+
+                                                                                                                                                                                                        Decoding algorithm and hyperparameter setting
+
+
+Figure 5. Human judgment scores for each decoding algorithm and hyperparameter choice. ”Selective” is selective sampling and ”model”
+is sampling directly from the probability distribution outputted by the language model. A score of 0 represents no preference. Selective
+sampling underperforms other more computationally efficient strategies.
+
+
+
+                              0.25                                                                                                                                                                                                                                                                                      0
+                              0.20
+
+
+
+           Human Judgement
+                              0.15
+                                                                                                                                                                                                                                                                                                                 50
+                              0.10
+                              0.05
+
+                                                                                                                                                                                                                                                                                           logp (x)
+                              0.00
+                                                                                                                                                                                                                                                                                                            100
+                              0.05
+                                                                                                                                                                                                                                                                                                            150
+                                              temperature, t = 0.7                                  top-k, k = 40                                nucleus, p = 0.9
+
+                                                                                                                                                                                                                                                                                                            200
+Figure 6. Human judgment scores for paired samples of equal log                                                                                                                                                                                                                                                                               1                      2                               3                      4                       5
+likelihood. 95% bootstrap confidence intervals. Dotted line repre-
+sents random judgments. For all decoding strategies it can be seen
+that decreasing diversity tends to lead to higher-judged outputs.                                                                                                                                                                                                         Figure 7. Distribution of prompt-conditional sample log likeli-
+                                                                                                                                                                                                                                                                          hoods for five different prompts. The dotted-line represents the
+                                                                                                                                                                                                                                                                          cutoff α used in experiments.
+
+sampling, a method with proposals drawn from pmodel , does
+not share this prior of its autoregressive locally normalized
+                                                                                                                                                                                                                                                                          that sample quality and diversity can be traded for one an-
+decoding counterparts. We can thus conclude that the suc-
+                                                                                                                                                                                                                                                                          other, and that the merit of a decoding algorithm requires
+cess of a decoding algorithm involves more than promoting
+                                                                                                                                                                                                                                                                          comparing it to others at equivalent levels of diversity. We
+high joint likelihood; in this way, selective sampling is defi-
+                                                                                                                                                                                                                                                                          also given evidence that autoregressive decoding algorithms
+cient.
+                                                                                                                                                                                                                                                                          induce additional preference beyond promoting samples
+Second, we consider the distribution over sample log like-                                                                                                                                                                                                                with high joint likelihood; a beneficial preference selective
+lihoods conditioned on a fixed prompt as show in Figure 7                                                                                                                                                                                                                 sampling does not share.
+Depending on the prompt, the distribution over log likeli-
+hoods varies from prompt to prompt. In selective sampling,                                                                                                                                                                                                                5. Related Work
+we’ve elected to choose a single, global maximum likeli-
+hood constant α. For some prompts, this has nearly no                                                                                                                                                                                                                     Encouraging Diversity Several recent work have pro-
+impact – nearly all samples have likelihood below the cutoff.                                                                                                                                                                                                             posed strategies for increasing the diversity of text gen-
+For others, this may eliminate nearly half of samples, leav-                                                                                                                                                                                                              erated by language models. These approaches fall into two
+ing only those of lower quality. This suggests that a fixed                                                                                                                                                                                                               broad categories: (1) algorithmic changes to the decoding
+cutoff α for all prompts may not be ideal.                                                                                                                                                                                                                                algorithm and (2) methods that involve training auxiliary
+                                                                                                                                                                                                                                                                          language models or modifying the training paradigm for the
+Based on the prior experiments, we find that choice of de-
+                                                                                                                                                                                                                                                                          main language model in some way.
+coding algorithm and its hyperparameter has a significant
+impact on sample quality and diversity. Further, we find                                                                                                                                                                                                                  The advantage of changing the decoding algorithm is that
+                             Trading Off Diversity and Quality in Natural Language Generation
+
+improvements can be rapidly be implemented on top of any        BLEU scores (Cohen & Beck, 2018; Vinyals et al., 2016;
+already trained language model. Vijayakumar et al. (2016),      Yang et al., 2018). In open-ended generation, Holtzman
+Li & Jurafsky (2016), Tam et al. (2019), and Kulikov et al.     et al. (2019) find similar results, observing that maximizing
+(2018) all propose modifications to beam search to force it     the likelihood generates extremely repetitive sentences. In
+to explore a more diverse set of beams. In contrast, modi-      addition to finding corroborating evidence that low quality
+fications to random sampling that have been proposed aim        generations appear at both the low and high probability ex-
+to reduce diversity and thereby increase quality (Fan et al.,   tremes, our main contribution towards understanding the
+2018; Holtzman et al., 2019). Ippolito et al. (2019b) com-      likelihood trap is the first explicit measurement of the re-
+pare many of these algorithmic advancements on the tasks        lationship between model likelihoods and human quality
+of open-ended dialog and image captioning, concluding that      judgments at all points in the model probability space, not
+the quality-diversity tradeoff makes it nearly impossible to    just the endpoints.
+say that any one of these methods is ubiquitously best.
+                                                                Ott et al. (2018) attempt to quantify the reasons behind the
+We choose to evaluate three commonly used decoding meth-        likelihood trap, proposing that the underlying issue is low
+ods: nucleus sampling (Holtzman et al., 2019), top-k sam-       quality examples in the training data. They demonstrate
+pling (Fan et al., 2018), and temperature sampling. All         that the likelihood trap can be avoided when restricting
+three of these methods control the relative tradeoff between    themselves to a significantly smaller dataset where each
+quality and diversity with a single hyperparameter. Top-k       training point is carefully examined to guarantee that it is
+sampling samples from only the top-k most likely tokens         high quality. However, given the recent interest in train-
+at a timestep, proportionally according to the original prob-   ing increasingly large language models on increasing large
+ability. Nucleus sampling (also called top-p) sampling op-      datasets, it seems infeasible to guarantee the quality of every
+erates similarly, but chooses an adaptive k such that the       example included in the dataset.
+top-k tokens comprise of the top-p percent of the total prob-
+                                                                Frameworks Note that our framework is related, but not
+ability mass at each timestep. Temperature sampling di-
+                                                                identical to many frameworks such as Hashimoto et al.
+vides the logits of each token by the temperature hyperpa-
+                                                                (2019); Kingma & Welling (2013); Goodfellow et al. (2014)
+rameter before normalizing and converting the logits into
+                                                                which ask that generative models mimic the training dis-
+sampling probabilities. In terms of diversity-promoting ap-
+                                                                tribution exactly. While some tasks do require indistin-
+proaches that require training new language models, (Li
+                                                                guishability as the ultimate goal (e.g. representation learn-
+et al., 2016) use a language model that predicts the source
+                                                                ing (Bengio et al., 2013), Turing Test (Turing, 2009; Ip-
+sequence given the target sequence to rank candidate gen-
+                                                                polito et al., 2019a), etc.), this is typically not the case for
+erations, penalizing generations that are too generic (have
+                                                                most generation tasks. Humans make errors, but a “perfect”
+low P (source | target)). Welleck et al. (2019) propose a
+                                                                model would not seek to imitate these mistakes. Because we
+novel loss function which discourages the model from as-
+                                                                ground quality evaluations in human judgments rather than
+signing too high probability to repetitive wording. Zhang
+                                                                on any statistical measure, our framework is easily able to
+et al. (2018) and Xu et al. (2018) use adversarial learning
+                                                                capture the possibility of superhuman performance in ways
+methods to encourage diversity. Though these methods are
+                                                                that frameworks based solely on a statistical divergence
+promising, the extra complexity of training makes them
+                                                                would find difficult.
+less attractive for quickly improving upon existing language
+models.
+                                                                6. Conclusion
+The concept of oversampling generations and then ranking
+them has been popular since the days of statistical machine     In this paper, we propose a framework for credibly eval-
+translation (Shen et al., 2004) but has also been used more     uating decoding algorithms and use it to conduct the first
+recently in other domains (Li et al., 2016; Ippolito et al.,    large scale evaluation of decoding algorithms by measuring
+2019b; Kriz et al., 2019). Our particular contribution is to    their performance along the entire quality-diversity frontier.
+relate our sampling algorithm to the reverse KL divergence      Our findings suggest that existing decoding algorithms are
+and competing objectives maximization. We are also able         more or less interchangeable in high diversity settings, but
+to use this method to give approximate probability density      that nucleus sampling performs best when quality is valued
+estimates for sampled sentences, which typically cannot be      over diversity. Additionally, we provide evidence for the
+done for algorithms that oversample generations.                existence of a likelihood trap and are the first to explicitly
+                                                                measure the relationship between log pmodel and human
+Likelihood Trap We are far from the first to observe ev-
+                                                                judgments. Finally, we propose and evaluate selective sam-
+idence of the likelihood trap. In particular, the machine
+                                                                pling, the first algorithm that can tractably estimate globally
+translation and image captioning communities have long
+                                                                normalized temperature sampling.
+known that using higher beam sizes often leads to lower
+                             Trading Off Diversity and Quality in Natural Language Generation
+
+In the future, we hope to extend our work to additional gen-    Ippolito, D., Duckworth, D., Callison-Burch, C., and Eck, D.
+erative language models as well as other modalities such          Human and automatic detection of generated text. arXiv
+as image and music generation. Additionally, we leave             preprint arXiv:1911.00650, 2019a.
+questions of whether selective sampling can be improved
+via choice of an adaptive cutoff that can vary based on the     Ippolito, D., Kriz, R., Kustikova, M., Sedoc, J., and
+prompt or proposal distributions other than random sam-           Callison-Burch, C. Comparison of diverse decoding meth-
+pling for future discovery.                                       ods from conditional language models. arXiv preprint
+                                                                  arXiv:1906.06362, 2019b.
+
+References                                                      Kingma, D. P. and Welling, M. Auto-encoding variational
+                                                                  bayes. arXiv preprint arXiv:1312.6114, 2013.
+Adiwardana, D., Luong, M.-T., So, D. R., Hall, J., Fiedel,
+  N., Thoppilan, R., Yang, Z., Kulshreshtha, A., Nemade,        Koehn, P. Pharaoh: a beam search decoder for phrase-based
+  G., Lu, Y., et al. Towards a human-like open-domain             statistical machine translation models. In Conference of
+  chatbot. arXiv preprint arXiv:2001.09977, 2020.                 the Association for Machine Translation in the Americas,
+                                                                  pp. 115–124. Springer, 2004.
+Arjovsky, M., Chintala, S., and Bottou, L. Wasserstein gan.
+  arXiv preprint arXiv:1701.07875, 2017.                        Koehn, P. and Knowles, R. Six challenges for neural ma-
+                                                                  chine translation. arXiv preprint arXiv:1706.03872, 2017.
+Bengio, Y., Courville, A., and Vincent, P. Representation
+  learning: A review and new perspectives. IEEE transac-        Kriz, R., Sedoc, J., Apidianaki, M., Zheng, C., Kumar,
+  tions on pattern analysis and machine intelligence, 35(8):      G., Miltsakaki, E., and Callison-Burch, C. Complexity-
+  1798–1828, 2013.                                                weighted loss and diverse reranking for sentence simplifi-
+                                                                  cation. arXiv preprint arXiv:1904.02767, 2019.
+Cohen, E. and Beck, J. C. (unconstrained) beam search is
+  sensitive to large search discrepancies. 2018.                Kulikov, I., Miller, A. H., Cho, K., and Weston, J. Impor-
+de Masson d’Autume, C., Mohamed, S., Rosca, M., and Rae,          tance of a search strategy in neural dialogue modelling.
+  J. Training language gans from scratch. In Advances in          2018.
+  Neural Information Processing Systems, pp. 4302–4313,         Li, J. and Jurafsky, D. Mutual information and diverse
+  2019.                                                           decoding improve neural machine translation. 2016.
+Fan, A., Lewis, M., and Dauphin, Y. Hierarchical neural         Li, J., Galley, M., Brockett, C., Gao, J., and Dolan, W. B. A
+  story generation. arXiv preprint arXiv:1805.04833, 2018.         diversity-promoting objective function for neural conver-
+Forsythe, G. E. Von neumann’s comparison method for                sation models. pp. 110–119, 2016.
+  random sampling from the normal and other distributions.      Ott, M., Auli, M., Grangier, D., and Ranzato, M. Analyzing
+  Mathematics of Computation, 26(120):817–826, 1972.              uncertainty in neural machine translation. arXiv preprint
+Gehring, J., Auli, M., Grangier, D., Yarats, D., and Dauphin,     arXiv:1803.00047, 2018.
+  Y. N. Convolutional sequence to sequence learning. In
+                                                                Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and
+  Proceedings of the 34th International Conference on Ma-
+                                                                  Sutskever, I. Language models are unsupervised multitask
+  chine Learning-Volume 70, pp. 1243–1252. JMLR. org,
+                                                                  learners. OpenAI Blog, 1(8):9, 2019.
+  2017.
+                                                                Shannon, C. E. A mathematical theory of communication.
+Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
+                                                                  Bell system technical journal, 27(3):379–423, 1948.
+ Warde-Farley, D., Ozair, S., Courville, A., and Bengio,
+ Y. Generative adversarial nets. In Advances in Neural          Shen, L., Sarkar, A., and Och, F. J. Discriminative reranking
+ Information Processing Systems (NeurIPS), 2014.                  for machine translation. pp. 177–184, 2004.
+Hamilton, J. D. Time series analysis, volume 2. Princeton       Stahlberg, F. and Byrne, B. On NMT search errors and
+  New Jersey, 1994.                                               model errors: Cat got your tongue? In Proceedings
+Hashimoto, T. B., Zhang, H., and Liang, P. Unifying human         of the 2019 Conference on Empirical Methods in Natu-
+  and statistical evaluation for natural language generation.     ral Language Processing and the 9th International Joint
+  arXiv preprint arXiv:1904.02792, 2019.                          Conference on Natural Language Processing (EMNLP-
+                                                                  IJCNLP), pp. 3356–3362, Hong Kong, China, Novem-
+Holtzman, A., Buys, J., Forbes, M., and Choi, Y. The              ber 2019. Association for Computational Linguistics.
+  curious case of neural text degeneration. arXiv preprint        doi: 10.18653/v1/D19-1331. URL https://www.
+  arXiv:1904.09751, 2019.                                         aclweb.org/anthology/D19-1331.
+                            Trading Off Diversity and Quality in Natural Language Generation
+
+Sutskever, I., Vinyals, O., and Le, Q. V. Sequence to se-
+  quence learning with neural networks. In Advances in
+  neural information processing systems, pp. 3104–3112,
+  2014.
+Tam, Y.-C., Ding, J., Niu, C., and Zhou, J. Cluster-based
+  beam search for pointer-generator chatbot grounded by
+  knowledge. In Dialog System Technology Challenges 7
+  at AAAI 2019, 2019.
+Turing, A. M. Computing machinery and intelligence. In
+  Parsing the Turing Test, pp. 23–65. Springer, 2009.
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones,
+  L., Gomez, A. N., Kaiser, Ł., and Polosukhin, I. Atten-
+  tion is all you need. In Advances in neural information
+  processing systems, pp. 5998–6008, 2017.
+Vijayakumar, A. K., Cogswell, M., Selvaraju, R. R., Sun,
+  Q., Lee, S., Crandall, D., and Batra, D. Diverse beam
+  search: Decoding diverse solutions from neural sequence
+  models. 2016.
+Vinyals, O., Toshev, A., Bengio, S., and Erhan, D. Show and
+  tell: Lessons learned from the 2015 mscoco image cap-
+  tioning challenge. IEEE transactions on pattern analysis
+  and machine intelligence, 39(4):652–663, 2016.
+
+Welleck, S., Kulikov, I., Roller, S., Dinan, E., Cho, K.,
+ and Weston, J. Neural text generation with unlikelihood
+ training. arXiv preprint arXiv:1908.04319, 2019.
+Xu, J., Ren, X., Lin, J., and Sun, X. Diversity-promoting
+  gan: A cross-entropy based generative adversarial net-
+ work for diversified text generation. In Proceedings of the
+ 2018 Conference on Empirical Methods in Natural Lan-
+  guage Processing, pp. 3940–3949, 2018. URL https:
+ //www.aclweb.org/anthology/D18-1428.
+Yang, Y., Huang, L., and Ma, M. Breaking the beam search
+  curse: A study of (re-) scoring methods and stopping
+  criteria for neural machine translation. arXiv preprint
+  arXiv:1808.09582, 2018.
+Zhang, Y., Galley, M., Gao, J., Gan, Z., Li, X., Brockett,
+  C., and Dolan, B. Generating informative and diverse
+  conversational responses via adversarial information max-
+  imization. In Advances in Neural Information Processing
+  Systems, pp. 1815–1825, 2018.
+Zhang, Y., Sun, S., Galley, M., Chen, Y.-C., Brockett, C.,
+  Gao, X., Gao, J., Liu, J., and Dolan, B. Dialogpt: Large-
+  scale generative pre-training for conversational response
+  generation. 2019.
+                               Trading Off Diversity and Quality in Natural Language Generation
+
+A. Appendix                                                      correctly2 were allowed to participate in further experiments.
+                                                                 Of the 550 crowdsourced workers surveyed, 136 met this
+A.1. Proof of Proposition 1                                      criteria. We refer to this set of raters as the ”qualified rater
+Notice first that, subject to H(Q) = K,                          pool” below.
+                                     X                          Even with a qualification exam, we found raters often dis-
+ arg min DKL (Q k P ) = arg max         Q(x) log P (x)          agree on the appropriate label for a given continuation. How-
+       Q                            Q
+                                        x∈X
+                                                                ever, when asked to choose which of two continuations was
+                                                                higher quality quality (if any), raters were better aligned.
+Properly choosing K ∗ allows us to write the Lagrangian         With this in mind, we choose to analyze pairs of ratings
+dual for the above constrained optimization problem as          given in the same task. From five absolute ratings, we con-
+                                                                struct twenty pairwise preference ratings: two per pair of
+                      X                                         continuations. If two continuations receive the same label,
+    L(Q, λ, µ) = λ(         Q(x) log P (x)) − K ∗ )      (2)    they are assigned a preference of 0. If the first continuation
+                      x∈X
+                                 X                              is rated higher than the second, a the pair (first, second) is
+                + H(Q) + µ((           Q(X)) − 1) = 0    (3)    assigned a score of +1 and the pair (second, first) a score of
+                                 x∈X                            -1. All analyses comparing multiple decoding methods use
+                                                                this methodology.
+For any x ∈ X                                                    Even with the precautions above, care is needed to ensure
+                                                                 repeatable results. To measure this, we performed an “A/A”
+             ∇Q(x) L(Q, λ, µ)
+                                                                 experiment prior to data collection. This experiment con-
+           = λ log P (x) + log Q(x) + 1 + µ = 0                  sists of having the same tasks rated by two different pools
+                       P (x)−λ                                   of raters. Identical analyses are performed on both rating
+           ⇒ Q(x) =                                              results, and the experimental setup is deemed valid if con-
+                        e1+µ
+                                                                 clusions are consistent. To achieve this, we constructed 150
+                                                  1
+Setting λ = − τ1 and µ = −1 + log x∈X P (x) τ immedi-
+                                     P                           tasks3 using a subset of the context sequences and decod-
+ately gives us temperature sampling. Finally, observing that     ing methods from our primary experiment. We artificially
+positive temperatures give us the local maxima and negative      split the qualified worker pool in two by sending the same
+temperatures give us the local minima completes the proof.       tasks for evaluation at midnight and at noon.4 We submit
+                                                                 the same set of tasks to both rater pools. An analysis of
+A.2. Experimental Design                                         results from both sets of ratings (Figure 10) reveals a statis-
+                                                                 tically consistent preference of top-p over top-k and (local)
+In this section, we describe the design of experiments pre-      temperature sampling, and a severe disapproval of random
+sented in Section 4 in greater detail.                           sampling from the model. These results are also consistent
+                                                                 with the same statistics gathered in the full-scale experiment
+We begin by describing the task presented to crowdsourced
+                                                                 presented in the main text and another experiment described
+raters. A sample task is shown in Figure 9. Each task con-
+                                                                 below.
+sists of a “context” sequence of the first 20 words in a news
+article.1 We then present the rater with five continuations      To further validate the reliability of our methodology, we
+of 30 word-piece tokens. The rater assigns a label of “High      explicitly measure inter-rater agreement on the same set of
+Quality”, “Decent”, “Passable”, “Bad” or “Terrible” to each.     150 tasks in a follow-up experiment after large-scale data
+We note that these labels are inherently subjective, and in-     collection. In this experiment, we ask each task be rated by
+clude a description and reference example before each task       five distinct raters. We measure Fleiss’s Kappa, a measure
+to calibrate the rater. The same description and example is      inter-rater agreement, on the resulting pairwise ratings. We
+repeated in Figure 8.                                            obtain a score of 0.1964 – an indication that a correlation be-
+                                                                 tween raters exists but that the task is far from unambiguous.
+In preliminary experiments, we found examples and instruc-
+                                                                 While this may initially appear concerning, we argue that
+tions insufficient for achieving repeatable results. Manual
+                                                                 this is an indication of the task’s difficulty. Unlike image
+inspection of rater responses revealed a failure to interpret
+the labels correctly as well as spammers who would always           2
+                                                                      Raters which incorrectly labeled at most one continuation with
+choose the same response for every prompt. As a result,         a label at most one level off (e.g. if the correct answer is ”Bad”,
+we crafted a qualification exam of five continuations. Only     acceptable errors are ”Passable” and ”Terrible”) are counted as
+raters which rated all five continuations correctly or nearly   ”nearly correct”.
+                                                                    3
+                                                                      The large-scale experiment includes 1,930 tasks.
+    1                                                               4
+      News articles are sourced from GPT-2’s WebText dataset.         All tasks within each experiment were rated within 4 hours
+https://github.com/openai/gpt-2-output-dataset                  and 1.5 hours, respectively.
+                               Trading Off Diversity and Quality in Natural Language Generation
+
+
+
+
+Figure 8. Instructions for the crowdworker task. Each sentence continuation is labeled on a scale from “Terrible” to “High Quality”. A
+description of each label and an example continuation that fits each each is provided before each task.
+
+
+classification, for example, a universally agreeable criteria
+for text quality does not exist. A measure of Cohen’s Kappa
+on the A/A experiment above produces a score of 0.19578
+– nearly identical to the inter-rater agreement experiment
+described here. The similarity of these two statistics gives
+evidence that the proposed experimental design is repeatable
+in spite of the task’s ambiguity. These reuslts underscore
+the importance of large-scale, repeatable studies like that
+presented here.
+We conclude by measuring rater preference between each
+pair of sampling method and hyperparameter on the five-
+raters-per-task inter-rater agreement experiment described
+above. Results, as shown in Figure 12, indicate that the same
+trends presented in the full-scale experiment (Figure 5) hold,
+
+  • Top-p is preferred to all other sampling methods,
+  • Increased diversity correlates with lower human judge-
+    ment scores, and
+
+  • Random sampling directly from the model produces
+    the lowest human judgement scores by a large margin
+                                                                       Trading Off Diversity and Quality in Natural Language Generation
+
+
+
+
+Figure 9. Sample crowdworker task used for the main evaluation results. Raters assign a label on a scale from “Terrible” to “High Quality”
+to each of five continuations sharing a common context of twenty words. Each continuation is generated by a different sampling method
+and hyperparameter.
+
+
+
+
+                                                                                                                                                                           0.1
+                     0.1                                                                                                                                                                                                                             0.1
+                                                                                                 0.1
+                     0.0                                                                                                                                                   0.0
+                                                                                                 0.0                                                                                                                                                 0.0
+                     0.1                                                                         0.1                                                                       0.1
+            RATING                                                                      RATING                                                                    RATING                                                                    RATING
+                                                                                                                                                                                                                                                     0.1
+                     0.2                                                                         0.2                                                                       0.2
+                                                                                                                                                                                                                                                     0.2
+                     0.3                                                                         0.3
+                                                                                                                                                                           0.3
+                     0.4                                                                         0.4                                                                                                                                                 0.3
+
+
+
+                                                        top-k, k=all                                                                top-k, k=all                                                              top-k, k=all                                                              top-k, k=all
+                           model                                                                       model                                                                     model                                                                     model
+
+
+                                   temperature, t=all                                                          temperature, t=all                                                        temperature, t=all                                                        temperature, t=all
+                                                                         top-p, p=all                                                              top-p, p=all                                                              top-p, p=all                                                              top-p, p=all
+
+
+
+
+                      (a) A/A, midnight                                                                (b) A/A, noon                                                             (c) Full-scale                                                            (d) Inter-rater
+
+Figure 10. Average Human judgement scores for each sampling method, aggregated across sampling method hyperparameters. In spite of
+being collected by different raters on different sets of tasks and different points in time, rater preference remains consistent.
+
+
+
+
+                                                                                         Experiment                                 Num Ratings                                       Kappa
+                                                                                            A/A                                        2,968                                     0.1957 (Cohen’s)
+                                                                                         Five-Rater                                   14,760                                     0.1964 (Fleiss’s)
+
+Figure 11. Inter-rater agreement between pairwise preference ratings as measured in a preliminary A/A experiment and an explicit,
+five-raters-per-task inter-rater agreement experiment. While agreement is low, Kappa is strongly consistent between both experiments.
+                                                           Trading Off Diversity and Quality in Natural Language Generation
+
+
+
+
+                      0.3
+                      0.2
+                      0.1
+                      0.0
+             RATING
+                      0.1
+                      0.2
+                      0.3
+
+
+                            model
+
+                                                                                                                                                         top-k, k = 0001   top-k, k = 0002   top-k, k = 0010   top-k, k = 0100   top-k, k = 1000   nucleus, p = 0.1   nucleus, p = 0.3   nucleus, p = 0.5   nucleus, p = 0.7   nucleus, p = 0.9
+                                    temperature, t = 0.1     temperature, t = 0.3   temperature, t = 0.5   temperature, t = 0.7   temperature, t = 0.9
+
+
+
+Figure 12. Human judgement scores for each decoding algorithm and hyperparameter choice, as measured in the inter-rater agreement
+experiment. Preference between sampling methods remains consistent with large-scale experiment shown in Figure 5 in spite of using
+only decodes generated by a subset of context sequences.
+

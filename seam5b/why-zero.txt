@@ -1,0 +1,32 @@
+towns 768
+towns with a 'corruption' institution impairment: 0
+towns with ANY institution impairment: 0
+towns with a corrupt NPC: 134
+institution present / with any instantiated service row:
+  Citizen militia        present  106  with service rows  106
+  Democratic assembly    present    0  with service rows    0
+  Royal seat             present    1  with service rows    1
+  City administration    present    3  with service rows    3
+  Town hall              present  128  with service rows  128
+  City hall              present  256  with service rows  256
+  Courthouse             present   83  with service rows   83
+  Town watch             present  128  with service rows  128
+the service names those institutions actually instantiate:
+   256  City hall :: Civic licensing
+   180  City hall :: Appeals court
+   128  Town hall :: Permit applications
+   128  Town watch :: Night patrol
+   106  Citizen militia :: Emergency defense
+    83  Courthouse :: Civil disputes
+    83  Courthouse :: Criminal trials
+    73  Town hall :: Tax payment
+    67  Town watch :: Gate duty
+    56  Town hall :: Dispute arbitration
+    46  Courthouse :: Notary services
+     3  City administration :: Civic administration
+     3  City administration :: Courts and adjudication
+     3  City administration :: Taxation and tolls
+     2  City administration :: Licensing and charters
+     2  City administration :: Public records
+     1  Royal seat :: State governance
+     1  City administration :: Public works

@@ -1,0 +1,613 @@
+Menu 
+ Close 
+
+ Chuck Wendig: Terribleminds 
+
+ Apple-Obsessed Author Fella
+
+ Posts 
+
+ Merch! 
+
+ Where’s Wendig? 
+
+ Wait, Who The Hell Is This Guy? 
+
+ Comments Policy 
+
+ Contact 
+
+ Subscribe 
+
+ Posts 
+
+ Merch! 
+
+ Where’s Wendig? 
+
+ Wait, Who The Hell Is This Guy? 
+
+ Comments Policy 
+
+ Contact 
+
+ Subscribe 
+
+ April 1, 2024 
+
+ / 33 Comments 
+
+ Generative A.I. For Writers: An Unfolding (But Not Inevitable) Nightmare!
+
+ I have seen the sentiment around that generative AI for writers and artists is “inevitable,” which is a message that I think falls right in line with the myth of the starving artist — meaning, they’re two bits of pervasive folklore put forth by the Powers That Be, because it rewards and enriches those powers. To put a finer point on it, it’s fucking capitalism. It’s capitalist propaganda bellowed from the deepest, most cankerous cave of moneyed interests, because if they say it enough times and make it true, then they make more money because we make less money, the end. 
+
+ Just the same, I’ve seen some actual writers and actual artists start to… really take this to heart. They are taking on the inevitability of Gen AI sure as a broken-hulled boat takes on water — but that boat doesn’t have to sink, and nor does AI have to be inevitable. I do think it is inevitable that Moneyed Interests will continue to push AI as a catch-all solution to problems that don’t exist, and they won’t just let that bone go — but I do think, just like crypto and NFTs and what-have-you, that the actual value of Gen AI and the inclusion of Gen AI is far, far from confirmed prophecy.
+
+ So, this is a post talking about what we are, I anticipate, likely to see regarding artificial intelligence and both our writing lives and our writing careers. Note: none of this is good, but again, none of this needs to be inevitable, either, and I feel like blah blah blah, forewarned is forearmed.
+
+ Real quick, a quick sum-up of where we’re at with Gen AI in art and writing (and arguably music and game design and pretty much everything else):
+
+ a) It is built entirely on stolen work, colonizing the efforts of human creators, milling everything into artbarf and content slurry — and it is worth reminding too that it is not the AI that has stolen our work but rather, the creators of the AI who literally directed their artbarf robots to build themselves out of pilfered material.
+
+ b) It is environmentally damaging, increasingly so, guzzling water like a man in the desert and contributing overmuch to carbon emissions — see this article here, from Yale . Immigrants crossing borders are dying of thirst, but meanwhile, we’re feeding a half-a-liter of water to the machines just to ask it a couple-few dozen questions (which it will probably get wrong).
+
+ c) It continues to chew at the beams and struts of our information fidelity, and in those holes and in the inevitable collapse, mis- and disinformation will flourish like an invasive species.
+
+ With those three things in mind, it is fair to say, I think, that use of AI in writing and in the arts is unethical at present until the problems of stolen material, environmental damage and information erosion are addressed and solved. There’s a fourth thing, one that arguably is too true of everything we touch, which is that Gen AI exists largely to make Rich People Richer, and does nothing for everyone further down the ladder. (This is a much harder problem to solve because, well, welcome to the water in which we swim.) It serves companies. It does not serve people. It doesn’t help writers or artists or the audience. It’s there to make stuff fast, cheap, easy. 
+
+ And, to opine a bit here, even outside the ethics of this, I also think use of Gen AI in this way is supremely lazy and completely betrays the entire point of making art and telling stories in the first fucking place. It’s not helping us make the work better and get paid more. It’s relegating art and writing to a hobby only, while simpering incel chimps press buttons and get their rocks off by having the AI make images and stories of whatever mediocre garbage is passing through their minds at any given moment. 
+
+ But, but, but —
+
+ Again, I don’t think this is inevitable.
+
+ Here I’m really going to switch gears and talk more explicitly about Gen AI in writing , and the problems it presents beyond the lack of ethics and the fact it’s really just there for lazy people who actually like the idea of writing more than they actually want to write . (Ironically, some people want to be a writer without doing work, but AI doesn’t fix that for them — they’re still not writing jack shit, they’re just zapping the Fancy Autocorrect Robot and making it shit out words for them. The software is the writer, not them.)
+
+ So, for me there are two key problems with Gen AI in writing —
+
+ 1) It sucks. 
+
+ It really just sucks. It’s not good. It can make the shape of the thing you want it to write (article, story, blog post, review) but then it fills it with half-assed hallucinations. Gen AI isn’t here to get things right , it’s here to make things look right , which is a very different thing. AI is vibes only. You don’t get an article — you get an article-shaped thing that’s just a really, really advanced version of Lorem Ipsum.
+
+ Gen AI isn’t true artificial intelligence. It isn’t “thinking” per se about input and output. It’s just barfing up the raw-throated bile of effervescent copypasta. It’s just a program tapping the predictive words button. And it knows to do this because, again, it’s stolen a whole lot of material to feed to its Judas Engine. So what it’s outputting is a broth steeped from tens of thousands of illicitly-yoinked human-created pieces of writing.
+
+ It also isn’t good at sustaining anything with continuity. Continuity is really important for writing — in an article, in an essay, and especially in longer-form material. When we talk about Chekhov’s Gun, that’s a shorthand that means the pieces of narrative information we use early are just the start of the trail of breadcrumbs that will carry us through the story. The gun appears early and must be used later — but that’s true of so much inside our work. We introduce things that are important, that have continuity throughout the work, that appear again and again and form a kind of constellation of narrative information — and that information comes in the form of themes, motifs, motivations, descriptions, tension-building plot points, and so on. AI has literally no understanding of that. Because it doesn’t understand anything. It just sees a pile of stuff and attempts to ape the shape and colors of that stuff. Gen AI artbarf can show you a house in image, but it has no idea what building a house means, it doesn’t know what’s behind the walls or how bricks are laid or how fucking molecules and atoms form together to make everything — it just horks up the architectural hairball on command, like a cat with the Clapper in its stomach. 
+
+ CLAP CLAP GIVE ME A VICTORIAN MANSE MADE OF CANDY HA HA LOOK MOTHER, LOOK, THE GOOD KITTY VOMITED FOR ME A CANDY HOUSE, I MADE ART, I AM AN ARTIST, MOTHER, PRAISE ME
+
+ Anyway. What I’m saying is–
+
+ AI doesn’t know shit and can’t sustain shit.
+
+ And here the retort is often, “Well, sure, but this is what it can do now , imagine what it can do in a year or two.” And that mayyyyy be true, but I have a gut feeling that — particularly when it comes to writing — it has some very hard limits. It can never really go beyond the fact it is Fancy Autocorrect. Because it does not truly think, it will always be janky. It will never sustain information for long. It will always lie. It may be able to fake shorter pieces, but I also think that, like humans spotting Terminators, we will develop a keen eye to be able to spot this bullshit with an increasingly refined Uncanny Valley detector in our guts.
+
+ 2) The second problem is that it can’t be copyrighted. That’s a real problem, a true vulnerability, though one that hasn’t been entirely tested legally, yet — what if you push the AI-Do-My-Work-I-Suck-And-Am-Lazy button and it spits out a 5,000-word short story but then you change like, every 100th word? What does that mean for its copyrightability? I don’t know because I am a stupid person and not a lawyer, but I do suspect that it remains a very real weak spot in its defenses. 
+
+ So, these two things mean we’re free and clear, right? The AI will eventually fail to be a Good Writer. It will collapse under its own mediocre hallucinations! It’ll be like the aliens in War of the Worlds, felled by pigeon herpes and rat poison, same as Brave Flaco.
+
+ (I apologize, I just really wanted to write “pigeon herpes.” RIP, Flaco. Poor owl. People are bad and pigeons have herpes, the end.)
+
+ Sadly, we are not free and clear.
+
+ Gen AI will come at us from a dozen different directions, and we need to be eyes up in terms of what happens next — because eventually it will become clear it cannot sustain itself as a Pure Form Generator. But Money Shitheads are still Shitheads who want their Money, and so that means Gen AI will continue its ceaseless march upon our territories. After all, they’ve already invested, and they’d much rather not pay actual humans (because, god forbid, those humans might start getting sassy and unionize , oh fuck). 
+
+ So, AI is still coming for us all.
+
+ Question is: How?
+
+ The myth of its magic and potency will be a cudgel used by companies to bash us into taking less money for our work.
+
+ Meaning, they’ll say, “Ah, look, the AI is so good , it has generated this script, this story, this idea. It’s done the hard work !” And here we must remember that AI is very much about the fetishization of ideas . “So, now I just need you, Word Janitor, to come and, you know, sweep these ideas into a pile for us.” The writer will just became a wrangler, a jockey, a plumber clearing story clogs — at least, that’s how it’ll be described. In reality, the writer will be even more vital, because the writer will be handed some inane, insane piece of shit from the Artbarf Robot, and told to turn that horrible thing into art — which is harder than just allowing a human to refine their own idea into something amazing. “Turn this AI turd into a profitable Ryan Reynolds movie” is a Herculean task, but will be paid with Sisyphean money.
+
+ (Real-talk, licensed IP is already set up for this pretty easily. Most of these licensed worlds are already miles deep in terms of storytelling and worldbuilding — it would be no shock to see Marvel or Star Wars or whoever feeding all their existing material into The Machine in the hopes it will extrude favorable content, whether as an idea or as a full “story.” Again, it’ll be slop that will require an actual human to make palatable.)
+
+ This will probably fail, too — eventually they’ll come back around to the idea that humans are better than the Artbarf Robot, but by that time the aim will be served, which is, writers get paid less. Here, the AI serves almost more as a threat than as an actual foe . And it doesn’t take much to imagine some company in the future telling its writers, “We’re paying less now because honestly we could just get The Robot to do it, but we’re throwing you a bone.” It’s a lie, of course. The Robot can’t do it, or they’d have it done already without you, for sure. But, that’s the AI trick, isn’t it? AI is here to build to a convincing lie. A useful lie. Artifice wielded by power.
+
+ That’s the more direct way it’ll come for us, but this is a death by a thousand cuts situation, and it would not be shocking to find:
+
+ – AI implemented in generating descriptions of our written material online, or Amazon using AI descriptions above the flap copy written by us or our publishers, orrrrr
+
+ – Publishers saying “fuck it” and using AI to write the flap copy in the first place, pre-appeasing the robo-tyrants
+
+ – Publishers replacing human editors with AI, though again here the reality is likely that they’ll still retain and require human editors, but they’ll just pay them less (or heap other duties upon their shoulders, burning them out through strain and crunch) because “well, the AI did most of the work, now you do the cleanup” — meaning, editors will just edit the shitty editing done by the shitty robots. Or , they’ll let the AI rewrite whole sections of your book, and leave it to you , the author, to fix it.
+
+ – Book reviews written wholecloth by AI. I think I’ve already found a couple of these for my books. Here, you can find one here , a review of Black River Orchard at what looks like a reputable place. Is it AI? Maybe not. But it gets some details totally wrong and other details seem simply lifted from the text, as if the book was fed to a machine in order to defecate out the review. And some of the sentences are… just weird. “Calla is not fooled by its appearance and refers to this new blend situation as trapping her between the Scylla of Golden and the Charybdis of the apple. Along with the narrative of a now older Calla and her father, we are treated to time spent with two other kindred spirits: life partners Emily and Meg. Their stories will become intertwined with each other, as well as a horde of other interesting characters with whom Wendig peppers his tale.” Like, what the fuck is that sentence? Hell, the whole review starts off suggesting I’ve been praised by Stephen King, which… trust me, if Stephen King had praised me, I’d be spraypainting that shit on the walls of your homes. We’d all know it.
+
+ – And even if the above review isn’t AI, the simple possibility of it being so poisons the entire ecosystem. It’s like The Thing. Any one of your friends or co-workers could be the monster. 
+
+ – AI as an insult, too — “It sucks. ChatGPT probably wrote this.”
+
+ – AI “authors” straight-up remixing our books and publishing them at Amazon. This is more or less already happening — Jane Friedman notes that there are books on Amazon labeled as written by her, but not written by her at all . And Stephanie Land found “biographies” of her at Amazon . 
+
+ – AI picking and choosing what books get made based on the trends it analyzes and farms. It’ll be wrong, of course, and worse, it’ll be wholly pedestrian in its tastes — the best case scenario is that it’ll get stuff so wrong and so weird that it accidentally picks some interesting books. One could argue in a sense this is already happening with algorithms on social media…
+
+ – Publishers passively or actively letting AI onto book covers. This is, of course, already happening. Gothikana, Fractal Noise, etc . Sometimes it’ll be art directors not realizing that AI was in the stock imagery they’re using. Sometimes it’ll just be someone plugging the cover idea into Midjourney and seeing what the Arfbarf Robot barfs up.
+
+ – Companies feeding written material into the machine in order to train the machine. This is again likeliest amongst freelance work or work done in service to licensed IPs because you do not own that work and they can do whatever the fuck they want with it. (And I’d argue this is a reason to start reconsidering doing licensed IP work, by the way. The juice is increasingly not worth the squeeze.)
+
+ This is all just a sampling. AI will come to fuck us in so many worse and weirder ways. And in the larger sense, it’ll simply add way too much noise into an already noisy process — lots of uncertainty and threat, all designed to, again, direct money upward and not toward writers and artists.
+
+ So, what the hell do we do about it?
+
+ Is there anything we can do about it?
+
+ Absolutely. This stuff is really not inevitable.
+
+ First, push back on it. Whenever you see it, push back. I am really appreciating that when I see AI pop up somewhere, people hop in the comments to say THIS IS AI, and then explain why. It vibes to me that there is a strong public sentiment against the intrusion of AI, and I’m all for it.
+
+ Though, also worth noting, it is possible to get it wrong, and it’s why it’s important to do your best to enlighten and engage rather than throwing sharp rocks at individuals. And when it’s not an individual, when it’s a corporation — well, sharp rocks work juuuuuust fine.
+
+ Second, AI does well with formula. The most vulnerable writing is the kind of writing that has at its core a formula, an equation of how the thing is written. This isn’t always escapable, but when it is, definitely escape it . It’s as good a reason as any to go big and weird and personal. The AI can’t do shit with wild swings. It’s not clever enough or smart enough. The more humanity you put into the work, the less it can ape it — and, ideally, the more likely it is you connect the work to other human readers and not just info-scraping robots looking to render the text into replicable hot dog paste.
+
+ Third, if you see it in contracts, do your best to kill it with fire. It’s also why agents are very important here, especially agents who understand this stuff and are on your side. If they don’t and they’re not, get a new agent. Good to get ahead of this, too, by talking to agents and editors — be they current or potential suitors for the work.
+
+ Fourth, get good at spotting it. AI imagery, even in its advanced state, is still obviously AI with a few cursory glances, and there are good groups on, say, Facebook that will share tutorials on how to spot AI. AI writing is a little harder but even still, it usually gets a bunch of shit wrong and has a kind of… fakey-fakey sound to it, the prose as plastic as the weird TikTok voice or the creepy sheen on so much AI-generated artbarf.
+
+ Fifth, don’t use it. Not even a little. Don’t dick around with ChatGPT even for shits and giggles. Avoid it. Spit upon the lens of its cybernetic eye-stalk.
+
+ Sixth and finally? Don’t quit. It’s tempting. It is. But don’t quit. Stay in the game if you can. Keep your boot on the Terminator’s neck. Assert your human-ness through your art and through your stories.
+
+ Generative AI does not need to be inevitable. It doesn’t need to write our TV shows and movies, it doesn’t need to write our books, it doesn’t need to be all up in our articles or legal briefs or bios. It shouldn’t edit us, shouldn’t make our book covers, not any of it. Leave AI to help us figure out when milk is on sale or to alert me to what birds might be migrating into my area overnight. I don’t want AI to write or draw comic books — I just want it to help me plot a better route to the comic book store . Okay? 
+
+ The Artbarf Copypasta Content Slurry Thieving Magpie of a Robot can fuck all the way off. And when it won’t go willingly, we need to hit it with a stick until it does.
+
+ Anyway. I am a human. Buy my human-written books. Shit, when I say it that way it sounds like I’m protesting too much. I wrote them! Me, a human! A person of BLOOD AND MEAT oh god it’s sounding worse I AM NOT A ROBOT MY HEART IS NOT METAL
+
+ (also p.s. I’m realizing that I’m posting this on April Fool’s Day and boy that is totally appropriate given how AI is trying to make fools of us all)
+
+ (anyway Black River Orchard is out in paperback June 25th bye)
+
+ Share this:
+
+ Tweet 
+
+ Share on Tumblr 
+
+ Share on Reddit (Opens in new window) 
+ Reddit 
+
+ Like this:
+
+ Like Loading... 
+
+ Comments 
+
+ Post info 
+
+ Author info 
+
+ 33 Comments 
+
+ Add yours → 
+
+ Jennifer says: 
+
+ I’m one of those weirdos who GOT a steady freelance gig because my boss realized that chatGPT can’t actually connect with his customers. So here’s hoping that’s a trend that continues.
+
+ April 1, 2024 — 10:03 AM 
+
+ Reply 
+
+ A A says: 
+
+ Hooooweeee. This was jam-packed with truth nuggets and dare I say things that will stick in my mind when fellow writers and industry leaders continue to try and sell me on the idea. 
+
+ I’m writing parodically about “AI” in my Dystopian series and I explore the idea of how the Powers that Be are the ones who push over the people who straddle the fence on the issue. Why? For financial gain of course. So this very much resonates with me.
+
+ April 1, 2024 — 10:11 AM 
+
+ Reply 
+
+ Rebecca M. Douglass says: 
+
+ Preach it! Seriously, your points need to be out there more, because I’m hearing too many writers considering how they can use AI for the scut work. And many make good-sounding arguments for letting it draft your blurb or your bio, though I suspect it would be just as much work to fix those as to start from scratch. But the environmental issue—I think that’s the one we really need to scream, because fresh water is a HUGE issue in the West, and Silicon Valley needs to deal with that.
+
+ April 1, 2024 — 10:24 AM 
+
+ Reply 
+
+ John Winkelman says: 
+
+ Some of my biggest worries for AI intruding into the creative space:
+
+ 1. The mediocre work produced by AI is deemed “good enough” by the average reader, and given the volume of work produced by LLMs, their output will become the de-facto standard by which that which is produced by humans is judged.
+
+ 2. Proficiency in the writing of ChatGPT prompts will become a more marketable skill than actually being able to write and edit.
+
+ 3. The output of LLMs will be considered more desirable than the output of human beings, because it comes from a (presumably) known, predictable (and therefore “unbiased”) place.
+
+ April 1, 2024 — 10:37 AM 
+
+ Reply 
+
+ conniejjasperson says: 
+
+ Good morning – and thank you for making the point’s about using Gen AI to “write creative fiction” that I haven’t the words to express in a civilized manner.
+
+ April 1, 2024 — 10:48 AM 
+
+ Reply 
+
+ Seth G says: 
+
+ I am constantly finding tech articles that I honestly can’t tell if they’re generated by “AI” or just poorly written by a non-native English speaker. There’s just an off flavor to them you can’t quite put your finger on.
+
+ April 1, 2024 — 11:36 AM 
+
+ Reply 
+
+ Joan says: 
+
+ I’m not a word-nerd or your typical blog reader, although I’ve written a memoir. However I do have actual experience with AI, the 1990s version. That’s when we computer nerds were trying to interview people and capture what they know to replicate that knowledge in the AI software of the time. That’s when graphic designers were trying to figure out how to make balls look round on a screen and language translators struggled with the difference between nouns and verbs. Neural networks were just one of the many attempts to have computers replicate human thought. It has been interesting for me to follow the AI progression. 
+
+ The early chess programs were relatively unsuccessful until programmers interviewed the chess masters and added their knowledge. It is likely, and probably is happening, that the Gen AI companies will interview subject matter experts to add specific knowledge to their programs (heuristics) to increase their accuracy and use. This is one way to make the Gen AI output tougher to spot and better at replacing human output. It will potentially create new job titles for writers, in addition to the post-AI editing you mentioned. However, developing the heuristics will depend on writers working with the AI companies. Writers could choose not to cooperate in this effort. 
+
+ However much we fight or try to contract our way out of it’s progress, Gen AI is not a train that anyone can stop, however one feels about it. I agree, there is too much money involved and too much momentum from the years of trial and error. The best we can do is keep the train on the tracks. We’ll adjust and do fine. Despite the success of the automated chess programs, people still play the game with each other.
+
+ April 1, 2024 — 1:07 PM 
+
+ Reply 
+
+ Brad Wyble says: 
+
+ I also have experience with AI since the 90’s and I want to make two comments. First, the analogy with Chess is not a good one since the chess problem space is wildly simpler than the creative writing space. The approaches that work for chess will not apply to GenAI. Second, you will be amazed at how quickly the money train for AI will stop if companies start to perceive it as an overhyped dead end. The push back towards genuine-certified-human-creativity(tm) will make the Organic food movement look like a lemonade stand.
+
+ April 29, 2024 — 9:33 AM 
+
+ Reply 
+
+ TCinLA says: 
+
+ I have this as Point 1 of my contracts for my books:
+
+ “The parties to this contract agree that Artificial Intelligence (AI) will not be used for any reason in the creation and production of this work. The parties further agree that if AI is used, this contract becomes null and void upon such discovery.”
+
+ April 1, 2024 — 1:30 PM 
+
+ Reply 
+
+ Lyse says: 
+
+ I am sharing this EVERYWHERE!!! Hell yeah all the way to done and back. Thank you for giving hope that we can make AI fuck off and disappear like jeans that are way-too-tight and stereo movies and disposable cameras. A terrible fad that we will be ashamed we thought was cute. Buh-bye and piss off.
+
+ April 1, 2024 — 2:04 PM 
+
+ Reply 
+
+ Amarand says: 
+
+ I had one of those chatbots today (interacting with a company), and they all seem to be using them these days. I told it what I wanted, and it was like “sounds like you need to speak to a human” which is why I pressed the “chat” button in the first place. Chatbots rarely give me the information I need. They fail to do so at least 95% of the time. Sometimes I give them a chance, like, maybe this time this chatbot will be able to help me? But it doesn’t. I’m not lazy or dumb. When I want to talk with a human, it’s because I need a human to look at my account, do the needful, and make the thing happen – first time, accurately. AI fails like this, a lot. I was reading an article/study yesterday where they noticed that AI peer review papers had a visible major spike in specific words, that weren’t apparent in other fields. People are using this stuff to write all sorts of things and getting away with it. Pretty scary. It’s a fun cat and mouse game, trying to catch the plagiarizers. But the mouse keeps getting better, more difficult to detect.
+
+ April 1, 2024 — 2:30 PM 
+
+ Reply 
+
+ Michelle says: 
+
+ I am Sarah Connor AND I WILL DESTROY SKYNET. Is that how it works? I never saw that movie. 
+
+ Thanks for writing this and reminding us all that it will be a team effort. Even in the freelance spaces online over the past year and a half I’ve seen so much tech bro bullying/shill propaganda. Someone told me if I didn’t get on board with AI sometime in 2023, I’d be “out of the game” by now. Another troll/possibly bot likened me to a horse buggy maker who scoffed at the automobile. Ok, dude who was probably hot for crypto 4 years ago.
+
+ April 1, 2024 — 2:57 PM 
+
+ Reply 
+
+ Laura says: 
+
+ What a great piece! I especially love this bit here because it’s accurate and provides a usable example we can share: 
+
+ “AI is vibes only. You don’t get an article — you get an article-shaped thing that’s just a really, really advanced version of Lorem Ipsum.”
+
+ Exactly.
+
+ April 1, 2024 — 8:38 PM 
+
+ Reply 
+
+ Judith Duncan says: 
+
+ Thank you Chuck another great post and so important. Artbarf is my new favourite word.
+
+ April 2, 2024 — 3:01 AM 
+
+ Reply 
+
+ Debi Gliori says: 
+
+ That review? Of Black River Orchard? It has to be AI. It reeks of Uncanny Valley. Eughhh. A plague upon its chips.
+
+ April 2, 2024 — 5:19 AM 
+
+ Reply 
+
+ Gerald says: 
+
+ I wonder if the Thieving Magpie could write a blog post in the style of Chuck Wendig? That would be some funny shit.
+
+But you articulate the problem superbly. Thank you. Keep on keeping on.
+
+ April 2, 2024 — 6:44 AM 
+
+ Reply 
+
+ Terry says: 
+
+ Read the suspicious”review” listed and either the review was wrote by A.I. or the reviewer only read about every 3rd paragraph. Details of the story in this particular review could not be more wrong .
+
+ April 2, 2024 — 6:58 AM 
+
+ Reply 
+
+ Comment by post author 
+
+ terribleminds says: 
+
+ Yeah there’s a buncha wrong deets in there.
+
+ April 2, 2024 — 8:09 AM 
+
+ Reply 
+
+ Mullah Nasruddin's Donkey says: 
+
+ AI lacks soul. In both its visual and literary forms, it has a peculiar deadness. Art for zombies.
+
+ April 2, 2024 — 9:41 AM 
+
+ Reply 
+
+ mattw says: 
+
+ I get out and forage for vittles in the woods in my spare time, and on the Foraging subreddit I’ve seen a bunch of people posting about Gen AI foraging books on Amazon. The biggest problem with those is that they’ll get someone killed one day. There’ll be some detail or some plant or mushroom that’s misidentified, someone that’s inexperienced will eat the thing, and their liver will shut down, or somesuch. 
+
+ Keep the dang robots outta the word mines. There are literary nuggets enough for those that are willing to dig, but if the machines bring fools gold to the surface then no one is going to be the better for it.
+
+ April 2, 2024 — 10:32 AM 
+
+ Reply 
+
+ Melissa Clare says: 
+
+ High five. And thanks for the suggestions on what we can do. It’s hard right now to deal with that feeling of inevitability, the belief that the AI tide will simply crush us and no one will work ever again and we should all just lie down and die while scrolling our Instagram feeds.
+
+ April 3, 2024 — 8:28 AM 
+
+ Reply 
+
+ Lourenço says: 
+
+ There’s a rising wave of similar discussions among translators. More translators are refusing to “edit” Google-Translated materials that are sent to them by cheapskate publishers. Not for ethical or artistic reasons, either. It’s because it takes more time and mental effort to edit a machine-translated book or article into shape (including fact-checking and continuity-checking) than to translate it from scratch. Yet publishers expect to pay less for an “edit”.
+
+ April 4, 2024 — 5:59 AM 
+
+ Reply 
+
+ Melissa Clare says: 
+
+ This is interesting, and not too surprising. I was recently given AI copy written in English to edit from a nonfiction writer that I’ve worked with in the past, and I found that even without a translation step to complicate matters, editing the AI copy is more difficult than editing his original work was. The copy starts out more polished, but it’s flatter, if that makes sense. It’s wrong in these weirdly subtle ways and it’s hard to make it good. The raw material is just… crap. I told him not to use AI. It can only write bland, forgettable (under-performing?) marketing copy. We should all refuse this garbage.
+
+ April 5, 2024 — 4:47 AM 
+
+ Reply 
+
+ Alexander Lane says: 
+
+ All of the ethical arguments you give against AI are valid, and none of them matter. Your rage is justified but I don’t think it will get you anywhere.
+
+ Your reasons don’t matter because our society is not ethical. Our politics are not ethical. Our media is not ethical. Consumers are not ethical (including a good percentage of the ones who say that they are). Generative AI is here now and it’s being used by bad actors to create convincing fascimiles of human-generated words and images (content, to use the umbrella term we all hate). Scream all you want, the Borg will assimilate you. The genie won’t go back in the bottle.
+
+ Copyright law as it stands is a thin protection against the tactics used by the likes of Open AI to harvest every word and image ever created by humanity. I’d give only a 50/50 chance of success to the current round of cases being brought by copyright owners. I’d give the same odds that the US or the UK will do anything to improve that protection, let alone international agreements like the Berne Convention. I’d give slightly better odds that the EU will do something but it will take too long to be effective, and none at all that China will do anything but make concerned noises while it builds an advantage. 
+
+ The only battle worth fighing, IMO, is for licensing and compensation, maybe along the lines of what’s used for sampling in music. And even that’s going to be a hard fight.
+
+ But you’re wrong to dismiss gen AI on the grounds that it sucks, or it won’t get better. That’s just putting your head in the sand and hoping it will go away. It’s already better than a lot of SEO content farms. It’s better than a lot of bad writers who churn out cookie-cutter fiction and non-fiction. It will turbocharge their work and the most formulaic human-generated content will be overwhelmed by AI in five years, maybe 10. I mean, seriously, have you seen Reacher on Amazon Prime? Generative AI, today, could plot that checklist of tropes and it could probably write most of the dialogue.
+
+ Does it matter? That depends on what you create. There will always be a market for original, innovative creative content, and it’s very hard to say where the barrier sits between what AI can achieve and the human imagination. I suspect it’s going to be as much about who crafts the prompts as it is the skill of the writer. No-one really knows what drives human creativity, and AI hallucinations might be terrible for non-fiction purposes but they also look a lot like a new kind of machine creativity. 
+
+ Some people will want to enjoy content that’s 100% human-made, and some people won’t care so long as it’s enjoyable. People can be selfish arseholes like that.
+
+ April 5, 2024 — 8:38 AM 
+
+ Reply 
+
+ Tom Witherspoon says: 
+
+ Holey-moley, as much as I want to shout “YOU’RE WRONG!”, I’m afraid you’re absolutely right. The company I work for is ramming AI adoption down our throats. 
+
+ But there’s one thing that is standing in the way of AI’s conquest: the people who are promoting it.
+
+ A few months ago, there was a company-wide demo of an AI project that involved some form generation using customer data. Impressive, right? Sure, if you think that automated mail-merge is impressive. Because that’s all it was! I can do the same thing at my desk right now using an Excel spreadsheet (the database) and a Word document (the form).
+
+ I pointed this out to my boss during our 1:1 meeting following this demo, just to see where her sympathies lay. The look on her face as she realized what I was saying was priceless!
+
+ So, yes AI is coming. But it’s going to trip over the feet of its own cheer squad.
+
+ April 10, 2024 — 3:46 PM 
+
+ Reply 
+
+ Fatman says: 
+
+ “It’s better than a lot of bad writers who churn out cookie-cutter fiction and non-fiction.”
+
+ Is it, tho? Not trying to argue, I’m professing my ignorance more than anything else.
+
+ All AI-generated fiction that I see posted around is complete garbage. Not garbage from the standpoint of semantics or grammar – it just doesn’t read like fiction at all. It reads like a terminally boring person telling you the plot of the movie they watched last night.
+
+ I tried to get ChatGPT to write me a story based on prompts, and I’ve never gotten a story. I get a very basic plot outline that might be turned into a story. Even the worst meatsack writing is light years ahead of that. Might be that my prompting ability really sucks… but I have a hard time imagining AI writing getting better.
+
+ April 8, 2024 — 7:45 AM 
+
+ Reply 
+
+ Alexander Lane says: 
+
+ Getting anything good out of an LLM (we shouldn’t call them AIs, it’s a bad habit to slip into) is very much a YMMV thing at the moment. A lot of it comes down to prompts and – I’m sure – to developing a workflow that will take you from a prompt to a plan to a first draft. Certainly, from what I’ve seen they’re much better at non-fiction than purely creative writing. I think it also depends on the LLM you choose: in my limited experiments, Google’s Gemini is better than ChatGPT both in terms of what it delivers and how you can interact with it.
+
+ A lot of people don’t know, for instance, that you can iterate an LLM’s output by asking it to change its drafts in specific ways until it’s delivering what you want. And if you think that sounds a lot like redrafting a novel, and that it takes effort, then you’re right. It still takes less effort than doing it yourself, but it’s not instant.
+
+ I’m not here to cheerlead for AI or apologise for the freakish pod-people techbros promoting it. Those guys are the Sirius Cybernetics Corporation and they can go stick their head in a pig. But I want to understand it, to know its strengths and limitations. I want to know how much of a threat it genuinely represents and on what timescale. I want to know if this beast can be harnessed and put to work, or if I’m sticking my head in the tiger’s mouth.
+
+ And if it is garbage, then why are prominent authors suing OpenAI? If it doesn’t represent a threat, why is there so much fear and loathing? Surely it can’t be both garbage and an existential threat?
+
+ I will add one thing: I suspect that the potential of AI as a threat long-form creative writing will be limited by the availability of computing power and simple energy. It is a hungry beast on both counts and the energy required to work on 100,000-word texts is vastly greater than writing short emails, news articles or marketing spam. The AI pushers are currently in the phase of “get your junkie hooked on freebies”, but when the real cost lands, some things may not be economically practical.
+
+ April 12, 2024 — 12:57 PM 
+
+ Reply 
+
+ Fatman says: 
+
+ “And if it is garbage, then why are prominent authors suing OpenAI? If it doesn’t represent a threat, why is there so much fear and loathing?”
+
+ That’s not really an argument for anything, tho. An action does not have to qualify as an existential threat to be illegal.
+
+ People are suing OpenAI for copyright infringement and intellectual property abuse. I.e. for feeding their hard-wrought personal efforts into a plagiarism machine without seeking authorization, or offering compensation. That would be against the law regardless of the quality of the work produced by OpenAI.
+
+ April 17, 2024 — 6:39 AM 
+
+ Reply 
+
+ Alexander Lane says: 
+
+ I ask because legal action is an expensive gamble. There’s a widespread assumption that because the acts of OpenAI et al are immoral, they are also illegal, but there’s no guarantee that the courts will follow that assumption.
+
+Copyright law wasn’t designed for this question and while I hope that OpenAI loses, I am far from certain that it will. It’s likely that OpenAI will attempt to settle out of court and out of public view. A few authors may be compensated but it won’t lead to anything substantial for the majority.
+
+On the other hand, if the case proceeds it will probably work its way up the ladder of courts via the appeals process. How do you think the current Supreme Court would decide in the case of creative individuals vs corporations?
+
+But IANAL so maybe I’m being unduly pessimistic? OpenAI may know that it doesn’t have a solid defence, and it’s running out the clock in the hope that AI becomes so economically important that the law has to be changed in ways that ensure it can survive.
+
+My point is that there are many possible scenarios that can play out here. Morally righteous rage blinds us not only to the ways that this could end badly for creatives, but also to ways that we could win, even if they’re not as satisfying as watching Sam Altman having to stand still while we all queue up to punch his smug face.
+
+ April 17, 2024 — 9:29 AM 
+
+ Reply 
+
+ damirsalkovic says: 
+
+ “Copyright law wasn’t designed for this question”
+
+ I don’t see how infringing on copyright by writing a program to do it differs from infringing on copyright the old-fashioned way. But IANAL either.
+
+ “OpenAI may know that it doesn’t have a solid defence, and it’s running out the clock in the hope that AI becomes so economically important that the law has to be changed in ways that ensure it can survive.”
+
+ Could be, but I don’t see AI becoming “economically important”. Almost 100% of what’s currently being peddled as “groundbreaking AI solutions to revolutionize work” has been neither groundbreaking nor revolutionary, and you bring up a great point regarding the energy cost.
+
+ Work done by meatsacks is remarkably energy-cheap. Income earned by meatsacks for doing said work is what makes the techbros rich. AI might eventually become capable of replacing human workers in certain domains, but it will never replace human consumers.
+
+ The AI craze reminds me more of crypto than anything. Hype-peddlers are hoping to rope the gullible in and cash out ASAP. Like with crypto, the hogwash will eventually subside and the brave new world will look remarkably like the old and boring one.
+
+ April 21, 2024 — 5:22 AM 
+
+ Reply 
+
+ Fatman says: 
+
+ “I don’t see how infringing on copyright by writing a program to do it differs from infringing on copyright the old-fashioned way.”
+
+ From what I’ve read, OpenAI has tried to frame their theft as “fair use”. Which is beyond absurd, but it’ll be interesting to see how the argument shakes out in court.
+
+ “Income earned by meatsacks for doing said work is what makes the techbros rich.”
+
+ I think you severely underestimate the degree of self-delusion the techbros are capable of.
+
+ Techbros have already convinced themselves that they “invented” the products of the blood, sweat, and tears of their respective R&D and engineering departments. Even things they stole outright. Vide: Elon Musk and the lawsuit over who founded Tesla. From there, it’s not a huge jump to “we create our own wealth, we don’t need consumers”.
+
+ April 21, 2024 — 2:26 PM 
+
+ Reply 
+
+ Nicholas Glean says: 
+
+ Let us remember that writing is primarily a data storage technology, and that literature is a product of that technology.
+
+ November 19, 2024 — 3:45 AM 
+
+ Reply 
+
+ Alexander Lane says: 
+
+ This is putting the cart before the horse. Literature is a form of storytelling, a human activity which long predates writing. There would be storytelling without stone tablets, pens, typewriters or computers. To describe literature as data is to ignore the creativity fundamental to storytelling, although that’s probably how the techbros see it. Writing is a function of storytelling, not the other way round.
+
+ November 22, 2024 — 10:20 AM 
+
+ Reply 
+
+ Speak Your Mind, Word-Nerds Cancel reply 
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+
+ terribleminds 
+
+ April 1, 2024 9:49 AM 
+
+ The Ramble 
+
+ Next post
+
+ Delilah S. Dawson: It Will Only Hurt For A Moment Cover Reveal!
+
+ Previous post
+
+ In Which I Have Ghostbuster Thoughts
+
+ terribleminds 
+
+ Administrator
+
+ WORDMONKEY
+
+ Author website 
+
+ Type your email… 
+
+ Subscribe 
+
+ Join 11.3K other subscribers 
+
+ Flickr Photos
+
+ More Photos 
+
+ Recent Posts: Chuck Wendig: Terribleminds
+
+ The Calamities Tour! August Dates Now Live 
+
+ Emma OSborne: Five Things I Learned Writing Grief Eater 
+
+ I Watched The Randolorian And Gogurt And Now I Have Thoughts 
+
+ The Calamities: Pre-Order For Secret, Sinister Delights 
+
+ Mary Berman: Five Things I Learned Writing Until Death 
+
+ Posts 
+
+ Merch! 
+
+ Where’s Wendig? 
+
+ Wait, Who The Hell Is This Guy? 
+
+ Comments Policy 
+
+ Contact 
+
+ Subscribe 
+
+ © 2026 Chuck Wendig: Terribleminds . All rights reserved.
+
+ Theme by Anders Norén .
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website 
+
+ %d

@@ -1,0 +1,2405 @@
+{
+  "_doc": [
+    "THE DECLARED TUNING REGISTER — THE PEN'S FILE.",
+    "",
+    "This file is DECLARED. Its sibling tests/lint/.tuning-inventory.json is MEASURED and is",
+    "written by the refreeze ritual alone. Never hand-edit a measured field; never hand-edit",
+    "a signature here.",
+    "",
+    "THE VALUES IN THE ESTATE ARE NOT THIS FILE'S TO CHANGE. Every row lands `draft`, and a",
+    "row becomes `signed` only through the ritual, driven by a signing record the OWNER wrote",
+    "at the tuning sitting. `signatureVersion` is 0 until then. A lane that wants a different",
+    "value opens an owner row; it does not edit here.",
+    "",
+    "REFREEZE:",
+    "  TUNING_INVENTORY_REFREEZE='<seat>' TUNING_INVENTORY_NOTE='<why it moved>' \\",
+    "    npx vitest run tests/lint/tuningRegister.walker.test.js"
+  ],
+  "registerVersion": 1,
+  "schemaVersion": 1,
+  "signatureVersion": 0,
+  "signatures": [],
+  "unitVocabulary": [
+    "ticks",
+    "weeks",
+    "years",
+    "fraction01",
+    "probability",
+    "share",
+    "count",
+    "people",
+    "mouths",
+    "score100",
+    "points",
+    "multiplier",
+    "rank",
+    "mixed"
+  ],
+  "homes": [
+    {
+      "kind": "tables",
+      "file": "src/domain/density/densityBands.js",
+      "exports": [
+        "TIER_ORDER",
+        "IMPORTANCE_ORDER",
+        "DENSITY_BANDS",
+        "RANK_CEILING_BY_TIER",
+        "VACANCY_WEIGHTS",
+        "PARTICULAR_TILTS",
+        "RIVAL_ROLL",
+        "CONCENTRATION",
+        "SUCCESSION_CLOCK_TICKS",
+        "SUCCESSION_WEIGHTS"
+      ],
+      "note": "the density ladder (D4). Ten unsuffixed exports the _TUNING glob cannot see."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/bandedStock.js",
+      "exports": [
+        "HALF_LIFE_WEEKS"
+      ],
+      "note": "the half-life ladder. The routing wave owns its thirteen hand-keyed Math.pow sites."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/intervalWeeks.js",
+      "exports": [
+        "INTERVAL_WEEKS"
+      ],
+      "note": "the canonical interval table; two private duplicates are held equal by its role."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/faithChannelBindings.js",
+      "exports": [
+        "CAUSAL_SWING"
+      ],
+      "note": "a scalar dial imported by name; its consumers read it as a computed leaf."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/worldPulse/faithTuningSurface.js",
+      "exports": [
+        "FAITH_TUNING_COVERAGE"
+      ],
+      "note": "the F6c roster (post-TAIL-F). Its three _TUNING tables enter by the glob."
+    },
+    {
+      "kind": "signature-record",
+      "file": "src/domain/density/densityBands.js",
+      "exports": [
+        "REGISTER_VII_SIGNATURE"
+      ],
+      "words": [
+        "signed",
+        "live"
+      ],
+      "note": "D4. INDEXED here, never replaced — the record keeps gating its own dial."
+    },
+    {
+      "kind": "signature-record",
+      "file": "src/domain/worldPulse/faithTuningSurface.js",
+      "exports": [
+        "FAITH_TUNING_SIGNATURE"
+      ],
+      "words": [
+        "signed",
+        "live"
+      ],
+      "note": "F6c (TAIL-F). INDEXED here, never replaced."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/powerStateProse.js",
+      "exports": [
+        "NARROW_MARGIN",
+        "SHALLOW_RUNGS_BELOW",
+        "HIGH_INSTABILITY_FROM",
+        "CROWDED_TOP_GAP",
+        "SETTLED_MIN_GAP"
+      ],
+      "note": "the power desk's five reader-facing cuts. Module-private scalars the _TUNING glob cannot see, indexed by roster exactly as faithChannelBindings.js#CAUSAL_SWING is. Deliberately NOT exported: a register row is never a reason to widen a module's public surface."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/stressorsStateProse.js",
+      "exports": [
+        "WIND_DOWN_FRACTION"
+      ],
+      "note": "the condition desk's wind-down cut, one module-private scalar indexed by roster."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/economyStateProse.js",
+      "exports": [
+        "SOLE_EARNER_FROM",
+        "LEADER_FROM"
+      ],
+      "note": "the economy desk's two income-concentration cuts. Module-private scalars the _TUNING glob cannot see, indexed by roster exactly as faithChannelBindings.js#CAUSAL_SWING is. Deliberately NOT exported: a register row is never a reason to widen a module's public surface. HIGH_RUNG_FROM and LOW_RUNG_TO in the same file are equally reader-facing and are deliberately NOT here — they sit at the figure the inventory already banked, so registering them is a TIGHTENING act rather than this lane's blocker cure. Owed, not forgotten."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/generalStateProse.js",
+      "exports": [
+        "DEFICIT_FRACTION_FROM"
+      ],
+      "note": "the general desk's food-deficit cut, one module-private scalar indexed by roster. It is the only row in this register whose value MIRRORS a second, unregistered literal in the producer — see the row's own note."
+    }
+  ],
+  "moduleSide": [
+    "src/domain/townCartography/"
+  ],
+  "moduleSideCitation": "§725.1 — the owner ruled no map leg in launch tuning at all; every map constant is module-side. These ids are enrolled by totality but are REFUSED `signed` and never reach the sitting's desk.",
+  "tables": {
+    "src/data/informationBrokerageTuning.js#INFORMATION_BROKERAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/certification/warConvergenceContract.js#WAR_CONVERGENCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/certification/warConvergenceForces.js#WAR_CONVERGENCE_FORCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#CAPTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#CORRUPTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#DEITY_CORRUPTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#DEITY_LAW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#GUILD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/corruption.js#PATRONAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#CONCENTRATION": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#DENSITY_BANDS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#IMPORTANCE_ORDER": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#PARTICULAR_TILTS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#RIVAL_ROLL": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#TIER_ORDER": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/density/densityBands.js#VACANCY_WEIGHTS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/roads/seaRoads.js#SEA_ROADS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/roads/state.js#ROADS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/roads/thirdPartyRansom.js#THIRD_PARTY_RANSOM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/rulingPowerSeat.js#SEAT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/armyTransit.js#ARMY_TRANSIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/calamity.js#CALAMITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/calamity.js#EXPOSURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/cohesionWeave.js#QUADRANT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/commodityFlow.js#COMMODITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/cultureDistance.js#CULTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/dispatchEV.js#DISPATCH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/embattlement.js#EMBATTLEMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/entrepots.js#ENTREPOT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/generosityEV.js#GENEROSITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/generosityEV.js#INTEL_SALE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/generosityReactions.js#REACTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/intelActs.js#INTEL_TRADE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/migration.js#MIGRATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/migrationRumors.js#MIGRATION_RUMOR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/moralDrift.js#MORAL_DRIFT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/navalLayer.js#NAVAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/pestilence.js#EPIDEMIC_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/smuggle.js#SMUGGLE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/supplyShipments.js#SUPPLY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/spatial/tradeFlow.js#TRADE_FLOW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/townCartography/cartographyTuning.js#TOWN_CARTOGRAPHY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/undercity/colonization.js#UNDERCITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/undercity/monotoneComponents.js#MONOTONE_EXTENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/undercity/sewerDerivation.js#SEWER_DERIVATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/armyTransitKernel.js#ARMY_ENVOY_INTENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/attrition.js#ATTRITION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/beliefAxes.js#AXIS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/beliefAxisSubjects.js#SUBJECT_AXIS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/beliefMap.js#ALLY_INTEL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/beliefMap.js#BELIEF_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageFidelity.js#BROKERAGE_FIDELITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageServices.js#INTERCEPT_FOG_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageServices.js#QUERY_PRICE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageServicesFeed.js#PATRON_FEED_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/brokerageStamps.js#BROKERAGE_STAMP_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/causeLifecycle.js#LIFECYCLE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/causeVocabulary.js#CAUSE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/clandestineFacet.js#UNDERWAYS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/clergyTraitPlane.js#FOOTHOLD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/coalitionRatification.js#RATIFICATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/commercialReasons.js#COMMERCIAL_REASON_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/compromiseRound.js#COMPROMISE_ROUND_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/conquestDoctrineStage.js#CONQUEST_STAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/conquestExecution.js#CONQUEST_EXECUTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/conquestFeasibility.js#CONQUEST_FEASIBILITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/conquestFeeds.js#CONQUEST_FEED_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/conquestIntent.js#CONQUEST_INTENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/convergence.js#CONVERGENCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/corruptionImpair.js#REFORM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/corruptionWeb.js#CORRUPTION_WEB_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/deityStance.js#STANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/deityStanceLane.js#STANCE_LANE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsHerald.js#HERALD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsLadder.js#LADDER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsLand.js#SPATIAL_LAW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsPlans.js#PLAN_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsPushPull.js#PUSH_PULL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsRates.js#DEMOGRAPHIC_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsResponses.js#RESPONSE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsRisk.js#RISK_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsWar.js#WAR_DEMOGRAPHIC_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/demographicsWorks.js#WORKS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/disinformationPlant.js#LIE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/disposition.js#AGGRESSION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/disposition.js#ALIGNMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/dispositionLedger.js#APPETITE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/dispositionLedger.js#DISPOSITION_CHANNEL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/dispositionLedger.js#DISPOSITION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/envoyChanceMeeting.js#CHANCE_MEETING_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "eighths": "count",
+        "courtNeutralPoint": "fraction01",
+        "baseRung.traveller_resident.host_settlement": "count",
+        "baseRung.traveller_resident.field_node": "count",
+        "baseRung.traveller_traveller.host_settlement": "count",
+        "baseRung.traveller_traveller.field_node": "count",
+        "posturePlus.friendly": "count",
+        "posturePlus.neutral": "count",
+        "posturePlus.hostile": "count",
+        "covertMeetStep": "count",
+        "approachBaseRung": "count",
+        "approachAtOddsRung": "count",
+        "approachAtOddsStep": "count",
+        "approachCovertStep": "count",
+        "compromiseFloor": "count",
+        "compromiseCapCorruptible": "count",
+        "compromiseCapPlain": "count",
+        "compromiseFastPath": "count",
+        "markLadder.alike.bond": "count",
+        "markLadder.alike.respect": "count",
+        "markLadder.alike.rivalry": "count",
+        "markLadder.differing.bond": "count",
+        "markLadder.differing.respect": "count",
+        "markLadder.differing.rivalry": "count",
+        "markLadder.opposed.bond": "count",
+        "markLadder.opposed.respect": "count",
+        "markLadder.opposed.rivalry": "count",
+        "markPostureStep": "count",
+        "markRefusedRivalryStep": "count",
+        "nothingFloor": "count",
+        "exposureBaseRung": "count",
+        "exposureCovertStep": "count",
+        "exposureWarinessCap": "count",
+        "exposureHostileStep": "count",
+        "distanceEdges.alike": "count",
+        "distanceEdges.differing": "count",
+        "driftAxisCap": "count",
+        "driftFirmGap": "count",
+        "lessonCadenceTicks": "ticks",
+        "leanTtlTicks": "ticks"
+      },
+      "band": null,
+      "note": "ENC-1, the chance-meeting leaf. Every rung a DRAFT: the base rungs, the approach die, the compromise caps, the mark ladder, the exposure rungs, the lesson cadence, the lean TTL, the die itself. Nothing here is signed and this lane signs nothing."
+    },
+    "src/domain/worldPulse/espionage/espionageCareerCredit.js#CAREER_CREDIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageDoctrine.js#ESPIONAGE_DOCTRINE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageDoctrineStage.js#DISPATCH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageGauntlet.js#GAUNTLET_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageLeak.js#LEAK_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageMath.js#ESPIONAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageProducts.js#PRODUCT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageTap.js#TAP_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/espionageWariness.js#TELL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/espionage/infiltrationDepth.js#INFILTRATION_DEPTH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/factionCompetition.js#COALITION_TRUST_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/faithChannelBindings.js#CAUSAL_SWING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/faithNews.js#FAITH_NEWS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/faithTuningSurface.js#DEITY_FLAW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "JEALOUS_BOON_FADE": "fraction01",
+        "LEVEL_SCALE.a_touch": "fraction01",
+        "LEVEL_SCALE.marked": "fraction01",
+        "LEVEL_SCALE.defining": "fraction01",
+        "WRATH_SHARPEN_RUNGS": "rank"
+      },
+      "band": null,
+      "note": "units read from FAITH_TUNING_COVERAGE; WRATH_SHARPEN_RUNGS counts demotion rungs, so it is a rank rather than a count of things."
+    },
+    "src/domain/worldPulse/faithTuningSurface.js#FAITH_FIELD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "PATRON_AMP": "multiplier",
+        "STRENGTH.faint": "fraction01",
+        "STRENGTH.firm": "fraction01",
+        "STRENGTH.heavy": "fraction01",
+        "DAMP_MAX": "fraction01",
+        "CAUSAL_SWING": "points"
+      },
+      "band": null,
+      "note": "units read from FAITH_TUNING_COVERAGE, the F6c roster written as this surface's unit sheet. CAUSAL_SWING is score points per unit channel total and its VALUE lives in faithChannelBindings.js; this table carries the binding by reference."
+    },
+    "src/domain/worldPulse/faithTuningSurface.js#FAITH_TUNING_COVERAGE": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/faithTuningSurface.js#FAITH_WITNESS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "FULL_EXPOSURE": "fraction01",
+        "PART_EXPOSURE": "fraction01"
+      },
+      "band": null,
+      "note": "units read from FAITH_TUNING_COVERAGE: both keys are exposure fractions."
+    },
+    "src/domain/worldPulse/feasibilityGate.js#FEASIBILITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/fidelityNoise.js#FIDELITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/foodStockpile.js#STOCKPILE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/generosityKernel.js#GENEROSITY_MOVER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/grievanceRead.js#GRIEVANCE_READ_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/habit/habitCurve.js#HABIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/hegemony.js#HEGEMONY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/hegemonyFear.js#HEGEMONY_FEAR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/informationStatecraft.js#SIGHT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/institutionLifecycle.js#INSTITUTION_LIFECYCLE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/institutionStatusModel.js#INSTITUTION_STATUS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/lineageClaim.js#LINEAGE_CLAIM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/magicBufferModel.js#MAGIC_BUFFER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/magicForms.js#MAGIC_FORMS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/magicRegimeModel.js#MAGIC_REGIME_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/magicSubstitution.js#MAGIC_SUBSTITUTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/magicSubstitutionReagents.js#REAGENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/martialReadiness.js#MARTIAL_READINESS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/mercenaryMarket.js#MERCENARY_MARKET_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/migrationKernel.js#MIGRATION_KERNEL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/mobilization.js#MOBILIZATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/mobilizationReactions.js#REACTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/momentum.js#CONSUMPTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/momentum.js#CRACK_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/momentum.js#MOMENTUM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/momentum.js#THRESHOLD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/moralInstitutionPressure.js#MORAL_PRESSURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/namedPersonTransit.js#NAMED_PERSON_TRANSIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcConsequencesTuning.js#NPC_CONSEQUENCES_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcGrowthKernel.js#GROWTH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "HALF_LIFE_TICKS": "ticks",
+        "MAX_LOOKBACK_TICKS": "ticks",
+        "STOCK_MAX": "points",
+        "DEPOSIT_SCALE": "multiplier",
+        "MINT_CLIFF": "points",
+        "RELINQUISH_FLOOR": "points",
+        "PRUNE_EPSILON": "points",
+        "MAX_ACQUIRED": "count",
+        "RESIST_SCALE": "multiplier",
+        "DOMAIN_OFF_MULT": "multiplier",
+        "IMPORTANCE_FLOOR": "fraction01",
+        "RECEIPT_CAP": "count",
+        "CALAMITY_WINDOW_YEARS": "years"
+      },
+      "band": null,
+      "note": "units read from the table's own per-key comments (ticks, stock points, multipliers, a count cap, an importance fraction and a window in years). Values UNCHANGED and UNSIGNED."
+    },
+    "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcLadderContest.js#CONTEST_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcLadderGoals.js#GOAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/occupation.js#OCCUPATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/opportunism.js#OPPORTUNISM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/pactFormation.js#PACT_FORMATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/pactProposals.js#PACT_PROPOSAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/pactTriggers.js#PACT_TRIGGER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/pantheon.js#PANTHEON_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/peaceTermsCatalog.js#COALITION_BETRAYAL_CHARACTER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/peaceTermsCatalog.js#PEACE_TERMS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/pestilenceKernel.js#PESTILENCE_KERNEL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/piety.js#PIETY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/ransomClaim.js#RANSOM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/razing.js#RAZING_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/razingExecution.js#RAZING_EXECUTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/razingWitness.js#RAZING_WITNESS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/reframeKernel.js#REFRAME_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/reinforcement.js#REINFORCEMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/religionLegitimacy.js#RELIGION_LEGITIMACY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/religionState.js#RELIGION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/religiousContest.js#CRISIS_CONVERSION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkCharter.js#ROUTE_CHARTER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkCharterBypass.js#ROUTE_BYPASS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkCharterDanger.js#ROUTE_DANGER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkConsumersRace.js#ROUTE_RACE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkConsumersStrategic.js#ROUTE_STRATEGIC_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkConsumersTransit.js#ROUTE_TRANSIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkDecay.js#ROUTE_DECAY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkFlows.js#ROUTE_FLOW_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/routeNetworkFlowsObjective.js#ROUTE_OBJECTIVE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sacredClaim.js#SACRED_CLAIM_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/seasons.js#SEASONS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/seatIntervention.js#SEAT_INTERVENTION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/secrecyTradeFactor.js#SECRECY_TRADE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/settlementLifecycleKernel.js#SETTLEMENT_LIFECYCLE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/settlementPolitics.js#SETTLEMENT_POLITICS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/settlementStrategy.js#STRATEGY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyAppraisal.js#SOVEREIGNTY_APPRAISAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyBundle.js#SOVEREIGNTY_BUNDLE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyIntent.js#SOVEREIGNTY_INTENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyMarketStage.js#SOVEREIGNTY_MARKET_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyReach.js#SOVEREIGNTY_REACH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/sovereigntyTransfer.js#SOVEREIGNTY_TRANSFER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/steadingTopography.js#STEADING_TOPOGRAPHY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/strategicPosture.js#POSTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/stressorGates.js#UPHEAVAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/supplyQuality.js#SUPPLY_QUALITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/supplyWebWarfare.js#WEBWAR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/tradeSalience.js#TRADE_SALIENCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/treasury.js#TREASURY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/treatyBreachCredibility.js#BREACH_CREDIBILITY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/treatyEnforcement.js#TREATY_ENFORCEMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/treatySuccession.js#SUCCESSION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/treatyTransfer.js#TREATY_TRANSFER_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/upswingKernel.js#UPSWING_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/urbanFabricKernel.js#FABRIC_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/vengeanceLicense.js#VENGEANCE_LICENSE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warCoalitionExpenditure.js#COALITION_EXPENDITURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warCoalitionRefusal.js#COALITION_REFUSAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warCoalitionSettlement.js#COALITION_SETTLEMENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warCosts.js#WAR_COSTS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warIntent.js#WAR_INTENT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warPeaceDecision.js#WAR_PEACE_DECISION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warPeaceRefusal.js#WAR_PEACE_REFUSAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warPoliticalLoop.js#WAR_POLITICAL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warReasons.js#REASON_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/warTermination.js#WAR_TERMINATION_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": ""
+    },
+    "src/domain/worldPulse/envoyChanceMeetingStage.js#CHANCE_MEETING_STAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "exposureGrievance": "fraction01",
+        "exposureCovertMultiplier": "multiplier",
+        "residentImportanceFloor": "fraction01"
+      },
+      "band": null,
+      "note": "ENC-3's chance-meeting STAGE (§893.2), distinct from the leaf's CHANCE_MEETING_TUNING beside it. Three values, and the source's own provenance block already names all three as OWNER-UNSIGNED (§12 row 7): exposureGrievance is deliberately HALF corruptionWeb's EXPOSURE_GRIEVANCE_W (0.5) because an approach is smaller than a discovered leash; exposureCovertMultiplier doubles it for a covert face; residentImportanceFloor is the estate's existing 'notable' line, NOT a number this lane chose. Units derived, not guessed: exposureGrievance adds into a clamp01'd resentment scaled by a magnitude01 (envoyChanceMeetingStage.js:778, corruptionWeb.js:1119), and residentImportanceFloor mirrors npcGrowthKernel's IMPORTANCE_FLOOR: fraction01. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/powerStateProse.js#NARROW_MARGIN": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-POW-2's NARROW cut. PROPOSED = 0.15, which is the value shipping today; this row moves nothing. EVIDENCE: governingSharePoolKey renders 'governing faction holds a NARROW plurality' when `governing.power - runnerUp <= governing.power * NARROW_MARGIN`, so the dial is a proportion OF THE GOVERNING FACTION'S OWN POWER rather than of the town's total — fraction01. The source's docblock marks it a vetoable JUDGMENT and records that the DS-POW-2 annex says only \"by the smallest margin the town has\" and leaves the cut to the implementer, so no canonical value was overridden. A share falling between DOMINANT and NARROW renders NOTHING by design. READER-FACING: this dial decides which of two sentences a paying customer reads about a town's power. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/powerStateProse.js#SHALLOW_RUNGS_BELOW": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "count"
+      },
+      "band": null,
+      "note": "DS-POW-3's shallow-ladder cut. PROPOSED = 3, the value shipping today. EVIDENCE: compared against `rungs.length` in ladderPoolKey, so it counts THINGS rather than naming a position — the distinction DEITY_FLAW_TUNING's WRATH_SHARPEN_RUNGS row draws in the other direction, where rungs are a rank. It is tested first because the two gap cuts below it are meaningless on two rungs. Vetoable JUDGMENT per the source: npcLadderState.js#LADDER_TUNING carries STAND_MAX and a baseline but no rung-count band, so there was no canonical cut to reuse. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/powerStateProse.js#HIGH_INSTABILITY_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-POW-3's churn cut. PROPOSED = 0.35, the value shipping today. EVIDENCE: compared against the churn tax returned by ladderInstabilityOf (src/domain/townMap/ladderRead.js:138), which pushes its reading through `num01` and is documented \"0..1, decaying\" — fraction01, and NOT on LADDER_TUNING's raw STAND_MAX 0..10 scale. FOR THE SITTING, THE SHARPEST ROW HERE: 0.35 is byte-equal to npcLadderState.js#LADDER_TUNING.CHURN_BUMP (0.35, commented \"per contested challenge this advance (win OR fail)\"), so the desk calls a faction 'high instability (churn at the top)' on the strength of exactly ONE undecayed contested challenge. Whether that coupling is intended or coincidence is the owner's to say; this lane neither moved the value nor bound the two into a role. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/powerStateProse.js#CROWDED_TOP_GAP": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-POW-3's crowded-top cut. PROPOSED = 0.08, the value shipping today. EVIDENCE: `standing[0] - standing[1] <= CROWDED_TOP_GAP`, and ladderRungsOf (src/domain/townMap/ladderRead.js:95) normalises every standing through `num01` and documents \"standing 0..1\" — so this is a fraction01 gap on the NORMALISED reading and not on LADDER_TUNING's raw STAND_MAX 0..10. Vetoable JUDGMENT per the source, with no canonical band to reuse. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/powerStateProse.js#SETTLED_MIN_GAP": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-POW-3's settled-order cut. PROPOSED = 0.15, the value shipping today. EVIDENCE: every adjacent pair must satisfy `standing[i-1] - v >= SETTLED_MIN_GAP` over the same num01-normalised standings CROWDED_TOP_GAP reads — same population, same unit. FOR THE SITTING: it and CROWDED_TOP_GAP (0.08) are the two ends of ONE scale and are best read on one page. They are deliberately NOT bound into a role, because a role asserts ONE value and these are two different cuts by design. Its 0.15 equals NARROW_MARGIN's 0.15 by coincidence over a different population — also no role. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/stressorsStateProse.js#WIND_DOWN_FRACTION": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-CND-1's wind-down window. PROPOSED = 0.25, the value shipping today. EVIDENCE: `remaining <= expires * WIND_DOWN_FRACTION` in conditionDurationPoolKey — a proportion of a condition's own expiry, dimensionless, so it is fraction01 and NOT a ticks dial. The source's docblock records that activeConditions.js carries SEVERITY_DRIFT_PER_TICK and expiry bookkeeping but NO wind-down boundary, so no canonical cut was overridden. DRAFT — registering is not signing."
+    },
+    "src/domain/worldPulse/envoyChanceMeetingNews.js#CHANCE_MEETING_NEWS_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "notable.severity": "fraction01",
+        "notable.score": "score100",
+        "major.severity": "fraction01",
+        "major.score": "score100"
+      },
+      "band": null,
+      "note": "ENC-4 (ROAD B): the Herald presentation of a recorded meeting — severity (the notable band's weight) and score; registered by the Fable chair at the §899 composed landing when the walker convicted the bare decimal in a new file. Candidate, owner-unsigned, like its stage sibling. §900: the major band (ENC-4b's exposed refusal) joins as a second leaf pair; units per leaf, all-or-none."
+    },
+    "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "DS-ECO-12's sole-earner cut. PROPOSED = 50, which is the value shipping today; this row moves nothing. EVIDENCE: incomeMixPoolKey renders 'INCOME MIX: one source carries the town' when the LARGEST single `percentage` in the income roster is >= SOLE_EARNER_FROM, and `percentage` is a 0..100 PERCENT figure — src/pdf/lib/viewModelBodySlices.js#normalizeIncomeSources documents \"percentage = 0..100\", the economy generators write whole percents (65, 45, 35, 30, 28, 25, 22, 20, 18), and src/foundry/journalPages.js renders the same field with a literal '%'. ⚠ FOR THE SITTING, THE SHARPEST THING ON THIS ROW IS THE UNIT WORD, NOT THE VALUE: `share` is used elsewhere in this register on a 0..1 scale — the cap__share role groups an elite-bleed cap of 0.05 with an institution-tolerance cap of 0.5 — so this row carries a 0..100 scale under a word whose only precedent is 0..1. The fourteen-word vocabulary is CLOSED but nowhere DEFINED, and it offers no word that distinguishes the two scales (`fraction01` is wrong here, `score100` names the scale but calls a share a score). The collision is RECORDED rather than resolved: splitting or defining a finite vocabulary is not a lane's act. The source's docblock marks the cut a vetoable JUDGMENT and records that the DS-ECO-12 annex says only \"one source carries the town\" and leaves the number to the implementer, so no canonical value was overridden. READER-FACING: this dial picks which of three sentences a paying customer reads about a town's economy. ⛔ AND THE BOUNDARY IS MEASURED, NOT REASONED — THIS IS THE SHARPEST THING ON THIS DESK: because the cut is 50 and the comparison is `>=`, TWO EVEN SOURCES AT 50.0 EACH RENDER 'one source carries the town'. That is the monopoly sentence, printed for a perfectly even two-way split, and the pool's own C1 variant says the leader is \"well past half\" where 50.0 is exactly half. Driven live through incomeMixPoolKey at this commit, not inferred from the source. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/economyStateProse.js#LEADER_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "DS-ECO-12's leader cut — the lower end of the same ladder SOLE_EARNER_FROM tops. PROPOSED = 20, the value shipping today. EVIDENCE: the same largest-`percentage` reading in incomeMixPoolKey; a leader at or above LEADER_FROM but below SOLE_EARNER_FROM renders 'two or three sources between them', and anything below it renders 'a broad spread, no leader'. Same 0..100 percent population as SOLE_EARNER_FROM, so the same `share` scale caveat on that row applies here unchanged. ⚠ FOR THE SITTING: the cut is read off the LEADER ALONE and never off the roster's length, and the consequence is MEASURED rather than argued — driven live through incomeMixPoolKey, four even sources at 25.0 each and five at 20.0 each BOTH render \"two or three sources between them\", and 'a broad spread, no leader' cannot fire at all until SIX even sources at 16.7 each. The pool's words promise a count the cut never reads. Whether that is intended or is the cut standing in for a count the pool's own words promise is the owner's to say; this lane neither moved the value nor bound the two cuts into a role. They are deliberately NOT roled: a role asserts ONE value, and these are two ends of one ladder by design. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/generalStateProse.js#DEFICIT_FRACTION_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-GEN-6's food-deficit cut. PROPOSED = 0.05, the value shipping today; giving it a name moved nothing. EVIDENCE: `gap / need >= DEFICIT_FRACTION_FROM` in foodDeficitDimension, where the gap is the larger of a pre-import rawDeficit and a post-import residual and `need` is daily need — a ratio of two food quantities, dimensionless and 0..1, so fraction01. ⭐ THIS VALUE IS NOT THIS DESK'S ALONE, AND THE SITTING SHOULD KNOW IT BEFORE SIGNING: it MIRRORS the producer's own inline cut `gap / need >= 0.05` in generateSettlementReason (src/generators/narrativeGenerator.js), which computes hasFoodDeficit and persists nothing, so the desk has no canonical field to read and must re-derive. tests/domain/generalStateProseDesk.test.js pins the PRODUCER's literal through mustExtract and drives both sides of the boundary (4/100 reads 'no deficit', 5/100 reads 'deficit'), so the two cannot drift in silence — but they remain TWO literals in two trees, and only this one now has a register row. Signing this row alone would sign half of one value. The honest signature covers both sites, or the producer's literal earns a name and a row of its own first. DRAFT — registering is not signing."
+    },
+    "src/domain/worldPulse/irregularForce.js#IRREGULAR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "SHARE_WEIGHT": "share"
+      },
+      "band": null,
+      "note": "W-SEAT D10 (SEAT-7a replayed by SEAT-78 at §899→§900): the irregular-force leaf's one dial, SHARE_WEIGHT — the share of the incumbent's political standing a maximal rising takes off the table (the factor spans [1 − SHARE_WEIGHT, 1]); unit `share` from the leaf's own doc block. DRAFT — registered by the Fable chair at the §900 composition because the walker's totality arm convicted the table as unnamed; the lane's receipt predicted this row. Nothing here is signed."
+    }
+  },
+  "roles": {
+    "prune_epsilon": {
+      "unit": "points",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/momentum.js#MOMENTUM_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcGrowthKernel.js#GROWTH_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/urbanFabricKernel.js#FABRIC_TUNING.PRUNE_EPSILON"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "one member holds 0.02 and the rest 0.05. Same name, same role, different value, with nothing in the source saying why. The sitting rules; this lane only records."
+      }
+    },
+    "max_lookback_ticks": {
+      "unit": "ticks",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/momentum.js#MOMENTUM_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/npcGrowthKernel.js#GROWTH_TUNING.MAX_LOOKBACK_TICKS"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "three members hold 260 and one holds 312. The charter recorded a fourth value of 24 at 60255ca8e; no member holds it at C-prime, so that spelling is GONE from this role and the divergence is now two-valued, not three."
+      }
+    },
+    "half_life_ladder": {
+      "unit": "weeks",
+      "canonical": "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+      "members": [
+        "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+        "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING.HALF_LIFE_WEEKS"
+      ],
+      "divergence": null,
+      "note": "the routing wave owns the thirteen hand-keyed Math.pow(0.5, ...) sites; this role indexes the named ladder only, and claims nothing about them."
+    },
+    "interval_weeks": {
+      "unit": "weeks",
+      "canonical": "src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS",
+      "members": [
+        "src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS"
+      ],
+      "divergence": null,
+      "note": "the canonical interval table. Two private duplicates hold the same values in foodStockpile.js and populationDynamics.js and are HELD EQUAL by this role; folding them by import is car 4, which is optional and the owner's to drop."
+    },
+    "exodus_floor__fraction": {
+      "unit": "fraction01",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/calamity.js#CALAMITY_TUNING.EXODUS_FLOOR"
+      ],
+      "divergence": null,
+      "note": "TWO ROLES, not one divergence. The 0.04 member is a fraction of a population; the 300 member is a headcount. One name, two units, two roles - a unit-less field gets a different unit at every consumer, which is why the split is recorded and not argued."
+    },
+    "exodus_floor__headcount": {
+      "unit": "people",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/migrationRumors.js#MIGRATION_RUMOR_TUNING.EXODUS_FLOOR"
+      ],
+      "divergence": null,
+      "note": "the headcount half of the EXODUS_FLOOR homonym."
+    },
+    "score_max__points": {
+      "unit": "points",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.SCORE_MAX",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.SCORE_MAX"
+      ],
+      "divergence": null,
+      "note": "the 12-point score ceilings. A third member reads SCORE_MAX as a shorthand aggregator of a module const and is recorded as a computed leaf."
+    },
+    "score_max__probability": {
+      "unit": "probability",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING.SCORE_MAX"
+      ],
+      "divergence": null,
+      "note": "the 0.95 member is a probability ceiling, not a score. Same name, different unit."
+    },
+    "cap__share": {
+      "unit": "share",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING.CAP",
+        "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING.CAP"
+      ],
+      "divergence": {
+        "reason": "distinct-by-design",
+        "odqRow": "TR-5",
+        "note": "an elite-bleed cap of 0.05 and an institution-tolerance cap of 0.5 are two subsystems' ceilings that share a key name. Grouping them by that name was this register's doing, not the estate's, so the divergence is recorded as deliberate rather than handed to the sitting as a disagreement to reconcile. The sitting may overrule this typing; it may not be left untyped."
+      },
+      "note": "the CAP members that bound a share of something."
+    },
+    "cap__count": {
+      "unit": "count",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/reframeKernel.js#REFRAME_TUNING.CAP"
+      ],
+      "divergence": null,
+      "note": "the CAP member that bounds a count of things."
+    },
+    "cooldown_weeks": {
+      "unit": "weeks",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/intelActs.js#INTEL_TRADE_TUNING.COOLDOWN_WEEKS",
+        "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING.COOLDOWN_WEEKS"
+      ],
+      "divergence": {
+        "reason": "distinct-by-design",
+        "odqRow": "TR-5",
+        "note": "an intel-trade cooldown of 26 and a post-succession cooldown of 104 are different clocks that happen to share a key name. Recorded as distinct BY DESIGN so the sitting is not asked to reconcile two things that were never one."
+      },
+      "note": "the design named this role cooldown_ticks; every measured member is spelled COOLDOWN_WEEKS and carries weeks, so the role takes the measured spelling."
+    },
+    "severity_floor": {
+      "unit": "fraction01",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/pestilence.js#EPIDEMIC_TUNING.SEVERITY_FLOOR",
+        "src/domain/worldPulse/razingExecution.js#RAZING_EXECUTION_TUNING.SEVERITY_FLOOR",
+        "src/domain/worldPulse/routeNetworkCharter.js#ROUTE_CHARTER_TUNING.SEVERITY_FLOOR"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "three members hold 0.2, 0.3 and 0.35 across an epidemic, a razing and a route charter. Plausibly deliberate, plausibly drift; nothing in the source says which."
+      }
+    }
+  },
+  "declaredGrowth": {
+    "unregisteredNamed": {
+      "src/domain/relationships/canonicalRelationship.js": {
+        "sites": 1,
+        "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
+        "cause": "T13 Car P-prime replaced a bare computed population bonus with the named constant POPULATION_SATURATION, so this file's +1 unregistered-named is the counterpart of its own -1 bare-decimal win in the same commit. The register is scoring the act it exists to encourage; the name earns its register row when the owner signs the estate, not by a landing."
+      }
+    },
+    "bareDecimals": {
+      "src/domain/worldPulse/thievesGuild.js": {
+        "sites": 2,
+        "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
+        "cause": "T13 Car P-prime retired an eager det-math call site by placement, and the two literals 0.6 and 0.4 arrived on a single placement-cure line beside the already-registered GUILD_TUNING table. No value was chosen here: they are the constants the retired call site already computed with, relocated rather than authored."
+      }
+    }
+  },
+  "soakBandAliases": {
+    "BASE": {
+      "registeredLeaf": "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING.BASE",
+      "phantom": false,
+      "realHome": null,
+      "note": "homonym: 3 leaves carry this name; the band's constantModule picks one."
+    },
+    "BOND_HALF_LIFE_WEEKS": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING.BOND_HALF_LIFE_WEEKS",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "BOND_MAX_SEV": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING.BOND_MAX_SEV",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "BOND_MINT_SEV": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING.BOND_MINT_SEV",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "CHALLENGE_RATE": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING.CHALLENGE_RATE",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "CONTESTS_PER_SETTLEMENT_CAP": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderContest.js#CONTEST_TUNING.CONTESTS_PER_SETTLEMENT_CAP",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "COOLDOWN_WEEKS": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING.COOLDOWN_WEEKS",
+      "phantom": false,
+      "realHome": null,
+      "note": "homonym: 2 leaves carry this name; the band's constantModule picks one."
+    },
+    "DISCOVER_BASE": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderContest.js#CONTEST_TUNING.DISCOVER_BASE",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "GRATITUDE_MITE": {
+      "registeredLeaf": "src/domain/spatial/generosityReactions.js#REACTION_TUNING.GRATITUDE_MITE",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "REALM_SUCCESSION_CAP": {
+      "registeredLeaf": "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING.REALM_SUCCESSION_CAP",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "SEVERE_FLIGHT_CAP": {
+      "phantom": true,
+      "realHome": "src/domain/worldPulse/populationDynamics.js:327",
+      "note": "a bare literal with no name; the band cites a constant that does not exist."
+    },
+    "SKIP_PROSPERITY_RANK_MAX": {
+      "registeredLeaf": "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING.SKIP_PROSPERITY_RANK_MAX",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "TIE_BIND": {
+      "registeredLeaf": "src/domain/spatial/generosityReactions.js#REACTION_TUNING.TIE_BIND",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "TRIUMPH_OFFSET": {
+      "registeredLeaf": "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING.TRIUMPH_OFFSET",
+      "phantom": false,
+      "realHome": null,
+      "note": ""
+    },
+    "WAR_CRISIS_ARCHETYPES_RATE_PRESS": {
+      "phantom": true,
+      "realHome": "src/domain/worldPulse/populationDynamics.js:306",
+      "note": "a bare literal with no name; the band cites a constant that does not exist."
+    },
+    "economicAdj_divisor_400": {
+      "phantom": true,
+      "realHome": "src/domain/worldPulse/coup.js:134",
+      "note": "a bare literal with no name; the band cites a constant that does not exist."
+    }
+  }
+}

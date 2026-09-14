@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 132,
+ "firstTs": "2026-09-12T00:38:19.447Z",
+ "lastTs": "2026-09-12T00:52:25.856Z",
+ "tools": {
+  "Bash": 33
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "s sentence pin); three of four fronted-pressure openers removed by tic-count rather than by a wall; vid 3's numbered line rebuilt on a refiner's judgment about a mirrored frame; two faces deliberately kept verbatim; and the §21.2 keep-or-revert test — no new failing state introduced, nothing banked.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "ad78f92f11b049273",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-ad78f92f11b049273.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

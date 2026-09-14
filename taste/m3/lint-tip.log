@@ -1,0 +1,279 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneTASTE
+
+ ❯ tests/lint/proseCorpusBytes.test.js (18 tests | 2 failed) 22ms
+     × RAW is EXACT: above fails, below demands the row be lowered 10ms
+     × GZIP sits inside the 1 % band around its committed figure 1ms
+ ❯ tests/lint/tuningRegister.walker.test.js (75 tests | 1 failed) 14334ms
+     × the measured tree matches the committed inventory exactly 22ms
+ ❯ tests/lint/proseWiringCensus.walker.test.js (72 tests | 2 failed) 17134ms
+     × the corpus is a marginal-controlled grid whose TIER axis is balanced 26ms
+     × the occurrence bound is the WILSON lower bound, and the pair distribution is printed at it 2ms
+ ❯ tests/lint/composeStateProseFence.test.js (9 tests | 1 failed) 3180ms
+     × all six exist and import NOTHING 15ms
+ ❯ tests/lint/domainAnyCastBaseline.test.js (19 tests | 4 failed) 652ms
+     × no file exceeds its baseline (new files get 0) — fix the types, do not widen 15ms
+     × baseline exactly matches the tree (airtight against any drift mode) 17ms
+     × ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path) 2ms
+     × ⛔ every LIVE declared row is refused against the LIVE register 14ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/composeStateProseFence.test.js > the six candidates leaves are PURE HEADLESS LEAVES (ARCH §4.1, M-F7) > all six exist and import NOTHING
+AssertionError: a candidates leaf that grew a dependency: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/stateProse/defenseStateProseCandidates.js: ../../corruption.js, ./defenseStateProse.js",
++ ]
+
+ ❯ tests/lint/composeStateProseFence.test.js:339:67
+    337|       .map((leaf) => `${leaf}: ${specifiersIn(read(leaf)).join(', ')}`)
+    338|       .filter((row) => !row.endsWith(': '));
+    339|     expect(importing, 'a candidates leaf that grew a dependency').toEq…
+       |                                                                   ^
+    340|     expect(CANDIDATE_LEAVES.length, 'one leaf per desk').toBe(6);
+    341|     for (const leaf of CANDIDATE_LEAVES) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+AssertionError: any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an existing one) only moves the red from this arm to the ceiling arm:
+  src/domain/display/stateProse/defenseStateProseCandidates.js: 2 any-holes (allowance 0)
+  src/domain/display/stateProse/generalStateProseCandidates.js: 1 any-holes (allowance 0): expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/stateProse/defenseStateProseCandidates.js: 2 any-holes (allowance 0)",
++   "src/domain/display/stateProse/generalStateProseCandidates.js: 1 any-holes (allowance 0)",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:393:7
+    391|       + ' ceilings are MONOTONE-DOWN literals, so a new row (or a rais…
+    392|       + ' one) only moves the red from this arm to the ceiling arm:\n …
+    393|     ).toEqual([]);
+       |       ^
+    394|   });
+    395|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+AssertionError: expected { …(171) } to deeply equal { …(169) }
+
+- Expected
++ Received
+
+@@ -109,11 +109,19 @@
+    },
+    "src/domain/display/stateProse/causalDossierProse.js": {
+      "any": 1,
+      "suppress": 0,
+    },
++   "src/domain/display/stateProse/defenseStateProseCandidates.js": {
++     "any": 2,
++     "suppress": 0,
++   },
+    "src/domain/display/stateProse/dmFieldProjection.js": {
++     "any": 1,
++     "suppress": 0,
++   },
++   "src/domain/display/stateProse/generalStateProseCandidates.js": {
+      "any": 1,
+      "suppress": 0,
+    },
+    "src/domain/display/threatAssessment.js": {
+      "any": 1,
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:435:27
+    433|     // src/domain under an exact-equality check — the declared three s…
+    434|     // different, attributed, capped expected value.
+    435|     expect(current.files).toEqual(expectedFiles());
+       |                           ^
+    436|     const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a…
+    437|     expect(current.total).toBe(baseline.total + declaredExcess);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+AssertionError: undeclared overruns:
+  src/domain/display/stateProse/defenseStateProseCandidates.js: 2 any / 0 suppress against baseline 0/0
+  src/domain/display/stateProse/generalStateProseCandidates.js: 1 any / 0 suppress against baseline 0/0: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/stateProse/defenseStateProseCandidates.js: 2 any / 0 suppress against baseline 0/0",
++   "src/domain/display/stateProse/generalStateProseCandidates.js: 1 any / 0 suppress against baseline 0/0",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:564:78
+    562|       }
+    563|     }
+    564|     expect(undeclared, `undeclared overruns:\n  ${undeclared.join('\n …
+       |                                                                              ^
+    565|   });
+    566|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+AssertionError: a clean-tip --update would still move the committed register: expected { …(169) } to deeply equal { …(167) }
+
+- Expected
++ Received
+
+@@ -109,11 +109,19 @@
+    },
+    "src/domain/display/stateProse/causalDossierProse.js": {
+      "any": 1,
+      "suppress": 0,
+    },
++   "src/domain/display/stateProse/defenseStateProseCandidates.js": {
++     "any": 2,
++     "suppress": 0,
++   },
+    "src/domain/display/stateProse/dmFieldProjection.js": {
++     "any": 1,
++     "suppress": 0,
++   },
++   "src/domain/display/stateProse/generalStateProseCandidates.js": {
+      "any": 1,
+      "suppress": 0,
+    },
+    "src/domain/display/threatAssessment.js": {
+      "any": 1,
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:694:88
+    692|     // …and what it WOULD write is exactly the register that is commit…
+    693|     // `--update` on a clean tip today is a no-op rather than a 12-ins…
+    694|     expect(next.files, 'a clean-tip --update would still move the comm…
+       |                                                                                        ^
+    695|     expect(next.total).toBe(baseline.total);
+    696|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/lint/proseCorpusBytes.test.js > the prose byte ratchet — the roster and the measurement (ARCH §10) > RAW is EXACT: above fails, below demands the row be lowered
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/dossierStateProse/defense.generated.js: grew to 158547 raw bytes, over the committed 154593. Append a declared row to scripts/.prose-byte-baseline.json naming the car and the delta, and move this number onto 158547.",
++   "src/data/dossierStateProse/general.generated.js: grew to 250573 raw bytes, over the committed 249940. Append a declared row to scripts/.prose-byte-baseline.json naming the car and the delta, and move this number onto 250573.",
++   "src/data/proseNorms.generated.js: grew to 20245 raw bytes, over the committed 19938. Append a declared row to scripts/.prose-byte-baseline.json naming the car and the delta, and move this number onto 20245.",
++ ]
+
+ ❯ tests/lint/proseCorpusBytes.test.js:157:19
+    155|       }
+    156|     }
+    157|     expect(drift).toEqual([]);
+       |                   ^
+    158|   });
+    159|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/lint/proseCorpusBytes.test.js > the prose byte ratchet — the roster and the measurement (ARCH §10) > GZIP sits inside the 1 % band around its committed figure
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/dossierStateProse/defense.generated.js: gzip is 23534 against the committed 23039, a move of 495 bytes, outside the 1 % band. A payload change reds the RAW arm first, so a gzip-only move this large means the zlib build changed: re-measure and move the row, saying so.",
++   "src/data/proseNorms.generated.js: gzip is 4363 against the committed 4315, a move of 48 bytes, outside the 1 % band. A payload change reds the RAW arm first, so a gzip-only move this large means the zlib build changed: re-measure and move the row, saying so.",
++ ]
+
+ ❯ tests/lint/proseCorpusBytes.test.js:174:19
+    172|       }
+    173|     }
+    174|     expect(drift).toEqual([]);
+       |                   ^
+    175|   });
+    176|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the RATE corpus, its per-tier arm and the occurrence bound > the corpus is a marginal-controlled grid whose TIER axis is balanced
+AssertionError: pools that fired somewhere on the grid: expected 276 to be 271 // Object.is equality
+
+- Expected
++ Received
+
+- 271
++ 276
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2113:72
+    2111|     // impaired-house lens could not either. This is the corpus every …
+    2112|     // from, so it is also the reason the departure line and the per-t…
+    2113|     expect(rate.rows.length, 'pools that fired somewhere on the grid')…
+       |                                                                        ^
+    2114|     // The one-config 200-town probe reached 181; the grid reaches mor…
+    2115|     expect(rate.rows.length, 'more than the single-configuration probe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the RATE corpus, its per-tier arm and the occurrence bound > the occurrence bound is the WILSON lower bound, and the pair distribution is printed at it
+AssertionError: over every fired pool: expected 276 to be 271 // Object.is equality
+
+- Expected
++ Received
+
+- 271
++ 276
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2255:73
+    2253|     expect(committed.rate.departureReport.uncommon, 'the departure bit…
+    2254|     expect(committed.rate.departureReport.uncommon
+    2255|       + committed.rate.departureReport.common, 'over every fired pool'…
+       |                                                                         ^
+    2256|   });
+    2257|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the measured tree matches the committed inventory exactly
+AssertionError: the inventory is EXACT, both ways, including digests, leaves and dependents. A tuning value that moved without a refreeze is exactly the event this register exists to make visible. If the movement is legitimate, refreeze it and say why; do not edit this file by hand.: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/corruption.js#CAPTURE_TUNING: dependents moved",
++   "src/domain/corruption.js#CORRUPTION_TUNING: dependents moved",
++   "src/domain/corruption.js#DEITY_CORRUPTION_TUNING: dependents moved",
++   "src/domain/corruption.js#DEITY_LAW_TUNING: dependents moved",
++   "src/domain/corruption.js#GUILD_TUNING: dependents moved",
++   "src/domain/corruption.js#PATRONAGE_TUNING: dependents moved",
++ ]
+
+ ❯ tests/lint/tuningRegister.walker.test.js:415:49
+    413|       + ' dependents. A tuning value that moved without a refreeze is …
+    414|       + ' register exists to make visible. If the movement is legitima…
+    415|       + ' why; do not edit this file by hand.').toEqual([]);
+       |                                                 ^
+    416|   });
+    417|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  5 failed | 150 passed (155)
+      Tests  10 failed | 2531 passed (2541)
+   Start at  22:34:18
+   Duration  138.91s (transform 24.81s, setup 5.55s, import 201.18s, tests 680.55s, environment 22ms)
+

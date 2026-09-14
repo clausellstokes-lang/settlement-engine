@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 71,
+ "firstTs": "2026-09-09T15:26:10.186Z",
+ "lastTs": "2026-09-09T15:33:03.180Z",
+ "tools": {
+  "Bash": 18,
+  "Read": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "older cited anywhere (SOURCE-UNRESOLVED obeyed) · slot set identical within every variant (variant 3 slotless throughout) · `{settlement}` opens 2 of 16 wordings, in non-adjacent variants · the CONTRAST closes exactly one variant (v2), licensed by sibling bands `WEAK`/`STRONG` of the same state key.",
+ "run": "wf_b6204819-335",
+ "agent": "ab5c6f80e5cb564a5",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_b6204819-335/agent-ab5c6f80e5cb564a5.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

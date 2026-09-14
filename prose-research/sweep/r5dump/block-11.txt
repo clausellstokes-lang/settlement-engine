@@ -1,0 +1,349 @@
+### [672] VERIFIED_VERBATIM  {other: frequency not presence is the tell}
+CLAIM: Guo argues that the devices themselves are not the difference: a good writer uses these devices sparingly and with intention, while AI litters them throughout its writing indiscriminately.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: a good writer uses these devices sparingly, and with intention
+TRUE: good writer uses these devices sparingly, and with intention; AI litters
+NOTE: Same raw page, section 'Pattern Matching': 'The main difference is that a good writer uses these devices sparingly, and with intention... AI litters them throughout its writing indiscriminately.' Preceded by 'human writers (even good ones!) use these patterns too', which supports the 'devices themselves are not the difference' limb.
+
+### [673] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Guo states that AI writing detectors do not work and produce false positives at alarming rates.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: They produce false positives at alarming rates
+TRUE: AI writing detectors don't work. They produce false positives at alarming rates
+NOTE: Same raw page, section 'Pattern Matching': 'so-called "AI writing detectors" don't work. They produce false positives at alarming rates, flagging human-written content as AI-generated based on crude heuristics.' Both limbs verbatim.
+
+### [674] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Guo says his own defence against AI slop is to cultivate specificity, writing things rooted in particular knowledge and tangible experience, which he says AI still struggles to replicate convincingly.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: to write things rooted in particular knowledge and tangible experience
+TRUE: cultivate specificity... things AI still struggles to replicate convincingly
+NOTE: Same raw page, closing section 'Articulate Architecture': 'my own defense against AI slop isn't to worry too much about style and structure. It's to cultivate specificity: to write things rooted in particular knowledge and tangible experience... These are things that AI still struggles to replicate convincingly.' All limbs verbatim; the page's 'These are things' covers specificity plus voice and point of view.
+
+### [675] VERIFIED_VERBATIM  {model era drift}
+CLAIM: Guo reports anecdotally that GPT-4o produces emoji-led bullet lists more than its predecessors and, anecdotally, more than GPT-5, and that he rarely sees Claude do it.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: GPT-4o does this more than its predecessors
+TRUE: GPT-4o does this more than its predecessors (anecdotally, more than GPT-5)
+NOTE: Same raw page, section 'Lists (And Emojis)': 'I've noticed that GPT-4o does this more than its predecessors (and anecdotally, more than GPT-5). It's rare for me to see Claude do it, though that may be biased by my system prompts.' 'this' refers to emoji-led bullet lists in professional contexts, matching the claim. All three limbs supported.
+
+### [676] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Scalzi wrote in February 2023 that the AI-generated stories then flooding science fiction magazines are kinda trash.
+SRC: John Scalzi, novelist, Whatever, 23 February 2023 | https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/
+QUOTE: all these generated stories are kinda trash
+TRUE: all these generated stories are kinda trash
+NOTE: Raw WordPress HTML fetched (200), 'Posted on February 23, 2023'. Opening paragraph: 'Technically yes, as this New York Times story about people flooding science fiction magazines with AI-generated story submissions makes evident. But realistically, no, because all these generated stories are kinda trash...' Date and flooding limbs both supported (Scalzi attributes the flooding to scamsters using AI, which the claim does not contradict).
+
+### [677] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Scalzi argues that a single prompter sees one output and may find it original, but an editor sees the current AI tropes dozens of times with each new iteration of the generators.
+SRC: John Scalzi, novelist, Whatever, 23 February 2023 | https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/
+QUOTE: see the current AI tropes dozens of times
+TRUE: an editor will see the current AI tropes dozens of times
+NOTE: Same raw page, paragraph beginning 'If this is indeed mostly scamsters': 'if you're prompting an AI to vomit out text, that one exposure you have to it might make it seem like it's generated something sufficiently original, especially if you otherwise know very little about the genre. But if you're an editor, you'll see the current AI tropes dozens of times with each new iteration.' Same paragraph supplies 'each new iteration of AI text generators'. All limbs verbatim.
+
+### [678] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Scalzi argues that leaving prose quality aside, the sheer repetition of elements across generated submissions is by itself enough to remove the material from serious editorial consideration.
+SRC: John Scalzi, novelist, Whatever, 23 February 2023 | https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/
+QUOTE: the sheer repetition of elements will remove the material from serious consideration
+TRUE: Leaving aside the quality of the prose entirely, the sheer repetition of elements will remove the material from serious consideration.
+NOTE: Raw live page (curl, browser UA, HTTP 200). Quote exact. Editorial framing supported by the same paragraph: 'if you're an editor, you'll see the current AI tropes dozens of times with each new iteration.'
+
+### [679] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Scalzi describes AI as a fast, infinite generator of competently-assembled bullshit with no ability to tell truth from nonsense.
+SRC: John Scalzi, novelist, Whatever, 23 February 2023 | https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/
+QUOTE: a fast, infinite generator of competently-assembled bullshit
+TRUE: If you want a fast, infinite generator of competently-assembled bullshit, AI is your go-to source.
+NOTE: Raw live page. Quote exact. Second limb supported in the same paragraph: 'it has no ability to differentiate between truth and nonsense.'
+
+### [680] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Scalzi frames the gap as one between text that is serviceable on the sentence level and text that is actually good, and says closing it takes so much human work that skipping the generation step would be less work.
+SRC: John Scalzi, novelist, Whatever, 23 February 2023 | https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/
+QUOTE: serviceable on the sentence level
+TRUE: The amount of work required by a human to make AI-generated text go from 'serviceable on the sentence level' to 'actually good' is enough that one wonders why one wouldn't just skip the AI-generating text part entirely. It would be less work.
+NOTE: Raw live page. Quote exact and both limbs (the serviceable/actually-good gap, and skipping the generation step being less work) are in one sentence pair.
+
+### [681] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Scalzi states in February 2026 that he does not use AI in his published text partly because he writes better than AI can or ever will.
+SRC: John Scalzi, novelist, Whatever, 14 February 2026 | https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/
+QUOTE: I write better than
+TRUE: But mostly, it's because I write better than 'AI' can or ever will, and I can do it with far less energy draw.
+NOTE: Raw live page, dated 'Posted on February 14, 2026', numbered point 1, which opens 'I don't and won't use "AI" in the text of any of my published work.' Page says 'mostly'; the claim's weaker 'partly' is still supported since the post lists several reasons.
+
+### [682] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Scalzi asserts in February 2026 that there is no statistical model that can create what is uniquely you.
+SRC: John Scalzi, novelist, Whatever, 14 February 2026 | https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/
+QUOTE: There is no statistical model that can create what is uniquely you
+TRUE: There is no statistical model that can create what is uniquely you.
+NOTE: Raw live page. Quote exact, and it is the final sentence of the point-10 closing paragraph, immediately preceding the '- JS' sign-off, as the claim's page hint states.
+
+### [683] VERIFIED_VERBATIM  {model era drift}
+CLAIM: A commenter using the name Fatman argues on Scalzi's blog that although LLMs have improved considerably at pattern-recognition tasks, more powerful software has so far not led to better machine-generated fiction.
+SRC: 'Fatman', a reader commenting on John Scalzi's Whatever, 15 February 2026 | https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/
+QUOTE: more powerful software has so far not led to better machine-generated fiction
+TRUE: Over the past couple of years, LLMs have improved considerably in performing patter-recognition tasks. ... But more powerful software has so far not led to better machine-generated fiction.
+NOTE: Raw live page comment thread; comment byline 'Fatman / February 15, 2026, 9:50 am' matches exactly. Quote exact. The pattern-recognition limb is the preceding sentence (original contains the typo 'patter-recognition').
+
+### [684] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: A commenter using the name Quill argues on Scalzi's blog that AI will be better at writing than Scalzi within roughly two to seven years.
+SRC: 'Quill', a reader commenting on John Scalzi's Whatever, quoted by another commenter, February 2026 | https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/
+QUOTE: AI will be better at writing than you are
+TRUE: No, John. You do not write better than AI ever will. At some point, perhaps in two years, perhaps in seven, AI will be better at writing than you are.
+NOTE: Raw live page. Original is Quill's own comment, 'February 15, 2026, 1:01 am'; Fatman re-quotes it verbatim at 9:50 am, so the claim's 'quoted by another commenter' also holds. Note the page hedges ('At some point, perhaps in two years, perhaps in seven'); the claim's 'within roughly two to seven years' is a fair but slightly tighter rendering.
+
+### [685] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Wendig argues that a generative model does not conjure an answer but an answer-shaped thing, filling the space with the shape of what was asked for.
+SRC: Chuck Wendig, novelist, Terribleminds, 21 May 2025 | https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/
+QUOTE: It will conjure not an answer, but an answer-shaped thing
+TRUE: It is you giving it the parameters of a block of text, and saying, 'Fill this space with the shape of the thing I'm asking about.' It will conjure not an answer, but an answer-shaped thing.
+NOTE: Live URL soft-404s to the site homepage for non-browser clients (HTTP 200 but wrong document; a nonsense slug returns the same page). Verified on the Wayback raw capture 20260618213915id_ and confirmed identical in captures 20250524060542id_ and 20250530191023id_. Quote exact; both limbs in consecutive sentences.
+
+### [686] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Wendig calls generative AI almost literally a super-fancy lorum ipsum generator.
+SRC: Chuck Wendig, novelist, Terribleminds, 21 May 2025 | https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/
+QUOTE: a super-fancy lorum ipsum generator
+TRUE: It is, almost literally, a super-fancy lorum ipsum generator.
+NOTE: Wayback raw captures (three, identical). Quote exact including the post's own misspelling 'lorum', and 'almost literally' is Wendig's own wording.
+
+### [687] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: A commenter using the name bluespiderwort writes on Wendig's post that AI paragraphs have words, sometimes big words, and lots of sentences, but frequently say nothing.
+SRC: 'bluespiderwort', a reader commenting on Chuck Wendig's Terribleminds, 21 May 2025 | https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/
+QUOTE: The paragraphs have words, sometimes big words
+TRUE: The paragraphs have words, sometimes big words, and lots of sentences, but they frequently say nothing.
+NOTE: Wayback raw captures. Comment byline 'bluespiderwort says:' timestamped 'May 21, 2025 - 6:51 PM' on that post's thread. Quote exact; the full sentence carries the 'lots of sentences, but frequently say nothing' limb.
+
+### [688] VERIFIED_VERBATIM  {other: no model of what the draft is doing}
+CLAIM: Sloan reports that when he tried to make Google's Wordcraft AI play detective in a locked-room mystery it had no idea what was happening a few paragraphs in.
+SRC: Robin Sloan, novelist, newsletter, November 2022 | https://www.robinsloan.com/newsletters/authors-note/
+QUOTE: it had no idea what was happening
+TRUE: Paragraphs into my nascent mystery, it had no idea what was happening; or at least, not enough of an idea to 'participate' in any meaningful way.
+NOTE: Raw live page (robinsloan.com, HTTP 200). Quote exact. Supporting limbs on the same page: the story was 'commissioned by Google and produced using a new AI-powered editor called Wordcraft'; Sloan 'liked the idea of giving the AI the role of the detective' in 'some kind of locked-room mystery'.
+
+### [689] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Sloan reports that the model knew he was writing a mystery and reached for the appropriate terms and tropes, but that this was nowhere close to sufficient.
+SRC: Robin Sloan, novelist, newsletter, November 2022 | https://www.robinsloan.com/newsletters/authors-note/
+QUOTE: It knew I was writing a mystery
+TRUE: It knew I was writing a mystery; it reached for the appropriate terms and tropes; but that wasn't anywhere close to being sufficient.
+NOTE: Raw live page. Quote exact and every limb of the claim is in this single sentence.
+
+### [690] VERIFIED_VERBATIM  {steerability}
+CLAIM: Sloan reports that the project only worked once he established a fenced-in space for the AI, assigning it a litany of grisly deaths and fantasy character names to riff on rather than any structural role.
+SRC: Robin Sloan, novelist, newsletter, November 2022 | https://www.robinsloan.com/newsletters/authors-note/
+QUOTE: a fenced-in space for the AI
+TRUE: Then, I cracked it, by establishing a fenced-in space for the AI to contribute what it could.
+NOTE: Raw live page. Quote exact. Next paragraph supplies the assignment limbs: 'very good at riffing', 'This new story called for a litany of grisly deaths, so, I asked the AI to dream up grisly deaths. I asked it, also, to tell me the names of the dead: characters from a fantasy saga.' 'Rather than any structural role' is not phrased that way on the page but is entailed by the abandoned detective role that 'didn't work at all' immediately above.
+
+### [691] VERIFIED_VERBATIM  {steerability}
+CLAIM: Sloan reports that the AI did not make a useful or pleasant writing partner because even a state-of-the-art language model cannot presently understand what a fiction writer is trying to accomplish in an evolving draft.
+SRC: Robin Sloan, novelist, newsletter, November 2022 | https://www.robinsloan.com/newsletters/authors-note/
+QUOTE: did not make a useful or pleasant writing partner
+TRUE: But, third: I have to report that the AI did not make a useful or pleasant writing partner. Even a state-of-the-art language model cannot presently 'understand' what a fiction writer is trying to accomplish in an evolving draft.
+NOTE: Raw live page. Quote exact, and it is indeed the third of the 'Three thoughts, to close.' Both limbs are consecutive sentences.
+
+### [692] VERIFIED_VERBATIM  {gloss and over-explaining}
+CLAIM: Doctorow refers in passing to the verbosity of chatbot responses as a reason forwarding transcripts imposes on the reader.
+SRC: Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026 | https://pluralistic.net/2026/03/02/nonconsensual-slopping/
+QUOTE: the verbosity of chatbot responses
+TRUE: forwarding the transcripts of those sessions doubly so (perhaps triply so, given the verbosity of chatbot responses)
+NOTE: Raw live page (pluralistic.net, HTTP 200), 'No one wants to read your AI slop (02 Mar 2026)', byline Cory Doctorow, March 2, 2026. Quote exact, inside the paragraph that begins 'The same is true of your conversations with chatbots', and it is genuinely a parenthetical aside - 'in passing' is accurate.
+
+### [693] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Doctorow argues that prompting a model for a rebuttal yields a blob of plausible sentences that is just stochastic word-salad until a human who understands the issue verifies it line by line.
+SRC: Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026 | https://pluralistic.net/2026/03/02/nonconsensual-slopping/
+QUOTE: you have generated a blob of plausible sentences
+TRUE: you have generated a blob of plausible sentences
+NOTE: Raw page (curl, browser UA). Para. 'You haven't generated a rebuttal: you have generated a blob of plausible sentences ... until a human being who understands the issue goes through the AI output line by line and verifies it, it's just stochastic word-salad.' The prior para. supplies the 'ask an AI to generate a rebuttal for you' limb. Every limb supported.
+
+### [694] VERIFIED_VERBATIM  {gloss and over-explaining}
+CLAIM: Doctorow describes what a chatbot costlessly produces as infinite volumes of verbose, plausible-seeming topical sentences.
+SRC: Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026 | https://pluralistic.net/2026/03/02/nonconsensual-slopping/
+QUOTE: infinite volumes of verbose, plausible-seeming topical sentences
+TRUE: generate infinite volumes of verbose, plausible-seeming topical sentences
+NOTE: Raw page. 'The fact that you can costlessly (to you) generate infinite volumes of verbose, plausible-seeming topical sentences ... time to mark your chatbot's homework.' Costless, infinite-volume and chatbot limbs all present.
+
+### [695] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Mark Williams rejects the premise of AI-spotting, arguing that machine writing does not carry a stable, visible fingerprint.
+SRC: Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026 | https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/
+QUOTE: machine writing carries a stable, visible fingerprint
+TRUE: rests on the idea ... It doesn't
+NOTE: Raw page, section 'Full disclosure'. 'That's not a gotcha aimed at you, the reader. It's aimed at the premise. The whole LinkedIn cottage industry of "spot the bot" rests on the idea that machine writing carries a stable, visible fingerprint. It doesn't.' Byline Mark Williams, Aug 16 2026 (article:published_time 2026-08-16).
+
+### [696] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Williams argues that what the supposed AI tells actually mark is the fingerprint of editing - clarity, structure, transitions, a point that goes somewhere - which is a feature of good writing whoever produced the first draft.
+SRC: Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026 | https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/
+QUOTE: What it carries is the fingerprint of editing
+TRUE: feature of good writing regardless of who or what produced
+NOTE: Raw page, 'Full disclosure'. 'What it carries is the fingerprint of editing - clarity, structure, transitions, a point that goes somewhere - which is a feature of good writing regardless of who or what produced the first draft.' Claim's 'whoever produced the first draft' is a faithful paraphrase of 'who or what'.
+
+### [697] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Williams argues that classifiers cannot reliably separate AI prose from human prose because the models were trained on human prose, so the categories overlap by construction.
+SRC: Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026 | https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/
+QUOTE: the categories overlap by construction
+TRUE: classifiers can't reliably separate AI prose from human prose
+NOTE: Raw page, section beginning 'So here's the actual argument.' (line follows it): 'The classifiers can't reliably separate AI prose from human prose because the models were trained on human prose - the categories overlap by construction.' Section pointer correct.
+
+### [698] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Williams argues that detectors falsely flag non-native English writing because ESL prose tends toward simpler sentence-length variance, safer phrasing and fewer idioms, the very features detectors treat as tells.
+SRC: Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026 | https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/
+QUOTE: simpler sentence-length variance, safer phrasing, fewer idioms
+TRUE: ESL prose tends toward exactly the features the detectors treat as tells
+NOTE: Raw page, same section. 'And the false positives aren't randomly distributed. Studies on GPT-detection tools have flagged non-native English writing at dramatically higher rates than native writing, because ESL prose tends toward exactly the features the detectors treat as tells: simpler sentence-length variance, safer phrasing, fewer idioms.' False-positive limb explicit.
+
+### [699] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Williams discloses that the twenty satirical tell-tale signs in his own piece were not written by him but gathered from several AI models, whose sharpest lines he picked and presented as one voice.
+SRC: Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026 | https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/
+QUOTE: I put a version of this challenge to several AI models
+TRUE: None of those twenty example as written were mine
+NOTE: Raw page, 'Full disclosure'. 'None of those twenty example as written were mine. True, a few had independently occurred to me, but the truth is I put a version of this challenge to several AI models, gathered their answers, picked the sharpest lines, and presented them here as one voice.' Satirical framing supported by the 'twenty different comedians'/'if you laughed' wording.
+
+### [700] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Strauss reports that the AI-driven author scams she tracks are marked by hyper-personalization coupled with lavish praise, which she attributes to generative AI.
+SRC: Victoria Strauss, Writer Beware, 28 August 2026 | https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/
+QUOTE: hyper-personalization coupled with lavish praise
+TRUE: hyper-personalization coupled with lavish praise (thanks to generative AI)
+NOTE: Raw page (writerbeware.blog, datePublished 2026-08-28, Victoria Strauss). Para. 'The one thing the scammers haven't changed or adapted is the set of markers ...: hyper-personalization coupled with lavish praise (thanks to generative AI) ...'. The generative-AI attribution is the page's own parenthetical.
+
+### [701] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Strauss reports that receiving multiple flattering yet suspiciously similar solicitations every day is itself what makes the AI-written approaches start to seem inauthentic.
+SRC: Victoria Strauss, Writer Beware, 28 August 2026 | https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/
+QUOTE: suspiciously similar solicitations every day
+TRUE: multiple flattering yet suspiciously similar solicitations every day
+NOTE: Raw page, same para. '(when you're getting multiple flattering yet suspiciously similar solicitations every day, they start to seen a tad inauthentic)' [sic 'seen']. Page frames it as the self-undercutting of the scammers' extreme aggressiveness, which is the claim's point.
+
+### [702] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: Strauss identifies friendly, open-ended inquiry as a common ingredient of AI marketing solicitations, used to incentivize a reply and draw the writer into a long exchange.
+SRC: Victoria Strauss, Writer Beware, 28 August 2026 | https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/
+QUOTE: friendly, open-ended inquiry is a common ingredient
+TRUE: intended to incentivize response ... draw the writer in
+NOTE: Raw page, German-language solicitation section. 'This kind of friendly, open-ended inquiry is a common ingredient of AI marketing solicitations: it's intended to incentivize response, so that the scammer can draw the writer in over an often-lengthy series of email exchanges.' Section pointer correct.
+
+### [703] VERIFIED_VERBATIM  {steerability}
+CLAIM: In a pre-registered study of 81 participants post-editing LLM drafts for personal writing tasks, the post-edited text still remained stylistically closer to LLM text than to the participants' own unassisted control text.
+SRC: Baumler, Bao, Nghiem, Yang, Carpuat and Daume III, University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: post-edited text still remains stylistically closer in style to LLM text
+TRUE: pre-registered online study (n=81) ... post-edit LLM-generated drafts
+NOTE: Raw arXiv HTML. Abstract: 'We conduct a pre-registered online study (n=81) in which participants post-edit LLM-generated drafts for writing tasks where personal style matters to them ... However, post-edited text still remains stylistically closer in style to LLM text than to participants' unassisted control text.' All three limbs (pre-registered, 81, personal-style tasks) verified; 81 is the analysed sample of 100 recruited.
+
+### [704] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: The same study measured post-edited writing as significantly more stylistically homogeneous than unassisted writing, at p = .0002 with Hedges g = 1.42 and a 95% CI of [1.33, 1.51].
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: post-edited writing is indeed more stylistically homogeneous than unassisted writing
+TRUE: p=.0002, g=1.42, 95% CI [1.33, 1.51]
+NOTE: Raw arXiv HTML Sec. 6.2 'Post-Editing and Stylistic Homogeneity': 'post-edited writing is indeed more stylistically homogeneous than unassisted writing (H2a, p=.0002, g=1.42, 95% CI: [1.33, 1.51])'. Sec. 5 confirms g is Hedges' g with bootstrap CIs, and significance survives Benjamini-Hochberg.
+
+### [705] VERIFIED_VERBATIM  {other: which features survive human editing}
+CLAIM: The same study found participants' post-edited text significantly more stylistically similar to other participants' post-edited text than to their own control writing, showing that some features of the LLM stylistic fingerprint are consistently preserved after post-editing across different participants.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: are consistently preserved after post-editing across different participants
+TRUE: significantly more stylistically similar to other participants' post-edited text
+NOTE: Raw arXiv HTML Sec. 6.2: 'participants' post-edited text is significantly more stylistically similar to other participants' post-edited text than to their own control text (H2c, p=.0002, g=1.14, 95% CI: [1.02, 1.26]) showing that some features of the stylistic fingerprint of LLM-generated text are consistently preserved after post-editing across different participants.'
+
+### [706] VERIFIED_VERBATIM  {other: which features survive human editing}
+CLAIM: The study concludes that the human-like changes made during post-editing are meaningfully unique to individuals while the AI-like aspects that are not addressed during post-editing are meaningfully shared between participants.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: the AI-like aspects that are not addressed during post-editing
+TRUE: human-like changes ... meaningfully unique to individuals
+NOTE: Raw arXiv HTML Sec. 6.2: 'Between H1a' and H2c, we can see that human-like changes made during post-editing are meaningfully unique to individuals while the AI-like aspects that are not addressed during post-editing are meaningfully shared between participants.' Both limbs verbatim.
+
+### [707] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: In the study's qualitative coding, some participant edits removed words or punctuation commonly associated with LLM-generated text, the examples given being em dashes and the word dive, while others added contractions.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: some edits removed words or punctuation commonly associated with LLM-generated text
+TRUE: (e.g., em dashes or "dive") or added contractions
+NOTE: Raw arXiv HTML Sec. 6.4 'What Are(n't) Participants Editing?': 'some edits removed words or punctuation commonly associated with LLM-generated text (e.g., em dashes or "dive") or added contractions, while others reflected more idiosyncratic preferences'. Section pointer and both examples correct.
+
+### [708] VERIFIED_VERBATIM  {adjective and adverb discipline}
+CLAIM: The study reports that participants sometimes simplified sentence structure or removed flowery language, giving the example of cutting a phrase about a spirit whose generosity knew no bounds down to an amazing man.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: participants sometimes simplified sentence structure or removed flowery language
+TRUE: participants sometimes simplified sentence structure or removed flowery language (e.g., changing “an amazing spirit, one whose generosity knew no bounds” to “an amazing man”)
+NOTE: §6.4 of arXiv:2604.24444v1 (27 Apr 2026, Baumler, Bao, Nghiem, Yang, Carpuat, Daumé III, Univ. of Maryland) carries the quoted clause word for word, including the exact eulogy example the claim paraphrases. Fetched raw HTML with a browser UA (HTTP 200, 372 KB).
+
+### [709] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: The same study observed that other participants added cliched expressions during post-editing, which the authors take as evidence that such language was not uniformly viewed as uncharacteristic.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: while others added clich
+TRUE: while others added clichéd expressions such as “She will forever be a part of our lives,” suggesting this language was not uniformly viewed as uncharacteristic
+NOTE: Same sentence in §6.4, immediately after the 708 clause. Both limbs — other participants ADDING clichés during post-editing, and the authors' inference that such language was not uniformly seen as uncharacteristic — are on the page verbatim.
+
+### [710] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: The study found a gap between perceived stylistic authenticity and model-measured similarity: post-edited text was often perceived by its own editor as representative of their personal style despite remaining detectable LLM stylistic traces.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: despite remaining detectable LLM stylistic traces
+TRUE: We find a gap between perceived stylistic authenticity and model-measured stylistic similarity, with post-edited text often perceived as representative of participants’ personal style despite remaining detectable LLM stylistic traces
+NOTE: Abstract, final sentence, matches the claim limb for limb; the quoted fragment appears word for word. §6.3 corroborates the mechanism (perceived self-similarity of post-edited text no lower than control despite LUAR showing it closer to LLM text).
+
+### [711] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: The study's exploratory results suggest that adoption of the post-editing workflow is limited less by the effort of adjusting style than by a perceived lack of interesting or original content in the LLM-generated drafts.
+SRC: Baumler et al., University of Maryland, arXiv:2604.24444, April 2026 | https://arxiv.org/html/2604.24444v1
+QUOTE: a perceived lack of interesting or original content in LLM-generated drafts
+TRUE: These exploratory results (expanded in §B.6) suggest that potential adoption of post-editing may be limited less by the effort required (e.g., adjusting style) and more by a perceived lack of interesting or original content in LLM-generated drafts
+NOTE: Closing sentence of §6.5 “(Why) Do Participants Like to Post-Edit?” — the quoted fragment is verbatim, and the page also marks the finding as exploratory, as the claim does.
+
+### [712] VERIFIED_VERBATIM  {register measured}
+CLAIM: Liang and colleagues measured LLM-assisted writing across four institutional registers from January 2022 to September 2024, on a corpus of 687,241 consumer complaints, 537,413 corporate press releases, 304.3 million job postings and 15,919 United Nations press releases.
+SRC: Weixin Liang, Yaohui Zhang, Mihai Codreanu, Jiayu Wang et al., Stanford and UW, arXiv:2502.09747, February 2025 | https://arxiv.org/html/2502.09747v1
+QUOTE: 687,241 consumer complaints, 537,413 corporate press releases
+TRUE: Our dataset includes 687,241 consumer complaints, 537,413 corporate press releases, 304.3 million job postings, and 15,919 United Nations (UN) press releases
+NOTE: Abstract of arXiv:2502.09747v1 (13 Feb 2025); all four counts, the four-domain scope and the Jan 2022–Sep 2024 window are verbatim, as is the quoted fragment. Authors confirmed on the page: Weixin Liang, Yaohui Zhang, Mihai Codreanu (Stanford Economics), Jiayu Wang (UW), Hancheng Cao, James Zou. Note the paper's own word is “domains”, not “institutional registers” — a framing gloss, not a factual limb.
+
+### [713] VERIFIED_VERBATIM  {register measured}
+CLAIM: The study estimates that LLM-assisted content in United Nations press releases rose from 3.1% in Q1 2023 to 10.1% in Q3 2023 and reached 13.7% by Q3 2024.
+SRC: Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025 | https://arxiv.org/html/2502.09747v1
+QUOTE: reaching 13.7% by Q3 2024
+TRUE: The initial phase was marked by a rapid increase from 3.1% in Q1 2023 to 10.1% in Q3 2023. This was followed by a slower, incremental rise, reaching 13.7% by Q3 2024
+NOTE: Results section on UN press releases, and repeated in the Fig. 1(d) caption as “(Q1 2023: 3.1% to Q3 2023: 10.1%), followed by a more gradual increase to 13.7% by Q3 2024”. Every figure in the claim is on the page.
+
+### [714] VERIFIED_VERBATIM  {register measured}
+CLAIM: The study estimates LLM-modified content in Newswire corporate press releases peaked at 24.3% in December 2023 and stabilised at 23.8% through September 2024.
+SRC: Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025 | https://arxiv.org/html/2502.09747v1
+QUOTE: peaking at 24.3% in December 2023 and stabilizing at 23.8%
+TRUE: Newswire saw rapid growth, peaking at 24.3% in December 2023 and stabilizing at 23.8% through September 2024
+NOTE: Results, corporate press releases — the quoted fragment is verbatim in the body text (the Fig. 1(b) caption states the same numbers as “reaching 24.3% by December 2023, stabilizing at 23.8% through September 2024”).
+
+### [715] VERIFIED_VERBATIM  {register measured}
+CLAIM: The study reports the consumer-complaint estimate rising from a baseline algorithm false positive rate of 1.5% to 15.3% by August 2023, with only a modest increase to 17.7% through August 2024.
+SRC: Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025 | https://arxiv.org/html/2502.09747v1
+QUOTE: rose sharply from a baseline algorithm false positive rate of 1.5% to 15.3%
+TRUE: rose sharply from a baseline algorithm false positive rate of 1.5% to 15.3% by August 2023. This rapid growth plateaued, with only a modest increase to 17.7% observed through August 2024
+NOTE: Results, consumer complaint domain (CFPB). The quoted fragment is verbatim and the “only a modest increase to 17.7%” limb is the paper's own wording.
+
+### [716] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Liang and colleagues state explicitly that their study did not directly measure homogenization, and only point to prior academic research as a reason to expect similar effects in job postings.
+SRC: Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025 | https://arxiv.org/html/2502.09747v1
+QUOTE: our study did not directly measure homogenization
+TRUE: While our study did not directly measure homogenization, prior research on the homogenization of LLM-generated content in academia [12, 13] suggests that similar effects could occur in job postings
+NOTE: Discussion of job postings. Quoted fragment verbatim; both limbs — the explicit non-measurement disclaimer and the appeal to prior academic research as the only basis for expecting the effect in job postings — are supported.
+
+### [717] VERIFIED_VERBATIM  {other: what a human editor sees first}
+CLAIM: Chakrabarty and colleagues hired professional writers to edit LLM-generated paragraphs and found the writers agree on undesirable idiosyncrasies in LLM-generated text, which the authors formalised into a seven-category taxonomy.
+SRC: Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024 | https://arxiv.org/html/2409.14509v3
+QUOTE: these writers agree on undesirable idiosyncrasies in LLM-generated text
+TRUE: we hired professional writers to edit paragraphs... We first found these writers agree on undesirable idiosyncrasies in LLM-generated text, formalizing it into a seven-category taxonomy
+NOTE: Abstract of arXiv:2409.14509v3 (26 Sep 2024); authors on the page are Tuhin Chakrabarty, Philippe Laban and Chien-Sheng Wu, all Salesforce AI Research. The paragraphs edited are the LLM-generated ones curated as the LAMP corpus, so the claim's “LLM-generated paragraphs” limb holds.
+
+### [718] VERIFIED_VERBATIM  {other: what a human editor sees first}
+CLAIM: The seven edit categories the study's professional writers converged on are Cliche, Unnecessary/Redundant Exposition, Purple Prose, Poor Sentence Structure, Lack of Specificity and Detail, Awkward Word Choice and Phrasing, and Tense Inconsistency.
+SRC: Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024 | https://arxiv.org/html/2409.14509v3
+QUOTE: 
+TRUE: Cliché / Unnecessary–Redundant Exposition / Purple Prose / Poor Sentence Structure / Lack of Specificity and Detail / Awkward Word Choice and Phrasing / Tense Inconsistency
+NOTE: All seven names appear verbatim, both as the §4.4.1–§4.4.7 subsection headings and as the Final Category column of Table 3, in exactly the claim's order. The claim carried an empty quote field, so the verbatim grade rests on the seven category names themselves matching the page word for word.
+
+### [719] VERIFIED_VERBATIM  {other: what a human editor sees first}
+CLAIM: The LAMP corpus consists of 1,057 LLM-generated paragraphs edited by professional writers according to that taxonomy.
+SRC: Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024 | https://arxiv.org/html/2409.14509v3
+QUOTE: 1,057 LLM-generated paragraphs edited by professional writers
+TRUE: we curated the LAMP corpus: 1,057 LLM-generated paragraphs edited by professional writers according to our taxonomy
+NOTE: Abstract, second contribution; the quoted fragment is verbatim and §5.1 repeats “18 writers who edited 1,057 LLM-generated paragraphs”.
+
+### [720] VERIFIED_VERBATIM  {other: what a human editor sees first}
+CLAIM: Eighteen professional writers produced 8035 fine-grained edits on those responses.
+SRC: Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024 | https://arxiv.org/html/2409.14509v3
+QUOTE: resulting in 8035 fine-grained edits
+TRUE: These responses... are further edited by 18 professional writers using the above-mentioned taxonomy, resulting in 8035 fine-grained edits
+NOTE: Introduction (§1) contribution bullet; the quoted fragment is verbatim. §5.1 corroborates: “18 writers who edited 1,057 LLM-generated paragraphs, gathering about 8 edits per paragraph, totaling 8,035 fine-grained edits.”
+
+### [721] VERIFIED_VERBATIM  {steerability}
+CLAIM: The models in that study were explicitly prompted to be original and were instructed not to use ornamental language and to focus on nuance, simplicity, and subtext, yet their output still drew the seven categories of expert edits.
+SRC: Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024 | https://arxiv.org/html/2409.14509v3
+QUOTE: Do not use ornamental language and focus on nuance, simplicity, and subtext
+TRUE: The prompt further specifies: “Try your best to be original, avoiding clichés or overused tropes. Do not use ornamental language and focus on nuance, simplicity, and subtext”
+NOTE: §4.1, with the full prompt repeated per venue in Appendix A Table 13 — the quoted sentence is verbatim in both places. The second limb holds too: those same 1,057 responses are the ones the 18 writers edited into 8,035 edits spanning the seven-category taxonomy (§4.5, Fig. 5(a)).

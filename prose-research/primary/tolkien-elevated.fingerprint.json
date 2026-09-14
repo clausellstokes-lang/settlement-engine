@@ -1,0 +1,147 @@
+{
+  "label": "tolkien-elevated",
+  "files": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/primary/raw/tolkien_elevated.txt"
+  ],
+  "paragraphs": 103,
+  "sentences": 623,
+  "wordsPerSentence": {
+    "mean": 24.2,
+    "sd": 16,
+    "p10": 7,
+    "p50": 21,
+    "p90": 46,
+    "shareUnder8": 0.1027,
+    "shareOver30": 0.2809,
+    "neighbourVariation": 0.646
+  },
+  "sentencesPerParagraph": 6.05,
+  "punctuation": {
+    "semicolonRate": 0.122,
+    "colonRate": 0.1252,
+    "emDashRate": 0.0482,
+    "questionRate": 0.0144,
+    "exclamationRate": 0.0273,
+    "parenthesisRate": 0.2247
+  },
+  "shapes": {
+    "antithesisRate": 0.0401,
+    "triadRate": 0.1091,
+    "participialOpenerRate": 0.008,
+    "whichTailRate": 0.0225,
+    "doubledAdjectiveRate": 0.0417,
+    "adverbsPerSentence": 0.392,
+    "thereIsOpenerRate": 0.0482,
+    "dialogueShare": 0.0032
+  },
+  "closers": {
+    "abstractNounRate": 0.0578,
+    "pronounRate": 0.0674,
+    "topClosers": [
+      [
+        "",
+        29
+      ],
+      [
+        "it",
+        17
+      ],
+      [
+        "me",
+        8
+      ],
+      [
+        "ring",
+        7
+      ],
+      [
+        "him",
+        6
+      ],
+      [
+        "world",
+        5
+      ],
+      [
+        "story",
+        5
+      ],
+      [
+        "time",
+        5
+      ],
+      [
+        "children",
+        4
+      ],
+      [
+        "them",
+        4
+      ],
+      [
+        "frodo",
+        4
+      ],
+      [
+        "all",
+        3
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "i",
+        96
+      ],
+      [
+        "it",
+        46
+      ],
+      [
+        "but",
+        46
+      ],
+      [
+        "the",
+        46
+      ],
+      [
+        "in",
+        25
+      ],
+      [
+        "he",
+        21
+      ],
+      [
+        "",
+        16
+      ],
+      [
+        "they",
+        15
+      ],
+      [
+        "and",
+        13
+      ],
+      [
+        "that",
+        13
+      ],
+      [
+        "this",
+        11
+      ],
+      [
+        "frodo",
+        10
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.0947
+  },
+  "runsOfThreeSameLengthBand": 0.199,
+  "presence": null,
+  "presenceReason": "the raw exemplar text is GONE from this machine — the `files` array points into the dead scratchpad d5b9a39f and 1 of 1 basename(s) do not resolve under primary/raw. Re-obtaining the text is an owner act (cost and IP); the three §13.2 lines are NULL rather than fabricated."
+}

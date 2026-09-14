@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 81,
+ "firstTs": "2026-09-09T17:59:19.637Z",
+ "lastTs": "2026-09-09T18:10:00.988Z",
+ "tools": {
+  "Bash": 14,
+  "Read": 7
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "lons or semicolons; no row opens on the proper-typed `{settlement}` slot (ARCH §2.5 T-F8); slot sets are constant inside each variant (variants 1 and 3 carry `{settlement}`, variant 2 carries none, exactly as shipped); zero pronoun closers; no two variants can share a two-word opener under any draw.",
+ "run": "wf_f9cf9a1d-188",
+ "agent": "a51a79cde25b7969d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_f9cf9a1d-188/agent-a51a79cde25b7969d.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

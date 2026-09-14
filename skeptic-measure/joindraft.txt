@@ -1,0 +1,44 @@
+ALIAS DRAFT · ARCH car 0f · SITTING §O.2 · MEASURED, NOTHING RATIFIED, NO LEAF WRITTEN
+  endpoints 89 · desk read roots 85 (15 excluded as the instrument's own table labels) · read paths 153
+  candidate rows 37 · endpoints with at least one candidate 15 · with none 74
+  by evidence: docblock 25 · generator-write 9 · identifier 3
+  RELATION ROWS THAT WOULD JOIN under this draft: 4 of 165 · by direction a->b 4
+  (the shipped join, unchanged and unratified: STRICT 0)
+    WOULD JOIN  consequence (a) condition:famine -> system:food_security
+    WOULD JOIN  consequence (a) condition:famine -> system:public_legitimacy
+    WOULD JOIN  consequence (a) condition:boom -> system:public_legitimacy
+    WOULD JOIN  consequence (b) signal:occupied -> cause:occupation
+  ── the draft, the forty strongest candidates ─────────────────────
+    cause:occupation                           -> war                        identifier       war.occupation
+    economicGates.military                     -> settlement.defenseProfile  identifier       settlement.defenseProfile.economicGates.military
+    system:food_security                       -> eco                        identifier       eco.foodSecurity.stockpile
+    cause:underfunded                          -> forces                     generator-write  src/generators/structuralValidator.js:588
+    condition:famine                           -> name                       generator-write  src/generators/stressNarrative.js:80
+    condition:famine                           -> row                        generator-write  src/generators/defenseGenerator.js:608
+    condition:siege                            -> name                       generator-write  src/generators/narrativeText.js:53
+    economicGates.disaster                     -> stress                     generator-write  src/generators/history/historyEventStrands.js:42
+    economicGates.military                     -> settlement.config          generator-write  src/generators/npc/factionLeaderSecret.js:56
+    economicGates.military                     -> stress                     generator-write  src/generators/npcGenerator.js:169
+    signal:occupied                            -> name                       generator-write  src/generators/stressNarrative.js:83
+    system:food_security                       -> settlement.config          generator-write  src/generators/defenseGenerator.js:552
+    cause:occupation                           -> reading                    docblock         src/domain/display/stateProse/warFaithStateProse.js:192
+    cause:occupation                           -> stress                     docblock         src/domain/display/stateProse/generalStateProse.js:1016
+    cause:occupation                           -> warBeat                    docblock         src/domain/display/stateProse/warFaithStateProse.js:463
+    condition:boom                             -> events                     docblock         src/domain/display/stateProse/generalStateProse.js:1010
+    condition:siege                            -> warBeat                    docblock         src/domain/display/stateProse/warFaithStateProse.js:463
+    condition:war_exhaustion                   -> ledger                     docblock         src/domain/display/stateProse/warFaithStateProse.js:214
+    condition:war_exhaustion                   -> reading                    docblock         src/domain/display/stateProse/warFaithStateProse.js:214
+    economicGates.economic                     -> name                       docblock         src/domain/display/stateProse/generalStateProse.js:486
+    economicGates.economic                     -> row                        docblock         src/domain/display/stateProse/defenseStateProse.js:334
+    economicGates.economic                     -> score                      docblock         src/domain/display/stateProse/defenseStateProse.js:334
+    economicGates.economic                     -> settlement.config          docblock         src/domain/display/stateProse/defenseStateProse.js:9
+    economicGates.economic                     -> settlement.defenseProfile  docblock         src/domain/display/stateProse/defenseStateProse.js:9
+    economicGates.economic                     -> stress                     docblock         src/domain/display/stateProse/generalStateProse.js:773
+    economicGates.internal                     -> court                      docblock         src/domain/display/stateProse/defenseStateProse.js:321
+    economicGates.internal                     -> row                        docblock         src/domain/display/stateProse/defenseStateProse.js:321
+    economicGates.monster                      -> readings.tier              docblock         src/domain/display/stateProse/defenseStateProse.js:421
+    economicGates.monster                      -> settlement.tier            docblock         src/domain/display/stateProse/defenseStateProse.js:421
+    signal:occupied                            -> stress                     docblock         src/domain/display/stateProse/generalStateProse.js:1016
+    signal:occupied                            -> war                        docblock         src/domain/display/stateProse/warFaithStateProse.js:183
+    system:defense_readiness                   -> score                      docblock         src/domain/display/stateProse/defenseStateProse.js:1441
+    system:food_security                       -> blockaded                  docblock         src/domain/display/stateProse/defenseStateProse.js:1264

@@ -1,0 +1,843 @@
+ATLANTIS
+Journal of the Spanish Association of Anglo-American Studies
+46.1 (June 2024): 131-148
+e-issn 1989-6840
+DOI: http://doi.org/10.28914/Atlantis-2024-46.1.08
+© The Author(s)
+Content is licensed under a Creative Commons Attribution NonCommercial ShareAlike 4.0 International Licence
+
+
+  Abandoning the Quest? High/Epic Fantasy and the Challenges of the
+                          Anthropocene
+
+                                    Weronika Łaszkiewicz
+                                      Uniwersytet w Białymstoku
+                                      w.laszkiewicz@uwb.edu.pl
+
+
+    The aim of this article is to determine why the prototypical form of high/epic fantasy
+    cannot effectively address the present environmental, social and political problems gathered
+    under the umbrella term of the Anthropocene. Drawing on Marek Oziewicz’s concept of
+    planetarianist fantasy and scholarship on the Anthropocene, as well as on examples of selected
+    fantasy series (J.R.R. Tolkien’s The Lord of the Rings, Stephen R. Donaldson’s The Chronicles
+    of Thomas Covenant, Guy Gavriel Kay’s The Fionavar Tapestry, and Robert Jordan’s The Wheel
+    of Time), this article investigates the sub-genre’s most persistent components and juxtaposes
+    them against issues related to ethnicity, species interconnectedness, non-human agency,
+    sustained urban development and urban ethics which are raised by Anthropocene debates.
+    This analysis will illustrate why the form of high/epic fantasy requires reconfiguration so
+    that it can continue to evolve together with the needs of contemporary readers.
+
+    Keywords: high/epic fantasy; the Anthropocene; J.R.R. Tolkien; Stephen R. Donaldson;
+    Guy Gavriel Kay; Robert Jordan
+
+                                                     ...
+
+   ¿Abandonar la búsqueda? La fantasía elevada/épica y los desafíos del
+                            antropoceno
+
+    El objetivo de este artículo es determinar por qué la forma prototípica de fantasía elevada/
+    épica no puede abordar eficazmente los actuales problemas ambientales, sociales y políticos
+    reunidos bajo el término general de Antropoceno. Basándose en el concepto de fantasía
+    planetarianista y la erudición sobre el Antropoceno de Marek Oziewicz, así como en ejemplos
+
+
+
+
+                                                 —131—
+132                                                                               WERONIKA ŁASZKIEWICZ
+
+
+    de series de fantasía seleccionadas (The Lord of the Rings, de J.R.R. Tolkien; The Chronicles of
+    Thomas Covenant, de Stephen R. Donaldson; The Fionavar Tapestry, de Guy Gavriel Kay; y The
+    Wheel of Time, de Robert Jordan), este artículo investiga los componentes más persistentes del
+    subgénero y los yuxtapone con cuestiones relacionadas con la etnicidad, la interconexión de
+    especies, la agencia no humana, el desarrollo urbano sostenible y la ética urbana que surgen
+    en los debates sobre el Antropoceno. Este análisis ilustrará por qué la forma de fantasía
+    elevada/épica requiere una reconfiguración para poder continuar evolucionando junto con las
+    necesidades de los lectores contemporáneos.
+
+    Palabras clave: fantasía elevada/épica; Antropoceno; J.R.R. Tolkien; Stephen R. Donaldson;
+    Guy Gavriel Kay; Robert Jordan
+
+
+1. Introduction
+While high/epic fantasy has remained a highly popular model of fantasy fiction since
+the genre’s emergence at the hand of J.R.R. Tolkien in the middle of the twentieth
+century, in recent years scholars have begun to question its relevance for contemporary
+readers, debating its ability to interrogate the present environmental, social and
+political problems gathered under the umbrella term of the Anthropocene, and calling
+for the development of new critical approaches (Wise 2020, 1-25). One of the recent
+contributions to this debate is Marek Oziewicz’s approach to fantasy through the lens of
+planetarianism, which he understands as “a biocentric philosophical commitment to standing
+up for the planet and an applied hope articulated through stories” (2022, 58; italics in the
+original). Oziewicz posits that certain fantastic narratives can help readers imagine
+“a biocentric future” which promotes the harmonious existence of humanity and
+non-human species (2022, 58-59). These hopeful “planetarianist fantasies,” Oziewicz
+believes, can call into question the still widespread denial of the damage inflicted upon
+the planet and challenge the prevalent belief, embodied in scores of popular texts, that
+humanity is doomed to perish in an ecological apocalypse—attitudes which the scholar
+frames as “the ecocidal unconscious” (2022, 58-59) of modern people. Oziewicz’s study
+of selected fantasy cartoons and books reveals that what is important is not whether a
+text engages with environmental issues at all, but rather what approaches to the non-
+human world it offers. As an example, he highlights a potentially disturbing passage
+from The Hobbit, which praises Bilbo’s skill at stone-throwing, honed on small animals:
+
+    It codes that the value of nature is not intrinsic but based on human needs. It normalizes
+    the anthropocentric bias, human supremacy, and expendability of small animals, which can
+    be stoned on a whim. While Tolkien would likely be appalled by such meanings ascribed to
+    his words, this is exactly how the ecocidal unconscious works. It replicates and perpetuates
+    our habitual, unreflective ways of being in relation to the biosphere (Oziewicz 2022, 60).
+
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       133
+
+
+Oziewicz’s study invites critics to approach existing texts from a new perspective in
+order to assess how they might be reinforcing, even against the authors’ best intentions,
+certain patterns of (narrative) thought that are now challenged by Anthropocene debates.
+Thus, the aim of this article is to examine a number of high/epic fantasy series in order
+to demonstrate why this sub-genre of fantasy fiction might require reconfiguration in
+order to successfully respond to the needs of contemporary readers. The series chosen
+for analysis are J.R.R. Tolkien’s The Lord of the Rings (1954-55), Stephen R. Donaldson’s
+The Chronicles of Thomas Covenant (1977-2013), Guy Gavriel Kay’s Fionavar Tapestry
+(1984-86), and Robert Jordan’s The Wheel of Time (1990-2013), which share enough
+features to be able to offer insight into the structure of high/epic fantasy, yet differ
+in certain of their narrative solutions, which indicates the evolution of this form. To
+prepare the background for the analysis, this article first examines the definitions and
+roots of high/epic fantasy, introduces the series chosen for analysis, and briefly discusses
+the concept of the Anthropocene. It then juxtaposes the most persistent components
+of high/epic fantasy, identified in the series’ depictions of their protagonists and
+antagonists, their relationship with non-human inhabitants of the fantastic world and
+the structure of that world, with selected recurring issues in Anthropocene debates.
+These include questions related to ethnicity, species interconnectedness, non-human
+agency, sustained urban development and urban ethics. While all arguments are
+illustrated with specific examples, rather than provide a close reading of each series,
+this article attempts to draw conclusions pertaining to high/epic fantasy as a whole and
+signal a direction for more detailed investigation in the future.
+    It is not the aim of this article to discredit in any way the works of Tolkien, Donaldson,
+Kay and Jordan. They have been selected for analysis because they feature intricate
+imaginary worlds and complex protagonists whose tales of loss and perseverance in the
+face of heavy odds have inspired generations of readers. Yet, while these works might
+not have been written with any specific socio-political or ecological agenda in mind,
+they speak differently to the twenty-first-century reader (entangled in the problems of
+the Anthropocene) than they spoke to readers of the previous century. Thus, it is vital
+to investigate the inherent patterns of high/epic fantasy embodied by these works so
+that the new generation of writers can look beyond them and continue to expand the
+boundaries of the sub-genre.
+
+
+2. Defining High/Epic Fantasy
+Early in the scholarship on fantasy fiction, the terms “high” and “epic” fantasy were
+often separated, even though scholars used them to describe the same narratives
+(Williamson 2015, 12). For instance, in The Fantasy Tradition in American Literature
+(1980), Brian Attebery remarks that the fantasy convention developed by the works of
+George MacDonald, William Morris, C.S. Lewis, and J.R.R. Tolkien might be defined
+as “high” (1980, 12). Noting how these writers were inspired by fairy stories and
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+134                                                                               WERONIKA ŁASZKIEWICZ
+
+
+folktales, Attebery argues that the most characteristic elements of their narratives are:
+the Other World, a structure indebted to that of a fairy tale (divided by Vladimir Propp
+into specific events and figures), an ordinary protagonist, extraordinary secondary
+characters and an emphasis on moral values (12-13). Attebery also posits that high
+fantasy shows “respect for the past, [a] love of simple things and simple language,
+delight in the hills and forests of the English countryside, an unorthodox but profound
+religious sense, and a fascination with the impossible” (14). C.W. Sullivan, in “High
+Fantasy” (1996), also highlights the importance of a believable secondary world as
+the setting for high fantasy and points to its roots in epic poetry, myths, legends and
+medieval romances, with Tolkien’s The Lord of the Rings as a prime example (1996,
+300-310). In The Encyclopedia of Fantasy (1997), high fantasy and epic fantasy appear as
+separate entries, though both are defined rather similarly, that is, as stories that follow
+great conflicts affecting the destiny of their imaginary worlds (Clute and Grant 1997,
+319; 466). High and epic fantasy still remain separated in Brian Stableford’s Historical
+Dictionary of Fantasy Literature (2005): the former is defined in a vague manner and
+the latter is said to depict complex imaginary worlds (2005, 130-31). However, the
+categories of high and epic fantasy are combined in Lisa Tuttle’s Writing Fantasy and
+Science Fiction (2005), which contrasts high/epic fantasy with heroic fantasy, and declares
+that the former is longer and offers a larger cast of characters than the latter (2005,
+10-13). Tuttle’s decision to combine the categories might have been prompted by her
+recognition of the blurred boundaries between these two forms, which stems from the
+on-going development and intersection of various forms of fantasy. For instance, in
+his contribution to The Cambridge Companion to Fantasy Literature (2012), W.A. Senior
+decides to use the name “quest fantasies” for high/epic narratives which are commonly
+driven by a quest of some sort (2012, 190-99). Taking into consideration the available
+definitions, in Fantasy Literature and Christianity (2018) Weronika Łaszkiewicz describes
+high/epic fantasy as:
+
+    a category of fantasy fiction, which typically revolves around a hero or group of heroes
+    inhabiting or temporarily visiting a full-fledged secondary reality, i.e., an imaginary world,
+    equipped with fantastic countries, languages, cultures, maps, creatures, and religions. The
+    heroes of high/epic fantasy are usually involved in a cosmic battle against an evil force, with
+    the safety and future of the imaginary realm at stake. The plot might consist of several minor
+    quests and adventures, which ultimately lead the heroes to their final goal (2018, 12-13).
+
+It is worth noting that even The Lord of the Rings has been classified differently by
+individual scholars. For instance, The Encyclopedia of Fantasy states that the category
+of “heroic fantasy” might be synonymous with “epic fantasy” (Clute and Grant 1997,
+464), and Stableford in fact categorizes Tolkien’s The Lord of the Rings as heroic fantasy
+(2005, 197). Thomas Honegger (2010), on the other hand, calls the trilogy an example
+of epic fantasy, while C. Palmer-Patel sees it as a case of heroic epic fantasy (2020,
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       135
+
+
+7). The categories of high, epic and heroic fantasy undoubtedly intersect at several
+points, so a total separation of these sub-genres might not be possible (or desirable).
+To avoid ambiguity, this article will use the definition of high/epic fantasy offered by
+Łaszkiewicz, of which The Lord of the Rings is considered a key representative.
+
+
+3. Roots of High/Epic Fantasy
+In order to determine the affordance of prototypical high/epic fantasy to tackle the
+challenges of the Anthropocene, it is also vital to examine its development. The
+influence which Tolkien exerted over it (Sullivan 1996, 308-309) is one reason that
+high/epic fantasy might be unable to properly address the current crises. Due to the
+originality and ensuing success of The Lord of the Rings, many following writers duly
+emulated the structure of Tolkien’s world and the trilogy’s narrative pattern. Even if they
+failed to grasp the complexity of Tolkien’s creation and instead produced formulaic and
+predictable narratives (Attebery 1992, 9-10), they still reinforced the literary model
+offered by Tolkien. Moreover, Tolkien’s trilogy—though inarguably original—did not
+appear out of a void: it was indebted, on the one hand, to his literary predecessors,
+whose involvement with elements of the fantastic prepared the foundations for the
+development of the modern fantasy genre in the nineteenth century, and, on the other,
+to his own specific interests and experiences. The list of Tolkien’s most immediate
+literary predecessors includes such notable Victorian writers as William Morris and
+George MacDonald, whose narratives signaled the emergence of fantasy as a modern
+genre (Mathews 2002, 16). The works of Morris (e.g., The Wood Beyond the World,
+1894; The Well at the World’s End, 1896) are strongly inspired by myths and legends
+(in particular, the Arthurian tradition and Norse myths), whereas MacDonald’s
+narratives (e.g., Phantastes, 1858; The Princess and the Goblin, 1872) are embedded in
+fairy stories and Christian morality. Tolkien’s own interests revolved around the study
+of languages, myths and sagas (e.g., the Völsunga saga, the Poetic Edda, Kalevala), which
+heavily conditioned the mood and structure of his fiction (Drout 2007, 129, 205-207,
+475; Sullivan 1996, 307). Apart from Tolkien’s professional background, his private
+experiences of war as well as his disillusionment with the progress of industrialization
+also had an impact on his work (Drout 2007, 294; 712-17), as did his deep Catholicism
+(Wise 2020, 15). Since all of these personal interests and experiences coalesced into the
+form of The Lord of the Rings, it can be argued that the sub-genre of high/epic fantasy is
+strongly indebted to both the personal experiences and the professional interests of its
+founder, as well as to the reality of life in the twentieth century.
+    Moreover, as a literary form, high/epic fantasy tends to look to the past rather than
+the future. This nostalgic tendency is already visible in its literary roots, i.e., in the
+extensive borrowings from ancient heroic epics (Weiner 2017, 25-26), myths, fairy
+stories and folktales, as well as in its penchant for quasi-medieval European settings
+(Sullivan 1996, 303-04), which are also present in Tolkien’s trilogy and the works
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+136                                                                               WERONIKA ŁASZKIEWICZ
+
+
+of subsequent fantasists (Selling 2004, 211-18). Sullivan states: “The future of high
+fantasy lies in the past. Because it is a form which draws so heavily on the past for
+virtually all of its context, content, and style, there can be little literary innovation in
+the genre” (1996, 309). Given the persistence of epic, mythic and fairytale borrowings
+within fantasy narratives as well as the ubiquity of medieval-like imaginary worlds, it
+is not surprising that Lev Grossman, echoing Sullivan, describes fantasy as “literature
+of longing, a longing for things that are lost”—lost from the postmodern world where
+humanity is surrounded by alienating high-tech equipment (Grossman 2012, n/p).
+Grossman’s diagnosis can be seen as the flipside of what has been called fantasy’s
+escapism. For Michael Moorcock (1987), the escape from the horrors of the Industrial
+Revolution into the pastoral idyll of The Lord of the Rings is something to be mocked;
+he chides the tone of high fantasy for being “sentimental, slightly distanced, often
+wistful, a trifle retrospective; it contains little wit and much whimsy” (1987, 122).
+Eric S. Rabkin (1979), on the other hand, sees the benefits of such an escape: “The real
+world is a messy place where dust accumulates and people die for no good reason and
+crime often pays and true love doesn’t conquer much. In one sense all art is fantastic
+simply because it offers us worlds in which some order, whatever that may be, prevails”
+(1979, 3). Tolkien believed that a temporary escape into the imaginary world can renew
+the reader’s awareness of their own reality and, as such, improve their understanding of
+their surroundings (1988, 59-61). However, since it takes the reader some considerable
+cognitive effort to transpose a literary experience set in a quasi-medieval fantasy world
+over their own surroundings, it is not surprising that the sub-genre might not be able
+to challenge the ailments of the Anthropocene.
+
+
+4. From The Lord of the Rings to The Wheel of Time
+As stated before, the four selected series share the key signature components of high/
+epic fantasy, yet they span several decades and are different enough to indicate the
+evolution of this sub-genre. The analysis will first focus on Tolkien’s The Lord of the
+Rings (1954-55), since the trilogy determined the primary shape of high/epic fantasy
+and conditioned its development (e.g., George R.R. Martin has confirmed on several
+occasions that the gritty and violent world of A Song of Ice and Fire is a deliberate
+subversion of Tolkien’s unspoiled Middle-earth). Stephen R. Donaldson’s vast Chronicles
+of Thomas Covenant (1977-2013) features one of the most recognizable anti-heroes
+of fantasy fiction, also clearly fashioned as a response to the idealism of Tolkien’s
+protagonists (Slethaug 1993, 48). However, by transporting the protagonist from
+modern America to an imaginary land, the series complicates the relationship between
+the real world and the fantastic world. Guy Gavriel Kay’s Fionavar Tapestry (1984-86),
+which was strongly influenced by Tolkien’s Middle-earth, yet also features modern
+people transported to a magical realm (Senior 2012, 193), is a bridge between Tolkien’s
+and Donaldson’s approaches to fantasy. Finally, Robert Jordan’s multi-volume series
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       137
+
+
+The Wheel of Time (1990-2013; finished by Brandon Sanderson after Jordan’s death),
+which describes Rand al’Thor’s rise to the status of a prophesied savior, is among the
+most extensive high/epic narratives after Tolkien.
+
+
+5. The Anthropocene
+Initially used by Paul J. Crutzen and Eugene F. Stoermer to “emphasize the central
+role of mankind in geology and ecology” (2000, 17), the term “Anthropocene” has
+been gradually extended by critics to encompass various interrelated social, political,
+economic and environmental problems which affect the state of our planet and lead
+to possibly irreversible damage. Since the scope of this article does not allow for an
+investigation of all of the challenges identified with the period of the Anthropocene,
+this work examines only those which correspond to high/epic fantasy and—when
+transposed onto the sub-genre—offers insights into its affordances as a literary space
+within which to explore Anthropocene concerns.
+    First of all, critics indicate that the debate on the Anthropocene is replete with
+remnants of colonialism as it often fails to account for the indigenous experience of
+and contribution to the Anthropocene. Notions of humanity’s shared responsibility
+for the creation and resolution of the Anthropocene—as well as the idea that humanity
+can be regarded as a homogenous entity—are rightly contested in the face of the
+historically and industrially dominant position of Western nations (Chakrabarty
+2009, 197-222; Comos and Rosenthal 2019, viii-xxii; Zapf 2019, 2-22). Thus, the
+call to decolonize the debate on the Anthropocene demands attempts at restorative
+justice, which would decrease the level of oppression still experienced by indigenous
+communities around the globe. It also entails the recognition and inclusion of
+indigenous perspectives of the Anthropocene and the interests of indigenous
+communities, which might significantly differ from those of the dominant groups
+(Davis and Todd 2017, 763).
+    The inclusion of indigenous knowledge in the discussion of the Anthropocene will
+be beneficial, as it will contest the dominant Western mindset, which is grounded in
+European traditions. Critics of the Anthropocene repeatedly highlight the distorted
+relationship between humankind and the living world, resulting from the capitalist
+pursuit of profit and a belief in human superiority over nature (Davis and Todd 2017,
+769-70). The exploitation of natural resources, negligence towards wild life and overall
+wastefulness have led to pollution, species loss and global climate change, which
+will ultimately result in the deterioration of the conditions of human existence on
+Earth. It is therefore necessary to counter Western discourses of human dominance
+with indigenous wisdom, which recognizes the interconnectedness of all species and
+the agency of non-human species. This mental shift in the perception of the natural
+world can contribute to the successful coexistence of different forms of life in the future
+(Ansloos 2016, 70-73; Coulthard 2014, 13; Meijer 2016, 73-88).
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+138                                                                               WERONIKA ŁASZKIEWICZ
+
+
+    Much of the discussion about the Anthropocene is also devoted to urbanity, which
+is identified, alongside industry, as one of the primary agents of exploitation, pollution
+and wastefulness (Pincetl 2017, 74-82). Jeffrey K.H. Chan (2019), estimating that by
+the year 2050 cities will have become home to two-thirds of the human population,
+indicates how vital it is to address the problems of urban life before they reach the tipping
+point of being beyond the possibility of solution (2019, 22). In order to counter the
+Anthropocene, it is necessary to implement solutions of sustainable urban development
+that will alleviate the terrible condition of the natural environment and, simultaneously,
+guarantee the establishment of healthy urban communities. These solutions might
+include the nurturing of citizens’ ecological awareness, the creation of green areas,
+improvements in transportation, and the development of ethical urban communities
+based on cooperation and fair access to resources (Chan 2019, 1-24; Pincetl 2017, 74-82).
+
+
+6. The Hero(es) on the Quest to Defeat the Evil Dark Lord
+High/epic fantasy’s ability to address the problems of the Anthropocene is challenged,
+first of all, by its choice of characters. Largely inspired by the conventions of fairy
+stories and myths (Sullivan 1996, 302), the protagonist of high/epic fantasy is typically
+an average male who becomes involved in a cosmic conflict that forces him to embark
+on a perilous quest, during which he has to successfully face challenges that lead to
+his self-development. Through self-development, he can achieve victory and save the
+world, or even the entire universe, from destruction at the hands of an evil Dark Lord
+(Palmer-Patel 2020, 1; Senior 2012, 190).
+    One element of this pattern that does correspond to the concept of the Anthropocene
+is the fact that, in most cases, the threat posed by the Dark Lord results from humanity’s
+own actions. For instance, in The Lord of the Rings various characters repeatedly succumb
+to their desire for power (symbolized by the Ring), thus strengthening Morgoth’s and
+then Sauron’s reign. In The Chronicles of Thomas Covenant, the malevolent Lord Foul
+is similarly strengthened by every act of human despite, and the final Apocalypse
+is triggered when one of the protagonists, Linden Avery, is blinded by her rage and
+arrogance. The Fionavar Tapestry suggests that the very existence of the evil Rakoth
+Maugrim is due to the crime of the first men, committed after the world was created
+from nothingness. Rakoth later breaks free from his prison with the help of humans
+and dwarves. Similarly, in The Wheel of Time the first destruction of the world happens
+because Shai’tan is freed from his divine imprisonment by overtly ambitious people,
+and the coming of the second Apocalypse is fueled by certain people’s hunger for power.
+Thus, though in most high/epic fantasies the Dark Lord is presented as the primary
+threat to the imaginary world, he can be interpreted as a symbolic embodiment of
+humanity’s destructive agency and self-destructive tendencies.
+    The one element of high/epic fantasy that contradicts the solutions offered as
+counter measures to the Anthropocene is the quest that lies at the heart of the sub-
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       139
+
+
+genre. Though the protagonist is typically accompanied by a group of friends who
+contribute to the final victory over evil—while the (faceless) allied armies clash with
+the Dark Lord’s minions in the background of the story—the quest that drives the
+plot essentially relies on the messianic figure of the protagonist, who must perform
+some form of self-sacrifice in order to defeat the satanic Dark Lord and ensure the
+preservation of the world. In The Lord of the Rings, Frodo courageously volunteers to
+travel all the way to Mordor in a suicidal mission to destroy the One Ring. Even
+though Thomas Covenant is an anti-hero who refuses to believe in the existence of the
+imaginary world and do his duty in shouldering responsibility for its preservation, he
+does still repeatedly save it from the clutches of the evil deity at the expense of his own
+well-being and eventually manages to restore the world after the Apocalypse. The five
+protagonists of The Fionavar Tapestry are required to perform a number of sacrifices in
+order to defeat Rakoth; eventually, the world is saved because the prophesized child
+renounces his life to destroy the Dark Lord. In The Wheel of Time, the survival of the
+world depends on Rand al’Thor, the mythic Dragon Reborn, who will battle Shai’tan
+on mount Shayol Ghul, possibly sacrificing himself in the process. The formula of
+high/epic fantasy, then, seems in general to be focused on the exploits of a singular hero
+and thus leaves little space for considerations that widespread efforts to raise ecological
+awareness, alter consumerist mentality and curb wastefulness can save the world.
+Grounded in the conventions of myths and sagas, the apocalyptic destruction presented
+in high/epic fantasy results from a cosmic conflict between divine forces, and as such, it
+can only be resolved by a messianic self-sacrifice, not through socio-political changes.
+    Of course, each series provides certain variations on the pattern: Frodo eventually
+succumbs to the Ring’s power and it is only thanks to Gollum that the object is
+destroyed, while Covenant is assisted in the act of re-creating the world by Linden
+and Jeremiah—his new family. Still, all of these works imply that the survival of the
+world depends on the actions of a single individual (or a small group) who, gifted
+with special powers, will sacrifice themselves for the greater good. The self-sacrifice
+of this exceptional hero will then end the threat of destruction embodied by the Dark
+Lord. When juxtaposed with the several interrelated challenges of the Anthropocene
+(complicated by the vested interests of various groups), this pattern of quest-sacrifice-
+victory seems of little relevance in terms of contemporary problems. Moreover, in
+many series the salvation of the world is only temporary since the cosmic conflict is
+actually a repetitive event that is inscribed into the very nature of divine creation and
+is apparently necessary to (morally) challenge humanity (Senior 2012, 190). Paired
+with the assumption that it is the Dark Lord, not humanity, who is responsible for
+the deliberate destruction of the world, this narrative pattern further reduces people’s
+culpability with respect to the state of the planet and, as such, contradicts the premises
+of Anthropocene debates.
+    What is more, while these debates (Chakrabarty 2009, 197-222; Comos and
+Rosenthal 2019, viii-xxii; Zapf 2019, 2-22) call for the inclusion of a greater variety
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+140                                                                               WERONIKA ŁASZKIEWICZ
+
+
+of voices and experiences, it is evident that high/epic fantasy is predominantly focused
+on the white male hero, whose experiences are visibly modeled on the fate of mythic
+gods, ancient warriors and Jesus Christ. Tolkien’s Fellowship of the Ring has nine
+members, all of whom are white males. Though significant female characters do appear
+in The Lord of the Rings and in Tolkien’s other works, their roles and attitudes are a
+mixture of empowerment and passivity; for example, Éowyn’s victory over the Witch-
+king, Arwen’s nobility, and Galadriel’s rejection of the Ring are contested by their
+relegation to the margins of the main quest, exceptional social status and the overall
+patriarchal nature of Middle-earth. In addition, if Tolkien’s representation of ethnicity
+is judged solely on the rather unfavorable portrayal of the dark-skinned Haradrim from
+The Lord of the Rings and contrasted with the prevailing whiteness of the allied armies
+of good, then the racial politics of his Middle-earth is quite troublesome. A similar
+problem appears in the other series, even in The Wheel of Time, which includes a range
+of ethnic communities who are united in their fight against the Dark Lord: the series
+all invariably bestow the role of the messianic savior on the white male. High/epic
+fantasy’s problematic approach to race, framed by Helen Young as the genre’s “habits
+of whiteness” (2016), has become particularly visible after Amazon’s versions of Rings
+of Power and Wheel of Time introduced characters of color. The backlash the showrunners
+experienced for their decision to cast non-white actors to play fantastic characters
+who inhabit imaginary worlds revealed the perplexing resistance of some parts of the
+audience to portrayals of racial diversity (Hetzner 2022, n.p.; Todd 2019, n.p.).
+    While in other series female characters do receive more exposition and play more
+significant roles (e.g., in The Chronicles, Covenant’s female partner, Linden, helps him
+rebuild the world; in Fionavar, Kim is a wise woman figure and Jennifer a reincarnation
+of Guinevere; and in The Wheel of Time, the armies are composed of power-wielding and
+combat-skilled women who fight against Shai’tan), overall, none of them is assigned a
+similar messianic status to that of the male protagonist. Ironically speaking, according
+to the rules of high/epic fantasy, women need not worry that they will have to become
+the savior of humankind—that is the job of men. Thus, the ambiguity of female
+empowerment and the lack of believable indigenous voices might not only render high/
+epic fantasy less appealing to women and readers from ethnic communities, but also
+limit the genre’s ability to speak to contemporary concerns.
+
+
+7. The Hero(es) and Non-Human Species
+A staple element of world building in high/epic fantasy is the presence of supernatural
+animals and (humanoid) plants. Their roles vary: in some works they are simply a
+decorative enrichment of the realm, while in others they become the protagonist’s
+trusted companions and provide critical help in the fight against evil. By and large,
+it can be argued that high/epic fantasy supports contemporary environmental debates
+by featuring a wide array of sentient non-human species and directing the reader’s
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       141
+
+
+attention to the sublime character of the natural world and the mental and physical
+benefits derived from immersion in nature (Brawley 2014, 178-88; Colligs 2021, 77-
+83). Grossman states that fantasy’s preoccupation with nature is, in fact, one of the
+reasons for its growing popularity since the preservation of ecosystems is nowadays
+close to the public’s heart (2012, n.p.). Nonetheless, high/epic fantasy’s approach to the
+concept of species interconnectedness also raises concerns. Though some interspecies
+relations are fostered due to the fact that all forms of life suffer from the actions of the
+Dark Lord, the balance of power is visibly tipped toward human dominance over other
+inhabitants of the imaginary world. This approach to non-human species questions the
+relevance of high/epic fantasy in contemporary debates.
+    This imbalance of power is clearly visible as early as in The Lord of the Rings. On
+the one hand, the trilogy has been praised for its strong ecocritical message: when the
+ents (sentient trees) destroy the forges of the evil Saruman, who had devastated nearby
+forests in pursuit of military progress, their revenge is rightfully applauded and seen as
+the embodiment of nature’s wrathful agency. On the other hand, though, while readers
+applaud this expression of sovereignty, they often overlook the fact that none of the
+human heroes was there to support the ents in their fight (while the hobbits, Merry and
+Pippin, rally around the ents, it is not however because they are particularly concerned
+with the fate of the forests). In fact, although the protagonists do acknowledge the
+diminishment of nature’s mythic beauty and its destruction due to Sauron’s evil
+(his Mordor is a wasteland), it is impossible to discuss any environmental politics of
+the trilogy’s quasi-medieval societies because these are not formulated beyond the
+assumption that the natural beauty created by the supreme deity deserves protection.
+Apart from the implicit message that industrial progress should not be achieved at the
+cost of environmental exploitation, Tolkien’s trilogy does not—indeed cannot, because
+of its quasi-medieval and mythic premises—offer any practical solutions beyond the
+necessity of vanquishing the Dark Lord responsible for the spread of corruption.
+    Similar concerns inform the quasi-medieval worlds of The Chronicles, Fionavar and
+The Wheel of Time. Readers are offered images of corrupted landscapes, whose lost
+beauty is repeatedly lamented, and the protagonists are aided in its restoration by
+sentient non-human creatures. However, the preservation of the world ultimately
+depends on the actions of the male human savior, who will reinstate the proper order
+of things by winning the cosmic conflict. Typically, this proper order implies the
+human order, with humanity at the center of creation and other species defined by
+their relationships with humans. The Dark Lords of these series are embodiments of
+corruption and opposition to nature (represented by their own devastated territories:
+Ridjeck Thome, Starkadh and the Blight). Their malevolent schemes result in the
+further destruction of whole ecosystems along with unnatural weather conditions. In
+some cases, the Dark Lords manipulate people to further distort the balance of the
+natural world, e.g., in The Chronicles; High Lord Kevin performs the act of Desecration
+in the hope of vanquishing Foul, and in Fionavar, the evil wizard Metran uses a magical
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+142                                                                               WERONIKA ŁASZKIEWICZ
+
+
+ritual to prolong the winter. In all cases, the divine corruption of the natural world
+needs to be countered by the hero’s powers, which are inaccessible to other characters.
+Thus, the series studied here (Tolkien’s Saruman being a notable exception) depict
+climate change as the result of divine intervention rather than centuries of human
+exploitation and wastefulness and it is difficult to link such imagery to the demands
+of living responsibly in the Anthropocene in terms of frugality, intentional living
+and ecological awareness. Though these series generally espouse the importance of
+a connection between people and nature (e.g., in The Chronicles, inhabitants of the
+Land had previously lived attuned to the Earthpower that permeated their world),
+their quasi-medieval human-centered societies are not capable of fostering any lasting
+relationship of species interconnectedness or engaging in environmental debates about
+the challenges which the capitalist world poses to natural ecosystems.
+    Moreover, the series often display a rather utilitarian approach to non-human species,
+be they sentient or not. Animals are neatly divided into those serving good1 and those
+allied with evil.2 The former are usually beautiful and noble; yet, even if they possess
+terrifying powers, they are relegated to the role of helper (never the ultimate savior),
+who might be exploited or killed in the process of saving the world. The latter are vile
+and hideous, which justifies their killing without any consideration of their place in the
+ecosystems of the imaginary worlds—their existence is validated only by their alliance.
+Likewise, orcs, goblins, and other humanoid beings serving the evil Lords need to be
+removed for the safety of humanity. Since they exist merely as token characters that
+are deprived of individual traits—basically, an extension of the Dark Lord—and their
+primary role is to be an obstacle on the hero’s path, the hero is not required to take into
+consideration their interests and right to life.
+    There are also other subtler ways in which the four series support the dominance
+of humankind. One example appears in The Lord of the Rings, where the victory over
+Sauron marks the beginning of the Fourth Age—the Age of Men—which entails the
+withdrawal of the realm’s supernatural inhabitants. A similar concept underlies the
+other series. In addition, though all of the good non-human inhabitants of these worlds
+unite in the fight against the Dark Lord, ultimately their preservation would have
+been impossible without the powers and self-sacrifices of the (white, male) human
+protagonists. Even when some form of species interconnectedness does appear in these
+series, it is eventually either lost due to humanity’s foolish actions or overshadowed by
+human dominance. For instance, people’s relationship to Earthpower present in the
+     1
+        Examples include the eagles that rescue Frodo and Sam, and Gandalf’s extraordinary mount which is
+descended from the greatest horse of Middle-earth (The Lord of the Rings); the Ranyhyn, which are magnificent
+horses linked to the Earthpower (The Chronicles); the unicorn Imraith-Nimphais, the white swan Lauriel, and the
+crystal dragon (Fionavar); and Perrin’s wolves (The Wheel of Time).
+     2
+        Examples of these include the monstrous spider Shelob and the wolves that accompany the orcs (The Lord
+of the Rings); the wolves of Galadan, the black swan Avaia, and the black dragon (Fionavar); crows, ravens, and the
+darkhounds (The Wheel of Time). It is evident that high/epic fantasy stereotypically employs a few selected species,
+while the remaining wildlife is omitted.
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       143
+
+
+first volumes of The Chronicles gradually becomes distorted and corrupted and is never
+fully restored. The Dalrei of Fionavar are linked to nature in a rather stereotypical
+manner in that they are a tribe of hunter-gatherers modeled on Native Americans.
+Fionavar’s Pendaran Wood, a sentient forest that despises people for their crimes, is
+overpowered by the protagonists because their mission is too important to be thwarted
+by the forest’s (albeit just) wrath. The gentle chora trees, the humanoid Nym that tend
+plants and a number of other entities created to improve humanity’s relationship with
+nature in the Age of Legends are, at the time of the story, lost to the characters of The
+Wheel of Time because of the evil that humans have released into the world. Of course,
+there are also some cases of a positive union between nature and humanity, e.g., the
+Forestals of The Chronicles are guardians of the forest that were created from mortal
+men, and their presence is a prerequisite for the well-being of the Land. Nonetheless,
+such examples are scarce. Overall, high/epic fantasy’s models of humanity’s interaction
+with non-human species are grounded in anthropocentric supremacy, and pay markedly
+less attention to the interests of the nonhuman. As such, the traditional quest-oriented
+high/epic fantasy, driven by a cosmic conflict between good and evil, does not seem to
+offer adequate templates for rethinking humanity’s position in the Anthropocene.
+
+
+8. The Hero(es) and the Imaginary World
+When discussing the worlds of high/epic fantasy in the context of the Anthropocene, it
+is necessary to consider their structure and relation to the primary world of the reader.
+Overall, high/epic fantasy has a preference for quasi-medieval—i.e., grounded in modern
+people’s assumptions about life in the Middle Ages (Eco 1986, 61-72)—European-like
+worlds, which are dominated by feudal, agricultural societies, typically organized into
+a network of towns and villages, with a central capital city.3 From Tolkien’s Minas
+Tirith and Edoras, through Donaldson’s Revelstone and Kay’s Brennin, to Jordan’s
+Caemlyn, Cairhien and Tar Valon, the cities of high/epic fantasy are presented as places
+of shelter and provisioning on the protagonist’s journey, and a stronghold of human
+civilization. They might be anything from colorful and fascinating to intimidating (for
+protagonists drawn to them from rural areas), stifling (in comparison to the liberating
+wilderness) and filthy (if the writer aims at a semblance of “realism”). Typically, they
+are also completely detached from the primary world of the protagonists, who are
+transported to fantastic realms. Apart from the idea that the Dark Lord’s corruption
+of the secondary world will affect the primary world as well (which raises the stakes
+for the modern-day protagonists of The Chronicles and Fionavar), there is no cultural
+diffusion, or indeed any other exchange, between the worlds. Separated as they
+are from modernity, the medieval-like cities of high/epic fantasy offer little to no
+
+    3
+       The Wheel of Time takes the protagonists to a number of densely populated cities with quite distinct
+cultures—the series’ level of world building is quite exceptional.
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+144                                                                               WERONIKA ŁASZKIEWICZ
+
+
+suggestions concerning the problems of urban life in the Anthropocene. They might
+be threatened by invasion from the Dark Lord’s hordes and apocalyptic destruction,
+yet they are seldom shown suffering from the ailments common to modern cities, such
+as overflowing waste, inadequate housing, gentrification, shortage of green areas and
+traffic congestion. Though some of these problems are signaled (e.g., the protagonists
+might need to endure insanitary conditions or deal with crime), they are presented as
+inherent elements of the hero’s experience of the city rather than examples of failed
+urban management. The cities of high/epic fantasy are unable to investigate notions
+of sustainable development and urban ethics in the ways available to other sub-genres
+of speculative fiction, e.g., urban fantasy and dystopian fiction (the former frequently
+focuses on the fate of social outcasts, while the latter depicts what might happen to
+cities if global crises are not resolved).
+    Given the high/epic fantasy sub-genre’s roots in epic poetry, myths and legends, it is
+not surprising that the city is not of particular interest to its writers. Instead, high/epic
+fantasy pays attention to the landscape in general (Senior 2012, 120) or to landmarks that
+are significant for the hero’s messianic quest. These landmarks include sacred trees and
+mountains reminiscent of similar entities in myths and religions across the globe, such
+as the biblical Tree of Knowledge of Good and Evil, Golgotha of Christ’s crucifixion and
+the Norse Yggdrasil (Eliade 1996, 99; 268-99). The quests of high/epic heroes frequently
+lead to or end at a sacred tree/mountain where the protagonist is supposed to offer up their
+life in a reconstruction of well-known mythic tales. Cases in point include Paul’s ordeal
+on the Summer Tree (Fionavar) and Mat’s suffering on the tree Avendesora (The Wheel of
+Time), both of which combine the imagery of Odin’s sacrifice on Yggadrasil and Christ’s
+crucifixion; the mountains of Orodruin (The Lord of the Rings), Melekurion Skyweir (The
+Chronicles), Rangat (Fionavar) and Shayol Ghul (The Wheel of Time) are also linked to the
+cosmic conflict and the hero’s sacrifice. The ubiquity of these motifs is partially indebted
+to Tolkien, an avid reader of ancient myths, who combined his narratives with mythic
+material. Since subsequent writers tended to rely on The Lord of the Rings, recognizing
+not only its popularity but also the potential locked into the form of high/epic fantasy,
+the presence of mythic elements was further reinforced. Nonetheless, it seems that this
+formula is not particularly suitable for addressing the problems of the twenty-first century.
+
+
+9. Conclusion
+Taking into consideration its reliance on quests driven by cosmic conflicts, (white,
+male) protagonists given a messianic role, (homogenous) quasi-medieval societies, and
+unquestioned anthropocentrism, the prototypical form of high/epic fantasy emerges as
+a literary form whose capacity to address the multiple demands of the Anthropocene is
+limited. Of course, its inarguably hopeful message that humanity will prevail and that
+everyone should contribute to the protection of their shared home is indeed relevant
+in times of global crises. Moreover, given its penchant for extensive world-building
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       145
+
+
+spanning whole centuries—high/epic fantasy is able to present large-scale socio-political
+and environmental processes which go unnoticed by any individual person because they
+play out across generations—the complexity and length of high/epic fantasy allows the
+“slow violence” of the Anthropocene to be illustrated in a way that is inaccessible to other
+genres (Nixon 2011, 6-16). In this sense, the series chosen for consideration do correspond
+to Oziewicz’s notion of “planetarianist fantasy” since they, at least in part, draw the
+reader’s attention to the importance and beauty of the natural world and the detrimental
+effects of human actions on it, hence combating the “ecocidal unconscious.” Still, the
+rebirth of high/epic fantasy worlds typically means the restoration or reinforcement of the
+old order—specifically, the human order—which is hardly a viable solution for the world
+today. When regarded through the lens of planetarianism, the series become ambiguous,
+just like the passage on Bilbo’s stone-throwing skills. Thus, high/epic fantasy as developed
+by Tolkien and subsequent writers now requires some revision and reconfiguration so that
+it can speak in a new voice that will resonate with contemporary audiences.
+     Of course, the Anthropocene debates developed only after the series chosen for analysis
+had been written, so their limited relevance to contemporary challenges should not
+overshadow their literary value and overall contribution to the development of fantasy as
+a genre. However, the inherent patterns in these works should still be investigated so that
+the present generations of high/epic fantasy writers can consciously determine how their
+works reflect on the current problems and humanity’s relationship with the rest of the
+living world. Indeed, setting aside the unfinished works of George R.R. Martin (A Song of
+Ice and Fire) and Patrick Rothfuss (The Kingkiller Chronicle)—which offer new approaches to
+high/epic fantasy, but escape a conclusive analysis since their ultimate message, fate of the
+protagonists, and shape of the imaginary world remain unknown—there are some series
+that demonstrate that it is possible to alter the patterns of high/epic fantasy. One early
+example is Ursula K. Le Guin’s Earthsea Cycle (1968-2001), which successfully reshapes
+the motif of a quest for an object into an intricate tale of discovering one’s identity and
+place in the world. A more recent example is Brandon Sanderson’s Mistborn series (2006-
+2008), which plays with the reader’s expectations regarding the patterns of high/epic
+fantasy, delivering a tale that subverts the trope of a white male savior on a quest to defeat
+the Dark Lord as well as adding an ecological catastrophe to the backdrop of the story. In
+addition, the works of N.K. Jemisin (e.g., The Inheritance Trilogy, 2010-2011) renounce
+high/epic fantasy’s penchant for realms inspired by medieval Europe in favor of more
+diverse societies that allow the author to introduce a variety of ethnic voices. Inarguably,
+the sub-genre of high/epic still has much to offer to twenty-first century readers, but only
+if contemporary fantasists are ready to part with the models created by their predecessors
+and experiment with well-known tropes, while also creatively addressing the challenges
+of the contemporary world.4
+   4
+      This article is the result of a research project financed from a grant received from the Polish Ministry of
+Education and Science under the Regional Initiative of Excellence programme for the years 2019-2022, project
+number 009/RID/2018/19, the amount of funding 8 791 222,00 zloty.
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+146                                                                               WERONIKA ŁASZKIEWICZ
+
+
+Works Cited
+Ansloos, Jeffrey. 2016. “Peace like a Red River: Indigenous Human Rights for
+   Decolonising Reconciliation.” In Devere, Te Maihāroa and Synott 2016, 65-76.
+Attebery, Brian. 1980. The Fantasy Tradition in American Literature: From Irving to Le
+   Guin. Bloomington: Indiana UP.
+—. 1992. Strategies of Fantasy. Bloomington: Indiana UP.
+Brawley, Chris. 2014. Nature and the Numinous in Mythopoeic Fantasy Literature.
+   Jefferson: McFarland.
+Chakrabarty, Dipesh. 2009. “The Climate of History: Four Theses.” Critical Inquiry
+   35: 197-222.
+Chan, Jeffrey K.H. 2019. Urban Ethics in the Anthropocene: The Moral Dimensions of Six
+   Emerging Conditions in Contemporary Urbanism. Singapore: Palgrave Macmillan.
+Clute, John and John Grant, eds. 1997. The Encyclopedia of Fantasy. London: Orbit.
+Colligs, Britta Maria. 2021. “The Forest as a Voice for Nature: Ecocriticism in Fantasy
+   Literature.” In Dědinová, Łaszkiewicz and Borowska-Szerszun 2021, 67-86.
+Comos, Gina and Caroline Rosenthal. 2019. “Introduction.” In Comos and Rosenthal
+   2019, viii-xxii.
+—, eds. 2019. Anglophone Literature and Culture in the Anthropocene. Newcastle upon
+   Tyne: Cambridge Scholars Publishing.
+Coulthard, Glen Sean. 2014. Red Skin, White Masks: Rejecting the Colonial Politics of
+   Recognition. Minneapolis: U of Minnesota P.
+Crutzen, Paul and Eugene F. Stoermer. 2000. “The ‘Anthropocene’.” Global Change
+   41: 17-18.
+Davis, Heather and Zoe Todd. 2017. “On the Importance of a Date, or Decolonizing
+   the Anthropocene.” ACME: An International Journal for Critical Geographies 16 (4):
+   761-80.
+Dědinová, Tereza, Weronika Łaszkiewicz and Sylwia Borowska-Szerszun, eds. 2021.
+   Images of the Anthropocene in Speculative Fiction: Narrating the Future. Lanham:
+   Lexington Books.
+Devere, Heather, Kelli Te Maihāroa and John P. Synott, eds. 2016. Peacebuilding and
+   the Rights of Indigenous People: Experiences and Strategies for the 21st Century. New York:
+   Springer.
+Drout, Michael D.C., ed. 2007. J.R.R. Tolkien Encyclopedia: Scholarship and Critical
+   Assessment. New York: Routledge.
+Eco, Umberto. 1986. “Dreaming of the Middle Ages.” In Eco 1986, 61-72.
+—. 1986. Travels in Hyperreality: Essays. Trans. William Weaver. San Diego: Harcourt
+   Brace Jovanovich.
+Eliade, Mircea. 1996. Patterns in Comparative Religion. Translated by Rosemary Sheed,
+   Lincoln and London: U of Nebraska P.
+Grossman, Lev. 2012. “Why Our Culture Looks to Fantasy Novels.” The Lavin Agency
+   Speakers Bureau, March 7. [Accessed March 20, 2024].
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+INEFFECTIVENESS OF HIGH/EPIC FANTASY IN THE ANTHROPOCENE                                                       147
+
+
+Hetzner, Christiaan. 2022. “Jeff Bezos’ New Lord of the Rings Show Is Angering
+   Fans because it Has Black Dwarves. Seriously.” Fortune, February 19. [Accessed
+   March 20, 2024].
+Honegger, Thomas. 2010. “(Heroic) Fantasy and the Middle Ages – Strange
+   Bedfellows or an Ideal Cast?” Itinéraires 3: n/p. [Accessed March 20, 2024].
+Hunt, Peter, ed. 1996. International Companion Encyclopedia of Children’s Literature.
+   London: Routledge.
+James, Edward and Farah Mendlesohn, eds. 2012. The Cambridge Companion to Fantasy
+   Literature. Cambridge: CUP.
+Ketterer, David, ed. 2004. Flashes of the Fantastic: Selected Essays from The War of
+   the Worlds Centennial, Nineteenth International Conference on the Fantastic in the Arts.
+   Westport: Praeger.
+Łaszkiewicz, Weronika. 2018. Fantasy Literature and Christianity: A Study of the
+   Mistborn, Coldfire, Fionavar Tapestry and Chronicles of Thomas Covenant Series. Jefferson:
+   McFarland.
+Mathews, Richard. 2002. Fantasy: The Liberation of Imagination. New York: Routledge.
+Meijer, Eva. 2016. “Speaking with Animals: Philosophical Interspecies Investigations.”
+   In Tønnessen, Armstrong Oma and Rattasepp 2016, 73-88.
+Moorcock, Michael. 1987. Wizardry and Wild Romance: A Study of Epic Fantasy.
+   London: Gollancz.
+Nixon, Rob. 2011. Slow Violence and the Environmentalism of the Poor. Cambridge:
+   Harvard UP.
+Oziewicz, Marek. 2022. “Fantasy for the Anthropocene: On the Ecocidal Unconscious,
+   Planetarianism, and Imagination of Biocentric Futures.” In Oziewicz, Attebery and
+   Dědinová 2022, 58-69.
+—, Brian Attebery and Tere, eds. 2022. Fantasy and Myth in the Anthropocene: Imagining
+   Futures and Dreaming Hope in Literature and Media. London: Bloomsbury Academic.
+Palmer-Patel, C. 2020. The Shape of Fantasy: Investigating the Structures of American
+   Heroic Epic Fantasy. New York: Routledge.
+Pincetl, Stephanie. 2017. “Cities in the Age of the Anthropocene: Climate Change
+   Agents and the Potential for Mitigation.” Anthropocene 20: 74-82.
+Rabkin, Eric S., ed. 1979. Fantastic Worlds: Myths, Tales, and Stories. Oxford: OUP.
+Rogers, Brett M. and Benjamin Eldon Stevens, eds. 2017. Classical Traditions in
+   Modern Fantasy. Oxford: OUP.
+Selling, Kim. 2004. “‘Fantastic Neomedievalism’: The Image of the Middle Ages in
+   Popular Fantasy.” In Ketterer 2004, 211-18.
+Slethaug, Gordon E. 1993. “‘The Discourse of Arrogance’, Popular Power, and
+   Anarchy: The (First) Chronicles of Thomas Covenant the Unbeliever.” Extrapolation
+   34 (1): 48-63.
+Stableford, Brian. 2005. Historical Dictionary of Fantasy Literature. Lanham: The
+   Scarecrow Press.
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+148                                                                               WERONIKA ŁASZKIEWICZ
+
+
+Senior, W.A. 2012. “Quest fantasies.” In James and Mendlesohn 2012, 190-99.
+Sullivan III, C.W. 1996. “High Fantasy.” In Hunt 1996, 300-10.
+Todd, Billy. 2019. “From the Two Rivers: Casting and Race in The Wheel of Time.”
+   Tor, August 20. [Accessed March 20, 2024].
+Tønnessen, Morten, Kristin Armstrong Oma and Silver Rattasepp, eds. 2016.
+   Thinking about Animals in the Age of the Anthropocene. Lanham: Lexington Books.
+Tuttle, Lisa. 2005. Writing Fantasy and Science Fiction. London: A & C Black.
+Tolkien, J.R.R. 1988. Tree and Leaf. London: Unwin Hyman.
+Weiner, Jesse. 2017. “Classical Epic and the Poetics of Modern Fantasy.” In Rogers
+   and Stevens 2017, 25-46.
+Williamson, Jamie. 2015. The Evolution of Modern Fantasy: From Antiquarianism to the
+   Ballantine Adult Fantasy Series. New York: Palgrave Macmillan.
+Wise, Denis Wilson. 2020. “On Ways of Studying Tolkien: Notes Toward a Better
+   (Epic) Fantasy Criticism.” Journal of Tolkien Research 9 (11): 1-25.
+Young, Helen. 2016. Race and Popular Fantasy: Habits of Whiteness. New York:
+   Routledge.
+Zapf, Hubert. 2019. “The Challenge of the Anthropocene and the Sustainability of
+   Texts.” In Comos and Rosenthal 2019, 2-22.
+
+
+Received 5 September 2022                                         Revised version accepted 24 October 2022
+
+Weronika Łaszkiewicz, PhD, works at the University of Białystok (Poland). She has written a number
+of articles on Euro-American fantasy fiction. She is the author of Fantasy Literature and Christianity
+(2018) and Exploring Fantasy Literature: Selected Topics (2019). She is the co-editor of Images of the
+Anthropocene in Speculative Fiction (2021).
+
+
+
+
+ATLANTIS. Journal of the Spanish Association of Anglo-American Studies. 46.1 (June 2024): 131-148 • e-issn 1989-6840
+

@@ -1,0 +1,2038 @@
+On the Algorithmic Bias of Aligning Large Language Models with
+RLHF: Preference Collapse and Matching Regularization
+Jiancong Xiao∗ Ziniu Li† Xingyu Xie‡ Emily Getzen∗ Cong Fang§ Qi Long*¶
+Weijie J. Su*¶
+Abstract
+Accurately aligning large language models (LLMs) with human preferences is crucial for
+informing fair, economically sound, and statistically efficient decision-making processes. However,
+we argue that the predominant approach for aligning LLMs with human preferences through a
+reward model—reinforcement learning from human feedback (RLHF)—suffers from an inherent
+algorithmic bias due to its Kullback–Leibler-based regularization in optimization. In extreme
+cases, this bias could lead to a phenomenon we term preference collapse, where minority pref-
+erences are virtually disregarded. To mitigate this algorithmic bias, we introduce preference
+matching (PM) RLHF, a novel approach that provably aligns LLMs with the preference distribu-
+tion of the reward model under the Bradley–Terry–Luce/Plackett–Luce model. Central to our
+approach is a PM regularizer that takes the form of the negative logarithm of the LLM’s policy
+probability distribution over responses, which helps the LLM balance response diversification
+and reward maximization. Notably, we obtain this regularizer by solving an ordinary differential
+equation that is necessary for the PM property. For practical implementation, we introduce a
+conditional variant of PM RLHF that is tailored to natural language generation. Finally, we
+empirically validate the effectiveness of conditional PM RLHF through experiments on the OPT
+and Llama-family models, demonstrating a 29% to 41% improvement in alignment with human
+preferences, as measured by a certain metric, compared to standard RLHF.
+Contents
+1 Introduction 2
+1.1 Related Work . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2 Preliminaries 5
+2.1 Reinforcement Learning from Human Feedback . . . . . . . . . . . . . . . . . . . . . 5
+∗University of Pennsylvania.
+†The Chinese University of Hong Kong, Shenzhen.
+‡National University of Singapore.
+§Peking University.
+¶Joint corresponding authors. Emails: qlong@upenn.edu, suw@wharton.upenn.edu.
+This paper has been accepted for publication in the Journal of the American Statistical Association.
+1
+arXiv:2405.16455v2  [stat.ML]  25 Aug 2025
+
+===PAGE===
+
+3 Preference Matching RLHF 7
+3.1 Preference Matching Differential Equation . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.2 Preference Matching Regularization . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.3 Extension to Response-Dependent Regularization . . . . . . . . . . . . . . . . . . . . 10
+4 Conditional Preference Matching RLHF 11
+4.1 Conditional Preference Matching . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+4.2 Parameterization of Conditional PM RLHF . . . . . . . . . . . . . . . . . . . . . . . 13
+5 Experiments 13
+5.1 Evaluation Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+5.2 Preferences in Helpfulness and Harmlessness . . . . . . . . . . . . . . . . . . . . . . . 15
+5.3 Preferences in Summarization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+6 Discussion 18
+A Additional Discussions of Algorithmic Bias 24
+A.1 More Details on the PL Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+A.2 Bias from the Reward Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+A.3 Bias from Beta . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+A.4 Examples of Preference Matching Regularization . . . . . . . . . . . . . . . . . . . . 26
+A.5 Discussion of f -divergence RLHF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+A.6 Other Discussions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+B Algorithmic Biases of Standard RLHF 29
+B.1 Bias from KL Regularization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+B.2 Extreme Case: Preference Collapse in KL RLHF . . . . . . . . . . . . . . . . . . . . 31
+C Other Related W ork 32
+D Other Experiments 33
+D.1 Perplexity of PM RLHF . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+D.2 Fine-tuning OPT-1.3B Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+D.3 Other Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+E Proofs of T echnical Results 35
+E.1 Proof of Theorem 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+E.2 Proof of Theorem 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+E.3 Proof of Proposition 3.1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+E.4 Proof of Proposition 5.1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+1 Introduction
+Large language models (LLMs) such as ChatGPT-4o (OpenAI, 2023) and Claude-3.7 Sonnet
+(Anthropic, 2024) have demonstrated impressive capabilities in tasks such as code generation, basic
+data analysis, elementary math problem solving, and reasoning (Bubeck et al., 2023; Chowdhery
+et al., 2023; Touvron et al., 2023; Bubeck et al., 2023; Team et al., 2023). The widespread adoption
+2
+
+===PAGE===
+
+of LLMs for tasks previously considered unlikely to be performed by machines reflects these advanced
+capabilities. For instance, a recent study revealed that a substantial proportion of machine learning
+conference reviews had been written or significantly modified by LLMs (Liang et al., 2024).
+As a result, LLMs are increasingly influencing decision-making processes across various domains
+(Eloundou et al., 2023; Duetting et al., 2023). It is, therefore, crucial to ensure that LLMs accurately
+reflect human preferences to promote fairness, mitigate the risk of biased outputs, and facilitate
+economically sound decisions (Arrow, 2012). Human preferences are inherently diverse due to
+factors such as cultural background, personal experiences, and contexts. It is natural for people
+from different backgrounds to exhibit varied preferences when making comparisons. For example,
+Ouyang et al. (2022) and Bai et al. (2022) reported annotator–annotator and annotator–researcher
+disagreement rates of 37% and 23%, respectively, even for trained human labelers. Crucially, the
+relative proportions of these preferences play a critical role. For example, a restaurant chain deciding
+between adding a vegan dish or a spicy meat-based option to its menu might base its decision on
+whether customers have a 90% to 10% or a 20% to 80% preference for the two options. An LLM
+that fails to match human preferences could result in biased viewpoints on the tasks assigned to it.
+Consequently, the suggestions or decisions made by the LLM could suffer from fairness issues or, in
+this case, lead to undesirable economic outcomes.
+Indeed, LLMs have been observed to exhibit significant biases when expressing preferences (Casper
+et al., 2023; Santurkar et al., 2023; Azar et al., 2024; Chakraborty et al., 2024). Casper et al. (2023)
+noted that LLMs tend to disproportionately favor more frequent items over less frequent ones. This
+finding is in agreement with the observation by Santurkar et al. (2023) that opinion distributions
+generated by LLMs are often highly skewed towards the dominant viewpoints, often assigning over
+99% probability to the dominant opinion and thus failing to capture the diversity of opinions within
+the population.
+In this paper, we aim to understand the origins of bias in LLMs from an algorithmic viewpoint
+and, more importantly, to develop a method for accurately aligning LLMs with human preferences
+with provable guarantees. To this end, it is instructive to examine reinforcement learning from
+human feedback (RLHF) (Ouyang et al., 2022; Dong et al., 2024), the go-to solution for unleashing
+the power of LLMs by significantly simplifying the process of prompting for general tasks. To put
+this in perspective, LLMs had existed for at least five years—for example, GPT-3 was introduced in
+2020—before the worldwide excitement surrounding the introduction of ChatGPT-3.5, which was
+enabled by applying standard RLHF to GPT-3. At its core, RLHF trains a reward model using the
+Bradley–Terry–Luce model (Bradley and Terry, 1952; Luce, 2012) to learn human preferences based
+on data from human labelers, and then fine-tunes the pretrained LLM using this reward model.
+First, we reveal an inherent bias in standard Kullback–Leibler (KL) divergence-based RLHF,
+which involves a pretrained LLM as a reference model for computing the divergence. We demonstrate
+that the reference model, arguably biased since it has not been aligned, can pass its bias to RLHF
+through the KL-based regularization. In certain cases, we theoretically show that this algorithmic
+bias can asymptotically amplify to extreme preference imbalances, such as 0% versus 100%, a
+phenomenon we term preference collapse. When preference collapse occurs, the LLM completely
+disregards minority opinions, which would lead to severe consequences in making fair and economical
+decisions. Furthermore, we show that merely replacing the KL divergence with a generalf -divergence
+(R´ enyi, 1961) does not eliminate this algorithmic bias.
+Crucially, this algorithmic bias persists even when the reward model is an oracle, meaning it
+fully represents human preferences. This contrasts with prior research, which often attributed the
+3
+
+===PAGE===
+
+empirically observed biases in LLMs to the insufficiency of using a single reward model to express
+complex human preferences (Chakraborty et al., 2024; Zhong et al., 2024) or overfitting issues in
+reward model training, partly due to limited labeling data (Song et al., 2023; Schulman, 2023).
+To address the algorithmic bias and its extreme form, preference collapse, we introduce preference
+matching RLHF as the main contribution of this paper. This novel RLHF method provides a
+principled approach to precisely aligning LLMs with the reward model’s preferences, which comes
+with provable statistical guarantees. We start by considering a general function that regularizes
+the policy network, i.e., the probability distribution of responses given a prompt. By deriving a
+necessary condition for the regularizer to achieve preference matching in the form of an ordinary
+differential equation and solving it, we show that the regularization must equal the negative
+logarithm of the response probability distribution, up to certain less relevant terms. We further
+prove that this form of regularization is sufficient to match the reward model’s preferences. Taking
+the expectation, this regularization term becomes the Shannon entropy. Intuitively, in maximizing
+the reward plus the preference matching regularization, it seeks to strike a balance between reward
+maximization and diversifying the generation of responses. Moreover, we extend the differential
+equation-based strategy to obtain preference matching regularization for a class of generalized
+Bradley–Terry–Luce/Plackett–Luce models.
+In comparison to our approach, a straightforward approach to addressing algorithmic biases
+is the early stopping of the fine-tuning process in standard RLHF, which appears to be one of
+OpenAI’s approaches based on publicly available information (Schulman, 2023). However, early
+stopping cannot entirely eliminate the bias in alignment since the “target” of standard RLHF is
+inherently biased, whereas our preference matching RLHF provably sets its global optimization
+solution to be unbiased.
+To examine the empirical performance of our preference matching RLHF, we introduce a variant
+of PM RLHF by conditioning PM RLHF on the set of responses that resemble natural language.
+We apply this conditional PM RLHF to fine-tune the OPT (Zhang et al., 2022) and Llama-family
+(Touvron et al., 2023) models. In our experiments, we use proximal policy optimization (PPO)
+(Schulman et al., 2017) to train the model with our RLHF and the standard RLHF. To measure
+how well an RLHF approach does in terms of preference matching, we introduce a new measure
+called the preference matching divergence, defined as the KL divergence between the aligned model
+and the reward model. Using the standard RLHF approach, the preference matching divergence
+is 2.23 and 1.16 when fine-tuning Llama-2-7B and OPT-1.3B, respectively. Using our preference
+matching RLHF, the values of this divergence decrease to 1.57 and 0.68, marking improvements of
+approximately 29% and 41%, respectively.
+The remainder of the paper is structured as follows. Section 2 introduces the basics of LLMs and
+how standard RLHF operates on them. Section 3 introduces the concept of preference matching and
+obtains preference matching regularization by solving an ordinary differential equation. Section 4
+extends preference matching RLHF to language domains, where we resolve a numerical challenge
+by introducing a conditional variant of our RLHF that is tailored to natural text generation.
+Experimental results are presented in Section 5. We conclude the paper with a discussion in
+Section 6.
+1.1 Related Work
+Perspective on Bias in Preference Modeling. The observed bias in RLHF may originate
+from the assumption that complex human preferences can be captured by a single reward function.
+4
+
+===PAGE===
+
+Chakraborty et al. (2024) challenged this assumption by providing a reward mismatch lower
+bound, arguing that diverse human preferences cannot be modeled by a single reward function.
+Similarly, Zhong et al. (2024) showed that a single reward function fails to balance the preferences of
+multiple heterogeneous individuals. Xiao et al. (2025b) examined the inconsistency between reward
+learning and the principles of social choice theory. To address this limitation, Wang et al. (2024)
+proposed directional preference alignment with multi-objective rewards to train LLMs for diverse
+user preferences. Xu et al. (2024b) showed that methods such as RLHF can fail to yield desirable
+outcomes due to violations of the independence of irrelevant alternatives. Liu et al. (2025) and Shi
+et al. (2025) discussed the statistical impossibility of aligning with human preferences.
+Diversity in Human Preferences. Existing alignment approaches predominantly consider the
+average preference of human annotators, overlooking the rich diversity inherent in human preferences
+(Casper et al., 2023; Kaufmann et al., 2023; Li et al., 2025). Chakraborty et al. (2024) explored the
+factors contributing to this diversity, which often arises from various social and cultural backgrounds
+(Aroyo et al., 2023b). These factors include socio-demographic backgrounds, personal bias and
+context subjectivity, imperfect preferences, and linguistic ambiguity and missing context. Additional
+information on these factors is provided in the online Appendix.
+2 Preliminaries
+LLMs are large-scale deep learning architectures trained on extensive datasets (Vaswani et al., 2017;
+Kenton and Toutanova, 2019). They are built upon the Transformer architecture (Vaswani et al.,
+2017), which is designed to capture the context and relationships within textual sequences. This
+enables the models to extract and comprehend the meanings of words and phrases effectively.
+The generation of sentences by LLMs relies on predicting the next token. Tokenization (Grefen-
+stette, 1999) is the process of converting text into smaller units called tokens. Tokens can be words,
+subwords, characters, or other meaningful units. This process is a crucial step in natural language
+processing (NLP) and language modeling because it transforms raw text data into a format that can
+be processed by machine learning algorithms and models. For instance, the sentence “I just got a
+funky phone case!” can be tokenized into [“I”, “ just”, “ got”, “ a”, “ fun”, “ky”, “ phone”, “ case”,
+“!”], where “ ” represents a space. Formally, tokenization can be expressed as y = [T1, T2, T3, . . . , TL],
+where L is the length of the sentence. Utilizing the sequence of preceding tokens, an LLM predicts
+the subsequent token. For example, the LLM assigns a probability to p(T3 | “I”, “ just”) across a
+range of possible next tokens such as [“ got”, “ took”, · · ·] from its vocabulary.
+2.1 Reinforcement Learning from Human Feedback
+RLHF is a promising approach to align LLMs with human preferences, ensuring that the models are
+useful and safe for their human users (Ouyang et al., 2022). The pre-training fine-tuning framework
+for learning LLMs typically consists of the following three steps: (1) supervised fine-tuning; (2)
+preference and reward modeling; and (3) policy learning and RLHF fine-tuning.
+Step 1: Supervised Fine-T uning (SFT). RLHF typically begins with a generic pre-trained
+language model, which is fine-tuned using supervised learning on a high-quality dataset to obtain a
+model πSFT.
+5
+
+===PAGE===
+
+Step 2: Preference and Reward Modeling. Let x be a prompt given to an LLM and y be
+the output response. In the second step, the SFT model is prompted with prompts x to produce
+pairs of answers ( y1, y2) ∼ πSFT. For instance, consider the prompt x being the question: “Please
+suggest a drink.” Two possible responses to this prompt are y1 = “I would suggest coffee” and y2 =
+“I would suggest tea,” respectively. After that, human labelers express their preferences for one of
+the two answers, labeled as yw ≻ yl, where yw and yl denote the winner and loser among ( y1, y2),
+respectively.
+The preferences are assumed to be generated by some true reward model r(x, y), which we do
+not have access to. In standard RLHF (Ouyang et al., 2022), the preference model is assumed to be
+the Bradley–Terry–Luce (BTL) model (Bradley and Terry, 1952; Luce, 2012), which assumes that
+the human preference distribution can be written as
+P(y1 ≻ y2|y1, y2, x) = exp(r(x, y1))
+exp(r(x, y1)) + exp(r(x, y2)) . (2.1)
+By collecting an offline dataset of comparisons Dcomp = {xi, yi
+w, yi
+l }n
+i=1, we can parameterize a reward
+model rθ(x, y) and estimate the parameters via maximum likelihood. The problem is formulated as
+a binary classification problem. The negative log-likelihood function is
+min
+θ
+−E(x,yw,yl)∼Dcomp[log(σ(rθ(x, yw) − rθ(x, yl)))], (2.2)
+where σ(u) := 1 /(1 + exp(−u)) is the logistic function. Hence, we omit the dependence of the
+reward function rθ on θ because this paper does not discuss how the reward model is trained.
+Step 3: Policy Learning and RLHF Fine-tuning. Let πϕ(y|x) be the probability distribution
+of the responses given a prompt x, where ϕ denotes the weights of the LLM. The goal of (unreg-
+ularized) RLHF fine-tuning is to maximize the expected reward, i.e., maxϕ Ey∼πϕ(·|x)r(x, y). To
+mitigate over-optimization of the reward model, additional regularization should be added to the
+objective function, i.e., maxϕ Ey∼πϕ(·|x)r(x, y) − Regularizer, where, unless specified otherwise, the
+expectation is taken over the randomness of x and, conditional on x, the randomness of y sampled
+from πϕ(·|x). In practice, x can be either sampled from a fixed database of prompts (Rafailov et al.,
+2023) or adaptively based on prior responses (Xiong et al., 2023). RLHF uses a KL penalty between
+the RLHF model and the reference model, which is the pretrained or SFT model, at each token as
+the regularizer. The loss function of regularized RLHF fine-tuning is
+max
+ϕ
+Ey∼πϕ(·|x)r(x, y) − βDKL(πϕ(y|x)∥πref(y|x)), (2.3)
+where β >0 is a parameter controlling the deviation from the base reference policy πref, namely the
+initial SFT model πSFT. Above, the Kullback–Leibler divergence between πϕ(y|x) and πref(y|x) is
+defined to be Ey∼πϕ(·|x)
+
+log(πϕ(y|x)) − log(πref(y|x))
+
+. In practice, πϕ(y|x) is calculated token-wise,
+let y = [T1, · · ·, TL], it can be expressed in
+log(πϕ(y|x)) =
+LX
+i=1
+
+log πϕ(Ti | Ti−1, · · ·, T1, T0)
+
+,
+where we further denote T0 = x. The same notation is used for πref(y|x). For clarity, the term
+RLHF problem specifically refers to the problem defined in (2.3). When comparing various RLHF
+approaches, (2.3) is referred to as either standard RLHF or KL RLHF.
+6
+
+===PAGE===
+
+3 Preference Matching RLHF
+We start by presenting a motivating example. For a question x, formally referred to as a prompt,
+let y1 and y2 be two possible responses. Suppose 60% of human labelers prefer y1 over y2 for this
+binary comparison. To ensure fairness and protect minority preferences, it would be desirable for the
+model’s output probabilities to reflect this distribution (for example, π(y1|x)/π(y2|x) = 60%/40%).
+We now formally define the following condition.
+Definition 3.1 (Preference Matching). A policy π(y|x) is said to be preference matching (PM) if,
+for any prompt x and any pair of responses y1, y2, it satisfies
+π(y1|x)
+π(y1|x) + π(y2|x) = P(y1 ≻ y2|x, y1, y2),
+where P(y1 ≻ y2|x, y1, y2) denotes the target human preference distribution.
+Remark 3.2. From a practical perspective, we only require Definition 3.1 to hold for prompts that do
+not admit a single correct response, with the response distribution depending on personal opinions
+or preferences. Another reason for not requiring it to hold for all prompts is that the reward model
+might not generalize well for some prompts.
+For general human preferences, a preference matching policy as defined in Definition 3.1 may
+not always exist due to conflicts across different pairwise comparisons. To further explore which
+human preferences can be matched by LLMs, we first introduce the extension of the BTL model
+to multi-comparison settings, which yields the Plackett–Luce (PL) model (Plackett, 1975; Luce,
+2012). The PL model outputs the preference in the form of a ranking of different items, which will
+not be used in our paper. Therefore, we provide the standard assumption of the PL model in the
+appendix. For simplicity, we consider an equivalent formulation of the PL model that assumes the
+preference of one response over others: P(y|x) = exp(r(x, y))/ P
+y′ exp(r(x, y′)), where the sum is
+over all possible responses to the prompt x.
+Given a human preference, if a preference-matching policy exists, it can be represented by the
+PL model. Conversely, if human preferences follow the PL model assumption, a preference-matching
+policy necessarily exists. Therefore, throughout the remainder of the paper, we assume that human
+preferences follow the PL model. We refer to the policy π⋆(y | x) = exp(r(x, y))/ P
+y′ exp(r(x, y′))
+as the preference-matching policy.
+Given a reward model, consider the simple scenario of optimizing the expected reward without
+any regularization. Assuming that the reward model accurately reflects this 60% versus 40%
+preference between the two responses, it will assign a slightly higher reward r(x, y1) to the first
+response than r(x, y2) to the second one. Maximizing the reward without any regularization would
+lead the LLM to exclusively prefer the majority opinion and completely disregard any minority
+opinions.
+Proposition 3.3. Let ϕ⋆ be an optimal solution to the unregularized reward maximization problem
+maxϕ Ey∼πϕ(·|x)r(x, y), where the expectation is over the randomness of both x and y following the
+conditional distribution πϕ(·|x). For a fixed x, with probability one, πϕ⋆(y|x) outputs some response
+y⋆ with the highest reward r(x, y⋆).
+Here, we assume sufficient expressivity of the LLMs and that the expected reward is maximized
+exactly, as detailed in Hypotheses 3.1 and 3.2 in Section 3.1. Although this result is almost trivial,
+7
+
+===PAGE===
+
+it implies that regularization is necessary to match the preferences of the reward model. Formally,
+we consider adding a regularizer R(πϕ(y|x)) to the reward maximization problem:
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) + R(πϕ(y|x))
+
+. (3.1)
+Specifically, our goal is to determine the form of R(·) such that the global solution to (3.1) is
+statistically unbiased. We seek to identify what regularization structure would ensure that the
+solution possesses certain desirable properties—for example, satisfying the PM condition. As such,
+our investigation is entirely statistically motivated.
+Following Definition 3.1, we call R a PM regularizer if solving (3.1) leads to a PM policy πϕ⋆(y|x).
+Assuming that the reward model faithfully reflects the preferences learned from human-labeled data,
+PM regularization ensures that the LLM fine-tuned by an RL algorithm maximizing (3.1) would
+have (approximately) the same preferences as the human labelers.
+3.1 Preference Matching Differential Equation
+Now, we aim to find all possible PM regularizers by finding a necessary condition for the PM
+property. To this end, we first propose two hypotheses to facilitate our discussion.
+Working Hypothesis 3.1 (Sufficiency of expressivity) . For any x, we assume that the policy of the
+LLM, πϕ(y|x), can represent an arbitrary probability distribution function over the universe of
+responses by varying the parameter ϕ.
+Working Hypothesis 3.2 (Soundness of optimization) . The fine-tuning process of the LLM can find
+the global solution to the optimization problem (3.1).
+These two working hypotheses allow us to obtain an almost closed-form expression of the optimal
+policy for (3.1). Under Hypothesis 3.1, any policy ϕ is feasible in the sense that there exists ϕ such
+that π = πϕ. This suggests that we can directly optimize the policy π instead of ϕ that parametrizes
+it. Hence, we consider the following program that is more amenable to analysis than (3.1):
+max
+π
+Ey∼π(·|x)
+
+r(x, y) + R(π(y|x))
+
+, (3.2)
+where we use π rather than πϕ to highlight that π itself becomes the decision variable in this
+optimization program.
+Next, we study under what conditions the exact solution to (3.2) would satisfy the PM property.
+We can write (3.2) in the form of a conditional expectation:
+Ey∼π(·|x)
+
+r(x, y) + R(π(y|x))
+
+= Ex Ey∼π(·|x)
+
+r(x, y) + R(π(y|x))
+x
+
+,
+where the second Ey∼π(·|x) is interpreted as the expectation over only the randomness of y. Thus, it
+would be sufficient to find the optimal R that maximizes
+Ey∼π(·|x)
+
+r(x, y) + R(π(y|x))
+x
+
+(3.3)
+for each x. For a fixed x, without loss of generality, we assume the distributionπ(·|x) is a multinomial
+distribution on y1, . . . , yk with probabilities π1, . . . , πk, respectively. By Hypothesis 3.2, (3.3) can
+8
+
+===PAGE===
+
+be exactly minimized over such multinomial distributions. Denoting by ri = r(x, yi), therefore (3.3)
+is equivalent to
+max
+π1,...,πk
+kX
+i=1
+πi(ri + R(πi)), (3.4)
+subject to the constraints Pk
+i=1 πi = 1 and πi ≥ 0.
+Assuming that R is sufficiently differentiable, we aim to find the necessary condition on R that
+leads to PM regularization based on (3.4). Consider the Lagrangian of (3.4): L = Pk
+i=1 πi(ri +
+R(πi)) + λ
+Pk
+i=1 πi − 1
+
+. Here, we omit the constraints since they will be satisfied automatically.
+The first-order conditions ∂L/∂π i = ri + R(πi) + πiR′(πi) + λ = 0 must be satisfied by the PM
+policy π⋆. Thus, we get
+R(π⋆
+i ) + π⋆
+i R′(π⋆
+i ) = −ri − λ (3.5)
+for all i, where π⋆
+i := π⋆(yi|x) = exp(ri)/ Pk
+j=1 exp(rj). Conversely, we can write
+ri = log
+
+π⋆
+i
+Pk
+j=1 exp(rj)
+
+= log π⋆
+i + c,
+where c = log(Pk
+j=1 exp(rj)) does not depend on i = 1, . . . , k. This expression of ri together with
+(3.5) gives
+R(π⋆
+i ) + π⋆
+i R′(π⋆
+i ) = − log π⋆
+i + c′, (3.6)
+where c′ = −c − λ does not depend on i.
+Taking π⋆
+i as a variable, as it can take any value in [0 , 1] in principle, and differentiating both
+sides of (3.6), we show that R must satisfy the following second-order ordinary differential equation:
+πR′′(π) + 2R′(π) + 1
+π = 0,
+which we call the PM differential equation.
+3.2 Preference Matching Regularization
+To solve the PM differential equation, note that πR′′ + 2R′ = (πR)′′. Hence, we get
+R(π) = 1
+π
+Z Z
+πR′′ + 2R′dπ = 1
+π
+Z Z
+− 1
+π dπ = − log π + C1 + C2
+π , (3.7)
+where C1 and C2 are constants. In words, π⋆(y|x) ≡ exp(r(x, y))/ P
+y′ exp(r(x, y′)) is the global
+solution to (3.3) only if R takes the form above.
+It is important to recognize that the form ofR here does not depend on the specific probabilitiesπ⋆
+i ,
+which implicitly depend on the prompt x. This is a convenient fact that facilitates the implementation
+of the PM regularization. If there were such dependence, it would be very complicated to compute
+R since it would require knowledge of the values of π⋆
+i from the reward model.
+Notably, the derivation of (3.7) is conditional on x, which implies that the constants C1 and C2
+can depend on x. Taken together, our discussion above suggests the following theorem, of which the
+sufficiency part is proved in the appendix.
+9
+
+===PAGE===
+
+Theorem 1. Under Hypotheses 3.1 and 3.2, solving (3.1) yields the PM policy if and only if
+R(π) = − log π + C1,x + C2,x
+π , (3.8)
+where C1,x and C2,x are arbitrary constants depending on x.
+Remark 3.4. For the last term in R(π), note that
+Ey∼π(·|x)
+C2,x
+π(y|x) = Ex
+"X
+y
+π(y|x) C2,x
+π(y|x)
+#
+= Ex [kC2,x]
+is a constant that is independent of the decision variable π. Therefore, this term does not influence
+the optimization of (3.2) at all.
+Taking the expectation over the randomness of y conditional on x, the term − log π in the
+regularization is equal to the Shannon entropy of the policy π(·|x). The entropy in the maximization
+problem would encourage more diverse responses as opposed to the modal collapse in Proposition 3.3.
+Now we formally define PM RLHF by bringing back the parameter ϕ into the maximization
+problem.
+Definition 3.5. We refer to an RLHF variant as PM RLHF under the PL model if it seeks to
+optimize the following optimization program:
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − log(πϕ(y|x)) + C1,x + C2,x
+πϕ(y|x)
+
+. (3.9)
+A Dual Perspective. Let C1,x = C2,x = 0, we can interpret the PM RLHF objective (3.9)
+through the lens of robust optimization. Note that the dual of (3.9) is
+max
+ϕ
+min
+r′(x,y)
+Ey∼πϕ(·|x)r′(x, y) s.t. log-sum-exp( r(x, ·) − r′(x, ·)) ≤ ϵ
+for some constant ϵ, where the log-sum-exp function equals log
+hP
+y exp(r(x, y) − r′(x, y))
+i
+. The
+constraint can be interpreted as an adversarial perturbation of the rewards for robust optimization.
+In the appendix, we obtain the dual formulation and discuss several examples of such objective
+functions with different constants C1,x and C2,x.
+3.3 Extension to Response-Dependent Regularization
+The discussion in Section 3.2 implicitly assumes the dependence of R on the prompt x. Now, we
+extend this dependence to both x and the response y, and it would be of interest to find a larger
+class of PM regularization due to this extended scope:
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) + Rx,y(πϕ(y|x))
+
+. (3.10)
+This, in particular, includes the standard KL RLHF (2.3).
+10
+
+===PAGE===
+
+Just as with its response-independent counterpart, Hypothesis 3.1 allows us to write (3.10) in
+the following ϕ-independent form: maxπ Ey∼π(·|x)
+
+r(x, y) + Rx,y(π(y|x))
+
+. Next, Hypothesis 3.2
+shows that the ϕ-independent optimization program above can be further reduced to
+max
+π1,...,πk
+kX
+i=1
+πi(ri + Ri(πi)), (3.11)
+subject to the constraints Pk
+i=1 πi = 1 and πi ≥ 0, where Ri(·) := Rx,yi(·).
+To admit the PM policy as its solution, just as with (3.6), the optimization program (3.11)
+shows that Ri must obey Ri(π) + πR′
+i(π) + log π = c′ for all 1 ≤ i ≤ k. Solving this differential
+equation gives
+Ri(π) = 1
+π
+Z
+πR′
+i + πR′
+idπ = − log π + C1 + C2,i
+π , (3.12)
+where C1 = c′ − 1 is independent of i, while C2,i could depend on i. As the derivation of (3.12) is
+conditional on x, both the constants C1 and C2,i can depend on x. Taken together, our discussion
+above suggests the following theorem, which we prove in the appendix.
+Theorem 2. Under Hypotheses 3.1 and 3.2, solving (3.10) yields the PM policy if and only if
+Rx,y(π) = − log π + C1,x + C2,x,y
+π ,
+where C1,x is an arbitrary constant depending only on x, and C2,x,y is an arbitrary constant depending
+on x and y.
+Since the KL penalty used in (2.3) is included as an instance of (3.10) but cannot be expressed
+as in Theorem 2, we have the following corollary.
+Proposition 3.6. The standard KL RLHF (2.3) does not yield the PM policy.
+It is not clear how to leverage the dependence on both the prompt and response for a choice
+of nonzero C2,x,y with good practical performance. For example, one possibility is to set C2,x,y =
+Cπϕ′(y|x) for some fixed parameter ϕ′ for the LLM. We leave this question for future research.
+Finally, we provide a brief comparison with an existing alignment approach designed to handle di-
+verse human preferences: MaxMin RLHF (Chakraborty et al., 2024). Let the human population be U .
+Let u represents the human subpopulation defined over a finite discrete set U := {H1, H2, . . . ,H|U |},
+such that H = S|H|
+u=1 Hu. The cardinality of the set U represents the number of sub-populations in the
+total human population H. Assume that the sub-population Hu can be modeled by a BT model with
+an associated reward function ru(x, y), for all u. Under this assumption, the loss function of MaxMin
+RLHF can be formulated as: maxπ minu ExEy∼π(·|x)
+
+ru(x, y) − βDKL
+ 
+π(· |x) ∥ πref(· |x)
+
+. The
+main difference between MaxMin RLHF and PM RLHF lies in their fundamental goals. MaxMin
+RLHF aims to address group-level bias across distinct preference groups, whereas our approach
+focuses on eliminating individual-level bias within a single preference group.
+4 Conditional Preference Matching RLHF
+When applying PM RLHF in practice, we encounter a numerical issue that is inherent to the nature
+of text data. A direct application of PM RLHF in our experiments fails to produce human-like
+11
+
+===PAGE===
+
+text. This numerical issue corresponds to high values of perplexity (see Section 5 for the definition
+of perplexity). For the Llama-2-7B model (Touvron et al., 2023), the perplexity scores for LLMs
+trained by PM RLHF and KL RLHF are 7.15 and 5.48, respectively. Further experimental details
+are provided in the appendix.
+A possible cause is that the number of all responses is excessively large. In principle, the number
+can be up to |V| L for responses of length no more than L, where V is the token vocabulary. For
+example, |V| = 50, 272 for the OPT-1.3B model, and |V| = 32, 000 for the Llama series models,
+and |V| = 50 , 257 for GPT-2 and GPT-3.5 series models (OpenAI, 2023). However, most such
+responses are meaningless and the meaningful and natural text occupies only a negligible fraction.
+In particular, the reward model might not be generalized well on the meaningless text. Consequently,
+PM RLHF does not exclude the generation of meaningless text, as the reward model might assign
+positive probability to such text.
+4.1 Conditional Preference Matching
+To tackle the numerical issue above, we propose to divide the responses space, which we refer to
+as Y, into M(x) and Y \ M(x). The former contains all well-formed natural language responses
+to prompt x, while the latter consists of malformed outputs such as nonsensical text. Although
+the precise formulation of these sets remains to be determined, for the moment, we assume that
+the reward model behaves well on M(x) in the sense that the rewards on this set reflects well the
+human labelers’ preferences.
+Our hypothesis is that by conditioning PM RLHF on the set where the reward model behaves
+well, the numerical issue would be resolved. As such, we consider a constrained variant of (3.9):
+max
+π
+Ey∼π(·|x)
+
+r(x, y) − log(π(y|x)) + C1,x + C2,x
+π(y|x)
+
+,
+s.t. π(y|x) ≥ 0, if y ∈ M(x), π(y|x) = 0, if y /∈ M(x).
+Here, the first constraint is automatically satisfied by parametrization of neural networks. However,
+this program is difficult to optimize due to a large number of constraints. Instead, we consider an
+unconstrained relaxation of the above optimization program:
+max
+π
+Ey∼π(·|x)
+
+r(x, y) − log(π(y|x))1(y ∈ M(x)) − log(π(y|x)/ϵ)1(y /∈ M(x)) + C1,x + C2,x
+π(y|x)
+
+, (4.1)
+where ϵ >0 is a small number.
+For meaningful responses in M(x), the regularization log(π(y|x)) remains the same as in the
+original PM RLHF. In contrast, when the response is meaningless, the regularization becomes
+log(π(y|x)/ϵ), which penalizes heavily if π(y|x) ̸= 0 as ϵ → 0.
+The following theorem shows that the global solution to (4.1) is preference matching in the
+conditional sense. Its proof is relegated to the appendix.
+Theorem 3. Under the same assumptions as in Theorem 1, the optimal solution π⋆(y|x) to (4.1)
+conditional on M(x) satisfies
+π⋆(y|M(x), x) = exp(r(x, y))P
+y′∈M(x) exp(r(x, y′))
+for any y ∈ M(x).
+12
+
+===PAGE===
+
+This theorem holds for an arbitrary choice of M(x), not necessarily that containing only
+meaningful responses for the prompt x. In particular, by letting ϵ → 0, π⋆(y|x) tend to output
+responses only in the meaningful set M(x), that is, π⋆(M(x)|x) → 1. As such, we have π⋆(y|x) =
+exp(r(x, y))/ P
+y′∈M(x) exp(r(x, y′)) in the limit ϵ → 0.
+4.2 Parameterization of Conditional PM RLHF
+To conclude this section, we discuss some practical aspects of implementing the conditional PM
+RLHF. Following Example 2 in Section 3.2, we set C1,x = C1 = −Ey∼π(·|x)r(x, y), where the
+expectation is over the randomness of both x and y, and C2,x = 0 (Ouyang et al., 2022). The reward
+now has mean zero and is still denoted by r(x, y) for simplicity. The objective function becomes
+r(x, y) − log(π(y|x))1(y ∈ M(x)) − log(π(y|x)/ϵ)1(y /∈ M(x)).
+To implement the conditional PM RLHF above, both the regular set M(x) and the relaxation
+parameter ϵ need to be set. We leverage the reference model to serve as a basis to characterize
+regular responses. Specifically, we assume that a regular response would yield a relatively large
+value of πref(y|x), which suggests setting the regular set as M(x) := {y : πref(y|x) ≥ α} for some
+α >0. It is worthwhile mentioning that Theorem 3 remains true for this choice of regular set.
+Next, we discuss how to choose ϵ. First of all, while its choice might influence the likelihood of
+generating a response, it does not impact the conditional preference matching of those responses
+such that πref(y|x) ≥ α. In general, a very small value of ϵ is desired from a theoretical perspective
+since it penalizes the generation of meaningless responses. However, this also increases the burden
+of numerical optimization. To balance the theoretical guarantee and practical tractability, we let ϵ
+depend on both x and y and set ϵ(x, y) = πref(y|x) to serve as a computationally feasible calibration
+for relaxation. This would ensure that the model remains reasonably close to the reference model,
+avoiding significant deviations that could impact the model robustness and reliability. Finally, we
+propose the following conditional PM RLHF that we will use in our experiments:
+Definition 4.1. We refer to
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − log(πϕ(y|x))1(πref(y|x) ≥ α) − log
+ πϕ(y|x)
+πref(y|x)
+
+1(πref(y|x) < α)
+
+.
+as the conditional PM RLHF.
+The conditional PM RLHF has only one explicit tuning parameter, α. Fortunately, any choice
+of this parameter would yield a preference matching policy on responses with probability πref(y|x)
+above the threshold. In Section 5, we experiment with several choices of α and show that the results
+are robust with respect to the choice of this parameter.
+5 Experiments
+In this section, we demonstrate the effectiveness of conditional PM RLHF through a comparison
+with KL RLHF. The experiments were conducted on a computing infrastructure equipped with
+four A100 GPUs, each with 80GB of memory. Throughout the experimental process, each stage of
+RLHF follows the standardized configurations established in the DeepSpeed-Chat framework (Yao
+et al., 2023).
+13
+
+===PAGE===
+
+For experiments involving a publicly available dataset, we employ a random partitioning strategy
+to divide it into three distinct subsets: 20% is allocated for SFT, 40% is allocated to learning the
+reward functions, and the remaining 40% is reserved for the reward maximization process.
+Reward Model. The reward model is trained on a dataset of human preferences. In the second
+stage, the reward model is trained using a network architecture identical to the LLMs, but with a
+different prediction head that outputs a scalar reward value. The training process involves minimizing
+the loss function defined in (2.2), with early stopping applied to prevent over-optimization (Schulman,
+2023). It is worth noting that our theory requires β = 1, and our experiments focus on this case.
+However, note that (2.3) is equivalent to
+max
+ϕ
+Ey∼πϕ(·|x)rθ(x, y)/β − DKL(πϕ(y|x)∥πref(y|x)).
+Ablation studies are also performed by experimenting with values of β ̸= 1. In this setting, rθ(x, y)/β
+can be considered a better approximation of the true reward function r∗(x, y) compared to rθ(x, y)
+itself. Consequently, we utilize r(x, y) = rθ(x, y)/β as the reward function in our experiments, where
+β is treated as a hyperparameter.
+Another hyperparameter to tune is the threshold α, which can be set to 1 − top p, where top p
+is the nucleus sampling parameter used in SFT (Holtzman et al., 2020). The intuition for this choice
+is that it ensures natural and coherent generation by restricting sampling to high-probability tokens,
+while responses in the 1 − top p tail are typically low-quality or unnatural.
+5.1 Evaluation Metrics
+Preference Matching Divergence. To evaluate the alignment between the reward model’s
+preferences and those of the LLMs, we introduce the preference matching divergence metric. For
+a given prompt x, the procedure involves generating a pair of responses, denoted as y1 and y2.
+Consistent with the previous notation, the preference of the LLMs is defined as:
+pllm(yi|y1, y2, x) = πllm(yi|x)
+πllm(y1|x) + πllm(y2|x) , i = 1, 2.
+Here the models can be the KL RLHF–aligned or conditional PM RLHF–aligned models. Then, the
+instance preference matching divergence given x is defined by the KL divergence between the above
+two distributions, i.e., DKL(pllm(y|y1, y2, x)∥preward(y|y1, y2, x)).
+The aggregate preference matching divergence is determined by calculating the expected
+value of the instance preference divergence over all instances of x drawn from the test dataset:
+PM Divergence = ExInstance PM Divergence(x).
+LLMs’ ability to capturing human preference is usually measured by win rates. However, it
+cannot adequately capture algorithmic bias or model fairness. To illustrate this limitation, consider
+that win rate measures a model’s ability to predict the chosen response against the rejected response.
+For instance, a model could achieve a perfect 100% win rate by consistently predicting the chosen
+one with 100% confidence. However, such a model would exhibit severe preference collapse, as
+it completely ignores minority group preferences for the alternative response. In contrast, PM
+divergence directly measures a model’s algorithmic fairness. A lower PM divergence suggests better
+performance in preference matching. A perfectly fair model would achieve zero PM divergence,
+indicating that its confidence exactly match the distribution of human preferences.
+14
+
+===PAGE===
+
+Connection between PM Divergence and win rate. While win rate is a commonly used
+metric for evaluating accuracy in preference learning, it fails to capture algorithmic bias and model
+fairness. For example, a model that always predicts the preferred response with 100% confidence
+may achieve a perfect win rate but suffer from preference collapse, ignoring minority preferences.
+Since our work focuses on fairness in LLMs, PM divergence serves as a more suitable metric than
+win rate for evaluating alignment with diverse human preferences.
+To evaluate the generative performance of LLMs, additional metrics such as average output
+length, perplexity, entropy, and KL divergence are utilized. These metrics collectively aim to
+quantify various aspects of the model’s output, including predictability, conciseness, uncertainty,
+and deviation from the reference distributions.
+• Average Generation Length. The average generation length is calculated based on the
+responses generated using the test dataset. The following metrics are computed in a similar
+manner.
+• Perplexity. The perplexity (Jelinek et al., 1977) of an LLM for generating a response y
+given an input x can be characterized by the output probability πϕ(y|x). It is important
+to note that πϕ(y|x) represents the product of the probabilities of each token in y, making
+πϕ(y|x) not directly comparable across responses of different lengths. To address this, one
+can take the geometric mean of πϕ(y|x) for each token and then consider its inverse. This
+gives us the following standard definition of perplexity for a language model over a dataset D.
+Let πϕ(y|x) = p1 × p2 × . . .× pLength(y), where pi is the probability of token Ti given all the
+previous tokens. Then, perplexity is defined to be Ey∼πϕ(·|x)
+
+p1 · p2 . . . pLength(y)
+−1/Length(y).
+• Entropy. Entropy measures the diversity of the outputs. It is defined to be Ey∼πϕ(·|x) −
+log πϕ(y|x).
+• KL divergence. This metric measures the KL divergence between the trained model and
+the reference model. It is defined to be Ey∼πϕ(·|x) log[πϕ(y|x)/πref(y|x)].
+5.2 Preferences in Helpfulness and Harmlessness
+We begin by considering the task of aligning with human preferences on helpfulness and harmlessness.
+We utilize thefull-hh-rlhf dataset to fine-tune our models. This dataset comprises 112,000 training
+examples and 12,500 test cases. Figure 1 presents the PM divergences in panels (a), (b), and (c)
+for β values of 0.1, 0.5, and 1, respectively. Table 1 provides detailed numerical values for these
+metrics. The results demonstrate that the conditional PM RLHF approach outperforms the KL
+RLHF across various values of α and β. Specifically, this metric consistently yields lower values
+compared to the KL RLHF model, highlighting the efficacy of the conditional PM RLHF approach.
+Notably, when β is set to 1.0, the conditional PM RLHF model with an α value of 0.3 exhibits
+better performance than the KL RLHF model, with a PM divergence of 1.57 compared to 2.23.
+Across all tested β values, the optimal range for the α parameter appears to be 0.1 or 0.3 to achieve
+the minimal PM divergence.
+Distribution of PM Divergence. Next, we examine the histogram and the cumulative distribu-
+tion function (CDF) of instance preference matching divergence under various RLHF settings, as
+illustrated in Figure 1. In Figure 1, panels (d), (e), and (f) compare the histogram of instance PM
+15
+
+===PAGE===
+
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.00
+0.25
+0.50
+0.75
+1.00
+1.25
+1.50
+=0.1
+(a)
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.0
+0.5
+1.0
+1.5
+2.0
+=0.5
+ (b)
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.0
+0.5
+1.0
+1.5
+2.0
+=1.0
+ (c)
+0 2 4 6 8 10
+PM Divergence
+0
+200
+400
+600
+800
+1000Frequency (# of Prompts)
+=0.1
+CPM RLHF, =0.1
+KL RLHF
+(d)
+0 2 4 6 8 10
+PM Divergence
+=0.5
+CPM RLHF, =0.3
+KL RLHF (e)
+0 2 4 6 8 10
+PM Divergence
+=1.0
+CPM RLHF, =0.3
+KL RLHF
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+CDF (f)
+Figure 1: Output probabilities of the reference model and reward model when fine-tuning the
+Llama-2-7B model. Panels (a), (b), and (c) demonstrate the aggregate PM divergence for different
+α and β values. Panels (d), (e), and (f) demonstrate the histogram and CDF of the distribution of
+instance PM divergence in different settings.
+divergence for conditional PM RLHF (with the optimal α) and KL RLHF. Across all the reward
+models determined by different β values, the distribution of the instance PM divergence for models
+aligned using conditional PM RLHF is consistently closer to zero compared to those aligned with
+the KL RLHF method. This finding suggests that the conditional PM RLHF approach results in a
+higher concentration of instances with lower PM divergence, indicating better alignment with the
+preference-matching policy. This, in turn, leads to improved bias mitigation and better preservation
+of human preferences.
+Additional Measures. Table 1 compares the performance of conditional PM RLHF and RLHF
+in terms of perplexity, length, entropy, and KL divergence when fine-tuning the Llama-2-7B model.
+We now examine the perplexity measure. Across all β values, as α increases, we observe a general
+decrease in perplexity, suggesting an improvement in the model’s language generation accuracy. At
+β = 0.1, the perplexity decreases from 6.17 to 5.48 as we transition from conditional PM RLHF
+(α=0.1) to RLHF, indicating better performance. This improving trend is consistent for β = 0.5
+and β = 1.0. These trends suggest a trade-off between preference matching, as indicated by the
+16
+
+===PAGE===
+
+Table 1: Comparison between conditional PM RLHF and KL RLHF, when fine-tuning the Llama-2-
+7B model. The symbol ↓ means smaller is better. KL RLHF is equivalent to conditional PM RLHF
+when α is set to 1.
+PM Divergence ↓ Length Perplexity ↓ Entropy KL
+β = 0.1
+α = 0.1 1.33 256 6.17 0.9 0.11
+α = 0.3 1.37 246 5.74 0.82 0.08
+α = 0.5 1.40 207 5.55 0.88 0.06
+KL RLHF 1.53 131 5.48 0.92 0.05
+β = 0.5
+α = 0.1 1.58 256 7.17 0.78 0.15
+α = 0.3 1.46 253 5.57 0.81 0.07
+α = 0.5 1.57 221 5.13 0.95 0.03
+KL RLHF 1.98 115 4.91 1.01 0.01
+β = 1.0
+α = 0.1 1.71 256 10.73 0.56 0.22
+α = 0.3 1.57 254 5.64 0.79 0.07
+α = 0.5 1.62 227 5.08 0.96 0.03
+KL RLHF 2.23 108 4.82 1.05 0.01
+PM divergence, and perplexity. However, maintaining α at or above 0.3 ensures that perplexity
+remains below 6, demonstrating good generation capabilities in LLMs. Consequently, the optimal
+balance between PM divergence and perplexity appears to be achieved with an α value in the range
+of 0.3 to 0.5. Within this range, LLMs attain an ideal equilibrium, effectively aligning with user
+preferences while preserving high-quality language generation.
+5.3 Preferences in Summarization
+Secondly, we consider the task of aligning with human preferences in summarization. We fine-tune
+our models using the TL;DR summarization dataset (Stiennon et al., 2020). The results are shown
+in Table 2. For the Llama-2-7B model, PM divergence is 1.73 using PM RLHF (with β = 0 .1
+and α = 0 .1), compared to 1.96 using KL RLHF. For the Llama-3.2-3B model, the results are
+similar—1.37 for PM RLHF versus 1.50 for KL RLHF. These results indicate that the PM RLHF
+fine-tuned model is more effective at mitigating bias. The results on generation length and perplexity
+are similar between PM RLHF and KL RLHF, indicating that PM RLHF preserves natural language
+generation quality.
+In addition, we observed that when using a small-scale model, Llama-3.2-1B, the PM divergence
+remains nearly identical across different methods, ranging from 1.75 to 1.76. This suggests that
+small models may be insufficient for mitigating bias. We conjecture that larger models, such as
+Llama-3.2-70B, may be more effective in reducing bias. Due to computational constraints, we leave
+the investigation to future research.
+Remark 5.1. As established in our main theorems, the optimal solution of PM RLHF is the preference
+matching policy, which corresponds to zero PM divergence. In contrast, the global solution of KL
+RLHF corresponds to a non-zero PM divergence. However, it is important to note that fine-tuning
+does not recover the exact optimal solution, and thus the resulting model will generally exhibit
+non-zero PM divergence. Nonetheless, since PM RLHF explicitly optimizes toward minimizing PM
+17
+
+===PAGE===
+
+Table 2: Comparison between conditional PM RLHF and KL RLHF, when fine-tuning the Llama
+family models on the TL;DR summarization dataset. The symbol ↓ means smaller is better. KL
+RLHF is equivalent to conditional PM RLHF when α is set to 1.
+PM Divergence ↓ Length Perplexity ↓ Entropy KL
+Llama-2-7B PM RLHF 1.73 36 4.34 0.96 0.00
+KL RLHF 1.96 44 4.34 0.81 0.00
+Llama-3.2-1B
+α = 0.1 1.75 33 5.80 1.18 0.00
+α = 0.3 1.76 32 5.78 1.19 0.00
+KL RLHF 1.75 33 5.77 1.20 0.00
+Llama-3.2-3B
+α = 0.1 1.37 36 4.84 1.28 0.00
+α = 0.3 1.37 40 4.84 1.25 0.00
+KL RLHF 1.50 36 4.87 1.27 0.00
+divergence, it yields a model with lower PM divergence compared to KL RLHF.
+6 Discussion
+In this paper, we have introduced PM RLHF to address algorithmic biases arising from aligning LLMs
+using a reward model. An integral component of this extension of RLHF is the PM regularizer, which
+takes the form of the negative logarithm of the probability distribution of the response. Essentially
+being the Shannon entropy of the LLM’s response, this regularization, together with the reward
+model, strikes a balance between reward maximization and response diversification. In particular, it
+allows the LLM to output responses that match the preference probabilities of the reward model
+under the PL model, thereby eliminating the algorithmic bias that standard RLHF suffers from.
+When applying PM RLHF to language domains, we resolve the challenge of the generated text
+becoming unnatural by introducing a conditional variant of PM RLHF. The conditional PM RLHF
+operates by excluding responses that have a very low probability with respect to a reference model.
+This work has some limitations. Given abundant computational resources, this work could
+be enhanced if PM RLHF were applied to industrial-level LLMs such as ChatGPT-4 or Claude-3
+Opus. Recognizing that RLHF methodologies are more effective for very large LLMs (Schulman,
+2023), there are good reasons to believe that PM RLHF would further improve preference alignment
+when the LLMs become larger, given the promising experiments on small models in Section 5.
+Furthermore, when transitioning to the language domain, the method by which the conditional PM
+RLHF determines the naturalness of the text using the reference model appears somewhat arbitrary.
+A more principled approach would likely further enhance the empirical performance of PM RLHF.
+Acknowledgments
+We thank the Associate Editor and the reviewers for their valuable comments and suggestions. This work
+was supported in part by NIH grants, R01-EB036016, RF1AG063481 and U01CA274576, NSF DMS-2310679,
+a Meta Faculty Research Award, and Wharton AI for Business. The content is solely the responsibility of the
+authors and does not necessarily represent the official views of the NIH.
+18
+
+===PAGE===
+
+References
+A. Anthropic. The claude 3 model family: Opus, sonnet, haiku. Claude-3 Model Card , 2024.
+L. Aroyo, M. Diaz, C. Homan, V. Prabhakaran, A. Taylor, and D. Wang. The reasonable effectiveness of
+diverse evaluation data, 2023a.
+L. Aroyo, A. S. Taylor, M. Diaz, C. M. Homan, A. Parrish, G. Serapio-Garcia, V. Prabhakaran, and D. Wang.
+Dices dataset: Diversity in conversational ai evaluation for safety, 2023b.
+K. J. Arrow. Social choice and individual values , volume 12. Yale university press, 2012.
+M. G. Azar, Z. D. Guo, B. Piot, R. Munos, M. Rowland, M. Valko, and D. Calandriello. A general theoretical
+paradigm to understand learning from human preferences. In International Conference on Artificial
+Intelligence and Statistics , pages 4447–4455. PMLR, 2024.
+Y. Bai, A. Jones, K. Ndousse, A. Askell, A. Chen, N. DasSarma, D. Drain, S. Fort, D. Ganguli, T. Henighan,
+N. Joseph, S. Kadavath, J. Kernion, T. Conerly, S. El-Showk, N. Elhage, Z. Hatfield-Dodds, D. Hernandez,
+T. Hume, S. Johnston, S. Kravec, L. Lovitt, N. Nanda, C. Olsson, D. Amodei, T. Brown, J. Clark,
+S. McCandlish, C. Olah, B. Mann, and J. Kaplan. Training a helpful and harmless assistant with
+reinforcement learning from human feedback, 2022. URL https://arxiv.org/abs/2204.05862.
+R. A. Bradley and M. E. Terry. Rank analysis of incomplete block designs: I. the method of paired comparisons.
+Biometrika, 39(3/4):324–345, 1952.
+S. Bubeck, V. Chandrasekaran, R. Eldan, J. Gehrke, E. Horvitz, E. Kamar, P. Lee, Y. T. Lee, Y. Li,
+S. Lundberg, et al. Sparks of artificial general intelligence: Early experiments with gpt-4. arXiv preprint
+arXiv:2303.12712, 2023.
+S. Casper, X. Davies, C. Shi, T. K. Gilbert, J. Scheurer, J. Rando, R. Freedman, T. Korbak, D. Lindner,
+P. Freire, et al. Open problems and fundamental limitations of reinforcement learning from human feedback.
+arXiv preprint arXiv:2307.15217 , 2023.
+S. Chakraborty, J. Qiu, H. Yuan, A. Koppel, F. Huang, D. Manocha, A. S. Bedi, and M. Wang. Maxmin-rlhf:
+Towards equitable alignment of large language models with diverse human preferences. arXiv preprint
+arXiv:2402.08925, 2024.
+J. D. Chang, W. Shan, O. Oertell, K. Brantley, D. Misra, J. D. Lee, and W. Sun. Dataset reset policy
+optimization for rlhf. arXiv preprint arXiv:2404.08495 , 2024.
+L. Chen, C. Zhu, D. Soselia, J. Chen, T. Zhou, T. Goldstein, H. Huang, M. Shoeybi, and B. Catanzaro. Odin:
+Disentangled reward mitigates hacking in rlhf. arXiv preprint arXiv:2402.07319 , 2024a.
+Z. Chen, Y. Deng, H. Yuan, K. Ji, and Q. Gu. Self-play fine-tuning converts weak language models to strong
+language models. arXiv preprint arXiv:2401.01335 , 2024b.
+A. Chowdhery, S. Narang, J. Devlin, M. Bosma, G. Mishra, A. Roberts, P. Barham, H. W. Chung, C. Sutton,
+S. Gehrmann, et al. Palm: Scaling language modeling with pathways. Journal of Machine Learning
+Research, 24(240):1–113, 2023.
+E. Denton, M. D ´ ıaz, I. Kivlichan, V. Prabhakaran, and R. Rosen. Whose ground truth? accounting for
+individual and collective identities underlying dataset annotation, 2021a.
+E. Denton, M. D ´ ıaz, I. Kivlichan, V. Prabhakaran, and R. Rosen. Whose ground truth? accounting for
+individual and collective identities underlying dataset annotation, 2021b.
+19
+
+===PAGE===
+
+H. Dong, W. Xiong, B. Pang, H. Wang, H. Zhao, Y. Zhou, N. Jiang, D. Sahoo, C. Xiong, and T. Zhang. Rlhf
+workflow: From reward modeling to online rlhf. arXiv e-prints , pages arXiv–2405, 2024.
+P. Duetting, V. Mirrokni, R. P. Leme, H. Xu, and S. Zuo. Mechanism design for large language models.
+arXiv preprint arXiv:2310.10826 , 2023.
+T. Eloundou, S. Manning, P. Mishkin, and D. Rock. Gpts are gpts: An early look at the labor market impact
+potential of large language models. arXiv preprint arXiv:2303.10130 , 2023.
+B. Eysenbach and S. Levine. Maximum entropy rl (provably) solves some robust rl problems. In International
+Conference on Learning Representations, 2021.
+A. Gorbatovski, B. Shaposhnikov, A. Malakhov, N. Surnachev, Y. Aksenov, I. Maksimov, N. Balagansky, and
+D. Gavrilov. Learn your reference model for real good alignment. arXiv preprint arXiv:2404.09656 , 2024.
+G. Grefenstette. Tokenization. In Syntactic wordclass tagging , pages 117–133. Springer, 1999.
+T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine. Soft actor-critic: Off-policy maximum entropy deep
+reinforcement learning with a stochastic actor. In International conference on machine learning , pages
+1861–1870. PMLR, 2018.
+A. Holtzman, J. Buys, L. Du, M. Forbes, and Y. Choi. The curious case of neural text degeneration. In
+International Conference on Learning Representations , 2020.
+F. Jelinek, R. L. Mercer, L. R. Bahl, and J. K. Baker. Perplexity—a measure of the difficulty of speech
+recognition tasks. The Journal of the Acoustical Society of America , 62(S1):S63–S63, 1977.
+R. Jin, B. Hou, J. Xiao, W. J. Su, and L. Shen. Fine-tuning attention modules only: Enhancing weight
+disentanglement in task arithmetic. InThe Thirteenth International Conference on Learning Representations,
+2025. URL https://openreview.net/forum?id=dj0TktJcVI.
+T. Kaufmann, P. Weng, V. Bengs, and E. H¨ ullermeier. A survey of reinforcement learning from human
+feedback, 2023.
+J. D. M.-W. C. Kenton and L. K. Toutanova. Bert: Pre-training of deep bidirectional transformers for
+language understanding. In Proceedings of NAACL-HLT, pages 4171–4186, 2019.
+Z. Li, T. Xu, and Y. Yu. Policy optimization in rlhf: The impact of out-of-preference data. arXiv preprint
+arXiv:2312.10584, 2023a.
+Z. Li, T. Xu, Y. Zhang, Y. Yu, R. Sun, and Z.-Q. Luo. Remax: A simple, effective, and efficient method for
+aligning large language models. arXiv preprint arXiv:2310.10505 , 2023b.
+Z. Li, C. Chen, T. Xu, Z. Qin, J. Xiao, Z.-Q. Luo, and R. Sun. Preserving diversity in supervised fine-tuning
+of large language models. In The Thirteenth International Conference on Learning Representations , 2025.
+URL https://openreview.net/forum?id=NQEe7B7bSw.
+W. Liang, Z. Izzo, Y. Zhang, H. Lepp, H. Cao, X. Zhao, L. Chen, H. Ye, S. Liu, Z. Huang, et al. Monitoring
+ai-modified content at scale: A case study on the impact of chatgpt on ai conference peer reviews. arXiv
+preprint arXiv:2403.07183, 2024.
+K. Liu, Q. Long, Z. Shi, W. J. Su, and J. Xiao. Statistical impossibility and possibility of aligning llms with
+human preferences: From condorcet paradox to nash equilibrium. arXiv preprint arXiv:2503.10990 , 2025.
+T. Liu, Y. Zhao, R. Joshi, M. Khalman, M. Saleh, P. J. Liu, and J. Liu. Statistical rejection sampling
+improves preference optimization. arXiv preprint arXiv:2309.06657 , 2023.
+20
+
+===PAGE===
+
+R. D. Luce. Individual choice behavior: A theoretical analysis . Courier Corporation, 2012.
+R. Munos, M. Valko, D. Calandriello, M. G. Azar, M. Rowland, Z. D. Guo, Y. Tang, M. Geist, T. Mesnard,
+A. Michi, et al. Nash learning from human feedback. arXiv preprint arXiv:2312.00886 , 2023.
+OpenAI. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 , 2023.
+L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. L. Wainwright, P. Mishkin, C. Zhang, S. Agarwal, K. Slama,
+A. Ray, J. Schulman, J. Hilton, F. Kelton, L. Miller, M. Simens, A. Askell, P. Welinder, P. Christiano,
+J. Leike, and R. Lowe. Training language models to follow instructions with human feedback, 2022.
+R. Park, R. Rafailov, S. Ermon, and C. Finn. Disentangling length from quality in direct preference
+optimization. arXiv preprint arXiv:2403.19159 , 2024.
+R. L. Plackett. The analysis of permutations. Journal of the Royal Statistical Society Series C: Applied
+Statistics, 24(2):193–202, 1975.
+R. Rafailov, A. Sharma, E. Mitchell, S. Ermon, C. D. Manning, and C. Finn. Direct preference optimization:
+Your language model is secretly a reward model, 2023.
+R. Rafailov, J. Hejna, R. Park, and C. Finn. From r to q∗: Your language model is secretly a q-function.
+arXiv preprint arXiv:2404.12358 , 2024.
+A. R´ enyi. On measures of entropy and information. In Proceedings of the fourth Berkeley symposium on
+mathematical statistics and probability, volume 1: contributions to the theory of statistics , volume 4, pages
+547–562. University of California Press, 1961.
+M. Sandri, E. Leonardelli, S. Tonelli, and E. Jezek. Why don’t you do it right? analysing annotators’
+disagreement in subjective tasks. In A. Vlachos and I. Augenstein, editors,Proceedings of the 17th Conference
+of the European Chapter of the Association for Computational Linguistics , pages 2428–2441, Dubrovnik,
+Croatia, May 2023. Association for Computational Linguistics. doi: 10.18653/v1/2023.eacl-main.178. URL
+https://aclanthology.org/2023.eacl-main.178.
+S. Santurkar, E. Durmus, F. Ladhak, C. Lee, P. Liang, and T. Hashimoto. Whose opinions do language
+models reflect? In International Conference on Machine Learning , pages 29971–30004. PMLR, 2023.
+M. Sap, S. Swayamdipta, L. Vianna, X. Zhou, Y. Choi, and N. A. Smith. Annotators with attitudes: How
+annotator beliefs and identities bias toxic language detection. In M. Carpuat, M.-C. de Marneffe, and I. V.
+Meza Ruiz, editors, Proceedings of the 2022 Conference of the North American Chapter of the Association
+for Computational Linguistics: Human Language Technologies , pages 5884–5906, Seattle, United States,
+July 2022. Association for Computational Linguistics. doi: 10.18653/v1/2022.naacl-main.431. URL
+https://aclanthology.org/2022.naacl-main.431.
+J. Schulman. Proxy objectives in reinforcement learning from human feedback, 2023. URL https://icml.
+cc/virtual/2023/invited-talk/21549.
+J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms.
+ArXiv preprint, abs/1707.06347, 2017. URL https://arxiv.org/abs/1707.06347.
+Z. Shi, K. Liu, Q. Long, W. J. Su, and J. Xiao. Fundamental limits of game-theoretic llm alignment: Smith
+consistency and preference matching. arXiv preprint arXiv:2505.20627 , 2025.
+Z. Song, T. Cai, J. D. Lee, and W. J. Su. Reward collapse in aligning large language models. arXiv preprint
+arXiv:2305.17608, 2023.
+21
+
+===PAGE===
+
+N. Stiennon, L. Ouyang, J. Wu, D. Ziegler, R. Lowe, C. Voss, A. Radford, D. Amodei, and P. F. Christiano.
+Learning to summarize with human feedback. Advances in neural information processing systems , 33:
+3008–3021, 2020.
+F. Tajwar, A. Singh, A. Sharma, R. Rafailov, J. Schneider, T. Xie, S. Ermon, C. Finn, and A. Kumar.
+Preference fine-tuning of llms should leverage suboptimal, on-policy data. arXiv preprint arXiv:2404.14367 ,
+2024.
+Y. Tang, D. Z. Guo, Z. Zheng, D. Calandriello, Y. Cao, E. Tarassov, R. Munos, B. ´A. Pires, M. Valko,
+Y. Cheng, et al. Understanding the performance gap between online and offline alignment algorithms.
+arXiv preprint arXiv:2405.08448 , 2024.
+G. Team, R. Anil, S. Borgeaud, Y. Wu, J.-B. Alayrac, J. Yu, R. Soricut, J. Schalkwyk, A. M. Dai, A. Hauth,
+et al. Gemini: a family of highly capable multimodal models. arXiv preprint arXiv:2312.11805 , 2023.
+H. Touvron, T. Lavril, G. Izacard, X. Martinet, M.-A. Lachaux, T. Lacroix, B. Rozi` ere, N. Goyal, E. Hambro,
+F. Azhar, et al. Llama: Open and efficient foundation language models. arXiv preprint arXiv:2302.13971 ,
+2023.
+A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin.
+Attention is all you need. In Advances in Neural Information Processing Systems 30 , pages 5998–6008,
+2017.
+E. A. Vogels. The state of online harassment. Pew Research Center, 13:625, 2021.
+C. Wang, Y. Jiang, C. Yang, H. Liu, and Y. Chen. Beyond reverse kl: Generalizing direct preference
+optimization with diverse divergence constraints. In The Twelfth International Conference on Learning
+Representations, 2023.
+H. Wang, Y. Lin, W. Xiong, R. Yang, S. Diao, S. Qiu, H. Zhao, and T. Zhang. Arithmetic control of llms for
+diverse user preferences: Directional preference alignment with multi-objective rewards. arXiv preprint
+arXiv:2402.18571, 2024.
+M. Wang, C. Ma, Q. Chen, L. Meng, Y. Han, J. Xiao, Z. Zhang, J. Huo, W. J. Su, and Y. Yang. Magnetic
+preference optimization: Achieving last-iterate convergence for language model alignment. In The Thirteenth
+International Conference on Learning Representations , 2025. URL https://openreview.net/forum?id=
+PDnEDS244P.
+J. Xiao, B. Hou, Z. Wang, R. Jin, Q. Long, W. J. Su, and L. Shen. Restoring calibration for aligned large
+language models: A calibration-aware fine-tuning approach. arXiv preprint arXiv:2505.01997 , 2025a.
+J. Xiao, Z. Shi, K. Liu, Q. Long, and W. J. Su. Theoretical tensions in rlhf: Reconciling empirical success
+with inconsistencies in social choice theory. arXiv preprint arXiv:2506.12350 , 2025b.
+W. Xiong, H. Dong, C. Ye, Z. Wang, H. Zhong, H. Ji, N. Jiang, and T. Zhang. Iterative preference learning
+from human feedback: Bridging theory and practice for rlhf under kl-constraint. In ICLR 2024 Workshop
+on Mathematical and Empirical Understanding of Foundation Models , 2023.
+S. Xu, W. Fu, J. Gao, W. Ye, W. Liu, Z. Mei, G. Wang, C. Yu, and Y. Wu. Is dpo superior to ppo for llm
+alignment? a comprehensive study. arXiv preprint arXiv:2404.10719 , 2024a.
+W. Xu, S. Dong, X. Lu, G. Lam, Z. Wen, and B. Van Roy. Rlhf and iia: Perverse incentives. In ICML 2024
+Workshop on Models of Human Feedback for AI Alignment , 2024b.
+J. Q. Yang, S. Salamatian, Z. Sun, A. T. Suresh, and A. Beirami. Asymptotics of language model alignment.
+arXiv preprint arXiv:2404.01730 , 2024.
+22
+
+===PAGE===
+
+Z. Yao, R. Y. Aminabadi, O. Ruwase, S. Rajbhandari, X. Wu, A. A. Awan, J. Rasley, M. Zhang, C. Li,
+C. Holmes, et al. Deepspeed-chat: Easy, fast and affordable rlhf training of chatgpt-like models at all
+scales. arXiv preprint arXiv:2308.01320 , 2023.
+C. Ye, W. Xiong, Y. Zhang, N. Jiang, and T. Zhang. A theoretical analysis of nash learning from human
+feedback under general kl-regularized preference. arXiv preprint arXiv:2402.07314 , 2024.
+S. Zhang, S. Roller, N. Goyal, M. Artetxe, M. Chen, S. Chen, C. Dewan, M. Diab, X. Li, X. V. Lin, et al.
+Opt: Open pre-trained transformer language models. arXiv preprint arXiv:2205.01068 , 2022.
+H. Zhong, Z. Deng, W. J. Su, Z. S. Wu, and L. Zhang. Provable multi-party reinforcement learning with
+diverse human feedback. arXiv preprint arXiv:2403.05006 , 2024.
+B. D. Ziebart, A. L. Maas, J. A. Bagnell, A. K. Dey, et al. Maximum entropy inverse reinforcement learning.
+In Aaai, volume 8, pages 1433–1438. Chicago, IL, USA, 2008.
+23
+
+===PAGE===
+
+A Additional Discussions of Algorithmic Bias
+A.1 More Details on the PL Model
+We start from providing the standard assumption of PL Model.
+Assumption A.1 (The PL Model (Plackett, 1975; Luce, 2012)) . Given a prompt x and a set of k
+responses y1, . . . , yk. The preference of the ranking of the answers is presented as a permutation
+τ : [k] → [k]. The Plackett-Luce model assumes that:
+P(τ |y1, . . . , yk, x) =
+kY
+i=1
+p
+ 
+yτ (i) ≻ yτ (1), yτ (2), . . . , yτ (i−1), yτ (i+1), . . . , yτ (k) | yτ (i), . . . , yτ (k), x
+
+,
+where
+P
+ 
+yτ (i) ≻ yτ (1), yτ (2), . . . , yτ (i−1), yτ (i+1), . . . , yτ (k) | yτ (i), . . . , yτ (k), x
+
+= er(x,yτ (i))
+Pk
+j=i er(x,yτ (j)) .
+Here yτ (i) ≻ yτ (1), yτ (2), . . . , yτ (i−1), yτ (i+1), . . . , yτ (k) represents the preference on yτ (i) over the
+other responses. The PL model can be reduced to the BTL model by setting τ (k) = 1 and
+τ (k − 1) = 2. In fact, a policy π(y|x) that aligns with the PL model corresponds to aligning with
+the subsequent more refined probability:
+π(y|x) = er(x,y)
+P
+y′ er(x,y′) . (A.1)
+On the one hand, by letting i = 1 and τ (i) = 1, . . . , kin Assumption A.1, we obtain (A.1). On the
+other hand, for any subset C ⊂ {y1, . . . , yk} and for any y ∈ C, (A.1) implies
+π(y|C, x) = er(x,y)
+P
+y′∈C er(x,y′) ,
+which recovers Assumption A.1.
+A.2 Bias from the Reward Model
+In addition to the algorithmic bias of RLHF, we will also discuss the potential data bias and reward
+model bias induced by Step 2. In the data collection phase, a labeling team is responsible for ranking
+various sets of data and collecting comparison information. However, it is essential to acknowledge
+that this team, like any other group, might have inherent biases. Their collective perspectives,
+backgrounds, and experiences might not perfectly represent the diverse range of human preferences.
+Given the data, the reward model might either underfit or overfit the comparison data. It can lead
+the agent to adopt behaviors that are not truly optimal or even potentially harmful.
+Data bias and reward model bias can be mitigated through the collection of high-quality data
+and the training of an effective reward model. The subsequent proposition assures us that under
+ideal conditions, Step 2 can yield an optimal reward model.
+Proposition A.2. Under the BTL model, assume that Pcomp is the true distribution of comparison
+data. The global solution of minr(x,y) −E(x,yw.yl)∼Pcomp[log(σ(r(x, yw) − r(x, yl)))] is the true reward
+r⋆(x, y).
+24
+
+===PAGE===
+
+0.00 0.25 0.50 0.75 1.00
+Reward model preference on y
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0KL RLHF model preference on y
+=0.1
+(a)
+0.00 0.25 0.50 0.75 1.00
+Reward model preference on y
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+=0.5
+Ref model preference on y
+0.1
+0.3
+0.5
+0.7
+0.9 (b)
+Figure 2: Algorithmic bias when β ̸= 1. Smaller β, more severe algorithmic bias.
+Proof: Given x, yw, yl, denote
+preward⋆(yw) = er⋆(x,yw)
+er⋆(x,yw) + er⋆(x,yl) ,
+preward⋆(yl) = er⋆(x,yl)
+er⋆(x,yw) + er⋆(x,yl) .
+Here, we omit the condition on x, yw, yl, i.e., preward⋆(yw|x, yw, yl), to simplify the notation. Similarly,
+denote
+preward(yw) = σ(r(x, yw) − r(x, yl)) = er(x,yw)
+er(x,yw) + er(x,yl) ,
+preward(yl) = σ(r(x, yl) − r(x, yw)) = er(x,yl)
+er(x,yw) + er(x,yl) .
+Then, the objective function can be written as:
+E(x,yw.yl)∼Dcomp − [log(σ(r(x, yw) − r(x, yl)))]
+=Ex − [preward⋆(yw) logpreward(yw) + preward⋆(yl) logpreward(yl)]
+=ExH(preward⋆∥preward),
+where H(·∥·) denotes the cross entropy of two distributions. The objective function is minimized
+when preward⋆ = preward, for all x, yw, yl. Therefore, the global solution of the reward minimization
+problem is r(x, y) = r⋆(x, y).
+A.3 Bias from Beta
+In the scenario where the reward model is optimal, β ̸= 1 will also introduce algorithmic bias, as
+illustrated in Figure 2. When β <1, the aligned model will amplify the dominant response y when
+preward(y) > 0.5, and vice versa. In extreme cases, such as when β = 0.1 and preward(y) > 0.7, we
+observe that prlhf(y) > 0.99, resulting in a preference collapse.
+25
+
+===PAGE===
+
+However, the reward model is often not optimal. It typically overfits the comparison training
+dataset Dcomp = {xi, yi
+w, yi
+l }n
+i=1. Additionally, Song et al. (2023) identified the phenomenon of
+reward collapse in reward learning, suggesting that the number of training iterations for reward
+learning should be carefully controlled to mitigate these issues. Consequently, the learned reward
+model rθ(x, y) is often sub-optimal.
+Although we initially posited that β contributes to algorithmic bias in scenarios with op-
+timal rewards, in sub-optimal settings, β might play a beneficial role by acting as a calibra-
+tion parameter for the reward. This is because the loss function in RLHF can be expressed as
+maxϕ Ey∼π(·|x)r(x, y)/β − DKL(π(y|x)|πref(y|x)), indicating β’s potential to adjust the reward model
+effectively. Thus, preward(yi) can be viewed as an approximation of the true probability. Under this
+assumption, the effect of β is relatively minor.
+A.4 Examples of Preference Matching Regularization
+We first recall the objective of RLHF
+max
+ϕ
+Ey∼πϕ(·|x)r(x, y) − βDKL(πϕ(y|x)∥πref(y|x)), (A.2)
+and the objective of PM PLHF
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − log(πϕ(y|x)) + C1,x + C2,x
+πϕ(y|x)
+
+. (A.3)
+Example 1: C1,x = C2,x = 0. In this case, (A.3) reduces to
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − log(πϕ(y|x))
+
+. (A.4)
+This is related to maximum entropy RL in the literature (Ziebart et al., 2008; Haarnoja et al., 2018;
+Eysenbach and Levine, 2021), which adds an entropy term to the reward function to enhance the
+diversity of the policy’s output. However, maximum entropy RL involves a tuning parameter that
+weighs the entropy terms, whereas the objective in PM RLHF is tuning-free. This tuning parameter
+is used for empirical reward maximization performance rather than preference consideration.
+We can interpret the PM RLHF objective (A.4) through the lens of robust optimization. Note
+that the dual of (A.4) is
+max
+ϕ
+min
+r′(x,y)
+Ey∼πϕ(·|x)r′(x, y)
+s.t. log-sum-exp(r(x, ·) − r′(x, ·)) ≤ ϵ
+for some constant ϵ, where the log-sum-exp function is
+log
+hP
+y exp(r(x, y) − r′(x, y))
+i
+.
+The constraint can be interpreted as an adversarial perturbation of the rewards for robust optimiza-
+tion.
+To see the duality between the two forms, let ∆ r(x, y) = r(x, y) − r′(x, y). Owing to the
+Lagrangian duality between constraint and regularization, there exists some ϵ such that the Lagrange
+26
+
+===PAGE===
+
+multiplier is 1. As a result, the objective in the robust optimization program above becomes equivalent
+to
+min
+r′(x,y)
+h
+Ey∼πϕ(·|x)r′(x, y) + log-sum-exp(r(x, ·) − r′(x, ·))
+i
+= Ey∼πϕ(·|x)r(x, y) + min
+r′(x,y)
+h
+Ey∼πϕ(·|x) − ∆r(x, y) + log-sum-exp(∆r(x, ·))
+i
+= Ey∼πϕ(·|x)r(x, y) − max
+∆r(x,y)
+h
+Ey∼πϕ(·|x)∆r(x, y) − log-sum-exp(∆r(x, ·))
+i
+.
+Next, note that
+max
+∆r(x,y)
+h
+Ey∼πϕ(·|x)∆r(x, y) − log-sum-exp(∆r(x, ·))
+i
+= max
+∆r(x,y)
+[⟨∆r(x, ·), πϕ(·|x)⟩ −log-sum-exp(∆r(x, ·))] .
+This is by definition the Fenchel conjugate of log-sum-exp at πϕ(·|x), which equals the negative
+entropy Ey∼πϕ(·|x) log π(y|x).
+Example 2: C1,x = −Ey∼πref(·|x)[r(x, y)|x] or Ey∼πref(·|x)r(x, y), C2,x = 0. In this case, the reward
+is effectively replaced by r(x, y) + C1,x. As the added term C1,x is a constant or depends only on
+x, this does not change the probability distribution of the PL model. The modified reward has
+approximately mean zero for any prompt, thereby delivering good numerical properties such as
+helping stabilize the training procedure across different prompts. However, it is computationally
+expensive to compute the conditional expectation. To save computation, one can simply use the
+unconditional counterpart Ey∼πref(·|x)r(x, y) for C1,x (Ouyang et al., 2022).
+Example 3: C1,x = 1 /k, C2,x = 0 . As earlier, k is the number of possible responses. The
+objective function is
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − log(πϕ(y|x)) + log(1/k)
+
+= max
+ϕ
+
+Ey∼πϕ(·|x)r(x, y) − DKL(πϕ(y|x)∥Unif(y|x))
+
+,
+where Unif(y|x)) denotes the uniform distribution. We call this uniform-penalty RLHF, which can
+be thought of as an instance of the standard KL RLHF in (A.2) when β = 1 and πref(y|x) is the
+uniform distribution.
+This RLHF might find applications in cases where k is small. However, in the context of training
+LLMs, k can be exponentially large, which renders uniform-penalty RLHF impractical.
+A.5 Discussion of f -divergence RLHF
+The algorithmic bias stems from the use of a reference model in the RL objective (5.1) and, in
+particular, cannot be removed by replacing the KL divergence with other divergences. To see this
+point, consider the f -divergence RLHF (Wang et al., 2023):
+max
+ϕ
+
+Ey∼πϕ(·|x)r(x, y) − βDf (πϕ(y|x)∥πref(y|x))
+
+,
+27
+
+===PAGE===
+
+where the f -divergence (R´ enyi, 1961) is defined as2
+Df (πϕ(y|x)∥πref(y|x)) = Ey∼πref(·|x)f (πϕ(y|x))/πref(y|x)).
+The (5.2) counterpart of the f -divergence RLHF takes the form
+pf
+rlhf(yi) = pref(yi)pf
+reward(yi)
+pref(y1)pf
+reward(y1) + pref(y2)pf
+reward(y2)
+, i = 1, 2, (A.5)
+where
+pf
+reward(yi) = (f ′)−1(r(x, yi)/β)
+(f ′)−1(r(x, y1)/β) + (f ′)−1(r(x, y2)/β) , i = 1, 2.
+As is clear from (A.5), the algorithmic bias remains in the case of f -divergence. In fact, it becomes
+worse in the sense that the bias remains even ifβ = 1 and pref is uniform, unless (f ′)−1(u) = exp(u+c)
+for some constant c. Note that ( f ′)−1(u) = exp(u + c) if and only if f (u) = u log u + c′u, which
+effectively gives the KL divergence.
+0.00 0.25 0.50 0.75 1.00
+Preference on y
+0
+500
+1000
+1500
+2000
+Reference Model
+(a)
+0.00 0.25 0.50 0.75 1.00
+Preference on y
+0
+20
+40
+60
+80
+100
+120
+140
+Reward Model (b)
+Figure 3: Output probabilities for the reference and reward models in the experiment on OPT-1.3B.
+Panel (a) shows the output probabilities of the reference model, while panel (b) shows the preferences
+on the same ( y1, y2) pairs derived from the reward model.
+A.6 Other Discussions
+Generating Examples for PM RLHF. We present two examples of responses generated by
+the PM RLHF model in Table 3, illustrating its difficulty in producing natural-sounding sentences.
+This challenge motivates the introduction of conditional PM RLHF in Section 4, to enhance the
+quality of natural language generation.
+In Table 4, we present the notation for the conditional probabilities in the RLHF model, the
+reference model, and the reward model, given y1, y2, and x, respectively.
+2Here f is a convex function, f : [0 , +∞) → (−∞, +∞], such that f (x) is finite for all x > 0, f (1) = 0, and
+f (0) = limt→0+ f (t) (which could be infinite).
+28
+
+===PAGE===
+
+Table 3: Examples of response generation by the Llama-2-7B model fine-tuned using PM RLHF. In
+some instances, the LLMs fail to generate natural sentences.
+Human: What was the name of the movie that won the Academy Award for Best Picture in
+1955?
+Assistant: The movie that
+Human: Why do birds migrate south for the winter?
+Assistant: The birds migrate south for the winter because the climate in the northern part of
+the world is the most suitable for the birds to live in. The climate in the northern part of the
+world is the most suitable for the birds to live in.
+Human: thank thank thank thank thank thank thank thank thank thank thank thank thank
+thank thank thank thank thank thank thank thank thank thank thank thank thank thank
+thank thank thank
+Table 4: List of abbreviations for the conditional probabilities in the RLHF model, the reference
+model, and the reward model, given y1, y2 and x, respectively.
+Abbreviation Conditional Probability Formulation (i=1 , 2)
+prlhf(yi) := prlhf(yi|y1, y2, x) = πrlhf(yi|x)/(πrlhf(y1|x) + πrlhf(y2|x))
+pref(yi) := pref(yi|y1, y2, x) = πref(yi|x)/(πref(y1|x) + πref(y2|x))
+preward(yi) := preward(yi|y1, y2, x) = exp( r(x, yi)/β)/(exp(r(x, y1)/β) + exp(r(x, y2)/β))
+B Algorithmic Biases of Standard RLHF
+In this section, we elaborate on how algorithmic biases arise in standard RLHF. In the most extreme
+scenario, in particular, the bias amplifies to preference collapse.
+B.1 Bias from KL Regularization
+Let us recall the objective function of standard RLHF (Ouyang et al., 2022), which uses a KL
+divergence to regularize the reward maximization problem:
+max
+ϕ
+Ey∼πϕ(·|x)
+
+r(x, y) − βDKL(πϕ(y|x)∥πref(y|x))
+
+.
+Proposition B.1 (Rafailov et al. (2023)) . The optimal solution of the RLHF problem to (2.3) is
+πrlhf(y|x) = πref(y|x) exp(r(x, y)/β)P
+j πref(yj|x) exp(r(x, yj)/β) . (B.1)
+The closed-form solution provided in (B.1) has been previously presented in the literature of
+direct preference optimization (Rafailov et al., 2023). However, we argue that (B.1) inherently leads
+to a certain algorithmic bias. To show this bias, it is instructive to consider the binary setting of
+(B.1). Given a prompt x and two responses y1 and y2, we denote
+prlhf(yi) := prlhf(yi|y1, y2, x) = πrlhf(yi|x)
+πrlhf(y1|x) + πrlhf(y2|x) , i = 1, 2.
+29
+
+===PAGE===
+
+Similarly, we denote by
+preward(yi) = exp(r(x, yi)/β)
+exp(r(x, y1)/β) + exp(r(x, y2)/β) , pref(yi) = πref(yi|x)
+πref(y1|x) + πref(y2|x) , i = 1, 2.
+Here, all the probabilities prlhf(yi), preward(yi), and pref(yi) are conditioned on x, y1, y2. For the sake
+of simplifying the notation and improving readability, we omit the conditioning variables. Then,
+based on (B.1), the probability of binary comparison of the RLHF model is
+prlhf(yi) = pref(yi)preward(yi)
+pref(y1)preward(y1) + pref(y2)preward(y2) , i = 1, 2. (B.2)
+From (B.2), it is clear that prlhf is identical to the preferences of the reward model when β = 1 and,
+0.00 0.25 0.50 0.75 1.00
+Reward model preference on y
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0KL RLHF model preference on y
+Ref model preference on y
+0.0
+0.1
+0.3
+0.5
+0.7
+0.9
+1.0
+Figure 4: Algorithmic bias of the KL RLHF–aligned model for various pref(y) and β = 1. Here,
+“preference on y” refers to the conditional probability p(y1|y1, y2, x). Algorithmic bias occurs when
+pref(y) ̸= 0 .5. If pref(y) < 0.5, the KL RLHF–aligned model underestimates the probability of
+y1, and vice versa. The red line, where the aligned model and the reward model have the same
+preference on y, represents the desired alignment.
+more crucially , when πref is the uniform distribution over all (valid) responses for any prompt x.
+Figure 4 illustrates this algorithmic bias by showing the relationship between the reward model and
+the RLHF policy πrlhf(y|x) in terms of their preference probabilities. As long as the reference model
+is not uniform between the two responses—that is, pref(y1) ̸= pref(y2) ̸= 0.5—the two models are
+not aligned. In an extreme case when pref(y1) = 0 or 1, KL RLHF will lead to a phenomenon—that,
+as mentioned earlier—we refer to as preference collapse and will be discussed in Section B.2.
+As mentioned in Example 3 later in Section A.4, however, it is practically impossible to have a
+uniform distribution for a reference language model. Specifically, πref(y|x) represents a pretrained
+model or SFT model, which by no means yields a uniform distribution. Early stopping can reduce
+this algorithmic bias to some extent (Schulman, 2023) but cannot completely remove it, as the
+target of (B.1) is fundamentally biased. In stark contrast, conditional PM RLHF provably sets its
+global solution to be unbiased with respect to the reward model.
+30
+
+===PAGE===
+
+B.2 Extreme Case: Preference Collapse in KL RLHF
+In a certain extreme case when the reference model has a completely imbalanced preference—meaning
+99% against 1% or 1% against 99%—the algorithm bias of the KL RLHF could turn into preference
+collapse. To explain this, note that the conditional binary probability distribution between two
+responses, y1 and y2, for a prompt x takes the form
+prlhf(yi) = pref(yi)preward(yi)
+pref(y1)preward(y1) + pref(y2)preward(y2) =
+(
+0 if pref(yi) = 0,
+1 if pref(yi) = 1, i = 1, 2.
+This extreme case is also shown in Figure 4. The phenomenon of preference collapse, if were true,
+would be detrimental to decision-making, as it would completely let the LLM discard minority
+opinions. Our experiments on Llama-2-7B and OPT-1.3B indeed show this phenomenon occurs in
+practice. For each prompt x in the dataset, we randomly generate two responses, y1 and y2. We
+then calculate the conditional probabilities of y1 with respect to y1 and y2. As shown in Figure 5(a),
+it becomes evident that the probabilities pref(y1) are very likely to be close to 0 or 1. In contrast,
+the probabilities induced by the reward model are more uniform, with probabilities between 0 and 1
+for a large number of prompts, as illustrated in Figure 5(b). This phenomenon can be observed in
+the experiment on OPT-1.3B, as demonstrated in the appendix.
+While the exact cause of this phenomenon is unclear to us at the moment, some evidence shows
+that it might be attributed to varying lengths of responses (Park et al., 2024; Chen et al., 2024a).
+Recall that LLMs generate each token following the next-token prediction. The probability of a
+response is in the form of the product of probabilities and the number of terms is the length of the
+response. A direct consequence is that the probability of a response in general decays exponentially
+with its length. Thus, for two responses that are generated independently from a prompt, the ratio
+of their probability is likely to be either very large or small, which is especially the case when the
+two responses differ significantly in length.
+0.00 0.25 0.50 0.75 1.00
+Preference on y
+0
+500
+1000
+1500
+2000
+Reference Model
+(a)
+0.00 0.25 0.50 0.75 1.00
+Preference on y
+0
+200
+400
+600
+800
+1000
+Reward Model (b)
+Figure 5: Output probabilities for the reference and reward models in the experiments conducted
+on Llama-2-7B. Panel (a) shows the output probabilities of the reference model, while panel (b)
+shows the preferences on the same ( y1, y2) pairs derived from the reward model.
+31
+
+===PAGE===
+
+The algorithmic bias and preference collapse stems from the use of a reference model in the
+RL objective (B.1) and, in particular, continues to occur even if the KL divergence is replaced by
+any f -divergence. The discussion of RLHF under f -divergence regularization is provided in the
+appendix.
+To conclude this section, we summarize the key differences between PM RLHF and KL (or
+general f -divergence) RLHF. Both the reward model and the reference model implicitly encode
+preferences—the former aligned with human preferences, and the latter not. KL RLHF blends the
+preferences of these two models, which can lead to preference collapse. In contrast, PM RLHF
+focuses on extracting the preference encoded in the reward model while eliminating the influence of
+the reference model, thereby preserving human preferences.
+C Other Related Work
+Diversity in Human Preferences. Existing alignment approaches predominantly consider
+the average preference of human annotators, overlooking the rich diversity inherent in human
+preferences (Casper et al., 2023; Kaufmann et al., 2023). Chakraborty et al. (2024) explored the
+factors contributing to this diversity, which often arises from various social and cultural backgrounds
+(Aroyo et al., 2023b,a; Denton et al., 2021a). These factors include socio-demographic backgrounds
+(Vogels, 2021), personal bias and context subjectivity (Denton et al., 2021b; Sandri et al., 2023),
+imperfect preferences (Sandri et al., 2023), and linguistic ambiguity and missing context (Sandri
+et al., 2023; Denton et al., 2021b; Sap et al., 2022).
+Training Algorithms. Li et al. (2023b) demonstrated that PPO does not fully exploit the
+properties of RLHF in LLMs for preference alignment. Munos et al. (2023) introduced the Nash
+equilibrium of the preference model for aligning LLMs with human preferences, while Chen et al.
+(2024b) proposed a self-play-based approach to learn from supervised data as an alternative to
+supervised fine-tuning. Tang et al. (2024) discussed the performance gap between online and offline
+algorithms for alignment, and Ye et al. (2024) studied an online iterative RLHF algorithm with a
+general preference model. Outside of fine-tuning, model editing has emerged as a complementary
+strategy to modify LLM behavior across tasks (Jin et al., 2025).
+A popular alternative to reward-model-based RLHF is direct preference optimization (DPO)
+(Rafailov et al., 2023), which directly fine-tunes LLMs on human preference data and has several
+notable variants (Liu et al., 2023; Azar et al., 2024; Chang et al., 2024; Gorbatovski et al., 2024;
+Rafailov et al., 2024; Yang et al., 2024). DPO is computationally more accessible since it bypasses
+the need for training a reward model. However, recent studies (Li et al., 2023a; Xu et al., 2024a;
+Tajwar et al., 2024) suggest that DPO is inferior to reward-model-based RLHF in aligning LLMs.
+Li et al. (2023a) and Xu et al. (2024a) empirically argued that representation misspecification is
+the reason why DPO is inferior to RL-based methods such as PPO. Furthermore, the on-policy
+nature of fine-tuning using a reward model can help improve LLM performance, possibly due to the
+distribution shift between the offline preference dataset during training and online responses during
+evaluation (Tajwar et al., 2024). The calibration challenges introduced by RLHF have also been
+studied by Xiao et al. (2025a). An alternative line of work introduces NLHF, which aims to align
+LLMs under general preference models (Munos et al., 2023). In this direction, Wang et al. (2025)
+examined the convergence behavior of NLHF and showed that the last iterate converges to a Nash
+equilibrium.
+32
+
+===PAGE===
+
+D Other Experiments
+D.1 Perplexity of PM RLHF
+When applying PM RLHF in practice, we encounter a numerical issue that is inherent to the nature
+of text data. A direct application of PM RLHF in our experiments fails to produce human-like text.
+This numerical issue corresponds to high values of perplexity, as illustrated by the experimental
+results in Figure 6. In particular, we evaluate the perplexity of the PM RLHF–aligned and KL
+RLHF–aligned models on 12,500 test samples. For the OPT-1.3B model (Zhang et al., 2022)
+fine-tuned by PM RLHF, the perplexity of the LLM is 2343.56, while KL RLHF yields a significantly
+lower perplexity of 7.24. Similarly, for the Llama-2-7B model (Touvron et al., 2023), the perplexity
+scores for LLMs trained by PM RLHF and KL RLHF are 7.15 and 5.48, respectively.
+KL RLHF PM RLHF
+0
+500
+1000
+1500
+2000
+Perplexity, OPT-1.3B
+(a)
+KL RLHF PM RLHF
+0
+1
+2
+3
+4
+5
+6
+7
+Perplexity, Llama-2-7B (b)
+Figure 6: The perplexity of PM and KL RLHF models. (a) Results on OPT-1.3B. (b) Results on
+Llama-2-7B. For the OPT-1.3B model, the perplexity scores for LLMs trained by PM RLHF and
+KL RLHF are 2343.56 and 7.14, respectively. For the Llama-2-7B model, the perplexity scores for
+LLMs trained by PM RLHF and KL RLHF are 7.15 and 5.48, respectively.
+D.2 Fine-tuning OPT-1.3B Model
+Finally, we examine the other values reported in the table, such as length, entropy, and KL
+divergence. The length metrics exhibit a decreasing trend as α increases, suggesting that models
+generate shorter outputs. When α = 0.1, the length metric of each model reaches its maximum
+value in our experiments, indicating that the model tends to generate more verbose outputs with
+this parameter setting. Entropy is employed to assess the diversity of outputs produced by LLMs. It
+has been observed that models aligned with conditional PM RLHF typically exhibit lower entropy.
+This could be attributed to the fact that conditional PM RLHF may encourage the model to focus
+on responses where the probability exceeds α, thereby reducing output diversity. Regarding KL
+divergence, the data demonstrates that higher α values are associated with lower KL scores, implying
+that the models bear greater similarity to the reference or pre-trained models. This similarity may
+reflect a closer adherence to the expected distribution pattern established during pre-training. These
+findings suggest that setting α between 0.3 and 0.5 results in a model that exhibits strong predictive
+33
+
+===PAGE===
+
+performance while achieving better alignment with human preferences. Striking this balance is
+crucial for the effective operation of LLMs.
+Our experimental results on the OPT-1.3B model are presented in Figures 7 and 8 in the form of
+a histogram and a CDF, respectively. Table 5 displays detailed parameter settings and key metrics
+from the experiments. Consistent with the experiments on the Llama-2-7B model, the experiments
+in this section demonstrate the effectiveness of the conditional PM RLHF.
+Trade-off between PM Divergence and Perplexity. The experiments on the OPT-1.3
+model exhibit a similar pattern to the Llama-2-7B model, where decreasing α leads to an increase
+in perplexity. This trend demonstrates a consistent trade-off between preference matching and
+perplexity across different model architectures. These findings underscore the importance of carefully
+selecting the α parameter to effectively manage this trade-off. When α is between 0.3 and 0.5, the
+models achieve a desirable balance in terms of prediction accuracy and the preservation of human
+preferences. By carefully tuning this parameter, researchers and practitioners can create LLMs that
+effectively capture human preferences while maintaining high levels of accuracy and coherence in
+their generated outputs.
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+ =0.1
+(a)
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+ =0.5
+ (b)
+=0.1
+ =0.3
+ =0.5
+ KL RLHF
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+ =1.0
+ (c)
+0 2 4 6 8 10
+PM Divergence
+0
+50
+100
+150
+200
+250
+300
+350Frequency (# of Prompts)
+=0.1
+CPM RLHF, =0.5
+KL RLHF
+(d)
+0 2 4 6 8 10
+PM Divergence
+=0.5
+CPM RLHF, =0.3
+KL RLHF (e)
+0 2 4 6 8 10
+PM Divergence
+=1.0
+CPM RLHF, =0.5
+KL RLHF
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+CDF (f)
+Figure 7: The preference matching divergence when fine-tuning the OPT-1.3B model. Panels (a),
+(b), and (c) demonstrate the aggregate PM divergence for different α and β values. Panels (d),
+(e), and (f) demonstrate the histogram and CDF of the distribution of instance PM divergence in
+different settings.
+34
+
+===PAGE===
+
+0 2 4 6 8 10
+PM Metric
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0CDF
+=0.1
+CPM RLHF, =0.1
+CPM RLHF, =0.3
+CPM RLHF, =0.5
+KL RLHF
+(a)
+0 2 4 6 8 10
+PM Metric
+=0.5
+CPM RLHF, =0.1
+CPM RLHF, =0.3
+CPM RLHF, =0.5
+KL RLHF (b)
+0 2 4 6 8 10
+PM Metric
+=1.0
+CPM RLHF, =0.1
+CPM RLHF, =0.3
+CPM RLHF, =0.5
+KL RLHF (c)
+Figure 8: CDF of PM divergences across different RLHF Settings when fine-tuning the OPT-
+1.3B model. These figures illustrate the variability of PM divergences under four RLHF settings:
+conditional PM RLHF with α=0.1, α=0.3, α=0.5, and KL RLHF. Panels (a), (b), and (c) correspond
+to β = 0.1, 0.5, and 1, respectively.
+D.3 Other Discussion
+To conclude the paper, we present several directions for future research. An interesting problem is
+to incorporate the PM regularization into using multiple reward models to model human preferences
+(Chakraborty et al., 2024; Zhong et al., 2024). This would help reduce algorithmic bias when human
+preferences exhibit heterogeneity. Another important direction is to develop a DPO counterpart of
+PM RLHF. Although evidence is accumulating that DPO is less effective than RLHF for training
+highly performant LLMs, the low complexity and computational cost of implementing DPO, which
+is due to its ability to bypass the reward learning step, render it popular for aligning small LLMs or
+for downstream tasks (Xiong et al., 2023). More broadly, an important question is to investigate
+how the length of the response would impact the reward as well as the preference (Park et al., 2024).
+It could possibly further reduce algorithmic biases using PM RLHF if the nuances of the length
+effect could be taken into account.
+E Proofs of Technical Results
+E.1 Proof of Theorem 1
+The discussion before the statement of Theorem 1 shows the necessity of (3.8). We finish the proof
+below by showing the sufficiency of (3.8). The objective function is:
+max
+π
+Ey∼π(·|x)
+
+r(x, y) − log(π(y|x)) + C1,x + C2,x
+π(y|x)
+
+.
+It is sufficient to demonstrate that the objective function is equivalent to the KL divergence between
+π(y|x) and the target PL model. First of all, we consider the first two terms:
+Ey∼π(·|x)r(x, y) − log(π(y|x)).
+35
+
+===PAGE===
+
+Table 5: Comparison between RLHF and conditional PM RLHF when fine-tuning the OPT-1.3B
+model. The symbol ↓ means smaller is better. KL RLHF is equivalent to conditional PM RLHF
+when α is set to 1.
+PM Divergence ↓ Length Perplexity ↓ Entropy KL
+β = 0.1
+α = 0.1 0.7976 257 7.82 1.51 0.10
+α = 0.3 0.7083 256 7.33 1.64 0.06
+α = 0.5 0.6839 229 7.08 1.71 0.04
+KL RLHF 1.1555 110 6.81 1.85 0.02
+β = 0.5
+α = 0.1 0.9732 257 19.54 0.85 0.29
+α = 0.3 0.9702 255 7.21 1.41 0.06
+α = 0.5 1.0887 236 6.82 1.61 0.03
+KL RLHF 1.1957 111 6.71 1.79 0.01
+β = 1.0
+α = 0.1 1.0967 256 20.82 0.60 0.34
+α = 0.3 0.9732 257 7.94 1.20 0.08
+α = 0.5 0.8865 241 6.78 1.57 0.03
+KL RLHF 1.1737 89 6.64 1.84 0.00
+Without the two constants C1,x and C2,x, it reduces to the objective function of maximum entropy
+RL with β = 1.
+Ey∼π(·|x)
+
+log er(x,y) − log(π(y|x))
+
+=Ey∼π(·|x)
+
+log er(x,y)
+P
+y′ er(x,y′)
+| {z }
+π⋆(y|x)
+− log(π(y|x)) + log
+X
+y′
+er(x,y′)
+| {z }
+Z(x)
+
+=Ey∼π(·|x)
+
+log π⋆(y|x) − log(π(y|x)) + logZ(x)
+
+.
+By expressing the difference of the two logarithmic terms as the KL divergence, the equation above
+continues as follows:
+=Ey∼π(·|x)
+
+− log π(y|x)
+π⋆(y|x) + log Z(x)
+
+= − DKL(π(y|x)∥π⋆(y|x)) + Ex log Z(x).
+Here, Z(x) is independent of π(y|x). Now, we turn to the two constant terms C1,x and C2,x.
+Consider
+Ey∼π(·|x)
+
+C1,x + C2,x
+π(y|x)
+
+= C1,x + kC2,x.
+It is also independent of π(y|x). Therefore, we obtain
+max
+π
+Ey∼π(·|x)
+
+r(x, y) − log(π(y|x)) + C1,x + C2,x
+π(y|x)
+
+= max
+π
+Ex
+
+− DKL(π(y|x)∥π⋆(y|x)) + logZ(x) + C1,x + kC2,x
+
+.
+The optimal solution of π(y|x) is π⋆(y|x), which completes the proof.
+36
+
+===PAGE===
+
+E.2 Proof of Theorem 4
+Recall that the objective function in (4.1) is
+max
+π
+Ey∼π(·|x)
+
+r(x, y) − log(π(y|x))1(y ∈ M(x)) − log(π(y|x)/ϵ)1(y /∈ M(x)) + C1,x + C2,x
+π(y|x)
+
+.
+Then, (4.1) is equivalent to
+max
+π
+Ey∼π(·|x)
+
+p(y ∈ M(x))
+
+r(x, y) − log(π(y|x))
+
++ p(y /∈ M(x))
+
+r(x, y) − log(π(y|x)/ϵ)
+
+.
+Based on the same argument of the optimal solutions of PM RLHF and KL RLHF, the first term is
+maximized when
+π(y|y ∈ M(x), x) = er(x,y)
+P
+y′ er(x,y′) , y ∈ M(x).
+The second term is maximized when
+π(y|y /∈ M(x), x) = ϵ(x, y)er(x,y)
+P
+y′ ϵ(x, y′)er(x,y′) , y /∈ M(x).
+It completes the proof.
+E.3 Proof of Proposition 3.1
+Given x and for all y, r(x, y⋆) ≥ r(x, y). Then
+Ey∼π(·|x)r(x, y)
+=Ex
+Z
+y
+π(y|x)r(x, y)dy
+≤Ex
+Z
+y
+π(y|x)r(x, y⋆)dy
+=Exr(x, y⋆).
+The equality holds when π(y⋆|x) = 1. Therefore, the optimal policy is to output y⋆ with probability
+one.
+37
+
+===PAGE===
+
+E.4 Proof of Proposition 5.1
+The objective function in (A.2) is equal to
+Ey∼π(·|x)
+
+r(x, y)/β − DKL(π(y|x)∥πref(y|x))
+
+=Ey∼π(·|x)
+
+log er(x,y)/β − log(π(y|x)/πref(y|x))
+
+=Ey∼π(·|x)
+
+log er(x,y)/β − log π(y|x) + logπref(y|x)
+
+=Ey∼π(·|x)
+
+log πref(y|x)er(x,y)/β − log π(y|x)
+
+=Ey∼π(·|x)
+
+log πref(y|x)er(x,y)/β
+P
+y′ πref(y′|x)er(x,y′)/β
+| {z }
+:=prlhf(y|x)
+− log(π(y|x)) + log
+X
+y′
+πref(y′|x)er(x,y′)/β
+| {z }
+:=Z(x)
+
+=Ey∼π(·|x)
+
+− log π(y|x)
+prlhf(y|x) + log Z(x)
+
+= − ExDKL(π(y|x)∥prlhf(y|x)) + Ex log Z(x).
+Here, Z(x) is independent of π(y|x). Consequently, the objective function is maximized when
+π(y|x) = prlhf(y|x).
+38

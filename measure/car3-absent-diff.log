@@ -1,0 +1,37 @@
+CELLS THAT CHANGED VERDICT (path grain, with the cell count):
+    6  measured -> not-produced :: readings.notableAbsences.map
+    5  default -> measured :: readings.inst
+    4  measured -> not-produced :: court
+    3  not-produced -> measured :: eco.safetyProfile.blackMarketCapture
+    3  measured -> not-produced :: reading.rungs.map
+    3  measured -> not-produced :: doc
+    2  not-produced -> measured :: eco.foodSecurity.stockpile.blockadeBypass
+    2  measured -> not-produced :: eco.incomeSources.filter
+    2  default -> measured :: link
+    2  not-produced -> measured :: faith.unaffiliated
+    2  measured -> not-produced :: faith.ranks.filter
+    1  not-produced -> measured :: readings.prominentRelationship
+OLD {"measured":377,"not-produced":64,"default":10} NEW {"not-produced":76,"measured":372,"default":3}
+producerIndex files 1145 · keys 13162 · unparsed 0
+  produced.has(blackMarketCapture) = true
+  produced.has(blockadeBypass) = true
+  produced.has(prominentRelationship) = true
+  produced.has(economicGates) = true
+  produced.has(zzzNoWriterAnywhere) = false
+rows matching MORE THAN ONE civic object class: 12
+  DS-DEF-2 :: Disasters & Famine: granary AND hospital  -> store/care
+  DS-DEF-2 :: Disasters & Famine: granary AND parish care only  -> store/temple
+  DS-DEF-2 :: Disasters & Famine: granary, NO medical provision  -> store/care
+  DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present  -> store/care
+  DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision  -> store/care
+  DS-DEF-6 :: Medical Readiness: Clergy care  -> temple/care
+  DS-DEF-6 :: Logistics & Supply: Granary + port  -> store/road
+  DS-DEF-6 :: Logistics & Supply: Granary with road supply  -> store/road
+  DS-DEF-6 :: Logistics & Supply: No reserves, port open  -> store/road
+  DS-SUP-1 :: ENTREPÔT PASS-THROUGH (no workshop in the line)  -> road/craft
+  DS-GEN-5 :: market (route crossroads)  -> market/road
+  DS-GEN-7 :: power_economic: temple economy under a secular seat  -> temple/hall
+ratifiedAliases 3
+  cause:occupation -> war  identifier  war.occupation
+  economicGates.military -> settlement.defenseProfile  identifier  settlement.defenseProfile.economicGates.military
+  system:food_security -> eco  identifier  eco.foodSecurity.stockpile

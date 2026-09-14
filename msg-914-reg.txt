@@ -1,0 +1,7 @@
+§914 INSTR-912 landing (register car): writer-reach re-takes its provenance at the thirteen-car tip; no other register moved
+
+The register series at 2865da54f (registers-914.log, 03:2x; every door as predict-914.log forecast): the lighting census untouched and its plain walker green (34) — the register frozen by the lane's own commits (files 2551, parked 375, credited 2176, titles 23779, suiteTitles 6361) equals the farmed probe; the OSR plain read 1972 exact with 0 drift lines and NO write; the mounts door unchanged (changed: []); prose-numerics 225 exact, nothing re-keyed; the tuning walker plain green (75); writer-reach's dry run HOLD with no refusal and its --write moved the provenance alone (frozenAtSha e47974d84 -> 2865da54f): cohort 1322 -> 1322, 0 stale folded out, 0 registered rows lit; the scan statistics did not move — the ten island modules have no product importer and sit outside the web-transitive closure, exactly as the second fold's H4 predicted.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

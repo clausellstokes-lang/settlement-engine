@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="profile" href="https://gmpg.org/xfn/11">
+
+		<title>Guy Gavriel Kay Interview &#8211; PAUL TOMLINSON</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Oswald:r:latin,latin-ext","Cabin:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active html, .wf-active body{font-family:"Cabin",sans-serif}.wf-active input, .wf-active textarea{font-family:"Cabin",sans-serif}.wf-active .entry-content, .wf-active .entry-content p, .wf-active .entry-content ol, .wf-active .entry-content ul, .wf-active .entry-content dl, .wf-active .entry-content dt, .wf-active .entry-content cite{font-family:"Cabin",sans-serif}.wf-active .entry-content .wp-block-jetpack-contact-form, .wf-active .entry-content .wp-block-jetpack-button button, .wf-active .widget_text p, .wf-active .widget_text ol, .wf-active .widget_text ul, .wf-active .widget_text dl, .wf-active .widget_text dt, .wf-active .widget-content .rssSummary{font-family:"Cabin",sans-serif}.wf-active .faux-heading, .wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6, .wf-active .entry-content h1, .wf-active .entry-content h2, .wf-active .entry-content h3, .wf-active .entry-content h4, .wf-active .entry-content h5, .wf-active .entry-content h6{font-family:"Oswald",sans-serif;font-weight:400;font-style:normal}.wf-active .heading-size-1, .wf-active h1{font-weight:400;font-style:normal}.wf-active .heading-size-2, .wf-active h2{font-style:normal;font-weight:400}.wf-active .heading-size-3, .wf-active h3{font-style:normal;font-weight:400}.wf-active .heading-size-4, .wf-active h4{font-style:normal;font-weight:400}.wf-active .heading-size-5, .wf-active h5{font-style:normal;font-weight:400}.wf-active .heading-size-6, .wf-active h6{font-style:normal;font-weight:400}.wf-active .button, .wf-active .faux-button, .wf-active .wp-block-button__link, .wf-active .wp-block-file__button, .wf-active button{font-family:"Oswald",sans-serif;font-style:normal;font-weight:400}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=77'
+					+ '&is_singular=';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wYXVsdG9tbGluc29uLm9yZw%3D%3D"
+		+ "&wpcomid=109117950"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//wordpress.com' />
+<link rel='dns-prefetch' href='//af.pubmine.com' />
+<link rel="alternate" type="application/rss+xml" title="PAUL TOMLINSON &raquo; Feed" href="https://paultomlinson.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="PAUL TOMLINSON &raquo; Comments Feed" href="https://paultomlinson.org/comments/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??/wp-content/mu-plugins/widgets/eu-cookie-law/templates/style.css,/wp-content/mu-plugins/likes/jetpack-likes.css?m=1743883414j&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??/wp-content/mu-plugins/core-compat/wp-mediaelement.css,/wp-content/mu-plugins/wpcom-bbpress-premium-themes.css?m=1432920480j&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--accent: #177db4;--wp--preset--color--primary: #000000;--wp--preset--color--secondary: #6d6d6d;--wp--preset--color--subtle-background: #dbdbdb;--wp--preset--color--background: #ffffff;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 18px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 26.25px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--normal: 21px;--wp--preset--font-size--larger: 32px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-color{color: var(--wp--preset--color--accent) !important;}.has-primary-color{color: var(--wp--preset--color--primary) !important;}.has-secondary-color{color: var(--wp--preset--color--secondary) !important;}.has-subtle-background-color{color: var(--wp--preset--color--subtle-background) !important;}.has-background-color{color: var(--wp--preset--color--background) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-background-color{background-color: var(--wp--preset--color--accent) !important;}.has-primary-background-color{background-color: var(--wp--preset--color--primary) !important;}.has-secondary-background-color{background-color: var(--wp--preset--color--secondary) !important;}.has-subtle-background-background-color{background-color: var(--wp--preset--color--subtle-background) !important;}.has-background-background-color{background-color: var(--wp--preset--color--background) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-accent-border-color{border-color: var(--wp--preset--color--accent) !important;}.has-primary-border-color{border-color: var(--wp--preset--color--primary) !important;}.has-secondary-border-color{border-color: var(--wp--preset--color--secondary) !important;}.has-subtle-background-border-color{border-color: var(--wp--preset--color--subtle-background) !important;}.has-background-border-color{border-color: var(--wp--preset--color--background) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-normal-font-size{font-size: var(--wp--preset--font-size--normal) !important;}.has-larger-font-size{font-size: var(--wp--preset--font-size--larger) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/_static/??-eJyNjsEKg0AMRH+o29BK1Yv4LVaipt3sLk0W8e+bsiDSk5eQvMwMA2tyYwyKQYGzSz7PFATGyGzIeXqjXfJHrkYuQBCikrllX8rjkKkLsiWk/ARdDWxlgujm8bR6EEEtPSaTOjL55+fuubs19aNq23tVv76Hjk0E&cssminify=yes' type='text/css' media='all' />
+<style id="twentytwenty-style-inline-css">
+.color-accent,.color-accent-hover:hover,.color-accent-hover:focus,:root .has-accent-color,.has-drop-cap:not(:focus):first-letter,.wp-block-button.is-style-outline,a { color: #177db4; }blockquote,.border-color-accent,.border-color-accent-hover:hover,.border-color-accent-hover:focus { border-color: #177db4; }button,.button,.faux-button,.wp-block-button__link,.wp-block-file .wp-block-file__button,input[type="button"],input[type="reset"],input[type="submit"],.bg-accent,.bg-accent-hover:hover,.bg-accent-hover:focus,:root .has-accent-background-color,.comment-reply-link { background-color: #177db4; }.fill-children-accent,.fill-children-accent * { fill: #177db4; }:root .has-background-color,button,.button,.faux-button,.wp-block-button__link,.wp-block-file__button,input[type="button"],input[type="reset"],input[type="submit"],.wp-block-button,.comment-reply-link,.has-background.has-primary-background-color:not(.has-text-color),.has-background.has-primary-background-color *:not(.has-text-color),.has-background.has-accent-background-color:not(.has-text-color),.has-background.has-accent-background-color *:not(.has-text-color) { color: #ffffff; }:root .has-background-background-color { background-color: #ffffff; }body,.entry-title a,:root .has-primary-color { color: #000000; }:root .has-primary-background-color { background-color: #000000; }cite,figcaption,.wp-caption-text,.post-meta,.entry-content .wp-block-archives li,.entry-content .wp-block-categories li,.entry-content .wp-block-latest-posts li,.wp-block-latest-comments__comment-date,.wp-block-latest-posts__post-date,.wp-block-embed figcaption,.wp-block-image figcaption,.wp-block-pullquote cite,.comment-metadata,.comment-respond .comment-notes,.comment-respond .logged-in-as,.pagination .dots,.entry-content hr:not(.has-background),hr.styled-separator,:root .has-secondary-color { color: #6d6d6d; }:root .has-secondary-background-color { background-color: #6d6d6d; }pre,fieldset,input,textarea,table,table *,hr { border-color: #dbdbdb; }caption,code,code,kbd,samp,.wp-block-table.is-style-stripes tbody tr:nth-child(odd),:root .has-subtle-background-background-color { background-color: #dbdbdb; }.wp-block-table.is-style-stripes { border-bottom-color: #dbdbdb; }.wp-block-latest-posts.is-grid li { border-top-color: #dbdbdb; }:root .has-subtle-background-color { color: #dbdbdb; }body:not(.overlay-header) .primary-menu > li > a,body:not(.overlay-header) .primary-menu > li > .icon,.modal-menu a,.footer-menu a, .footer-widgets a:where(:not(.wp-block-button__link)),#site-footer .wp-block-button.is-style-outline,.wp-block-pullquote:before,.singular:not(.overlay-header) .entry-header a,.archive-header a,.header-footer-group .color-accent,.header-footer-group .color-accent-hover:hover { color: #177db4; }.social-icons a,#site-footer button:not(.toggle),#site-footer .button,#site-footer .faux-button,#site-footer .wp-block-button__link,#site-footer .wp-block-file__button,#site-footer input[type="button"],#site-footer input[type="reset"],#site-footer input[type="submit"] { background-color: #177db4; }.social-icons a,body:not(.overlay-header) .primary-menu ul,.header-footer-group button,.header-footer-group .button,.header-footer-group .faux-button,.header-footer-group .wp-block-button:not(.is-style-outline) .wp-block-button__link,.header-footer-group .wp-block-file__button,.header-footer-group input[type="button"],.header-footer-group input[type="reset"],.header-footer-group input[type="submit"] { color: #ffffff; }#site-header,.footer-nav-widgets-wrapper,#site-footer,.menu-modal,.menu-modal-inner,.search-modal-inner,.archive-header,.singular .entry-header,.singular .featured-media:before,.wp-block-pullquote:before { background-color: #ffffff; }.header-footer-group,body:not(.overlay-header) #site-header .toggle,.menu-modal .toggle { color: #000000; }body:not(.overlay-header) .primary-menu ul { background-color: #000000; }body:not(.overlay-header) .primary-menu > li > ul:after { border-bottom-color: #000000; }body:not(.overlay-header) .primary-menu ul ul:after { border-left-color: #000000; }.site-description,body:not(.overlay-header) .toggle-inner .toggle-text,.widget .post-date,.widget .rss-date,.widget_archive li,.widget_categories li,.widget cite,.widget_pages li,.widget_meta li,.widget_nav_menu li,.powered-by-wordpress,.footer-credits .privacy-policy,.to-the-top,.singular .entry-header .post-meta,.singular:not(.overlay-header) .entry-header .post-meta a { color: #6d6d6d; }.header-footer-group pre,.header-footer-group fieldset,.header-footer-group input,.header-footer-group textarea,.header-footer-group table,.header-footer-group table *,.footer-nav-widgets-wrapper,#site-footer,.menu-modal nav *,.footer-widgets-outer-wrapper,.footer-top { border-color: #dbdbdb; }.header-footer-group table caption,body:not(.overlay-header) .header-inner .toggle-wrapper::before { background-color: #dbdbdb; }
+.post-tags, .post-author { clip: rect(1px, 1px, 1px, 1px); height: 1px; position: absolute; overflow: hidden; width: 1px; }
+/*# sourceURL=twentytwenty-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-15-1' href='/wp-content/themes/pub/twentytwenty/print.css?m=1732786075i&cssminify=yes' type='text/css' media='print' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-16-1' href='/_static/??-eJx9jsEKwjAQRH/IuFQr9SJ+S4xrTN1kQ3dD6d+bqoeI4GWYgXnDwJyN46SYFGIxmYoPSWBEzdY9Phki8yrXQiigd4xolJkEHMdsFXSu/PLWrRPZQDP76gvkcvnqQUgORBdCM+e688M1dya8EPtqPdRWE/9BHtkQO6uhnm+DuZEN04qe46kbDvvdsR+6fnwCWn9lKA==&cssminify=yes' type='text/css' media='all' />
+<style id="twentytwenty-jetpack-inline-css">
+
+	.infinite-scroll #site-content #infinite-handle span button,
+	.infinite-scroll #site-content #infinite-handle span button:hover,
+	.infinite-scroll #site-content #infinite-handle span button:focus {
+		background: #177db4;
+		color: #ffffff;
+	}
+	#site-content .entry-content div.sharedaddy h3.sd-title,
+	#site-content .entry-content h3.sd-title,
+	#site-content .entry-content #jp-relatedposts h3.jp-relatedposts-headline {
+		color: #6d6d6d;
+	}
+	
+/*# sourceURL=twentytwenty-jetpack-inline-css */
+</style>
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyNjcEKAjEMRH/ImhVlqwfxU6TbhrZrmhTTIv69u+JFvHgZ5sHwBh7VeOGG3KB0U6nHzAoztur87cNQRNYInVBBk7tjcCE83zVz3HrVDfxvumb2MPVMAVR8dmRIougX/DhbwrK8pwNEksnROriU884e9+PJDnaYXxwFS20=&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/js/rlt-proxy.js?m=1720530689i'></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<script data-wp-strategy="defer" defer id="twentytwenty-js-js" crossorigin='anonymous' src="https://s0.wp.com/wp-content/themes/pub/twentytwenty/assets/js/index.js?m=1765388236i&#038;ver=3.0-wpcom"></script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"109117950","postID":"77","siteURL":"https://paultomlinson.org","xhrURL":"https://paultomlinson.org/wp-admin/admin-ajax.php","nonce":"e422ab16d0","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/P7nQyW-1f","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/blog-plugins/wordads-classes/js/cmp/v2/cmp-non-gdpr.js?m=1780567333i'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://paultomlinsonblog.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/" />
+<link rel='shortlink' href='https://wp.me/P7nQyW-1f' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fpaultomlinson.org%2Finterviews-articles%2Fguy-gavriel-kay-interview%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fpaultomlinson.org%2Finterviews-articles%2Fguy-gavriel-kay-interview%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Guy Gavriel Kay Interview" />
+<meta property="og:url" content="https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/" />
+<meta property="og:description" content="Guy Gavriel Kay was born and brought up in Canada, and he now lives in Toronto. In 1974-5 he spent a year in Oxford working with Christopher Tolkien on the editorial construction of J.R.R. Tolkien&amp;…" />
+<meta property="article:published_time" content="2016-03-29T20:13:49+00:00" />
+<meta property="article:modified_time" content="2016-05-05T16:27:47+00:00" />
+<meta property="og:site_name" content="PAUL TOMLINSON" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg?m=1383295312i" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:text:title" content="Guy Gavriel Kay&nbsp;Interview" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="apple-touch-icon" href="https://s0.wp.com/i/webclip.png?m=1713868326i" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://paultomlinson.org/osd.xml" title="PAUL TOMLINSON" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#ffffff" />
+<script>
+document.documentElement.className = document.documentElement.className.replace( 'no-js', 'js' );
+//# sourceURL=twentytwenty_no_js_class
+</script>
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="description" content="Guy Gavriel Kay was born and brought up in Canada, and he now lives in Toronto. In 1974-5 he spent a year in Oxford working with Christopher Tolkien on the editorial construction of J.R.R. Tolkien&#039;s posthumously published The Silmarillion. He returned to Canada, where he studied law and he was called to the Bar of&hellip;" />
+<style id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+<script>
+var wa_client = {}; wa_client.cmd = []; wa_client.config = { 'blog_id': 109117950, 'blog_language': 'en', 'is_wordads': false, 'hosting_type': 0, 'afp_account_id': null, 'afp_host_id': 5038568878849053, 'theme': 'pub/twentytwenty', '_': { 'title': 'Advertisement', 'privacy_settings': 'Privacy Settings' }, 'formats': [ 'inline', 'belowpost', 'bottom_sticky', 'sidebar_sticky_right', 'sidebar', 'gutenberg_rectangle', 'gutenberg_leaderboard', 'gutenberg_mobile_leaderboard', 'gutenberg_skyscraper' ] };
+</script>
+		<script type="text/javascript">
+
+			window.doNotSellCallback = function() {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = document.createElement( 'a' );
+				dnsLink.href = 'https://wordpress.com/advertising-program-optout/';
+				dnsLink.classList.add( 'do-not-sell-link' );
+				dnsLink.rel = 'nofollow';
+				dnsLink.style.marginLeft = '0.5em';
+				dnsLink.textContent = 'Do Not Sell or Share My Personal Information';
+
+				var creditLinks = document.querySelectorAll( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				Array.prototype.forEach.call( creditLinks, function( el ) {
+					el.insertAdjacentElement( 'afterend', dnsLink );
+				});
+
+				return true;
+			};
+
+		</script>
+		<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+
+	</head>
+
+	<body class="wp-singular page-template page-template-page-full-width page-template-page-full-width-php page page-id-77 page-child parent-pageid-47 custom-background wp-embed-responsive wp-theme-pubtwentytwenty customizer-styles-applied singular enable-search-modal missing-post-thumbnail has-no-pagination not-showing-comments show-avatars page-full-width footer-top-visible reduced-spacing hide-homepage-title jetpack-reblog-enabled tags-hidden author-hidden">
+
+		<a class="skip-link screen-reader-text" href="#site-content">Skip to the content</a>
+		<header id="site-header" class="header-footer-group">
+
+			<div class="header-inner section-inner">
+
+				<div class="header-titles-wrapper">
+
+					
+						<button class="toggle search-toggle mobile-search-toggle" data-toggle-target=".search-modal" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-expanded="false">
+							<span class="toggle-inner">
+								<span class="toggle-icon">
+									<svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)" /></svg>								</span>
+								<span class="toggle-text">Search</span>
+							</span>
+						</button><!-- .search-toggle -->
+
+					
+					<div class="header-titles">
+
+						<div class="site-title faux-heading"><a href="https://paultomlinson.org/" rel="home">PAUL TOMLINSON</a></div>
+					</div><!-- .header-titles -->
+
+					<button class="toggle nav-toggle mobile-nav-toggle" data-toggle-target=".menu-modal"  data-toggle-body-class="showing-menu-modal" aria-expanded="false" data-set-focus=".close-nav-toggle">
+						<span class="toggle-inner">
+							<span class="toggle-icon">
+								<svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="26" height="7" viewBox="0 0 26 7"><path fill-rule="evenodd" d="M332.5,45 C330.567003,45 329,43.4329966 329,41.5 C329,39.5670034 330.567003,38 332.5,38 C334.432997,38 336,39.5670034 336,41.5 C336,43.4329966 334.432997,45 332.5,45 Z M342,45 C340.067003,45 338.5,43.4329966 338.5,41.5 C338.5,39.5670034 340.067003,38 342,38 C343.932997,38 345.5,39.5670034 345.5,41.5 C345.5,43.4329966 343.932997,45 342,45 Z M351.5,45 C349.567003,45 348,43.4329966 348,41.5 C348,39.5670034 349.567003,38 351.5,38 C353.432997,38 355,39.5670034 355,41.5 C355,43.4329966 353.432997,45 351.5,45 Z" transform="translate(-329 -38)" /></svg>							</span>
+							<span class="toggle-text">Menu</span>
+						</span>
+					</button><!-- .nav-toggle -->
+
+				</div><!-- .header-titles-wrapper -->
+
+				<div class="header-navigation-wrapper">
+
+					
+							<nav class="primary-menu-wrapper" aria-label="Horizontal">
+
+								<ul class="primary-menu reset-list-style">
+
+								<li id="menu-item-176" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-176"><a href="https://paultomlinson.org/">Home</a></li>
+<li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-177"><a href="https://paultomlinson.org/about/">About</a><span class="icon"></span>
+<ul class="sub-menu">
+	<li id="menu-item-288" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-288"><a href="https://paultomlinson.org/about/images-of-paul-tomlinson/">Images</a></li>
+	<li id="menu-item-289" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-289"><a href="https://paultomlinson.org/about/">Biography</a></li>
+	<li id="menu-item-290" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-290"><a href="https://paultomlinson.org/about/website-credits/">Website Credits</a></li>
+</ul>
+</li>
+<li id="menu-item-179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-179"><a href="https://paultomlinson.org/short-stories/">Short Stories</a></li>
+<li id="menu-item-178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a href="https://paultomlinson.org/books/">Books</a></li>
+<li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181"><a href="https://paultomlinson.org/bibliography/">Bibliography</a></li>
+<li id="menu-item-182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182"><a href="https://paultomlinson.org/blog/">Blog</a></li>
+<li id="menu-item-183" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-183"><a href="https://paultomlinson.org/contact/">Contact</a><span class="icon"></span>
+<ul class="sub-menu">
+	<li id="menu-item-1117" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1117"><a href="https://paultomlinson.org/contact/">Contact</a></li>
+	<li id="menu-item-1115" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1115"><a href="https://paultomlinson.org/contact/signup/">Genre Writer E-Mail List sign-up</a></li>
+</ul>
+</li>
+
+								</ul>
+
+							</nav><!-- .primary-menu-wrapper -->
+
+						
+						<div class="header-toggles hide-no-js">
+
+						
+							<div class="toggle-wrapper search-toggle-wrapper">
+
+								<button class="toggle search-toggle desktop-search-toggle" data-toggle-target=".search-modal" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-expanded="false">
+									<span class="toggle-inner">
+										<svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)" /></svg>										<span class="toggle-text">Search</span>
+									</span>
+								</button><!-- .search-toggle -->
+
+							</div>
+
+							
+						</div><!-- .header-toggles -->
+						
+				</div><!-- .header-navigation-wrapper -->
+
+			</div><!-- .header-inner -->
+
+			<div class="search-modal cover-modal header-footer-group" data-modal-target-string=".search-modal" role="dialog" aria-modal="true" aria-label="Search">
+
+	<div class="search-modal-inner modal-inner">
+
+		<div class="section-inner">
+
+			<form role="search" aria-label="Search for:" method="get" class="search-form" action="https://paultomlinson.org/">
+	<label for="search-form-1">
+		<span class="screen-reader-text">
+			Search for:		</span>
+		<input type="search" id="search-form-1" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<input type="submit" class="search-submit" value="Search" />
+</form>
+
+			<button class="toggle search-untoggle close-search-toggle fill-children-current-color" data-toggle-target=".search-modal" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field">
+				<span class="screen-reader-text">
+					Close search				</span>
+				<svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102" /></svg>			</button><!-- .search-toggle -->
+
+		</div><!-- .section-inner -->
+
+	</div><!-- .search-modal-inner -->
+
+</div><!-- .menu-modal -->
+
+		</header><!-- #site-header -->
+
+		
+<div class="menu-modal cover-modal header-footer-group" data-modal-target-string=".menu-modal">
+
+	<div class="menu-modal-inner modal-inner">
+
+		<div class="menu-wrapper section-inner">
+
+			<div class="menu-top">
+
+				<button class="toggle close-nav-toggle fill-children-current-color" data-toggle-target=".menu-modal" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal">
+					<span class="toggle-text">Close Menu</span>
+					<svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102" /></svg>				</button><!-- .nav-toggle -->
+
+				
+					<nav class="mobile-menu" aria-label="Mobile">
+
+						<ul class="modal-menu reset-list-style">
+
+						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-176"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/">Home</a></div><!-- .ancestor-wrapper --></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-177"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/about/">About</a><button class="toggle sub-menu-toggle fill-children-current-color" data-toggle-target=".menu-modal .menu-item-177 > .sub-menu" data-toggle-type="slidetoggle" data-toggle-duration="250" aria-expanded="false"><span class="screen-reader-text">Show sub menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)" /></svg></button></div><!-- .ancestor-wrapper -->
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-288"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/about/images-of-paul-tomlinson/">Images</a></div><!-- .ancestor-wrapper --></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-289"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/about/">Biography</a></div><!-- .ancestor-wrapper --></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-290"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/about/website-credits/">Website Credits</a></div><!-- .ancestor-wrapper --></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-179"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/short-stories/">Short Stories</a></div><!-- .ancestor-wrapper --></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/books/">Books</a></div><!-- .ancestor-wrapper --></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/bibliography/">Bibliography</a></div><!-- .ancestor-wrapper --></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/blog/">Blog</a></div><!-- .ancestor-wrapper --></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-183"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/contact/">Contact</a><button class="toggle sub-menu-toggle fill-children-current-color" data-toggle-target=".menu-modal .menu-item-183 > .sub-menu" data-toggle-type="slidetoggle" data-toggle-duration="250" aria-expanded="false"><span class="screen-reader-text">Show sub menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)" /></svg></button></div><!-- .ancestor-wrapper -->
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1117"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/contact/">Contact</a></div><!-- .ancestor-wrapper --></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1115"><div class="ancestor-wrapper"><a href="https://paultomlinson.org/contact/signup/">Genre Writer E-Mail List sign-up</a></div><!-- .ancestor-wrapper --></li>
+</ul>
+</li>
+
+						</ul>
+
+					</nav>
+
+					
+			</div><!-- .menu-top -->
+
+			<div class="menu-bottom">
+
+				
+			</div><!-- .menu-bottom -->
+
+		</div><!-- .menu-wrapper -->
+
+	</div><!-- .menu-modal-inner -->
+
+</div><!-- .menu-modal -->
+
+<main id="site-content">
+
+	
+<article class="post-77 page type-page status-publish hentry" id="post-77">
+
+	
+<header class="entry-header has-text-align-center header-footer-group">
+
+	<div class="entry-header-inner section-inner medium">
+
+		<h1 class="entry-title">Guy Gavriel Kay&nbsp;Interview</h1>
+	</div><!-- .entry-header-inner -->
+
+</header><!-- .entry-header -->
+
+	<div class="post-inner thin ">
+
+		<div class="entry-content">
+
+			<p>Guy Gavriel Kay was born and brought up in Canada, and he now lives in Toronto. In 1974-5 he spent a year in Oxford working with Christopher Tolkien on the editorial construction of J.R.R. Tolkien&#8217;s posthumously published <em>The Silmarillion</em>. He returned to Canada, where he studied law and he was called to the Bar of Ontario in 1982, but he chose not to practice. Between 1984 and 1987, the three books that make up the award-winning fantasy series The Fionavar Tapestry (<em>The Summer Tree, The Wandering Fire </em>and <em>The Darkest Road)</em> were published in the UK, the USA, and Canada, and were translated into eight languages. In addition to writing fiction, Kay served as principal writer and associate producer on CBC Radio&#8217;s <em>The Scale of Justice</em>, which aired from 1983 to 1989, and he has also worked in television. His most recent work is the novel <em>Tigana</em>.</p>
+<p><strong>Guy Gavriel Kay:</strong> <em>Tigana</em> is an attempt to break down the border between fantasy literature and mainstream literature. What I&#8217;ve done is tell a story in a setting that is recognisably similar to that of the Italian Renaissance — it&#8217;s not set in Italy, it&#8217;s not set in the Renaissance, it&#8217;s set in a world that I created myself, but I wanted it to evoke the intrigue and the political machinations and the Machiavellian manipulations of the Italian Renaissance, so that the reader who doesn&#8217;t normally read fantasy literature would find something to anchor their images as they read the book.</p>
+<p>The story is about a conquered peninsula — the nine provinces of a peninsula that has been conquered by two foreign powers — and the secret struggle led by a very small band of people to oust the two conquerors and regain the freedom of the peninsula. So it is a war story, it is a story of intrigue, cunning and manipulation, and there are two or three love stories built into the plot.</p>
+<p><strong>Paul Tomlinson:</strong> It&#8217;s also a story about a missing place, isn&#8217;t it?</p>
+<p><strong>GGK:</strong> Very much. The theme of the book, essentially, is about freedom and identity in terms of countries. About how a conquered and occupied country begins to lose it&#8217;s essence, it&#8217;s identity, under the oppressors. And one of the reasons I made this a fantasy was because in a fantasy, if I told the story of the occupation of the province of <em>Tigana</em>, and I explored the human themes, and the tragedies and the sorrows and the dangers and the intensities that are associated with that, the readers, in their own minds, can relate that story to, for example, Czechoslovakia under the Soviets, or the Turkish occupation of Armenia, or the English occupation of Ireland under Cromwell. If it&#8217;s in a fantasy setting, and you do the people vividly enough, then in a way it can be about any and all of these places that have experienced the same sort of thing.</p>
+<p><strong>PT:</strong> It also relates in a way to the fact that the &#8216;global village&#8217; is causing individual ethnic cultures to disappear&#8230;</p>
+<p><strong>GGK:</strong> Very much so. That&#8217;s actually a very perceptive comment, because I had two ideas in my mind for the ways that cultures disappear — one was the notion of ancient civilizations of which we have left only the names: we know so little about the Chaldeans, relatively little about the Babylonians, but they were once dominant, overwhelmingly powerful cultures. And I began to think how time gradually erases these cultures.</p>
+<p>Then I was thinking about how, in this century, that process can be accelerated so much by the speed of information and the speed of transition. Do you know those famous photographs — from Czechoslovakia in &#8217;68, from Hungary in 1956, where you&#8217;ll see a picture of six Soviet party functionaries, and then two months later that same photograph will show five functionaries and a potted plant. And that sixth person has not only been killed, but it has been made as if they never existed.</p>
+<p>And the combination of those two things, the disappearance of cultures and the fact that it can happen so fast now, were starting points in the evolution to my writing <em>Tigana</em>. The other thing is that the surest way to destroy a culture is to begin destroying its names and language and history. In the novel, the most brutal thing that has been done to the province of <em>Tigana</em> is that the people who have occupied it have set about not only killing people, not only occupying cities, but also destroying and eliminating history and memory of the province. So that if things continue unchecked, as the novel opens, it won&#8217;t be very long before absolutely no shred of memory of <em>Tigana</em> is left in the world. That&#8217;s the crisis that my protagonists are facing as the book opens.</p>
+<p><strong>PT:</strong> Because it is only the memories of the last generation of <em>Tigana</em>&#8216;s people that is keeping the place alive&#8230;</p>
+<p><strong>GGK</strong>: Exactly. Memory is a theme&#8230; The two major themes of the book are, in some way, spelled out by the two epigraphs: there is an epigraph from Dante that talks about the bitterness of exile — &#8220;You will come to know how bitter as salt and stone is the bread of others&#8230;&#8221; when you are forced to be away from your home, the idea of exile and loss is built in there. The other motif is in the quote from the great poet George Seferis, which is about the importance of remembering things, but also the importance of not remembering too much, because you can be paralysed if you only live in the past, the importance of finding a balance between the two.</p>
+<p><strong>PT:</strong> I have to admit to not reading much fantasy, by choice&#8230;</p>
+<p><strong>GGK:</strong> I don&#8217;t either, I don&#8217;t read much fantasy at all&#8230;</p>
+<p><strong>PT:</strong> My view of the &#8216;typical fantasy&#8217; novel is probably unfair, but I see them as over-simplistic, Good versus Evil tales, where the villains are defeated in the end and the heroes live happily ever after. Pure escapism, more or less. <em>Tigana</em> is very different. It&#8217;s not Good and Evil, there are too many greys, and when it comes to the end, the final confrontation with the villains&#8230;</p>
+<p><strong>GGK:</strong> You&#8217;re not sure what you want to happen?</p>
+<p><strong>PT:</strong> Right! Especially with Dianora being in love with Brandin&#8230; you think, maybe he&#8217;s not so bad after all.</p>
+<p><strong>GGK:</strong> I really wanted that effect, that&#8217;s very much what I was going for. I&#8217;ve been tired for years of the simplistic nature of most fantasies, where the characters are two-dimensional, or even one-dimensional; where the situations are clear cut, as they never really are in life. I wanted to try and find ways of making it more complex, with more shades of meaning, more nuances of motivation. So the fantasy starts to become much closer to the reader&#8217;s actual perception of how people really act and behave in life. I wanted to start breaking down the border between Fantasy over there somewhere and Realistic Fiction over here somewhere, with no way the two can meet. I think they can, if you do it right.</p>
+<p><strong>PT:</strong> Do you think fantasy should, instead of being simple escapism, be tackling current and topical or controversial issues, in some veiled or allegorical form?</p>
+<p><strong>GGK:</strong> Absolutely. I think the most moving thing that any critic said about my first trilogy came from an academic who was doing a sort of global assessment of the trilogy, and the last line of the review described it as &#8220;the kind of escape that brings you home.&#8221; And the reason I loved it so much was because that is what I&#8217;ve been saying and believing that the best fantasy can do. I was never as concise as he was. He gave me the phrase for what I&#8217;ve been working for.</p>
+<p>There&#8217;s nothing wrong with escaping — and all fiction is an escape of sorts — but good fiction, and good fantasy is in no way an exception to this, gives you something to bring back with you. That when you&#8217;ve been out there, when you&#8217;ve been turning pages until three in the morning — which I hope my readers do, not just the ones on a deadline! — you want people turning the pages to find out what happens, but I want something more. I&#8217;m reaching for the next step beyond just a fast page-turner. I want the reader, during the book and at the end of it, to have had an experience through my characters that illuminates in some way their own experiences and perceptions of the world.</p>
+<p>By making this a fantasy, this story about conquered countries and the things that happen when good people sometimes have to do bad things in a cause that matters to them; or when apparently evil people actually turn out to be driven and tormented by love and grief as much as the heroes, I wanted the reader to come back from my novel, as it were, with a sense that the way they looked at things might suddenly have been altered.</p>
+<p><strong>PT:</strong> All of the characters in <em>Tigana</em> seem to have a past, they don&#8217;t just appear on stage as The Young Hero, The Wizard, whatever&#8230; and when the book finishes, you wonder what happens next, without wanting there to be two more books, you just wonder how things turn out for them.</p>
+<p><strong>GGK:</strong> The ending was very deliberately set up to evoke what you&#8217;re talking about. I don&#8217;t want to say anything about the ending that will spoil it.</p>
+<p><strong>PT:</strong> Another part of the book I liked very much was the sequence with the Nightwalkers. These people who must fight once every year in a kind of dream land so that the land remains fertile. Is this based on actual mythology?</p>
+<p><strong>GGK:</strong> There&#8217;s an acknowledgement at the beginning of the book to the work of an Italian scholar by the name of Carlo Ginsberg who did a book called the <em>Night Battles</em>, which was a study of the late Middle Ages religious cult that had some elements of what I later spun off into my chapter.</p>
+<p>What I wanted to do with that chapter&#8230; That&#8217;s the one pure fantasy chapter in the whole book. That&#8217;s the one chapter that is out-and-out magical. In the middle of a night that turns out to be a night in another place, a very agrarian cult ritual is enacted. It&#8217;s almost dead centre in the book. In many ways the novel turns at that point and starts its movement towards a resolution.</p>
+<p>I wanted to see if I could write a very realistic, human-grounded fantasy, as opposed to monsters and supernatural creatures, grounded in human characters, but see if in the middle of it I could put this one very beautiful, very mysterious and quite magical sequence. I was reaching for that in the writing.</p>
+<p><strong>PT:</strong> I thought it was quite topical too — a fight to stop something killing the &#8230;</p>
+<p><strong>GGK:</strong> &#8230; the health of the land. It&#8217;s a mistake to think that the crises of today are fundamentally different to the crises of yesterday. The emotional crises of people are always going to be the same: about love and fear and ageing and economic stress and parents and children, these things will be constant. So too will be anxieties about things like the health and fertility of the soil.</p>
+<p>The earliest legends of Western civilization — and Eastern, if you go back far enough — involve the notion of this inextricable binding together of the health of the King and the health of his land. That&#8217;s what the Fisher King myth is about, the idea that if the king or the government, the state of politics, is malevolent or unhealthy, then the soil will not be fruitful. That as we are, so is our land.</p>
+<p>It is a very ancient idea that is finding a very different kind of modern expression in some of what we are seeing in the ecology movement. There&#8217;s nothing new about that, there&#8217;s just a sense of crisis now because, perhaps, the stakes are higher now than they&#8217;ve ever been.</p>
+<p>If you go back into the myths and legends that underlie the best fantasy, you will find&#8230; because a myth, after all, is an attempt by a culture to explain something or pacify something or come to terms with the world in which it lives. And Mankind has always been trying to come to terms with the same things: How did the world begin? Why must we die? Elements as large and as important as that.</p>
+<p><strong>PT:</strong> You&#8217;ve said that you wanted to capture the feel of Italy for <em>Tigana</em>, did you <em>have</em> to go to Europe for that?</p>
+<p><strong>GGK:</strong> I get teased by my friends for that; they accuse me of coming up with a self-fulfilling habit, which is: I write better when I&#8217;m away from home, that&#8217;s one thing. I work more efficiently. I&#8217;ve always found that when I&#8217;m off somewhere where I don&#8217;t know as many people, I get up in a morning and I write. I go to bed, I get up in a morning, and I write.</p>
+<p>At the same time, I really wanted the mood of <em>Tigana</em>, the flavour of it, to evoke Italy. I really wanted that to happen. I live in downtown Toronto, in Canada. It&#8217;s difficult to evoke olive groves and vineyards and cyprus trees and the colours and smells of Tuscany when you&#8217;re writing with a streetcar running outside your window in the city. Now it can obviously be done, but it seemed to me that it would be a very good idea to try to put myself in the ambience I was trying to evoke.</p>
+<p>I&#8217;ve just done the same thing again with my newest book, which is meant to evoke the south of France. Again I went over there for four months while I was writing it, to surround myself with what I wanted to capture on paper.</p>
+<p><strong>PT:</strong> Tell us a little bit about the book you&#8217;re working on at the moment.</p>
+<p><strong>GGK:</strong> I don&#8217;t like talking about works in progress too much because I always worry that if I say too much — not for the listener, but for me — if I describe it too vividly, I&#8217;ll lock myself in in my own thinking.</p>
+<p>The main thing that I can say about the new one is that I&#8217;m trying to work the same vein as <em>Tigana</em> in one way: To do careful historical research in a given period of history — in <em>Tigana</em> it was the Renaissance, for the new book its Provence in the south of France, in the 12th and 13th Century of the Troubadours and Eleanor of Aquitaine — <em>The Lion in Winter</em> and all of that period. I wanted to evoke that period in a fantasy setting of my own. It&#8217;s a newish idea, one never wants to say its a brand new thing, there&#8217;s always someone who did something like it, but it is relatively new. What I&#8217;m trying to do is capture the spirit of the period, but leave myself free for the narrative, for the story and the characters to be independent and my own, so that I can explore the themes that interest me most in that flavour, without being tied to actual historical events.</p>
+<p><strong>PT:</strong> I sometimes wonder why Medieval and Renaissance Europe is so popular with American fantasy writers, when they have other closer cultures and histories to draw on&#8230;</p>
+<p><strong>GGK:</strong> I only half agree with you there. The culture of North America is astonishingly young — the past is fundamental recent history. The wellsprings which underlie European culture are the same wellsprings which underlie North American culture, because North America came from Europe. So if you go back far enough, the roots are the same.</p>
+<p>You will see a new kind of fantasy emerging in North America that I don&#8217;t write, but that I&#8217;m reading with some interest, which is what they call &#8216;urban fantasy&#8217;. And what you&#8217;re seeing there is people writing books set here and now in Toronto or Seattle or Minneapolis, Minnesota, where the characters are very contemporary people moving through very contemporary lives, and suddenly, through some infusion of the fantastic element, the supernatural enters their lives. Not horror, not a Stephen King kind of horror, it&#8217;s a fantasy element. The Queen of Elfland enters a shopping mall in Minneapolis. Now it can sound very funny to describe it that way, but in fact the better writers are finding a very interesting way of balancing and marrying a contemporary setting with that infusion of the fantastic. That&#8217;s a North American innovation I think.</p>
+<p><strong>PT:</strong> You trained as a lawyer, what kind of influence do you think that training has on your writing?</p>
+<p><strong>GGK:</strong> Well, my joke answer always is that I&#8217;ve had better fantasies in the courtroom than I&#8217;ve ever read in books!</p>
+<p>The more serious answer is that it takes a genuinely high degree of discipline to write a fantasy. It sounds paradoxical because one pictures fantasy as frivolous and irresponsible and dethatched from reality. But in fact, if you think about it, if someone writes a novel set in the middle of London in 1990, they know that Margaret Thatcher&#8217;s the Prime Minister, they know where Fleet Street is, they have no problem with the groundwork of their story, they simply — well, not simply, it&#8217;s very difficult — they have to focus on their characters and their story.</p>
+<p>When you write fantasy, the groundwork is what you have to do yourself. You have to build up a vivid and convincing and fully fleshed out a setting for your novel, so that the reader will trust you and will find it believable and convincing and will walk with you into that world.</p>
+<p>To do that convincingly requires an uncommon degree of organisational discipline, and for me I found the training, the mind set that law induces, enormously useful in that groundwork stage of building the novel.</p>
+<p><strong>PT:</strong> I suppose that if you&#8217;ve got to create everything, then you&#8217;ve got to create a framework, you have to have rules which you obey, limitations&#8230; if your hero can weave a spell to solve any problem, you don&#8217;t end up with much of a story&#8230;</p>
+<p><strong>GGK:</strong> You&#8217;re exactly right. That&#8217;s the biggest problem with most fantasies. It is, I think, also what leads so many people to turn away from fantasy -the image of arbitrariness. I think the arbitrary is death to fantasy. To any fiction. If the reader feels that the writer is just pulling something out of a hat at the moment of a crisis, and at the moment of the next crisis he can pull whatever he wants out of his hat, then you don&#8217;t really engage in the story — your emotions and your involvement aren&#8217;t there. So it&#8217;s exactly as you say  — you have to build the rules as precisely and carefully as possible, so that the reader will trust you not to be arbitrary and casual in any moment of crisis.</p>
+<p><strong>PT:</strong> The other problem I have with fantasy generally is that it is about things that don&#8217;t matter: it&#8217;s about a quest for an orb or a sword, or to rescue a princess you don&#8217;t really care about, and at the end of the (always) successful quest you think: So what? In <em>Tigana</em>, the fight to save the memory of a place, of a culture, is important. Something real is at stake&#8230;</p>
+<p><strong>GGK:</strong> It has become a tired genre in too many ways. But the truth is, in any kind of fiction, whether its detective fiction, whether its a spy thriller, whether its a mainstream novel of whatever sort, the truth is that most of everything is mediocre at best. Most practitioners of any art form are not pushing the envelope, working for the cutting edge.</p>
+<p>What sometimes distresses me is that the serious practitioners&#8217; fantasy literature, the people trying to work with the wonderful potential of the genre, are judged by standards based on our perceptions created by people who are simply writing in the genre to pay the next month&#8217;s bills; where fantasy novels are associated with war gaming or roll-playing games, and there&#8217;s nothing more to it than a kind of quick escape for two hours from whatever else is going on in your life.</p>
+<p>Nobody judges the Booker Prize nominees by the standards of somebody writing contemporary fiction, a sex and violence novel for example, purely as hack work. Nobody says the Booker Prize people are writing in a debased genre because sex `n&#8217; violence people also write mainstream fiction. But you will see people saying all of fantasy is a debased genre, without recognising that there is a wonderful, sometimes even an exhilarating, potential for pure story telling in the genre.</p>
+<p>I&#8217;ve been enormously fortunate, the critical response to my first trilogy, The Fionavar Tapestry — which was a pure fantasy in a way that <em>Tigana</em> isn&#8217;t, because <em>Tigana</em> is, I think, looking for the borderline between fantasy and mainstream; or the border between historical fiction and fantasy — was very good. The trilogy was pure fantasy, but reviewers were very generous in the attention they gave it, and in the generosity of their notices. So that it is possible, I think, to look for and find quality in any dimension, but it&#8217;s not necessarily easy to find, in any sphere.</p>
+<p><strong>PT:</strong> With crime fiction and SF, and more recently horror, people have taken it seriously, and there is academic writing on the genres, discussing it critically. That doesn&#8217;t seem to have happened with fantasy, except in the case of Tolkien&#8230;</p>
+<p><strong>GGK:</strong> One out of every ten works of fiction in the United States that are sold are fantasies. It is the largest selling single subset of fiction in North America, and it is almost there in the United Kingdom. That means two things really, one is very good and one is very bad. The very bad thing is that whenever a genre becomes commercially viable, whenever you can make a living at it, people will be attracted to it, not out of any particularly passionate desire to say what they have to say in that field, but out of a passionate desire to pay the mortgage or the rent. It will attract hack work. It will attract commercially driven hack work, when the field allows these people to make money. That&#8217;s the bad thing, which means there will be a lot of very mediocre stuff published.</p>
+<p>On the other hand, when the genre becomes commercially viable, the good thing that happens is that people who write seriously and with passion, and with a respect for their reader can in fact sustain themselves by writing those things which ten or twenty years ago they could not have.</p>
+<p>So it&#8217;s a double edged sword. It brings both quality work and the floodgates open and the low quality work will also emerge.</p>
+<div id="atatags-370373-6a9d54443571f">
+		<script type="text/javascript">
+			__ATA = window.__ATA || {};
+			__ATA.cmd = window.__ATA.cmd || [];
+			__ATA.cmd.push(function() {
+				__ATA.initVideoSlot('atatags-370373-6a9d54443571f', {
+					sectionId: '370373',
+					format: 'inread'
+				});
+			});
+		</script>
+	</div><span id="wordads-inline-marker" style="display: none;"></span><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-77"
+				class="share-twitter sd-button share-icon"
+				href="https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-77"
+				>
+				<span id="sharing-twitter-77" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-77"
+				class="share-facebook sd-button share-icon"
+				href="https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-77"
+				>
+				<span id="sharing-facebook-77" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-109117950-77-6a9d544436a60' data-src='//widgets.wp.com/likes/index.html?ver=20260906#blog_id=109117950&amp;post_id=77&amp;origin=paultomlinsonblog.wordpress.com&amp;obj_id=109117950-77-6a9d544436a60&amp;domain=paultomlinson.org' data-name='like-post-frame-109117950-77-6a9d544436a60' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div></div>
+		</div><!-- .entry-content -->
+
+	</div><!-- .post-inner -->
+
+	<div class="section-inner">
+		
+	</div><!-- .section-inner -->
+
+	
+</article><!-- .post -->
+
+</main><!-- #site-content -->
+
+
+	<div class="footer-nav-widgets-wrapper header-footer-group">
+
+		<div class="footer-inner section-inner">
+
+			
+			
+				<aside class="footer-widgets-outer-wrapper">
+
+					<div class="footer-widgets-wrapper">
+
+						
+							<div class="footer-widgets column-one grid-item">
+								<div class="widget widget_search"><div class="widget-content"><form role="search"  method="get" class="search-form" action="https://paultomlinson.org/">
+	<label for="search-form-2">
+		<span class="screen-reader-text">
+			Search for:		</span>
+		<input type="search" id="search-form-2" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<input type="submit" class="search-submit" value="Search" />
+</form>
+</div></div>
+		<div class="widget widget_recent_entries"><div class="widget-content">
+		<h2 class="widget-title subheading heading-size-3">Recent Posts</h2><nav aria-label="Recent Posts">
+		<ul>
+											<li>
+					<a href="https://paultomlinson.org/2026/01/02/happy-new-year-and-freebies/">Happy New Year (and&nbsp;Freebies)</a>
+									</li>
+											<li>
+					<a href="https://paultomlinson.org/2025/08/19/how-do-you-write-vivid-descriptions/">How Do You Write Vivid&nbsp;Descriptions?</a>
+									</li>
+											<li>
+					<a href="https://paultomlinson.org/2025/06/17/new-book-blurbs-book-descriptions/">New Book: Blurbs &amp; Book&nbsp;Descriptions</a>
+									</li>
+											<li>
+					<a href="https://paultomlinson.org/2025/05/17/backlist-makeover-part-2/">Backlist Makeover &#8211; Part&nbsp;2</a>
+									</li>
+											<li>
+					<a href="https://paultomlinson.org/2025/05/14/backlist-makeover-part-1/">Backlist Makeover &#8211; Part&nbsp;1</a>
+									</li>
+					</ul>
+
+		</nav></div></div><div class="widget widget_archive"><div class="widget-content"><h2 class="widget-title subheading heading-size-3">Archives</h2><nav aria-label="Archives">
+			<ul>
+					<li><a href='https://paultomlinson.org/2026/01/'>January 2026</a></li>
+	<li><a href='https://paultomlinson.org/2025/08/'>August 2025</a></li>
+	<li><a href='https://paultomlinson.org/2025/06/'>June 2025</a></li>
+	<li><a href='https://paultomlinson.org/2025/05/'>May 2025</a></li>
+	<li><a href='https://paultomlinson.org/2025/04/'>April 2025</a></li>
+	<li><a href='https://paultomlinson.org/2023/12/'>December 2023</a></li>
+	<li><a href='https://paultomlinson.org/2023/11/'>November 2023</a></li>
+	<li><a href='https://paultomlinson.org/2021/12/'>December 2021</a></li>
+	<li><a href='https://paultomlinson.org/2021/10/'>October 2021</a></li>
+	<li><a href='https://paultomlinson.org/2021/06/'>June 2021</a></li>
+	<li><a href='https://paultomlinson.org/2021/05/'>May 2021</a></li>
+	<li><a href='https://paultomlinson.org/2021/04/'>April 2021</a></li>
+	<li><a href='https://paultomlinson.org/2021/03/'>March 2021</a></li>
+	<li><a href='https://paultomlinson.org/2017/05/'>May 2017</a></li>
+	<li><a href='https://paultomlinson.org/2016/08/'>August 2016</a></li>
+	<li><a href='https://paultomlinson.org/2016/06/'>June 2016</a></li>
+			</ul>
+
+			</nav></div></div><div class="widget widget_categories"><div class="widget-content"><h2 class="widget-title subheading heading-size-3">Categories</h2><nav aria-label="Categories">
+			<ul>
+					<li class="cat-item cat-item-19599"><a href="https://paultomlinson.org/category/artwork/">Artwork</a>
+</li>
+	<li class="cat-item cat-item-164971"><a href="https://paultomlinson.org/category/authorship/">Authorship</a>
+</li>
+	<li class="cat-item cat-item-534763520"><a href="https://paultomlinson.org/category/benjamin-vickery-the-great-vicari/">Benjamin Vickery (The Great Vicari)</a>
+</li>
+	<li class="cat-item cat-item-12381"><a href="https://paultomlinson.org/category/blurbs/">Blurbs</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="https://paultomlinson.org/category/books/">Books</a>
+</li>
+	<li class="cat-item cat-item-386154820"><a href="https://paultomlinson.org/category/description-series/">Description Series</a>
+</li>
+	<li class="cat-item cat-item-767357315"><a href="https://paultomlinson.org/category/frankie-rowan-casebook-series/">Frankie Rowan Casebook series</a>
+</li>
+	<li class="cat-item cat-item-60459716"><a href="https://paultomlinson.org/category/genre-writer/">Genre Writer</a>
+</li>
+	<li class="cat-item cat-item-778679580"><a href="https://paultomlinson.org/category/modern-cozy-mystery/">Modern Cozy Mystery</a>
+</li>
+	<li class="cat-item cat-item-103"><a href="https://paultomlinson.org/category/news/">News</a>
+</li>
+	<li class="cat-item cat-item-1668"><a href="https://paultomlinson.org/category/novels/">Novels</a>
+</li>
+	<li class="cat-item cat-item-717295660"><a href="https://paultomlinson.org/category/outlaws-of-the-galaxy/">Outlaws of the Galaxy</a>
+</li>
+	<li class="cat-item cat-item-534767164"><a href="https://paultomlinson.org/category/robot-wrecker/">Robot Wrecker</a>
+</li>
+	<li class="cat-item cat-item-546"><a href="https://paultomlinson.org/category/short-stories/">Short Stories</a>
+</li>
+	<li class="cat-item cat-item-502222070"><a href="https://paultomlinson.org/category/sword-in-the-stone-dead/">Sword in the Stone-Dead</a>
+</li>
+	<li class="cat-item cat-item-767357316"><a href="https://paultomlinson.org/category/the-vampires-skull/">The Vampire&#039;s Skull</a>
+</li>
+	<li class="cat-item cat-item-781095702"><a href="https://paultomlinson.org/category/thurlambria-series/">Thurlambria Series</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://paultomlinson.org/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-161386"><a href="https://paultomlinson.org/category/urban-fantasy/">Urban Fantasy</a>
+</li>
+	<li class="cat-item cat-item-20982679"><a href="https://paultomlinson.org/category/writing-a-series/">Writing a Series</a>
+</li>
+			</ul>
+
+			</nav></div></div>							</div>
+
+						
+						
+					</div><!-- .footer-widgets-wrapper -->
+
+				</aside><!-- .footer-widgets-outer-wrapper -->
+
+			
+		</div><!-- .footer-inner -->
+
+	</div><!-- .footer-nav-widgets-wrapper -->
+
+	
+			<footer id="site-footer" class="header-footer-group">
+
+				<div class="section-inner">
+
+					<div class="footer-credits">
+
+						<p class="footer-copyright">&copy;
+							2026							<a href="https://paultomlinson.org/">PAUL TOMLINSON</a>
+						</p><!-- .footer-copyright -->
+
+						
+						<p class="powered-by-wordpress">
+							<a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a>
+						</p><!-- .powered-by-wordpress -->
+
+					</div><!-- .footer-credits -->
+
+					<a class="to-the-top" href="#site-header">
+						<span class="to-the-top-long">
+							To the top <span class="arrow" aria-hidden="true">&uarr;</span>						</span><!-- .to-the-top-long -->
+						<span class="to-the-top-short">
+							Up <span class="arrow" aria-hidden="true">&uarr;</span>						</span><!-- .to-the-top-short -->
+					</a><!-- .to-the-top -->
+
+				</div><!-- .section-inner -->
+
+			</footer><!-- #site-footer -->
+
+		<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/twentytwenty/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202636d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	</div>
+		<!-- CCPA [start] -->
+		<script type="text/javascript">
+			( function () {
+
+				var setupPrivacy = function() {
+
+					// Minimal Mozilla Cookie library
+					// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+					var cookieLib = window.cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+					// Implement IAB USP API.
+					window.__uspapi = function( command, version, callback ) {
+
+						// Validate callback.
+						if ( typeof callback !== 'function' ) {
+							return;
+						}
+
+						// Validate the given command.
+						if ( command !== 'getUSPData' || version !== 1 ) {
+							callback( null, false );
+							return;
+						}
+
+						// Check for GPC. If set, override any stored cookie.
+						if ( navigator.globalPrivacyControl ) {
+							callback( { version: 1, uspString: '1YYN' }, true );
+							return;
+						}
+
+						// Check for cookie.
+						var consent = cookieLib.getItem( 'usprivacy' );
+
+						// Invalid cookie.
+						if ( null === consent ) {
+							callback( null, false );
+							return;
+						}
+
+						// Everything checks out. Fire the provided callback with the consent data.
+						callback( { version: 1, uspString: consent }, true );
+					};
+
+					// Initialization.
+					document.addEventListener( 'DOMContentLoaded', function() {
+
+						// Internal functions.
+						var setDefaultOptInCookie = function() {
+							var value = '1YNN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultOptOutCookie = function() {
+							var value = '1YYN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultNotApplicableCookie = function() {
+							var value = '1---';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setCcpaAppliesCookie = function( applies ) {
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'ccpa_applies', applies, 24 * 60 * 60, '/', domain );
+						}
+
+						var maybeCallDoNotSellCallback = function() {
+							if ( 'function' === typeof window.doNotSellCallback ) {
+								return window.doNotSellCallback();
+							}
+
+							return false;
+						}
+
+						// Look for usprivacy cookie first.
+						var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+						// Found a usprivacy cookie.
+						if ( null !== usprivacyCookie ) {
+
+							// If the cookie indicates that CCPA does not apply, then bail.
+							if ( '1---' === usprivacyCookie ) {
+								return;
+							}
+
+							// CCPA applies, so call our callback to add Do Not Sell link to the page.
+							maybeCallDoNotSellCallback();
+
+							// We're all done, no more processing needed.
+							return;
+						}
+
+						// We don't have a usprivacy cookie, so check to see if we have a CCPA applies cookie.
+						var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+						// No CCPA applies cookie found, so we'll need to geolocate if this visitor is from California.
+						// This needs to happen client side because we do not have region geo data in our $SERVER headers,
+						// only country data -- therefore we can't vary cache on the region.
+						if ( null === ccpaCookie ) {
+
+							var request = new XMLHttpRequest();
+							request.open( 'GET', 'https://public-api.wordpress.com/geo/', true );
+
+							request.onreadystatechange = function () {
+								if ( 4 === this.readyState ) {
+									if ( 200 === this.status ) {
+
+										// Got a geo response. Parse out the region data.
+										var data = JSON.parse( this.response );
+										var region      = data.region ? data.region.toLowerCase() : '';
+										var ccpa_applies = ['california', 'colorado', 'connecticut', 'delaware', 'indiana', 'iowa', 'montana', 'new jersey', 'oregon', 'tennessee', 'texas', 'utah', 'virginia'].indexOf( region ) > -1;
+										// Set CCPA applies cookie. This keeps us from having to make a geo request too frequently.
+										setCcpaAppliesCookie( ccpa_applies );
+
+										// Check if CCPA applies to set the proper usprivacy cookie.
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												// Do Not Sell link added, so set default opt-in.
+												setDefaultOptInCookie();
+											} else {
+												// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+												setDefaultOptOutCookie();
+											}
+										} else {
+											// CCPA does not apply.
+											setDefaultNotApplicableCookie();
+										}
+									} else {
+										// Could not geo, so let's assume for now that CCPA applies to be safe.
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											// Do Not Sell link added, so set default opt-in.
+											setDefaultOptInCookie();
+										} else {
+											// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+											setDefaultOptOutCookie();
+										}
+									}
+								}
+							};
+
+							// Send the geo request.
+							request.send();
+						} else {
+							// We found a CCPA applies cookie.
+							if ( ccpaCookie === 'true' ) {
+								if ( maybeCallDoNotSellCallback() ) {
+									// Do Not Sell link added, so set default opt-in.
+									setDefaultOptInCookie();
+								} else {
+									// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+									setDefaultOptOutCookie();
+								}
+							} else {
+								// CCPA does not apply.
+								setDefaultNotApplicableCookie();
+							}
+						}
+					} );
+				};
+
+				// Kickoff initialization.
+				if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+					defQueue.items.push( setupPrivacy );
+				} else {
+					setupPrivacy();
+				}
+
+			} )();
+		</script>
+
+		<!-- CCPA [end] -->
+		<div class="widget widget_eu_cookie_law_widget">
+<div
+	class="hide-on-button ads-active"
+	data-hide-timeout="30"
+	data-consent-expiration="180"
+	id="eu-cookie-law"
+	style="display: none"
+>
+	<form method="post">
+		<input type="submit" value="Close and accept" class="accept" />
+
+		Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. <br />
+To find out more, including how to control cookies, see here:
+				<a href="https://automattic.com/cookies/" rel="nofollow">
+			Cookie Policy		</a>
+ </form>
+</div>
+</div>		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-twentytwenty actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://paultomlinson.org">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				PAUL TOMLINSON			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																				<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="109117950" />
+										<input type="hidden" name="source" value="https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="de7b1abeb5" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fpaultomlinson.org%252Finterviews-articles%252Fguy-gavriel-kay-interview%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://paultomlinson.org">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				PAUL TOMLINSON			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fpaultomlinson.org%252Finterviews-articles%252Fguy-gavriel-kay-interview%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/P7nQyW-1f">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/109117950/posts/77">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+	
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://paultomlinson.org/interviews-articles/guy-gavriel-kay-interview/":77};
+	</script>
+				
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script id="comment-like-js-extra">
+var comment_like_text = {"loading":"Loading...","swipeUrl":"https://s0.wp.com/wp-content/mu-plugins/comment-likes/js/lib/swipe.js?m=1382645497i&amp;ver=20131008"};
+//# sourceURL=comment-like-js-extra
+</script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx9kEsOwjAMBS9EakCiLQvEUVCaWKlT50OTUHF7IkACddGdPX7zFoYlChV8Rp9h4GBE5GLIJ1jCrKVOQrFMCRPYimRm8Tg2Nu3gT3PlJ5E2mBNgqdcwEQqWC2R0kWXGFd/oYZpq+l6w4Ci9Zpw3wio4V5H4SHYFNkSLOUo1fXdwIXi4kVcwFGINaZQz1h/o53skbxpHvvZd3eXQ9d35tO/b1r4AkFN33A=='></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63320"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260906#ver=20260906' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'109117950','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'109117950','v':'wpcom','tz':'0','user_id':'0','post':'77','subd':'paultomlinsonblog'}]);
+		_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3BuVT01Uj14Ti1yYTBnX3xuYUQ3Qz1oblZbVHV3MTZoVXFwTTVDK2wuPT1KWzJNV19iQk9bTmF0PUUlUlYzbW1nYyxHTnlKQiUsT0hKb2tYK09aZkN6LzJmYVtxMGpoLT9rJnJRJXg4S3dLRnBlQUV5UWJWblk4RXRVPXYvWzRDbWR8MktBMVNoQjI1Lm5Yek12ZD1LW3ZRW29JeWwlTVFuXVlxT2MzQ0hIUW5KWVN+Uy51RXwyTGhTfGNoUEtBLFN0K1JhVjBBeSVPaEVdeFIwJTFFYUErLDkmSEtPNl9GWUVtakprWnFnK11baXlTP25+bUNMcENFaVh3dDRbbXRYeWc0QmdkRUwtUXlncjAlaiswQU52ej9KYnNOJThWNkd8UC5VOV8vdFRMPSxt'}]);
+_stq.push([ 'clickTrackerInit', '109117950', '77' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Etc/GMT-0" data-custom-props="{&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/twentytwenty&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202636"></script> 	
+	</body>
+</html>

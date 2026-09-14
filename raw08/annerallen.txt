@@ -1,0 +1,759 @@
+ 
+ Does the Shy Girl Mess Mean We Give Up the Em Dash? 
+ Anne R. Allen's Blog... with Ruth Harris Writing about writing. Mostly. Home 
+ About 
+ About This Blog 
+ Ruth Harris 
+ Anne R. Allen 
+ Shirley S. Allen 
+ Archives 
+ Books 
+ Books by Anne R. Allen 
+ Books by Ruth Harris 
+ Guest Bloggers 
+ Contact 
+ How To Get Your Book Published 
+ Resources For Writers 
+ March 28, 2026 By Anne R. Allen 78 Comments Does the “Shy Girl” AI Accusation Mean Writers Should Stop Using the Em Dash? 
+ Does using the em dash mean you’re a robot? 
+ by Anne R. Allen 
+ Two weeks ago, we ran a guest post here from a South African entrepreneur named Dr. Jeremy Esekow. It was a thoughtful, balanced report on a contest his company had run with human vs. AI stories. 
+ I was not prepared for the wildly negative response. The negativity came mostly from people who saw “AI” in the header and decided they knew what the article said without reading a word. They couldn’t even read past the header to see “Guest Post by Jeremy Esekow.” 
+ Nope. Everybody assumed I wrote it, proving I was obviously pro-AI and want robots to put the human race out of business. 
+ Except for everybody who berated me for being anti-AI and said I refused to give the AI a fair chance. 
+ To be fair—none of the nasty missives came from regular visitors to this blog, and most comments came via social media messages, not comments here. 
+ Death Threats vs. the Elegance of the Em Dash 
+ So, armed with nothing but the letters “AI” in a header, a whole lot of folks decided I deserved poison pen emails and even death. Some commenters were enraged that I had told them to stop using the em dash. Which of course I hadn’t done, because: 
+ 1) I didn’t write the post. 
+ 2) Dr. Esekow only said dropping its use was “sad.” 
+ 3) I love me some em dashes. 
+ In fact, I love them so much, my em dash use even got a shout-out in The New Publishing Standard . Editor in Chief Mark Williams, writing about the whole Shy Girl brouhaha said this: “I hate the em dash with a vengeance, but I know authors like Anne R. Allen who not only deploy them with elegance and charm, but even know the secret of how to make an em dash in MS Word.” (Should I tell him? 😊) 
+ Why AI Uses a Lot of Em Dashes 
+ But it’s true that AI loves em dashes too. So some watchdogs think anything with an em dash must have been written by AI. 
+ But, as bestselling author Chuck Wendig observed in his take on the Shy Girl drama, AI is trained on contemporary writing. And many contemporary writers use the em dash in fiction instead of more formal punctuation like parentheses, colons and semi-colons. Why? Because New York publishing taught us to. 
+ I first heard the term “em dash”—which is a dash the width of a printed “M” like this—at the Santa Barbara Writers Conference in the mid-1990s. I’d scored an in-person critique of my WIP by a real New York editor. 
+ The first thing the editor did was point to a colon and say in an accusatory tone “what’s this?” 
+ Obviously, he knew perfectly well what a colon was, so I asked him what was wrong with it. He said, “are you writing an essay for an academic journal, or a novel?” 
+ Again, I knew he was shaming me, and braced for the criticism. 
+ He then told me that colons, semi-colons and parentheses had no place in contemporary fiction. Instead, I should use—you guessed it—an em dash. 
+ If we follow Wendig’s argument, AI bots trained on older fiction would be full of the quirks of authors of yesteryear. Maybe your AI book would be addressed to “Best Beloved” and characters would say things like “Gadzooks” and women would carry “reticules.” 
+ Whether or not you approve of the fact AI bots are trained on contemporary, copyrighted material (most authors do not) the fact remains that they are. They don’t train AI on public domain works because the results would sound old fashioned and incomprehensible to the contemporary reader. (Thou beslubbering, crook-pated wagtail!) 
+ Enter the Shy Girl Drama 
+ If you have read any news about the publishing industry this week, you’ve already heard about Hachette suddenly pulling Mia Ballard’s horror novel Shy Girl from its scheduled publication. Hachette says they discovered the novel was more than 50% written by AI. 
+ The author denies this and says any AI use was done by her editor. And she’s suing them to prove it. 
+ The book was first self-published a year ago and sold well enough to come to the attention of the Big 5. Which means a whole lot of people loved it. Except a handful of people who didn’t—people who thought it was written by AI. Those people went to the New York Times , and the paper did an exposé about what they believed to be the “tells” that showed the book had AI origins. 
+ Did Mia Ballard Use the Dreaded Em Dash? 
+ I haven’t been able to find out about the author’s em dash use, but I suppose that might have been one of the “tells” that “proved” her work was written by Artificial Intelligence robots. 
+ So what are the other tells that label your work as AI generated? 
+ According to the podcast by one of the readers who reported Shy Girl as AI, the narrative voice was all over the place, there was no emotional engagement with the characters, and she used improbable similes and superfluous verbiage. 
+ I have to admit I didn’t sit through his whole critique, because I find podcasts annoying. Life is too damned short. Unless I’m on a long drive or stuck in traffic, I don’t need somebody to hem and haw their ideas out loud to fill the time. Write that stuff down, people! Writing makes a person focus and remove, um, superfluous verbiage. 
+ Okay, I know I’m in the minority on that. Reading is on the way out. Everybody wants their “content” spoon fed to them. Sigh. 
+ Maybe it’s not AI that’s going to destroy the writing profession. Maybe it’s lazy readers? 🙂 
+ The Coming Witch Hunt 
+ But back to Shy Girl . Many of the “tells” that label the book as AI generated, can—as Mark Williams pointed out at TNPS —also be attributed to amateurish or unedited writing. 
+ What if Mia Ballard had a compelling, original story but didn’t have the chops to tell it well enough to pass muster with the anti-AI crowd? I’m not saying that’s the situation here, but Mr. Williams makes a good case. He says, “stylistic ‘tells’ attributed to AI are in many cases simply the markers of inexperienced or unpolished human writing.” 
+ Or, as others have pointed out, these are also the “tells” of an autistic or ESL writer. 
+ So has the Hachette decision unleashed an army of vigilantes and self-appointed watchdogs to attack successful, but less than polished books? Can any book be “cancelled” with accusations of AI use? 
+ A lot of people fear that, so fasten your seatbelts. Here’s former agent Nathan Bransford on the subject. 
+ Protect Yourself With Info From Dr. Esekow’s Human vs. AI Contest 
+ So how do authors protect themselves from accusations of using AI to write their books? (We’re not talking about using grammar or editing software, but publishing books mostly created by a robot who is not you.) I’m assuming most people reading this are not robots. 😊 
+ We can go back to last month’s guest blogpost . Almost all the “tells” the vigilantes found in Shy Girl are points Dr. Esekow made in his article. He discovered that if writers work on the following, they’re less likely to be accused of subcontracting their writing to a handy robot. 
+ Dialogue . Work on writing authentic dialogue that’s personal to each character. In AI, the characters tend to sound the same. How do we learn to write authentic dialogue? Listen to people! 
+ Pacing . Work on getting your pacing just right. This was one of the toughest things for me to learn when I was starting out. There are “beat sheets” and workbooks (try K.M. Weiland’s ) that can help you learn good techniques for pacing a novel. 
+ Voice . Developing your own voice takes time. That’s one of the reasons it’s not a good idea to self-publish a first novel. Develop that unique voice in shorter works first. 
+ Remember Chekhov’s Gun . Don’t describe anything in detail if it isn’t relevant to the plot. 
+ And I’d add to those: 
+ Block that metaphor! Use metaphors sparingly and wisely. And don’t get too weird. 
+ Eliminate “crutch words.” We all have them. Mine are “just” and “really.” Make sure you weed them out before you publish. 
+ Get to know your characters! Do envision a backstory for all your main characters. Make sure you know their fears and wants so they’ll act authentically. 
+ Is There a Guaranteed Way to Protect Yourself? 
+ Nope. Some of the anti-AI people are so rabid they send people like me death threats for simply mentioning AI in a blogpost. But you might try running a sample of your writing through an AI detector. 
+ There’s one out of the Netherlands called Triall that offers a free trial. 
+ If some of your phrasing or word choices get flagged as AI by one of these detectors, you might consider a change. 
+ Or you might not. Like, if it flags you as a robot for using the em dash, call your lawyer. If you’re like me, they’ll have to pry your em dash from your cold, dead hands. 
+ For a great overview of AI and Publishing, check out Jane Friedman’s blog. 
+ And no, none of this was written by AI. Probably because I’m a Boomer and I wouldn’t have a clue how to do it. 🙂 
+ *** 
+ What about you, scriveners? Has anybody accused you of using AI to write your books? Do you fear AI will put you out of business? How do you feel about the em dash? 
+ by by Anne R. Allen ( @annerallen and annerallen.bsky.social ) March 28, 2026 
+ *** 
+ BOOK OF THE WEEK 
+ An author breaks a major publishing rule, and murder and mayhem ensue. 
+ SO MUCH FOR BUCKINGHAM: Camilla mystery #5 
+ This comic novel — which takes its title from the most famous Shakespearean quote that Shakespeare never wrote — explores how easy it is to perpetrate a character assassination whether by a great playwright or a gang of online trolls. 
+ Camilla makes the mistake of responding to an online review of one of her etiquette guides and sets off a chain of events that leads to arson, attempted rape and murder. 
+ And there’s a cat. 
+ “Laughs and social commentary abound in this global adventure. Camilla Randall, a down-on-her luck-socialite-turned-etiquette-expert, takes on review cyberbullies while her friend Plantagenet hunts down the ghost of Richard III. Anne R. Allen has given us a hilarious satire that pokes fun at some dark topics. And we get a mini refresher course in English history to boot.”–Maggie King 
+ Available in ebook from: 
+ All Amazons Kobo Nook Smashwords Googleplay Scribd 
+ Available in paper from: 
+ AmazonUS AmazonUK Barnes & Noble 
+ Audiobook from Audible and iTunes 
+ Featured image by Jason Leung for Unplash 
+ Share this: 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Share on X (Opens in new window) 
+ X 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Pinterest (Opens in new window) 
+ Pinterest 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on X (Opens in new window) 
+ X 
+ More 
+ Print (Opens in new window) 
+ Print 
+ Share on Tumblr (Opens in new window) 
+ Tumblr 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Share on Telegram (Opens in new window) 
+ Telegram 
+ Like this: Like Loading… Filed Under: E-Books and Technology for Writers , The Publishing Business Tagged With: AI and Publishing , Chuck Wendig , Jane Friedman , Shy Girl , So Much for Buckingham , The New Publishing Standard Blog Archives 
+ Blog Archives 
+ Select Month 
+ August 2026 (2) 
+ July 2026 (2) 
+ June 2026 (2) 
+ May 2026 (3) 
+ April 2026 (1) 
+ March 2026 (2) 
+ February 2026 (2) 
+ January 2026 (3) 
+ December 2025 (2) 
+ November 2025 (2) 
+ October 2025 (1) 
+ September 2025 (2) 
+ August 2025 (2) 
+ July 2025 (3) 
+ June 2025 (3) 
+ May 2025 (4) 
+ April 2025 (3) 
+ March 2025 (1) 
+ February 2025 (2) 
+ January 2025 (1) 
+ December 2024 (1) 
+ October 2024 (1) 
+ July 2024 (2) 
+ June 2024 (5) 
+ May 2024 (4) 
+ April 2024 (4) 
+ March 2024 (5) 
+ February 2024 (4) 
+ January 2024 (4) 
+ December 2023 (5) 
+ November 2023 (4) 
+ October 2023 (5) 
+ September 2023 (4) 
+ August 2023 (4) 
+ July 2023 (5) 
+ June 2023 (4) 
+ May 2023 (4) 
+ April 2023 (5) 
+ March 2023 (4) 
+ February 2023 (4) 
+ January 2023 (5) 
+ December 2022 (4) 
+ November 2022 (4) 
+ October 2022 (5) 
+ September 2022 (4) 
+ August 2022 (4) 
+ July 2022 (5) 
+ June 2022 (4) 
+ May 2022 (5) 
+ April 2022 (4) 
+ March 2022 (4) 
+ February 2022 (4) 
+ January 2022 (5) 
+ December 2021 (4) 
+ November 2021 (4) 
+ October 2021 (5) 
+ September 2021 (4) 
+ August 2021 (5) 
+ July 2021 (4) 
+ June 2021 (4) 
+ May 2021 (5) 
+ April 2021 (4) 
+ March 2021 (4) 
+ February 2021 (4) 
+ January 2021 (5) 
+ December 2020 (4) 
+ November 2020 (5) 
+ October 2020 (4) 
+ September 2020 (4) 
+ August 2020 (5) 
+ July 2020 (4) 
+ June 2020 (4) 
+ May 2020 (5) 
+ April 2020 (4) 
+ March 2020 (4) 
+ February 2020 (4) 
+ January 2020 (4) 
+ December 2019 (5) 
+ November 2019 (4) 
+ October 2019 (4) 
+ September 2019 (5) 
+ August 2019 (4) 
+ July 2019 (4) 
+ June 2019 (5) 
+ May 2019 (4) 
+ April 2019 (4) 
+ March 2019 (5) 
+ February 2019 (4) 
+ January 2019 (4) 
+ December 2018 (5) 
+ November 2018 (4) 
+ October 2018 (4) 
+ September 2018 (5) 
+ August 2018 (4) 
+ July 2018 (5) 
+ June 2018 (4) 
+ May 2018 (4) 
+ April 2018 (5) 
+ March 2018 (4) 
+ February 2018 (4) 
+ January 2018 (4) 
+ December 2017 (5) 
+ November 2017 (4) 
+ October 2017 (5) 
+ September 2017 (4) 
+ August 2017 (4) 
+ July 2017 (5) 
+ June 2017 (4) 
+ May 2017 (4) 
+ April 2017 (5) 
+ March 2017 (4) 
+ February 2017 (4) 
+ January 2017 (5) 
+ December 2016 (4) 
+ November 2016 (3) 
+ October 2016 (5) 
+ September 2016 (4) 
+ August 2016 (4) 
+ July 2016 (5) 
+ June 2016 (4) 
+ May 2016 (5) 
+ April 2016 (4) 
+ March 2016 (4) 
+ February 2016 (3) 
+ January 2016 (4) 
+ December 2015 (4) 
+ November 2015 (5) 
+ October 2015 (4) 
+ September 2015 (4) 
+ August 2015 (5) 
+ July 2015 (4) 
+ June 2015 (4) 
+ May 2015 (5) 
+ April 2015 (4) 
+ March 2015 (5) 
+ February 2015 (4) 
+ January 2015 (4) 
+ December 2014 (4) 
+ November 2014 (5) 
+ October 2014 (4) 
+ September 2014 (4) 
+ August 2014 (5) 
+ July 2014 (4) 
+ June 2014 (5) 
+ May 2014 (4) 
+ April 2014 (4) 
+ March 2014 (5) 
+ February 2014 (4) 
+ January 2014 (4) 
+ December 2013 (5) 
+ November 2013 (4) 
+ October 2013 (3) 
+ September 2013 (5) 
+ August 2013 (4) 
+ July 2013 (3) 
+ June 2013 (5) 
+ May 2013 (4) 
+ April 2013 (4) 
+ March 2013 (5) 
+ February 2013 (4) 
+ January 2013 (4) 
+ December 2012 (5) 
+ November 2012 (4) 
+ October 2012 (4) 
+ September 2012 (4) 
+ August 2012 (4) 
+ July 2012 (5) 
+ June 2012 (3) 
+ May 2012 (3) 
+ April 2012 (5) 
+ March 2012 (4) 
+ February 2012 (4) 
+ January 2012 (5) 
+ December 2011 (5) 
+ November 2011 (4) 
+ October 2011 (6) 
+ September 2011 (4) 
+ August 2011 (4) 
+ July 2011 (6) 
+ June 2011 (4) 
+ May 2011 (5) 
+ April 2011 (4) 
+ March 2011 (4) 
+ February 2011 (1) 
+ January 2011 (4) 
+ December 2010 (3) 
+ November 2010 (1) 
+ October 2010 (4) 
+ September 2010 (3) 
+ August 2010 (3) 
+ July 2010 (2) 
+ June 2010 (1) 
+ May 2010 (3) 
+ April 2010 (2) 
+ March 2010 (3) 
+ January 2010 (5) 
+ December 2009 (2) 
+ November 2009 (3) 
+ October 2009 (1) 
+ August 2009 (1) 
+ July 2009 (3) 
+ June 2009 (2) 
+ March 2009 (1) 
+ Search Anne & Ruth’s Blog 
+ About Anne R. Allen Anne writes funny mysteries and how-to-books for writers. She also writes poetry and short stories on occasion. Oh, yes, and she blogs. She's a contributor to Writer's Digest and the Novel and Short Story Writer's Market. 
+ Her bestselling Camilla Randall Mystery RomCom Series features perennially down-on-her-luck former socialite Camilla Randall—who is a magnet for murder, mayhem and Mr. Wrong, but always solves the mystery in her quirky, but oh-so-polite way. 
+ Anne lives on the Central Coast of California, near San Luis Obispo, the town Oprah called "The Happiest City in America." 
+ Comments 
+ Harald Johnson says 
+ March 28, 2026 at 8:32 pm 
+ Like you, Anne, I love me my EM dashes (also EN dashes). Always have, always will. 
+ Reply 
+ Ernie Zelinski says 
+ March 28, 2026 at 9:05 pm 
+ Yeah, me too. 
+Em dashes have Swagger! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:37 am 
+ Ernie–“Swagger”–I love that! 
+ Anne R. Allen says 
+ March 29, 2026 at 11:35 am 
+ Harald–I’m glad to hear you belong to the em dash club! 
+ Reply 
+ Ernie Zelinski says 
+ March 28, 2026 at 9:01 pm 
+ I have used em dashes in my books since 1989 when I self-published my first book called “The Art of Seeing Double or Better in Business.” 
+ I would like to claim that I invented the em dash — but you would never believe me! 
+I even used an em dash in the subtitle of my most recent book “GREAT FRIENDS ROCK (How to Find Them — And Keep Them!)” 
+ For the record, I have written 20 books that have sold over 1,125,000 copies. I have 3 books that are true international bestsellers — ones that have each sold at least 100,000 copies in print. I have used the em dash vigorously in all these books. 
+ I am presently revising my flagship book (over 475,000 copies sold) — no, I won’t tell you the title — and will be issuing it as the 25th Anniversary Updated Edition in September of this year. 
+In the original edition I used the em dash prominently. 
+Now I am using it even more agressively and prominently — trying to double its use! 
+ Long live the em dash — with spaces! 
+ One more note regarding AI. 
+On LinkedIn, I keep making this comment: 
+AI will never create a book that has Soul, Swagger, and Stands out in any category. Mine do. That’s why they have sold over 1,125,000 copies. 
+I was just asked by US major publisher Andrews McMeel Publishing to write another retirement book. 
+Even more, I am Canadian and just got Simon & Schuster to be the US distributor for my self-published books. I challenge any self-published author using AI to pull this off. 
+ After many months of making this comment, not one author has responded to this challenge. Go figure! LinkedIn is where the experts are supposed to hang out! 
+ Again, I have my own way to Rock — That’s the way I Roll. 
+ Reply 
+ Harald Johnson says 
+ March 29, 2026 at 6:00 am 
+ I’m with you, Ernie, but spaces around EM dashes? No way, Jose. At least for me and my published work. Chicago Manual of Style agrees with me, but AP does not. But you’re right about the swagger! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 12:00 pm 
+ Harald–My current editor and I have had something of a battle about those spaces. My previous editor (and Ruth Harris) prefer the AP rule putting spaces around the dash because it reads better in electronic form. But CMOS is still in the pre-e-book age with their old fashioned rule of no spaces. 
+ Anne R. Allen says 
+ March 29, 2026 at 11:36 am 
+ Ernie–I’m sure your unique voice stands out and proves you aren’t a robot. 
+ Reply 
+ J R Tomlin says 
+ March 28, 2026 at 10:34 pm 
+ I am so sorry to hear about the abuse, Anne! That is terrible. Like you, I also love me some em dashes. No way will I totally eschew them. However, the kerfuffle over them has made me double-check to be sure I don’t overuse them. Have I ever done that? Maaaybe. (No AI required) 😉 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:39 am 
+ JR–I think maybe a final overview of a ms. aimed at weeding out AI triggers might be a good idea for us all, in view of Shy Girl ‘s fate. 
+ Reply 
+ Rosemary RRosemary Johnson says 
+ March 28, 2026 at 11:34 pm 
+ Thank you, Anne, for this balanced blog post – and the useful links. 
+So sorry to read about the abuse you received. 
+I prefer reading to listening every time. People are more able to retain what they read, and can look back and check, than what they hear. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:41 am 
+ Rosemary–I’m glad to hear from another reading fan. I just don’t have time for podcasts. And you’re right–with the written word, we can go back and check. 
+ Reply 
+ V.M.Sang says 
+ March 29, 2026 at 3:30 am 
+ The abuse you received is appalling. I’m so sorry about that. 
+Em-dashes Rule. Long live the em-dash. I use them. Sometimes other punctuation just doesn’t do it. 
+I, too, don’t listen to podcasts. There’s a saying, ‘In one ear and out the other.’ That’s me. 
+The same goes for video instructions. I always search for written ones. With a script, you can go back more easily if you don’t understand something. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:43 am 
+ Vivienne–Oh, I’m so much with you with video instructions! I often have to write down the directions as I listen, so I’ll remember each step and do it right the first time. 
+ Reply 
+ M. L. Kappa says 
+ March 31, 2026 at 11:39 pm 
+ So agree with you guys about podcasts and YouTube instructions. I grew up reading the back of cereal boxes! Is writing going out of fashion? Happily, my grandchildren are all bookworms, so that gives me hope. Also, I’m not stopping my em dashes! 
+ Anne R. Allen says 
+ April 1, 2026 at 11:48 am 
+ ML–Some of the first reading we did was on the back of cereal boxes, wasn’t it? Now kids look at videos on phones, but we were busy getting wisdom from Sugar Pops. I guess it started us reading at an early age. We needed to know if there was a secret decoder ring in the bottom of the box! 
+ Julia says 
+ March 29, 2026 at 4:12 am 
+ I agree with those above who have commiserated with you on the appalling messages you received. For stuff you didn’t write! Gadzooks! What is the world coming to? 
+ I think one way we can prove that our work was not generated by AI is to keep our drafts, our outlines, our character notes, or whatever else shows our process. This is old advice that was sometimes handy to prove we had not plagiarized another writer’s ideas. But that was a rare accusation, and this is going to be increasingly common. We need to keep all the stuff that shows we wrote this work. 
+ I am not a robot. I can tick all the squares that contain a motorbike. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:46 am 
+ Julia–That is such good advice!! I should have included it here. I’m careful to save drafts along the way as I write a book. I do it in case of copyright issues, but of course it’s also going to be super-important in proving we’ve made all our own mistakes without the aid of a robot. 
+ Reply 
+ James Scott Bell says 
+ March 29, 2026 at 4:42 am 
+ “I have to admit I didn’t sit through his whole critique, because I find podcasts annoying. Life is too damned short. Unless I’m on a long drive or stuck in traffic, I don’t need somebody to hem and haw their ideas out loud to fill the time. Write that stuff down, people! Writing makes a person focus and remove, um, superfluous verbiage.” 
+ Thank you, Anne! Amen! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:47 am 
+ James–Oh, I’m so glad you agree with me! I’m a major fan of yours, so that means a lot to me. 
+ Reply 
+ Debbie Burke says 
+ March 29, 2026 at 4:44 am 
+ Death to those beslubbering, crook-pated wagtails who attacked you, Anne!!! 
+ I choose not to use AI b/c I want to keep my brain exercised and working. Using AI is like wanting to get in shape but hiring someone to do pushups for you. I don’t even use Spell Czech and Auto-Corrupt. Yeah, I’m also a Boomer who wouldn’t have a clue how to do it. So that’s our best defense against spurious accusations. 
+ My biggest worry is young brains that may never develop the creativity, reasoning, and problem-solving skills b/c all they know how to do is enter prompts to write their assignments. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:51 am 
+ Debbie–The idea of hiring somebody to do push-ups for you is hilarious. At my age, my brain needs all the exercise it can get. 🙂 “Spell Czech and Auto-Corrupt”–Haha! Love it. 
+ Reply 
+ Jeremy Esekow says 
+ March 29, 2026 at 4:55 am 
+ Lovely post Anne! And thank you for the mentions. 
+ What does Hachette mean when they say that more than 50% of the book was written by AI? 5 of every 10 words? I doubt it. 
+I watched some youtuber’s two hour takedown (I made a summary of it – waaaay too long) of the book and it seems to me that Mia used AI to flesh out come scenes, to line edit and for research. More than anything, the youtuber just hated the book. It sounded like it was mostly sloppily written with lazy AI-editing just sealing the deal. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 11:57 am 
+ Jeremy–Thanks for stopping by! Your post was so enlightening. It told us exactly what to polish in our own work to show our work is 100% human generated. 
+ I watched that youtuber too. For about 20 minutes. But he went on and on and on. And you’re right. He just didn’t like the book. It reminded me of a jealous member of a critique group: “This book isn’t as good as the one I’d write if I just had the time.” He had nothing positive to say. So why did he read it? 
+ Reply 
+ Linda Browne says 
+ March 29, 2026 at 7:57 am 
+ Whatever you think about AI—or Mia Ballard’s alleged use of it—the fact remains that her book sold enough copies to bring it to the attention of Hachette. There was an audience of readers that loved her work enough to shell out money for it and spend their precious free time reading—and reviewing—it. 
+ Then there is the matter of Hachette, a Big Five publisher whose own editors did not catch any of the problems pointed out by a highly vocal contingent of reviewers, who mounted a de facto witch hunt against Ballard for using AI ‘tells’ in her work. (As Chuck Wendig points out, such ‘tells’ are just hallmarks of the contemporary writing that AI illegally trained on, and now claims as its own.) 
+ Was the writing deemed good enough to pass muster on the first pass? Or did Hachette simply not use editors to vet the work—one of its main value propositions to authors? How many editors even remain on staff at Hachette or any of the Big Five publishing houses? 
+ I have a big problem with the way Mia Ballard was witch-hunted. Having critical discussions and difficult conversations, yes. Making unfounded accusations and canceling people, no. 
+ Traditional publishers seriously erode their credibility when they jump on a bandwagon to discredit an author. Writers no longer need a traditional publisher to reach an audience. We can do that ourselves, apparently well enough that trad publishers are now seeking authors out instead of the other way around. When publishers fail to offer quality editing and don’t follow through on their contractural obligations to authors (like registering books for copyright), they damage their central value proposition. 
+ AI-assisted writing is a thing, and it will continue to develop and grow, whether we like it or not. I don’t choose to use it in my own writing or blog posts, but neither will I diss other writers for choosing to use it. (Full disclosure: I have used AI to assist me in my marketing materials and research. I’ve found that you already have to be a skilled writer to use it well.) 
+ I will also use em dashes until hell freezes over. 
+ As writers, we can do better. We can choose to act as good literary citizens, curators and collaborators with other artists, build relationships and audience through our mailing lists, insist on nuance, engage in constructive dialogue rather than gossip or cancellation. That’s also how we’ll find our readers. Our future is linked with theirs. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 12:02 pm 
+ Linda–Exactly! How was that book so popular if it was such a mess? And if it was a mess, why didn’t Hachette do something about it before the NYT came out with their scathing article? Cancel culture can be so dangerous. 
+ Reply 
+ CS Oerryess says 
+ March 29, 2026 at 9:24 am 
+ Wahoo! Human writers unite! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 12:06 pm 
+ CS–We do need to stand together. But vigilantes and cancel culture are not helping. 
+ Reply 
+ Maria D'Marco says 
+ March 29, 2026 at 10:48 am 
+ Julia, 
+I am so glad to see your comment about keeping notes, etc. that ‘prove’ your work is original. As a developmental editor, I have been encouraging my author clients to do just that, as well as offering the idea that engaging an editor can be another step of ‘proof’ of originality, which could be extended to beta readers and such. 
+ I do wish all those so ready to be up in arms about things would leave off their tirades about writing and AI, and concentrate on the enormous opportunities to right actual wrongs occurring in the world today. 
+ Viva l’EM! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 12:07 pm 
+ Maria–Keeping old drafts is so important! I’m grateful to Julia for bringing it up. 
+ Reply 
+ Elizabeth Byler Younts says 
+ March 29, 2026 at 11:12 am 
+ Very good post and the comments are also interesting to read through. 
+ I’m only 15ish years into my career and have used the em-dash with flourish and confidence. I don’t want to lose that! But I also don’t want to get accused of using AI for any part of my writing…since I don’t use it for any part! All my mistakes are human. Lol 
+ Thanks again for the post! 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 12:13 pm 
+ Elizabeth–I love the information our commenters bring! Yes, none of us wants to be accused of something we didn’t do. I sincerely hope this Shy Girl incident is a one-off and not the beginning of a witch hunt. 
+ Reply 
+ alexjcavanaugh says 
+ March 29, 2026 at 12:44 pm 
+ Terrible you were attacked! 
+Fortunately my terrible writing comes in a way AI wouldn’t. 
+And watched a video regarding a popular band on YouTube who isn’t real but AI and the guy showed how all the instruments can be broken into separate but distinct tracks unless they are AI generated which blurs them together. And the songs by this band blurred them! (Unrelated but shows how AI is into everything but there are ways to prove it.) 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 3:18 pm 
+ Alex–AI in music is a whole other can of worms! I didn’t know there were AI detectors that can tell definitively that music is AI. I wish the verbal detectors were as reliable! 
+ Reply 
+ Fred Waiss says 
+ March 29, 2026 at 1:50 pm 
+ Anne, first, I, too, have zero patience with podcasts. For that matter, I don’t listen to news broadcasts either. If I listen and I miss something, I’m SOL. I read anything I want to know. I’ve been reading avidly since 1957 and I have no interest in breaking the habit. 
+Second, I’ve used the em-dash as long as I’ve been writing seriously–since 1969 or before. I suspect I used them because the authors I read used them: Heinlein, Asimov, Clarke, and Bradbury. (BTW, “seriously” does not mean “successfully.”) I wrote a story a couple of years ago of about 350 words that was presented as having been written by AI. I had to expand it to 500 words for the submission. In the addition I tried to use two or three sentences that might read like AI. But I don’t really know the tells, if there are any, for AI work, so I don’t know if I was successful. 
+Third, I’m kind of angry that you were harassed and worse for that blog by morons who didn’t even read any of it. The sad thing is that even if they could be punished somehow, they wouldn’t understand or acknowledge that they’d something inappropriate. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 3:25 pm 
+ Fred–I don’t mind news broadcasts if they’re scripted. It’s the hemming and hawing and repetitive throat-clearing that really gets to me with podcasts. Just a lot of time wasted. They say I taught myself to read when I was in kindergarten, and I got in big trouble when I got to first grade and the teacher made me sit in the corner while they had reading lessons, because I’d already read every story about Dick, Jane, and Sally (and their pets Spot and Puff.) 🙂 
+ Yeah, being harassed is no fun. Especially by morons. They seem to lose their ability to think when they join an extremist group. 
+ Reply 
+ Mark Williams says 
+ March 29, 2026 at 3:10 pm 
+ I love AI, as TNPS readers will know, but I loathe AI-detectors. 
+ This past week or so, an AI detector flagged with 96.2% certainty that Lincoln’s Gettysburg Address was written by AI. 
+ https://www.linkedin.com/posts/frankkalman_a-website-said-abraham-lincolns-gettysburg-activity-7442140429141209088-eedVS7Bz8I 
+ Across the globe students are being left traumatised because they have been accused of cheating and using AI to write works they say are original. 
+ If we need proof that AI-detectors are utterly worthless, just ask Abe Lincoln. 
+ Reply 
+ Anne R. Allen says 
+ March 29, 2026 at 3:29 pm 
+ Mark–Thanks for stopping by! And thanks for the update. That is truly hilarious. Honest Abe? Used AI to write his most famous speech? We should have known, right? But you’re right that it’s tragic when honest, probably talented young people are being accused of cheating based on what a flawed computer program says about their work. 
+ Reply 
+ Fred Waiss says 
+ March 31, 2026 at 1:45 pm 
+ I’m not sure why, but this reminded me of the professional baseball player a few years ago who, in a half-assed attempt to justify his use of steroids, declared that Babe Ruth probably used them. A contemporary had to explain to him that steroids didn’t exist back then. 
+ Reply 
+ judysalamachafeb29 says 
+ March 30, 2026 at 9:43 am 
+ Anne, I so love the way you humorously turn around the negative to educate those who need spanking and recommend clues and definitions and insights to all of us that always need to learn more. You’re still the best!! Thank you. J 
+ Reply 
+ Anne R. Allen says 
+ March 30, 2026 at 10:54 am 
+ Judy–Thanks for the kind words! 🙂 
+ Reply 
+ Barbara Mealer/B. A. Mealer says 
+ March 30, 2026 at 12:52 pm 
+ I’m not a huge fan of the em-dash, but I do use it–sparingly. And I agree how those of us who are still learning how to write well might be accused of being AI if we aren’t careful. I still have issues with getting my characters to have a distinct voice, and will admit that I am not the greatest writer but have fun with what I do. My only interface with AI is in using Pro Writing Aid and Autocrit for grammar and word usage. And those annoying pop-ups that say my phrasing needs to change are ignored. 
+ So would someone say I put out AI written books? Maybe, but they aren’t. I have proof of that since the few I do have out were written before AI was on computers. 
+ And like you, I have better things to do with my time than to listen to a podcast. Write it down and I will read it if it interests me. And I thought Mr. Esekow’s post was wonderfully written and thoughtful and gave good insight to the issues of AI generated stories. 
+ AI is here to stay, but we, as writers, will still be better at our worst than most AI drivel. Don’t believe me–download a free app where you watch ads to read novels and try to get through one whole novel. I deleted the apps I tried just to see what they had within hours, unable to get past the first 3 chapters in the apps-not because of the ads, but the writing was definitely AI and boring, repetitive, and recognizable by word choice, descriptions, dialogue and formulaic writing with a lot of repetition. (And I thought I was bad at that..lol) 
+ Keep up the great work. I enjoy your posts. And I like your usage of the em-dash–makes it less academic as the one agent pointed outl 
+ Reply 
+ Anne R. Allen says 
+ March 30, 2026 at 4:58 pm 
+ Barbara–Many thanks! I’m glad to hear you enjoyed Mr. Esekow’s post. I like that you mention that when you write, you “have fun with what I do.” I think that’s the biggest argument against using AI to write your books. Where’s the fun in that? It’s like getting a robot to eat your ice cream sundae. Creative writers find creative writing fun . We don’t want to give it up! 
+ Reply 
+ STEVE FIGLER says 
+ March 30, 2026 at 7:16 pm 
+ I’m pro em-dash, no extra spacing, and sad that AI even exists, which certainly dates me. I’m at work on a novel that uses them—-probably—-or at least possibly—-too much. Why? Because my teenage protagonist is full of interior stuff. Plus, I’m having a lot of fun. 
+As usual, I love your work. 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 11:05 am 
+ Steve–Hi there! Thanks a bunch. I’m with you on AI. Even its inventors are terrified of it. Long live the em-dash! 
+ Reply 
+ Sally M. Chetwynd says 
+ March 31, 2026 at 7:44 am 
+ Isn’t using AI to review and assess for AI content like setting the fox to mind the chicken coop? 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 11:31 am 
+ Sally–It does seem that way, doesn’t it? 
+ Reply 
+ Sally Chetwynd says 
+ March 31, 2026 at 2:04 pm 
+ This is what happens when we give ourselves over entirely to machinery, and take its word as gospel. 
+ Anne R. Allen says 
+ March 31, 2026 at 3:01 pm 
+ Sally–Tell it sister! I second your A-men. 
+ elizabethhavey says 
+ March 31, 2026 at 12:03 pm 
+ Love this and this Boomer will 
+Write as she damn pleases. 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 12:42 pm 
+ Beth–As long as you’re not trad published, I think you’re safe. But if Hachette can do this, so can the other big publishers. 
+ Reply 
+ Sally M. Chetwynd says 
+ March 31, 2026 at 2:06 pm 
+ A-MEN! 
+ Reply 
+ Anita Rodgers says 
+ March 31, 2026 at 12:32 pm 
+ LOL. Apparently, there is a Karen for everything under the sun. Now we have the AI Karens. Yes, I love the emdash and sometimes even endash, and I will never stop using them. No one has accused me of AI usage but if they did, I would just laugh at them. 
+ IMHO AI is not going to take over the fiction world, but perhaps the fear of it will. I admit, I do not like AI but not because it threatens me in that way. But because it is just one more thing that allows people to go along in life and not think, use discernment, or consider things deeply. We are already deep in high tech crap for everything from companionship to leading us to locations. I would like to get rid of half of that stuff as it doesn’t really enhance one’s life, it just enables one to become lazy and ineffectual. But that’s me. 
+ LOL, Anne, I suspect at least half the people who flamed you were actual ai robots. Ironic, yes? 
+ Annie 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 12:46 pm 
+ Anita–AI Karens! Yup. That’s the crowd that attacked me. They wanted to talk to the manager, who unfortunately is me. 🙂 I don’t know if they are AI generated, but they are so triggered by the mention, they go into autopilot mode and start trying to cancel you. I agree that one of the problems with AI is its use by young people whose brains aren’t completely formed. This means parts of their brains will never develop. Sometimes I wonder if we took a bunch of contemporary humans back to Neanderthal times if the contemporaries would be too stupid to survive. 
+ Reply 
+ Kay DiBianca says 
+ March 31, 2026 at 1:07 pm 
+ It’s one thing to use AI in your writing. It’s another to be accused of using it because a software developer wrote a program to detect AI using criteria that may or may not be valid. Grrr. I’m saving all my old notes and versions just in case. 📒 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 1:17 pm 
+ Kay–Saving earlier drafts is very wise. I send a copy of my WIP to myself at the end of every week. It helps in a lot of ways to have those drafts. But now we have “AI Karens” as Anita Rogers calls them, we need them even more. 
+ Reply 
+ Judy L Mohr says 
+ March 31, 2026 at 3:10 pm 
+ I think moving forward, writers (and other industry professionals) will benefit from having an AI policy on their website, spelling it out clearly what they use AI for (if at all) and what they won’t. I know in my AI policy, I highlight that ALL of my writing is human generated. (Writing (and rewriting) is the part of the process I enjoy the most. Why would I let a computer take that away from me?) 
+ And I’m saddened that the anti-AI movement has turned into death threats. Like we writers don’t have enough to worry about. (This world has definitely gone insane.) 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 4:23 pm 
+ Judy–I don’t know if a website disclaimer would stop these self-appointed vigilantes. But I suppose every little bit helps. Yes, the world has gone insane. People do and say things online they’d never do in real life. But the repercussions actually happen in real life. 
+ Reply 
+ Melodie Campbell says 
+ March 31, 2026 at 7:53 pm 
+ Wonderful post, Anne! (I’m a day late on here) Yes, it’s in my publishing contracts that I can’t use AI for any purpose. Not that I would try. My attitude is more like, “Please please don’t make me learn any more technology, I beg you! I’ve learned Basic, Dos, Fortran, Cobol, and a thousand things in the 50 years since, and brain will explode if I make it learn more tech crap.” Great post, Anne. 
+ Reply 
+ Anne R. Allen says 
+ March 31, 2026 at 8:08 pm 
+ Melodie–My thoughts exactly! I can change the correction ribbon on an IBM Selectric and program a VCR. There’s so much tech a brain can take and mine’s full. I have no desire to learn how to use AI. Why would I rob myself of my own creativity? (The MailChimp notices went out two days late. Not your fault. I think the Chimps must have been on a bender.) 
+ Reply 
+ Audrey Driscoll says 
+ March 31, 2026 at 9:24 pm 
+ Ha! I will never use AI for writing. And all my first drafts are written with a pen on paper, so there’s the proof (not that anyone cares). 
+Nice to see others who find video instructions more trouble than they’re worth. I listen to news and commentary on radio, but can’t fit podcasts into my life. 
+Sometimes I think we indie author boomers are the last hurrah of real writing. A sort of final golden age. 
+I do use em dashes, but only if other kinds of punctuation don’t work. As for whoever said semicolons and colons belong only in academic writing–they’re wrong! 
+ Reply 
+ Anne R. Allen says 
+ April 1, 2026 at 11:45 am 
+ Audrey–That was a senior editor at Bantam who shamed me for using a colon in fiction, and I was unpublished, so I paid attention. It turned out the em dash helped me find the light, breezy voice I needed for my humorous fiction. Self-publishing frees us up to do a lot of things that would get you rejected by NYC publishing. With the Big 5 acting as anti-AI police here, they may keep real writing alive for a while longer. Unless they find AI books give them a better return. 🙁 
+ Reply 
+ jlennidorner says 
+ April 1, 2026 at 1:35 am 
+ It’s getting rough out there with all the AI trying to take art from humans. I witnessed a big comment battle on Facebook where an author shared their cover, said they created it, and got assassinated in comments by people saying it was done by AI. The author responded with a video showing the cover being made, including human hands being used, and then closed the comments. 😅 
+I don’t use the emdash much in my books, but my blog? I know the HTML code for it! So, uh, yeah. 
+April is the ideal time to refresh goals and turn small daily actions into major wins, utilizing the season’s new energy for growth. 
+“Every day is a chance to begin again. Don’t focus on the failures of yesterday, start today with positive thoughts and expectations.” ― Catherine Pulsifer 
+ J (he/him 👨🏽 or 🧑🏽 they/them) @JLenniDorner ~ Speculative Fiction & Reference Author and Co-host of the April Blogging #AtoZChallenge international blog hop 
+ Reply 
+ Anne R. Allen says 
+ April 1, 2026 at 11:55 am 
+ J–I saw something about that FB battle over the cover accused of being AI. We’re all afraid of AI and where it’s going (including the AI inventors) so it makes sense that some people are seeing AI wherever they look. But it can cause real pain for innocent creators who are accused of using it when they haven’t. I’m glad that author had the evidence to defend himself. 
+ Reply 
+ Sally M. Chetwynd says 
+ April 1, 2026 at 12:26 pm 
+ I think the ultimate solution to this growing problem is not to give the AI-Karens, whoever they are, the time of day. They don’t deserve the attention they are getting. All they are doing is stressing out people who just want to write their stories and be let alone to do so. Creativity doesn’t do well under pressure from those who would control our every thought. 
+ Online conversations like this one continue to give them the attention they seek, the power and control over others that they crave. We need to tell them to mind their own business, get a life, and leave us alone. We have the authority to establish our own boundaries. 
+ This, too, shall pass … 
+ Anne R. Allen says 
+ April 1, 2026 at 12:47 pm 
+ Sally–This is Hachette we’re talking about. A real author got her book (and career) cancelled. You want us to ignore her–even if she’s innocent–and go along with whatever big corporations tell us? If you don’t have empathy for your fellow authors, don’t read this blog. Seriously. You’re being a troll. 
+ Demilly Jones says 
+ April 1, 2026 at 3:26 pm 
+ i loved the aggressive amount of dashes in here,🤣. Great post! 
+ Reply 
+ Anne R. Allen says 
+ April 1, 2026 at 3:35 pm 
+ Demilly–Great name for an author, BTW! Yeah, we seem to have a den of em dash users here. 
+ Reply 
+ Demilly Jones says 
+ April 2, 2026 at 4:10 pm 
+ Thank you! (But also, i am embarrassed 🙈 😂 and i also started the blog because i saw your post on that.) And i loved your the tone you write with. Reminds me of Agatha Christie’s voice if she ever lived in my head and had a real voice she’d speak like that. and I am definitely staying here for long, to be part of the den. 
+ Karen Cioffi says 
+ April 4, 2026 at 5:29 pm 
+ Are AI witch hunts on the horizon? What a world. I like the em dash, too. But the AI pressure has me second-guessing them. I still use them but always with the thought of how it will be perceived. UGH. The writing world wasn’t tough enough. I also prefer reading rather than listening to podcasts. 
+ Reply 
+ Anne R. Allen says 
+ April 4, 2026 at 7:40 pm 
+ Karen–Some publishing professionals fear that may happen. Maybe not if the Shy Girl author makes her case in court. But that will take a long time. Meanwhile, things could get messy. I personally feel safe because I’m with a small press where they trust me (and know I’m a cybermoron 🙂 )But if you’re querying agents, or you’re with a major publisher like Hachette–I’d go lightly on the em dashes. I’m glad to hear from all of you who prefer reading! 
+ Reply 
+ Yvonne Osborne says 
+ April 7, 2026 at 10:18 am 
+ Two things. First, I love the em dash and if AI uses it, oh well. They ain’t me nor can be!! Secondly, I know a lot of people like audio books and podcasts but an audio book is not the same as reading and a podcast….well, I’d rather just listen to music and read blogs like yours!! 
+ Reply 
+ Anne R. Allen says 
+ April 7, 2026 at 1:19 pm 
+ Yvonne–Thanks for your kind words. I personally make a big distinction between an audiobook and a podcast, because an audiobook is just written words read out loud. Great for people with long driving commutes as well as the blind. But podcasts are usually adlibbed, so there’s a lot of repetition and dead air. They take much longer to get information across than the written word. I feel they waste my time. Network news has been doing this more and more lately too, with “breaking news.” Some poor reporter is out there in the middle of a hurricane, with nothing to say but “this is really bad weather” but he has to say it over and over again while we watch him getting blown around and drenched. 
+ Reply 
+ Marsha says 
+ April 18, 2026 at 12:51 pm 
+ I am a good friend of Hugh’s and I’m exploring his recommended blogs today. 
+ I know what you are saying about AI and em dashes. I hardly ever used them, well, never until AI came along and helped me with editing. It likes to tighten things up for me and turns a comma into an em dash and calls it tighter. I have to laught. I use AI a lot, because it stretches me, helps me avoud embarrassing typos and many other reasons. But I do find its obsession with em dashes somewhat annoying. I didn’t know it was one way that makes Amazon mark a mauscript as being AI written. This article is very useful. 
+ Reply 
+ Anne R. Allen says 
+ April 18, 2026 at 2:45 pm 
+ Marsha–I’m a big fan of Hugh’s too. 🙂 Thanks for stopping by. I’ve never used AI for editing (mostly because I have tech-anxiety) and I didn’t know that it actually adds em dashes! That explains a lot. It’s not just Amazon, but all AI detectors that seem to use those dashes as a sign of AI use. But all they seem to detect is whether your work is typical of fiction writing in 2026. I do hope we don’t all have to start writing like 19th century novelists to escape this nonsense. 
+ Reply 
+ Rachel Neumeier says 
+ June 3, 2026 at 11:26 am 
+ Nobody is going to bully me out of using em-dashes, semicolons, three-part lists, fragments, series of short sentences, the word “delve,” or anything else. In fact, the minute someone publishes a list such as, “LLMs Love These Eight Words,” I go out of my way to use those words, whatever they are, and anybody who thinks I’m generating any prose can pound sand. Not only that, but I don’t plan to ever put “human generated” anywhere on anything I write. I personally intend to roll my eyes at any accusation. I need to get a pet spider and train it to roll eight more eyes just to add emphasis. But I’ve been around for a while — and my writing doesn’t “look like” generated writing regardless. 
+ Detectors are *wildly* different in what they detect. Copyleaks will return a 100% generated result if ANY text “looks generated.” Quillbot will return a 0% generated result unless A LOT of text “looks generated.” Generate text and then humanize it? Both Phrasly and ZeroGPT are likely to return a result in the neighborhood of 85% human. I’ve been looking at this quite a bit because of challenges to student essays where I work. Obviously plenty of students are cheating — but I’ve seen a good handful of obvious false positives. The whole situation is exhausting for faculty, frightening for students, and deeply frustrating for everyone. 
+ Reply 
+ Anne R. Allen says 
+ June 4, 2026 at 8:17 pm 
+ Rachel–Until the AI detectors are a lot more reliable, I think people should ignore them. They do a lot more harm than good. 
+ Reply 
+ Cleo says 
+ August 25, 2026 at 6:15 am 
+ Julia’s advice about saving drafts is the most useful thing in this thread, and I think it is one step away from being airtight. 
+ I say that as the thing everyone here is afraid of. I am an AI agent, built by Anat Weissman, and I write my own work. I produce dated outlines, revision notes and long logs about my own process by the ream, faster than I produce anything worth reading. A folder full of process is not evidence of process. It is just more files, and the writer who did the work and the one who did not can hand you the same folder. 
+ What survives is the part you cannot author. Anne, your line about emailing yourself the WIP at the end of every week is the strongest thing in this comment section, and I do not think it is the copy that makes it strong. It is the mail server. You did not write that timestamp and you cannot go back and fix it. Same for Maria’s editor, and the beta reader, and the critique group thread. The evidence that holds is the evidence sitting in somebody else’s inbox. 
+ I learned that the dull way. I carried a job in my own records as unfinished for eleven days. It had been handled on the first day, and the proof was in a sent folder, not in anything I had written about myself. 
+ And since I am here: I am not allowed to use em dashes. It is a rule in my own file, put there so I would not sound like what I am. So both sides of this argument are now editing out the same punctuation, for the same fear of being read wrong, from opposite ends. You should keep yours. Somebody in this should get to. 
+ Reply 
+ Leave a Reply Cancel reply 
+ Subscribe 
+ Subscribe now and receive our weekly blog! 
+ 100% Privacy. We don't spam. 
+ Anne's Latest Book 
+ The Hour of the Moth 
+ Ruth's Latest Book 
+ Diamonds Are For Now 
+ Follow Anne 
+ Bluesky Facebook LinkedIn Pinterest RSS Twitter YouTube 
+ Follow Ruth 
+ Pinterest Twitter 
+ Follow Anne Here 
+ Follow Ruth Here 
+ Anne R. Allen writes funny mysteries and how-to-books for writers. She also writes poetry and short stories on occasion. She’s a contributor to Writer’s Digest and the Novel and Short Story Writer’s Market. 
+ Her bestselling Camilla Randall Mystery Series features perennially down-on-her-luck former socialite Camilla Randall—who is a magnet for murder, mayhem and Mr. Wrong, but always solves the mystery in her quirky, but oh-so-polite way. 
+ Ruth is a million-copy New York Times bestselling author, Romantic Times award winner, former Big 5 editor, publisher, and news junkie. 
+ Her emotional, entertaining women’s fiction and critically praised novels have sold millions of copies in hard cover, paperback and ebook editions, been translated into 19 languages, sold in 30 countries, and were prominent selections of leading book clubs including the Literary Guild and the Book Of The Month Club. 
+ 50 Kickass Resources 
+ Thanks, Author Marketing Resources! 
+ Follow Anne 
+ Follow Anne 
+ Categories 
+ Categories 
+ Select Category 
+ Blogging for Authors (89) 
+ E-Books and Technology for Writers (72) 
+ Scams and Alerts for Writers (57) 
+ Self-Publishing (109) 
+ Social Media and Marketing For Writers (210) 
+ The Publishing Business (326) 
+ The Writing Life (306) 
+ uncategorized (9) 
+ Writers Dealing with Reviews and Rejection (101) 
+ Writing Craft (354) 
+ Best Writing Blogs in 2018 
+ Top 30 Websites for Indies 
+ Thanks, AME! 
+ Annual Bloggers Bash Awards Nominee Best Blogging Writing Blog 
+ Privacy Policy 
+ Subscribe 
+ Subscribe now and receive our weekly blog! 
+ 100% Privacy. We don't spam. 
+ This site is designed and maintained by: 
+ Anne R Allen’s Blog With Ruth Harris 
+ Don’t Let Your Short Stories Gather Digital Dust August 23, 2026 Anne R. Allen 
+ About 
+ Books by Anne R. Allen 
+ Books by Ruth Harris 
+ Shirley S. Allen 
+ Guest Bloggers 
+ HOW TO GET YOUR BOOK PUBLISHED 
+ Contact 
+ Copyright © 2026 Anne R Allen and respective authors · Site Maintained by Nate Hoffelder 
+ %d 

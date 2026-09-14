@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 80,
+ "firstTs": "2026-09-09T07:17:56.955Z",
+ "lastTs": "2026-09-09T07:22:08.486Z",
+ "tools": {
+  "Bash": 14,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_2dff77d0-392",
+ "agent": "aae7d6678fb7ae1ef",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_2dff77d0-392/agent-aae7d6678fb7ae1ef.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

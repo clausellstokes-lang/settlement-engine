@@ -1,0 +1,64 @@
+Seat: Opus 5 — Fable-unvalidated. Block DS-DEF-2, pool `Internal Security`: full legal chain (court AND prison). REWRITE draft, round 1.
+Paste target: under the pool's bold heading in `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, replacing rows 1 to 3 only. The pool's typed lines and its bold heading are untouched and are not repeated here. Three variants in, three variants out; same vids, same order, same bracketed tags.
+
+1. `[ledger]` `[plain]` The charge at {settlement} goes to a court, and the sentence goes to a prison.
+   - `[face]` Offences at {settlement} are heard in court, and the convicted stay in custody.
+   - `[face]` Wrongdoing at {settlement} is tried, and the sentenced are held.
+   - `[face]` A person charged at {settlement} comes before a court, and a person sentenced there is lodged in a prison.
+
+2. `[street]` `[plain]` Something done wrong at {settlement} ends in a court, and it can end in a prison.
+   - `[face]` What is done wrong at {settlement} is answered by a court, and then by confinement.
+   - `[face]` A charge laid at {settlement} is tried, and the person charged is jailed.
+   - `[face]` A hearing at {settlement} precedes a cell.
+
+3. `[visitor]` `[plain]` A stranger at {settlement} finds a court, and a prison that holds what the court decides.
+   - `[face]` The newcomer at {settlement} is in a town that tries what it holds, and holds what it tries.
+   - `[face]` Strangers at {settlement} arrive where a charge is tried and a sentence is kept.
+   - `[face]` An outsider at {settlement} stands in a town where a charge is tried before a court and a sentence is discharged inside a prison.
+
+--- NOTES
+
+**A. The card, as this draft read it.** `node scripts/prose-licence-card.mjs DS-DEF-2 'Internal Security: full legal chain (court AND prison)'` prints, for this ROLE SPINE: reads `court` and `prison`, both not-produced; predicate `court` truthy AND `prison` truthy; bag `{band: RESERVED, route: proper, settlement: proper}` with only `{settlement}` FILLED at this block's call sites; form `sentence`; move none declared; angle `ledger street visitor`; source none, standing SOURCE-UNRESOLVED, no citation licensed; may claim — that the conjunction holds, as a STANDING fact of the record; may NOT — a count, a cause, a season, a future, a standpoint, a second fact, another civic object of the class `law`; refused columns always — a totality over persons, an exemption from a duty, a named character and that character's fate, a theological claim.
+
+**B. Licence, clause by clause, for every wording.** The pool licenses ONE fact, so all twelve wordings are claim-equal by construction (arm A6 satisfied trivially, arm C-pair satisfied against each BEFORE as set out in D). Every wording asserts exactly the card's `may claim` line and nothing else.
+
+| # | wording | claims made | card clause that licenses each |
+|---|---|---|---|
+| 1 plain | The charge / a court · the sentence / a prison | (i) a charge is tried here; (ii) a sentence is held here | (i) `reads: court` under `predicate: court truthy`; (ii) `reads: prison` under `predicate: prison truthy`; the conjunction by `may claim` |
+| 1 face a | heard in court · the convicted stay in custody | same two | same two; `custody` is the state the `prison` read licenses, not a second institution |
+| 1 face b | is tried · the sentenced are held | same two | same two; `held` is the `prison` read's own predicate |
+| 1 face c | comes before a court · lodged in a prison | same two | same two; the two reads named by their own nouns |
+| 2 plain | ends in a court · can end in a prison | same two | same two; `can` is the standing capacity the truthy predicate holds, never a future |
+| 2 face a | answered by a court · then by confinement | same two | same two; `confinement` is the `prison` read's state |
+| 2 face b | is tried · the person charged is jailed | same two | same two |
+| 2 face c | a hearing precedes a cell | same two | same two; the ORDER is the pool key's own `full legal chain`, not an added fact (see D-3) |
+| 3 plain | finds a court · a prison that holds what the court decides | same two | same two; the relative is `that`, never `which` |
+| 3 face a | tries what it holds, and holds what it tries | same two | same two, stated as one chiasmus; the figure is syntax, not a simile (R-DA-11 bars simile, metaphor and inanimate intent, not word order) |
+| 3 face b | a charge is tried · a sentence is kept | same two | same two |
+| 3 face c | a charge is tried before a court · a sentence is discharged inside a prison | same two | same two |
+
+Slots: every wording carries `{settlement}` exactly once and no other slot, so each face's `{slot}` set is identical to its parent's (ARCH §2.5, the `[face]` row's refusal) and matches the bag's FILLED set. `{band}` is RESERVED and `{route}` is unfilled at this block; neither is written.
+
+**C. Walls checked on every wording.** No digit; no em dash; no exclamation; no question; no `which`; no citation (the card licenses no source, so arm A13 would refuse one); no named person, office or holder (CLERK-LAWS §1.2 NOTE 2's `sheriff` / `constable` / `sergeant` vocabulary is absent, and no office noun of any kind is used); no quantifier over persons (`every`, `only`, `all`, `none`, `whoever`, `nobody` all avoided, since no column here is `closed`); no future indicative; no cause connective; no season or duration; no count word (`both`, `two`, `twice`, `a second time` were drafted and struck). One sentence per wording (A1; R-DA-03's never-a-third). No wording opens on `{settlement}` or on any proper-typed slot (ARCH §2.5 T-F8; MOVE-GRAMMAR §1.4 wall 10; R-DA-17's town-name rule) — the wall is met at the stricter pool grain, not merely one variant. No two of the twelve share their first two words (A11). No wording closes on a pronoun (R-DA-04's `closers.pronounRate`). Openers in order: The charge · Offences at · Wrongdoing at · A person | Something done · What is · A charge · A hearing | A stranger · The newcomer · Strangers at · An outsider.
+
+THE THREAD (MOVE-GRAMMAR §1.4.1): this pool is a SPINE and is placed first, so its duty is to hand a noun forward. Every wording closes on a civic noun of the two reads or on their present condition — prison, custody, held, prison, prison, confinement, jailed, cell, decides, tries, kept, prison — so a modifier seating after it can carry the court, the sentence or the prison forward without a turn.
+
+Word counts: 15 · 13 · 10 · 19 | 16 · 15 · 13 · 7 | 16 · 18 · 14 · 24. The seven-word line is the register's short line (R-DA-06's `< 8` floor); the twenty-four-word line is the pool's long end; no wording reaches thirty (R-DA-06's ceiling).
+
+**D. Claims the BEFORE carried that this draft does NOT carry, each with the law that refuses it.** These are removals, and each is declared rather than made silently. Removing an unlicensed claim is editing, not trimming (Part B §22's own carve-out: cutting words is editing, cutting sentences is trimming); the variant count and the face count only rise.
+
+1. **Variant 1, `arrest`.** The BEFORE read "can arrest, try and hold". The card's reads are `court` and `prison` only. An arrest asserts an arresting body, which is an office the institution table does not return — CLERK-LAWS §1.3 and R-DA-15's C2 arm, and the card's own `may NOT: another civic object of the class law`. Dropped. The two licensed limbs are kept in every face.
+2. **Variant 1, the gloss.** "having all three means the town's law is a process rather than a threat" is the MEANING move, which does not exist anywhere in the estate (MOVE-GRAMMAR §1.3; R-DA-03's second-sentence summary at 0.000), and its contrast names no sibling pool key or sibling band in the sibling's own terms (R-DA-02). A gloss carries no field-licensed claim, so its removal does not move the typed claim set and C-pair holds.
+3. **Variant 2, `takes time`, the reliance, and the watch's temper.** "goes somewhere and takes time" carries a duration the card refuses (`may NOT: a count`); "the town has come to rely on that" is a disposition of persons and the card's refused `standpoint` (FEELING is also a non-move, MOVE-GRAMMAR §1.3); "the watch's temper" names an office outside the reads and gives it a feeling. All three dropped. The BEFORE's oblique carriage of the prison limb ("goes somewhere and takes time") is written plainly in every face, so the variant keeps the pool's conjunction rather than half of it — the sibling-coherence arm C-sibling wants the four Internal Security pools to differ in exactly this predicate.
+   The ORDER of the chain (a hearing precedes a cell) is carried by the pool key's own words, `full legal chain`, and is treated as the predicate's shape rather than as an added fact. If the chair reads the order as a second fact, wording 2c is the one row to re-take.
+4. **Variant 3, "rather than a favour" and "and the procedure runs".** The first is a contrast whose rejected alternative is a moral term, not a sibling key or band (R-DA-02); the second restates the first clause and is R-DA-03's summarising second clause. Both dropped.
+5. **Variant 3, the stranger's experience.** The BEFORE asserted that a stranger's complaint is given a procedure. That is an assertion about whom the court counts, and `whoItCounts` is `closed: false` (CLERK-LAWS §1.2 NOTE), so a sentence stating that the court hears an outsider is refused by R-DA-15 (i) and H-4's closed-world clause. The visitor angle is therefore realised as PLACEMENT — the stranger stands in the town and the standing fact is stated — never as the court's treatment of the stranger and never as a perception verb on an abstraction (R-DA-11).
+
+**E. Refusals — laws this pool cannot meet, with the measurement.** The pool is written in full; these are reported, not worked around.
+
+- **REFUSAL 1 (whole pool): the level-1 grammar distinctness rule.** MOVE-GRAMMAR §2.1 requires a pool of k variants to carry min(k, 8) DISTINCT level-1 grammars, at least two in any pool of two or more. This card licenses exactly one move on one predicate: V2 needs a structural-consequence field, V3 a `none-exists` field, V4 a named-object field, V5 an institution row, V6 an unresolved state value, V7 event provenance, V8 a `not-held` field — the card holds none of them, and it refuses a cause and a second fact outright. All three variants are therefore V1 (PRESENT), as all three were before the rewrite. The rule cannot be met without minting a field, which is a schema act and owner-gated. Pre-existing; the rewrite neither cures nor worsens it.
+- **REFUSAL 2 (whole pool): the close-kind ceiling.** R-DA-04 draws the close from {condition · prohibition · absence · object · a name not given}. A prohibition close would need an exclusivity the closed-world clause refuses; an absence close would need a `none-exists` or `not-held` field, and this pool is the branch where the chain is PRESENT; a name-not-given close would need a GAP field. Only OBJECT and CONDITION are reachable, and the twelve wordings alternate between them. Two of five kinds is the pool's ceiling under this card.
+- **REFUSAL 3 (variant 3, reported not fatal): the angle against the card.** The card's `may NOT` includes `a standpoint`, and the variant's tag is `[visitor]`. The draft resolves this by treating the stranger as placement rather than vantage (D-5), which keeps every claim on the record's side; a refuter who reads the tag itself as the standpoint would refuse the whole variant, and the resolution is the chair's, not this seat's. No alternative wording of a `[visitor]` variant avoids naming a stranger, because the tag is not this seat's to touch.
+- **REFUSAL 4 (reported): the nouns the pool can disperse over.** R-DA-10 wants a per-pool dispersion floor on the fills. The two reads yield a small licensed noun set — court, charge, hearing, offence, trial, sentence, judgment, prison, cell, custody, confinement — and every one of these is an act, an output or a state of the two licensed institutions rather than a third civic object; naming a bench, an assize, a magistracy, a watch or a gaoler would be the card's refused `another civic object of the class law`. The dispersion in this draft is at the ceiling the card allows, and this seat records the reading (that a court's own charge and a prison's own cell are not new civic objects) so the chair can veto it in one act.
+
+**F. Convention flagged for the chair.** ARCH §2.5's example row puts `[plain]` in the tag position, because the example modifier row carries no angle tag. This pool's variants carry angle tags that are not this seat's to touch, so each variant line here carries both — the angle tag exactly as it stands, then `[plain]`. If the projector wants one bracketed token on the variant line, the angle tag is the one that stays and `[plain]` is dropped; the three face sub-rows are unaffected either way.

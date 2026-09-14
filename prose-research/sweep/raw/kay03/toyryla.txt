@@ -1,0 +1,382 @@
+ 
+
+ Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay’s Tigana – BrightWeavings 
+
+ Welcome 
+
+ Tour Journals 
+
+ Art Gallery 
+
+ Scholarship 
+
+ Readers 
+
+ News 
+
+ GGK’s Words 
+
+ Skip to content 
+
+ Welcome 
+
+ Original Introduction 
+
+ Buying Books 
+
+ Tour Journals 
+
+ Children of Earth & Sky 
+
+ River of Stars 
+
+ The Last Light of the Sun 
+
+ Under Heaven TOUR JOURNAL 
+
+ Ysabel JOURNAL 
+
+ Books 
+
+ Written on the Dark 
+
+ All the Seas of the World 
+
+ A Brightness Long Ago 
+
+ Children of Earth and Sky 
+
+ River of Stars 
+
+ Under Heaven 
+
+ Ysabel 
+
+ Lord of Emperors 
+
+ Sailing to Sarantium 
+
+ Last Light of the Sun 
+
+ The Lions of Al-Rassan 
+
+ A Song for Arbonne 
+
+ Tigana 
+
+ The Fionavar Tapestry 
+
+ Beyond this Dark House 
+
+ Art Gallery 
+
+ Written on the Dark Art 
+
+ All the Seas of the World Art 
+
+ A Brightness Long Ago Art 
+
+ A Children of Earth and Sky Art 
+
+ River of Stars Art 
+
+ Under Heaven Art 
+
+ Ysabel Art 
+
+ The Sarantine Mosaic Art 
+
+ The Last Light of the Sun Art 
+
+ The Lions of Al-Rassan Art 
+
+ A Song For Arbonne Art 
+
+ Tigana Art 
+
+ Fionavar Art 
+
+ Beyond this Dark House Art 
+
+ Scholarship 
+
+ Professional Scholarship 
+
+ Student Papers 
+
+ Readers 
+
+ Reader Art 
+
+ Readers Music & Verse 
+
+ Music & Verse 
+
+ Fun Stuff! 
+
+ GGK’s Words 
+
+ Essays & Poems 
+
+ Bibliographies 
+
+ Interviews 
+
+ Tour Journals 
+
+ Readings 
+
+ Contact 
+
+ . 
+
+ . 
+
+ . 
+
+ . 
+
+ THE BOOKS
+ FICTION: 
+
+ A Brightness Long Ago 
+
+ Children of Earth & Sky 
+
+ River of Stars 
+
+ Under Heaven 
+
+ Ysabel 
+
+ THE SARANTINE MOSAIC: 
+
+ Sailing to Sarantium 
+
+ Lord of Emperors 
+
+ The Last Light of the Sun 
+
+ The Lions of Al-Rassan 
+
+ Song For Arbonne 
+
+ Tigana 
+
+ THE FIONAVAR TAPESTRY: 
+
+ The Summer Tree 
+
+ The Wandering Fire 
+
+ The Darkest Road 
+
+ POETRY: 
+
+ Beyond this Dark House 
+
+ BUYING BOOKS: 
+
+ Signed and personalized books can be ordered from Bakka-Phoenix Books in Toronto 
+
+ Recently Added
+
+ Where I Have No Notes 
+ January 2, 2026 
+
+ Search for: 
+
+ ← Children of Earth and Sky Author Questions 
+
+ Reading Passages from Tigana → 
+
+ Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay’s Tigana
+
+ Posted on August 5, 2017 by Alec Lynch 
+
+ Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay’s Tigana 
+
+ This is a bachelor’s thesis by Roosa Töyrylä, written at the University of Helsinki, Finland. 2017.
+
+ Introduction 
+
+ In fantasy literature, good and evil are often portrayed as absolute opposites, the balance between the two driving the plot and characters falling into one or the other of these categories (Hanna and Clute). Guy Gavriel Kay’s Tigana, first published in 1990, is, however, an exceptional representative of the genre when it comes to this dichotomy. Kay himself writes in an afterword to his novel that one of his aims was “to stretch the reader with ambiguities and divided loyalties in a genre that tended (and still tends) not to work that way” (792), and I argue that he succeeds. Tigana offers no simple solution to the problem of good and evil, right and wrong, instead it steers readers’ emotional responses in multiple directions and passes the responsibility of making moral judgments to them. In short, the novel gives rise to more questions than answers.
+
+ The aim of this thesis is to show that the forms of focalization utilized in the novel play a major role in creating and enhancing the aforementioned uncertainties and conflicts. I will start by giving an introduction to the story in Tigana , followed by a brief account of the theory of focalization I am using in this paper, and then I will proceed to the actual analysis of the novel, exploring one type of focalization at a time.
+
+ Tigana is a very complex novel with a vast array of characters and intricate plot developments. It can be classified as high fantasy since it is set in a fictional world. The action focuses on an area called the Peninsula of the Palm, formerly consisting of nine provinces now conquered by and divided between two foreign tyrant sorcerers: Brandin of Ygrath and Alberico of Barbadior. One of these provinces has been treated particularly cruelly because Stevan, Brandin’s son, was killed in the battles leading to its conquest. As a vengeance, Brandin not only stripped the province of all its former glory, but by use of sorcery, also its name. Now only those born in the province before the conquest can hear or pronounce the name of Tigana, and practically all of its history, culture and art have been cast into oblivion.
+
+ The novel has two major storylines, which get increasingly intertwined towards the end. One of these follows a group of people led by the only living son of the last Prince of Tigana, named Alessan. Alessan’s ambitious goal is not only to bring back the name of Tigana but also to free the entire peninsula of the two tyrants, essentially by trying to set them against each other. This storyline is presented mostly from the perspective of Devin, a young singer, who at the beginning of the novel learns that he is from Tigana and decides to join Alessan and his companions in their mission.
+
+ The other storyline follows a woman named Dianora, living in Brandin’s saishan , or harem, on the island of Chiara. Dianora is from Tigana as well, and her original plan in coming to Chiara was to assassinate Brandin and thus bring the name of Tigana back to the world. Yet, at the beginning of the novel, she has spent twelve years in the court without accomplishing that and has, instead, fallen in love with the self-same oppressor of her home country she had intended to kill. She is, however, set back on track with her original plan after half-accidentally saving Brandin from an assassination attempt.
+
+ Theoretical Background on Focalization 
+
+ I use Gérard Genette’s ground-breaking theory of focalization as my starting point but at least equal weight will be put on Manfred Jahn’s take on the subject, resulting in a heuristic combination of the two theories. Genette recognizes three types of focalization: zero, internal and external . Zero-focalization is the form of “traditional narrative” with a so-called omniscient narrator, internal focalization portrays events as experienced by a character in the narrative and can be fixed , variable or multiple and external focalization is restricted to the portrayal of the characters’ actions without access to their thoughts or feelings ( Narrative 188-190). Genette defines focalization as a restriction of the information offered to readers ( Narrative 185–6; Revisited 74). This leads to something that Jahn points out to be counterintuitive: the notion that the point of view of an omniscient narrator is actually not a point of view at all (“Windows” 250).
+
+ This is one of the reasons why I have chosen to complement Genette’s theory with that of Jahn’s. Jahn defines focalization as “providing and managing windows into the narrative world, and . . . regulating (guiding, manipulating) readerly imaginary perception” (“More Aspects” 95). Jahn bases his approach on what he calls “a mental model of vision”, or how we typically perceive seeing (“Windows” 242-43), and fuses it with Henry James’s metaphor of narrative point of view as windows opening to the text (251-54). Jahn’s model of vision consists of a perceiving subject, a perceived object, the former’s field of vision where the latter is situated and the “world” surrounding all of this. The perceiving subject is called focus-1 and the object of perception focus-2 (242). Jahn argues that focus-1 can align itself with a heterodiegetic narrator as well as a character since it is possible to interpret the narrator as perceiving imaginarily what they narrate (“More Aspects” 89-91). As the model can be expanded to include imaginary perception, the step to include phenomena such as memory, thought and belief, which all are aspects of focalization, is not that long either (“Windows” 243).
+
+ Jahn classifies four types of focalization, which form a continuum, meaning that some texts or passages are more focalized than others. The four categories of focalization by Jahn are strict , ambient , weak and zero focalization. Strict focalization has one focus-1, one clear viewpoint, whereas ambient focalization has two or more focus-1s and “depict[s] a thing summarily, from more than one side, possibly from all sides, considerably relaxing the condition of specific time-place anchoring, and allowing a mobile, summary, or communal point of view”. In weak focalization no clear viewpoint can be identified; typically this means a presentation of (fictional) facts. In zero focalization there is neither a focus-1 nor a focus-2; in other words there is “no perspective, no spatial order, no origo, no foregrounded center of interest, and no obvious organizing principle” (“More Aspects” 97-99).
+
+ Following James, Jahn uses the term reflector of a character to whom the focus-1 belongs (“More Aspects” 89). I, however, prefer Genette’s term focal character since it has a closer relation to the term focalization but avoids the problematic connotation of active agency associated with the term focalizer , introduced by Mieke Bal. I follow Jahn in assuming that focus-1 can belong to a heterodiegetic narrator and call instances of this phenomenon narratorial focalization .
+
+ Variable Internal Focalization: Inner Struggles and Contrasting Views 
+
+ The main form of focalization in Tigana is variable internal focalization; in other words, the story is focalized through one character’s consciousness at a time. There are some passages that do not have a story-internal focal character, but these form only a small minority. About sixty per cent of the text has either Devin or Dianora as the focal character, and they are also the clearest protagonists in the book. In addition, there are at least nineteen other focal characters that can be clearly identified, ranging from major characters such as Alessan to minor ones such as an innkeeper named Ettocio, whose fate will be discussed later on. The rhythm in which the different focal characters are used, or to use Jahn’s term, the rhythm of window shifting (“More Aspects” 101), varies considerably within the novel. There are a few chapters with only one focal character, usually Devin, but most have at least three different perspectives alternating with each other. Before turning to the effects of variable focalization, however, I will now explore the significance of the internal perspective of characters.
+
+ Internal focalization, by definition, offers readers a more or less direct access to the consciousness of the focal character. In Tigana conflicts do not exist only between characters but also within characters, and the internal focalization and the use of free indirect thought, or what Dorrit Cohn calls narrated monologue, that accompanies it, offer readers a vantage point for observing these mental struggles. The narrated monologue allows readers to hear traces of the character’s own internal voice while the narrator still holds the reins. Dianora with her bitterly divided love is perhaps the most obvious example of a character experiencing deep internal conflict:
+
+ [H]er own rebel body and heart and mind, traitors together to her soul, had slaked so desperate and deep a need in him.
+
+ In Brandin of Ygrath. Whom she had come here to kill twelve years ago, twin snakes [of memory and hatred] around the wreckage of her heart, for having done what he had done to Tigana which was her home.
+
+ Or had been her home until he had battered and levelled and burned it and killed a generation and taken away the very sound of its name. Of her own true name. (189)
+
+ Despite being told in the narrator’s voice, as is obvious from the use of the third person pronoun, Dianora’s own voice is allowed to come through in the passage. The metaphor of twin snakes is clearly hers, not the narrator’s, since a little earlier she uses it in a sentence of direct thought: “She’d lowered her eyelashes to where their hands were twined. Like the snakes , she thought” (188). Also the deictic markers (“come here”) in the passage originate from Dianora’s mental language and the use of incomplete sentences point in the direction of the character as well since it enhances the emotionality of the words. The same goes for the long list of verbs: “battered and levelled and burned . . . and killed . . . and taken away”. Cohn argues that narrated monologue, characterized by the combination of the language of a subjective mind and the objective grammar of the narration often “amplif[ies] the emotional notes” of the narration (117). This is obviously true of many instances of its use in Tigana as well, the above example included. The heightened emotionality invites readers to empathize with the character, which in turn may enhance readers’ experience of the character’s inner struggle by allowing them to share the conflict.
+
+ Inner struggles are to some extent typical of Devin’s internal perspective as well since he occasionally has qualms about his actions, for instance about killing a sleeping Barbadian soldier. Moreover, he is frequently, especially in the beginning of the novel, somewhat perplexed about what is going on around him, which might make him an easy character to relate to since much of the happenings are as unfamiliar to readers as they are to Devin. In other words, readers experience large parts of the story through a character that is, in a way, on the same level with them.
+
+ According to Alan Palmer, stories are created by conflicts between characters, and these conflicts, in turn, are created by the characters viewing the storyworld from their different personal perspectives ( Fictional Minds 194). So all stories contain a multitude of perspectives, but not all narratives give direct access to all of these perspectives. It is the use of variable internal focalization that makes this possible; to use Jahn’s terminology, variable internal focalization opens several windows through which readers can perceive the events. In addition to Devin and Dianora, one of the most regularly presented focal characters is Alberico, one of the two antagonists in the book. Internal focalization is often among the usual suspects when looking for devices that create empathy or sympathy for literary characters (see Keen, Empathy 96-99; Sklar 48). Still, internal focalization does not necessarily lead to such feelings: even though readers have access to Alberico’s consciousness, they are unlikely to sympathize with him, simply because he is quite an unsympathetic character. His sole motivation is to become Emperor back in Barbadior, he has moments when he “need[s] an excuse to kill” (Kay 583) and his callous attitude to things like executing innocent people is illustrated by the following: “The stench [of dead bodies] had been deplorable and some of the children lived an unconscionably long time on the wheels. It made it difficult to concentrate on business in the state offices above the Grand Square” (302). Using the antagonist as a focal character makes him, however, a less distant figure than a commonplace dark lord, present in many works of high fantasy, would be (see Kaveney). Alberico may be a totally unsympathetic character, but he is nevertheless presented as a human being with human emotions like frustration and fear, and it is the internal focalization that makes readers aware of these emotions. Moreover, using Alberico as a focal character allows readers to judge his nature themselves, as it were, instead of relying on the opinions of characters who term him as their enemy.
+
+ Unlike Alberico, who is present in person almost right from the beginning of the novel, Brandin stays a distant figure throughout Part One, which is almost two hundred pages long. He is portrayed only through the perspective of people who do not personally know him and viewed almost always through what he has done to Tigana. Therefore it is natural for readers to conceive him only as the cruel tyrant and distant enemy that he is for Devin, Alessan and their companions. The situation changes, however, at the beginning of Part Two that introduces Dianora as a character (and focal character) and opens a whole new window to the story. Brandin is no longer a faraway tyrant but someone Dianora knows very intimately. There is a connection to the earlier perspective since Dianora shares the same feelings about Tigana as Devin and others, but Brandin is not only an enemy any more. Through Dianora readers learn what Brandin is to someone who knows him and has fallen in love with him despite all the terrible things he has done. Readers are likely to adapt their views since someone with a personal relationship is arguably a more reliable source of information about a person than someone who only knows him by reputation. On the other hand, Dianora’s being in love with Brandin might undermine her reliability, but this is balanced out by the fact that she very much cares about what Brandin did to Tigana and nevertheless falls in love with him. The image of someone who is capable of “overr[unning a] province in blood and fire” (Kay 115) is still there, but it is complemented by making that someone also a person whose laughter is “like the healing sun slicing out of clouds” (190). All in all, the picture readers have of Brandin almost unavoidably grows more ambiguous as the story proceeds and opens more windows through which to perceive him.
+
+ Multiple Focalization and a Hidden Perspective: It Depends on How You See It 
+
+ The development of how Brandin is perceived takes another step when Devin and Alessan see him for the first time with their own eyes. Brandin has abdicated as King of Ygrath and terms himself the King of the Western Palm. Alberico is planning to attack Brandin, who is now in a weakened position, and starts to gather his forces. Following Dianora’s advice, Brandin decides to perform the ancient ritual of the Ring Dive: he will throw a ring into the sea and Dianora will dive for it, thus winning the favour of the people of the Palm and new recruits for Brandin’s army. Because of the history of the ceremony, a failure to bring up the ring, on the other hand, would most certainly lead to Alberico’s victory over Brandin and his diminished forces. Dianora knows this, and as can be guessed, has no intention of coming out of the sea alive: she believes to have finally found the way to bring back the name of Tigana. Devin, Alessan and others have travelled to Chiara to witness the ceremony. The scene of the ritual marks the coming together of the storylines focused on Dianora and Devin, and it is focalized through both of them, and in addition Alessan, so that some of the events are narrated twice or even thrice, making the scene an instance of multiple focalization.
+
+ Most importantly, the scene shows how Devin, and perhaps even Alessan, has to adapt his views on Brandin. At first Devin, observing the situation from the mast of a moored ship, interprets Brandin according to his own prejudices:
+
+ He could see how the man watched the woman approach. His face was utterly expressionless. Icy cold.
+
+ He’s calculating the situation, Devin thought. The numbers, the chances. He’s using all of this, – the woman, the ritual, everyone gathered here with so much passion in them – for a purely political end. He realized that he despised the man for that, over and above everything else: hated him for the blank, emotionless gaze with which he watched a woman approach to risk her life for him. By the Triad, he was supposed to be in love with her! (650)
+
+ When the focalization shifts back to Dianora, a completely different interpretation of Brandin’s emotions is offered: she “see[s] how ferociously he was struggling not to show what he was feeling” (651). Dianora’s interpretation is in this case more trustworthy than Devin’s, not only because Dianora knows Brandin but also because she is much closer to him and can obviously see his expression more clearly.
+
+ The situation changes, however, when Dianora, contrary to her original intention, comes back ashore and Devin is forced to realize that Brandin is not nearly as unfeeling as he thought: “he saw the King, the Tyrant, the sorceror [ sic ] who had ruined them with his bitter, annihilating power, gather the woman into his arms, gently, with tenderness, but with the unmistakable urgency of a man deprived and hungry for too long” (660). In Devin’s thoughts Brandin as a tyrant is now juxtaposed with Brandin as a man capable of deep love. Alessan is arguably experiencing something similar since after the ceremony he cannot “force out of his mind the image of Brandin the Tyrant falling to his knees and burying his face in his hands” (665). The inner conflict Dianora has about Brandin seems to be reaching the other characters as well, if in a milder form, and thus it is no wonder if it affects readers too. If those who see Brandin as their arch-enemy are no longer able to perceive him as completely evil, readers can hardly do that either.
+
+ Portraying an event such as the Ring Dive through so many focal characters, might lead readers to think that all the perspectives that matter are actually present. This need not be so, however, and focalization can also be approached from an angle that takes into account the characters that do not have their perspective portrayed. Brandin’s Fool, Rhun, is an excellent example of this: throughout the novel he appears only as an extension of Brandin, bound to him by magic, but in the very last pages, the focalization unexpectedly shifts to him and it turns out that he is actually Valentin, the Prince of Tigana and Alessan’s father. This plot twist is only achieved because Rhun does not appear as a focal character earlier in the book, even though he is present in several scenes, such as the Ring Dive discussed above. The surprising turn of events is not without a build-up, though. For instance, in the pivotal Ring Dive scene, all the focal characters pay some attention to Rhun, even though he is at this point a seemingly unimportant figure. Most telling is, perhaps, Alessan’s impression of him: “Alessan looked at the bent, balding figure with his weirdly deformed face, and felt a blurred, disorienting kinship to the man. As if the two of them were linked here, if only in their inability to know how to react to all of this” (661). There is indeed a much deeper “kinship” between the two than Alessan will ever know: after all, he is unknowingly gazing at no one else but his own father. Readers will naturally realize this only in retrospect, and the significance of Alessan’s feelings in this situation might become clear only after a second reading. Nevertheless, this shows how the plot twist is hinted at and how readers might have to re-examine the story after the revelation of Rhun’s real identity. The new perspective offered through such an unexpected window shift thus further adds to the ambiguous nature of the novel.
+
+ Minor Characters as Focal Characters: Less Important People? 
+
+ In addition to recurring focal characters like Devin, Tigana features short passages that are focalized through a minor character. One such passage relates to Dianora’s past. Most of the chapter that introduces Dianora to the story is concerned with her past through her memories, reflecting on how she made her way to Brandin’s court. After this long subjective analepsis (see Keen, Narrative Form 103) the narration returns to the present moment for a while, and then it continues from where it left off in the past but not from Dianora’s point of view any more. This analepsis is not a memory, and so it may seem more objective, but it nevertheless exhibits a strict, internal focalization, this time through a character only known as the Governor of Stevanien. This way Dianora changes status from focus-1 to focus-2: she becomes an object of focalization and something akin to an object in the story as well since the passage describes how she is “seized as Tribute for Brandin in Chiara and bundled directly on to the galley in the river” (Kay 231), which, paradoxically enough, is only beneficial to her plan if not strictly according to it.
+
+ Having the Governor as the focal character leads to readers being excluded from Dianora’s feelings. Instead, they get to witness the Governor’s acute panic over a situation where a seemingly reckless captain chooses to capture a woman who is, as the Governor believes, from Certando, a province under the rule of Alberico, not Brandin. (Dianora has at this point lived a few years there because she knows that Brandin will not accept anyone from former Tigana to his harem.) This allows readers to experience the political controversies surrounding this episode in Dianora’s life, the fact that her seizing could possibly have led to a war between the two tyrants. On the other hand, the Governor is not so much worried about what is actually happening but about the blame falling on him. This side of the affair is stressed so much that Dianora as a person almost disappears from readers’ view, which is quite paradoxical when considering how important a character she is. This could be considered in the light of Palmer’s suggestion that storyworld events are almost always experiences, not only things that happen but also things that happen to someone ( Fictional Minds 194). Dianora’s experience is undoubtedly central to the story, but having the Governor as the focal character shows that what happens to her affects the lives of others as well; she is not the only one having an experience. The Governor’s experience is not essential to the story, but it strengthens the illusion of there being a world full of other stories around the one the novel is about: people living through their lives and, for example, worrying about a possible political conflict.
+
+ The life of a minor character can be, however, affected by the actions of the protagonists in much more drastic ways as well. Ettocio is an innkeeper in whose establishment Alessan and his companions, under false identities, are rousing rebel spirit through a feigned argument among themselves. Since the scene is focalized through Ettocio, readers are not directly told who the characters are. They are nevertheless likely to recognize Alessan from his description as a “grey-eyed merchant” (310) who “pushe[s] a hand through his hair” (310) since it has been previously mentioned that Alessan’s eyes are grey, he poses at the moment as a merchant and pushing a hand through his hair is a characteristic habit of his. By extension, readers might also be able to identify “[t]he young fellow leaning on the bar” as Devin (311). The third member of the group is, however, likely to go unnoticed by readers at this point: it would be almost impossible to guess that a warrior from Khardhun with “sculpted, black features” (311) is actually Duke Sandre, a further member of Alessan’s group, since his disguise, which includes body-paint, has not yet been mentioned. Therefore readers, unlike Ettocio, are probably able to sense that there is something curious about the scene, since it would not make sense for Alessan to draw such attention to himself if there were not some profit in it, but not to realize the full truth, which is revealed only later when the focalization returns to Devin: “Alessan quarreled with the sardonic Khardhu warrior in a dozen different inns and taverns on the road, and hired him a dozen different times” (326).
+
+ The scene is a good example of how focalization through a minor character allows an outsider’s view on the main characters. This interrupts the immersion readers may have in the main characters’ consciousness and allows them to view those characters in a more objective way, as it were, by suspending the emotional engagement readers tend to have with protagonists. It depends on whether readers recognize the characters while the scene is in progress or only afterwards whether this effect works immediately or not. The greatest significance of the scene is, however, only realized after all the main characters have left the tavern and the narration goes on describing what happens afterwards, still maintaining Ettocio’s perspective:
+
+ It went on all afternoon, even after the boy left as well. And that night, with an entirely different crowd, Ettocio shocked himself by speaking up during an argument about ancestral primacy between an Astibarian wine-dealer and another Senzian. He made the same point the tall Khardhu had made – about nine spindly fingers that had been broken one by one because they never formed a fist. . . .
+
+ In the days that followed he found himself raising the point whenever the opportunity arose. For the first time in his life Ettocio began to get a reputation as a thoughtful man.
+
+ Unfortunately, one evening in summer he was overheard by a Barbadian mercenary standing outside the open window. They didn’t take away his license. There was a very high level of tension across the whole of the Palm by then. They arrested Ettocio and executed him on a wheel outside his own tavern, with his severed hands stuffed in his mouth.
+
+ A great many men had heard the argument by then, though. A great many had nodded, hearing it. (316-17)
+
+ The latter part of the above excerpt shifts from Ettocio’s perspective to narratorial focalization. This window shift distances the narration from Ettocio and enables the matter-of-fact description of his execution, which, accompanied by the fact that readers had access to his consciousness only a moment earlier, makes it all the more shocking. For a minor character that is present in the text for only a few pages, Ettocio is an exceptionally round character (see Rimmon-Kenan 42-44). Even though it may not be possible to construct a completely defined character from such a short description, traces of character development are nevertheless discernible in the passage: Ettocio changes from someone who keeps his thoughts to himself to someone who quite enjoys hearing his own voice. The internal focalization naturally plays a role in how “real” a character feels as well, and Shlomith Rimmon-Kenan actually suggest “penetration into ‘inner life’” as one of the facets of character classification (44).
+
+ Notably, the event is not of that much importance for the main characters or the plot: this is only one of the things Alessan’s group does in order to rouse the people against the tyrants. From Ettocio’s point of view, however, the incident ends up costing him his life. The excerpt shows that Alessan and his companions’ way of spreading rebellious spirit among the people is working, but it also reveals at what cost this happens. It is only through having the focalization follow a minor character for a while that this is possible. The main characters probably never even learn Ettocio’s name, let alone that he has lost his life because of their play-acting. Readers do, however, and are forced to realize what the actions of the main characters lead to: their intentions are unquestionably good, but does that justify the bad things that are necessary to reach their goals?
+
+ Narratorial Focalization: All-seeing but Indifferent 
+
+ Genette claims that a so-called omniscient “’viewpoint of God’” is so vague that people often “wonder whether it is indeed a point of view” ( Revisited 73). This is an understandable conclusion if focalization is defined as a restriction of information, but I believe that this notion ignores the fact that even if a narrator is omniscient, they do not have to be objective, in other words, it excludes the ideological facet of focalization. In Jahn’s model of focalization, on the other hand, a passage that would be an instance of Genette’s zero focalization can range all the way from zero to at least ambient focalization, illustrating what a multiplicity of different situations the term groups together.
+
+ Take, for example, the latter part of the excerpt on Ettocio presented in the previous section. On Jahn’s focalization scale, this excerpt falls somewhere in the vicinity of ambient focalization: it presents the event in a summary fashion and shifts flexibly between different locales and points in time: the here and now of Ettocio’s death as opposed to “across the whole of the Palm” and what has happened “by then”. But it also bears traces of an ideological viewpoint, different from that of any of the characters present: essentially in the form of the word “unfortunately” that begins the passage. From Ettocio’s perspective, the event is clearly graver than merely “unfortunate”, and it would make no sense to attribute the stance to the mercenaries either, so everything we have left is the narrator. The use of such a relatively mild word to describe the situation is related to the matter-of-fact style of the excerpt that enhances its shock effect. This exemplifies the relatively indifferent attitude the narrator often seems to have towards the characters and events. The narrator does not make strong moral judgments, denying readers the access to a guiding voice that would tell what is right or wrong. Instead, narratorial focalization often takes the form of matter-of-fact description with only minimal commentary.
+
+ Another example of this type of narratorial report of events can be found towards the end of the novel, describing the incident that finally brings about the war between Alberico and Brandin in Senzio, the last province not yet fully under either’s control. The woman mentioned in the excerpt is Catriana, a member of Alessan’s group, who has killed the representative of Alberico in Senzio while posing as a supporter of Brandin:
+
+ Then they [a group of Barbadian soldiers] went back downstairs and through the courtyard to the front gates and hacked to death the four Senzian guards who had let the woman in without a proper search. It was during this that the captain of the Castle Guard came into the courtyard with a company of Senzians. He ordered them to lay down their arms.
+
+ The Barbadians were, according to most reports later, about to do so, having achieved their immediate purposes, when two of the Senzians, enraged at the butchery of their friends, fired arrows at them. Two men fell, one instantly dead, one mortally wounded. . . . There ensued a bloody, to-the-death mêlée in the torchlit courtyard of the castle, soon slippery with blood. The Barbadians were slaughtered to the last man, taking some thirty or forty Senzians with them. (722-23)
+
+ Again a matter-of-fact style is used to describe a dramatic and violent event; the narrator is merely reporting what happened, without any commentary and in the summary fashion of ambient focalization. As with Ettocio’s death, none of the main characters are present, but this time they are going to find out afterwards what has happened. This is signalled by the phrase “according to most reports later”, which makes it clear that the events will become public knowledge. The phrase also suggests that the narrator is restricting their omniscience and narrating only what people hear about the incident afterwards, not what is actually happening. The approximate number of the dead could also point in the same direction, even though it can also be related to the narrator’s indifferent attitude towards violent events since the exact number of casualties does not seem to be of great importance. The fact that the above passage takes into account what the main characters, or people in general, will later learn about the events portrayed in it leads up to the topic of the next section: focalization with a communal viewpoint.
+
+ Communal Viewpoints: As Everyone Knows 
+
+ Many instances of narratorial focalization in the novel are characterized by the narrator assuming a viewpoint that is close to something like an everyman of the fictional world. General facts about the storyworld, and even narratorial comments, are often presented as something that “everyone knows” or as circulating rumours. The narrator seems reluctant to simply give information of the world as it is, instead reporting what the world seems like to an average person living in that world. The first chapter of Tigana (excluding the prologue) begins: “In the autumn season of the wine, word went forth from among the cypresses and olives and the laden vines of his country estate that Sandre, Duke of Astibar, once ruler of that city and its province, had drawn the last bitter breath of his exile and age and died” (11). A few chapters later it turns out that Duke Sandre is not only alive but the mastermind of a conspiracy against Alberico. Kay himself says in his afterword that he started the book with “an outright lie” (792), but that is not strictly speaking true since the narrator does not claim that Sandre is dead but states that such “word went forth”, and that is the truth: at this point everyone, including Sandre’s son, believes he is dead. Even though the sentence is not a lie, it pushes readers to believe what everyone in the novel does; there is no reason for readers to suspect Sandre’s death just as there is none for the characters. This way the trustworthiness of the heterodiegetic narrator is, at least to some extent, maintained, while purposely misleading readers. Even if the focus-1 stays with the narrator, readers are led to assume the viewpoint of “people”, the characters of the novel as an entity.
+
+ Even though the narrator in the novel is heterodiegetic and so outside the world portrayed, the narratorial perspective seems in a way to remain on the same level with the characters. The narratorial voice does not give the impression of being outside the story but inside it; the narrator describes things like an inhabitant of that world would. One of the clearest indicators of this is how the narrator adopts the religious views of the people of the Palm: “And so too, that morning, did [ended] a part of Devin’s life. For when a portal of Morian’s has been crossed there is, as everyone knows, never a turning back” (Kay 65). The excerpt has to be focalized through the narrator since it refers to the future, of which Devin naturally knows nothing. The religious stance is, however, that of a person who believes in the Triad, the group of three deities worshipped in the Palm, Morian being the goddess of thresholds and death. This comes most strongly across in the phrase “as everyone knows”: it is assumed that the sentence contains something that everybody will accept as a fact, but “everybody” does not include readers, or even all the characters within the storyworld, but only the people of the Palm: those who have been raised to believe in the Triad. Thus the narrator’s perspective concurs with that of an average citizen of the Palm, while the narrator still remains outside the story in the sense that they are omniscient and therefore able to hint at future events.
+
+ The excerpts discussed in this section so far exemplify a situation where the form of focalization leads readers to experience the world as an average inhabitant of the fictional world would, while the focus-1 still remains with the narrator. This phenomenon could be approached through Alan Palmer’s ideas, presented in his book Social Minds in the Novel, where he argues that the eponymous town in George Eliot’s Middlemarch has a mind of its own, consisting of the intermental activities of its inhabitants (48, 65). Following the idea of “the Middlemarch mind” (65), it is possible to argue that the excerpts are focalized through “the Peninsula of the Palm mind”. On the other hand, at least in the latter excerpt, the presence of the omniscient narrator is so prominent that perhaps it is wiser to speak of a hypothetical average citizen than a concrete group mind that would include all the people of such a vast area. I will now, however, move to cases where the focus-1 is clearly no longer with the narrator and the presence of a group mind is more evident. These are examples of how ambient focalization, as Jahn says, can present a communal point of view, and can also be approached through what Palmer calls intermental focalization : focalization through a group of characters that engage collectively in some kind of mental activity (84).
+
+ The following excerpt describes a reunion among the main characters of the novel in a tavern:
+
+ The enthusiasms of the reunion that ensued would have led to predictably cynical conclusions about the nature of the men involved, given the way of such things in Senzio, had the new party not included a pair of exceptionally attractive young women, . . .
+
+ A moment later another kind of reunion occurred. One with a different resonance that even stilled the excitement of the newly mingled group. Another man rose and walked diffidently over to the five people who had just arrived. Those who looked closely could see that his hands were trembling.
+
+ ‘Baerd?’ they heard him say.
+
+ There followed a moment of silence. Then the man whom he’d addressed said ‘ Naddo? ’ in a tone even the most innocent Senzian could interpret. Any lingering doubts about that were laid to rest a second later by the way the two men embraced each other.
+
+ They even wept.
+
+ More than one man, eyeing the two women with frank admiration, decided that his chances of a conversation, and who knew what else, might be better than they’d first appeared if the men were all like that. (675-76)
+
+ The passage is not focalized through any single patron in the tavern, but instead collectively through the whole group of them, thus illustrating what the scene must look like to someone who does not know what is going on. Readers, however, are at this point better informed than the patrons: Baerd and Naddo are not lovers; instead Naddo was the last apprentice of Baerd’s father. The two men have not met each other for years and their parting was less than friendly, because Baerd disapproved of Naddo’s decision to leave Tigana. However, Baerd made the same decision only a little later and has regretted his harsh treatment of Naddo ever since.
+
+ Readers know more than the focal characters and that leads to an interesting double vision of the scene. The ambient or intermental focalization allows for a sarcastic and detached view of a scene that from the main characters’ perspective would be highly emotional. Thus the passage is another example of how focalization can interrupt readers’ immersion in the main characters’ perspective, but unlike the shocking effects of Ettocio’s fate, the result is more like a comic relief. On the other hand, readers are still aware of the emotional quality of the scene and can at least make guesses at what Baerd and Naddo are experiencing. Actually, it may even be possible for readers to imagine a more touching representation of the characters’ feelings than what a narrated account of them could amount to.
+
+ The following excerpt on the aftermath of the discovered “Sandreni conspiracy”, a plot to overthrow Alberico, led by the Sandreni family, is another example of the narrator briefly adopting the viewpoint of a group of people, this time the citizens of the town of Astibar:
+
+ An immensely convenient conspiracy, all the taverns and khav rooms agreed.
+
+ And every single conspirator was dead overnight, as well. Such swift justice! Such an accumulation of evidence against them! There had been an informer among the Sandreni, it was proclaimed. He was dead. Of course. Tomasso bar Sandre had led the conspiracy, they were told. He too, most unfortunately, was dead. (300-01)
+
+ The form of this excerpt with its exclamations and incomplete sentences resembles very much that of narrated monologue (see Cohn). It is not, however, a presentation of the thoughts of any single character but the general opinion of the people of the town. Similarly with the scene of Baerd and Naddo’s reunion, a sardonic tone is combined with the deeper level irony that the wry commentators are actually wrong: there was a conspiracy, even if it was led by Sandre himself, not his son Tomasso, and readers know that by this point even though the general public of the characters does not. Irony is in fact another possible effect of the use of narrated monologue (Cohn 117), and here it combines with a kind of dramatic irony: a situation where readers know more than the characters.
+
+ To use Palmer’s terminology, both the patrons and the people of Astibar form a large intermental unit , a rather loose group that nevertheless has a “tendency to think together on certain issues and so produce a collective opinion or consensus view on a particular topic” ( Social Minds 48). The groups differ from each other in that the patrons arrive in the same conclusions independently, whereas the opinions of Astibar town are subject to open discussion. Nevertheless, both groups interpret the situation they are in according to their background information and skills of logical reasoning, and their conclusions are in accordance with them. Readers, on the other hand, are in a privileged position in comparison with the characters since they know things that are not available to the general public. In the case of both examples, a humorous effect combines with the deeper level message that things are not always what they seem and truth is not equal to general opinion.
+
+ Conclusion 
+
+ In this paper I have shown how the various forms of focalization used in Tigana contribute to the ambiguous nature of the novel and its characters. Through variable internal focalization and multiple focalization readers have access to varying viewpoints and feelings, both between and within the characters. Furthermore, some of the shifts in focalization necessitate a re-evaluation of characters or events. Using minor focal characters further adds to the number of perspectives and shows how the main characters’ lives affect and connect to the lives of the people around them. Passages using narratorial focalization are often either matter-of-fact descriptions of events or representing the worldview or level of knowledge of an average inhabitant of the storyworld. Therefore the novel has no absolute and completely trustworthy guiding voice that readers could follow in their interpretation of the events and characters. Focalization through a group of characters is used in a way that reveals how things are often open to more than one interpretation and that the truth is not always the most obvious of these.
+
+ Thus it is clear that the forms of focalization utilized in the novel are instrumental in creating and enhancing its ambiguities and divided loyalties, even though they cannot be said to be a matter of focalization only. The existence of these conflicts and uncertainties is in turn part of what makes Tigana an exceptional high fantasy novel: a story where the question of good and evil, or right and wrong, is not a simple one and there is room for readers’ own interpretations. In other words, Tigana is a book that challenges its readers to think for themselves. 
+
+ Primary Source
+
+ Kay, Guy Gavriel. Tigana . Harper Voyager, 2011.
+
+ Other Works Cited
+
+ Bal, Mieke. Narratology: Introduction to the Theory of Narrative. Translated by Christine van Boheemen, 2 nd ed., Toronto University Press, 1997.
+
+ Cohn, Dorrit. Transparent Minds: Narrative Modes for Presenting Consciousness in Fiction. Princeton University Press, 1978.
+
+ Genette, Gérard. Narrative Discourse: An Essay in Method. Translated by Jane E. Lewin, Cornell University Press, 1980.
+
+ –––. Narrative Discourse Revisited. Translated by Jane E. Lewin, Cornell University Press, 1988.
+
+ Hanna, Judith and John Clute. “Good and Evil” The Encyclopedia of Fantasy, edited by John Clute and John Grant, 2 nd ed., 1999.
+
+ Jahn, Manfred. “More Aspects of Focalization: Refinements and Applications.” G RAAT: Revue des Groupes de Recherches Anglo-Américaines de L”Université François Rabelais de Tours, vol. 21, 1999, pp. 85-110. (Available from: <http://www.uni-koeln.de/~ame02/jahn99b.htm>)
+
+ –––. “Windows of Focalization: Deconstructing and Reconstructing a Narratological Concept.” Style, vol. 30, no. 2, 1996, pp. 241-67.
+
+ Kaveney, Roz. “Dark Lord.” The Encyclopedia of Fantasy, edited by John Clute and John Grant, 2 nd ed., 1999.
+
+ Kay, Guy Gavriel. Afterword. Tigana, by Kay. Harper Voyager, 2011, pp. 789-93.
+
+ Keen, Suzanne. Empathy and the Novel. Oxford University Press, 2007.
+
+ –––. Narrative Form. Palgrave Macmillan, 2003.
+
+ Palmer, Alan. Fictional Minds. University of Nebraska Press, 2004.
+
+ –––. Social Minds in the Novel. The Ohio State University Press, 2010.
+
+ Rimmon-Kenan, Shlomith. Narrative Fiction: Contemporary Poetics. 2 nd ed. Taylor & Francis, 2005.
+
+ Sklar, Howard. The Art of Sympathy in Fiction. John Benjamins Publishing Company, 2013.
+
+ This entry was posted in Student Papers . Bookmark the permalink . 
+
+ ← Children of Earth and Sky Author Questions 
+
+ Reading Passages from Tigana → 
+
+ Comments are closed.
+
+ Powered by WordPress and Sliding Door theme.
+

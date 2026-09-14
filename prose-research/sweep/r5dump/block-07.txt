@@ -1,0 +1,349 @@
+### [460] VERIFIED_VERBATIM  {hypernormative interpretation}
+CLAIM: Claude imposed a heteronormative monogamous reading of an interaction over what the text actually says.
+SRC: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024) | https://arxiv.org/html/2403.01061
+QUOTE: assumes a heteronormative monogamous interpretation
+TRUE: Claude assumes a heteronormative monogamous interpretation of the interaction instead of what is written
+NOTE: Quote exact, Sec. 6.2, and the source sentence names Claude and carries the 'over what the text actually says' limb as 'instead of what is written'. Corroborated by a writer's comment about 'a hypernormative interpretive framework'.
+
+### [461] VERIFIED_VERBATIM  {implication read literally}
+CLAIM: An implied death was rendered as a deliberate choice to stay at the summit.
+SRC: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024) | https://arxiv.org/html/2403.01061
+QUOTE: The cold settled into me
+TRUE: The cold settled into me
+NOTE: Quote exact, Sec. 6.2, in the sentence carrying both limbs: 'The action error example in Figure 7 mistakenly states that the narrator decided to stay at the summit. However, "The cold settled into me", is meant to imply that the narrator died at the summit, which was not an action or choice.'
+
+### [462] VERIFIED_VERBATIM  {errors cluster in what characters did and felt}
+CLAIM: Most faithfulness errors fall in Action and Feeling, the categories requiring interpretation of characters' deeds and reactions.
+SRC: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024) | https://arxiv.org/html/2403.01061
+QUOTE: most faithfulness errors across the models are in Action and Feeling
+TRUE: most faithfulness errors across the models are in Action and Feeling
+NOTE: Quote exact, Sec. 6.2, immediately followed by the claim's second limb verbatim in substance: 'These errors require interpretation of what characters did and how they reacted or felt.' Arithmetic checks: Table 5 faithfulness Action 39 + Feeling 23 = 62 of 104 total.
+
+### [463] VERIFIED_VERBATIM  {unsupported analysis even in top-rated summaries}
+CLAIM: Summaries rated 4/4 for analysis still contained on average at least one analysis error (104 unsupported-analysis spans in total).
+SRC: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024) | https://arxiv.org/html/2403.01061
+QUOTE: at least one error in analysis on average
+TRUE: summaries rated 4 for analysis actually contain at least one error in analysis on average
+NOTE: Quote exact, Sec. 6.1. The '4/4' framing is correct: Sec. 5.2 states writers 'rate each of the four attributes on a Likert scale from 1 to 4', and Table 3 gives 1.22 average analysis errors at rating 4. The parenthetical checks against Table 5: Analysis/unsupported 18 + 16 + 70 = 104.
+
+### [464] VERIFIED_VERBATIM  {excellence only about half the time}
+CLAIM: GPT-4 and Claude can produce excellent literary summaries, but only about half the time.
+SRC: Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024) | https://arxiv.org/html/2403.01061
+QUOTE: excellent summaries, but only about half the time
+TRUE: GPT-4 and Claude can produce excellent summaries, but only about half the time.
+NOTE: Raw arXiv HTML (arxiv.org/html/2403.01061) reached; byline Subbiah/Chilton/McKeown confirmed. Quote is verbatim in the Introduction's key-findings list ('Our key findings are: 1.) GPT-4 and Claude can produce excellent summaries, but only about half the time.'). Every limb holds: the models evaluated are GPT-4, Claude-2.1 and Llama-2-70B on 25 unpublished short stories judged by their own authors, so 'literary summaries' is faithful to the setting.
+
+### [465] VERIFIED_VERBATIM  {default bland, elementary voice}
+CLAIM: Nearly all writers noticed a single default voice in the generations, bland and elementary in its language.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: bland and somewhat elementary in its use of language
+TRUE: Nearly all the writers noticed a 'default' voice, bland and somewhat elementary.
+NOTE: Raw arXiv HTML (2211.05030) reached; byline Ippolito/Yuan/Coenen/Burnam confirmed. Section 7.1: 'Nearly all the writers noticed that there seemed to be a “default” voice to the language model’s generations, one that was bland and somewhat elementary in its use of language.' Quote verbatim; every limb supported. The claim drops only the hedge 'somewhat'.
+
+### [466] VERIFIED_VERBATIM  {novice fan-fiction register}
+CLAIM: Several writers compared the suggestions to those of a novice fan-fiction writer, pitched at an implicit audience of internet users.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: novice fan fiction writer
+TRUE: Multiple participants compared Wordcraft's suggestions to a novice fan fiction writer.
+NOTE: Both limbs sit in adjacent sentences of Section 7.1: 'MT described this as the AI having an implicit target audience: internet users. Multiple participants compared Wordcraft’s suggestions to those of a novice fan fiction writer.' Quote verbatim. Attribution nuance worth knowing: the fan-fiction comparison is 'multiple participants' (matching 'several writers'), while the internet-users audience is one writer's (MT's) description of the same default voice; the page orders the two the other way round from the claim.
+
+### [467] VERIFIED_VERBATIM  {genre collapses to its most worn trope}
+CLAIM: The model pushed a fantasy story toward warrior-hero-versus-invaders and treated genre as its dominant trope.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: fantasy is high fantasy, science fiction is robots and spaceships
+TRUE: Wordcraft insisted on pushing the story toward a warrior hero fighting invaders.
+NOTE: Section 7.2: YW's premise deliberately made the heroes cartographers and builders rather than warriors, 'but Wordcraft insisted on pushing the story toward the well-worn trope of a warrior hero fighting back enemy invaders.' The quoted genre line follows immediately and verbatim, attributed to NG: 'For Wordcraft, “fantasy is high fantasy, science fiction is robots and spaceships”'. Both limbs supported.
+
+### [468] VERIFIED_VERBATIM  {heteronormative and male defaults}
+CLAIM: A lesbian romance kept receiving suggestions to add a male character; unspecified gender defaulted to a male voice.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: kept suggesting that she insert a male character
+TRUE: The system kept suggesting she insert a male character; unspecified gender defaulted male.
+NOTE: Section 7.2: 'NG noted the difficulty in writing a story with a lesbian romance plot–the system kept suggesting that she insert a male character or that she have the female protagonists talk about friendship. WT found that when no gender was specified, Wordcraft tended to default to a male voice.' Quote verbatim; both limbs supported, each by a named participant.
+
+### [469] VERIFIED_VERBATIM  {characters are not allowed to be mean}
+CLAIM: Safety tuning made the system reluctant to generate people doing mean things, flattening conflict.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: seemed very reluctant to generate people doing mean things
+TRUE: The software seemed very reluctant to generate people doing mean things.
+NOTE: Section 8.2: the page itself supplies the safety-tuning causation — LaMDA was finetuned on data 'labeled by human annotators as safe and sensible', and 'This intentional biasing is a strength in some respects… but it can also be limiting. For example, MT found that “the software seemed very reluctant to generate people doing mean things”'. Quote verbatim. The 'flattening conflict' limb is the paper's own consequence in its wording: 'a literary world where no character is ever mean is unlikely to be a very interesting one.'
+
+### [470] VERIFIED_VERBATIM  {exemplar names leak into every story}
+CLAIM: Prompt exemplars containing 'Sarah' caused the system to try inserting a Sarah into every participant's story.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: into every single participant’s story
+TRUE: Wordcraft attempted to insert a character named 'Sarah' into every participant's story.
+NOTE: Section 7.3: 'several of Wordcraft’s controls were implemented with exemplars that contained the name “Sarah.” This had the unintended consequence that Wordcraft attempted to insert a character named “Sarah” into every single participant’s story.' Quote verbatim including the curly apostrophe; both limbs (exemplar cause, universal effect) supported.
+
+### [471] VERIFIED_VERBATIM  {shallow memory of the story}
+CLAIM: All participants complained that the model's understanding of their story was superficial, worsening with length.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: understanding seemed superficial if not entirely absent
+TRUE: All participants complained the model's understanding seemed superficial if not absent.
+NOTE: Section 7.5 ('Model’s Natural Language Understanding is Superficial and Insufficient'): 'All participants complained that the language model’s understanding seemed superficial if not entirely absent.' Quote verbatim. The length limb is supported two sentences later: 'This problem got worse, the longer the story,' with the 1024-token LaMDA sequence limit given as the technical cause.
+
+### [473] VERIFIED_VERBATIM  {reversion to trope and repetition}
+CLAIM: Suggestions slid easily back into tropes and repetition, a named system limitation.
+SRC: Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022) | https://arxiv.org/html/2211.05030
+QUOTE: Suggestions too Easily Revert to Tropes and Repetition
+TRUE: Section 7.2 heading: 'Suggestions too Easily Revert to Tropes and Repetition'.
+NOTE: The quote is verbatim as the title of Section 7.2, inside the paper's numbered list '7 System Limitations Experienced by Participants' — which supports the claim's 'a named system limitation' limb precisely: it is a named subsection of the limitations section, not an incidental remark.
+
+### [474] VERIFIED_VERBATIM  {one narrative in many skins}
+CLAIM: Writers reported the model writing the same story over and over with a new surface, regardless of prompt.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: writes exactly the same story over and over again
+TRUE: It writes exactly the same story over and over with a new skin on it.
+NOTE: Raw arXiv HTML (2309.12570) reached; byline Chakrabarty/Padmakumar/Brahman/Muresan confirmed. Table 8 (participant feedback on AI weaknesses), SH: 'It feels oftentimes as if it writes exactly the same story over and over again with a new skin on it, rather than even generating a different feeling arc given even vastly different prompts. It has one narrative that it knows how to write, and that’s all it does.' Quote verbatim; 'new surface' = 'new skin', 'regardless of prompt' = 'given even vastly different prompts'. The plural 'writers' is carried by neighbouring entries in the same table (ATK on redoing rather than building, NM on paragraphs that 'always feel similar').
+
+### [475] VERIFIED_VERBATIM  {most-obvious autocomplete}
+CLAIM: The system autocompletes toward the most obvious version of any request, the opposite of good fiction.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: autocompletes with the most obvious version of whatever you ask for
+TRUE: It effectively autocompletes with the most obvious version of whatever you ask for.
+NOTE: Table 8, MC: 'A teacher once told me that the best fiction writing is the opposite of autocomplete - this system, on the other hand, effectively autocompletes with the most obvious version of whatever you ask for.' Quote verbatim; the claim's 'the opposite of good fiction' limb is the page's own antecedent clause about the best fiction writing.
+
+### [476] VERIFIED_VERBATIM  {telling over showing}
+CLAIM: The model tells rather than shows and cannot write real scenes with realistic dialogue and detail.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: much better at telling than showing
+TRUE: It is much better at telling than showing — reversing the writing maxim.
+NOTE: Table 8, MC: 'It still relies on cliches, and it is much better at telling than showing - reversing the writing maxim. It can’t effectively write real scenes with realistic dialogue and details, but can generate general sketches based on well-known tropes.' Quote verbatim; both limbs supported nearly word for word (the claim's 'cannot' compresses the page's 'can’t effectively').
+
+### [477] VERIFIED_VERBATIM  {moralising, didactic endings}
+CLAIM: Every ending arrived as a stated lesson, uplifting and didactic whether or not the story wanted it.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: Here is the lesson learnt
+TRUE: All the endings were 'Here is the lesson learnt'; uplifting and didactic.
+NOTE: Table 8, under 'Overly Moralistic and Predictable Endings', MG: 'It seems that the ChatGPT is very moralistic - all the endings it gave me are all very much “Here is the lesson learnt”.ChatGPT seems very into being uplifting and didactic to the audience and not every short story wants to do that'. Quote verbatim. Every limb holds, including the universal 'Every ending' (page: 'all the endings it gave me') and 'whether or not the story wanted it' (page: 'not every short story wants to do that').
+
+### [478] VERIFIED_VERBATIM  {binary tone; no nuance between happy and fatalistic}
+CLAIM: The model resists ambiguity and treats any story that is neither happy nor wholly fatalistic as flawed.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: The story must be either happy or entirely fatalistic
+TRUE: Unwillingness to accept nuance; anything that strays is a flaw.
+NOTE: Table 8, under 'Lack of Nuance Subtext or Symbolism', SH: 'Its unwillingness to accept nuance. The story must be either happy or entirely fatalistic and the model finds that anything that strays is a flaw in the work.' Quote verbatim; 'resists ambiguity' = 'unwillingness to accept nuance', and the treats-as-flawed limb is the page's own trailing clause.
+
+### [479] VERIFIED_VERBATIM  {homogenising toward dominant narratives}
+CLAIM: Writers saw a violent homogenising pull toward the narratives of dominant powers and voices.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: a weird and violent kind of homogenizing
+TRUE: “a weird and violent kind of homogenizing that steer toward the narratives of dominant powers, voices, and stories”
+NOTE: Quote verbatim in Sec. 6.5 weakness table (theme ‘Reliance on Cliches and Tropes’). The ‘dominant powers, voices’ framing is participant FV’s alone; the plural ‘writers’ holds for the homogenising/generic pull, which NM (‘cliched conception of literature’, ‘generic… essay-like texts’), SH (‘one narrative that it knows how to write’) and MC (‘autocompletes with the most obvious version’) also report. Cite FV by name for the dominant-powers wording.
+
+### [481] VERIFIED_VERBATIM  {style mimicry is shallow imitation}
+CLAIM: Asked to mimic an author, the model produced a campy facsimile rather than the author's actual wit.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: less ‘artificial intelligence’ and more ‘automatic imitation’
+TRUE: MG: “less ‘artificial intelligence’ and more ‘automatic imitation’ … a shallow campy weird facsimile of Rupert’s style”
+NOTE: Quote verbatim in Sec. 6.6. Every limb holds: asked to mimic a writer’s style (Rupert Everett), the model produced ‘a shallow campy weird facsimile’ instead of the author’s actual wit — the page calls Everett’s writing ‘delightfully cleverly bitchy and hilarious’, which the model ‘couldn’t do’. Single participant (MG), and the claim already says ‘the model’, not ‘writers’.
+
+### [482] VERIFIED_VERBATIM  {derivative plotting shaped by alignment}
+CLAIM: Plot instincts were boring or carried a particular ethical perspective the writers attributed to alignment.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: The AI’s creative impulses are the definition of derivative
+TRUE: ES: “The AI’s creative impulses are the definition of derivative, meaning the instincts on plotting are often boring, or interestingly embedded with a particular ethical perspective (alignment).”
+NOTE: Quote verbatim; both limbs (boring plot instincts; ethical perspective ascribed to alignment) sit in the same sentence, with ‘(alignment)’ written by the participant. The authors endorse the attribution in their own voice nearby (‘potentially an artifact of aligning models via RLHF’; Ippolito et al. 2022 on alignment training being in conflict). Named source is ES; other writers (Anon, SH, MG) report the moralising sibling of the same effect.
+
+### [483] VERIFIED_VERBATIM  {formulaic and too literal}
+CLAIM: Dialogue and description came out formulaic and the model read craft too literally.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: is too literal
+TRUE: Anon: craft “is too literal”; NM: “dialogue and description that is very formulaic”
+NOTE: The quoted fragment ‘is too literal’ appears verbatim (Anon, on characterization and plot). The other limb is verbatim too, from NM in the same table: ‘will produce dialogue and description that is very formulaic’; MC adds it ‘can’t effectively write real scenes with realistic dialogue and details’. Both limbs supported, by two different participants.
+
+### [484] VERIFIED_VERBATIM  {writer fights the tool}
+CLAIM: One writer described the session as fighting the model to get what they wanted rather than being helped.
+SRC: Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023) | https://arxiv.org/html/2309.12570
+QUOTE: fighting against the AI to produce what I wanted
+TRUE: NM: “It mostly felt as though I was fighting against the AI to produce what I wanted, instead of the AI helping me.”
+NOTE: Quote verbatim, appearing twice (Sec. 6.4 and the frustration discussion). ‘One writer’ is exactly right — the page attributes it to NM — and ‘rather than being helped’ is the sentence’s own second half.
+
+### [485] VERIFIED_VERBATIM  {Western default suggestions}
+CLAIM: The first suggested food was always pizza or sushi and the first festival invariably Christmas, for Indian writers too.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: always pizza or sushi
+TRUE: “the first suggested food item was always pizza or sushi, and the first suggested festival was invariably Christmas”
+NOTE: Quote ‘always pizza or sushi’ word-for-word (Sec. 4.4.2 and again in 4.4.3), with ‘invariably’ the page’s own adverb for Christmas. The ‘for Indian writers too’ limb is supported: the suggestions were the same for both cohorts, and the page tracks the consequence for Indians specifically — no Indian chose sushi without AI yet it appeared in three AI-condition essays, and Christmas rose above the 12.5% (3/24) No-AI baseline.
+
+### [486] VERIFIED_VERBATIM  {Western gaze on the writer's own culture}
+CLAIM: With suggestions on, Indians described their own food and festivals from a Western, exoticising gaze.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: describe their own food and festivals from a Western gaze
+TRUE: “with AI suggestions, Indians lose cultural nuance and describe their own food and festivals from a Western gaze”
+NOTE: Quote verbatim in the introduction. The ‘exoticising’ limb is separately supported in Sec. 4.4.1: AI phrasing ‘subtly exoticizing Indian food’, with exoticization, misrepresentation and Western gaze coded as analysis dimensions (Table 5, after Qadri et al. 2023).
+
+### [487] VERIFIED_VERBATIM  {cross-cultural convergence}
+CLAIM: Indian–American essay similarity rose from 0.48 to 0.54 and nationality-prediction accuracy fell from 90.6% to 83.5% with AI.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: rose to 0.54
+TRUE: similarity 0.48 (SD=0.11) → 0.54 (SD=0.13); classifier accuracy 90.6% → 83.5%
+NOTE: Both figures verbatim and both limbs exact: ‘without AI, the mean similarity between Indians and Americans was 0.48… with AI, the similarity score rose to 0.54’ (t(6958)=-17.89, p<0.001); ‘the accuracy decreased by 7.1 percentage points, from 90.6% in the No AI condition to 83.5% in the AI condition’ (t(38)=2.25, p=0.03). The second figure is nationality-prediction (classifier) accuracy, as the claim says.
+
+### [488] VERIFIED_VERBATIM  {specific detail replaced by generic tropes}
+CLAIM: Regional preparation details gave way to 'rich', 'flavorful', 'aromatic' phrasing that subtly exoticised the dish.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: subtly exoticizing Indian food
+TRUE: essays with AI “frequently used cultural tropes like ‘rich’, ‘flavorful’, and ‘aromatic’, subtly exoticizing Indian food”
+NOTE: Quote verbatim; the displaced detail limb is the same sentence’s first half — No-AI participants ‘described specific regional variations and accompaniments’ (Table 5 gives ‘dates chutney’ as the concrete instance) and AI essays ‘did not contain such details’. Dish in question is Biryani.
+
+### [489] VERIFIED_VERBATIM  {extra editing burden on non-Western writers}
+CLAIM: Indians modified suggestions in 63.5% of tasks versus 59.4% for Americans and gained less per suggestion.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: Indians lose cultural nuance
+TRUE: “Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American participants modified suggestions in 59.4%”
+NOTE: Both statistics exact (t(198)=6.48, p<0.001, Cohen’s d=0.91), and the second limb is confirmed in Sec. 4.1.3: ‘Indians derived significantly less productivity per suggestion compared to Americans’ (U=5424.0, p<0.001), ‘Americans derived more productivity from each suggestion’. The supplied quote ‘Indians lose cultural nuance’ is verbatim on the page but comes from the introduction’s cultural-gaze sentence, not from the passage carrying these numbers — re-quote from Sec. 4.1.2/4.1.3 if the quotation must sit with the figures.
+
+### [490] VERIFIED_VERBATIM  {Western public figures suggested}
+CLAIM: Initial celebrity suggestions for Indian writers were almost exclusively Western figures and never matched the final choice.
+SRC: Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025) | https://arxiv.org/html/2409.11360
+QUOTE: almost exclusively Western figures
+TRUE: “no instance where the first suggested celebrity matched the one ultimately included… the initial suggestions were almost exclusively Western figures (with one exception)”
+NOTE: Quote verbatim. Both limbs supported for Indian participants; note the page’s parenthetical ‘(with one exception)’, which the claim’s ‘almost exclusively’ already accommodates, while ‘never matched the final choice’ is the page’s stronger ‘no instance’.
+
+### [491] VERIFIED_VERBATIM  {a single default poetic mode}
+CLAIM: GPT poetry is far more constrained and uniform than human poetry, defaulting to rhymed iambic quatrains.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: much more constrained and uniform than human poetry
+TRUE: “GPT poetry is much more constrained and uniform than human poetry, showing a strong penchant for rhyme, quatrains… iambic meter”
+NOTE: Quote verbatim in both the abstract and Sec. 1. The ‘default rhymed iambic quatrains’ limb is the paper’s own conclusion: ‘there is a sort of default poetic mode in GPT models, which favors quatrains, iambic meter, and end rhyme.’
+
+### [492] VERIFIED_VERBATIM  {quatrain dominance}
+CLAIM: 66.8% of GPT-3.5 and 59.6% of GPT-4 stanzas are quatrains against 16.7% of human stanzas.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: a whopping 66.8% of all GPT-3.5 stanzas
+TRUE: “just 16.7% of the human-authored stanzas are quatrains, a whopping 66.8% of all GPT-3.5 stanzas and 59.6% of all GPT-4 stanzas”
+NOTE: Quote verbatim; all three percentages exact and stanza-level, matching Table 3 (3,014/18,052 human; 16,089/24,093 GPT-3.5; 13,303/22,305 GPT-4). Human corpus is Poetry Foundation + Academy of American Poets.
+
+### [493] VERIFIED_VERBATIM  {rhyme even where the form does not ask for it}
+CLAIM: About 90% of GPT poems rhyme versus 65% of human poems, including forms like aubade and pastoral.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: Around 90% of the poems generated by both
+TRUE: “Around 90% of the poems generated by both… contained at least one end rhyme, compared to around 65% of our human-authored corpus”
+NOTE: Quote verbatim; both percentages exact (measured as at least one AA/ABAB/ABBA/ABCB end rhyme via the CMU Pronouncing Dictionary). The aubade/pastoral limb is the next sentence: for those unfixed forms, ‘which do not typically require specific patterns of rhyme’, the models ‘always produced poems with at least one end rhyme’.
+
+### [494] VERIFIED_VERBATIM  {iambic default}
+CLAIM: Over 60% of GPT poems carry a dominant iambic meter against under 40% of human poems.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: had a dominant iambic meter
+TRUE: Over 60% GPT iambic-dominant versus just under 40% human.
+NOTE: Sec 4.4 raw HTML: 'Over 60% of the GPT-authored poems had a dominant iambic meter, compared to just under 40% of poems from the human corpus.' Both limbs exact. Paper adds a split the claim omits: GPT-4 ~53% vs GPT-3.5 ~74%.
+
+### [495] VERIFIED_VERBATIM  {first-person plural 'we/us/our'}
+CLAIM: GPT poems over-use first-person plural and under-use first-person singular relative to human poets.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: curiously dominant first-person plural perspective
+TRUE: GPT uses more first-person plural, fewer singular, than humans.
+NOTE: Sec 4.2: 'poems produced by GPT-3.5 and GPT-4 tend to use more first-person plural pronouns ("we," "us," "our") and fewer first-person singular pronouns'. Quote 'curiously dominant first-person plural perspective' verbatim in Sec 1.
+
+### [496] VERIFIED_VERBATIM  {signature vocabulary (echo, whisper, embrace, grace, heart)}
+CLAIM: Echo or whisper appears in 75% of GPT-4 poems; embrace/grace/dance/dreams in 87% of GPT-3.5 poems.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: either “echo” or “whisper” shows up in 75% of the poems
+TRUE: Echo/whisper 75% of GPT-4; four GPT-3.5 words 87%.
+NOTE: Sec 4.3: 'At least one of these words shows up in 87% of the GPT-3.5 poems. For GPT-4, either "echo" or "whisper" shows up in 75% of the poems.' The 87% is 'at least one of' embrace/grace/dance/dreams, as the claim implies.
+
+### [497] VERIFIED_VERBATIM  {stock iambic openers ('In', 'Upon', 'Beneath')}
+CLAIM: The most distinctive opening word is 'In', with 'Upon', 'Beneath', 'Behold' seeding iambic lines in GPT-4.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: The most distinctive opening word
+TRUE: Most distinctive opening word is 'In'; 'Upon' initiates iambic meter.
+NOTE: Sec 4.3: 'The most distinctive opening word in both the GPT-3.5- and GPT-4 generated poems is "In"'; 'Upon' is 'a frequent way for the model to initiate iambic meter', and 'beneath', 'behold', 'within' are named as further iambic first words.
+
+### [498] VERIFIED_VERBATIM  {does not know when to stop}
+CLAIM: Limericks and sonnets get bundled in multiples (median limerick 25 lines) because the model does not stop.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: don’t know when to stop
+TRUE: Median limerick 25 lines; models bundle multiple poems together.
+NOTE: Sec 4.1: 'the median length for both GPT models is 25 lines... both models frequently bundle multiple, appropriately-lengthed limericks together. This is also the case for GPT-3.5's atypically long sonnets'. Two softenings: the sonnet bundling is stated for GPT-3.5 only, and the causal reading is hedged ('we think this tendency more likely suggests').
+
+### [499] VERIFIED_VERBATIM  {default breaks through contrary prompts}
+CLAIM: Even when prompted for other forms the iambic/quatrain/end-rhyme default resurfaces.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: the persistent iambic/quatrain/end rhyme style still breaks through
+TRUE: Default quatrain/iambic/end-rhyme mode resurfaces despite contrary prompts.
+NOTE: Sec 5: 'The models can be prompted to produce writing in other styles, but sometimes the persistent iambic/quatrain/end rhyme style still breaks through', with the limerick-as-five-quatrains example following.
+
+### [500] VERIFIED_VERBATIM  {'we' as trained inclusivity}
+CLAIM: The authors attribute the plural voice partly to pre-programmed inclusivity and the model's lack of first-person experience.
+SRC: Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122) | https://arxiv.org/html/2410.15299
+QUOTE: pre-programmed attitudes toward inclusivity
+TRUE: May reflect pre-programmed inclusivity and lack of singular experience.
+NOTE: Sec 4.2: 'We think this pattern may reflect the models' pre-programmed attitudes toward inclusivity, as well as its obvious lack of first-person singular experiences, but more work is needed'. The claim's 'partly' matches the paper's hedge.
+
+### [502] VERIFIED_VERBATIM  {canon memorised}
+CLAIM: 41% of the benchmark poems are memorised by GPT-4, and memorisation may inflate form recognition.
+SRC: Walsh, Preus, Antoniak — 'Sonnet or Not, Bot? Poetry Evaluation for Large Models and Datasets' (Findings of EMNLP 2024) | https://arxiv.org/html/2406.18906
+QUOTE: 41% of poems are memorized by GPT-4
+TRUE: 41% memorized by GPT-4; memorization may enhance form classification.
+NOTE: Sec 4.3: 'We find that 41% of poems are memorized by GPT-4' (of the 1.4k-poem benchmark). Sec 6.3: 'This suggests that memorization of a poem may enhance its form classification' - though the same section calls the impact 'unclear' and the abstract calls results 'inconclusive', which the claim's 'may' preserves.
+
+### [503] VERIFIED_VERBATIM  {repetition-based forms confused}
+CLAIM: Models handle whole-line repetition (pantoum) better than word-level repetition (ghazal).
+SRC: Walsh, Preus, Antoniak — 'Sonnet or Not, Bot? Poetry Evaluation for Large Models and Datasets' (Findings of EMNLP 2024) | https://arxiv.org/html/2406.18906
+QUOTE: pantoums than ghazals
+TRUE: Models do better with pantoums than ghazals; whole lines repeat.
+NOTE: Sec 7.1: 'the models do better with pantoums than ghazals even though both hinge on repetition... pantoums contain repetition of entire lines while ghazals contain repetition of a single endword'.
+
+### [504] VERIFIED_VERBATIM  {genre-specific error signature}
+CLAIM: Generated stories draw 'irrelevant' flags, news 'generic', recipes 'common sense' — the failure mode follows the genre.
+SRC: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023) | https://arxiv.org/abs/2212.12672
+QUOTE: more “irrelevant” errors on stories
+TRUE: GPT-2 XL: common_sense on recipes, irrelevant on stories, generic on news.
+NOTE: Figure 6 caption (arXiv PDF, p.5): 'GPT-2 XL tends to make more "common_sense" errors on recipes, more "irrelevant" errors on stories, and more "generic" errors on news. This is consistent with our intuition about what makes each of these domains challenging.' The 'flags' are reader-selected reasons; the model is GPT-2 XL at p=0.4.
+
+### [505] VERIFIED_VERBATIM  {grammar is the least reliable tell}
+CLAIM: Readers who flag grammar are least often right; common-sense, irrelevance and contradiction are the reliable cues.
+SRC: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023) | https://arxiv.org/abs/2212.12672
+QUOTE: conditioning on bad grammar is by far the least reliable way
+TRUE: Bad grammar least reliable; common_sense/irrelevant/contradicts_sentence most reliable.
+NOTE: Sec 4: 'we see that conditioning on bad grammar is by far the least reliable way to detect generated text with a mean score of 1.78... the three most common reasons given ("common_sense," "irrelevant," and "contradicts_sentence") were also the three most reliable.' Table 2 ranks grammar last (1.780).
+
+### [506] VERIFIED_VERBATIM  {the human-to-machine boundary is hard to see}
+CLAIM: Annotators found the exact transition sentence only 23.4% of the time (chance 10%).
+SRC: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023) | https://arxiv.org/abs/2212.12672
+QUOTE: correctly selecting the boundary sentence 23.4% of the time
+TRUE: Players selected the boundary sentence 23.4% of time, chance 10%.
+NOTE: Sec 4: 'players were significantly better than random chance at the boundary detection task, correctly selecting the boundary sentence 23.4% of the time (chance being 10%).' The paper frames 23.4% as above chance rather than as 'only'.
+
+### [507] VERIFIED_VERBATIM  {diversity trades against quality}
+CLAIM: Pure random sampling was easiest to catch, confirming models cannot match human diversity without noise.
+SRC: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023) | https://arxiv.org/abs/2212.12672
+QUOTE: LMs struggle to generate high-quality text with similar diversity
+TRUE: Players significantly better at p=1.0; LMs struggle with diverse high-quality text.
+NOTE: Sec 5: 'players were significantly better at p=1.0 (pure random sampling) than the lower values, validating claims from earlier papers that LMs struggle to generate high-quality text with similar diversity to human-written text.' Comparison run on News and Stories with GPT-2 XL; the paper credits earlier papers for the diversity claim.
+
+### [508] VERIFIED_VERBATIM  {detection is a trainable skill}
+CLAIM: Incentivised, instructed annotators improved over time; reading the guide was the strongest predictor of skill.
+SRC: Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023) | https://arxiv.org/abs/2212.12672
+QUOTE: detection is a skill and that annotators can be trained
+TRUE: Incentivised group improved; reading the help guide predicted skill best.
+NOTE: Sec 4: 'detection is a skill and that annotators can be trained to do well on the detection task'; Figure 3: Group B, 'given extra instruction and incentives, improved over time' while Group A did not; Sec 4/Appendix: 'the most impactful feature for predicting annotator skill was whether or not they read our provided help guide.'
+
+### [510] VERIFIED_VERBATIM  {decoding tuned to fool humans, not to write well}
+CLAIM: Truncated sampling optimises for fooling readers while introducing statistical anomalies machines catch.
+SRC: Ippolito, Duckworth, Callison-Burch, Eck — 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020) | https://aclanthology.org/2020.acl-main.164/
+QUOTE: improvements in decoding methods have primarily optimized for fooling humans
+TRUE: improvements in decoding methods have primarily optimized for fooling humans
+NOTE: Abstract, verbatim, followed immediately by "This comes at the expense of introducing statistical abnormalities that make detection easy for automatic systems." The "improvements" benchmarked are the truncation strategies (top-k, nucleus) against untruncated random sampling, so the "truncated sampling" limb is the paper's own framing. Raw PDF read (aclanthology.org/2020.acl-main.164.pdf, 15pp).
+
+### [511] VERIFIED_VERBATIM  {humans catch semantic errors, machines catch statistics}
+CLAIM: Humans notice contradictions and nonsense; discriminators notice unigram-distribution artefacts.
+SRC: Ippolito, Duckworth, Callison-Burch, Eck — 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020) | https://aclanthology.org/2020.acl-main.164/
+QUOTE: humans more easily noticing semantic errors
+TRUE: humans more easily noticing semantic errors and discriminators picking up on statistical artifacts
+NOTE: Quote verbatim (§1 Introduction). "Contradictions and nonsense" limb supported: "choosing one of these words can lead to odd or contradictory phrases and semantic errors. Humans are quick to notice these types of errors." "Unigram-distribution" limb supported by the abstract ("when a decoding strategy severely modifies the unigram token distribution, as top-k does") and §7 ("[the distribu]tion over unigrams strongly diverges from human-written texts–an easy feature for discriminators to exploit").
+
+### [512] VERIFIED_VERBATIM  {no dips into low-probability language}
+CLAIM: Human writing dips in and out of low-probability zones; generation cannot mimic that cadence without bad word choices.
+SRC: Ippolito, Duckworth, Callison-Burch, Eck — 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020) | https://aclanthology.org/2020.acl-main.164/
+QUOTE: dips in and out of low probability zones
+TRUE: human language ... dips in and out of low probability zones
+NOTE: Quote verbatim. Second limb verbatim too: "Today's generation systems have not yet solved the problem of mimicking the human cadence without introducing poor word choices that are easy for humans to detect." Note for citation hygiene: on the page the low-probability-zone observation is credited to Holtzman et al. (2020), restated by Ippolito et al.; the claim does not assert originality, so this does not reduce the grade.
+
+### [513] VERIFIED_VERBATIM  {fluency masks emptiness}
+CLAIM: Fluent generated excerpts fooled raters who could otherwise catch topic drift and falsehoods.
+SRC: Ippolito, Duckworth, Callison-Burch, Eck — 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020) | https://aclanthology.org/2020.acl-main.164/
+QUOTE: the high level of fluency left human raters fooled
+TRUE: the high level of fluency left human raters fooled
+NOTE: Quote verbatim (§8, discussion of Table 4). The "otherwise catch topic drift and falsehoods" limb is the immediately preceding sentence: "In the middle two examples, topic drift and falsehoods such as Atlanta being the 'information hub of the nation's capital' allowed humans to correctly detect the generated content."

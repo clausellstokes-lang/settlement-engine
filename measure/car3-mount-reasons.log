@@ -1,0 +1,14 @@
+defense.criminalStructure      DS-DEF-4   pools   9 · firing on the RATE grid   0 · unmounted-block? false
+economics.tradeFlow            DS-ECO-3   pools   5 · firing on the RATE grid   0 · unmounted-block? false
+faith.creedStanding            DS-FTH-3   pools  25 · firing on the RATE grid   0 · unmounted-block? false
+faith.nicheRow                 DS-FTH-3   pools  25 · firing on the RATE grid   0 · unmounted-block? false
+faith.patronSeat               DS-FTH-1   pools  21 · firing on the RATE grid   0 · unmounted-block? false
+overview.populationDirection   DS-POP-3   pools   5 · firing on the RATE grid   0 · unmounted-block? false
+overview.steadings             DS-GEN-8   pools   6 · firing on the RATE grid   0 · unmounted-block? false
+overview.stressorLifecycle     DS-STR-2   pools  32 · firing on the RATE grid   0 · unmounted-block? false
+plot_hooks.framing             DS-HK-1    pools  11 · firing on the RATE grid   0 · unmounted-block? false
+power.factionLadder            DS-POW-3   pools   5 · firing on the RATE grid   0 · unmounted-block? false
+relationships.network          DS-REL-1   pools  10 · firing on the RATE grid   0 · unmounted-block? false
+war.dormantNote                DS-WAR-3   pools   1 · firing on the RATE grid   0 · unmounted-block? false
+war.standing                   DS-WAR-1   pools  21 · firing on the RATE grid   0 · unmounted-block? false
+war.treaties                   DS-WAR-2   pools  28 · firing on the RATE grid   0 · unmounted-block? false

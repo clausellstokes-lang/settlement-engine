@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 132,
+ "firstTs": "2026-09-12T05:59:30.278Z",
+ "lastTs": "2026-09-12T06:06:12.313Z",
+ "tools": {
+  "Bash": 30,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": " are the live line and this `JUDGMENT.md` is evidence for the REFUTER COMPARISON car — two Opus judge seats over identical verdicts agreeing on 27 of 31 reverts and differing on 4 in each direction, which is a sharper measurement of judge variance than the counts alone (both reported 31/99) suggest.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a9743fd38d4080c20",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a9743fd38d4080c20.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

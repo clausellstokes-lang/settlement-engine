@@ -1,0 +1,604 @@
+{
+ "name": "leguin",
+ "writtenAt": "Mon Sep  7 04:46:54 EDT 2026",
+ "critic": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/prose-research/sweep/critic-leguin.md (third critic pass, rung 9 verify-only completion, mtime 2026-09-07 04:36 EDT)",
+ "rows": [
+  {
+   "index": 384,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): Slusser — \"Le Guin gives us precise prose rhythms.\" (verify-only)"
+  },
+  {
+   "index": 389,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Jameson, the world-reduction thesis — \"the most-cited academic account of her method\", absent from the section; §4 names it the second source for the leaving-out limb (verify-only)"
+  },
+  {
+   "index": 390,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Jameson, the world-reduction thesis — \"the most-cited academic account of her method\", absent from the section; §4 names it the second source for the leaving-out limb (verify-only)"
+  },
+  {
+   "index": 392,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Jameson, the world-reduction thesis — \"the most-cited academic account of her method\", absent from the section; §4 names it the second source for the leaving-out limb (verify-only)"
+  },
+  {
+   "index": 453,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10: Erlich, §4 second source — \"a significant gap to be left or filled in by readers\" (verify-only)"
+  },
+  {
+   "index": 468,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): named by §8 among the plainness/diction rows the section needs (verify-only)"
+  },
+  {
+   "index": 469,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): Kelso (verify-only)"
+  },
+  {
+   "index": 470,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): Kelso (verify-only)"
+  },
+  {
+   "index": 471,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 472,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): Kelso (verify-only)"
+  },
+  {
+   "index": 476,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 478,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): §4 makes it the second row for the dragon's wingbeats, the same Kelso relay as [55]; the essay is in the Wave PDF already on disk (verify-only)"
+  },
+  {
+   "index": 479,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 516,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 517,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 518,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 520,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 522,
+   "feature": "15",
+   "why": "critic §8 F15 (length): named by §8 among the length rows the section needs (verify-only)"
+  },
+  {
+   "index": 523,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 524,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 526,
+   "feature": "25",
+   "why": "critic §8 F25 (telling): \"Giving information indirectly, by hint and suggestion, can be fun to write.\" (verify-only)"
+  },
+  {
+   "index": 529,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 530,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 533,
+   "feature": "15",
+   "why": "critic §8 F15 (length): \"There are no rules concerning sentence length.\" (verify-only)"
+  },
+  {
+   "index": 534,
+   "feature": "15",
+   "why": "critic §8 F15 (length): named by §8 among the length rows the section needs (verify-only)"
+  },
+  {
+   "index": 536,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): named by §8 among the sound rows the section needs (verify-only)"
+  },
+  {
+   "index": 537,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 542,
+   "feature": "19",
+   "why": "critic §8 F19 (point of view): Roberts (verify-only)"
+  },
+  {
+   "index": 548,
+   "feature": "22",
+   "why": "critic §8 F22 (names): Roberts — \"three names covering three of the four elements\", §4 second source (verify-only)"
+  },
+  {
+   "index": 551,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): Guynes, §4 second source (verify-only)"
+  },
+  {
+   "index": 552,
+   "feature": "8",
+   "why": "critic §8 F8 (detail): Guynes — \"her sentences luxuriate in the plainclothes description of thistle and juniper\", the close-2 finder's own top find, §4 second source (verify-only)"
+  },
+  {
+   "index": 561,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 562,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 563,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 564,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 566,
+   "feature": "22",
+   "why": "critic §8 F22 (names): Steering ch. 1 — \"the echo-allusions hidden in them, can be intensely expressive\", §4 second source for magic as names with rules (verify-only)"
+  },
+  {
+   "index": 567,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 575,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 576,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 577,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10: Burt; §4 names [577] and [579] as second sources for the leaving-out as a method (verify-only)"
+  },
+  {
+   "index": 578,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 579,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10: Burt; §4 names [577] and [579] as second sources for the leaving-out as a method (verify-only)"
+  },
+  {
+   "index": 580,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10: Burt; §4 names [577] and [579] as second sources for the leaving-out as a method (verify-only)"
+  },
+  {
+   "index": 582,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 583,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 584,
+   "feature": "11/23",
+   "why": "critic §8 F11/F23 (register, scale): Ramsay — \"the reassuring sense of fable which pervades\"; §4 records it as adjacent to the domestic-register limb, not a cure (verify-only)"
+  },
+  {
+   "index": 587,
+   "feature": "18",
+   "why": "critic §8 F18 (repetition): Amenta (verify-only)"
+  },
+  {
+   "index": 605,
+   "feature": "8",
+   "why": "critic §8 F8 (detail): named by §8 among the rows the detail feature needs (verify-only)"
+  },
+  {
+   "index": 607,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 608,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 613,
+   "feature": "17",
+   "why": "critic §8 F17 (modifiers): Mohanraj quoting 'Is Gender Necessary? Redux' — \"Strike the word 'probably' and replace it with 'certainly.'\", her own recorded self-revision of a hedging adverb; §4 second source (verify-only)"
+  },
+  {
+   "index": 614,
+   "feature": "20",
+   "why": "critic §8 F20 (place): named by §8 among the place rows the section needs (verify-only)"
+  },
+  {
+   "index": 615,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): named by §8 among the plainness/diction rows the section needs (verify-only)"
+  },
+  {
+   "index": 616,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): named by §8 among the plainness/diction rows the section needs (verify-only)"
+  },
+  {
+   "index": 618,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 619,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 621,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 622,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 624,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): the [624]/[894] pair named by §8 (verify-only)"
+  },
+  {
+   "index": 626,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): §4 second source for plainness as her own late practice (verify-only)"
+  },
+  {
+   "index": 641,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): Bittner — \"The very word tale has an archaic, distant tone\" (verify-only)"
+  },
+  {
+   "index": 646,
+   "feature": "17",
+   "why": "critic §8 F17 (modifiers): Bittner, §4 second source for modifiers rationed (verify-only)"
+  },
+  {
+   "index": 650,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): the Bloom-volume essay — \"a skillful use of cadence and sound patterns\", §4 second source for F26 sound patterning beyond alliteration (verify-only)"
+  },
+  {
+   "index": 663,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): Cadden — \"Leese Webster is very spare\", §4 second source (verify-only)"
+  },
+  {
+   "index": 664,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): her own answer to Cadden — \"It's austere\", §4 second source (verify-only)"
+  },
+  {
+   "index": 667,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): Olander — \"strong colors and plain fabrics\", §4 second source (verify-only)"
+  },
+  {
+   "index": 669,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): named by §8 among the plainness/diction rows the section needs (verify-only)"
+  },
+  {
+   "index": 675,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10: Spivack, §4 second source — \"richly suggestive, leaving much unsaid\" (verify-only)"
+  },
+  {
+   "index": 680,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 681,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 682,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 688,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 689,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 690,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 692,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 693,
+   "feature": "19",
+   "why": "critic §8 F19 (point of view): Dirda — \"confides in the reader like a friend\"; §4 makes it the measured counter-evidence to the detached-author limb (verify-only)"
+  },
+  {
+   "index": 694,
+   "feature": "11/23",
+   "why": "critic §8 F11/F23 (register, scale): named by §8 (verify-only)"
+  },
+  {
+   "index": 698,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 699,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 700,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 702,
+   "feature": "19",
+   "why": "critic §8 F19 (point of view): Burt/Plotz — \"invites us in and holds us back\", §4 second source for the detached author (verify-only)"
+  },
+  {
+   "index": 703,
+   "feature": "19",
+   "why": "critic §8 F19 (point of view): Burt/Plotz — \"invites us in and holds us back\", §4 second source for the detached author (verify-only)"
+  },
+  {
+   "index": 704,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 705,
+   "feature": "22",
+   "why": "critic §8 F22 (names): named by §8 among the naming rows the section needs (verify-only)"
+  },
+  {
+   "index": 792,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 793,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 794,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 796,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 797,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 798,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 802,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 803,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): the archaism rows the feature needs (verify-only)"
+  },
+  {
+   "index": 804,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): the archaism rows the feature needs (verify-only)"
+  },
+  {
+   "index": 805,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): the archaism rows the feature needs (verify-only)"
+  },
+  {
+   "index": 814,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 815,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 816,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): the archaism rows the feature needs (verify-only)"
+  },
+  {
+   "index": 817,
+   "feature": "12",
+   "why": "critic §8 F12 (archaism): the archaism rows the feature needs (verify-only)"
+  },
+  {
+   "index": 819,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 820,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 821,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 824,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 827,
+   "feature": "8",
+   "why": "critic §8 F8 (detail): the \"lesser matters\" qualification (verify-only)"
+  },
+  {
+   "index": 828,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 829,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 832,
+   "feature": "6/16",
+   "why": "critic §8 F6/F16 (plainness, diction): \"potatoes, everyday language, commonplace characters\", §4 second source for plainness as her own late practice (verify-only)"
+  },
+  {
+   "index": 839,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): BVC — \"brevity, a few telling details, a great left unsaid\"; §4 also cites [844] \"Often one physical detail will do it\" for F8 (verify-only)"
+  },
+  {
+   "index": 840,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): BVC — \"brevity, a few telling details, a great left unsaid\"; §4 also cites [844] \"Often one physical detail will do it\" for F8 (verify-only)"
+  },
+  {
+   "index": 844,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): BVC — \"brevity, a few telling details, a great left unsaid\"; §4 also cites [844] \"Often one physical detail will do it\" for F8 (verify-only)"
+  },
+  {
+   "index": 849,
+   "feature": "8",
+   "why": "critic §8 F8 (detail): named by §8 among the rows the detail feature needs (verify-only)"
+  },
+  {
+   "index": 853,
+   "feature": "8",
+   "why": "critic §8 F8 (detail): §4 second source — \"I'm very strong on accuracy and exactitude\" (verify-only)"
+  },
+  {
+   "index": 855,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 856,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 863,
+   "feature": "19",
+   "why": "critic §8 F19 (point of view): \"describe it from the point of view of the powerless\" (verify-only)"
+  },
+  {
+   "index": 866,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 890,
+   "feature": "9/10",
+   "why": "critic §8 F9/F10 (leaving-out, the glimpse): Le Guin to Morton on suggestion — \"fantasy and science fiction is just the art of suggestion\", \"you do as little as possible\", \"You can't describe everything\" (verify-only)"
+  },
+  {
+   "index": 894,
+   "feature": "13/14",
+   "why": "critic §8 F13/F14 (sound): the [624]/[894] pair named by §8 (verify-only)"
+  },
+  {
+   "index": 895,
+   "feature": "dup",
+   "why": "critic §8 the 53 duplicates bullet: the row is a duplicate quotation and §8 rules it \"should be marked \\\"duplicate quotation of #N\\\" without a fetch\"; §9 assigns that marking to the same verify-skipped pass, so the row must leave SKIPPED_TRIAGE to reach a chunk (verify-only, no fetch)"
+  },
+  {
+   "index": 920,
+   "feature": "20",
+   "why": "critic §8 F20 (place): named by §8 among the place rows the section needs (verify-only)"
+  }
+ ],
+ "count": 119,
+ "notes": "04:47 chair-reconciler (session b43943b4), leguin r11 verify-only list. METHOD: two independent Opus readers extracted the list from critic-leguin.md (§8 group (e), §4's named SKIPPED second sources); the reconciler re-extracted both sections mechanically a third time (python3: every bracketed group in each §8 bullet and every §4 cell, comma lists split individually, 'A to B' ranges expanded inclusive) and got 66 indices from the §8 FEATURE bullets, 53 from §8's separate duplicates bullet (zero overlap), and 36 from §4 — of which the 25 SKIPPED second sources were already among the 66 and the other 11 are §4's 'flagged as' column, i.e. rows already carrying a verdict. Every one of the 119 was then checked against state-leguin.json: all 119 are exactly SKIPPED_TRIAGE (executed; 0 fell out). AGREEMENT: reader1 119, reader2 66, reader2 ⊆ reader1, nothing was only in reader2. DISPUTE (one, of 53 indices): reader1 included §8's final bullet — the 53 duplicates [471, 476, 479, 516-518, 520, 523, 524, 529, 530, 537, 561-564, 567, 575, 576, 578, 582, 583, 607, 608, 680-682, 688-690, 692, 698-700, 704, 792-794, 796-798, 802, 814, 815, 819-821, 824, 828, 829, 855, 866, 895]; reader2 excluded them, its method reading only the 'feature bullets'. RESOLVED: INCLUDE all 53. They pass the test as written — the critic names them inside §8, whose heading is 'the new SKIPPED rows the section needs', it does not call any of them verified, and each is exactly SKIPPED_TRIAGE in the state. The mechanism decides it: §8 says they 'should be marked \"duplicate quotation of #N\" without a fetch' and §9's recommended round 2 puts that marking in the SAME verify-skipped pass as the feature rows; untriage.py is the only route by which a SKIPPED_TRIAGE row reaches a verification chunk, so excluding them would leave 53 rows permanently un-dispositioned. They are marked feature 'dup' and their why records that they need no fetch. NOT DISPUTED, EXCLUDED: §9's [601] and [602] (named in §9, not §8/§4, and BLOCKED not SKIPPED_TRIAGE in the state — untriage.py would refuse them). COUNT NOTE: the §8 heading says '82 new SKIPPED rows' but its feature bullets name only 66 (§9 repeats '~82'); the critic's own arithmetic is off, and this list carries what the bullets actually name, not the headline figure. NOT SKIPPED (named in §4 but already carrying a verdict, so excluded by both readers and by this reconciliation): 49 VERIFIED_VERBATIM; 50 VERIFIED_VERBATIM; 55 VERIFIED_VERBATIM; 83 VERIFIED_VERBATIM; 128 VERIFIED_VERBATIM; 416 VERIFIED_VERBATIM; 462 PARTIAL; 586 VERIFIED_VERBATIM; 731 VERIFIED_VERBATIM; 747 PARTIAL; 748 VERIFIED_VERBATIM. The r9 list of 243 rows is preserved as untriage-leguin.r9.json (backed up by this reconciler at 04:44; it did not exist before); the 119 rows here overlap it in zero indices."
+}

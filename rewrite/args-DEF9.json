@@ -1,0 +1,29 @@
+{
+ "block": "DS-DEF-9",
+ "dock": "laneRW-DEF9",
+ "pools": [
+  {
+   "pool": "magicDependency true",
+   "dir": "ds-def-9--magicdependency-true",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  },
+  {
+   "pool": "magicDependency true, with a NAMED dependent chain",
+   "dir": "ds-def-9--magicdependency-true-with-a-named-dependent-chai",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "magicDependency false",
+   "dir": "ds-def-9--magicdependency-false",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  }
+ ],
+ "wiringDebt": [],
+ "maxRounds": 6
+}

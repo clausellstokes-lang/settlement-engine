@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneMEASURE
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 18ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/lint/proseWiringCensus.walker.test.js: 1 un-anchored negative assertion(s) at line(s) 1182 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted away as when the member was correctly excluded — it outlives the regression it was written to catch. Pair it with a liveness anchor: expectPresentThenAbsent(before, after, member) for a removal, expectAbsentWithAnchor(collection, member, anchor) for a selection (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say why with an \"// anchored: <reason>\" marker — AND MIND THE RULE, which has cost a lane two attempts: the marker is read ONLY on the assertion's own line or the ONE line immediately above it. A marker WRAPPED across two comment lines does NOT count, because the line abutting the assertion is then the continuation rather than the marker. Keep it on one line, or put \"anchored:\" on the comment's LAST line.",
++ ]
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:861:24
+    859|       }
+    860|     }
+    861|     expect(violations).toEqual([]);
+       |                        ^
+    862|   });
+    863|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 145 passed (146)
+      Tests  1 failed | 2368 passed (2369)
+   Start at  06:42:52
+   Duration  102.40s (transform 23.74s, setup 4.30s, import 139.88s, tests 493.75s, environment 13ms)
+

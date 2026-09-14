@@ -1,0 +1,790 @@
+                                                                     On the Efficacy of Sampling Adapters
+                                                               Clara Meister             Tiago Pimentel        Luca Malagutti
+                                                                           Ethan G. Wilcox         Ryan Cotterell
+                                                                  ETH Zürich    University of Cambridge
+                                                    meistecl@inf.ethz.ch tp472@cam.ac.uk lmalagutti@inf.ethz.ch
+                                                        ethan.wilcox@inf.ethz.ch ryan.cotterell@inf.ethz.ch
+
+                                                               Abstract                           generation tasks—both sampling directly from
+                                                                                                  them and searching for the maximum-probability
+                                            Sampling is a common strategy for generating
+                                                                                                  string under them can lead to dull, incoherent, and
+                                            text from probabilistic models, yet standard
+                                            ancestral sampling often results in text that         degenerate text (Holtzman et al., 2020; Eikema
+                                            is incoherent or ungrammatical. To alleviate          and Aziz, 2020; Welleck et al., 2020).
+                                            this issue, various modifications to a model’s           Surprisingly, applying a post-hoc modification
+
+
+
+
+arXiv:2307.03749v2 [cs.CL] 5 Jan 2024
+                                            sampling distribution, such as nucleus or top-k       to pθ (· | y<t ) often serves to dramatically improve
+                                            sampling, have been introduced and are now            the quality of the generated text (Nadeem et al.,
+                                            ubiquitously used in language generation              2020; Pillutla et al., 2021; Wiher et al., 2022;
+                                            systems. We propose a unified framework for
+                                                                                                  Hewitt et al., 2022; Li et al., 2022). In this paper,
+                                            understanding these techniques, which we term
+                                            sampling adapters. Sampling adapters often
+                                                                                                  we give a name to these methods, dubbing them
+                                            lead to qualitatively better text, which raises the   sampling adapters. A sampling adapter can be
+                                            question: From a formal perspective, how are          formally defined as a simplex-to-simplex map
+                                            they changing the (sub)word-level distributions       α : ∆|V|−1 → ∆|V|−1 that systematically modifies
+                                            of language generation models? And why                the conditional distribution of an autoregressive
+                                            do these local changes lead to higher-quality         language model pθ (· | y<t ), thus creating another
+                                            text? We argue that the shift they enforce can
+                                                                                                  language model α(pθ (· | y<t )) with a desired set
+                                            be viewed as a trade-off between precision
+                                            and recall: while the model loses its ability to      of characteristics, e.g., it may only give non-zero
+                                            produce certain strings, its precision rate on        probability to items assigned high probability
+                                            desirable text increases. While this trade-off is     under the original model. Sampling adapters often
+                                            not reflected in standard metrics of distribution     require little to no fine-tuning and can be imple-
+                                            quality (such as perplexity), we find that            mented in just a few lines of code. Presumably due
+                                            several precision-emphasizing measures                to their simplicity, sampling adapters have become
+                                            indeed indicate that sampling adapters can lead       a default tool in text generation pipelines, serving
+                                            to probability distributions more aligned with
+                                                                                                  as the core component of baseline decoding
+                                            the true distribution. Further, these measures
+                                            correlate with higher sequence-level quality          strategies in various tasks (Welleck et al., 2020;
+                                            scores, specifically, M AUVE.                         Pillutla et al., 2021; Pimentel et al., 2023).
+                                                                                                     The fact that sampling adapters often lead to
+                                                  https://github.com/rycolab/                     qualitatively better text, however, evokes a simple
+                                                  sampling-adapters                               question: How do they change our language gener-
+                                                                                                  ation models such that the distribution pθ (· | y<t )
+                                        1   Introduction                                          places more probability mass on what we quali-
+                                                                                                  tatively deem to be “better” text? Most sampling
+                                        The vast majority of natural language generation          adapters have been found through trial and error
+                                        systems take a probabilistic approach. The                with only intuitive motivations given for their
+                                        backbone of such an approach is a probability             efficacy. Moreover, standard evaluation measures1
+                                        distribution over strings pθ for a specific target        do not immediately shed light on why sampling
+                                        domain. While modern language models have                 adapters work well because most sampling adapters
+                                        achieved remarkable performance on standard               make language generation models substantially
+                                        measures of distribution quality, e.g., perplexity        worse according to these measures, e.g., they often
+                                        (Brown et al., 2020; Chowdhery et al., 2022;                  1
+                                                                                                        We use the term measure instead of the more common
+                                        Hoffmann et al., 2022; OpenAI, 2023), they often           metric throughout this work because several of the functions
+                                        fall short when applied out of the box for language        that we consider are not metrics in the mathematical sense.
+reduce the probability assigned to certain strings             autoregressive pθ to define a valid probability distri-
+to zero, which can yield a perplexity of ∞.                    bution over V ∗ . The sequence-level probability can
+   In this paper, we posit that the change of                  then be computed via the chain rule of probability:
+distribution induced by sampling adapters can be
+analyzed in terms of a precision–recall trade-off,                                            |y|
+                                                                                              Y
+using the generalizations of these terms to the                       pθ (y) = pθ (EOS | y)         pθ (yt | y<t )   (1)
+field of generative modeling (Sajjadi et al., 2018;                                           t=1
+
+Lucic et al., 2018; Djolonga et al., 2020). While
+                                                               See Du et al. (2023) for a characterization of when
+a model loses its ability to produce certain strings,
+                                                               these models are tight, i.e., when the probability
+its ability to produce desirable text increases. We
+                                                               mass assigned to finite-length strings is 1.
+experiment with various sampling adapters that
+                                                                 The parameters θ of these models are typi-
+have been proposed (Fan et al., 2018; Holtzman
+                                                               cally chosen by (numerically) maximizing the
+et al., 2020; Meister et al., 2023; Hewitt et al.,
+                                                               log-likelihood of the training data D, where
+2022) and find that, while the use of these adapters
+                                                               log-likelihood is defined as:
+negatively affects recall-emphasizing performance
+measures, certain choices of hyperparameters                                           X
+increase performance in terms of measures that                                L(θ) =         log pθ (y)              (2)
+                                                                                       y∈D
+balance between precision and recall or that are
+precision-emphasizing. Comparing trends in these
+                                                               Note this is equivalent to minimizing the (forward)
+measures, we see evidence of a precision–recall
+                                                               cross-entropy between the empirical distribution
+trade-off, which offers a quantitative motivation
+                                                               pD induced by the training data D.
+for the efficacy of sampling adapters. We further
+find that precision-emphasizing measures correlate             2.2   Decoding Strategies
+most highly with sequence-level quality metrics,
+offering a potential avenue for efficiently choosing           In order to produce text from a model, one must
+sampling adapter hyperparameter values. The                    use a decoding strategy, which provides a set of
+formal framework and empirical analysis presented              decision rules according to which tokens are se-
+here should pave the way for the development of                quentially chosen from the distribution pθ to form
+theoretically motivated sampling adapters, and                 a string. Decoding strategies can be broadly taxon-
+provide a straightforward means for both analysis              omized as either maximization-based or sampling-
+of and comparison between adapters.                            based. Maximization-based strategies aim to find
+                                                               the candidate string that scores highest under some
+2     Language Generation                                      objective. Finding the string with the highest prob-
+                                                               ability under the model is a common maximization-
+2.1    Probability Distributions over Strings                  based strategy. Sampling-based strategies instead
+Most language generation systems are based on                  sample tokens according to some distribution de-
+probabilistic models, i.e., models of the probability          rived from the model. While maximization-based
+distribution over natural language strings2 V ∗ ,              strategies may make intuitive sense, they often
+where V ∗ is the Kleene closure of an alphabet                 lead to dull or degenerate text in open-generation
+V. In words, V ∗ is the set of all strings that can            settings (Cohen and Beck, 2019; Eikema and
+be generated from a vocabulary of (sub)words                   Aziz, 2020; Nadeem et al., 2020). Sampling-based
+V. A common modeling choice is to break down                   strategies likewise have shortcomings: They intro-
+string probabilities autoregressively and locally              duce randomness into the generated text, which
+normalize pθ , i.e., instead of directly modeling              may lead to a disruption in coherence or fluency
+the full sequence probability pθ (y), one models               when units are sampled from low-probability
+(sub)word probabilities pθ (y | y<t ) conditioned on           regions of the distribution (Holtzman et al., 2020;
+                      def                                      Hewitt et al., 2022). A class of methods has been
+the prior context y<t = ⟨y1 , . . . , yt−1 ⟩ ∈ V ∗ . Note
+                                  def                          developed to address the problems observed when
+that here, we have y ∈ V for V = V ∪{EOS} where
+                                                               sampling directly from the model, specifically by
+EOS is a special end of string token required for an
+                                                               altering the distribution from which tokens are sam-
+   2
+     Notably, these distributions might be conditioned on an   pled. We term these methods sampling adapters,
+input string, as in machine translation or summarization.      formally defining them in the next section.
+3       The Sampling Adapter Framework                           Example 3.4. We recover top-π (nucleus) sam-
+                                                                 pling (Holtzman et al., 2020) when
+Formally, sampling adapters are simplex-to-
+simplex mappings, i.e., functions α : ∆|V|−1 →                        C(p(· | y<t )) = argmin |V ′ |                        (6)
+∆|V|−1 that take a probability distribution over V                                          V ′ ⊆V
+as input and map it to another one over V.3 We use
+                                                                                                  X
+                                                                                          s.t.            p(y | y<t ) ≥ π
+the notation pe to denote the output of this map, as                                              y∈V ′
+applied to the distribution p:
+                                                                 i.e., a function that returns the smallest subset of
+                           def
+                                                                 (sub)words that collectively have probability mass
+                                          
+              pe(· | y<t ) = α p(· | y<t )                (3)
+                                                                 ≥ π.
+similarly denoting the individual adapted
+                                          probabil-             Example 3.5. We recover locally typical sampling
+ities as pe(y | y<t ) = α p(· | y<t ) (y). We now                (Meister et al., 2023) when
+give two examples of common sampling adapters.
+                                                                                           X
+Example 3.1. We recover standard ancestral sam-                  C(p(· | y<t )) = argmin    H(p(· | y<t )) (7)
+pling when α p(· | y<t ) (y) = p(y | y<t ).                                            V ′ ⊆V    y∈V ′
+
+Example 3.2. We recover temperature sampling                                                                + log p(y | y<t )
+                                    1
+when α p(· | y<t ) (y) ∝ p(y | y<t ) T for temper-                                     X
+                                                                                s.t.            p(y | y<t ) ≥ π
+ature parameter T .4
+                                                                                       y∈V ′
+   One popular way of formulating sampling
+adapters in the literature has been via truncation               i.e., the set of items with log-probability closest to
+functions, i.e., functions where vocabulary units                the (sub)word-level entropy that collectively have
+that do not meet a certain criterion are re-assigned             probability mass ≥ π.
+zero probability. We write these functions as:                   Example 3.6. We recover η-sampling (Hewitt
+                                                                et al., 2022) when
+   α p(· | y<t ) (y) ∝                            (4)
+                                                                    C(p(· | y<t )) = {y ∈ V | p(y | y<t ) > η} (8)
+                           n                   o
+               p(y | y<t )1 y ∈ C p(· | y<t )
+                                                                                     √
+                                                                 where η = min (ϵ, ϵ exp(−H (p(· | y<t )))), i.e.,
+where C : ∆|V|−1 → P(V) is a function that finds                 the set of items with probability greater than η for
+the set of (sub)words that meets said criterion;                 hyperparameter ϵ > 0.
+P(·) denotes the powerset operator. Truncation                      Other methods can similarly be cast in the sam-
+sampling methods aim to eliminate probability                    pling adapter framework, such as Mirostat (Basu
+mass placed on tokens deemed likely to lead to                   et al., 2021) and the re-calibration method proposed
+undesirable text, reallocating their probability mass            by Braverman et al. (2020). Moreover, the general
+to the remaining options. We now specify several                 equation for sampling adapters given in Eq. (3) sug-
+common truncation-based sampling adapters.                       gests that one direction for future research is learn-
+Example 3.3. We recover top-k sampling (Fan                      ing a sampling adapter α. While many previously
+et al., 2018) when                                               proposed adapters are truncation-based, adapters
+                            X                                    that reallocate mass in a different manner may also
+    C(p(· | y<t )) = argmax   p(y | y<t ) (5)                    prove effective. Indeed, equipping α with tunable
+                          V ′ ⊆V       y∈V ′                     parameters could prove useful as a lightweight fine-
+                                   ′
+                         s.t. |V | = k                           tuning method.
+
+i.e., a function that returns the top-k most-probable            An Unintuitive Effect. The motivation behind
+(sub)words.                                                      the use of sampling adapters with language genera-
+    3
+                                                                 tion models is to readjust their distribution, shifting
+      Sampling adapters can be generalized to work on full
+distributions p(y) instead of on the conditionals p(· | y<t ),   mass away from tokens deemed likely to lead to
+but we focus on the simpler case of the conditionals here.       undesirable text and onto tokens that will generate
+    4
+      T allows us to control the entropy of the distribution.    high-quality text. Yet why are such transformations
+As T → 0, we recover a distribution that places probability
+1 on the argmax, and, as T → ∞, we recover the uniform           even necessary? Standard measures of distribution
+distribution.                                                    quality, such as perplexity, would suggest that our
+models’ estimates of the ground-truth distribution              values change depending on the order in which the
+over natural language strings are quite good                    distributions are given as arguments to the measure.
+(Brown et al., 2020; Wang and Komatsuzaki, 2021;                Out of convention, in the case that the reference dis-
+Hoffmann et al., 2022). This, in turn, implies that             tribution is provided first, we call this the forward
+the heuristic shifts performed by sampling adapters             variant of the measure. We call the case where
+should lead to worse language generators. We                    the reference distribution is the second argument
+argue that the disparity between the quality of lan-            the reverse variant of the measure. We define all
+guage generation systems using sampling-adapted                 measures in terms of generic distributions p1 and
+models and the quality of these same models                     p2 , which we assume both have (not necessarily
+according to standard measures can be reconciled                identical) supports that are a subset of V.
+using probabilistic analogs of precision and recall.
+                                                                Precision-emphasizing Measures. We first
+4     A Precision–Recall Hypothesis                             consider the cross-entropy between p1 and p2 :
+                                                                                       X
+                                                                       H(p1 , p2 ) = −    p1 (y) log p2 (y)    (9)
+We begin by reviewing generalizations of the con-
+                                                                                            y∈V
+cepts of precision and recall in the field of genera-
+tive modeling. We then discuss the shortcomings of              Upon inspection, we can see that the reverse cross-
+current language generation models and how sam-                 entropy, i.e., where p1 is the distribution being eval-
+pling adapters may address these shortcomings.                  uated and p2 is a (fixed) reference distribution, re-
+                                                                wards high precision.7 Specifically, it rewards p1
+4.1    Generalizations of Precision and Recall                  for assigning probability mass where p2 is large,
+A series of recent papers have related the precision            implicitly penalizing p1 for assigning high proba-
+of a learned distribution pθ to the average quality of          bility where p2 is small. In fact, the reverse cross-
+generated samples, where high-quality samples are               entropy is minimized in the case where p1 places
+assumed to be those with high probability under the             all probability on the most probable token under p2 .
+data-generating distribution p.5 Additionally, they                A related measure is the reverse KL divergence
+relate the recall of pθ to its coverage of p (Sajjadi                                  X               p2 (y)
+                                                                     KL(p1 || p2 ) =        p1 (y) log           (10a)
+et al., 2018; Lucic et al., 2018; Djolonga et al.,                                                     p1 (y)
+                                                                                         y∈V
+2020, inter alia), i.e., high overlap in the support
+of pθ and p. Following this line of reasoning, the                                    = H(p1 , p2 ) − H(p1 )           (10b)
+notions of precision and recall can naturally be                which is equivalent to the cross-entropy up to the
+operationalized using measures of the difference                subtraction of the entropy term H(p1 ). As with
+between two distributions—specifically, ones that               cross-entropy, the reverse KL divergence rewards
+enable different penalizations of over- and under-              high precision. This property is reflected by a com-
+coverage of our reference distribution.                         mon intuition provided about this measure when
+   There are several measures that, when consid-                it is used as a learning objective: It is referred to
+ered together, naturally operationalize precision,              as a mode-seeking objective, i.e., it aims to place
+recall, or some combination of the two.6 In                     mass on the modes of p1 .8 Importantly, the distribu-
+this paper, we focus on cross-entropy, KL                       tions that minimize the reverse variants of Eq. (9)
+divergence, total variation distance (TVD), and                 and (10a) will not necessarily be equivalent be-
+Jensen–Shannon (JS) divergence. We introduce                    cause the latter takes into account p1 ’s entropy. So
+each in greater detail below. We note that for all              which of these two metrics should we use? As we
+these measures, a larger value indicates a greater              are interested in using metrics that operationalize
+discrepancy between two distributions, and that                 the notion of precision, the entropy of the distri-
+all but the cross-entropy will be zero when the                 bution under evaluation is irrelevant. Thus, we
+two distributions are identical. Further, we note               will use the reverse cross-entropy as our primary
+that not all the measures are symmetric, i.e., their            precision-emphasizing metric.
+    5                                                               7
+      We note that in general though, it is not clear that            We note that most readers are likely more familiar with
+high-probability and high-quality should necessarily coincide   the forward cross-entropy, which is a common loss function.
+(Zhang et al., 2021; Meister et al., 2023).                         8
+                                                                      For further insights about the properties of the various
+    6
+      We refer the reader to Cichocki and Amari (2010) and      measures used here, we refer the reader to the following
+Djolonga et al. (2020) for a more comprehensive discussion      detailed discussions (Minka, 2005; Nickisch and Rasmussen,
+of such measures.                                               2008; Huszár, 2015; Theis et al., 2016).
+Recall-emphasizing Measures. On the other                          4.2    Current Modeling Shortcomings
+hand, the forward variants of Eq. (9) and (10a),
+                                                                   It is not clear that the objective with which prob-
+where p2 is now the distribution under evaluation
+                                                                   abilistic language generators are typically trained
+and p1 is assumed to be fixed, reward recall.
+                                                                   imparts characteristics that align with the goals of
+This is evident when taking a closer look at their
+                                                                   building good language generators.10 Any form of
+definitions. If p2 fails to place probability on
+                                                                   maximum-likelihood training is equivalent to mini-
+all elements y assigned probability by p1 , then
+                                                                   mizing H(pD , pθ )—often with an additional form
+both the cross-entropy and KL divergence will be
+                                                                   of regularization. Thus, it encourages high recall:
+∞.9 Analogously to the reverse KL’s description
+                                                                   pθ (yt | y<t ) must be nonzero for all tokens yt in
+as mode-seeking, the forward KL is referred to
+                                                                   every string y in the training set D for the objective
+as mean-seeking. Note that using the forward
+                                                                   to be finite. This, in turn, results in pθ allocating
+variants of cross-entropy and KL divergence as
+                                                                   some probability mass to all (sub)words y ∈ V
+learning objectives is equivalent since H(p1 ) is
+                                                                   for all contexts y<t . In language modeling, this is
+constant with respect to p2 . Further, the forward
+                                                                   perhaps a desirable property: We often care about
+KL and cross-entropy, as well as the reverse KL,
+                                                                   the relative probabilities of strings, and assigning
+are minimized when p2 = p1 .
+                                                                   strings 0 probability would be counter-productive
+Balanced Measures. The definitions for TVD                         towards this goal. Yet, this property can potentially
+and JS divergence, which are both symmetric mea-                   prove problematic when such models are used out
+sures, suggest a balance between the characteristics               of the box as language generators.11 For language
+of precision and recall:                                           generation systems, high precision is arguably a
+                                                                   higher priority, i.e., the goal is for all of the gener-
+                                                                   ated sequences to be of high quality. An intuitive
+                          X
+       TVD (p1 , p2 ) =         |p1 (y) − p2 (y)|         (11)
+                                                                   argument for this is that a single bad output can
+                          y∈V
+                                                                   leave a lasting poor impression on the user. Yet,
+                                                                   the inability to generate a single sequence may go
+                   KL(p1 || m) + KL(p2 || m)
+  JS(p1 , p2 ) =                             (12)                  unnoticed—especially if the difference between
+                               2                                   that sequence and one the model can produce is a
+where m(y) = p1 (y)+p  2
+                          2 (y)
+                                for y ∈ V is a point-              single, exchangeable token.
+wise average. Practically, the JS divergence can                      In this light, a possible explanation for the
+informally be viewed as an interpolation between                   efficacy of sampling adapters is as follows: While
+the forward and reverse KL divergences. Indeed,                    model parameters are chosen to minimize a
+several divergences that generalize the forward and                recall-prioritizing objective, sampling adapters
+reverse KL recover the JS divergence given a par-                  re-align the distribution with a more appropriate
+ticular choice of hyperparameter (Huszár, 2015;                    precision-prioritizing probabilistic objective, i.e.,
+Meister et al., 2020; Pillutla et al., 2021). TVD                  sampling adapter hyperparameter combinations
+can be similarly motivated: Sajjadi et al. (2018)                  that work well perhaps do so because they mini-
+recover TVD in their precision–recall operational-                 mize an objective that balances between precision
+ization for generative models when assigning equal                 and recall. If this is indeed the case, it should not
+importance to precision and recall. Further, a stan-               be surprising that the transformation induced by
+dard result demonstrates that the JS divergence is a               sampling adapters leads to worse models according
+lower bound on TVD (Lin, 1991). With these mea-                    to standard, recall-emphasizing measures: Any
+sures in hand, we can more effectively assess the                  generator that assigns zero probability to a
+shifts to precision and recall that sampling adapters
+                                                                     10
+induce in a model.                                                       Several works have explored this topic specifically, which
+                                                                   we discuss in §6.
+                                                                      11
+   9
+      To avoid the possibility of an infinite cross-entropy, one         To see why, consider a simple example: A model that
+                                                        (ε)        assigns a very small collective probability mass of 0.001 to
+can use an ε-smoothed variant of p2 i.e., where p2 (·) =
+p2 (·)+ε
+                                                                   all (sub)words in the tail (low-probability region) of the distri-
+ 1+|V|·ε
+         . This trick is often employed to evaluate methods that   bution at any given generation step. If we sample a sequence
+do not produce distributions covering the entire support, e.g.,    of 200 tokens from this (unaltered) model, there is a 1−(1−
+Peters et al. (2019) and Martins et al. (2020). As many of the     0.001)200 ≈ 20% chance it will contain at least one token
+sampling adapters that we analyze produce sparse distributions     from the tail of the distribution, which after sampled, can have
+(specifically, the truncation sampling methods), we will like-     negative downstream effects, ultimately rendering the whole
+wise employ this variant of KL divergence where necessary.         string incoherent (Holtzman et al., 2020; Xia et al., 2023).
+valid string—as is the case when top-π or top-k                      combination of model, sampling adapter, and hy-
+sampling are applied—will have both infinite                         perparameter. We compute M AUVE scores (where
+cross-entropy and perplexity with respect to the                     higher implies the samples are closer to the ref-
+natural language distribution. They may, however,                    erence text), aggregated over 5 seeds, for each of
+lead to better models according to more balanced                     these sets of text samples.
+(or even precision-emphasizing) measures, which
+is what we now empirically test.                                     Token-level Measures. In this analysis, we com-
+                                                                     pare (sub)word-level distributions peθ (· | y<t ) and
+5        Experiments                                                 p(· | y<t ). The former is our generation model
+                                                                     after the application of a sampling adapter and the
+To test the hypothesis that the operations performed                 latter is a reference distribution. We present results
+by sampling adapters are akin to a re-prioritization                 using both the empirical distribution induced by
+of precision over recall in the output of the model,                 our test set and the distribution given by the GPT-
+we evaluate the effects of sampling adapters on                      J model (Wang and Komatsuzaki, 2021)14 as our
+measures that emphasize recall, precision or a                       reference distribution. Here, y is a string from the
+balance of the two, as outlined in §4.1. We then ob-                 test set. Results are mean-aggregated across both
+serve how these measures vary as a function of the                   t = 1, . . . , |y| and all y. Note that when we com-
+sampling adapters’ hyperparameters. Further, we                      pute either the cross-entropy or KL divergence and
+also look at these measures’ Spearman correlations                   it is not guaranteed that the support of p1 is a subset
+with M AUVE, a sequence-level quality metric.                        of the support of p2 , we make use of the ε version
+   We consider five different adapters: temperature,                 of the metrics, as specified in §4.1, with ε = 1e-6.
+η (eta), top-π, top-k and locally typical sampling,
+each over a wide range of hyperparameters. Note                      5.2    Results
+that for the latter three adapters, a smaller hyperpa-
+                                                                     Trends in Probabilistic Measures. We first
+rameter value corresponds to a larger shift between
+                                                                     present our analysis of how different adapter–
+pθ and peθ . For η-sampling, the reverse is true, and
+                                                                     hyperparameter settings affect the relationship of
+for temperature sampling, hyperparameter values
+                                                                     the model to a reference distribution (either proba-
+farther from 1 imply a larger shift. For reproducibil-
+                                                                     bilities according to GPT-J or the empirical distri-
+ity, we leverage the Hugging Face framework (Wolf
+                                                                     bution). Note that if our hypothesis in §4.1 is cor-
+et al., 2020) and its implementation of sampling
+                                                                     rect, we would expect to see that certain sampling
+adapters for all but η-sampling, for which we rely
+                                                                     adapter–hyperparameter settings lead to lower val-
+on the original authors’ implementation.12 Error
+                                                                     ues of measures that emphasize precision, such
+bars for all plots indicate 95% confidence intervals
+                                                                     as reverse cross-entropy, while simultaneously in-
+for the observed values; note that bars are often
+                                                                     creasing measures that emphasize recall, such as
+small enough that they are not visible.
+                                                                     forward cross-entropy. We show the reverse and
+5.1        Setup                                                     forward cross-entropy, as well as TVD, in Fig. 1.15
+                                                                        Both the forward and reverse cross-entropy
+We focus on the task of open-ended text genera-
+                                                                     results align closely with our hypothesis: A larger
+tion. We use GPT-2 small and large (Radford et al.,
+                                                                     adapter shift generally leads to a higher forward
+2019), as well as, GPT-Neo (small) (Gao et al.,
+                                                                     cross-entropy and lower reverse cross-entropy.16
+2020) as our generation models. The main results
+                                                                     This observation holds when using either the
+of this paper use the test set of a public version of
+the WebText dataset13 as our reference text. Results                   14
+                                                                           We use GPT-J as a reference because it has substantially
+using the WikiText test set (Merity et al., 2016) are                better perplexity on benchmark datasets. Note that it has ≈ 50
+                                                                     times more parameters than either GPT-2 small or GPT-Neo,
+qualitatively similar and can be found in App. A.                    both of which it shares a vocabulary with.
+                                                                        15
+                                                                           As anticipated given the relationship between TVD and
+Sequence-level Metrics. Following Pillutla et al.                    JS, results showing the JS divergence are qualitatively very
+(2021), we use the first 35 tokens of samples from                   similar to TVD. Hence, they appear in App. A.
+                                                                        16
+our reference text as a prompt to generate contin-                         Importantly, if not for use of the ε-smoothed versions of
+                                                                     the forward and reverse cross-entropies, many of the cross-
+uations y ∼ pθ (· | y<t ) until |y| = 512, or EOS                    entropies in Fig. 1 would be infinite for the truncation-based
+is sampled. We generate 1000 samples for each                        adapters. Specifically, this would be true for any adapter
+                                                                     without 100% coverage of the tokens in the evaluation text,
+    12
+         github.com/john-hewitt/truncation-sampling                  which is the case for most adapter–hyperparameter settings
+    13
+         The dataset is at github.com/openai/gpt-2-output-dataset.   (see Fig. 6 in App. A).
+Figure 1: Forward/reverse cross-entropy and TVD of the model with GPT-J and the empirical distribution (WebText
+test set) after different sampling adapter methods have been applied to the output distribution. Note that as described
+in §4.1, the ε-variant is used in all cross-entropy estimates except for reverse estimates with GPT-J. Dashed lines
+represent divergence with the unmodified distribution, i.e., the equivalent of using ancestral sampling.
+
+empirical distribution or GPT-J as our reference.            trend appears to hold when considering the em-
+Interestingly, we see that the trends reverse when           pirical distribution: TVD generally decreases with
+we consider the reverse KL divergence (as opposed            adapter strength. The reason for this difference
+to the reverse cross-entropy; see Fig. 3). This is           is not immediately obvious. Closer inspection re-
+perhaps expected given that the entropy of the               veals that when GPT-J is the reference, the trends
+model’s distribution monotonically decreases after           in TVD mimic what we would expect from a metric
+the application of sampling adapters (see Fig. 7).           that interpolates between forward and reverse cross-
+   Lastly, the trends in TVD differ largely depend-          entropies. Since TVD is motivated as a metric that
+ing on the distribution used as a reference. When            balances between precision and recall, our results
+GPT-J is used, we see that TVD monotonically in-             therefore make intuitive sense. On the other hand,
+creases as adapter strength increases. The reverse           the observed trends for the empirical distribution
+                                                                                                                KL          Cross-entropy
+do not have a clear explanation.
+                                                                                                TVD    Reverse ε-Forward Reverse ε-Forward
+   Critically, we find that the observed trends are
+                                                                                    GPT-2       -0.73∗ -0.77∗   -0.38∗   -0.11    -0.44∗
+
+
+
+
+                                                                  Empirical GPT-J
+stable across various design choices; see App. A                                    GPT-Neo     -0.74∗ -0.73∗   -0.33∗    0.08    -0.41∗
+                                                                                    GPT-Large   -0.77∗ -0.80∗   -0.49∗    0.01    -0.55∗
+for results with the WikiText dataset and with
+                                                                                    GPT-2       -0.18∗ -0.26∗   -0.48∗   -0.18∗   -0.48∗
+different choices of ε for the ε-smoothed versions                                  GPT-Neo      -0.02 -0.25∗   -0.42∗   -0.02    -0.42∗
+of metrics.17                                                                       GPT-Large    -0.10 -0.50∗   -0.61∗   -0.10    -0.61∗
+
+
+A Precision–Recall Trade-Off. We next look                       Table 1: Spearman correlations of (sub)word-level prob-
+at whether the shifts induced by common sampling                 abilistic measures with M AUVE. We use ∗ to indicate
+adapters correspond to a precision–recall trade-off              significance with a p-value < 0.001.
+according to our probabilistic measures. In
+Fig. 2, we compare the reverse and forward cross-
+                                                                 prioritized precision-based measures due to their
+entropies (with GPT-J used as the reference) across
+                                                                 higher correlation with human quality judgments.
+the adapter hyperparameter settings used. Results
+                                                                 For example, BLEU (Papineni et al., 2002) is
+using the empirical distribution are similar (see
+                                                                 computed using n-gram precision, and the original
+Fig. 10 in App. A). Fig. 2 indeed suggests a quite
+                                                                 work on CHR F (Popović, 2015), which is a
+direct trade-off between our operationalizations
+                                                                 precision–recall-based metric, found that variants
+of precision and recall. Notably, the highest
+                                                                 of the metric that placed more weight on precision
+sequence-level quality scores do not correspond
+                                                                 correlated better with human judgments. More re-
+with the sampling adapter–hyperparameter settings
+                                                                 cently, Pimentel et al. (2023) report that the reverse
+that achieve the best precision (i.e., lowest reverse
+                                                                 KL divergence between multinomial distributions
+cross-entropy).18 Rather, they correspond to an
+                                                                 over embeddings of text from language models
+intermediate point along the line, suggesting the
+                                                                 and of text from humans correlated more with
+importance of balancing precision and recall.
+                                                                 human quality judgments than the results of other
+Correlations. The previous observations moti-                    divergence measures. On the other hand, measures
+vate us to look at correlations between (sub)word-               that place higher importance on recall of the model
+level probabilistic measures and sequence-level                  with respect to some test set, such as perplexity,
+quality metrics. We consider both the WebText and                are known not to be good indicators of text quality
+WikiText results when computing correlations. In                 (Holtzman et al., 2020; Cohen and Beck, 2019;
+Tab. 1, we see that the reverse KL of the generation             Meister et al., 2023). In terms of model training,
+model with GPT-J has the highest (rank) correlation              alternative objectives that emphasize precision
+with our quality metrics, closely followed by TVD.               have been proposed in an attempt to alleviate the
+This finding suggests that reverse KL with another               zero-avoiding effect induced by optimization for
+model could be a useful metric for selecting sam-                maximum likelihood (Kang and Hashimoto, 2020;
+pling adapter’s hyperparameters, as its computation              Pang and He, 2021).
+is much faster than standard methods for choosing
+such hyperparameters—e.g., human annotations or                  Analysis of Language Generation Models. The
+sequence-level quality scores—which require the                  effect of sampling adapters on language models
+generation of full sequences.                                    has previously been discussed in the framework
+                                                                 of a quality–diversity trade-off (Zhang et al., 2021;
+6    Related Work                                                Meister et al., 2022). For instance, Nadeem et al.
+                                                                 (2020) and Wiher et al. (2022) catalog various
+Precision and Recall in Language Generation.                     sampling adapters and analyze their properties with
+This is by no means the first work to focus on                   respect to a quality–diversity trade-off using a wide
+the notions of precision and recall in the context               range of automatic metrics. Hashimoto et al. (2019)
+of language generation. Language generator                       propose an evaluation framework that combines hu-
+evaluation metrics have historically intentionally               man and statistical evaluation. In contrast, our work
+   17
+      We also observed that trends were very stable across the   makes an explicit connection to the concepts of
+choice of reference model, i.e., using GPT2-XL and the 1.5B      precision and recall and analyzes the effect of sam-
+parameter version of GPT-Neo rather than GPT-J. We omit          pling adapters employing measures of differences
+these results from the appendix to reduce clutter.
+   18
+      M AUVE scores for all adapter–hyperparameter settings      in distributions. While Pillutla et al. (2021) like-
+and both datasets can be seen in Fig. 4.                         wise use notions of precision and recall for assess-
+Figure 2: Reverse cross-entropy versus forward cross-entropy (the latter uses ε-smoothing) of the model with GPT-J
+for various sampling adapter and hyperparameter settings. Stars correspond to values at which hyperparameter
+settings achieved the highest M AUVE scores. The black dot corresponds to ancestral sampling.
+
+
+ing language generators, they look at quantized dis-       Limitations
+tributions over language embedding spaces rather
+                                                           A clear limitation of this work is that the results
+than directly at distributions over (sub)words.
+                                                           have been shown only for English. Further work
+                                                           should consider other model architectures, as well
+7   Conclusion                                             as datasets that span a variety of languages and
+                                                           domains. Another limitation is that we do not con-
+In this work, we offer a formal treatment of               duct human evaluations. Given the large number of
+sampling adapters and provide an analysis that             adapter and hyperparameter settings that we chose
+aims to uncover why they are effective when used           to explore, acquiring the human evaluations that
+with probabilistic models for language generation.         would have allowed us to make statistically signif-
+To this end, we first introduce a general framework        icant conclusions regarding the relationships be-
+that encompasses most of the transformations per-          tween text quality, distribution-level measures, and
+formed by previously proposed sampling adapters.           adapter–hyperparameter settings would have been
+We then offer an intuition as to why sampling              financially prohibitive. Instead, we chose to look
+adapters may lead to better language generators.           at automatic sequence-level quality metrics that
+Using the notions of precision and recall proposed         are known to correlate highly with human qual-
+for generative models, which can be quantified             ity judgments. Further, it has been observed that
+in terms of standard probabilistic measures, we            crowd-sourced judgments of text quality are far
+perform an empirical analysis. We find evidence            from perfect (Clark et al., 2021), making it not
+that the application of sampling adapters increases        obvious whether this is indeed the better option.
+the precision of a distribution at the expense
+of its recall; this observation is robust across           Ethical Considerations
+several experimental design choices. We further            The use of language models for text generation
+find a high correlation between sequence-level             comes with several ethical concerns. Especially
+quality metrics and reverse KL divergence of the           when using sampling-based decoding algorithms,
+generation model with a reference model.                   as is promoted in this work, the text generated by
+                                                           probabilistic models may contain malicious or hal-
+Acknowledgments                                            lucinatory content. This may be an intention of the
+                                                           user, but can also occur simply due to the training
+We would like to thank John Hewitt and Afra Amini          data that the model was exposed to, which is often
+for the insightful discussions preceding this work.        not carefully filtered for undesirable material that
+Clara was supported by a Google Ph.D. Fellowship.          a model then learns to mimic. The goal of works
+Tiago was supported by a Facebook Ph.D. Fellow-            like this—to help create systems that can produce
+ship. Ethan was supported by an ETH Zürich Post-           more human-like text—may also make it easier
+doctoral Fellowship.                                       to automatically produce such content, which can
+ultimately have several negative downstream side            robust measures of similarities. Entropy, 12(6):1532–
+effects. We caution designers and users of text gen-        1568.
+eration systems to publicly advertise when content        Elizabeth Clark, Tal August, Sofia Serrano, Nikita
+was created by a machine, and implement checks               Haduong, Suchin Gururangan, and Noah A. Smith.
+to prevent the production of harmful material.               2021. All that’s ‘human’ is not gold: Evaluating
+                                                             human evaluation of generated text. In Proceedings
+                                                             of the 59th Annual Meeting of the Association for
+                                                             Computational Linguistics and the 11th International
+References                                                   Joint Conference on Natural Language Processing
+Sourya Basu, Govardana Sachitanandam Ramachan-              (Volume 1: Long Papers), pages 7282–7296, Online.
+  dran, Nitish Shirish Keskar, and Lav R. Varshney.          Association for Computational Linguistics.
+  2021. Mirostat: A perplexity-controlled neural text
+  decoding algorithm. In 9th International Conference     Eldan Cohen and Christopher Beck. 2019. Empirical
+  on Learning Representations.                              analysis of beam search performance degradation
+                                                            in neural sequence models. In Proceedings of the
+Mark Braverman, Xinyi Chen, Sham Kakade, Karthik            International Conference on Machine Learning, vol-
+ Narasimhan, Cyril Zhang, and Yi Zhang. 2020. Cali-         ume 97, Long Beach, California, USA. PMLR.
+ bration, entropy rates, and memory in language mod-
+ els. In Proceedings of the 37th International Con-       Josip Djolonga, Mario Lucic, Marco Cuturi, Olivier
+ ference on Machine Learning, volume 119, pages             Bachem, Olivier Bousquet, and Sylvain Gelly. 2020.
+ 1089–1099. PMLR.                                           Precision-recall curves using information divergence
+                                                            frontiers. In International Conference on Artificial
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie               Intelligence and Statistics, pages 2550–2559. PMLR.
+  Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+                                                          Li Du, Lucas Torroba Hennigen, Tiago Pimentel, Clara
+  Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+                                                             Meister, Jason Eisner, and Ryan Cotterell. 2023. A
+  Askell, Sandhini Agarwal, Ariel Herbert-Voss,
+                                                             measure-theoretic characterization of tight language
+  Gretchen Krueger, Tom Henighan, Rewon Child,
+                                                             models. In Proceedings of the 61st Annual Meet-
+  Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens
+                                                             ing of the Association for Computational Linguistics,
+  Winter, Chris Hesse, Mark Chen, Eric Sigler, Ma-
+                                                             Toronto, Canada. Association for Computational Lin-
+  teusz Litwin, Scott Gray, Benjamin Chess, Jack
+                                                             guistics.
+  Clark, Christopher Berner, Sam McCandlish, Alec
+  Radford, Ilya Sutskever, and Dario Amodei. 2020.        Bryan Eikema and Wilker Aziz. 2020. Is MAP decoding
+  Language models are few-shot learners. In Ad-             all you need? The inadequacy of the mode in neu-
+  vances in Neural Information Processing Systems,          ral machine translation. In Proceedings of the 28th
+  volume 33, pages 1877–1901. Curran Associates,            International Conference on Computational Linguis-
+  Inc.                                                      tics, COLING, pages 4506–4520, Barcelona, Spain
+                                                            (Online). International Committee on Computational
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin,           Linguistics.
+  Maarten Bosma, Gaurav Mishra, Adam Roberts,
+  Paul Barham, Hyung Won Chung, Charles Sutton,           Angela Fan, Mike Lewis, and Yann Dauphin. 2018.
+  Sebastian Gehrmann, Parker Schuh, Kensen Shi,             Hierarchical neural story generation. In Proceedings
+  Sasha Tsvyashchenko, Joshua Maynez, Abhishek              of the 56th Annual Meeting of the Association for
+  Rao, Parker Barnes, Yi Tay, Noam Shazeer, Vin-            Computational Linguistics (Volume 1: Long Papers),
+  odkumar Prabhakaran, Emily Reif, Nan Du, Ben              pages 889–898, Melbourne, Australia. Association
+  Hutchinson, Reiner Pope, James Bradbury, Jacob            for Computational Linguistics.
+  Austin, Michael Isard, Guy Gur-Ari, Pengcheng Yin,
+  Toju Duke, Anselm Levskaya, Sanjay Ghemawat,            Leo Gao, Stella Biderman, Sid Black, Laurence Gold-
+  Sunipa Dev, Henryk Michalewski, Xavier Garcia,            ing, Travis Hoppe, Charles Foster, Jason Phang, Ho-
+  Vedant Misra, Kevin Robinson, Liam Fedus, Denny           race He, Anish Thite, Noa Nabeshima, et al. 2020.
+  Zhou, Daphne Ippolito, David Luan, Hyeontaek Lim,         The pile: An 800GB dataset of diverse text for lan-
+  Barret Zoph, Alexander Spiridonov, Ryan Sepassi,          guage modeling. CoRR, abs/2101.00027.
+  David Dohan, Shivani Agrawal, Mark Omernick, An-
+  drew M. Dai, Thanumalayan Sankaranarayana Pil-          Tatsunori B. Hashimoto, Hugh Zhang, and Percy Liang.
+  lai, Marie Pellat, Aitor Lewkowycz, Erica Moreira,        2019. Unifying human and statistical evaluation for
+  Rewon Child, Oleksandr Polozov, Katherine Lee,            natural language generation. In Proceedings of the
+  Zongwei Zhou, Xuezhi Wang, Brennan Saeta, Mark            2019 Conference of the North American Chapter of
+  Diaz, Orhan Firat, Michele Catasta, Jason Wei, Kathy      the Association for Computational Linguistics: Hu-
+  Meier-Hellstern, Douglas Eck, Jeff Dean, Slav Petrov,     man Language Technologies, Volume 1 (Long and
+  and Noah Fiedel. 2022. PaLM: Scaling language             Short Papers), pages 1689–1701, Minneapolis, Min-
+  modeling with pathways. CoRR, abs/2204.02311.             nesota. Association for Computational Linguistics.
+
+Andrzej Cichocki and Shun-ichi Amari. 2010. Families      John Hewitt, Christopher Manning, and Percy Liang.
+  of alpha- beta- and gamma- divergences: Flexible and      2022. Truncation sampling as language model
+  desmoothing. In Findings of the Association for Com-    Clara Meister, Gian Wiher, Tiago Pimentel, and Ryan
+  putational Linguistics: EMNLP 2022, pages 3414–           Cotterell. 2022. On the probability–quality paradox
+  3427, Abu Dhabi, United Arab Emirates. Association        in language generation. In Proceedings of the 60th
+  for Computational Linguistics.                            Annual Meeting of the Association for Computational
+                                                            Linguistics (Volume 2: Short Papers), pages 36–45,
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch,         Dublin, Ireland. Association for Computational Lin-
+   Elena Buchatskaya, Trevor Cai, Eliza Rutherford,         guistics.
+   Diego de las Casas, Lisa Anne Hendricks, Johannes
+   Welbl, Aidan Clark, Tom Hennigan, Eric Noland,         Stephen Merity, Caiming Xiong, James Bradbury, and
+   Katherine Millican, George van den Driessche, Bog-        Richard Socher. 2016. Pointer sentinel mixture mod-
+   dan Damoc, Aurelia Guy, Simon Osindero, Karen             els. CoRR, abs/1609.07843.
+   Simonyan, Erich Elsen, Oriol Vinyals, Jack William
+   Rae, and Laurent Sifre. 2022. An empirical analysis    Thomas Minka. 2005. Divergence measures and mes-
+   of compute-optimal large language model training.        sage passing. Technical report, Microsoft Research.
+   In Advances in Neural Information Processing Sys-
+   tems, volume 35. Curran Associates, Inc.               Moin Nadeem, Tianxing He, Kyunghyun Cho, and
+                                                           James Glass. 2020. A systematic characterization
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and         of sampling algorithms for open-ended language gen-
+  Yejin Choi. 2020. The curious case of neural text        eration. In Proceedings of the 1st Conference of the
+  degeneration. In 8th International Conference on         Asia-Pacific Chapter of the Association for Compu-
+  Learning Representations.                                tational Linguistics and the 10th International Joint
+                                                           Conference on Natural Language Processing, pages
+Ferenc Huszár. 2015. How (not) to train your generative    334–346, Suzhou, China. Association for Computa-
+  model: Scheduled sampling, likelihood, adversary?        tional Linguistics.
+  CoRR, abs/1511.05101.
+                                                          Hannes Nickisch and Carl Edward Rasmussen. 2008.
+Daniel Kang and Tatsunori B. Hashimoto. 2020. Im-           Approximations for binary Gaussian process clas-
+  proved natural language generation via loss trunca-       sification. Journal of Machine Learning Research,
+  tion. In Proceedings of the 58th Annual Meeting of        9(67):2035–2078.
+  the Association for Computational Linguistics, pages
+  718–731, Online. Association for Computational Lin-     OpenAI. 2023. GPT-4 technical report.            CoRR,
+  guistics.                                                 abs/2303.08774.
+Xiang Lisa Li, Ari Holtzman, Daniel Fried, Percy Liang,   Richard Yuanzhe Pang and He He. 2021. Text genera-
+  Jason Eisner, Tatsunori Hashimoto, Luke Zettle-           tion by learning from demonstrations. In 9th Interna-
+  moyer, and Mike Lewis. 2022. Contrastive decoding:        tional Conference on Learning Representations.
+  Open-ended text generation as optimization. CoRR,
+  abs/2210.15097.                                         Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+                                                            Jing Zhu. 2002. BLEU: a method for automatic eval-
+J. Lin. 1991. Divergence measures based on the Shan-
+                                                            uation of machine translation. In Proceedings of the
+   non entropy. IEEE Transactions on Information The-
+                                                            40th Annual Meeting of the Association for Compu-
+   ory, 37(1):145–151.
+                                                            tational Linguistics, pages 311–318, Philadelphia,
+Mario Lucic, Karol Kurach, Marcin Michalski, Sylvain        Pennsylvania, USA. Association for Computational
+ Gelly, and Olivier Bousquet. 2018. Are GANS cre-           Linguistics.
+ ated equal? A large-scale study. Advances in Neural
+ Information Processing Systems, 31:698–707.              Ben Peters, Vlad Niculae, and André F. T. Martins. 2019.
+                                                            Sparse sequence-to-sequence models. In Proceed-
+Pedro Henrique Martins, Zita Marinho, and André F. T.       ings of the 57th Annual Meeting of the Association for
+  Martins. 2020. Sparse text generation. In Proceed-        Computational Linguistics, pages 1504–1519, Flo-
+  ings of the 2020 Conference on Empirical Methods          rence, Italy. Association for Computational Linguis-
+  in Natural Language Processing (EMNLP), pages             tics.
+  4252–4273, Online. Association for Computational
+  Linguistics.                                            Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+                                                            John Thickstun, Sean Welleck, Yejin Choi, and Zaid
+Clara Meister, Tiago Pimentel, Gian Wiher, and Ryan         Harchaoui. 2021. MAUVE: Measuring the gap be-
+  Cotterell. 2023. Locally typical sampling. Transac-       tween neural text and human text using divergence
+  tions of the Association for Computational Linguis-       frontiers. In Advances in Neural Information Pro-
+  tics, 11:102–121.                                         cessing Systems, volume 34, pages 4816–4828. Cur-
+                                                            ran Associates, Inc.
+Clara Meister, Elizabeth Salesky, and Ryan Cotterell.
+  2020. Generalized entropy regularization or: There’s    Tiago Pimentel, Clara Isabel Meister, and Ryan Cot-
+  nothing special about label smoothing. In Proceed-        terell. 2023. On the usefulness of embeddings, clus-
+  ings of the 58th Annual Meeting of the Association        ters and strings for text generation evaluation. In
+  for Computational Linguistics, pages 6870–6886, On-       The Eleventh International Conference on Learning
+  line. Association for Computational Linguistics.          Representations.
+Maja Popović. 2015. chrF: character n-gram F-score
+ for automatic MT evaluation. In Proceedings of the
+ Tenth Workshop on Statistical Machine Translation,
+ pages 392–395, Lisbon, Portugal. Association for
+ Computational Linguistics.
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+  Dario Amodei, Ilya Sutskever, et al. 2019. Language
+  models are unsupervised multitask learners. OpenAI
+  blog, 1(8):9.
+Mehdi S. M. Sajjadi, Olivier Bachem, Mario Lucic,
+ Olivier Bousquet, and Sylvain Gelly. 2018. Assess-
+ ing generative models via precision and recall. Ad-
+ vances in Neural Information Processing Systems,
+ 31:5234–5243.
+L. Theis, A. van den Oord, and M. Bethge. 2016. A
+   note on the evaluation of generative models. In 4th
+   International Conference on Learning Representa-
+   tions.
+Ben Wang and Aran Komatsuzaki. 2021. GPT-J-6B: A
+  6 billion parameter autoregressive language model.
+Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Di-
+  nan, Kyunghyun Cho, and Jason Weston. 2020. Neu-
+  ral text generation with unlikelihood training. In 8th
+  International Conference on Learning Representa-
+  tions.
+Gian Wiher, Clara Meister, and Ryan Cotterell. 2022.
+  On decoding strategies for neural text generators.
+  Transactions of the Association for Computational
+  Linguistics, 10:997–1012.
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien
+  Chaumond, Clement Delangue, Anthony Moi, Pier-
+  ric Cistac, Tim Rault, Remi Louf, Morgan Funtow-
+  icz, Joe Davison, Sam Shleifer, Patrick von Platen,
+  Clara Ma, Yacine Jernite, Julien Plu, Canwen Xu,
+  Teven Le Scao, Sylvain Gugger, Mariama Drame,
+  Quentin Lhoest, and Alexander Rush. 2020. Trans-
+  formers: State-of-the-art natural language processing.
+  In Proceedings of the 2020 Conference on Empirical
+  Methods in Natural Language Processing: System
+  Demonstrations, pages 38–45, Online. Association
+  for Computational Linguistics.
+Mengzhou Xia, Mikel Artetxe, Chunting Zhou, Xi Vic-
+ toria Lin, Ramakanth Pasunuru, Danqi Chen, Luke
+ Zettlemoyer, and Ves Stoyanov. 2023. Training tra-
+ jectories of language models across scales. CoRR,
+ abs/2212.09803.
+Hugh Zhang, Daniel Duckworth, Daphne Ippolito, and
+  Arvind Neelakantan. 2021. Trading off diversity and
+  quality in natural language generation. In Proceed-
+  ings of the Workshop on Human Evaluation of NLP
+  Systems, pages 25–33, Online. Association for Com-
+  putational Linguistics.
+A    Additional Results
+
+
+
+
+Figure 3: Reverse and forward KL divergence of the model with GPT-J and the empirical distribution (WebText test
+set) after different sampling adapter methods have been applied to the output distribution. Note that the ε-method, as
+described in §4.1, is used in all but reverse KL estimates of models with GPT-J. Dashed lines represent divergence
+with unmodified distribution, i.e., the equivalent of using ancestral sampling.
+Figure 4: M AUVE scores for text generated using WebText prefixes and different sampling adapters. The dashed
+lines indicate the scores of samples generated using ancestral sampling.
+
+
+
+
+Figure 5: JS divergence of the model with the empirical distribution in the first row and with GPT-J in the second
+row after different sampling adapter methods have been applied to the output distribution. Dashed lines represent
+the distance to the unmodified distribution. We observe that at lower temperature values, some NaNs are produced
+by the JS computation with the empirical distribution.
+Figure 6: Average entropy of the distribution peθ (· | y<t ) for different sampling adapter–hyperparameter combina-
+tions. Dashed lines correspond to the entropy of the unmodified distribution.
+
+
+
+
+Figure 7: Average model token coverage per sequence y (i.e., percentage of tokens to which the adapter assigns
+non-zero probability) of the WebText test set after different sampling adapter methods have been applied to the
+output distribution. Dashed lines correspond to unmodified distribution, which always assigns probability mass to
+each token.
+
+
+
+
+Figure 8: Same plot as Fig. 1 albeit using smaller ε (1e-8 instead of 1e-6) in computation of ϵ variants of methods.
+Results are essentially unchanged, except for a slight shift in axis values.
+Figure 9: Same plot as Fig. 1 except using the test set of WikiText as our set of strings (y) and to construct the
+empirical distribution.
+Figure 10: Reverse cross-entropy versus forward cross-entropy divergence (both using ε-smoothing) of the model
+with the empirical distribution for various sampling adapter and hyperparameter settings. Stars correspond to values
+at which hyperparameter settings achieved the highest M AUVE scores. The black dot corresponds to ancestral
+sampling.
+

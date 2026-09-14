@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 71,
+ "firstTs": "2026-09-09T23:19:18.761Z",
+ "lastTs": "2026-09-09T23:22:50.069Z",
+ "tools": {
+  "Bash": 18
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "ar uniformity (all three variants are V1, one grammar against a floor of two — the card reads one field, declares no move and seats no relation, so no other grammar member has a licensing field) and within-pool sentence-length spread (sd ≈ 3.6 against a direction of ≥ 4.0, up from ≈ 3.4 in round 1).",
+ "run": "wf_e7c6cf61-44a",
+ "agent": "a5dd8488c37b13a18",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_e7c6cf61-44a/agent-a5dd8488c37b13a18.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

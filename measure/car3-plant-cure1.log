@@ -1,0 +1,13 @@
+     × ⭐ THE DRIFT ARM: no row added, no row removed, no row moved 11ms
+     × ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE 3ms
+     × ⭐ REFUSAL 1: every recorded cell carries a REAL coordinate (index >= 0) 4ms
+     × ⭐ REFUSAL 2: every registered MOUNT is recorded, or carries a measured reason 22ms
+     × ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed 51ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: rows whose composed prose moved: expected [ …(1050) ] to deeply equal []
+AssertionError: a fixture whose recorder has moved since it was written is REFUSED: re-record with `node scripts/prose-manifest-cells.mjs --record`: expected { …(3) } to deeply equal { …(3) }
+AssertionError: a cell whose variant is not in its own audience's pool: expected [ …(10) ] to deeply equal []
+AssertionError: every mount the corpus does not reach carries a reason, and no other does: expected [ 'defense.criminalStructure', …(15) ] to deeply equal [ 'defense.criminalStructure', …(13) ]
+AssertionError: positions where the two faces draw differently: expected 36 to be 345 // Object.is equality
+ Test Files  1 failed (1)
+      Tests  5 failed | 9 passed (14)

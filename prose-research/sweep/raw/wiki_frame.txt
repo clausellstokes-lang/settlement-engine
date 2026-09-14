@@ -1,0 +1,258 @@
+{{short description|Literary device in Tolkien's fiction}}
+{{good article}}
+{{Use British English|date=May 2021}}
+
+[[J. R. R. Tolkien]] used [[frame story|frame stories]] throughout his [[Middle-earth]] writings, especially [[Tolkien's legendarium|his legendarium]], to make the works [[Mythopoeia|resemble a genuine mythology]] written and edited by many hands over a long period of time. He described in detail how his fictional characters wrote their books and transmitted them to others, and showed how later in-universe editors annotated the material.
+
+The frame story for both Tolkien's novels published in his lifetime, ''[[The Hobbit]]'' and ''[[The Lord of the Rings]]'', is that the eponymous Hobbit [[Bilbo Baggins]] wrote a memoir of his adventures; it became ''[[The Red Book of Westmarch]]''. This was continued by his relative [[Frodo Baggins]], who carried the [[One Ring]] to [[Mount Doom]], and then by Frodo's servant, [[Samwise Gamgee]], who had accompanied him. ''The Lord of the Rings'' contains an appendix, "[[The Tale of Aragorn and Arwen]]", which, being written by Men rather than Hobbits, has its own frame story.
+
+The legendarium, the body of writing behind the posthumously-published ''[[The Silmarillion]]'', has a frame story that evolved over Tolkien's long writing career. It centred on a character, [[Ælfwine (Tolkien)|Aelfwine the mariner]], whose name, like those of several later reincarnations of the frame-characters, means "Elf-friend". He sails the seas and is shipwrecked on an island where the [[Elf (Middle-earth)|Elves]] narrate their tales to him. The legendarium contains [[Time travel in The Lord of the Rings|two incomplete time-travel novels]], ''[[The Lost Road and Other Writings|The Lost Road]]'' and ''[[The Notion Club Papers]]'', which are framed by various "Elf-friend" characters who by dream or other means visit earlier ages, step by step all the way back to the ancient, [[Atlantis]]-like [[Lost city (fiction)|lost civilisation]] of [[Númenor]].
+
+Tolkien was influenced by [[William Morris]]'s use of a frame story in his 1868–1870 epic poem ''[[The Earthly Paradise]]'', in which mariners of Norway set sail for the mythical place, where they hear and narrate tales, one of them of a wanderer much like [[Eärendil]]. Tolkien was familiar, too, with the Celtic [[Imram]] sea-voyage legends such as those of [[St Brendan]], who returned to tell many stories, and published a poem called "Imram" from his legendarium.
+
+Eventually, Tolkien gave the book not just a frame story, but [[Editorial framing of The Lord of the Rings|an elaborate editorial frame]] of prologue and appendices that together imply [[found manuscript|the survival of a manuscript]] through the thousands of years since the end of the [[Third Age]], along with the editing and annotation of that manuscript by many hands. This placed Tolkien in the congenial role for a [[philologist]] of [[Pseudotranslation in The Lord of the Rings|having to "translate"]] the ancient languages used in the manuscript.
+
+== Context ==
+
+[[File:Ferdinand Keller - Scheherazade und Sultan Schariar (1880).jpg|thumb|Tolkien was following in a long tradition by framing his stories in another tale explaining how they were told. That tradition includes ''[[One Thousand and One Nights]]'', where [[Scheherazade]] kept the king entertained with one story after another.<ref name=Shahrazad/> Painting by [[Ferdinand Keller (painter)|Ferdinand Keller]], 1880]]
+
+=== Frame stories ===
+
+{{main|Frame story}}
+
+A frame story is a tale that encloses or frames the main story or set of stories. For example, in [[Mary Shelley]]'s 1818 novel ''[[Frankenstein]]'', the main story is framed by a fictional correspondence between an explorer and his sister;<ref>{{cite web |title=Frame narrative |url=https://www.oxfordreference.com/view/10.1093/oi/authority.20110803095832133 |website=Oxford Reference |access-date=7 May 2021}}</ref> in ''[[One Thousand and One Nights]]'', compiled during the [[Islamic Golden Age]], the many stories are framed by a tale that [[Scheherazade]]<!--source uses "Shahrazad", which redirects to the same place--> keeps the king from executing her by telling him a story every night, each time not completing the story by daybreak so that he spares her life for just one more day.<ref name=Shahrazad>{{cite web |last=Hoh |first=Anchi |title=A Thousand and One Nights: Arabian Story-telling in World Literature |url=https://blogs.loc.gov/international-collections/2017/10/a-thousand-and-one-nights-arabian-story-telling-in-world-literature/ |publisher=[[Library of Congress]] |access-date=7 May 2021 |date=26 October 2017}}</ref>
+
+== ''The Hobbit'' and ''The Lord of the Rings'' ==
+
+=== ''Red Book of Westmarch'' ===
+
+{{main|Red Book of Westmarch}}
+
+In the last chapter of ''[[The Hobbit]]'', Tolkien writes of the protagonist and titular character [[Bilbo Baggins]] returning from the journey to the [[Lonely Mountain]] and composing his memoirs, to record the events described in the book. Bilbo thinks of calling his work ''There and Back Again, A Hobbit's Holiday''.<ref name="last stage" group=T>{{harvnb|Tolkien|1937}}, "The Last Stage"</ref>  Tolkien's full name for the novel is indeed ''The Hobbit or There and Back Again''.<ref name="hobbit title" group=T>{{harvnb|Tolkien|1937}}, Title page</ref> In the first chapter of ''[[The Lord of the Rings]]'', Bilbo's ''There and Back Again'' tale is said to be written in his red leather-bound [[diary]].<ref group=T>{{harvnb|Tolkien|1954a}}, "A Long-expected Party"</ref>
+While living in [[Rivendell]], Bilbo expands his memoirs into a record of the events of ''The Lord of the Rings'', including the exploits of his kinsman [[Frodo Baggins]] and others. He leaves the material for Frodo to complete and organize.<ref name="partings" group=T>{{harvnb|Tolkien|1955}} "Many Partings"</ref> Frodo writes down the bulk of the final work, using Bilbo's diary and "many pages of loose notes". At the close of Tolkien's main narrative, the work is almost complete, and Frodo leaves the task to his gardener and close friend and heir [[Samwise Gamgee]].<ref name="havens" group=T>{{harvnb|Tolkien|1955}}, "The Grey Havens"</ref>
+
+[[File:The_Hobbit_Dust_Jacket_Runes_Detail.jpg|thumb|upright=1.6|Detail of [[Cirth|the runes]] that provide a frame story in Tolkien's 1937 dust jacket painting for ''[[The Hobbit]]''. The runes here shown running horizontally read in English "journey made by Bilbo Baggins of Hob[biton]".<ref name="Flieger 2005 Bilbo's book"/>]]
+
+The Tolkien scholar [[Verlyn Flieger]] writes that Tolkien, seeking to present his Middle-earth writings as a credible mythology, needed to create a "credible book tradition". He went to "elaborate lengths" to achieve this, including many mentions of Bilbo's "diary" and "Translations from the Elvish", supposedly created during his years of retirement, complete with "the masses of notes and paper in his room at Rivendell".<ref name="Flieger 2005 Bilbo's book">{{harvnb|Flieger|2005|pp=67–73 "A great big book with red and black letters"}}</ref> She observes that the simulated tradition is already in evidence, [[Camouflage|hidden in plain sight]], in ''The Hobbit'', whose [[dust jacket]] is "surreptitiously" [[Tolkien's artwork|ornamented by Tolkien]] with ancient-looking [[rune]]s, which read:<ref name="Flieger 2005 Bilbo's book"/>
+
+{{quote|The Hobbit or There and Back Again, being the record of a year's journey made by Bilbo Baggins of Hobbiton; compiled from his memoirs by JRR Tolkien, and published by George Allen and Unwin Ltd.<ref name="Flieger 2005 Bilbo's book"/>}}
+
+Flieger notes that ''The Hobbit''{{'}}s frame story is rather fragile, since the book's narrator often speaks in a voice that cannot be Bilbo's.<ref name="Flieger 2005 Bilbo's book"/> In ''The Lord of the Rings'', on the other hand, Tolkien carefully embedded the frame story in the text, from the earliest drafts. He has Bilbo talk in the [[Council of Elrond]] about getting on with his book, saying that he was "just writing an ending for it", but realising that it now needed "several more chapters" because of Frodo's adventures on the way to Rivendell.<ref group=T>{{harvnb|Tolkien|1954a}}, "[[The Council of Elrond]]"</ref><ref name="Flieger 2005 Bilbo's book"/> She comments that Tolkien "went so far as to draw up a title page" for his Red Book, showing Bilbo's "largely unsatisfactory tries" at finding an appropriate title.<ref name="Flieger 2005 Bilbo's book"/> The final title is Frodo's:<ref name="havens" group=T/>
+
+{| class="wikitable" style="margin:auto"
+|-
+|style="text-align: center;"| 
+''<s>My Diary.</s> <s>My Unexpected Journey.</s> <s>There and Back Again. And<br/>What Happened After.</s>''<br/>
+''<s>Adventures of Five Hobbits.</s> <s>The Tale of the Great Ring, compiled by</s>''<br/>''<s>Bilbo Baggins from his own observations and the accounts of his friends.</s>''<br/>''<s>What we did in the War of the Ring.</s>''
+
+THE DOWNFALL<br/>
+<small>OF THE</small><br/>
+LORD OF THE RINGS<br/>
+<small>AND THE</small><br/>
+RETURN OF THE KING
+
+(as seen by the [[Hobbit|Little People]]; being the memoirs of Bilbo and<br/>
+Frodo of [[Shire (Middle-earth)|the Shire]], supplemented by the accounts of their friends<br/>
+and the learning of the Wise.)
+
+Together with extracts from Books of Lore translated by Bilbo<br/>in [[Rivendell]].
+
+|}
+
+Flieger writes that at the time of the release of the first edition of ''The Lord of the Rings'' in 1954, Tolkien had not yet included that text in the Red Book; its prologue spoke of ''The Hobbit'' as containing "a selection from the ''Red Book of Westmarch''".<ref name="Flieger 2005 Bilbo's book"/> Tolkien went on developing the frame story, and in the second edition he added a "Note on the Shire Records" to the prologue. It explains, in [[Editorial framing of The Lord of the Rings|the voice of the fictional editor]], that the "account" (the main text of ''The Lord of the Rings'') was taken mainly from the ''Red Book of Westmarch'', stating that this was begun as "Bilbo's private diary", continued by Frodo with an account of the War of the Ring, and extended by Sam.<ref name="Flieger 2005 Bilbo's book"/>
+
+Near the end of the main text, Tolkien has Frodo give the Red Book to Sam. Flieger notes that, seeing it, Sam says "Why, you have nearly finished it, Mr. Frodo!", and describes Frodo's answer as "both definitive and revealing": {{"'}}I have quite finished, Sam', said Frodo. 'The last pages are for you.{{'"}}<ref name="Flieger 2005 Bilbo's book"/> She comments that where Sam says "it", meaning the book, Frodo does not, leaving open whether he means the book or his life in Middle-earth as he has recorded in the book.<ref name="Flieger 2005 Bilbo's book"/> She briefly considers what Sam might have been supposed to have added, if the suggestion is to be taken at all seriously. She points out that they could have been books 4 and 6 of ''The Lord of the Rings'', where Frodo is never seen without Sam, but there are times when Sam is alert while Frodo is absent or unconscious. Further, no other observer was present, especially at [[Mount Doom]] where Sam is the only person who sees Gollum fighting an invisible Frodo for [[One Ring|the Ring]].<ref name="Flieger 2005 Bilbo's book"/>
+
+[[File:A minstrel sings of famous deeds by J. R. Skelton c 1910.jpg|thumb|upright|The medieval poem ''[[Beowulf]]'' contains a passage about a [[scop]] reciting the tale of the hero [[Beowulf (hero)|Beowulf]]. Illustration by [[Joseph Ratcliffe Skelton]], c. 1910]]
+
+Flieger observes that on the stairs of the dangerous pass of [[Cirith Ungol]], Frodo and Sam talk about what a story is. Sam says "We're in one, of course, but I mean put into words, you know ... read out of a great big book with red and black letters". Frodo answers "Why Sam ... to hear you somehow makes me as merry as if the story were already written". Flieger writes that this is "the most [[self-referential]] and [[Tolkien and the modernists|post-modern]] moment in the entire book",<ref name="Flieger 2005 Bilbo's book"/> since it constitutes the book itself looking both back at its own creation, and forward to the printed book that the reader is holding. She compares this with [[Beowulf and Middle-earth|a passage that Tolkien certainly knew]], lines 867–874 of ''[[Beowulf]]'', where the [[scop]] who is reciting the poem sings of a poet singing about Beowulf. In her view, Sam's "put into words, you know" is a deliberate echo of ''Beowulf''{{'}}s "glorying in words".<ref name="Flieger 2005 Bilbo's book"/>
+
+{| cellpadding=5 style="margin:1em auto;"
+|+ ''Beowulf's'' [[self-referential]] account of Anglo-Saxon artistry in story-telling
+|-
+! ''[[Beowulf]]'' 867–874  !! [[Roy Liuzza]]'s translation{{sfn|Liuzza|2013|p=36}}
+|-
+| <poem>{{lang|ang| &nbsp; &nbsp;  &nbsp; &nbsp;  ... &nbsp; &nbsp; Hwīlum cyninges þegn,
+guma gilphlæden, &nbsp; &nbsp; gidda gemyndig,
+se ðe ealfela &nbsp; &nbsp; ealdgesegena
+worn gemunde &nbsp; &nbsp; —word oþer fand
+soðe gebunden— &nbsp; &nbsp; secg eft ongan
+sið Bēowulfes &nbsp; &nbsp; snyttrum styrian,
+ond on sped wrecan &nbsp; &nbsp; spel gerade,
+wordum wrixlan; &nbsp; &nbsp; ...}}</poem>
+| <poem> &nbsp; &nbsp;  &nbsp; &nbsp; At times the king's thane,
+full of grand stories, mindful of songs,
+who remembered much, a great many
+of the old tales, found other words
+truly bound together; he began again
+to recite with skill the adventure of Beowulf,
+adeptly tell an apt tale,
+and weave his words.</poem>
+|}
+
+[[File:hobbitstale.jpg|thumb|upright=1.5|[[Bilbo Baggins|Bilbo]] writing his memoirs titled ''There and Back Again'' in [[Peter Jackson]]'s ''[[The Lord of the Rings: The Fellowship of the Ring|The Fellowship of the Ring]]'', at that stage representing Tolkien's book ''[[The Hobbit]]''<ref name="McClintock"/>]]
+
+[[Peter Jackson]] chose to continue the use of the frame story of Bilbo's memoirs in his film adaptations. In his 2001 ''[[The Lord of the Rings: The Fellowship of the Ring|The Fellowship of the Ring]]'', Bilbo's ''There and Back Again'' provided the basis for the [[voiceover]] for the scene "Concerning Hobbits"; this was greatly extended in the Special Extended Edition. The memoirs' title became the working title for the third of Jackson's ''The Hobbit Films'' in August 2012,<ref name="McClintock">{{cite news |last=McClintock |first=Pamela |title=Third 'Hobbit' Film Sets Release Date |url=https://www.hollywoodreporter.com/news/third-hobbit-film-sets-release-367258 |work=The Hollywood Reporter |access-date=31 August 2012 |date=31 August 2012}}</ref> but in 2014 he changed it to ''[[The Hobbit: The Battle of the Five Armies]]''.<ref name=Guardian1>{{cite web |title=Peter Jackson retitles The Hobbit part three The Battle of the Five Armies |url=https://www.theguardian.com/film/2014/apr/24/peter-jackson-hobbit-battle-of-the-five-armies |work=[[The Guardian]] |access-date=22 May 2014 |first=Ben |last=Child |date=24 April 2014}}</ref>
+
+=== "The Tale of Aragorn and Arwen" ===
+
+{{further|The Tale of Aragorn and Arwen}}
+
+''The Lord of the Rings'' contains a second frame story, for the appendix "[[The Tale of Aragorn and Arwen]]". The tale describes how the hero [[Aragorn]] came to marry an immortal Elf-woman, [[Arwen]]. Tolkien stated that it was "really essential" to the work. Its frame story is that the tale was written by [[Faramir]] and Éowyn's grandson Barahir after Aragorn's death, and that an abbreviated version of the tale was included in a copy of the [[Red Book of Westmarch#Thain's Book|Thain's Book]] made by Findegil. This in turn was annotated, corrected, and extended in [[Minas Tirith]].<ref name="Shire Records" group=T>{{harvnb|Tolkien|1955}}, "Prologue: Note on the Shire Records"</ref> The [[narrative voice]] and the story's point of view are examined by the scholar Christine Barkley, who considers the main part of the tale to have been narrated by Aragorn.<ref name="Barkley 1996">{{cite journal |last=Barkley |first=Christine |year=1996 |title=Point of View in Tolkien |journal=[[Mythlore]] |volume=21 |number=2 |pages=256–262 |url=https://dc.swosu.edu/mythlore/vol21/iss2/38}}</ref>{{efn|The scholar Helen Armstrong examines the implications of Arwen's being one of the narrators of the tale after Aragorn's death.<ref name="Armstrong 1998">{{cite journal |last=Armstrong |first=Helen |title=There Are Two People in This Marriage |journal=[[Mallorn (journal)|Mallorn]] | publisher=[[The Tolkien Society]]| date=1998 |volume=36 |pages=5–12}}</ref>}}
+
+=== Paratexts ===
+
+{{further|Tolkien and antiquarianism#Paratext|Philology and Middle-earth}}
+
+Tolkien included a mass of [[paratext]]s – prefaces, notes, and appendices of all kinds – in ''The Lord of the Rings'', and some in ''The Hobbit''. The Tolkien scholar [[Janet Brennan Croft]] comments that these "resonat[e]" or "collaborat[e]" with the main text to amplify its effect, making it more believable. Several of these contribute to his frame stories, which place him not as author but as the last of a line of [[Philology and Middle-earth|philological editors]] of ancient documents originally written by characters such as the Hobbits [[Bilbo Baggins|Bilbo]] and [[Frodo Baggins]]. These paratexts thus support a [[found manuscript]] conceit, which in turn supports the frame story.<ref name="Croft 2018">{{cite journal |last=Croft |first=Janet Brennan |author-link=Janet Brennan Croft |title=Doors into Elf-mounds: J.R.R. Tolkien's Introductions, Prefaces, and Forewords |journal=[[Tolkien Studies]] |volume=15 |issue=1 |year=2018 |doi=10.1353/tks.2018.0009 |pages=177–195}}</ref> 
+The Tolkien scholar Giuseppe Pezzini writes that the "meta-textual frame [of ''The Lord of the Rings''] ... is duly harmonised in the text through the use of formal features; the appendixes are indeed full of scribal glosses, later notes, and editorial references that are meant to match the elaborate textual history detailed in the Note on the Shire Records."<ref name="Pezzini 2018">{{cite journal |last=Pezzini |first=Giuseppe |title=The authors of Middle Earth: Tolkien and the mystery of literary creation  |journal=[[Journal of Inklings Studies]] |url=https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/13159/Pezzini_2018_JIS_AuthorsofMiddleEarth_AAM.pdf?sequence=1&isAllowed=y |date=2018 |volume=8 |issue=1 |pages=31–64 |doi=10.3366/ink.2018.0003 |hdl=10023/13159 |hdl-access=free }}</ref> For example:
+
+{| style="margin:auto" width="70%"
+|+ Tolkien's representation of historical editing of [[Found manuscript|ancient documents]] in the appendices to ''The Lord of the Rings''<ref name="Croft 2018"/>
+!  !! Material in the appendix !! !! Comments
+|-
+| || '''Appendix A. II "The House of Eorl".''' The Kings of the Mark. ''Third Line''. || &nbsp; || ''Annalistic heading''
+|- style="vertical-align: top;"
+| 2991—F.A. 63 (3084) || ''[[Éomer]] Éadig''. When still young he became a Marshal of [[Rohan, Middle-earth|the Mark]] (3017) and was given his father's charge in the east marches. In the War of the Ring Théodred fell in battle with [[Saruman]] at the Crossings of Isen. Therefore before he died on the [[Battle of the Pelennor Fields|Fields of the Pelennor]], [[Théoden]] named Éomer his heir and called him king. In that day [[Éowyn]] also won renown, for she fought in that battle, riding in disguise; and was known after in the Mark as the Lady of the Shield-arm.<sup>1</sup> ||  || ''[[Annals|Annalistic]] dates and text recording great events of the past''
+|-
+| || &nbsp; ||  || 
+|-
+| colspan=2 | <sup>1</sup> <small>For her shield-arm was broken by the mace of the Witch-king; but he was brought to nothing, and thus the words of [[Glorfindel]] long before to King Eärnur were fulfilled, that the Witch-king would not fall by the hand of man. For it is said in the songs of the Mark that in this deed Éowyn had the aid of Théoden's esquire, and that he also was not a Man but a [[Hobbit|Halfling]] out of a far country, though Éomer gave him honour in the Mark and the name of Holdwine.</small> || &nbsp; || ''Later editor's footnote''<br/>&nbsp;<br/>&nbsp;
+|-
+| colspan=2 |<small>[This Holdwine was none other than [[Merry Brandybuck|Meriadoc]] the Magnificent who was Master of [[Buckland (Middle-earth)|Buckland]].]</small> || &nbsp; || ''[[Scribe|Scribal]] gloss''
+|}
+
+== Tolkien's legendarium ==
+
+{{further|Tolkien's legendarium}}
+
+Tolkien thought of [[Tolkien's legendarium|his legendarium]], the large body of documents of many kinds that lies behind the text of the 1977 book ''[[The Silmarillion]]'', as a presented collection, with a frame story that changed over the years, first with an Ælfwine-type character who translates the "Golden Book" of the sages Rumil or Pengoloð; later, having the Hobbit [[Bilbo Baggins]] collect the stories into the ''[[Red Book of Westmarch]]'', translating mythological Elvish documents in [[Rivendell]].{{sfn|Flieger|2005|pp=87–118}}
+
+=== Ælfwine ===
+
+[[File:Hengist and Horsa.jpg|thumb|upright=1.35|The brothers [[Hengest and Horsa]] are the legendary founders of England; in ''[[The Book of Lost Tales]]'', Tolkien places Ælfwine as their father. Illustration from [[Edward Parrott]]'s 1909 ''Pageant of British History'']]
+
+{{further|Ælfwine (Tolkien)|A mythology for England}}
+
+In ''[[The Book of Lost Tales]]'', begun early in Tolkien's writing career, the character who becomes Ælfwine the mariner is named Ottor Wǽfre (called ''Eriol'' by the Elves), and his tale serves as frame story for the tales of the Elves. He sets out from what is today [[Heligoland]] on a voyage with a small crew, but is the lone survivor after his ship crashes upon the rocks near an island. The island is inhabited by an old man who gives him directions to Eressëa. After he finds the island, the Elves host him in the [[Cottage of Lost Play]] and narrate their tales to him. He afterwards learns from them that the old man he met was actually "[[Ulmo|Ylmir]]". He is taught most of the tales by the old Elf Rúmil, Eressëa's lore master.<ref group=T name="BOLT2">{{harvnb|Tolkien|1984b}}, p. 103</ref>
+
+In these early versions, [[Tol Eressea]] is seen as the island of Britain. He earned the name Ælfwine from the Elves; his first wife, Cwén, was the mother of [[Hengest and Horsa]]; his second wife, Naimi, bore him a third son, [[Heorrenda]], a great poet of [[half-Elven]] descent, who in the fiction would go on to write the Old English epic poem ''[[Beowulf]]''. This weaves together [[a mythology for England]], connecting England's geography, poetry and mythology with the Legendarium as a plausibly reconstructed (though probably untrue) prehistory.<ref name="Drout 2004">{{cite book |last=Drout |first=Michael D. C. |author-link=Michael D. C. Drout |editor-last=Chance |editor-first=Jane |editor-link=Jane Chance | chapter=A Mythology for Anglo-Saxon England |title=Tolkien and the Invention of Myth: a Reader |title-link=Tolkien and the Invention of Myth | publisher=[[University Press of Kentucky]] | year=2004 | isbn=978-0-8131-2301-1 |pages=229–247}}</ref>
+
+=== ''The Book of Lost Tales'' ===
+
+The first title for ''[[The Book of Lost Tales]]'', begun in 1917, framed its stories as a transmitted collection:{{-}}
+
+{| class="wikitable" style="margin:auto"
+|-
+|style="text-align: center;"|The Golden Book of [[Heorrenda]]<br/>being the book of the<br/>Tales of Tavrobel<ref group=T>{{harvnb|Tolkien|1984b}}, p. 290</ref>
+|}
+
+In the fiction, a series of named Elves{{efn|See the "Storyteller" column in the table in the article on ''[[The Book of Lost Tales#Comparison with The Silmarillion|The Book of Lost Tales]]''.}} told the "lost tales" to Eriol/Ælfwine. He transmitted them via Heorrenda's written book.{{sfn|Flieger|2005|p=108}} As edited by [[Christopher Tolkien]], the 1983 ''Book of Lost Tales, Volume 1'' is inscribed:
+
+{| class="wikitable" width="400px" style="margin:auto"
+|-
+|style="text-align: center;"|''This is the first part of the Book of the Lost Tales of Elfinesse which Eriol the Mariner learned from the Elves of [[Tol Eressëa]], the Lonely Isle in the [[Belegaer|western ocean]], and afterwards wrote in the Golden Book of Tavrobel. Herein are told the Tales of [[Valinor]], from the [[Music of the Ainur]] to the Exile of the [[Noldor|Noldoli]] and the [[Valinor#The Hiding of Valinor|Hiding of Valinor]].''<ref group=T>{{harvnb|Tolkien|1984}}, Title page</ref>
+|}
+
+=== Two incomplete time-travel novels: ''The Lost Road'' and ''The Notion Club Papers'' ===
+
+{{further|The Lost Road|The Notion Club Papers}}
+
+Tolkien attempted to write [[Time in Tolkien's fiction|two time-travel novels]], but never completed either of them. Both can be seen as frame stories for his legendarium, as the father-son pair of time travellers in each of the novels successively approach the ancient period of the downfall of [[Númenor]]. He began ''[[The Lost Road and Other Writings|The Lost Road]]'' in 1937, writing four chapters before setting it aside.{{sfn|Flieger|1983|pp=19–20, 61, 119}} He returned to the theme with ''[[The Notion Club Papers]]'', which he began and abandoned between 1944 and 1946.{{sfn|Flieger|1983|pp=19–20, 61, 119}} In its frame story, a Mr. Green finds documents in sacks of waste paper at Oxford in 2012. These documents, the Notion Club Papers of the title, are the incomplete notes of meetings of the Notion Club; these meetings are said to have occurred in the 1980s. During these meetings, Alwin Arundel Lowdham discusses his [[lucid dream]]s about Númenor, a [[Lost city (fiction)|lost civilisation]] connected with [[Atlantis]] and with Tolkien's [[Middle-earth]]. Through these dreams, he "discovers" much about the Númenor story and the [[Languages constructed by J. R. R. Tolkien|languages of Middle-earth]] (notably [[Quenya]], [[Sindarin]], and [[Adûnaic]]). While not finished, at the end of the given story it becomes clear that Alwin Lowdham himself is a reincarnation of sorts of [[Elendil]].{{sfn|Flieger|2001|pp=117–141}} Tolkien selected the names of these characters (in both novels) to indicate their affinity: Alwin is another form of the Old English name "Aelfwine", meaning "Elf-friend", while the [[Quenya]] name [[Elendil]] can carry the same meaning.<ref name="Luling 2012">{{cite journal |last=Luling |first=Virginia |title=Going back: time travel in Tolkien and E. Nesbit |journal=[[Mallorn (journal)|Mallorn]] |date=2012 |issue=53 (Spring 2012) |pages=30–31 |url=https://journals.tolkiensociety.org/mallorn/article/download/66/60}}</ref>
+
+{| class="wikitable" style="margin: 1em auto;"
+|+ [[J. R. R. Tolkien's explorations of time travel|Time-travelling]] frame story characters with the periods they visit{{sfn|Shippey|2005|pp=336-337}}
+|-
+! Period || [[Second Age]]<br/>Over 9,000 years ago || [[Lombards]]<br/>(568–774) || [[Anglo-Saxons]]<br/>({{circa}} 450–1066) || England<br/>20th century || 
+|-
+! Language<br/>of names !! [[Quenya]]<br/>(in [[Númenor]]) || Germanic || [[Old English]] !! Modern English !! Meaning<br/>of names
+|-
+! Character 1 
+| '''[[Elendil]]''' || '''''[[Alboin]]''''' || '''''[[Ælfwine (Tolkien)|Ælfwine]]''''' || '''Alwin'''  || Elf-friend
+|-
+! Character 2 
+| Herendil || [[Audoin]] || ''[[Eadwine]]'' || Edwin || Bliss-friend
+|-
+! Character 3 
+| Valandil ("[[Valar]]-friend") || ——— || ''Oswine'' || Oswin, cf. Oswald  || God-friend
+|}
+
+== Analysis ==
+
+[[File:Saint brendan german manuscript.jpg|thumb|upright|Tolkien's frame stories began as a mariner's sea-voyages, encountering strange lands. One of the types of story influencing these was the Celtic [[Imram]] legend, such as of the voyages of [[St Brendan]], shown here in a 15th-century manuscript.<ref name="Garth 2020"/>]]
+
+[[Anna Vaninskaya]], in [[Blackwell Publishers|Blackwell's]] 2014 ''[[A Companion to J. R. R. Tolkien]]'', notes that Tolkien was directly influenced by [[William Morris]]. She suggests that the legendarium's frame story, starting from the travels of Ælfwine the mariner, was modelled on Morris's 1868–1870 epic poem ''[[The Earthly Paradise]]'', whose frame story is that "mariners of Norway, having ... heard of the Earthly Paradise, set sail to find it".<ref name="Vaninskaya 2020">{{harvnb|Lee|2020|loc=[[Anna Vaninskaya]], "Modernity: Tolkien and His Contemporaries", pp. 350–366}}</ref> She notes that Morris's "wanderers" reach "A nameless city in a distant sea / White as the changing walls of faërie", where they hear and narrate legends including "The Land East of the Sun and West of the Moon"; Tolkien's ''Lost Tales II'' contains one of the legendarium's foundation-poems that similarly describes the "Wanderer" Earendel (forerunner of Tolkien's [[Eärendil]]), who sails "[[A Walking Song|West of the Moon, east of the Sun]]".<ref name="Vaninskaya 2020"/>{{efn|The phrase "East of the Sun and West of the Moon" is used in fairy-stories and similar tales to refer to another world that is fantastically difficult to reach – in this case [[Aman (Middle-earth)|Aman]], which can only be reached by the [[Straight Road]]. An example of the use of this phrase is in the fairy tale "[[East of the Sun and West of the Moon]]". See also Tolkien's use of this phrase in a late variant of his '[[The Road Goes Ever On (song)|The Road Goes Ever On]]' walking songs.}}
+
+Tolkien's biographer [[John Garth (author)|John Garth]], in the same volume, writes that in 1920, Tolkien revised his frame story so that the Lonely Isle was no longer equated with England, and Eriol became the Anglo-Saxon Ælfwine; this began the process of revising the legendarium that continued throughout his life. He notes that in 1945 and 1946, Tolkien added ''The Notion Club Papers'', visiting ancient Númenor by [[Time in Tolkien's fiction|travelling in time]] rather than by ship, but with a poem about St Brendan's [[Imram]] sea-voyages that he revised as the 1955 "Imram".<ref name="Garth 2020">{{harvnb|Lee|2020|loc=[[John Garth (author)|John Garth]], "A Brief Biography", pp. 13, 18}}</ref><ref>{{cite web |title=Imram |url=https://tolkiengateway.net/wiki/Imram |publisher=[[Tolkien Gateway]] |access-date=21 May 2024}}</ref>
+
+The Tolkien scholar [[Jane Chance]] describes the 1920 version of the Ælfwine story as "Tolkien's complicated penultimate version of the pseudo-historical and Anglo-Saxon frame-story", calling it important to any understanding of "Middle-earth's kernel mythology".<ref>{{cite book |last=Chance |first=Jane |author-link=Jane Chance |chapter=Forlorn and Abject: Tolkien and His Earliest Writing (1914–1924) |title=Tolkien, Self and Other |publisher=[[Palgrave Macmillan]] |year=2016 |pages=19–45 |doi=10.1057/978-1-137-39896-3_2|isbn=978-1-137-39895-6 }}</ref>
+
+Dale Nelson, in ''[[The J. R. R. Tolkien Encyclopedia]]'', writes that Tolkien and his friend [[C. S. Lewis]] admired [[David Lindsay (novelist)|David Lindsay]]'s ''[[A Voyage to Arcturus]]'', but that Tolkien "regretted" the [[science fiction]] style frame story machinery that Lindsay had used – the back-rays and the crystal torpedo ship; he notes that in ''The Notion Club Papers'', Tolkien makes one of the protagonists, Guildford, criticise those kinds of "contraptions".<ref name="Nelson 2013">{{cite encyclopedia |last=Nelson |first=Dale |editor-last=Drout |editor-first=Michael D. C. |editor-link=Michael D. C. Drout |title=Literary Influences: Nineteenth and Twentieth Centuries |encyclopedia=[[The J. R. R. Tolkien Encyclopedia]] |year=2013 |orig-year=2007 |publisher=[[Routledge]] |isbn=978-0-415-86511-1 |pages=372-377<!--20th C-->}}</ref>
+
+== Beyond the frame story: editorial framing of ''The Lord of the Rings'' ==
+
+{{main|Editorial framing of The Lord of the Rings}}
+
+In ''The Lord of the Rings'', Tolkien ultimately went much further than simply embedding a frame story in the text, though he did that too. Instead, he constructed an elaborate  editorial frame, including a prologue and an extensive set of appendices, all designed to give the impression that the text had not only survived the thousands of years since the end of the [[Third Age]], but had in that long period been annotated and edited by many hands. The scholar Vladimir Brljak argues that this framework, with its pseudo-editorial, pseudo-philological, and [[Pseudotranslation in The Lord of the Rings|pseudo-translational aspects]], "is both the cornerstone and crowning achievement of Tolkien's mature literary work".<ref>{{cite journal |last=Brljak |first=Vladimir |title=The Books of Lost Tales: Tolkien as Metafictionist |journal=[[Tolkien Studies]] |volume=7 |issue=1 |date=2010 |doi=10.1353/tks.0.0079 |pages=1–34 }}</ref>
+
+{| style="margin-left: auto; margin-right: auto; border: none;" class="wikitable"
+|+ Found manuscript and pseudotranslation supporting Tolkien's frame story<ref name="Flieger 2005 Bilbo's book"/>{{sfn|Turner|2011a|pp=18–21}}
+|-
+! style="width: 120px;" | Time
+! style="width: 350px;" | Events
+! style="width: 150px;" | Notes
+|-
+| [[History of Arda#Years of the Sun|Third Age]] 
+| The quest of [[Erebor]]<br/>[[Bilbo Baggins]] writes his memoirs in [[Westron]].<br/>[[War of the Ring]]
+| Pseudo-history conceit<br/>''[[The Hobbit]]''<br/>Further pseudo-history
+|-
+| Fourth Age 
+| [[Frodo Baggins]] writes his memoirs in Westron.<br/>Others annotate the memoirs: the ''[[Red Book of Westmarch]]''.
+|  ''[[The Lord of the Rings]]''<br/>[[Found manuscript]] conceit
+|-
+| Fifth Age  
+| ... more editing by more hands ...
+| Pseudo-editor conceit
+|-
+| Sixth/Seventh Age 
+| The Tolkien 'editor' "translates" the found manuscript into English (and a little [[Old Norse]] and [[Old English]])
+| [[Pseudotranslation in The Lord of the Rings|Pseudo-translator]] conceit: Appendices
+|}
+
+== Notes ==
+
+{{notelist}}
+
+== References ==
+
+=== Primary ===
+
+{{reflist|group=T|30em}}
+
+=== Secondary ===
+
+{{reflist|30em}}
+
+== Sources ==
+
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |year=1983 |title=Splintered Light: Logos and Language in Tolkien's World |title-link=Splintered Light |location=Grand Rapids, Michigan |publisher=[[William B. Eerdmans Publishing Company]] |isbn=978-0-8028-1955-0}}
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |title=A Question of Time: J. R. R. Tolkien's Road to Faėriė |url=https://books.google.com/books?id=I33v5ny3NX0C&pg=PA117 |year=2001 |publisher=[[Kent State University Press]] |isbn=978-0-87338-699-9}}
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |year=2005 |title=Interrupted Music: The Making of Tolkien's Mythology |publisher=[[Kent State University Press]]}}
+* {{cite book |editor-last=Lee |editor-first=Stuart D. |editor-link=Stuart D. Lee |title=A Companion to J. R. R. Tolkien |title-link=A Companion to J. R. R. Tolkien |date=2020 |orig-year=2014 |publisher=[[Wiley Blackwell]] |isbn=978-1119656029}}
+* {{cite book |last=Liuzza |first=Roy M. |author-link=Roy Liuzza |title=Beowulf: facing page translation |publisher=Broadview Press |publication-place=Peterborough, Ontario |year=2013 |edition=2nd |orig-year=2000 |isbn=978-1554811137}}
+* {{ME-ref|ROAD}}   <!--Shippey 2005-->
+* {{ME-ref|TH}}
+* {{ME-ref|FOTR}}
+* {{ME-ref|ROTK}}
+* {{ME-ref|BoLT}}
+* {{ME-ref|BoLT2}}
+* {{cite book |last=Turner |first=Allan |author-link=Allan Turner (scholar) |chapter=A Theoretical Model for Tolkien Translation Criticism |editor-last=Honegger |editor-first=Thomas |editor-link=Thomas Honegger |title=Tolkien in Translation |publisher=[[Walking Tree Publishers]] |year=2011a |isbn=978-3-9521424-6-2 |series=Cormarë series |volume=4 |location=Zurich |pages=1–30}}
+
+{{Middle-earth}}
+{{Hobbit}}
+{{Lord of the Rings}}
+
+<!--- Categories --->
+[[Category:Middle-earth themes]]
+[[Category:Frame stories]]
+[[Category:Themes of The Lord of the Rings]]

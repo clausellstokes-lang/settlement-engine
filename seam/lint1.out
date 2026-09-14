@@ -1,0 +1,98 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 4588ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 40ms
+ ❯ tests/lint/proseWiringCensus.walker.test.js (57 tests | 1 failed) 6389ms
+     × the committed census is byte-identical to a fresh build, and the stamp is live 25ms
+ ❯ tests/lint/tuningRegister.walker.test.js (75 tests | 2 failed) 10474ms
+     × no file carries more unregistered named constants than the inventory banked 14ms
+     × the six ceilings never rise 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-bytes' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ stale-bytes
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:1437:61
+    1435|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    1436|     const verdict = censusCheck(text, committed);
+    1437|     expect(verdict.reason, 'the committed file is current').toBe('');
+       |                                                             ^
+    1438|     expect(verdict.ok).toBe(true);
+    1439|     expect(text, 'and byte-identical to what the script would write').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 2555 to be 2553 // Object.is equality
+
+- Expected
++ Received
+
+- 2553
++ 2555
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7446:8
+    7444|       .toBe(blockKeys.length);
+    7445|     expect(TEST_FILES.length, 'the estate\'s file count moved — re-mea…
+    7446|       .toBe(CENSUS.files);
+       |        ^
+    7447|     expect(parked.length, 'the parked-file count moved from SP-C\'s me…
+    7448|       + ' a rule widened or narrowed, or a lane changed a file\'s shap…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked
+AssertionError: P2 is SHRINK-ONLY with new files at zero.: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/stateProse/composeStateProse.js: 0 -> 2",
++ ]
+
+ ❯ tests/lint/tuningRegister.walker.test.js:482:67
+    480|       if (count > banked) problems.push(`${file}: ${banked} -> ${count…
+    481|     }
+    482|     expect(problems, 'P2 is SHRINK-ONLY with new files at zero.').toEq…
+       |                                                                   ^
+    483|   });
+    484|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise
+AssertionError: every ceiling here is a banked MEASUREMENT of what the estate already is, so the only movement it permits is downward. Raising one is not a lane's act — TIME IS NOT THE CONSTRAINT, and a raised ceiling is a debt taken silently.: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "UNREGISTERED_NAMED_CEILING: 535 -> 537",
++ ]
+
+ ❯ tests/lint/tuningRegister.walker.test.js:518:88
+    516|     expect(problems, 'every ceiling here is a banked MEASUREMENT of wh…
+    517|       + ' is, so the only movement it permits is downward. Raising one…
+    518|       + ' TIME IS NOT THE CONSTRAINT, and a raised ceiling is a debt t…
+       |                                                                                        ^
+    519|   });
+    520|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  3 failed | 145 passed (148)
+      Tests  4 failed | 2396 passed (2400)
+   Start at  11:55:25
+   Duration  89.52s (transform 15.47s, setup 3.98s, import 127.05s, tests 432.15s, environment 14ms)
+

@@ -1,0 +1,1046 @@
+ 
+
+ THE BOOK OF THE NEW SUN – Gene Wolfe (1980-83) | Weighing a pig doesn't fatten it. 
+
+ Weighing a pig doesn't fatten it. 
+
+ speculative fiction and then some
+
+ Skip to content 
+
+ Reviews 
+
+ A-Z index 
+
+ Favorite Lists 
+
+ Other 
+
+ About 
+
+ ← 2 BOOKS ON BRAINS: ‘HOW THE BRAIN MAKES DECISIONS’ (2020) & ‘BEAUTIFUL BRAIN: THE DRAWINGS OF SANTIAGO RAMON Y CAJAL’ (2017) 
+
+ ROADSIDE PICNIC – Arkady and Boris Strugatsky (1972) → 
+
+ THE BOOK OF THE NEW SUN – Gene Wolfe (1980-83)
+
+ Posted on May 16, 2021 | 51 Comments 
+
+ This is a 5500 word essay on a reread of TBotNS , focusing on the narrative trap Wolfe has set, and my theory that his literary sleight of hand serves a religious/mystical goal, much more than it is the supposed puzzle for the reader to unravel. There’s also a short section on free will, and it ends with my overall appraisal of the book’s enduring appeal. 
+
+ The first time I read The Book of the New Sun must have been somewhere in 2011, and it has remained a strong favorite in my mind ever since, easily top 5 ever. As The Folio Society recently published a more or less affordable version of their limited edition treatment of the book, I decided that was a good excuses to whip out too much cash on a book I already owned, and reread the entire thing.
+
+ Much has been written about Gene Wolfe’s magnum opus, and I have no intention whatsoever to add to certain debates surrounding these volumes – on the contrary: to me these debates miss an important point, as I will try to explain later.
+
+ Deep down I was reluctant to start the reread. My other encounters with Wolfe’s prose haven’t always been fully successful, and I feared The Book of the New Sun to be a lesser affair than I remembered. I have to admit that to a certain extent is was – but that is not to say it became a bad book: I still rank it among my favorite reads.
+
+ Before I’ll get to the bulk of this review, first some introductionary remarks to those unfamiliar with the book.
+
+ The Book of the New Sun was first published as 4 separate volumes: The Shadow of the Torturer (1980), The Claw of the Conciliator (1981), The Sword of the Lictor (1982) and The Citadel of the Autarch (1983). Two volume editions have been published as Shadow & Claw and Sword & Citadel , and single volume editions have been published as The Book of the New Sun , and also as Severian of the Guild .
+
+ When I started rereading it, I intended to review only The Shadow of the Torturer , and then turn to some other books before starting the second volume. But it quickly dawned on me such a review wouldn’t do the novel justice. A review of Shadow might have worked if it had been my first read, but since my memories of the other volumes – not perfect, mind you – had such a gravitational pull, I could only finish the entire thing before writing this. That is not unlike Wolfe himself, who intended to write a novella, but when is was done it turned out to be a tetralogy, only finishing the final draft of the first book when he had finished the second drafts of the remaining 3 parts.
+
+ Because he was pressured by his publisher, Wolfe published a coda to this story in 1987, The Urth of the New Sun . I will reread that too someday, but I feel I shouldn’t take it into account for this review, as Wolfe didn’t conceive of it while he wrote this. The same goes for the two related series The Book of the Long Sun and The Book of the Short Sun – published between 1993-1996 and 1999-2003. I won’t take their subject matter into account either: they weren’t part of the quadruple canon, and as such can’t really be used to weigh the original artistic merit. I feel that lots of the interpretations of TBotNS based on certain things in the later series could be considered a form of Hineininterpretierung.
+
+ Those who dread being sucked into a 12 book ‘Solar Cycle’, such fear is unwarranted. The Book of the New Sun was conceived as a stand-alone, and if you like it a lot, there’s no harm in reading the coda, Urth . But Long Sun and Short Sun are generally considered works of lesser quality – except by hardcore Wolfe fans – and their main stories are only very tangentially related. I’ve read the first 3 of Long Sun (reviews here ), but chances are I’ll never start its final book.
+
+ The Book of the New Sun is a dying earth novel, set on Urth, a far-future version of Earth, or an Earth before our own, in some different time cycle. It’s a world that has lost most scientific abilities, and resembles a society straight out of a fantasy novel – even though remnants of technology exist, and certain of the upper classes still have access to flying ships. In the backdrop of the story, there are aliens that try to enslave humanity, and yet other aliens that want to help our race to revive the sun, which has dimmed to such an extent stars are even visible by day. The moon’s light is green, as it has been terraformed in the past, but humans forgot when and how, and can’t get there anymore.
+
+ It is the first-person narrative of Severian, a young man belonging to the guild of the torturers – “ The Order of the Seekers of Truth and Penitence”, who is disgraced and exiled, and ultimately “backs into the throne” seemingly by accident, and turns out to be something of a messiah. Like in other works by Wolfe, Severian is an unreliable narrator, but more on that in a minute. 
+
+ The Book of the New Sun is considered by many as one of the towering achievements of science fiction or science fantasy, and I’ve read serious people putting it on the same level as Ulysses and À la recherche du temps perdu . It won lots of awards, and tends to be found near the top of many lists of best speculative fiction. Word has it that this weird and strange book can only be fully understood after three readings. 
+
+ So what to write about this illustrious work? 
+
+ I will talk first about its religious themes – Wolfe was a devout Catholic – and how the question whether this book can be enjoyed by agnostics or atheists too ties into the trap that Wolfe has set, a trap that has ensnared many of those writing New Sun exegesis on message boards, Facebook groups, mailing lists and Reddit .
+
+ As an intermezzo, I’ve written a short passage about Severian’s outlook on free will, and I’ll end with some thoughts on my rereading experience, and my current appraisal of New Sun – will I read it a third time?
+
+ This entire text is spoiler free.
+
+ In his review of Michael Andre-Driussi’s Gene Wolfe: The Book of the New Sun: A Chapter Guide (2019) Wolfe scholar Marc Aramini notes “One of the most fascinating aspects of the critical discourse surrounding Wolfe involves how infrequently any two people will agree with each other.” That fact should tell the perceptive reader something. 
+
+ Interpreting TBotNS is allegedly difficult for a couple of reasons:
+
+ 1) Severian is an unreliable narrator;
+
+ 2) Wolfe is an illusionist and has crafted a mirror-hall full of hints & puzzles that only become clear after careful rerereading;
+
+ 3) the book’s prose is structurally unclear – the book reportedly being a found text, as Wolfe claims he has translated it from the original future language, and because of that had to resort to obscure words to use for animals and things that do not exist yet on our own planet.
+
+ As a ladder to Wolfe’s religious ambitions, a few thoughts on those three reasons.
+
+ 1) Even though Severian is an unreliable narrator strictu sensu, as far as I can tell, he doesn’t lie to the reader. He makes small mistakes remembering things, he characterizes himself as possibly insane, at times he lies to other characters, and, most importantly, he doesn’t tell certain things to the reader straight away. Besides that, it seems that what he tells the reader is true – even though he doesn’t fully comprehend his own world. On the other hand, I do agree with David Auerbach that we can’t be sure Severian can be trusted, and that the text as such isn’t stable.
+
+ But where the book most seriously fails in its ambitions is on a more fundamental level, which is that in the stability of the text itself. We know that Severian is a liar quite early on. We also know that what he is writing is destined for public consumption by people in his world, and that Wolfe claims to be acting as a translator of Severian’s manuscript which has traveled long and far, without knowing anything about that audience. These two facts cause the book to be underdetermined with regard to Severian’s motives and to the purpose of the text itself. Because we do not know what intent may be behind Severian’s lies, we can’t derive from the whole what the meaning of any particular piece is, because we do not have the whole context.
+
+ I don’t agree with Auerbach’s conclusion however:
+
+ This is not a matter of obscurity; rather, it is an intentional choice that indicates a serious failure on the part of Wolfe to push his book past the realm of entertainment.
+
+ The reason I do not agree is hinted at in another of Auerbach’s sentences, and ties into Wolfe’s religious ambition: The Book of the New Sun can indeed be considered an apocryphal gospel. This is not a reduction, but imo the core of Wolfe’s goal, that surpasses mere entertainment easily.
+
+ Without our being able to grasp the deeper sense of Severian’s words other than as a maybe-true story, he reduces the book to decontextualized apocrypha, a gnostic gospel without an accompanying authoritative text.
+
+ 2) Wolfe has indeed written a novel that has lots of things going on below the surface, with hints and literary sleight of hand and self-referential allusions and labyrinthine loops and intertextual links to other writers. But I don’t think it is possible to solve all the puzzles, and my hunch is that Wolfe has made that deliberately impossible, and probably made things deliberately more muddled with all the subsequent publications. I also think the appreciative reader doesn’t need to crack the code. On the contrary – the core of Wolfe’s gospel might very well be you shouldn’t even try, and that to try and do so is to underestimate the Miracle that is reality. I’ll try to elaborate and back that up with quotes in the next section.
+
+ 3) I found the text perfectly enjoyable without trying to figure out the obscure words – even though that’s a whole lot easier today than in the early 80ies. The fact that nobody envisioned the internet in its current form, tells us something about what Wolfe expected from the readers he had in mind . It’s a nice example of historical irony that this novel nowadays lures some of its readers to chase words down the rabbit holes in one’s smartphone.
+
+ Words that are really important for the story become crystal clear as the story progresses, and the others help splendidly in setting the tone and the mood. There are a few New Sun lexicons on the market, but, ultimately, who cares what ‘cubicula’ or ‘catamite’ refer to? It’s mainly fictional technology – not unlike Star Trek ‘s handwavish dialogue – or fictional fauna or future social titles.
+
+ We can use our imagination, and Wolfe’s book is also a celebration of that: the book as book, the text as text. Peter Wright has written a rather hagiographic text on the subject, and claims Wolfe deliberately cultured the book for post-structuralist analyses. Wright’s article is well worth reading, and from what I can glance via Google Books , his 2003 book Attending Daedalus: Gene Wolfe, Artifice and the Reader has some very solid chapters on TBotNS too, even though parts of it also seem a bit batshit.
+
+ In short, Wolfe organises the text to be understood only by those readers willing to question their own literary assumptions, pause, reflect, and reread.
+
+ While I debate the text can be fully understood, Wright’s thesis also ties into a remark on the Alzabo Soup podcast , namely that an attempt to make a movie out of this book would be against its very nature, its nature as a text .
+
+ Even though Wright might be right in spirit, Aramini’s law still holds: “One of the most fascinating aspects of the critical discourse surrounding Wolfe involves how infrequently any two people will agree with each other.” That is because Wolfe has indeed set a trap – but his trap isn’t there to catch readers unwilling to question their assumptions in a post-structuralist way… The trap is there to catch post-structuralists and puzzle-solvers altogether. To understand that, I’ll have to turn to the Spiritual. 
+
+ THEATER OF THE MIRACLE: SI MONUMENTUM REQUIRES, CIRCUMSPICE 
+
+ Let’s just get it out of the way. My claim, in short, is that The Book of the New Sun is a celebration of the mystery of creation, the mystery of existence, the mystery of life. Wolfe’s outlook is religious, and God the ultimate mystery. Wolfe’s book is indeed full of puzzles and literary tricks, but my guess is that they can’t be fully solved, and that while to try might be fun and entertaining, it misses the point of what a Mystery, a Miracle, is.
+
+ So while there are indeed links between Severian and Christ, these allusions seem to be there to obfuscate the reader, as it is also very clear to me Severian isn’t Christ at all – for one, they seem to have an entirely different character, a fact that is all too easily sidestepped.
+
+ What I haven’t come across in my reading about TBotNS is an examination of the religious and mystical passages Severian offers the reader throughout the novel. This next part is quote-heavy, but you can skip the quotes if you want to, my own text should be clear without them. 
+
+ What returns again and again is a certain pantheistic sentiment, and the fact that observable reality is a testament to God.
+
+ Certain mystes aver that the real world has been constructed by the human mind, since our ways are governed by the artificial categories into which we place essentially undifferentiated things, things weaker than our words for them. [my bold] 
+
+ &
+
+ ‘Flowers are better theology than folios, Severian. (…)’
+
+ &
+
+ ‘The third is the transsubstantial meaning. Since all objects have their ultimate origin in the Pancreator, and all were set in motion by him, so all must express his will – which is the higher reality.’
+
+ &
+
+ ‘Of what kind, Severian, is your own attachment to the Divine Entity?’ I said nothing. It may have been that I was thinking; but if so, my mind was too much filled with sleep to be conscious of its thought. Instead, I became profoundly aware of my physical surroundings. The sky above my face in all its grandeur seemed to have been made solely for my benefit, and to be presented for my inspection now. I lay upon the ground as upon a woman, and the very air that surrounded me seemed a thing as admirable as crystal and as fluid as wine.
+
+ &
+
+ (…) and then he thought it was nothing that the cathedral rose, no miracle at all. That shows what it is to be a fool – it never came to him that the reason things were made so was so the cathedral would rise just like it did. He can’t seen the Hand in nature.
+
+ &
+
+ The thorn was a sacred Claw because all thorn were sacred Claws; the sand in my boots was sacred sand because it came from a beach of sacred sand. (…) everything had approached and even touched the Pancreator, because everything had dropped from his hand. Everything was a relic. All the world was a relic. I drew off my boots, that had traveled with me so far, and threw them into the waves that I might not walk shod on holy ground.
+
+ It is in this way people that are agnostics or atheists can still enjoy the philosophical underpinnings of the book, for even if one doesn’t believe in a god, it is crystal clear that Existence is miraculous, and that we do not understand it. Wolfe doesn’t seem to advance any other agenda than this, and TBotNS isn’t a dogmatic expression of some religious laws or practices – aside from a few mentions of love being important, something non-religious readers can hardly object to. While Wolfe was a Catholic, the book seems to embrace ecumenism, and blends early myths and religion.
+
+ Whatever your stance is on god or reality, Wolfe – via the mouth of different characters – stresses time and time again that god is, by definition, unknowable. And, important for my overall interpretation, he suggest that to try and rationalize god is to misunderstand him: we should just surrender ourselves to the mystery, and obey creation – just as we should just surrender ourselves to the story, without trying to figure it out.
+
+ Some, (…), have pointed out that the fluttering in the Presence there abide a multitude of beings that though appearing minute – indeed, infinitely small – by comparison are correspondingly vast in the eyes of men, to whom their master is so gigantic as to be invisible.
+
+ &
+
+ I knew that there is an all-pervasive power in the universe of which every other is the shadow. I knew that in the last analysis my conception of that power was as laughable (and as serious) as Oannes.
+
+ &
+
+ ‘I don’t know. Do you think there are answers to everything here? Is that true in the place you come from?’
+
+ &
+
+ If I had seen one miracle fail, I had witnessed another; and even a seemingly purposeless miracle is an inexhaustible source of hope, because it proves to us that since we do not understand everything, our defeats – so much more numerous than our few and empty victories – may be equally specious.
+
+ &
+
+ I found (and find) this suggestion as rational as it is repellent, and it represents for me all that monomaniacal fabric of argument, so tightly woven that not even the tiniest objection or spark of light can escape its net, in which human minds become enmeshed whenever the subject is one in which no appeal to fact is possible. [This passages follows various variations on classical arguments for the existence of god.] 
+
+ &
+
+ Whenever I looked at it, it seemed to erase thought. Not as wine and certain drugs do, by rendering the mind unfit for it, but by replacing it with a higher state for which I know no name. Again and again I felt myself enter this state, rising always higher until I feared I should never return to the mode of consciousness I call normality; and again and again I tore myself from it it. Each time I emerged, I felt I had gained some inexpressible insight into immense realities. At last, after a long series of these bold advances and fearful retreats, I came to understand that I should never reach any real knowledge of the tiny thing I held, and with that thought (for it was a thought) came a third state, one of happy obedience to I knew not what, an obedience without reflection because there was no longer anything to reflect upon, and without the least tincture of rebellion. [my bold] 
+
+ &
+
+ “The Pancreator is infinitely far from us,” the angel said. “And thus infinitely far from me, though I fly so much higher than you. I guess at his desires – no one can de otherwise.”
+
+ &
+
+ (…) and that the commander of all such figures was everywhere invisible only because he was too large to be seen.
+
+ Contrary to what most would assume, Wolfe does aim for realism, as he explained in an 1988 interview with Larry McCaffery:
+
+ That’s what I meant when I said I’m trying to show the way things really seem to me—my experience is that subjects and methods are always interacting in our daily lives. That’s realism, that’s the way things really are. It’s the other thing—the matter of fact assumption found in most fiction that the author and characters perceive everything around them clearly and objectively—that is unreal. (…) You think you’re hearing me directly at this moment but you’re actually hearing everything a little bit after I’ve said it because it requires a finite but measurable amount of time for my voice to reach you. Fiction that doesn’t acknowledge these sorts of interactions simply isn’t “realistic” in any sense I’d use that term.
+
+ I don’t think it is a long stretch to consider that TBotNS was created to be an artificial microcosmos, mirroring a larger reality, with an inbuilt impossibility to understand it. Such structural impossibility isn’t that hard to achieve as a writer: just throw in enough vague descriptors, allusions, meta-fictional passages and contradictions, and people can chew on it for centuries. To lure people in, some of the puzzles are solvable, and certain references are traceable. They only help the general obfuscation, letting readers to believe anything is an Interpretable Significant Sign. It seems Wolfe has outdone about anyone, as Peter Wright in his book even draws conclusions about the spread of extinct species (page 129-130), but that might not be too different from people seeing the face of Jesus in burn marks on a slice of toast.
+
+ All that could explain why nobody seems to be able to agree on an interpretation – just as in the real world people aren’t able to agree on the nature and the laws of god. The story the Ascian soldier tells is a strong metaphor for the problems inherent in interpretation. It screams loud and clear. Why would Wolfe’s readers think Wolfe has written a book with a fixed, set interpretation that can be uncovered by careful rereading?
+
+ However you see Wolfe, from what I’ve read of his other works it is pretty obvious he has a taste for the absurd joke. If you think my theory is outlandish, you are well withing your rights, but remember what Severian says: “The idea is absurd. But then, all ideas are absurd.”
+
+ If you allow me one argument from Wolfe’s textual games: the new sun is equated to God in the inscription on a sundial in the Atrium of Time via the Latin translation, and so The Book of the New Sun becomes The Book of God .
+
+ According to the book itself, it is fitting Wolfe chose to write a story as his celebration of the Creator – or the Creation, if you’re irreligious.
+
+ Indeed, it often seems to me that of all good things in the world, the only ones humanity can claim for itself are stories and music; the rest, mercy, beauty, sleep, clean water and hot food (…) are all the work of the Increate.
+
+ I understand the appeal of the puzzle. I like puzzles. And to a certain extent I agree this novel is also a testament to memory: readers with a better one will get more thrills. On the other hand, I quickly found during my rereading that I enjoyed the story more when I let go of trying to figure everything out. In the end: who cares who is Severian’s mother? Does it even matter?
+
+ But, I have to admit I didn’t always succeed in letting go, as the dominant mode of rereading and interpreting this book is to embark on a treasure hunt for subtext and clues. It is the serious thing to do. The intellectual thing. It is hard to escape the apparent consensus on that, so, yes, I consulted lots of Reddit and other secondary literature during my rereading, and made a ton of notes. In retrospect, all that detracted, and, for me, the main strength of Severian’s story remains its appeal as a story. My advice to new readers is to just jump in, and not take it all too seriously: just enjoy the surf on the surface, Wolfe casts plenty of exiting waves.
+
+ MERCY INTERMEZZO: ILLUSIONS OF CONTROL: THE HUMAN MIND IN A MECHANIC WORLD pt. 4
+
+ For parts 1, 2 and 3, see my essays on Dune , Dune Messiah and Children of Dune . 
+
+ Recurring readers of this blog know I like to spot issues with free will in literature. I will not elaborate more on this, the debate isn’t that obscure anyhow. I just want to point you to the relevant quotes I found in The Book of the New Sun ‘s 1160 pages, and they all seem to indicate Wolfe indeed thinks free will does not exist.
+
+ The difficulty lies in learning that we ourselves encompass forces equally great. We say, ‘I will,’ and ‘I will not,’ and imagine ourselves (though we obey the orders of some prosaic person every day) our own masters, when the truth is that our masters are sleeping. One wakes within us and we are ridden like beasts, though the rider is but some hitherto unguessed part of ourselves.
+
+ &
+
+ That we are capable only of being what we are remains our unforgivable sin. [This exact same sentence is found two times, by the way.] 
+
+ &
+
+ ‘(…) He called it a purely mechanical psychological function, and at the time that seemed to me an oxymoron, but now I’m not sure he wasn’t right. (…)’
+
+ &
+
+ My acolyte still believes the universe hers to command, a board where she can move counters to form whatever patterns suit her. [says the Cumaean] 
+
+ &
+
+ Yet even if that is so, some higher authority may have been served. It is in such fashion most sages explain the apparent paradox that though we freely choose to do this or the other, commit some crime or by altruism steal the sacred distinction of the Empyrian, still the Increate commands the entirety and is served equally (that is, totally) by those who would obey and those who would rebel.
+
+ &
+
+ Because the prehistoric cultures endured for so many chiliads, they have shaped our heritage in such a way as to cause us to behave as if their conditions obtained today. 
+
+ As far as I could tell, there are no parts that suggest the opposite. The fact that there’s one character speaking out against a materialistic worldview doesn’t count as such, as one can have immaterial mechanics too: even if you consider love to be more than just electrical brain chemistry, it can still determine one’s actions.
+
+ Add to that the fact that Severian has no control over the Claw or his own powers, and the Claw also seems to push him forward, a bit like the ring in The Lord of the Rings . (For a lengthy discussion about free will in LOTR , see my text on the matter.)
+
+ The fact that free will does not exist also ties in nicely to the religious idea of mercy: if we can’t help ourselves, we should be forgiven. The most important part of the Bible for me is the fact that Jesus asks his father to forgive his executioners, as they know not what they do – which is the same as saying they can’t help themselves.
+
+ The idea of mercy returns a few times in TBotNS too, aside from the fact that Severian grants both Thecla and Agia mercy – two things on which the entire story hinges.
+
+ At one instant we walked mutely together in what surely must have been the paradise the New Sun is said to open to all who, in their final moments, call upon him; and though the wise teach that it is closed to those who are their own executioners, yet I cannot but think that he who forgives so much must sometimes forgive that as well.
+
+ &
+
+ ‘ . . . have mercy on those who had no mercy. Have mercy on us, who shall have none now. ‘
+
+ AM I UP FOR A THIRD READING? 
+
+ I must say at first I was a bit underwhelmed while rereading The Book of the New Sun – in my mind things were more genius & more outlandish. That is how the mind works: good things become even better in our memories. Add to that the diminished sense of surprise, discovery and wonder when you read something for the second time. A factor specific for this novel is that I had expected more from my post-structuralist detective mode while rereading, I guess I was too eager to spot stuff I didn’t spot before. That was a bit of a letdown as well.
+
+ But gradually these thoughts disappeared, again replaced by marvel & admiration. I still love this novel a lot, and I still rank it among my favorites. It is just that my first reading set a nigh impossible high bar.
+
+ I think this book appeals to me because it manages to keep up a certain atmosphere throughout, and a very specific one at that. Wolfe evokes a bigger, greater Truth lurking just behind the corner about everywhere. The feeling is obviously tied to the mystery and the miracle I talked about above. It is structurally woven into the novel, as it is both the result of the literary puzzle as it is a result of the basic plot – that latter being the most crucial, by the way. Severian is caught in a fight between overlords he doesn’t know, and part of a world he doesn’t understand. As such he is like each and every human – we are all part of a reality we can’t fathom.
+
+ That brings us to Severian, truly one of the strangest and baffling characters ever to grace the page. He is hinted at to be an Everyman numerous times, in different ways, but at the same time not everyone will identify with the lad. A complex character, with different, conflicting goals, prone to change his mind, and as such very imperfect, and very human. But he’s also a character that is arrogant, sure of himself and his specific training – and that is comforting: your schooling will save you, keep you upright in times of need. He doesn’t seem to care for what most others think of him, and breaks about every taboo there is. He easily convinces about every woman in the story to sleep with him – this aspect of the novel might be a problem for certain contemporary readers. The heart of Severian’s story is the ultimate in romance: the rebel that chooses death & exile, all for love, an amour fou that turns into grief.
+
+ His self-assurance is appealing, even though we see he isn’t that perceptive. He’s a pragmatic, unapologetic liar, maybe immoral at first, yet he performs numerous acts of kindness. Severian has a sense of brotherhood and connection, even though he is the ultimate loner. He seems to be a kind of prophetic hero, a chosen one, and at the same time we feel that he is manipulated and just trapped in a web too: things mostly happen to him, and he hardly makes decisions. He is not so much a grey character as one that is both black and white – insane indeed.
+
+ The book is full of contrasts like this, and Wolfe manages to couple numerous really sharp and insightful observations on humans with deadpan humor. Take the following passage:
+
+ Master Gurloes, who had performed a great many executions, used to say that only a fool worried about making some failure of ritual: slipping in the blood, or failing to perceive that the client wore a wig and attempting to lift the head by the hair. The greater dangers were a loss of nerve that would make one’s arms tremble and give an awkward blow and a feeling of vindictiveness that would transform the act of justice into mere revenge.
+
+ There is a certain parlez-vrai to Wolfe, at times not fully on par with the current ideological tendencies in mainstream Western media, and I’m sure I don’t agree with everything Wolfe thinks. But his occasional ruminations on politics and the ethics of violence are always interesting, whatever your own stances on the matter, and Severian’s decisions at the end of the story might surprise some.
+
+ I’ve written a bit about a part of Wolfe’s politics in my review of The Knight , and I don’t want to spend too much time on that subject in TBotNS here, mainly because there is much more to agree to than to disagree with – we are on the same page about the Miracle that is Reality, and I don’t think it is always productive to zoom in on certain ideological differences. Humans are a social species, and at the end of the day we better try and get along, even with people that have different opinions.
+
+ Finally, there’s the obvious stuff: this book is brimming with imagination, written in a singular prose, the pacing is great, the construction more than clever, the setting cinematic, awesome, brilliant. The horror and the humor and the wisdom and the surprises and the awe just keep coming, page after page after page.
+
+ So, will I read this a third time? I think I will, and I have the feeling it might become the best one out of three – without the blind naiveté of my first reading, and without the wrong expectations that colored my second reading. I don’t think I’ll wait another 10 years.
+
+ Terminus Est. 
+
+ Consult the author index for my other reviews, or my favorite lists . 
+
+ Click here for an index of my non-fiction or art book reviews only, and here for an index of my longer fiction reviews of a more scholarly & philosophical nature. 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+
+ Share on Reddit (Opens in new window) 
+ Reddit 
+
+ Share on WhatsApp (Opens in new window) 
+ WhatsApp 
+
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+
+ Email a link to a friend (Opens in new window) 
+ Email 
+
+ Like Loading... 
+
+ Related 
+
+ This entry was posted in Reviews and tagged 1980s , BFSA winner , British Fantasy winner , Campbell Winner , Gene Wolfe , Locus winner , Nebula winner , reread , Review , Science Fiction , Severian of the Guild , Shadow & Claw , Solar Cycle , Sword & Citadel , The Book of the New Sun , The Citadel of the Autarch , The Claw of the Conciliator , The Shadow of the Torturer , The Sword of the Lictor , World Fantasy winner . Bookmark the permalink . 
+
+ ← 2 BOOKS ON BRAINS: ‘HOW THE BRAIN MAKES DECISIONS’ (2020) & ‘BEAUTIFUL BRAIN: THE DRAWINGS OF SANTIAGO RAMON Y CAJAL’ (2017) 
+
+ ROADSIDE PICNIC – Arkady and Boris Strugatsky (1972) → 
+
+ 51 responses to “ THE BOOK OF THE NEW SUN – Gene Wolfe (1980-83) ” 
+
+ Jeroen Admiraal 
+
+ |
+
+ May 16, 2021 at 20:44 
+ |
+ Reply 
+
+ Excellent review, Bart! I suspect that your interpretation is correct – that there is no ultimate correct interpretation of all the layers and mysteries of the text. I cannot believe that Wolfe would be able to write a book in a few years that is so intricate that after 40 years of study people still cannot find its ultimate interpretation. That just means that critics have gone down pathways of interpretation until every word gets double meanings. But even if the Book of the New Sun works like a rabbit hole that fizzles out into endless interpretation, that is pretty remarkable on its own. Try to write a book like that! That’s impressive.
+
+ One day I will reread this book, but not before finishing Malazan. That takes up all my brain space.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 13:40 
+ |
+ Reply 
+
+ Thanks! I’m pretty sure you’ll like it upon rereading to. It might not occupy your top 1 spot anymore afterwards, but I would be surprised that you would stop liking it.
+
+ iirc you weren’t that enthusiastic about the final volumes in Mazalan, so why reread the entire series? Or am I mistaken?
+
+ Like Liked by 1 person 
+
+ Jeroen Admiraal 
+
+ |
+
+ May 17, 2021 at 14:06 
+ |
+ Reply 
+
+ After BotNS, every other Wolfe book felt like a disappointment, and he was doing the same trick every time. Like in the book of the Long Sun, every time some action happens, he cuts away from it. Much of the confusion and many of the puzzles are just artificially created by him for whatever reason and are not always necessary for telling the story. It began to annoy me. 
+
+ For Malazan. I quit the series halfway through. I don’t know how it ends. I just lost track of the plot and was “reading it wrong”. But I remember that was I had read had some quality to it, so now in the reread I’m picking up on so many things in the background that I finally feel like I have a good idea of where the story is going. That helps a lot with the immersion.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 14:53 
+ |
+ Reply 
+
+ Yes, agreed, there’s something of a one-trick pony quality to certain aspects of his writing.
+
+ Like Liked by 1 person 
+
+ Andreas 
+
+ |
+
+ May 17, 2021 at 20:50 
+ |
+ Reply 
+
+ Did you read his Peace? Because that’s equal at least. 
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 21:00 
+ |
+ Reply 
+
+ No I haven’t. I remember you’ve advocated for it before. Will look out for it…
+
+ Like Liked by 1 person 
+
+ Maverick 
+
+ |
+
+ August 25, 2022 at 13:31 
+ |
+ Reply 
+
+ Did it loose the top spot for you on the re-read?
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ August 25, 2022 at 15:03 
+ |
+ Reply 
+
+ I think so. As for speculative fiction I’d say atm Dune is quite firmly in the top spot, even after rereading it. (Which I sadly can’t say about the rest of the Dune series.) Or maybe Radiance by Carter Scholz, but that’s not really speculative, rather a novel about science. Maybe Stephenson’s Anathem is a contender too, but I have to reread that to be sure. Maybe A Wizard of Earthsea too.
+
+ Like Like 
+
+ Tasos Alexiadis 
+
+ |
+
+ August 26, 2022 at 09:15 
+ |
+ Reply 
+
+ I like both Dune and Dune Messiah greatly but they are much simpler works and not as well written as BotNS. I have not read another work with BoTNS’s depth that tells a story that interested me and that rich in symbolism. For me the main themes of BotNS concern death and rebirth and the effect of reading BotNS is that very strong images are produced in my mind which haunt me. No other work has managed that in the same depth.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ August 26, 2022 at 16:02 
+ |
+ Reply 
+
+ Agreed Dune is simpler – but simplicity doesn’t mean it’s a lesser book. As for the writing/prose – well, there are lots of people who find Wolfe’s prose overwrought and hard to digest. That’s much less the case in Dune. 
+
+ But I don’t think it’s a contest either way. I think both books have their strengths, it’s just that I think Dune on a whole is more concise and because of that packs a stronger punch. But that’s not to diminish Wolfe’s accomplishment, BotNS is incredible.
+
+ In the end, it’s mainly a matter of taste.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 17, 2021 at 08:39 
+ |
+ Reply 
+
+ Great review, Bart!
+
+ After giving the issue of free will as you present it some thought I am currently of the opinion that it is prevalently an ethical problem; my stance may be somewhat aligned with Dennett’s in that I don’t believe in absolute free will, but neither will I claim that free will in some limited form doesn’t exist. This argument goes IMO too far toward Laplace’s idea of mechanistic universe which we already know doesn’t hold water. 
+
+ But free will aside, I really enjoyed your review and now I’m pretty motivated to start my own first read of Wolfe – without rabbit holes of conflicting interpretations, I’ll just stick to my own 😄
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 13:53 
+ |
+ Reply 
+
+ It’s not only an ethical problem, so to say, as it also ties into how society could better itself as a whole. A significant part of social problems nowadays result from our mistaken self-perception. We could better our policies and improve our justice system if we would take a more realistic image of our human capacities into account.
+
+ Imo freedom as a term is absolute: you can’t be ‘a bit free’. But on the other hand, I agree that some people are ‘less free’ than others, but this is semantic/rhetorical mist, as actually we mean that some people are determined/constrained by more factors than others (e.g. prisoners, addicts, the poor).
+
+ I have zero knowledge about Laplace, and a quick search on Wikipedia hasn’t really answered my question: why doesn’t his idea of a mechanistic universe doesn’t hold water?
+
+ As for BotNS, I’m very, very curious about your reading experience.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 18, 2021 at 11:28 
+ |
+ Reply 
+
+ To me, ethical implies social. Yes, you’re right it all should be taken into account. As for Wolfe, to me the word “forgiveness” actually implies guilt, so judging by your quotes I wouldn’t go as far as you in claiming he questioned the existence of free will in BotNS.
+
+ I might be mistaken, I’m not a physicist, but from du Sautoy’s explanations both the discoveries regarding the chaos theory and the general outlook engendered by Heisenberg’s discovery counter the Newtonian/Laplacean version of mechanistic universe where everything is predictable given enough computing power.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 18, 2021 at 12:17 
+ |
+ Reply 
+
+ I’ll get back to you on free will, but there is a very big difference between non-predictable/computable and deterministic/escaping the cause-result chain of events.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 18, 2021 at 12:59 
+ |
+ Reply 
+
+ Many philosophers seem to conflate the two to arrive at the lack of free will since the difference between them is quite easy to bridge logically – if all is determined by its foundations/prior events, the full knowledge of these prior elements should give you exact results.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 18, 2021 at 13:15 
+ |
+ Reply 
+
+ I guess there are degrees of being determined we have to consider. If you shoot a proton to a double slit, the fact that you shoot the proton obviously determines that it will pass through, so it is a determined event, but the outcome is partly unpredictable (not fully, as we know it will pass through either of the slits, and not do something else entirely.)
+
+ Anyhow, it looks like quantum events don’t play a role in how neurons work, and even if they would, our volition can’t control quantum events, so the entire quantum avenue is a dead end in this debate imo.
+
+ Like Like 
+
+ bormgans 
+
+ |
+
+ May 18, 2021 at 13:28 
+ |
+ Reply 
+
+ As for the quotes:
+
+– in the first it’s clear we aren’t are own masters: we are ridden (determined) by our impulses, etc.
+
+– in the second it says we can only be what we are, i.e. we can’t determine ourselves, we can’t change our character, our volitions, our preferences by simple acts of volition.
+
+– the third can be unterpreted either way, but it shows at the time of his training Severian thought the mind to be mechanical, and the moment he’s in dubio, but even that doubt doesn’t necessarily mean he thinks free will exist.
+
+– the fourth is only tangentially related, and has more to do with the broader fact we can’t control things (and I’d argue those things include ourselves).
+
+– the fifth quote shows the semantic confusion between ‘choice’ and ‘freedom’ on the one hand, and being determined yes or no on the other. Of course we make choices, and of course we are free in the colloquial sense (if we are not imprisoned, etc.), but either way, that doesn’t mean our choices are not determined. Either way, Wolfe seems to suggest that God determines everything, and I would read that as the fact that the whole of reality determines everything, including ourselves.
+
+– the final quote talks about the fact that our culture is determined by our biological history. I’d argue, as we are part of the culture, we are also determined ourselves in that respect.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 18, 2021 at 22:20 
+ |
+ Reply 
+
+ I think I’ll need to read the book to know the context; I was only speaking about the meaning and subtexts of forgiveness – particularly in the New Testament sense. 
+
+ All this makes me want to pick up BotNS sooner! 🙂
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 18, 2021 at 22:31 
+ |
+ Reply 
+
+ Yes, but how can you be truly guilty if you can’t help yourself. To me it sounds more like Old Testament’s original sin.
+
+ Anyhow, free will isn’t a big part of the book, these are the only relevant quotes, I just included it here as it is becoming kinda like a running joke 🙂
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 18, 2021 at 22:38 
+ |
+
+ That’s what I mean – forgiveness implies guilt and they’re guilty in their ignorance; besides, the Bible was quite adamant in belief that God gave the humanity free will 😉
+
+ Heh, you sure seem to like that topic more than any other lately! I still enjoy it, though, definitely learned a bit in our discussions 😄
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 20, 2021 at 09:54 
+ |
+
+ I’m not sure if the Bible is adamant on that: there are huge swats of Protestants that believe in predestination (the religious version of denial of free will), so that indicates to me the Bible is inconclusive on the matter.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 20, 2021 at 10:21 
+ |
+
+ predestination is not a denial of free will – and there is a lot of discussion around that particular topic even among the various Protestant factions (though Bookstooge would be probably a better source on this). As with all “sacred texts,” Bible is open to interpretation 😉
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 20, 2021 at 12:13 
+ |
+
+ Yes it would be nice if Stooge would chime in on the matter, but either way, if you believe your life is 100% predestined, there is no room for free will.
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 21, 2021 at 00:50 
+ |
+
+ Hmm, the way it was explained to me (mind you, different strands have different explanations) is that the only certain thing is God’s knowledge whether you’ll be saved or condemned; and the deeds you do and actions you take in your life serve only as your way of knowing your ultimate fate – but within those constraints you are free to act – just when you act badly, it is an indication of your fate in Hell. So, it’s a constrained free will, but not every action you make is predestined.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 21, 2021 at 06:28 
+ |
+
+ Thanks for that, I’ve never seen it explained that way. Either way, it’s a case of having your cake and eating it. (Your choice to act badly being determined by the fact that you’ll be condemned: if a pre-set condemned person would always choose the right/good thing, why would they still be condemned at the end?)
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 21, 2021 at 07:14 
+ |
+
+ So, that’s the beauty of it – as you don’t know what awaits you, you want to do good things, because if you prosper and are respected, you may take it as a sign of future salvation. At least that was part of the link Weber saw between Protestantism and capitalism – prosperity linked to salvation and orientation toward future, with emphasis on worldly success as an indication of otherworldly outcome 😉
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 21, 2021 at 07:51 
+ |
+
+ Yes, but put like that, what you want, doesn’t matter, so we’re back to square one. 🤔
+
+ Like Liked by 1 person 
+
+ Ola G 
+
+ |
+
+ May 21, 2021 at 07:57 
+ |
+
+ The beauty of philosophy!!! 😁
+
+ Like Liked by 1 person 
+
+ Aonghus Fallon 
+
+ |
+
+ May 17, 2021 at 13:46 
+ |
+ Reply 
+
+ I read the first book a while back, started the second but never finished it, and came back to the sequence a few months ago, starting with the third book, which I read along with the fourth – I found the books much more enjoyable and a lot less frustrating when I read them purely for entertainment. 
+
+ I’d be broadly in agreement with you re Wolfe’s intentions. Tonally the books read a lot like a certain type of religious allegory to me and that almost seems to have been Wolfe’s intention. Often such allegories are described as dreams by the author; so you have settings that are vivid, yet curiously vague, and a character who undergoes various trials and tribulations yet also seems emotionally removed from what is happening to him (as most of us are, when we’re dreaming). And like any dream, both character and story defy easy analysis, which is part of what makes them so intriguing – it’s impossible to make up your mind about what sort of person Severian is for example: good or bad?
+
+ I think this is qualified to some extent by Wolfe’s sense of humour, which is present but so deadpan that often it only became obvious to me in retrospect.
+
+ Re Free Will. Severian speculates at the end of the fourth book that his importance was understood from the outset because this is not the first time he has made this journey. Certain celestial beings who dwelt outside time took an interest in him and have tampered with his storyline multiple times – thus his journey (the journey we’re reading about) is actually the penultimate iteration of an original journey. This differed in some important respects from the final version, just as the original Severian differs from the one who is telling us his story.
+
+ If I was looking for one direct corollary with Wolfe’s own life, it would be Severian’s participation in the battle against the Ascians. Although I appreciate the word has a different root in the context of the story, the corollaries with Asians and Communism – specifically Korea – are hard to ignore.
+
+ ‘Some have pointed out that the fluttering in the Presence there abide a multitude of beings that though appearing minute – indeed, infinitely small – by comparison are correspondingly vast in the eyes of men, to whom their master is so gigantic as to be invisible.’
+
+ I wonder if this is a comment on the old medieval argument about how many angels could dance on the head of a pin?
+
+ Like Liked by 2 people 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 14:52 
+ |
+ Reply 
+
+ That’s an interesting remark on religious allegories/dreams, rings true indeed.
+
+ As for Severian, I think he tends towards good, especially near the end, he clearly has learned something about suffering & torture.
+
+ As for the humor, it’s one of the main draws for me. There’s one scene in Claw where Severian talks about cowardice using an anecdote about master Gurloes that is so bonkers/baffling that is has to be read to be believed. Not sure if you made it to that scene? Anyhow, it often has to do with a certain cruel or perverse slapstick, I’ve noticed it in his other books too.
+
+ As for Severian making the journey again (I’ve seen a timeline online that says there are 7 Severians, based on information from the other books), it only underscores the lack of free will imo, he is gamed and guided until he gets it right, and as he doesn’t know what he needs to do or what his goal is, there are no conscious, free decisions on that matter from him anyhow.
+
+ I’ve read an interview with Wolfe (I think the one I linked too) that says that the Ascians are actually descendants of North-Americans, as the book is set in South-America, in an ironic reversal of what we could assume based on the cold war back in the 80ies. But you are right that Wolfe’s participation in the Korean war has shaped him as a person, he talks about it in that interview too, what he says there is that the book is also an attempt to counter the banalisation of the horror of violence. I think his characterization of the war somewhere at the beginning of Citadel is fairly spot on: “War is not a new experience. War is a new world.”, which ties in nicely to James Nachtwey’s observations on the matter btw – I’ve recently saw a documentary about him, that’s why the association pops up.
+
+ Like Like 
+
+ Riders of Skaith 
+
+ |
+
+ May 17, 2021 at 14:29 
+ |
+ Reply 
+
+ ….wheels within wheels, plots within plots…but is it a good story with interesting characters?
+
+ It’s reviews like like this that keep me shying away from Gene Wolfe. I’m dumb and I like stories that entertain and distract. Things that are too complicated scare me! 🙂
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 14:35 
+ |
+ Reply 
+
+ Yes, I think it is. Severian is a really interesting character, and the overall story is cool, even though it is baffling at times, and at face value a juxtaposition of scenes in different sets.
+
+ But I understand where you’re coming from. Maybe the comment above, form Aonghus Fallon, might draw you in: you can just enjoy the ride, and read for the entertainment.
+
+ But I also agree wath Jeroen said, so far, almost everything else I’ve read by Wolfe was a disappointment after BotNS. That’s not to say his other books aren’t worth it, and there are probably gems in his catalogue I haven’t read (I’ve only begun to scratch the surface anyhow), but there’s something of a one-trick pony vibe to his writing too.
+
+ Like Liked by 1 person 
+
+ Riders of Skaith 
+
+ |
+
+ May 17, 2021 at 22:45 
+ |
+ Reply 
+
+ Ah, thanks. I will put it somewhere back on the list again. It’s a little heartening to find that you don’t have to be a genius to enjoy these books….
+
+ Like Liked by 1 person 
+
+ Aonghus Fallon 
+
+ |
+
+ May 17, 2021 at 14:44 
+ |
+ Reply 
+
+ I did read a short story by him a few years ago – ‘Comber’ – which I liked a lot; enough to make me take a second look at his other work (well, ‘The Book of the Long Sun’ anyhow!)
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 14:57 
+ |
+ Reply 
+
+ I still have high hopes for The Island of Doctor Death &… short story collection, have yet to start that one. I’m still planning to finish The Wizard Knight, and I’ll start The Soldier series, as I have bought that in an enthusiastic folly after my first BotNS read – I’ve learned better since (or at least, that’s what I tell myself, even though I went on a Greg Egan buying spree last year, based on just one book).
+
+ Like Like 
+
+ Calmgrove 
+
+ |
+
+ May 17, 2021 at 21:45 
+ |
+ Reply 
+
+ I shall come back to this in due course, Bart, too much to absorb in a quick skim read, a peruse which won’t do your commentary justice at all. 
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 17, 2021 at 21:47 
+ |
+ Reply 
+
+ Thank you, Chris. Should you have any opinions to offer, I look forward to them.
+
+ Like Liked by 1 person 
+
+ Wakizashi 
+
+ |
+
+ May 19, 2021 at 08:55 
+ |
+ Reply 
+
+ This is a fascinating review. A lot of it has gone over my head, though. What are your personal thoughts on free will? It’s something I haven’t really looked into. I enjoyed reading yours and Ola’s discussion in the comments.
+
+ I have yet to read the third and fourth books. It’s been so long since I read the first two that I will have to read them again. I’m also hoping to read Wolfe’s “The Fifth Head of Cerberus”, a book I seem to remember you reviewing.
+
+ I’d just finished reading an interview with Wolfe by Larry McCaffery when your review popped up in my feed. Have you read it? It’s more of a general interview about Wolfe’s career and influences, but he talks about The Books of the New Sun in the second half of the article. ( https://www.depauw.edu/sfs/interviews/wolfe46interview.htm )
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 20, 2021 at 09:52 
+ |
+ Reply 
+
+ Thanks!!
+
+ I’ve linked to that interview as well in my review, it’s excellent. I did review Fifth Head as well indeed, recommended for sure. I guess it’s best to reread 1&2, if it’s been a long time. Did you got stuck, or why didn’t you continue the series?
+
+ As for free will, I don’t think it exists. I’ve discussed the matter a lot in the comments of my reviews of Dune, Children of Dune and LOTR, if you enjoyed the discussion here, I’d surely recommend checking out the comments underneath those reviews. I think the best general text on the matter that aligns with my views is this text by Cashmore: http://www.pnas.org/content/107/10/4499.full 
+
+ Like Liked by 1 person 
+
+ Wakizashi 
+
+ |
+
+ May 20, 2021 at 10:19 
+ |
+ Reply 
+
+ OK, thanks very much for the link. I will have a look at the comments in your reviews. 
+
+ I didn’t continue the series because something else caught my eye at the time. And then, you know how this story goes 😅
+
+ Like Liked by 1 person 
+
+ corwex 
+
+ |
+
+ May 24, 2021 at 13:10 
+ |
+ Reply 
+
+ I believe the tendency to think of Wolfe as a riddler ties in to M. John Harrison’s critique of world-building: a considerable subset of SF readers expect all the workings of the plot and the fictional world to be clearly spelled out, and if they aren’t, it’s either considered a failure or an invitation to look harder. This, of course, clashes with the (post)modern tendency to deny narrative closure and certainty (which has become a very common way of signalling Literary Ambition).
+
+ Which way Wolfe himself leaned might be an open question. On the one hand, I think that The Fifth Head of Cerberus, for example, is fundamentally about ever-increasing uncertainty, ultimately leaving the reader in a sort of epistemological void; on the other hand, I think Wolfe has been quoted as saying that to write a baffling, ambiguous plot, he always has to know what actually happened. These two points, of course, are not necessarily incompatible.
+
+ By the way, some music fans seem to have a similar approach to Autechre’s work, approaching the tracks as riddles built on a pattern that is to be uncovered. Closure-seeking and pattern recognition is fairly universal.
+
+ Anyway, I’m looking forward to my own re-read of The Book of the New Sun in the summer. I also had some doubts that it would hold up, so your review provides a bit of reassurance.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ May 24, 2021 at 20:34 
+ |
+ Reply 
+
+ As for your first paragraph, I hadn’t thought about it that way, but you are 100% on the money. It doesn’t only work for the writer’s ambition, but also for the readers: there is something annoying about certain Wolfe readers claiming the Lovers of Serious Art badge for themselves, reading his books over and over, and seemingly nothing else.
+
+ As for whether BotNS is solvable, my guess is the big lines for sure, but you don’t need to read it 3 times for that. I also stick by my guns and think that Long and Short Sun are later additions, working out stuff not necessarily present in Wolfe’s mind when he wrote the first 4 or 5 books. Most of what I find online in terms of complexity is by bringing them all together, not about BotNS alone, that’s pretty straightforward by itself. Most of it is about working out the citadel is a spaceship, maybe a bit on family relationships, etc. 
+
+ When all is said and done, whether my theory in this review is true or not doesn’t really interest me, but I do like the general thought, and I see it as way to play the game, the text allows for such a reading, so why not present it to others?
+
+ I have only one Autechre album, Confield. I’ve read good things about their more recent work, I should check it out, but I’m rediscovering my love for Anthony Braxton atm, after about 10 years of not paying attention to him, and I’m surprised his more recent work still speaks to me. Too much to talk about here, but if you’re interested in solo saxophone music, his ‘Solo (Victoriaville) 2017’ album rivals his best solo work, and I’m also baffled his Echo Echo Mirror House concept works so well, even though it’s utter chaos in a way – there’s a 3cd studio recording ‘3 Compositions (EEMHM) 2011’ on Firehouse 12 records that’s fully on Bandcamp, and the live album ‘Echo Echo Mirror House’ on Victo. 
+
+ If you reread BotNS, I’d by curious on you thoughts, don’t hesitate to drop by over here again. My advice would be not to get your hopes up – my rereading it was a strange experience, and it’s impossible to parse how much of my current appraisal is colored by my first reading. In a way, it would have been much more interesting to have read it now for the first time.
+
+ Like Like 
+
+ Pingback: LONG FORM FICTION ANALYSIS | Weighing a pig doesn't fatten it. 
+
+ piotrek 
+
+ |
+
+ July 27, 2021 at 17:40 
+ |
+ Reply 
+
+ Well, I have to say that Hineininterpretierung is a beautiful German word I did not know I needed to know 😉 Schadenfreude might be the best Teutonic addition to the world’s vocabulary, but this is something I’ll try to remember as well!
+
+ I also think that perhaps I should get a copy of TBotNS in English, as I only have Polish versions bought & read ages ago… that would be a demanding re-read, but worth time and effort, I think, especially after reading your take on the series.
+
+ As to what you say about the books, I don’t remember enough to seriously challenge it, but I know enough about Wolfe to find it likely… will have your ideas in mind when the re-read happens.
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ July 27, 2021 at 18:53 
+ |
+ Reply 
+
+ I would have guessed that long border with Poland would have resulted in more German loanwords in Polish, but glad to be of assistance 🙂 We use these two, and a bunch of others, in Dutch too, especially if we want to sound smart. We don’t really have an alternative for Hineininterpretierung, but ‘leedvermaak’ means just the same as Schadenfreude.
+
+ As for Wolfe, I wonder what the (Polish) translator did with all those obscure words: just keep them? Anyhow, I think this book deserves a read in its original version – I guess every book does, but this one more so than your average novel. There’s something to the prose that just works, even though it is wrought.
+
+ I hope you reread it sooner than later, I’d be curious how you’d experience it today.
+
+ Like Liked by 1 person 
+
+ Pingback: FAVORITE SCIENCE FICTION BOOKS | Weighing a pig doesn't fatten it. 
+
+ Pingback: TOO LIKE THE LIGHTNING – Ada Palmer (2016) | Weighing a pig doesn't fatten it. 
+
+ Pingback: SEVEN SURRENDERS – Ada Palmer (2017) | Weighing a pig doesn't fatten it. 
+
+ Pingback: FOUNDATION TRILOGY – Isaac Asimov (1951-’53) | Weighing a pig doesn't fatten it. 
+
+ Tara 
+
+ |
+
+ January 27, 2025 at 14:00 
+ |
+ Reply 
+
+ Great reading your bllog post
+
+ Like Liked by 1 person 
+
+ bormgans 
+
+ |
+
+ January 27, 2025 at 16:57 
+ |
+ Reply 
+
+ Thanks!
+
+ Like Like 
+
+ Leave a comment Cancel reply 
+
+ Δ 
+
+ LET’S CONNECT…
+
+ CURRENTLY READING…
+
+ SEARCH
+
+ Search for: 
+
+ Follow Blog via Email 
+
+ Enter your email address to receive notifications of new posts by email.
+
+ Email Address: 
+
+ Follow 
+
+ Recent Posts
+
+ ONTBIJT IN HET VILBELUIK – J.M.H. Berckmans (1997) 
+
+ HET JAAR 1901 – Louis Paul Boon (1977) 
+
+ SHORT REVIEWS: Krasznahorkai, Richard Rorty, Tracey Emin, Jancovici, Jonckheere & Jon Fosse 
+
+ ON THE CALCULATION OF VOLUME I – Solvej Balle (2020) 
+
+ THE END OF EVERYTHING – M. John Harrison (2026) 
+
+ TITUS GROAN – Mervyn Peake (1946) 
+
+ THE WORLD INSIDE – Robert Silverberg (1971) 
+
+ BERICHT UIT KLEIN KONSTANTINOPEL – J.M.H. Berckmans (1996) 
+
+ CLAY’S ARK – Octavia E. Butler (1984) 
+
+ ASH: A SECRET HISTORY – Mary Gentle (2000) 
+
+ PRAGMATISM AS ANTI-AUTHORITARIANISM – Richard Rorty (2021) 
+
+ EMILY – Joanna Newsom (2006) – lyrics analysis 
+
+ 2025 FAVORITES 
+
+ SERVICE ANNOUNCEMENT 
+
+ RSS - Posts 
+
+ Create a free website or blog at WordPress.com. 
+
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+
+To find out more, including how to control cookies, see here:
+
+ Cookie Policy 
+
+ Comment 
+
+ Subscribe 
+
+ Subscribed 
+
+ Weighing a pig doesn't fatten it. 
+
+ Join 431 other subscribers
+
+ Sign me up 
+
+ Already have a WordPress.com account? Log in now. 
+
+ Weighing a pig doesn't fatten it. 
+
+ Subscribe 
+
+ Subscribed 
+
+ Sign up 
+
+ Log in 
+
+ Copy shortlink 
+
+ Report this content 
+
+ View post in Reader 
+
+ Manage subscriptions 
+
+ Collapse this bar 
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website 
+
+ %d 
+
+ Design a site like this with WordPress.com
+ Get started 
+
+ 

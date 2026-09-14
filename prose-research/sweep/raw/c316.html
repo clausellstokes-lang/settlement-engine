@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html id="ie7" lang="en">
+<![endif]-->
+<!--[if (!IE 7)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<title>Literature Commentary: A Song of Ice and Fire (Books 1-3) | Literary Analysis</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://literaryanalysis.net/xmlrpc.php" />
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Noto+Sans:r:latin,latin-ext","Noto+Sans:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active #site-title{font-family:"Noto Sans",sans-serif;font-weight:400;font-style:normal}.wf-active body{font-family:"Noto Sans",sans-serif}.wf-active .post .meta{font-family:"Noto Sans",sans-serif}.wf-active .widgettitle label{font-family:"Noto Sans",sans-serif}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6{font-weight:400;font-style:normal}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6{font-family:"Noto Sans",sans-serif;font-weight:400;font-style:normal}.wf-active #content h1{font-style:normal;font-weight:400}.wf-active #content h2{font-style:normal;font-weight:400}.wf-active #content h3{font-style:normal;font-weight:400}.wf-active #content h4{font-style:normal;font-weight:400}.wf-active #content h5{font-style:normal;font-weight:400}.wf-active #content h6{font-style:normal;font-weight:400}.wf-active #content .entry-title{font-style:normal;font-weight:400}.wf-active .pagetitle{font-style:normal;font-weight:400}.wf-active #content thead th, .wf-active #content tr th{font-weight:400;font-style:normal}.wf-active #content .post-title{font-style:normal;font-weight:400}.wf-active #content #entry-author-info-heading{font-style:normal;font-weight:400}.wf-active #sidebar h4{font-style:normal;font-weight:400}.wf-active #wp-calendar tbody tr th{font-weight:400;font-style:normal}.wf-active #comments-title, .wf-active #respond h3{font-style:normal;font-weight:400}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=391'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9saXRlcmFyeWFuYWx5c2lzLm5ldA%3D%3D"
+		+ "&wpcomid=9257833"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//af.pubmine.com' />
+<link rel="alternate" type="application/rss+xml" title="Literary Analysis &raquo; Feed" href="https://literaryanalysis.net/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Literary Analysis &raquo; Comments Feed" href="https://literaryanalysis.net/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Literary Analysis &raquo; Literature Commentary: A Song of Ice and Fire (Books&nbsp;1-3) Comments Feed" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJx9jFEKAjEMRC9kjfrh4od4ltKGpdu0CSaleHtbEQQRCQw8ZvKgiwtcDatBaU6orakq9BRXNAVso+Wc0JHvYFiEvKGC2oNwH1R38FuwoYkP+c1QmGfERuP5jlMSnbDaF/1TUsr4Eb9ozm/lelyWw2Xc6bw9AWlRTZ8=&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v23.9.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??/wp-content/mu-plugins/core-compat/wp-mediaelement.css,/wp-content/mu-plugins/wpcom-bbpress-premium-themes.css?m=1432920480j&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.css?m=1785895867i&cssminify=yes' type='text/css' media='all' />
+<link rel='stylesheet' id='verbum-gutenberg-css-css' href='https://widgets.wp.com/verbum-block-editor/block-editor.css?ver=1771405207' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-16-1' href='/_static/??-eJyNy9EKwjAMheEXsoYNdHohPksXs66SNqVJGb69E28UYXh3DvwfLMWhZKNsYDMlUihtBJwFBdQeTHtU3cFWhsJSFW40+cb2r4oZ36lbCkr6Aam5wi3ErFBpZAnrDLBWH3cLBRLHgt6i5K/jJvaxvug1Xbrh2B/6oTuf7k/EXGMx&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-17-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-20-1' href='/_static/??-eJyNjcEKAjEMRH/ImhVlqwfxU6TbhrZrmhTTIv69u+JFvHgZ5sHwBh7VeOGG3KB0U6nHzAoztur87cNQRNYInVBBk7tjcCE83zVz3HrVDfxvumb2MPVMAVR8dmRIougX/DhbwrK8pwNEksnROriU884e9+PJDnaYXxwFS20=&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"9257833","postID":"391","siteURL":"https://literaryanalysis.net","xhrURL":"https://literaryanalysis.net/wp-admin/admin-ajax.php","nonce":"eea69a29e4","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/pCQnT-6j","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJxdjd0KwjAMhV/ILOrQeSM+inRtGa1tEprW6du7gYh6dfg4fzgLWKbqqWJuIKlNgRSjr2Ls7c2YmQmvgSyOLSSHxSdTvQNhrfpLXQ7URd3g13BcMqmCFH48/70x8fS5nbk44xRsMqpe16LNgvf9KkBMMDkpy8Qln3fDaXs4Dn3fxxfKckg7'></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://literaryanalysis.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/" />
+<link rel='shortlink' href='https://wp.me/pCQnT-6j' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fliteraryanalysis.net%2F2012%2F06%2F07%2Fliterature-commentary-a-song-of-ice-and-fire-books-1-3%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fliteraryanalysis.net%2F2012%2F06%2F07%2Fliterature-commentary-a-song-of-ice-and-fire-books-1-3%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Literature Commentary: A Song of Ice and Fire (Books 1-3)" />
+<meta property="og:url" content="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/" />
+<meta property="og:description" content="It’s been a long time since I sat down to read an epic high-fantasy series. Too often, these books end up being blatant Tolkien rip-offs, with a clever variant or two to keep things interesting. Wi…" />
+<meta property="article:published_time" content="2012-06-07T17:03:18+00:00" />
+<meta property="article:modified_time" content="2012-06-07T17:04:53+00:00" />
+<meta property="og:site_name" content="Literary Analysis" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg?m=1383295312i" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@johnehrett" />
+<meta name="twitter:site" content="@johnehrett" />
+<meta name="twitter:text:title" content="Literature Commentary: A Song of Ice and Fire (Books&nbsp;1-3)" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="apple-touch-icon" href="https://s0.wp.com/i/webclip.png?m=1713868326i" />
+<link rel='openid.server' href='https://literaryanalysis.net/?openidserver=1' />
+<link rel='openid.delegate' href='https://literaryanalysis.net/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://literaryanalysis.net/osd.xml" title="Literary Analysis" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="description" content="It’s been a long time since I sat down to read an epic high-fantasy series. Too often, these books end up being blatant Tolkien rip-offs, with a clever variant or two to keep things interesting. With the recent popularity of HBO’s “Game of Thrones” TV show, however, one series has emerged at the forefront of&hellip;" />
+<script>
+var wa_client = {}; wa_client.cmd = []; wa_client.config = { 'blog_id': 9257833, 'blog_language': 'en', 'is_wordads': false, 'hosting_type': 0, 'afp_account_id': null, 'afp_host_id': 5038568878849053, 'theme': 'pub/choco', '_': { 'title': 'Advertisement', 'privacy_settings': 'Privacy Settings' }, 'formats': [ 'inline', 'belowpost', 'bottom_sticky', 'sidebar_sticky_right', 'sidebar', 'gutenberg_rectangle', 'gutenberg_leaderboard', 'gutenberg_mobile_leaderboard', 'gutenberg_skyscraper' ] };
+</script>
+		<script type="text/javascript">
+
+			window.doNotSellCallback = function() {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = document.createElement( 'a' );
+				dnsLink.href = 'https://wordpress.com/advertising-program-optout/';
+				dnsLink.classList.add( 'do-not-sell-link' );
+				dnsLink.rel = 'nofollow';
+				dnsLink.style.marginLeft = '0.5em';
+				dnsLink.textContent = 'Do Not Sell or Share My Personal Information';
+
+				var creditLinks = document.querySelectorAll( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				Array.prototype.forEach.call( creditLinks, function( el ) {
+					el.insertAdjacentElement( 'afterend', dnsLink );
+				});
+
+				return true;
+			};
+
+		</script>
+		<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+<body class="wp-singular post-template-default single single-post postid-391 single-format-standard wp-theme-pubchoco customizer-styles-applied color-default jetpack-reblog-enabled">
+
+<div id="page">
+	<div id="header" class="clear-fix">
+		<div id="logo">
+						<h3 id="site-title">
+				<span>
+					<a href="https://literaryanalysis.net/" title="Literary Analysis" rel="home">Literary Analysis</a>
+				</span>
+			</h3>
+			<div class="description">Never judge a book by its movie. Or vice versa.</div>
+
+		</div><!-- #logo -->
+
+		<div id="nav">
+			<ul class="menu">
+<li ><a href="https://literaryanalysis.net/">Home</a></li><li class="page_item page-item-2"><a href="https://literaryanalysis.net/about/">About Literary Analysis</a></li>
+<li class="page_item page-item-189"><a href="https://literaryanalysis.net/index/">Index</a></li>
+<li class="page_item page-item-744"><a href="https://literaryanalysis.net/normalized-scores-9-2016/">Score Normalization</a></li>
+</ul>
+		</div><!-- #nav -->
+
+	</div><!-- #header -->
+
+	<div id="main">
+		<a href="https://literaryanalysis.net/feed/rss/" id="rss-link">RSS</a>
+		<div id="main-top">
+			<div id="main-bot" class="clear-fix">
+				<div id="content">
+	<div class="post-navigation clear-fix">
+		<div class="nav-previous">
+			<a href="https://literaryanalysis.net/2012/06/02/movie-review-snow-white-and-the-huntsman/" rel="prev"><span class="meta-nav">&larr;</span> Movie Review: &#8220;Snow White and the&nbsp;Huntsman&#8221;</a>		</div>
+		<div class="nav-next">
+			<a href="https://literaryanalysis.net/2012/06/08/movie-review-prometheus/" rel="next">Movie Review: &#8220;Prometheus&#8221; <span class="meta-nav">&rarr;</span></a>		</div>
+	</div><!-- .post-navigation -->
+
+	<div class="post post-391 type-post status-publish format-standard hentry category-fantasy">
+
+		
+				<h2 class="post-title">
+							Literature Commentary: A Song of Ice and Fire (Books&nbsp;1-3)					</h2>
+	
+				<div class="date">
+			<div class="bg">
+									<span class="day">07</span>
+					<span>Jun</span>
+							</div>
+		</div><!-- .date -->
+	
+	<div class="entry">
+		
+		<p>It’s been a long time since I sat down to read an epic high-fantasy series. Too often, these books end up being blatant Tolkien rip-offs, with a clever variant or two to keep things interesting. With the recent popularity of HBO’s “Game of Thrones” TV show, however, one series has emerged at the forefront of the American cultural consciousness: the “Song of Ice and Fire” series, by George R.R. Martin. After TIME labeled him “the American Tolkien,” I was skeptical…but thought the books were worth a try.</p>
+<p>The series (planned to be seven books, five of which have been released) is set on the continent of Westeros – geographically similar to the UK. The lands of Westeros are subdivided into seven kingdoms, each of which is ruled by a “Great House.” Among these Houses are the noble Starks, the cunning Lannisters, and the royal Baratheons.</p>
+<p>As the series progresses, two major plotlines emerge: the struggle for ultimate political power between the seven houses, and the constant threat of invasion by the monstrous “Others” of the north. Succinctly summarizing Martin’s story would go far beyond the scope of this review (and necessarily involve heavy spoilers), but suffice it to say that the books remain compelling even after 3,500 pages.</p>
+<p>Martin is a brilliant writer. He successfully juggles multiple points of view per book, while simultaneously managing to give each character their own unique voice. By any metric, his prose is far superior to many of his contemporaries in the genre. Accounts of the mythic world unfold with fluid lyricism, without ever lapsing into Tolkienesque descriptive tedium (yes, I know that’s heresy), and a ruthlessly fast-paced plot consistently engages the reader.</p>
+<p>Martin is known – and often derided – for his tendency to kill off popular characters. This, however, makes “A Song of Ice and Fire” incredibly gripping: if heroes aren’t genuinely vulnerable, there’s little reason to cheer when they succeed. In Martin’s viscerally lifelike world, no one is safe.</p>
+<p>Any discussion of “A Song of Ice and Fire” will inevitably raise questions regarding the TV show, “Game of Thrones.” The HBO adaptation is notorious for its graphic content – and while Martin’s books certainly contain plenty of depravity, the show (from what I’ve seen of it) certainly exaggerates this.</p>
+<p>The multiple-viewpoint style employed by Martin results in differing reactions to immoral behavior: a corrupt character may attend a brothel (and engage in what that entails), while a noble man of honor feels disgust and revulsion at the very idea. By unfolding the story through stream-of-consciousness techniques, Martin sheds light on the inner thoughts and emotions of his characters. Just as in life, a character’s response to moral darkness is contingent on their personal convictions. It’s probably fair to say, though, that immorality isn’t objectively glamorized.</p>
+<p>This brings up an interesting question: can it be healthy to appreciate a fictional work that, by its very narrative structure, forces one to engage with diseased minds? I think the answer is a qualified “yes.”</p>
+<p>In a very real sense, Martin is telling multiple stories within one overarching “meta-plot.” Some of these stories have deep moral flaws, but these flaws stem primarily from the characters telling them. If one were to read the inmost thoughts of several world leaders – say, Barack Obama, David Cameron, Hu Jintao, and Mahmoud Ahmadinejad – one might very well be exposed to moral darkness. Throughout his opus, Martin leaves the question of ethical judgment up to the reader (which may be a strength or a weakness, depending on one’s perspective).</p>
+<p>All that being said, however, this is definitely a series intended for mature readers. Martin’s world – which draws much of its stylistic inspiration from real-world history – contains brutal violence, sexuality, strong language, moral ambiguity, and pervasive cynicism. Many will be turned off by the frank portrayal of these elements (and to be entirely fair, at times these become excessive). The books are excellent reading and remarkably thought-provoking, but certainly feature their share of human vice.</p>
+<p>Whether or not “A Song of Ice and Fire” embraces a single overarching worldview is unclear. Martin does, however, address religious issues: the three predominant faiths in Westeros are each patterned after real-world belief systems. The “old gods,” worshiped in tree groves, clearly derive from ancient pagan/animistic traditions. The ritualized faith of the “new gods” – specifically, the worship of a deity that reveals itself in seven aspects, yet exists as one god – is obviously rebadged Catholicism. And finally, the dualistic “Faith of R’hllor, the Lord of Light and Shadow” draws inspiration from Zoroastrianism.</p>
+<p>This subtext provides a fascinating backdrop for the events which unfold, but is criminally underutilized. Almost without exception, major plot developments occur because of military victories, acts of treason, or forged alliances…throughout the series, the importance of ideological conflict never truly takes center stage. Given Martin’s propensity for rooting his novels in history, this deficit is somewhat surprising. The Reformation – which initially began as a theological dispute over church doctrine – led to centuries of bloody conflict between states. In Martin’s world, however, all is reducible to raw power (to an almost Machiavellian extent). This makes for pulse-pounding reading, but lacks depth; in reality, ideas – even more than the insatiable lust to dominate – have been shown to catalyze action.</p>
+<p>So are the books worth reading?</p>
+<p>It depends. Fans of “traditional” fantasy may find Martin’s realistic/historical storytelling dull. Those expecting a “clean” story will be horrified by the vivid depictions of evil on display. On the other hand, those who appreciate political intrigue will find the books eminently compelling…and inquiring minds will appreciate the thorny questions the series raises.</p>
+<p>Not everyone will enjoy “A Song of Ice and Fire.” Even critics, however, must cede that it is an outstanding work of prose. On both stylistic and thematic levels, Martin draws on a rich tradition of history, myth, and legend – then makes the story uniquely his own. And that, in an increasingly simplistic and derivative genre, is a remarkable accomplishment.</p>
+<p>VERDICT: 9/10<br />
+An intense, dark exploration of humanity through the eyes of a mythmaker. Martin fully deserves the title “American Tolkien.”</p>
+<div id="atatags-370373-6a9c90b9f0e54">
+		<script type="text/javascript">
+			__ATA = window.__ATA || {};
+			__ATA.cmd = window.__ATA.cmd || [];
+			__ATA.cmd.push(function() {
+				__ATA.initVideoSlot('atatags-370373-6a9c90b9f0e54', {
+					sectionId: '370373',
+					format: 'inread'
+				});
+			});
+		</script>
+	</div><span id="wordads-inline-marker" style="display: none;"></span><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-391"
+				class="share-facebook sd-button share-icon"
+				href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-391"
+				>
+				<span id="sharing-facebook-391" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-391"
+				class="share-twitter sd-button share-icon"
+				href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-391"
+				>
+				<span id="sharing-twitter-391" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-tumblr-391"
+				class="share-tumblr sd-button share-icon"
+				href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?share=tumblr"
+				target="_blank"
+				aria-labelledby="sharing-tumblr-391"
+				>
+				<span id="sharing-tumblr-391" hidden>Share on Tumblr (Opens in new window)</span>
+				<span>Tumblr</span>
+			</a></li><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-391"
+				class="share-email sd-button share-icon"
+				href="mailto:?subject=%5BShared%20Post%5D%20Literature%20Commentary%3A%20A%20Song%20of%20Ice%20and%20Fire%20%28Books%201-3%29&#038;body=https%3A%2F%2Fliteraryanalysis.net%2F2012%2F06%2F07%2Fliterature-commentary-a-song-of-ice-and-fire-books-1-3%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-391"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="91b9a8151c" data-email-share-track-url="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?share=email">
+				<span id="sharing-email-391" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-print"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-print-391"
+				class="share-print sd-button share-icon"
+				href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/#print?share=print"
+				target="_blank"
+				aria-labelledby="sharing-print-391"
+				>
+				<span id="sharing-print-391" hidden>Print (Opens in new window)</span>
+				<span>Print</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-9257833-391-6a9c90b9f1892' data-src='//widgets.wp.com/likes/index.html?ver=20260905#blog_id=9257833&amp;post_id=391&amp;origin=literaryanalysis.wordpress.com&amp;obj_id=9257833-391-6a9c90b9f1892&amp;domain=literaryanalysis.net' data-name='like-post-frame-9257833-391-6a9c90b9f1892' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>
+		<div class="cl">&nbsp;</div>
+
+		
+			</div><!-- .entry -->
+
+				<div class="meta">
+			<div class="bg">
+				<span class="comments-num"><a href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/#comments">3 Comments</a></span>
+				<p>Posted by <a href="https://literaryanalysis.net/author/literaryanalysis/" rel="author">literaryanalysis</a> on June 7, 2012 in <a href="https://literaryanalysis.net/category/fantasy/" rel="category tag">Fantasy</a></p>
+			</div>
+			<div class="bot">&nbsp;</div>
+		</div><!-- .meta -->
+			</div>
+	<div class="post-navigation clear-fix">
+		<div class="nav-previous">
+			<a href="https://literaryanalysis.net/2012/06/02/movie-review-snow-white-and-the-huntsman/" rel="prev"><span class="meta-nav">&larr;</span> Movie Review: &#8220;Snow White and the&nbsp;Huntsman&#8221;</a>		</div>
+		<div class="nav-next">
+			<a href="https://literaryanalysis.net/2012/06/08/movie-review-prometheus/" rel="next">Movie Review: &#8220;Prometheus&#8221; <span class="meta-nav">&rarr;</span></a>		</div>
+	</div><!-- .post-navigation -->
+
+	
+			<div id="comments">
+
+
+			<h3 id="comments-title">
+			3 responses to &ldquo;<em>Literature Commentary: A Song of Ice and Fire (Books&nbsp;1-3)</em>&rdquo;			</h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1 comment">
+		<div class="comment-body" id="comment-355">
+			<img referrerpolicy="no-referrer" alt='ASOIAF Fan&#039;s avatar' src='https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=70&#038;d=&#038;r=G' srcset='https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=70&#038;d=&#038;r=G 1x, https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=105&#038;d=&#038;r=G 1.5x, https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=140&#038;d=&#038;r=G 2x, https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=210&#038;d=&#038;r=G 3x, https://0.gravatar.com/avatar/f6d7c2d5c6919244900276157ade2544d31146ccc79f8d472b8c786192f9b893?s=280&#038;d=&#038;r=G 4x' class='avatar avatar-70' height='70' width='70' decoding='async' />			<p class="author">
+				ASOIAF Fan			</p>
+			<p class="comment-meta">
+				September 26, 2012 at 10:07 am			</p>
+			<div class="comment-content">
+				
+				<p>Nice analysis, it seems rare to find people who appreciated this story while remaining able to criticize it &#8220;objectively&#8221;.<br />
+One minor correction : While Westeros looks/feels like UK, its size is closer to the south american continent. Characters travel a lot and spend a lot of time on the move to get from a location to another, it&#8217;s usually only mentionned as we don&#8217;t spend a lot of time on &#8220;travel scenes&#8221; unlike a lot of other fantasy fictions.</p>
+				<div class="alignleft"></div>
+
+			</div>
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?replytocom=355#respond" data-commentid="355" data-postid="391" data-belowelement="comment-355" data-respondelement="respond" data-replyto="Reply to ASOIAF Fan" aria-label="Reply to ASOIAF Fan">Reply</a>			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 comment">
+		<div class="comment-body" id="comment-2543">
+			<img referrerpolicy="no-referrer" alt='Francisco Salas (@FG_Salas)&#039;s avatar' src='https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=70%2C70&#038;ssl=1' srcset='https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=70%2C70&#038;ssl=1 1x, https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=105%2C105&#038;ssl=1 1.5x, https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=140%2C140&#038;ssl=1 2x, https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=210%2C210&#038;ssl=1 3x, https://i0.wp.com/pbs.twimg.com/profile_images/1882034816/MYSELF_1_normal.jpg?resize=280%2C280&#038;ssl=1 4x' class='avatar avatar-70' height='70' width='70' decoding='async' />			<p class="author">
+				<a href="http://twitter.com/FG_Salas" class="url" rel="ugc external nofollow">Francisco Salas (@FG_Salas)</a>			</p>
+			<p class="comment-meta">
+				June 3, 2014 at 6:24 pm			</p>
+			<div class="comment-content">
+				
+				<p>It seems to me, according to this analysis, that Martin wrote a story that could happen in any period and region of our own world. It was not necessary to locate it in some fantastic world. The fantastic characters and places were only accesories.</p>
+				<div class="alignleft"></div>
+
+			</div>
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?replytocom=2543#respond" data-commentid="2543" data-postid="391" data-belowelement="comment-2543" data-respondelement="respond" data-replyto="Reply to Francisco Salas (@FG_Salas)" aria-label="Reply to Francisco Salas (@FG_Salas)">Reply</a>			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 comment">
+		<div class="comment-body" id="comment-16311">
+			<img referrerpolicy="no-referrer" alt='Marcy&#039;s avatar' src='https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=70&#038;d=&#038;r=G' srcset='https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=70&#038;d=&#038;r=G 1x, https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=105&#038;d=&#038;r=G 1.5x, https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=140&#038;d=&#038;r=G 2x, https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=210&#038;d=&#038;r=G 3x, https://2.gravatar.com/avatar/2cc858cf2a10ea0894574639594c093bb47975543d43faa9f4193aafc78317e8?s=280&#038;d=&#038;r=G 4x' class='avatar avatar-70' height='70' width='70' decoding='async' />			<p class="author">
+				Marcy			</p>
+			<p class="comment-meta">
+				May 23, 2019 at 1:44 pm			</p>
+			<div class="comment-content">
+				
+				<p>I appreciated your thoughtful article.  Since the series ended I keep looking for intelligent discussion about the book/series.  What I want to share is this, which I&#8217;m sure you know. Fantasy genre is a commentary on the socio-political times we live in and GOT has it down above and beyond on multiple levels. I don’t read fantasy genre, but I am grateful to the writers of fantasy for the metaphors – a folk tale of my own current time. How generous of them!  So, this is NOT a piece of work about some long ago period in a galaxy or continent far, far away. It is about NOW.  I don&#8217;t personally ever get caught up in story or characters in this genre, as I am looking for meaning and lesson only through them.  They are showing me my time, not theirs and I try to hear their lesson.  So in GOT, the author is brilliant at using all of time to depict the  “end” of time as we have known it. To include the opening of the show with the kingdoms as Swiss time pieces and a fiery sun our original &#8220;clock.&#8221;  Also, the series is brilliant even in its casting as one can immediately transpose Cerci and her brother right into the streets of downtown Manhattan.  This could not happen in the book.  He used the visual medium of TV to enhance his meaning in the novels.  The actors are not “types” cast normally for period drama, no small coincidence.  And when I saw Ned Stark die I saw the most perfect symbolic image of ALL loss of soldiers in Vietnam in the death of one brilliantly cast, directed and filmed actor.  Aria and her sister went down paths that are what happens to GIRLS when a society gets rid of or corrupts too many fathers&#8230;they are taken advantage of sexually or raped/killed and/or they become fighters having to protect themselves with too few good dads around to do the job and let them be just girls.  Do you know what the rate of female kidnapping and molestation increased to in the 1970&#8217;s?  Look that up.  The author sure as hell does.  The author knows EXACTLY what happened to our nation, very, very well.  GOT (like any good fantasy book) is what is going on or has just gone on in our own world.  Why else are the ones Danni is uplifting and protecting of African descent?  The story projects our future forward, too.  And like with any bit of genius writing, as readers we mostly only know all of this subconsciously.  Brilliantly, he uses all history and pre-history (pre-historical subconscious tendencies, darkness, rage we don&#8217;t remember represented by what&#8217;s in the snow&#8230;white walkers, who are beyond a &#8220;wall&#8221;) to bring about the depiction of an end of history, an end to &#8220;systems&#8221; we see now cannot work even when those with the best of intentions try&#8230;and a start of a new epoch and story now without that fucking throne.  The dragon melts it but not Jon, important.  Jon&#8217;s an orphan because it is the only type of person symbolically that can carry out good action in a truly terrible time. </p>
+<p>The “game over” that we are experiencing now in OUR world, all the hideous abuse and hurt and harm and loss and misguidedness and helpful guidance that has brought us to this point, is come to a head.  It is our turning point that is happening and the start of a whole new game. This is magnificently depicted in his story.  It resonates with the whole world because of it, but mostly in the US because this is where history came to finally draw the line.  That’s the reason so many stuck with this story, passionately. Operative word: passionately.  Also because the author wrote it so well, cast it brilliantly and then they shot it like a beast, truly amazing work. But it was mostly because we knew it, felt it.  The pain and problem was cathartic.  It was real.  It was really about us.</p>
+<p>Thank you so much for this forum and your writing!!</p>
+				<div class="alignleft"></div>
+
+			</div>
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/?replytocom=16311#respond" data-commentid="16311" data-postid="391" data-belowelement="comment-16311" data-respondelement="respond" data-replyto="Reply to Marcy" aria-label="Reply to Marcy">Reply</a>			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</li><!-- #comment-## -->
+			</ol>
+
+
+
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://literaryanalysis.net/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></div><div class="verbum-form-meta"><input type='hidden' name='comment_post_ID' value='391' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+			<input type="hidden" name="highlander_comment_nonce" id="highlander_comment_nonce" value="a2a688a5e8" />
+			<input type="hidden" name="verbum_show_subscription_modal" value="" /></div><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2950457fd4" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="72"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+
+				</div><!-- END Content -->
+				<div id="sidebar">
+										<ul class="xoxo">
+						<li id="pages-3" class="widget widget_pages"><h4 class="widgettitle">Pages</h4>
+			<ul>
+				<li class="page_item page-item-2"><a href="https://literaryanalysis.net/about/">About Literary Analysis</a></li>
+<li class="page_item page-item-189"><a href="https://literaryanalysis.net/index/">Index</a></li>
+<li class="page_item page-item-744"><a href="https://literaryanalysis.net/normalized-scores-9-2016/">Score Normalization</a></li>
+			</ul>
+
+			</li>
+		<li id="recent-posts-2" class="widget widget_recent_entries">
+		<h4 class="widgettitle">Recent Reviews</h4>
+		<ul>
+											<li>
+					<a href="https://literaryanalysis.net/2025/01/20/movie-review-the-brutalist/">Movie Review: “The&nbsp;Brutalist”</a>
+									</li>
+											<li>
+					<a href="https://literaryanalysis.net/2024/11/12/movie-review-heretic/">Movie Review: &#8220;Heretic&#8221;</a>
+									</li>
+											<li>
+					<a href="https://literaryanalysis.net/2024/10/07/movie-review-megalopolis/">Movie Review: “Megalopolis”</a>
+									</li>
+					</ul>
+
+		</li><li id="categories-2" class="widget widget_categories"><h4 class="widgettitle">Categories</h4>
+			<ul>
+					<li class="cat-item cat-item-35739"><a href="https://literaryanalysis.net/category/classic/">Classic</a>
+</li>
+	<li class="cat-item cat-item-40070"><a href="https://literaryanalysis.net/category/contemporary/">Contemporary</a>
+</li>
+	<li class="cat-item cat-item-7224"><a href="https://literaryanalysis.net/category/fantasy/">Fantasy</a>
+</li>
+	<li class="cat-item cat-item-12856"><a href="https://literaryanalysis.net/category/historical/">Historical</a>
+</li>
+	<li class="cat-item cat-item-1733"><a href="https://literaryanalysis.net/category/sci-fi/">Sci-Fi</a>
+</li>
+	<li class="cat-item cat-item-66361"><a href="https://literaryanalysis.net/category/thrillers/">Thrillers</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://literaryanalysis.net/category/uncategorized/">Uncategorized</a>
+</li>
+			</ul>
+
+			</li><li id="archives-3" class="widget widget_archive"><h4 class="widgettitle">Literary Analysis Archives</h4>		<label class="screen-reader-text" for="archives-dropdown-3">Literary Analysis Archives</label>
+		<select id="archives-dropdown-3" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://literaryanalysis.net/2025/01/'> January 2025 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/11/'> November 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/10/'> October 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/09/'> September 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/08/'> August 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/04/'> April 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2024/03/'> March 2024 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2023/12/'> December 2023 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2023/08/'> August 2023 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2023/07/'> July 2023 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2023/06/'> June 2023 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2022/11/'> November 2022 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2022/08/'> August 2022 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2022/06/'> June 2022 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2022/05/'> May 2022 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2022/04/'> April 2022 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2022/03/'> March 2022 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2021/12/'> December 2021 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2021/10/'> October 2021 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2021/08/'> August 2021 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2021/06/'> June 2021 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2021/03/'> March 2021 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2021/01/'> January 2021 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2020/12/'> December 2020 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2020/11/'> November 2020 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2020/09/'> September 2020 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2020/08/'> August 2020 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2020/06/'> June 2020 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2020/04/'> April 2020 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2020/03/'> March 2020 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2020/02/'> February 2020 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2020/01/'> January 2020 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2019/12/'> December 2019 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2019/11/'> November 2019 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2019/10/'> October 2019 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2019/09/'> September 2019 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2019/08/'> August 2019 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2019/07/'> July 2019 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2019/05/'> May 2019 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2019/04/'> April 2019 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2019/03/'> March 2019 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2019/01/'> January 2019 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2018/12/'> December 2018 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2018/11/'> November 2018 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2018/10/'> October 2018 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2018/09/'> September 2018 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2018/08/'> August 2018 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2018/07/'> July 2018 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2018/06/'> June 2018 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2018/05/'> May 2018 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2018/04/'> April 2018 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2018/03/'> March 2018 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2018/02/'> February 2018 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2017/12/'> December 2017 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2017/06/'> June 2017 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2017/05/'> May 2017 &nbsp;(6)</option>
+	<option value='https://literaryanalysis.net/2017/04/'> April 2017 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2017/03/'> March 2017 &nbsp;(5)</option>
+	<option value='https://literaryanalysis.net/2017/02/'> February 2017 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2017/01/'> January 2017 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2016/12/'> December 2016 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2016/11/'> November 2016 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2016/10/'> October 2016 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2016/09/'> September 2016 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2016/08/'> August 2016 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2016/07/'> July 2016 &nbsp;(5)</option>
+	<option value='https://literaryanalysis.net/2016/06/'> June 2016 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2016/05/'> May 2016 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2016/04/'> April 2016 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2016/03/'> March 2016 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2016/02/'> February 2016 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2016/01/'> January 2016 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2015/12/'> December 2015 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2015/11/'> November 2015 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2015/10/'> October 2015 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2015/09/'> September 2015 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2015/08/'> August 2015 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2015/07/'> July 2015 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2015/06/'> June 2015 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2015/05/'> May 2015 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2015/04/'> April 2015 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2015/02/'> February 2015 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2015/01/'> January 2015 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2014/12/'> December 2014 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2014/11/'> November 2014 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2014/10/'> October 2014 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2014/08/'> August 2014 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2014/07/'> July 2014 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2014/06/'> June 2014 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2014/05/'> May 2014 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2014/03/'> March 2014 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2014/01/'> January 2014 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2013/12/'> December 2013 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2013/11/'> November 2013 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2013/09/'> September 2013 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2013/07/'> July 2013 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2013/06/'> June 2013 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2013/05/'> May 2013 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2013/04/'> April 2013 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2013/01/'> January 2013 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2012/12/'> December 2012 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2012/11/'> November 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/10/'> October 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/09/'> September 2012 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2012/08/'> August 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/07/'> July 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/06/'> June 2012 &nbsp;(6)</option>
+	<option value='https://literaryanalysis.net/2012/05/'> May 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/04/'> April 2012 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2012/03/'> March 2012 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2012/02/'> February 2012 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2012/01/'> January 2012 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2011/12/'> December 2011 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2011/11/'> November 2011 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2011/10/'> October 2011 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2011/09/'> September 2011 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2011/08/'> August 2011 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2011/07/'> July 2011 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2011/06/'> June 2011 &nbsp;(5)</option>
+	<option value='https://literaryanalysis.net/2011/05/'> May 2011 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2011/04/'> April 2011 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2011/03/'> March 2011 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2011/02/'> February 2011 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2011/01/'> January 2011 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2010/12/'> December 2010 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2010/11/'> November 2010 &nbsp;(4)</option>
+	<option value='https://literaryanalysis.net/2010/10/'> October 2010 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2010/08/'> August 2010 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2010/07/'> July 2010 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2010/06/'> June 2010 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2010/05/'> May 2010 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2010/04/'> April 2010 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2010/03/'> March 2010 &nbsp;(1)</option>
+	<option value='https://literaryanalysis.net/2010/02/'> February 2010 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2010/01/'> January 2010 &nbsp;(2)</option>
+	<option value='https://literaryanalysis.net/2009/12/'> December 2009 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2009/11/'> November 2009 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2009/10/'> October 2009 &nbsp;(3)</option>
+	<option value='https://literaryanalysis.net/2009/09/'> September 2009 &nbsp;(8)</option>
+	<option value='https://literaryanalysis.net/2009/08/'> August 2009 &nbsp;(36)</option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-3" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</li><li id="blog-stats-2" class="widget widget_blog-stats"><h4 class="widgettitle">Blog Stats</h4>		<ul>
+			<li>958,074 hits</li>
+		</ul>
+		</li><li id="media_image-5" class="widget widget_media_image"><style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="http://literaryanalysis.net"><img width="100" height="100" src="https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png?w=100" class="image wp-image-585 alignnone attachment-100x100 size-100x100" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png?w=100 100w, https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png?w=200 200w, https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png?w=150 150w" sizes="auto, (max-width: 100px) 100vw, 100px" data-attachment-id="585" data-permalink="https://literaryanalysis.net/2015/04/04/movie-review-furious-7/litanalysislogo/" data-orig-file="https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png" data-orig-size="267,267" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="LitAnalysisLogo" data-image-description="" data-image-caption="" data-large-file="https://literaryanalysis.net/wp-content/uploads/2015/04/litanalysislogo.png?w=267" /></a></li>					</ul>
+				</div><!-- END Sidebar -->
+				<div class="cl">&nbsp;</div>					</div><!-- #main-bot -->
+				</div><!-- #main-top -->
+			</div><!-- #main -->
+			<div id="footer">
+				<p><a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a>
+</p>
+
+				<p class="rss"><a href="https://literaryanalysis.net/feed/rss/">Entries (RSS)</a> and <a href="https://literaryanalysis.net/comments/feed/">Comments (RSS)</a></p>
+			</div><!-- #footer -->
+		</div><!-- #page -->
+		<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/choco/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202636d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-355b57d0bf277f98de5bdef4f7703ef4">
+	</div>
+	<div class="grofile-hash-map-414e698f72dd0d20efbc51f2c8646da9">
+	</div>
+	<div class="grofile-hash-map-340857bdd013c3df805d4bd5b962116f">
+	</div>
+	</div>
+		<!-- CCPA [start] -->
+		<script type="text/javascript">
+			( function () {
+
+				var setupPrivacy = function() {
+
+					// Minimal Mozilla Cookie library
+					// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+					var cookieLib = window.cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+					// Implement IAB USP API.
+					window.__uspapi = function( command, version, callback ) {
+
+						// Validate callback.
+						if ( typeof callback !== 'function' ) {
+							return;
+						}
+
+						// Validate the given command.
+						if ( command !== 'getUSPData' || version !== 1 ) {
+							callback( null, false );
+							return;
+						}
+
+						// Check for GPC. If set, override any stored cookie.
+						if ( navigator.globalPrivacyControl ) {
+							callback( { version: 1, uspString: '1YYN' }, true );
+							return;
+						}
+
+						// Check for cookie.
+						var consent = cookieLib.getItem( 'usprivacy' );
+
+						// Invalid cookie.
+						if ( null === consent ) {
+							callback( null, false );
+							return;
+						}
+
+						// Everything checks out. Fire the provided callback with the consent data.
+						callback( { version: 1, uspString: consent }, true );
+					};
+
+					// Initialization.
+					document.addEventListener( 'DOMContentLoaded', function() {
+
+						// Internal functions.
+						var setDefaultOptInCookie = function() {
+							var value = '1YNN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultOptOutCookie = function() {
+							var value = '1YYN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultNotApplicableCookie = function() {
+							var value = '1---';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setCcpaAppliesCookie = function( applies ) {
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'ccpa_applies', applies, 24 * 60 * 60, '/', domain );
+						}
+
+						var maybeCallDoNotSellCallback = function() {
+							if ( 'function' === typeof window.doNotSellCallback ) {
+								return window.doNotSellCallback();
+							}
+
+							return false;
+						}
+
+						// Look for usprivacy cookie first.
+						var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+						// Found a usprivacy cookie.
+						if ( null !== usprivacyCookie ) {
+
+							// If the cookie indicates that CCPA does not apply, then bail.
+							if ( '1---' === usprivacyCookie ) {
+								return;
+							}
+
+							// CCPA applies, so call our callback to add Do Not Sell link to the page.
+							maybeCallDoNotSellCallback();
+
+							// We're all done, no more processing needed.
+							return;
+						}
+
+						// We don't have a usprivacy cookie, so check to see if we have a CCPA applies cookie.
+						var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+						// No CCPA applies cookie found, so we'll need to geolocate if this visitor is from California.
+						// This needs to happen client side because we do not have region geo data in our $SERVER headers,
+						// only country data -- therefore we can't vary cache on the region.
+						if ( null === ccpaCookie ) {
+
+							var request = new XMLHttpRequest();
+							request.open( 'GET', 'https://public-api.wordpress.com/geo/', true );
+
+							request.onreadystatechange = function () {
+								if ( 4 === this.readyState ) {
+									if ( 200 === this.status ) {
+
+										// Got a geo response. Parse out the region data.
+										var data = JSON.parse( this.response );
+										var region      = data.region ? data.region.toLowerCase() : '';
+										var ccpa_applies = ['california', 'colorado', 'connecticut', 'delaware', 'indiana', 'iowa', 'montana', 'new jersey', 'oregon', 'tennessee', 'texas', 'utah', 'virginia'].indexOf( region ) > -1;
+										// Set CCPA applies cookie. This keeps us from having to make a geo request too frequently.
+										setCcpaAppliesCookie( ccpa_applies );
+
+										// Check if CCPA applies to set the proper usprivacy cookie.
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												// Do Not Sell link added, so set default opt-in.
+												setDefaultOptInCookie();
+											} else {
+												// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+												setDefaultOptOutCookie();
+											}
+										} else {
+											// CCPA does not apply.
+											setDefaultNotApplicableCookie();
+										}
+									} else {
+										// Could not geo, so let's assume for now that CCPA applies to be safe.
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											// Do Not Sell link added, so set default opt-in.
+											setDefaultOptInCookie();
+										} else {
+											// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+											setDefaultOptOutCookie();
+										}
+									}
+								}
+							};
+
+							// Send the geo request.
+							request.send();
+						} else {
+							// We found a CCPA applies cookie.
+							if ( ccpaCookie === 'true' ) {
+								if ( maybeCallDoNotSellCallback() ) {
+									// Do Not Sell link added, so set default opt-in.
+									setDefaultOptInCookie();
+								} else {
+									// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+									setDefaultOptOutCookie();
+								}
+							} else {
+								// CCPA does not apply.
+								setDefaultNotApplicableCookie();
+							}
+						}
+					} );
+				};
+
+				// Kickoff initialization.
+				if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+					defQueue.items.push( setupPrivacy );
+				} else {
+					setupPrivacy();
+				}
+
+			} )();
+		</script>
+
+		<!-- CCPA [end] -->
+		<div class="widget widget_eu_cookie_law_widget">
+<div
+	class="hide-on-button ads-active"
+	data-hide-timeout="30"
+	data-consent-expiration="180"
+	id="eu-cookie-law"
+	style="display: none"
+>
+	<form method="post">
+		<input type="submit" value="Close and accept" class="accept" />
+
+		Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. <br />
+To find out more, including how to control cookies, see here:
+				<a href="https://automattic.com/cookies/" rel="nofollow">
+			Cookie Policy		</a>
+ </form>
+</div>
+</div>		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-choco actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-comment" href="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/#comments">
+							<svg class="gridicon gridicons-comment" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 16l-5 5v-5H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2h-7z"/></g></svg>							<span>Comment						</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+						<a class="actnbr-action actnbr-actn-reblog" href="">
+							<svg class="gridicon gridicons-reblog" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M22.086 9.914L20 7.828V18c0 1.105-.895 2-2 2h-7v-2h7V7.828l-2.086 2.086L14.5 8.5 19 4l4.5 4.5-1.414 1.414zM6 16.172V6h7V4H6c-1.105 0-2 .895-2 2v10.172l-2.086-2.086L.5 15.5 5 20l4.5-4.5-1.414-1.414L6 16.172z"/></g></svg><span>Reblog</span>
+						</a>
+					</li>
+									<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://literaryanalysis.net">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Literary Analysis			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 112 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="9257833" />
+										<input type="hidden" name="source" value="https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="b325a2b940" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fliteraryanalysis.net%252F2012%252F06%252F07%252Fliterature-commentary-a-song-of-ice-and-fire-books-1-3%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://literaryanalysis.net">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Literary Analysis			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fliteraryanalysis.net%252F2012%252F06%252F07%252Fliterature-commentary-a-song-of-ice-and-fire-books-1-3%252F">Log in</a></li>
+																<li class="actnbr-shortlink">
+										<a href="https://wp.me/pCQnT-6j">
+											<span class="actnbr-shortlink__text">Copy shortlink</span>
+											<span class="actnbr-shortlink__icon"><svg class="gridicon gridicons-checkmark" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"/></g></svg></span>
+										</a>
+									</li>
+																<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/blogs/9257833/posts/391">
+										View post in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+	
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://literaryanalysis.net/2012/06/07/literature-commentary-a-song-of-ice-and-fire-books-1-3/":391};
+	</script>
+				
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx9jEsOwjAMBS9EcIuqdoU4i2msNKnzoXbI9ckO1AXbeTMPWjFrTkpJ4cnZmcLV+STQ8mHRilkZRUggdITK5n27BrnATxbrN/LWkQpQ7WvePRnGBkqxMCqd+J8f9nu3X5UqbZgs09HlR7yPyzxM0zyMS/gAPatD8g=='></script>
+<script id="wp-hooks-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/hooks/index.min.js?m=1788366818i&#038;ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="/wp-content/plugins/gutenberg-core/v23.9.0/build/scripts/i18n/index.min.js?m=1788366818i&#038;ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="verbum-settings-js-before">
+window.VerbumComments = {"Log in or provide your name and email to leave a reply.":"Log in or provide your name and email to leave a reply.","Log in or provide your name and email to leave a comment.":"Log in or provide your name and email to leave a comment.","Receive web and mobile notifications for posts on this site.":"Receive web and mobile notifications for posts on this site.","Name":"Name","Email (address never made public)":"Email (address never made public)","Website (optional)":"Website (optional)","Leave a reply. (log in optional)":"Leave a reply. (log in optional)","Leave a comment. (log in optional)":"Leave a comment. (log in optional)","Log in to leave a reply.":"Log in to leave a reply.","Log in to leave a comment.":"Log in to leave a comment.","Logged in via %s":"Logged in via %s","Log out":"Log out","Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.":"Your browser is blocking the cookies needed to log in and comment here. Allow cookies in your privacy settings, then reload the page.","Email":"Email","(Address never made public)":"(Address never made public)","Instantly":"Instantly","Daily":"Daily","Reply":"Reply","Comment":"Comment","WordPress":"WordPress","Weekly":"Weekly","Notify me of new posts":"Notify me of new posts","Email me new posts":"Email me new posts","Email me new comments":"Email me new comments","Cancel":"Cancel","Write a comment...":"Write a comment...","Write a reply...":"Write a reply...","Website":"Website","Optional":"Optional","We'll keep you in the loop!":"We'll keep you in the loop!","Loading your comment...":"Loading your comment...","Discover more from":"Discover more from Literary Analysis","Subscribe now to keep reading and get access to the full archive.":"Subscribe now to keep reading and get access to the full archive.","Continue reading":"Continue reading","Never miss a beat!":"Never miss a beat!","Interested in getting blog post updates? Simply click the button below to stay in the loop!":"Interested in getting blog post updates? Simply click the button below to stay in the loop!","Enter your email address":"Enter your email address","Subscribe":"Subscribe","Comment sent successfully":"Comment sent successfully","Save my name, email, and website in this browser for the next time I comment.":"Save my name, email, and website in this browser for the next time I comment.","hovercardi18n":{"Edit your profile \u2192":"Edit your profile \u2192","View profile \u2192":"View profile \u2192","Contact":"Contact","Send money":"Send money","Gravatar not found.":"Gravatar not found.","This profile is private.":"This profile is private.","Too Many Requests.":"Too Many Requests.","Internal Server Error.":"Internal Server Error.","Sorry, we are unable to load this Gravatar profile.":"Sorry, we are unable to load this Gravatar profile."},"siteId":9257833,"postId":391,"mustLogIn":false,"requireNameEmail":true,"commentRegistration":false,"connectURL":"https://literaryanalysis.wordpress.com/public.api/connect/?action=request\u0026domain=literaryanalysis.net","logoutURL":"https://literaryanalysis.wordpress.com/wp-login.php?action=logout\u0026_wpnonce=ec01b370fa","homeURL":"https://literaryanalysis.net/","subscribeToBlog":true,"subscribeToComment":true,"isJetpackCommentsLoggedIn":false,"jetpackUsername":"","jetpackUserId":0,"jetpackSignature":"","jetpackAvatar":"https://0.gravatar.com/avatar/?s=96\u0026amp;d=\u0026amp;r=G","enableBlocks":true,"enableSubscriptionModal":true,"currentLocale":"en","isJetpackComments":false,"allowedBlocks":["core/paragraph","core/list","core/code","core/list-item","core/quote","core/image","core/embed","core/quote","core/code"],"embedNonce":"6038a714bf","verbumBundleUrl":"/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/features/verbum-comments/dist/index.js","isRTL":false,"vbeCacheBuster":1771405207,"iframeUniqueId":0,"colorScheme":false}
+//# sourceURL=verbum-settings-js-before
+</script>
+<script data-wp-strategy="defer" defer id="verbum-dynamic-loader-js" src="/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/assets/dynamic-loader.js?m=1772518873i&#038;minify=false&#038;ver=8b5296f9195db92c42e4"></script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="jetpack-script-data-js-before">
+window.JetpackScriptData = {"site":{"host":"wpcom","is_wpcom_platform":true}};
+//# sourceURL=jetpack-script-data-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJyNkNsOgjAMhl/IUYwR8ML4KKZuEwc7Ze0kvL0LIvHKeNf8h/ZLYYrCeGmz0gQDgQzOac8i6WjnyhlfDbSDEpLBczHAZRFt7o0vcc0R5SiKNMVSXA1wIfiPeX1qr0ICzBwcMhu51ZBIM8EtG6s2kWQykYVCxh+XcTTkNItDVcO14G/CPS1h9Qf1N+yy4w1CD0xaoVLzMhrfr1+4uPO+7drTse6aZngBPy90MQ=='></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "tumblr" ] = "menubar=1,resizable=1,width=450,height=450";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1-RC3-63320"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260905#ver=20260905' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'9257833','blog_tz':'-5','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'9257833','v':'wpcom','tz':'-5','user_id':'0','post':'391','subd':'literaryanalysis'}]);
+		_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3BuVT01Uj14Ti1yYTBnX3xuYUQ3Qz1oblZbVHV3MTZoVXFwTTVDK2wuPT1KWzJNV19iQk9bTmF0PUUlUlYzbW1nYyxHTnlKQiUsT0hKb2tYK09aZkN6LzJmYVtxMGpoLT9rJnJRJXg4Mj03ZmpkdF1Jb2ZoVT1FS1tEVVpBZlp+ZDFSU3R+ZW1aZ245U1JERDJwJnFjW354VD9QRlhrXWgtblMzVDU0Y0hGXy9+ZnNPY0QmaG0/WW41WWRVeFBNdWViWSZsMFdQWHdfVSVwXTh8Yi92dl9jOFBHbD94bkxwdVMvejcyYUhlfFhsTCwsQytuLzR6W1BLOH5ZbEViRGF6RDdITXNNRUVUb35tdU9DVX40SnVHSHRfSF9oc3ZbPW5qdEJMeUt0bXQsW11qOTBVXXNmdms/Z0g5SS1MMjBlNDEvMSxxMC5mcVc='}]);
+_stq.push([ 'clickTrackerInit', '9257833', '391' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Etc/GMT+5" data-custom-props="{&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/choco&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=17&amp;m=202636"></script> 	
+<script>
+(function() {
+	'use strict';
+
+	const fetches = {};
+	const promises = {};
+	const urls = {
+		'wp-polyfill': '/wp-includes/js/dist/vendor/wp-polyfill.min.js?m=1786440387i&ver=3.15.0',
+		'verbum': '/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/moon/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/verbum-comments/verbum-comments.js?m=1785895867i&minify=false&ver=ecf5cfe8827907d3ea28'
+	};
+	const loaders = {
+		'verbum': () => {
+			fetchExternalScript('wp-polyfill');
+			fetchExternalScript('verbum');
+			promises['wp-polyfill'] = promises['wp-polyfill'] || loadWPScript('wp-polyfill');
+			promises['verbum'] = promises['verbum'] || promises['wp-polyfill'].then( () => loadWPScript('verbum') );
+			return promises['verbum'];
+		},
+		
+	};
+	const scriptExtras = {
+		
+	};
+
+	window.WP_Enqueue_Dynamic_Script = {
+		loadScript: (handle) => {
+			if (!loaders[handle]) {
+				console.error('WP_Enqueue_Dynamic_Script: unregistered script `' + handle + '`.');
+			}
+			return loaders[handle]();
+		}
+	};
+
+	function fetchExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		fetches[handle] = fetches[handle] || fetch(urls[handle], { mode: 'no-cors' });
+		return fetches[handle];
+	}
+
+	function runExtraScript(handle, type, index) {
+		const id = 'wp-enqueue-dynamic-script:' + handle + ':' + type + ':' + (index + 1);
+		const template = document.getElementById(id);
+		if (!template) {
+			return Promise.reject();
+		}
+
+		const script = document.createElement( 'script' );
+		script.innerHTML = template.innerHTML;
+		document.body.appendChild( script );
+		return Promise.resolve();
+	}
+
+	function loadExternalScript(handle) {
+		if (!urls[handle]) {
+			return Promise.resolve();
+		}
+
+		return fetches[handle].then(() => {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.onload = () => resolve();
+				script.onerror = (e) => reject(e);
+				script.src = urls[handle];
+				document.body.appendChild(script);
+			});
+		});
+	}
+
+	function loadExtra(handle, pos) {
+		const count = (scriptExtras[handle] && scriptExtras[handle][pos]) || 0;
+		let promise = Promise.resolve();
+
+		for (let i = 0; i < count; i++) {
+			promise = promise.then(() => runExtraScript(handle, pos, i));
+		}
+
+		return promise;
+	}
+
+	function loadWPScript(handle) {
+		// Core loads scripts in this order. See: https://github.com/WordPress/WordPress/blob/a59eb9d39c4fcba834b70c9e8dfd64feeec10ba6/wp-includes/class-wp-scripts.php#L428.
+		return loadExtra(handle, 'translations')
+			.then(() => loadExtra(handle, 'before'))
+			.then(() => loadExternalScript(handle))
+			.then(() => loadExtra(handle, 'after'));
+	}
+} )();
+</script>
+	</body>
+</html>

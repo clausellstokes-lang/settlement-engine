@@ -1,0 +1,1438 @@
+Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing , pages 9379–9393
+December 7-11, 2022 ©2022 Association for Computational Linguistics
+Dungeons and Dragons as a Dialog Challenge for Artiﬁcial Intelligence
+Chris Callison-Burch∗
+University of Pennsylvania
+ccb@upenn.edu
+Gaurav Singh Tomar∗
+Google Research
+gtomar@google.com
+Lara J. Martin
+University of Pennsylvania
+Daphne Ippolito
+University of Pennsylvania
+Google Research
+Suma Bailis
+Google Research
+David Reitter
+Google Research
+Abstract
+AI researchers have posited Dungeons and
+Dragons (D&D) as a challenge problem to test
+systems on various language-related capabil-
+ities. In this paper, we frame D&D specif-
+ically as a dialogue system challenge, where
+the tasks are to both generate the next conver-
+sational turn in the game and predict the state
+of the game given the dialogue history. We cre-
+ate a gameplay dataset consisting of nearly 900
+games, with a total of 7,000 players, 800,000
+dialogue turns, 500,000 dice rolls, and 58 mil-
+lion words. We automatically annotate the
+data with partial state information about the
+game play. We train a large language model
+(LM) to generate the next game turn, condi-
+tioning it on different information. The LM
+can respond as a particular character or as the
+player who runs the game—i.e., the Dungeon
+Master (DM). It is trained to produce dialogue
+that is either in-character (roleplaying in the
+ﬁctional world) or out-of-character (discussing
+rules or strategy). We perform a human evalu-
+ation to determine what factors make the gen-
+erated output plausible and interesting. We fur-
+ther perform an automatic evaluation to deter-
+mine how well the model can predict the game
+state given the history and examine how well
+tracking the game state improves its ability to
+produce plausible conversational output.
+1 Introduction
+Artiﬁcial Intelligence has a long and rich history of
+using games as challenge problems that lead to ad-
+vances in the ﬁeld. In many cases, AI game-playing
+systems have gone on to rival human champions of
+the game. Dungeons and Dragons has been identi-
+ﬁed as an appropriate challenge for the next stage
+of artiﬁcial intelligence (Ellis and Hendler, 2017;
+Louis and Sutton, 2018; Martin et al., 2018b). Ellis
+and Hendler (2017) proposed open-ended creative
+games like D&D as the next challenge for AI af-
+ter the human-level successes of AI at Chess and
+∗*Denotes equal contribution
+Go, which are zero-sum, deterministic, sequential
+two-player games with perfect information. Louis
+and Sutton (2018) understood the importance of
+narrative in natural language processing (NLP) and
+generation (NLG). In particular, they saw how co-
+operative story generation between humans already
+exists in these games and can be used for auto-
+mated generation. Martin et al. (2018b) outlined
+some of the speciﬁc challenges D&D presents to
+the NLP community; such as a state of the game
+world distributed across the Dungeon Master (DM)
+and other players or dealing with the intrinsic re-
+wards players get from taking certain actions that
+would not necessarily provide them with points in
+the game.
+D&D involves multiple players who roleplay
+characters in a fantasy setting, guided by a Dun-
+geon Master who sets obstacles and adventures and
+plays as monsters. In roleplaying games like Dun-
+geons and Dragons, the gameplay happens through
+language rather than moves on a game board, mak-
+ing it an interesting domain for NLP research. To
+have an AI successfully play D&D , it would re-
+quire abilities like
+• Language generation (multi-party dialog, gen-
+erating descriptions of the world/actions, sto-
+rytelling)
+• Language understanding (knowledge acquisi-
+tion and representation, state tracking, auto-
+mated reasoning)
+• Planning / strategic play during battles (simi-
+lar to chess or go)
+Appendix A gives an example of D&D gameplay
+and the AI challenges presented by it.
+Is it possible to design an AI system that is capa-
+ble of playing a game of D&D either as a character
+in the game or as the Dungeon Master using current
+AI technology? We argue that now is the perfect
+time for this challenge, since large scale neural
+language models like GPT have shown impressive
+generation results (Brown et al., 2020), and since
+9379
+incorporating neural LMs into a game setting both
+exercises their strengths and exposes their weak-
+nesses.
+In this paper, we introduce a new dataset of “ac-
+tual play” game transcripts. Each turn is labeled
+with game state variables like character informa-
+tion and whether the conversational turn was in-
+character or out-of-character. Our data is a novel,
+large scale, real-world conversational dataset. It
+is unique in that the dialog turns are generated
+entirely through player collaboration and written
+interaction in a multi-player game. We propose our
+dataset as a challenge for dialogue systems for the
+following reasons:
+• It is naturally occurring conversational dialog
+that covers a spectrum of task oriented and
+non-task oriented (e.g. chit chat) dialog.
+• It is strongly history dependent – a substan-
+tive criticism of recent dialog datasets is their
+history independence (Mosig et al., 2020).
+• It has many participants in the conversation,
+since there are several players in the game.
+• It conveys narrative elements including de-
+scriptions of events that denote changes in the
+state of the game.
+Unlike existing dialog datasets, our data reﬂects
+the challenging nature of the D&D game as a multi-
+party dialogue with creative roleplaying and under-
+lying game states.
+2 Tasks
+We trained a large language model (LLM) to per-
+form two tasks: Next Utterance Prediction and
+Game State Tracking.
+Next Utterance Prediction. We trained our lan-
+guage model on a corpus of human conversations
+(see Section 3) to predict the next utterance. We
+varied the conditioning information to examine the
+effects on the quality of predicted next utterance.
+In all variations, we included the conversational
+history as input. Given the conversational input
+(and other input in the variant models), the LLM
+must generate the next utterance, such that it is
+both interesting and a plausible next turn in the
+D&D game.
+Game State Tracking. In this task, rather than
+producing the next utterance, we had the model
+predict the game state for a given dialogue turn
+in the conversation. We have kept the state deﬁni-
+tion similar to task-oriented dialogue state tracking
+Play-By-Post Corpus
+Number of campaigns 896
+Average players per campaign 8
+Average turns per campaign 910
+Average words per campaign 64,941
+Total turns 815,106
+Total words 58,187,526
+Average dice rolls per campaign 594
+Total dice rolls 532,270
+Table 1: Statistics for our play-by-post corpus
+(DST). In DST, the dialogue state is a collection
+of slot-value pairs. In our case, each slot is a state
+variable feature related to D&D games. Our target
+slot values do not need to appear as a word in the
+dialogue context. We track several game states as-
+pects including some that remain relatively static
+throughout the game (character attributes like their
+pronouns, class, fantasy race, and their inventory),
+some that change periodically (like being in com-
+bat or out of combat), and some that change from
+turn to turn (like what action the player is taking).
+3 Dataset
+For this paper, we have created a novel dataset for
+our dialogue-oriented test of AI’s ability to play
+Dungeons & Dragons. We scraped Play-By-Post
+data from a web forum1 where people play by tak-
+ing turns posting on the forum to describe their
+move.
+Figure 1 shows an example of part of the game-
+play from the play-by-post forums from D&D Be-
+yond. D&D Beyond provides a mechanism in its
+forum to roll dice using a “roll” tag. Their dice
+roller allows players to conduct the rolls that are
+used for D&D ability checks and in combat.
+Table 1 summarizes the amount of play-by-post
+data that we collected from the D&D Beyond web-
+site (with permission from the company).
+3.1 Heuristic annotation of game states
+We designed a set of rule-based heuristics to ex-
+tract game state information from the play by post.
+These were implemented using regular expressions
+and NLP tools like named entity recognizers (Gard-
+ner et al., 2018). Although this heuristically ex-
+tracted information is not perfect, it provides a
+reasonable approximation of the game state. It is
+1https://www.dndbeyond.com/forums/
+d-d-beyond-general/play-by-post
+9380
+ďĉůÑÕĉĶñ±ăѕ҃ѕwīďĨīñÕĶ±īŕ
+'DWDVHWV3OD\%\3RVW'	'
+Figure 1: Example of 3 turns in the D&D Beyond play-by-post forum
+useful for testing whether large language models
+can beneﬁt from inclusion of complex state infor-
+mation for next utterance prediction and whether
+LLMs can be used for state tracking. We designed
+rules to extract state information relating to charac-
+ter properties, combat and player actions.
+Character properties
+• Name: Perform NER on all the player’s turns
+in a campaign. The character’s name is as-
+signed to be the player’s most frequently men-
+tioned name, on the assumption that they tend
+to describe their own character’s actions.
+• Class: Count how many times each
+D&D class 2 is mentioned by each player.
+Most frequently mentioned class is their char-
+acter’s class.
+• Race: On a player’s ﬁrst turn, check whether
+any of the D&D fantasy races3 are mentioned.
+Assign it to character. If not, guess based on
+the most frequently mentioned race.
+• Pronouns: Count pronouns mentioned by a
+player. Assign their character’s pronouns to
+be the most frequent pronouns used by the
+player.
+• Inventory: Use regex to match items occurring
+after character’s personal pronouns (e.g. her
+sword).
+2https://www.dndbeyond.com/classes
+3https://www.dndbeyond.com/races
+• Spells known: Regex that matches cast fol-
+lowed by a spell name
+The DM is assumed to be the player who has the
+ﬁrst post in the game. The DM’s entries in the
+dataset are scrubbed of other character properties,
+since they play multiple NPCs (non-player charac-
+ters) and monsters.
+Combat
+• We detect the start of combat when there is
+a roll for initiative, or when there are attack
+rolls before initiative (from surprise attacks).
+• Combat continues while there are attack rolls
+happening.
+• Combat concludes after there are no rolls for
+a number of turns.
+• In a combat span, we extract a list of monsters
+mentioned, and heuristically guess the number
+of each kind of monster.
+Actions
+• Dice rolls are marked in D&D Beyond posts.
+We detect the associated actions based on the
+kind of die used (D20 = a check, other dice
+are used for calculating damage if an attack
+check is successful)
+• We use a regex to match the nearest pattern,
+which includes attack or a list of abilities like
+acrobatics, animal handling, arcana, athletics,
+etc.
+• Damage rolls are matched with damage, dmg,
+9381
+Control Feature Description Expected Impact on Model’s Output
+Player ID Player writing a given dialog turn Connects the current turn to the player’s previous turns,
+which is important in multi-party conversations.
+IC versus OOC Whether a player is in-character or out-of-
+character for a given dialog turn
+Changes whether the generated text is more like de-
+scriptive text found in a novel, or more like a discus-
+sion of rules and strategies.
+Character Name Name of the character being played by the
+player of a given dialog turn
+IC descriptions use the character’s name.
+Character Class D&D classes Character classes perform different actions (e.g. wiz-
+ards cast spells, thieves pick locks)
+Character Race D&D fantasy races Different physical characteristics (e.g. halﬂings are
+small, dragonborn have scales).
+Character
+Pronouns
+The character’s pronouns Uses the correct pronouns when describing the char-
+acter.
+Character
+Actions
+List of actions taken by the character in the
+current turn
+Allows a description to be generated for a given ac-
+tion. The action can be thought of as a goal for the
+description.
+Combat Whether the players are currently engaged in
+combat or not during a given dialog turn
+Affects the likelihood of actions (e.g. attacks are more
+likely during combat and investigations checks are
+more likely outside of combat)
+Table 2: Our LLMs are conditioned on a variety of control features that allow the models to better learn what kind
+of text to generate for the next utterance prediction task
+cure, heal, healing, points.
+Our heuristics resulted in features for around
+60% of all conversational turns. We train a convo-
+lutional neural network classiﬁer using these con-
+versational turns to predict all of the above control
+features for each conversational turn in training
+data. Appendix C estimates the accuracy of the
+model’s prediction on these state features.
+3.2 In-Character Versus Out-Of-Character
+Text
+In addition to labeling the game states in our Play
+by Post data, we also labeled the text of each turn
+as being either spoken in-character (IC) or out-of-
+character (OOC). To do so, we crawled another
+Play by Post forum hosted at Giant in the Play-
+ground4, where play happens on two discussion
+boards – one in-character and one out-of-characters.
+For example, here is an IC post:
+Kuros pulls the feathered shaft of the
+arrow back to his cheek winning easily
+against the resistance of the bowstring.
+He pulls a lungful of air to keep himself
+steady, takes aim at the Bandit with the
+deer, and lets ﬂy.
+And here is its corresponding OOC post:
+Surprise round so only 1 standard
+or move action. Shoot the bow:
+4https://forums.giantitp.com/forumdisplay.php?
+3-Play-by-Post-Games
+(1d20+6)[20] vs Flat Footed AC at Ban-
+dit 1. Damage: (1d8+2)[10]
+We train a classiﬁer to predict IC versus OOC text,
+and then apply it to each paragraph in our D&D Be-
+yond forum data.
+4 Models
+For our large language model, we use a 64B param-
+eter version of Google’s LaMDA language model
+(Thoppilan et al., 2022), which was trained on con-
+versations. LaMDA is similar to other Transformer-
+based pre-trained language models like GPT-3. As
+with other pre-trained language models (Howard
+and Ruder, 2018), LaMDA can be ﬁnetuned to
+different tasks. The two tasks that we ﬁnetune
+LaMDA to perform are game state tracking and
+response generation. In both cases, the LLM can
+be thought of as a function that maps inputs onto an
+output. For instance, game state tracking is a lan-
+guage understanding task where the function takes
+in inputs like f (current utterance, previous state,
+history)→ new state, and response generation is
+a language generation task where f (current state,
+history)→ next utterance. The LLM functions are
+trained via the ﬁne tuning process.
+In our experiments we try a variety of different
+inputs to our LLM functions to see how they enable
+better learning of the tasks. We train our LLMs on
+the conversation history (which is typical in dia-
+log modeling) and we also augment the conversa-
+tions by conditioning other explicit signals. These
+9382
+conditioning signals can be thought of as sophis-
+ticated “control features”, inspired by the CTRL
+language model (Keskar et al., 2019). During train-
+ing, the model learns a relationship between the
+control features and appropriate responses. In turn,
+during inference, one can explicitly inﬂuence di-
+mensions of the conversation – enabling more com-
+pelling dialogue – by setting the values of control
+features. These control features can be set dynami-
+cally, without necessitating ﬁnetuning or additional
+post-processing. Table 2 describes the control fea-
+tures we have proposed and describes how they
+could steer generation. Note that we use the terms
+‘control features’ and ‘state variables’ interchange-
+ably when referring to our next utterance prediction
+models.
+4.1 Baseline Pre-Training Data
+LaMDA is trained on turn-based conversational
+data. For a conversation of length n, LaMDA takes
+as input the ﬁrst n− 1 turns, and the nth turn as the
+target. For all models, we used the 7 most recent
+conversational turns as input, and predict turn 8.
+4.2 D&D FineTuning Data
+Here is an example of the data used in our versions
+of LaMDA that are ﬁnetuned to on our D&D data.
+TURN 1:
+Text You attack. You launch some ﬁre onto the
+goblin closest to the wagon. And with that,
+he looks like he is on death’s door. And
+the other goblin that you can see, the one
+that’s not in the brush somewhere, just sort
+of stops in his tracks. What do you do next?
+Player ID 0
+Character Dungeon Master
+Race N/A
+Class Dungeon Master
+Pronouns N/A
+Inventory N/A
+In combat? Yes
+In character? Yes
+Action Attack
+TURN 2:
+Text I grab my axe and bring it down on the
+wounded goblin.
+Player ID 1
+Character Magnus
+Race Human
+Class Fighter
+Pronouns he/him
+Inventory Axe
+In combat? Yes
+In character? Yes
+Action Attack
+'HYVHWSHUSOH[LW\GXULQJWUDLQLQJ
+(DFKRIRXUPRGHOVVWDUWVIURPDSUHWUDLQHG/D0'$PRGHOWUDLQHGIRU.VWHSVDQGWKHQLV
+ILQHWXQHGIRUDIXUWKHU.VWHSV
+7KHSORWEHORZVKRZVWKH1HJDWLYHORJSHUSOH[LW\RQRXUGHYHORSPHQWVHW
+$WWKHHQGRIILQHWXQLQJWKHPRGHOVZLWKWKHEHVWSHUSOH[LW\VFRUHVDQGWKHEHVWWRNHQDFFXUDF\
+VFRUHVZHUH//0'1'5(&(17&75/DQG//0'1'$//&75/
+0RGHO 3HUSOH[LW\ 7RNHQDFFXUDF\
+//0'LDORJ  
+//0'1'  
+//0'1'35(9&75/  
+//0'1'5(&(17&75/  
+//0'1'$//&75/  
+//0'1'3RGFDVW  
+//03RGFDVW  
+Figure 2: Negative Log Perplexity of our models af-
+ter pretraining on generic dialogue data for 600k steps,
+and then ﬁnetuning to our data for a further 60k steps.
+Colors correspond to the models in Table 3.
+4.3 Next Utterance Prediction Models
+LLM-Dialog: We call our baseline model LLM-
+Dialog. It is a LaMDA dialogue model that does
+not use not use any D&D data.
+LLM-DND: LLM-Dialog that has been ﬁne-
+tuned on Play-by-post D&D gameplay dataset us-
+ing no control features
+LLM-DND-ALL-CTRL: LLM-Dialog that has
+been ﬁnetuned on Play-by-post D&D gameplay
+dataset using control features (state variables) for
+all dialog turns including the state variables for the
+current turn the utterance is being predicted for.
+LLM-DND-PREV-CTRL: LLM-Dialog that
+has been ﬁnetuned on Play-by-post D&D gameplay
+dataset using control features for all previous
+dialog turns, not including the current turn.
+LLM-DND-CURRENT-CTRL: LLM-Dialog
+that has been ﬁnetuned on Play-by-post
+D&D gameplay dataset using control fea-
+tures (state variables) for only the current turn
+the utterance is being predicted for.
+4.4 Dev Set Perplexity During Training
+Each of our models starts from a pretrained
+LaMDA model trained for 600K steps and then
+is ﬁnetuned for a further 60K steps. Figure 2 plots
+the Negative log perplexity on our development set,
+and Table 3 shows the ﬁnal perpexity and token
+accuracies on the dev set. At the end of ﬁnetun-
+ing, the models with the best perplexity scores and
+the best token accuracy scores were LLM-DND-
+CURRENT-CTRL and LLM-DND-ALL-CTRL,
+which used our control features.
+9383
+Model Perplexity Token Accuracy
+LLM-Dialog 2.65 44.61
+LLM-DND 2.50 46.92
+LLM-DND-PREV-CTRL 2.51 46.84
+LLM-DND-CURR-CTRL 2.34 49.67
+LLM-DND-ALL-CTRL 2.37 49.02
+Table 3: Perplexity and token accuracy of our models
+after ﬁnetuning to our data.
+5 Manual Evaluation
+To evaluate the quality of our models for the task
+of next utterance prediction in D&D , we perform a
+human evaluation. We recruited professional raters
+to perform a manual evaluation. They read a ver-
+sion of the content that was provided to the models
+– the seven turns of conversational history plus a list
+of players and the names/classes of the characters
+that they played. Then they were shown several
+model outputs for the context (or the “gold”, which
+was the actual next turn in the game), The anno-
+tators asked to rate each output along the three di-
+mensions, following the evaluation procedure used
+for the Meena LM (Adiwardana et al., 2020):
+• Does the response make sense? (yes/no)
+• Is the response speciﬁc? (yes/no)
+• How interesting is the response? (10 point
+scale)
+The full annotator instructions and the annotation
+interface are given in Appendix D.
+5.1 Raters
+Because of the specialized nature of the D&D do-
+main, we recruited 6 professional raters rather than
+crowd workers to perform the task. The raters were
+selected based on their professed interest in the fan-
+tasy genre, and on their background with D&D. All
+raters were fantasy fans, and 5 of the 6 had played
+D&D. 3 raters had been the DM in a game before.
+5.2 Inter-Rater Agreement
+Our raters annotated 500 system outputs with 3-
+way redundancy on each output. For the binary
+sense and speciﬁc scores, pairwise annotator agree-
+ment was 0.8, with a chance-adjusted Randolph
+Kappa score of 0.6. For the scalar interestingness
+scores, the Kendall’s Tau correlation was 0.46.
+5.3 Analysis
+Model Comparison. Table 4 shows the average
+sense, speciﬁc and interestingness scores for the
+systems, and for the human-written gold response.
+All of the D&D adapted systems outperform the
+Model Sense Speciﬁc Interest
+LLM-Dialog 0.81 0.85 3.57
+LLM-DND 0.9 0.9 3.91
+LLM-DND-PREV-CTRL 0.86 0.88 3.96
+LLM-DND-CURR-CTRL 0.88 0.9 3.96
+LLM-DND-ALL-CTRL 0.87 0.88 3.92
+GOLD 0.92 0.92 4.17
+Table 4: Average sense, speciﬁc and interestingness
+scores for our systems, and for human-written gold re-
+sponses
+vanilla dialogue system. On average, the adapted
+systems make sense 6.75% more often than the
+baseline, are speciﬁc 4% more often, and are 0.37
+points more interesting. However, the added con-
+trol features do not seem to differ substantially
+from the LLM that is adapted to the D&D data
+without any control features. Why then use the
+control features at all?
+Control Features. One reason is that the control
+features are useful to allow the model to role-play.
+For example, we can ask the model to play an elf
+wizard via the control features. Table 5 gives a
+qualitative example of this. The Table shows out-
+puts from two LLMs without control features, plus
+3 outputs from our LLM-DND-CURRENT-CTRL
+model roleplaying different characters. As input,
+we gave the models the ﬁnal seven turns in the
+game play example from Appendix A –from “With
+his eagle eyes, Magnus spots two dead horses. . . ”
+to “... What do you do next?”, and then generate
+what each model thinks the next utterance ought to
+be. The vanilla dialogue system with no D&D data
+generates an irrelevant reply about Discord. The
+dialogue system ﬁne-tuned on D&D data without
+control feature generates a relevant response. The
+dialgoue system that adds conditioning control fea-
+tures allows the model to generate speciﬁc replies
+for each of the different characters. These replies
+are relevant to the character classes – the wizard
+casts a spell, and the Dwarf cleric shouts a battle
+cry by invoking the name of a Dwarf god.
+In-Character Turns Are More Interesting.
+Among our most impactful control features was the
+one that allowed systems to generate in-character
+(IC) versus out-of-character (OOC) turns. Table 6
+shows that control models’ scores substantially in-
+creased on IC turns compared to when their output
+was generated OOC. The pronounced increase in
+intersestingness makes sense because IC turns are
+ones where the players describe their characters in
+9384
+Model Output
+LLM-Dialog moon_monk you can just join our discord conversation. it’s free and easier to deal with
+LLM-DND I cast Ice Knife (I’m assuming this is not one of the ones I can’t do?)
+LLM-DND-CURRENT-CTRL
+Responding as Magnus (human
+ﬁghter, inventory: axe) In combat
+I turn from the goblin and go to help Merle and Taako with getting this wagon moving
+again. Magnus can’t see them anymore with such a dense forest. They’re likely in a
+battle right now... I have to ﬁnd them as fast as I can!
+LLM-DND-CURRENT-CTRL
+Responding as Taako (elf wizard, in-
+ventory: spellbook) In combat
+If the goblins still don’t look like they’re getting closer, Taako will yell, “Alright you
+little monsters! Let’s see what ya got!” And he’ll cast Chill Touch on one of the goblins
+that isn’t dead/on its doorstep. Attack: 22 Damage: 6
+LLM-DND-CURRENT-CTRL
+Responding as Mearle (dwarf cleric,
+inventory: holy symbol) In combat
+Merle steps away from the wagon. He draws his sword and takes aim at the hidden
+goblin! Attack: 27 Damage: 8 He puts his free hand on the pommel of his sword and
+shouts his battle cry, "For Clanggeddin!" His eyes glow brightly red as he strikes!
+Table 5: Example model outputs for the next utterance prediction task, given the sample gameplay from Table 8 as
+input. The 3 LLM-DND-CURRENT-CTRL examples use the same model with different control features (in red).
+Model Sense Speciﬁc Interest
+LLM-Dialog -0.01 -0.01 +0.06
+LLM-DND -0.02 +0.03 +0.4
+LLM-DND-PREV-CTRL +0.02 +0.02 +0.6
+LLM-DND-CURR-CTRL +0.06 +0.06 +0.93
+LLM-DND-ALL-CTRL +0.07 +0.06 +0.81
+GOLD +0.07 +0.05 +1.02
+Table 6: Improvements by generating in-character (IC)
+text rather than out-of-character (OOC) text. Numbers
+are IC scores minus OOC scores.
+State variable Majority LLM-DND-GST
+All .73 .82
+Combat .89 .82
+Character Class .58 .76
+Character Name .58 .78
+Character Race .75 .79
+Character Pronouns .58 .89
+Character Actions .80 .85
+Table 7: Average accuracy for our Game State Tracking
+LLM on the slot-ﬁlling our state variables, compared to
+a majority class baseline.
+the ﬁctional world often with evocative language,
+whereas OOC turns usually discuss rules or me-
+chanics. Our control features allowed the system
+to intentionally generate IC responses, resulting in
+substantially improved interestingness scores for
+those in-character turns.
+6 Game State Tracking Model
+We conducted an experiment to evaluate whether
+a LLM could be ﬁnetuned to perform game state
+tracking for D&D using our heuristically annotated
+game state features. We trained a new model LLM-
+DND-GST (Game State Tracking). It is a LLM-
+Dialog that has been ﬁnetuned on our Play-by-post
+D&D gameplay dataset. As input, it takes all pre-
+vious dialog turns and their state variables, plus
+the text of the current turn, and then it outputs the
+corresponding state variables for the current turn.
+We analyzed the accuracy of the LLM-DND-
+GST model its ability to do slot-ﬁlling for each
+of the individual game states, and compared its
+performance to a simple baseline that always output
+the the majority class. The results are shown in
+Table 7. The average accuracy of the dialogue state
+tracker is better than the majority class baseline,
+but likely falls short of being useful when it comes
+to joint accuracy. The joint accuracy for LLM-
+DND-GST is 58%. This suggests that accurately
+tracking the full game state may require additional
+machinery beyond a ﬁnetuned LLM.
+7 Related Work
+Previous work has examined AI to play text adven-
+tures games (Haroush et al., 2018; Yao et al., 2020;
+Dambekodi et al., 2020). These games are simpler
+than D&D because they have a limited vocabulary
+and more straightforward game states. Creating
+text adventure games (Ammanabrolu et al., 2020a;
+Fan et al., 2020) is more challenging than playing
+them, and is similar to the world-building job of
+the DM in D&D . There has also been work on per-
+sona/character generation in stories (Prabhumoye
+et al., 2019), and within D&D itself (Louis and
+Sutton, 2018). Others (Urbanek et al., 2019; Am-
+manabrolu et al., 2020b) have realized that NPCs
+are lacking in their abilities to speak and act in text
+games.
+Findings of the automated story generation com-
+munity are relevant for D&D AI systems. Neural
+language models have become increasingly more
+popular for story generation (Roemmele, 2018;
+Martin et al., 2018a; Mathewson et al., 2019; Hou
+et al., 2019). We have also started to see story-
+telling with transformers (See et al., 2019; Peng
+et al., 2021; Branch et al., 2021). Transformer-
+9385
+based storytelling systems have even been intro-
+duced to the general public thanks to the popularity
+of AI Dungeon (Walton, 2019). Although neural
+networks possess a lot of power in terms of what
+text they generate, they are still limited in their
+ability to produce longer spans of coherent text.
+Many (Fan et al., 2018; Yao et al., 2019; Ippolito
+et al., 2019; Tambwekar et al., 2019; Ammanabrolu
+et al., 2020b; Rashkin et al., 2020) have improved
+the coherence of neural storytellers by splitting the
+generation into two steps: ideation of the story plot,
+followed by the realization of sentences. This con-
+trollable story generation is the focus of a lot of
+current work in neural automated story generation.
+Due to the conversational nature of D&D , we
+decided to use a dialog-based system. Deep neural
+networks have been used for dialog agents for a
+while (Serban et al., 2016), with a shift toward us-
+ing transformers in recent years (Zhang et al., 2019;
+Ghazarian et al., 2021). Like in automated story
+generation and other neural text generation tasks,
+we are also seeing controllability being an impor-
+tant factor being integrated into systems. This
+includes using deep reinforcement learning tech-
+niques to guide the dialog toward a goal (Li et al.,
+2016; Saleh et al., 2020) or controlling for style
+(Zhang et al., 2018; Smith et al., 2020).
+In this paper, we use LaMDA, a transformer-
+based open-domain dialogue system that builds on
+the Meena model (Adiwardana et al., 2020). The
+original Meena model was an end-to-end model
+trained on public conversations found on social me-
+dia. Controllable text generation with transformers
+has been seen before with CTRL (Keskar et al.,
+2019), a language model that is conditioned on
+a given “control code” in addition to the textual
+history. This work takes a similar approach. We
+integrate contextual information such as character
+descriptions, actions, and in- and out-of-character
+classiﬁcations.
+We have ﬁnetuned our LaMDA models on data
+crawled from D&D Beyond. This data contains
+both in-character and out-of-character dialog and
+can be used in conjunction with Rameshkumar
+and Bailey (2020)’s dataset from Critical Role (a
+D&D podcast), Louis and Sutton (2018)’s dataset
+from roleplayerguild.com (a D&D forum), Ur-
+banek et al. (2019)’s crowdsourced LIGHT dataset,
+and/or Akoury et al. (2020)’s STORIUM dataset
+for human+AI collaborative story generation.
+8 Discussion and Conclusions
+We have demonstrated that training on D&D data
+results in much higher quality outputs than a vanilla
+dialogue system (as expected), that controlling the
+model to generate in-character responses results
+in substantially more interesting output, and that
+conditioning on game state information qualita-
+tively results in responses that are appropriate to
+the character class. Our preliminary experiments
+with using the large language models to perform
+game state tracking show low performance even
+after ﬁnetuning, suggesting that other models may
+be required for an AI to play D&D track the full
+state of the game.
+Although our models are unable to play
+D&D fully autonomously by acting as the Dun-
+geon Master, they could act as an aid for novice
+DMs. Since our models can generated evocative,
+in-character text that is appropriate for the context
+and the game state, DMs could use it as inspiration
+as they narrate the adventure to the other players.
+Here is some model output to inspire your next
+adventure:
+You get a much closer look than the other
+two... the sarcophagi have the inscrip-
+tions of some sort of magic, probably
+to keep the dead inside, but you can not
+read them to save your life.
+What will you do next? Download our dataset5 to
+start your new adventure!
+9 Limitations
+One limitation of our human evaluation is that it is
+a static evaluation. The raters are simply reading
+the outputs of the model, and there is no interactive
+evaluation wherein they engage in gameplay with
+the system. An interactive user-study would be
+required before any claims could be made about
+how well AI is able to play D&D alongside human
+players.
+Because our state information was created
+heuristically, it therefore potentially contains er-
+rors. It is also incomplete. There are several kinds
+of state tracking variables that would be useful to
+include, but were not possible to heuristically ex-
+tract from our data. To address this problem in the
+future, we have begun a collaboration with the de-
+veloper of Avrae, which is a Discord bot for playing
+5https://www.cis.upenn.edu/~ccb/dnd-data.html
+9386
+D&D online. Avrae contains many state variables
+that are missing from our current annotations, such
+as HIT points and slot-ﬁller values for attacks.
+10 Acknowledgments
+We would like to thank Antony Pegg of Fandom
+for granting us permission to use D&D Beyond’s
+forum data for research purposes.
+Thank you to Rich Burlew and forum moderator
+truemane for granting us permission to crawl the
+Giant in the Playground forum and to build models
+using the forum posts.
+We would like to thank the many Google Re-
+searchers who gave valuable input on this project,
+especially Dipanjan Das and Suma Bailis.
+Chris Callison-Burch is grateful for having the
+opportunity to be a part-time visiting researcher at
+Google for two years. It was amazing to spend time
+among such incredibly smart people, and it was
+eye opening to see large LMs before they became
+widely available. Thanks!
+References
+Daniel Adiwardana, Minh-Thang Luong, David R So,
+Jamie Hall, Noah Fiedel, Romal Thoppilan, Zi Yang,
+Apoorv Kulshreshtha, Gaurav Nemade, Yifeng Lu
+Quoc, and V Le. 2020. Towards a Human-like Open-
+Domain Chatbot. arXiv preprint arXiv:2001.09977.
+Nader Akoury, Shufan Wang, Josh Whiting, Stephen
+Hood, Nanyun Peng, and Mohit Iyyer. 2020. STO-
+RIUM: A Dataset and Evaluation Platform for
+Machine-in-the-Loop Story Generation. In Proceed-
+ings of the 2020 Conference on Empirical Methods
+in Natural Language Processing (EMNLP) , pages
+6470–6484, Online. Association for Computational
+Linguistics.
+Prithviraj Ammanabrolu, William Broniec, Alex
+Mueller, Jeremy Paul, and Mark O. Riedl. 2020a.
+Toward Automated Quest Generation in Text-
+Adventure Games. In International Conference on
+Computational Creativity (ICCC).
+Prithviraj Ammanabrolu, Jack Urbanek, Margaret Li,
+Arthur Szlam, Tim Rocktäschel, and Jason Weston.
+2020b. How to Motivate Your Dragon: Teaching
+Goal-Driven Agents to Speak and Act in Fantasy
+Worlds. In The North American Chapter of the
+Association for Computational Linguistics (NAACL-
+HLT).
+Boyd Branch, Piotr Mirowski, and Kory Mathewson.
+2021. Collaborative Storytelling with Human Ac-
+tors and AI Narrators. In International Conference
+on Computational Creativity (ICCC), pages 97–101.
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, et al. 2020. Language models are few-shot
+learners. Advances in neural information processing
+systems, 33:1877–1901.
+Sahith Dambekodi, Spencer Frazier, Prithviraj Am-
+manabrolu, and Mark O Riedl. 2020. Playing Text-
+Based Games with Common Sense. In Wordplay:
+When Language Meets Games Workshop (NeurIPS
+2020).
+Simon Ellis and James Hendler. 2017. Comput-
+ers Play Chess, Computers Play Go...Humans Play
+Dungeons & Dragons. IEEE Intelligent Systems ,
+32(4):31–34.
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hi-
+erarchical Neural Story Generation. In Proceedings
+of the 56th Annual Meeting of the Association for
+Computational Linguistics, pages 889–898.
+Angela Fan, Jack Urbanek, Pratik Ringshia, Emily
+Dinan, Emma Qian, Siddharth Karamcheti, Shri-
+mai Prabhumoye, Douwe Kiela, Tim Rocktäschel,
+Arthur Szlam, and Jason Weston. 2020. Generating
+Interactive Worlds with Text. In AAAI Conference
+on Artiﬁcial Intelligence (AAAI), pages 1693–1700.
+Matt Gardner, Joel Grus, Mark Neumann, Oyvind
+Tafjord, Pradeep Dasigi, Nelson Liu, Matthew Pe-
+ters, Michael Schmitz, and Luke Zettlemoyer. 2018.
+AllenNLP: A deep semantic natural language pro-
+cessing platform. arXiv preprint arXiv:1803.07640.
+Sarik Ghazarian, Zixi Liu, Tuhin Chakrabarty, Xuezhe
+Ma, Aram Galstyan, and Nanyun Peng. 2021. DiS-
+CoL: Toward Engaging Dialogue Systems through
+Conversational Line Guided Response Generation.
+arXiv preprint arXiv:2102.02191.
+Matan Haroush, Tom Zahavy, Daniel J. Mankowitz,
+and Shie Mannor. 2018. Learning How Not to Act
+in Text-Based Games. In Workshop Track at ICLR
+2018, pages 1–4.
+Chenglong Hou, Chensong Zhou, Kun Zhou, Jinan
+Sun, and Sisi Xuanyuan. 2019. A survey of deep
+learning applied to story generation. In Smart Com-
+puting and Communication , pages 1–10. Springer
+International Publishing.
+Jeremy Howard and Sebastian Ruder. 2018. Universal
+language model ﬁne-tuning for text classiﬁcation. In
+Proceedings of the 56th Annual Meeting of the As-
+sociation for Computational Linguistics (Volume 1:
+Long Papers), pages 328–339, Melbourne, Australia.
+Association for Computational Linguistics.
+Daphne Ippolito, David Grangier, Chris Callison-
+Burch, and Douglas Eck. 2019. Unsupervised Hier-
+archical Story Inﬁlling. In Proceedings of the First
+Workshop on Narrative Understanding , pages 37–
+43.
+9387
+Nitish Shirish Keskar, Bryan McCann, Lav R. Varsh-
+ney, Caiming Xiong, and Richard Socher. 2019.
+CTRL: A Conditional Transformer Language Model
+for Controllable Generation. arXiv preprint
+arXiv:1909.05858.
+Jiwei Li, Will Monroe, Alan Ritter, and Dan Jurafsky.
+2016. Deep Reinforcement Learning for Dialogue
+Generation. In Conference on Empirical Methods in
+Natural Language Processing, pages 1192–1202.
+Annie Louis and Charles Sutton. 2018. Deep Dun-
+geons and Dragons: Learning Character-Action In-
+teractions from Role-Playing Game Transcripts. In
+Conference of the North American Chapter of the
+Association for Computational Linguistics: Human
+Language Technologies (NAACL-HLT), pages 708–
+713.
+Lara J. Martin, Prithviraj Ammanabrolu, Xinyu Wang,
+William Hancock, Shruti Singh, Brent Harrison, and
+Mark O. Riedl. 2018a. Event Representations for
+Automated Story Generation with Deep Neural Nets.
+In Thirty-Second AAAI Conference on Artiﬁcial In-
+telligence, pages 868–875, New Orleans, Louisiana.
+Lara J. Martin, Srijan Sood, and Mark O. Riedl. 2018b.
+Dungeons and DQNs: Toward Reinforcement Learn-
+ing Agents that Play Tabletop Roleplaying Games.
+In Joint Workshop on Intelligent Narrative Technolo-
+gies and Workshop on Intelligent Cinematography
+and Editing (INT-WICED), Edmonton, AB, Canada.
+Kory W. Mathewson, Pablo Samuel Castro, Colin
+Cherry, George Foster, and Marc G. Bellemare.
+2019. Shaping the Narrative Arc: An Information-
+Theoretic Approach to Collaborative Dialogue.
+arXiv preprint arXiv:1901.11528, page 20.
+Johannes E. M. Mosig, Vladimir Vlasov, and Alan
+Nichol. 2020. Where is the context? - A critique
+of recent dialogue datasets. CoRR, abs/2004.10473.
+Xiangyu Peng, Siyan Li, Sarah Wiegreffe, and Mark
+Riedl. 2021. Inferring the Reader: Guiding Auto-
+mated Story Generation with Commonsense Reason-
+ing. In Workshop on Narrative Understanding at
+NAACL-HLT 2021.
+Shrimai Prabhumoye, Khyathi Raghavi Chandu, Rus-
+lan Salakhutdinov, and Alan W Black. 2019. "My
+Way of Telling a Story": Persona based Grounded
+Story Generation. In Storytelling Workshop at ACL
+2019, pages 11–21.
+Revanth Rameshkumar and Peter Bailey. 2020. Story-
+telling with Dialogue: A Critical Role Dungeons and
+Dragons Dataset. In Annual Meeting of the Asso-
+ciation for Computational Linguistics (ACL) , pages
+5121–5134.
+Hannah Rashkin, Asli Celikyilmaz, Yejin Choi, and
+Jianfeng Gao. 2020. PlotMachines: Outline-
+Conditioned Generation with Dynamic Plot State
+Tracking. In Conference on Empirical Methods
+in Natural Language Processing (EMNLP) , pages
+4274–4295.
+Melissa Roemmele. 2018. Neural Networks for Narra-
+tive Continuation. Ph.D. thesis, University of South-
+ern California.
+Abdelrhman Saleh, Natasha Jaques, Asma Ghande-
+harioun, Judy Hanwen Shen, and Rosalind Picard.
+2020. Hierarchical Reinforcement Learning for
+Open-Domain Dialog. In AAAI Conference on Ar-
+tiﬁcial Intelligence (AAAI), pages 8741–8748.
+Abigail See, Aneesh Pappu, Rohun Saxena, Akhila
+Yerukola, and Christopher D. Manning. 2019. Do
+Massively Pretrained Language Models Make Better
+Storytellers? In Conference on Computational Nat-
+ural Language Learning (CoNLL), pages 843–861.
+Iulian Vlad Serban, Ryan Lowe, Laurent Charlin, and
+Joelle Pineau. 2016. Generative Deep Neural Net-
+works for Dialogue: A Short Review. In Con-
+ference on Neural Information Processing Systems
+(NeurIPS), Workshop on Learning Methods for Dia-
+logue, pages 1–6.
+Eric Michael Smith, Diana Gonzalez-Rico, Emily
+Dinan, and Y-Lan Boureau. 2020. Controlling
+Style in Generated Dialogue. arXiv preprint
+arXiv:2009.10855.
+Pradyumna Tambwekar, Murtaza Dhuliawala, Lara J.
+Martin, Animesh Mehta, Brent Harrison, and
+Mark O. Riedl. 2019. Controllable Neural Story
+Plot Generation via Reinforcement Learning. In
+International Joint Conference on Artiﬁcial Intelli-
+gence (IJCAI), Macau, China.
+Romal Thoppilan, Daniel De Freitas, Jamie Hall,
+Noam Shazeer, Apoorv Kulshreshtha, Heng-Tze
+Cheng, Alicia Jin, Taylor Bos, Leslie Baker, Yu Du,
+YaGuang Li, Hongrae Lee, Huaixiu Steven Zheng,
+Amin Ghafouri, Marcelo Menegali, Yanping Huang,
+Maxim Krikun, Dmitry Lepikhin, James Qin, Dehao
+Chen, Yuanzhong Xu, Zhifeng Chen, Adam Roberts,
+Maarten Bosma, Yanqi Zhou, Chung-Ching Chang,
+Igor Krivokon, Will Rusch, Marc Pickett, Kath-
+leen S. Meier-Hellstern, Meredith Ringel Morris,
+Tulsee Doshi, Renelito Delos Santos, Toju Duke,
+Johnny Soraker, Ben Zevenbergen, Vinodkumar
+Prabhakaran, Mark Diaz, Ben Hutchinson, Kristen
+Olson, Alejandra Molina, Erin Hoffman-John, Josh
+Lee, Lora Aroyo, Ravi Rajakumar, Alena Butryna,
+Matthew Lamm, Viktoriya Kuzmina, Joe Fenton,
+Aaron Cohen, Rachel Bernstein, Ray Kurzweil,
+Blaise Aguera-Arcas, Claire Cui, Marian Croak,
+Ed H. Chi, and Quoc Le. 2022. LaMDA: Lan-
+guage Models for Dialog Applications. CoRR,
+abs/2201.08239.
+Jack Urbanek, Angela Fan, Siddharth Karamcheti,
+Saachi Jain, Samuel Humeau, Emily Dinan, Tim
+Rocktäschel, Douwe Kiela, Arthur Szlam, and Ja-
+son Weston. 2019. Learning to Speak and Act in a
+Fantasy Text Adventure Game. In Conference on
+Empirical Methods in Natural Language Process-
+ing and the International Joint Conference on Natu-
+ral Language Processing (EMNLP-IJCNLP), pages
+9388
+673–683, Hong Kong, China. Association for Com-
+putational Linguistics.
+Nick Walton. 2019. AI Dungeon.
+Lili Yao, Nanyun Peng, Ralph Weischedel, Kevin
+Knight, Dongyan Zhao, and Rui Yan. 2019.
+Plan-And-Write: Towards Better Automatic Story-
+telling. In AAAI Conference on Artiﬁcial Intelli-
+gence (AAAI), volume 33(01), pages 7378–7385.
+Shunyu Yao, Rohan Rao, Matthew Hausknecht, and
+Karthik Narasimhan. 2020. Keep CALM and Ex-
+plore: Language Models for Action Generation in
+Text-based Games. In Conference on Empirical
+Methods in Natural Language Processing (EMNLP),
+pages 8736–8754.
+Saizheng Zhang, Emily Dinan, Jack Urbanek, Arthur
+Szlam, Douwe Kiela, and Jason Weston. 2018. Per-
+sonalizing Dialogue Agents: I have a dog, do you
+have pets too? In Annual Meeting of the Association
+for Computational Linguistics (ACL) , pages 2204–
+2213, Melbourne, Australia.
+Yizhe Zhang, Siqi Sun, Michel Galley, Yen-Chun
+Chen, Chris Brockett, Xiang Gao, Jianfeng Gao,
+Jingjing Liu, and Bill Dolan. 2019. DialoGPT:
+Large-Scale Generative Pre-training for Conver-
+sational Response Generation. arXiv preprint
+arXiv:1911.00536.
+A Example D&D Game Session
+Instead of the game being a series of moves on
+a game board, RPGs D&D are language-based.
+Players create characters that have a class (wizard,
+ﬁghter, thief, etc.) that denotes their abilities, and a
+fantasy race (elf, dwarf, human, etc.). Players de-
+scribe what they want their character to do and roll
+dice to determine if they are successful. The dun-
+geon master (DM) acts as the narrator who shapes
+the overall story. The DM describes scenarios and
+locations, and takes on the role of non-player char-
+acters (NPCs), and monsters.
+A common element to the game play is an en-
+counter with monsters. Battles are governed by
+rules, and unfold in a turn-based fashion where
+the DM controls the monsters and each player con-
+trols their character. Each player and monster has
+a health meter (called their HIT points), an armor
+class (which indicates the threshold of the dice roll
+needed to damage them), and a set of possible at-
+tack or move actions.
+Table 8 provides example dialogue from a game
+of D&D being played between 3 players – Travis
+(playing a human ﬁghter named Magnus Burn-
+sides), Clint (playing Merle Highchurch, a dwarf
+cleric), Justin (playing Taako an elf wizard), and
+DM Grifﬁn. We add comments about each dialogue
+turn to describe what is happening in the game, and
+to highlight the challenges that would need to be
+addressed if an AI system were to play the game
+either as a player or as the DM.
+The game session is taken from the podcast The
+Adventure Zone. In this episode, the hosts are
+playing an adventure module called Lost Mine of
+Phadelver, an expert of which is given in Appendix
+B. In the ﬁrst episode of the podcast 6, the hosts
+explain the rules of D&D .
+B Lost Mine of Phadelver Adventure
+Here is an excerpt from the adventure book that the
+Dungeon Master was using in our example game
+play. The adventure book provides boxed text,
+which is descriptive text to be read aloud verba-
+tim or to paraphrase. It also gives details about the
+combat that is about to ensure, and links to relevant
+game rules (like stealth checks, and statistics about
+the monsters that the characters will be in combat
+with).
+The adventure begins as the player characters are escorting
+a wagon full of provisions and supplies from Neverwinter
+to Phandalin. The journey takes them south along the High
+Road to the Triboar Trail, which heads east (as shown on
+the overland map). When they’re a half-day’s march from
+Phandalin, they run into trouble with goblin raiders from the
+Cragmaw tribe.
+Read the boxed text when you’re ready to start. If you
+create a different adventure hook, skip to the second paragraph
+and adjust the details as necessary, ignoring the information
+about driving the wagon.
+In the city of Neverwinter, a dwarf named Gun-
+dren Rockseeker asked you to bring a wagonload
+of provisions to the rough-and-tumble settlement
+of Phandalin, a couple of days’ travel southeast
+of the city. Gundren was clearly excited and more
+than a little secretive about his reasons for the trip,
+saying only that he and his brothers had found
+“something big,” and that he’d pay you ten gold
+pieces each for escorting his supplies safely to
+Barthen’s Provisions, a trading post in Phandalin.
+He then set out ahead of you on horse, along
+with a warrior escort named Sildar Hallwinter,
+claiming he needed to arrive early to “take care
+of business.”
+You’ve spent the last few days following the High
+Road south from Neverwinter, and you’ve just re-
+cently veered east along the Triboar Trail. You’ve
+encountered no trouble so far, but this territory
+can be dangerous. Bandits and outlaws have been
+known to lurk along the trail.
+You’ve been on the Triboar Trail for about half a
+day. As you come around a bend, you spot two
+6https://maximumfun.org/
+episodes/adventure-zone/
+ep-1-here-there-be-gerblins-chapter-one/
+9389
+Player
+(character)
+Game Dialogue D&D Game Description and
+AI challenges
+Grifﬁn (DM) A dwarf named Gundren Rockseeker has hired
+you to transport a wagonload of provisions to
+the rough-and-tumble settlement of Phandalin,
+which is a couple days’ travel to the southeast.
+A day and a half after leaving, you turn off the
+high road that connects the major cities on the
+coast onto a smaller trail that will lead you to
+Phandalin. This trail is not as well maintained,
+and bandits and outlaws have been known to lurk
+along the trail.
+This game is based on the D&D starter adventure
+called “Lost Mine of Phadelver”. The adventure
+book is a mixture of rules and “boxed text” which
+is descriptive text for the DM to read aloud or
+paraphrase. See the appendix for the text that the
+DM is consulting. AI challenges: Generation of
+stories and descriptive text
+Grifﬁn (DM) Roll a perception check for me. Perception is
+a wisdom skill, so be sure to add your wisdom
+modiﬁer.
+The previous text was descriptive text. Here
+the DM is asking the players to perform a game
+mechanic and referencing a game rule. This is
+called “out of character” dialogue. AI chal-
+lenges: Knowledge base population (extrac-
+tion of rules from a rulebook)
+Clint (out of char-
+acter)
+I got an eight. Clint has rolled his dice. The number is low
+so his character fails the check. AI challenges:
+Multi-party dialogue
+Justin (out of char-
+acter)
+I got a six. Justin also fails. Neither character sees the thing
+that requires the perception check.
+Travis (out of char-
+acter)
+I rolled a natural twenty plus my wisdom modi-
+ﬁer is 23.
+Travis rolls high number and succeeds on the
+check. AI challenges: Understanding rules, de-
+termining success or failure
+Grifﬁn (DM) With his eagle eyes, Magnus spots two dead
+horses lying in the middle of the road about 200
+feet ahead of you.
+The DM describes what happens as a result of
+the success. AI challenges: Reasoning about
+consequences of success or failure, descrip-
+tive text generation
+Travis
+(in-character as
+Magnus)
+I stop the wagon and motion silently to get the
+attention of Merle and Taako, and kinda pull them
+up towards the front of the wagon.
+Travis is describing what he is doing using “in
+character” language. AI challenges: Persona-
+based chat
+Grifﬁn (DM) As you warn them that shit has gone south, you
+notice a few goblins crouching in a part of the
+shaded woods off to the side of the road. Two of
+the goblins begin charging your wagon.
+The DM describes the start of a battle with sev-
+eral monsters. AI challenges: State tracking (in
+combat v. out of combat).
+Travis (out of char-
+acter)
+How many goblins are there? AI challenges: Question answering, state
+tracking (how many monsters).
+Grifﬁn (DM) There are three goblins; two of them are rushing
+the group, one is pretty heavily obscured by the
+brush, probably about 40 feet out, sort of between
+you and the dead horses laying in the middle of
+the road.
+AI challenges: Question answering, Descrip-
+tive text generation from game state.
+Clint (Merle) I will cast sacred ﬂame at the nearest one. If it
+fails a dexterity saving throw, it takes 6 points of
+damage.
+Clint chooses an action based on what is allowed
+for his character class. He describes the rule
+that governs the spell in an out-of-character fash-
+ion. AI challenges: Intent detection (perform
+attack action against a particular goblin)
+Grifﬁn (DM) You attack. You launch some ﬁre onto the goblin
+closest to the wagon. And with that, he looks
+like he is on death’s door. And the other goblin
+that you can see, the one that‘s not in the brush
+somewhere, just sort of stops in his tracks. What
+do you do next?
+The DM rolls for the monster, updates the state
+of its health meter, and describes the result of
+Merle’s attack.AI challenges: Reasoning about
+rules, state tracking (monster’s HIT points),
+descriptive text generation.
+Table 8: Example dialogue from a game of D&D with explanations of what is happening and comments on
+potential challenges for AI
+9390
+dead horses sprawled about ﬁfty feet ahead of
+you, blocking the path. Each has several black-
+feathered arrows sticking out of it. The woods
+press close to the trail here, with a steep embank-
+ment and dense thickets on either side.
+Four goblins are hiding in the woods, two on each side of
+the road. They wait until someone approaches the bodies and
+then attack.
+This will likely be the ﬁrst of many combat encounters in
+the adventure. Here are the steps you should follow to run it
+effectively:
+• Review the goblin stat block. Since the goblins are
+hiding, you’ll need their Stealth skill modiﬁer: +6.
+• Check to see who, if anyone, is surprised. The party
+can’t surprise the goblins, but the goblins might surprise
+some or all of the characters. Make a Dexterity (Stealth)
+check for the goblins: roll one d20 for all of them,
+add their Stealth skill modiﬁer (+6) to the roll, and
+compare the total to the characters’ passive Wisdom
+(Perception) scores. A character whose score is lower
+than the goblins’ check total is surprised and therefore
+can’t do anything on his or her ﬁrst turn in the combat
+(see “Surprise” in the Basic Rules).
+• Use the initiative rules in the Basic Rules to determine
+who acts ﬁrst, second, third, and so on. Keep track of
+everyone’s initiative count on a piece of paper.
+• When the time comes for the goblins to act, two of
+them rush forward and make melee attacks while two
+goblins stand 30 feet away from the party and make
+ranged attacks. The goblins’ stat block contains the
+information you need to resolve these attacks. For more
+information on what the goblins can do on their turn,
+see chapter 9, “Combat,” in the Basic Rules. When
+three goblins are defeated, the last goblin attempts to
+ﬂee, heading for the goblin trail
+C Estimated accuracy of predicted state
+variables
+In addition to the heuristics that we used to recover
+state variables for each turn in the game (described
+in Section 3.1), we used a CNN to ﬁll in state values
+when our heuristics did not ﬁre. Table 9 estimates
+gives an estimate of the CNN’s performance on
+ﬁlling in the state variables where the rule-based
+heuristic did not extract a value. The CNN classiﬁer
+only uses current post text as input (no additional
+context).
+D Annotation Guidelines and
+Annotation Interface
+D.1 Annotation task
+In this task, you will see part of a conversation be-
+tween a few people playing D&D . The players and
+their characters are listed at the beginning of the
+conversation. The conversations that are shown as
+context are real conversations from players. Your
+job is to read the context and then rate different
+responses for a player/character given conversa-
+tional context. Please note that the context you are
+given represents only a part of the players’ past
+conversations/interactions with one another during
+the game.
+For each response, you would be asked the fol-
+lowing questions.
+• Does the response make sense?
+– Use your common sense here. Is the re-
+sponse completely reasonable in terms
+of the rules of D&D ?
+– The response “makes sense” if it is cohe-
+sive as a standalone statement, consistent
+with the rules of the game, and the ele-
+ments/entities mentioned are plausible,
+given the prior context.
+– If anything seems off—not ﬂuent, con-
+fusing, illogical, out of context, or wrong
+according to the rules of D&D —then
+rate it as Does not make sense. If in
+doubt, choose Does not make sense.
+• Is the response speciﬁc?
+– You may be asked to assess whether the
+response is speciﬁc to a given context.
+In other words, do you think that the re-
+sponse represents a good thing for the
+character to do now?
+– The response is "speciﬁc" if it ﬂows log-
+ically from the narrative established by
+the prior context.
+* Note: It is possible for a response to
+"make sense" (due to being cohesive,
+consistent and plausible in and of it-
+self), but be marked "not speciﬁc"
+when it is not a logical next step in
+the overall game progression.
+* Note: "Speciﬁc" for the purposes of
+this task does not have to do with
+how detailed the response is per se;
+a response can be fairly general in
+its language, but still qualify as "spe-
+ciﬁc" when it is a logical next step in
+the overall game progression.
+• How interesting is the response?
+– You may be asked to score the response
+for its interestingness on a scale of 10.
+Choose a high score for “Interesting” if
+the response would likely catch some-
+one’s attention or arouse curiosity in the
+game; or it is insightful, creative, or
+witty with respect to the game. If the
+response is monotonous and predictable,
+or if you’re unsure, then it is Less Inter-
+9391
+State variable Model Type Multi-valued Availability Evaluation metric Performance
+Character Span labeller Text No 42% - -
+Race Classiﬁer Text No >58% Macro AUC 0.45
+Class Classiﬁer Text No >75% Macro AUC 0.71
+Pronous Classiﬁer Text No 42% Macro AUC 0.92
+Inventory Span labeller Text Yes 11% - -
+In combat? Classiﬁer Score No 100% Accuracy 0.91
+Action Classiﬁer Text Yes 20% Macro AUC 0.92
+Table 9: The estimated performance of our CNN classiﬁer on predicting state values for turns where our rule-based
+heuristics did not predict a value
+esting.
+D.2 Annotation Interface
+A mock up of the annotation user interface is given
+in Figure 3.
+D.3 Survey of Raters
+We recruited raters who had a background in role
+playing games and an understanding of the fantasy
+genre. We surveyed our raters, asking them the
+following questions:
+1. Have you ever played Dungeons and Dragons
+or another role playing game before?
+2. If so,
+• roughly how many times have you
+played
+• were you a player or a game master or
+both
+3. If not,
+• what kind of exposure do you have to
+Dungeons and Dragons? (For example,
+have you seen it referred to in TV or
+movies)
+4. Are you a fan of the fantasy genre (like Lord
+of the Rings)?
+Our 6 raters responded to the survey as follows:
+5 out of the 6 have played D&D or another role
+playing game before. All 5 of those who have
+played D&D /other role playing games before have
+played more than 6 times. Of the 5 who have
+played D&D /other role playing games before, 3
+played as both Game Master and Player. For the
+one who had not played D&D /other role playing
+games, they indicated they had not had much expo-
+sure to D&D through TV or other channels. All 6
+answered that they were fans of the fantasy genre.
+9392
+0DQXDO(YDOXDWLRQ
+7RHYDOXDWHWKHTXDOLW\RIRXUPRGHOVIRUWKHWDVNRIQH[WXWWHUDQFHSUHGLFWLRQLQ'	'ZH
+SHUIRUPDKXPDQHYDOXDWLRQ:HUHFUXLWHGSURIHVVLRQDOUDWHUVWRSHUIRUPDPDQXDOHYDOXDWLRQ
+7KH\UHDGDYHUVLRQRIWKHFRQWHQWWKDWZDVSURYLGHGWRWKHPRGHOV±WKHVHYHQWXUQVRI
+FRQYHUVDWLRQDOKLVWRU\SOXVDOLVWRISOD\HUVDQGWKHQDPHVFODVVHVRIWKHFKDUDFWHUVWKDWWKH\
+SOD\HG7KHQWKH\ZHUHVKRZQVHYHUDOPRGHORXWSXWVIRUWKHFRQWH[WRUWKH³JROG´ZKLFKZDV
+WKHDFWXDOQH[WWXUQLQWKHJDPH7KHDQQRWDWRUVDVNHGWRUDWHHDFKRXWSXWDORQJWKHWKUHH
+GLPHQVLRQVIROORZLQJWKHHYDOXDWLRQSURFHGXUHXVHGIRUWKH0HHQD/0?FLWH^PHHQD`
+Ɣ'RHVWKHUHVSRQVHPDNHVHQVH"\HVQR
+Ɣ,VWKHUHVSRQVHVSHFLILF"\HVQR
+Ɣ+RZLQWHUHVWLQJLVWKHUHVSRQVH"SRLQWVFDOH
+7KHIXOODQQRWDWRULQVWUXFWLRQVDUHJLYHQLQWKH$SSHQGL[$PRFNXSRIWKHXVHULQWHUIDFHLV
+JLYHQLQWKH)LJXUHEHORZ
+&RQWH[W 3OD\HU'HO 5DWLQJV
+3OD\HU'HO%DUEDULDQ
+3OD\HU'XQJHRQ0DVWHU
+3OD\HU$UDPLV%DUG
+3OD\HU;DYLHU%DUG
+
+3OD\HU'HO%DUEDULDQ'HOJLYHVDILQDONLFNWRWKHGHDGRUF
+WKDWKHMXVWNLOOHGWKHQSURFHHGVWRKXQWWKURXJKWKHPDLQURRP
+WKHQWKHVWRUHURRPORRNLQJIRUKLVD[HDQGRWKHUJHDU
+3OD\HU'XQJHRQ0DVWHU'HOPDNHDQLQYHVWLJDWLRQFKHFN
+3OD\HU'HO%DUEDULDQ
+3OD\HU'XQJHRQ0DVWHU7KHEDUEDULDQEHJLQVWRVVLQJWKLQJV
+DURXQGRYHUWXUQLQJWDEOHVDQGWHDULQJFUDWHVDQGVDFNVRSHQ
+WKRXJKKLVVWLOOVLPPHULQJUDJHDWEHLQJORFNHGXSSUHYHQWVKLP
+IURPXQGHUWDNLQJDWKRURXJKVHDUFK+HWXUQVXSDVKRUWERZD
+OLJKWFURVVERZDIHZMDYHOLQVTXLYHUVRIDUURZVFDVHVRI
+FURVVERZEROWVDFUDWHIXOORIPLVPDWFKHGOHDWKHUDUPRXUDQGD
+IHZVDFNVIXOORISUHYHVHUYHGIUXLWDQGYHJHWDEOHV7KHUHLVQRVLJQ
+RIWKHHTXLSPHQWWKDWZDVWDNHQIURPKLPODVWQLJKW
+3OD\HU$UDPLV%DUGDQ\RQHVHHQDQ\NH\V"RUP\VWXII"
+DUDPLVFDOOVRXWWRHYHU\RQH
+3OD\HU;DYLHU%DUGTXLFNO\SLFNLQJXSWKHGHDGRUFVFOHDYHU
+VRDEHWWHUZHDSRQ;DYLHUWXUQVWRWKHUHVWRIWKHSDUW\ILJKWLQJ
+LVQRWRYHUZHDUHQRWVXUHZKDWVWREHIRXQGXSWKHUHUDLGWKH
+VWRUHURRPZHPXVWEHUHDG\IRUPRUHFRPEDWLWXUQWRGHO
+ZRXOG\RXVWDQGZLWKPHWRGHIHQGWKHUHVWZKLOHWKH\UHDUP"
+LRIIHUWKHFURZEDUWRGHOWKHQWXUQEDFNWRWKHSDUW\DQGLI\RX
+ILQGDVKLHOGDQGVZRUGLQWKHUHLUHTXLUHDVWURQJHUGHIHQFHDQG
+ILVW
+5HVSRQVH
+'HOTXLFNO\VHDUFKHVWKHVWRUHURRP
+JUDEELQJZKDWHYHUZHDSRQVKHILQGXVHIXO
++HWKHQKHDGVEDFNWRWKHRWKHUV,IRXQG
+DQRWKHUFURVVERZDQGDUURZVDQGD
+GDJJHU,KDYHDVKRUWERZEXW,
+OOOHDYHLW
+KHUHLIVRPHRQHHOVHZDQWVLW,DOVRIRXQG
+RQHRIP\MDYHOLQVWKDW,ZDVPLVVLQJ
+'RHVWKLVUHVSRQVHPDNHVHQVH"
+䙘 0DNHVVHQVH
+䙘 'RHVQRWPDNHVHQVH
+,VWKLVUHVSRQVHVSHFLILFWRWKHJLYHQFRQWH[W"
+䙘 6SHFLILF
+䙘 1RWVSHFLILF
++RZLQWHUHVWLQJLVWKLVUHVSRQVHRQDVFDOHRI"
+BBBBB
+5HVSRQVH
+GHOWDNHVWKHFURZEDUDQGWHOOV[DYLHUWR
+ILQGKHVHQD[HDQGLOONHHSJRRGFDUH
+RIKLP
+'RHVWKLVUHVSRQVHPDNHVHQVH"
+䙘 0DNHVVHQVH
+䙘 'RHVQRWPDNHVHQVH
+,VWKLVUHVSRQVHVSHFLILFWRWKHJLYHQFRQWH[W"
+䙘 6SHFLILF
+䙘 1RWVSHFLILF
++RZLQWHUHVWLQJLVWKLVUHVSRQVHRQDVFDOHRI"
+BBBBB
+5HVSRQVH
+$Q\RQHVHHP\D[HDQGOHDWKHU"
+'RHVWKLVUHVSRQVHPDNHVHQVH"
+䙘 0DNHVVHQVH
+䙘 'RHVQRWPDNHVHQVH
+,VWKLVUHVSRQVHVSHFLILFWRWKHJLYHQFRQWH[W"
+䙘 6SHFLILF
+䙘 1RWVSHFLILF
++RZLQWHUHVWLQJLVWKLVUHVSRQVHRQDVFDOHRI"
+BBBBB
+5HVSRQVH
+1RWLFLQJ'HOLVVHDUFKLQJWKHVDPHURRP
+'HOFDOOVRXWWRKLP;,MXVWNLOOHGDQRUF
+\RXFRXOGXVHLWVVWXIILI\RXOLNH
+'RHVWKLVUHVSRQVHPDNHVHQVH"
+䙘 0DNHVVHQVH
+䙘 'RHVQRWPDNHVHQVH
+,VWKLVUHVSRQVHVSHFLILFWRWKHJLYHQFRQWH[W"
+䙘 6SHFLILF
+䙘 1RWVSHFLILF
++RZLQWHUHVWLQJLVWKLVUHVSRQVHRQDVFDOHRI"
+BBBBB
+Figure 3: The user interface that our raters used to evaluate the quality of our model’s next utterance prediction.
+9393

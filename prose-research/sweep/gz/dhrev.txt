@@ -1,0 +1,1118 @@
+Review – Waterdeep: Dragon Heist 
+
+ November 7th, 2018 
+
+ SPOILERS FOR DRAGON HEIST
+
+ If you’re a local player in my campaigns, you might want to steer clear here. I may be running Dragon Heist in the future, but not for people who’ve read the plot. 
+
+ I’ve been periodically checking out the published campaigns for D&D 5 th Edition whenever one catches my eyes, hoping that it’ll be something super awesome that I can use to kick off a 5 th Edition campaign. Hoard of the Dragon Queen was one of these, and that went… poorly .
+
+ Earlier this year, I started getting really, really excited about Waterdeep: Dragon Heist . It promised something distinctive: A heist-structured mini-campaign for D&D with the PCs competing against a complex web of factions in order to win a huge prize that would lead directly into a megadungeon campaign in the Dungeon of the Mad Mage ! That would be amazing!
+
+ … that is not what Dragon Heist is.
+
+ First, there is no heist. And I know what you’re thinking. You’re thinking, “But Justin, the name of the book is Dragon Heist . Why wouldn’t there be a heist?” And I’m right there with you, because an overwhelming refrain as I read through this book was simply:
+
+ Why?
+
+ But… why?
+
+ And also: Why?
+
+ Okay, let’s take a step back and talk about what the story of Dragon Heist actually is. It basically breaks down into four parts:
+
+ The PCs are hired to rescue someone who has been kidnapped. The person they rescue is virtually unimportant, but the other kidnap victim turns out to be the estranged son of a former Open Lord of Waterdeep who embezzled a bunch of money and hid it in a magical vault.
+
+ The PCs are rewarded with the deed to an abandoned tavern. A little while later, a huge fireball goes off and kills a bunch of people just outside the tavern. Investigating the explosion will lead the PCs to discover that some bad guys have stolen a magic item (the Stone of Golorr ) that will lead them to the magical vault.
+
+ A Benny Hill chase sequence ensues, at the end of which the PCs have the Stone of Golorr .
+
+ They go to the vault and loot it.
+
+ THINGS THAT MAKE NO SENSE
+
+ So one of the major problems with Dragon Heist is how much of it doesn’t really make any sense.
+
+ For example, the second part of the scenario works like this:
+
+ Dalakhar is a spy who works for Lord Neverember. He has stolen the Stone of Golorr that leads to the vault, but is unable to leave Waterdeep and take the magic artifact to Lord Neverember because Zhent assassins are stalking him.
+
+ He goes to members of Lord Neverember’s estranged son’s household and asks them to tell him where he can find the heroes who rescued the estranged son because he believes that anyone who would rescue Lord Neverember’s son can also be trusted to help him.
+
+ That doesn’t actually make sense. Why wouldn’t Dalakhar just ask Neverember’s son to help him? And if Dalakhar believes that the son is so estranged from his father that he would never help him, why would he believe that the son’s friends would be the only possible source of assistance? Why doesn’t he just ask his friends for help directly?
+
+ So then Dalakhar gets killed in the fireball that explodes outside of the PCs’ tavern. Where did the fireball come from? Well, Zhent assassins working with House Gralhund had successfully tracked him down. House Gralhund didn’t fully trust the Zhent assassins, however, and so sent their own agent to follow them and make sure the job got done right. “When it seemed as though Dalakhar might give [the Zhent assassins] the slip, this agent hurled one of the beads from the necklace [of fireballs] to stop the gnome in his tracks.”
+
+ Okay, fine. Except then it turns out that the Zhent assassins were also killed and/or badly injured in the fireball because they were literally mere feet away from Dalakhar when it went off. So… the Gralhund agent was so concerned that Dalakhar had escaped the Zhent asssassins – even though they were mere feet away from snatching him – that it decided to blow up an entire city block?
+
+ That doesn’t make any sense.
+
+ To be fair, I think the intention here may have been for the Gralhunds to be intentionally double-crossing the Zhent assassins by blowing them up along with Dalakhar. (There’s another passage later in the book that sort of suggests that might be true.) But it still doesn’t make sense because the Gralhunds’ agent immediately runs away, leaving the surviving Zhent assassin to collect the Stone of Golorr ! It’s also obviously directly contradicted by the first passage.
+
+ Which is another problem: Dragon Heist is teeming with continuity errors. For example, in a later scene there’s a gazer who is invisibly following the PCs and watching their movements. When the PCs reach a particular location, the gazer waits outside and summons reinforcements from its gang. But when the PCs go inside, they discover that the gang members are… already there? How? Why?
+
+ FRAGILE STRUCTURE
+
+ Okay, Dalakhar and a bunch of other people have been blown up. So the PCs start investigating the explosion.
+
+ But… why?
+
+ There’s literally no reason given. The PCs are given no motivation to do so, and, in fact, the scenario goes out of its way to specifically discourage them from getting involved.
+
+ But, okay, the PCs start investigating the explosion. This investigation can follow one of two paths.
+
+ First option: Break into the morgue and use speak with dead spells. (This option is fine, if a little thin.)
+
+ Second option:
+
+ Question witnesses and have one of them tell the PCs that she saw an automaton that “bears a striking similarity to the automatons that sometimes march in the Day of Wonders parade”, which is sponsored by the local temple of Gond.
+
+ Go the Temple of Gond and discover that this is not, in fact, true and there are no such automatons that march in the Day of Wonders parade. (Because the adventure is teeming with continuity errors, remember?)
+
+ The Temple of Gond does have a single automaton that matches this description, however. It’s known as a nimblewright. As the PCs approach the temple, the nimblewright will be on the roof flying a mechanical bird that will crash land on or near the PCs.
+
+ If – and only if! – the PCs mention the incident with the mechanical bird to the priest of Gond they speak with, the priest will take them upstairs to the nimblewright’s room, chastise the nimblewright, and force the nimblewright to watch while acolytes pack up all of its mechanical inventions.
+
+ If the PCs happen to have cast a detect magic spell while they watch the acolytes clear out the nimblewright’s stuff, they will notice that one of the items is magical.
+
+ If they ask the nimblewright what this item is, it will turn out that the nimblewright has built a nimblewright detector! (What a lucky concidence!)
+
+ If they use the nimblewright detector, they will discover that there are only four nimblewrights in the entire city of Waterdeep. (Lucky!)
+
+ Three of them belong to someone who may or may not be the bad guy in this scenario. (More on that later.) Regardless, this is pure coincidence and irrelevant to the current investigation.
+
+ The fourth is, in fact, the one they were looking for at Gralhund House!
+
+ This investigatory structure is so bizarre, arbitrary, and paper-thin in its rationale that I honestly find it difficult to understand why it was included in the book at all.
+
+ Fortunately, when this structure inevitably fails, the book does suggest that the GM just have an NPC randomly come by and tell the PCs where to go.
+
+ When I find stuff like this in a published scenario, I always kind of second guess myself: Am I the crazy one? Does this actually work for other groups? Well, the interesting thing about the rise of online actual plays is that you can very quickly do a survey of how scenarios actually play out, and notably every single DM running Dragon Heist online that I was able to find has been forced to improvise a fix for this broken structure.
+
+ And this is a pattern which repeats several times in Dragon Heist . The Benny Hill chase, for example, is largely built along a similar chain of implausible connections, leaving the GM with little choice but to force implausible-yet-predetermined outcomes.
+
+ Unsurprisingly, therefore, the book is pockmarked with exhortations for the GM to railroad their players, accented with a smattering of pixelbitching propped up with several “thou shalt not find this unless you jump through my very specific hoop” bits. (One of the silliest involves making it impossible for the PCs to succeed on an Investigation test because there’s a thin layer of dust on the floor.)
+
+ TIMELINE 
+
+ Something else to mention here is that the adventure’s handling of time makes no sense. This is really a more specific iteration of Things That Make No Sense, but it’s pervasive enough to become a serious issue in its own right which any DM running the adventure will need to deal with.
+
+ First major example:
+
+ Dalakhar steals the Stone of Golorr from Xanathar.
+
+ This triggers a gang war between the Zhentarim and Xanathar which has been going on for awhile when the PCs undertake their first mission.
+
+ At the end of that mission, the PCs are rewarded with an abandoned tavern.
+
+ A period of at least a tenday and probably several weeks now passes during which the PCs are assumed to be fixing up the tavern, joining various factions, doing missions for those factions, and advancing 1-2 more levels.
+
+ Dalakhar, unable to get out of Waterdeep with the Stone , attempts to bring it to the PCs.
+
+ … what the heck has Dalakhar been doing for the past several weeks? The way the adventure is written, it actually seems as if he just stole the stone before coming to the PCs, but that can’t be true. And to make things even more confusing, there’s another timeline in which Dalakhar was keeping an eye on Neverember’s estranged son, and then abruptly stopped doing that to infiltrate Xanathar’s operation, but the dates in that timeline aren’t really consistent with the other events described, either.
+
+ Another example: After the PCs trace the nimblewright to Gralhund House, Lady Gralhund orders the nimblewright to deliver the Stone of Golorr to a courier who will carry it to her master. (Why not just deliver it directly to her master? I can’t help you.) In the adventure as written, it’s supposed to take the PCs several days to find the nimblewright and discover where it took the Stone of Golorr .
+
+ You might be thinking, “Well, that’s too bad. They’ll be way too late to stop those couriers from delivering the Stone of Golorr! ” Thankfully, however, the bad guys all politely wait for the PCs to show up before suddenly remembering they have a package to deliver and rushing off to do so in the Benny Hill chase sequence.
+
+ I think my favorite sequence here is:
+
+ The bad guy tells five cultists about the Stone of Golorr and sends them to pick it up from the nimblewright. But he simultaneously orders two of the cultists to murder the other three because now they know too much about the Stone of Golorr and must be silenced! (But… why?)
+
+ They botch the job and leave one of the other cultists still alive. This cultist then lies unconscious in a mausoleum for several days until the PCs find her and wake her up. She tells them where the other two cultists went.
+
+ Thankfully, instead of just having the cultists bring the Stone of Golorr directly to him (despite that being the most logical course of action), the bad guy has ordered them to wait at a converted windmill for – and I emphasize this once again – several days twiddling their thumbs for no reason.
+
+ The bad guy eventually sends three spined devils to pick up the Stone of Golorr . With absolutely incredible timing, these spined devils arrive just after the PCs enter the converted windmill, but just before the PCs can climb the stairs and retrieve the Stone for themselves.
+
+ Cue the Benny Hill soundtrack.
+
+ And there are four different variations of this nonsense, because…
+
+ PICK A VILLAIN
+
+ Dragon Heist has a gimmick: It has four different villains.
+
+ Before the campaign begins, the GM picks one of these villains:
+
+ Xanathar, a beholder crime boss
+
+ Jarlaxle Baenre, a drow swashbuckler who is the secret lord of a city and also runs a traveling circus
+
+ the Cassalanters, a demon-worshipping noble family
+
+ the Zhentarim, a network of assassins and mercenaries
+
+ This decision also determines what season the campaign takes place (spring, summer, autumn, or winter). With one exception there is no actual connection between the villain and the time of year, but it does provide an interesting vehicle for emphasizing to the GM how the setting of Waterdeep changes over the course of a year.
+
+ The villain the DM chooses essentially affects three moments in the adventure:
+
+ It’s their minions the PCs are chasing during the Benny Hill chase
+
+ It’s their minions who track the PCs to the vault (even though they generally have no way of doing that ) and fight them as they attempt to leave.
+
+ Each of them has a unique and elaborately detailed lair.
+
+ So, roughly speaking, at least three-quarters of the adventure is totally unaffected by the choice of villain. And where it gets weird is that most (but not all) of the villains are included in the scenario even if they’re not the villain you selected . So, for example, Xanathar is intensely interested in the vault at the beginning of the scenario regardless of whether or not the DM selected him to be the main bad guy, but then he just… stops caring? Jarlaxle will kind of randomly show up and you’re supposed to stage a random, lengthy scene with him which will, if he’s not actually involved with the vault storyline, result in… nothing?
+
+ Oddly, the most compelling and interesting villains – the Cassalanters – are the ones who only show up if you select them as the main villains. (Although, as written, it’s very likely that the PCs will never even realize that the Cassalanters are their antagonist, and it’s virtually certain they’ll never find out the really interesting reason the Cassalanters are interested in the vault without the GM rewriting a bunch of stuff.)
+
+ This is all baffling. And it becomes more so as we look at how these villainous components were actually implemented.
+
+ THE BENNY HILL CHASE : As I mentioned, this section of the adventure starts with the PCs discovering who the Gralhunds’ nimblewright delivered the Stone of Golorr to. There are four different variations of this sequence (one for each villain), but they’re all pretty similar and consist of the PCs chasing one set of bad guys and then, just as they’re about to grab the Stone of Golorr , a completely random new bad guy will leap out of the shadows, grab the Stone , and run off!
+
+ In most of these sequences the GM is instructed to not once, but TWICE use the chase rules from the DMG and then, as soon as the PCs succeed at the chase, pull the, “Ha ha!” moment.
+
+ Whatever.
+
+ There’s a bunch of other painful railroading in this sequence, too. (Including old chestnuts like “the city watch magically finds them no matter where they are and no matter what precautions they take and arrest them”.)
+
+ But it gets weirder, because the way they’ve decided to design this sequence is to take ten generic locations, add a little text customizing them to each villain’s minions, and then shuffle up the order in which you encounter them based on which villain’s minions you’re chasing.
+
+ But… why?
+
+ It’s difficult to really describe how pointlessly convoluted this whole approach is. I spent an enormous amount of time trying to figure out what the benefit of this was supposed to be. They’d spent so much time constructing this Rube Goldbergian structure that I thought there surely must have been some purpose behind doing so.
+
+ But there just… isn’t.
+
+ In fact, it’s all negative value: If you want to run the adventure strictly as written, the presentation is just unnecessarily confusing. If you were thinking that you might try to remix Dragon Heist in order to bring all the villainous factions into play simultaneously, the design of this section only serves to block you from doing so (because your players will notice if a bunch of different factions are all independently holed up in identical windmills).
+
+ THE LAIRS : Dragon Heist spends a little over 60 pages describing each of the villains’ lairs in lavish detail. Here, at long last, a strong and unique spotlight is shone on each of the villains.
+
+ But if you glance back up to the beginning of this review where I summarized the plot of Dragon Heist , you may notice that “go to the villain’s lair” does not appear in the list of events.
+
+ That’s because in the adventure as designed, the PCs don’t go to any of these lairs.
+
+ “That makes no sense! Why would you spend 60 pages describing these lairs and then write up a scenario structure in which they’re never used? You must be pulling my leg, Justin!”
+
+ No. I’m not. The DM is, in fact, repeatedly told that the PCs don’t need to go there, probably won’t go there, and if they do go there and actually confront any of the villains, they’ll almost certainly be killed.
+
+ But… why?
+
+ CONCLUDING THOUGHTS
+
+ This book made me feel dumb.
+
+ Great care was clearly put into its construction. Enormous effort was exerted in order to erect, for example, the Rube Goldbergian Benny Hill chase sequence. The “pick a villain” gimmick required a ton of extra work. It all suggested that there must be some meaning in the madness that I was seeing.
+
+ And so I spent inordinate amounts of time flipping back and forth through the book, trying to figure out what I was missing.
+
+ Ultimately, though, I don’t think I’m missing anything. Dragon Heist is just a mess.
+
+ Take the “pick a villain” thing, for example. I’ve seen it hyped up for giving the scenario “replayability”, but that’s not really true: As I mentioned before, fully three-quarters of the scenario isn’t affected by the villain swap-out. Dragon Heist is no more replayable than any other scenario.
+
+ My most charitable conclusion is that the goal might have been to create distinctly different versions of the plot in order to support rewatchability (not playability) for the audience of actual play streamers. (In other words, the second time you watch a streaming group playing Dragon Heist you’re surprised to discover the plot suddenly going in a different direction!) But just designing a scenario featuring dynamic faction play would have had the same result without turning your scenario’s spine into generic mush and having the GM ignore half the book’s content.
+
+ There are also places where you can squint and kind of imagine what the useful intention might have been. The Benny Hill Chase of Generic Locations, for example, might have been an exemplar of how to build an adventure out of customized generic urban locations. But the book doesn’t actually provide a stockpile of such generic locations, so even if that was the intention, it doesn’t really go anywhere.
+
+ Similarly, there are a number of scenes (like the Jarlaxle one) where it feels as if the scenario is almost trying to allow the ultimate bad guy to evolve organically out of the events of the campaign. But none of that goes anywhere, either, because the “DM picks the villain before the campaign starts” structure is pretty heavily embedded.
+
+ In many ways, Dragon Heist feels like the shattered remnants of a broken development cycle. It feels as if they were aiming for something ambitious, didn’t achieve it (or maybe it fell apart in playtests), and they ended up kind of cobbling together something that was at least mostly functional out of the wreckage.
+
+ So here’s the big question: Do I recommend Dragon Heist ?
+
+ …
+
+ … how much work are you willing to put into fixing it?
+
+ I came to Dragon Heist because I wanted something that I could basically run out of the box. That’s not really what I found: I could probably technically run it as written, but I wouldn’t feel good about myself as a DM. So, for me, Dragon Heist is a failure.
+
+ If I was in a slightly different place in my life right now – one where I had the time necessary to heavily modify the scenario – I might feel differently: Dragon Heist is filled with interesting NPCs, studded with a number of good set pieces, and has an intriguing (if unfortunately squandered) premise. It’s drenched with absolutely stunning art, including excellent portraits for most of the NPCs you’ll encounter. It’s also an excellent introduction to the rich setting of Waterdeep, with the decision in the second part of the adventure to gift the PCs with an abandoned tavern (although it is largely unconnected to the rest of the scenario) being an inspired one to tie the PCs into the community.
+
+ In short, there’s a solid foundation here and a lot of good raw material to work with. But you will need to put in a fair amount of labor to realize its potential.
+
+ Here’s another way to think of it: Without the “villain swap” gimmick and a couple other instances of bloat, this could have easily been a 64 page module plus about 32 pages of gazetteer information. If you think of this as a 96 page book with a bunch of other pages that have been specifically designed so that you can’t use them, it’s really difficult to justify this as a $50 product.
+
+ If you’re willing to put in the substantial work necessary to actually get 100% utility out of the book, then your personal calculus may change.
+
+ Style : 4
+
+ Substance : 2
+
+ Author : Christopher Perkins (with James J. Haeck, James Introcaso, Adam Lee, Matt Sernett, Jeremy Crawford, Ben Petrisor, Kate Welch, Matthew Mercer, Charles Sanders)
+
+ Publisher : Wizards of the Coast
+
+ Cost : $49.95
+
+ Page Count : 224
+
+ Filed under: Reviews , Roleplaying Games Comments (43) 
+ Article tags: d&d , dragon heist 
+
+ 43 Responses to “Review – Waterdeep: Dragon Heist”
+
+ John says: 
+
+ Thanks for the review. I have picked up most of the 5e adventures except Rise of Tiamat (Hoard disappointed me so much I could not be bothered). 
+
+ I thought Dragon Heist looked like it would emphasize the stuff I do not like about 5e adventures, and from your review it looks like I was right. Really, a big part of the problem is their decision to only make huge hardback books and sell them for fifty dollars. Dragon Heist should probably, as you say, be a much shorter interlude adventure that you could slot into almost any game. I am not a fan of Waterdeep and all it’s nonsense personally, so I was not too excited about this. 
+
+ A lot of 5e adventures have suffered from being spread out into a sort of reluctant adventure path. Usually they do this with a pretty poorly defined opening hook, a couple of towns, and then a pretty badly implemented sandbox where no good systems are provided for navigating said sandbox or helping the GM generate interesting things. Then you have a couple of pretty cool locations with nice maps, and a big confrontation with a bad guy that you have little connection to.
+
+ This structure would work better with each location just being a smaller supplement to be put in a world with suggested adventure hooks.
+
+Storm King’s Thunder for example has a lot of aimless walking around at the start and it does not really get going for like 6 levels. There is no real hook for the players but it is just expected that they will want to solve the plot of the adventure and wander around this mostly empty sandbox until they find someone who knows what is going on.
+
+The same is true of Princes of the Apocalypse
+
+Out of the Abyss is my favourite of them so far, and I would be interested in your thoughts on it, but after a very strong start it also sort of degenerates into a pretty poorly thought out tunnel crawl (albiet with cool and interesting locations to go to) where players just witness crazy events happening until they decide to save the world with the help of an NPC wizard. The tone and setting are great, but the actual plot of the adventure is pretty bad in my view.
+
+Tomb of Annihilation does better at presenting an interesting crawl, and is more obviously designed with a crawl in mind, which is great. I have not really had time to look at it in detail, it broadly looks to be a pretty decent adventure and is, like OotA, set in a strongly themed area with a distinct tone.
+
+Curse of Strahd I do not include because it is just a redo of an old module with little change to the core of it. It works as well as Ravenloft has always worked.
+
+ Anyway. All of this I think is one of the few things WOTC have gotten wrong with 5e. The big advantage of 5e is it’s simple mechanics that make it easy for anyone to run or for anyone to learn. It has brought a lot of new players into the hobby and that is a very good thing. But new GMs often want prepublished adventures to run, and any of these big book campaigns are very daunting to run as a newbie and also quite flawed in themselves, requiring a lot of work to run well and also a GM capable of filling in a lot of the big empty sandboxes with their own colour, or thinking of better ways to motivate the players to play. Really weird, since their starter set actually as a really solid starting adventure this time (Lost Mine of Phandelver). I would actually point new GMs at Tales From the Yawning Portal after that, at least with the adventures presented there you get Sunless Citadel and Forge of Fury as your starting point, two excellent adventures which are really good at introducing new GMs to the gae.
+
+ November 7th, 2018 - 12:36 pm 
+
+ Fred Smith says: 
+
+ Sounds like a lot of modern modules: needlessly complicated by adding layer upon layer of middlemen. Bad guys never just DO anything anymore; instead they have a henchman send one of HIS henchman to hire some untrustworthy goons to collect the all-important MacGuffin. I guess that creates more opportunities for the PCs to get into fights, but it’s totally nonsensical. It kind of reminds me of the old beat ’em up games where the boss is kind enough to send increasingly stronger thugs against you one at a time instead of having everybody mob you all at once. I.e., the heroes’ success depends on the ‘mastermind’ actually being an idiot.
+
+ November 7th, 2018 - 12:50 pm 
+
+ Firox says: 
+
+ I was curious about this adventure but wasn’t going to pay for it and didn’t find any pdf yet to read it first. Your review is enlightening, I won’t spend time searching for one anymore. I started reading Out of the Abyss, and I really like the premise of it all. I wonder what you think of it?
+
+ November 7th, 2018 - 2:00 pm 
+
+ Justin Alexander says: 
+
+ I was actually going to ask people what their suggestions were for a good 5E campaign for me to check out. John seems to like Out of the Abyss.
+
+ What do other people recommend? There have been quite a few of these campaigns now. Which one is the best?
+
+ (Other than Curse of Strahd for me. I’m good on Castle Ravenlofts — I own like four of them — and there’s a couple local DMs already running it for a good chunk of my core player base.)
+
+ November 7th, 2018 - 3:38 pm 
+
+ a different John says: 
+
+ I’m about three-quarters of the way through running Tomb of Annihilation and would definitely recommend it. It feels as though it was written with the Three Clue Rule in mind, and many events and locations are designed to facilitate multiple solutions. While there are definitely opportunities to pursue side missions, the main goal of the campaign is clear from the very beginning, so players can build characters with buy-in rather than force a motivation later.
+
+ What a lot of people call the “hexcrawl” part of the adventure is too sparsely keyed to really be a hexcrawl. It happens to be presented on a hex map, but it’s just overland travel between points of interest with (good, thematic) random encounters and some route/approach/survival choices that are impactful at low levels. The odds of stumbling upon a keyed location you don’t already know about are pretty low. I think all of this is fine, actually.
+
+ November 7th, 2018 - 4:44 pm 
+
+ John R says: 
+
+ Our group had a reasonably good time with Out of the Abyss, but the second half of the campaign is a mess, and little of it can really be run out of the box. We’ve also done the Board campaign and Curse of Strahd. Abyss was clearly better than Board, but as a DM I had more fun with Strahd than with Abyss. 
+
+ No experience with any of the other products, other than a couple of the adventures out of Tales fro. The Yawning Portal.
+
+ November 7th, 2018 - 5:13 pm 
+
+ Justin Alexander says: 
+
+ I am a fan of Acererak….
+
+ November 7th, 2018 - 5:30 pm 
+
+ DRV says: 
+
+ Well, I made it pretty far through your article and plan to finish it but… You almost lost me when you started it off by showing that you didn’t even read the introduction to the book. It explains how the coins are called dragons and how they were stolen. Thus Dragon Heist. Thanks players job is to recover them or at least prevent them from falling into the wrong hands.
+
+ November 8th, 2018 - 1:21 am 
+
+ Jack V says: 
+
+ I feel exactly the same as you, I read something like this and feel really stupid, like, surely they’re trying to get SOMETHING out of this sort of module which to me is completely unplayable.
+
+ I guess, most people just railroad all the time? Or Wizards expect people to railroad all the time? Not just in a “only one obvious choice” way but in a “here the characters are supposed to take their own initiative to do X but there’s nothing telling them to”.
+
+ I’m actually interested, that people complain about a very similar thing in computer games. Obviously in most computer games players misunderstanding the plot doesn’t lead to them going to the wrong place, but I’m always asking, if they care about the plot, why didn’t they even spend five minutes polishing it so the player has an actual reason to go to the next place? And if they don’t care, why don’t they make something simple and over the top and impossible to miss? But what they end up with is a lovingly rendered, screen captured, voice acted cut scene that meticulously sets up emotional arcs — that are completely contradictory to the other cut scenes and the rest of the game.
+
+ Movies are actually a *bit* better here. They’re often pretty incoherent, but they usually at least manage for each scene to have a reason for the characters to get to the next scene — it’s just the overall goals which are a random mess unrelated to everything else.
+
+ I guess, you need all that content? But most people don’t notice if there’s no coherent story? Although I don’t know HOW they don’t notice in a roleplaying game? I guess the GM fudges it and the players go along with it.
+
+ If I was designing a module, I would (heavily inspired from you), design several locations and antagonists that work well, describe villains motivations, and then give a “default” route with suggestions for likely alternatives. That seems like it’s not really more work than what they do. But apparently they don’t want to do that?
+
+ I was really annoyed with 4e overall, and its modules, and although GMs managed to make those work, it was clearly built around “here are three major and eight minor pre-scripted encounters, encounter them according to…” And 5e was designed to be so so much closer to what I want in a roleplaying game, but the modules are just aggressively terrible? They didn’t even manage ONE good introductory module (where by “good” I mean “fun if you play it out of the box”, even if it has lots of good material in)?
+
+ November 8th, 2018 - 8:18 am 
+
+ Jonathan Gazda says: 
+
+ I’ve been pondering your review of this book for a few days. Having read the module myself, it was very helpful to hear your thoughts and compare them to mine. And after some further contemplation, I think I have an answer to some of your questions.
+
+ The lairs are the heist.
+
+ They are large, labyrinthine dungeons that feature disguised/invisible enemies, interesting NPCs that could betray the villains, traps, stealth-oriented challenges, and above all: they are far to deadly to go in by force. With the promise of a huge amount of treasure at the end (assuming the Stone has fallen into their hands), this seems like the perfect recipe for an excellent stealth mission.
+
+ However, Wizards can’t bring themselves to create a set of dungeons that are explicitly too powerful for the given party level, because that will invariably lead to players dying and people not liking their product. So they tacked together a rather convoluted and silly plot line that avoids the dungeons entirely, making the dungeons the “penalty” if the players mess things up badly enough.
+
+ I can almost picture the design team crafting these excellent heist-oriented lairs, while the creatives wrung their hands and complained about story and difficulty.
+
+ Personally, I plan on salvaging a lot from this book. The introduction on adventure structure, factions/faction quests, and character creation provides a great insight into how to link players into an adventure. Most of the maps are decent, and the lairs are fantastic. I like the idea of the “encounter chain” as a way to use a limited pool of maps/locations to create a variety of encounters. And obviously, this is a great resource for those running games in Waterdeep.
+
+ But overall, I would never run this as-is. I agree with your post – points for style but falls flat on usability. However, I wouldn’t dismiss the substance of the module so quickly.
+
+ PS – I’m a fan of the concepts in Out of the Abyss but the structure of the book makes the module a huge headache to run. It needed an introduction chapter like Curse of Strahd or Dragon Heist. Personally, Lost Mine of Phandelver and Curse of Strahd are the only modules I would run out of the box.
+
+ November 8th, 2018 - 8:39 am 
+
+ Dave says: 
+
+ Tomb of Annihilation is my pick for the best published WotC adventure with a caveat or two. 
+
+ Most praise for ToA focuses on the first half or so before the party gets to the Tomb of Annihilation itself. Often described as a hex crawl, it doesn’t follow the best practices for hex crawling. It provides random encounter tables but, crucially, WotC doesn’t include tables for monster motivation. Each monster entry describes a simple motivation or scenario, but it’s one motivation per creature and they often aren’t very dramatic. It’s very likely that a DM will roll the same encounter multiple times during a party’s travels, but without a random table to provide motivations, the DM’s left to improvise. The vast majority of hexes don’t contain interesting features and there aren’t any tables to generate them. If played straight, exploration can be filled with several stretches of players rolling skill checks to navigate, the DM rolling no encounter, and the cycle starting again. Someone published a PDF containing thirty days of pre-rolled encounters for ToA and that’s what WotC should have done. Publish the encounter tables as a free PDF and give me some actual work by the designers for my money.
+
+ Once the party actually reaches the Tomb, the adventure takes a very sharp twist. Until that point, the campaign is largely about exploration, dealing with some monster factions, and a few straightforward, dungeon-style encounters. The Tomb itself is much closer to its Tomb-of-Horrors roots than its designers would care to admit. An unpleasantly high number of room designs in the Tomb are quite deadly. If they aren’t deadly, they’re throwbacks to an old, Gygaxian style of “fun” that modern players (and those who finished the first half of ToA) often won’t appreciate. There are a couple of locations or events that can destroy all metal on a PC’s body, for example, one of them somewhat late in the dungeon. I’ve seen two different players in two different campaigns bump into these traps and become *livid* at losing their armor and weapons in a somewhat arbitrary way. The Tomb of Annihilation preverves the old “paranoia and distrust” style of dungeoneering from the Tomb of Horrors for a modern, 5e audience that’s largely got no experience or patience for that sort of thing. It feels like WotC’s designers getting a grognard’s laugh at running newbs through an old-school dungeon to show them “how we used to do it back in the day.”
+
+ As usual for a WotC product, the information design and adventure presentation are muddled. For months on the DM’s Guild site, two of the most popular titles were fan-made PDFs that (a) summarized the information in the book so that DMs could put all the pieces together and (b) filled gaps in the module’s hexcrawl design. With all of that said, it’s probably still the best WotC adventure to day. On the eve of the release of Dungeon of the Mad Mage, I hope we get a new champion.
+
+ November 8th, 2018 - 11:00 am 
+
+ Kinak says: 
+
+ Of the ones I’ve read (Hoard, Abyss, Strahd, and Storm King), I don’t think I’d recommend any of them for running out of the box. If I had to choose, I’d say Strahd is the best and Abyss is the worst.
+
+ November 8th, 2018 - 1:00 pm 
+
+ James says: 
+
+ Ok well I ran Dragon Heist, itsnot as bad as you make it out to be. My group of 6 players loved it. It did take a little prep work but much less than say ToA or OotA. The article seemed rather biased and he could have read parts a little more closely. Such as you said the Zhents are one of the villians when they are not, Manshoon is and he is using a group of Zhents to do his dirty work. But all the Zhents do not agree with him. That’s just one example, out of quite a few. And you will have to do a little game development, bit that’s part of the fun. Right?
+
+ November 8th, 2018 - 3:41 pm 
+
+ James B says: 
+
+ Your comment section is horrible.
+
+ November 8th, 2018 - 3:48 pm 
+
+ Sarah Brogan says: 
+
+ Thank you very much for this review. I had high hopes and a lot of interest in this adventure, having never run an urbancrawl structure before.
+
+ It is unfortunate that it is just so lacklustre and in need of heavy modifications to be playable. This seems a common complaint for many of the WotC 5e published adventures.
+
+ I have been running Tomb of Annihilation for that past 3 months (50~ hours of play) and found the hex crawl mechanics very much as Dave says – a fake hex crawl.
+
+ It simple has too few static locations, too few fleshed out encounters and too few motivations to play it ‘as is’. This leads to days upon days of marking off rations and water, rolling weather, rolling random encounters that have little thematic elements… it just became a series of chores.
+
+ It seems to me more like a location/node based adventure with the most mundane elements of a hexcrawl tacked on. We stopped playing the hexcrawl as written, because my players and I were just so bored for all of it.
+
+ Hearing about the ‘gotcha’ difficulty switch in the Tomb itself is worrying, and makes me think there’s going to need to be heavy modifications for that too on my part… which I’m really not looking forward to!
+
+ November 8th, 2018 - 5:04 pm 
+
+ CzarSmith says: 
+
+ I played about half of Out of the Abyss as a player, and the thing that struck me the most was that there was extremely limited downtime allowed (because of the plot) and that there are almost no chances for the player to visit a city and sell off treasure. I think we were something like 8 sessions in before we had that chance.
+
+ There are also a TON of NPCs who can join the party. I think that, at one point, the NPCs outnumbered the PCs, and we had a group of six players!
+
+ November 8th, 2018 - 5:04 pm 
+
+ Justin Alexander says: 
+
+ @James: The leader of the Zhentarim gang which is one of the four villainous factions that can be chosen by the GM is actually not Manshoon, one of the founders of the Zhentarim, but rather a clone of Manshoon.
+
+ If we’re going to pretend that this kind of delve into the minutia of the scenario is actually relevant to the review, let’s try to get the minutia right, OK?
+
+ Although, actually, you do raise a good point here, which is that the continuity around the Zhentarim gangs in the adventure IS one of the many elements in Dragon Heist plagued with contradictions. I mostly used more prominent inconsistencies as my examples in my review, but there are actually A LOT of these less significant glitches. In this case, we’re told that:
+
+ – Manshoon’s Black Network gang attempted to ALLY with Xanathar, and the war between them broke out because Manshoon was framed for stealing the Stone of Golorr .
+
+ But we’re also told that:
+
+ – Manshoon’s Black Network was trying to TAKE OVER the Xanathar Guild and that’s the cause of the gang war.
+
+ “The DM can fix it!”
+
+ Well, of course they can. But if you’re arguing that they should HAVE to, I would strongly disagree. Adventure scenarios do not have to be this sloppy.
+
+ November 9th, 2018 - 1:56 am 
+
+ Rane2k says: 
+
+ Regarding the “streaming” thing: I think you are close with your thought that they are making it with streamers in mind.
+
+Personally, I think they recognize (rightfully so) that streamers, actual play podcasts, etc. are a good in-road to players. However, it opens the problem that an adventure can be “spoiled” when you watch in on stream, so that interest in actually playing it yourself is lost.
+
+ So they designed around the problem by keeping it open who the bad guy is. Maybe they planned on going fully onto the “there is no main bad guy, whoever gets the stone will be your final boss” plan, which would explain why there are detailed descriptions of these lairs, or something like that. (I do not have the book, I just watched parts of Adam Koebel DMing it on Youtube)
+
+ Seems to me as if they tried and botched their attempt. Then the usual corporate things like deadlines and release schedules come up and they had to present something, salvaged what they could.
+
+ Just some thoughts. 🙂
+
+ November 9th, 2018 - 12:11 pm 
+
+ Jordan says: 
+
+ I just want to say that I would very much like to read your review of Dungeon of the Mad Mage. It looks like a megadungeon (not an adventure path), which I would seriously consider to buy and run if it’s good and well done. 
+
+ Thanks!
+
+ November 9th, 2018 - 1:28 pm 
+
+ Z says: 
+
+ Heist title is so misleading. I watched Chris run some great heists, so I was naively expecting that his experience will be transferred into a book form, kind of like a heist engine for DnD.
+
+ November 9th, 2018 - 2:22 pm 
+
+ Jorge says: 
+
+ You wonder why.
+
+ The answer is: Money!
+
+ “they’ve decided to design this sequence is to take ten generic locations, add a little text customizing them to each villain’s minions, and then shuffle up the order in which you encounter them based on which villain’s minions you’re chasing. But… why?”
+
+ Well, money. More words means more pages means more money.
+
+ “Why would you spend 60 pages describing these lairs and then write up a scenario structure in which they’re never used?”
+
+ Well, I’m sure you know the answer. But if you don’t, let me tell you: Money!
+
+ Also, you say: “Great care was clearly put into its construction.”
+
+ Don’t fool yourself, friend! No care was put at all. You read the book. I read the book. We both know it’s not a good product. Nobody cared about it. They knew it would sell hundreds of copies or thousands. It’s money. Wizards pay very little by the word, the only think their writers care about is putting as many words as they can.
+
+ November 9th, 2018 - 3:42 pm 
+
+ kenny says: 
+
+ personally, i love dragon heist, but my only previous experience in published adventures is curse of strahd, which was impossible for me to follow. i never ran it because it was so vague and open-ended it seemed like there was no actual plot, just a list of locations and npcs. i was relieved that dragon heist is the exact opposite of curse of strahd; it has a very linear plot line and clear story hooks to get the players moving forward. i’m running it right now as part of my regular campaign, so i’ve had to change a few things to make it fit into my homebrew world and also fit level 13 characters.
+
+ but even though i love it, you’re right about most of your complaints. there are a lot of plot points which make no sense at all, and the time frame is all messed up, and it includes tons of content which you’ll probably never need. there several sequences which are ridiculously contrived and unnecessary, and the actual background of the story is paper thin and full of plot holes. if you run this, you’ll absolutely need to fix the story before you start.
+
+ however, none of that really bothers me, because i was going to change a bunch of stuff anyway to make it fit into my campaign. so your mileage may vary on this point. if you’re the kind of dm that always tweaks and changes things to fit your own preferences, then dragon heist is awesome because it gives you so many freaking options. the four villain gimmick is wonderful, because you can use all those villains as much or as little as you want and really create a plotline as complicated as your players can handle. you can have false villains, story twists, trick endings, whatever. let the players think xanathar is the villain and then drop manshoon on them, or whatever you want. i love that aspect of it, really.
+
+ all the extra content (the villain lairs, the alternate encounters, the huge number of npcs) is great for me because i can use a lot of that content later in my campaign or for one-shots or anything i need. it’s like they made an adventure and then included a ton of extra material that the dm can use however they want. again, i love that because it gives me tons of ideas for new storylines.
+
+ like you said, “if you’re willing to put in the substantial work necessary to actually get 100% utility out of the book, then your personal calculus may change.” i am totally willing to do that extra work. i’ve heard glowing reviews about curse of strahd and that seems unplayable to me, so it really comes down to your style as a dm and what you’re looking for in an adventure. it’s one of the things i love about d&d to be honest.
+
+ November 11th, 2018 - 9:25 am 
+
+ Rabbiteconomist says: 
+
+ This blew up on reddit a few days ago when it was posted – looks like they came here to comment too!
+
+ November 11th, 2018 - 2:26 pm 
+
+ Shadowkat says: 
+
+ I agree with Kenny here (two comments up for those that see this and don’t want to search through all these names). I can completely see your point, but like him I’m one to add and shift things, which is a style I think this is PERFECT for when you’re also a dm that doesn’t have the time to build something completely from scratch. For me, I get burnt out if I don’t have a spring board to go off of. I find that I shine most when I can “twist” content. Plus it’s fun.
+
+ Three of the villains are already featured in a lot of lore. One of the main draws for me was Jarlaxle, since I’ve read all the Legend of Drizzt books, love his character, and know him well enough to have a lot of fun pulling some strings. The others I don’t know as much about but there’s lore on them, and the idea that there were four meant I could have a lot of other events going on in the background. I would like to point out about the comment you made with being unable to involve more than one without the chain getting messy. I don’t think the module where it suggests using them on the side meant use more than one chain. A whole lot of the module seemed to me to encourage adding onto what was already there. I can’t remember the wording but there were a few lines that seemed to carry that implication pretty heavily.
+
+ I’m personally mixing the Cassalanders and Jarlaxle, with the first being more open and the second behind the scenes and an seeming ally for most of it, since two PCs are already working for him. Thinking of putting in Xanathar, but leaving Mansoon for a thread after the module that’s hinted at.
+
+ It’s definitely a lot of work, but I personally don’t think any module could be run as is. People brought up Lost Mines, but I’m running that as well and my players started doing things that I didn’t have a single detail for before the Redbrand Hideout, that’s already caused me to adapt future events. You just can’t expect any module to be played as is without some heavy railroads, because players don’t stick to your plan. You can spend all day plotting and they’ll go the one direction you never expected.
+
+ Personally I always advise to never buy a module with the intention of running it as is. Most of the events will be used, but things will always end up changing. 
+
+ I do think the motivations for some of the plot can be worked on. I already have some fixes on my end. It’s definitely not a module to run as is if inconsistencies bother you, or if you don’t want to improvise when the party inevitably doesn’t follow the requirements in the event chains. However, for certain styles of dm who enjoy expansion rather than pure self creation or a by the book adventure, I think it’s one of the better ones to get someone excited and start brainstorming on. 
+
+ One last thing. I don’t think some of the inconsistencies are inconsistent. The truce between the Zhents and Xanathar for instance. From lore it seems reasonable the Zhents would try to truce to get closer and gain an advantage to use when they decide to make their play against Xanathar’s guild for control.
+
+ November 11th, 2018 - 9:53 pm 
+
+ Justin Alexander says: 
+
+ Since we’re discussing how to remix the material, my primary thought is that you need to bring all four villains into play.
+
+ 1 & 2: The Zhentarim and Xanathar are already engaged in a gang war over the Stone of Golorr / the Vault at the beginning of the scenario. Stick with that.
+
+ 3: Instead of a nimblewright detector, make Jarlaxle the ultimate source of the nimblewrights: He brings them into town on his ships and sells them. Once the PCs have identified that a nimblewright is responsible, they can find other nimblewrights (at the Temple of Gond, for example) and be referred to Jarlaxle. Jarlaxle will be able to tell them he sold the nimblewright they’re looking for to the Gralhunds, but will first want to know why they’re looking for it. Following up on whatever the PCs tell him, his agents will discover the hunt for the stone of Golorr and, bang, he’s in.
+
+ (Alternatively the PCs decide not to talk to him and instead sneak in and steal his records of sale. Which is great because, bang, you’ve got a heist pointed at Jarlaxle’s ship.)
+
+ 4: After the explosion (during the time that they’re investigating nimblewrights), the PCs are contacted by the Cassalanters: Their own agents were there that day because they, too, were tracking the stone, so they know that Dalakhar was trying to bring the stone to the PCs. They tell the PCs a modified version of their plight (they need the money to save their kids from Asmodeus; they don’t mention the ritual also involves killing 99 people) and ask for the PCs’ help.
+
+ If the PCs agree, it’s fully possible that they’re invited to the feast where the Cassalanters enact their ceremony. I recommend not having the Cassalanters try to double-cross them: If the PCs haven’t put together the Cassalanters’ true intentions, it’ll be more effective for them to be horrified at their implication in the mass murder. The Cassalanters couldn’t be more pleased with the PCs’ work and are looking forward to a long friendship with them.
+
+ Bring It All Together : Simplify the Gralhund back story. They’re not aligned with any of the villains. Instead, they’re just a minor faction (compared to the other four villain factions) that’s also interested in securing the vault for themselves. As the PCs arrive on the scene, however, Zhentarim agents have infiltrated the manor and are trying to seize the Stone of Golorr, which the nimblewright took after blowing up their agents. (This also fixes some of the continuity errors around the Dalakhar fireball.) 
+
+ Also watching the Gralhund estate, however, were agents of Xanathar and (if he’s been tipped off) Jarlaxle. Hijinks now ensue as the Gralhund mansion turns into a five-way battle for control of the stone.
+
+ To the Lairs : The Stone of Golorr is currently blind as its three eyes have been removed. Xanathar, the Cassalanters, and Manshoon have all tracked down one of them. At one or more of these, Jarlaxle’s agents are simultaneously performing a heist to steal the eye: If they succeed, the PCs will need to pursue them back to Jarlaxle’s ship.
+
+ (Alternatively, two of those factions have them and Renaer actually has third, having been unwittingly gifted with the eye by his father before they became estranged. Thus prompting a race for the third stone between all the factions once the PCs realize where it is.)
+
+ Chase Locations : I’d look through these, harvest the strongest options, and re-cast them as faction-related facilities. Bringing them into play is a more direct question of how each faction is using those facilities. (Missions might include: Infiltrating a facility to get a pass-amulet allowing passage through Manshoon’s forcefield or joining one of the secret caravans taking audience members to witness Xanathar’s gladiatorial combats. Pursuing agents fleeing to a safe house with the Stone. Et cetera.)
+
+ November 12th, 2018 - 12:58 am 
+
+ Nat says: 
+
+ I would be fascinated to read a review of ToA as I just finished running it (wrapped up with Session 47 this Monday!) so I know it back to front. I echo most of the complaints and praise, especially critiques of the hexcrawl portion. The final dungeon is pretty brutal, but my group had a blast with it. I was careful to manage expectations; I killed plenty of PCs throughout the campaign and built up the final tomb so they knew they were walking into a deathtrap. Of the six PCs who entered the tomb, only one came out the other side. (One technically survived but was transported to Victorian London, which we considered a happy ending.) The dungeon itself is pretty well designed, with many different ways to move around. My party went from level one straight to the bottom level, figured out what they needed to do, then worked their way through the other floors. My main critique is that it was a bit heavy of stand-up fights rather than player challenges, but that’s true for all 5e products. Overall the campaign was a success, and I didn’t even use all the content in the book.
+
+ November 15th, 2018 - 9:55 pm 
+
+ Lluewhyn says: 
+
+ Oh my god, I so needed this review after last week’s session ended up being such a debacle (I had started them on Chapter 3). 
+
+ Chapter 1 had a pretty strong opening, and although railroaded, the railroad mostly made sense, albeit with a few quirks, for example: why the patrons of a dive bar just happen to know where a group of thugs are lairing. The climactic battle was a bit odd, with a named Half-Orc mini-boss having only 9 HP, and the beast companion (Intellect Devourer) being an extremely deadly Glass Cannon that the adventure doesn’t warn you about (I found out the hard way when trying to research how the players could cure the affliction). For the most part, however, ok chapter.
+
+ Chapter 2 is very free-form and sandboxy, but it’s obvious going in so the DM can determine (along with their players) what they want to spend time doing. The faction mini-quests are hit and miss, with some of them being exciting and others being dull and pointless. Most don’t even have any gold rewards, and simply give faction reknown, which aren’t well articulated in this adventure about what they accomplish. My Players elected to reopen the tavern, and spent the ~1,300 gold (pretty much all they had acquired up until this point, rolled a 95 on their Running a Business check, and got a measly 80 gold profit. In terms of real-world ROI, it’s beyond fantastic, but in terms of the limited screen time this venture gets the money seems like a waste. I skipped the business rival section because having a villain scheme against them that they don’t even know about doesn’t seem like it would be very entertaining for them. From their perspective, this barely lucrative venture would just be constantly hit with various bizarre problems like pests and were-rats. 
+
+ So, I moved on to Chapter 3 last week and this is where the game really went off the rails (pun intended). They witnessed the explosion, were proactive to interrogate the witnesses, and then were at a loss for what to do. They wanted to track down the wounded guy who looted the gnome, but the module doesn’t even pretend like that’s an option (because it would skip to the end of the chapter), and then I remembered that “Oh yes, you realize that having lived in Waterdeep (my PCs were actually new arrivals), the description of the construct reminds you of this parade, which was sponsored by this temple, so maybe you should go to the temple to see if they know anything”. (Funny how none of the NPC witnesses who have lived in Waterdeep their entire lives comment on how assassin looked like one of those things from the parade).
+
+ They went to the temple, and I just couldn’t proceed any further with the non-sequitur nonsense that relies upon the PCs doing very specific things to progress further. I specifically didn’t want them to experience the terrible encounter with Jarlaxle where the PCs learn nothing, the story doesn’t progress, and they don’t even learn the identity of their “host”. I’m not quite sure what the point of a disguised Cameo encounter is, other than for the DM to know something mildly interesting the players don’t. 
+
+ So, I skipped to them finding out information that the man carrying the stone was seen entering the Gralhund manor. The PCs investigated it by sending the Rogue in to scout, and upon hearing sounds of combat, jumped over the wall to intervene. This is where the awkward writing of the adventure reasserted itself. While the DM is given the backstory about why there is a bloodbath at the villa, the PCs are unlikely to find this information out. The PCs sided with the villa guards, because that made the most logical sense, but then the story runs into another problem: no matter which side the PCs help, they won’t really be given any new information. Siding with one of the two factions pretty much results in a “Thank you for all of your help! Now, go away, and we’re not going to tell you anything!” Oh, and the City Watch is on their way so the PCs don’t have much time to explore their options.
+
+ So, I pondered if I could have the PCs skip ahead again, and I discovered that there’s nowhere I want to take them.
+
+ Chapter 4 “Benny Hill” encounter chains? I referred to these as the “Sorry, Mario, your McGuffin is in another encounter.” Succeed in an encounter, and the Stone stays out of the PCs’ hands and they progress to the next encounter. Fail, and the PCs are left with nothing to do until an NPC comes up to the PCs later and gives them hints to connect them back on to the encounter chain. So, they’ll later learn that success or failure just results in the same thing. And if the PCs try to be smart/creative and come up with a way to get the Stone without going through the full sequence: THE STONE TRIES TO MENTALLY DOMINATE THE PC HOLDING IT TO MAKE THEM DROP IT, AND THEN WIPES THEIR MEMORY OF THIS SO THAT THEY MUST GO THROUGH THE FULL ENCOUNTER SEQUENCE AND THUS “EARN” THE STONE. This is beyond bad writing. Why did any veterans at WotC think this was a good idea to thwart the PCs this way?
+
+ Chapter 4 “Find the 3 keys”? This is only mildly entertaining, and seems like additional busywork for the PCs when they’re really interested in moving on at this point.
+
+ Chapter 4 Vault? I might start the PCs here, but the vault isn’t terribly interesting dungeon wise, and the encounter at the end is very anti-climactic. Still, I guess it will allow me to conclude the adventure and move on, and I’ll probably mix in some fights to spice it up. 
+
+ In conclusion, this adventure was just frustrating me, and I was very glad to read your review because so many of the other ones out there (mostly from people who had not actually ran it) were mostly glowing about how great it was. I ran Curse of Strahd which required a decent bit of work from the DM, but this Dragon Heist goes beyond the pale of making the DM rewrite almost everything to make it a decent adventure to match its great premise. I’ve suspected for awhile now that they never play-test their adventure modules, and this one confirmed it. By play-test, I mean hand the module as written to a DM who knows nothing about it and see how the DM handles it.
+
+ November 20th, 2018 - 10:48 am 
+
+ JHansen says: 
+
+ With all the Forgotten Realms lore-porn present in this module, I’m surprised that they didn’t connect the Cassalanters to the Knights of the Shield – they were a faction of influence peddlers and (mostly unknowing) devil-worshippers, and I feel like every other FR novel set in Waterdeep involved them trying to take over the city via some Byzantine plot. 
+
+ I wasn’t really going anywhere with this – it just feels like a(nother) weird oversight.
+
+ December 12th, 2018 - 6:53 pm 
+
+ Melted says: 
+
+ Actually, it’s even odder–they don’t have to break into the morgue to Speak With Dead. They can just hire someone!
+
+ “Any character who has a renown of 1 or higher in Force Grey (the Gray Hands), the Harpers, the Lords’ Alliance, the Order of the Gauntlet, or the Zhentarim can petition their faction representative to hire a cleric to cast speak with dead on one or more of the fatalities. The characters can hire a cleric themselves by making a donation of at least 25 gp to the cleric’s temple for each casting of the spell.”
+
+ So, it’s presented as being perfectly legal/unremarkable to do this–no subterfuge or break-ins necessary.
+
+ The problem with this is that Speak With Dead specifically fails on a corpse it was used on in the last ten days. So it seems like if you take this route, you’re interfering with a murder investigation, and nobody acknowledges or objects to it.
+
+ December 15th, 2018 - 10:09 pm 
+
+ hugseverycat says: 
+
+ I feel so validated by this review. When I bought W:DH shortly after it came out I figured there was just something wrong with me (I’m a brand new DM — prior to DH I had only run LMoP) when every single review was glowing and I was sitting there thinking, “What the hell is this timeline? When do we see the villains? You mean the players aren’t going to go to the hideouts? But wow the art is nice, huh!” I even ran across people recommending this as good for new DMs.
+
+ February 28th, 2019 - 5:42 pm 
+
+ Niqqi says: 
+
+ The thing is just a mess, you are certainly right there. Right down to the premise of Neverember stealing a ton of money while he was in charge of things. Previous depictions of him have always painted him as imperfect, but generally a very driven and honorable man. Suddenly he’s a thief. With no real motivation. Because… reasons?
+
+So badly written.
+
+ March 7th, 2019 - 11:41 pm 
+
+ illustro says: 
+
+ I’ve just finished running Dragon Heist. It was the first published adventure I ran for my PCs.
+
+ You are right that there are certainly issues with the timeline, and in particular there are some issues with the time lag between events in the story and getting the PCs to be level appropriate if you shorten those timescales. I remedied this in a couple of ways:
+
+ 1. Truncating the timescales significantly. In particular the events after the explosion were moved up to a much shorter timeline, with the Gralhunds passing off the stone one day after the explosion happened.
+
+ In addition I used the faction quests to tie into story elements, picking ones that were related to the plot more directly.
+
+ 2. I made a system for awarding XP for social and exploration encounters to level the PCs up. This system is ties the XP awarded to the PCs to CR levels (with ratcheting for difficulty). As the module is actually choc full of social and exploration encounters this helped with levelling up the party at an appropriate pace in my truncated timescale (as there was less time for faction missions). It also freed me up to reward the party for creative thinking.
+
+ 3. The timescale was fixed before I started the module, with specific events happening on specific days. I tracked time pretty religiously throughout the module. I chose the Cassalanters as the main villain, and they have a defined end point for their goal (a festival in the middle of Summer). This meant if the PCs spent to long faffing about the Cassalanters would just succeed.
+
+ 4. I didn’t railroad the chase sequences. If my party was sufficiently prepared and didn’t take too long they had a chance of getting the stone “early” in the encounters (This was treated as an exploration encounter for XP purposes).
+
+ Overall, with these changes the module ran well and my players enjoyed it.
+
+ I also found, while I was researching, a DMsGuild Adept release for Dragon Heist written by two of the three designers of Dragon Heist (and another person). This suppliment is 35 pages long and provides a number of good additions to the module which can help with the continuity issues even further. These additions are:
+
+ 1. An alternative way to start the campaign (so the Xanathar & Zhent war is less critical and could be started later in the campaign)
+
+2. An alternative “Fireball” chapter which removes the Gralhunds from the equation (removing that inconsistency)
+
+3. A reworked Vault (for a fresh runthrough for players)
+
+4. A replacement “Vault Heist” to enable you to end the adventure with a classic bank heist
+
+5. A letter from Dalakhar to Lord Neverember which provides a compelling reason (imo) for him to search out the adventurers, and also explains the time delay you are concerned with
+
+6. Gives rules for actually running a bank heist.
+
+ If I run it again I plan to use one or more of these modifications to freshen it up for me.
+
+ March 12th, 2019 - 8:36 am 
+
+ illustro says: 
+
+ One other point of note…I made use of the 3.5e City of Splendours supplement to flesh out the locations and make them consistent with previous lore. This also had the handy side note of giving me a fully fleshed out set of locations for Taverns and the like in the city 🙂
+
+ For example…the Dragon Vault in my version is located under the ruins of the Dragon Tower of Maaril in the Sea Ward ($30 if you are interested…On the Dragon Heist Map it’s located in the centre of the triangular block surrounded by Grimwald’s Way, Shark Street, Street of Wonders and Street of the Singing Dolphins), the previous holder of the Dragonstaff of Aghairion. Which is appropriate I think 😛
+
+ March 12th, 2019 - 8:45 am 
+
+ Jordy says: 
+
+ This work is amazing!
+
+ I’m going to use it for my heist.
+
+ Do you have a pdf version?
+
+It will be very useful to prepare the campaign
+
+ June 6th, 2019 - 5:35 am 
+
+ Justin Alexander says: 
+
+ Patrons of the Alexandrian’s Patreon have access to PDF copies of every article here (often before they come out).
+
+ I’ve also posted my full running notes for the Dragon Heist Remix there.
+
+ June 6th, 2019 - 11:29 pm 
+
+ Russ says: 
+
+ I am in the middle of playing this campaign and it. is. garbage. 
+
+ I have NEVER been this angry about playing DnD before. I am starting to look forward to our sessions with dread rather than anticipation. 
+
+ I catch myself checking the time in our sessions – not to see if we will be able to fit any more cool things into the night, but rather to see when it’s time to leave, go home, wake up the next morning and go to work where I can at least have a better chance of having fun.
+
+ This is a never ending slog through a tortuously confusing and dissapointing “narrative”. It seems like it is set up for a lazy DM to take a couple months off to sit back and watch the PCs wander around a city. 
+
+ No plot
+
+No direction
+
+No money
+
+No combat
+
+Nothing but never ending bordom.
+
+ I hate this campaign.
+
+ July 30th, 2019 - 7:58 am 
+
+ Gravenhurst48 says: 
+
+ The Alexandrian review has been spot on about Dragon Heist, giving the best explanation to justify my crappy new beginning as a DM learning the 5E system. I am not new to D&D, been playing over 30 years as a DM ever since my best buddy tortured me in a spiked pit trap in Desert of Desolation, like, pits would just open up where I would carefully step? “Hmm, sumfin not right 🤔”, even after prodding for traps with my trusty 10 foot pole. The last straw as a player for me, was when my other bud sent me to the afterlife only to revive me as many times as Strahds lost love was – Ireena. I was in the Whack-A-Zombie mists, which in turn I was the one goafered. Or sumfin like that scene.
+
+Bam, I purchased all the core tombs and became a DM. And boy those guys were jerks after I owned the two modules mentioned, the two buds were obviously not truly interested in D&D or with giving a good experience to players but for their own gleeful immature sadist joy seeing others die with no hope of surviving or no way out. Those experiences have taught me to create a better story for players, with lots of prep work with notes, lotsa notes. Now, 30 years later, I do not have a lot of time to even want to prep a new game and since no more one shot modules, I really did not want to reinvest in more D&D for a new edition.
+
+To my interest though, I discovered the Platinum Edition from Beadle and Grimm’s Dragon Heist. I purchased from Canada, so I paid a lot more than $50 US for one hard book, and a lot more than the $500 US price tag for the box set. I believed this amazing box of holding was a great way back into roleplaying, to start fresh, because the Platinum Edition was advertised as an adventure ready to play Out of the Box, a DM’s Aid. But of course it was not.
+
+Against my better judgement, I did not jot notes down, or create any backup anything, or try to come up with any side plots, because I truly believed that what I was purchasing from the Platinum Edition was a ready made campaign, and I would just wing it. Dead wrong. Just reading one booklet will not tie into the next booklet smoothly. Its as if each booklet (aka Seasons) were its own module. So I would go back and forth between booklets trying to make sense of all the plots involved, and we know there are many plots. You can be in a Faction with the Blackstaff of Waterdeep! Or Lady Alustriel, or Mirt, or hang out with Volo! Yes, the, Volo!
+
+I have Princes Of the Apocalypse, Mad Mage, Tomb of Annihilation, Tales from the Portal, and Dragon Heist has been the worst introduction as a DM to start gaming a new edition of D&D. If the material isn’t setup clearly and you as a DM do not take the time to make the adventure your own, the adventure becomes an embarrassing flop. Trying to learn the new system while figuring out where am I going with this adventure was painfully clear to me, to get it over with and move on, never looking back. And for my players, they wanted a new DM. And the kicker for me, was learning about the villian lair not part of the sequence of events? Nonsense. In fact, it’s best just to let the bad guys gain the Stone of Gorlorr so the players can level up to take on the villian stronghold. The adventure would have been better scripted if the lair was the end game, not just having to tie it into the Mad Mage never ending dungeon crawl. Now that is rail roading an adventure.
+
+I thank you Justin Alexander, because I will be linking your review to my players so they will understand it was not just me being a bad DM, it was me DMing a badly put together adventure. Cheers!
+
+ December 18th, 2019 - 9:09 pm 
+
+ Talespinner says: 
+
+ I found two additional things odd about this module so far: 
+
+ 1) The DM isn’t encouraged to start the players at the early stages of the gang war going on as a backdrop in rumors while running other side-adventures … so the players know stuff is going on but not why now and have a sense of connection to the escalating violence. (Very similar to the post about rumors in Descent Into Avernus.)
+
+ 2) Where are the non-evil factions in all of this during the gang war breakout? Especially if they somehow get wind that it is a great game involving trying to find a fortune that should belong to the city? There are hooks for the PCs to represent a faction, but shouldn’t they be more involved than just via the PCs actions?
+
+ It seems really odd to have a “great game around finding this fortune” and yet it only involves potentially 4 factions and some minor players in the largest city of this setting.
+
+ If this was a story idea thing to inspire a DM to come up with their own thing … maybe … At $50 it seems like it should be a lot more than that including made for the DM to run as is.
+
+ Given everything else that has been already said about this adventure you should only buy this if you are going to steal the interesting bits and rework it like Justin has admirably shown in his remix posts.
+
+ March 4th, 2020 - 8:47 pm 
+
+ Joshua says: 
+
+ Apart from the initial Lost Mines of Phandelver, I have generally loathed most 5E modules. Curse of Strahd was all right, but it did require some tweaking to mesh together, although less than DH.
+
+ I think one thing that would greatly help all of these modules is for them to provide a sample walk-through, although several walk-throughs where the PCs chose different options would be great. Even having PCs choose custom things that weren’t suggested (meaning the DM would have to do some work!) would be easier if there were several sample scenarios.
+
+ The key is that it would have to be written by someone not otherwise working on the module. Someone who would take the descriptions from the rest of the development team, and figure out how A connects to B, connects to C. Even better would be if said individual DM’d it for a group of playtesters. If the summarizer/DM had to come up with their own explanation for something or had to go back and ask the other developers what to do for a standard PC action, that means the module needed more clarification. Instead, we just get a halfway thrown-together mish-mash of information where the developers said “Thanks for the $50, here’s some rough material, you figure it out.”
+
+ June 16th, 2020 - 2:57 pm 
+
+ Mark says: 
+
+ My 1st comment here on the blog, so let me first say, I absolutely love your content, especially the W:DH remix, which honestly saved me.
+
+ I was given W:DH as a present, I loved the theme and the idea, and I was so hyped being a first-time DM. And we started well, first session concluded and I was intrigued. I got a little help from the DMSGuild and was looking forward to the rest of the adventure.
+
+ But when I started to prep session 2+ with all the factions coming into play, I was overwhelmed. By the sheer possibilities I had, by having 4 villains to choose from and realizing that it was not the heist adventure I had imagined.
+
+ I totally agree with your review – it is a badly constructed adventure with so many plot holes. It is rather a book full of ideas on what you could run, if you’re having a city adventure.
+
+ In the end, I discovered your remix and it saved me (the complete newbie DM). I spend two months rearranging the plot, adding depth and meaning to all four villains, creating mysteries, clues and revelations for the PCs to find. We’re now enjoying the setting and are slowly moving through the adventure.
+
+ PS: I recently read from James Haeck on DnDBeyond that the adventure was designed to be played in about 10 sessions. And then to be re-played over and over again with different villains, etc.
+
+I think that’s horrible. We now have played 9 sessions and my players are still investigating the nimblewright incident. I wanted to make the players feel like they are immersively living in a “living city”, give them time to establish contacts, etc. not just rushing through some plot. I mean, they get to own a tavern! At least my PCs want to see it grow, renovate and make money from it, not just having a base.
+
+ So far, I will continue borrowing ideas from your remix, saying thank you again. Awesome work!
+
+ August 25th, 2020 - 5:00 am 
+
+ Justin Alexander says: 
+
+ @Mark: I’m so happy to hear that the Remix was useful for you! And that your campaign is going so well!
+
+ August 25th, 2020 - 1:17 pm 
+
+ James T McGrath III says: 
+
+ I’m 8 sessions in(chapter 1 complete/just started chapter 2) and just getting around to reading Justin’s remix in full, from the beginning, starting with his review, and I’m just so thankful for the perspective and helping to make the most of this Campaign. My original intent/hope was to use Dragon Heist as a springboard for a Waterdeep sandbox campaign, so all of the resources I’ve found have been helpful(a little overwhelming), as you could imagine. I’m totally down with heisting from each of the four lairs, and using/leaning on as many of the book assets as possible. I inserted Winter’s Splendor halfway through chapter one and it couldn’t have been more perfect. (the setting and results, not my execution!) Getting invited into a noble family’s villa for a party is exactly what I want. Anyway, thanks to everyone working towards a more prosperous game experience!
+
+ February 22nd, 2021 - 5:02 pm 
+
+ The Best D&D Blogs in 2025 ... Chosen by a Blogger! says: 
+
+ […] believe I discovered the Alexandrian when prepping to run Dragon Heist, when his savage exposing of the adventures flaws both amused and impressed me. I am a bad reader, and it would take me much longer to spot all the […]
+
+ October 12th, 2025 - 1:06 pm 
+
+ Leave a Reply
+
+ Name (required) 
+
+ Mail (will not be published) (required) 
+
+ Website 
+
+ XHTML: You can use these tags: <a href="" title=""> <abbr title=""> <acronym title=""> <b> <blockquote cite=""> <cite> <code> <del datetime=""> <em> <i> <q cite=""> <s> <strike> <strong> 
+-->
+
+ you MUST enable javascript to be able to comment 
+
+ Δ 
+
+ JUSTIN ALEXANDER
+ About - Bibliography 
+ Acting Resume 
+
+ROLEPLAYING GAMES
+ Gamemastery 101 
+
+ RPG Scenarios 
+
+ RPG Cheat Sheets 
+
+ RPG Miscellaneous 
+
+ Dungeons & Dragons 
+
+ Ptolus: Shadow of the Spire 
+
+ Alexandrian Auxiliary 
+
+ Check These Out 
+
+ Essays 
+
+ Other Games 
+
+ Reviews 
+
+ Shakespeare Sunday 
+
+ Thoughts of the Day 
+
+ Videos 
+
+ Patrons 
+
+ Open Game License 
+
+ Bluesky • Mastodon • Twitter 
+
+ Archives
+ Archives 
+
+ Select Month 
+ August 2026 (13) 
+ July 2026 (13) 
+ June 2026 (10) 
+ May 2026 (10) 
+ April 2026 (13) 
+ March 2026 (8) 
+ February 2026 (10) 
+ January 2026 (9) 
+ December 2025 (16) 
+ November 2025 (12) 
+ October 2025 (16) 
+ September 2025 (14) 
+ August 2025 (11) 
+ July 2025 (17) 
+ June 2025 (16) 
+ May 2025 (11) 
+ April 2025 (14) 
+ March 2025 (14) 
+ February 2025 (16) 
+ January 2025 (16) 
+ December 2024 (13) 
+ November 2024 (11) 
+ October 2024 (13) 
+ September 2024 (14) 
+ August 2024 (16) 
+ July 2024 (16) 
+ June 2024 (14) 
+ May 2024 (16) 
+ April 2024 (17) 
+ March 2024 (17) 
+ February 2024 (16) 
+ January 2024 (18) 
+ December 2023 (15) 
+ November 2023 (16) 
+ October 2023 (14) 
+ September 2023 (16) 
+ August 2023 (12) 
+ July 2023 (12) 
+ June 2023 (13) 
+ May 2023 (19) 
+ April 2023 (15) 
+ March 2023 (15) 
+ February 2023 (13) 
+ January 2023 (16) 
+ December 2022 (14) 
+ November 2022 (15) 
+ October 2022 (13) 
+ September 2022 (15) 
+ August 2022 (15) 
+ July 2022 (16) 
+ June 2022 (17) 
+ May 2022 (19) 
+ April 2022 (19) 
+ March 2022 (12) 
+ February 2022 (9) 
+ January 2022 (14) 
+ December 2021 (10) 
+ November 2021 (13) 
+ October 2021 (11) 
+ September 2021 (13) 
+ August 2021 (13) 
+ July 2021 (11) 
+ June 2021 (14) 
+ May 2021 (12) 
+ April 2021 (12) 
+ March 2021 (14) 
+ February 2021 (14) 
+ January 2021 (18) 
+ December 2020 (16) 
+ November 2020 (13) 
+ October 2020 (16) 
+ September 2020 (13) 
+ August 2020 (11) 
+ July 2020 (12) 
+ June 2020 (12) 
+ May 2020 (15) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (13) 
+ December 2019 (7) 
+ November 2019 (6) 
+ October 2019 (8) 
+ September 2019 (15) 
+ August 2019 (9) 
+ July 2019 (8) 
+ June 2019 (9) 
+ May 2019 (15) 
+ April 2019 (20) 
+ March 2019 (11) 
+ February 2019 (13) 
+ January 2019 (12) 
+ December 2018 (5) 
+ November 2018 (19) 
+ October 2018 (20) 
+ September 2018 (16) 
+ August 2018 (18) 
+ July 2018 (20) 
+ June 2018 (17) 
+ May 2018 (18) 
+ April 2018 (7) 
+ March 2018 (14) 
+ February 2018 (16) 
+ January 2018 (19) 
+ December 2017 (1) 
+ October 2017 (1) 
+ September 2017 (2) 
+ August 2017 (4) 
+ July 2017 (4) 
+ June 2017 (2) 
+ April 2017 (7) 
+ February 2017 (1) 
+ December 2016 (1) 
+ November 2016 (5) 
+ October 2016 (12) 
+ September 2016 (7) 
+ August 2016 (8) 
+ June 2016 (1) 
+ May 2016 (8) 
+ April 2016 (5) 
+ March 2016 (5) 
+ February 2016 (15) 
+ January 2016 (3) 
+ December 2015 (2) 
+ November 2015 (12) 
+ October 2015 (12) 
+ September 2015 (6) 
+ August 2015 (14) 
+ July 2015 (13) 
+ June 2015 (14) 
+ May 2015 (19) 
+ April 2015 (18) 
+ March 2015 (25) 
+ February 2015 (28) 
+ January 2015 (29) 
+ December 2014 (20) 
+ November 2014 (13) 
+ October 2014 (10) 
+ September 2014 (11) 
+ August 2014 (8) 
+ July 2014 (7) 
+ June 2014 (3) 
+ May 2014 (6) 
+ April 2014 (3) 
+ February 2014 (4) 
+ January 2014 (1) 
+ December 2013 (3) 
+ November 2013 (1) 
+ October 2013 (7) 
+ September 2013 (11) 
+ August 2013 (20) 
+ July 2013 (27) 
+ June 2013 (2) 
+ April 2013 (4) 
+ March 2013 (6) 
+ February 2013 (11) 
+ January 2013 (5) 
+ December 2012 (7) 
+ November 2012 (14) 
+ October 2012 (12) 
+ September 2012 (3) 
+ August 2012 (6) 
+ July 2012 (2) 
+ June 2012 (14) 
+ May 2012 (21) 
+ April 2012 (22) 
+ March 2012 (4) 
+ February 2012 (17) 
+ January 2012 (31) 
+ December 2011 (18) 
+ November 2011 (25) 
+ October 2011 (28) 
+ September 2011 (27) 
+ August 2011 (27) 
+ July 2011 (8) 
+ June 2011 (16) 
+ May 2011 (22) 
+ April 2011 (28) 
+ March 2011 (38) 
+ February 2011 (29) 
+ January 2011 (14) 
+ November 2010 (6) 
+ September 2010 (4) 
+ August 2010 (7) 
+ July 2010 (20) 
+ June 2010 (22) 
+ May 2010 (17) 
+ April 2010 (1) 
+ January 2010 (11) 
+ December 2009 (3) 
+ November 2009 (2) 
+ September 2009 (1) 
+ August 2009 (2) 
+ July 2009 (3) 
+ June 2009 (3) 
+ May 2009 (2) 
+ April 2009 (8) 
+ March 2009 (30) 
+ February 2009 (29) 
+ January 2009 (11) 
+ December 2008 (1) 
+ November 2008 (4) 
+ October 2008 (22) 
+ September 2008 (23) 
+ August 2008 (9) 
+ July 2008 (23) 
+ June 2008 (23) 
+ May 2008 (31) 
+ April 2008 (1) 
+ March 2008 (7) 
+ February 2008 (2) 
+ January 2008 (2) 
+ December 2007 (1) 
+ November 2007 (4) 
+ October 2007 (7) 
+ September 2007 (7) 
+ August 2007 (10) 
+ July 2007 (13) 
+ June 2007 (7) 
+ May 2007 (11) 
+ April 2007 (6) 
+ March 2007 (5) 
+ February 2007 (4) 
+ January 2007 (2) 
+ December 2006 (5) 
+ November 2006 (6) 
+ June 2006 (9) 
+ May 2006 (5) 
+ April 2006 (9) 
+ March 2006 (25) 
+ November 2005 (6) 
+ October 2005 (3) 
+ August 2005 (17) 
+ July 2005 (25) 
+
+ Recent Posts
+
+ Chaos Lorebook: The Magi of Chaos 
+
+ Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Chaos Lorebook: The Earthbound Demons 
+
+ Ex-RPGNet Review: Penumbra Backdrops 
+
+ Chaos Lorebook: The Assassins of Chaos 
+
+ Recent Comments
+ SvenFu on Mothership: Thinking About Combat 
+ Mr Gill on Review: Heroes of the Borderlands (D&D Starter Set 2025) 
+ On the Railroad Again – Rindis.com on Forgotten Realms: A Textual History of the Yawning Portal 
+ Robert on Chaos Lorebook: The Magi of Chaos 
+ Justin Alexander on Ptolus: Running the Campaign – From Table to Page 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Remus on Some Thoughts on Swords & Sorcery 
+ BP on Ex-RPGNet Review: A Song of Ice and Fire 
+ Ben Ferguson on Ptolus: Running the Campaign – From Table to Page 
+ Jake on Ex-RPGNet Review: A Song of Ice and Fire 
+
+ Author
+ Read Now! - Audio Book 
+
+Author
+
+ PDF Edition 
+
+ City Supplement 1: Dweredell 
+
+ City Supplement 2: Aerie 
+
+ City Supplement 3: Anyoc 
+
+ Rule Supplement 1: Mounted Combat 
+
+ Adventure: Complex of Zombies 
+
+ Adventure: The Black Mist 
+
+ Spells of Light and Darkness 
+
+ Mythos Audio Library: Call of Cthulhu 
+
+ Copyright © The Alexandrian . All rights reserved.

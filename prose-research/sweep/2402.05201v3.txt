@@ -1,0 +1,774 @@
+                                                       The Effect of Sampling Temperature on Problem Solving
+                                                                      in Large Language Models
+
+
+
+                                                                  Matthew Renze                                      Erhan Guven
+                                                              Johns Hopkins University                          Johns Hopkins University
+                                                                 mrenze1@jhu.edu                                   eguven2@jhu.edu
+
+
+
+
+arXiv:2402.05201v3 [cs.CL] 2 Oct 2024
+                                                                                               Abstract
+                                                 In this research study, we empirically investigate the effect of sampling temperature on the per-
+                                                 formance of Large Language Models (LLMs) on various problem-solving tasks. We created a
+                                                 multiple-choice question-and-answer (MCQA) exam by randomly sampling problems from standard
+                                                 LLM benchmarks. Then, we used nine popular LLMs with five prompt-engineering techniques
+                                                 to solve the MCQA problems while increasing the sampling temperature from 0.0 to 1.6. Despite
+                                                 anecdotal reports to the contrary, our empirical results indicate that changes in temperature from
+                                                 0.0 to 1.0 do not have a statistically significant impact on LLM performance for problem-solving
+                                                 tasks. In addition, these results appear to generalize across LLMs, prompt-engineering techniques,
+                                                 and problem domains. All code, data, and supplemental materials are available on GitHub at:
+                                                 https://github.com/matthewrenze/jhu-llm-temperature.
+
+                                        1     Introduction
+                                        1.1   Background
+
+                                        In recent years, Large Language Models (LLMs) have revolutionized the field of artificial intelligence. The availability
+                                        of open-source LLMs and pay-per-use APIs has allowed engineers to incorporate LLMs in their AI systems. However,
+                                        prompt engineering and hyperparameter tuning are required to work effectively with LLMs.
+                                        Prompt-engineering techniques help LLMs solve complex problems, avoid hallucinations, and provide more accurate
+                                        responses. For example, we can use techniques like chain-of-thought, tree-of-thought, self-criticism, and self-consistency
+                                        to improve LLM performance [1, 2].
+                                        In addition, several inference hyperparameters can be adjusted to modify the LLM’s output at runtime. For example,
+                                        hyperparameters like sampling temperature, top-k sampling, repetition penalty, and maximum token length all affect
+                                        the LLM’s output and performance [3–5].
+                                        Despite significant interest in LLMs and progress in LLM best practices, many open questions remain about optimal
+                                        prompt-engineering techniques and inference hyperparameters for LLMs. To complicate matters, various local optima
+                                        may exist for LLMs, prompt types, and problem domains [5].
+                                        The prompt-engineering community has an abundance of opinions and anecdotal evidence regarding optimal prompt-
+                                        engineering techniques and inference hyperparameter settings. However, we currently lack systematic studies and
+                                        empirical evidence to support many of these claims.
+                                        As a result, this paper aims to address the open question of the optimal LLM sampling temperature for problem-solving
+                                        tasks. In addition, we aim to provide a systematic study with empirical results to add to the growing body of knowledge
+                                        used to create LLM and prompt-engineering best practices.
+
+                                        1.2   Sampling Temperature
+
+                                        Sampling temperature is a hyperparameter of an LLM used in a temperature-based sampling process. It controls the
+                                        randomness of the model’s output at inference time [5–8].
+                    The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+During each step of an LLM’s decoding process, the LLM uses the previous tokens to choose the next output token.
+The final layer of the LLM uses a softmax function to convert raw scores (logits) into probabilities.
+In greedy sampling, the model will always choose the most likely next token. However, for probabilistic sampling, the
+next token is selected from a probability distribution.
+Temperature sampling is a modification to the softmax function, which adjusts the resulting probability mass functions.
+In this modified softmax function, vk is the k-th vocabulary token, lk is the token’s logit, and τ is a constant temperature.
+See equation 1.
+
+                                                                 elk /τ
+                                                      Pr(vk ) = P l /τ                                                         (1)
+                                                                  ie
+                                                                      i
+
+
+
+A lower temperature makes the output of the LLM more deterministic, thus favoring the most likely predictions. This
+conservativeness is captured by the model’s tendency to produce more repetitive, focused, and less diverse output based
+on the patterns most commonly seen in the training data [5, 7, 8].
+A higher temperature increases the randomness of the output, thus favoring more “creative” predictions. This creativity
+is captured by the model’s willingness to explore more unconventional and less likely outputs. Higher temperatures can
+lead to novel text, diverse ideas, and creative solutions to problems [5, 7, 8].
+In the context of problem-solving, temperature can be seen as a trade-off between exploring and exploiting possible
+solutions within the solution space. Lower temperatures tend to exploit more probable solutions; higher temperatures
+explore the solution space more broadly.
+
+1.3       Choosing a Sampling Temperature
+
+Within the prompt-engineering community, there are a variety of opinions and best practices regarding the ideal
+sampling temperature for various problem-solving tasks [9, 10].
+Low sampling temperatures are recommended for tasks requiring precision and factual accuracy, such as technical
+writing, code generation, or question-answering [11, 12]. However, higher temperatures are recommended for tasks
+requiring creativity, such as writing poetry, creating stories, or brainstorming.
+Higher temperatures also increase the probability of model hallucination. Hallucination is a phenomenon where an LLM
+produces statistically probable responses that are factually incorrect or nonsensical. As a result, optimal temperature
+selection is also a balance between creativity and hallucination [13].
+Practical guidelines for choosing a sampling temperature for a specific task or problem domain are often vague or
+anecdotal. Prompt-engineering guides often provide hypothetical examples of optimal sampling temperatures for
+various tasks. However, they rarely cite any sources or provide empirical evidence.1
+As a result, the current state of choosing the optimal sampling temperature for specific problems is largely based on
+guesswork, gut instinct, non-systematic experimentation, and iterative refinement.2,3
+
+2         Methods
+2.1       Models
+
+The models used in this research project comprise nine widely-used foundational LLMs. To complement our analysis,
+we also conducted experiments using five prompts created using commonly used prompt-engineering techniques.
+First, we reviewed the prior literature to identify candidate LLMs commonly used for problem-solving tasks. We limited
+our candidate models to those that allowed the model’s sampling temperature to be specified via their API [4, 16–18].
+See Table 1 for a list of LLMs used in the experiment.
+      1
+     A few empirical studies exist that indicate sampling temperature does have an effect on LLM performance on some types of
+problem-solving tasks (e.g., code generation, engineering exams, etc.) [11, 12, 14].
+   2
+     For example, OpenAI’s GPT-3.5 API allowed users to set the sampling temperature from 0.0 to 1.0 with a default of 0.7. GPT-4’s
+API expanded this range from 0.0 to 2.0 with a default of 1.0. No explanation from OpenAI has been provided for these default
+values or their change from GPT-3.5 to GPT-4 [15].
+   3
+     Even the GPT-4 Technical Report explains that the authors used their “best-guess” when choosing sampling temperatures while
+evaluating GPT-4 on various benchmarks. See Appendix A in the GPT-4 Technical Report [16].
+
+
+                                                                2
+                       The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+                               Name                        Vendor        Released         License   Source
+                               Claude 3 Opus               Anthropic     2024-03-04       Closed    [19, 20]
+                               Command R+                  Cohere        2024-04-04        Open     [21, 22]
+                               Gemini 1.0 Pro              Google        2023-12-06       Closed    [23, 24]
+                               Gemini 1.5 Pro (Preview)    Google        2024-02-15       Closed    [25, 26]
+                               GPT-3.5 Turbo               OpenAI        2022-11-30       Closed    [17, 27]
+                               GPT-4                       OpenAI        2023-03-14       Closed    [16, 18]
+                               Llama 2 7B Chat             Meta          2023-07-18        Open     [4, 28]
+                               Llama 2 70B Chat            Meta          2023-07-18        Open     [4, 28]
+                               Mistral Large               Mistral AI    2024-02-26       Closed    [29]
+
+                                               Table 1: LLMs used in the experiment.
+
+
+Next, we reviewed the existing literature for commonly used prompt-engineering techniques. We limited our candidate
+prompts to those that could be performed in a single request-and-response cycle with one-shot in-context learning. We
+excluded multi-step agents, few-shot learning, and model fine-tuning.
+As a result, we selected five prompt-engineering techniques to construct our system prompts:
+
+             • Baseline - no prompt engineering; the LLM is instructed to return only a single multiple-choice answer as its
+               output (e.g., ‘Answer(“C”)’ ).
+             • Domain Expertise – the system prompt specifies that the LLM is an expert in the problem domain of the
+               exam (e.g., “medicine”) or the topic of the problem (e.g., “anatomy”) [2].
+             • Self-recitation – the system prompt instructs the LLM to recite its own internal knowledge about the problem
+               before answering the question [2, 30].
+             • Chain-of-Thought (CoT) – the system prompt instructs the LLM to “think step-by-step” to encourage it to
+               reason through the problem procedurally [31, 32].
+             • Composite – the system prompt combines domain expertise, self-recitation, chain-of-thought, and adds
+               self-criticism [33, 34].
+
+Finally, we provided the LLM with a single example problem-and-solution pair for one-shot in-context learning. The
+example solution was adapted for each prompt based on the prompt-engineering technique used. For example, the CoT
+prompt included a chain of thought in its solution. See Figure 10 in the Appendix for a sample prompt.
+
+2.2        Data
+
+The test dataset used in this research study consists of a series of Multiple-Choice Question-and-Answer (MCQA)
+exams derived from widely used LLM performance benchmarks.
+First, we reviewed the prior literature to identify benchmarks frequently used to evaluate LLMs. We limited our
+candidate benchmarks to those containing MCQA problems so that we could use correct-answer accuracy as our
+primary performance metric.
+Next, we selected a set of problems that covered a range of problem domains (e.g., math, science, law, etc.) and
+difficulty levels (e.g., secondary school, university, etc.) These problem sets can be seen in Table 2.
+Then, we converted the benchmark problems from their original data format into a standardized data structure using the
+JSON Lines (JSON-L) format [41]. Our standardized set of exams allowed us to use the exams interchangeably without
+modifying the code in the test harness. See Figure 11 in the Appendix for a sample of an MCQA problem.
+Finally, we created two MCQA exams of different sizes. We created a large exam with 1,000 questions by randomly
+sampling 100 problems from each of the ten problem sets. This 1,000-question (large) exam was used with GPT-3.5 to
+perform a detailed analysis of temperature across problem domains.
+Additionally, we created a smaller exam of 100 questions by randomly sampling ten questions from each of the ten
+domain-specific problem sets. This 100-question (small) exam was used for our high-level analysis of sampling
+temperature across all nine models, all five prompt-engineering techniques, and extended temperature range (0.0-1.6).4
+
+      4
+          We used the smaller 100-question exam due to cost and runtime considerations.
+
+
+                                                                    3
+                        The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+                 Problem Set                     Benchmark          Domain                        Questions       License   Source
+                 ARC Challenge Test              ARC                Science                           1,173    CC BY-SA     [35]
+                 AQUA-RAT                        AGI Eval           Math                                254   Apache v2.0   [36]
+                 Hellaswag Val                   Hellaswag          Common Sense Reasoning           10,042          MIT    [37]
+                 LogiQA (English)                AGI Eval           Logic                               651       GitHub    [36, 38]
+                 LSAT-AR                         AGI Eval           Law (Analytic Reasoning)            230          MIT    [36, 39]
+                 LSAT-LR                         AGI Eval           Law (Logical Reasoning)             510          MIT    [36, 39]
+                 LSAT-RC                         AGI Eval           Law (Reading Comprehension)         260          MIT    [36, 39]
+                 MedMCQA Valid                   MedMCQA            Medicine                          6,150          MIT    [40]
+                 SAT-English                     AGI Eval           English                             206          MIT    [36]
+                 SAT-Math                        AGI Eval           Math                                220          MIT    [36]
+
+                                      Table 2: Problem sets used to create the multi-domain MCQA exam.
+Note: The GitHub repository for LogiQA does not include a license file. However, both the paper and readme.md file states that
+"The dataset is freely available."
+
+
+2.3         Process
+
+Our experiment was designed to test the problem-solving performance of LLMs across ten models, five prompt-
+engineering techniques, ten problem domains, 100 problems within each problem domain, and all viable sampling
+temperatures. For each combination of model, prompt, exam, and temperature, we instructed the LLM to answer each
+question ten times so we could assess the average correct-answer accuracy.
+The full experiment setup can be seen in Figure 1 and Algorithm 1. However, due to cost and runtime considerations, we
+conducted a subset of the full experiment designed to capture the most valuable information as efficiently as possible.
+
+
+                                                                                     Algorithm 1 Full LLM Temperature Experiment
+                              Prompt                                                  1: for each model m in M do              ▷ 10 models
+                             Answer the
+                                                                                      2: for each prompt p in P do             ▷ 5 prompts
+                              following                                               3:     for each exam e in E do            ▷ 10 exams
+                             question …
+                                                                                      4:       for each temperature τ in T do    ▷ 16 temps
+                                    × 5 prompts                                       5:         for each problem q in Q do     ▷ 100 probs
+             Exam                                    Response                         6:           for each attempt a in A do ▷ 10 attempts
+                              Large                  Knowledge:
+                                                                         ✓            7:             Create the prompt
+          1. What is        Language
+          the capital
+                             Model
+                                                     Thought: …
+                                                     Criticism: …                     8:             Answer the question
+          of …
+                                     × 9 LLMs
+                                                     Answer(“B”)                      9:             Record the answer
+      × 100 problems                                × 10 attempts                    10:           end for
+        × 10 exams        Temperature                                                11:         end for
+                          0.0            2.0
+                        (in increments of 0.1)
+                                                                                     12:       end for
+                                                                                     13:       Save the results
+                                                                                     14:     end for
+                                                                                     15: end for
+                                                                                     16: end for
+               Figure 1: Diagram of the full experiment.                             17: Process the results
+                                                                                     18: Analyze the results
+
+
+First, we instructed GPT-3.5 to complete the 100-question (small) exam using the CoT prompt with temperatures
+ranging from 0.0 to 2.0 in increments of 0.1. This allowed us to determine the range of viable sampling temperatures to
+explore. 5
+Performance began to drop rapidly after a temperature of 1.0 until the generated text became incoherent at 1.6. As a
+result, we stopped the initial temperature sweep at 1.6 and limited the rest of our sweeps from 0.0 to 1.0.
+Next, we instructed the other eight LLMs to complete the 100-question (small) exam using the CoT prompt with
+temperatures from 0.0 to 1.0. This allowed us to determine if the results generalize to other LLMs.
+      5
+          For this experiment, we fixed all other sampling parameters (e.g., top-k, top-p, etc.) to isolate the effect of temperature.
+
+
+                                                                                 4
+                  The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+Then, we instructed GPT-3.5 to complete the 100-question (small) exam using each of the five prompts over temperatures
+from 0.0 to 1.0. This allowed us to determine if the results generalize over various prompt-engineering techniques.
+Finally, we instructed GPT-3.5 to complete the 1,000-question (large) exam using the CoT prompt with temperatures
+from 0.0 to 1.0. This allowed us to determine if the results were domain-specific or generalized across problem domains.
+
+2.4    Metrics
+
+To test our hypothesis, we measured the LLM’s correct-answer accuracy as our primary performance metric. For each
+combination of model, prompt, exam, and temperature, we calculated the accuracy as the number of correct answers
+from ten attempts at each problem. Then, we computed the average (mean) accuracy across all problems.
+To further support our findings, we also measured the similarity of the LLM’s responses using a series of text-similarity
+metrics. These metrics are defined as follows:
+
+        • Jaccard similarity – the ratio of the intersection to the union of word sets in the output text [42].
+        • Bag-of-Words (BoW) similarity – comparison of the frequency of each word, ignoring order [43].
+        • TF-IDF similarity – comparison of word frequency weighted by inverse document frequency [44].
+        • Levenshtein similarity – the number of edits needed to change one string of text into the other [45].
+        • BLEU score – comparison of similarity based on n-gram overlap [46].
+        • SBERT similarity – semantic similarity computed using Sentence-BERT embeddings [47].
+
+2.5    Analysis
+
+We used the Kruskal-Wallis test to evaluate the statistical significance of any changes in accuracy as a function of
+temperature [48]. We chose the Kruskal-Wallis test because the data (i.e., correct-answer accuracy by question) were
+not normally distributed. Rather, they were bimodally distributed with centers at 0.0 and 1.0.
+
+
+3     Results
+
+3.1    Accuracy vs. Temperature
+
+Our analysis revealed that the problem-solving performance of LLMs remained relatively stable across sampling
+temperatures from 0.0 to 1.0 for all LLMs, prompt-engineering techniques, and problem domains. Using GPT-3.5 with
+a CoT prompt on the 1,000-question exam from 0.0 to 1.0, the Kruskal-Wallis test yielded H(10) = 10.439, p = 0.403.
+First, we analyzed the performance of GPT-3.5 using the CoT prompt on the 100-question exam. Accuracy remained
+stable over temperatures from 0.0 to 1.0. However, after a temperature of 1.0, the text rapidly became incoherent, and
+the accuracy began to drop until it reached zero around a temperature of 1.6. See Figure 2.
+
+
+                                           1.0
+
+
+                                           0.8
+
+
+                                           0.6
+
+                                Accuracy
+                                           0.4
+
+
+                                           0.2
+
+
+                                           0.0
+                                              0.0   0.2   0.4   0.6     0.8   1.0   1.2   1.4   1.6
+                                                                      Temperature
+
+
+    Figure 2: Accuracy by temperature from 0.0 to 1.6 for GPT-3.5 using the CoT prompt on the 100-question exam.
+
+
+                                                                       5
+                      The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+Second, we analyzed the performance of all nine LLMs using the CoT prompt on the 100-question exam. Accuracy
+also remained stable across all of the LLMs, except for Llama 2 7B. The performance of most LLMs showed a gradual
+(non-significant) decrease in performance as a function of temperature. See Figure 3 and Table 3.
+
+
+             1.0
+                                                                          Model
+                                                                         Claude 3 Opus
+                                                                                                Model              H(10)     p-value
+                                                                         Command R+
+             0.8                                                                                Claude 3 Opus      1.735       0.998
+                                                                         Gemini Pro 1.0
+                                                                         Gemini Pro 1.5
+                                                                                                Command R+         1.771       0.998
+                                                                         GPT-3.5 Turbo          Gemini Pro 1.0     7.379       0.689
+             0.6                                                                                Gemini Pro 1.5     3.119       0.978
+
+  Accuracy
+                                                                         GPT-4
+                                                                         Llama 2 70B            GPT-3.5 Turbo      2.042       0.996
+                                                                         Llama 2 7B             GPT-4              3.789       0.956
+             0.4                                                         Mistral Large
+                                                                                                Llama 2 70B        3.677       0.961
+                                                                                                Llama 2 7B        17.086       0.072
+             0.2                                                                                Mistral Large      3.069       0.980
+
+                                                                                            Table 3: Kruskal-Wallis test results by model
+             0.0                                                                            using the CoT prompt on the 100-question
+                0.0   0.2      0.4      0.6        0.8       1.0                            exam.
+                               Temperature
+
+Figure 3: Accuracy by temperature and model using the
+CoT prompt on the 100-question exam.
+
+Llama 2 7B did not perform better than statistically random guesses. Its poor performance was due to generating
+incorrectly formatted answers (39%) and correctly formatted but incorrect answers (36%). Its all-or-nothing behavior at
+a temperature of 0.0 versus more random behavior from 0.1 to 1.0 led to a much lower, yet still non-significant, p-value.
+Third, we analyzed the performance of GPT-3.5 using each of the five prompts on the 100-question exam. Accuracy
+remained stable for all temperatures across all prompt-engineering techniques. The CoT prompt outperformed the other
+four prompts. As a result, we used the CoT prompt for all single-prompt experiments. See Figure 4 and Table 4.
+
+
+             1.0
+                                                                                          Prompt              H(10)    p-value
+
+             0.8                                                                          Baseline             0.420       1.000
+                                                                                          Domain Expert        0.548       1.000
+                                                                                          Self-recitation      1.403       0.999
+             0.6                                                                          Chain of Thought     2.042       0.996
+
+  Accuracy
+                                                                                          Composite            1.000       1.000
+             0.4                                  Prompt                        Table 4: Kruskal-Wallis test results by prompt for
+                                                Baseline
+                                                Domain Expert
+                                                                                GPT-3.5 on the 100-question exam.
+             0.2                                Self-Recitation
+                                                Chain of Thought
+                                                Composite
+             0.0
+                0.0   0.2       0.4       0.6        0.8           1.0
+                                Temperature
+
+Figure 4: Accuracy by temperature and prompt for
+GPT-3.5 on the 100-question exam.
+
+Finally, we analyzed the performance of GPT-3.5 using the CoT prompt on all ten exams. Accuracy remained stable for
+all temperatures across all problem domains based on visual analysis. However, the LSAT-AR and SAT-Math exams
+showed statistically significant differences in the Kruskal-Wallis p-values. 6 See Figure 5 and Table 5.
+     6
+         We considered the ARC Challenge results to be non-significant since they were greater than the significance threshold of 0.05.
+
+
+                                                                            6
+                                     The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+
+               1.0
+                                                                                                 Exam                                           Exam                     H(10)   p-value
+                                                                                                AQUA-RAT
+                                                                                                ARC Challenge                                   AQUA-RAT                10.320     0.413
+               0.8                                                                              Hellaswag                                       ARC Challenge           16.390     0.089
+                                                                                                LogiQA                                          Hellaswag                4.473     0.924
+                                                                                                LSAT-AR
+               0.6                                                                                                                              LogiQA                   3.208     0.976
+
+  Accuracy
+                                                                                                LSAT-LR
+                                                                                                LSAT-RC
+                                                                                                                                                LSAT-AR                 37.874   < 0.001
+                                                                                                MedMCQA                                         LSAT-LR                  7.816     0.647
+               0.4                                                                              SAT-English                                     LSAT-RC                  4.037     0.946
+                                                                                                SAT-Math                                        MedMCQA                  2.334     0.993
+                                                                                                                                                SAT-English              3.937     0.950
+               0.2                                                                                                                              SAT-Math                21.276     0.019
+
+                                                                                                                                           Table 5: Kruskal-Wallis test results by exam
+               0.0
+                  0.0                0.2         0.4            0.6         0.8     1.0                                                    for GPT-3.5 using the CoT prompt.
+                                                 Temperature
+
+Figure 5: Accuracy by temperature and exam for GPT-3.5
+using the CoT prompt.
+
+
+We performed the Dunn-Bonferroni test on the LSAT-AR and SAT-Math results [49]. It revealed that the all-or-nothing
+behavior of responses generated at a temperature of 0.0 versus the more random responses from 0.1 to 1.0 caused the
+anomaly. The correct-answer accuracy for each individual problem varied significantly when evaluated pairwise across
+temperatures. However, the average accuracy for all problems remained similar across temperatures.
+
+
+3.2                Text Variability vs. Temperature
+
+To further support our results, we analyzed text variability as a function of temperature. Our findings show a clear trend
+of decreasing text similarity (thus increasing text variability) as temperature increases. Text similarity decreases rapidly
+after a temperature of 1.0, corresponding to the rapid decrease in accuracy observed above τ = 1.0. See Figure 6.
+These results are consistent with our understanding of sampling temperature, indicating that higher temperatures
+produce more widely varied outputs. Furthermore, these results hold regardless of the LLM, prompt-engineering
+technique, or problem domain. See Figures 7, 8, and 9.
+
+
+                   1.0                                                                                                              1.0
+
+
+
+                   0.8                                                                                                              0.8
+
+
+
+
+                                                                                                                TF-IDF Similarity
+                   0.6                                                                                                              0.6
+                                                                                                                                                 Model
+
+      Similarity
+                                                                                                                                                Claude 3 Opus
+                                                                                                                                                Command R+
+                   0.4               Metric                                                                                         0.4         GPT-3.5 Turbo
+                               Jaccard Similarity                                                                                               GPT-4
+                               BoW Similarity                                                                                                   Gemini Pro 1.0
+                               TF-IDF Similarity                                                                                                Gemini Pro 1.5
+                   0.2         Levenshtein Similarity                                                                               0.2         Llama 2 70B
+                               BLEU Score                                                                                                       Llama 2 7B
+                               SBERT Similarity                                                                                                 Mistral Large
+                   0.0                                                                                                              0.0
+                         0.0   0.2         0.4   0.6      0.8         1.0   1.2   1.4     1.6                                             0.0      0.2           0.4      0.6    0.8       1.0
+                                                        Temperature                                                                                              Temperature
+
+Figure 6: Text similarity by temperature and metric for GPT-                                               Figure 7: TF-IDF text similarity by temperature and
+3.5 using CoT prompting on the 100-question exam over                                                      model using the CoT prompt on the 100-question
+sampling temperatures from 0.0 to 1.6.                                                                     exam over sampling temperatures from 0.0 to 1.0
+
+
+
+                                                                                                   7
+                                       The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+
+                        1.0                                                                                 1.0
+
+
+
+                        0.8                                                                                 0.8
+
+
+
+
+    TF-IDF Similarity                                                                   TF-IDF Similarity
+                        0.6                                                                                 0.6           Exam
+                                                                                                                        AQUA-RAT
+                                                                                                                        ARC Challenge
+                                                                                                                        Hellaswag
+                        0.4                                                                                 0.4         LSAT-AR
+                                      Prompt                                                                            LSAT-LR
+                                    Baseline                                                                            LSAT-RC
+                                    Domain Expert                                                                       LogiQA
+                        0.2         Self-Recitation                                                         0.2
+                                                                                                                        MedMCQA
+                                    Chain of Thought                                                                    SAT-English
+                                    Composite                                                                           SAT-Math
+                        0.0                                                                                 0.0
+                              0.0      0.2         0.4          0.6   0.8   1.0                                   0.0      0.2          0.4      0.6   0.8   1.0
+                                                       Temperature                                                                      Temperature
+
+
+Figure 8: TF-IDF text similarity by temperature and                                   Figure 9: TF-IDF text similarity by temperature and exam
+prompt for GPT-3.5 on the 100-question exam over sam-                                 for GPT-3.5 using the CoT prompt over sampling temper-
+pling temperatures from 0.0 to 1.0.                                                   atures from 0.0 to 1.0
+
+
+
+4                   Discussion
+
+4.1                     Interpretation
+
+Based on these results, changes in temperature from 0.0 to 1.0 do not have a statistically significant effect on the problem-
+solving performance of LLMs. These results appear to generalize across LLMs, prompt-engineering techniques, and
+problem domains. However, there are a few potential exceptions to these general findings.
+Therefore, we recommend setting an LLM’s sampling temperature to 0.0 for problem-solving tasks. This temperature
+maximizes reproducibility without compromising accuracy. In addition, it helps avoid the inevitable drop-off in
+performance that occurs beyond a temperature of 1.0. However, exceptions to this guidance should be taken into
+consideration.
+
+
+4.2                     Limitations
+
+There were several limitations to our research study due to cost and runtime considerations:
+First, our study was limited to a subset of popular LLMs. As a result, our findings may not hold for other LLMs that
+were excluded from our experiment.
+Second, we only explored a subset of prompt-engineering techniques using a single prompt-and-response cycle with
+one-shot in-context learning. As a result, there may be more complex prompts or agent architectures that better leverage
+sampling temperature for creativity in their problem-solving capabilities.
+Third, our study was limited to a subset of problems, problem domains, and problem-solving tasks. As a result, our
+findings may not hold for larger data sets, different problem domains, or other types of problem-solving tasks.
+Fourth, due to time and cost constraints, we limited our study to two test sets of 1,000 and 100 randomly selected
+questions from standard benchmarks. These limited sample sizes may have introduced bias into the results. Utilizing a
+larger and more diverse test set would enhance the statistical reliability of our findings.
+Fifth, we had to limit the sampling temperature range we explored from 0.0 to 1.0 for all combinations of models,
+prompts, and exams, except for GPT-3.5 using CoT prompting on the 100-question exam. As a result, the temperature
+hyperparameter of other LLMs may operate differently at temperatures above 1.0.
+Sixth, we fixed all other sampling parameters (e.g., top-p, top-k, repetition penalty, etc.) to isolate the effect of sampling
+temperature. As a result, there may be combinations of sampling parameters that result in different outcomes.
+
+
+                                                                                  8
+                The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+Finally, we could only explore a subset of the various combinations of models, prompts, exams, and temperatures. As a
+result, other combinations of LLMs, prompt-engineering techniques, and problem domains may exist where temperature
+plays a more important role in problem-solving performance.
+
+4.3   Implications
+
+This research study provides empirical evidence that changes in sampling temperature in the range of 0.0 to 1.0 do not
+significantly impact the problem-solving capabilities of LLMs on MCQA problems.
+Answering this question may save AI engineers significant time and resources evaluating various sampling temperatures
+for their LLM agents and applications. In addition, it may reduce unproductive debates in the prompt-engineering
+community regarding the optimal sampling temperatures for various problem-solving tasks.
+This research also provides broader insights for AI researchers studying model hallucination and problem-solution
+state-space search with LLMs. Our results show that increasing LLM temperature up to 1.0 does not cause the LLM to
+hallucinate in ways that lead to incorrect MCQA solutions. In addition, higher temperatures do not appear to improve
+MCQA solution-space search in ways that lead to correct solutions more often than lower temperatures.
+
+4.4   Future Research
+
+To improve upon this research, we propose the following follow-up experiments:
+First, we recommend conducting this experiment with additional LLMs. Other proprietary and open-source LLMs may
+utilize temperature in ways that benefit their specific models but did not benefit the LLMs we tested.
+Second, we recommend expanding beyond MCQA problems to other types of problem-solving tasks whose correct
+answers are more open-ended. The limited effects of sampling temperature in our experiments may have simply resulted
+from the constraints imposed by the structure of MCQA problems.
+Third, we recommend conducting additional experiments with more MCQA problems and problem domains. We
+recommend specifically targeting tasks and problem domains that require more creative solutions or lateral “out-of-the-
+box” thinking.
+Fourth, we recommend extending the sampling temperature range until accuracy drops to zero for each LLM, prompt,
+and exam. However, it should be noted that as the generated text becomes more random, the number of tokens in each
+response increases significantly, leading to a considerable increase in runtime and cost to explore temperatures above
+1.0.
+Finally, we recommend a more in-depth error analysis to determine if any sub-types of problems within these problem
+domains benefit from changes to sampling temperature. It is possible that statistical noise or averaging may have hidden
+individual problems that were sensitive to changes in sampling temperature.
+
+5     Conclusion
+This research study empirically investigated the effect of sampling temperature on the problem-solving performance of
+LLMs across multiple problem domains.
+We demonstrated that changes in sampling temperature from 0.0 to 1.0 do not produce statistically significant differences
+in problem-solving performance on MCQA problems across multiple LLMs, prompt-engineering techniques, and
+problem domains.
+These results have practical implications for AI engineers using LLMs to develop new AI systems. Additionally, they
+have theoretical implications for AI researchers studying model hallucination and solution-space search with LLMs.
+
+References
+ [1] G. Mialon, R. Dessì, M. Lomeli, C. Nalmpantis, R. Pasunuru, R. Raileanu, B. Rozière, T. Schick, J. Dwivedi-Yu,
+     A. Celikyilmaz, E. Grave, Y. LeCun, and T. Scialom, “Augmented language models: a survey,” arXiv, 2 2023.
+ [2] J. White, Q. Fu, S. Hays, M. Sandborn, C. Olea, H. Gilbert, A. Elnashar, J. Spencer-Smith, and D. C. Schmidt, “A
+     prompt pattern catalog to enhance prompt engineering with ChatGPT,” arXiv, 2 2023.
+ [3] OpenAI, “OpenAI - API reference,” 2023. [Online]. Available: https://platform.openai.com/docs/api-reference/
+     chat/create
+
+
+                                                           9
+                The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+ [4] Llama-2-Team, “Llama 2: Open foundation and fine-tuned chat models,” arXiv, 7 2023.
+ [5] C. Wang, S. X. Liu, and A. H. Awadallah, “Cost-effective hyperparameter optimization for large language model
+     generation inference,” 2023.
+ [6] D. H. Ackley, G. E. Hinton, and T. J. Sejnowski, “A learning algorithm for Boltzmann machines,” Cognitive
+     Science, vol. 9, pp. 147–169, 1985.
+ [7] G. Hinton, O. Vinyals, and J. Dean, “Distilling the knowledge in a neural network,” arXiv, 3 2015.
+ [8] P.-H. Wang, S.-I. Hsieh, S.-C. Chang, Y.-T. Chen, J.-Y. Pan, W. Wei, and D.-C. Juan, “Contextual temperature for
+     language modeling,” arXiv, 12 2020.
+ [9] Microsoft, “Completions - learn how to generate or manipulate text,” 2023. [Online]. Available:
+     https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/completions
+[10] J. Shieh, “Best practices for prompt engineering with OpenAI API,” 2024. [Online]. Available:
+     https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api
+[11] F. F. Xu, U. Alon, G. Neubig, and V. J. Hellendoorn, “A systematic evaluation of large language models of code,”
+     in Proceedings of the 6th ACM SIGPLAN International Symposium on Machine Programming. Association for
+     Computing Machinery, 2022, pp. 1–10.
+[12] Y. Zhu, J. Li, G. Li, Y. Zhao, J. Li, Z. Jin, and H. Mei, “Improving code generation by dynamic temperature
+     sampling,” arXiv, 9 2023.
+[13] M. Lee, “A mathematical investigation of hallucination and creativity in GPT models,” Mathematics, vol. 11, p.
+     2320, 5 2023.
+[14] V. Pursnani, Y. Sermet, and I. Demir, “Performance of ChatGPT on the US fundamentals of engineering exam:
+     Comprehensive assessment of proficiency and potential implications for professional environmental engineering
+     practice,” arXiv, 4 2023.
+[15] OpenAI, “Api temperature change from 0 to 1 to 0 to 2 in ’playground’,” 2023. [Online]. Available:
+     https://community.openai.com/t/api-temperature-change-from-0-to-1-to-0-to-2-in-playground/217755
+[16] ——, “GPT-4 technical report,” arXiv, 3 2023. [Online]. Available: https://arxiv.org/abs/2303.08774
+[17] ——, “Introducing ChatGPT,” 11 2022. [Online]. Available: https://openai.com/blog/chatgpt
+[18] ——, “GPT-4,” 3 2023. [Online]. Available: https://openai.com/research/gpt-4
+[19] Anthropic, “Introducing the next generation of claude anthropic,” 2024. [Online]. Available: https:
+     //www.anthropic.com/news/claude-3-family
+[20] ——, “The claude 3 model family: Opus, sonnet, haiku,” 2024. [Online]. Available: https:
+     //www.anthropic.com/claude-3-model-card
+[21] Cohere, “Command r+,” 2024. [Online]. Available: https://docs.cohere.com/docs/command-r-plus
+[22] ——, “Model card for c4ai command r+,” 2024. [Online]. Available: https://huggingface.co/CohereForAI/
+     c4ai-command-r-plus
+[23] S. Pichai and D. Hassabis, “Introducing gemini: Google’s most capable ai model yet,” 2023. [Online]. Available:
+     https://blog.google/technology/ai/google-gemini-ai/
+[24] Gemini-Team, “Gemini: A family of highly capable multimodal models,” arXiv, 12 2023.
+[25] S. Pichai and D. Hassabis, “Introducing gemini 1.5, google’s next-generation ai model,” 2024. [Online]. Available:
+     https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/
+[26] Gemini-Team, “Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context,” 2024.
+     [Online]. Available: https://arxiv.org/abs/2403.05530
+[27] OpenAI, “Models - openai api.” [Online]. Available: https://platform.openai.com/docs/models/gpt-3-5-turbo
+[28] Meta, “Meta and microsoft introduce the next generation of llama | meta,” 2023. [Online]. Available:
+     https://about.meta.com/news/2023/07/llama-2/
+[29] Mistral-AI-Team, “Au large | mistral ai | frontier ai in your hands,” 2024. [Online]. Available:
+     https://mistral.ai/news/mistral-large/
+[30] Z. Sun, X. Wang, Y. Tay, Y. Yang, and D. Zhou, “Recitation-augmented language models,” in The Eleventh
+     International Conference on Learning Representations, 10 2023.
+[31] T. Kojima, S. S. Gu, M. Reid, Y. Matsuo, and Y. Iwasawa, “Large language models are zero-shot reasoners,” in
+     Advances in Neural Information Processing Systems, vol. 35, 5 2022, pp. 22 199–22 213.
+[32] J. Wei, X. Wang, D. Schuurmans, M. Bosma, B. Ichter, F. Xia, E. Chi, Q. Le, and D. Zhou, “Chain-of-thought
+     prompting elicits reasoning in large language models,” arXiv, 1 2022.
+[33] S. Huo, N. Arabzadeh, and C. L. A. Clarke, “Retrieving supporting evidence for generative question answering,”
+     arXiv, 9 2023.
+
+
+                                                         10
+                 The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+[34] R. Wang, H. Wang, F. Mi, Y. Chen, R. Xu, and K.-F. Wong, “Self-critique prompting with large language models
+     for inductive instructions,” arXiv, 5 2023.
+[35] P. Clark, I. Cowhey, O. Etzioni, T. Khot, A. Sabharwal, C. Schoenick, and O. Tafjord, “Think you have solved
+     question answering? Try ARC, the AI2 reasoning challenge,” ArXiv, 3 2018.
+[36] W. Zhong, R. Cui, Y. Guo, Y. Liang, S. Lu, Y. Wang, A. Saied, W. Chen, and N. Duan, “AGIEval: A human-centric
+     benchmark for evaluating foundation models,” ArXiv, 4 2023.
+[37] R. Zellers, A. Holtzman, Y. Bisk, A. Farhadi, and Y. Choi, “HellaSwag: Can a machine really finish your sentence?”
+     in Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 2019.
+[38] J. Liu, L. Cui, H. Liu, D. Huang, Y. Wang, and Y. Zhang, “Logiqa: A challenge dataset for machine reading
+     comprehension with logical reasoning,” in International Joint Conference on Artificial Intelligence, 2020.
+[39] S. Wang, Z. Liu, W. Zhong, M. Zhou, Z. Wei, Z. Chen, and N. Duan, “From lsat: The progress and challenges of
+     complex reasoning,” IEEE/ACM Transactions on Audio, Speech and Language Processing, vol. 30, pp. 2201–2216,
+     8 2021.
+[40] A. Pal, L. K. Umapathi, and M. Sankarasubbu, “MedMCQA: A large-scale multi-subject multi-choice dataset
+     for medical domain question answering,” in Proceedings of the Conference on Health, Inference, and Learning.
+     PMLR, 2022, pp. 248–260.
+[41] I. Ward, “JSON lines,” 2014. [Online]. Available: https://jsonlines.org/
+[42] P. Jaccard, “The distribution of flora in the alpine zone,” New Phytologist, vol. 11, pp. 37–50, 2 1912.
+[43] Z. S. Harris, “Distributional structure,” WORD, vol. 10, pp. 146–162, 8 1954.
+[44] K. S. Jones, “A statistical interpretation of term specificity and its application in retrieval,” Journal of Documenta-
+     tion, vol. 28, pp. 11–21, 1 1972.
+[45] V. Levenshtein, “Binary codes capable of correcting deletions, insertions and reversals,” Soviet Physics Doklady,
+     vol. 10, pp. 707–710, 1966.
+[46] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, “BLEU,” in Proceedings of the 40th Annual Meeting on
+     Association for Computational Linguistics - ACL ’02. Association for Computational Linguistics, 2001, p. 311.
+[47] N. Reimers and I. Gurevych, “Sentence-BERT: Sentence embeddings using Siamese BERT-networks,” in Pro-
+     ceedings of the 2019 Conference on Empirical Methods in Natural Language Processing. Association for
+     Computational Linguistics, 8 2019.
+[48] W. H. Kruskal and W. A. Wallis, “Use of ranks in one-criterion variance analysis,” Journal of
+     the American Statistical Association, vol. 47, no. 260, pp. 583–621, 1952. [Online]. Available:
+     https://www.tandfonline.com/doi/abs/10.1080/01621459.1952.10483441
+[49] O. J. Dunn, “Multiple comparisons using rank sums,” Technometrics, vol. 6, no. 3, pp. 241–252, 1964. [Online].
+     Available: https://www.tandfonline.com/doi/abs/10.1080/00401706.1964.10490181
+
+
+
+
+                                                            11
+                 The Effect of Sampling Temperature on Problem Solving in Large Language Models
+
+
+A     Appendix
+
+[System Prompt]
+You are an expert in {{expertise}}.
+Your task is to answer the following multiple-choice questions.
+First, you should recite all of the relevant knowledge you have about the question and each option.
+Next, you should think step-by-step through the problem to ensure you have the correct answer.
+Then, you should critically evaluate your thoughts to identify any flaws in your facts, logic, and reasoning.
+Finally, you MUST answer the question using the following format ’Action: Answer("[choice]")’
+The parameter [choice] is the letter or number of the answer you want to select (e.g. "A", "B", "C", or "D")
+For example, ’Answer("C")’ will select choice "C" as the best answer.
+The answer MUST ALWAYS be one of the available choices; it CANNOT be "None of the Above".
+If you think the answer is "none of the above", then you MUST select the most likely answer.
+[Example Problem]
+Question: What is the capital of the state where Johns Hopkins University is located?
+Choices:
+  A: Baltimore
+  B: Annapolis
+  C: Des Moines
+  D: Las Vegas
+[Example Solution]
+Knowledge:
+  Johns Hopkins University is located in Baltimore, Maryland.
+  A: Baltimore is a city located in the State of Maryland, but it is not the capital of Maryland.
+  B: Annapolis is the capital of the State of Maryland.
+  C: Des Moines is a city located in the State of Iowa and is the capital of Iowa.
+  D: Las Vegas is located in the State of Nevada, but it is not the capital of Nevada.
+Thought:
+  Johns Hopkins University is located in Baltimore.
+  Baltimore is a city located in the state of Maryland.
+  The capital of Maryland is Baltimore.
+  Therefore, the capital of the state where Johns Hopkins University is located is Baltimore.
+  The answer is A: Baltimore.
+Criticism:
+  You are correct that Johns Hopkins is located in the State of Maryland.
+  However, the capital of Maryland is Annapolis, not Baltimore.
+  So, the correct answer is actually B: Annapolis.
+Action: Answer("B")
+
+
+     Figure 10: Sample of the composite system prompt with a one-shot example (i.e., problem-and-solution pair).
+
+{
+    "source": "arc/arc-challenge-test",
+    "source_id": 1,
+    "topic": "Science",
+    "context": "",
+    "question": "An astronomer observes that a planet rotates faster
+                  after a meteorite impact. Which is the most likely effect
+                  of this increase in rotation?",
+    "choices": {
+      "A": "Planetary density will decrease.",
+      "B": "Planetary years will become longer.",
+      "C": "Planetary days will become shorter.",
+      "D": "Planetary gravity will become stronger." },
+    "answer": "C",
+    "solution":""
+}
+
+         Figure 11: Sample of an MCQA problem in JSON-L format – with whitespace added for readability.
+
+
+
+
+                                                         12
+

@@ -1,0 +1,1449 @@
+ 
+ A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?An Evaluation of LLMs’ Humour Alignment with Comedians 
+ Report GitHub Issue 
+ × 
+ Title: 
+ Content selection saved. Describe the issue below: 
+ Description: 
+ Submit without GitHub 
+ Submit in GitHub 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ Back to arXiv 
+ Why HTML? 
+ Report Issue 
+ Back to Abstract 
+ Download PDF 
+ Abstract. 
+ 1 Introduction 
+ 1.1 Motivation: investigate the potential and implications of LLMs for comedy writing 
+ 1.1.1 Using LLMs for humour, a task with human-level difficulty 
+ 1.1.2 The utility of instruction-tuned LLMs as Creativity Support Tools 
+ 1.1.3 Socio-Technical Systems concerns with LLMs for creative writing 
+ 1.2 Investigating hypotheses about using LLMs to write comedy 
+ 1.2.1 Biases in large language models 
+ 1.2.2 Potential censorship of speech labeled as “ offensive ” 
+ 1.2.3 Missing context 
+ 1.2.4 Homogeneisation 
+ 1.2.5 Investigating hypotheses via a mixed-methods study 
+ 2 Methods 
+ 2.1 Writing exercise 
+ 2.2 Creativity Support Tools evaluation 
+ 2.3 Focus Group Questions 
+ 2.4 Focus Group Analysis 
+ 3 Quantitative Results and Creativity Support Index 
+ 4 Qualitative Results from Focus Group Discussions 
+ 4.1 Use-cases of LLMs in comedy writing and quality of generated outputs 
+ 4.1.1 LLMs can be an effective first step for quickly generating content and structure. 
+ 4.1.2 Generated outputs are generally of poor comedic quality. 
+ 4.1.3 Participants had difficulty steering LLMs away from bland and generic outputs. 
+ 4.1.4 The human writer still produces the humorous elements in co-written text. 
+ 4.1.5 Lack of concern over ownership over generated content 
+ 4.2 Limitations introduced by moderation and safety filtering 
+ 4.2.1 Moderation and safety filtering limits writers’ creative agency. 
+ 4.2.2 Moderation limits writers’ ability to use AI with their preferred subject matter. 
+ 4.3 Marginalization of minority identities 
+ 4.3.1 LLM-generated outputs reflect a particular set of ethics, values and norms. 
+ 4.3.2 When prompted to reflect non-dominant identities, LLMs made only shallow adjustments. 
+ 4.3.3 Moderation makes LLMs less useful to minorities by suppressing content by and about marginalized identities. 
+ 4.3.4 Moderation makes LLMs less useful to minorities by suppressing topics important to people from marginalized identities. 
+ 4.4 Fundamental limitations of AI in contrast to human writers 
+ 4.4.1 AI’s inability to draw on personal experience is a fundamental limitation. 
+ 4.4.2 AI’s lack of context (understanding of its audience and location) is a fundamental limitation. 
+ 4.4.3 As a text-only medium, (current) LLMs are missing critical aspects of comedy: delivery and surprise. 
+ 4.5 Concerns around data sources used to train LLMs 
+ 4.5.1 Participants criticized the training of models on copyrighted data, but acknowledged its positive impact on performance. 
+ 4.5.2 The lack of diversity in the training data perpetuates majority viewpoints, to the detriment of people from underrepresented identities. 
+ 5 Discussion 
+ 5.1 Towards community-based cultural value alignment for humour and comedy 
+ 5.1.1 Complexity of global cultural value alignment of LLMs for creative uses 
+ 5.1.2 The problem with global fine-tuning of Harmless, Helpful and Honest conversational agents 
+ 5.1.3 Community-based value alignment of LLMs 
+ 5.1.4 Avoiding unnecessary paternalism in LLMs for creative uses 
+ 5.2 Humour and comedy uses of LLMs require incorporating the context 
+ 5.2.1 Recent AI ethics research on relational context for LLMs 
+ 5.2.2 Humour and the human context 
+ 5.3 Data ownership and the impact of AI on artists 
+ 6 Mitigations and conclusion 
+ Acknowledgements 
+ 7 Ethical guidance 
+ 7.1 Ethical considerations 
+ 7.2 Researchers’ positionality 
+ 7.3 Adverse impacts 
+ References 
+ A Related Work on Computational Humour, AI and Comedy 
+ A.1 Humour generation, from template-based systems to prompting 
+ A.2 LLMs for comedy performance 
+ B Participant questionnaire 
+ B.1 Your past experience with AI systems in general. 
+ B.2 Your experience with the AI system for writing comedy material 
+ B.3 Creativity Support Index of the AI writing tool 
+ B.4 Free-form questions about the AI system for writing. 
+ C Focus Group Questions 
+ C.1 Qualitative questions about the specific writing task 
+ C.2 General discussion points about AI tools for comedy 
+ C.3 Debriefing questions 
+ License: CC BY 4.0
+arXiv:2405.20956v2 [cs.AI] 03 Jun 2024 
+ A Robot Walks into a Bar : Can Language Models Serve as Creativity Support Tools for Comedy?
+ An Evaluation of LLMs’ Humour Alignment with Comedians 
+ Conference: The 2024 ACM Conference on Fairness, Accountability, and Transparency; June 3–6, 2024; Rio de Janeiro, Brazil The 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT ’24), June 3–6, 2024, Rio de Janeiro, Brazil DOI: 10.1145/3630106.3658993 ISBN: 979-8-4007-0450-5/24/06 13794.108 CCS: Applied computing Performing arts CCS: Human-centered computing Empirical studies in HCI CCS: Social and professional topics Censoring filters CCS: Human-centered computing User studies 
+ Piotr W. Mirowski
+ Note: Both authors contributed equally to this research.
+ email: piotrmirowski@deepmind.com 
+ Affiliation: Google DeepMind , 5 New Street Square , London , UK 
+ , 
+ Juliette Love
+ email: juliettelove@deepmind.com 
+ Affiliation: Google DeepMind , 5 New Street Square , London , UK 
+ , 
+ Kory Mathewson
+ email: korymath@deepmind.com 
+ Affiliation: Google DeepMind , 5 New Street Square , Montréal, QC , Canada 
+ and 
+ Shakir Mohamed
+ email: shakir@deepmind.com 
+ Affiliation: Google DeepMind , 5 New Street Square , London , UK 
+ Received 22 January 2024 
+ Abstract. 
+ We interviewed twenty professional comedians who perform live shows in front of audiences and who use artificial intelligence in their artistic process
+as part of 3-hour workshops on “AI x Comedy” conducted at the Edinburgh Festival Fringe in August 2023 and online.
+The workshop consisted of a comedy writing session with large language models (LLMs), a human-computer interaction questionnaire to assess the Creativity Support Index of AI as a writing tool, and a focus group
+interrogating the comedians’ motivations for and processes of using AI, as well as their ethical concerns about bias, censorship and copyright.
+Participants noted that existing moderation strategies used in safety filtering and instruction-tuned LLMs reinforced hegemonic viewpoints by erasing minority groups and their perspectives, and qualified this as a form of censorship. At the same time, most participants felt the LLMs did not succeed as a creativity support tool, by producing bland and biased comedy tropes, akin to “cruise ship comedy material from the 1950s, but a bit less racist”. Our work extends scholarship about the subtle difference between, one the one hand, harmful speech, and on the other hand, “offensive” language as a practice of resistance, satire and “punching up”. We also interrogate the global value alignment behind such language models, and discuss the importance of community-based value alignment and data ownership to build AI tools that better suit artists’ needs. Warning: this study may contain offensive language and discusses self-harm. 
+ Keywords: Large Language Models, Comedy, Creativity, Offensive speech, Censorship, Value Alignment
+ 1. Introduction 
+ 1.1. Motivation: investigate the potential and implications of LLMs for comedy writing 
+ Recent work on the intersection of AI and comedy has demonstrated ( Toplyn, 2023 ; Chen et al., 2023 ; Jentzsch and Kersting, 2023 ; Winters, 2021 ; Mirowski and Mathewson, 2019 ; Mathewson and Mirowski, 2018 ) an appetite for comedians to (try to) write humorous material using AI tools like Large Language Models (LLMs). We conducted an empirical study to better understand the current state of LLMs as comedy-writing support tools, their use-cases and limitations, and artists’ opinions on ethical questions regarding their use in a comedy-writing context. The complexity of comedy can help expose some limitations of LLMs. To participate, we recruited 20 professional comedians who use AI in their artistic processes and who perform live shows in front of audiences (10 in person at the Edinburgh Festival Fringe, 10 online) for a 3-hour-long workshop on “AI x Comedy”. As detailed in Section 2 , the workshop consisted of a comedy writing session with generally-available instruction-tuned LLMs (ChatGPT ( OpenAI et al., [n. d.] ; Ouyang et al., 2022 ) and Bard ( Chowdhery et al., 2023 ; Team et al., [n. d.] ) ), a human-computer interaction questionnaire, and focus group discussions on the use of LLMs in comedy writing and ethical concerns. 
+ 1.1.1. Using LLMs for humour, a task with human-level difficulty 
+ Trying to combine humour and machine intelligence is a long-standing subject of scientific enquiry ( Sharples and y Pérez, 2022 ; Veale, 2021 ; Raskin, 1979 ) , and is perceived as a fundamental challenge. According to computational humour researchers like Winters (2021) , “humans are the only known species that use humor for making others laugh”
+ ( Caron, 2002 ; Gervais and Wilson, 2005 ) .
+ Winters (2021) argues that one of the modern formal humor theories points to incongruity ( Hutcheson, 1750 ) (whereby the setup points in one direction and the punch line in another) as a basic element ( Gervais and Wilson, 2005 ; Ritchie, 1999 ; Raskin, 1979 ) 1 1 
+ 1 
+ Alternative humour theories include the Aristotelian Relief Theory ( Aristotle, 0 BC ) of tension and release whereby we let out our psychic energy connected with repressed topics, the Superiority Theory ( Hobbes, 1651 ) whereby we laugh at others’ misfortunes to feel better about ourselves, and the Benign Violation Theory ( McGraw and Warren, 2010 ) . . As we discuss in Section 5.2.2 , producing and resolving incongruity is a task with human-level difficulty. We situate LLMs for comedy within broader computational humour research and AI-assisted comedy performance ( Mathewson and Mirowski, 2017 ; Rosa et al., 2020 ; Mirowski et al., 2023 ) in Appendix A . 
+ 1.1.2. The utility of instruction-tuned LLMs as Creativity Support Tools 
+ Similar to previous empirical studies on the use of LLMs for creative writing ( Qadri et al., 2023 ; Mirowski et al., 2023 ; Chakrabarty et al., 2023b ; Chakrabarty et al., 2023a ; Huang et al., 2023 ; Chakrabarty et al., 2022 ; Yuan et al., 2022 ; Gero et al., 2022 ; Calderwood et al., 2022 ; Ippolito et al., 2022 ) , we asked the artists about their motivations and processes for using LLMs. We asked about the potential and limitations of language models as Creativity Support Tools ( Chakrabarty et al., 2023b ) , and quantified the Creativity Support Index of LLMs for comedy writing ( Cherry and Latulipe, 2014 ) . We report our results in Section 3 . 
+ 1.1.3. Socio-Technical Systems concerns with LLMs for creative writing 
+ Inspired by Dev et al. (2023) , we leveraged community engagement with large generative models, and interrogated the diverse, intersectional identities of the comedians using AI in a creative context. In addition to their reasons for using (or not using) LLMs as comedy-writing tools, we asked participants about the ethical considerations of using AI. The study was conducted at the time of the Writers’ Guild of America (WGA) 2023 strike ( of America, 2023 ) . Participants raised and addressed questions on the scrutiny of AI and on concerns around AI’s impacts, both on intellectual property and artistic copyright, and on artists’ livelihoods. We report their opinions in Section 4 and discuss these concerns in Section 5.3 . 
+ 1.2. Investigating hypotheses about using LLMs to write comedy 
+ Based on previous work and on the authors’ personal experience of AI as creativity support tools, we hypothesized—prior to conducting our study—that participants would express negative opinions of LLMs for co-creativity on four issues: expressing stereotyped (Sect. 1.2.1 ) or bland (Sect. 1.2.4 ) language, censorship (Sect. 1.2.2 ) and missing context (Sect. 1.2.3 ). We review literature on these four hypotheses below, as they become the basis of our mixed methods study. 
+ 1.2.1. Biases in large language models 
+ Gender and racial biases embedded within machine learning models have been extensively documented ( Buolamwini and Gebru, 2018 ; Hamidi et al., 2018 ; Benjamin, 2019 ; West et al., 2019 ; Abid et al., 2021 ; Bender et al., 2021 ; Blodgett et al., 2021 ; Bommasani et al., 2021 ; Sheng et al., 2021 ; Dev et al., 2022 ) . These biases include sexism and racism ( Bender et al., 2021 ; Sheng et al., 2021 ) , homophobia and transphobia ( Queerinai et al., 2023 ; Dias Oliva et al., 2021 ) , Islamophobia ( Abid et al., 2021 ) , the perpetuation of Western colonial mindsets ( Mohamed et al., 2020 ) , Anglocentrism ( Zhou et al., 2021 ) , and in-group vs. out-group social identity biases ( Hu et al., 2023 ) .
+In their extensive reviews, Bommasani et al. (2021) ; Rauh et al. (2022) identified two broad kinds of harms resulting from such biases: intrinsic harms such as representational bias (due to misrepresentation, overrepresentation, and underrepresentation of specific social groups), and extrinsic harms , the downstream consequences of biased models, including representational and performance disparities. As we show in Section 4 , the study participants noticed a few examples of representational harm and many examples of underrepresentation harm (also called allocational harm in ( Rauh et al., 2022 ) ), such as erasure when LLMs refused to generate content for certain demographic groups. 
+ 1.2.2. Potential censorship of speech labeled as “ offensive ” 
+ Comedians often pepper their language with profanities and their material with provoking themes. As we discuss in Section 5.1.2 (and confirmed by the study participants in Section 4 ), offensive language that would be perfectly acceptable at a comedy club may get “censored” by instruction-tuned LLMs that “refuse” to answer “offensive” prompts. 
+ This problem has been observed in automated moderation of online content, such as hate speech detectors that suppress social media posts by queer communities and drag queens ( Dias Oliva et al., 2021 ; Díaz et al., 2022 ) , or posts using African-American Vernacular English ( Amironesei and Díaz, 2023 ; Xu et al., 2021 ) . Amironesei and Díaz (2023) called it censorship . Rauh et al. (2022) studied algorithmic moderation of social media posts by the Perspective API, noting that “authors of the comment may be harmed if their content is incorrectly flagged as toxic” by the moderation tool. Similar erasure due to the cultural hegemony embedded in image generators has been studied in ( Qadri et al., 2023 ) . We relate the participants’ experience, similarly frustrated that the LLM tools “considered” their own identity and comedy material as problematic and necessary to censor. 
+ Díaz et al. (2022) defined offensive language as non-normative “language that uses terminology that is noted as offensive but which is not perceived as offensive in particular contexts of use”, and studied its use by minorities as a form of resistance, for “socially productive uses of decoratively offensive language”, aiming to reclaim “offensive” language and resist oppression. Just like the minority groups described in ( Díaz et al., 2022 ) , many comedians (who may be members of minority groups themselves) often use offensive jokes to punch up , and satire (“to challenge existing social structures”) to build empathy, rather than to punch down (“silence others”). 
+ 1.2.3. Missing context 
+ Context is key to disambiguate offensive language from hate speech. LLMs, like social media posts, cause “context collapse” ( Marwick and Boyd, 2011 ) by providing a limited amount of information to understand their meaning, particularly when using mock impoliteness. Specifically, “in-group usage of reclaimed slurs can be considered acceptable, depending on who uses them” ( Rauh et al., 2022 ; Croom, 2011 ) . Moreover, the context of comedy extends beyond the language to other factors including the audience and the venue. 
+ 1.2.4. Homogeneisation 
+ Bommasani et al. (2021) warned that “the application of foundation models across domains has the potential to act as an epistemically and culturally homogenising force, spreading one perspective, often a socially dominant one, across multiple domains of application”. In the arts, this means that AI-generated artifacts may lead to a homogeneisation of aesthetic styles ( Weidinger et al., 2023 ; Epstein et al., 2023 ) , further reinforced by curation algorithms ( Epstein et al., 2023 ; Manovich, 2018 ) . For creative writing, empirical studies showed that instruction-tuned LLMs reduce the diversity of content in co-writing tasks ( Padmakumar and He, 2023 ) , and that LLM-generated stories did not pass the Torrance Test of Creative Writing according to metrics of “fluency, flexibility, originality and elaboration” ( Chakrabarty et al., 2023a ) . Similarly to Qadri et al. (2023) , we ran focus groups with artists to interrogate cultural (Western) biases (see Sections 2.3 and 2.4 ). 
+ 1.2.5. Investigating hypotheses via a mixed-methods study 
+ In our empirical study, we ask participants questions on all four problems identified in Section 1.2 , namely about bias, censorship, context and homogeneity. In Section 5 , we build upon scholarship on cultural value alignment of language models, the moderation of offensive and harmful speech, and the use of offensive speech and satire as a form of resistance, to revisit the global cultural value alignment of LLMs and propose community-based alignment to build LLMs that better suit comedians’ creative needs 2 2 
+ 2 
+ We deliberately do not generalize our findings beyond comedy, as some professionals and the computational creativity community have historically embraced LLM tools in a way that fits their creative practice, whether building on the glitch aesthetic ( Manovich, 2018 ; Parrish, 2017 ) or designing interactive experiences ( Park et al., 2023 ) . . 
+ 2. Methods 
+ Our study was designed to address a challenging problem, with on one hand, limitations of LLMs (stereotypes, inability to distinguish comedic offensiveness from harmful speech, cultural erasure and homogeneisation of content), and on the other hand, the use of LLMs for a creative writing task. For this reason, we asked a group of experts---professional comedians and performers---who are used both to thinking about thorny questions of identity, offensiveness and censorship in their work, and to employing language in a highly creative way. We chose artists who already use AI in their work and expected them to be somewhat knowledgeable and open to using AI: this likely biased our results 3 3 
+ 3 
+ Our biased selection criteria of participants might, and likely do, lead to biased opinions as compared to the much more broad population of comedians and performers, which might be reflected in more favourable judgment of the Creativity Support Index of LLM writing tools. Future research might explore the diversity of opinions in creative communities across a greater range of familiarity with AI tools and openness to using them in their own creative practices. Exploring those opinions would significantly increase the scope of the paper and would make a compelling follow-up study. . 
+ We ran workshops with 20 comedians who use AI creatively. The first workshop with 10 participants was run in person at Edinburgh Festival Fringe 2023; the following 3 workshops with 3, 4 and 3 participants were run online.
+We reached out to comedians performing in Edinburgh during Fringe, or in our network, and attempted to recruit as diverse (along linguistic, cultural, gender, sexual, national and racial dimensions) a pool of comedians as possible given the constraints of the study 4 4 
+ 4 
+ A demographic analysis of opinions might be a possible avenue for future investigations, but it would require a different study design and participant recruiting process. . Participants had contrasting views on AI for comedy writing, from "AI is very bad at this, and I don’t want to live in a world where it gets better" (p15) to "I liked the details that I got. I think those details sparked my imagination, and I think I could use them to write something" (p20).
+Participants were asked to register on the Prolific platform 5 5 
+ 5 
+ https://prolific.com and invited to join a specific study thanks to an allowlist. The study was approved by the research ethics committee of our institution. The information sheet and consent forms were shared with the participants, their active consent was obtained at the beginning of the workshop and they had the right to withdraw without prejudice at any time. The Prolific platform handled the payment of their participation fee, set to £300 for 3 hours. 
+ We started each 3-hour session by describing the agenda and goals of the workshop, sharing the information sheet and consent forms with the participants, and asking them to start filling out a short anonymous survey about their background in comedy, previous exposure to AI and usage of AI in performance (full questionnaire in Appendix B.1 ). 
+ 2.1. Writing exercise 
+ We then proceeded with a comedy-writing exercise, in which participants spent around 45 minutes on their own, using an LLM. We encouraged participants to try to use the LLM in a way that would generate useful material ‘‘that they would be comfortable presenting in a comedy context’’, but emphasized that we did not require a fully-finished product by the end of the writing exercise. We invited them to use the language(s) they felt the most comfortable with 6 6 
+ 6 
+ Languages included German, Dutch, English, French, Hindi, Swedish and Tamil. .
+We also suggested they could use the tool to 1) generate, rate/detect or explain jokes, 2) co-write jokes via iterative prompting, step-by-step or using examples, and 3) analyse, re-write or complete some of their previous material. In the first workshop (in person), we provided participants with access to ChatGPT-3.5 ( Ouyang et al., 2022 ) served via a plain text interface similar to ChatGPT. In the following 3 workshops, we invited participants to use their own preferred model via their personal account: participants used ChatGPT-3.5, ChatGPT-4 ( OpenAI et al., [n. d.] ) and Google Bard powered by Gemini Pro ( Team et al., [n. d.] ) (December 2023 version).
+Note that the choice of such instruction-tuned models was motivated by their popularity and ease of access by comedians, and more complex prompting strategies, such as used in Dramatron ( Mirowski et al., 2023 ) , could have produced higher-quality outputs. 
+ 2.2. Creativity Support Tools evaluation 
+ Following the writing exercise, we asked participants to fill out three surveys. The first survey was about their experience with the AI system for writing comedy material and contained nine questions from previous studies ( Ippolito et al., 2022 ; Mirowski et al., 2023 ; Yuan et al., 2022 ) that assessed LLMs for creative writing on the 5-level Likert scale (see Appendix B.2 ). The second survey was used to calculate the Creativity Support Index (CSI) ( Cherry and Latulipe, 2014 ) of the writing tool, which itself was adapted from the NASA Task Load Index ( Hart and Staveland, 1988 ) . CSI is estimated in a psychometric survey that measures six dimensions of creativity support: Exploration , Expressiveness , Immersion , Enjoyment , Results Worth Effort , and Collaboration (see specific questions in Appendix B.3 ), and is a number between 0 and 100, where 90 is considered excellent and 50 mediocre. The third survey contained free-form questions on one thing that the “AI system” (the LLM writing tool) did well, one improvement, and open-ended comments on the writing session and on the survey. 
+ 2.3. Focus Group Questions 
+ The last part of the workshop consisted in a one-hour focus group, where we asked participants first to discuss the writing task (for about 30 minutes) and second to discuss the general usage of AI for writing comedy material. 
+ In order to guide the discussion, we prepared two sets of questions 7 7 
+ 7 
+ Question-led focus groups are useful to start discussions, but we acknowledge the limitation that questions can bias the participants’ responses. (see Appendix B.4 for the full list of questions). The first set of questions pertained to the usefulness of the outputs generated by the LLM tool for personal writing, differences between using an LLM or searching for inspiration using Wikipedia or a search engine, the types of comedy that can be produced by an LLM, and concerns about the ownership of LLM-generated outputs. 
+ The second set of questions addressed the comedy writing process of the participants, as well as the topics introduced in Section 1.2 , namely various biases and stereotypes of LLMs, problems with moderation strategies employed by LLMs, the importance of context and delivery or whether some forms of cultural appropriation or homogeneisation could happen. We invited discussions about the use of other comedians’ work, and also challenged the participants with question on whether the AI has a “voice” and if humour can be quantified. 
+ 2.4. Focus Group Analysis 
+ In our workshops, we had followed focus group methodology described in ( Noble and Mitchell, 2016 ; Onwuegbuzie et al., 2009 ) (engaging a group of participants in an informal one hour discussion focused around a particular topic, activity, or stimulus material, with a team of two moderators). Transcripts of focus groups were recorded as audio recordings, then automatically transcribed using speech recognition tools in Google Meet, and manually verified as well as compared against notes taken by the moderators. After transcription, audio and video recordings were destroyed. Like in the surveys, participants were anonymised: authors independently reviewed the transcripts to remove any personally identifiable information from the transcripts.
+We then performed constant comparison analysis to analyze the transcripts of the focus groups ( Onwuegbuzie et al., 2009 ) . We first identified initial codes using sentence-by-sentence open coding. We then grouped those codes into themes, and found themes that were coherent across focus groups. Data from four focus groups allowed us to achieve data saturation ( Braun and Clarke, 2006 ; Maguire and Delahunt, 2017 ) . 
+ Results section 3 summarises the quantitative results 8 8 
+ 8 
+ Full outputs of the writing sessions, all individual survey results and raw transcripts from the focus groups will be shared in anonymised form as supplementary material, once our work is published. derived from the Creativity Support Tool evaluation (Sect. 2.2 ), while results section 4 details the observations made by the participants during focus groups (Sect. 2.4 ).
+Please note that this paper is an exploration of external perspectives rather than an endorsement of any one of them; in particular, this paper does not seek to undertake any legal evaluation. 
+ 3. Quantitative Results and Creativity Support Index 
+ Figure 1 summarises the quantitative results collected at the end of the writing session with instruction-tuned LLMs. Based on the participants’ responses to the survey questionnaire (see Appendix B.2 for questions), we notice that while comedians mostly enjoyed writing with AI, questions about the ownership, helpfulness, expressivity, surprise, collaboration and ease of writing with AI had mixed answers. The majority of participants did not feel pride in the material written with AI, nor did they feel it was unique, hinting at the derivative nature of AI-generated text. 
+ Figure 1. Left: Evaluation of the instruction-tuned LLMs as creativity support tool for writing comedy using a Likert scale; each row corresponds to a question in a survey (questions are listed in Appendix B.2 ). Only 10 participants responded to question “Collaborated with AI”. Right box plots (box for quartiles and whiskers for min and max) show the break-down of the Creativity Support Index ( Cherry and Latulipe, 2014 ) , respectively by a) previous usage of AI for writing comedy material, b) language used during the writing session with LLMs, c) the degree of familiarity with AI and d) the type of comedian or performer (stand-up vs. improv, theatre, film, dance etc.). Plots showing the quantitative results. Left: Evaluation of the instruction-tuned LLMs as creativity support tool for writing comedy using a Likert scale; each row corresponds to a question in a survey (the full list of questions is listed in Appendix). Right plots (box for quartiles and whiskers for min and max) show the break-down of the Creativity Support Index \citep{cherry2014quantifying}, respectively by a) previous usage of AI for writing comedy material, b) language used during the writing session with LLMs, c) the degree of familiarity with AI and d) the type of comedian or performer (stand-up vs. improv, theatre, film, dance etc.). 
+ We computed the Creativity Support Index (see Appendix B.3 for computation), with an average score that is mediocre ( μ = 54.6 \mu=54.6 , σ = 18.1 \sigma=18.1 ). We broke down CSI based on participants’ background in comedy, previous exposure to AI and usage of AI in performance (see questions in Appendix B.1 ), as well as based on the language they used during the writing session. As Figure 1 shows, participants who scored the LLMs writing tools highest were those who had professional exposure to AI, or who had performed AI-written material in the past (as opposed to only exploring the tool), or who qualified themselves as improvisers, theatre and film actors and directors, or dancers, rather than as full-time stand-up comedians. Interestingly, participants who used LLMs to generate non-English or multi-lingual text scored the tool higher on CSI. Lastly, we did not observe a significant change in CSI among the models between August 2023 ( μ = 50 \mu=50 , σ = 15.8 \sigma=15.8 ) and December 2023 ( μ = 60 \mu=60 , σ = 19.6 \sigma=19.6 ). 
+ 4. Qualitative Results from Focus Group Discussions 
+ In this section, we summarize the major themes that emerged from the focus group discussions.
+Each is presented alongside supporting quotes from various participants (anonymised as p1, p2, etc.). 
+ 4.1. Use-cases of LLMs in comedy writing and quality of generated outputs 
+ Participants described a diverse array of use cases for LLMs in their writing practice, including as a conversational brainstorming partner (p19), critic (p6), choreographic assistant (p3), translator (p1, p11, p12, p19, p20), and historical guru (p13). They generally reflected positively on the potential of LLMs to assist with some tasks within the comedy writing process. However, many participants commented on the overall poor quality of generated outputs, and the amount of human effort required to arrive at a satisfying result. 
+ 4.1.1. LLMs can be an effective first step for quickly generating content and structure. 
+ Participants described the utility of LLMs for generating content much faster than human writers. They described success with using LLMs to generate first drafts, which then required significant edits from human writers: “AI allows you to kind of get that s*** first draft immediately” (p6). Participant p14 called their initial output “a vomit draft that I know that I’m gonna have to iterate on and improve.” Many participants also described using LLMs to generate a structure for a sketch or other performance, of which they could then fill in the details—the LLM “spat out a scene which provided a lot of structure” (p17). 
+ 4.1.2. Generated outputs are generally of poor comedic quality. 
+ Many participants noted that they only used LLMs for setup and structure generation due to their inability to generate humorous outputs from the models:
+“the most bland, boring thing—I stopped reading it. It was so bad” (p6),
+“just consistently bad […] didn’t really improve on the jokes” (p10).
+Some participants described particular aspects critical in comedy, and how LLMs seemed incapable of them: “AI generated material has a lack of agency.
+[…] lacking that little bit of urgency that shows it can be emotional” (p11). 
+ 4.1.3. Participants had difficulty steering LLMs away from bland and generic outputs. 
+ Six participants described LLM-generated outputs as “bland” or “generic,” making them poor producers of comedic or artistic material: “the words seem very generic. They lack that incisiveness that I often find with human written language” (p11);
+“if you zoom out on the story that it told, it wasn’t really a good story or a creative story” (p20). Participants also commented on various prompting approaches and their general lack of success at prompting the LLM to generate more specific or interesting responses: “no matter how much I prompt […] it’s a very straight-laced, sort of linear approach to comedy” (p11). 
+ 4.1.4. The human writer still produces the humorous elements in co-written text. 
+ The importance of human writers in providing the comedic aspects of material written with LLMs was a common theme. Many participants commented that while LLMs could provide effective setup or structure, they often could not provide the humor: “usually it can serve in a setup capacity. I more often than not provide the punchline” (p17). When participants had success using LLMs in the writing process, they still attributed the best parts of produced output to the human in the loop: “the only thing again that is funny in what I gave you is the joke I put into the prompting” (p15). 
+ 4.1.5. Lack of concern over ownership over generated content 
+ In response to questions about feelings of ownership over content that was co-written with LLMs, most participants felt little concern. For some, this was due to the poor quality of generated outputs: “most of the jokes I was writing [are] the level of, I will go on stage and experiment with it, but they’re not at the level of, I’d be worried if anyone took one of these jokes” (p14). For others, it was due to the amount of human effort required in improving generated outputs: “I don’t feel a lot of ownership, because there’s no finished product. If I could polish it, then it would feel more like it is mine” (p19). 
+ 4.2. Limitations introduced by moderation and safety filtering 
+ Participants commented on the moderation and safety filtering applied to widely-available language models. They remarked that this moderation limited the creative agency of human writers using LLMs, by serving as an initial editor of the text and removing writers’ ability to self-moderate. They also expressed frustration at being unable to use LLMs to write about many themes common in comedy writing, including sexually-suggestive material (p3, p10, p13, p16), dark humor (p8), and offensive jokes (p10, p15, p20). 
+ 4.2.1. Moderation and safety filtering limits writers’ creative agency. 
+ Participants explained that self-moderation is a critical part of the writing process, and expressed frustration that moderation tools on LLMs interfered with that process: “the creative process is about going through stages of ‘this material isn’t good enough, it’s not right, or it’s offensive, it’s marginalizing people, I need to make it more acceptable.’ And I think AI models are a beginning to do that before you have a chance to explore” (p10). “It probably would be more interesting for a writer if there would be less moderation, because you can do the moderation in your own prompts. A writer is going to moderate themselves. If you’re writing with an AI, if you don’t like the bad stuff that it writes, you won’t use it” (p19). Participants described that this external source of moderation limited the creative control of the human writer: “it’s interesting if there’s less moderation, because… the end result is moderated in the way that the author wants it to be” (p19). Some explained that if filters were necessary, that the user should still have some degree of control over them: “I feel like the opportunity to set the filters should still be at the performers’ end” (p12). 
+ 4.2.2. Moderation limits writers’ ability to use AI with their preferred subject matter. 
+ In addition to affecting the creative writing process, participants commented that moderation tools limited their ability to write freely on subject matter of their choice. “Comedy’s about pushing the boundaries or pointing out how ridiculous something is, on the fringe of what’s acceptable. And so when a lot of your inputs are limited that way, it’s gonna make it harder to be what I consider funny” (p14). Multiple participants expressed difficulty using LLMs to write potentially-offensive humor: “I was a little bit disappointed that it wasn’t a little bit offensive. It could have been a fun scene” (p20). Participant p8 described challenges using LLMs for dark humor: “a lot of my stuff can have dark bits in it. And then it wouldn’t write me any dark stuff, because it sort of thought I was going to commit suicide. So it just stopped giving me anything.” 
+ 4.3. Marginalization of minority identities 
+ Many participants commented on the challenges of using LLMs to write content which reflected perspectives and identities outside of the “Western” (p11, p18), “white” (p14), “heteronormative” (p10), “male” (p5, p15) mainstream.
+They attributed these difficulties to the moderation applied to model outputs; the data used to train the models; and prompting or other instruction-tuning techniques that aimed to “generalize” model outputs for a broad audience. 
+ 4.3.1. LLM-generated outputs reflect a particular set of ethics, values and norms. 
+ Participants expressed concern over the values reflected in the outputs of LLMs, and found them less useful when those values did not reflect those of their own cultures. Speaking as a member of the “majority,” participant p20 described that “we have a set of views of what we think is good, and our norms, and it just repeats, it behaves within these norms.”
+P11 questioned “whose ethics [and norms] are being enforced on these large language models?”, suggesting these were Western ones. 
+ 4.3.2. When prompted to reflect non-dominant identities, LLMs made only shallow adjustments. 
+ Many participants described their attempts to steer LLM outputs away from dominant narratives and stereotypical characters, and their dissatisfaction with the results. They explained that models’ adjustments in response to these prompts were surface-level, failing to truly reflect other identities, and described issues with the names of characters introduced by the LLM: “when I switched the whole conversation to Indian languages, it didn’t automatically change the names. It still was Maria, Evan, Lexi” (p18). “I specified that the scene was set in Sweden, but the names were not typically Swedish” (p20). P18 described their attempts to “Indianize” the model’s outputs by introducing Indian languages into the prompt: “it seemed very artificial from the perspective of just using languages, but it was not truly embedding itself into the culture” (p18). 
+ 4.3.3. Moderation makes LLMs less useful to minorities by suppressing content by and about marginalized identities. 
+ Many participants expressed frustration that their prompts would be rejected when they prompted the model to generate content from the perspective of someone of their identity. To them, the model not only seemed less capable of generating outputs which felt authentic to people from non-majority groups, but explicitly “othered” them by alluding that any content produced by someone of their background was potentially dangerous or non-inclusive. Participant p6 expressed frustration at the models’ delineation of what is acceptable and what needs to be sanitized: “it’s taking out the gay language of it to make it more appealing or more palpable. This is the whole premise of my show, who decides what is PC in the first place?” Similarly, participant p1 found that the model would not generate outputs from her point of view: “it’s all so politically correct–I wrote a comedic monologue about Asian women, and it says, ‘As an AI language model, I am committed to fostering a respectful and inclusive environment’.” Participant p5 highlighted the unevenness of this treatment of identity, remarking that while the model was “uncomfortable writing a monologue about an Asian woman, but I just asked it to write a comedy monologue from the perspective of a white man, and it did it” (p5). 
+ 4.3.4. Moderation makes LLMs less useful to minorities by suppressing topics important to people from marginalized identities. 
+ Participants described that not only were the models unlikely to generate content from marginalized perspectives, but also refused to engage with topics that might be important to people from those backgrounds. P14 was frustrated with “having to use the language of the oppressor… I couldn’t say ‘white supremacy’ or I couldn’t say ‘terrorist.’ I had to find another way to say the same thing, because it couldn’t work around those limitations” (p14). They posited that because these controversial topics were more likely to be important to people of color, this moderation introduced “just an extra hurdle, and I think people of color, and, I think, people coming from outside of a UN-type lens, they’re gonna run into those problems.” 
+ 4.4. Fundamental limitations of AI in contrast to human writers 
+ While most participants felt the difficulties introduced by the moderation could be alleviated by different approaches to safety filtering or instruction tuning, they also commented on some more fundamental limitations of LLMs. They posited that LLMs would never be able to create human-level comedy, due to models’ inability to pull from personal experience, lack of perspective, and lack of context and situational awareness—features that are critical to good comedy. 
+ 4.4.1. AI’s inability to draw on personal experience is a fundamental limitation. 
+ Many participants described the centrality of personal experience in good comedy, which enables comedians to draw upon their memories, acquaintances, and beliefs to construct an authentic and engaging narrative: “very much related to who I am and my lived experience, as well as the place I am in” (p11). “I always draw from my experience, or my memories, or something someone said that stayed with me for many, many years – and I think that’s what makes literature interesting and unique” (p20). This experience, some participants said, enables them to effectively calibrate their writing: “I have an intuitive sense of what’s gonna work and what’s gonna not work based on so much lived experience and studying of comedy, but it is very individualized and I don’t know that AI is ever gonna be able to approach that” (p14). By contrast, LLMs could not perform such calibration: “it really had no idea how to punch up or punch down. It had no perspective, so it couldn’t take any risks in terms of jokes” (p6). Participants emphasized that perspective and point of view was a uniquely human trait, saying that “human comedians… add much more nuance and emotion and subtlety” due to their lived experience and relationship to the material (p16). 
+ 4.4.2. AI’s lack of context (understanding of its audience and location) is a fundamental limitation. 
+ In addition to its lack of personal experience, participants described LLMs’ lack of awareness of the context in which its comedic material would be delivered as another fundamental limitation. Multiple participants commented on the importance of understanding the effects of culture and geography on what material would land with an audience: “the kind of comedy that I could do in India would be very different from the kind of comedy that I could do in the UK, because my social context would change” (p11); “what works in LA isn’t gonna work in Raleigh, or what’s working in Chicago is not going to work in Albuquerque” (p17). This poses a fundamental challenge for LLMs, they argued, because they lacked any context beyond what is provided to them in the prompt: “comedy is all about subtext, and a lot of that subtext can be unspoken, about who’s on stage, what environment they’re in” (p14). To participant p11, this makes the LLM unable to adapt its material effectively, because it is “everywhere and nowhere all at once” (p11). 
+ 4.4.3. As a text-only medium, (current) LLMs are missing critical aspects of comedy: delivery and surprise. 
+ Many participants commented on the importance of delivery in a quality comedy routine: “any written text could be an okay text, but a great actor could probably make this very enjoyable”
+(p19). Given that current widely-available LLMs are primarily accessible through a text-based chat interface, they felt that the utility of these tools was limited to only a subset of the domains needed for producing a full comedic product. This, too, some participants argued, illustrates the fundamental need for humans in the comedy generation process: “AI is just generating content”
+(p18).
+A few participants further attributed their lack of success at generating humorous outputs with LLMs to the statistical methods by which the models were trained. By simply learning to predict the most likely next token of text, they hypothesized, models will be unable to produce the surprising and unique moments that are hallmarks of comedy: “the whole idea of humor is that it is surprising, and it is so human, and AI is only adept at regurgitating tropes” (p15). LLMs cannot produce truly original content, participant p14 argued, “because the context has already been written by other people.” 
+ 4.5. Concerns around data sources used to train LLMs 
+ Participants also expressed various concerns pertaining to the data sources used to train current widely-available LLMs. They discussed the ethical issues with training models on copyrighted works; the possibilities of unintentionally plagiarizing works on which the models were trained; and the lack of diversity represented in the training data. However, they also acknowledged the importance of training data in model performance, and many expressed uncertainty around how to balance their ethical concerns with their desire for more effective and equitable models. 
+ 4.5.1. Participants criticized the training of models on copyrighted data, but acknowledged its positive impact on performance. 
+ Participants were acutely aware of the pending litigation over the training of models on copyrighted data at the time of the focus groups. Some participants, including participant p15, expressed sympathy for those whose work was included in the training data: “Sarah Silverman… spent years honing her voice and then an AI just scraped her content, and now you can tell an AI to write in the style of Sarah Silverman […] I don’t think it’s ethical” (p15). Other participants took a more balanced view, echoing their concerns with training on copyrighted works while acknowledging the benefits: “I think they are overtrained on copyrighted work… but on the other hand, if we didn’t put all that stuff in there, it wouldn’t work as well” (p19). Some participants feared unintentionally plagiarizing authors’ whose works were included in the training data: “I cannot tell if someone has written something like this before. We know that it’s using statistics from previous texts to recreate this, that it can in principle only be based on what already exists” (p20). Some participants had suggestions on licensing models: “for music, licensing is something tracked and recognized” (p10) and “not against the tools, but I think there needs to be licensing agreements for the work that should be compensated” (p4). 
+ 4.5.2. The lack of diversity in the training data perpetuates majority viewpoints, to the detriment of people from underrepresented identities. 
+ Multiple participants hypothesized that they struggled to get the LLMs to produce authentic-sounding content because the models were trained heavily on data that did not represent people of their identity. A few participants described unsuccessful attempts to replicate content in the style of famous non-white comedians and writers (p11, p14). “If you’re only getting biased inputs, you’re only getting the writing from a really biased lens. So there’s not enough black voices in there to make an accurate black sounding voice” (p14). “As someone who lives in the global south, I am not looking to make a play in the form of Shakespeare or other Western literature. I am looking to write about an Indian author. I find all these language models really lacking in references or authorship styles from this part of the world” (p11). However, participants also questioned whether, given the other ethical concerns about training data, more training on these underrepresented voices was indeed a good thing: “should this AI be able to completely replicate a black comedic voice? There’s a line between being able to replicate a voice and then immediately going into cultural appropriation. I don’t know how a large language model could ever effectively walk that line” (p17). 
+ 5. Discussion 
+ After analysing our study participants’ feedback and inspired by recent discussions on the ethics of generative models, we discuss how comedy and humour can be seen as special cases of value alignment (Sect. 5.1 ) where context is key (Sect. 5.2 ) and how data ownership impacts artists (Sect. 5.3 ). 
+ 5.1. Towards community-based cultural value alignment for humour and comedy 
+ The participants’ critical stance towards popular conversational LLMs (ChatGPT and Bard) as a tool for comedy writing suggests that those tools may be currently misaligned with the particular creative goals of the artists. 
+ 5.1.1. Complexity of global cultural value alignment of LLMs for creative uses 
+ The participants’ observations might be a special case of a more general problem. We first borrow
+ Masoud et al. (2023) ’s definition of cultural value alignment as “ the process of aligning an AI system with the set of shared beliefs,
+values, and norms of the group of users that interact with the system”, where such values are “fundamental beliefs an individual or a group holds
+towards socio-cultural topics” ( Arora et al., 2022 ) . Gabriel (2020) discusses the complexity of attempting to align generalist conversational AI systems—made to be used by diverse users for diverse tasks—with values shared by global communities, particularly given significant variations in norms and conceptions of justice across societies.
+In “Whose Opinions Do Language Models Reflect?”, Santurkar et al. (2023) propose to probe the cultural representation encoded in LLMs. For instance, Johnson et al. (2022) identified, in some LLMs, lack of pluralistic opinions in LLM outputs and values that were culturally more aligned with the US, on issues ranging from secularism to gender and sexuality.
+ Gabriel (2020) and Kirk et al. (2023) warn about the pitfalls of value imposition by one community over another—a problem surfaced by participants in our study. 
+ In addition to the challenge of value alignment for diverse groups of users, Kasirzadeh and Gabriel (2023) discuss alignment for diverse tasks, namely factual information retrieval vs. creative storytelling: “creative work aspires to achieve creative freedom and originality ”, the latter often “obtained by stretching, even outright violating, the various rules of the game” ( Kasirzadeh and Gabriel, 2023 ; Simonton, 2000 ) . 
+ 5.1.2. The problem with global fine-tuning of Harmless, Helpful and Honest conversational agents 
+ Askell et al. (2021) explicitly list honest , helpful , and harmless as stated objectives for general purpose assistants (the so-called HHH criteria ) because those “seem to capture the majority of what users want from an aligned AI”. However, while they discuss inter-agent and intra-agent conflicts between the three HHH criteria , they do not address the question of how the human values that underlie each of those criteria might conflict between different societies, nor do they discuss creative use cases where users may not want “ honest ” conversational agents, or may have a different definition of “ harmless ” ( Hendry et al., 2023 ) . 
+ Askell et al. (2021) further propose to train such HHH assistants directly from user interactions and using preference models, for instance through Reinforcement Learning from Human Feedback ( Christiano et al., 2017 ; Ziegler et al., 2019 ) . During such fine-tuning, LLMs such as OpenAI’s ChatGPT ( Ouyang et al., 2022 ; OpenAI et al., [n. d.] ) , Google Bard ( Chowdhery et al., 2023 ; Team et al., [n. d.] ) , Anthropic’s Claude ( Bai et al., 2022 ) , and Meta’s Llama ( Touvron et al., [n. d.] ) are all finetuned on annotators’ feedback supposed to represent values of the global community. However, the wider social or relational context of the producer and audience of the LLM’s interactions, do not factor into the model’s training objective. The crowdworkers or users who fine-tune LLMs may not sufficiently represent the diversity of opinions ( Kirk et al., 2023 ) , and provide insufficiently defined feedback. And yet the default versions of the LLMs are released under assumptions of indiscriminate, global cultural value alignment. 
+ The broad HHH criteria embody a Western philosophical approach to alignment ( Varshney, 2023 ) and bias ( Dev et al., 2023 ) . As the participants noted, such global cultural value alignment underlying LLMs might also be directly in conflict with the specificity and local tastes that make comedy funny: “the broader appeal something has, the less great it could be. If you make something that fits everybody, it probably will end up being nobody’s favorite thing” (p10). 
+ 5.1.3. Community-based value alignment of LLMs 
+ Thus, to make LLMs effectively understand or generate humour, their value-based alignment should be redirected from global alignment to community-based alignment with specific audiences and comedians. Communities could agree on a set of values for their specific culture and acceptable language norms, before training, fine-tuning or adapting the LLM. More simply, LLMs could be trained only on feedback and data generated by members of each distinct community, data that will reflect that community’s actual norms and values. As Gabriel (2020) suggests, this kind of value alignment could happen through a democratic process (see more recent work on Collective Constitution AI ( Anthropic, 2023 ; Shaotran et al., 2023 ) ). The LLM could be designed as a mixture model that accommodates a plurality of viewpoints ( Varshney, 2023 ) or could be fine-tuned to allow consensus-based agreement among humans with diverse preferences ( Bakker et al., 2022 ) . The technical infrastructure for community-based value alignment of LLMs is readily available: for example, proprietary LLMs like ChatGPT ( Ouyang et al., 2022 ; OpenAI et al., [n. d.] ) or Palm 2 ( Chowdhery et al., 2023 ) , as well as open-source models like Llama ( Touvron et al., [n. d.] ) or Mixtral ( Jiang et al., 2024 ) (via the HuggingFace platform 9 9 
+ 9 
+ https://huggingface.co/models ), all allow fine-tuning on user-supplied text or conversations. The key problem for communities is setting up data governance and infrastructure to responsibly collect and curate data ( Workshop et al., 2022 ) . 
+ One benefit of global value alignment is the prevention of harm; delegating such a responsibility to a smaller community of users is not without risks. To prevent harm, one could envision mechanisms for community accountability, and assume that comedians share some common values, such as do not harm (and do not lose) the audience 10 10 
+ 10 
+ While comedy has also been used as a weapon to target and alienate specific social groups and spread hateful stereotypes, we exclude such misuse from our argument, as that usage falls under the definition of hate speech ( Díaz et al., 2022 ; Rauh et al., 2022 ) : “if we’re using it to create material as artists, the responsibility for what we do with that material is on me” (p4). 
+ 5.1.4. Avoiding unnecessary paternalism in LLMs for creative uses 
+ Two alternative formulations of the interaction between a creative (comedy) writer and AI could be adapted from ( London et al., 2023 ) and ( Epstein et al., 2023 ) . In the first, the AI writing tools should “enable the [human] to more effectively carry out tasks that are instrumental to their goals” while being “mediated by the norms and infrastructure of the society in which they live” ( London et al., 2023 ) . In the second, “meaningful human control is achieved if human creators can creatively express themselves through the generative system, leading to an outcome that aligns with their intentions and carries their personal, expressive signature” ( Epstein et al., 2023 ) . Provided that societal norms can be formulated in the subtle and edgy domain of humour, an LLM designed according to principles of beneficent intelligence ( London et al., 2023 ) and with self-expression as a goal ( Epstein et al., 2023 ) could ensure the comedian’s creative freedom when interacting with the tool, while minimising unnecessary paternalism due to LLM censorship. 
+ 5.2. Humour and comedy uses of LLMs require incorporating the context 
+ As we hypothesised in Section 1.2 , and as observed by study participants, LLM tools did not take into account the relational context when moderating offensive language, and missed the broader situational context of comedy writing. 
+ 5.2.1. Recent AI ethics research on relational context for LLMs 
+ There are safety reasons why widely-released public-facing LLMs generally cannot handle offensive language and dark humour. As Kasirzadeh and Gabriel (2023) observe in the case of creative storytelling, the potential harms of LLMs are due to their deployment in “domains that are not context-bound”. Weidinger et al. (2023) recognise that “context determines whether a given capability may cause harm” and propose to add human interaction (as well as systemic impacts) in safety evaluation, in order to “account for relevant context”: “who uses the AI system, to what end and under which circumstances”. Similarly, Amironesei and Díaz (2023) propose to “incorporate social context into the ways [NLP] tasks are conceptualised and operationalised”, in order to allow the distinction between offensive language such as reclaimed slurs from “language which is [intentionally] abusive, toxic or hateful”. Such relational context includes the speaker, the receiver, their social relation, social and cultural norms, and communicative goals. Comedy is often shared with audiences in physical spaces (e.g., a comedy festival) or on age-controlled distribution channels, with implied context and explicit trigger warnings. Context allows comedians to share their lived experience of trauma, which may involve depicting violence or harassment ( Gadsby, 2018 ) ; more generally, comedy can be used as a mechanism for processing trauma ( Double, 2017 ) . It is beyond the scope of this paper to propose technical solutions to evaluate or to incorporate the broader relational context into an LLM, but we suggest that the creative community needs to be actively involved in specifying how the LLM should process the context, and in safety design without indiscriminate censorship. 
+ As a counterpoint to that suggestion, one can argue that comedians can afford to use offensive language because they can take responsibility for it (and are accountable to their audiences) as they can claim to be in-group members—something that AI cannot be. Even if one successfully builds an LLM that can handle context properly and speak the (offensive) language of its users as if it were part of that in-group, “it is not clear if users would find its use of reclaimed terms acceptable, as the model cannot actually be in-group” ( Rauh et al., 2022 ) . To quote a participant: “If I was to try to do that with an AI, I can only imagine how yikes, and offensive, and totally not fit for humanity a pitch like that would be” (p17). 
+ 5.2.2. Humour and the human context 
+ We can hypothesize that the missing relational context, as discussed above, affects the quality of comedy material co-written with LLMs. In our study, participants noted that the LLMs were missing the complex human context needed for real humour understanding: “I have an intuitive sense of what’s gonna work […] for me based on so much lived experience and studying of comedy, but it is very individualized and I don’t know that AI is ever gonna be able to approach that” (p14). 
+ Their observations seem to confirm recent work that examined the use of LLMs to automatically evaluate ( Goes et al., 2023 ; Goes et al., 2022 ; Hessel et al., 2022 ) and detect humour ( Baradaran, 2023 ) . Despite formidable recent advances, empirical studies found that understanding and generating humour was still challenging for LLMs, which could generate only a limited number of stereotypical jokes ( Jentzsch and Kersting, 2023 ) . These issues get worse when one ventures beyond the English language: researchers observed that “one mostly unaddressed issue in the field of computational humour (both for generation and detection) is how it is mostly centered on English jokes” ( Winters, 2021 ) , with limited work on LLM-based humour in other languages ( Inácio and Oliveira, 2023 ; Li et al., 2023 ) . 
+ To cite Winters (2021) , “Humor’s frame-shifting prerequisite reveals its difficulty for a machine to acquire. […] This substantial dependency on insight into human thought (e.g., memory recall, linguistic abilities for semantic integration, and world knowledge inferences) often made researchers conclude that humor is an AI-complete problem ” ( Hurley et al., 2011 ) . Winters (2021) continues: “genuine humor appreciation requires machines to have human-level intelligence, since it needs functionally equivalent cognitive abilities, sensory inputs, anticipation-generators and world views” ( Hurley et al., 2011 ) . Humans know how to write surreal prose “by design, not by accident or failure of expression” ( Sharples and y Pérez, 2022 ) . 
+ 5.3. Data ownership and the impact of AI on artists 
+ As discussed in Sections 4.5 and 4.5.1 , many of the participants in our study mentioned concerns about copyright and data ownership in the discussion. Their responses reflected keen awareness of recent litigation against technology companies training LLMs on data potentially under copyright (including the one led by comedian Sarah Silverman ( GHAJAR et al., 2023 ) ), and the AI-related concerns of Writers’ Guild of America (WGA) 2023 strike ( of America, 2023 ) . Several participants believed that “if you copy and paste something directly into a show, that is plagiarism” (p9) and that, just like for visual artists ( Jiang et al., 2023 ; Ortiz, 2022 ) , a comedian’s style and voice are personal to them and developed through their lived experience. Among the underlying concerns is economic loss via labor displacement ( Jiang et al., 2023 ; Epstein et al., 2023 ) with LLM that “canibalise the market for human-authored works” ( Weidinger et al., 2021 ) , and devaluing artists’ work via “digital forgery” ( Jiang et al., 2023 ) . In the US, the WGA 2023 strike resulted in outcomes that some considered favourable for writers 11 11 
+ 11 
+ https://www.vox.com/culture/2023/9/24/23888673/wga-strike-end-sag-aftra-contract , with rules for producers that “AI can’t write or rewrite literary material, and AI-generated material will not be considered source material under the [Minimum Basic Agreement], meaning that AI-generated material can’t be used to undermine a writer’s credit or separated rights” ( of America, 2023 ) . 
+ The need for disclosing the AI origin of the text or images has been discussed in ( Epstein et al., 2023 ; Jiang et al., 2023 ; Weidinger et al., 2021 ) ; one participant said that it was important for ethical reasons that “people understand that they’re working with AI live” (p15). 
+ 6. Mitigations and conclusion 
+ Our mixed-method study on AI for creative writing consulted the real domain experts in language subtleties: comedians. Building on their opinions,
+we suggest the following avenues to make the writing tools work for them (if they wish to do so). First, for the artist communities to conceptualise and contribute towards building LLMs that are aligned with the intended audiences instead of being globally aligned. Open-source repositories of user-contributed LLMs 12 12 
+ 12 
+ Examples of open-source repositories of user-contributed LLMs include https://huggingface.co/models and https://cworld.ai . 
+could be adapted for artists’ specific needs. Second, to integrate necessary relational context when training and deploying such LLMs, for instance by describing the context in which the text is produced and used, and by empowering the artists to make decisions about how to moderate the LLM outputs. Third, to allow the comedians to reclaim ownership of the tools and the processes for gathering and curating training data for these models, taking as inspiration data governance used for training some open-source LLMs ( Workshop et al., 2022 ) and providing artists with transparency about data provenance ( Mitchell et al., 2019 ; Srinivasan et al., 2021 ) . These are thorny open questions, left to the readers to address. 
+ Acknowledgements. 
+The authors wish to thank Renée Shelby, Jackie Kay, Mark Diaz, Nick Swanson, Remi Denton, Rida Qadri, Maribeth Rauh, Iason Gabriel, Tom Everitt, Merrie Morris, Canfer Akbulut, Nahema Marchal, Boxi Wu, Antonia Paterson, and Ed Hirst, for helpful discussions and suggestions, as well as Shereen Ashraf, Tom Rodenby, Rob Willoughby, Nasem Shalbak, Alyssa Pierce, Robert Ogley, Lorrayne Bennett, Jon Small and Vijay Bolina for support in the study.
+ 7. Ethical guidance 
+ 7.1. Ethical considerations 
+ Our empirical study was approved by the ethics board appointed by our institution, who considered adverse impacts of LLMs upon participants (e.g., exposure to harmful and biased LLM outputs), the right to withdrawal without prejudice, and the compensation of participants. Participant anonymity was an additional requirement for the study, which explains why we did not collect demographic data from the participants. 
+ At the beginning of the session, the objectives of the workshop were discussed with the participants. 
+ The study contains some offensive language, which is mentioned as a trigger warning at the beginning of the paper. 
+ 7.2. Researchers’ positionality 
+ The question of researchers’ positionality was directly asked by some of the workshop participants, who asked “what side we were on?”, meaning the side of the AI or the comedians’. Workshop facilitators answered that they were passionate about building AI tools that are useful for the artists, that they were open to any criticism and wanted the industry to listen to these criticisms and change behaviour. The professional affiliation of the workshop organisers (Google DeepMind) was disclosed to the participants. 
+ Two of the authors of this study (Piotr Mirowski and Kory Mathewson) have extensively used AI in professional comedy performance since 2016 through their human and AI duet HumanMachine 13 13 
+ 13 
+ https://humanmachine.live and AI theatre company Improbotics 14 14 
+ 14 
+ https://improbotics.org , a participatory theatre lab exploring the creative potential and ethics of generative AI. In that process, these two researchers have had numerous opportunities to discuss the subjects of AI with artists and academics. All participants of the workshop were aware of the authors’ dual affiliation and artistic exploration of AI tools for live performance. We all exchanged flyers and pitched our respective shows at the end of the workshop. 
+ 7.3. Adverse impacts 
+ We considered reputation damage for the participants, due to the participation in a study on AI for writing comedy material. This risk is exemplified by some participants: “I have friends who don’t talk to me anymore, because they learned that I have an AI show going on here” (p1) or “I have a friend who is deeply upset that I was using generative AI in my flyers” (p2). This risk was mitigated by keeping all participants anonymous in the study, by requesting all participants to adhere to Chatham House rules ( House, 2017 ) following the focus groups, as well as by anonymising the names of shows and details of comedy material in the participants’ survey answers and focus group transcripts. Furthermore, we reduced this risk by reaching out to prospective participants who had already advertised using AI in their process or who were discussing AI in their subject material (i.e., on their show listing for Edinburgh Festival Fringe 2023, or on their personal website and social media profiles). 
+ The second adverse impact can be the intentional or unintentional publication of comedians’ work. We addressed this concern by asking the participants to remove details of their shows and personal material from the writing sessions, and by personally removing anything that was omitted from the survey results, writing sessions’ answers, and from the focus groups transcripts. 
+ The third possible adverse impact could be advertising for the dissemination of LLMs as tools for writing. It is addressed, to some extent, by honest reporting of the concerns of the participants. 
+ References 
+ Abid et al . (2021) 
+Abubakar Abid, Maheen
+Farooqi, and James Zou.
+2021.
+ Persistent anti-muslim bias in large language
+models. In Proceedings of the 2021 AAAI/ACM
+Conference on AI, Ethics, and Society . 298–306.
+ Amin and Burghardt (2020) 
+Miriam Amin and Manuel
+Burghardt. 2020.
+ A survey on approaches to computational humor
+generation. In Proceedings of the The 4th Joint
+SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social
+Sciences, Humanities and Literature . 29–41.
+ Amironesei and Díaz (2023) 
+Razvan Amironesei and
+Mark Díaz. 2023.
+ Relationality and Offensive Speech: A Research
+Agenda. In The 7th Workshop on Online Abuse and
+Harms (WOAH) . 85–95.
+ Anthropic (2023) 
+Anthropic.
+2023.
+ Collective constitutional AI: Aligning a language
+model with public input.
+ https://www.anthropic.com/index/collective-constitutional-ai-aligning-a-language-model-with-public-input 
+ Aristotle (0 BC) 
+Aristotle. 350
+BC.
+ Poetics .
+ Arora et al . (2022) 
+Arnav Arora,
+Lucie-Aimée Kaffee, and Isabelle
+Augenstein. 2022.
+ Probing pre-trained language models for
+cross-cultural differences in values.
+ arXiv preprint arXiv:2203.13722 
+(2022).
+ Askell et al . (2021) 
+Amanda Askell, Yuntao
+Bai, Anna Chen, Dawn Drain,
+Deep Ganguli, Tom Henighan,
+Andy Jones, Nicholas Joseph,
+Ben Mann, Nova DasSarma, et al . 
+2021.
+ A general language assistant as a laboratory for
+alignment.
+ arXiv preprint arXiv:2112.00861 
+(2021).
+ Bai et al . (2022) 
+Yuntao Bai, Andy Jones,
+Kamal Ndousse, Amanda Askell,
+Anna Chen, Nova DasSarma,
+Dawn Drain, Stanislav Fort,
+Deep Ganguli, Tom Henighan,
+Nicholas Joseph, Saurav Kadavath,
+Jackson Kernion, Tom Conerly,
+Sheer El-Showk, Nelson Elhage,
+Zac Hatfield-Dodds, Danny Hernandez,
+Tristan Hume, Scott Johnston,
+Shauna Kravec, Liane Lovitt,
+Neel Nanda, Catherine Olsson,
+Dario Amodei, Tom Brown,
+Jack Clark, Sam McCandlish,
+Chris Olah, Ben Mann, and
+Jared Kaplan. 2022.
+ Training a Helpful and Harmless Assistant with
+Reinforcement Learning from Human Feedback.
+ arXiv:2204.05862 [cs.CL]
+ Bakker et al . (2022) 
+Michiel Bakker, Martin
+Chadwick, Hannah Sheahan, Michael
+Tessler, Lucy Campbell-Gillingham, Jan
+Balaguer, Nat McAleese, Amelia Glaese,
+John Aslanides, Matt Botvinick,
+et al . 2022.
+ Fine-tuning language models to find agreement among
+humans with diverse preferences.
+ Advances in Neural Information Processing
+Systems 35 (2022),
+38176–38189.
+ Baradaran (2023) 
+Amir Baradaran.
+2023.
+ Towards a decolonial I in AI: mapping the pervasive
+effects of artificial intelligence on the art ecosystem.
+ AI & SOCIETY (2023),
+1–13.
+ Bender et al . (2021) 
+Emily M Bender, Timnit
+Gebru, Angelina McMillan-Major, and
+Shmargaret Shmitchell. 2021.
+ On the dangers of stochastic parrots: Can language
+models be too big?. In Proceedings of the 2021 ACM
+conference on fairness, accountability, and transparency .
+610–623.
+ Benjamin (2019) 
+Ruha Benjamin.
+2019.
+ Race After Technology: Abolitionist Tools
+for the New Jim Code .
+ John Wiley & Sons.
+ Binsted and Ritchie (1994) 
+Kim Binsted and Graeme
+Ritchie. 1994.
+ An implemented model of punning riddles. In
+ Proceedings of the Twelfth AAAI National Conference
+on Artificial Intelligence . 633–638.
+ Blodgett et al . (2021) 
+Su Lin Blodgett, Gilsinia
+Lopez, Alexandra Olteanu, Robert Sim,
+and Hanna Wallach. 2021.
+ Stereotyping Norwegian salmon: An inventory of
+pitfalls in fairness benchmark datasets. In
+ Proceedings of the 59th Annual Meeting of the
+Association for Computational Linguistics and the 11th International Joint
+Conference on Natural Language Processing (Volume 1: Long Papers) .
+1004–1015.
+ Bommasani et al . (2021) 
+Rishi Bommasani, Drew A
+Hudson, Ehsan Adeli, Russ Altman,
+Simran Arora, Sydney von Arx,
+Michael S Bernstein, Jeannette Bohg,
+Antoine Bosselut, Emma Brunskill,
+et al . 2021.
+ On the opportunities and risks of foundation
+models.
+ arXiv preprint arXiv:2108.07258 
+(2021).
+ Branch et al . (2021) 
+Boyd Branch, Piotr
+Mirowski, and Kory W Mathewson.
+2021.
+ Collaborative Storytelling with Human Actors and AI
+Narrators.
+ Proceedings of the 12th International
+Conference on Computational Creativity (2021).
+ https://arxiv.org/abs/2109.14728 
+ Braun and Clarke (2006) 
+Virginia Braun and
+Victoria Clarke. 2006.
+ Using thematic analysis in psychology.
+ Qualitative research in psychology 
+3, 2 (2006),
+77–101.
+ Buolamwini and Gebru (2018) 
+Joy Buolamwini and
+Timnit Gebru. 2018.
+ Gender shades: Intersectional accuracy disparities
+in commercial gender classification. In Conference
+on fairness, accountability and transparency . PMLR,
+77–91.
+ Calderwood et al . (2022) 
+Alex Calderwood, Noah
+Wardrip-Fruin, and Michael Mateas.
+2022.
+ Spinning coherent interactive fiction through
+foundation model prompts. ICCC.
+ Caron (2002) 
+James E Caron.
+2002.
+ From ethology to aesthetics: Evolution as a
+theoretical paradigm for research on laughter, humor, and other comic
+phenomena.
+ Humor: International Journal of Humor
+Research (2002).
+ Chakrabarty et al . (2023a) 
+Tuhin Chakrabarty,
+Philippe Laban, Divyansh Agarwal,
+Smaranda Muresan, and Chien-Sheng Wu.
+2023a.
+ Art or artifice? large language models and the
+false promise of creativity.
+ arXiv preprint arXiv:2309.14556 
+(2023).
+ Chakrabarty et al . (2023b) 
+Tuhin Chakrabarty, Vishakh
+Padmakumar, Faeze Brahman, and Smaranda
+Muresan. 2023b.
+ Creativity Support in the Age of Large Language
+Models: An Empirical Study Involving Emerging Writers.
+ arXiv preprint arXiv:2309.12570 
+(2023).
+ Chakrabarty et al . (2022) 
+Tuhin Chakrabarty, Vishakh
+Padmakumar, and He He. 2022.
+ Help me write a Poem-Instruction Tuning as a
+Vehicle for Collaborative Poetry Writing. In
+ Proceedings of the 2022 Conference on Empirical
+Methods in Natural Language Processing . 6848–6863.
+ Chen et al . (2023) 
+Yuetian Chen, Bowen Shi,
+and Mei Si. 2023.
+ Prompt to GPT-3: Step-by-Step Thinking Instructions
+for Humor Generation.
+ arXiv preprint arXiv:2306.13195 
+(2023).
+ Cherry and Latulipe (2014) 
+Erin Cherry and Celine
+Latulipe. 2014.
+ Quantifying the creativity support of digital tools
+through the creativity support index.
+ ACM Transactions on Computer-Human
+Interaction (TOCHI) 21, 4
+(2014), 1–25.
+ Chowdhery et al . (2023) 
+Aakanksha Chowdhery,
+Sharan Narang, Jacob Devlin,
+Maarten Bosma, Gaurav Mishra,
+Adam Roberts, Paul Barham,
+Hyung Won Chung, Charles Sutton,
+Sebastian Gehrmann, et al . 
+2023.
+ Palm: Scaling language modeling with pathways.
+ Journal of Machine Learning Research 
+24, 240 (2023),
+1–113.
+ Christiano et al . (2017) 
+Paul F Christiano, Jan
+Leike, Tom Brown, Miljan Martic,
+Shane Legg, and Dario Amodei.
+2017.
+ Deep reinforcement learning from human
+preferences.
+ Advances in neural information processing
+systems 30 (2017).
+ Croom (2011) 
+Adam M Croom.
+2011.
+ Slurs.
+ Language Sciences 33,
+3 (2011), 343–358.
+ Dev et al . (2023) 
+Sunipa Dev, Akshita Jha,
+Jaya Goyal, Dinesh Tewari,
+Shachi Dave, and Vinodkumar
+Prabhakaran. 2023.
+ Building Stereotype Repositories with LLMs and
+Community Engagement for Scale and Depth.
+ Cross-Cultural Considerations in NLP@ EACL 
+(2023), 84.
+ Dev et al . (2022) 
+Sunipa Dev, Emily Sheng,
+Jieyu Zhao, Aubrie Amstutz,
+Jiao Sun, Yu Hou, Mattie
+Sanseverino, Jiin Kim, Akihiro Nishi,
+Nanyun Peng, et al . 
+2022.
+ On Measures of Biases and Harms in NLP. In
+ Findings of the Association for Computational
+Linguistics: AACL-IJCNLP 2022 . 246–267.
+ Dias Oliva et al . (2021) 
+Thiago Dias Oliva,
+Dennys Marcelo Antonialli, and
+Alessandra Gomes. 2021.
+ Fighting hate speech, silencing drag queens?
+artificial intelligence in content moderation and risks to LGBTQ voices
+online.
+ Sexuality & Culture 25
+(2021), 700–732.
+ Díaz et al . (2022) 
+Mark Díaz, Razvan
+Amironesei, Laura Weidinger, and Iason
+Gabriel. 2022.
+ Accounting for offensive speech as a practice of
+resistance. In Proceedings of the sixth workshop
+on online abuse and harms (woah) . 192–202.
+ Double (2017) 
+Oliver Double.
+2017.
+ Tragedy plus time: Transforming life experience
+into stand-up comedy.
+ New Theatre Quarterly 33,
+2 (2017), 143–155.
+ Epstein et al . (2023) 
+Ziv Epstein, Aaron
+Hertzmann, Investigators of Human Creativity,
+Memo Akten, Hany Farid,
+Jessica Fjeld, Morgan R Frank,
+Matthew Groh, Laura Herman,
+Neil Leach, et al . 
+2023.
+ Art and the science of generative AI.
+ Science 380,
+6650 (2023), 1110–1111.
+ Gabriel (2020) 
+Iason Gabriel.
+2020.
+ Artificial intelligence, values, and alignment.
+ Minds and machines 30,
+3 (2020), 411–437.
+ Gadsby (2018) 
+Hannah Gadsby.
+2018.
+ Hannah Gadsby: Nanette.
+ USA:: Netflix (2018).
+ Gero et al . (2022) 
+Katy Ilonka Gero, Vivian
+Liu, and Lydia Chilton.
+2022.
+ Sparks: Inspiration for science writing using
+language models. In Designing Interactive Systems
+Conference . 1002–1019.
+ Gervais and Wilson (2005) 
+Matthew Gervais and
+David Sloan Wilson. 2005.
+ The evolution and functions of laughter and humor:
+A synthetic approach.
+ The Quarterly review of biology 
+80, 4 (2005),
+395–430.
+ GHAJAR et al . (2023) 
+BOBBY GHAJAR, COLETTE
+GHAZARIAN, ANGELA L DUNNING, MARK
+WEINSTEIN, JUDD LAUTER, and MARK A
+LEMLEY. 2023.
+ UNITED STATES DISTRICT COURT NORTHERN DISTRICT OF
+CALIFORNIA.
+ (2023).
+ https://llmlitigation.com/pdf/03417/kadrey-meta-complaint.pdf 
+ Goes et al . (2023) 
+Fabricio Goes, Piotr
+Sawicki, Marek Grześ, Dan Brown,
+and Marco Volpe. 2023.
+ Is GPT-4 Good Enough to Evaluate Jokes?. In
+ Proceedings of the 14th International Conference
+for Computational Creativity .
+ Goes et al . (2022) 
+Fabricio Goes, Zisen
+Zhou, Piotr Sawicki, Marek Grzes, and
+Daniel G Brown. 2022.
+ Crowd score: A method for the evaluation of jokes
+using large language model AI voters as judges.
+ arXiv preprint arXiv:2212.11214 
+(2022).
+ Hamidi et al . (2018) 
+Foad Hamidi, Morgan Klaus
+Scheuerman, and Stacy M Branham.
+2018.
+ Gender recognition or gender reductionism? The
+social implications of embedded gender recognition systems. In
+ Proceedings of the 2018 chi conference on human
+factors in computing systems . 1–13.
+ Hart and Staveland (1988) 
+Sandra G Hart and
+Lowell E Staveland. 1988.
+ Development of NASA-TLX (Task Load Index): Results
+of empirical and theoretical research.
+ In Advances in psychology .
+Vol. 52. Elsevier,
+139–183.
+ Hendry et al . (2023) 
+Manuel Flurin Hendry,
+Norbert Kottmann, Martin Fröhlich,
+Florian Bruggisser, Marco Quandt,
+Stella Speziali, Valentin Huber, and
+Chris Salter. 2023.
+ Are you talking to me? a case study in emotional
+human-machine interaction. In Proceedings of the
+AAAI Conference on Artificial Intelligence and Interactive Digital
+Entertainment , Vol. 19. 417–424.
+ Hessel et al . (2022) 
+Jack Hessel, Ana
+Marasović, Jena D Hwang, Lillian
+Lee, Jeff Da, Rowan Zellers,
+Robert Mankoff, and Yejin Choi.
+2022.
+ Do androids laugh at electric sheep? humor"
+understanding" benchmarks from the new yorker caption contest.
+ arXiv preprint arXiv:2209.06293 
+(2022).
+ Hobbes (1651) 
+Hobbes. 1651.
+ Leviathan .
+ House (2017) 
+Chatham House.
+2017.
+ Chatham house rule.
+ Hu et al . (2023) 
+Tiancheng Hu, Yara
+Kyrychenko, Steve Rathje, Nigel Collier,
+Sander van der Linden, and Jon
+Roozenbeek. 2023.
+ Generative language models exhibit social identity
+biases.
+ arXiv preprint arXiv:2310.15819 
+(2023).
+ Huang et al . (2023) 
+Chieh-Yang Huang, Sanjana
+Gautam, Shannon McClellan Brooks, Ya-Fang
+Lin, and Ting-Hao’Kenneth’ Huang.
+2023.
+ Inspo: Writing Stories with a Flock of AIs and
+Humans.
+ arXiv preprint arXiv:2311.16521 
+(2023).
+ Hurley et al . (2011) 
+Matthew M Hurley,
+Daniel Clement Dennett, and Reginald B
+Adams. 2011.
+ Inside jokes: Using humor to
+reverse-engineer the mind .
+ MIT press.
+ Hutcheson (1750) 
+Francis Hutcheson.
+1750.
+ Reflections upon Laughter, and Remarks upon
+the Fable of the Bees .
+ R. Urie.
+ Inácio and Oliveira (2023) 
+Marcio Lima Inácio and
+Hugo Gonçalo Oliveira.
+2023.
+ Towards Generation and Recognition of Humorous
+Texts in Portuguese. In Proceedings of the 17th
+Conference of the European Chapter of the Association for Computational
+Linguistics: Student Research Workshop . 26–36.
+ Ippolito et al . (2022) 
+Daphne Ippolito, Ann
+Yuan, Andy Coenen, and Sehmon Burnam.
+2022.
+ Creative writing with an ai-powered writing
+assistant: Perspectives from professional writers.
+ arXiv preprint arXiv:2211.05030 
+(2022).
+ Jentzsch and Kersting (2023) 
+Sophie Jentzsch and
+Kristian Kersting. 2023.
+ ChatGPT is fun, but it is not funny! Humor is still
+challenging Large Language Models.
+ arXiv preprint arXiv:2306.04563 
+(2023).
+ Jiang et al . (2024) 
+Albert Q. Jiang, Alexandre
+Sablayrolles, Antoine Roux, Arthur
+Mensch, Blanche Savary, Chris Bamford,
+Devendra Singh Chaplot, Diego de las
+Casas, Emma Bou Hanna, Florian Bressand,
+Gianna Lengyel, Guillaume Bour,
+Guillaume Lample, Lélio Renard Lavaud,
+Lucile Saulnier, Marie-Anne Lachaux,
+Pierre Stock, Sandeep Subramanian,
+Sophia Yang, Szymon Antoniak,
+Teven Le Scao, Théophile Gervet,
+Thibaut Lavril, Thomas Wang,
+Timothée Lacroix, and William El
+Sayed. 2024.
+ Mixtral of Experts.
+ arXiv:2401.04088 [cs.LG]
+ Jiang et al . (2023) 
+Harry H Jiang, Lauren
+Brown, Jessica Cheng, Mehtab Khan,
+Abhishek Gupta, Deja Workman,
+Alex Hanna, Johnathan Flowers, and
+Timnit Gebru. 2023.
+ AI Art and its Impact on Artists. In
+ Proceedings of the 2023 AAAI/ACM Conference on AI,
+Ethics, and Society . 363–374.
+ Johnson et al . (2022) 
+Rebecca L Johnson, Giada
+Pistilli, Natalia Menédez-González,
+Leslye Denisse Dias Duran, Enrico Panai,
+Julija Kalpokiene, and Donald Jay
+Bertulfo. 2022.
+ The Ghost in the Machine has an American accent:
+value conflict in GPT-3.
+ arXiv preprint arXiv:2203.07785 
+(2022).
+ Kaddour et al . (2023) 
+Jean Kaddour, Joshua
+Harris, Maximilian Mozes, Herbie
+Bradley, Roberta Raileanu, and Robert
+McHardy. 2023.
+ Challenges and Applications of Large Language
+Models.
+ arXiv:2307.10169 [cs.CL]
+ Kasirzadeh and Gabriel (2023) 
+Atoosa Kasirzadeh and
+Iason Gabriel. 2023.
+ In conversation with Artificial Intelligence:
+aligning language models with human values.
+ Philosophy & Technology 
+36, 2 (2023),
+1–24.
+ Kirk et al . (2023) 
+Hannah Rose Kirk, Andrew M
+Bean, Bertie Vidgen, Paul Röttger,
+and Scott A Hale. 2023.
+ The past, present and better future of feedback
+learning in large language models for subjective human preferences and
+values.
+ arXiv preprint arXiv:2310.07629 
+(2023).
+ Li et al . (2023) 
+Jianquan Li, Xiangbo Wu,
+Xiaokang Liu, Qianqian Xie,
+Prayag Tiwari, and Benyou Wang.
+2023.
+ Can Language Models Make Fun? A Case Study in
+Chinese Comical Crosstalk. In Proceedings of the
+61st Annual Meeting of the Association for Computational Linguistics (Volume
+1: Long Papers) . 7581–7596.
+ London et al . (2023) 
+Alex John London et al . 
+2023.
+ Beneficent Intelligence: A Capability Approach to
+Modeling Benefit, Assistance, and Associated Moral Failures through AI
+Systems.
+ arXiv preprint arXiv:2308.00868 
+(2023).
+ Maguire and Delahunt (2017) 
+Moira Maguire and Brid
+Delahunt. 2017.
+ Doing a thematic analysis: A practical,
+step-by-step guide for learning and teaching scholars.
+ All Ireland Journal of Higher Education 
+9, 3 (2017).
+ Manovich (2018) 
+Lev Manovich.
+2018.
+ AI aesthetics .
+ Strelka Press Moscow.
+ Marwick and Boyd (2011) 
+Alice E Marwick and
+Danah Boyd. 2011.
+ I tweet honestly, I tweet passionately: Twitter
+users, context collapse, and the imagined audience.
+ New media & society 13,
+1 (2011), 114–133.
+ Masoud et al . (2023) 
+Reem I Masoud, Ziquan
+Liu, Martin Ferianc, Philip Treleaven,
+and Miguel Rodrigues. 2023.
+ Cultural Alignment in Large Language Models: An
+Explanatory Analysis Based on Hofstede’s Cultural Dimensions.
+ arXiv preprint arXiv:2309.12342 
+(2023).
+ Mathewson and Mirowski (2017) 
+Kory Mathewson and Piotr
+Mirowski. 2017.
+ Improvised theatre alongside artificial
+intelligences. In Proceedings of the AAAI
+Conference on Artificial Intelligence and Interactive Digital
+Entertainment , Vol. 13. 66–72.
+ Mathewson and Mirowski (2018) 
+Kory Mathewson and Piotr
+Mirowski. 2018.
+ Improbotics: Exploring the imitation game using
+machine intelligence in improvised theatre. In
+ Proceedings of the AAAI Conference on Artificial
+Intelligence and Interactive Digital Entertainment ,
+Vol. 14.
+ McGraw and Warren (2010) 
+A Peter McGraw and Caleb
+Warren. 2010.
+ Benign violations: Making immoral behavior funny.
+ Psychological science 21,
+8 (2010), 1141–1149.
+ Mirowski and Mathewson (2019) 
+Piotr Mirowski and
+Kory Wallace Mathewson. 2019.
+ Human improvised theatre augmented with artificial
+intelligence.
+ In Proceedings of the 2019 on Creativity
+and Cognition . 527–530.
+ Mirowski et al . (2023) 
+Piotr Mirowski, Kory W
+Mathewson, Jaylen Pittman, and Richard
+Evans. 2023.
+ Co-Writing Screenplays and Theatre Scripts with
+Language Models: Evaluation by Industry Professionals. In
+ Proceedings of the 2023 CHI Conference on Human
+Factors in Computing Systems . 1–34.
+ Mitchell et al . (2019) 
+Margaret Mitchell, Simone
+Wu, Andrew Zaldivar, Parker Barnes,
+Lucy Vasserman, Ben Hutchinson,
+Elena Spitzer, Inioluwa Deborah Raji,
+and Timnit Gebru. 2019.
+ Model cards for model reporting. In
+ Proceedings of the conference on fairness,
+accountability, and transparency . 220–229.
+ Mohamed et al . (2020) 
+Shakir Mohamed,
+Marie-Therese Png, and William Isaac.
+2020.
+ Decolonial AI: Decolonial theory as sociotechnical
+foresight in artificial intelligence.
+ Philosophy & Technology 
+33 (2020), 659–684.
+ Noble and Mitchell (2016) 
+Helen Noble and Gary
+Mitchell. 2016.
+ What is grounded theory?
+ Evidence-based nursing 
+19, 2 (2016),
+34–35.
+ of America (2023) 
+Writers Guild of America.
+2023.
+ Summary of the 2023 WGA MBA.
+ https://www.wgacontract2023.org/the-campaign/summary-of-the-2023-wga-mba 
+ Onwuegbuzie et al . (2009) 
+Anthony J Onwuegbuzie,
+Wendy B Dickinson, Nancy L Leech, and
+Annmarie G Zoran. 2009.
+ A qualitative framework for collecting and
+analyzing data in focus group research.
+ International journal of qualitative
+methods 8, 3 (2009),
+1–21.
+ OpenAI et al . ([n. d.]) 
+OpenAI, Josh Achiam,
+Steven Adler, Sandhini Agarwal,
+Lama Ahmad, Ilge Akkaya,
+Florencia Leoni Aleman, Diogo Almeida,
+Janko Altenschmidt, Sam Altman,
+Shyamal Anadkat, Red Avila,
+Igor Babuschkin, Suchir Balaji,
+Valerie Balcom, Paul Baltescu,
+Haiming Bao, Mo Bavarian,
+Jeff Belgum, Irwan Bello,
+et al . [n. d.].
+ GPT-4 Technical Report.
+ Ortiz (2022) 
+Karla Ortiz.
+2022.
+ Why AI Models are not inspired like humans.
+ Ouyang et al . (2022) 
+Long Ouyang, Jeffrey Wu,
+Xu Jiang, Diogo Almeida,
+Carroll Wainwright, Pamela Mishkin,
+Chong Zhang, Sandhini Agarwal,
+Katarina Slama, Alex Ray,
+John Schulman, Jacob Hilton,
+Fraser Kelton, Luke Miller,
+Maddie Simens, Amanda Askell,
+Peter Welinder, Paul F Christiano,
+Jan Leike, and Ryan Lowe.
+2022.
+ Training language models to follow instructions
+with human feedback. In Advances in Neural
+Information Processing Systems ,
+S. Koyejo, S. Mohamed,
+A. Agarwal, D. Belgrave,
+K. Cho, and A. Oh (Eds.),
+Vol. 35. Curran Associates, Inc.,
+27730–27744.
+ https://proceedings.neurips.cc/paper_files/paper/2022/file/b1efde53be364a73914f58805a001731-Paper-Conference.pdf 
+ Padmakumar and He (2023) 
+Vishakh Padmakumar and
+He He. 2023.
+ Does Writing with Language Models Reduce Content
+Diversity?
+ arXiv preprint arXiv:2309.05196 
+(2023).
+ Park et al . (2023) 
+Joon Sung Park, Joseph
+O’Brien, Carrie Jun Cai, Meredith Ringel
+Morris, Percy Liang, and Michael S
+Bernstein. 2023.
+ Generative agents: Interactive simulacra of human
+behavior. In Proceedings of the 36th Annual ACM
+Symposium on User Interface Software and Technology .
+1–22.
+ Parrish (2017) 
+Allison Parrish.
+2017.
+ Poetic sound similarity vectors using phonetic
+features. In Proceedings of the AAAI Conference on
+Artificial Intelligence and Interactive Digital Entertainment ,
+Vol. 13. 99–106.
+ Qadri et al . (2023) 
+Rida Qadri, Renee Shelby,
+Cynthia L Bennett, and Emily Denton.
+2023.
+ AI’s Regimes of Representation: A
+Community-centered Study of Text-to-Image Models in South Asia. In
+ Proceedings of the 2023 ACM Conference on Fairness,
+Accountability, and Transparency . 506–517.
+ Queerinai et al . (2023) 
+Organizers Of Queerinai,
+Anaelia Ovalle, Arjun Subramonian,
+Ashwin Singh, Claas Voelcker,
+Danica J Sutherland, Davide Locatelli,
+Eva Breznik, Filip Klubicka,
+Hang Yuan, et al . 
+2023.
+ Queer In AI: A Case Study in Community-Led
+Participatory AI. In Proceedings of the 2023 ACM
+Conference on Fairness, Accountability, and Transparency .
+1882–1895.
+ Raskin (1979) 
+Victor Raskin.
+1979.
+ Semantic mechanisms of humor. In
+ Annual Meeting of the Berkeley Linguistics
+Society , Vol. 5. 325–335.
+ Rauh et al . (2022) 
+Maribeth Rauh, John
+Mellor, Jonathan Uesato, Po-Sen Huang,
+Johannes Welbl, Laura Weidinger,
+Sumanth Dathathri, Amelia Glaese,
+Geoffrey Irving, Iason Gabriel,
+et al . 2022.
+ Characteristics of harmful text: Towards rigorous
+benchmarking of language models.
+ Advances in Neural Information Processing
+Systems 35 (2022),
+24720–24739.
+ Ritchie (1999) 
+Graeme Ritchie.
+1999.
+ Developing the Incongruity-Resolution Theory.
+ Institute for Communicating and Collaborative
+Systems (1999).
+ Rosa et al . (2020) 
+Rudolf Rosa, Ondřej
+Dušek, Tom Kocmi, David
+Mareček, Tomáš Musil,
+Patrícia Schmidtová, Dominik
+Jurko, Ondřej Bojar, Daniel Hrbek,
+David Košt’ák, et al . 
+2020.
+ THEaiTRE: Artificial intelligence to write a
+theatre play.
+ arXiv preprint arXiv:2006.14668 
+(2020).
+ Rosa et al . (2022) 
+Rudolf Rosa, Patrícia
+Schmidtová, Ondřej Dušek,
+Tomáš Musil, David
+Mareček, Saad Obaid, Marie
+Nováková, Klára Vosecká, and
+Josef Doležal. 2022.
+ GPT-2-based Human-in-the-loop Theatre Play Script
+Generation. In Proceedings of the 4th Workshop of
+Narrative Understanding (WNU2022) . 29–37.
+ Santurkar et al . (2023) 
+Shibani Santurkar, Esin
+Durmus, Faisal Ladhak, Cinoo Lee,
+Percy Liang, and Tatsunori Hashimoto.
+2023.
+ Whose opinions do language models reflect?. In
+ International Conference on Machine Learning .
+PMLR, 29971–30004.
+ Schmidtová et al . (2022) 
+Patrícia Schmidtová,
+Dávid Javorskỳ, Christián
+Mikláš, Tomáš Musil,
+Rudolf Rosa, and Ondřej
+Dušek. 2022.
+ DialogueScript: Using Dialogue Agents to Produce a
+Script.
+ arXiv preprint arXiv:2206.08425 
+(2022).
+ Shaotran et al . (2023) 
+Ethan Shaotran, Ido
+Pesok, Sam Jones, and Emi Liu.
+2023.
+ Aligned: A Platform-based Process for Alignment.
+ arXiv preprint arXiv:2311.08706 
+(2023).
+ Sharples and y Pérez (2022) 
+Mike Sharples and
+Rafael Pérez y Pérez.
+2022.
+ Story machines: How computers have become
+creative writers .
+ Routledge.
+ Sheng et al . (2021) 
+Emily Sheng, Kai-Wei
+Chang, Prem Natarajan, and Nanyun
+Peng. 2021.
+ Societal Biases in Language Generation: Progress
+and Challenges. In Proceedings of the 59th Annual
+Meeting of the Association for Computational Linguistics and the 11th
+International Joint Conference on Natural Language Processing (Volume 1: Long
+Papers) . 4275–4293.
+ Simonton (2000) 
+Dean Keith Simonton.
+2000.
+ Creativity: Cognitive, personal, developmental, and
+social aspects.
+ American psychologist 55,
+1 (2000), 151.
+ Srinivasan et al . (2021) 
+Ramya Malur Srinivasan,
+Emily Denton, Jordan Jennifer Famularo,
+Negar Rostamzadeh, Fernando Diaz, and
+Beth Coleman. 2021.
+ Art Sheets for Art Datasets.
+ https://openreview.net/pdf?id=K7ke_GZ_6N 
+ Stock and Strapparava (2005) 
+Oliviero Stock and Carlo
+Strapparava. 2005.
+ Hahacronym: A computational humor system. In
+ Proceedings of the ACL Interactive Poster and
+Demonstration Sessions . 113–116.
+ Team et al . ([n. d.]) 
+Gemini Team, Rohan Anil,
+Sebastian Borgeaud, Yonghui Wu,
+Jean-Baptiste Alayrac, Jiahui Yu,
+Radu Soricut, Johan Schalkwyk,
+Andrew M. Dai, Anja Hauth,
+Katie Millican, David Silver,
+Slav Petrov, Melvin Johnson,
+Ioannis Antonoglou, Julian Schrittwieser,
+Amelia Glaese, Jilin Chen,
+Emily Pitler, Timothy Lillicrap,
+et al . [n. d.].
+ Gemini: A Family of Highly Capable Multimodal
+Models.
+ Toplyn (2023) 
+Joe Toplyn.
+2023.
+ Witscript 3: A Hybrid AI System for Improvising
+Jokes in a Conversation.
+ arXiv preprint arXiv:2301.02695 
+(2023).
+ Touvron et al . ([n. d.]) 
+Hugo Touvron, Louis
+Martin, Kevin Stone, Peter Albert,
+Amjad Almahairi, Yasmine Babaei,
+Nikolay Bashlykov, Soumya Batra,
+Prajjwal Bhargava, Shruti Bhosale,
+Dan Bikel, Lukas Blecher,
+Cristian Canton Ferrer, Moya Chen,
+Guillem Cucurull, David Esiobu,
+Jude Fernandes, Jeremy Fu,
+Wenyin Fu, et al . 
+[n. d.].
+ Llama 2: Open Foundation and Fine-Tuned Chat Models.
+ Varshney (2023) 
+Kush R Varshney.
+2023.
+ Decolonial AI Alignment: Vi \ \backslash ’ { \{ s } \} 
+esadharma, Argument, and Artistic Expression.
+ arXiv preprint arXiv:2309.05030 
+(2023).
+ Veale (2021) 
+Tony Veale.
+2021.
+ Your Wit is My Command: Building AIs with a
+Sense of Humor .
+ Mit Press.
+ Weidinger et al . (2021) 
+Laura Weidinger, John
+Mellor, Maribeth Rauh, Conor Griffin,
+Jonathan Uesato, Po-Sen Huang,
+Myra Cheng, Mia Glaese,
+Borja Balle, Atoosa Kasirzadeh,
+et al . 2021.
+ Ethical and social risks of harm from language
+models.
+ arXiv preprint arXiv:2112.04359 
+(2021).
+ Weidinger et al . (2023) 
+Laura Weidinger, Maribeth
+Rauh, Nahema Marchal, Arianna Manzini,
+Lisa Anne Hendricks, Juan Mateos-Garcia,
+Stevie Bergman, Jackie Kay,
+Conor Griffin, Ben Bariach,
+et al . 2023.
+ Sociotechnical Safety Evaluation of Generative AI
+Systems.
+ arXiv preprint arXiv:2310.11986 
+(2023).
+ West et al . (2019) 
+Sarah Myers West, Meredith
+Whittaker, and Kate Crawford.
+2019.
+ Discriminating systems.
+ AI Now (2019),
+1–33.
+ Winters (2021) 
+Thomas Winters.
+2021.
+ Computers Learning Humor Is No Joke.
+ Harvard Data Science Review 
+3, 2 (2021).
+ Winters and Delobelle (2021) 
+Thomas Winters and
+Pieter Delobelle. 2021.
+ Survival of the wittiest: Evolving satire with
+language models. In Proceedings of the Twelfth
+International Conference on Computational Creativity . Association for
+Computational Creativity (ACC), 82–86.
+ Winters and Mathewson (2019) 
+Thomas Winters and
+Kory W Mathewson. 2019.
+ Automatically generating engaging presentation
+slide decks. In International Conference on
+Computational Intelligence in Music, Sound, Art and Design (Part of
+EvoStar) . Springer, 127–141.
+ Winters et al . (2018) 
+Thomas Winters, Vincent
+Nys, and Daniel De Schreye.
+2018.
+ Automatic joke generation: Learning humor from
+examples. In Distributed, Ambient and Pervasive
+Interactions: Technologies and Contexts: 6th International Conference, DAPI
+2018, Held as Part of HCI International 2018, Las Vegas, NV, USA, July
+15–20, 2018, Proceedings, Part II 6 . Springer, 360–377.
+ Winters et al . (2019) 
+Thomas Winters, Vincent
+Nys, and Danny De Schreye.
+2019.
+ Towards a general framework for humor generation
+from rated examples. In Proceedings of the 10th
+International Conference on Computational Creativity . Association for
+Computational Creativity, 274–281.
+ http://computationalcreativity.net/iccc2019/assets/iccc_proceedings_2019.pdf 
+ Workshop et al . (2022) 
+BigScience Workshop,
+Teven Le Scao, Angela Fan,
+Christopher Akiki, Ellie Pavlick,
+Suzana Ilić, Daniel Hesslow,
+Roman Castagné, Alexandra Sasha
+Luccioni, François Yvon, et al . 
+2022.
+ Bloom: A 176b-parameter open-access multilingual
+language model.
+ arXiv preprint arXiv:2211.05100 
+(2022).
+ Xu et al . (2021) 
+Albert Xu, Eshaan Pathak,
+Eric Wallace, Suchin Gururangan,
+Maarten Sap, and Dan Klein.
+2021.
+ Detoxifying Language Models Risks Marginalizing
+Minority Voices. In Proceedings of the 2021
+Conference of the North American Chapter of the Association for Computational
+Linguistics: Human Language Technologies . 2390–2397.
+ Yang et al . (2022) 
+Kevin Yang, Yuandong
+Tian, Nanyun Peng, and Dan Klein.
+2022.
+ Re3: Generating Longer Stories With Recursive
+Reprompting and Revision. In Proceedings of the
+2022 Conference on Empirical Methods in Natural Language Processing .
+4393–4479.
+ Yuan et al . (2022) 
+Ann Yuan, Andy Coenen,
+Emily Reif, and Daphne Ippolito.
+2022.
+ Wordcraft: Story Writing With Large Language
+Models. In 27th International Conference on
+Intelligent User Interfaces . 841–852.
+ Zhou et al . (2021) 
+Kaitlyn Zhou, Kawin
+Ethayarajh, and Dan Jurafsky.
+2021.
+ Frequency-based distortions in contextualized word
+embeddings.
+ arXiv preprint arXiv:2104.08465 
+(2021).
+ Ziegler et al . (2019) 
+Daniel M Ziegler, Nisan
+Stiennon, Jeffrey Wu, Tom B Brown,
+Alec Radford, Dario Amodei,
+Paul Christiano, and Geoffrey Irving.
+2019.
+ Fine-tuning language models from human
+preferences.
+ arXiv preprint arXiv:1909.08593 
+(2019).
+ Appendix A Related Work on Computational Humour, AI and Comedy 
+ This section reviews computational humour literature. As foreshadowed in the Introduction (Sect. 1.1.1 ) and discussed in the Section on the importance of context in humour and comedy (Sect. 5.2.2 ), humour remains an elusive goal for AI. 
+ A.1. Humour generation, from template-based systems to prompting 
+ Amin and Burghardt (2020) , Winters (2021) and Veale (2021) provide extensive surveys on the history of computational humour generation and early approaches, like hand-coded rules ( Winters et al., 2018 ) and templates for puns, riddles and acronyms ( Binsted and Ritchie, 1994 ; Stock and Strapparava, 2005 ) , or templates for automatically-generated slide decks for improvised “Powerpoint Karaoke” ( Winters and Mathewson, 2019 ) . 
+ With the advent of LLMs, able to generate grammatically correct sentences in a given writing style, writers can focus on joke structure, guiding LLM-based systems to replicate such structures from examples of jokes ( Winters et al., 2019 ) , or use evolutionary computing to evolve text to become more satirical ( Winters and Delobelle, 2021 ) . More broadly, Kaddour et al. (2023) summarise recent work on using LLMs for creative applications such as (potentially humorous) story generation, including “Recursive Reprompting and Revision” ( Yang et al., 2022 ) or interactive writing tools like “WordCraft” ( Ippolito et al., 2022 ) and “Dramatron” ( Mirowski et al., 2023 ) . 
+ A.2. LLMs for comedy performance 
+ LLMs have been deployed since at least 2016 for live performance on stage, including in improvised comedy ( Mathewson and Mirowski, 2017 ; Mirowski and Mathewson, 2019 ; Branch et al., 2021 ) , short comical film scripts like Sunspring , and song lyrics for musical comedy like Beyond the Fence 15 15 
+ 15 
+ https://www.theguardian.com/stage/2016/feb/28/beyond-the-fence-review-computer-created-musical-arts-theatre-london . More recently, LLMs have been involved in (involuntarily) comical , absurdist productions of Prague-based company THEaiTRE ( Rosa et al., 2020 ; Schmidtová et al., 2022 ; Rosa et al., 2022 ) , and semi-improvised comedy Plays By Bots 16 16 
+ 16 
+ Review: https://12thnight.ca/2022/08/13/oh-no-bots-have-invaded-theatre-and-they-can-do-it-plays-by-bots-a-fringe-review/ ( Mirowski et al., 2023 ) . The success of these performances with AI primarily relied on the skills of the actors, who could invent subtext and add interpretation to AI-generated text ( Mirowski and Mathewson, 2019 ) . 
+ Appendix B Participant questionnaire 
+ B.1. Your past experience with AI systems in general. 
+ Please answer based on your past experience, before this workshop.
+ • 
+ Have you used AI systems to write comedy material in the past? [Yes, and I used that material in some of my performances / Yes, but only to explore ideas / No]
+ • 
+ Have you used AI systems to generate content (including audio, video, text, etc.) for some of your performances? [Yes, and I operated the AI system myself / Yes, but someone else operated the AI system / No]
+ • 
+ In fewer than 10 words, why did you use AI in your artistic process? For example: trendy topic, glitch aesthetic, inspiration, etc.
+ • 
+ In fewer than 10 words, what is your background with AI? (Please do not give personally identifiable information)
+ • 
+ In few than 10 words, what is your performance background? For example: full-time comedian, dancer, years of experience, etc. (Please do not give personally identifiable information)
+ Note that the wording of these questions (for example: trendy topic, glitch aesthetic, inspiration) could be considered as potentially biasing, but we believed it was ultimately helpful to prompt study participants. 
+ B.2. Your experience with the AI system for writing comedy material 
+ Please answer based on your interaction with the AI system in this morning’s writing session.
+ • 
+ I found the AI system helpful. [1 to 5]
+ • 
+ I felt like I was collaborating with the AI system. [1 to 5]
+ • 
+ I found it easy to write with the AI system. [1 to 5]
+ • 
+ I enjoyed writing with the AI system. [1 to 5]
+ • 
+ I was able to express my creative goals while writing with the AI system. [1 to 5]
+ • 
+ The comedy material written with the AI system feel unique. [1 to 5]
+ • 
+ I feel I have ownership over the comedy material written with the AI system. [1 to 5]
+ • 
+ I was surprised by the responses from the AI system. [1 to 5]
+ • 
+ I’m proud of the comedy material written with the AI system. [1 to 5]
+ In the questions above, 1 corresponds to Strongly disagree and 5 to Strongly agree . 
+ B.3. Creativity Support Index of the AI writing tool 
+ This section contains questions that will allow us to compute a Creativity Support Index for the AI writing tool. Most of these questions overlap with those in the previous section.
+ • 
+ The AI system allowed other people to work with me easily. [1 to 10]
+ • 
+ It was really easy to share ideas and designs with other people inside this system or tool. [1 to 10]
+ • 
+ I would be happy to use this system or tool on a regular basis. [1 to 10]
+ • 
+ I enjoyed using the system or tool. [1 to 10]
+ • 
+ It was easy for me to explore many different ideas, options, designs, or outcomes, using this system or tool. [1 to 10]
+ • 
+ The AI system was helpful in allowing me to track different ideas, outcomes, or possibilities. [1 to 10]
+ • 
+ I was able to be very creative while doing the activity inside this system or tool. [1 to 10]
+ • 
+ The system or tool allowed me to be very expressive. [1 to 10]
+ • 
+ My attention was fully tuned to the activity, and I forgot about the AI system that I was using. [1 to 10]
+ • 
+ I became so absorbed in the activity that I forgot about the AI system that I was using. [1 to 10]
+ • 
+ What I was able to produce was worth the effort I had to exert to produce it. [1 to 10]
+ • 
+ I was satisfied with what I got out of the system or tool. [1 to 10]
+ In the questions above, 1 corresponds to Strongly disagree and 10 to Strongly agree . 
+ For the following question:
+ When writing comedy material, it is most important that I’m able to: 
+the participant was shown two choices of response and asked to choose one of those two choices. There were six possible responses (listed below). Given that we consider pairs of 2 different responses at a time, there are C 6 2 = 6 ! 4 ! ​ 2 ! = 15 C_{6}^{2}=\frac{6!}{4!2!}=15 unique pairwise choices. 
+ • 
+ Be creative and expressive
+ • 
+ Become immersed in the activity
+ • 
+ Enjoy using the system or tool
+ • 
+ Explore many different ideas, outcomes, or possibilities
+ • 
+ Produce results that are worth the effort I put in
+ • 
+ Work with other people
+ All the questions listed in this section B.3 are directly taken from ( Cherry and Latulipe, 2014 ) and the NASA Task Load Index ( Hart and Staveland, 1988 ) , and are used as is for easy of reproduction of results. Note that the questions pertaining to human-human collaboration are less pertinent to our study. 
+ B.4. Free-form questions about the AI system for writing. 
+ • 
+ What is one thing that the AI system did well?
+ • 
+ What is one improvement for the AI system?
+ • 
+ Please provide any comments, reflections, or open questions that came up for you during the writing session.
+ • 
+ Please provide any other comments, reflections, or open questions that came up for you when answering this survey.
+ Appendix C Focus Group Questions 
+ C.1. Qualitative questions about the specific writing task 
+ • 
+ Did you find any of the generated outputs helpful? If so, could you recall one output that was usable and explain in what way it helped you write?
+ • 
+ Could you recall one generated output that was not usable, and explain why?
+ • 
+ How do you think the generated output differed from what you would find in some of the resources you use often, e.g., Wikipedia, Google search, other artists’ material?
+ • 
+ How did the prompts we suggested differ from your custom prompts?
+ • 
+ Comment on the types of comedy that you managed to generated with the AI tools.
+ • 
+ Were any of the generated outputs that were presented offensive/inappropriate in some way? If so, what did you think of these?
+ • 
+ What made you decide to stop generating outputs?
+ • 
+ Did you have any concerns about ownership or agency when generating outputs?
+ C.2. General discussion points about AI tools for comedy 
+ • 
+ What does your comedy writing process look like? How is this process of working with AI different from working alone or working with other comedians?
+ • 
+ What can you say about the stereotypes in the outputs generated by the AI writing tool? How do they relate to or differ from stereotypes in human written comedy?
+ • 
+ Is humor and comedy evolving over time? Should AI tools adapt to societal changes in a similar way?
+ • 
+ Does the computer have a "voice"? How would you compare it with the voice of a human comedian? What are the consequences for writing comedy about identity?
+ • 
+ What is your stance on moderation? Should the output of AI tools be allowed to be edgy? Can and should the output of AI tools be moderated?
+ • 
+ How does context shape the meaning of comedy? Who has the responsibility for the comedy material?
+ • 
+ When is it acceptable to use other comedians’, or in general, other artists’ work? What about the outputs of an AI writing tool?
+ • 
+ What importance do you attach to the text vs. to the delivery of that text? Could a human comedian make AI-generated content better?
+ • 
+ Can comedy and humour be quantified and measured?
+ Note that the leading questions in the focus group could be considered as biasing the respondents. We chose this formulation to be able to address the topics of interest listed in Section 1.2 . 
+ C.3. Debriefing questions 
+ • 
+ Is there anything you’d like to share that I didn’t ask about?
+ • 
+ Is there anything you’d like to know or ask me?
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ L
+ A 
+ T
+ E 
+ xml 
+ .
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ Click the "Report Issue" ( ) button, located in the page header. 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 

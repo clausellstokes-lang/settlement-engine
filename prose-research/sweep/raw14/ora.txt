@@ -1,0 +1,553 @@
+=== PAGE 1 ===
+‘A Milestone in BBC History? The 1955-56 Radio Dramatization of The 
+Lord of the Rings’ 
+ 
+Stuart D. Lee 
+ 
+The 1955-56 BBC radio dramatization of The Lord of the Rings often only receives a minor 
+mention in studies around the dramatization of Tolkien’s works1. The first series (‘Series 
+One’), entitled ‘The Fellowship of the Ring’, was broadcast through November-December 
+1955 and covered the first volume. Series Two (November/December 1956, by now entitled 
+‘The Lord of the Rings’), completed the story by attempting all of The Two Towers and The 
+Return of the King. Both series consisted of six episodes (c. 30-minutes each). Now 
+overshadowed by the seminal BBC radio drama by Brian Sibley and Michael Bakewell in 
+1981, and the films of the books, this adaptation is often only remembered for Tolkien’s 
+intense dislike of it2. Moreover, as no recordings survive, it would seem there is little to 
+discuss. This article will attempt to redress this using the scripts of the original series3, and 
+correspondences held in the BBC Written Archives4. However, by way of an opening, this 
+was the first attempt to portray any of Tolkien’s fiction through mass media5, and 
+importantly it took place during Tolkien’s lifetime when the books were more or less ‘hot off 
+the shelf’ (FR published July 1954, TT November 1954, and RK October 1955).  
+ 
+The Lord of the Rings: Series One 
+Tolkien had a long and strained relationship with the BBC dating back to his first 
+interaction in 1936 (when part of his translation of Pearl was read on regional radio). The 
+late 1940s and 1950s saw failed projects (e.g. a broadcast on Richard Rolle in 1949, or a 
+biographical piece on Joseph Wright in 1955) and successful ones (e.g. his translation of Sir 
+Gawain and the Green Knight aired 6/12/53, and The Homecoming of Beorhtnoth 
+Beorhthelm’s Son, 3/12/54)6. This level of activity alone would be sufficient to demonstrate 
+an ongoing, if often frustrating relationship between the broadcaster and Tolkien. However, 
+in the middle of this there was the first ever dramatization of The Lord of the Rings. The 
+ 
+1 The notable exception being Scull and Hammond – Reader, pp. 11-17. 
+2 See his letter to Molly Waldron (30/11/55, Letters #175) where he wrote he had not 
+enjoyed the broadcasts, describing Norman Shelley’s Bombadil as ‘dreadful’ and a mistaken 
+description of Goldberry and Willowman as ‘worse still’. See also Letters #176, plus the 
+comment in June 1957 (Letters #198) describing the BBC’s ‘sillification’. 
+3 Scripts for Series One survive in paper (R71/289) and microfilm (R. P. Nos. TLO 16820, -
+822, -821, TLO 17626, -643, 18653) at the BBC Written Archives, Caversham. I am extremely 
+grateful to Samantha Blake, BBC Archivist, for her assistance. 
+4 BBC Written Archives, R19/2194/2. 
+5 Strictly speaking the first adaptation of The Return of the King at least was by Silvia Goodall 
+School Scripts: Adventures in English (BBC Home Service, 19/1 - 22/3/56). This consisted of 
+ten episodes: The Hobbits; The Old Forest; Strider; The Ring Goes South; Treebeard the Ent; 
+Riders of Rohan; The Way to Mordor; The Siege of Minas Tirith; The Last Battle; Mount 
+Doom. 
+6 The latter was not liked by Tolkien though, see Letters #152. 
+=== PAGE 2 ===
+producer, Terence Tiller, may have first encountered Tolkien when he had been approached 
+about producing Homecoming in 1954 (which he declined). However, what is clear is that by 
+late 1954 (only a few months after the publication of FR and TT) a successful pitch was made 
+to dramatize FR because on 25th January 1955 Tiller was already engaging the services of E. 
+H. Wakeham (BBC Rights Department) to negotiate the necessary approvals and fees.  
+Even at this stage Tolkien was voicing concerns about covering ‘390 pages’ in under 
+five hours broadcast time but due to being ‘bogged down in the business of term, and the 
+labours of producing VOL III’ he was unable to comment further (26/1/55, see Reader, p. 
+12). He did add though that Rayner Unwin had given his approval. Tiller replied (2/2/55) 
+noting Tolkien’s understandable request for more details before giving consent, explaining 
+that ‘the dialogue of the original book would be preserved as far as possible’. A Narrator 
+would be used to link scenes7, assisted by newly commissioned music8 for background and 
+leit-motifs, as well as sound-effects. Importantly, at this stage it was envisaged that each of 
+the six episodes would last 45 minutes (e.g. 4.5 hours in total), but even so Tiller 
+acknowledged this could cover only a third of FR. Cutting would be necessary, especially for 
+most of the songs, but he preferred this to excessive ‘summarising’. Tiller promised not to 
+alter the narrative except ‘where the ear requires more information than the eye’ and cited 
+his previous radio adaptions of Lewis’s ‘The Great Divorce’ and ‘The Pilgrim’s Regress’ as 
+examples. 
+Matters were seemingly resolved, permissions agreed, as well as a fee of £30 per 
+performance (BBC memo, 1/3/55). By June drafts were ready (Tiller to Tolkien, 1/6/55) and 
+both men met at the BBC Club to discuss progress (24/6/55). Allen & Unwin also sent Tiller 
+draft versions of the Appendices and Maps for The Lord of the Rings (acknowledged 29/7/55 
+thus 2-3 months before publication of RK). 
+Importantly in the correspondences we have two interesting examples of Tolkien’s 
+direct engagement with the script, giving further insights into his work. First, in a letter 
+(stamped ‘5 Feb 1955’9) having noted he will instruct Allen & Unwin to approve, Tolkien 
+recognised the need to cut the songs noting they were ‘seldom contributors to the action, 
+but a means of depicting character or providing decorative background’. He added that 
+though the songs ‘have no special music … one or two are written to ‘tunes’’, giving two 
+examples – Sam’s ‘Troll-song’ which ‘goes to the old tune assoc. with “The Fox went out on 
+a Winter’s night10”’ and the ‘Elvish chant (p.394) has in mind the tones used in the 
+Lamentatio of Tenebrae11’. This indicates that when writing the ‘verse’ pieces scattered 
+ 
+7 Brian Sibley explained that whilst the ‘Narrator’ has gone out of fashion in radio 
+dramatizations, he also used one in 1981 (Gerard Murphy) as it allowed you to ‘capture the 
+authorial voice of the book’, convey a sense of place and passing of time, move you across 
+scenes (especially useful when the Fellowship splits up), and gave the listener a sense of the 
+vastness of Middle-earth (Sibley, 2019).  
+8 The composer Anthony Smith-Masters of Marlborough College was engaged. Some of this 
+still survives and can be heard in ‘Tolkien: The Lost Recordings’ (see references). 
+9 See Chronology, p.473. 
+10 A traditional English folk song also called ‘The fox went out on a chilly night’. The structure 
+is very similar to Sam’s with the refrain ‘down-o, down-o’ (and similar). See, for example, 
+Peter Adamson: https://www.youtube.com/watch?v=SDTBV3lppQQ. 
+11 ‘Tenebrae’ is the service of darkness leading up to Easter. A Gregorian reciting tone is 
+traditionally used that conjures up a feeling of sadness. 
+=== PAGE 3 ===
+throughout The Lord of the Rings, most did not have a defined music to accompany them, 
+but at least two did drawing their inspiration from English folk-music and Catholic reciting 
+tones. 
+Second, is a letter sent to Tiller (10/9/55 – see Figure 1-3, and also Reader, pp. 12-
+13). Tolkien is responding to a request about accents to help the actors12. Referencing ‘Vol iii 
+p 408 and 411’ and ‘characterization in my text’ he observed ‘the Hobbit ‘gentry’ should not 
+be made rustical in actual tones and accents’, adding their ‘divergence from High Speech is 
+cast rather in forms of grammar and idiom: they just speak unstudied modern English’. 
+Merry and Pippin (‘two young hobbits of the highest birth in the land’) should sound like 
+Frodo (whose ‘superior linguistic skill would be exhibited only in Elvish’), and he was 
+vehemently against ‘anything more than the merest tinge of “country” (if any) in their 
+speech’. Comparing ‘gentlehobbits’ with ‘the Great’ the difference is more ‘one of period … 
+than dialect’ with the Great using ‘a more archaic language (when functioning as the Great)’ 
+and speaking ‘with greater solemnity and precision’, whereas Hobbits ‘just use our own 
+rather slack colloquial’.  
+Tolkien noted Sam and Butterbur (‘Breelandians, Men and Hobbits were in the same 
+linguistic position’) could be given ‘a “country accent” of some kind – fairly but not too 
+strongly marked’ but was concerned at a mention of “West-Country” which ‘since 
+Elizabethan days … seems to have been favoured as ‘stage dialect’ though not often with 
+any local or historical accuracy’. Whilst he recognised the text purports to be a ‘translation 
+into modern terms of a vanished past’ any ‘accent’ should be consistent and could be 
+‘vaguely “countrified”’ but at all costs it should be noted he had avoided making ‘the 
+dropping or misuse of h a feature of any kind of hobbit-speech’ and wanted this observed. 
+Moreover Tolkien would ‘passionately’ not want any ‘supposedly ‘Zummerzet’ z/v for s/f’. 
+To help, Tolkien suggested ‘the pronunciation of r as a main characterizing detail’ with 
+‘Hobbit-gentry’ speaking as we do ‘at our most unstudied’; Sam, ‘in addition to a rustic tone 
+and vowel-colouring should use the burred (or reverted) r’; The Great, and the Elves, ‘should 
+sound their rs as a trill (though not with a Scots extravagance) in all positions’ which he 
+observed was ‘a great enhancement of English, as well as now having an archaic flavour.’ 
+ 
+12 See Chronology, p.500. Tolkien obviously had an ear for such things– see his comments on 
+the dialect tones in Homecoming in a letter (22/9/54) to Heppenstall – Letters #152, and 
+also his ‘parlour game’ recorded in Quirke, 2016. 
+=== PAGE 4 ===
+ 
+
+=== PAGE 5 ===
+
+=== PAGE 6 ===
+ 
+Figures 1-3: Letter from Tolkien to Tiller (10/9/55). © The Tolkien Estate.  
+
+=== PAGE 7 ===
+Tiller sent Tolkien the scripts (21/9/55) with the news of enforced further 
+compression as each episode had now been reduced to 30-minutes. He expected shock ‘at 
+the extent of the cutting’ and noted that ‘inevitably a great deal of the flavour of your work 
+has been lost.’ Tiller had therefore ‘telescope[d]’ incidents and simplified ‘geographical 
+details and similar intricacies’ concluding – ‘I hope that the main themes of your work have 
+not been totally obscured or mutilated beyond reason’. Tolkien replied (27/9/55, see 
+Reader, p. 13-14), remarking that ‘I do not think that with the time at your disposal you 
+could have done any better’. He admitted that ‘a weakness of the books is the necessity of 
+historical build-up concurrent with the tale of the events’ and that this presents an even 
+greater weakness in dramatic form. That said the script now read as ‘much more of a “fairy 
+tale” in the ordinary sense’ and the Hobbits seemed ‘sillier’ and others ‘more stilted’. As the 
+author he now realised there were few, if any, ‘unnecessary details in the long narrative’ 
+and their cutting deprived ‘the story of significance at some later point.’ Whilst it couldn’t 
+‘be helped’ Tolkien provided suggestions for the abridgements in Episodes two and six13. In 
+the archives the former survives, relating to the attack on Weathertop. Figure 4 shows 
+Tolkien’s suggestions and the subsequent script (note Director’s timings) is in Figure 5. 
+Tolkien offered two solutions (A and B) with ‘A’ preferred ‘because F.[rodo] was in no 
+condition to give a detailed description, and because Narrator can do it better anyway.’ 
+Someone has written ‘Please Type’ across Version A (‘giving description of Wraiths to 
+Narrator’) and Figure 5 confirms that Tolkien’s suggestions were used. A comparison with 
+the original text in FR (FR, I, xi) shows that Tolkien also recognised the need, when 
+dramatizing, to balance the Narrator with the characters, and to speed the action along. 
+Tiller replied (6/10/55) relieved at Tolkien’s ‘tolerant and understanding letter’, and 
+agreed that nothing in the books was ‘superfluous’ and cutting had been ‘painful’. Tiller 
+hoped it would not come across as a ‘mere “fairy-tale”’ or ‘empty fantasy’ but in an odd 
+disregard for Tolkien’s letter of the 10th September (above) suggested that Sam, Merry, and 
+Pippin would have strong ‘West-country accents’.  
+ Scripts were then sent out to the actors, studios booked, and the production was in 
+full swing. Rehearsals were on the weekend of broadcast (Tolkien was invited to attend 
+these but never did). Tiller clearly recognised the importance of the work, and writing to 
+Frank Phillips (11/11/55) he remarked: 
+ 
+The implications of The Lord of the Rings are far deeper than those of a fairy-tale. The 
+trilogy has created a totally new mythology, with great relevance to the contemporary 
+spiritual situation. 
+ 
+13 See also Chronology, p.501. 
+=== PAGE 8 ===
+ 
+ 
+Figure 4: Tolkien’s suggestions for changes to the script. ©The Tolkien Estate 
+
+=== PAGE 9 ===
+ 
+ 
+Figure 5: Extract from Director’s script. ©BBC. 
+ 
+  
+
+=== PAGE 10 ===
+ 
+Series One: Episode Summaries 
+The following presents a brief description and commentary on each episode. The timings 
+are from the paper scripts assumed to be the Director’s (as they contains notes such as 
+‘check pronunciation of Gloin’). Numbers in parenthesis are the script page numbers – each 
+page would have taken on average around 90 seconds to read. 
+ 
+1. ‘The Meaning of the Ring’. The Narrator introduces ‘Hobbits’, cutting to Bilbo (2-3) 
+who summarises The Hobbit and the episode with Gollum. Bilbo invites Frodo to stay 
+(3-4) and we move quickly to the Birthday party. The Narrator explains Bilbo’s 
+vanishing (4-6), Bilbo discusses his plans with Gandalf, departs, and Gandalf meets 
+Frodo (7-9). The Narrator is used to summarise Frodo’s time in The Shire, and then 
+introduces ‘strange happenings’ linked to ‘Mordor’. Gandalf comments ‘Mordor. 
+There it was said, the Dark Tower had been rebuilt …’, he returns and discusses the 
+Ring with Frodo (11-19, c.14 minutes). Sam is discovered eavesdropping, and Frodo 
+resolves to go to Rivendell.  
+ 
+2. ‘Black Riders and Others’. The Narrator describes the selling of Bag End, and the 
+departure from the Shire. The Hobbits hide from the Nazgûl (2-3) and the action is 
+conveyed through dialogue14: 
+ 
+Pippin: That’s not Gandalf! Look at Him. 
+Sam: Not in that black hood. You can’t see his face, even; only his boots. 
+Pippin: He’s not looking for us – he’s – smelling for us. Sniffing …  
+Frodo: Don’t let him see us. Don’t breathe. 
+ 
+Gildor and the Elves arrive (3-5), the Hobbits then meet Farmer Maggot (6), and then 
+Merry at the river-ferry (8). They discuss plans (9-11) and set off into the Old Forest. 
+They encounter Old Man Willow (13), are saved by Tom Bombadil and taken to his 
+house to meet Goldberry (13-16). They spend time with Tom (c.6 minutes). 
+ 
+3. ‘Aragorn’. The Hobbits leave Tom but fall asleep on the Downs. Frodo gets lost, 
+wakes in a Barrow (2), and a Wight calls to him. The Narrator provides the 
+description (drawn from FR, I, viii):  
+ 
+A tall figure … like a shadow against the stars. He [Frodo] thought there were 
+two eyes, very cold though lit with a pale light that seemed to come from some 
+remote distance. 
+ 
+Frodo sees the other Hobbits asleep. The directions note this should be 
+accompanied by a song ‘immeasurably sad and dreary, cold and miserable and 
+horrible, sometimes high in the air and thin, sometimes like a low moan from the 
+ground’. The Barrow-wight sings: ‘Cold be hand and heart and bone …’ (FR, I, viii), 
+and Frodo sees the moving dismembered arm (4) and strikes it. Frodo (clumsily) 
+remarks ‘Oh dear! I still haven’t killed the Barrow-Wight …’. He summons Tom, who 
+ 
+14 Italics indicates this dialogue is not in the original text. 
+=== PAGE 11 ===
+arrives (‘Frodo: Daylight! And the barrow has fallen wide open! And here’s Tom 
+Bombadil himself!’). Tom dismisses the Wight, frees the Hobbits, and gives them 
+daggers from the hoard. The Hobbits leave (7) and arrive at The Prancing Pony (8) 
+where they meet Aragorn (8-15) ending with Merry saying he has seen the Black 
+Riders. They leave Bree after the attack by the Nazgûl and arrive at Weathertop. The 
+fight on Weathertop is described by the Narrator (19 – see above). They fly to 
+Rivendell, meet Glorfindel, and Frodo encounters the Nazgûl at the Ford (24).  
+ 
+4. ‘Many Meetings’ –Frodo wakes and discusses events with Gandalf (c. 7 minutes). He 
+meets Sam, Glóin, and Bilbo (5-9) and the rest of the episode covers the Council of 
+Elrond (see below). Characters such as Galdor and Glorfindel are given speaking 
+parts, and the episode ends with Frodo volunteering to take the Ring. 
+ 
+5. ‘The Moria Gate’ – The Fellowship forms and departs Rivendell (1-4). They journey to 
+Caradhras, are attacked by Wargs (5-7), then go to Moria (9) and are attacked by the 
+lake creature before entering the gates (11). The remainder of the episode is the 
+journey through Moria but the whole Chamber of Mazarbul scene is omitted. They 
+arrive at bridge of Khazad-dûm, Gandalf fights the Balrog, and the remnants of the 
+Fellowship escape. 
+ 
+6. ‘The Breaking of the Fellowship’ – The Fellowship arrives at Lórien (1), they meet 
+Haldir (1-5), and then Galadriel and Celeborn. The scenes of the Mirror of Galadriel 
+(6-7), Galadriel’s gift-giving (9), and the departure (10) are covered. Legolas shoots at 
+the Winged Beast (11), and then the Fellowship rests. Boromir attempts to take Ring 
+(13), but Frodo escapes and he departs with Sam. The episode ends with the 
+Narrator saying:  
+ 
+So Frodo and Sam set off on the last stage of the Quest together; and the River 
+bore them swiftly away. At length they came to the southern slope of the 
+dividing mountains. They drew their boat out, shouldered their burdens, and set 
+off – down into the Land of Shadow. 
+ 
+Directions indicate ‘Ring music’ at the close, which changes to ‘Mordor music’ but 
+ends on ‘hopeful fade’.  
+ 
+The Lord of the Rings: Series Two 
+The idea of commissioning a dramatization of the remaining two volumes appeared 
+relatively early on. In a note from Tiller to the composer Smith-Masters (11/1/56) he 
+observed ‘Tolkien was not wildly enthusiastic about the programmes, but he is at least 
+willing to let me adapt Volumes 2 and 3 … so he can’t have been really displeased.’ A week 
+later C. Holme (Chief Assistant, Third Programme) wrote to Tiller, commenting on the 
+success of Series One (though he noted he was ‘the only enthusiast over here for Tolkien’s 
+book’), but that the chances of securing another 12 programmes were slim. Holme asked if 
+‘the rest cannot be done in six of 30 minutes each’ observing that: 
+ 
+Volume 2 is more homogeneous than Volume 1, and could therefore be represented 
+by fewer episodes, whereas Volume 3 is not only shorter in itself than the other two, 
+=== PAGE 12 ===
+but could be shorter still in adaptation by ending it with the victory and restoration of 
+Gondor …15 
+ 
+He suggested the return to the Shire and final departure to the West could be treated as an 
+epilogue, omitted altogether, or ‘disposed of in a few lines of narration’. 
+Tiller (25/1/56) was ‘appalled at the cutting that would be necessary’ but agreed six 
+programmes would be better than leaving the whole thing unfinished. Approval was gained 
+in March, but in the archives all that then survives is a letter from Tiller to Tolkien (17/9/56) 
+where the former admits ‘cuts would have to be more drastic’. The first three scripts were 
+sent to Tolkien (1/11/56) with Tiller noting the task had been ‘formidable’, as he felt he 
+could not simply concentrate on Frodo and Sam, and he was therefore forced to ‘script-in’ 
+his own narration more than in the first series. Tiller concluded by asking about the accents 
+of the Rohirrim, Orcs, and the people of Minas Tirith. Tolkien replied on the matter of the 
+accents the next day (Letters #193, and Reader, pp.16-17); and on 6th November he 
+followed up with comments on the three scripts (Letters #194, Reader, p. 17). Tolkien 
+resignedly accepted that Tiller had done his best, but asked ‘why this sort of treatment was 
+allowed’ as he felt the text now came across as ‘simple-minded’ and would be confusing 
+(exactly the reaction recorded by listeners – see below). Whilst he admitted he lacked 
+experience ‘in the medium’ he felt more could be made of the Narrator through the reading 
+of longer descriptive passages. Fundamentally Tolkien clearly was having second thoughts 
+as to whether the books could be dramatized at all – even though he had been reasonably 
+complementary about Series One to Tiller. The epic scale of the text suggested to him that it 
+could not, but he concluded by noting Tiller ‘had a very hard task’.  
+ 
+Series Two: Episode Summaries16 
+ 
+1. ‘Fangorn’. The Narrator summarises Series One and then cuts to Boromir’s death 
+(who dies without speaking to Aragorn). The hunt for Merry and Pippin is described 
+in a single paragraph and by p.3 the Riders of Rohan have appeared followed by a 
+conversation with Éomer. Pippin and Merry are held by the Orcs until the attack by 
+the Riders (7-8). The Hobbits escape and meet Treebeard, followed swiftly by the 
+Moot (9-14). The episode closes with Aragorn, Legolas, and Gimli meeting Gandalf 
+who describes his fight with the Balrog. 
+  
+2. ‘Rohan and Isengard’. The Narrator describes the approach to Edoras, and the 
+meeting with Théoden and Wormtongue (1-3). Within two pages (4-5) Théoden has 
+escaped his bewitchment, the Rohirrim have ridden to Helm’s deep, and the battle is 
+waged and completed. Pages 6-13 give more time to the ride to Isengard, meeting 
+Merry and Pippin, and the exchanges with Saruman. The company return to Helm’s 
+Deep and Pippin looks into the Palantir (14-15). Aragorn takes the Palantir and a 
+winged Nazgûl is sighted.  
+ 
+ 
+15 See Reader, pp.15-16. It is worth noting that this is the ending, in a sense, that Peter 
+Jackson also chose, i.e. omitting The Scouring of the Shire. 
+16 Scripts only survive on Microfilm. 
+=== PAGE 13 ===
+3. ‘Into the Dark’. The Narrator begins by describing Frodo and Sam ‘on the brink of a 
+tall cliff’. Sam remarks (1): 
+ 
+What a fix! That’s the one place, in all the lands we’ve heard of, that we don’t 
+want to see any closer; and that’s the one place we’re trying to get to. (TT, IV, I) 
+ 
+With Frodo supplying ‘Mordor!’. They meet Gollum and then journey (4-5) to Cirith 
+Gorgor where Gollum reveals there is ‘another way’. The Narrator quickly covers the 
+journey and adds bluntly ‘And there they were captured by a band of tall men’. 
+Faramir, Mablung, and Frodo talk (7-10) and Gollum is discovered at the waterfall. 
+The Hobbits depart, fight Shelob (12-16), and Frodo is taken by Gorbag and Shagrat 
+(17). The episode ends with Sam beating at the doors (in effect the end of The Two 
+Towers) and the Narrator saying ‘Frodo was alive but taken by the Enemy’. 
+ 
+4. ‘The Siege of Gondor’. Gandalf and Pippin ride to Minas Tirith, meet Denethor, and 
+Pippin swears his oath of allegiance (2). Pippin meets Beregond (3), and plays with 
+Bergil (4-5). The Narrator cuts back to the Rohirrim, where the troops meet Halbarad 
+and the Rangers who remind Aragorn ‘If thou art in haste, remember the Paths of 
+the Dead’. They ride to Dunharrow and enter the Paths of Dead (7-8). The Narrator 
+describes Théoden meeting Hirgon, the messenger from Minas Tirith with the Red 
+Arrow, and Éowyn/Dernhelm equips Merry (10). In Gondor Pippin and Beregond see 
+the Nazgûl (11), there is Faramir’s flight and Gandalf’s intervention (described by the 
+Narrator). Faramir, Gandalf, and Denethor meet with the latter becoming more 
+sinister (‘witless halfling’). The Narrator says that ‘battle was joined beneath the 
+walls of the City itself’ and Faramir is wounded (13). Denethor builds his pyre, and 
+the Lord of the Nazgûl enters the city at which point Rohan arrives (14-16). 
+ 
+5. ‘Minas Tirith & Mount Doom’. The Narrator summarises the action so far, followed 
+by the dramatized death of Théoden, and a narrated end of the battle. We move to 
+the Houses of Healing (4-5), and Gimli and Legolas tell Merry and Pippin of their 
+journey. The Council (in effect a short speech by Gandalf) meets and then the 
+Narrator describes the approach to the Gates of Mordor (6), the Mouth of Sauron 
+(7), followed by a description of the battle and Pippin’s fight with the Troll. We 
+return to Sam (8), and the action in the tower and discovery of Frodo (9-11). The two 
+dress as Orcs with a suggestion that Frodo and Sam hear the death of the Witch King 
+(11-12). They arrive at Mount Doom and the Ring is destroyed (13-14); the whole 
+action with Gollum is covered in a less than a minute. The episode concludes with 
+Frodo’s ‘Here at the end of all things’. 
+ 
+6. ‘Many Partings’. The Narrator describes the end of the battle and the fall of Sauron 
+(2). Sam wakes to find Gandalf and Frodo (2). Aragorn is crowned at the Fields of 
+Cormallen (3-4); then Aragorn and Arwen, and Éowyn and Faramir are married 
+(narrated). This is followed by the departure of the company for Isengard where they 
+meet Treebeard (5). Aragorn, Galadriel, and Celeborn depart (6) and the remainder 
+arrive at Rivendell. They head for Bree and meet Butterbur (7); and then we have the 
+Scouring of the Shire and death of Saruman (8-13). The Narrator describes the 
+rebuilding process, the marriage of Sam and Rosie, and Frodo asking Sam to join him 
+=== PAGE 14 ===
+(14). They journey to the Grey Havens, Frodo departs (15-16), and Sam returns to 
+the Shire. The episode closes with Sam’s ‘Well, I’m back …’. 
+ 
+Reception 
+The broadcast of the two series was without publicity (certainly compared with 198117). The 
+Radio Times ran no feature, and the shows were simply listed with a tagline, and credits. 
+Both series also suffered from inconsistent broadcast times and were up against stiff 
+competition – Series One went out at the same time as ‘Quatermass II’ and ‘What’s my 
+line?’ on television, and ‘The Archers’ and other shows on radio; whilst Series Two coincided 
+with the opening of the Melbourne Olympics. 
+But how were they received by critics, Tolkien, and listeners? Beginning with the 
+1955 broadcasts Paul Ferris of The Observer (20/11/55, p.10) described it as ‘the best light 
+listening for the next five weeks’ having the ‘pure quality of fairy-tale … charming without 
+being slight’. In an uncatalogued newspaper clipping in Caversham another review (‘The 
+Meaning of the Ring’ 15/11/55) noted Tolkien’s ‘relaxed, vivid, and masculine style with its 
+rich coinages in the names of the creatures’ adapted naturally to radio and his ‘power of 
+unfolding the matter holds the attention even when he is being expository.’  
+Tolkien himself appeared balanced in his views (at least to Tiller). In a letter 
+(8/12/55) he observed The Times ‘was appreciative’18, but he was angered by the BBC show 
+‘The Critics’ (‘they were intolerable with a superiority that only ignorance can maintain’19). 
+He noted he had received many letters expressing enjoyment with the production and that 
+‘non-readers got a great deal out of it’. It had gone down especially well with older children 
+with the only complaint being the late time of broadcast20. Tolkien thought most of the 
+criticism he had seen was ‘silly’ (especially that the Hobbits should ‘pipe and squeak’ asking 
+rhetorically ‘Why should tones rise with fall in stature?’). He felt the Elves were ‘managed 
+excellently’ as was the Council of Elrond (‘masterly’), but criticised Bilbo (he sounded 
+‘bored’), and the announcer’s mistake in stating Goldberry was Tom’s daughter and that Old 
+Man Willow was an ally of Mordor21. He liked Glóin’s accent but added it was a bit ‘heavily 
+laid on’ noting ‘dwarves spoke the Common Tongue natively, like Jews, but they had a 
+uvular back R’. He pondered about another series suggesting ‘Vol ii might go even better in 
+this form.’ 
+ Tiller replied (12/12/55) taking full responsibility for the Announcer’s mistake over 
+Goldberry’s relationship with Tom Bombadil, but he noted it was never fully explained in the 
+ 
+17 See, for example, Eric Fraser’s specially designed cover for the Radio Times - 
+https://www.bbc.co.uk/programmes/p01h96nf/p01gz0qt. 
+18 Though this may be referring to the review in The Times on the 3rd November for RK. See 
+Reader, p.14. 
+19 ‘The Critics’ seemingly discussed the dramatization (20/11/55) but no recording survives. 
+See also Letters #177 where, writing to Rayner Unwin, Tolkien notes he agreed with their 
+view of the dramatization (but no indication of whether this was positive or negative) but 
+was annoyed when they admitted they had not read the book. 
+20 Other correspondences to Tiller from listeners make the same complaint. For timings see 
+‘Programme Details’ below. 
+21 The offending lines were ‘Opening Announcement: … He [Sauron] has other allies too, 
+from one of which the hobbits have been rescued by the strange and ancient power of Tom 
+Bombadil. With Bombadil and his daughter Goldberry, the hobbits find temporary shelter.’ 
+=== PAGE 15 ===
+book asking ‘Who is she?’. Tiller also agreed that the reaction ‘without the BBC’ had been 
+very positive and he would submit a proposal for ‘Volume Two’. Tolkien replied (15/12/55) 
+acknowledging ‘that not all is in the ‘book’’ and that he had quite forgotten ‘that Bombadil’s 
+adventures as set out in the Oxford Magazine of 1934 (!) were not included’ (in effect 
+excusing Tiller of the Goldberry mistake). He added that ‘Gimli was v. good, and C. S. Lewis 
+who heard the last ‘fit’ agreed’. Again, positively, he concluded he would ‘like to have the 
+thing continued – if you are the producer.’ This balanced praise does seem at odds, 
+however, with Tolkien’s more private criticisms in his letters noted earlier.  
+ When it comes to the reaction of listeners there are full reports attached to the 
+scripts – results of surveys by the BBC’s Audience Research Department. Four survive for 
+Series One (episodes 1, 2, 3, and 6) and two for Series Two (episodes 1 and 6). These list 
+audience size, an ‘appreciation index’, and a summary description complete with 
+anonymised feedback. For both series it was estimated that 0.1% of the adult population 
+heard them, and the appreciation index for Series One began at 56 rising to 64 by episode 
+six (against an average for a Third Programme drama of 65), but Series Two never rose 
+above 59.  
+ Considering the direct feedback recorded there is a clear difference between Series 
+One and Two. With Series One, whilst compression was commented on it (especially in 
+terms of reducing the atmosphere) it is notable how positive most comments were 
+especially around the performances. One reader, in a direct letter to Tiller, described it as 
+‘’The Archers’ of the Third Programme, a milestone in BBC history’. Some expected the 
+Hobbits to have ‘high pitch voices’ though (see Tolkien’s comments on this noted earlier) 
+and a few objected to Victor Platt’s Sam (with his ‘BBC Mummersetshire’ accent). Most 
+interestingly though was the clear divide the programme engendered. There were those 
+who simply objected to time wasted on a ‘children’s story’ (‘if we must occupy the Third 
+Programme with fairy tales then let us have Enid Blyton’ – ‘Chemical Manager’). Then there 
+were the comments from listeners who were frustrated because they simply did not ‘get it’. 
+Was it an allegory, for example? ‘One expected satire, or recognisable symbolism’ 
+complained a ‘Lecturer in English’ and a ‘Clerk in Holy Orders’ found it without ‘mythological 
+overtones, or anything, so far as I could see.’ As the series closed it was noted as a ‘brave 
+effort’, with some listeners having now found ‘a pertinent allegorical meaning’ (good versus 
+evil) and wanting more (‘You just can’t leave it at this point!’). But again there were 
+criticisms. The summary reports some listeners disliking ‘the naive acceptance of witchcraft 
+and the convenient intervention of various ‘Dei ex machine’ at crucial points’ and, as they 
+saw it, ‘stereotyped characters of the conventional fairy-story’. 
+Series Two was criticized much more. Added to those who saw it as childish, were 
+non-readers of the book who were just confused, or fans of Tolkien who described it as an 
+‘absolute ruin’, ‘a farce’, with ‘ignominious’ compression that resulted in a ‘juvenile 
+adventure story’. As one reader commented (a ‘Civil Servant’) ‘The result was the 
+conversion of a glorious, rich, detailed, and self-consistent narrative into a footling and 
+ridiculous sounding adventure story of the “with one bound Jack was free” type.’ 
+ 
+1981 and all that 
+Is it possible to compare the 1955-56 dramatization with Sibley and Bakewell’s or, indeed, 
+the films of Peter Jackson? At first, due to the lack of recordings this may seem pointless – 
+outside of the reader reports we have no way to compare Ian Holm’s 1981 Frodo, for 
+example, with that of Oliver Burt; or Ian McKellen’s Gandalf with Norman Shelley’s. 
+=== PAGE 16 ===
+Furthermore, the enforced compression of Series Two that so enraged listeners would 
+suggest any comparison would be aligning apples with pears. However, considering Series 
+One alongside the equivalent episodes from 1981 and the 2001 film is more fruitful. In 
+terms of running time the six episodes in 1955 equated to just under three hours in total 
+before Frodo and Sam’s departure at the end of the first volume. In 1981 ‘The Breaking of 
+the Fellowship’ was the tenth episode (of 26 thirty-minute broadcasts, or in the one-hour 
+episode versions the sixth episode of thirteen). So 1981 allotted five hours to what was 
+covered in three hours in 1955. Interestingly, Jackson covered the same in 2 hours 58 
+minutes in 2001 (cinema version).  
+ As noted Tolkien singled out for praise the 1955 dramatization of The Council of 
+Elrond which when reading feels more like a play cutting back and forth between dialogue. 
+In the dramatization this begins in effect with the Narrator stating ‘Next morning, the 
+Council of Elrond assembled’ at just around 16 minutes in, and ended (28’15”) with Sam’s ‘A 
+nice little pickle we have landed ourselves in, Mr Frodo!’ – so running to 12’15”. In 1981 the 
+‘Council’ began with Elrond’s ‘Welcome, welcome …’ and again ran until Sam’s comment 
+(total length  16’14”). In the film, however, the scene only runs for 6’30” (although some of 
+the back-story of the Ring covered during the Council in the book had appeared in earlier 
+scenes).  
+ As a rule of thumb then Series One in the 1955 dramatization was compressed by 
+about two-thirds compared with 1981, but tended to match the filmed version in length 
+(though lengthy descriptions of landscape and action can, of course, be dispensed with 
+through images and pan shots). Notably though 1955 did include the dramatization of Tom 
+Bombadil and the Barrow-wights which, despite Tolkien’s criticism of Shelley’s performance, 
+still reads reasonably well (but, as a consequence, gave even less time for the rest of the 
+book). Bombadil was cut in the 2001 film, and also in 1981 (though Sibley did offer a 
+dramatisation in ‘Tales from the Perilous Realm’ for Radio 4, 1992). Sibley (2019) noted that 
+Bombadil had been omitted partly out of necessity (he felt to do it properly would have 
+required one hour), partly because it was possible to do so without affecting the text, but 
+most importantly because from the point where the Black Riders appear in the Shire the 
+‘story is set and running’ and there is a ‘sense of chase’ up to Rivendell. Bombadil would 
+have felt like a lull in this. Moreover with the 30-minute episode format each one required a 
+cliff-hanger ending and it was not clear how to do this. 
+ In summary, 1955-56 should certainly be seen as a first ‘brave attempt’ (noted by a 
+listener) but also a lost opportunity. The performances, on the whole, were well received 
+and the script (apart from a few clumsy interventions) showed signs of promise dashed 
+mainly by the need for compression. Had the books been out longer and become more 
+established then perhaps the BBC senior managers would have agreed to each episode 
+lasting 45 minutes, and even running to three series. This in turn may have encouraged 
+Tolkien to be more engaged with the process and to have led to more insights from him on 
+the adaptation; but alas, it was not to be. Even then Tolkien, despite some obvious 
+reservations, found Series One well done in places. One can only imagine the delight he 
+would have had in hearing the 1981 version with its much longer running time, better 
+writing, and better production quality. 
+ 
+Programme Details 
+For cast list see - 
+http://tolkiengateway.net/wiki/The_Lord_of_the_Rings_(1955_radio_series). 
+=== PAGE 17 ===
+ 
+ 
+Figure 6: The Radio Times entry for 14th November, 1955 
+ 
+First Series (1955) 
+Broadcast BBC Third Programme: 14/11, 21/11, 29/11, 4/12, 11/12, 18/12 (10.10pm, 9.50pm, 
+7.10pm, 9.30pm, 8.00pm, 7.20pm; repeated 15/11, 23/11, 30/11, 5/12, 12/12, 21/12 (6.40pm, 
+7.00pm, 9.40pm, 6.35pm, 6.20pm, 7.20pm) 
+ 
+Second Series (cast as First Series but with additions) (1956) 
+Broadcast BBC Third Programme: 19/11, 26/11, 2/12, 9/12, 16/12, 23/12 (10.30pm, 10.40pm, 
+8.45pm, 8.05pm, 5.25pm, 10.05pm); repeated 22/11, 29/11, 7/12, 12/12, 18/12, 27/12 (7.50pm, 
+6.45pm, 7.20pm, 6.15pm, 7.10pm, 6.00pm).  
+ 
+References 
+‘Archive on 4 – Tolkien: The Lost Recordings’, BBC Radio 4 (2016), 
+https://www.bbc.co.uk/programmes/b07mvd5z 
+ 
+Quirke, Antonia. ‘The Wizard of Oxford’. New Statesman, 145(5327), 12-18 August 2016, p. 
+55. 
+ 
+Scull, Christina, and Hammond, Wayne G. The J. R. R. Tolkien Companion and Guide. 3 vols. 
+Reader’s Guide Parts 1 and 2, and Chronology. (London: HarperCollins, 2017). Referred to as 
+Reader and Chronology. 
+ 
+Sibley, Brian. Telephone Interview with Stuart Lee, unpublished. (6th September, 2019). 
+ 
+– Blog, http://briansibleytheworks.blogspot.com/ 
+ 
+Tolkien, J. R. R. The Letters of J. R. R. Tolkien. Ed. H. Carpenter (London: HarperCollins, 2002).  

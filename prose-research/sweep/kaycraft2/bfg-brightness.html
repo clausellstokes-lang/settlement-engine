@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11"/>
+	<link rel="pingback" href="https://bookandfilmglobe.com/xmlrpc.php"/>
+	    <script>
+      var bwg_admin_ajax = 'https://bookandfilmglobe.com/wp-admin/admin-ajax.php?action=shortcode_bwg';
+      var bwg_ajax_url = 'https://bookandfilmglobe.com/wp-admin/admin-ajax.php?action';
+      var bwg_plugin_url = 'https://bookandfilmglobe.com/wp-content/plugins/photo-gallery';
+      document.addEventListener('DOMContentLoaded', function(){ // Analog of $(document).ready(function(){
+        bwg_check_ready = function () {}
+        document.onkeyup = function(e){
+          if ( e.key == 'Escape' ) {
+            bwg_remove_loading_block();
+          }
+        };
+      });
+
+      // Set shortcode popup dimensions.
+      function bwg_set_shortcode_popup_dimensions() {
+        var H = jQuery(window).height(), W = jQuery(window).width();
+        jQuery("#TB_title").hide().first().show();
+        // New
+        var tbWindow = jQuery('#TB_window');
+        if (tbWindow.size()) {
+          tbWindow.width(W).height(H);
+          jQuery('#TB_iframeContent').width(W).height(H);
+          tbWindow.attr('style',
+            'top:'+ '0px !important;' +
+            'left:' + '0px !important;' +
+            'margin-left:' + '0;' +
+            'z-index:' + '1000500;' +
+            'max-width:' + 'none;' +
+            'max-height:' + 'none;' +
+            '-moz-transform:' + 'none;' +
+            '-webkit-transform:' + 'none'
+          );
+        }
+        // Edit
+        var tbWindow = jQuery('.mce-window[aria-label="Photo Gallery"]');
+        if (tbWindow.length) {
+          // To prevent wp centering window with old sizes.
+          setTimeout(function() {
+            tbWindow.width(W).height(H);
+            tbWindow.css({'top': 0, 'left': 0, 'margin-left': '0', 'z-index': '1000500'});
+            tbWindow.find('.mce-window-body').width(W).height(H);
+          }, 10);
+        }
+      }
+      // Create loading block.
+      function bwg_create_loading_block() {
+        jQuery('body').append('<div class="loading_div" style="display:block; width: 100%; height: 100%; opacity: 0.6; position: fixed; background-color: #000000; background-image: url('+ bwg_plugin_url +'/images/spinner.gif); background-position: center; background-repeat: no-repeat; background-size: 50px; z-index: 1001000; top: 0; left: 0;"></div>');
+      }
+      // Remove loading block.
+      function bwg_remove_loading_block() {
+        jQuery(".loading_div", window.parent.document).remove();
+        jQuery('.loading_div').remove();
+      }
+	  </script>
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.4 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>A Brightness Long Ago Book Review - Book and Film Globe</title>
+	<meta name="description" content="I waited years before finding the right moment to dive into the work of Canadian author Guy Gavriel Kay. In 2016, I finally read his stand-alone" />
+	<link rel="canonical" href="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="A Brightness Long Ago Book Review - Book and Film Globe" />
+	<meta property="og:description" content="I waited years before finding the right moment to dive into the work of Canadian author Guy Gavriel Kay. In 2016, I finally read his stand-alone" />
+	<meta property="og:url" content="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/" />
+	<meta property="og:site_name" content="Book and Film Globe" />
+	<meta property="article:published_time" content="2019-05-29T16:55:51+00:00" />
+	<meta property="article:modified_time" content="2019-05-29T19:01:09+00:00" />
+	<meta property="og:image" content="https://bookandfilmglobe.com/wp-content/uploads/2019/05/Screen-Shot-2019-05-29-at-11.23.40-AM.png" />
+	<meta property="og:image:width" content="367" />
+	<meta property="og:image:height" content="354" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="Michael Giltz" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@michaelgiltz" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Michael Giltz" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="5 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Article","@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#article","isPartOf":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/"},"author":{"name":"Michael Giltz","@id":"https:\/\/bookandfilmglobe.com\/#\/schema\/person\/b8988d4261aa313d91e817f284cbf042"},"headline":"&#8216;A Brightness Long Ago&#8217;","datePublished":"2019-05-29T16:55:51+00:00","dateModified":"2019-05-29T19:01:09+00:00","mainEntityOfPage":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/"},"wordCount":980,"commentCount":1,"publisher":{"@id":"https:\/\/bookandfilmglobe.com\/#organization"},"image":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#primaryimage"},"thumbnailUrl":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2019\/05\/Screen-Shot-2019-05-29-at-11.23.40-AM.png","keywords":["A Brightness Long Ago","Children Of Earth and Sky","Guy Gavriel Kay"],"articleSection":["FICTION"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#respond"]}]},{"@type":"WebPage","@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/","url":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/","name":"A Brightness Long Ago Book Review - Book and Film Globe","isPartOf":{"@id":"https:\/\/bookandfilmglobe.com\/#website"},"primaryImageOfPage":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#primaryimage"},"image":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#primaryimage"},"thumbnailUrl":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2019\/05\/Screen-Shot-2019-05-29-at-11.23.40-AM.png","datePublished":"2019-05-29T16:55:51+00:00","dateModified":"2019-05-29T19:01:09+00:00","description":"I waited years before finding the right moment to dive into the work of Canadian author Guy Gavriel Kay. In 2016, I finally read his stand-alone","breadcrumb":{"@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#primaryimage","url":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2019\/05\/Screen-Shot-2019-05-29-at-11.23.40-AM.png","contentUrl":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2019\/05\/Screen-Shot-2019-05-29-at-11.23.40-AM.png","width":367,"height":354},{"@type":"BreadcrumbList","@id":"https:\/\/bookandfilmglobe.com\/fiction\/book-review-a-brightness-long-ago\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https:\/\/bookandfilmglobe.com\/"},{"@type":"ListItem","position":2,"name":"&#8216;A Brightness Long Ago&#8217;"}]},{"@type":"WebSite","@id":"https:\/\/bookandfilmglobe.com\/#website","url":"https:\/\/bookandfilmglobe.com\/","name":"Book and Film Globe","description":"Books, Film, TV, Culture.","publisher":{"@id":"https:\/\/bookandfilmglobe.com\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/bookandfilmglobe.com\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https:\/\/bookandfilmglobe.com\/#organization","name":"Book and Film Globe","url":"https:\/\/bookandfilmglobe.com\/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/bookandfilmglobe.com\/#\/schema\/logo\/image\/","url":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2025\/02\/cropped-BNFG-LOGO-MAIN-2025-01.png","contentUrl":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2025\/02\/cropped-BNFG-LOGO-MAIN-2025-01.png","width":1500,"height":804,"caption":"Book and Film Globe"},"image":{"@id":"https:\/\/bookandfilmglobe.com\/#\/schema\/logo\/image\/"}},{"@type":"Person","@id":"https:\/\/bookandfilmglobe.com\/#\/schema\/person\/b8988d4261aa313d91e817f284cbf042","name":"Michael Giltz","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2018\/10\/unnamed-5-96x96.jpg","url":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2018\/10\/unnamed-5-96x96.jpg","contentUrl":"https:\/\/bookandfilmglobe.com\/wp-content\/uploads\/2018\/10\/unnamed-5-96x96.jpg","caption":"Michael Giltz"},"description":"Michael Giltz is a freelance writer based in New York City covering all areas of entertainment, politics, sports and more. He has written extensively for the New York Post, New York Daily News, New York Magazine, The Advocate, Out, Huffington Post, Premiere Magazine, Entertainment Weekly, BookFilter, USA Today and the Los Angeles Times. He co-hosts the long-running podcast Showbiz Sandbox.","sameAs":["https:\/\/x.com\/michaelgiltz"],"url":"https:\/\/bookandfilmglobe.com\/author\/glitz\/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//a.omappapi.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="Book and Film Globe &raquo; Feed" href="https://bookandfilmglobe.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Book and Film Globe &raquo; Comments Feed" href="https://bookandfilmglobe.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Book and Film Globe &raquo; &#8216;A Brightness Long Ago&#8217; Comments Feed" href="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://bookandfilmglobe.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbookandfilmglobe.com%2Ffiction%2Fbook-review-a-brightness-long-ago%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://bookandfilmglobe.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbookandfilmglobe.com%2Ffiction%2Fbook-review-a-brightness-long-ago%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<link rel='stylesheet' id='font-awesome-5-css' href='https://bookandfilmglobe.com/wp-content/plugins/beaver-builder-lite-version/fonts/fontawesome/5.15.4/css/all.min.css?ver=2.10.3.2' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://bookandfilmglobe.com/wp-content/plugins/beaver-builder-lite-version/fonts/fontawesome/5.15.4/css/v4-shims.min.css?ver=2.10.3.2' media='all' />
+<link rel='stylesheet' id='mpp_gutenberg-css' href='https://bookandfilmglobe.com/wp-content/plugins/metronet-profile-picture/dist/blocks.style.build.css?ver=2.6.4' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='dashicons-css' href='https://bookandfilmglobe.com/wp-includes/css/dashicons.min.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='everest-forms-general-css' href='https://bookandfilmglobe.com/wp-content/plugins/everest-forms/assets/css/everest-forms.css?ver=1788535546' media='all' />
+<link rel='stylesheet' id='jquery-intl-tel-input-css' href='https://bookandfilmglobe.com/wp-content/plugins/everest-forms/assets/css/intlTelInput.css?ver=3.6.0' media='all' />
+<link rel='stylesheet' id='perfect-pullquotes-styles-css' href='https://bookandfilmglobe.com/wp-content/plugins/perfect-pullquotes/perfect-pullquotes.css?ver=1.7.5' media='all' />
+<link rel='stylesheet' id='bwg_fonts-css' href='https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/css/bwg-fonts/fonts.css?ver=0.0.1' media='all' />
+<link rel='stylesheet' id='sumoselect-css' href='https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/css/sumoselect.min.css?ver=3.4.6' media='all' />
+<link rel='stylesheet' id='mCustomScrollbar-css' href='https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/css/jquery.mCustomScrollbar.min.css?ver=3.1.5' media='all' />
+<link rel='stylesheet' id='bwg_googlefonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu&#038;subset=greek,latin,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic' media='all' />
+<link rel='stylesheet' id='bwg_frontend-css' href='https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/css/styles.min.css?ver=1.8.44' media='all' />
+<link rel='stylesheet' id='ssp-recent-episodes-css' href='https://bookandfilmglobe.com/wp-content/plugins/seriously-simple-podcasting/assets/css/recent-episodes.css?ver=2.7.2' media='all' />
+<link rel='stylesheet' id='colormag-style-css' href='https://bookandfilmglobe.com/wp-content/themes/colormag/style.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='child-style-css' href='https://bookandfilmglobe.com/wp-content/themes/rnrglobe/style.css?ver=1.0.1' media='all' />
+<link rel='stylesheet' id='footer-style-css' href='https://bookandfilmglobe.com/wp-content/themes/rnrglobe/footer-style.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='colormag_style-css' href='https://bookandfilmglobe.com/wp-content/themes/rnrglobe/style.css?ver=2.1.0' media='all' />
+<style id="colormag_style-inline-css">
+.colormag-button,blockquote,button,input[type=reset],input[type=button],input[type=submit],#masthead.colormag-header-clean #site-navigation.main-small-navigation .menu-toggle,.fa.search-top:hover,#masthead.colormag-header-classic #site-navigation.main-small-navigation .menu-toggle,.main-navigation ul li.focus > a,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.focus > a,.home-icon.front_page_on,.main-navigation a:hover,.main-navigation ul li ul li a:hover,.main-navigation ul li ul li:hover>a,.main-navigation ul li.current-menu-ancestor>a,.main-navigation ul li.current-menu-item ul li a:hover,.main-navigation ul li.current-menu-item>a,.main-navigation ul li.current_page_ancestor>a,.main-navigation ul li.current_page_item>a,.main-navigation ul li:hover>a,.main-small-navigation li a:hover,.site-header .menu-toggle:hover,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li:hover > a,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-ancestor > a,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-item > a,#masthead .main-small-navigation li:hover > a,#masthead .main-small-navigation li.current-page-ancestor > a,#masthead .main-small-navigation li.current-menu-ancestor > a,#masthead .main-small-navigation li.current-page-item > a,#masthead .main-small-navigation li.current-menu-item > a,.main-small-navigation .current-menu-item>a,.main-small-navigation .current_page_item > a,.promo-button-area a:hover,#content .wp-pagenavi .current,#content .wp-pagenavi a:hover,.format-link .entry-content a,.pagination span,.comments-area .comment-author-link span,#secondary .widget-title span,.footer-widgets-area .widget-title span,.colormag-footer--classic .footer-widgets-area .widget-title span::before,.advertisement_above_footer .widget-title span,#content .post .article-content .above-entry-meta .cat-links a,.page-header .page-title span,.entry-meta .post-format i,.more-link,.no-post-thumbnail,.widget_featured_slider .slide-content .above-entry-meta .cat-links a,.widget_highlighted_posts .article-content .above-entry-meta .cat-links a,.widget_featured_posts .article-content .above-entry-meta .cat-links a,.widget_featured_posts .widget-title span,.widget_slider_area .widget-title span,.widget_beside_slider .widget-title span,.wp-block-quote,.wp-block-quote.is-style-large,.wp-block-quote.has-text-align-right{background-color:#919191;}#site-title a,.next a:hover,.previous a:hover,.social-links i.fa:hover,a,#masthead.colormag-header-clean .social-links li:hover i.fa,#masthead.colormag-header-classic .social-links li:hover i.fa,#masthead.colormag-header-clean .breaking-news .newsticker a:hover,#masthead.colormag-header-classic .breaking-news .newsticker a:hover,#masthead.colormag-header-classic #site-navigation .fa.search-top:hover,#masthead.colormag-header-classic #site-navigation.main-navigation .random-post a:hover .fa-random,.dark-skin #masthead.colormag-header-classic #site-navigation.main-navigation .home-icon:hover .fa,#masthead .main-small-navigation li:hover > .sub-toggle i,.better-responsive-menu #masthead .main-small-navigation .sub-toggle.active .fa,#masthead.colormag-header-classic .main-navigation .home-icon a:hover .fa,.pagination a span:hover,#content .comments-area a.comment-edit-link:hover,#content .comments-area a.comment-permalink:hover,#content .comments-area article header cite a:hover,.comments-area .comment-author-link a:hover,.comment .comment-reply-link:hover,.nav-next a,.nav-previous a,.footer-widgets-area a:hover,a#scroll-up i,#content .post .article-content .entry-title a:hover,.entry-meta .byline i,.entry-meta .cat-links i,.entry-meta a,.post .entry-title a:hover,.search .entry-title a:hover,.entry-meta .comments-link a:hover,.entry-meta .edit-link a:hover,.entry-meta .posted-on a:hover,.entry-meta .tag-links a:hover,.single #content .tags a:hover,.post-box .entry-meta .cat-links a:hover,.post-box .entry-meta .posted-on a:hover,.post.post-box .entry-title a:hover,.widget_featured_slider .slide-content .below-entry-meta .byline a:hover,.widget_featured_slider .slide-content .below-entry-meta .comments a:hover,.widget_featured_slider .slide-content .below-entry-meta .posted-on a:hover,.widget_featured_slider .slide-content .entry-title a:hover,.byline a:hover,.comments a:hover,.edit-link a:hover,.posted-on a:hover,.tag-links a:hover,.widget_highlighted_posts .article-content .below-entry-meta .byline a:hover,.widget_highlighted_posts .article-content .below-entry-meta .comments a:hover,.widget_highlighted_posts .article-content .below-entry-meta .posted-on a:hover,.widget_highlighted_posts .article-content .entry-title a:hover,.widget_featured_posts .article-content .entry-title a:hover,.related-posts-main-title .fa,.single-related-posts .article-content .entry-title a:hover{color:#919191;}#site-navigation{border-top-color:#919191;}#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li:hover,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-ancestor,#masthead.colormag-header-classic .main-navigation ul ul.sub-menu li.current-menu-item,#masthead.colormag-header-classic #site-navigation .menu-toggle,#masthead.colormag-header-classic #site-navigation .menu-toggle:hover,#masthead.colormag-header-classic .main-navigation ul > li:hover > a,#masthead.colormag-header-classic .main-navigation ul > li.current-menu-item > a,#masthead.colormag-header-classic .main-navigation ul > li.current-menu-ancestor > a,#masthead.colormag-header-classic .main-navigation ul li.focus > a,.promo-button-area a:hover,.pagination a span:hover{border-color:#919191;}#secondary .widget-title,.footer-widgets-area .widget-title,.advertisement_above_footer .widget-title,.page-header .page-title,.widget_featured_posts .widget-title,.widget_slider_area .widget-title,.widget_beside_slider .widget-title{border-bottom-color:#919191;}@media (max-width:768px){.better-responsive-menu .sub-toggle{background-color:#737373;}}
+/*# sourceURL=colormag_style-inline-css */
+</style>
+<link rel='stylesheet' id='colormag-fontawesome-css' href='https://bookandfilmglobe.com/wp-content/themes/colormag/fontawesome/css/font-awesome.min.css?ver=2.1.0' media='all' />
+<link rel='stylesheet' id='colormag_googlefonts-css' href='//fonts.googleapis.com/css?family=Open+Sans:400%2C600&#038;1&#038;display=swap&#038;ver=2.1.0' media='all' />
+<link rel='stylesheet' id='wpcw-css' href='https://bookandfilmglobe.com/wp-content/plugins/contact-widgets/assets/css/style.min.css?ver=1.0.1' media='all' />
+<script id="jquery-core-js" src="https://bookandfilmglobe.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://bookandfilmglobe.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script id="ResizeSensor-js" src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/assets/js/ResizeSensor.min.js?ver=7.1"></script>
+<script id="sticky-sidebar-js" src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/assets/js/theia-sticky-sidebar.min.js?ver=7.1"></script>
+<script id="custom-js" src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/assets/js/custom.js?ver=7.1"></script>
+<script id="sumoselect-js" src="https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/js/jquery.sumoselect.min.js?ver=3.4.6"></script>
+<script id="bwg_mobile-js" src="https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/js/tocca.min.js?ver=2.0.9"></script>
+<script id="mCustomScrollbar-js" src="https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/js/jquery.mCustomScrollbar.concat.min.js?ver=3.1.5"></script>
+<script id="jquery-fullscreen-js" src="https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/js/jquery.fullscreen.min.js?ver=0.6.0"></script>
+<script id="bwg_frontend-js-extra">
+var bwg_objectsL10n = {"bwg_field_required":"field is required.","bwg_mail_validation":"This is not a valid email address.","bwg_search_result":"There are no images matching your search.","bwg_select_tag":"Select Tag","bwg_order_by":"Order By","bwg_search":"Search","bwg_show_ecommerce":"Show Ecommerce","bwg_hide_ecommerce":"Hide Ecommerce","bwg_show_comments":"Show Comments","bwg_hide_comments":"Hide Comments","bwg_restore":"Restore","bwg_maximize":"Maximize","bwg_fullscreen":"Fullscreen","bwg_exit_fullscreen":"Exit Fullscreen","bwg_search_tag":"SEARCH...","bwg_tag_no_match":"No tags found","bwg_all_tags_selected":"All tags selected","bwg_tags_selected":"tags selected","play":"Play","pause":"Pause","is_pro":"","bwg_play":"Play","bwg_pause":"Pause","bwg_hide_info":"Hide info","bwg_show_info":"Show info","bwg_hide_rating":"Hide rating","bwg_show_rating":"Show rating","ok":"Ok","cancel":"Cancel","select_all":"Select all","lazy_load":"0","lazy_loader":"https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/images/ajax_loader.png","front_ajax":"0","bwg_tag_see_all":"see all tags","bwg_tag_see_less":"see less tags"};
+//# sourceURL=bwg_frontend-js-extra
+</script>
+<script id="bwg_frontend-js" src="https://bookandfilmglobe.com/wp-content/plugins/photo-gallery/js/scripts.min.js?ver=1.8.44"></script>
+<script id="YTPlayer-js" src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/assets/js/jquery.mb.YTPlayer.min.js?ver=7.1"></script>
+<link rel="https://api.w.org/" href="https://bookandfilmglobe.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://bookandfilmglobe.com/wp-json/wp/v2/posts/3697" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://bookandfilmglobe.com/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://bookandfilmglobe.com/?p=3697' />
+
+<link rel="alternate" type="application/rss+xml" title="Podcast RSS feed" href="https://bookandfilmglobe.com/feed/podcast" />
+
+<!-- Related Posts for WP Premium CSS -->
+<style type='text/css'>
+.rp4wp-related-posts { width:100%; overflow:hidden;}ul.rp4wp-posts-list {width:100%; margin:0 !important; padding:0 !important; list-style:none !important; float:left;}ul.rp4wp-posts-list .rp4wp-col {width:100% !important;margin-bottom:30px !important;list-style:none !important;box-sizing:border-box;overflow:hidden;float:left;}.rp4wp_component_wrapper {width:100% !important;float:left;}.rp4wp_component {width:100% !important;padding:0 0 5% !important;box-sizing:border-box;float:left;overflow:hidden !important;}.rp4wp_component a {border:0 !important;}.rp4wp_component_image a {display:block; height:100% !important;} .rp4wp_component_image img {width:100% !important;height:100% !important;}.rp4wp_component_title a {text-decoration:none !important; font-weight:bold; border:0 !important;}@media (min-width: 768px) {ul.rp4wp-posts-list .rp4wp-col {width:34.3333333333% !important;padding:0 2% !important;}ul.rp4wp-posts-list .rp4wp-col-first {width:32.3333333333% !important;padding-left:0 !important;padding-right:2% !important;}ul.rp4wp-posts-list .rp4wp-col-last {width:32.3333333333% !important;padding-right:0 !important;padding-left:2% !important;}.rp4wp_component_wrapper {width:50% !important;}.rp4wp_component_wrapper_left {padding-right:5% !important;}.rp4wp_component_wrapper_right {padding-left:5% !important;}}.rp4wp_component_2{height:20% !important;}.rp4wp_component_3{height:20% !important;}.rp4wp_component_4{height:20% !important;}
+</style>
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><style id="custom-background-css">
+body.custom-background { background-color: #adadad; background-image: url("https://bookandfilmglobe.com/wp-content/uploads/2019/01/book-film-globe-wallpaper-smaller.jpg"); background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
+</style>
+<link rel="icon" href="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-VERT-2025-tag-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-VERT-2025-tag-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-VERT-2025-tag-180x180.png" />
+<meta name="msapplication-TileImage" content="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-VERT-2025-tag-270x270.png" />
+<style id="wp-custom-css">
+ .tag-links { display: none; }
+</style>
+	<meta name="monetization" content="$twitter.xrptipbot.com/TheFarmMusic" />
+    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+	<script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+
+<script>
+  var _postAuthor = "Michael Giltz";
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KDJZHF4');</script>
+<!-- End Google Tag Manager -->
+
+
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    if(window.innerWidth>755) {
+        googletag.defineSlot('/21683694079/BRG-ATF', [728, 90], 'div-gpt-ad-1531167327139-0').addService(googletag.pubads());
+    } else {
+        googletag.defineSlot('/21683694079/BRG-ATF', [320, 50], 'div-gpt-ad-1531167327139-0').addService(googletag.pubads());
+    }
+
+    googletag.defineSlot('/21683694079/BRG-ATF/BRG-RHS-Bottom', [300, 250], 'div-gpt-ad-1531167327139-1').addService(googletag.pubads());
+    googletag.defineSlot('/21683694079/BRG-ATF/BRG-RHS-Top', [300, 600], 'div-gpt-ad-1531167327139-2').addService(googletag.pubads());
+    googletag.defineSlot('/21683694079/BRG-ATF/BRG-ShowMore', [728, 90], 'div-gpt-ad-1531167327139-3').addService(googletag.pubads());
+    //floating ad
+    googletag.defineSlot('/21683694079/BRG-ATF/BNFG-BottomOfPage', [320, 50], 'div-gpt-ad-1548966638196-0').addService(googletag.pubads());
+
+
+	googletag.defineSlot('\/21683694079\/RNRG-MOP\/RNRG-ATF', [ 728.0 ,  90.0 ], 'div-gpt-ad-1528823095074-0').addService(googletag.pubads());
+    googletag.defineSlot('\/21683694079\/RNRG-MOP\/RNRG-RHS-Bottom', [ 300.0 ,  250.0 ], 'div-gpt-ad-1528823095074-1').addService(googletag.pubads());
+    googletag.defineSlot('\/21683694079\/RNRG-MOP\/RNRG-ShowMore', [ 728.0 ,  90.0 ], 'div-gpt-ad-1528823095074-2').addService(googletag.pubads());
+    googletag.defineSlot('\/21683694079\/RNRG-MOP\/RNRG-RHS-Top', [ 300.0 ,  600.0 ], 'div-gpt-ad-1528823095074-3').addService(googletag.pubads());
+    googletag.defineSlot('\/21683694079\/RNRG-MOP', [ 728.0 ,  90.0 ], 'div-gpt-ad-1528822466515-0').addService(googletag.pubads());
+	  
+	
+	  
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+<link rel='stylesheet' id='gglcptch-css' href='https://bookandfilmglobe.com/wp-content/plugins/google-captcha/css/gglcptch.css?ver=1.87' media='all' />
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-3697 single-format-standard custom-background wp-custom-logo wp-embed-responsive wp-theme-colormag wp-child-theme-rnrglobe fl-builder-lite-2-10-3-2 fl-no-js everest-forms-no-js right-sidebar box-layout better-responsive-menu">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDJZHF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div id="page" class="hfeed site">
+	
+	
+	<header id="masthead" class="site-header clearfix ">
+		<div id="header-text-nav-container" class="clearfix">
+
+			
+			<div class="news-bar">
+				<div class="inner-wrap clearfix">
+					
+		<div class="date-in-header">
+			Sunday, September 6, 2026		</div>
+
+		
+		<div class="social-links clearfix">
+			<ul>
+							</ul>
+		</div><!-- .social-links -->
+						</div>
+			</div>
+
+			
+			
+			
+		<div class="inner-wrap">
+			<div id="header-text-nav-wrap" class="clearfix">
+
+				<div id="header-left-section">
+											<div id="header-logo-image">
+							<a href="https://bookandfilmglobe.com/" class="custom-logo-link" rel="home"><img width="1500" height="804" src="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-MAIN-2025-01.png" class="custom-logo" alt="Book and Film Globe" decoding="async" fetchpriority="high" srcset="https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-MAIN-2025-01.png 1500w, https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-MAIN-2025-01-300x161.png 300w, https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-MAIN-2025-01-1024x549.png 1024w, https://bookandfilmglobe.com/wp-content/uploads/2025/02/cropped-BNFG-LOGO-MAIN-2025-01-768x412.png 768w" sizes="(max-width: 1500px) 100vw, 1500px" /></a>						</div><!-- #header-logo-image -->
+						
+					<div id="header-text" class="screen-reader-text">
+													<h3 id="site-title">
+								<a href="https://bookandfilmglobe.com/" title="Book and Film Globe" rel="home">Book and Film Globe</a>
+							</h3>
+						
+													<p id="site-description">
+								Books, Film, TV, Culture.							</p><!-- #site-description -->
+											</div><!-- #header-text -->
+				</div><!-- #header-left-section -->
+
+				<div id="header-right-section">
+											<div id="header-right-sidebar" class="clearfix">
+							<aside id="custom_html-6" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!-- /21683694079/BRG-ATF -->
+<div id='div-gpt-ad-1531167327139-0' style='height:90px; width:728px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1531167327139-0'); });
+</script>
+</div>
+</div></aside>						</div>
+										</div><!-- #header-right-section -->
+
+			</div><!-- #header-text-nav-wrap -->
+		</div><!-- .inner-wrap -->
+
+		
+			
+			
+		<nav id="site-navigation" class="main-navigation clearfix" role="navigation">
+			<div class="inner-wrap clearfix">
+				
+					<div class="home-icon">
+						<a href="https://bookandfilmglobe.com/"
+						   title="Book and Film Globe"
+						>
+							<i class="fa fa-home"></i>
+						</a>
+					</div>
+				
+									<div class="search-random-icons-container">
+													<div class="top-search-wrap">
+								<i class="fa fa-search search-top"></i>
+								<div class="search-form-top">
+									
+<form action="https://bookandfilmglobe.com/" class="search-form searchform clearfix" method="get" role="search">
+
+	<div class="search-wrap">
+		<input type="search"
+		       class="s field"
+		       name="s"
+		       value=""
+		       placeholder="Search"
+		/>
+
+		<button class="search-icon" type="submit"></button>
+	</div>
+
+</form><!-- .searchform -->
+								</div>
+							</div>
+											</div>
+				
+				<p class="menu-toggle"></p>
+				<div class="menu-primary-container"><ul id="menu-new-menu" class="menu"><li id="menu-item-777" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-777"><a href="https://bookandfilmglobe.com/category/fiction/">FICTION</a></li>
+<li id="menu-item-778" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-778"><a href="https://bookandfilmglobe.com/category/nonfiction/">NON-FICTION</a></li>
+<li id="menu-item-779" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-779"><a href="https://bookandfilmglobe.com/category/comics/">COMICS</a></li>
+<li id="menu-item-834" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-834"><a href="https://bookandfilmglobe.com/category/film/">FILM</a></li>
+<li id="menu-item-1225" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1225"><a href="https://bookandfilmglobe.com/category/television/">TELEVISION</a></li>
+<li id="menu-item-836" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-836"><a href="https://bookandfilmglobe.com/category/creators/">CREATORS</a>
+<ul class="sub-menu">
+	<li id="menu-item-13976" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-13976"><a href="https://bookandfilmglobe.com/category/book-and-film-globe-podcasts/">Book and Film Globe Podcasts</a></li>
+</ul>
+</li>
+</ul></div>
+			</div>
+		</nav>
+
+		
+		</div><!-- #header-text-nav-container -->
+
+		
+	</header>
+
+		
+	<div id="main" class="clearfix">
+		<div class="inner-wrap clearfix">
+
+	
+<div id="primary">
+		<div id="content" class="clearfix">
+
+			
+				
+<article id="post-3697" class="post-3697 post type-post status-publish format-standard has-post-thumbnail hentry category-fiction tag-a-brightness-long-ago tag-children-of-earth-and-sky tag-guy-gavriel-kay">
+	
+   
+   
+   <div class="article-content clearfix">
+
+   
+   <div class="above-entry-meta"><span class="cat-links"><a href="https://bookandfilmglobe.com/category/fiction/" style="background:#2747f9" rel="category tag">FICTION</a>&nbsp;</span></div>
+      <header class="entry-header">
+   		<h1 class="entry-title">
+   			&#8216;A Brightness Long Ago&#8217;   		</h1>
+   	  </header>
+<p class="ar-subtitle">Guy Gavriel Kay&#8217;s Novels are Historical Fiction About a World Almost Like Our Own</p>   	<div class="below-entry-meta">
+			<span class="posted-on"><a href="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/" title="12:55 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2019-05-29T12:55:51-04:00">May 29, 2019</time><time class="updated" datetime="2019-05-29T15:01:09-04:00">May 29, 2019</time></a></span>
+			<span class="byline">
+				<span class="author vcard">
+					<i class="fa fa-user"></i>
+					<a class="url fn n"
+					   href="https://bookandfilmglobe.com/author/glitz/"
+					   title="Michael Giltz"
+					>
+						Michael Giltz					</a>
+				</span>
+			</span>
+
+							<span class="comments">
+						<a href="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/#comments"><i class="fa fa-comment"></i> 1 Comment</a>					</span>
+				<span class="tag-links"><i class="fa fa-tags"></i><a href="https://bookandfilmglobe.com/tag/a-brightness-long-ago/" rel="tag">A Brightness Long Ago</a>, <a href="https://bookandfilmglobe.com/tag/children-of-earth-and-sky/" rel="tag">Children Of Earth and Sky</a>, <a href="https://bookandfilmglobe.com/tag/guy-gavriel-kay/" rel="tag">Guy Gavriel Kay</a></span></div>
+   	<div class="entry-content clearfix">
+   		<p>I waited years before finding the right moment to dive into the work of Canadian author <a href="https://en.wikipedia.org/wiki/Guy_Gavriel_Kay">Guy Gavriel Kay</a>. In 2016, I finally read his stand-alone historical (?) novel <a href="https://www.amazon.com/Children-Earth-Sky-Guy-Gavriel/dp/0451472977">Children Of Earth And Sky</a><em>,</em> which takes place in a time akin to the 1400s. It was terrific. Now I’ve just finished <a href="https://www.amazon.com/Brightness-Long-Ago-Guy-Gavriel/dp/0451472985/ref=pd_lpo_sbs_14_t_0?_encoding=UTF8&amp;psc=1&amp;refRID=SYMPT1NR1823TZJDFBC7">A Brightness Long Ago</a><em>.</em> Terrific again! It’s sure to be one of my favorite books of the year.</p>
+<p><img decoding="async" class="aligncenter wp-image-3699" src="https://bookandfilmglobe.com/wp-content/uploads/2019/05/Brightness.png" alt="" width="212" height="320" srcset="https://bookandfilmglobe.com/wp-content/uploads/2019/05/Brightness.png 424w, https://bookandfilmglobe.com/wp-content/uploads/2019/05/Brightness-199x300.png 199w" sizes="(max-width: 212px) 100vw, 212px" /></p>
+<p>&nbsp;</p>
+<p>The books don&#8217;t quite read like Alexandre Dumas, but that&#8217;s the easiest comparison I can make. Kay’s novels boast the pleasures of a strong plot, duels, battles, romance, poison-kissed assassins, and young heroes naively rubbing shoulders with the mighty. Add a layer of thoughtfulness and a casual reflection on the vagaries of life, and you’ve got Kay.</p>
+<p>Brightness is a little more focused than the sprawling cast of characters in Children Of Earth And Sky<em>.</em> Here Kay tells the story mostly through the actions of Danio Cerra. Born into the merchant class, Danio&#8217;s smarts and luck gain him access to one of the most famous schools of the age.</p>
+<p>His training there leads to his placement in the court of a brutal ruler nicknamed The Beast, known for raping and killing young women and men on a whim. But when business is good, the country stable and the Beast otherwise reasonable, the aristocracy looks the other way. One night, so does Danio when he realizes the Beast’s latest “victim” is not some trembling farm girl but likely an assassin.</p>
+<p>Danio looks the other way instead of raising an alarm. He then impulsively helps the woman escape into the night when she finishes her work. Kay doesn’t paint Danio’s action in some dashing, noble light. Danio knows full well his choice means the death of The Beast, which is good. It also means his friend at court, the man directly responsible for security, will die as well, which is bad but unavoidable. On further consideration, it might also mean the death of a very young heir apparent, since small children coming into power rarely grow into manhood.</p>
+<p>The moment comes, Danio acts, and the repercussions spread throughout the rest of the novel. Before we know it, Danio finds himself a pawn of sorts, caught in the middle of a fierce battle between two mercenaries. One is handsome and dashing and the other squat and disfigured, but both are excellent leaders of men, relatively decent…and determined to see the other man die.</p>
+<p>Toss in that female assassin (who is of course beautiful, noble-born and daring to boot), a healer named Jelena determined to make her own way in the world, and about a dozen other vivid characters both major and minor, and you’ve got yourself a doozy of a story.</p>
+<h5>Different Worlds</h5>
+<figure id="attachment_3700" aria-describedby="caption-attachment-3700" style="width: 248px" class="wp-caption alignright"><img decoding="async" class="wp-image-3700 size-full" src="https://bookandfilmglobe.com/wp-content/uploads/2019/05/Kay.png" alt="Author Photo " width="248" height="640" srcset="https://bookandfilmglobe.com/wp-content/uploads/2019/05/Kay.png 248w, https://bookandfilmglobe.com/wp-content/uploads/2019/05/Kay-116x300.png 116w" sizes="(max-width: 248px) 100vw, 248px" /><figcaption id="caption-attachment-3700" class="wp-caption-text"><span style="font-size: 10pt;"><em>Guy Gavriel Kay</em></span></figcaption></figure>
+<p>I referred to Kay as writing an historical (?) novel since people usually describe him as a writer of fantasy. His breakthrough work was a trilogy known as The Fionavar Tapestry, in the classic fantasy mode (The series has since expanded to four books).</p>
+<p>Ever since, however, Kay has delivered novels that draw inspiration from our world’s past without being beholden to it. Typically, here he calls Venice Seressa. The city of Constantinople becomes Sarantium, besieged (from a Western perspective) by the Asharites.</p>
+<p>Even the two mercenaries locked in mortal hatred have a basis in Italian history, namely Federico Montefeltro and Sigismondo Malatesta. Kay describes himself as using “history as a scaffold for invention.” So history buffs will note many parallels between Kay’s novel and the real world, but can never rest assured they know exactly how things will turn out.</p>
+<p>Why bother; why not just write a work of historical fiction? Kay’s approach pays dividends by allowing me to experience the shock of an event in history more fully than I ever imagined it before. The simple act of renaming places and times left me blissfully unaware of what to expect, something unlikely to occur if I were reading, say, a novel faithfully based on the War Of The Roses.</p>
+<p>Even better, he creates characters so rich and diverting that the death of even a minor one will knock you for a loop. And since they’re all “made up,” no one can complain the author changed the fate of some real world nobleman. Kay is also wonderful at showing a character come into his or her own, like the High Patriarch (Pope) suddenly taking his faith seriously, or the foppish aristocrat starting to care about his place in the world.</p>
+<p>More broadly, Kay acknowledges the randomness of life, how a brief moment or impulse can branch you off forever into an unexpected and perhaps unwelcome direction. That perspective makes this grand adventure quite moving. Kay never lets you forget the real cost of everything that happens, from war to love to deciding whether to catch up with the large party on the road ahead of you or take a side path and go around them. The choice matters.</p>
+<p>It&#8217;s quite a feat to be rousing, amusing and thoughtful all at once. Kay manages this so often because he’s <em>not</em> trapped in a world of the past where we already know how it all turns out. His novels feel “real” because of his artistry and not because they got the dates and clothing and geography right. Perhaps it doesn’t matter what names you give to a city or time, whether inspired by the Tang Dynasty (his novel Under Heaven), Wessex/England during the Viking Invasions  (his novel The Last Light Of The Sun) or even Fionavar (Kay’s own “first of all worlds,” depicted in The Fionavar Tapestry).</p>
+<p>Maybe, after all, <a href="https://bookandfilmglobe.com/creators/writers/a-slog-of-ice-and-fire/">every novel is a work of fantasy.</a></p>
+<p><strong>(Berkley, May 14, 2019)</strong></p>
+<style>
+    .rp4wp-related-posts h3 {
+        font-size: 22px;
+    }
+    .has-post-thumbnail .rp4wp-related-posts  img.wp-post-image {
+        display: block !important;
+    }
+    .rp4wp_component_date {
+        font-size: 12px;
+        color: #888886;
+    }
+    .rp4wp_component_title  a {
+        color: #232323;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .rp4wp_component_image img {
+        width: 100% !important;
+        height: 150px !important;
+        object-fit: cover;
+    }
+    ul.rp4wp-posts-list .rp4wp-col {
+/*         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); */
+/*         padding-right: 0 !important; */
+/*         margin-right: 2%; */
+    }
+    ul.rp4wp-posts-list .rp4wp-col.rp4wp-col-last {
+/*         margin-right: 0; */
+    }
+    @media screen and (min-width: 320px) and (max-width: 767px){
+        .rp4wp_component_wrapper_flex {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            place-self: flex-start;
+        }
+        .rp4wp_component.rp4wp_component_image {
+            width: auto !important;
+        }
+        .rp4wp_component_image img {
+            width: 246px !important;
+            height: 150px !important;
+            object-fit: cover;
+        }
+        ul.rp4wp-posts-list .rp4wp-col {
+            padding: 0 !important;
+            width: 100% !important;
+            display: flex;
+        }
+        ul.rp4wp-posts-list .rp4wp-col.rp4wp-col-last {
+            margin-right: 0;
+        }
+        .rp4wp_component_image {
+            padding: 0 !important;
+        }
+        .rp4wp_component_title, .rp4wp_component_date {
+            padding-bottom: 10px !important;
+            padding-left: 10px !important;
+        }
+    }
+</style>
+<div class="rp4wp-related-posts rp4wp-related-post">
+	<h3><i class='fa fa-thumbs-up'></i>&nbsp;You May Also Like</h3>	<ul class="rp4wp-posts-list">
+		<li class="rp4wp-col rp4wp-col-first">
+	<div class="rp4wp_component rp4wp_component_image rp4wp_component_2"><a href="https://bookandfilmglobe.com/creators/writers/a-slog-of-ice-and-fire/"><img width="380" height="205" src="https://bookandfilmglobe.com/wp-content/uploads/2019/05/game-of-thrones-children-recap-finale-1.jpg" class="attachment-rp4wp-thumbnail-post size-rp4wp-thumbnail-post wp-post-image" alt="Hodor" srcset="https://bookandfilmglobe.com/wp-content/uploads/2019/05/game-of-thrones-children-recap-finale-1.jpg 696w, https://bookandfilmglobe.com/wp-content/uploads/2019/05/game-of-thrones-children-recap-finale-1-300x162.jpg 300w" sizes="(max-width: 380px) 100vw, 380px" /></a></div><div class="rp4wp_component_wrapper_flex"><div class="rp4wp_component rp4wp_component_title rp4wp_component_3"><a href="https://bookandfilmglobe.com/creators/writers/a-slog-of-ice-and-fire/">A Slog of Ice and Fire</a></div><div class="rp4wp_component rp4wp_component_date rp4wp_component_4"><span><i class="fa fa-calendar-o"></i> May 17, 2019</span>
+</div></div></li>
+<li class="rp4wp-col">
+	<div class="rp4wp_component rp4wp_component_image rp4wp_component_2"><a href="https://bookandfilmglobe.com/author-stuff/toni-morrison-remembered/"><img width="160" height="205" src="https://bookandfilmglobe.com/wp-content/uploads/2019/08/morrison-2.jpg" class="attachment-rp4wp-thumbnail-post size-rp4wp-thumbnail-post wp-post-image" alt="" srcset="https://bookandfilmglobe.com/wp-content/uploads/2019/08/morrison-2.jpg 1280w, https://bookandfilmglobe.com/wp-content/uploads/2019/08/morrison-2-234x300.jpg 234w, https://bookandfilmglobe.com/wp-content/uploads/2019/08/morrison-2-768x986.jpg 768w, https://bookandfilmglobe.com/wp-content/uploads/2019/08/morrison-2-798x1024.jpg 798w" sizes="(max-width: 160px) 100vw, 160px" /></a></div><div class="rp4wp_component_wrapper_flex"><div class="rp4wp_component rp4wp_component_title rp4wp_component_3"><a href="https://bookandfilmglobe.com/author-stuff/toni-morrison-remembered/">Toni Morrison</a></div><div class="rp4wp_component rp4wp_component_date rp4wp_component_4"><span><i class="fa fa-calendar-o"></i> August 6, 2019</span>
+</div></div></li>
+<li class="rp4wp-col rp4wp-col-last">
+	<div class="rp4wp_component rp4wp_component_image rp4wp_component_2"><a href="https://bookandfilmglobe.com/nonfiction/little-darlings/"><img width="154" height="205" src="https://bookandfilmglobe.com/wp-content/uploads/2018/07/Erotic-Innocence.jpg" class="attachment-rp4wp-thumbnail-post size-rp4wp-thumbnail-post wp-post-image" alt="Erotic Innocence" srcset="https://bookandfilmglobe.com/wp-content/uploads/2018/07/Erotic-Innocence.jpg 375w, https://bookandfilmglobe.com/wp-content/uploads/2018/07/Erotic-Innocence-225x300.jpg 225w" sizes="(max-width: 154px) 100vw, 154px" /></a></div><div class="rp4wp_component_wrapper_flex"><div class="rp4wp_component rp4wp_component_title rp4wp_component_3"><a href="https://bookandfilmglobe.com/nonfiction/little-darlings/">Little Darlings</a></div><div class="rp4wp_component rp4wp_component_date rp4wp_component_4"><span><i class="fa fa-calendar-o"></i> May 1, 1998</span>
+</div></div></li>
+	</ul>
+	</div>   	</div>
+
+   </div>
+
+	</article>
+
+						<div class="horisontal-links"><ul><li class="no-label"><a href="https://twitter.com/BookPlusFilm?lang=en" target="_blank" title="Visit Book and Film Globe on Twitter"><span class="fa fa-2x fa-twitter"></span></a></li><li class="no-label"><a href="https://www.facebook.com/booksplusfilmglobe/" target="_blank" title="Visit Book and Film Globe on Facebook"><span class="fa fa-2x fa-facebook"></span></a></li></ul></div>		</div><!-- #content -->
+
+      <div class="post-tags">
+		Tags: <a href="https://bookandfilmglobe.com/tag/a-brightness-long-ago/" rel="tag">A Brightness Long Ago</a>, <a href="https://bookandfilmglobe.com/tag/children-of-earth-and-sky/" rel="tag">Children Of Earth and Sky</a>, <a href="https://bookandfilmglobe.com/tag/guy-gavriel-kay/" rel="tag">Guy Gavriel Kay</a><br />      </div>
+
+      
+		<ul class="default-wp-page clearfix">
+			<li class="previous"><a href="https://bookandfilmglobe.com/creators/tv-review-shaky-ground/" rel="prev"><span class="meta-nav">&larr;</span> San Francisco on Shaky Ground</a></li>
+			<li class="next"><a href="https://bookandfilmglobe.com/television/tv-review-all-in-the-family-the-jeffersons-live/" rel="next">Shows That Made the Hit Parade <span class="meta-nav">&rarr;</span></a></li>
+		</ul>
+
+		
+               <div class="author-box">
+            <div class="author-img"><img width="100" height="100" src="https://bookandfilmglobe.com/wp-content/uploads/2018/10/unnamed-5-150x150.jpg" class="avatar avatar-100 photo" alt="" decoding="async" loading="lazy" srcset="https://bookandfilmglobe.com/wp-content/uploads/2018/10/unnamed-5-150x150.jpg 150w, https://bookandfilmglobe.com/wp-content/uploads/2018/10/unnamed-5-24x24.jpg 24w, https://bookandfilmglobe.com/wp-content/uploads/2018/10/unnamed-5-48x48.jpg 48w, https://bookandfilmglobe.com/wp-content/uploads/2018/10/unnamed-5-96x96.jpg 96w" sizes="auto, (max-width: 100px) 100vw, 100px" /></div>
+               <h4 class="author-name">Michael Giltz</h4>
+               <p class="author-description">Michael Giltz is a freelance writer based in New York City covering all areas of entertainment, politics, sports and more. He has written extensively for the New York Post, New York Daily News, New York Magazine, The Advocate, Out, Huffington Post, Premiere Magazine, Entertainment Weekly, BookFilter, USA Today and the Los Angeles Times. He co-hosts the long-running podcast <a href="http://www.showbizsandbox.com">Showbiz Sandbox</a>.</p>
+         </div>
+            
+      
+<div id="comments" class="comments-area">
+
+			<h3 class="comments-title">
+			One thought on &ldquo;<span>&#8216;A Brightness Long Ago&#8217;</span>&rdquo;		</h3>
+
+		
+		<ul class="comment-list">
+							<li class="comment even thread-even depth-1" id="li-comment-6086">
+					<article id="comment-6086" class="comment">
+						<header class="comment-meta comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/86b50b2569b403de645a86a764fe8af4bb6c73250b0ff6317ee2db7691bcf195?s=74&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/86b50b2569b403de645a86a764fe8af4bb6c73250b0ff6317ee2db7691bcf195?s=148&#038;d=mm&#038;r=g 2x' class='avatar avatar-74 photo' height='74' width='74' loading='lazy' decoding='async'/><div class="comment-author-link"><i class="fa fa-user"></i>Linda J Holland-Toll</div><div class="comment-date-time"><i class="fa fa-calendar-o"></i>April 14, 2022 at 9:32 pm</div><a class="comment-permalink" href="https://bookandfilmglobe.com/fiction/book-review-a-brightness-long-ago/#comment-6086"><i class="fa fa-link"></i>Permalink</a>						</header><!-- .comment-meta -->
+
+						
+						<section class="comment-content comment">
+							<p>You say:<br />
+&#8220;The Fionavar Tapestry, in the classic fantasy mode (The series has since expanded to four books).&#8221;<br />
+What is the title of the fourth book? I have been unable to find any references at all to such a book, but I would love to read it.</p>
+<a rel="nofollow" class="comment-reply-link" href="#comment-6086" data-commentid="6086" data-postid="3697" data-belowelement="comment-6086" data-respondelement="respond" data-replyto="Reply to Linda J Holland-Toll" aria-label="Reply to Linda J Holland-Toll">Reply</a>						</section><!-- .comment-content -->
+
+					</article><!-- #comment-## -->
+				</li><!-- #comment-## -->
+		</ul><!-- .comment-list -->
+
+		
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/fiction/book-review-a-brightness-long-ago/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://bookandfilmglobe.com/wp-comments-post.php?wpe-comment-post=bnfg" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-honeypot">
+        <label for="honeypot">Leave this field empty</label>
+        <input type="text" name="honeypot" id="honeypot" value="">
+    </p>
+<div class="gglcptch gglcptch_invisible"><div id="gglcptch_recaptcha_2378103040" class="gglcptch_recaptcha"></div>
+				<noscript>
+					<div style="width: 302px;">
+						<div style="width: 302px; height: 422px; position: relative;">
+							<div style="width: 302px; height: 422px; position: absolute;">
+								<iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfGDIYqAAAAAMAHIKFgAOUD3_IeozvHwdeBXsNc" frameborder="0" scrolling="no" style="width: 302px; height:422px; border-style: none;"></iframe>
+							</div>
+						</div>
+						<div style="border-style: none; bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px; background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px; height: 60px; width: 300px;">
+							<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px !important; height: 40px !important; border: 1px solid #c1c1c1 !important; margin: 10px 25px !important; padding: 0px !important; resize: none !important;">
+						</div>
+					</div>
+				</noscript></div><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='3697' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="52"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+	</div><!-- #primary -->
+
+	
+<div id="secondary">
+	
+	<aside id="colormag_featured_posts_vertical_widget-3" class="widget widget_featured_posts widget_featured_posts_vertical widget_featured_meta clearfix">
+		<h3 class="widget-title" ><span >Featured Stories</span></h3><div class="first-post">
+			<div class="single-article clearfix">
+				<figure><a href="https://bookandfilmglobe.com/podcasts/bfg-podcast-314-lanterns-coyotes-acme-discussions/" title="BFG Podcast #314: Lanterns, Coyotes, Acme Discussions"><img width="390" height="205" src="https://bookandfilmglobe.com/wp-content/uploads/2026/08/kyle-chandler-390x205.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="BFG Podcast #314: Lanterns, Coyotes, Acme Discussions" title="BFG Podcast #314: Lanterns, Coyotes, Acme Discussions" decoding="async" loading="lazy" /></a></figure>
+				<div class="article-content">
+					<div class="above-entry-meta"><span class="cat-links"><a href="https://bookandfilmglobe.com/category/featured-stories/"  rel="category tag">Featured Stories</a>&nbsp;<a href="https://bookandfilmglobe.com/category/podcasts/"  rel="category tag">Podcasts</a>&nbsp;</span></div>		<h3 class="entry-title">
+			<a href="https://bookandfilmglobe.com/podcasts/bfg-podcast-314-lanterns-coyotes-acme-discussions/" title="BFG Podcast #314: Lanterns, Coyotes, Acme Discussions">
+				BFG Podcast #314: Lanterns, Coyotes, Acme Discussions			</a>
+		</h3>
+		<div class="below-entry-meta"><span class="posted-on"><a href="https://bookandfilmglobe.com/podcasts/bfg-podcast-314-lanterns-coyotes-acme-discussions/" title="7:17 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2026-09-03T19:17:59-04:00">September 3, 2026</time><time class="updated" datetime="2026-09-03T15:36:00-04:00">September 3, 2026</time></a></span>
+		<span class="byline">
+			<span class="author vcard">
+				<i class="fa fa-user"></i>
+				<a class="url fn n"
+				   href="https://bookandfilmglobe.com/author/book-and-film-globe-staff/"
+				   title="Book and Film Globe Staff"
+				>
+					Book and Film Globe Staff				</a>
+			</span>
+		</span>
+
+					<span class="comments">
+				<i class="fa fa-comment"></i><a href="https://bookandfilmglobe.com/podcasts/bfg-podcast-314-lanterns-coyotes-acme-discussions/#respond">0</a>			</span>
+		
+		</div>
+											<div class="entry-content">
+							<p>Neal and Rob unpack private equity and falling anvils; Neal and Nick pick over HBO&#8217;s new superhero series</p>
+						</div>
+									</div>
+
+			</div>
+			</div><div class="following-post">
+			<div class="single-article clearfix">
+				<figure><a href="https://bookandfilmglobe.com/film/ridley-scott-is-back-flying-by-the-light-of-the-dog-stars/" title="Ridley Scott Is Back, Flying By the Light of &#8216;The Dog Stars&#8217;"><img width="130" height="90" src="https://bookandfilmglobe.com/wp-content/uploads/2026/08/TDS-TP3-00105-130x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Ridley Scott Is Back, Flying By the Light of &#8216;The Dog Stars&#8217;" title="Ridley Scott Is Back, Flying By the Light of &#8216;The Dog Stars&#8217;" decoding="async" loading="lazy" srcset="https://bookandfilmglobe.com/wp-content/uploads/2026/08/TDS-TP3-00105-130x90.jpg 130w, https://bookandfilmglobe.com/wp-content/uploads/2026/08/TDS-TP3-00105-392x272.jpg 392w" sizes="auto, (max-width: 130px) 100vw, 130px" /></a></figure>
+				<div class="article-content">
+					<div class="above-entry-meta"><span class="cat-links"><a href="https://bookandfilmglobe.com/category/featured-stories/"  rel="category tag">Featured Stories</a>&nbsp;<a href="https://bookandfilmglobe.com/category/film/" style="background:#dd3333" rel="category tag">FILM</a>&nbsp;</span></div>		<h3 class="entry-title">
+			<a href="https://bookandfilmglobe.com/film/ridley-scott-is-back-flying-by-the-light-of-the-dog-stars/" title="Ridley Scott Is Back, Flying By the Light of &#8216;The Dog Stars&#8217;">
+				Ridley Scott Is Back, Flying By the Light of &#8216;The Dog Stars&#8217;			</a>
+		</h3>
+		<div class="below-entry-meta"><span class="posted-on"><a href="https://bookandfilmglobe.com/film/ridley-scott-is-back-flying-by-the-light-of-the-dog-stars/" title="2:05 pm" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2026-08-28T14:05:44-04:00">August 28, 2026</time><time class="updated" datetime="2026-08-31T08:52:22-04:00">August 31, 2026</time></a></span>
+		<span class="byline">
+			<span class="author vcard">
+				<i class="fa fa-user"></i>
+				<a class="url fn n"
+				   href="https://bookandfilmglobe.com/author/stephen-garrett/"
+				   title="Stephen Garrett"
+				>
+					Stephen Garrett				</a>
+			</span>
+		</span>
+
+					<span class="comments">
+				<i class="fa fa-comment"></i><a href="https://bookandfilmglobe.com/film/ridley-scott-is-back-flying-by-the-light-of-the-dog-stars/#respond">0</a>			</span>
+		
+		</div>
+									</div>
+
+			</div>
+			
+			<div class="single-article clearfix">
+				<figure><a href="https://bookandfilmglobe.com/film/maybe-you-can-go-home-again-samba-traore/" title="Maybe You Can Go Home Again, Samba Traore"><img width="130" height="90" src="https://bookandfilmglobe.com/wp-content/uploads/2026/08/sambatraore_rec709_0024408-130x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Maybe You Can Go Home Again, Samba Traore" title="Maybe You Can Go Home Again, Samba Traore" decoding="async" loading="lazy" srcset="https://bookandfilmglobe.com/wp-content/uploads/2026/08/sambatraore_rec709_0024408-130x90.jpg 130w, https://bookandfilmglobe.com/wp-content/uploads/2026/08/sambatraore_rec709_0024408-392x272.jpg 392w" sizes="auto, (max-width: 130px) 100vw, 130px" /></a></figure>
+				<div class="article-content">
+					<div class="above-entry-meta"><span class="cat-links"><a href="https://bookandfilmglobe.com/category/film/classics/"  rel="category tag">CLASSICS</a>&nbsp;<a href="https://bookandfilmglobe.com/category/featured-stories/"  rel="category tag">Featured Stories</a>&nbsp;<a href="https://bookandfilmglobe.com/category/film/" style="background:#dd3333" rel="category tag">FILM</a>&nbsp;</span></div>		<h3 class="entry-title">
+			<a href="https://bookandfilmglobe.com/film/maybe-you-can-go-home-again-samba-traore/" title="Maybe You Can Go Home Again, Samba Traore">
+				Maybe You Can Go Home Again, Samba Traore			</a>
+		</h3>
+		<div class="below-entry-meta"><span class="posted-on"><a href="https://bookandfilmglobe.com/film/maybe-you-can-go-home-again-samba-traore/" title="8:11 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2026-08-27T08:11:40-04:00">August 27, 2026</time><time class="updated" datetime="2026-08-30T15:47:01-04:00">August 30, 2026</time></a></span>
+		<span class="byline">
+			<span class="author vcard">
+				<i class="fa fa-user"></i>
+				<a class="url fn n"
+				   href="https://bookandfilmglobe.com/author/william-schwartz/"
+				   title="William Schwartz"
+				>
+					William Schwartz				</a>
+			</span>
+		</span>
+
+					<span class="comments">
+				<i class="fa fa-comment"></i><a href="https://bookandfilmglobe.com/film/maybe-you-can-go-home-again-samba-traore/#respond">0</a>			</span>
+		
+		</div>
+									</div>
+
+			</div>
+			
+			<div class="single-article clearfix">
+				<figure><a href="https://bookandfilmglobe.com/film/40-years-on-uconns-geno-auriemma-is-still-butting-heads-and-winning/" title="40 Years On, UConn&#8217;s Geno Auriemma is Still Butting Heads&#8230; and Winning"><img width="130" height="90" src="https://bookandfilmglobe.com/wp-content/uploads/2026/08/The_Dynasty_Uconn_Huskies_Photo_010302.jpg.photo_modal_show_home_large-130x90.jpg" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="40 Years On, UConn&#8217;s Geno Auriemma is Still Butting Heads&#8230; and Winning" title="40 Years On, UConn&#8217;s Geno Auriemma is Still Butting Heads&#8230; and Winning" decoding="async" loading="lazy" srcset="https://bookandfilmglobe.com/wp-content/uploads/2026/08/The_Dynasty_Uconn_Huskies_Photo_010302.jpg.photo_modal_show_home_large-130x90.jpg 130w, https://bookandfilmglobe.com/wp-content/uploads/2026/08/The_Dynasty_Uconn_Huskies_Photo_010302.jpg.photo_modal_show_home_large-392x272.jpg 392w" sizes="auto, (max-width: 130px) 100vw, 130px" /></a></figure>
+				<div class="article-content">
+					<div class="above-entry-meta"><span class="cat-links"><a href="https://bookandfilmglobe.com/category/film/documentary/" style="background:#dd3333" rel="category tag">DOCUMENTARY</a>&nbsp;<a href="https://bookandfilmglobe.com/category/featured-stories/"  rel="category tag">Featured Stories</a>&nbsp;<a href="https://bookandfilmglobe.com/category/film/" style="background:#dd3333" rel="category tag">FILM</a>&nbsp;</span></div>		<h3 class="entry-title">
+			<a href="https://bookandfilmglobe.com/film/40-years-on-uconns-geno-auriemma-is-still-butting-heads-and-winning/" title="40 Years On, UConn&#8217;s Geno Auriemma is Still Butting Heads&#8230; and Winning">
+				40 Years On, UConn&#8217;s Geno Auriemma is Still Butting Heads&#8230; and Winning			</a>
+		</h3>
+		<div class="below-entry-meta"><span class="posted-on"><a href="https://bookandfilmglobe.com/film/40-years-on-uconns-geno-auriemma-is-still-butting-heads-and-winning/" title="10:45 am" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2026-08-26T10:45:29-04:00">August 26, 2026</time><time class="updated" datetime="2026-08-30T15:47:34-04:00">August 30, 2026</time></a></span>
+		<span class="byline">
+			<span class="author vcard">
+				<i class="fa fa-user"></i>
+				<a class="url fn n"
+				   href="https://bookandfilmglobe.com/author/jon-hart/"
+				   title="Jon Hart"
+				>
+					Jon Hart				</a>
+			</span>
+		</span>
+
+					<span class="comments">
+				<i class="fa fa-comment"></i><a href="https://bookandfilmglobe.com/film/40-years-on-uconns-geno-auriemma-is-still-butting-heads-and-winning/#respond">0</a>			</span>
+		
+		</div>
+									</div>
+
+			</div>
+			</div></aside><aside id="custom_html-3" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!-- /21683694079/BRG-ATF/BRG-RHS-Top -->
+<div id='div-gpt-ad-1531167327139-2' style='height:600px; width:300px; margin:0 0 20px 0;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1531167327139-2'); });
+</script>
+</div>
+<!-- /21683694079/RNRG-MOP/RNRG-RHS-Top -->
+<!--
+<div id='div-gpt-ad-1528823095074-3' style='height:600px; width:300px; margin:0 0 10px 0;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1528823095074-3'); });
+</script>
+</div>
+--></div></aside><aside id="custom_html-8" class="widget_text widget widget_custom_html clearfix"><h3 class="widget-title"><span>Subscribe to our mailing list</span></h3><div class="textwidget custom-html-widget"><!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://newjerseyglobe.us17.list-manage.com/subscribe/post?u=9ff4e98db7fbd3918b732d7ab&amp;id=19d6634729" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding:10px 0;">
+    <div id="mc_embed_signup_scroll">
+    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" style="float:right;height:40px;line-height:40px;background:#FF8E05;">	
+<div class="mc-field-group" style="width:auto;margin-right:125px;">
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="margin-bottom:0;border:2px solid #FF8E05;">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9ff4e98db7fbd3918b732d7ab_19d6634729" tabindex="-1" value=""></div>
+
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup--></div></aside><aside id="wpcw_social-3" class="widget wpcw-widgets wpcw-widget-social clearfix"><h3 class="widget-title"><span>Social</span></h3><ul><li class="has-label"><a href="https://twitter.com/BookPlusFilm?lang=en" target="_blank" title="Visit Book and Film Globe on Twitter"><span class="fa fa-2x fa-twitter"></span>Twitter</a></li><li class="has-label"><a href="https://www.facebook.com/booksplusfilmglobe/" target="_blank" title="Visit Book and Film Globe on Facebook"><span class="fa fa-2x fa-facebook"></span>Facebook</a></li></ul></aside><aside id="custom_html-9" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!-- /21683694079/BRG-ATF/BRG-RHS-Bottom -->
+<div id='div-gpt-ad-1531167327139-1' style='height:250px; width:300px;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1531167327139-1'); });
+</script>
+</div>
+</div></aside>
+		<aside id="recent-posts-2" class="widget widget_recent_entries clearfix">
+		<h3 class="widget-title"><span>Recent Posts</span></h3>
+		<ul>
+											<li>
+					<a href="https://bookandfilmglobe.com/film/john-malkovich-werner-herzog-and-danny-boyle-show-up-big-in-italy/">John Malkovich, Werner Herzog, and Danny Boyle Show Up Big in Italy</a>
+									</li>
+											<li>
+					<a href="https://bookandfilmglobe.com/film/the-whisper-man-deserves-this-review/">&#8216;The Whisper Man&#8217; Deserves this Review</a>
+									</li>
+											<li>
+					<a href="https://bookandfilmglobe.com/podcasts/bfg-podcast-314-lanterns-coyotes-acme-discussions/">BFG Podcast #314: Lanterns, Coyotes, Acme Discussions</a>
+									</li>
+											<li>
+					<a href="https://bookandfilmglobe.com/comedy/dont-wait-for-busboys/">Don&#8217;t Wait for &#8216;Busboys&#8217;</a>
+									</li>
+											<li>
+					<a href="https://bookandfilmglobe.com/film/chronovisor-presents-an-intellectually-grounded-indiana-jones-type-adventure/">&#8216;Chronovisor&#8217; Presents an Intellectually Grounded Indiana Jones-Type Adventure</a>
+									</li>
+					</ul>
+
+		</aside><aside id="custom_html-4" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><!-- /21683694079/RNRG-MOP/RNRG-RHS-Bottom -->
+<div id='div-gpt-ad-1528823095074-1' style='height:250px; width:300px; margin:0 0 20px 0;'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1528823095074-1'); });
+</script>
+</div>
+
+</div></aside><aside id="recent-comments-2" class="widget widget_recent_comments clearfix"><h3 class="widget-title"><span>Recent Comments</span></h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Caitlin Anya Lester</span> on <a href="https://bookandfilmglobe.com/books/in-transcription-ben-lerner-breaks-the-spell-of-his-mothers-voice/#comment-33333">In &#8216;Transcription,&#8217; Ben Lerner Breaks the Spell of His Mother&#8217;s Voice</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://tech-insider.org/eliezer-yudkowsky-ai-job-2027-manifold-market-odds/" class="url" rel="ugc external nofollow">Traders Pile Into a Yudkowsky AI-Job Market, but Manifold Odds Stay at 4% - Tech Insider</a></span> on <a href="https://bookandfilmglobe.com/film/the-a-i-doc-explores-the-perils-and-promise-of-ai/#comment-33332">&#8216;The A.I. Doc&#8217; Explores the Perils and the Promise of AI</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://internetruinedeverything.com/2026/08/22/is-it-over/" class="url" rel="ugc external nofollow">Is it over? &#8211; The Internet Ruined Everything</a></span> on <a href="https://bookandfilmglobe.com/streaming/the-kurtzman-era-of-star-trek-boldly-goes-into-the-trashcan/#comment-33330">The Kurtzman Era of Star Trek Boldly Goes Into the Trashcan</a></li><li class="recentcomments"><span class="comment-author-link">N</span> on <a href="https://bookandfilmglobe.com/television/cobra-kai-season-3-what-went-wrong/#comment-33329">&#8216;Cobra Kai&#8217; Season 3: What Went Wrong?</a></li><li class="recentcomments"><span class="comment-author-link">Michael S Washburn</span> on <a href="https://bookandfilmglobe.com/books/the-counterfactual-adulation-of-amanda-knox/#comment-33324">The Counterfactual Adulation of Amanda Knox</a></li></ul></aside>
+	</div>
+
+	
+
+</div><!-- .inner-wrap -->
+</div><!-- #main -->
+
+<footer class="clearfix footer ">
+    <div class="footer-row-1">
+        <div class="footer-head">
+            <div class="footer-head-item"><span>Editor: Dan Friedman,&nbsp;</span><a href="/cdn-cgi/l/email-protection#f1949598859e83b1939e9e9a909f9597989d9c969d9e9394df929e9c"><span class="__cf_email__" data-cfemail="d4b1b0bda0bba694b6bbbbbfb5bab0b2bdb8b9b3b8bbb6b1fab7bbb9">[email&#160;protected]</span></a></div>
+            <div class="footer-splitter">|</div>
+            <div class="footer-head-item"><span>General Manager & Advertising: Kevin Sanders,&nbsp;</span><a href="/cdn-cgi/l/email-protection#107b7566797e506375717f7662757574637d757479713e737f7d"> <span class="__cf_email__" data-cfemail="abc0ceddc2c5ebd8cecac4cdd9cececfd8c6cecfc2ca85c8c4c6">[email&#160;protected]</span></a></div>
+            <div class="footer-social-icons">
+                <div class="follow-us-icon">
+                    <!-- <a href="" target="_blanc"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/icons/Instagram.png"></a> -->
+                    <a href="https://www.facebook.com/booksplusfilmglobe/" target="blanc"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/icons/Facebook.png"></a>
+                    <!-- <a href="" target="_blanc"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/icons/Youtube.png"></a> -->
+                    <a href="https://twitter.com/BookPlusFilm?lang=en" target="_blanc"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/icons/Twitter.png"></a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="footer-row-2">
+        <div class="footer-list footer-col-1">
+            <div class="menu-footer-menu-container"><ul id="8962" class="menu"><li id="menu-item-373" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-373"><a href="https://bookandfilmglobe.com/about/">About Us</a></li>
+<li id="menu-item-379" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-379"><a href="https://bookandfilmglobe.com/terms/">Terms &#038; Conditions</a></li>
+<li id="menu-item-378" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-378"><a href="https://bookandfilmglobe.com/privacy/">Privacy Policy</a></li>
+<li id="menu-item-377" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-377"><a href="https://bookandfilmglobe.com/advertise-with-us/">Advertise with us</a></li>
+</ul></div>        </div>
+        <div class="footer-col-2">
+            <a class="footer-logo" href="//seaofreedsmedia.com/">
+                <img src="/wp-content/uploads/2022/02/SoRm_logo3-white1.png" alt="Sea of Reeds">
+            </a>
+        </div>
+        <div class="footer-col-3">
+            <div class="check-us-out">
+                Check us out:
+            </div>
+            <div class="check-us-out-container">
+                <ul>
+                    <li><a href="//audiohopper.com" title="Audiohopper. Real news. Narrated." target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/ahg.png" alt="Audiohopper. Real news. Narrated."></a></li>
+                    <li><a href="//bookandfilmglobe.com" title="Book and Film Globe" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/bfg.png" alt="Book and Film Globe"></a></li>
+                    
+                    <li><a href="//fineartglobe.com" title="Fine Art Globe" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/fag.png" alt="Fine Art Globe"></a></li>
+                    <li><a href="//themediaglobe.com" title="Media Globe" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/mg.png" alt="Media Globe"></a></li>
+                    <li><a href="//modernconsensus.com" title="Modern Consensus" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/mc.png" alt="Modern Consensus"></a></li>
+                    
+                    <li><a href="https://thebookhousemillburn.com/" title="The Book House" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/tbh.jpg" alt="The Book House"></a></li>
+                    <li><a href="//rockandrollglobe.com" title="Rock and Roll Globe" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/rrg.png" alt="Rock and Roll Globe"></a></li>
+                    <li><a href="//wineandwhiskeyglobe.com" title="Wine and Whiskey Globe" target="_blank" rel="nofollow"><img src="https://bookandfilmglobe.com/wp-content/themes/rnrglobe/images/globes/wwg.png" alt="Wine and Whiskey Globe"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-socket-wrapper clearfix">
+        <div class="inner-wrap">
+            <div class="footer-socket-area">
+                <div class="footer-socket-section">
+                    <div id=" copyright">©Sea of Reeds Media. All Rights Reserved.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="#masthead" id="scroll-up"><i class="fa fa-chevron-up"></i></a>
+
+</div><!-- #page -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/rnrglobe/*","/wp-content/themes/colormag/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+	<script type="text/javascript">
+		var c = document.body.className;
+		c = c.replace( /everest-forms-no-js/, 'everest-forms-js' );
+		document.body.className = c;
+	</script>
+	<script id="mpp_gutenberg_tabs-js" src="https://bookandfilmglobe.com/wp-content/plugins/metronet-profile-picture/js/mpp-frontend.js?ver=2.6.4"></script>
+<script async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://bookandfilmglobe.com/wp-includes/js/comment-reply.min.js?ver=7.1"></script>
+<script id="colormag-bxslider-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/jquery.bxslider.min.js?ver=2.1.0"></script>
+<script id="colormag-sticky-menu-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/sticky/jquery.sticky.min.js?ver=2.1.0"></script>
+<script id="colormag-navigation-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/navigation.min.js?ver=2.1.0"></script>
+<script id="colormag-fitvids-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/fitvids/jquery.fitvids.min.js?ver=2.1.0"></script>
+<script id="colormag-skip-link-focus-fix-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/skip-link-focus-fix.min.js?ver=2.1.0"></script>
+<script id="colormag-custom-js" src="https://bookandfilmglobe.com/wp-content/themes/colormag/js/colormag-custom.min.js?ver=2.1.0"></script>
+<script>(function(d){var s=d.createElement("script");s.type="text/javascript";s.src="https://a.omappapi.com/app/js/api.min.js";s.async=true;s.id="omapi-script";d.getElementsByTagName("head")[0].appendChild(s);})(document);</script><script id="gglcptch_api-js" data-cfasync="false" async="async" defer="defer" src="https://www.google.com/recaptcha/api.js?render=explicit&#038;ver=1.87"></script>
+<script id="gglcptch_script-js-extra">
+var gglcptch = {"options":{"version":"invisible","sitekey":"6LfGDIYqAAAAAMAHIKFgAOUD3_IeozvHwdeBXsNc","error":"\u003Cstrong\u003EWarning\u003C/strong\u003E:&nbsp;More than one reCAPTCHA has been found in the current form. Please remove all unnecessary reCAPTCHA fields to make it work properly.","disable":0},"vars":{"visibility":false}};
+//# sourceURL=gglcptch_script-js-extra
+</script>
+<script id="gglcptch_script-js" src="https://bookandfilmglobe.com/wp-content/plugins/google-captcha/js/script.js?ver=1.87"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://bookandfilmglobe.com/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://bookandfilmglobe.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+		<script type="text/javascript">var omapi_data = {"object_id":3697,"object_key":"post","object_type":"post","term_ids":[463,3147,3148,3146],"wp_json":"https:\/\/bookandfilmglobe.com\/wp-json","wc_active":false,"edd_active":false,"nonce":"8f3009337e"};</script>
+		</body>
+</html>

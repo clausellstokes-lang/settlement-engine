@@ -1,0 +1,24 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 109,
+ "firstTs": "2026-09-09T22:44:38.637Z",
+ "lastTs": "2026-09-09T22:56:35.471Z",
+ "tools": {
+  "Bash": 17,
+  "Read": 10,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--internal-security-court-without-detention/draft-round-1.md"
+ ],
+ "lastAssistantText": "person, future modals, and zero `anyone`/`everyone`/`nobody`/`all`/`only`/`every`. All twelve first-two-word openers are distinct; exactly one wording opens on `{settlement}` (0.083 against the 0.167 ceiling); slot sets match parent to face in every variant (variant 2 stays slotless, as it shipped).",
+ "run": "wf_68d644ef-3dd",
+ "agent": "a82d935ddb369b7e4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_68d644ef-3dd/agent-a82d935ddb369b7e4.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

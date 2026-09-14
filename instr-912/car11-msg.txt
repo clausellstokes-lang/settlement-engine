@@ -1,0 +1,55 @@
+INSTR-912 car 11: the two register debts the merged tree exposed — the third column source was read at a path NO writer produces and is re-pointed to the pulse's own, the census stops formatting its mean, and the eleven plants' prose numbers meet their headers
+
+THE CHAIR PUT TWO BRANCHES AND THE MEASUREMENT FOUND A THIRD. `institutionTable.js:415`
+read `settlement.treasury.coinFlows.taxed`. The grep decides it: the only writer of a coin
+ledger anywhere in the estate is `advanceTreasury`, and it writes at
+`settlement.economicState.treasury` (worldPulse/treasury.js:1231, :1253), where
+`treasuryRecordOf` reads it (:625) and where the schema types it (:628-635). NOTHING writes
+`settlement.treasury`. So the read was neither legitimate-as-written (branch a) nor a phantom
+source to be deleted (branch b): it was a WRONG-PATH READ OF A REAL SOURCE, and the cure is
+the gate's own remedy line — "read a key the producer actually writes". No door was opened,
+no `--write` was run, and `scripts/.observed-shape-readers-baseline.json` is byte-untouched.
+
+The estate had already ratified the answer: the OSR's virtual-dormant writer door declares
+`treasury on economicState` with writer `src/domain/worldPulse/treasury.js` behind the
+`treasuryEnabled` flag the generation corpus never lights. Car 9's read matched no declared
+identity and was convicted precisely because that door is keyed on the full identity and never
+on the key alone. The re-pointed read is a sixth read of that already-cleared identity, so the
+door's read count moves 5 -> 6 while its enumerated identity list does not (still four) — the
+same move, and the same attribution rule, the file already documents for its 4 -> 5 step.
+
+`whatItCounts` stays closed, and now honestly: all three sources CLERK-LAWS §1.2 names are read,
+the third at the path its writer produces. Still absent on every generated settlement — but now
+absent BECAUSE THE WORLD HAS NOT TICKED, not because the code was asking the wrong object. A new
+arm drives BOTH shapes through the real function so the path is pinned in both directions, and
+plant #85 now reds twice instead of once. The plant's own pattern moved with the code, and had
+to: car 10's original perl leaves car 11's file byte-identical under cmp — a plant whose regex
+no longer matches mutates nothing, reports CLEAR, and dies in silence.
+
+THE SECOND DEBT: `wiringCensus.js` returned `meanPerPool: (variants / total).toFixed(2)`, one
+line leaking two rows over the prose-numerics ceiling. The census now publishes `variants` and
+`total` as integers and the walker formats the same two decimal places over the same two
+integers in its own arm — the assertion keeps its force and no presentation is decided inside
+`src/domain/prose/`.
+
+THE THIRD: the rebase bumped INSTR's eleven plant headers #74-#84 -> #75-#85, comments only, and
+the prose BODIES still named the old numbers. Every reference was checked against the header it
+names rather than bumped mechanically; all eleven map +1. Labels are byte-untouched (every
+`check_caught` line diffs identical) and the manifest is a pure text edit (5 `meta` `what`
+strings; 5 lines in, 5 out; every other key byte-equal, order preserved).
+
+EXECUTED: OSR gate exit 0, 0 drift lines, "1972 finding(s), exactly matching the frozen
+inventory" · prose-numerics `baseline=225 live=225 exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0`
+· institutionTable walker 19/19 · wiringCensus walker 26/26 · manifest test 10/10 · OSR walker
+44/44 (was 2 failed) · proseNumerics 29/29 (was 3 failed) · entryContradiction 27/27 ·
+moveGrammar 50/50 · typecheck ratchet 173/173 at ceiling · seven plants executed by hand with
+cp/cmp restore (never the checkout family), every one convicting, every one restored cmp-exact.
+
+DISCLOSED IN THE RECEIPT: `tests/lint/observedShapeReaders.walker.test.js` is a third walker test
+beyond the brief's named two — two literals, no baseline byte — recorded for the chair's veto;
+and one runner-count gate read 5 rather than 0 before a run that was afterwards re-run at a
+verified zero.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: INSTR-912
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

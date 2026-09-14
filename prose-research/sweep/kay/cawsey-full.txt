@@ -1,0 +1,845 @@
+7KH2QFHDQG)XWXUH&KLOGVOD\HU*X\*DYULHO.D\૷V
+,QYHUVLRQRI0DORU\૷V0RUWH'DUWKXU
+.DWK\&DZVH\
+Arthuriana, Volume 25, Number 2, Summer 2015, pp. 67-83 (Article)
+3XEOLVKHGE\6FULSWRULXP3UHVV
+DOI: 10.1353/art.2015.0020
+For additional information about this article
+                                                    Access provided by Dalhousie University (20 Nov 2015 19:09 GMT)
+http://muse.jhu.edu/journals/art/summary/v025/25.2.cawsey.html
+
+67
+once and future childslayer
+arthuriana 25.2 (2015)
+The Once and Future Childslayer:
+Guy Gavriel Kay’s Inversion of 
+Malory’s Morte Darthur
+kathy cawsey
+Guy Gavriel Kay’s Fionavar T apestry interprets Arthur’s return not as a 
+reward or honor, but as a punishment for killing the children on Mayday. 
+This reinterpretation links the ‘Mayday’ incident with the famous ‘May 
+passages’ and provides a rewriting of the Morte Darthur’s stance on 
+prophecy, predestination, and free will. (KC)
+T
+he range of responses to the Arthurian legends in modern fantasy 
+fiction is overwhelming. From momentary ‘grace-notes’ to whole-sale 
+adaptation of the legend, late-twentieth-century fantasy writers have made 
+Arthur a staple of the fantasy genre. The Arthur story has been used in almost 
+every way imaginable, though some aspects have proven more fruitful than 
+others. The Grail legend, the symbol of the Fisher King, and the doomed 
+love-triangle of T ristan and Iseult loom large; many fantasy and science-fiction 
+writers also capitalize on the ‘time travel’ element opened up by Sir Thomas 
+Malory’s ‘once and future king’ phrase in The Morte Darthur.
+1 Interestingly, 
+Merlin and other characters travel in time more often in modern fantasy than 
+Arthur himself, the original ‘once and future’ character.
+2  Guy Gavriel Kay, a 
+Canadian fantasy writer, does use a time-traveling Arthur in his fantasy trilogy 
+The Fionavar T apestry; however, unlike many fantasy authors, Kay uses the 
+Arthurian story and the ‘return of the king’ angle not just as a popular legend 
+or trendy motif, but as a means of staking out a philosophical argument about 
+the nature of freedom and free will. Guy Gavriel Kay’s Fionavar T apestry is 
+unique among modern fantasy in its reading of Malory’s rex quondam rexque 
+futurus prophecy: Kay reads the return of Arthur not as an honor but rather, as 
+a curse.
+3 Moreover, the Lancelot-Guinevere-Arthur love triangle is envisioned, 
+in the series, not as a cause of the fall of Camelot but as a punishment for the 
+young Arthur’s killing of the boatload of children on Mayday in his attempt 
+to forestall Merlin’s prophecy about Mordred. A minor incident in Malory 
+is thus reinterpreted by Kay as the defining moment in Arthur’s reign.
+4 Most 
+importantly, these changes are not merely ‘plot’ revisions or ‘updatings’ of the 
+story. Rather, through these changes Kay offers a profound commentary on 
+key themes of Malory’s work: the roles prophecy, fate, and free will play in 
+68
+arthuriana
+the lives of both commoners and kings. In Malory, fate is inevitable and the 
+characters are inexorably moved to the tragic ending; in Kay, the characters 
+have free will and can choose to act against prophecy or ‘fate’. Kay thus both 
+points up the feeling of inevitability in the Morte Darthur and shows that 
+actually, Arthur did make choices that could have averted the tragedy. 
+thomas malory’s ‘other’ may passage
+In Thomas Malory’s Morte Darthur, two key stories open with the invocation 
+of the month of May, when ‘every lusty harte begynnyth to blossom and to 
+burgyne.’
+5 The importance of the ‘May passages’ is a commonplace among 
+scholars of the Morte Darthur. The significance or meaning of the passages 
+is debated; nonetheless, few Malory scholars would dispute the claim that 
+one’s interpretation of at least the first ‘May passage’ fundamentally colors 
+one’s interpretation of the love of Lancelot and Guinevere and, ultimately, 
+the causes of the fall of Camelot.
+6 Both ‘May passages’ draw on the trope, 
+pervasive in medieval literature, of the ‘May morning,’ which links the 
+renewal of springtime with the onset of human romantic love.
+7 The first 
+passage explicitly connects the ‘May morning’ literary trope with the love of 
+Lancelot and Guinevere, calling Guinevere a ‘trew lover’ (Vinaver III.1120.12, 
+Field I.842.11); the second passage inverts the trope to increase the shock to 
+the reader when ‘wynter wyth hys rowghe wyndis and blastis’ metaphorically 
+interrupts the May morning, and the ‘floure of chyvalry’ is destroyed and 
+slain (Vinaver III.1161.4–8; Field I.870.6–10). 
+What few scholarly critics have noted, however, is that there are not two 
+but three ‘May’ passages in the Morte Darthur. The first one comes well before 
+the later, better-known passages, well before Lancelot and Guinevere are even 
+introduced, and stands in stark contrast to the later passages. When Arthur 
+is still a young king, Malory tells us, he
+lette sende for all the children that were borne in May-day, begotyn of lordis 
+and borne of ladyes; for Merlyon tolde kynge Arthure that he that sholde 
+destroy hym and all the londe sholde be borne on May-day. Wherefore he sente 
+for hem all in payne of dethe, and so there were founde many lordis sonnys 
+and many knyghtes sonnes, and all were sente unto the kynge. And so was 
+Mordred sente by kynge Lottis wyff. And all were putte in a shyppe to the se; 
+and som were four wekis olde and som lesse. And so by fortune the shyppe 
+drove unto a castelle, and was all to-ryven and destroyed the moste party, save 
+that Mordred was cast up, and a good man founde hym, and fostird hym tylle 
+he was fourtene yere of age, and than brought hym to the courte. (Vinaver 
+I.55.19–32; Field I.46.7–18)
+This passage, often mentioned but rarely analyzed by scholars, is strange on 
+a number of levels. It draws on numerous literary tropes and motifs only to 
+confound the reader’s expectations of them. Most obvious is the bewildering 
+69
+once and future childslayer
+use of the ‘May morning’ trope: in medieval literature Mayday is supposed to 
+be a time for romantic and erotic love, not for the killing of babies. 8 Other 
+tropes are similarly overturned. The ‘Killing of the Innocents’ is an incident 
+familiar to medieval audiences from mystery plays and biblical stories, but 
+it is perpetrated by one of history’s worst villains, King Herod—a strange 
+role in which to cast the great King Arthur, however young at the time. 
+Mordred, moreover, is hardly a Jesus-figure! The ‘innocents adrift’ is likewise 
+a familiar medieval motif or plot device; but again, it is usually the saintly 
+hero or heroine of the tale who is cast adrift and saved by providence, not 
+the eventual villain. Mordred is a strange bedfellow (boatfellow?) for the likes 
+of St Kentigern, St Gregory, Constance, Emaré, or King Horn. As Helen 
+Cooper notes, this seeming paradox can be resolved with reference to the 
+widely-distributed medieval tradition of Judas being set adrift in a boat—
+Malory may be connecting Mordred to the most famous traitor of Christian 
+history.
+9 This connection is further strengthened by the legend’s Oedipal 
+plot that Judas killed his father and married his mother, as Mordred does 
+with Arthur and attempts to do with Arthur’s wife (albeit not his mother). 
+Such a connection, however, does not exonerate Arthur of the crime of child 
+murder, especially since in the Legenda Aurea Judas is set adrift alone, not in 
+a boatload of innocents.
+ 
+Few critics have commented on this passage, other than to note its 
+problematic nature. 10 As Elizabeth Archibald writes, ‘This ought to be a 
+key episode, one would have thought, since Mordred is fated to be Arthur’s 
+nemesis. Yet Malory devotes curiously little space to it.’
+11 No one has suggested 
+that there might be a link between this ‘Mayday passage’ and the later ‘May 
+passages.’ Yet both the ‘Mayday passage’ and the last ‘May passage’ invoke 
+the ‘May morning’ trope only to invert it: in both cases May becomes a time 
+not of love but of killing, and the killing is all the more shocking because 
+of its unexpected timing. Moreover, both the first ‘Mayday’ passage and the 
+later ‘May passages’ are implicated in the ending of the Morte Darthur and 
+the downfall of Camelot: the first by Merlin’s prophecy of the role Mordred 
+would play in the death of Arthur and the destruction of ‘all the londe,’ the 
+second by the way Lancelot and Guinevere’s adultery instigates the rumours 
+and faction-fighting in the last book of the Morte. Implicitly, then, the 
+‘Mayday passage’ about Mordred and the ‘May passages’ about the love of 
+Lancelot and Guinevere are linked, both through the common motif of the 
+May morning and through a common foreshadowing of the destruction of 
+Arthur’s kingdom.
+No scholarly critic that I know of has made the argument that these 
+passages are connected in this way. However, fiction writers are ‘readers’ 
+and ‘interpreters’ of Malory just as much as academics are. As Neil Sinyard 
+argues, adaptation can be a ‘critical essay on its source.’
+12 Guy Gavriel Kay’s 
+70
+arthuriana
+Fionavar T apestry presents a reading of Malory that implicitly argues for a 
+connection between the three ‘May passages’—for an interpretation of the 
+Morte Darthur which sees the killing of the Mayday children, the love of 
+Lancelot and Guinevere, and the fall of Camelot not as discrete incidents, 
+but as intimately, and causally, connected.
+high fantasy and the legend of arthur
+Guy Gavriel Kay deliberately drew on the Arthurian legends in his first fantasy 
+work as a kind of challenge to himself. Having worked with Christopher 
+T olkien on The Silmarillion, and thus having been thoroughly steeped in 
+the T olkien-style fantasy tradition, Kay felt the need to counteract the more 
+escapist kind of popular fantasy that he felt was ‘debasing the genre’ in the 
+post-T olkien years. He says, ‘The [Fionavar] T apestry was a conscious decision 
+…to work squarely in the T olkien tradition while trying to allow room for 
+character development and plausibility that I tended to find missing in most 
+post-[T olkien] High Fantasy. In a way it was a challenge to the debasing of 
+the genre.’
+13 In another interview he comments,
+Fionavar was very much a conscious attempt to—the phrase I’ve sometimes 
+used is—‘throw a gantlet [sic] down to the barbarians in the temple.’ I was so 
+irritated by the lazy imitations of T olkien that had been coming out through 
+the seventies, and into the early parts of the eighties. It seemed to me that the 
+writers of fantasy I respected had abandoned high fantasy, they’d sort of thrown 
+up their hands and said, ‘Well, this is only going to be for the hacks, doing 
+derivative work!’ and they were writing small precise fantasies, or introducing 
+urban fantasy, the modern urban fantasy tradition, and I felt to some degree 
+that that was abdicating. There was such a long, illustrious tradition to high 
+fantasy that it seemed an abdication to abandon it to people doing nothing but 
+imitative work. So writing the [Fionavar] T apestry was a very conscious effort 
+to say that the elements of high fantasy; the magic weapons, the enchanted 
+jewelry, the races of dwarves and the lios alfar, the equivalent of elves, that all 
+of these things could still, if done right, have some vitality.
+14 
+Drawing on the Arthurian legend allowed Kay to follow T olkien’s practice 
+of incorporating myth into his high fantasy world without being merely 
+derivative, since the Arthurian legend is arguably the medieval legend that 
+T olkien least uses in The Lord of the Rings.
+15 Kay’s work touches on Arthurian 
+sources beyond Malory—from Welsh sources such as the Mabinogion to T .H. 
+White—but it is Malory’s version which forms the core of the Arthurian 
+material in The Fionavar T apestry.
+For a work in which the Arthurian legend plays such a large role, the story 
+does not even enter the trilogy explicitly until the second book, The Wandering 
+Fire. In the first book, Kay’s five protagonists, Kim, Jennifer, Paul, Kevin, and 
+Dave, travel from T oronto to Fionavar, the ‘first of all worlds,’ and become 
+71
+once and future childslayer
+involved in the age-long fight against the world’s manifestation of absolute 
+evil, Rakoth Maugrim. Each of the five characters begins to take on archetypal 
+and mythological roles and resonances, from Odin to Adonis to the Celtic 
+Morrigan, and it is around the character Jennifer that the Arthurian legend 
+(unbeknownst to the reader) begins to coalesce. At the end of the first book of 
+the series, Jennifer is captured and taken to Rakoth Maugrim’s fortress in what 
+becomes a re-enactment of Guinevere’s capture by Meleagant in Malory—a 
+rewriting the reader only realizes retrospectively, after discovering Jennifer’s 
+alternate identity as Guinevere. Jennifer is raped by Maugrim, and after being 
+saved and pulled back to ‘our’ world, she decides to bear the resulting child. 
+The second book begins with another character, Kim, resurrecting Arthur, 
+‘The Warrior,’ in order to gain his help in the battle against evil. Arthur, we 
+are told, has been eternally doomed to return to life, fight, and die over and 
+over again as punishment for killing the children on Mayday. When Arthur 
+encounters Jennifer, both realize she is Guinevere, and she becomes drawn 
+into the Arthurian narrative. Later Arthur raises Lancelot from the dead, 
+and when Lancelot returns with Arthur to Jennifer/Guinevere, the reader 
+learns that the perfectly-balanced love triangle is a further aspect of Arthur’s 
+doom and punishment: ‘The grief at the heart of a dream, the reason why 
+[Guinevere] was here, and Lancelot. The price, the curse, the punishment 
+laid…on the Warrior in the name of the children who had died.’
+16 
+In the final battle in the third book, The Darkest Road, Arthur discovers that 
+the battle is to be fought at a place called Camlann, and concludes that it was 
+for this fight that he was meant to return and die, as a champion for the side 
+of the light. However, the endless replaying of Arthur’s doom is broken when 
+another character, Diarmuid, decides to take the fight on himself instead. 
+Arthur therefore survives the final battle, the cycle of punishment is broken, 
+and Arthur, Guinevere, and Lancelot are allowed to sail together into the 
+West in an echo of Frodo’s sailing from T olkien’s Grey Havens. 
+Bare, bald plot summary can never re-create the power of the full tale; 
+and such a summary of the Arthurian material omits the greater part of the 
+narrative of The Fionavar T apestry. The Arthurian story is merely one strand, 
+albeit an important one, in the overall epic, and this was quite deliberate on 
+Kay’s part. He says, ‘I wanted to find my own avenue into working with the 
+Arthurian material, to see if I could find a way to create a scaffolding or a 
+canvas for a book which would be large enough for that material to be a central 
+part, but not the whole story.’
+17 Other strands involve the story of Odin and 
+the Yggdrasil tales from Norse mythology, the cauldron myth from the Welsh 
+Cauldron of Annwn, the Irish goddesses Macha and Nemain, and the Greek 
+myth of Adonis, among others; nevertheless, the Arthurian material in The 
+Fionavar T apestry constitutes a significant re-working of the legend, which 
+also stands as a critical interpretation of Malory’s Morte Darthur. 
+72
+arthuriana
+the once and future king
+The phrase rex quondam rexque futurus, found in earlier texts such as the 
+Alliterative Morte Arthure, but known to most readers from Malory, 18 has 
+proven to be unremittingly resonant in the five centuries since Malory. The 
+phrase has been endlessly fruitful in its spawning of other stories, some only 
+tangentially related to the original medieval legends.
+ From the title of T .H. 
+White’s epic Arthurian series, to Peter David’s re-incarnation of ‘Arthur 
+Penn’ as mayor of New York City, to Andre Norton’s space-traveling Arthur 
+who has been preserved by a half-alien Merlin until future space travelers 
+can heal him, the idea that Arthur will return someday, somewhen, has had 
+enduring appeal.
+19 Almost all writers, however, interpret Arthur’s exclusion 
+from the normal cycle of mortality as a positive thing, an honor given to a 
+peerless hero. At the start of the tradition, Malory reports that some men say 
+that ‘kynge Arthure ys nat dede, but had by the wyll of oure Lorde Jesu into 
+another place’ (Vinaver III.1242.22–3; Field I.928.23–24) so that he might 
+return and win the Holy Cross on Crusade. T .H. White too, reports that 
+‘the old King felt refreshed, clear-headed, almost ready to begin again,’ and 
+that he believed that ‘there would be a day—there must be a day—when 
+he would come back to Gramarye with a new Round Table which had no 
+corners, just as the world had none.’
+20 The narrator shares a hopeful vision 
+of the return of Arthur: 
+I am inclined to believe that my beloved Arthur of the future is sitting at this 
+very moment among his learned friends…and that they are thinking away in 
+there for all they are worth, about the best means to help our curious species: 
+and I for one hope that some day…they will issue from their rath in joy and 
+power: and then, perhaps, they will give us happiness in the world once more 
+and chivalry.
+21
+Numerous other examples of the way in which the ‘once and future king’ is 
+seen as a positive and honorable reward for Arthur’s greatness could be given.22 
+Raymond H. Thompson perhaps summarizes it best: ‘What all these returns 
+offer is hope. Just as he once led the heroic resistance against barbarian invaders 
+who assailed a crumbling civilization at the beginning of the Dark Ages, so 
+Arthur once again rallies us to defy the gathering darkness that threatens to 
+overwhelm all that is precious.’
+23
+Few authors, however, trouble themselves with wondering what Arthur 
+himself might think of this fated return. Guy Gavriel Kay explains that it 
+was this question—of what Arthur might think of the whole thing—which 
+inspired his inversion of the Malorian ‘once and future king’ motif: 
+This came about in part because of a chance, almost wry, reflection on what it 
+must feel like to be always on call. Dial 911 in time of need and your champion 
+must answer! The only time you’re around is when there’s a dismal, violent, 
+73
+once and future childslayer
+destructive, dangerous crisis! Furthermore, as part of the received material 
+of the legend, Arthur does not see the end of such conflicts. I found myself 
+thinking, that’s not much of a state of grace; that is a burden and a duty and 
+a responsibility.
+24
+In The Fionavar T apestry, Arthur’s return is not an honorable reward, but a 
+curse. When Kim re-awakens Arthur, she ‘set[s] once more in motion the 
+workings of a curse so old it made the wind seem young’ (284). In punishment 
+for Arthur’s killing of the Mayday children, the Weaver—Fionavar’s name for 
+God—had ‘marked [Arthur] down for a long unwinding doom. A cycle of 
+war and expiation under many names, and in many worlds, that redress be 
+made for the children and for love’ (285). Indeed, the name which summons 
+Arthur to his doom is ‘Childslayer,’ as though that one deed forged his identity 
+despite all his later great deeds. Kay explains, ‘What was vital for me was to use 
+the notion of Arthur as child slayer. . . . That was my innovation: the notion 
+of being condemned to be the Once and Future King, the Warrior, by virtue 
+of a crime in youth. The crime was not the incest, because I’m not coming 
+out of a religious tradition where unknowing incest is a great crime. It’s the 
+sentient ordering of the death of the children.’
+25  Kay’s reinterpretation of the 
+Morte Darthur, his reading of it, solves the question of what/who caused the 
+fall of the round table—Mordred or Lancelot/Guinevere? Instead he suggests 
+that Arthur himself, in being responsible for an evil deed more typical of 
+Herod than one of the great Christian ‘Worthies,’ ultimately caused his own 
+downfall, and that Mordred and Lancelot and Guinevere were all part of the 
+punishment, rather than being the cause.
+Enhancing the impact of the notion of Arthur as Childslayer is the 
+importance that children play in the Fionavar T apestry. Although the main 
+characters are all adults, some of the key secondary characters—and, indeed, 
+some of the most tragic figures in the books—are children. Finn is called 
+from his family to lead the Wild Hunt, a cold, inhuman destiny in which 
+he kills people at random and must leave everyone he loves. Leila is the girl 
+who ‘called’ Finn to his destiny, and is forced, painfully, to witness Finn’s 
+actions through her second sight. Tabor is a young boy whose destiny is to 
+ride a winged unicorn, a creature of war, and he too grows distant from his 
+family and becomes almost inhuman because of the fighting and killing he 
+must do. Darien, the youngest of the children in the book, is Jennifer’s child 
+by Rakoth Maugrim. Darien is rejected by everyone, including (seemingly) 
+his own mother, and spends most of the narrative journeying towards his 
+father, who kills him in the end. Darien pushes himself onto a dagger held 
+by his father in an echo of the way Mordred pushes himself on Arthur’s lance 
+in order to reach and kill his father in Malory, but in doing so Darien saves 
+the world rather than destroying it.
+26 By the end of the trilogy, Finn and 
+Darien have died, Tabor narrowly escapes death, and Leila has witnessed her 
+74
+arthuriana
+beloved Finn’s death and has become the youngest High Priestess in history. 
+Although Kay does not spell it out explicitly, the specific tragedies of the lives 
+of these children individualize and particularize the nameless children killed 
+on Mayday by the ‘Childslayer.’ Moreover, the importance of these children 
+to the story and to the fate of the world implicitly points up the monstrosity 
+of the young Arthur’s actions—what might those individual children in the 
+boatload of children have accomplished had they lived?—and rounds out 
+the reader’s understanding of the appropriateness of the curse laid upon the 
+once and future king. 
+Part of the curse is that Arthur does not even know if his efforts have any 
+impact: he always dies before the end of the battle, so he never knows who 
+wins (335). The other part of the curse is, of course, the repetition of the love-
+triangle between Arthur, Lancelot and Guinevere. Lancelot and Guinevere 
+themselves do not remember any life but their first, because the original crime 
+was not theirs: ‘No curse so dark as [Arthur’s] had been given [Guinevere], 
+for no destiny so high, no thread of the Tapestry, had ever been consigned to 
+her name. She was, instead, the agent of his fate, the working out of his bitter 
+grief’ (366). Nonetheless, they are there every time Arthur reappears, as part 
+of the doom laid upon him. Unlike some Arthurian writers, both pre- and 
+post-Malory, Kay insists on the perfect balance of the love triangle. Both in 
+The Fionavar T apestry and in his unrelated poem ‘Guinevere at Almesbury,’ 
+Kay portrays Guinevere as loving both Lancelot and Arthur equally. In 
+‘Guinevere at Almesbury,’ Guinevere says, ‘We cannot be other than / we 
+are. I loved two men. A kingdom / broke for it.’
+27 In the Fionavar T apestry, 
+after Jennifer meets Arthur for the first time, she remembers her former life: 
+‘She had only fallen in love twice in her life, with the two shining men of her 
+world. Nor was the second less golden than the first. He was not, whatever 
+might have been said afterwards. And the two men had loved each other, 
+too, making all the angles equal, shaped most perfectly for grief’ (366). Had 
+Guinevere loved either Arthur or Lancelot more than the other, the reader 
+senses, or had Arthur and Lancelot had less love and respect for each other, 
+the situation would have been resolved and the tragedy would have been less. 
+prophecy, free will and fate
+By interpreting the return of Arthur as a curse rather than an honor, and by 
+focusing on the childslaying incident of the Morte, Kay provides a reading of 
+the ending of Malory’s tale which challenges the feeling of inevitability that 
+pervades the Morte. Fate and prophecy are hugely important in the Morte 
+Darthur, especially in the first book. Merlin repeatedly makes prophecies 
+about the results of Arthur’s actions and the future of Camelot. In addition 
+to the Mayday prophecy about Mordred, Malory includes prophecies about 
+Balin; a prophecy of Arthur’s conquest of Wales, Scotland, and Ireland; 
+75
+once and future childslayer
+numerous prophecies about the Grail quest; minor prophecies about random 
+knights and various events; and a key prophecy about Guinevere’s love 
+for Lancelot. Some of these prophecies come true, and act as linking and 
+structuring devices for the narrative. Others vanish from the narrative, and 
+the reader never finds out if they come true or not. 
+In Malory, prophecy seems to serve three main functions. First, as Jane 
+Bliss has argued, it serves as a structuring device which connects the whole of 
+the Morte Darthur and sets the tale firmly within an overarching ‘Matter of 
+Britain,’ which contains stories and connections that may or may not be retold 
+in Malory’s tale itself.
+28 Second, it adds to the mystery and magic of the tale, 
+especially in terms of Merlin’s character and role.29 Most importantly, however, 
+prophecy opens the narrative to an exploration of free will, destiny, and fate 
+that swirls around and adds poignancy to the tragedy of the final books of the 
+Morte. As Bliss writes, ‘prophecy is also a thematic device by which Malory 
+shows human free will in conflict with divine will and with fate or destiny 
+…Prophecy as theme is used by Malory to set up a wall of predestination 
+(divine or fated, mindful or mindless) against which human will is shown to 
+react.’
+30 As Rachel Kapelle has cogently argued, prophecies in the Morte fall 
+into two categories, contingent and categorical.31 Contingent prophecies are 
+open-ended: the actions of the characters can affect the outcome. For example, 
+near the beginning of the narrative, Merlin warns Arthur that if he continues 
+to fight the eight kings, God will become displeased and the tide of battle will 
+turn; Arthur withdraws and thus forestalls the foretold consequence (Vinaver 
+1.36.26–32; Field I.29.25–33). This kind of prophecy is therefore a useful guide 
+to action. Other prophecies, by contrast, are categorical: no matter what the 
+characters do, the outcome will be the same. Arthur has slept with his sister; 
+therefore God is displeased and the child of the union will destroy Arthur and 
+all the knights of the realm (Vinaver 1.44.16–19; Field I.36.15–17). Nothing 
+Arthur can do can change this outcome: the action setting the foretold events 
+in motion has already been taken. Such prophecies are useless as guides to 
+action—although Arthur nonetheless acts as though the prophecy were 
+contingent and attempts to avert destiny by killing the Mayday children.
+32
+I believe a third category of prophecy is at work in the Morte, which 
+Kapelle does not discuss. These prophecies are, to my mind, the most 
+interesting: they are contingent prophecies which become categorical because 
+of the nature or personality of the participants.
+33 For example, many of the 
+prophecies about Balin could theoretically have been averted. The damsel 
+says to Balin that if he keeps the sword from her he shall kill his best friend 
+with it; Balin responds merely that he shall ‘take the adventure…that God 
+woll ordayne for me’ (Vinaver 1.64.12–13; Field I.50.5–6). Within the code 
+of Balin’s chivalry and his understanding of ‘worship,’ a contingent prophecy 
+becomes categorical, since Balin will not change the way he acts. Similarly, 
+76
+arthuriana
+scholars have commented on the lack of response Arthur gives to Merlin’s 
+prophecy that ‘Gwenyver was nat holsom for hym to take to wyff’ (Vinaver 
+1.97.29–30; Field I.76.25–26), yet the explanation for Arthur’s inability or 
+unwillingness to change his actions in the face of this prophecy is given a few 
+lines earlier: ‘thereas mannes herte is sette he woll be loth to returne’ (Vinaver 
+1.97.26–27; Field I.76.23). Again, a contingent prophecy becomes essentially 
+categorical, since the characters would have to abandon the essence of their 
+selves in order to avert the prophecy.
+34
+It is this third kind of prophecy—the theoretically-contingent-but-
+practically-categorical—that is most important in Guy Gavriel Kay’s 
+reworking of Malory. Kay makes it clear throughout, in a way that it never 
+is in the Morte Darthur, that the individuals in Fionavar’s universe have free 
+will, and are not completely controlled by destiny. Indeed, the importance 
+of free will is literally woven into the ruling metaphor of the universe: the 
+‘Weaver’ has allowed a ‘random thread’ to enter the ‘Tapestry,’ so that he 
+does not and cannot control everything that happens. This randomness 
+opens up space for the free will of individuals, since there is always the chance 
+that it might disrupt ‘fate’ or ‘destiny.’ The full explanation comes near the 
+beginning of book three: 
+The [Wild] Hunt was placed in the Tapestry to be wild in the truest sense, to 
+lay down an uncontrolled thread for the freedom of the Children who came 
+after. And so did the Weaver lay a constraint upon himself, that not even he, 
+shuttling at the Loom of Worlds, may preordain and shape exactly what is to 
+be. We who came after…we have such choices as we have, some freedom to 
+shape our own destinies, because of that wild thread of Owein and the Hunt 
+slipping across the Loom, warp and then weft, in turn and at times. They are 
+there…precisely to be wild, to cut across the Weaver’s measured will. T o be 
+random, and so enable us to be. (558)
+The sense of inevitability that feels so strong towards the end of the Morte 
+Darthur is continually undercut in the Fionavar T apestry: phrases such as 
+‘and it appeared that there was nothing inevitable after all’ (236) are scattered 
+throughout the books. This message comes through most forcefully with 
+regards to Jennifer: she is told by another character, ‘we are not slaves to the 
+Loom. Nor are you only Guinevere—you are Jennifer now, as well. You bring 
+your own history to this hour…It need not be now as it has been before!’ 
+(417). Unlike in the Morte, there is a chance that Arthur’s destiny can be 
+averted: ‘if all this is true, if the Weaver put a check on his own shaping of 
+our destinies, it would follow—surely it would follow—that the Warrior’s 
+doom is not irrevocable’ (558). 
+Ironically, however, despite the repeated message about individual freedom, 
+Arthur himself does not feel that he has free will. When Kim first summons 
+him, she promises she will never tell anyone the summoning name, but 
+77
+once and future childslayer
+Arthur responds, ‘Others will, though, as others have before’ (285). Jennifer 
+tries to tell Arthur that this time things are different, that Lancelot is not 
+here this time; but Arthur answers, ‘It cannot be so…I killed the children, 
+Guinevere’ (420). Before the final battle, Arthur asks the name of the place, 
+and when told that it used to be called ‘Camlann,’ he answers, ‘I thought it 
+might be’ (700). When another character tries to take the fight upon himself, 
+Arthur tells him, ‘The name…made things clear: there has been a Camlann 
+waiting for me in every world. This is what I was brought here for’ (701). 
+When Guinevere tries to protest, Arthur says simply, ‘we are caught in a 
+woven doom of no escape’ (701). 
+Yet what becomes clear from the narrative, despite Arthur’s own feeling of 
+doom and inevitability, is that he does in fact have free will. He could choose 
+to avert his destiny—but if he were to do so, he would be someone other 
+than himself. Kay’s Arthur is caught in the contingent-yet-categorical kind of 
+prophecy that Malory gives when the Morte’s Arthur simply cannot, or will 
+not, heed Merlin’s prophecy about Guinevere and Lancelot. When Arthur 
+goes to wake Lancelot from the dead, another character tells him, ‘My lord 
+Arthur…you do not have to do this. It is neither written nor compelled.’ 
+Arthur responds, ‘He will be needed…He cannot but be needed.’ ‘You are 
+willing your own grief,’ he is told, and he responds simply, ‘it was willed long 
+ago.’ Yet despite Arthur’s feeling that these actions were ‘willed long ago,’ Kay 
+makes it clear that it is Arthur’s personality, his moral values, that make him 
+act this way, and not ‘fate’ or ‘destiny’: ‘Looking on Arthur Pendragon’s face 
+in that moment, Paul [one of the five Canadians] saw a purer nobility than 
+he had ever seen in his days.…Here was the quintessence, and everything 
+in him cried out against the doom that lay beyond this monstrous choice’ 
+(465–66; emphasis mine). What seems to be doom—fate—is in fact choice. 
+The point is driven home even further: when Lancelot wakes, the first thing 
+he says is, ‘Why have you done this, my lord, to the three of us?’ and Arthur 
+responds, ‘Because there are more at risk than the three of us’ (466). This 
+vision of Arthur is implicitly a reading of Malory: Kay says when reading 
+Malory as a boy, he felt ‘such a sense of grief and frustration when Arthur is 
+warned against the marriage by Merlin but proceeds nonetheless.…Arthur 
+knows that certain actions will engender the destruction of his kingdom, and 
+he proceeds nonetheless.’
+35 As in the Morte, Kay’s Arthur is caught by destiny 
+because he cannot act differently and remain true to himself.
+In the end, Arthur is freed from his doom in The Fionavar T apestry: he 
+survives the final battle and sails into the west with Guinevere and Lancelot. 
+This release from destiny, however, comes about not because of Arthur’s 
+own actions, but because of the actions of another character, Diarmuid. 
+Throughout the series Diarmuid has been linked linguistically to the ‘wild 
+thread’ of ‘Owein’s Hunt’—he is called ‘a little wild’ (230), ‘feral and fey’ (71), 
+78
+arthuriana
+‘mercurial’ (221), ‘irresponsible’ (312), ‘frivolous’ (328) and ‘unreliable’ (221), 
+and he is often associated with freedom (71). Diarmuid is also the character 
+who tells Arthur that it is ‘neither written nor compelled’ that he must wake 
+Lancelot (quoted above).
+36 Diarmuid is in many ways the human embodiment 
+of the ‘wild thread’ which grants free will to other individuals, and so even 
+though Arthur, according to the Weaver’s planned pattern, is destined to 
+die in the battle, Diarmuid is able to exercise his free will and change the 
+predestined pattern. While Arthur and Guinevere are arguing over whether 
+Arthur should fight the final battle, Diarmuid simply rides off and takes the 
+battle upon himself. Diarmuid, therefore, is the one who dies in the battle, 
+and Arthur is released from his fate. It results in a paradox: we all have free 
+will, yet only the actions of another character, and not his own actions, can 
+free Arthur from his fate. 
+This ‘displacement’ (Kay’s word) of price is a very Christian eucatastrophe 
+in an ostensibly non-religious book.
+37 Kay says, ‘The Fionavar T apestry was 
+a deliberate attempt to work within the traditions of high fantasy, which 
+incorporates the idea, in T olkien’s word, of the eucatastrophe, the reverse of 
+the catastrophe. The resolution of the Arthurian love triangle, the unbinding 
+of that curse, would be central to the eucatastrophe at the end of the book.’
+38 
+As in the Christian story, the original sin—in this case, Arthur’s killing of the 
+children—must be paid for; as in the Christian story, an innocent person can 
+take the punishment onto himself. Diarmuid is not Jesus; nonetheless, the 
+Christian concept of sacrifice and redemption is very much at work here.
+39 
+Through Diarmuid’s sacrifice and payment of Arthur’s sins, Arthur is freed 
+for redemption and salvation. Because he survives the final battle, Arthur can 
+save the life of a child, Tabor, who otherwise would have died. The saving of 
+this particular child thus symbolically redeems Arthur for the original killing 
+of the children; in Kay’s words: ‘that is the symbolic expiation of the child 
+slayer: he becomes the child saver at that moment.’
+40
+Kay’s re-reading and re-writing of Malory, therefore, draws out connections 
+and themes left latent in the Morte. The re-interpretation of the Mayday 
+passage as intimately connected both to the love of Lancelot and Guinevere 
+and to the fall of Camelot, as well as the revision of Arthur’s return not as 
+a glorious triumph but as a punishment, allows Kay to comment upon the 
+themes of fate and predestination pervasive in the Morte Darthur. By bringing 
+to light the hitherto unnoticed connections between the May passages—both 
+in terms of the use and inversion of the traditional ‘May morning’ trope, and 
+in their dual implication in the fall of Camelot, Kay offers a new reading of 
+Malory that challenges the conventional arguments over the reasons behind 
+the fall of Arthur. The sense of inevitability that faces Arthur and the other 
+characters of the Morte is present in Kay’s Arthur as well, but it is more 
+explicitly shown to be an inevitability that comes about as much because of 
+79
+once and future childslayer
+the characters’ personalities and values—their inability to act in any other 
+way and remain true to themselves—as because of prophecy or destiny. Most 
+importantly, the eucatastrophe that never manages to come in the Morte 
+becomes possible because of the actions of individuals; because of their free 
+will and freely-made choices.
+41 The same freedom of choice that allowed 
+Arthur to kill the Mayday babies in Malory frees Arthur, in Kay, from the 
+‘once and future’ destiny that is at once his glory and punishment. Kay thus 
+shows that Camelot’s seemingly immutable destiny—the fall of the Round 
+Table because of the love of Lancelot and Guinevere combined with the 
+treachery of Mordred—was actually not immutable at all. Arthur himself, in 
+Malory’s tale, made conscious choices that set in motion both strands of his 
+final doom, and the doom of all of Camelot. This radical re-reading of Arthur 
+and the Arthurian legend suggests that although the feeling of inevitability 
+and fate seems so strong in Malory’s telling of the tale, maybe the fall was 
+less foreordained, more contingent, than both characters and readers think. 
+dalhousie university
+Kathy Cawsey is an Associate Professor of Middle English Literature at Dalhousie 
+University in Halifax, Nova Scotia, Canada. 
+notes
+I owe thanks to the audience of the ‘Arthur in the Americas’ panel at Kalamazoo’s 
+International Medieval Conference, 2011, where an earlier version of this paper was 
+given, for questions and thoughtful comments, and to the anonymous reviewers of 
+this paper, for advice and further references to 20
+th-century Arthuriana, especially 
+comics. I also owe heartfelt thanks and beer to Kevin Whetter and Cory Rushton, 
+who responded immediately to my panicky requests for Field’s page numbers 
+while the new edition was still on order at my library.
+ 1 
+ F
+or surveys, see Alan Lupack and Barbara T epa Lupack, King Arthur in America 
+(Cambridge, UK: D.S. Brewer, 1999), especially chapter 8, ‘Arthurian T radition 
+and Popular Culture’; Norris J. Lacy, ‘The Arthur of the twentieth and twenty-first 
+centuries’ in The Cambridge Companion to the Arthurian Legend, ed. Elizabeth 
+Archibald and Ad Putter (Cambridge, UK: Cambridge University Press, 2009), 
+pp. 120–135; Raymond H. Thompson, ‘Arthurian Legend in Science Fiction 
+and Fantasy,’ in King Arthur Through the Ages, vol. 2, ed. Valerie M. Lagorio 
+and Mildred Leake Day (New York: Garland, 1990), pp. 223–39; Raymond H. 
+Thompson, ‘Conceptions of King Arthur in the T wentieth Century,’ in King 
+Arthur: A Casebook, ed. Edward Donald Kennedy (New York: Garland, 1996), 
+pp. 303, 310 [pp. 299–311]; Michael A. T orregrossa, ‘Once and Future Kings: 
+The Return of King Arthur in the Comics’ in Adapting the Arthurian Legends for 
+80
+arthuriana
+Children, ed. Barbara T epa Lupack (New York: Palgrave Macmillan, 2004), pp. 
+243–262.
+ 2  L
+upack and Lupack, Arthur in America, p. 289; see Thompson, ‘Arthurian Legend,’ 
+in King Arthur Through the Ages, pp. 224–227; Thompson, ‘Conceptions,’ in King 
+Arthur: A Casebook, pp. 303–310; Dominick Grace, ‘The Future King: Camelot 
+3000,’ The Journal of Popular Culture 41.1 (2008), p. 21 [pp. 21–63].
+ 3 
+ D
+ena Taylor, ‘The Double-Edged Gift: Power and Moral Choice in The Fionavar 
+T apestry,’ http://www.brightweavings.com/scholarship/denafionavar.htm (accessed 
+Feb. 24, 2015); Susannah Clements, ‘From Middle Earth to Fionavar: Free Will and 
+Sacrifice in High Fantasy by J.R.R. T olkien and Guy Gavriel Kay,’ http://www.
+brightweavings.com/scholarship/clementsfionavarlotr.htm (accessed Feb. 24, 2015); 
+Adam Roberts, Silk and Potatoes: Contemporary Arthurian Fantasy (Amsterdam: 
+Rodopi, 1998), p. 89; Raymond H. Thompson, ‘The Arthurian Legend in Canada’ 
+in Medievalism in North America, ed. Kathleen Verduin (Cambridge: Boydell and 
+Brewer, 1994), p. 91 [pp. 85–99]; Raymond H. Thompson, ‘Kay, Guy Gavriel’ in 
+The New Arthurian Encyclopedia, ed. Norris J. Lacy (New York: Garland, 1996), 
+p. 260; Allan Weiss, ‘Destiny and Identity in Canadian Urban Fantasy’ in Literary 
+Environments: Canada and the Old World, ed. Britta Olinder (Brussels: Peter Lang, 
+2006), p. 111 [pp. 109–130]; Thompson, ‘Conceptions,’ in King Arthur: A Casebook, 
+p. 310. Other writers have used the Mayday incident (see Marie Nelson, ‘King 
+Arthur and the Massacre of the May Babies,’ Journal of the Fantastic in the Arts 11.3 
+(2001): 266–81; Thompson, ‘Conceptions,’ in King Arthur: A Casebook, p. 300), 
+but few have made it so central: ‘Much is made [in Kay] of the fact that Arthur 
+slaughtered children in his attempt to kill Mordred, and because of this act he 
+is fated to return and repeat the pattern of his death’; Alan Lupack, The Oxford 
+Guide to Arthurian Literature and Legend (Oxford: Oxford University Press, 2007), 
+p. 199. In the comic book series Camelot 3000 Arthur attempts to drown the baby 
+Mordred with his bare hands, rather than setting him adrift, and in the future 
+expiates this crime by saving a mother and child; however, his return is ‘to rid the 
+earth of invading alien hoards’ and not a punishment for his crime; on this, see 
+Sally Slocum, ‘King Arthur is Alive and Well: Camelot 3000 and the Comics’ in 
+Moderne Artus-Rezeption 18–20. Jahrhundert, ed. Kurt Gamerschlag (Göppingen: 
+Kümmerle Verlag, 1991), pp. 307–309 [305–319]; Grace, ‘The Future King,’ pp. 
+33–34; see also Charles T . Wood, ‘Camelot 3000 and the Future of Arthur,’ in 
+Culture and the King: The Social Implications of the Arthurian Legend, ed. Martin 
+B. Shichtman and James P . Carley (Albany: State University of New York Press, 
+1994), pp. 297–313.
+ 4 
+ I hav
+e been unable to find another fantasy writer who re-interprets the ‘once 
+and future king’ motif in the same way as Kay, although admittedly I have not 
+read all the Arthurian fantasy fiction available (an impossible task!). Guy Gavriel 
+Kay himself said in a 1989 interview that ‘to the best of [his] knowledge, no one 
+[else] has ever inverted 180 degrees the idea of the Once and Future King’; post-
+1989 writers who reinterpret the motif are as likely to be imitating Kay as doing 
+something original; Guy Gavriel Kay, interview with Raymond H. Thompson, 
+81
+once and future childslayer
+30 July 1989, T aliesin’s Successors: Interviews with Authors of Modern Arthurian 
+Literature, http://www.lib.rochester.edu/camelot/intrvws/kay.htm (accessed 
+February 24, 2015).
+ 5 
+ The 
+Works of Sir Thomas Malory,  3 vols., 3rd edn., ed. Eugène Vinaver, rev. P .J.C. 
+Field (Oxford: Clarendon Press, 1990), vol. III, p. 1119, l. 4; Sir Thomas Malory, 
+Le Morte Darthur, 2 vols., ed. P .J.C. Field (Cambridge: D.S. Brewer, 2013), vol. 
+1, p. 841, l. 21. Further references will be to these editions and will be noted by 
+volume, page and line number in brackets; where there are editorial differences 
+I will use Vinaver’s edition.
+ 6 
+ E
+ugène Vinaver’s edition notoriously skewed the importance of the first ‘May 
+passage’ by placing it at the beginning of the ‘Knight of the Cart’ story, a move 
+attested in neither the Winchester Manuscript or Caxton’s edition; nonetheless, the 
+passage remains of crucial importance in Malory criticism. For scholars who think 
+the ‘May passage’ shows Lancelot’s and Guinevere’s love is sinful, see R.T . Davies, 
+‘Malory’s “Vertuouse Love,”’ Studies in Philology 53 (1956): 469 [459–69]; Stephen 
+Knight, The Structure of Sir Thomas Malory’s Arthuriad (Sydney: Sydney UP , 1969), 
+p. 69; Irene Joynt, ‘Vengeance and Love,’ in Arthurian Literature III, ed. Richard 
+Barber (Cambridge: Brewer, 1983), p. 111 [pp. 91–112]; Rachel Jurovics, ‘The 
+Definition of Virtuous Love in Thomas Malory’s Le Morte Darthur,’ Comitatus 
+2 (1971): 28 [27–43]. For opposing views, see Betsy Taylor, ‘Malory’s Launcelot 
+and Guinevere abed togydirs,’ in Words and Wordsmiths, ed. Geraldine Barnes, 
+et al  (Sydney, Sydney University Press, 1989), pp. 141–2 [pp. 137–46]; Beverly 
+Kennedy, ‘Adultery in Malory’s “Le Morte d’Arthur,”’ Arthuriana 7:4 (1997): 78 
+[63-91]; Beverly Kennedy, ‘Malory’s Lancelot: “T rewest Lover, of a Synful Man,”’ 
+Viator 12 (1981): 436-9 [409-456]; Beverly Kennedy, ‘Love, Freedom and Marital 
+Fidelity in Malory’s Morte Darthur,’ Florilegium 10 (1988–91): 184 [197–92]; Harry 
+Cole, ‘Forgiveness as Structure,’ The Chaucer Review 31 (1996): 42 [36–44]; Peter 
+Waldron, ‘“Vertuouse Love” and Adulterous Lovers,’ in Sir Thomas Malory: Views 
+and Re-views, ed. D. Thomas Hanks, Jr. (New York: AMS Press, 1992), pp. 55–6 
+[pp. 54–62].
+ 7 
+ Catherine 
+Batt, Malory’s Morte Darthur: Remaking Arthurian Tradition (New York: 
+Palgrave, 2002), p. xiv; p. 160.
+ 8  The paradigm was set b
+y the Roman de la Rose, but can be found in romances 
+ranging from Sir Orfeo to Thomas of Erceldoune to King Edward and the Shepherd 
+to Chaucer’s Knight’s T ale. 
+ 9 
+ H
+elen Cooper, The English Romance in Time (Oxford: Oxford University Press, 
+2004) pp. 106–136. See also Paull Franklin Baum, ‘The Mediaeval Legend of Judas 
+Iscariot,’ PMLA 31.3 (1916): 481–632, esp. 591–2; Sebastian Sobecki, The Sea and 
+Medieval English Literature (Cambridge: D.S. Brewer, 2008), p. 101. 
+10 
+ 
+See Batt, Malory’s Morte, pp. 58–59; P .J.C. Field, ‘Malory’s Mordred and the Morte 
+Arthure’ in Romance Reading on the Book, ed. Jennifer Fellows et al (Cardiff: 
+University of Wales Press, 1996), pp. 77–93; Beverly Kennedy, Knighthood in the 
+Morte Darthur, 2
+nd ed. (Cambridge: D.S. Brewer, 1992), p. 175.
+82
+arthuriana
+11  E lizabeth Archibald, ‘Beginnings,’ in A Companion to Malory, ed. Elizabeth 
+Archibald and A.S.G. Edwards (Cambridge: D.S. Brewer, 1996), p. 137 [pp. 
+133–152].
+12  
+Sinyard, Neil. Filming Literature: The Art of Screen Adaptation (London: Croom 
+Helm, 1986), p. 117.
+13  G
+uy Gavriel Kay, interview with Andrew A. Adams, 1995. http://www.
+brightweavings.com/ggkswords/andrews.htm (accessed February 24, 2015).
+14  G
+uy Gavriel Kay, interview with Jean-Luis T rudel for Solaris, 1995. http://www.
+brightweavings.com/ggkswords/trudel.htm  (accessed February 24, 2015).
+15  The r
+ecently-published incomplete alliterative poem The Fall of Arthur shows that 
+T olkien was not immune to or resistant to the power of the Arthurian legend; on 
+the contrary, he consciously eliminated it from his Middle-Earth mythology in 
+part because it was too well-known, as well as being too overtly Christian and too 
+French/continental for his purposes in The Lord of the Rings. J.R.R. T olkien, The 
+Fall of Arthur, ed. Christopher T olkien (New York: Houghton Mifflin Harcourt, 
+2013); J.R.R. T olkien, ‘Letter 131,’ in The Letters of J.R R. T olkien, ed. Humphrey 
+Carpenter (Boston: Houghton Mifflin, 1981), p. 144 [pp. 143–61].
+16 
+ G
+uy Gavriel Kay, The Fionavar T apestry: omnibus edition (T oronto: HarperCollins, 
+1995 [1984, 1986, 1986]), p. 571. Further references will be to this edition and will 
+be noted in brackets.
+17 
+ Kay
+, Thompson interview. 
+18 
+ V
+inaver III.1242.20; Field 1.928.28.
+19  S
+ee Lupack & Lupack, Arthur in America, pp. 287–89. Some writers, such as T .H. 
+White, seem to envision Arthur returning only once, whereas others (mostly in 
+science fiction stories) describe a continual returning. Thanks go to the second 
+anonymous reviewer of this article for this distinction.
+20 T .H. White, The Once and Future King: The Complete Edition (London: 
+HarperCollins, 1996 [1939, 1940, 1958, 1977]), pp. 696–97.
+21 
+ 
+White, Once and Future King, p. 812.
+22  A par
+tial list can be found in Raymond H. Thompson, ‘Introduction: Does One 
+Good Return Deserve Another?’ in King Arthur’s Modern Return, ed. Debra N. 
+Mancoff (New York: Garland, 1998), pp. 7–10 [pp. 3–30].
+23 
+ Thompson, ‘I
+ntroduction,’ p. 10.
+24 
+ Kay
+, Thompson interview.
+25 
+ Kay
+, Thompson interview.
+26  D
+arien is in many ways an inversion of Mordred: both are born out of sinful 
+copulations (though Darien is the result of rape rather than incest) and both kill 
+their fathers, but Darien’s patricide saves the world/civilization rather than ending 
+it. Thanks go to the first reviewer of this article for pointing out this connection; 
+see also Roberts, Silk and Potatoes, p. 93.
+27 
+ G
+uy Gavriel Kay, Beyond this Dark House (T oronto: Penguin, 2003), p. 44.
+28 
+ J
+ane Bliss, ‘Prophecy in the Morte Darthur,’ Arthuriana 13.1 (2003): 1–16.
+29 
+ Kathy Cawsey
+, ‘Merlin’s Magical Writing,’ Arthuriana 11.3 (2001): 91 [89–109].
+30 
+ B
+liss, ‘Prophecy,’ p. 1; p. 9.
+83
+once and future childslayer
+31  Rachel Kapelle, ‘M erlin’s Prophecies, Malory’s Lacunae,’ Arthuriana 19.2 (2009): 
+58–81.
+32 
+ Kapelle, ‘M
+erlin’s Prophecies,’ 76.
+33 
+ S
+ee Bliss, ‘Prophecy,’ p. 11.
+34  F
+or discussion, see Roberts, Silk and Potatoes, pp. 91–2; Taylor, ‘Double-Edged 
+Gift’; and Clements, ‘From Middle Earth.’ One could argue that if one cannot 
+act differently because of one’s personality, then that personality is simply an 
+instrument of fate; yet this view necessitates an understanding of personality that 
+is immutable and set, rather than one which develops out of one’s choices and 
+values. Being unable to change one’s behavior because of external forces—Oedipus’ 
+ignorance over the identities of his father and mother, for example—seems to me 
+to be fundamentally different from refusing to change one’s behavior because to 
+do so would result in a loss of identity. Balin could always choose not to ‘take the 
+adventure,’ but he finds himself unable to do so while remaining the knight he 
+envisions himself to be. 
+35 
+ Kay
+, Thompson interview.
+36  Kay mistakenly says in an inter
+view that it is Paul who says this; perhaps Paul 
+was the original speaker and Kay made the change to Diarmuid in a later draft. 
+Whatever the case, Diarmuid is much more appropriate. Kay, Thompson 
+interview.
+37 
+ Kay
+, Thompson interview. See discussion in Roberts, Silk and Potatoes, p. 90.
+38 
+ Kay
+, Thompson interview.
+39  S
+ee Clements, ‘From Middle Earth.’ The concepts of sacrifice and redemption are 
+not limited to Christianity, of course, but are fundamental to many other religions, 
+to which Kay often gestures in the Fionavar T apestry. Paul, for example, steps into 
+the role of Odin, the ‘Hanging God,’ in his self-sacrifice on the Summer T ree. 
+Kevin, Kim, and even Darien play similar self-sacrificing roles which echo other 
+mythic traditions. Thanks go to Jim Weldon who pointed this out to me.
+40 Kay insists that he had not originally planned to have Arthur save Tabor: he says, 
+‘I knew that [Tabor] would survive, but not how until I actually wrote the episode. 
+I remember smiling as I was writing, and knowing that something had worked, 
+that I’d done something right’; Kay, Thompson interview.
+41 
+ Although see 
+Thomas Hanks, ‘“A far green country under a swift sunrise”: T olkien’s 
+eucatastrophe and Malory’s Morte Darthur,’ Fifteenth-Century Studies 36 (2011): 
+63–4 [49–64], who argues that the ending of the Morte Darthur is, actually, a 
+‘T olkienian happy ending.’ 

@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 102,
+ "firstTs": "2026-09-12T07:56:23.548Z",
+ "lastTs": "2026-09-12T08:04:18.722Z",
+ "tools": {
+  "Bash": 24,
+  "SendUserFile": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now I'll build the archive by joining the ratified table's verbatim rows to the fold's verdicts.",
+ "run": "wf_11bb797e-f25",
+ "agent": "af023ddf468e74464",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_11bb797e-f25/agent-af023ddf468e74464.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

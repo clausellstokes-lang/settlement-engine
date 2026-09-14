@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+
+<script>
+let ageConfirmed;
+let ageConfirmedCookie = "_ageConfirmed";
+let date = new Date();
+
+date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+
+let expires = "; expires=" + date.toGMTString();
+    let domain = "." + window.location.hostname;
+let forceExpireDate = "Wed, 31 Oct 2012 08:50:17 GMT";
+
+function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function checkForAgeCookie() {
+  let cookieValue = getCookie(ageConfirmedCookie);
+
+        if (cookieValue == null) {
+            ageConfirmed;
+
+            const addStyle = (() => {
+                const style = document.createElement('style');
+                document.head.append(style);
+                return (styleString) => style.textContent = styleString;
+            })();
+
+            addStyle(`#onetrust-banner-sdk { display: none; }`);
+        } else if (cookieValue && cookieValue == "YES") {
+            ageConfirmed = true;
+        } else if (cookieValue && cookieValue == "NO") {
+  ageConfirmed = false;
+}
+    }
+
+function ageGate() {
+  if (!getCookie(ageConfirmedCookie)) {
+    document.getElementById("age-gate").removeAttribute("style");
+  } else {
+    document.getElementById("age-gate").style.display = "none";
+  }
+}
+
+function confirmedAge(value) {
+  document.cookie =
+    ageConfirmedCookie +
+    "=" +
+    value +
+    expires +
+    ";path=/; Samesite=Lax;domain=" +
+    domain +
+    ";";
+
+  if (value == "YES") {
+/*    document.cookie =
+      "OptanonConsent" +
+      "=" +
+      value +
+      forceExpireDate +
+      ";path=/; Samesite=Lax;domain=" +
+      domain +
+      ";";
+*/
+    ageConfirmed = true;
+            location.reload();
+  } else {
+    ageConfirmed = false;
+            let expireCookieValue = getCookie("OptanonConsent");
+          // USE THIS LINE FOR TEST
+          // document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;"; //domain=" + domain + ";";
+          // USE THIS LINE FOR PROD
+          document.cookie = "OptanonConsent" + "=" + expireCookieValue + ";expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/; Samesite=Lax;domain=" + domain + ";";
+          location.reload();
+  }
+
+  document.getElementById("age-gate").style.display = "none";
+}
+
+window.geofeed = function (options) {
+	var country = options.country.toString();
+	var state = options.state.toString();
+
+	if (country == "US") {
+		checkForAgeCookie();
+		setTimeout(ageGate, 500);
+	}
+
+};
+
+var json = document.createElement("script");
+json.setAttribute(
+  "src",
+  "https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location/geofeed"
+);
+document.head.appendChild(json);
+
+</script>
+
+<div id="age-gate" title="age gate" class="age-gate-overlay" style="display:none;">
+<div class="age-gate-content-container">
+<div class="age-gate-text">
+<p style="font-size: 1rem">For compliance with applicable privacy laws:</p>
+<p>Are you between 13-15 years old?</p><br>
+</div>
+<div class="confirm-btn-container">
+<button id="age-gate-no" onclick="window.confirmedAge('NO')">No</button>
+<button id="age-gate-yes" onclick="window.confirmedAge('YES')">Yes</button>
+</div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/d22907aa-9739-4543-a9f8-4ccac65e20a0/OtAutoBlock.js"></script>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="d22907aa-9739-4543-a9f8-4ccac65e20a0"></script>
+<script type="text/javascript">
+function OptanonWrapper() {
+if (!getCookie('_ageConfirmed')) {
+    var groupID = ['C0002', 'C0003', 'C0004'];
+    var OTdomain = OneTrust.GetDomainData().Domain;
+
+    function updateOtCookie(ID) {
+        var cookie = getCookie("OptanonConsent");
+        for (var i = 0; i < ID.length; i++) {
+            cookie = cookie.replace('%2C' + ID[i] + '%3A0', "%2C" + ID[i] + "%3A0");
+            cookie = cookie.replace('%2C' + ID[i] + '%3A1', "%2C" + ID[i] + "%3A0");
+            var cookieName = "OptanonConsent";
+            OptanonActiveGroups = OptanonActiveGroups.replace("," + ID[i] + ",", ",");
+            OnetrustActiveGroups = OnetrustActiveGroups.replace("," + ID[i] + ",", ",");
+        }
+        document.cookie = cookieName + "=" + cookie + ";path=/;domain=" + domain + ";";
+    }
+    var ageGateYes = document.getElementById("age-gate-yes");
+    ageGateYes.addEventListener('click', function handler() {
+        updateOtCookie(groupID);
+    });
+} else { //do nothing
+}
+
+}
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0" content="width=device-width, user-scalable=no" />
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-76.png">
+<link rel="apple-touch-icon" sizes="96x96" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-96.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-180.png">
+<link rel="apple-touch-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon-60.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.tor.com/wp-content/themes/tor/static/images/favicons/favicon.ico" />
+<title>A Read of Ice and Fire: A Game of Thrones, Part 1  |  Tor.com</title>
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<!--[if lt IE 9]>
+<script src="https://www.tor.com/wp-content/themes/tor/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W2ZGVB');</script>
+
+<meta name="robots" content="max-image-preview:large" />
+
+<meta name="google-site-verification" content="TKdgmMLGHnS29XwYAR1A9VCy1ejitKME08p83KA8bbw" />
+<meta name="p:domain_verify" content="c5fa3aa04d7b8e9504e9307da5489225" />
+<link rel="dns-prefetch" href="//www.google.com" />
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//i0.wp.com" />
+<link rel="dns-prefetch" href="//c0.wp.com" />
+<link rel="dns-prefetch" href="//widgets.wp.com" />
+<link rel="alternate" type="application/rss+xml" title="Tor.com &raquo; A Read of Ice and Fire: A Game of Thrones, Part 1 Comments Feed" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/feed/" />
+<link rel="stylesheet" id="theme-style-css" href="https://www.tor.com/wp-content/themes/tor/custom.css?ver=6.4.2" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-block-library-css" href="https://c0.wp.com/c/6.4.2/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all" />
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<style id="bp-login-form-style-inline-css" type="text/css">
+.widget_bp_core_login_widget .bp-login-widget-user-avatar{float:left}.widget_bp_core_login_widget .bp-login-widget-user-links{margin-left:70px}#bp-login-widget-form label{display:block;font-weight:600;margin:15px 0 5px;width:auto}#bp-login-widget-form input[type=password],#bp-login-widget-form input[type=text]{background-color:#fafafa;border:1px solid #d6d6d6;border-radius:0;font:inherit;font-size:100%;padding:.5em;width:100%}#bp-login-widget-form .bp-login-widget-register-link,#bp-login-widget-form .login-submit{display:inline;width:-moz-fit-content;width:fit-content}#bp-login-widget-form .bp-login-widget-register-link{margin-left:1em;vertical-align:super}#bp-login-widget-form .bp-login-widget-pwd-link{font-size:80%}
+
+</style>
+<style id="bp-member-style-inline-css" type="text/css">
+[data-type="bp/member"] input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}.bp-block-member{position:relative}.bp-block-member .member-content{display:flex}.bp-block-member .user-nicename{display:block}.bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-member .bp-profile-button{width:100%}.bp-block-member .bp-profile-button a.button{bottom:10px;display:inline-block;margin:18px 0 0;position:absolute;right:0}.bp-block-member.has-cover .item-header-avatar,.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{z-index:2}.bp-block-member.has-cover .member-content,.bp-block-member.has-cover .member-description{padding-top:75px}.bp-block-member.has-cover .bp-member-cover-image{background-color:#c5c5c5;background-position:top;background-repeat:no-repeat;background-size:cover;border:0;display:block;height:150px;left:0;margin:0;padding:0;position:absolute;top:0;width:100%;z-index:1}.bp-block-member img.avatar{height:auto;width:auto}.bp-block-member.avatar-none .item-header-avatar{display:none}.bp-block-member.avatar-none.has-cover{min-height:200px}.bp-block-member.avatar-full{min-height:150px}.bp-block-member.avatar-full .item-header-avatar{width:180px}.bp-block-member.avatar-thumb .member-content{align-items:center;min-height:50px}.bp-block-member.avatar-thumb .item-header-avatar{width:70px}.bp-block-member.avatar-full.has-cover{min-height:300px}.bp-block-member.avatar-full.has-cover .item-header-avatar{width:200px}.bp-block-member.avatar-full.has-cover img.avatar{background:hsla(0,0%,100%,.8);border:2px solid #fff;margin-left:20px}.bp-block-member.avatar-thumb.has-cover .item-header-avatar{padding-top:75px}.entry .entry-content .bp-block-member .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-members-style-inline-css" type="text/css">
+[data-type="bp/members"] .components-placeholder.is-appender{min-height:0}[data-type="bp/members"] .components-placeholder.is-appender .components-placeholder__label:empty{display:none}[data-type="bp/members"] .components-placeholder input.components-placeholder__input{border:1px solid #757575;border-radius:2px;flex:1 1 auto;padding:6px 8px}[data-type="bp/members"].avatar-none .member-description{width:calc(100% - 44px)}[data-type="bp/members"].avatar-full .member-description{width:calc(100% - 224px)}[data-type="bp/members"].avatar-thumb .member-description{width:calc(100% - 114px)}[data-type="bp/members"] .member-content{position:relative}[data-type="bp/members"] .member-content .is-right{position:absolute;right:2px;top:2px}[data-type="bp/members"] .columns-2 .member-content .member-description,[data-type="bp/members"] .columns-3 .member-content .member-description,[data-type="bp/members"] .columns-4 .member-content .member-description{padding-left:44px;width:calc(100% - 44px)}[data-type="bp/members"] .columns-3 .is-right{right:-10px}[data-type="bp/members"] .columns-4 .is-right{right:-50px}.bp-block-members.is-grid{display:flex;flex-wrap:wrap;padding:0}.bp-block-members.is-grid .member-content{margin:0 1.25em 1.25em 0;width:100%}@media(min-width:600px){.bp-block-members.columns-2 .member-content{width:calc(50% - .625em)}.bp-block-members.columns-2 .member-content:nth-child(2n){margin-right:0}.bp-block-members.columns-3 .member-content{width:calc(33.33333% - .83333em)}.bp-block-members.columns-3 .member-content:nth-child(3n){margin-right:0}.bp-block-members.columns-4 .member-content{width:calc(25% - .9375em)}.bp-block-members.columns-4 .member-content:nth-child(4n){margin-right:0}}.bp-block-members .member-content{display:flex;flex-direction:column;padding-bottom:1em;text-align:center}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:100%}.bp-block-members .member-content .item-header-avatar{margin:0 auto}.bp-block-members .member-content .item-header-avatar img.avatar{display:inline-block}@media(min-width:600px){.bp-block-members .member-content{flex-direction:row;text-align:left}.bp-block-members .member-content .item-header-avatar,.bp-block-members .member-content .member-description{width:auto}.bp-block-members .member-content .item-header-avatar{margin:0}}.bp-block-members .member-content .user-nicename{display:block}.bp-block-members .member-content .user-nicename a{border:none;color:currentColor;text-decoration:none}.bp-block-members .member-content time{color:#767676;display:block;font-size:80%}.bp-block-members.avatar-none .item-header-avatar{display:none}.bp-block-members.avatar-full{min-height:190px}.bp-block-members.avatar-full .item-header-avatar{width:180px}.bp-block-members.avatar-thumb .member-content{min-height:80px}.bp-block-members.avatar-thumb .item-header-avatar{width:70px}.bp-block-members.columns-2 .member-content,.bp-block-members.columns-3 .member-content,.bp-block-members.columns-4 .member-content{display:block;text-align:center}.bp-block-members.columns-2 .member-content .item-header-avatar,.bp-block-members.columns-3 .member-content .item-header-avatar,.bp-block-members.columns-4 .member-content .item-header-avatar{margin:0 auto}.bp-block-members img.avatar{height:auto;max-width:-moz-fit-content;max-width:fit-content;width:auto}.bp-block-members .member-content.has-activity{align-items:center}.bp-block-members .member-content.has-activity .item-header-avatar{padding-right:1em}.bp-block-members .member-content.has-activity .wp-block-quote{margin-bottom:0;text-align:left}.bp-block-members .member-content.has-activity .wp-block-quote cite a,.entry .entry-content .bp-block-members .user-nicename a{border:none;color:currentColor;text-decoration:none}
+
+</style>
+<style id="bp-dynamic-members-style-inline-css" type="text/css">
+.bp-dynamic-block-container .item-options{font-size:.5em;margin:0 0 1em;padding:1em 0}.bp-dynamic-block-container .item-options a.selected{font-weight:600}.bp-dynamic-block-container ul.item-list{list-style:none;margin:1em 0}.bp-dynamic-block-container ul.item-list li{margin-bottom:1em}.bp-dynamic-block-container ul.item-list li:after,.bp-dynamic-block-container ul.item-list li:before{content:" ";display:table}.bp-dynamic-block-container ul.item-list li:after{clear:both}.bp-dynamic-block-container ul.item-list li .item-avatar{float:left;width:60px}.bp-dynamic-block-container ul.item-list li .item{margin-left:70px}
+
+</style>
+<style id="bp-online-members-style-inline-css" type="text/css">
+[data-type="bp/online-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/online-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-active-members-style-inline-css" type="text/css">
+[data-type="bp/active-members"] .avatar-block{display:flex;flex-flow:row wrap}[data-type="bp/active-members"] .avatar-block img{margin:.5em}
+
+</style>
+<style id="bp-latest-activities-style-inline-css" type="text/css">
+.bp-latest-activities .components-flex.components-select-control select[multiple]{height:auto;padding:0 8px}.bp-latest-activities .components-flex.components-select-control select[multiple]+.components-input-control__suffix svg{display:none}.bp-latest-activities-block a,.entry .entry-content .bp-latest-activities-block a{border:none;text-decoration:none}.bp-latest-activities-block .activity-list.item-list blockquote{border:none;padding:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini){box-shadow:1px 0 4px rgba(0,0,0,.15);padding:0 1em;position:relative}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after,.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-color:transparent;border-style:solid;content:"";display:block;height:0;left:15px;position:absolute;width:0}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):before{border-top-color:rgba(0,0,0,.15);border-width:9px;bottom:-18px;left:14px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item:not(.mini):after{border-top-color:#fff;border-width:8px;bottom:-16px}.bp-latest-activities-block .activity-list.item-list blockquote .activity-item.mini .avatar{display:inline-block;height:20px;margin-right:2px;vertical-align:middle;width:20px}.bp-latest-activities-block .activity-list.item-list footer{align-items:center;display:flex}.bp-latest-activities-block .activity-list.item-list footer img.avatar{border:none;display:inline-block;margin-right:.5em}.bp-latest-activities-block .activity-list.item-list footer .activity-time-since{font-size:90%}.bp-latest-activities-block .widget-error{border-left:4px solid #0b80a4;box-shadow:1px 0 4px rgba(0,0,0,.15)}.bp-latest-activities-block .widget-error p{padding:0 1em}
+
+</style>
+<style id="bp-sitewide-notices-style-inline-css" type="text/css">
+[data-type="bp/sitewide-notices"] .bp-screen-reader-text{clip:rect(0 0 0 0);word-wrap:normal!important;border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}[data-type="bp/sitewide-notices"] [data-bp-tooltip]:after{word-wrap:break-word;background-color:#fff;border:1px solid #737373;border-radius:1px;box-shadow:4px 4px 8px rgba(0,0,0,.2);color:#333;content:attr(data-bp-tooltip);display:none;font-family:Helvetica Neue,Helvetica,Arial,san-serif;font-size:12px;font-weight:400;letter-spacing:normal;line-height:1.25;max-width:200px;opacity:0;padding:5px 8px;pointer-events:none;position:absolute;text-shadow:none;text-transform:none;transform:translateZ(0);transition:all 1.5s ease;visibility:hidden;white-space:nowrap;z-index:100000}[data-type="bp/sitewide-notices"] .bp-tooltip:after{left:50%;margin-top:7px;top:110%;transform:translate(-50%)}.bp-sitewide-notice-block{border-left:4px solid #ff853c;padding-left:1em;position:relative}.bp-sitewide-notice-block h2:before{background:none;border:none}.bp-sitewide-notice-block .dismiss-notice{background-color:transparent;border:1px solid #ff853c;color:#ff853c;display:block;padding:.2em .5em;position:absolute;right:.5em;top:.5em;width:-moz-fit-content;width:fit-content}.bp-sitewide-notice-block .dismiss-notice:hover{background-color:#ff853c;color:#fff}
+
+</style>
+<link rel="stylesheet" id="mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="wp-mediaelement-css" href="https://c0.wp.com/c/6.4.2/wp-includes/js/mediaelement/wp-mediaelement.min.css" type="text/css" media="all" />
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="tor-merriweather-webfont-css" href="https://fonts.googleapis.com/css?family=Merriweather%3A400%2C400i%2C700%2C700i&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tor-open-sans-css" href="https://fonts.googleapis.com/css?family=Open+Sans%3A200%2C300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic&#038;ver=1.0.74" type="text/css" media="all" />
+<link rel="stylesheet" id="tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/tablet.css?ver=1.0.74" type="text/css" media="all and (min-width: 767px)" />
+<link rel="stylesheet" id="desktop-css" href="https://www.tor.com/wp-content/themes/tor/static/css/desktop.css?ver=1.0.74" type="text/css" media="all and (min-width: 1024px)" />
+<link rel="stylesheet" id="mobile-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mobile.css?ver=1.0.74" type="text/css" media="all and (max-width: 767px)" />
+<link rel="stylesheet" id="mini-tablet-css" href="https://www.tor.com/wp-content/themes/tor/static/css/mini-tablet.css?ver=1.0.74" type="text/css" media="(min-width: 641px) and (max-width: 767px)" />
+<link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/12.9.1/_inc/social-logos/social-logos.min.css" type="text/css" media="all" />
+<link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/12.9.1/css/jetpack.css" type="text/css" media="all" />
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/vendor.bundle.js?ver=1.0.74" id="vendor-js"></script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/ga.bundle.js?ver=1.0.74" id="tor-ga-js"></script>
+<script type="text/javascript" id="sharing-js-fe-js-extra">
+/* <![CDATA[ */
+var tor_sharing_fe = ["is_logged_in",false];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/sharing.bundle.js?ver=1.0.74" id="sharing-js-fe-js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?ver=2.8.6" id="recaptcha-js"></script>
+<link rel="https://api.w.org/" href="https://www.tor.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.tor.com/wp-json/wp/v2/posts/47248" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.tor.com/xmlrpc.php?rsd" />
+<link rel="canonical" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/" />
+<link rel="shortlink" href="https://www.tor.com/?p=47248" />
+<link rel="alternate" type="application/json+oembed" href="https://www.tor.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.tor.com%2F2011%2F03%2F18%2Fa-read-of-ice-and-fire-a-game-of-thrones-part-1%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.tor.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.tor.com%2F2011%2F03%2F18%2Fa-read-of-ice-and-fire-a-game-of-thrones-part-1%2F&#038;format=xml" />
+<script type="text/javascript">var ajaxurl = 'https://www.tor.com/wp-admin/admin-ajax.php';</script>
+
+<style type="text/css">
+ul#menu-footer-menu-small li:nth-child(2) {
+    position: relative;
+    padding-right: 30px !important;
+}
+
+
+ul#menu-footer-menu-small li:nth-child(2)::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 4px;
+    width: 27px;
+    height: 10px;
+    background-image: url("/wp-content/uploads/2023/09/privacyoptions730x350.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+</style>
+
+
+<script type="text/javascript">
+		var dfp_ad_slots = [];
+		var googletag = googletag || {};
+		googletag.cmd = googletag.cmd || [];
+		(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		gads.type = 'text/javascript';
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') +
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+		})();
+		</script>
+<script type="text/javascript">
+		googletag.cmd.push(function() {
+			var mappingtop = googletag.sizeMapping().addSize([1280,1],[[728,90]]).addSize([1024,1],[[728,90]]).addSize([850,1],[[728,90]]).addSize([768,1],[[728,90]]).addSize([0,0],[[320,50]]).build();
+var mappingright1 = googletag.sizeMapping().addSize([1280,1],[[300,250]]).addSize([1024,1],[[300,250]]).addSize([850,1],[[300,250]]).addSize([768,1],[]).addSize([0,0],[[300,250]]).build();
+dfp_ad_slots[0] = googletag.defineSlot('/21876227215/tor.com',[728,90],'div-gpt-ad-top').defineSizeMapping(mappingtop).addService(googletag.pubads()).setTargeting('pos', 'top');
+dfp_ad_slots[1] = googletag.defineSlot('/21876227215/tor.com',[300,250],'div-gpt-ad-right1').defineSizeMapping(mappingright1).addService(googletag.pubads()).setTargeting('pos', 'right1');
+			googletag.pubads().enableSingleRequest();
+			googletag.pubads().enableAsyncRendering();
+			googletag.pubads().collapseEmptyDivs( true );
+			googletag.enableServices();
+		});
+		</script>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="A Read of Ice and Fire: A Game of Thrones, Part 1" />
+<meta property="og:url" content="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/" />
+<meta property="og:description" content="Welcome, one and all, to the brand-spankingest new blog series on Tor.com, A Read of Ice and Fire! Please join me as I read and react, for the very first time, to George R.R. Martin’s epic fantasy …" />
+<meta property="article:published_time" content="2011-03-18T17:54:00+00:00" />
+<meta property="article:modified_time" content="2019-01-31T19:41:59+00:00" />
+<meta property="og:site_name" content="Tor.com" />
+<meta property="og:image" content="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C+9999&#038;crop=0%2C0%2C100%2C340px&#038;quality=100&#038;ssl=1" />
+<meta property="og:image:width" content="225" />
+<meta property="og:image:height" content="340" />
+<meta property="og:image:alt" content />
+<meta property="og:locale" content="en_US" />
+<meta property="fb:app_id" content="966242223397117" />
+<meta property="article:publisher" content="https://www.facebook.com/tordotcom/" />
+<meta property="author" content="Leigh Butler" />
+<meta property="article:author" content="https://www.tor.com/author/leigh-butler/" />
+<meta name="twitter:site" content="@tordotcom" />
+<meta name="twitter:text:title" content="A Read of Ice and Fire: A Game of Thrones, Part 1" />
+<meta name="twitter:image" content="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C+9999&#038;crop=0%2C0%2C100%2C340px&#038;quality=100&#038;ssl=1&#038;w=144" />
+<meta name="twitter:card" content="summary" />
+
+<style>
+
+	body .age-gate-overlay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483646;
+	background-color: #c1c5c899;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+body .age-gate-content-container {
+	background: #fff;
+	width: 570px;
+	padding: 30px;
+}
+
+body .age-gate-text p {
+	color: #333333;
+  font-family: "Nunito", "sans-serif";
+	font-size: 2rem;
+	font-weight: normal;
+	margin-top: 8px;
+}
+
+body .confirm-btn-container button {
+	color: #fff;
+	background: #ab0033;
+	border: none;
+	padding: 10px 20px;
+	width: 100px;
+	text-transform: uppercase;
+	display: inline-block;
+	font-weight: bold;
+}
+
+body .confirm-btn-container button:first-child {
+	margin-right: 15px;
+}
+</style>
+</head>
+<body class="bp-legacy post-template-default single single-post postid-47248 single-format-standard no-js">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W2ZGVB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div id="page-wrapper">
+<header id="page-header">
+<div id="div-gpt-ad-top" class="dfp-ad dfp-top">
+<script type="text/javascript">
+		if ( typeof googletag != 'undefined' ) {
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-top'); });
+		}
+	</script>
+</div>
+<hgroup id="page-header-masthead">
+<h1 id="site-logo"><a href="https://www.tor.com/" title="Tor.com" rel="home">Tor.com</a></h1>
+<a href="#" id="menu-control" class="mobile"><i class="icon-menu"></i></a>
+<h2 id="site-description">Science fiction. Fantasy. The universe. And related subjects.</h2>
+</hgroup>
+<nav id="page-navigation">
+<h1 class="assistive-text section-heading">Main menu</h1>
+<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+<div class="menu-header-menu-container"><ul id="menu-header-menu" class="menu"><li id="menu-item-18" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18"><a href="https://www.tor.com/category/all-fiction/">Fiction</a></li>
+<li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21"><a href="/series">Series</a></li>
+<li id="menu-item-23" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23"><a target="_blank" rel="noopener" href="https://publishing.tor.com/">Publishing</a></li>
+<li id="menu-item-212027" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-212027"><a target="_blank" rel="noopener" href="https://read.macmillan.com/tordotcom/newsletter-signup/">Newsletter</a></li>
+</ul></div> <div class="search-toggle icon-search-2"></div>
+<form method="get" id="searchform" action="https://www.tor.com/search-page/">
+<label for="s" class="assistive-text">Search</label>
+<input type="text" class="field" name="s" id="s" placeholder="Search" />
+<button type="submit" class="search-submit"><i class="icon-search-2"></i><span class="assistive-text">Search</span></button>
+</form>
+<div id="account-wrapper" data-nonce="630fc5c9e6">
+<ul class="logged-out">
+<li class="login-control"><a href="#" class="login-button login">Log In</a></li>
+<li class="login-control"><a href="https://www.tor.com/register/" class="register-button">Register</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<div id="main">
+<div id="primary">
+<div id="content">
+<article data-nonce="e766a30423" data-post-id="47248" id="post-47248" class="post-47248 post type-post status-publish format-standard has-post-thumbnail hentry category-blog tag-a-game-of-thrones tag-a-read-of-ice-and-fire tag-a-song-of-ice-and-fire tag-books tag-fantasy tag-george-r-r-martin tag-literary-criticism tag-reading series-a-game-of-thrones visible-main-pages visible-contributor-pages visible-homepage visible-recommended-content visible-related-posts visible-tag-results single">
+<header class="entry-header">
+<ul class="post-categories uber-tag"><li><a href="https://www.tor.com/tag/a-song-of-ice-and-fire/" rel="category tag">A Song of Ice and Fire</a></li></ul>
+<h2 class="series-title"><a href="https://www.tor.com/series/a-read-of-ice-and-fire/">A Read of Ice and Fire</a></h2>
+<h2 class="entry-title"><a href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/">A Read of Ice and Fire: <em>A Game of Thrones</em>, Part 1</a></h2>
+<a href="https://www.tor.com/author/leigh-butler/" title="Posts by Leigh Butler" class="entry-author" rel="author">Leigh Butler</a>
+<div class="entry-meta">
+<div class="entry-dateline">
+<span class="entry-date">Fri Mar 18, 2011 1:54pm</span>
+<a href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/#comments" class="entry-comment-count">
+133 comments </a>
+<a id="favorite-47248" href="#" data-nonce="6602bf80d8" data-entity-id="47248" data-favorite-action="favorite" data-user-id="0" class="post-favorite-count">9 Favorites [+]</a>
+</div>
+</div>
+</header>
+<picture class="featured-image-wrapper vertical" data-id="47252">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C340&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C340&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C340&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 1023px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C340&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 1024px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2014/12/AGOT-reread-cover.jpg?fit=225%2C340&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+<div class="entry-content">
+<p>Welcome, one and all, to the brand-spankingest new blog series on Tor.com, <a href="/features/series/a-read-of-ice-and-fire" target="_blank" rel="noopener noreferrer">A Read of Ice and Fire</a>!</p>
+<p>Please join me as I read and react, for the very first time, to George R.R. Martin’s epic fantasy series A Song of Ice and Fire.</p>
+<p>Today’s inaugural entry is Part 1 of <a href="http://www.randomhouse.com/catalog/display.pperl/9780553573404.html" target="_blank" rel="noopener noreferrer"><em>A Game of Thrones</em></a>, in which we cover the Prologue and “Bran,” because it turns out Mr. Martin is not into chapter numbers. Or non-repetitive titles, either. I’m a bit nonplussed by this, but I imagine you guys are all smart enough to figure it out as we go, and we’ll all survive somehow.</p>
+<p>For what it’s worth, I highly recommend you follow this by reading the actual chapters, since my summaries for the chapters are not going to be as detailed as the ones for the <a href="https://www.tor.com/features/series/wot-reread/" target="_blank" rel="noopener noreferrer">Wheel of Time Re-read</a> tend to be. Just a heads-up.</p>
+<p>Previous entries are located in the <a href="/features/series/a-read-of-ice-and-fire" target="_blank" rel="noopener noreferrer">Index</a>, or rather they will be once there’s, you know, more than one entry.</p>
+<p>And that’s about the size of it, so please click on for the post!</p>
+<p><span id="more-47248"></span></p>
+<p>Before we start, a note on spoilers: There are no spoilers for the series in the post itself except for the actual chapters covered, for the very good reason that I am reading the series for the first time in this endeavor, and thus have no spoilers to spoil you with.</p>
+<p>As far as spoiler policy in the comments goes, here’s the deal: The Powers That Be at Tor.com have very kindly set up a forum thread for spoilery comments. Any spoileriffic discussion should go there, where I won’t see it. Non-spoiler comments go below, in the comments to the post itself.</p>
+<p>I ask that everyone be decent human beings and honor this spoiler policy so I don’t have to stop reading comments altogether, because I like hearing what you have to say. Okay? Okay!</p>
+<p>So there’s all that. And now, off we go!</p>
+<p><strong><u>Prologue</u></strong></p>
+<p><strong>What Happens</strong><br/>
+Two men of the Night’s Watch, Will and Gared, ride through the woods with their new commanding officer, Ser Waymar Royce. Will is a former poacher, Gared a grizzled veteran; neither of them have much respect for Royce, an arrogant eighteen-year-old lordling. They have been tracking a group of wildling raiders beyond the Wall. Will and Gared are both uneasy, sensing something wrong in the woods, but Royce only makes fun of them for it. Will tells Royce again of how he had found the wildlings’ camp, with its inhabitants dead, sitting or lying where they had fallen, but Royce doesn’t believe him, and insists on seeing the campsite for himself.</p>
+<p>Will leads him there, leaving Gared behind to guard the horses, but when Will and Royce reach the site, the bodies are all gone. Royce sends Will up into a tree to look for a fire, and once there Will sees shapes moving in the trees; it suddenly grows much colder. Then, Royce is confronted by one of what Will calls “The Others”; five more emerge to watch as Royce duels with the first. Royce holds his own for a bit, but then is wounded by the Other’s strange crystalline sword, and on the next pass Royce’s sword shatters. The rest converge on him and slaughter him as Will watches from the tree, and then disappear. Will climbs down and picks up Royce’s shattered sword, thinking to take it back as evidence, and turns to find Royce’s mutilated corpse standing over him. Royce begins choking Will to death.</p>
+<p><strong>Commentary</strong><br/>
+Frozen zombies, by George!</p>
+<p>Er. Literally, in this case, eh?</p>
+<p>Well, that’s certainly starting off your epic fantasy series with an extremely creepy bang, I’ll say. This whole scene was straight out of a horror movie.</p>
+<p>A <em>good</em> horror movie, mind you. The writing did a superb job of immediately putting the reader in the moment, and conveying the eerie, ominous atmosphere of… um, wherever they are.</p>
+<p>Okay, I looked it up on the map, and it turns out they are in… The North.</p>
+<p>Helpful!</p>
+<p>But at least that explains the cold:</p>
+<blockquote><p>“I saw men freeze last winter, and the one before, when I was half a boy. Everyone talks about snows forty foot deep, and how the ice wind comes howling out of the north, but the real enemy is the cold. It steals up on you quieter than Will, and at first you shiver and your teeth chatter and you stamp your feet and dream of mulled wine and nice hot fires. It burns, it does. Nothing burns like the cold. But only for a while. Then it gets inside you and starts to fill you up, and after a while you don’t have the strength to fight it. It’s easier just to sit down or go to sleep. They say you don’t feel any pain toward the end. First you go weak and drowsy, and everything starts to fade, and then it’s like sinking into a sea of warm milk. Peaceful, like.”</p></blockquote>
+<p>Brr. I felt cold reading it, and my apartment is overheated at the moment.</p>
+<p>So I’m guessing from this introduction that we are not in for a whole lot of happy fun times in this series. Of course, I’d pretty much known that already. I’ve managed to avoid spoilers on the <em>specifics</em> of ASOIAF, but I’ve caught more than enough in general about the dark grittiness and the wanton character-killin’ and so forth. Which is fine, as long as I don’t know ahead of time <em>who</em> gets killed. Or maybe the more relevant question is who <em>stays</em> dead, eh?</p>
+<p>Overall, nicely done, with just enough worldbuilding tidbits to pique the interest without drowning you in exposition. Little bits like this one:</p>
+<blockquote><p>[Will] was a veteran of a hundred rangings by now, and the endless dark wilderness that the southron called the haunted forest had no more terrors for him.</p></blockquote>
+<p>And fortunately I don’t have to remember any of these characters, except possibly Gared, because they’re all dead. Although, I’m not sure if it counts when they haven’t stopped moving afterwards. Eeek.</p>
+<p>Speaking of which, the description of the frozen zombies were really well-done, but I particularly liked the description of the main Other guy’s voice:</p>
+<blockquote><p>The Other said something in a language that Will did not know; his voice was like the cracking of ice on a winter lake, and the words were mocking.</p></blockquote>
+<p>And his sword:</p>
+<blockquote><p>No human metal had gone into the forging of that blade. It was alive with moonlight, translucent, a shard of crystal so thin that it seemed almost to vanish when seen edge-on. There was a faint blue shimmer to the thing, a ghost-light that played around its edges, and somehow Will knew it was sharper than any razor.</p></blockquote>
+<p>CREEPY. And, awesome. So far, so good.</p>
+<p><strong><u>Bran</u></strong></p>
+<p><strong>What Happens</strong><br/>
+Seven-year-old Bran Stark rides with his brother, Robb Stark, and his half-brother (and bastard) Jon Snow to watch his first execution. Robb had told Bran he thinks the sentenced man is a wildling sworn to Mance Rayder, the King-beyond-the-Wall. The beheading is carried out by his father, Lord Eddard Stark of Winterfell, with the greatsword called Ice, and on Jon’s advice Bran forces himself not to look away. The head rolls to Theon Greyjoy, Eddard’s ward, who kicks it away with a laugh. As they head back to Winterfell, Bran speaks with his father, who tells him the man was actually a deserter from the Night’s Watch, and explains to him why the Starks always carry out their own sentences.</p>
+<p>Jon and Robb find the corpse of a direwolf, bigger than Bran’s pony; Theon comments that it has been two hundred years since a direwolf has been seen south of the Wall. It transpires that the direwolf was a bitch, and had whelped a litter before dying of wounds inflicted by an antler lodged in her throat; Bran does not understand why that makes the men in the party afraid. Theon wants to kill the pups as well, but Bran protests fiercely, and Robb agrees. Eddard is unwilling at first, but Jon points out to him that the sigil for the Starks is a direwolf, and there are exactly five pups in the litter, one for each of his living children; Jon excludes himself from this count. Eddard regards him thoughtfully, and tells Bran and Robb they may keep the pups only if they feed and train them themselves. As the party is riding off, Jon hears a noise, and goes back to find a sixth pup, an albino, which he declares belongs to him.</p>
+<p><strong>Commentary</strong><br/>
+Oops, I guess I don’t have to remember Gared either, since I’m about 97% sure he was the guy who just got his head chopped off here. (The executee is described as missing both ears and a finger, which are the same extremities Gared is described as having lost to frostbite in the Prologue.) Man, that sucks, Gared, sorry. Beats being a frozen zombie? I guess?</p>
+<p>Also, I am such a girl sometimes, because: puppies!</p>
+<p>Okay, puppies destined to grow up to be giant, scary, probably-slavering monster-wolves, but hey. Puppies! Highly Symbolic Puppies, while we’re at it. Which of course is the <em>best</em> kind.</p>
+<p>Anyway. So: Stark, Winterfell, Greyjoy, Snow, Ice…. I am maybe just possibly sensing a theme here, with the names. WHAT CAN IT BE. Also, like fragments like this:</p>
+<blockquote><p>The late summer snows had been heavy this moonturn.</p></blockquote>
+<p><em>Summer</em> snows? Ye gods. So, what I’m getting out of this is, it is <em>fucking cold</em> in this part of the world. Clear copy, thanks.</p>
+<p>I can’t help but think that must have an effect on the people who live there, and all the dialogue in this chapter seems to back that up:</p>
+<blockquote><p>“The blood of the First Men still flows in the veins of the Starks, and we hold to the belief that the man who passes the sentence should swing the sword. If you would take a man’s life, you owe it to him to look into his eyes and hear his final words. And if you cannot bear to do that, then perhaps the man does not deserve to die.”</p></blockquote>
+<p>Eddard’s philosophy on carrying out his own sentences is remarkably like his name and his world: cold and harsh, but clean. I’ve certainly come across worse ways to be. Same thing goes for taking a seven-year-old to an execution; that might be cruel in a softer setting, but it’s immediately clear that in this world, no one gets to be a child for very long if they want to survive. Not a place of luxury, or leniency, at all.</p>
+<p>Although, even so, I was frankly startled when Jon Snow’s age was mentioned as being fourteen. Fourteen!</p>
+<p>Speaking of which, the main effect this chapter had, for me, was to instantly identify Jon Snow as the most interesting character in it. Bran is cute and all, but is too young to have much going on in the character department yet; Robb seemed generic, Theon’s a jerk, and Eddard is Inscrutable Lord Guy, but you can tell even from Bran’s immature perspective that Jon is pretty kickass, especially for a fourteen-year-old. And, of course, the outsider character is almost always automatically the most interesting, if for no other reason than that they tend to have much more baggage than the other characters. But Jon seems cool; I just “met” him, and I’m already rooting for him.</p>
+<p>Therefore, I’m very happy he got a puppy. The <em>special</em>, albino/outsider/different puppy, lest we forget. I’m sure that’s not fraught with meaning at all.</p>
+<p>Also, there’s this, when Bran is thinking about the stories he’s been told about wildlings:</p>
+<blockquote><p>They consorted with giants and ghouls, stole girl children in the dead of night, and drank blood from polished horns. And their women lay with the Others in the Long Night to sire terrible half-human children.</p></blockquote>
+<p>I really really hope that this is all tall tales, but I have a distinct feeling that it isn’t. Not all of it, anyway. Ew.</p>
+<hr/>
+<p>And that’ll about do it for this entry! I hope you have enjoyed, and I hope that you will join me for the next installment next Friday. Cheers!</p>
+<div class="post-end-spacer"></div><div class="footer-favorite-wrapper"></div><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-47248" class="share-facebook sd-button share-icon no-text" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-47248" class="share-twitter sd-button share-icon no-text" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared class="share-tumblr sd-button share-icon no-text" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-47248" class="share-pinterest sd-button share-icon no-text" href="https://www.tor.com/2011/03/18/a-read-of-ice-and-fire-a-game-of-thrones-part-1/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div> <div id="entry-content__citation-popup" class="entry-content__citation-popup">
+<div class="entry-content__citation-header">
+<h4><i class="icon-note"></i> <span>citation</span></h4>
+<i id="entry-content__citation-close" class="icon-cancel"></i>
+</div>
+<div class="entry-content__citation-content">
+<span id="entry-content__citation-id" class="entry-content__citation-id"></span>
+<p id="entry-content__citation-text"></p>
+</div>
+</div>
+</div>
+</article>
+<div class="entry-footer">
+<div class="series-nav-wrapper"><ul class="series-nav"><li class="series-nav-title"><a href="https://www.tor.com/series/a-read-of-ice-and-fire/">A Read of Ice and Fire</a></li><li class="series-nav-link"><a href="https://www.tor.com/series/a-read-of-ice-and-fire/">index</a></li><li class="series-nav-link"><a href="https://www.tor.com/2011/03/25/a-read-of-ice-and-fire-a-game-of-thrones-part-2/">next &rsaquo;</a></li></ul></div> <div class="entry-tags"><a href="https://www.tor.com/tag/a-game-of-thrones/" rel="tag">A Game of Thrones</a><a href="https://www.tor.com/tag/a-read-of-ice-and-fire/" rel="tag">A Read of Ice and Fire</a><a href="https://www.tor.com/tag/a-song-of-ice-and-fire/" rel="tag">A Song of Ice and Fire</a><a href="https://www.tor.com/tag/books/" rel="tag">books</a><a href="https://www.tor.com/tag/fantasy/" rel="tag">Fantasy</a><a href="https://www.tor.com/tag/george-r-r-martin/" rel="tag">George R.R. Martin</a><a href="https://www.tor.com/tag/literary-criticism/" rel="tag">literary criticism</a><a href="https://www.tor.com/tag/reading/" rel="tag">reading</a></div>
+<ul id="related-posts">
+<li>
+<article class="related-post">
+<a href="https://www.tor.com/2024/01/11/excerpts-sun-of-blood-and-ruin-by-mariely-lares/">
+<picture class="featured-image-wrapper horizontal" data-id="765456">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Sun-of-Blood-and-Ruin-header.png?resize=90%2C68&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Sun-of-Blood-and-Ruin-header.png?resize=150%2C113&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Sun-of-Blood-and-Ruin-header.png?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/Sun-of-Blood-and-Ruin-header.png?resize=90%2C68&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<h2 class="related-post-title"><a href="https://www.tor.com/2024/01/11/excerpts-sun-of-blood-and-ruin-by-mariely-lares/">Read an Excerpt From <em>Sun of Blood and Ruin</em></a></h2>
+</article>
+</li>
+<li>
+<article class="related-post">
+<a href="https://www.tor.com/2024/01/11/book-review-somewhere-in-the-deep-by-tanvi-berwah/">
+<picture class="featured-image-wrapper horizontal" data-id="765437">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/review-Somewhere-in-the-Deep.png?resize=90%2C68&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/review-Somewhere-in-the-Deep.png?resize=150%2C113&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/review-Somewhere-in-the-Deep.png?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/review-Somewhere-in-the-Deep.png?resize=90%2C68&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<h2 class="related-post-title"><a href="https://www.tor.com/2024/01/11/book-review-somewhere-in-the-deep-by-tanvi-berwah/">Review: <em>Somewhere in the Deep</em> by Tanvi Berwah</a></h2>
+</article>
+</li>
+<li>
+<article class="related-post">
+<a href="https://www.tor.com/2024/01/11/mark-each-year-in-books-thoughts-on-reading-traditions/">
+<picture class="featured-image-wrapper horizontal" data-id="765332">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/reading-book-with-blanket.jpg?resize=90%2C68&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/reading-book-with-blanket.jpg?resize=150%2C113&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/reading-book-with-blanket.jpg?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2024/01/reading-book-with-blanket.jpg?resize=90%2C68&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<h2 class="related-post-title"><a href="https://www.tor.com/2024/01/11/mark-each-year-in-books-thoughts-on-reading-traditions/">Mark Each Year in Books: Thoughts on Reading Traditions</a></h2>
+</article>
+</li>
+<li>
+<article class="related-post">
+<a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/">
+<picture class="featured-image-wrapper horizontal" data-id="748115">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-1400x500-2.jpg?resize=90%2C68&#038;quality=100&#038;ssl=1" media="(max-width: 640px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-1400x500-2.jpg?resize=150%2C113&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-1400x500-2.jpg?resize=140%2C105&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-1400x500-2.jpg?resize=90%2C68&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<h2 class="related-post-title"><a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/"><em>Elantris</em> Reread: Chapters Fifty-One and Fifty-Two</a></h2>
+</article>
+</li>
+</ul>
+</div>
+<a href="#" id="back-to-top">
+<i class="icon-up"></i>
+<span>Back to the top of the page</span>
+</a>
+<div id="comments">
+<h2 id="comments-title">
+133 Comments </h2>
+<div id="comment-skip-link-container">
+<a href="#comment-175356" id="newest-comment-link" class="comment-skip-link">skip to newest</a>
+<a href="#" id="latest-comment-link" class="comment-skip-link" style="display:none;">skip to unread</a>
+</div>
+<div id="comment-container"></div>
+<div id="comment-more-buttons">
+<button id="load-more-comments" class="comment-form-button" style="display:none;">More Comments</button>
+<button id="check-more-comments" class="comment-form-button" style="display:none;">Check for New Comments</button>
+</div>
+<input type="hidden" id="comment-nonce" value="66651e59ca">
+<input type="hidden" id="comment-page" value="1">
+<input type="hidden" id="total-comment-pages" value="2">
+<input type="hidden" id="comment-bookmark-found" value="false">
+<div id="comment-status"></div>
+</div>
+<p class="nocomments">This post is closed for comments.</p>
+</div>
+<div id="page-sidebar">
+<div class="module-title"><a href="https://read.macmillan.com/tordotcom/newsletter-signup/" target="_blank"><img src="/wp-content/uploads/2015/10/newsletter_signup.png" width="300" alt /></a></div><div class="widget"><h2>Latest Posts</h2> <ul id="latest-posts">
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/author-terry-bisson-passes-away-at-age-81/">Author Terry Bisson Passes Away at Age 81</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/mariely-lares/" title="Posts by Mariely Lares" class="entry-author" rel="author">Mariely Lares</a> </span>
+<a href="https://www.tor.com/2024/01/11/excerpts-sun-of-blood-and-ruin-by-mariely-lares/">Read an Excerpt From <em>Sun of Blood and Ruin</em></a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/humanity-isnt-doing-so-well-in-halo-season-2-trailer/">Humanity Isn’t Doing So Well In <i>Halo</i> Season 2 Trailer</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/mahvesh-murad/" title="Posts by Mahvesh Murad" class="entry-author" rel="author">Mahvesh Murad</a> </span>
+<a href="https://www.tor.com/2024/01/11/book-review-somewhere-in-the-deep-by-tanvi-berwah/">Colonial Creatures: <em>Somewhere in the Deep</em> by Tanvi Berwah</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/vanessa-armstrong/" title="Posts by Vanessa Armstrong" class="entry-author" rel="author">Vanessa Armstrong</a> </span>
+<a href="https://www.tor.com/2024/01/11/abigail-trailer-bloodsucking-child-ballerina/"><i>Abigail</i> Trailer Reveals the Apparent Bloodsucking Side of Being A Child Ballerina</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/molly-templeton/" title="Posts by Molly Templeton" class="entry-author" rel="author">Molly Templeton</a> </span>
+<a href="https://www.tor.com/2024/01/11/the-last-of-us-has-found-its-dina-and-jesse/"><em>The Last of Us</em> Has Found Its Dina and Jesse</a>
+<span class="post-date">3 days ago</span>
+</li>
+<li>
+<span class="widget-author-byline">
+<a href="https://www.tor.com/author/alissa-burger/" title="Posts by Alissa Burger" class="entry-author" rel="author">Alissa Burger</a> </span>
+<a href="https://www.tor.com/2024/01/11/r-l-stines-the-new-years-party-teen-horror-time-machine-review/">Not So Happy New Year: R.L. Stine’s <em>The New Year’s Party</em> </a>
+<span class="post-date">3 days ago</span>
+</li>
+</ul>
+</div> <div class="widget"> <h2>New in Series</h2> <ul id="new-in-series">
+<li>
+<a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/">
+<picture class="featured-image-wrapper horizontal" data-id="748117">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-400x91-1.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-400x91-1.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2023/06/Sanderson_Elantris_Reread-400x91-1.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/"><em>Elantris</em> Reread: Chapters Fifty-One and Fifty-Two</a>
+</li>
+<li>
+<a href="https://www.tor.com/2024/01/10/bet-you-didnt-know-you-could-get-into-this-much-trouble-using-calculus-redux-algernon-blackwoods-a-victim-of-higher-space/">
+<picture class="featured-image-wrapper horizontal" data-id="615283">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/09/Reading-the-Weird-banner.png?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/09/Reading-the-Weird-banner.png?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/09/Reading-the-Weird-banner.png?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/10/bet-you-didnt-know-you-could-get-into-this-much-trouble-using-calculus-redux-algernon-blackwoods-a-victim-of-higher-space/">Bet You Didn&#8217;t Know You Could Get Into This Much Trouble Using Calculus, Redux: Algernon Blackwood&#8217;s &#8220;A Victim of Higher Space&#8221;</a>
+</li>
+<li>
+<a href="https://www.tor.com/2024/01/10/aint-nothin-but-a-family-thing-blue-beetle/">
+<picture class="featured-image-wrapper horizontal" data-id="287217">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2017/08/superherorewatch_sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2017/08/superherorewatch_sidebar.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2017/08/superherorewatch_sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/10/aint-nothin-but-a-family-thing-blue-beetle/">Ain’t Nothin’ But a Family Thing — <em>Blue Beetle</em></a>
+</li>
+<li>
+<a href="https://www.tor.com/2024/01/09/5-books-about-regretting-that-cult-you-joined/">
+<picture class="featured-image-wrapper horizontal" data-id="174539">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2015/05/fivebooks_seriessidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2015/05/fivebooks_seriessidebar.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2015/05/fivebooks_seriessidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/09/5-books-about-regretting-that-cult-you-joined/">5 Books About Regretting That Cult You Joined</a>
+</li>
+<li>
+<a href="https://www.tor.com/2024/01/08/star-trek-enterprise-rewatch-demons/">
+<picture class="featured-image-wrapper horizontal" data-id="669519">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2021/11/Star-Trek-Rewatch-Sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2021/11/Star-Trek-Rewatch-Sidebar.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2021/11/Star-Trek-Rewatch-Sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/08/star-trek-enterprise-rewatch-demons/"><em>Star Trek: Enterprise</em> Rewatch: &#8220;Demons&#8221;</a>
+</li>
+<li>
+<a href="https://www.tor.com/2024/01/02/reading-the-wheel-of-time-young-bull-dreams-and-perrin-makes-a-choice-in-winters-heart-part-6/">
+<picture class="featured-image-wrapper horizontal" data-id="336323">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/02/readingwot_seriesidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/02/readingwot_seriesidebar.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2018/02/readingwot_seriesidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2024/01/02/reading-the-wheel-of-time-young-bull-dreams-and-perrin-makes-a-choice-in-winters-heart-part-6/">Reading <em>Winter&#8217;s Heart</em> (Part 6)</a>
+</li>
+<li>
+<a href="https://www.tor.com/2023/12/15/terry-pratchett-book-club-wintersmith-part-iii/">
+<picture class="featured-image-wrapper horizontal" data-id="591107">
+<source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/06/Pratchett-sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(max-width: 766px)" /> <source srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/06/Pratchett-sidebar.jpg?fit=268%2C61&#038;type=vertical&#038;quality=100&#038;ssl=1" media="(min-width: 767px)" />
+<img draggable="false" srcset="https://i0.wp.com/www.tor.com/wp-content/uploads/2020/06/Pratchett-sidebar.jpg?fit=400%2C91&#038;type=vertical&#038;quality=100&#038;ssl=1"></img>
+</picture>
+</a>
+<a href="https://www.tor.com/2023/12/15/terry-pratchett-book-club-wintersmith-part-iii/">Terry Pratchett Book Club: <i>Wintersmith</i>, Part III</a>
+</li>
+</ul>
+<a href="https://www.tor.com/series/" class="widget-view-more-link">all series</a>
+</div>
+<div class="widget"><h2>Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Jeff Wright</span> on <a href="https://www.tor.com/2024/01/10/bet-you-didnt-know-you-could-get-into-this-much-trouble-using-calculus-redux-algernon-blackwoods-a-victim-of-higher-space/comment-page-1/#comment-989788">Bet You Didn&#8217;t Know You Could Get Into This Much Trouble Using Calculus, Redux: Algernon Blackwood&#8217;s &#8220;A Victim of Higher Space&#8221;</a><span class="comment-widget-date"> 5 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Yale Strom</span> on <a href="https://www.tor.com/2014/05/22/a-questionable-view-of-science-stowaway-to-the-mushroom-planet/comment-page-1/#comment-989787">A Questionable View of Science: <em>Stowaway to the Mushroom Planet</em></a><span class="comment-widget-date"> 6 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">chip137</span> on <a href="https://www.tor.com/2024/01/08/fake-candidates-invented-enemies-five-fraudulent-personas-in-classic-sf/comment-page-1/#comment-989784">Fake Candidates, Invented Enemies: Five Fraudulent Personas in Classic SF</a><span class="comment-widget-date"> 10 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">AlanBrown</span> on <a href="https://www.tor.com/2024/01/08/marvels-what-if-season-2-recap-and-review/comment-page-1/#comment-989783">What If Marvel&#8217;s <em>What If&#8230;?</em> Season 2 Gave Us Four Great Episodes, and Five OK Ones?</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Carl</span> on <a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/comment-page-1/#comment-989782"><em>Elantris</em> Reread: Chapters Fifty-One and Fifty-Two</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Kikishua</span> on <a href="https://www.tor.com/2024/01/10/six-sci-fi-femme-fatales-i-would-like-to-take-out-for-a-nice-steak-dinner/comment-page-1/#comment-989781">Six Sci-Fi Femme Fatales I Would Like To Take Out for a Nice Steak Dinner</a><span class="comment-widget-date"> 13 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">Kikishua</span> on <a href="https://www.tor.com/2024/01/04/book-review-saevus-corax-captures-the-castle-by-k-j-parker/comment-page-1/#comment-989780">K.J. Parker Delivers a Strong Sequel With <em>Saevus Corax Captures the Castle</em></a><span class="comment-widget-date"> 14 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">jaimebabb</span> on <a href="https://www.tor.com/2024/01/08/star-trek-enterprise-rewatch-demons/comment-page-1/#comment-989779"><em>Star Trek: Enterprise</em> Rewatch: &#8220;Demons&#8221;</a><span class="comment-widget-date"> 14 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">davep1</span> on <a href="https://www.tor.com/2024/01/11/elantris-reread-chapters-fifty-one-and-fifty-two/comment-page-1/#comment-989778"><em>Elantris</em> Reread: Chapters Fifty-One and Fifty-Two</a><span class="comment-widget-date"> 17 hours ago</span></li><li class="recentcomments"><span class="comment-author-link">J.U.N.O</span> on <a href="https://www.tor.com/2020/10/02/terry-pratchett-book-club-mort-part-iii/comment-page-1/#comment-989777">Terry Pratchett Book Club: <em>Mort</em>, Part III</a><span class="comment-widget-date"> 18 hours ago</span></li></ul><a href="https://www.tor.com/conversations/" class="widget-view-more-link">more comments</a></div><div id="div-gpt-ad-right1" class="dfp-ad dfp-right1">
+<script type="text/javascript">
+		if ( typeof googletag != 'undefined' ) {
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-right1'); });
+		}
+	</script>
+</div>
+</div>
+</div>
+</div>
+<footer id="page-footer">
+<div class="menu-footer-menu-large-container"><ul id="menu-footer-menu-large" class="menu"><li id="menu-item-155053" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155053"><a href="https://www.tor.com/about-us/">About</a></li>
+<li id="menu-item-141444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141444"><a href="https://www.tor.com/submissions-guidelines/">Submissions</a></li>
+<li id="menu-item-141443" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141443"><a href="https://www.tor.com/advertise/">Advertise</a></li>
+<li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-34"><a href="/blog-archive">Archive</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33"><a href="/search-page/">Search</a></li>
+</ul></div> <div class="share-menus">
+<ul class="footer-share menu">
+<li>
+Follow Tor.com </li>
+<li>
+<a target="_blank" href="https://twitter.com/tordotcom">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/tordotcom">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/tordotcompub/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+<li>
+<a href="https://www.tor.com/rss-feeds">
+<i class="icon-rss"></i>
+<span class="assistive-text">RSS</span>
+</a>
+</li>
+</ul>
+<ul class="footer-share german menu">
+<li>
+Follow Tor.com Germany </li>
+<li>
+<a target="_blank" href="http://www.tor-online.de/">
+<i class="icon-home"></i>
+<span class="assistive-text">Tor Germany Home</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://twitter.com/fischertor">
+<i class="icon-twitter-1"></i>
+<span class="assistive-text">Twitter</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.facebook.com/FISCHERTORVERLAG/">
+<i class="icon-facebook-1"></i>
+<span class="assistive-text">Facebook</span>
+</a>
+</li>
+<li>
+<a target="_blank" href="https://www.instagram.com/fischertorverlag/">
+<i class="icon-instagram-1"></i>
+<span class="assistive-text">Instagram</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="menu-footer-menu-small-container"><ul id="menu-footer-menu-small" class="menu"><li id="menu-item-141601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141601"><a href="https://www.tor.com/privacy-notice/">Privacy Policy</a></li>
+<li id="menu-item-757512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-757512"><a href="https://www.tor.com/your-privacy-choices/">Your Privacy Choices</a></li>
+<li id="menu-item-376236" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-376236"><a href="/privacy-notice/#onlinetracking">Ads and Cookies</a></li>
+<li id="menu-item-141602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141602"><a href="https://www.tor.com/terms-of-use/">Terms of Use</a></li>
+<li id="menu-item-141600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141600"><a href="https://www.tor.com/contact-us/">Contact</a></li>
+</ul></div> <span class="copyright">&copy; 2024 Macmillan | All stories, art, and posts are the copyright of their respective authors</span>
+<a href="#" class="mobile back-to-top">Back to top</a>
+</footer>
+</div>
+<style>
+
+footer#page-footer{
+	margin-top: 296px;
+}
+	
+	
+</style>
+<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-3533630-3', 'www.tor.com');
+		  ga('set', 'dimension1', 'post');
+ga('set', 'dimension5', 'A Read of Ice and Fire: A Game of Thrones, Part 1');
+ga('set', 'dimension4', 'A Game of Thrones');
+ga('set', 'dimension7', 'Blog');
+ga('set', 'dimension6', 'A Game of Thrones,A Read of Ice and Fire,A Song of Ice and Fire,books,Fantasy,George R.R. Martin,literary criticism,reading');
+		  ga('require', 'linkid', 'linkid.js');
+		  ga('require', 'displayfeatures');
+		  ga('send', 'pageview');
+		</script>
+<div id="entry-content__footer-popup" class="entry-content__footer-popup">
+<div class="entry-content__footer-popup-content">
+<i class="icon-cancel" title="Close Notification"></i>
+<p id="entry-content__footer-popup-text">
+Our <a href="https://www.tor.com/privacy-notice/" target="_blank">Privacy Notice</a> has been updated to explain how we use cookies, which you accept by continuing to use this website. To withdraw your consent, see <a href="https://www.tor.com/privacy-notice/#yourchoices" target="_blank">Your Choices</a>. </p>
+</div>
+</div>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.tor.com\/2011\/03\/18\/a-read-of-ice-and-fire-a-game-of-thrones-part-1\/":47248};
+	</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-image-cdn/dist/image-cdn.js?minify=false&amp;ver=132249e245926ae3e188" id="jetpack-photon-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/modules/likes/queuehandler.js" id="jetpack_likes_queuehandler-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/core.min.js" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.4.2/wp-includes/js/jquery/ui/effect.min.js" id="jquery-effects-core-js"></script>
+<script type="text/javascript" id="global-js-extra">
+/* <![CDATA[ */
+var tor_wp_vars = {"breakpoints":[{"name":"mobile","width":767},{"name":"desktop","width":9999}],"wp_ajax_url":"https:\/\/www.tor.com\/wp-admin\/admin-ajax.php","static_url":"https:\/\/www.tor.com\/wp-content\/themes\/tor\/static\/","current_url":"https:\/\/www.tor.com\/2011\/03\/18\/a-read-of-ice-and-fire-a-game-of-thrones-part-1","site_domain":"www.tor.com","is_home":false,"is_single":true,"is_user_logged_in":false,"modal":"\n<div class=\"modal-login-form\">\n\t<h2 class=\"login-form-title\">Log in to Tor.com<\/h2>\n\t<form name=\"loginform\" id=\"loginform\" action=\"https:\/\/www.tor.com\/wp-login.php?wpe-login=tormain\" method=\"post\">\n\t\t<input type=\"text\" placeholder=\"username\" name=\"log\" id=\"user\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"password\" placeholder=\"password\" name=\"pwd\" id=\"pass\" class=\"input\" value=\"\" size=\"20\">\n\t\t<input type=\"submit\" name=\"wp-submit\" id=\"wp-submit\" class=\"button-primary\" value=\"Log In\">\n\t\t<a href=\"https:\/\/www.tor.com\/wp-login.php?action=lostpassword\" class=\"forgot-password\">Forgot Password<\/a>\n\t\t<input name=\"rememberme\" type=\"hidden\" id=\"rememberme\" value=\"forever\">\n\t\t<input type=\"hidden\" id=\"redirect_to\" name=\"redirect_to\" value=\"https:\/\/www.tor.com\/2011\/03\/18\/a-read-of-ice-and-fire-a-game-of-thrones-part-1\">\n\t\t<input type=\"hidden\" id=\"login_tracking\" name=\"login_tracking\" value=\"\" \/>\n\t<\/form>\n<\/div>\n","post_id":47248,"protected_content":false,"allow_tinymce":false,"wp_edit_post":"https:\/\/www.tor.com\/wp-admin\/post.php","allow_new_comments":false,"comments_enabled":true,"comments_protected":false,"comment_submit_url":"https:\/\/www.tor.com\/wp-comments-post.php?wpe-comment-post=tormain","is_moderator":false,"current_user":0,"flag_default":"Select a reason:","comment_button_text":{"cancel":"Cancel","update":"Update Comment","submit":"Post Comment","quick":"Quick Reply","preview":"Preview Comment"},"comment_char_limit":{"char_limit":13000,"text":"Character Count","paste_error":"Comments entered must be less than 13,000 characters."},"comment_title_text":{"post":"Post a Comment","edit":"Edit a Comment"},"comment_messages":{"session_expired":"Your session has expired. Please refresh your page.","update_error":"We are sorry. We could not update your comment at this time. Please try again.","preview":"This comment has not yet been published\u2014review or edit your comment below and click &quot;Post Comment&quot; to publish it.","moderation":"Comments must first be approved and published by the moderators before they appear on the site. If your comment does not eventually appear please review our <a href=\"https:\/\/www.tor.com\/moderation-policy\/\">Moderation Policy<\/a> carefully before posting again.","blacklist":"Thank you for posting \u2014 your comment is awaiting approval by an admin.","banned":"You have been banned from commenting.","empty_name_email":"Please fill out both the name and email fields.","empty_comment":"Please fill out the comment field.","empty_recaptcha":"Please complete the CAPTCHA to post your comment.","comment_submitted":"Comment submitted.","duplicate_comment":"This is a duplicate of an existing comment."},"comment_autoload_disabled":false};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.tor.com/wp-content/themes/tor/static/js/global.bundle.js?ver=1.0.74" id="global-js"></script>
+<script type="text/javascript" id="sharing-js-js-extra">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/12.9.1/_inc/build/sharedaddy/sharing.min.js" id="sharing-js-js"></script>
+<script type="text/javascript" id="sharing-js-js-after">
+/* <![CDATA[ */
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-facebook' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-twitter' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-tumblr' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-tumblr' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+						return false;
+					}
+				} );
+			} )();
+/* ]]> */
+</script>
+</body>
+</html>

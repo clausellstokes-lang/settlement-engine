@@ -1,0 +1,740 @@
+Complications in diagnosing lexical meaning: A rejoinder to Horvath and Siloni (2013)
+John Beavers Andrew Koontz-Garboden
+The University of Texas at Austin The University of Manchest er
+jbeavers@mail.utexas.edu andrewkg@manchester.ac.uk
+Abstract
+We respond to Horvath and Siloni’s (2013) continued argumen ts against the reﬂex-
+ivization analysis of anticausatives, which we show suffermany of the same problems
+Beavers and Koontz-Garboden (2013) identiﬁed with the argu ments in Horvath and
+Siloni (2011).
+In Beavers and Koontz-Garboden (2013) (BKG) we point to meth odological, empirical, and con-
+ceptual inadequacies in Horvath and Siloni’s (2011) arguments against the analysis of anticausativiza-
+tion as a reﬂexivization operation, as argued by Chierchia (2004), Beavers and Zubair (2013), and
+particularly Koontz-Garboden (2009). One of BKG’s main poi nts is a methodological one — a
+key task in evaluating claims of semantic unacceptability is ensuring that context is taken into ac-
+count in evaluating the relevant data. As BKG demonstrated r epeatedly, examples that sound odd
+absent a context are instead judged acceptable when appropriate context is supplied. Such observa-
+tions have ramiﬁcations for whether certain acceptability patterns are due to pragmatics vs. lexical
+meaning qua the set of lexical entailments encoded by a given word (following e.g. Dowty 1991).
+BKG conclude that Horvath and Siloni’s (2011) claim that the ir data indicate an absence of re-
+ﬂexive causal meaning in anticausatives is not supported, and that the data instead support such an
+analysis. Despite this, Horvath and Siloni (2013) (HS) suffers from essentially the same problems.
+As such, our overarching point in this rejoinder is the same as in BKG. In what follows we largely
+just point out where these problems arise again, and close byresponding to their assessment of ad-
+vantages of the reﬂexivization analysis over alternativessuch as causer deletion, showing that there
+are key empirical and formal misunderstandings that lead HS again to unsupported conclusions.
+1 Context, acceptability judgements, by itself, and negation
+The problems regarding absence of context in HS are seen most clearly in relation to by itself
+modiﬁcation. BKG (following both Chierchia 2004 and Koontz -Garboden 2009) claim that by
+itself only modiﬁes predicates that lexically encode causal meani ng, including causatives and, we
+argued, anticausatives, but not statives. Underived inchoatives vary depending on whether a given
+inchoative lexicalizes causal meaning. The crux of HS’s (p. 219ff.) counterargument is that this
+predicts by itself modiﬁers to be acceptable with all causatives. However, they note that while
+such modiﬁers are acceptable with causatives with animate subjects, they are less acceptable if the
+subject is inanimate. Consider (1) from Spanish (their (10a,b)) and (2) from Hebrew (their (9a,b)).
+(1) a. El
+the
+viento
+wind
+rompi´o
+broke
+el
+the
+vidrio
+glass
+(??por
+by
+s´ı
+REFL
+solo).
+only
+‘The wind broke the glass by itself.’
+b. El
+the
+calor
+heat
+fundi´o
+melted
+el
+the
+hielo
+ice
+(??por
+by
+s´ı
+REFL
+solo).
+only
+‘The heat melted the ice by itself.’
+(2) a. Ha-ruax
+the-wind
+ˇ savra
+broke
+et
+ACC
+ha-xalon
+the-window
+(??be-acma).
+in-itself
+1
+‘The wind broke the window by itself.’
+b. Ha-xom
+the-heat
+hemes
+elted
+et
+ACC
+ha-kerax
+the-ice
+(??be-acmo).
+in-itself
+‘The heat melted the ice by itself.’
+Thus by itself may not always be available for predicates with causal meaning, calling into question
+BKG’s analysis of this diagnostic. However, this conclusion is not supported by the data. First and
+foremost, the only inanimates given in (1) and (2) are natural forces. We asked one of our Spanish
+speakers about inanimate artifacts withpor s´ı solo, and these are judged to be quite acceptable, e.g.
+(3) is acceptable in a context where the hammer fell from a shelf onto the vase without any explicit
+intervention (as opposed to being manipulated, i.e. being an instrument).
+(3) El
+the
+martillo
+hammer
+rompi´o
+broke
+el
+the
+vaso
+vase
+por
+by
+s´ı
+REFL
+solo.
+only
+‘The hammer broke the vase by itself’
+This suggests that HS’s main empirical point about animacy i s incorrect — it is a fact more nar-
+rowly about natural forces. Furthermore, as is clear from (1 ) and (2), these data are given without
+any context. When we consulted speakers of Spanish and Hebrew respectively, they found the sen-
+tences improve with contrastive focus regarding the causer.1 For example, (1a) is a ﬁne response to
+a question asking whether the wind or the earthquake broke the glass, and (2b) is ﬁne as a response
+to an assertion that both the salt and the heat were responsible for melting the ice. Thus there is no
+fundamental incompatibility with by itself and natural force causer subjects in (1) and (2).
+We suggest that the reason natural forces require a particular context to license by itself modi-
+ﬁers follows from how informative such modiﬁers are for particular predicate/subject combinations
+given that their main function is to clarify sole responsibility when it is in question (R´ akosi 2012:
+193). For anticausatives and causatives with inanimate artifact subjects, by itself modiﬁers clarify
+that the patient/artifact was indeed the causer, when the ex pectation would normally be that they
+were acted upon. For causatives with animate subjects by itself modiﬁers clarify ultimate personal
+responsibility, relevant when human agents are involved (since it is not uncommon that there might
+be many potential agent causers in any given context). But it is unlikely that natural forces would
+be set in action by or act in tandem with other causes (i.e. they are likely to be unique in any given
+context), nor be held responsible in any human sense. Thus itis unsurprising thatby itself modiﬁers
+are pragmatically odd with natural force causers absent some other communicative motivation, like
+contrastive focus. At any rate, HS are correct in noting that BKG’s analysis predicts that (1) and
+(2) should be acceptable — as indeed they are, once the right c ontext is considered. The claimed
+unacceptability is instead an artifact of inadequate elicitation techniques.
+The problem with context is similar in HS’s discussion of negation, and again we ﬁnd that once
+the data they give are properly understood, they provide fur ther evidence for the reﬂexivization
+1Incidentally, the Hebrew speaker we consulted did also reje ct me-acmo/a in (2) (consistent with HS’s (8)). The
+most reasonable explanation for this, we believe, has to do w ith natural forces being relatively agent-like (see e.g.,
+Cruse 1973: 11; Van Valin and Wilkins 1996: 294), and therefo re preferring the agent-oriented be-acmo/a (as dis-
+cussed in Horvath and Siloni 2011 and BKG, p. 204-205). Contr ary to the claim in HS (p. 221), this fact is not
+inconsistent with the reﬂexivization analysis — the two mod iﬁers are simply in a paradigmatic relationship with
+one another, seemingly along the lines of agentivity. So, it seems unsurprising that in clearly non-agentive (i.e. anti -
+causative) environments, one is found, while the other is found in environments that are more agentive.
+2
+analysis. HS (p. 223) incorrectly claim that in BKG we argued against the use of NPIs as a way
+of ensuring that the negation in the negation diagnostic is logical rather than metalinguistic. How-
+ever, this is a misunderstanding of our position in BKG; we continue to believe that the use of NPIs
+is the best way to ensure a logical reading of negation. Our concern was s imply in Horvath and
+Siloni’s (2011) implementation of the diagnostic, which is problematic in several ways. In Hun-
+garian, Horvath and Siloni’s argument relied on negation with preverbal aspectual particles being
+unambiguously metalinguistic. We showed that this is not th e case (nor is negation with postver-
+bal particles unambiguously logical, as we also deﬁnitivel y showed). In the case of Spanish, we
+showed that there are confounding tense and aspect factors that Horvath and Siloni did not control
+for that complicated the judgments. Furthermore, there wer e inconsistencies in which NPIs they
+used with which data, where different NPIs may bring additio nal meaning to bear that is orthog-
+onal to their use in ruling out metalinguistic negation but c omplicates the judgments. Crucially,
+none of these factors invalidate the use of NPIs to rule out me talinguistic negation (although the
+Hungarian observations do invalidate particle position as a control for negation type). Rather, they
+simply must be controlled for when using this diagnostic. On ce they are controlled for, we main-
+tained then and now that NPIs are an effective way of implemen ting the negation diagnostic (see
+our extensive discussion in BKG for further details and empirical justiﬁcation).
+Nonetheless, HS develop a new negation diagnostic that avoi ds using NPIs, which involves
+using negated sentences with “no preceding utterance” (HS, p. 223), building on the idea that
+metalinguistic negation can only arise in response to a prio r utterance and thus ‘out of the blue’
+negation must be logical. Of course, we welcome any new, well -justiﬁed diagnostic, since the
+best support for any argument comes from converging evidenc e. But as with any diagnostic, one
+has to be aware of potentially tangential inferences tied to it that can confound the issue under
+investigation. Here, once again, we suggest that HS have ove rlooked the role of context in a way
+that undermines their argument. In particular, negated sentences uttered ‘out of the blue’ are usually
+unacceptable for purely pragmatic reasons. Consider (4) (a contextually enriched English version
+of their (18)).
+(4) CONTEXT: A and B come upon a child who is bleeding from a cut . A says to B:
+?The child didn’t cut himself.
+While it is true that the negation in (4) is logical rather than metalinguistic, it is difﬁcult to conclude
+anything about the underlying meaning of the verbcut given that the utterance is pragmatically odd
+for unrelated reasons. For example, it violates Grice’s Maxim of Relevance, since it is unclear why
+(4) would be useful information in the given context. It also violates the Maxim of Manner, since
+whatever it is meant to convey is better expressed via some more direct, afﬁrmative assertion.
+So if HS’s proposed diagnostic is to be taken seriously, the r elevant utterance must not be
+pragmatically unacceptable from the outset. For this to be t he case for an utterance conveying the
+negation of a propositionP in the absence of any previous utterance, there must be some reasonable
+expectation (given the nature of the world or speciﬁc contextual knowledge) that if things had been
+operating normally P might have been the case. If this were so, then an utterance co nveying ¬ P
+is relevant and directly informative. For example, (4) is mo re acceptable if the child in question
+is known to cut himself on a regular basis (the utterance then suggesting that something afoul is
+afoot, although there are more direct ways to convey this).
+3
+Building on this, in order for a negated anticausative to be pragmatically felicitous in ‘out of the
+blue’ contexts on the reading relevant for evaluating the reﬂexivization hypothesis, there must be
+a reasonable expectation given the nature of the world or speciﬁc contextual clues that the patient
+will have undergone the change-of-state named by the verb wi thout external intervention. This is
+rarely the case for objects we can imagine that commonly undergo breaking events, so the infelicity
+of (5), HS’s (15), particularly given the poor context givento their consultants, seems unsurprising.
+(5) a. Context: You know that ‘Juan broke the glass’; given th is, would you be lying (or
+incoherent) if you stated [(5b)]?
+b. #No
+NEG
+se
+REFL
+rompi´o
+broke
+el
+the
+vaso.
+glass
+‘The glass didn’t break.’
+Under such circumstances, the default interpretation of (5) will be negation of the change of state,
+which of course gives rise to a contradiction. But this is a fa ct about the nature of objects (that
+we can think of) that undergo breaking events, not about the l exical semantics of the verb itself.
+However, this is not necessarily true for all participants i n events named by anticausatives. For
+example, the earth, particularly in desert-type surroundi ngs, often cracks as part of its natural
+development. As a consequence, if someone encountered sucha crack ‘out of the blue’, they might
+reasonably expect that the earth opened up on its own. In such a context, a denial that this was the
+case will not be pragmatically odd. Crucially, and as predic ted by the reﬂexivization analysis, the
+negation of an anticausative clause meaning “the earth cracked” in Spanish is indeed licit in such
+a context, as shown by (6).
+(6) CONTEXT: There is a large crack in the earth with marks sug gesting that a seismic event
+did not do it, but rather human (or machine) intervention. An observer says:
+La
+the
+tierra
+earth
+no
+didn’t
+se
+SELF
+abri´o.
+open
+Se
+REFL
+notan
+note
+las
+the
+marcas
+marks
+de
+of
+una
+a
+pala
+digger
+mec´anica
+mechanical
+aqu´ı
+here
+y
+and
+aqu´ı.
+here
+Voy
+going.1SG
+a
+to
+encontrar
+ﬁnd.out
+al
+the
+que
+who
+lo
+it
+hizo.
+did
+‘The ground didn’t open. One notes the marks of a mechanical digger here and here. I am
+going to ﬁnd the person who did this.’
+In (6), it cannot be the change-of-state that is being denied, as this would be ﬂatly false in the given
+context. Thus what is instead being denied — via logical nega tion according to HS’s ‘out of the
+blue’ diagnostic — must be causation, which must thus be in th e meaning of the anticausative, as
+predicted by the reﬂexivization analysis.
+By contrast, with negated stative predicates in contexts where the state named by the predicate
+clearly holds and what one wants to deny instead is causation of the state, a sharp contradiction is
+generated, even in the richest of contexts, as in (7), consistent with the received wisdom that such
+predicates lack causative entailments.
+(7) CONTEXT: There is a biology teacher well-known for frigh tening children with spiders
+unnecessarily. The principal and the superintendent of his school district are walking past
+the class one day. They peer into the room and see that the teacher is forcing the children to
+hold huge tarantulas on their heads for a minimum of ﬁve minutes at a time while watching
+4
+a ﬁlm about the virulence of tarantula poison, a ﬁlm which includes images of people dying
+painful deaths after tarantula bites. The children are in hysterics, screaming and crying. The
+principal, worried about the fact that his teacher is making the students fear tarantulas and
+thinking that they need to do something about the situation, says to the superintendent:
+#No
+no
+les
+them
+tienen
+have
+miedo
+fear
+a
+to
+las
+the
+tar´antulas
+tarantulas
+los
+the
+estudiantes.
+students
+Tenemos
+we.must
+que
+that
+castigar
+punish
+al
+the
+maestro.
+teacher
+‘The students do not fear tarantulas. We must punish the teacher.’
+Similarly, with the underived inchoativeempeorar ‘worsen’, even in an enriched context like that in
+(8) in which patients do commonly get worse for unspeciﬁed reasons without external intervention,
+negation yields a clear contradiction, consistent with empeorar not lexically encoding causation.
+(8) CONTEXT: A doctor in a hospital is visiting a patient of hi s, and sees that his condition
+has worsened. He detects signs suggesting that the worsenin g may be a side effect of one
+of the treatments he earlier provided. He say to his colleagues:
+#No
+no
+empeor´o
+worsened
+el
+the
+estado
+state
+del
+of.the
+paciente.
+patient
+Voy
+1SG.go
+a
+to
+encontrar
+ﬁnd.out
+cu´al
+which
+de
+of
+los
+the
+tratamientos
+treatments
+lo
+it
+hizo.
+did
+‘The state of the patient didn’t worsen. I’m going to ﬁnd out which of the treatments did it.’
+Rather, the only reading of (8) is to deny the change-of-stat e, which gives rise to a contradiction
+in the given context. Thus the data from HS’s own diagnostic support anticausatives having causal
+entailments, by contrast with statives and (some) underived inchoatives, which do not.2
+In short, we continue to believe that the best way to implement the negation diagnostic, and to
+rule out the possibility of metalinguistic negation, is to u se an NPI under the appropriate condi-
+tions. HS’s new diagnostic can potentially also rule out met alinguistic negation, but it introduces
+unrelated tangential complications regarding the pragmatic context of use that can lead to infelicity
+for reasons that have nothing to do with the lexical meaning o f the predicate under investigation.
+When these factors are controlled for, HS’s new diagnostic actually provides evidence in support
+of the reﬂexivization analysis of anticausatives. Further more, a deletion analysis as proposed by
+HS would be unable to account for these data, since on that ana lysis there would be no causative
+lexical entailments to be logically negated in anticausati ves, a fact which in turn causes problems
+in capturing the contrast between anticausatives vs. statives and (some) underived inchoatives.
+As a ﬁnal point regarding context and acceptability, we brieﬂy note an additional argument HS
+make about by itself modiﬁers. They suggest that most if not all underived inchoatives actually do
+allow by itself modiﬁers, if the context can be enriched enough to make clear the possibility of
+external causation. Thus (9), which is normally unacceptable, is ﬁne in the given context.
+(9) La
+the
+situaci´on
+situation
+del
+of.the
+paciente
+patient
+empeor´o
+worsened
+por
+by
+s´ı
+REFL
+sola,
+only
+(el
+(the
+m´edico
+doctor
+no
+NEG
+tiene
+has
+la
+the
+culpa).
+fault)
+‘The patient’s situation worsened by itself (it isn’t the doctor’s fault).’ (HS, (6a))
+2HS also discuss additional Hungarian data, using again thei r new diagnostic but also again failing to control
+for context (and they claim to have similar judgments for Heb rew but do not give the data). We have not consulted
+Hungarian or Hebrew speakers on such data, but given the prob lems with HS’s use of the new diagnostic in Spanish,
+we suspect that HS’s data in these other languages is likely also compromised in similar ways.
+5
+HS argue that these data undermine BKG’s claim that there is e ver a distinction between anti-
+causatives and underived inchoatives. Although this is an i nstance where HS laudably do take
+context seriously, the conclusion they draw is a bit of a non-sequitur — as BKG (p. 204) noted, the
+reﬂexivization analysis makes no predictions about underi ved inchoatives, so it is not clear why
+data such as (9) should matter one way or the other. Indeed, fo llowing the logic of this diagnostic
+as outlined in BKG (p. 204), the obvious conclusion from (9) should simply be that sinceempeorar
+occurs with por s´ı soloin at least some contexts, then it must encode causation. Thi s is of course
+entirely compatible with a reﬂexivization analysis of anticausatives since it has nothing to do with
+anticausatives as such (see Koontz-Garboden 2009: 108, fn. 27 and BKG, p. 204 for discussion).
+With that said, however, it turns out that an interesting fac t emerges from the data above —
+that HS were presumably not aware of — that points towards a mo re subtle conclusion than the
+one just suggested. In particular, our speakers who rejected (8) (and other negation diagnostic data
+like it — see BKG, p. 205ff.) in fact accept (9). Taken togethe r, this is an apparent contradiction,
+since (8) (and other negation data like it) suggests that empeorar does not lexicalize causation,
+while the judgment in (9) suggests that it does. Although thi s seems to put the tests at odds, there
+is a simple reconciliation already hinted at by BKG (p. 202, f n.3). In particular, there is still a
+key empirical difference between causatives and anticausa tives vs. (some) underived inchoatives
+and statives, which are also typically unacceptable with by itself modiﬁers: causatives and anti-
+causatives all have uses that allow by itself modiﬁers readily without an enriched thematic context
+like (9), while (some) underived inchoatives require such a context. Why can context improve by
+itself modiﬁers with verbs that otherwise do not allow them and for which other evidence (such as
+(8)) suggests they lack causation in their meaning? A simple answer is that the constraint on by it-
+self modiﬁcation is more general than previously suggested: it is licensed when causation has been
+previously established in the discourse (rather than more narrowly lexically entailed by the modi-
+ﬁed verb, as per Levin and Rappaport Hovav 1995, Chierchia 20 04, and Koontz-Garboden 2009,
+among others). This can be satisﬁed in at least two ways: (i) through lexical content of the modiﬁed
+predicate as with causatives and anticausatives (consistent with earlier approaches cited above) or
+(ii) pragmatically in enriched contexts for predicates tha t do not encode it lexically (building on
+Koontz-Garboden 2007a, Sch¨ afer 2007: 4 and R´ akosi 2012: 193). The empirical difference will
+be the requirement of necessary contextual thematic enrichment. Given the behavior of verbs like
+empeorar ‘worsen’ in other constructions as in (8), and that the rightcontext must be found for its
+use with por s´ı solo, we believe (9) falls into this latter class. Thusempeorar lacks causative lexical
+entailments, even if these can be introduced by other discourse material in ways that satisfy por s´ı
+solo’s requirements.3 Thus a more careful view of the data — and a more nuanced unders tanding
+of what data involving context can tell us — show that the reﬂe xivization analysis is compatible
+with all of these facts.
+The moral, reiterating BKG, is that diagnostics must be applied with care, and one must ensure
+that in cases where a particular utterance is (in)felicitous it is so for the claimed reasons. This means
+not only understanding the relevant meanings of the parts inthe constructions under consideration,
+but also providing appropriate contexts for evaluating examples and understanding why these con-
+texts play the role they do in facilitating acceptability. As we discussed in BKG and further above,
+3See also Jackendoff (1990: 294, fn. 7) for a parallel discuss ion of what he calls “grammatical” vs. “discourse”
+patients, i.e. something that is a patient because it is enta iled by the predicate vs. something that is a patient because
+of particularized discourse contexts, which will have an impact on affectedness tests and thus must be controlled for.
+6
+these contextual issues are key in distinguishing lexical from non-lexical information. When con-
+sultants are asked to evaluate sentences with contexts that are highly underdetermined, the risk
+of running foul of some tangential constraint on use is high; when some otherwise unacceptable
+example can be saved by context, we should ask why that is so. A s in Horvath and Siloni (2011),
+HS’s discussion suffers from methodological problems rela ted to these issues, leading them to
+what we continue to believe is the incorrect conclusion. Once these issues are controlled for, their
+arguments against reﬂexivization are actually arguments in favor of it.
+2 Greek apo
+HS further suggest a previously unnoted prediction of the reﬂexivization analysis in relation to the
+Greek causal adjunctapo (see Koontz-Garboden 2009: 121-122). They state that the “.. . reﬂexivization
+analysis leads us to expect that the causative alternate should be able to occur with apo PPs no less
+than its derived anticausative. The reason for this is that u nder reﬂexivization both the causative
+and the anticausative alternates would have an argument with a Cause role (not only a causal mean-
+ing) present in the clause, so there is no reason why apo should not behave uniformly with regard
+to both.” (HS, p. 228). They provide (10) and (11) suggestingthat this is false.
+(10) a. I
+the
+porta
+door
+espase
+broke
+apo
+from
+ton
+the
+anemo/apo
+wind/from
+tin
+the
+kateyida.
+storm
+The door broke from the wind/from the storm.
+b. I
+the
+porta
+door
+espase
+broke
+apo
+from
+to
+the
+apotomo
+abrupt
+klisimo.
+closing
+The door broke from the abrupt closing.
+(11) a. O
+the
+anemos
+wind
+espase
+broke
+tin
+the
+porta
+door
+(*apo
+from
+tin
+the
+kateyida).
+storm
+The wind broke the door (from the storm).
+b. I
+the
+kateyida
+storm
+espase
+broke
+tin
+the
+porta
+door
+(*apo
+from
+ton
+the
+anemo).
+wind
+The storm broke the door (from the wind).
+We have not veriﬁed these judgements, but simply point out th at the acceptability of (11) is not a
+prediction of the reﬂexivization analysis. Rather, any rea sonable theory of event semantics, such
+as that adopted by Koontz-Garboden (2009), predicts (11) to be unacceptable.4 Koontz-Garboden
+(2009: 105), for example, follows Pi˜ n´ on (2001: 18, fn.9) in his view that although a single event
+can have more than one cause, it cannot have more than one caus e of the same thematic type.
+In the data in (11), both the subject and the apo causer are kinds of natural forces, and thereby
+excluded by this condition. By contrast, with anticausatives like (10), as Koontz-Garboden (2009)
+4An additional example that HS provide is (i) (their (27c)):
+(i) O
+the
+anemos
+wind
+espase
+broke
+tin
+the
+porta
+door
+(*apo
+from
+to
+the
+apotomo
+abrupt
+klisimo).
+closing
+The wind broke the door (from the abrupt closing).
+Again, we have not veriﬁed the judgement, but assuming it is i ndeed unacceptable, we presume it is because there is
+a problem with the causal order of the subject and apo causer. As suggested (implicitly) by Croft (1991: 185), cau ser
+adjuncts other than instrument/means adjuncts should indicate causes that precede rather than follow the subject in the
+causal chain. These are reversed in (i), however, since the wind would cause the closing, and not vice versa.
+7
+discusses and as Beavers and Zubair (2013) provide solid for mal articulation for, although there
+are two causes they are of thematically different types. In t he theory of Beavers and Zubair, for
+example, the undergoer is the effector of a stative causing e ventuality (less formally, something
+about the patient led to the change) while the complement of t he apo PP would be the effector of
+an eventive causing eventuality (some action involving thecauser led to the change). Thus there is
+no incompatibility between them. In sum, contrary to HS’s cl aims, (10) and (11) differ from one
+another in key ways that explain the contrast, once a better a rticulated theory of event semantics
+is worked out. Furthermore, the contrast in acceptability between them is at once tangential to the
+reﬂexivization theory of anticausativization and also consistent with it.
+3 Theoretical and further empirical advantages
+Finally, HS attempt to refute several other claimed advantages of the reﬂexivization analysis, both
+empirical and theoretical. Empirically, as Koontz-Garbod en (2009) and Chierchia (2004) both
+point out, the reﬂexivization analysis of anticausativiza tion makes straightforward sense of the
+wide-spread crosslinguistic syncretism between anticaus ativizing and reﬂexivizing morphology
+(see e.g. Haspelmath 1990). HS (p. 218) rightly point out that, as the data from Haspelmath (1990)
+and Kemmer (1993) show, the same morphemes also commonly mar k middles, reciprocals, and
+passives. They thus conclude that because reﬂexivization is clearly not the right semantic analysis
+for these additional operations it cannot underlie this morphology at all, presumably calling reﬂex-
+ivization into question as the right analysis for anticausa tivization. However, Koontz-Garboden
+(2009: 92, fn. 11) already anticipates such an objection in r elation to the syncretism with passive,
+pointing out that for most languages the arguments showing t hat a particular operation is passive
+rather than anticausative are generally not provided in the ﬁrst place. Still further, even if some
+other uses are passive, HS’s argument is dubious — while the relevant morphology is not categori-
+cally reﬂexive, it certainly allows that reading in the relevant languages for canonical reﬂexives. If it
+is an available interpretation, there is no reason to assumeit cannot also underlie the anticausative.
+Indeed, a reﬂexivization analysis of anticausativization is in fact entirely consistent with the
+syncretism with these other operations. For example, Beavers and Zubair (2013: 30-31) show that
+in Colloquial Sinhala there are two types of anticausatives, one which does not implicate any addi-
+tional causer participant for the change-of-state described by the verb, thus conforming to the stan-
+dard understanding of an inchoative, and the other which cle arly does implicate some additional
+causer participant, giving rise to a passive-like reading d espite not being syntactically passive.
+Beavers and Zubair propose that these two types of anticausa tives can be given a uniﬁed analysis
+by assuming that the operation that derives anticausativessimply strips a causer from the argument
+structure of the verb in question but leaves it in the verb’s l exical semantic content, implemented
+formally as saturation by a free variable. 5 Assuming free variables must receive some interpreta-
+tion, various language-speciﬁc interpretive processes gi ve rise to the two readings: coidentifying
+the underlying causer with the expressed patient subject de rives a reﬂexive and thus canonical
+anticausative reading, while existentially binding the ca user derives a passive-type reading. Thus
+reﬂexive and passive meanings are two outgrowths of a more basic semantic operation.
+Still further, as Beavers and Zubair (2013: 31-32) themselves mention (see also Beavers 2012),
+5There may actually be convergence between HS’s own proposed “deletion” analysis and an analysis consistent
+with the facts supporting reﬂexivization: Beavers and Zubair note that their idea might be construed as at least one kind
+of formal implementation of Reinhart’s (2002) decausativization, also cited by HS, although in Beavers and Zubair’s
+analysis causal meaning is still preserved truth conditionally.
+8
+this analysis could be extended to middles and canonical pas sives if the language-speciﬁc inter-
+pretative rules include other ways of binding the underlying causer. This could include existential
+quantiﬁcation again for various sorts of passives, generic quantiﬁcation for middles, and plural re-
+ﬂexivization qua reciprocalization (straightforward ext ensions of Beavers and Zubair’s analysis).
+Thus there is a unifying underlying generalization that uni tes all the various operations (the free
+variable) but still admits anticausatives as a type of reﬂex ive while also distinguishing those from
+other operations that share the same morphology in terms of the nature of the quantiﬁcational oper-
+ation. This in turn allows that these operations might also be marked differently in some cases, e.g.
+if the morphology has a meaning that includes the speciﬁc quantiﬁcational meaning. It also leads to
+the expectation that anticausativization and reﬂexivizat ion, since they are notional variants of the
+same underlying operation of coidentifying a suppressed ar gument with an expressed argument,
+would most likely be marked identically. This is consistent with the crosslinguistic morphological
+facts — in the survey of Haspelmath (1990: 36) anticausativi zation and reﬂexivization are almost
+always marked identically, whereas the marking of passive,for example, more often diverges from
+them.6 Notwithstanding HS’s protestations, this is expected under the reﬂexivization analysis.
+HS (p. 218–219) also object that a reﬂexivization analysis o f anticausatives cannot explain
+why the reﬂexivization operation that derives anticausatives from causatives with effector subjects
+does not also always apply productively to agent-subject ve rbs to produce a huge class of proper
+reﬂexives. However, BKG (p. 214-215) already addressed thi s, again building on proposals in
+both Koontz-Garboden (2009: 93-96) and Beavers and Zubair ( 2013: 41-42), suggesting that the
+relative productivity of the type of reﬂexive morphology us ed to form anticausatives can only be
+understood by considering the larger system of reﬂexivizat ion in a language, which may include
+other forms (such as long reﬂexives) that speciﬁcally encode “agent act on self” readings and thus
+may block anticausative morphology from operating in some cases (see fn. 6).
+Finally, a higher level issue HS (p. 218; 229–230) bring up is the question of whether an
+analysis of anticausativization that is consistent with th e Montonicity Hypothesis is desirable, as
+Koontz-Garboden (2009) argues. Firstly, they point to an additional empirical phenomenon — de-
+verbal adjective formation — which poses a challenge to Monotonicity, suggesting that it gives rise
+to empirically incorrect predictions in that domain and so must be wrong (independent of the facts
+of anticausativization).7 They then go on to suggest that there is no independent reason to believe
+that Monotonicity should even hold at all. Regarding the iss ue with deverbal adjectives, Koontz-
+Garboden (2010) and Deo et al. (2011) show that there is no argument from deverbal adjectives for
+deletion in the analysis of deverbal adjective formation (contra, e.g., Dubinsky and Simango 1996).
+As with anticausativization, the lexical semantic facts have simply been misunderstood, and once
+they are properly understood, it is in fact shown, as with anticausativization, that a deletion analy-
+sis makes a series of incorrect predictions. As for the second issue, we do not ﬁnd HS’s discussion
+of deletion rules in relation to this issue helpful. We simpl y do not understand what they mean in
+6That said, it is possible that a language could distinguish e ven reﬂexivization and anticausativization on this
+analysis: although they share a core of coidentiﬁcation of a rguments, the thematic roles of the suppressed arguments
+differ in the canonical cases. If a language is sensitive to this it may mark them differently.
+7HS (p. 230) also suggest that result nominals may pose a challenge to Monotonicity. As Koontz-Garboden (2007b:
+288) points out, however, this depends very much on what the direction of derivation is morphologically (in languages
+where this can actually be seen) and what the meaning of result nouns is. Because there has been no typological study
+of the issue that we are aware of, nor is there a sufﬁcient understanding of the lexical semantics of result nominals, we
+think it is far from clear that these are a challenge, though we agree that this remains to be demonstrated.
+9
+saying that lexical representations do not “involve semant ic (λ-)formulas” (HS, p. 230) or what
+the nature of lexical semantics and semantic composition is that their view entails. We would in-
+vite them to implement their ideas model-theoretically, as we have done (Koontz-Garboden 2009,
+Beavers and Zubair 2013), so that it can be better understood what exactly they are proposing.
+We note with some optimism, however, that it may well be, as no ted in fn. 5, that there is a for-
+mal implementation of something akin to their higher-level “deletion” idea that is consistent with
+reﬂexivization (“deletion” of an argument as saturation by an open variable, later bound in some
+way).8 Crucially, however, such an analysis does not entail deletion of any causative lexical entail-
+ments, a welcome result, since the facts in Koontz-Garboden (2009), BKG, and above show that
+the derivation of an inchoative from a causative verb preserves such entailments.
+As for the broader desirability of the Monotonicity Hypothe sis, it may be that it follows from
+independent principles of compositionality (as suggested by Koontz-Garboden 2012, though see
+fn. 8). But even if it does not, the fact is that many theoretic ians across a range of frameworks
+either explicitly or implicitly do theory development on th e assumption that it does actually hold
+(see Koontz-Garboden 2012 for discussion). The point of our discussion, and Koontz-Garboden’s
+(2009, 2010, 2012) more generally, has been to question whether this assumption is actually war-
+ranted by taking it from axiom to falsiﬁable hypothesis and subjecting it to empirical investigation.
+We have so far seen no evidence to suggest it does not hold. Even in the cases where it appears on
+the surface to be violated, as with deverbal adjective forma tion and anticausativization, once the
+lexical semantic facts are properly understood, it is seen that the hypothesis is still well supported.
+Given that examination of difﬁcult cases like anticausativ ization and deverbal adjectives in light
+of the hypothesis has led to the better understanding of the l exical semantics of these phenomena
+in the ﬁrst place, we believe that adopting it as a working hyp othesis has the advantage of leading
+to newer and more subtle empirical predictions in other doma ins as well. Thus its desirability is
+based on the value it has as a working hypothesis, and the deba te herein suggests it has much to
+offer, even if it were ultimately shown to be empirically incorrect in some domain.
+Acknowledgements
+We would like to thank Ricardo Berm´ udez-Otero, Oliver Bond, Itamar Francez, Valia Kordoni,
+and Maria del Mar Bassa Vanrell for general comments and/or their help with various datapoints.
+We especially thank Julia Horvath and Tal Siloni for raising interesting questions that have led to
+a productive debate. We also thank Johan Rooryck for facilitating it.
+References
+Beavers, John. 2012. On non-agentivity and causer suppress ion in Colloquial Sinhala. Paper
+presented at the Workshop on Argument Structure, University of Debrecen, Debrecen, Hungary,
+May 25-27.
+Beavers, John and Andrew Koontz-Garboden. 2013. In defense of the reﬂexivization analysis of
+anticausativization. Lingua 131:199–216.
+Beavers, John and Cala Zubair. 2013. Anticausatives in Sinh ala: Involitivity and causer suppres-
+sion. Natural Language and Linguistic Theory 31:1–46.
+8Beavers (2012) in fact sketches out a way in which HS could achieve the effects of true deletion compositionally
+by constructing the meaning of the anticausative from the gr ound up around the state-denoting root of the causative,
+but not including causation in the event structure. However, while compositionally possible, the facts to date show that
+such an approach is empirically undesirable.
+10
+Chierchia, Gennaro. 2004. A semantics for unaccusatives an d its syntactic consequences. In
+A. Alexiadou, E. Anagnostopoulou, and M. Everaert, eds., The Unaccusativity Puzzle , pages
+22–59. Oxford: Oxford University Press.
+Croft, William. 1991. Syntactic Categories and Grammatical Relations: The Cognitive Organiza-
+tion of Information. Chicago, IL: University of Chicago Press.
+Cruse, D.A. 1973. Some thoughts on agentivity. Journal of Linguistics 9:11–23.
+Deo, Ashwini, Itamar Francez, and Andrew Koontz-Garboden. 2011. The morphosemantics of
+–ed. Paper presented at the workshop Dimensions of Grammar in ho nor of Paul Kiparsky.
+University of Konstanz, August 3, 2011.
+Dowty, David. 1991. Thematic proto-roles and argument selection. Language 67:547–619.
+Dubinsky, Stanley and Silvester Ron Simango. 1996. Passive and stative in Chiche ˆ wa: Evidence
+for modular distinctions in grammar. Language 72(4):749–781.
+Haspelmath, Martin. 1990. The grammaticization of passive morphology. Studies in Language
+14:25–71.
+Horvath, Julia and Tal Siloni. 2011. Anticausatives: Again st reﬂexivization. Lingua 121:2176–
+2186.
+Horvath, Julia and Tal Siloni. 2013. Anticausatives have no cause(r): A rejoinder to Beavers &
+Koontz-Garboden. Lingua 131:217–230.
+Jackendoff, Ray. 1990. Semantic Structures. Cambridge, MA: MIT Press.
+Kemmer, Suzanne. 1993. The Middle Voice. Amsterdam: John Benjamins.
+Koontz-Garboden, Andrew. 2007a. Aspectual coercion and the typology of change of state predi-
+cates. Journal of Linguistics 43:115–152.
+Koontz-Garboden, Andrew. 2007b. States, changes of state, and the Monotonicity Hypothesis .
+Ph.D. thesis, Stanford University, Stanford, CA.
+Koontz-Garboden, Andrew. 2009. Anticausativization. Natural Language and Linguistic Theory
+27:77–138.
+Koontz-Garboden, Andrew. 2010. The lexical semantics of de rived statives. Linguistics and Phi-
+losophy 33:285–324.
+Koontz-Garboden, Andrew. 2012. The monotonicity hypothesis. In L. McNally and V . Demonte,
+eds., Telicity, change, and state: A cross-categorial view of eve nt structure, pages 139–161.
+Oxford: Oxford University Press.
+Levin, Beth and Malka Rappaport Hovav. 1995. Unaccusativity: At the Syntax-Lexical Semantics
+Interface. Cambridge, MA: MIT Press.
+Pi˜ n´ on, Christopher. 2001. A ﬁner look at the causative-in choative alterna-
+tion. In Proceedings of Semantics and Linguistic Theory 11 . Ithaca, NY: Cor-
+nell Linguistics Circle. References to prepublication man uscript on WWW at:
+http://www.phil-fak.uni-duesseldorf.de/˜pinon/papers/flcia.html.
+R´ akosi, Gy¨ orgy. 2012. In defence of the non-causative analysis of anticausatives. In M. Everaert,
+M. Marelj, and T. Siloni, eds., The Theta System , pages 177–199. Oxford: Oxford University
+Press.
+Reinhart, Tanya. 2002. The theta system - an overview. Theoretical Linguistics 28:229–90.
+Sch¨ afer, Florian. 2007. By itself. University of Stuttgart, ms.
+Van Valin, Robert D. and David P. Wilkins. 1996. The case for ‘effector’: Case roles, agents, and
+agency revisited. In M. Shibatani and S. A. Thompson, eds., Grammatical Constructions: Their
+Form and Meaning, pages 289–322. Oxford: Oxford University Press.
+11

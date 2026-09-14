@@ -1,0 +1,1270 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+<title>The Big Idea: Guy Gavriel Kay | Whatever</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<!-- IE Fix for HTML5 Tags -->
+<!--[if lt IE 9]>
+<script src="https://whatever.scalzi.com/wp-content/themes/profile/js/html5shiv.js" type="text/javascript"></script>
+<![endif]-->
+
+<link rel="pingback" href="https://whatever.scalzi.com/xmlrpc.php">
+
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Libre+Baskerville:r,i,b,bi:latin,latin-ext","Abril+Fatface:r:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://whatever.scalzi.com/wp-content/mu-plugins/wpcomsh/vendor/automattic/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active #header .site-title{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active #header .site-title a{font-weight:400;font-style:normal}.wf-active body{font-family:"Libre Baskerville",serif}.wf-active blockquote{font-family:"Libre Baskerville",serif}.wf-active #header .site-description{font-family:"Libre Baskerville",serif}.wf-active #navigation{font-family:"Libre Baskerville",serif}.wf-active .post-date{font-family:"Libre Baskerville",serif}.wf-active .pagination{font-family:"Libre Baskerville",serif}.wf-active .widget_recent_comments table{font-family:"Libre Baskerville",serif}.wf-active #s{font-family:"Libre Baskerville",serif}.wf-active .sidebar #searchsubmit{font-family:"Libre Baskerville",serif}.wf-active .footer{font-family:"Libre Baskerville",serif}.wf-active #comments #respond input#submit, .wf-active #nextLink a, .wf-active #prevLink a, .wf-active #searchsubmit, .wf-active #submit, .wf-active .btn, .wf-active .more-link, .wf-active .reply a, .wf-active a.button, .wf-active form input[type='submit']{font-family:"Libre Baskerville",serif}.wf-active #author, .wf-active #email, .wf-active #url{font-family:"Libre Baskerville",serif}.wf-active #comment{font-family:"Libre Baskerville",serif}.wf-active #cancel-comment-reply-link{font-family:"Libre Baskerville",serif}.wf-active table{font-family:"Libre Baskerville",serif}.wf-active #infinite-footer .container{font-family:"Libre Baskerville",serif}.wf-active #infinite-footer .container{font-family:"Libre Baskerville",serif}.wf-active h1{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active h2{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active h3{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active h4{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active h5{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active h6{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active .headline{font-style:normal;font-weight:400}.wf-active .headline-small{font-style:normal;font-weight:400}.wf-active .headline-archive{font-style:normal;font-weight:400}.wf-active .headline-slide{font-style:normal;font-weight:400}.wf-active .title{font-family:"Abril Fatface",sans-serif;font-weight:400;font-style:normal}.wf-active .headline a, .wf-active .headline-small a{font-weight:400;font-style:normal}.wf-active #comments-title{font-style:normal;font-weight:400}</style>
+<meta name='robots' content='max-image-preview:large' />
+<!-- Jetpack Site Verification Tags -->
+<meta name="google-site-verification" content="lBU8Zf_zA-zCjVtQuDERq77KCiVHy55PzrXYqkvM57Q">
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//fonts-api.wp.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//0.gravatar.com' />
+<link rel='dns-prefetch' href='//1.gravatar.com' />
+<link rel='dns-prefetch' href='//2.gravatar.com' />
+<link rel='preconnect' href='//i0.wp.com' />
+<link rel='preconnect' href='//c0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Whatever &raquo; Feed" href="https://whatever.scalzi.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Whatever &raquo; Comments Feed" href="https://whatever.scalzi.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Whatever &raquo; The Big Idea: Guy Gavriel Kay Comments Feed" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://whatever.scalzi.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwhatever.scalzi.com%2F2025%2F05%2F28%2Fthe-big-idea-guy-gavriel-kay-4%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://whatever.scalzi.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwhatever.scalzi.com%2F2025%2F05%2F28%2Fthe-big-idea-guy-gavriel-kay-4%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='all-css-ce2ac8be8734fe6dd0db5fa93ccca712' href='https://whatever.scalzi.com/wp-content/themes/profile/style.css?m=1757587232' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=https://whatever.scalzi.com/wp-content/plugins/gutenberg/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-search-inline-css">
+.wp-block-search__button{margin-left:10px;word-break:normal}.wp-block-search__button.has-icon{line-height:0}.wp-block-search__button svg{fill:currentColor;height:1.25em;min-height:24px;min-width:24px;vertical-align:text-bottom;width:1.25em}:where(.wp-block-search__button){border:1px solid #ccc;padding:6px 10px}.wp-block-search__inside-wrapper{display:flex;flex:auto;flex-wrap:nowrap;max-width:100%}:where(.wp-block-search__label){width:100%}.wp-block-search.wp-block-search__button-only .wp-block-search__button{box-sizing:border-box;display:flex;flex-shrink:0;justify-content:center;margin-left:0;max-width:100%}.wp-block-search.wp-block-search__button-only .wp-block-search__inside-wrapper{min-width:0!important;transition-property:width}.wp-block-search.wp-block-search__button-only .wp-block-search__input{flex-basis:100%;transition-duration:.3s}.wp-block-search.wp-block-search__button-only.wp-block-search__searchfield-hidden,.wp-block-search.wp-block-search__button-only.wp-block-search__searchfield-hidden .wp-block-search__inside-wrapper{overflow:hidden}.wp-block-search.wp-block-search__button-only.wp-block-search__searchfield-hidden .wp-block-search__input{border-left-width:0!important;border-right-width:0!important;flex-basis:0;flex-grow:0;margin:0;min-width:0!important;padding-left:0!important;padding-right:0!important;width:0!important}:where(.wp-block-search__input){-webkit-appearance:initial;-moz-appearance:initial;appearance:none;border:1px solid #949494;flex-grow:1;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;margin-left:0;margin-right:0;min-width:3rem;padding:8px;text-decoration:unset!important;text-transform:inherit}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper){background-color:#fff;border:1px solid #949494;box-sizing:border-box;padding:4px}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input{border:none;border-radius:0;padding:0 4px}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input:focus{outline:none}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) :where(.wp-block-search__button){padding:4px 8px}.wp-block-search.aligncenter .wp-block-search__inside-wrapper{margin:auto}.wp-block[data-align=right] .wp-block-search.wp-block-search__button-only .wp-block-search__inside-wrapper{float:right}
+/*# sourceURL=https://whatever.scalzi.com/wp-content/plugins/gutenberg/build/styles/block-library/search/style.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=https://whatever.scalzi.com/wp-content/plugins/gutenberg/build/styles/block-library/classic.min.css */
+</style>
+
+<link rel='stylesheet' id='all-css-c90078a2f33119b75e118060feb3cd0b' href='https://whatever.scalzi.com/wp-content/mu-plugins/wpcomsh/vendor/automattic/text-media-widget-styles/css/widget-text.css?m=1788542353' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<style id="jetpack-stats-inline-css">
+img#wpstats{display:none}
+/*# sourceURL=jetpack-stats-inline-css */
+</style>
+<link rel='stylesheet' id='dashicons-css' href='https://whatever.scalzi.com/wp-includes/css/dashicons.min.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='all-css-35941d74e7573da5ea1cb3a8ec3a0cef' href='https://whatever.scalzi.com/_static/??-eJyNjkEOgjAQRS9kGU0wsjFuSDyAJ4B2wAntTMOUEDy9DbhygS7//Jf3Z47GCifkBNFPPbFCP+XY4thDO5F3oGnxqJCeGBAcKvVskgzIWgTiwqoe5r8tVkIUzqBulz2FldaLHRSIrZ/yMtQYkR2ypRzuUjfOLfDYzNuMbxJq+jauvyvEUTryaNQ2/kWfB3bRjTFBWvqJ5ha6XJlmRpWw4rdwPV2qqizPx6p6A3KHioY=' type='text/css' media='all' />
+<style id="jetpack_likes-inline-css">
+#jp-post-flair{padding-top:.5em}#content div.sharedaddy,#main div.sharedaddy,div.sharedaddy{clear:both}div.sharedaddy h3.sd-title{display:inline-block;font-size:9pt;font-weight:700;line-height:1.2;margin:0 0 1em}div.sharedaddy h3.sd-title:before{border-top:1px solid #dcdcde;content:"";display:block;margin-bottom:1em;min-width:30px;width:100%}div.jetpack-likes-widget-wrapper{min-height:50px;position:relative;width:100%}div.jetpack-likes-widget-wrapper .sd-link-color{font-size:12px}div.jetpack-comment-likes-widget-wrapper{min-height:31px;position:relative;width:100%}div.jetpack-comment-likes-widget-wrapper iframe{margin-bottom:0}#likes-other-gravatars{background-color:#fff;border:1px solid #dcdcde;border-radius:4px;box-shadow:none;display:none;height:auto;max-height:240px;min-width:220px;overflow:auto;padding:9px 12px 10px;position:absolute;z-index:1000}#likes-other-gravatars *{line-height:normal}#likes-other-gravatars .likes-text{color:#101517;font-size:12px;font-weight:500;padding-bottom:8px}#likes-other-gravatars :is(li,ul){list-style-type:none;margin:0;padding:0;text-indent:0}#likes-other-gravatars li:before{content:""}#likes-other-gravatars ul.wpl-avatars{display:block;max-height:190px;overflow:auto}#likes-other-gravatars ul.wpl-avatars li{float:none;height:28px;margin:0 0 4px;width:196px}#likes-other-gravatars ul.wpl-avatars li a{align-items:center;border-bottom:none!important;display:flex;gap:8px;margin:0 2px 0 0;text-decoration:none}#likes-other-gravatars ul.wpl-avatars li a span{color:#2c3338;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#likes-other-gravatars ul.wpl-avatars li a img{background:none;border:none;border-radius:50%;box-sizing:border-box;margin:0!important;padding:1px!important;position:static}div.sd-box{border-top:1px solid #00000021}.jetpack-likes-widget-loaded iframe,.jetpack-likes-widget-loading .likes-widget-placeholder,.jetpack-likes-widget-unloaded .likes-widget-placeholder{display:block}.jetpack-likes-widget-loaded .likes-widget-placeholder,.jetpack-likes-widget-loading iframe,.jetpack-likes-widget-unloaded iframe{display:none}.comment-likes-widget,.entry-content .post-likes-widget,.post-likes-widget{border-width:0;margin:0}.comment-likes-widget-placeholder,.post-likes-widget-placeholder{border-width:0;margin:0;position:relative}.comment-likes-widget-placeholder{display:flex;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;height:18px;position:absolute}.comment-likes-widget-placeholder:before{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath fill='%232ea2cc' d='m12 2 2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:16px 16px;color:#2ea2cc;content:"";display:inline-block;height:16px;padding-right:5px;position:relative;top:3px;width:16px}.post-likes-widget-placeholder .button{display:none}:is(.comment-likes-widget-placeholder,.post-likes-widget-placeholder) .loading{color:#999;font-size:12px}.comment-likes-widget-placeholder .loading{align-self:center;color:#4e4e4e;margin-top:4px;padding-left:5px}div.sharedaddy.sd-like-enabled .sd-like h3{display:none}div.sharedaddy.sd-like-enabled .sd-like .post-likes-widget{float:none;position:absolute;top:0;width:100%}.comment-likes-widget{width:100%}.cs-rating,.pd-rating{display:block!important}.sd-gplus .sd-title{display:none}@media print{.jetpack-likes-widget-wrapper{display:none}}
+/*# sourceURL=https://whatever.scalzi.com/wp-content/plugins/jetpack/_inc/build/likes/style.min.css */
+</style>
+<link rel='stylesheet' id='profile-fonts-css' href='https://fonts-api.wp.com/css?family=Open+Sans:400,300,600,700,800,800italic,700italic,600italic,400italic,300italic|Merriweather:400,700,300,900|Pacifico&#038;subset=latin,latin-ext,latin,latin-ext,latin' media='all' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link rel='stylesheet' id='all-css-d702c216bf892b490f15eef0aa61916b' href='https://whatever.scalzi.com/_static/??wp-content/plugins/jetpack/modules/sharedaddy/sharing.css,wp-content/plugins/jetpack/_inc/build/social-logos/social-logos.css?m=1784576016' type='text/css' media='all' />
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://whatever.scalzi.com/wp-content/mu-plugins/wpcomsh/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script id="jquery-core-js" src="https://whatever.scalzi.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script type='text/javascript'  src='https://whatever.scalzi.com/_static/??-eJwrL9DNzEvOKU1JLdbPAqLC0tSiSiilm5uZXpRYkqqXm5mnl1WsU16gm5yfV5KaV6JfkpGaC9RRUJSflpmTCtKZkV+WWuQJliWotri0ILUoLbM4g6BKiEP00jJLwjJTioHK7XNtDc0szIwsLM3NTAD5j0bD'></script>
+
+<!-- Google tag (gtag.js) snippet added by Site Kit -->
+<!-- Google Analytics snippet added by Site Kit -->
+<script id="google_gtagjs-js" src="https://www.googletagmanager.com/gtag/js?id=G-1PKYK0Z2YY" async></script>
+<script id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag("set","linker",{"domains":["whatever.scalzi.com"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "G-1PKYK0Z2YY");
+ window._googlesitekit = window._googlesitekit || {}; window._googlesitekit.throttledEvents = []; window._googlesitekit.gtagEvent = (name, data) => { var key = JSON.stringify( { name, data } ); if ( !! window._googlesitekit.throttledEvents[ key ] ) { return; } window._googlesitekit.throttledEvents[ key ] = true; setTimeout( () => { delete window._googlesitekit.throttledEvents[ key ]; }, 5 ); gtag( "event", name, { ...data, event_source: "site-kit" } ); }; 
+//# sourceURL=google_gtagjs-js-after
+</script>
+<link rel="https://api.w.org/" href="https://whatever.scalzi.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://whatever.scalzi.com/wp-json/wp/v2/posts/55841" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://whatever.scalzi.com/xmlrpc.php?rsd" />
+
+<link rel="canonical" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/" />
+<link rel='shortlink' href='https://wp.me/p5Fv-ewF' />
+<meta name="generator" content="Site Kit by Google 1.186.0" /><style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0 !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0 0 1px 0;
+				margin: 0;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0 0 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0 10px 2px 0;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0 0 0 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0 10px 0 0;
+			}
+		</style>
+		<meta name="description" content="Author Guy Gavriel Kay believes that sometimes, summarizing a book can be a disservice to it. So how do you talk about your novel in a way that encapsulates everything you want it to, without giving away too much, and while keeping the reader hooked? Follow along in the Big Idea for his newest novel, Written&hellip;" />
+<style id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The Big Idea: Guy Gavriel Kay" />
+<meta property="og:url" content="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/" />
+<meta property="og:description" content="Author Guy Gavriel Kay believes that sometimes, summarizing a book can be a disservice to it. So how do you talk about your novel in a way that encapsulates everything you want it to, without givin…" />
+<meta property="article:published_time" content="2025-05-28T16:42:28+00:00" />
+<meta property="article:modified_time" content="2025-05-28T16:42:28+00:00" />
+<meta property="og:site_name" content="Whatever" />
+<meta property="og:image" content="https://live.staticflickr.com/65535/54552065320_51e0fc8161_c.jpg" />
+<meta property="og:image:width" content="530" />
+<meta property="og:image:height" content="800" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="The Big Idea: Guy Gavriel Kay" />
+<meta name="twitter:image" content="https://live.staticflickr.com/65535/54552065320_51e0fc8161_c.jpg?w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://i0.wp.com/whatever.scalzi.com/wp-content/uploads/2020/12/cropped-whateverfavicon.jpg?fit=32%2C32&#038;ssl=1" sizes="32x32" />
+<link rel="icon" href="https://i0.wp.com/whatever.scalzi.com/wp-content/uploads/2020/12/cropped-whateverfavicon.jpg?fit=192%2C192&#038;ssl=1" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://i0.wp.com/whatever.scalzi.com/wp-content/uploads/2020/12/cropped-whateverfavicon.jpg?fit=180%2C180&#038;ssl=1" />
+<meta name="msapplication-TileImage" content="https://i0.wp.com/whatever.scalzi.com/wp-content/uploads/2020/12/cropped-whateverfavicon.jpg?fit=270%2C270&#038;ssl=1" />
+<style type="text/css" id="wp-custom-css">/*
+Welcome to Custom CSS!
+
+To learn how this works, see https://wp.me/PEmnE-Bt
+*/
+.bypostauthor {
+	background: #DAF0D5 url('https://whatever.scalzi.com/wp-content/uploads/2020/07/js2020c.jpg') repeat;
+	background-attachment: fixed;
+}
+
+.profile-singular.profile-relative-text .postarea {
+	color: #000;
+}
+
+.menu li {
+	display: none;
+	position: relative;
+}
+
+.site-title {
+	display: block;
+	font-size: 4.6em;
+	font-weight: 400;
+	text-shadow: 0 0 8px rgba(0,0,0,.4);
+	text-transform: none;
+	letter-spacing: -1px;
+	line-height: 1.6;
+	padding: 0;
+	margin: 0;
+}
+
+.widget.widget_text {
+	word-wrap: break-word;
+	font-size: .9em;
+}
+
+.widget ul li {
+	display: block;
+	background: 0 0;
+	line-height: 2;
+	margin: 8px 0;
+	padding: 0;
+	font-size: .9em;
+	overflow: hidden;
+}</style><!-- Your Google Analytics Plugin is missing the tracking ID -->
+
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input{width:95%}.comment-subscription-form{margin-bottom:1em}.comment-subscription-form .subscribe-label{display:inline!important}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;overflow-wrap:normal!important;padding:0;position:absolute!important;width:1px}
+/*# sourceURL=https://whatever.scalzi.com/wp-content/plugins/jetpack/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-55841 single-format-standard custom-background wp-theme-profile wp-child-theme-profile-scalzi profile-singular profile-right-sidebar profile-sidebar-active profile-relative-text">
+
+<!-- BEGIN #wrap -->
+<div id="wrap">
+
+	<!-- BEGIN #header -->
+	<div id="header"  style="background-image: url('https://whatever.scalzi.com/wp-content/uploads/2021/10/cropped-PXL_20211029_154805902.jpg');">
+
+		<!-- BEGIN .row -->
+		<div class="row">
+			
+							<div id="masthead">
+					<h1 class="site-title"><span><a href="https://whatever.scalzi.com/" title="Whatever" rel="home">Whatever</a></span></h1>
+					<h2 class="site-description">DIGITAL CONTENT FROM ANALOG PEOPLE</h2>
+				</div>
+			
+		<!-- END .row -->
+		</div>
+
+		<!-- BEGIN #navigation -->
+		<nav id="navigation" class="navigation-main " role="navigation">
+
+			<span class="menu-toggle">Menu</span>
+
+			<div class="menu"><ul>
+<li ><a href="https://whatever.scalzi.com/">Home</a></li><li class="page_item page-item-2 page_item_has_children"><a href="https://whatever.scalzi.com/about/">About</a>
+<ul class='children'>
+	<li class="page_item page-item-83"><a href="https://whatever.scalzi.com/about/a-brief-biography-of-john-scalzi/">A Brief Biography of John Scalzi</a></li>
+	<li class="page_item page-item-86"><a href="https://whatever.scalzi.com/about/interviews-appearances-articles-and-etc/">Availability for Interviews, Appearances, Writing Work and Optioning Existing Work</a></li>
+	<li class="page_item page-item-9125"><a href="https://whatever.scalzi.com/about/books-by-john-scalzi/">Books and Other Projects by John Scalzi</a></li>
+	<li class="page_item page-item-87"><a href="https://whatever.scalzi.com/about/contact-information/">Contact Information</a></li>
+	<li class="page_item page-item-85"><a href="https://whatever.scalzi.com/about/publicity-blurb-and-unpublished-work-guidelines/">Guidelines for Publicity, Blurbing, Unpublished Work, Story Ideas, Social Media Boosting, Guest Blogging, Charitable Solicitations, Autographing, Educational Use and School Assignments</a></li>
+	<li class="page_item page-item-653"><a href="https://whatever.scalzi.com/about/scheduled-appearances/">Scheduled Appearances</a></li>
+	<li class="page_item page-item-84"><a href="https://whatever.scalzi.com/about/site-disclaimer-and-comment-policy/">Site Disclaimer, Comment, Privacy and &#8220;AI&#8221; Policy</a></li>
+	<li class="page_item page-item-1696"><a href="https://whatever.scalzi.com/about/the-canonical-bacon-page/">The Canonical Bacon Page</a></li>
+	<li class="page_item page-item-94"><a href="https://whatever.scalzi.com/about/the-scalzi-creative-sampler/">The Scalzi Creative Sampler</a></li>
+</ul>
+</li>
+<li class="page_item page-item-46199"><a href="https://whatever.scalzi.com/scalzi-enterprises-%c2%b7-the-scalzi-family-foundation/">Scalzi Enterprises · The Scalzi Family Foundation</a></li>
+</ul></div>
+
+		</nav><!-- END #navigation -->
+
+		
+	<!-- END #header -->
+	</div>
+
+<!-- BEGIN .container -->
+<div class="container">
+
+	<!-- BEGIN .row -->
+	<div class="row">
+
+		<!-- BEGIN .eight columns -->
+		<div class="eight columns">
+	        <!-- BEGIN .postarea -->
+<div class="postarea">
+
+	
+	<h1 class="headline text-center">The Big Idea: Guy Gavriel Kay</h1>
+
+	
+		<p class="post-date text-center">
+		<span>
+			<i class="icon-time"></i>
+			Posted on			<a class="post-date-link" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/" rel="bookmark">May 28, 2025</a>
+			&nbsp;&nbsp;
+			Posted by			<a href="https://whatever.scalzi.com/author/athenascalzi/" rel="author">Athena Scalzi</a>							&nbsp;&nbsp;
+				<i class="icon-comment"></i> &nbsp;<a class="post-comment-link" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comments">
+				8 Comments</a>		</span>
+	</p>
+	<p><img data-recalc-dims="1" fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://i0.wp.com/live.staticflickr.com/65535/54552065320_51e0fc8161_c.jpg?resize=530%2C800&#038;ssl=1" width="530" height="800" /></p>
+<p><strong>Author <a href="https://brightweavings.com/">Guy Gavriel Kay</a> believes that sometimes,</strong> summarizing a book can be a disservice to it. So how do you talk about your novel in a way that encapsulates everything you want it to, without giving away too much, and while keeping the reader hooked? Follow along in the Big Idea for his newest novel, <a href="https://www.penguinrandomhouse.com/books/783078/written-on-the-dark-by-guy-gavriel-kay/"><em>Written on the Dark</em></a>, to see how it&#8217;s done.</p>
+<p><strong>GUY GAVRIEL KAY:</strong></p>
+<p><i><span style="font-weight: 400;">So, GGK, what&#8217;s the new book about, eh?</span></i></p>
+<p><span style="font-weight: 400;">Ah, anonymous interviewer, are you so tired of life, that you ask this of me? Understand in your bones and marrow that I am truly Canadian. I can summon Canada geese to deal with you. You really don&#8217;t want that to happen, trust me.</span></p>
+<p><i><span style="font-weight: 400;">Say what? I don&#8217;t understand —</span></i></p>
+<p><span style="font-weight: 400;">Of course you don&#8217;t. All right, let&#8217;s try this. Some of us (well, me?) take the considered view that </span><i><span style="font-weight: 400;">War and Peace</span></i><span style="font-weight: 400;"> or </span><i><span style="font-weight: 400;">The Lord of the Rings </span></i><span style="font-weight: 400;">or </span><i><span style="font-weight: 400;">Song of Solomon</span></i><span style="font-weight: 400;"> can be made to sound trivial, silly, shallow if boiled down to a paragraph&#8217;s worth of sound bite. Some of us (me!) also know that&#8217;s the Way of the World today for books, pitching a novel as a vibe, or as &#8216;The Godfather meets Ted Lasso!&#8217;, to make it easily grasped.</span></p>
+<p><span style="font-weight: 400;">[Pause for someone to say &#8216;I&#8217;d read/watch the shit out of that!&#8217;]</span></p>
+<p><span style="font-weight: 400;">[OK, fine, you can say it too, John. You know you want to.]</span></p>
+<p><span style="font-weight: 400;">Truth is, I&#8217;ve always felt that nothing I&#8217;ve ever written has one single Big Idea.  (</span><i><span style="font-weight: 400;">Tigana</span></i><span style="font-weight: 400;"> is probably closest.) I&#8217;m focused on complicating things, multiple ideas, on nuance, on letting readers decide what </span><i><span style="font-weight: 400;">they</span></i><span style="font-weight: 400;"> find in or take away from a book. (That&#8217;s gonna happen anyhow, might as well embrace it!) But as every release date nears (May 27th in US/Canada, 29th in UK, for </span><i><span style="font-weight: 400;">Written on the Dark) </span></i><span style="font-weight: 400;">I know I need to prep some sort of answer as the tour and online interviews begin. </span></p>
+<p><span style="font-weight: 400;">Or also, you know, write a short essay, as here. (Thanks, John.) Because just about every interviewer (see top of this essay) is going to ask, given that a) it&#8217;s a fair question and b) it is an easy question to ask.</span></p>
+<p><span style="font-weight: 400;">Problem is, like Canada geese, I </span><i><span style="font-weight: 400;">will</span></i><span style="font-weight: 400;"> protect my young (the book!). That means pushing back against oversimplifying and trying not to distort the story myself with a flippant summary, or even a serious (but too fast!) one. </span></p>
+<p><span style="font-weight: 400;">But here&#8217;s something I </span><i><span style="font-weight: 400;">can</span></i><span style="font-weight: 400;"> say that&#8217;s more than a vibe and honestly reflects some things I think as to writing about history and how the past plays in terms of today — which </span><i><span style="font-weight: 400;">is</span></i><span style="font-weight: 400;"> what I like to do, and what I did in this book.</span></p>
+<p><span style="font-weight: 400;">A wise man who was not Mark Twain wrote that history may not repeat, but it rhymes. (His name was Theodore Reik and he was a psychoanalyst — make of that what you will — but it always seems to be credited to Twain.) I share that thought. I write with that idea in mind. It is one of many reasons why most of my books take place in a not-quite past, with many different settings, under two moons. What one reviewer called &#8216;history with a quarter-turn to the fantastic.&#8217; If I do it right, this use of the fantastic — because we are not quite </span><i><span style="font-weight: 400;">here</span></i><span style="font-weight: 400;">, because there are elements of the supernatural — causes reader and author to share with each other that we are, indeed, </span><i><span style="font-weight: 400;">rhyming</span></i><span style="font-weight: 400;"> with the past, not trying to pin the present down with it precisely. </span></p>
+<p><i><span style="font-weight: 400;">Written on the Dark</span></i><span style="font-weight: 400;"> is inspired by France (and Burgundy, and England, and Italy) during the Hundred Years&#8217; War of the 14th and well into the 15th century. It takes its cue, its opening scenes, from the assassination of a very important figure in the city of Orane, which is fairly close to being Paris. (Parts of the book are something of a love letter to Paris, actually.) Its main protagonist is modeled on the celebrated tavern poet, possible murderer and certain thief, François Villon, who is likely best known for asking in a verse, &#8216;Where are the snows of yesteryear?&#8217;  My version of the poet, Thierry Villar, gets entangled in the investigation of the assassination at the start of the book. Why? Well, gosh, there&#8217;s a novel that answers that. I, er, wrote it!</span></p>
+<p><span style="font-weight: 400;">But here&#8217;s where the idea of, well a Big Idea meets the notion of the past rhyming with the present. I became interested in thinking about people who are just too powerful to be made to face the law. Where the risk to those who might try to pursue justice can cause them to decide that their duty to family, city, even to a turbulent, endangered country, should perhaps lead them </span><i><span style="font-weight: 400;">away</span></i><span style="font-weight: 400;"> from that investigation. These fears, and moral quandaries, and political realities, are part of the book.</span></p>
+<p><span style="font-weight: 400;">A bit of a rhyme with today, you think? With America, and several other countries right now? Well, yes. But here&#8217;s the thing: I began writing the book two years ago, after my usual period of research. Its themes started emerging for me back then, not in the current circumstances of the world. And that, I suppose, might be a big idea for me&#8230;that events in our time have antecedents in so many periods and places. That themes of power and justice (and of tavern poets and power, and of women and finding a space for themselves and their desires in the world) are always with us, in one form or another. </span></p>
+<p><span style="font-weight: 400;">You can write about yesterday&#8217;s snows — or the snows of an almost-yesterday — and say things that might resonate for readers as they look up from the page at their own time. I want people reading in my books about people they come to care for, set in a world essentially 600 years ago — and also thinking about &#8230; well, about right now. Not for </span><i><span style="font-weight: 400;">lessons</span></i><span style="font-weight: 400;">! I&#8217;m offering a story not giving a lecture. But as John indicates on this blog, with the very concept of these guest posts: novels do have room for substantial ideas too. Page turners can have us thinking: as we read, and after we&#8217;re finished.</span></p>
+<p><span style="font-weight: 400;">I suppose this feeling lies behind every book I&#8217;ve ever written. That the snows of yesteryear have never gone away. Where are they, François Villon asked in a poem. They are right here with us, I&#8217;ll answer, in stories we can tell, and read. </span></p>
+<p><span style="font-weight: 400;">A friend wrote me this spring after reading an advance copy of this newest novel that &#8216;maybe every book you&#8217;ve done has been written on the dark, trying to find the light.&#8217;</span></p>
+<p><span style="font-weight: 400;">I&#8217;ll live with that.</span></p>
+<hr />
+<p><strong>Written on the Dark: </strong><a href="https://www.amazon.com/gp/product/0593953983?tag=randohouseinc7986-20">Amazon</a>|<a href="https://www.barnesandnoble.com/w/written-on-the-dark-guy-gavriel-kay/1146224707;jsessionid=7ED145E970EBCFFD0659AE10FD025641.prodny_store01-atgap13?ean=9780593953983&amp;st=AFF&amp;2sid=Random%20House%20Inc_8373827_NA&amp;sourceId=AFFRandom%20House%20Inc">Barnes &amp; Noble</a>|<a href="https://www.booksamillion.com/p/9780593953983?cjdata=MXxOfDB8WXww&amp;AID=10747236&amp;PID=8373827&amp;SID=PRHEFFDF5A7F1--9780593953983&amp;cjevent=e70aca2f3be011f083bf00ae0a82b824">BAM</a>|<a href="https://bookshop.org/a/2186/9780593953983?prhc=PRHEFFDF5A7F1">Bookshop</a>|<a href="https://www.powells.com/book/-9780593953983?utm_source=randomhouse&amp;utm_campaign=randomhouse&amp;utm_content=PRHEFFDF5A7F1--9780593953983">Powell&#8217;s</a></p>
+<p><strong>Guy Gavriel Kay: </strong><a href="https://brightweavings.com">Website</a>|<a href="https://bsky.app/profile/guygavrielkay.bsky.social">Bluesky</a>|<a href="https://www.instagram.com/guygavrielkay/?hl=en">Instagram</a></p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share:</h3><div class="sd-content"><ul><li class="share-bluesky"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-bluesky-55841"
+				class="share-bluesky sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=bluesky"
+				target="_blank"
+				aria-labelledby="sharing-bluesky-55841"
+				>
+				<span id="sharing-bluesky-55841" hidden>Share on Bluesky (Opens in new window)</span>
+				<span>Bluesky</span>
+			</a></li><li class="share-threads"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-threads-55841"
+				class="share-threads sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=threads"
+				target="_blank"
+				aria-labelledby="sharing-threads-55841"
+				>
+				<span id="sharing-threads-55841" hidden>Share on Threads (Opens in new window)</span>
+				<span>Threads</span>
+			</a></li><li class="share-mastodon"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-mastodon-55841"
+				class="share-mastodon sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=mastodon"
+				target="_blank"
+				aria-labelledby="sharing-mastodon-55841"
+				>
+				<span id="sharing-mastodon-55841" hidden>Share on Mastodon (Opens in new window)</span>
+				<span>Mastodon</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-55841"
+				class="share-facebook sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-55841"
+				>
+				<span id="sharing-facebook-55841" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-reddit-55841"
+				class="share-reddit sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=reddit"
+				target="_blank"
+				aria-labelledby="sharing-reddit-55841"
+				>
+				<span id="sharing-reddit-55841" hidden>Share on Reddit (Opens in new window)</span>
+				<span>Reddit</span>
+			</a></li><li class="share-linkedin"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-linkedin-55841"
+				class="share-linkedin sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=linkedin"
+				target="_blank"
+				aria-labelledby="sharing-linkedin-55841"
+				>
+				<span id="sharing-linkedin-55841" hidden>Share on LinkedIn (Opens in new window)</span>
+				<span>LinkedIn</span>
+			</a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-pinterest-55841"
+				class="share-pinterest sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=pinterest"
+				target="_blank"
+				aria-labelledby="sharing-pinterest-55841"
+				>
+				<span id="sharing-pinterest-55841" hidden>Share on Pinterest (Opens in new window)</span>
+				<span>Pinterest</span>
+			</a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-tumblr-55841"
+				class="share-tumblr sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=tumblr"
+				target="_blank"
+				aria-labelledby="sharing-tumblr-55841"
+				>
+				<span id="sharing-tumblr-55841" hidden>Share on Tumblr (Opens in new window)</span>
+				<span>Tumblr</span>
+			</a></li><li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-whatsapp-55841"
+				class="share-jetpack-whatsapp sd-button share-icon no-text"
+				href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=jetpack-whatsapp"
+				target="_blank"
+				aria-labelledby="sharing-whatsapp-55841"
+				>
+				<span id="sharing-whatsapp-55841" hidden>Share on WhatsApp (Opens in new window)</span>
+				<span>WhatsApp</span>
+			</a></li><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-55841"
+				class="share-email sd-button share-icon no-text"
+				href="mailto:?subject=%5BShared%20Post%5D%20The%20Big%20Idea%3A%20Guy%20Gavriel%20Kay&#038;body=https%3A%2F%2Fwhatever.scalzi.com%2F2025%2F05%2F28%2Fthe-big-idea-guy-gavriel-kay-4%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-55841"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="a3e07f4c06" data-email-share-track-url="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/?share=email">
+				<span id="sharing-email-55841" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-21793-55841-6a9dab29bb894' data-src='https://widgets.wp.com/likes/?ver=16.2-a.5#blog_id=21793&amp;post_id=55841&amp;origin=whatever.scalzi.com&amp;obj_id=21793-55841-6a9dab29bb894' data-name='like-post-frame-21793-55841-6a9dab29bb894' data-title='Like or Reblog'><h3 class="sd-title">Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading"><svg class="jetpack-spinner" width="18" height="18" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg><span class="screen-reader-text">Loading…</span></span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+	
+	<!-- BEGIN .postmeta -->
+	<div class="postmeta">
+
+		<!-- BEGIN .meta-text -->
+		<p class="meta-text">
+
+			<i class="icon-reorder"></i> Category: <a href="https://whatever.scalzi.com/category/big-idea/" rel="category tag">Big Idea</a> &nbsp; &nbsp;
+
+			
+		<!-- END .meta-text -->
+		</p>
+
+	<!-- END .postmeta -->
+	</div>
+
+	<div class="post-navigation">
+		<div class="previous-post">&larr; <a href="https://whatever.scalzi.com/2025/05/27/a-birthday-bonanza-in-columbus/" rel="prev">A Birthday Bonanza In Columbus</a></div>
+		<div class="next-post"><a href="https://whatever.scalzi.com/2025/05/29/the-big-idea-caitlin-rozakis-2/" rel="next">The Big Idea: Caitlin Rozakis</a> &rarr;</div>
+	</div><!-- .post-navigation -->
+
+	
+<div id="comments" class="comments-wrapper">
+
+	
+	
+			<h3 id="comments-title">
+			8 Comments on &ldquo;The Big Idea: Guy Gavriel Kay&rdquo;		</h3>
+
+		
+		<ol class="commentlist">
+						<li class="comment even thread-even depth-1" id="li-comment-943587">
+
+				<article id="comment-943587" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/9b154c5ed2e32c4ee606592a3a95412a8463cac29318020a13fbb90e829e1cd6?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/9b154c5ed2e32c4ee606592a3a95412a8463cac29318020a13fbb90e829e1cd6?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' decoding='async'/><span class="comment-name"><a href="https://broken-engines.blogspot.com/" class="url" rel="ugc external nofollow">L</a></span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943587"><time pubdate datetime="2025-05-28T12:53:08-04:00">May 28, 2025, 12:53 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>Big fan of GGK here. I haven&#8217;t quite read everything he&#8217;s written yet, but I&#8217;m working my way through the oeuvre.<br />
+/Written on the Dark/ is definitely on my list.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-943588">
+
+				<article id="comment-943588" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/cd102f87d8e6f69e440d00053f9b80fa8941bf59ef2309d36829446d33bf9d05?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/cd102f87d8e6f69e440d00053f9b80fa8941bf59ef2309d36829446d33bf9d05?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' decoding='async'/><span class="comment-name">Chuk</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943588"><time pubdate datetime="2025-05-28T13:02:58-04:00">May 28, 2025, 1:02 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>This book is great. All of his books are &#8212; his prose is nearly poetry and his characters are all very well developed and displayed, and I love how he takes inspiration from history but sets it in his own world and changes what he wants to.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment even thread-even depth-1" id="li-comment-943589">
+
+				<article id="comment-943589" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/0f8440671e038e086b24e06832e641753fe91c610b46905f530d8bf944c1b563?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/0f8440671e038e086b24e06832e641753fe91c610b46905f530d8bf944c1b563?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name">Hugh</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943589"><time pubdate datetime="2025-05-28T13:43:17-04:00">May 28, 2025, 1:43 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>Yay, yay, a new GGK!  I&#8217;m a huge fan.  Can&#8217;t wait to read this one- I love his poetry, so I&#8217;m really looking forward to seeing his take on Villon.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-943590">
+
+				<article id="comment-943590" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/673b95feadeb6ddefb55ff569197215534ff1d3d633518389f1545742074e3f5?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/673b95feadeb6ddefb55ff569197215534ff1d3d633518389f1545742074e3f5?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name">Paul Weimer</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943590"><time pubdate datetime="2025-05-28T14:33:15-04:00">May 28, 2025, 2:33 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>the book is great, Kay hitting on all cylinders.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment even thread-even depth-1" id="li-comment-943593">
+
+				<article id="comment-943593" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/4cd13d03ce5adca939ff3ffc89dd37af958ad2b34560220ee0124882b30514f9?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/4cd13d03ce5adca939ff3ffc89dd37af958ad2b34560220ee0124882b30514f9?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name">Mike G.</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943593"><time pubdate datetime="2025-05-28T19:16:19-04:00">May 28, 2025, 7:16 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>I&#8217;m imagining John&#8217;s imaginary interviewer and GGK&#8217;s complaining to each other over a drink in the Draco Tavern&#8230;</p>
+<p>Looking forward to reading this, it&#8217;s been on my kindle since the release second.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-943602">
+
+				<article id="comment-943602" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/f52a9cb84e28e6cb2e6bd53cfa038b0569fb233860963d18879d0c36cbb3b496?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/f52a9cb84e28e6cb2e6bd53cfa038b0569fb233860963d18879d0c36cbb3b496?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name">efrat</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943602"><time pubdate datetime="2025-05-29T06:13:55-04:00">May 29, 2025, 6:13 am</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>bought</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment even thread-even depth-1" id="li-comment-943603">
+
+				<article id="comment-943603" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/71a6c0b304a10c39bd75192812f8a362882711ca6d1f5d30de4733fea28762ba?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/71a6c0b304a10c39bd75192812f8a362882711ca6d1f5d30de4733fea28762ba?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name"><a href="http://selimpensfiction.wordpress.com" class="url" rel="ugc external nofollow">Selim Ulug</a></span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943603"><time pubdate datetime="2025-05-29T09:35:43-04:00">May 29, 2025, 9:35 am</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>Books by GGK go immediately to the top of my to-read pile. They are, without exception, exquisite. PS I’d totally watch Godfather Meets Ted Lasso…</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+			<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-943608">
+
+				<article id="comment-943608" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<img alt='' src='https://secure.gravatar.com/avatar/5a7df1ec438704f5e1236762046f94ca111c2e670990887819a45581bf5dec6c?s=48&#038;d=identicon&#038;r=pg' srcset='https://secure.gravatar.com/avatar/5a7df1ec438704f5e1236762046f94ca111c2e670990887819a45581bf5dec6c?s=96&#038;d=identicon&#038;r=pg 2x' class='avatar avatar-48 photo' height='48' width='48' loading='lazy' decoding='async'/><span class="comment-name">Gerald</span><br /> <a class="comment-time" href="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/#comment-943608"><time pubdate datetime="2025-05-29T12:16:41-04:00">May 29, 2025, 12:16 pm</time></a><br />						</div><!-- END .comment-author .vcard -->
+					</footer>
+
+					<div class="comment-content">
+												<p>Ah yes, beware the cobra chickens. GGK would be well aware of our national harpies.</p>
+						<div class="reply">
+												</div><!-- .reply -->
+											</div>
+
+				</article><!-- #comment-## -->
+
+				</li><!-- #comment-## -->
+		</ol>
+
+		
+		
+	
+</div><!-- #comments -->
+
+	<div class="clear"></div>
+
+	
+<!-- END .postarea -->
+</div>		</div><!-- END .eight columns -->
+
+		<!-- BEGIN .four columns -->
+		<div class="four columns">
+			
+<div class="sidebar">
+
+	<div id="text-272772153" class="widget widget_text"><h6 class="title widget-title">WHATEVER</h6>			<div class="textwidget"><p><strong>Taunting the tauntable since 1998</strong><br />
+John Scalzi, proprietor &#8211; JS<br />
+Athena Scalzi, EIC &#8211; AMS<br />
+<a href="http://whatever.scalzi.com/2012/01/01/station-identification-whatever/">About the site</a></p>
+</div>
+		</div><div id="calendar-2" class="widget widget_calendar"><h6 class="title widget-title">Whatever Days</h6><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>May 2025</caption>
+	<thead>
+	<tr>
+		<th scope="col" aria-label="Sunday">S</th>
+		<th scope="col" aria-label="Monday">M</th>
+		<th scope="col" aria-label="Tuesday">T</th>
+		<th scope="col" aria-label="Wednesday">W</th>
+		<th scope="col" aria-label="Thursday">T</th>
+		<th scope="col" aria-label="Friday">F</th>
+		<th scope="col" aria-label="Saturday">S</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td><a href="https://whatever.scalzi.com/2025/05/01/" aria-label="Posts published on May 1, 2025">1</a></td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td><a href="https://whatever.scalzi.com/2025/05/04/" aria-label="Posts published on May 4, 2025">4</a></td><td><a href="https://whatever.scalzi.com/2025/05/05/" aria-label="Posts published on May 5, 2025">5</a></td><td><a href="https://whatever.scalzi.com/2025/05/06/" aria-label="Posts published on May 6, 2025">6</a></td><td><a href="https://whatever.scalzi.com/2025/05/07/" aria-label="Posts published on May 7, 2025">7</a></td><td><a href="https://whatever.scalzi.com/2025/05/08/" aria-label="Posts published on May 8, 2025">8</a></td><td><a href="https://whatever.scalzi.com/2025/05/09/" aria-label="Posts published on May 9, 2025">9</a></td><td><a href="https://whatever.scalzi.com/2025/05/10/" aria-label="Posts published on May 10, 2025">10</a></td>
+	</tr>
+	<tr>
+		<td>11</td><td><a href="https://whatever.scalzi.com/2025/05/12/" aria-label="Posts published on May 12, 2025">12</a></td><td><a href="https://whatever.scalzi.com/2025/05/13/" aria-label="Posts published on May 13, 2025">13</a></td><td><a href="https://whatever.scalzi.com/2025/05/14/" aria-label="Posts published on May 14, 2025">14</a></td><td><a href="https://whatever.scalzi.com/2025/05/15/" aria-label="Posts published on May 15, 2025">15</a></td><td><a href="https://whatever.scalzi.com/2025/05/16/" aria-label="Posts published on May 16, 2025">16</a></td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td><a href="https://whatever.scalzi.com/2025/05/19/" aria-label="Posts published on May 19, 2025">19</a></td><td><a href="https://whatever.scalzi.com/2025/05/20/" aria-label="Posts published on May 20, 2025">20</a></td><td><a href="https://whatever.scalzi.com/2025/05/21/" aria-label="Posts published on May 21, 2025">21</a></td><td><a href="https://whatever.scalzi.com/2025/05/22/" aria-label="Posts published on May 22, 2025">22</a></td><td><a href="https://whatever.scalzi.com/2025/05/23/" aria-label="Posts published on May 23, 2025">23</a></td><td><a href="https://whatever.scalzi.com/2025/05/24/" aria-label="Posts published on May 24, 2025">24</a></td>
+	</tr>
+	<tr>
+		<td>25</td><td><a href="https://whatever.scalzi.com/2025/05/26/" aria-label="Posts published on May 26, 2025">26</a></td><td><a href="https://whatever.scalzi.com/2025/05/27/" aria-label="Posts published on May 27, 2025">27</a></td><td><a href="https://whatever.scalzi.com/2025/05/28/" aria-label="Posts published on May 28, 2025">28</a></td><td><a href="https://whatever.scalzi.com/2025/05/29/" aria-label="Posts published on May 29, 2025">29</a></td><td><a href="https://whatever.scalzi.com/2025/05/30/" aria-label="Posts published on May 30, 2025">30</a></td><td>31</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="Previous and next months" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://whatever.scalzi.com/2025/04/">&laquo; Apr</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next"><a href="https://whatever.scalzi.com/2025/06/">Jun &raquo;</a></span>
+	</nav></div></div><div id="archives-2" class="widget widget_archive"><h6 class="title widget-title">Whatarchives</h6>		<label class="screen-reader-text" for="archives-dropdown-2">Whatarchives</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://whatever.scalzi.com/2026/09/'> September 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/08/'> August 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/07/'> July 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/06/'> June 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/05/'> May 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/04/'> April 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/03/'> March 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/02/'> February 2026 </option>
+	<option value='https://whatever.scalzi.com/2026/01/'> January 2026 </option>
+	<option value='https://whatever.scalzi.com/2025/12/'> December 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/11/'> November 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/10/'> October 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/09/'> September 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/08/'> August 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/07/'> July 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/06/'> June 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/05/'> May 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/04/'> April 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/03/'> March 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/02/'> February 2025 </option>
+	<option value='https://whatever.scalzi.com/2025/01/'> January 2025 </option>
+	<option value='https://whatever.scalzi.com/2024/12/'> December 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/11/'> November 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/10/'> October 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/09/'> September 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/08/'> August 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/07/'> July 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/06/'> June 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/05/'> May 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/04/'> April 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/03/'> March 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/02/'> February 2024 </option>
+	<option value='https://whatever.scalzi.com/2024/01/'> January 2024 </option>
+	<option value='https://whatever.scalzi.com/2023/12/'> December 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/11/'> November 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/10/'> October 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/09/'> September 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/08/'> August 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/07/'> July 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/06/'> June 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/05/'> May 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/04/'> April 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/03/'> March 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/02/'> February 2023 </option>
+	<option value='https://whatever.scalzi.com/2023/01/'> January 2023 </option>
+	<option value='https://whatever.scalzi.com/2022/12/'> December 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/11/'> November 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/10/'> October 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/09/'> September 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/08/'> August 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/07/'> July 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/06/'> June 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/05/'> May 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/04/'> April 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/03/'> March 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/02/'> February 2022 </option>
+	<option value='https://whatever.scalzi.com/2022/01/'> January 2022 </option>
+	<option value='https://whatever.scalzi.com/2021/12/'> December 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/11/'> November 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/10/'> October 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/09/'> September 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/08/'> August 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/07/'> July 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/06/'> June 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/05/'> May 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/04/'> April 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/03/'> March 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/02/'> February 2021 </option>
+	<option value='https://whatever.scalzi.com/2021/01/'> January 2021 </option>
+	<option value='https://whatever.scalzi.com/2020/12/'> December 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/11/'> November 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/10/'> October 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/09/'> September 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/08/'> August 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/07/'> July 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/06/'> June 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/05/'> May 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/04/'> April 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/03/'> March 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/02/'> February 2020 </option>
+	<option value='https://whatever.scalzi.com/2020/01/'> January 2020 </option>
+	<option value='https://whatever.scalzi.com/2019/12/'> December 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/11/'> November 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/10/'> October 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/09/'> September 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/08/'> August 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/07/'> July 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/06/'> June 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/05/'> May 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/04/'> April 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/03/'> March 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/02/'> February 2019 </option>
+	<option value='https://whatever.scalzi.com/2019/01/'> January 2019 </option>
+	<option value='https://whatever.scalzi.com/2018/12/'> December 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/11/'> November 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/10/'> October 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/09/'> September 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/08/'> August 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/07/'> July 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/06/'> June 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/05/'> May 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/04/'> April 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/03/'> March 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/02/'> February 2018 </option>
+	<option value='https://whatever.scalzi.com/2018/01/'> January 2018 </option>
+	<option value='https://whatever.scalzi.com/2017/12/'> December 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/11/'> November 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/10/'> October 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/09/'> September 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/08/'> August 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/07/'> July 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/06/'> June 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/05/'> May 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/04/'> April 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/03/'> March 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/02/'> February 2017 </option>
+	<option value='https://whatever.scalzi.com/2017/01/'> January 2017 </option>
+	<option value='https://whatever.scalzi.com/2016/12/'> December 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/11/'> November 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/10/'> October 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/09/'> September 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/08/'> August 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/07/'> July 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/06/'> June 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/05/'> May 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/04/'> April 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/03/'> March 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/02/'> February 2016 </option>
+	<option value='https://whatever.scalzi.com/2016/01/'> January 2016 </option>
+	<option value='https://whatever.scalzi.com/2015/12/'> December 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/11/'> November 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/10/'> October 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/09/'> September 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/08/'> August 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/07/'> July 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/06/'> June 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/05/'> May 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/04/'> April 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/03/'> March 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/02/'> February 2015 </option>
+	<option value='https://whatever.scalzi.com/2015/01/'> January 2015 </option>
+	<option value='https://whatever.scalzi.com/2014/12/'> December 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/11/'> November 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/10/'> October 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/09/'> September 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/08/'> August 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/07/'> July 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/06/'> June 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/05/'> May 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/04/'> April 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/03/'> March 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/02/'> February 2014 </option>
+	<option value='https://whatever.scalzi.com/2014/01/'> January 2014 </option>
+	<option value='https://whatever.scalzi.com/2013/12/'> December 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/11/'> November 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/10/'> October 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/09/'> September 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/08/'> August 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/07/'> July 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/06/'> June 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/05/'> May 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/04/'> April 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/03/'> March 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/02/'> February 2013 </option>
+	<option value='https://whatever.scalzi.com/2013/01/'> January 2013 </option>
+	<option value='https://whatever.scalzi.com/2012/12/'> December 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/11/'> November 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/10/'> October 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/09/'> September 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/08/'> August 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/07/'> July 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/06/'> June 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/05/'> May 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/04/'> April 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/03/'> March 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/02/'> February 2012 </option>
+	<option value='https://whatever.scalzi.com/2012/01/'> January 2012 </option>
+	<option value='https://whatever.scalzi.com/2011/12/'> December 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/11/'> November 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/10/'> October 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/09/'> September 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/08/'> August 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/07/'> July 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/06/'> June 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/05/'> May 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/04/'> April 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/03/'> March 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/02/'> February 2011 </option>
+	<option value='https://whatever.scalzi.com/2011/01/'> January 2011 </option>
+	<option value='https://whatever.scalzi.com/2010/12/'> December 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/11/'> November 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/10/'> October 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/09/'> September 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/08/'> August 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/07/'> July 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/06/'> June 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/05/'> May 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/04/'> April 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/03/'> March 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/02/'> February 2010 </option>
+	<option value='https://whatever.scalzi.com/2010/01/'> January 2010 </option>
+	<option value='https://whatever.scalzi.com/2009/12/'> December 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/11/'> November 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/10/'> October 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/09/'> September 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/08/'> August 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/07/'> July 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/06/'> June 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/05/'> May 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/04/'> April 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/03/'> March 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/02/'> February 2009 </option>
+	<option value='https://whatever.scalzi.com/2009/01/'> January 2009 </option>
+	<option value='https://whatever.scalzi.com/2008/12/'> December 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/11/'> November 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/10/'> October 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/09/'> September 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/08/'> August 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/07/'> July 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/06/'> June 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/05/'> May 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/04/'> April 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/03/'> March 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/02/'> February 2008 </option>
+	<option value='https://whatever.scalzi.com/2008/01/'> January 2008 </option>
+	<option value='https://whatever.scalzi.com/2007/12/'> December 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/11/'> November 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/10/'> October 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/09/'> September 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/07/'> July 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/06/'> June 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/05/'> May 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/04/'> April 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/03/'> March 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/02/'> February 2007 </option>
+	<option value='https://whatever.scalzi.com/2007/01/'> January 2007 </option>
+	<option value='https://whatever.scalzi.com/2006/12/'> December 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/11/'> November 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/10/'> October 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/09/'> September 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/08/'> August 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/07/'> July 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/06/'> June 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/05/'> May 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/04/'> April 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/03/'> March 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/02/'> February 2006 </option>
+	<option value='https://whatever.scalzi.com/2006/01/'> January 2006 </option>
+	<option value='https://whatever.scalzi.com/2005/12/'> December 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/11/'> November 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/10/'> October 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/09/'> September 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/08/'> August 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/07/'> July 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/06/'> June 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/05/'> May 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/04/'> April 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/03/'> March 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/02/'> February 2005 </option>
+	<option value='https://whatever.scalzi.com/2005/01/'> January 2005 </option>
+	<option value='https://whatever.scalzi.com/2004/12/'> December 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/11/'> November 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/10/'> October 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/09/'> September 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/08/'> August 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/07/'> July 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/06/'> June 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/05/'> May 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/04/'> April 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/03/'> March 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/02/'> February 2004 </option>
+	<option value='https://whatever.scalzi.com/2004/01/'> January 2004 </option>
+	<option value='https://whatever.scalzi.com/2003/12/'> December 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/11/'> November 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/10/'> October 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/09/'> September 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/08/'> August 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/07/'> July 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/06/'> June 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/05/'> May 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/04/'> April 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/03/'> March 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/02/'> February 2003 </option>
+	<option value='https://whatever.scalzi.com/2003/01/'> January 2003 </option>
+	<option value='https://whatever.scalzi.com/2002/12/'> December 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/11/'> November 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/10/'> October 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/09/'> September 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/08/'> August 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/06/'> June 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/04/'> April 2002 </option>
+	<option value='https://whatever.scalzi.com/2002/03/'> March 2002 </option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-2" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</div><div id="block-11" class="widget widget_block widget_search"><form role="search" method="get" action="https://whatever.scalzi.com/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search" ><label class="wp-block-search__label screen-reader-text" for="wp-block-search__input-1" >Search</label><div class="wp-block-search__inside-wrapper" ><input class="wp-block-search__input" id="wp-block-search__input-1" placeholder="Search Whatever" value="" type="search" name="s" required /><button aria-label="Search" class="wp-block-search__button wp-element-button" type="submit" >Search</button></div></form></div><div id="text-272772154" class="widget widget_text"><h6 class="title widget-title">The Big Idea</h6>			<div class="textwidget"><p><img data-recalc-dims="1" src="https://i0.wp.com/live.staticflickr.com/65535/52403961981_e7b56af17c_n.jpg?w=639&#038;ssl=1" border="1"/></p>
+<p><b>What's the Big Idea?</b> Authors explaining the the big ideas behind their latest works, in their own words. <a href="http://whatever.scalzi.com/category/big-idea/">See the latest Big Ideas!</a></p>
+<p>Authors/Editors/Publicists: for information on how to participate, click <a href="http://whatever.scalzi.com/2013/09/07/big-idea-guidelines/">here.</a></p>
+</div>
+		</div><div id="google_translate_widget-3" class="widget widget_google_translate_widget"><h6 class="title widget-title">Translate Whatever</h6><div id="google_translate_element"></div></div><div id="pages-2" class="widget widget_pages"><h6 class="title widget-title">Administrivia</h6>
+			<ul>
+				<li class="page_item page-item-2 page_item_has_children"><a href="https://whatever.scalzi.com/about/">About</a>
+<ul class='children'>
+	<li class="page_item page-item-83"><a href="https://whatever.scalzi.com/about/a-brief-biography-of-john-scalzi/">A Brief Biography of John Scalzi</a></li>
+	<li class="page_item page-item-86"><a href="https://whatever.scalzi.com/about/interviews-appearances-articles-and-etc/">Availability for Interviews, Appearances, Writing Work and Optioning Existing Work</a></li>
+	<li class="page_item page-item-9125"><a href="https://whatever.scalzi.com/about/books-by-john-scalzi/">Books and Other Projects by John Scalzi</a></li>
+	<li class="page_item page-item-87"><a href="https://whatever.scalzi.com/about/contact-information/">Contact Information</a></li>
+	<li class="page_item page-item-85"><a href="https://whatever.scalzi.com/about/publicity-blurb-and-unpublished-work-guidelines/">Guidelines for Publicity, Blurbing, Unpublished Work, Story Ideas, Social Media Boosting, Guest Blogging, Charitable Solicitations, Autographing, Educational Use and School Assignments</a></li>
+	<li class="page_item page-item-653"><a href="https://whatever.scalzi.com/about/scheduled-appearances/">Scheduled Appearances</a></li>
+	<li class="page_item page-item-84"><a href="https://whatever.scalzi.com/about/site-disclaimer-and-comment-policy/">Site Disclaimer, Comment, Privacy and &#8220;AI&#8221; Policy</a></li>
+	<li class="page_item page-item-1696"><a href="https://whatever.scalzi.com/about/the-canonical-bacon-page/">The Canonical Bacon Page</a></li>
+	<li class="page_item page-item-94"><a href="https://whatever.scalzi.com/about/the-scalzi-creative-sampler/">The Scalzi Creative Sampler</a></li>
+</ul>
+</li>
+<li class="page_item page-item-46199"><a href="https://whatever.scalzi.com/scalzi-enterprises-%c2%b7-the-scalzi-family-foundation/">Scalzi Enterprises · The Scalzi Family Foundation</a></li>
+			</ul>
+
+			</div><div id="recent-comments-2" class="widget widget_recent_comments"><h6 class="title widget-title">Whatever Everyone Else is Saying</h6>				<ul id="recentcomments">
+											<li class="recentcomments">
+							B.B. on <a href="https://whatever.scalzi.com/2026/09/04/the-big-idea-betsy-james/#comment-956686">The Big Idea: Betsy James</a>						</li>
+
+												<li class="recentcomments">
+							B.B. on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956685">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							Granny Roberta on <a href="https://whatever.scalzi.com/2026/09/04/the-big-idea-betsy-james/#comment-956684">The Big Idea: Betsy James</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://whatever.scalzi.com/" class="url" rel="ugc">Staccy Minniti</a> on <a href="https://whatever.scalzi.com/2026/09/04/the-big-idea-betsy-james/#comment-956683">The Big Idea: Betsy James</a>						</li>
+
+												<li class="recentcomments">
+							Bo Lindbergh on <a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/#comment-956682">View From a Hotel Window, 9/3/26: Tampa, FL</a>						</li>
+
+												<li class="recentcomments">
+							Mar Saleski on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956681">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							<a href="http://seanessay.com" class="url" rel="ugc external nofollow">Sean Crawford</a> on <a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/#comment-956680">View From a Hotel Window, 9/3/26: Tampa, FL</a>						</li>
+
+												<li class="recentcomments">
+							Jay Crandell on <a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/#comment-956679">View From a Hotel Window, 9/3/26: Tampa, FL</a>						</li>
+
+												<li class="recentcomments">
+							David Allen Moody on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956678">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							Granny Roberta on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956677">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							Granny Roberta on <a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/#comment-956676">View From a Hotel Window, 9/3/26: Tampa, FL</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://www.katherinevillyard.com" class="url" rel="ugc external nofollow">Katherine</a> on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956675">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							Sean on <a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/#comment-956674">View From A Hotel Window, 9/4/2026: Atlanta</a>						</li>
+
+												<li class="recentcomments">
+							Roy A. on <a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/#comment-956673">View From a Hotel Window, 9/3/26: Tampa, FL</a>						</li>
+
+												<li class="recentcomments">
+							Jennifer L Anstey on <a href="https://whatever.scalzi.com/2026/09/03/the-big-idea-janci-patterson/#comment-956672">The Big Idea: Janci Patterson</a>						</li>
+
+										</ul>
+				</div>
+		<div id="recent-posts-2" class="widget widget_recent_entries">
+		<h6 class="title widget-title">Whatever Just Happened</h6>
+		<ul>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/04/the-big-idea-betsy-james/">The Big Idea: Betsy James</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/04/view-from-a-hotel-window-9-4-2026-atlanta/">View From A Hotel Window, 9/4/2026: Atlanta</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/03/view-from-a-hotel-window-9-3-26-tampa-fl/">View From a Hotel Window, 9/3/26: Tampa, FL</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/03/the-big-idea-janci-patterson/">The Big Idea: Janci Patterson</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/03/i-am-traveling-yet-again-please-enjoy-this-photo-of-fungus-in-my-absence/">I Am Traveling Yet Again, Please Enjoy This Photo of Fungus In My Absence</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/02/the-big-idea-steven-t-gibbon/">The Big Idea: Steven T. Gibbon</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/02/how-to-be-the-most-annoying-person-at-worldcon-2026-edition/">How to Be the Most Annoying Person at Worldcon, 2026 Edition</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/09/01/as-promised-the-2026-hugo-award-follow-up-post/">As Promised, the 2026 Hugo Award Follow-up Post</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/08/31/also-here-is-my-hugo-acceptance-speech-this-year/">Also Here is My Hugo Acceptance Speech This Year</a>
+									</li>
+											<li>
+					<a href="https://whatever.scalzi.com/2026/08/31/reviews-of-monsters-of-ohio-in-kirkus-starred-and-publishers-weekly/">Reviews of Monsters of Ohio in Kirkus (Starred!) and Publishers Weekly</a>
+									</li>
+					</ul>
+
+		</div><div id="rss-2" class="widget widget_rss"><h6 class="title widget-title"><a class="rsswidget rss-widget-feed" href="http://nextbandname.tumblr.com"><img class="rss-widget-icon" style="border:0" width="14" height="14" src="https://whatever.scalzi.com/wp-includes/images/rss.png" alt="RSS feed: The Name of My Next Band" loading="lazy" /></a> <a class="rsswidget rss-widget-title" href="https://nextbandname.tumblr.com/">The Name of My Next Band</a></h6><ul><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/823494630428622848'>Prednisone Nap</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/822972727562469376'>Beef Fairy</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/822759322438320128'>Somnosferatu</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/821441159975010304'>Cold Elmo</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/821400701704994816'>Hospital Watermelon</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/821247625650110464'>Seasonal Triffid</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/820446298080722944'>Good Friday Bun Enthusiasts</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/820216522341498880'>Blacklight Peaches</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/819062030467219456'>Chimps and Elephants</a></li><li><a class='rsswidget' href='https://nextbandname.tumblr.com/post/817675569792794624'>The Hess Triangle</a></li></ul></div><div id="text-272772155" class="widget widget_text"><h6 class="title widget-title">Random Whatever</h6>			<div class="textwidget"><a href="http://whatever.scalzi.com/?random"><b>Click this link</b></a> -- and you'll be taken to a random Whatever entry in the archive. Which one will you get? Got me!</div>
+		</div><div id="block-9" class="widget widget_block"><h6>Subscribe to Whatever</h6>
+<div class="wp-block-jetpack-subscriptions wp-block-jetpack-subscriptions__supports-newline is-style-compact"><div class="jetpack_subscription_widget">			<div class="wp-block-jetpack-subscriptions__container">
+			<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-1"
+				data-blog="21793"
+				data-post_access_level="everybody" >
+									<p id="subscribe-email">
+						<label id="jetpack-subscribe-label"
+							class="screen-reader-text"
+							for="subscribe-field-1">
+							Email Address						</label>
+						<input type="email" name="email" autocomplete="email" required="required"
+																						style="font-size: 16px; padding: 15px 23px 15px 23px; border-radius: 0px; border-width: 1px;"
+														value=""
+							id="subscribe-field-1"
+							placeholder="Email Address"
+						/>
+					</p>
+
+					<p id="subscribe-submit"
+											>
+						<input type="hidden" name="action" value="subscribe"/>
+						<input type="hidden" name="source" value="https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/"/>
+						<input type="hidden" name="sub-type" value="widget"/>
+						<input type="hidden" name="redirect_fragment" value="subscribe-blog-1"/>
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="a2288d6196" /><input type="hidden" name="_wp_http_referer" value="/2025/05/28/the-big-idea-guy-gavriel-kay-4/" />						<button type="submit"
+															class="wp-block-button__link"
+																						style="font-size: 16px; padding: 15px 23px 15px 23px; margin: 0; margin-left: 10px; border-radius: 0px; border-width: 1px;"
+														name="jetpack_subscriptions_widget"
+						>
+							Subscribe						</button>
+					</p>
+							</form>
+						</div>
+			
+</div></div></div>
+</div>		</div><!-- END .four columns -->
+
+	</div><!-- END .row -->
+
+</div><!-- END .container -->
+
+
+
+<div class="clear"></div>
+
+<!-- BEGIN #footer -->
+<div id="footer">
+
+	<!-- BEGIN .row -->
+	<div class="row">
+
+		<!-- BEGIN .twelve columns -->
+		<div class="twelve columns">
+
+		    <div class="footer">
+		       	<p><a href="https://wordpress.com/?ref=footer_custom_powered">Powered by WordPress.com</a>.</p>
+	    		<p>Theme: Profile by <a href="http://organicthemes.com" rel="designer">Organic Themes</a>.</p>
+		    </div>
+
+	    <!-- END .twelve columns -->
+		</div>
+
+	<!-- END .row -->
+	</div>
+
+<!-- END #footer -->
+</div>
+
+<!-- END #wrap -->
+</div>
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/profile-scalzi/*","/wp-content/themes/profile/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<meta id="bilmur" property="bilmur:data" content="" data-customproperties="{&quot;wpcomsp&quot;:&quot;1&quot;,&quot;woo_active&quot;:&quot;0&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;profile-scalzi&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}" data-provider="wordpress.com" data-service="atomic"  data-site-tz="America/New_York" data-site-v="8680a47f50db5536e15692a3e6bf2e2c" >
+<script defer src="https://s0.wp.com/wp-content/js/bilmur.min.js?m=202636"></script>
+	<div style="display:none">
+			<div class="grofile-hash-map-9e52a5981234da70d1d70d1040548228">
+		</div>
+		<div class="grofile-hash-map-9a531fc0af2f9944f95c735e97d858f0">
+		</div>
+		<div class="grofile-hash-map-b9430755306c3e8c14ea128076a7fb21">
+		</div>
+		<div class="grofile-hash-map-217a752d6dafa1f094f2c8db73a17f14">
+		</div>
+		<div class="grofile-hash-map-ba27f89768c0aec50c898b1fe9b4b780">
+		</div>
+		<div class="grofile-hash-map-2463f1bd85aea23703f320e67d33f349">
+		</div>
+		<div class="grofile-hash-map-38ff07e12522a75e862ebecb8e85a230">
+		</div>
+		<div class="grofile-hash-map-68047f6e79557fbe42688db5d767526c">
+		</div>
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/":55841};
+	</script>
+						<script type='text/javascript'  src='https://whatever.scalzi.com/_static/??-eJyFjEEOgzAMBD9UsMqFU8VbQupSh8ROsUPE76EHxBGttIfVzNbceGFDNsixTMQKXsYoflZ4kxqEa2gcU3JGwm3QR71M+2JChbzIhyL+lfAruGytL2qSbml2K03n8ZBez77vjhy9AyuqO2U='></script>
+<script id="grofiles-cards-js" src="https://secure.gravatar.com/js/gprofiles.js?ver=202636"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script id="scalzi-comment-js-extra">
+var scalziComment = {"translateErrorSecurityAnswerWrong":"Your response to the challenge question ('The name of this blog is Scalzi on ____') was not correct. Please try again.","ajax_url":"https://whatever.scalzi.com/wp-admin/admin-ajax.php"};
+//# sourceURL=scalzi-comment-js-extra
+</script>
+<script type='text/javascript'  src='https://whatever.scalzi.com/_static/??wp-content/plugins/jetpack/modules/wpgroho.js,wp-content/themes/profile-scalzi/js/comment.js?m=1730206540'></script>
+<script id="googlesitekit-events-provider-content-events-js-before">
+window._googlesitekit = window._googlesitekit || {};
+window._googlesitekit.contentEvents = {"postID":55841,"isSinglePost":true};
+//# sourceURL=googlesitekit-events-provider-content-events-js-before
+</script>
+<script id="googlesitekit-events-provider-content-events-js" src="https://whatever.scalzi.com/wp-content/plugins/google-site-kit/dist/assets/js/googlesitekit-events-provider-content-events-33078016c5e1e9f07c35.js" defer></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"21793","post":"55841","tz":"-4","srv":"whatever.scalzi.com","hp":"atomic","ac":"2","amp":"0","j":"1:16.2-a.5"} ]);
+_stq.push([ "clickTrackerInit", "21793", "55841" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202636.js"></script>
+<script id="google-translate-init-js-extra">
+var _wp_google_translate_widget = {"lang":"en_US","layout":"0"};
+//# sourceURL=google-translate-init-js-extra
+</script>
+<script type='text/javascript'  src='https://whatever.scalzi.com/_static/??-eJyNzDEOgzAMQNELFawiUbJUHAWliRUMxgnYUa7fpVsX1i+930oXshiKQeGaSBQ2tOLDDgtJgE8ljsC0o8JZseLqJTJe/UHSb/pot3yjmNAUUs6JsbPLi7I3/Au/7Xy8n5ObhnF8OfcFEg48xg=='></script>
+<script id="google-translate-js" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&#038;ver=16.2-a.5"></script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="sharing-js-js" src="https://whatever.scalzi.com/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=16.2-a.5"></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "bluesky" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "threads" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "mastodon" ] = "menubar=1,resizable=1,width=460,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "linkedin" ] = "menubar=1,resizable=1,width=580,height=450";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "tumblr" ] = "menubar=1,resizable=1,width=450,height=450";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://whatever.scalzi.com/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://whatever.scalzi.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260906#ver=20260906' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	
+</body>
+</html>
+<!--
+	generated in 0.586 seconds
+	128867 bytes batcached for 300 seconds
+-->

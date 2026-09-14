@@ -1,0 +1,1045 @@
+Druid 101: Circle of the Moon | Dungeons & Dragons 
+
+ Skip to Content 
+
+ Play D&D 
+ My Characters
+
+ Create a character 
+ 
+ My Campaigns
+
+ Beta 
+ Maps VTT
+
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+
+ Rules Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+ 
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+
+ Library Free books View all 
+
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+
+ Community Support
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+ 
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+ 
+ Follow Us
+
+ Featured Article
+ 
+ Dungeon Masters: The New D&D Actual Play
+
+ Marketplace 
+ 
+ Open search Toggle mobile navigation Sign in Create Account 
+
+ Play D&D Back Play D&D 
+ My Characters 
+ Create a character 
+ My Campaigns 
+
+ Maps VTT 
+
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+
+ Rules Back Rules 
+ Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+ 
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+ 
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+
+ Library Back Library 
+ Free books
+ Monstrous Compendium Vol. 1: Spelljammer Creatures 
+ Frozen Sick 
+ D&D Beyond Basic Rules 
+ Basic Rules (2014) 
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+
+ Community Back Community 
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+ 
+ Follow Us
+
+ Featured Article
+ 
+ Dungeon Masters: The New D&D Actual Play
+
+ Marketplace 
+ Sign in Create an Account 
+
+ Home 
+
+ Posts 
+
+ Druid 101: Circle of the Moon 
+
+ Druid 101: Circle of the Moon
+
+ Druid 101: Circle of the Moon
+
+ by James Haeck 
+
+ Oct 11, 2019 
+
+ Category Icon 
+ Posts 
+
+ 94 
+
+ Tags 
+ 
+ Class Guides 
+ 
+ Class 101 
+ 
+ Druid 101 
+
+ Class is back in session. This week, we delve into the forest primeval and howl at the moon, issuing a prayer to Selûne in the tongue of beasts. Like all druids, those who gather in the Circle of the Moon protect the wilderness from those who would do it harm, or use it to harm others. They do so in their own unique way. They use the art of Wild Shape, which all druids possess in some form, has been made into a weapon by these druids, who use the ferocity of beasts rather than the power of magic to defend the natural world. Sharpen your claws and practice your roar; it’s time to learn about the druidic Circle of the Moon.
+
+ We’ve completed our first full rotation of the twelve classes, and exhausted all the content that the Basic Rules have to offer—as far as classes go, that is. This next wave of the Class 101 series will appraise every subclass within the Player’s Handbook and break down each subclass’s strengths, weaknesses, thematic elements, and everything else a player would want to know before playing that subclass. Because of this, you will need to own the Player’s Handbook (or purchase the subclass a la carte on the Marketplace ) in order to make full use of this series.
+
+ Check out the other guides in the Class 101 series, like the broad overview of the druid class in Druid 101: A Beginner’s Guide to Channeling Nature’s Might , and Druid 101: Circle of the Land . If you’re interested in playing other classes, check out the entire Class 101 series . 
+
+ Story of the Circle of the Moon
+
+ The moon shone overhead, bathing the druid in its silvery light. She strode across the salt flats, tasting the frigid air as it scoured the cracked ground beneath her feet. She stopped and slowly looked all around, seeing nothing but flat earth around her, and the tiny silhouettes of mountains encircling the plains in all directions. She knew, somewhere on this endless plain, the blue dragon Azulaskai had made his lair. She scowled and tugged on her braid in annoyance, vexed by the endless expanse before her.
+
+ “I had hoped to save this for the battle,” she mused. “But…” Without finishing her thought, the druid took off running. Her strides grew wider, first two, then four, then six, even ten feet apart as she bounded across the desert. She extended her arms and struck the ground with both feet, and sprung into the air. A shimmering cloud of silver mist shrouded her as she soared upward—then burst into faint wisps as a massive winged pterosaur, a quetzalcoatlus, emerged from within. 
+
+ The druid—now in a beast form with a wingspan over thirty feet wide and a beak longer than her humanoid form was tall—soared over the salt flats. The moon reflected off of the shimmering feathers on the back of her wings, and her beady eyes scanned the plains. She opened her enormous beak and released a shrill, shuddering cry into the evening air. The cry rang like a bell, and then faded. Silence reigned.
+
+ And then, a flash of light. A tiny crackle of lightning on the surface of the ground. A tiny peal of thunder. The druid smiled to herself—not that her prehistoric beak allowed her to actually smile—and dove downward. Her quarry was close.
+
+ Circle of the Moon Features
+
+ The Circle of the Moon draws upon the magical and transformative powers of the moon itself to allow druids to take on powerful forms. Even when the moon hides from the sky, its power can always be felt. The druid gains access to four subclass features at 2nd, 6th, 10th, and 14th level. You can read all of the Circle of the Moon features in the Player’s Handbook . In summary, your subclass features allow you to:
+
+ Adopt a combat wild shape, allowing you to use the Wild Shape feature more quickly and adopt stronger forms, and even magically heal yourself while in this form.
+
+ Overcome your foes’ resistance to nonmagical damage while in Wild Shape.
+
+ Transform into an elemental.
+
+ Use your mastery of transformation to change your humanoid form’s features.
+
+ Benefits of the Circle of the Moon
+
+ At low levels, the Circle of the Moon allows druids to absorb incredible amounts of damage using their Wild Shape feature. A 2nd-level druid can transform into beasts with a challenge rating of 1 or lower, such as a brown bear or a dire wolf . Not only does this give them incredible offensive power, but this transformation also comes with (essentially) 34 to 37 free hit points. At 2nd level, a druid with 14 (+2) Constitution has about 16 hit points. A single use of Wild Shape (and don’t forget, a druid can use Wild Shape twice between short rests) essentially triples the druid’s maximum hit points.
+
+ Since your Wild Shape lasts for a minimum of 1 hour (a number of hours equal to half your druid level, that is), you can likely stay in Wild Shape for multiple combats, unless your form runs out of hit points. Since you can use this feature twice per short rest, most druids will be able to stay in beast form at almost all times during combat. And even if you do come close to running out of Wild Shape uses, you can you can burn spell slots to heal 1d8 damage per spell slot, so damage doesn’t knock you out of beast form. Even then, if you’re forced to rely on your humanoid form, you still have the spellcasting power of a druid to help you and your party.
+
+ Abilities like Primal Strike and Elemental Wild Shape help ensure that your transformations remain relevant, even as your enemies grow more challenging. Finally, though your Thousand Forms feature is a strange and surprising one, oddly disconnected from the other features of this largely combat-focused subclass, it’s a welcome boon in social situations.
+
+ Drawbacks of the Circle of the Moon
+
+ Unfortunately, the incredible staying power that Circle of the Moon druids possess at low levels drops off as they grow in level. Even though they remain incredibly durable, they’re no longer tripling their hit point maximum twice per short rest. Features that were incredibly useful, like being able to spend spell slots for hit points, dissolve into only having niche application—especially as high-level spells tend to be far more useful than simply dealing and taking damage. Likewise, despite the additional power of your Elemental Wild Shape, the number of interesting creatures to transform into begins to thin at higher levels, especially if you’re limited to beasts in the Monster Manual .
+
+ Remember; you can only transform into beasts that you’ve seen. Xanathar’s Guide to Everything contains a page of useful suggestions to help DMs adjudicate what beasts a druid may have seen at the start of a campaign, and you can keep track of the additional beasts you’ve seen over the course of play. You may have to ask your DM to include interesting beasts in their campaign so that you can transform into them.
+
+ Suggested Build
+
+ If you’re playing a Circle of the Moon druid, you should choose a race that grants you a bonus to Wisdom, like a wood elf or hill dwarf. Both of these races already have a natural connection to the land itself, and thematically match the class, making them a perfect fit! Likewise, races with bonuses you can assign to any trait, such as a variant human or a half-elf, also allow you to allocate your ability score bonuses as you see fit, while also letting you get some other useful traits, too, like extra skill proficiencies.
+
+ While in Wild Shape, you adopt the Strength, Dexterity, and Constitution scores of the creature you transform into. This can make it tempting to focus entirely on your mental ability scores, and let Wild Shape pick up the slack for your physical scores. This is usually a sound idea, especially if your campaigns often only have one or two large encounters, rather than several small ones, in between rests. Nevertheless, choosing a race that improves your Dexterity and Constitution isn’t a bad thing—there will be times in your adventuring career that you find yourself in combat with all your Wild Shape uses exhausted, so you can only rely on your own Armor Class and hit points to survive. 
+
+ As usual, your character’s background is up to you. Many druids come from a hermit or outlander background, and live in relative isolation in the wild places of the world. But not all druids are the same. Perhaps you were a street urchin who fled from the streets of Waterdeep and were saved by a druidic master and taken to the heart of the High Forest where you were trained in the druidic arts—or so on. A character with a background studying animals, such as an entertainer that performed in the circus, could have an interesting reason to be familiar with many different types of animals.
+
+ Selecting EQUIPMENT when building a 1st-level druid will make your life easier, as most druids don’t have to worry too much about what equipment they carry. Fortunately, your spell selection is more important to your continued survival than your equipment selection, so just choose whatever tools you think would be useful.
+
+ Optional: Environment
+
+ If your gaming group owns a copy of Xanathar’s Guide to Everything , what kind of biome your druid grew up in could play a role in what Wild Shape forms you know from the beginning of the game. If you don’t own this book, you and your DM can simply discuss what Wild Shape options you have access to starting at 2nd level. Your druid’s environment is described in chapter 1 of Xanathar’s Guide to Everything , and you can choose from any of the options listed.
+
+ Spells
+
+ You don’t choose your subclass until 2nd level, but you can still carve out your role in the party through your spell selection before you officially join the Circle of the Moon. Like a cleric, you have your entire class spell list available to you whenever you prepare spells at the start of the day. Nevertheless, when playing a druid, I like to have a typical spell list that my druid always has prepared—unless I specifically choose otherwise. This saves me the trouble of having to re-select all my spells at the start of each day. Since you will be doing most of your fighting in beast form, at least for the first several levels of your adventuring career, you’re safe to focus on learning spells that are useful outside of combat.
+
+ As a 1st-level druid, you know two cantrips and can prepare a number of 1st-level spells equal to 1 + your Wisdom modifier. Odds are, your Wisdom modifier will be either +2 or +3 right now, so you’ll be able to choose either three or four 1st-level spells whenever you complete a long rest. Even though your Wild Shape forms give you a lot of offensive power, you won’t be able to attack from range in those shapes, so you’ll want at least one offensive ranged cantrip, to use outside of beast form. Produce flame is a good choice, since it can serve as both offense and utility. Beyond this, your cantrips are simply a matter of preference, and almost any will serve you well. Druidcraft is another good first choice, since it lets you perform all manner of minor, “druid-y” tricks.
+
+ You can prepare any 1st-level spells from the druid spell list, but you can use this list of suggested spells to prepare an all-purpose spell loadout that will serve you in most circumstances. As you go on adventures and learn what dangers your character tends to face, you can personalize your spell loadout. Try to choose one spell labeled SUPPORT and two labeled UTILITY . If you have a high Wisdom score and can prepare additional spells, choose others of your choice. Note that this list only includes some spells from the Player's Handbook , so if you want to choose more unusual spells, or have other sources like Xanathar's Guide to Everything , you'll have to do a little self-directed research. This list is just here to get you started if this is your first time playing a Circle of the Moon druid.
+
+ Be warned that many druid spells require concentration, and you can only concentrate on one spell at once. Try to limit the number of concentration spells you prepare to no more than 1/3 of your spell loadout on any given adventuring day. To aid in this, all concentration spells on this list are listed as such.
+
+ Animal friendship (DEFENSE/UTILITY) 
+
+ Charm person (SOCIAL) 
+
+ Cure wounds (SUPPORT) 
+
+ Detect magic (UTILITY) 
+
+ Entangle (DEFENSE; CONCENTRATION) 
+
+ Faerie fire (SUPPORT; CONCENTRATION) 
+
+ Fog cloud (DEFENSE; CONCENTRATION) 
+
+ Speak with animals (UTILITY) 
+
+ Feats
+
+ At 4th level, you get to gain either an Ability Score Increase or a feat. Choosing an Ability Score Increase lets you increase one ability score by +2 (such as increasing your Wisdom score from 16 to 18) or increase two ability scores by +1 (like increasing your Wisdom from 15 to 16 and your Constitution score from 13 to 14). Increasing your ability scores makes you better at a wide variety of things; for instance, increasing your Wisdom score makes it harder for enemies to resist your spells, makes it easier for you to hit with your spells, and also makes you better at making Wisdom checks.
+
+ Feats, on the other hand, give you a special ability that could be more helpful in a specific circumstance, as opposed to the broad improvement that an Ability Score Increase could give you. Wisdom is your most important ability score, since it governs your spellcasting abilities. Once you’ve increased your Wisdom score to 20 (its maximum value), or even just to 18 (a pretty good value), you may want to choose a feat. You can choose any feat you want to support your character concept, but there are some feats that may be more useful to your character than others.
+
+ Note that all of these feats still apply to you while you’re using your Wild Shape. These feats include:
+
+ Dungeon Delver. If you find yourself going into dungeons a lot, this feat can save your life. Druids don’t typically get any class features that help them out against traps, so this can help you out when you’re wandering through dungeons in your humanoid form.
+
+ Grappler. Some beast forms make great use of grappling, especially at low levels. Beasts that can constrict, like the giant constrictor snake or swallow, like the giant toad , want to be able to grapple creatures in order to make full use of their powerful abilities.
+
+ Mobile. Being mobile while in Wild Shape is paramount, since you don’t have the ability to cast spells that will get you in and out of difficult situations. This feat goes a long way.
+
+ Observant. This feat is essentially half a feat, since its effects are minor, and you also gain a +1 bonus to Wisdom when you choose it. Since Wisdom is your key ability score, this +1 can help. Perception is also a crucial skill for just about anyone.
+
+ Sentinel. Since you’re a melee fighter while in Wild Shape, you can take this feat to become a powerful defender.
+
+ If you want more advice for building a druid, check out Druid 101. Have you ever played a Circle of the Moon druid? What advice would you give to players that want to make a character like this? 
+
+ James Haeck is the lead writer for D&D Beyond, the co-author of Waterdeep: Dragon Heist , Baldur's Gate: Descent into Avernus , and the Critical Role Tal'Dorei Campaign Setting, a member of the Guild Adepts, and a freelance writer for Wizards of the Coast, the D&D Adventurers League, and other RPG companies. He lives in Seattle, Washington with his fiancée Hannah and their animal companions Mei and Marzipan . You can find him wasting time on Twitter at @jamesjhaeck .
+
+ Tags 
+ 
+ Class Guides 
+ 
+ Class 101 
+ 
+ Druid 101 
+
+ 94 
+
+ Comments
+
+ 1 
+ 2 
+ 3 
+ 4 
+ 5 
+ Next 
+
+ SavageVince 
+
+ Brother
+
+ Join Date:
+
+ 7/20/2017
+
+ Posts:
+
+ 1,859
+
+ Member Details
+
+ #1 
+
+ SavageVince 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ Great article as always. One small mistake:
+
+ «If you’re playing a Circle of the Land druid, you should choose a race that grants you a bonus to Wisdom, like a wood elf or hill dwarf.»
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ Thrackdaddy 
+
+ Adventurer
+
+ Join Date:
+
+ 12/20/2017
+
+ Posts:
+
+ 1
+
+ Member Details
+
+ #2 
+
+ Thrackdaddy 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ A great write up as always! I had the opportunity to play a Tortle Moon Druid in a ToA campaign and I had a blast with it. As mentioned in the article the class starts off with incredible staying power, but drops off in the higher levels. Here are a couple of suggestions to try and mitigate this:
+
+ If you're in a campaign that uses multi class rules (Talk to your DM) Moon druid pairs very well with a level or two of Monk or Barbarian. Monks unarmored defense will give most beasts increased AC (depending on your wisdom modifier), and the barbarians Rage feature helps mitigate damage you would take while in beast form. There is always the drawback of slower spell and Wild Shape progression but I think it's definitely worth considering, especially if you want to go full Kung Fu Panda!
+
+ Something this article doesn't touch on much is the use of concentration spells while in wild shape. It's quite useful to be able to cast a spell such as entangle and be able to maintain it even after going into a beast form. Unfortunately most wild shape forms have low AC and relatively low constitution scores, making maintaining concentration difficult without further investment (war caster, Resilient Constitution). Nevertheless it's still an option to keep in mind, especially given the amount of powerful concentration spells the druid has.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ MsCrick 
+
+ Adventurer
+
+ Join Date:
+
+ 6/25/2019
+
+ Posts:
+
+ 5
+
+ Member Details
+
+ #3 
+
+ MsCrick 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ I also recommend war caster as a feat! Druids have a lot of concentration control spells. Throwing one down before becoming an animal and then keeping up while in best shape is really helpful! 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ MsCrick 
+
+ Adventurer
+
+ Join Date:
+
+ 6/25/2019
+
+ Posts:
+
+ 5
+
+ Member Details
+
+ #4 
+
+ MsCrick 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ Ah you beat me to it, Thrack! I totally agree about the concentration!
+
+ Last edited by MsCrick : Oct 11, 2019 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ max_difficulty 
+
+ Adventurer
+
+ Join Date:
+
+ 1/25/2019
+
+ Posts:
+
+ 10
+
+ Member Details
+
+ #5 
+
+ max_difficulty 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ Barkskin into Brown Bear. Low level free ride :)
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ CWintheVW 
+
+ Adventurer
+
+ Join Date:
+
+ 10/12/2017
+
+ Posts:
+
+ 2
+
+ Member Details
+
+ #6 
+
+ CWintheVW 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ I like the break down of spells into Utility, Support, Defense, etc. in this and other magic-user focused articles. Great guide!
+
+ One mistake to fix:
+
+ <do come close to running out of Wild Shape uses, you can you can burn spell slots to heal 1d8 damage per spell slot,>
+
+ Last edited by CWintheVW : Oct 11, 2019 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ V2Blast 
+
+ Moderator
+
+ Swashbuckler
+
+ Join Date:
+
+ 11/27/2017
+
+ Posts:
+
+ 1,271
+
+ Member Details
+
+ #7 
+
+ V2Blast 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ And then, a flash of light. A tiny crackle of lighting on the surface of the ground. A tiny peal of thunder.
+
+ Given the context, I assume this should be "lightning".
+
+ Anyway, great article! I could have used this a month or two ago when I started playing my Moon druid :P It'd be even better if it suggested some go-to Wild Shape options.
+
+ Last edited by V2Blast : Oct 11, 2019 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ DruNemeton 
+
+ Adept
+
+ Join Date:
+
+ 3/20/2017
+
+ Posts:
+
+ 41
+
+ Member Details
+
+ #8 
+
+ DruNemeton 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ “They use the art of Wild Shape, which all druids possess in some form, [???] has been made into a weapon by these druids, who use the ferocity of beasts rather than the power of magic to defend the natural world.”
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ TheRavenOfDarkness 
+
+ Priest
+
+ Join Date:
+
+ 10/27/2018
+
+ Posts:
+
+ 74
+
+ Member Details
+
+ #9 
+
+ TheRavenOfDarkness 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 11, 2019 
+
+ This is a great article. Circle of Moon druids are amazing at lower levels, decent at higher ones, but once you have infinite wild shapes, the class is broken.
+
+ Two typos: Detect Magic is concentration, and the Mobile feat is useless when wild shaped, since you replace your movement speed(s).
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ Tim 
+
+ Initiate of the 3rd Circle
+
+ Join Date:
+
+ 3/20/2017
+
+ Posts:
+
+ 2,016
+
+ Member Details
+
+ #10 
+
+ Tim 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ Druids have great synergies with wizards, especially Circle of the Moon Druids. Mage Armor gives every beast shape that a Moon Druid can change into until they hit 4th level an AC bonus and the value of that AC bonus is huge when your AC without it is 11 or 12! Beasts have huge pools of HP but they're easy to hit.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ MrMel 
+
+ Bravo
+
+ Join Date:
+
+ 4/16/2018
+
+ Posts:
+
+ 34
+
+ Member Details
+
+ #11 
+
+ MrMel 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ Quote from TheRavenOfDarkness >> 
+
+ This is a great article. Circle of Moon druids are amazing at lower levels, decent at higher ones, but once you have infinite wild shapes, the class is broken.
+
+ Two typos: Detect Magic is concentration, and the Mobile feat is useless when wild shaped, since you replace your movement speed(s).
+
+ I'm pretty sure the Mobile Feat still applies when Wild Shaped. According to the section in the PHB on wild shape "You retain the benefit of any features from your class, race, or other source and can use them if the new form is physically capable of doing so." Is there any reason why a Feat would not be an "other source"?
+
+ Also note that Mobile has three effects only one of which is directly related to movement speed. That effect is that "Your speed increases by 10 feet" which any animal form should be physically capable of doing, so it should apply in Wild Shape.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ Marc567 
+
+ Adventurer
+
+ Join Date:
+
+ 4/15/2019
+
+ Posts:
+
+ 2
+
+ Member Details
+
+ #12 
+
+ Marc567 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ It's probably for the ability to not provoke opportunity attacks, allowing higher level druids to get in and out of striking range without risking too much damage to their wildshape.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ zeromh 
+
+ Acolyte
+
+ Join Date:
+
+ 8/13/2018
+
+ Posts:
+
+ 21
+
+ Member Details
+
+ #13 
+
+ zeromh 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ Quote from TheRavenOfDarkness >> 
+
+ Circle of Moon druids are amazing at lower levels, decent at higher ones, but once you have infinite wild shapes, the class is broken. 
+
+ Is it? I assume you're talking combat, specifically (correct me if I'm wrong).
+
+ I think the DM has to plan ahead in terms of how to challenge a level 20 druid in combat, but that's probably true of all level 20 characters. There are lots of ways to take down an archdruid using powerful spells and damage-dealing monsters (keeping in mind that druids can only transform on their turn). I'm not convinced this is broken.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ PhoenixM13 
+
+ Veteran
+
+ Join Date:
+
+ 3/22/2017
+
+ Posts:
+
+ 17
+
+ Member Details
+
+ #14 
+
+ PhoenixM13 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ A word of caution to DMs who allow multi-classing. Barb rage + wild shape is incredibly powerful! It's a lot harder to make this type of druid feel the pain of combat compared to the other members of the party. 
+
+ Think of wild shape being similar to temp hp and you'll get a better picture of how much damage you have to dish out. If you allow it and your Druidariam wants to take animal totem, you might think about a compromise where they only get the benefit of certain rage mechanics while wild shaped as that animal. 
+
+ It can be done great role play, but just think about the consequences before you done into it. 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ CaelenVasius 
+
+ Veteran
+
+ Join Date:
+
+ 4/13/2017
+
+ Posts:
+
+ 14
+
+ Member Details
+
+ #15 
+
+ CaelenVasius 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ I'm currently playing a Moon Druid / Battlemaster Fighter combo. Second wind and action surge a re always fantastic to have around, but all Maneuvers function in wild shape forms and make for great fun things to do instead of just swinging. My dire wolf form can not only bite you, but it can menace you at the same time, or allow a friend to sneak in behind you. The only challenge here is that Moon Druids tend to need quick access to higher CR beasts to stay combt relevant, and dipping into fighter does slow that down.
+
+ Quote from V2Blast >> 
+ :P It'd be even better if it suggested some go-to Wild Shape options.
+
+ Check out the following link : it has a massive breakdown of all beasts from a wild shape perspective, and grades them! It's a wonderful resource when I planned my "go to" shapes in the character builder.
+
+ Last edited by CaelenVasius : Oct 12, 2019 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ FerranSchafer 
+
+ Adventurer
+
+ Join Date:
+
+ 7/3/2019
+
+ Posts:
+
+ 3
+
+ Member Details
+
+ #16 
+
+ FerranSchafer 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ A character who tugs on her braid in annoyance?
+
+ How dare you stand where Robert Jordan stood. 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ RJP1973 
+
+ Scutifer
+
+ Join Date:
+
+ 3/25/2017
+
+ Posts:
+
+ 220
+
+ Member Details
+
+ #17 
+
+ RJP1973 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ Quote from MsCrick >> 
+
+ I also recommend war caster as a feat! Druids have a lot of concentration control spells. Throwing one down before becoming an animal and then keeping up while in best shape is really helpful! 
+
+ There's a little bit of controversy here (so I've seen), since the War Caster feat has a prerequisite: The ability to cast at least one spell . And since you lose that ability in wild shape then, so the argument goes, you lose access to the feat. The rules do actually say that if you lose a feat's prerequisite then you can't use the feat until you regain the prerequisite.
+
+ As a DM, I would probably allow it anyway, but I have to admit that RAW suggests you can't use War Caster in wild shape.
+
+ I am actually playing a moon druid myself in a game and, being fortunate enough to start with an 18 wisdom, decided to take the Resilient Feat instead for Constitution. More hit points and being able to add your Constitution modifier to all Constitution saving throws (which includes concentration checks) has proven extremely useful.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ cosplaywrite 
+
+ Rogue
+
+ Join Date:
+
+ 9/28/2018
+
+ Posts:
+
+ 458
+
+ Member Details
+
+ #18 
+
+ cosplaywrite 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ Quote from RJP1973 >> 
+
+ Quote from MsCrick >> 
+
+ I also recommend war caster as a feat! Druids have a lot of concentration control spells. Throwing one down before becoming an animal and then keeping up while in best shape is really helpful! 
+
+ There's a little bit of controversy here (so I've seen), since the War Caster feat has a prerequisite: The ability to cast at least one spell . And since you lose that ability in wild shape then, so the argument goes, you lose access to the feat. The rules do actually say that if you lose a feat's prerequisite then you can't use the feat until you regain the prerequisite.
+
+ As a DM, I would probably allow it anyway, but I have to admit that RAW suggests you can't use War Caster in wild shape.
+
+ I am actually playing a moon druid myself in a game and, being fortunate enough to start with an 18 wisdom, decided to take the Resilient Feat instead for Constitution. More hit points and being able to add your Constitution modifier to all Constitution saving throws (which includes concentration checks) has proven extremely useful.
+
+ Once you hit 18th level (so maybe take the feat late in the game) you can cast a lot of spells in wild shape form. So that by RAW then goes out the window at high levels, assuming the campaign goes that high. Below that level your point is solid. RAI, I'd be inclined to allow war caster to work in wild shape since you can cast a concentration spell, assume wild shape, and maintain that spell while in wild shape unless you take damage and fail your concentration check.
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ sgruenbe 
+
+ Adventurer
+
+ Join Date:
+
+ 10/26/2017
+
+ Posts:
+
+ 11
+
+ Member Details
+
+ #19 
+
+ sgruenbe 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ It's been said quite a bit, but not here: Circle of the Moon is the best class for characters who have suboptimal rolled stats. Wildshape doesn't require high WIS for efficacy. 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ RussetLord 
+
+ Curate
+
+ Join Date:
+
+ 4/18/2019
+
+ Posts:
+
+ 77
+
+ Member Details
+
+ #20 
+
+ RussetLord 
+
+ View User Profile
+
+ Send Message
+
+ Posted Oct 12, 2019 
+
+ 20th level circle of the moon druids are broken. You can cast spells and transform as a bonus action infinite times. So you can attack and transform every turn to keep your HP up. 
+
+ Last edited by RussetLord : Oct 12, 2019 
+
+ Rollback Post to Revision 
+ 
+ RollBack 
+
+ To post a comment, please login or register a new account.
+
+ 1 
+ 2 
+ 3 
+ 4 
+ 5 
+ Next 
+
+ Delete 
+ Undelete 
+ Spam 
+ Not Spam 
+ Merge 
+
+ Apply To Selected 
+
+ Clear Selected 
+
+ Posts Quoted: 
+
+ Reply 
+
+ Clear All Quotes 
+
+ Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here: Terms of Service , Privacy Notice . By continuing to use the services, you agree to the new Terms.
+
+ Support
+
+ Help Portal 
+
+ Support Forum 
+
+ System Status 
+
+ Do Not Sell or Share My Personal Information 
+
+ Your Privacy Choices 
+
+ Cookie Notice 
+
+ System Reference Document (SRD) 
+
+ About
+
+ Contact Us 
+
+ Careers 
+
+ Wizards of the Coast 
+
+ Credits 
+
+ Find us on social media
+
+ Download the D&D Beyond App
+
+ © 2017- 2024 Wizards of the Coast LLC | All Rights Reserved
+
+ Dungeons & Dragons, D&D Beyond, D&D, Wizards of the Coast, the dragon ampersand, and all other Wizards of the Coast product names, campaign settings, their respective logos, and The World's Greatest Roleplaying Game are © and trademark Wizards of the Coast in the U.S.A. and other countries. © 2024 Wizards.
+
+ Privacy Policy
+
+ Terms of Service

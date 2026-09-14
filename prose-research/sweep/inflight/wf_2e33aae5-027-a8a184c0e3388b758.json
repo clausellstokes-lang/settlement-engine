@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 124,
+ "firstTs": "2026-09-11T19:14:35.070Z",
+ "lastTs": "2026-09-11T19:20:23.268Z",
+ "tools": {
+  "Bash": 38,
+  "Read": 5
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Section 0 is on disk. Appending variant 1.",
+ "run": "wf_2e33aae5-027",
+ "agent": "a8a184c0e3388b758",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_2e33aae5-027/agent-a8a184c0e3388b758.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

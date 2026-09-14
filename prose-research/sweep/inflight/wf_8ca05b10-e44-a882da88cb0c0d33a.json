@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 189,
+ "firstTs": "2026-09-10T04:00:59.937Z",
+ "lastTs": "2026-09-10T04:14:33.563Z",
+ "tools": {
+  "Bash": 35,
+  "Read": 17,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The packet is written and its citations are verified against the dock, and the dock is untouched. Returning the structured verdicts.",
+ "run": "wf_8ca05b10-e44",
+ "agent": "a882da88cb0c0d33a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_8ca05b10-e44/agent-a882da88cb0c0d33a.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

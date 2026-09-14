@@ -1,0 +1,825 @@
+ 
+ Storytelling in The Lord of the Rings - Wikipedia 
+ Jump to content 
+ Main menu 
+ Main menu 
+ move to sidebar 
+ hide 
+ Navigation
+ Main page Contents Current events Random article About Wikipedia Contact us 
+ Contribute
+ Help Learn to edit Community portal Recent changes Upload file Special pages 
+ Search 
+ Search 
+ Appearance 
+ Donate 
+ Create account 
+ Log in 
+ Personal tools 
+ Donate 
+ Create account 
+ Log in 
+ Contents 
+ move to sidebar 
+ hide 
+ (Top) 
+ 1 
+ Context 
+ 2 
+ Points of view 
+ Toggle Points of view subsection 
+ 2.1 
+ Hobbit 
+ 2.2 
+ Omniscient narrator 
+ 2.3 
+ Inverting literary theory 
+ 3 
+ Weaving a complex story 
+ Toggle Weaving a complex story subsection 
+ 3.1 
+ A tapestry romance 
+ 3.2 
+ Embedded stories 
+ 3.3 
+ Metanarrative 
+ 4 
+ Framing 
+ Toggle Framing subsection 
+ 4.1 
+ Frame stories 
+ 4.2 
+ Framing the author 
+ 5 
+ References 
+ Toggle References subsection 
+ 5.1 
+ Primary 
+ 5.2 
+ Secondary 
+ 5.3 
+ Sources 
+ Toggle the table of contents 
+ Storytelling in The Lord of the Rings 
+ 2 languages 
+ Português 中文 
+ Edit links 
+ Article 
+ Talk 
+ English 
+ Read 
+ Edit 
+ View history 
+ Tools 
+ Tools 
+ move to sidebar 
+ hide 
+ Actions
+ Read 
+ Edit 
+ View history 
+ General
+ What links here Related changes Upload file Permanent link Page information Cite this page Get shortened URL Switch to legacy parser 
+ Print/export
+ Download as PDF Printable version 
+ In other projects
+ Wikidata item 
+ Appearance 
+ move to sidebar 
+ hide 
+ From Wikipedia, the free encyclopedia 
+ Literary device in Tolkien's fiction 
+Storytelling is explored in multiple ways in J. R. R. Tolkien 's The Lord of the Rings , with stories told in different styles , attributed to many different characters with limited knowledge of events, as well as an omniscient narrator . Tolkien weaves together a complex story in the style of an interlaced medieval tapestry romance . Much dialogue and many stories and poems are embedded in the narrative. Alongside the main narrative are many other elements such as genealogies and footnotes , giving the impression that Tolkien was the editor and translator of the work, forming an editorial frame that includes a figure of himself in the story. 
+ Context [ edit ] 
+ Further information: J. R. R. Tolkien and Literary reception of The Lord of the Rings 
+ J. R. R. Tolkien was a scholar of English literature, a philologist and medievalist interested in language and poetry from the Middle Ages , especially that of Anglo-Saxon England and Northern Europe. [ 1 ] His professional knowledge of Beowulf , telling of a pagan world but with a Christian narrator, [ 2 ] helped to shape his fictional world of Middle-earth . His intention to create what has been called " a mythology for England " [ T 1 ] led him to construct not only stories but a fully-formed world, Middle-earth , with languages , peoples , cultures , and history . He is best known as the author of the high fantasy works The Hobbit and The Lord of the Rings , both set in Middle-earth. [ 3 ] 
+ The Lord of the Rings , once in Lykke Guanio-Uluru's words " dismissed by the literary establishment on generic terms " as worthless fantasy, is seen by comparison of analytic approaches to literature to be "as complex as a critic's analytical tools allow for." [ 4 ] 
+ Points of view [ edit ] 
+ Hobbit [ edit ] 
+ Further information: Tolkien's prose style § Hobbits as mediators with the heroic 
+ A Hobbit point of view is shared in The Lord of the Rings by narrative, dialogue, embedded stories, and songs, for example in the first chapter. [ T 2 ] 
+ Seq Narrative Dialogue Story Poem or song Place 
+ 1 Hobbit The Shire 
+ 2 Gaffer Gamgee The Ivy Bush inn 
+ 3 Hobbits 
+ 4 Gaffer Gamgee 
+ 5 Hobbits 
+ 6 Omniscient The Shire 
+ 7 Gandalf / Bilbo Bag End 
+ 8 Hobbit Hobbiton 
+ 9 Bilbo's speech 
+ 10 Hobbit 
+ 11 Gandalf/Bilbo Bag End 
+ 12 Bilbo: " The Road Goes Ever On " leaving Hobbiton 
+ 13 Hobbit Bag End 
+ 14 Gandalf/ Frodo 
+ 15 Hobbit 
+ 16 Gandalf/Frodo 
+ About half of The Lord of the Rings consists of dialogue, poetry and song , or stories told by a character. Thomas Kullmann and Dirk Siepmann liken this to the epic poetry of Homer and Virgil , which has a similar ratio, and contrast it to the modern novel, where dialogue typically makes up around a quarter of the text. The other half of Tolkien's novel is narrative, which frequently takes the point of view of one of the characters, most often – 85% of the time – one of the four Hobbit protagonists, Frodo, Sam , Merry , and Pippin . Each of these has a specific, limited knowledge and perspective on the world, with his own combination of thoughts, feelings, and perceptions. The Hobbit point of view is however balanced by other types of narrative, including sections with an omniscient narrator . Kullmann and Siepmann remark the "emotional depth" that is apparent from the first time that Frodo's point of view is given, in the first chapter. They write that this "will characterize the bulk of the novel". They liken this to English novels from the late 18th century onwards, which focussed on the subjective experiences of characters, such as Jane Austen 's 1813 Pride and Prejudice or Thomas Hardy 's 1891 Tess of the D'Urbervilles . [ 5 ] In addition, the Hobbits serve as mediators between the ordinary modern world and the heroic and archaic fantasy realm, making The Hobbit and The Lord of the Rings readily accessible. [ 6 ] 
+ Descriptions such as of landscape are often told from such a Hobbit point of view. Landscape features may be personified , so as to indicate the state of the character's mind at that moment: "the road ... climbed to the top of a steep bank in a weary zig-zagging sort of way, and then prepared to go down for the last time." An account, too, can switch from omniscient to specific within a paragraph, as when Aragorn appears after a hard night: "So much alike were they, the sons of Elrond, that few could tell them apart: dark-haired, grey-eyed, and their faces elven-fair... But Merry had eyes only for Aragorn, so startling was the change that he saw in him, as if in one night many years had fallen on his head. Grim was his face, grey-hued and weary." [ 5 ] 
+ Tolkien, however, is not constrained to using point-of-view to describe characters. He can use Frodo's limited viewpoint to debate a philosophical point, such as whether people have free will or are governed by forces beyond their control. Frodo looks out from the Seat of Seeing atop Amon Hen : "everywhere he looked he saw the signs of war... Horsemen were galloping on the grass of Rohan; wolves poured from Isengard..." and then he realizes he has been noticed by "two powers", good and evil : "The two powers strove in him. For a moment, perfectly balanced between their piercing points, he writhed, tormented. Suddenly he was aware of himself again. Frodo, neither the Voice nor the Eye: free to choose, and with one remaining instant in which to do so. He took the Ring off his finger." [ 5 ] 
+ Omniscient narrator [ edit ] 
+ Where the Hobbit viewpoints are narrated in the style of a 19th century novel, the relatively rare omniscient narrator sections use other styles. The prologue about Hobbits imitates ethnography , one of several antiquarian elements in The Lord of the Rings comparable to the writings of 18th century figures like William Stukeley or Thomas Percy . [ 5 ] [ 7 ] The geographic descriptions of places such as Bree have some resemblance to a travel guide : "Bree was the chief village of the Bree-land, a small inhabited region, like an island in the empty lands round about. Besides Bree itself, there was Staddle on the other side of the hill, Combe in a deep valley a little further eastward..." Such descriptions were common in ancient Greek literature such as Heliodorus 's romance Aethiopica . These sections of the novel do not further the action, but by using non-fiction techniques they make Middle-earth feel objectively real as well as subjectively experienced. [ 5 ] 
+ Tolkien's description of the re-forging of Aragorn 's sword Andúril marks him out as an old-style hero . [ 5 ] Artist's impression shown. 
+ Other omniscient narrator passages are in epic style, marking out characters such as Aragorn as old-style heroes : "The Sword of Elendil was forged anew by Elvish smiths, and on its blade was traced a device of seven stars set between the crescent Moon and the rayed Sun, and about them was written many runes, for Aragorn son of Arathorn was going to war upon the marches of Mordor. Very bright was that sword when it was made whole again..." Kullmann and Siepmann comment that both the epic style and the sword-forging theme indicate a hero. Passages in this style occur at critical moments, they write, such as the Battle of Helm's Deep , the Battle of the Pelennor Fields , and the destruction of the One Ring in the Cracks of Doom ; Tolkien uses it, too, when describing the Riders of Rohan . The epic style is characterised by archaic diction, parataxis with clauses linked with "and", plentiful imagery, and a richly poetical use of descriptive words . [ 5 ] 
+ Inverting literary theory [ edit ] 
+ Kullmann and Siepmann comment that The Lord of the Rings , and fantasy more widely, does not fit the usual literary theory of the use of points of view. The standard maxim " show, don't tell " implies that telling is less vivid than showing, and that (in a realist novel ) it would be describing the same thing, only less well. They state that Tolkien can exploit an archaic style with an omniscient narrator for the Riders of Rohan to create a highly vivid account: "The host rode on. Need drove them. Fearing to come too late, they rode with all the speed they could, pausing seldom. Swift and enduring were the steeds of Rohan, but there were many leagues to go. ... Night closed about them." Conversely, when Tolkien does use a single character's viewpoint, he does it to show their state of mind, not to describe action. The outer level (of story) is in the fantasy world; the inner level of spiritual and mental growth is closer to the real world. Further, narrative theory supposes that the omniscient narrator carries the author's voice (diegetic authority), while individual character narration, especially in a focalising character like a protagonist, is mimetic , giving an impression of the fictional world; and non-focalising characters carry little weight. Tolkien, on the other hand, can be highly mimetic in omniscient narrative, as in the Riders of Rohan passage; and non-focalising characters like Tom Bombadil, Elrond, and Gandalf can provide important messages, as when Gandalf says "Many that live deserve death. And some that die deserve life. Can you give it to them?" [ 8 ] 
+ Weaving a complex story [ edit ] 
+ A tapestry romance [ edit ] 
+ Further information: Interlacing in The Lord of the Rings 
+ George Thomson states that The Lord of the Rings is a tapestry romance like Edmund Spenser 's 1590 narrative poem The Faerie Queene . Illustration from an 1895–1897 edition. [ 9 ] 
+ George Thomson writes that the story of The Lord of the Rings could have been told as a plain narrative of how Frodo overcame obstacles to fulfil his quest: but Tolkien attempted something much "far more elaborate". Thomson states this to be "a tapestry romance in the Medieval-Renaissance tradition." [ 9 ] Northrop Frye stated that a romance has six phases. In the novel, Frodo has a strange birth where his parents drown; as a boy he lives innocently in the peaceful Shire; he then goes on the dangerous quest of the Ring. The fourth stage, Thomson writes, has Éowyn killing the Nazgûl and his monstrous steed in front of a besieged fortress, Minas Tirith : a transformation of the fairytale "beleaguered castle and the monster controlled by the virgin" theme. The heroes return victorious, Aragorn weds Arwen , and Sam weds Rosie Cotton . Finally, the Third Age ends, Sam becomes Mayor of the Shire, and he and Rosie have many children; Frodo writes his memoirs. Thomson notes that in addition, the many stories of the tapestry romance are interwoven , in the long unfashionable manner of Edmund Spenser 's 1590 narrative poem The Faerie Queene . Further, because the main characters of a romance are basically types rather than individuals, "the complexity of human nature must be projected into the external world." [ 9 ] Tolkien handles this by character pairing , such as by providing the heroes with evil counterparts: Gandalf with Sauron and with Saruman , Aragorn with Denethor, Frodo with the Hobbit-turned-monster, Gollum . The rather artificial effect of such a black-and-white structure is enlivened and made more engaging by having the Hobbits as mediators between the rather medieval romance and the modern reader. Thomson concludes that "Tolkien has created a prose romance in which displacement is radical and the fantasy element extremely powerful. For this reason he was able to ransack the entire storehouse of early northern literature (mythology, fairy tale, saga, epic), transmute its materials ... and combine them with the materials and conventions of romance." [ 9 ] 
+ Embedded stories [ edit ] 
+ Further information: Impression of depth in The Lord of the Rings 
+ Depending on what is counted as a story, there are some 45 to 50 stories embedded in the text of The Lord of the Rings , supposedly narrated by 23 of the novel's characters. These range from brief, taking up as little as ten lines, to lengthy tales occupying multiple pages. Besides these actual stories, the reader is told that Tom Bombadil spent a day on "long tales", telling the Hobbits "many remarkable stories" about "bees and flowers, the ways of trees, and the strange creatures of the Forest, about the evil things and good things, things friendly and things unfriendly, cruel things and kind things, and secrets hidden under brambles". However, none of those tales are provided for the reader. After the Bombadil episode, a whole chapter of Book 2, " The Council of Elrond ", is devoted to stories told by one character after another. The chapter alludes to several more stories, told by Frodo and Bilbo Baggins , but since what they had to say has already been described in earlier chapters, including in the chapter " The Shadow of the Past " in Book 1, the content of those stories is not given. [ 10 ] [ T 3 ] [ T 4 ] 
+ Kullmann and Siepmann categorise the stories in the novel as tales of recent events in the lives of characters while the others were busy doing something else; tales of the time before Frodo set off from Bag End , including events narrated at the Council of Elrond, as well as Gaffer Gamgee's account of Bilbo and young Frodo; and mythological tales about the history of the Ring, including of Lúthien as told by Aragorn , and of Nimrodel as told by Legolas . They add that the history of the Ents as told by Treebeard , remembering when he was young and there were still Entwives in Middle-earth, and of events concerning Númenor and Sauron in the Second Age as recalled by Elrond , are also "mythological" because of their content, despite the fact that these narrators have lived long enough to have seen some of the ancient events they describe. [ 10 ] 
+ Metanarrative [ edit ] 
+ Further information: Tolkien and the modernists § Metanarrative and self-referentiality 
+ Tolkien's characters do not just tell stories to each other: they explicitly speak about storytelling, and are conscious of the metanarrative fact that they are in a story. Frodo and Sam Gamgee , resting for a moment high on the pass of Cirith Ungol , about to descend into Mordor , very likely to their deaths, discuss whether their tale will be "read out of a great big book with red and black letters, years and years afterwards. And people will say 'Let's hear about Frodo and the Ring!'" Kullmann and Siepmann comment that the resulting laughter "is obviously due to the liberating function of literature." [ 10 ] 
+ Mary Bowman writes that Tolkien makes use of multiple metanarrative techniques in The Lord of the Rings , including, as with Frodo and Sam at Cirith Ungol, having characters discuss narrative, in that case actually self-referentially , [ 11 ] as Sam realises that the Phial of Galadriel contains some of the light of the Silmarils , tying his tale into a wider arc of story. [ T 5 ] She comments that it "is perhaps not surprising to find such a conversation, with its mood-altering impact, in a work written by a man who spent his professional career, as well as a good deal of his leisure time from boyhood, reading, teaching, editing, and writing about narratives of various sorts (not to mention creating them)." [ 11 ] 
+ Framing [ edit ] 
+ Frame stories [ edit ] 
+ Main article: Tolkien's frame stories 
+ A particular narrative issue for Tolkien, after the success of The Hobbit in 1937, was the demand for another Hobbit book, given that he had ended the novel with an extremely emphatic closure: the protagonist Bilbo "remained very happy to the end of his days, and those were extraordinarily long." To get around this sequel-blocking announcement, Tolkien came up with a frame story for the sequel , the Red Book of Westmarch , The Lord of the Rings : both it and The Hobbit were ancient tales told by Bilbo and somehow preserved through the ages until Tolkien found the manuscript . [ 11 ] [ 12 ] [ 13 ] This effectively puts the whole of The Hobbit , including the troublesome closure, "inside quotation marks", as Bowman puts it; [ 11 ] and Bilbo the author becomes obsessional about the question of closure, to the extent that he remarks to the Council of Elrond, which had a much bigger problem to discuss, "I was very comfortable here, and getting on with my book. If you want to know, I am just writing an ending for it", which was to be a "happily ever after" conclusion, evidently to be frustrated by the quest to destroy the One Ring and the need for Bilbo to write the whole thing up when it eventually concluded. Bowman contrasts Bilbo's desire to wrap the story up with Sam's delight at finding himself in a story, and his realisation that it was in fact part of the ancient story of Eärendil and the Silmarils , since the Phial of Galadriel that the Hobbits were carrying contained some of the light from the Evening Star , which in the tale was the Silmaril carried across the sky in Eärendil's ship. Bowman remarks that the conclusion that "there is no true end to any fairy-tale" is stated directly in Tolkien's 1938 essay " On Fairy-Stories ". [ 11 ] [ T 6 ] 
+ Framing the author [ edit ] 
+ Main article: Editorial framing of The Lord of the Rings 
+ In The Lord of the Rings , Tolkien went much further than simply providing a frame story. The found manuscript conceit, and the claim that he had translated it into English from the original Westron rather than written it himself, put him in the frame with the story that he was the book's editor and translator. He formed the frame with an elaborate editorial apparatus that extends and comments upon it. This material, mainly in the book's appendices, effectively includes a fictional editorial figure much like himself who is interested in philology , and who says he is translating a manuscript which has somehow come into his hands , having somehow survived the thousands of years since the Third Age . He called the book a heroic romance, giving it a medieval feeling , and describing its time-frame as the remote past. Among the steps he took to make its setting, Middle-earth , believable were to develop its geography , history , peoples , genealogies , and unseen background (later published as The Silmarillion ) in great detail, complete with editorial commentary in each case. [ 12 ] [ 14 ] 
+ Tolkien tells a meta-story, that he is the editor of The Lord of the Rings , not its author, by presenting it as a text framed with a wide variety of editorial materials. [ 12 ] [ 13 ] [ 14 ] [ 15 ] 
+ References [ edit ] 
+ Primary [ edit ] 
+ ↑ Carpenter 2023 , Letters #131 to Milton Waldman , late 1951 
+ ↑ Tolkien 1954a , Book 1, ch. 1 "A Long-Expected Party" 
+ ↑ Tolkien 1954a , book 1, ch. 2, " The Shadow of the Past " 
+ ↑ Tolkien 1954a , Book 2, ch. 2: " The Council of Elrond " . 
+ ↑ Tolkien 1954 , book 4, ch. 8 "The Stairs of Cirith Ungol" 
+ ↑ Tolkien 1964 , " On Fairy-Stories " 
+ Secondary [ edit ] 
+ ↑ Chance 2003 , Introduction. 
+ ↑ Shippey 2005 , pp. 104, 190–197, 217. 
+ ↑ Carpenter 1977 , pp. 111, 200, 266 and throughout. 
+ ↑ Guanio-Uluru 2013 , pp. 225–238. 
+ 1 2 3 4 5 6 7 Kullmann & Siepmann 2021 , pp. 90–122. 
+ ↑ Shippey 2005 , p. 259. 
+ ↑ Groom 2020 , pp. 286–302. 
+ ↑ Kullmann & Siepmann 2021 , pp. 120–122. 
+ 1 2 3 4 Thomson 1967 , pp. 43–59. 
+ 1 2 3 Kullmann & Siepmann 2021 , pp. 193–226. 
+ 1 2 3 4 5 Bowman 2006 , pp. 272–275. 
+ 1 2 3 Turner 2011a , pp. 18–21. 
+ 1 2 Flieger 2005 , pp. 67–73 "A great big book with red and black letters". 
+ 1 2 Brljak 2010 , pp. 1–34. 
+ ↑ Kullmann 2009 , pp. 46–47. 
+ Sources [ edit ] 
+ \n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"Letters"}},"i":4}}," <!--Carpenter 2023 [1981]-->\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Chance"},"first":{"wt":"Jane"},"author-link":{"wt":"Jane Chance"},"title":{"wt":"Tolkien the Medievalist"},"publisher":{"wt":"[[Routledge]]"},"year":{"wt":"2003"},"isbn":{"wt":"978-0-415-47348-4"},"oclc":{"wt":"53706034"}},"i":5}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Flieger"},"first":{"wt":"Verlyn"},"author-link":{"wt":"Verlyn Flieger"},"year":{"wt":"2005"},"title":{"wt":"Interrupted Music: The Making of Tolkien's Mythology"},"title-link":{"wt":"Interrupted Music"},"publisher":{"wt":"[[Kent State University Press]]"}},"i":6}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Guanio-Uluru"},"first":{"wt":"Lykke H.A."},"chapter":{"wt":"Narrative Ethics in J.R.R. Tolkien's ''The Lord of the Rings''"},"title":{"wt":"Narrative Ethics"},"publisher":{"wt":"Brill"},"year":{"wt":"2013"},"pages":{"wt":"225–238"},"doi":{"wt":"10.1163/9789401209823_017"},"isbn":{"wt":"978-94-012-0982-3"},"url":{"wt":"https://brill.com/display/book/9789401209823/B9789401209823-s017.xml"}},"i":7}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Groom"},"first":{"wt":"Nick"},"author-link":{"wt":"Nick Groom"},"chapter":{"wt":"The English Literary Tradition: Shakespeare to the Gothic"},"pages":{"wt":"286–302"},"chapter-url":{"wt":"https://onlinelibrary.wiley.com/doi/abs/10.1002/9781118517468.ch20"},"editor-last":{"wt":"Lee"},"editor-first":{"wt":"Stuart D."},"editor-link":{"wt":"Stuart D. Lee"},"title":{"wt":"[[A Companion to J. R. R. Tolkien]]"},"date":{"wt":"2020"},"orig-year":{"wt":"2014"},"publisher":{"wt":"[[Wiley Blackwell]]"},"doi":{"wt":"10.1002/9781118517468.ch20"},"isbn":{"wt":"978-1119656029"},"oclc":{"wt":"1183854105"}},"i":8}},"\n* ",{"template":{"target":{"wt":"cite journal ","href":"./Template:Cite_journal"},"params":{"last":{"wt":"Kullmann"},"first":{"wt":"Thomas"},"title":{"wt":"Intertextual Patterns in JRR Tolkien's The Hobbit and The Lord of the Rings"},"journal":{"wt":"[[Nordic Journal of English Studies]]"},"volume":{"wt":"8"},"issue":{"wt":"2"},"year":{"wt":"2009"},"pages":{"wt":"37–56"},"doi":{"wt":"10.35360/njes.190"},"url":{"wt":"https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=ef4bbee7b8993086ff7315388bece6038fa6241d"},"doi-access":{"wt":"free"}},"i":9}},"\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last1":{"wt":"Kullmann"},"first1":{"wt":"Thomas"},"last2":{"wt":"Siepmann"},"first2":{"wt":"Dirk"},"title":{"wt":"Tolkien as a Literary Artist"},"publisher":{"wt":"[[Palgrave Macmillan]]"},"publication-place":{"wt":"Cham"},"year":{"wt":"2021"},"isbn":{"wt":"978-3-030-69298-8"}},"i":10}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"ROAD"}},"i":11}}," <!--Shippey 2005-->\n* ",{"template":{"target":{"wt":"cite journal ","href":"./Template:Cite_journal"},"params":{"last":{"wt":"Thomson"},"first":{"wt":"George H."},"title":{"wt":"\"The Lord of the Rings\": The Novel as Traditional Romance"},"journal":{"wt":"Wisconsin Studies in Contemporary Literature"},"volume":{"wt":"8"},"issue":{"wt":"1"},"date":{"wt":"1967"},"doi":{"wt":"10.2307/1207129"},"pages":{"wt":"43–59"},"jstor":{"wt":"1207129"}},"i":12}},"\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"FOTR"}},"i":13}}," <!--Tolkien 1954a-->\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"TT"}},"i":14}}," <!--Tolkien 1954-->\n* ",{"template":{"target":{"wt":"ME-ref","href":"./Template:ME-ref"},"params":{"1":{"wt":"T&L"}},"i":15}}," <!--Tolkien 1964, Tree and Leaf-->\n* ",{"template":{"target":{"wt":"cite book ","href":"./Template:Cite_book"},"params":{"last":{"wt":"Turner"},"first":{"wt":"Allan"},"author-link":{"wt":"Allan Turner"},"chapter":{"wt":"A Theoretical Model for Tolkien Translation Criticism"},"editor-last":{"wt":"Honegger"},"editor-first":{"wt":"Thomas"},"editor-link":{"wt":"Thomas Honegger"},"title":{"wt":"Tolkien in Translation"},"publisher":{"wt":"[[Walking Tree Publishers]]"},"year":{"wt":"2011a"},"isbn":{"wt":"978-3-9521424-6-2"},"series":{"wt":"Cormarë series"},"volume":{"wt":"4"},"location":{"wt":"Zurich"},"pages":{"wt":"1–30"}},"i":16}},"\n",{"template":{"target":{"wt":"refend","href":"./Template:Refend"},"params":{},"i":17}}]}'> 
+ Bowman, Mary R. (October 2006). "The Story Was Already Written: Narrative Theory in "The Lord of the Rings" ". Narrative . 14 (3): 272– 293. doi : 10.1353/nar.2006.0010 . JSTOR 20107391 . S2CID 162244172 . 
+ Brljak, Vladimir (2010). "The Books of Lost Tales: Tolkien as Metafictionist". Tolkien Studies . 7 (1): 1– 34. doi : 10.1353/tks.0.0079 . ISSN 1547-3163 . 
+ Carpenter, Humphrey (1977). J. R. R. Tolkien: A Biography . New York: Ballantine Books . ISBN 978-0-04-928037-3 . 
+ Carpenter, Humphrey , ed. (2023) [1981]. The Letters of J. R. R. Tolkien : Revised and Expanded Edition . New York: HarperCollins . ISBN 978-0-35-865298-4 . 
+ Chance, Jane (2003). Tolkien the Medievalist . Routledge . ISBN 978-0-415-47348-4 . OCLC 53706034 . 
+ Flieger, Verlyn (2005). Interrupted Music: The Making of Tolkien's Mythology . Kent State University Press . 
+ Guanio-Uluru, Lykke H.A. (2013). "Narrative Ethics in J.R.R. Tolkien's The Lord of the Rings ". Narrative Ethics . Brill. pp. 225– 238. doi : 10.1163/9789401209823_017 . ISBN 978-94-012-0982-3 . 
+ Groom, Nick (2020) [2014]. "The English Literary Tradition: Shakespeare to the Gothic" . In Lee, Stuart D. (ed.). A Companion to J. R. R. Tolkien . Wiley Blackwell . pp. 286– 302. doi : 10.1002/9781118517468.ch20 . ISBN 978-1119656029 . OCLC 1183854105 . 
+ Kullmann, Thomas (2009). "Intertextual Patterns in JRR Tolkien's The Hobbit and The Lord of the Rings" . Nordic Journal of English Studies . 8 (2): 37– 56. doi : 10.35360/njes.190 . 
+ Kullmann, Thomas; Siepmann, Dirk (2021). Tolkien as a Literary Artist . Cham: Palgrave Macmillan . ISBN 978-3-030-69298-8 . 
+ Shippey, Tom (2005) [1982]. The Road to Middle-Earth: How J. R. R. Tolkien Created a New Mythology (Third ed.). HarperCollins . ISBN 978-0-261-10275-0 . 
+ Thomson, George H. (1967). " "The Lord of the Rings": The Novel as Traditional Romance". Wisconsin Studies in Contemporary Literature . 8 (1): 43– 59. doi : 10.2307/1207129 . JSTOR 1207129 . 
+ Tolkien, J. R. R. (1954a). The Fellowship of the Ring . The Lord of the Rings . Boston: Houghton Mifflin . OCLC 9552942 . 
+ Tolkien, J. R. R. (1954). The Two Towers . The Lord of the Rings . Boston: Houghton Mifflin . OCLC 1042159111 . 
+ Tolkien, J. R. R. (1964). J. R. R. Tolkien: Tree and Leaf . London: HarperCollins . 
+ Turner, Allan (2011a). "A Theoretical Model for Tolkien Translation Criticism". In Honegger, Thomas (ed.). Tolkien in Translation . Cormarë series. Vol. 4. Zurich: Walking Tree Publishers . pp. 1– 30. ISBN 978-3-9521424-6-2 . 
+ v t e The Lord of the Rings 
+ J. R. R. Tolkien 
+ Constructing The Lord of the Rings 
+ About 
+ Volumes
+ The Fellowship of the Ring 
+ The Two Towers 
+ The Return of the King 
+ Stories
+ " The Shadow of the Past " 
+ " The Council of Elrond " 
+ " The Scouring of the Shire " 
+ " The Tale of Aragorn and Arwen " 
+ Translating 
+ list 
+ Swedish 
+ Reception
+ Impact 
+ Literary 
+ Fandom 
+ Fan fiction 
+ Oxonmoot 
+ Tolkienmoot 
+ Works inspired 
+ Tolkien's impact on fantasy 
+ Annotation
+ A Reader's Companion 
+ Elements Languages 
+ Black Speech 
+ Elvish 
+ Quenya 
+ Sindarin 
+ Khuzdul 
+ Westron 
+ Poetry 
+ A Elbereth Gilthoniel 
+ Namárië 
+ Song of Eärendil 
+ The Man in the Moon Stayed Up Too Late 
+ The Road Goes Ever On 
+ A Walking Song 
+ Other 
+ Artwork 
+ Family trees 
+ Heraldry 
+ Maps 
+ Proverbs 
+ Scripts 
+ Cirth 
+ Tengwar 
+ Analysis Themes 
+ Addiction to power 
+ Ancestry as guide to character 
+ Architecture 
+ Company of the Ring 
+ Death and immortality 
+ Decline and fall 
+ Divination 
+ Dreams and visions 
+ Economy 
+ England 
+ Environmentalism 
+ Evil 
+ Feudal allegiance 
+ Forests 
+ Geology 
+ Hell 
+ Heroism 
+ Luck and fate 
+ Magic 
+ Mental illness 
+ Moral dilemma 
+ Music 
+ Naming of weapons 
+ Northern courage 
+ Paganism 
+ Plants 
+ Prophecy 
+ Psychological journeys 
+ Quests 
+ Race 
+ Sexuality 
+ Sound and language 
+ Time 
+ Trees 
+ Women 
+ Influences 
+ Antiquarianism 
+ Beowulf 
+ Celtic 
+ Christianity 
+ Classical world 
+ Edwardian adventure stories 
+ First World War 
+ Norse 
+ Medieval 
+ Modern sources 
+ Modernism 
+ William Morris 
+ A mythology for England 
+ Philology 
+ Shakespeare 
+ Techniques 
+ Anachronism 
+ Character pairing 
+ Editorial framing 
+ Frame stories 
+ Pseudotranslation 
+ Impression of depth 
+ Narrative structure 
+ Interlacing 
+ Storytelling 
+ Prose style 
+ Ambiguity 
+ Epic Pooh 
+ Peoples Maiar 
+ Balrogs 
+ Sauron 
+ Wizards 
+ Gandalf 
+ Radagast 
+ Saruman 
+ Free peoples 
+ Dwarves 
+ Balin 
+ Gimli 
+ Elves 
+ Galadriel 
+ Glorfindel 
+ Half-elven 
+ Arwen 
+ Elrond 
+ Legolas 
+ Thranduil 
+ Ents 
+ Treebeard 
+ Hobbits 
+ Bilbo 
+ Frodo 
+ Merry 
+ Pippin 
+ Sam 
+ Men 
+ Beornings 
+ Drúedain 
+ Dúnedain 
+ Aragorn 
+ of Gondor 
+ Boromir 
+ Denethor 
+ Faramir 
+ of Rohan 
+ Éomer 
+ Éowyn 
+ Théoden 
+ Wormtongue 
+ Monsters 
+ Barrow-wight 
+ Gollum 
+ Nazgûl 
+ Witch-king of Angmar 
+ Old Man Willow 
+ Orcs 
+ Shelob 
+ Trolls 
+ Wargs 
+ Watcher in the Water 
+ Other 
+ Eagles 
+ Goldberry 
+ Tom Bombadil 
+ World Geography 
+ Middle-earth 
+ Eriador
+ Bree 
+ Old Forest 
+ Rivendell 
+ The Shire 
+ Bag End 
+ Gondor 
+ Minas Tirith 
+ Harad 
+ Lothlórien 
+ Mirkwood 
+ Moria 
+ Mordor 
+ Rohan 
+ Isengard 
+ Undying Lands 
+ Battles 
+ Helm's Deep 
+ Pelennor Fields 
+ Morannon 
+ Things 
+ Mithril 
+ Oliphaunts 
+ Palantírs 
+ Phial of Galadriel 
+ Rings of Power 
+ One Ring 
+ List of weapons and armour 
+ Related works 
+ The Hobbit 
+ The Adventures of Tom Bombadil 
+ Errantry 
+ Fastitocalon 
+ The Sea-Bell 
+ Donald Swann 
+ The Road Goes Ever On 
+ Bilbo's Last Song 
+ The Silmarillion 
+ Unfinished Tales 
+ The Letters of J. R. R. Tolkien 
+ The History of Middle-earth 
+ The Children of Húrin 
+ The History of The Hobbit 
+ Beren and Lúthien 
+ The Fall of Gondolin 
+ The Nature of Middle-earth 
+ Adaptations and derivative works Books 
+ Bored of the Rings (1969) 
+ The Last Ringbearer (1999) 
+ Muddle Earth (2003) 
+ Illustrations 
+ A Map of Middle-earth 
+ Pauline Baynes 
+ Barbara Remington 
+ John Howe 
+ Alan Lee 
+ Margrethe II of Denmark 
+ Ted Nasmith 
+ Theatre 
+ Fellowship! (2005) 
+ The Lord of the Rings (2006) 
+ Music 
+ Bo Hansson 
+ Music Inspired by Lord of the Rings (1972) 
+ Johan de Meij 
+ Symphony No. 1 The Lord of the Rings (1988) 
+ Led Zeppelin 
+ " Ramble On " (1969) 
+ " Misty Mountain Hop " (1971) 
+ " The Battle of Evermore " (1971) 
+ Radio 
+ The Lord of the Rings ( BBC , 1955) 
+ The Lord of the Rings ( NPR , 1979) 
+ Hordes of the Things (1980) 
+ The Lord of the Rings (BBC, 1981) 
+ Der Herr der Ringe (1992) 
+ Film Animated 
+ The Lord of the Rings ( Bakshi , 1978) 
+ The Return of the King ( Rankin/Bass , 1980) 
+ The War of the Rohirrim ( Kamiyama , 2024) 
+ Peter Jackson series 
+ The Fellowship of the Ring (2001) 
+ The Two Towers (2002) 
+ The Return of the King (2003) 
+ Music 
+ " Concerning Hobbits " 
+ " Into the West " 
+ " May It Be " 
+ The Music of the Lord of the Rings Films (2010 book) 
+ Approach 
+ Production 
+ Hobbiton Movie Set 
+ Peter Jackson's interpretation 
+ Picturing Tolkien 
+ Tolkien on Film 
+ Other 
+ Sagan om ringen (1971) 
+ Khraniteli (1991) 
+ Hobitit (1993) 
+ The Rings of Power (2022)
+ music 
+ The Hunt for Gollum (2027) 
+ Fan-made 
+ The Hunt for Gollum (2009) 
+ Born of Hope (2009) 
+ Video games 
+ Journey to Rivendell 
+ Game One 
+ Game Two: Shadows of Mordor 
+ War in Middle Earth 
+ Vol. I (1990) 
+ Vol. I (SNES) 
+ Riders of Rohan 
+ Elendor 
+ Vol. II: The Two Towers 
+ The Fellowship of the Ring 
+ The Two Towers 
+ The Return of the King 
+ War of the Ring 
+ The Third Age 
+ GBA 
+ The Battle for Middle-earth 
+ Tactics 
+ The Battle for Middle-earth II 
+ The Rise of the Witch-king 
+ Conquest 
+ Aragorn's Quest 
+ War in the North 
+ Lego The Lord of the Rings 
+ Guardians of Middle-earth 
+ Shadow of Mordor 
+ Shadow of War 
+ Gollum 
+ Return to Moria 
+ The Lord of the Rings Online 
+ Mines of Moria 
+ Siege of Mirkwood 
+ Rise of Isengard 
+ Riders of Rohan 
+ Helm's Deep 
+ Mordor 
+ Minas Morgul 
+ War of Three Peaks 
+ Fate of Gundabad 
+ Before the Shadow 
+ Tabletop role- playing games 
+ Middle-earth Role Playing 
+ The Lord of the Rings Roleplaying Game 
+ The One Ring Roleplaying Game 
+ Adventures in Middle-earth 
+ Board games 
+ Middle Earth 
+ War of the Ring 
+ Gondor: The Siege of Minas Tirith 
+ Sauron 
+ Lord of the Rings 
+ War of the Ring 
+ Card games 
+ Middle-earth Collectible Card Game 
+ The Lord of the Rings Trading Card Game 
+ The Lord of the Rings: The Card Game 
+ Other games 
+ Middle-earth Strategy Battle Game 
+ Lego The Lord of the Rings 
+ v t e Middle-earth 
+ J. R. R. Tolkien 
+ Bibliography 
+ Canon 
+ Legendarium 
+ Outline 
+ Works In Tolkien's lifetime 
+ The Hobbit (1937) 
+ The Lord of the Rings (1954–55)
+ The Fellowship of the Ring 
+ " The Shadow of the Past " 
+ " The Council of Elrond " 
+ The Two Towers 
+ The Return of the King 
+ " The Scouring of the Shire " 
+ " The Tale of Aragorn and Arwen " 
+ The Adventures of Tom Bombadil (1962) 
+ Posthumous 
+ The Silmarillion (1977)
+ " Ainulindalë " 
+ Unfinished Tales (1980) 
+ The Letters of J. R. R. Tolkien (1981) 
+ Bilbo's Last Song (1990) 
+ The three "Great Tales"
+ The Children of Húrin (2007) 
+ Beren and Lúthien (2017) 
+ The Fall of Gondolin (2018) 
+ The Fall of Númenor (2022) 
+ History of composition History of Middle-earth 
+ [1–2] The Book of Lost Tales (1983–84)
+ Ælfwine 
+ [3] The Lays of Beleriand (1985) 
+ [4] The Shaping of Middle-earth (1986) 
+ [5] The Lost Road and Other Writings (1987)
+ The Etymologies 
+ Lhammas 
+ [6–9] The History of The Lord of the Rings (1988–1992)
+ The Notion Club Papers 
+ [10] Morgoth's Ring (1993) 
+ [11] The War of the Jewels (1994) 
+ [12] The Peoples of Middle-earth (1996) 
+ Others 
+ John D. Rateliff 
+ The History of The Hobbit (2007) 
+ Carl F. Hostetter 
+ The Nature of Middle-earth (2021) 
+ Fictional universe Peoples , monsters 
+ Ainur 
+ Maiar 
+ Balrogs 
+ Wizards 
+ Valar 
+ Dragons 
+ Ancalagon 
+ Smaug 
+ Dwarves 
+ Eagles 
+ Elves 
+ Half-elven 
+ Noldor 
+ Sundering 
+ Ents 
+ Hobbits 
+ Men 
+ Beornings 
+ Drúedain 
+ Dúnedain 
+ Orcs 
+ Trolls 
+ Characters 
+ First and Second Ages
+ Celebrimbor 
+ Eärendil and Elwing 
+ Elendil 
+ Fëanor 
+ Fingolfin 
+ Finwë and Míriel 
+ Gil-galad 
+ Húrin 
+ Isildur 
+ Lúthien and Beren 
+ Melian 
+ Morgoth 
+ Thingol 
+ Tuor and Idril 
+ Túrin Turambar 
+ Ungoliant 
+ Third Age
+ Elrond 
+ Galadriel 
+ Gandalf 
+ Glorfindel 
+ Goldberry 
+ Gollum 
+ Saruman 
+ Sauron 
+ Tom Bombadil 
+ Places 
+ First and Second Ages
+ Beleriand 
+ Númenor 
+ Valinor 
+ Third Age
+ Bree 
+ Esgaroth 
+ Gondor 
+ Harad 
+ Isengard 
+ Lonely Mountain 
+ Lothlórien 
+ Mirkwood 
+ Mordor 
+ Moria 
+ Rivendell 
+ Rohan 
+ The Shire 
+ Bag End 
+ Objects 
+ Mithril 
+ Palantír 
+ Red Book of Westmarch 
+ Rings of Power 
+ One Ring 
+ Silmarils 
+ Two Trees of Valinor 
+ List of weapons and armour 
+ Analysis Elements 
+ Artwork 
+ Family trees 
+ Heraldry 
+ Languages 
+ Adûnaic 
+ Black Speech 
+ Elvish 
+ Quenya 
+ Sindarin 
+ Khuzdul 
+ Valarin 
+ Westron 
+ Maps 
+ Tolkien's poetry 
+ Scripts 
+ Cirth 
+ Sarati 
+ Tengwar 
+ Themes 
+ Anachronism 
+ Ancestry as guide to character 
+ Architecture 
+ Christianity 
+ Cosmology 
+ Round World dilemma 
+ Death and immortality 
+ Decline and fall 
+ Dreams and visions 
+ Economy 
+ England 
+ Environmentalism 
+ Evil 
+ First World War 
+ Forests 
+ Frame stories 
+ Hell 
+ Heroism 
+ Light 
+ Luck and fate 
+ Magic 
+ Mental illness 
+ Modernism 
+ Moral dilemma 
+ Music 
+ Naming of weapons 
+ Northern courage 
+ Old Straight Road 
+ Paganism 
+ Plants 
+ Psychological journeys 
+ Quests 
+ Sound and language 
+ Time 
+ Trees 
+ Literary 
+ Tolkien's impact on fantasy 
+ Influences 
+ Beowulf 
+ Celtic 
+ Classical world 
+ Finnish language and literature 
+ Medieval 
+ Modern 
+ William Morris 
+ Norse 
+ Philology 
+ Shakespeare 
+ Prose style 
+ Ambiguity 
+ A mythology for England 
+ Geographic 
+ Geology 
+ The Atlas of Middle-earth 
+ Journeys of Frodo 
+ A Map of Middle-earth 
+ Adaptations, legacy Illustrators 
+ Pauline Baynes 
+ Cor Blok 
+ Anke Eißmann 
+ Brothers Hildebrandt 
+ Jenny Dolfen 
+ Mary Fairburn 
+ Donato Giancola 
+ John Howe 
+ Tove Jansson 
+ Alexander Korotich 
+ Alan Lee 
+ Tom Loback 
+ Margrethe II of Denmark 
+ Ted Nasmith 
+ Composers 
+ Bo Hansson 
+ Music Inspired by Lord of the Rings 
+ Leonard Rosenman 
+ Music of The Lord of the Rings , 1978 
+ Johan de Meij 
+ Symphony No. 1 The Lord of the Rings 
+ Howard Shore 
+ Music of The Lord of the Rings film series 
+ Music of The Hobbit film series 
+ Music of The Rings of Power TV series 
+ Bear McCreary 
+ Music of The Rings of Power TV series 
+ Stephen Gallagher
+ Music of The Lord of the Rings: The War of the Rohirrim 
+ Blind Guardian 
+ Nightfall in Middle-Earth 
+ Settings 
+ Donald Swann 
+ The Road Goes Ever On 
+ Poems and Songs of Middle Earth 
+ The Tolkien Ensemble 
+ An Evening in Rivendell 
+ A Night in Rivendell 
+ At Dawn in Rivendell 
+ Leaving Rivendell 
+ Other media 
+ Impact 
+ Middle-earth Enterprises 
+ Works inspired by Tolkien 
+ Fan fiction 
+ Film 
+ Calendars 
+ Video games 
+ Things named after Tolkien and his works 
+ Literary criticism 
+ The Complete Guide to Middle-earth 
+ A Companion to J. R. R. Tolkien 
+ Interrupted Music 
+ Master of Middle-Earth 
+ Picturing Tolkien 
+ A Question of Time 
+ J. R. R. Tolkien: Author of the Century 
+ The J. R. R. Tolkien Companion and Guide 
+ J. R. R. Tolkien Encyclopedia 
+ The Lord of the Rings: A Reader's Companion 
+ Perilous Realms 
+ The Road to Middle-Earth 
+ Splintered Light 
+ Tolkien and the Invention of Myth 
+ Tolkien's Art: 'A Mythology for England' 
+ Tolkien: A Look Behind The Lord of the Rings 
+ A Tolkien Compass 
+ Tolkien: Maker of Middle-earth 
+ Tolkien, Race and Cultural History 
+ Tolkien's Legendarium 
+ Tolkien and the Great War 
+ The Worlds of J. R. R. Tolkien 
+ The Ring of Words: Tolkien and the Oxford English Dictionary 
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=Storytelling_in_The_Lord_of_the_Rings&oldid=1309308416 " 
+ Categories : J. R. R. Tolkien Middle-earth themes Hidden categories: Articles with short description Short description is different from Wikidata Good articles Use British English from June 2024 All Wikipedia articles written in British English Use dmy dates from June 2024 
+ This page was last edited on 3 September 2025, at 08:55 (UTC) . 
+ Page was rendered with Parsoid . 
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization. 
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+ Search 
+ Search 
+ Toggle the table of contents 
+ Storytelling in The Lord of the Rings 
+ 2 languages 
+ Add topic 
+ 

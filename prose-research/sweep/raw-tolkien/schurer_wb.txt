@@ -1,0 +1,734 @@
+
+===== PAGE 1 =====
+Journal of Tolkien Research Journal of Tolkien Research 
+Volume 15 Issue 2 Article 6 
+2022 
+Second Age, Middle Age Second Age, Middle Age 
+Norbert Schürer 
+California State University, Long Beach, norbert.schurer@csulb.edu 
+Follow this and additional works at: https://scholar.valpo.edu/journaloftolkienresearch 
+ Part of the Literature in English, British Isles Commons, Medieval Studies Commons, and the Modern 
+Literature Commons 
+Recommended Citation Recommended Citation 
+Schürer, Norbert (2022) "Second Age, Middle Age," Journal of Tolkien Research: Vol. 15: Iss. 2, Article 6. 
+Available at: https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6 
+This Peer-Reviewed Article is brought to you for free and open access by ValpoScholar. It has been accepted for 
+inclusion in Journal of Tolkien Research by an authorized administrator of ValpoScholar. For more information, 
+please contact a ValpoScholar staff member at scholar@valpo.edu. 
+===== PAGE 2 =====
+Second Age, Middle Age Second Age, Middle Age 
+Cover Page Footnote Cover Page Footnote 
+A first (much shorter) version of this article was presented as a paper at the 18th Tolkien Seminar of the 
+Deutsche Tolkien Gesellschaft (German Tolkien Society) at the Friedrich-Schiller-Universität Jena in 2022. 
+I would particularly like to thank Prof. Thomas Honegger, Jonas Mertens, Jonathan Naumann, Prof. 
+Robert Tally, Allan Turner, and Renee Vink for their feedback. Suggestions from the anonymous reviewers 
+of the Journal of Tolkien Research vastly improved my essay. 
+This peer-reviewed article is available in Journal of Tolkien Research: https://scholar.valpo.edu/
+journaloftolkienresearch/vol15/iss2/6 
+===== PAGE 3 =====
+ 
+The Second Age of Tolkien’s legendarium is currently in vogue.  The William 
+Morrow imprint of HarperCollins Publishers recently released The Fall of 
+Númenor, a chronological or annalistic account of the Second Age edited by Brian 
+Sibley. The Fall of Númenor  does not introduce any new and  unpublished 
+documents, but rather assembles and reorganizes material relating to the Second 
+Age published in The Lord of th e Rings  (especially the appendices), The 
+Silmarillion, Unfinished Tales, various volumes of The History of Middle -Earth, 
+and The Nature of Middle-Earth. As the title suggests, the volume mostly focuses 
+on Númenor rather than Middle -earth, though of course the exploits of the 
+Númenóreans in Middle -earth mean that there are a number of stories about and 
+references to that continent. At the same time,  Amazon Prime Video released the 
+first season (eight episodes) of the series The Lord of the Rings: The Rings o f 
+Power. As most Tolkien fans know, this series has very little to do with The Lord 
+of the Rings—though there are some characters who are involved in the War of the 
+Rings at the end of the Third Age , e.g., Elrond, Galadriel, and Sauron . But The 
+Rings of Po wer is set in the Second Age, in Númenor and in Middle -earth, and 
+features some figures from that time mentioned in Tolkien’s writings , e.g., Gil-
+Galad, Celebrimbor, Durin III and IV, A r-Pharazôn, Míriel, Isildur, and Elendil. 
+There are also freely invented characters such as a sister for Isildur named Eärien; 
+a leader of the Uruk called Adar; a number of Elves; an entire group of proto -
+Hobbits; and a mysterious individual who falls from the sky.  The plot of the first 
+season of The Rings of Power  centered a round Galadriel’s search for Sauron, 
+Sauron’s emergence, the discovery of mithril by the dwarves, the production of 
+rings of power by Celebrimbor and others, and the travails of the band of proto -
+Hobbits—all in the Second Age. This recent popularity of the Second Age, whether 
+in Tolkien’s own words in The Fall of Númenor or in the imagination of the show-
+runners of The Rings of Power, raises the question of what the significance of this 
+period is for Tolkien’s legendarium as a whole. 
+With The Silmarillion  and The Lord of the Rings , the major published 
+narratives in Tolkien’s legendarium are set in the First and the Third Ages  
+respectively. In contrast, the Second Age only has one major completed story, the 
+“Akallabêth” or Fall  (or Downfall)  of Númenor , which Tolkien himself never 
+published in fully developed form.  For that reason  among others, many scholars 
+either ignore the Second Age entirely or dismiss it without much consideration. For 
+instance, Toby Widdicombe writes in J.R.R. Tolkien: A Guide for  the Perplexed 
+that “conceptually that [Second] age was always too tightly bound up with the 
+Atlantis story” (95)—at the very least ignoring the Noachian echoes1—and asserts 
+ 
+1 As Marie Barnfield explains, the Númenor  legend incorporates influence at least from Greek 
+legend (Atlantis), Israel (in Númenor’s religion), ancient Egypt (culture), and Celtic myth (in the 
+foundered kingdom, the link between the health of the king and the country, and the physical 
+1
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 4 =====
+ 
+that the story is “hackneyed” (95). In The Road to Middle -Earth, Tom Shippey 
+reduces the Second Age to “that of Númenor” (226).  In writing about the 
+“Akallabêth,” Brian Rosebury praises “[t]he simplicity and grandeur of its themes” 
+(107), but he concludes that there is an “unfulfilled promise” (108) in the material 
+on the Second Age in  The Silmarillion as well as Unfinished Tales. Even when 
+Peter Grybauskas recognizes the “sprawling allusive web” of the Second Age and 
+calls the Last Alliance “an untold tale essential to plot and theme” (26), he is 
+contextualizing the era and story for The Lord of the Rings  rather than analyzing 
+the Second Age for its own sake. 
+Yet the Second Age is physically and geographically distinct from the other 
+ages and carries its own meaning . As Widdicombe points out, “For almost all of 
+the Second Age, much of Middle-earth looked markedly different from the Middle-
+earth with which the general reader of Tolkien’s work is familiar from The Lord of 
+the Rings ” (104). More specifically, at the beginning of the age “some is lands 
+disappear and new ones are formed, hills are leveled, and rivers take new 
+directions” (104). In addition, the Second Age stands out because it is actually the 
+longest: The First Age (not counting the Years of the Lamps and Trees) only has 
+590 years and the Third Age has 3021, but the Second Age counts 3441. In a review 
+of The Fall of Númenor, Douglas Kane writes that the Second Age “is an important 
+part of the legendarium in and of itself” (1).  What then is the significance of th is 
+Second Age for Tolkien’s legendarium? 
+The answer I propose to this question is premised on the conviction that the 
+true significance of the legendarium lies not in itself, but in its application to our 
+world. As is well-known, Tolkien rejected the idea that there was any all egory in 
+The Lord of the Rings , and indeed I would submit that there are no  successful 
+allegorical interpretations of that novel. Presumably, Tolkien would have extended 
+his view of allegory to his entire legendarium. In the same foreword to the second 
+edition of The Lord of the Rings  where he formulated his rejection of allegory, 
+however, Tolkien offered the idea that his story could be ‘applied’ to the real world, 
+and a similar ‘application’ might help us understand better the significance of the 
+Second Age (Lord of the Rings xxiv). 
+My exploration of th at significance proceeds in two steps. First, i n my 
+opinion, the Second Age constitutes the Middle Ages or medieval period of 
+Tolkien’s universe. Tolkien was a scholar of medieval language and literature, and 
+it is quite possible that he considered this period central to any understanding of 
+English culture and history. Whereas many scholars of his time interpreted the 
+Middle Ages as an aberration between glorious antiquity and an even more glorious 
+present, Tolkien himself saw it as the most important period  of history, or at least 
+ 
+structure of the island). In spite of her subtitle “Númenor and the Second Age,” however, Barnfield 
+hardly discusses the Second Age as such. 
+2
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 5 =====
+ 
+European history. If we ‘apply’ this understanding to the legendarium, it seems to 
+me that the Second Age becomes the pivot around which all of Middle-earth moves. 
+The second step of my answer to the question above has two parts. On the 
+one hand, I argue, Tolkien sees the Second Age as central because, like the Middle 
+Ages on our earth to which he devoted his academic career, it looks backwards and 
+forwards in a unique way that helps us understand our own time better while 
+anchoring our present in a distant past.2 As Grybauskas explains, here “[t]he author 
+himself is in search of […] sour ce and import” (28).  On the other hand, in my 
+interpretation, the Second Age can never fulfill Tolkien’s desire to give his 
+legendarium and universe a center and meaning. Instead, it mostly consists of an 
+absent center, and the few stories that exist demonstrate the decline and failure that 
+are actually truly representative of the human condition.  As Rosebury puts it, 
+Tolkien here presents a “dark, disillusioned view of human experience” (108).  
+While the First Age and the Third Age end with a kind of redemption in the victories 
+over Morgoth and Sauron respectively, the climax of the Second Age offers little 
+optimism or hope for improvement. The stories show the failure and corruption of 
+humanity both in their content, like the moral and geological fall of Númenor, and 
+in their form, i.e., the fact that so many of them are fragmentary and unfinished. 
+In a way, then, I am presenting a deconstructive interpretation here: I am  
+looking at what the text and the critics marginalize, and I focus on what is not there 
+rather than what is there. My argument proceeds in three main sections: I examine 
+Tolkien’s assessment of the Middle Ages in our world in his correspondence and 
+scholarly work; I investigate the place of the Second Age in several large 
+frameworks or overviews that Tolkien constructed over the decades for his entire 
+legendarium; and I analyze the significance of the few more or less developed 
+narratives we have from the Second Age. 
+ 
+Middle Ages 
+ 
+The Middle Ages in our world are generally defined as beginning with the fall of 
+the Roman Empire in 476 CE after a glorious past in antiquity. At the later end, the 
+period moves into  the Reformation, the Early Modern Period, or the 
+Enlightenment—a new period of glory . According to Chris Wickham, the Middle 
+Ages were often treated by historians as transitional and dismissible, “a long period 
+of random violence, ignorance and superstition” (4).  Many scholars were and are 
+mostly interested in what followed the period, but as Wickham cautions: “History 
+is not teleological: that is to say historical development does not go to; it goes from” 
+(1). In addition, the adjective ‘medieval’ “was a negative word from the start, and 
+has often remained one” (Wickham 3).  The Middle Ages were sometimes also 
+ 
+2 I am not arguing that Tolkien consciously constructed his legendarium with this meaning in mind, 
+only that this constitutes a legitimate interpretation of the published material on the Second Age. 
+3
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 6 =====
+ 
+referred to as the Dark Ages, introducing another adjective that Tolkien uses 
+frequently in his legendarium. In linguistic terms, the Middle Ages in England in 
+particular encompass the two historical stages of the English language on which 
+Tolkien spent most of his professional career: Old English (then often called Anglo-
+Saxon) and Middle English. Tolkien published one of his early academic essays, 
+“Sigelwara Land,” in the journal Medium Aevum, which is a common Latin version 
+of the term Middle Ages.3 
+To my knowledge, Tolkien never really articulated why  exactly he found 
+the Middle Ages so fascinating and why he made them the center of his academic 
+career, and critics have not addressed the question head -on.4 There are two 
+excellent collections on Tolkien and the Middle Ages, but Tolkien the Medievalist 
+only dedicates its first part to Tolkien’s own medieval scholarship (mostly in 
+relation to other scholars and friends), while Tolkien’s Modern Middle Ages focuses 
+on ‘medievalism,’ i.e., the way Tolkien and other scholars use and instrumentalize 
+the medieval period for other purposes. As Jane Chance and Alfred Siewers point 
+out in their introduction to the latter  volume, Tolkien came from a Victorian 
+tradition of medieval scholarship that “helped shape resistance and social responses 
+to modernization, industrialization, and the development of modern gender and 
+racial identities” (3) —so medieval scholarship served a contemporaneous 
+ideological agenda rather than i nvestigating the Middle Ages on their own terms.  
+Nevertheless, there seems to be a scholarly consensus that, as Thomas Honegger 
+puts it, Tolkien’s “academic work determined the way he saw himself personally 
+and professionally” (“Tolkien,” 51). 
+In the absen ce of direct statements from Tolkien as well as pertinent 
+scholarship, perhaps some hints as to why Tolkien was so excited about the Middle 
+Ages can be gathered from his biography and his scholarly publications. I propose 
+that the reasons for Tolkien’s fascination with the Middle Ages in our world suggest 
+that the Second Age was central to his invented universe.  Humphrey Carpenter 
+writes that at Oxford, where Tolkien had enrolled to study Classics, he was soon 
+“bored with Latin and Greek authors and was far  more excited by Germanic 
+literature” (62), though it remains unclear what form that excitement took  beyond 
+ 
+3 In his letter to Milton Waldman (see below), Tolkien speaks of the Third Age of Middle-earth as 
+“a Twilight Age, a Medium Aevum” ( Letters 154), but in my assessment that passage plac es the 
+time of The Lord of the Rings  between the First Age and our time. Similarly, I am discounting the 
+brief foray Tolkien made into a sequel to The Lord of the Rings  in the Fourth Age in “The New 
+Shadow” (Peoples 409-21). 
+4 Many, many critics have exami ned parallels and similarities between the Middle Ages and the 
+legendarium, but mostly in order to illuminate the latter. To pick one classical example, Jane Chance 
+writes: “Just as Tolkien the man in the primary world became attracted to an earlier age—the Middle 
+Ages—instead of finding interest in the twentieth century, so Tolkien the sub -creator in the 
+secondary world became attracted to its earlier age” (32) . Chance does not speculate, however, on 
+any reasons for the first attraction. 
+4
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 7 =====
+ 
+his academic pursuits and clubs. In 1913, Tolkien officially changed from Classics 
+to the Honour School of English Language and Literature. The spli t in th at name 
+often indicated that a student focused either on comparative philology  (today 
+usually called historical linguistics) or on modern literature —a fact that Tolkien 
+bemoaned in his “Valedictory Address” ( Monsters 229-36). Tolkien for his part 
+was certainly interested in languages, also studying Welsh and Finnish at the time, 
+but additionally he read widely in literature from the linguistic periods he focused 
+on. It is well known that one major inspiration for his entire legendarium was two 
+lines from the Old English poem Crist I from the Exeter Book, written or compiled 
+in the ninth or tenth century, that included the word or term ‘Earendel.’ 
+In 1923, Tolkien wrote in a letter that “Middle English is an exciting field—
+almost uncharted I begin to t hink” (Letters 11), so perhaps in addition to simple 
+excitement professional opportunities were one of his motivations.  In 1937, he 
+rejected the idea that studying Old English was “abstruse” —apparently a wide -
+spread opinion even in the 1930s —and asserted i nstead that its literature touches 
+on “human concerns” ( Letters 21). In 1944, he told his son Christopher that Old 
+English was a “noble idiom” (Letters 102). Even later, in 1955, Tolkien wrote that 
+it was “as much due to descent as to opportunity that Anglo -Saxon and Western 
+Middle English and alliterative verse have been both a childhood attraction and my 
+main professional sphere” ( Letters 218). This sentence reinforces the impression 
+that Tolkien was interested in professional opportunities, and it introduces the idea 
+of an inherited connection to specific earlier forms of the English language. 
+As Honegger has noted  (“Academic Writings”) , Tolkien went on  
+throughout his academic career to write extensively about two canonical texts: the 
+Old English Beowulf and the Middle English Sir Gawain and the Green Knight . 
+With regard to Beowulf, Tolkien wrote that the poem was successful “in creating in 
+the minds of the poet’s contemporaries the illusion of survey ing a past, pagan but 
+noble and fraught with deep significance—a past that itself had depth and reached 
+backward into a dark antiquity of sorrow” (Monsters 27). Perhaps this passage can 
+be adapted to explain Tolkien ’s fascination with the Middle Ages: they  look 
+backwards towards a significant and noble antiquity, while they also look forwards 
+to modernity. This liminal state, being  undetermined and in the middle, may have 
+been exactly what Tolkien considered important himself. As Mark Atherton puts it 
+(with regard to looking forwards) , Tolkien “came to appreciate the connections 
+with the language of the present day; this was English, but English in an earlier 
+form, familiar but distant” (217). Atherton also asserts that in Beowulf the story, the 
+style, and the mythical treatment of important topics such as light and dark appealed 
+to Tolkien. 
+On a different level, Tolkien was interested in bringing Old and Middle 
+English texts and knowledge about them  to wider audiences through editions, 
+translations, and presentations. As Dimitra Fimi has shown, Tolkien provided radio 
+5
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 8 =====
+ 
+programs to the BBC as early as the 1930s. In December 1953, the BBC broadcast 
+Tolkien’s translation of Sir Gawain  in four parts  (Solopova 234) , and th ose 
+broadcasts were repeated in September 1954 (Letters 444, note 148.1). According 
+to Tolkien himself, the BBC were “clamouring for Gawain” (Letters 183). At the 
+same time, he published an article titled “A Fourteenth -Century Romance” in the 
+popular Radio Times. Looking backwards, T olkien points out that the poem has 
+“roots deep in the almost forgotten pagan past of north Europe, and of Ireland and 
+Britain in particular” and that the “[t]he reshaping of the inherited material by a 
+mind of the fourteenth century, concerned with the problems and ideals of conduct 
+at that period, is as interesting to observe as is, say Shakespeare’s in similar cases, 
+such as King Lear” (“Romance” 9). Specifically, the author(s) of Sir Gawain were 
+trying to rescue Old English alliterative verse from the p ast and using antiquated 
+vocabulary. Looking forwards, Tolkien argues that the merits of the poem “entitle 
+it to a hearing still, some five hundred and fifty years since it was written” 
+(“Romance” 9). 
+On January 3, 1954, Tolkien gave a talk on Sir Gawain on the BBC, which 
+Christopher Tolkien later used “in slightly reduced form” (Gawain ix) for the 
+introduction to the published version of Tolkien’s translation s Sir Gawain and the 
+Green Knight, Pearl, Sir Orfeo . Here, Tolkien praises the  Gawain author’s 
+technical abilities, but also the construction of the hero : “in terms of literature, 
+undoubtedly this break in the mathematical perfection of an ideal creature, inhuman 
+in flawlessness, is a great improvement” ( Gawain 7). According to Tolkien, “the 
+movements of the English mind in the fourteenth century” are important because 
+“from [them] much of our sentiment and ideals of conduct have been derived” 
+(Gawain 7f.). At the same time, he wrote in his more academic lecture on Sir 
+Gawain—in language simil ar to the popular article in the Radio Times—that the 
+poem “has deep roots in the past, deeper even than its author was aware. It is made 
+of tales often told before and elsewhere, and of elements that derive from remote 
+times, beyond the vision or awarenes s of the poet : like Beowulf” (Monsters 72). 
+Here, once again but in a different way, the Middle Ages reach into the distant past, 
+while they also form the foundation of our modern times. In addition, as Elizabeth 
+Solopova notes, “Middle English literature reflects beliefs that humans share the 
+earth with other races” (236), and Tolkien took  from medieval literature  his 
+representation of the Elves as forceful rather than fanciful beings. 
+For Michael Drout, the singular achievement of Tolkien’s medieval 
+scholarship is that, “He could bring to bear a literary sensibility that was informed 
+by philological knowledge and at the same time use the detail and rigor of philology 
+to understand literary works” (151). It stands to reason that Tolkien intended to 
+create for his own world a similar age that looked backwards and forwards, through 
+etymological significance and rhetorical construction —and make that age the 
+center of his universe. My argument, of course, is that this was the Second Age of 
+6
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 9 =====
+ 
+Middle-earth. At the s ame time, I submit, Tolkien was not and could not be 
+successful in his project to create such a center for the legendarium. 
+ 
+Frameworks and Overviews 
+ 
+Tolkien located the Second Age of his legendarium in various frameworks and 
+overviews that suggest different kinds of meaning and spell out connections 
+backwards and forwards to varying degrees.  As Brian Sibley writes in the 
+introduction to The Fall of Númenor , “readers had their first tantalizing glimps es 
+of that past history, providing a richly tapestried backdrop to the struggle by the 
+Free Peoples of Middle-earth against Sauron and the forces of Mordor” in The Lord 
+of the Rings (xix). The first text in which readers encounter the Second Age directly 
+(rather than in these glimpses ) is the appendices to The Lord of the Rings , 
+specifically Appendix B, “The Tale of Years.” According to Widdicombe, Tolkien 
+uses this appendix as an “opportunity to stress the camaraderie among peoples (in 
+this case elves and dwarves)” (95). In my assessment, in contrast, the appendix 
+presents a much less positive view of the world . For instance, Tolkien’s first 
+paragraph about the Second Age reads:  “These were the dark years for Men of 
+Middle-earth, but the years of the glory of Númenor. Of events in Middle-earth the 
+records are few and brief, and their dates are often uncertain” ( Lord of the Rings  
+1082). This paragraph immediately distinguishes two groups of humans: those in 
+Middle-earth and those in Númenor. The two groups differ in their fates: the former 
+experience “dark years,” the latter are at their most luminous height. In that sense, 
+Shippey is correct in calling the Second Age “that of Númenor” ( Road 226), but 
+that requires erasing the history of Middle-earth. It is probably no coincidence that 
+“Dark Ages” is often used as a synonym for the Middle Ages, so Tolkien is aligning 
+the men of Middle -earth with the period he studied  in his academic pursuits . 
+However, Tolkien actually hardly ever talks about the Men of Middle -earth in his 
+writings on the Second Age  and only sometimes refers backwards from The Lord 
+of the Rings , as to the men of Dunharro w (Grybauskas 28). Instead,  he almost 
+always focuses on Númenóreans or on Elves.  In my interpretation, this is a first 
+instance of the absence at the center of the Second Age, one which Tolkien 
+unsuccessfully tried to fill with his story “Tal-Elmar” (see below). 
+The text in the appendices to The Lord of the Rings specifies that “records” 
+of the Second Age are rare . Even when they exist, they are not much perused:  as 
+Grybauskas points out , Isildur’s narrative regarding the One Ring, for instance, 
+written at the very end of the Second Age, “sat unread for three millen nia” (26). 
+Similarly, the various narratives of the Second Age emphasize again and again how 
+many records are lost in the destruction of Númenor.  That leaves open the 
+possibility that much more happened than the events enumerated in the following 
+barely more than one-page list of years in the appendices. For instance, the story of 
+7
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 10 =====
+ 
+Aldarion and Erendis, published in Unfinished Tales, is not even mentioned in that 
+list. Indeed, there are gaps in the chronology of three, four, or even five hundred 
+years between 40 and 442, 1200 and c. 1500, c.1800 and 2250, 2350 and 2899, all 
+of which suggest absences . Of course, for Tolkien, records are significant, since 
+they can be studied. In contrast, it could be argued that the absence of records either 
+demonstrates the contingency of writin g and language or symbolizes the absent 
+transcendental signifier at the center of meaning that brings down any attempt to 
+create stable significance—in this case, a coherent narrative of the Second Age. 
+Tolkien presents a similar framework in his famous letter to Milton 
+Waldman, an editor at Longman, from around 1951. Here, Tolkien calls the Second 
+Age his “next cycle” after the First Age and uses similar language about this being 
+a “dark age” (Letters 150) He specifies that “not very much of its history is (or need 
+be) told” (Letters 150). The parenthesis deserves some exploration: Did the history 
+the Second Age not need to be told because there were no stories, or because those 
+stories were insignificant? In his letter, Tolkien goes on to name two stories for the 
+Second Age: The Rings of Power , probably the inspiration for the title of the 
+Amazon series, and the Downfall of Númenor. Tolkien allows that Sauron initially 
+repents from his actions in the Firs t Age and  begins the Second Age “with fair 
+motives: the reorganising and rehabilitation of the ruin of Middle-earth, ‘neglected 
+by the gods’” (Letters 151)—before turning back to evil. Tolkien names three main 
+themes for the Second Age: “The Delaying Elves that lingered in Middle -earth; 
+Sauron’s growth to a new Dark Lord, master and god of men; and Numenor -
+Atlantis” (Letters 151). I would argue, however, that these are not really themes, 
+but episodes , and that the real themes of the Second Age are pride, corruption, 
+decay, and failure. Tolkien writes that the Elves are trying to avoid decay, and he 
+mentions “an inner weakness in Men” ( Letters 154) that in spite of  Númenor’s 
+“days of Pride and Glory” ( Letters 155) ultimately leads to her downfall. In other 
+words, even though Númenor temporarily experiences pride and glory, all of 
+Middle-earth and Númenor eventually succumbs to the Dark Ages. 
+In his letter to Waldman, Tolkien writes that The Rings of Pow er and the 
+Downfall of Númenor are “dealt with annalistically, and in two Tales or Accounts” 
+(Letters 151)—the structure that Sibley adopted for The Fall of Númenor . These 
+tales or accounts are perhaps the annals collected in the section “The Tale of Years 
+of the Second Age” in The Peoples of Middle -earth, which mentions seven 
+manuscripts or typescripts, T(a) and T(b) as well as T 1 -5, most with additional 
+annotations. These annals —meaning lists of years or spans with brief summaries 
+of what happened during that time—also have significant gaps: For instance, both 
+T1 and T4 simply list the years 2000-3000 as one entry where “Sauron’s dominion 
+slowly extends over all Middle -earth” (Peoples T1, 169) and “The Númenóreans 
+now make permanent dwellings on the shores of Middle-earth, seeking wealth and 
+dominion; they build many havens and fortresses” ( Peoples T4, 175). The second 
+8
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 11 =====
+ 
+sentence here in particular suggests that Tolkien’s perspective is predominantly 
+Númenoréan. 
+Some of the gaps are filled out by “The Line of Elros: Kings of Númenor” 
+in Unfinished Tales, which for instance lists Tár-Miriel, who more recently featured 
+in Amazon’s The Rings of Power. What Tolkien mostly fleshes out here, though, is 
+the slow descent of the Númenóre an kings, from Tar -Ciryatan, who is “greedy of 
+wealth” (Unfinished Tales 221) and dies in 2029, to Tar -Atanamir, who “was the 
+first of the Kings to refuse to lay down his life, or to renounce the scepter” and died 
+in 2386 ( Unfinished Tales  221), to Tar -Calmacil, during whose time before his 
+death in 2825 “the name of the King was first spoken in Adûnaic” (Unfinished Tales 
+222), to Ar-Adûnakhôr, who took the blasphemous title “Lord of the West” before 
+he died in 2962.  At the same time, Elves are banned from Númenor, and the 
+connection between the Elves in Valinor and those in Middle-earth grows more and 
+more tenuous. These developments contribute to the impression that the Second 
+Age is a time of decay and decline, both among Elves and Men. 
+Finally, the Second Age serves as the focal point for Tolkien’s “The Lost 
+Road” and “The Notion Club Papers ,” incomplete stories that use time travel as a 
+framework (and that are reprinted in part in The Fall of Númenor ). In “The Lost 
+Road” (Lost Road 39-116) a father and a son turn out to be reincarnated over and 
+over again with etymologically similar names, and towards the end of the surviving 
+manuscript the twentieth-century British Alboin and Audoin Errol find themselves 
+as Elendil and Herendil in the middle of the story of the downfall of Númenor. In 
+“The Notion Club Papers”  (Sauron Defeated 143-327) two Oxford dons from a 
+literary club suspiciously similar to the Inklings have a vision or dream that includes 
+Númenor. In other words, in the few instances where Tolkien de liberately tried to 
+tie his legendarium to our world, he did so through the Second Age. 
+My conclusion from this brief analysis of the frameworks and overviews, 
+then, is that Tolkien attempts to link the Second Age more closely to our time than 
+any other pe riod in his legendarium, which I interpret as him giving it a special 
+significance. He tries to explicate that significance with the rise of Númenor  and 
+names stories he is developing. These stories look back to the First Age and 
+forwards to the Third, for instance in the presence of Sauron. Yet ultimately the 
+Second Age emerges as a time of decline, decay, corruption, and failure. Since these 
+developments are not in Tolkien’s plan, they cannot be developed, which he 
+explains with the construct that they  were not much recorded. That makes the 
+Second Age dark in two senses: the developments were bad, and the record is bad. 
+There are large gaps in the history of the Second Age, which leave it wide open to 
+interpretation. The absence of a record, however, is not the same as an absence of 
+significance, and in any case Tolkien did write some stories set in the Second Age, 
+to which I turn next. 
+ 
+9
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 12 =====
+ 
+Stories 
+ 
+If the Second Age of Middle-earth corresponds with the Middle Ages in our world, 
+and if Tolkien considered the Middle Ages the most important era in our world, 
+that raises the question: Why didn’t Tolkien write more stories set in the Second 
+Age? On the one ha nd, it is possible that Tolkien was intentionally leaving the 
+Second Age open so that others could insert into that period what they considered 
+most significant about Middle -earth—as The Rings of Power  is arguably doing . 
+Conversely, Tolkien may have been u ncertain himself about what he considered 
+central to his imagined universe and hence uncertain about what stories to provide. 
+In that vein, I argue that Tolkien consciously wanted to provide a positive view of 
+humanity and a quasi-Christian teleology, but unconsciously found himself pulled 
+back into darkness  again and again —and for that reason was unable to fully 
+develop his stories. In the process, a darker view of human nature emerged. 
+By my count, there are about six more or less  significant narratives set in 
+the Second Age.5 The most extensive story, and really the only completed story, is 
+the “Akallabêth” or “The Downfall of Númenor.” This was originally published in 
+The Silmarillion (309-38), and various earlier versions are available in the section 
+“The Drowning of Anadûnê” in Sauron Defeated (329-440) as well as the section 
+“The History of the Akallabêth” from The Peoples of Middle-earth (140-65). Then 
+there are three narratives in “Part Two: The Second Age” in Unfinished Tales (163-
+267). These include the geographical and somewhat anthropological “Description 
+of the Island  of Númenor ” and the annalistic “The Line of Elros: Kings of 
+Númenor.” “Galadriel and Celeborn” consists of various parts and passages  from 
+various periods in Tolkien’s life, but there is no sustained narration. “Aldarion and 
+Erendis” is the lengthiest story from the Second Age (apart from the “Akallabêth”), 
+but disappointingly lacks a developed ending. Finally, Tolkien’s fragment “Tal -
+Elmar,” published in The Peoples of Middle -earth (422-38), is set in the Second 
+Age. Still, Grybauskas is correct when he writes that the Second Age “in many 
+regards remains only ‘sketched,’ never assuming the same depth and breadth of the 
+legends of the Elder Days” (27). What then is the significance of these stories? 
+The “Description of the Island  of Númenor” and “The Line of Elros”  are 
+both rather short at 8-10 pages. The “Description” characterizes the geology and 
+geography of Númenor , and there is some incidental information on the nature, 
+agriculture, economy, infrastructure, art, and religion of the island. The description 
+ 
+5 I refer to the original publications here rather than The Fall of Númenor because some of the stories 
+are split up into different sections there, because not all of “The Lost Road” and “The Notion Club 
+Papers” is included, and because “Tal-Elmar” is missing entirely. There are also several sections in 
+The Nature of Middle -Earth that describe the aging of the Númenoréans, the anthropology and 
+zoology of Númenor, and the end of the island, but in my assessment they make no major 
+contributions to understanding the significance of the Second Age. 
+10
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 13 =====
+ 
+may be important because Númenor is geographically at the center of Arda in this 
+age, halfway between Middle -earth to the east and Valinor to the west, as the 
+Second Age forms the chronological center of the legendarium. “Elros,” as I 
+discussed earlier, simply lists every king and queen of Númenor, with a brief  
+description of their reign. Both of these texts flesh out the Second Age, at least with 
+regard to Númenor, in areas that none of the other stories cover. In my assessment, 
+they represent attempts on Tolkien’s part to connect the era to what preceded and 
+followed it by way of geography and heritage. Neither of them, however, sheds 
+much light on the significance of the Second Age. 
+“The History of Galadriel and Celeborn” is more interesting in the context 
+of the present argument because it reaches backwards and forwards in time, one of 
+the main points of interest that Tolkien articulated for the Middle Ages in our world 
+and in his frameworks and overviews of the legendarium. Galadriel’s story starts 
+in the First Age, where she is apparently rather proud and strong-willed, though in 
+most versions presented here at least she resists Fëanor. Notably, at the end of the 
+First Age, “she refused the pardon of the Valar for all who had fought” (Unfinished 
+Tales 230 f.) against Morgoth. On the other  (temporal) end, Galadriel’s 
+involvement in the War of the Rings, her rule over Lothlórien, and her resistance 
+to the temptation of the One Ring  are well -known. The story “Galadriel and 
+Celeborn” mentions some of these details, but mostly it focuses on the movements 
+of the couple in the Second Age. Here, I would argue, we see another possible 
+significance of the Second Age: it is a time when individuals such as Galadriel can 
+assess their past actions and determine what kind of person (or Elf , or Dwarf, or 
+Hobbit) they want to be in the future. This is not to say that the Second Age is only 
+important for beings that live across the ages, but rather that it reminds us  (when 
+we apply it to our w orld), perhaps more than narratives from the First or Third 
+Ages, that we are responsible for our own decisions and actions and can plot the 
+course and meaning of our own lives. Interestingly, though, Tolkien was never able 
+to give this arguably most posit ive story of the Second Age —a love story with a 
+happy ending and a political tale with at least intermittent success —a completed 
+form. I would speculate that the reason for this failure was that the story simply did 
+not fit with the darker image of the human condition that was emerging in the texts 
+about the Second Age. 
+“Aldarion and Erendis” is fascinating because it traces some of the 
+development of Númenórean imperialism and colonialism in Middle-earth. In fact, 
+most critics who deal with “Aldarion and Erendis,” such as Elizabeth Hoiem and 
+Alastair Whyte , focus on its postcolonial aspect s. But more importantly for the 
+present argument, the story offers perhaps the most developed characters  (in the 
+modern literary sense)  in all of Tolkien’s legendarium. The male protagonist is 
+driven by ambition and passion, but he is not an evil person; the female protagonist 
+is three-dimensional in a way that might come as a surprise to many readers of 
+11
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 14 =====
+ 
+Tolkien. At the same time, the imp licit feminism of the story may have disturbed 
+Tolkien. If the story pointed forward s, it may have been towards what Tolkien 
+probably would have considered the disturbing trends of women’s suffrage and 
+empowerment in his twentieth century. For that reason, conceivably, he was unable 
+to complete a story highlighting these developments. Along similar lines, the story 
+(at least in my interpretation) portrays how two individuals who are both well -
+meaning in their own way turn out to be incompatible, with sad co nsequences for 
+both, not to mention their country . Once again, human darkness surfaces in a way 
+that Tolkien consciously or unconsciously wanted to avoid. 
+“Tal-Elmar” addresses similar topics, but from a different and much more 
+confusing perspective. This is a story that only exists in an even more fragmentary 
+state than “Galadriel and Celeborn”  or “Aldarion and Erendis,”  since there is 
+neither a clear plot nor an ending. Instead, what is important for the present 
+argument is the dizzying layering of people s and events. There are at least three 
+layers of colonialism in this story (the conquest of the wild men by the people of 
+Agar; the wars between the people of Agar and the people from the east; and the 
+impending invasion by the Númenoréans) with the four p eoples involved. The 
+situation is even more complicated, though, in that the eponymous hero and his 
+grandmother seem to be mystically connected to Númenor, with Tal -Elmar 
+speaking what Tolkien would in some linguistic writing call his ‘native tongue,’ 
+i.e., a language anchored in his hereditary memory. 6 Here, the Second Age 
+demonstrates the absence of a true center: each character in “Tal -Elmar” seems to 
+have an identity, but in every case that identity is challenged or undermined  by 
+revelations about the historical context, by decisions they make, or by events in the 
+story. Arguably, Tolkien is here suggesting that the Second Age shows us that we 
+never stand on firm ground. 
+Similarly, the story of Númenor could be understood as the absent center of 
+the Second Age, and of Tolkien’s entire legendarium. As Verlyn Flieger explains, 
+the story of Númenor “redirected three important elements in the legendarium, 
+notably the cosmology that shaped it, the theology that grew out of that cosmology, 
+and the narrative structure that supported them both” (Fairy-Tale 214). At the same 
+time, Tolkien was never quite able to sort and develop these elements of cosmology, 
+theology, and narrative  to his satisfaction, so the story remained unfinished or at 
+least unpublished. As a matter of fact, the story almost seems like a red herring  or 
+dead end, since at the end of the Second Age, of course, the island disappears. In 
+other words, Númenor is only an illusory anchor for the legendarium. This could 
+be interpreted as the absence in the middle  of Tolkien’s mythology  that sets in 
+motion the différance or supplementation throughout the legendarium. That in turn 
+might explain Tolkien’s uncertainty about how to get to Númenor, for instance 
+ 
+6 Tolkien explores this concept in his essay “English and Welsh” (Monsters 162-97). 
+12
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 15 =====
+ 
+through time travel in “The Lost Road” or reincarnation in the “ The Notion Club 
+Papers.” It is interesting, though, that at least in one plan for “The Lost Road,” the 
+fall of Númenor was supposed to be the end of the story (Flieger, Time 67). In other 
+words, the Second Age here did not end with the victory of the Last Alliance over 
+Sauron, but with the final corruption and destruction of Men, at least the Men who 
+were supposed to be superior to the rest of Mannish creation. In my interpretation, 
+this suggests that Tolkien saw the Second Age as demonstrating that the true nature 
+of Men was to be morally bankrupt, easily corruptible by each other and even more 
+easily by an evil power such as Sauron. This might be another explanation for why 
+there are no more stories about the Second Age: it would have been more difficult 
+for Tolkien to write about the dark side of humanity than compose more hopeful 
+stories such as the victory over Morgoth in the First Age or the destruction of 
+Sauron in the Third. 
+ 
+Conclusion 
+ 
+In my assessment, then, Tolkien’s view of the Middle Ages in our world, his various 
+frames for the mythology of his legendarium, and the contents as well as  
+fragmentary and unfinished nature of his stories point to a double conclusion  
+regarding the significance of the Second  Age. For one, it seems that Tolkien was 
+trying to put the Second Age at the center of his universe so that it could connect 
+the First and Third Ages, both of which present quasi-Christian stories that end with 
+sacrifice, but also hope and improvement. But secondly, Tolkien was never able to 
+develop his time frame and stories fully because ultimately the Second Age always 
+exposed the failure, decline, and corruption at the center of the human experience , 
+which Tolkien as a Catholic Christian could not fully  accept or countenance. In 
+other words, the Second Age presents the dark heart of the legendarium—not a 
+pleasant conclusion, but one we need to face. 
+ 
+References 
+ 
+Atherton, Mark. “Old English.” A Companion to J.R.R. Tolkien . Ed. Stuart Lee. 
+Malden, MA: Wiley Blackwell, 2014. 217-29. 
+ 
+Barnfield, Marie. “More Celtic Influences: Númenor and the Second Age.” 
+Mallorn #29 (August 1992): 6-13. 
+ 
+Carpenter, Humphrey. J.R.R. Tolkien: A Biography (1977). Boston and New York: 
+Houghton Mifflin, 2000. 
+ 
+13
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 16 =====
+ 
+Chance, Jane. Tolkien’s Art: A Mythology for England . Rev. ed. Lexington: 
+University Press of Kentucky, 2001. 
+ 
+Chance, Jane (ed.). Tolkien the Medievalist . New York and London: Routledge, 
+2003. 
+ 
+Chance, Jane and Alfred Siewers (eds.). Tolkien’s Modern Middle Ages. New York: 
+Palgrave Macmillan, 2005. 
+ 
+Drout, Michael.  “J.R.R. Tolkien’s Medieval Scholarship and Its Significance.” 
+Tolkien Studies 4 (2007): 113-76. 
+ 
+Fimi, Dimitra.  “Tolkien on 1930s BBC Radio  via Historical Issues of Radio 
+Times.” <https://dimitrafimi.com/2019/01/03/tolkien-on-1930s-bbc-radio-
+via-historical-issues-of-radio-times/>  
+ 
+Flieger, Verlyn. A Question of Time: J.R.R. Tolkien’s Road to Fäerie . Kent, OH: 
+Kent State University Press, 1997. 
+ 
+—. There Would Always Be a Fairy-Tale: More Essays on Tolkien. Kent, OH: Kent 
+State University Press, 2017. 
+ 
+Grybauskas, Peter.  A Sense of Tales Untold: Exploring the Edges of Tolkien’s 
+Literary Canvas. Kent, OH: Kent State University Press, 2021. 
+ 
+Hoiem, Elizabeth Massa. “World Creation as Colonization: British Imperialism in 
+‘Aldarion and Erendis.’” Tolkien Studies 2 (2005): 75-92. 
+ 
+Honegger, Thomas. “Tolkien Through the Eyes of a Mediaevalist.” Reconsidering 
+Tolkien. Ed. Thomas Honegger. [Zurich:] Walking Tree, 2005. 45-66. 
+ 
+—. “Academic Writings.” A Companion to J.R.R. Tolkien. Ed. Stuart Lee. Malden, 
+MA: Wiley Blackwell, 2014. 26-40. 
+ 
+Kane, Douglas. Rev. of The Fall of Númenor (2022). By J.R.R. Tolkien, ed. Brian 
+Sibley. The Journal of Tolkien Research 15.2 (2022): art. 5, 1-8. 
+ 
+Rosebury, Brian. Tolkien: A Cultural Phenomenon . Houndsmill, Basingstoke and 
+New York: Palgrave Macmillan, 2003. 
+ 
+14
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6
+===== PAGE 17 =====
+ 
+Shippey, Tom. The Road to Middle -Earth. Boston and New York: Houghton 
+Mifflin, 2003. 
+ 
+—. “Tolkien As Editor.” A Companion to J.R.R. Tolkien. Ed. Stuart Lee. Malden, 
+MA: Wiley Blackwell, 2014. 41-55. 
+ 
+Solopova, Elizabeth. “Middle English.” A Companion to J.R.R. Tolkien. Ed. Stuart 
+Lee. Malden, MA: Wiley Blackwell, 2014. 230-43. 
+ 
+Tolkien, J.R.R.  “A Fourteen th-Century Romance.”  Radio Times  121.1569 
+(December 6-12, 1953): 9. 
+ 
+—. The Lord of the Rings (1954-55). 50th anniversary one-volume ed. Boston and 
+New York: Houghton Mifflin Harcourt, 2004. 
+ 
+—. Sir Gawain and the Green Knight, Pearl, Sir Orfeo  (1975). Tr. J.R.R. Tolkien 
+and ed. Christopher Tolkien. New York: Ballantine, 1980. 
+ 
+—. The Silmarillion (1977). Ed. Christopher Tolkien. New York: Ballantine, 1979. 
+ 
+—. Unfinished Tales of Númenor and Middle -Earth. Ed. Christopher Tolkien. 
+Boston: Houghton Mifflin, 1980. 
+ 
+—. Letters. Ed. Humphrey Carpenter. Boston: Houghton Mifflin, 1981. 
+ 
+—. The Monsters and the Critics and Other Essays  (1983). Ed. Christopher 
+Tolkien. London: HarperCollins, 2006. 
+ 
+—. The Lost Road and Other Writings  (1983) (=The History of Middle -Earth V). 
+Ed. Christopher Tolkien. New York: Ballantine, 1987. 
+ 
+—. Sauron Defeated (1992) (=The History of Middle -Earth IX). Ed. Christopher 
+Tolkien. London: HarperCollins, 2002. 
+ 
+—. The Peoples of Middle -Earth (1996) (=The History of Middle -Earth XII). Ed. 
+Christopher Tolkien. London: HarperCollins, 2002. 
+ 
+—. The Nature of Middle-Earth. Ed. Carl Hostetter. London: HarperCollins, 2021. 
+ 
+—. The Fall of Númenor. Ed. Brian Sibley. New York: William Morrow, 2022. 
+ 
+15
+Schürer: Second Age, Middle Age
+Published by ValpoScholar, 2022
+===== PAGE 18 =====
+ 
+Whyte, Alastair. “Many a Tale of Dread: The Dystopian Interface of 
+Totalitarianism and Colonial Imperialism in the Númenor Narratives of 
+J.R.R. Tolkien.” Journal of Language, Literature and Culture  67.2-3 
+(2020): 83-96. 
+ 
+Wickham, Chris. Medieval Europe . New Haven and London: Yale University 
+Press, 2016. 
+ 
+Widdicombe, Toby. J.R.R. Tolkien: A Guide for the Perplexed . London and New 
+York: Bloomsbury Academic, 2020. 
+16
+Journal of Tolkien Research, Vol. 15 [2022], Iss. 2, Art. 6
+https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6

@@ -1,0 +1,72 @@
+RATE CORPUS · threat 4 x route 8 x tier 6 = 192 cells x 4 seeds = 768 towns
+  generated 768 of 768 (generator throws 0) in 13 s · desk throws none · general-desk bare sentences 21159
+  tier marginals: thorp 128 · hamlet 128 · village 128 · town 128 · city 128 · metropolis 128
+  requested per threat choice 192 · per route choice 96 · per tier 128
+  threat marginals (resolved): frontier 295 · heartland 254 · plagued 219
+  route marginals (resolved): crossroads 110 · isolated 103 · mountain_pass 96 · none 96 · port 115 · river 110 · road 138
+  pools that fired: 271 of 708
+  PER-TIER SILENCE FINDINGS: 352 (pool, tier) rows where a MOUNTED block's pool fired somewhere and never at that tier
+    LAWFUL (value-class: the rung spoke at that tier and chose another class) 307 · MISSING-AT-TIER (rung-dark: the rung said nothing at that size) 45 · of 352, at 128 towns per tier
+    rows resting on the coarser BLOCK grain because the census recovered no key function: 123
+    of the 45 MISSING-AT-TIER rows, those whose BLOCK spoke at that tier through another rung: 45 — so no BLOCK is dark at a size on this corpus and only a RUNG is, and 12 sit on a block whose ladder SPLITS across a key table and the function carrying its fallback, where the two halves cannot see each other
+    MISSING-AT-TIER by block: DS-POW-6 23 · DS-GEN-6 10 · DS-DEF-5 4 · DS-DEF-6 3 · DS-ECO-12 2 · DS-GEN-7 2 · DS-SUP-3 1
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: thorp / hamlet — silent at village (fired on 255 towns overall)
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: thorp / hamlet — silent at town (fired on 255 towns overall)
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: other tiers — silent at thorp (fired on 255 towns overall)
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: other tiers — silent at hamlet (fired on 255 towns overall)
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: other tiers — silent at city (fired on 255 towns overall)
+    MISSING-AT-TIER DS-GEN-6 :: tier overlay: other tiers — silent at metropolis (fired on 255 towns overall)
+    MISSING-AT-TIER DS-POW-6 :: operation role protection + extraction — silent at thorp (fired on 197 towns overall)
+    MISSING-AT-TIER DS-POW-6 :: operation role protection + extraction — silent at hamlet (fired on 197 towns overall)
+    MISSING-AT-TIER DS-POW-6 :: operation role protection + extraction — silent at village (fired on 197 towns overall)
+    MISSING-AT-TIER DS-DEF-5 :: mercenary / contracted forces PRESENT — silent at thorp (fired on 160 towns overall)
+    MISSING-AT-TIER DS-DEF-5 :: mercenary / contracted forces PRESENT — silent at hamlet (fired on 160 towns overall)
+    MISSING-AT-TIER DS-DEF-5 :: mercenary / contracted forces PRESENT — silent at village (fired on 160 towns overall)
+    LAWFUL          DS-SUP-3 :: COMPLETE FOR ITS TIER — silent at metropolis (its rung DS-SUP-3 :: serviceCatalogPoolKey spoke there)
+    LAWFUL          DS-GEN-3 :: scores.military: STRONG — silent at thorp (its rung DS-GEN-3 :: systemsHealthScorePoolKey spoke there)
+    LAWFUL          DS-DEF-5 :: charter hall PRESENT (specialist monster response) — silent at thorp (its rung DS-DEF-5 :: charterPoolKey spoke there)
+    LAWFUL          DS-DEF-2 :: Internal Security: no legal infrastructure — silent at town (its rung DS-DEF-2 :: internalRowPoolKey spoke there)
+  DEPARTURE bits at the 10 % report line: 72 of 271 fired pools would read 1 (uncommon); 199 would read 0
+  CO-OCCURRING FACT PAIRS WITH NO POOL: 729 distinct pairs over 768 towns
+    the Wilson 95 % lower bound clears 5 % at >= 51 of 768 towns
+    ALL pairs clearing the bound: 590 of 729
+    USABLE pairs (both members a dotted reading path): 205 · clearing the bound 151
+    excluded as the instrument's own labels or a builtin: 524 — the UNION of a table-rung synthetic label on 437, an unrooted bare parameter on 108, a JS method tail on 38 (the sets overlap)
+    distribution, ALL:    [1-7] 49 · [8-38] 69 · [39-76] 89 · [77-153] 134 · [154-384] 198 · [385-767] 189 · [768+] 1
+    distribution, USABLE: [1-7] 12 · [8-38] 31 · [39-76] 39 · [77-153] 47 · [154-384] 44 · [385-767] 32 · [768+] 0
+    the twenty most frequent USABLE pairs, with their intervals:
+     763 (9935 bp) [9849, 9972] bp  politics.blocs + readings.exportPosture.status
+     763 (9935 bp) [9849, 9972] bp  politics.blocs + readings.viable
+     763 (9935 bp) [9849, 9972] bp  readings.exportPosture.status + readings.viable
+     756 (9844 bp) [9729, 9910] bp  marker.yearsAgo + politics.blocs
+     756 (9844 bp) [9729, 9910] bp  marker.yearsAgo + readings.exportPosture.status
+     756 (9844 bp) [9729, 9910] bp  marker.yearsAgo + readings.viable
+     600 (7813 bp) [7507, 8090] bp  legitimacy.govMultiplier + politics.blocs
+     600 (7813 bp) [7507, 8090] bp  legitimacy.govMultiplier + readings.exportPosture.status
+     600 (7813 bp) [7507, 8090] bp  legitimacy.govMultiplier + readings.viable
+     595 (7747 bp) [7439, 8029] bp  legitimacy.govMultiplier + marker.yearsAgo
+     529 (6888 bp) [6552, 7205] bp  eco.primaryImports + readings.exportPosture.status
+     524 (6823 bp) [6485, 7142] bp  eco.primaryImports + marker.yearsAgo
+     524 (6823 bp) [6485, 7142] bp  eco.primaryImports + politics.blocs
+     524 (6823 bp) [6485, 7142] bp  eco.primaryImports + readings.viable
+     501 (6523 bp) [6180, 6852] bp  conflict.intensity + politics.blocs
+     501 (6523 bp) [6180, 6852] bp  conflict.intensity + readings.exportPosture.status
+     501 (6523 bp) [6180, 6852] bp  conflict.intensity + readings.viable
+     498 (6484 bp) [6140, 6814] bp  conflict.intensity + marker.yearsAgo
+     455 (5924 bp) [5573, 6267] bp  politics.blocs + settlement.defenseProfile.economicGates.military
+     455 (5924 bp) [5573, 6267] bp  readings.exportPosture.status + settlement.defenseProfile.economicGates.military
+  WIZARD-DEFAULT REPORT COLUMN: 768 towns from DEFAULT_CONFIG in 13 s · pools that fired 270
+    tier marginals: metropolis 141 · thorp 135 · hamlet 132 · town 132 · city 115 · village 113
+    pools whose two weightings differ by 10 percentage points or more: 33
+      DS-GEN-11 :: viable: true: the arithmetic closes — uniform 7943 bp · wizard 9206 bp
+      DS-GEN-11 :: criticalIssueCount zero — uniform 7878 bp · wizard 9167 bp
+      DS-GEN-3 :: economicViability.viable: true — uniform 7878 bp · wizard 9167 bp
+      DS-ECO-12 :: TRADE PROFILE: exports and imports both present — uniform 6888 bp · wizard 8503 bp
+      DS-POW-2 :: stable matched — uniform 5612 bp · wizard 6797 bp
+      DS-ECO-10 :: POSTURE: established — uniform 5195 bp · wizard 7161 bp
+      DS-POW-4 :: legitimacyHold: public rejection is breaking the hold — uniform 5195 bp · wizard 3724 bp
+      DS-POW-4 :: riskLabel: Holding — uniform 4297 bp · wizard 5690 bp
+      DS-GEN-3 :: prosperity: Struggling / Poor — uniform 4180 bp · wizard 2786 bp
+      DS-GEN-3 :: prosperity: Comfortable / Prosperous — uniform 4076 bp · wizard 5534 bp
+  COST: 13 s for 768 towns plus 13 s for the wizard column · 17 ms per town
+  wrote /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/measure/car3-rate-corpus.json

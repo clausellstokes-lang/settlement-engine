@@ -1,0 +1,23 @@
+PREDICT_HEAD=ef3ee6cbd4e0b48355daad2d2c269d79e554cbbd cars_over_8961388ce=13 start 23:15:48 load=1.63 3.14 4.22
+--- OSR plain read (read-only):
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+OSR_DRY_EXIT=0
+--- writer-reach dry (read-only):
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_DRY_EXIT=0
+--- lighting probe (farmed, read-only):
+{"files":2557,"parked":375,"credited":2182,"titles":24048,"suiteTitles":6422}
+LIGHT_PROBE_EXIT=0
+--- lighting register:
+{"files": 2557, "parked": 375, "credited": 2182, "titles": 24048, "suiteTitles": 6422, "measuredAtSha": "707118f8034fccc182e0110e2b878ef724b922c0"}
+--- prose-numerics dry:
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_DRY_EXIT=0
+--- voice E2 (the two banked files only — read the per-file lines):
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
++   "src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0",
++   "src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0",
+--- domain strict (on its ceiling):
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+PREDICT_PORCELAIN_AFTER=0 end 23:16:43

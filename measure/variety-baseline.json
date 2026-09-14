@@ -1,0 +1,391 @@
+{
+  "corpus": {
+    "kind": "VARIETY",
+    "configs": 525,
+    "seeds": 8,
+    "towns": 4200,
+    "seconds": 74
+  },
+  "duplicates": {
+    "units": 532689,
+    "duplicateUnits": 520632,
+    "rateBp": 9774,
+    "distinctPairs": 51396,
+    "pairsSeenTwice": 39339,
+    "byPosition": [
+      [
+        "dm::viability.verdict::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::viability.verdict::1",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::daily_life.standingOfLiving|economics.economyTile::0",
+        {
+          "units": 4200,
+          "duplicates": 4190
+        }
+      ],
+      [
+        "dm::economics.commercialProfile::0",
+        {
+          "units": 4200,
+          "duplicates": 4164
+        }
+      ],
+      [
+        "dm::economics.commercialProfile::1",
+        {
+          "units": 4200,
+          "duplicates": 4179
+        }
+      ],
+      [
+        "dm::economics.exportPosture::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::resources.groundAndWorkings::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::resources.groundAndWorkings::1",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::resources.groundAndWorkings::2",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::services.catalogStanding::0",
+        {
+          "units": 4200,
+          "duplicates": 4176
+        }
+      ],
+      [
+        "dm::power.rulingStructure::0",
+        {
+          "units": 4200,
+          "duplicates": 3935
+        }
+      ],
+      [
+        "dm::defense.threatAssessment::0",
+        {
+          "units": 4200,
+          "duplicates": 4155
+        }
+      ],
+      [
+        "dm::defense.threatAssessment::1",
+        {
+          "units": 4200,
+          "duplicates": 4187
+        }
+      ],
+      [
+        "dm::defense.threatAssessment::2",
+        {
+          "units": 4200,
+          "duplicates": 4177
+        }
+      ],
+      [
+        "dm::viability.magicDependency::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::faith.teaser::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::viability.verdict::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::viability.verdict::1",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::daily_life.standingOfLiving|economics.economyTile::0",
+        {
+          "units": 4200,
+          "duplicates": 4190
+        }
+      ],
+      [
+        "player::economics.commercialProfile::0",
+        {
+          "units": 4200,
+          "duplicates": 4164
+        }
+      ],
+      [
+        "player::economics.commercialProfile::1",
+        {
+          "units": 4200,
+          "duplicates": 4179
+        }
+      ],
+      [
+        "player::economics.exportPosture::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::resources.groundAndWorkings::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::resources.groundAndWorkings::1",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::resources.groundAndWorkings::2",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::services.catalogStanding::0",
+        {
+          "units": 4200,
+          "duplicates": 4176
+        }
+      ],
+      [
+        "player::power.rulingStructure::0",
+        {
+          "units": 4200,
+          "duplicates": 3935
+        }
+      ],
+      [
+        "player::defense.threatAssessment::0",
+        {
+          "units": 4200,
+          "duplicates": 4155
+        }
+      ],
+      [
+        "player::defense.threatAssessment::1",
+        {
+          "units": 4200,
+          "duplicates": 4187
+        }
+      ],
+      [
+        "player::defense.threatAssessment::2",
+        {
+          "units": 4200,
+          "duplicates": 4177
+        }
+      ],
+      [
+        "player::viability.magicDependency::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "player::faith.teaser::0",
+        {
+          "units": 4200,
+          "duplicates": 4200
+        }
+      ],
+      [
+        "dm::economics.prosperityHeader::0",
+        {
+          "units": 4198,
+          "duplicates": 3932
+        }
+      ],
+      [
+        "player::economics.prosperityHeader::0",
+        {
+          "units": 4198,
+          "duplicates": 3932
+        }
+      ],
+      [
+        "dm::defense.armedForces::0",
+        {
+          "units": 4193,
+          "duplicates": 4193
+        }
+      ],
+      [
+        "player::defense.armedForces::0",
+        {
+          "units": 4193,
+          "duplicates": 4193
+        }
+      ],
+      [
+        "dm::defense.postureHeader::0",
+        {
+          "units": 4181,
+          "duplicates": 4181
+        }
+      ],
+      [
+        "player::defense.postureHeader::0",
+        {
+          "units": 4181,
+          "duplicates": 4181
+        }
+      ],
+      [
+        "dm::defense.armedForces::1",
+        {
+          "units": 4180,
+          "duplicates": 4129
+        }
+      ],
+      [
+        "player::defense.armedForces::1",
+        {
+          "units": 4180,
+          "duplicates": 4129
+        }
+      ],
+      [
+        "dm::defense.supportingCapabilities::0",
+        {
+          "units": 4167,
+          "duplicates": 4167
+        }
+      ],
+      [
+        "player::defense.supportingCapabilities::0",
+        {
+          "units": 4167,
+          "duplicates": 4167
+        }
+      ],
+      [
+        "dm::overview.origin::0",
+        {
+          "units": 4130,
+          "duplicates": 4063
+        }
+      ],
+      [
+        "player::overview.origin::0",
+        {
+          "units": 4130,
+          "duplicates": 4063
+        }
+      ],
+      [
+        "dm::defense.threatAssessment::3",
+        {
+          "units": 4129,
+          "duplicates": 4114
+        }
+      ],
+      [
+        "player::defense.threatAssessment::3",
+        {
+          "units": 4129,
+          "duplicates": 4114
+        }
+      ],
+      [
+        "dm::overview.ground::0",
+        {
+          "units": 4128,
+          "duplicates": 4128
+        }
+      ],
+      [
+        "player::overview.ground::0",
+        {
+          "units": 4128,
+          "duplicates": 4128
+        }
+      ],
+      [
+        "dm::overview.situation::0",
+        {
+          "units": 4116,
+          "duplicates": 4109
+        }
+      ],
+      [
+        "dm::overview.origin::1",
+        {
+          "units": 4116,
+          "duplicates": 4097
+        }
+      ]
+    ]
+  },
+  "repeatCensus": {
+    "groups": 632,
+    "executable": 347,
+    "notExecutable": 285,
+    "findings": [
+      {
+        "key": "dm::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCount: critical contradictions on the record",
+        "towns": 540,
+        "draws": 8,
+        "variants": 3,
+        "distinct": 1,
+        "expectedDistinctBp": 28829
+      },
+      {
+        "key": "player::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCount: critical contradictions on the record",
+        "towns": 540,
+        "draws": 8,
+        "variants": 3,
+        "distinct": 1,
+        "expectedDistinctBp": 28829
+      }
+    ]
+  }
+}

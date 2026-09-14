@@ -1,0 +1,3997 @@
+{
+  "capturedAt": "HEAD pre-CL0",
+  "flagOn": [
+    {
+      "tick": 3,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.5918866189830884,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7257531481728042,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.05497415014466604,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.6154977977880038,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.19398373757764226,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.41556379776495245,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.suppress.b_npc_briarwatch_1.3",
+          "candidateType": "npc_suppress",
+          "ruleId": "npc_military_suppress",
+          "ruleFamily": "npc",
+          "severity": 0.9169196062702385,
+          "probability": 0.46906426034736537,
+          "roll": 0.6113483577954928,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.3",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.5370716163882708,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.suppress.c_npc_crownhold_1.3",
+          "candidateType": "npc_suppress",
+          "ruleId": "npc_military_suppress",
+          "ruleFamily": "npc",
+          "severity": 0.8769988899908789,
+          "probability": 0.44138589706034276,
+          "roll": 0.07784853396268261,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8571428571428571,
+          "probability": 0.3171428571428571,
+          "roll": 0.7743882883541119,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8571428571428571,
+          "probability": 0.3171428571428571,
+          "roll": 0.07935443042900021,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.escalate.world_stressor_famine_a.3",
+          "candidateType": "stressor_escalate_famine",
+          "ruleId": "stressor_escalate_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.8272857142857143,
+          "probability": 0.27840000000000004,
+          "roll": 0.9341796627161273,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7428571428571429,
+          "probability": 0.28285714285714286,
+          "roll": 0.4650470335537865,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.b_iron_syndicate.3",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.7113137221770891,
+          "probability": 0.3618466655402103,
+          "roll": 0.22979939989616865,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.3948824856183308,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.10136116932899307,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.35894538186085795,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.69,
+          "probability": 0.28759999999999997,
+          "roll": 0.23554225604127768,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.vassal.rebellion.edge_a_c.3",
+          "candidateType": "vassal_rebellion",
+          "ruleId": "vassal_rebellion_pressure",
+          "ruleFamily": "relationship",
+          "severity": 0.6867799661769368,
+          "probability": 0.23923527422172758,
+          "roll": 0.2440517476318351,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.3",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1928,
+          "roll": 0.6797768242366976,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.3",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5358,
+          "probability": 0.3358,
+          "roll": 0.7201148783463734,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.3",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5114857142857143,
+          "probability": 0.1736,
+          "roll": 0.7214620778132732,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.c_crown_court.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4987533542956991,
+          "probability": 0.23965093920279576,
+          "roll": 0.7132401272938116,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.48421059205585903,
+          "probability": 0.23557896577564055,
+          "roll": 0.7319859683225152,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.5004689135442532,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4688289258824387,
+          "probability": 0.23127209924708286,
+          "roll": 0.6349612610120682,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4469951816330617,
+          "probability": 0.22515865085725728,
+          "roll": 0.5849745077148011,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4121947251413979,
+          "probability": 0.2154145230395914,
+          "roll": 0.07711394493200113,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.trade_route_disruption.edge.a.b.3",
+          "candidateType": "trade_route_disruption",
+          "ruleId": "trade_route_disruption",
+          "ruleFamily": "relationship",
+          "severity": 0.4007142857142857,
+          "probability": 0.21857142857142858,
+          "roll": 0.5290846820117839,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.3",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "ruleId": "vassal_overlord_weakness_memory",
+          "ruleFamily": "relationship",
+          "severity": 0.38620000000000004,
+          "probability": 0.5,
+          "roll": 0.7040301737402664,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.3",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.36550476190476194,
+          "probability": 0.17577142857142858,
+          "roll": 0.1810923059386556,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.crime.c.3",
+          "candidateType": "crime_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.3",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.npc.suppress.c_npc_crownhold_1.3",
+          "candidateType": "npc_suppress",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.b.3",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.b_iron_syndicate.3",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.3.condition.c.candidate_condition_crime_c_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.stressor.b.candidate_stressor_betrayal_b_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.npc.c.candidate_npc_suppress_c_npc_crownhold_1_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.condition.b.candidate_condition_legitimacy_b_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.faction.b.candidate_faction_faction_government_challenge_b_iron_syndicate_3",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 4,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "ruleId": "stressor_crime_wave_residual",
+          "ruleFamily": "stressor",
+          "severity": 0.20700000000000005,
+          "probability": 1,
+          "roll": 0.9238473080316609,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7169193554855089,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.6884591760658533,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.49433682106487864,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.20108979611421093,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.9195772641247806,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.36566459074002045,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.2857630663983557,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9085714285714286,
+          "probability": 0.3325714285714286,
+          "roll": 0.5394079064943184,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9,
+          "probability": 0.33,
+          "roll": 0.7666332310148355,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.4",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.343996908901932,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8714285714285714,
+          "probability": 0.3214285714285714,
+          "roll": 0.17661274953448333,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.8160700107971852,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.715121260429934,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.7025,
+          "probability": 0.2921,
+          "roll": 0.28992431070586777,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.4",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.6885714285714286,
+          "probability": 0.26657142857142857,
+          "roll": 0.37106190679977263,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.4",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.19519999999999998,
+          "roll": 0.49780906024086335,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.4",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5711428571428572,
+          "probability": 0.1736,
+          "roll": 0.4175127362121078,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.4",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.55584,
+          "probability": 0.21984000000000004,
+          "roll": 0.9259643735692943,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.4",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.5528289258824387,
+          "probability": 0.25479209924708285,
+          "roll": 0.9442357739669202,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5316,
+          "probability": 0.3316,
+          "roll": 0.28842961453827975,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5309951816330616,
+          "probability": 0.24867865085725727,
+          "roll": 0.43968693433533157,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49236414519545213,
+          "probability": 0.23786196065472662,
+          "roll": 0.8955328976638057,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49221059205585893,
+          "probability": 0.23781896577564052,
+          "roll": 0.27801748115474945,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.4",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.5823470827229004,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.2958465512653147,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.8993509274020939,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.9431722333470909,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.6053184507040266,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "ruleId": "trade_route_disruption",
+          "ruleFamily": "relationship",
+          "severity": 0.4007142857142857,
+          "probability": 0.21857142857142858,
+          "roll": 0.1705724785758427,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "ruleId": "vassal_overlord_weakness_memory",
+          "ruleFamily": "relationship",
+          "severity": 0.3872,
+          "probability": 0.5,
+          "roll": 0.18653068016640098,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.4",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.37769523809523814,
+          "probability": 0.18262857142857145,
+          "roll": 0.5722399894240346,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.legitimacy.b.4",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.4",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.c.4",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.npc.exploit.a_npc_ashford_2.4",
+          "candidateType": "npc_exploit",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.a.4",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.4.condition.b.candidate_condition_legitimacy_b_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.stressor.b.candidate_stressor_betrayal_b_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.stressor.c.candidate_stressor_betrayal_c_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.npc.a.candidate_npc_exploit_a_npc_ashford_2_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.condition.a.candidate_condition_legitimacy_a_4",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 5,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7065759506555574,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.5230537605138046,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7306685025005218,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7884022063732051,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7416204348763439,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.6321560187053359,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.3117779920019123,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.7330962426036238,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9142857142857143,
+          "probability": 0.33428571428571424,
+          "roll": 0.1462696876926091,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.5",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.8031225586795503,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8714285714285714,
+          "probability": 0.3214285714285714,
+          "roll": 0.44699409452118843,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.escalate.world_stressor_famine_a.5",
+          "candidateType": "stressor_escalate_famine",
+          "ruleId": "stressor_escalate_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.8132857142857143,
+          "probability": 0.27840000000000004,
+          "roll": 0.5715655755186135,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.b_iron_syndicate.5",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.8078851507485177,
+          "probability": 0.39468095125449604,
+          "roll": 0.12372837310046822,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.vassal.rebellion.edge_a_c.5",
+          "candidateType": "vassal_rebellion",
+          "ruleId": "vassal_rebellion_pressure",
+          "ruleFamily": "relationship",
+          "severity": 0.7587593542654194,
+          "probability": 0.2869405707443644,
+          "roll": 0.4365862211682788,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.c_crown_court.5",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.7442469461065985,
+          "probability": 0.3730439616762435,
+          "roll": 0.019409632557594838,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.5",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.715,
+          "probability": 0.2966,
+          "roll": 0.5786729171957562,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.7882697073162751,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.014993959380846501,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.5",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7028571428571428,
+          "probability": 0.27085714285714285,
+          "roll": 0.5644827909423942,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.5",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1976,
+          "roll": 0.20561633936949597,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "ruleId": "organic_settlement_disease_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.6485714285714285,
+          "probability": 0.25457142857142856,
+          "roll": 0.056435151052540225,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.5912289258824387,
+          "probability": 0.2655440992470829,
+          "roll": 0.061832891335686514,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.5",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5737142857142857,
+          "probability": 0.1736,
+          "roll": 0.6705472384502144,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5693951816330616,
+          "probability": 0.25943065085725725,
+          "roll": 0.5260484503898423,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.5",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.54576,
+          "probability": 0.21676,
+          "roll": 0.6415964928613698,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5274,
+          "probability": 0.3274,
+          "roll": 0.29129132756658616,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5002105920558589,
+          "probability": 0.2400589657756405,
+          "roll": 0.9844125267576853,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49836414519545225,
+          "probability": 0.23954196065472666,
+          "roll": 0.4989463860210985,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.8984596335534488,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4136786261519069,
+          "probability": 0.21583001532253396,
+          "roll": 0.1793121919791812,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.3837904761904762,
+          "probability": 0.18605714285714287,
+          "roll": 0.14875404829211064,
+          "passed": true,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.5",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.c.5",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.b_iron_syndicate.5",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.c_crown_court.5",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.5.stressor.b.candidate_stressor_betrayal_b_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.condition.c.candidate_condition_legitimacy_c_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.faction.b.candidate_faction_faction_government_challenge_b_iron_syndicate_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.faction.c.candidate_faction_faction_government_challenge_c_crown_court_5",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 6,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.21657081010282211,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.9112341653722561,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.8636657599415838,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.6",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.12938766931858794,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.6",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7116855561573578,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.6",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.054699198299250094,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.5216412629489984,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.15092798993973017,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.16232873611566495,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.6",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.715,
+          "probability": 0.2966,
+          "roll": 0.8966161704284991,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.6",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.48682909155906,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.6",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7028571428571428,
+          "probability": 0.27085714285714285,
+          "roll": 0.9917799139277721,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1976,
+          "roll": 0.07969716369351244,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.594210592055859,
+          "probability": 0.2663789657756406,
+          "roll": 0.8655276363001677,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.6",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5816342857142858,
+          "probability": 0.17756,
+          "roll": 0.2774092314262567,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5693951816330616,
+          "probability": 0.25943065085725725,
+          "roll": 0.5940537989304367,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.6",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.5356799999999999,
+          "probability": 0.21367999999999998,
+          "roll": 0.3463241149010988,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.6",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5232,
+          "probability": 0.3232,
+          "roll": 0.7070351519064405,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5043641451954523,
+          "probability": 0.24122196065472665,
+          "roll": 0.9728964874306341,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.2197032455036907,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.6791826855740631,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.5846758743518886,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.19434325453447568,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.03794875874860659,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.6",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.402639619047619,
+          "probability": 0.1942342857142857,
+          "roll": 0.8605598845731386,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.crime.a.6",
+          "candidateType": "crime_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.b.6",
+          "candidateType": "food_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.c.6",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.6",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.c.6",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.6.condition.a.candidate_condition_crime_a_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.condition.b.candidate_condition_food_b_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.condition.c.candidate_condition_legitimacy_c_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.stressor.b.candidate_stressor_betrayal_b_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.stressor.c.candidate_stressor_betrayal_c_6",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        }
+      ]
+    }
+  ],
+  "flagOff": [
+    {
+      "tick": 3,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.5918866189830884,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7257531481728042,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.3",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.05497415014466604,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.6154977977880038,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.19398373757764226,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.3",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.41556379776495245,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.suppress.b_npc_briarwatch_1.3",
+          "candidateType": "npc_suppress",
+          "ruleId": "npc_military_suppress",
+          "ruleFamily": "npc",
+          "severity": 0.9169196062702385,
+          "probability": 0.46906426034736537,
+          "roll": 0.6113483577954928,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.3",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.5370716163882708,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.suppress.c_npc_crownhold_1.3",
+          "candidateType": "npc_suppress",
+          "ruleId": "npc_military_suppress",
+          "ruleFamily": "npc",
+          "severity": 0.8769988899908789,
+          "probability": 0.44138589706034276,
+          "roll": 0.07784853396268261,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8571428571428571,
+          "probability": 0.3171428571428571,
+          "roll": 0.7743882883541119,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8571428571428571,
+          "probability": 0.3171428571428571,
+          "roll": 0.07935443042900021,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.escalate.world_stressor_famine_a.3",
+          "candidateType": "stressor_escalate_famine",
+          "ruleId": "stressor_escalate_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.8272857142857143,
+          "probability": 0.27840000000000004,
+          "roll": 0.9341796627161273,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.3",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7428571428571429,
+          "probability": 0.28285714285714286,
+          "roll": 0.4650470335537865,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.b_iron_syndicate.3",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.7113137221770891,
+          "probability": 0.3618466655402103,
+          "roll": 0.22979939989616865,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.3948824856183308,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.10136116932899307,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.3",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.35894538186085795,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.69,
+          "probability": 0.28759999999999997,
+          "roll": 0.23554225604127768,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.vassal.rebellion.edge_a_c.3",
+          "candidateType": "vassal_rebellion",
+          "ruleId": "vassal_rebellion_pressure",
+          "ruleFamily": "relationship",
+          "severity": 0.6867799661769368,
+          "probability": 0.23923527422172758,
+          "roll": 0.2440517476318351,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.3",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1928,
+          "roll": 0.6797768242366976,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.3",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5358,
+          "probability": 0.3358,
+          "roll": 0.7201148783463734,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.3",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5114857142857143,
+          "probability": 0.1736,
+          "roll": 0.7214620778132732,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.c_crown_court.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4987533542956991,
+          "probability": 0.23965093920279576,
+          "roll": 0.7132401272938116,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.48421059205585903,
+          "probability": 0.23557896577564055,
+          "roll": 0.7319859683225152,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.5004689135442532,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.3",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4688289258824387,
+          "probability": 0.23127209924708286,
+          "roll": 0.6349612610120682,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4469951816330617,
+          "probability": 0.22515865085725728,
+          "roll": 0.5849745077148011,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4121947251413979,
+          "probability": 0.2154145230395914,
+          "roll": 0.07711394493200113,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.trade_route_disruption.edge.a.b.3",
+          "candidateType": "trade_route_disruption",
+          "ruleId": "trade_route_disruption",
+          "ruleFamily": "relationship",
+          "severity": 0.4007142857142857,
+          "probability": 0.21857142857142858,
+          "roll": 0.5290846820117839,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.3",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "ruleId": "vassal_overlord_weakness_memory",
+          "ruleFamily": "relationship",
+          "severity": 0.38620000000000004,
+          "probability": 0.5,
+          "roll": 0.7040301737402664,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.3",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.36550476190476194,
+          "probability": 0.17577142857142858,
+          "roll": 0.1810923059386556,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.crime.c.3",
+          "candidateType": "crime_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.3",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.npc.suppress.c_npc_crownhold_1.3",
+          "candidateType": "npc_suppress",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.b.3",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.b_iron_syndicate.3",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.3.condition.c.candidate_condition_crime_c_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.stressor.b.candidate_stressor_betrayal_b_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.npc.c.candidate_npc_suppress_c_npc_crownhold_1_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.condition.b.candidate_condition_legitimacy_b_3",
+          "type": null
+        },
+        {
+          "id": "world_proposal.3.faction.b.candidate_faction_faction_government_challenge_b_iron_syndicate_3",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.3",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.food.b.3",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.3",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.3",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 4,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "ruleId": "stressor_crime_wave_residual",
+          "ruleFamily": "stressor",
+          "severity": 0.20700000000000005,
+          "probability": 1,
+          "roll": 0.9238473080316609,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7169193554855089,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.6884591760658533,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.4",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.49433682106487864,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.20108979611421093,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.9195772641247806,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.36566459074002045,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.4",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.2857630663983557,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9085714285714286,
+          "probability": 0.3325714285714286,
+          "roll": 0.5394079064943184,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9,
+          "probability": 0.33,
+          "roll": 0.7666332310148355,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.4",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.343996908901932,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.4",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8714285714285714,
+          "probability": 0.3214285714285714,
+          "roll": 0.17661274953448333,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.8160700107971852,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.4",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.715121260429934,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.7025,
+          "probability": 0.2921,
+          "roll": 0.28992431070586777,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.4",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.6885714285714286,
+          "probability": 0.26657142857142857,
+          "roll": 0.37106190679977263,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.4",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.19519999999999998,
+          "roll": 0.49780906024086335,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.4",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5711428571428572,
+          "probability": 0.1736,
+          "roll": 0.4175127362121078,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.4",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.55584,
+          "probability": 0.21984000000000004,
+          "roll": 0.9259643735692943,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.4",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.5528289258824387,
+          "probability": 0.25479209924708285,
+          "roll": 0.9442357739669202,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5316,
+          "probability": 0.3316,
+          "roll": 0.28842961453827975,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5309951816330616,
+          "probability": 0.24867865085725727,
+          "roll": 0.43968693433533157,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49236414519545213,
+          "probability": 0.23786196065472662,
+          "roll": 0.8955328976638057,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.4",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49221059205585893,
+          "probability": 0.23781896577564052,
+          "roll": 0.27801748115474945,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.4",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.5823470827229004,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.2958465512653147,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.8993509274020939,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.9431722333470909,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.6053184507040266,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "ruleId": "trade_route_disruption",
+          "ruleFamily": "relationship",
+          "severity": 0.4007142857142857,
+          "probability": 0.21857142857142858,
+          "roll": 0.1705724785758427,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "ruleId": "vassal_overlord_weakness_memory",
+          "ruleFamily": "relationship",
+          "severity": 0.3872,
+          "probability": 0.5,
+          "roll": 0.18653068016640098,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.4",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.37769523809523814,
+          "probability": 0.18262857142857145,
+          "roll": 0.5722399894240346,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.legitimacy.b.4",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.4",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.c.4",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.npc.exploit.a_npc_ashford_2.4",
+          "candidateType": "npc_exploit",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.a.4",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.4.condition.b.candidate_condition_legitimacy_b_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.stressor.b.candidate_stressor_betrayal_b_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.stressor.c.candidate_stressor_betrayal_c_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.npc.a.candidate_npc_exploit_a_npc_ashford_2_4",
+          "type": null
+        },
+        {
+          "id": "world_proposal.4.condition.a.candidate_condition_legitimacy_a_4",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.4",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "world_outcome.residual.world_stressor_crime_wave_b.b",
+          "candidateType": "stressor_residual",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_tribute_extraction.edge.a.c.4",
+          "candidateType": "vassal_tribute_extraction",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.4",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.4",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.trade_route_disruption.edge.a.b.4",
+          "candidateType": "trade_route_disruption",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_overlord_weakness_memory.edge.a.c.4",
+          "candidateType": "vassal_overlord_weakness_memory",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 5,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7065759506555574,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.5230537605138046,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.5",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7306685025005218,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7884022063732051,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7416204348763439,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.6321560187053359,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.3117779920019123,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.5",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.7330962426036238,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.9142857142857143,
+          "probability": 0.33428571428571424,
+          "roll": 0.1462696876926091,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.npc.exploit.a_npc_ashford_2.5",
+          "candidateType": "npc_exploit",
+          "ruleId": "npc_merchant_exploit",
+          "ruleFamily": "npc",
+          "severity": 0.8947455869477776,
+          "probability": 0.4603569402837925,
+          "roll": 0.8031225586795503,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.a.5",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.8714285714285714,
+          "probability": 0.3214285714285714,
+          "roll": 0.44699409452118843,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.escalate.world_stressor_famine_a.5",
+          "candidateType": "stressor_escalate_famine",
+          "ruleId": "stressor_escalate_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.8132857142857143,
+          "probability": 0.27840000000000004,
+          "roll": 0.5715655755186135,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.b_iron_syndicate.5",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.8078851507485177,
+          "probability": 0.39468095125449604,
+          "roll": 0.12372837310046822,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.vassal.rebellion.edge_a_c.5",
+          "candidateType": "vassal_rebellion",
+          "ruleId": "vassal_rebellion_pressure",
+          "ruleFamily": "relationship",
+          "severity": 0.7587593542654194,
+          "probability": 0.2869405707443644,
+          "roll": 0.4365862211682788,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.faction.faction_government_challenge.c_crown_court.5",
+          "candidateType": "faction_government_challenge",
+          "ruleId": "faction_crisis_government_challenge",
+          "ruleFamily": "faction",
+          "severity": 0.7442469461065985,
+          "probability": 0.3730439616762435,
+          "roll": 0.019409632557594838,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.5",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.715,
+          "probability": 0.2966,
+          "roll": 0.5786729171957562,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.7882697073162751,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.014993959380846501,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.5",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7028571428571428,
+          "probability": 0.27085714285714285,
+          "roll": 0.5644827909423942,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.5",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1976,
+          "roll": 0.20561633936949597,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "ruleId": "organic_settlement_disease_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.6485714285714285,
+          "probability": 0.25457142857142856,
+          "roll": 0.056435151052540225,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.5912289258824387,
+          "probability": 0.2655440992470829,
+          "roll": 0.061832891335686514,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.5",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5737142857142857,
+          "probability": 0.1736,
+          "roll": 0.6705472384502144,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5693951816330616,
+          "probability": 0.25943065085725725,
+          "roll": 0.5260484503898423,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.5",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.54576,
+          "probability": 0.21676,
+          "roll": 0.6415964928613698,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5274,
+          "probability": 0.3274,
+          "roll": 0.29129132756658616,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5002105920558589,
+          "probability": 0.2400589657756405,
+          "roll": 0.9844125267576853,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.49836414519545225,
+          "probability": 0.23954196065472666,
+          "roll": 0.4989463860210985,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.8984596335534488,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.4136786261519069,
+          "probability": 0.21583001532253396,
+          "roll": 0.1793121919791812,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.3837904761904762,
+          "probability": 0.18605714285714287,
+          "roll": 0.14875404829211064,
+          "passed": true,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.5",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.c.5",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.b_iron_syndicate.5",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.faction.faction_government_challenge.c_crown_court.5",
+          "candidateType": "faction_government_challenge",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.5.stressor.b.candidate_stressor_betrayal_b_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.condition.c.candidate_condition_legitimacy_c_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.faction.b.candidate_faction_faction_government_challenge_b_iron_syndicate_5",
+          "type": null
+        },
+        {
+          "id": "world_proposal.5.faction.c.candidate_faction_faction_government_challenge_c_crown_court_5",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.5",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.food.c.5",
+          "candidateType": "food_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.disease.b.5",
+          "candidateType": "disease_pressure",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.b_grain_guild.5",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.flow.migration.world_stressor_famine_a.b.5",
+          "candidateType": "flow_migration",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_law_preference_push.a_city_watch.5",
+          "candidateType": "faction_law_preference_push",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.rival_arms_race.edge.b.c.5",
+          "candidateType": "rival_arms_race",
+          "applyMode": "auto"
+        }
+      ]
+    },
+    {
+      "tick": 6,
+      "rollExplanations": [
+        {
+          "candidateId": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "ruleId": "population_decline",
+          "ruleFamily": "population",
+          "severity": 0.12,
+          "probability": 1,
+          "roll": 0,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.crime.a.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.21657081010282211,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.b.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.9112341653722561,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.crime.c.6",
+          "candidateType": "crime_pressure",
+          "ruleId": "organic_settlement_crime_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.8636657599415838,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.food.b.6",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.12938766931858794,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.b.6",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.7116855561573578,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.condition.legitimacy.c.6",
+          "candidateType": "legitimacy_pressure",
+          "ruleId": "organic_settlement_legitimacy_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 1,
+          "probability": 0.36,
+          "roll": 0.054699198299250094,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.a.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.5216412629489984,
+          "passed": false,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.b.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.15092798993973017,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.stressor.betrayal.c.6",
+          "candidateType": "stressor_birth_betrayal",
+          "ruleId": "stressor_birth_betrayal",
+          "ruleFamily": "stressor",
+          "severity": 1,
+          "probability": 0.40800000000000003,
+          "roll": 0.16232873611566495,
+          "passed": true,
+          "applyMode": "proposal"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_tribute_extraction.edge.a.c.6",
+          "candidateType": "vassal_tribute_extraction",
+          "ruleId": "vassal_tribute_extraction",
+          "ruleFamily": "relationship",
+          "severity": 0.715,
+          "probability": 0.2966,
+          "roll": 0.8966161704284991,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.food.a.6",
+          "candidateType": "food_pressure",
+          "ruleId": "organic_settlement_food_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7085714285714286,
+          "probability": 0.2725714285714286,
+          "roll": 0.48682909155906,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.condition.trade.c.6",
+          "candidateType": "trade_pressure",
+          "ruleId": "organic_settlement_trade_pressure",
+          "ruleFamily": "organic_drift",
+          "severity": 0.7028571428571428,
+          "probability": 0.27085714285714285,
+          "roll": 0.9917799139277721,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "ruleId": "vassal_protection_burden",
+          "ruleFamily": "relationship",
+          "severity": 0.66,
+          "probability": 0.1976,
+          "roll": 0.07969716369351244,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.c_shadow_market.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.594210592055859,
+          "probability": 0.2663789657756406,
+          "roll": 0.8655276363001677,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_sabotage.edge.b.c.6",
+          "candidateType": "rival_sabotage",
+          "ruleId": "rival_sabotage",
+          "ruleFamily": "relationship",
+          "severity": 0.5816342857142858,
+          "probability": 0.17756,
+          "roll": 0.2774092314262567,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.b_city_watch.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5693951816330616,
+          "probability": 0.25943065085725725,
+          "roll": 0.5940537989304367,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.stressor.spread.world_stressor_famine_a.b.6",
+          "candidateType": "stressor_spread_famine",
+          "ruleId": "stressor_spread_famine",
+          "ruleFamily": "stressor",
+          "severity": 0.5356799999999999,
+          "probability": 0.21367999999999998,
+          "roll": 0.3463241149010988,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.flow.migration.world_stressor_famine_a.b.6",
+          "candidateType": "flow_migration",
+          "ruleId": "flow_migration_famine",
+          "ruleFamily": "flow",
+          "severity": 0.5232,
+          "probability": 0.3232,
+          "roll": 0.7070351519064405,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_law_preference_push.a_iron_syndicate.6",
+          "candidateType": "faction_law_preference_push",
+          "ruleId": "faction_law_preference_push",
+          "ruleFamily": "faction",
+          "severity": 0.5043641451954523,
+          "probability": 0.24122196065472665,
+          "roll": 0.9728964874306341,
+          "passed": false,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "ruleId": "faction_service_bolster",
+          "ruleFamily": "faction",
+          "severity": 0.4702897880920218,
+          "probability": 0.23168114066576612,
+          "roll": 0.2197032455036907,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.6791826855740631,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.5846758743518886,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_military_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.19434325453447568,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "ruleId": "npc_merchant_goal_rebranch",
+          "ruleFamily": "npc",
+          "severity": 0.44,
+          "probability": 1,
+          "roll": 0.03794875874860659,
+          "passed": true,
+          "applyMode": "auto"
+        },
+        {
+          "candidateId": "candidate.relationship.rival_arms_race.edge.b.c.6",
+          "candidateType": "rival_arms_race",
+          "ruleId": "rival_arms_race",
+          "ruleFamily": "relationship",
+          "severity": 0.402639619047619,
+          "probability": 0.1942342857142857,
+          "roll": 0.8605598845731386,
+          "passed": false,
+          "applyMode": "auto"
+        }
+      ],
+      "selectedIds": [
+        {
+          "id": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.condition.crime.a.6",
+          "candidateType": "crime_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.food.b.6",
+          "candidateType": "food_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.condition.legitimacy.c.6",
+          "candidateType": "legitimacy_pressure",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.b.6",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.stressor.betrayal.c.6",
+          "candidateType": "stressor_birth_betrayal",
+          "applyMode": "proposal"
+        },
+        {
+          "id": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        }
+      ],
+      "proposalIds": [
+        {
+          "id": "world_proposal.6.condition.a.candidate_condition_crime_a_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.condition.b.candidate_condition_food_b_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.condition.c.candidate_condition_legitimacy_c_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.stressor.b.candidate_stressor_betrayal_b_6",
+          "type": null
+        },
+        {
+          "id": "world_proposal.6.stressor.c.candidate_stressor_betrayal_c_6",
+          "type": null
+        }
+      ],
+      "autoAppliedIds": [
+        {
+          "id": "candidate.population.decline.a.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.b.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.population.decline.c.6",
+          "candidateType": "population_decline",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.relationship.vassal_protection_burden.edge.a.c.6",
+          "candidateType": "vassal_protection_burden",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.faction.faction_service_bolster.a_grain_guild.6",
+          "candidateType": "faction_service_bolster",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.b_npc_briarwatch_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_1.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        },
+        {
+          "id": "candidate.npc.goal_rebranch.c_npc_crownhold_2.6",
+          "candidateType": "npc_goal_rebranch",
+          "applyMode": "auto"
+        }
+      ]
+    }
+  ]
+}

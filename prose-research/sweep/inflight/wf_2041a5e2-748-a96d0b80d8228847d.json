@@ -1,0 +1,24 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 124,
+ "firstTs": "2026-09-09T22:51:21.650Z",
+ "lastTs": "2026-09-09T22:58:16.874Z",
+ "tools": {
+  "Bash": 20,
+  "Read": 11,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-critical/draft-round-2.md"
+ ],
+ "lastAssistantText": "AIM is a wall where the spread limb is a band. Two judgment calls stay open for the chair in §F: no subjunctive edge is spent in this pool, and the `[visitor]` angle keeps the stranger as the frame's grammatical subject, which diverges from the sibling `readiness ADEQUATE` packet in this same block.",
+ "run": "wf_2041a5e2-748",
+ "agent": "a96d0b80d8228847d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_2041a5e2-748/agent-a96d0b80d8228847d.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

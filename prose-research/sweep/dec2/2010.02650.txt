@@ -1,0 +1,737 @@
+                                                       If Beam Search is the Answer, What was the Question?
+
+                                                                 Clara Meister          Tim Vieira    Ryan Cotterell ,
+                                                        ETH Zürich  Johns Hopkins University University of Cambridge
+                                                        clara.meister@inf.ethz.ch tim.vieira@gmail.com
+                                                                    ryan.cotterell@inf.ethz.ch
+
+                                                               Abstract
+                                             Quite surprisingly, exact maximum a posteri-
+                                             ori (MAP) decoding of neural language gen-
+                                             erators frequently leads to low-quality results
+                                             (Stahlberg and Byrne, 2019). Rather, most
+                                             state-of-the-art results on language generation
+
+
+
+
+arXiv:2010.02650v2 [cs.CL] 17 Jan 2021
+                                             tasks are attained using beam search despite its
+                                             overwhelmingly high search error rate. This
+                                             implies that the MAP objective alone does not
+                                             express the properties we desire in text, which
+                                             merits the question: if beam search is the an-
+                                             swer, what was the question? We frame beam
+                                             search as the exact solution to a different de-
+                                             coding objective in order to gain insights into
+                                             why high probability under a model alone may
+                                             not indicate adequacy. We find that beam
+                                             search enforces uniform information density
+                                             in text, a property motivated by cognitive sci-
+                                             ence. We suggest a set of decoding objec-
+                                             tives that explicitly enforce this property and
+                                             find that exact decoding with these objectives
+                                             alleviates the problems encountered when de-
+                                             coding poorly calibrated language generation       Figure 1: Average std. deviation σ of surprisals (per
+                                             models. Additionally, we analyze the text pro-     sentence) and corpus BLEU for translations generated
+                                             duced using various decoding strategies and        using exact search over the MAP objective with a
+                                             see that, in our neural machine translation ex-    greedy regularizer (Eq. (11)) with varying degrees of
+                                             periments, the extent to which this property       λ. References for beam search (k = 5 and k = 100)
+                                             is adhered to strongly correlates with BLEU.       are included. Sub-graph shows the explicit relationship
+                                             Our code is publicly available at https://         between BLEU and σ. λ and σ axes are log-scaled.
+                                             github.com/rycolab/uid-decoding.
+
+                                         1   Introduction
+                                         As a simple search heuristic, beam search has been
+                                         used to decode models developed by the NLP             or even approximate—the highest-scoring candi-
+                                         community for decades. Indeed, it is notewor-          date under a model, it has repeatedly proven its
+                                         thy that beam search is one of the few NLP al-         merit in practice (Serban et al., 2017; Edunov et al.,
+                                         gorithms that has stood the test of time: It has       2018; Yang et al., 2019) and, thus, has largely been
+                                         remained a cornerstone of NLP systems since the        tolerated—even embraced—as NLP’s go-to search
+                                         1970s (Reddy, 1977). As such, it became the nat-       heuristic. However, in the context of neural ma-
+                                         ural choice for decoding neural probabilistic text     chine translation (NMT), a shocking empirical find-
+                                         generators—whose design makes evaluating the           ing has emerged: Using beam search to decode
+                                         full search space impossible (Kalchbrenner and         sentences from neural text generators almost invari-
+                                         Blunsom, 2013; Sutskever et al., 2014; Vinyals         ably leads to better text than using exact search (or
+                                         and Le, 2015; Yin et al., 2016). While there is        beam search with a very large beam size). In fact,
+                                         no formal guarantee that beam search will return—      Stahlberg and Byrne (2019) report that exact search
+returns the empty string in > 50% of cases,1 show-                 text-quality degradation typically seen when de-
+ing that the success of beam search does not stem                  coding with larger beam sizes. We take all the
+from its ability to approximate exact decoding in                  above as evidence that our proposed explanation of
+practice, but rather due to a hidden inductive bias                beam search’s inductive bias indeed elucidates why
+embedded in the algorithm. This inductive bias ap-                 the algorithm performs so well as a search heuristic
+pears to be paramount for generating desirable text                for language generation tasks.
+from neural probabilistic text generators. While
+several works explore this phenomenon (Murray                      2    Neural Probabilistic Text Generation
+and Chiang, 2018; Yang et al., 2018; Stahlberg                     Probabilistic text generators define a probability
+and Byrne, 2019; Cohen and Beck, 2019), no one                     distribution pθ (y | x) over an output space of hy-
+has yet hypothesized what beam search’s hidden                     potheses Y (to be defined in Eq. (1)) conditioned
+inductive bias may be. Our work fills this gap.                    on an input x.2 Modern generators are typically
+   We analyze the beam search blessing by re-                      parameterized by a deep neural network—possibly
+verse engineering an objective that beam search                    recurrent—with a set of learned weights θ. In the
+returns the exact solution for. Specifically, we in-               case of text generation, the full set of possible hy-
+troduce a regularizer for the the standard (MAP)                   potheses grows exponentially with the vocabulary
+decoding objective for text generation models such                 size |V|. We consider the set of complete hypothe-
+that the exact solution to this regularized objec-                 ses, i.e., valid outputs, as
+tive is equivalent to the solution found by beam
+search under the unmodified objective. Qualitative                           Y := {BOS ◦ v ◦ EOS | v ∈ V ∗ }                  (1)
+inspection reveals that our “beam search regular-
+izer” has a clear connection to a theory in cog-                   where ◦ is string concatenation and V ∗ is the
+nitive science—the uniform information density                     Kleene closure of V. In words, valid hypotheses
+hypothesis (UID; Levy and Jaeger, 2007). The UID                   are text, e.g., sentences or phrases, padded with dis-
+hypothesis states that—subject to the constraints                  tinguished tokens, BOS and EOS. In this work, we
+of the grammar—humans prefer sentences that dis-                   consider models that are locally normalized, i.e.,
+tribute information (in the sense of information                   the model pθ is defined as the product of probability
+theory) equally across the linguistic signal, e.g., a              distributions:
+sentence. In other words, human-produced text,                                                |y|
+                                                                                              Y
+regardless of language, tends to have evenly dis-                             pθ (y | x) =          pθ (yt | x, y<t )         (2)
+tributed surprisal, formally defined in information                                           t=1
+theory as negative log-probability. This connec-
+                                                                   where each pθ (· | x, y<t ) is a distribution with sup-
+tion suggests beam search has an interpretation as
+                                                                   port over V̄ := V ∪ {EOS} and y<1 = y0 := BOS.
+exact decoding, but with a UID-promoting regu-
+                                                                      The decoding objective for text generation aims
+larizer that encourages evenly distributed surprisal
+                                                                   to find the most-probable hypothesis among all
+in generated text. This insight naturally leads to
+                                                                   candidate hypotheses, i.e. we aim to solve the
+the development of several new regularizers that
+                                                                   following optimization problem:
+likewise enforce the UID property.
+   Empirically, we experiment with our novel regu-                               y? = argmax log pθ (y | x)                   (3)
+larizers in the decoding of NMT models. We first                                           y∈Y
+observe a close relationship between the standard
+                                                                   This is commonly known as maximum a posteriori
+deviation of surprisals—an operationalization of
+                                                                   (MAP) decoding since pθ is a probability model.
+UID—and BLEU, which suggests that high-quality
+                                                                   While there exists a wealth of literature on decod-
+text does indeed exhibit the UID property. Addi-
+                                                                   ing algorithms for statistical text generation mod-
+tionally, we find that even with exact search, our
+                                                                   els, e.g., phrase-based machine translation models,
+regularized objective leads to performance simi-
+                                                                   many of these methods cannot reasonably be used
+lar to beam search on standard NMT benchmarks.
+                                                                   with neural models. Specifically, due to the non-
+Both of these observations are reflected in Fig. 1.
+                                                                   Markovian structure of most neural text generators,
+Lastly, we see that our regularizers alleviate the
+                                                                   dynamic-programming algorithms for searching
+    1                                                                  2
+      This rate tends to decrease for larger models, although it         The input could be another sentence, a semantic structure
+is often still a considerable percentage.                          or an image, to name a few examples.
+over the exponentially large space are not efficient               (Stahlberg and Byrne, 2019). Counterintuitively,
+in this setting. Indeed, there are formal results that             it is widely known that increasing the beam size
+solving Eq. (3) with a recurrent neural network                    beyond 5 can hurt model performance in terms
+is NP-hard (Chen et al., 2018). Therefore decod-                   of downstream evaluation metrics (e.g., BLEU,
+ing is performed almost exclusively with heuristic                 ROUGE ); while a number of prior works have
+methods, such as beam search.                                      referred to this phenomenon as a curse (Koehn and
+                                                                   Knowles, 2017; Yang et al., 2018; Cohen and Beck,
+2.1    Beam Search                                                 2019), it should perhaps be seen as a blessing.
+Beam search is a form of pruned breadth-first                      Beam search typically generates well-formed and
+search where the breadth is limited to k ∈ Z+                      coherent text from probabilistic models, whose
+(i.e., a maximum of k hypotheses) are expanded                     global optimum in many cases is the empty string,
+at each time step. We express beam search as the                   when they otherwise might fail to produce text at
+following recursion:                                               all. As we demonstrate in §4, this text also tends
+                                                                   to be human-like. We will subsequently explore
+             Y0 = {BOS}                                    (4)     possible reasons as to why beam search leads
+                                           0
+             Yt = argmax log pθ (Y | x)                    (5)     to desirable text from models that are otherwise
+                      Y 0 ⊆Bt ,
+                      |Y 0 |=k                                     poorly calibrated, i.e., poor representations of the
+                                                                   true distribution p(y | x) (Guo et al., 2017).
+where we define the candidate set at t > 0
+       n                                   o                       2.2    Alternative Decoding Objectives
+  Bt = yt91 ◦ y | y ∈ V̄ and yt91 ∈ Yt91                   (6)
+                                                                   When the MAP objective (Eq. (3)) is used for de-
+For notational convenience, we define EOS ◦ EOS =                  coding neural text generators, the results are gen-
+EOS . The above algorithm terminates after a fixed                 erally not satisfactory. Among other problems, the
+number of iterations3 nmax and the set Ynmax is                    generated texts are often short and defaults to high-
+returned. We overload pθ (· | x) to take a set of hy-              frequency words (Cho et al., 2014; Vinyals and Le,
+potheses as an argument instead of just                            2015; Shen et al., 2016). Methods such as length
+                                      Qa single hy-
+pothesis. In this case, pθ (Y | x) := y∈Y pθ (y |                  and coverage normalization (Jean et al., 2015; Tu
+x).4 Using a similar schema, the argmax may                        et al., 2016; Murray and Chiang, 2018), which aug-
+also operate over a different objective, e.g., log-                ment the MAP objective with an additive term or
+probabilities combined with various rewards or pe-                 multiplicative factor, have been adopted to allevi-
+naties, such as those discussed in §2.2.                           ate these issues. For example, two such forms of
+   Beam search has a long history in sequence                      length5 and coverage normalization use the follow-
+transduction. For example, many of the decoding                    ing modified MAP objective respectively during
+strategies used in statistical machine translation                 decoding to produce higher-quality output:
+(SMT) systems were variants of beam search (Och
+et al., 1999; Koehn et al., 2003; Koehn, 2004). As                                 log pθ (y | x) + λ|y|            (7)
+                                                                                                                 
+language generation systems moved away from                                               |x|             |y|
+                                                                                         X                X
+phrase-based statistical approaches and towards                       log pθ (y | x)+λ         log min 1,
+                                                                                                             αij  (8)
+neural models, beam search remained the de-facto                                         i=1                 j=1
+decoding algorithm (Sutskever et al., 2014; Vinyals
+and Le, 2015). However, it has been observed                       where λ > 0 is the (tunable) strength of the reward
+that when used as a decoding algorithm for neural                  and αij is the attention weight (Bahdanau et al.,
+text generation, beam search (for small beams)                     2015) from the j th decoding step over the ith input.
+typically has a large percentage of search errors                  Eq. (7) directly rewards longer outputs (He et al.,
+   3
+                                                                   2016) while Eq. (8) aims to reward coverage of in-
+      If all hypotheses in Yt end in EOS for some t < nmax ,
+then we may terminate beam search early as it is then gau-
+                                                                   put words in a prediction using the attention mecha-
+ranteed that Yt = Ynmax . We do not consider further early-        nism of an encoder–decoder model as an oracle (Tu
+stopping methods for beam search (Huang et al., 2017; Yang
+et al., 2018; Meister et al., 2020) as they generally should not      5
+                                                                        The predominant form of length normalization divides
+affect the quality of the decoded set.                             (log) sequence probability by the length of the hypothesis
+    4
+      There do exist objectives that take into account interac-    rather than using an additive reward as in (He et al., 2016).
+tions between hypotheses in a set, e.g., diverse beam search       We present results from the former in our experiments as we
+(Vijayakumar et al., 2018), but we do not consider those here.     find it empirically leads to better performance.
+et al., 2016). While such methods help obtain state-    Theorem 3.1. The argmax of log pθ (y | x) − λ ·
+of-the-art results in neural MT (Wu et al., 2016;       Rgreedy (y) is exactly computed by greedy search
+Gehring et al., 2017; Ng et al., 2019), we view         in the limiting case as λ → ∞.
+them as a patch to the observed problems. The
+fact that text quality still degrades with increased    Proof. By induction. In App. A.
+beam sizes when these rewards are used (Koehn
+and Knowles, 2017; Ott et al., 2018a) suggests that        Theorem 3.1 establishes that greedy search is the
+they do not address the inherent issues with text       limiting case of a regularizer that seeks to encour-
+generation systems. We subsequently hypothesize         age decisions to have high-probability locally. In
+about the nature of these issues and provide a set      contrast, the optimal MAP solution will generally
+of linguistically motivated regularizers—inspired       not have this property. This is because a globally
+by beam search—that appear to alleviate them.           optimal MAP decoder may require a locally subop-
+                                                        timal decision for the sake of being able to make
+3   Deriving Beam Search                                a compensatory decision later that leads to global
+                                                        optimality.6
+We introduce a regularized decoding framework.
+                                                           We now consider the generalization of greedy
+The idea is simple; we seek to solve the regularized
+                                                        search (k = 1) to full beam search (k ≥ 1). Recall
+optimization problem to decode
+                                                        that beam search returns not just a single output,
+                                                        but rather a set of outputs. Thus, we must consider
+                                            
+  y? = argmax log pθ (y | x) − λ · R(y) (9)
+          y∈Y                                           the set-decoding objective
+                                                                                               
+for a strategically chosen R(·). Clearly, for certain    Y ? = argmax log pθ (Y | x) − λ · R(Y ) (12)
+R(·), we recover the decoding objectives discussed                 Y ⊆Y,
+                                                                   |Y |=k
+in §2.2. The question we ask in this work is the
+following: If we want to view beam search as an
+                                                        where, as before, we have used our overloaded nota-
+exact-decoding algorithm, which R(·) should we
+                                                        tion pθ (· | x) to score sets of hypotheses. Similarly
+choose to recover beam search?
+                                                        to Rgreedy , we formulate a greedy set-regularizer
+   We discovered an elegant answer rooted in infor-     to recover beam search:
+mation theory and cognitive science (the connec-
+tions are discussed in-depth in §4). We first define           Rbeam (Y ) =                           (13)
+the model’s time-dependent surprisals, which are                                                  2
+an information-theoretic concept that characterizes                 nXmax
+
+the amount of new information expressed at time t:                        ut (Yt ) − min ut (Y 0 )
+                                                                                                  
+                                                                                      0   Y ⊆Bt ,
+                                                                       t=1                |Y 0 |=k
+ u0 (BOS) = 0
+    ut (y) = − log pθ (y | x, y<t ), for t ≥ 1 (10)     where Yt = {y1:t | y ∈ Y } corresponds to the set
+                                                        of hypotheses expanded by t steps.7 Note that we
+Note that minimally surprising means maximally          additionally
+probable. For the special case of greedy decoding,                 Poverload surprisal to operate on sets,
+                                                        ut (Y ) =    y∈Y ut (y). We prove an analogous
+where k = 1, the following choice of regularizer        theorem to Theorem 3.1 for this regularizer.
+recovers beam search for sufficiently large λ:
+                                                        Theorem 3.2. The argmax of log pθ (Y | x) − λ ·
+                |y| 
+                X                             2        R(Y ) is computed by beam search with beam size
+                                          0             of k = |Y | as λ → ∞.
+Rgreedy (y) =        ut (yt ) − min
+                                0
+                                    ut (y   )    (11)
+                                y ∈V
+                t=1
+                                                        Proof. The proof follows from the same argument
+The intuition behind Eq. (11) is to encourage lo-       as Theorem 3.1, albeit with sets instead of an indi-
+cally optimal decisions: Every local surprise ut        vidual hypothesis.
+should be close to the minimally surprising choice.
+                                                           6
+In the limiting case where locally optimal deci-              Indeed, we only have formal guarantees for greedy algo-
+sions are not just encouraged, but rather enforced,     rithms when local optimality translates into global optimality
+                                                        (Kleinberg and Tardos, 2005, Chapter 4).
+we recover greedy search.                                   7
+                                                              This includes both incomplete hypotheses of length t and
+   Formally, we have the following theorem:             complete hypotheses that have reached EOS at step ≤ t.
+Note that in the (predominant) case where we want          words, thereby distributing information across the
+to return a single candidate sentence as the output        sentence more uniformly and avoiding instances
+rather than an entire set—as would be generated by         of high surprisal—which, from a psycholinguistic
+Eq. (12)—we can take the highest-probability se-           perspective, are displeasing. In short, the relativizer
+quence in the chosen set Y ? as our decoded output.        helps to ensure the UID property of the sentence.
+The objective in Eq. (12) boils down to a subset              Importantly, the preference suggested by the
+selection problem which, given the size of Y, is a         UID hypothesis is between possible utterances (i.e.,
+computationally prohibitive optimization problem.          outputs) where grammaticality and information
+Nonetheless, we can use it to analyze the properties       content are held constant. Any violation of these
+enforced on generated text by beam search.                 assumptions presents confounding factors when
+                                                           measuring, or optimizing, the information density
+4   From Beam Search to UID                                of the generated text. In our setting, there is reason
+The theoretical crux of this paper hinges on a             to believe that grammaticallity and information con-
+proposed relationship between beam search and              tent are approximately held constant while select-
+the uniform information density hypothesis                 ing between hypothesis. First, the high-probability
+(Levy, 2005; Levy and Jaeger, 2007), a concept             outputs of neural generation models tend to be
+from cognitive science:                                    grammatical (Holtzman et al., 2020). Second, be-
+                                                           cause decoding is conditioned on a specific input
+Hypothesis 4.1. “Within the bounds defined by              x, the conditional probability model pθ (y | x) is
+grammar, speakers prefer utterances that distribute        able to assign high-probability to outputs y that are
+information uniformly across the signal (informa-          plausible outputs (e.g., translations) of the given
+tion density). Where speakers have a choice be-            x. Thus, even though the various y are not con-
+tween several variants to encode their message,            strained to be sematically equivalent to one another,
+they prefer the variant with more uniform informa-         they tend to express similar information because
+tion density (ceteris paribus)” (Jaeger, 2010).            they are at least relevant to the same x. This is
+   At its core, the theory seeks to explain various        why our regularized optimization problem Eq. (9)
+aspects of human language processing in terms of           combines an information-density regularizer with
+information theory; it is often applied to an area         log pθ (y | x): the term log pθ (y | x) rewards
+of psycholinguistics known as sentence processing          grammaticallity and content relevance, whereas the
+where the UID hypothesis is used to explain exper-         information-density regularizer encourages the hu-
+imental data (Hale, 2001). As the UID hypothesis           man preferences posited by the UID hypothesis.
+concerns a cognitive process (virtually) indepen-          The parameter λ allows the preferences to be cali-
+dent of the language in use, the theory should hold        brated to perform well on downstream evaluation
+across languages (Jaeger and Tily, 2011).                  metrics, such as BLEU and ROUGE.
+   To see the hypothesis in action, consider the
+classic case of syntactic reduction from Levy and          4.1   The UID Bias in Beam Search
+Jaeger (2007):
+                                                           It may not be immediately obvious how the UID
+(1) How big is [NP the familyi [RC (that) you cook         hypothesis relates to beam search. After all, beam
+    for −i ]]?                                             search narrows the scope of the search to only the
+                                                           lowest surprisal candidates at each time step, which
+In the above example, the sentence does not require        does not clearly lead to a uniform distribution of
+the relativizer that at the start of the relative clause   surprisals in the final decoded sequences. The con-
+(denoted by RC); it would also be syntactically            nection is best seen visually.
+correct without it. However, many would agree                 Fig. 2 shows the time-dependent surprisals ut
+that the relativizer makes the text qualitatively bet-     under the model of several candidate translations
+ter. The information-theoretic explanation of this         (German to English). Recall that we have ut (y) ∈
+perception is that without the relativizer, the first      [0, ∞) and that the standard decoding objective ex-
+word of a relative clause conveys two pieces of in-        plicitly minimizes the sum of surprisals, i.e., maxi-
+formation simultaneously: the onset of a relative          mizes log-probability. Therefore, the only way the
+clause and part of its internal contents. Including        distribution of a solution can become distinctly non-
+the relativizer spreads this information across two        uniform is when there are several high-surprisal
+Figure 2: Surprisals (according to pθ ) by time step of sequences generated with various decoding strategies. Values
+of λ indicate the greedy regularizer was used with the corresponding λ value. Note that beam search (k=5) and
+exact search (λ = 1.0) return the same prediction in this example, and thus, are represented by the same line.
+
+
+decisions in the mix; we observe this in the or-            eration models. The success of beam search on
+ange and red curves. Intuitively, this corresponds          such tasks is, in part, due to the fact that it inher-
+to the notion of compensation discussed earlier:            ently biases the search procedure towards text that
+a globally optimal decoding scheme may select a             humans prefer.
+high-surprisal step at some point in order to shorten
+                                                               The foundation of the argument for this hypoth-
+the length of the path or to take a low-surprisal step
+                                                            esis follows naturally from the previous sections:
+later on. We observe an extreme example of this
+                                                            First, we demonstrated in §3 that beam search is an
+behavior above: Selecting the EOS character at the
+                                                            exact decoding algorithm for a certain regularized
+first step leads to a very non-uniform distribution,
+                                                            objective—to wit, the one in Eq. (9). Qualitatively,
+i.e., the degenerate distribution, which, violates our
+                                                            we related the behavior of the regularizer to the
+operationalization of UID described subsequently.
+                                                            UID hypothesis from cognitive science. As a fi-
+In summary, we see that as λ is decreased, the de-
+                                                            nal step, we next provide operationalizations of
+coded sentences obey the UID property less strictly.
+                                                            UID—in the form of regularizers within our regu-
+Indeed, setting λ = 0, i.e., exact inference of the
+                                                            larized decoding framework—through which we
+MAP objective, results in the empty string.
+                                                            can empirically test the validity of this hypothesis.
+   A number of successful sampling methods (p-
+nucleus sampling (Holtzman et al., 2020) and top-
+k sampling (Fan et al., 2018)) enforce the UID              5   Generalized UID Decoding
+property in generated text by the same logic as
+                                                            If beam search is trying to optimize for UID, can
+above. Both methods eliminate many of the high-
+                                                            we beat it at its own game? This section develops
+surprisal choices at any given decoding step by
+                                                            a battery of possible sentence-level UID measures,
+narrowing the set of tokens that may be chosen.
+                                                            which can be used as regularizers in our regularized
+4.2   Cognitive Motivation for Beam Search                  decoding framework and compared experimentally
+                                                            on downstream evaluation metrics.
+The goal of this work is to expose a possible in-
+ductive bias of beam search. We now exhibit our             Variance Regularizer. We first consider the vari-
+primary hypothesis                                          ance regularizer from Jain et al. (2018). In essence,
+Hypothesis 4.2. Beam search is a cognitively mo-            UID concerns the distribution of information over
+tivated search heuristic for decoding language gen-         the course (i.e., time steps) of a sentence. A natural
+measure for this is variance of the surprisals.          helpful—and our logic in constructing regulariz-
+                       |y|
+                                                         ers is sound—all the regularizers (Eq. (14) to (17))
+                    1 X               2
+                                                         should lead to roughly the same performance un-
+      Rvar (y) =           ut (yt ) − µ           (14)
+                   |y|                                   der exact decoding and beam search with large
+                       t=1
+                                                         beam widths. Such results would not only validate
+                   P|y|
+where µ = 1/|y| t=1 ut (yt ). This regularizer,          the connection between UID and high-quality text;
+in contrast to Eq. (11), is a much more straight-        comparable performance of optimal beam search8
+forward encoding of the UID: it directly opera-          and exact search under our regularized objective
+tionalizes UID through variance.                         would provide explicit evidence for our declarative
+                                                         explanation of the inductive bias in beam search.
+Local Consistency. Next we consider a local
+consistency regularizer, also taken from Jain et al.     6       Experiments
+(2018), that encourages adjacent surprisals to have
+similar magnitude:                                       We explore how encouraging uniform information
+                                                         density in text generated by neural probabalistic
+                     |y|
+                1 X                         2          text generators affects its downstream quality. To
+  Rlocal (y) =       ut (yt ) − ut−1 (yt−1 )
+               |y|                                       this end, we decode NMT models using the reg-
+                    t=1
+                                                  (15)   ularized objective (Eq. (9)) with our UID regu-
+                                                         larizers. We perform exact decoding for a range
+Again, this is a straightforward encoding of the         of λ and observe how text quality (quantified by
+UID: if every surprisal is similar to its neighbor, it   BLEU (Papineni et al., 2002) using the SacreBLEU
+will be close to uniform. Note that both of the          (Post, 2018) system) and the distribution of sur-
+above regularizers are defined for all decoding          prisal changes. We additionally evaluate our regu-
+steps t > 0 since we define u0 (y0 ) = 0, y0 =           larizers under the beam search decoding strategy
+BOS for all valid hypotheses.                            to see if penalizing violations of UID alleviates
+                                                         the text-quality degradation typically seen with in-
+Max Regularizer. We propose a UID-inspired
+                                                         creased beam widths.
+regularizer of our own design that exploits the na-
+ture of MAP decoding, for which the overarching             Experiments are performed using models trained
+goal is to find a solution with low surprisal. In        on the IWSLT’14 De-En (Cettolo et al., 2012) and
+this setting, one strategy is to penalize decisions      WMT’14 En-Fr (Bojar et al., 2014) datasets. For re-
+that move the distribution away from 0, the lowest       producibility, we use the model provided by fairseq
+possible surprisal. This suggests                        (Ott et al., 2019) for the WMT’14 task;9 we use the
+                                                         data pre-processing scripts and recommended hy-
+                             |y|                         perparameter settings provided by fairseq for train-
+              Rmax (y) = max ut (yt )             (16)
+                             t=1                         ing a model on the IWSLT’14 De-En dataset. We
+would regularize for UID. Such a regularizer would       use the Newstest’14 dataset as the test set for the
+also directly penalize extreme compensation dur-         WMT’14 model. All model and data information
+ing decoding (discussed in §3). It is worth noting       can be found on the fairseq NMT repository. 10
+that this regularizer has a connection to entropy
+                                                         6.1      Exact Decoding
+regularization, which can be seen by looking at the
+formula for Rényi entropy.                              To perform exact decoding of neural probabilistic
+                                                         text generators, we build on the decoding frame-
+Squared Regularizer. Finally, we consider a              work of Stahlberg et al. (2017), albeit using Dijk-
+novel squared penalty, that, again, exploits the goal    stra’s algorithm (Dijkstra, 1959) instead of depth-
+of MAP decoding. If we wish to keep everything           first search as we find it decreases decoding time.
+uniform, we can try to push all surprisals close to      Note that Dijkstra’s algorithm is guaranteed to find
+0, but this time with a squared penalty:                 the global optimum when path cost is monotoni-
+                             |y|                             8
+                             X                                By optimal beam search, we mean beam search using the
+             Rsquare (y) =         ut (yt )2      (17)   beam width that empirically leads to the best results.
+                                                            9
+                             t=1                              This model uses a transformer architecture (Vaswani et al.,
+                                                         2017) and was trained as in Ott et al. (2018b).
+Experimentally, we expect to see the following:            10
+                                                              https://github.com/pytorch/fairseq/
+If encouraging decoded text to exhibit UID is            tree/master/examples/translation
+Figure 3: BLEU as a function of beam width for various regularizers. We choose λ for each regularizer by best per-
+formance on validation sets (see App. B). y-scales are broken to show minimum BLEU values. x-axis is log-scaled.
+
+
+cally increasing, which is the case for hypotheses                                 k=5     k = 10   k = 100   k = 500
+under the scoring scheme used by neural proba-             No Regularization       36.42   36.30    32.83     14.66
+bilistic text generators (see Meister et al. (2020)        Squared Regularizer     36.92   36.42    36.13     35.96
+                                                           Greedy Regularizer      36.45   36.49    36.22     36.15
+for more detailed discussion). While the variance
+                                                           Combined Regularizers   36.69   36.65    36.48     36.35
+and local consistency regularizers Eq. (14) and (15)       Length Normalization    36.02   35.94    35.80     35.11
+break this monotonicity property, we can still guar-
+antee optimality by using a stopping criterion sim-       Table 1: BLEU scores on first 1000 samples of New-
+ilar to the one proposed by Yang et al. (2018).           stest2014 for predictions generated with various decod-
+Explicitly, we check if the top-scoring complete          ing strategies. Best scores per beam size are bolded.
+hypothesis has a greater score than the maximum
+possible score of any hypothesis in the queue. All
+scores are bounded due to the maximum-length cri-
+terion. Additionally, we lower-bound each search          this problem. Notably, the greedy and squared
+by the score of the empty string to decrease the          regularizer aid performance for larger beam sizes
+memory footprint, i.e., we stop considering hy-           more so than other regularizers, for which we still
+potheses whose scores (or maximum possible score          see a slight drop in performance for larger beam
+in the case of Eq. (14) and (15)) drop below that of      sizes. This drop is negligible compared to the
+the empty string at any time step.                        one observed for unregularized beam search—a
+   Fig. 1 demonstrates how the addition of the            drop which is also frequently observed for length-
+greedy UID regularizer (Eq. (11) ) to the regular-        normalized decoding (Koehn and Knowles, 2017).
+ized MAP objective (Eq. (9)) affects characteristics      While intuitively, variance and local variance are
+of the global optimum under the model as we vary          the purest encodings of UID, they perform the poor-
+λ. Notably, increasing the strength of the regular-       est of the regularizers. Arguably, this may be due
+izer appears to alleviate the text quality degradation    to the fact that they do not simultaneously (as the
+seen with exact search, leading to results that ap-       other regularizers do) penalize for high surprisal.
+proach the BLEU of those generated using optimal
+beam search. Fig. 1 also shows a strong inverse re-          We additionally decode with a combination of
+lationship between BLEU and average standard de-          the UID regularizers in tandem. We collectively
+viation (per sentence) of surprisals. We take these       tune the λ value for each of the regularizers on
+observations as empirical validation of Hyp. 4.2.         validation sets. We report performance in Tab. 1
+                                                          and see that results outperform standard and length-
+                                                          normalized, i.e. score divided by sequence length,
+6.2   Regularized Beam Search
+                                                          beam search with noticeable improvements for
+We next look at how the regularized decoding ob-          larger beams. Search details and parameter set-
+jective affects text generated using beam search. As      tings may be found in App. B. Notably, combining
+previously noted, text quality generally degrades         multiple UID regularizers does not lead to as great
+with increased beam size when using the standard          an increase in performance as one might expect,
+MAP objective; this phenomenon is demonstrated            which hints that a single method for enforcing UID
+in Fig. 3. UID regularization appears to alleviate        is sufficient for promoting quality in generated text.
+7   Related Work                                        Acknowledgments
+
+Neural probabilistic text generators are far from       We would like to thank Ari Holtzman and Jason Eis-
+perfect; prior work has shown that they often gen-      ner for useful feedback and discussion that helped
+erate text that is generic (Vinyals and Le, 2015;       improve this work.
+Li et al., 2016), unnatural (Holtzman et al., 2020),
+and sometimes even non-existent (Stahlberg and
+Byrne, 2019). In the context of the degenerate be-      References
+havior of these models, the beam search curse—a         Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Ben-
+specific phenomenon where using a larger beam             gio. 2015. Neural machine translation by jointly
+size leads to worse performance—has been ana-             learning to align and translate. In 3rd International
+                                                          Conference on Learning Representations.
+lyzed by a number of authors (Koehn and Knowles,
+2017; Murray and Chiang, 2018; Yang et al., 2018;       Samy Bengio, Oriol Vinyals, Navdeep Jaitly, and
+Stahlberg and Byrne, 2019; Jean et al., 2015; Tu          Noam Shazeer. 2015. Scheduled sampling for se-
+et al., 2016; He et al., 2016; Cohen and Beck, 2019).     quence prediction with recurrent neural networks.
+                                                          In Advances in Neural Information Processing Sys-
+Many of these authors attribute the performance           tems 28.
+drop (as search becomes better) to an inherent bias
+in neural sequence models to pefer shorter sen-         Ondřej Bojar, Christian Buck, Christian Federmann,
+tences. Other authors have ascribed fault to the          Barry Haddow, Philipp Koehn, Johannes Leveling,
+                                                          Christof Monz, Pavel Pecina, Matt Post, Herve
+model architectures, or how they are trained (Cho         Saint-Amand, Radu Soricut, Lucia Specia, and Aleš
+et al., 2014; Bengio et al., 2015; Sountsov and           Tamchyna. 2014. Findings of the 2014 workshop
+Sarawagi, 2016; Vinyals et al., 2017; Ott et al.,         on statistical machine translation. In Proceedings
+2018a; Kumar and Sarawagi, 2019). To remedy the           of the Workshop on Statistical Machine Translation,
+                                                          Baltimore, Maryland, USA. Association for Compu-
+problem, a large number of regularized decoding
+                                                          tational Linguistics.
+objectives and modified training techniques have
+been proposed. In contrast, this work analyzes the      Mauro Cettolo, Christian Girardi, and Marcello Fed-
+behavior of neural text generators from a different      erico. 2012. Wit3 : Web inventory of transcribed and
+angle: We provide a plausible answer—inspired by         translated talks. In Proceedings of the Conference of
+                                                         the European Association for Machine Translation
+psycholinguistic theory—as to why beam search            (EAMT).
+(with small beams) leads to high-quality text, rather
+than another explanation of why exact search per-       Yining Chen, Sorcha Gilroy, Andreas Maletti, Jonathan
+forms so badly.                                           May, and Kevin Knight. 2018. Recurrent neural
+                                                          networks as weighted language recognizers. In
+                                                          Proceedings of the 2018 Conference of the North
+8   Conclusion                                            American Chapter of the Association for Computa-
+                                                          tional Linguistics: Human Language Technologies,
+We analyze beam search as a decoding strategy for         Volume 1 (Long Papers), pages 2261–2271, New
+                                                          Orleans, Louisiana. Association for Computational
+text generation models by framing it as the solu-         Linguistics.
+tion to an exact decoding problem. We hypothesize
+that beam search has an inductive bias which can        Kyunghyun Cho, Bart van Merriënboer, Dzmitry Bah-
+be linked to the promotion of uniform informa-            danau, and Yoshua Bengio. 2014. On the properties
+tion density (UID), a theory from cognitive science       of neural machine translation: Encoder–decoder ap-
+                                                          proaches. In Proceedings of SSST-8, Eighth Work-
+regarding even distribution of information in lin-        shop on Syntax, Semantics and Structure in Statisti-
+guistic signals. We observe a strong relationship         cal Translation, pages 103–111, Doha, Qatar. Asso-
+between variance of surprisals (an operationaliza-        ciation for Computational Linguistics.
+tion of UID) and BLEU in our experiments with
+                                                        Eldan Cohen and Christopher Beck. 2019. Empirical
+NMT models. With the aim of further exploring             analysis of beam search performance degradation in
+decoding strategies for neural text generators in the     neural sequence models. In Proceedings of the In-
+context of UID, we design a set of objectives to          ternational Conference on Machine Learning, vol-
+explicitly encourage uniform information density          ume 97, Long Beach, California, USA. PMLR.
+in text generated from neural probabalistic models      Edsger W. Dijkstra. 1959. A note on two problems
+and find that they alleviate the quality degradation      in connexion with graphs. Numerische Mathematik,
+typically seen with increased beam widths.                1(1).
+Sergey Edunov, Myle Ott, Michael Auli, and David             Proceedings of the Tenth Workshop on Statistical
+  Grangier. 2018. Understanding back-translation at          Machine Translation, pages 134–140, Lisbon, Por-
+  scale. In Proceedings of the 2018 Conference on            tugal. Association for Computational Linguistics.
+  Empirical Methods in Natural Language Processing,
+  pages 489–500, Brussels, Belgium. Association for        Nal Kalchbrenner and Phil Blunsom. 2013. Recurrent
+  Computational Linguistics.                                 convolutional neural networks for discourse compo-
+                                                             sitionality. In Proceedings of the Workshop on Con-
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018.              tinuous Vector Space Models and their Composition-
+  Hierarchical neural story generation.  CoRR,               ality, pages 119–126, Sofia, Bulgaria. Association
+  abs/1805.04833.                                            for Computational Linguistics.
+Jonas Gehring, Michael Auli, David Grangier, Denis         Jon Kleinberg and Éva Tardos. 2005. Algorithm De-
+  Yarats, and Yann N. Dauphin. 2017. Convolutional           sign. Addison-Wesley Longman Publishing Co.,
+  sequence to sequence learning. In Proceedings of           Inc., USA.
+  the International Conference on Machine Learning -
+  Volume 70, ICML’17. JMLR.org.                            Philipp Koehn. 2004. Pharaoh: A beam search decoder
+                                                             for phrase-based statistical machine translation mod-
+Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q. Wein-         els. In Machine Translation: From Real Users to
+  berger. 2017. On calibration of modern neural net-         Research, Berlin, Heidelberg. Springer Berlin Hei-
+  works. In Proceedings of the International Confer-         delberg.
+  ence on Machine Learning, ICML’17. JMLR.org.
+                                                           Philipp Koehn and Rebecca Knowles. 2017. Six chal-
+John Hale. 2001. A probabilistic Earley parser as a psy-     lenges for neural machine translation. In Proceed-
+  cholinguistic model. In Second Meeting of the North        ings of the First Workshop on Neural Machine Trans-
+  American Chapter of the Association for Computa-           lation, pages 28–39, Vancouver. Association for
+  tional Linguistics.                                        Computational Linguistics.
+Wei He, Zhongjun He, Hua Wu, and Haifeng Wang.             Philipp Koehn, Franz J. Och, and Daniel Marcu. 2003.
+  2016. Improved neural machine translation with smt         Statistical phrase-based translation. In Proceedings
+  features. In Proceedings of the Thirtieth AAAI Con-        of the 2003 Human Language Technology Confer-
+  ference on Artificial Intelligence, AAAI’16. AAAI          ence of the North American Chapter of the Associa-
+  Press.                                                     tion for Computational Linguistics, pages 127–133.
+Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin          Aviral Kumar and Sunita Sarawagi. 2019. Calibration
+  Choi. 2020. The curious case of neural text degener-       of encoder decoder models for neural machine trans-
+  ation. International Conference on Learning Repre-         lation. CoRR, abs/1903.00802.
+  sentations.
+                                                           Roger Levy. 2005. Probabilistic Models of Word Order
+Liang Huang, Kai Zhao, and Mingbo Ma. 2017. When             and Syntactic Discontinuity. Ph.D. thesis, Stanford,
+  to finish? optimal beam search for neural text gen-        CA, USA.
+  eration (modulo beam size). In Proceedings of the
+  2017 Conference on Empirical Methods in Natu-            Roger P. Levy and T. F. Jaeger. 2007. Speakers op-
+  ral Language Processing, pages 2134–2139, Copen-           timize information density through syntactic reduc-
+  hagen, Denmark. Association for Computational              tion. In B. Schölkopf, J. C. Platt, and T. Hoffman,
+  Linguistics.                                               editors, Advances in Neural Information Processing
+                                                             Systems 19. MIT Press.
+T. Florian Jaeger. 2010. Redundancy and reduc-
+   tion: Speakers manage syntactic information density.    Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao,
+  Cognitive Psychology, 61(1).                                and Bill Dolan. 2016. A diversity-promoting ob-
+                                                              jective function for neural conversation models. In
+T. Florian Jaeger and Harry Tily. 2011. On language           Proceedings of the 2016 Conference of the North
+   ’utility’: Processing complexity and communicative         American Chapter of the Association for Computa-
+   efficiency. Wiley Interdisciplinary Reviews: Cogni-        tional Linguistics: Human Language Technologies,
+   tive Science, 2.                                           pages 110–119, San Diego, California. Association
+                                                              for Computational Linguistics.
+Ayush Jain, Vishal Singh, Sidharth Ranjan, Rajakrish-
+  nan Rajkumar, and Sumeet Agarwal. 2018. Uni-             Clara Meister, Tim Vieira, and Ryan Cotterell. 2020.
+  form information density effects on syntactic choice       Best-first beam search. Transactions of the Associa-
+  in Hindi. In Proceedings of the Workshop on Lin-           tion for Computational Linguistics.
+  guistic Complexity and Natural Language Process-
+  ing, pages 38–48, Santa Fe, New-Mexico. Associa-         Kenton Murray and David Chiang. 2018. Correct-
+  tion for Computational Linguistics.                        ing length bias in neural machine translation. In
+                                                             Proceedings of the Third Conference on Machine
+Sébastien Jean, Orhan Firat, Kyunghyun Cho, Roland          Translation: Research Papers, pages 212–223, Bel-
+   Memisevic, and Yoshua Bengio. 2015. Montreal              gium, Brussels. Association for Computational Lin-
+   neural machine translation systems for WMT’15. In         guistics.
+Nathan Ng, Kyra Yee, Alexei Baevski, Myle Ott,             Felix Stahlberg and Bill Byrne. 2019. On NMT Search
+  Michael Auli, and Sergey Edunov. 2019. Facebook            Errors and Model Errors: Cat Got Your Tongue? In
+  FAIR’s WMT19 news translation task submission.             Proceedings of the Conference on Empirical Meth-
+  In Proceedings of the Fourth Conference on Ma-             ods in Natural Language Processing and the 9th In-
+  chine Translation (Volume 2: Shared Task Papers,           ternational Joint Conference on Natural Language
+  Day 1), pages 314–319, Florence, Italy. Association        Processing (EMNLP-IJCNLP), Hong Kong, China.
+  for Computational Linguistics.                             Association for Computational Linguistics.
+
+Franz Josef Och, Christoph Tillmann, and Hermann           Felix Stahlberg, Eva Hasler, Danielle Saunders, and
+  Ney. 1999. Improved alignment models for statisti-         Bill Byrne. 2017. SGNMT – a flexible NMT de-
+  cal machine translation. In 1999 Joint SIGDAT Con-         coding platform for quick prototyping of new mod-
+  ference on Empirical Methods in Natural Language           els and search strategies. In Proceedings of the
+  Processing and Very Large Corpora.                         2017 Conference on Empirical Methods in Natu-
+                                                             ral Language Processing: System Demonstrations,
+Myle Ott, Michael Auli, David Grangier, and                  pages 25–30, Copenhagen, Denmark. Association
+ Marc’Aurelio Ranzato. 2018a. Analyzing uncer-               for Computational Linguistics.
+ tainty in neural machine translation. ICML.
+                                                           Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. 2014.
+Myle Ott, Sergey Edunov, Alexei Baevski, Angela               Sequence to sequence learning with neural networks.
+ Fan, Sam Gross, Nathan Ng, David Grangier, and               In Z. Ghahramani, M. Welling, C. Cortes, N. D.
+ Michael Auli. 2019. fairseq: A fast, extensible              Lawrence, and K. Q. Weinberger, editors, Advances
+ toolkit for sequence modeling. In Proceedings of             in Neural Information Processing Systems 27. Cur-
+ NAACL-HLT 2019: Demonstrations.                              ran Associates, Inc.
+
+Myle Ott, Sergey Edunov, David Grangier, and               Zhaopeng Tu, Zhengdong Lu, Yang Liu, Xiaohua Liu,
+ Michael Auli. 2018b. Scaling neural machine trans-          and Hang Li. 2016. Modeling coverage for neural
+ lation. In Proceedings of the Third Conference on           machine translation. In Proceedings of the 54th An-
+ Machine Translation: Research Papers, pages 1–9,            nual Meeting of the Association for Computational
+ Belgium, Brussels. Association for Computational            Linguistics (Volume 1: Long Papers), pages 76–
+ Linguistics.                                                85, Berlin, Germany. Association for Computational
+                                                             Linguistics.
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+  Jing Zhu. 2002. BLEU: A method for automatic             Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob
+  evaluation of machine translation. In Proceedings          Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz
+  of the Annual Meeting on Association for Computa-          Kaiser, and Illia Polosukhin. 2017. Attention is all
+  tional Linguistics.                                        you need. In Advances in Neural Information Pro-
+                                                             cessing Systems, volume 30.
+Matt Post. 2018. A call for clarity in reporting BLEU
+ scores. In Proceedings of the Conference on Ma-           Ashwin K. Vijayakumar, Michael Cogswell, Ram-
+ chine Translation: Research Papers.                         prasaath R. Selvaraju, Qing Sun, Stefan Lee, David J.
+                                                             Crandall, and Dhruv Batra. 2018. Diverse beam
+Raj Reddy. 1977. Speech understanding systems: A             search for improved description of complex scenes.
+  summary of results of the five-year research effort at     In Proceedings of the Thirty-Second AAAI Confer-
+  carnegie mellon university.                                ence on Artificial Intelligence. AAAI Press.
+Iulian Serban, Tim Klinger, Gerald Tesauro, Kartik         Oriol Vinyals and Quoc V. Le. 2015. A neural conver-
+   Talamadupula, Bowen Zhou, Yoshua Bengio, and              sational model. CoRR, abs/1506.05869.
+   Aaron Courville. 2017. Multiresolution recurrent
+   neural networks: An application to dialogue re-         Oriol Vinyals, Alexander Toshev, Samy Bengio, and
+   sponse generation.                                        Dumitru Erhan. 2017. Show and tell: Lessons
+                                                             learned from the 2015 mscoco image captioning
+Shiqi Shen, Yong Cheng, Zhongjun He, Wei He, Hua             challenge. IEEE Transactions on Pattern Analysis
+  Wu, Maosong Sun, and Yang Liu. 2016. Minimum               and Machine Intelligence, 39(4):652–663.
+  risk training for neural machine translation. In Pro-
+  ceedings of the 54th Annual Meeting of the Associa-      Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V.
+  tion for Computational Linguistics (Volume 1: Long         Le, Mohammad Norouzi, Wolfgang Macherey,
+  Papers), pages 1683–1692, Berlin, Germany. Asso-           Maxim Krikun, Yuan Cao, Qin Gao, Klaus
+  ciation for Computational Linguistics.                     Macherey, Jeff Klingner, Apurva Shah, Melvin John-
+                                                             son, Xiaobing Liu, Lukasz Kaiser, Stephan Gouws,
+Pavel Sountsov and Sunita Sarawagi. 2016. Length             Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith
+  bias in encoder decoder models and a case for global       Stevens, George Kurian, Nishant Patil, Wei Wang,
+  conditioning. In Proceedings of the 2016 Confer-           Cliff Young, Jason Smith, Jason Riesa, Alex Rud-
+  ence on Empirical Methods in Natural Language              nick, Oriol Vinyals, Gregory S. Corrado, Macduff
+  Processing, pages 1516–1525, Austin, Texas. Asso-          Hughes, and Jeffrey Dean. 2016. Google’s neu-
+  ciation for Computational Linguistics.                     ral machine translation system: Bridging the gap
+  between human and machine translation.     CoRR,
+  abs/1609.08144.
+Yilin Yang, Liang Huang, and Mingbo Ma. 2018.
+   Breaking the beam search curse: A study of (re-
+   )scoring methods and stopping criteria for neural
+   machine translation. In Proceedings of the 2018
+  Conference on Empirical Methods in Natural Lan-
+   guage Processing, pages 3054–3059, Brussels, Bel-
+   gium. Association for Computational Linguistics.
+Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Car-
+  bonell, Russ R Salakhutdinov, and Quoc V Le.
+  2019. Xlnet: Generalized autoregressive pretrain-
+  ing for language understanding. In H. Wallach,
+  H. Larochelle, A. Beygelzimer, F. d'Alché-Buc,
+  E. Fox, and R. Garnett, editors, Advances in Neu-
+  ral Information Processing Systems 32. Curran As-
+  sociates, Inc.
+Jun Yin, Xin Jiang, Zhengdong Lu, Lifeng Shang,
+  Hang Li, and Xiaoming Li. 2016. Neural gener-
+  ative question answering. In Proceedings of the
+  Workshop on Human-Computer Question Answer-
+  ing, pages 36–42, San Diego, California. Associa-
+  tion for Computational Linguistics.
+A    Theory
+Proof. We prove Theorem 3.2 by induction. We denote the argmax of log pθ (y | x) − λ · Rgreedy (y)
+as yR and the solution found by greedy search as ygreedy . We will show that ytgreedy = ytR for all
+0 ≤ t ≤ max(|yR |, |ygreedy |). The theorem holds trivially for the base case of t = 0 because y0 must
+be BOS for any valid hypothesis by definition of the hypothesis space (Eq. (1)). Now, by the inductive
+hypothesis, suppose yigreedy = yiR for all i < t. We will show that our regularized objective must choose
+the same word as greedy search at time-step t. In the limiting case of Eq. (11), the following function
+reflects the penalty to the distribution over tokens at position t:
+                                                              (
+                       h 
+                                                    0
+                                                       2 i    0 if ut (yt ) = miny0 ∈V ut (y 0 )
+                 lim λ · ut (yt ) − min       ut (y   )     =
+                λ→∞                    y 0 ∈V                  ∞ otherwise
+
+Since minimum surprisal implies maximum log-probability, the above function clearly returns either
+0 or ∞ depending on whether the decoding choice at time-step t is greedy. Therefore the only choice
+that would not send the hypothesis score to −∞ is the greedy choice, which implies any feasible
+solution to our objective must have ytR = ytgreedy . By the principle of induction, ytgreedy = ytR for all
+0 ≤ t ≤ |yR | = |ygreedy |, which in turn implies ygreedy = yR .
+
+B   Parameters
+For values in Fig. 3, we perform grid search over λ ∈ [0.2, 0.5, 0.7, 1, 2, 3, 4, 6, 7, 8, 9, 10] and choose
+the λ with the best validation set performance. For combined UID regularization, we perform hyper-
+parameter search over the 5 strength parameters, each sampled uniformly from the following values:
+[0, 0.2, 0.5, 0.7, 1, 2, 3, 4, 6, 7, 8, 9, 10]. We run 50 trials on the validation set; λ = 5 and λ = 2 yield the
+best performance for the greedy and squared regularizers, respectively with all others λ set to 0.
+
+                                                        IWSLT’14       WMT’14
+                                 Greedy                 10             5
+                                 Local Consistency      4              6
+                                 Max                    5              3
+                                 Squared                3              2
+                                 Variance               7              3
+
+                 Table 2: λ settings used during decoding in Fig. 3 and reported in table Tab. 1.
+
+
+C    Additional Plots
+
+Figure 4: BLEU vs. std. deviation of surprisals for
+translations generated with beam search on test sets
+of IWSLT’14 and WMT’14. Size of point indicates
+beam width used (between 5 and 100). In contrast to
+the subgraph of Fig. 1, the x-axis is not log-scaled.
+

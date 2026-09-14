@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 99,
+ "firstTs": "2026-09-09T22:44:07.630Z",
+ "lastTs": "2026-09-09T22:54:01.886Z",
+ "tools": {
+  "Bash": 23,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "icative), zero question or exclamation marks, zero expletive openers, exactly one `{settlement}` per row and no other slot (face slot-set equals parent's, equals the filled bag), and no row opens on the `proper`-typed slot (ARCH §2.5 T-F1/T-F8 — the one shape every shipped row of this pool carried).",
+ "run": "wf_68d644ef-3dd",
+ "agent": "a1b7f902c8557aac6",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_68d644ef-3dd/agent-a1b7f902c8557aac6.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

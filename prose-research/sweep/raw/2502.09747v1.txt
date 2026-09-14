@@ -1,0 +1,1180 @@
+ 
+ The Widespread Adoption of Large Language Model-Assisted Writing Across Society 
+ Report GitHub Issue 
+ × 
+ Title: 
+ Content selection saved. Describe the issue below: 
+ Description: 
+ Submit without GitHub 
+ Submit in GitHub 
+ arXiv is now an independent nonprofit! 
+ Learn more 
+ × 
+ Back to arXiv 
+ Why HTML? 
+ Report Issue 
+ Back to Abstract 
+ Download PDF 
+ Abstract 
+ References 
+ License: arXiv.org perpetual non-exclusive license
+arXiv:2502.09747v1 [cs.CL] 13 Feb 2025 
+ \DeclareCaptionType 
+ [fileext=lof,placement=!ht,within=none]suppfigure[Figure][List of Supplementary Figures]
+ \DeclareCaptionType [fileext=lot,placement=!ht,within=none]supptable[Table][List of Supplementary Tables] 
+The Widespread Adoption of Large Language Model-Assisted Writing Across Society
+ Weixin Liang
+ Yaohui Zhang
+ Mihai Codreanu
+ Affiliation: Department of Economics, Stanford University, Stanford, CA 94305, USA
+ Jiayu Wang
+ Affiliation: Paul G. Allen School of Computer Science & Engineering, University of Washington, Seattle, WA 98195, USA
+ Hancheng Cao
+ Affiliation: Goizueta Business School, Emory University, Atlanta, GA 30322, USA
+ James Zou
+ Affiliation: Department of Computer Science, Stanford University, Stanford, CA 94305, USA
+ Affiliation: Department of Electrical Engineering, Stanford University, Stanford, CA 94305, USA
+ Affiliation: Department of Biomedical Data Science, Stanford University, Stanford, CA 94305, USA
+ Affiliation: W.L. and Y.Z. contributed equally to this work
+ Abstract 
+ The recent advances in large language models (LLMs) attracted significant public and policymaker interest in its adoption patterns. In this paper, we systematically analyze LLM-assisted writing across four domains—consumer complaints, corporate communications, job postings, and international organization press releases—from January 2022 to September 2024. Our dataset includes 687,241 consumer complaints, 537,413 corporate press releases, 304.3 million job postings, and 15,919 United Nations (UN) press releases.
+Using a robust population-level statistical framework, we find that LLM usage surged following the release of ChatGPT in November 2022. By late 2024, roughly 18% of financial consumer complaint text appears to be LLM-assisted, with adoption patterns spread broadly across regions and slightly higher in urban areas. For corporate press releases, up to 24% of the text is attributable to LLMs. In job postings, LLM-assisted writing accounts for just below 10% in small firms, and is even more common among younger firms. UN press releases also reflect this trend, with nearly 14% of content being generated or modified by LLMs.
+Although adoption climbed rapidly post-ChatGPT, growth appears to have stabilized by 2024, reflecting either saturation in LLM adoption or increasing subtlety of more advanced models. Our study shows the emergence of a new reality in which firms, consumers and even international organizations substantially rely on generative AI for communications. 
+ Introduction 
+ The emergence of large language models (LLMs) marked a significant moment in artificial intelligence, offering unprecedented capabilities in natural language processing and generation.
+This rapid proliferation of LLMs generated both excitement and concern. On one hand, LLMs have the potential to greatly enhance productivity; in the writing space specifically, it can democratize content creation (especially for non-native speakers). On the other hand, policymakers fear an erosion of trust, risks of biases and discrimination, and job displacement [ 1 , 2 , 3 ] ; businesses worry about reliability and data privacy; academics debate the implications for research integrity and teaching [ 4 , 5 ] ; and the public is concerned about misinformation, deepfakes, and authenticity [ 6 , 7 ] . Further complicating the discourse is the question of how LLMs may widen or potentially bridge socioeconomic gaps, given differential access to these advanced technologies. 
+ Although some early adoption stories or isolated examples have drawn significant media attention, and survey studies have explored LLM adoption from an individual user perspective [ 8 , 9 ] , there remains a lack of systematic evidence about the patterns and extent of LLM adoption across various diverse writing domains. While some previous work used commercial software to detect such patterns [ 10 , 11 ] , these studies often been constrained to single domains, relied on black-box commercial AI detectors, or analyzed relatively small datasets.
+To address this gap, we conduct the first large-scale, systematic analysis of LLM adoption patterns across consumer, firm and institution communications.
+Our analysis leverages a statistical framework validated in our previous work [ 12 ] 
+to quantify the prevalence of LLM-modified content. This framework has demonstrated superior robustness, transparency (and lower cost) compared to commercial AI content detectors [ 12 , 13 , 14 ] , allowing us to track adoption trajectories and uncover key demographic and organizational factors driving LLM integration. 
+ We focus on four domains where LLMs are likely to influence communication and decision-making: consumer complaints, corporate press releases, job postings, and United Nations press releases. Consumer complaints offer insight into user–business interactions and show how these technologies may extend beyond AI-powered customer service [ 15 ] . Corporate press releases reflect strategic organizational usage, as firms incorporate LLMs into their investor relations, public relations, and broader business communications. Job postings reveal how recruiters and human resource departments harness LLMs, shedding light on broader labor market trends. Finally, UN press releases showcase the growing institutional adoption of AI for regulatory, policy, and public outreach efforts. 1 1 
+ 1 
+ We also conducted a similar analysis of patent applications. However, due to the standard 18-month embargo between application and publication, our study period did not yield sufficient data to draw robust conclusions. Still, in the limited sample of late-2024 published patents, we observed a (very) moderate uptick in LLM-generated text. 
+ This comprehensive approach reveals several patterns. First, we observe a consistent trajectory across all the analyzed domains: rapid initial adoption following ChatGPT’s release, followed by a distinctive stabilizing trend highlighting widespread adoption. One of the remarkable results from our analysis is how similar adoption is between these diverse domains. By the end of the period we analyzed, in the financial dataset we estimate about 17% of the data was generated by LLM, around 20% in company press releases, up to 15% for young and small companies job postings, and 15% for international organizations. Second, we uncover some heterogeneity in adoption rates across geographic regions, demographic groups, and organizational characteristics. Third, we find that organizational age and size emerge as the most important predictor of differential adoption, with smaller and younger firms showing markedly higher utilization rates. 
+ Our findings provide crucial insights into the first wave of LLM integration across society, revealing how various socioeconomic and organizational factors shape technology adoption patterns. This understanding is essential for policymakers, business leaders, and researchers as they navigate the implications of AI integration across different sectors of society and work to ensure equitable access to and responsible deployment of these powerful new tools in the future. 
+ Results 
+ Widespread Adoption of Large Language Models in Writing Assistance Across Domains 
+ We systematically analyzed large language model (LLM) adoption patterns across four distinct domains: consumer complaints, corporate PR communications, job postings, and governmental press releases (see Supplementary Information for data collection and preprocessing). Our analysis reveals a consistent pattern of initial rapid adoption following ChatGPT’s release, followed by a notable stabilization period that emerged between mid to late 2023 across all domains ( Fig. 1 ). 2 2 
+ 2 
+ While the patterns across all time series show a slower adoption through 2024, these could be (at least partly) the product of more sophistication when adopting AI tools or the developments in LLMs making writing more undistinguishable from human writing. 
+ In the consumer complaint domain ( Fig. 1 a ), initial LLM adoption surged about 3-4 months after the release of ChatGPT in November 2022. The proportion of content flagged as LLM-generated or substantially modified rose sharply from a baseline algorithm false positive rate of 1.5% to 15.3% by August 2023. This rapid growth plateaued, with only a modest increase to 17.7% observed through August 2024. 
+ Corporate press releases demonstrated similar adoption trends across platforms ( Fig. 1 b ), once again about 3-4 months post-ChatGPT release. Newswire saw rapid growth, peaking at 24.3% in December 2023 and stabilizing at 23.8% through September 2024. PRNewswire followed closely, reaching 16.4% in December 2023 and maintaining this level through September 2024. PRWeb exhibited comparable dynamics, with data available through January 2024. 
+ LinkedIn job postings from small organizations showed profession-specific adoption trends but similarly reflected a slowing trajectory ( Fig. 1 c ). Following a five-month lag post-ChatGPT release, adoption increased steadily across professional categories, peaking in July 2023 between 6-10%. These figures are higher in the sample of small and young firms, where they reach more than 10%, and up to 15% ( Fig. 4 )
+. Adoption rates either plateaued or showed signs of slight declines through October 2023, when the latest data was available. 
+ International organization communication, here measured by United Nations press releases by country teams followed a similar adoption pattern with initial rapid growth that later plateaued ( Fig. 1 d ). The initial phase was marked by a rapid increase from 3.1% in Q1 2023 to 10.1% in Q3 2023. This was followed by a slower, incremental rise, reaching 13.7% by Q3 2024. 
+ Geographic and Demographic Disparities in Consumer Complaint LLM Adoption 
+ Our analysis of Consumer Financial Protection Bureau complaints some geographic and demographic heterogeneity in LLM adoption patterns ( Fig. 2 ). At the state level, we observed variation in adoption rates during the January-August 2024 period, with highest adoption in Arkansas (29.2%, 7,376 complaints), Missouri (26.9%, 16,807 complaints), and North Dakota (24.8%, 1,025 complaints). This contrasted sharply with minimal adoption in West Virginia (2.6%, 2,010 complaints), Idaho (3.8%, 1,651 complaints), and Vermont (4.8%, 361 complaints). Notably, major population centers demonstrated much less variation in adoption levels, with California (157,056 complaints) and New York (104,862 complaints) showing rates of 17.4% and 16.6%, respectively ( Fig. 2 a ). However, this could be interpreted either as a genuine differential compared to the smaller states in the left and right tail or the product of lower sample noise (due to higher number of observations). 
+ The adoption of LLMs varied over time between more and less urbanized areas. Analysis using Rural Urban Commuting Area (RUCA) codes showed that highly urbanized and non-highly urbanized areas initially displayed similar adoption trajectories during the early phase (2023Q1-2023Q3). However, these trajectories subsequently diverged, reaching equilibrium levels of 18.2% in highly urbanized areas compared to 10.9% in non-highly urbanized areas ( Fig. 2 b ). These differences were highly statistically significant at all conventional levels. 
+ Areas with lower educational attainment showed somewhat higher LLM adoption rates in consumer complaints. Comparing areas above and below state median levels of bachelor’s degree attainment, areas with lower educational attainment ultimately stabilized at rates of around 19.9% in 2024Q3 (compared with 17.4%) ( Fig. 2 c ). This pattern persisted even within highly urbanized areas, where lower-education regions demonstrated higher adoption rates (21.4% versus 17.8% by 2024Q3) ( Fig. 2 d ). In both comparison, the p-values were less than 0.001, indicating statistically significant differences, despite qualitatively similar trends. 
+ LLM Adoption in Corporate Press Releases 
+ After characterizing consumer-side adoption patterns, we next examined corporate LLM usage across major corporate press release platforms—Newswire, PRWeb, and PRNewswire, each of which caters to different audiences and industries ( Fig. 1 b , Fig. 3 a-b ). 3 3 
+ 3 
+ A vast oversimplification based on available data would be that PRNewswire generally targets larger corporations with extensive reach to major news outlets and traditional media. PRWeb offers a more affordable, online-focused option with an emphasis on SEO, catering to smaller businesses. Newswire reaches both traditional and online platforms. All three offer some editorial services but focus primarily on distribution of the contents produced by the businesses. 
+ Before the launch of ChatGPT, the fraction of AI-modified content remained consistently low across all these sources, fluctuating around the 2-3% mark (i.e., false positives). However, following the launch, a significant increase in AI-modified content was observed across all domains, about 2 quarters post rollout. Newswire, in particular, experienced the most dramatic rise, with the estimated fraction peaking at over 25% by late-2023. PRWeb and PRNewswire also saw notable growth, though to a lesser degree, plateauing around 15%. This suggests a widespread uptake of LLM technology in content creation across different types of press releases starting in early 2023. 
+ In Fig. 3 a-b , we show the quarterly growth of LLM usage in press releases across different categories for PRNewswire (a) and PRWeb (b). Both charts show a sharp rise in AI-modified content starting in early 2023, with some differential patterns emerging by topic. In both platforms, the categories "Business & Money" and "Science & Tech" exhibit the most pronounced increase, with Science & Tech reaching just below 17% by Q4 2023. "People & Culture" and "Other" categories also demonstrate growth, but at a somewhat slower pace, which may be indicative that LLM adoption has been particularly strong in more technical and business-focused content. 
+ Overall, we show a significant uptick in LLM writing across various press release categories. On one hand, the sharp increase in AI-modified content in press releases suggests that businesses are leveraging LLMs to improve efficiency in content creation. By utilizing AI, companies can potentially produce high-quality communications more quickly and cost-effectively, especially in areas requiring frequent updates and complex information dissemination. This may also be advantageous if companies are trying to withhold more sensitive information from the public and use more generic language. On the other hand, the growing reliance on AI-generated content may introduce challenges in communication. In sensitive categories, over-reliance on AI could result in messages that fail to address concerns or overall release less credible information externally. Over-reliance on AI could also introduce public mistrust in the authenticity of messages sent by firms. 
+ LLM Adoption in LinkedIn Job Postings 
+ We next examined another dimension of corporate LLM adoption through analysis of LinkedIn job postings.
+We first took the whole sample of LinkedIn job posting and analyzed the effects ( Supp. Fig. The Widespread Adoption of Large Language Model-Assisted Writing Across Society ). In this full sample, we see that about 3-4% of all vacancy postings have LLM modified content. Albeit a small increase, this is generally statistically different from pre-ChatGPT introduction (i.e. false positive) levels (with p-values less than 0.001 across categories). However, this broader sample heavily features larger firms that post more vacancies and have greater financial and human resources to customize those postings. Such firms may also advertise the same position multiple times throughout the year and rely on their established reputation, reducing the need to update job postings frequently. Consequently, for the remainder of this analysis, we focused on small companies, defined either as firms which post less than the median number of vacancies (2 or less each year), or as businesses with 10 or fewer registered employees in 2021 or those posting two or fewer positions per year on LinkedIn (see Supplementary Information). 
+ Using the sample of small companies based on the number of vacancies posted, our findings reveal a gradual but notable increase in the estimated fraction of AI-modified content for several job categories ( Fig. 1 d , Fig. 4 ). Prior to the launch of ChatGPT, the fraction of AI-modified text hovered between 0–2% across all categories, reflecting the range of false positives. After ChatGPT became available, a discernible uptick begins around early to mid-2023, leveling off by October 2023 at roughly 5–10% for all categories. The increase is most pronounced in engineering and sales postings, which each approach 10% AI-modified content. Finance, Admin, Scientist, and Operations show a somewhat slower growth, albeit the differences between these categories are small. If instead we define small companies by the number of employees ( Fig. The Widespread Adoption of Large Language Model-Assisted Writing Across Society ) the Scientist category ranks first. 4 4 
+ 4 
+ This may be some evidence that firms requiring more advanced scientific, financial, or marketing expertise might be more inclined to adopt AI technologies, although the differences are modest. 
+ We further stratified these small firms by founding year—grouping them into post-2015, 2000–2015, 1980–2000, and pre-1980 cohorts ( Fig. 4 ), based on the rough quartiles in the data. Across every job category, more recently founded companies consistently exhibit both the highest levels and the fastest uptake of LLM-related text generation, especially following ChatGPT’s launch. Firms founded after 2015 reach 10–15% AI-modified text in certain roles, whereas those founded between 2000 and 2015 show moderate growth of 5–10%. By comparison, firms founded before 1980 typically remain below 5%. These results underscore how younger firms—possibly with younger workforces—more readily integrate new AI technologies into their hiring and onboarding processes, whereas older organizations may adopt such tools more conservatively. Overall, firm age and size emerge as (perhaps the most) significant correlates of the heterogeneity observed in LLM uptake throughout our analyses. 
+ This trend highlights a potential shift in recruitment practices among small firms, showcasing a growing reliance on AI-writing tools. On one hand, this can decrease company hiring costs, with smaller and younger enterprises being more likely to leverage advanced tools to remain competitive despite perhaps being more liquidity constrained. On the other hand, the adoption of LLM writing in job posting could either enhance or decrease the efficiency and effectiveness in attracting qualified candidates. For jobseekers, one possible negative effect is harder differentiation between posting firms quality and position requirements. 
+ The leveling off or even slight decrease in AI-modified content by October 2023 might indicate that the adoption rate has stabilized, potentially reaching a saturation point where firms comfortable with AI have already adopted it. Alternatively, this can be explained by increased sophistication and subtlety of these methods. Overall, the increased integration of AI in job postings suggests a transformative period in hiring, with AI playing an important role in how small firms communicate job opportunities. This could have implications for job seekers as well, who may encounter more uniformly crafted postings and might need to adapt their application strategies accordingly. 
+ LLM Adoption in United Nations Press Releases 
+ United Nations press releases exhibited a similar two-phase adoption pattern, with an initial surge from 3.1% to 10.1% in Q1-Q3 2023, followed by a more gradual increase to 13.7% by Q3 2024 ( Fig. 1 d ).
+Across UN Member States country teams, we observed consistent adoption patterns across regions, with adoption rates reaching 11-14% by 2024, with the exception of the UN teams in Latin American and Caribbean countries that had slightly higher adoption rates at about 20% ( Supp. Fig. The Widespread Adoption of Large Language Model-Assisted Writing Across Society ). The steady growth across regions reflects how LLMs are being integrated globally, even in contexts of sensitive, high-stakes communication. 
+ This rapid uptake suggests that country teams have found LLMs valuable for producing timely updates, which can be especially useful during pressing crises. On the other, this trend raises questions about how LLMs might affect the authenticity of vital international communication. As the UN continues to refine its stance on AI, this highlights a broader trend: even the world’s most prominent international bodies are using LLMs in their communications–underscoring both the perhaps inevitability of AI-driven writing and the questions it raises about authenticity and accountability. 
+ Discussion 
+ Our findings reveal widespread adoption of large language models across diverse writing domains, ranging consumers, firms and international organizations. This finding complements and extends our previous research that found widespread adoption across academic researchers. [ 12 ] 
+A consistent temporal pattern emerges from our data: after an initial lag of 3–4 months following the ChatGPT launch, there was a sharp surge in LLM usage, which then stabilized by late 2023 and remained steady through 2024. This trajectory deviates from traditional diffusion models that predict continuous and gradual growth, suggesting several possibilities. Early adopters may have already reached a saturation point within their domains, or domain-specific barriers (generally, these can range from costs of adoption, regulatory constraints, concerns over authenticity coupled with advances in users recognizing AI writing, etc.) that could be impeding further expansion. Alternatively, improvements in LLM sophistication may be rendering AI-generated content increasingly indistinguishable from human writing, complicating our ability to measure ongoing adoption. 
+ In the consumer complaint domain, the geographic and demographic patterns in LLM adoption present an intriguing departure from historical technology diffusion trends [ 16 , 17 , 18 ] and technology acceptance model [ 19 , 20 ] , where technology adoption has generally been concentrated in urban areas, among higher-income groups, and populations with higher levels of educational attainment [ 21 , 22 ] . While the urban-rural digital divide seems to persist, our finding that areas with lower educational attainment showed modestly higher LLM adoption rates in consumer complaints suggests these tools may serve as equalizing tools in consumer advocacy. This finding aligns with survey evidence indicating that younger, less experienced workers may be more likely to use ChatGPT [ 8 ] . This democratization of access underscores the potentially transformative role LLMs could play in amplifying underserved voices. However, further study is needed to assess whether this increased adoption translates into more effective consumer outcomes. 
+ Corporate communication channels also demonstrated widespread but decelerating LLM integration. The plateauing adoption across platforms like Newswire, PRWeb, and PRNewswire raises important considerations about the balance between cost efficiency and authenticity. While LLMs may enable rapid, cost-effective content generation, overreliance on automated tools could compromise the nuance and credibility required in professional communications, potentially eroding trustworthiness [ 23 , 24 , 25 ] . Future research should explore how organizations navigate this trade-off and whether editorial interventions are employed to mitigate potential drawbacks. 
+ In the recruitment process, small firms, particularly those founded after 2015, exhibited the fastest adoption of LLM-generated content. This trend suggests that younger, or companies closer to the technological frontier are leveraging LLMs to streamline hiring processes and reduce costs. 5 5 
+ 5 
+ This is consistent with previous research finding that younger firms may invest relatively more in AI, but may superficially seem in contrast with datapoints showing larger firms and firms with higher cash holdings increase their AI investments more. [ 26 ] We think that it is possible that younger, smaller firms may use more cost-effective AI products such as ChatGPT, and may also have a lower time from AI usage to output. While our study did not directly measure homogenization, prior research on the homogenization of LLM-generated content in academia [ 12 , 13 ] suggests that similar effects could occur in job postings. This potential homogenization may inadvertently obscure critical distinctions between roles and organizations, potentially complicating job seekers’ decision-making. In fact, recent evidence has shown that while employers who leverage LLM to generate first draft of job post may receive more applications, they are less likely to make a hire [ 27 ] . Further investigating how AI-generated postings influence applicant perceptions and hiring could provide valuable insights into the long-term implications of this shift. 
+ International institutions communication, exemplified by United Nations press releases, also demonstrated significant LLM adoption. These patterns remained robust when stratifying by regional country groups ( Supp. Fig. The Widespread Adoption of Large Language Model-Assisted Writing Across Society ).
+The presence of LLM-generated content within such formal and traditionally cautious institutions suggests that AI-driven tools are gradually influencing even high-stakes communication channels, reflecting the broad and expanding reach of these technologies. As it was the case with corporate communications, these findings raise the same trade-off between cost-efficiency and credibility. 
+ The stabilization of LLM adoption may reflect either the maturation of AI integration or domain-specific friction factors. As LLM technologies continue to evolve, future research should aim to disentangle the drivers of adoption plateaus by examining whether they stem from market saturation, improvements in LLM indistinguishability, or external barriers. They should evaluate the impact of LLM-generated content on communication quality, credibility, and user engagement across sectors and investigate potential homogenization effects in job postings and other domains to assess how uniform AI-generated content might affect decision-making and market dynamics. 
+ Our study has several limitations. While we focused on widely used LLMs like ChatGPT, which account for a significant portion of global usage [ 28 ] , we acknowledge that other models also contribute to content generation across domains. Additionally, although prior research has shown that GPT-detection methods can sometimes misclassify non-native writing as AI-generated [ 14 ] , our findings consistently indicated low false positive rates during earlier periods. However, shifts in user demographics or language usage could still influence detection accuracy [ 29 ] . 
+ Perhaps the biggest limitation in our study is that we cannot reliably detect language that was generated by LLMs, but was either heavily edited by humans or was generated by models that imitate very well human writing. Therefore, one way to interpret our study is as a lower bound of adoption patterns.
+Finally, our analysis primarily focuses on English-language content, potentially overlooking adoption trends in non-English-speaking regions. Future research could expand on these findings by incorporating multilingual data and refining detection methodologies. 
+ In conclusion, we show that LLM writing is a new pervasive reality across consumer, corporate, recruitment, and even governmental communications. As these technologies continue to mature, understanding their effects on content quality, creativity, and information credibility will be critical. Addressing the regulatory and ethical challenges associated with AI-generated content will also be essential for ensuring that the benefits of LLMs are realized while maintaining transparency, diversity, and public trust in communication. 
+ Acknowledgments 
+ We thank Daniel McFarland, Dan Jurafsky, Yian Yin, Mirac Suzgun , Zachary Izzo for their helpful comments and discussions. We thank Todd Hines and the Stanford GSB Library for help with obtaining data. J.Z. is supported by the National Science Foundation (CCF 1763191 and CAREER 1942926), the US National Institutes of Health (P30AG059307 and U01MH098953) and grants from the Silicon Valley Foundation and the Chan-Zuckerberg Initiative. 
+ Data Availability 
+ The datasets analyzed in this study are publicly or privately accessible through the following sources: the Consumer Complaint Data is available at the Consumer Financial Protection Bureau’s website (linked here ); Corporate Press Release data can be accessed via the News API (linked here ); and LinkedIn Job Posting data is obtained from the Revelio Labs Workforce Data, licensed through Stanford GSB Library (information here ). Data for UN Press Releases was directly scraped from official UN websites (e.g., here ). 
+ Code Availability 
+ The code can be accessed at this GitHub link . 
+ References 
+ [1] 
+The White House Office of Science and Technology Policy.
+ Blueprint for an AI bill of rights (2022).
+ Accessed: 2023-09-08.
+ [2] 
+Bommasani, R. et al. 
+ On the opportunities and risks of foundation models.
+ arXiv preprint arXiv:2108.07258 (2022).
+ [3] 
+Stanford Institute for Human-Centered Artificial Intelligence.
+ Artificial intelligence index report 2024.
+ Tech. Rep., Stanford University (2024).
+ [4] 
+Dwivedi, Y. K. et al. 
+ Opinion paper:“so what if chatgpt wrote it?” multidisciplinary perspectives on opportunities, challenges and implications of generative conversational ai for research, practice and policy.
+ International Journal of Information Management 71 , 102642, DOI: 10.1016/j.ijinfomgt.2023.102642 (2023).
+ [5] 
+Kasneci, E. et al. 
+ Chatgpt for good? on opportunities and challenges of large language models for education.
+ Learning and Individual Differences 103 , 102274, DOI: 10.1016/j.lindif.2023.102274 (2023).
+ [6] 
+Bender, E. M., Gebru, T., McMillan-Major, A. & Smitchell, M.
+ On the dangers of stochastic parrots: Can language models be too big?
+ In Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency , FAccT ’21, 610–623, DOI: 10.1145/3442188.3445922 (ACM, 2021).
+ [7] 
+Laura Weidinger, M. R., John Mellor & other authors.
+ Ethical and social risks of harm from language models.
+ arXiv preprint arXiv:2112.04359 (2021).
+ [8] 
+Humlum, A. & Vestergaard, E.
+ The adoption of chatgpt.
+ IZA Discussion Paper No. 16992 DOI: 10.2139/ssrn.4827166 (2024).
+ [9] 
+Bick, A., Blandin, A. & Deming, D. J.
+ The rapid adoption of generative ai.
+ Working Paper 32966, National Bureau of Economic Research (2024).
+ DOI: 10.3386/w32966 .
+ Revised February 2025.
+ [10] 
+Brooks, C., Eggert, S. & Peskoff, D.
+ The rise of ai-generated content in wikipedia (2024).
+ 2410.08044 .
+ [11] 
+Shin, M., Kim, J. & Shin, J.
+ The adoption and efficacy of large language models: Evidence from consumer complaints in the financial industry.
+ Available at SSRN 5004194 (2024).
+ [12] 
+Liang, W. et al. 
+ Monitoring AI-Modified Content at Scale: A Case Study on the Impact of ChatGPT on AI Conference Peer Reviews.
+ arXiv preprint arXiv:2403.07183 (2024).
+ [13] 
+Liang, W. et al. 
+ Mapping the increasing use of LLMs in scientific papers.
+ In First Conference on Language Modeling (2024).
+ [14] 
+Liang, W., Yuksekgonul, M., Mao, Y., Wu, E. & Zou, J. Y.
+ Gpt detectors are biased against non-native english writers.
+ arXiv (2023).
+ 2304.02819 .
+ [15] 
+Brynjolfsson, E., Li, D. & Raymond, L.
+ Generative ai at work.
+ National Bureau of Economic Research DOI: 10.3386/w31161 (2023).
+ [16] 
+Rogers, E. M., Singhal, A. & Quinlan, M. M.
+ Diffusion of innovations.
+ In Salwen, M. B. & Stacks, D. W. (eds.) An Integrated Approach to Communication Theory and Research , 432–448 (Routledge, 2008), 2 edn.
+ [17] 
+Kalyani, A. et al. 
+ The diffusion of new technologies.
+ Working Paper 28999, National Bureau of Economic Research (2021).
+ DOI: 10.3386/w28999 .
+ [18] 
+Kalyani, A. et al. 
+ The diffusion of new technologies*.
+ The Quarterly Journal of Economics qjaf002, DOI: 10.1093/qje/qjaf002 (2025).
+ https://academic.oup.com/qje/advance-article-pdf/doi/10.1093/qje/qjaf002/61489798/qjaf002.pdf .
+ [19] 
+Davis, F. D.
+ Perceived usefulness, perceived ease of use, and user acceptance of information technology.
+ MIS Quarterly 13 , 319–340, DOI: 10.2307/249008 (1989).
+ [20] 
+Venkatesh, V., Morris, M. G., Davis, G. B. & Davis, F. D.
+ User acceptance of information technology: Toward a unified view.
+ MIS quarterly 425–478 (2003).
+ [21] 
+Rojas-Mendez, J. I., Parasuraman, A. & Papadopoulos, N.
+ Demographics, attitudes, and technology readiness: A cross-cultural analysis and model validation.
+ Marketing Intelligence & Planning 35 , 18–39 (2017).
+ [22] 
+Foster, A. D. & Rosenzweig, M. R.
+ Microeconomics of technology adoption.
+ Annu. Rev. Econ. 2 , 395–424 (2010).
+ [23] 
+Jakesch, M., French, M., Ma, X., Hancock, J. T. & Naaman, M.
+ Ai-mediated communication: How the perception that profile text was written by ai affects trustworthiness.
+ In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems , 1–13 (2019).
+ [24] 
+Hong, J.-W.
+ Bias in perception of art produced by artificial intelligence.
+ In Human-Computer Interaction. Interaction in Context: 20th International Conference, HCI International 2018, Las Vegas, NV, USA, July 15–20, 2018, Proceedings, Part II 20 , 290–303 (Springer, 2018).
+ [25] 
+Kadoma, K., Metaxa, D. & Naaman, M.
+ Generative ai and perceptual harms: Who’s suspected of using llms?
+ arXiv preprint arXiv:2410.00906 (2024).
+ [26] 
+Babina, T., Fedyk, A., He, A. & Hodson, J.
+ Artificial intelligence, firm growth, and product innovation.
+ Journal of Financial Economics 151 , 103745, DOI: 10.1016/j.jfineco.2023.103745 (2024).
+ [27] 
+Wiles, E. & Horton, J. J.
+ More, but worse: The impact of ai writing assistance on the supply and quality of job posts.
+ Massachusetts Institute of Technology (MIT) Sloan (2024).
+ [28] 
+Van Rossum, D.
+ Generative AI Top 150: The World’s Most Used AI Tools.
+ https://www.flexos.work/learn/generative-ai-top-150 (2024).
+ [29] 
+MacroPolo.
+ The Global AI Talent Tracker (2024).
+ Figure 1 : 
+ Temporal dynamics of large language model (LLM) adoption across diverse writing domains. 
+Analysis of LLM-generated or substantially modified content across four domains: (a) Consumer complaints filed with the Consumer Financial Protection Bureau showed algorithm false positive rate of 1.5% pre-ChatGPT release (November 2022), followed by genuine LLM adoption rising to 15.3% by August 2023, before plateauing at 17.7% through August 2024. (b) Corporate press releases demonstrated consistent adoption patterns across platforms: Newswire platform showed rapid uptake reaching 24.3% by December 2023, stabilizing at 23.8% through September 2024; PRNewswire demonstrated similar trends with peak adoption at 16.4% (December 2023) maintaining at 16.5% through September 2024; PRWeb showed comparable patterns (data available through January 2024). (c) LinkedIn job postings from small organizations (below median job postings) displayed consistent trends across professional categories, with adoption increasing post-ChatGPT release (5-month lag), peaking in July 2023 before plateauing or slightly declining through October 2023. (d) United Nations government press releases showed two phases: rapid initial adoption (Q1 2023: 3.1% to Q3 2023: 10.1%), followed by a more gradual increase to 13.7% by Q3 2024. This figure displays the fraction ( ) of sentences estimated to have been substantially modified by LLM using our previous method [ 12 ] . Error bars indicate 95% confidence intervals by bootstrap.
+ Figure 2 : 
+ Geographic and demographic patterns of LLM adoption in Consumer Financial Protection Bureau complaints. 
+(a) State-level analysis (January-August 2024) revealed substantial geographic variation, with highest adoption in Arkansas (29.2%), Missouri (26.9%), and North Dakota (24.8%), contrasting with lowest rates in West Virginia (2.6%), Idaho (3.8%), and Vermont (4.8%). Notable population centers showed moderate adoption (California: 17.4%, New York: 16.6%). (b) Analysis by Rural Urban Commuting Area (RUCA) codes showed similar adoption trajectories between highly urbanized and non-highly urbanized areas during initial uptake (2023Q1-2023Q3), before diverging to equilibrium levels of 18.2% and 10.9%, respectively. (c) Comparison of areas above and below state median levels of bachelor’s degree attainment (population aged 25+) revealed comparable initial adoption patterns (2023Q1-2023Q2), followed by higher stabilized rates in areas with lower educational attainment (19.9% vs 17.4% by 2024Q3). (d) Within highly urbanized areas, this educational attainment pattern persisted, with lower-education areas showing higher adoption rates (21.4% vs 17.8% by 2024Q3).
+ Figure 3 : 
+ Sectoral patterns of LLM adoption in corporate press releases across major distribution platforms. 
+Analysis of press releases by sector revealed consistent patterns across platforms, with Science & Technology showing marginally higher adoption rates. (a) PRNewswire demonstrated similar sectoral patterns by 2023Q4: Science & Technology (16.8%), People & Culture (14.3%), Business & Money (14.0%), and Other sectors (11.4%). (b) PRWeb exhibited comparable sectoral distribution: Science & Technology (16.8%), Business & Money (15.6%), People & Culture (13.6%), and Other sectors (11.7%). All sectors showed similar temporal adoption patterns following ChatGPT’s release, with initial lag followed by sustained growth through 2023.
+ Figure 4 : 
+ Organization age and LLM adoption patterns in LinkedIn job postings from small organizations across professional categories. 
+(a) Among small organizations (less than median job vacancies), analysis stratified by number of employees revealed higher LLM adoption rates in firms with below median employees (11.1% vs 6.2% by October 2023). (b) Among small organizations (less than median job vacancies), analysis stratified by founding year revealed higher LLM adoption rates in more recently established firms (founded after 2015: 14.1%; 2010-2015: 10.2%; 1980-2000: 7.2%; pre-1980: 4.0%). (c-i) This age-dependent pattern persisted across professional categories: Admin (c), Engineer (d), Finance (e), Marketing (f), Operations (g), Sales (h), and Scientist (i), with newer organizations consistently showing higher adoption rates. We defined small organizations based on having 2 or less job vacancy postings in a year (median is 3).
+ {suppfigure} 
+ [htb!]
+ Regional variation in LLM adoption across United Nations Member States’ press releases. 
+Temporal analysis of estimated fraction ( ) of LLM-modified content stratified by regional groups shows differential adoption patterns. After ChatGPT’s launch (November 30, 2022), Latin American and Caribbean States demonstrated the highest adoption rate, reaching approximately 21% by 2024, while African States, Asia-Pacific States, and Eastern European States showed more moderate increases to 11-14%. Error bars indicate 95% confidence intervals obtained through bootstrap analysis. Regional variations may reflect differences in technological infrastructure, language diversity, and institutional policies across Member States.
+ {suppfigure} 
+ [ht!]
+ Analysis of LLM adoption in LinkedIn job postings across the full sample. Temporal analysis of the estimated fraction ( ) of LLM-modified content in job postings across all company sizes shows a modest but statistically significant increase from pre-ChatGPT baseline to approximately 3% adoption following ChatGPT’s introduction (November 30, 2022). This aggregate analysis includes all companies regardless of size, with larger firms (who post more frequent vacancies and typically have dedicated HR resources) representing a greater proportion of the sample. Error bars represent 95% confidence intervals obtained through bootstrap analysis.
+ {suppfigure} 
+ [ht!]
+ LLM adoption patterns in LinkedIn job postings from small organizations ( 10 employees). 
+Temporal analysis of estimated fraction ( ) of LLM-modified content across professional categories (Finance, Marketing, Admin, Operation, Engineer, Scientist, Sales) shows patterns consistent with main findings based on vacancy frequency. Following ChatGPT’s launch (November 30, 2022), organizations with 10 employees demonstrate similar adoption trajectories to those posting 2 vacancies annually, with estimated increasing from 0-2% pre-launch to 7-15% by October 2023. Scientist positions show highest adoption ( 15%), followed by Marketing and Finance ( 10%), while Admin, Engineer, Sales and Operations show more moderate adoption (7-9%). Error bars indicate 95% confidence intervals obtained through bootstrap analysis. This consistency across different definitions of small organizations (by employee count or vacancy frequency) strengthens the robustness of observed adoption patterns.
+ {suppfigure} 
+ [htb]
+ Robustness analysis of LLM adoption estimates across different press release platforms using multiple GPT models for training data generation. 
+(a) PRNewswire, (b) PRWeb, and (c) Newswire press releases show consistent temporal patterns regardless of the GPT model used for training data generation. Estimated fraction ( ) of LLM-modified content was calculated using three different models: GPT-3.5-turbo (used in main analysis, released January 25, 2024), GPT-4-0125-preview (released January 25, 2024), and GPT-4-2024-08-06 (released August 6, 2024). While all models reveal similar adoption trajectories following ChatGPT’s launch (November 30, 2022), the most recent model GPT-4-2024-08-06 generates marginally higher estimates across platforms, suggesting our main results may be conservative. Error bars indicate 95% confidence intervals obtained through bootstrap analysis.
+ {supptable} 
+ [htb!] 
+ Performance validation of our model across Consumer Complaint (all predating ChatGPT’s launch), using a blend of official human and LLM-generated complaints.
+ No. 
+ Validation 
+ Data Source 
+ Ground 
+ Truth 
+ Estimated 
+ Prediction 
+ Error 
+ ( ) 
+ (1) 
+ Consumer Complaint 
+ 0.0% 
+ 1.8% 
+ 0.2% 
+ 1.8% 
+ (2) 
+ Consumer Complaint 
+ 2.5% 
+ 4.6% 
+ 0.2% 
+ 2.1% 
+ (3) 
+ Consumer Complaint 
+ 5.0% 
+ 7.3% 
+ 0.2% 
+ 2.3% 
+ (4) 
+ Consumer Complaint 
+ 7.5% 
+ 9.8% 
+ 0.2% 
+ 2.3% 
+ (5) 
+ Consumer Complaint 
+ 10.0% 
+ 12.2% 
+ 0.3% 
+ 2.2% 
+ (6) 
+ Consumer Complaint 
+ 12.5% 
+ 14.6% 
+ 0.2% 
+ 2.1% 
+ (7) 
+ Consumer Complaint 
+ 15.0% 
+ 17.1% 
+ 0.3% 
+ 2.1% 
+ (8) 
+ Consumer Complaint 
+ 17.5% 
+ 19.4% 
+ 0.3% 
+ 1.9% 
+ (9) 
+ Consumer Complaint 
+ 20.0% 
+ 21.8% 
+ 0.3% 
+ 1.8% 
+ (10) 
+ Consumer Complaint 
+ 22.5% 
+ 24.2% 
+ 0.3% 
+ 1.7% 
+ (11) 
+ Consumer Complaint 
+ 25.0% 
+ 26.5% 
+ 0.3% 
+ 1.5% 
+ {supptable} 
+ [htb!] 
+ Performance validation of our model across UN Press Release (all predating ChatGPT’s launch), using a blend of official human and LLM-generated press releases.
+ No. 
+ Validation 
+ Data Source 
+ Ground 
+ Truth 
+ Estimated 
+ Prediction 
+ Error 
+ ( ) 
+ (1) 
+ UN Press Release 
+ 0.0% 
+ 2.5% 
+ 0.2% 
+ 2.5% 
+ (2) 
+ UN Press Release 
+ 2.5% 
+ 5.4% 
+ 0.2% 
+ 2.9% 
+ (3) 
+ UN Press Release 
+ 5.0% 
+ 8.1% 
+ 0.3% 
+ 3.1% 
+ (4) 
+ UN Press Release 
+ 7.5% 
+ 10.7% 
+ 0.3% 
+ 3.2% 
+ (5) 
+ UN Press Release 
+ 10.0% 
+ 13.1% 
+ 0.3% 
+ 3.1% 
+ (6) 
+ UN Press Release 
+ 12.5% 
+ 15.6% 
+ 0.3% 
+ 3.1% 
+ (7) 
+ UN Press Release 
+ 15.0% 
+ 18.0% 
+ 0.3% 
+ 3.0% 
+ (8) 
+ UN Press Release 
+ 17.5% 
+ 20.4% 
+ 0.3% 
+ 2.9% 
+ (9) 
+ UN Press Release 
+ 20.0% 
+ 22.8% 
+ 0.3% 
+ 2.8% 
+ (10) 
+ UN Press Release 
+ 22.5% 
+ 25.1% 
+ 0.3% 
+ 2.6% 
+ (11) 
+ UN Press Release 
+ 25.0% 
+ 27.5% 
+ 0.3% 
+ 2.5% 
+ {supptable} 
+ [htb!] 
+ Performance validation of our model across PRNewswire, PRWeb, Newswire (all predating ChatGPT’s launch), using a blend of official human and LLM-generated press releases.
+Our algorithm demonstrates high accuracy with less than 3.3% prediction error in identifying the proportion of LLM press release within the validation set.
+ No. 
+ Validation 
+ Data Source 
+ Ground 
+ Truth 
+ Estimated 
+ Prediction 
+ Error 
+ ( ) 
+ (1) 
+ PRNewswire 
+ 0.0% 
+ 2.9% 
+ 0.3% 
+ 2.9% 
+ (2) 
+ PRNewswire 
+ 2.5% 
+ 5.7% 
+ 0.3% 
+ 3.2% 
+ (3) 
+ PRNewswire 
+ 5.0% 
+ 8.3% 
+ 0.3% 
+ 3.3% 
+ (4) 
+ PRNewswire 
+ 7.5% 
+ 10.8% 
+ 0.3% 
+ 3.3% 
+ (5) 
+ PRNewswire 
+ 10.0% 
+ 13.2% 
+ 0.3% 
+ 3.2% 
+ (6) 
+ PRNewswire 
+ 12.5% 
+ 15.6% 
+ 0.3% 
+ 3.1% 
+ (7) 
+ PRNewswire 
+ 15.0% 
+ 18.0% 
+ 0.3% 
+ 3.0% 
+ (8) 
+ PRNewswire 
+ 17.5% 
+ 20.3% 
+ 0.3% 
+ 2.8% 
+ (9) 
+ PRNewswire 
+ 20.0% 
+ 22.7% 
+ 0.3% 
+ 2.7% 
+ (10) 
+ PRNewswire 
+ 22.5% 
+ 25.0% 
+ 0.3% 
+ 2.5% 
+ (11) 
+ PRNewswire 
+ 25.0% 
+ 27.3% 
+ 0.3% 
+ 2.3% 
+ (12) 
+ PRWeb 
+ 0.0% 
+ 2.1% 
+ 0.2% 
+ 2.1% 
+ (13) 
+ PRWeb 
+ 2.5% 
+ 5.2% 
+ 0.2% 
+ 2.7% 
+ (14) 
+ PRWeb 
+ 5.0% 
+ 7.8% 
+ 0.2% 
+ 2.8% 
+ (15) 
+ PRWeb 
+ 7.5% 
+ 10.4% 
+ 0.2% 
+ 2.9% 
+ (16) 
+ PRWeb 
+ 10.0% 
+ 12.9% 
+ 0.3% 
+ 2.9% 
+ (17) 
+ PRWeb 
+ 12.5% 
+ 15.4% 
+ 0.3% 
+ 2.9% 
+ (18) 
+ PRWeb 
+ 15.0% 
+ 17.8% 
+ 0.3% 
+ 2.8% 
+ (19) 
+ PRWeb 
+ 17.5% 
+ 20.2% 
+ 0.3% 
+ 2.7% 
+ (20) 
+ PRWeb 
+ 20.0% 
+ 22.6% 
+ 0.3% 
+ 2.6% 
+ (21) 
+ PRWeb 
+ 22.5% 
+ 25.0% 
+ 0.3% 
+ 2.5% 
+ (22) 
+ PRWeb 
+ 25.0% 
+ 27.3% 
+ 0.3% 
+ 2.3% 
+ (23) 
+ Newswire 
+ 0.0% 
+ 2.3% 
+ 0.2% 
+ 2.3% 
+ (24) 
+ Newswire 
+ 2.5% 
+ 5.3% 
+ 0.2% 
+ 2.8% 
+ (25) 
+ Newswire 
+ 5.0% 
+ 7.9% 
+ 0.3% 
+ 2.9% 
+ (26) 
+ Newswire 
+ 7.5% 
+ 10.5% 
+ 0.3% 
+ 3.0% 
+ (27) 
+ Newswire 
+ 10.0% 
+ 13.0% 
+ 0.3% 
+ 3.0% 
+ (28) 
+ Newswire 
+ 12.5% 
+ 15.4% 
+ 0.3% 
+ 2.9% 
+ (29) 
+ Newswire 
+ 15.0% 
+ 17.9% 
+ 0.3% 
+ 2.9% 
+ (30) 
+ Newswire 
+ 17.5% 
+ 20.3% 
+ 0.3% 
+ 2.8% 
+ (31) 
+ Newswire 
+ 20.0% 
+ 22.6% 
+ 0.3% 
+ 2.6% 
+ (32) 
+ Newswire 
+ 22.5% 
+ 25.0% 
+ 0.3% 
+ 2.5% 
+ (33) 
+ Newswire 
+ 25.0% 
+ 27.4% 
+ 0.3% 
+ 2.4% 
+ {supptable} 
+ [htb!] 
+ Performance validation of our model across Admin, Engineer, Finance, Marketing (all predating ChatGPT’s launch), using a blend of official human and LLM-generated job postings.
+ No. 
+ Validation 
+ Data Category 
+ Ground 
+ Truth 
+ Estimated 
+ Prediction 
+ Error 
+ ( ) 
+ (1) 
+ Admin 
+ 0.0% 
+ 1.2% 
+ 0.5% 
+ 1.2% 
+ (2) 
+ Admin 
+ 2.5% 
+ 4.0% 
+ 0.6% 
+ 1.5% 
+ (3) 
+ Admin 
+ 5.0% 
+ 6.6% 
+ 0.7% 
+ 1.6% 
+ (4) 
+ Admin 
+ 7.5% 
+ 9.1% 
+ 0.7% 
+ 1.6% 
+ (5) 
+ Admin 
+ 10.0% 
+ 11.6% 
+ 0.8% 
+ 1.6% 
+ (6) 
+ Admin 
+ 12.5% 
+ 14.1% 
+ 0.8% 
+ 1.6% 
+ (7) 
+ Admin 
+ 15.0% 
+ 16.7% 
+ 0.8% 
+ 1.7% 
+ (8) 
+ Admin 
+ 17.5% 
+ 19.1% 
+ 0.8% 
+ 1.6% 
+ (9) 
+ Admin 
+ 20.0% 
+ 21.6% 
+ 0.9% 
+ 1.6% 
+ (10) 
+ Admin 
+ 22.5% 
+ 24.0% 
+ 0.9% 
+ 1.5% 
+ (11) 
+ Admin 
+ 25.0% 
+ 26.4% 
+ 0.9% 
+ 1.4% 
+ (12) 
+ Engineer 
+ 0.0% 
+ 0.9% 
+ 0.5% 
+ 0.9% 
+ (13) 
+ Engineer 
+ 2.5% 
+ 3.6% 
+ 0.6% 
+ 1.1% 
+ (14) 
+ Engineer 
+ 5.0% 
+ 6.2% 
+ 0.7% 
+ 1.2% 
+ (15) 
+ Engineer 
+ 7.5% 
+ 8.8% 
+ 0.8% 
+ 1.3% 
+ (16) 
+ Engineer 
+ 10.0% 
+ 11.3% 
+ 0.8% 
+ 1.3% 
+ (17) 
+ Engineer 
+ 12.5% 
+ 13.8% 
+ 0.8% 
+ 1.3% 
+ (18) 
+ Engineer 
+ 15.0% 
+ 16.4% 
+ 0.9% 
+ 1.4% 
+ (19) 
+ Engineer 
+ 17.5% 
+ 18.9% 
+ 0.8% 
+ 1.4% 
+ (20) 
+ Engineer 
+ 20.0% 
+ 21.4% 
+ 0.9% 
+ 1.4% 
+ (21) 
+ Engineer 
+ 22.5% 
+ 23.9% 
+ 0.9% 
+ 1.4% 
+ (22) 
+ Engineer 
+ 25.0% 
+ 26.4% 
+ 0.9% 
+ 1.4% 
+ (23) 
+ Finance 
+ 0.0% 
+ 0.7% 
+ 0.4% 
+ 0.7% 
+ (24) 
+ Finance 
+ 2.5% 
+ 3.5% 
+ 0.6% 
+ 1.0% 
+ (25) 
+ Finance 
+ 5.0% 
+ 6.0% 
+ 0.7% 
+ 1.0% 
+ (26) 
+ Finance 
+ 7.5% 
+ 8.5% 
+ 0.7% 
+ 1.0% 
+ (27) 
+ Finance 
+ 10.0% 
+ 10.9% 
+ 0.7% 
+ 0.9% 
+ (28) 
+ Finance 
+ 12.5% 
+ 13.4% 
+ 0.7% 
+ 0.9% 
+ (29) 
+ Finance 
+ 15.0% 
+ 15.9% 
+ 0.8% 
+ 0.9% 
+ (30) 
+ Finance 
+ 17.5% 
+ 18.3% 
+ 0.8% 
+ 0.8% 
+ (31) 
+ Finance 
+ 20.0% 
+ 20.7% 
+ 0.9% 
+ 0.7% 
+ (32) 
+ Finance 
+ 22.5% 
+ 23.1% 
+ 0.8% 
+ 0.6% 
+ (33) 
+ Finance 
+ 25.0% 
+ 25.5% 
+ 0.9% 
+ 0.5% 
+ (23) 
+ Marketing 
+ 0.0% 
+ 0.6% 
+ 0.5% 
+ 0.6% 
+ (24) 
+ Marketing 
+ 2.5% 
+ 3.4% 
+ 0.6% 
+ 0.9% 
+ (25) 
+ Marketing 
+ 5.0% 
+ 5.9% 
+ 0.6% 
+ 0.9% 
+ (26) 
+ Marketing 
+ 7.5% 
+ 8.4% 
+ 0.7% 
+ 0.9% 
+ (27) 
+ Marketing 
+ 10.0% 
+ 10.9% 
+ 0.8% 
+ 0.9% 
+ (28) 
+ Marketing 
+ 12.5% 
+ 13.4% 
+ 0.8% 
+ 0.9% 
+ (29) 
+ Marketing 
+ 15.0% 
+ 15.8% 
+ 0.8% 
+ 0.8% 
+ (30) 
+ Marketing 
+ 17.5% 
+ 18.3% 
+ 0.9% 
+ 0.8% 
+ (31) 
+ Marketing 
+ 20.0% 
+ 20.8% 
+ 0.8% 
+ 0.8% 
+ (32) 
+ Marketing 
+ 22.5% 
+ 23.3% 
+ 0.9% 
+ 0.8% 
+ (33) 
+ Marketing 
+ 25.0% 
+ 25.7% 
+ 0.9% 
+ 0.7% 
+ {supptable} 
+ [htb!] 
+ Performance validation of our model across Operation, Sales, Scientist (all predating ChatGPT’s launch), using a blend of official human and LLM-generated job postings.
+ No. 
+ Validation 
+ Data Category 
+ Ground 
+ Truth 
+ Estimated 
+ Prediction 
+ Error 
+ ( ) 
+ (1) 
+ Operation 
+ 0.0% 
+ 0.8% 
+ 0.5% 
+ 0.8% 
+ (2) 
+ Operation 
+ 2.5% 
+ 3.3% 
+ 0.6% 
+ 0.8% 
+ (3) 
+ Operation 
+ 5.0% 
+ 5.9% 
+ 0.7% 
+ 0.9% 
+ (4) 
+ Operation 
+ 7.5% 
+ 8.4% 
+ 0.7% 
+ 0.9% 
+ (5) 
+ Operation 
+ 10.0% 
+ 10.9% 
+ 0.8% 
+ 0.9% 
+ (6) 
+ Operation 
+ 12.5% 
+ 13.3% 
+ 0.8% 
+ 0.8% 
+ (7) 
+ Operation 
+ 15.0% 
+ 15.8% 
+ 0.8% 
+ 0.8% 
+ (8) 
+ Operation 
+ 17.5% 
+ 18.2% 
+ 0.9% 
+ 0.7% 
+ (9) 
+ Operation 
+ 20.0% 
+ 20.7% 
+ 0.9% 
+ 0.7% 
+ (10) 
+ Operation 
+ 22.5% 
+ 23.2% 
+ 0.9% 
+ 0.7% 
+ (11) 
+ Operation 
+ 25.0% 
+ 25.6% 
+ 0.9% 
+ 0.6% 
+ (12) 
+ Sales 
+ 0.0% 
+ 1.2% 
+ 0.5% 
+ 1.2% 
+ (13) 
+ Sales 
+ 2.5% 
+ 3.7% 
+ 0.6% 
+ 1.2% 
+ (14) 
+ Sales 
+ 5.0% 
+ 6.2% 
+ 0.7% 
+ 1.2% 
+ (15) 
+ Sales 
+ 7.5% 
+ 8.6% 
+ 0.8% 
+ 1.1% 
+ (16) 
+ Sales 
+ 10.0% 
+ 11.0% 
+ 0.8% 
+ 1.0% 
+ (17) 
+ Sales 
+ 12.5% 
+ 13.4% 
+ 0.8% 
+ 0.9% 
+ (18) 
+ Sales 
+ 15.0% 
+ 15.8% 
+ 0.8% 
+ 0.8% 
+ (19) 
+ Sales 
+ 17.5% 
+ 18.2% 
+ 0.8% 
+ 0.7% 
+ (20) 
+ Sales 
+ 20.0% 
+ 20.7% 
+ 0.9% 
+ 0.7% 
+ (21) 
+ Sales 
+ 22.5% 
+ 23.1% 
+ 0.9% 
+ 0.6% 
+ (22) 
+ Sales 
+ 25.0% 
+ 25.5% 
+ 0.9% 
+ 0.5% 
+ (23) 
+ Scientist 
+ 0.0% 
+ 2.0% 
+ 0.6% 
+ 2.0% 
+ (24) 
+ Scientist 
+ 2.5% 
+ 4.8% 
+ 0.7% 
+ 2.3% 
+ (25) 
+ Scientist 
+ 5.0% 
+ 7.3% 
+ 0.7% 
+ 2.3% 
+ (26) 
+ Scientist 
+ 7.5% 
+ 9.8% 
+ 0.8% 
+ 2.3% 
+ (27) 
+ Scientist 
+ 10.0% 
+ 12.3% 
+ 0.8% 
+ 2.3% 
+ (28) 
+ Scientist 
+ 12.5% 
+ 14.7% 
+ 0.9% 
+ 2.2% 
+ (29) 
+ Scientist 
+ 15.0% 
+ 17.2% 
+ 0.9% 
+ 2.2% 
+ (30) 
+ Scientist 
+ 17.5% 
+ 19.7% 
+ 1.0% 
+ 2.2% 
+ (31) 
+ Scientist 
+ 20.0% 
+ 22.1% 
+ 0.9% 
+ 2.1% 
+ (32) 
+ Scientist 
+ 22.5% 
+ 24.5% 
+ 1.0% 
+ 2.0% 
+ (33) 
+ Scientist 
+ 25.0% 
+ 27.0% 
+ 1.0% 
+ 2.0% 
+ Supplementary Information 
+ Overview of the Consumer Complaint Data 
+ The Consumer Complaint Database, maintained by the Consumer Financial Protection Bureau (CFPB), is a publicly accessible resource that collects complaints about consumer financial products and services. These complaints are forwarded to companies for their response, while the CFPB—a U.S. government agency—is dedicated to ensuring that banks, lenders, and other financial institutions treat consumers fairly. We focus on 687,241 consumer complaint narrative, starting from January 2022 and ending in August 2024. The dataset offers the mailing ZIP code provided by the consumer, which allow us to check heterogeneity via the educational level and the degree of urbanization by region. Specifically, we employ Rural Urban Commuting Area (RUCA) codes to assess urbanization levels and measure the educational level by the percentage of individuals aged 25 and older who have earned a bachelor’s degree. Corresponding data is available at
+ here 
+and here respectively. 
+ Overview of the LinkedIn Job Posting Data 
+ We use data from the Revelio Labs universe, which collects, cleans and aggregates individual-level job postings sourced from publicly available online sources, such as LinkedIn. The raw dataset includes all LinkedIn postings (active, inactive, removed), the company identifier, the company founding year, the full text of job listings, and associated information (title, salary, etc.). The raw data are broken out by Revelio Labs into eight job categories: Administration, Engineering, Finance, Marketing, Operations, Sales, Scientist, and Unclassified. We focus on 304,270,122 job postings, starting from January 2021 and ending in October 2023. We focus on the full text of the job postings. To analyze the heterogeneity of LLM usage by company characteristics, we combine the job listings information with the Revelio Labs associated LinkedIn employee data. Similarly to the job postings data, the baseline workforce data was scraped, cleaned and aggregated at the firm level. The workforce data is available going back up to 2008. We define firm characteristics based on pre-ChatGPT introduction characteristics. We define two different definitions for small firms: in our sample, small firms are companies with either 10 or fewer registered employees in 2021 or companies posting less than or equal to about 2 postings per year. We also check heterogeneity via founding year, splitting in terms of years 2015-onwards, 2000-2015, 1980-2000 and before 1980. These time periods are determined based on quantiles of the founding year distribution. Note that although the median number of postings per company per year is 3, the total number of postings drops from 304,270,122 to 1,440,912 when we focus on small companies. This indicates that small companies contribute a relatively minor share to the total posting volume compared to larger companies. 
+ Overview of the Corporate Press Release Data 
+ We collect corporate press release data using the NewsAPI service, which aggregates online news content from various sources. We collected data from: PRNewswire, PRWeb, and Newswire, three of the main companies distributing corporate press releases online. These were chosen due to data avilability and cost. PR Newswire, founded in 1954, is one of the oldest and most widely recognized press release distribution services, offering an extensive network that reaches major news outlets, journalists, and online platforms worldwide. It serves a broad range of clients, from large corporations to small businesses. PRWeb, launched in 1997, focuses primarily on online distribution and SEO optimization, making it a more budget-friendly option for businesses looking to enhance their digital presence. Newswire distributes press releases to both traditional media and online platforms, catering to businesses of various sizes. While all three services offer some level of editorial support, their primary business focus remains distribution. 
+ With a focus on English-language text, we gathered up to 537,413 press releases from January 2022 to September 2024. Our analysis primarily focused on the full body text. Due to the limited number of articles post-ChatGPT introduction available from Newswire, we conducted detailed robustness checks only on PR Newswire and PRWeb data, which provided sufficient volume for heterogeneity analysis. We classified the press releases by four overarching categories: Business & Money, Science & Tech, People & Culture, and Other. 
+ Overview of the UN Press Release Data 
+ We collect United Nations release data using customized scripts. The United Nations (UN), founded in 1945, is an international organization dedicated to fostering global peace, security, and cooperation among its member states [ 11 ] .
+Country teams of United Nations regularly update on the latest developments in that country.
+To ensure consistency and maintain a focus on English-language content, articles were selected from the English-language websites of 97 country teams. From January 2019 to September 2024, up to 15,919 press releases were collected, with the analysis primarily concentrating on the full body text. Our investigation revealed that among the remaining 96 country teams, 57 do not have their own websites, 33 lack English-language websites, and 6 do not operate press release websites. 
+ Data Split, Model Fitting, and Evaluation 
+ For model fitting, we count word frequencies for the corpora written before the release of ChatGPT and the LLM-modified corpora. We fit the model with data from 2021 (2019 for UN press release), and use data from January 2022 onwards for validation and inference. We developed individual models for each major category in LinkedIn job postings and for each distribution platform in corporate press releases. For UN press releases and consumer complaints, we fit one model for each domain. During inference, we randomly sample up to 2,000 records per month (per quarter for UN press release) to analyze the increasing temporal trends of LLM usage across various writing domains. 
+ To evaluate model accuracy and calibration under temporal distribution shift, we collected a sample of 2000 records from January 1, 2022, to November 29, 2022, a time period prior to the release of ChatGPT, as the validation data. We construct validation sets with LLM-modified content proportions ( ) ranging from 0% to 25%, in 2.5% increments, and compared the model’s estimated with the ground truth (Table The Widespread Adoption of Large Language Model-Assisted Writing Across Society , The Widespread Adoption of Large Language Model-Assisted Writing Across Society , The Widespread Adoption of Large Language Model-Assisted Writing Across Society , The Widespread Adoption of Large Language Model-Assisted Writing Across Society , The Widespread Adoption of Large Language Model-Assisted Writing Across Society ). Our models all performed well in our application, with a prediction error consistently less than 3.3% at the population level across various ground truth values. 
+ {suppfigure} 
+ [htb!] 
+ ⬇ 
+ The aim here is to reverse - engineer the author ’ s writing process by taking a piece of text from a consumer complaint and compressing it into a more concise form . This process simulates how an author might distill their thoughts and key points into a structured , yet not overly condensed form . 
+ Now as a first step , given a complete piece of text from a consumer complaint , reverse - engineer it into a list of bullet points . 
+ Example prompt for summarizing a consumer complaint into a skeleton: This process simulates how an author might first only write the main ideas and core information into a concise outline. The goal is to capture the essence of the complaint in a structured and succinct manner, serving as a foundation for the next prompt. 
+ {suppfigure} 
+ [htb!] 
+ ⬇ 
+ Following the initial step of reverse - engineering the author ’ s writing process by compressing a text segment from a consumer complaint , you now enter the second phase . Here , your objective is to expand upon the concise version previously crafted . This stage simulates how an author elaborates on the distilled thoughts and key points , enriching them into a detailed , structured narrative . 
+ Given the concise output from the previous step , your task is to develop it into a fully fleshed - out text . 
+ Example prompt for expanding the skeleton into a full text: The aim here is to simulate the process of using the structured outline as a basis to generate comprehensive and coherent text. This step mirrors the way an author might flesh out the outline into detailed paragraphs, effectively transforming the condensed ideas into a fully articulated consumer complaint. The format and depth of the expansion can vary, reflecting the diverse styles and requirements of different consumer complaints. 
+ Experimental support, please
+ view the build logs 
+ for errors. Generated by
+ L
+ A 
+ T
+ E 
+ xml 
+ .
+ Instructions for reporting errors 
+ We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+ support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+ methods listed below: 
+ Click the "Report Issue" ( 
+ ) button, located in the page header. 
+ Tip: You can select the relevant text first, to include it in your report. 
+ Our team has already identified the following issues . We appreciate your time reviewing and reporting rendering errors we
+ may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+ should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+ all. 
+ Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion , and welcome developer contributions . 
+ We gratefully acknowledge support from
+ our major funders ,
+ member institutions , ,
+ and all contributors.
+ About 
+ · 
+ Help 
+ · 
+ Contact 
+ · 
+ Subscribe 
+ · 
+ Copyright 
+ · 
+ Privacy 
+ · 
+ Accessibility 
+ · 
+ Operational Status (opens in new tab) 
+ Major funding support from 

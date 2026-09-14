@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneSEAM
+
+ ❯ tests/lint/composeStateProseFence.test.js (9 tests | 1 failed) 970ms
+     × ⭐ THE COMPOSER REACHES NO LOCALE API 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/composeStateProseFence.test.js > the composer's locale-API ban (ARCH §4.1, P-F7) > ⭐ THE COMPOSER REACHES NO LOCALE API
+AssertionError: a locale collation would order two candidate keys differently on two devices and compose two different sentences: expected [ 'localeCompare' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "localeCompare",
++ ]
+
+ ❯ tests/lint/composeStateProseFence.test.js:217:76
+    215|   test('⭐ THE COMPOSER REACHES NO LOCALE API', () => {
+    216|     expect(bannedApisIn(read(COMPOSER)), 'a locale collation would ord…
+    217|       + ' differently on two devices and compose two different sentenc…
+       |                                                                            ^
+    218|     // The comparator it uses instead, pinned by shape so a lane canno…
+    219|     expect(codeOnly(read(COMPOSER))).toMatch(/return a\.key < b\.key \…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  12:00:37
+   Duration  1.45s (transform 29ms, setup 21ms, import 360ms, tests 970ms, environment 0ms)
+

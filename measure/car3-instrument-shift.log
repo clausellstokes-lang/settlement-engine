@@ -1,0 +1,21 @@
+PROSE MANIFEST DIFF · 73284 cells on the tip side
+  REPLACED       cells       0 · towns     0
+  RE-INDEXED     cells     309 · towns   309
+  ADDITIVE       cells       0 · towns     0
+  WORDING-ONLY   cells       0 · towns     0
+  UNCHANGED      cells   71851 · towns   525
+  ADDED          cells    1124
+  REMOVED        cells       0
+  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)
+  ── RE-INDEXED ──
+    thorp|germanic|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|latin|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|celtic|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|arabic|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|norse|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|slavic|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|east_asian|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|mesoamerican|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|south_asian|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    thorp|steppe|forest|isolated|civilized|golden-master-v3::player::economics.shadowEconomy::0
+    … and 299 more

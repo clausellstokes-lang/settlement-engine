@@ -1,0 +1,2850 @@
+<!DOCTYPE html>
+<!--[if lte IE 7]> <html lang="en" class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head><script type="text/javascript" src="https://web-static.archive.org/_static/js/bundle-playback.js?v=2N_sDSC0" charset="utf-8"></script>
+<script type="text/javascript" src="https://web-static.archive.org/_static/js/wombat.js?v=o9P2E1FK" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden","showSwfDownload":true};</script>
+<script type="text/javascript" src="https://web-static.archive.org/_static/js/ruffle/ruffle.js"></script>
+<script type="text/javascript">
+    __wm.init("https://web.archive.org/web");
+  __wm.wombat("https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm","20201111202014","https://web.archive.org/","web","https://web-static.archive.org/_static/",
+	      "1605126014");
+</script>
+<link rel="stylesheet" type="text/css" href="https://web-static.archive.org/_static/css/banner-styles.css?v=1utQkbB3" />
+<link rel="stylesheet" type="text/css" href="https://web-static.archive.org/_static/css/iconochive.css?v=3PDvdIFv" />
+<!-- End Wayback Rewrite JS Include -->
+
+<meta charset="utf-8"/><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"d4f02fb7e7",applicationID:"14767184"};window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var i=t[n]={exports:{}};e[n][0].call(i.exports,function(t){var i=e[n][1][t];return r(i||t)},i,i.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(e,t,n){function r(){}function i(e,t,n){return function(){return o(e,[u.now()].concat(c(arguments)),t?null:this,n),t?void 0:this}}var o=e("handle"),a=e(6),c=e(7),f=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(e,t){s[t]=i(p+t,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),t.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,t){var n={},r=this,i="function"==typeof t;return o(l+"tracer",[u.now(),e,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return t.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],n),e}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){m[t]=i(l+t)}),newrelic.noticeError=function(e,t){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,t])}},{}],2:[function(e,t,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=e(8);t.exports=r,t.exports.offset=a,t.exports.getLastTimestamp=i},{}],3:[function(e,t,n){function r(e,t){var n=e.getEntries();n.forEach(function(e){"first-paint"===e.name?d("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&d("timing",["fcp",Math.floor(e.startTime)])})}function i(e,t){var n=e.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(e){e.getEntries().forEach(function(e){e.hadRecentInput||d("cls",[e])})}function a(e){if(e instanceof m&&!g){var t=Math.round(e.timeStamp),n={type:e.type};t<=p.now()?n.fid=p.now()-t:t>p.offset&&t<=Date.now()?(t-=p.offset,n.fid=p.now()-t):t=p.now(),g=!0,d("timing",["fi",t,n])}}function c(e){d("pageHide",[p.now(),e])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d=e("handle"),p=e("loader"),l=e(5),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(e){document.addEventListener(e,a,!1)})}l(c)}},{}],4:[function(e,t,n){function r(e,t){if(!i)return!1;if(e!==i)return!1;if(!t)return!0;if(!o)return!1;for(var n=o.split("."),r=t.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}t.exports={agent:i,version:o,match:r}},{}],5:[function(e,t,n){function r(e){function t(){e(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,t,!1)}t.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],6:[function(e,t,n){function r(e,t){var n=[],r="",o=0;for(r in e)i.call(e,r)&&(n[o]=t(r,e[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;t.exports=r},{}],7:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,i=n-t||0,o=Array(i<0?0:i);++r<i;)o[r]=e[t+r];return o}t.exports=r},{}],8:[function(e,t,n){t.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,t,n){function r(){}function i(e){function t(e){return e&&e instanceof r?e:e?f(e,c,o):o()}function n(n,r,i,o){if(!p.aborted||o){e&&e(n,r,i);for(var a=t(i),c=v(n),f=c.length,u=0;u<f;u++)c[u].apply(a,r);var d=s[w[n]];return d&&d.push([b,n,r,a]),a}}function l(e,t){h[e]=v(e).concat(t)}function m(e,t){var n=h[e];if(n)for(var r=0;r<n.length;r++)n[r]===t&&n.splice(r,1)}function v(e){return h[e]||[]}function g(e){return d[e]=d[e]||i(n)}function y(e,t){u(e,function(e,n){t=t||"feature",w[n]=t,t in s||(s[t]=[])})}var h={},w={},b={on:l,addEventListener:l,removeEventListener:m,emit:n,get:g,listeners:v,context:t,buffer:y,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var c="nr@context",f=e("gos"),u=e(6),s={},d={},p=t.exports=i();p.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(i.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[t]=r,r}var i=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){i.buffer([e],r),i.emit(e,t,n)}var i=e("ee").get("handle");t.exports=r,r.ee=i},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!E++){var e=b.info=NREUM.info,t=p.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return u.abort();f(h,function(t,n){e[t]||(e[t]=n)});var n=a();c("mark",["onload",n+b.offset],null,"api"),c("timing",["load",n]);var r=p.createElement("script");r.src="https://"+e.agent,t.parentNode.insertBefore(r,t)}}function i(){"complete"===p.readyState&&o()}function o(){c("mark",["domContent",a()+b.offset],null,"api")}var a=e(2),c=e("handle"),f=e(6),u=e("ee"),s=e(4),d=window,p=d.document,l="addEventListener",m="attachEvent",v=d.XMLHttpRequest,g=v&&v.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:v,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var y=""+location,h={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1184.min.js"},w=v&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),b=t.exports={offset:a.getLastTimestamp(),now:a,origin:y,features:{},xhrWrappable:w,userAgent:s};e(1),e(3),p[l]?(p[l]("DOMContentLoaded",o,!1),d[l]("load",r,!1)):(p[m]("onreadystatechange",i),d[m]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var E=0},{}],"wrap-function":[function(e,t,n){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(7),a="nr@original",c=Object.prototype.hasOwnProperty,f=!1;t.exports=function(e,t){function n(e,t,n,i){function nrWrapper(){var r,a,c,f;try{a=this,r=o(arguments),c="function"==typeof n?n(r,a):n||{}}catch(u){p([u,"",[r,a,i],c])}s(t+"start",[r,a,i],c);try{return f=e.apply(a,r)}catch(d){throw s(t+"err",[r,a,d],c),d}finally{s(t+"end",[r,a,f],c)}}return r(e)?e:(t||(t=""),nrWrapper[a]=e,d(e,nrWrapper),nrWrapper)}function u(e,t,i,o){i||(i="");var a,c,f,u="-"===i.charAt(0);for(f=0;f<t.length;f++)c=t[f],a=e[c],r(a)||(e[c]=n(a,u?c+i:i,o,c))}function s(n,r,i){if(!f||t){var o=f;f=!0;try{e.emit(n,r,i,t)}catch(a){p([a,n,r,i])}f=o}}function d(e,t){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(e);return n.forEach(function(n){Object.defineProperty(t,n,{get:function(){return e[n]},set:function(t){return e[n]=t,t}})}),t}catch(r){p([r])}for(var i in e)c.call(e,i)&&(t[i]=e[i]);return t}function p(t){try{e.emit("internal-error",t)}catch(n){}}return e||(e=i),n.inPlace=u,n.flag=a,n}},{}]},{},["loader"]);</script>
+<meta property="og:image" content="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/lead_image/public/Longreads_2018/07/robinhobb.jpg?itok=zftOgnIu"/>
+<link rel="apple-touch-icon" href="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/all/modules/touch_icons/apple-touch-icon.png" type="image/png"/>
+<link rel="shortcut icon" href="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/favicon_0.jpg" type="image/jpeg"/>
+<script type="application/ld+json">{
+    "@context": "https://web.archive.org/web/20201111202014/http://schema.org",
+    "@graph": [
+        {
+            "@type": "NewsArticle",
+            "headline": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm",
+            "name": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm",
+            "description": "Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with Assassin’s Apprentice (1995) and ending with Assassin’s Fate (2017). Over the course of 20 years, four trilogies and one quartet, characters from one book could re-appear in another, creating an ever-expanding web of complex societies, secret family lines, buried cities and uncharted islands. George RR Martin, with whom Hobb shares an editor, described her books as “diamonds in a sea of zircons”. “The last books of the Farseer were very hard for me to write, very emotional. For a year, I stopped writing,” Hobb, 66, told the New Statesman at the Imaginales festival in Epinal, France, in May. Fans had travelled from Lille, in the north of France, and Marseilles, in the far south, to meet the author. When she is not writing best sellers, she lives on a small farm near Tacoma, Washington state. Robin Hobb is a pseudonym – her real name is Margaret Lindholm Ogden – and a cape of anonymity, a disguise she seems to enjoy. “I needed to go to the grocery store and I was still in my boots, and my jeans were dirty. And that never happens, but a woman came to me and said: ‘Oh, you’re that fantasy writer! You’re Melody Young!’” She has a tranquil laugh. “I really wanted to say yes, but I said ‘No, I am the other one’.” Hobb is measured about her success; the farm, she says, is work, too. Her books tell tales of dragons and pirates, of noblemen and royal plots, masterfully threaded with magic and adventure. The stories are immersive and the characters complex – Hobb alternates points of views from all ages, genders and social statuses with an elegant style. Set in different times and countries of the same world, the Elderlings epic allows Hobb to develop diverse societies – the matriarchal, business-oriented Bingtown; the macho, warring state of Chalced; the rough land of the Six Duchies; all colliding with the return of an ancient dragon race. By introducing cultural clashes between them, Hobb cleverly touches on the subjects of slavery, gender equality, political unrest and sexual violence. In Hobb’s world, whores become queens and gay characters live and love openly. Five series – trilogies of the Farseer, The Liveship Traders, The Tawny Man, The Fitz and the Fool, and the four books of The Rain Wild chronicles – may seem too vast a reading task, but the Realm of the Elderlings can be entered by many different doors. The Liveship Traders trilogy, for instance, a tale of economic collapse and political crises on the high seas, can be read entirely separately from the rest of the novels set in the same world. Like Game of Thrones, to which the Elderlings has been compared to for its tapestry of voices – although it is often more tightly threaded than GoT’s – the series seriously tackles political, sexual, and physical violence. Unlike GoT, it does so without glossing over or underplaying the consequences: “I try to express how horrifying and ugly violence is”, Hobb says. “I have read descriptions of violence in which it is almost like a beautiful, or a satisfying, or almost a sexual thing, and that always makes me uncomfortable as a reader.” Rape is present in the series, and Hobb made sure to write the scenes from the victim’s perspective. It reads as a traumatic, haunting experience that never fully leaves the characters it happens to. “I did not want it to be written as something lascivious or somehow exciting. I wanted it to be a terrible, terrible thing.” The brutality of conflicting regimes and the inhumane logic of for-profit economies manifest themselves in the development of a slave market. “Slavery is not really an old issue, it is an ongoing issue”, says Hobb, adding that where she lives, there have been cases of trafficked women, lured to the United States to be sexually exploited or work to repay their trip. “It is an ongoing thing, and I think it is important to remind people of what slavery is.” The Elderlings books never ignore women’s stories. In the Liveship Traders series, Hobb paints striking portraits of three generations of women caught in a political maelstrom. The matriarch, Ronica Vestrit, “lives to the old standards, and has not relinquished her power”, Hobb says. Her daughter Keffria has married a man whom she has let control her life: “She has said: ‘I will let my husband make the decisions, it is easier.’ And so you get an imbalance”, Hobb explains. “It can be dangerous.” Teenager Malta’s certitudes are overturned when puberty hits at the same time as violent revolts in her town. “Cultures change”, Hobb says, citing the positive example of Saudi women recently winning the right to drive. “But when regimes change, sometimes there are people who lose privilege, and it can come from above, as a legal system.” Her books are set in a medieval world, but resonate in our era: sometimes, like Keffria Vestrit, “if you do not exercise your power, it goes away”, Hobb says. Just like, perhaps, when you are so sure of what the result of the presidential election will be, that you do not vote: “If you do not vote, you lose your power.” That is as close as the American author will get to Trump’s name. To anyone who has read her books, “Grab her by the pussy” certainly sounds like a brag from the misogynist nation of Chalced. Unlike Game of Thrones, the adventures of the assassin Fitzchivalry, the dragon Tintaglia and the ship captain Althea have never been adapted for the screen. There has been a French graphic novel version of the Liveship Traders, but Hobb remains careful when dealing with potential adaptations. (She says she doesn’t have an agent for film or television, which complicates things.) And then, there’s the problem of the volume: “Sixteen books!” She laughs. “I think it would be very difficult series to make. You start with these characters in the Farseer trilogy, and then the next season they\u0027re all gone and we have a whole new cast. You could do alternating episodes, but I think it would be very complicated.” To play the Fool, one of her most beloved characters, she imagines “a very young David Bowie”. “Of course”, she adds, “it is far too late to hope for anything like that.” In Hobb’s Elderlings universe, names matter. Her own pen name was carefully chosen by checking which letter of the alphabet is better placed on libraries’ shelves. “It was H”, she says. And “Robin” is intentionally gender neutral. (In the books, The Fool is similarly careful about gender, refusing to reveal whether they are male or female.) Her process for naming characters is more obscure: “It happens in a part of my mind which I don’t have access to. They step out on to the stage with a name”, she explains with a fond smile. In her universe, names can embody a character’s virtues – like the noble brothers Chivalry, Nimble, Swift, Steady, Just and Hearth – or make them reflect poorly on their actions – like the captain Kyle Haven, whose greediness creates endless troubles for his ship and family’s business. The sailor Brashen, a character from her Liveship Traders series, was named after the “very best deckhands” and a colleague of Hobb’s husband, who is a marine engineer. Now, just like George RR Martin’s Khaleesi, there are children named after Brashen and his lover Althea. “It’s a very strange feeling, because I think: ‘Will the child like this when they are older?’” she worries. Hobb has learned to “fit writing wherever” she can, because when she started, there was no time to waste: “I was a mother with small children, my husband was at sea and I also had a job.” Fitz and the Fool, Bee, Brashen and Althea grew up in “different pieces of time” in-between her other life, the one spent raising four children at the farm, “with chickens and ducks and things”. During the writing of Assassin’s Apprentice, her youngest daughter was about three years old. When approaching her deadline, Hobb made her daughter sit on a cushion on the floor and played Disney’s Beauty and the Beast on a loop while she wrote. Now Hobb will write over her morning coffee, then feed the farm’s animals, fix things around the farm and come back to the writing. “All the time when I am not writing, I am thinking about it. That enables me to come back and say ‘Now I know how the conversation will go,’ or ‘Now I know what they will do next’,” she explains. “So even when I am not writing, I am still writing.” There are still children at the farm – they’re just her grandchildren now. “If I’m busy, I will say: ‘There\u0027s a package of hotdogs in the refrigerator, go outside and build a little fire, find some sticks, you\u0027ll be fine’.” She laughs: “Sometimes it\u0027s a disaster, but often they just learn to do things for themselves and it works out.” Hobb hasn’t ruled out coming back to the Elderlings, but she is currently writing something new: an urban fantasy story based near Tacoma, Washington State, where she lives. “It’s a story I have wanted to write for a long time, but I don’t know if anyone will want to publish it.” If no one does – which the New Statesman, and thousands of fans, highly doubt – there will always be the farm. Tending her animals, imagining dragons.",
+            "author": {
+                "@type": "Organization",
+                "@id": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com",
+                "name": "Pauline Bock",
+                "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/newstatesman_logo@2x.png",
+                    "width": "50",
+                    "height": "50"
+                }
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com",
+                "name": "Newstatesman",
+                "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/newstatesman_logo@2x.png",
+                    "width": "50",
+                    "height": "50"
+                }
+            },
+            "datePublished": "27 July, 2018 - 15:47",
+            "dateModified": "2 August, 2018 - 11:20",
+            "image": {
+                "@type": "ImageObject",
+                "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/sites/default/files/Longreads_2018/07/robinhobb.jpg",
+                "width": "500",
+                "height": "200"
+            },
+            "mainEntityOfPage": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"
+        }
+    ]
+}</script>
+<meta name="viewport" content="width=device-width"/>
+<link rel="amphtml" href="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm?amp"/>
+<meta name="description" content="The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons."/>
+<meta name="abstract" content="The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons."/>
+<meta name="keywords" content="New Statesman magazine, International Politics, British Politics, Britain, UK, Tony Blair, Gordon Brown, Geoffrey Robinson, David Cameron, Sir Menzies Campbell, Labour, Conservative, Liberal Democrat, UK Politics, House of Commons, House of Lords, Legislation, politics magazine"/>
+<meta name="robots" content="follow, index"/>
+<meta name="news_keywords" content="New Statesman magazine, International Politics, British Politics, Britain, UK, Tony Blair, Gordon Brown, Geoffrey Robinson, David Cameron, Sir Menzies Campbell, Labour, Conservative, Liberal Democrat, UK Politics, House of Commons, House of Lords, Legislation, politics magazin"/>
+<meta name="generator" content="Drupal 7 (http://drupal.org)"/>
+<meta name="rights" content="New Statesman Ltd"/>
+<link rel="canonical" href="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"/>
+<link rel="shortlink" href="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/node/315078"/>
+<meta property="fb:pages" content="100959719644"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"/>
+<meta property="og:title" content="Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm"/>
+<meta property="og:description" content="Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with Assassin’s Apprentice (1995) and ending with Assassin’s Fate (2017). Over the course of 20 years, four trilogies and one quartet, characters from one book could re-appear in another, creating an ever-expanding web of complex societies, secret family lines, buried cities and uncharted islands. George RR Martin, with whom Hobb shares an editor, described her books as “diamonds in a sea of zircons”. “The last books of the Farseer were very hard for me to write, very emotional. For a year, I stopped writing,” Hobb, 66, told the New Statesman at the Imaginales festival in Epinal, France, in May. Fans had travelled from Lille, in the north of France, and Marseilles, in the far south, to meet the author. When she is not writing best sellers, she lives on a small farm near Tacoma, Washington state. Robin Hobb is a pseudonym – her real name is Margaret Lindholm Ogden – and a cape of anonymity, a disguise she seems to enjoy. “I needed to go to the grocery store and I was still in my boots, and my jeans were dirty. And that never happens, but a woman came to me and said: ‘Oh, you’re that fantasy writer! You’re Melody Young!’” She has a tranquil laugh. “I really wanted to say yes, but I said ‘No, I am the other one’.” Hobb is measured about her success; the farm, she says, is work, too. Her books tell tales of dragons and pirates, of noblemen and royal plots, masterfully threaded with magic and adventure. The stories are immersive and the characters complex – Hobb alternates points of views from all ages, genders and social statuses with an elegant style. Set in different times and countries of the same world, the Elderlings epic allows Hobb to develop diverse societies – the matriarchal, business-oriented Bingtown; the macho, warring state of Chalced; the rough land of the Six Duchies; all colliding with the return of an ancient dragon race. By introducing cultural clashes between them, Hobb cleverly touches on the subjects of slavery, gender equality, political unrest and sexual violence. In Hobb’s world, whores become queens and gay characters live and love openly. Five series – trilogies of the Farseer, The Liveship Traders, The Tawny Man, The Fitz and the Fool, and the four books of The Rain Wild chronicles – may seem too vast a reading task, but the Realm of the Elderlings can be entered by many different doors. The Liveship Traders trilogy, for instance, a tale of economic collapse and political crises on the high seas, can be read entirely separately from the rest of the novels set in the same world. Like Game of Thrones, to which the Elderlings has been compared to for its tapestry of voices – although it is often more tightly threaded than GoT’s – the series seriously tackles political, sexual, and physical violence. Unlike GoT, it does so without glossing over or underplaying the consequences: “I try to express how horrifying and ugly violence is”, Hobb says. “I have read descriptions of violence in which it is almost like a beautiful, or a satisfying, or almost a sexual thing, and that always makes me uncomfortable as a reader.” Rape is present in the series, and Hobb made sure to write the scenes from the victim’s perspective. It reads as a traumatic, haunting experience that never fully leaves the characters it happens to. “I did not want it to be written as something lascivious or somehow exciting. I wanted it to be a terrible, terrible thing.” The brutality of conflicting regimes and the inhumane logic of for-profit economies manifest themselves in the development of a slave market. “Slavery is not really an old issue, it is an ongoing issue”, says Hobb, adding that where she lives, there have been cases of trafficked women, lured to the United States to be sexually exploited or work to repay their trip. “It is an ongoing thing, and I think it is important to remind people of what slavery is.” The Elderlings books never ignore women’s stories. In the Liveship Traders series, Hobb paints striking portraits of three generations of women caught in a political maelstrom. The matriarch, Ronica Vestrit, “lives to the old standards, and has not relinquished her power”, Hobb says. Her daughter Keffria has married a man whom she has let control her life: “She has said: ‘I will let my husband make the decisions, it is easier.’ And so you get an imbalance”, Hobb explains. “It can be dangerous.” Teenager Malta’s certitudes are overturned when puberty hits at the same time as violent revolts in her town. “Cultures change”, Hobb says, citing the positive example of Saudi women recently winning the right to drive. “But when regimes change, sometimes there are people who lose privilege, and it can come from above, as a legal system.” Her books are set in a medieval world, but resonate in our era: sometimes, like Keffria Vestrit, “if you do not exercise your power, it goes away”, Hobb says. Just like, perhaps, when you are so sure of what the result of the presidential election will be, that you do not vote: “If you do not vote, you lose your power.” That is as close as the American author will get to Trump’s name. To anyone who has read her books, “Grab her by the pussy” certainly sounds like a brag from the misogynist nation of Chalced. Unlike Game of Thrones, the adventures of the assassin Fitzchivalry, the dragon Tintaglia and the ship captain Althea have never been adapted for the screen. There has been a French graphic novel version of the Liveship Traders, but Hobb remains careful when dealing with potential adaptations. (She says she doesn’t have an agent for film or television, which complicates things.) And then, there’s the problem of the volume: “Sixteen books!” She laughs. “I think it would be very difficult series to make. You start with these characters in the Farseer trilogy, and then the next season they're all gone and we have a whole new cast. You could do alternating episodes, but I think it would be very complicated.” To play the Fool, one of her most beloved characters, she imagines “a very young David Bowie”. “Of course”, she adds, “it is far too late to hope for anything like that.” In Hobb’s Elderlings universe, names matter. Her own pen name was carefully chosen by checking which letter of the alphabet is better placed on libraries’ shelves. “It was H”, she says. And “Robin” is intentionally gender neutral. (In the books, The Fool is similarly careful about gender, refusing to reveal whether they are male or female.) Her process for naming characters is more obscure: “It happens in a part of my mind which I don’t have access to. They step out on to the stage with a name”, she explains with a fond smile. In her universe, names can embody a character’s virtues – like the noble brothers Chivalry, Nimble, Swift, Steady, Just and Hearth – or make them reflect poorly on their actions – like the captain Kyle Haven, whose greediness creates endless troubles for his ship and family’s business. The sailor Brashen, a character from her Liveship Traders series, was named after the “very best deckhands” and a colleague of Hobb’s husband, who is a marine engineer. Now, just like George RR Martin’s Khaleesi, there are children named after Brashen and his lover Althea. “It’s a very strange feeling, because I think: ‘Will the child like this when they are older?’” she worries. Hobb has learned to “fit writing wherever” she can, because when she started, there was no time to waste: “I was a mother with small children, my husband was at sea and I also had a job.” Fitz and the Fool, Bee, Brashen and Althea grew up in “different pieces of time” in-between her other life, the one spent raising four children at the farm, “with chickens and ducks and things”. During the writing of Assassin’s Apprentice, her youngest daughter was about three years old. When approaching her deadline, Hobb made her daughter sit on a cushion on the floor and played Disney’s Beauty and the Beast on a loop while she wrote. Now Hobb will write over her morning coffee, then feed the farm’s animals, fix things around the farm and come back to the writing. “All the time when I am not writing, I am thinking about it. That enables me to come back and say ‘Now I know how the conversation will go,’ or ‘Now I know what they will do next’,” she explains. “So even when I am not writing, I am still writing.” There are still children at the farm – they’re just her grandchildren now. “If I’m busy, I will say: ‘There's a package of hotdogs in the refrigerator, go outside and build a little fire, find some sticks, you'll be fine’.” She laughs: “Sometimes it's a disaster, but often they just learn to do things for themselves and it works out.” Hobb hasn’t ruled out coming back to the Elderlings, but she is currently writing something new: an urban fantasy story based near Tacoma, Washington State, where she lives. “It’s a story I have wanted to write for a long time, but I don’t know if anyone will want to publish it.” If no one does – which the New Statesman, and thousands of fans, highly doubt – there will always be the farm. Tending her animals, imagining dragons."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@NewStatesman"/>
+<meta name="twitter:creator" content="@NewStatesman"/>
+<meta name="twitter:creator:id" content="19906615"/>
+<meta name="twitter:url" content="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"/>
+<meta name="twitter:description" content="The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons."/>
+<title>Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm</title>
+<link href="//web.archive.org/web/20201111202014cs_/https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<script src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/vendor/modernizr.js"></script>
+<script>
+  var j = 1;
+</script>
+
+<link rel="icon" href="/web/20201111202014im_/https://www.newstatesman.com/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="57x57" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/web/20201111202014im_/https://www.newstatesman.com/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/web/20201111202014im_/https://www.newstatesman.com/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/web/20201111202014im_/https://www.newstatesman.com/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/web/20201111202014im_/https://www.newstatesman.com/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/web/20201111202014im_/https://www.newstatesman.com/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/web/20201111202014/https://www.newstatesman.com/manifest.json">
+<link rel="mask-icon" href="/web/20201111202014im_/https://www.newstatesman.com/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--<meta name="google-site-verification" content="-wzk9l4dBtL8YHJVF-afrZXha3QSFTKJvhfaoTyOL2Y" />--->
+
+<!--[if gt IE 9 | !IE ]><!-->
+            <link href="/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/paywall/assets/css/ev-widgets.min.css" rel="stylesheet">
+      <link href="/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/paywall/assets/css/ev-widgets.min.old.css" rel="stylesheet">
+            <link href="/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/paywall/assets/css/prefixed-bootstrap.css" rel="stylesheet">
+            <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/modules/paywall/assets/js/ev-dab.min.js?ver=1.2.2"></script>
+            <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/modules/paywall/assets/js/ev-widgets.min.js?ver=3.10.1"></script>
+            <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/modules/paywall/assets/js/ev-em.min.js?ver=3.2.23"></script>
+          <![endif]-->
+<!-- Online Advertising -->
+<script type="text/javascript">
+    window.AD_UNITS_TOGGLE_OFF = [];
+</script>
+
+
+<!-- <script type="text/javascript" src="//static.amp.services/clients/GlobalData/NewStatesman.js"></script> -->
+
+
+<script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_qikmINIYTWe4jcTUn8cKiMr8bmSDiZB9LQqvceZ6wlM.js"></script>
+<script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_2Q3jNFDf0xz3ING3Dtu9yrLuDlW4H871wLsiOwIVRyg.js"></script>
+<script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_3mkg0A9u230eWCNAeIeCEbnBIJYCusRC62ogbeUkpAM.js"></script>
+<script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_b1LdZPsRQvN6IqA5q9Z4r2pE7uN2ni4g_wCMWipqjR0.js"></script>
+<script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_zA2FqiIEhPQVoIfb60HrIjQx8QZVuB6SsuEYo9Y4UH0.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"creative_responsive_theme","theme_token":"kC3BAV2VTuqkGvb5LQQSPEemMmnz3O5DLvePiHi0tZM","jquery_version":"default","js":{"sites\/all\/modules\/NS_custom\/js\/geo-ads.js":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/eu_cookie_compliance\/js\/jquery.cookie-1.4.1.min.js":1,"misc\/jquery.form.js":1,"sites\/all\/modules\/views_slideshow\/js\/views_slideshow.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/jquery_update\/js\/jquery_update.js":1,"sites\/all\/modules\/google_cse\/google_cse.js":1,"sites\/all\/modules\/NS_custom\/js\/custom-us.js":1,"sites\/all\/modules\/lazyloader\/jquery.lazyloader.js":1,"sites\/all\/modules\/simple_cookie_compliance\/js\/simple_cookie_compliance.js":1,"sites\/all\/modules\/service_links\/js\/facebook_like.js":1,"sites\/all\/modules\/service_links\/js\/twitter_button.js":1,"sites\/all\/modules\/service_links\/js\/facebook_share.js":1,"misc\/progress.js":1,"sites\/all\/modules\/cs_adaptive_image\/cs_adaptive_image.js":1,"sites\/all\/modules\/vscc\/js\/vscc.js":1,"sites\/all\/libraries\/jquery.cycle\/jquery.cycle.all.js":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/js\/views_slideshow_cycle.js":1,"sites\/all\/themes\/creative-responsive-theme\/js\/custom.js":1,"sites\/all\/themes\/creative-responsive-theme\/js\/hideads.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/views_slideshow\/views_slideshow.css":1,"modules\/book\/book.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/NS_custom\/css\/custom.css":1,"sites\/all\/modules\/paywall\/assets\/css\/ev-custom.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/lazyloader\/lazyloader.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/default\/files\/sl_sprites.css":1,"sites\/all\/modules\/simple_cookie_compliance\/css\/simple_cookie_compliance.css":1,"sites\/all\/modules\/vscc\/vscc.css":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/views_slideshow_cycle.css":1,"sites\/all\/themes\/creative-responsive-theme\/style.css":1,"sites\/all\/themes\/creative-responsive-theme\/styles\/style-america.css":1}},"googleCSE":{"cx":"014587529549946006773:q0ke2unon2y","language":"en","resultsWidth":800,"domain":"www.google.com"},"custommodule":{"currentNid":"315078"},"ws_fl":{"width":90,"height":21},"ws_fs":{"type":"icon_link","app_id":"150123828484431","css":""},"better_exposed_filters":{"views":{"event_section":{"displays":{"event_featured_article":{"filters":[]}}},"related_book":{"displays":{"block":{"filters":[]}}},"ns_new_offers":{"displays":{"articlefooterspromo":{"filters":[]}}},"ns_offers_america":{"displays":{"articlefooterspromo":{"filters":[]}}},"spotlight_carousel_us":{"displays":{"block_2":{"filters":[]}}},"article_footer_promotion_culture":{"displays":{"articlefooterspromo":{"filters":[]}}},"article_footer_promotion_uk_politics":{"displays":{"articlefooterspromo":{"filters":[]}}},"article_footer_promotion_international_politics":{"displays":{"articlefooterspromo":{"filters":[]}}},"related_block":{"displays":{"block_3":{"filters":[]}}}}},"viewsSlideshow":{"spotlight_carousel_us-block_2_1":{"methods":{"goToSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"nextSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"pause":["viewsSlideshowControls","viewsSlideshowCycle"],"play":["viewsSlideshowControls","viewsSlideshowCycle"],"previousSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"transitionBegin":["viewsSlideshowPager","viewsSlideshowSlideCounter"],"transitionEnd":[]},"paused":0}},"viewsSlideshowControls":{"spotlight_carousel_us-block_2_1":{"top":{"type":"vsccControls"}}},"viewsSlideshowCycle":{"#views_slideshow_cycle_main_spotlight_carousel_us-block_2_1":{"num_divs":3,"id_prefix":"#views_slideshow_cycle_main_","div_prefix":"#views_slideshow_cycle_div_","vss_id":"spotlight_carousel_us-block_2_1","effect":"fade","transition_advanced":1,"timeout":5000,"speed":500,"delay":2000,"sync":1,"random":0,"pause":1,"pause_on_click":0,"play_on_hover":0,"action_advanced":1,"start_paused":0,"remember_slide":0,"remember_slide_days":1,"pause_in_middle":0,"pause_when_hidden":0,"pause_when_hidden_type":"full","amount_allowed_visible":"","nowrap":0,"pause_after_slideshow":0,"fixed_height":1,"items_per_slide":1,"wait_for_image_load":1,"wait_for_image_load_timeout":3000,"cleartype":1,"cleartypenobg":1,"advanced_options":"{}"}},"ajax":{"edit-submit--2":{"callback":"simple_cookie_compliance_dismiss_form_submit","progress":{"type":"none"},"wrapper":"cookie-compliance","event":"mousedown","keypress":true,"prevent":"click","url":"\/system\/ajax","submit":{"_triggering_element_name":"op","_triggering_element_value":"OK"}}},"urlIsAjaxTrusted":{"\/system\/ajax":true,"\/culture\/books\/2018\/07\/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm":true}});
+//--><!]]>
+</script>
+ 
+<style type="text/css" media="all">
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/system/system.base.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/system/system.menus.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/system/system.messages.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/system/system.theme.css?qjnaq1");
+</style>
+<style type="text/css" media="all">
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/views_slideshow/views_slideshow.css?qjnaq1");
+</style>
+<style type="text/css" media="all">
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/book/book.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/date/date_api/date.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/field/theme/field.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/node/node.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/NS_custom/css/custom.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/paywall/assets/css/ev-custom.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/search/search.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/modules/user/user.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/views/css/views.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/lazyloader/lazyloader.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/ckeditor/css/ckeditor.css?qjnaq1");
+</style>
+<style type="text/css" media="all">
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/ctools/css/ctools.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/default/files/sl_sprites.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/simple_cookie_compliance/css/simple_cookie_compliance.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/vscc/vscc.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/modules/views_slideshow/contrib/views_slideshow_cycle/views_slideshow_cycle.css?qjnaq1");
+</style>
+<style type="text/css" media="all">
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/style.css?qjnaq1");
+@import url("https://web.archive.org/web/20201111202014cs_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/styles/style-america.css?qjnaq1");
+</style>
+
+
+<meta name="google-site-verification" content="GfOJMinBD7e8A_EFHIWacMNjU-AM1WaPrpnAVzwr7-4"/>
+<meta name="DCSext.WebsiteName" content="www.newstatesman.com"/>
+<meta name="google-site-verification" content="VQBn5aoKTz9xmgAiIklPg5sTDXy91sVHxXA4HtRot-g"/>
+
+
+<!-- Facebook Conversion Code for Checkouts - New Statesman 1 -->
+    <script>(function() {
+    var _fbq = window._fbq || (window._fbq = []);
+    if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//web.archive.org/web/20201111202014/https://connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+    }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '6025943409225', {'value':'0.00','currency':'GBP'}]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://web.archive.org/web/20201111202014im_/https://www.facebook.com/tr?ev=6025943409225&amp;cd[value]=0.00&amp;cd[currency]=GBP&amp;noscript=1"/></noscript>
+    
+    <!-- Facebook tracking pixel -->
+    <script>(function() {
+    var _fbq = window._fbq || (window._fbq = []);
+    if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//web.archive.org/web/20201111202014/https://connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+    }
+    _fbq.push(['addPixelId', '526380280843209']);
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', 'PixelInitialized', {}]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://web.archive.org/web/20201111202014im_/https://www.facebook.com/tr?id=526380280843209&amp;ev=PixelInitialized"/></noscript>
+    
+
+<!-- Facebook Conversion Code for New Statesman - MasterBrand Philips 2015 -->
+      <script>(function() {
+      var _fbq = window._fbq || (window._fbq = []);
+      if (!_fbq.loaded) {
+      var fbds = document.createElement('script');
+      fbds.async = true;
+      fbds.src = '//web.archive.org/web/20201111202014/https://connect.facebook.net/en_US/fbds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(fbds, s);
+      _fbq.loaded = true;
+      }
+      })();
+      window._fbq = window._fbq || [];
+      window._fbq.push(['track', '6032031760848', {'value':'0.00','currency':'GBP'}]);
+      </script>
+      <noscript><img height="1" width="1" alt="" style="display:none" src="https://web.archive.org/web/20201111202014im_/https://www.facebook.com/tr?ev=6032031760848&amp;cd[value]=0.00&amp;cd[currency]=GBP&amp;noscript=1"/></noscript>
+	  <script type="text/javascript"> 
+		if(location.hostname=='critiquetimes.com'){ window.location.href='https://web.archive.org/web/20201111202014/https://critiquetimes.com/'; }
+	  </script>
+<!-- end of Facebook Conversion Code- MasterBrand Philips 2015 -->
+
+
+<!-- OnScroll tag: New Statesman -->
+<!-- <script src="//tags.onscroll.com/3380db1e-7e02-4e5d-b02b-291ba90d3565/tag.min.js" async defer></script> -->
+
+<!-- Hotjar Tracking Code for www.newstatesman.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:899208,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://web.archive.org/web/20201111202014/https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+ <!-- On mouse hover sponsered artilce --->
+
+ <!-- On mouse hover sponsered artilce --->
+  
+
+<!--- Added Organization name and address for structure data elements ------>	
+	<script type="application/ld+json">
+	{
+	  "@context": "https://web.archive.org/web/20201111202014/http://schema.org",
+	  "@type": "Organization",
+	  "url": "https://web.archive.org/web/20201111202014/https://www.newstatesman.com/us",
+	  "name": "Newstatesman."
+	 
+     
+	}
+</script>
+<!--- End Organization name and address for structure data elements -->
+<!-- Unruly tracking Code ----->
+<script>
+var unruly = window.unruly ||{};
+unruly.native = unruly.native || {};
+unruly.native.siteld=1080927;
+</script>
+<!-- <script src="//video.unrulymedia.com/native/native-loader.js"></script> -->
+<!--unruly tracking code---->
+<!-- unruly script--->
+<!-- head script  start -->
+
+
+<!-- <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/5269235/New_Statesman/1x3', [1, 3], '1x3').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
+  });
+</script> -->
+<!-- head script  End-->
+
+<!-- unruly script---->
+
+
+
+
+
+<script>
+  dataLayer = [{
+    'nodeID': '315078',
+    'title': 'Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm',
+    'type': 'longread',
+    'categories': 'Culture,Books',
+    'NSgeo' : 'US',
+    'publishedDate': '2018-07-27 15:47:34',
+    'authorName': 'Pauline Bock'
+  }];
+</script>
+
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://web.archive.org/web/20201111202014/https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCSDN56');</script>
+<!-- End Google Tag Manager -->
+
+   
+<script async src="https://web.archive.org/web/20201111202014js_/https://cdn.permutive.com/e82dc6a7-79a5-49b7-b1ed-a89a37f2fe8b-web.js"></script>
+
+
+<script>  
+!function(n,e,o,r,i){if(!e){e=e||{},window.permutive=e,e.q=[],e.config=i||{},e.config.projectId=o,e.config.apiKey=r,e.config.environment=e.config.environment||"production";for(var t=["addon","identify","track","trigger","query","segment","segments","ready","on","once","user","consent"],c=0;c<t.length;c++){var f=t[c];e[f]=function(n){return function(){var o=Array.prototype.slice.call(arguments,0);e.q.push({functionName:n,arguments:o})}}(f)}}}(document,window.permutive,"e82dc6a7-79a5-49b7-b1ed-a89a37f2fe8b","62905692-4299-42af-951f-aa610546b2b1",{});  
+window.googletag=window.googletag||{},window.googletag.cmd=window.googletag.cmd||[],window.googletag.cmd.push(function(){if(0===window.googletag.pubads().getTargeting("permutive").length){var g=window.localStorage.getItem("_pdfps");window.googletag.pubads().setTargeting("permutive",g?JSON.parse(g):[])}});  
+permutive.addon('web', { page: {
+ article: { id:315078,
+  title:"Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm" 
+ }}});
+</script>
+
+<!-- Infinite Ad Serving 234 -->
+<script async src="https://web.archive.org/web/20201111202014js_/https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+    window.googletag = window.googletag || {cmd: []};
+    googletag.cmd.push(function() {
+        googletag.defineSlot('/5269235/New_Statesman/Unit1', [[320,50],[468,60],[728,90],[970,90],[970,250]], 'Unit1')
+                 .addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/Unit2', [[300, 600], [320, 50], [320, 100], [300, 250]], 'Unit2').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/Unit3', [[300, 600], [320, 50], [320, 100], [300, 250]], 'Unit3').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/Unit4', [[300, 600], [320, 50], [320, 100], [300, 250]], 'Unit4').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/Unit5', [[320, 50], [468, 60], [970, 90], [970, 250], [728, 90]], 'Unit5').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/Unit6', [[300, 250]], 'Unit6').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/1x1', [1, 1], '1x1').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/1x2', [1, 2], '1x2').addService(googletag.pubads());
+        googletag.defineSlot('/5269235/New_Statesman/1x3', [1, 3], '1x3').addService(googletag.pubads());
+
+        googletag.pubads().setTargeting( "Category", "Culture" );googletag.pubads().setTargeting( "SubCategory", "Books" );
+        googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+
+    });
+</script>
+
+
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+
+var first1=0;
+var first2=0;
+var first3=0;
+var first4=0;
+var first5=0;
+var first6=0;
+
+var article_type=1
+
+//alert(article_type);
+
+    //Load the second article onlym when you get to the bottom of the first.
+    jQuery(window).bind('scroll', function() {
+
+
+
+
+function detectmob() {
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+ else {
+    return false;
+  }
+}
+
+
+
+detectmobvalue=detectmob();
+
+
+      if(detectmobvalue===false && article_type==0){
+
+        // Desktop Ads
+
+       //alert ('not mobile');
+
+       // console.log('not mobile');
+
+        /*jQuery('.article-mpu-1').each(function() {
+
+            var count2 = jQuery("#container").find('.article-mpu-1').length;
+            count2 -= 1;
+
+
+            for (b = 0; b <= count2; b++) {
+
+                var element = jQuery(".article-mpu-1").eq(b);
+
+                var topOfElement = element.offset().top;
+                var bottomOfElement = element.offset().top + element.outerHeight(true);
+
+                var scrollTopPosition = jQuery(window).scrollTop() + $(window).height();
+                var windowScrollTop = jQuery(window).scrollTop()
+
+                if (windowScrollTop > topOfElement && windowScrollTop < bottomOfElement) {
+                    // Element is partially visible (above viewable area)
+                     console.log("article-mpu-1"+(b)+" is partially visible (above viewable area)");
+
+
+                    if (element.hasClass("Added") || b == 0) {
+                        if(b == 0){
+                           jQuery(".article-mpu-1").eq(1).empty();
+                           jQuery(".article-mpu-1").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-2").eq(1).empty();
+                           jQuery(".article-mpu-2").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-3").eq(1).empty();
+                           jQuery(".article-mpu-3").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-4").eq(1).empty();
+                           jQuery(".article-mpu-4").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+
+
+                        }
+
+
+                    } else {
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                         jQuery(".article-mpu-1").empty();
+                         jQuery(".article-mpu-1").removeClass("Added");
+
+                         jQuery(".article-mpu-2").empty();
+                         jQuery(".article-mpu-2").removeClass("Added");
+
+                         jQuery(".article-mpu-3").empty();
+                         jQuery(".article-mpu-3").removeClass("Added");
+
+                         jQuery(".article-mpu-5").empty();
+                         jQuery(".article-mpu-5").removeClass("Added");
+
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        element.append("<div id='Unit2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".article-mpu-2").last().append("<div id='Unit3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-3").last().append("<div id='Unit4'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".article-mpu-5").last().append("<div id='Unit6'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit6'); });<\/script><\/div>");
+                        jQuery(".video-inread").last().append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").last().append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+                        if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("Unit5");
+                            streamamp.refreshBids("Unit6");
+                            streamamp.refreshBids("1x3");
+
+
+
+                        }
+                        //first1++;
+
+
+                        element.addClass("Added");
+                        jQuery(".article-mpu-2").last().addClass("Added");
+                        jQuery(".article-mpu-3").last().addClass("Added");
+                        jQuery(".article-mpu-5").last().addClass("Added");
+                        jQuery(".video-inread").last().addClass("Added");
+                        jQuery(".bottom-leaderboard-section").last().addClass("Added");
+
+                         // alert('added all ads');
+                         console.log('article-mpu-2'+b);
+                         console.log('added all ads');
+                    }
+
+
+
+                } else if (windowScrollTop > bottomOfElement && windowScrollTop > topOfElement) {
+                    // Element is hidden (above viewable area)
+                    //   console.log("Element is hidden (above viewable area)");
+
+                    //jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+                } else if (scrollTopPosition < topOfElement && scrollTopPosition < bottomOfElement) {
+                    // Element is hidden (below viewable area)
+                    // console.log("Element is hidden (below viewable area)");
+
+                   // jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+
+                } else if (scrollTopPosition < bottomOfElement && scrollTopPosition > topOfElement) {
+                    // Element is partially visible (below viewable area)
+                    //console.log("Element is partially visible (below viewable area)");
+
+                } else {
+                    // Element is completely visible
+                    //console.log("Element is completely visible");
+
+                     console.log("article-mpu-1"+(b)+" is completely visible (above viewable area)");
+
+                    if (element.hasClass("Added") || b == 0) {
+                        if(b == 0){
+                           jQuery(".article-mpu-1").eq(1).empty();
+                           jQuery(".article-mpu-1").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-2").eq(1).empty();
+                           jQuery(".article-mpu-2").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-3").eq(1).empty();
+                           jQuery(".article-mpu-3").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-4").eq(1).empty();
+                           jQuery(".article-mpu-4").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+
+
+                        }
+
+
+                    } else {
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                         jQuery(".article-mpu-1").empty();
+                         jQuery(".article-mpu-1").removeClass("Added");
+
+                         jQuery(".article-mpu-2").empty();
+                         jQuery(".article-mpu-2").removeClass("Added");
+
+                         jQuery(".article-mpu-3").empty();
+                         jQuery(".article-mpu-3").removeClass("Added");
+
+                         jQuery(".article-mpu-5").empty();
+                         jQuery(".article-mpu-5").removeClass("Added");
+
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        element.append("<div id='Unit2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".article-mpu-2").last().append("<div id='Unit3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-3").last().append("<div id='Unit4'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".article-mpu-5").last().append("<div id='Unit6'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit6'); });<\/script><\/div>");
+                        jQuery(".video-inread").last().append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").eq(b).append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+                        if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("Unit5");
+                            streamamp.refreshBids("Unit6");
+                            streamamp.refreshBids("1x3");
+
+
+
+                        }
+                        //first1++;
+
+
+                        element.addClass("Added");
+                        jQuery(".article-mpu-2").last().addClass("Added");
+                        jQuery(".article-mpu-3").last().addClass("Added");
+                        jQuery(".article-mpu-5").last().addClass("Added");
+                        jQuery(".video-inread").last().addClass("Added");
+                        jQuery(".bottom-leaderboard-section").last().addClass("Added");
+
+                         // alert('added all ads');
+                         console.log('article-mpu-2'+b);
+                         console.log('added all ads');
+                    }
+
+
+                }
+
+            }
+
+        }); */
+
+
+
+
+  }else if(detectmobvalue===true){
+
+
+////////alert('mobile');
+ console.log('mobile');
+/// Mobile ADs
+
+  jQuery('.title.inf_class').each(function() {
+
+            var count2 = jQuery(".html").find('.title.inf_class').length;
+            count2 -= 1;
+
+            console.log(count2);
+
+
+            for (b = 0; b <= count2; b++) {
+
+                var element = jQuery(".title.inf_class").eq(b);
+
+                var topOfElement = element.offset().top;
+                var bottomOfElement = element.offset().top + element.outerHeight(true);
+
+                var scrollTopPosition = jQuery(window).scrollTop() + $(window).height();
+                var windowScrollTop = jQuery(window).scrollTop()
+
+                if (windowScrollTop > topOfElement && windowScrollTop < bottomOfElement) {
+                    // Element is partially visible (above viewable area)
+                     console.log("Element is partially visible (above viewable area)");
+
+          /*
+                      if (jQuery(".article-mpu-5").last().hasClass("Added")  || b == 0) {
+                        if(b == 0){
+
+                          //streamamp.refreshBids("Unit2");
+
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-51").eq(1).empty();
+                           jQuery(".article-mpu-51").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-52").eq(1).empty();
+                           jQuery(".article-mpu-52").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".video-inread1").eq(1).empty();
+                           jQuery(".video-inread1").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread2").eq(1).empty();
+                           jQuery(".video-inread2").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+                        }
+
+
+                   } else {
+
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                        jQuery(".article-mpu-5").empty();
+                        jQuery(".article-mpu-5").removeClass("Added");
+
+                        jQuery(".article-mpu-51").empty();
+                        jQuery(".article-mpu-51").removeClass("Added");
+
+                        jQuery(".article-mpu-52").empty();
+                        jQuery(".article-mpu-52").removeClass("Added");
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".video-inread1").empty();
+                        jQuery(".video-inread1").removeClass("Added");
+
+
+                        jQuery(".video-inread2").empty();
+                        jQuery(".video-inread2").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        jQuery(".article-mpu-5").last().append("<div id='Unit3' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-51").last().append("<div id='Unit4' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".article-mpu-52").last().append("<div id='Unit2' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".video-inread").last().append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".video-inread1").eq(b).append("<div id='1x1'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x1'); });<\/script><\/div>");
+                        jQuery(".video-inread2").eq(b).append("<div id='1x2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x2'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").last().append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+
+
+                       if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("1x3");
+                            streamamp.refreshBids("1x2");
+                            streamamp.refreshBids("1x1");
+                            streamamp.refreshBids("Unit5");
+
+                        }
+
+
+
+                        jQuery(".article-mpu-5").last().addClass("Added");
+                        jQuery(".article-mpu-51").last().addClass("Added");
+                        jQuery(".article-mpu-52").last().addClass("Added");
+                        jQuery(".video-inread").last().addClass("Added");
+                        jQuery(".video-inread1").last().addClass("Added");
+                        jQuery(".video-inread2").last().addClass("Added");
+                        jQuery(".bottom-leaderboard-section").last().addClass("Added");
+
+                         // alert('added all ads');
+                          console.log('added all ads');
+                    } */
+
+
+
+                } else if (windowScrollTop > bottomOfElement && windowScrollTop > topOfElement) {
+                    // Element is hidden (above viewable area)
+                    //   console.log("Element is hidden (above viewable area)");
+
+                    //jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+                } else if (scrollTopPosition < topOfElement && scrollTopPosition < bottomOfElement) {
+                    // Element is hidden (below viewable area)
+                    // console.log("Element is hidden (below viewable area)");
+
+                   // jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+
+                } else if (scrollTopPosition < bottomOfElement && scrollTopPosition > topOfElement) {
+                    // Element is partially visible (below viewable area)
+                    //console.log("Element is partially visible (below viewable area)");
+
+                } else {
+
+                    // Element is completely visible
+                    console.log("Element is completely visible");
+
+          /*
+                      if (jQuery(".article-mpu-5").last().hasClass("Added") || b == 0) {
+                        if(b == 0){
+
+
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-51").eq(1).empty();
+                           jQuery(".article-mpu-51").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-52").eq(1).empty();
+                           jQuery(".article-mpu-52").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".video-inread1").eq(1).empty();
+                           jQuery(".video-inread1").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread2").eq(1).empty();
+                           jQuery(".video-inread2").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+                        }
+
+
+                    } else {
+
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                        jQuery(".article-mpu-5").empty();
+                        jQuery(".article-mpu-5").removeClass("Added");
+
+                        jQuery(".article-mpu-51").empty();
+                        jQuery(".article-mpu-51").removeClass("Added");
+
+                        jQuery(".article-mpu-52").empty();
+                        jQuery(".article-mpu-52").removeClass("Added");
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".video-inread1").empty();
+                        jQuery(".video-inread1").removeClass("Added");
+
+
+                        jQuery(".video-inread2").empty();
+                        jQuery(".video-inread2").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        jQuery(".article-mpu-5").last().append("<div id='Unit3' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-51").last().append("<div id='Unit4' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".article-mpu-52").last().append("<div id='Unit2' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".video-inread").last().append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".video-inread1").eq(b).append("<div id='1x1'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x1'); });<\/script><\/div>");
+                        jQuery(".video-inread2").eq(b).append("<div id='1x2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x2'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").last().append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+
+
+                       if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("1x3");
+                            streamamp.refreshBids("1x2");
+                            streamamp.refreshBids("1x1");
+                            streamamp.refreshBids("Unit5");
+
+                        }
+
+
+
+                        jQuery(".article-mpu-5").last().addClass("Added");
+                        jQuery(".article-mpu-51").last().addClass("Added");
+                        jQuery(".article-mpu-52").last().addClass("Added");
+                        jQuery(".video-inread").last().addClass("Added");
+                        jQuery(".video-inread1").last().addClass("Added");
+                        jQuery(".video-inread2").last().addClass("Added");
+                        jQuery(".bottom-leaderboard-section").last().addClass("Added");
+
+                         // alert('added all ads');
+                          console.log('added all ads');
+                    } */
+                }
+
+            }
+
+        });
+
+
+  }else if(detectmobvalue===false && article_type==1){
+
+
+      //alert('long read');
+      console.log("long read");
+
+
+        jQuery('.title.inf_class').each(function() {
+
+            var count2 = jQuery(".html").find('.title.inf_class').length;
+            count2 -= 1;
+
+            console.log(count2);
+
+
+            for (b = 0; b <= count2; b++) {
+
+                var element = jQuery(".title.inf_class").eq(b);
+
+                var topOfElement = element.offset().top;
+                var bottomOfElement = element.offset().top + element.outerHeight(true);
+
+                var scrollTopPosition = jQuery(window).scrollTop() + $(window).height();
+                var windowScrollTop = jQuery(window).scrollTop()
+
+                if (windowScrollTop > topOfElement && windowScrollTop < bottomOfElement) {
+                    // Element is partially visible (above viewable area)
+                     console.log("Element is partially visible (above viewable area)");
+
+          /*
+                      if (jQuery(".article-mpu-5").eq(b).hasClass("Added") || jQuery(".article-mpu-51").eq(b).hasClass("Added")  || b == 0) {
+                        if(b == 0){
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-51").eq(1).empty();
+                           jQuery(".article-mpu-51").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-52").eq(1).empty();
+                           jQuery(".article-mpu-52").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".video-inread1").eq(1).empty();
+                           jQuery(".video-inread1").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread2").eq(1).empty();
+                           jQuery(".video-inread2").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+                        }
+
+
+                    } else {
+
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                        jQuery(".article-mpu-5").empty();
+                        jQuery(".article-mpu-5").removeClass("Added");
+
+                        jQuery(".article-mpu-51").empty();
+                        jQuery(".article-mpu-51").removeClass("Added");
+
+                        jQuery(".article-mpu-52").empty();
+                        jQuery(".article-mpu-52").removeClass("Added");
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".video-inread1").empty();
+                        jQuery(".video-inread1").removeClass("Added");
+
+
+                        jQuery(".video-inread2").empty();
+                        jQuery(".video-inread2").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        jQuery(".article-mpu-5").eq(b).append("<div id='Unit2' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".article-mpu-51").eq(b).append("<div id='Unit3' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-52").eq(b).append("<div id='Unit4' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".video-inread").eq(b).append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".video-inread1").eq(b).append("<div id='1x1'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x1'); });<\/script><\/div>");
+                        jQuery(".video-inread2").eq(b).append("<div id='1x2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x2'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").eq(b).append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+
+
+                       if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("1x3");
+                            streamamp.refreshBids("1x2");
+                            streamamp.refreshBids("1x1");
+                            streamamp.refreshBids("Unit5");
+
+                        }
+
+
+
+                        jQuery(".article-mpu-5").eq(b).addClass("Added");
+                        jQuery(".article-mpu-51").eq(b).addClass("Added");
+                        jQuery(".article-mpu-52").eq(b).addClass("Added");
+                        jQuery(".video-inread").eq(b).addClass("Added");
+                        jQuery(".video-inread1").eq(b).addClass("Added");
+                        jQuery(".video-inread2").eq(b).addClass("Added");
+                        jQuery(".bottom-leaderboard-section").eq(b).addClass("Added");
+
+                         // alert('added all ads');
+                          console.log('added all ads');
+                    }
+          */
+
+
+
+                } else if (windowScrollTop > bottomOfElement && windowScrollTop > topOfElement) {
+                    // Element is hidden (above viewable area)
+                    //   console.log("Element is hidden (above viewable area)");
+
+                    //jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+                } else if (scrollTopPosition < topOfElement && scrollTopPosition < bottomOfElement) {
+                    // Element is hidden (below viewable area)
+                    // console.log("Element is hidden (below viewable area)");
+
+                   // jQuery(".article-mpu-1").eq(b).empty();
+                   // jQuery(".article-mpu-1").eq(b).removeClass("Added");
+
+
+                } else if (scrollTopPosition < bottomOfElement && scrollTopPosition > topOfElement) {
+                    // Element is partially visible (below viewable area)
+                    //console.log("Element is partially visible (below viewable area)");
+
+                } else {
+                    // Element is completely visible
+                    console.log("Element is completely visible");
+          /*
+                      if (jQuery(".article-mpu-5").eq(b).hasClass("Added") || jQuery(".article-mpu-51").eq(b).hasClass("Added")  || b == 0) {
+                        if(b == 0){
+                           jQuery(".article-mpu-5").eq(1).empty();
+                           jQuery(".article-mpu-5").eq(1).removeClass("Added");
+
+
+                           jQuery(".article-mpu-51").eq(1).empty();
+                           jQuery(".article-mpu-51").eq(1).removeClass("Added");
+
+                           jQuery(".article-mpu-52").eq(1).empty();
+                           jQuery(".article-mpu-52").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread").eq(1).empty();
+                           jQuery(".video-inread").eq(1).removeClass("Added");
+
+
+                           jQuery(".video-inread1").eq(1).empty();
+                           jQuery(".video-inread1").eq(1).removeClass("Added");
+
+                           jQuery(".video-inread2").eq(1).empty();
+                           jQuery(".video-inread2").eq(1).removeClass("Added");
+
+
+                           jQuery(".bottom-leaderboard-section").eq(1).empty();
+                           jQuery(".bottom-leaderboard-section").eq(1).removeClass("Added");
+
+                        }
+
+
+                    } else {
+
+
+                        console.log('removed all ads');
+
+                          // Cleaning ads
+                        jQuery(".article-mpu-5").empty();
+                        jQuery(".article-mpu-5").removeClass("Added");
+
+                        jQuery(".article-mpu-51").empty();
+                        jQuery(".article-mpu-51").removeClass("Added");
+
+                        jQuery(".article-mpu-52").empty();
+                        jQuery(".article-mpu-52").removeClass("Added");
+
+                        jQuery(".video-inread").empty();
+                        jQuery(".video-inread").removeClass("Added");
+
+                        jQuery(".video-inread1").empty();
+                        jQuery(".video-inread1").removeClass("Added");
+
+
+                        jQuery(".video-inread2").empty();
+                        jQuery(".video-inread2").removeClass("Added");
+
+                        jQuery(".bottom-leaderboard-section").empty();
+                        jQuery(".bottom-leaderboard-section").removeClass("Added");
+
+
+
+                        jQuery(".article-mpu-5").eq(b).append("<div id='Unit2' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit2'); });<\/script><\/div>");
+                        jQuery(".article-mpu-51").eq(b).append("<div id='Unit3' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit3'); });<\/script><\/div>");
+                        jQuery(".article-mpu-52").eq(b).append("<div id='Unit4' class='sidebarad" + b + "'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit4'); });<\/script><\/div>");
+                        jQuery(".video-inread").eq(b).append("<div id='1x3'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x3'); });<\/script><\/div>");
+                        jQuery(".video-inread1").eq(b).append("<div id='1x1'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x1'); });<\/script><\/div>");
+                        jQuery(".video-inread2").eq(b).append("<div id='1x2'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('1x2'); });<\/script><\/div>");
+                        jQuery(".bottom-leaderboard-section").eq(b).append("<div id='Unit5'><script type='text/javascript'>googletag.cmd.push(function() { googletag.display('Unit5'); });<\/script><\/div>");
+
+
+                       if (b != 0) {
+
+                            streamamp.refreshBids("Unit2");
+                            streamamp.refreshBids("Unit3");
+                            streamamp.refreshBids("Unit4");
+                            streamamp.refreshBids("1x3");
+                            streamamp.refreshBids("1x2");
+                            streamamp.refreshBids("1x1");
+                            streamamp.refreshBids("Unit5");
+
+                        }
+
+
+
+                        jQuery(".article-mpu-5").eq(b).addClass("Added");
+                        jQuery(".article-mpu-51").eq(b).addClass("Added");
+                        jQuery(".article-mpu-52").eq(b).addClass("Added");
+                        jQuery(".video-inread").eq(b).addClass("Added");
+                        jQuery(".video-inread1").eq(b).addClass("Added");
+                        jQuery(".video-inread2").eq(b).addClass("Added");
+                        jQuery(".bottom-leaderboard-section").eq(b).addClass("Added");
+
+                         // alert('added all ads');
+                          console.log('added all ads');
+                    }
+          */
+                }
+
+            }
+
+        });
+
+  }
+
+
+
+
+    });
+});
+
+
+
+</script>
+
+</head>
+
+
+      <script>
+        EV.Core.init({
+            serviceName: "default",
+            realmName: "default_realm",
+            icDomain: "https://web.archive.org/web/20201111202014/https://cmp.evolok.net/ic/api",
+            recaptchaSiteKey: "6LcHrpAUAAAAAGAkDcosec3_d7Ssqggm8j9bz5e2"
+        });
+
+        EV.Translate.addTranslationTable("en", {
+          "ev.widgets.errors.attribute_validation_failed": "Details are invalid. Please enter valid details",
+          "ev.widgets.errors.general_attributes": "Details are invalid. Please enter valid details",
+          "ev.widgets.errors.general_attribute": "Details are invalid. Please enter valid details",          
+          "ev.widgets.errors.forgot_password_success": "Password reset email sent",
+          "ev.widgets.errors.duplicate_user_profile": "Email already exits! Please use different email for signup",        
+          "ev.widgets.errors.undefined_order_id": "The order has not been created. Please enter valid billing address and delivery address.",  
+          "ev.widgets.errors.invalid_form": "Please enter valid profile details.",  
+          "ev.widgets.errors.identifiers_invalid": "The password you have entered is incorrect. Please re-enter your password, or click the forgot password button below to reset it.",
+          "ev.widgets.errors.identifier_value_empty": "Please enter a valid email address.",
+          "ev.widgets.errors.validators_value_empty": "Please enter a valid password.",
+          "ev.widgets.productProfile.submit" : "Click To Proceed",
+          "ev.widgets.productSelection.orderType.GIFT": "Tick this box if this is a gift",
+          "ev.widgets.errors.not_robot": "Please tick the captcha box below",
+          "ev.widgets.accountactivation.success" : "Your account is successfully activated.",
+          "ev.widgets.accountactivation.warning" : "Couldn't find the activation key!.",
+          "ev.widgets.purchases.actions" : "Invite",          
+          "ev.widgets.purchases.numberBeneficiaries" : "Gifts Given",
+          "ev.widgets.stripe.cardNumber": "Enter your card number",
+          "ev.widgets.checkout.submit": "Confirm and Pay",
+          "ev.widgets.purchases.beneficiariesInput.beneficiaryLabel": "Beneficiary label key. Default: `Beneficiary`",
+          "ev.widgets.purchases.beneficiariesInput.beneficiaryPlaceholder": "Beneficiary placeholder key. Default: `Enter beneficiary email`",
+          "ev.widgets.purchases.beneficiariesInput.addBeneficiaryEmail": "Beneficiary label over input key. Default: `Add Beneficiary Email`",
+      "ev.widgets.gocardless.directDebitSuccessful": "Your payment is successful"
+        });
+
+      EV.Translate.setActiveLanguage("en", true);
+
+        EV.Widgets = {};
+        EV.Widgets.Display = {};
+
+        EV.Em.init({
+            url: "https://web.archive.org/web/20201111202014/https://cmp.evolok.net/acd/api/3.0",
+            sidCookieDomain: ".newstatesman.com",
+            meterHD: false
+        });
+
+        EV.Social.init({
+            icDomain: "https://web.archive.org/web/20201111202014/https://cmp.evolok.net/evolok-idm-web/api",
+            serviceName: "default",
+            realmName: "default_realm",
+            redirectUri: "/my-account",
+            socialAttributeMapping: {
+                "email_address": "email",
+                "first_name": "firstName",
+                "last_name": "lastName"
+            },
+            socialKeys: {
+                facebook   : "296323097570420",
+                google   : "733730641858-49sls9g1ol0ko0sv6eihg9gqhtrh6v7o.apps.googleusercontent.com",
+            }
+        });
+
+        EV.Event.init();
+
+        EV.PM.init({
+            pmDomain: "https://web.archive.org/web/20201111202014/https://cmp.evolok.net/pm/api/v2",
+            version: 2,
+            stripeKey: "pk_live_iGYXuxWCb49iOFMJ7G4F86Yy",
+        gocardlessKey: "r6pl7ZbTOkybdM2SZKNYissworK71NEhMFUeQGet",
+            skipSummary: false,
+            skipProfile: false,
+            skipValidation: false,
+            skipSessionCreation: false,
+            skipLogin: false
+        });
+
+
+        var TNS_Data = {};
+
+        TNS_Data.countries = [];
+
+        EV.Widgets.Display = {
+          "NewStatesman_The_Morning_Call_by_Stephen_Bush": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "Morning Call - your daily political briefing from Stephen Bush",
+                      "id": "true"
+                  }
+              }
+          },
+          "newsletterWeeklyHighlights": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "Weekly Highlights - a round up of coverage from the New Statesman",
+                      "id": "true"
+                  }
+              }
+          },
+         "newsletterCulture": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "New Statesman Dress Down - our weekly culture newsletter",
+                      "id": "true"
+                  }
+              }
+          },
+          /* "newsletterEveningCall": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "New Statesman Evening Call",
+                      "id": "true"
+                  }
+              }
+          },
+         */ "newsletterSpecialOffers": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "Information regarding NS events, subscription offers & product updates",
+                      "id": "true"
+                  }
+              }
+          },
+      "newsletterWorldReview": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "World Review - the New Statesman’s global affairs newsletter",
+                      "id": "true"
+                  }
+              }
+          },
+      /*"NS_Daily_Highlights_Newsletter": {
+              "type": "checkbox",
+              "values": {
+                  "true": {
+                      "caption": "Daily Highlights - your daily round up of coverage from the New Statesman team",
+                      "id": "true"
+                  }
+              }
+          },*/
+      
+          "NS_Archive_Newsletter": {
+            "type": "checkbox",
+            "values": {
+                "true": {
+                    
+          "caption": "From the Archive newsletter - a weekly dig into the New Statesman’s archive",
+                    "id": "true"
+                }
+            } 
+        },
+          "delivery_address": {
+              "type": "label",
+              "values": [{
+                  "caption": "Delivery Address",
+                  "value": "Delivery Address"
+              }]
+          }
+      };
+        TNS_Data.auth = {};
+        
+        EV.Dab.init();
+
+      </script>
+<!--- Evlolok init ENDS -->
+
+<!--Twitter conversion tracking pixel for philips -->
+
+<script src="https://web.archive.org/web/20201111202014js_/https://platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('ntow3', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://web.archive.org/web/20201111202014im_/https://analytics.twitter.com/i/adsct?txn_id=ntow3&amp;p_id=Twitter&amp;tw_sale_amount=0&amp;tw_order_quantity=0"/>
+<img height="1" width="1" style="display:none;" alt="" src="//web.archive.org/web/20201111202014im_/https://t.co/i/adsct?txn_id=ntow3&amp;p_id=Twitter&amp;tw_sale_amount=0&amp;tw_order_quantity=0"/>
+</noscript>
+
+<!-- End of Twitter conversion tracking pixel for philips -->
+
+
+
+
+
+
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-315078 node-type-longread page-america article-theme ">
+ 
+
+
+
+
+
+
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript><iframe id="gtm" src="https://web.archive.org/web/20201111202014if_/https://www.googletagmanager.com/ns.html?id=GTM-WCSDN56" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+ 
+<div class="tns-modal-wrapper"><div class="tns-modal tns-modal--login"><a><span class="ev-nslogo"><img src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/large/public/ns-ga.jpeg?itok=soqxWQNh"></span></a><a><span class="tns-ev-close tns-close">&times;</span></a><ev-login ev-ready="login_loaded" auth-scheme-name="default" forgot-password-service="edit_password" show-social="true" recaptcha="false" social-style="icons" social-networks="['facebook', 'google']" remember-me="true" title="Login" show-labels="false" show-header="false" show-container="false" auto-populate="true" submitbtn-caption="Log In" override-translation-key="ev.login">
+    </ev-login><span class="tns-right">Don't have an account? <a name="register" class="tns-goto-register" data-context="Login">Sign up</a></span></div><div class="tns-modal tns-modal--register"><a><span class="ev-nslogo"><img src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/large/public/ns-ga.jpeg?itok=soqxWQNh"></span></a><a><span class="tns-ev-close tns-close">&times;</span></a><ev-registration show-labels="false" show-header="false" id="registration" auth-scheme-name="default" recaptcha="true" service-name="default" title="register" submitbtn-caption="Create Account" auto-login="false" show-social="true" social-style="icons" social-networks="['facebook', 'google']" hidden-attributes="{'registration': 'true'}"></ev-registration><div class="tns-pp ng-scope">By registering, I Agree to the <a href="/web/20201111202014/https://www.newstatesman.com/terms/" target="_blank">Terms of Service</a> and <a href="/web/20201111202014/https://www.newstatesman.com/privacy-policy/" target="_blank">Privacy Policy</a></div><span class="tns-right">Already a member? <a name="login" class="tns-goto-login" data-context="Register">Log in</a></span></div><div class="tns-modal tns-modal--paywall ns-paywall--subscribe"><a><span class="tns-ev-close tns-close">&times;</span></a><ev-paywall modal="false"></ev-paywall></div><div class="tns-modal tns-modal--paywallNotifier ns-paywall--subscribe-mozila"><a><span class="tns-ev-close tns-close">&times;</span></a><ev-paywall-notifier modal="false"></ev-paywall-notifier></div><div name="sociallogin" class="tns-modal tns-modal--sociallogin"><a><span class="tns-ev-close tns-close">&times;</span></a><ev-social-registration id="socialRegistration" auth-scheme-name="default" service-name="registration" title="Create an Account" modal-keyboard="true" modal-backdrop="true" auto-populate="true" auto-register="false" show-error-msgs="true" submitbtn-caption="Create Account" cancel-anchor-caption="" show-labels="false">
+            </ev-social-registration></div><div class="tns-modal tns-modal--privateMode"><a><span class="tns-ev-close tns-close">&times;</span></a><div class="container-fluid">
+                          <div class="row">
+                              <div class="modal-header text-center">
+                                  <h1>NewStatesman</h1>
+
+                              <div class="modal-inkognito-window-actions">
+                                <div class="cta button-column ns_uk_btn"><a href="/web/20201111202014/https://www.newstatesman.com/subscribe12">Subscribe</a></div>
+                                
+                                <div class="cta button-column ns_international_btn"><a href="/web/20201111202014/https://www.newstatesman.com/int-subscribe">Subscribe</a></div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4 modal-content">
+                                      <h2 id="bannimg" class="text-center"><img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/modules/paywall/assets/img/private-modal.png" alt="Subscribe from just £1 per week"></h2>
+                                      <div class="text-center">
+                                          <h4 class="text-center">You are browsing in private mode.</h4>
+                                          <p class="modal-message">To enjoy all the benefits of our website</p>
+                                          <button name="login" class="tns-goto-login" data-context="paywall">LOG IN</button>
+                                          <span class="modal-options">or</span>
+                                          <button name="register" class="tns-goto-register register" data-context="Login">Create an Account</button>
+                                      </div>
+                              </div>
+                          </div>
+                      </div></div></div>
+ 
+  <div id="cookie-compliance" class="cookie-compliance clearfix">
+  <div class="cookie-compliance__inner">
+    <div class="cookie-compliance__text">
+          <p>This website uses cookies to help us give you the best experience when you visit our website. By continuing to use this website, you consent to our use of these cookies.</p>
+        </div>
+          <form action="/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" method="post" id="simple-cookie-compliance-dismiss-form" accept-charset="UTF-8"><div><input class="cookie-compliance__button form-submit" type="submit" id="edit-submit--2" name="op" value="OK"/><input type="hidden" name="form_build_id" value="form-9hBS-pP1K2hNYtiy381pOAkMUbRGz_JvpDaNz6BEA7Q"/>
+<input type="hidden" name="form_id" value="simple_cookie_compliance_dismiss_form"/>
+</div></form>      </div>
+</div>
+
+<noscript>
+  <div class="cookie-compliance clearfix">
+    <div class="cookie-compliance__inner">
+      <div class="cookie-compliance__text">
+              <p>This website uses cookies to help us give you the best experience when you visit our website. By continuing to use this website, you consent to our use of these cookies.</p>
+            </div>
+              <form action="/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" method="post" id="simple-cookie-compliance-dismiss-form" accept-charset="UTF-8"><div></div></form>          </div>
+  </div>
+</noscript>
+  
+<script>
+
+    function load_disqus(c,path)
+    {
+	    //var pageurl= '?q=/node/'+c;
+		//history.pushState('stateObj', "page 2", pageurl);
+		history.pushState('stateObj', "page 2", path);
+	   if(document.getElementById("disqus_thread"))
+	   {
+
+        var ano = document.getElementById("disqus_loader").getAttribute("class");
+			  if(ano.substr(13)==c)
+			  {
+				   var vis = document.getElementById("disqus_thread").getAttribute("style");
+				  if(vis == 'display: none;')
+				  {
+
+				  document.getElementById("disqus_thread").style.display = 'block';
+					return false;
+				  }
+				  else{
+
+					 document.getElementById("disqus_thread").style.display = 'none';
+					return false;
+				  }
+			  }
+
+
+
+
+
+	    var x = document.getElementById("disqus_thread").getAttribute("class");
+	   document.getElementById("disqus_thread").setAttribute("id", x);
+
+	    var y = document.getElementById("disqus_loader").getAttribute("class");
+	   document.getElementById("disqus_loader").setAttribute("id", y);
+
+	  // var ldr1 = document.getElementById(y);
+	   //ldr1.style.display = 'Block';
+
+	   }
+
+      document.getElementById("disqus_thread"+c).setAttribute("id", "disqus_thread");
+	  document.getElementById("disqus_loader"+c).setAttribute("id", "disqus_loader");
+
+	  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = "https://web.archive.org/web/20201111202014/https://newstatesman1913.disqus.com/embed.js";
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     // var ldr = document.getElementById('disqus_loader');
+     // ldr.parentNode.removeChild(ldr);
+	 // ldr.style.display = 'none';
+
+	  return false;
+    }
+
+	function showimage(id)
+   {
+	 var cls = document.getElementById(id).getAttribute("class");
+     var n = cls.indexOf("feature-image-revealed");
+    if(n < 0)
+    document.getElementById(id).setAttribute("class",cls+" feature-image-revealed");
+    else
+	 document.getElementById(id).setAttribute("class",cls.substr(0,n));
+     return;
+
+
+
+  }
+
+
+  </script>
+
+
+
+<!-- Hide Ad code -->
+<div class="leaderboard top-leaderboard">
+  <div class="row"> 
+
+  <!-- /ca-pub-8914899523938848/New_Statesman/Unit1 test -->
+ <div id="Unit1">
+    <script type="text/javascript">
+      googletag.cmd.push(function() { googletag.display('Unit1'); });
+    </script>
+  </div>
+  </div>
+</div>
+<!-- .top-leaderboard -->
+
+<header class="site-header header-america clearfix">
+  <div class="row">
+
+    <div class="ns-switcher">
+      <div class="mobile-login-container">
+        <button name="login" class="tns-btn tns-login"></button>  
+        <div class="ev-myaccount">
+          <button name="login" class="tns-login"></button> 
+          <ul class="ev-myaccount-list">
+            <li><a href="/web/20201111202014/https://www.newstatesman.com/my-account" class="navLoggedIn">My Account</a></li>
+            <li><a href="" class="navLoggedIn" onclick="javascript:EV.Core.UI.logout();">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+      <label for="check" class="ns-switcher_selected america_selected ns_international"><b>International EDITION</b> <small>INTL</small></label>
+      <!-- <label for="check" class="ns-switcher_selected america_selected"><b>America EDITION</b> <small>US</small></label> -->
+      <input id="check" type="checkbox">
+      <div class="ns-switcher_close">
+        <label onclick="javascript:location.href='/preference/edition?ver=UK';createCookie('STYXKEY_nsversion', 'UK', 30);" for="check"><b>UK EDITION</b> <small>UK</small></label>
+      </div>  
+    </div>
+    
+    <!--<a id="new_sub_button_mobile" class="last leaf menu-mlid-12703 subscribe-link">Subscribe</a>--> 
+    
+    <h1 class="site-logo">
+      
+      <a href="/web/20201111202014/https://www.newstatesman.com/international" title="Home"><img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/newstatesman_logo@2x.png" alt="New Statesman"/></a>
+
+          </h1>
+        <!--<div>
+      <div class="promotion">
+        <a href="/int-subscribe/"><img src="https://www.newstatesman.com/sites/default/files/styles/large/public/ns_subscribe.jpg" alt="12 issues for $12"></a>
+      </div>
+    </div>-->
+    <div class="header-promotion">
+	 			<div>
+				<div class="promotion">
+				
+							<a href="/web/20201111202014/https://www.newstatesman.com/xmas20?utm_source=website&amp;utm_medium=banner&amp;utm_campaign=christmas2020&amp;utm_term=save%2018%25%20Int"><img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/subscrybe_2020.jpg" alt="save 18% this Chrismas"></a>
+			
+
+
+
+
+
+				</div>
+			</div>
+			<div>
+				<div class="twitter-follow-promotion">
+					<!--<a href="https://twitter.com/NewStatesman"><strong>Follow us</strong> on Twitter Ratnam </a>--->
+					<a href="https://web.archive.org/web/20201111202014/https://twitter.com/statesmanworld"><strong>Follow us</strong> on Twitter </a>
+				</div>
+				<!-- .follow-promotion -->
+			</div>
+
+			<div>
+				<div class="podcast-promotion">
+					<a href="https://web.archive.org/web/20201111202014/https://play.acast.com/s/world-review/6274451b-71c4-43bb-930b-a623de443969" target="_blank"><small>New Statesman</small> <span>Podcast</span></a>
+				</div>
+				<!-- .podcast-promotion -->
+			</div>
+	<!-- 	<div>
+		<div class="twitter-follow-promotion">
+			<a href="https://twitter.com/NewStatesman"><strong>Follow us</strong> on Twitter </a>
+		</div>
+	</div>
+
+	<div>
+		<div class="podcast-promotion">
+			<a href="/podcast/"><small>New Statesman</small> <span>Podcast</span></a>
+		</div>
+	</div> -->
+
+
+</div>
+<!-- header-promotion -->
+
+  </div>
+  <!-- .row -->
+
+    <nav class="site-nav">
+        <div class="row">
+          <div class="nav-links">
+            <ul class="site-categories clearfix">
+                            <div class="region region-mainnav-us">
+  <div id="block-menu-block-5" class="block block-menu-block">
+
+      
+  <div class="content">
+    <div class="menu-block-wrapper menu-block-5 menu-name-menu-main-menu-america parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-12737"><a href="/web/20201111202014/https://www.newstatesman.com/">Home</a></li>
+<li class="leaf menu-mlid-12793"><a href="/web/20201111202014/https://www.newstatesman.com/us-election-2020">US 2020</a></li>
+<li class="leaf menu-mlid-12703"><a href="/web/20201111202014/https://www.newstatesman.com/international/coronavirus">Coronavirus</a></li>
+<li class="leaf has-children menu-mlid-12219 pl-removedmenu"><a href="/web/20201111202014/https://www.newstatesman.com/international/politics">Politics</a></li>
+<li class="leaf has-children menu-mlid-12704"><a href="/web/20201111202014/https://www.newstatesman.com/international/places">Places</a></li>
+<li class="leaf has-children menu-mlid-12225"><a href="/web/20201111202014/https://www.newstatesman.com/international/culture">Culture</a></li>
+<li class="last leaf has-children menu-mlid-12237 sl-removedmenu"><a href="/web/20201111202014/https://www.newstatesman.com/international/science-tech">Science &amp; Tech</a></li>
+</ul></div>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+                          </ul>
+            <div class="content-links-toggle">More</div>
+            <ul class="content-links">
+                            <div class="region region-mainnav2-us">
+  <div id="block-menu-block-6" class="block block-menu-block">
+
+      
+  <div class="content">
+    <div class="menu-block-wrapper menu-block-6 menu-name-menu-main-menu-2-america parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-12249 II"><a href="/web/20201111202014/https://www.newstatesman.com/long-reads">Long Reads</a></li>
+<li class="leaf menu-mlid-12250 mag-link"><a href="/web/20201111202014/https://www.newstatesman.com/magazine">Magazine</a></li>
+<li class="leaf has-children menu-mlid-12251 sp" id="sp"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight-america">Spotlight</a></li>
+<li class="last leaf menu-mlid-12722"><a href="/web/20201111202014/https://www.newstatesman.com/world-review">Newsletter</a></li>
+</ul></div>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+                          </ul>
+            <div class="mega-menu-row mega-menu row politics-mg">
+                <div class="close-hover-mega-menu">Close menu</div>
+
+                <div class="row">
+                  <div class="large-12 columns">
+                    <div class="row">
+                      <div class="large-9 columns">
+                                               </div>
+                      <div class="large-3 columns">
+                                               </div>
+                    </div>
+                    <!-- .row -->
+
+                    <div class="main-mega-menu-section">
+                      <div class="large-12 columns ns-network">
+
+                        <div class="mega-menu-logo">
+                          <img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/nsnetworks.png">
+                        </div>
+
+                        <div class="network-sites">
+                          <div class="row">
+                            <div class="large-4 columns">
+                              <h1>Consumer</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://www.citymetric.com/">CityMetric</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1>Business</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://tech.newstatesman.com/">New Statesman Tech</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">Spotlight</a></h1>
+                              <h2><a href="/web/20201111202014/https://www.newstatesman.com/cyber">Cyber</a></h2>
+                              <h2 class="viewall"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">View All</a></h2>
+
+
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .network-sites -->
+
+                      </div>
+                      <!-- .ns-network -->
+                    </div>
+                    <!-- .main-mega-menu-section -->
+
+                  </div>
+                  <!-- .large-8 -->
+
+                </div>
+                <!-- .row -->
+
+              </div>
+              <!-- .politics-mg -->
+
+            <div class="mega-menu-row mega-menu row culture-mg">
+                <div class="close-hover-mega-menu">Close menu</div>
+
+                <div class="row">
+
+                  <div class="large-12 columns">
+
+                    <div class="row">
+                      <div class="large-9 columns">
+                                               </div>
+                      <div class="large-3 columns">
+                                               </div>
+                    </div>
+                    <!-- .row -->
+
+                    <div class="main-mega-menu-section">
+                      <div class="large-12 columns ns-network">
+
+                        <div class="mega-menu-logo">
+                          <img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/nsnetworks.png">
+                        </div>
+
+                        <div class="network-sites">
+                          <div class="row">
+                            <div class="large-4 columns">
+                              <h1>Consumer</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://www.citymetric.com/">CityMetric</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1>Business</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://tech.newstatesman.com/">New Statesman Tech</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">Spotlight</a></h1>
+                              <h2><a href="/web/20201111202014/https://www.newstatesman.com/cyber">Cyber</a></h2>
+                             <!-- <h2><a href="https://www.newstatesman.com/northern-powerhouse">Northern Powerhouse</a></h2>
+                              <h2><a href="https://www.newstatesman.com/skills">Skills</a></h2>
+                              <h2><a href="https://www.newstatesman.com/manufacturing">Manufacturing</a></h2> <h2><a href="https://www.newstatesman.com/investment">Investment</a></h2>-->
+                              <h2 class="viewall"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">View All</a></h2></h2>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .network-sites -->
+
+                      </div>
+                      <!-- .ns-network -->
+                    </div>
+                    <!-- .main-mega-menu-section -->
+
+                  </div>
+                  <!-- .large-8 -->
+
+                </div>
+                <!-- .row -->
+              </div>
+              <!-- .culture-mg -->
+
+            <div class="mega-menu-row mega-menu row world-mg">
+                <div class="close-hover-mega-menu">Close menu</div>
+
+                <div class="row">
+
+                  <div class="large-12 columns">
+
+                    <div class="row">
+                      <div class="large-9 columns">
+                                               </div>
+                      <div class="large-3 columns">
+                                               </div>
+                    </div>
+                    <!-- .row -->
+
+                    <div class="main-mega-menu-section">
+                      <div class="large-12 columns ns-network">
+
+                        <div class="mega-menu-logo">
+                          <img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/nsnetworks.png">
+                        </div>
+
+                        <div class="network-sites">
+                          <div class="row">
+                            <div class="large-4 columns">
+                              <h1>Consumer</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://www.citymetric.com/">CityMetric</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1>Business</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://tech.newstatesman.com/">New Statesman Tech</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">Spotlight</a></h1>
+                              <h2><a href="/web/20201111202014/https://www.newstatesman.com/cyber">Cyber</a></h2>
+                             <!-- <h2><a href="https://www.newstatesman.com/northern-powerhouse">Northern Powerhouse</a></h2>
+                              <h2><a href="https://www.newstatesman.com/skills">Skills</a></h2>
+                              <h2><a href="https://www.newstatesman.com/manufacturing">Manufacturing</a></h2> <h2><a href="https://www.newstatesman.com/investment">Investment</a></h2>-->
+                              <h2 class="viewall"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">View All</a></h2></h2>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .network-sites -->
+
+                      </div>
+                      <!-- .ns-network -->
+                    </div>
+                    <!-- .main-mega-menu-section -->
+
+                  </div>
+                  <!-- .large-8 -->
+
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- world-mg -->
+
+            <div class="mega-menu-row mega-menu row science_tech-mg">
+                <div class="close-hover-mega-menu">Close menu</div>
+
+                <div class="row">
+
+                  <div class="large-12 columns">
+
+                    <div class="row">
+                      <div class="large-9 columns">
+                                               </div>
+                      <div class="large-3 columns">
+                                               </div>
+                    </div>
+                    <!-- .row -->
+
+                    <div class="main-mega-menu-section">
+                      <div class="large-12 columns ns-network">
+
+                        <div class="mega-menu-logo">
+                          <img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/nsnetworks.png">
+                        </div>
+
+                        <div class="network-sites">
+                          <div class="row">
+                            <div class="large-4 columns">
+                              <h1>Consumer</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://www.citymetric.com/">CityMetric</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1>Business</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://tech.newstatesman.com/">New Statesman Tech</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">Spotlight</a></h1>
+                              <h2><a href="/web/20201111202014/https://www.newstatesman.com/cyber">Cyber</a></h2>
+                             <!-- <h2><a href="https://www.newstatesman.com/northern-powerhouse">Northern Powerhouse</a></h2>
+                              <h2><a href="https://www.newstatesman.com/skills">Skills</a></h2>
+                              <h2><a href="https://www.newstatesman.com/manufacturing">Manufacturing</a></h2> <h2><a href="https://www.newstatesman.com/investment">Investment</a></h2>-->
+                              <h2 class="viewall"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">View All</a></h2></h2>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .network-sites -->
+
+                      </div>
+                      <!-- .ns-network -->
+                    </div>
+                    <!-- .main-mega-menu-section -->
+
+                  </div>
+                  <!-- .large-8 -->
+
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- ns_tech-mg -->
+
+
+			<div class="mega-menu-row mega-menu row event-mg">
+                <div class="close-hover-mega-menu">Close menu</div>
+
+                <div class="row">
+
+                  <div class="large-12 columns">
+
+                    <div class="row">
+
+                         
+                    </div>
+                    <!-- .row -->
+
+                    <div class="main-mega-menu-section">
+                      <div class="large-12 columns ns-network">
+
+                        <div class="mega-menu-logo">
+                          <img src="/web/20201111202014im_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/nsnetworks.png">
+                        </div>
+
+                        <div class="network-sites">
+                          <div class="row">
+                            <div class="large-4 columns">
+                              <h1>Consumer</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://www.citymetric.com/">CityMetric</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1>Business</h1>
+                              <h2><a href="https://web.archive.org/web/20201111202014/https://tech.newstatesman.com/">New Statesman Tech</a></h2>
+                            </div>
+                            <div class="large-4 columns">
+                              <h1><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">Spotlight</a></h1>
+                              <h2><a href="/web/20201111202014/https://www.newstatesman.com/cyber">Cyber</a></h2>
+                             <!-- <h2><a href="https://www.newstatesman.com/northern-powerhouse">Northern Powerhouse</a></h2>
+                              <h2><a href="https://www.newstatesman.com/skills">Skills</a></h2>
+                              <h2><a href="https://www.newstatesman.com/manufacturing">Manufacturing</a></h2> <h2><a href="https://www.newstatesman.com/investment">Investment</a></h2>-->
+                              <h2 class="viewall"><a href="/web/20201111202014/https://www.newstatesman.com/spotlight">View All</a></h2></h2>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .network-sites -->
+
+                      </div>
+                      <!-- .ns-network -->
+                    </div>
+                    <!-- .main-mega-menu-section -->
+
+                  </div>
+                  <!-- .large-8 -->
+
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- events -->
+
+            <div class="tns-evo-profile ev">
+              <button name="login" class="tns-btn tns-login">Login</button>  <button name="register" class="tns-btn tns-register">Register</button><a href="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/subscribe12" id="new_sub_button" class="last leaf menu-mlid-12703 subscribe-link">Subscribe</a>            </div>
+
+            </div>
+
+            
+
+            <div class="site-search"><div class="region region-search">
+  <div id="block-search-form" class="block block-search">
+
+      
+  <div class="content">
+    <form class="google-cse" action="/web/20201111202014/https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input title="Enter the terms you wish to search for." type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text"/>
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit"/></div><input type="hidden" name="form_build_id" value="form-aMZPaXfWfkR4N7tpK-M2cP26KHpGRtcDMfhbf_8gyKA"/>
+<input type="hidden" name="form_id" value="search_block_form"/>
+</div>
+</div></form>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+            <div class="mega-menu-toggle mobile-mega-menu-toggle">Menu</div>
+            <div class="search-toggle">Search</div>
+
+        </nav>  
+        
+<div class="subscribe-banner-mobile">
+	<div class="row">
+
+	<h1><a href="/web/20201111202014/https://www.newstatesman.com/int-subscribe" name="subscribe-mobile">Subscribe from just $2 per week  <i class="far fa-bell"></i></a></h1>
+</div></header>
+
+
+    
+
+  
+    
+
+                                  
+   <div class="region region-content">
+  
+          <script>
+jQuery(document.body).addClass('long-read-theme');
+</script>
+
+
+<input type="hidden" name="oldcat" id="oldcat" value=""/>
+<input type="hidden" name="noimage" id="noimage" value=""/>
+<script>
+//moreContent6();
+if(jQuery('#oldcat').val()!=''){
+                jQuery(document.body).addClass(jQuery('#oldcat').val());
+                }
+jQuery('#oldcat').val('culture');
+
+ </script>
+
+<script>
+if(jQuery('#noimage').val()!=''){
+                jQuery(document.body).addClass(jQuery('#noimage').val());
+                }
+jQuery('#noimage').val('imageexist');
+ </script>
+ 
+ 
+ 
+  
+  <main>    
+
+ <div class="article-featured-image parallax-layer parallax-layer-back"> 
+<img typeof="foaf:Image" src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/lead_image/public/Longreads_2018/07/robinhobb.jpg?itok=zftOgnIu" alt=""/> 
+   <div class="image-credit">
+    <!--
+THIS FILE IS NOT USED AND IS HERE AS A STARTING POINT FOR CUSTOMIZATION ONLY.
+See http://api.drupal.org/api/function/theme_field/7 for details.
+After copying this file to your theme's folder and customizing it, remove this
+HTML comment.
+-->
+
+  
+          Getty      
+
+	
+  </div>
+   	</div>	  
+</div> 
+
+         <div class="main-content " id="showhideimage315078">
+    <article class="article-column long-read-article-column">
+           
+    <div class="toggle-image" onclick="showimage('showhideimage315078')"><b>Show</b> <span>Hide</span> image</div>        <div id="node-315078" class="node node-longread node-full" about="/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm" typeof="sioc:Item foaf:Document">
+      <header class="article-header">
+                    <div class="article-category"> <a href="/web/20201111202014/https://www.newstatesman.com/culture/books">Books</a> </div>
+                            
+        <div class="article-date">
+          27 July 2018        </div>
+                  
+                      <h1 class="title inf_class" data-analyticsid="/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm">Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm</h1>
+       
+        <span property="dc:title" content="Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm" class="rdf-meta element-hidden"></span> <div class="field field-name-field-subheadline field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"> <p>
+	The author’s best selling fantasy books tackle complex topics like slavery, gender and sexual violence, in a magical world full of plotting pirates and forgotten dragons.</p>
+ </div></div></div>        <div class="article-author clearfix">
+                       
+                  <div class="multiple-author-images">
+ <div class="author-avatar"><img src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/pauline_bock.jpg"></div></div>             <div class="author-byline">By <a href="/web/20201111202014/https://www.newstatesman.com/writers/321634">Pauline Bock</a> </div>
+            <div class="author-twitter twitter-button">
+                <a href="https://web.archive.org/web/20201111202014/https://twitter.com/PaulineBock" class="twitter-follow-button" data-show-count="false">
+                        Follow @PaulineBock</a>               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>  
+            </div>    
+                  
+        </div>
+       
+		<div style="margin:2em 0 -2em 0; overflow: hidden; margin: auto;  max-width:50%;  padding-top:2.5em">
+
+					
+</div>
+        
+      </header>
+    </div>
+
+    <div class="row">
+        <div class="large-2 columns media-icons">
+        <div class="row comments-area">
+  
+    
+       <ul class="share-buttons">
+                <li class="facebook-button st_facebook_hcount"><a target="_blank" href="https://web.archive.org/web/20201111202014/http://www.facebook.com/sharer.php?u=https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm&amp;t=Robin+Hobb+on+changing+cultures%2C+writing+about+violence%2C+and+the+anonymity+of+living+on+a+farm"> <span class="stButton"> <span class="stMainServices st-facebook-counter">&nbsp;</span> <span class="stArrow"><span class="stBubble_hcount">
+                                    </span></span></span> </a></li>
+                <li class="twitter-button st_twitter_hcount"><a target="_blank" href="https://web.archive.org/web/20201111202014/http://twitter.com/share?text=Robin+Hobb+on+changing+cultures%2C+writing+about+violence%2C+and+the+anonymity+of+living+on+a+farm&amp;url=https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm"> <span class="stButton"> <span class="stMainServices st-twitter-counter">&nbsp;</span> <span class="stArrow"><span class="stBubble_hcount">
+                                    </span></span></span></a> </li>
+                <li class="reddit-button st_reddit_hcount"><a target="_blank" href="https://web.archive.org/web/20201111202014/http://www.reddit.com/submit?url=https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm&amp;title=Robin" hobb on changing cultures, writing about violence, and the anonymity of living on a farm> <span class="stButton"> <span class="reddit-button st_reddit_hcount"> &nbsp;</span> <span class="stArrow"><span class="stBubble_hcount">
+                                    </span></span></span></a> </li>
+                <li class="email-button st_email_hcount"><a href="https://web.archive.org/web/20201111202014/mailto:type email address here?subject=Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm &amp;body=https://www.newstatesman.com/culture/books/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm  " title="Email to a friend/colleague"> <span class="stButton"> <span class="stMainServices st-mail-counter">&nbsp;</span> <span class="stArrow"><span class="stBubble_hcount"></span></span></span></a></li>
+              
+              </ul>
+       </div> 
+
+       <div class="ns-form-item in-article-newsletter-form"><h3>Sign Up</h3><p>Get the New Statesman’s Morning Call email.</p> <div id="block-block-63" class="block block-block">
+
+        <div class="content">
+            <div class="cta">
+            <a href="/web/20201111202014/https://www.newstatesman.com/morning-call-email-newsletter">Sign-up</a></div>
+        </div>
+</div>
+        </div> <!-- /.block -->
+        </div> <!-- /.block -->
+
+      <section>
+        <div id="container" class="content node-longread">
+       
+<div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"> <p>
+	Robin Hobb is at peace. Last year, she put the final touches to a twenty-year long literary project: the intertwined stories of the Realm of the Elderlings, the fantasy epic that sold over a million copies. The 16-book series, divided into five parts, ran over two decades, starting with <em>Assassin’s Apprentice</em> (1995) and ending with <em>Assassin’s Fate</em> (2017). Over the course of 20 years, four trilogies and one quartet, characters from one book could re-appear in another, creating an ever-expanding web of complex societies, secret family lines, buried cities and uncharted islands. George RR Martin, with whom Hobb shares an editor, described her books as “diamonds in a sea of zircons”.
+<p>
+	“The last books of the <em>Farseer</em> were very hard for me to write, very emotional. For a year, I stopped writing,” Hobb, 66, told the <em>New Statesman</em> at the <a href="https://web.archive.org/web/20201111202014/https://www.imaginales.fr/invites/hobb-robin/">Imaginales festival in Epinal</a>, France, in May. Fans had travelled from Lille, in the north of France, and Marseilles, in the far south, to meet the author.
+<p>
+	When she is not writing best sellers, she lives on a small farm near Tacoma, Washington state. Robin Hobb is a pseudonym – her real name is Margaret Lindholm Ogden – and a cape of anonymity, a disguise she seems to enjoy. “I needed to go to the grocery store and I was still in my boots, and my jeans were dirty. And that never happens, but a woman came to me and said: ‘Oh, you’re that fantasy writer! You’re Melody Young!’” She has a tranquil laugh. “I really wanted to say yes, but I said ‘No, I am the other one’.” Hobb is measured about her success; the farm, she says, is work, too.
+<p>
+	Her books tell tales of dragons and pirates, of noblemen and royal plots, masterfully threaded with magic and adventure. The stories are immersive and the characters complex – Hobb alternates points of views from all ages, genders and social statuses with an elegant style. Set in different times and countries of the same world, the Elderlings<em> </em>epic allows Hobb to develop diverse societies – the matriarchal, business-oriented Bingtown; the macho, warring state of Chalced; the rough land of the Six Duchies; all colliding with the return of an ancient dragon race. By introducing cultural clashes between them, Hobb cleverly touches on the subjects of slavery, gender equality, political unrest and sexual violence. In Hobb’s world, whores become queens and gay characters live and love openly.
+<p>
+	Five series – trilogies of the <em>Farseer</em>, <em>The Liveship Traders</em>, <em>The Tawny Man</em>, <em>The Fitz and the Fool</em>, and the four books of <em>The Rain Wild</em> chronicles – may seem too vast a reading task, but the Realm of the Elderlings can be entered by many different doors. The <em>Liveship Traders</em> trilogy, for instance, a tale of economic collapse and political crises on the high seas, can be read entirely separately from the rest of the novels set in the same world.
+<p>
+	Like <em>Game of Thrones</em>, to which the <em>Elderlings</em> has been compared to for its tapestry of voices – although it is often more tightly threaded than <em>GoT</em>’s – the series seriously tackles political, sexual, and physical violence. Unlike <em>GoT</em>, it does so without glossing over or underplaying the consequences: “I try to express how horrifying and ugly violence is”, Hobb says. “I have read descriptions of violence in which it is almost like a beautiful, or a satisfying, or almost a sexual thing, and that always makes me uncomfortable as a reader.” Rape is present in the series, and Hobb made sure to write the scenes from the victim’s perspective. It reads as a traumatic, haunting experience that never fully leaves the characters it happens to. “I did not want it to be written as something lascivious or somehow exciting. I wanted it to be a terrible, terrible thing.”
+<p>
+	The brutality of conflicting regimes and the inhumane logic of for-profit economies manifest themselves in the development of a slave market. “Slavery is not really an old issue, it is an ongoing issue”, says Hobb, adding that where she lives, there have been cases of trafficked women, lured to the United States to be sexually exploited or work to repay their trip. “It is an ongoing thing, and I think it is important to remind people of what slavery is.”
+<p>
+	The Elderlings books never ignore women’s stories<strong>.</strong> In the <em>Liveship Traders</em> series, Hobb paints striking portraits of three generations of women caught in a political maelstrom. The matriarch, Ronica Vestrit, “lives to the old standards, and has not relinquished her power”, Hobb says. Her daughter Keffria has married a man whom she has let control her life: “She has said: ‘I will let my husband make the decisions, it is easier.’ And so you get an imbalance”, Hobb explains. “It can be dangerous.” Teenager Malta’s certitudes are overturned when puberty hits at the same time as violent revolts in her town. “Cultures change”, Hobb says, citing the positive example of Saudi women recently winning the right to drive. “But when regimes change, sometimes there are people who lose privilege, and it can come from above, as a legal system.” Her books are set in a medieval world, but resonate in our era: sometimes, like Keffria Vestrit, “if you do not exercise your power, it goes away”, Hobb says. Just like, perhaps, when you are so sure of what the result of the presidential election will be, that you do not vote: “If you do not vote, you lose your power.” That is as close as the American author will get to Trump’s name. To anyone who has read her books, “Grab her by the pussy” certainly sounds like a brag from the misogynist nation of Chalced.
+<p>
+	Unlike <em>Game of Thrones, </em>the adventures of the assassin Fitzchivalry, the dragon Tintaglia and the ship captain Althea have never been adapted for the screen. There has been a French graphic novel version of the <em>Liveship Traders</em>, but Hobb remains careful when dealing with potential adaptations. (She says she doesn’t have an agent for film or television, which complicates things.) And then, there’s the problem of the volume: “Sixteen books!” She laughs. “I think it would be very difficult series to make. You start with these characters in the<em> Farseer</em> trilogy, and then the next season they're all gone and we have a whole new cast. You could do alternating episodes, but I think it would be very complicated.” To play the Fool, one of her most beloved characters, she imagines “a very young David Bowie”. “Of course”, she adds, “it is far too late to hope for anything like that.”
+<p>
+	In Hobb’s<em> </em>Elderlings<em> </em>universe, names matter. Her own pen name was carefully chosen by checking which letter of the alphabet is better placed on libraries’ shelves. “It was H”, she says. And “Robin” is intentionally gender neutral. (In the books, The Fool is similarly careful about gender, refusing to reveal whether they are male or female.) Her process for naming characters is more obscure: “It happens in a part of my mind which I don’t have access to. They step out on to the stage with a name”, she explains with a fond smile. In her universe, names can embody a character’s virtues – like the noble brothers Chivalry, Nimble, Swift, Steady, Just and Hearth – or make them reflect poorly on their actions – like the captain Kyle Haven, whose greediness creates endless troubles for his ship and family’s business. The sailor Brashen, a character from her <em>Liveship Traders</em> series, was named after the “very best deckhands” and a colleague of Hobb’s husband, who is a marine engineer. Now, just like George RR Martin’s Khaleesi, there are children named after Brashen and his lover Althea. “It’s a very strange feeling, because I think: ‘Will the child like this when they are older?’” she worries.
+<p>
+	Hobb has learned to “fit writing wherever” she can, because when she started, there was no time to waste: “I was a mother with small children, my husband was at sea and I also had a job.” Fitz and the Fool, Bee, Brashen and Althea grew up in “different pieces of time” in-between her other life, the one spent raising four children at the farm, “with chickens and ducks and things”. During the writing of <em>Assassin’s Apprentice</em>, her youngest daughter was about three years old. When approaching her deadline, Hobb made her daughter sit on a cushion on the floor and played Disney’s <em>Beauty and the Beast</em> on a loop while she wrote. Now Hobb will write over her morning coffee, then feed the farm’s animals, fix things around the farm and come back to the writing. “All the time when I am not writing, I am thinking about it. That enables me to come back and say ‘Now I know how the conversation will go,’ or ‘Now I know what they will do next’,” she explains. “So even when I am not writing, I am still writing.”
+<p>
+	There are still children at the farm – they’re just her grandchildren now. “If I’m busy, I will say: ‘There's a package of hotdogs in the refrigerator, go outside and build a little fire, find some sticks, you'll be fine’.” She laughs: “Sometimes it's a disaster, but often they just learn to do things for themselves and it works out.”
+<p>
+	Hobb hasn’t ruled out coming back to the Elderlings, but she is currently writing something new: an urban fantasy story based near Tacoma, Washington State, where she lives. “It’s a story I have wanted to write for a long time, but I don’t know if anyone will want to publish it.” If no one does – which the <em>New Statesman</em>, and thousands of fans, highly doubt – there will always be the farm. Tending her animals, imagining dragons.
+ </div></div></div>            
+  
+            
+            
+                          <div class="about-the-author">
+                  <div class="row">
+
+                      
+
+                        <div class="large-2 columns author-avatar"><img src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/pauline_bock.jpg"></div>
+
+                        
+                                              <div class="large-10 columns author-details"> 
+                         <!-- <h3> </h3>-->
+                                                          <p>
+	Pauline Bock is a<em> New Statesman</em> contributing writer based in Brussels. She writes about Brexit, the EU, France and&nbsp;the Macron presidency.&nbsp;</p>
+                                                </div>
+  
+
+                                        </div>
+              </div>
+              <!-- .article-author -->
+                
+
+
+<div class="article-footer-promotion">
+              <div class="row">  
+              
+               <div id="block-views-84feadde90468bf7a90bb5de2b60c35f" class="block block-views">
+
+      
+  <div class="content">
+    <div class="view view-article-footer-promotion-culture view-id-article_footer_promotion_culture view-display-id-articlefooterspromo view-dom-id-1a6ea81c295a87f706e8babe19620813">
+        
+  
+  
+      <div class="view-content">
+        <div>
+      
+          <div class="large-2 small-2 columns magazine-cover"><img typeof="foaf:Image" src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/magazine-cover-thumb/public/magazinecovers/2020_46_america_after_trump_small.jpg?itok=saSd6Ej6" alt=""/></div>    
+          <div class="large-10 small-10 columns promotion-text-remove">
+             <h3></h3> 
+<div class="cta subscribe-link"><a href="/web/20201111202014/https://www.newstatesman.com/weboffer">Subscribe</a>
+<br/>
+For the latest TV, art, films and book reviews subscribe <strong>for just  £1 per month! </strong>
+</div> <span></span> 
+
+                </div>    </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+  
+</div> <!-- /.block -->
+               </div>
+            </div>
+			
+			
+			
+			
+
+                        <!-- .first-appeared-in -->
+    
+        </div>
+        </section>
+      </div>
+    </article>
+  </div>
+  
+</main>
+
+<footer class="article-footer">
+
+
+    <div class="row">
+      <div class="large-2 columns">
+            </div>
+
+    </div>
+
+	
+
+    <!-- Footer leaderboard working with infinite scroll -->
+    <div class="bottom-leaderboard" id="leaderboard" style="text-align: center;"> 
+
+          
+    </div>
+   
+  <!--//<div class="bottom-mpu-section article-mpu-4 mobile-banner"> </div>-->
+
+
+   
+</footer>
+
+
+
+<div class="row"><div class="secondary-content-box related-articles"><h4 class="scb-heading">Related articles</h4><div class="view view-related-block view-id-related_block view-display-id-block_3 view-dom-id-4fb7ee14ab04db47ddcac105426ecb1b">
+        
+  
+  
+      <div class="view-content">
+      <div class="item-list">    <ul class="row article-list horizontal-article-list">          <li class="large-4 columns">  
+  <div class="row">        <div class="large-4 small-4 xsmall-4 columns">
+                  <div class="article-image">
+                   <a href="/web/20201111202014/https://www.newstatesman.com/best-books-2020"><img typeof="foaf:Image" src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/thumbnail/public/Longreads_2020/11/2020_46_books_of_the_year_opener_new.jpg?itok=jBWBgRcl" alt=""/></a>
+                  </div>
+                </div>
+                <div class="large-8 small-8 xsmall-8 columns">
+                  <h5><a href="/web/20201111202014/https://www.newstatesman.com/best-books-2020">Books of the year </a> </h5>
+                </div>
+           </div></li>
+          <li class="large-4 columns">  
+  <div class="row">        <div class="large-4 small-4 xsmall-4 columns">
+                  <div class="article-image">
+                   <a href="/web/20201111202014/https://www.newstatesman.com/culture/books/2020/11/jbs-haldane-man-who-knew-almost-everything"><img typeof="foaf:Image" src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/thumbnail/public/Longreads_2020/11/2020_45_haldane.jpg?itok=GeFcpGny" alt=""/></a>
+                  </div>
+                </div>
+                <div class="large-8 small-8 xsmall-8 columns">
+                  <h5><a href="/web/20201111202014/https://www.newstatesman.com/culture/books/2020/11/jbs-haldane-man-who-knew-almost-everything">JBS Haldane: the man who knew almost everything </a> </h5>
+                </div>
+           </div></li>
+          <li class="large-4 columns">  
+  <div class="row">        <div class="large-4 small-4 xsmall-4 columns">
+                  <div class="article-image">
+                   <a href="/web/20201111202014/https://www.newstatesman.com/david-goodhart-head-hand-heart-michael-sandel-tyranny-merit-review"><img typeof="foaf:Image" src="https://web.archive.org/web/20201111202014im_/https://www.newstatesman.com/sites/default/files/styles/thumbnail/public/Longreads_2020/11/2020_45_meritocracy.jpg?itok=qCfMCX72" alt=""/></a>
+                  </div>
+                </div>
+                <div class="large-8 small-8 xsmall-8 columns">
+                  <h5><a href="/web/20201111202014/https://www.newstatesman.com/david-goodhart-head-hand-heart-michael-sandel-tyranny-merit-review">The myths of meritocracy</a> </h5>
+                </div>
+           </div></li>
+      </ul></div>    </div>
+  
+  
+  
+  
+  
+  
+</div></div></div><div class="clear"></div><!--<div id='dianomi-tags' class='row'>
+ <div class='secondary-content-box related-articles dianomi-sponsored'>   
+<iframe width="100%" height="690" scrolling="NO" src="//www.dianomi.com/smartads.epl?id=3402" style="width: 100%; border: none; overflow: hidden;"></iframe>
+</div>
+</div>--->
+
+<div id="leaderboards315078">
+<script type="text/javascript">
+//googletag.display('div-728-90-top_leader');
+</script>
+</div> 
+<!--</div>-->
+
+           <div style="display:none">
+	Free trial CSS</div>
+<script type="text/javascript">
+<!--//--><![CDATA[// ><!--
+ 
+if(location.hostname=='critiquetimes.com'){ window.location.href='critiquetimes.com'; }
+
+//--><!]]>
+</script>  
+<!--</div>-->
+</div>
+ <!-- /.region -->
+   
+<footer id="nsfooter">
+  <div class="row">
+    <div class="footerwrapper">
+      <div class="large-2 columns footerlogo">
+        <img src="https://web.archive.org/web/20201111202014im_/https://newstatesman.com/sites/all/themes/creative-responsive-theme/images/newstatesman_logo@2x.png" alt="">
+      </div>
+      <div class="large-10 columns">
+        <div class="link-footer">
+        <div class="region region-footer">
+  <div id="block-menu-menu-footer-menu" class="block block-menu">
+
+      
+  <div class="content">
+    <ul class="menu"><li class="first leaf"><a href="https://web.archive.org/web/20201111202014/http://www.newstatesmanmedia.com/">NS Media Group</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/about-new-statesman">About us</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/advertising">Advertising</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/contact-new-statesman">Contact us</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/history">History</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/privacy-policy">Privacy policy</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/page/rss">RSS feeds</a></li>
+<li class="leaf"><a href="https://web.archive.org/web/20201111202014/https://subscribe.newstatesman.com/">Subscribe</a></li>
+<li class="leaf"><a href="/web/20201111202014/https://www.newstatesman.com/terms-and-conditions">T&amp;Cs</a></li>
+<li class="last leaf"><a href="https://web.archive.org/web/20201111202014/http://www.newstatesman.com/page/supplements">Supplements</a></li>
+</ul>  </div>
+  
+</div> <!-- /.block -->
+<div id="block-block-51" class="block block-block">
+
+      
+  <div class="content">
+     <!-- Start of Leadin Embed --><script type="text/javascript" src="//web.archive.org/web/20201111202014js_/https://js.leadin.com/js/v1/2099850.js" id="LeadinEmbed-2099850" crossorigin="use-credentials" async="" defer="defer"></script><!-- End of Leadin Embed -->   </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+ 
+        </div>
+      </div>
+    </div>
+    <div class="large-12">
+      <div class="sociallist">
+          <ul>
+            <li><a href="https://web.archive.org/web/20201111202014/https://www.twitter.com/newstatesman"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="https://web.archive.org/web/20201111202014/https://en-gb.facebook.com/NewStatesman/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</footer>  <script type="text/javascript" src="https://web.archive.org/web/20201111202014js_/https://www.newstatesman.com/sites/default/files/js/js_nXx8MrPXgH_jG1ISY-wjTKRyeJKCW6AelxJ9o5T-Efk.js"></script>
+
+
+  
+    
+      <script src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/foundation.min.js"></script>
+      <script>
+          //$(document).foundation();
+      </script>
+      <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/ux.js"></script>
+      
+      <script type="text/javascript" src="//web.archive.org/web/20201111202014js_/https://code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script type="text/javascript" src="//web.archive.org/web/20201111202014js_/https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/slick/slick.min.js"></script>
+      <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/jquery.sticky.js"></script>
+	 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>---->
+	     <script src="https://web.archive.org/web/20201111202014js_/https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      heightStyle: "content"
+    });
+  } );
+  </script>
+	  
+	
+<script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/modules/paywall/assets/js/ev-custom.min.js?v=1.7.1"></script><script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/modules/paywall/assets/js/ev-ui.js"></script><script type="text/javascript">
+                // alert("loaded");
+                var params_obj = {"articleId": "315078", "category": "", "tags": "standard", "authors": "Pauline Bock", "section": "culture", "site": "US", "notifier": "true", "premium": "0"};
+
+                TNS_Data.articleId = 315078;
+                // articleId = 315078;
+                // console.log("req: "+ params);
+                // TNS_Data.auth.ev_emit( params );
+                // console.log(TNS_Data.auth.ev_queue);
+                // console.log(TNS_Data.auth.handleMeteringSuccess); 
+                TNS_Data.auth.init(params_obj);        
+              </script>
+
+
+<!--Subs -->
+<script type="text/javascript">
+  dynamic_button('US');
+  sessionStorage.removeItem("location");
+ sessionStorage.setItem("location", 'US');
+</script>
+      
+
+  <script type="text/javascript" src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/inArticleBanners.js"></script>
+ 
+
+
+<script type="text/javascript">
+$(".homepage_sticky").sticky({ topSpacing: 100 });
+</script>
+
+
+
+<script type="text/javascript">
+  $('.header-promotion').slick({
+      autoplay: true,
+      autoplaySpeed: 3000,
+    });
+
+ jQuery(document).ready(function(){
+		//setTimeout( function(){ 
+		
+			var current_height = $('.view-display-id-homepagesponsored').position();
+			if(current_height!=undefined){
+			//$('.sponsored-hover-2017').show();
+			$('.sponsored-hover-2017').css("top",current_height.top);
+			$('.joyride').css("top",current_height.top);
+			$('.joyride').css("bottom","auto");
+			}
+		/* Code for sending Sponsered article to GA on hover -- NNAS-2 */
+						
+			//jQuery(".sidebar-sponsored-article").hover(function(){
+			jQuery(".sidebar-sponsored-article-2017").hover(function(){
+			
+			
+			
+			// jQuery(".page-node .view-display-id-homepagesponsored:hover .sponsored-hover-2017").toggle();
+			// ga('send', 'pageview', match);
+			});
+      // var pageURL = $(location).attr("href");
+            // alert(pageURL);
+      if(window.location.href.indexOf("/2017/") > -1) {
+		//if(window.location.href=="https://web.archive.org/web/20201111202014/https://www.newstatesman.com/politics/brexit/2017/11/leader-brexit-betrayal"){
+		// if(window.location.href == "https://web.archive.org/web/20201111202014/https://np-ind-new-statesman.pantheonsite.io/politics/brexit/2017/11/leader-brexit-betrayal") {
+        $(".view-display-id-homepagesponsored").on("mouseover",function(){
+		var current_height = $(this).position();
+          $('.sponsored-hover-2017').show();
+		  $('.sponsored-hover-2017').css("top",current_height.top);
+		  $('.joyride').css("top",current_height.top);
+		  $('.joyride').css("bottom","auto");
+		  var match = $(this).find('div:first a').attr('href');
+		  console.log(match);
+		  // ga('send', 'pageview', match);
+		  ga('send', 'pageview', "https://web.archive.org/web/20201111202014/https://www.newstatesman.com"+match);
+        });
+		 $(".view-display-id-homepagesponsored").on("mouseleave",function(){
+		var current_height = $(this).position();
+		
+		          //$('.sponsored-hover-2017').delay(100000).hide();
+		          $('.sponsored-hover-2017').delay(4000).fadeOut();
+		  // $('.sponsored-hover-2017').css("top",current_height.top);
+		  // $('.joyride').css("top",current_height.top);
+        });
+		
+      }
+			
+	/* Code end for sending Sponsered article to GA on hover -- NNAS-2 */
+ jQuery('.supplements-thumb p img').removeAttr('style');   
+   jQuery('.supplements-thumb p img').each(function(){
+      jQuery(this).removeAttr('width');
+      jQuery(this).removeAttr('height');      
+   });   
+ });
+  
+</script>
+
+
+
+<!-- Google Code for Remarketing Tag -->
+<!-- <script type="text/javascript">
+var google_conversion_id = 975790991;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/975790991/?value=0&guid=ON&script=0"/>
+</div>
+
+</noscript> -->
+
+
+
+<!-- Google Code for Remarketing Tag end -->
+
+
+
+
+
+<!-- Ad-blocker -->
+
+<script src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/blockadblock.js"></script>
+
+<!-- Ad blocker content -->
+
+				
+				<!--<div class="donate" id="donate">
+					<div id="donate-close" class="donate-close"> X </div>
+				  
+															<br>
+					 
+						<div class="cta-link donate-link">
+							<a id="nothanks-link" href="#" style="text-decoration: none; padding: 10px; background:black;">No Thanks</a>&nbsp; &nbsp;&nbsp;&nbsp;
+							<a href="" style="text-decoration: none; padding: 10px;" target="_blank" id="gotofeedback"></a>
+						</div>
+						<br/><br/>
+									</div>-->
+				<div class="donate-toggle" id="donate-toggle" style="display:none;">
+					Close   ASD
+				</div>
+	
+
+<!-- Ad blocker content end-->
+
+<script>
+// $(function() {
+  if (!getCookie('donation')) {
+        $("#donate").show();
+        
+    }else{
+        $("#donate").hide();      
+        
+    }
+  
+$("#donate-close").click(function(){
+   // checkCookie();
+      //if(chek === true){
+        $("#donate").hide();
+      //}        
+        
+    });
+	
+$("#nothanks-link, #gotofeedback").click(function(){
+        checkCookie();
+        $("#donate").hide();
+
+    });
+
+//intiate the donation cookie
+function setCookie() {
+    var expdate = new Date ();
+      expdate.setTime (expdate.getTime() + (1 * 24 * 60 * 60 * 1000));
+      var expires = "expires="+expdate.toUTCString();
+      document.cookie="donation=Initiated ;"+expires+";path=/";
+      //window.location.href="https://web.archive.org/web/20201111202014/https://subscribe.newstatesman.com/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+//check if the user has payed and dontion cookie is set to payed
+function checkCookie() {
+  var expdate = new Date ();
+      expdate.setTime (expdate.getTime() + (1 * 24 * 60 * 60 * 1000));
+      var expires = "expires="+expdate.toUTCString();
+    var donate123 = getCookie("donation");
+    if (donate123 == "Initiated") {      
+        document.getElementById("donate").style.display="none";
+        document.getElementById("donate").style.display="none";
+        document.body.style.overflow = "visible";
+        document.cookie="donation=Payed ; path=/ ; expires = " + expires ;       
+    } else {
+          setCookie();
+        }    
+    }
+
+// });	
+
+
+// function hideDonationPopup() {
+//     var expdate = new Date ();
+//       expdate.setTime (expdate.getTime() + (24 * 60 * 60 * 1000));
+//       document.cookie="donationPopup=hide; path=/; expires = " + expdate ; 
+// }
+
+// $('.donate-toggle').click(function(e) { 
+
+// if(e.target.id!="donate123")
+// { 
+    // document.getElementById("donate123").style.display="none";
+    // document.getElementById("donate-toggle123").style.display="none";
+    // document.body.style.overflow = "visible";
+    // hideDonationPopup();
+  // }
+ // else{
+  //  e.stopPropagation();
+ // }
+//});
+
+// $('.donate-close').click(function(e) { 
+
+// if(e.target.id!="donate123")
+// { 
+    // document.getElementById("donate123").style.display="none";
+    // document.getElementById("donate-toggle123").style.display="none";
+    // document.body.style.overflow = "visible";
+    // hideDonationPopup();
+  // }
+ // else{
+  //  e.stopPropagation();
+ // }
+//});
+
+//for addressing donation complains.this function will set the cookie so that the donation popup is not showed for 60 days
+// function setDonationComplainCookie() {
+    // var expdate = new Date ();
+      // expdate.setTime (expdate.getTime() + (24 * 60 * 60 * 1000 * 60));
+      // document.cookie="donationPopup=Complain; path=/ ; expires = " + expdate ;  
+
+// }
+//for addressing donation complains of subscribers.this function will set the cookie so that the donation popup is never again showed
+// function setDonationSubscriberCookie() {
+    // var expdate = new Date ();
+      // expdate.setTime (expdate.getTime() + (24 * 60 * 60 * 1000 * 6000));
+      // document.cookie="donationPopup=Subscriber; path=/ ; expires = " + expdate ; 
+
+// }
+
+</script>
+
+
+<!--<script src="http://imakewebthings.github.com/jquery-waypoints/waypoints.min.js" type="text/javascript"></script>--->
+<script src="https://web.archive.org/web/20201111202014js_/https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.5/waypoints.min.js"></script>
+<script type="text/javascript">
+$(function() {   
+    $('#leaderslot2').waypoint(function() {
+      var PathName  = window.location.pathname;
+
+      alert(PathName);
+      ga('send', 'event', 'AdCount', PathName+' leaderslot2 view count', { "nonInteraction": 1 });
+        
+     }, {
+       offset: '100%'
+     });
+
+   $('.secondary-content-box.mpu.article-mpu-1').waypoint(function() {
+      var PathName  = window.location.pathname;
+      ga('send', 'event', 'AdCount', PathName+' article-mpu-1 view count', { "nonInteraction": 1 });
+     }, {
+       offset: '100%'
+     });
+
+   $('.secondary-content-box.mpu.article-mpu-2').waypoint(function() {
+      var PathName  = window.location.pathname;
+      ga('send', 'event', 'AdCount', PathName+' article-mpu-2 view count', { "nonInteraction": 1 });
+     }, {
+       offset: '100%'
+     });
+
+
+   $('.secondary-content-box.mpu.article-mpu-3').waypoint(function() {
+     var PathName  = window.location.pathname;
+     ga('send', 'event', 'AdCount', PathName+' article-mpu-3 view count', { "nonInteraction": 1 });
+
+     }, {
+       offset: '100%'
+     });
+
+
+});
+
+</script>
+
+<script>
+    var donate = getCookie("donation");
+    var donationPopup = getCookie("donationPopup");
+  // IP whitelist array 
+  //var ar = ["86.178.61.94"];
+  //var ar = ["115.119.113.194", "10.8.23.3","5.148.40.2","86.178.61.94"];
+  var ip = "10.223.192.155";
+  var ip_new = "91.200.82.73";
+  //alert(ip_new)
+  var temp_disable = true;
+  
+    /*if ( temp_disable || (donate == "Payed") || (donationPopup == "hide") || (donationPopup == "Complain")|| (donationPopup == "Subscriber"))
+        {           
+            document.getElementById("donate1234").style.display="none";
+            document.getElementById("donate-toggle12345").style.display="none";
+            document.body.style.overflow = "visible";
+        }*/
+    /* Code for IP whitelisting */
+    //else if(jQuery.inArray("86.178.61.94",ar) == 0){
+    //else if(jQuery.inArray("86.178.61.94",ar) == 0 || jQuery.inArray("115.119.113.194",ar) == 0 || jQuery.inArray("5.148.40.2",ar) == 0){
+     if(ip == "86.178.61.94" || ip_new == "86.178.61.94"){
+      //alert("In Array");
+      $( "#donate" ).css( "display","none" );
+      $( "#donate-toggle" ).css( "display","none" );
+      $( "body" ).css( "overflow","visible" );
+    }
+    /* Code end for IP whitelisting */
+        else
+        {
+            //alert("Inelse");
+			// document.getElementById('donate').style.display = 'block';
+            // document.getElementById('donate-toggle').style.display = 'block';
+            // document.body.style.overflow = "hidden";
+        }
+  
+    //alert('ad blocker detected');
+    jQuery(".ad-blocker-wraper").css("ad-blocker-detected");
+
+    function adBlockDetected() {
+      /* Event fired if adBlock is Detected */    
+    }
+    function adBlockNotDetected() {
+        //alert('No Adblocker found');
+    }
+
+    if (typeof blockAdBlock === 'undefined') {
+        adBlockDetected();
+    } else {
+        blockAdBlock.setOption({debug: true});
+        blockAdBlock.onDetected(adBlockDetected).onNotDetected(adBlockNotDetected);
+    }
+
+    function checkAgain() {
+
+        // setTimeout 300ms for the recheck is visible when you click on the button
+        setTimeout(function () {
+            if (typeof blockAdBlock === 'undefined') {
+                adBlockDetected();
+            } else {
+                blockAdBlock.onDetected(adBlockDetected).onNotDetected(adBlockNotDetected);
+                blockAdBlock.check();
+            }
+        }, 300);
+    }
+</script>
+
+
+<!-- Ad-blocker end -->
+
+
+
+
+<!-- <script>
+(function(){
+	
+  var test = document.createElement('div'); 
+  test.innerHTML = '&nbsp;';
+  test.className = 'adsbox';
+  document.body.appendChild(test);
+  window.setTimeout(function() {
+    if (test.offsetHeight === 0) {
+      ga('set', 'dimension1', 'Ads Blocked');
+      ga('send', 'event', 'AdSense', 'Ads blocked', { "nonInteraction": 1 });
+    }else{
+      ga('set', 'dimension1', 'Ads Displaying');
+      ga('send', 'event', 'AdSense', 'Ads not blocked', { "nonInteraction": 1 });
+    }
+    test.remove();
+  }, 100);
+})();
+</script> -->
+
+<script type="text/javascript">
+ jQuery(document).ready(function() {
+	 
+			
+jQuery("ul.event-months li").hover(
+  
+ function() {
+    jQuery(this).addClass("showevents");
+  
+  }, function() {
+    jQuery(this).removeClass("showevents");
+  }
+  
+);
+
+	// jQuery(".sidebar-sponsored-article").hover(function(){
+	// console.log("you made onover");
+	// jQuery(".sponsored-hover").toggle();
+	// });
+	
+	
+
+	
+			
+	});			
+ 
+ 
+ jQuery(".close-toggle").click(function(){ 
+	console.log("you made click");
+	jQuery(".joyride").toggle();
+	//jQuery(".joyride").hide();
+	});
+ </script>
+
+ 
+<!--Pardot Onboarding Tracking code-->
+ 
+
+<script type="text/javascript">
+piAId = '510131';
+piCId = '6800';
+piHostname = 'pi.pardot.com';
+
+(function() {
+	function async_load(){
+		var s = document.createElement('script'); s.type = 'text/javascript';
+		s.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20201111202014/https://pi' : 'https://web.archive.org/web/20201111202014/http://cdn') + '.pardot.com/pd.js';
+		var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+	}
+	if(window.attachEvent) { window.attachEvent('onload', async_load); }
+	else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+
+
+
+<!--Pardot Onboarding Tracking code-->
+<!-- <script src="/sites/all/themes/creative-responsive-theme/js/jquery.curlies.js"></script>
+ <script>
+    $(document).ready(function () {
+        $('body').curlies();
+    });
+    </script> -->
+	
+	<script src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/jquery.curlies.js"></script>
+ <script>
+    $(document).ready(function () {
+       
+        $('.home-section-1,.home-section-2,.home-section-3,.home-section-4,.home-section-5,.home-section-6,.make_equal,.main-content, .content, .conferences-theme ,.mag-title,.issue-contents,#post-content').curlies();
+    });
+    </script>
+
+<!-- Hiding ads script -->
+<script src="/web/20201111202014js_/https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/js/hideads.js"></script>
+
+<!-- Twitter universal website tag code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//web.archive.org/web/20201111202014/https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','o3aan');
+twq('track','PageView');
+</script>
+<!-- End Twitter universal website tag code -->
+<script>
+jQuery( ".node-blogs a" ).attr('target', '_blank');
+jQuery( ".node-longread a" ).attr('target', '_blank');
+
+</script>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam-cell.nr-data.net","licenseKey":"d4f02fb7e7","applicationID":"14767184","transactionName":"ZwEDZxBQXkZTAUJfVl5LIFAWWF9bHQxZUlxvFABUB25GXFcV","queueTime":0,"applicationTime":2167,"atts":"S0YAEVhKTUg=","errorBeacon":"bam-cell.nr-data.net","agent":""}</script></body>
+</html><!--
+     FILE ARCHIVED ON 20:20:14 Nov 11, 2020 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 05:21:13 Sep 06, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 0.531
+  exclusion.robots: 0.102
+  exclusion.robots.policy: 0.091
+  esindex: 0.006
+  cdx.remote: 15.501
+  LoadShardBlock: 107.538 (3)
+  PetaboxLoader3.datanode: 85.072 (5)
+  PetaboxLoader3.resolve: 71.656 (2)
+  load_resource: 118.651
+  loaddict: 37.728
+-->

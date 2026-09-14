@@ -1,0 +1,842 @@
+                                                           A Systematic Characterization of Sampling Algorithms
+                                                                   for Open-ended Language Generation
+                                                                Moin Nadeem∗                                          Tianxing He∗
+                                                      Massachusetts Institute of Technology                Massachusetts Institute of Technology
+                                                            mnadeem@mit.edu                                cloudygoose@csail.mit.edu
+
+                                                               Kyunghyun Cho                                          James Glass
+                                                             New York University                           Massachusetts Institute of Technology
+                                                          kyunghyun.cho@nyu.edu                                    glass@mit.edu
+
+                                                                   Abstract
+
+                                                 This work studies the widely adopted ancestral
+                                                 sampling algorithms for auto-regressive lan-
+
+
+
+
+arXiv:2009.07243v1 [cs.CL] 15 Sep 2020
+                                                 guage models, which is not widely studied in
+                                                 the literature. We use the quality-diversity (Q-
+                                                 D) trade-off to investigate three popular sam-
+                                                 pling algorithms (top-k, nucleus and tempered
+                                                 sampling). We focus on the task of open-ended
+                                                 language generation. We first show that the
+                                                 existing sampling algorithms have similar per-
+                                                 formance. After carefully inspecting the trans-
+                                                 formations defined by different sampling algo-
+                                                 rithms, we identify three key properties that
+                                                 are shared among them: entropy reduction, or-             Figure 1: Human evaluation (y-axis: quality, x-axis:
+                                                 der preservation, and slope preservation. To              diversity, both are the bigger the better) shows that
+                                                 validate the importance of the identified prop-           the generation performance of existing sampling algo-
+                                                 erties, we design two sets of new sampling al-            rithms are on par with each other.
+                                                 gorithms: one set in which each algorithm sat-
+                                                 isfies all three properties, and one set in which
+                                                 each algorithm violates at least one of the prop-            Decoding, i.e., finding the most probable output
+                                                 erties. We compare their performance with ex-
+                                                                                                           sequence from a trained model, is a natural prin-
+                                                 isting sampling algorithms, and find that vio-
+                                                 lating the identified properties could lead to            ciple for generation. The beam-search decoding
+                                                 drastic performance degradation, as measured              algorithm approximately finds the most likely se-
+                                                 by the Q-D trade-off. On the other hand, we               quence by performing breadth-first search over a
+                                                 find that the set of sampling algorithms that sat-        restricted search space. It has achieved success
+                                                 isfies these properties performs on par with the          in machine translation, summarization, image cap-
+                                                 existing sampling algorithms.1                            tioning, and other subfields.
+                                                                                                              However, in the task of open-ended language
+                                         1       Introduction                                              generation (which is the focus of this work), a sig-
+                                         A language model (LM) is a central module for nat-                nificant degree of diversity is required. For ex-
+                                         ural language generation (NLG) tasks (Young et al.,               ample, conditioned on the prompt “The news
+                                         2018) such as machine translation (Wu et al., 2018),              says that ...”, the LM is expected to be able
+                                         dialogue response generation (Li et al., 2017), im-               to generate a wide range of interesting continua-
+                                         age captioning (Lin et al.), and related tasks. Given             tions. While the deterministic behavior of decoding
+                                         a trained LM, finding the best way to generate a                  algorithms could give high-quality samples, they
+                                         sample from it has been an important challenge for                suffer from a serious lack of diversity.
+                                         NLG applications.                                                    This need for diversity gives rise to a wide adop-
+                                                                                                           tion of various sampling algorithms. Notably, top-
+                                                 ∗
+                                             Equal contribution.                                           k sampling (Fan et al., 2018), nucleus sampling
+                                             1
+                                            Our    data     and  code are available                   at
+                                         https://github.com/moinnadeem/                                    (Holtzman et al., 2020), and tempered sampling
+                                         characterizing-sampling-algorithms.                               (Caccia et al., 2020) have been used in open-ended
+generation (Radford et al., 2018; Caccia et al.,          timation (MLE) has been the most popular frame-
+2020), story generation (Fan et al., 2018), and di-       work to train an autoregressive LM (Mikolov et al.,
+alogue response generation (Zhang et al., 2020b).         2010). MLE training minimizes the negative log-
+However, the sampling algorithm and the hyper-            likelihood (NLL) objective below:
+parameter are usually chosen via heuristics, and a
+comprehensive comparison between existing sam-                           1      X
+                                                            LMLE =                      −ΣL−1
+                                                                                          l=0 log Pθ (Wl+1 |W1:l , C),
+                                                                        |D|
+pling algorithm is lacking in the literature. More                            (W,C)∈D
+
+importantly, the underlying reasons behind the                                                                        (1)
+success of the existing sampling algorithms still
+remains poorly understood.                                where θ denotes model parameters, and Pθ (· | W1:l )
+   In this work, we begin by using the quality-           denotes the conditional model distribution of Wl+1
+diversity (Q-D) trade-off (Caccia et al., 2020) to        given a prefix W1:l . For simplicity, we assume all
+compare the three existing sampling algorithms.           sentences are of length L in the formulations. Since
+For automatic metrics, we use the BLEU score              this work focuses on sampling from a given model
+for quality and n-gram entropy for diversity. We          instead of training it, in the rest of the paper, we
+also correlate these automatic metrics with human         abbreviate Pθ (·) as P (·) for brevity.
+judgements. The first observation we draw is that
+                                                          2.2      Existing Sampling Algorithms
+top-k , nucleus and tempered sampling perform
+on par in the Q-D trade-off, as shown in Figure 1.        Given a trained LM and a context C, an ancestral
+Motivated by this result, we extract three key prop-      sampling algorithm seeks to generate a sequence
+erties by inspecting the transformations defined by       from P (W |C) by sampling token-by-token from a
+the sampling algorithms: (1) entropy reduction, (2)       transformed version of P (Wl+1 |W1..l , C). We now
+order preservation and (3) slope preservation. We         review and formulate three popular sampling algo-
+prove all three properties hold for the three existing    rithms: top-k (Fan et al., 2018), nucleus (Holtzman
+sampling algorithms.                                      et al., 2020), and tempered (Ackley et al., 1985;
+   We then set out to systematically validate the         Caccia et al., 2020) sampling.
+importance of the identified properties. To do so,           We view these algorithms as different
+we design two sets of new sampling algorithms             transformations applied to the distribution
+in which each algorithm either violates one of the        P (Wl+1 |W1..l , C). First, we treat the conditional
+identified properties, or satisfies all properties. Us-   distribution P (Wl+1 |W1..l , C) as a sorted vector
+ing the Q-D trade-off, we compare their efficacy          p of length |V |. By sorting, we rearrange the
+against existing algorithms, and find that violating      elements such that if i < j → pi >= pj .2 We list
+these identified properties could result in signifi-      the transformations and their intuition below:
+cant performance degradation. More interestingly,         Definition 2.1. (Top-k) In top-k sampling, we
+we find that the set of sampling algorithms that sat-     only sample from the top K tokens:
+isfies these properties has generation performance
+that matches the performance of existing sampling                                     pi · 1{i ≤ K}
+algorithms.                                                                   p̂i =      PK         ,                 (2)
+                                                                                            j=1 pj
+2 Sampling Algorithms for
+Autoregressive Language Models                            where 1 is the indicator function, and K (1 ≤ K ≤
+                                                          |V |) is the hyperparameter.
+2.1   Autoregressive Language Modeling
+                                                          Definition 2.2. (Nucleus) With a hyperparameter
+The task of autoregressive language modeling is to        P (0 < P ≤ 1), in nucleus sampling, we sample
+learn the probability distribution of the (l + 1)-th      from the top-P mass of p:
+word Wl+1 in a sentence W conditioned on the
+word history W1:l := (W1 , . . . , Wl ) and context C.                                   p0
+                                                                                 p̂i = P|V i|         ,               (3)
+Here, we use Wi ∈ V to denote a discrete random                                                   0
+                                                                                             j=1 pj
+variable distributed across a fixed vocabulary V .
+In this work, the vocabulary is constructed on sub-
+                                                          where p0i = pi · 1{ j=1
+                                                                             Pi−1
+                                                                                  pj < P }.
+word level (Sennrich et al., 2016).
+                                                             2
+   Given a training set D, maximum likelihood es-                The token indexes are also permutated accordingly.
+Definition 2.3. (Tempered) In tempered sampling,              Property 2. (Order Preservation): The order of
+the log probabilities are scaled by T1 :                      the elements in the distribution is preserved. For-
+                                                              mally, pi ≥ pj → p̂i ≥ p̂j .
+                    exp(log(pi )/T )
+            p̂i = P|V |                 .              (4)    Property 3. (Slope Preservation): The “slope”
+                   j=1 exp(log(pj )/T )                       of the distribution is preserved. Formally, ∀p̂i >
+                                                              p̂j > p̂k > 0 (i.e., they are not truncated), we have
+In this work, we assume 0 < T < 1, i.e., the                   log pi −log pj  log p̂i −log p̂j
+                                                              log pj −log pk = log p̂j −log p̂k .
+distribution is only made sharper3 .
+                                                                 The order preservation property implies that trun-
+  We additionally experiment with a combined                  cation can only happen in the tail of the distribu-
+version of top-k and tempered sampling:                       tion, which aligns with top-k and nucleus sampling.
+Definition 2.4. (Tempered Top-k) We combine                   The slope preservation property is stronger than
+the transformation defined by top-k and tempered              the order preservation property in that not only the
+sampling:                                                     ordering, but also the relative magnitude of the el-
+                                                              ements in the distribution needs to be somewhat
+                            p0                                preserved by the transformation.
+                    p̂i = P|V i|       ,               (5)
+                                   0                             All these three properties are shared by the three
+                              j=1 pj
+                                                              existing sampling algorithms:
+where p0i = exp(log(pi )/T ) · 1{i ≤ K}. We set               Proposition 1. Property 1, 2 and 3 hold for the top-
+1 ≤ K ≤ |V | and 0 < T < 1.                                   k, nucleus and tempered sampling transformations
+   Throughout this work we use p̂ to denote the               formulated in Definitions 2.1, 2.2 and 2.3.
+normalized version of the transformed distribution.           Proof. See Appendix B.
+All algorithms have hyperparameters to control the
+entropy of the transformed distribution. For ex-                 We then set out to validate the importance of
+ample, K in top-k sampling controls the size of               these identified properties in the aspects of neces-
+the support of the resulting distribution. We will            sity and sufficiency. To do so, we design two sets of
+formalize this statement in Property 1 below.                 new sampling algorithms in which each algorithm
+                                                              either violates one of the identified properties, or
+3     Properties of Sampling Algorithms                       satisfies all properties. We list them in the next
+                                                              section.
+As we will show in Section 5.1 (also Figure 1),
+top-k, nucleus and tempered sampling perform on               3.2   Designed Sampling Algorithms
+par with each other under our evaluation. This key            Property-violating algorithms To validate the
+observation makes us question: What are the core              necessity of each property, we design several sam-
+principles underlying the different algorithms that           pling algorithms which violate at least one of the
+lead to their similar performance?                            identified properties. In our experiments, we check
+   To answer this question, in this section, we iden-         whether that violation leads to a significant degra-
+tify three core properties that are provably shared           dation in performance. We list them below:
+by the existing sampling algorithms. We then de-
+sign experiments to validate their importance.                Definition 3.1. (Target Entropy) Based on tem-
+                                                              pered sampling, target entropy sampling tunes the
+3.1    Identifying Core Properties                            temperature t such that the transformed distribution
+                                                              has entropy value equal to the hyperparameter E
+By inspecting the transformations listed in Defini-
+                                                              (0 < E ≤ log |V |). We formulate it below:
+tion 2.1, 2.2 and 2.3, we extract the following three
+properties:                                                                      exp(log(pi )/t)
+                                                                         p̂i = P|V |                  ,        (6)
+Property 1. (Entropy Reduction): The transfor-                                  j=1  exp(log(p j )/t)
+mation strictly decrease the entropy of the distri-
+bution. Formally, H(p̂) < H(p), where H(p) =                  where t is selected such that H(p̂) = E.
+  P|V |
+− i=1 pi log pi .                                                Target entropy sampling violates entropy reduc-
+   3
+     One could also use T > 1, but it does not work well in   tion, because when H(p) < E, the entropy will be
+practice.                                                     tuned up (i.e., H(p̂) > H(p)).
+Definition 3.2. (Random Mask) In random mask                Definition 3.5. (Max Entropy) Max entropy sam-
+sampling, we randomly mask out tokens in the                pling is similar to target entropy sampling (Def-
+distribution with rate R. We formluate it below:            inition 3.1). However to match entropy reduc-
+                                                            tion (Property 1), we only tune the temperature
+                          p0                                when H(p) > E, where E is the hyperparameter
+                  p̂i = P|V i|      ,                 (7)
+                                0
+                           j=1 pj                           (0 < E ≤ log |V |):
+
+where p0i = pi · 1{i = 1 or ui > R} and
+                                                                          
+                                                                           P|Vexp(log(p
+                                                                                |
+                                                                                         i )/t)
+                                                                                                     , if H(p) > E
+ui ∼ U (0, 1). The hyperparameter R (0 < R ≤ 1)                   p̂i =        j=1 exp(log(pj )/t)                   ,
+                                                                          p ,                         otherwise
+controls the size of the support of the resulting dis-                      i
+tribution. In Appendix A, we show it is crucial that                                                                 (10)
+the token which is assigned the largest probability         where t is selected so that H(p̂) = E.
+(p1 ) is never be masked.                                      It is easy to prove that Property 1, 2, and 3 holds
+   Random mask sampling is different from top-k             for the transformations defined by random top-k
+or nucleus sampling in that the masking not only            and max entropy sampling, and we omit the proof
+happens in the tail of the distribution. Therefore, it      for brevity.
+violates the order preservation property.
+                                                            4     Experiment Setup
+Definition 3.3. (Noised Top-k) We add a sorted
+noise distribution to the result from top-K transfor-       In this section, we first establish evaluation proto-
+mation, and the weight of the noise distribution is         cols, and then describe the model and data we use
+controlled by a hyperparameter W (0 ≤ W ≤ 1).               for the open-ended language generation task.
+We formulate it below:
+                                                            4.1     Evaluation via the Q-D Trade-off
+                         top-K          noise-K
+        p̂ = (1 − W )p̂          + Wp             ,   (8)   How to efficiently measure the generation perfor-
+                                                            mance of a NLG model has been an important open
+where pnoise-K is a uniformly  sampled sorted K-            question. Most existing metrics either measure the
+simplex, which satisfies K     noise-K = 1 and i <
+                         P
+                              p
+                           i=1 i                            quality aspect (e.g. BLEU score) or the diversity
+j → pinoise-K    noise-K
+              ≥ pj       ≥ 0.                               (e.g. n-gram entropy) aspect. To make the situation
+   The sorted nature of the noise distribution              more complicated, each sampling algorithm has its
+pnoise-K maintains order preservation. However,             own hyperparameters which controls the trade-off
+it violates slope preservation, and the noise weight        between quality and diversity.
+W controls the degree of the violation.                        To address the challenges above, we adopt the
+                                                            quality-diversity trade-off proposed by Caccia et al.
+Property-satisfying algorithms To validate the              (2020). In the Q-D trade-off, we perform a fine-
+sufficiency of the identified properties, we design         grained sweep of hyperparameters for each sam-
+two new sampling algorithms for which all three             pling algorithm, and compute the quality and diver-
+properties hold. And in our experiments we check            sity score for each configuration. We report two
+whether their performance is on par with the exist-         pairs of Q/D metrics, with one pair using automatic
+ing sampling algorithms. We list them below:                evaluation and the other using human evaluation.
+Definition 3.4. (Random Top-k) We design a ran-             In the next two sections, we describe the metrics
+domized version of top-k sampling: At each time             we use, and refer readers to Caccia et al. (2020) for
+step, we sample a uniformly random float number             more intuition behind the Q-D trade-off.
+u ∼ U (0, 1), and use it to specify a top-k trunca-
+                                                            4.1.1     Automatic Evaluation
+tion:
+                                                            For automatic metrics, we adopt the corpus-BLEU
+                     pi · 1{i ≤ k}                          (Yu et al., 2016) metric to measure quality and the
+                p̂i = Pk           ,                  (9)
+                           j=1 p j                          self-BLEU (Zhu et al., 2018) metric to measure
+                                                            diversity. We formulate them below.
+where k = b1 + M · uc. The hyperparameter M                    Given a batch of generated sentences Sgen and
+(1 ≤ M < |V |) controls the maximum truncation              a batch of sentences from ground-truth data as
+threshold.                                                  references Sref , corpus-BLEU returns the average
+BLEU score (Papineni et al., 2002) of every model              of the rating. Therefore, we estimate the human
+generated sentence against the reference set:                  judgement score for a sample as the average rating
+                                 1      X                      of the 20 crowdworkers (out of 25) who took the
+ corpus-BLEU(Sgen , Sref ) =                BLEU(W, Sref ).    most time to rate the samples. We provide further
+                               |Sgen | W ∈S
+                                         gen
+                                                               details about our setup in Appendix C and D.
+                                                        (11)
+                                                               Diversity It is difficult for human annotators
+A higher corpus-BLEU score means that the gen-
+                                                               to estimate diversity of text (Hashimoto et al.,
+erated sequences has better quality in that it has
+                                                               2019). Therefore, we use the n-gram entropy met-
+higher ngram-level overlap with the reference data.
+                                                               ric (Zhang et al., 2018; He and Glass, 2019) . Given
+Based on the same intuition, we define the self-
+                                                               Sgen which contains a large number of samples, we
+BLEU metric to quantify the diversity aspect:
+                                                               measure its diversity using the following formula-
+   self-BLEU(Sgen ) = corpus-BLEU(Sgen , Sgen ),        (12)   tion:
+                                                                                       X
+where a lower self-BLEU score means that the                        Hn-gram (Sgen ) =       −r(g) log r(g),    (13)
+samples have better diversity.                                                        g∈Gn
+   In our experiments, we feed the first ten sub-
+                                                               where Gn is the set of all n-grams that appeared
+words of every sample from test set to the model,
+                                                               in Sgen , and r(g) refers to the ratio (frequency) of
+and compare the model-generated sequences to the
+                                                               n-gram g w.r.t. all n-grams in the Sgen . For the
+reference samples in the validation set. We use
+                                                               estimation of n-gram entropy, we generate 50,000
+10,000 samples to compute corpus-BLEU or self-
+                                                               samples from each sampling configuration.
+BLEU, i.e., |Sgen | = |Sref | = 10, 000.
+                                                                  We will report human quality score either paired
+   Automatic evaluation enables us to do a fine-
+                                                               with n-gram entropy or with self-BLEU as diversity
+grained sweep of the hyperparameters for each sam-
+                                                               metric. We find they give similar observations.
+pling algorithm, and compare them in the quality-
+diversity trade-off. However, observations from                4.2    Model and Datasets
+automatic evaluation could be misaligned with hu-
+                                                               We separately fine-tune GPT2-small (Radford et al.,
+man evaluation (Belz and Reiter, 2006). Therefore,
+                                                               2018; Wolf et al., 2019) (110M parameters) on
+we confirm our key observations with human eval-
+                                                               the Gigaword (Graff et al., 2003; Napoles et al.,
+uation.
+                                                               2012) and the Wikitext-103 (Merity et al., 2017)
+4.1.2 Human Evaluation                                         datasets. We use the same tokenization as GPT-2,
+Quality We ask a pool of 602 crowdworkers on                   and add additional padding and end-of-sequence
+Amazon Mechanical Turk to evaluate various sam-                tokens ([EOS]) to the sentences.
+pling configurations in the quality aspect. Each                  To generate a sequence, we feed a length-10 pre-
+worker is presented a set of ten samples along with            fix from test data into the fine-tuned GPT-2 model,
+the prompts (prefixes). They are then asked to rate            and use a sampling algorithm to complete the sen-
+how likely the sentence would appear in a news                 tence. Since shorter samples are more difficult to
+article between 0 and 5 (Invalid, Confusing, Un-               judge in quality (Ippolito et al., 2020), we filter all
+specific, Average, Expected, and Very Expected                 generated sentence completions to be between 40
+respectively).                                                 and 50 subwords, and filter our validation and test
+   We focus on the Gigaword dataset for human                  set to meet the same requirements. To permit vali-
+evaluation since news articles are ubiquitous and              dation and test sets that are large enough to prefix
+do not often require expert knowledge for qual-                10,000 sentences for the corpus-BLEU metric, we
+ity judgement. For each configuration (sampling                re-chunk the first 80% of the Gigaword dataset for
+algorithm and hyperparameter pair) we ask crowd-               the training set, 15% for validation, and the last 5%
+workers to rate 200 samples in total. To get an                for the test set. Similarly, we re-chunk the first 97%
+accurate rating for each sample, we enlist 25 differ-          of the Wikitext-103 dataset for training, and leave
+ent crowdworkers to rate each sample. We report                1.5% for validation and 1.5% for test.
+mean and standard deviation from 5 independent
+                                                               5     Empirical Results
+runs (each with 40 samples) as error bar.
+   By manual inspection, we find that the time spent           First, we compare existing sampling algorithms,
+in the annotations is a good indicator of the quality          and then move on to validate the necessity and
+                                                          Figure 3: Automatic evaluation of the noised top-k,
+                                                          target entropy, and random mask sampling proposed
+                                                          to validate the necessity of the identified properties.
+Figure 2: The performance (x-axis: quality, y-axis: di-
+                                                          The results show that violation of entropy reduction
+versity, both are the smaller the better) of top-k, nu-
+                                                          and slope preservation could lead to drastic perfor-
+cleus, tempered and tempered top-k sampling are on
+                                                          mance degradation, while the order preservation prop-
+par on the Gigaword dataset, as shown by automatic
+                                                          erty could be further relaxed.
+evaluation.
+
+
+sufficiency of the identified properties.                 present experiments validating the necessity or suf-
+                                                          ficiency aspect of the properties.
+5.1   Comparison of Existing Algorithms
+                                                          5.2   Property-violating Algorithms
+We compare top-k, nucleus, and tempered sam-
+pling via automatic and human evaluation. We do           In Figure 3, we compare the generation perfor-
+a fine-grained sweep of hyperparameters for each          mance of the property-violating sampling algo-
+sampling algorithm on the Gigaword dataset. The           rithms (designed in Section 3.2), against the ex-
+results are shown in Figure 1 (human evaluation)          isting algorithms using automatic evaluation on the
+and Figure 2 (automatic evaluation). We also show         Gigaword dataset. We make the following obser-
+the quality and diversity score for human text in         vations: First, the target entropy sampling, which
+the test data for reference, which is labeled as gold.    violates entropy reduction, has significantly worse
+   Both automatic and human evaluations demon-            performance; Second, even with small noise weight
+strate that the performance of top-k, nucleus and         W , the performance of noised top-k sampling de-
+tempered sampling are on par with each other, with        grades from the original top-k sampling, and the
+no significant gap. When the hyperparameters (K,          gap becomes larger as W increases; Last, the ran-
+P and T ) are tuned so that different sampling has        dom mask sampling is on par with the existing
+the same diversity (measured by self-BLEU or n-           sampling algorithms in performance. We further
+gram entropy), their quality (measured by corpus-         confirm this observation with human evaluation in
+BLEU or human rating) are close.                          Figure 5.
+   Additionally, we compare tempered top-k sam-              These results suggest that the violation of en-
+pling with the existing algorithm also in Figure 2.       tropy reduction or slope preservation could lead
+We find that adding the tempered transformation           to drastic performance degradation. On the other
+only moves top-k sampling along the Q-D trade-            hand, the competitive performance of random mask
+off, instead of yielding a better or a worse sampling     sampling suggests that order preservation could be
+algorithm. For example, the performance of the            further relaxed.
+K = 500, T = 0.8 configuration for tempered                  In the next section, we investigate the sufficiency
+top-k sampling is very close to the K = 30 config-        aspect of the identified properties.
+uration for the top-k sampling.
+   Motivated by these observations, we identify           5.3   Property-satisfying Algorithms
+three core properties (elaborated in Section 3.1)         We now compare the generation performance of
+that are shared among the sampling algorithms:            the property-satisfying sampling algorithms (de-
+entropy reduction, order preservation and slope           signed in Section 3.2) with the existing sampling
+preservation. In the following two sections, we           algorithms. The results from the Gigaword dataset
+    Sampling                                                   Conditional Samples
+                                                Existing Sampling Algorithms
+ Top-k              steven spielbergs dreamworks movie studio said monday it was filing a lawsuit, accusing us studio
+ (K = 30)           executives of defrauding hundreds of thousands of dollars in refunds and other damages.
+ Nucleus            steven spielberg’s dreamworks movie studio has failed to attract the kind of business and development
+ (P = 0.80)         investors that jeffrey hutchinson dreamed up in the past.
+ Tempered           steven spielberg’s dreamworks movie studio plans to spend the rest of the year producing the high-speed
+ (T = 0.85)         thriller ”the earth’s path” and an upcoming sequel, the studio announced on wednesday.
+                                          Property-satisfying Sampling Algorithms
+ Random Top-k       steven spielbergs dreamworks movie studio is planning to make a movie about a young man who is a
+ (R = 90)           <unk>, a man who has a dream of being the first man to be born with the ability to walk on water.
+ Max Entropy        steven spielberg’s dreamworks movie studio has agreed to pay $ #.# million to director john nichols ( #.#
+ (E = 2.75)         million, ###, a record in the studio circulation ), the studio announced sunday..
+                                          Property-violating Sampling Algorithms
+ Random Mask        steven spielberg’s dreamworks movie studio scored a big win with a $ ##.# million ( euro ##.# million )
+ (R = 0.75)         direct-to-video ( dvds ) deal to develop the #### short story ”the rose garden”.
+ Noised Top-k       steven spielberg’s dreamworks movie studio is in disarray and has a few directors and a lot of stock
+ (K=50, W=5e-3)     involved, leaving it only a matter of time before spielberg’s departure from the nobel peace prize.
+ Target Entropy     steven spielberg’s dreamworks movie studio production scored an action boost m boom, nabbing an ’d
+ (E = 2.75)         after the ##th instal specialization with nominations of fritz, ika, ivan english ape and evlyn mcready.
+
+Table 1: Generated sequences with the same prefix steven spielbergs dreamworks movie studio by different sam-
+pling algorithms. The hyperparameters are chosen such that the algorithms yield roughly the same diversity mea-
+sured by self-BLEU. The poor-quality spans are higlighted in red.
+
+
+
+
+Figure 4: The proposed random top-k and max entropy             Figure 5: Human evaluation also shows that the pro-
+schedulers, which meet the identified properties, are on        posed sampling algorithms has performance on par
+par in performance with existing methods in automatic           with the existing methods on the Gigaword dataset. Ap-
+evaluation on the Gigaword dataset.                             pendix F repeats this plot with self-BLEU.
+
+
+are shown in Figure 3 (for automatic evaluation)                tified properties in that, new sampling algorithms
+and Figure 5 (for human evaluation). For complete-              could get competitive generation performance as
+ness, we also replicate Figure 5 with self-BLEU                 long as they meet the identified properties.
+as the diversity measure in Appendix F. We also
+present results from automatic evaluation on the                5.4    Qualitative Analysis
+Wikitext-103 dataset in Figure 6, with consistent               We list samples from the proposed sampling algo-
+observations.                                                   rithms and compare them with the existing ones
+   The evaluations consistently show that the perfor-           in Table 1. We choose the hyperparameter of each
+mance of random top-k and max entropy sampling                  sampling algorithm so that each algorithm exhibits
+(and random mask sampling in last section) is on                a similar level of diversity (as measured by self-
+par with top-k, nucleus, and tempered sampling.                 BLEU). By manual inspection, we find that the
+These results strengthen the importance of the iden-            quality of samples from property-satisfying sam-
+                                                        diversity trade-off to compare top-k, nucleus, and
+                                                        tempered sampling. Their observation is similar to
+                                                        ours: The performance of the existing algorithms
+                                                        are close with no significant gap.
+                                                           More importantly, the underlying reasons for
+                                                        the success of various sampling algorithms remain
+                                                        poorly understood. Zhang et al. (2020a) proposes
+                                                        the selective sampling algorithm, which fails to out-
+                                                        perform existing approaches. This failed attempt
+                                                        suggests the need for a better understanding of the
+                                                        strengths and weaknesses of existing methods. To
+                                                        the best of our knowledge, our work provides the
+                                                        first systematic characterization of sampling algo-
+Figure 6: Automatic evaluation on the Wikitext-103
+dataset: The performance of proposed sampling algo-     rithms, where we attribute the success of existing
+rithms are on par with top-k, nucleus, and tempered     sampling algorithms to a shared set of properties.
+sampling.                                               We show that we can propose novel sampling algo-
+                                                        rithms based on the identified properties, and reach
+                                                        competitive generation performance as measured
+pling algorithms is on par with samples from the
+                                                        by both automatic and human evaluation.
+existing algorithms. In particular, the samples from
+random top-k, max entropy, and random masked            7   Limitations and Future Work
+sampling are all coherent and informative.
+   In contrast, the samples from noised top-k and       Our core contribution is the three properties of sam-
+target entropy algorithms, tend to be less seman-       pling algorithms that we conjecture are crucial for
+tically and syntatically coherent. In particular,       competitive generation performance. While we
+the target entropy sampling algorithm, which ob-        design a set of experiments to validate their ne-
+tains the lowest quality score measured by corpus-      cessity and sufficiency, the observations we make
+BLEU, lacks basic language structure. In compar-        are still empirical. We emphasize that it is com-
+ison to target entropy, noised top-k is syntatically    pletely possible that there exists some crucial
+coherent, but exhibits logical and factual inconsis-    property, that is yet to be discovered, and can
+tencies. These observations aligns with the results     lead to significantly better generation perfor-
+we get from automatic evaluation.                       mance. Therefore, the exploration of novel sam-
+                                                        pling algorithms (Zhang et al., 2020a) should still
+6   Related Works                                       be encouraged.
+                                                           On the other hand, to provide a comprehensive
+Despite the popularity of sampling algorithms in
+                                                        study, we focus on the open-ended language gener-
+natural language generation, a rigorous comparison
+                                                        ation task with the GPT-2 model. As future work, it
+or scrutiny of existing algorithms is lacking in the
+                                                        would be interesting to check whether our observa-
+literature. Holtzman et al. (2020) proposes nucleus
+                                                        tions also hold on other tasks such story generation
+sampling, and compare it with top-k sampling (Fan
+                                                        or dialogue response generation, or with weaker
+et al., 2018). However, only a few hyperparame-
+                                                        language models in low-resource setting.
+ter configurations are tested. In Hashimoto et al.
+(2019) and Caccia et al. (2020), temperature sam-
+                                                        8   Conclusion
+pling is used and the hyperparameter T is tuned
+to trade-off between diversity and quality, but it      This work studies sampling algorithms for the open-
+lacks comparisons with other sampling algorithms.       ended language generation task. We show that the
+Welleck et al. (2020) studies the consistency of ex-    existing algorithms, namely top-k, nucleus, and
+isting sampling and decoding algorithms, without        tempered sampling, have similar generation perfor-
+comparing the generation performance.                   mance as measured by the quality-diversity trade-
+   In this work we mainly use the quality-diversity     off evaluation. Motivated by this result, we identify
+trade-off (Caccia et al., 2020) to conduct a compar-    three key properties that we prove are shared by
+ison of different sampling algorithms. Parallel to      the existing algorithms. To validate the importance
+our work, Zhang et al. (2020a) also uses the quality-   of these identified properties, we design a set of
+new sampling algorithms, and compare their perfor-     Tianxing He and James R. Glass. 2019. Negative train-
+mance with the existing sampling algorithms. We           ing for neural dialogue response generation. CoRR,
+                                                          abs/1903.02134.
+find that violation of the identified properties may
+lead to drastic performance degradation. On the        Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+other hand, we propose several novel algorithms,         Yejin Choi. 2020. The curious case of neural text de-
+namely random top-k and max entropy sampling,            generation. In Proceedings of the International Con-
+                                                         ference on Learning Representations, ICLR 2020,
+that meet the identified properties. We find that        Addis Ababa, Ethiopia, April 26-30, 2020. OpenRe-
+their generation performance is on par with the          view.net.
+existing algorithms.
+                                                       Daphne Ippolito, Daniel Duckworth, Chris Callison-
+Acknowledgments                                          Burch, and Douglas Eck. 2020. Automatic detection
+                                                         of generated text is easiest when humans are fooled.
+The authors sincerely thank Yixin Tao, Jingzhao          In Proceedings of the Association for Computational
+                                                         Linguistics, pages 1808–1822, Online. Association
+Zhang and Yonatan Belinkov for useful discussions.       for Computational Linguistics.
+This work was partly supported by Samsung Ad-
+vanced Institute of Technology (Next Generation        Jiwei Li, Will Monroe, Tianlin Shi, Sébastien Jean,
+Deep Learning: from pattern recognition to AI),           Alan Ritter, and Dan Jurafsky. 2017. Adversarial
+                                                          learning for neural dialogue generation. In Pro-
+Samsung Electronics (Improving Deep Learning              ceedings of the Conference on Empirical Methods
+using Latent Structure). Kyunghyun Cho thanks             in Natural Language Processing, pages 2157–2169,
+CIFAR, Naver, eBay, NVIDIA and Google for their           Copenhagen, Denmark. Association for Computa-
+support.                                                  tional Linguistics.
+
+                                                       Tsung-Yi Lin, Michael Maire, Serge J. Belongie, James
+                                                         Hays, Pietro Perona, Deva Ramanan, Piotr Dollár,
+References                                               and C. Lawrence Zitnick. Microsoft COCO: com-
+                                                         mon objects in context. In Proceedings of European
+David H. Ackley, Geoffrey E. Hinton, and Terrence J.     Conference on Computer Vision.
+  Sejnowski. 1985. A Learning Algorithm for Boltz-
+  mann Machines, volume 9, pages 147–169.              Stephen Merity, Caiming Xiong, James Bradbury, and
+                                                          Richard Socher. 2017. Pointer sentinel mixture mod-
+Anja Belz and Ehud Reiter. 2006. Comparing auto-          els. In Proceedings of the International Conference
+  matic and human evaluation of NLG systems. In           on Learning Representations. OpenReview.net.
+  11th Conference of the European Chapter of the
+  Association for Computational Linguistics, Trento,   Tomas Mikolov, Martin Karafiát, Lukás Burget, Jan
+  Italy. Association for Computational Linguistics.      Cernocký, and Sanjeev Khudanpur. 2010. Recurrent
+                                                         neural network based language model. In Proceed-
+Massimo Caccia, Lucas Caccia, William Fedus, Hugo        ings of the International Speech Communication As-
+ Larochelle, Joelle Pineau, and Laurent Charlin.         sociation, pages 1045–1048.
+ 2020. Language gans falling short. In Proceedings
+ of the International Conference on Learning Repre-    Courtney Napoles, Matthew Gormley, and Benjamin
+ sentations, ICLR 2020, Addis Ababa, Ethiopia, April     Van Durme. 2012. Annotated Gigaword. In Pro-
+ 26-30, 2020. OpenReview.net.                            ceedings of the Joint Workshop on Automatic Knowl-
+                                                         edge Base Construction and Web-scale Knowl-
+Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hi-      edge Extraction (AKBC-WEKEX), pages 95–100,
+  erarchical neural story generation. In Proceedings     Montréal, Canada. Association for Computational
+  of the 56th Annual Meeting of the Association for      Linguistics.
+  Computational Linguistics (Volume 1: Long Papers),
+  pages 889–898, Melbourne, Australia. Association     Kishore Papineni, Salim Roukos, Todd Ward, and Wei-
+  for Computational Linguistics.                         Jing Zhu. 2002. Bleu: a method for automatic eval-
+                                                         uation of machine translation. In Proceedings of
+David Graff, Junbo Kong, Ke Chen, and Kazuaki            the 40th Annual Meeting of the Association for Com-
+  Maeda. 2003. English gigaword. Linguistic Data         putational Linguistics, pages 311–318, Philadelphia,
+  Consortium, Philadelphia, 4(1):34.                     Pennsylvania, USA. Association for Computational
+                                                         Linguistics.
+Tatsunori Hashimoto, Hugh Zhang, and Percy Liang.
+  2019. Unifying human and statistical evaluation      Alec Radford, Jeffrey Wu, Rewon Child, David Luan,
+  for natural language generation. In Proceedings        Dario Amodei, and Ilya Sutskever. 2018. Language
+  of the North American Chapter of the Association       models are unsupervised multitask learners.
+  for Computational Linguistics: Human Language
+  Technologies, pages 1689–1701, Minneapolis, Min-     Rico Sennrich, Barry Haddow, and Alexandra Birch.
+  nesota. Association for Computational Linguistics.     2016. Neural machine translation of rare words
+  with subword units. In Proceedings of the Asso-
+  ciation for Computational Linguistics, pages 1715–
+  1725, Berlin, Germany. Association for Computa-
+  tional Linguistics.
+Sean Welleck, Ilia Kulikov, Jaedeok Kim,
+  Richard Yuanzhe Pang, and Kyunghyun Cho.
+  2020. Consistency of a recurrent language model
+  with respect to incomplete decoding.      CoRR,
+  abs/2002.02492.
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien
+  Chaumond, Clement Delangue, Anthony Moi, Pier-
+  ric Cistac, Tim Rault, Rémi Louf, Morgan Funtow-
+  icz, and Jamie Brew. 2019. Huggingface’s trans-
+  formers: State-of-the-art natural language process-
+  ing. CoRR, abs/1910.03771.
+Lijun Wu, Yingce Xia, Fei Tian, Li Zhao, Tao Qin,
+   Jianhuang Lai, and Tie-Yan Liu. 2018. Adversar-
+   ial neural machine translation. In Proceedings of
+   The Conference on Machine Learning, volume 95 of
+   Proceedings of Machine Learning Research, pages
+   534–549. PMLR.
+Tom Young, Devamanyu Hazarika, Soujanya Poria,
+  and Erik Cambria. 2018. Recent trends in deep
+  learning based natural language processing [review
+  article]. IEEE Comput. Intell. Mag., 13(3):55–75.
+Lantao Yu, Weinan Zhang, Jun Wang, and Yong Yu.
+  2016. Seqgan: Sequence generative adversarial nets
+  with policy gradient. CoRR, abs/1609.05473.
+Hugh Zhang, Daniel Duckworth, Daphne Ippolito, and
+  Arvind Neelakantan. 2020a. Trading off diversity
+  and quality in natural language generation.
+Yizhe Zhang, Michel Galley, Jianfeng Gao, Zhe Gan,
+  Xiujun Li, Chris Brockett, and Bill Dolan. 2018.
+  Generating informative and diverse conversational
+  responses via adversarial information maximization.
+  In S. Bengio, H. Wallach, H. Larochelle, K. Grau-
+  man, N. Cesa-Bianchi, and R. Garnett, editors, Pro-
+  ceedings of Neural Information Processing Systems
+  31, pages 1810–1820. Curran Associates, Inc.
+
+Yizhe Zhang, Siqi Sun, Michel Galley, Yen-Chun Chen,
+  Chris Brockett, Xiang Gao, Jianfeng Gao, Jingjing
+  Liu, and Bill Dolan. 2020b. DIALOGPT : Large-
+  scale generative pre-training for conversational re-
+  sponse generation. In Proceedings of the Associa-
+  tion for Computational Linguistics: System Demon-
+  strations, pages 270–278, Online. Association for
+  Computational Linguistics.
+Yaoming Zhu, Sidi Lu, Lei Zheng, Jiaxian Guo,
+  Weinan Zhang, Jun Wang, and Yong Yu. 2018. Texy-
+  gen: A benchmarking platform for text genera-
+  tion models. In Proceedings of the Conference on
+  Research & Development in Information Retrieval,
+  pages 1097–1100. ACM.
+                                                                                        0
+                                                                                P
+A    Auxiliary Plots                                     We set Z =                  j pj , then ∀p̂i > p̂j > p̂k > 0 we
+                                                         have
+We show the importance of preserving the token
+with the largest probability (p1 ) in the proposed                         log p̂i − log p̂j
+                                                                           log p̂j − log p̂k
+random mask sampling. For comparison, we re-
+                                                                           log p0i − log Z − log p0j + log Z
+lax the constraint and define the random mask-all                        =
+                                                                           log p0j − log Z − log p0k + log Z
+sampling:
+                                                                             log p0i − log p0j
+Definition A.1. (Random Mask-all) The only dif-                          =
+                                                                             log p0j − log p0k
+                                                                                               (log Z is cancelled)        (15)
+ference between random mask-all sampling and
+                                                                           log(pi )/T − log(pj )/T
+random mask sampling is that we allow the p1 to-                         =
+                                                                           log(pj )/T − log(pk )/T
+ken to be masked. We formulate it below:                                   log(pi ) − log(pj )
+                                                                         =
+                           p0                                              log(pj ) − log(pk )
+                  p̂i = P|V i|     ,          (14)
+                               p 0
+                          j=1 j
+
+where p0i = pi · 1{ui > R} and ui ∼ U (0, 1).              Only Property 1 (entropy reduction) is left. We
+   In Figure 7, we show that if p1 is allowed to         now prove it holds for top-k / nucleus sampling:
+be masked, the generation performance will be            Lemma B.2. Property 1 holds for transformations
+seriously degraded.                                      defined by top-k or nucleus sampling (Definition
+                                                         2.1 and 2.2).
+                                                         Proof. We first consider the change of entropy
+                                                         when the token with the smallest probability (p|V | )
+                                                         is removed from the original distribution (p̂i =
+                                                             pi
+                                                         P|V |−1 , 1 ≤ i < |V |):
+                                                             j=1    pi
+
+                                                                          V
+                                                                          X
+                                                         − H(p) =               pi log pi
+                                                                          i=1
+                                                             V
+                                                             X −1
+                                                         =          pi log pi + p|V | log p|V |
+                                                             i=1
+                                                                              V −1
+                                                                              X      pi
+                                                         = (1 − p|V | )                     log pi + p|V | log p|V |
+                                                                              i=1
+                                                                                  1 − p|V |
+Figure 7: The random mask-all sampling, where p1 is          V −1
+allowed to be masked, is shown to have worse perfor-
+                                                             X      pi             pi
+                                                         =                  log          + log(1 − p|V | )
+mance than the random mask sampling. The dataset is          i=1
+                                                                 1 − p |V |     1 − p|V | |      {z     }
+                                                                                                        <0
+Giagword.                                                                                             
+                                                                                         V −1
+                                                                                         p
+                                                                                         X i
+                                                             + p|V | log p|V | −               log pi 
+                                                                                  i=1
+                                                                                      1 − p|V |
+B   Proof for Proposition 1                                                                                                        
+                                                             V −1                                      V −1
+In this section we prove Proposition 1.                      X                                        X      pi              
+                                                         <                              log p|V | −
+                                                                    p̂i log p̂i + p|V | 
+                                                                                                           1 − p
+                                                                                                                      log pi 
+   Firstly, it is straightforward to prove that Prop-        i=1                                       i=1       |V |    |{z} 
+                                                                                                                           >p|V |
+erty 2 (order preservation) holds for the top-k, nu-                                                                          
+cleus and tempered sampling and we omit the proof                                                                        
+                                                             V −1                               V −1
+here.                                                    <
+                                                             X                     
+                                                               p̂i log p̂i + p|V | log p|V | −
+                                                                                               X       pi
+                                                                                                                          
+                                                                                                                log p|V | 
+                                                                                                                          
+   For Property 3 (slope preservation), it holds triv-     i=1
+                                                                                   
+                                                                                                i=1
+                                                                                                     1 − p |V |           
+                                                                                                                      }
+ially for nucleus and top-k sampling. We prove it
+                                                                                                |         {z
+                                                                                                              =log p|V |
+
+for tempered sampling in the following lemma:                V
+                                                             X −1
+
+Lemma B.1. Property 3 holds for tempered sam-            =          p̂i log p̂i = −H(p̂)
+                                                             i=1
+pling (Definition 2.3).                                                                                                    (16)
+Proof. Remember that the tempered sampling with          Therefore, we get H(p̂) < H(p).
+hyperparameter T defines the follow transforma-            By induction (iteratively removing the last to-
+             p0
+tion: pˆi = P ip0 , where p0i = exp(log(pi )/T ) .       ken), it is now easy to see that the top-k or nucleus
+               j   j
+transformation strictly decrease the entropy of the                in the United States. In total, 602 crowdworkers
+sampling distribution.                                             completed our tasks. In order to ensure that we had
+                                                                   quality data, we filtered the crowdworker annota-
+  Finally, we prove Property 1 (entropy reduction)
+                                                                   tions for workers that spent at least 45 seconds on
+holds for tempered sampling:
+                                                                   the aggregate task (or 4.5 seconds rating each sen-
+Lemma B.3. Property 1 holds for the transforma-                    tence). 51 crowdworkers were filtered out through
+tion defined by tempered sampling (Definition 2.3).                this process. Screenshots of our instructions and
+Proof. For convenience, we first rewrite the Tem-                  task are available in Figure(s) 8 and 9 respectively.
+perature transformation:
+
+                              exp(−αei )
+                 p̂i = pαi = P                              (17)
+                              j exp(−αej )
+
+where ei = − log(pi ) and α = T1 . The entropy can
+be written as:
+                 X      exp(−αei )           exp(−αei )
+ H(pα ) = −            P               log P
+                   i     j exp(−αe j )       j exp(−αej )
+                                                                       Figure 8: Our instructions for crowdworker task.
+                   X                    X       exp(−αei )
+             = log     exp(−αej ) + α       ei P
+                     j                    i      j exp(−αej )
+                                                            (18)
+
+Next, we take derivative w.r.t α:
+∂H    X     exp(−αei )       X     exp(−αei )
+   =−   ei P               +   ei P
+∂α    i     j exp(−αe  j )   i     j exp(−αej )
+    |                     {z                  }
+                                        =0
+                                                                   Figure 9: An example of the task given to crowdwork-
+    ∂ X        exp(−αei )                                          ers.
++α         ei P
+   ∂α i         j exp(−αej )
+          "                        #"                #
+   X         ∂       exp(−αei )        exp(−αei )
+=α     ei      log
+                                                                   D     Convergence of Human Evaluation
+                    P                 P
+     i
+            ∂α        j exp(−αej )      j exp(−αej )
+          |                   {z                     }
+                                     log-derivative trick
+                                                                 When we conduct human evaluation, we provide
+ =α
+        X
+             ei −ei +
+                         X
+                                ej 0 P
+                                      exp(−αei )                  crowdworkers with 200 generated samples for
+         i                j   0        j exp(−αej )                some configuration, and ask 25 different crowd-
+    "                    #                                         workers to evaluate the same sample. However, a
+      exp(−αei )
+    P                                                              reasonable question is whether our human evalua-
+      j exp(−αej )
+           h                i                                      tions are converging to some underlying true rating,
+ = −αEpα e2i − ei Epα [ei ]                                        or whether we need more samples or replicas.
+                               
+      α Epα [e2i ] − Epα [ei ]2
+ = − |{z}                                                             Figure 10 and 11 show that the average scores
+      >0 |         {z           }                                  have roughly converged around 150 samples per
+                    =Varpα [ei ]≥0
+                                                                   configuration, or around 15 replicas per sample.
+ <0
+                                                            (19)
+                                                                   The two figures demonstrate this for nucleus sam-
+                                                                   pling, and this holds true for human evaluations of
+We can now easily get ∂H    ∂H ∂α                                  all sampling algorithms.
+                      ∂T = ∂α ∂T > 0. There-
+fore, when we apply a tempered transformation
+with T < 1, the entropy will strictly decrease                     E    Additional Model-Generated Samples
+comaparing to the original distribution (where                     Table 2 shows some additional samples from each
+T = 1).                                                            of the sampling algorithms described in the pa-
+                                                                   per. Similarly, we have chosen hyperparameters for
+C       Mechanical Turk Setup
+                                                                   each sampling method that yields a similar diversity
+Our crowdworkers were required to have a HIT                       (measured by self-BLEU) to the top-k configura-
+acceptance rate higher than 95%, and be located                    tion where K = 15. We observe that all sampling
+    Sampling                                                 Conditional Samples
+                                               Existing Sampling Algorithms
+ Top-K             as the rest of his denver broncos teammates prepared for the game against denver, jay kasey could not
+ (K = 15)          help but think of his teammates and friends who worked hard in preparation for that night’s game.
+ Nucleus           as the rest of his denver broncos teammates slumped and buried themselves in their work, broncos
+ (P = 0.65)        quarterback leon johnson moved to the locker room monday and called his parents.
+ Temperature       as the rest of his denver broncos teammates gathered in an auditorium to watch more stretching drills,
+ (T = 0.7)         ben holtz gave an emotional speech : we’re running out of time to win a championship ring.
+                                         Property-satisfying Sampling Algorithms
+ Random Top-K      as the rest of his denver broncos teammates battled through their own stretch of the nfl playoffs, the
+ (R = 30)          quarterback began throwing the ball in the fourth quarter.
+ Max Entropy       steven spielberg’s dreamworks movie studio has agreed to pay $ #.# million to director john nichols ( #.#
+ (E = 2.75)        million, ###, a record in the studio circulation ), the studio announced sunday..
+                                         Property-violating Sampling Algorithms
+ Random Mask       as the rest of his denver broncos teammates connect with a player that the team didn’t expect to become
+ (R = 0.75)        a starter, quarterback james crosby speaks out about colin peterson’s passion for the game.
+ Noised Top-K      as the rest of his denver broncos teammates start making room for nerdy bundles or twiggy pitchers,
+ (K=20, W=5e-3)    coach william perez might have to cut a big, bold note cut ready to console wife join them in iraq.
+ Target Entropy    as the rest of his denver broncos teammates scratched out their locker rooms, cleanDeath Yo Communities
+ (E = 2.5)         wander edge extingustretched cords429 Mohnegie wildfires.
+
+Table 2: The samples conditioned on as the rest of his denver broncos teammates, and the hyperparameters for a
+given sampling algorithm. The poor quality spans are higlighted in red.
+
+
+                                                               indicating violation of the identified properties may
+                                                               possibly lead towards degraded performance.
+
+                                                               F     Human Evaluation with Self-BLEU as
+                                                                     Diversity Metric
+
+
+
+
+Figure 10: We see that we obtain a reasonable estimate
+of sample quality around 150 samples per configura-
+tion.
+
+
+
+
+                                                               Figure 12: Using self-BLEU as a diversity metric pro-
+                                                               vides similar conclusions as to using n-gram entropy.
+
+                                                                  Figures 1 and 5 measures diversity in terms of 3-
+                                                               gram entropy, while the rest of our work measures
+                                                               diversity in terms of self-BLEU. For completeness,
+Figure 11: We see that we obtain a reasonable estimate
+of sample quality with around 15 ratings per sample.           we provide Figure 12 where self-BLEU is used
+                                                               for diversity metric. This figure demonstrates that
+                                                               similar trends can be observed using either 3-gram
+algorithms except for noised top-k and target en-              entropy or self-BLEU.
+tropy, yield similar quality samples. For noised
+top-k and target entropy, we see that these samples
+tend to degenerate towards the end of the sentence,
+

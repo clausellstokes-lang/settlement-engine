@@ -1,0 +1,23 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 314,
+ "firstTs": "2026-09-11T09:16:07.332Z",
+ "lastTs": "2026-09-11T09:36:53.903Z",
+ "tools": {
+  "Bash": 87,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/entailment/general.referent.survey.md"
+ ],
+ "lastAssistantText": "Now I have the evidence base. Writing the packet.",
+ "run": "wf_3252b403-4ff",
+ "agent": "a258758c8652dc93e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_3252b403-4ff/agent-a258758c8652dc93e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

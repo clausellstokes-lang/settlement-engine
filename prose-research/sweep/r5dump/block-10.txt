@@ -1,0 +1,349 @@
+### [620] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: In that preprint 516 college-educated general readers took part alongside 28 MFA-trained readers.
+SRC: Tuhin Chakrabarty, Jane C. Ginsburg and Paramveer Dhillon, arXiv:2510.13939v4 | https://arxiv.org/abs/2510.13939
+QUOTE: 28 MFA-trained readers and 516 college-educated general readers
+TRUE: In blind pairwise evaluations by 28 MFA-trained readers and 516 college-educated general readers
+NOTE: Raw arXiv abs page (2510.13939v4). Quote verbatim; both participant counts and both reader categories are on the page.
+
+### [621] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: In Farrell's blind Italian-language test the AI-written texts received slightly higher average ratings than the Moravia story.
+SRC: Michael Farrell, arXiv:2601.17363v3, NeTTIT 2026, 24 January 2026 (v3 3 June 2026) | https://arxiv.org/abs/2601.17363v3
+QUOTE: AI-written texts received slightly higher average ratings and were more
+TRUE: the AI-written texts received slightly higher average ratings and were more frequently preferred
+NOTE: Raw arXiv abs page (2601.17363v3) plus the accepted PDF (extracted text): quote verbatim in the abstract, and the Discussion gives the comparator explicitly — Moravia's story (Oval) 6.83 vs the two AI texts 7.33 and 7.42 out of 10, 'While the SynTs slightly outperformed the human-authored one on average, the differences were modest.' Blind setup and Italian language both stated.
+
+### [622] VERIFIED_VERBATIM  {register measured}
+CLAIM: Farrell's stimuli were three stories, two made with ChatGPT-4o and one by Alberto Moravia.
+SRC: Michael Farrell, arXiv:2601.17363v3 | https://arxiv.org/abs/2601.17363v3
+QUOTE: two created with ChatGPT-4o and one by Alberto Moravia
+TRUE: 20 participants read and evaluated three stories, two created with ChatGPT-4o and one by Alberto Moravia
+NOTE: Raw arXiv abs page (2601.17363v3). Quote verbatim; the three-story stimulus set and its 2 AI / 1 Moravia composition are stated in the abstract and confirmed in the PDF body (Moravia's 'L'incosciente' from Racconti romani).
+
+### [623] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Chakrabarty and colleagues found LLM-generated stories passed 3 to 10 times fewer Torrance Test of Creative Writing tests than stories by professional authors.
+SRC: Tuhin Chakrabarty, Philippe Laban, Divyansh Agarwal, Smaranda Muresan and Chien-Sheng Wu, CHI 2024 (arXiv:2309.14556v3) | https://arxiv.org/abs/2309.14556v3
+QUOTE: LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals
+TRUE: LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals
+NOTE: Raw arXiv abs page (2309.14556v3). Quote verbatim; the same abstract defines TTCW as the Torrance Test of Creative Writing, so every limb of the claim is on the page.
+
+### [624] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: In the same study no LLM used as an assessor positively correlated with the expert assessments.
+SRC: Chakrabarty, Laban, Agarwal, Muresan and Wu, CHI 2024 (arXiv:2309.14556v3) | https://arxiv.org/abs/2309.14556v3
+QUOTE: none of the LLMs positively correlate with the expert assessments
+TRUE: none of the LLMs positively correlate with the expert assessments
+NOTE: Raw arXiv abs page (2309.14556v3): 'we explore the use of LLMs as assessors to automate the TTCW evaluation, revealing that none of the LLMs positively correlate with the expert assessments.' Quote verbatim; the assessor role is explicit.
+
+### [625] VERIFIED_VERBATIM  {discourse-level tells}
+CLAIM: Professional writers hired to edit LLM paragraphs agreed on undesirable idiosyncrasies and the researchers formalised them into a seven-category taxonomy.
+SRC: Tuhin Chakrabarty, Philippe Laban and Chien-Sheng Wu, CHI 2025 (arXiv:2409.14509v5) | https://arxiv.org/abs/2409.14509v5
+QUOTE: a seven-category taxonomy (e.g. clichés, unnecessary exposition)
+TRUE: these writers agree on undesirable idiosyncrasies in LLM generated text, formalizing it into a seven-category taxonomy
+NOTE: Raw arXiv abs page (2409.14509v5): 'we hired professional writers to edit paragraphs in several creative domains. We first found these writers agree on undesirable idiosyncrasies in LLM generated text, formalizing it into a seven-category taxonomy (e.g. clichés, unnecessary exposition).' Quote verbatim; hiring, agreement and formalisation all supported.
+
+### [626] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: No model in the LAMP study outperformed the others on writing quality, which the authors read as a limitation common to model families.
+SRC: Chakrabarty, Laban and Wu, CHI 2025 (arXiv:2409.14509v5) | https://arxiv.org/abs/2409.14509v5
+QUOTE: outperform each other in terms of writing quality
+TRUE: none of the LLMs used in our study outperform each other in terms of writing quality, revealing common limitations across model families
+NOTE: Raw arXiv abs page (2409.14509v5). Quote verbatim; the sentence names the LAMP corpus as the analysed data and states the 'common limitations across model families' reading, matching both limbs.
+
+### [627] VERIFIED_VERBATIM  {steerability}
+CLAIM: A large-scale preference annotation in that study confirmed experts largely prefer text edited by other experts over automatically edited text.
+SRC: Chakrabarty, Laban and Wu, CHI 2025 (arXiv:2409.14509v5) | https://arxiv.org/abs/2409.14509v5
+QUOTE: experts largely prefer text edited by other experts
+TRUE: A large-scale preference annotation confirms that although experts largely prefer text edited by other experts
+NOTE: Raw arXiv abs page (2409.14509v5) for the verbatim quote; the comparator limb ('over automatically edited text') is confirmed in the raw HTML full text (2409.14509v5) conclusion: 'writers consistently rank text edited by other writers highest, followed by LLM-edited text, with unedited LLM-generated text ranking lowest.'
+
+### [628] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Doshi and Hauser found that access to generative AI story ideas caused stories to be evaluated as more creative.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances 10, eadn5290, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: generative AI ideas causes stories to be evaluated as more
+TRUE: access to generative AI ideas causes stories to be evaluated as more creative
+NOTE: Raw Europe PMC JATS full text (PMC11244532, Science Advances 10, eadn5290, 12 July 2024). Quote verbatim in the abstract; 'more creative' is the first listed evaluation outcome.
+
+### [629] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Stories written with generative AI ideas were more similar to each other than stories written by humans alone.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: stories are more similar to each other than stories by
+TRUE: generative AI-enabled stories are more similar to each other than stories by humans alone
+NOTE: Raw Europe PMC JATS full text (PMC11244532). Quote verbatim in the abstract; the Results section corroborates with per-condition similarity coefficients (b=0.871, P<0.001; b=0.718, P=0.003).
+
+### [630] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Writers given five generative AI ideas produced stories rated 8.1% higher in novelty than writers with no AI access.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: an increase in novelty of 8.1%
+TRUE: writers in the Human with five GenAI ideas condition show an increase in novelty of 8.1%
+NOTE: Raw Europe PMC JATS full text (PMC11244532), Results: '...an increase in novelty of 8.1% (b = 0.311, P < 0.001) over writers without generative AI access.' Quote verbatim; the five-ideas condition and the no-AI-access baseline are both named in the same sentence.
+
+### [631] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: For the least inherently creative writers, ratings of how well the story was written rose by up to 26.6% with five AI ideas.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: how well the story was written increase by up to 26.6%
+TRUE: assessments of how well the story was written increase by up to 26.6%
+NOTE: Europe PMC full-text XML fetched raw (HTTP 200, 98KB). Results/Heterogeneity by inherent creativity: 'For low-DAT writers in the Human with five GenAI ideas condition, assessments of how well the story was written increase by up to 26.6%'. Quote is a verbatim substring; 'low-DAT' is defined in the same paper as 'inherently less creative writers', and DAT is 'a measure of an individual's inherent creativity'. Paper's word is 'assessments', the claim says 'ratings' - same referent (third-party evaluator scores).
+
+### [632] VERIFIED_VERBATIM  {counter-evidence}
+CLAIM: Among the most inherently creative writers, access to generative AI ideas had little effect on their stories' evaluations.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: there is little effect of having access to generative AI ideas
+TRUE: there is little effect of having access to generative AI ideas
+NOTE: Raw XML: 'Among the most inherently creative writers (i.e., high-DAT writers), there is little effect of having access to generative AI ideas on the creativity of their stories.' Quote verbatim. The 'evaluations' limb is supported by the following sentences: 'Across all conditions, high-DAT writers' stories are evaluated relatively highly ... providing them with access to generative AI does not affect their high evaluations.'
+
+### [633] VERIFIED_VERBATIM  {register measured}
+CLAIM: The generative model in the Doshi and Hauser experiment was OpenAI's GPT-4, used only to supply a three-sentence starting idea.
+SRC: Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML
+QUOTE: OpenAI’s GPT-4 LLM
+TRUE: OpenAI's GPT-4 LLM ... to provide a three-sentence starting idea
+NOTE: Raw XML, study design: 'we gave writers the option to call upon a generative AI platform (OpenAI's GPT-4 LLM) to provide a three-sentence starting idea to inspire their own story writing.' Quote verbatim (curly apostrophe). The 'only' limb is corroborated in Materials and Methods: the prompt was 'Write a three-sentence summary of a story about ...', the API response was passed to the participant, and 'At the time of the study, we used the API from OpenAI's latest model, GPT-4.' The only other OpenAI call in the paper is the (non-generative) embeddings API used for the similarity analysis, so GPT-4 is indeed the sole generative model and its sole role is the starting idea.
+
+### [634] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Chiang argues that when an LLM fills in the choices a prompt did not make by averaging the choices other writers made, that average amounts to the least interesting choices available, which is why AI-generated text is often bland.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: that average is equivalent to the least interesting choices possible
+TRUE: that average is equivalent to the least interesting choices possible
+NOTE: New Yorker page fetched raw with a browser UA (HTTP 200, full essay text, not a paywall stub - byline 'By Ted Chiang August 31, 2024' present). Page: 'One is to take an average of the choices that other writers have made, as represented by text found on the Internet; that average is equivalent to the least interesting choices possible, which is why A.I.-generated text is often really bland.' Quote verbatim; every limb (filling in choices the prompt did not make, averaging other writers, blandness) is on the page. Page says 'often really bland'; claim says 'often bland'.
+
+### [635] VERIFIED_VERBATIM  {steerability}
+CLAIM: Chiang argues that the alternative to averaging - instructing the program to mimic a specific writer's style - produces a highly derivative story rather than interesting art.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: which produces a highly derivative story
+TRUE: which produces a highly derivative story
+NOTE: Same paragraph: 'Another is to instruct the program to engage in style mimicry, emulating the choices made by a specific writer, which produces a highly derivative story. In neither case is it creating interesting art.' Quote verbatim; the 'rather than interesting art' limb is the next sentence.
+
+### [636] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Chiang states flatly that at the time of writing the fiction generated by large language models like ChatGPT is terrible.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: the fiction generated by large language models like ChatGPT is terrible
+TRUE: Right now, the fiction generated by large language models like ChatGPT is terrible
+NOTE: Page: 'Right now, the fiction generated by large language models like ChatGPT is terrible, but one can imagine that such programs might improve in the future.' Quote verbatim. The 'at the time of writing' limb is carried by the page's own 'Right now' and by the dateline August 31, 2024.
+
+### [637] VERIFIED_VERBATIM  {other: sentence-level choice as the locus of quality}
+CLAIM: Chiang argues that you could not replace every sentence of a thriller with a semantically equivalent one and have the novel remain as entertaining, so its sentences and the small-scale choices they represent determine its effectiveness.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: I doubt you could replace every sentence in a thriller
+TRUE: its sentences - and the small-scale choices they represent - help to determine the thriller's effectiveness
+NOTE: Page: 'I doubt you could replace every sentence in a thriller with one that is semantically equivalent and have the resulting novel be as entertaining. This means that its sentences - and the small-scale choices they represent - help to determine the thriller's effectiveness.' Quote verbatim and both limbs present. Fidelity note for the downstream writer: Chiang hedges twice where the claim does not - 'I doubt you could' (not 'you could not') and 'help to determine' (not 'determine'). Use the page's wording if quoting.
+
+### [638] VERIFIED_VERBATIM  {other: absence of communicative intention}
+CLAIM: Chiang argues that ChatGPT has no more intention to communicate than a phone's auto-complete, and that this lack of intention means it is not actually using language.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: it has no more intention to communicate
+TRUE: it has no more intention to communicate
+NOTE: Page: 'The fact that ChatGPT can generate coherent sentences invites us to imagine that it understands language in a way that your phone's auto-complete does not, but it has no more intention to communicate.' Quote verbatim, and the auto-complete comparison is in the same sentence. The second limb is the same paragraph's opening: 'a large language model is not a writer; it's not even a user of language. Language is, by definition, a system of communication, and it requires an intention to communicate.'
+
+### [639] VERIFIED_VERBATIM  {steerability}
+CLAIM: Chiang argues that the selling point of generative AI - that it generates vastly more than the user puts in - is precisely what prevents these programs from being effective tools for artists.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024 | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: that is precisely what prevents them from being effective tools for artists
+TRUE: that is precisely what prevents them from being effective tools for artists
+NOTE: Page: 'The selling point of generative A.I. is that these programs generate vastly more than you put into them, and that is precisely what prevents them from being effective tools for artists.' Quote verbatim, both limbs in the one sentence.
+
+### [640] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Chiang reports that Google pulled its Paris Olympics Gemini commercial, in which a father uses Gemini to compose his daughter's fan letter, after widespread backlash from viewers.
+SRC: Ted Chiang, essayist and SF writer, The New Yorker, 2024, reporting on the Google Gemini ad | https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art
+QUOTE: Google pulled the commercial after widespread backlash from viewers
+TRUE: Google pulled the commercial after widespread backlash from viewers
+NOTE: Page: 'Recently, Google aired a commercial during the Paris Olympics for Gemini ... The ad shows a father using Gemini to compose a fan letter, which his daughter will send to an Olympic athlete who inspires her. Google pulled the commercial after widespread backlash from viewers.' Quote verbatim; every limb (Paris Olympics, Gemini, father composing, daughter's letter, backlash, pulled) is on the page.
+
+### [641] VERIFIED_VERBATIM  {gloss and over-explaining}
+CLAIM: Preston reports that when a prospect asked several questions at once, the Brenda chatbot strung together a composite response that collated so much information she sounded hostile.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022 | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: she sounded hostile
+TRUE: she sounded hostile
+NOTE: n+1 page fetched raw (HTTP 200, full essay, no paywall cut). Page: 'a prospect would pose a series of questions (What's the rent? And utilities? When can I move in?) and Brenda would string together a composite response that collated so much information she sounded hostile.' Quote verbatim; every limb supported.
+
+### [642] VERIFIED_VERBATIM  {other: what a human editor fixes first}
+CLAIM: Preston reports that her standard intervention on Brenda's over-informative replies was to soften the aggressive recitation of facts with line breaks and merry affirmations.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022 | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: aggressive recitation of facts with line breaks and merry affirmations
+TRUE: I softened her aggressive recitation of facts with line breaks and merry affirmations
+NOTE: Page, immediately after the composite-response sentence: 'In these cases, I softened her aggressive recitation of facts with line breaks and merry affirmations.' Quote verbatim. 'Standard intervention' is carried by the page's habitual framing ('In these cases ...', among the routine 'little collaborations' she describes).
+
+### [643] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: Preston reports that Brenda's most common failure was errors of comprehension in which she would seize on the wrong keyword and queue up a non sequitur.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022 | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: She would seize on the wrong keyword and queue up a non sequitur
+TRUE: Most of her missteps were errors of comprehension. She would seize on the wrong keyword and queue up a non sequitur
+NOTE: Page: 'Most of her missteps were errors of comprehension. She would seize on the wrong keyword and queue up a non sequitur, or she would think she did not know how to answer when she actually had the right response on hand.' Quote verbatim, both limbs supported. Note the page gives a second form of the same error class (thinking she did not know an answer she had) that the claim omits; the claim does not assert exclusivity.
+
+### [644] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: Preston reports that Brenda's developers touted her unrelenting consistency as a feature, claiming that because she said the same thing to everyone she was incapable of bias.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022, reporting the developers' claim | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: The developers touted her unrelenting consistency as a feature
+TRUE: The developers touted her unrelenting consistency as a feature
+NOTE: Page: 'Brenda's cyclical catchphrases anesthetized me into a stupor. The developers touted her unrelenting consistency as a feature. Brenda, they claimed, said the same thing to everyone, which meant that she was incapable of bias.' Quote verbatim; both limbs, including the attribution to the developers' claim, supported.
+
+### [645] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Preston reports that neither she nor Brenda could answer prospects' specific questions such as carpet or hardwood and which direction the windows faced, and that specifics were what people cared about most.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022 | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: specifics, it turns out, were what people cared about the most
+TRUE: specifics, it turns out, were what people cared about the most
+NOTE: Page: 'When it came to specifics, we couldn't say much, and specifics, it turns out, were what people cared about the most. Carpet or hardwood? What direction did the windows face? Of course we had no idea and neither did Brenda.' Quote verbatim; the 'neither she nor Brenda' limb is the page's 'we had no idea and neither did Brenda'.
+
+### [646] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Preston reports that when Brenda sounded odd and graceless, people were less likely to get intimate with her, which reduced the number of conversations escalated to a human.
+SRC: Laura Preston, former chatbot operator, n+1 Issue 44, 2022 | https://www.nplusonemag.com/issue-44/essays/human_fallback/
+QUOTE: when Brenda sounded odd and graceless, people were less likely to get intimate
+TRUE: "when Brenda sounded odd and graceless, people were less likely to get intimate, which meant less HUMAN_FALLBACK"
+NOTE: Raw n+1 page fetched (HTTP 200, browser UA). Quote exact in the paragraph beginning "Eventually I reached a level of virtuosity". The escalation limb is supported: the essay defines HUMAN_FALLBACK as Brenda's "white flag of surrender" with which "Brenda ceded the conversation to me" (the human operator), so "less HUMAN_FALLBACK" = fewer conversations escalated to a human.
+
+### [647] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Clarke reports that even AI works that have been co-written or given a polishing edit to disguise them still display the hallmarks he has come to expect.
+SRC: Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025 | https://clarkesworldmagazine.com/clarke_08_25/
+QUOTE: they still display the hallmarks I
+TRUE: "In many cases, these works have been “co-written” with “AI” or simply given a polishing edit in an attempt to make them less obvious... they still display the hallmarks I’ve come to expect"
+NOTE: Raw Clarkesworld Aug 2025 editorial fetched (HTTP 200). Quote exact; both limbs (co-written / polishing edit to disguise, and hallmarks he has come to expect) present in the same sentence pair.
+
+### [648] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Clarke states parenthetically that the tells of generated fiction are more obvious on longer works, which is why some AI flash fiction and poetry has found publication elsewhere.
+SRC: Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025 | https://clarkesworldmagazine.com/clarke_08_25/
+QUOTE: the tells are more obvious on longer works
+TRUE: "Given that I’ve seen some flash and poetry examples of these works find publication elsewhere (the tells are more obvious on longer works)"
+NOTE: Quote exact and genuinely parenthetical. The causal "which is why" is carried by the parenthesis's placement immediately after the flash/poetry-publication clause, which is its plain function; both facts are stated on the page.
+
+### [649] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Clarke describes the AI systems writers co-write with as having produced some of the worst stories he has read.
+SRC: Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025 | https://clarkesworldmagazine.com/clarke_08_25/
+QUOTE: some of the worst stories I
+TRUE: "co-writing with something that has produced some of the worst stories I’ve read"
+NOTE: Quote exact, in the paragraph beginning "If any of that makes you nervous". Page uses the singular "something" (the AI system) rather than plural "systems"; substance identical.
+
+### [650] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Clarke reports that at the peak of the generated-submission surge Clarkesworld's submissions more than doubled.
+SRC: Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025 | https://clarkesworldmagazine.com/clarke_08_25/
+QUOTE: our submissions more than doubled due to the high volume of generated works
+TRUE: "At its peak, our submissions more than doubled due to the high volume of generated works."
+NOTE: Quote exact, in the paragraph beginning "The good news is that the adaptations we made to our submissions process". Peak-of-surge limb explicit ("At its peak").
+
+### [651] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Clarke reports that when he evaluated commercial detection tools he observed an even greater error rate on works written by non-native English speakers.
+SRC: Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025 | https://clarkesworldmagazine.com/clarke_08_25/
+QUOTE: an even greater error rate when it came to works written by non-native English speakers
+TRUE: "The number of false positives and negatives was simply unacceptable and I observed an even greater error rate when it came to works written by non-native English speakers"
+NOTE: Quote exact, in the paragraph beginning "I was already thinking ahead to this scenario". The evaluation limb is supported both by that paragraph's subject (commercial detection tools/"their products") and by his later statement "I’ve been regularly evaluating these products since 2023".
+
+### [652] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Clarke states that he would never trust an algorithm to make a final assessment and personally evaluates each submission his automated check flags as suspicious.
+SRC: Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025 | https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/
+QUOTE: I would never trust an algorithm to make a final assessment
+TRUE: "I would never trust an algorithm to make a final assessment... As such, I personally evaluate each suspicious submission."
+NOTE: Raw neil-clarke.com post (dated 05/02/2025) fetched (HTTP 200). Quote exact, in the paragraph beginning "No process is perfect"; the automated check is the post's "oval" in-house automated step that routes “suspicious” submissions to a separate queue.
+
+### [653] VERIFIED_VERBATIM  {reader and expert judgment}
+CLAIM: Clarke states that setting aside legal and ethical concerns, the output of generative AI tools is nowhere near the standards Clarkesworld expects.
+SRC: Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025 | https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/
+QUOTE: the output of these tools is nowhere near the standards we expect
+TRUE: "even if we set aside our legal and ethical concerns with how these systems were developed, the output of these tools is nowhere near the standards we expect"
+NOTE: Quote exact, in the closing section paragraph beginning "And repeated from the previous post". Both limbs (setting aside legal and ethical concerns; nowhere near Clarkesworld's standards) present verbatim.
+
+### [654] VERIFIED_VERBATIM  {other: abstract-concrete conjunction (eyeball kick)}
+CLAIM: nostalgebraist claims the main stylistic hallmark shared by DeepSeek-R1 and an unreleased OpenAI creative-writing model is the conjunction of one thing that is abstract or incorporeal with another that is concrete or sensory.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: one thing that is abstract and/or incorporeal
+TRUE: "This, I claim, is the main stylistic hallmark of both R1 and the new OpenAI model" ... "one thing that is abstract and/or incorporeal" / "another thing that is concrete and/or sensory"
+NOTE: Raw Tumblr page fetched (HTTP 200, browser UA; full post body present, not a shell). Quote exact in section "A mechanical boot, a human eye". The OpenAI model is described earlier as "the new, unreleased OpenAI model".
+
+### [655] VERIFIED_VERBATIM  {steerability}
+CLAIM: nostalgebraist reports that R1 kept producing abstract/concrete conjunctions in spite of user-specified stylistic directions, including prompts to imitate named literary authors.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: R1 even consistently does this in spite of user-specified stylistic directions
+TRUE: "R1 even consistently does this in spite of user-specified stylistic directions. To wit: when I tried prompting R1 to mimic the styles of a bunch of famous literary authors..."
+NOTE: Quote exact in "A mechanical boot, a human eye". The named-author limb is the following sentence: mimicking "famous literary authors" yielded the eyeball kicks "in virtually every case".
+
+### [656] VERIFIED_VERBATIM  {steerability}
+CLAIM: nostalgebraist reports that the one pastiche free of the abstract/concrete tell was the Hemingway attempt, which he attributes to Hemingway having a distinctive and constrained style leaving no room for such flourishes.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: presumably because Hemingway himself has a distinctive and constrained style
+TRUE: "(The one exception being the Hemingway pastiche, presumably because Hemingway himself has a distinctive and constrained style which leaves no room for these kinds of flourishes.)"
+NOTE: Quote exact; it is the parenthesis immediately after the pastiche discussion, exactly as the page hint says. Both limbs (sole exception; attributed to Hemingway's constrained style) present.
+
+### [657] VERIFIED_VERBATIM  {uniform rhythm (low burstiness)}
+CLAIM: nostalgebraist describes this crammed prose as having no modulation and no room to breathe, an unrelenting stream of gee-whiz effects.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: no modulation, no room to breathe
+TRUE: "There’s no modulation, no room to breathe – just an unrelenting stream of “gee-whiz” effects."
+NOTE: Quote exact in "A mechanical boot, a human eye"; the referent "This kind of prose" is the "crammed prose full of eyeball kicks" named two paragraphs above, so the "crammed prose" limb holds.
+
+### [658] VERIFIED_VERBATIM  {homogenisation}
+CLAIM: nostalgebraist guesses that the shared style of two unrelated models is convergent evolution, what happens if you optimize for human judgments of literary quality in a generic way.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: maybe this is just what happens if you optimize for human judgments
+TRUE: "I would guess it’s convergent evolution: maybe this is just what happens if you optimize for human judgments of “literary quality” in some fairly generic, obvious, “naive” manner"
+NOTE: Quote exact, in the closing paragraph of section "Background: the new OpenAI model". "Two unrelated models" is supported — the post's framing is "two unrelated LLMs" and he explicitly doubts OpenAI copied DeepSeek.
+
+### [659] VERIFIED_VERBATIM  {other: technique without purpose}
+CLAIM: nostalgebraist argues that where human writers deploy these devices to specific ends, the LLMs seem to use them arbitrarily and incessantly.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: the LLMs seem to use them arbitrarily and incessantly
+TRUE: "In the hands of humans, these are techniques that can be deployed to specific ends; the LLMs seem to use them arbitrarily and incessantly"
+NOTE: Quote exact, in section "Commentary". Both limbs (human writers deploy to specific ends; LLMs arbitrary and incessant) are the two halves of the same sentence.
+
+### [660] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: nostalgebraist identifies personification of nature or the inanimate as a trick overused by R1, and suggests it is favoured because it is easy and reads as distinctively literary.
+SRC: nostalgebraist, blogger and ML researcher, Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: personification of nature (or the inanimate)
+TRUE: "First: personification of nature (or the inanimate)... possibly because it’s a fairly easy technique... which nonetheless strikes most people as distinctively “literary”"
+NOTE: Quote exact in section "More on style: personification", which opens "a few other stylistic ‘tricks’ overused by R1". The easy/reads-as-literary limb is the next sentence; the page hedges it as "possibly because", matching the claim's "suggests".
+
+### [662] VERIFIED_VERBATIM  {lexical tells}
+CLAIM: Coagulopath, quoted by nostalgebraist, describes R1's overwhelming reliance on cliche as spinning a Rolodex of 20-30 generic images and selecting one at random.
+SRC: Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: spinning its Rolodex of 20-30 generic images
+TRUE: spinning its Rolodex of 20-30 generic images, selecting one at random
+NOTE: Raw tumblr HTML fetched with browser UA (200, post dated 2025-03-15 00:18 GMT). Quoted point 3 of Coagulopath's 7-point description, reproduced verbatim by nostalgebraist: 'an overwhelmingly reliance on cliche. Everything is a shadow, an echo, a whisper, a void, a heartbeat, a pulse, a river, a flower-you see it spinning its Rolodex of 20-30 generic images and selecting one at random.' Attribution limb ('Here's a selection from Coagulopath's 7-point description of R1's style in that comment') supported.
+
+### [663] VERIFIED_VERBATIM  {other: no idle detail (everything is functional)}
+CLAIM: Coagulopath, quoted by nostalgebraist, complains that in R1 fiction every line of dialogue advances the plot and every description is functional, so nothing on the page has weight.
+SRC: Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: Every line of dialog advances the plot
+TRUE: Every line of dialog advances the plot; nothing has weight
+NOTE: Same raw page. Quoted point 5: 'an eyeball-flatteningly fast pace... Every line of dialog advances the plot. Every description is functional. Nothing is allowed to exist, or to breathe... Nothing on the page has any weight or heft.' Every limb (dialogue advances plot, description functional, nothing has weight) is on the page verbatim; note the source spelling is 'dialog'.
+
+### [664] VERIFIED_VERBATIM  {steerability}
+CLAIM: Coagulopath, quoted by nostalgebraist, reports that reprompting R1 after a story you dislike is almost pointless because you just get the same stuff again.
+SRC: Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025 | https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes
+QUOTE: you just get the same stuff again
+TRUE: almost pointless reprompting it: you just get the same stuff again
+NOTE: Same raw page. Quoted point 7: 'The way how, if you don't like a story, it's almost pointless reprompting it: you just get the same stuff again, smeared around your plate a bit.' Both limbs (reprompting after a disliked story; almost pointless) supported.
+
+### [665] VERIFIED_VERBATIM  {uniform rhythm (low burstiness)}
+CLAIM: Guo lists monotony as a tell, writing that in AI-generated content sentences are roughly the same length and the cadence never varies.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: Sentences are roughly the same length
+TRUE: Sentences are roughly the same length. The cadence never varies.
+NOTE: Raw Substack HTML fetched (200, byline 'Charlie Guo, Oct 22, 2025'). Section 'Monotony': 'AI-generated content often has a repetitive structure. Sentences are roughly the same length. Paragraphs follow the same rhythm. The cadence never varies.' Both limbs verbatim; the section sits inside the article's tells (under 'Structural Patterns'), so 'lists monotony as a tell' holds.
+
+### [666] VERIFIED_VERBATIM  {other: fixed person and tense}
+CLAIM: Guo observes that LLMs uncommonly switch person or tense and tend to pick a lane and stay in it with unnatural consistency.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: They tend to pick a lane and stay in it
+TRUE: uncommon to see LLMs switch person; they pick a lane
+NOTE: Same raw page, 'Monotony': 'Creative writing varies not only sentence structure, but also tense and point of view. It's uncommon to see LLMs switch from second or third person to first, and vice versa. They tend to pick a lane and stay in it with unnatural consistency.' Quote verbatim. The 'person' limb is explicit; 'tense' is named one sentence earlier as the axis creative writing varies and is carried by 'pick a lane', so the whole claim stands, though the LLM-specific sentence itself names only person.
+
+### [667] VERIFIED_VERBATIM  {abstraction over the concrete}
+CLAIM: Guo argues that AI metaphors are plausible and generic, gesturing toward meaning without quite achieving it, whereas human metaphors are either highly specific or culturally resonant.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: They gesture toward meaning without quite achieving it
+TRUE: AI metaphors are... plausible. Generic. Human ones specific or resonant.
+NOTE: Same raw page, section 'Awkward Analogies': 'Human metaphors tend to be either highly specific (drawing from personal experience) or culturally resonant (drawing from shared references). AI metaphors are... plausible. Generic. They gesture toward meaning without quite achieving it.' All three limbs verbatim.
+
+### [668] VERIFIED_VERBATIM  {other: surface polish with nothing underneath}
+CLAIM: Guo names the combination of surface polish with nothing underneath as AI's signature failure.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: surface polish with nothing underneath
+TRUE: That specific combination - surface polish with nothing underneath - is AI's signature
+NOTE: Same raw page, section 'Filler': 'That specific combination - surface polish with nothing underneath - is AI's signature.' Quote verbatim. The page word is 'signature'; the claim's 'signature failure' is supported by the surrounding framing ('Maybe the biggest red flag' / prose that 'looks and sounds correct until it's put under scrutiny').
+
+### [669] VERIFIED_VERBATIM  {gloss and over-explaining}
+CLAIM: Guo reports that a common AI failure is a paragraph saying in four sentences something that could easily have been said in one, with the other three adding nothing.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: in four sentences something that could easily have been said
+TRUE: a paragraph said in four sentences what one could say
+NOTE: Same raw page, section 'Filler': 'I'll realize that a paragraph has said in four sentences something that could easily have been said in one. The other three sentences added zero to the piece - if anything, they distracted from the point.' All limbs verbatim, including the 'other three adding nothing' limb.
+
+### [671] VERIFIED_VERBATIM  {detection and its failures}
+CLAIM: Guo rejects absence of typos as a tell, writing that with tools like Grammarly widespread, perfect grammar is no longer the smoking gun it once was.
+SRC: Charlie Guo, Artificial Ignorance newsletter, 22 October 2025 | https://www.ignorance.ai/p/the-field-guide-to-ai-slop
+QUOTE: Perfect grammar is no longer the smoking gun it once was
+TRUE: Perfect grammar is no longer the smoking gun it once was
+NOTE: Same raw page, section 'The Red Herrings', bullet 'Typos (or lack thereof)': 'With tools like Grammarly becoming more prevalent... a lack of typos may mean the text went through spell check, not that it was entirely generated by AI. Perfect grammar is no longer the smoking gun it once was.' Quote verbatim; 'rejects as a tell' matches the section's framing ('Before we discuss the reliable tells, let's address a couple of red herrings... I don't think any of them should be considered conclusive'), though Guo also calls them 'yellow flags - worth noticing'.

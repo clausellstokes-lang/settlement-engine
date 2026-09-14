@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 77,
+ "firstTs": "2026-09-12T03:11:24.202Z",
+ "lastTs": "2026-09-12T03:14:40.391Z",
+ "tools": {
+  "Bash": 19,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "and the bars re-run face-by-face plus the pool-level checks.\n\nThe judge's other finding in this pool (variant 2 face 2) was a REVERT already standing at HEAD; it is carried through unchanged and was not a target. No dock file was written, entered or executed beyond the read-only licence-card script.",
+ "run": "wf_b9aa5993-4a0",
+ "agent": "a7bcd302e96d6f654",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4ed79a2b-6cd2-45cf-ab97-83cdad49c30b/subagents/workflows/wf_b9aa5993-4a0/agent-a7bcd302e96d6f654.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

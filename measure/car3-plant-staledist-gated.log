@@ -1,0 +1,6 @@
+     × every prose leaf lands in a data-lazy chunk (PRESENCE: the fresh build only) 110ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+  src/data/dossierStateProse/general.generated.js: reached NO emitted chunk. Either its desk lost its last importer (the corpus is dead code) or the fingerprint no longer survives minification.: expected [ Array(1) ] to deeply equal []
++   "src/data/dossierStateProse/general.generated.js: reached NO emitted chunk. Either its desk lost its last importer (the corpus is dead code) or the fingerprint no longer survives minification.",
+ Test Files  1 failed (1)
+      Tests  1 failed | 53 passed (54)

@@ -1,0 +1,885 @@
+A Game of Thrones - Wikipedia
+Jump to content
+Main menu
+ Main menu
+ move to sidebar
+ hide
+ Navigation
+ Main page
+Contents
+Current events
+Random article
+About Wikipedia
+Contact us
+ Contribute
+ Help
+Learn to edit
+Community portal
+Recent changes
+Upload file
+Special pages
+Search
+ Search
+Appearance
+ Donate
+Create account
+Log in
+Personal tools
+Donate
+Create account
+Log in
+ Contents
+ move to sidebar
+ hide
+ (Top)
+ 1
+ Plot
+ Toggle Plot subsection
+ 1.1
+ In the Seven Kingdoms
+ 1.2
+ On the Wall
+ 1.3
+ Across the Narrow Sea
+ 2
+ Background
+ Toggle Background subsection
+ 2.1
+ Author
+ 2.2
+ Writing and publication
+ 3
+ Style
+ Toggle Style subsection
+ 3.1
+ Narration
+ 3.2
+ Genre
+ 4
+ Reception
+ 5
+ Interpretation
+ Toggle Interpretation subsection
+ 5.1
+ Historical
+ 5.2
+ Gender and sex
+ 5.3
+ Power and rulers
+ 6
+ Adaptations
+ 7
+ Notes and references
+ Toggle Notes and references subsection
+ 7.1
+ Notes
+ 7.2
+ References
+ 8
+ Bibliography
+ Toggle Bibliography subsection
+ 8.1
+ Contemporary reviews
+ 8.2
+ Primary sources
+ 9
+ External links
+Toggle the table of contents
+ A Game of Thrones
+57 languages
+ العربية
+Asturianu
+Azərbaycanca
+Беларуская
+Български
+বাংলা
+Brezhoneg
+Català
+Čeština
+Cymraeg
+Dansk
+Deutsch
+Español
+Eesti
+فارسی
+Suomi
+Français
+Gaeilge
+Galego
+עברית
+Hrvatski
+Magyar
+Հայերեն
+Bahasa Indonesia
+Íslenska
+Italiano
+日本語
+ქართული
+Taqbaylit
+Қазақша
+한국어
+Кыргызча
+Latina
+Lietuvių
+Македонски
+മലയാളം
+Bahasa Melayu
+Nederlands
+Norsk bokmål
+Polski
+Português
+Română
+Русский
+සිංහල
+Simple English
+Slovenčina
+Slovenščina
+Shqip
+Српски / srpski
+Svenska
+ไทย
+Türkçe
+Українська
+اردو
+Oʻzbekcha / ўзбекча
+閩南語 / Bân-lâm-gí
+中文
+ Edit links
+ Article
+Talk
+ English
+ Read
+Edit
+View history
+Tools
+ Tools
+ move to sidebar
+ hide
+ Actions
+Read
+Edit
+View history
+ General
+ What links here
+Related changes
+Upload file
+Permanent link
+Page information
+Cite this page
+Get shortened URL
+Switch to legacy parser
+ Print/export
+ Download as PDF
+Printable version
+ In other projects
+ Wikidata item
+ Appearance
+ move to sidebar
+ hide
+ From Wikipedia, the free encyclopedia
+ 1996 novel by George R. R. Martin
+This article is about the novel. For the TV series, see Game of Thrones. For the franchise, see Game of Thrones (franchise). For derivative works of the same name, see A Game of Thrones (disambiguation).
+\n","href":"./Template:Infobox_book"},"params":{"name":{"wt":"A Game of Thrones"},"image":{"wt":"AGameOfThrones.jpg"},"caption":{"wt":"US first edition cover"},"author":{"wt":"[[George R. R. Martin]]"},"language":{"wt":"English"},"series":{"wt":"''[[A Song of Ice and Fire]]''"},"release_number":{"wt":"1"},"genre":{"wt":"[[Historical fantasy]], [[epic fantasy]]"},"published":{"wt":"{{start date|1996|08|01}}{{Sfn|Martin|2016}}"},"publisher":{"wt":"[[Bantam Spectra]] (US)<br>[[HarperCollins|HarperCollins Voyager]] (UK)"},"pages":{"wt":"694 <!-- US first edition -->"},"preceded_by":{"wt":""},"followed_by":{"wt":"[[A Clash of Kings]]"},"editor":{"wt":"Anne Groell{{Sfn|Abraham|2012|p=29}}{{Sfn|Beaumont-Thomas|2014}}"}},"i":0}}]}'>A Game of Thrones US first edition cover
+EditorAnne Groell[1][2]
+AuthorGeorge R. R. Martin
+LanguageEnglish
+SeriesA Song of Ice and Fire
+Release number1
+GenreHistorical fantasy, epic fantasy
+PublishedAugust 1, 1996 (1996-08-01)[3]
+PublisherBantam Spectra (US)
+HarperCollins Voyager (UK)
+Pages694
+Followed byA Clash of Kings 
+A Game of Thrones is an epic fantasy novel by American author George R. R. Martin. It was published in August 1996 as the first entry in his series A Song of Ice and Fire. It was Martin's fourth novel and his return to writing prose fiction after a long period working in television. He had the initial idea in 1991 while writing science fiction; he wrote a hundred pages and submitted them to his agent, originally planning the novel as a trilogy. 
+A Game of Thrones is narrated in third person, with each chapter alternating between eight narrators who sometimes provide unreliable accounts. In the Seven Kingdoms of Westeros, House Stark and House Lannister influence the political fate of the continent. In Westeros' far north, an illegitimate son of House Stark joins a group maintaining a giant wall of ice to protect Westeros from raiders and a group of mythical enemies. Across the sea in Essos, the last surviving members of Westeros' deposed royal house, House Targaryen, live in exile.
+Following the novel's publication, several reviewers commended the novel's focus on political intrigue and historical influences. It won the 1997 Locus Award for Best Fantasy Novel and was nominated for several others, and a novella comprising the Targaryen chapters won the 1997 Hugo Award for Best Novella. The novel's first printing sold only a few thousand copies, but gained a small following through word of mouth. The HBO television adaptation Game of Thrones (2011–2019) reignited interest in the novel. It became a best-seller and the subject of academic and popular discourse. 
+An epic fantasy novel, it has been widely compared with the work of J. R. R. Tolkien and characterized as subverting the genre's major tropes; it is sometimes described as historical or medieval fantasy. There are few direct historical analogues, but there are clear echoes of real history, like Hadrian's Wall inspiring the novel's giant wall of ice. Scholars have explored whether the novel authentically represents the Middle Ages and discuss how it responds to medieval literary conventions or themes, like chivalry. Gender, motherhood, and sexual violence are other frequently explored topics, and the authority of rulers or kings is sometimes discussed with reference to feudalism. In 2019, the BBC named it among the 100 most inspiring novels.
+Plot
+[edit]
+This article's plot summary may be too long or excessively detailed. Please help improve it by removing unnecessary details and making it more concise. (April 2026) (Learn how and when to remove this message)
+In the Seven Kingdoms
+[edit]
+After the death of Lord Jon Arryn, King Robert Baratheon recruits his childhood friend Eddard "Ned" Stark, the lord of the northern castle of Winterfell, to replace Arryn as Hand of the King and betroths his son Joffrey to Ned's daughter Sansa. Shortly thereafter, Ned's son Bran discovers Robert's wife, Queen Cersei Lannister, having sex with her twin brother, Jaime. Jaime throws Bran from a tower, leaving Bran comatose and paralyzed. 
+Ned brings his daughters Sansa and Arya to the capital city, King's Landing, and finds that Robert is an ineffective king whose only interests are hunting, drinking, and womanizing.
+At Winterfell, an assassin fails to kill Bran while he is unconscious, and Ned's wife, Catelyn, travels to King's Landing to bring word to Ned. Catelyn's childhood friend, Petyr "Littlefinger" Baelish, implicates Tyrion Lannister, the dwarf brother of Cersei and Jaime, in the assassination attempt. On the road home, Catelyn encounters Tyrion and arrests him for the attempt on Bran's life. In retaliation for Tyrion's abduction, his father, Lord Tywin Lannister, sends soldiers to raid the Riverlands, Catelyn's home region. Tyrion regains his freedom by demanding a trial and recruiting a mercenary named Bronn to defend him in trial by combat.
+Ned investigates Jon Arryn's death and discovers that the children thought to be Robert's heirs are in fact Cersei's children by Jaime; he infers that Jon Arryn was killed to conceal this information. Before Ned can act, Cersei arranges Robert's death and installs Joffrey on the throne. Ned enlists Littlefinger's help to take Cersei and Joffrey into custody. Littlefinger betrays him and Ned is arrested. Arya escapes, but Cersei and Joffrey take Sansa as a hostage.
+Ned's eldest son, Robb, marches his army south in response to his father's arrest. To secure a strategically necessary bridge crossing, Catelyn negotiates a marital alliance between Robb and the notoriously unreliable House Frey. Robb defeats a Lannister army in the Riverlands, capturing Jaime. Tywin sends Tyrion back to King's Landing to act as Joffrey's Hand of the King. Joffrey has Ned executed and Robb's followers declare independence from the Seven Kingdoms, proclaiming Robb the "King in the North".
+On the Wall
+[edit]
+The prologue of the novel introduces the Wall: a huge magical wall of ice at the northern border of the Seven Kingdoms. The Wall is defended by the Night's Watch, an order of warriors who serve for life to defend the realm from the Others, an ancient and hostile inhuman race, and human "wildlings" who live north of the Wall.
+Jon Snow, Ned's bastard son, is inspired by his uncle Benjen to join the Night's Watch. He becomes disillusioned when he discovers that its recruits are mostly convicts. Jon unites his fellow recruits against their harsh instructor and protects the cowardly but good-natured and intelligent Samwell Tarly. Jon is appointed steward to the leader of the Watch, Lord Commander Jeor Mormont. Benjen fails to return from an expedition north of the Wall; when the bodies of two men from his party are recovered, they re-animate as undead wights before being dispatched by Jon.
+When word of Ned's execution reaches Jon, he attempts to join Robb against the Lannisters, but is persuaded to remain loyal to the Watch. Mormont declares his intention to march north to find Benjen, and to investigate rumors of a "King-beyond-the-Wall" uniting the wildlings.
+Across the Narrow Sea
+[edit]
+Across the eastern sea, in Essos, live the exiled children of the dead and deposed Mad King Aerys of the Seven Kingdoms: Viserys and Daenerys Targaryen.
+Viserys betroths Daenerys to Khal Drogo, a warlord of the Dothraki people, in exchange for the use of Drogo's army to reclaim the throne. Daenerys receives three petrified dragon eggs as a wedding present from a wealthy merchant. Jorah Mormont, a knight exiled from Westeros and Jeor's son, joins Viserys as an adviser. Initially terrified of her new husband and his people, Daenerys eventually embraces her role as Drogo's queen. Drogo, however, shows little interest in conquering Westeros. When Viserys publicly threatens Daenerys and her unborn child, Drogo executes him by pouring molten gold on his head.
+An assassin attempts to poison Daenerys, convincing Drogo to conquer Westeros. While sacking villages to fund the invasion, Drogo is badly wounded, and Daenerys commands the captive folk healer Mirri Maz Duur to save him. The healer, angered by the Dothraki raids against her people, sacrifices Daenerys's unborn child to power the spell to save Drogo's life, which restores Drogo's physical health but leaves him in a persistent vegetative state.
+With Drogo incapacitated, much of his army disperses. Daenerys smothers Drogo with a pillow and has Mirri tied to Drogo's funeral pyre. She places her three dragon eggs on the pyre and enters it herself. When the fire burns out, she emerges unharmed, with three newly hatched dragons.
+Background
+[edit]
+Author
+[edit]
+Martin at a book signing in Ljubljana, Slovenia (2011)
+George R. R. Martin was born and raised in Bayonne, New Jersey.[4] His family was poor,[5] lived on a government housing project, and did not own a car.[6] He started writing in childhood and sold horror stories to other children for a nickel.[5][7] Martin's passion for comic books led to his interest in science fiction and fantasy and, as a teenager, he wrote superhero fiction for fan magazines.[8] His first published work was a science-fiction story for Galaxy Science Fiction in 1971.[9][5] At Northwestern University, Martin studied journalism,[8] and he was a conscientious objector to the Vietnam War[10]—he performed alternative service instead.[8]
+Martin's first two published novels, Dying of the Light (1977) and Fevre Dream (1982), performed well,[8][5] and by 1983 he had accrued 3 Hugo Awards.[11] Martin's publisher provided a large advance payment for his third novel, The Armageddon Rag (1983).[11] It was a commercial disaster, temporarily halting his literary career.[12] A fan of The Armageddon Rag hired Martin as a writer on a revival of The Twilight Zone (1985–1989);[11] he later worked on the CBS series Beauty and the Beast (1987–1990) and The Outer Limits (1995–1997).[8][13] This work paid Martin well,[6] but he was frustrated by the limitations of television budgets and the early cancellation of projects.[9]
+Writing and publication
+[edit]
+Martin was writing a science fiction novel titled Avalon in summer 1991,[5] and had wanted to write an epic fantasy novel since reading the work of English writer J. R. R. Tolkien.[14] He had an idea for the first chapter—a young boy seeing a beheading and the discovery of dire wolf pups in "summer snows"[5][15]—and wrote it in a few days.[14] Over that summer, he sketched a map, wrote a hundred pages, then sent the pages – alongside a series outline – to his literary agent. He expected he was writing a trilogy because they were the standard for the fantasy genre, and built the world as he wrote the story.[5][a] Martin pointed to historical fiction as an important influence, and described French writer Maurice Druon's seven-book historical series The Accursed Kings as "the original game of thrones".[17] He describes epic fantasy and historical fiction as siblings.[18][b]
+A Game of Thrones was published in August 1996 by Bantam Books (USA) and HarperCollins Voyager (UK).[21] The cover bore a recommendation from The Wheel of Time author Robert Jordan;[22] the UK edition positioned him as an heir to Tolkien.[23] Several thousand copies were printed in the United States; only 1500 were produced for the United Kingdom.[24] Bantam's edition was printed several months earlier so that copies could be disseminated at the June 1996 American Booksellers Association convention. Further copies were distributed at the July Westercon.[21]
+Style
+[edit]
+Narration
+[edit]
+A Game of Thrones is narrated in the third person from a character's limited perspective, alternating character with each chapter.[25] Martin primarily uses noble-born perspective characters,[26] which Shannon Wells-Lassagne says keeps the reader's interest and loyalty with the aristocratic houses.[27] A non-noble member of the Night's Watch, named Will, focalizes the novel's prologue.[27]
+There are three main plot lines. Daenerys Targaryen provides the sole viewpoint on her exile.[28] Concurrently, the politics of the Seven Kingdoms mainly unfolds through the perspectives of House Stark members—Ned, Catelyn, Sansa, Arya, and Bran—dispersed across Westeros, with Tyrion Lannister also offering a viewpoint.[28] Finally, Jon Snow's service to the Night's Watch on the far northern Wall forms the third plot line.[28]
+Martin's viewpoint characters often provide unreliable accounts;[29] Brian Pavlac describes the viewpoints as "sources" sometimes at odds with each other.[30] Some narrators actively suppress their thoughts to conceal information from the reader.[31] A notable example is the true parentage of Ned Stark's supposed illegitimate son, Jon Snow.[31] Ned's recurring memory of his dying sister Lyanna's plea—"Promise me, Ned"—provides the reader with more information about the circumstances of her death as the novel progresses.[32]
+Genre
+[edit]
+Martin described the series as epic fantasy "inspired by and grounded in history",[33] and some scholars concur.[34][35][36] Others apply labels like modern fantasy,[37][38] romance fantasy,[39][40] medieval or neomedievalist fantasy,[41][42][43] historical fantasy, and fantastical history.[44] Literary scholar Shiloh Carroll notes a broad range of influences for Martin's series,[45] and writes that Martin's attempts to subvert or avoid medievalist literary conventions resulted in thematic overlap with Victorian medieval romance.[40]
+Commentators often compare Martin's work and universe with those of Tolkien.[46][47] Martin himself has compared his work to Tolkien's and its imitators,[48] although he characterized Tolkien's approach as too simplified.[49] As with The Lord of the Rings, A Game of Thrones was initially planned as the first in a trilogy.[30] Carroll says both writers are indebted to medieval sources, but Tolkien drew from medieval legend where Martin draws from history.[50] Literary critic Priscilla Walton describes Martin's work as "more Byzantine (and less Christian)".[49] However, Joseph Rex Young argues that positioning Martin's work against Tolkien's neglects to consider their respective professional backgrounds.[c]
+The series has been widely celebrated for subverting fantasy tropes;[52] Ned Stark's death is often regarded as the moment A Game of Thrones "became a distinctive, original contribution" to the genre.[53][d] Ned Vizzini suggests that works of fantasy preceding Martin focused on characters of low birth and station,[54] and argues that Martin elevated fantasy by "writing books that are too bloody, unexpected, and relentlessly story-driven to be ignored".[55] However, Joseph Rex Young argues that Martin does not "[overturn] the fundamental rules of fantasy" but instead "[follows] them to great effect".[56] He calls it a "shrewdly assembled example of the modern fantasy form",[57] contending—for example—that various plot lines align with Mendlesohnian fantasy categorizations—for example, Daenerys and Bran's journeys as portal-quest fantasy.[58][e]
+In A Game of Thrones, magic belongs to a mythological or lost past.[61][62] Young states this theme of a lost or diminished world is "pervasive" in modern fantasy.[63] Symons specifically identifies the dragon eggs as representing a lost past, noting that their birth is remarkable because it establishes A Game of Thrones as supernatural fantasy at the novel's conclusion.[62] In Westeros, characters generally downplay magic, relegating it to superstition,[64] as seen in omens,[f] cursed or haunted places, apotropaic runes, and resurrection. Excluding the novel's prologue and events involving Daenerys and the maegi, Young counts three explicitly supernatural events.[66]
+Reception
+[edit]
+Upon release, A Game of Thrones was widely praised.[67] Don D'Ammassa suggested it as "the major fantasy publishing event of 1996".[68] In The Year's Best Science Fiction (1997), Gardner R. Dozois described the novel as "the year's Big Fantasy Novel, reviewed everywhere", and a favorite for the World Fantasy Award.[69] The first printing sold a few thousand copies.[70] While not an immediate commercial hit, some independent booksellers championed the novel and it gained a small following through word of mouth.[71] It won the Locus Award for Best Fantasy Novel and the 1997 Premio Ignotus for best foreign novel.[72]
+A novella titled Blood of the Dragon, comprising Daenerys' chapters and published in Asimov's Science Fiction, won the 1997 Hugo Award for Best Novella.[67]
+Contemporary reviews celebrated Martin writing prose fiction again after a long absence.[73] Several observed that readers would eagerly await a sequel.[74][75][76] Jeff Watkins of the Albuquerque Journal said that "[a]fter so many pages, a reader wants to know how the thing comes out".[77] Two reviews said the ending provided little narrative resolution,[78][79] and it was framed as the first instalment of a trilogy.[80][77][25] Vector's Steve Jeffery said that HarperCollins' marketing had done Martin's novel a disservice by comparing it to The Lord of the Rings and described AGOT as "widescreen epic fantasy, well delivered and competently told".[23] The New York Review of Science Fiction's Lisa Padol said it "aspires to be a page-turner" more than epic fantasy.[25]
+Several reviews, including by Phyllis Eisenstein for the Chicago Sun-Times, said Martin's execution elevated a conventional fantasy set-up;[81] Dave Gross writes that he "makes vital figures of what seems to be stock characters".[82] Dorman Shindler of The Des Moines Register said Martin imbued the Stark children with as many weaknesses as their antagonists.[80] An anonymous 1999 review by The Guardian described the characters as "so venomous they could eat the Borgias".[83] The Washington Post's John H. Riskind criticized them as one dimensional.[84] In Interzone, Gwyneth Jones criticized the major female characters as "fools and rotters" except Arya Stark; she said Daenerys has "no characteristics except a will of iron".[85]
+Reviewers frequently praised the intrigue and emphasis on politics.[86] The Associated Press' review commended the narrative structure;[75] Kirkus Reviews praised the characters and complex plot "flawlessly articulated against a backdrop of real depth and texture".[79] Anticipating future instalments, Booklist said the novel was likely to reward rereading, but described the large cast as a "daunting" burden of the fantasy genre.[87] Several reviewers mentioned Martin's influence from historical narratives; Jones compared the novel to Macbeth and paralleled Ned Stark's intransigence with Scottish Calvinists.[85] Padol identified the ice wall with Hadrian's Wall and compared the dothraki to the Mongols.[25] In Locus, Shira Daemon said the novel felt closer to historical fiction than fantasy, with supernatural threats that would not pay off until future entries.[88] A second review the following month by Faren Millar called it "a medievalesque fantistorical novel".[89]
+The success of the HBO adaptation Game of Thrones (2011–2019) reignited interest in the novel, making it a best seller and the subject of popular and academic interest.[67] BBC Arts named A Game of Thrones among the 100 most influential novels in 2019.[90] The novel was on the New York Times Bestseller List in January 2011,[91] and was the top of the list in July 2011.[92]
+Interpretation
+[edit]
+Further information: Themes in A Song of Ice and Fire
+Historical
+[edit]
+"},"image1":{"wt":"King Edward IV.jpg"},"image2":{"wt":"ElizabethWoodville.JPG"},"image3":{"wt":"Beheading duke somerset.jpg"},"image4":{"wt":"Section of Hadrian's Wall 1.jpg"},"footer":{"wt":"(Top left and right) [[Edward IV]] and [[Elizabeth Woodville]]'s marriage led to the [[Wars of the Roses]]. During the war Edward oversaw [[Edmund Beaufort (died 1471)|Edmund Beaufort]]'s beheading (bottom left). [[Hadrian's Wall]] (bottom right) is frequently compared to the novel's giant ice wall."}},"i":0}}]}'>
+(Top left and right) Edward IV and Elizabeth Woodville's marriage led to the Wars of the Roses. During the war Edward oversaw Edmund Beaufort's beheading (bottom left). Hadrian's Wall (bottom right) is frequently compared to the novel's giant ice wall.
+Scholars have explored Martin's depiction of the Middle Ages and ideals associated with the period.[g] Carolyne Larrington and Joanna Kakot identify the influence of medieval Europe.[93][36] KellyAnn Fitzpatrick describes A Song of Ice and Fire as neomedieval fantasy, indebted to "medieval history, medieval myth, and later medievalist and neomedieval interpretations".[94] Carol Jamison describes the setting as detailed and intricate "a pseudo-medieval society".[95] Priscila L. Walton says the series' likeness to the Middle Ages is superficial, but A Game of Thrones' feudalist society bears the closest similarity of any volume in the series.[96][h]
+Some writers explore the novel's treatment of medieval chivalric conventions. Shiloh Carroll describes the novel as subverting the figure of the knight-errant and idea of honorable nobility.[100] Carolyne Larrington notes that some knights publicly keep with "the tenets of chivalry": Jaime does not kill Ned during their duel, and is angry at a soldier who injures Ned in the middle of it.[101] According to Carroll, Sansa Stark is presented as an idealist, and Ned Stark as the likely romantic hero, then corrects Sansa's notions of a just aristocracy.[100] Blaszkiewicz says that male sexuality is frequently depicted as "disruptive, if not explicitly violent" in chivalric romance;[102] Alyssa Rosenberg notes that King Robert abuses his queen and commits marital rape, contravening chivalric ideals.[103] In the novel, romantic or idealistic characters die or have their faiths broken, foregrounding the novel's inspirations but acknowledging the limited appeal of romantic ideals to modern audiences.[104] Medievalist Steven Muhlberger says the primary chivalric institutions—chiefly the Night's Watch and the Kingsguard—represent the erosion of chivalric standards.[105] The Night's Watch dedicate their lives to protecting the realm, but are composed of condemned criminals. The Kingsguard might resemble "royally-sponsored orders of chivalry from the Middle Ages", but are selected for political reasons and not for skill or leadership.[105]
+Martin generally avoids direct historical analogy,[106] but there are clear allusions.[95] Westeros' history of invasion may represent the Roman, Anglo-Saxon, and Norman conquests of England.[107] Medieval scholar Kavita Mudan Finn notes that Cersei's introduction underscores her loyalty to House Lannister over her husband the king, noting parallels with Edward IV's marriage to Elizabeth Woodville, which brought her ambitious family to court and ultimately culminated in civil war.[108] Several scholars note resemblance between House Stark / House of York and House Lannister / House of Lancaster.[109][110][111] Larrington describes the presumed deaths of two young Targaryen heirs in the novel's pre-history as a motif recalling the 15th-century Princes in the Tower;[112] she compares Petyr Baelish to Geoffrey Chaucer—citing his low birth and penchant for political climbing[113]—and Khal Drogo to a fictional version of Attila.[114] Westeros' primary religious institution, the Faith of the Seven, may resemble the medieval Catholic Church, although less powerful.[115][i] Several critics compare the novel's Wall to Hadrian's Wall,[117][j] while others have noted a similarity to the Great Wall of China.[118] Kakot compares the Dothraki culture to nomadic North African tribes,[93] and Larrington highlights additional influence from central Asian cultures.[36]
+Gender and sex
+[edit]
+Medieval illumination of the wedding between Eleanor of Aquitaine and Louis VII of France. They were betrothed when she was nine and he was fifteen as part of a political alliance. Her life formed part of the historical background for the novel's inspiration.[119]
+Several female characters are entered into marriage to cement alliances or facilitate a transfer of wealth.[120] Viserys trades his sister Daenerys for military support from Khal Drogo.[121] Borowska-Szerszun says that Daenerys' narrative—marriage and loss of freedom—traditionally conclude women's stories in fairy tales, but affords Daenerys with power and social status.[122] Larrington says Daenerys' growing influence over Drogo weakens his standing as a leader,[123] and her decisions cause the end of Drogo's rule and the birth of her dragons.[123] Before the events of A Game of Thrones, Cersei Lannister and Catelyn Stark are married, to Robert and Ned respectively, to establish political alliances.[120][124] Cersei and Catelyn's children—Joffrey and Sansa—are betrothed to ensure the north's loyalty to the crown.[120] This betrothal is ultimately abusive and she is held hostage and used as a pawn.[125][k] Whether the series' female characters constitute feminist portrayals is a contested topic.[127][128]
+Scholars and fans often discuss the series' frequent depiction of rape, which is sometimes described by Martin and fans as historically accurate.[129] Medieval women were subject to marital rape.[130] Mariah Larsson states that Drogo knows only one word in Daenerys' language, "no", and that he uses this word to "ensure his wife's consent" before consummating the marriage.[131] According to Carroll, Daenerys' age and circumstances "problematize" the consent and he says Drogo "rapes her every night on the way to Vaes Dothrak", ultimately "[falling] in love with her attacker".[132][l] Daenerys tries to prevent or mitigate sexual violence. She saves a group of women from rape by her husband's warriors by claiming them as handmaidens.[134] Although Daenerys directly intervenes to prevent the rape of another woman, the warriors return later to gang rape her;[133] Carroll describes this as "an expression of ownership and power over a woman [and] a vengeance against Daenerys for denying the men's claim to Eroeh earlier".[133] Cersei is subject to sexual violence by Robert, who blames it on alcohol.[135]
+Some scholars discuss the novel's representation of motherhood. Marta Eidsvåg contrasts Cersei's role as a mother against her ordering the assassination of Robert's illegitimate children.[136] Catelyn Stark is depicted as devoted to her children, but she acts hatefully towards Ned's illegitimate son Jon.[110] Catelyn's role as a viewpoint character is unusual because mothers are not typically depicted in fantasy.[110] Robert does not think Daenerys herself presents a direct threat to his rule, but he is deeply alarmed by the news of her marriage and the prospect of offspring.[137] Carroll notes symbolism that frames Daenerys as the dragons' mother: "the eggs begin to hatch, lactating in 'streams'; when the fire dies [...] two of the dragons are nursing at her breasts".[138]
+Several writers have explored Daenerys' encounter with the maegi Mirri Maz Duur. Sheilagh O'Brien describes the maegi as a conventional representation of witches, symbolizing anxieties over female power, "monstrous births, and the influence of an evil elderly woman over a younger woman often encountered in early modern witch narratives".[139] Anne Gjelsvik writes that Mirri Maz Duur represents Daenerys' denial of her role in oppression. She attempts to save Mirri Maz Duur from gang rape but fails. The maegi takes vengeance by causing Daenerys' child to be stillborn. Consequently, Daenerys takes the maegi into Drogo's funeral pyre and symbolically consumes the witch's magic.[140]
+Power and rulers
+[edit]
+Kingship and royal power is frequently explored by scholars. Blaszkiewicz says the tyrannical Aerys led the country to civil war by destroying the social contract between king and community. Robert is an improvement over Aerys' tyranny but is "equally oblivious to the notion of royal dignity involving a [king's] social duty".[141] Blaszkiewicz argues his decadent lifestyle and appearance demonstrate his inability to properly execute the social role of a king.[142] Hudson says that Cersei dismisses Robert's authority by derisively overruling his writ declaring Ned Stark the regent, taking the role herself.[143] Walton says Ned's function as judge and executioner makes his role as the north's feudal lord effectively equivalent to that of a king—a role his son inherits when Ned goes to King's Landing.[144]
+Pavlac says that the game of thrones refers to attempts to gain control over the Seven Kingdoms of Westeros.[145] Cersei Lannister refers to the game of thrones in the novel, telling Ned that participation means victory or death.[146] King Robert's death, and the resultant disputed succession, drives it—Robert's brothers claim the throne because Robert's heirs are illegitimate.[46]
+Adaptations
+[edit]
+Main article: Game of Thrones (franchise)
+A novella titled Blood of the Dragon, comprising Daenerys Targaryen's chapters from A Game of Thrones and published in Asimov's Science Fiction, was released in July 1996.[67]
+A Song of Ice and Fire is the basis for the HBO television series Game of Thrones (2011–2019). The first season was broadly faithful to A Game of Thrones, but later the series diverged more from the novels.[147] A major change for the series was adding several years to the novel's timeline, increasing several characters' ages: Sansa (from eleven to thirteen), Arya (from nine to eleven), Bran (from seven to ten),[148] and Daenerys (thirteen to fifteen).[149]
+A Game of Thrones was adapted as a graphic novel of the same name by author Daniel Abraham,[1] with art by Tommy Patterson.[150] Anne Groell, who edited the original novel, requested that Abraham outline his proposed approach to the adaptation.[1] Abraham described several problems in adapting the work: predicting what was vital to preserve in an unfinished series; how to visualize elements that already existed in the popular imagination; and a US child abuse law precluding an illustration of young Daenerys in a sexual context.[1]
+A Game of Thrones: Genesis (2011) draws its name from the novel. A real-time strategy game, it was the first video game title to use the Game of Thrones license. It does not depict the events from the novel but uses setting elements spanning the millennium preceding it.[151]
+Notes and references
+[edit]
+Notes
+[edit]
+↑ Martin classifies writers' approaches into two types—"architects" meticulously plan ahead and "gardeners" have a general sense of the end result but no rigid outline; he considers himself a "gardener".[16]
+↑ For many readers, Martin's work has become the primary reference for the Middle Ages.[19] Literature scholar Helen Young argues this has negatively impacted discussions about the series' authentic representation.[20]
+↑ Young describes The Lord of the Rings as "a deeply personal experiment in linguistics, medievalism and moral philosophy" and emphasises Tolkien's lifelong academic career. Concerning Martin, Young describes his background as a writer of science fiction and superhero stories, "and as such he fits the profile of a typical genre fantasist".[51]
+↑ Of Stark's death, Young notes that "Eddard dies, almost literally, on-stage, in front of a crowd, in a manner carefully arranged by characters and author alike for maximum dramatic effect."[53]
+↑ In portal-quest fantasy, characters enter environments they do not understand and acquire information from guide characters, with the reader learning alongside the character and prevented from learning what they do not know.[59] For example: Bran is advised by the Three-Eyed Crow, whose dialogue is not represented by speech marks and are thus "matters of narrative truth".[60]
+↑ Gary Westfahl, for instance, highlights: "Lord Eddard Stark agrees to spare a litter of dire-wolf pups when his bastard son, Jon Snow, points out that they correspond in their number and genders to his own children."[65]
+↑ David Symons notes that Martin's work has featured in medievalist university classes.[62] Bartlomiej Blaszkiewicz narrows it to the High Middle Ages.[39]
+↑ Some fans the series believe that the series is authentically medieval.[97][98] Carroll argues it is unfeasible to create an authentic medieval portrayal and that Martin sought to create an impression of reality.[99]
+↑ Larrington writes: "Although Ned remarks to Catelyn, "it’s your religion
+which has all the rules," it's quite hard to distinguish between the different mores produced by class, gender or ethnic differences and those derived from the Faith’s religious teachings."[116]
+↑ Martin has said he had the idea of the Wall in the early 1980s while visiting a friend in England.[5]
+↑ Carroll describes Cersei as a narrative foil to Sansa: the "archetypal princess" and the "bitter and power-hungry queen".[126]
+↑ Carroll also writes: "The difficulty with rape in A Song of Ice and Fire is that commentators have trouble differentiating between authorial endorsement and portrayal. Martin's narrative voice, hidden as it is behind the third-person viewpoint with which he writes the series, clearly does not approve of rape or violence in general."[133]
+References
+[edit]
+1 2 3 4 Abraham 2012, p. 29.
+↑ Beaumont-Thomas 2014.
+↑ Martin 2016.
+↑ Berwick 2012.
+1 2 3 4 5 6 7 8 Martin 2014.
+1 2 Levy 1996.
+↑ Macnab 2014.
+1 2 3 4 5 Flood 2018.
+1 2 Carroll 2018, pp. 1–2.
+↑ St. James 2017.
+1 2 3 Huddleston Jr. 2019.
+↑ Shindler 2005.
+↑ Carroll 2018, p. 2.
+1 2 Martin 2011.
+↑ Snider 2025.
+↑ Martin NPR 2019.
+↑ Fitzpatrick 2019, p. 108.
+↑ Cornwell 2012.
+↑ Carroll 2018, pp. 17–18.
+↑ Young 2014, pp. 740–742.
+1 2 Miller 2012, p. 198.
+↑ Power 2021.
+1 2 Jeffery 1997, p. 19.
+↑ Schubart & Gjelsvik 2016, p. 3.
+1 2 3 4 Padol 1997, p. 23.
+↑ Wells-Lassagne 2016, pp. 41, 52–53.
+1 2 Wells-Lassagne 2016, p. 52.
+1 2 3 Kokot 2014, p. 63.
+↑ Kokot 2014, pp. 60–61.
+1 2 Pavlac Introduction, p. 3.
+1 2 Carroll 2018, pp. 28–29.
+↑ Kokot 2014, pp. 61–62.
+↑ Fitzpatrick 2019, p. 121.
+↑ Carroll 2018, p. 1.
+↑ Finn 2020, p. 29.
+1 2 3 Larrington 2019, p. 16.
+↑ Young 2019, p. 1.
+↑ Blaszkiewicz 2014, p. 9.
+1 2 Blaszkiewicz 2014a, p. 115.
+1 2 Carroll 2018, p. 183.
+↑ Rohr & Benz 2020, p. xxxiii.
+↑ Fitzpatrick 2019, p. 60.
+↑ Carroll 2018, p. 20.
+↑ Uckelman, Murphy & Percer 2017, p. 248.
+↑ Carroll 2018, p. 182.
+1 2 Fitzpatrick 2019, p. 107.
+↑ Staggs 2012, p. 149.
+↑ Rohr & Benz 2020, p. xxxiv.
+1 2 Walton 2019, p. 100.
+↑ Carroll 2018, p. 3.
+↑ Young 2019, pp. 2–4.
+↑ Mitchell 2018, p. 230.
+1 2 Young 2019, p. 9.
+↑ Vizzini 2012, p. 211.
+↑ Vizzini 2012, pp. 216–217.
+↑ Young 2019, p. 4.
+↑ Young 2019, pp. 8.
+↑ Young 2019, pp. 6, 104–105, 90.
+↑ Young 2019, p. 72.
+↑ Young 2019, p. 104.
+↑ Kokot 2014, p. 54.
+1 2 3 Symons 2017, p. 94.
+↑ Young 2019, p. 6.
+↑ Kokot 2014, pp. 52–53.
+↑ Westfahl 2012, p. 56.
+↑ Young 2019, pp. 138–139.
+1 2 3 4 Symons 2017, p. 95.
+↑ D'Ammassa 1996.
+↑ Dozois 1997, p. xxxii.
+↑ Lowder Introduction 2012, p. xiii.
+↑ Miller 2011.
+↑ Lowder Introduction 2012, p. xiv.
+↑ Jeffery 1997, p. 19; Perry 1996; Shindler 1996, p. 18; Publishers Weekly 1996.
+↑ D'Ammassa 1996, p. 76.
+1 2 Nathan 1996.
+↑ Mazzacco 1996.
+1 2 Watkins 1996.
+↑ Kershaw 1996.
+1 2 Kirkus 1996.
+1 2 Shindler 1996, p. 18.
+↑ Eisenstein 1996; Kershaw 1996; Miller 1996, pp. 20–21; Shindler 1996, p. 18.
+↑ Gross 1996, p. 59.
+↑ The Guardian 1999.
+↑ Riskind 1996.
+1 2 Jones 1996, p. 59.
+↑ Daemon 1996, p. 30; Mazzacco 1996, p. 119; Nathan 1996; Scunthorpe Telegraph 1998, p. 14; The Guardian 1999, p. 278.
+↑ Green 1996.
+↑ Daemon 1996, p. 57.
+↑ Miller 1996, p. 20.
+↑ BBC 2019.
+↑ NYT 1 2011.
+↑ NYT 2 2011.
+1 2 Kokot 2014, p. 55.
+↑ Fitzpatrick 2019, p. 103.
+1 2 Jamison 2018, p. 182.
+↑ Walton 2019, p. 101.
+↑ Benz & Rohr 2020, p. xxix.
+↑ Young 2014, pp. 741–742.
+↑ Carroll 2018, pp. 14, 17–18.
+1 2 Carroll 2018, p. 38.
+↑ Larrington 2019, p. 129.
+↑ Blaszkiewicz 2014a, p. 86.
+↑ Rosenberg 2012, p. 21.
+↑ Fowler 2014, pp. 71–72.
+1 2 Muhlberger 2017, pp. 52–53.
+↑ Carroll 2018, pp. 110.
+↑ Carroll 2018, pp. 110–111.
+↑ Finn 2017, pp. 19–20.
+↑ Fitzpatrick 2019, pp. 107–108.
+1 2 3 Schubart & Gjelsvik 2016, p. 6.
+↑ Pavlac Introduction, p. 8.
+↑ Larrington 2019, p. 17.
+↑ Larrington 2019, pp. 129–130.
+↑ Larrington 2019, p. 192; Young 2019, p. 56.
+↑ Larrington 2019, p. 133.
+↑ Larrington 2019, p. 134.
+↑ Carroll 2017, p. 75; de Ruiter 2017, pp. 85–87; Young 2018, p. 68.
+↑ Young 2018, p. 68.
+↑ West 2019.
+1 2 3 Fitzpatrick 2019, p. 122.
+↑ Borowska-Szerszun 2020, p. 64; Larsson 2016, p. 23; Walton 2019, p. 108; Larrington 2020, p. xi.
+↑ Borowska-Szerszun 2020, p. 64.
+1 2 Larrington 2019, p. 34.
+↑ Larrington 2020, p. x.
+↑ Larsson 2016, p. 31.
+↑ Carroll 2014, p. 250.
+↑ Schubart & Gjelsvik 2016, p. 2.
+↑ Benz & Rohr 2020, p. xliii.
+↑ Carroll 2018, pp. 10, 18.
+↑ Alesi 2017, p. 166.
+↑ Larsson 2016, p. 23.
+↑ Carroll 2018, p. 93.
+1 2 3 Carroll 2018, p. 92.
+↑ Walton 2019, p. 108.
+↑ Spector 2012, p. 185.
+↑ Eidsvåg 2016, pp. 153–154, 165.
+↑ Liedl 2017, p. 125.
+↑ Carroll 2018, p. 78.
+↑ O'Brien 2020, p. 209.
+↑ Gjelsvik 2016, pp. 64, 118–119.
+↑ Blaszkiewicz 2014a, pp. 118–119.
+↑ Blaszkiewicz 2014a, p. 119.
+↑ Hudson 2020, p. 9.
+↑ Walton 2019, p. 103.
+↑ Pavlac Introduction, p. 9.
+↑ Hudson 2020, p. 10.
+↑ Bruner 2019.
+↑ Larsson 2016, pp. 22–23.
+↑ Schubart & Gjelsvik 2016, p. 8.
+↑ Young 2018, p. 60.
+↑ Schröter 2016, p. 89.
+Bibliography
+[edit]
+Staff (November 5, 2019). "100 'most inspiring' novels revealed by BBC Arts". BBC News. Retrieved July 10, 2025.
+Beaumont-Thomas, Ben (June 2014). "George RR Martin's editor hints at eighth Game of Thrones book". The Guardian. ISSN 0261-3077. Retrieved July 10, 2025.
+Berwick, Isabel (June 1, 2012). "Lunch with the FT: George RR Martin". Financial Times. Retrieved July 8, 2025.{{cite web}}: CS1 maint: deprecated archival service (link)
+Blaszkiewicz, Bartlomiej, ed. (2014). George R. R. Martin's "A Song of Ice and Fire" and the Medieval Literary Tradition. University of Warsaw Press. ISBN 978-83-235-1427-5. 
+Blaszkiewicz, Bartlomiej. Introduction. In Blaszkiewicz (2014).
+Kokot, Joanna. "The text and the World: The Conventions of Interlacement and its Functions in George R. R. Martin's A Game of Thrones". In Blaszkiewicz (2014).
+Fowler, Rebekah M. "Sansa’s Songs: The Allegory of Medieval Romance in George R. R. Martin’s A Song of Ice and Fire Series". In Blaszkiewicz (2014).
+Carroll, Shiloh. "“You Ought to be in Skirts and Me in Mail”: Gender and History in George R.R. Martin’s A Song of Ice and Fire". In Blaszkiewicz (2014).
+Bruner, Raisa (April 14, 2019). "Why the 'Game of Thrones' Show Is Better Than the Books". Time. Archived from the original on April 17, 2019. Retrieved July 9, 2025.
+Carroll, Shiloh (2018). Medievalism in A Song of Ice and Fire and Game of Thrones. Boydell & Brewer. ISBN 978-1 84384-484-6.
+Fitzpatrick, KellyAnn (2019). "Game of Thrones: Neomedievalism and the Myths of Inheritance". Neomedievalism, Popular Culture, and the Academy: from Tolkien to Game of Thrones. D.S. Brewer. ISBN 978-1-84384-541-6.
+Flood, Alison (November 10, 2018). "George RR Martin: 'When I began A Game of Thrones I thought it might be a short story'". The Guardian. ISSN 0261-3077. Retrieved July 7, 2025.
+Gjelsvik, Anne; Schubart, Rikke, eds. (2016). Women of Ice and Fire: Gender, Game of Thrones and Multiple Media Engagements. New York: Bloomsbury Academic. ISBN 978-1-5013-0289-3.
+Schubart, Rikke; Gjelsvik, Anne. Introduction. In Gjelsvik & Schubart (2016).
+Wells-Lassagne, Shannon. "Adapting Desire: Wives, Prostitutes and Smallfolk". In Gjelsvik & Schubart (2016).
+Larsson, Mariah. "Adapting Sex: Cultural Conceptions of Sexuality in Words and Images". In Gjelsvik & Schubart (2016).
+Gjelsvik, Anne. "Unspeakable Acts of (Sexual) Terror As/In Quality Television". In Gjelsvik & Schubart (2016).
+Eidsvåg, Marta. ""Maiden, Mother, and Crone": Motherhood in the World of A Song of Ice and Fire". In Gjelsvik & Schubart (2016).
+Schröter, Felix. "Sworn Swords and Noble Ladies: Female Characters in Game of Thrones Video Games". In Gjelsvik & Schubart (2016).
+Huddleston Jr., Tom (April 14, 2019). "'Game of Thrones' creator George R.R. Martin almost quit writing for real estate". CNBC. Retrieved July 7, 2025.
+Jamison, Carol Parrish (2018). Chivalry in Westeros: The Knightly Code of A Song of Ice and Fire. McFarland & Company. ISBN 978-1-4766-7005-8.
+Larrington, Carolyne (2019). Winter is Coming: The Medieval World of Game of Thrones. Bloomsbury Academic. ISBN 978-0-85772-931-6.
+Lowder, James, ed. (2012). Beyond the Wall: Exploring George R.R. Martin's A Song of Ice and Fire. BenBella Books. ISBN 978-1-936661-74-9.
+Lowder, James. "Introduction: In Praise of Living History". In Lowder (2012).
+Westfahl, Gary. "Back to the Egg: The Prequels of A Song of Ice and Fire". In Lowder (2012).
+Rosenberg, Alyssa. "Men and Monsters: Rape, Myth-Making, and the Rise and Fall of Nations in A Song of Ice and Fire". In Lowder (2012).
+Abraham, Daniel. "Same Song in a Different Key: Adapting Game of Thrones as a Graphic Novel". In Lowder (2012).
+Miller, John J. "Collecting Ice and Fire in the Age of Nook and Kindle". In Lowder (2012).
+Staggs, Matt. "Petyr Baelish and the Mask of Sanity". In Lowder (2012).
+Spector, Carolyn. "Power and Feminism in Westeros". In Lowder (2012).
+Vizzini, Ned. "Beyond the Ghetto: How George R. R. Martin Fights the Genre Wars". In Lowder (2012).
+Macnab, Geoffrey (August 9, 2014). "George RR Martin on success, chess and the wrath of superfans". The Independent. Retrieved July 7, 2025.
+Miller, Laura (April 4, 2011). "Just Write It!". The New Yorker. ISSN 0028-792X. Retrieved July 10, 2025.
+Mitchell, Lynsey (November 1, 2018). "Reaffirming and rejecting the rescue narrative as an impetus for war: to war for women in A Song of Ice and Fire". Law and Humanities. 12 (2).
+Pavlac, Brian A. (2017). Game of Thrones versus History: Written in Blood. Wiley-Blackwell. ISBN 9781119249429.
+Pavlac, Brian A. Introduction. In Pavlac (2017).
+Finn, Kavita Mudan. "High and Mighty Queens of Westeros". In Pavlac (2017).
+Liedl, Janice. "Rocking Cradles and Hatching Dragons". In Pavlac (2017).
+Alesi, Danielle. "The Power of Sansa Stark". In Pavlac (2017).
+Carroll, Shiloh. "Barbarian Colonizers and Postcolonialism in Westeros and Britain". In Pavlac (2017).
+de Ruiter, Brian. "A Defence Against the "Other"". In Pavlac (2017).
+Muhlberger, Steven. "Chivalry in Westeros". In Pavlac (2017).
+Uckelman, Sara L.; Murphy, Sonia; Percer, Joseph. "What's in a Name? History and Fantasy in Game of Thrones". In Pavlac (2017).
+Power, Ed (November 19, 2021). "The Wheel of Time isn't the next Game of Thrones – it's the original". The Telegraph. ISSN 0307-1235. Retrieved July 11, 2025.
+Rohr, Zita Eva; Benz, Lisa, eds. (2020). Queenship and the Women of Westeros: Female Agency and Advice in Game of Thrones and A Song of Ice and Fire. Palgrave Macmillan. ISBN 978-3-030-25041-6. 
+Larrington, Carolyne. Foreword. In Rohr & Benz (2020).
+Benz, Lisa; Rohr, Zita Eva. "Introduction: Cherchez les Femmes: Queenship and the Women of Westeros". In Rohr & Benz (2020).
+Hudson, JJ. "A Game of Thrones in China: The Case of Cixi, Empress Dowager of the Qing Dynasty (1835–1908)". In Rohr & Benz (2020).
+O'Brien, Sheilagh Ilona. "Wicked Women and the Iron Throne: The Twofold Tragedy of Witches as Advisors in Game of Thrones". In Rohr & Benz (2020).
+Borowska-Szerszun, Sylwia. "Westerosi Queens: Medievalist Portrayal of Female Power and Authority in A Song of Ice and Fire". In Rohr & Benz (2020).
+Finn, Kavita Munn. "Queen of Sad Mischance: Medievalism, "Realism", and the Case of Cersei Lannister". In Rohr & Benz (2020).
+Romano, Aja (August 30, 2017). "R+L=J: A comprehensive oral history of Game of Thrones' ultimate fan theory". Vox. Retrieved July 11, 2025.
+Shindler, Dorman T. (October 28, 2005). "Of Hybrids and Clichés". Publishers Weekly. Retrieved July 7, 2025.
+Snider, Mike (April 8, 2025). "George R.R. Martin got to hold a dire wolf. Extinct animal's 'rebirth...has stirred me'". USA Today.
+St. James, Emily (September 1, 2017). "How Game of Thrones sneakily reflects George R.R. Martin's hatred of war". Vox. Retrieved July 19, 2025.
+Symons, Devin (2017). "A Game of Thrones". Supernatural Literature. 3.
+Taylor, Ihsan (January 2, 2011). "The New York Times Bestseller List". The New York Times. Archived from the original on January 22, 2011. Retrieved May 16, 2011.
+Taylor, Ihsan (July 10, 2011). "The New York Times Bestseller List". The New York Times. Archived from the original on July 7, 2011. Retrieved July 4, 2011.
+Walton, Priscilla L. (March 25, 2019). ""You Win or You Die": The Royal Flush of Power in Game of Thrones". Canadian Review of American Studies. 49 (1): 99–114. doi:10.3138/cras.49.1.005. ISSN 0007-7720.
+West, Ed (2019). Iron, Fire and Ice: The Real History that Inspired Game of Thrones. Skyhorse Publishing.
+Wicher, Andrzej; Spyra, Piotr; Matyjaszczyk, Joanna, eds. (2014). Basic Categories of Fantastic Literature Revisited. Cambridge Scholars. ISBN 978-1-4438-6679-8.
+Blaszkiewicz, Bartlomiej (2014a). "On Theories of Kingship in George R. R. Martin's A Song of Ice and Fire". In Wicher, Spyra & Matyjaszczyk (2014).
+Young, Helen (September 3, 2014). "Race in online fantasy fandom: whiteness on Westeros.org". Continuum. 28 (5): 737–747. doi:10.1080/10304312.2014.941331. ISSN 1030-4312.
+Young, Helen (2018). Race and Popular Fantasy Literature: Habits of Whiteness. Routledge. ISBN 978-1-138-54770-4.
+Young, Joseph Rex (2019). George R. R. Martin and the Fantasy Form. Routledge. ISBN 978-1-351-38460-5.
+Contemporary reviews
+[edit]
+D'Ammassa, Don (October 1996). "Untitled review". Science Fiction Chronicle. No. 190. Retrieved July 8, 2025.
+Daemon, Shira (May 1996). "A Game of Thrones". Locus. Vol. 36, no. 5.
+Dozois, Gardner (1997). "Summation". The Year's Best Science Fiction. Vol. 14. Retrieved July 8, 2025.
+Eisenstein, Phyllis (August 11, 1996). "Near the frozen north, where dragons awaken". Chicago Sun-Times.
+Green, Roland (August 1996). "A Game of Thrones". Booklist. Vol. 92, no. 22. American Library Association. Retrieved July 9, 2025.
+Staff (November 27, 1999). "Untitled review". The Guardian. Retrieved July 8, 2025.
+Gross, Dave (October 1996). "A Game of Thrones". Dragon. No. 235. Retrieved July 8, 2025.
+Jeffery, Steve (March 1997). "A Game of Thrones". Vector. Vol. 192.
+Jones, Gwyneth (October 1996). "Expect No Mercy". Interzone. Vol. 112.
+Kershaw, Paul (September 4, 1996). "Fantasy novels kicks off new series with an intricate, intriguing story". Detroit Free Press. Retrieved July 8, 2025.
+Staff (August 12, 1996). "A Game of Thrones". Kirkus Reviews. Retrieved July 8, 2025.
+Levy, Michael (August 26, 1996). "George R.R. Martin: dreamer of fantastic worlds". Publishers Weekly. Vol. 243, no. 35. Retrieved July 9, 2025.
+Mazzacco, Mary (October 27, 1996). "Untitled review". Arizona Daily Star. Retrieved July 8, 2025.
+Miller, Faren (June 1996). "A Game of Thrones". Locus. Vol. 36, no. 6.
+Nathan, Lauren K. Nathan (November 24, 1996). "Fantasy writer's A Game of Thrones is fit for a king". Associated Press. Retrieved July 8, 2025.
+Padol, Lisa (January 1997). "A Game of Thrones by George R. R. Martin". The New York Review of Science Fiction.
+Perry, Steve (December 29, 1996). "Best first book in a multi-volume saga". The Oregonian. Retrieved July 8, 2025.
+Staff (July 29, 1996). "A Game of Thrones". Publishers Weekly. Retrieved July 8, 2025.
+Riskind, John S. (July 28, 1996). "Untitled review". The Washington Post.
+Staff (March 13, 1998). "Untitled review". Scunthorpe Telegraph. Retrieved July 8, 2025.
+Shindler, Dorman T. (September 8, 1996). "A Game of Thrones Review". The Des Moines Register. Retrieved July 8, 2025.
+Watkins, Jeff (August 11, 1996). "'Game of Thrones' weaves majestic tapestry of fantasy action in gripping adventure". Albuquerque Journal. Retrieved July 8, 2025.
+Primary sources
+[edit]
+Martin, George R. R. (January 2012). "Interview with George R. R. Martin" (Interview). Interviewed by Bernard Cornwell.
+Martin, George R. R. (April 23, 2014). "George R. R. Martin: The Rolling Stone Interview". Rolling Stone (Interview). Interviewed by Mikal Gilmore. Archived from the original on July 12, 2018.
+Martin, George R. R. (July 12, 2011). "A Dance with Dragons Interview". Entertainment Weekly (Interview). Interviewed by Hibberd, James. Archived from the original on March 27, 2012.
+Martin, George R. R. (August 1, 2016). "The Long Game... of Thrones". Not A Blog. Archived from the original on August 17, 2016.
+Martin, George R. R. (October 19, 2019). "Interview: George R. R. Martin, Creator of A Song of Ice and Fire". NPR (Interview). Interviewed by Simon, Scott.
+External links
+[edit]
+A Game of Thrones title listing at the Internet Speculative Fiction Database
+A Game of Thrones at the Internet Book List
+v
+t
+e
+George R. R. Martin's A Song of Ice and Fire
+A Game of Thrones (1996)
+A Clash of Kings (1998)
+A Storm of Swords (2000)
+A Feast for Crows (2005)
+A Dance with Dragons (2011)
+The Winds of Winter (TBA)
+Franchise media
+Books
+Tales of Dunk and Egg (1998–2010)
+The Princess and the Queen (2013)
+The Rogue Prince (2014)
+The World of Ice & Fire (2014, co-written by Elio M. García Jr. and Linda Antonsson)
+The Sons of the Dragon (2017)
+Fire & Blood (2018)
+The Rise of the Dragon (2022, co-written by García and Antonsson)
+Game of Thrones
+Episodes
+Season 1
+2
+3
+4
+5
+6
+7
+8
+Music
+Soundtracks
+Season 1
+2
+3
+4
+5
+6
+7
+8
+"Game of Thrones Theme"
+"The Rains of Castamere"
+"The Bear and the Maiden Fair"
+"Light of the Seven"
+"Power Is Power"
+"Me Traicionaste"
+"Jenny's Song"
+Catch the Throne
+For the Throne
+Live Concert Experience
+Awards
+Characters
+Title sequence
+After the Thrones
+Thronecast
+The Last Watch
+House of the Dragon
+Episodes
+Season 1
+2
+3
+Season 1 soundtrack
+Awards
+Other series
+A Knight of the Seven Kingdoms
+Video games
+A Game of Thrones: Genesis
+Game of Thrones
+Ascent
+A Telltale Games Series
+Seven Kingdoms (canceled)
+Reigns
+Winter is Coming
+Legends
+Kingsroad
+Dragonfire
+War for Westeros
+Tabletop games
+A Game of Thrones (card game)
+Second Edition
+A Game of Thrones (board game)
+A Game of Thrones (role-playing game)
+A Song of Ice and Fire Roleplaying
+Battles of Westeros
+Comics
+A Game of Thrones
+A Clash of Kings
+Stage
+Game of Thrones: The Mad King
+Characters
+Petyr Baelish
+Joffrey Baratheon
+Myrcella Baratheon
+Renly Baratheon
+Robert Baratheon
+Stannis Baratheon
+Tommen Baratheon
+Ramsay Bolton
+Roose Bolton
+Gregor Clegane
+Sandor Clegane
+Gendry
+Tormund Giantsbane
+Theon Greyjoy
+Cersei Lannister
+Jaime Lannister
+Tyrion Lannister
+Tywin Lannister
+Arianne Martell
+Oberyn Martell
+Melisandre
+Missandei
+Jorah Mormont
+Daario Naharis
+Night King
+Osha
+Ellaria Sand
+Davos Seaworth
+Jon Snow
+High Sparrow
+Arya Stark
+Bran Stark
+Catelyn Stark
+Ned Stark
+Rickon Stark
+Robb Stark
+Sansa Stark
+Daenerys Targaryen
+Samwell Tarly
+Brienne of Tarth
+Margaery Tyrell
+Olenna Tyrell
+Varys
+House of the Dragon
+Ormund Hightower
+Daemon Targaryen
+Rhaenyra Targaryen
+Jacaerys Velaryon
+World
+Dothraki language
+Iron Throne
+Valyrian languages
+White Walker
+Miscellaneous
+Fandom
+Themes
+Targaryendraco
+MultiVersus
+ Category
+ Outline
+v
+t
+e
+Works by George R. R. Martin
+Novels
+Dying of the Light
+Windhaven
+Fevre Dream
+The Armageddon Rag
+Hunter's Run
+A Song of Ice and Fire
+A Game of Thrones
+A Clash of Kings
+A Storm of Swords
+A Feast for Crows
+A Dance with Dragons
+The Winds of Winter
+Reference
+The World of Ice & Fire
+Fire & Blood
+The Rise of the Dragon
+Novellas
+"A Song for Lya"
+"Sandkings"
+The Ice Dragon
+Nightflyers
+The Skin Trade
+A Song of Ice and Fire
+Tales of Dunk and Egg
+The Princess and the Queen
+The Rogue Prince
+The Sons of the Dragon
+Editing
+Wild Cards
+list of works
+Songs of the Dying Earth
+Warriors
+Songs of Love and Death
+Down These Strange Streets
+Old Mars
+Dangerous Women
+Rogues
+Old Venus
+Short stories
+"With Morning Comes Mistfall"
+"The Way of Cross and Dragon"
+"Unsound Variations"
+"Portraits of His Children"
+Collections
+A Song for Lya
+Songs of Stars and Shadows
+Sandkings
+Songs the Dead Men Sing
+Nightflyers
+Tuf Voyaging
+Portraits of His Children
+Quartet: Four Tales from the Crossroads
+Dreamsongs: A RRetrospective
+Television
+The Twilight Zone
+"The Last Defender of Camelot"
+"The Once and Future King"
+"Lost and Found"
+"The Toys of Caliban"
+"The Road Less Traveled"
+Beauty and the Beast
+Doorways
+Nightflyers
+House of the Dragon
+Game of Thrones
+"The Pointy End"
+"Blackwater"
+"The Bear and the Maiden Fair"
+"The Lion and the Rose"
+Films
+Nightflyers
+The Sandkings
+In the Lost Lands
+Elden Ring
+Video games
+Elden Ring
+ Category
+v
+t
+e
+Locus Award for Best Fantasy Novel
+1978-1989
+The Silmarillion by J. R. R. Tolkien (1978)
+Harpist in the Wind by Patricia A. McKillip (1980)
+Lord Valentine's Castle by Robert Silverberg (1981)
+The Claw of the Conciliator by Gene Wolfe (1982)
+The Sword of the Lictor by Gene Wolfe (1983)
+The Mists of Avalon by Marion Zimmer Bradley (1984)
+Job: A Comedy of Justice by Robert A. Heinlein (1985)
+Trumps of Doom by Roger Zelazny (1986)
+Soldier of the Mist by Gene Wolfe (1987)
+Seventh Son by Orson Scott Card (1988)
+Red Prophet by Orson Scott Card (1989)
+1990-1999
+Prentice Alvin by Orson Scott Card (1990)
+Tehanu by Ursula K. Le Guin (1991)
+Beauty by Sheri S. Tepper (1992)
+Last Call by Tim Powers (1993)
+The Innkeeper's Song by Peter S. Beagle (1994)
+Brittle Innings by Michael Bishop (1995)
+Alvin Journeyman by Orson Scott Card (1996)
+A Game of Thrones by George R. R. Martin (1997)
+Earthquake Weather by Tim Powers (1998)
+A Clash of Kings by George R. R. Martin (1999)
+2000-2009
+Harry Potter and the Prisoner of Azkaban by J. K. Rowling (2000)
+A Storm of Swords by George R. R. Martin (2001)
+American Gods by Neil Gaiman (2002)
+The Scar by China Miéville (2003)
+Paladin of Souls by Lois McMaster Bujold (2004)
+Iron Council by China Miéville (2005)
+Anansi Boys by Neil Gaiman (2006)
+The Privilege of the Sword by Ellen Kushner (2007)
+Making Money by Terry Pratchett (2008)
+Lavinia by Ursula K. Le Guin (2009)
+2010-2019
+The City & the City by China Miéville (2010)
+Kraken by China Miéville (2011)
+A Dance with Dragons by George R. R. Martin (2012)
+The Apocalypse Codex by Charles Stross (2013)
+The Ocean at the End of the Lane by Neil Gaiman (2014)
+The Goblin Emperor by Katherine Addison (2015)
+Uprooted by Naomi Novik (2016)
+All the Birds in the Sky by Charlie Jane Anders (2017)
+The Stone Sky by N. K. Jemisin (2018)
+Spinning Silver by Naomi Novik (2019)
+2020-present
+Middlegame by Seanan McGuire (2020)
+The City We Became by N. K. Jemisin (2021)
+Jade Legacy by Fonda Lee (2022)
+Babel, or the Necessity of Violence by R. F. Kuang (2023)
+Witch King by Martha Wells (2024)
+A Sorceress Comes to Call by T. Kingfisher (2025)
+Authority control databases 
+NationalFrance
+BnF data
+OtherMusicBrainz work
+MusicBrainz release group
+Open Library
+Retrieved from "https://en.wikipedia.org/w/index.php?title=A_Game_of_Thrones&oldid=1371546817"
+ Categories: 1996 American novels
+1996 English-language novels
+1996 fantasy novels
+American fantasy novels
+American political novels
+High fantasy novels
+Novels set in castles
+American novels adapted into television shows
+American novels adapted into comics
+Locus Award–winning works
+A Song of Ice and Fire books
+Novels by George R. R. Martin
+Bantam Books books
+Hidden categories: Articles with short description
+Short description matches Wikidata
+Good articles
+Use mdy dates from March 2025
+Wikipedia articles with plot summary needing attention from April 2026
+All Wikipedia articles with plot summary needing attention
+Pages using multiple image with auto scaled images
+CS1 maint: deprecated archival service
+ This page was last edited on 27 August 2026, at 02:14 (UTC).
+ Page was rendered with Parsoid.
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+ Privacy policy
+ About Wikipedia
+ Disclaimers
+ Contact Wikipedia
+ Legal & safety contacts
+ Code of Conduct
+ Developers
+ Statistics
+ Cookie statement
+ Mobile view
+Search
+ Search
+Toggle the table of contents
+ A Game of Thrones
+57 languages
+Add topic
