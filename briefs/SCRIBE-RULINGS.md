@@ -56,3 +56,14 @@ DATA DELETION off the table by its own rule. A migration FILE is written; applyi
     marked undone (with its advanceSeq and the advance's nonce, since the seq will be reused by a different future) and re-points current
     at the surviving epoch. SUPERSEDES the chair's earlier "drop epochs above the restored depth". Applies the same tier rotation as lived
     epochs (item 13 stays owner-gated).
+
+16–19. THE PRODUCT SURFACE (the owner, 2026-09-14 ~06:5x, verbatim): "and there should be an option to redo the AI narrative, to redraw based on the
+    current settlement's facts. lastly, remove the Narrative overlay option because it is now redundant. But do key in the AI instructions box in the
+    dossier to be additional instructions that is actually read and used by the AI for the prose for the dossier. And lastly, with this, it is
+    automatially default that the daily life tab be populated rather than on command. let's just get it all out there."
+    16 REDO: a redraw of the current epoch from the current facts; the prior render moves to the past lane marked redone; billed per render.
+    17 THE NARRATIVE OVERLAY IS RETIRED in W2 (toggle, requestNarrative, aiSettlement, pitch, the narrative SKU); chronicle/pins/notes/snapshots stay.
+    18 `dossierNotes.aiGuidance` (the ai_notes tab) is read on every render as the game master's instructions — in the volatile turn, below the law,
+       shaping words never the world; the refuter runs unchanged; editing it makes the epoch redo-eligible, never auto-renders.
+    19 DAILY LIFE renders by default as the seventh tab call of every epoch render, same card, same VOICE, same refuter, same artefact, same REDO;
+       its on-command button and SKU retire. Ruling 1 AMENDED: one render SKU, chair's default 5 credits (the retired narrative's), owner-signed.
