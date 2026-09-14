@@ -31,9 +31,11 @@ POOL "COMBINATION C3: the middle rungs" in block DS-ECO-1
     {access} is "road" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    prosperityRank(settlement.economicState.prosperity) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    prosperityRank(settlement.economicState.prosperity) = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
@@ -46,7 +48,7 @@ POOL "INCOME MIX: two or three sources between them" in block DS-ECO-12
   THE FIELDS this pool reads, with their values here:
     economicState.incomeSources = "[10 rows]" (FROZEN)
     economicState.incomeSources.length = 10 (FROZEN)
-    economicState.incomeSources.reduce = "{}" (FROZEN)
+    economicState.incomeSources.reduce = "[10 rows]" (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -78,9 +80,11 @@ POOL "POSTURE: established" in block DS-ECO-10
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    readings.exportPosture.status = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.exportPosture.status = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There is always something going out. If one trade is quiet, another is not.
@@ -100,7 +104,6 @@ POOL "PRESSURED" in block DS-ECO-9
 POOL "STALLED" in block DS-GEN-18
   vid: 2
   stance: ledger
-  CAVEAT: this pool's key names a departure (the word `stalled`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: institution, settlement
     {settlement} is "Spitzplatz" on this town
@@ -108,10 +111,10 @@ POOL "STALLED" in block DS-GEN-18
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.activeChains = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.exploitation = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.isEntrepot = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.primaryImports = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.activeChains = "[24 rows]" (FROZEN)
+    readings.exploitation = "{}" (FROZEN)
+    readings.isEntrepot = false (FROZEN)
+    readings.primaryImports = "[6 rows]" (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

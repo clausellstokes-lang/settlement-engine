@@ -415,8 +415,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "powerStructure.factions",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -425,8 +429,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "powerStructure.recentConflict",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -571,9 +579,18 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [
+      {
+       "field": "id",
+       "value": "s_014aefbc38036f89"
+      }
+     ],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -840,12 +857,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.govMultiplier",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": 1.15,
      "writers": 0
     }
    ],
@@ -908,7 +929,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/6",
+ "schema": "scribe-town-card/7",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "power",

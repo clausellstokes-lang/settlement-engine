@@ -99,9 +99,11 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.politics ?? null.blocs = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
@@ -153,7 +155,7 @@ POOL "legitimacyHold: public backing hardens the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 1.15 (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

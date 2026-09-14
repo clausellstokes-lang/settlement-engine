@@ -282,9 +282,11 @@ POOL "watch PRESENT" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
-    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    standingDefenseForces(settlement) = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
@@ -298,9 +300,11 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
-    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    standingDefenseForces(settlement) = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
@@ -313,9 +317,11 @@ POOL "arcane defense PRESENT" in block DS-DEF-5
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    magicWorksAt({ settlement }) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    magicWorksAt({ settlement }) = UNKNOWN (the engine has not decided this; assert nothing that depends on it)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN cannot carry a sentence, and no absence may be read
+    out of it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.

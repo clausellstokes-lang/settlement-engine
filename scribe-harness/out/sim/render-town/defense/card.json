@@ -412,8 +412,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "defenseProfile.readiness.score",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -520,8 +524,12 @@
    "fields": [
     {
      "clock": "LIVE-ROSTER",
+     "expression": "",
      "field": "institutions",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -665,8 +673,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasCourtSystem",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -675,8 +687,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasPrison",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -816,8 +832,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "defenseProfile.scores.economic",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -978,8 +998,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasChurch",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -988,8 +1012,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -998,8 +1026,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasHospital",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1084,8 +1116,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1160,8 +1196,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1301,8 +1341,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "name",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1377,8 +1421,12 @@
    "fields": [
     {
      "clock": "LIVE-ROSTER",
+     "expression": "",
      "field": "institutions",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1453,8 +1501,12 @@
    "fields": [
     {
      "clock": "LIVE-ROSTER",
+     "expression": "",
      "field": "institutions",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1463,9 +1515,13 @@
     },
     {
      "clock": "LIVE-ROSTER",
+     "expression": "standingDefenseForces(settlement)",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -1542,8 +1598,12 @@
    "fields": [
     {
      "clock": "LIVE-ROSTER",
+     "expression": "",
      "field": "institutions",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1552,9 +1612,13 @@
     },
     {
      "clock": "LIVE-ROSTER",
+     "expression": "standingDefenseForces(settlement)",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -1629,9 +1693,13 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "magicWorksAt({ settlement })",
      "field": "magicWorksAt({ settlement })",
      "grain": "root",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -1705,8 +1773,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "defenseProfile.economicGates.military",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1715,8 +1787,12 @@
     },
     {
      "clock": "LIVE-ROSTER",
+     "expression": "",
      "field": "institutions",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1797,8 +1873,12 @@
    "fields": [
     {
      "clock": "CONFIG",
+     "expression": "",
      "field": "config.tradeRouteAccess",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1807,8 +1887,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1817,8 +1901,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.compound.inst.hasPort",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -1882,7 +1970,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/6",
+ "schema": "scribe-town-card/7",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "defense",
