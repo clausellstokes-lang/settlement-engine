@@ -1,0 +1,609 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "and the ground that was given up stands abandoned.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3",
+    "EPOCH"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "EPOCH",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "an elapsed course on an unadvanced world",
+     "value": "no longer",
+     "description": "the card holds no advance, so nothing has since changed and this clause asserts a history the world does not have"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "This is as far as Warmholz can go before it is no longer the same settlement, and that lim",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": ", not the town.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "less room than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then TRADITION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then GEOGRAPHY then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nothing here is urgent, and the town's troubles are chronic rather than acute. (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What protects Warmholz is that nobody has wanted it, and the town understands the arrangement. (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "No answer exists in Warmholz for what lives beyond its fields, and the task of finding one falls to nobody. (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nobody in Warmholz worries about food, and nothing here threatens the supply. (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "spine": "Nothing in Warmholz is arranged for buying and selling in quantity.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "spine": "What gets done in Warmholz is never anybody's official post, only ever somebody's job on the side.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "spine": "The stock and the people of Warmholz have been pulled inward, and the ground that was given up stands abandoned.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "spine": "It is getting worse, steadily rather than suddenly, and each season costs a little more than the one before.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "spine": "The year in Warmholz ends close enough to level that it draws notice.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "spine": "Only a part of what happens in Warmholz is ever known, and no one here decides which part.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "spine": "Under the terms it currently has, Warmholz works, and the judgment falls on those terms, not the town.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "spine": "Between Warmholz and trouble lies less room than a town this size ought to have.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "spine": "More goes on in Warmholz than is kept track of, and little of it stays hidden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Little is spare in Warmholz, and that is the first thing a careful eye notices.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "Neither a practitioner nor any arrangement is kept in Warmholz, and no one expects either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "spine": "Where Warmholz stands is close enough to the road to matter, and no closer.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "spine": "A handful of roofs with a reason behind them make up Warmholz, and the reason is usually the ground.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "No marked relationship, friendly or hostile, ties Warmholz to anywhere else, and none is on record.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "A careful reader of Warmholz finds one loose end, and it is the kind a single institution could tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 5,
+ "patched": 0,
+ "tier1Dropped": 4,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 20,
+   "openers": [
+    {
+     "opener": "a careful reader",
+     "n": 1
+    },
+    {
+     "opener": "a handful of",
+     "n": 1
+    },
+    {
+     "opener": "between warmholz and",
+     "n": 1
+    },
+    {
+     "opener": "it is getting",
+     "n": 1
+    },
+    {
+     "opener": "little is spare",
+     "n": 1
+    },
+    {
+     "opener": "more goes on",
+     "n": 1
+    },
+    {
+     "opener": "neither a practitioner",
+     "n": 1
+    },
+    {
+     "opener": "no answer exists",
+     "n": 1
+    },
+    {
+     "opener": "no marked relationship,",
+     "n": 1
+    },
+    {
+     "opener": "nobody in warmholz",
+     "n": 1
+    },
+    {
+     "opener": "nothing here is",
+     "n": 1
+    },
+    {
+     "opener": "nothing in warmholz",
+     "n": 1
+    },
+    {
+     "opener": "only a part",
+     "n": 1
+    },
+    {
+     "opener": "the stock and",
+     "n": 1
+    },
+    {
+     "opener": "the year in",
+     "n": 1
+    },
+    {
+     "opener": "this is as",
+     "n": 1
+    },
+    {
+     "opener": "under the terms",
+     "n": 1
+    },
+    {
+     "opener": "what gets done",
+     "n": 1
+    },
+    {
+     "opener": "what protects warmholz",
+     "n": 1
+    },
+    {
+     "opener": "where warmholz stands",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
