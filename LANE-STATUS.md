@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 03:22:19 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 03:27:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
@@ -96,7 +96,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_874f9ad9-605** (mtime 09-14 03:16): agent calls 16 (16 distinct) · DONE 12 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_874f9ad9-605/`
+- **wf_874f9ad9-605** (mtime 09-14 03:16): agent calls 16 (16 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_874f9ad9-605/`
     - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
     - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
     - `a6cbf322f` ? · DONE · transcript 09-14 03:09 440 KB · 7 tool calls · result: {"pool": "Economic Survival: CRITICAL", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 4 [register]", "headText": "Those who keep the ground say
@@ -109,10 +109,10 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `aa92482ee` ADVERSARY · DONE · transcript 09-14 03:16 527 KB · 17 tool calls · files: h.txt, i.txt · result: {"pool": "Economic Survival: CRITICAL", "verdicts": [{"faceOrSpine": "VARIANT 1 FACE 4 [register]", "verdict": "SOUND", "why": "The repair is HEAD verbatim, con
     - `a79cd7191` ADVERSARY · DONE · transcript 09-14 03:21 603 KB · 16 tool calls · files: rep.json · result: {"pool": "Disasters & Famine: granary AND parish care only", "verdicts": [{"faceOrSpine": "VARIANT 1 FACE 1 [hall \u00b7 pair 1 \u00b7 reinforce]", "verdict": "
     - `aab612847` ADVERSARY · DONE · transcript 09-14 03:17 469 KB · 8 tool calls · files: rep.json · result: {"pool": "Economic Survival: WEAK", "verdicts": [{"faceOrSpine": "v1 FACE 3 [stranger]", "verdict": "SOUND", "why": "The `was` string matches the working tree's
-    - `a3560ef39` ADVERSARY · IN FLIGHT · transcript 09-14 03:21 494 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `af7ce222c` ADVERSARY · IN FLIGHT · transcript 09-14 03:22 554 KB · 13 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `a88c3bc64` ADVERSARY · IN FLIGHT · transcript 09-14 03:21 464 KB · 9 tool calls · files: "$SC/adv-repair2/rep.json, check.mjs · last: Bash export SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2
-    - `a12ab64b3` ADVERSARY · IN FLIGHT · transcript 09-14 03:22 475 KB · 9 tool calls · files: rep_hospital.json · last: Bash cd "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scra
+    - `a3560ef39` ADVERSARY · DONE · transcript 09-14 03:22 529 KB · 10 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "verdicts": [{"faceOrSpine": "variant 1 FACE 3 [market]", "verdict": "SOUND", "why": "Mechanically applicable: the `was`
+    - `af7ce222c` ADVERSARY · DONE · transcript 09-14 03:27 686 KB · 18 tool calls · result: {"pool": "Disasters & Famine: granary AND hospital", "verdicts": [{"faceOrSpine": "VARIANT 1 FACE 3 [register]", "verdict": "SOUND", "why": "The `was` string is
+    - `a88c3bc64` ADVERSARY · DONE · transcript 09-14 03:24 547 KB · 12 tool calls · files: "$SC/adv-repair2/rep.json, check.mjs, check2.mjs · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "verdicts": [{"faceOrSpine": "VARIANT 1 SPINE", "verdict": "SOUND", "why": "granary -> grain s
+    - `a12ab64b3` ADVERSARY · DONE · transcript 09-14 03:25 566 KB · 11 tool calls · files: rep_hospital.json · result: {"pool": "Disasters & Famine: NO reserves, hospital present", "verdicts": [{"faceOrSpine": "VARIANT 1 FACE 2 [stranger \u00b7 pair 1 \u00b7 disagree]", "verdict
 - **wf_980caecf-038** (mtime 09-14 02:54): agent calls 16 (16 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_980caecf-038/`
     - `a58382150` ? · DONE · transcript 09-14 02:48 453 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "claimFreezeHeld": false, "facesChanged": 22, "facesUnchanged": 9, "lineTotal": 31, "ownerTestBefore": 13, "ownerT
     - `af201562a` ? · DONE · transcript 09-14 02:49 495 KB · 6 tool calls · result: {"pool": "Economic Survival / WEAK", "claimFreezeHeld": false, "facesChanged": 9, "facesUnchanged": 18, "lineTotal": 30, "ownerTestBefore": 19, "ownerTestAfter"
@@ -132,4 +132,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 1.85 2.32 2.31
+load: 2.76 2.39 2.33
