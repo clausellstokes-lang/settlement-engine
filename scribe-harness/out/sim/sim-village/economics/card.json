@@ -222,9 +222,18 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "prosperityRank(settlement.economicState.prosperity)",
      "field": "prosperityRank(settlement.economicState.prosperity)",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [
+      {
+       "field": "economicState.prosperity",
+       "value": "Comfortable"
+      }
+     ],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -303,8 +312,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.incomeSources",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -313,8 +326,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.incomeSources.length",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -323,12 +340,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.incomeSources.reduce",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.incomeSources",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{}",
+     "value": "[4 rows]",
      "writers": 0
     }
    ],
@@ -401,8 +422,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "economicState",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -411,8 +436,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.isEntrepot",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -421,8 +450,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.localProduction",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -431,8 +464,12 @@
     },
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "economicState.primaryExports",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -441,8 +478,12 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "economicState.primaryImports",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
@@ -521,9 +562,13 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "deriveExportPosture(settlement).status",
      "field": "readings.exportPosture.status",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -638,13 +683,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-18",
-   "caveats": [
-    {
-     "channel": "REPORT",
-     "key": "departure key with no reading under it",
-     "note": "this pool's key names a departure (the word `stalled`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
-    }
-   ],
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -652,8 +691,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "readings",
      "grain": "root",
+     "inputs": [],
+     "note": "the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -662,42 +705,58 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.activeChains",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.activeChains",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "[5 rows]",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.exploitation",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "resourceAnalysis.exploitation",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{}",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.isEntrepot",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.isEntrepot",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": false,
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.primaryImports",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.primaryImports",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "[4 rows]",
      "writers": 0
     }
    ],
@@ -767,7 +826,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/6",
+ "schema": "scribe-town-card/7",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "economics",

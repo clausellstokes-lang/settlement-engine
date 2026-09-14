@@ -32,9 +32,11 @@ POOL "COMBINATION C1: a high rung on a working approach" in block DS-ECO-1
     {complexity} is "spread of trades" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    prosperityRank(settlement.economicState.prosperity) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    prosperityRank(settlement.economicState.prosperity) = DERIVED: the engine computes this as `prosperityRank(settlement.economicState.prosperity)`, from `economicState.prosperity` = "Prosperous". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.
@@ -45,9 +47,9 @@ POOL "INCOME MIX: two or three sources between them" in block DS-ECO-12
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    economicState.incomeSources = "[10 rows]" (FROZEN)
-    economicState.incomeSources.length = 10 (FROZEN)
-    economicState.incomeSources.reduce = "{}" (FROZEN)
+    economicState.incomeSources = "[10 rows]"
+    economicState.incomeSources.length = 10
+    economicState.incomeSources.reduce = "[10 rows]" (the engine's own field is `economicState.incomeSources`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -62,11 +64,11 @@ POOL "TRADE PROFILE: exports and imports both present" in block DS-ECO-12
     {settlement} is "Rundgate" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    economicState = "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}" (LIVE)
-    economicState.isEntrepot = false (FROZEN)
-    economicState.localProduction = "[19 rows]" (FROZEN)
-    economicState.primaryExports = "[18 rows]" (LIVE)
-    economicState.primaryImports = "[10 rows]" (FROZEN)
+    economicState = "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}"
+    economicState.isEntrepot = false
+    economicState.localProduction = "[19 rows]"
+    economicState.primaryExports = "[18 rows]"
+    economicState.primaryImports = "[10 rows]"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -79,9 +81,11 @@ POOL "POSTURE: established" in block DS-ECO-10
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    readings.exportPosture.status = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.exportPosture.status = DERIVED: the engine computes this as `deriveExportPosture(settlement).status`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
@@ -101,18 +105,17 @@ POOL "SECURE" in block DS-ECO-9
 POOL "STALLED" in block DS-GEN-18
   vid: 2
   stance: ledger
-  CAVEAT: this pool's key names a departure (the word `stalled`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: institution, settlement
     {settlement} is "Rundgate" on this town
     {institution} is "Garrison" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.activeChains = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.exploitation = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.isEntrepot = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.primaryImports = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on
+    readings.activeChains = "[21 rows]" (the engine's own field is `economicState.activeChains`)
+    readings.exploitation = "{}" (the engine's own field is `resourceAnalysis.exploitation`)
+    readings.isEntrepot = false (the engine's own field is `economicState.isEntrepot`)
+    readings.primaryImports = "[10 rows]" (the engine's own field is `economicState.primaryImports`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -127,7 +130,7 @@ POOL "TIER: minor shadow activity (≥3)" in block DS-ECO-6
     {settlement} is "Rundgate" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    economicState.safetyProfile.blackMarketCapture = 8 (FROZEN)
+    economicState.safetyProfile.blackMarketCapture = 8
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

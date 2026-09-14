@@ -89,9 +89,11 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.politics ?? null.blocs = DERIVED: the engine computes this as `settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs`, from `id` = "s_b4150f0588a0f37a". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
@@ -146,7 +148,7 @@ POOL "legitimacyHold: public opinion neither helps nor hurts" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 1 (the engine's own field is `powerStructure.publicLegitimacy.govMultiplier`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

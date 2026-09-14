@@ -46,10 +46,10 @@ POOL "governanceFractured true" in block DS-POW-1
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}) = "{bg, breakdown, color, crimMultiplier, govMultiplier, governanceFractured, isApproved, isContested, isEndorsed, isLegitimacyCrisis, isTolerated, label, score}" (the engine's own field is `powerStructure.publicLegitimacy`)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured = true (the engine's own field is `powerStructure.publicLegitimacy.governanceFractured`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -93,16 +93,16 @@ POOL "capture pressure ADVANCING (weak security, poor prosperity)" in block DS-P
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    powerStructure.criminalCaptureState = "none" (LIVE)
+    powerStructure.criminalCaptureState = "none"
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown = "{defense: -2, food: 0, prosperity: -10, safety: -20}" (the engine's own field is `powerStructure.publicLegitimacy.breakdown`)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity = -10 (the engine's own field is `powerStructure.publicLegitimacy.breakdown.prosperity`)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety = -20 (the engine's own field is `powerStructure.publicLegitimacy.breakdown.safety`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -121,9 +121,11 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.politics ?? null.blocs = DERIVED: the engine computes this as `settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs`, from `id` = "s_fb778fe0fe392cd9". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
@@ -171,7 +173,6 @@ POOL "riskLabel: Contested" in block DS-POW-4
 POOL "legitimacyHold: public rejection is breaking the hold" in block DS-POW-4
   vid: 3
   stance: ledger
-  CAVEAT: this pool's key names a departure (the word `breaking`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: seat, settlement
     {seat} is "Free Elder Council" on this town
@@ -180,7 +181,7 @@ POOL "legitimacyHold: public rejection is breaking the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 0.6 (the engine's own field is `powerStructure.publicLegitimacy.govMultiplier`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

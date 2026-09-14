@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-14 18:42:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 18:47:43 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = f7fea02bc Plan: the collection at 09-14 ~18:4x — the prose rewrite is banked on the owner's word a
+product claude/composite-r4 = f73bdbf16 · ledger = 92dac1c04 Plan: the collection at 09-14 ~19:3x — the long tail enumerated from every record into o
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
@@ -113,6 +113,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
+- **wf_00f13b26-496** (mtime 09-14 18:45): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
+    - `a4fbfbedf` ? · IN FLIGHT · transcript 09-14 18:45 450 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `aff4d541f` ? · IN FLIGHT · transcript 09-14 18:45 448 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a9265e93e` ? · IN FLIGHT · transcript 09-14 18:45 431 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a3ca72aef` ? · IN FLIGHT · transcript 09-14 18:45 443 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a7b3b52e3` ? · IN FLIGHT · transcript 09-14 18:45 438 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `ae63488d5` ? · IN FLIGHT · transcript 09-14 18:45 457 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
 - **wf_43403a50-66b** (mtime 09-14 17:39): agent calls 30 (30 distinct) · DONE 30 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_43403a50-66b/`
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
@@ -388,4 +395,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.50 2.74 2.65
+load: 2.28 2.69 2.66

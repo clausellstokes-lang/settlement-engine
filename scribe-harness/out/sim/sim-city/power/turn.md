@@ -68,8 +68,8 @@ POOL "recentConflict present" in block DS-POW-2
     {settlement} is "Rundgate" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    powerStructure.factions = "[7 rows]" (LIVE)
-    powerStructure.recentConflict = "City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost." (FROZEN)
+    powerStructure.factions = "[7 rows]"
+    powerStructure.recentConflict = "City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost."
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -100,9 +100,11 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Rundgate" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.politics ?? null.blocs = DERIVED: the engine computes this as `settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs`, from `id` = "s_ea3b06f441896e3b". Write from those values and give this reading no value of its own.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.
@@ -158,7 +160,7 @@ POOL "legitimacyHold: public backing hardens the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = 1.15 (the engine's own field is `powerStructure.publicLegitimacy.govMultiplier`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

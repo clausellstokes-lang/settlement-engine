@@ -46,7 +46,7 @@ POOL "readiness WEAK" in block DS-DEF-1
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    defenseProfile.readiness.score = 28 (FROZEN)
+    defenseProfile.readiness.score = 28
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -59,7 +59,7 @@ POOL "Invasion & War: neither walls nor force" in block DS-DEF-2
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    institutions = "[29 rows]" (LIVE)
+    institutions = "[29 rows]"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 9
@@ -99,8 +99,8 @@ POOL "Internal Security: no legal infrastructure" in block DS-DEF-2
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    economicState.compound.inst.hasCourtSystem = false (FROZEN)
-    economicState.compound.inst.hasPrison = false (FROZEN)
+    economicState.compound.inst.hasCourtSystem = false
+    economicState.compound.inst.hasPrison = false
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 7
@@ -134,7 +134,7 @@ POOL "Economic Survival: WEAK" in block DS-DEF-2
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    defenseProfile.scores.economic = 32 (FROZEN)
+    defenseProfile.scores.economic = 32
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 9
@@ -174,9 +174,9 @@ POOL "Disasters & Famine: NO reserves, NO medical provision" in block DS-DEF-2
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    economicState.compound.inst.hasChurch = true (FROZEN)
-    economicState.compound.inst.hasGranary = false (FROZEN)
-    economicState.compound.inst.hasHospital = false (FROZEN)
+    economicState.compound.inst.hasChurch = true
+    economicState.compound.inst.hasGranary = false
+    economicState.compound.inst.hasHospital = false
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 5
@@ -206,7 +206,7 @@ POOL "Moderate" in block DS-DEF-3
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
+    economicState.safetyProfile.safetyLabel = "Moderate"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -221,7 +221,7 @@ POOL "First-Survey qualification (the reading is a first look)" in block DS-DEF-
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
+    economicState.safetyProfile.safetyLabel = "Moderate"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -236,7 +236,7 @@ POOL "structure null (nothing organized recognized)" in block DS-DEF-4
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    structureKey = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    structureKey = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — a CALLER'S ARGUMENT and not a settlement field — `defenseCriminalProse(settlement, structureKey, options)` takes it from `deriveCriminalStructure(settlement).key`, which the page prints beside the pool as the criminal-structure badge
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -254,7 +254,7 @@ POOL "capture none" in block DS-DEF-4
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    name = "Hochhausen" (LIVE)
+    name = "Hochhausen"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -269,7 +269,7 @@ POOL "walls ABSENT" in block DS-DEF-5
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    institutions = "[29 rows]" (LIVE)
+    institutions = "[29 rows]"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -284,10 +284,12 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    institutions = "[29 rows]" (LIVE)
-    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    institutions = "[29 rows]"
+    standingDefenseForces(settlement) = DERIVED: the engine computes this as `standingDefenseForces(settlement)`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
@@ -299,9 +301,11 @@ POOL "arcane defense ABSENT" in block DS-DEF-5
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    magicWorksAt({ settlement }) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    magicWorksAt({ settlement }) = DERIVED: the engine computes this as `magicWorksAt({ settlement })`. The card holds no input for it, so give this reading no value: what the engine decided about it is what the pool key and the page lines already say.
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
+    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no
+    absence may be read out of one.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.
@@ -314,7 +318,7 @@ POOL "UNWALLED-SMALL" in block DS-DEF-11
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    institutions = "[29 rows]" (LIVE)
+    institutions = "[29 rows]"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -327,9 +331,9 @@ POOL "Logistics & Supply: No reserves, landlocked" in block DS-DEF-6
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    config.tradeRouteAccess = "road" (FROZEN)
-    economicState.compound.inst.hasGranary = false (FROZEN)
-    economicState.compound.inst.hasPort = false (FROZEN)
+    config.tradeRouteAccess = "road"
+    economicState.compound.inst.hasGranary = false
+    economicState.compound.inst.hasPort = false
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

@@ -281,22 +281,30 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({})",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{bg, breakdown, color, crimMultiplier, govMultiplier, governanceFractured, isApproved, isContested, isEndorsed, isLegitimacyCrisis, isTolerated, label, score}",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.governanceFractured",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": true,
      "writers": 0
     }
    ],
@@ -506,8 +514,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "powerStructure.criminalCaptureState",
      "grain": "field",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -516,32 +528,44 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.breakdown",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{defense: -2, food: 0, prosperity: -10, safety: -20}",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.breakdown.prosperity",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": -10,
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.breakdown.safety",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": -20,
      "writers": 0
     }
    ],
@@ -623,9 +647,18 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [
+      {
+       "field": "id",
+       "value": "s_fb778fe0fe392cd9"
+      }
+     ],
+     "note": "",
+     "readFrom": "",
+     "state": "derived",
      "status": "FROZEN",
      "unknown": true,
      "value": null,
@@ -893,13 +926,7 @@
    "angle": "ledger",
    "authoredIndex": 2,
    "blockId": "DS-POW-4",
-   "caveats": [
-    {
-     "channel": "REPORT",
-     "key": "departure key with no reading under it",
-     "note": "this pool's key names a departure (the word `breaking`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
-    }
-   ],
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -907,12 +934,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "powerStructure.publicLegitimacy.govMultiplier",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": 0.6,
      "writers": 0
     }
    ],
@@ -978,7 +1009,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/6",
+ "schema": "scribe-town-card/7",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "power",
