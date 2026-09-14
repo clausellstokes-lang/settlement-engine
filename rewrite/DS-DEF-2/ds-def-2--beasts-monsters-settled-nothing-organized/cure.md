@@ -10,6 +10,12 @@
 # LEFT AS IT STANDS IS SPINE 2, byte-identical from the draft: it is the pool's public carrier, it
 # lands on a perception rather than on an absence, and the echo limb (d) charged against it is the
 # FACE's repetition of its words, which is cured on the face side.
+#
+# SECOND SITTING (the refuter's part B, ONE target). Variant 3 face 0 — THE SPINE — was ruled FAIL
+# on F1-107 (the town's trust made a fact), with ruling 35's perimeter-sibling limb standing beside
+# it as an independent finding. THAT ROW ALONE IS RE-CUT HERE. The other 26 units are BYTE-IDENTICAL
+# to the rows this file already held, and the notes below are amended only where the re-cut
+# falsified them or where a figure moved.
 
 **`Beasts & Monsters`: `settled`, nothing organized**
 1. `[ledger]` Nothing stands round these houses, and the place keeps no soldiers of its own. The hours go into the harvest, the grinding and the burying.
@@ -30,7 +36,7 @@
    - `[face]` `[elders]` A child goes out to the fields with a basket and with whoever else is going that way, the elders have it.
    - `[face]` `[tavern · pair 3 · disagree]` At the tavern a carter says anything that came in from outside would be met first by whoever is furthest out among the fields.
    - `[face]` `[watch · pair 3 · disagree]` One of the watch holds that anything coming in would come up the road, and that the road is his to walk.
-3. `[visitor]` A carter says he leaves the load on the cart in the lane overnight and takes it up again in the morning.
+3. `[visitor]` A carter who came in with a load says he found no edge to the place, only the last house and then the next one.
    - `[face]` `[stranger · pair 5 · disagree]` The people in the fields had their eyes on him the whole way in, a pedlar says, and their hands on the work.
    - `[face]` `[tavern · pair 5 · disagree]` At the tavern a drover holds that a stranger walks in here with the whole place looking the other way.
    - `[face]` `[hall]` A clerk in the hall says a stranger with business here brings it to the hall, and that a stranger without business goes where he likes.
@@ -41,6 +47,37 @@
    - `[face]` `[elders]` By the elders' account the one thing a household keeps by the door is a stick. The stick is for the dogs.
 
 --- NOTES
+
+PART B, THE ONE FAIL: VARIANT 3 FACE 0, THE SPINE. CURED. The struck row read "A carter says he
+leaves the load on the cart in the lane overnight and takes it up again in the morning." It is
+replaced by "A carter who came in with a load says he found no edge to the place, only the last
+house and then the next one." Both limbs of the finding are answered, and nothing else in the file
+is touched.
+
+  F1-107, THE TRUST MADE A FACT. The habitual present goes out with the load. The row now says
+  nothing about what becomes of unattended property, or of any property, and nothing about order,
+  theft, the night or the morning — so safetyProfile.js:313's "Violence and theft are routine" can
+  print in the same panel (DefenseTab.jsx:366) beside it without contradicting a word of it. The
+  internal-order band stays entirely open, which is what card section 8 requires of this pool, and
+  the frozen record the finding named is no longer claimed in either direction.
+  RULING 35, THE PERIMETER SIBLING. The re-cut row cannot sit on `Beasts & Monsters: settled,
+  defenses beyond the need`: it reports the ABSENCE of a perimeter, which is the read that sibling
+  reverses. It carries the key's own read (institutions[bucket=walls], false) as a source's
+  account, and it is card section 9's own sentence for this pool — the settlement ends where the
+  dwellings end and the fields go on past it with no edge anywhere — put in a visitor's mouth.
+  THE SHAPE IS KEPT (ruling 29). The pool's three spines still take three shapes: spine 1 the bare
+  fact in the archiver's hand, spine 2 the public's seeing, spine 3 a source's account with the
+  attribution named at the head and carried through the clause by `he`. The `[visitor]` tag, the
+  speaker kind (a CARTER, against variant 3's PEDLAR and its DROVER) and the pool's nine sources
+  are unchanged, and no face of variant 3 repeats a phrase, a construction or the speaker kind of
+  the new spine.
+  WHAT THE ROW DOES NOT DO. It asserts no placement (card section 2b′), denies no required row and
+  no service at or above the bar — a perimeter is a required row at no preimage tier — spends no
+  citation (the source is a ROLE and no record is named, so nothing here can raise the corpus
+  ceiling the way "from the road" did in batch 3), carries no rate, count, night or season (F2's
+  two standing breaches on this desk), names no office-holder, and leaves the load's fate unstated,
+  which is the whole of the repair. It writes the absence as a standing condition met by a visitor
+  and not as a history or a choice (F2-03, F2-04, F2-09).
 
 THE ONE TARGET WAS THE DULL RULING, AND ALL FOUR OF ITS LIMBS ARE CURED. No face was ruled FAIL,
 so nothing here is a floor repair; every row is rewritten, the three spines included, and the pool
@@ -64,8 +101,9 @@ keeps its nine speakers, its three pairs and its two disagreements.
     to find his own door). VARIANT 3 IS 2 OF 8, against 8 of 8, and the four faces the finding
     ordered re-aimed are re-aimed onto card section 9's own list: the SELLING (the market's grain
     weighed on the same scales as the near fields'), the GRINDING (the guild's sacks going out with
-    whoever is going that way), WHAT IS LEFT OUT (the variant's spine — the load on the cart in the
-    lane overnight) and WHAT A HOUSEHOLD KEEPS BY THE DOOR (the elders' stick). The watch's round
+    whoever is going that way), THE APPROACH ITSELF (the variant's spine, which at part B stopped
+    being "what is left out overnight" and became a carter coming in and finding no edge to the
+    place) and WHAT A HOUSEHOLD KEEPS BY THE DOOR (the elders' stick). The watch's round
     was re-aimed with them, onto the ground it actually covers.
 (c) THE SENSORY NOUNS. 4.71 per hundred words (31 hits in 658), against 1.94 and a bar of 2.0,
     measured with `rewrite/measure-block.py`'s own `pool_fingerprint` over these 27 rows and not by
@@ -80,16 +118,27 @@ keeps its nine speakers, its three pairs and its two disagreements.
     the grinding and the burying) and no face of variant 1 carries the word; spine 2 stands
     byte-identical from the draft and no face of variant 2 says "out of the country" (the hall's
     "on the country's account" is the one use of the word, in another frame); spine 3 is a CARTER's
-    account of the load left in the lane, variant 3's stranger is a PEDLAR and its tavern face a
+    account of coming in and finding no edge to the place, variant 3's stranger is a PEDLAR and its tavern face a
     DROVER, and neither "the road in" nor "a drover says" appears anywhere in the variant's faces.
 
-THE FOUR FIGURES, same instrument: SENSORY 4.71/100w (benchmark 2.9, bar 2.0) · SAME-OPENER 0.038,
-1 hit in 26 (benchmark 0.14, bar 0.20) · ATTRIBUTIONS PER SENTENCE 0.700 loose and 0.700 strict, 21
-of 30 (benchmark 0.63) · SENTENCE-LENGTH SD 6.24 on a mean of 21.93 (benchmark 5.0). Also printed:
-pet words 0.76 per hundred (the draft's 2.43 — the fall is the negations going out), self-citations
-0, forecasts 0, open share 0, opener classes subject 16 · place 5 · fronted 3 · attributed 3, with
-no run of three in one class and the pool's three spines in three shapes (the bare fact · the
-public · a source's account).
+THE FOUR FIGURES, same instrument, RE-MEASURED OVER THESE 27 ROWS AFTER THE PART B RE-CUT: SENSORY
+4.39/100w, 29 hits in 661 words (benchmark 2.9, bar 2.0) · SAME-OPENER 0.038, 1 hit in 26 (benchmark
+0.14, bar 0.20) · ATTRIBUTIONS PER SENTENCE 0.700 loose and 0.700 strict, 21 of 30 (benchmark 0.63)
+· SENTENCE-LENGTH SD 6.27 on a mean of 22.03 (benchmark 5.0). Also printed: pet words 0.76 per
+hundred (the draft's 2.43 — the fall is the negations going out), self-citations 0, forecasts 0,
+open share 0, opener classes subject 16 · place 5 · fronted 3 · attributed 3, with no run of three
+in one class and the pool's three spines in three shapes (the bare fact · the public · a source's
+account).
+THE PART B DELTA, MEASURED AND NOT REASONED: sensory 4.71 → 4.39 (31 hits → 29; the cart and the
+lane go out, the load and the house come in), words 658 → 661, mean 21.93 → 22.03, SD 6.24 → 6.27.
+EVERY OTHER FIGURE IS UNMOVED, the opener histogram included: the struck row and the re-cut row
+both class `subject` and both close `plain`, and the sentence count, the attribution count, the pet
+words, the self-citations, the forecasts and the open share are all identical.
+HOW IT WAS TAKEN, so the chair can repeat it: `rewrite/measure-block.py` was IMPORTED (its
+`__main__` guard not run) and its own `pools_of` and `pool_fingerprint` called over THIS packet
+file. The script's main path wants a DOCK and does `git -C <dock> show` for the shipped-versus-
+working comparison, and the curer's fences bar the dock, so the two legacy lines and the shipped
+comparison were NOT run — only the pool-grain fingerprint, which needs nothing but these rows.
 
 TWO THINGS THE INSTRUMENT STILL CANNOT SEE, REPORTED RATHER THAN DRESSED UP.
 - CLOSES READ `plain` ON ALL 27, as they did at the draft. Two faces close on a two-sentence stop

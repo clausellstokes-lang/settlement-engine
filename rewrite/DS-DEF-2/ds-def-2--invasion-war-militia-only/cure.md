@@ -1,5 +1,23 @@
 # CURE (curer, seat opus) — block DS-DEF-2 · pool `Invasion & War: militia only`
 
+**SITTING 2 (this pass).** A complete `cure.md` already stood from sitting 1. Under the checkpoint
+law I continued from it and did NOT bank it on trust: the rows are unchanged, and every mechanical
+and citation claim the packet makes was RE-EXECUTED rather than re-read. **Everything the rows
+assert holds; two things the NOTES asserted did not.** Both are corrected in place and named here:
+the road citation in WIRING 1 (wrong path and wrong line, understated count) and the move-detector
+exposure, which had no wiring row at all and which both earlier seats miscounted (WIRING 4, new).
+No row moved for either. The dock was neither entered nor written; HEAD reads `97302382a` and
+`git status --porcelain` is EMPTY, unchanged from entry.
+
+EXECUTED THIS SITTING, over the row block of this file: 19 units · 3 spines · 16 faces · 6/6/4 ·
+em dash 0 · en dash 0 · exclamation 0 · semicolon 0 · digit 0 · contraction 0 (the six apostrophes
+are possessives) · `will`/`shall` 0 · `{settlement}` 1, in spine 1 and in NO face · `says`/`say` in
+6 of 19 units, longest adjacent run 2 · sibling-opener collisions 0 in all three variants · faces
+opening "One of the" 0 · negation landings 5 of 19 (26.3%) · PROVENANCE move hits 0 · `road`/`track`
+0 · no wage, pay, purse, arrears or coin · no named record cited · no armoury or issued arms · no
+court, gaol or stocks · no guild, hall or council · no self-citation · the only `wall` and `soldier`
+in the pool are spine 1's two key-fixed absences, which the refuter passed.
+
 TARGETS CURED: 2 of 2. REFUSED: none.
   (1) variant 1 face 6 — FAIL, floor 1, F1-25 the negation direction ("there are no other hands
       here to ask"). Cured by the refuter's own prescription: the third clause is gone.
@@ -305,14 +323,20 @@ is in the rows above.
 
 ## THE REFUTER'S WIRING ITEMS — carried to the chair, not cured here
 
-None of the three is a face charge and no wording change reaches any of them. Repeated so they are
+None of the four is a face charge and no wording change reaches any of them. Repeated so they are
 not lost between packets.
 
-1. **The card over-counts the roadless towns** (8 of 27 → the true 4): `generalStateProse.js:966` is
-   `ORIGIN_POOL_OF_ROUTE[route] || 'road'`, so `none` renders under the engine's own road arm.
-   ⭐ THE CURED ROWS DO NOT DEPEND ON IT EITHER WAY — **"the road" is now in no row of this pool**,
-   the stranger faces having moved to houses, doors and trade. Whichever count the chair settles on,
-   this packet is unaffected.
+1. **The card over-counts the roadless towns** (card: "8 of 27 are `isolated` or `none`" → the true
+   **4** roadless, **11** rendering as road). ⚠ THIS SITTING RE-EXECUTED THE CITATION AND CORRECTED
+   THIS PACKET'S OWN EARLIER ONE: the path is `src/domain/display/stateProse/generalStateProse.js`
+   (not `src/domain/prose/`) and the else-arm is **`:974`**, `ORIGIN_POOL_OF_ROUTE[text(
+   tradeRouteAccess)] || 'road'`, with the map at **`:896-901`** holding ONLY crossroads · river ·
+   port · isolated — so `none` (4) AND `mountain_pass` (3) both render under the engine's own road
+   arm. The earlier line (`:966`) was wrong and the count understated; the refuter's sitting-2
+   correction is upheld against my own packet.
+   ⭐ THE CURED ROWS DO NOT DEPEND ON IT EITHER WAY — **"the road" is now in no row of this pool**
+   (EXECUTED: `road`/`track` match nothing in the 19 cured units), the stranger faces having moved
+   to houses, doors and trade. Whichever count the chair settles on, this packet is unaffected.
 2. **Section (7) and §V disagree about where the register is seated**, and THREE rows still ride on
    it (variant 1 face 6, variant 2 face 6, variant 3 face 4). §V governs and makes the register
    village-only (13/27); the mechanical section seats it at both tiers. If the draw's source filter
@@ -322,11 +346,66 @@ not lost between packets.
 3. **A `Watch Captain` NPC on 4/27 with `hasWatch` false**, and `safetyProfile.js:183` on the one
    succession-void town. Re-checked over the cured rows: no row in this pool touches the watch in
    any form.
+4. ⛔ **THE MOVE DETECTORS — RE-EXECUTED THIS SITTING OVER BOTH ROW SETS, AND BOTH EARLIER COUNTS
+   WERE WRONG.** The refuter's WIRING 4 reported "exactly one hit" over the 19 draft rows, and this
+   packet's spine-3 discussion implied the re-cut cleared the exposure. Neither is what the detector
+   says. EXECUTED with `CLAUSE_DETECTORS` and `clauseUnits` parsed out of
+   `src/domain/prose/moveGrammar.js` and run over the rows of `draft.md` and of this file. Run
+   TWICE, because the semantics matter: once first-match-per-clause, and once collecting EVERY
+   detector that fires, which is what `classifyMoves` does (`proseMoveGrammar.walker.test.js:895`:
+   "collects EVERY detector that fires and orders them by match index"). **Both runs return the
+   same table**, there being no clause in either row set where two detectors fire at once:
+
+   | | ABSENCE | CONSEQUENCE | PROVENANCE | total hits | rows carrying a move |
+   |---|---|---|---|---|---|
+   | shipped (`f2da5a3ee`) | 0 | 0 | 0 | **0** | 0 |
+   | draft (landed at HEAD) | 4 | 1 | 0 | **5** | 4 |
+   | **cured (this file)** | **1** | **1** | **0** | **2** | **2** |
+
+   The draft's four ABSENCE hits the refuter's run missed: *does not say* (v1 f4), *there are no*
+   (v1 f6, the charged clause), *nothing here for* (spine 3), *does not say* (v3 f4). Three of the
+   four are gone by the cure — two of them dropped by the two targets themselves.
+
+   **What the cure actually did to CONSEQUENCE: moved it, not removed it.** Spine 3's `comes out of`
+   is gone, and `costs` in variant 2 face 5 now matches in its place, so the pool's CONSEQUENCE
+   count is **FLAT at 1** rather than zero. That face is the pool's one BILL (ruling 32) landed on a
+   row the town holds, and I did not cut a lawful, earned clause to dodge a detector that refuses
+   nothing — the reasons are measured, not preferred:
+   - **NO CEILING IS RAISABLE BY THIS PACKET.** The batch-3 refusal shape is PROVENANCE, and the
+     exact-count corpus assertion is PROVENANCE-only — EXECUTED at
+     `tests/lint/proseMoveGrammar.walker.test.js`, where `cited` is built at `:834` as
+     `leaves.filter((v) => classifyMoves(v.text).includes('PROVENANCE'))` and asserted
+     `expect(cited.length).toBe(7)` at `:853`, with a twin filter and assertion at `:901`/`:917`.
+     **The cured rows spend ZERO PROVENANCE.** A
+     grep of `tests/lint/` for an exact-count assertion on CONSEQUENCE or ABSENCE returns only
+     grammar-ID checks on fixed fixture strings (`proseComposed.walker.test.js:1282-1284`), which no
+     corpus row can move.
+   - **NO NEW MOVE KIND ENTERS THE POOL**, and no kind's count rises: the cured set's kinds are a
+     subset of the draft's, 2 hits against 5, on 2 rows against 4. A shrink-only instrument reading
+     any of these three columns reads a DECREASE.
+   - Both surviving sequences are LEVEL1 orders by the composed test's own table: `['PRESENT',
+     'CONSEQUENCE']` is V2 level 1 and `['PRESENT', 'ABSENCE']` is V3|V8 level 1.
+
+   ⚠ The chair should still see it, because the shape is the one that refused a whole packet at
+   batch 3 and because two independent seats miscounted it before this one. Nothing here is a face
+   charge and no row was changed for it.
 
 ## SEAT DISCLOSURE
 
-The curer's seat is opus, and so were both writers and the selector. I read the landed rows as my
-own hand and cut accordingly, which is why two edits in this packet go against my own earlier
-choices at this desk: the `the same hands` collocation in variant 1 face 6 (measured against the
-landed corpus, not judged by ear) and the re-cut of spine 3 (named in the finding's own evidence and
-flagged above for the chair to revert if it disagrees).
+The curer's seat is opus, and so were both writers, the selector, the refuter and sitting 1 of this
+packet. I read the landed rows as my own hand and cut accordingly, which is why two edits in this
+packet go against my own earlier choices at this desk: the `the same hands` collocation in variant 1
+face 6 (measured against the landed corpus, not judged by ear) and the re-cut of spine 3 (named in
+the finding's own evidence and flagged above for the chair to revert if it disagrees).
+
+**And sitting 2 turned the same rule on sitting 1's own NOTES, which is where it found both errors.**
+The `the same hands` measurement was re-run and CONFIRMED exactly as stated — `git grep` over
+`docs/content/` at HEAD returns four, two of them this pool's own draft rows (`:2955`, `:2959`) and
+one the SIBLING pool's register face on the same burial rota (`:2979`, `Invasion & War: neither
+walls nor force`), which is the autopilot the DULL verdict exists to catch; the cured rows carry the
+collocation ZERO times. The card grounds for the cured face were re-read and hold (`Graveyard`
+required at village, "a face may not deny: Burial", and the cured face AFFIRMS burial; the hamlet
+`Burial ground`'s "kept by the households in turn" is quoted from the card verbatim). What did NOT
+survive re-execution was a line number, a file path and a count in WIRING 1, and a whole missing
+wiring row in WIRING 4. A packet that is right about its rows and wrong about its receipts is the
+failure this law was written for, so both are corrected above rather than quietly re-stated.

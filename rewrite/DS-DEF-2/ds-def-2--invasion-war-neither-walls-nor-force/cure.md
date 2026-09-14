@@ -7,22 +7,29 @@ READ WHOLE: `EXEMPLAR-PACK.md` (584 lines) · `card.md` (914 lines) · `speakers
 TARGETS: five named FAIL rows (v1f3, v1f4, v1f9, v2f7, v3f3) and the POOL-GRAIN **DULL** verdict,
 which lifts the byte-identical rule and orders every face of every variant rewritten.
 
+⚠ **THIS PACKET WAS RE-OPENED AND RE-SCANNED BY ITS OWN SEAT BEFORE IT WAS HANDED OVER** (the
+checkpoint law: the file existed, so it was read and continued rather than re-run). The re-scan was
+mechanical, not a re-reading of my own prose for tone, and it found **four hazards the first pass's
+own rewrite had introduced while curing the five charged ones**, plus the sixth charge the refuter
+told the chair to treat as live. All five are now cured and every one of them is written up under
+THE SECOND PASS below. The measures in this file are counted on the rows as they now stand.
+
 **SLOTS AND SOURCES ARE UNCHANGED.** Every face keeps its number, its source tag and its pair tag,
 so `speakers.md` stands as written and needs no re-issue. Three spines, twenty-six faces,
 twenty-nine units, exactly as the landed rows.
 
 ---
 
-1. `[ledger]` {settlement} has no line around it and no soldiers of its own. The rest of the keeping falls on the people who live here, out of their own hours.
+1. `[ledger]` {settlement} has no line around it and no soldiers of its own. What keeping there is falls to the people who live here, out of their own hours.
    - `[face]` `[market]` The grain in the store is the one thing here worth coming for, the stallholders say, and what the town has put over it is a lock.
    - `[face]` `[stranger]` A pedlar has it that he is asked to step round the thing leaning behind every door he calls at here.
-   - `[face]` `[elders]` The older households say a wall has never been asked of them, only a hand at a burial and a bed for a stranger.
+   - `[face]` `[elders]` The older households say they have been asked for a bed for a stranger and a hand at a neighbour's roof, and never yet for a wall.
    - `[face]` `[court]` Those who sit to hear a matter hold that nothing a wall would have kept out has ever come before them.
    - `[face]` `[register]` The sexton says the opening of the ground for a burial has never been anybody's wage here, the people nearest doing it between them.
    - `[face]` `[tavern]` At the tavern a carter puts it that the nights are all the town pays to keep itself, and that everything else here gets done when work is over.
    - `[face]` `[guild]` The trades pay into the purse like everybody else, a guild factor says, and the shutters on a workshop go up at the workshop's own charge.
    - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall has it that the purse that would have kept a wall up keeps the nights. <!-- joinable -->
-   - `[face]` `[watch · pair 1 · disagree]` One of the watch says the wage he draws is the whole of the town's answer to an army. <!-- joinable -->
+   - `[face]` `[watch · pair 1 · disagree]` One of the watch says the wage he draws is the whole of what the town pays against an army. <!-- joinable -->
 
 2. `[counterforce]` The houses here stand with nothing about them, a drover has it, and at the first door he was asked the state of the road behind him.
    - `[face]` `[watch]` A night patrolman says he was given the round street by street and left to guess at the rest.
@@ -32,7 +39,7 @@ twenty-nine units, exactly as the landed rows.
    - `[face]` `[guild]` A guild factor says the trades could price a wall down to the carting, and that what the trades are asked for is money and never men.
    - `[face]` `[court]` Whether a line goes round the place is nothing anyone can put before them, those who sit to hear a matter hold, and they leave the question there.
    - `[face]` `[elders · pair 2 · view]` The older households say the water is the whole of what this place is careful of.
-   - `[face]` `[register · pair 2 · view]` By the sexton's account the deepest anybody has dug in this place is a grave.
+   - `[face]` `[register · pair 2 · view]` By the sexton's account the ground for the dead is marked off and the rest of the place is not.
 
 3. `[street]` Everyone here has seen the place go about its week with no line around it and no soldier in it, and the town counts that an answer.
    - `[face]` `[stranger]` A traveller says he asked at a door here what the place would do if an army came, and was answered about the price of salt.
@@ -40,7 +47,7 @@ twenty-nine units, exactly as the landed rows.
    - `[face]` `[market]` The stallholders say the square fills when the light comes and empties when it goes, and that the light is what they work to.
    - `[face]` `[tavern]` At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.
    - `[face]` `[watch]` One of the watch says the round is walked by people who keep a bench by day.
-   - `[face]` `[court]` Those who sit to hear a matter say the place has no line of its own, and that every boundary before them runs between one plot and the next.
+   - `[face]` `[court]` Those who sit to hear a matter say the place has no line of its own, and that the boundaries before them run between one plot and the next.
    - `[face]` `[register]` The sexton holds that the people here are easier about the place as it stands than anybody who comes through, and does not say which of them is right.
    - `[face]` `[guild · pair 3 · reinforce]` A guild factor says the trades have priced their goods to a place that stands open. <!-- joinable -->
    - `[face]` `[hall · pair 3 · reinforce]` The hall has never had anybody come in asking for a wall, a clerk there says. <!-- joinable -->
@@ -53,12 +60,13 @@ twenty-nine units, exactly as the landed rows.
 spending decision at the households' doorsteps, which is the thorp and hamlet shape written across
 a four-tier preimage that requires a `Town hall`, seats a `Town council` and mints a Mayor on 14
 draws. **CURED, and cured at the root rather than at the clause:** the face no longer says anything
-about how this place decides anything. It says what is asked OF the speakers, which is their own
-standing and nothing else, and it lands on two things every tier of the preimage holds — `Burial`
-at p 1.0 on every draw, and a bed, which no row denies anywhere. The refuter's own cure
-("they would hear of it first if anybody did") was available and I did not take it: it still puts
-the speakers at the head of a channel the `Town hall` owns at town, and the cure that asserts
-nothing about the channel is the safer one. **No venue, no consensus, no room, no first hearing.**
+about how this place decides anything. It says what has been asked OF the speakers, which is their
+own standing and nothing else, and what it names (a bed for a stranger, a hand at a neighbour's
+roof) no row denies at any tier. The refuter's own cure ("they would hear of it first if anybody
+did") was available and I did not take it: it still puts the speakers at the head of a channel the
+`Town hall` owns at town, and the cure that asserts nothing about the channel is the safer one.
+**No venue, no consensus, no room, no first hearing.** The clause is ADDITIVE, not exclusive —
+see THE SECOND PASS, hazard 1, which is where this face's first cure went wrong.
 
 **2 · v1f4 `court` — the caseload superlative (floor 1).** "The worst thing anybody is ever asked
 to settle here" is a fact about the caseload that `safetyLabel` denies at every value at or below
@@ -79,8 +87,9 @@ against an army — the key's own subject, the engine's own machine sentence ("C
 organized military aggression") — and enumerates no service, so there is nothing left for §2b's
 stop to bite. No singular headcount: the subject is a wage, not a man on a street. The
 disagreement with the hall's half survives whole and is sharper for the shortening: the hall says
-the purse that would have kept a wall keeps the nights; the watch says the wage that purse pays is
-the town's entire answer to an army. One purse, two readings, joinable under `though`.
+the purse that would have kept a wall keeps the nights; the watch says that wage is the whole of
+what the town PAYS against an army. One purse, two readings, joinable under `though`. The claim is
+scoped to the PURSE and not to the town's whole answer — see THE SECOND PASS, hazard 2.
 
 **4 · v2f7 `elders` — the founding reason (floor 1).** "The water is why anybody is here" is a
 claim about the town's ORIGIN, which the History tab prints at a value no key here fixes, and
@@ -105,26 +114,40 @@ columns are comparable and not two different ways of counting.
 
 | measure | landed rows | the chair's bar | this cure |
 | --- | --- | --- | --- |
-| final clause lands on a NEGATION | 20 of 29 (69 %) | not more than a third | **5 of 29 (17 %)** |
-| unit carries a `, and` join | 18 of 29 (62 %) | the tell is the RUN, not the join | **12 of 29 (41 %)** |
-| `say` / `says` anywhere in the unit | 26 of 29 (90 %), v1 nine in a row | never three running | **17 of 29 (59 %), longest run two** |
+| final clause lands on a NEGATION | 22 of 29 (76 %) | not more than a third | **7 of 29 (24 %)** |
+| unit carries a `, and` join | 18 of 29 (62 %) | the tell is the RUN, not the join | **13 of 29 (45 %), longest run two** |
+| `say`/`says` as the ATTRIBUTION verb | 26 of 29 (90 %), v1 nine in a row | never three running | **17 of 29 (59 %), longest run two** |
 
-Two of the twelve `, and` units are a compound predicate on one subject (v2f3, v3f7) rather than
-the two-clause join the tell names, so the true join count is **ten of twenty-nine**. I report the
-mechanical figure rather than the flattering one.
+Counted by the refuter's own instrument (final clause = the text after the last comma; the same
+negation set), so the two columns are the same measurement and not two ways of counting. Two of the
+thirteen `, and` units are a compound predicate on one subject (v2f3, v3f7) rather than the
+two-clause join the tell names, so the true join count is **eleven of twenty-nine**; I report the
+mechanical figure rather than the flattering one. The `, and` frame never runs more than **two**
+units consecutively in draw order, which is the form the tell actually takes (PART III names four
+in a row; the selector's veto is three of a kind).
+
+The attribution-verb run is counted on the ATTRIBUTION verb and not on the string: `does not say`
+inside v2f3 and v3f7 is content, not a frame. The sequence in draw order is say · has it · say ·
+hold · say · puts · say · has it · say ‖ say · none · puts · say · say · hold · say · account ‖
+say · have it · say · none · say · say · hold · say · say. Longest run of any one verb: two.
 
 **And one measure barely moved, which the chair should have rather than discover.** Distinct words
-are 222 over 659 here against the landed 225 over 693 — a ratio of 0.337 against 0.325, which is an
+are 226 over 667 here against the landed 225 over 693 — a ratio of 0.339 against 0.325, which is an
 improvement too small to claim. The DULL verdict was written on CONSTRUCTION ("the pool reads as
 one sentence twelve times") and construction is where this cure spends itself; the lexical spread
 is what a single author writing twenty-nine units to one key can do, and it is the same ceiling the
 selector hit. If the chair wants the vocabulary opened as well, that is a second writer on the same
 card, not a curer's pass.
 
-The five remaining negation landings are v1f4 (the key-anchored court), v2f3 (the hall's omission,
-where the withheld thing IS the landing), v2f5 (money and never men), v3f7 (the sexton declining to
-say which is right) and v3f9 (the reinforce half). Each is a negation the unit is FOR. Variant 2,
-which the refuter singled out at eight of nine, is now two of eight.
+The seven remaining negation landings are v1f3 (never yet for a wall — the key's own read),
+v1f4 (the key-anchored court), v2f2 (an instrument artefact: the unit carries no comma, so the
+whole sentence is scored as its final clause and the real landing is *at every table*), v2f3 (the
+hall's omission, where the withheld thing IS the landing), v2f5 (money and never men), v2f8 (the
+rest of the place is not marked off — the key's own read again) and v3f7 (the sexton declining to
+say which is right). Each is a negation the unit is FOR. Per variant: v1 **2 of 10**, v2 **4 of 9**,
+v3 **1 of 10**. Variant 2, which the refuter counted at nine of nine including its spine, is the
+one that still carries the shape most, and I have not forced it further down: each of its four is
+either an omission, a contrast the key licenses, or the instrument's own artefact.
 
 **Where the variety actually came from**, since the selector's own note said it could not be bought
 by selection and it is worth saying how it was bought by writing:
@@ -149,11 +172,13 @@ noun is moved). Spine 1 and spine 2 no longer share "nothing raised around it/th
 same three words. Within each variant no landing noun repeats (`light`, `morning`, `door`, `stall`
 and `rest` were each moved once for this).
 
-**Pair 2 was rebuilt rather than retagged.** The refuter's charge was that its halves were two
-unrelated subjects — a founding reason and soil — that do not address one fact. They now address
-one: what this place has ever put its care and its labour into. The elders say the water is the
-whole of what it is careful of; the sexton says the deepest anybody has dug here is a grave. Two
-views of one fact, which is what `view` is for, and the kind is unchanged so `speakers.md` stands.
+**Pair 2 was rebuilt rather than retagged, and then rebuilt again.** The refuter's charge was that
+its halves were two unrelated subjects — a founding reason and soil — that do not address one fact.
+They now address one: **what this place takes deliberate care of.** The elders say the water is the
+whole of what it is careful of; the sexton says the ground for the dead is marked off and the rest
+of the place is not. Two views of one fact, which is what `view` is for, and the kind is unchanged
+so `speakers.md` stands. The sexton's half is the SECOND cure of that slot — the first pass
+replaced the soil claim with a depth superlative, which was worse; see THE SECOND PASS, hazard 4.
 **Pair 2 is NOT marked joinable**, and that is deliberate: ruling 23's conjunction table covers
 `disagree` (though · but · while · and yet) and `reinforce` (and · as) and gives a `view` none, so
 the two halves take the full stop. The landed rows marked them joinable and the mark was stripped
@@ -179,9 +204,10 @@ recorded here so the chair can restore either without re-running anything:
 - **spine 1, `[ledger]` — THE BARE FACT in the archiver's own hand.** The only unit in the pool
   carrying `{settlement}` (ruling 12), and the only bare statement of a recorded fact anywhere
   above. No self-citation: it does not say the survey, the record, this office or entered as. The
-  second sentence carries the refuter's floor-1 cure ("the rest of the keeping") so that no unpaid
+  second sentence carries the refuter's floor-1 hedge ("what keeping there is") so that no unpaid
   universal is asserted over a paid `Town watch` at town, and it moves the noun off `households`
-  so the spine cannot echo a face of its own variant.
+  so the spine cannot echo a face of its own variant. The hedge is a QUANTIFIER on the keeping and
+  not a reference back to something the first sentence never named; see THE SECOND PASS, hazard 3.
 - **spine 2, `[counterforce]` — A SOURCE'S ACCOUNT**, the drover, with the attribution carried
   MID-SENTENCE so the spine's shape differs from every face that opens on its speaker. The
   stranger's interest is what did not happen to him, written as what did: he was asked about the
@@ -266,8 +292,8 @@ venue is asserted anywhere, which is the v1f3 cure generalised across the pool. 
 responds, nobody answers for the place, or there is no one whose job it is (F1-25).
 
 **Floor 2.** No count, no date, no season, no duration, no rate. The duratives that appear
-(*has never been asked of them*, *has ever come before them*, *has never been anybody's wage*, *the
-deepest anybody has dug*, *has always stopped*, *has never had anybody come in*, *has seen*) run
+(*have been asked for*, *never yet*, *has ever come before them*, *has never been anybody's wage*,
+*has always stopped*, *has never had anybody come in*, *has seen*, *have priced*) run
 over the key's own reads — walls, garrison, militia — or over the card's frozen list, which is
 where ruling 11 licenses them. The conditionals (*would have kept out*, *would have kept a wall
 up*, *could price*, *would come out*) are conditionals, which ruling 33 keeps; no `will` and no
@@ -313,10 +339,81 @@ depend on the way any of them resolves:
   to all twenty-nine units and a green on DS-DEF-2 is not evidence about them. Unchanged by this
   cure: every account still names its source in PROSE, which is what rulings 13a and 40 require.
 
+## THE SECOND PASS — five hazards found by this seat re-scanning its own cure
+
+The checkpoint law returned this packet to its own seat with the rows already written. Rather than
+re-read my own prose for tone, I re-derived the load-bearing claims against `card.md` §2, §2b and
+§7 the way the refuter did. **Four of the five below are hazards the first pass INTRODUCED while
+curing the charged rows**, which is the failure mode a curer is most exposed to: the charged clause
+goes and a fresh total exclusion arrives in its place. The fifth is the sixth charge the refuter
+told the chair to treat as live. Every one is a `card.md` row, not a matter of taste.
+
+**Hazard 1 · v1f3 `elders` — the cure for a venue introduced a closed enumeration of obligations.**
+The first cure read *"a wall has never been asked of them, only a hand at a burial and a bed for a
+stranger."* The `only` closes the class of what is asked of the households, and `Town hall` at town
+carries **`Tax payment` at p 0.9** and `Weekly market` carries **`Tax collection` at p 0.9**
+(card.md:43, :46). Money IS asked of them on the 14 town draws, so the clause is §2b's ⛔ in the
+same shape that failed v1f9 as landed — a service at or above the bar denied by a total exclusion,
+whatever the face is otherwise about. **Cured by making the clause ADDITIVE:** *"they have been
+asked for a bed for a stranger and a hand at a neighbour's roof, and never yet for a wall."* The
+only thing now denied is a wall, which is the key's own read. It also moves the face off `Burial`,
+which v1f5 owns in the same variant.
+
+**Hazard 2 · v1f9 `watch` — the cure for a service denial introduced a denial of the community
+baseline.** The first cure read *"the wage he draws is the whole of the town's answer to an army."*
+The engine's answer to an army on this key is **not** the wage: `communityMilBase`
+(`defenseGenerator.js:138-159`) is the unpaid armed-household baseline, the upkeep gate EXEMPTS it
+entirely (`:190-191`), and on the 204 below-town draws it is frequently the only entry in the
+military score at all — the card's §7 and §9 both name it as the pool's central fact, and this
+pool's own spine says the keeping falls on the people who live here. A face asserting the wage is
+the WHOLE answer contradicts the spine printing above it. **Cured by scoping the claim to the
+purse:** *"the wage he draws is the whole of what the town pays against an army."* That is exactly
+true by §9 ("the same money … pays a part-time watch and nothing else, off one multiplier, with
+nothing else on the bill"), the unpaid households being exempt from the purse by construction. The
+disagreement with the hall's half is unchanged, and it is now sharper, because both halves are
+about the one purse.
+
+**Hazard 3 · spine 1 — a hedge with no antecedent.** *"The rest of the keeping"* referred back to a
+first sentence that names no keeping anybody else does, so the hedge read as a dangling reference
+rather than as the floor-1 quantifier it is meant to be. **Cured to *"What keeping there is falls to
+the people who live here"*** — the same hedge, now a quantifier on the keeping itself, so the paid
+`Town watch` at town is neither asserted nor denied and the sentence no longer points at nothing.
+
+**Hazard 4 · v2f8 `register` — THE SIXTH CHARGE, and the first cure made it worse.** The refuter
+withheld this row narrowly and told the chair in terms: *"The chair should treat this as the sixth
+charge if it wants the pool airtight."* The first cure replaced the soil claim with *"the deepest
+anybody has dug in this place is a grave"* — a **depth superlative** across all 218 draws, on a
+preimage where `Water source` is `required: true` at thorp and hamlet and `Multiple water sources`
+at village and town (card.md:14-17), with the KIND left unspecified. Where the water source
+resolves as a dug well it is deeper than a grave, and the superlative denies a required row
+outright. That is the V-08 / F1-102 family the refuter was already circling, made explicit rather
+than cured. **Cured by leaving excavation alone entirely:** *"By the sexton's account the ground
+for the dead is marked off and the rest of the place is not."* It affirms `Burial` at p 1.0, asserts
+no depth, no soil and no terrain, and lands on the key's own read. It also does NOT reach for the
+hamlet row's walled-and-gated description (§7 trap (b)): a ground that is *marked off* is not a
+wall and not a gate, and gates stay OPEN.
+
+**Hazard 5 · v3f6 `court` — a caseload universal of the family that failed v1f4.** *"every boundary
+before them runs between one plot and the next"* is a total claim about the court's caseload, which
+is the shape `safetyLabel` denied at v1f4. **Cured by dropping the quantifier:** *"the boundaries
+before them run between one plot and the next."* A generic report of what comes before them, which
+affirms `Dispute arbitration` at p 0.8 rather than bounding it.
+
+**What the second pass did NOT change, having checked it and found it lawful.** v1f1's lock (the
+town putting a lock over the granary affirms `Grain storage` at p 1.0 and no row denies a lock;
+the ration tension with ruling 31 is recorded under THE RATIONS and is the selector's ground, never
+a finding) · v1f5's unwaged opening of the ground (`Burial` is affirmed, the service being the
+burying and not a wage; no row on the card prices it) · v2f5's *money and never men* (the key fixes
+`militia` false and no row asks the guilds for men) · v3f1's *the price of salt* (a price named
+without a figure, which floor 2 permits) · v3f4's cap on the naming (V-27 defused, unchanged from
+the row the refuter passed).
+
 ## REFUSED TARGETS
 
-**None.** All five named findings are cured, and the pool-grain DULL verdict is cured by the full
-rewrite the instruction ordered. The five WITHHELD rows the refuter did not charge (the spine,
+**None.** All five named findings are cured; the pool-grain DULL verdict is cured by the full
+rewrite the instruction ordered and holds on all three of its measures; and the refuter's SIXTH
+charge (v2f8, which it withheld and flagged to the chair) is cured as well, along with four hazards
+this seat's own first pass introduced. Nothing is handed over as uncurable. The five WITHHELD rows the refuter did not charge (the spine,
 v1f5, v1f7, v2f1, v2f8) were re-cut anyway under the DULL instruction, and every one of their
 seams is closed while it was open: the spine's unpaid universal is hedged to "the rest of the
 keeping"; v1f5's turf (F3-05 family) and its "sent for" clause (`Last rites` at hamlet) are both
