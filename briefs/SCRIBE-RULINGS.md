@@ -67,3 +67,23 @@ DATA DELETION off the table by its own rule. A migration FILE is written; applyi
        shaping words never the world; the refuter runs unchanged; editing it makes the epoch redo-eligible, never auto-renders.
     19 DAILY LIFE renders by default as the seventh tab call of every epoch render, same card, same VOICE, same refuter, same artefact, same REDO;
        its on-command button and SKU retire. Ruling 1 AMENDED: one render SKU, chair's default 5 credits (the retired narrative's), owner-signed.
+
+20. W2's COMMIT 6 (THE RETIREMENTS) IS DEFERRED TO W5, NOT REFUSED (chair, 2026-09-14 ~10:0x, after W2 stopped it with measured blockers): retiring
+    `requestNarrative` today empties `eventNarrativeSnapshots` (:18, :50 read `aiSettlement`), leaves the chronicle with no writer (its three writers are
+    all narrative-family: aiSlice.js:527/958/1123) and makes NPC pins inert; retiring the `narrative`/`dailyLife` SKUs by editing the client table reds
+    the money pins over SHIPPED migrations (114's seed parsed by contracts.test.js; feeSchedule.pglite executes spend_credits per feature). THE LAWFUL
+    ORDER: the Scribe's own chronicle writer lands first (owner item 13 — past epochs into `ai_data.chronicle`), the SKUs retire by a NEW migration that
+    re-seeds `ai_credit_costs` (never by contradicting a shipped seed), the overlay's UI and requests retire at the FLAG FLIP (W4), all as one revertable
+    commit. The owner's order stands; only its moment moves.
+21. THE EPOCH RECORD IS COMPUTED AT ADVANCE TIME (chair, same hour; W2 found the transport sends `null`): the past lane is compact (units only) so a
+    prior card cannot be rebuilt after the settlement moves — therefore the advance trigger itself computes `epochRecord(currentArtefact.card,
+    townCard(newState), campaignState)` while both cards exist and stores it on the now-stale artefact; the render at open sends it. `current` keeps its
+    card (it already does). W3's first fix.
+22. W0's GATE LIST MISSED `tests/lint/composeStateProseFence.test.js` — `townCard.js` and `scribePage.js` import the composer and `faceSources.js` and are
+    not in `ROUTED_COMPOSERS`/`PAGE_CALLERS`; red at the W0 tip and after. A chair car adds them (they are headless readers, the fence's own class) —
+    not a re-record.
+23. THE 24-WORD BAR IS MEASURED IN THE SWEEP'S CONVENTION (a slot counts as one token): the owner's six lines are counted as written; a slot's rendered
+    length is the engine's. Recorded for the instrument car.
+24. PRE-EXISTING DEFECTS SURFACED BY W2, THE OWNER'S: the account-import NODE BUDGET (`MAX_NODES` 20,000) refuses 4 of 7 real generated towns today,
+    artefact or no artefact (security posture — owner-gated); `verify:dist`'s first-paint closure is over its 1,048,000 B ceiling at the BASE
+    (1,058,427; W2 adds 162 B) and the generation worker is over its ceiling too (1,416,656 vs 1,404,493) — both pre-existing reds, neither W2's.
