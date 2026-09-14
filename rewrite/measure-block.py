@@ -334,7 +334,10 @@ def pool_fingerprint(name, units):
 # shows one `holds` this table does not, and the difference is named here rather than reconciled
 # away. NEITHER READING IS REFUSED; the histogram is printed in full so both are visible.
 ATTRIB_VERB_TABLE = [
-    ('account',  re.compile(r"\bby\s+(?:the\s+|a\s+|an\s+)?[a-z'’\- ]{0,30}?(?:'s|’s)?\s*(?:own\s+)?accounts?\b", re.I)),
+    # The noun set is ATTRIBUTION_NOUNS above — the kernel's own list — and not a shorter one of
+    # this table's invention, so `by the elders' reckoning` and `by a traveller's account` count
+    # as the one frame they are.
+    ('account',  re.compile(r"\bby\s+(?:the\s+|a\s+|an\s+)?[a-z'’\- ]{0,30}?(?:'s|’s)?\s*(?:own\s+)?(?:" + '|'.join(ATTRIBUTION_NOUNS) + r")\b", re.I)),
     ('account',  re.compile(r"\b(?:the|a|an|its|their|his|her)\s+[a-z'’\-]+(?:'s|’s)\s+(?:own\s+)?(?:account|accounts|reckoning|reading|telling)\b", re.I)),
     ('has-it',   re.compile(r'\b(?:has|have|had)\s+it\s+that\b', re.I)),
     ('takes-it', re.compile(r'\b(?:takes|take|took)\s+it\s+that\b', re.I)),
@@ -345,8 +348,12 @@ ATTRIB_VERB_TABLE = [
     ('claim',    re.compile(r'\b(?:claims|claim|claimed)\b', re.I)),
     ('reckon',   re.compile(r'\b(?:reckons|reckon|is\s+reckoned|are\s+reckoned|reckoned)\b', re.I)),
     ('tell',     re.compile(r'\b(?:tells|tell|told)\b', re.I)),
-    ('ask',      re.compile(r'\b(?:is\s+asked|are\s+asked|asked\s+at|asked\s+in)\b', re.I)),
-    ('hear',     re.compile(r'\b(?:is\s+heard|are\s+heard)\b', re.I)),
+    ('ask',      re.compile(r'\b(?:is|are|was|were)\s+asked\b', re.I)),
+    # ⚠ `is heard` TAKES A SAYING COMPLEMENT OR IT IS NOT COUNTED, on the `holds` precedent above.
+    # MEASURED: the bare passive fires once in DS-DEF-2 and the hit is "when something IS HEARD" —
+    # a noise in the country, not a source reporting. The refuter's own alternative ("a source is
+    # heard") is still counted; a sound is not.
+    ('hear',     re.compile(r'\b(?:is|are|was|were)\s+heard\s+to\s+(?:say|hold|put|tell)\b', re.I)),
     ('add',      re.compile(r'\b(?:adds|add)\s+that\b', re.I)),
     ('allow',    re.compile(r'\b(?:allows|allow)\s+that\b', re.I)),
     ('agree',    re.compile(r'\b(?:agrees|agree)\s+that\b', re.I)),

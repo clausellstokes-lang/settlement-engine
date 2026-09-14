@@ -1,4 +1,4 @@
-# wf_208f835e-a94 — per-agent progress, 2026-09-13 21:13:32
+# wf_208f835e-a94 — per-agent progress, 2026-09-13 21:18:49
     - `a76ef67c1` MARKER Invasion & War: walls with NO force · DONE · transcript 09-13 02:21 728 KB · 28 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a3e5e33ce` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:28 656 KB · 15 tool calls · files: shipped-f2da5a3ee.md, candidates-1.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
