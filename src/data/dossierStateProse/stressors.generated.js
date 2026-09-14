@@ -2484,7 +2484,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it happens.",
+          "text": "The rebuild goes well enough that people have begun arguing about what it should look like rather than whether it is going to happen.",
           "slots": [],
           "vid": 3
         }

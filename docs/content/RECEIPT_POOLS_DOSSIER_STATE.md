@@ -5052,7 +5052,7 @@ one crisis twice.
 **ARCHETYPE: `reconstruction`** · **THE GOOD STATE (R-DST-G)**
 1. `[unfolding]` The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.
 2. `[visitor]` {settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.
-3. `[street]` The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it happens.
+3. `[street]` The rebuild goes well enough that people have begun arguing about what it should look like rather than whether it is going to happen.
 
 **ARCHETYPE: `boom`** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` The town is prosperous. Trade runs in its favour. The expectation of that has become part of the economy rather than a comment on it.
@@ -5817,7 +5817,7 @@ shared letter would collide.*
 **`infiltration_fear`**
 1. `[street · minor]` {settlement} has grown careful about strangers in a way it cannot quite account for. The carefulness has begun to be about neighbours too.
 2. `[visitor · major]` A newcomer to {settlement} is asked more questions than the business warrants, politely, by more than one person.
-3. `[ledger · major · dm-only]` {faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone says aloud.
+3. `[ledger · major · dm-only]` {faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone here is willing to say aloud.
 4. `[unfolding · catastrophic]` Suspicion in {settlement} has outrun whatever it started from. An accusation costs nothing to make here and a great deal to survive.
 5. `[counterforce · minor]` {settlement} watches its strangers and lets them stay. The suspicion is a habit of the gate, not a policy of the hall.
 
@@ -5851,7 +5851,7 @@ shared letter would collide.*
 
 **`resource_scarcity`**
 1. `[ledger · minor]` What {settlement} needs and what {settlement} has do not meet, and the gap is managed by ration rather than closed.
-2. `[street · major]` There is not enough of what {settlement} runs on. What there is goes to whoever asks first and whoever asks loudest.
+2. `[street · major]` There is not enough of what {settlement} runs on. The not-enough gets shared out by who asks first and who asks loudest.
 3. `[visitor · major]` {settlement} is careful with something a town this size should have in plenty. The care is visible before anyone explains it.
 4. `[unfolding · catastrophic]` {settlement} has begun taking from tomorrow to cover today. The arithmetic of that has an end in it that nobody is discussing.
 5. `[counterforce · minor]` {settlement} is short and orderly about being short. The queue is respected, the ration is honoured, and the shortness has not become a quarrel.
@@ -5891,7 +5891,7 @@ shared letter would collide.*
 
 **`intensity: high`**
 1. `[street]` {faction} and {faction2} are past arguing in {settlement}. {issue} is the thing each of them is preparing for now, not the thing they are debating.
-2. `[ledger]` {settlement}'s clerks have stopped filing anything that touches {issue}. Filed either way, one of {faction} or {faction2} would read it as a decision.
+2. `[ledger]` {settlement}'s clerks have stopped filing anything that touches {issue}, because filed either way one of {faction} or {faction2} would read it as a decision.
 3. `[visitor]` The trouble between {faction} and {faction2} does not need explaining to a stranger in {settlement}. It is in how the room goes quiet.
 4. `[unfolding]` {stakes} is what {faction} and {faction2} are contesting in {settlement}. The contest has reached the stage where losing it costs more than winning it does.
 5. `[counterforce]` {faction} and {faction2} are at the edge of it in {settlement} and neither has crossed. What holds is that both would rather have the town than have the argument.
@@ -6031,7 +6031,7 @@ unchanged.
 
 **`river`** — 1. `[ledger · no deficit]` {settlement} is built on its water because the water is the cheapest thing here to move goods on. · 2. `[street · no deficit]` Every decision {settlement} has ever made about where to put a building started with the river. · 3. `[ledger · deficit]` {settlement}'s ground gives less than the town needs and the river makes up the rest. That is why the town is on the river and not on better ground. · 4. `[elder · deficit]` A river town can be short of fields and long of custom, and {settlement} is both.
 
-**`isolated`** — 1. `[ledger · no deficit]` {settlement} is out of reach of the trade roads. Self-sufficiency here is a constraint rather than an aspiration. · 2. `[street · no deficit]` {settlement} produces what {settlement} uses, because the alternative is a long journey for it. · 3. `[ledger · deficit]` {settlement} is out of reach of the trade roads and cannot fully feed itself. What the land does not give arrives at a high price, by sanctioned caravan or seasonal access or patronage or ration. It arrives that way or it does not arrive. · 4. `[visitor · deficit]` The gap between what {settlement} grows and what {settlement} eats is closed at a price. The price is visible in the market before anyone explains it.
+**`isolated`** — 1. `[ledger · no deficit]` {settlement} is out of reach of the trade roads. Self-sufficiency here is a constraint rather than an aspiration. · 2. `[street · no deficit]` {settlement} produces what {settlement} uses, because the alternative is a long journey for it. · 3. `[ledger · deficit]` {settlement} is out of reach of the trade roads and cannot fully feed itself. What the land does not give arrives dearly, by sanctioned caravan or seasonal access or patronage or ration. It arrives that way or it does not arrive. · 4. `[visitor · deficit]` The gap between what {settlement} grows and what {settlement} eats is closed at a price. The price is visible in the market before anyone explains it.
 
 **`road`** — 1. `[ledger · no deficit]` {settlement} is on a road and lives off the road: goods in, goods out, people through. · 2. `[street · no deficit]` {settlement} is here because somebody, once, found this a reasonable distance from the last place. · 3. `[ledger · deficit]` What {settlement} cannot grow, the road brings. The road is therefore not a convenience for this town but a condition of it. · 4. `[visitor · deficit]` {settlement} is a road town that has outgrown its fields, and it is buying the difference.
 
@@ -6083,7 +6083,7 @@ unchanged.
 4. `[counterforce]` {settlement}'s temple carries the economy and does not reach for the seat. {govFaction} governs without contesting the arrangement.
 
 **`historical_economic`: the recovery narrative** *(CAUSAL-LICENSED, and the year renders as a band)*
-1. `[elder]` {settlement}'s prosperity was rebuilt and not inherited, and the town went down a generation and more ago. It came back inside the memory of people still working.
+1. `[elder]` {settlement}'s prosperity was rebuilt and not inherited. The town went down a generation and more ago, and came back inside the memory of people still working.
 2. `[ledger]` {settlement}'s books show a hard collapse older than its living memory and a recovery a good deal newer. The town manages risk like a place that remembers the first.
 3. `[street]` {settlement} is comfortable and does not behave comfortably. The caution here is older than the money.
 4. `[unfolding]` The generation running {settlement} did the rebuilding. What they decide about surplus is still being decided against the collapse rather than against the present.
@@ -6122,7 +6122,7 @@ unchanged.
 4. `[street]` People still give directions past {settlement}. That is more than the place itself still offers.
 
 **`history.ancientRuin` present**
-1. `[visitor]` The relic ruin of {ruin} stands near {settlement}. It is a city that fell {timeband_since}, and it has been drawing superstition ever since. Its interior is yours.
+1. `[visitor]` The relic ruin of {ruin} stands near {settlement}, a city that fell {timeband_since}. It has been drawing superstition ever since. Its interior is yours.
 2. `[elder]` {ruin} fell {timeband_since} and {settlement} has grown up in its shadow. What the older place was is not remembered here, only that it was larger. Its interior is yours.
 3. `[street]` {settlement} does not go into {ruin}. The not-going is a rule nobody has ever had to write down.
 4. `[ledger]` {ruin} is {timeband_age} and appears on no roll of {settlement}'s. The ground it stands on is claimed by nobody and worked by nobody.
@@ -6393,7 +6393,7 @@ unchanged.
 **clock `faction_split`** — *trigger: two factions with overlapping power and conflicting wants*
 1. `[ledger]` {faction} and {faction2} hold overlapping ground in {settlement} and want incompatible things with it.
 2. `[street]` Two powers in {settlement} need the same rooms. The rooms are not getting larger.
-3. `[unfolding]` The people of {settlement} who deal with both {faction} and {faction2} are the ones who are to choose first.
+3. `[unfolding]` The people of {settlement} who deal with both {faction} and {faction2} are the ones who are going to have to choose first.
 4. `[counterforce]` {faction} and {faction2} overlap in {settlement} and have divided the overlap. The arrangement holds, and it holds on one person's word.
 
 ---
@@ -6530,7 +6530,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`MARKET-NARROW`**
 1. `[ledger]` {settlement}'s market serves the town itself. Little passes through that was not always coming here.
-2. `[street]` What {settlement} makes, {settlement} mostly buys from itself. Where that happens is the market.
+2. `[street]` What {settlement} makes, {settlement} mostly buys from itself. The room where that happens is the market.
 3. `[counterforce]` No great road feeds {settlement}'s market, and the market has made its peace with that. It is a town's exchange, not a region's.
 
 **`ENTREPOT`**

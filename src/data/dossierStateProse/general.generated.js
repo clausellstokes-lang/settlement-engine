@@ -1146,7 +1146,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "major",
             "dm-only"
           ],
-          "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone says aloud.",
+          "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone here is willing to say aloud.",
           "slots": [
             "faction",
             "settlement"
@@ -1423,7 +1423,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "There is not enough of what {settlement} runs on. What there is goes to whoever asks first and whoever asks loudest.",
+          "text": "There is not enough of what {settlement} runs on. The not-enough gets shared out by who asks first and who asks loudest.",
           "slots": [
             "settlement"
           ],
@@ -1856,7 +1856,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s clerks have stopped filing anything that touches {issue}. Filed either way, one of {faction} or {faction2} would read it as a decision.",
+          "text": "{settlement}'s clerks have stopped filing anything that touches {issue}, because filed either way one of {faction} or {faction2} would read it as a decision.",
           "slots": [
             "settlement",
             "issue",
@@ -4210,7 +4210,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "{settlement} is out of reach of the trade roads and cannot fully feed itself. What the land does not give arrives at a high price, by sanctioned caravan or seasonal access or patronage or ration. It arrives that way or it does not arrive.",
+          "text": "{settlement} is out of reach of the trade roads and cannot fully feed itself. What the land does not give arrives dearly, by sanctioned caravan or seasonal access or patronage or ration. It arrives that way or it does not arrive.",
           "slots": [
             "settlement"
           ],
@@ -4748,7 +4748,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "historical_economic: the recovery narrative": [
         {
           "angle": "elder",
-          "text": "{settlement}'s prosperity was rebuilt and not inherited, and the town went down a generation and more ago. It came back inside the memory of people still working.",
+          "text": "{settlement}'s prosperity was rebuilt and not inherited. The town went down a generation and more ago, and came back inside the memory of people still working.",
           "slots": [
             "settlement"
           ],
@@ -5062,7 +5062,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "history.ancientRuin present": [
         {
           "angle": "visitor",
-          "text": "The relic ruin of {ruin} stands near {settlement}. It is a city that fell {timeband_since}, and it has been drawing superstition ever since. Its interior is yours.",
+          "text": "The relic ruin of {ruin} stands near {settlement}, a city that fell {timeband_since}. It has been drawing superstition ever since. Its interior is yours.",
           "slots": [
             "ruin",
             "settlement",
@@ -7359,7 +7359,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The people of {settlement} who deal with both {faction} and {faction2} are the ones who are to choose first.",
+          "text": "The people of {settlement} who deal with both {faction} and {faction2} are the ones who are going to have to choose first.",
           "slots": [
             "settlement",
             "faction",
@@ -8147,7 +8147,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What {settlement} makes, {settlement} mostly buys from itself. Where that happens is the market.",
+          "text": "What {settlement} makes, {settlement} mostly buys from itself. The room where that happens is the market.",
           "slots": [
             "settlement"
           ],
