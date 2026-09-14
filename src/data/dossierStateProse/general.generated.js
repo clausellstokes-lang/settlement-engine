@@ -5953,7 +5953,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "founding": [
         {
           "angle": "elder",
-          "text": "{settlement} was founded {timeband_since} for {reason}, and the reason is still legible in how the town is laid out.",
+          "text": "{settlement} was founded {timeband_since} for {reason}. The reason is still legible in how the town is laid out.",
           "slots": [
             "settlement",
             "timeband_since",
@@ -5963,7 +5963,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{founder} put {settlement} here, and the first trial the place met was {challenge}; that it was met is why there is a town to describe.",
+          "text": "{founder} put {settlement} here, and the first trial the place met was {challenge}. That it was met is why there is a town to describe.",
           "slots": [
             "founder",
             "settlement",
@@ -5973,7 +5973,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it.",
+          "text": "{settlement} tells its own beginning as a difficulty overcome. The telling is accurate enough that the clerks do not correct it.",
           "slots": [
             "settlement"
           ],
@@ -5981,7 +5981,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.",
+          "text": "The oldest part of {settlement} still shows what the town was for when it started. That is not always what it is for now.",
           "slots": [
             "settlement"
           ],
@@ -5989,7 +5989,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} was founded for {reason} and has never been anything else; whatever else has been tried here did not take.",
+          "text": "{settlement} was founded for {reason} and has never been anything else. Whatever else has been tried here did not take.",
           "slots": [
             "settlement",
             "reason"
@@ -6000,7 +6000,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "historicalCharacter": [
         {
           "angle": "elder",
-          "text": "{settlement} is {timeband_age}, and the shape of what it has been through is still the shape it holds.",
+          "text": "{settlement} is {timeband_age}. The shape of what it has been through is still the shape it holds.",
           "slots": [
             "settlement",
             "timeband_age"
@@ -6030,7 +6030,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.",
+          "text": "{settlement} lost {band} to {event} {timeband_since}. The town has never rebuilt the quarter it happened in.",
           "slots": [
             "settlement",
             "band",
@@ -6044,7 +6044,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{event} is {timeband_age} and still on {settlement}'s books: what it destroyed is recorded as a lack rather than as a loss.",
+          "text": "{event} is {timeband_age} and still on {settlement}'s books. What it destroyed is recorded as a lack rather than as a loss.",
           "slots": [
             "event",
             "timeband_age",
@@ -6084,7 +6084,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "What was decided at {settlement} {timeband_since} in {event} is still the rule here, and the people it was decided against are still living under it.",
+          "text": "What was decided at {settlement} {timeband_since} in {event} is still the rule here. The people it was decided against are still living under it.",
           "slots": [
             "settlement",
             "timeband_since",
@@ -6123,7 +6123,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{event} was supposed to end an argument at {settlement} and has instead given it a form; the argument is still being had in the terms {event} set.",
+          "text": "{event} was supposed to end an argument at {settlement} and has instead given it a form. The argument is still being had in the terms {event} set.",
           "slots": [
             "event",
             "settlement"
@@ -6137,7 +6137,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{event} changed what {settlement} lives on {timeband_since}, and the town has been living on the new thing ever since.",
+          "text": "{event} changed what {settlement} lives on {timeband_since}. The town has been living on the new thing ever since.",
           "slots": [
             "event",
             "settlement",
@@ -6163,7 +6163,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{settlement} had its fortunes turned {timeband_since} by {event}, and a stranger would not guess it from the market.",
+          "text": "{settlement} had its fortunes turned {timeband_since} by {event}. A stranger would not guess it from the market.",
           "slots": [
             "settlement",
             "timeband_since",
@@ -6176,7 +6176,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.",
+          "text": "{event} should have remade {settlement} and did not. The town absorbed it and went on doing what it had been doing.",
           "slots": [
             "event",
             "settlement"
@@ -6190,7 +6190,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{event} changed what {settlement} keeps, {timeband_since}, and there are households here still keeping the older way quietly.",
+          "text": "{event} changed what {settlement} keeps, {timeband_since}. There are households here still keeping the older way quietly.",
           "slots": [
             "event",
             "settlement",
@@ -6216,7 +6216,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{event} is remembered at {settlement} as a disturbance rather than a change, which is how the town settled it.",
+          "text": "{event} is remembered at {settlement} as a disturbance rather than a change. That is how the town settled it.",
           "slots": [
             "event",
             "settlement"
@@ -6228,7 +6228,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{settlement}'s altars carry a history a stranger will not read without asking.",
+          "text": "{settlement}'s altars carry a history a stranger does not read without asking.",
           "slots": [
             "settlement"
           ],
@@ -6241,7 +6241,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{event} left something at {settlement} that {timeband_since} has not dispersed, and the town has arranged itself around it.",
+          "text": "{event} left something at {settlement} that {timeband_since} has not dispersed. The town has arranged itself around it.",
           "slots": [
             "event",
             "settlement",
@@ -6254,7 +6254,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{settlement} still keeps rules written after {event}, and the rules are specific in a way that suggests they were written by people who were there.",
+          "text": "{settlement} still keeps rules written after {event}. The rules are specific in a way that suggests they were written by people who were there.",
           "slots": [
             "settlement",
             "event"
@@ -6279,7 +6279,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{event} could have marked {settlement} permanently and did not; what it touched has grown back.",
+          "text": "{event} could have marked {settlement} permanently and did not. What it touched has grown back.",
           "slots": [
             "event",
             "settlement"
@@ -6293,7 +6293,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "{settlement}'s rolls changed by {band} at {event}, {timeband_since}, and the town has been the new size ever since.",
+          "text": "{settlement}'s rolls changed by {band} at {event}, {timeband_since}. The town has been the new size ever since.",
           "slots": [
             "settlement",
             "band",
@@ -6307,7 +6307,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.",
+          "text": "The people who came to {settlement} at {event} are the people {settlement} is now made of. The older families still know which is which.",
           "slots": [
             "settlement",
             "event"
@@ -6345,7 +6345,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "People {settlement} sent away came back {timeband_since}, and the town has never fully resolved what it owes them or what they owe it.",
+          "text": "People {settlement} sent away came back {timeband_since}. The town has never fully resolved what it owes them or what they owe it.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -6380,7 +6380,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "The returned in {settlement} have claims the town has not settled, and the claims are being pressed rather than dropped.",
+          "text": "The returned in {settlement} have claims the town has not settled. The claims are being pressed rather than dropped.",
           "slots": [
             "settlement"
           ],
@@ -6405,7 +6405,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "anchored"
           ],
-          "text": "Who holds what in {settlement} was decided by an authority that is no longer here, and nothing has been rewritten.",
+          "text": "Who holds what in {settlement} was decided by an authority that is no longer here. Nothing has been rewritten.",
           "slots": [
             "settlement"
           ],
@@ -6416,7 +6416,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{settlement} was taken and released {timeband_since}, and the town treats it as a season rather than as a wound.",
+          "text": "{settlement} was taken and released {timeband_since}. The town treats it as a season rather than as a wound.",
           "slots": [
             "settlement",
             "timeband_since"
@@ -6428,7 +6428,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "not anchored"
           ],
-          "text": "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+          "text": "{settlement} was occupied and gave nothing up that mattered. What the occupier took, the town had already moved.",
           "slots": [
             "settlement"
           ],
@@ -6492,7 +6492,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "recency framing: Ancient": [
         {
           "angle": "elder",
-          "text": "{settlement} inherited the consequence and not the event; what happened is a fact here rather than a memory.",
+          "text": "{settlement} inherited the consequence and not the event. What happened is a fact here rather than a memory.",
           "slots": [
             "settlement"
           ],
@@ -6500,7 +6500,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The reason {settlement} is shaped this way is older than anything a stranger will be told about it.",
+          "text": "The reason {settlement} is shaped this way is older than anything a stranger is told about it.",
           "slots": [
             "settlement"
           ],
@@ -6510,7 +6510,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "recency framing: Deep history": [
         {
           "angle": "elder",
-          "text": "It is older than {settlement}'s own account of itself, and the town's explanation of it is a reconstruction.",
+          "text": "It is older than {settlement}'s own account of itself. The town's explanation of it is a reconstruction.",
           "slots": [
             "settlement"
           ],

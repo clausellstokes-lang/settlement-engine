@@ -6216,71 +6216,71 @@ unchanged.
 **ANCHORED IS THE CAUSAL GATE.** `anchored: true` (badged *STILL RELEVANT TODAY*) is the record's own assertion that the event still bears on the present, and it is the licence for a *"and it still…"* clause. An unanchored event gets described and **not** connected forward. This is the sharpest line in the shape and the easiest to blur.
 
 **`founding`** *(the town's origin as the record holds it)*
-1. `[elder]` {settlement} was founded {timeband_since} for {reason}, and the reason is still legible in how the town is laid out.
-2. `[ledger]` {founder} put {settlement} here, and the first trial the place met was {challenge}; that it was met is why there is a town to describe.
-3. `[street]` {settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it.
-4. `[visitor]` The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.
-5. `[counterforce]` {settlement} was founded for {reason} and has never been anything else; whatever else has been tried here did not take.
+1. `[elder]` {settlement} was founded {timeband_since} for {reason}. The reason is still legible in how the town is laid out.
+2. `[ledger]` {founder} put {settlement} here, and the first trial the place met was {challenge}. That it was met is why there is a town to describe.
+3. `[street]` {settlement} tells its own beginning as a difficulty overcome. The telling is accurate enough that the clerks do not correct it.
+4. `[visitor]` The oldest part of {settlement} still shows what the town was for when it started. That is not always what it is for now.
+5. `[counterforce]` {settlement} was founded for {reason} and has never been anything else. Whatever else has been tried here did not take.
 
 **`historicalCharacter`** *(the pull-quote's framing, never a replacement for it)*
-1. `[elder]` {settlement} is {timeband_age}, and the shape of what it has been through is still the shape it holds.
+1. `[elder]` {settlement} is {timeband_age}. The shape of what it has been through is still the shape it holds.
 2. `[street]` {settlement} has a character it would recognise a description of, and it did not choose it.
 3. `[visitor]` What {settlement} is like takes a stranger a day to notice and a season to believe.
 
 **event type: `disaster`**
-1. `[elder · anchored]` {settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.
-2. `[ledger · anchored]` {event} is {timeband_age} and still on {settlement}'s books: what it destroyed is recorded as a lack rather than as a loss.
+1. `[elder · anchored]` {settlement} lost {band} to {event} {timeband_since}. The town has never rebuilt the quarter it happened in.
+2. `[ledger · anchored]` {event} is {timeband_age} and still on {settlement}'s books. What it destroyed is recorded as a lack rather than as a loss.
 3. `[street · not anchored]` {settlement} remembers {event} the way a town remembers a hard season: as a date, and not as a grievance.
 4. `[visitor · not anchored]` {settlement} came through {event} {timeband_since} and does not show it.
 
 **event type: `political`**
-1. `[ledger · anchored]` What was decided at {settlement} {timeband_since} in {event} is still the rule here, and the people it was decided against are still living under it.
+1. `[ledger · anchored]` What was decided at {settlement} {timeband_since} in {event} is still the rule here. The people it was decided against are still living under it.
 2. `[elder · anchored]` {event} settled a question at {settlement} {timeband_since}, and the settlement of it is the arrangement the town runs on.
 3. `[street · not anchored]` {event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.
-4. `[unfolding · anchored]` {event} was supposed to end an argument at {settlement} and has instead given it a form; the argument is still being had in the terms {event} set.
+4. `[unfolding · anchored]` {event} was supposed to end an argument at {settlement} and has instead given it a form. The argument is still being had in the terms {event} set.
 
 **event type: `economic`**
-1. `[ledger · anchored]` {event} changed what {settlement} lives on {timeband_since}, and the town has been living on the new thing ever since.
+1. `[ledger · anchored]` {event} changed what {settlement} lives on {timeband_since}. The town has been living on the new thing ever since.
 2. `[street · anchored]` {settlement} still divides its year the way {event} taught it to, {timeband_since} on.
-3. `[visitor · not anchored]` {settlement} had its fortunes turned {timeband_since} by {event}, and a stranger would not guess it from the market.
-4. `[counterforce · not anchored]` {event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.
+3. `[visitor · not anchored]` {settlement} had its fortunes turned {timeband_since} by {event}. A stranger would not guess it from the market.
+4. `[counterforce · not anchored]` {event} should have remade {settlement} and did not. The town absorbed it and went on doing what it had been doing.
 
 **event type: `religious`**
-1. `[elder · anchored]` {event} changed what {settlement} keeps, {timeband_since}, and there are households here still keeping the older way quietly.
+1. `[elder · anchored]` {event} changed what {settlement} keeps, {timeband_since}. There are households here still keeping the older way quietly.
 2. `[ledger · anchored]` The observances {settlement} records and the observances {settlement} maintains have differed since {event}, {timeband_since}.
-3. `[street · not anchored]` {event} is remembered at {settlement} as a disturbance rather than a change, which is how the town settled it.
-4. `[visitor · not anchored]` {settlement}'s altars carry a history a stranger will not read without asking.
+3. `[street · not anchored]` {event} is remembered at {settlement} as a disturbance rather than a change. That is how the town settled it.
+4. `[visitor · not anchored]` {settlement}'s altars carry a history a stranger does not read without asking.
 
 **event type: `magical`**
-1. `[elder · anchored]` {event} left something at {settlement} that {timeband_since} has not dispersed, and the town has arranged itself around it.
-2. `[ledger · anchored]` {settlement} still keeps rules written after {event}, and the rules are specific in a way that suggests they were written by people who were there.
+1. `[elder · anchored]` {event} left something at {settlement} that {timeband_since} has not dispersed. The town has arranged itself around it.
+2. `[ledger · anchored]` {settlement} still keeps rules written after {event}. The rules are specific in a way that suggests they were written by people who were there.
 3. `[street · not anchored]` {event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.
-4. `[counterforce · not anchored]` {event} could have marked {settlement} permanently and did not; what it touched has grown back.
+4. `[counterforce · not anchored]` {event} could have marked {settlement} permanently and did not. What it touched has grown back.
 
 **event type: `demographic`**
-1. `[ledger · anchored]` {settlement}'s rolls changed by {band} at {event}, {timeband_since}, and the town has been the new size ever since.
-2. `[elder · anchored]` The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.
+1. `[ledger · anchored]` {settlement}'s rolls changed by {band} at {event}, {timeband_since}. The town has been the new size ever since.
+2. `[elder · anchored]` The people who came to {settlement} at {event} are the people {settlement} is now made of. The older families still know which is which.
 3. `[street · not anchored]` {settlement} was a different size {timeband_since}, and almost nobody here thinks about that.
 4. `[visitor · anchored]` {settlement} has quarters that do not match each other, and the mismatch dates from {event}.
 
 **event type: `exile_return`**
-1. `[elder · anchored]` People {settlement} sent away came back {timeband_since}, and the town has never fully resolved what it owes them or what they owe it.
+1. `[elder · anchored]` People {settlement} sent away came back {timeband_since}. The town has never fully resolved what it owes them or what they owe it.
 2. `[ledger · anchored]` {settlement}'s rolls carry names that were struck and restored, and the restoring is {timeband_age}.
 3. `[street · not anchored]` {settlement} exiled and readmitted and has agreed not to discuss either half.
-4. `[unfolding · anchored]` The returned in {settlement} have claims the town has not settled, and the claims are being pressed rather than dropped.
+4. `[unfolding · anchored]` The returned in {settlement} have claims the town has not settled. The claims are being pressed rather than dropped.
 
 **event type: `occupation_infiltration`**
 1. `[elder · anchored]` {settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on.
-2. `[ledger · anchored]` Who holds what in {settlement} was decided by an authority that is no longer here, and nothing has been rewritten.
-3. `[street · not anchored]` {settlement} was taken and released {timeband_since}, and the town treats it as a season rather than as a wound.
-4. `[counterforce · not anchored]` {settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.
+2. `[ledger · anchored]` Who holds what in {settlement} was decided by an authority that is no longer here. Nothing has been rewritten.
+3. `[street · not anchored]` {settlement} was taken and released {timeband_since}. The town treats it as a season rather than as a wound.
+4. `[counterforce · not anchored]` {settlement} was occupied and gave nothing up that mattered. What the occupier took, the town had already moved.
 
 **recency framing** *(composed with the type variant, never instead of it)*
 - `Recent` — 1. `[street]` It is recent enough at {settlement} that the people it happened to are the people running the town. · 2. `[unfolding]` {settlement} has not finished with it.
 - `Living memory` — 1. `[elder]` There are people in {settlement} who were there, and their account is not quite the town's account. · 2. `[street]` {settlement} remembers it first-hand and has begun to remember it selectively.
 - `Last century` — 1. `[elder]` It is out of living memory at {settlement} and inside the memory of the buildings. · 2. `[ledger]` {settlement}'s records carry it plainly and nobody now working here can add to them.
-- `Ancient` — 1. `[elder]` {settlement} inherited the consequence and not the event; what happened is a fact here rather than a memory. · 2. `[visitor]` The reason {settlement} is shaped this way is older than anything a stranger will be told about it.
-- `Deep history` — 1. `[elder]` It is older than {settlement}'s own account of itself, and the town's explanation of it is a reconstruction. · 2. `[ledger]` {settlement} records it and cannot source it.
+- `Ancient` — 1. `[elder]` {settlement} inherited the consequence and not the event. What happened is a fact here rather than a memory. · 2. `[visitor]` The reason {settlement} is shaped this way is older than anything a stranger is told about it.
+- `Deep history` — 1. `[elder]` It is older than {settlement}'s own account of itself. The town's explanation of it is a reconstruction. · 2. `[ledger]` {settlement} records it and cannot source it.
 
 **severity overlay** — `minor`: 1. `[ledger]` It went into {settlement}'s record and did not go far past it. · `major`: 1. `[street]` It is one of the handful of things {settlement} would list if asked what has happened here. · `catastrophic`: 1. `[elder]` {settlement} counts time against it.
 
