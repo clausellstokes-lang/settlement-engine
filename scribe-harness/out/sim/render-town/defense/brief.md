@@ -47,44 +47,37 @@ would have shipped anyway. A pool with nothing lawful to say in its SPINE is omi
 hand corpus draws the whole of it. Neither is a failure; both are the dossier reading as it
 always did.
 
-THE SIX WAYS A LINE INVENTS, AND IS REFUSED. Each was measured on rendered pages by a second
-reader holding this same card.
+THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT. THE STANDARD IS NON-CONTRADICTION. A line is
+refused for CONTRADICTING the settlement and never for ADDING to it. What the card does not hold,
+the card does not forbid: silence is permission.
 
-A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT. Where a field on the card shows no value, you
-have not been told what it holds. You may not say the thing is absent, small, quiet or
-unchanged, and you may not write a sentence that would be false if that field were later
-filled either way. A pool whose fields all show no value is OMITTED.
-  REFUSED: "nothing here is being built and nothing sold off", on a page where the ranking of
-  the town's prosperity had no value at all.
+REFUSED, AND ONLY FOR THESE:
+- A VALUE A CARD FIELD DENIES. A wall on a town whose walls field says there is none; "no goods
+  come in" where the page says trade proceeds at an ordinary pace; "nothing organised behind it"
+  where the town's own rows list a street gang and front businesses.
+- A PAGE LINE OR A BADGE CONTRADICTED. The machine lines on this page are what the reader sees
+  beside your words. The posture badge and the readiness band are TWO LADDERS over one score and
+  both are true; a funding note and a backing word are TWO FIELDS and both are true. Neither pair
+  is a contradiction, and writing to the pool key is not a breach of either.
+- A ROLE THE TOWN DOES NOT SEAT, OR A RECORD NO BODY HERE KEEPS. Every speaker is one the town
+  block seats and every record cited is one a body here keeps.
+- THE ENGINE'S OWN MODEL DENIED. Do not explain a state by a cause the engine does not run it on:
+  a readiness band by how hard people work, a stress by the weather.
+- AN EVENT, A DATE OR A NUMBER STATED AS RECORD. No founding, no battle, no year, no count, no
+  rate and no price that the card does not hold. This is the floor with no exception, and it is
+  why an ORIGIN is refused: "carts stopped on this spot before any stall did" is a founding stated
+  as record. It is refused for that and never for being invented.
+- A FORECAST. The dossier reports what stands, never what is going to happen.
 
-NO ORIGIN. Nothing on the card has a beginning you were told. No body, market, road, custom or
-arrangement came before another, grew out of another, took root, was founded, was sited or was
-chosen. The record holds what stands.
-  REFUSED: "the market took root where the carts already stopped".
+NOT REFUSED, BECAUSE SILENCE IS PERMISSION:
+A practice, a custom, a motive, a belief, an interpretation, a feeling attributed to a source,
+and an absence or a smallness asserted on a field the card leaves UNKNOWN, all SHIP, provided no
+row and no page line denies them. Servants at the inn nursing a sick guest on a town with no
+hospital ships. A store filled by the trades ships. The court's business waiting on the parish
+ships. "Nothing here is being built" on an unknown ranking of prosperity ships, unless a row says
+otherwise. This is the flavour a game master opens the dossier for, and it is yours to write.
 
-NO CONTEST THE CARD DOES NOT NAME. Two bodies are at odds only where a relation row on the card
-says so. A rank, a share, a standing or a seat is not a quarrel.
-  REFUSED: the governing council set against the order of the watch, on a card whose conflict
-  reading had no value and which carried no relation row between them.
-
-A BOOLEAN IS A FACT, NOT A PRACTICE. Where a field says that a thing stands, a granary, a
-church, a court, a wall, you may say that it stands and what a person meets at it. You may not
-say how it is run, who fills it, who is let in, what is owed, what waits on what, or what is
-done for the sick, the poor or the accused, unless a field on the card says that too. Add no
-mechanism, practice, cause, procedure, custom, price or arrangement the card does not name: if
-the card says a court and a prison, you may not say a fine, a debt, a backlog or a bribe.
-  REFUSED: "grain they would rather have sold", written from a granary that only stands; "the
-  court's business waits on the parish"; the sick "nursed by the inn servants".
-
-NO VERDICT THE CARD'S OWN ROWS DENY. Before you write that a town lacks a thing, read the
-institutions and the holders on the town block. If a row names it, the town has it.
-  REFUSED: "no through traffic", written beside a caravaneer's post, a carriers' guild, a
-  customs house and a post relay station.
-
-NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE CARD. Where the town block's `hasWorld` reads false,
-no other settlement exists for this page: nobody speaks of neighbours, of what is said
-elsewhere, or of what comes down the road from anywhere named.
-  REFUSED: what they are saying in the next valley about this town.
+AN UNKNOWN FIELD IS ONE YOU MAY WRITE AROUND BUT MAY NOT GIVE A VALUE, A COUNT OR A DATE.
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,

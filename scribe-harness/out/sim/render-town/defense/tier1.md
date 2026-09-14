@@ -1,23 +1,26 @@
 Below are lines written for one settlement dossier, and the facts they were written from.
-For EACH numbered line answer the 7 questions with `yes` or `no` and nothing else.
-  1. CERTAINTY: does the line state as DECIDED something the facts below leave UNDECIDED — an absence read out of a field with no value, an origin, a contest no relation row names, a practice behind a fact that only stands, or a verdict the town's own institution and holder rows deny?
-  2. QUANTIFIER: does it say how many, how much or how often, where the facts give no number?
-  3. SCOPE: does it apply to more of the town, or more of the time, than the facts cover?
-  4. ACTOR: does someone act in it who is not a body or role these facts seat?
-  5. FORECAST: does it say what is going to happen rather than what stands?
-  6. MECHANISM: does it describe how a thing works — a practice, a procedure, a cause, a custom, a price, a debt, a fine, a backlog — where the facts only say that the thing stands?
-  7. SAME PAGE: does it contradict a machine line on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine's, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.
+THE STANDARD: a line is refused for CONTRADICTING the settlement, and NEVER for adding to it.
+What the facts do not hold, they do not forbid. A practice, a custom, a motive, a belief, an
+interpretation or an absence asserted on a field with no value is FLAVOUR, and it ships unless
+a row or a page line below denies it. You are not asked whether the line was invented.
+
+For EACH numbered line answer these 6 CONTRADICTION TESTS with `yes` or `no` and nothing else.
+  1. FIELD: does the line assert a value a field below DENIES? Not a value the facts are silent about, and not a value a field leaves UNKNOWN: a value a field below states otherwise.
+  2. PAGE: does it contradict a machine line or a badge on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine's, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.
+  3. ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep?
+  4. MODEL: does it explain a state by a cause the engine's own model denies, such as a readiness band explained by how hard people work, or a stress explained by the weather?
+  5. RECORD: does it state an EVENT, a DATE or a NUMBER as record where the facts hold none? A founding, a battle, a year, a count, a rate or a price that the facts do not carry. This is the one floor with no exception.
+  6. FORECAST: does it say what is going to happen rather than what stands?
 A `yes` to any question means the line is refused and the hand-written line ships instead.
 Answer for every numbered line, in order, and write nothing outside the schema.
 
-THE READER'S EYE. These are the bars the writer was given, and they are the bars you
-are reading against. A line that keeps all six is not refused for keeping them.
-  - A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT: an absence, a smallness or a quiet asserted where a field shows no value is an invention.
-  - NO ORIGIN: nothing here came before, grew from, took root, was founded, was sited or was chosen.
-  - NO CONTEST THE CARD DOES NOT NAME: a rank, a share, a standing or a seat is not a quarrel.
-  - A BOOLEAN IS A FACT, NOT A PRACTICE: that a thing stands licenses no account of how it is run, who fills it, who is let in or what is owed.
-  - NO VERDICT THE FACTS' OWN ROWS DENY: if an institution or holder row names a thing, the town has it.
-  - NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS: where `hasWorld` reads false, no other settlement exists for this page.
+THE READER'S EYE. This is the law the writer was given, and it is the law you are
+reading against. A line that keeps it is not refused for keeping it.
+  - THE STANDARD: a line is refused for CONTRADICTING the settlement, and NEVER for adding to it.
+  - SILENCE IS PERMISSION: a practice, a custom, a motive, a belief, an interpretation, or an absence asserted on a field with no value is FLAVOUR, and it ships unless a row or a page line denies it.
+  - THE TWO LADDERS are two true readings of one score and the funding note and the backing word are two true fields; neither pair is a contradiction.
+  - THE ONE FLOOR WITH NO EXCEPTION: an event, a date or a number stated as record where the facts hold none.
+  - A ROLE OR A RECORD the town does not seat or keep is a contradiction; so is a cause the engine's own model denies, and so is a forecast.
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
