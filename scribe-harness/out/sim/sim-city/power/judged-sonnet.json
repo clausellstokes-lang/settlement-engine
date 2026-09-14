@@ -1,0 +1,248 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C4"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C4",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "a totality over an open column",
+     "value": "with exceptions few enough for the clerks to name every one.",
+     "description": "\"every\" asserts a totality over whoIsCounted, which is not closed on this settlement (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": ", not what is answered.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The City Council and the merchants are at odds over the market levies, and the merchants h",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [powerStructure.factions, powerStructure.recentConflict]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "A stranger who addresses the City Council at Rundgate by any other title is corrected, pol",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "spine": "Rundgate credits the City Council with the good years, whether or not it earned them, and the prosperity is the whole of the argument in its favour.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 4,
+   "spine": "What is settled at Rundgate is the hall and only the hall, and the town's steadiness says who answers, not what is answered.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "spine": "The trouble at Rundgate is recent enough that nobody needs it explained, and the town simply refers to it and moves on. The City Council and the merchants are at odds over the market levies, and the merchants have stopped attending the sessions to argue it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "spine": "There is a criminal presence at Rundgate that carries weight of its own, whether territorial or economic, and nothing more is known of it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "spine": "What the City Council at Rundgate watches for is the town's own temper, knowing a council falls to unrest before it falls to a rival.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and at once.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "spine": "Nobody who wants the City Council's seat at Rundgate outweighs it, and the hold, though real, is not a comfortable one.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "spine": "Public backing at Rundgate is hardening the City Council's grip on its seat, so what would be a contest elsewhere is here only an inconvenience.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 9,
+   "openers": [
+    {
+     "opener": "a stranger who",
+     "n": 1
+    },
+    {
+     "opener": "nobody who wants",
+     "n": 1
+    },
+    {
+     "opener": "public backing at",
+     "n": 1
+    },
+    {
+     "opener": "rundgate credits the",
+     "n": 1
+    },
+    {
+     "opener": "the city council",
+     "n": 1
+    },
+    {
+     "opener": "the trouble at",
+     "n": 1
+    },
+    {
+     "opener": "there is a",
+     "n": 1
+    },
+    {
+     "opener": "what is settled",
+     "n": 1
+    },
+    {
+     "opener": "what the city",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}
