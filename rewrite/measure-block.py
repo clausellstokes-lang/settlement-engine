@@ -568,12 +568,18 @@ def fingerprint(label, pools, variants=None):
     rows = [pool_fingerprint(k, v) for k, v in pools.items() if v]
     empty = [k for k, v in pools.items() if not v]
     vmap = variants or {}
+    # THE FOUR MEASURES ARE FACE MEASURES (a verb, a stop, an entrance, a sibling), so a pool of
+    # BARE SPINES is skipped rather than reported as zeros — but it is COUNTED and NAMED, because
+    # "no variants parsed" would read as an instrument failure on a block the REWRITE has not
+    # reached yet (DS-DEF-5 is eleven such pools today).
     cut7 = [cut7_measures(k, vs) for k, vs in vmap.items() if vs and any(v['faces'] for v in vs)]
+    skipped = [k for k, vs in vmap.items() if vs and not any(v['faces'] for v in vs)]
     bench = benchmark_of(cut7)
     if not rows:
         return {'label': label, 'pools': [], 'summary': None, 'cut7': cut7,
                 'cut7Benchmark': {'live': bench, 'frozen': FABLE_BENCHMARK_FROZEN,
-                                  'frozenAt': FABLE_BENCHMARK_FROZEN_AT}, 'cut7Summary': None}
+                                  'frozenAt': FABLE_BENCHMARK_FROZEN_AT},
+                'cut7Summary': None, 'cut7SkippedPools': skipped}
     med = {k: statistics.median([r[k] for r in rows]) for k, _ in SCALARS}
     for r in rows:
         inside = all(abs(r[k] - med[k]) <= band for k, band in SCALARS)
@@ -616,6 +622,7 @@ def fingerprint(label, pools, variants=None):
             'siblingOverlapMedianBp': int(statistics.median(meds)) if meds else None,
         }
     return {'label': label, 'pools': rows, 'summary': summary, 'cut7': cut7, 'cut7Summary': c7sum,
+            'cut7SkippedPools': skipped,
             'cut7Benchmark': {'live': bench, 'frozen': FABLE_BENCHMARK_FROZEN,
                               'frozenAt': FABLE_BENCHMARK_FROZEN_AT}}
 
@@ -656,8 +663,13 @@ def print_fingerprint(fp):
 def print_cut7(fp):
     """⭐ THE FOUR MEASURES (the chair's cut 7). REFUSES NOTHING — no threshold, no exit code."""
     cut7 = fp.get('cut7') or []
+    sk = fp.get('cut7SkippedPools') or []
     if not cut7:
-        print(f"\n── THE FOUR MEASURES · {fp['label']}: no variants parsed ──"); return
+        why = (f"every one of its {len(sk)} pools is bare spines, with no `[face]` row for a verb, a"
+               " stop, an entrance or a sibling to be measured on — the REWRITE has not reached this"
+               " block" if sk else "no pool and no variant parsed under this heading")
+        print(f"\n── THE FOUR MEASURES · {fp['label']}: NOT MEASURED, and the reason is not a"
+              f" failure of the instrument: {why}. ──"); return
     b = fp['cut7Benchmark']; live, frozen = b['live'], b['frozen']
     print(f"\n── THE FOUR MEASURES (cut 7) · {fp['label']} — REFUSES NOTHING ──")
     for i, c in enumerate(cut7, 1):
@@ -698,6 +710,8 @@ def print_cut7(fp):
           f"(frozen figures taken at {b['frozenAt']}): verb-concentration {live['verbConcentration']} · "
           f"two-sentence share {live['twoSentenceShare']} · repeated-opener share {live['repeatedWithinVariantShare']} · "
           f"sibling overlap {live['medianOfVariantMediansBp']} bp")
+    if sk:
+        print(f"    ⚠ {len(sk)} pool(s) of bare spines NOT MEASURED (no `[face]` row): {' | '.join(sk)}")
     if live['missing']:
         print(f"    ⚠ not in this block: {' | '.join(live['missing'])}")
 
