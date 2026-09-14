@@ -1,4 +1,4 @@
-// clarity-sweep.mjs <dock> <heading-prefix e.g. "### DS-POW-"> [base-rev=HEAD]
+// clarity-sweep.mjs <dock>  (tag regex widened 2026-09-14: `[x · dm-only]` rows were invisible to `\w+`) <heading-prefix e.g. "### DS-POW-"> [base-rev=HEAD]
 // THE CLAIM-FREEZE INSTRUMENT (chair, 2026-09-14): for every spine and face under the prefix that differs
 // between <base-rev> and the working tree, print the move-grammar sequence before and after (classifyMoves),
 // the LEVEL1 order id before and after (orderIdOf), and the owner's-test proxy before and after. Reports; refuses nothing.
@@ -13,7 +13,7 @@ function parse(text){ const out=[]; let blk=null, pool=null, v=0;
     if ((m=l.match(/^### (DS-[A-Z]+-\d+)/))) { blk = l.startsWith(prefix) ? m[1] : null; pool=null; continue; }
     if (!blk) continue;
     if ((m=l.trim().match(/^\*\*(.+)\*\*$/))) { pool=m[1]; v=0; continue; }
-    if ((m=l.match(/^(\d+)\. `\[(\w+)\]` (.+)/))) { v=+m[1]; out.push({blk,pool,where:`v${v} SPINE`,text:m[3].replace(/<!--.*?-->/g,'').trim()}); continue; }
+    if ((m=l.match(/^(\d+)\. `\[([^\]]+)\]` (.+)/))) { v=+m[1]; out.push({blk,pool,where:`v${v} SPINE`,text:m[3].replace(/<!--.*?-->/g,'').trim()}); continue; }
     if ((m=l.match(/^\s*- `\[face\]` (?:`\[(.+?)\]` )?(.+)/))) { out.push({blk,pool,where:`v${v} face [${m[1]||''}]`,text:m[2].replace(/<!--.*?-->/g,'').trim()}); }
   } return out; }
 const GLOSS=/\b(has it that|have it that|puts it that|the account is|the talk is that|'s position is|'s account is|'s own account|'s word is|own answer is|the word is that|the view is that|'s view is)\b/;

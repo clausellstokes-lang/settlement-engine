@@ -35,7 +35,7 @@ def pools_of(lines):
     for l in lines:
         m = re.match(r'^\*\*(.+)\*\*\s*$', l.strip())
         if m: cur = m.group(1); pools.setdefault(cur, []); continue
-        m = re.match(r'\s*- `\[face\]` (.+)', l) or re.match(r'\d+\. `\[\w+\]` (.+)', l)
+        m = re.match(r'\s*- `\[face\]` (.+)', l) or re.match(r'\d+\. `\[[^\]]+\]` (.+)', l)
         if m and cur is not None: pools[cur].append(re.sub(r'<!--.*?-->', '', m.group(1)).strip())
     return pools
 def variants_of(lines):
@@ -49,7 +49,7 @@ def variants_of(lines):
         if m:
             cur = m.group(1); pools.setdefault(cur, []); vs = pools[cur]; continue
         if cur is None: continue
-        m = re.match(r'(\d+)\. `\[\w+\]` (.+)', l)
+        m = re.match(r'(\d+)\. `\[[^\]]+\]` (.+)', l)
         if m:
             vs.append({'n': int(m.group(1)),
                        'spine': re.sub(r'<!--.*?-->', '', m.group(2)).strip(), 'faces': []})
