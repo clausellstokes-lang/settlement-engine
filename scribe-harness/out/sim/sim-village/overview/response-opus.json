@@ -1,0 +1,148 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "spine": "The busiest way through the town ends at the market, and a stranger reaches it without asking. The road that carries the trade comes in at the far end of the stalls.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Armed order is ordinary here, and the safety of the town falls to people paid for it rather than to luck and neighbours. The charter hall is the one building set aside for that work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here can afford to argue about things other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "spine": "Everything Hochhausen needs it can get, and everything it makes it can move.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Lightly Defended",
+   "vid": 2,
+   "spine": "What the town could hold, it could hold briefly.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "spine": "The town would hold against what it expects, and it knows it is not proof against what it does not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: WEAK",
+   "vid": 2,
+   "spine": "No one here is organised against what lives outside the fields. Each household answers for its own fences.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "spine": "More quarrels are opened here than are settled. Which one gets settled first is itself a quarrel.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the town is spare, and a careful eye sees that before it sees the market.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "The town keeps no practitioner, no arrangement for one, and no expectation of either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "spine": "The harvest here is the whole of the town's security, and it holds against a closed road and not against a bad year.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "spine": "The Commercial Circle and The Administrative Circle are at odds, and a day in the town would not show it. The disagreement is a quiet one and stays inside the two circles.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "spine": "Goods come into the town and goods go out of it, and neither the coming nor the going is remarkable.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "spine": "Hochhausen stands on a road and lives off it. What comes into the town comes by the road, and what goes out goes by the road.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "spine": "The town is the size a village settles at, and it has settled there.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie in the town carries more weight than the rest, and the weight shows in what the town does and does not do. The tie is between Ingrid Köhler and Ivo Werner.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "The people here are connected the way the people of any settled place are connected. Marriage, trade and neighbourhood account for it, and nothing else does.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "A careful reader of the town finds one loose end. It is the sort that a single body of the right kind would tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
