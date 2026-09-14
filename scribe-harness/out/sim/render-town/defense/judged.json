@@ -1,130 +1,106 @@
 {
  "verdicts": [
   {
-   "blockId": "DS-DEF-1",
-   "poolKey": "readiness ADEQUATE",
-   "vid": 4,
-   "verdict": "WITHHELD",
-   "arms": [
-    "ORDER"
-   ],
-   "findings": [
-    {
-     "arm": "ORDER",
-     "channel": "WITHHELD",
-     "subject": "a move sequence outside the closed set",
-     "value": "OBJECT",
-     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
-    }
-   ]
-  },
-  {
    "blockId": "DS-DEF-2",
    "poolKey": "Invasion & War: walls with NO force",
    "vid": 3,
-   "verdict": "WITHHELD",
+   "verdict": "PATCHED",
    "arms": [
-    "ORDER"
+    "BAR-emdash",
+    "ORDER",
+    "Q"
+   ],
+   "patched": [
+    "face 0"
    ],
    "findings": [
     {
      "arm": "ORDER",
      "channel": "WITHHELD",
+     "seat": "spine",
      "subject": "a move sequence outside the closed set",
-     "value": "OBJECT",
+     "value": "ABSENCE then OBJECT",
      "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
-    }
-   ]
-  },
-  {
-   "blockId": "DS-DEF-2",
-   "poolKey": "Internal Security: full legal chain (court AND prison)",
-   "vid": 3,
-   "verdict": "WITHHELD",
-   "arms": [
-    "ORDER"
-   ],
-   "findings": [
+    },
     {
-     "arm": "ORDER",
-     "channel": "WITHHELD",
-     "subject": "a move sequence outside the closed set",
-     "value": "OBJECT",
-     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
-    }
-   ]
-  },
-  {
-   "blockId": "DS-DEF-2",
-   "poolKey": "Invasion & War: walls with NO force",
-   "vid": 3,
-   "verdict": "FAIL",
-   "arms": [
-    "T1-MECHANISM"
-   ],
-   "findings": [
-    {
-     "arm": "T1-MECHANISM",
+     "arm": "BAR-emdash",
      "channel": "FAIL",
-     "subject": "the second reader refused this row",
-     "value": "face 3",
-     "description": "A clerk in the hall says the keeping is paid out of the common purse. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+     "seat": "face 0",
+     "subject": "a mechanical bar",
+     "value": "—",
+     "description": "an em dash: the E2 ratchet holds every face at hard zero"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then CONTRADICTION then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a second sentence naming no second field",
+     "value": "Nothing that comes there is about who would hold them.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions]; none claimed)"
     }
    ]
   }
  ],
  "kept": [
   {
-   "blockId": "DS-DEF-1",
-   "poolKey": "readiness ADEQUATE",
-   "vid": 4,
-   "spine": "The walls are kept and no soldiers of the town stand behind them.",
-   "faces": [],
-   "notebook": []
-  },
-  {
    "blockId": "DS-DEF-2",
-   "poolKey": "Internal Security: full legal chain (court AND prison)",
+   "poolKey": "Invasion & War: walls with NO force",
    "vid": 3,
-   "spine": "The walls are kept and no soldiers of the town stand behind them.",
+   "spine": "There are no soldiers of the town own here, and the walls are kept up all the same.",
    "faces": [
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse.",
-    "A clerk in the hall says the keeping is paid out of the common purse."
+    "{elders} {v:take} the walls for their own boundary before anything else, and where the line runs is the older argument.",
+    "{watch} {v:say} the hall's record has the walls in it and not the walk along them, and {v:walk} it after dark regardless.",
+    "{court} {v:hear} what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.",
+    "{public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming."
    ],
    "notebook": []
   }
  ],
- "dropped": 1,
+ "dropped": 0,
+ "patched": 1,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
  "page": {
   "verdict": "PASS",
   "findings": [
    {
-    "id": "(tab)",
-    "arm": "C7-opener",
-    "channel": "REPORT",
-    "subject": "an opener trigram repeated on one page",
-    "value": "the walls are: 3",
-    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+    "id": "(page-set)",
+    "arm": "C7",
+    "channel": "NOT-EXECUTABLE",
+    "subject": "(blocks)",
+    "value": "1",
+    "description": "a cross-block comparison needs two blocks on the page-set"
    }
   ],
   "report": {
-   "units": 3,
+   "units": 1,
    "openers": [
     {
-     "opener": "the walls are",
-     "n": 3
+     "opener": "there are no",
+     "n": 1
     }
    ]
   }
  },
  "missing": [
+  "readiness ADEQUATE",
+  "Internal Security: full legal chain (court AND prison)",
   "Economic Survival: STRONG",
   "Disasters & Famine: granary AND parish care only",
   "Moderate",
