@@ -1,4 +1,4 @@
-# wf_74510771-4fe — per-agent progress, 2026-09-13 21:18:49
+# wf_74510771-4fe — per-agent progress, 2026-09-13 21:24:05
     - `aae3b7721` MARKER Invasion & War: walls AND professional garrison · DONE · transcript 09-13 08:05 1088 KB · 63 tool calls · files: card-mech.txt, card-79.md, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `a14855157` MARKER Internal Security: full legal chain (court AND prison) · DONE · transcript 09-13 08:01 868 KB · 41 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--interna
     - `a54b8e93a` MARKER Economic Survival: STRONG · DONE · transcript 09-13 08:05 893 KB · 49 tool calls · files: $D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
