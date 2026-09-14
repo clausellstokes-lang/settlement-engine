@@ -905,24 +905,24 @@ wants a sentence.
 3. `[threshold]` {settlement} sits level on food. The fields answer the town and no further. So a single failure would be felt at once and a good season would not be noticed.
 
 **GRANARY: well stocked**
-1. `[ledger]` The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.
-2. `[street]` Nobody is counting sacks in {settlement} this {season}. The granary is full. The argument is about the overflow.
-3. `[visitor]` The stores here are the reassuring kind. The granary stands deep in {season}, and the town plainly expects to stay that way.
+1. `[ledger]` The store stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.
+2. `[street]` Nobody is counting sacks in {settlement} this {season}. The store is full. The argument is about the overflow.
+3. `[visitor]` The stores here are the reassuring kind. They stand deep in {season}, and the town plainly expects to stay that way.
 
 **GRANARY: stocked**
 1. `[ledger]` The granary holds a working reserve into {season}. It is enough to carry the town through and not enough to lend.
-2. `[street]` The stores are enough. That is the whole of what {settlement} says about its granary this {season}.
-3. `[threshold]` The granary is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.
+2. `[street]` The stores are enough. That is the whole of what {settlement} says about its store this {season}.
+3. `[threshold]` The store is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.
 
 **GRANARY: thin**
-1. `[ledger]` The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.
-2. `[street]` People in {settlement} have begun asking when the granary was last this low. That is the question that comes before the harder ones.
+1. `[ledger]` The store runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.
+2. `[street]` People in {settlement} have begun asking when the store was last this low. That is the question that comes before the harder ones.
 3. `[unfolding]` The stores are drawing down faster than {season} is going to replace them. That gap is the town's whole immediate problem.
 
 **GRANARY: nearly empty**
-1. `[ledger]` The granary is very nearly out. What remains is counted daily and issued against a list.
-2. `[street]` The granary door is watched now. There is little behind it and everybody knows roughly how little.
-3. `[visitor]` A stranger who asks about the stores gets a short answer and a changed subject. The granary is all but empty and {season} has not turned.
+1. `[ledger]` The store is very nearly out. What remains is counted daily and issued against a list.
+2. `[street]` The store door is watched now. There is little behind it and everybody knows roughly how little.
+3. `[visitor]` A stranger who asks about the stores gets a short answer and a changed subject. The store is all but empty and {season} has not turned.
 
 ---
 

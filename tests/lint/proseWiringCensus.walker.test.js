@@ -2579,14 +2579,32 @@ describe('⭐⭐ REWRITE car 8a-6 — THE FIELD-SYNONYM TABLE, a REPORT column r
     // cited to the card, never to a comment or a prose string". A generous table would make
     // arm Q quieter without anybody deciding it should be, so the roster is short and every
     // row says where the join comes from.
-    expect(FIELD_SYNONYM_ROWS.length, 'the ratified field rows at this tip').toBe(1);
+    expect(FIELD_SYNONYM_ROWS.length, 'the ratified field rows at this tip').toBe(2);
+    // ⛔⛔ THE DOT TEST WAS A PROXY AND R-ECO-4 FALSIFIED IT. `granary` is a census read with no
+    // dot in it — DS-ECO-2's four GRANARY pools read `granary`, `granary.available` and
+    // `granary.band` — so "contains a dot" REFUSED a lawful root-level field while admitting any
+    // dotted string nobody reads. The property wanted all along was THE CENSUS ACTUALLY READS IT,
+    // and the committed register can answer that here, so it is asked directly instead of guessed
+    // at through punctuation. The pool-key half of the old assertion is kept as its own check: a
+    // pool key carries a space and a colon (`GRANARY: well stocked`) and a field path carries
+    // neither.
+    const readFields = new Set(committed.rows.flatMap((r) => r.reads || []));
     for (const row of FIELD_SYNONYM_ROWS) {
-      expect(row.field, 'a row names a FIELD PATH, not a pool key').toContain('.');
+      expect(row.field, 'a row names a FIELD PATH, not a pool key').not.toMatch(/[\s:]/);
+      expect(readFields.has(row.field), `no census row reads \`${row.field}\``).toBe(true);
       expect(row.nouns.length, 'and at least one noun').toBeGreaterThan(0);
-      expect(row.at, 'and cites where the join comes from').toContain('SITTING');
+      // AND CITED TO A RATIFYING INSTRUMENT — a sitting, or a chair's numbered ruling. The alias
+      // law asks for a typed artefact and never a comment; a ruling id is one and `SITTING` is
+      // not the only one the estate mints.
+      expect(row.at, 'and cites where the join comes from').toMatch(/SITTING|R-[A-Z]{2,5}-\d+/);
     }
     expect(FIELD_SYNONYM_ROWS[0].field).toBe('settlement.defenseProfile.economicGates.military');
     expect(FIELD_SYNONYM_ROWS[0].nouns, 'the owner\'s own exemplar word').toContain('wages');
+    // R-ECO-4, the chair's cut of the ECONOMY clarity leaf: the SEASON TILE's own field, so the
+    // store it holds may be named by the store's nouns and thirteen spines stop saying `granary`.
+    expect(FIELD_SYNONYM_ROWS[1].field).toBe('granary');
+    expect(FIELD_SYNONYM_ROWS[1].nouns, 'the noun the block\'s own FOOD pools already write')
+      .toContain('grain store');
   });
 
   test('⛔ THE HOLDER NOUNS ARE ROWS, NOT AN OBJECT KEYED BY KIND, and the reason is a defect', () => {

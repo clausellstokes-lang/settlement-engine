@@ -24,6 +24,12 @@
  * rather than as an exact integer, because a heuristic pinned exactly becomes a re-record every
  * car pays and nobody reads.
  *
+ * ⚠ AND THE READING'S BASIS MOVED ONCE, at the ECONOMY leaf's granary row (R-ECO-4). The walk
+ * now passes the RATIFIED field-synonym vocabulary that table's own docblock names this arm a
+ * consumer of, as the wave gate and the entry walker already did. The figures at that tip go
+ * 55 / 1273 / 13 on the old basis to 55 / 1250 / 11 on this one, and the CEILINGS are
+ * deliberately NOT followed down in the same commit that moved the basis. See the call site.
+ *
  * @enforced-by scripts/mutation-sweep.sh (plant 97)
  */
 import { readFileSync } from 'node:fs';
@@ -38,6 +44,7 @@ import {
   COMPOSED_ARMS, provenanceCount, reWalkBlock, sampleOf, siblingDistance, walkComposed,
 } from '../../src/domain/prose/composedWalker.js';
 import { armA2 } from '../../src/domain/prose/composedWalker.js';
+import { fieldSynonymsFor } from '../../src/domain/prose/fieldSynonyms.js';
 import { composedOrderIdOf, LEVEL1_ORDERS, LEVEL2_ORDERS, MOVES } from '../../src/domain/prose/moveGrammar.js';
 import { estateGround, withEntryContext } from '../../src/domain/prose/entryGround.js';
 import { composeStateProse, composeStateProseMount } from '../../src/domain/display/stateProse/composeStateProse.js';
@@ -377,6 +384,21 @@ describe('A0b — the text claims every declared field and no other', () => {
         reads: row ? row.reads : [],
         universe: row ? row.fieldsRead : [],
         predicate: row ? row.predicate : [],
+        // ⛔⛔ THE RATIFIED VOCABULARY, WHICH THIS READING WENT WITHOUT UNTIL R-ECO-4 AND WHICH
+        // ITS TWO SIBLING CONSUMERS ALREADY PASS. `fieldSynonyms.js`'s own docblock names this
+        // arm — "the column widens what arm Q, F25 and A0b can SEE" — and both
+        // `prose-wave-gate.mjs:1712` and `proseEntryContradiction.walker.test.js:798` hand
+        // `fieldSynonymsFor(row)` to the walker. This call did not, so the one instrument holding
+        // the ratchet was the one instrument blind to the table the estate ratifies rows into: a
+        // chair could sign a synonym and the gate would still convict the spine that used it.
+        // ⚠ THE BASIS OF THE PRINTED FIGURES THEREFORE MOVED ONCE, at the ECONOMY leaf's granary
+        // row, and the shift is declared rather than absorbed: on the OLD basis the tip read
+        // 55 / 1273 / 13 and on this one it reads 55 / 1250 / 11. The CEILINGS below are NOT
+        // followed down in the same commit that moved the basis — a re-record and a basis change
+        // landing together is exactly the pair a later reader cannot take apart. DEFERRED,
+        // DELIBERATELY, AND WRITTEN DOWN: the next car that touches this arm should tighten
+        // 1282 -> 1250 and 13 -> 11 once a second measurement on this basis exists.
+        vocabulary: row ? fieldSynonymsFor(row) : {},
       });
       for (const finding of out.fails) {
         tally[finding.subject] += 1;

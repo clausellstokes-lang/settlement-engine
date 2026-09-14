@@ -313,7 +313,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "GRANARY: well stocked": [
         {
           "angle": "ledger",
-          "text": "The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.",
+          "text": "The store stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.",
           "slots": [
             "season"
           ],
@@ -321,7 +321,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody is counting sacks in {settlement} this {season}. The granary is full. The argument is about the overflow.",
+          "text": "Nobody is counting sacks in {settlement} this {season}. The store is full. The argument is about the overflow.",
           "slots": [
             "settlement",
             "season"
@@ -330,7 +330,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The stores here are the reassuring kind. The granary stands deep in {season}, and the town plainly expects to stay that way.",
+          "text": "The stores here are the reassuring kind. They stand deep in {season}, and the town plainly expects to stay that way.",
           "slots": [
             "season"
           ],
@@ -348,7 +348,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The stores are enough. That is the whole of what {settlement} says about its granary this {season}.",
+          "text": "The stores are enough. That is the whole of what {settlement} says about its store this {season}.",
           "slots": [
             "settlement",
             "season"
@@ -357,7 +357,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The granary is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.",
+          "text": "The store is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.",
           "slots": [
             "season"
           ],
@@ -367,7 +367,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "GRANARY: thin": [
         {
           "angle": "ledger",
-          "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.",
+          "text": "The store runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.",
           "slots": [
             "season"
           ],
@@ -375,7 +375,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People in {settlement} have begun asking when the granary was last this low. That is the question that comes before the harder ones.",
+          "text": "People in {settlement} have begun asking when the store was last this low. That is the question that comes before the harder ones.",
           "slots": [
             "settlement"
           ],
@@ -393,19 +393,19 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "GRANARY: nearly empty": [
         {
           "angle": "ledger",
-          "text": "The granary is very nearly out. What remains is counted daily and issued against a list.",
+          "text": "The store is very nearly out. What remains is counted daily and issued against a list.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "The granary door is watched now. There is little behind it and everybody knows roughly how little.",
+          "text": "The store door is watched now. There is little behind it and everybody knows roughly how little.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A stranger who asks about the stores gets a short answer and a changed subject. The granary is all but empty and {season} has not turned.",
+          "text": "A stranger who asks about the stores gets a short answer and a changed subject. The store is all but empty and {season} has not turned.",
           "slots": [
             "season"
           ],

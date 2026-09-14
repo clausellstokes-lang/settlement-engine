@@ -47548,6 +47548,12 @@
       "roll",
       "rolls"
     ],
+    "granary": [
+      "grain",
+      "grain store",
+      "store",
+      "stores"
+    ],
     "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)": [
       "muster",
       "roll",

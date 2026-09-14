@@ -51,6 +51,16 @@ export const FIELD_SYNONYM_ROWS = Object.freeze([
     at: 'SITTING §H rule 3. The military economic gate IS the town\'s pay for its watch;'
       + ' the licence card prints the gate as the pool\'s read and the writers author against it',
   }),
+  Object.freeze({
+    field: 'granary',
+    nouns: Object.freeze(['grain store', 'store', 'stores', 'grain']),
+    at: 'R-ECO-4, the chair\'s cut of the ECONOMY clarity leaf. DS-ECO-2\'s own STATE-KEY card'
+      + ' declares the field as `deriveGranaryOutlook(s){available,season,band}` and prints it as'
+      + ' the SEASON TILE — the town\'s store of grain, banded `well stocked` / `stocked` / `thin`'
+      + ' / `nearly empty` against capacity. The store IS what the field holds, so the store\'s own'
+      + ' nouns name it, and the block\'s FOOD pools already write them (`the town\'s grain store`,'
+      + ' `The stores show it.`) on spines reading the same tile',
+  }),
 ]);
 
 /**
