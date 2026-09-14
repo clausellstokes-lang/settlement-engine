@@ -1,0 +1,236 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": ", not yet.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The pay is thin and the watch is thinner, and a town bought that cheaply rarely knows it u",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [powerStructure.criminalCaptureState, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "A decision does not leave the Free Elder Council at Warmholz until every voice on it can l",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-FIELD"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-FIELD",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The criminal interest at Warmholz has not reached where the town's decisions get made, not yet. The pay is thin and the  (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "The Free Elder Council asks little of Warmholz, and even that goes unanswered.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A traveller who asks the Free Elder Council for a decision at Warmholz finds it made somewhere else entirely, by whoever the town actually listens to.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "The Free Elder Council governs Warmholz, and the town's affairs run through it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "A decision does not leave the Free Elder Council at Warmholz until every voice on it can live with it, and once it leaves, it rarely comes back for a second look.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "A drover at Warmholz who calls the Free Elder Council by any other name is corrected before the sentence is finished.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "spine": "Around Warmholz the talk is that the Free Elder Council does not really run the place anymore, and watching it govern, it is hard to say the council believes otherwise.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "The Free Elder Council has lost ground at Warmholz to the town itself, not to any rival waiting to take advantage of it.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 1,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the free elder: 3",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 8,
+   "openers": [
+    {
+     "opener": "a decision does",
+     "n": 1
+    },
+    {
+     "opener": "a drover at",
+     "n": 1
+    },
+    {
+     "opener": "a traveller who",
+     "n": 1
+    },
+    {
+     "opener": "around warmholz the",
+     "n": 1
+    },
+    {
+     "opener": "the criminal interest",
+     "n": 1
+    },
+    {
+     "opener": "the free elder",
+     "n": 3
+    }
+   ]
+  }
+ },
+ "missing": [
+  "governing faction holds a DOMINANT share",
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}

@@ -1,0 +1,278 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "BAR-first-person",
+    "ORDER",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "BAR-first-person",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "a mechanical bar",
+     "value": "mine",
+     "description": "the first person: the archiver reports and the clerks are reported, so no face speaks as itself"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then PRESENT then ABSENCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": ", not dearer.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "Business before the Free Elder Council is settled slowly and by agreement, and once settle",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "People passing through who name the Free Elder Council anything else are put right at once",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3",
+    "EPOCH",
+    "NON-MOVE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "FIGURE",
+     "value": "as though ",
+     "description": "the pools carry no simile slot; a comparison is a measurement in words"
+    },
+    {
+     "arm": "EPOCH",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "an elapsed course on an unadvanced world",
+     "value": "no longer",
+     "description": "the card holds no advance, so nothing has since changed and this clause asserts a history the world does not have"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "The people of the place are no longer sure the Free Elder Council is theirs, and the Counc",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "and no rival was needed to take it.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "The Free Elder Council sits as it has always sat, and almost nothing it asks of the households arrives.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A traveller who brings a question to the Free Elder Council is sent away with it, and has it settled the same afternoon by somebody here who holds no title.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "Warmholz is governed by the Free Elder Council, and every matter of the place runs through it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "Business before the Free Elder Council is settled slowly and by agreement, and once settled it is not readily opened again.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "People passing through who name the Free Elder Council anything else are put right at once, and politely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "The hold the Free Elder Council had here has gone to the households, and no rival was needed to take it.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 2,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 8,
+   "openers": [
+    {
+     "opener": "a traveller who",
+     "n": 1
+    },
+    {
+     "opener": "business before the",
+     "n": 1
+    },
+    {
+     "opener": "nothing here is",
+     "n": 1
+    },
+    {
+     "opener": "people passing through",
+     "n": 1
+    },
+    {
+     "opener": "the free elder",
+     "n": 1
+    },
+    {
+     "opener": "the hold the",
+     "n": 1
+    },
+    {
+     "opener": "the people of",
+     "n": 1
+    },
+    {
+     "opener": "warmholz is governed",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "governing faction holds a DOMINANT share",
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}

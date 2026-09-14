@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 16:01:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 16:06:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 99474b62b Plan: the collection at 09-14 ~14:2x — the owner re-framed the two programmes (the Scrib
 
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_59ec807d-940** (mtime 09-14 16:01): agent calls 62 (62 distinct) · DONE 56 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_59ec807d-940/`
+- **wf_59ec807d-940** (mtime 09-14 16:02): agent calls 64 (64 distinct) · DONE 62 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_59ec807d-940/`
     - `aa0a85931` ? · DONE · transcript 09-14 15:10 606 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats have no roster on this town: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and DS-DEF-2 'Internal Security' f
     - `a1a27c60a` ? · DONE · transcript 09-14 15:35 1366 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["Two pools call for faces attributed to roles Spitzplatz's own roster does not seat: `elders` in DS-DEF-2 Invasion & War (the tow
     - `a735f2aca` ? · DONE · transcript 09-14 15:06 503 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The DS-ECO-6 corpus line ('nothing organised behind it') is the exact phrasing the brief lists as REFUSED on a town whose rows se
@@ -169,13 +169,15 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a17b1bbd1` SECOND · DONE · transcript 09-14 15:56 546 KB · 10 tool calls · files: answers-opus.json · result: {"arms": ["C3", "NON-MOVE", "ORDER", "Q", "WALL-5", "C3", "ORDER", "T1-PAGE"], "fail": 2, "finalKept": 7, "judgeLine": "verdicts {\"PASS\":4,\"FAIL\":2,\"WITHHE
     - `a1afee2da` SECOND · DONE · transcript 09-14 15:58 546 KB · 13 tool calls · files: answers-opus.json · result: {"arms": [], "fail": 0, "finalKept": 6, "judgeLine": "verdicts {\"PASS\":6} \u00b7 kept 6 \u00b7 patched 0 (tier 1 patched 0) \u00b7 dropped 0 (tier 1 took 0) \
     - `a3a63068a` SECOND · DONE · transcript 09-14 15:58 540 KB · 10 tool calls · files: answers-sonnet.json · result: {"arms": ["C4", "WALL-5", "Q", "C3"], "fail": 1, "finalKept": 8, "judgeLine": "verdicts {\"FAIL\":1,\"PASS\":5,\"WITHHELD\":3} \u00b7 kept 8 \u00b7 patched 0 (t
-    - `aff132ab7` SECOND · IN FLIGHT · transcript 09-14 16:01 578 KB · 15 tool calls · files: answers-opus.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a5b909bbb` SECOND · IN FLIGHT · transcript 09-14 16:01 596 KB · 9 tool calls · files: answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a9a3ac4dd` SECOND · IN FLIGHT · transcript 09-14 16:01 552 KB · 11 tool calls · files: answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aff132ab7` SECOND · DONE · transcript 09-14 16:01 598 KB · 16 tool calls · files: answers-opus.json · result: {"arms": ["C3", "C3", "C4", "ORDER", "Q", "C3", "ORDER", "C4", "ORDER", "Q", "X", "WALL-5", "X", "X", "T1-PAGE", "ORDER", "ORDER", "C3", "X"], "fail": 2, "final
+    - `a5b909bbb` SECOND · DONE · transcript 09-14 16:02 625 KB · 10 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "C4", "ORDER", "Q", "C3", "C5", "Q", "C3", "ORDER", "X", "C3", "ORDER", "C3", "Q", "T1-ROSTER", "Q", "WALL-5", "ORDER", "Q", "ORDER", "C3", "ORDE
+    - `a9a3ac4dd` SECOND · DONE · transcript 09-14 16:02 598 KB · 13 tool calls · files: answers-sonnet.json · result: {"poolsOnCard": 17, "unitsReturned": 16, "tier0Kept": 12, "tier0Dropped": 4, "tier1Dropped": 1, "finalKept": 11, "pass": 2, "withheld": 9, "fail": 5, "arms": ["
     - `a8c01d9d6` SECOND · DONE · transcript 09-14 16:01 542 KB · 10 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "Q", "Q", "Q", "Q"], "fail": 0, "finalKept": 6, "judgeLine": "verdicts {\"WITHHELD\":5,\"PASS\":1} \u00b7 kept 6 \u00b7 patched 0 (tier 1 patched
-    - `a91bcefc1` SECOND · IN FLIGHT · transcript 09-14 16:00 496 KB · 9 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aafa42de4` SECOND · IN FLIGHT · transcript 09-14 16:00 463 KB · 11 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a41b58543` SECOND · IN FLIGHT · transcript 09-14 16:01 363 KB · 5 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a91bcefc1` SECOND · DONE · transcript 09-14 16:02 546 KB · 12 tool calls · files: answers-opus.json · result: {"arms": ["ORDER", "BAR-first-person", "ORDER", "WALL-5", "C3", "C3", "C3", "EPOCH", "NON-MOVE", "C3"], "fail": 2, "finalKept": 6, "judgeLine": "verdicts {\"WIT
+    - `aafa42de4` SECOND · DONE · transcript 09-14 16:05 623 KB · 16 tool calls · files: answers-opus.json · result: {"poolsOnCard": 20, "unitsReturned": 20, "tier0Kept": 20, "tier0Dropped": 0, "tier1Dropped": 1, "finalKept": 19, "pass": 16, "withheld": 3, "fail": 1, "arms": [
+    - `a41b58543` SECOND · IN FLIGHT · transcript 09-14 16:06 636 KB · 13 tool calls · files: brief_p2.txt, brief_p3.txt, answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ae9d515d2` SECOND · IN FLIGHT · transcript 09-14 16:02 451 KB · 9 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `aefc35e20` SECOND · DONE · transcript 09-14 16:06 561 KB · 12 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "T1-FIELD", "WALL-5", "C3"], "fail": 1, "finalKept": 7, "judgeLine": "verdicts {\"PASS\":6,\"FAIL\":1,\"WITHHELD\":1} \u00b7 kept 7 \u00b7 patche
 - **wf_0c7e8fcf-e4a** (mtime 09-14 13:57): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_0c7e8fcf-e4a/`
     - `a64dc9d07` ? · DONE · transcript 09-14 13:09 616 KB · 11 tool calls · files: response-opus.json · result: {"unitsWritten": 12, "notes": ["Three pools were omitted as unwritable, not skipped: DS-DEF-2 'Invasion & War: walls with NO force' seats face 0 through `elders
     - `a0141863e` ? · DONE · transcript 09-14 13:11 695 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 12, "notes": ["Omitted 3 of 15 pools (DS-DEF-2: 'Invasion & War: walls with NO force' vid 3, 'Internal Security: full legal chain (court AND pr
@@ -290,4 +292,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 1.50 2.14 2.65
+load: 1.49 1.77 2.32
