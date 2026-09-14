@@ -950,7 +950,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
+              "value": "{colour: \"#1a3a4a\", crisisHook: \"Something is slightly wrong: a decision that doesn't make sense, a face seen in too many p (cut)\", historyColour: \"political\", icon: null, label: \"Infiltrated\", summary: \"Schwarzwalde has been quietly penetrated by an outside interest. Enemy agents, a cult, a m (cut)\", type: \"infiltrated\", viabilityNote: \"No economic impact yet. The infiltration is strategic, not extractive (so far).\"}",
               "writers": 0
             }
           ],
@@ -1044,7 +1044,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
+              "value": "{colour: \"#1a3a4a\", crisisHook: \"Something is slightly wrong: a decision that doesn't make sense, a face seen in too many p (cut)\", historyColour: \"political\", icon: null, label: \"Infiltrated\", summary: \"Schwarzwalde has been quietly penetrated by an outside interest. Enemy agents, a cult, a m (cut)\", type: \"infiltrated\", viabilityNote: \"No economic impact yet. The infiltration is strategic, not extractive (so far).\"}",
               "writers": 0
             }
           ],
@@ -3395,7 +3395,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{fullyExploited, partiallyExploited, unexploited, warnings}",
+              "value": "{fullyExploited: [1 rows], partiallyExploited: [0 rows], unexploited: [2 rows], warnings: [0 rows]}",
               "writers": 0
             },
             {
@@ -4328,7 +4328,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{age, currentTensions, eventsTimeline, founding, historicalCharacter, historicalEvents, legacyAnnotations, siegeNarrative}",
+              "value": "{age: 157, currentTensions: [1 rows], eventsTimeline: [3 rows], founding: {6 keys}, historicalCharacter: \"The Flood did not destroy the settlement. It destroyed the settlement's sense of itself. W (cut)\", historicalEvents: [3 rows], legacyAnnotations: [2 rows], siegeNarrative: \"The Flood is still present in living memory: Rumours (some true) of enemy agents within th (cut)\"}",
               "writers": 0
             }
           ],
@@ -6204,7 +6204,7 @@
               "field": "axis",
               "grain": "root",
               "inputs": [],
-              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`",
+              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
               "readFrom": "",
               "state": "unreadable",
               "status": "LIVE",
@@ -6223,7 +6223,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+              "value": "{disaster: 54, economic: 21, internal: 5, magicDependency: false, magical: 0, military: 6, monster: 0, traditions: {5 keys}}",
               "writers": 0
             }
           ],
@@ -6299,7 +6299,7 @@
               "field": "axis",
               "grain": "root",
               "inputs": [],
-              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`",
+              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
               "readFrom": "",
               "state": "unreadable",
               "status": "LIVE",
@@ -6318,7 +6318,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+              "value": "{disaster: 54, economic: 21, internal: 5, magicDependency: false, magical: 0, military: 6, monster: 0, traditions: {5 keys}}",
               "writers": 0
             }
           ],
@@ -6394,7 +6394,7 @@
               "field": "axis",
               "grain": "root",
               "inputs": [],
-              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`",
+              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
               "readFrom": "",
               "state": "unreadable",
               "status": "LIVE",
@@ -6413,7 +6413,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+              "value": "{disaster: 54, economic: 21, internal: 5, magicDependency: false, magical: 0, military: 6, monster: 0, traditions: {5 keys}}",
               "writers": 0
             }
           ],
@@ -6489,7 +6489,7 @@
               "field": "axis",
               "grain": "root",
               "inputs": [],
-              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`",
+              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
               "readFrom": "",
               "state": "unreadable",
               "status": "LIVE",
@@ -6508,7 +6508,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+              "value": "{disaster: 54, economic: 21, internal: 5, magicDependency: false, magical: 0, military: 6, monster: 0, traditions: {5 keys}}",
               "writers": 0
             }
           ],
@@ -6584,7 +6584,7 @@
               "field": "axis",
               "grain": "root",
               "inputs": [],
-              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`",
+              "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
               "readFrom": "",
               "state": "unreadable",
               "status": "LIVE",
@@ -6603,7 +6603,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+              "value": "{disaster: 54, economic: 21, internal: 5, magicDependency: false, magical: 0, military: 6, monster: 0, traditions: {5 keys}}",
               "writers": 0
             }
           ],
@@ -6926,7 +6926,7 @@
               "state": "decided",
               "status": "FROZEN",
               "unknown": false,
-              "value": "{full, npc1, npc2, phrasing, tension, type}",
+              "value": "{full: \"What Vilbirg Becker knows would ruin Liutgar Bauer; what Liutgar Bauer holds would finish  (cut)\", npc1: \"Vilbirg Becker\", npc2: \"Liutgar Bauer\", phrasing: \"Vilbirg Becker's relationship with Liutgar Bauer is more complicated than their public rol (cut)\", tension: \"The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.\", type: \"Mutual Leverage\"}",
               "writers": 0
             }
           ],
@@ -10184,7 +10184,7 @@
               "inputs": [
                 {
                   "field": "availableServices",
-                  "value": "{criminal, employment, entertainment, equipment, food, healing, information, legal, lodging, magic, transport}"
+                  "value": "{criminal: [0 rows], employment: [1 rows], entertainment: [0 rows], equipment: [0 rows], food: [2 rows], healing: [1 rows], information: [1 rows], legal: [1 rows], lodging: [1 rows], magic: [0 rows], transport: [0 rows]}"
                 },
                 {
                   "field": "tier",
@@ -10207,7 +10207,7 @@
               "inputs": [
                 {
                   "field": "availableServices",
-                  "value": "{criminal, employment, entertainment, equipment, food, healing, information, legal, lodging, magic, transport}"
+                  "value": "{criminal: [0 rows], employment: [1 rows], entertainment: [0 rows], equipment: [0 rows], food: [2 rows], healing: [1 rows], information: [1 rows], legal: [1 rows], lodging: [1 rows], magic: [0 rows], transport: [0 rows]}"
                 },
                 {
                   "field": "tier",

@@ -141,8 +141,8 @@ export const DESK_LOCAL_NOTES = Object.freeze([
   Object.freeze({
     name: 'axis',
     why: 'the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed'
-      + ' vocabulary of score axes, not a settlement field. The pool key names which axis this is'
-      + ' (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`',
+      + ' vocabulary of score axes, not a settlement field. THIS POOL\'S OWN KEY NAMES THE AXIS,'
+      + ' and every axis\'s score is in `readings.scores` above',
   }),
   Object.freeze({
     name: 'conflict',

@@ -351,7 +351,40 @@ export function fieldValue(value) {
   if (value === null || value === undefined) return null;
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return value;
   if (Array.isArray(value)) return `[${value.length} rows]`;
-  return `{${Object.keys(value).sort(compareCodepoint).join(', ')}}`;
+  const keys = Object.keys(value).sort(compareCodepoint);
+  // ⭐⭐ A SMALL RECORD IS PRINTED WITH ITS VALUES (W3c car 3), and the measurement is why. Once the
+  // resolution column let the card read `readings.scores` at `defenseProfile.scores`, the writer was
+  // handed `{disaster, economic, internal, …}` beside a pool key that says `scores.military: STRONG`
+  // — the NAMES of the eight scores and not one of the numbers, on the very pool that is about one
+  // of them. A key list answers "what is in this record" where the model asked "what did the engine
+  // decide". Under thirteen keys the record rides with its values; above it the list stands, because
+  // a thirty-three-row institution bag is a roster and the town block already prints that roster.
+  if (keys.length > SMALL_RECORD_KEYS) return `{${keys.join(', ')}}`;
+  return `{${keys.map((k) => `${k}: ${entryValue(value[k])}`).join(', ')}}`;
+}
+
+/** Above this many keys a record prints as its key list. @see fieldValue */
+export const SMALL_RECORD_KEYS = 12;
+
+/** How long a string inside a small record may run before it is cut. @see fieldValue */
+export const SMALL_RECORD_CHARS = 90;
+
+/**
+ * One entry of a small record: a scalar as itself, anything deeper as its shape. A nested record
+ * is NOT flattened — the card would then print a tree whose depth no reader can see — and a long
+ * string is cut at `SMALL_RECORD_CHARS` with the cut marked, so one paragraph-valued key cannot
+ * take a whole pool's row.
+ * @param {unknown} held @returns {string}
+ */
+function entryValue(held) {
+  if (held === null || held === undefined) return 'null';
+  if (typeof held === 'string') {
+    return JSON.stringify(held.length > SMALL_RECORD_CHARS
+      ? `${held.slice(0, SMALL_RECORD_CHARS)} (cut)` : held);
+  }
+  if (typeof held === 'number' || typeof held === 'boolean') return String(held);
+  if (Array.isArray(held)) return `[${held.length} rows]`;
+  return `{${Object.keys(held).length} keys}`;
 }
 
 /**

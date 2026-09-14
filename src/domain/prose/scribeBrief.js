@@ -430,6 +430,55 @@ function rosterLine(pool, source) {
  * `Spitzplatz` has written a token and not a word; THE ROSTER answers `REFERENT-role`, which
  * refuses any office the town does not seat.
  */
+/**
+ * ⭐⭐ ONE READING, AS BOTH SEATS ARE SHOWN IT (W3c car 3). ONE SPELLING, used by the writer's own
+ * turn and by the second reader's checklist, because a reader given a harsher rendering of the same
+ * fact than the writer was refuses lines the writer was licensed to write — ruling 26's defect
+ * class pointed at the second seat, and the reason `fieldsFor` was a copy of this loop before.
+ *
+ * ⛔⛔ THE FOUR ANSWERS ARE FOUR DIFFERENT FACTS AND THE PROMPT SAYS WHICH.
+ *   a VALUE        the engine decided it and the card read it — at the settlement path the static
+ *                  card's resolution names, which is printed beside it so the writer can name the
+ *                  field in the engine's own word rather than in the desk's private letter;
+ *   DERIVED        the engine COMPUTES this reading rather than storing it. The card may not call a
+ *                  function, so it prints the expression and the VALUES OF ITS INPUTS, which are
+ *                  facts the engine did decide;
+ *   UNKNOWN        a real settlement path whose leaf is absent: the engine has not decided it, and
+ *                  nothing may be asserted that depends on it;
+ *   UNREADABLE     the resolver could not follow the name, WITH ITS REASON. Before W3c this was 42
+ *                  of 42 valueless rows on the pinned town and the reason was never given; it is 8
+ *                  now, and "this is one of five closed score-axis words, and the pool key names
+ *                  which" is a fact a writer can write from.
+ * @param {object} field one `pools[].fields[]` row @returns {string}
+ */
+function fieldLine(field) {
+  const name = String(field?.field ?? '');
+  if (field?.unknown !== true) {
+    const from = String(field?.readFrom ?? '');
+    return `    ${name} = ${JSON.stringify(field?.value ?? null)}`
+      + `${from ? ` (the engine's own field is \`${from}\`)` : ''}`;
+  }
+  if (String(field?.state) === 'derived') {
+    const inputs = (Array.isArray(field?.inputs) ? field.inputs : [])
+      .map((i) => `\`${String(i?.field ?? '')}\` = ${JSON.stringify(i?.value ?? null)}`);
+    // ⛔ THE CLOSING SENTENCE FOLLOWS THE INPUTS AND IS NOT ONE SENTENCE FOR BOTH CASES. Forty of
+    // the forty nine derived readings name no settlement input — the engine computes them from the
+    // settlement whole, or from a campaign world this page does not have — and telling a writer to
+    // "write from those values" where no value was printed is an instruction to invent one.
+    return `    ${name} = DERIVED: the engine computes this as \`${String(field?.expression ?? '')}\``
+      + (inputs.length
+        ? `, from ${inputs.join(' and ')}. Write from those values and give this reading no value of its own.`
+        : '. The card holds no input for it, so give this reading no value: what the engine decided'
+          + ' about it is what the pool key and the page lines already say.');
+  }
+  if (String(field?.state) === 'unreadable') {
+    const note = String(field?.note ?? '');
+    return `    ${name} = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it;`
+      + ` assert no value for this field beyond what the key says)${note ? ` — ${note}` : ''}`;
+  }
+  return `    ${name} = UNKNOWN (the engine has not decided this; assert nothing that depends on it)`;
+}
+
 function poolBrief(pool) {
   const faces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
 
@@ -480,27 +529,16 @@ function poolBrief(pool) {
 
   if (fields.length) {
     rows.push('  THE FIELDS this pool reads, with their values here:');
-    for (const field of fields) {
-      // ⛔⛔ THE TWO VALUELESS READINGS ARE NOT THE SAME FACT, AND SAYING SO IS CAR 6's WHOLE
-      // POINT. `unreadable` means THIS CARD cannot resolve the reading (a desk-local spelling, an
-      // expression) while the engine decided it and the POOL KEY STATES IT; `not-decided` means a
-      // real settlement path whose leaf is absent. Printing the first as "the engine has not
-      // decided this" would be a false fact on the card, and printing it as a bare `null` would
-      // invite the absence RUN 2 measured. Measured: 42 of 42 valueless rows on the pinned town
-      // are the FIRST kind.
-      if (field?.unknown === true) {
-        rows.push(String(field?.state) === 'unreadable'
-          ? `    ${String(field?.field ?? '')} = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)`
-          : `    ${String(field?.field ?? '')} = UNKNOWN (the engine has not decided this; assert nothing that depends on it)`);
-        continue;
-      }
-      rows.push(`    ${String(field?.field ?? '')} = ${JSON.stringify(field?.value ?? null)}${field?.status ? ` (${String(field.status)})` : ''}`);
-    }
+    // ⛔⛔ THE FOUR KINDS OF READING ARE FOUR DIFFERENT FACTS AND THE LINE SAYS WHICH. See
+    // `fieldLine`, which the second reader's checklist prints from too, so the two seats read the
+    // same words. Before W3c a desk-local spelling printed UNREADABLE with no reason and no value;
+    // 42 of 42 valueless rows on the pinned town were that, and 34 of them are a value now.
+    for (const field of fields) rows.push(fieldLine(field));
     rows.push('    The second sentence of a unit, if there is one, must rest on one of these fields');
     rows.push('    and name it in its own word, or the instruments withhold it.');
     if (fields.some((f) => f?.unknown === true && String(f?.state) !== 'unreadable')) {
-      rows.push('    A field reading UNKNOWN cannot carry a sentence, and no absence may be read');
-      rows.push('    out of it.');
+      rows.push('    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no');
+      rows.push('    absence may be read out of one.');
     }
   } else {
     rows.push('  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.');
@@ -1006,13 +1044,9 @@ function corpusFor(card, unit) {
 
 function fieldsFor(card, unit) {
   const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
-  return (Array.isArray(pool?.fields) ? pool.fields : [])
-    .map((f) => {
-      if (f?.unknown !== true) return `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`;
-      return String(f?.state) === 'unreadable'
-        ? `    ${String(f?.field ?? '')} = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)`
-        : `    ${String(f?.field ?? '')} = UNKNOWN (the engine has not decided this; assert nothing that depends on it)`;
-    });
+  // ⛔ ONE SPELLING WITH THE WRITER'S TURN (W3c car 3). This was a second copy of `poolBrief`'s
+  // field loop, and a second copy of a rendering is how the two seats come to read two pages.
+  return (Array.isArray(pool?.fields) ? pool.fields : []).map(fieldLine);
 }
 
 /**

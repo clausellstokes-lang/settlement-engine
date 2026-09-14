@@ -25,8 +25,9 @@ import {
   generateSettlementPipeline, regenNPCsPipeline, regenHistoryPipeline,
 } from '../../src/generators/generateSettlementPipeline.js';
 import {
-  townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, readPathOf,
-  WORLD_ONLY_READINGS, UNNAMEABLE_BODIES, DEPARTURE_KEY_WORDS, RECORDED_UPHEAVAL,
+  townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, fieldValue, readPathOf,
+  SMALL_RECORD_CHARS, SMALL_RECORD_KEYS, WORLD_ONLY_READINGS, UNNAMEABLE_BODIES,
+  DEPARTURE_KEY_WORDS, RECORDED_UPHEAVAL,
 } from '../../src/domain/prose/townCard.js';
 import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
 import {
@@ -354,6 +355,18 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
     expect(fieldState(town, 'readings.scores', null)).toBe('unreadable');
     expect(fieldState(town, 'axis', null)).toBe('unreadable');
     expect(fieldState(town, '', null)).toBe('unreadable');
+    // ⭐ (W3c car 3) A SMALL RECORD RIDES WITH ITS VALUES, so the pool whose key says
+    // `scores.military: STRONG` is handed the military score and not the names of the eight scores.
+    expect(String(scores.value)).toMatch(/military: \d+/);
+    expect(fieldValue({ b: 2, a: 'x', c: null, d: true })).toBe('{a: "x", b: 2, c: null, d: true}');
+    expect(fieldValue({ a: { x: 1, y: 2 }, b: [1, 2, 3] })).toBe('{a: {2 keys}, b: [3 rows]}');
+    expect(fieldValue({ a: 'z'.repeat(SMALL_RECORD_CHARS + 5) })).toContain(' (cut)"}');
+    // NEGATIVE CONTROL — above the bar the key list stands, because a thirty-three-row institution
+    // bag is a roster and the town block already prints that roster.
+    const wide = Object.fromEntries(Array.from({ length: SMALL_RECORD_KEYS + 1 }, (_, i) => [`k${i}`, i]));
+    expect(fieldValue(wide)).toBe(`{${Object.keys(wide).sort().join(', ')}}`);
+    expect(fieldValue([1, 2])).toBe('[2 rows]');
+    expect(fieldValue(null)).toBe(null);
     // … and `readPathOf` is the seam that makes an older static card lawful rather than blank.
     expect(readPathOf('readings.scores', null)).toBe('readings.scores');
     expect(readPathOf('readings.scores', { kind: 'path', path: 'defenseProfile.scores' }))
@@ -1163,6 +1176,17 @@ describe('townCard — the golden', () => {
    *   string, and `pools[].caveats` on the four `scores.*: CRITICAL` pools of the overview tab,
    *   whose `readings.scores` reading now has a value so the departure caveat correctly stops
    *   firing. NO KEY WAS REMOVED and no other value on any tab changed.
+   *
+   * 2026-09-14 — RE-RECORDED (W3c car 3), card schema UNCHANGED at /7. CAUSE: `fieldValue` prints a
+   *   SMALL RECORD with its values. Car 2 let the card read `readings.scores` at
+   *   `defenseProfile.scores`, and the writer was then handed `{disaster, economic, internal, …}`
+   *   beside a pool key that says `scores.military: STRONG` — the NAMES of the eight scores and not
+   *   one of the numbers, on the very pool that is about one of them. A record of at most twelve
+   *   keys now rides with its values (a nested record as `{n keys}`, a list as `[n rows]`, a string
+   *   over ninety characters cut and marked), and a larger one keeps the key list it had. THE KEYS
+   *   THAT MOVED, and only these: `fields[].value` and `fields[].inputs[].value` wherever the
+   *   reading is a small record, and `fields[].note` on the `axis` rows, whose reason was re-worded
+   *   because it named one axis by example on a pool about another. NO KEY WAS ADDED OR REMOVED.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];
