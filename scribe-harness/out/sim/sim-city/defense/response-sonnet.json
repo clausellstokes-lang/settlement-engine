@@ -1,0 +1,179 @@
+{
+ "units": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness STRONG",
+   "vid": 4,
+   "spine": "At present nothing presses Rundgate. Its defenses read strong, past the point where pressing them would cost more than it would gain.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Beasts & Monsters: frontier, credible deterrence",
+   "vid": 2,
+   "spine": "The country around is an active frontier, and the walls and the garrison hold a perimeter that keeps most trouble from ever pressing it.",
+   "faces": [
+    "A traveller says nobody at the gate asked what he had passed on the road, though he had come ready to tell it.",
+    "A serjeant on the wall says the gate is barred at dusk without fail, and nobody argues the hour with him.",
+    "A priest of one of the parishes holds that the men who watch the country are prayed for in the same breath as the roads.",
+    "One of the aldermen says no complaint about the nights beyond the wall has reached the hall at all.",
+    "The watch hold that what complaints there are stop at the gate and go no further.",
+    "An innkeeper says the talk at his tables runs to who stands the nights, and never to what waits past them.",
+    "A soldier of the garrison says the drills draw no crowd from the town, not even the curious.",
+    "A guild factor reckons the trades foot the toll that pays for the watch at the gate, and counts the keeping of it as everyone's due, not the trades' alone.",
+    "A stallholder says the stalls go up the same whether the country is quiet or not.",
+    "A bailiff says a dispute over the toll is heard the day it is brought, and the country beyond the gate has never brought one.",
+    "The elders say the young stand the nights and the old say how they are stood."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls AND professional garrison",
+   "vid": 2,
+   "spine": "A traveller is stopped and counted at the gate before he is let through. What lies past it is a place that keeps its own paid soldiers, walls and all.",
+   "faces": [
+    "The men who hold the ways in say a stranger pays his toll at the gate, and the gate settles its own account with the hall in its own time.",
+    "A woman who keeps the hall books holds that a stranger who pays at the gate has paid the town in full, whatever is said to him at the gate itself.",
+    "A clerk of the court says anyone who paid a toll may dispute it before the bench, a stranger the same as a carter.",
+    "A pedlar says his pack was opened at the gate and nothing taken from it beyond the toll owed.",
+    "A man who drinks where the carters drink holds that the town was never asked whether it wanted soldiers, only what keeping them costs."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: court without detention",
+   "vid": 1,
+   "spine": "The court here sits, and keeps no cell for anyone it judges. What its law can take from a person is coin, or a place in the town.",
+   "faces": [
+    "A night patrolman says whatever is caught after dark is settled after dark, there being no cell to hold a man until morning.",
+    "The officers of the court say they hear by daylight what the watch already settled in the dark, and ask it nothing first.",
+    "A clerk in the hall reckons the purse has never run to a cell, and does not say who first asked for one.",
+    "A stallholder says a short weight goes before a magistrate and comes home again as a fine, and the scales that weighed it stay right there on his stall.",
+    "A priest of one of the parishes holds that the parish keeps a place for a man once he is dead, and the town keeps none for him while he lives.",
+    "A journeyman says a fine comes out of a man's earnings and is forgotten, though the mark it leaves on his work is not.",
+    "The drinkers of the district say a man with a house here pays and stays. A man without one is sent off, and the table loses him.",
+    "A drover says there is nothing to take from a man who owns nothing in the town. The town is left with the one thing it can still do with him.",
+    "A gatekeeper reports being handed a man and a direction, and given no reason for either.",
+    "A serjeant of the garrison says what comes at the town is the garrison's business, and the people turned out of it are not."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "vid": 2,
+   "spine": "Everyone in the town has seen its trade hold up through hard seasons before, and takes it that the town's footing is strong enough for whatever comes.",
+   "faces": [
+    "A clerk in the hall says the hall asks the trades for no more than they can bear.",
+    "A guild factor says the carrying falls to the guilds, and the asking of it was never theirs to agree to.",
+    "The guilds' reading is the likelier of the two, since the hall has a purse of its own to defend and the guilds have only their bill to point to.",
+    "The guard captain holds that the rounds are walked by people still owed for walking them.",
+    "Whoever keeps the toll book says a cart bound for the grain store is never kept waiting at the gate, whatever else is.",
+    "A rider who stopped a night reports the grain store praised and the watch's wage complained of, from the very same mouths.",
+    "A woman at the long table says the watch is a trade that drinks against wages it has not yet seen.",
+    "A man who draws the wage holds that a town able to feed itself through a crisis and still short his pay has made a choice, though it has not named the choice out loud.",
+    "A market clerk says the stallholders settle what the hall is owed before they settle any account of their own.",
+    "One of the vergers holds that the town keeps its word to the dead before it keeps its word to the living who serve it."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: granary AND parish care only",
+   "vid": 3,
+   "spine": "A drover says the town looks well stored from the road, and that whoever nurses the sick here does it out of the church, there being no hospital to send them to.",
+   "faces": [
+    "A parish warden holds that a stranger who asks for shelter is given a person to take him in, though nobody born here ever has to ask.",
+    "A clerk of the fair says grain does not keep well here for anyone without a door and a cellar of his own in the town.",
+    "A potboy of the district reports that strangers come in and ask to see the grain store, though nobody born here ever does.",
+    "One of the watch says strangers ask it where the grain is kept, and that nobody has ever once asked it where the sick are taken.",
+    "An apprentice out of his time reckons what a stranger takes for a full store is grain the trades filled and now cannot touch themselves.",
+    "The officers of the court say a stranger's questions about the grain are ordinary enough, but the ones about the sick are new to them."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 1,
+   "spine": "A working balance holds here at Rundgate. The law is present and so is crime, and neither one has the run of the town.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "spine": "What is known of Rundgate so far comes from a first look, honest about what has been seen and silent about what has not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure organized",
+   "vid": 3,
+   "spine": "A stranger at Rundgate is not robbed outright, but is quietly told how matters are arranged here, since the danger runs organized rather than sudden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "vid": 2,
+   "spine": "Entry points here are the town's own to control, and keeping them is what buys Rundgate its choice of where trouble is met.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "garrison PRESENT",
+   "vid": 1,
+   "spine": "A standing force keeps Rundgate's defense as its trade, paid and answerable for the work like any other.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "mercenary / contracted forces PRESENT",
+   "vid": 2,
+   "spine": "The town pays for some of its soldiers outright, and keeps track of exactly which ones, treating them accordingly.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "spine": "A traveller reaching Rundgate finds a hall whose business is the sort of trouble a garrison is not suited for, and finds that hall busy.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense PRESENT",
+   "vid": 2,
+   "spine": "Passing through Rundgate's gate, a stranger is measured in some way he cannot quite name, and nobody offers to explain it to him.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "vid": 1,
+   "spine": "The city walls and gates at Rundgate are kept in better order than the watch meant to stand behind them, the pay for standing there being the part of the work that keeps coming up short.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "vid": 1,
+   "spine": "Stores are kept at Rundgate and the town is fed in by the roads. The roads are the risk in that, and the granary is what buys time against it.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
