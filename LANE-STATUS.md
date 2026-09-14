@@ -1,15 +1,18 @@
-# LANE-STATUS — written 2026-09-14 00:28:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 00:33:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD d610e371d · 53 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD d610e371d · 53 cars over f2da5a3ee · porcelain 2 · last commits:
     d610e371d REWRITE 8b DS-DEF-2 cure (v3): 2/2 pools
     bf8c499c1 REWRITE 8b DS-DEF-2 draft (v3): 2/3 pools
     310893244 REWRITE 8b DS-DEF-2 cut 7, the re-refute answered: two speakers restored, and the instrument corrected where it was rewarding their loss
     389812b5f REWRITE 8b DS-DEF-2 cut 7: the two DULL pools cured to the refuter's own prescription, and a count put where a reader was
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -309,4 +312,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.18 2.15 2.24
+load: 2.84 2.29 2.24
