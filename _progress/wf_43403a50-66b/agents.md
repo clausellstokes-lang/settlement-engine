@@ -1,4 +1,4 @@
-# wf_43403a50-66b — per-agent progress, 2026-09-14 17:43:20
+# wf_43403a50-66b — per-agent progress, 2026-09-14 17:48:42
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
     - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
@@ -28,4 +28,4 @@
     - `a74c791c6` ? · DONE · transcript 09-14 17:37 718 KB · 7 tool calls · result: {"items": [{"title": "Migration 195 landed past the rehearsal manifest head, with no rollback", "what": "`195_civility_guard_and_public_identity.sql` landed pas
     - `a65cc7eae` ? · DONE · transcript 09-14 17:39 790 KB · 5 tool calls · result: {"stateSummary": "Two chair-compiled queues for an external implementer (\"Sol\"), both written 2026-08 and both explicit that they are specs and order, not bui
     - `ac5c2a91e` ? · DONE · transcript 09-14 17:33 440 KB · 3 tool calls · result: {"items": [{"title": "Deploy the refunds webhook (partial refunds blocked until then)", "what": "The endgame row records that until the webhook deploys, a parti
-    - `a634b7d07` r1 · IN FLIGHT · transcript 09-14 17:39 2051 KB · 0 tool calls
+    - `a634b7d07` r1 · DONE · transcript 09-14 17:47 2435 KB · 1 tool calls · result: {"chain": [{"n": 1, "title": "The Scribe's model key", "area": "scribe", "status": "owner-gated", "gated": true, "size": "S", "what": "The Scribe is the AI laye

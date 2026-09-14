@@ -1,0 +1,759 @@
+{
+ "chain": [
+  {
+   "n": 1,
+   "title": "The Scribe's model key",
+   "area": "scribe",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "S",
+   "what": "The Scribe is the AI layer that writes each town's prose at generation time. It is built and sitting in the product, but its live model call has never once run \u2014 every result so far comes from an agent seated by hand as a stand-in. Nothing about it can be priced, judged or shipped until you hand over an API key for the pilot.",
+   "whyHere": "It costs you one minute and it is the only thing standing between a fully built feature and the first honest measurement of whether it is worth shipping.",
+   "dependsOn": "nothing",
+   "records": [
+    "HANDOFF.part00 \u2014 pickup 09-14 10:1x and 10:4x, 'THE OWNER MUST'",
+    "RESUME-NOTE.part01 \u2014 09-14 05:5x (no key in the shell) and 12:1x (the keyless simulation)",
+    "PLAN+MANUAL \u2014 DESIGN_SCRIBE \u00a710/\u00a711, 'W3 \u2014 THE PILOT'"
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Push the Scribe's two database migrations (201 and 202)",
+   "area": "persistence/migration",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "S",
+   "what": "The Scribe shipped with two migrations written into the repository and never applied to any database: one strips its prose from shared dossiers, one handles the claim and the credit spend. The chair keeps every database push off its own table by rule, so these sit written and inert.",
+   "whyHere": "Second because the pilot and the billing both read a database that does not yet have these tables; the key alone is not enough.",
+   "dependsOn": "nothing; the flag and the billing wait on it",
+   "records": [
+    "HANDOFF.part00 \u2014 09-14 10:1x, 'migrations 201/202 WRITTEN NEVER APPLIED'",
+    "RESUME-NOTE.part01 \u2014 09-14 10:0x and 11:1x",
+    "PLAN+MANUAL \u2014 REWRITE_RECUT_PROGRAM_PLAN Progress 09-14 ~10:1x 'Owner acts'"
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Sign the Scribe's price: the render SKU, the free first render, the daily cap",
+   "area": "payments/tiers",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "S",
+   "what": "The Scribe bills five credits per render through one SKU that reuses the retired narrative price, with a proposed free first render per account and a free tier capped at one render a day. The chair has written a default for each but will not sign a price. Whether the daily cap is hard or soft is also yours.",
+   "whyHere": "A paid surface cannot go live on a chair's default, and the price shapes the pilot's cost measurement.",
+   "dependsOn": "migration 202 carries the SKU row",
+   "records": [
+    "PLAN+MANUAL \u2014 DESIGN_SCRIBE \u00a712 items 1, 2 and 14; SCRIBE-RULINGS rulings 1, 2, 19",
+    "RESUME-NOTE.part01 \u2014 09-14 08:3x and 08:5x (the cap, the economics)",
+    "HANDOFF.part00 \u2014 09-14 10:4x 'sign the 5-credit SKU'"
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Rule item 13 and the narrative overlay's retirement order",
+   "area": "scribe",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "You ordered the old narrative overlay retired. The chair measured that it cannot be: the chronicle's only three writers are all narrative-family, so retiring them leaves the chronicle with no writer at all, and the credit-cost rows ride migrations that already shipped. The lawful order is that you first rule item 13 \u2014 whether past epochs move into the chronicle, and how much is kept \u2014 then the Scribe becomes the chronicle's writer, then the old SKUs retire by a new migration, then the overlay's screens go at the flag flip.",
+   "whyHere": "It is one ruling that unblocks a whole stopped commit, and it is the first step of a chain the chair has already priced.",
+   "dependsOn": "nothing; it gates Scribe commit 6 and the W5 retirements",
+   "records": [
+    "PLAN+MANUAL \u2014 DESIGN_SCRIBE \u00a712 item 13 and \u00a75b; SCRIBE-RULINGS rulings 15 and 20",
+    "RESUME-NOTE.part01 \u2014 09-14 14:1x 'SCRIBE W2 COMMIT 6 STOPPED, NOT ATTEMPTED'",
+    "HANDOFF.part00 \u2014 09-14 10:1x owner acts"
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Light the Scribe's flag",
+   "area": "scribe",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "S",
+   "what": "The whole Scribe ships dark behind a flag that defaults to off. With it off nothing renders, nothing bills, nothing is drawn from an artefact. Turning it on is your last act on this feature and the moment the old overlay's screens come down.",
+   "whyHere": "Listed here with its five siblings so the Scribe desk is one page, though it fires last of the six.",
+   "dependsOn": "the key, the migrations, the price, item 13, and the pilot's numbers",
+   "records": [
+    "HANDOFF.part00 \u2014 09-14 10:1x and 10:4x, 'light FLAGS.scribe last'",
+    "PLAN+MANUAL \u2014 SCRIBE-RULINGS ruling 20 (the retirements fire at the flag flip)",
+    "RESUME-NOTE.part01 \u2014 09-14 10:0x"
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Reconcile the stale main checkout against HEAD",
+   "area": "build/tooling",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "The working copy on disk is an old snapshot: it differs from the real head of the branch by over four thousand deletions, and whole shipped subsystems \u2014 the Surveyor and bring-your-own-key layer, dozens of migrations, decomposed modules \u2014 exist only at HEAD. Everyone is under standing orders to read the code through git rather than the disk. Those pre-staged deletions are your work in progress, so only you can resolve them.",
+   "whyHere": "Every reader, lane and successor is working around this daily, and one bare commit in that tree would sweep nearly a thousand of your deletions into history.",
+   "dependsOn": "nothing",
+   "records": [
+    "HANDOFF.part00 \u2014 09-14 ~05:0x, 'THE MAIN CHECKOUT IS STALE AGAINST HEAD'",
+    "PLAN+MANUAL \u2014 DESIGN_SCRIBE \u00a712 item 11 and the status banner",
+    "MEMORY-FOLDS \u2014 FOLD 14, 'the main checkout is a different tree'"
+   ]
+  },
+  {
+   "n": 7,
+   "title": "The production deploy gate \u2014 78 migrations behind, and one that deletes",
+   "area": "persistence/migration",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "Production is running a build from late July, at migration 121 against a repository head near 200 \u2014 roughly seventy-eight migrations and a month behind. Every fix in the programme, including licence removals and security repairs, is stacked behind that gate. The estate labels migration 198 destructive, but the chair measured that migration 188 is the one that actually quarantines and deletes real users' custom content at push time, and nothing in the paperwork says so.",
+   "whyHere": "It is the only item degrading purely by delay, and it must be understood before any push rather than discovered during one.",
+   "dependsOn": "the clone-rehearsal receipts and the labelling correction; your credentials and machine",
+   "records": [
+    "ODQ.part04 \u2014 \u00a7532.4, \u00a7537.6, \u00a7538.8 ('THE DEPLOY GATE IS STILL SHUT \u2014 DAY 27'), \u00a7540.7\u2013\u00a7540.8",
+    "ODQ.part00 \u2014 \u00a71 item T9, the migration-train deploy",
+    "ODQ.part03 \u2014 \u00a7446.2/\u00a7455.1/\u00a7464.4, the db-push train 195\u2013199"
+   ]
+  },
+  {
+   "n": 8,
+   "title": "The legal sitting",
+   "area": "other",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "Several things sit outside anything the chair may do. Terms of service and a privacy policy have never been authored, and no clause says who owns a generated settlement. Beside them sit the founder-transfer sign-off, seal trademark clearance, corpus copyright registration, the vendored editor's GPL position, the map fork's clean-room posture, the stale third-party notices page, and three trademark-adjacent phrases in public marketing copy. The chair's own note is that counsel turnaround is the real long pole and the current plan schedules the brief far too late.",
+   "whyHere": "Counsel's answer is an input to remedies, not a formality after them, so it should start now rather than beside the push.",
+   "dependsOn": "nothing",
+   "records": [
+    "ODQ.part01 \u2014 \u00a7133.1 and \u00a7133a (the largest gap of the sweep)",
+    "ODQ.part04 \u2014 \u00a7510.2 carve-out 3 and \u00a7530.6 (the brief scheduled too late)",
+    "ODQ.part07 \u2014 \u00a7783.3, \u00a7825 (the notices page) and \u00a7857 (the trademark rows)"
+   ]
+  },
+  {
+   "n": 9,
+   "title": "The provenance and IP acts only a person can do",
+   "area": "security",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "Twenty-three shipped image files predate the AI account and carry no licence; the single highest-value step is a ten-minute reverse-image search no automated lane can run. Alongside them: twenty-three terrain heightmaps that carry mandatory attribution nobody has written, a live keyboard shortcut in the vendored map that exports third-party terrain data, two unread database functions that decide whether a private blob is served publicly, and a 76 MB video that inherits every obligation the day a deploy picks it up.",
+   "whyHere": "These are cheap human acts blocking a legal sign-off that everything else eventually waits behind.",
+   "dependsOn": "feeds the legal sitting",
+   "records": [
+    "ODQ.part04 \u2014 \u00a7535.5, \u00a7531.5, \u00a7529.7, \u00a7554.6 (cohort A); \u00a7528.4\u2013\u00a7528.7 (the export paths and the RPC questions)",
+    "ODQ.part04 \u2014 \u00a7530.6 (heightmap attribution), \u00a7535.4 (nobody indemnifies the estate)",
+    "ODQ.part05 \u2014 \u00a7572.3 (the 8.4 GB corpus exists on one disk)"
+   ]
+  },
+  {
+   "n": 10,
+   "title": "The eighteen-item owner batch, plus item nineteen",
+   "area": "other",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "A single sitting document was assembled for you months ago and never answered. It carries the map gates, the telemetry and product decisions \u2014 the referral loop, the consent default, the 400-day retention window, the naming question, the community home, the support-email destination, whether importing restores a campaign's life or only its facts \u2014 plus the scale bar's unit names added later. Nothing in it blocks building; every item names what happens on a yes.",
+   "whyHere": "It is the single cheapest sitting on the desk: one document, nineteen answers, and a dozen downstream rows unlock at once.",
+   "dependsOn": "nothing",
+   "records": [
+    "ODQ.part01 \u2014 \u00a7187 (the batch assembled), \u00a7199.2b (item 19), \u00a7264.4 (still unanswered)",
+    "ODQ.part02 \u2014 \u00a7359 (five delegated rulings) and \u00a7362 (three signed as recommended)",
+    "ODQ.part00 \u2014 \u00a711 T11 (the support email), \u00a766.4 (import versus restore)"
+   ]
+  },
+  {
+   "n": 11,
+   "title": "The persisted-shape and schema rows",
+   "area": "persistence/migration",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "A long line of work is stopped on questions about the shape of saved data, which the chair treats as yours by nature. They include eleven schema acts from the prose reconciliation, a field the rules cite that does not exist, the type of an estate's owner reference, the database twin that re-issues content on a shared dossier, whether a marker rides the persisted receipt, whether an imported town should be seedless, the terrain type enum against a corpus that needs twenty settings, and whether a settlement's neighbour gets a permanent bearing.",
+   "whyHere": "Each is a small ruling that releases a car already written and waiting behind it.",
+   "dependsOn": "nothing",
+   "records": [
+    "ODQ.part10 \u2014 \u00a7912 owner rows (the schema acts (a)\u2013(k), record.origin)",
+    "ODQ.part04 \u2014 \u00a7543.9 O2/O3; ODQ.part05 \u2014 \u00a7544.3",
+    "ODQ.part01 \u2014 \u00a7251.5 (terrainType) and \u00a7267.2c (the neighbour bearing); ODQ.part09 \u2014 \u00a7913 (the SQL twin, R-I)"
+   ]
+  },
+  {
+   "n": 12,
+   "title": "The paid-surface rows and the Stripe console to-do",
+   "area": "payments/tiers",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "Eight acts can only be done in your own Stripe account before the Surveyor tier and the annual plan can exist, and one of them is a trap: a price secret must be set before the Surveyor price is created or the first invoice mints the wrong allowance. Beside them sit the tier decisions themselves \u2014 the interiors ladder row and the free-sample teaser it strikes, the lens-count entitlement, whether the map is reachable on the free path, a delayed-information mode on the premium gate, and a Surveyor client arm that contradicts a standing ruling.",
+   "whyHere": "The money path cannot be built past these, and the annual work below is gated on the first of them.",
+   "dependsOn": "nothing; it gates the money path",
+   "records": [
+    "ODQ.part03 \u2014 \u00a7470 \u00a74 (the eight-item to-do) and \u00a7471.2 F5",
+    "ODQ.part04 \u2014 \u00a7543.9 O1; ODQ.part01 \u2014 \u00a7162.4 (LENS_COUNT), \u00a7247.3b (free-tier map access)",
+    "ODQ.part07 \u2014 \u00a7839 (WEB-9a's collision), \u00a7782.3 (map-chains)"
+   ]
+  },
+  {
+   "n": 13,
+   "title": "The culls, the parks and the things you have said you would decide",
+   "area": "other",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "M",
+   "what": "A dozen rows have sat on your desk for a long time, each held because the chair judged it yours: twenty-one unreachable catalogue rows awaiting a keep-or-cull word, the main worktree's disposition, four hundred and sixty megabytes of marketing masters riding a branch that cannot be pushed until they move, the physics dial list, the criminal-capture badge shown to players, the absent edit path for composed prose, the coup shield no interface can arm, the capital that nothing writes, and the aesthetic cull of thirteen generated images with three regeneration prompts ready to run.",
+   "whyHere": "None blocks the endgame on its own, but every one of them is cheap for you and permanently stuck without you.",
+   "dependsOn": "nothing",
+   "records": [
+    "ODQ.part00 \u2014 \u00a767.6 (the 21-row cull), \u00a713 (the worktree), \u00a71 T1, \u00a75 M44",
+    "ODQ.part02 \u2014 \u00a7336/\u00a7359/\u00a7362.4/\u00a7362.5 (the cull, the V5 prompts)",
+    "PLAN+MANUAL \u2014 REWRITE_RECUT_PROGRAM_PLAN 'Owner-gated' (the badge, the edit path, deriveCriminalStructure)"
+   ]
+  },
+  {
+   "n": 14,
+   "title": "Call the Fable retrovalidation pass, and set its scope",
+   "area": "docs/process",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "A great deal of the last two months of judgment was made on a model seat you asked to be re-checked later, and the re-check only runs when you call it. The true owed surface is about a hundred and thirty sections whose authorship cannot be recovered, a hundred and forty-seven unruled rows in the older queue, and three cases where something reported closed rests on ground that was never validated. The chair has written the protocol; it will not start it.",
+   "whyHere": "Placed last among your decisions because it is a scoping call rather than a blocker, but it grows every day the programme runs.",
+   "dependsOn": "nothing; the chair has the protocol ready",
+   "records": [
+    "ODQ.part05 \u2014 \u00a7685.1\u2013\u00a7685.5, \u00a7687.1\u2013\u00a7687.5",
+    "FRQ.part00 \u2014 \u00a75 'THE PASS, WHEN THE OWNER CALLS IT'; \u00a76.1 STRATUM 0",
+    "ODQ.part03 \u2014 \u00a7484.3/\u00a7484.4 (the OPUS REGISTER and its protocol)"
+   ]
+  },
+  {
+   "n": 15,
+   "title": "Document the ten consumed secrets, including the one that breaks the first sale",
+   "area": "build/tooling",
+   "status": "owed",
+   "gated": false,
+   "size": "M",
+   "what": "Ten secret names the running product consumes have no documentation anywhere, and one of them is the Surveyor price. Its absence means the first Surveyor purchase fails on a deploy done by the book. Two sibling cars correct hand-typed figures in the docs and a piece of shipped copy that tells users a rail has fourteen steps when it has twenty-two.",
+   "whyHere": "First of the build work because it is small, it is a genuine launch blocker, and it sits directly in front of the money path.",
+   "dependsOn": "queued behind two earlier cars in the executor order",
+   "records": [
+    "ODQ.part00 \u2014 \u00a787 items 1\u20132 (dom-1, dom-2), \u00a7115.1\u2013\u00a7115.3 (dom-4 minted), \u00a7120.3 (the secrets added)",
+    "ODQ.part00 \u2014 \u00a788.4 (named among the launch blockers)"
+   ]
+  },
+  {
+   "n": 16,
+   "title": "The money path, and the webhook before any refund",
+   "area": "payments/tiers",
+   "status": "chartered",
+   "gated": false,
+   "size": "L",
+   "what": "Four or five cars finish the commerce surface: de-advertising rows that were never built, a dark Surveyor plan and its purchase arm, a pricing copy correction, the webhook allowance table, and the annual plan's client half. Two rules bind the order \u2014 the webhook work is stop-class and builds last, and until it deploys a partial refund claws back a whole seat, so none may be issued. The annual toggle additionally waits on your ruling about how annual credits are granted, and on a guard that fails closed when an invoice maps to no known plan.",
+   "whyHere": "It is launch-critical, it is the only remaining money work, and its ordering is fixed by the records themselves.",
+   "dependsOn": "the Stripe console acts above; the annual credit cadence ruling",
+   "records": [
+    "ODQ.part03 \u2014 \u00a7470/\u00a7471/\u00a7473 (the W-C and W-D cars, the skeptic's six must-fixes)",
+    "MEMORY-FOLDS \u2014 FOLD 45, 'until the webhook deploys, partial refunds claw back whole seats \u2014 issue none'",
+    "SOL_QUEUE+FIRST_CONTACT \u2014 LD-6 items 2, 3 and 7 (W-1 cadence, W-2 fail-closed, the portal configuration)"
+   ]
+  },
+  {
+   "n": 17,
+   "title": "The catalogue-hygiene train, including a shipped doctrine violation",
+   "area": "engine",
+   "status": "chartered",
+   "gated": false,
+   "size": "L",
+   "what": "A train of small content-and-code cars is chartered and mostly undispatched. One of them matters beyond hygiene: the arcane keyword list treats divine healers, druid circles and elder groves as magic, so a magic-free world can hold no divine healer \u2014 the engine asserting that divine healing is a species of magic, against your own constitutional rule. The rest fix an unanchored word that links a criminal to a parish priest, seven hundred mis-keyed catalogue rows, a metropolis with nowhere to bury anyone, and two packets that are landed in code but still marked draft.",
+   "whyHere": "Placed before the display trains because several of them change what the corpus can say, and one is a live violation of a rule you wrote.",
+   "dependsOn": "a free lane; the earlier cars of its own train",
+   "records": [
+    "ODQ.part05 \u2014 \u00a7594.2, \u00a7596.3(iv), \u00a7619.1, \u00a7672.1 (CH-6b, the divine-healer gap, MF-CH3, MF-CH2B)",
+    "ODQ.part06 \u2014 \u00a7708.5 (the graveyard gap), \u00a7708.7 (the tannery at the civic core), \u00a7708.6 (DEITY-LIVE-CHECK)",
+    "ODQ.part04 \u2014 \u00a7541.8\u2013\u00a7541.9, \u00a7550.3\u2013\u00a7550.8, \u00a7555 (CH-4, CH-6, CH-7)"
+   ]
+  },
+  {
+   "n": 18,
+   "title": "The remaining display trains \u2014 wave, turns, custom-content prose, two surfaces, capacity",
+   "area": "display/UI",
+   "status": "chartered",
+   "gated": false,
+   "size": "XL",
+   "what": "Six named trains stand between the finished corpus and the walk: the wave and turns work, the custom-content prose parity pass, two surface trains \u2014 one for events, one for the game master's own page \u2014 and a capacity train. They are specified and ordered and none has been dispatched. The DM pen line and a settlement's interested holder both live in the second surface train.",
+   "whyHere": "These couple behind the banked rewrite's own landing and are the last substantial build work before the review and the walk.",
+   "dependsOn": "the banked prose rewrite's desks and its \u00a7920 landing",
+   "records": [
+    "HANDOFF.part00 \u2014 pickups \u00a7914\u2013\u00a7919, 'THE TRAINS' (arch-prose/TRAINS.md)",
+    "PLAN+MANUAL \u2014 OPUS_CHAIR_MANUAL \u00a75 item 9 (the trains after 8b)",
+    "RESUME-NOTE.part02 \u2014 09-08 01:2x, 'the cars grouped into trains'"
+   ]
+  },
+  {
+   "n": 19,
+   "title": "The last same-seed move, then the golden freeze",
+   "area": "tests/instruments",
+   "status": "chartered",
+   "gated": true,
+   "size": "XL",
+   "what": "Two waves must run in a fixed order. The first converts forty-nine pieces of cross-engine maths so the same seed produces the same world on every machine; it is declared the last wave allowed to move output. Only then may the golden corpus be widened and frozen, because nobody freezes a corpus they are about to move. The freeze itself needs seven cars that were built and never landed, and the act of freezing is yours to sign.",
+   "whyHere": "It is the hinge of the endgame: after the freeze, nothing that can move an output may land.",
+   "dependsOn": "every output-moving wave landed first; your signature on the freeze",
+   "records": [
+    "ODQ.part07 \u2014 \u00a7764.2/\u00a7764.3 (TRANS before GOLDEN, both before the soak), \u00a7873",
+    "ODQ.part09 \u2014 \u00a7898/\u00a7901/\u00a7904/\u00a7906/\u00a7908/\u00a7910 (the freeze waits on the owner's signature)",
+    "FRQ.part01 \u2014 \u00a7882.14.1 (seven GOLDEN cars unlanded, 197\u2013214 commits behind)"
+   ]
+  },
+  {
+   "n": 20,
+   "title": "The single trailing schema mint and the parity train",
+   "area": "tests/instruments",
+   "status": "chartered",
+   "gated": false,
+   "size": "M",
+   "what": "One deliberate mint of the observed-shape register runs after the very last content car, so that the whole run costs one mint rather than many; two further schema rungs are already spoken for by an exemption that was declared retired and never was, and by twenty-five keys that become visible the moment the default preset lights. The parity train then proves that hand-built and user-authored content behave identically.",
+   "whyHere": "It is the housekeeping the freeze depends on, and waiting is precisely what keeps it a single act.",
+   "dependsOn": "the last schema-bearing car of the released arc",
+   "records": [
+    "ODQ.part07 \u2014 \u00a7384.2, \u00a7467.1, \u00a7482.2 ('ONE trailing OSR mint')",
+    "ODQ.part09 \u2014 \u00a7900/\u00a7902 (the ninth exemption never retired; rung 19 and rung 20)",
+    "HANDOFF.part00 \u2014 \u00a7914\u2013\u00a7919 pickups (the parity train re-scoped to post-strip surfaces)"
+   ]
+  },
+  {
+   "n": 21,
+   "title": "The exhaustive review-and-fix phase",
+   "area": "docs/process",
+   "status": "chartered",
+   "gated": false,
+   "size": "XL",
+   "what": "You ordered a full systematic comprehension, review and fix of the whole estate between the last landing and the soak, and the chair runs its build half. Its cost was re-measured as far cheaper than feared. It is the natural home for the long tail of recorded-not-fixed defects and instrument gaps listed further down this chain.",
+   "whyHere": "The records fix it here: after everything lands and before anything is certified.",
+   "dependsOn": "the last landing",
+   "records": [
+    "ODQ.part09 \u2014 \u00a7879.6 (the owner's clauses 4\u20135), \u00a7881.4, \u00a7882.8 P0.4",
+    "HANDOFF.part01 \u2014 \u00a7879 card, 'the exhaustive review (\u00a7879.6)'",
+    "ODQ.part08 \u2014 \u00a7879 arc restatements"
+   ]
+  },
+  {
+   "n": 22,
+   "title": "The billed review keystroke",
+   "area": "launch/endgame",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "S",
+   "what": "A deep review pass exists that only you can trigger, and the chair cannot press it. It was deliberately re-sequenced to run after the dwellings work so that the review covers it, and before the endgame proper.",
+   "whyHere": "It is a one-keystroke owner act positioned by the records immediately before the walk.",
+   "dependsOn": "the review phase and the last landing",
+   "records": [
+    "ODQ.part03 \u2014 \u00a7464.4 and \u00a7482.2 (item 19 of the arc)",
+    "ODQ.part04 \u2014 \u00a7499.2 section H, \u00a7510.2 carve-out (4)",
+    "HANDOFF.part00 \u2014 the arc lines in the \u00a7894 and later pickups"
+   ]
+  },
+  {
+   "n": 23,
+   "title": "Your walk, and the one regeneration that rides with it",
+   "area": "launch/endgame",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "You walk the finished product yourself, and your eye outranks any green test suite; your corrections become rulings. Exactly one regeneration is sanctioned to ride with it, carrying a typed founding field, three hundred and thirty-eight reader-visible punctuation cures and a set of copy items that were deliberately left for your pen. The chair has flagged that the review corpus currently contains no settlement with a patron, so faith cannot be judged on the walk until that roster widens.",
+   "whyHere": "The records fix it here \u2014 the walk and one regeneration come before the terminal soak, always.",
+   "dependsOn": "the review phase; a review corpus that is not deity-free",
+   "records": [
+    "ODQ.part07 \u2014 \u00a7790.2 (the owner override: the walk precedes the review), \u00a7764.3",
+    "HANDOFF.part01 \u2014 \u00a7891/\u00a7892 cards, the owner's desk (the deity-free corpus)",
+    "START_HERE+ \u2014 \u00a73h, the endgame tail, steps 4 and 5"
+   ]
+  },
+  {
+   "n": 24,
+   "title": "The terminal soak",
+   "area": "launch/endgame",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "A long certification run on the exact shipping tree, re-priced from about thirty-five hours down to four or five hours of manual time on your machine. You accepted the price and parked it until the reconciliation passed. Two capacity cells ride with it \u2014 a re-run if any demographic value is retuned, and a two-seed grid, because one seed was found to move a headline figure by more than a third of its own window.",
+   "whyHere": "The records place it after the walk and the regeneration and before any tuning, and it is the hard stop the chair is ordered never to cross alone.",
+   "dependsOn": "the walk and the one regeneration",
+   "records": [
+    "ODQ.part09 \u2014 \u00a7907(d), \u00a7909(3), \u00a7911(b) and \u00a7911.1(b) ('ACCEPTED at the measured price')",
+    "ODQ.part09 \u2014 \u00a7911(c) CAP-10 and \u00a7911(d) CAP-11",
+    "HANDOFF.part00 \u2014 \u00a7911 pickup, 'SOAK-1 at the measured price'"
+   ]
+  },
+  {
+   "n": 25,
+   "title": "The tuning signature, last",
+   "area": "launch/endgame",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "Every tuned number in the estate waits for one signature from you, and the law is that nothing which can move an output may land after it. The docket is long and already written: a three-hundred-year population runaway, a register of seven rungs, nine constants that have never been minted and twelve more whose measurement basis must be re-checked, the seat channel strengths, the density bands, a terrain family that can never produce a cliff, and a hundred-odd rows in a sheet built for you to walk.",
+   "whyHere": "Tuning is last by your own constitutional rule, and a band signed against a tree that then moves is stale the moment it is signed.",
+   "dependsOn": "the terminal soak's evidence",
+   "records": [
+    "START_HERE+ \u2014 \u00a73h step 7 and 'THE LAW (chair-ruled, and it forces the order)'",
+    "ODQ.part10 \u2014 \u00a7912.3/\u00a7912.7 (the three numbers), SIGNED_CONSTANTS' nine unminted rows",
+    "ODQ.part05 \u2014 \u00a7647.1, \u00a7674.1, \u00a7677.1 (the re-verify-on-partition block)"
+   ]
+  },
+  {
+   "n": 26,
+   "title": "The identity pass, the scrub, then the push",
+   "area": "launch/endgame",
+   "status": "owner-gated",
+   "gated": true,
+   "size": "L",
+   "what": "After tuning come three closing acts in order: the visual identity build waves you sequenced after tuning, the cull and the history scrub that removes vendored exposure from the repository, and then the push and deploy \u2014 each push confirmed by you at the moment of the push. The beta launch follows, and it is also the acceptance panel, since the blind game-master panel was struck.",
+   "whyHere": "These are the last items in every version of the arc, and the push is permanently yours.",
+   "dependsOn": "the tuning signature",
+   "records": [
+    "ODQ.part03 \u2014 \u00a7482.2 ENDGAME row ('V5 / cull / IP scrub \u2192 push')",
+    "ODQ.part02 \u2014 \u00a7295.5d (the history scrub rides the push decision), \u00a7318.1/\u00a7362.4 (the V5 waves)",
+    "ODQ.part07 \u2014 \u00a7763.1 and \u00a7764.4 (the beta as the panel)"
+   ]
+  },
+  {
+   "n": 27,
+   "title": "The Scribe's remaining waves, as one area",
+   "area": "scribe",
+   "status": "chartered",
+   "gated": false,
+   "size": "L",
+   "what": "Grouped as one: a wave that makes eighty-eight of the card's field paths actually resolve on a settlement \u2014 today the card is seventy per cent blind and that is the largest single lever on quality; a wave that puts the rendered page back in front of the writer, which the last measurement showed would fix twenty-four of twenty-eight contradictions; a fourth measurement run; the live pilot once a key exists; then the surface wave and the tier proposal. The pilot's own numbers are what decide whether the Scribe ships at all.",
+   "whyHere": "It is the estate's second programme and it moves fastest once your five acts above are done, but none of it is launch-blocking on its own.",
+   "dependsOn": "the key, the migrations, the price and item 13",
+   "records": [
+    "HANDOFF.part00 \u2014 pickup 09-14 16:5x (RUN 3, W3c, W3d) and 10:1x",
+    "RESUME-NOTE.part01 \u2014 09-14 12:3x, 15:2x (the W3c brief), 16:5x",
+    "PLAN+MANUAL \u2014 DESIGN_SCRIBE \u00a711 (W3, W4, W5); brief-scribe-W3c"
+   ]
+  },
+  {
+   "n": 28,
+   "title": "The gate cannot go green",
+   "area": "build/tooling",
+   "status": "debt",
+   "gated": false,
+   "size": "L",
+   "what": "The full check chain cannot finish. Roughly three hundred and fifty type errors sit at the project level, fifteen lint-family tests fail from inherited debt, three lint errors stand in files nobody owns, the distribution check is over two size ceilings, and two large engine files sit at or above their line limits with one banked permanently. Several ratchets were frozen at today's debt so the gate could run at all, which turns the debt into a ledger to burn down rather than a wall.",
+   "whyHere": "Everything above eventually lands through this gate, and the review phase is the natural place to pay it down.",
+   "dependsOn": "nothing; several pieces are owned by no lane",
+   "records": [
+    "START_HERE+ \u2014 \u00a73k (the three step-14 failures; the frozen ratchets; 49 attributed failures)",
+    "ODQ.part00 \u2014 \u00a788.2 audit-zero inventory; ROADMAP.part00 \u2014 the domain strict ratchet (4,649 baseline)",
+    "RESUME-NOTE.part01 \u2014 09-14 14:1x (verify:dist red on both ceilings)"
+   ]
+  },
+  {
+   "n": 29,
+   "title": "The instrument estate's own debt",
+   "area": "tests/instruments",
+   "status": "debt",
+   "gated": false,
+   "size": "L",
+   "what": "The tools that check the work have their own faults, several of them serious: a known-failure census sitting full at ten of ten with no headroom, so no new test can be added without curing an old one; five test suites red at the rewrite dock since its earliest cars; a ratchet that reports the wrong time budget and sent one diagnosis chasing a ghost; a commit tool with no guard against building from a stale copy of its own ledger; a measurement script blind to a fifth of the corpus; and a register that charges a debt for the exact hygiene act it exists to encourage.",
+   "whyHere": "These distort every measurement above them, so they belong before the review rather than inside it.",
+   "dependsOn": "nothing; the census headroom gates several other rows",
+   "records": [
+    "ODQ.part08 \u2014 \u00a7883.7 ('the banked known-failure census is at 10/10 with ZERO HEADROOM')",
+    "PLAN+MANUAL \u2014 REWRITE_RECUT_PROGRAM_PLAN, 'THE INSTRUMENT DEBT' (five red suites)",
+    "ODQ.part09 \u2014 \u00a7885 (the budget misreport), \u00a7883.5(c) (the missing prefix gate), \u00a7883.8 (the register's rule question)"
+   ]
+  },
+  {
+   "n": 30,
+   "title": "The reader-without-writer repairs and the blocked whole-tree scan",
+   "area": "tests/instruments",
+   "status": "owed",
+   "gated": false,
+   "size": "L",
+   "what": "Twenty-one confirmed cases remain where the product reads a field nothing ever writes \u2014 a class that produces quietly wrong pages rather than crashes. The scanner that finds them cannot be run over the whole repository: it dies partway through, and the repair around one canonical identity is authorised but unbuilt. Until that lands, no baseline or golden may move, and the freeze ruling that would release them is explicitly yours.",
+   "whyHere": "It is a measured defect class with a written cure and a clear blocker, and it also holds a schema freeze hostage.",
+   "dependsOn": "the unified-identity scanner repair; then your freeze ruling",
+   "records": [
+    "START_HERE+ \u2014 \u00a73k (118 findings with no status; the 21 remaining repairs)",
+    "FVQ.part02 \u2014 'S12-OSR-FP' resume order steps 5\u201310 and the freeze-ruling docket",
+    "ODQ.part09 \u2014 \u00a7900/\u00a7902 (the exemptions and the rungs)"
+   ]
+  },
+  {
+   "n": 31,
+   "title": "The dossier corpus's dark half \u2014 the wiring and authoring backlog",
+   "area": "corpus-prose",
+   "status": "deferred",
+   "gated": false,
+   "size": "XL",
+   "what": "Of sixty-eight blocks of dossier prose, sixty-four are unmounted and six hundred and eighty-one pools never reach a reader; five hundred and ninety-one census rows resolve to no source; two hundred and seventy-four routed tokens have no pool at all; four hundred and forty-eight authored variants sit in blocks nothing mounts; and one module of two hundred and ten thousand bytes has no consumers while carrying fifty-seven families that can print a neighbour's history as this town's. Roughly three quarters of a megabyte of authored corpus is in no build.",
+   "whyHere": "This is the wiring and authoring backlog that rides behind the banked rewrite, and it is the largest measured content gap in the estate.",
+   "dependsOn": "the banked rewrite; the authoring wave you chartered after it",
+   "records": [
+    "ODQ.part10 \u2014 \u00a7916 car 5b (the holder census: 114 licensed, 591 source-unresolved)",
+    "RESUME-NOTE.part01 \u2014 09-14 (the DESK re-scope: 64 blocks / 681 pools dark; causalDossierProse)",
+    "ODQ.part10 \u2014 \u00a7912.1 (the authoring wave chartered), \u00a7914 (448 variants in fifteen unmounted blocks)"
+   ]
+  },
+  {
+   "n": 32,
+   "title": "The declared engine family waves \u2014 the biggest unbuilt block",
+   "area": "engine",
+   "status": "chartered",
+   "gated": true,
+   "size": "XL",
+   "what": "The measured census is a hundred and thirteen declared waves across thirteen families \u2014 war circulation, wayfare, epochs, habits, espionage, trade, faith, populations, interiors, grammar, information, couplings and logistics. Eleven have landed whole and two are part-built, leaving about a hundred and two. Three owner gates stand inside them: a persisted-field batch that blocks one family from its sixth wave onward, an unsigned cargo field another family hard-gates on, and two persisted habit fields.",
+   "whyHere": "It is the largest single body of declared work in the estate and it cannot be read as small; its own gates are yours.",
+   "dependsOn": "a serial dependency spine; the three owner gates named above",
+   "records": [
+    "START_HERE+ \u2014 \u00a73j ('11 whole landed \u2192 102 REMAINING, two of them PART-BUILT')",
+    "SOL_QUEUE+FIRST_CONTACT \u2014 \u00a71 Lane A rows 11\u201318d (the eight FP volumes and the five amendment volumes)",
+    "START_HERE+ \u2014 the 2026-08-07 fold, 'LANDING IS NOT SEALING' (CR-WC-9, WY F9, EP \u00a77a, HB Q1)"
+   ]
+  },
+  {
+   "n": 33,
+   "title": "The logistics and vessel family",
+   "area": "engine",
+   "status": "chartered",
+   "gated": true,
+   "size": "XL",
+   "what": "A whole chartered capability that has never been built: teleportation circles with relays, airships, a unified vessel pool with fleet bounds and rebuild timers, cargo asymmetry, news carriage, rescue exceptions, envoy vessels, caravan cover, confiscation, siege lockdown and roaming captivity. It carries two flags, dark by construction, and a declared widening of saved data. One directive inside it \u2014 whether wartime military use preempts trade use of limited capacity \u2014 was asked of you and never answered.",
+   "whyHere": "Separated from the other families because it is a new capability rather than a completion, and because it has its own unanswered question.",
+   "dependsOn": "a population wave precedes several of its members; a band-walker prefix precedes any of its bands",
+   "records": [
+    "ODQ.part00 \u2014 \u00a746 with \u00a746a/b/c and \u00a7125's five directives",
+    "ODQ.part00 \u2014 \u00a7125.1 (the wartime-preemption question asked of the owner)",
+    "ODQ.part00 \u2014 \u00a749, \u00a792.3, \u00a799.3 (the ordering constraints)"
+   ]
+  },
+  {
+   "n": 34,
+   "title": "The political, economic and heraldic programmes",
+   "area": "engine",
+   "status": "chartered",
+   "gated": true,
+   "size": "XL",
+   "what": "Several designed programmes stand sealed and unbuilt: a treasury layer blocked on two questions you have not answered, an eight-car political layer queued behind it, a display-plane legibility wave, two operations cars, a roughly twenty-one-car reconciliation of the realm map generator, the remainder of the chance-encounters work including a season cap that locks out the whole world instead of one person, and a generative heraldry programme whose design is complete and whose build never started.",
+   "whyHere": "Each is architected, priced and stopped \u2014 mostly on a single owner row apiece, which is why they cluster here rather than deeper down.",
+   "dependsOn": "the treasury questions; a shared governing resolver; the encounters drift door",
+   "records": [
+    "ODQ.part06 \u2014 \u00a7731/\u00a7733/\u00a7737 (W-COIN), \u00a7735/\u00a7741/\u00a7744/\u00a7746 (W-SEAT), \u00a7730.3 (W-DESK), \u00a7727\u2013\u00a7729 (the WEAVE)",
+    "ODQ.part08 \u2014 \u00a7881.10\u2013\u00a7881.13 and \u00a7882.10 (the encounters programme, build-ready)",
+    "ODQ.part08 \u2014 \u00a7879.11 R2 and \u00a7880.5 (W-ARMS designed, Car 0's six owed measurements)"
+   ]
+  },
+  {
+   "n": 35,
+   "title": "The post-launch map module, under its own licence",
+   "area": "generation",
+   "status": "deferred",
+   "gated": true,
+   "size": "XL",
+   "what": "You moved the entire settlement-map programme out of the launch path and into a separately licensed module: the dwellings programme of forty-two cars, the art-direction programme of seventeen, interiors, the undercity train, the cover refresh and two coupled cars. It carries real unfinished questions \u2014 the framing trade that crops the decline register off sixteen of eighteen pages, a parked enclosure operator, and a capacity figure over-stated by roughly three and a half times. Before any public release it owes a licence file, published source, a scrub list and a counsel review.",
+   "whyHere": "It is the one bucket you have explicitly deferred past launch, so it sits low, but its compliance floor is real work with your name on it.",
+   "dependsOn": "the launch shipping; counsel's review before any public push",
+   "records": [
+    "ODQ.part06 \u2014 \u00a7724.4/\u00a7724.6, \u00a7739.1, \u00a7740.1 (the descope and what travels with it)",
+    "ODQ.part06 \u2014 \u00a7710.4/\u00a7715.2/\u00a7716.1 (the framing trade), \u00a7719.5 (the enclosure operator), \u00a7721.5 (the capacity over-statement)",
+    "ODQ.part04 \u2014 \u00a7502.4/\u00a7546.1 (DW's 41\u201342 cars), \u00a7526.1 (the AD programme)"
+   ]
+  },
+  {
+   "n": 36,
+   "title": "The security work that is written down but not executed",
+   "area": "security",
+   "status": "owed",
+   "gated": false,
+   "size": "L",
+   "what": "Several of the estate's security claims are checked by reading source text with patterns rather than by running anything: row-level policy, gallery privacy, admin escalation, webhook idempotency and save limits. A shared logger that scrubs emails and addresses was designed and never built, and the guard that would fail the build if raw personal data returned to a log was never added. Separately, a register of a hundred and eighteen findings has never been triaged row by row \u2014 only the fifteen most severe were re-verified, months ago.",
+   "whyHere": "It is the highest-stakes body of unexecuted verification in the estate and it belongs to the review phase.",
+   "dependsOn": "one shared test harness, coordinated between the backend and testing lanes",
+   "records": [
+    "ROADMAP.part00 \u2014 enforcement.6 and Track F (the grep-only contract suites)",
+    "ROADMAP.part01 \u2014 backend.1/backend.2/backend.3 (the plaintext email, the shared logger, the CI guard)",
+    "START_HERE+ \u2014 \u00a73k ('118 findings carry no remediation status, not 9')"
+   ]
+  },
+  {
+   "n": 37,
+   "title": "The engineering-quality tracks nobody has started",
+   "area": "build/tooling",
+   "status": "chartered",
+   "gated": false,
+   "size": "L",
+   "what": "An older quality programme still carries whole untouched tracks: resilience work on the analytics and edge layer, the backend security execution tests, screen-and-print parity for the dossier, simulation evaluation fixtures, AI output evaluations and drift tracking, and three architecture steps \u2014 a single action-result envelope, one unified receipt type and a durable outbox. Beside them sit unstarted continuous-integration performance budgets, five missing end-to-end user journeys and three large components never decomposed.",
+   "whyHere": "Real engineering value, no launch dependency, and the natural backlog for the period after the push.",
+   "dependsOn": "nothing",
+   "records": [
+    "ROADMAP.part00 \u2014 the 18-point disposition (rows 2, 3, 4, 9, 12, 13, 16, 18) and Phase 2 Tracks I, J, K",
+    "ROADMAP.part01 \u2014 Track E, F, G sections; components-core.2 and .8",
+    "ROADMAP.part00 \u2014 Track C's three remaining extra-large components"
+   ]
+  },
+  {
+   "n": 38,
+   "title": "The landing page and first-contact ladder",
+   "area": "display/UI",
+   "status": "owed",
+   "gated": false,
+   "size": "L",
+   "what": "A ladder of eleven ordered landing items has three built and the rest open: the living miniature that would show the real dossier on the landing page, a second ribbon, the herald miniature, the navigation dropdowns, a popup scope law with a live bug, two deletions and a scroll fix, consent defaults and a reset-on-self-click rule. The real gate is not design but a size ceiling: two files sit at a zero-tolerance limit, so any item that adds a line to them fails the build unless it pays for itself first. Alongside sits a small rename cluster where the product still says \"AI\" against your own voice rules, and about twenty-two wording proposals.",
+   "whyHere": "It is the first thing a new visitor sees, it is cheap relative to the engine work, and its blocker is known and nameable.",
+   "dependsOn": "a decomposition or net-zero surgery on one large component",
+   "records": [
+    "SOL_QUEUE+FIRST_CONTACT \u2014 the LD ladder build-state table (measured 2026-08-03) and the size-ratchet note",
+    "SOL_QUEUE+FIRST_CONTACT \u2014 LD-1, LD-3b, LD-4, LD-5, LD-7, LD-8, LD-10, LD-11 sections",
+    "SOL_QUEUE+FIRST_CONTACT \u2014 'Priority: residual AI language' and the per-page polish proposals"
+   ]
+  },
+  {
+   "n": 39,
+   "title": "The relationship chronicle surface, and the chronicle's deploy",
+   "area": "display/UI",
+   "status": "owed",
+   "gated": false,
+   "size": "M",
+   "what": "One phase of the world-pulse work is genuinely unfinished: the history of what an alliance survived and who a character betrayed is captured in the data but no screen reads it. The related AI chronicle function exists in the repository with its client hook and credit cost, but deploying an edge function is your act, so the deployed half may still be outstanding.",
+   "whyHere": "A small, well-understood piece of visible value with no dependencies and a clear boundary.",
+   "dependsOn": "a screen; the edge function's deploy is yours",
+   "records": [
+    "START_HERE+ \u2014 world-pulse-roadmap, the 2026-06-11 status refresh ('Genuinely remaining: Phase 4d')",
+    "START_HERE+ \u2014 world-pulse-roadmap \u00a74a and \u00a74d"
+   ]
+  },
+  {
+   "n": 40,
+   "title": "Engine defects recorded and deliberately not fixed",
+   "area": "engine",
+   "status": "debt",
+   "gated": false,
+   "size": "L",
+   "what": "A long list of measured, shipped defects was written down rather than cured, usually because the fix would move output and needed a signature. Examples: a town's age is frozen at generation so a roll that should change every advance never does; a services field is empty on every generated town; a port's nature reaches the map and never the roster, so no settlement can earn a dock; a repair pass silently deletes institutions without a receipt; a razing-spoils system reads a value nothing writes, so there is never anything in the ash. Eighteen further defects were found by asking an efficiency question and are ordered by what each costs a reader.",
+   "whyHere": "These are real product faults with owners named and cures priced; the review phase is where they are meant to be paid.",
+   "dependsOn": "mostly a declared output shift, which rides the one regeneration",
+   "records": [
+    "RESUME-NOTE.part01 \u2014 09-14 06:3x/08:0x (history.age frozen); ODQ.part10 \u00a7912.7 (services empty)",
+    "ODQ.part06 \u2014 \u00a7708.4 (the forcePort ordering), \u00a7708.7 (the mis-keyed catalogue)",
+    "PLAN+MANUAL \u2014 'THE DARK-POOL CAR' and the eighteen defects ordered by reader cost; ODQ.part06 \u00a7733.2 (the inert spoils)"
+   ]
+  },
+  {
+   "n": 41,
+   "title": "The voice guard's blind spot and the shipped prose debts",
+   "area": "corpus-prose",
+   "status": "debt",
+   "gated": false,
+   "size": "M",
+   "what": "The rule that removes a particular punctuation mark from reader prose only scans two directories; a third holds four hundred and ninety-six instances, sixteen of which are genuine reader-facing sentences in two whole prose generators this programme has no writer or checker for. Twenty-seven further instances are exact twins of shipping strings and must be cured on both sides in one act. Two suites carry inherited failures that have been red for weeks.",
+   "whyHere": "It is small, it is visible to readers, and it is the piece of prose work that is not part of the banked rewrite.",
+   "dependsOn": "the ratchet's scan widened by a named allowlist, never a path exemption",
+   "records": [
+    "RESUME-NOTE.part01 \u2014 09-14, 'the voice ratchet's blind spot' and the sixteen prose sentences",
+    "ODQ.part07 \u2014 \u00a7888 (the 27 refused annex marks, byte-twins of shipping literals)",
+    "PLAN+MANUAL \u2014 REWRITE_RECUT_PROGRAM_PLAN, 'Owner-gated' (the sixteen as a shrink-only debt)"
+   ]
+  },
+  {
+   "n": 42,
+   "title": "The record's own housekeeping",
+   "area": "docs/process",
+   "status": "owed",
+   "gated": false,
+   "size": "M",
+   "what": "The programme's paperwork carries its own debts: a sweep of every standing deferral on the launch path that you ordered and that has never been run; a memory index over its size ceiling with folds owed; three copies of one queue on disk, two of them stale; a numbered ledger section that was never written so every citation of it points at nothing; and a two-hundred-and-forty-five-section span that no sweep has ever read.",
+   "whyHere": "Low value on its own, but it is what makes every list above trustworthy, and the deferral sweep is your own standing order.",
+   "dependsOn": "nothing",
+   "records": [
+    "ODQ.part07 \u2014 \u00a7764.4/\u00a7764.5 (the owner addendum: nothing emergent deferred past launch)",
+    "ODQ.part09 \u2014 \u00a7883.5(c) (three copies, two stale); ODQ.part05 \u00a7685.5(vi) (the ledger hole)",
+    "ODQ.part05 \u2014 \u00a7693.9 ('the surface no sweep covered', \u00a7440\u2013\u00a7684)"
+   ]
+  },
+  {
+   "n": 43,
+   "title": "The dead-code and disposition residue",
+   "area": "build/tooling",
+   "status": "open-decision",
+   "gated": false,
+   "size": "S",
+   "what": "Four files were kept rather than deleted because each needs a decision rather than a judgment: a pricing-moment hook on a paid surface, a counterfactual projection whose mounting would be a new capability, a map profile used only as a test oracle, and a classification vocabulary that may be a governance reference. A ratchet that would stop new orphan modules appearing was deliberately not built until those four are ruled.",
+   "whyHere": "Last because it is the smallest item on the list, but it is genuinely blocked on four one-line answers.",
+   "dependsOn": "four per-file rulings, then the ratchet",
+   "records": [
+    "START_HERE+ \u2014 DEAD_CODE_DISPOSITION \u00a71/\u00a72/\u00a73 (usePricingMoment, counterfactual, mapProfile, categoryVocabulary)",
+    "START_HERE+ \u2014 DEAD_CODE_DISPOSITION, 'Suggested follow-up: the only-shrinks inventory ratchet'"
+   ]
+  }
+ ],
+ "counts": {
+  "raw": 1875,
+  "distinct": 58,
+  "ownerGated": 23,
+  "likelyDone": 15
+ },
+ "likelyDone": [
+  {
+   "title": "The clarity line-edit across all five shipped corpus leaves",
+   "evidence": "The memory index's start row and the plan's Progress block record all five leaves cut, reader-audited, chair-cured, every instrument green and each sealed to its own preserve ref (defense, power, war-and-faith, general, economy-and-stressors)."
+  },
+  {
+   "title": "The prose window \u2014 1,001 cured reader sentences across 200 paths",
+   "evidence": "Carried for five successive pickups as an owner's-desk row, then landed at \u00a7898 with its rebase and a declared same-seed shift ('THE PROSE CONSIST LANDS')."
+  },
+  {
+   "title": "The twelve mutilated section anchors",
+   "evidence": "Held as owner-gated behind a wiring note across four landings, then proven to be a lane note rather than an owner ruling, taken at \u00a7893 and landed at \u00a7897 (2a7550741) with authored canonicals."
+  },
+  {
+   "title": "The wall-clock leak in the news layer and its five siblings",
+   "evidence": "Recorded as a pre-freeze deferral for four landings, then 'cured at cause' at \u00a7888 and extended to all twenty outstanding threading sites at \u00a7890.2."
+  },
+  {
+   "title": "The nine unwritten Herald sentences for the encounters wave",
+   "evidence": "Stopped the wave before its first byte for several cards, then taken under the amended carve-out at \u00a7893 as chair-drafted (the pen's to overwrite) and landed at \u00a7899 in nine cars."
+  },
+  {
+   "title": "The clamp consolidation programme",
+   "evidence": "Recorded as waves 2\u20134 against a ceiling of 62 with one reserved ruling, then reported 'the clamp program is CLOSED' at \u00a7899."
+  },
+  {
+   "title": "The dossier desk consist",
+   "evidence": "Queued as thirteen docks with a full owed list, then landed at \u00a7900 as one consist with the register acts taken."
+  },
+  {
+   "title": "The lighting wave",
+   "evidence": "Chartered at \u00a7882.1 and carried in every arc line; \u00a7901 and \u00a7906 report it complete in every part the owner has not gated, with only the named owner rows outstanding."
+  },
+  {
+   "title": "The eight sealed cars waiting behind a landing at \u00a7888",
+   "evidence": "\u00a7889 lands fifteen cars and describes itself as 'every sealed car in the program, composed into one train'."
+  },
+  {
+   "title": "The legacy map strip (waves 1 and 3) and the map descope itself",
+   "evidence": "\u00a7725 records the six-wave strip charter under your descope order; \u00a7747 records STRIP-1 and STRIP-3 landed at a named tip, and later records treat the settlement map as removed and module-side."
+  },
+  {
+   "title": "The two capacity measurement lanes (the horizon pass and the 600-year cell)",
+   "evidence": "Carried as queued implementation slots across four pickups, then both completed with receipts \u2014 including the measurement that re-priced the terminal soak from ~35 h to ~4\u20135 h."
+  },
+  {
+   "title": "The world-pulse phases other than the chronicle surface",
+   "evidence": "The roadmap's own 2026-06-11 status refresh states every phase is implemented, wired and tested green except 4d, and instructs readers to trust the refresh over the stale [next] markers in the section bodies."
+  },
+  {
+   "title": "Phase 0 and Phase 1 of the engineering quality roadmap, including the CI hard gate",
+   "evidence": "Both phases are marked COMPLETE with their items enumerated (P1.1\u2013P1.9), and the CI gate is the first bullet of the completed Phase 0."
+  },
+  {
+   "title": "The grand prose reconciliation (S12)",
+   "evidence": "\u00a7912 records it landed: ninety-one Part B rules reconciled, the dossier ratified as corrected, with only the three numbers, the signatures and the named breaches left as owner rows."
+  },
+  {
+   "title": "The instruments, measure, seam and lighting trains",
+   "evidence": "Landed in sequence as ledger sections \u00a7914 through \u00a7917, each with its cars, registers and receipts recorded; the pickups afterwards move on to the next trains."
+  }
+ ],
+ "summary": "You asked what the long tail actually is. Twenty-nine readers pulled roughly 1,875 rows out of the estate's own records \u2014 eleven parts of the owner decision queue, two validation queues, the roadmap, the handoff cards, five parts of the chair's diary, the rewrite plan and the Scribe design. Most of those rows are the same work written down many times over, so after merging duplicates and dropping what a later record shows finished, the real list is 58 items: 43 still open and 15 that are already done and can be struck. The prose rewrite is not in that 43 \u2014 it is banked on your word, and the chair's own note is that \"until the rewrite is finished\" has become the release condition for the free and paid tiers, so banking it is a real decision and not a shelving. Of the 43, twenty-three are yours and nobody else's, and that is the honest headline: the largest blocker in this estate is not unbuilt code, it is unanswered questions. Five of them are a single afternoon's work on the Scribe \u2014 a key, a database push, a price, one ruling and a flag \u2014 and they unlock a whole finished feature that has never once called a model. Three more are heavier and older: the legal sitting that nothing can launch without, the production deploy that is seventy-eight migrations and a month behind with one migration that deletes real users' content at push time, and an eighteen-item batch assembled for you months ago that still sits unanswered. I have put your decisions first because almost everything under them is built, priced and waiting; then the launch-critical endgame in exactly the order the records themselves fix \u2014 the money path with the webhook before any refund, the display trains, the last output-moving wave before the golden freeze, the review, your keystroke, your walk with one regeneration, the soak, the tuning signature last, then the push; then the rest by dependency and value, with the biggest single body of unbuilt work \u2014 about a hundred and two declared engine waves \u2014 sitting where its own gates put it. Two honest cautions. The first is that the hundred-and-two figure is the estate's own measurement and it is large; nothing in this chain makes it smaller, and it is the item most likely to decide how long the tail really is. The second is that a great deal of the last two months of judgment was made on a model seat you asked to be re-checked later, and that re-check only starts when you call it \u2014 roughly a hundred and thirty sections whose authorship cannot now be recovered, plus a hundred and forty-seven unruled rows in the older queue. It blocks nothing, but it grows every day the programme runs, and three cases have already been found where something reported closed rests on ground that was never validated.",
+ "validationState": "Two queues exist and neither reports itself empty. The older one, the Fable validation queue opened 2026-07-31, had exactly one validation pass: thirty-three rows ruled on 2026-08-01 (twenty-six confirmed, six adjusted, no engineering reversals), after which forty-eight newer rows were added carrying a vetoable-veto column and no verdict at all; a later count puts the whole file at a hundred and fifty-one data rows of which a hundred and forty-seven carry no status marker, and everything below its 2026-08-10 exhaustion boundary \u2014 thirty-eight Opus-era rows \u2014 is still stamped owed. The newer retrovalidation queue, re-armed by your order at \u00a7685, has had one substantial sitting: forty-three rows ruled at \u00a7892 and twenty-eight more at \u00a7896.1, but that sitting closed partial \u2014 its completeness critic never ran and eight calls stay labelled evidence-thin rather than confirmed. Everything enrolled since is \"enrolled, not ruled\", and the historical strata \u2014 the dark window of about a hundred and eighteen unmarked sections, the \u00a7687\u2013\u00a7723 run, and three cases where a closure rests on an unvalidated ruling \u2014 stay queued at your trigger. The chair has written the protocol, the provenance map and the priority strata; it will not start the pass, and it cannot: a chair re-reading its own reading is circular, which is precisely why three of the widest standing grants are named as yours to re-read rather than anyone's to re-derive."
+}
