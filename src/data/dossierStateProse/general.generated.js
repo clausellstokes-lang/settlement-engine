@@ -677,7 +677,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} has lost a substantial share of itself across the last stretch of the record; the trend is unambiguous and the reason is not.",
+          "text": "{settlement} has lost a substantial share of itself across the last stretch of the record. The trend is unambiguous and the reason is not.",
           "slots": [
             "settlement"
           ],
@@ -701,7 +701,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The town has been getting smaller. Not sharply; the kind of decline you only see by comparing years.",
+          "text": "The town has been getting smaller. Not sharply. The kind of decline you only see by comparing years.",
           "slots": [],
           "vid": 2
         },
@@ -745,13 +745,13 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has been adding people across the window. It is not a boom; it is the ordinary accumulation of a place that works.",
+          "text": "The town has been adding people across the window. It is not a boom. It is the ordinary accumulation of a place that works.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "Numbers here have been rising gently. The town has begun building again, which is usually the first honest sign.",
+          "text": "Numbers here have been rising gently. The town has begun building again. That is usually the first honest sign.",
           "slots": [],
           "vid": 3
         }
@@ -759,7 +759,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "BAND +2: has been swelling": [
         {
           "angle": "unfolding",
-          "text": "{settlement} has been swelling over the recent readings. The growth has outrun the town's arrangements, and the arrangements are visibly behind.",
+          "text": "{settlement} has been swelling over the recent readings. The growth has outrun the town's arrangements. The arrangements are visibly behind.",
           "slots": [
             "settlement"
           ],
@@ -789,7 +789,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} has not been measured often enough to have a shape yet. The population is what it is; whether it is moving is unknown.",
+          "text": "{settlement} has not been measured often enough to have a shape yet. The population is what it is. Whether it is moving is unknown.",
           "slots": [
             "settlement"
           ],
@@ -811,13 +811,13 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The net movement is dozens either way; the town's shape is the same, and its edges have shifted.",
+          "text": "The net movement is dozens either way. The town's shape is unchanged, and its edges have shifted.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "elder",
-          "text": "The window's net change amounts to many hundreds, which is a different settlement rather than a fluctuating one.",
+          "text": "The window's net change amounts to many hundreds. That is a different settlement rather than a fluctuating one.",
           "slots": [],
           "vid": 3
         }
@@ -8420,7 +8420,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RISING-OPEN": [
         {
           "angle": "ledger",
-          "text": "{settlement} is getting larger and can be reached without much deciding; the roll and the approaches agree with one another, and the town has to plan for both at once.",
+          "text": "{settlement} is getting larger and can be reached without much deciding. The roll and the approaches agree with one another. The town has to plan for both at once.",
           "slots": [
             "settlement"
           ],
@@ -8428,7 +8428,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Arriving at {settlement} is easy, and there are more people here than the older rolls describe; the town has not had to be sought out in order to fill.",
+          "text": "Arriving at {settlement} is easy. There are more people here than the older rolls describe. The town has not had to be sought out in order to fill.",
           "slots": [
             "settlement"
           ],
@@ -8436,7 +8436,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} stands open to its approaches and is plainly carrying more than it used to, which is the ordinary condition of a place that is convenient.",
+          "text": "{settlement} stands open to its approaches and is plainly carrying more than it used to. That is the ordinary condition of a place that is convenient.",
           "slots": [
             "settlement"
           ],
@@ -8446,7 +8446,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RISING-NARROW": [
         {
           "angle": "ledger",
-          "text": "{settlement} is growing at the end of a hard approach; whatever the town has been gaining, it has not been gaining it by being easy to get to.",
+          "text": "{settlement} is growing at the end of a hard approach. Whatever the town has been gaining, it has not been gaining it by being easy to get to.",
           "slots": [
             "settlement"
           ],
@@ -8454,7 +8454,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "For a place this troublesome to reach, {settlement} is remarkably full, and the difficulty of arriving is the measure of what the arriving is worth.",
+          "text": "For a place this troublesome to reach, {settlement} is remarkably full. The difficulty of arriving measures what the arriving is worth.",
           "slots": [
             "settlement"
           ],
@@ -8462,7 +8462,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} has every structural excuse to be shrinking and is not: the ways in are poor, the country is long, and the roll rises regardless.",
+          "text": "{settlement} has every structural excuse to be shrinking and is not. The ways in are poor, the country is long, and the roll rises regardless.",
           "slots": [
             "settlement"
           ],
@@ -8472,7 +8472,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEVEL": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s roll holds where it is, and the approaches neither fill the town nor drain it; the arrangement is steady in both respects at once.",
+          "text": "{settlement}'s roll holds where it is, and the approaches neither fill the town nor drain it. The arrangement is steady in both respects at once.",
           "slots": [
             "settlement"
           ],
@@ -8480,7 +8480,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "{settlement} is the size it has been, and the ways in and out have not moved it in either direction.",
+          "text": "{settlement} is the size it has been. The ways in and out have not moved it in either direction.",
           "slots": [
             "settlement"
           ],
@@ -8490,7 +8490,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FALLING-OPEN": [
         {
           "angle": "ledger",
-          "text": "{settlement} is getting smaller, and it is not for want of a way in; the approaches are open and the roll falls beside them.",
+          "text": "{settlement} is getting smaller. It is not for want of a way in. The approaches are open and the roll falls beside them.",
           "slots": [
             "settlement"
           ],
@@ -8498,7 +8498,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Reaching {settlement} is easy and remaining is evidently the harder part, since the roads that would bring people would carry them out just as readily.",
+          "text": "Reaching {settlement} is easy. Remaining is evidently the harder part, since the roads that would bring people would carry them out just as readily.",
           "slots": [
             "settlement"
           ],
@@ -8506,7 +8506,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is well approached and thinner than it was, and the two facts sit uncomfortably beside one another.",
+          "text": "{settlement} is well approached and thinner than it was. The two facts sit uncomfortably beside one another.",
           "slots": [
             "settlement"
           ],
@@ -8516,7 +8516,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FALLING-NARROW": [
         {
           "angle": "ledger",
-          "text": "{settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.",
+          "text": "{settlement} is losing what it had and is hard to reach. A town in that position gets smaller quietly, without anyone outside marking the stages.",
           "slots": [
             "settlement"
           ],
@@ -8524,7 +8524,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.",
+          "text": "The ways into {settlement} were always poor and the town was always small enough to carry that. It is smaller now, and the poor ways make the smallness harder to answer.",
           "slots": [
             "settlement"
           ],

@@ -5572,12 +5572,12 @@ variant explaining *why* the town is thinning would be inventing history.
 
 **BAND −2: `has been emptying`**
 1. `[ledger]` The town has been emptying over the recent readings, not all at once, and not from any single cause visible from here.
-2. `[visitor]` {settlement} has lost a substantial share of itself across the last stretch of the record; the trend is unambiguous and the reason is not.
+2. `[visitor]` {settlement} has lost a substantial share of itself across the last stretch of the record. The trend is unambiguous and the reason is not.
 3. `[elder]` The population has fallen hard over the recent window. Whatever the town is now, it is not what the older rolls describe.
 
 **BAND −1: `has been thinning`**
 1. `[ledger]` {settlement} has been thinning over the recent readings, steadily, mildly, and with nothing in particular to point at.
-2. `[elder]` The town has been getting smaller. Not sharply; the kind of decline you only see by comparing years.
+2. `[elder]` The town has been getting smaller. Not sharply. The kind of decline you only see by comparing years.
 3. `[threshold]` Numbers have been slipping over the recent window. It is the sort of trend that is easy to argue about and hard to reverse.
 
 **BAND 0: `has held level`** · **THE GOOD STATE (R-DST-G)**
@@ -5587,23 +5587,23 @@ variant explaining *why* the town is thinning would be inventing history.
 
 **BAND +1: `has been growing`** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` {settlement} has been growing steadily over the recent readings, modestly, and consistently enough to plan around.
-2. `[street]` The town has been adding people across the window. It is not a boom; it is the ordinary accumulation of a place that works.
-3. `[visitor]` Numbers here have been rising gently. The town has begun building again, which is usually the first honest sign.
+2. `[street]` The town has been adding people across the window. It is not a boom. It is the ordinary accumulation of a place that works.
+3. `[visitor]` Numbers here have been rising gently. The town has begun building again. That is usually the first honest sign.
 
 **BAND +2: `has been swelling`**
-1. `[unfolding]` {settlement} has been swelling over the recent readings. The growth has outrun the town's arrangements, and the arrangements are visibly behind.
+1. `[unfolding]` {settlement} has been swelling over the recent readings. The growth has outrun the town's arrangements. The arrangements are visibly behind.
 2. `[counterforce]` The town has gained a large share of itself in a short stretch of the record. Housing, water and order are all being asked for more than they were built to give.
 3. `[visitor]` Population here has climbed sharply. Whatever is drawing people, it is drawing them faster than {settlement} is absorbing them.
 
 **WINDOW under two readings** — **NO TREND CLAIM IS LAWFUL HERE**
 1. `[ledger]` The record is too short to say anything about the town's direction. What exists is a count, not a trend.
-2. `[visitor]` {settlement} has not been measured often enough to have a shape yet. The population is what it is; whether it is moving is unknown.
+2. `[visitor]` {settlement} has not been measured often enough to have a shape yet. The population is what it is. Whether it is moving is unknown.
 3. `[threshold]` There is no trend here, only a first reading. The town's direction is a question the record has not been kept long enough to answer.
 
 **NET MAGNITUDE, banded** (the digit-free form of the lens's raw net clause)
 1. `[ledger]` The change across the window runs to several hundred, enough that the town's own estimate and the realm's have come apart.
-2. `[visitor]` The net movement is dozens either way; the town's shape is the same, and its edges have shifted.
-3. `[elder]` The window's net change amounts to many hundreds, which is a different settlement rather than a fluctuating one.
+2. `[visitor]` The net movement is dozens either way. The town's shape is unchanged, and its edges have shifted.
+3. `[elder]` The window's net change amounts to many hundreds. That is a different settlement rather than a fluctuating one.
 
 ---
 
@@ -6653,27 +6653,27 @@ compass word, no real-world place, no named analogy.*
 **PROVENANCE:** **THIS BLOCK HAS NO CAUSE POOL, AND THE ABSENCE IS THE DESIGN.** `R-DST-B` rules that a configuration field licenses structure and never history; `DS-POP-2` rules that the band carries no provenance; `DS-POP-1` holds the migration ledger and the demographic receipt, which are the only fields in the estate that license a clause about why the roll moved, and it reads "the movement that produced it" already. What is left, and what is genuinely unowned, is the JOIN: a town's direction of travel means something different at the end of an easy road than at the end of a hard one, and that difference is entailed by the two standing fields alone. A narrow approach makes arrival costly, so arrival at a narrow-approach town is deliberate; an open approach makes arrival cheap, so an open-approach town's direction is not evidence of anything having been chosen. Not one variant below says where a person came from, where one went, or why. `R-DST-A`: `DS-POP-2` is the LADDER for this fact and `DS-POP-1` the movement SURFACE; this block is the why-frame for the pairing alone and composes BESIDE them, never over the same cell. In practice the pairing question is presently moot, since `DS-POP-2` is marked NO SURFACE and the dossier has no population-trend surface at all; when one lands, a composer draws at most one of the three. `R-DST-G` is satisfied: the rising pools carry more variants than the falling ones, not fewer.
 
 **`RISING-OPEN`**
-1. `[ledger]` {settlement} is getting larger and can be reached without much deciding; the roll and the approaches agree with one another, and the town has to plan for both at once.
-2. `[street]` Arriving at {settlement} is easy, and there are more people here than the older rolls describe; the town has not had to be sought out in order to fill.
-3. `[visitor]` {settlement} stands open to its approaches and is plainly carrying more than it used to, which is the ordinary condition of a place that is convenient.
+1. `[ledger]` {settlement} is getting larger and can be reached without much deciding. The roll and the approaches agree with one another. The town has to plan for both at once.
+2. `[street]` Arriving at {settlement} is easy. There are more people here than the older rolls describe. The town has not had to be sought out in order to fill.
+3. `[visitor]` {settlement} stands open to its approaches and is plainly carrying more than it used to. That is the ordinary condition of a place that is convenient.
 
 **`RISING-NARROW`**
-1. `[ledger]` {settlement} is growing at the end of a hard approach; whatever the town has been gaining, it has not been gaining it by being easy to get to.
-2. `[visitor]` For a place this troublesome to reach, {settlement} is remarkably full, and the difficulty of arriving is the measure of what the arriving is worth.
-3. `[counterforce]` {settlement} has every structural excuse to be shrinking and is not: the ways in are poor, the country is long, and the roll rises regardless.
+1. `[ledger]` {settlement} is growing at the end of a hard approach. Whatever the town has been gaining, it has not been gaining it by being easy to get to.
+2. `[visitor]` For a place this troublesome to reach, {settlement} is remarkably full. The difficulty of arriving measures what the arriving is worth.
+3. `[counterforce]` {settlement} has every structural excuse to be shrinking and is not. The ways in are poor, the country is long, and the roll rises regardless.
 
 **`LEVEL`**
-1. `[ledger]` {settlement}'s roll holds where it is, and the approaches neither fill the town nor drain it; the arrangement is steady in both respects at once.
-2. `[elder]` {settlement} is the size it has been, and the ways in and out have not moved it in either direction.
+1. `[ledger]` {settlement}'s roll holds where it is, and the approaches neither fill the town nor drain it. The arrangement is steady in both respects at once.
+2. `[elder]` {settlement} is the size it has been. The ways in and out have not moved it in either direction.
 
 **`FALLING-OPEN`**
-1. `[ledger]` {settlement} is getting smaller, and it is not for want of a way in; the approaches are open and the roll falls beside them.
-2. `[counterforce]` Reaching {settlement} is easy and remaining is evidently the harder part, since the roads that would bring people would carry them out just as readily.
-3. `[street]` {settlement} is well approached and thinner than it was, and the two facts sit uncomfortably beside one another.
+1. `[ledger]` {settlement} is getting smaller. It is not for want of a way in. The approaches are open and the roll falls beside them.
+2. `[counterforce]` Reaching {settlement} is easy. Remaining is evidently the harder part, since the roads that would bring people would carry them out just as readily.
+3. `[street]` {settlement} is well approached and thinner than it was. The two facts sit uncomfortably beside one another.
 
 **`FALLING-NARROW`**
-1. `[ledger]` {settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.
-2. `[elder]` The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.
+1. `[ledger]` {settlement} is losing what it had and is hard to reach. A town in that position gets smaller quietly, without anyone outside marking the stages.
+2. `[elder]` The ways into {settlement} were always poor and the town was always small enough to carry that. It is smaller now, and the poor ways make the smallness harder to answer.
 
 ---
 
