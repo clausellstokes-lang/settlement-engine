@@ -1,0 +1,260 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "A town paid this little and watched this little is cheap to buy into… and this one is both",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [powerStructure.criminalCaptureState, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity, typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "Whoever names the Free Elder Council wrong at Warmholz is corrected at once, and politely.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3",
+    "EPOCH",
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "EPOCH",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "an elapsed course on an unadvanced world",
+     "value": "no longer",
+     "description": "the card holds no advance, so nothing has since changed and this clause asserts a history the world does not have"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "Warmholz is no longer sure the hall answers to the Free Elder Council, and from the way it",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "Almost nothing the Free Elder Council asks of Warmholz gets done, and nobody troubles to say why.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A stranger who brings a problem to the Free Elder Council at Warmholz is passed along and comes away with nothing, then finds it settled within the day by someone who holds no seat at all.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "The Free Elder Council holds the hall at Warmholz, and the town's business runs through it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "spine": "The criminal interest at Warmholz is gaining ground inside the hall rather than outside it, and nothing has closed on it yet. A town paid this little and watched this little is cheap to buy into… and this one is both.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "Decisions at Warmholz are talked into agreement before they are made, and the Free Elder Council is slow to move and slower still to move back.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "Whoever names the Free Elder Council wrong at Warmholz is corrected at once, and politely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "The Free Elder Council has lost ground at Warmholz, and it has lost that ground to the town itself, with no rival required to take it.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the free elder: 2",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 8,
+   "openers": [
+    {
+     "opener": "a stranger who",
+     "n": 1
+    },
+    {
+     "opener": "almost nothing the",
+     "n": 1
+    },
+    {
+     "opener": "decisions at warmholz",
+     "n": 1
+    },
+    {
+     "opener": "the criminal interest",
+     "n": 1
+    },
+    {
+     "opener": "the free elder",
+     "n": 2
+    },
+    {
+     "opener": "warmholz is no",
+     "n": 1
+    },
+    {
+     "opener": "whoever names the",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "governing faction holds a DOMINANT share",
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}

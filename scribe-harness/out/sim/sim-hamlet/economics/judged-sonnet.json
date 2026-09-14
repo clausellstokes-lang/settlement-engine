@@ -1,0 +1,178 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C4: a low rung on a working approach",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Most of what anyone earns here traces back to that trade.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.incomeSources, economicState.incomeSources.length, economicState.incomeSources.reduce]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "Most of what leaves here was raised",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Most of what leaves here was raised or made in the town first.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState, economicState.isEntrepot, economicState.localProduction, economicState.primaryExports, economicState.primaryImports]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "BOUGHT-IN",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C4: a low rung on a working approach",
+   "vid": 2,
+   "spine": "Prosperity here sits on a low rung, though the town's trade still keeps its ordinary pace.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 2,
+   "spine": "One thing the town does for its money outweighs the rest. Most of what anyone earns here traces back to that trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 2,
+   "spine": "The town both exports and imports, and the two are not simply the same trade in each direction. Most of what leaves here was raised or made in the town first.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 1,
+   "spine": "Warmholz sells more than one thing beyond its own borders, and no single one of them carries the trade alone.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "What is grown here feeds the town, with a little to spare, season after season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "BOUGHT-IN",
+   "vid": 1,
+   "spine": "Salt is worked here that the town cannot raise for itself, and buying it in is as settled a part of the craft as the working.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 0,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 6,
+   "openers": [
+    {
+     "opener": "one thing the",
+     "n": 1
+    },
+    {
+     "opener": "prosperity here sits",
+     "n": 1
+    },
+    {
+     "opener": "salt is worked",
+     "n": 1
+    },
+    {
+     "opener": "the town both",
+     "n": 1
+    },
+    {
+     "opener": "warmholz sells more",
+     "n": 1
+    },
+    {
+     "opener": "what is grown",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
