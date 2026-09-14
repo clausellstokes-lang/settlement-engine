@@ -2432,51 +2432,51 @@ cell in this shape.
 
 **layer DORMANT (no ledger materialized)**
 1. `[ledger]` The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.
-2. `[street]` There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
+2. `[street]` There are interests at {settlement} and there are no camps. A question is answered by whoever cares about that question.
 3. `[visitor]` A stranger at {settlement} cannot work out who is aligned with whom, and the reason is that nobody is.
 
 **consolidation 0: a fully divided court (live layer, no ruling bloc)**
-1. `[ledger]` No combination at {settlement} holds enough of the hall to govern it; every decision must be assembled separately, and several are not assembled at all.
+1. `[ledger]` No combination at {settlement} holds enough of the hall to govern it. Every decision must be assembled separately, and several are not assembled at all.
 2. `[unfolding · dm-only]` The court at {settlement} is divided finely enough that it is cheap to influence. A small interest buys a great deal here, because there is no majority for it to have to outbid.
 3. `[street]` The town waits longer for answers than a town this size should, and the waiting is arithmetic rather than idleness.
 
 **a RULING bloc, consolidated**
-1. `[ledger]` A working majority sits at {settlement} with the {seat} inside it; what the hall decides is decided by that combination and announced by the {seat}.
-2. `[street]` The town knows which houses go together at {settlement} and takes its business to whichever of them is nearest.
+1. `[ledger]` A working majority sits at {settlement} with the {seat} inside it. What the hall decides is decided by that combination and announced by the {seat}.
+2. `[street]` At {settlement} the town knows which houses go together, and takes its business to whichever of them is nearest.
 3. `[counterforce]` There are interests at {settlement} outside the governing combination with real weight, and they do not move. Outbidding a settled majority costs more than any single question is worth.
 
 **glue `concession` (seats and revenue traded)**
-1. `[ledger]` What holds the combination at {settlement} together is a trade: seats and revenue for a working majority, seat-held rather than personal, and outbiddable by anybody who arrives with more.
+1. `[ledger]` What holds the combination at {settlement} together is a trade: seats and revenue for a working majority. The trade belongs to the seats and not to the people, and a better offer takes it.
 2. `[street]` The arrangement in the hall at {settlement} is a business one and is treated as one by everybody in it.
-3. `[unfolding]` The majority at {settlement} survives every leader it has and would not survive a better offer, and there is no secret about which risk it is running.
+3. `[unfolding]` The majority at {settlement} survives every leader it has and would not survive a better offer. There is no secret about which risk it is running.
 
 **glue `patronage` (personal loyalty between leaders)**
-1. `[ledger]` The combination at {settlement} is held by a personal loyalty between the people at the head of it, strong while those hands hold those seats, and worth nothing the moment either changes.
+1. `[ledger]` The combination at {settlement} is held by a personal loyalty between the people at the head of it. It holds while those hands hold those seats, and it is worth nothing the moment either changes.
 2. `[street]` The alliance in the hall at {settlement} is between two people rather than two houses, and the town has noticed which.
-3. `[unfolding]` What binds the majority at {settlement} will die with its bearers' tenure rather than with the arrangement, and the succession that ends it has not yet been called.
+3. `[unfolding]` What binds the majority at {settlement} is held by people and not by seats. It dies when those people leave, and the succession that ends it has not yet been called.
 
 **glue `doctrine` (a shared creed)**
-1. `[ledger]` The seats that hold together at {settlement} hold together on a shared creed; it is the most durable binding in the hall and the least negotiable.
-2. `[street]` The houses that agree at {settlement} agree about something larger than the town, which makes them very hard to divide over anything smaller.
-3. `[counterforce]` The combination at {settlement} has been offered better terms than it holds and declined them; a binding of belief is not outbid by a binding of coin.
+1. `[ledger]` The seats that hold together at {settlement} hold together on a shared creed. It is the most durable binding in the hall and the least negotiable.
+2. `[street]` The houses that agree at {settlement} agree about something larger than the town. Nothing smaller divides them.
+3. `[counterforce]` The combination at {settlement} has been offered better terms than it holds and declined them. A better offer does not move it.
 
 **glue `threat` (a common danger at the walls)**
-1. `[ledger]` The fractious have closed ranks at {settlement} because of what is at the walls; the combination is real, effective and entirely contingent on the danger continuing.
-2. `[unfolding]` What holds the hall at {settlement} together is outside it, and will leave when the danger does.
+1. `[ledger]` The houses that quarrel have closed ranks at {settlement} because of what is at the walls. The combination is real, it works, and it lasts as long as the danger does.
+2. `[unfolding]` What holds the hall at {settlement} together is outside it, and it leaves when the danger does.
 3. `[counterforce]` Houses at {settlement} that have not agreed on anything in years are agreeing now, and none of them mistakes it for a reconciliation.
 
 **glue `compromise` (a corruption leash)** *(every variant `dm-only`)*
 1. `[ledger · dm-only]` One of the seats in the combination at {settlement} carries a leash, and the combination does not name it aloud. It is the strongest binding in the hall and the only one that shatters rather than loosens.
-2. `[unfolding · dm-only]` What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud, and everybody inside it is arranging their affairs accordingly.
+2. `[unfolding · dm-only]` What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud. Everybody inside it is arranging their affairs for that.
 3. `[street · dm-only]` The hall at {settlement} agrees on more than it should and nobody outside it can account for why.
 
 **end `seats`**
 1. `[ledger]` What the combination at {settlement} wants is office. Everything else it takes up is taken up for the effect on who holds what.
 2. `[street]` The combination at {settlement} takes an interest in everything and cares about one thing, and the one thing is who is sitting where.
-3. `[unfolding]` What the combination at {settlement} is assembling toward is a hall it does not have to assemble anything for, and each season's trade moves it a little nearer.
+3. `[unfolding]` Each season's trade moves the combination at {settlement} a little nearer. What it is assembling toward is a hall it does not have to assemble anything for.
 
 **end `commerce`**
-1. `[ledger]` The combination at {settlement} is organized around money, and its politics are legible the moment the question is framed as a cost.
+1. `[ledger]` The combination at {settlement} is organized around money, and its politics are plain the moment the question is put as a cost.
 2. `[street]` The houses that agree at {settlement} agree about money, and the agreement lasts exactly as far as the money does.
 3. `[visitor]` A stranger who wants something from the combination at {settlement} is not asked what he believes, only what he is offering.
 

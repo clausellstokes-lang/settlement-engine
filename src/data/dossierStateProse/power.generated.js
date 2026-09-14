@@ -2948,7 +2948,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.",
+          "text": "There are interests at {settlement} and there are no camps. A question is answered by whoever cares about that question.",
           "slots": [
             "settlement"
           ],
@@ -2966,7 +2966,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "consolidation 0: a fully divided court (live layer, no ruling bloc)": [
         {
           "angle": "ledger",
-          "text": "No combination at {settlement} holds enough of the hall to govern it; every decision must be assembled separately, and several are not assembled at all.",
+          "text": "No combination at {settlement} holds enough of the hall to govern it. Every decision must be assembled separately, and several are not assembled at all.",
           "slots": [
             "settlement"
           ],
@@ -2993,7 +2993,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "a RULING bloc, consolidated": [
         {
           "angle": "ledger",
-          "text": "A working majority sits at {settlement} with the {seat} inside it; what the hall decides is decided by that combination and announced by the {seat}.",
+          "text": "A working majority sits at {settlement} with the {seat} inside it. What the hall decides is decided by that combination and announced by the {seat}.",
           "slots": [
             "settlement",
             "seat"
@@ -3002,7 +3002,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town knows which houses go together at {settlement} and takes its business to whichever of them is nearest.",
+          "text": "At {settlement} the town knows which houses go together, and takes its business to whichever of them is nearest.",
           "slots": [
             "settlement"
           ],
@@ -3020,7 +3020,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "glue concession (seats and revenue traded)": [
         {
           "angle": "ledger",
-          "text": "What holds the combination at {settlement} together is a trade: seats and revenue for a working majority, seat-held rather than personal, and outbiddable by anybody who arrives with more.",
+          "text": "What holds the combination at {settlement} together is a trade: seats and revenue for a working majority. The trade belongs to the seats and not to the people, and a better offer takes it.",
           "slots": [
             "settlement"
           ],
@@ -3036,7 +3036,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The majority at {settlement} survives every leader it has and would not survive a better offer, and there is no secret about which risk it is running.",
+          "text": "The majority at {settlement} survives every leader it has and would not survive a better offer. There is no secret about which risk it is running.",
           "slots": [
             "settlement"
           ],
@@ -3046,7 +3046,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "glue patronage (personal loyalty between leaders)": [
         {
           "angle": "ledger",
-          "text": "The combination at {settlement} is held by a personal loyalty between the people at the head of it, strong while those hands hold those seats, and worth nothing the moment either changes.",
+          "text": "The combination at {settlement} is held by a personal loyalty between the people at the head of it. It holds while those hands hold those seats, and it is worth nothing the moment either changes.",
           "slots": [
             "settlement"
           ],
@@ -3062,7 +3062,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What binds the majority at {settlement} will die with its bearers' tenure rather than with the arrangement, and the succession that ends it has not yet been called.",
+          "text": "What binds the majority at {settlement} is held by people and not by seats. It dies when those people leave, and the succession that ends it has not yet been called.",
           "slots": [
             "settlement"
           ],
@@ -3072,7 +3072,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "glue doctrine (a shared creed)": [
         {
           "angle": "ledger",
-          "text": "The seats that hold together at {settlement} hold together on a shared creed; it is the most durable binding in the hall and the least negotiable.",
+          "text": "The seats that hold together at {settlement} hold together on a shared creed. It is the most durable binding in the hall and the least negotiable.",
           "slots": [
             "settlement"
           ],
@@ -3080,7 +3080,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The houses that agree at {settlement} agree about something larger than the town, which makes them very hard to divide over anything smaller.",
+          "text": "The houses that agree at {settlement} agree about something larger than the town. Nothing smaller divides them.",
           "slots": [
             "settlement"
           ],
@@ -3088,7 +3088,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The combination at {settlement} has been offered better terms than it holds and declined them; a binding of belief is not outbid by a binding of coin.",
+          "text": "The combination at {settlement} has been offered better terms than it holds and declined them. A better offer does not move it.",
           "slots": [
             "settlement"
           ],
@@ -3098,7 +3098,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "glue threat (a common danger at the walls)": [
         {
           "angle": "ledger",
-          "text": "The fractious have closed ranks at {settlement} because of what is at the walls; the combination is real, effective and entirely contingent on the danger continuing.",
+          "text": "The houses that quarrel have closed ranks at {settlement} because of what is at the walls. The combination is real, it works, and it lasts as long as the danger does.",
           "slots": [
             "settlement"
           ],
@@ -3106,7 +3106,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What holds the hall at {settlement} together is outside it, and will leave when the danger does.",
+          "text": "What holds the hall at {settlement} together is outside it, and it leaves when the danger does.",
           "slots": [
             "settlement"
           ],
@@ -3138,7 +3138,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud, and everybody inside it is arranging their affairs accordingly.",
+          "text": "What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud. Everybody inside it is arranging their affairs for that.",
           "slots": [
             "settlement"
           ],
@@ -3175,7 +3175,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What the combination at {settlement} is assembling toward is a hall it does not have to assemble anything for, and each season's trade moves it a little nearer.",
+          "text": "Each season's trade moves the combination at {settlement} a little nearer. What it is assembling toward is a hall it does not have to assemble anything for.",
           "slots": [
             "settlement"
           ],
@@ -3185,7 +3185,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "end commerce": [
         {
           "angle": "ledger",
-          "text": "The combination at {settlement} is organized around money, and its politics are legible the moment the question is framed as a cost.",
+          "text": "The combination at {settlement} is organized around money, and its politics are plain the moment the question is put as a cost.",
           "slots": [
             "settlement"
           ],
