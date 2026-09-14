@@ -4000,7 +4000,7 @@ PEACE, not missing data.
 **`statusLabel: On campaign`**
 1. `[ledger]` {settlement}'s army is in the field against {counterpart}. Everything the town does at home is done without those people.
 2. `[street]` The town is short of the people who would ordinarily be here. The harvest and the gate feel it first.
-3. `[unfolding]` What {settlement} wins from this campaign is won somewhere else. What it spends, it spends here, in the open and without a break.
+3. `[unfolding]` What {settlement} wins from this campaign it is going to win somewhere else. What it spends, it spends here, in the open and without a break.
 4. `[visitor]` A stranger finds {settlement} quieter than a town this size should be. He finds the reason is arithmetic rather than mood.
 
 **`statusLabel: Occupied`**
@@ -4010,7 +4010,7 @@ PEACE, not missing data.
 
 **`statusLabel: At war` (no front at the walls, no army abroad)**
 1. `[ledger]` {settlement} is at war with {counterpart}, and nothing has come of it here yet. No army has marched and none has arrived. The town is arranged for both.
-2. `[street]` The town is at war without seeing any of it. What it sees is prices, absences, and a great deal of talk about what might happen.
+2. `[street]` The town is at war in the way a town can be at war without seeing any of it. What it sees is prices, absences, and a great deal of talk about what might happen.
 3. `[counterforce]` {settlement} is at war with {counterpart} and has not been touched by it. The distance between the two towns does the work walls would otherwise have to do.
 
 **`warExhaustion: rested`**
@@ -4026,18 +4026,18 @@ PEACE, not missing data.
 
 **`warExhaustion: war-weary`**
 1. `[street]` {settlement} has had enough. The fighting has gone on past what the town believed it agreed to. The agreement is being withdrawn quietly, in a hundred small refusals.
-2. `[ledger]` Sustained fighting has worn {settlement} down. The hall has an appetite for the war and the town does not. The pressure to end it now comes from inside.
+2. `[ledger]` Sustained fighting has worn {settlement} down to the point where the hall has an appetite for the war and the town does not. The pressure to end it now comes from inside.
 3. `[unfolding]` The town is being pushed toward asking for peace by its own weariness rather than by any defeat. Each season the pushing gets harder to resist.
 4. `[threshold]` {settlement} has reached the point where the next demand is the one that gets refused. Nobody in the hall can say in advance which demand that is.
 
 **`warExhaustion: exhausted`**
-1. `[ledger]` {settlement} is spent. There is no further war in this town, and none is being withheld. Anything asked of it from here does not arrive.
+1. `[ledger]` {settlement} is spent. There is no further war in this town, and none is being withheld. Anything asked of it from here is not going to arrive.
 2. `[street]` The town has nothing left to give the war and has stopped pretending it might find some.
-3. `[unfolding]` Whatever {settlement} agrees to next, it agrees to because it is exhausted. The terms show it.
+3. `[unfolding]` Whatever {settlement} agrees to next, it is going to agree to because it is exhausted, and the terms are going to show it.
 
 **mobilization: climbing the ramp, still distant**
 1. `[ledger]` {settlement} is turning toward war and is not near it. The muster has begun. The economy has barely started to shift behind it.
-2. `[street]` The town has begun to prepare quietly, and well ahead of anybody admitting what for.
+2. `[street]` The town has begun to prepare the way towns do: quietly, and well ahead of anybody admitting what for.
 3. `[visitor]` A stranger at {settlement} notices the town buying things it does not ordinarily buy. He is told nothing about why.
 
 **mobilization: climbing, close to ready**
@@ -4076,13 +4076,13 @@ PEACE, not missing data.
 3. `[counterforce]` Nothing {settlement} has done has loosened {counterpart}'s hold, because the hold is not being decided here.
 
 **feasibility `plausible`**
-1. `[ledger]` An attempt on {settlement} by {counterpart} would be a real contest. The outcome is genuinely open. No position a town can be in is more dangerous.
+1. `[ledger]` An attempt on {settlement} by {counterpart} would be a real contest, with the outcome genuinely open. That is the most dangerous position a town can be in.
 2. `[street]` The town believes it could be taken. It believes it could hold. It lives with both beliefs at once.
-3. `[unfolding]` Neither {settlement} nor {counterpart} can be confident of the outcome. Under precisely that condition, somebody eventually tries.
+3. `[unfolding]` Neither {settlement} nor {counterpart} can be confident of the outcome. That is precisely the condition under which somebody eventually tries.
 
 **feasibility `auto_fail`**
 1. `[counterforce]` {counterpart} cannot take {settlement}. The gap is not a close one, and everybody on both sides has done the arithmetic.
-2. `[ledger]` An assault on {settlement} by {counterpart} would be hopeless. No assault comes, and the hostility goes on in other forms.
+2. `[ledger]` An assault on {settlement} by {counterpart} would be hopeless. That is why no assault comes, and why the hostility goes on in other forms.
 3. `[street]` The town does not lose sleep over {counterpart}, and it is right not to.
 
 **feasibility `harassment`**
@@ -4096,12 +4096,12 @@ PEACE, not missing data.
 3. `[unfolding]` What {settlement} watches is not {counterpart}'s army but {counterpart}'s company, and the company has been growing.
 
 **feasibility `require_betrayal`**
-1. `[counterforce · dm-only]` {settlement} cannot be taken from outside by {counterpart}. It would have to break apart first, and breaking it apart is what {counterpart} is actually working on.
+1. `[counterforce · dm-only]` {settlement} cannot be taken from outside by {counterpart}. It would have to break apart first, and the breaking apart is what {counterpart} is actually working on.
 2. `[ledger]` The danger to {settlement} from {counterpart} can only come from inside. The walls are not the way in, and both parties understand which way is.
 3. `[street · dm-only]` {counterpart} has stopped looking at {settlement}'s walls and started looking at its quarrels. That change of attention is the whole threat.
 
 **feasibility `require_magic`**
-1. `[counterforce]` Nothing {counterpart} could bring by ordinary means would take {settlement}. Only decisive arcane force would open this town.
+1. `[counterforce]` Nothing {counterpart} could bring by ordinary means would take {settlement}. Only decisive arcane force would open this town, and that is a different kind of undertaking entirely.
 2. `[ledger]` {settlement}'s defense against {counterpart} holds against everything except the arcane. That narrows the threat a great deal and does not remove it.
 3. `[street]` The town's confidence at {settlement} stops exactly where the arcane begins. It has no comfortable way of talking about that.
 
@@ -4174,13 +4174,13 @@ each cell below is authored from the page-owner's side.
 
 **`security` · `defaulted`**
 1. `[ledger]` {settlement} has thrown off the cap on arms. The forbidden muster gathers in the open, and has stopped being disguised as anything else.
-2. `[unfolding]` The town is arming past what it agreed to and is not hiding it. The next move belongs to {counterpart}.
+2. `[unfolding]` The town is arming past what it agreed to and is not hiding it. That means the next move belongs to {counterpart}.
 3. `[street]` The town is arming at {settlement} in daylight, and has stopped offering any account of it.
 
 **`territorial` · `honored`**
 1. `[ledger]` {counterpart}'s garrison keeps the walls of {settlement} without incident. It is thoroughly resented, and it has not been removed.
 2. `[street]` The soldiers who hold the town are not the town's, and there is no trouble about it. That is not the same as there being no feeling about it.
-3. `[unfolding]` The garrison at {settlement} keeps the walls without incident and has kept them long enough. The absence of incident is beginning to look like the arrangement rather than the truce.
+3. `[unfolding]` The garrison at {settlement} keeps the walls without incident, and has kept them long enough. That is why the absence of incident is beginning to look like the arrangement rather than the truce.
 
 **`territorial` · `strained`**
 1. `[street]` The garrison keeps {settlement}'s walls uneasily now. The townspeople chafe and stones are thrown. The throwing has stopped being the work of children.
@@ -4198,7 +4198,7 @@ each cell below is authored from the page-owner's side.
 3. `[street]` The town at {settlement} deals with the installed seat because it must, and deals with it competently. That is not the same as accepting it.
 
 **`political` · `strained`**
-1. `[ledger]` The installed seat at {settlement} wavers. What it decides carries little weight beyond the hall itself. The parts of the town that ignore it are growing.
+1. `[ledger]` The installed seat at {settlement} wavers. Its writ runs thinly beyond the hall itself. The parts of the town that ignore it are growing.
 2. `[unfolding]` What was set up at {settlement} to govern is governing less each season. Nothing has been sent to shore it up.
 3. `[street]` The installed seat at {settlement} is obeyed inside the hall and increasingly nowhere else. The boundary moves inward each season.
 
@@ -4224,7 +4224,7 @@ each cell below is authored from the page-owner's side.
 
 **`sovereignty` · `honored`**
 1. `[ledger]` No foreign banner marches on {counterpart}'s succession, and none marches on {settlement}'s. The pledge not to interfere holds on both sides of it.
-2. `[counterforce]` There has been a contest at {counterpart} that {settlement} could have reached into and did not. The holding back counts as restraint.
+2. `[counterforce]` There has been a contest at {counterpart} that {settlement} could have reached into and did not. The holding back is entered in the record as restraint.
 3. `[street]` Neither town interferes in the other's quarrels. At {settlement} that restraint is discussed as a point of pride rather than of policy.
 
 **`sovereignty` · `strained`**
@@ -4239,7 +4239,7 @@ each cell below is authored from the page-owner's side.
 
 **generic floor · `honored`** *(unnamed family)*
 1. `[ledger]` The term is kept at {settlement} as it was written, and the peace holds along this seam of it.
-2. `[street]` Whatever was agreed is being done. The town has stopped watching to see whether it is being done.
+2. `[street]` Whatever was agreed is being done. The town has stopped watching to see whether it is going to be done.
 3. `[visitor]` A stranger at {settlement} would not know from the town's conduct that there was a term here at all. That is what keeping one looks like.
 
 **generic floor · `strained`**
@@ -4253,7 +4253,7 @@ each cell below is authored from the page-owner's side.
 3. `[unfolding]` This part of the agreement has failed at {settlement}, and the parts still standing are now carrying the weight of it.
 
 **`fraying` set on a term with time still to run**
-1. `[unfolding]` This part of the peace at {settlement} has {timeband_span} left on it. It does not reach the end of that time in the shape it started.
+1. `[unfolding]` This part of the peace at {settlement} has {timeband_span} left on it. It is not going to reach the end of that time in the shape it started.
 2. `[ledger]` The term still has its years to run and is failing inside them. That is a different problem from a term expiring.
 3. `[street]` Everybody at {settlement} expects this term to fail before it expires. They expect it openly enough that the expecting is helping it along.
 
@@ -4332,7 +4332,7 @@ once, drawn in print and by `WarFaithSection`.
 **`Even-handed`**
 1. `[ledger]` {settlement} weighs a quarrel the way most halls do. It is neither eager nor reluctant. It is predictable to anybody who has dealt with it twice.
 2. `[street]` The town has no reputation either way. In these matters that is itself a reputation.
-3. `[visitor]` A stranger can predict what {settlement}'s hall does about a grievance. That is the most useful thing a neighbour can say about a town.
+3. `[visitor]` A stranger can predict what {settlement}'s hall is going to do about a grievance. That is the most useful thing a neighbour can say about a town.
 
 **`Cautious`**
 1. `[ledger]` {settlement} prefers not to. Where a grievance can be carried rather than pressed, this hall carries it. The carrying is its habit rather than its calculation.
@@ -4340,7 +4340,7 @@ once, drawn in print and by `WarFaithSection`.
 3. `[street]` The town at {settlement} would rather be wronged than be at war. It says so when the question is put directly.
 
 **`Pacific`**
-1. `[ledger]` {settlement} goes a very long way to avoid a fight. Its neighbours price that in.
+1. `[ledger]` {settlement} is willing to go a very long way to avoid a fight. Its neighbours price that in.
 2. `[street]` The town does not answer provocation. Not answering is a settled policy rather than a mood.
 3. `[counterforce]` {settlement} would not take up a cause another hall would seize on. Its neighbours can plan around that without having to test it.
 
@@ -4394,21 +4394,21 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **posture `mobilized`**
 1. `[ledger]` {settlement} is fully mobilized. It has a war economy and is ready to march. It is waiting on a decision rather than on preparation.
 2. `[street]` The town is ready and is being kept ready. Being kept ready is expensive in ways the hall is discovering.
-3. `[unfolding]` {settlement} is ready and idle. No condition a town can hold is more expensive. None is harder to hold for long.
+3. `[unfolding]` {settlement} is ready and idle. That is the most expensive condition a town can hold, and the hardest to hold for long.
 
 **posture `deployed`**
 1. `[ledger]` {settlement}'s army is in the field. What the town has is elsewhere, and what remains here is what could not be taken.
-2. `[street]` The town is short of its own people. It stays short until the campaign ends, however it ends.
+2. `[street]` The town is short of its own people. It is going to stay short until the campaign ends, however it ends.
 3. `[visitor]` A stranger finds {settlement} short of exactly the people a town this size should be full of. He does not have to ask where they are.
 
 **posture `war_exhaustion`**
 1. `[ledger]` {settlement} is war-weary and its army is spent. What could be raised here now is a fraction of what was raised. The fraction is falling.
-2. `[unfolding]` The town has reached the end of what it is willing to give and has not formally said so. The gap between those is where the next few seasons go.
+2. `[unfolding]` The town has reached the end of what it is willing to give and has not formally said so. The gap between those is where the next few seasons are going to be spent.
 3. `[street]` The town at {settlement} has stopped answering the muster properly and has not formally refused it. Both facts are understood.
 
 **posture `demobilizing`**
 1. `[ledger]` {settlement} is standing down and the war economy is unwinding. What was made for the war is being sold, converted or abandoned, and mostly it is abandoned.
-2. `[street]` People are coming back to the town and are not returning to what they left. What they left has been reorganized around their absence.
+2. `[street]` People are coming back to the town. They are not returning to what they left, because what they left has been reorganized around their absence.
 3. `[unfolding]` What {settlement} built for the war is being unbuilt at a loss. The loss is arriving in the accounts a season after the fighting stopped.
 
 **posture COVERT (any state)** *(every variant `dm-only`)* · **COMPOSITION FENCE (§0h V1-g):** `DS-WAR-1`'s covert-*mobilization* cell is the muster read; this is the *posture* read. Two fields, two rows, and **never both on one page** — a town that is quietly arming and quietly disposed toward war says one of these things, not two.
@@ -4462,7 +4462,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[visitor]` A stranger at {settlement} sees a town under somebody else's soldiers going about its business. He has to be told that is not normal.
 
 **resistance `restive`**
-1. `[ledger]` {settlement} is restive. Sabotage and refusals wear at the garrison steadily and never amount to a rising.
+1. `[ledger]` {settlement} is restive. Sabotage and noncompliance wear at the garrison steadily and never amount to a rising.
 2. `[unfolding]` Nothing large is happening at {settlement} and a great many small things are. The small things are getting less deniable.
 3. `[threshold]` {settlement} is at the point where the small refusals have become a habit rather than a mood. A habit is what a rising is assembled out of.
 
@@ -4473,7 +4473,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **resistance `in open revolt`**
 1. `[ledger]` {settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.
-2. `[unfolding]` What is happening at {settlement} decides whether {counterpart} keeps it. It is decided within the season.
+2. `[unfolding]` What is happening at {settlement} is going to decide whether {counterpart} keeps it, and the deciding comes within the season.
 3. `[street]` The town at {settlement} is fighting the people holding it, in daylight. It has stopped calculating whether it can win.
 
 **blockade stamped (recorded cause)**
@@ -4499,7 +4499,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **aftermath `siege_lifted`**
 1. `[street]` The army outside {settlement} has gone. The gates are open and the town is counting. The counting is taking longer than anybody expected.
 2. `[ledger]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact. Stores, walls and people are all where the siege left them.
-3. `[unfolding]` {settlement} is open again and is not yet what it was. The counting has started, and nobody has said aloud how long the making-good takes.
+3. `[unfolding]` {settlement} is open again and is not yet what it was. The counting has started, and nobody has said aloud how long the making-good is going to take.
 
 **aftermath `occupation_lifted`**
 1. `[ledger]` {counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged. The town is now responsible for arrangements it did not choose.
@@ -4520,7 +4520,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **aftermath `war_spoils`**
 1. `[ledger]` {settlement} came out of the fighting with more than it went in with. The more is in the town, visible and unevenly distributed. It is making quarrels of its own.
 2. `[street]` The town profited, and the profit is not shared in the proportions anybody expected before the fighting started.
-3. `[unfolding]` What {settlement} took is being turned into something permanent by the people who hold it. The town's shape after that is not the shape it had.
+3. `[unfolding]` What {settlement} took is being turned into something permanent by the people who hold it. The town's shape after that is not going to be the shape it had.
 
 **aftermath `relief_burden`**
 1. `[ledger]` {settlement} is carrying people it did not have before. The relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.
@@ -5178,7 +5178,7 @@ reads what the panel renders. A page draws at most one of each.
 3. `[threshold]` {settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
 
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
-1. `[unfolding]` Devotion is climbing. The town lives by the creed it professes, and the professing has followed the living.
+1. `[unfolding]` Devotion is climbing, and the reason is plain. The town lives by the creed it professes, and the professing has followed the living.
 2. `[street]` The tide is coming back in. Attendance has not caught up with belief yet, and it rarely does. It is moving.
 3. `[ledger]` The observance is gaining. What the clergy record is larger each time they record it. Nothing in the reckoning runs the other way.
 
@@ -5209,7 +5209,7 @@ reads what the panel renders. A page draws at most one of each.
 
 **SINK: `unaffiliated` present, arc falling** (the pews draining)
 1. `[ledger]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
-2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life. Its religious life is shrinking.
+2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life. That is a way of saying its religious life is shrinking.
 3. `[street]` People here are leaving the rites without joining anything. The benches thin and nothing fills them.
 
 **SINK: `unaffiliated` present, arc rising** (the pews reclaiming)
@@ -5322,7 +5322,7 @@ panel does not surface at all.
 **STANDING: `ascendant`**
 1. `[unfolding]` {creed} has risen to the front rank of {settlement}'s faiths. Its share is large enough to make it patron-eligible, and everyone concerned has noticed.
 2. `[threshold]` The creed is ascendant here. It is not the patron, and the gap between what it holds and what the patron holds has become discussable.
-3. `[street]` This faith has grown into a contender. Nothing about its position is settled.
+3. `[street]` This faith has grown into a contender. Nothing about its position is settled, and that is the point.
 
 **NICHE: slots saturated at tier capacity**
 1. `[counterforce]` The town sustains as many faiths as it can. A new creed arriving here does not join the field. It displaces something.
@@ -5351,7 +5351,7 @@ panel does not surface at all.
 
 **LEGITIMACY: `established`**
 1. `[ledger]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.
-2. `[threshold]` {creed} holds the seat by right as much as by numbers, and the right is a real one that scandal reaches.
+2. `[threshold]` {creed} holds the seat by right as much as by numbers. The right is real, and it is the kind of right scandal reaches.
 3. `[street]` The faith's standing is legitimate and ordinary. It is the arrangement people are used to.
 
 **LEGITIMACY: `tenuous`**
@@ -6159,7 +6159,7 @@ unchanged.
 **`allied`** — 1. `[ledger]` {settlement} and {counterpart} answer for each other, and the answering is understood on both sides without being renegotiated. · 2. `[street]` Trouble for {counterpart} is trouble in {settlement}, and the town would say so out loud. · 3. `[visitor]` A stranger arriving in {settlement} from {counterpart} is treated as arriving from nearby rather than from elsewhere.
 **`patron`** *(arm: {settlement} is the patron)* — 1. `[ledger]` {counterpart} looks to {settlement}, and {settlement}'s decisions are made with that looking taken for granted. · 2. `[street]` {settlement} does not think of {counterpart} as a neighbour so much as a responsibility. · 3. `[visitor]` What {settlement} decides tends to be what {counterpart} does, and neither town finds that worth remarking on.
 **`client`** *(arm: {settlement} is the client)* — 1. `[ledger]` {settlement}'s decisions are made with {counterpart} in the room. Nobody from {counterpart} has to be present for that. · 2. `[street]` {settlement} manages its own affairs up to a point, and everyone here knows roughly where the point is. · 3. `[visitor]` Ask in {settlement} who decides a thing and you are given a name in {counterpart} more often than a name here.
-**`rival`** — 1. `[ledger]` {settlement} and {counterpart} want the same things and do not have them together. Both towns price accordingly. · 2. `[street]` {settlement} measures itself against {counterpart} in a way that is not always flattering to {settlement}. · 3. `[visitor]` Praise {counterpart} in {settlement} and you get a correction rather than an argument.
+**`rival`** — 1. `[ledger]` {settlement} and {counterpart} want the same things and refuse to have them together. Both towns price accordingly. · 2. `[street]` {settlement} measures itself against {counterpart} in a way that is not always flattering to {settlement}. · 3. `[visitor]` Praise {counterpart} in {settlement} and you get a correction rather than an argument.
 **`cold_war`** — 1. `[ledger]` {settlement} and {counterpart} have no dealings that either would call dealings, and the absence is maintained rather than accidental. · 2. `[street]` Nothing passes between {settlement} and {counterpart} except people who have to, and they do not linger. · 3. `[counterforce]` {settlement} and {counterpart} are as hostile as two towns can be without a hand raised, and the restraint is the whole shape of it.
 **`hostile`** — 1. `[ledger]` {settlement} treats {counterpart} as an adversary in every arrangement it makes, and makes no arrangements with it. · 2. `[street]` There is nobody in {settlement} with a good word for {counterpart} and few here who would trouble to explain why. · 3. `[visitor]` Coming into {settlement} from {counterpart} is a thing to be careful about mentioning.
 **`neutral`** — 1. `[ledger]` {settlement} and {counterpart} are known to each other and owe each other nothing. · 2. `[street]` {counterpart} is a place people from {settlement} go to when they have a reason, and they usually do not. · 3. `[visitor]` {settlement} has an opinion of {counterpart} and it is not a strong one.
@@ -6187,7 +6187,7 @@ unchanged.
 
 **`prominentRelationship` present**
 1. `[street]` Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself.
-2. `[ledger]` One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town is and is not willing to do.
+2. `[ledger]` One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town does and refuses to do.
 3. `[visitor]` Ask {settlement} about its neighbours and you get one name before you get a list.
 4. `[counterforce]` {settlement} has one tie that matters more than the others and has not let it become the only one.
 
@@ -6195,7 +6195,7 @@ unchanged.
 1. `[street]` {band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together. A town with the same neighbours and different pressures would not have them.
 2. `[ledger]` {band} of the ties on {settlement}'s roll are the town's own circumstances made into arrangements between people.
 3. `[visitor]` Some of what binds people together in {settlement} would make no sense in a settlement without {settlement}'s particular difficulties.
-4. `[unfolding]` {band} of {settlement}'s relationships rest on conditions rather than on choices. They are exactly as durable as the conditions.
+4. `[unfolding]` {band} of {settlement}'s relationships rest on conditions rather than on choices. That makes them exactly as durable as the conditions.
 
 **`flagDriven` count zero** *(the good state deserves its sentence)*
 1. `[street]` Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time.
@@ -6894,11 +6894,11 @@ no compass word, no real-world place, no named analogy.*
 3. `[ledger]` {institution}'s standing at {settlement} is old. It is entered everywhere: in the rolls, in the feast days, in who is buried where.
 
 **`ENDOWED`**
-1. `[ledger]` {institution} at {settlement} is propertied. The observance can outlast bad seasons, thin years, and unfriendly officers. *— requires `templeWealth`*
+1. `[ledger]` {institution} at {settlement} is propertied, and property is patience. The observance can outlast bad seasons, thin years, and unfriendly officers. *— requires `templeWealth`*
 2. `[visitor]` Whatever else changes in {settlement}, {institution}'s holdings do not look like they intend to. *— requires `templeWealth`*
 
 **`THIN`**
-1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold. The observance is present, and it does no more than that.
+1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold. The observance is present, and presence is the whole of it.
 2. `[street]` {institution} at {settlement} is one thread in the town's week, not the loom.
 
 ---

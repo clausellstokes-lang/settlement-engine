@@ -5429,7 +5429,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "rival": [
         {
           "angle": "ledger",
-          "text": "{settlement} and {counterpart} want the same things and do not have them together. Both towns price accordingly.",
+          "text": "{settlement} and {counterpart} want the same things and refuse to have them together. Both towns price accordingly.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5782,7 +5782,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town is and is not willing to do.",
+          "text": "One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town does and refuses to do.",
           "slots": [
             "settlement"
           ],
@@ -5834,7 +5834,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{band} of {settlement}'s relationships rest on conditions rather than on choices. They are exactly as durable as the conditions.",
+          "text": "{band} of {settlement}'s relationships rest on conditions rather than on choices. That makes them exactly as durable as the conditions.",
           "slots": [
             "band",
             "settlement"
