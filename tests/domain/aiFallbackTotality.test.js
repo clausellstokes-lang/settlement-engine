@@ -42,6 +42,9 @@ import {
 } from '../../src/lib/surveyorWrite.js';
 import { getByokStatus } from '../../src/lib/surveyorByok.js';
 import { compileTableClerk } from '../../src/lib/tableClerk.js';
+import { renderScribe } from '../../src/store/scribeTransport.js';
+import { renderTabPage } from '../../src/domain/prose/scribePage.js';
+import { proseOf } from '../../src/lib/scribeArtefact.js';
 import { TABLE_EVENT_KINDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES } from '../../src/domain/tableLedger.js';
 import {
   AI_SURFACES, AI_CLIENT_TRANSPORTS, AI_SURFACE_ROSTER, CLIENT_TRANSPORTS, CENSUS_FLOORS,
@@ -106,6 +109,31 @@ const SURFACE_FALLBACK = {
       expect(isFriendlyMessage(roadScene?.error), 'road-scene dressing returns a friendly AI-off refusal').toBe(true);
       // Additive-only: the un-dressed bundle stands alone, so the refusal carries no prose.
       expect(roadScene?.answer, 'no AI prose is fabricated for the road scene AI-off').toBeUndefined();
+    },
+  },
+  // ⭐ THE SCRIBE. Its AI-off fallback is the STRONGEST in this file, and it is structural
+  // rather than a message: the hand corpus is what the dossier draws by default, so with AI off
+  // (or the flag dark, or a render refused) every tab reads exactly as it always has. The driver
+  // therefore asserts BOTH halves — the transport refuses without throwing and writes nothing,
+  // and the page still composes its full deterministic prose from the corpus.
+  'scribe-render': {
+    async drive() {
+      const before = JSON.stringify(settlement);
+      const refusal = await renderScribe({
+        saveId: 'save-1', advanceSeq: 0, renderedFor: String(settlement._seed),
+        engineVersion: 'gen-1/sim-1', settlement, guidance: '',
+      });
+      const page = renderTabPage(settlement, 'defense', { audience: 'dm' });
+      return { refusal, page, unchanged: JSON.stringify(settlement) === before };
+    },
+    check({ refusal, page, unchanged }) {
+      expect(refusal?.ok, 'the transport refuses AI-off rather than throwing').toBe(false);
+      expect(refusal?.reason, 'and it says why in a word the caller can act on').toBe('offline');
+      // NOTHING IS WRITTEN. A refused render must leave the settlement exactly as it was.
+      expect(unchanged, 'a refused render mutates no settlement').toBe(true);
+      expect(proseOf(settlement), 'and mints no artefact').toBe(null);
+      // AND THE PAGE STILL READS: the corpus is the floor, not a placeholder.
+      expect(page.some((line) => line.kind === 'composed'), 'the hand corpus composes AI-off').toBe(true);
     },
   },
   'interview': {

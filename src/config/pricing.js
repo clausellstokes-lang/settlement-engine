@@ -65,12 +65,23 @@ const NEW_AI_COSTS = Object.freeze({
   narrative:   5,
   dailyLife:   4,
   progression: 6,
+  // ⭐ THE SCRIBE'S ONE RENDER SKU (chair ruling 1 as amended by ruling 19; migration 202's
+  // `spend_credits` arm is the server mirror). ONE PRICE FOR A WHOLE RENDER of a settlement's
+  // dossier prose — every tab AND the daily-life beats, per epoch — set at the retired
+  // narrative's own five credits. INERT: nothing spends this feature until FLAGS.scribe is lit,
+  // which is an owner act.
+  dossierProse: 5,
 });
 
 const FAST_AI_COSTS = Object.freeze({
   narrative:   2,
   dailyLife:   3,
   progression: 4,
+  // NO FAST VARIANT, and the same number rather than an omission. The Scribe runs on ONE model
+  // by ruling 8, so there is no cheaper tier to price; carrying the key at the same value means
+  // `getAiCostForModel('dossierProse', anyPreference)` answers the true price instead of
+  // `undefined`, which is what a missing key would have returned on a fast preference.
+  dossierProse: 5,
 });
 
 // Runtime quote cache. The server remains the charging authority; this holds the

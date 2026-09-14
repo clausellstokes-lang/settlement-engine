@@ -158,11 +158,15 @@ const SHELLS = readdirSync(FN_DIR)
   .sort();
 
 describe('every resolveProviderKey shell fails closed before it can spend', () => {
-  it('the census is the nine AI surfaces (a new importer joins it or this reds)', () => {
+  it('the census is the ten AI surfaces (a new importer joins it or this reds)', () => {
     // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted.
+    // ⭐ scribe-render JOINED 2026-09-14 (SCRIBE W2 commit 5). It resolves a provider key like any
+    // other AI surface, so chair ruling 10's BYOK path applies to it, and so does the owner's
+    // 2026-07-30 fail-closed ruling: a vault error is a typed refusal returned BEFORE the credit
+    // flow is constructed, so there is no reservation to release and no spend to refund.
     expect(SHELLS).toEqual([
       'ai-analyst', 'construct-realm', 'construct-settlement', 'custom-content',
-      'interpret-session', 'interview', 'parley',
+      'interpret-session', 'interview', 'parley', 'scribe-render',
       'surveyor-autonomy', 'surveyor-byok',
     ]);
   });

@@ -64,6 +64,7 @@ const DECLARED_IMPORTERS = Object.freeze({
   'src/store/scribeEpochLane.js': 'The past lane. Moves a render off `current` on the two verbs that retire one (undo, redo) and reads the tier cap; constructs nothing itself.',
   'src/store/campaignWorldPulseDeferred.js': 'The shared restore chokepoint re-attaches the moved artefact to the restored settlement and to the live view.',
   'src/store/scribeOpenTrigger.js': 'THE OPEN. Reads staleness to decide whether a render is owed; writes nothing.',
+  'src/store/scribeTransport.js': 'THE TRANSPORT. Lands each tab answer through the writer and persists the settlement through the ordinary save outbox.',
 });
 
 /** Every .js/.jsx file under a tree. */

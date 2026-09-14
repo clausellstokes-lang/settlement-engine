@@ -477,6 +477,47 @@ describe('Tier 3.3 — generate-narrative folds daily life into the single narra
   });
 });
 
+/**
+ * THE SCRIBE'S ONE RENDER SKU (W2 commit 5). `scribe-render` carries no cost table of its own —
+ * `spend_credits` resolves the price from the SQL CASE — so the drift pin is SQL against pricing.js
+ * rather than edge source against pricing.js. That is a stronger pin, not a weaker one: the number
+ * that actually charges the user is the one compared.
+ */
+describe('THE SCRIBE — the render SKU is one number in two places', () => {
+  it('migration 202\'s spend_credits arm equals NEW_AI_COSTS.dossierProse', () => {
+    const sql = readFileSync(join(ROOT, 'supabase', 'migrations', '202_scribe_claim.sql'), 'utf8');
+    const pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+    const server = sql.match(/when 'dossierProse' then (\d+)/)?.[1];
+    const block = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)?.[0];
+    const client = block?.match(/dossierProse:\s*(\d+)/)?.[1];
+    expect(server, 'migration 202 must carry a dossierProse arm or the spend RAISES').toBeTruthy();
+    expect(client, 'pricing.js must carry the client mirror').toBeTruthy();
+    expect(server).toBe(client);
+  });
+
+  it('the edge function names the SKU and never a price', () => {
+    const src = readFunction('scribe-render');
+    expect(src).toMatch(/SCRIBE_FEATURE = 'dossierProse'/);
+    // A second cost table would be a second place to keep the price right.
+    expect(src).not.toMatch(/CREDIT_COSTS/);
+  });
+
+  it('the free first render is claimed and released on migration 118\'s pattern', () => {
+    const sql = readFileSync(join(ROOT, 'supabase', 'migrations', '202_scribe_claim.sql'), 'utf8');
+    // ⛔ ANCHORED, with the m flag. An unanchored form also matches a migration HEADER that
+    // quotes the statement in prose, so a text assertion can stay green over English
+    // (tests/lint/netCurrentExtractorAnchor.walker.test.js holds the whole tree to this).
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.claim_free_scribe\(p_user uuid\)/m);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.release_free_scribe\(p_user uuid\)/m);
+    // SECURITY DEFINER with a pinned search_path and service-role-only execute, as 118 has.
+    expect(sql).toMatch(/grant execute on function public\.claim_free_scribe\(uuid\) to service_role;/);
+    expect(sql).not.toMatch(/grant execute on function public\.claim_free_scribe\(uuid\) to authenticated/);
+    const src = readFunction('scribe-render');
+    expect(src).toMatch(/claim_free_scribe/);
+    expect(src).toMatch(/release_free_scribe/);
+  });
+});
+
 describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
   let src;
   let pricing;

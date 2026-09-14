@@ -54,8 +54,16 @@ export function useScribeOpenTrigger({ enabled = true, saveId = null } = {}) {
     if (!flag('scribe')) return undefined;
     let live = true;
     (async () => {
-      const { runScribeOpenTrigger } = await import('../store/scribeOpenTrigger.js');
+      // THE TRANSPORT REGISTERS ITSELF, and it is imported HERE rather than by the trigger, so the
+      // trigger stays a pure decision with no edge client behind it and a test can install a
+      // recorder instead. Registration is idempotent; the decision below refuses with
+      // `no-transport` and spends no queue slot if this import ever fails.
+      const [{ runScribeOpenTrigger }, { registerScribeTransport }] = await Promise.all([
+        import('../store/scribeOpenTrigger.js'),
+        import('../store/scribeTransport.js'),
+      ]);
       if (!live) return;
+      registerScribeTransport();
       await runScribeOpenTrigger({
         state: useStore.getState(),
         saveId,

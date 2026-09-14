@@ -98,7 +98,10 @@ beforeEach(() => {
 // pricing changes, this block has to change too (and so does the
 // edge function). A grep for "CONTRACT_AI_COSTS" finds both ends.
 const CONTRACT_AI_COSTS_LEGACY = { narrative: 8, dailyLife: 10, progression: 12 };
-const CONTRACT_AI_COSTS_NEW    = { narrative: 5, dailyLife: 4,  progression: 6  };
+// dossierProse is THE SCRIBE's one render SKU (chair ruling 1 amended by 19), added with the
+// `scribe-render` edge function and mirrored by migration 202's `spend_credits` arm. It is inert
+// until FLAGS.scribe is lit; the arm below pins the number so the client and the SQL cannot drift.
+const CONTRACT_AI_COSTS_NEW    = { narrative: 5, dailyLife: 4,  progression: 6, dossierProse: 5 };
 
 describe('AI cost server contract', () => {
   it('legacy schedule matches the server-enforced legacy costs', () => {

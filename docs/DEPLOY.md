@@ -150,7 +150,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `201_scribe_prose_dm_full_strip.sql`** (this
+**Current migration head: `202_scribe_claim.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -164,6 +164,14 @@ migrations are additive and need no separate reading; these are the pending ones
 posture an operator has to know, and they stay listed here after they are applied
 because the fact does not expire:
 
+- `202_scribe_claim.sql` — **inert, and it touches the MONEY function.** Two things THE SCRIBE
+  needs before it can charge: the once-per-account free-render claim (`claim_free_scribe` /
+  `release_free_scribe` / `free_scribe_available`, migration 118's pattern verbatim), and a
+  `dossierProse` arm at 5 credits in `spend_credits`. The `spend_credits` body is migration 192's
+  VERBATIM with that ONE line added, so no existing feature's price, no config-first resolution and
+  no tier multiplier moves. Nothing spends the new feature until `FLAGS.scribe` is lit, which is a
+  separate owner act. Read it beside 192 before pushing, because it recreates a function every
+  paid surface calls.
 - `201_scribe_prose_dm_full_strip.sql` — **inert privacy hardening, safe to apply whenever the
   train is applied, and it does not switch anything on.** It recreates `_gallery_dm_full_json`
   from 129 VERBATIM with one more key on the drop chain, `- 'prose'`, so the Scribe's rendered
@@ -244,7 +252,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 32 functions total — deploy all of them on a first cutover.
+There are 33 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -304,13 +312,14 @@ npx supabase functions deploy custom-content                          # Surveyor
 npx supabase functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
 npx supabase functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
 npx supabase functions deploy surveyor-autonomy                       # Surveyor S7 autonomy composer (JWT + entitlement + kill-switch)
+npx supabase functions deploy scribe-render                            # THE SCRIBE — one tab of dossier prose per call (JWT, metered 'dossierProse', dark behind FLAGS.scribe)
 npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **32 deployable functions** (every `supabase/functions/*` dir except
+There are **33 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The sixteen `verify_jwt = false`
-and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
+and eighteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->

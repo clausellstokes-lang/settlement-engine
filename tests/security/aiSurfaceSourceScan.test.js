@@ -99,6 +99,18 @@ const AI_SURFACE_WALLS = Object.freeze({
   // No client apply seam exists in the tree today (the edge is live server-side). The
   // census tripwire below fires if a client invocation is ever wired without a disposition.
   'parley':              { disposition: 'none' },
+  // ⭐ THE SCRIBE (W2). WALLED, and the wall is unusually strong for an AI surface: the edge
+  // returns WORDS ONLY — a spine, its faces and its notebook rows, keyed to the annex `vid` the
+  // corpus already decided — and the client seam lands them through `landBlock`, the artefact's
+  // single writer, which stores exactly those fields and nothing else. The rendered text reaches
+  // a page only through the kernel's `scribeVariantPool`, which substitutes the words into the
+  // CORPUS variant and refuses the unit outright unless its face count, its slots and its vid all
+  // fit. So marks (which decide audience), `sources` (which decide who speaks), `pairs` and
+  // `slots` are always the corpus's: a compromised edge cannot mint a DM-only line onto a player
+  // page or seat a power the town does not hold. It writes no typed engine field at all —
+  // `settlement.prose` is an OUTPUT, and `tests/lint/scribeFiniteSemantics.walker.test.js` holds
+  // src/domain and src/generators to zero reads of it.
+  'scribe-render':       { disposition: 'walled', seam: 'src/store/scribeTransport.js', walls: ['landBlock', 'attachProse'] },
   // A key/health management transport — returns status rows, never engine state.
   'surveyor-byok':       { disposition: 'byok', seam: 'src/lib/surveyorByok.js' },
 });

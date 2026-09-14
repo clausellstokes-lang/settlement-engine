@@ -256,7 +256,9 @@ describe('THE MOUNT — the dossier is where the open is observed, and it costs 
       '../store/index.js',
       'react',
     ]);
-    expect(hook).toMatch(/await import\('\.\.\/store\/scribeOpenTrigger\.js'\)/);
+    expect(hook).toMatch(/import\('\.\.\/store\/scribeOpenTrigger\.js'\)/);
+    // And the TRANSPORT is reached the same way, so the edge client cannot enter this chunk.
+    expect(hook).toMatch(/import\('\.\.\/store\/scribeTransport\.js'\)/);
   });
 
   test('the hook does nothing at all with the flag dark', () => {

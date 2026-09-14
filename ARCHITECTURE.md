@@ -266,7 +266,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (201) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (202) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
@@ -278,7 +278,7 @@ shows all visible items.
   Operator Messages/receipt substrate with lease-safe broadcast delivery and
   explicit product-update consent — up to the current head. RLS is the security
   spine.
-- **functions/** (32 Deno edge functions) (Deno edge):
+- **functions/** (33 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.

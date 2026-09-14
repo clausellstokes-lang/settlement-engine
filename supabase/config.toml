@@ -556,6 +556,12 @@ verify_jwt = true
 [functions.parley]
 verify_jwt = true
 
+# scribe-render (THE SCRIBE, W2) — renders one tab of a settlement's dossier prose for the
+# signed-in owner of that world and spends credits doing it. Authenticated, user-facing, never
+# self-authenticating: every request is a credited call on behalf of exactly one account.
+[functions.scribe-render]
+verify_jwt = true
+
 # custom-content (Surveyor S4) — homebrew content compiler: authenticated, user-facing,
 # DM-only. verify_jwt true (the handler additionally re-checks auth, account status, the
 # Surveyor entitlement gate, and the per-stage kill-switch inside the function).
