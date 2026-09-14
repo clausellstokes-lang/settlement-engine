@@ -1141,15 +1141,15 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 **SLOTS.** `{settlement}` `{faction}` `{institution}` `{good}`
 
 **TIER: a large share off the books (≥30)**
-1. `[ledger · dm-only]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
-2. `[street · dm-only]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
-3. `[visitor · dm-only]` A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.
+1. `[ledger · dm-only]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done. The gap is not an accounting error.
+2. `[street · dm-only]` Half the business of this town is done in the ordinary way. The rest is done quietly. The quiet half is not hiding especially hard.
+3. `[visitor · dm-only]` A stranger who trades honestly here is undersold. He does not immediately understand why. {faction} is not paying what he is paying.
 4. `[unfolding · dm-only]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
 0. *(canonical)* Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
-1. `[ledger · dm-only]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
-2. `[street · dm-only]` There is a cheaper way to do most things here, and most people know somebody who knows it.
+1. `[ledger · dm-only]` A real portion of {settlement}'s trade sits outside the rolls. It is enough that the men who do pay their duties are competing at a disadvantage.
+2. `[street · dm-only]` There is a cheaper way to do most things here. Most people know somebody who knows it.
 3. `[visitor · dm-only]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
 
 **TIER: minor shadow activity (≥3)**
@@ -1181,13 +1181,13 @@ veto the owner takes, not an implementer's swap.
 0. *(frozen, canonical)* Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
 1. `[ledger]` The counts on this page were taken at the last full survey of {settlement}. Anything recorded since then may not have reached them yet.
 2. `[unfolding]` These figures describe {settlement} as it was judged at its last survey. Events entered after that judgement may not be counted in them yet.
-3. `[visitor]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
+3. `[visitor]` What follows is the last careful reckoning of {settlement}. It may not be today's.
 
 **CATALOG**
 0. *(frozen, canonical)* Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
 1. `[ledger]` This list of what {settlement} offers was drawn at the last survey. A house opened or closed since then may not appear on it yet.
 2. `[unfolding]` The catalog describes the services {settlement} was judged to hold. Later changes may not be counted in it yet.
-3. `[street]` What the town could do for a visitor was written down at the last survey, and may have moved since.
+3. `[street]` What the town could do for a visitor was written down at the last survey. It may have moved since.
 
 ---
 
@@ -1225,7 +1225,7 @@ contradict** it (R-DST-C).
 **POOR** — *getting by, no surplus*
 1. `[ledger]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
 2. `[street]` The town gets by. Nobody is going without bread and nobody is building anything either.
-3. `[visitor]` {settlement} looks maintained rather than made. What stands is kept standing; nothing new goes up.
+3. `[visitor]` {settlement} looks maintained rather than made. What stands is kept standing. Nothing new goes up.
 
 **MODERATE** — *steady, thin margin*
 1. `[ledger]` The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.
@@ -1233,17 +1233,17 @@ contradict** it (R-DST-C).
 3. `[visitor]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
-1. `[ledger]` {settlement} runs a reliable surplus. The margin is not large and it is dependable, and there are reserves behind it.
+1. `[ledger]` {settlement} runs a reliable surplus. The margin is not large and it is dependable. There are reserves behind it.
 2. `[street]` People here put things by, and can. That is the difference between this town and a poorer one.
-3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
+3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched. The stores are more than the season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
-1. `[ledger]` The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.
+1. `[ledger]` The surplus is large enough to be spent rather than merely held. The spending shows in what the town keeps up.
 2. `[visitor]` {settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
-3. `[street]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
+3. `[street]` There is money here. It goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
 
 **WEALTHY** — *reserves deep enough to outlast most crises*
-1. `[ledger]` {settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive; they are cushioned.
+1. `[ledger]` {settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive. They are cushioned.
 2. `[visitor]` The wealth here is not the kind a stranger has to look for. It is in the scale of everything at once: the gates, the halls, the goods on ordinary stalls.
 3. `[street]` The town is rich and behaves like it. What would be a crisis elsewhere is an expense here.
 

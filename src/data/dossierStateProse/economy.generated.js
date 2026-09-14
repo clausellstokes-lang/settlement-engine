@@ -1553,7 +1553,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.",
+          "text": "A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done. The gap is not an accounting error.",
           "slots": [
             "settlement"
           ],
@@ -1564,7 +1564,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.",
+          "text": "Half the business of this town is done in the ordinary way. The rest is done quietly. The quiet half is not hiding especially hard.",
           "slots": [],
           "vid": 2
         },
@@ -1573,7 +1573,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.",
+          "text": "A stranger who trades honestly here is undersold. He does not immediately understand why. {faction} is not paying what he is paying.",
           "slots": [
             "faction"
           ],
@@ -1601,7 +1601,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.",
+          "text": "A real portion of {settlement}'s trade sits outside the rolls. It is enough that the men who do pay their duties are competing at a disadvantage.",
           "slots": [
             "settlement"
           ],
@@ -1612,7 +1612,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "There is a cheaper way to do most things here, and most people know somebody who knows it.",
+          "text": "There is a cheaper way to do most things here. Most people know somebody who knows it.",
           "slots": [],
           "vid": 2
         },
@@ -1752,7 +1752,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "What follows is the last careful reckoning of {settlement}, and it may not be today's.",
+          "text": "What follows is the last careful reckoning of {settlement}. It may not be today's.",
           "slots": [
             "settlement"
           ],
@@ -1784,7 +1784,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What the town could do for a visitor was written down at the last survey, and may have moved since.",
+          "text": "What the town could do for a visitor was written down at the last survey. It may have moved since.",
           "slots": [],
           "vid": 3
         }
@@ -1894,7 +1894,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} looks maintained rather than made. What stands is kept standing; nothing new goes up.",
+          "text": "{settlement} looks maintained rather than made. What stands is kept standing. Nothing new goes up.",
           "slots": [
             "settlement"
           ],
@@ -1926,7 +1926,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMFORTABLE": [
         {
           "angle": "ledger",
-          "text": "{settlement} runs a reliable surplus. The margin is not large and it is dependable, and there are reserves behind it.",
+          "text": "{settlement} runs a reliable surplus. The margin is not large and it is dependable. There are reserves behind it.",
           "slots": [
             "settlement"
           ],
@@ -1940,7 +1940,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.",
+          "text": "The town is plainly past subsistence. The buildings are finished rather than patched. The stores are more than the season needs.",
           "slots": [],
           "vid": 3
         }
@@ -1948,7 +1948,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "PROSPEROUS": [
         {
           "angle": "ledger",
-          "text": "The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.",
+          "text": "The surplus is large enough to be spent rather than merely held. The spending shows in what the town keeps up.",
           "slots": [],
           "vid": 1
         },
@@ -1962,7 +1962,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.",
+          "text": "There is money here. It goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.",
           "slots": [],
           "vid": 3
         }
@@ -1970,7 +1970,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "WEALTHY": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive; they are cushioned.",
+          "text": "{settlement} holds reserves deep enough to sit out most of what could happen to it. The accounts are not merely positive. They are cushioned.",
           "slots": [
             "settlement"
           ],
