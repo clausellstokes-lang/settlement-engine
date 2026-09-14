@@ -315,14 +315,258 @@ def pool_fingerprint(name, units):
         'forecasts': sum(1 for f in faces if FORECAST.search(rendered(f))),
     }
 
+# ════════════════════════════════════════════════════════════════════════════════════════════
+# ⭐⭐ THE CHAIR'S CUT 7 — THE FOUR MEASURES. EVERYTHING IN THIS SECTION REFUSES NOTHING.
+# ════════════════════════════════════════════════════════════════════════════════════════════
+# WHY THEY EXIST, in the chair's own words: "a selector and its writers shared a model and neither
+# could see the repetition." Each of the four is a COUNT the refuter had to make by hand.
+
+# ── (1) VERB CONCENTRATION ──────────────────────────────────────────────────────────────────
+# The table is LEMMA-LABELLED, and the labels are the refuter's own from the two DULL packets
+# (`says says account holds says … has-it … takes-it`), so a chair can read the histogram against
+# the hand tallies in `rerefute.md` without a translation step.
+# ⚠ ONE DELIBERATE DIVERGENCE FROM THE HAND TALLY, AND IT IS THE INSTRUMENT'S WHOLE POINT.
+# The `hold` limb requires a COMPLEMENT (`holds that` / `holds it that`), for the reason the
+# attribution measure above already records: bare `holds` is possession far more often than
+# report. On the `settled, defenses beyond the need` pool the hand tally reads the v1 gate face
+# ("Whoever HOLDS the way through SAYS the bar goes down…") as `holds`; this instrument reads it
+# as `says`, which is the verb actually doing the attributing. The hand tally's v1 line therefore
+# shows one `holds` this table does not, and the difference is named here rather than reconciled
+# away. NEITHER READING IS REFUSED; the histogram is printed in full so both are visible.
+ATTRIB_VERB_TABLE = [
+    ('account',  re.compile(r"\bby\s+(?:the\s+|a\s+|an\s+)?[a-z'’\- ]{0,30}?(?:'s|’s)?\s*(?:own\s+)?accounts?\b", re.I)),
+    ('account',  re.compile(r"\b(?:the|a|an|its|their|his|her)\s+[a-z'’\-]+(?:'s|’s)\s+(?:own\s+)?(?:account|accounts|reckoning|reading|telling)\b", re.I)),
+    ('has-it',   re.compile(r'\b(?:has|have|had)\s+it\s+that\b', re.I)),
+    ('takes-it', re.compile(r'\b(?:takes|take|took)\s+it\s+that\b', re.I)),
+    ('puts-it',  re.compile(r'\b(?:puts|put)\s+it\s+that\b', re.I)),
+    ('hold',     re.compile(r'\b(?:holds|hold|held)\s+(?:that|it\s+that)\b', re.I)),
+    ('say',      re.compile(r'\b(?:says|say|said)\b', re.I)),
+    ('report',   re.compile(r'\b(?:reports|report|reported)\b', re.I)),
+    ('claim',    re.compile(r'\b(?:claims|claim|claimed)\b', re.I)),
+    ('reckon',   re.compile(r'\b(?:reckons|reckon|is\s+reckoned|are\s+reckoned|reckoned)\b', re.I)),
+    ('tell',     re.compile(r'\b(?:tells|tell|told)\b', re.I)),
+    ('ask',      re.compile(r'\b(?:is\s+asked|are\s+asked|asked\s+at|asked\s+in)\b', re.I)),
+    ('hear',     re.compile(r'\b(?:is\s+heard|are\s+heard)\b', re.I)),
+    ('add',      re.compile(r'\b(?:adds|add)\s+that\b', re.I)),
+    ('allow',    re.compile(r'\b(?:allows|allow)\s+that\b', re.I)),
+    ('agree',    re.compile(r'\b(?:agrees|agree)\s+that\b', re.I)),
+    ('note',     re.compile(r'\b(?:notes|note)\s+that\b', re.I)),
+    ('refuse',   re.compile(r'\b(?:will|would)\s+not\s+say\b', re.I)),
+]
+# The surface form actually on the page, for the histogram printed beside the lemma figure.
+SURFACE_RE = re.compile(r"\b(?:says|say|said|holds|hold|held|reports|report|claims|claim|"
+                        r"reckons|reckon|reckoned|tells|tell|told|accounts?|has|have|had|"
+                        r"takes|take|took|puts|put|asked|heard)\b", re.I)
+def attrib_verbs_of(row):
+    """The set of attribution-verb LEMMAS a row carries. A row carrying two counts in both, and
+    counts ONCE in the attributed-row denominator."""
+    txt = rendered(face_text(row))
+    return {lemma for lemma, rx in ATTRIB_VERB_TABLE if rx.search(txt)}
+def verb_concentration(rows):
+    hits, attributed = {}, 0
+    for r in rows:
+        ls = attrib_verbs_of(r)
+        if not ls: continue
+        attributed += 1
+        for l in ls: hits[l] = hits.get(l, 0) + 1
+    if not attributed:
+        return {'rows': len(rows), 'attributedRows': 0, 'commonestVerb': None,
+                'commonestVerbRows': 0, 'concentration': 0.0, 'verbs': {}, 'distinctVerbs': 0}
+    top = max(hits.items(), key=lambda kv: (kv[1], -ord(kv[0][0])))
+    return {'rows': len(rows), 'attributedRows': attributed, 'commonestVerb': top[0],
+            'commonestVerbRows': top[1], 'concentration': round(top[1] / attributed, 3),
+            'verbs': hits, 'distinctVerbs': len(hits)}
+
+# ── (2) SENTENCES PER FACE ──────────────────────────────────────────────────────────────────
+# The splitter is `entryWalker.sentencesOf` ported (slots neutralised to 'X' FIRST, then split),
+# because that is the counter the U2 ceiling and the gate's `sameSegments` both read. It differs
+# from this file's legacy `sentences_of` only in the slot handling, and no face carries a slot
+# (ruling 12), so the two agree on every face in the annex today.
+ENTRY_SENT_RE = re.compile(r'(?<=[.?!])\s+(?=[A-Z"\'(])')
+def sentences_of_entry(text):
+    t = ROLE_ANY_SLOT_RE.sub('X', str(text or ''))
+    if not t.strip(): return []
+    return [s for s in ENTRY_SENT_RE.split(t) if s.strip()]
+def sentences_per_face(faces):
+    """⭐ THE LAW'S OWN EXEMPLAR OF RESTRAINT IS TWO SENTENCES AND A FULL STOP ('The works are
+    kept. Nobody is paid to stand on them.'), so the TWO-sentence share is printed by name."""
+    counts = [len(sentences_of_entry(face_text(f))) for f in faces]
+    hist = {}
+    for c in counts: hist[c] = hist.get(c, 0) + 1
+    two = sum(1 for c in counts if c == 2)
+    words = [len(bare_words(face_text(f))) for f in faces]
+    return {'faces': len(counts), 'hist': hist,
+            'twoSentenceFaces': two,
+            'twoSentenceShare': round(two / len(counts), 3) if counts else 0.0,
+            'multiSentenceFaces': sum(1 for c in counts if c >= 2),
+            'shortestFaceWords': min(words) if words else 0,
+            'longestFaceWords': max(words) if words else 0,
+            'facesUnderElevenWords': sum(1 for w in words if w <= 10)}
+
+# ── (3) OPENER TRIGRAM REPETITION ───────────────────────────────────────────────────────────
+# The chair's own mechanical rule: "no face may open on the same three words as a sibling." A
+# SIBLING is a face of the SAME VARIANT — the unit that co-renders — so the repeat count is taken
+# per variant and then summed, and the pool-wide commonest trigram is printed beside it.
+# ⚠ RECORDED, BECAUSE IT IS THE CHAIR'S OWN DOING: ruling 25's role construction ("one of the
+# elders", "one of the aldermen") gave every force-seated source the same three opening words and
+# the ruling never said to vary its SYNTAX. This measure is what would have shown that.
+def opener_trigram(text, n=3):
+    norm = ROLE_ANY_SLOT_RE.sub(lambda m: m.group(0)[1:-1], VERB_SLOT_RE.sub(r'\1', str(text)))
+    parts = [re.sub(r"^[^a-z']+|[^a-z']+$", '', p.lower()) for p in re.split(r'\s+', norm.strip())]
+    parts = [p for p in parts if p]
+    return ' '.join(parts[:n]) if len(parts) >= n else ' '.join(parts)
+def opener_trigrams(variants):
+    per_variant, repeated_faces, allhist = [], 0, {}
+    for v in variants:
+        tg = [opener_trigram(face_text(f)) for f in v['faces']]
+        h = {}
+        for t in tg: h[t] = h.get(t, 0) + 1
+        for t in tg: allhist[t] = allhist.get(t, 0) + 1
+        rep = sum(c for c in h.values() if c > 1)
+        repeated_faces += rep
+        top = max(h.items(), key=lambda kv: (kv[1], kv[0])) if h else ('', 0)
+        per_variant.append({'variant': v['n'], 'faces': len(tg), 'commonest': top[0],
+                            'commonestCount': top[1], 'repeatedFaces': rep})
+    faces = sum(len(v['faces']) for v in variants)
+    top = max(allhist.items(), key=lambda kv: (kv[1], kv[0])) if allhist else ('', 0)
+    return {'faces': faces, 'perVariant': per_variant,
+            'poolCommonest': top[0], 'poolCommonestCount': top[1],
+            'repeatedWithinVariantFaces': repeated_faces,
+            'repeatedWithinVariantShare': round(repeated_faces / faces, 3) if faces else 0.0,
+            'variantsBreached': sum(1 for r in per_variant if r['repeatedFaces'] > 0)}
+
+# ── (4) SIBLING OVERLAP ─────────────────────────────────────────────────────────────────────
+# PORTED VERBATIM from the dock's own ruler — `src/domain/prose/composedWalker.js`
+# `contentWords` / `siblingDistance` and `scripts/prose-wave-gate.mjs` `siblingSpreadOf` — so the
+# figure here and the figure in the wave-gate packet are the SAME figure and can be compared
+# across sittings. A second ruler for the same quantity would be a second answer.
+ALTERNATIVE_STOP = ['that', 'this', 'with', 'from', 'have', 'been', 'being', 'than', 'then',
+                    'they', 'them', 'their', 'there', 'here', 'what', 'when', 'which', 'would',
+                    'could', 'should', 'about', 'into', 'over', 'rather', 'anything',
+                    'something', 'nothing', 'everything', 'more', 'most', 'much', 'only',
+                    'also', 'just', 'such', 'other', 'same', 'town', 'settlement', 'place',
+                    'thing', 'things']
+def content_words(text):
+    ws = re.sub(r'[^a-z ]', ' ', re.sub(r'\{[a-z_0-9]+\}', ' ', str(text or '').lower())).split()
+    ws = [w for w in ws if len(w) >= 4 and w not in ALTERNATIVE_STOP]
+    return list(dict.fromkeys(ws))
+def sibling_distance(a, b):
+    wa, wb = content_words(a), content_words(b)
+    shared = len([w for w in wa if w in wb]); union = len(set(wa) | set(wb))
+    return {'sameSegments': len(sentences_of_entry(a)) == len(sentences_of_entry(b)),
+            'overlapBp': 10000 if union == 0 else round(shared * 10000 / union)}
+def sibling_spread(faces):
+    fs = [face_text(f) for f in faces]
+    if len(fs) < 2:
+        return {'pairs': 0, 'medianOverlapBp': None, 'maxOverlapBp': None,
+                'sameSegmentPairs': 0, 'why': f'NOT-EXECUTABLE: a distance needs two faces and this variant carries {len(fs)}'}
+    rows = [sibling_distance(fs[a], fs[b]) for a in range(len(fs)) for b in range(a + 1, len(fs))]
+    ov = sorted(r['overlapBp'] for r in rows); mid = len(ov) // 2
+    return {'pairs': len(rows),
+            'medianOverlapBp': ov[mid] if len(ov) % 2 == 1 else (ov[mid - 1] + ov[mid]) // 2,
+            'maxOverlapBp': ov[-1], 'minOverlapBp': ov[0],
+            'sameSegmentPairs': sum(1 for r in rows if r['sameSegments']), 'why': ''}
+def sibling_overlaps(variants):
+    """⛔ THE UNIT IS THE SPINE PLUS ITS FACES, not the faces alone — because that is what the
+    wave gate feeds `siblingSpreadOf` (its packet reports 7 · 9 · 9 where the annex carries 6 · 8
+    · 8 faces), and a measure that cannot reproduce the packet it is meant to be compared with is
+    a second answer wearing the same name. VERIFIED 2026-09-13 against
+    `kit/packets/laneRW-DEF2/measure-cure-v3-sitting-5.json`: all six variant medians of the two
+    DULL pools reproduce EXACTLY (588 · 500 · 556 and 477 · 455 · 646).
+    ⚠ THE OTHER THREE MEASURES COUNT FACES ONLY, which is the grain their rules are written at
+    ("no FACE may open on the same three words as a sibling"; the two-sentence exemplar is a face)."""
+    per = [dict(variant=v['n'], **sibling_spread([v['spine']] + v['faces'])) for v in variants]
+    meds = [p['medianOverlapBp'] for p in per if p['medianOverlapBp'] is not None]
+    return {'perVariant': per,
+            'medianOfVariantMediansBp': int(statistics.median(meds)) if meds else None,
+            'worstVariantMedianBp': max(meds) if meds else None}
+
+def cut7_measures(name, variants):
+    rows = [v['spine'] for v in variants] + [f for v in variants for f in v['faces']]
+    faces = [f for v in variants for f in v['faces']]
+    return {'pool': name, 'variants': len(variants), 'rows': len(rows), 'faces': len(faces),
+            'verbConcentration': verb_concentration(rows),
+            'sentencesPerFace': sentences_per_face(faces),
+            'openerTrigram': opener_trigrams(variants),
+            'siblingOverlap': sibling_overlaps(variants)}
+
+# ── THE FABLE-SELECTED BENCHMARK ────────────────────────────────────────────────────────────
+# ⭐ PRINTED BESIDE EACH OF THE FOUR, exactly as the exemplars' attribution baseline is printed
+# beside the attribution figure today, and for the same reason: a measure without a comparison is
+# a number nobody can act on. THE POPULATION is the NINE pools of DS-DEF-2 whose packet was chosen
+# by a FABLE selector (the v3 dry run + batches 2 and 3; `args-DEF2-v3.onepool.json`,
+# `args-DEF2-v3.batch2.json`, `args-DEF2-v3.batch3.json`, each `selectModel: 'fable'`). The six of
+# batch 4 and the six of batch 5 were selected by Opus and are NOT in it — that split is the whole
+# comparison the selector measurement of 2026-09-13 16:0x was built on.
+# ⛔ THE FROZEN FIGURES BELOW WERE MEASURED AT DOCK HEAD 57a75858b AND ARE NEVER SILENTLY
+# REFRESHED. The LIVE figure is recomputed from the tree on every run and printed beside them, so
+# drift is visible rather than re-recorded (the ruling of `brief-chair-cut-5-and-two-reds.md`).
+FABLE_SELECTED_POOLS = [
+    'Invasion & War: walls with NO force',
+    'Invasion & War: force with NO walls',
+    'Internal Security: no legal infrastructure',
+    'Disasters & Famine: NO reserves, NO medical provision',
+    'Invasion & War: walls AND professional garrison',
+    'Internal Security: full legal chain (court AND prison)',
+    'Economic Survival: STRONG',
+    'Disasters & Famine: granary AND hospital',
+    'Beasts & Monsters: frontier, credible deterrence',
+]
+FABLE_BENCHMARK_FROZEN_AT = '57a75858b'
+# FROZEN 2026-09-13 by `measure-block.py <dock> docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+# '### DS-DEF-2' --benchmark` at dock HEAD 57a75858b, all nine pools found, none missing. Each
+# figure is the MEDIAN over the nine.
+FABLE_BENCHMARK_FROZEN = {
+    'pools': 9,
+    'verbConcentration': 0.786,          # the commonest attribution verb carries ~4 of 5 attributed rows
+    'twoSentenceShare': 0.067,           # about one face in fifteen stops and starts again
+    'repeatedWithinVariantShare': 0.0,   # ⭐ ZERO: not one Fable-selected pool repeats an opener trigram
+    'medianOfVariantMediansBp': 556,     # siblings share ~5.6% of their content tokens
+}
+# ⚠ A FIGURE THAT IS NOT A CEILING. The two DULL pools sit at 556 and 477 on measure 4 — AT and
+# BELOW the Fable benchmark — so measure 4 is the one of the four that does NOT separate the two
+# populations, and no cure should be steered by it alone. It is kept because the refuter's own
+# finding was the MOVEMENT (v2 0 -> 500 bp inside one cure), which a level cannot show.
+def _pool_key(name):
+    """The annex heading carries backticks and the args carry none; match on the bare words."""
+    return re.sub(r'[^a-z0-9]+', ' ', str(name).lower()).strip()
+FABLE_KEYS = {_pool_key(p) for p in FABLE_SELECTED_POOLS}
+def benchmark_of(cut7_rows):
+    rows = [r for r in cut7_rows if _pool_key(r['pool']) in FABLE_KEYS]
+    if not rows:
+        return {'pools': 0, 'found': [], 'missing': FABLE_SELECTED_POOLS,
+                'verbConcentration': None, 'twoSentenceShare': None,
+                'repeatedWithinVariantShare': None, 'medianOfVariantMediansBp': None}
+    found = [r['pool'] for r in rows]
+    meds = [r['siblingOverlap']['medianOfVariantMediansBp'] for r in rows
+            if r['siblingOverlap']['medianOfVariantMediansBp'] is not None]
+    return {
+        'pools': len(rows), 'found': found,
+        'missing': [p for p in FABLE_SELECTED_POOLS if _pool_key(p) not in {_pool_key(f) for f in found}],
+        'verbConcentration': round(statistics.median([r['verbConcentration']['concentration'] for r in rows]), 3),
+        'twoSentenceShare': round(statistics.median([r['sentencesPerFace']['twoSentenceShare'] for r in rows]), 3),
+        'repeatedWithinVariantShare': round(statistics.median([r['openerTrigram']['repeatedWithinVariantShare'] for r in rows]), 3),
+        'medianOfVariantMediansBp': int(statistics.median(meds)) if meds else None,
+    }
+def _bench_pair(live, frozen):
+    l = '—' if live is None else live
+    f = 'unfrozen' if frozen is None else frozen
+    return f'benchmark live {l} / frozen {f}'
+
 SCALARS = [('wordsPerSentenceMean', BAND_WPS), ('sameOpenerRate', BAND_RATE),
            ('petWordsPerHundredWords', BAND_PER100), ('sensoryNounsPerHundredWords', BAND_PER100),
            ('attributionsPerSentence', BAND_RATE), ('openShare', BAND_RATE)]
 
-def fingerprint(label, pools):
+def fingerprint(label, pools, variants=None):
     rows = [pool_fingerprint(k, v) for k, v in pools.items() if v]
     empty = [k for k, v in pools.items() if not v]
-    if not rows: return {'label': label, 'pools': [], 'summary': None}
+    vmap = variants or {}
+    cut7 = [cut7_measures(k, vs) for k, vs in vmap.items() if vs and any(v['faces'] for v in vs)]
+    bench = benchmark_of(cut7)
+    if not rows:
+        return {'label': label, 'pools': [], 'summary': None, 'cut7': cut7,
+                'cut7Benchmark': {'live': bench, 'frozen': FABLE_BENCHMARK_FROZEN,
+                                  'frozenAt': FABLE_BENCHMARK_FROZEN_AT}, 'cut7Summary': None}
     med = {k: statistics.median([r[k] for r in rows]) for k, _ in SCALARS}
     for r in rows:
         inside = all(abs(r[k] - med[k]) <= band for k, band in SCALARS)
@@ -349,7 +593,24 @@ def fingerprint(label, pools):
                                 'perSentence': round(ATTRIB_BASELINE_HITS / ATTRIB_BASELINE_SENTENCES, 3)},
         'bands': {'wordsPerSentenceMean': BAND_WPS, 'rates': BAND_RATE, 'perHundredWords': BAND_PER100},
     }
-    return {'label': label, 'pools': rows, 'summary': summary}
+    c7sum = None
+    if cut7:
+        meds = [c['siblingOverlap']['medianOfVariantMediansBp'] for c in cut7
+                if c['siblingOverlap']['medianOfVariantMediansBp'] is not None]
+        c7sum = {
+            'pools': len(cut7),
+            'rows': sum(c['rows'] for c in cut7), 'faces': sum(c['faces'] for c in cut7),
+            'verbConcentrationMedian': round(statistics.median([c['verbConcentration']['concentration'] for c in cut7]), 3),
+            'poolsOverHalfOnOneVerb': sum(1 for c in cut7 if c['verbConcentration']['concentration'] > 0.5),
+            'twoSentenceShareMedian': round(statistics.median([c['sentencesPerFace']['twoSentenceShare'] for c in cut7]), 3),
+            'poolsWithNoTwoSentenceFace': sum(1 for c in cut7 if c['sentencesPerFace']['twoSentenceFaces'] == 0),
+            'repeatedOpenerFaces': sum(c['openerTrigram']['repeatedWithinVariantFaces'] for c in cut7),
+            'poolsWithARepeatedOpener': sum(1 for c in cut7 if c['openerTrigram']['repeatedWithinVariantFaces'] > 0),
+            'siblingOverlapMedianBp': int(statistics.median(meds)) if meds else None,
+        }
+    return {'label': label, 'pools': rows, 'summary': summary, 'cut7': cut7, 'cut7Summary': c7sum,
+            'cut7Benchmark': {'live': bench, 'frozen': FABLE_BENCHMARK_FROZEN,
+                              'frozenAt': FABLE_BENCHMARK_FROZEN_AT}}
 
 def print_fingerprint(fp):
     if not fp['pools']:
@@ -385,6 +646,54 @@ def print_fingerprint(fp):
           + (f" — {' | '.join(s['perfectPoolNames'])}" if s['perfectPoolNames'] else '')
           + f"  [band: wps ±{BAND_WPS}, shares ±{BAND_RATE}, per-100w ±{BAND_PER100}; sd 0 and one opener + one close class, units ≥ 2]")
 
+def print_cut7(fp):
+    """⭐ THE FOUR MEASURES (the chair's cut 7). REFUSES NOTHING — no threshold, no exit code."""
+    cut7 = fp.get('cut7') or []
+    if not cut7:
+        print(f"\n── THE FOUR MEASURES · {fp['label']}: no variants parsed ──"); return
+    b = fp['cut7Benchmark']; live, frozen = b['live'], b['frozen']
+    print(f"\n── THE FOUR MEASURES (cut 7) · {fp['label']} — REFUSES NOTHING ──")
+    for i, c in enumerate(cut7, 1):
+        vc, sp, ot, so = (c['verbConcentration'], c['sentencesPerFace'],
+                          c['openerTrigram'], c['siblingOverlap'])
+        mark = ' ⟵ FABLE-SELECTED' if _pool_key(c['pool']) in FABLE_KEYS else ''
+        print(f"  [M{i:02d}] {c['pool']}{mark}")
+        print(f"        (1) VERB CONCENTRATION  {vc['concentration']} — '{vc['commonestVerb']}' on "
+              f"{vc['commonestVerbRows']} of {vc['attributedRows']} attributed rows "
+              f"({c['rows']} rows, {vc['distinctVerbs']} distinct verbs) · {_bench_pair(live['verbConcentration'], frozen['verbConcentration'])}")
+        print(f"            verbs {hist_str(vc['verbs'])}")
+        print(f"        (2) SENTENCES PER FACE  two-sentence share {sp['twoSentenceShare']} "
+              f"({sp['twoSentenceFaces']} of {sp['faces']}) · hist {hist_str({str(k): v for k, v in sp['hist'].items()})} · "
+              f"shortest {sp['shortestFaceWords']}w · longest {sp['longestFaceWords']}w · "
+              f"≤10w {sp['facesUnderElevenWords']} · {_bench_pair(live['twoSentenceShare'], frozen['twoSentenceShare'])}")
+        print(f"        (3) OPENER TRIGRAM      pool commonest '{ot['poolCommonest']}' ×{ot['poolCommonestCount']} · "
+              f"faces sharing a trigram with a sibling {ot['repeatedWithinVariantFaces']} of {ot['faces']} "
+              f"({ot['repeatedWithinVariantShare']}) in {ot['variantsBreached']} variant(s) · "
+              f"{_bench_pair(live['repeatedWithinVariantShare'], frozen['repeatedWithinVariantShare'])}")
+        for r in ot['perVariant']:
+            print(f"            v{r['variant']}: '{r['commonest']}' ×{r['commonestCount']} of {r['faces']} faces · repeated {r['repeatedFaces']}")
+        print(f"        (4) SIBLING OVERLAP     median of variant medians {so['medianOfVariantMediansBp']} bp · "
+              f"worst variant {so['worstVariantMedianBp']} bp · {_bench_pair(live['medianOfVariantMediansBp'], frozen['medianOfVariantMediansBp'])}")
+        for r in so['perVariant']:
+            if r['medianOverlapBp'] is None:
+                print(f"            v{r['variant']}: {r['why']}")
+            else:
+                print(f"            v{r['variant']}: median {r['medianOverlapBp']} bp · min {r['minOverlapBp']} · max {r['maxOverlapBp']} · "
+                      f"pairs {r['pairs']} · sameSegmentPairs {r['sameSegmentPairs']}/{r['pairs']}")
+    s = fp.get('cut7Summary')
+    if s:
+        print(f"  BLOCK SUMMARY (the four measures) {fp['label']}: pools {s['pools']} · rows {s['rows']} · faces {s['faces']}")
+        print(f"    (1) verb concentration median {s['verbConcentrationMedian']} · pools over HALF the rows on one verb: {s['poolsOverHalfOnOneVerb']}/{s['pools']}")
+        print(f"    (2) two-sentence share median {s['twoSentenceShareMedian']} · pools with NO two-sentence face: {s['poolsWithNoTwoSentenceFace']}/{s['pools']}")
+        print(f"    (3) faces sharing an opener trigram with a sibling: {s['repeatedOpenerFaces']} · pools breached {s['poolsWithARepeatedOpener']}/{s['pools']}")
+        print(f"    (4) sibling overlap, median over pools: {s['siblingOverlapMedianBp']} bp")
+    print(f"    BENCHMARK — the {live['pools']} FABLE-SELECTED pools found in this block "
+          f"(frozen figures taken at {b['frozenAt']}): verb-concentration {live['verbConcentration']} · "
+          f"two-sentence share {live['twoSentenceShare']} · repeated-opener share {live['repeatedWithinVariantShare']} · "
+          f"sibling overlap {live['medianOfVariantMediansBp']} bp")
+    if live['missing']:
+        print(f"    ⚠ not in this block: {' | '.join(live['missing'])}")
+
 if __name__ == '__main__':
     argv = [a for a in sys.argv[1:] if not a.startswith('--')]
     flags = {a for a in sys.argv[1:] if a.startswith('--')}
@@ -393,15 +702,22 @@ if __name__ == '__main__':
     base = argv[4] if len(argv) > 4 else 'f2da5a3ee'
     shipped = subprocess.run(['git','-C',dock,'show',base+':'+annex],capture_output=True,text=True).stdout
     tree = open(os.path.join(dock, annex)).read()
-    sp = pools_of(block_lines(shipped, head)); tp = pools_of(block_lines(tree, head))
+    sl, tl = block_lines(shipped, head), block_lines(tree, head)
+    sp, tp = pools_of(sl), pools_of(tl)
+    sv, tv = variants_of(sl), variants_of(tl)
+    fps = fingerprint('SHIPPED ' + base, sp, sv)
+    fpt = fingerprint('TREE ' + dock.rstrip('/').split('/')[-1], tp, tv)
+    if '--benchmark' in flags:
+        b = fpt['cut7Benchmark']['live']
+        print(f"THE FABLE-SELECTED BENCHMARK, recomputed from the tree of {dock} at "
+              f"{subprocess.run(['git','-C',dock,'rev-parse','--short','HEAD'],capture_output=True,text=True).stdout.strip()}")
+        print(json.dumps(b, indent=1)); sys.exit(0)
     quiet = '--json-only' in flags
     if not quiet:
         report('SHIPPED  ' + base, sp, budget)
         report('TREE     ' + dock.rstrip('/').split('/')[-1], tp, budget)
-    fps = fingerprint('SHIPPED ' + base, sp)
-    fpt = fingerprint('TREE ' + dock.rstrip('/').split('/')[-1], tp)
-    if not quiet:
         print_fingerprint(fps); print_fingerprint(fpt)
+        print_cut7(fps); print_cut7(fpt)
     if '--json' in flags or quiet:
         print(json.dumps({'block': head, 'dock': dock, 'annex': annex, 'baseRev': base,
                           'budget': budget, 'shipped': fps, 'tree': fpt}, indent=1))
