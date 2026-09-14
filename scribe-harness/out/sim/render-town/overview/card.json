@@ -791,7 +791,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+     "value": "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -886,7 +886,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+     "value": "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -981,7 +981,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+     "value": "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1076,7 +1076,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+     "value": "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1171,7 +1171,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}",
+     "value": "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1656,7 +1656,7 @@
      "state": "decided",
      "status": "FROZEN",
      "unknown": false,
-     "value": "{full, npc1, npc2, phrasing, tension, type}",
+     "value": "{full: \"Between Berchta Schmidt and Karl Berger stands an old kindness with the structure of a mor (cut)\", npc1: \"Berchta Schmidt\", npc2: \"Karl Berger\", phrasing: \"The relationship between Berchta Schmidt and Karl Berger is best understood as outstanding (cut)\", tension: \"Karl Berger is about to call it in.\", type: \"Outstanding Debt\"}",
      "writers": 0
     }
    ],

@@ -35,9 +35,9 @@ POOL "MARKET-OPEN" in block DS-GEN-13
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.isEntrepot = false (FROZEN)
-    readings.tradeRouteAccess = "road" (FROZEN)
+    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on
+    readings.isEntrepot = false (the engine's own field is `economicState.isEntrepot`)
+    readings.tradeRouteAccess = "road" (the engine's own field is `config.tradeRouteAccess`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -52,7 +52,7 @@ POOL "ADMINISTERED" in block DS-GEN-17
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.inst = "{hasAlchemist, hasBank, hasBlackMarket, hasCathedral, hasCharterHall, hasChurch, hasCourtSystem, hasCriminalInst, hasFreeCompany, hasGangInfra, hasGarrison, hasGates, hasGranary, hasGuild, hasHospital, hasMagesGuild, hasMagicInst, hasMarket, hasMercenary, hasMerchantGuild, hasMilitaryInst, hasMilitia, hasMonastery, hasNavy, hasPort, hasPrison, hasSmuggling, hasThievesGuild, hasWalls, hasWarehouse, hasWatch, hasWizardTower, names}" (FROZEN)
+    readings.inst = "{hasAlchemist, hasBank, hasBlackMarket, hasCathedral, hasCharterHall, hasChurch, hasCourtSystem, hasCriminalInst, hasFreeCompany, hasGangInfra, hasGarrison, hasGates, hasGranary, hasGuild, hasHospital, hasMagesGuild, hasMagicInst, hasMarket, hasMercenary, hasMerchantGuild, hasMilitaryInst, hasMilitia, hasMonastery, hasNavy, hasPort, hasPrison, hasSmuggling, hasThievesGuild, hasWalls, hasWarehouse, hasWatch, hasWizardTower, names}" (the engine's own field is `economicState.compound.inst`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -67,7 +67,7 @@ POOL "prosperity: Comfortable / Prosperous" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    name = "Spitzplatz" (LIVE)
+    name = "Spitzplatz"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -82,7 +82,7 @@ POOL "economicViability.viable: true" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.viable = true (FROZEN)
+    readings.viable = true (the engine's own field is `economicViability.viable`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -97,7 +97,7 @@ POOL "defenseProfile.readiness.label: Well-Defended" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    name = "Spitzplatz" (LIVE)
+    name = "Spitzplatz"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -112,8 +112,8 @@ POOL "scores.military: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.scores = "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}" (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -128,8 +128,8 @@ POOL "scores.monster: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.scores = "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}" (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -144,8 +144,8 @@ POOL "scores.internal: ADEQUATE" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.scores = "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}" (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -160,8 +160,8 @@ POOL "scores.economic: STRONG" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.scores = "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}" (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -176,8 +176,8 @@ POOL "scores.magical: WEAK" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
-    readings.scores = "{disaster, economic, internal, magicDependency, magical, military, monster, traditions}" (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`
+    readings.scores = "{disaster: 64, economic: 76, internal: 47, magicDependency: false, magical: 38, military: 73, monster: 76, traditions: {5 keys}}" (the engine's own field is `defenseProfile.scores`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -192,7 +192,7 @@ POOL "foodSecurity.label: Pressured" in block DS-GEN-3
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    name = "Spitzplatz" (LIVE)
+    name = "Spitzplatz"
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -210,7 +210,7 @@ POOL "intensity: moderate" in block DS-GEN-2
     {faction2} is "The Order of the Watch" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    conflict.intensity = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    conflict.intensity = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says) — the loop variable over the conflict rows the desk is handed; the rows themselves are `conflicts`, and this reading is one row of that list
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -238,7 +238,7 @@ POOL "road" in block DS-GEN-6
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.tradeRouteAccess = "road" (FROZEN)
+    readings.tradeRouteAccess = "road" (the engine's own field is `config.tradeRouteAccess`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -253,7 +253,7 @@ POOL "tier overlay: other tiers" in block DS-GEN-6
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.tier = "town" (FROZEN)
+    readings.tier = "town" (the engine's own field is `tier`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -268,7 +268,7 @@ POOL "prominentRelationship present" in block DS-REL-2
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.prominentRelationship = "{full, npc1, npc2, phrasing, tension, type}" (FROZEN)
+    readings.prominentRelationship = "{full: \"Between Berchta Schmidt and Karl Berger stands an old kindness with the structure of a mor (cut)\", npc1: \"Berchta Schmidt\", npc2: \"Karl Berger\", phrasing: \"The relationship between Berchta Schmidt and Karl Berger is best understood as outstanding (cut)\", tension: \"Karl Berger is about to call it in.\", type: \"Outstanding Debt\"}" (the engine's own field is `prominentRelationship`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -284,8 +284,8 @@ POOL "flagDriven count zero" in block DS-REL-2
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.relationships = "[11 rows]" (FROZEN)
-    readings.relationships.length = 11 (FROZEN)
+    readings.relationships = "[11 rows]" (the engine's own field is `relationships`)
+    readings.relationships.length = 11 (the engine's own field is `relationships.length`)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
