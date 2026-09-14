@@ -107,7 +107,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "daily_life",
@@ -129,6 +129,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -1971,7 +2081,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "defense",
@@ -1993,6 +2103,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -2774,7 +2994,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "economics",
@@ -2796,6 +3016,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -3041,7 +3371,7 @@
           "vid": 4
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "faith",
@@ -3063,6 +3393,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -3676,7 +4116,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "history",
@@ -3698,6 +4138,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -5545,7 +6095,7 @@
           "vid": 3
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "overview",
@@ -5567,6 +6117,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -6118,7 +6778,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "plot_hooks",
@@ -6140,6 +6800,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -7004,7 +7774,7 @@
           "vid": 3
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "power",
@@ -7026,6 +7796,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -7184,7 +8064,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "relationships",
@@ -7206,6 +8086,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -7588,7 +8578,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "resources",
@@ -7610,6 +8600,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -7853,7 +8953,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "services",
@@ -7875,6 +8975,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -8343,7 +9553,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "viability",
@@ -8365,6 +9575,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {
@@ -8535,7 +9855,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/1",
+      "schema": "scribe-town-card/2",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "war",
@@ -8557,6 +9877,116 @@
           "watch": false
         },
         "hasWorld": false,
+        "holders": [
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "treasury",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "muster",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "census",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "parish",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "toll-bar",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "market",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "watch",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "court",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "elders",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "tradition",
+            "marks": [],
+            "rosterBacked": false,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "road",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          },
+          {
+            "absent": [],
+            "holders": [],
+            "interested": false,
+            "kind": "office",
+            "marks": [],
+            "rosterBacked": true,
+            "standing": "SOURCE-UNRESOLVED"
+          }
+        ],
         "id": "s_f31e9b37e51d7959",
         "institutions": [
           {

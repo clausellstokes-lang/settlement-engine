@@ -15,7 +15,17 @@ export const ACCOUNT_EXPORT_VERSION = 4;
 // 16 MiB. Leave equal bounded headroom for settlements/campaigns and JSON
 // envelope overhead so a valid archive is not rejected merely because it was
 // placed inside the account-transfer format.
-export const MAX_IMPORT_BYTES = 32 * 1024 * 1024;
+//
+// ⭐ RAISED 32 MiB → 64 MiB FOR THE SCRIBE (design §5 EXPORT). The rendered dossier prose
+// (`settlement.prose`, lib/scribeArtefact.js) rides inside each settlement blob, so a scribed
+// town's export row grows by roughly 150-200 KB. The exporter refuses to produce a file above
+// this ceiling (lib/accountData.js) and the importer refuses to read one, which means a ceiling
+// left where it was would have turned a scribed estate into an account that cannot re-import
+// its OWN export: a silent data-loss path with no test on it. The raise is safe to make
+// one-sided because `validateAccountImport`'s version guard already refuses an envelope from a
+// newer build outright, so an older client meeting a larger file gives a plain message rather
+// than a partial read. The 1,000-town round trip is pinned in tests/lib/scribeArtefact.test.js.
+export const MAX_IMPORT_BYTES = 64 * 1024 * 1024;
 export const MAX_IMPORT_SETTLEMENTS = 1_000;
 export const MAX_IMPORT_CAMPAIGNS = 1_000;
 

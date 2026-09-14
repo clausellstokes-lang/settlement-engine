@@ -122,11 +122,28 @@ export function planTimelineUndo(eventLog) {
  * embedding the history inside every snapshot made each new snapshot carry all
  * prior ones (size ≈ base × 2^N). Stripping here guarantees payloads can never
  * nest, whichever timeline (draft sibling or saved-entry sibling) they land in.
+ *
+ * ⛔ THE SCRIBE ARTEFACT IS STRIPPED FOR THE SAME REASON, AND IT IS THE LARGER ONE.
+ * `settlement.prose` is the rendered dossier prose (lib/scribeArtefact.js): write-once per
+ * epoch, ~150-200 KB on a scribed town. MAX_VERSION_HISTORY is 50, so an unstripped snapshot
+ * lane would put ten megabytes of duplicated prose on ONE save row's version_history JSONB —
+ * for nothing, because a snapshot records CONTENT and a restore re-attaches the artefact from
+ * the live blob it never left. The prose lifecycle keeps its own past lane
+ * (`prose.epochs[]`), which is where an undone or redone render is saved; the version
+ * timeline is not that lane and must not become a second copy of it.
+ *
+ * The key is spelled literally here rather than imported from lib/scribeArtefact.js because
+ * THIS MODULE IS EAGER (it sits in src/main.jsx's static closure) and the first-paint byte
+ * budget is an exact ratchet; a delete needs no module. The three strip sites are enumerated in
+ * tests/lint/scribeFiniteSemantics.walker.test.js so the spelling cannot drift unnoticed.
  */
 export function snapshotSettlement(settlement) {
   if (!settlement) return null;
   const clone = cloneJson(settlement);
-  if (clone && typeof clone === 'object') delete clone.versionHistory;
+  if (clone && typeof clone === 'object') {
+    delete clone.versionHistory;
+    delete clone.prose;
+  }
   return clone;
 }
 

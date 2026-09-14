@@ -30,6 +30,8 @@
  * must be at least as long as a Stripe Checkout session lives (~24h).
  */
 
+import { stripProse } from './scribeArtefact.js';
+
 const KEY = 'sf.pendingDossier';
 const TTL_MS = 24 * 60 * 60 * 1000; // 24 hours — matches Stripe's session lifetime
 const MAX_ENTRIES = 5;              // small cap; unpaid entries are LRU-evicted
@@ -152,8 +154,14 @@ export function stashPendingDossier(settlement, checkoutToken, sessionId = null)
     }
   }
 
+  // ⛔ THE SCRIBE ARTEFACT NEVER ENTERS THE STASH. This store keeps up to five WHOLE
+  // settlements in localStorage across a Stripe round trip, against an origin quota of about
+  // five megabytes, and it already fails closed when the write throws. Rendered dossier prose
+  // is ~150-200 KB a town, so five stashed towns carrying it would put the quota in reach and
+  // the failure would land on a BUYER mid-checkout. Nothing is lost: a bought dossier renders
+  // on its first save like any other town (design §5, the pending-dossier stash).
   store.entries[checkoutToken] = {
-    settlement,
+    settlement: stripProse(settlement),
     checkoutToken,
     sessionId: (typeof sessionId === 'string' && sessionId) ? sessionId : null,
     stashedAt: Date.now(),

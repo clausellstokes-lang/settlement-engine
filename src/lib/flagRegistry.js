@@ -125,6 +125,16 @@ export const FLAG_DEFAULTS = Object.freeze({
   // also activates the RealmUnfurlLoading backdrop over the booting FMG map.
   loadingJourneyFilm: true,
   welcomeJourneyFilm: true,
+  // ⭐ THE SCRIBE (docs/DESIGN_SCRIBE_GENERATION_TIME_PROSE.md). AI-written dossier prose,
+  // rendered once per epoch when a settlement's dossier is opened, refuted by the tier-0
+  // instruments before it is persisted, and kept on the settlement blob. DEFAULT OFF and INERT:
+  // with the flag off nothing renders, nothing is billed, no Scribe module enters the
+  // first-paint closure (every one of them loads through a dynamic import), and every tab draws
+  // the hand corpus exactly as it does today. The lifecycle cures that ride beside it (the
+  // snapshot strip, the stash strip, the locked carry) are unconditional because they are
+  // no-ops on a settlement that carries no artefact. Lighting this is an owner act: it opens a
+  // PAID surface and needs the render SKU seeded and the key in place first.
+  scribe: false,
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

@@ -489,6 +489,17 @@ describe('townCard — the golden', () => {
    * 2026-09-14 — GENESIS (W0). The first golden town of `goldenMasterCorpus.js`, all thirteen
    *   tabs, at the DM audience, with the committed static card joined. Recorded at the W0 lane's
    *   clean tip off `7992713d0`.
+   *
+   * 2026-09-14 — RE-RECORDED (W2 commit 1), card schema /1 → /2. CAUSE: `town.holders` was
+   *   added, under the chair's ruling on W1's open item. W1 MEASURED that A13's INTERESTED
+   *   limb was NOT-EXECUTABLE from the card alone, because whether the body keeping a cited
+   *   record has an interest in it needs impairments and capture state, which are settlement
+   *   facts the card did not carry — and the SERVER-side refuter has only the card. The row
+   *   resolves the twelve holder kinds once, where the settlement IS in hand, so the arm now
+   *   executes on the ground the product actually refutes on. NOTHING ELSE MOVED: every other
+   *   field of every tab is byte-identical to the genesis record, and the two absences the
+   *   headless card cannot read (captured, controlled) are PRINTED in each row's `absent`
+   *   rather than defaulted to false.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

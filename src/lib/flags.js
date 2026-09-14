@@ -85,6 +85,7 @@ const FLAG_DESCRIPTIONS = Object.freeze({
   pricingSimulationCopy: "Simulation-led premium pricing copy. ON (default) = \"generate a town, then run the region\" — names the simulation, never size. OFF = the old \"unlimited saves / full size\" copy.",
   loadingJourneyFilm: "C2L: the progress-scrubbed journey film as the loading backdrop (generation + realm). ON is the selected default; OFF retains the stills-only accessibility/fallback floor.",
   welcomeJourneyFilm: "C2: the scroll-scrubbed journey film behind the Welcome page. ON is the selected default; OFF retains the stills-only, zero-video-byte floor.",
+  scribe: "THE SCRIBE: AI-written dossier prose, rendered once per epoch when a settlement's dossier is opened, refuted by the tier-0 instruments, and persisted on the settlement. Default OFF and INERT: with the flag off nothing renders, nothing is billed, no Scribe module enters the first-paint closure, and every tab draws the hand corpus. Lighting it opens a PAID surface, so it needs the render SKU seeded and the provider key in place first.",
 });
 
 // ── Composed registry ────────────────────────────────────────────────────────

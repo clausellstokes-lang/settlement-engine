@@ -3,7 +3,7 @@
     "src/domain/prose/refuteUnit.js",
     "src/domain/prose/epochRecord.js"
   ],
-  "sourceHash": "390dc0fff98dfd6b",
+  "sourceHash": "af3ad7e2edcaa073",
   "inputs": [
     "src/data/powerData.js",
     "src/domain/arcaneIdentity.js",

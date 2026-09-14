@@ -307,6 +307,17 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // strictly better than the gap it replaces.
     delete clone.customContentRoster;
     delete clone.customContentProvenance;
+    // ⛔ THE SCRIBE ARTEFACT (W2, ruling 3). `settlement.prose` is the rendered dossier prose.
+    // DEFAULT mode already drops it through the fail-closed top-level allowlist — `prose` is
+    // deliberately NOT in PUBLIC_TOPLEVEL_KEYS — but FULL mode skips that gate and is a
+    // denylist, so without this line a `gallery_share_dm` share would publish it. That is not
+    // what the toggle sells: its own copy scopes it to "secrets, plot hooks, NPC goals and
+    // relationships, your DM notes, and the DM Compass". Rendered prose is paid, per-account,
+    // never human-refuted content, and the chair's ruling is that it is not shown to gallery
+    // viewers and not copied on gallery import; hiding it is the reversible first state.
+    // THE SERVER TWIN LANDS WITH IT, unlike the two keys above: migration 201 adds `- 'prose'`
+    // to `_gallery_dm_full_json`'s delete chain (FILE ONLY — applying it is the owner's act).
+    delete clone.prose;
     // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting
     // pantheon (config.latentPantheon) NEVER leaves the account — not even on a
     // DM-full share. The owner's gallery_share_dm opt-in reveals THEIR authored

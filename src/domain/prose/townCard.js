@@ -93,6 +93,9 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { deriveArmedForces } from '../display/defenseDisplay.js';
+import {
+  HOLDER_KINDS, INTERESTED, holdersOf, recordOf, standingOf,
+} from './holderTable.js';
 import { GENERATOR_VERSION, SIMULATION_VERSION } from '../settlement.schema.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../data/dossierStateProse/defense.generated.js';
@@ -102,8 +105,17 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../data/dossierStateProse/power.ge
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../data/dossierStateProse/stressors.generated.js';
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warFaith.generated.js';
 
-/** The card's schema id. A shape change takes the next number and says why. */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/1';
+/**
+ * The card's schema id. A shape change takes the next number and says why.
+ *
+ * /2 (W2, 2026-09-14): `town.holders` added — the twelve holder kinds with the body that keeps
+ * each record and whether that body is INTERESTED in the fact it holds. W1 measured that A13's
+ * INTERESTED limb was NOT-EXECUTABLE from the card alone (it needs impairments and capture
+ * state, which are settlement facts the card did not carry), and the server-side refuter has
+ * only the card. Resolving the standing once, where the settlement is in hand, turns that arm
+ * on. The golden was re-recorded for this cause and no other.
+ */
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/2';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -325,7 +337,51 @@ function townOf(s, world) {
     ['forceBuckets', sorted(['militia', 'watch', 'garrison'].map(
       (bucket) => [bucket, forces?.[bucket]?.present === true],
     ))],
+    // ⭐ (7) THE HOLDER ROWS — added in W2 under the chair's ruling on W1's open item.
+    // A13 asks whether the body that keeps a cited record is INTERESTED in the fact it holds.
+    // Reading that needs impairments and capture state, which live on the SETTLEMENT, so a
+    // refuter given the card alone could only say NOT-EXECUTABLE (W1 measured that gap). The
+    // card builder has the settlement, so the standing is resolved HERE, once, and the
+    // server-side refuter reads the answer instead of the question.
+    //
+    // ⛔ THE TWO ABSENCES ARE PRINTED, NOT GUESSED. `captured` and `controlled` are campaign
+    // world facts (faction states, patronage) that a headless card does not hold; `standingOf`
+    // names each gap in `absent` rather than reading false, and everything else the limb needs
+    // — corruption, impairment, the birth-time capture of the ruling structure — is on the blob
+    // and IS read. So this row is a partial but truthful standing, exactly as the arm is.
+    ['holders', HOLDER_KINDS.map((kind) => holderRow(s, kind))],
     ['hasWorld', Boolean(world)],
+  ]);
+}
+
+/**
+ * One holder row: who in this town keeps the kind's record, and whether they have an interest
+ * in it. This is `sourceOfForTown`'s pair loop read from the KIND rather than from a row's
+ * `reads`, so the card can carry all twelve kinds without a pool to hang each one on.
+ * @param {object} s @param {string} kind
+ */
+function holderRow(s, kind) {
+  const named = holdersOf(kind, s);
+  const record = recordOf(kind);
+  /** @type {string[]} */
+  const marks = [];
+  /** @type {string[]} */
+  const absent = [];
+  let interested = false;
+  for (const holder of named) {
+    const standing = standingOf(holder, s, {}, kind);
+    if (standing.interested) interested = true;
+    for (const mark of standing.marks) marks.push(`${holder}: ${mark}`);
+    for (const gap of standing.absent) if (!absent.includes(gap)) absent.push(gap);
+  }
+  return sorted([
+    ['kind', kind],
+    ['holders', named],
+    ['rosterBacked', Boolean(record && record.rosterBacked)],
+    ['standing', named.length === 0 ? 'SOURCE-UNRESOLVED' : (interested ? INTERESTED : 'LICENSED')],
+    ['interested', interested],
+    ['marks', marks],
+    ['absent', absent],
   ]);
 }
 

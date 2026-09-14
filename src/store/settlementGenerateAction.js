@@ -251,10 +251,30 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // always crossed that boundary. Only the campaign-layer condition carry
   // below is guarded, because those belong to a save, not to an intent.
   const locked = carryLockedSections(state.locks, state.settlement, withRoster);
+  // ⭐ THE SCRIBE'S LOCKED CARRY (design §5 REGENERATE). A full generate mints a NEW town, so
+  // the rendered dossier prose does NOT follow it by default: the fresh blob carries no
+  // artefact and every tab draws the hand corpus until the town is scribed. The one exception
+  // is the ground a lock actually froze — carryProseAcrossGenerate re-derives the town card for
+  // both towns and keeps a pool's units only where every fact the unit stands on is identical.
+  // The path is DORMANT unless the replaced town carries an artefact at all, which is why the
+  // module (it pulls the six prose leaves through the town card) is reached lazily and why the
+  // ordinary generate loads nothing.
+  let carried = locked;
+  if (locked && state.settlement && Object.hasOwn(state.settlement, 'prose')) {
+    try {
+      const { carryProseAcrossGenerate } = await import('../lib/scribeGround.js');
+      carried = await carryProseAcrossGenerate(state.settlement, locked, state.locks);
+    } catch (e) {
+      // A carry is a convenience over a FLOOR that always exists: never block a generation on
+      // it, and never leave a half-carried artefact behind.
+      console.warn('[settlementSlice] scribe prose carry failed', e);
+      carried = locked;
+    }
+  }
   const reconciled = state.activeSaveId
-    ? locked
-    : reconcileSettlementChange(locked, state.settlement, {
-        source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: locked?.name,
+    ? carried
+    : reconcileSettlementChange(carried, state.settlement, {
+        source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: carried?.name,
       });
   // W-F6 THE PREMIUM GATE — turn the key at generation-complete. A premium
   // account activates the seed's latent starting pantheon into live embeds

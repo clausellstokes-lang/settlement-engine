@@ -65,7 +65,9 @@ import {
 import { classifyMoves, NON_MOVES, orderIdOf } from './moveGrammar.js';
 import { sentencesOf, walkPair, closeKindOf } from './entryWalker.js';
 import { CONTRAST_SHAPES, OFFICE_NOUN_CANDIDATES } from './entryLexicons.js';
-import { HOLDER_RECORDS, sourceOfForTown } from './holderTable.js';
+import {
+  HOLDER_RECORDS, INTERESTED, sourceOfForTown, sourceOfRow,
+} from './holderTable.js';
 import { openerOf } from './grammarWalker.js';
 import { presenceOf } from './presenceMeasure.js';
 import { compareCodepoint } from '../deterministicSort.js';
@@ -230,7 +232,7 @@ export const REFUTE_ARMS = Object.freeze([
   Object.freeze({ arm: 'A3', ground: GROUND_INPUT, note: 'the primary/field readers; NOT-EXECUTABLE without them' }),
   Object.freeze({ arm: 'A5', ground: GROUND_TEXT, note: 'four synonym swaps across the faces' }),
   Object.freeze({ arm: 'A6', ground: GROUND_TEXT, note: 'a face names a slot or a mark its parent does not' }),
-  Object.freeze({ arm: 'A13', ground: GROUND_CARD, note: 'the cited holder, resolved through the card institutions; the INTERESTED limb needs the settlement' }),
+  Object.freeze({ arm: 'A13', ground: GROUND_CARD, note: 'the cited holder, resolved through the card institutions; the INTERESTED limb reads card.town.holders, or the settlement when one is given' }),
   Object.freeze({ arm: 'Tail', ground: GROUND_TEXT, note: 'R-DA-03; via walkComposed' }),
   Object.freeze({ arm: 'Aspect', ground: GROUND_TEXT, note: 'a forecast or perfect on a standing fact; via walkComposed' }),
   Object.freeze({ arm: 'Restatement', ground: GROUND_TEXT, note: 'via walkComposed' }),
@@ -379,8 +381,9 @@ export function institutionsOfCard(card) {
  * EXACT rather than an approximation: `holdersOf` intersects the kind's declared services with
  * the town's LIVE instantiated services, and `card.town.institutions[].services` IS that list
  * (W0 builds it from `liveInstitutions` with the services actually on). The one thing the card
- * cannot answer is whether a holder is INTERESTED, which needs impairments and capture state;
- * that limb declares itself NOT-EXECUTABLE below rather than reading LICENSED by default.
+ * cannot answer from its institution rows alone is whether a holder is INTERESTED, which needs
+ * impairments and capture state; the card's own `town.holders` rows (schema /2) carry that
+ * answer, resolved once where the settlement was in hand, and the arm below reads them.
  * @param {string} kind @param {object} card @returns {string[]}
  */
 export function holdersFromCard(kind, card) {
@@ -394,6 +397,57 @@ export function holdersFromCard(kind, card) {
     if (services.some((s) => wanted.has(str(s))) && str(inst?.name)) held.add(str(inst.name));
   }
   return [...held].sort(compareCodepoint);
+}
+
+/**
+ * The card's holder rows (card schema /2), or null on a card that predates them. Null is the
+ * shape a caller must be able to tell apart from "no holder for this kind", which is why an
+ * empty array is NOT used for the absent case.
+ * @param {object} card
+ * @returns {Map<string, {holders: string[], standing: string, interested: boolean}>|null}
+ */
+export function holderRowsOfCard(card) {
+  const rows = card?.town?.holders;
+  if (!Array.isArray(rows)) return null;
+  /** @type {Map<string, {holders: string[], standing: string, interested: boolean}>} */
+  const out = new Map();
+  for (const row of rows) {
+    out.set(str(row?.kind), {
+      holders: Array.isArray(row?.holders) ? row.holders.map(str) : [],
+      standing: str(row?.standing),
+      interested: row?.interested === true,
+    });
+  }
+  return out;
+}
+
+/**
+ * The same resolution for one explicit read set. Split out so `refuteUnit` can hand it the
+ * ONE pool's reads rather than the tab's, and so the two callers cannot drift.
+ * @param {ReadonlyArray<string>} reads
+ * @param {Map<string, {holders: string[], standing: string, interested: boolean}>} holderRows
+ * @returns {{kind: string, holder: string|null, standing: string}}
+ */
+export function sourceOfCardForReads(reads, holderRows) {
+  const base = sourceOfRow({ reads: reads.map(str) });
+  if (base.standing !== 'LICENSED') {
+    return { kind: base.kind, holder: null, standing: base.standing };
+  }
+  /** @type {string[]} */
+  const named = [];
+  let interested = false;
+  for (const kind of base.kinds) {
+    const row = holderRows.get(kind);
+    if (!row) continue;
+    if (row.interested) interested = true;
+    for (const holder of row.holders) if (!named.includes(holder)) named.push(holder);
+  }
+  named.sort(compareCodepoint);
+  return {
+    kind: base.kind,
+    holder: named.length ? named[0] : null,
+    standing: interested ? INTERESTED : 'LICENSED',
+  };
 }
 
 /**
@@ -842,9 +896,10 @@ export function refuteUnit(unit, card, extra = {}) {
   const cited = armReferentBody(id, row.text, card, out);
   armReferentRole(id, row.text, card, out);
 
-  // ⭐ A13's holder reader. With the settlement in hand the real `sourceOfForTown` runs and the
-  // INTERESTED limb is live; with the card alone the holder resolves but the interest does not,
-  // and the arm says so instead of reading LICENSED by default.
+  // ⭐ A13's holder reader. With the settlement in hand the real `sourceOfForTown` runs; with the
+  // card alone the same standing is read off `town.holders`, which the card builder resolved
+  // where the settlement WAS in hand. Only a card older than schema /2 leaves the limb unread,
+  // and it says so rather than reading LICENSED by default.
   /** @type {object} */
   const walkOptions = { ...opts };
   if (opts.settlement) {
@@ -852,8 +907,21 @@ export function refuteUnit(unit, card, extra = {}) {
     const reads = Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
     walkOptions.sourceOf = () => sourceOfForTown({ reads }, opts.settlement, opts.world || {});
   } else if (cited.length) {
-    emit(out, finding(id, 'A13', 'NOT-EXECUTABLE', '(the holder standing)', cited.map((c) => c.kind).join(', '),
-      'the card resolves which body keeps the cited record but carries no impairment or capture state, so whether that body is INTERESTED in the fact it holds cannot be read here'));
+    // ⭐ THE CARD ANSWERS IT NOW (card schema /2, W2). `town.holders` carries each record kind's
+    // holders and whether any of them is INTERESTED, resolved once where the settlement was in
+    // hand. So the arm executes off the card alone — which is the only ground the SERVER-side
+    // refuter ever has — instead of declaring itself unreachable. A card from the older shape
+    // has no such row, and the arm still says NOT-EXECUTABLE rather than reading LICENSED by
+    // default: a missing answer is not a clean one.
+    const holderRows = holderRowsOfCard(card);
+    if (holderRows === null) {
+      emit(out, finding(id, 'A13', 'NOT-EXECUTABLE', '(the holder standing)', cited.map((c) => c.kind).join(', '),
+        'this card carries no holder rows, so whether the body that keeps the cited record is INTERESTED in the fact it holds cannot be read here'));
+    } else {
+      const pool = poolOfCard(card, row.blockId, row.poolKey);
+      const reads = Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
+      walkOptions.sourceOf = () => sourceOfCardForReads(reads, holderRows);
+    }
   }
 
   const walk = walkComposed(row, ground, walkOptions);
