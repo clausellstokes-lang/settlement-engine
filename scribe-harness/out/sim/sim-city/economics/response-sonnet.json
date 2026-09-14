@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C1: a high rung on a working approach",
+   "vid": 1,
+   "spine": "A stranger reads Rundgate's standing off the road before anyone tells him, and finds a spread of trades keeping more hands busy than the town strictly needs, none of it makeshift.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "What the town lives on is not one trade but several, and no one of them carries it by itself.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "The market at Rundgate sets the town's own goods out on its stalls beside goods brought in from elsewhere, and sorts neither for a visitor's benefit. The town does not merely pass other towns' trade through it, and what it makes here is sold on the same stalls.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "Goods bound out fill the yards here, no two lots alike, in a place long used to selling them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "Rundgate feeds itself with a small margin to spare, and the margin holds from one season to the next.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The Garrison here depends on a supply that has failed further up the chain, and the building and the skill both remain with the accounts still unclosed.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "spine": "A little of Rundgate's trade slips past whatever keeps count of it… not enough to trouble the hall, and nowhere near enough to say the town lives by it.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

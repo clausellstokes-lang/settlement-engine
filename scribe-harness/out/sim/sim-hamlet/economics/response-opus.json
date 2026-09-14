@@ -1,0 +1,52 @@
+{
+  "units": [
+    {
+      "blockId": "DS-ECO-1",
+      "poolKey": "COMBINATION C4: a low rung on a working approach",
+      "vid": 2,
+      "spine": "The roads into the town are well used and the place they lead to is poor.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-ECO-12",
+      "poolKey": "INCOME MIX: one source carries the town",
+      "vid": 2,
+      "spine": "One line of work brings in what money the town has, and a household with no part in it lives off it all the same.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-ECO-12",
+      "poolKey": "TRADE PROFILE: exports and imports both present",
+      "vid": 2,
+      "spine": "What leaves the town and what comes into it are carried on the same carts.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-ECO-10",
+      "poolKey": "POSTURE: established",
+      "vid": 1,
+      "spine": "Warmholz sells several things outward and none of them carries the trade alone.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-ECO-9",
+      "poolKey": "SECURE",
+      "vid": 1,
+      "spine": "This place feeds itself and has a little in hand.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-GEN-18",
+      "poolKey": "BOUGHT-IN",
+      "vid": 1,
+      "spine": "The salt worked here is bought and never raised, and the buying is as much a part of the craft as the working.",
+      "faces": [],
+      "notebook": []
+    }
+  ]
+}
