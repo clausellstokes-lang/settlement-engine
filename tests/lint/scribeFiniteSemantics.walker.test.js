@@ -60,6 +60,9 @@ const DECLARED_WRITE_SITES = Object.freeze({
 const DECLARED_IMPORTERS = Object.freeze({
   'src/lib/scribeGround.js': 'The locked carry across a full generate. Calls the writer; constructs nothing itself.',
   'src/lib/pendingDossier.js': 'The Stripe round-trip stash strips the key, against the localStorage origin quota.',
+  'src/store/campaignPulseHelpers.js': 'capturePulseSnapshot strips the key from every clone, so an undo cannot restore the prose as it stood before the advance and delete the epoch the owner said must be saved.',
+  'src/store/scribeEpochLane.js': 'The past lane. Moves a render off `current` on the two verbs that retire one (undo, redo) and reads the tier cap; constructs nothing itself.',
+  'src/store/campaignWorldPulseDeferred.js': 'The shared restore chokepoint re-attaches the moved artefact to the restored settlement and to the live view.',
 });
 
 /** Every .js/.jsx file under a tree. */

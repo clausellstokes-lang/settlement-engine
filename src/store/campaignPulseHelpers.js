@@ -25,6 +25,7 @@ import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { cloneJson, campaignSettlements } from './campaignSliceShared.js';
+import { stripProse } from '../lib/scribeArtefact.js';
 
 export function campaignStateForRegionalImpact(state, save, systemState, now) {
   const isActive = state.activeSaveId && String(state.activeSaveId) === String(save.id);
@@ -259,6 +260,21 @@ export function applyWorldPulseResultToState(state, campaign, result, now, autho
  * (campaign world + every member save + the live active settlement view) without
  * mutating anything. The caller pushes it onto pulseUndoStack only after the
  * pulse is confirmed.
+ *
+ * ⛔ THE SCRIBE ARTEFACT IS STRIPPED FROM EVERY CLONE HERE, FOR TWO REASONS, AND THE
+ * SECOND ONE IS CORRECTNESS RATHER THAN SIZE.
+ *   (a) SIZE: this snapshot deep-clones EVERY member save, and the ring retains up to
+ *       PULSE_UNDO_CAP of them per campaign. A realm of thirty scribed towns at ~150-200 KB
+ *       of prose each would put tens of megabytes of duplicated text in session memory and
+ *       carry it through the paused-interval cursor onto the campaign record.
+ *   (b) CORRECTNESS: the owner's rule of 2026-09-14 ~06:4x is that an undone advance's prose
+ *       is SAVED, never dropped. Restoring the artefact as it stood BEFORE the advance would
+ *       do exactly the opposite — silently deleting the epoch the rule exists to keep. So the
+ *       artefact does not travel in the snapshot at all: it MOVES on the live object, through
+ *       `store/scribeEpochLane.js` at the shared restore chokepoint, which puts the undone
+ *       epoch into the past lane and re-points `current` at the surviving one.
+ * The two halves are pinned together in tests/store/scribeEpochLane.test.js, which drives the
+ * real capture and the real restore rather than these functions in isolation.
  */
 export function capturePulseSnapshot(state, campaign, now) {
   const memberSaves = campaignSettlements(state, campaign.id);
@@ -271,13 +287,13 @@ export function capturePulseSnapshot(state, campaign, now) {
     wizardNews: cloneJson(campaign.wizardNews),
     saves: memberSaves.map(s => ({
       id: s.id,
-      settlement: cloneJson(s.settlement),
+      settlement: stripProse(cloneJson(s.settlement)),
       campaignState: cloneJson(s.campaignState),
     })),
     active: state.activeSaveId
       ? {
           saveId: String(state.activeSaveId),
-          settlement: cloneJson(state.settlement),
+          settlement: stripProse(cloneJson(state.settlement)),
           systemState: cloneJson(state.systemState),
           eventLog: cloneJson(state.eventLog),
           phase: state.phase,

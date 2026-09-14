@@ -53,10 +53,14 @@ export const SCRIBE_SETTLEMENT_KEY = 'prose';
 export const SCRIBE_ARTEFACT_SCHEMA = 1;
 
 /**
- * How many COMPACT past epochs the blob keeps. The lived past beyond this rotates into the
- * chronicle lane, which is where the product already promises narrative history lives
- * (`store/aiChronicleAppend.js`, CHRONICLE_LIMITS, tier-rotated). Without a cap a fifty-advance
- * campaign at ~150 KB an epoch would be 7.5 MB on one save row.
+ * How many COMPACT past epochs the blob keeps, and the HARD CEILING no tier may exceed.
+ *
+ * Without a cap a fifty-advance campaign at ~150 KB an epoch would be 7.5 MB on one save row.
+ * The retention POLICY is tier-based and lives in `store/scribeEpochLane.js`, which reads the
+ * product's existing narrative-history promise (`lib/chronicle.js` CHRONICLE_LIMITS) rather than
+ * inventing a second number; this constant is the floor under that policy, because two of those
+ * three tiers are `Infinity` and a JSONB row cannot be unbounded. Whether the owner wants every
+ * epoch forever on the blob is a STORAGE decision and stays owner-gated (design §12 item 13).
  */
 export const SCRIBE_PAST_EPOCH_LIMIT = 12;
 
@@ -166,7 +170,8 @@ export function isStale(prose, q) {
  *
  * @param {unknown} prose the artefact so far (null/absent starts one)
  * @param {{advanceSeq: number, blockId: string, pools: Record<string, object[]>,
- *   renderedFor: string, renderedAt?: string, version?: object, nonce?: string}} landing
+ *   renderedFor: string, renderedAt?: string, version?: object, nonce?: string,
+ *   limit?: number}} landing
  * @returns {object} a NEW artefact
  */
 export function landBlock(prose, landing) {
@@ -187,7 +192,9 @@ export function landBlock(prose, landing) {
 
   const openSeq = currentAdvanceSeq(next);
   if (openSeq !== null && openSeq !== seq) {
-    next = retireCurrent(next, { state: 'lived', nonce: str(landing.nonce), at: str(landing.renderedAt) });
+    next = retireCurrent(next, {
+      state: 'lived', nonce: str(landing.nonce), at: str(landing.renderedAt), limit: landing.limit,
+    });
   }
   if (!isObj(next.current)) {
     next.current = { advanceSeq: seq, renderedAt: str(landing.renderedAt), blocks: {} };
@@ -208,7 +215,7 @@ export function landBlock(prose, landing) {
  * future for a seq that was undone.
  *
  * @param {unknown} prose
- * @param {{state?: 'lived'|'undone'|'redone', nonce?: string, at?: string}} [how]
+ * @param {{state?: 'lived'|'undone'|'redone', nonce?: string, at?: string, limit?: number}} [how]
  * @returns {object} a NEW artefact with `current` null and one more past-lane entry
  */
 export function retireCurrent(prose, how = {}) {
@@ -220,7 +227,7 @@ export function retireCurrent(prose, how = {}) {
   next.epochs = rotate([
     ...(Array.isArray(next.epochs) ? next.epochs : []),
     compactEpoch(current, { state, nonce: str(how.nonce), at: str(how.at) }),
-  ]);
+  ], how.limit);
   next.current = null;
   return next;
 }
@@ -232,7 +239,7 @@ export function retireCurrent(prose, how = {}) {
  * artefact is never deleted on this path, which is the whole of the owner's rule.
  *
  * @param {unknown} prose
- * @param {{advanceSeq: number, nonce?: string, at?: string}} restore the depth restored TO
+ * @param {{advanceSeq: number, nonce?: string, at?: string, limit?: number}} restore the depth restored TO
  * @returns {object} a NEW artefact
  */
 export function restoreToDepth(prose, restore) {
@@ -244,7 +251,7 @@ export function restoreToDepth(prose, restore) {
 
   const openSeq = currentAdvanceSeq(next);
   if (openSeq !== null && openSeq > depth) {
-    next = retireCurrent(next, { state: 'undone', nonce, at });
+    next = retireCurrent(next, { state: 'undone', nonce, at, limit: restore?.limit });
   }
   const lane = Array.isArray(next.epochs) ? next.epochs : [];
   /** @type {object[]} */
@@ -257,7 +264,7 @@ export function restoreToDepth(prose, restore) {
       kept.push(clone(epoch));
     }
   }
-  next.epochs = rotate(kept);
+  next.epochs = rotate(kept, restore?.limit);
 
   // Re-point current at the surviving epoch when the lane still holds it whole.
   if (!isObj(next.current)) {
@@ -309,10 +316,18 @@ export function compactEpoch(epoch, how) {
   return out;
 }
 
-/** Keep the lane bounded, oldest first out. */
-function rotate(lane) {
+/**
+ * Keep the lane bounded, oldest first out. `limit` is the caller's tier policy; it is CLAMPED to
+ * SCRIBE_PAST_EPOCH_LIMIT in both directions, so a caller can never widen the blob past the hard
+ * ceiling and a missing or nonsense number falls back to it rather than to unbounded growth.
+ * @param {object[]} lane @param {number} [limit]
+ */
+function rotate(lane, limit) {
   const rows = Array.isArray(lane) ? lane : [];
-  return rows.length <= SCRIBE_PAST_EPOCH_LIMIT ? rows : rows.slice(rows.length - SCRIBE_PAST_EPOCH_LIMIT);
+  const want = Number.isFinite(limit) && limit >= 0
+    ? Math.min(Math.floor(/** @type {number} */ (limit)), SCRIBE_PAST_EPOCH_LIMIT)
+    : SCRIBE_PAST_EPOCH_LIMIT;
+  return rows.length <= want ? rows : rows.slice(rows.length - want);
 }
 
 /**

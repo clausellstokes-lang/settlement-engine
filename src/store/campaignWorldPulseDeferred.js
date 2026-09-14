@@ -50,6 +50,8 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalGraphSnapshot } from '../lib/regionalFingerprint.js';
+import { attachProse } from '../lib/scribeArtefact.js';
+import { proseAfterRestore, scribePastLaneLimit } from './scribeEpochLane.js';
 
 const AUTH_SESSION_CHANGED_RESULT = Object.freeze({
   ok: false,
@@ -462,12 +464,46 @@ function advanceDepthOf(state, campaignId) {
 }
 
 /**
+ * Re-attach the Scribe artefact to the restored LIVE VIEW. The active save's row was restored a
+ * moment ago and its artefact was moved exactly once there, so the view re-uses that result; only
+ * a view with no matching restored row (a detached or newly opened member) moves its own, read
+ * off the live view before this assignment replaces it.
+ * @param {object} restored the settlement the snapshot restores
+ * @param {Map<string, object>} proseBySaveId
+ * @param {object} state the Immer draft
+ * @param {{advanceSeq: number, nonce?: string, at?: string, limit?: number}} to
+ * @returns {object}
+ */
+function withMovedProse(restored, proseBySaveId, state, to) {
+  const id = state.activeSaveId != null ? String(state.activeSaveId) : '';
+  const already = id ? proseBySaveId.get(id) : null;
+  const moved = already || proseAfterRestore(state.settlement, to);
+  return moved ? attachProse(restored, moved) : restored;
+}
+
+/**
  * Restore one full pre-pulse/pre-apply snapshot onto the Immer draft: the
  * campaign world unit (worldState + regionalGraph + wizardNews), every member
  * save the snapshot carries, and the live active view when it belongs to this
  * campaign. Shared chokepoint for BOTH undo verbs (advance + proposal) so their
  * restore semantics can never drift. Mutates `state`/`campaign`, appends the
  * save writes to `persistUpdates`, returns nothing.
+ *
+ * ⭐ THE SCRIBE'S ONE ACT HERE (design §5b, the owner's rule of 2026-09-14 ~06:4x: "if advanced
+ * time is reverted back, then that past one should be saved"). The snapshot carries NO prose by
+ * construction (`capturePulseSnapshot` strips it), so the artefact is not restored — it MOVES.
+ * For every settlement this restore touches, the LIVE artefact is read before the row is
+ * replaced, every epoch above the restored depth is put into the past lane marked `undone`,
+ * `current` re-points at the surviving epoch, and the result is attached to the restored
+ * settlement. Nothing is ever deleted, which is the whole of the owner's rule, and the road not
+ * taken stays readable because the next advance draws a DIFFERENT future for the seq an undo
+ * freed (the `(advanceSeq, nonce)` pair keeps the two apart).
+ *
+ * @param {{advanceSeq: number, nonce?: string, limit?: number}} proseRestore the depth restored
+ *   TO. The ADVANCE undo passes one less than the current depth, because the counter is
+ *   decremented after this call; the PROPOSAL undo passes the depth unchanged, since an apply
+ *   does not move the epoch, and the move is then a no-op that still preserves the live artefact
+ *   over the stripped snapshot.
  */
 function restorePulseSnapshotOnDraft(
   state,
@@ -476,6 +512,7 @@ function restorePulseSnapshotOnDraft(
   stamp,
   persistUpdates,
   deleteSaveIds,
+  proseRestore,
 ) {
   // Campaign world, topology, and news are one undo unit.
   campaign.worldState = ensureWorldState(snapshot.worldState, campaign);
@@ -510,6 +547,9 @@ function restorePulseSnapshotOnDraft(
   }
 
   const memberIds = new Set((campaign.settlementIds || []).map(String));
+  /** saveId -> the artefact after the undo move, so the live view re-uses it rather than
+   *  moving a second time (which would file the same epoch into the past lane twice). */
+  const proseBySaveId = new Map();
   // Membership is read at undo time. A save detached since the snapshot must
   // not be silently rewound by an older campaign snapshot.
   for (const saved of snapshot.saves || []) {
@@ -517,7 +557,16 @@ function restorePulseSnapshotOnDraft(
     const savedIndex = state.savedSettlements
       .findIndex(item => String(item.id) === String(saved.id));
     if (savedIndex === -1) continue;
-    const restoredSettlement = cloneJson(saved.settlement);
+    // The artefact is read off the LIVE row before it is replaced, moved once, and attached to
+    // both the row and (below) the live view, so one undo files exactly one past-lane entry.
+    const movedProse = proseAfterRestore(
+      state.savedSettlements[savedIndex].settlement,
+      { ...proseRestore, at: stamp },
+    );
+    if (movedProse) proseBySaveId.set(String(saved.id), movedProse);
+    const restoredSettlement = movedProse
+      ? attachProse(cloneJson(saved.settlement), movedProse)
+      : cloneJson(saved.settlement);
     const restoredCampaignState = cloneJson(saved.campaignState);
     state.savedSettlements[savedIndex] = {
       ...state.savedSettlements[savedIndex],
@@ -558,7 +607,12 @@ function restorePulseSnapshotOnDraft(
     // Rehydrate only a live view that belongs to this campaign, including a
     // different member opened after the snapshot was taken.
     if (snapshot.active && String(state.activeSaveId) === snapshot.active.saveId) {
-      state.settlement = cloneJson(snapshot.active.settlement);
+      state.settlement = withMovedProse(
+        cloneJson(snapshot.active.settlement),
+        proseBySaveId,
+        state,
+        { ...proseRestore, at: stamp },
+      );
       state.systemState = cloneJson(snapshot.active.systemState);
       state.eventLog = cloneJson(snapshot.active.eventLog);
       state.phase = snapshot.active.phase;
@@ -568,7 +622,12 @@ function restorePulseSnapshotOnDraft(
         .find(saved => String(saved.id) === String(state.activeSaveId));
       if (activeSnapshot && memberIds.has(String(activeSnapshot.id))) {
         const campaignState = activeSnapshot.campaignState || {};
-        state.settlement = cloneJson(activeSnapshot.settlement);
+        state.settlement = withMovedProse(
+          cloneJson(activeSnapshot.settlement),
+          proseBySaveId,
+          state,
+          { ...proseRestore, at: stamp },
+        );
         state.systemState = campaignState.systemState != null
           ? cloneJson(campaignState.systemState)
           : null;
@@ -644,6 +703,14 @@ export async function runUndoLastPulse({
     const snapshot = index === -1 ? (parked ? cloneJson(parked) : null) : stack[index];
     if (!snapshot) return;
     const stamp = new Date().toISOString();
+    // THE DEPTH THE UNDO RESTORES TO. The pop below lowers the counter by one, and this call
+    // runs before it, so the target depth is one less than the depth standing now. A parked
+    // pre-interval restore (index === -1) pops nothing and leaves the counter alone, so its
+    // target is the depth standing now: no epoch is above it and the move preserves the live
+    // artefact without filing anything.
+    const restoredDepth = index !== -1
+      ? Math.max(0, advanceDepthOf(state, campaignId) - 1)
+      : advanceDepthOf(state, campaignId);
     restorePulseSnapshotOnDraft(
       state,
       campaign,
@@ -651,6 +718,11 @@ export async function runUndoLastPulse({
       stamp,
       persistUpdates,
       deleteSaveIds,
+      {
+        advanceSeq: restoredDepth,
+        nonce: `${String(campaignId)}:${snapshot.now || stamp}:${snapshot.tick ?? 0}`,
+        limit: scribePastLaneLimit(state),
+      },
     );
 
     if (index !== -1) {
@@ -755,6 +827,10 @@ export async function runUndoLastProposalApply({
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return;
     const stamp = new Date().toISOString();
+    // A PROPOSAL undo does not move the epoch: it reverses an apply inside the current advance
+    // depth, and the counter is untouched. So the target depth is the depth standing now,
+    // nothing is above it, and the move files no past-lane entry — it exists on this path only
+    // to preserve the LIVE artefact over a snapshot that no longer carries one.
     restorePulseSnapshotOnDraft(
       state,
       campaign,
@@ -762,6 +838,11 @@ export async function runUndoLastProposalApply({
       stamp,
       persistUpdates,
       deleteSaveIds,
+      {
+        advanceSeq: advanceDepthOf(state, campaignId),
+        nonce: `${String(campaignId)}:${snapshot.now || stamp}:proposal`,
+        limit: scribePastLaneLimit(state),
+      },
     );
 
     // Pop exactly the restored entry; older proposal snapshots remain for a
