@@ -1,0 +1,229 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "NON-MOVE",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "FIGURE",
+     "value": "as though ",
+     "description": "the pools carry no simile slot; a comparison is a measurement in words"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "It is over what the market should be made to pay, and each side by now carries on as thoug",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [powerStructure.factions, powerStructure.recentConflict]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role money laundering",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 4,
+   "spine": "The Guild Council's standing at Spitzplatz is approved.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 3,
+   "spine": "The Guild Council's grip on that standing reaches only as far as the town's own prosperity, and stops exactly there.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 3,
+   "spine": "A stranger doing business at Spitzplatz asks who is in charge and is given one name, and trades easier for it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role money laundering",
+   "vid": 3,
+   "spine": "Several houses at Spitzplatz keep books that no look can fault, and that is the service actually being bought.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 2,
+   "spine": "The town cannot settle on one word for how it is governed, and the hall gives no cleaner an answer than the street does.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 3,
+   "spine": "At Spitzplatz, the hall goes by its full title in public and by something shorter everywhere else, and neither usage is wrong.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 3,
+   "spine": "Guild Council's hold at Spitzplatz stands because Guild Council still outweighs whatever would move against it, and the reckoning starts over each season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 3,
+   "spine": "There are those at Spitzplatz who could move against the Guild Council and choose not to, since unseating a power the town still backs costs more than any seat is worth.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the guild council's: 2",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 9,
+   "openers": [
+    {
+     "opener": "a stranger doing",
+     "n": 1
+    },
+    {
+     "opener": "at spitzplatz, the",
+     "n": 1
+    },
+    {
+     "opener": "guild council's hold",
+     "n": 1
+    },
+    {
+     "opener": "nobody at spitzplatz",
+     "n": 1
+    },
+    {
+     "opener": "several houses at",
+     "n": 1
+    },
+    {
+     "opener": "the guild council's",
+     "n": 2
+    },
+    {
+     "opener": "the town cannot",
+     "n": 1
+    },
+    {
+     "opener": "there are those",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}

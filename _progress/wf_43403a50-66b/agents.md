@@ -1,4 +1,4 @@
-# wf_43403a50-66b — per-agent progress, 2026-09-14 17:21:52
+# wf_43403a50-66b — per-agent progress, 2026-09-14 17:27:14
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
     - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
@@ -16,9 +16,11 @@
     - `aba8e7d22` ? · DONE · transcript 09-14 17:19 1045 KB · 18 tool calls · result: {"stateSummary": "docs/FABLE_RETROVALIDATION_QUEUE.md (part 1 of 2, 2,250 lines) is the ledger-branch register of every judgment an Opus seat made that a Fable 
     - `a4c2d6159` ? · DONE · transcript 09-14 17:18 1005 KB · 42 tool calls · result: {"items": [{"title": "Rule the 32 Opus-authored rows of the \u00a7893\u2013\u00a7895 span (R1\u2013R32)", "what": "Every row from \u00a7893 through \u00a7895 wa
     - `a2e753739` ? · DONE · transcript 09-14 17:17 624 KB · 10 tool calls · result: {"items": [{"title": "Track K(a) \u2014 standardize ONE action-result envelope over existing store actions", "what": "The typed-command layer is missing (only s
-    - `a9be6da5a` ? · IN FLIGHT · transcript 09-14 17:20 508 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a98192fc9` ? · IN FLIGHT · transcript 09-14 17:18 403 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a28a11ab0` ? · IN FLIGHT · transcript 09-14 17:19 436 KB · 14 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a9384c3aa` ? · IN FLIGHT · transcript 09-14 17:19 505 KB · 21 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a03669471` ? · IN FLIGHT · transcript 09-14 17:20 574 KB · 16 tool calls · last: Bash sed -n '201,215p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b
-    - `a73a1d32e` ? · IN FLIGHT · transcript 09-14 17:21 445 KB · 12 tool calls · last: Bash sed -n '197,215p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4
+    - `a9be6da5a` ? · DONE · transcript 09-14 17:23 651 KB · 8 tool calls · result: {"items": [{"title": "Generalize the tag-vocabulary coverage pin to services, resources and trade goods (+ orphan-tag reachability)", "what": "The vocabulary-dr
+    - `a98192fc9` ? · IN FLIGHT · transcript 09-14 17:22 499 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a28a11ab0` ? · DONE · transcript 09-14 17:25 635 KB · 15 tool calls · result: {"items": [{"title": "Write the five owed Fable rulings (S01, S04, S15, S20, S99)", "what": "The retrovalidation sitting is partial: 485 calls walked across 17 
+    - `a9384c3aa` ? · IN FLIGHT · transcript 09-14 17:24 608 KB · 21 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a03669471` ? · IN FLIGHT · transcript 09-14 17:23 651 KB · 16 tool calls · last: Bash sed -n '201,215p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b
+    - `a73a1d32e` ? · IN FLIGHT · transcript 09-14 17:25 561 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a9738386f` ? · IN FLIGHT · transcript 09-14 17:26 465 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a82cbc263` ? · IN FLIGHT · transcript 09-14 17:26 457 KB · 17 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp

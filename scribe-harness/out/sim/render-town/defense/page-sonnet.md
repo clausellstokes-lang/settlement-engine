@@ -1,0 +1,27 @@
+[WITHHELD] Spitzplatz sits at the point where its defenses are sufficient and nothing about them is spare. One more call on the town and something already stretched thin would have to give.
+
+[WITHHELD] No soldiers of the town's own stand here, and still the walls are kept. {elders} {v:take} the walls for their own boundary before anything else, and where the line runs is the older argument. One of the watch says the hall's record accounts for the walls and not for the walk along their top, and walks it after dark regardless. A woman who brought a matter to the court says what is argued there about the walls is always who owes the work. Nothing that comes before it concerns who would stand on them. The townsfolk have seen the wall kept and no soldiers on it, and take it that nobody is coming.
+
+[WITHHELD] A traveller with a complaint here is shown where it is heard and where the person he names is kept. A clerk in the hall says a man waits only because the matter ahead of his is being heard in full. A traveller says a man waits because nobody has yet said whose business brought him in. A clerk of the court says a traveller's complaint is heard the same as any other, and whether he stays to see it through is his own affair. A carter at the tavern says a man is brought in for who he is known to and let go for what he can pay. One of the watch says the wage is the same whether the night passes quiet or a man is brought in. A soldier reckons a stranger stopped at the gate is the garrison's until his business is asked. After that he is the watch's. A guild factor says the trades pay twice for the waiting, once in the man who waits and once in the work that waits behind him. The stallholders say a stranger cheated at the market is told where to take it, and a stallholder cheated by a stranger is told the same only after the stranger has gone. The men who hold the way in say a stranger with a complaint against him waits at the gate until somebody comes for him.
+
+[WITHHELD] The hall holds that the grain store could carry the town through a crisis, and at the tavern they say the people who would be paid to see it through are paid short already. One of the watch says the purse that pays it is opened last. The soldiers say they are paid out of the same purse and in the same order. The hall's own answer, whenever the wage comes up, is the grain store. The guilds of the town say the trades made the provision and the hall made the shortfall. A traveller smells grain at the store door and hears the wage complained of at the tavern. A local priest reports that the parish asks for nothing the town has not already promised it, and does not say what has actually been given. Asked about the purse, one of the aldermen turns to the grain store, and asked again, turns to it again. The officers of the court say nobody has brought them the matter of the watch's wage, and they do not expect the hall to.
+
+[FAIL] A traveller says the town looks well provided from the road, and the church takes in the sick because the town has no hospital for them. A local priest says a stranger who asks for care is given a person to see to him, and nobody born here ever has to ask. Grain is hard to keep here, a woman who sells at the market says, for anybody without a door of their own in the town. The drinkers at the tavern say strangers stop to look at the grain store, and nobody from here ever does. One of the watch says strangers ask where the grain is kept, and nobody has ever asked where the sick are kept instead. A guild factor reckons what a stranger takes for provision is a store the trades filled and cannot open again. The officers of the court say a stranger's questions about the grain store are ordinary, and the ones about the sick are new to them.
+
+[WITHHELD] The balance at Spitzplatz sits where either side could tip it. A thinner watch or a bolder criminal would show up in the season's returns, and nothing else about the town would need to change.
+
+[WITHHELD] What Spitzplatz says about its own safety is what it says to somebody just arrived, and a longer stay would tell a different story.
+
+[PASS] Very little trouble shows in the streets at Spitzplatz, and it is not the watch keeping it that way but an organized interest that suppresses anything likely to draw notice, more thoroughly than the watch could manage.
+
+[WITHHELD] Spitzplatz controls its own entry points. That is the whole use of a perimeter, not safety outright, but the choosing of where anything happens.
+
+[PASS] There are people walking the streets of Spitzplatz at night, and the town's own sense of its safety rests more on that than on anything kept at the gate.
+
+[PASS] A stranger arriving at Spitzplatz finds a hall whose business is exactly the sort of trouble a garrison is the wrong tool for, and finds it busy.
+
+[PASS] Spitzplatz keeps arcane provision among its defenses, detection and wards among them, and an answer to things a sword or a wall cannot see coming.
+
+[WITHHELD] The town walls around Spitzplatz hold sound, though the muster meant to stand them is thinning. It is the kind of shortfall a town notices only once it is already short.
+
+[WITHHELD] An interruption on the roads to Spitzplatz never quite reaches the table, and the granary is the reason for that, not the roads themselves.

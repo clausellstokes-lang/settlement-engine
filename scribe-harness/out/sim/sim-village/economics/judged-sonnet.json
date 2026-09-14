@@ -1,0 +1,212 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The town's fortune is middling, neither rising enough nor falling enough for anyone to rem",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [prosperityRank(settlement.economicState.prosperity)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The ledger's other columns add up to little beside it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.incomeSources, economicState.incomeSources.length, economicState.incomeSources.reduce]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Little of it is only passing through, and what fills the stalls is as often made in the to",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState, economicState.isEntrepot, economicState.localProduction, economicState.primaryExports, economicState.primaryImports]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "GEOGRAPHY then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "This is old footing, not new trade.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.exportPosture.status]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3",
+    "EPOCH"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "EPOCH",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "an elapsed course on an unadvanced world",
+     "value": "no longer",
+     "description": "the card holds no advance, so nothing has since changed and this clause asserts a history the world does not have"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "The Cartographer's guild in Hochhausen still stands, though what once fed it no longer rea",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "The road into Hochhausen is kept, and the market at the end of it does a steady trade. The town's fortune is middling, neither rising enough nor falling enough for anyone to remark on it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 1,
+   "spine": "One trade brings in most of what Hochhausen earns. The ledger's other columns add up to little beside it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "Goods from elsewhere sit on the same stalls as Hochhausen's own, with nothing marking which is which. Little of it is only passing through, and what fills the stalls is as often made in the town as carried into it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "Out along the road from Hochhausen, the yards are stacked with goods ready to go, no two lots alike. This is old footing, not new trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 2,
+   "spine": "Nobody in the town goes without a meal, and nobody talks about it either.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 6,
+   "openers": [
+    {
+     "opener": "goods from elsewhere",
+     "n": 1
+    },
+    {
+     "opener": "nobody in the",
+     "n": 1
+    },
+    {
+     "opener": "one trade brings",
+     "n": 1
+    },
+    {
+     "opener": "out along the",
+     "n": 1
+    },
+    {
+     "opener": "the cartographer's guild",
+     "n": 1
+    },
+    {
+     "opener": "the road into",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}

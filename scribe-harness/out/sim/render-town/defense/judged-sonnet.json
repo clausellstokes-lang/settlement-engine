@@ -1,0 +1,603 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness ADEQUATE",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "One more call on the town and something already stretched thin would have to give.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.readiness.score]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls with NO force",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 0",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a second sentence naming no second field",
+     "value": "Nothing that comes before it concerns who would stand on them.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: full legal chain (court AND prison)",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "ORDER",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 5",
+     "subject": "a second sentence naming no second field",
+     "value": "After that he is the watch's.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.compound.inst.hasCourtSystem, economicState.compound.inst.hasPrison]; none claimed)"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "face 6",
+     "subject": "is this clause historical?",
+     "value": "A guild factor says the trades pay twice for the waiting, once in the man who waits and on",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then HISTORY",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 8",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then GEOGRAPHY",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "INSTITUTION then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "exhaustivity over an open column",
+     "value": "The hall's own answer, whenever the wage comes up, is the grain store.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 6",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: granary AND parish care only",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "A13",
+    "ORDER",
+    "REFERENT-body"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "REFERENT-body",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "a record no body in this town keeps",
+     "value": "road",
+     "description": "the text cites a record, and no institution on this card offers the service by which it is kept; the citation names a body the town does not have, which is floor 1"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then PROVENANCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "A13",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a cited holder the census does not license",
+     "value": "Disasters & Famine: granary AND parish care only: SOURCE-UNRESOLVED",
+     "description": "the fact's source is unresolved or is the office's own books, so the citation cites the speaker rather than a record"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 3",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then ABSENCE",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "a move sequence outside the closed set",
+     "value": "INSTITUTION",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 5",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then OBJECT then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "A thinner watch or a bolder criminal would show up in the season's returns, and nothing el",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.safetyProfile.safetyLabel]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "What Spitzplatz says about its own safety is what it says to somebody just arrived, and a ",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure organized",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "not safety outright, but",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "That is the whole use of a perimeter, not safety outright, but the choosing of where anyth",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [institutions]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "watch PRESENT",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense PRESENT",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "is this clause historical?",
+     "value": "The town walls around Spitzplatz hold sound, though the muster meant to stand them is thin",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "It is the kind of shortfall a town notices only once it is already short.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.economicGates.military, institutions]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": ", not the roads themselves.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness ADEQUATE",
+   "vid": 4,
+   "spine": "Spitzplatz sits at the point where its defenses are sufficient and nothing about them is spare. One more call on the town and something already stretched thin would have to give.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: walls with NO force",
+   "vid": 3,
+   "spine": "No soldiers of the town's own stand here, and still the walls are kept.",
+   "faces": [
+    "{elders} {v:take} the walls for their own boundary before anything else, and where the line runs is the older argument.",
+    "One of the watch says the hall's record accounts for the walls and not for the walk along their top, and walks it after dark regardless.",
+    "A woman who brought a matter to the court says what is argued there about the walls is always who owes the work. Nothing that comes before it concerns who would stand on them.",
+    "The townsfolk have seen the wall kept and no soldiers on it, and take it that nobody is coming."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: full legal chain (court AND prison)",
+   "vid": 3,
+   "spine": "A traveller with a complaint here is shown where it is heard and where the person he names is kept.",
+   "faces": [
+    "A clerk in the hall says a man waits only because the matter ahead of his is being heard in full.",
+    "A traveller says a man waits because nobody has yet said whose business brought him in.",
+    "A clerk of the court says a traveller's complaint is heard the same as any other, and whether he stays to see it through is his own affair.",
+    "A carter at the tavern says a man is brought in for who he is known to and let go for what he can pay.",
+    "One of the watch says the wage is the same whether the night passes quiet or a man is brought in.",
+    "A soldier reckons a stranger stopped at the gate is the garrison's until his business is asked. After that he is the watch's.",
+    "A guild factor says the trades pay twice for the waiting, once in the man who waits and once in the work that waits behind him.",
+    "The stallholders say a stranger cheated at the market is told where to take it, and a stallholder cheated by a stranger is told the same only after the stranger has gone.",
+    "The men who hold the way in say a stranger with a complaint against him waits at the gate until somebody comes for him."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: STRONG",
+   "vid": 3,
+   "spine": "The hall holds that the grain store could carry the town through a crisis, and at the tavern they say the people who would be paid to see it through are paid short already.",
+   "faces": [
+    "One of the watch says the purse that pays it is opened last.",
+    "The soldiers say they are paid out of the same purse and in the same order.",
+    "The hall's own answer, whenever the wage comes up, is the grain store.",
+    "The guilds of the town say the trades made the provision and the hall made the shortfall.",
+    "A traveller smells grain at the store door and hears the wage complained of at the tavern.",
+    "A local priest reports that the parish asks for nothing the town has not already promised it, and does not say what has actually been given.",
+    "Asked about the purse, one of the aldermen turns to the grain store, and asked again, turns to it again.",
+    "The officers of the court say nobody has brought them the matter of the watch's wage, and they do not expect the hall to."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 4,
+   "spine": "The balance at Spitzplatz sits where either side could tip it. A thinner watch or a bolder criminal would show up in the season's returns, and nothing else about the town would need to change.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 3,
+   "spine": "What Spitzplatz says about its own safety is what it says to somebody just arrived, and a longer stay would tell a different story.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure organized",
+   "vid": 4,
+   "spine": "Very little trouble shows in the streets at Spitzplatz, and it is not the watch keeping it that way but an organized interest that suppresses anything likely to draw notice, more thoroughly than the watch could manage.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls PRESENT",
+   "vid": 2,
+   "spine": "Spitzplatz controls its own entry points. That is the whole use of a perimeter, not safety outright, but the choosing of where anything happens.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "watch PRESENT",
+   "vid": 2,
+   "spine": "There are people walking the streets of Spitzplatz at night, and the town's own sense of its safety rests more on that than on anything kept at the gate.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "spine": "A stranger arriving at Spitzplatz finds a hall whose business is exactly the sort of trouble a garrison is the wrong tool for, and finds it busy.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense PRESENT",
+   "vid": 1,
+   "spine": "Spitzplatz keeps arcane provision among its defenses, detection and wards among them, and an answer to things a sword or a wall cannot see coming.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "WALLED-STRAINED",
+   "vid": 2,
+   "spine": "The town walls around Spitzplatz hold sound, though the muster meant to stand them is thinning. It is the kind of shortfall a town notices only once it is already short.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "vid": 3,
+   "spine": "An interruption on the roads to Spitzplatz never quite reaches the table, and the granary is the reason for that, not the roads themselves.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 1,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 14,
+   "openers": [
+    {
+     "opener": "a stranger arriving",
+     "n": 1
+    },
+    {
+     "opener": "a traveller says",
+     "n": 1
+    },
+    {
+     "opener": "a traveller with",
+     "n": 1
+    },
+    {
+     "opener": "an interruption on",
+     "n": 1
+    },
+    {
+     "opener": "no soldiers of",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz controls its",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz keeps arcane",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz sits at",
+     "n": 1
+    },
+    {
+     "opener": "the balance at",
+     "n": 1
+    },
+    {
+     "opener": "the hall holds",
+     "n": 1
+    },
+    {
+     "opener": "the town walls",
+     "n": 1
+    },
+    {
+     "opener": "there are people",
+     "n": 1
+    },
+    {
+     "opener": "very little trouble",
+     "n": 1
+    },
+    {
+     "opener": "what spitzplatz says",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "capture none"
+ ],
+ "unknown": []
+}
