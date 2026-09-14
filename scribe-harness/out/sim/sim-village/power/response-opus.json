@@ -1,0 +1,76 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Tolerated",
+   "vid": 4,
+   "spine": "The village tolerates the Elected Reeve without backing it, and a hard decision here would be paid for out of an empty purse.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 1,
+   "spine": "The mill and the stone quarry both have work, and the Elected Reeve is well thought of by a village that does not look hard at who arranged that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 1,
+   "spine": "Who governs here is settled, the town expects the Elected Reeve to stay, and business is done on that expectation.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "governing faction holds a NARROW plurality",
+   "vid": 2,
+   "spine": "What the Elected Reeve has is a first place and not a majority, and the town takes that as current rather than settled.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 2,
+   "spine": "Hochhausen has interests and no camps, and a question is answered by whoever cares about that question.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 1,
+   "spine": "Nothing here is carried by one kind of power alone, and the Elected Reeve is an arrangement between several of them that decides at the pace of whichever is least willing.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 1,
+   "spine": "The Elected Reeve is the name the village gives to what governs it, and the name is exact about the size of the place in a way people passing through routinely mistake.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 2,
+   "spine": "Some here would take the Elected Reeve's place if they could, and they cannot, and everybody concerned understands the arrangement precisely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public opinion neither helps nor hurts",
+   "vid": 2,
+   "spine": "Opinion here neither helps the Elected Reeve nor hurts it, and the Elected Reeve rules on its own strength alone.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
