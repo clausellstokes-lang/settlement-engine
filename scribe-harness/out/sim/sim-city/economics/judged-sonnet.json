@@ -1,0 +1,221 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C1: a high rung on a working approach",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The spread of trades keeps more hands at work than the town strictly needs, and the traffi",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [prosperityRank(settlement.economicState.prosperity)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "This is a place built on selling.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.exportPosture.status]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a route claim on a goods sentence",
+     "value": "The town keeps its Garrison fed by a supply that failed somewhere upstream.",
+     "description": "\"upstream\" asserts a route fact; a flow word is licensed by the field, a route step by a chain row (unresolved)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The building stands, the skill remains, and the accounts wait.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings, readings.activeChains, readings.exploitation, readings.isEntrepot, readings.primaryImports]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C1: a high rung on a working approach",
+   "vid": 1,
+   "spine": "A traveller off the road reads Rundgate's standing before a word is spoken to him. The spread of trades keeps more hands at work than the town strictly needs, and the traffic itself keeps an easy pace.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "Ask what the town lives on, and the answer comes back as a short list rather than a single trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "The market here carries Rundgate's own goods beside other towns' goods, unsorted for any stranger who cannot tell the difference.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "The yards stand full of goods bound outward, and no two loads are alike. This is a place built on selling.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "Here the count comes out ahead by a little, season after season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The town keeps its Garrison fed by a supply that failed somewhere upstream. The building stands, the skill remains, and the accounts wait.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "spine": "A little of the trade here slips by unrecorded... small enough that the clerks shrug at it and turn their attention elsewhere.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 0,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 7,
+   "openers": [
+    {
+     "opener": "a little of",
+     "n": 1
+    },
+    {
+     "opener": "a traveller off",
+     "n": 1
+    },
+    {
+     "opener": "ask what the",
+     "n": 1
+    },
+    {
+     "opener": "here the count",
+     "n": 1
+    },
+    {
+     "opener": "the market here",
+     "n": 1
+    },
+    {
+     "opener": "the town keeps",
+     "n": 1
+    },
+    {
+     "opener": "the yards stand",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
