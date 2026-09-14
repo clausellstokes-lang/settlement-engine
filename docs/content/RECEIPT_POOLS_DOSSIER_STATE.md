@@ -1542,91 +1542,91 @@ A composed page draws one of each grain, never two.
 **SLOTS.** `{settlement}` `{resource}` `{good}` `{chain}` `{institution}`
 
 **TERRAIN: `Coastal`**
-1. `[visitor]` {settlement} keeps its back to the land and its face to the water, and everything the town is good at begins at the tideline.
-2. `[ledger]` The ground here gives less than the water does; what {settlement} counts as its own produce comes off boats more often than out of fields.
-3. `[street]` The weather that matters in this town is the weather out at sea, and everybody watches it whether or not they sail.
+1. `[visitor]` {settlement} keeps its back to the land and its face to the water. Everything the town is good at begins at the tideline.
+2. `[ledger]` The ground here gives less than the water does. What {settlement} counts as its own produce comes off boats more often than out of fields.
+3. `[street]` The weather that matters in this town is the weather out at sea. Everybody watches it whether or not they sail.
 
 **TERRAIN: `Plains`**
-1. `[ledger]` {settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.
-2. `[visitor]` The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.
-3. `[street]` There is nothing between this town and the horizon but what the town has planted, and the town knows both halves of that.
+1. `[ledger]` {settlement} sits on ground that grows things without argument. The town's whole arrangement follows from that one fact.
+2. `[visitor]` The country around {settlement} is open in every direction. It is good for a plough, good for a cart, and good for anything else that wants to reach the town.
+3. `[street]` There is nothing between this town and the horizon but what the town has planted. The town knows both halves of that.
 
 **TERRAIN: `Forest`**
-1. `[ledger]` The timber and what lives in it are {settlement}'s standing wealth; the fields here are clearings rather than country.
-2. `[visitor]` The trees come nearly to the doorframes at {settlement}, and the town has arranged its light, its roads and its watch around them.
+1. `[ledger]` The timber and what lives in it are {settlement}'s standing wealth. The fields here are clearings rather than country.
+2. `[visitor]` The trees come nearly to the doorframes at {settlement}. The town has arranged its light, its roads and its watch around them.
 3. `[street]` Everything in this town is made of what grows around it, and the making is the trade.
 
 **TERRAIN: `Hills`**
 1. `[ledger]` {settlement} works ground that rises: small fields, hard carting, and whatever the slopes hold that the flat land does not.
-2. `[visitor]` Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.
-3. `[street]` The work here is uphill in the literal sense, and the town prices its carting accordingly.
+2. `[visitor]` Nothing at {settlement} is level. The town has made a virtue of it. The approaches are slow and the sightlines are long.
+3. `[street]` The work here is uphill in the literal sense. The town prices its carting accordingly.
 
 **TERRAIN: `Mountains`**
-1. `[ledger]` What {settlement} lives on comes out of the rock rather than off the ground, and the season is short at both ends.
+1. `[ledger]` What {settlement} lives on comes out of the rock rather than off the ground. The season is short at both ends.
 2. `[visitor]` The town sits in a place that had to be argued for: high, cold, and holding something worth the height.
 3. `[street]` Everything this town does not dig out of the mountain, it carries up to itself.
 
 **TERRAIN: `River`**
-1. `[ledger]` The water is {settlement}'s road and its mill both, and the town's earnings divide along it rather than around it.
-2. `[visitor]` {settlement} is arranged lengthwise on its water, and a stranger meets the town by walking upstream or down.
-3. `[street]` The river decides what this town can move and when, and nobody here treats that as a hardship.
+1. `[ledger]` The water is {settlement}'s road and its mill both. The town's earnings divide along it rather than around it.
+2. `[visitor]` {settlement} is arranged lengthwise on its water. A stranger meets the town by walking upstream or down.
+3. `[street]` The river decides what this town can move and when. Nobody here treats that as a hardship.
 
 **TERRAIN: `Desert`**
-1. `[ledger]` {settlement} exists where it does because of water rather than soil; the ground gives almost nothing and the town's whole economy is arrangement.
+1. `[ledger]` {settlement} exists where it does because of water rather than soil. The ground gives almost nothing and the town's whole economy is arrangement.
 2. `[visitor]` What surprises a stranger at {settlement} is not the dryness but how thoroughly the town has organised itself around it.
-3. `[street]` Nothing grows here without being made to, and everybody in the town knows exactly what the making costs.
+3. `[street]` Nothing grows here without being made to. Everybody in the town knows exactly what the making costs.
 
 **TERRAIN: `Swamp`**
-1. `[ledger]` The ground under {settlement} will not carry a heavy building or a straight road, and every trade the town has is shaped by that refusal.
-2. `[visitor]` A stranger reaches {settlement} by the one path that holds, and understands immediately why the town is where it is and not a mile in any direction.
-3. `[street]` What this country gives, it gives to people who know it, and the knowing is most of what the town sells.
+1. `[ledger]` The ground under {settlement} refuses to carry a heavy building or a straight road. Every trade the town has is shaped by that refusal.
+2. `[visitor]` A stranger reaches {settlement} by the one path that holds. He understands immediately why the town is where it is and not a mile in any direction.
+3. `[street]` What this country gives, it gives to people who know it. The knowing is most of what the town sells.
 
 **TERRAIN: `Tundra`**
-1. `[ledger]` The working year at {settlement} is short and the storing year is long, and the town's accounts are really an argument about that ratio.
-2. `[visitor]` {settlement} is built against the cold rather than against anybody, and the building shows in every wall a stranger passes.
-3. `[street]` The town spends the good months preparing for the others, and does not think of that as pessimism.
+1. `[ledger]` The working year at {settlement} is short and the storing year is long. The town's accounts are really an argument about that ratio.
+2. `[visitor]` {settlement} is built against the cold rather than against anybody. The building shows in every wall a stranger passes.
+3. `[street]` The town spends the good months preparing for the others. It does not think of that as pessimism.
 
 **TERRAIN: anything else (the default accent)**
-1. `[ledger]` The country around {settlement} is ordinary country, and what the town earns it earns by working it rather than by being anywhere in particular.
-2. `[visitor]` Nothing about {settlement}'s ground explains {settlement}; the town is the explanation.
+1. `[ledger]` The country around {settlement} is ordinary country. What the town earns it earns by working it rather than by being anywhere in particular.
+2. `[visitor]` Nothing about {settlement}'s ground explains {settlement}. The town does.
 3. `[street]` The ground here is what it is. The town has never had cause to describe it further.
 
 **ECONOMIC STRENGTHS: the roster is populated**
-1. `[ledger]` {settlement} has more than one thing it is good at, and the list is short enough that everybody here could recite it.
+1. `[ledger]` {settlement} has more than one thing it is good at. The list is short enough that everybody here could recite it.
 2. `[street]` Ask what this town does well and you get two or three answers, all of them the same two or three answers.
 3. `[visitor]` What {settlement} is for is legible within a day, because the town does a small number of things and does them visibly.
 
 **ECONOMIC STRENGTHS: none recorded**
 1. `[ledger]` Nothing about {settlement}'s ground or its trades stands out as a strength. The town works, and works at nothing in particular.
-2. `[street]` This town has no speciality and has never needed one; what it makes, it makes for itself.
-3. `[counterforce]` {settlement} has no advantage of any kind and is still here, which is a plainer achievement than a good harvest.
+2. `[street]` This town has no speciality and has never needed one. What it makes, it makes for itself.
+3. `[counterforce]` {settlement} has no advantage of any kind and is still here. That is a plainer achievement than a good harvest.
 
 **STRATEGIC VALUE: the generator's assessment, framed** *(the string is printed beneath; the prose never restates it)*
-1. `[ledger]` What {settlement} is worth to anybody else is a separate question from what it is worth to itself, and the two answers are not close.
+1. `[ledger]` What {settlement} is worth to anybody else is a separate question from what it is worth to itself. The two answers are not close.
 2. `[visitor]` A stranger with an eye for such things works out what this town is worth holding well before anybody explains it.
 3. `[street]` The town knows what it sits on, and knows that knowing is not the same as being able to keep it.
 
 **EXPLOITATION: `unexploited`, `exportValue: high`**
 1. `[ledger]` There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.
-2. `[visitor]` A stranger who knows what {resource} fetches elsewhere will find the sight of it lying unworked here difficult to leave alone.
-3. `[street]` Everybody in this town can point at the {resource}, and nobody in this town is working it.
-4. `[threshold]` The {resource} sits at the edge of being worth a great deal to {settlement}: what the town lacks is not the ground, it is the {institution} that would begin the work.
+2. `[visitor]` A stranger who knows what {resource} fetches elsewhere finds the sight of it lying unworked here difficult to leave alone.
+3. `[street]` Everybody in this town can point at the {resource}. Nobody in this town is working it.
+4. `[threshold]` The {resource} sits at the edge of being worth a great deal to {settlement}. What the town lacks is not the ground, it is the {institution} that would begin the work.
 
 **EXPLOITATION: `unexploited`, `exportValue: medium` or `low`**
-1. `[ledger]` {settlement} leaves {resource} unworked, and the leaving is a reasonable decision. What it would fetch would barely cover the working.
-2. `[street]` There is {resource} out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.
-3. `[counterforce]` The {resource} has been available to {settlement} for as long as the town has been here and has never been taken up; the arithmetic has been done and done again.
+1. `[ledger]` {settlement} leaves {resource} unworked. The leaving is a reasonable decision. What it would fetch would barely cover the working.
+2. `[street]` There is {resource} out there and nobody has ever thought it worth the trouble. That is the town's considered opinion rather than an oversight.
+3. `[counterforce]` The {resource} has been available to {settlement} for as long as the town has been here and has never been taken up. The arithmetic has been done and done again.
 
 **EXPLOITATION: `partiallyExploited`**
-1. `[ledger]` {settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.
-2. `[visitor]` A stranger tracing {resource} out of {settlement} finds it leaving half-finished, and finds nobody in the town troubled by that.
-3. `[threshold]` The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.
-4. `[street]` The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
+1. `[ledger]` {settlement} works part of the line that {resource} could support. The raw material moves. It moves before it has been made into anything worth more.
+2. `[visitor]` A stranger tracing {resource} out of {settlement} finds it leaving half-finished. He finds nobody in the town troubled by that.
+3. `[threshold]` The {chain} between {resource} and {good} is begun and not finished here. What stands between the two is one {institution} the town does not have.
+4. `[street]` The town takes the easy half of this trade and sells the rest of it to whoever does the hard half.
 
 **EXPLOITATION: `fullyExploited`**
-1. `[ledger]` The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.
+1. `[ledger]` The {resource} in {settlement}'s country is worked all the way through. The ground gives it, {institution} finishes it, and it leaves as {good}.
 2. `[visitor]` Nothing about this line is left on the table at {settlement}. A stranger following it from ground to gate finds every stage of it occupied.
-3. `[street]` This is the trade the town is actually built on, and the town has taken it as far as it goes.
+3. `[street]` This is the trade the town is actually built on. The town has taken it as far as it goes.
 
 **EXPLOITATION — nothing in any bucket** · **R-DST-K GATED: no exploitation record ⇒ no section ⇒ no sentence.**
 The Resource Exploitation section does not render when all three buckets are

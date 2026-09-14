@@ -3147,7 +3147,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Coastal": [
         {
           "angle": "visitor",
-          "text": "{settlement} keeps its back to the land and its face to the water, and everything the town is good at begins at the tideline.",
+          "text": "{settlement} keeps its back to the land and its face to the water. Everything the town is good at begins at the tideline.",
           "slots": [
             "settlement"
           ],
@@ -3155,7 +3155,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The ground here gives less than the water does; what {settlement} counts as its own produce comes off boats more often than out of fields.",
+          "text": "The ground here gives less than the water does. What {settlement} counts as its own produce comes off boats more often than out of fields.",
           "slots": [
             "settlement"
           ],
@@ -3163,7 +3163,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The weather that matters in this town is the weather out at sea, and everybody watches it whether or not they sail.",
+          "text": "The weather that matters in this town is the weather out at sea. Everybody watches it whether or not they sail.",
           "slots": [],
           "vid": 3
         }
@@ -3171,7 +3171,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Plains": [
         {
           "angle": "ledger",
-          "text": "{settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.",
+          "text": "{settlement} sits on ground that grows things without argument. The town's whole arrangement follows from that one fact.",
           "slots": [
             "settlement"
           ],
@@ -3179,7 +3179,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.",
+          "text": "The country around {settlement} is open in every direction. It is good for a plough, good for a cart, and good for anything else that wants to reach the town.",
           "slots": [
             "settlement"
           ],
@@ -3187,7 +3187,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is nothing between this town and the horizon but what the town has planted, and the town knows both halves of that.",
+          "text": "There is nothing between this town and the horizon but what the town has planted. The town knows both halves of that.",
           "slots": [],
           "vid": 3
         }
@@ -3195,7 +3195,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Forest": [
         {
           "angle": "ledger",
-          "text": "The timber and what lives in it are {settlement}'s standing wealth; the fields here are clearings rather than country.",
+          "text": "The timber and what lives in it are {settlement}'s standing wealth. The fields here are clearings rather than country.",
           "slots": [
             "settlement"
           ],
@@ -3203,7 +3203,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The trees come nearly to the doorframes at {settlement}, and the town has arranged its light, its roads and its watch around them.",
+          "text": "The trees come nearly to the doorframes at {settlement}. The town has arranged its light, its roads and its watch around them.",
           "slots": [
             "settlement"
           ],
@@ -3227,7 +3227,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.",
+          "text": "Nothing at {settlement} is level. The town has made a virtue of it. The approaches are slow and the sightlines are long.",
           "slots": [
             "settlement"
           ],
@@ -3235,7 +3235,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The work here is uphill in the literal sense, and the town prices its carting accordingly.",
+          "text": "The work here is uphill in the literal sense. The town prices its carting accordingly.",
           "slots": [],
           "vid": 3
         }
@@ -3243,7 +3243,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Mountains": [
         {
           "angle": "ledger",
-          "text": "What {settlement} lives on comes out of the rock rather than off the ground, and the season is short at both ends.",
+          "text": "What {settlement} lives on comes out of the rock rather than off the ground. The season is short at both ends.",
           "slots": [
             "settlement"
           ],
@@ -3265,7 +3265,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: River": [
         {
           "angle": "ledger",
-          "text": "The water is {settlement}'s road and its mill both, and the town's earnings divide along it rather than around it.",
+          "text": "The water is {settlement}'s road and its mill both. The town's earnings divide along it rather than around it.",
           "slots": [
             "settlement"
           ],
@@ -3273,7 +3273,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is arranged lengthwise on its water, and a stranger meets the town by walking upstream or down.",
+          "text": "{settlement} is arranged lengthwise on its water. A stranger meets the town by walking upstream or down.",
           "slots": [
             "settlement"
           ],
@@ -3281,7 +3281,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The river decides what this town can move and when, and nobody here treats that as a hardship.",
+          "text": "The river decides what this town can move and when. Nobody here treats that as a hardship.",
           "slots": [],
           "vid": 3
         }
@@ -3289,7 +3289,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Desert": [
         {
           "angle": "ledger",
-          "text": "{settlement} exists where it does because of water rather than soil; the ground gives almost nothing and the town's whole economy is arrangement.",
+          "text": "{settlement} exists where it does because of water rather than soil. The ground gives almost nothing and the town's whole economy is arrangement.",
           "slots": [
             "settlement"
           ],
@@ -3305,7 +3305,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nothing grows here without being made to, and everybody in the town knows exactly what the making costs.",
+          "text": "Nothing grows here without being made to. Everybody in the town knows exactly what the making costs.",
           "slots": [],
           "vid": 3
         }
@@ -3313,7 +3313,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Swamp": [
         {
           "angle": "ledger",
-          "text": "The ground under {settlement} will not carry a heavy building or a straight road, and every trade the town has is shaped by that refusal.",
+          "text": "The ground under {settlement} refuses to carry a heavy building or a straight road. Every trade the town has is shaped by that refusal.",
           "slots": [
             "settlement"
           ],
@@ -3321,7 +3321,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger reaches {settlement} by the one path that holds, and understands immediately why the town is where it is and not a mile in any direction.",
+          "text": "A stranger reaches {settlement} by the one path that holds. He understands immediately why the town is where it is and not a mile in any direction.",
           "slots": [
             "settlement"
           ],
@@ -3329,7 +3329,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What this country gives, it gives to people who know it, and the knowing is most of what the town sells.",
+          "text": "What this country gives, it gives to people who know it. The knowing is most of what the town sells.",
           "slots": [],
           "vid": 3
         }
@@ -3337,7 +3337,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: Tundra": [
         {
           "angle": "ledger",
-          "text": "The working year at {settlement} is short and the storing year is long, and the town's accounts are really an argument about that ratio.",
+          "text": "The working year at {settlement} is short and the storing year is long. The town's accounts are really an argument about that ratio.",
           "slots": [
             "settlement"
           ],
@@ -3345,7 +3345,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is built against the cold rather than against anybody, and the building shows in every wall a stranger passes.",
+          "text": "{settlement} is built against the cold rather than against anybody. The building shows in every wall a stranger passes.",
           "slots": [
             "settlement"
           ],
@@ -3353,7 +3353,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town spends the good months preparing for the others, and does not think of that as pessimism.",
+          "text": "The town spends the good months preparing for the others. It does not think of that as pessimism.",
           "slots": [],
           "vid": 3
         }
@@ -3361,7 +3361,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TERRAIN: anything else (the default accent)": [
         {
           "angle": "ledger",
-          "text": "The country around {settlement} is ordinary country, and what the town earns it earns by working it rather than by being anywhere in particular.",
+          "text": "The country around {settlement} is ordinary country. What the town earns it earns by working it rather than by being anywhere in particular.",
           "slots": [
             "settlement"
           ],
@@ -3369,7 +3369,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing about {settlement}'s ground explains {settlement}; the town is the explanation.",
+          "text": "Nothing about {settlement}'s ground explains {settlement}. The town does.",
           "slots": [
             "settlement"
           ],
@@ -3385,7 +3385,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ECONOMIC STRENGTHS: the roster is populated": [
         {
           "angle": "ledger",
-          "text": "{settlement} has more than one thing it is good at, and the list is short enough that everybody here could recite it.",
+          "text": "{settlement} has more than one thing it is good at. The list is short enough that everybody here could recite it.",
           "slots": [
             "settlement"
           ],
@@ -3417,13 +3417,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "This town has no speciality and has never needed one; what it makes, it makes for itself.",
+          "text": "This town has no speciality and has never needed one. What it makes, it makes for itself.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} has no advantage of any kind and is still here, which is a plainer achievement than a good harvest.",
+          "text": "{settlement} has no advantage of any kind and is still here. That is a plainer achievement than a good harvest.",
           "slots": [
             "settlement"
           ],
@@ -3433,7 +3433,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "STRATEGIC VALUE: the generator's assessment, framed": [
         {
           "angle": "ledger",
-          "text": "What {settlement} is worth to anybody else is a separate question from what it is worth to itself, and the two answers are not close.",
+          "text": "What {settlement} is worth to anybody else is a separate question from what it is worth to itself. The two answers are not close.",
           "slots": [
             "settlement"
           ],
@@ -3464,7 +3464,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who knows what {resource} fetches elsewhere will find the sight of it lying unworked here difficult to leave alone.",
+          "text": "A stranger who knows what {resource} fetches elsewhere finds the sight of it lying unworked here difficult to leave alone.",
           "slots": [
             "resource"
           ],
@@ -3472,7 +3472,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Everybody in this town can point at the {resource}, and nobody in this town is working it.",
+          "text": "Everybody in this town can point at the {resource}. Nobody in this town is working it.",
           "slots": [
             "resource"
           ],
@@ -3480,7 +3480,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {resource} sits at the edge of being worth a great deal to {settlement}: what the town lacks is not the ground, it is the {institution} that would begin the work.",
+          "text": "The {resource} sits at the edge of being worth a great deal to {settlement}. What the town lacks is not the ground, it is the {institution} that would begin the work.",
           "slots": [
             "resource",
             "settlement",
@@ -3492,7 +3492,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: medium or low": [
         {
           "angle": "ledger",
-          "text": "{settlement} leaves {resource} unworked, and the leaving is a reasonable decision. What it would fetch would barely cover the working.",
+          "text": "{settlement} leaves {resource} unworked. The leaving is a reasonable decision. What it would fetch would barely cover the working.",
           "slots": [
             "settlement",
             "resource"
@@ -3501,7 +3501,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is {resource} out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.",
+          "text": "There is {resource} out there and nobody has ever thought it worth the trouble. That is the town's considered opinion rather than an oversight.",
           "slots": [
             "resource"
           ],
@@ -3509,7 +3509,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The {resource} has been available to {settlement} for as long as the town has been here and has never been taken up; the arithmetic has been done and done again.",
+          "text": "The {resource} has been available to {settlement} for as long as the town has been here and has never been taken up. The arithmetic has been done and done again.",
           "slots": [
             "resource",
             "settlement"
@@ -3520,7 +3520,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: partiallyExploited": [
         {
           "angle": "ledger",
-          "text": "{settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.",
+          "text": "{settlement} works part of the line that {resource} could support. The raw material moves. It moves before it has been made into anything worth more.",
           "slots": [
             "settlement",
             "resource"
@@ -3529,7 +3529,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger tracing {resource} out of {settlement} finds it leaving half-finished, and finds nobody in the town troubled by that.",
+          "text": "A stranger tracing {resource} out of {settlement} finds it leaving half-finished. He finds nobody in the town troubled by that.",
           "slots": [
             "resource",
             "settlement"
@@ -3538,7 +3538,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.",
+          "text": "The {chain} between {resource} and {good} is begun and not finished here. What stands between the two is one {institution} the town does not have.",
           "slots": [
             "chain",
             "resource",
@@ -3549,7 +3549,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+          "text": "The town takes the easy half of this trade and sells the rest of it to whoever does the hard half.",
           "slots": [],
           "vid": 4
         }
@@ -3557,7 +3557,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: fullyExploited": [
         {
           "angle": "ledger",
-          "text": "The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.",
+          "text": "The {resource} in {settlement}'s country is worked all the way through. The ground gives it, {institution} finishes it, and it leaves as {good}.",
           "slots": [
             "resource",
             "settlement",
@@ -3576,7 +3576,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
+          "text": "This is the trade the town is actually built on. The town has taken it as far as it goes.",
           "slots": [],
           "vid": 3
         }
