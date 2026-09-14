@@ -39,7 +39,12 @@ function parse(text){ const out=[]; let blk=null, header=null, pool=null, v=0;
 const GLOSS=/\b(has it that|have it that|puts it that|the account is|the talk is that|'s position is|'s account is|'s own account|'s word is|own answer is|the word is that|the view is that|'s view is)\b/;
 const ARCH=/\b(granary|infirmary|pedlar|factor|watchman|sexton|alehouse|bier|billhook|gaol|patrolman|tallow)\b/;
 function stripNotes(t){ return t.replace(/\*—[^*]*\*/g,' '); }   // italic AUTHORING NOTES are stripped by cleanText before the projection
-function proxy(t0){ const t=stripNotes(t0); const f=[]; if (t.includes(' and that ')) f.push('and-that'); if (GLOSS.test(t)) f.push('gloss');
+// ⛔ INSTRUMENT DEBT, FOUND ON THIS LEAF: the bar regex's `\d` arm fires on the SLOT NAME `{faction2}`
+// (and `{parties2}`-shaped names generally), which never reaches a reader — the slot fills with a faction's
+// name. `stripSlots` renders slots the way the projection does before the bar is applied. RAWPROXY=1
+// restores the chair's own counting so this leaf's figure stays comparable with power's and warFaith's.
+function stripSlots(t){ return process.env.RAWPROXY ? t : t.replace(/\{[a-zA-Z_]+\d*\}/g,'the town'); }
+function proxy(t0){ const t=stripSlots(stripNotes(t0)); const f=[]; if (t.includes(' and that ')) f.push('and-that'); if (GLOSS.test(t)) f.push('gloss');
   if (t.split(/(?<=[.!?])\s+/).some(x=>x.split(/\s+/).length>24)) f.push('>24w'); if (ARCH.test(t)) f.push('archaism'); if (/;|—|!|\d|\bwill\b|\bshall\b/.test(t)) f.push('bar'); return f; }
 const a=parse(head), b=parse(tree);
 if (process.env.ROSTER) { const by={}; for (const r of b) { const k=r.blk+' :: '+r.pool; (by[k] ||= {n:0,form:r.form}); by[k].n++; }
