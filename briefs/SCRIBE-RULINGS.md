@@ -44,3 +44,15 @@ DATA DELETION off the table by its own rule. A migration FILE is written; applyi
     and never from prior prose — coherence comes from the cards and the record, not from re-reading its own text. The prior epochs'
     prose is KEPT (THE PROMISE's lived past) and the page shows the epoch the world is at. This is `requestProgression`'s diff-aware
     shape (aiSlice.js:764) made the default and stripped of its "refine what was written" step.
+
+14. THE OPEN TRIGGER (the owner, 2026-09-14 ~06:3x, verbatim): "but generation happens only once a settlement's dossier is opened and frozen
+    until next advance time." READ AS: nothing renders on save or on advance by itself; a render starts when a settlement's dossier is ON
+    SCREEN, it has a durable home (a saveId), and no artefact exists for the current epoch; the artefact is then frozen until the next
+    advance makes it stale; a settlement never opened in an epoch is never rendered or billed. Chair's addition (vetoable): the durable-home
+    condition, so no credit is spent on a town that cannot keep what it paid for.
+
+15. THE UNDONE EPOCH IS SAVED (the owner, 2026-09-14 ~06:4x, verbatim): "if advanced time is reverted back, then that past one should be
+    saved." READ AS: an undo of an advance never deletes that epoch's prose; the restore chokepoint MOVES it whole into the past-epochs lane
+    marked undone (with its advanceSeq and the advance's nonce, since the seq will be reused by a different future) and re-points current
+    at the surviving epoch. SUPERSEDES the chair's earlier "drop epochs above the restored depth". Applies the same tier rotation as lived
+    epochs (item 13 stays owner-gated).
