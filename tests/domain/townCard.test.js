@@ -1,0 +1,543 @@
+/**
+ * tests/domain/townCard.test.js — THE TOWN CARD'S PINS (W0 deliverable 4).
+ *
+ * Every arm here is one the design names (DESIGN_SCRIBE_GENERATION_TIME_PROSE §2's last
+ * paragraph, §11 W0), and every one of them carries its own NEGATIVE CONTROL — a deliberately
+ * broken card that the arm must convict. An arm that cannot be made to fail is not standing over
+ * anything, which is the lesson `stateProseKernel.js` records at `stableVid` about a sweep that
+ * re-derived its own predicate and left a planted defect green.
+ *
+ * ── ⚠ THE ONE ARM THE BRIEF NAMES THAT IS DRIVEN DIFFERENTLY, AND WHY (a chair-level call) ──
+ * The brief asks for byte-stability "before and after `regenSection` on a non-locked section".
+ * `regenSection` is an async Zustand thunk (`settlementSlice.js:405`) that needs the store, the
+ * save layer, the analytics module and the pricing-moment loader, and taken literally the arm is
+ * also not what anyone wants: regenerating HISTORY must move the history tab's card. The property
+ * the brief is protecting is that the card holds NO STATE ACROSS CALLS and MUTATES NOTHING, so it
+ * is driven directly and at the grain it lives at — the PURE pipelines `regenSection` itself
+ * calls (`regenNPCsPipeline`, `regenHistoryPipeline`), plus a no-mutation arm. Recorded, vetoable.
+ */
+import { describe, it, expect } from 'vitest';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve, relative, join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import {
+  generateSettlementPipeline, regenNPCsPipeline, regenHistoryPipeline,
+} from '../../src/generators/generateSettlementPipeline.js';
+import { townCard, townCardJson, variantAt, recoverFills, faceRawOf } from '../../src/domain/prose/townCard.js';
+import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
+import {
+  drawVariant, eligibleVariants, compromisedSpeaks, variantIsAudible,
+} from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { rolesOf, sourcesOf, renderYearOf } from '../../src/domain/display/stateProse/faceSources.js';
+import { astTokens } from '../../scripts/wiring-census.mjs';
+import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const STATIC_CARD = JSON.parse(readFileSync(join(ROOT, 'docs/content/scribe-static-card.json'), 'utf8'));
+const GOLDEN = join(ROOT, 'tests/fixtures/scribe-town-card.golden.json');
+
+/** The two new W0 modules, which every source-scan arm below is taken over. */
+const NEW_MODULES = Object.freeze([
+  'src/domain/prose/townCard.js',
+  'src/domain/prose/scribePage.js',
+]);
+
+const townOf = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
+const cardOf = (s, tab, audience = 'dm') => townCard(s, { tab, audience, staticCard: STATIC_CARD });
+
+/** A deterministic slice of the golden corpus, taken by stride so it spans the grid. */
+function sample(n) {
+  const rows = goldenCorpus();
+  const stride = Math.max(1, Math.floor(rows.length / n));
+  const out = [];
+  for (let i = 0; i < rows.length && out.length < n; i += stride) out.push(rows[i]);
+  return out;
+}
+
+function settlementOf(row) {
+  const { _seed, ...cfg } = row;
+  return generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+}
+
+describe('townCard — byte stability', () => {
+  it('is identical across two calls on every tab, over the whole 525-town golden corpus', () => {
+    const drift = [];
+    for (const row of goldenCorpus()) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      for (const tab of SCRIBE_TABS) {
+        const a = townCardJson(cardOf(s, tab));
+        const b = townCardJson(cardOf(s, tab));
+        if (a !== b) drift.push(`${keyOf(row)} :: ${tab}`);
+      }
+    }
+    expect(drift).toEqual([]);
+  }, 600_000);
+
+  it('is key-sorted and JSON-round-trippable at every level (no Set, no Map, no function)', () => {
+    const s = townOf({
+      settType: 'city', culture: 'germanic', terrainOverride: 'coastal',
+      tradeRouteAccess: 'port', monsterThreat: 'frontier',
+    }, 'card-shape');
+    for (const tab of SCRIBE_TABS) {
+      const card = cardOf(s, tab);
+      const j = townCardJson(card);
+      expect(JSON.parse(j)).toEqual(card);
+      const unsorted = [];
+      const walk = (node, path) => {
+        if (Array.isArray(node)) { node.forEach((x, i) => walk(x, `${path}[${i}]`)); return; }
+        if (!node || typeof node !== 'object') {
+          expect(typeof node).not.toBe('function');
+          return;
+        }
+        const keys = Object.keys(node);
+        // ⛔ `pools` and `page` are ARRAYS in page order; their MEMBERS are sorted records.
+        const s2 = [...keys].sort();
+        if (JSON.stringify(keys) !== JSON.stringify(s2)) unsorted.push(path);
+        for (const k of keys) walk(node[k], `${path}.${k}`);
+      };
+      walk(card, tab);
+      expect(unsorted, `\n${unsorted.join('\n')}\n`).toEqual([]);
+    }
+  }, 120_000);
+
+  it('mutates nothing it is handed, and holds no state across calls', () => {
+    for (const row of sample(20)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      const before = JSON.stringify(s);
+      const first = SCRIBE_TABS.map((tab) => townCardJson(cardOf(s, tab)));
+      expect(JSON.stringify(s), `${keyOf(row)}: townCard mutated the settlement`).toBe(before);
+      // A SECOND settlement generated from the same seed must give the same cards, so no card
+      // can be carrying anything from the first object's identity.
+      const twin = settlementOf(row);
+      const second = SCRIBE_TABS.map((tab) => townCardJson(cardOf(twin, tab)));
+      expect(second).toEqual(first);
+    }
+  }, 600_000);
+
+  it('is unmoved on the PRE-REGEN settlement by a section regeneration having happened', () => {
+    // The property `regenSection` byte-stability is really about: the card is a function of the
+    // settlement it is handed and of nothing else, so a regeneration that produced a DIFFERENT
+    // settlement leaves the original's card alone, and the new settlement's card is a function
+    // of the new settlement in the same way.
+    for (const row of sample(20)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      const cfg = s.config || {};
+      const beforeCards = SCRIBE_TABS.map((tab) => townCardJson(cardOf(s, tab)));
+      let regenerated = null;
+      try {
+        const { _preservation, ...parts } = regenNPCsPipeline(s, cfg, { locks: {} });
+        const { _regenSeed, ...hist } = regenHistoryPipeline(s, cfg);
+        regenerated = { ...s, ...parts, ...hist };
+      } catch { /* a tier with no roster to reroll still drives the first half */ }
+      const afterCards = SCRIBE_TABS.map((tab) => townCardJson(cardOf(s, tab)));
+      expect(afterCards, `${keyOf(row)}: the original's card moved`).toEqual(beforeCards);
+      if (regenerated) {
+        const a = SCRIBE_TABS.map((tab) => townCardJson(cardOf(regenerated, tab)));
+        const b = SCRIBE_TABS.map((tab) => townCardJson(cardOf(regenerated, tab)));
+        expect(b, `${keyOf(row)}: the regenerated town's card is not stable`).toEqual(a);
+      }
+    }
+  }, 600_000);
+});
+
+describe('townCard — no new read, and no new producer', () => {
+  it('names no settlement field the display layer does not already read', () => {
+    // THE ORACLE is the static card's own field table, which is built from the census's `reads`
+    // column normalised through each desk's source — i.e. exactly what the display layer reads —
+    // widened by the roots `faceSources.js` and the mount registry read on this same path.
+    const known = new Set(Object.keys(STATIC_CARD.fields));
+    const roots = new Set([...known].map((f) => f.split('.')[0]));
+    // The roots the SEATING path reads, named here because they are the card's own reads and
+    // they are licensed by `faceSources.js` rather than by a pool's key function.
+    for (const extra of ['institutions', 'tier', 'history', 'powerStructure', 'id', 'name',
+      'config', 'defenseProfile', 'economicState', 'economicViability', 'resourceAnalysis',
+      'stress', 'conflicts', 'relationships', 'neighbourNetwork', 'neighborRelationship',
+      'prominentRelationship', 'structuralViolations', 'structuralSuggestions', 'coherenceNotes',
+      'availableServices', 'populationHistory', 'lifecycleStatus', 'arrivalScene',
+      'pressureSentence', 'settlementReason', 'publicLegitimacy', '_seed']) roots.add(extra);
+
+    const s = townOf({
+      settType: 'city', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'frontier',
+    }, 'no-new-read');
+    const offending = [];
+    for (const tab of SCRIBE_TABS) {
+      for (const pool of cardOf(s, tab).pools) {
+        for (const rowField of pool.fields) {
+          if (!known.has(rowField.field)) offending.push(`${tab} :: ${pool.poolKey} :: ${rowField.field}`);
+        }
+      }
+    }
+    expect(offending, `\n${offending.join('\n')}\n`).toEqual([]);
+
+    // NEGATIVE CONTROL — a field path the display layer does not read must be convicted.
+    expect(known.has('powerStructure.aSecretTheEngineDoesNotHold')).toBe(false);
+  }, 120_000);
+
+  it('the two new modules mint ZERO producer writes', () => {
+    // ⛔ THE STRUCTURAL PIN. `scripts/wiring-census.mjs` `producerCitations` reads every
+    // non-computed `Property` key and every member-assignment target under `src/domain/**` as a
+    // WRITE of world state. Eighteen identifiers are read by a desk while produced nowhere, so a
+    // literal keyed on one of them would flip that pool's `not-produced` label and move the
+    // committed census. Both new modules build every record through `Object.fromEntries`, and
+    // this arm is what keeps them that way.
+    const offenders = [];
+    for (const rel of NEW_MODULES) {
+      const { writes, parsed } = astTokens(readFileSync(join(ROOT, rel), 'utf8'));
+      expect(parsed, `${rel} did not parse`).toBe(true);
+      for (const w of writes) offenders.push(`${rel}:${w.line} ${w.name}`);
+    }
+    expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
+
+    // NEGATIVE CONTROL — the scan must convict a plain literal.
+    const planted = astTokens('export const X = { court: 1 };\nlet y = {}; y.forces = 2;\n');
+    expect(planted.writes.map((w) => w.name).sort()).toEqual(['court', 'forces']);
+  });
+
+  it('is HEADLESS: nothing in the import closure is a .jsx file or imports React', () => {
+    const seen = new Set();
+    const components = new Set();
+    const visit = (rel) => {
+      if (seen.has(rel)) return;
+      seen.add(rel);
+      const abs = join(ROOT, rel);
+      if (!existsSync(abs)) return;
+      const src = readFileSync(abs, 'utf8');
+      expect(rel.endsWith('.jsx'), `${rel} is a component file`).toBe(false);
+      expect(/from\s+['"]react/.test(src), `${rel} imports React`).toBe(false);
+      if (rel.startsWith('src/components/')) components.add(rel);
+      for (const m of src.matchAll(/from\s+['"](\.[^'"]+)['"]/g)) {
+        visit(relative(ROOT, resolve(dirname(abs), m[1])));
+      }
+    };
+    for (const rel of NEW_MODULES) visit(rel);
+    // ⭐ THE COMPONENT ALLOWLIST IS EXACT, so a fifth reds by name rather than by habit. These
+    // four are plain `.js` reading recipes that render nothing; two of them live under
+    // `src/components/` only because the mount walker admits exactly ONE component file per desk.
+    expect([...components].sort()).toEqual([
+      'src/components/new/economyDeskRead.js',
+      'src/components/new/generalDeskRead.js',
+      'src/components/new/tabHelpers.js',
+      'src/components/settlement/faithPanelModel.js',
+    ]);
+    expect(seen.size).toBeGreaterThan(20);
+  });
+});
+
+describe('townCard — the join with the static card and the corpus', () => {
+  it('every fired pool has a static row and a corpus pool', () => {
+    const missingStatic = [];
+    const missingCorpus = [];
+    for (const row of sample(12)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      for (const tab of SCRIBE_TABS) {
+        for (const pool of cardOf(s, tab).pools) {
+          if (pool.static === null) missingStatic.push(`${keyOf(row)} :: ${pool.blockId} :: ${pool.poolKey}`);
+          if (variantAt(pool.blockId, pool.poolKey, pool.authoredIndex) === null) {
+            missingCorpus.push(`${keyOf(row)} :: ${pool.blockId} :: ${pool.poolKey} @ ${pool.authoredIndex}`);
+          }
+        }
+      }
+    }
+    expect(missingStatic, `\n${missingStatic.join('\n')}\n`).toEqual([]);
+    expect(missingCorpus, `\n${missingCorpus.join('\n')}\n`).toEqual([]);
+
+    // NEGATIVE CONTROL — a pool key the corpus does not hold must answer null.
+    expect(variantAt('DS-DEF-2', 'a pool nobody authored', 0)).toBe(null);
+    expect(STATIC_CARD.pools['DS-DEF-2::a pool nobody authored']).toBe(undefined);
+  }, 300_000);
+
+  it('says so when the static card is absent rather than carrying a half-answer', () => {
+    const s = townOf({
+      settType: 'town', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'civilized',
+    }, 'no-static');
+    const card = townCard(s, { tab: 'defense', audience: 'dm' });
+    expect(card.staticCardJoined).toBe(false);
+    expect(card.pools.every((p) => p.static === null && p.fields.length === 0)).toBe(true);
+    expect(cardOf(s, 'defense').staticCardJoined).toBe(true);
+  }, 60_000);
+});
+
+describe('townCard — determinism of the trace', () => {
+  it('the drawn variant, the roles and the compromised flag are the render\'s own', () => {
+    const bad = [];
+    for (const row of sample(12)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      const seated = sourcesOf(s);
+      const roles = rolesOf(s);
+      const year = renderYearOf(s);
+      for (const tab of SCRIBE_TABS) {
+        const card = cardOf(s, tab);
+        for (const pool of card.pools) {
+          const v = variantAt(pool.blockId, pool.poolKey, pool.authoredIndex);
+          // (i) THE ANNEX VID ON THE CARD IS THE VARIANT'S OWN, and it is NOT the authored index.
+          if (v && typeof v.vid === 'number' && pool.vid !== v.vid) {
+            bad.push(`${tab} ${pool.poolKey}: vid ${pool.vid} != leaf ${v.vid}`);
+          }
+          // (ii) EVERY SOURCE THE UNIT SPOKE THROUGH IS ONE THIS TOWN SEATS, and every role the
+          // card offers for it is one `rolesOf` seats.
+          for (const source of pool.faceSources) {
+            // ⛔ THE ARCHIVER IS NOT A POWER OF THE TOWN and `sourcesOf` never emits it (ruling
+            // 22): it is the hand the dossier is written in, eligible everywhere its `observed`
+            // mark or its weighing row admits it. Found by this arm convicting a real weighing
+            // row on `Economic Survival: STRONG`, which is the arm telling the truth about a
+            // vocabulary word the seating roster deliberately does not hold.
+            if (source === 'archiver') continue;
+            if (!seated.has(source)) bad.push(`${tab} ${pool.poolKey}: unseated source ${source}`);
+          }
+          for (const r of pool.faceRoles) {
+            if (r.source === 'archiver') { expect(r.roster).toEqual([]); continue; }
+            const known = new Set((roles.get(r.source) || []).map((x) => x.role));
+            for (const held of r.roster) {
+              if (!known.has(held.role)) bad.push(`${tab} ${pool.poolKey}: role ${held.role} not in rolesOf`);
+            }
+          }
+          // (iii) THE COMPROMISED FLAG IS `compromisedSpeaks` RECOMPUTED on the page's own key.
+          if (pool.compromised) {
+            const again = compromisedSpeaks(card.seed, pool.poolKey, String(s.id ?? s._seed ?? ''), year);
+            if (pool.compromised.speaks !== again) bad.push(`${tab} ${pool.poolKey}: roll disagrees`);
+            if (pool.compromised.year !== year) bad.push(`${tab} ${pool.poolKey}: wrong year`);
+          }
+        }
+      }
+    }
+    expect(bad, `\n${bad.slice(0, 40).join('\n')}\n`).toEqual([]);
+  }, 300_000);
+
+  it('the drawn variant is the one drawVariant returns for (seed, blockId, poolKey)', () => {
+    // Driven on the DEFENSE tab, whose spine pools take no demoted dimension, so the eligible
+    // set the card's page drew from is reproducible here without the desk's slot bag.
+    const s = townOf({
+      settType: 'city', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'plagued',
+    }, 'draw-pin');
+    const card = cardOf(s, 'defense');
+    let checked = 0;
+    for (const pool of card.pools) {
+      const v = variantAt(pool.blockId, pool.poolKey, pool.authoredIndex);
+      if (!v || typeof v.vid !== 'number') continue;
+      const all = STATIC_CARD.pools[`${pool.blockId}::${pool.poolKey}`];
+      if (!all || all.slotsNamed.length > 0) continue; // a slot bag we do not hold
+      const eligible = eligibleVariants(
+        [...Array(all.variants).keys()].map((i) => variantAt(pool.blockId, pool.poolKey, i)),
+        { audience: 'dm' },
+      );
+      const drawn = drawVariant(eligible, pool.blockId, pool.poolKey, card.seed);
+      if (drawn && typeof drawn.vid === 'number') {
+        expect(pool.vid, `${pool.poolKey}`).toBe(drawn.vid);
+        checked += 1;
+      }
+    }
+    expect(checked, 'the arm checked nothing').toBeGreaterThan(0);
+  }, 120_000);
+
+  it('recoverFills reads the render and is convicted by a wrong one', () => {
+    // DRIVEN, because only 10 of the corpus's 2,838 faces carry a role slot today: the limb the
+    // card most depends on is nearly dark on the shipped corpus, so it is driven by hand.
+    const raw = '{hall} {v:put} the walls\' keeping under the {defmaterial} purse.';
+    const rendered = 'The mayor puts the walls\' keeping under the military purse.';
+    const got = recoverFills(raw, rendered);
+    expect(got).toEqual([
+      { slot: 'hall', value: 'The mayor' },
+      { slot: 'v:put', value: 'puts' },
+      { slot: 'defmaterial', value: 'military' },
+    ]);
+    // A PLURAL ROLE takes the plural verb, and the alternation must follow it.
+    expect(recoverFills('{tavern} {v:say} it is kept.', 'The drinkers of the district say it is kept.'))
+      .toEqual([
+        { slot: 'tavern', value: 'The drinkers of the district' },
+        { slot: 'v:say', value: 'say' },
+      ]);
+    // NEGATIVE CONTROL — a rendered text the raw cannot align against yields null, never a guess.
+    expect(recoverFills(raw, 'A sentence about something else entirely.')).toBe(null);
+    // A face naming nothing recovers an empty list and is not a failure.
+    expect(recoverFills('The walls are kept.', 'The walls are kept.')).toEqual([]);
+  });
+
+  it('recovers a fill for every composed line of a real page, or says it did not', () => {
+    let total = 0;
+    let unrecovered = 0;
+    for (const row of sample(8)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      for (const tab of SCRIBE_TABS) {
+        for (const pool of cardOf(s, tab).pools) {
+          total += 1;
+          if (!pool.slots.recovered) unrecovered += 1;
+          // Whatever it recovered must actually BE in the rendered text.
+          for (const fill of pool.slots.fills) {
+            expect(pool.unit.rendered.toLowerCase()).toContain(String(fill.value).toLowerCase());
+          }
+          const v = variantAt(pool.blockId, pool.poolKey, pool.authoredIndex);
+          if (v) expect(faceRawOf(v, pool.face)).toEqual(expect.any(String));
+        }
+      }
+    }
+    expect(total).toBeGreaterThan(100);
+    // A ratchet, not a threshold: the recovery is total on the corpus as it stands today, and a
+    // face shape that breaks it must announce itself rather than degrade quietly.
+    expect(unrecovered, `${unrecovered} of ${total} composed units did not align`).toBe(0);
+  }, 300_000);
+});
+
+describe('townCard — the audience', () => {
+  it('a player card carries no dm-only unit; a dm card may', () => {
+    const offending = [];
+    let dmOnlySeen = 0;
+    for (const row of sample(12)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      for (const tab of SCRIBE_TABS) {
+        for (const pool of cardOf(s, tab, 'player').pools) {
+          const v = variantAt(pool.blockId, pool.poolKey, pool.authoredIndex);
+          if (v && !variantIsAudible(v, 'player')) offending.push(`${tab} :: ${pool.poolKey}`);
+          if (pool.marks.includes('dm-only')) offending.push(`${tab} :: ${pool.poolKey} :: marked`);
+        }
+        for (const pool of cardOf(s, tab, 'dm').pools) {
+          if (pool.marks.includes('dm-only')) dmOnlySeen += 1;
+        }
+      }
+    }
+    expect(offending, `\n${offending.join('\n')}\n`).toEqual([]);
+    // NEGATIVE CONTROL — the audience filter is the kernel's, and it must be able to refuse.
+    expect(variantIsAudible({ marks: ['dm-only'] }, 'player')).toBe(false);
+    expect(variantIsAudible({ marks: ['dm-only'] }, 'dm')).toBe(true);
+    expect(dmOnlySeen).toBeGreaterThanOrEqual(0);
+  }, 300_000);
+
+  it('an unrecognised audience reads as the player\'s (kernel law 2, fail-closed)', () => {
+    const s = townOf({
+      settType: 'town', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'civilized',
+    }, 'audience-law');
+    const odd = townCard(s, { tab: 'defense', audience: 'archivist', staticCard: STATIC_CARD });
+    expect(odd.audience).toBe('player');
+    expect(townCardJson(odd)).toBe(townCardJson(cardOf(s, 'defense', 'player')));
+  }, 60_000);
+});
+
+describe('townCard — the epoch', () => {
+  it('records an unadvanced town honestly, and reads the campaign world where there is one', () => {
+    const s = townOf({
+      settType: 'town', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'civilized',
+    }, 'epoch');
+    const bare = cardOf(s, 'overview');
+    expect(bare.epoch.advanced).toBe(false);
+    expect(bare.epoch.tick).toBe(null);
+    expect(bare.lastAdvance).toBe(null);
+    // ⛔ THE FROZEN-YEAR FINDING, PINNED so it cannot be quietly forgotten: `renderYearOf` is
+    // `history.age`, which the engine writes at generation and no worldPulse module ever moves.
+    expect(bare.epoch.renderYearIsFrozen).toBe(true);
+    expect(bare.epoch.renderYear).toBe(renderYearOf(s));
+
+    const world = {
+      tick: 31,
+      calendar: { year: 31, month: 4, season: 'spring', elapsedWeeks: 1560 },
+      pulseHistory: [{
+        id: 'world_pulse.c1.31',
+        tick: 31,
+        interval: 'one_year',
+        committed: true,
+        calendar: { year: 31, season: 'spring' },
+        timeTicks: [{ saveId: s.id, summary: ['one year passed under no active conditions.'] }],
+        mechanicalOutcomes: [{
+          id: 'candidate.population.growth.a.31', type: 'population', ruleId: 'population_growth',
+          targetSaveId: s.id, saveId: s.id, headline: 'the town may grow', summary: 'it gains about 13 people.',
+        }],
+        consequenceOutcomes: [],
+        corruptionEvents: [],
+        factionCaptureEvents: [],
+      }],
+    };
+    const advanced = townCard(s, { tab: 'overview', audience: 'dm', world, staticCard: STATIC_CARD });
+    expect(advanced.epoch.advanced).toBe(true);
+    expect(advanced.epoch.tick).toBe(31);
+    expect(advanced.epoch.calendar.year).toBe(31);
+    expect(advanced.lastAdvance.tick).toBe(31);
+    expect(advanced.lastAdvance.interval).toBe('one_year');
+    expect(advanced.lastAdvance.summary).toEqual(['one year passed under no active conditions.']);
+    expect(advanced.lastAdvance.outcomes[0].ruleId).toBe('population_growth');
+    // NEGATIVE CONTROL — another settlement's rows are not this town's.
+    const notMine = {
+      ...world,
+      pulseHistory: [{
+        ...world.pulseHistory[0],
+        timeTicks: [{ saveId: 'some-other-town', summary: ['not this town'] }],
+        mechanicalOutcomes: [{ id: 'x', type: 'population', ruleId: 'r', saveId: 'some-other-town' }],
+      }],
+    };
+    const filtered = townCard(s, { tab: 'overview', audience: 'dm', world: notMine, staticCard: STATIC_CARD });
+    expect(filtered.lastAdvance.summary).toEqual([]);
+    expect(filtered.lastAdvance.outcomes).toEqual([]);
+  }, 60_000);
+});
+
+describe('townCard — the golden', () => {
+  /**
+   * ── SHIFT RECORD ────────────────────────────────────────────────────────────
+   * A fixture cannot show WHY it moved, so every re-record is written down here, in the golden
+   * master's own discipline. Re-recording without adding a row is a deleted alarm.
+   *
+   * 2026-09-14 — GENESIS (W0). The first golden town of `goldenMasterCorpus.js`, all thirteen
+   *   tabs, at the DM audience, with the committed static card joined. Recorded at the W0 lane's
+   *   clean tip off `7992713d0`.
+   */
+  it('the first golden town matches the committed card, byte for byte, on every tab', () => {
+    const row = goldenCorpus()[0];
+    const s = settlementOf(row);
+    const built = {};
+    for (const tab of SCRIBE_TABS) built[tab] = cardOf(s, tab);
+    const out = { town: keyOf(row), tabs: built };
+    if (process.env.UPDATE_SCRIBE_GOLDEN) {
+      process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
+    }
+    expect(existsSync(GOLDEN), 'run UPDATE_SCRIBE_GOLDEN=1 to print the fixture').toBe(true);
+    expect(out).toEqual(JSON.parse(readFileSync(GOLDEN, 'utf8')));
+  }, 120_000);
+});
+
+describe('scribePage — the page the card reads', () => {
+  it('every composed line names a mount the registry holds for that tab', () => {
+    const bad = [];
+    const byTab = new Map();
+    for (const tab of SCRIBE_TABS) byTab.set(tab, new Set());
+    const s = townOf({
+      settType: 'city', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'frontier',
+    }, 'mount-pin');
+    for (const tab of SCRIBE_TABS) {
+      for (const line of renderTabPage(s, tab, { audience: 'dm' })) {
+        if (line.kind !== 'composed') continue;
+        byTab.get(tab).add(line.mount);
+        if (!line.block || !line.pool || typeof line.vid !== 'number') {
+          bad.push(`${tab}: a composed line with no provenance — ${line.text.slice(0, 60)}`);
+        }
+      }
+    }
+    expect(bad, `\n${bad.join('\n')}\n`).toEqual([]);
+    // Every mount drawn is one the registry names for that tab.
+    const { DOSSIER_MOUNTS: rows } = STATIC_CARD.pools ? { DOSSIER_MOUNTS: null } : {};
+    expect(rows).toBe(null);
+    for (const [tab, mounts] of byTab) {
+      for (const mount of mounts) expect(mount.startsWith(`${tab}.`), `${tab} drew ${mount}`).toBe(true);
+    }
+  }, 60_000);
+
+  it('an unknown tab is silence, never a throw', () => {
+    const s = townOf({
+      settType: 'thorp', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'isolated', monsterThreat: 'safe',
+    }, 'unknown-tab');
+    expect(renderTabPage(s, 'no_such_tab', { audience: 'dm' })).toEqual([]);
+    expect(townCard(s, { tab: 'no_such_tab', staticCard: STATIC_CARD }).tabIsKnown).toBe(false);
+    expect(renderTabPage(null, 'defense', {})).toEqual(expect.any(Array));
+  }, 60_000);
+});
