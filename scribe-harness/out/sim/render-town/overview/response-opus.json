@@ -1,0 +1,140 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "spine": "Carts stopped on this spot before any stall did, and the stalls came afterwards to the carts.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "spine": "The rules in this town have rooms a traveller can find, the hall and the courthouse and the customs house.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People can afford to argue about something other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 2,
+   "spine": "No one has to explain why a town stands on this ground.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "The walls are sound and the watch walks its circuit, and neither of them is for show.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 3,
+   "spine": "The townsfolk do not expect this town to lose a straight fight, and they say as much to its neighbours.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "spine": "Against the beasts of this ground the town has men who know the work and the tools the work takes.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "spine": "Order holds on the main streets and thins in the lanes behind them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "spine": "Prices hold from one market to the next, and the town is not living on the last thing it sold.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "spine": "For magic the town has an alchemist's shop and no more, and whatever it wants past that comes from outside.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "spine": "The price of bread is watched here, as it is not in a town at ease.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "spine": "What stands to change hands between The Governing Council and The Order of the Watch is political influence, and the two are careful with each other.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "spine": "Traffic runs past this town on the road and leaves very little of itself behind.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "spine": "Everything the town cannot grow comes in on the road and comes in no other way.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "spine": "Spitzplatz is a town in the plain meaning of the word.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie carries more weight than the rest, and the weight shows in what the town refuses.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "spine": "Ties here are the ordinary ones, work and family and the same streets.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

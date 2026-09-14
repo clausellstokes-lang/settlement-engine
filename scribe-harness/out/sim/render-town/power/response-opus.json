@@ -1,0 +1,84 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 4,
+   "spine": "The Guild Council is well thought of here, and spends the good opinion on decisions the town would otherwise refuse.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 3,
+   "spine": "The Guild Council's standing rests on the town's prosperity, and lasts exactly as long as the prosperity lasts.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 3,
+   "spine": "A traveller doing business at Spitzplatz asks for one name and gets one answer, and plans a season ahead on that answer.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "spine": "Nobody here needs the argument over the market levies explained, and the town names it and moves on. The merchant guilds have stopped coming to the sessions, and each side now acts as though the other has already lost.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role money laundering",
+   "vid": 3,
+   "spine": "The books of several houses here are kept perfectly clean, and somebody is paying for the cleanness.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 2,
+   "spine": "The interests here have not gathered into camps, and a question is answered by whoever cares about that question.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 2,
+   "spine": "No one word covers how the town is governed, and the hall does not have one either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 3,
+   "spine": "The town calls the hall by its full title in public and something shorter everywhere else, and both names are exact.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 3,
+   "spine": "The Guild Council holds its seat because it is still the heavier of the interests here, and the weighing is done again every season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 3,
+   "spine": "There are people here who would move on the Guild Council and do not, because moving on a seat the town stands behind costs more than the seat is worth.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

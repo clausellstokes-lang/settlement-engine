@@ -1,0 +1,84 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 4,
+   "spine": "The Guild Council's standing at Spitzplatz is good enough to spend on decisions the town would otherwise refuse it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 3,
+   "spine": "The Guild Council's standing at Spitzplatz rests on the town's prosperity, and is worth exactly what that prosperity is worth and no more.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 3,
+   "spine": "A stranger who comes to Spitzplatz to do business needs only one name and gets one answer, and can plan a season ahead on the strength of it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "spine": "There is trouble at Spitzplatz over the market levies, and nobody here needs it explained to them. Both sides now carry on as if the other has already lost.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role money laundering",
+   "vid": 3,
+   "spine": "The books of several houses at Spitzplatz are kept spotless, and that spotlessness is exactly what is being paid for.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 2,
+   "spine": "There are interests at Spitzplatz that pull in different directions. None of them has hardened into a camp, and a question here is answered by whoever cares enough about it to answer.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 2,
+   "spine": "Nobody in the town can put a single word on what kind of place it is governed as, not even the hall itself.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 3,
+   "spine": "The town at Spitzplatz calls the hall by its full title in public and something shorter everywhere else, and both names are exact.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 3,
+   "spine": "The Guild Council at Spitzplatz holds because it remains the heavier of the two, and the weighing is done again each season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 3,
+   "spine": "There are people at Spitzplatz who could move against the Guild Council and do not, because unseating a power the town stands behind costs more than the seat is worth.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
