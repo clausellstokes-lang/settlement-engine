@@ -2677,17 +2677,17 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 1,
           "wordings": [
-            "A pedlar says the place has the look of somewhere that has never been asked for more than it has.",
-            "The sexton's account is that nothing at the ground waits on the purse. The boards laid over a new plot are the boards laid over the last one.",
-            "At the market they say the complaint comes to the stall because the stall is the thing that stands still.",
-            "A clerk in the hall says the town keeps ready what the ordinary asks of it.",
-            "A guild factor says the ordinary is what the trades make up when the town comes short.",
-            "At the tavern they say the people who do the place's mending pay for their own cups.",
-            "One of the watch has it that the rounds are kept whole and the pay for them is not.",
-            "Whoever holds the way through says the bar is worked by hands that have other work to be at.",
+            "A pedlar says the trestle he was lent at the market had been mended where it broke, and that it carried his whole load.",
+            "The sexton's account is that the ground is opened for whoever needs it. The boards laid over a new plot are the boards laid over the last one.",
+            "Those who set out a stall say the share is paid before the selling is done, and that the complaint comes to the stall because the stall is what stands still.",
+            "A clerk in the hall says the ordinary is provided for out of the common purse, and provided for first.",
+            "A guild factor holds that the ordinary is drawn as much from the trades as from the purse.",
+            "At the tavern they say the people who do the town's mending pay for their own cups.",
+            "A night patrolman has it that the rounds are kept whole and the pay for them is not.",
+            "Whoever holds the way through says the bar is worked by whoever the turn falls to. The turn comes round to everybody.",
             "The soldiers' account is that the town gives what it has and says nothing about the rest.",
             "The quarrels brought before those who hear them are about who pays, they say, and never about whether there is anything to pay with.",
-            "The muster says what it carries is its own and what it is owed is nothing."
+            "The muster's word is that it brings its own tools and turns out on its own time."
           ],
           "sources": [
             null,
@@ -2730,16 +2730,16 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "The sexton says the ground is the one charge here never asked to wait.",
-            "Those who set out a stall say everything here waits its turn and the ground waits with the rest.",
-            "One of the aldermen has it that the money is counted where anyone may stand and watch it counted.",
+            "The sexton's word is that the ground is paid for before anything else here is.",
+            "Those who sell say a charge here waits for the one before it, and the ground waits with the rest.",
+            "The hall's own answer is that the money is counted where anyone may stand and watch it counted.",
             "A carter at the tavern says the roof over the long table leaks at the far corner, and that nobody has mended it because nobody sits there.",
-            "A guild factor says what the town cannot cover comes to the trades as a favour and is remembered by the trades as a cost.",
-            "The watch's account is that the round is walked whole and walked dark where the oil runs out.",
-            "Asked at the way through, they say the bar gets seen to first and counted last.",
-            "The soldiers' account is that the grain they eat comes out of the same sacks as everybody's and is measured with the same scoop.",
+            "Asked at the guilds, they say what the town cannot cover comes to the trades as a favour. It is remembered by the trades as a cost.",
+            "The round is walked whole, one of the watch says, and the last of it is walked by whatever light there is.",
+            "By the account of those who hold the way through, the bar gets looked to first and counted last.",
+            "The soldiers say the grain they eat comes out of the same sacks as everybody's. It is measured with the same scoop.",
             "Nothing about the town's own paying has ever been brought as a quarrel, those who hear disputes say.",
-            "The muster says nobody argues about its pay because there is none to argue about."
+            "One of the muster says it keeps its own tools sharp for its own work, and would bring them out for the town's."
           ],
           "sources": [
             null,
@@ -2780,16 +2780,16 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "A drover says nobody here seems to know where the town's money stops, and nobody here seems troubled by that.",
-            "Whoever keeps the ground says no burying here has been turned away, and that nobody has asked what it would take to turn one away.",
-            "The stallholders' account is that the boards go out in the same order whatever has happened. Nobody here has seen the order break.",
-            "One of the aldermen has it that the store has been opened for the ordinary and for nothing else.",
-            "At the tavern they say nothing has come here yet that the place could not pay for, and that nobody takes that for a promise.",
-            "A guild factor says the trades could tell the town where the line falls, and that the town has not asked.",
-            "Those who walk the round say the round has never been shortened, and that nobody knows what would be dropped first if it had to be.",
-            "The soldiers say they have never been asked for more than they are kept for. What they are kept for is plain enough.",
-            "Those who hear disputes say the question of what the town can carry has never come to them, and they would not know where to look for the answer.",
-            "The muster says it has never been called out for anything worse than it knows, and that it would come out anyway."
+            "A drover says the town found him a bed and his beasts shelter without anyone going out of their way, and that nothing he was given was more than he needed.",
+            "Whoever keeps the ground says the digging has never waited on the purse, and that there has been room for everyone brought to it.",
+            "The stallholders' account is that the boards go out in the same order they always have, and that the order is the first thing a new seller is told.",
+            "At the hall the word is that the store has been opened for the ordinary and for nothing else.",
+            "Drinkers at the tavern say the people who would be wanted first if trouble came are the people who already have work enough.",
+            "The guilds' own reckoning is that nobody from the hall has come to the trades for a figure, and that the trades have one ready.",
+            "The watch's account is that the round is walked as it stands, and that the word to shorten it would have to come from the hall.",
+            "By the soldiers' own account the town has kept them fed and quartered, and they would be the first to know if that changed.",
+            "Those who hear disputes say the purse has never come before them, and that they would have to send the question on to somebody else.",
+            "Those who turn out for the muster say they have never been called for worse than they know, and that they would come for worse."
           ],
           "sources": [
             null,
@@ -2934,25 +2934,108 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: CRITICAL": [
         {
           "angle": "ledger",
-          "text": "{settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.",
-          "slots": [
-            "settlement"
+          "text": "Nothing here can be bought against trouble. What answers it instead is an arrangement carried in people's heads.",
+          "slots": [],
+          "vid": 1,
+          "wordings": [
+            "A traveller says a price here is made at the moment somebody wants a thing.",
+            "At the market they say what a thing is worth is settled between the two people holding it.",
+            "The elders hold that a want here is met by naming the house that can meet it. The house named is not asked first.",
+            "Those who keep the ground say the same words go over the house that gives everything and the house that gives nothing.",
+            "The drinkers have it that what a house is good for is settled at the tables here, and settled before anybody goes to the house.",
+            "Whoever holds the way through says a cart is asked what it carries and then waved on.",
+            "The muster says the fields have the first claim on the hands it would call out."
           ],
-          "vid": 1
+          "sources": [
+            null,
+            "stranger",
+            "market",
+            "elders",
+            "register",
+            "tavern",
+            "gate",
+            "muster"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "reinforce"
+            },
+            {
+              "id": 1,
+              "kind": "reinforce"
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "The town is not spending its way out of trouble because there is nothing to spend, and each thing that goes wrong makes the next thing cheaper to happen.",
+          "text": "Those the place listens to hold that what it cannot pay for still gets done, and that the doing is charged to the households that can carry it.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A drover says a thing is lent here for the asking. What comes back is a different thing of about the same use.",
+            "Those who keep the ground say a place for somebody in the ground is found before anything else about a burying is settled. The rest of it is got the way everything here is got, one house at a time.",
+            "Asked at the way through, they have it that a stranger's pack is worth more at the bar than a stranger's purse.",
+            "At the drinking house they say the deciding gets done in one house and the doing gets done in another.",
+            "The muster holds that what it would bring costs the place nothing to keep.",
+            "The mill takes its share of what a house grew, the stallholders say, and nothing at the board is settled in coin."
+          ],
+          "sources": [
+            null,
+            "stranger",
+            "register",
+            "gate",
+            "tavern",
+            "muster",
+            "market"
+          ]
         },
         {
           "angle": "street",
-          "text": "The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.",
-          "slots": [
-            "settlement"
+          "text": "Everyone here knows which things the place does for itself because it cannot buy them done, and the place counts them free.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "A pedlar says a visitor here learns whose door answers for what before learning anybody's name.",
+            "The heads of the households hold that what is given here is given outright.",
+            "At the drinking house they say what is given here is remembered by the giver longer than by the taker.",
+            "Those who keep the ground have it that a house owing the place something comes early to a burying, and nobody there says why.",
+            "Whoever holds the way through says what stops at the bar is asked for news before it is asked for anything else.",
+            "The muster's account is that what reaches it first is the shouting, and that the shouting is enough to go on.",
+            "At the market they say more is agreed at a board here than is bought at one. What is agreed is not written and does not need to be."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "stranger",
+            "elders",
+            "tavern",
+            "register",
+            "gate",
+            "muster",
+            "market"
+          ],
+          "pairs": [
+            null,
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null
+          ]
         }
       ],
       "Disasters & Famine: granary AND hospital": [
@@ -3763,9 +3846,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          8,
+          7,
+          8
         ],
         "vids": [
           1,

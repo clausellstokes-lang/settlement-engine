@@ -227,6 +227,21 @@ const FACED_POOLS = Object.freeze([
   // other than the spine.
   'Economic Survival: ADEQUATE',
   'Disasters & Famine: NO reserves, hospital present',
+  // ⭐⭐⭐⭐⭐⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5), BY ONE POOL — THE ONE
+  // THE DRAFT GATE IMMEDIATELY ABOVE REFUSED — and the list is twenty-four. `Economic Survival:
+  // CRITICAL` kept its shipped spine rows there because its variant 2 spine opened `The elders
+  // hold that …`, a PROVENANCE move that would have taken the shrink-only citation ratchet in
+  // `tests/lint/proseComposed.walker.test.js` from 7 to 8. Its CURE packet re-cuts that spine to
+  // `Those the place listens to hold that …`, the walker MEASURES 84 passed (84) with the pool
+  // landed, and the pool joins this list: 3 spines, 20 faces. The gate's other packet, `Economic
+  // Survival: ADEQUATE`, was ALREADY on this list and re-cut wordings inside the counts it had,
+  // so it moves nothing here. TWO POOLS OF THE BLOCK REMAIN UNFACED and are deliberately NOT on
+  // this list — `Internal Security: detention without process` and `Disasters & Famine: granary,
+  // NO medical provision`, both measuring 1,1,1. Every entry is still inside DS-DEF-2, and the
+  // arms below still assert the equality over the other 684 pools BY MEASUREMENT. ⛔ THE NEW ONE
+  // NAMES NO ATTRIBUTION SLOT either, so its drift is TEXT + SPINE on every seed that draws a
+  // face other than the spine.
+  'Economic Survival: CRITICAL',
 ]);
 const FACED_ATS = Object.freeze(FACED_POOLS.map((pool) => `${FACED_BLOCK} :: ${pool}`));
 /** @param {string} row a drift line @param {boolean} [prefix] match at the head only */
@@ -461,6 +476,11 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // present`. The gate's third packet, `Economic Survival: CRITICAL`, was REFUSED and never
     // reached this list at all.
         'Economic Survival: ADEQUATE',
+    // ⛔⛔⛔⛔⛔⛔⛔ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5) BY THE ONE POOL IT
+    // LANDED, and by the same mechanism: `Economic Survival: CRITICAL` names no attribution slot,
+    // so the recorder cannot name the variant behind a rendered FACE and its cells go blind. It
+    // is here because this gate LANDED it, which is the only reason a pool may join this list.
+        'Economic Survival: CRITICAL',
         'Economic Survival: STRONG',
         'Economic Survival: WEAK',
         'Internal Security: court without detention',
@@ -585,7 +605,17 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     // which is the same one-time cost the shift register's EIGHTH GROW declares. ⛔ THE ARM THAT
     // GUARDS CORRECTNESS IS UNTOUCHED AND STILL GREEN: `real.length` is 0, so no cell anywhere is
     // a coordinate DISAGREEMENT, and no pool went blind that this commit did not land.
-    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2710);
+    // ⛔⛔ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5), 2710 -> 2756 (+46), and the
+    // WHOLE of the move is `Economic Survival: CRITICAL` — the packet the draft gate above
+    // refused, landed here once its re-cut spine cleared the citation ratchet (walker 84 passed
+    // (84) with the pool landed). ⚠ AND IT CORRECTS THE DRAFT GATE'S OWN PREDICTION, WHICH WAS
+    // MADE AGAINST A DIFFERENT PACKET: that note says applying CRITICAL "would have added 72
+    // more". The CURE packet is a whole-pool rewrite under a DULL ruling with its own seating
+    // (faceCounts 8,7,8, seven speakers), not the draft packet that was refused, so the MEASURED
+    // move is 46. The figure here is the measurement, not the forecast. ⛔ THE ARM THAT GUARDS
+    // CORRECTNESS IS UNTOUCHED AND STILL GREEN: `real.length` is 0, so no cell anywhere is a
+    // coordinate DISAGREEMENT, and no pool went blind that this commit did not land.
+    expect(blind.length, 'and the blind spot is the size the gate measured').toBe(2756);
     expect(checked, 'the whole recorded table').toBe(run.cells.length);
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
     // NON-VACUITY OF THE RE-PIN: the DRIFT run really does reach the one faced pool, and

@@ -610,6 +610,14 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Economic Survival: ADEQUATE #0',
       'DS-DEF-2 :: Economic Survival: ADEQUATE #1',
       'DS-DEF-2 :: Economic Survival: ADEQUATE #2',
+      // ⭐ ADDED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5). The draft gate refused this
+      // pool whole on the citation ratchet (its variant 2 spine opened `The elders hold
+      // that …`); the cure packet re-cuts that spine and the walker measures 84 passed (84)
+      // with the pool landed, so it seats its faces here for the first time — faceCounts
+      // 1,1,1 → 8,7,8, declared on the shift register in the same commit.
+      'DS-DEF-2 :: Economic Survival: CRITICAL #0',
+      'DS-DEF-2 :: Economic Survival: CRITICAL #1',
+      'DS-DEF-2 :: Economic Survival: CRITICAL #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -696,7 +704,13 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       // each, and the gate's third packet was REFUSED on the citation ratchet. A GROW. THREE
       // POOLS OF THE BLOCK ARE STILL UNFACED: `Economic Survival: CRITICAL`, `Internal Security:
       // detention without process` and `Disasters & Famine: granary, NO medical provision`.
-      expect(hashedRows, 'and exactly sixty-nine variants ship more than one face').toBe(69);
+      // ⭐⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5): seventy-two, not
+      // sixty-nine — the packet the draft gate refused, `Economic Survival: CRITICAL`, re-cuts
+      // the citing spine and lands whole (three variants, 20 faces), and the walker measures
+      // 84 passed (84) with it landed. A GROW ONLY. TWO POOLS OF THE BLOCK ARE STILL UNFACED:
+      // `Internal Security: detention without process` and `Disasters & Famine: granary, NO
+      // medical provision`.
+      expect(hashedRows, 'and exactly seventy-two variants ship more than one face').toBe(72);
     } finally {
       spy.mockRestore();
     }
@@ -1527,6 +1541,14 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Economic Survival: ADEQUATE #0',
       'DS-DEF-2 :: Economic Survival: ADEQUATE #1',
       'DS-DEF-2 :: Economic Survival: ADEQUATE #2',
+      // ⭐ ADDED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5). The draft gate refused this
+      // pool whole on the citation ratchet (its variant 2 spine opened `The elders hold
+      // that …`); the cure packet re-cuts that spine and the walker measures 84 passed (84)
+      // with the pool landed, so it seats its faces here for the first time — faceCounts
+      // 1,1,1 → 8,7,8, declared on the shift register in the same commit.
+      'DS-DEF-2 :: Economic Survival: CRITICAL #0',
+      'DS-DEF-2 :: Economic Survival: CRITICAL #1',
+      'DS-DEF-2 :: Economic Survival: CRITICAL #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -1657,6 +1679,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'gate', 'register', 'stranger', 'muster', 'elders', 'tavern', 'garrison', 'watch', 'market', 'court'], 
       [null, 'stranger', 'elders', 'tavern', 'register', 'gate', 'muster', 'market', 'watch', 'garrison'], 
       [null, 'stranger', 'register', 'elders', 'tavern', 'muster', 'gate', 'market', 'garrison'], 
+      // ⭐⭐⭐⭐ NEW AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5) — `Economic Survival:
+      // CRITICAL`, the pool the DRAFT gate immediately above refused whole. Its variant 2 spine
+      // opened `The elders hold that …`, a PROVENANCE move that would have taken the shrink-only
+      // citation ratchet from 7 to 8; the cure packet re-cuts that spine to `Those the place
+      // listens to hold that …` and the walker MEASURES 84 passed (84) with the pool landed, so
+      // it takes its seat here for the first time: three variants, 20 faces, seven speakers, one
+      // `reinforce` pair on variant 1 and one `disagree` pair on variant 3. THIS IS THE WHOLE OF
+      // THIS GATE'S GROW — the other packet, `Economic Survival: ADEQUATE`, re-cut wordings
+      // inside the counts it already had and moves no row here.
+      [null, 'stranger', 'market', 'elders', 'register', 'tavern', 'gate', 'muster'],
+      [null, 'stranger', 'register', 'gate', 'tavern', 'muster', 'market'],
+      [null, 'stranger', 'elders', 'tavern', 'register', 'gate', 'muster', 'market'],
       [null, 'hall', 'market', 'register', 'tavern', 'watch', 'stranger', 'gate', 'guild', 'garrison'], 
       [null, 'hall', 'market', 'watch', 'tavern', 'register', 'stranger', 'guild', 'gate', 'garrison'], 
       [null, 'hall', 'tavern', 'market', 'register', 'watch', 'gate', 'stranger', 'guild', 'garrison'], 
@@ -1748,6 +1782,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
       undefined, 
       [null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }, null, null, null, null, null], 
+      // ⭐⭐⭐⭐ NEW AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5) — `Economic Survival:
+      // CRITICAL`, the pool the DRAFT gate immediately above refused whole. Its variant 2 spine
+      // opened `The elders hold that …`, a PROVENANCE move that would have taken the shrink-only
+      // citation ratchet from 7 to 8; the cure packet re-cuts that spine to `Those the place
+      // listens to hold that …` and the walker MEASURES 84 passed (84) with the pool landed, so
+      // it takes its seat here for the first time: three variants, 20 faces, seven speakers, one
+      // `reinforce` pair on variant 1 and one `disagree` pair on variant 3. THIS IS THE WHOLE OF
+      // THIS GATE'S GROW — the other packet, `Economic Survival: ADEQUATE`, re-cut wordings
+      // inside the counts it already had and moves no row here.
+      [null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, null, null, null],
+      undefined,
+      [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null],
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, { id: 2, kind: 'view' }, { id: 2, kind: 'view' }, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null, null], 
@@ -1803,7 +1849,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the sixty-nine sourced variants were reached').toBe(69);
+    expect(sourcedChecked, 'the seventy-two sourced variants were reached').toBe(72);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

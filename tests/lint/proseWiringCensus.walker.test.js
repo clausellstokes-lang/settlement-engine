@@ -729,8 +729,20 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // was REFUSED on the shrink-only citation ratchet and crosses nothing. MEASURED LIVE
     // (`wiringCensus` at the head of this file, not the committed JSON): MISSING 34 · THIN 476 ·
     // COVERED 232. MISSING does not move, and no held fact gained or lost a pool.
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(476);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(232);
+    // ⭐⭐⭐⭐⭐⭐⭐ THIN 476 → 475 AND COVERED 232 → 233 AT THE 8b DS-DEF-2 CURE GATE (v3,
+    // sitting 5), BY ONE POOL, and for the same reason the last four sittings crossed one each.
+    // `Economic Survival: CRITICAL` is the packet the draft gate immediately above REFUSED on
+    // the shrink-only citation ratchet; its cure re-cuts the citing spine, the walker measures
+    // 84 passed (84) with the pool landed, and the pool lands whole. ITS THREE CURED SPINES
+    // CARRY NO SLOT AT ALL — the shipped spine 1 opened `{settlement} cannot fund a response`
+    // and spine 3 named `{settlement}` too — so its census count moves `slots {settlement}` →
+    // `slots {none}` and its grammars 1 → 3, and it crosses to COVERED. The gate's other
+    // packet, `Economic Survival: ADEQUATE`, crossed at the draft gate above and re-cut
+    // wordings inside the counts it had, so it crosses nothing here. MEASURED LIVE
+    // (`wiringCensus` at the head of this file, not the committed JSON): MISSING 34 · THIN 475
+    // · COVERED 233. MISSING does not move, and no held fact gained or lost a pool.
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(475);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(233);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

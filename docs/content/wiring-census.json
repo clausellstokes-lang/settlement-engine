@@ -37,8 +37,8 @@
     "syntheticTableFields": 122,
     "tiers": {
       "MISSING": 34,
-      "THIN": 477,
-      "COVERED": 231,
+      "THIN": 475,
+      "COVERED": 233,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 375,
@@ -1741,13 +1741,11 @@
         "defmaterial",
         "settlement"
       ],
-      "slotsNamed": [
-        "settlement"
-      ],
+      "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -1857,13 +1855,11 @@
         "defmaterial",
         "settlement"
       ],
-      "slotsNamed": [
-        "settlement"
-      ],
+      "slotsNamed": [],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 3,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -2112,7 +2108,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
@@ -39276,7 +39272,7 @@
         "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision"
       ],
       "variants": 15,
-      "grammars": 12,
+      "grammars": 13,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -39693,7 +39689,7 @@
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
       "variants": 12,
-      "grammars": 6,
+      "grammars": 9,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -48400,14 +48396,14 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: ADEQUATE",
       "fields": [
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
       "tier": "COVERED",
@@ -48420,14 +48416,14 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {none}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: CRITICAL",
       "fields": [
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {none}"
     },
     {
       "tier": "THIN",
@@ -48467,7 +48463,7 @@
         "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "DISASTER_ROW_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

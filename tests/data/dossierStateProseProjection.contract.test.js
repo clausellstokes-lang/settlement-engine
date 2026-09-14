@@ -2298,6 +2298,31 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'register', 'market', 'hall', 'tavern', 'guild', 'watch', 'garrison', 'court', 'muster'],
       pairs: undefined,
     },
+    // ⭐ THE CURE GATE'S ONE NEW POOL, AND IT IS THE PACKET THE DRAFT GATE REFUSED ABOVE.
+    // `Economic Survival: CRITICAL` kept its three shipped spine rows there because its
+    // variant 2 spine opened `The elders hold that …`, a PROVENANCE move that would have taken
+    // the citation ratchet in `tests/lint/proseComposed.walker.test.js` from 7 to 8. THE CURE
+    // PACKET RE-CUTS THAT SPINE to `Those the place listens to hold that …`, and the walker
+    // MEASURES 84 passed (84) with the pool landed, so the ground for the refusal is gone and
+    // the pool seats its faces here for the first time (faceCounts 1,1,1 → 8,7,8, declared on
+    // the shift register's `face-count-per-variant` row in this same commit). Seven speakers,
+    // one `reinforce` pair on variant 1 and one `disagree` pair on variant 3. No `archiver`,
+    // no `public` and no `observed` mark, so the `observed` arm below stays UNCHANGED.
+    // ⚠ THE OTHER PACKET THIS GATE APPLIED, `Economic Survival: ADEQUATE`, MOVED NO ROW HERE:
+    // its cure re-cut wordings inside the seating it already had, so its three rows above are
+    // byte-identical to the draft gate's.
+    'DS-DEF-2 :: Economic Survival: CRITICAL #0': {
+      sources: [null, 'stranger', 'market', 'elders', 'register', 'tavern', 'gate', 'muster'],
+      pairs: [null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: CRITICAL #1': {
+      sources: [null, 'stranger', 'register', 'gate', 'tavern', 'muster', 'market'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Economic Survival: CRITICAL #2': {
+      sources: [null, 'stranger', 'elders', 'tavern', 'register', 'gate', 'muster', 'market'],
+      pairs: [null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null],
+    },
     'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #0': {
       sources: [null, 'elders', 'stranger', 'register', 'tavern', 'market'],
       pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
@@ -2357,7 +2382,18 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // STILL NOT WHOLE: `Economic Survival: CRITICAL`, `Internal Security: detention without
     // process` and `Disasters & Famine: granary, NO medical provision` stand on their shipped
     // spine rows alone at 1,1,1.
-    expect([rows.length, sourced, paired]).toEqual([69, 552, 130]);
+    // ⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 CURE GATE (v3, sitting 5), from [69, 552, 130]. THE
+    // WHOLE OF THIS MOVE IS ONE POOL — `Economic Survival: CRITICAL`, the packet the draft gate
+    // immediately above refused on the citation ratchet. Its cure re-cuts the citing spine, the
+    // walker measures 84 passed (84) with the pool landed, and the pool takes its seat here for
+    // the first time: +3 variants, +20 sourced faces, +4 pair rows (2 pairs of halves, no
+    // archiver `weigh` among them). The gate's other packet, `Economic Survival: ADEQUATE`, was
+    // already seated and its cure re-cut wordings inside the counts it had, so it moves nothing
+    // here. A GROW ONLY: no pool of the sixty-nine already pinned lost a face or a pair, and
+    // nothing outside DS-DEF-2 carries a face. TWO POOLS OF THE BLOCK ARE STILL UNFACED at
+    // 1,1,1: `Internal Security: detention without process` and `Disasters & Famine: granary,
+    // NO medical provision`.
+    expect([rows.length, sourced, paired]).toEqual([72, 572, 134]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)

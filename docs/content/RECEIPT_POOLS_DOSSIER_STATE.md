@@ -3135,39 +3135,39 @@ supplies the ancestry.
 **`Economic Survival`: `ADEQUATE`**
 
 1. `[ledger]` The place meets what it is asked for, and meets it short.
-   - `[face]` `[stranger]` A pedlar says the place has the look of somewhere that has never been asked for more than it has.
-   - `[face]` `[register]` The sexton's account is that nothing at the ground waits on the purse. The boards laid over a new plot are the boards laid over the last one.
-   - `[face]` `[market]` At the market they say the complaint comes to the stall because the stall is the thing that stands still.
-   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the town keeps ready what the ordinary asks of it.
-   - `[face]` `[guild · pair 1 · disagree]` A guild factor says the ordinary is what the trades make up when the town comes short.
-   - `[face]` `[tavern]` At the tavern they say the people who do the place's mending pay for their own cups.
-   - `[face]` `[watch]` One of the watch has it that the rounds are kept whole and the pay for them is not.
-   - `[face]` `[gate]` Whoever holds the way through says the bar is worked by hands that have other work to be at.
+   - `[face]` `[stranger]` A pedlar says the trestle he was lent at the market had been mended where it broke, and that it carried his whole load.
+   - `[face]` `[register]` The sexton's account is that the ground is opened for whoever needs it. The boards laid over a new plot are the boards laid over the last one.
+   - `[face]` `[market]` Those who set out a stall say the share is paid before the selling is done, and that the complaint comes to the stall because the stall is what stands still.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the ordinary is provided for out of the common purse, and provided for first.
+   - `[face]` `[guild · pair 1 · disagree]` A guild factor holds that the ordinary is drawn as much from the trades as from the purse.
+   - `[face]` `[tavern]` At the tavern they say the people who do the town's mending pay for their own cups.
+   - `[face]` `[watch]` A night patrolman has it that the rounds are kept whole and the pay for them is not.
+   - `[face]` `[gate]` Whoever holds the way through says the bar is worked by whoever the turn falls to. The turn comes round to everybody.
    - `[face]` `[garrison]` The soldiers' account is that the town gives what it has and says nothing about the rest.
    - `[face]` `[court]` The quarrels brought before those who hear them are about who pays, they say, and never about whether there is anything to pay with.
-   - `[face]` `[muster]` The muster says what it carries is its own and what it is owed is nothing.
+   - `[face]` `[muster]` The muster's word is that it brings its own tools and turns out on its own time.
 2. `[unfolding]` Everyone here has seen what the town provides and where the provision runs thin, and nobody here calls the thin part a fault.
-   - `[face]` `[register · pair 2 · disagree]` The sexton says the ground is the one charge here never asked to wait.
-   - `[face]` `[market · pair 2 · disagree]` Those who set out a stall say everything here waits its turn and the ground waits with the rest.
-   - `[face]` `[hall]` One of the aldermen has it that the money is counted where anyone may stand and watch it counted.
+   - `[face]` `[register · pair 2 · disagree]` The sexton's word is that the ground is paid for before anything else here is.
+   - `[face]` `[market · pair 2 · disagree]` Those who sell say a charge here waits for the one before it, and the ground waits with the rest.
+   - `[face]` `[hall]` The hall's own answer is that the money is counted where anyone may stand and watch it counted.
    - `[face]` `[tavern]` A carter at the tavern says the roof over the long table leaks at the far corner, and that nobody has mended it because nobody sits there.
-   - `[face]` `[guild]` A guild factor says what the town cannot cover comes to the trades as a favour and is remembered by the trades as a cost.
-   - `[face]` `[watch]` The watch's account is that the round is walked whole and walked dark where the oil runs out.
-   - `[face]` `[gate]` Asked at the way through, they say the bar gets seen to first and counted last.
-   - `[face]` `[garrison]` The soldiers' account is that the grain they eat comes out of the same sacks as everybody's and is measured with the same scoop.
+   - `[face]` `[guild]` Asked at the guilds, they say what the town cannot cover comes to the trades as a favour. It is remembered by the trades as a cost.
+   - `[face]` `[watch]` The round is walked whole, one of the watch says, and the last of it is walked by whatever light there is.
+   - `[face]` `[gate]` By the account of those who hold the way through, the bar gets looked to first and counted last.
+   - `[face]` `[garrison]` The soldiers say the grain they eat comes out of the same sacks as everybody's. It is measured with the same scoop.
    - `[face]` `[court]` Nothing about the town's own paying has ever been brought as a quarrel, those who hear disputes say.
-   - `[face]` `[muster]` The muster says nobody argues about its pay because there is none to argue about.
+   - `[face]` `[muster]` One of the muster says it keeps its own tools sharp for its own work, and would bring them out for the town's.
 3. `[threshold]` What the place can carry has an edge. No one here has been asked where it falls.
-   - `[face]` `[stranger]` A drover says nobody here seems to know where the town's money stops, and nobody here seems troubled by that.
-   - `[face]` `[register]` Whoever keeps the ground says no burying here has been turned away, and that nobody has asked what it would take to turn one away.
-   - `[face]` `[market]` The stallholders' account is that the boards go out in the same order whatever has happened. Nobody here has seen the order break.
-   - `[face]` `[hall]` One of the aldermen has it that the store has been opened for the ordinary and for nothing else.
-   - `[face]` `[tavern]` At the tavern they say nothing has come here yet that the place could not pay for, and that nobody takes that for a promise.
-   - `[face]` `[guild]` A guild factor says the trades could tell the town where the line falls, and that the town has not asked.
-   - `[face]` `[watch]` Those who walk the round say the round has never been shortened, and that nobody knows what would be dropped first if it had to be.
-   - `[face]` `[garrison]` The soldiers say they have never been asked for more than they are kept for. What they are kept for is plain enough.
-   - `[face]` `[court]` Those who hear disputes say the question of what the town can carry has never come to them, and they would not know where to look for the answer.
-   - `[face]` `[muster]` The muster says it has never been called out for anything worse than it knows, and that it would come out anyway.
+   - `[face]` `[stranger]` A drover says the town found him a bed and his beasts shelter without anyone going out of their way, and that nothing he was given was more than he needed.
+   - `[face]` `[register]` Whoever keeps the ground says the digging has never waited on the purse, and that there has been room for everyone brought to it.
+   - `[face]` `[market]` The stallholders' account is that the boards go out in the same order they always have, and that the order is the first thing a new seller is told.
+   - `[face]` `[hall]` At the hall the word is that the store has been opened for the ordinary and for nothing else.
+   - `[face]` `[tavern]` Drinkers at the tavern say the people who would be wanted first if trouble came are the people who already have work enough.
+   - `[face]` `[guild]` The guilds' own reckoning is that nobody from the hall has come to the trades for a figure, and that the trades have one ready.
+   - `[face]` `[watch]` The watch's account is that the round is walked as it stands, and that the word to shorten it would have to come from the hall.
+   - `[face]` `[garrison]` By the soldiers' own account the town has kept them fed and quartered, and they would be the first to know if that changed.
+   - `[face]` `[court]` Those who hear disputes say the purse has never come before them, and that they would have to send the question on to somebody else.
+   - `[face]` `[muster]` Those who turn out for the muster say they have never been called for worse than they know, and that they would come for worse.
 
 **`Economic Survival`: `WEAK`**
 1. `[ledger]` The means here come short of what trouble takes. The households make up the difference.
@@ -3202,9 +3202,29 @@ supplies the ancestry.
    - `[face]` `[garrison]` The soldiers say the place says plainly what it wants of them, and the people here ask them straight out to put a shoulder to a load.
 
 **`Economic Survival`: `CRITICAL`**
-1. `[ledger]` {settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
-2. `[unfolding]` The town is not spending its way out of trouble because there is nothing to spend, and each thing that goes wrong makes the next thing cheaper to happen.
-3. `[street]` The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
+1. `[ledger]` Nothing here can be bought against trouble. What answers it instead is an arrangement carried in people's heads.
+   - `[face]` `[stranger · pair 1 · reinforce]` A traveller says a price here is made at the moment somebody wants a thing.
+   - `[face]` `[market · pair 1 · reinforce]` At the market they say what a thing is worth is settled between the two people holding it.
+   - `[face]` `[elders]` The elders hold that a want here is met by naming the house that can meet it. The house named is not asked first.
+   - `[face]` `[register]` Those who keep the ground say the same words go over the house that gives everything and the house that gives nothing.
+   - `[face]` `[tavern]` The drinkers have it that what a house is good for is settled at the tables here, and settled before anybody goes to the house.
+   - `[face]` `[gate]` Whoever holds the way through says a cart is asked what it carries and then waved on.
+   - `[face]` `[muster]` The muster says the fields have the first claim on the hands it would call out.
+2. `[unfolding]` Those the place listens to hold that what it cannot pay for still gets done, and that the doing is charged to the households that can carry it.
+   - `[face]` `[stranger]` A drover says a thing is lent here for the asking. What comes back is a different thing of about the same use.
+   - `[face]` `[register]` Those who keep the ground say a place for somebody in the ground is found before anything else about a burying is settled. The rest of it is got the way everything here is got, one house at a time.
+   - `[face]` `[gate]` Asked at the way through, they have it that a stranger's pack is worth more at the bar than a stranger's purse.
+   - `[face]` `[tavern]` At the drinking house they say the deciding gets done in one house and the doing gets done in another.
+   - `[face]` `[muster]` The muster holds that what it would bring costs the place nothing to keep.
+   - `[face]` `[market]` The mill takes its share of what a house grew, the stallholders say, and nothing at the board is settled in coin.
+3. `[street]` Everyone here knows which things the place does for itself because it cannot buy them done, and the place counts them free.
+   - `[face]` `[stranger]` A pedlar says a visitor here learns whose door answers for what before learning anybody's name.
+   - `[face]` `[elders · pair 1 · disagree]` The heads of the households hold that what is given here is given outright.
+   - `[face]` `[tavern · pair 1 · disagree]` At the drinking house they say what is given here is remembered by the giver longer than by the taker.
+   - `[face]` `[register]` Those who keep the ground have it that a house owing the place something comes early to a burying, and nobody there says why.
+   - `[face]` `[gate]` Whoever holds the way through says what stops at the bar is asked for news before it is asked for anything else.
+   - `[face]` `[muster]` The muster's account is that what reaches it first is the shouting, and that the shouting is enough to go on.
+   - `[face]` `[market]` At the market they say more is agreed at a board here than is bought at one. What is agreed is not written and does not need to be.
 
 **`Disasters & Famine`: granary AND hospital**
 1. `[ledger]` {settlement} holds grain against a bad year and takes the sick in. It is not recorded whose word opens the granary.
