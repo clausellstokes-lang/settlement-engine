@@ -389,4 +389,18 @@ CAR 8b-W-2 (chartered in PART A; the defense desk; one lane after DEF-2) takes i
  - **WHAT WOULD REOPEN IT:** re-running the count on DS-DEF-1 AT FACE GRAIN once that block is written. That is the only thing that settles it, and the chair will not ask for another shipped-grain comparison.
  *Reversal: every face is coupled and carries the full check.*
 
+- **42. CLEAR, NOT CRAFTED (the owner, 2026-09-14, after cutting the chair's own demo line by line: "forget the craft prose and just make these clear … that's what I want. It's less to write. It's more clear. It's structured. I want that for every prose").** The standard, in the owner's own worked example:
+> The watch says a man taken up after midnight is not theirs until dawn.
+> A clerk in the hall says the court fines because the town has nowhere to hold anyone.
+> A sexton says the parish has a grave for a man and the town has no cell.
+> At the tavern they say a man who cannot pay is told to leave town.
+> A guild factor says a fine is paid and forgotten, and a reputation is not.
+> A drover says he was asked twice where he would sleep and never what he had done.
+ - **THE RULE: one fact, one speaker, no second clause explaining the first.** The owner cut three of the chair's lines in sequence and the fault was identical each time — the chair's SECOND CLAUSE was the chair explaining the first ("…and that dawn is a long way from midnight" · "…and it is a light one for a man with nowhere to be" · "…because a fine is the only sentence the town can carry out"). A face says the thing and stops.
+ - **PUT THE QUALIFIER INSIDE THE SENTENCE, NEVER IN A CLAUSE AFTER IT** (the owner's own correction: *"is their problem only till dawn"* carries the burden AND its limit in two words where the chair spent a whole clause on the limit alone).
+ - **WHAT THIS RETIRES:** most of ruling 14's tell-hunting. A clear sentence does not reach for a which-clause closer, a summarising close, an antithesis pair or a clever last beat, so the veto list stops being a hunt and becomes a consequence. The exemplar pack's MOVES drop below the plain statement in priority. The selector spends its attention on whether a line reads once, not on whether it is interesting.
+ - ⚠ **THE ONE GUARD THAT MUST SURVIVE, and it is what separates this from the corpus REVERTED at `f20532e18`:** every line still has A SPEAKER WITH SOMETHING AT STAKE. Clear + plain + no stake is exactly the flat corpus this programme already threw away once (168 distinct words against 519). The owner's six lines all keep it — the watch resents the hour, the clerk defends the purse, the sexton makes a comparison that costs the town something, the guild counts a loss the fine does not cover.
+ - **WHAT IT GIVES UP, said plainly:** the oblique line. *"What comes off the name does not"* is more interesting than *"a reputation is not"*, and the owner chose the second. That is the LEGIBILITY law applied consistently (glance → sentence → table) and it is the owner's to choose.
+ - MECHANISM: the VOICE's restraint paragraph leads with this; the selector's first question becomes "does it read once?" before any tell; the writer's brief carries the six lines verbatim as the standard. *Reversal: the craft moves lead again.*
+
 **PUT TO THE OWNER, NOT DECIDED.** The criminal-capture badge (`PowerTab.jsx:344-350`) prints the capture rung to the player with no covert path, while 22 `dm-only` marks on DS-DEF-4/DS-POW-6 assume the fact is hidden: either the badge is a WIRING leak and the birth capture joins the covert list, or the marks conceal nothing. The chair's recommendation: the badge is the leak; a paid-surface visibility decision, so it waits.
