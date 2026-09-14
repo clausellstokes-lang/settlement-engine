@@ -1,0 +1,37 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 17474 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/lane-clarity-ECONOMY
+
+stdout | tests/lint/proseComposed.walker.test.js > A0b — the text claims every declared field and no other > ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+
+A0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves
+  variants walked      2266
+  over-claims          55
+  under-claims         1283
+  implicit negations   13
+  NOT-EXECUTABLE reads 1534   pools carrying a finding 239
+
+
+ ❯ tests/lint/proseComposed.walker.test.js (84 tests | 1 failed) 340ms
+     × ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY 21ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/proseComposed.walker.test.js > A0b — the text claims every declared field and no other > ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+AssertionError: expected 1283 to be less than or equal to 1282
+ ❯ tests/lint/proseComposed.walker.test.js:399:34
+    397|     // ADDS a claim the census does not license reds here on the day i…
+    398|     expect(tally['over-claim']).toBeLessThanOrEqual(55);
+    399|     expect(tally['under-claim']).toBeLessThanOrEqual(1282);
+       |                                  ^
+    400|     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
+    401|     expect(pools.size).toBeLessThanOrEqual(240);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 83 passed (84)
+   Start at  10:31:12
+   Duration  1.64s (transform 859ms, setup 25ms, import 1.19s, tests 340ms, environment 0ms)
+
