@@ -1,15 +1,18 @@
-# LANE-STATUS — written 2026-09-13 23:40:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 23:46:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD bf8c499c1 · 52 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD bf8c499c1 · 52 cars over f2da5a3ee · porcelain 2 · last commits:
     bf8c499c1 REWRITE 8b DS-DEF-2 draft (v3): 2/3 pools
     310893244 REWRITE 8b DS-DEF-2 cut 7, the re-refute answered: two speakers restored, and the instrument corrected where it was rewarding their loss
     389812b5f REWRITE 8b DS-DEF-2 cut 7: the two DULL pools cured to the refuter's own prescription, and a count put where a reader was
     57a75858b REWRITE 8b DS-DEF-2 cure (v3): 5/6 pools
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -112,7 +115,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a81ba8f8c` REFUTER Disasters & Famine: NO reserves, hospital present · DONE · transcript 09-13 23:18 932 KB · 32 tool calls · files: refute.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--disaste
     - `a4b3a264d` CURER Economic Survival: ADEQUATE · DONE · transcript 09-13 23:34 1002 KB · 34 tool calls · files: cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
     - `a44182dcd` CURER Economic Survival: CRITICAL · DONE · transcript 09-13 23:39 1016 KB · 21 tool calls · files: "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economic-survival-critical/cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--economi
-    - `a9b12f7e7` GATE r1 · IN FLIGHT · transcript 09-13 23:40 418 KB · 11 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a9b12f7e7` GATE r1 · IN FLIGHT · transcript 09-13 23:46 623 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_4e9a99ae-6c1** (mtime 09-13 20:41): agent calls 57 (57 distinct) · DONE 57 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_4e9a99ae-6c1/`
     - `a35500bf1` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-13 17:37 845 KB · 38 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `aeadaf802` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-13 17:37 788 KB · 40 tool calls · files: "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
@@ -307,4 +310,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.01 1.97 2.13
+load: 2.56 2.33 2.24
