@@ -17,6 +17,16 @@ The reader is meant to feel three things: that a real town is being reported by 
 - **THE DEITY DOCTRINE.** Faith is culture. The prose never says what a god is or does. It may show what a creed's **followers** do, in the way the engine records their creed (its recorded alignment and law, its derived temper, its standing in the town). The god does not act; the people do.
 - **FINITE SEMANTICS.** The engine speaks in typed buckets. A writer, human or model, is a clerk of those buckets, never an author of new facts.
 
+## 2b. Two kinds of face (ruling 41, the owner's)
+
+A face is **unfalsifiable** or it is **coupled**, and they cost different things to make.
+
+An unfalsifiable face asserts nothing the engine records. "Whoever owns the spade brings the spade." No state can disagree with it, so it needs no check against the pool's key; it is written once into a shared bank and drawn by many pools. A coupled face is written for a particular pairing of states, and it keeps the whole apparatus, because everything worth reading on a page asserts something the engine holds.
+
+The target is UNFALSIFIABLE, not simple. Aiming at simplicity produced a version of this rewrite that had to be reverted: its sentences were plain, short, true and merely restated their key, and the corpus came out at a third of the vocabulary it replaced. A face that restates its key is dead. A face that says something true of any town, which the key never touches, is alive.
+
+Two checks survive on an unfalsifiable face: it must not sit badly beside what else the page can print, and its speaker must exist on that town.
+
 ## 3. The one test: it must not contradict
 
 The old test was "is every claim licensed by the data". It produced prose that was lawful and flat. The owner re-cut it on 2026-09-12: **a sentence is lawful if it does not contradict the settlement.** Silence in the data is permission, not prohibition. "Unlicensed" is no longer a finding. The author research is a set of guideposts for taste, not a rulebook.
