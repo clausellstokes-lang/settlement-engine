@@ -132,3 +132,13 @@ gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as
   READS-OTHER DS-GEN-17 :: hasMagicInst
   READS-OTHER DS-GEN-17 :: hasGranary
   READS-OTHER DS-GEN-17 :: hasHospital
+
+[compose] 8496 reads over 708 pools x 2 audiences x 6 seeds · 8370 composed a unit · drift 188
+[compose] base-side synthesis checked on 74302 cells of 1050 rows · mismatches 2756 (recorder-blind 2756)
+[compose] recorded cells whose authored vid and audible index differ: 36 of 74302 · mixed pools in the corpus 12 · reached by the DRIFT run 3 (DS-ECO-6 :: TIER: minor shadow activity (≥3) | DS-POW-1 :: governanceFractured true | DS-STR-1 :: INFILTRATED)
+
+ Test Files  5 passed (5)
+      Tests  335 passed (335)
+   Start at  10:18:15
+   Duration  21.87s (transform 3.68s, setup 146ms, import 24.39s, tests 14.39s, environment 0ms)
+
