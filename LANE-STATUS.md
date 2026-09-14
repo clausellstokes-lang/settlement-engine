@@ -1,18 +1,15 @@
-# LANE-STATUS — written 2026-09-13 21:24:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 21:29:20 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 57a75858b · 49 cars over f2da5a3ee · porcelain 2 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 389812b5f · 50 cars over f2da5a3ee · porcelain 0 · last commits:
+    389812b5f REWRITE 8b DS-DEF-2 cut 7: the two DULL pools cured to the refuter's own prescription, and a count put where a reader was
     57a75858b REWRITE 8b DS-DEF-2 cure (v3): 5/6 pools
     97302382a DARK POOLS 4/5: the RATE instrument never asked the stressor desk's SECOND entry point, so fourteen pools were recorded as zeros that had never been measured — rung added, whole table re-taken
     67bdb21cd DARK POOLS 3/5: REFUSED — DS-CND-1's PROVENANCE cure is a WRITING act, and the record is emptier than the brief assumed; plus the chair's stale-docblock item, both notes re-measured
-    4884e5ccb DARK POOLS 2/5: DS-GEN-18 HOME-FED — the docblock specified the canonical token and the code case-folded, so two resource vocabularies never met on any of 768 towns
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-       M src/data/dossierStateProse/defense.generated.js
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -78,7 +75,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 21 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 13
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -290,4 +287,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 3.31 2.62 2.29
+load: 2.74 2.90 2.54
