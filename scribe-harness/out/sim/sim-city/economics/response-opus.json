@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C1: a high rung on a working approach",
+   "vid": 1,
+   "spine": "The road in carries a steady traffic, and the spread of trades keeps more hands at work than the town strictly needs. The place stands high among towns of its kind, and nothing in it looks improvised.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "What the place lives on is a short list rather than a single trade. No one of those incomes carries the town by itself.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "Goods made in the town and goods brought in are set out on the same stalls, and nothing marks which is which. What comes in is unloaded and stays, and the town is no one's staging post.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "The yards stand full of goods bound outward, and no two loads in them are alike. Sending goods out is the settled business of the place, and a loaded cart draws no remark.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "Rundgate feeds itself and comes out of each season with a little in hand.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The Garrison is kept on a supply that has failed somewhere up the line. The building stands, the skill in it is not lost, and the work waits.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "spine": "A part of the trade here passes without ever reaching a clerk, small enough to annoy whoever keeps the counts and too small to alter what the place is. Who takes that part, and where it is sold on, is in no account at all: it would be worth knowing.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

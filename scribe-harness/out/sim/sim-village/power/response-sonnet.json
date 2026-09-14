@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Tolerated",
+   "vid": 4,
+   "spine": "Neither the town's backing nor its hostility touches the Elected Reeve at Hochhausen, and a hard decision here would have to be paid for out of an empty purse.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 1,
+   "spine": "The Elected Reeve at Hochhausen is well regarded because the town is doing well, and a town doing well rarely asks who is arranging it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 1,
+   "spine": "The office at Hochhausen is settled, with Elected Reeve holding it and the town expecting nothing else, so business goes ahead on that expectation.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 1,
+   "spine": "Nothing at Hochhausen governs cleanly, since the Elected Reeve is an arrangement between kinds of power, and it decides at the pace of whichever of them is least eager.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 1,
+   "spine": "What governs Hochhausen calls itself the Elected Reeve, and the name is exact about the town's size and its pretensions in a way most outsiders miss.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 2,
+   "spine": "Some in Hochhausen would take the office if they could, and cannot, and both sides know exactly where that leaves them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public opinion neither helps nor hurts",
+   "vid": 2,
+   "spine": "Public opinion at Hochhausen neither backs the Elected Reeve nor moves against it, and the Elected Reeve governs on its own strength alone.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

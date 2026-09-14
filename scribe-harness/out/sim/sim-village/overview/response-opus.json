@@ -1,0 +1,148 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "spine": "The busiest way through the village runs into the market, so a traveller coming in needs no directions.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Armed company is kept here as a matter of course, at the charter hall and at the veteran's lodge.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "In Hochhausen the arguments are about who stands where at the market, not about the price of bread.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "spine": "The stone from the quarry and the boards from the sawmill go out past the parish bounds, and what the village cannot make comes in by the same road.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Lightly Defended",
+   "vid": 2,
+   "spine": "What the village could hold, it could hold for a short while and no longer.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "spine": "The village would hold against the trouble it expects, though nobody here takes that for proof against the rest.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: WEAK",
+   "vid": 2,
+   "spine": "Nothing here is set against whatever lives beyond the fields, so each household answers for its own fences.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "spine": "More quarrels are opened here than are ever settled.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the village is spare, and it shows first in what is mended instead of replaced.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "Nobody here works magic, no arrangement stands for calling in anyone who does, and neither is looked for.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "spine": "Hochhausen eats out of its own fields, and a closed road troubles it less than a bad year does.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "spine": "The Commercial Circle and the Administrative Circle are at odds quietly enough that people passing through meet the quarrel late rather than at the door.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "spine": "Goods come into the village and go out of it at a pace nobody remarks on.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "spine": "The road the village stands on is what it lives off, and a face nobody knows turns no heads at the market.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "spine": "The village is the size a place of this kind settles at, no bigger and no smaller.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One of the ties this village keeps outweighs the others, and it is the one that decides what the place agrees to and what it refuses.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "The people here are bound to one another by market day, the common grazing and the church, and by nothing else worth a name.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "One gap shows in how this place is run, of the kind that one more body would close.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
