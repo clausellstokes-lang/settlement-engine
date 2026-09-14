@@ -2496,7 +2496,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "prosperity: Poverty / Impoverished": [
         {
           "angle": "visitor",
-          "text": "{settlement} is a poor town and does not disguise it: what is here is here because it could not be sold.",
+          "text": "{settlement} is a poor town and does not disguise it. What is here is here because it could not be sold.",
           "slots": [
             "settlement"
           ],
@@ -2538,7 +2538,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The households in {settlement} are careful with each other about money, which is its own kind of courtesy.",
+          "text": "The households in {settlement} are careful with each other about money. That is its own kind of courtesy.",
           "slots": [
             "settlement"
           ],
@@ -2548,7 +2548,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "prosperity: Moderate / Modest": [
         {
           "angle": "visitor",
-          "text": "{settlement} is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it.",
+          "text": "{settlement} is neither rich nor poor. Nothing about it is remarkable. That is the most accurate thing to say about it.",
           "slots": [
             "settlement"
           ],
@@ -2608,7 +2608,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here.",
+          "text": "{settlement}'s books carry more than the town needs. What to do with the excess is a question in its own right here.",
           "slots": [
             "settlement"
           ],
@@ -2642,7 +2642,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The watch's returns at {settlement} are short, and short returns here mean quiet streets rather than an idle watch.",
+          "text": "The watch's returns at {settlement} are short. Short returns here mean quiet streets rather than an idle watch.",
           "slots": [
             "settlement"
           ],
@@ -2660,7 +2660,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is not dangerous so much as unrelaxed, and the difference matters to the people living in it.",
+          "text": "{settlement} is not dangerous so much as unrelaxed. The difference matters to the people living in it.",
           "slots": [
             "settlement"
           ],
@@ -2668,7 +2668,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The watch at {settlement} is stretched across more than it can comfortably cover, and the stretching shows in what gets deferred.",
+          "text": "The watch at {settlement} is stretched across more than it can comfortably cover. The stretching shows in what gets deferred.",
           "slots": [
             "settlement"
           ],
@@ -2678,7 +2678,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}": [
         {
           "angle": "visitor",
-          "text": "{settlement} is a place to be careful in, and being careful is not sufficient.",
+          "text": "{settlement} is a place to be careful in, and being careful is not enough.",
           "slots": [
             "settlement"
           ],
@@ -2694,7 +2694,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What the watch at {settlement} records is a fraction of what happens, and the fraction is not chosen by the watch.",
+          "text": "What the watch at {settlement} records is a fraction of what happens. The fraction is not chosen by the watch.",
           "slots": [
             "settlement"
           ],
@@ -2704,7 +2704,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "economicViability.viable: true": [
         {
           "angle": "ledger",
-          "text": "{settlement} is a town that works: what it needs, it can get, and what it makes, it can move.",
+          "text": "{settlement} is a town that works. What it needs, it can get. What it makes, it can move.",
           "slots": [
             "settlement"
           ],
@@ -2712,7 +2712,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "There is no obvious reason {settlement} should not be here, which is a plainer compliment than it sounds.",
+          "text": "There is no obvious reason {settlement} should not be here. That is a plainer compliment than it sounds.",
           "slots": [
             "settlement"
           ],
@@ -2728,7 +2728,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} works on the terms it currently has, and the judgment is about those terms rather than about the town.",
+          "text": "{settlement} works on the terms it currently has. The judgment is about those terms rather than about the town.",
           "slots": [
             "settlement"
           ],
@@ -2738,7 +2738,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "economicViability.viable: false": [
         {
           "angle": "ledger",
-          "text": "The arithmetic of {settlement} does not close: what the town requires exceeds what its ground and its trade together supply.",
+          "text": "The arithmetic of {settlement} does not close. What the town requires exceeds what its ground and its trade together supply.",
           "slots": [
             "settlement"
           ],
@@ -2746,7 +2746,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is held here by something other than its own economy, and a visitor with an eye for it will start wondering what.",
+          "text": "{settlement} is held here by something other than its own economy. A visitor with an eye for it starts wondering what.",
           "slots": [
             "settlement"
           ],
@@ -2762,7 +2762,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} does not close its own arithmetic and is standing anyway, which means something outside the books is paying, and the page cannot say what.",
+          "text": "{settlement} does not close its own arithmetic and is standing anyway. That means something outside the books is paying. The page cannot say what.",
           "slots": [
             "settlement"
           ],
@@ -2780,7 +2780,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Walls, garrison and stores at {settlement} are all of a piece, which is rarer than any one of them.",
+          "text": "Walls, garrison and stores at {settlement} are all of a piece. That is rarer than any one of them.",
           "slots": [
             "settlement"
           ],
@@ -2790,7 +2790,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "defenseProfile.readiness.label: Well-Defended": [
         {
           "angle": "visitor",
-          "text": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show.",
+          "text": "{settlement} is defended properly rather than impressively. The works are sound, and none of them are for show.",
           "slots": [
             "settlement"
           ],
@@ -2880,7 +2880,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Secure": [
         {
           "angle": "ledger",
-          "text": "{settlement} feeds itself out of its own ground, and the granary is a convenience rather than a defence.",
+          "text": "{settlement} feeds itself out of its own ground. Its grain store is a convenience rather than a defence.",
           "slots": [
             "settlement"
           ],
@@ -2888,7 +2888,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food.",
+          "text": "Nobody in {settlement} thinks about food. That is the most that can be said for a town's food.",
           "slots": [
             "settlement"
           ],
@@ -2904,7 +2904,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year.",
+          "text": "{settlement}'s security is its own harvest. That means it is proof against a closed road and not against a bad year.",
           "slots": [
             "settlement"
           ],
@@ -2938,7 +2938,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The surplus here is what {settlement} sells; a season that took it would cost the town its income before it cost the town its dinner.",
+          "text": "The surplus here is what {settlement} sells. A season that took it would cost the town its income before it cost the town its dinner.",
           "slots": [
             "settlement"
           ],
@@ -2948,7 +2948,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Pressured": [
         {
           "angle": "ledger",
-          "text": "{settlement} covers its need and covers it exactly; nothing in the granary is spare.",
+          "text": "{settlement} covers its need and covers it exactly. Nothing in its grain store is spare.",
           "slots": [
             "settlement"
           ],
@@ -2956,7 +2956,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The price of bread in {settlement} is watched, which it is not in a comfortable town.",
+          "text": "The price of bread in {settlement} is watched. It is not watched in a comfortable town.",
           "slots": [
             "settlement"
           ],
@@ -2972,7 +2972,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is at the top of this condition rather than the bottom of a worse one, and what separates the two is the margin the granary is currently holding.",
+          "text": "{settlement} is at the top of this condition rather than the bottom of a worse one. What separates the two is the margin its grain store is currently holding.",
           "slots": [
             "settlement"
           ],
@@ -3016,7 +3016,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Deficit": [
         {
           "angle": "ledger",
-          "text": "What {settlement} needs exceeds what it produces and what it can bring in together, and the shortfall is carried by the households.",
+          "text": "What {settlement} needs exceeds what it produces and what it can bring in together. The shortfall is carried by the households.",
           "slots": [
             "settlement"
           ],
@@ -3024,7 +3024,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is less in {settlement} than there are people to eat it, and the arithmetic reaches the poorest quarters first.",
+          "text": "There is less in {settlement} than there are people to eat it. The arithmetic reaches the poorest quarters first.",
           "slots": [
             "settlement"
           ],
@@ -3032,7 +3032,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The granary at {settlement} is open and the queue at it is longer than the stock behind it.",
+          "text": "{settlement}'s grain store is open and the queue at it is longer than the stock behind it.",
           "slots": [
             "settlement"
           ],
@@ -3050,7 +3050,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Deficit × Active Famine": [
         {
           "angle": "ledger",
-          "text": "{settlement} is short of food past the point that stores or purchase can answer, and the rolls are being kept for reasons other than trade.",
+          "text": "{settlement} is short of food past the point that stores or purchase can answer. The rolls are being kept for reasons other than trade.",
           "slots": [
             "settlement"
           ],
@@ -3074,7 +3074,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "There is no rung below this one on the ladder {settlement} is on; what changes from here is not the grade but the count.",
+          "text": "There is no rung below this one on the ladder {settlement} is on. What changes from here is not the grade but the count.",
           "slots": [
             "settlement"
           ],
