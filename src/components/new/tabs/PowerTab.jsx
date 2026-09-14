@@ -474,10 +474,22 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                       // DS-POW-3, per faction. The desk takes the canonical readers' OUTPUTS
                       // (this loop already computed them) so it reads no npcLadder shape of
                       // its own. Skipped on a public dossier with the rest of the desk.
+                      //
+                      // ⛔ AN EMPTY DESK SEED MUST STAY EMPTY THROUGH THE JOIN — the same
+                      // guard OverviewTab's crisis banner carries, and for the same reason.
+                      // The seed expression admits `''`, and `${''}::${f.faction}` is TRUTHY,
+                      // so the kernel's seedless line (`if (!seed) return eligible[0]`, law 4
+                      // — canonical-at-zero) would be skipped and the ladder line drawn by a
+                      // hash of a bare faction name. Measured on the shipped DS-POW-3 corpus:
+                      // 26 of 40 pool x faction-name cells draw a vid other than the canonical
+                      // 1 that way. No read moves today — every production path stamps an id,
+                      // so the seed is non-empty — so this closes the trap, it does not move
+                      // the page.
+                      const deskSeed = String(s?._seed ?? s?.id ?? '');
                       const drawn = publicDossier ? null : drawnAtMount(LADDER_MOUNT, powerLadderRung(
                         s,
                         { factionName: f.faction, rungs, instability: instab },
-                        { seed: `${String(s?._seed ?? s?.id ?? '')}::${f.faction}`, audience },
+                        { seed: deskSeed ? `${deskSeed}::${f.faction}` : '', audience },
                       ));
                       return drawn?.sentence ? (
                         <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 5px 15px',fontStyle:'italic'}}>{drawn.sentence}</p>
