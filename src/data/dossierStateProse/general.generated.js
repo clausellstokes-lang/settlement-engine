@@ -8113,7 +8113,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
+          "text": "{settlement}'s market lives off through-traffic. The town sells to the road as much as to itself.",
           "slots": [
             "settlement"
           ],
@@ -8129,7 +8129,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit.",
+          "text": "The market was where the carts already stopped. The stalls came to the stopping. {settlement} grew around the habit.",
           "slots": [
             "settlement"
           ],
@@ -8139,7 +8139,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "MARKET-NARROW": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s market serves the town itself; little passes through that was not always coming here.",
+          "text": "{settlement}'s market serves the town itself. Little passes through that was not always coming here.",
           "slots": [
             "settlement"
           ],
@@ -8155,7 +8155,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "No great road feeds {settlement}'s market, and the market has made its peace with that: it is a town's exchange, not a region's.",
+          "text": "No great road feeds {settlement}'s market, and the market has made its peace with that. It is a town's exchange, not a region's.",
           "slots": [
             "settlement"
           ],
@@ -8165,7 +8165,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ENTREPOT": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s market handles more than the town could ever use; the difference is the town's living.",
+          "text": "{settlement}'s market handles more than the town could ever use, and the difference is the town's living.",
           "slots": [
             "settlement"
           ],
@@ -8173,7 +8173,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Half of what changes hands in {settlement} is only pausing here, and the town has built itself around the pause.",
+          "text": "Half of what changes hands in {settlement} is only pausing here. The town has built itself around the pause.",
           "slots": [
             "settlement"
           ],
@@ -8192,7 +8192,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "NO-MARKET": [
         {
           "angle": "counterforce",
-          "text": "{settlement} keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.",
+          "text": "{settlement} keeps no market worth the name. Exchange here happens at doorsteps and in yards, at the scale the town actually needs.",
           "slots": [
             "settlement"
           ],
@@ -8200,7 +8200,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.",
+          "text": "Nothing in {settlement} is arranged for buying and selling in quantity. That tells a stranger the essential thing about the place.",
           "slots": [
             "settlement"
           ],
@@ -8289,7 +8289,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FOUNDED-YOUNG": [
         {
           "angle": "ledger",
-          "text": "{settlement} is young enough that its first reason is still its working reason; the town has not yet had time to become anything else.",
+          "text": "{settlement} is young enough that its first reason is still its working reason. The town has not yet had time to become anything else.",
           "slots": [
             "settlement"
           ],
@@ -8297,7 +8297,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Everything in {settlement} was built by people who could still say why, and the whole town has that directness.",
+          "text": "Everything in {settlement} was built by people who could still say why. The whole town has that directness.",
           "slots": [
             "settlement"
           ],
@@ -8305,7 +8305,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} does what it was made to do; the founders' argument has not yet been improved on.",
+          "text": "{settlement} does what it was made to do. The founders' argument has not yet been improved on.",
           "slots": [
             "settlement"
           ],
@@ -8315,7 +8315,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FOUNDED-OLD": [
         {
           "angle": "elder",
-          "text": "{settlement} was made on purpose, and the purpose is {timeband_age}; what stands now is every year's amendment to it.",
+          "text": "{settlement} was made on purpose, and the purpose is {timeband_age}. What stands now is every year's amendment to it.",
           "slots": [
             "settlement",
             "timeband_age"
@@ -8324,7 +8324,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once.",
+          "text": "The town's first reason is on record and its present shape is the record of everything since. {settlement} is the argument and all its revisions at once.",
           "slots": [
             "settlement"
           ],
@@ -8332,7 +8332,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} reads as a place built to a plan that life has been editing for generations, and the editing is most of what a stranger sees.",
+          "text": "{settlement} reads as a place built to a plan that life has been editing for generations. The editing is most of what a stranger sees.",
           "slots": [
             "settlement"
           ],
@@ -8342,7 +8342,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "GROWN-UNRECORDED": [
         {
           "angle": "elder",
-          "text": "Nobody wrote down the beginning of {settlement}; the town simply proved convenient, and convenience compounded.",
+          "text": "Nobody wrote down the beginning of {settlement}. The town simply proved convenient, and convenience compounded.",
           "slots": [
             "settlement"
           ],
@@ -8626,7 +8626,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "SCARRED-FRESH": [
         {
           "angle": "street",
-          "text": "The {calamity} is still legible in {settlement}, and the town works around the mark the way a hand works around a cut.",
+          "text": "The {calamity} is still legible in {settlement}. The town works around the mark the way a hand works around a cut.",
           "slots": [
             "calamity",
             "settlement"
@@ -8635,7 +8635,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it; the damage is part of the town's present tense.",
+          "text": "Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it. The damage is part of the town's present tense.",
           "slots": [
             "timeband_since",
             "settlement"
@@ -8644,7 +8644,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} carries the {calamity}'s mark openly, and the repair is happening at the speed of means rather than of wish.",
+          "text": "{settlement} carries the {calamity}'s mark openly. The repair is happening at the speed of means rather than of wish.",
           "slots": [
             "settlement",
             "calamity"
@@ -8655,7 +8655,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "SCARRED-FADING": [
         {
           "angle": "elder",
-          "text": "The {calamity} has nearly left {settlement}'s fabric; what was a wound is becoming a feature, the way towns digest their disasters.",
+          "text": "The {calamity} has nearly left {settlement}'s fabric. What was a wound is becoming a feature, the way towns digest their disasters.",
           "slots": [
             "calamity",
             "settlement"
@@ -8664,7 +8664,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Only people who knew {settlement} before still see where the {calamity} sat; the town has grown over it the way turf grows over a track.",
+          "text": "Only people who knew {settlement} before still see where the {calamity} sat. The town has grown over it the way turf grows over a track.",
           "slots": [
             "settlement",
             "calamity"
@@ -8675,7 +8675,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "REBUILT": [
         {
           "angle": "visitor",
-          "text": "Part of {settlement} reads newer than the rest, all of a piece and all at once, which is how a town writes down that something happened to it and it decided to continue.",
+          "text": "Part of {settlement} reads newer than the rest, all of a piece and all at once. That is how a town writes down that something happened to it and it decided to continue.",
           "slots": [
             "settlement"
           ],
@@ -8683,7 +8683,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "A share of {settlement} was made twice, and the second making is plainer, straighter, and still a little foreign to what surrounds it.",
+          "text": "A share of {settlement} was made twice. The second making is plainer, straighter, and still a little foreign to what surrounds it.",
           "slots": [
             "settlement"
           ],
@@ -8691,7 +8691,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The rebuilt ground at {settlement} is the town's proof of itself: what fell was answered, and the answer is lived in.",
+          "text": "The rebuilt ground at {settlement} is the town's proof of itself. What fell was answered, and the answer is lived in.",
           "slots": [
             "settlement"
           ],
@@ -8701,7 +8701,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ENCROACHED": [
         {
           "angle": "street",
-          "text": "{settlement} is thickening from the inside: yards give way to rooms, lanes narrow by consent, and each year the town holds a little more life in the same skin.",
+          "text": "{settlement} is thickening from the inside. Yards give way to rooms, and lanes narrow by consent. Each year the town holds a little more life in the same skin.",
           "slots": [
             "settlement"
           ],
@@ -8709,7 +8709,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What was open ground inside {settlement} keeps becoming built ground; nobody ordered it, and the record of it is simply the town itself.",
+          "text": "What was open ground inside {settlement} keeps becoming built ground. Nobody ordered it, and the record of it is simply the town itself.",
           "slots": [
             "settlement"
           ],
@@ -8719,7 +8719,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "WORN-PLAIN": [
         {
           "angle": "elder",
-          "text": "{settlement}'s fabric carries no great wound, only wear; the town has been spared the memorable disasters and shows the ordinary kind of age instead.",
+          "text": "{settlement}'s fabric carries no great wound, only wear. The town has been spared the memorable disasters and shows the ordinary kind of age instead.",
           "slots": [
             "settlement"
           ],
@@ -8727,7 +8727,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "No calamity has marked {settlement}'s fabric within the mirror's reckoning, and the evenness of the town is that absence made visible.",
+          "text": "No calamity has marked {settlement}'s fabric within the mirror's reckoning. The evenness of the town is that absence made visible.",
           "slots": [
             "settlement"
           ],
@@ -8822,7 +8822,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ANCHORED-RECENT": [
         {
           "angle": "street",
-          "text": "The {calamity} is recent enough that {settlement} still divides time by it, and the record still marks it as bearing on the town today.",
+          "text": "The {calamity} is recent enough that {settlement} still divides time by it. The record still marks it as bearing on the town today.",
           "slots": [
             "calamity",
             "settlement"
@@ -8831,7 +8831,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.",
+          "text": "What the {calamity} took from {settlement} is still being counted. Some of the counting is done aloud.",
           "slots": [
             "calamity",
             "settlement"
@@ -8850,7 +8850,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ANCHORED-OLD": [
         {
           "angle": "elder",
-          "text": "The {calamity} is {timeband_age} now, and {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.",
+          "text": "The {calamity} is {timeband_age} now. {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.",
           "slots": [
             "calamity",
             "timeband_age",
@@ -8860,7 +8860,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The record of the {calamity} survives in what {settlement} does differently since; the event is old and its instructions are still being followed.",
+          "text": "The record of the {calamity} survives in what {settlement} does differently since. The event is old and its instructions are still being followed.",
           "slots": [
             "calamity",
             "settlement"
@@ -8869,7 +8869,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.",
+          "text": "Nobody now in {settlement} saw the {calamity}. Everybody here lives in the town it made.",
           "slots": [
             "settlement",
             "calamity"
@@ -8880,7 +8880,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LAYERED-ANCHORED": [
         {
           "angle": "elder",
-          "text": "{settlement}'s record is a stack of hard seasons survived in order, and the record still marks each of them as bearing on the town.",
+          "text": "{settlement}'s record is a stack of hard seasons survived in order. The record still marks each of them as bearing on the town.",
           "slots": [
             "settlement"
           ],
@@ -8888,7 +8888,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.",
+          "text": "{settlement} has been knocked down and has answered more than once, and the answering shows. This is a town with practice.",
           "slots": [
             "settlement"
           ],
@@ -8898,7 +8898,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RECORDED-UNANCHORED": [
         {
           "angle": "ledger",
-          "text": "The {calamity} stands on {settlement}'s record and the record does not carry it forward; it happened here, and what it left is no longer counted among the things that explain the place.",
+          "text": "The {calamity} stands on {settlement}'s record and the record does not carry it forward. It happened here. What it left is no longer counted among the things that explain the place.",
           "slots": [
             "calamity",
             "settlement"
@@ -8907,7 +8907,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "{settlement} keeps the {calamity} as an event rather than as a cause, which is what a town does with the troubles it has finished having.",
+          "text": "{settlement} keeps the {calamity} as an event rather than as a cause. That is what a town does with the troubles it has finished having.",
           "slots": [
             "settlement",
             "calamity"
@@ -8918,7 +8918,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "UNMARKED": [
         {
           "angle": "counterforce",
-          "text": "No great blow stands on {settlement}'s record; the town's history is the quieter kind, and its evenness is the inheritance.",
+          "text": "No great blow stands on {settlement}'s record, and the town's history is the quieter kind, and its evenness is the inheritance.",
           "slots": [
             "settlement"
           ],
@@ -8926,7 +8926,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.",
+          "text": "{settlement}'s books record no disaster worth the word. That is itself a fact about the place worth recording.",
           "slots": [
             "settlement"
           ],

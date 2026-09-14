@@ -6524,23 +6524,23 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`MARKET-OPEN`**
 1. `[street]` Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls.
-2. `[ledger]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
+2. `[ledger]` {settlement}'s market lives off through-traffic. The town sells to the road as much as to itself.
 3. `[visitor]` A stranger finds {settlement}'s market without directions, because the busiest way through town leads there on its own.
-4. `[elder]` The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit.
+4. `[elder]` The market was where the carts already stopped. The stalls came to the stopping. {settlement} grew around the habit.
 
 **`MARKET-NARROW`**
-1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
+1. `[ledger]` {settlement}'s market serves the town itself. Little passes through that was not always coming here.
 2. `[street]` What {settlement} makes, {settlement} mostly buys from itself, and the market is the room where that happens.
-3. `[counterforce]` No great road feeds {settlement}'s market, and the market has made its peace with that: it is a town's exchange, not a region's.
+3. `[counterforce]` No great road feeds {settlement}'s market, and the market has made its peace with that. It is a town's exchange, not a region's.
 
 **`ENTREPOT`**
-1. `[ledger]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
-2. `[visitor]` Half of what changes hands in {settlement} is only pausing here, and the town has built itself around the pause.
+1. `[ledger]` {settlement}'s market handles more than the town could ever use, and the difference is the town's living.
+2. `[visitor]` Half of what changes hands in {settlement} is only pausing here. The town has built itself around the pause.
 3. `[street]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 
 **`NO-MARKET`**
-1. `[counterforce]` {settlement} keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.
-2. `[visitor]` Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.
+1. `[counterforce]` {settlement} keeps no market worth the name. Exchange here happens at doorsteps and in yards, at the scale the town actually needs.
+2. `[visitor]` Nothing in {settlement} is arranged for buying and selling in quantity. That tells a stranger the essential thing about the place.
 
 ---
 
@@ -6553,17 +6553,17 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The accretion mechanism: a town is layers of decisions and the oldest decision is its reason. Spoken only through the founding record and the age field, and the age becomes a band in the desk — never a numeral in the prose (§0d). Non-redundant with `DS-GEN-9`, which renders the founding ROW and the event timeline; this block renders what the row MEANS for the town's present shape. It names no year and no date, because the engine holds a founding REASON and an AGE and no construction date of any kind.
 
 **`FOUNDED-YOUNG`**
-1. `[ledger]` {settlement} is young enough that its first reason is still its working reason; the town has not yet had time to become anything else.
-2. `[visitor]` Everything in {settlement} was built by people who could still say why, and the whole town has that directness.
-3. `[street]` {settlement} does what it was made to do; the founders' argument has not yet been improved on.
+1. `[ledger]` {settlement} is young enough that its first reason is still its working reason. The town has not yet had time to become anything else.
+2. `[visitor]` Everything in {settlement} was built by people who could still say why. The whole town has that directness.
+3. `[street]` {settlement} does what it was made to do. The founders' argument has not yet been improved on.
 
 **`FOUNDED-OLD`**
-1. `[elder]` {settlement} was made on purpose, and the purpose is {timeband_age}; what stands now is every year's amendment to it.
-2. `[ledger]` The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once.
-3. `[visitor]` {settlement} reads as a place built to a plan that life has been editing for generations, and the editing is most of what a stranger sees.
+1. `[elder]` {settlement} was made on purpose, and the purpose is {timeband_age}. What stands now is every year's amendment to it.
+2. `[ledger]` The town's first reason is on record and its present shape is the record of everything since. {settlement} is the argument and all its revisions at once.
+3. `[visitor]` {settlement} reads as a place built to a plan that life has been editing for generations. The editing is most of what a stranger sees.
 
 **`GROWN-UNRECORDED`**
-1. `[elder]` Nobody wrote down the beginning of {settlement}; the town simply proved convenient, and convenience compounded.
+1. `[elder]` Nobody wrote down the beginning of {settlement}. The town simply proved convenient, and convenience compounded.
 2. `[street]` {settlement} was never founded so much as agreed to, one household at a time.
 
 ---
@@ -6686,26 +6686,26 @@ compass word, no real-world place, no named analogy.*
 **PROVENANCE:** **ABSENT MIRROR ⇒ NO SENTENCE.** `hasFabric` is false for every aspatial world and every settlement the fabric layer has not touched, and each reader then returns empty or null. That is `R-DST-K` exactly, and it is the block's own dormancy wall: silence is the correct output and no variant here may be drawn as a fallback. The mechanism is engine-native end to end and every historical clause below is gated by a DATED row, which is what `R-DST-B` requires: the scars and the rebirths carry their own `week`, so a variant may say a thing happened and how long ago without inventing either. **Non-redundancy is MEASURED, not asserted: no other block in this annex reads the fabric mirror at all** (`urbanFabric`, `fabricRead`, `fabricScars` and `ageOverlay` return zero occurrences across the file outside this block), so the `R-DST-A` pairing question does not arise. The line this block does not cross: the mirror records THAT a quarter was rebuilt and WHEN, never where it sits or what shape it took, and no variant reaches for a location, a direction or a geometry. `DS-GEN-16` is the sibling and reads a different record entirely, and the two are distinguished in that block's own provenance.
 
 **`SCARRED-FRESH`**
-1. `[street]` The {calamity} is still legible in {settlement}, and the town works around the mark the way a hand works around a cut.
-2. `[visitor]` Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it; the damage is part of the town's present tense.
-3. `[unfolding]` {settlement} carries the {calamity}'s mark openly, and the repair is happening at the speed of means rather than of wish.
+1. `[street]` The {calamity} is still legible in {settlement}. The town works around the mark the way a hand works around a cut.
+2. `[visitor]` Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it. The damage is part of the town's present tense.
+3. `[unfolding]` {settlement} carries the {calamity}'s mark openly. The repair is happening at the speed of means rather than of wish.
 
 **`SCARRED-FADING`**
-1. `[elder]` The {calamity} has nearly left {settlement}'s fabric; what was a wound is becoming a feature, the way towns digest their disasters.
-2. `[street]` Only people who knew {settlement} before still see where the {calamity} sat; the town has grown over it the way turf grows over a track.
+1. `[elder]` The {calamity} has nearly left {settlement}'s fabric. What was a wound is becoming a feature, the way towns digest their disasters.
+2. `[street]` Only people who knew {settlement} before still see where the {calamity} sat. The town has grown over it the way turf grows over a track.
 
 **`REBUILT`**
-1. `[visitor]` Part of {settlement} reads newer than the rest, all of a piece and all at once, which is how a town writes down that something happened to it and it decided to continue.
-2. `[ledger]` A share of {settlement} was made twice, and the second making is plainer, straighter, and still a little foreign to what surrounds it.
-3. `[elder]` The rebuilt ground at {settlement} is the town's proof of itself: what fell was answered, and the answer is lived in.
+1. `[visitor]` Part of {settlement} reads newer than the rest, all of a piece and all at once. That is how a town writes down that something happened to it and it decided to continue.
+2. `[ledger]` A share of {settlement} was made twice. The second making is plainer, straighter, and still a little foreign to what surrounds it.
+3. `[elder]` The rebuilt ground at {settlement} is the town's proof of itself. What fell was answered, and the answer is lived in.
 
 **`ENCROACHED`**
-1. `[street]` {settlement} is thickening from the inside: yards give way to rooms, lanes narrow by consent, and each year the town holds a little more life in the same skin.
-2. `[ledger]` What was open ground inside {settlement} keeps becoming built ground; nobody ordered it, and the record of it is simply the town itself.
+1. `[street]` {settlement} is thickening from the inside. Yards give way to rooms, and lanes narrow by consent. Each year the town holds a little more life in the same skin.
+2. `[ledger]` What was open ground inside {settlement} keeps becoming built ground. Nobody ordered it, and the record of it is simply the town itself.
 
 **`WORN-PLAIN`**
-1. `[elder]` {settlement}'s fabric carries no great wound, only wear; the town has been spared the memorable disasters and shows the ordinary kind of age instead.
-2. `[counterforce]` No calamity has marked {settlement}'s fabric within the mirror's reckoning, and the evenness of the town is that absence made visible.
+1. `[elder]` {settlement}'s fabric carries no great wound, only wear. The town has been spared the memorable disasters and shows the ordinary kind of age instead.
+2. `[counterforce]` No calamity has marked {settlement}'s fabric within the mirror's reckoning. The evenness of the town is that absence made visible.
 
 ---
 
@@ -6718,26 +6718,26 @@ compass word, no real-world place, no named analogy.*
 **PROVENANCE:** **`anchored` IS THE GATE, AND THIS BLOCK IS BUILT AROUND IT.** `DS-GEN-9` rules that `anchored: true` is the record's own assertion that an event still bears on the present and is therefore the licence for an "and it still" clause, that an unanchored event "gets described and NOT connected forward", and that this is "the sharpest line in the shape and the easiest to blur". A block whose entire subject is an event's PRESENT REMAINDER blurs that line by construction unless the gate is keyed, so it is keyed: every forward-connecting pool below requires `anchored`, and `RECORDED-UNANCHORED` exists precisely so that the unanchored case has somewhere lawful to go instead of borrowing an anchored sentence. Its two variants describe the event and decline to carry it forward, which is the ruling rendered as prose. **Non-redundancy, twice over (`R-DST-A`):** `DS-GEN-9` renders the event rows AS A TIMELINE and owns the founding and the record itself; this block renders what the record says REMAINS, and only where `anchored` or `lastingEffects` actually asserts a remainder. `DS-GEN-15` reads the fabric mirror, which is what the STONES show; this block reads the history table, which is what the RECORD says. The two cite different fields and may compose together, since neither restates the other's cell. No variant carries a year: `DS-GEN-9` records that the surface prints a numeral beside its own band ladder, and `R-DST-D` keeps the prose banded.
 
 **`ANCHORED-RECENT`**
-1. `[street]` The {calamity} is recent enough that {settlement} still divides time by it, and the record still marks it as bearing on the town today.
-2. `[unfolding]` What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.
+1. `[street]` The {calamity} is recent enough that {settlement} still divides time by it. The record still marks it as bearing on the town today.
+2. `[unfolding]` What the {calamity} took from {settlement} is still being counted. Some of the counting is done aloud.
 3. `[visitor]` {settlement} has the particular carefulness of a town that was lately reminded what can happen to towns.
 
 **`ANCHORED-OLD`**
-1. `[elder]` The {calamity} is {timeband_age} now, and {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.
-2. `[ledger]` The record of the {calamity} survives in what {settlement} does differently since; the event is old and its instructions are still being followed.
-3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.
+1. `[elder]` The {calamity} is {timeband_age} now. {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.
+2. `[ledger]` The record of the {calamity} survives in what {settlement} does differently since. The event is old and its instructions are still being followed.
+3. `[street]` Nobody now in {settlement} saw the {calamity}. Everybody here lives in the town it made.
 
 **`LAYERED-ANCHORED`**
-1. `[elder]` {settlement}'s record is a stack of hard seasons survived in order, and the record still marks each of them as bearing on the town.
-2. `[visitor]` {settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.
+1. `[elder]` {settlement}'s record is a stack of hard seasons survived in order. The record still marks each of them as bearing on the town.
+2. `[visitor]` {settlement} has been knocked down and has answered more than once, and the answering shows. This is a town with practice.
 
 **`RECORDED-UNANCHORED`**
-1. `[ledger]` The {calamity} stands on {settlement}'s record and the record does not carry it forward; it happened here, and what it left is no longer counted among the things that explain the place.
-2. `[elder]` {settlement} keeps the {calamity} as an event rather than as a cause, which is what a town does with the troubles it has finished having.
+1. `[ledger]` The {calamity} stands on {settlement}'s record and the record does not carry it forward. It happened here. What it left is no longer counted among the things that explain the place.
+2. `[elder]` {settlement} keeps the {calamity} as an event rather than as a cause. That is what a town does with the troubles it has finished having.
 
 **`UNMARKED`**
-1. `[counterforce]` No great blow stands on {settlement}'s record; the town's history is the quieter kind, and its evenness is the inheritance.
-2. `[ledger]` {settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.
+1. `[counterforce]` No great blow stands on {settlement}'s record, and the town's history is the quieter kind, and its evenness is the inheritance.
+2. `[ledger]` {settlement}'s books record no disaster worth the word. That is itself a fact about the place worth recording.
 
 ---
 
