@@ -116,3 +116,22 @@ Second-reader `yes` LINES by question: certainty 177 · mechanism 205 · scope 1
 7. **MODEL CHOICE CANNOT BE DECIDED YET:** Sonnet 30 % vs Opus 26 % is noise inside a 70 % invention rate; the question re-opens when the writer stops inventing.
 
 **Before the cure, the honest state of the product:** on a cold card the Scribe would ship one line in four and the corpus the rest — lawful, never false, but not the product. The cure is in the writer's brief and the unit rule, not in the readers.
+
+## RUN 3 — the corrected writer, the six-question reader, the honest card (workflow `wf_59ec807d-940`, 15:3x–16:4x; 64 seats, 8.9 M tokens)
+Same 16 cells and seats as RUN 2; the dock at `fdc980f4c` (W3b cars 1–6); the reader handed the two cached blocks. Rows: `scribe-harness/out/sim/RUN-wf_59ec807d-940.json`.
+
+| | pools | returned | tier 0 kept | tier 1 dropped | FINAL shipped | RUN 2 |
+|---|---|---|---|---|---|---|
+| Opus | 198 | 188 | 176 | 10 | **166 (84 %)** | 26 % |
+| Sonnet | 198 | 188 | 173 | 18 | **155 (78 %)** | 30 % |
+
+Per tab × seat (shipped): defense 89 / 79 · economics 88 / 85 · overview 84 / 76 · power 72 / 77 (Opus / Sonnet). Per tier (both): city 89 % · town 80 % · hamlet 79 % · village 77 %.
+Second-reader contradictions, LINES over ~1,400: page 24 (Opus 5 · Sonnet 8 units; lines 24) · roster 8 · field 5 · record 2 · model 0 · forecast 0 — **28 lines, 2 %.** PATCHED units 6. Missing pools = exactly the world-only omissions the card ordered (`capture none/adversarial`, `layer DORMANT`, `governing faction holds …`).
+WITHHELD (ships) is now the large column — Q 36 / 45 units, ORDER 36 / 35, C3 21 / 27, WALL-5 11 / 22, X 17 / 7: craft and structure arms, not truth. Q withholds because 70 % of the fields are unreadable by the card (W3c's cure); ORDER because the AI spine's move sequence is outside the eight closed orders (a craft arm; the corpus's own withholds are the same family).
+
+**What RUN 3 settles**
+1. **Under the owner's standard the Scribe is a product**: four pages in five ship as the Scribe's, one in fifty lines contradicts, and the corpus fills the rest. RUN 2's 70 % was the licence reading.
+2. **The remaining contradictions are the card's, not the writer's.** 24 of 28 contradict a MACHINE LINE the writer never saw (W3a removed the page rows from the writer's turn; the tier-1 reader sees them and refuses): Warmholz "nothing here is urgent" beside `crisis.summary` "caravans are disappearing"; "no soldier in it" beside `guardEffectivenessDesc` "a mercenary company provides enforcement"; "nothing organised behind the wrongdoing" beside `Internal Security: Dangerous — Monster Threat`; "a break in the roads would not reach the table" beside the pool's own machine line "cut the roads, cut the supply". DECIDED: the page's machine lines go into the writer's turn (W3d).
+3. **The roster refusals are mostly bodies the card names but the roster does not list**: "The Governing Council and The Order of the Watch", "the Commercial Circle and the Administrative Circle" come from the pool's own fills (faction and relation rows) and are absent from the town block's roster, so the reader's ROSTER test calls them unseated. The town block gains the named bodies of the page (factions, circles, councils, named relationships) — W3d. Two roster refusals are real: a "Cartographer's guild" where the row is a workshop; "the returns" / "the books wait" as records (the corpus's own DS-DEF-3 spine says "the season's returns" — the checklist should grant a record the corpus line itself names).
+4. **Model choice, first evidence:** Opus leads on three tabs of four and on contradictions (10 vs 18 lines) and FAILs (22 vs 33); power is a coin-flip on 78 pools. Opus stays the writer; a per-tab Sonnet seat is not supported by this run. Re-open with live usage receipts.
+5. **The card's own defects the reader flagged, for the ledgers:** a `STALLED trade` pool (DS-GEN-18) firing on all-null reads; `structure null (nothing organized)` firing on a town whose page says "organized violence"; `flagDriven count zero` on a town whose historicalCharacter names an occupation — three corpus/engine findings, not the Scribe's.
