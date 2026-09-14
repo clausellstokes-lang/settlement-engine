@@ -2333,68 +2333,68 @@ own entailment and licenses nothing about who runs it.
 
 **`present: false` (no legitimacy reading)**
 1. `[ledger]` There is no reading of how {settlement} regards its rulers. The question has not been put here in any form the rolls would record.
-2. `[street]` Whether the town backs the {seat} is not something anybody at {settlement} has had cause to establish.
-3. `[visitor]` A stranger at {settlement} cannot tell whether the hall is loved or endured, and neither, on the evidence, can the hall.
+2. `[street]` Nobody at {settlement} has had cause to establish whether the town backs the {seat}.
+3. `[visitor]` A stranger at {settlement} cannot tell whether the hall is loved or endured. The hall cannot tell either.
 
 **neutral baseline (nothing pulling either way)**
 1. `[ledger]` Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the walls. The {seat} stands on the bare fact of being the {seat}.
-2. `[street]` The town has no particular opinion of the hall, which the hall would do well to notice and generally does not.
-3. `[threshold]` Nothing is currently deciding how {settlement} regards the {seat}, which means the first thing that does will decide a great deal at once.
+2. `[street]` The town has no particular opinion of the hall, and the hall does not notice.
+3. `[threshold]` Nothing is currently deciding how {settlement} regards the {seat}. The first thing that does would decide a great deal.
 
 **capture pressure ADVANCING (weak security, poor prosperity)** *(every variant `dm-only`)*
-1. `[unfolding · dm-only]` The criminal interest at {settlement} is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both.
+1. `[unfolding · dm-only]` The criminal interest at {settlement} is gaining ground inside the hall rather than outside it. The town is poorly paid and poorly policed, and it is cheap to buy into.
 2. `[ledger · dm-only]` Each season at {settlement} makes the next approach easier. The conditions that would resist it are the same conditions the town has been failing to maintain.
-3. `[street · dm-only]` Money is being spent at {settlement} on people who cannot account for having it, and the accounting is not being asked for.
+3. `[street · dm-only]` Money is being spent at {settlement} on people who cannot account for having it, and nobody asks them to.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
-1. `[unfolding · dm-only]` What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both.
+1. `[unfolding · dm-only]` What the criminal interest held at {settlement} it is losing. The town pays its people and polices its streets, and it has become expensive to hold.
 2. `[counterforce · dm-only]` The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.
-3. `[ledger · dm-only]` What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns.
+3. `[ledger · dm-only]` What the criminal interest at {settlement} still holds it holds at a rising cost. The cost is rising faster than the holding returns.
 
 **capture reached an AGENT of a faction** *(every variant `dm-only`; print-deferred)*
 1. `[ledger · dm-only]` Somebody well down inside {faction} at {settlement} is answering elsewhere. Nothing important passes through them, and everything important passes near.
-2. `[street · dm-only]` Somebody at {settlement} is a little too well informed about {faction}'s business and a little too easy about money, and nobody has connected the two.
-3. `[counterforce · dm-only]` The approach reached into {faction} at {settlement} and stopped at the level it could afford; what it bought is useful and it is not decisive.
+2. `[street · dm-only]` Somebody at {settlement} knows a little too much about {faction}'s business and is a little too easy about money. Nobody has connected the two.
+3. `[counterforce · dm-only]` The approach reached into {faction} at {settlement} and stopped at the level it could afford. What it bought is useful and it is not decisive.
 
 **capture reached a LEADER** *(every variant `dm-only`; print-deferred)*
-1. `[ledger · dm-only]` The person who speaks for {faction} at {settlement} is not free to speak against a particular interest, and the constraint does not appear in any minute of any meeting.
-2. `[unfolding · dm-only]` What {faction} decides at {settlement} is now shaped at the top rather than at the edges, which is a difference of kind and not of degree.
-3. `[street · dm-only]` {faction} at {settlement} has stopped opposing one particular interest and has never explained the change, which the town has noticed without being able to name.
+1. `[ledger · dm-only]` The person who speaks for {faction} at {settlement} is not free to speak against one particular interest. No minute of any meeting records the constraint.
+2. `[unfolding · dm-only]` What {faction} decides at {settlement} is shaped at the top now, and the edges do not shape it.
+3. `[street · dm-only]` {faction} at {settlement} has stopped opposing one particular interest and has never explained the change. The town has noticed and cannot name it.
 
 **operation role `parallel marketplace`**
-1. `[ledger]` There is a second market at {settlement} running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom.
+1. `[ledger]` There is a second market at {settlement} running alongside the lawful one. It sells what the lawful one may not, and it competes for the same custom.
 2. `[street]` The town buys in two places and only mentions one of them.
-3. `[visitor]` A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to.
+3. `[visitor]` A stranger at {settlement} is told a thing cannot be got. He finds it for sale, at a price, in a room nobody directed him to.
 
 **operation role `duty evasion`**
-1. `[ledger]` Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.
+1. `[ledger]` Goods reach {settlement} around the customs rather than through them. The manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.
 2. `[street]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
-3. `[counterforce]` The customs at {settlement} are properly kept and thoroughly bypassed, and the two facts do not contradict each other in the way a stranger expects.
+3. `[counterforce]` The customs at {settlement} are properly kept and thoroughly bypassed. The two facts do not contradict each other here.
 
 **operation role `unlicensed revenue`**
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.
 2. `[street]` The town's debts start in one house and are collected in another, and the two are the same concern.
-3. `[unfolding]` What is won and lost at {settlement}'s tables funds a great deal that is not a table, and the funding grows with every debt that cannot be paid.
+3. `[unfolding]` What is won and lost at {settlement}'s tables funds a great deal that is not a table. The funding grows with every debt that cannot be paid.
 
 **operation role `money laundering`**
-1. `[ledger]` Several perfectly ordinary businesses at {settlement} exist to make criminal revenue look ordinary, and they are good enough at it to also turn a legitimate profit.
+1. `[ledger]` Several perfectly ordinary businesses at {settlement} exist to make criminal revenue look ordinary. They are good enough at it to turn a lawful profit as well.
 2. `[visitor]` A stranger at {settlement} does business with a respectable house and never learns what else the house is for.
-3. `[counterforce]` The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased.
+3. `[counterforce]` The books of several houses at {settlement} are perfect, and the perfection is the service being bought.
 
 **operation role `stolen goods market`**
-1. `[ledger]` What is taken at {settlement} is moved back into lawful circulation through a clearinghouse, which is the arrangement that makes the taking worth doing at all.
-2. `[counterforce]` Theft at {settlement} would not be profitable without somewhere to sell, and the somewhere is the part the watch has never reached.
-3. `[street]` Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.
+1. `[ledger]` What is taken at {settlement} is moved back into lawful trade through one house that handles it. Without that house the taking would not be worth doing.
+2. `[counterforce]` Theft at {settlement} would not pay without somewhere to sell, and the place to sell is the part the watch has never reached.
+3. `[street]` Things taken at {settlement} reappear in the market a season later with nothing wrong about them. The town has stopped asking about the season in between.
 
 **operation role `protection + extraction`**
-1. `[ledger]` The criminal interest at {settlement} sells safety from itself and calls it something else, steadily, to the same people, every season.
+1. `[ledger]` The criminal interest at {settlement} sells safety from itself and calls it something else. It sells to the same people every season.
 2. `[street]` The town pays and does not describe the paying as paying.
-3. `[unfolding]` What is asked of the traders at {settlement} rises a little each year, and each rise is small enough that no single one is worth the trouble of refusing.
+3. `[unfolding]` Each year what is asked of the traders at {settlement} rises a little. No single rise is worth the trouble of refusing.
 
 **operation role `criminal revenue stream` (unclassified)**
-1. `[ledger]` There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that.
-2. `[street]` There is somebody at {settlement} who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part.
-3. `[visitor]` A stranger at {settlement} is told there is money in the town that does not come from the market, and is told no more than that.
+1. `[ledger]` There is a criminal concern at {settlement} with local weight, territorial or economic, and no clearer description of it than that.
+2. `[street]` There is somebody at {settlement} who does well out of arrangements the town does not ask about. The doing well is the only part anybody sees.
+3. `[visitor]` A stranger at {settlement} is told there is money in the town that does not come from the market. He is told no more than that.
 
 ---
 

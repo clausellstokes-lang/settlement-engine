@@ -2351,16 +2351,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Whether the town backs the {seat} is not something anybody at {settlement} has had cause to establish.",
+          "text": "Nobody at {settlement} has had cause to establish whether the town backs the {seat}.",
           "slots": [
-            "seat",
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} cannot tell whether the hall is loved or endured, and neither, on the evidence, can the hall.",
+          "text": "A stranger at {settlement} cannot tell whether the hall is loved or endured. The hall cannot tell either.",
           "slots": [
             "settlement"
           ],
@@ -2379,13 +2379,13 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has no particular opinion of the hall, which the hall would do well to notice and generally does not.",
+          "text": "The town has no particular opinion of the hall, and the hall does not notice.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "Nothing is currently deciding how {settlement} regards the {seat}, which means the first thing that does will decide a great deal at once.",
+          "text": "Nothing is currently deciding how {settlement} regards the {seat}. The first thing that does would decide a great deal.",
           "slots": [
             "settlement",
             "seat"
@@ -2399,7 +2399,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The criminal interest at {settlement} is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both.",
+          "text": "The criminal interest at {settlement} is gaining ground inside the hall rather than outside it. The town is poorly paid and poorly policed, and it is cheap to buy into.",
           "slots": [
             "settlement"
           ],
@@ -2421,7 +2421,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Money is being spent at {settlement} on people who cannot account for having it, and the accounting is not being asked for.",
+          "text": "Money is being spent at {settlement} on people who cannot account for having it, and nobody asks them to.",
           "slots": [
             "settlement"
           ],
@@ -2434,7 +2434,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both.",
+          "text": "What the criminal interest held at {settlement} it is losing. The town pays its people and polices its streets, and it has become expensive to hold.",
           "slots": [
             "settlement"
           ],
@@ -2456,7 +2456,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns.",
+          "text": "What the criminal interest at {settlement} still holds it holds at a rising cost. The cost is rising faster than the holding returns.",
           "slots": [
             "settlement"
           ],
@@ -2481,7 +2481,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Somebody at {settlement} is a little too well informed about {faction}'s business and a little too easy about money, and nobody has connected the two.",
+          "text": "Somebody at {settlement} knows a little too much about {faction}'s business and is a little too easy about money. Nobody has connected the two.",
           "slots": [
             "settlement",
             "faction"
@@ -2493,7 +2493,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The approach reached into {faction} at {settlement} and stopped at the level it could afford; what it bought is useful and it is not decisive.",
+          "text": "The approach reached into {faction} at {settlement} and stopped at the level it could afford. What it bought is useful and it is not decisive.",
           "slots": [
             "faction",
             "settlement"
@@ -2507,7 +2507,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The person who speaks for {faction} at {settlement} is not free to speak against a particular interest, and the constraint does not appear in any minute of any meeting.",
+          "text": "The person who speaks for {faction} at {settlement} is not free to speak against one particular interest. No minute of any meeting records the constraint.",
           "slots": [
             "faction",
             "settlement"
@@ -2519,7 +2519,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What {faction} decides at {settlement} is now shaped at the top rather than at the edges, which is a difference of kind and not of degree.",
+          "text": "What {faction} decides at {settlement} is shaped at the top now, and the edges do not shape it.",
           "slots": [
             "faction",
             "settlement"
@@ -2531,7 +2531,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "{faction} at {settlement} has stopped opposing one particular interest and has never explained the change, which the town has noticed without being able to name.",
+          "text": "{faction} at {settlement} has stopped opposing one particular interest and has never explained the change. The town has noticed and cannot name it.",
           "slots": [
             "faction",
             "settlement"
@@ -2542,7 +2542,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role parallel marketplace": [
         {
           "angle": "ledger",
-          "text": "There is a second market at {settlement} running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom.",
+          "text": "There is a second market at {settlement} running alongside the lawful one. It sells what the lawful one may not, and it competes for the same custom.",
           "slots": [
             "settlement"
           ],
@@ -2556,7 +2556,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to.",
+          "text": "A stranger at {settlement} is told a thing cannot be got. He finds it for sale, at a price, in a room nobody directed him to.",
           "slots": [
             "settlement"
           ],
@@ -2566,7 +2566,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role duty evasion": [
         {
           "angle": "ledger",
-          "text": "Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.",
+          "text": "Goods reach {settlement} around the customs rather than through them. The manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.",
           "slots": [
             "settlement"
           ],
@@ -2582,7 +2582,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The customs at {settlement} are properly kept and thoroughly bypassed, and the two facts do not contradict each other in the way a stranger expects.",
+          "text": "The customs at {settlement} are properly kept and thoroughly bypassed. The two facts do not contradict each other here.",
           "slots": [
             "settlement"
           ],
@@ -2606,7 +2606,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What is won and lost at {settlement}'s tables funds a great deal that is not a table, and the funding grows with every debt that cannot be paid.",
+          "text": "What is won and lost at {settlement}'s tables funds a great deal that is not a table. The funding grows with every debt that cannot be paid.",
           "slots": [
             "settlement"
           ],
@@ -2616,7 +2616,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role money laundering": [
         {
           "angle": "ledger",
-          "text": "Several perfectly ordinary businesses at {settlement} exist to make criminal revenue look ordinary, and they are good enough at it to also turn a legitimate profit.",
+          "text": "Several perfectly ordinary businesses at {settlement} exist to make criminal revenue look ordinary. They are good enough at it to turn a lawful profit as well.",
           "slots": [
             "settlement"
           ],
@@ -2632,7 +2632,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased.",
+          "text": "The books of several houses at {settlement} are perfect, and the perfection is the service being bought.",
           "slots": [
             "settlement"
           ],
@@ -2642,7 +2642,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role stolen goods market": [
         {
           "angle": "ledger",
-          "text": "What is taken at {settlement} is moved back into lawful circulation through a clearinghouse, which is the arrangement that makes the taking worth doing at all.",
+          "text": "What is taken at {settlement} is moved back into lawful trade through one house that handles it. Without that house the taking would not be worth doing.",
           "slots": [
             "settlement"
           ],
@@ -2650,7 +2650,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Theft at {settlement} would not be profitable without somewhere to sell, and the somewhere is the part the watch has never reached.",
+          "text": "Theft at {settlement} would not pay without somewhere to sell, and the place to sell is the part the watch has never reached.",
           "slots": [
             "settlement"
           ],
@@ -2658,7 +2658,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.",
+          "text": "Things taken at {settlement} reappear in the market a season later with nothing wrong about them. The town has stopped asking about the season in between.",
           "slots": [
             "settlement"
           ],
@@ -2668,7 +2668,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role protection + extraction": [
         {
           "angle": "ledger",
-          "text": "The criminal interest at {settlement} sells safety from itself and calls it something else, steadily, to the same people, every season.",
+          "text": "The criminal interest at {settlement} sells safety from itself and calls it something else. It sells to the same people every season.",
           "slots": [
             "settlement"
           ],
@@ -2682,7 +2682,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What is asked of the traders at {settlement} rises a little each year, and each rise is small enough that no single one is worth the trouble of refusing.",
+          "text": "Each year what is asked of the traders at {settlement} rises a little. No single rise is worth the trouble of refusing.",
           "slots": [
             "settlement"
           ],
@@ -2692,7 +2692,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role criminal revenue stream (unclassified)": [
         {
           "angle": "ledger",
-          "text": "There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that.",
+          "text": "There is a criminal concern at {settlement} with local weight, territorial or economic, and no clearer description of it than that.",
           "slots": [
             "settlement"
           ],
@@ -2700,7 +2700,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is somebody at {settlement} who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part.",
+          "text": "There is somebody at {settlement} who does well out of arrangements the town does not ask about. The doing well is the only part anybody sees.",
           "slots": [
             "settlement"
           ],
@@ -2708,7 +2708,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is told there is money in the town that does not come from the market, and is told no more than that.",
+          "text": "A stranger at {settlement} is told there is money in the town that does not come from the market. He is told no more than that.",
           "slots": [
             "settlement"
           ],
