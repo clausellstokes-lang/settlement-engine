@@ -1,0 +1,507 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness WEAK",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Something is in place against most of what arrives and nothing is in place behind it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.readiness.score]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: neither walls nor force",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "exhaustivity over an open column",
+     "value": "The stallholders say the market is open on every side and that is what brings the buyers o",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "face 6",
+     "subject": "exhaustivity over an open column",
+     "value": "The chapel's warden says the church door is the only one here barred at night, and it is b",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    },
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "face 8",
+     "subject": "is this clause historical?",
+     "value": "The hall has never had anybody come in asking for a wall, a clerk there says.",
+     "description": "a past-tense or formerly-construction: whether it asserts history is A6, the refuter's (semantic)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: no legal infrastructure",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "F25",
+    "ORDER",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then TRADITION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "F25",
+     "channel": "WITHHELD",
+     "seat": "face 3",
+     "subject": "a cited record's content",
+     "value": "the register say",
+     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet (unresolved)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then GEOGRAPHY then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 5",
+     "subject": "a second sentence naming no second field",
+     "value": "There is nowhere for the stranger either.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.compound.inst.hasCourtSystem, economicState.compound.inst.hasPrison]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: WEAK",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "Q",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "face 1",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then TRADITION then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "face 2",
+     "subject": "exhaustivity over an open column",
+     "value": "The drinkers at the alehouse say the loudest household at the table is the one that would ",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 4",
+     "subject": "a second sentence naming no second field",
+     "value": "Not one of the doors opens.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.scores.economic]; none claimed)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "face 7",
+     "subject": "a second sentence naming no second field",
+     "value": "The round ends where it starts, at the water.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [defenseProfile.scores.economic]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Neither has the run of the place.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.safetyProfile.safetyLabel]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "It holds what has been seen and nothing of what has not.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.safetyProfile.safetyLabel]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure null (nothing organized recognized)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls ABSENT",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The last house is the edge of the place, and past it the country begins.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense ABSENT",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then TRADITION",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "UNWALLED-SMALL",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: No reserves, landlocked",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Nothing comes in by water and nothing is held over.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [config.tradeRouteAccess, economicState.compound.inst.hasGranary, economicState.compound.inst.hasPort]; none claimed)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "What comes up the road is what the town eats.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness WEAK",
+   "vid": 1,
+   "spine": "The arrangements Hochhausen has made against trouble are thin. Something is in place against most of what arrives and nothing is in place behind it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: neither walls nor force",
+   "vid": 3,
+   "spine": "No soldiers of the town's own are kept here, and nothing is built for them to stand behind.",
+   "faces": [
+    "A traveller says the road runs in past the last house and nobody stands on it to ask anybody's business.",
+    "The older heads here say the place keeps no line around itself and nobody asks it to.",
+    "The stallholders say the market is open on every side and that is what brings the buyers off the road.",
+    "A woman at the long table says the houses that would come out if anything happened can all be named, and the naming is as far as it goes.",
+    "One of the watch says the round is walked by people who keep a bench by day.",
+    "Those who sit to hear a matter hold that the place has no line of its own, and the boundaries before them run between one plot and the next.",
+    "The chapel's warden says the church door is the only one here barred at night, and it is barred against the weather.",
+    "A guild member says the trades have priced their goods to a place that stands open.",
+    "The hall has never had anybody come in asking for a wall, a clerk there says."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: no legal infrastructure",
+   "vid": 3,
+   "spine": "The town has no court and no place to hold a man.",
+   "faces": [
+    "A rider who stopped a night says a man wronged here takes it to the door of the house that did it and no further.",
+    "The potboy says a quarrel here is settled at the table or carried out of the door, and the house would rather it went out.",
+    "A woman old enough to remember the custom says a wrong here is put to the households, and the households are the whole of it.",
+    "The people who keep the register say a man with nowhere else to go sleeps in the church porch, and the church is no place to hold anyone.",
+    "At the gate they say a stranger is looked over on the way in, and nothing is kept of the looking.",
+    "The muster tells a stranger who complains that there is nowhere to lock up the man he names. There is nowhere for the stranger either.",
+    "The market clerk says a thief taken at a stall gives the goods back, and the stallholders count that the whole of the remedy."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: WEAK",
+   "vid": 2,
+   "spine": "What the town could put behind itself in a hard season is thin.",
+   "faces": [
+    "A carter says what is handed over here is goods and not coin, and no apology comes with the sack.",
+    "The households that keep the custom say an ask is made out loud and in front of the neighbours, and a refusal is heard by the same ears.",
+    "The drinkers at the alehouse say the loudest household at the table is the one that would be asked last.",
+    "A woman who sings in the choir says a household gives what it has toward a burying, and what it gives is remembered by the neighbours.",
+    "Those who hold the way through say the bar coming down is heard at the far doors. Not one of the doors opens.",
+    "The muster reckons what comes up from a door is a body or a tool, and the tool is remembered as well as the body.",
+    "The women who gut the catch say the place takes from whoever can be found, and a stall is the easiest thing here to find.",
+    "One of the watch says the same corners get stood in whether the purse is settled or not. The round ends where it starts, at the water.",
+    "Nobody here asks the soldiers their business, the soldiers say, and everybody here asks them for a hand."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 3,
+   "spine": "No store is kept against a bad year, and no house here takes the sick.",
+   "faces": [
+    "A pilgrim says a man who asks here for the store is shown a field.",
+    "A carter at the alehouse says a man who asks after a house for the sick is taken for sick himself and served standing at the door.",
+    "One of the elders says what a stranger calls a want here is only the way the place is arranged.",
+    "A local priest says the sick are nursed in their own beds, and the church takes the ones with nobody to nurse them.",
+    "A fish seller says a buyer can have grain here on a market day and nowhere to keep it after."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 2,
+   "spine": "What keeps the peace here and what breaks it are evenly matched. Neither has the run of the place.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "spine": "The safety reading here is a first look. It holds what has been seen and nothing of what has not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure null (nothing organized recognized)",
+   "vid": 3,
+   "spine": "A stranger asking here what is organised is answered by people who do not appear to know what is meant.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls ABSENT",
+   "vid": 3,
+   "spine": "The last house is the edge of the place, and past it the country begins.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "spine": "A charter hall at Hochhausen takes on the trouble that soldiers are the wrong answer to, and it is not short of work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense ABSENT",
+   "vid": 2,
+   "spine": "Neither charm nor ward is kept here against what cannot be seen.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "UNWALLED-SMALL",
+   "vid": 2,
+   "spine": "Nothing stands in for a wall at a place this size, and nobody here treats that as a want.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: No reserves, landlocked",
+   "vid": 2,
+   "spine": "What comes up the road is what the town eats. Nothing comes in by water and nothing is held over.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 0,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 13,
+   "openers": [
+    {
+     "opener": "a charter hall",
+     "n": 1
+    },
+    {
+     "opener": "a stranger asking",
+     "n": 1
+    },
+    {
+     "opener": "neither charm nor",
+     "n": 1
+    },
+    {
+     "opener": "no soldiers of",
+     "n": 1
+    },
+    {
+     "opener": "no store is",
+     "n": 1
+    },
+    {
+     "opener": "nothing stands in",
+     "n": 1
+    },
+    {
+     "opener": "the arrangements hochhausen",
+     "n": 1
+    },
+    {
+     "opener": "the last house",
+     "n": 1
+    },
+    {
+     "opener": "the safety reading",
+     "n": 1
+    },
+    {
+     "opener": "the town has",
+     "n": 1
+    },
+    {
+     "opener": "what comes up",
+     "n": 1
+    },
+    {
+     "opener": "what keeps the",
+     "n": 1
+    },
+    {
+     "opener": "what the town",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "capture none"
+ ],
+ "unknown": []
+}
