@@ -148,3 +148,14 @@ Contradiction LINES: Opus 2 (field 1 · page 1), Sonnet 8 (field 3 · page 3 · 
 **What remains is tier 0's craft column, all shipping as WITHHELD:** ORDER (39/35 units — the AI spine's move sequence outside the eight closed orders), Q (22/41 — the second sentence's field unlicensed, 70 % of fields unreadable → W3c), C3 (24/27), X, WALL-5. Tier-0 FAILs: Opus 10, Sonnet 14 (NON-MOVE FEELING, C3 capacity on a state-only field, REFERENT). Power's 76 % is the world-only omissions plus the card's blindness on that desk.
 **Two things the readers saw that are NOT the Scribe's:** (a) a copied corpus face ships raw (`{elders} {v:take} …`) — in the product the kernel's `fillSlots` renders or silences it; the HARNESS prints the raw row (a display item for `simulate.mjs`); (b) **a corpus face contradicts its own town**: DS-DEF-2 `Internal Security: full legal chain` face 5 "A soldier reckons a stranger stopped at the gate is the garrison's …" ships on a town with `forceBuckets.garrison = false` — a corpus finding for the banked lane's ledger (the face asserts a body the key does not guarantee; the same class the clarity audit hunted).
 **Model:** Opus 89 vs Sonnet 85, 2 vs 8 contradictions, 10 vs 14 FAILs. Opus stays the writer.
+
+## RUN 5 — after W3c: the card reads through the resolution (workflow `wf_00f13b26-496`, 19:3x–20:3x; 64 seats, 8.9 M tokens)
+Same grid and seats; dock `f350d7ed5`. Rows: `scribe-harness/out/sim/RUN-wf_00f13b26-496.json`.
+
+| | returned | tier 0 kept | tier 1 dropped | FINAL shipped | RUN 4 | RUN 3 | RUN 2 |
+|---|---|---|---|---|---|---|---|
+| Opus | 188 | 178 | 5 | **173 / 198 (87 %)** | 89 % | 84 % | 26 % |
+| Sonnet | 188 | 172 | 6 | **166 / 198 (84 %)** | 85 % | 78 % | 30 % |
+
+Contradiction LINES: Opus 6 (field 3 · page 3), Sonnet 6 (field 4 · page 2) — 12 in ~1,400; roster 0, model 0, record 0, forecast 0.
+**Reading:** flat against RUN 4 within the writer's own draw-to-draw variance (the craft withholds swing ±20 between runs of one prompt: Q on Opus 36 → 22 → 41 across RUNS 3–5). W3c's gain is in TRUTH, not the headline: the writer and the second reader now see values (`military: 73`) where the card printed UNREADABLE, the `STALLED` caveat that was reporting the card's blindness has cleared, and the FIELD test can convict on 68 resolved paths. **The Scribe without a key is at its natural ceiling: 84–89 % of pools ship as the Scribe's, ~0.5–0.7 % of lines contradict, and what remains is the corpus's own craft column shipping as WITHHELD (ORDER · Q · C3) and the world-only omissions.** The next moves are the owner's five acts (the key first — the live pilot measures tokens, cache reads, dollars and wall-clock, which no simulation can) and W4/W5.
