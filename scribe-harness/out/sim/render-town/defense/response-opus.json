@@ -1,0 +1,124 @@
+{
+  "units": [
+    {
+      "blockId": "DS-DEF-1",
+      "poolKey": "readiness ADEQUATE",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "The arrangements here cover what is asked of them and nothing beyond it. One more call on the purse and the town chooses which of them to leave short."
+    },
+    {
+      "blockId": "DS-DEF-2",
+      "poolKey": "Invasion & War: walls with NO force",
+      "stance": "spine",
+      "source": "court",
+      "pair": "",
+      "text": "A clerk of the court says the walls reach it only as a question of who owes the mending. Nothing brought there asks who would stand on them."
+    },
+    {
+      "blockId": "DS-DEF-2",
+      "poolKey": "Internal Security: full legal chain (court AND prison)",
+      "stance": "spine",
+      "source": "tavern",
+      "pair": "",
+      "text": "By the ostler's account a man taken up here waits in a cell of the town's own until the court makes room for him."
+    },
+    {
+      "blockId": "DS-DEF-2",
+      "poolKey": "Economic Survival: STRONG",
+      "stance": "spine",
+      "source": "guild",
+      "pair": "",
+      "text": "A master of one of the crafts reckons the town could pay its way through a long bad season, and that the money for it would come out of the trades."
+    },
+    {
+      "blockId": "DS-DEF-2",
+      "poolKey": "Disasters & Famine: granary AND parish care only",
+      "stance": "spine",
+      "source": "tavern",
+      "pair": "",
+      "text": "An innkeeper says the town has grain put by for a bad year and a priest for a broken leg. A guest who needs more than a priest is a guest the inn cannot keep."
+    },
+    {
+      "blockId": "DS-DEF-3",
+      "poolKey": "Moderate",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "The watch keeps to the main ways, and what happens in the quiet corners after dark happens. Every household here can name the corners."
+    },
+    {
+      "blockId": "DS-DEF-3",
+      "poolKey": "First-Survey qualification (the reading is a first look)",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "The safety of this place is what a town shows on a first acquaintance. A season here would give a different reckoning."
+    },
+    {
+      "blockId": "DS-DEF-4",
+      "poolKey": "structure organized",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "There is little street trouble here and the watch is not what keeps it down. Something with rules of its own decides what crime this town has, and open disorder is not on the list."
+    },
+    {
+      "blockId": "DS-DEF-4",
+      "poolKey": "capture none",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "Whatever is being run in this town is being run outside the hall. A matter taken to the hall is settled by the hall, and by nobody standing behind the hall."
+    },
+    {
+      "blockId": "DS-DEF-5",
+      "poolKey": "walls PRESENT",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "Spitzplatz keeps its walls, and the ways in are the few the walls leave. Anything that comes here comes through a gate."
+    },
+    {
+      "blockId": "DS-DEF-5",
+      "poolKey": "watch PRESENT",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "People walk the streets here at night and none of them is a soldier. The town watch is the whole of what the town keeps under its own hand."
+    },
+    {
+      "blockId": "DS-DEF-5",
+      "poolKey": "charter hall PRESENT (specialist monster response)",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "A hall in the town takes contracts for the trouble the watch is the wrong instrument for. It is not short of work."
+    },
+    {
+      "blockId": "DS-DEF-5",
+      "poolKey": "arcane defense PRESENT",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "Not everything the town keeps for its defence stands on the wall. Wards are kept at the alchemist's shop, and with them the means of noticing what a watchman would walk past."
+    },
+    {
+      "blockId": "DS-DEF-11",
+      "poolKey": "WALLED-STRAINED",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "The town walls are kept sound out of a purse that comes up short. What the purse cannot cover is carried by the people who do the work."
+    },
+    {
+      "blockId": "DS-DEF-6",
+      "poolKey": "Logistics & Supply: Granary with road supply",
+      "stance": "spine",
+      "source": "",
+      "pair": "",
+      "text": "What this town does not grow comes up the road, and there is no port to bring it in by. The granary is what stands in for the road when the road is shut."
+    }
+  ]
+}
