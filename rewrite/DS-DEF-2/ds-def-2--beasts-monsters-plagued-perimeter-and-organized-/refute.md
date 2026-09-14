@@ -163,11 +163,11 @@ QUOTE: "the round is walked the same way whatever the country is doing"
 THE FIELD THAT DENIES IT: `config.stressTypes`, same read set, via `generateSafetyProfile`:
 
 - `src/generators/safetyProfile.js:152` (`insurgency`): "**Patrol patterns have changed.**"
-- `src/generators/safetyProfile.js:160` (`slave_revolt`): "**Normal patrol patterns have been
+- `src/generators/safetyProfile.js:161` (`slave_revolt`): "**Normal patrol patterns have been
   abandoned.**"
 - `src/generators/safetyProfile.js:197` (`monster_pressure`): "…has **changed** how the
   settlement operates after dark."
-- `src/generators/safetyProfile.js:212` (`mass_migration`): "**The watch is overwhelmed** by
+- `src/generators/safetyProfile.js:213` (`mass_migration`): "**The watch is overwhelmed** by
   unfamiliar faces."
 
 WHICH IS THE RECORD: the machine sentences. The aggravator is the face's own "**whatever** the
@@ -180,6 +180,30 @@ CURE: keep the demarcation stake, drop the invariance and the perfect —
 "One of the watch says the walk above the gate belongs to whoever stands it, and the round goes
 under it."
 (positive landing, present tense, no universal; and it takes the watch off v3 f7's ground.)
+
+## MEASUREMENT RECEIPTS (re-run this sitting, against the CURRENT rows, not trusted from the prior pass)
+
+Slice: `RECEIPT_POOLS_DOSSIER_STATE.md`, `### DS-DEF-2` → the bold pool line → next bold line.
+**35 renderings (3 spines + 32 faces) — CONFIRMED.** Every quote below was re-read off that slice.
+
+- **Negated landings: 20 of 32 faces = 62%** (attribution tail skipped when it is the last
+  clause; bar at a third = 10). CONFIRMED mechanically; it matches the prior sitting's hand
+  count exactly. The crude split that does NOT skip the attribution tail returns 17 of 32
+  (53%) — either rule clears the bar by a wide margin, so the collapse does not turn on the
+  counting convention.
+- **`the line`: 13 of 35 renderings** (the prior sitting recorded 14; corrected here).
+- **Distinct face speakers: 12** — court · elders · garrison · gate · guild · hall · market ·
+  muster · register · stranger · tavern · watch. Far above the fewer-than-three DULL trigger.
+- **Duplicate three-word openers, per variant: v1 none · v2 none · v3 `one of the` (f5, f7).**
+  CONFIRMED — the only opener collision in the pool, and it is inside one variant.
+- **Seating, re-read at `faceSources.js:135-140`:** `if (forces.militia.present) out.add('muster')`
+  / `forces.watch.present` → `watch` / `forces.garrison.present` → `garrison`. The projector
+  filters the draw, so no body word in this pool rides an unseated tier. CONFIRMED.
+- **W-1 regex, re-read at `moveGrammar.js:225`:** the PROVENANCE alternation literally contains
+  `the elders (?:say|hold|remember|keep)`. CONFIRMED at the source, not inferred.
+- **The two FAIL deniers, re-read:** `safetyProfile.js:193` is its own `hasStress('monster_pressure')`
+  block (distinct from the `wartime` block at `:164`), and `:197-198` carry the sentence. `:105`
+  sits under `hasStress('occupied')` at `:99`. Both citations hold.
 
 ## CRAFT — POOL GRAIN: **DULL**
 
@@ -204,7 +228,7 @@ not done in the hall" · f9 "nobody there says what it would find out" · f10 "a
 it"). The bar for this pool is about 11. Roughly nine faces must be turned to say what IS done
 while keeping the landing noun. The two FAIL cures above already turn two of them.
 
-**COMPOUNDING IT — "the line" is the pool's only noun.** It carries the wall in 14 of the 35
+**COMPOUNDING IT — "the line" is the pool's only noun.** It carries the wall in 13 of the 35
 renderings and is the LANDING noun of v1 f7 and v1 f8, two siblings in one variant, which the
 mechanical rule ("a different subject, order and landing noun") refuses on its own. The word is
 correctly chosen — it is the one wall-word true at all five tiers, with no material and no

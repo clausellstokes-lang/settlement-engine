@@ -344,3 +344,58 @@ W-DEF2-C · THE FROZEN/LIVE SEAM AT THE RUIN-ONLY CITY, SATISFIED. The key reads
   keeps a ruined `Garrison` and `City walls and gates` (§1.4 W-11; card §7). Spine 1 is written
   on the correct side of it — the absence of a KEPT wall and a STANDING force, never of a history
   or a fabric. Recorded as tested and clear so a later seat does not re-open it.
+
+────────────────────────────────────────────────────────────────────────────────────────
+SECOND SEAT — VERIFICATION PASS (Opus 5 refuter, same seat, later sitting)
+────────────────────────────────────────────────────────────────────────────────────────
+The packet above was found complete on entry and was CONTINUED, not re-run from nothing
+(the checkpoint law). Every load-bearing claim in it was re-executed against the dock rather
+than trusted. Nothing above is amended; nothing new is charged. What was executed:
+
+· THE ROWS. The 25 rows tested are the rows in draft.md (3 spines + 22 faces), and the chair's
+  own mechanical check already established draft.md IDENTICAL to the pool's rows in
+  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md at 507ff2637. Every quote charged above was
+  re-matched to its row in draft.md verbatim.
+· THE FLOOR-3 FIELD, RE-EXECUTED. `src/data/cultureProfiles.js:364-366` is the mesoamerican
+  `exchangePattern`, reading "Porters, canoe traffic where possible, and managed causeways move
+  staple and prestige goods"; `:368-369` is `foodways` ("...locally available fish or game").
+  `src/pdf/sections/IdentityDailyLife.jsx:280-281` prints both as the `Exchange` and `Foodways`
+  rows of the dossier. `grep -c` over the module returns ELEVEN shipped profiles (the twelfth
+  `exchangePattern` hit is the blend constructor at :603, not a profile). The instrument's own
+  row confirms the ground: CONTRADICTION-TABLE.md:277 F3-05 scopes to ALL blocks and is named
+  there "the finding most likely to recur in every block". The four non-PASS verdicts stand
+  exactly as written.
+· THE PREIMAGE AND THE SPEAKER FLOOR, RE-EXECUTED. card.md §7's derived required-row table
+  seats at thorp/hamlet ONLY burial ground · dwellings · water · external mill · subsistence
+  farming · parish-church ACCESS · common grazing — no hall, no watch, no market, no guild, no
+  tavern, no court, and no RESIDENT priest (the register seats at village, where
+  `Priest (resident)` first appears). Craft finding (4) is therefore confirmed at its sharpest
+  reading: at half the birth tiers this pool renders TWO speakers, the elders and the stranger.
+· THE CRAFT COUNTS, RE-COUNTED BY HAND, ROW BY ROW. The negation landings are THIRTEEN of
+  twenty-two (v1 f1, f2, f4, f5 · v2 f1, f2, f3, f4, f7 · v3 f1, f5, f6, f7), against the
+  brief's measured ceiling of one third (7). The attribution-first openers are TWENTY-ONE of
+  twenty-two, the sole exception v2 f5. "At the tavern a carter" opens all THREE tavern faces.
+  Every figure the DULL verdict rests on is confirmed.
+· THE MECHANICAL VOICE RULES, SCANNED OVER THE ROWS. Zero em dashes, zero exclamation marks,
+  zero digits in prose (the only digits in the file are `pair 5` / `pair 6` inside the tag
+  brackets, which are metadata and not rendered prose), zero contractions (the two apostrophes
+  are possessives), `{settlement}` in exactly ONE unit and in no `[face]` sub-row (ruling 12),
+  NO named record anywhere (no toll book, no muster roll, no parish register, no "the books",
+  no "from the road" — the citation rule and the PROVENANCE detector both clear), and NO
+  survey self-reference of any shape ("the survey", "this office", "the record has", "set down
+  here", "entered as" all return empty) — ruling 40 and the E2 ratchet clear.
+· THE SITTING'S NAMED FAILURE MODE, RE-TESTED FACE BY FACE. Every face that lands on a
+  body-shaped absence was re-read against the required `Town watch` and `Town hall` at town:
+  v1 f1 (the closest call, and it holds on the chair's general form — its own first clause
+  seats and pays the watch), v3 f5 (which refuses the WORD for two named arrangements and is
+  MORE true at town, not less), v3 f7, v3 f6, v2 f1, v1 f4, v1 f5, v2 f7. None asserts that no
+  body exists. FLOOR 1 BY INFERENCE IS NOT PRESENT IN THIS POOL.
+· SPINE 1 AT THE RUIN-ONLY CITY, RE-TESTED. "keeps no wall" and "no soldier of its own stands"
+  are both written on the STANDING/KEPT side of the frozen-live seam, which is what card §7
+  instructs in terms. Clear.
+
+VERDICT OF THIS SEAT: the packet above is adopted whole. SIX non-PASS of 25 rows — FOUR FAIL
+(v1 f3, v1 f6, v2 f4, v3 f4) and TWO WITHHELD (v3 f0, v3 f5), every one of them on ONE field,
+the culture profile, and every one curable by removing ONE WORD from the face without touching
+a single claim it makes. Nineteen rows PASS. The pool is LAWFUL in its substance and DULL at
+the pool grain. The craft collapse is the finding a cure cannot spend a word on: the closers.

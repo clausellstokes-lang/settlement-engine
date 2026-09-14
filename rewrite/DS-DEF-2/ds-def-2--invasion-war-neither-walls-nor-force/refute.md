@@ -74,10 +74,14 @@ not a second witness. Both are craft findings at the pool, not floors.
 Read as twelve renderings together, this pool is one sentence: **[a source] says [a thing], and
 [a thing that is not there].** Three independent measures, counted on the landed 29 units:
 
-1. **20 of 29 units (69 %) land the final clause on a negation.** The chair's standing rule from
-   batch 4 is NOT MORE THAN A THIRD, and the pool that caused the rule was 16 of 27 (59 %). This
-   pool is worse than the pool the rule was written against. **Variant 2 is 8 of 9.** The chair's
-   own cure is unapplied: say what IS done and keep the landing noun.
+1. **22 of 29 units (76 %) land the final clause on a negation** — RE-COUNTED MECHANICALLY at the
+   dock this sitting (final clause = the text after the last comma; negation set *no · not · never ·
+   nothing · nobody · none · nor · neither · without · ever*), and the count is WORSE than this
+   packet's first pass recorded (20/29, 69 %). The chair's standing rule from batch 4 is NOT MORE
+   THAN A THIRD, and the pool that caused the rule was 16 of 27 (59 %). This pool is worse than the
+   pool the rule was written against. **Variant 2 is 9 of 9 — every unit in the variant, spine
+   included.** (First pass recorded 8 of 9; the ninth is the spine itself.) The chair's own cure is
+   unapplied: say what IS done and keep the landing noun.
 2. **18 of 29 units are one compound sentence joined by `, and`** (the selector counted this
    itself and shipped it). That is 62 % of the pool on a single syntactic frame.
 3. **26 of 29 units carry `say`/`says` as the attribution verb; variant 1 is nine of nine in a
@@ -85,14 +89,26 @@ Read as twelve renderings together, this pool is one sentence: **[a source] says
    breaches it nine times running and records the breach as a defect of the candidate field. It
    is a defect of the pool as landed either way.
 
-The vocabulary shows it: 241 distinct words over 748 — `wall` 8 · `ask`/`asked` 13 · `never` 6 ·
-`nobody` 5 · `nothing` 5 · `household(s)` 11. The pool has stake (pair 1) and it has a physical
+The vocabulary shows it: **225 distinct words over 693** on the landed rows with the stance and
+source tags stripped (the first pass's 241/748 counted the tags in) — `wall` 8 · `ask`/`asked` 13 ·
+`never` 6 · `nobody` 5 · `nothing` 5 · `household(s)` 11. The pool has stake (pair 1) and it has a physical
 particular (the thing leaning behind the door) and two genuinely fine faces (v2f2 the tavern's
 reason that is never the same twice; v3f5 the round walked by people with a trade). It is NOT
 duller than the shipped rows it replaces — the shipped spine paraphrased the machine sentence
 printing beside it, and this one does not. But a pool whose renderings collapse onto one
 construction and one landing is what the DULL verdict is for, and this one does, on three
 measures at once.
+
+**THE RULING-35 NEAR-MISS, AND WHY IT IS NOT A FLOOR.** `v1f8` — *"A clerk in the hall says the
+town pays what it can for the safety of the place"* — would sit unchanged on all three sibling
+rungs, and I name them as ruling 35 requires: `walls with NO force` (a hall paying for a wall it
+cannot man), `force with NO walls`, `militia only`. Section 2d calls that a floor-1 finding. I
+REFUSE the charge and record the reasoning, because the chair will meet it again: ruling 35 reaches
+a face that READS AS a neighbouring rung — one a reader would take as asserting walls or a force —
+and this face asserts neither. It asserts that the town pays for safety, which on this key is TRUE
+(the military line pays the part-time watch, `defenseGenerator.js:189-191`). The sitting's own
+struck list bars the other reading by name: *a face need not restate its key at all*. An empty face
+is DULL, not false. It is charged here, at the pool, and it is the weakest unit in the block.
 
 Two smaller craft notes. **The spine echo:** spine 1 opens "The households do what defending is
 done here" and v1f3 opens "The older households say" — the spine co-renders with every face of
@@ -101,6 +117,46 @@ within variant 2, face 1 ("One of the watch says") and face 7 ("One of the older
 open on the same three words, which the mechanical rule bars between siblings. Spine 1's "nothing
 raised around it" and spine 2's "with nothing raised around them" also repeat verbatim across
 two of the three spines, which the three-shapes ruling does not reach but a reader does.
+
+## THE VERIFICATION PASS (this sitting) — what was re-derived from the instruments, not carried
+
+The verdict table above was written against `draft.md`; the rows LANDED at the dock are that draft
+verbatim (29 units, extracted and compared at `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2973`).
+Every load-bearing charge was re-checked against the card and the code rather than trusted:
+
+- **v1f9 (`Gate duty`)** — CONFIRMED at `card.md:44`: `Town watch` required at town, own services
+  `Night patrol` (p 1.0) **and `Gate duty` (p 0.8)**, filed under `standing`; §2b's ⛔ overrides the
+  ambiguity by its own terms ("whatever the face is otherwise about"). F1-08's both-directions bar
+  reinforces it: "nothing besides" denies a gate duty, and gates are OPEN at every preimage tier.
+- **v1f4 (`safetyLabel`)** — CONFIRMED: `threatAssessment.js:140` prints "Internal security: ${sl}"
+  UNCONDITIONALLY beside the prose, and `:142` fires "Active violence and organized crime make
+  internal order the primary threat" whenever the label carries `Dangerous`. `safetyLabel` is in the
+  defense tab's own SAME-PAGE READ SET (`card.md:129`) and no key function fixes it.
+- **v3f3 (`stress`)** — CONFIRMED: `safetyProfile.js:105` (`occupied`) prints curfew and checkpoint
+  protocols; `stress` is a same-page read (`card.md:140`, DS-DEF-8) and FROZEN, and none of the five
+  key functions reads `config.stressTypes`.
+- **v2f7 (the founding claim)** — CONFIRMED against §V.1 **V-12**, which KEEPS this shape by name and
+  by example: *"they settled the bend for the ford" beside "Origin: …"* is floor 1 at
+  `HistoryTab.jsx:272-275`. The face is that example with the ford changed to a water source.
+- **v1f3 (the decision venue)** — CONFIRMED: `Town hall` required at town with `Permit applications`
+  p 1.0 and `Tax payment` p 0.9 (`card.md:17`, `:43`); §7 prints every governance row as
+  `required: false` inside `exclusiveGroup: 'government'`, `Town council` 0.9 at town. It is §V.2's
+  closing sentence run backwards — *do not infer a body into a key's silence that a required row
+  denies* — with the inference running at the venue rather than the body.
+- **v2f8 (the spade) — RE-EXAMINED AND THE WITHHOLDING STANDS, narrowly.** `getTerrainType`
+  (`terrainHelpers.js:22-33`) admits `mountain` and the Overview strip prints it (`OverviewTab.jsx`,
+  the `ra.terrain` chip), and §V.1 **V-08** keeps the terrain contradiction as F1-102 — so the field
+  IS nameable and this is one hearing from a FAIL. It is withheld only because a `Burial ground` /
+  `Graveyard` is `required: true` at every tier of the preimage, so the engine digs on the mountain
+  draws too, and the face's second clause forces the reading onto the earthwork that was never
+  raised (the key's own read). **The chair should treat this as the sixth charge if it wants the
+  pool airtight.**
+
+Mechanical sweep of the landed rows, all clean: em dashes **0** · exclamation marks **0** · digits in
+prose **0** (the nine hits are row numbers and `pair N` tags) · `{settlement}` **1**, in spine 1 only
+(ruling 12 clean) · named records **0** (the citation budget is unspent, as §8 requires) ·
+self-citations **0** (no "the survey", "this office", "entered as") · F3-05 furniture **0** ·
+contractions **0** · barred bodies (garrison · militia · muster · perimeter) **0**.
 
 ## WIRING — no face may be charged on these
 
