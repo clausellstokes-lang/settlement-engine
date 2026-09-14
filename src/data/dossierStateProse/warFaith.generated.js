@@ -4614,7 +4614,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "STANDING: cult": [
         {
           "angle": "ledger",
-          "text": "{creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.",
+          "text": "{creed} is kept here by a few households and no more. It is a following rather than a congregation, and one the town's other rites do not take seriously.",
           "slots": [
             "creed"
           ],
@@ -4652,7 +4652,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons.",
+          "text": "It is one of the town's faiths rather than one of its curiosities. That is a distinction of {timeband_span}, not of seasons.",
           "slots": [
             "timeband_span"
           ],
@@ -4677,7 +4677,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "This faith has grown into a contender. Nothing about its position is settled, which is the point.",
+          "text": "This faith has grown into a contender. Nothing about its position is settled.",
           "slots": [],
           "vid": 3
         }
@@ -4685,7 +4685,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "NICHE: slots saturated at tier capacity": [
         {
           "angle": "counterforce",
-          "text": "The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.",
+          "text": "The town sustains as many faiths as it can. A new creed arriving here does not join the field. It displaces something.",
           "slots": [],
           "vid": 1
         },
@@ -4729,7 +4729,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "NICHE: the patron's niche carries a contestant": [
         {
           "angle": "counterforce",
-          "text": "Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence; it is a schism with a calendar.",
+          "text": "Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence. It is a schism with a calendar.",
           "slots": [],
           "vid": 1
         },
@@ -4745,7 +4745,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The contest here is not between different faiths but between near-identical ones, which is why it is bitter.",
+          "text": "The contest here is not between different faiths but between near-identical ones. That is why it is bitter.",
           "slots": [],
           "vid": 3
         }
@@ -4767,7 +4767,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.",
+          "text": "The religious field here is orderly. Every rite answers something the others do not. That is why they all survive.",
           "slots": [],
           "vid": 3
         }
@@ -4806,7 +4806,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.",
+          "text": "{creed} holds the seat by right as much as by numbers, and the right is a real one that scandal reaches.",
           "slots": [
             "creed"
           ],
@@ -4822,13 +4822,13 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "LEGITIMACY: tenuous": [
         {
           "angle": "counterforce",
-          "text": "The patron's right to the seat is thin. It holds the benches and it does not hold the argument, and the town has begun to notice the difference.",
+          "text": "The patron's right to the seat is thin. It holds the benches and it does not hold the argument. The town has begun to notice the difference.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "threshold",
-          "text": "{creed}'s claim here is weak enough to be contested by anyone with a better one, and better claims are not scarce.",
+          "text": "{creed}'s claim here is weak enough to be contested by anyone with a better one. Better claims are not scarce.",
           "slots": [
             "creed"
           ],
@@ -4836,7 +4836,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Legitimacy is the patron's problem. It has the following; what it lacks is the sense of rightfulness that keeps a following in place.",
+          "text": "Legitimacy is the patron's problem. It has the following. What it lacks is the sense of rightfulness that keeps a following in place.",
           "slots": [],
           "vid": 3
         }
@@ -4844,7 +4844,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "LEGITIMACY: contested": [
         {
           "angle": "ledger",
-          "text": "The patron's claim is broadly rejected. It holds the seat on numbers alone, which is not how seats stay held.",
+          "text": "The patron's claim is broadly rejected. It holds the seat on numbers alone. That is not how seats stay held.",
           "slots": [],
           "vid": 1
         },
@@ -4874,7 +4874,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{creed} is no longer the patron of {settlement}; the benches emptied into another rite, and at some point the emptying became a transfer.",
+          "text": "{creed} is no longer the patron of {settlement}. The benches emptied into another rite, and at some point the emptying became a transfer.",
           "slots": [
             "creed",
             "settlement"
@@ -4919,7 +4919,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "{creed} holds the seat of {settlement} because it was installed in it. The congregation is genuine now; the origin is still on the record.",
+          "text": "{creed} holds the seat of {settlement} because it was installed in it. The congregation is genuine now. The origin is still on the record.",
           "slots": [
             "creed",
             "settlement"
@@ -4958,7 +4958,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PANTHEON RANK: Cult": [
         {
           "angle": "ledger",
-          "text": "The creed holds barely any settlement seats anywhere: a fringe following with one town's worth of conviction behind it.",
+          "text": "The creed holds barely any settlement seats anywhere. It is a fringe following with one town's worth of conviction behind it.",
           "slots": [],
           "vid": 1
         },
@@ -4980,13 +4980,13 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PANTHEON RANK: Minor": [
         {
           "angle": "ledger",
-          "text": "The faith holds a few seats across the realm: enough to be known on the road, not enough to be assumed.",
+          "text": "The faith holds a few seats across the realm. That is enough to be known on the road and not enough to be assumed.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "visitor",
-          "text": "{creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.",
+          "text": "{creed} is a regional creed. A traveller from the next province recognizes the name and not the calendar.",
           "slots": [
             "creed"
           ],
@@ -5002,7 +5002,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PANTHEON RANK: Major": [
         {
           "angle": "ledger",
-          "text": "This is one of the realm's first-rank faiths, kept as patron in enough settlements that its clergy speak to rulers rather than about them.",
+          "text": "This is one of the realm's first-rank faiths. It is kept as patron in enough settlements that its clergy speak to rulers rather than about them.",
           "slots": [],
           "vid": 1
         },
@@ -5016,7 +5016,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The faith is major. That is a count of seats rather than a claim about the god, and the count is what gives its clergy their standing.",
+          "text": "The faith is major. That is a count of seats rather than a claim about the god. The count is what gives its clergy their standing.",
           "slots": [],
           "vid": 3
         }
@@ -5024,7 +5024,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "TEMPLE WEALTH: rich": [
         {
           "angle": "ledger",
-          "text": "{institution} holds a considerable coffer: enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.",
+          "text": "{institution} holds a considerable coffer. It is enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.",
           "slots": [
             "institution"
           ],
@@ -5032,7 +5032,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments; the town is aware of the stonework.",
+          "text": "The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments. The town is aware of the stonework.",
           "slots": [],
           "vid": 2
         },
@@ -5056,7 +5056,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Its means are ordinary: neither a lender nor a supplicant, which suits everyone here.",
+          "text": "Its means are ordinary: neither a lender nor a supplicant. That suits everyone here.",
           "slots": [],
           "vid": 2
         },
@@ -5084,7 +5084,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The faith here has no reserve. A bad year would not close it; a second bad year is a real question.",
+          "text": "The faith here has no reserve. A bad year would not close it. A second bad year is a real question.",
           "slots": [],
           "vid": 3
         }
@@ -5125,7 +5125,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PILGRIM SEASON: heavy": [
         {
           "angle": "visitor",
-          "text": "The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year, and the town's whole trade bends toward them.",
+          "text": "The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year. The town's whole trade bends toward them.",
           "slots": [
             "settlement",
             "season"
@@ -5140,7 +5140,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The rite draws a crowd from well outside the district; for a stretch of the year {settlement} is a destination rather than a place.",
+          "text": "The rite draws a crowd from well outside the district. For a stretch of the year {settlement} is a destination rather than a place.",
           "slots": [
             "settlement"
           ],
@@ -5162,7 +5162,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.",
+          "text": "The pilgrim trade is at its low ebb. What remains is the local congregation. It is smaller than the town's provisioning suggests.",
           "slots": [],
           "vid": 3
         }
@@ -5176,7 +5176,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The season should be busy and it is not; the country between here and the faithful has stopped being safe to cross.",
+          "text": "The season should be busy and it is not. The country between here and the faithful has stopped being safe to cross.",
           "slots": [],
           "vid": 2
         },
@@ -5586,7 +5586,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "CONTESTED": [
         {
           "angle": "unfolding",
-          "text": "{institution} at {settlement} holds its ground but not unquestioned; another observance wants the same hours of the same people, and both keep count.",
+          "text": "{institution} at {settlement} holds its ground but not unquestioned. Another observance wants the same hours of the same people, and both keep count.",
           "slots": [
             "institution",
             "settlement"
@@ -5603,7 +5603,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "No open breach divides {settlement}'s faiths; the contest stays at the level of attendance, and attendance is watched like weather.",
+          "text": "No open breach divides {settlement}'s faiths. The contest stays at the level of attendance, and attendance is watched like weather.",
           "slots": [
             "settlement"
           ],
@@ -5623,7 +5623,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly.",
+          "text": "Faith in {settlement} is not a choice anyone remembers making. {institution} was here, is here, and the town arranges itself accordingly.",
           "slots": [
             "settlement",
             "institution"
@@ -5632,7 +5632,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is buried where.",
+          "text": "{institution}'s standing at {settlement} is old. It is entered everywhere: in the rolls, in the feast days, in who is buried where.",
           "slots": [
             "institution",
             "settlement"
@@ -5643,7 +5643,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "ENDOWED": [
         {
           "angle": "ledger",
-          "text": "{institution} at {settlement} is propertied, and property is patience: the observance can outlast bad seasons, thin years, and unfriendly officers.",
+          "text": "{institution} at {settlement} is propertied. The observance can outlast bad seasons, thin years, and unfriendly officers.",
           "slots": [
             "institution",
             "settlement"
@@ -5663,7 +5663,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "THIN": [
         {
           "angle": "ledger",
-          "text": "{creed} keeps a footing at {settlement} rather than a hold; the observance is present, and presence is the extent of it.",
+          "text": "{creed} keeps a footing at {settlement} rather than a hold. The observance is present, and it does no more than that.",
           "slots": [
             "creed",
             "settlement"

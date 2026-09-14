@@ -5310,22 +5310,22 @@ panel does not surface at all.
 **SLOTS.** `{settlement}` `{creed}` `{rival_creed}` `{institution}` `{season}` `{timeband_span}`
 
 **STANDING: `cult`**
-1. `[ledger]` {creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.
+1. `[ledger]` {creed} is kept here by a few households and no more. It is a following rather than a congregation, and one the town's other rites do not take seriously.
 2. `[visitor]` The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.
 3. `[threshold]` This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.
 
 **STANDING: `established`**
 1. `[ledger]` {creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.
 2. `[visitor]` The creed is established: a real congregation, a real house, and no serious claim on the patron's place.
-3. `[elder]` It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons. *— requires `tenure`*
+3. `[elder]` It is one of the town's faiths rather than one of its curiosities. That is a distinction of {timeband_span}, not of seasons. *— requires `tenure`*
 
 **STANDING: `ascendant`**
 1. `[unfolding]` {creed} has risen to the front rank of {settlement}'s faiths. Its share is large enough to make it patron-eligible, and everyone concerned has noticed.
 2. `[threshold]` The creed is ascendant here. It is not the patron, and the gap between what it holds and what the patron holds has become discussable.
-3. `[street]` This faith has grown into a contender. Nothing about its position is settled, which is the point.
+3. `[street]` This faith has grown into a contender. Nothing about its position is settled.
 
 **NICHE: slots saturated at tier capacity**
-1. `[counterforce]` The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.
+1. `[counterforce]` The town sustains as many faiths as it can. A new creed arriving here does not join the field. It displaces something.
 2. `[ledger]` {settlement}'s religious life is full. Every observance the population can carry is already carried.
 3. `[threshold]` There is no room. Any rite that takes hold here takes hold at another's expense, and the other knows it.
 
@@ -5335,14 +5335,14 @@ panel does not surface at all.
 3. `[threshold]` There is space in the calendar here. Whether anything fills it is a question of who comes down the road.
 
 **NICHE: the patron's niche carries a contestant** (THE SCHISM)
-1. `[counterforce]` Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence; it is a schism with a calendar.
+1. `[counterforce]` Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence. It is a schism with a calendar.
 2. `[threshold]` {creed} and {rival_creed} answer the same need in {settlement}, and a town rarely holds two answers to one need quietly.
-3. `[street]` The contest here is not between different faiths but between near-identical ones, which is why it is bitter.
+3. `[street]` The contest here is not between different faiths but between near-identical ones. That is why it is bitter.
 
 **NICHE: every niche uncontested** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.
 2. `[visitor]` The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.
-3. `[street]` The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.
+3. `[street]` The religious field here is orderly. Every rite answers something the others do not. That is why they all survive.
 
 **LEGITIMACY: `secure`**
 1. `[elder]` The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}. *— requires `tenure`*
@@ -5351,22 +5351,22 @@ panel does not surface at all.
 
 **LEGITIMACY: `established`**
 1. `[ledger]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.
-2. `[threshold]` {creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.
+2. `[threshold]` {creed} holds the seat by right as much as by numbers, and the right is a real one that scandal reaches.
 3. `[street]` The faith's standing is legitimate and ordinary. It is the arrangement people are used to.
 
 **LEGITIMACY: `tenuous`**
-1. `[counterforce]` The patron's right to the seat is thin. It holds the benches and it does not hold the argument, and the town has begun to notice the difference.
-2. `[threshold]` {creed}'s claim here is weak enough to be contested by anyone with a better one, and better claims are not scarce.
-3. `[ledger]` Legitimacy is the patron's problem. It has the following; what it lacks is the sense of rightfulness that keeps a following in place.
+1. `[counterforce]` The patron's right to the seat is thin. It holds the benches and it does not hold the argument. The town has begun to notice the difference.
+2. `[threshold]` {creed}'s claim here is weak enough to be contested by anyone with a better one. Better claims are not scarce.
+3. `[ledger]` Legitimacy is the patron's problem. It has the following. What it lacks is the sense of rightfulness that keeps a following in place.
 
 **LEGITIMACY: `contested`**
-1. `[ledger]` The patron's claim is broadly rejected. It holds the seat on numbers alone, which is not how seats stay held.
+1. `[ledger]` The patron's claim is broadly rejected. It holds the seat on numbers alone. That is not how seats stay held.
 2. `[street]` Nobody here believes {creed} has the right to the place it occupies. The observance continues and the deference has stopped.
 3. `[counterforce]` The faith is discredited. Its position is now purely a matter of arithmetic, and the arithmetic is against it.
 
 **FALL: `displaced`** (an organic share flip)
 1. `[unfolding]` The seat changed hands. {rival_creed} drew away enough of the town's adherence to take it, steadily and without any single decisive week.
-2. `[ledger]` {creed} is no longer the patron of {settlement}; the benches emptied into another rite, and at some point the emptying became a transfer.
+2. `[ledger]` {creed} is no longer the patron of {settlement}. The benches emptied into another rite, and at some point the emptying became a transfer.
 3. `[elder]` The old patron was outnumbered rather than defeated. The houses are the same houses, and the name over the calendar has changed.
 
 **FALL: `discredited`** (a legitimacy-floor contest loss)
@@ -5376,7 +5376,7 @@ panel does not surface at all.
 
 **FALL: `imposed`** (occupation, warbound, or a DM flip)
 1. `[ledger]` The patron here arrived with an authority rather than a following. The creed followed the garrison, and the calendar changed by order.
-2. `[elder]` {creed} holds the seat of {settlement} because it was installed in it. The congregation is genuine now; the origin is still on the record.
+2. `[elder]` {creed} holds the seat of {settlement} because it was installed in it. The congregation is genuine now. The origin is still on the record.
 3. `[street]` The rite was imposed. Everyone attends, and everyone remembers the season it started.
 
 **FALL: `suppressed`** (eviction to suppressed standing)
@@ -5385,34 +5385,34 @@ panel does not surface at all.
 3. `[threshold]` The seat was emptied deliberately. Nothing organic did this, and the town's silence about it is itself informative.
 
 **PANTHEON RANK: `Cult`** (fewer than a couple of settlement seats)
-1. `[ledger]` The creed holds barely any settlement seats anywhere: a fringe following with one town's worth of conviction behind it.
+1. `[ledger]` The creed holds barely any settlement seats anywhere. It is a fringe following with one town's worth of conviction behind it.
 2. `[visitor]` Beyond {settlement} this faith is scarcely kept. It is a local phenomenon that happens to have a name.
 3. `[street]` The rite has almost no reach. Its clergy travel little because there is nowhere to travel to.
 
 **PANTHEON RANK: `Minor`** (two or three seats)
-1. `[ledger]` The faith holds a few seats across the realm: enough to be known on the road, not enough to be assumed.
-2. `[visitor]` {creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.
+1. `[ledger]` The faith holds a few seats across the realm. That is enough to be known on the road and not enough to be assumed.
+2. `[visitor]` {creed} is a regional creed. A traveller from the next province recognizes the name and not the calendar.
 3. `[street]` It is a real faith with a real spread and no pretensions past its district.
 
 **PANTHEON RANK: `Major`** (four or more seats)
-1. `[ledger]` This is one of the realm's first-rank faiths, kept as patron in enough settlements that its clergy speak to rulers rather than about them.
+1. `[ledger]` This is one of the realm's first-rank faiths. It is kept as patron in enough settlements that its clergy speak to rulers rather than about them.
 2. `[threshold]` {creed}'s reach is realm-wide. What its councils say about the lawfulness of magic is heard where such things are decided.
-3. `[visitor]` The faith is major. That is a count of seats rather than a claim about the god, and the count is what gives its clergy their standing.
+3. `[visitor]` The faith is major. That is a count of seats rather than a claim about the god. The count is what gives its clergy their standing.
 
 **TEMPLE WEALTH: rich**
-1. `[ledger]` {institution} holds a considerable coffer: enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.
-2. `[visitor]` The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments; the town is aware of the stonework.
+1. `[ledger]` {institution} holds a considerable coffer. It is enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.
+2. `[visitor]` The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments. The town is aware of the stonework.
 3. `[street]` The faith's treasury is full. It is among the richest institutions in {settlement} and behaves like it.
 
 **TEMPLE WEALTH: modest**
 1. `[ledger]` {institution} is solvent and no more. Its coffer covers the rites, the roof, and a bad season, in that order of priority.
-2. `[visitor]` Its means are ordinary: neither a lender nor a supplicant, which suits everyone here.
+2. `[visitor]` Its means are ordinary: neither a lender nor a supplicant. That suits everyone here.
 3. `[elder]` The faith is comfortable rather than rich, and has been for long enough that nobody remembers it otherwise. *— requires `tenure`*
 
 **TEMPLE WEALTH: drawn down**
 1. `[ledger]` {institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.
 2. `[visitor]` It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not.
-3. `[threshold]` The faith here has no reserve. A bad year would not close it; a second bad year is a real question.
+3. `[threshold]` The faith here has no reserve. A bad year would not close it. A second bad year is a real question.
 
 **COVERT CONGREGATION: `deities[ref].covert` present**
 1. `[ledger · dm-only]` A congregation persists that the town's records do not show. It keeps {creed} without a building, at a size the suppression was meant to prevent.
@@ -5420,18 +5420,18 @@ panel does not surface at all.
 3. `[street · dm-only]` There is a hidden observance in {settlement}. Its shepherd holds an ordinary clerical post under another creed's roof.
 
 **PILGRIM SEASON: heavy**
-1. `[visitor]` The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year, and the town's whole trade bends toward them.
+1. `[visitor]` The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year. The town's whole trade bends toward them.
 2. `[ledger]` This is the season the faithful come. Beds are scarce, prices are seasonal, and the town's opinion of pilgrims is seasonal too.
-3. `[street]` The rite draws a crowd from well outside the district; for a stretch of the year {settlement} is a destination rather than a place.
+3. `[street]` The rite draws a crowd from well outside the district. For a stretch of the year {settlement} is a destination rather than a place.
 
 **PILGRIM SEASON: thin**
 1. `[visitor]` The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.
 2. `[ledger]` Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
-3. `[threshold]` The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
+3. `[threshold]` The pilgrim trade is at its low ebb. What remains is the local congregation. It is smaller than the town's provisioning suggests.
 
 **PILGRIM SEASON: suppressed by road danger** · a cause clause licensed by the route-risk record
 1. `[counterforce]` The pilgrims are not coming. The rite has not changed and the road has. What was a devotional journey is now a risk with a devotional excuse.
-2. `[ledger]` The season should be busy and it is not; the country between here and the faithful has stopped being safe to cross.
+2. `[ledger]` The season should be busy and it is not. The country between here and the faithful has stopped being safe to cross.
 3. `[street]` {settlement} is provisioned for a crowd the roads are keeping away.
 
 ---
@@ -6884,21 +6884,21 @@ no compass word, no real-world place, no named analogy.*
 **PROVENANCE:** The institutional-gravity mechanism, composition arm only: an observance holds ground in a town because standing, tenure and endowment hold it there, all three being typed facts the religion state carries. `R-DST-B`: `share`, `standing` and `legitimacy` are BANDS carrying no provenance and get plain description; `tenure` is the one field here that licenses a clause with a LENGTH in it, exactly as `DS-FTH-3` rules, and `ROOTED` is the only pool that takes that licence. **⚠ WF-8A ADJACENCY, RE-CHECKED AT THIS TIP AND MADE STRUCTURAL RATHER THAN BEHAVIOURAL.** `faithPanelModel` carries `patronFallSentence` over `FALL_SENTENCE`, four authored strings keyed to `PATRON_FALL_CAUSES` (`discredited` · `displaced` · `imposed` · `suppressed`), which `DS-FTH-1` surrounds as authored copy. Every one of those four narrates a SEAT CHANGE. This block narrates PERSISTENCE and never a fall: `CONTESTED` describes a contest that has NOT resolved, and its `[counterforce]` variant states outright that no breach divides the town; `THIN` describes a small holding rather than a lost one. The disjointness is made STRUCTURAL by a change to the receipt itself — `patronFalls[]`, which the compiled draft listed, is REMOVED from this block's receipt, because a receipt names what a block READS and no pool here may read it. `DS-FTH-1` owns the fall; this block owns what happens when nothing falls. **Non-redundancy (`R-DST-A`):** `DS-FTH-1` renders the panel and `DS-FTH-3` the state table beneath it; this block renders the WHY-FRAME of the observance's persistence and composes beside both, never over the same cell. **Audience:** `DS-FTH-2` owns the free-tier teaser and its rule that no creed is named there, so this block is keyed to the UNLOCKED panel only. **No precinct geometry, no processional route, no siting** — CT-1b holds those, and the OB-5 boundary above forbids them here in any case.
 
 **`CONTESTED`**
-1. `[unfolding]` {institution} at {settlement} holds its ground but not unquestioned; another observance wants the same hours of the same people, and both keep count.
+1. `[unfolding]` {institution} at {settlement} holds its ground but not unquestioned. Another observance wants the same hours of the same people, and both keep count.
 2. `[street]` {settlement} has more than one answer to the large questions now, and the answers are polite in public and precise in private.
-3. `[counterforce]` No open breach divides {settlement}'s faiths; the contest stays at the level of attendance, and attendance is watched like weather.
+3. `[counterforce]` No open breach divides {settlement}'s faiths. The contest stays at the level of attendance, and attendance is watched like weather.
 
 **`ROOTED`**
 1. `[elder]` {creed} has held {settlement} {timeband_age}, long enough that the town's calendar and the observance's calendar are the same document.
-2. `[street]` Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly.
-3. `[ledger]` {institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is buried where.
+2. `[street]` Faith in {settlement} is not a choice anyone remembers making. {institution} was here, is here, and the town arranges itself accordingly.
+3. `[ledger]` {institution}'s standing at {settlement} is old. It is entered everywhere: in the rolls, in the feast days, in who is buried where.
 
 **`ENDOWED`**
-1. `[ledger]` {institution} at {settlement} is propertied, and property is patience: the observance can outlast bad seasons, thin years, and unfriendly officers. *— requires `templeWealth`*
+1. `[ledger]` {institution} at {settlement} is propertied. The observance can outlast bad seasons, thin years, and unfriendly officers. *— requires `templeWealth`*
 2. `[visitor]` Whatever else changes in {settlement}, {institution}'s holdings do not look like they intend to. *— requires `templeWealth`*
 
 **`THIN`**
-1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold; the observance is present, and presence is the extent of it.
+1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold. The observance is present, and it does no more than that.
 2. `[street]` {institution} at {settlement} is one thread in the town's week, not the loom.
 
 ---
