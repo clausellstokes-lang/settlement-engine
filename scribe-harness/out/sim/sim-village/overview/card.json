@@ -352,8 +352,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "readings",
      "grain": "root",
+     "inputs": [],
+     "note": "the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -362,22 +366,30 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.isEntrepot",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.isEntrepot",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": false,
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "config.tradeRouteAccess",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "road",
      "writers": 0
     }
    ],
@@ -450,12 +462,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.inst",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicState.compound.inst",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{hasAlchemist, hasBank, hasBlackMarket, hasCathedral, hasCharterHall, hasChurch, hasCourtSystem, hasCriminalInst, hasFreeCompany, hasGangInfra, hasGarrison, hasGates, hasGranary, hasGuild, hasHospital, hasMagesGuild, hasMagicInst, hasMarket, hasMercenary, hasMerchantGuild, hasMilitaryInst, hasMilitia, hasMonastery, hasNavy, hasPort, hasPrison, hasSmuggling, hasThievesGuild, hasWalls, hasWarehouse, hasWatch, hasWizardTower, names}",
      "writers": 0
     }
    ],
@@ -526,8 +542,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "name",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -602,12 +622,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.viable",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "economicViability.viable",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": true,
      "writers": 0
     }
    ],
@@ -678,8 +702,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "name",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -754,8 +782,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "axis",
      "grain": "root",
+     "inputs": [],
+     "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -764,12 +796,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.scores",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "defenseProfile.scores",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{disaster: 69, economic: 32, internal: 26, magicDependency: false, magical: 0, military: 57, monster: 39, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -841,8 +877,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "axis",
      "grain": "root",
+     "inputs": [],
+     "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -851,12 +891,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.scores",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "defenseProfile.scores",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{disaster: 69, economic: 32, internal: 26, magicDependency: false, magical: 0, military: 57, monster: 39, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -928,8 +972,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "axis",
      "grain": "root",
+     "inputs": [],
+     "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -938,12 +986,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.scores",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "defenseProfile.scores",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{disaster: 69, economic: 32, internal: 26, magicDependency: false, magical: 0, military: 57, monster: 39, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1015,8 +1067,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "axis",
      "grain": "root",
+     "inputs": [],
+     "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -1025,12 +1081,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.scores",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "defenseProfile.scores",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{disaster: 69, economic: 32, internal: 26, magicDependency: false, magical: 0, military: 57, monster: 39, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1094,13 +1154,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
-   "caveats": [
-    {
-     "channel": "REPORT",
-     "key": "departure key with no reading under it",
-     "note": "this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
-    }
-   ],
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1108,8 +1162,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "axis",
      "grain": "root",
+     "inputs": [],
+     "note": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. THIS POOL'S OWN KEY NAMES THE AXIS, and every axis's score is in `readings.scores` above",
+     "readFrom": "",
      "state": "unreadable",
      "status": "LIVE",
      "unknown": true,
@@ -1118,12 +1176,16 @@
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.scores",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "defenseProfile.scores",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{disaster: 69, economic: 32, internal: 26, magicDependency: false, magical: 0, military: 57, monster: 39, traditions: {5 keys}}",
      "writers": 0
     }
    ],
@@ -1195,8 +1257,12 @@
    "fields": [
     {
      "clock": "PULSE",
+     "expression": "",
      "field": "name",
      "grain": "root",
+     "inputs": [],
+     "note": "",
+     "readFrom": "",
      "state": "decided",
      "status": "LIVE",
      "unknown": false,
@@ -1271,8 +1337,12 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "conflict.intensity",
      "grain": "field",
+     "inputs": [],
+     "note": "the loop variable over the conflict rows the desk is handed; the rows themselves are `conflicts`, and this reading is one row of that list",
+     "readFrom": "",
      "state": "unreadable",
      "status": "FROZEN",
      "unknown": true,
@@ -1420,12 +1490,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "config.tradeRouteAccess",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "road",
      "writers": 0
     }
    ],
@@ -1498,12 +1572,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.tier",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "tier",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "village",
      "writers": 0
     }
    ],
@@ -1574,12 +1652,16 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.prominentRelationship",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "prominentRelationship",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "{full: \"Ingrid Köhler shaped Ivo Werner's career in ways that Ivo Werner has not fully acknowledge (cut)\", npc1: \"Ingrid Köhler\", npc2: \"Ivo Werner\", phrasing: \"Ingrid Köhler and Ivo Werner are connected by something neither discusses openly: A third  (cut)\", tension: \"A third party has asked Ingrid Köhler, quietly, whether Ivo Werner can be trusted. The ans (cut)\", type: \"Mentor and Successor\"}",
      "writers": 0
     }
    ],
@@ -1650,22 +1732,30 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.relationships",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "relationships",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "[11 rows]",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.relationships.length",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "relationships.length",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": 11,
      "writers": 0
     }
    ],
@@ -1738,22 +1828,30 @@
    "fields": [
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.structuralSuggestions",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "structuralSuggestions",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": "[1 rows]",
      "writers": 0
     },
     {
      "clock": "SNAPSHOT",
+     "expression": "",
      "field": "readings.structuralSuggestions.length",
      "grain": "field",
-     "state": "unreadable",
+     "inputs": [],
+     "note": "",
+     "readFrom": "structuralSuggestions.length",
+     "state": "decided",
      "status": "FROZEN",
-     "unknown": true,
-     "value": null,
+     "unknown": false,
+     "value": 1,
      "writers": 0
     }
    ],
@@ -1814,7 +1912,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/6",
+ "schema": "scribe-town-card/7",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "overview",
