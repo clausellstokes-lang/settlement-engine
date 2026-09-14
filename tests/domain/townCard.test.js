@@ -25,8 +25,8 @@ import {
   generateSettlementPipeline, regenNPCsPipeline, regenHistoryPipeline,
 } from '../../src/generators/generateSettlementPipeline.js';
 import {
-  townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, WORLD_ONLY_READINGS,
-  UNNAMEABLE_BODIES, DEPARTURE_KEY_WORDS, RECORDED_UPHEAVAL,
+  townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, readPathOf,
+  WORLD_ONLY_READINGS, UNNAMEABLE_BODIES, DEPARTURE_KEY_WORDS, RECORDED_UPHEAVAL,
 } from '../../src/domain/prose/townCard.js';
 import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
 import {
@@ -299,12 +299,18 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
 
   it('⭐ classifies a reading with no value, and NEVER calls an unreadable one undecided', () => {
     // ⛔⛔ THE FINDING THIS ARM STANDS OVER. RUN 2's second reader named "an ABSENCE asserted on a
-    // NULL read" as the writer's commonest invention. Counted here over the pinned town's thirteen
-    // tabs: 34 field rows carry a value, 42 do not, and NOT ONE of the 42 is a settlement path
-    // that resolves to nothing. They are expressions `valueAt` refuses by construction, and desk-
-    // local names the census recorded verbatim (`readings.scores`, `axis`, `conflict.intensity`),
-    // which no settlement has a key for. So "the engine has not decided this" would be FALSE on
-    // every one of them, and the card must not say it.
+    // NULL read" as the writer's commonest invention. Counted over the pinned town's thirteen tabs
+    // BEFORE W3c: 34 field rows carried a value, 42 did not, and NOT ONE of the 42 was a settlement
+    // path that resolves to nothing. They were expressions `valueAt` refuses by construction, and
+    // desk-local names the census recorded verbatim (`readings.scores`, `axis`,
+    // `conflict.intensity`), which no settlement has a key for. So "the engine has not decided
+    // this" would have been FALSE on every one of them, and the card must not say it.
+    //
+    // ⭐⭐ AFTER W3c CAR 2 the card reads each name THROUGH the static card's `resolution` column,
+    // so `readings.scores` is read at `defenseProfile.scores`: 57 rows carry a value, 11 are
+    // `derived` (the engine computes the reading; the card prints the expression and its inputs'
+    // values), and 8 remain `unreadable` — `axis` five times, the bag root `readings` twice and
+    // `conflict.intensity` once, which are the eight names the resolver reports it cannot bind.
     const s = townOf(PINNED, 'render-town');
     const seen = {};
     for (const tab of SCRIBE_TABS) {
@@ -314,50 +320,82 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
           expect(field.unknown, `${tab} :: ${field.field}`).toBe(field.state !== 'decided');
           if (field.state === 'decided') expect(field.value).not.toBe(null);
           else expect(field.value).toBe(null);
+          // ⛔ EVERY ROW SAYS WHERE IT CAME FROM OR WHY IT COULD NOT. A `decided` row read through
+          // the column names the path; a `derived` row names the expression; an `unreadable` row
+          // carries the resolver's reason. None of the three is a bare silence.
+          if (field.state === 'derived') expect(field.expression, field.field).not.toBe('');
+          if (field.state === 'unreadable') expect(field.note.length, field.field).toBeGreaterThan(20);
+          if (field.readFrom !== '') expect(field.readFrom, field.field).not.toBe(field.field);
         }
       }
     }
-    expect(seen).toEqual({ decided: 34, unreadable: 42 });
+    expect(seen).toEqual({ decided: 57, derived: 11, unreadable: 8 });
 
-    // DRIVEN BY HAND, because the pinned town reaches only two of the three answers and a branch
+    // ⭐ THE JOIN, ON ONE NAMED ROW: the overview's score pool reads the desk-local `readings.scores`
+    // and the card now prints the engine's own score record from `defenseProfile.scores`.
+    const scores = cardOf(s, 'overview').pools
+      .flatMap((p) => p.fields).find((f) => f.field === 'readings.scores');
+    expect(scores.readFrom).toBe('defenseProfile.scores');
+    expect(scores.state).toBe('decided');
+    expect(String(scores.value)).toContain('economic');
+
+    // DRIVEN BY HAND, because the pinned town reaches only three of the four answers and a branch
     // no arm reaches is a branch nothing stands over.
     const town = { name: 'Ashford', powerStructure: { recentConflict: null } };
     expect(fieldState(town, 'name', 'Ashford')).toBe('decided');
     // A REAL SETTLEMENT PATH WHOSE LEAF IS ABSENT: the engine has not decided it.
     expect(fieldState(town, 'powerStructure.recentConflict', null)).toBe('not-decided');
     expect(fieldState(town, 'powerStructure.nothingHere', null)).toBe('not-decided');
-    // NEGATIVE CONTROLS — an expression and a root no settlement carries are UNREADABLE, never
-    // undecided, because nothing about the engine follows from a card that cannot read.
+    // A DERIVED RESOLUTION is neither: the engine decides it and computes it, and the card says so.
+    expect(fieldState(town, 'readings.exportPosture.status', null, { kind: 'derived' })).toBe('derived');
+    // NEGATIVE CONTROLS — with NO resolution the card behaves exactly as it did before W3c, so an
+    // expression and a root no settlement carries are UNREADABLE, never undecided.
     expect(fieldState(town, 'magicWorksAt({ settlement })', null)).toBe('unreadable');
     expect(fieldState(town, 'readings.scores', null)).toBe('unreadable');
     expect(fieldState(town, 'axis', null)).toBe('unreadable');
     expect(fieldState(town, '', null)).toBe('unreadable');
+    // … and `readPathOf` is the seam that makes an older static card lawful rather than blank.
+    expect(readPathOf('readings.scores', null)).toBe('readings.scores');
+    expect(readPathOf('readings.scores', { kind: 'path', path: 'defenseProfile.scores' }))
+      .toBe('defenseProfile.scores');
+    expect(readPathOf('readings.scores', { kind: 'derived', expr: 'f(x)' })).toBe('readings.scores');
   }, 300_000);
 
   it('⭐⭐ THE POOL KEY IS THE DECIDED FACT: only a world-only pool on a headless town is refused', () => {
     // ⛔⛔ THE LIMB CAR 6 STRUCK, AND WHY. Car 2 also answered false where NO FIELD CARRIED A
-    // VALUE. Its own measurement settled against it: 42 of 42 valueless rows on this town are
-    // `unreadable` and NOT ONE is a true null, so that limb was measuring THIS CARD'S BLINDNESS
+    // VALUE. Its own measurement settled against it: 42 of 42 valueless rows on this town were
+    // `unreadable` and NOT ONE was a true null, so that limb was measuring THIS CARD'S BLINDNESS
     // (desk-local spellings the census recorded verbatim) and not the engine's silence. It turned
     // off nine of ten power pools and fourteen of seventeen overview pools whose keys the engine
     // had decided in terms: `scores.military: STRONG` was omitted for want of a value while its
-    // own key said STRONG. A pool key that fired IS a decided fact, and the card's blindness is
-    // the census's spelling, which is W3c's to cure and not this gate's.
+    // own key said STRONG. A pool key that fired IS a decided fact, and the card's blindness was
+    // the census's spelling, which W3c cured.
+    //
+    // ⭐ AND THE CURE IS MEASURED HERE: of the 47 pools on this town that carry field rows at all,
+    // 39 now hold at least one DECIDED value, 6 hold none (every row `derived` or `unreadable`) and
+    // exactly ONE reads nothing but unreadable names. The strike still stands — a pool with no
+    // value is still writeable on its key — but it is no longer carrying nine tenths of the corpus.
     const s = townOf(PINNED, 'render-town');
     const unwriteable = {};
     const total = {};
     const named = [];
+    let allUnknownAndWriteable = 0;
     let allUnreadableAndWriteable = 0;
+    let withADecidedField = 0;
+    let withFields = 0;
     for (const tab of SCRIBE_TABS) {
       const card = cardOf(s, tab);
       total[tab] = card.pools.length;
       unwriteable[tab] = card.pools.filter((p) => p.writeable === false).length;
       for (const pool of card.pools) {
         if (pool.writeable === false) named.push(`${tab} :: ${pool.blockId} :: ${pool.poolKey}`);
-        // ⭐ THE CONTROL THE STRIKE EXISTS FOR: a pool whose every reading this card cannot
-        // resolve stays WRITEABLE, because its key is the decided fact.
-        if (pool.writeable === true && pool.fields.length > 0
-          && pool.fields.every((f) => f.state === 'unreadable')) allUnreadableAndWriteable += 1;
+        if (pool.fields.length === 0) continue;
+        withFields += 1;
+        if (pool.fields.some((f) => f.state === 'decided')) withADecidedField += 1;
+        // ⭐ THE CONTROL THE STRIKE EXISTS FOR: a pool none of whose readings this card can put a
+        // value to stays WRITEABLE, because its key is the decided fact.
+        if (pool.writeable === true && pool.fields.every((f) => f.unknown === true)) allUnknownAndWriteable += 1;
+        if (pool.writeable === true && pool.fields.every((f) => f.state === 'unreadable')) allUnreadableAndWriteable += 1;
       }
     }
     expect(total).toEqual({
@@ -374,8 +412,13 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
       'faith :: DS-FTH-2 :: PRIVATE DOSSIER',
       'power :: DS-POW-7 :: layer DORMANT (no ledger materialized)',
     ]);
-    expect(allUnreadableAndWriteable, 'the control is vacuous: no pool reads only unreadable fields')
-      .toBe(24);
+    // ⭐ THE W3c MEASUREMENT, PINNED so a recipe change that loses a reading reds here too.
+    expect({ withFields, withADecidedField, allUnknownAndWriteable, allUnreadableAndWriteable })
+      .toEqual({
+        withFields: 47, withADecidedField: 39, allUnknownAndWriteable: 6, allUnreadableAndWriteable: 1,
+      });
+    expect(allUnknownAndWriteable, 'the control is vacuous: no pool reads only unknown fields')
+      .toBeGreaterThan(0);
   }, 300_000);
 
   it('the world-only table is NARROW, and catches the pool the chair named', () => {
@@ -667,14 +710,34 @@ describe('townCard — the card\'s own defects, pinned as REPORTS (W3d car 4)', 
     expect(rows.every((r) => r.channel === 'REPORT')).toBe(true);
     const tally = {};
     for (const r of rows) tally[r.key] = (tally[r.key] || 0) + 1;
+    // ⭐⭐ W3c CAR 2 MOVED THIS TALLY, AND THE MOVE IS THE CURE WORKING. The departure caveat fires
+    // where "not one of the readings behind this key has a value on this card", and the resolution
+    // column gave eight of those seventeen cells a value: 17 -> 9. The cell the chair NAMED —
+    // `render-town/economics :: STALLED`, whose five readings were `readings`,
+    // `readings.activeChains`, `readings.exploitation`, `readings.isEntrepot` and
+    // `readings.primaryImports` — now reads four of the five off the blob and is no longer
+    // caveated. That caveat was therefore reporting the CARD'S BLINDNESS on that cell and not the
+    // corpus's; what is left is the residue, and the two other caveats are untouched.
     expect(tally).toEqual({
       'a flag count of zero on a town with a recorded upheaval': 2,
-      'departure key with no reading under it': 17,
+      'departure key with no reading under it': 9,
       'structure null beside a dangerous page': 1,
     });
     const at = (key) => rows.filter((r) => r.key === key).map((r) => `${r.seed}/${r.tab} :: ${r.poolKey}`).sort();
-    // (i) THE `STALLED trade` CASE THE CHAIR NAMED, by name and on its own cell.
-    expect(at('departure key with no reading under it')).toContain('render-town/economics :: STALLED');
+    // (i) THE DEPARTURE CAVEAT, on the nine cells whose readings STILL resolve to nothing.
+    expect(at('departure key with no reading under it')).toEqual([
+      'render-town/power :: layer DORMANT (no ledger materialized)',
+      'sim-city/power :: layer DORMANT (no ledger materialized)',
+      'sim-city/services :: ONE EXPECTED CATEGORY MISSING',
+      'sim-hamlet/defense :: arcane defense ABSENT',
+      'sim-hamlet/overview :: DIRECTION: worsening',
+      'sim-hamlet/overview :: SEVERITY: critical',
+      'sim-hamlet/power :: layer DORMANT (no ledger materialized)',
+      'sim-village/defense :: arcane defense ABSENT',
+      'sim-village/power :: layer DORMANT (no ledger materialized)',
+    ]);
+    // … and the chair's own `STALLED` cell is NOT among them any more, which is the W3c receipt.
+    expect(at('departure key with no reading under it')).not.toContain('render-town/economics :: STALLED');
     // (ii) `structure null` BESIDE A PAGE THAT READS DANGEROUS, on the one town of four where the
     // page actually says it.
     expect(at('structure null beside a dangerous page'))
@@ -1083,6 +1146,23 @@ describe('townCard — the golden', () => {
    *   another with no field between them, and the writer has to pick; a caveat tells it not to pick.
    *   NOTHING ELSE MOVED: the only new bytes on any tab are `pools[].caveats` and the schema string,
    *   and the derivation is re-run by the arms above rather than frozen here.
+   *
+   * 2026-09-14 — RE-RECORDED (W3c car 2), card schema /6 → /7. CAUSE: `pools[].fields[]` now reads
+   *   THROUGH the static card's new `resolution` column. The census spells a desk's read with the
+   *   DESK'S OWN LOCAL NAME (`readings.scores`, `axis`, `conflict.intensity`) and no settlement has
+   *   a `readings` key, so 42 of 42 valueless field rows on the pinned town read `unreadable` while
+   *   the engine had decided plenty; the resolution says `readings.scores` denotes
+   *   `defenseProfile.scores` and the value is read there. Measured on the pinned town over
+   *   thirteen tabs: `decided` 34 → 57, `unreadable` 42 → 8, with 11 rows newly `derived`.
+   *   THE KEYS THAT MOVED, and only these: FOUR ADDED — `fields[].readFrom` (the settlement path
+   *   the value came from, empty where the name is its own path), `fields[].expression` and
+   *   `fields[].inputs` (a derived reading's expression and the values of its named settlement
+   *   inputs), `fields[].note` (an unreadable reading's reason, so the writer is told a closed
+   *   vocabulary word is one rather than reading a silence). FOUR MOVED — `fields[].value`,
+   *   `fields[].state` and `fields[].unknown` on every row the resolution reaches, the `schema`
+   *   string, and `pools[].caveats` on the four `scores.*: CRITICAL` pools of the overview tab,
+   *   whose `readings.scores` reading now has a value so the departure caveat correctly stops
+   *   firing. NO KEY WAS REMOVED and no other value on any tab changed.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

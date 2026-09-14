@@ -140,8 +140,18 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * found in the CARD rather than in the writer, each a REPORT and never a refusal, so the writer
  * writes the pool key without asserting the reading the page denies. See `caveatsOf`. The golden
  * was re-recorded for this cause and no other.
+ *
+ * /7 (W3c car 2, 2026-09-14): `pools[].fields[]` now reads THROUGH the static card's `resolution`
+ * column and gains `readFrom`, `expression`, `inputs` and `note`; `state` gains `derived`. RUN 4
+ * measured that seventy per cent of the corpus's field rows printed UNREADABLE because the census
+ * spells a read with the DESK'S LOCAL NAME (`readings.scores`) and no settlement has that key. The
+ * resolution says the name denotes `defenseProfile.scores`, and the value is read there. See
+ * `fieldState`, `readPathOf` and `derivedInputs`. The golden was re-recorded for this cause and no
+ * other: the moved bytes are those four keys, the `value`/`state`/`unknown` of every row the
+ * resolution reaches, the `caveats` of the pools whose readings stopped being valueless, and the
+ * schema string.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/6';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/7';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -351,45 +361,75 @@ export function fieldValue(value) {
  * ⛔⛔ MEASURED, AND IT IS A FINDING ABOUT THE CARD RATHER THAN ABOUT THE ENGINE. RUN 2's second
  * reader named "an ABSENCE asserted on a NULL read" as the writer's commonest invention, citing
  * `prosperityRank = null` and a pool whose every read printed null. So the readings were counted.
- * Over the pinned town's THIRTEEN TABS, 34 field rows carry a value and 42 print `null` — and NOT
- * ONE of the 42 is a settlement path that resolves to nothing. Eight are EXPRESSIONS `valueAt`
- * refuses by construction (`magicWorksAt({ settlement })`, `prosperityRank(...)`,
- * `standingDefenseForces(settlement)`); the other 34 are not settlement paths at all — they are
+ * Over the pinned town's THIRTEEN TABS, 34 field rows carried a value and 42 printed `null` — and
+ * NOT ONE of the 42 was a settlement path that resolves to nothing. Eight were EXPRESSIONS
+ * `valueAt` refuses by construction (`magicWorksAt({ settlement })`, `prosperityRank(...)`,
+ * `standingDefenseForces(settlement)`); the other 34 were not settlement paths at all — they were
  * the DESK'S OWN LOCAL NAMES as the census recorded them (`readings.scores`, `axis`,
  * `conflict.intensity`, `link.npcConnections`, `!hasPatron`), and a settlement has no `readings`
- * key to walk into. Over the whole static table: 125 field paths, 23 expressions and 65 whose root
- * is not a settlement key, so 88 of 125 can NEVER resolve here.
+ * key to walk into. Over the whole static table: 125 field names of which 88 could NEVER resolve.
  *
- * ⛔ THAT MAKES THE OBVIOUS WORDING A FALSE FACT ON THE CARD. `overview :: scores.military:
- * STRONG` prints `readings.scores = null` beside a pool key that says STRONG in terms: the engine
- * decided it and the CARD cannot read it. Telling a model "the engine has not decided this" there
- * would hand it a falsehood, which is the one thing this whole boundary exists to prevent (see the
- * header on `recoverFills` answering null rather than guessing). So the card names the two cases
- * apart and asserts only what it knows:
+ * ⛔ THAT MADE THE OBVIOUS WORDING A FALSE FACT ON THE CARD. `overview :: scores.military: STRONG`
+ * printed `readings.scores = null` beside a pool key that says STRONG in terms: the engine decided
+ * it and the CARD could not read it. Telling a model "the engine has not decided this" there would
+ * hand it a falsehood, which is the one thing this whole boundary exists to prevent (see the header
+ * on `recoverFills` answering null rather than guessing). So the card names the cases apart and
+ * asserts only what it knows:
  *   `decided`     — a value, printed.
+ *   `derived`     — the engine COMPUTES this reading rather than storing it. The card cannot
+ *                   evaluate an expression, so it prints the expression and the VALUES OF ITS
+ *                   NAMED INPUTS, which are facts the engine did decide.
  *   `not-decided` — a real settlement path whose leaf is absent here. The engine has not decided it.
- *   `unreadable`  — an expression, or a path whose ROOT is not a key of a settlement. The card
- *                   cannot resolve this reading; nothing follows about the engine.
- * Both of the last two set `unknown: true`, because from the WRITER's seat they are one fact: you
- * have not been told a value, so you may assert nothing that depends on one.
+ *   `unreadable`  — the resolution could not follow the name, WITH the reason on the row.
+ * The last three set `unknown: true`, because from the WRITER's seat they are one fact: you have
+ * not been told this reading's value, so you may assert nothing that depends on one.
  *
- * REPORTED, NOT FIXED HERE: normalising the census's 65 desk-local field spellings to settlement
- * paths would give the model real values on about half the corpus's pools, and it is a census
- * change (`scripts/scribe-static-card.mjs` and the wiring census's `reads` column) rather than a
- * card change. It is the single largest lever left on the Scribe's coverage.
+ * ⭐⭐ W3c CURED THE CAUSE. The static card now carries a RESOLUTION column
+ * (`scripts/lib/scribe-read-resolution.mjs`): per desk-local name, the settlement path it is read
+ * from, taken out of the desk-read recipe that binds it. `poolRow` reads the value THROUGH that
+ * column, so `readings.scores` is read at `defenseProfile.scores` and the row carries `readFrom`
+ * naming where it came from. A card built with no resolution column behaves exactly as it did
+ * before — the name is its own path — so an older static card is lawful and not a half-answer.
  *
- * @param {object} s the settlement @param {string} field the static table's field path
+ * @param {object} s the settlement @param {string} field the path the card actually read
  * @param {string|number|boolean|null} value the card's own `fieldValue` reading
- * @returns {'decided'|'not-decided'|'unreadable'}
+ * @param {{kind?: string}|null} [resolution] the static card's resolution row for this name
+ * @returns {'decided'|'derived'|'not-decided'|'unreadable'}
  */
-export function fieldState(s, field, value) {
+export function fieldState(s, field, value, resolution = null) {
   if (value !== null) return 'decided';
+  if (resolution && resolution.kind === 'derived') return 'derived';
   const path = String(field ?? '');
   // `valueAt` refuses a path carrying a call or an index by construction; so does this.
   if (path === '' || /[[(]/.test(path)) return 'unreadable';
   const root = path.split('.')[0];
   if (!s || typeof s !== 'object') return 'unreadable';
   return Object.prototype.hasOwnProperty.call(s, root) ? 'not-decided' : 'unreadable';
+}
+
+/**
+ * ⭐ THE PATH THE CARD ACTUALLY READS FOR ONE STATIC-TABLE NAME. The resolution's where it has
+ * one, the name itself where it has not — so a card built without the column reads exactly what
+ * it read before W3c rather than reading nothing.
+ * @param {string} field @param {{kind?: string, path?: string}|null} resolution
+ * @returns {string}
+ */
+export function readPathOf(field, resolution) {
+  return resolution && resolution.kind === 'path' && resolution.path
+    ? String(resolution.path) : String(field ?? '');
+}
+
+/**
+ * The named inputs of a DERIVED reading, with each input's value on this town. The reading itself
+ * is a function the card may not call — it is a domain leaf handed plain data, not an evaluator —
+ * but its inputs are settlement paths, and a writer told the inputs has been told what the engine
+ * decided even where the reading is computed from them.
+ * @param {object} s @param {{inputs?: ReadonlyArray<string>}|null} resolution
+ * @returns {Array<{field: string, value: string|number|boolean|null}>}
+ */
+function derivedInputs(s, resolution) {
+  return (Array.isArray(resolution?.inputs) ? resolution.inputs : [])
+    .map((input) => rec([['field', String(input)], ['value', fieldValue(valueAt(s, String(input)))]]));
 }
 
 /**
@@ -487,13 +527,18 @@ export const RECORDED_UPHEAVAL = /\b(?:occupation|occupations|occupied|conquest|
  * KEY, and assert nothing behind it. A refusal here would punish the writer for the card's fault,
  * which is ruling 26's defect class a third time.
  *
- *   (i)   A DEPARTURE KEY WITH NOTHING UNDER IT. `DS-GEN-18 :: STALLED` fires on the pinned town's
- *         economics tab and every one of its five readings (`readings`, `readings.activeChains`,
- *         `readings.exploitation`, `readings.isEntrepot`, `readings.primaryImports`) is UNREADABLE
- *         BY THIS CARD. The key says a chain has stalled; nothing on the card says which, or since
- *         when, or what it carried. The reader's own note: it "puts an economic stall onto the
- *         Garrison ... what no question on the checklist tests is whether a military institution is
- *         a legitimate SUBJECT for a chain-stall key at all".
+ *   (i)   A DEPARTURE KEY WITH NOTHING UNDER IT. The key names a departure and not one of the
+ *         readings behind it has a value on this card; the key says a chain has stalled, or a
+ *         layer is dormant, and nothing on the card says which, or since when, or what it carried.
+ *         ⭐⭐ W3c CAR 2 MOVED THIS ROW AND THE MOVE IS RECORDED RATHER THAN QUIET. The cell the
+ *         chair named — `DS-GEN-18 :: STALLED` on the pinned town's economics tab, whose five
+ *         readings `readings`, `readings.activeChains`, `readings.exploitation`,
+ *         `readings.isEntrepot` and `readings.primaryImports` were all UNREADABLE — now reads four
+ *         of the five off the blob through the static card's resolution column, so the caveat no
+ *         longer fires there. Over the four-town grid the row falls from 17 cells to 9. It was
+ *         reporting THIS CARD'S BLINDNESS on those eight and the engine's silence on the rest; the
+ *         nine that remain (a dormant power layer, a missing service category, an absent arcane
+ *         defence, a worsening or critical condition) are the real ones.
  *   (ii)  `structure null` BESIDE A DANGEROUS PAGE. `DS-DEF-4 :: structure null (nothing organized
  *         recognized)` fires on the hamlet, whose own `Internal Security.assess` machine line reads
  *         "Internal security: Dangerous ... Active violence and organized crime make internal order
@@ -818,13 +863,27 @@ function poolRow(s, line, ctx) {
   const fields = staticRow
     ? (staticRow.fields || []).map((field) => {
       const meta = ctx.staticCard?.fields?.[field] || null;
-      const value = fieldValue(valueAt(s, field));
-      const state = fieldState(s, field, value);
+      // ⭐ (W3c) THROUGH THE RESOLUTION. The census's spelling is the desk's local name; the
+      // resolution says what it denotes on a settlement, and the value is read THERE.
+      const res = ctx.staticCard?.resolution?.[field] || null;
+      const path = readPathOf(field, res);
+      const value = fieldValue(valueAt(s, path));
+      const state = fieldState(s, path, value, res);
       return sorted([
         ['field', field],
         ['value', value],
         ['state', state],
         ['unknown', state !== 'decided'],
+        // WHERE THE VALUE CAME FROM, printed only where it is not the name itself — so a reader of
+        // the card can check the join, and the writer can name the field in its own word.
+        ['readFrom', path === field ? '' : path],
+        // A DERIVED reading carries the expression and its inputs' values instead of a value.
+        ['expression', state === 'derived' ? String(res?.expr ?? '') : ''],
+        ['inputs', state === 'derived' ? derivedInputs(s, res) : []],
+        // ⛔ AND AN UNREADABLE ONE CARRIES THE REASON. "the card cannot read this" and "this is one
+        // of five closed score-axis words, and the pool key names which" are different facts, and
+        // only the second lets a writer write. The reason is the resolver's own sentence.
+        ['note', state === 'unreadable' && res ? String(res.via ?? '') : ''],
         ['clock', meta?.clock ?? null],
         ['writers', meta?.writers ?? null],
         ['status', meta?.status ?? null],
