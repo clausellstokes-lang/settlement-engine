@@ -1,0 +1,148 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "spine": "A traveller finds the market without asking the way, because the busiest road through the village ends among the stalls.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Armed order here is paid work rather than a favour asked of neighbours.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "A household here can afford to argue about something other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "spine": "The village can get what it needs and move what it makes.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Lightly Defended",
+   "vid": 2,
+   "spine": "Hochhausen could hold what comes at it, though not for long.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "spine": "The village is a match for ordinary trouble and is not armed for any other kind.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: WEAK",
+   "vid": 2,
+   "spine": "Every house here answers for its own fences, since nothing larger is organised against what lives beyond the fields.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "spine": "More quarrels are opened here than are settled.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the village is spare, and the want of it is the first thing a carter notices.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "No practitioner is kept here, nor is anything in the village arranged around expecting one.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "spine": "Bread here comes off fields the village owns, so a bad season would cost it more than a closed road.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "spine": "The Commercial Circle and The Administrative Circle are at odds quietly enough that people passing through learn it late rather than on arrival.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "spine": "Goods come in and goods go out at a pace that draws no remark.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "spine": "A road runs through the village, so a good part of what the place lives on comes off the carts.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "spine": "Villages of this kind settle at one size, and this one has settled there.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie here carries more weight than the rest, and the difference shows in what the village leaves undone.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "People here are connected the way people in any settled place are, with nothing further to be made of it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "A careful eye finds one loose end in the village, and one office would be enough to tie it off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
