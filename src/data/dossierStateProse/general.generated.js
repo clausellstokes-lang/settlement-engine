@@ -38,7 +38,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: a few souls": [
         {
           "angle": "ledger",
-          "text": "A few souls left {settlement} in {season}, few enough that everyone can name them, which is its own kind of record.",
+          "text": "A few souls left {settlement} in {season}, few enough that everyone can name them. That is its own kind of record.",
           "slots": [
             "settlement",
             "season"
@@ -61,7 +61,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: a dozen or so": [
         {
           "angle": "street",
-          "text": "A dozen or so have gone. That is a street's worth in a place this size, and the street shows it.",
+          "text": "A dozen or so have gone. That is a street's worth in a place this size. The street shows it.",
           "slots": [],
           "vid": 1
         },
@@ -73,7 +73,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.",
+          "text": "About a dozen households' worth of people have moved on. The town has redistributed the work among the rest without much comment.",
           "slots": [],
           "vid": 3
         }
@@ -81,7 +81,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: dozens": [
         {
           "angle": "visitor",
-          "text": "Dozens have left {settlement}. The workshops run with gaps in them, and the gaps are not being filled.",
+          "text": "Dozens have left {settlement}. The workshops run with gaps in them. The gaps are not being filled.",
           "slots": [
             "settlement"
           ],
@@ -103,7 +103,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: a hundred or so": [
         {
           "angle": "visitor",
-          "text": "A hundred or so have gone from {settlement}, which is a visible subtraction. Whole quarters are quieter than they were.",
+          "text": "A hundred or so have gone from {settlement}. That is a visible subtraction. Whole quarters are quieter than they were.",
           "slots": [
             "settlement"
           ],
@@ -111,7 +111,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The loss is a hundred or so people, and it is the sort of loss a town argues about rather than absorbs.",
+          "text": "The loss is a hundred or so people. It is the sort of loss a town argues about rather than absorbs.",
           "slots": [],
           "vid": 2
         },
@@ -125,7 +125,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: several hundred": [
         {
           "angle": "ledger",
-          "text": "Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.",
+          "text": "Several hundred have left {settlement}. The town is measurably smaller. Its institutions have not shrunk to match.",
           "slots": [
             "settlement"
           ],
@@ -147,7 +147,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: many hundreds": [
         {
           "angle": "elder",
-          "text": "Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.",
+          "text": "Many hundreds have gone. {settlement} is a substantially different settlement than it was. It has not finished discovering how.",
           "slots": [
             "settlement"
           ],
@@ -161,7 +161,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.",
+          "text": "Many hundreds have left. The emptying is legible from the road: whole terraces dark, whole workshops shut.",
           "slots": [],
           "vid": 3
         }
@@ -169,7 +169,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "QUANTITY: thousands": [
         {
           "angle": "visitor",
-          "text": "Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.",
+          "text": "Thousands have gone from {settlement}. This is not a decline. It is an evacuation on a slower schedule.",
           "slots": [
             "settlement"
           ],
@@ -191,7 +191,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "HERALD KIND: hungry_gap": [
         {
           "angle": "ledger",
-          "text": "The lean season has cost {settlement} people, not to the road but to the ground, and the burial rolls run longer than the harvest explains.",
+          "text": "The lean season has cost {settlement} people, not to the road but to the ground. The burial rolls run longer than the harvest explains.",
           "slots": [
             "settlement"
           ],
@@ -199,7 +199,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "More were buried here in {season} than born, and the shortfall in the fields is why the two counts went apart.",
+          "text": "More were buried here in {season} than born. The shortfall in the fields is why the two counts went apart.",
           "slots": [
             "season"
           ],
@@ -207,7 +207,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The gap between what the town grew and what it needed has been paid in the usual currency; the rolls carry it.",
+          "text": "The gap between what the town grew and what it needed has been paid in the usual currency. The rolls carry it.",
           "slots": [],
           "vid": 3
         }
@@ -215,7 +215,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "HERALD KIND: migration_flight": [
         {
           "angle": "unfolding",
-          "text": "Families are taking to the road. What they are leaving is not a rumour to them, and the columns out of {settlement} grow longer rather than shorter.",
+          "text": "Families are taking to the road. What they are leaving is not a rumour to them. The columns out of {settlement} grow longer rather than shorter.",
           "slots": [
             "settlement"
           ],
@@ -223,13 +223,13 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The departure is organized now: households moving together, with their tools, which is what distinguishes a migration from a flight.",
+          "text": "The departure is organized now: households moving together, with their tools. That is what distinguishes a migration from a flight.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
-          "text": "People are leaving {settlement} in numbers, and they are leaving for somewhere specific, which the town finds harder to bear than aimless departure.",
+          "text": "People are leaving {settlement} in numbers, and they are leaving for somewhere specific. The town finds that harder to bear than aimless departure.",
           "slots": [
             "settlement"
           ],
@@ -253,7 +253,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The rolls run in the town's favour. Nothing dramatic; simply more cradles than graves, season after season.",
+          "text": "The rolls run in the town's favour. Nothing dramatic. Simply more cradles than graves, season after season.",
           "slots": [],
           "vid": 3
         }
@@ -261,7 +261,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RECEIPT: births and deaths in balance": [
         {
           "angle": "ledger",
-          "text": "The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.",
+          "text": "The rolls balance. {settlement} replaces itself and does not exceed itself. That is what most settlements do most of the time.",
           "slots": [
             "settlement"
           ],
@@ -283,7 +283,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RECEIPT: deficit01 positive": [
         {
           "angle": "ledger",
-          "text": "More are buried here than born. The town is not emptying quickly, and it is not replacing itself either.",
+          "text": "More are buried here than born. The town is not emptying quickly. It is not replacing itself either.",
           "slots": [],
           "vid": 1
         },
@@ -297,7 +297,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The rolls are short. A settlement in this condition survives on arrivals, and the arrivals are a separate question.",
+          "text": "The rolls are short. A settlement in this condition survives on arrivals. The arrivals are a separate question.",
           "slots": [],
           "vid": 3
         }
@@ -305,13 +305,13 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "CANDIDATE KIND: growth": [
         {
           "angle": "visitor",
-          "text": "The town is taking people in faster than it loses them. The building is happening at the edges, which is where it always happens first.",
+          "text": "The town is taking people in faster than it loses them. The building is happening at the edges. That is where it always happens first.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is growing. The pressure shows as crowding rather than prosperity so far, which is normal at this stage.",
+          "text": "{settlement} is growing. The pressure shows as crowding rather than prosperity so far. That is normal at this stage.",
           "slots": [
             "settlement"
           ],
@@ -327,7 +327,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "CANDIDATE KIND: emigration": [
         {
           "angle": "unfolding",
-          "text": "The town is losing people to the road in organized numbers. This is departure rather than decline, and it has a destination.",
+          "text": "The town is losing people to the road in organized numbers. This is departure rather than decline. It has a destination.",
           "slots": [],
           "vid": 1
         },
@@ -341,7 +341,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The population is falling because people are going somewhere else, which is a different problem from people simply not being here.",
+          "text": "The population is falling because people are going somewhere else. That is a different problem from people simply not being here.",
           "slots": [],
           "vid": 3
         }
@@ -349,7 +349,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "CANDIDATE KIND: decline": [
         {
           "angle": "elder",
-          "text": "The town is shrinking without anyone particularly leaving. It is losing people the slow way, and nothing about it makes a scene.",
+          "text": "The town is shrinking without anyone particularly leaving. It is losing people the slow way. Nothing about it makes a scene.",
           "slots": [],
           "vid": 1
         },
@@ -374,7 +374,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What the neighbouring settlements believe about {settlement}'s numbers and what the rolls say have come apart; the belief is stale rather than false, and it is the belief being acted on.",
+          "text": "What the neighbouring settlements believe about {settlement}'s numbers and what the rolls say have come apart. The belief is stale rather than false. It is the belief being acted on.",
           "slots": [
             "settlement"
           ],
@@ -385,7 +385,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "{counterpart} still believes this town is emptying. It stopped some time ago, and nothing has travelled the road to say so.",
+          "text": "{counterpart} still believes this town is emptying. It stopped some time ago. Nothing has travelled the road to say so.",
           "slots": [
             "counterpart"
           ],
@@ -396,7 +396,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The realm's picture of {settlement}'s population is out of date in the town's favour, which is convenient for exactly as long as it lasts.",
+          "text": "The realm's picture of {settlement}'s population is out of date in the town's favour. That is convenient for exactly as long as it lasts.",
           "slots": [
             "settlement"
           ],
