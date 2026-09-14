@@ -1,3 +1,0 @@
-baseline=225 live=227 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=2
-  NEW   src/domain/prose/wiringCensus.js:1100 [floatInterpolation] (variants / total).toFixed(2)
-  NEW   src/domain/prose/wiringCensus.js:1100 [twoDecimalScore] (variants / total).toFixed(2)
