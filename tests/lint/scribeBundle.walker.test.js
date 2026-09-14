@@ -310,7 +310,12 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     expect(tier1Lines([copied], CARD).map((r) => r.n)).toEqual(tier1Lines([copied]).map((r) => r.n));
     expect(applyTier1([copied], faceSheet, CARD).kept.length, 'a yes on an exempt row is ignored').toBe(1);
     expect(mod.buildTier1Checklist([copied], CARD)).toBe(buildTier1Checklist([copied], CARD));
-    expect(buildTier1Checklist([copied], CARD)).not.toContain(pool.unit.faces[0]);
+    // ⛔ EXEMPT MEANS NOT ASKED, NOT ABSENT. Since W3d car 3 the pool's own hand-written line is
+    // printed with the facts as the grant the RECORD and ROSTER questions read, so the arm is that
+    // no NUMBERED line carries it.
+    const checklist = buildTier1Checklist([copied], CARD);
+    expect(new RegExp(`\\d+\\. \\(face 0\\) ${pool.unit.faces[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(checklist)).toBe(false);
+    expect(checklist).toContain(`      face 0: ${pool.unit.faces[0]}`);
 
     // THE TIER-0 JUDGE TAKES THE SAME FALLBACK AT THE SAME GRAIN, both sides of the seam.
     const emdash = { ...real, faces: real.faces.map((t, i) => (i === 0 ? 'A clerk says the purse is short — and getting shorter.' : t)) };
@@ -379,6 +384,51 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
       expect(machine, 'the page carries no machine line: the arm is vacuous').toBeGreaterThan(5);
       expect(composed, 'the page carries no composed row: the exclusion is vacuous').toBeGreaterThan(0);
     }
+  }, 120_000);
+
+  it('⭐⭐ THE RECORD AND ROSTER TESTS GRANT WHAT THE POOL\'S OWN CORPUS LINE NAMES (W3d car 3)', () => {
+    // ⛔ THE TWO REAL ROSTER REFUSALS OF RUN 3. Six of the run's eight roster contradictions were
+    // bodies the engine named; the other two were RECORDS — "the returns", "the books wait" —
+    // refused as records no body here keeps. The corpus's own DS-DEF-3 spine for that very pool
+    // reads "would show up in the returns within the season". The hand corpus is the floor and the
+    // line a refusal falls back TO, so refusing a line for naming what its own fallback names is a
+    // refusal that cannot be right whichever way it is answered.
+    const pinned = generateSettlementPipeline(
+      {
+        settType: 'town', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+      },
+      null,
+      { seed: 'render-town', customContent: {} },
+    );
+    const card = townCard(pinned, { tab: 'defense', audience: 'dm', staticCard: STATIC_CARD });
+    const pool = card.pools.find((p) => p.blockId === 'DS-DEF-3' && /returns/.test(p.unit.spine));
+    expect(pool, 'the pinned town fires no DS-DEF-3 pool whose spine names the returns').toBeTruthy();
+    expect(pool.unit.spine).toContain('would show up in the returns within the season');
+
+    const written = {
+      blockId: pool.blockId,
+      poolKey: pool.poolKey,
+      vid: pool.vid,
+      spine: 'The balance here sits where either side could take it, and the season\'s returns would show it.',
+      faces: pool.unit.faces.map((_, i) => `A clerk of the court says as much, line ${i}.`),
+      notebook: [],
+    };
+    const checklist = buildTier1Checklist([written], card);
+    // THE GRANT IS IN BOTH QUESTIONS THE TWO REFUSALS FELL UNDER.
+    expect(checklist).toContain('GRANTED, and not a yes: a record, an office or a body that the pool\'s OWN hand-written line names');
+    expect(checklist).toContain('or THE POOL\'S OWN HAND-WRITTEN LINE names it: any of the four is enough');
+    // AND THE LINE THE GRANT POINTS AT IS ACTUALLY PRINTED, beside this pool's own lines, labelled
+    // as the claim rather than as a line to judge.
+    expect(checklist).toContain('THE HAND-WRITTEN LINE THIS POOL SHIPS');
+    expect(checklist).toContain(`      spine: ${pool.unit.spine}`);
+    const at = checklist.indexOf(`POOL ${JSON.stringify(pool.poolKey)}`);
+    expect(at, 'the pool block is missing').toBeGreaterThan(-1);
+    expect(checklist.indexOf(`      spine: ${pool.unit.spine}`)).toBeGreaterThan(at);
+    expect(checklist.indexOf(`      spine: ${pool.unit.spine}`))
+      .toBeLessThan(checklist.indexOf(written.spine));
+    // ⛔ AND IT IS GROUND, NOT A QUESTION: no numbered line carries the hand-written spine.
+    expect(/\d+\. \(spine\) The balance at/.test(checklist)).toBe(false);
+    expect(checklist).toContain(`1. (spine) ${written.spine}`);
   }, 120_000);
 
   it('cardDelta agrees across the seam on a real pair of cards', async () => {

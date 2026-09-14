@@ -841,17 +841,23 @@ export const TIER1_QUESTIONS = Object.freeze([
   Object.freeze({
     key: 'roster',
     arm: 'T1-ROSTER',
-    ask: 'ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep? A name is SEATED if the town section seats the role, or `bodies` names the body, or the pool\'s own declared fills below print it: any of the three is enough, and a body the engine named is not an invention.',
+    ask: 'ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep? A name is SEATED if the town section seats the role, or `bodies` names the body, or the pool\'s own declared fills below print it, or THE POOL\'S OWN HAND-WRITTEN LINE names it: any of the four is enough, and a body the engine named is not an invention.',
   }),
   Object.freeze({
     key: 'model',
     arm: 'T1-MODEL',
     ask: 'MODEL: does it explain a state by a cause the engine\'s own model denies, such as a readiness band explained by how hard people work, or a stress explained by the weather?',
   }),
+  // ⭐ AND THE GRANT THE CORPUS LINE ITSELF MAKES (W3d car 3). RUN 3's two REAL roster refusals were
+  // "the returns" and "the books wait" read as records no body keeps — while the pool's OWN shipped
+  // spine says "would show up in the returns within the season". A record the hand corpus names on
+  // this very pool is a record this town keeps: the corpus programme's instruments already audited
+  // it, and refusing the Scribe for saying what the line it falls back to says is a refusal that
+  // cannot be right either way it is answered.
   Object.freeze({
     key: 'record',
     arm: 'T1-RECORD',
-    ask: 'RECORD: does it state an EVENT, a DATE or a NUMBER as record where the facts hold none? A founding, a battle, a year, a count, a rate or a price that the facts do not carry. This is the one floor with no exception.',
+    ask: 'RECORD: does it state an EVENT, a DATE or a NUMBER as record where the facts hold none? A founding, a battle, a year, a count, a rate or a price that the facts do not carry. This is the one floor with no exception. GRANTED, and not a yes: a record, an office or a body that the pool\'s OWN hand-written line names, printed with the facts below, because that line ships on this page and what it names this town has.',
   }),
   Object.freeze({
     key: 'forecast',
@@ -959,6 +965,36 @@ function fillsFor(card, unit) {
     .map((f) => `    {${String(f?.slot ?? '')}} is ${JSON.stringify(String(f?.value ?? ''))} on this town, and the page prints it`);
 }
 
+/**
+ * ⭐⭐ THE POOL'S OWN HAND-WRITTEN LINE, BESIDE THE FACTS (W3d car 3).
+ *
+ * ⛔ THE TWO REAL ROSTER REFUSALS RUN 3 FOUND. Six of the run's eight roster contradictions were
+ * bodies the engine named (car 2's cure); the other two were records — "the returns", "the books
+ * wait" — read as records no body here keeps. But the corpus's own DS-DEF-3 spine for that very
+ * pool reads "would show up in the returns within the season". The hand corpus is the FLOOR (design
+ * §9) and the line a refusal falls back TO: refusing the Scribe for naming what its own fallback
+ * names is a refusal that cannot be right in either direction, because the refused line and the
+ * line that replaces it both name the record.
+ *
+ * ⛔ IT IS LABELLED AS A FACT AND NOT AS A LINE TO JUDGE, and it is NOT numbered. A row byte-equal
+ * to the corpus is still exempt from the reader's list; what changes here is that the corpus line
+ * is now PRINTED as ground, in the same words the writer's own turn prints it in.
+ */
+function corpusFor(card, unit) {
+  const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
+  const spine = String(pool?.unit?.spine ?? '');
+  const faces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
+  if (!pool || (spine === '' && faces.length === 0)) return [];
+  const rows = [
+    '    THE HAND-WRITTEN LINE THIS POOL SHIPS. It is not a line to judge: it is the claim, it ships',
+    '    on this page if the lines below are refused, and a record, an office or a body IT names is',
+    '    granted to them.',
+  ];
+  if (spine !== '') rows.push(`      spine: ${spine}`);
+  faces.forEach((face, i) => rows.push(`      face ${i}: ${String(face ?? '')}`));
+  return rows;
+}
+
 function fieldsFor(card, unit) {
   const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
   return (Array.isArray(pool?.fields) ? pool.fields : [])
@@ -1053,6 +1089,8 @@ export function buildTier1Checklist(units, card) {
       else lines.push('    (this pool declares no typed field)');
       // ⭐ AND THE NAMES THE WRITER WAS HANDED FOR THIS POOL (W3d car 2). See `fillsFor`.
       for (const fill of fillsFor(card, unit)) lines.push(fill);
+      // ⭐ AND THE LINE THIS POOL SHIPS IF THESE ARE REFUSED (W3d car 3). See `corpusFor`.
+      for (const row of corpusFor(card, unit)) lines.push(row);
     }
     lines.push(`${row.n}. (${row.row}) ${row.text}`);
   }

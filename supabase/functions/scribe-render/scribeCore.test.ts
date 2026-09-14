@@ -494,8 +494,12 @@ Deno.test('⭐⭐ A ROW BYTE-EQUAL TO THE CORPUS IS NOT SENT TO THE SECOND READE
   // close up behind it or every answer after it would map to the wrong line.
   const copied = unit({ spine: 'The corpus spine stands.', faces: ['a', 'face one'] });
   const text = buildTier1Checklist([copied], card);
-  assert(!text.includes('The corpus spine stands.'), 'the corpus spine is exempt');
+  // ⛔ THE ASSERTION IS THAT IT IS NOT A NUMBERED LINE, not that the words are absent. Since W3d
+  // car 3 the pool's own hand-written line is PRINTED with the facts, as ground and as the grant
+  // the RECORD and ROSTER questions read; what is exempt is being ASKED about it.
+  assert(!/\d+\. \(spine\) The corpus spine stands\./.test(text), 'the corpus spine is not asked');
   assert(!text.includes('(face 1) face one'), 'the corpus face is exempt');
+  assert(text.includes('      spine: The corpus spine stands.'), 'but it is printed as the claim');
   assert(text.includes('2. (face 0) a'), 'the model\'s own row is asked, under its own number');
   // AND A `yes` ON AN EXEMPT NUMBER IS IGNORED, because nobody was asked it.
   const no = { fieldDenied: 'no', page: 'no', roster: 'no', model: 'no', record: 'no', forecast: 'no' };
