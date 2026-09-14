@@ -46,6 +46,10 @@ export const buildScribeUserTurn = kernel.buildScribeUserTurn;
 export const buildTier1Checklist = kernel.buildTier1Checklist;
 export const parseScribeUnits = kernel.parseScribeUnits;
 export const judgeUnits = kernel.judgeUnits;
+export const TIER1_ANSWER_SCHEMA = kernel.TIER1_ANSWER_SCHEMA;
+export const TIER1_QUESTIONS = kernel.TIER1_QUESTIONS;
+export const applyTier1 = kernel.applyTier1;
+export const tier1Lines = kernel.tier1Lines;
 
 /** The path the pin and the readers agree on, exported so nothing spells it twice. */
 export const PATHS = { WORKFLOW, EXEMPLARS, LAW, VOICE_TS };

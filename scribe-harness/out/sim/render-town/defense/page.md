@@ -1,0 +1,5 @@
+[WITHHELD] The walls are kept and no soldiers of the town stand behind them.
+
+[FAIL] The walls are kept and no soldiers of the town stand behind them. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse.
+
+[WITHHELD] The walls are kept and no soldiers of the town stand behind them. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse. A clerk in the hall says the keeping is paid out of the common purse.

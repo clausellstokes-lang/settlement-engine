@@ -39,8 +39,9 @@ import { dirname, resolve } from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
 
 import {
-  DOCK, SCRIBE_OUTPUT_SCHEMA, buildScribeBrief, buildScribeUserTurn, buildTownBlock,
-  exemplarPack, judgeUnits, parseScribeUnits, staticCard, voiceText,
+  DOCK, SCRIBE_OUTPUT_SCHEMA, TIER1_ANSWER_SCHEMA, applyTier1, buildScribeBrief,
+  buildScribeUserTurn, buildTier1Checklist, buildTownBlock, exemplarPack, judgeUnits,
+  parseScribeUnits, staticCard, voiceText,
 } from './lib/brief.mjs';
 
 const { townCard } = await import(`${DOCK}/src/domain/prose/townCard.js`);
@@ -163,18 +164,74 @@ export async function callModel(client, built) {
 }
 
 /**
+ * THE TIER-1 CALL. The SAME two cached system blocks as the writer, the checklist as the turn,
+ * the answer schema as the format. UNEXECUTED until a key exists, like `callModel`.
+ */
+export async function callTier1(client, built, units) {
+  const started = Date.now();
+  const checklist = buildTier1Checklist(units, built.card);
+  const response = await client.beta.messages.create({
+    model: MODEL,
+    max_tokens: 4000,
+    betas: ['server-side-fallback-2026-07-01'],
+    fallbacks: 'default',
+    thinking: { type: 'adaptive' },
+    output_config: {
+      effort: 'high',
+      format: { type: 'json_schema', schema: TIER1_ANSWER_SCHEMA },
+    },
+    system: [
+      { type: 'text', text: built.brief, cache_control: { type: 'ephemeral', ttl: '1h' } },
+      { type: 'text', text: built.townBlock, cache_control: { type: 'ephemeral', ttl: '1h' } },
+    ],
+    messages: [{ role: 'user', content: checklist }],
+  });
+  if (response.stop_reason === 'refusal') {
+    return { refused: true, answers: [], usage: response.usage, wallMs: Date.now() - started };
+  }
+  const text = (response.content || []).find((b) => b?.type === 'text')?.text ?? '';
+  let answers = [];
+  try { answers = JSON.parse(text).answers ?? []; } catch { answers = []; }
+  return { refused: false, answers, usage: response.usage, wallMs: Date.now() - started };
+}
+
+/**
  * ⭐ ONE JUDGE. `judgeUnits` is the edge function's own gate, from the dock's own leaf, with the
  * dock's own `refuteUnit` injected — so the pilot's refusal rate and the product's are one number
  * and not two. `refuteTab` runs beside it for the page-level arms, which are not a unit property.
+ *
+ * `tier1Answers` is the second reader's sheet where one was taken; without it the function is
+ * tier 0 alone, which is exactly what the product does when the second reader is unavailable.
  */
-export function judgeAll(units, card) {
+export function judgeAll(units, card, tier1Answers) {
   const judged = judgeUnits(units, card, refuteUnit);
-  const rows = units.map((unit) => ({
-    unit,
-    verdict: judged.verdicts.find(
+  if (Array.isArray(tier1Answers) && tier1Answers.length) {
+    const second = applyTier1(judged.kept, tier1Answers);
+    judged.kept = second.kept;
+    judged.verdicts = [...judged.verdicts, ...second.verdicts];
+    judged.dropped += second.dropped;
+    judged.tier1Dropped = second.dropped;
+  }
+  // ⛔ A UNIT CAN NOW CARRY TWO VERDICT ROWS, one per reader, so the printer takes the WORST and
+  // keeps both sets of findings. Reading only the first would hide every tier-1 refusal behind
+  // tier 0's PASS on the same pool.
+  const rank = { PASS: 0, WITHHELD: 1, FAIL: 2 };
+  const rows = units.map((unit) => {
+    const mine = judged.verdicts.filter(
       (v) => v.blockId === unit.blockId && v.poolKey === unit.poolKey && v.vid === unit.vid,
-    ) || null,
-  }));
+    );
+    if (!mine.length) return { unit, verdict: null, verdicts: [] };
+    const worst = mine.reduce((a, b) => ((rank[b.verdict] ?? 0) > (rank[a.verdict] ?? 0) ? b : a));
+    return {
+      unit,
+      verdicts: mine,
+      verdict: {
+        ...worst,
+        arms: [...new Set(mine.flatMap((v) => v.arms))].sort(),
+        findings: mine.flatMap((v) => v.findings || []),
+      },
+    };
+  });
   return {
     ...judged,
     rows,
@@ -260,7 +317,21 @@ async function main() {
     });
     process.exit(3);
   }
-  const judged = judgeAll(result.units, built.card);
+  // ⭐ TIER 1 RUNS LIVE, on tier 0's survivors, exactly as the edge function runs it — and a
+  // failure of it is NOT a failure of the render: tier 0 is the floor and the units it kept ship.
+  const tier0 = judgeAll(result.units, built.card);
+  let tier1 = { state: tier0.kept.length ? 'ok' : 'none', answers: [], usage: null, wallMs: 0 };
+  if (tier0.kept.length) {
+    try {
+      const second = await callTier1(client, built, tier0.kept);
+      if (second.refused) tier1 = { ...tier1, state: 'skipped' };
+      else tier1 = { state: 'ok', answers: second.answers, usage: second.usage, wallMs: second.wallMs };
+    } catch (e) {
+      console.log(`the second reader was unavailable (${e instanceof Error ? e.message : String(e)}); tier 0's units stand.`);
+      tier1 = { ...tier1, state: 'skipped' };
+    }
+  }
+  const judged = judgeAll(result.units, built.card, tier1.answers);
   for (const row of judged.rows) {
     const arm = row.verdict?.findings?.find((f) => f.channel === 'FAIL')
       || row.verdict?.findings?.find((f) => f.channel === 'WITHHELD');
@@ -272,13 +343,18 @@ async function main() {
     epoch,
     model: result.model,
     counted,
-    units: judged.rows.map((r) => ({ unit: r.unit, verdict: r.verdict })),
+    units: judged.rows.map((r) => ({ unit: r.unit, verdict: r.verdict, verdicts: r.verdicts })),
     dropped: judged.dropped,
     kept: judged.kept.length,
+    tier1: tier1.state,
+    tier1Dropped: judged.tier1Dropped ?? 0,
+    tier1Answers: tier1.answers,
     page: judged.page,
     usage: result.usage,
+    tier1Usage: tier1.usage,
     cacheReadInputTokens: result.usage?.cache_read_input_tokens ?? null,
-    wallMs: result.wallMs,
+    tier1CacheReadInputTokens: tier1.usage?.cache_read_input_tokens ?? null,
+    wallMs: result.wallMs + tier1.wallMs,
   });
 }
 

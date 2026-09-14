@@ -6,10 +6,14 @@
  *
  *   node simulate.mjs build --seed <seed> --tab <tab> [--audience dm|player] [--type town]
  *       → out/sim/<seed>/<tab>/{brief.md,town.md,turn.md,schema.json,card.json}
- *   node simulate.mjs judge --seed <seed> --tab <tab> --response <units.json>
+ *   node simulate.mjs tier1 --seed <seed> --tab <tab> --response <units.json>
+ *       → runs tier 0, then writes the SECOND READER'S prompt for its survivors
+ *         (tier1.md, tier1-schema.json) so a seat can answer it as the checklist model.
+ *   node simulate.mjs judge --seed <seed> --tab <tab> --response <units.json> [--tier1 <answers.json>]
  *       → parses the response under SCRIBE_OUTPUT_SCHEMA's own parser, runs the ONE judge
- *         (`judgeUnits` + the dock's `refuteUnit`) and `refuteTab` (the page arms), prints a
- *         verdict line per unit, writes judged.json and page.md.
+ *         (`judgeUnits` + the dock's `refuteUnit`), applies the second reader's sheet where one is
+ *         given (`applyTier1`), runs `refuteTab` (the page arms), prints a verdict line per unit,
+ *         writes judged.json and page.md.
  *
  * ⭐ SINCE W3a IT BUILDS THE PRODUCT'S PROMPT AND NOT A SECOND ONE. The three files below are the
  * bytes `scribe-render/index.ts` sends: two cached system blocks and one volatile user turn, from
@@ -22,7 +26,9 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { DOCK, SCRIBE_OUTPUT_SCHEMA, parseScribeUnits } from './lib/brief.mjs';
+import {
+  DOCK, SCRIBE_OUTPUT_SCHEMA, TIER1_ANSWER_SCHEMA, buildTier1Checklist, parseScribeUnits,
+} from './lib/brief.mjs';
 import { buildRender, judgeAll, parseArgs } from './render-town.mjs';
 
 const { generateSettlementPipeline } = await import(`${DOCK}/src/generators/generateSettlementPipeline.js`);
@@ -51,6 +57,23 @@ if (mode === 'build') {
   console.log(`brief ${built.brief.length} chars (cached) · town ${built.townBlock.length} chars (cached) · turn ${built.turn.length} chars (volatile) · ~${Math.round(chars / 4)} tokens`);
   for (const p of built.card.pools) console.log(`  - ${p.blockId} :: ${p.poolKey} · order ${p.unit?.order?.id || '(none)'} · sources ${(p.faceSources || []).join('/') || '(none)'} · spine: ${p.unit?.spine?.slice(0, 80) || ''}`);
   console.log(`wrote ${dir}/{brief.md,town.md,turn.md,card.json,schema.json}`);
+} else if (mode === 'tier1') {
+  // ⭐ THE SECOND READER'S PROMPT, AS A FILE. The seat is handed tier 0's survivors and the same
+  // two cached system blocks it was handed as the writer, so a simulated tier-1 pass is the same
+  // act the edge function performs and not a paraphrase of it.
+  const raw = readFileSync(resolve(String(args.response)), 'utf8');
+  const parsed = parseScribeUnits(raw);
+  if (!parsed.ok) {
+    console.log(`SCHEMA FAIL: ${parsed.reason}`);
+    process.exit(3);
+  }
+  const tier0 = judgeAll(parsed.units, built.card);
+  const checklist = buildTier1Checklist(tier0.kept, built.card);
+  writeFileSync(`${dir}/tier1.md`, checklist);
+  writeFileSync(`${dir}/tier1-schema.json`, JSON.stringify(TIER1_ANSWER_SCHEMA, null, 1));
+  console.log(`tier 0 kept ${tier0.kept.length} of ${parsed.units.length} units and dropped ${tier0.dropped}`);
+  console.log(`checklist ${checklist.length} chars · ~${Math.round(checklist.length / 4)} tokens over ${(checklist.match(/^\d+\. \(/gm) || []).length} lines`);
+  console.log(`wrote ${dir}/{tier1.md,tier1-schema.json}`);
 } else if (mode === 'judge') {
   const raw = readFileSync(resolve(String(args.response)), 'utf8');
   const parsed = parseScribeUnits(raw);
@@ -58,7 +81,13 @@ if (mode === 'build') {
     console.log(`SCHEMA FAIL: ${parsed.reason}`);
     process.exit(3);
   }
-  const judged = judgeAll(parsed.units, built.card);
+  let answers = [];
+  if (typeof args.tier1 === 'string') {
+    const sheet = JSON.parse(readFileSync(resolve(args.tier1), 'utf8'));
+    answers = Array.isArray(sheet?.answers) ? sheet.answers : [];
+    console.log(`the second reader's sheet carries ${answers.length} rows`);
+  }
+  const judged = judgeAll(parsed.units, built.card, answers);
   const tally = {};
   for (const row of judged.rows) {
     const verdict = row.verdict?.verdict ?? '?';
@@ -70,7 +99,7 @@ if (mode === 'build') {
   }
   const missing = built.card.pools.filter((p) => !parsed.units.some((u) => u.poolKey === p.poolKey)).map((p) => p.poolKey);
   const unknown = parsed.units.filter((u) => !built.card.pools.some((p) => p.poolKey === u.poolKey)).map((u) => u.poolKey);
-  console.log(`\nverdicts ${JSON.stringify(tally)} · kept ${judged.kept.length} · dropped ${judged.dropped} · pools on card ${built.card.pools.length} · units returned ${parsed.units.length} · missing ${JSON.stringify(missing)} · unknown ${JSON.stringify(unknown)}`);
+  console.log(`\nverdicts ${JSON.stringify(tally)} · kept ${judged.kept.length} · dropped ${judged.dropped} (tier 1 took ${judged.tier1Dropped ?? 0}) · pools on card ${built.card.pools.length} · units returned ${parsed.units.length} · missing ${JSON.stringify(missing)} · unknown ${JSON.stringify(unknown)}`);
   console.log(`page arms: ${JSON.stringify(judged.page).slice(0, 600)}`);
   writeFileSync(`${dir}/judged.json`, JSON.stringify({
     verdicts: judged.verdicts, kept: judged.kept, dropped: judged.dropped, page: judged.page, missing, unknown,
