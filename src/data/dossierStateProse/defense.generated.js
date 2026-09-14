@@ -1297,14 +1297,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 1,
           "wordings": [
-            "Nobody came out to a pedlar on the road in, by his own account, and nobody came out to him at the houses either.",
-            "A stranger is seen coming and left to come, the elders say.",
-            "By the sexton's account the ground is opened ahead of need, and the need comes off the fields and the water.",
-            "A clerk in the hall says what the purse carries is all of it work inside the place, and that nothing beyond the fields has ever been laid against it.",
+            "Nobody came out to a travelling trader on the road in, by his own account, and nobody came out to him at the houses either.",
+            "The elders say they see a stranger coming and leave him to come.",
+            "By the account of whoever buries the dead, the ground is opened ahead of need, and the need comes off the fields and the water.",
+            "A clerk in the hall says the purse carries only work inside the place. Nothing beyond the fields has ever been laid against it.",
             "The light one of the watch carries on the round is his own, he says, and the round ends where the houses do.",
-            "A guild factor says the trades pay their share of what the watch costs. The households that do not call it out pay the same share as the ones that do.",
-            "At the tavern they say a man who works out where nobody else works is owed something for it, and that he has never been told what.",
-            "Stallholders say a carter who has come in over open country is priced like any other, and that nothing here is allowed him for the coming.",
+            "A guild member says the trades pay their share of what the watch costs. The households that never call it out pay the same share as the ones that do.",
+            "At the tavern they say a man who works out where nobody else works is owed something for it. Nobody has told him what.",
+            "The stallholders price a carter who has come in over open country like any other, and allow him nothing for the coming.",
             "The court says what reaches it is a boundary, a debt, or a beast in the wrong field."
           ],
           "sources": [
@@ -1344,13 +1344,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "A pedlar says he asked here what keeps the country off and got no answer he could carry away with him.",
-            "What the guilds argue with the hall about is the weights and the hours, and nothing that lies outside the place, a guild factor says.",
+            "A travelling trader says he asked here what keeps the country off and got no answer he could carry away.",
+            "A guild member reports that the guilds argue with the hall about the weights and the hours, and about nothing outside the place.",
             "A clerk in the hall says the country has never been brought before it as a matter, and gives no reason for that.",
-            "The sexton says nothing out of the country has ever had him called out, and he does not say what he makes of that.",
+            "Whoever buries the dead says nothing out of the country has ever had him called out, and does not say what he makes of that.",
             "A child goes out to the fields with a basket and with whoever is going that way, the elders say.",
             "At the tavern a carter says nothing out in the country would be known of here until it was in among the houses.",
-            "One of the watch holds that anything coming out of the country would reach him first, the round being his."
+            "One of the watch says anything coming out of the country would reach him first, the round being his."
           ],
           "sources": [
             null,
@@ -1385,13 +1385,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "A drover says he was looked at the whole way in by the people at the fields, and that none of them stopped working to do it.",
-            "At the tavern a carter says nobody here troubles to look at a stranger on the road in.",
-            "A clerk in the hall says a stranger with business here brings it to the hall, and that a stranger without business is nobody's to ask after.",
+            "A drover says the people at the fields looked at him the whole way in, and none of them stopped working to do it.",
+            "At the tavern a carter who drives that road says nobody here troubles to look at a stranger on it.",
+            "A clerk in the hall says a stranger with business here brings it to the hall. A stranger without business is nobody's to ask after.",
             "The stallholders say a stranger's coin is looked at harder than the stranger.",
-            "A guild factor says a stranger's goods are looked over for their make and never for the road they were carried over.",
+            "A guild member says a stranger's goods are looked over for their make and never for the road they came by.",
             "The court says a stranger's coming in has never been a matter before it.",
-            "One of the watch says what he looks at on the round is a stranger's cart, and that he looks at what is in it.",
+            "One of the watch says he looks at a stranger's cart on the round, and at what is in it.",
             "The elders say a stranger is given room where there is room. The household that gives it is the household short a bed that night."
           ],
           "sources": [
@@ -1427,15 +1427,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls AND professional garrison": [
         {
           "angle": "ledger",
-          "text": "Entry into {settlement} is controlled and the town pays soldiers of its own. The levy at the gate falls on whoever is passing through it.",
+          "text": "Entry into {settlement} is controlled and the town pays soldiers of its own. The levy at the gate falls on whoever passes through it.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "A guild factor says the trades pay at the gate and pay again into the purse that keeps the gate.",
-            "The stallholders say the levy is paid by whoever carries the goods and borne by whoever eats them. A household at that stall pays it without ever standing at the gate.",
-            "At the tavern the soldiers are counted as custom, and the talk is which of them is off duty and which is not.",
+            "A guild member says the trades pay at the gate and pay again into the purse that keeps it.",
+            "The stallholders reckon whoever carries the goods pays the levy and whoever eats them bears it. A household at that stall pays it without ever standing at the gate.",
+            "At the tavern the soldiers are counted as custom, and the talk is which of them is off duty.",
             "A clerk in the hall says what the gate takes reaches the purse whole.",
             "The people on the gate say they hand over what they take and hear nothing of it after."
           ],
@@ -1464,14 +1464,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A traveller meets the town in the order the town means him to, stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own to keep it.",
+          "text": "A traveller is stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own.",
           "slots": [],
           "vid": 2,
           "wordings": [
             "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time.",
             "A clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
-            "The court holds that the toll can be argued before it by anyone who paid it, a stranger as much as a carter.",
-            "A pedlar says his pack was opened at the gate and nothing was taken from it but the toll.",
+            "The court holds that anyone who paid the toll may argue it there, a stranger as much as a carter.",
+            "A travelling trader says his pack was opened at the gate and nothing taken from it but the toll.",
             "At the tavern they say the town has never been asked whether it wants soldiers, only what they cost."
           ],
           "sources": [
@@ -1503,9 +1503,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "A traveller says the town talks about what its soldiers cost and not at all about what they are for.",
+            "A traveller reports that the town talks about what its soldiers cost and not at all about what they are for.",
             "At the tavern a woman at the long table says the town would have the gate shut earlier if the shutting cost it nothing.",
-            "The sexton's view is that the town's confidence is well founded, and that the parish keeps ground ready in case it is not.",
+            "A local priest says the town's confidence is well founded, and the parish keeps ground ready in case it is not.",
             "The soldiers say the town is glad of them after dark and has nothing to say to them before it.",
             "One of the watch says the nights and the way through are one duty to the town and two to the people who keep them."
           ],
@@ -1536,18 +1536,18 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls with citizen militia": [
         {
           "angle": "ledger",
-          "text": "The bank at {settlement} is up and the people who come out to it are the people who live behind it. They bring their own tools, and nobody is paid for the standing.",
+          "text": "The bank at {settlement} is up, and the people who come out to it live behind it. They bring their own tools, and nobody pays for the standing.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
             "By a drover's account the man who stopped him at the gap was leaning on a spear of his own, and went back to a field as soon as he had his answer.",
-            "A stranger at the gap states his business before he goes through, and the people standing there hold that a known face need not. They do not set out which faces are known.",
-            "A day the muster is called is a day the stall stays shut, and the traders' complaint is that the loss falls on the stallholder alone.",
-            "The tavern's account is that a call brings the same names to the bank, and that anyone drinking there can name the houses it does not bring.",
-            "The elders take it that the turn at the bank falls on every household alike.",
-            "Those who muster say the turn falls on the households that come, and that those are not all of them."
+            "Those who stand at the gap ask a stranger his business before he goes through, and let a known face by without. They do not set out which faces are known.",
+            "Stallholders say a day the muster is called is a day the stall stays shut, and the loss falls on the stallholder alone.",
+            "At the tavern they reckon a call brings the same names to the bank, and anyone drinking there can name the houses it does not bring.",
+            "The elders say the turn at the bank falls on every household alike.",
+            "Those who muster say the turn falls on the households that come, and those are not all of them."
           ],
           "sources": [
             null,
@@ -1580,13 +1580,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "The people who stand at the gap have other work waiting on them while they stand. The turn goes, by their own telling, to whoever can leave his work rather than to whoever it falls on by rights.",
-            "The elders' account is that a house that misses its turn at the bank hears about it from its neighbours and from nobody else.",
+            "The people who stand at the gap have other work waiting on them. The turn goes, by their own telling, to whoever can leave his work and not to whoever it falls on.",
+            "The elders hold that a house that misses its turn at the bank hears about it from its neighbours and from nobody else.",
             "Turns stand unfilled, those who muster grant, and the houses know which ones.",
-            "A man who stands his turn comes back to a day's work nobody did for him. The tavern counts that day as the cost of the standing.",
-            "A traveller who asked who had charge of the line reports that he was given the names of houses and no name of a man.",
-            "Those who stand put it that the place is held every time it needs holding.",
-            "At the tavern the holding of the place is said to depend on who remembers whose turn it is."
+            "Drinkers at the tavern say a man who stands his turn comes back to a day's work nobody did for him.",
+            "A traveller asked who had charge of the line and was given the names of houses and no name of a man.",
+            "Those who stand say the place is held every time it needs holding.",
+            "At the tavern they say the holding of the place depends on who remembers whose turn it is."
           ],
           "sources": [
             null,
@@ -1621,11 +1621,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "Men have been let through the gap who would not have been let through if anybody had been standing with them, and those who take the gap say so themselves.",
-            "Whatever comes into the place comes past somebody's neighbour, and the traders reckon a neighbour is easier to talk round than any officer.",
-            "Nothing is taken at the way through and nothing is written down there. A pedlar who had looked to pay something for his passage says he paid nothing.",
-            "There is no court here and nowhere to hold a man. By the elders' reckoning what is done instead is done by whoever turns out, and a man put out of the place goes out through the gap.",
-            "Talk at the tavern has it that a raid is a thing everyone here understands, and that what to do about anything larger is not agreed.",
+            "Those who take the gap say they have let men through who would not have got past two of them.",
+            "Stallholders say whatever comes into the place comes past somebody's neighbour, and they would sooner talk round a neighbour than an officer.",
+            "Nothing is taken at the way through and nothing is written down. A travelling trader who had expected to pay for his passage says he paid nothing.",
+            "There is no court here and nowhere to hold a man. The elders say whoever turns out does what is done instead, and a man put out of the place goes out through the gap.",
+            "At the tavern they say a raid is a thing they all understand. What to do about anything larger they have never agreed.",
             "The elders take the standing at the bank for a duty every household owes the place, whether anything is coming or not.",
             "Those who muster take the standing for work against what is coming, and say a duty owed to nobody in particular is one nobody stands."
           ],
@@ -1721,9 +1721,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "{elders} {v:take} the walls for a boundary before anything else, and where the line runs is the older argument.",
+            "{elders} {v:take} the walls for their own boundary before anything else, and where the line runs is the older argument.",
             "{watch} {v:say} the hall's record has the walls in it and not the walk along them, and {v:walk} it after dark regardless.",
-            "{court} {v:hear} what is disputed about the walls, and it is always who owes the work on them. Nothing that comes there is about who would hold them.",
+            "{court} {v:hear} what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.",
             "{public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming."
           ],
           "sources": [
@@ -1738,15 +1738,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: force with NO walls": [
         {
           "angle": "ledger",
-          "text": "The town keeps paid soldiers and no wall. They can meet a raid in the open and cannot hold a siege, because there is no line to hold.",
+          "text": "The town keeps paid soldiers and can meet a raid in the open. There is no wall to hold a siege behind.",
           "slots": [],
           "vid": 1,
           "wordings": [
             "A clerk in the hall says the soldiers' day hire is the barracks' own trade and no charge on the town's purse.",
-            "A guild factor says the trades pay for the same men once through the purse and again by the day.",
-            "The watch's view is that a purse shared with soldiers is a purse the watch does not set the terms of.",
+            "A guild member says the trades pay for the same men once through the purse and again by the day.",
+            "The watch reckons it does not set the terms of a purse it shares with soldiers.",
             "At the tavern they say the soldiers and the watch drink at the same tables and are paid off one line.",
-            "The council says what the soldiers cost is on the accounts for anyone to read, and what they are for is not written anywhere."
+            "The council says what the soldiers cost is on the accounts for anyone to read. What they are for is not written anywhere."
           ],
           "sources": [
             null,
@@ -1777,11 +1777,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "One of the watch says the watch walks the streets at night after a day's work. The day's work is the watchman's own trade, and the trade goes short for it.",
+            "One of the watch says he walks the streets at night after a day's work. The trade he works at by day goes short for it.",
             "A traveller says he passed the soldiers in the street as he would pass anyone, and was not sure until later that they were the town's.",
-            "The hall holds that paid men can be sent to where the trouble is and a wall cannot be.",
+            "A clerk in the hall says the hall can send paid men where the trouble is and cannot send a wall.",
             "At the tavern they say anyone who wants past the soldiers has only to pick a street they are not in.",
-            "The soldiers say they cannot be everywhere and are not paid to be, and the town does not tell them where to be instead."
+            "The soldiers say they cannot be everywhere and are not paid to be. The town does not tell them where to be instead."
           ],
           "sources": [
             null,
@@ -1813,10 +1813,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "The soldiers say they can be seen from the road and mean to be.",
-            "At the toll bar they say the bar is where a stranger is asked his business, and the soldiers are not at the bar.",
-            "The hall holds that a raid is a matter for the soldiers and a siege a matter for the granary, and does not say which it expects.",
-            "The market says the granary door is the thing worth coming for and the soldiers know it.",
-            "The register says the soldiers come to the rites with everyone else and stand at the back of them."
+            "At the toll bar they say a stranger is asked his business there, and the soldiers are not.",
+            "A clerk in the hall says a raid is a matter for the soldiers and a siege a matter for the grain store, and does not say which he expects.",
+            "Stallholders say the grain store door is the thing worth coming for, and the soldiers know it.",
+            "By a local priest's account the soldiers come to the rites with everyone else and stand at the back."
           ],
           "sources": [
             null,
@@ -1831,18 +1831,18 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: militia only": [
         {
           "angle": "ledger",
-          "text": "No wall stands at {settlement} and no soldier of the town's own. The people who come out armed are the people who work the ground, and they come with their own tools.",
+          "text": "No wall stands at {settlement} and no soldier of the town's own. The people who come out armed work the ground, and they bring their own tools.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "A billhook that goes out comes home wanting an edge, one of the muster puts it. The bench it is mended at is the owner's.",
+            "A hook that goes out comes home wanting an edge, one of the muster says. The bench it is mended at is the owner's.",
             "On a day the muster is wanted the stalls stand half-tended, a stallholder says, and what does not sell that day does not keep.",
-            "A pedlar reports that the people he passed here had a blade or a hook about them, and that none of them was dressed for a fight.",
-            "Whoever the town sends its questions to allows that the turns fall harder on some households than on others, and offers no account of how they came to be set.",
-            "It is said at the alehouse that the same households turn out every time, and the drinkers there can put a name to each one that stays in.",
-            "A priest says the bier is carried by the households that stand the night."
+            "A travelling trader says the people he passed here had a blade or a hook about them, and none of them was dressed for a fight.",
+            "Whoever the town sends its questions to allows that the turns fall harder on some households than on others, and does not say how they were set.",
+            "At the tavern they say the same households turn out every time, and the drinkers there can name each one that stays in.",
+            "A priest says the coffin is carried by the households that stand the night."
           ],
           "sources": [
             null,
@@ -1860,12 +1860,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "At the alehouse it is held that a man who never takes his turn owes a drink to the neighbour who takes it instead.",
-            "Those who stand say that nothing is owed either way, and that a man takes his turn for his own household and for no other reason.",
+            "At the tavern they say a man who never takes his turn owes a drink to the neighbour who takes it instead.",
+            "Those who stand say nothing is owed either way, and a man takes his turn for his own household and no other reason.",
             "A traveller says that elsewhere he asks who keeps order after dark, and here he is given a door to knock at.",
-            "The one the town sends to holds that a household that keeps its door shut is not spoken to about it, and that nothing is written against its name.",
+            "The one the town sends to says a household that keeps its door shut is not spoken to about it. Nothing is written against its name.",
             "By a stallholder's account a night spent standing costs the stall its morning.",
-            "The sexton has it that the households that turn out are not the households that complain, and that he hears both at the same door."
+            "By a priest's account the households that turn out are not the households that complain, and he hears both at the same door."
           ],
           "sources": [
             null,
@@ -1894,14 +1894,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A drover says there is nothing here for a stranger to be stopped at, and that whoever answers trouble here is at the day's work until somebody shouts.",
+          "text": "A drover says there is nothing here for a stranger to be stopped at, and whoever answers trouble here is at the day's work until somebody shouts.",
           "slots": [],
           "vid": 3,
           "wordings": [
-            "The muster's view is that a stranger is asked after from one house to the next before he has spoken to anybody.",
-            "A stallholder puts it that nobody here asks a stranger his business until he wants something bought or sold.",
+            "The muster reckons a stranger is asked after from one house to the next before he has spoken to anybody.",
+            "A stallholder says nobody here asks a stranger his business until he wants something bought or sold.",
             "Whoever answers for the place says a stranger is fed before he is questioned.",
-            "By a priest's telling a stranger who dies here is laid in the same ground as anybody born here."
+            "A priest says a stranger who dies here is laid in the same ground as anybody born here."
           ],
           "sources": [
             null,
