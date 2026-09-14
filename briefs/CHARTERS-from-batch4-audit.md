@@ -37,3 +37,9 @@ v3 machinery: Mark, Draft, Select, Refute, Cure), not a line edit.
 1 had landed, and the brief was never amended. An auditor found it by reading the file. THE BRIEF IS NOW
 AMENDED, with 42d and with the failure mode batch 4 taught: 42d's cure tempts a habitual present into a
 single past episode, and where 42d and the freeze collide the freeze wins.
+
+## CHARTER (from the Scribe simulation, 2026-09-14 12:3x) — TWO SHIPPED DEFENSE LINES THAT BREAK THE LAW THEY EXEMPLIFY
+A corpus car, ONE LANE, when the owner lifts the corpus pause (DEF-1 batch 1 is paused mid-draft; this car may ride in `laneRW-DEF1` as a chair car after the batch lands, or in its own worktree from `dd79991f5` if the block is still paused):
+1. DS-DEF-11 `WALLED-STRAINED` v1: "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late." — the `{defwork}` fill is plural on a walled town ("town walls … is sound"), and the close is a which-clause. Re-cut number-neutral and closed by a full stop, claim frozen: e.g. "{settlement} keeps its {defwork} sound while the muster behind it thins. That is the arithmetic a town notices late." — check `orderIdOf` before/after (the spine's order must hold), the sweep 0 shifts, the pin 2756.
+2. DS-DEF-5 `walls PRESENT` v1: "…That is what a perimeter buys: not invulnerability, but the choice of where trouble happens." — colon + not-X-but-Y (both on the selector's tell list). Convert per the clarity law (colon → period clean; the contrast kept as two claims), claim frozen.
+Gate: the five suites, both --check, the sweep, the wave gate `--out`, the reader audit of the two lines.
