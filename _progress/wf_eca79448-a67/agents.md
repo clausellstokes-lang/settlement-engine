@@ -1,0 +1,5 @@
+# wf_eca79448-a67 — per-agent progress, 2026-09-14 11:37:40
+    - `a5035890d` MARKER readiness STRONG · IN FLIGHT · transcript 09-14 11:37 730 KB · 41 tool calls · files: card-mech.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a2f99685d` MARKER readiness ADEQUATE · IN FLIGHT · transcript 09-14 11:37 660 KB · 35 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ae9c70829` MARKER readiness WEAK · IN FLIGHT · transcript 09-14 11:36 665 KB · 25 tool calls · files: card.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a42ce04f1` MARKER readiness CRITICAL · IN FLIGHT · transcript 09-14 11:37 689 KB · 42 tool calls · files: card.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc

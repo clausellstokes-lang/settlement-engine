@@ -1,0 +1,5 @@
+{"type":"launched"}
+{"type":"started","key":"v2:220a140c9379c32887afb1b84f45e1f4b7c086a05e292b838888b815ca2d7cc7","agentId":"a5035890d498aa615","label":"DS-DEF-1:mark:ds-def-1--readiness-strong","phase":"Mark"}
+{"type":"started","key":"v2:e50b68a3a71c742d70a468d1b44db6c9914d635950714087775c9298d37b6b6f","agentId":"a2f99685d0485cdb4","label":"DS-DEF-1:mark:ds-def-1--readiness-adequate","phase":"Mark"}
+{"type":"started","key":"v2:b577430e1fce5c5f06ead00144126165c1e579b60614148494809ff2da0c9645","agentId":"ae9c70829a0569a19","label":"DS-DEF-1:mark:ds-def-1--readiness-weak","phase":"Mark"}
+{"type":"started","key":"v2:088676eff39b2880cff1530d7f7da41a3520b98a52cbf0804c892729f82c096f","agentId":"a42ce04f145af02ca","label":"DS-DEF-1:mark:ds-def-1--readiness-critical","phase":"Mark"}
