@@ -1,0 +1,204 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Tolerated",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then HISTORY",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then HISTORY then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then HISTORY then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public opinion neither helps nor hurts",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Tolerated",
+   "vid": 4,
+   "spine": "The Elected Reeve at Hochhausen has neither the town's backing nor its hostility, and a hard decision here would have to be paid for out of a purse that is empty.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 1,
+   "spine": "At Hochhausen, the Elected Reeve holds a good name, and the accounts are the reason, since the town is doing well and a town doing well rarely looks hard at who is arranging it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 1,
+   "spine": "The hall at Hochhausen is settled, since the Elected Reeve holds it and the town expects it to go on holding it, and business here is conducted on that expectation.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "mixed",
+   "vid": 1,
+   "spine": "Nothing at Hochhausen governs cleanly, since the Elected Reeve is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 1,
+   "spine": "What governs Hochhausen calls itself the Elected Reeve, and the name says more about the town's own size and self-regard than a stranger usually credits.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 2,
+   "spine": "Hochhausen has people who would take the hall if they could, and cannot, and every side understands the arrangement precisely for what it is.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public opinion neither helps nor hurts",
+   "vid": 2,
+   "spine": "Public opinion neither backs the Elected Reeve nor moves against it, and the Elected Reeve governs on the strength of the office alone, favoured no more than it is opposed.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 0,
+ "patched": 0,
+ "tier1Dropped": 0,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 7,
+   "openers": [
+    {
+     "opener": "at hochhausen, the",
+     "n": 1
+    },
+    {
+     "opener": "hochhausen has people",
+     "n": 1
+    },
+    {
+     "opener": "nothing at hochhausen",
+     "n": 1
+    },
+    {
+     "opener": "public opinion neither",
+     "n": 1
+    },
+    {
+     "opener": "the elected reeve",
+     "n": 1
+    },
+    {
+     "opener": "the hall at",
+     "n": 1
+    },
+    {
+     "opener": "what governs hochhausen",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [
+  "governing faction holds a NARROW plurality",
+  "layer DORMANT (no ledger materialized)"
+ ],
+ "unknown": []
+}

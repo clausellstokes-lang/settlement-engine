@@ -1,0 +1,581 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "Q",
+    "WALL-5",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then CONSEQUENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The charter hall is the one building set aside for that work.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.inst, economicState.compound.inst]; none claimed)"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The charter hall is the one building set aside for that work.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Lightly Defended",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "capacity claim on a state-only field",
+     "value": "What the town could hold",
+     "description": "\"could hold\" is a capacity claim; the block carries no event-provenance field (R-DST-B) (state-only)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: WEAK",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C4",
+    "ORDER",
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C4",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "a totality over an open column",
+     "value": "Each household answers for its own fences.",
+     "description": "\"each\" asserts a totality over whoIsCounted, which is not closed on this settlement (open)"
+    },
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Each household answers for its own fences.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [axis, readings.scores, defenseProfile.scores]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Which one gets settled first is itself a quarrel.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [axis, readings.scores, defenseProfile.scores]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5",
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a contrast",
+     "value": "and not against a bad year.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The harvest here is the whole of the town's security, and it holds against a closed road a",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The disagreement is a quiet one and stays inside the two circles.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [conflict.intensity]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "What comes into the town comes by the road, and what goes out goes by the road.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.tradeRouteAccess, config.tradeRouteAccess]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "X"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "exhaustivity over an open column",
+     "value": "The town is the size a village settles at, and it has settled there.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The tie is between Ingrid Köhler and Ivo Werner.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.prominentRelationship, prominentRelationship]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Marriage, trade and neighbourhood account for it, and nothing else does.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.relationships, relationships, readings.relationships.length, relationships.length]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "It is the sort that a single body of the right kind would tie off.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.structuralSuggestions, structuralSuggestions, readings.structuralSuggestions.length, structuralSuggestions.length]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The people here are connected the way the people of any settled place are connected. Marriage, trade and neighbourhood a (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "spine": "The busiest way through the town ends at the market, and a stranger reaches it without asking. The road that carries the trade comes in at the far end of the stalls.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Armed order is ordinary here, and the safety of the town falls to people paid for it rather than to luck and neighbours. The charter hall is the one building set aside for that work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here can afford to argue about things other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "spine": "Everything Hochhausen needs it can get, and everything it makes it can move.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "spine": "The town would hold against what it expects, and it knows it is not proof against what it does not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "spine": "More quarrels are opened here than are settled. Which one gets settled first is itself a quarrel.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the town is spare, and a careful eye sees that before it sees the market.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "The town keeps no practitioner, no arrangement for one, and no expectation of either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "spine": "The harvest here is the whole of the town's security, and it holds against a closed road and not against a bad year.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "spine": "The Commercial Circle and The Administrative Circle are at odds, and a day in the town would not show it. The disagreement is a quiet one and stays inside the two circles.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "spine": "Goods come into the town and goods go out of it, and neither the coming nor the going is remarkable.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "spine": "Hochhausen stands on a road and lives off it. What comes into the town comes by the road, and what goes out goes by the road.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "spine": "The town is the size a village settles at, and it has settled there.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie in the town carries more weight than the rest, and the weight shows in what the town does and does not do. The tie is between Ingrid Köhler and Ivo Werner.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "A careful reader of the town finds one loose end. It is the sort that a single body of the right kind would tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 3,
+ "patched": 0,
+ "tier1Dropped": 1,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 18,
+   "openers": [
+    {
+     "opener": "a careful reader",
+     "n": 1
+    },
+    {
+     "opener": "armed order is",
+     "n": 1
+    },
+    {
+     "opener": "everything hochhausen needs",
+     "n": 1
+    },
+    {
+     "opener": "goods come into",
+     "n": 1
+    },
+    {
+     "opener": "hochhausen stands on",
+     "n": 1
+    },
+    {
+     "opener": "more quarrels are",
+     "n": 1
+    },
+    {
+     "opener": "no one here",
+     "n": 1
+    },
+    {
+     "opener": "nothing in the",
+     "n": 1
+    },
+    {
+     "opener": "one tie in",
+     "n": 1
+    },
+    {
+     "opener": "people here can",
+     "n": 1
+    },
+    {
+     "opener": "the busiest way",
+     "n": 1
+    },
+    {
+     "opener": "the commercial circle",
+     "n": 1
+    },
+    {
+     "opener": "the harvest here",
+     "n": 1
+    },
+    {
+     "opener": "the people here",
+     "n": 1
+    },
+    {
+     "opener": "the town is",
+     "n": 1
+    },
+    {
+     "opener": "the town keeps",
+     "n": 1
+    },
+    {
+     "opener": "the town would",
+     "n": 1
+    },
+    {
+     "opener": "what the town",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}

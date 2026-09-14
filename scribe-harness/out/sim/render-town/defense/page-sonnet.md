@@ -1,0 +1,27 @@
+[WITHHELD] The town has what its readiness calls for and nothing held in reserve. One more claim on it and a choice would have to be made about which front goes short.
+
+[WITHHELD] No soldiers of the town's own stand behind the walls, and the walls are kept regardless. One of the elders takes the walls for their own boundary before anything else, and where the line runs is the older argument. One of the watch says the walls are kept and the men to stand them are not. The watch walks it after dark all the same. A woman who brought a matter to the court says what gets disputed about the walls is always who owes the work. Who would stand behind them never comes before it. The townsfolk have seen the walls kept and no soldiers standing on them, and take it that nobody is coming.
+
+[WITHHELD] A complaint brought here is heard by the court, and whoever it names has somewhere to be kept while it is heard. A clerk in the hall says a man waits his turn because the matter ahead of him is being heard in full. A drover says a man is held because nobody has yet said whose complaint he answers to. By a clerk of the court's account, a stranger's complaint is heard like any other brought before it. Whether the stranger waits to see it settled is the stranger's own choice. A woman at the long table says a man is brought in for who he is known to run with, and let go again for what he can pay. A night patrolman says the wage is no different whether the night passes quiet or ends with a man walked in. A soldier reckons a stranger stopped at the gate is the garrison's until his business is asked. After that he is the watch's. A journeyman says the trades pay for the waiting twice, once in the man kept and once in the work that waits on him. The stallholders say a stranger who cheats at the market is told where the matter is heard. A stallholder cheated by a stranger is told the same, once the stranger is already gone. The men who hold the way in hold that a stranger with a complaint against him waits there until somebody comes to claim him.
+
+[WITHHELD] The grain store is kept deep enough to carry the town through a bad season, and the purse behind it has room still to spare. The watch says its own wage is the last thing the purse opens for. The soldiers say they are paid out of the same purse and in the same order. One of the aldermen holds that when the wage is raised, the answer is always the grain store. A master of one of the crafts reckons the trades built the store and the hall built the shortfall. A pedlar smells the grain through the store door, and hears the watch's wage complained of at the tavern. A local priest says the parish asks for nothing beyond what the town already promised it, and says nothing of what the parish has received in turn. Asked about the purse, a clerk in the hall talks about the grain store, and asked again, talks about the grain store again. The court says nobody has brought it the matter of the watch's wage. It does not expect the hall to be the one who does.
+
+[WITHHELD] The town keeps a grain store and no house kept apart for the sick, so whoever nurses a sick guest here does it out of the church. A local priest says a stranger who falls sick asks for a house kept for the sick, and is given a person to tend him instead. A woman who sells at the market holds that grain is hard to keep for anybody without a door of their own to store it behind. A guest at one of the inns reports that strangers walk over to look at the grain store, and nobody born here ever bothers to. One of the watch says strangers ask where the grain is kept, and nobody has ever once asked where the sick are taken. A guild factor reckons what a stranger draws on for provision is a store the trades filled, and the trades who filled it have no say in the opening of it. The officers of the court say a stranger's questions about the grain store are nothing new, and the ones about the sick are questions they have not had before.
+
+[WITHHELD] The balance of safety here could go either way. A thinner watch or a bolder hand at work would show up in the season's returns before anything else needed to change.
+
+[WITHHELD] What the town offers about its own safety is a first look and nothing more settled than that. A longer stay here would likely tell a different story.
+
+[PASS] The street stays quiet here, and the reason for that answers to an order of its own, not to the watch.
+
+[WITHHELD] Spitzplatz holds its own entry points, and that is what a wall buys a town, not safety outright but a say in where trouble starts.
+
+[FAIL] People walk the town here after dark, and that is more of what makes it feel safe than anything at the gate.
+
+[PASS] A traveller here finds a hall whose business is the kind of trouble a garrison could not touch, and finds it busy.
+
+[PASS] The town keeps arcane provision among its defenses, detection and wards against what conventional means would miss.
+
+[PASS] The town walls around Spitzplatz are sound, and the muster meant to stand behind them is thinning faster than anyone here has said aloud.
+
+[WITHHELD] A break on the roads here would not reach the table, and the grain store is the reason for that, not the roads themselves.
