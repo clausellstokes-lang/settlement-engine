@@ -1,14 +1,33 @@
 Below are lines written for one settlement dossier, and the facts they were written from.
 For EACH numbered line answer the 7 questions with `yes` or `no` and nothing else.
-  1. CERTAINTY: does the line claim to know something more surely than the facts below support?
+  1. CERTAINTY: does the line state as DECIDED something the facts below leave UNDECIDED — an absence read out of a field with no value, an origin, a contest no relation row names, a practice behind a fact that only stands, or a verdict the town's own institution and holder rows deny?
   2. QUANTIFIER: does it say how many, how much or how often, where the facts give no number?
   3. SCOPE: does it apply to more of the town, or more of the time, than the facts cover?
   4. ACTOR: does someone act in it who is not a body or role these facts seat?
   5. FORECAST: does it say what is going to happen rather than what stands?
   6. MECHANISM: does it describe how a thing works — a practice, a procedure, a cause, a custom, a price, a debt, a fine, a backlog — where the facts only say that the thing stands?
-  7. SAME PAGE: does it contradict a machine line on this page?
+  7. SAME PAGE: does it contradict a machine line on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine's, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.
 A `yes` to any question means the line is refused and the hand-written line ships instead.
 Answer for every numbered line, in order, and write nothing outside the schema.
+
+THE READER'S EYE. These are the bars the writer was given, and they are the bars you
+are reading against. A line that keeps all six is not refused for keeping them.
+  - A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT: an absence, a smallness or a quiet asserted where a field shows no value is an invention.
+  - NO ORIGIN: nothing here came before, grew from, took root, was founded, was sited or was chosen.
+  - NO CONTEST THE CARD DOES NOT NAME: a rank, a share, a standing or a seat is not a quarrel.
+  - A BOOLEAN IS A FACT, NOT A PRACTICE: that a thing stands licenses no account of how it is run, who fills it, who is let in or what is owed.
+  - NO VERDICT THE FACTS' OWN ROWS DENY: if an institution or holder row names a thing, the town has it.
+  - NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS: where `hasWorld` reads false, no other settlement exists for this page.
+
+THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
+Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
+WEAK, CRITICAL) are TWO ladders over ONE score and both are the engine's. Write to the pool
+key's band; never name the badge word and never reconcile the two. A line that agrees with the
+band is NOT a contradiction of the badge, and neither reading refutes the other.
+
+THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE. A note reading `Upkeep underfunded ... at 97%`
+beside `Economic Backing: Well-funded` is two true readings of two fields and not a
+contradiction; write to the pool key and to neither number.
 
 THE TOWN:
 {
@@ -803,27 +822,8 @@ THE PAGE, as the reader meets it. Question 7 is about these lines and no others:
   [machine] Medical Readiness: Medical Readiness: Clergy care — Parish care. Basic wound and disease management.
   [machine] Logistics & Supply: Logistics & Supply: Granary present — Granary with road supply. Cut the roads, cut the supply.
 
-THE LINES:
-  POOL "readiness ADEQUATE" in block DS-DEF-1, which reads:
-    defenseProfile.readiness.score = 57
-1. (spine) The walls are kept and no soldiers of the town stand behind them.
+THE LINES. The numbering skips the hand-written lines, which are not yours to judge;
+answer for the numbers that appear and for no others.
   POOL "Invasion & War: walls with NO force" in block DS-DEF-2, which reads:
     institutions = "[52 rows]"
-2. (spine) The walls are kept and no soldiers of the town stand behind them.
-3. (face 0) A clerk in the hall says the keeping is paid out of the common purse.
-4. (face 1) A clerk in the hall says the keeping is paid out of the common purse.
-5. (face 2) A clerk in the hall says the keeping is paid out of the common purse.
-6. (face 3) A clerk in the hall says the keeping is paid out of the common purse.
-  POOL "Internal Security: full legal chain (court AND prison)" in block DS-DEF-2, which reads:
-    economicState.compound.inst.hasCourtSystem = true
-    economicState.compound.inst.hasPrison = true
-7. (spine) The walls are kept and no soldiers of the town stand behind them.
-8. (face 0) A clerk in the hall says the keeping is paid out of the common purse.
-9. (face 1) A clerk in the hall says the keeping is paid out of the common purse.
-10. (face 2) A clerk in the hall says the keeping is paid out of the common purse.
-11. (face 3) A clerk in the hall says the keeping is paid out of the common purse.
-12. (face 4) A clerk in the hall says the keeping is paid out of the common purse.
-13. (face 5) A clerk in the hall says the keeping is paid out of the common purse.
-14. (face 6) A clerk in the hall says the keeping is paid out of the common purse.
-15. (face 7) A clerk in the hall says the keeping is paid out of the common purse.
-16. (face 8) A clerk in the hall says the keeping is paid out of the common purse.
+1. (spine) There are no soldiers of the town own here, and the walls are kept up all the same.
