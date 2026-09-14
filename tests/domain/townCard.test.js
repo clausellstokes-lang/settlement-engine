@@ -35,11 +35,33 @@ import {
 import { rolesOf, sourcesOf, renderYearOf } from '../../src/domain/display/stateProse/faceSources.js';
 import { classifyMoves, orderIdOf, LEVEL1_ORDERS } from '../../src/domain/prose/moveGrammar.js';
 import { astTokens } from '../../scripts/wiring-census.mjs';
+import { buildStaticCard, staticCardCheck, STATIC_CARD_JSON } from '../../scripts/scribe-static-card.mjs';
+import {
+  CENSUS_DECORATIONS, DESK_LOCAL_NOTES, READ_RECIPES, peelDecorations, readResolution,
+  resolveReadingBags,
+} from '../../scripts/lib/scribe-read-resolution.mjs';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const STATIC_CARD = JSON.parse(readFileSync(join(ROOT, 'docs/content/scribe-static-card.json'), 'utf8'));
 const GOLDEN = join(ROOT, 'tests/fixtures/scribe-town-card.golden.json');
+
+/**
+ * ⭐ THE SETTLEMENT ROOTS THE SEATING PATH AND THE DESK RECIPES READ, which `faceSources.js`, the
+ * mount registry and the reading bags license rather than a pool's key function. Hoisted out of
+ * the "no new read" arm so the W3c resolution arm asks the SAME oracle: a root that is legal for
+ * the card to read is legal for a resolution to name. `populationHistory` is the one that makes
+ * the point — it is written by the WORLD PULSE during a played world, so a freshly generated town
+ * does not carry the key and a test that asked only the blob would convict a real read.
+ */
+const LICENSED_ROOTS = Object.freeze([
+  'institutions', 'tier', 'history', 'powerStructure', 'id', 'name',
+  'config', 'defenseProfile', 'economicState', 'economicViability', 'resourceAnalysis',
+  'stress', 'conflicts', 'relationships', 'neighbourNetwork', 'neighborRelationship',
+  'prominentRelationship', 'structuralViolations', 'structuralSuggestions', 'coherenceNotes',
+  'availableServices', 'populationHistory', 'lifecycleStatus', 'arrivalScene',
+  'pressureSentence', 'settlementReason', 'publicLegitimacy', '_seed',
+]);
 
 /** The two new W0 modules, which every source-scan arm below is taken over. */
 const NEW_MODULES = Object.freeze([
@@ -156,13 +178,9 @@ describe('townCard — no new read, and no new producer', () => {
     const known = new Set(Object.keys(STATIC_CARD.fields));
     const roots = new Set([...known].map((f) => f.split('.')[0]));
     // The roots the SEATING path reads, named here because they are the card's own reads and
-    // they are licensed by `faceSources.js` rather than by a pool's key function.
-    for (const extra of ['institutions', 'tier', 'history', 'powerStructure', 'id', 'name',
-      'config', 'defenseProfile', 'economicState', 'economicViability', 'resourceAnalysis',
-      'stress', 'conflicts', 'relationships', 'neighbourNetwork', 'neighborRelationship',
-      'prominentRelationship', 'structuralViolations', 'structuralSuggestions', 'coherenceNotes',
-      'availableServices', 'populationHistory', 'lifecycleStatus', 'arrivalScene',
-      'pressureSentence', 'settlementReason', 'publicLegitimacy', '_seed']) roots.add(extra);
+    // they are licensed by `faceSources.js` rather than by a pool's key function. See
+    // `LICENSED_ROOTS`, which the W3c resolution arm asks too.
+    for (const extra of LICENSED_ROOTS) roots.add(extra);
 
     const s = townOf({
       settType: 'city', culture: 'germanic', terrainOverride: 'plains',
@@ -390,6 +408,150 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
     expect(WORLD_ONLY_READINGS.includes('capture')).toBe(false);
     expect(WORLD_ONLY_READINGS.every((w) => w === w.toLowerCase())).toBe(true);
   }, 300_000);
+});
+
+describe('the static table\'s reads resolve on a settlement (W3c car 1)', () => {
+  const PINNED = {
+    settType: 'town', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+  };
+  /** The committed column, which is what the card actually joins on. */
+  const RESOLUTION = STATIC_CARD.resolution;
+
+  it('⭐ the column is TOTAL over the field table, with three kinds and five keys a row', () => {
+    // ⛔ TOTAL AND NOT PARTIAL. A column with holes in it cannot be told from a column that was
+    // never built, and `townCard.js` would then have two silences to tell apart instead of one.
+    expect(Object.keys(RESOLUTION).sort()).toEqual(Object.keys(STATIC_CARD.fields).sort());
+    for (const [name, row] of Object.entries(RESOLUTION)) {
+      expect(Object.keys(row), name).toEqual(['expr', 'inputs', 'kind', 'path', 'via']);
+      expect(['path', 'derived', 'unresolved'], name).toContain(row.kind);
+      expect(String(row.via).length, `${name} carries no reason`).toBeGreaterThan(20);
+      if (row.kind === 'path') expect(row.path, name).not.toBe('');
+      if (row.kind === 'derived') expect(row.expr, name).not.toBe('');
+    }
+    // THE MEASUREMENT THE CAR IS SCORED ON, pinned so a recipe change that loses a reading reds.
+    const kinds = {};
+    for (const row of Object.values(RESOLUTION)) kinds[row.kind] = (kinds[row.kind] || 0) + 1;
+    expect(kinds).toEqual({ path: 68, derived: 49, unresolved: 8 });
+    expect(STATIC_CARD.totals.resolution).toEqual(kinds);
+  });
+
+  it('⭐⭐ THE REPLAY: every resolved path is rooted at a key a real settlement HAS', () => {
+    // ⛔⛔ THIS IS THE ARM THAT MAKES THE COLUMN A CURE RATHER THAN A RENAME. The resolution is
+    // read STATICALLY out of the recipes; this runs a real settlement past it and asserts that
+    // every `path` names a root the blob actually carries — which is exactly the test
+    // `fieldState` applies when it decides between `not-decided` and `unreadable`.
+    const s = townOf(PINNED, 'render-town');
+    const offending = [];
+    for (const [name, row] of Object.entries(RESOLUTION)) {
+      if (row.kind !== 'path') continue;
+      const root = String(row.path).split('.')[0];
+      if (!Object.prototype.hasOwnProperty.call(s, root)) offending.push(`${name} -> ${row.path}`);
+    }
+    expect(offending, `\n${offending.join('\n')}\n`).toEqual([]);
+
+    // The same for every INPUT a derived reading names: an input the model is shown must be real.
+    // The oracle is wider by exactly `LICENSED_ROOTS` — a field the WORLD PULSE writes is a real
+    // read even where a freshly generated town has not been given the key yet.
+    const badInputs = [];
+    for (const [name, row] of Object.entries(RESOLUTION)) {
+      for (const input of row.inputs) {
+        const root = String(input).split('.')[0];
+        if (!Object.prototype.hasOwnProperty.call(s, root) && !LICENSED_ROOTS.includes(root)) {
+          badInputs.push(`${name} <- ${input}`);
+        }
+      }
+    }
+    expect(badInputs, `\n${badInputs.join('\n')}\n`).toEqual([]);
+
+    // ⭐ NEGATIVE CONTROL — the names the census recorded are NOT rooted on a settlement, which is
+    // the defect the column exists for. If this ever passes, the census started spelling reads as
+    // settlement paths and the column is doing nothing.
+    const deskLocal = ['readings.scores', 'readings.isEntrepot', 'readings.viable', 'axis'];
+    for (const name of deskLocal) {
+      expect(Object.prototype.hasOwnProperty.call(s, String(name).split('.')[0]), name).toBe(false);
+      expect(Object.keys(RESOLUTION), name).toContain(name);
+    }
+    // … and three of those four now resolve to a root the town has.
+    expect(RESOLUTION['readings.scores'].path).toBe('defenseProfile.scores');
+    expect(RESOLUTION['readings.isEntrepot'].path).toBe('economicState.isEntrepot');
+    expect(RESOLUTION['readings.viable'].path).toBe('economicViability.viable');
+    // The fourth is a closed vocabulary word and says so rather than pretending.
+    expect(RESOLUTION.axis.kind).toBe('unresolved');
+    expect(RESOLUTION.axis.via).toMatch(/SCORE_AXES/);
+  }, 300_000);
+
+  it('the reading bags come out of the recipes, one per desk, and none is empty', () => {
+    const { desks, conflicts } = resolveReadingBags();
+    expect(conflicts).toEqual([]);
+    expect(Object.keys(desks).sort()).toEqual([...new Set(READ_RECIPES.map((r) => r.desk))].sort());
+    for (const [desk, bag] of Object.entries(desks)) {
+      expect(Object.keys(bag).length, `${desk} resolved no key`).toBeGreaterThan(0);
+    }
+    // NAMED PINS, one per desk, each checkable against the recipe by eye.
+    expect(desks.general.scores.path).toBe('defenseProfile.scores');
+    expect(desks.general.inst.path).toBe('economicState.compound.inst');
+    expect(desks.economy.notableAbsences.inputs).toEqual(['availableServices', 'tier']);
+    expect(desks.power.structuralLens.expr).toBe('structuralLensOf(settlement)');
+    expect(desks.stressors.conditions.expr).toBe('deriveAllActiveConditions(settlement)');
+    expect(desks.warFaith.faith.expr).toBe('faithPanelModel(settlement)');
+    // ⛔ THE CALLER HOP, which is the whole reason the option table exists: this key is bound to
+    // `options.populationTrend` in the recipe and to a reader of the blob at the call site.
+    expect(desks.general.populationTrend.expr).toBe('populationTrendBand(settlement.populationHistory)');
+    expect(desks.general.populationTrend.inputs).toEqual(['populationHistory']);
+  });
+
+  it('every census decoration peels off the spelling it names, and nothing else', () => {
+    for (const row of CENSUS_DECORATIONS) {
+      const peeled = peelDecorations(row.fixes);
+      expect(peeled.name, `${row.name} did not peel \`${row.fixes}\``).not.toBe(row.fixes);
+    }
+    // The four the committed table actually carries, by name.
+    expect(peelDecorations('Array.isArray(readings.conditions) ? readings.conditions : ').name)
+      .toBe('readings.conditions');
+    expect(peelDecorations('readings.politics ?? null.blocs').name).toBe('readings.politics.blocs');
+    expect(peelDecorations('readings.hasPatron === true').name).toBe('readings.hasPatron');
+    expect(peelDecorations('!hasPatron').name).toBe('hasPatron');
+    // A CHAINED METHOD is taken off the tail and reported, and `.length` is NOT a method.
+    expect(peelDecorations('readings.notableAbsences.map')).toMatchObject({
+      name: 'readings.notableAbsences', method: 'map',
+    });
+    expect(peelDecorations('readings.relationships.length')).toMatchObject({
+      name: 'readings.relationships.length', method: '',
+    });
+    // NEGATIVE CONTROL — a plain path is returned untouched.
+    expect(peelDecorations('config.monsterThreat')).toMatchObject({
+      name: 'config.monsterThreat', method: '', peeled: [],
+    });
+  });
+
+  it('the eight unresolved names are the desk locals the recipes cannot bind, each with a reason', () => {
+    const left = Object.entries(RESOLUTION).filter(([, r]) => r.kind === 'unresolved').map(([n]) => n);
+    expect(left.sort()).toEqual([
+      'axis', 'conflict.intensity', 'link', 'link.npcConnections', 'readings', 'row', 'row.type',
+      'structureKey',
+    ]);
+    // Every one of them is a NAMED note or the bag root itself, never a silence.
+    const named = new Set(DESK_LOCAL_NOTES.map((r) => r.name));
+    for (const name of left) {
+      const head = name.replace(/^readings\./, '').split('.')[0];
+      expect(named.has(head) || name === 'readings', name).toBe(true);
+    }
+  });
+
+  it('is deterministic, and the committed card is fresh', () => {
+    const once = readResolution(Object.keys(STATIC_CARD.fields));
+    const twice = readResolution(Object.keys(STATIC_CARD.fields));
+    expect(JSON.stringify(once)).toBe(JSON.stringify(twice));
+    // ⭐ FRESHNESS, the census idiom: the committed static card is rebuilt here and compared byte
+    // for byte, so a recipe edited without re-running the generator reds in the suite and not
+    // only in the gate command.
+    const verdict = staticCardCheck(
+      existsSync(STATIC_CARD_JSON) ? readFileSync(STATIC_CARD_JSON, 'utf8') : null,
+      buildStaticCard(),
+    );
+    expect(verdict.detail).toBe('');
+    expect(verdict.ok).toBe(true);
+  }, 120_000);
 });
 
 describe('townCard — the bodies this page names (W3d car 2)', () => {

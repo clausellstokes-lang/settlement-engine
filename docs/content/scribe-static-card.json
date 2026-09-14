@@ -1,5 +1,5 @@
 {
-  "schema": "scribe-static-card/1",
+  "schema": "scribe-static-card/2",
   "stamp": {
     "census": {
       "files": {
@@ -33,7 +33,12 @@
       "PULSE": 8,
       "SNAPSHOT": 113
     },
-    "unresolvedReads": 60
+    "unresolvedReads": 60,
+    "resolution": {
+      "path": 68,
+      "derived": 49,
+      "unresolved": 8
+    }
   },
   "fields": {
     "!hasPatron": {
@@ -785,6 +790,903 @@
       "writers": 0,
       "status": "FROZEN",
       "grain": "field"
+    }
+  },
+  "resolution": {
+    "!hasPatron": {
+      "expr": "faithPanelModel(settlement).hasEmbed",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `hasPatron` = `!!model.hasEmbed` in renderFaith"
+    },
+    "Array.isArray(hist.historicalEvents) ? hist.historicalEvents : ": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "history.historicalEvents",
+      "via": "the desk binds `hist = readings.history && typeof readings.history === 'object' ? readings.history : {}` in generalStateProse (src/domain/display/stateProse/generalStateProse.js), the general desk's reading bag, key `history` = `r.history` in generalDeskProse"
+    },
+    "Array.isArray(readings.conditions) ? readings.conditions : ": {
+      "expr": "deriveAllActiveConditions(settlement)",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the stressors desk's reading bag, key `conditions` = `deriveAllActiveConditions(s)` in stressorsOf"
+    },
+    "Array.isArray(readings.faith.ranks) ? readings.faith.ranks.find((d) => d.isPatron) : null.standing.mandate.phrase": {
+      "expr": "Array.isArray(readings.faith.ranks) ? readings.faith.ranks.find((d) => d.isPatron) : null.standing.mandate.phrase",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "axis": {
+      "expr": "axis",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable of `SCORE_AXES.map((axis) => …)` in generalStateProse.js: a closed vocabulary of score axes, not a settlement field. The pool key names which axis this is (`scores.economic: STRONG`), and the score itself resolves through `readings.scores`"
+    },
+    "config.monsterThreat": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "config.monsterThreat",
+      "via": "the desk binds `config = settlement?.config || {}` in defenseForcesProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "config.tradeRouteAccess": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "config.tradeRouteAccess",
+      "via": "the desk binds `config = settlement?.config || {}` in defenseForcesProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "conflict.intensity": {
+      "expr": "conflict.intensity",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable over the conflict rows the desk is handed; the rows themselves are `conflicts`, and this reading is one row of that list"
+    },
+    "defenseProfile.economicGates.military": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "defenseProfile.economicGates.military",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "defenseProfile.magicDependency": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "defenseProfile.magicDependency",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "defenseProfile.readiness.score": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "defenseProfile.readiness.score",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "defenseProfile.scores.economic": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "defenseProfile.scores.economic",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasChurch": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasChurch",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasCourtSystem": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasCourtSystem",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasGranary": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasGranary",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasHospital": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasHospital",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasNavy": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasNavy",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasPort": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasPort",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.compound.inst.hasPrison": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst.hasPrison",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.foodSecurity.stockpile": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.foodSecurity.stockpile",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.foodSecurity.stockpile.blockadeBypass": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.foodSecurity.stockpile.blockadeBypass",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.foodSecurity.stockpile.blockaded": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.foodSecurity.stockpile.blockaded",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.incomeSources": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.incomeSources",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.incomeSources.filter": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.incomeSources",
+      "via": "the census recorded a settlement path and the card reads it as one; the desk chains `.filter` onto it and the reading is the collection"
+    },
+    "economicState.incomeSources.length": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.incomeSources.length",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.incomeSources.reduce": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.incomeSources",
+      "via": "the census recorded a settlement path and the card reads it as one; the desk chains `.reduce` onto it and the reading is the collection"
+    },
+    "economicState.isEntrepot": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.isEntrepot",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.localProduction": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.localProduction",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.primaryExports": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.primaryExports",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.primaryImports": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.primaryImports",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.safetyProfile.blackMarketCapture": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.safetyProfile.blackMarketCapture",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicState.safetyProfile.safetyLabel": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.safetyProfile.safetyLabel",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "economicViability.viable": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.viable",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "governanceLedger(settlement)": {
+      "expr": "governanceLedger(settlement)",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "governanceLedger(settlement).present": {
+      "expr": "governanceLedger(settlement).present",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "hasNamedMagicChain(settlement.economicState.activeChains)": {
+      "expr": "hasNamedMagicChain(settlement.economicState.activeChains)",
+      "inputs": [
+        "economicState.activeChains"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "institutions": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "institutions",
+      "via": "the general desk's reading bag, key `institutions` = `r.institutions` in generalDeskProse"
+    },
+    "leadingDocument(readings.war)": {
+      "expr": "leadingDocument(readings.war)",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingDocument(readings.war).termLines": {
+      "expr": "leadingDocument(readings.war).termLines",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingExploitation(settlement.resourceAnalysis).bucket": {
+      "expr": "leadingExploitation(settlement.resourceAnalysis).bucket",
+      "inputs": [
+        "resourceAnalysis"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingExploitation(settlement.resourceAnalysis).row": {
+      "expr": "leadingExploitation(settlement.resourceAnalysis).row",
+      "inputs": [
+        "resourceAnalysis"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingTerm(doc.termLines)": {
+      "expr": "leadingTerm(doc.termLines)",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingTerm(doc.termLines).fraying": {
+      "expr": "leadingTerm(doc.termLines).fraying",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "leadingTerm(doc.termLines).yearsRemaining": {
+      "expr": "leadingTerm(doc.termLines).yearsRemaining",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "link": {
+      "expr": "link",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable over the neighbour links the RELATIONSHIPS tab assembles and passes in; the headless page builds that list from `neighbourNetwork` and `neighborRelationship`, and a link is one row of it"
+    },
+    "link.npcConnections": {
+      "expr": "link.npcConnections",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable over the neighbour links the RELATIONSHIPS tab assembles and passes in; the headless page builds that list from `neighbourNetwork` and `neighborRelationship`, and a link is one row of it"
+    },
+    "magicWorksAt({ settlement })": {
+      "expr": "magicWorksAt({ settlement })",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "name": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "name",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "powerStructure.criminalCaptureState": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.criminalCaptureState",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "powerStructure.factions": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.factions",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "powerStructure.recentConflict": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.recentConflict",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "powerStructure.stability": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.stability",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "prosperityRank(settlement.economicState.prosperity)": {
+      "expr": "prosperityRank(settlement.economicState.prosperity)",
+      "inputs": [
+        "economicState.prosperity"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "readings": {
+      "expr": "readings",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the desk's whole reading bag rather than one reading; the pool's other rows name the readings its key actually turns on"
+    },
+    "readings.activeChains": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.activeChains",
+      "via": "the general desk's reading bag, key `activeChains` = `eco.activeChains` in generalDeskProse"
+    },
+    "readings.ancientRuin && typeof readings.ancientRuin === 'object'\n    ? readings.ancientRuin : null": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "history.ancientRuin",
+      "via": "the general desk's reading bag, key `ancientRuin` = `options.ancientRuin` in generalDeskProse"
+    },
+    "readings.ancientRuin && typeof readings.ancientRuin === 'object'\n    ? readings.ancientRuin : null.name": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "history.ancientRuin.name",
+      "via": "the general desk's reading bag, key `ancientRuin` = `options.ancientRuin` in generalDeskProse"
+    },
+    "readings.criticalIssueCount": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.metrics.criticalIssueCount",
+      "via": "the general desk's reading bag, key `criticalIssueCount` = `via.metrics?.criticalIssueCount` in generalDeskProse"
+    },
+    "readings.exploitation": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "resourceAnalysis.exploitation",
+      "via": "the general desk's reading bag, key `exploitation` = `r.resourceAnalysis?.exploitation` in generalDeskProse"
+    },
+    "readings.exportPosture.status": {
+      "expr": "deriveExportPosture(settlement).status",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `exportPosture` = `deriveExportPosture(settlement)` in economyDeskRead"
+    },
+    "readings.faith.piety.trend": {
+      "expr": "faithPanelModel(settlement).piety.trend",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith"
+    },
+    "readings.faith.ranks": {
+      "expr": "faithPanelModel(settlement).ranks",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith"
+    },
+    "readings.faith.ranks.filter": {
+      "expr": "faithPanelModel(settlement).ranks",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith; the desk chains `.filter` onto it and the reading is the collection"
+    },
+    "readings.faith.ranks.find": {
+      "expr": "faithPanelModel(settlement).ranks",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith; the desk chains `.find` onto it and the reading is the collection"
+    },
+    "readings.faith.ranks.length": {
+      "expr": "faithPanelModel(settlement).ranks.length",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith"
+    },
+    "readings.faith.unaffiliated": {
+      "expr": "faithPanelModel(settlement).unaffiliated",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `faith` = `model` in renderFaith"
+    },
+    "readings.flowDrift.band": {
+      "expr": "(world && world.flowDrift ? world.flowDrift : null) ?? null.band",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `flowDrift` = `options.flowDrift ?? null` in economyDeskRead"
+    },
+    "readings.foodBalance": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.metrics.foodBalance",
+      "via": "the general desk's reading bag, key `foodBalance` = `via.metrics?.foodBalance` in generalDeskProse (and by 1 other desk to the same reading)"
+    },
+    "readings.foodBalance.available": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.metrics.foodBalance.available",
+      "via": "the general desk's reading bag, key `foodBalance` = `via.metrics?.foodBalance` in generalDeskProse (and by 1 other desk to the same reading)"
+    },
+    "readings.foodBalance.deficit": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.metrics.foodBalance.deficit",
+      "via": "the general desk's reading bag, key `foodBalance` = `via.metrics?.foodBalance` in generalDeskProse (and by 1 other desk to the same reading)"
+    },
+    "readings.foodBalance.surplus": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.metrics.foodBalance.surplus",
+      "via": "the general desk's reading bag, key `foodBalance` = `via.metrics?.foodBalance` in generalDeskProse (and by 1 other desk to the same reading)"
+    },
+    "readings.granaryOutlook": {
+      "expr": "(deriveGranaryOutlook(settlement)) ?? null",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `granaryOutlook` = `options.granaryOutlook ?? null` in economyDeskRead"
+    },
+    "readings.granaryOutlook.available": {
+      "expr": "(deriveGranaryOutlook(settlement)) ?? null.available",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `granaryOutlook` = `options.granaryOutlook ?? null` in economyDeskRead"
+    },
+    "readings.granaryOutlook.band": {
+      "expr": "(deriveGranaryOutlook(settlement)) ?? null.band",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `granaryOutlook` = `options.granaryOutlook ?? null` in economyDeskRead"
+    },
+    "readings.hasPatron === true": {
+      "expr": "faithPanelModel(settlement).hasEmbed",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `hasPatron` = `!!model.hasEmbed` in renderFaith"
+    },
+    "readings.history && typeof readings.history === 'object' ? readings.history : {}": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "history",
+      "via": "the general desk's reading bag, key `history` = `r.history` in generalDeskProse"
+    },
+    "readings.impairedInstitution": {
+      "expr": "(impairedInstitutionOf(settlement)) ?? null",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `impairedInstitution` = `options.impairedInstitution ?? null` in economyDeskRead"
+    },
+    "readings.inst": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.compound.inst",
+      "via": "the general desk's reading bag, key `inst` = `eco.compound?.inst` in generalDeskProse"
+    },
+    "readings.isEntrepot": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.isEntrepot",
+      "via": "the general desk's reading bag, key `isEntrepot` = `eco.isEntrepot` in generalDeskProse"
+    },
+    "readings.notableAbsences": {
+      "expr": "deriveNotableAbsences(settlement.tier, settlement.availableServices)",
+      "inputs": [
+        "availableServices",
+        "tier"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `notableAbsences` = `deriveNotableAbsences(settlement.tier, settlement.availableServices)` in economyDeskRead"
+    },
+    "readings.notableAbsences.map": {
+      "expr": "deriveNotableAbsences(settlement.tier, settlement.availableServices)",
+      "inputs": [
+        "availableServices",
+        "tier"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "the economy desk's reading bag, key `notableAbsences` = `deriveNotableAbsences(settlement.tier, settlement.availableServices)` in economyDeskRead; the desk chains `.map` onto it and the reading is the collection"
+    },
+    "readings.politics ?? null.blocs": {
+      "expr": "settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', settlement.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ])).blocs",
+      "inputs": [
+        "id"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "the power desk's reading bag, key `politics` = `settlementBlocs(Object.fromEntries([ ['worldState', world || null], ['settlementId', s.id], ['includeGroundTruth', audienceOf(options) === 'dm'], ['includeCovert', audienceOf(options) === 'dm'], ]))` in powerOf"
+    },
+    "readings.populationTrend.band": {
+      "expr": "populationTrendBand(settlement.populationHistory).band",
+      "inputs": [
+        "populationHistory"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "the general desk's reading bag, key `populationTrend` = `options.populationTrend` in generalDeskProse"
+    },
+    "readings.populationTrend.window": {
+      "expr": "populationTrendBand(settlement.populationHistory).window",
+      "inputs": [
+        "populationHistory"
+      ],
+      "kind": "derived",
+      "path": "",
+      "via": "the general desk's reading bag, key `populationTrend` = `options.populationTrend` in generalDeskProse"
+    },
+    "readings.primaryImports": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicState.primaryImports",
+      "via": "the general desk's reading bag, key `primaryImports` = `eco.primaryImports` in generalDeskProse"
+    },
+    "readings.primaryStress": {
+      "expr": "resolvePrimaryStress(stresses.map((v) => v.type).filter(Boolean))",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the general desk's reading bag, key `primaryStress` = `resolvePrimaryStress(stresses.map((v) => v?.type).filter(Boolean))` in generalDeskProse"
+    },
+    "readings.prominentRelationship": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "prominentRelationship",
+      "via": "the general desk's reading bag, key `prominentRelationship` = `r.prominentRelationship` in generalDeskProse"
+    },
+    "readings.relationships": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "relationships",
+      "via": "the general desk's reading bag, key `relationships` = `r.relationships` in generalDeskProse"
+    },
+    "readings.relationships.length": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "relationships.length",
+      "via": "the general desk's reading bag, key `relationships` = `r.relationships` in generalDeskProse"
+    },
+    "readings.scores": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "defenseProfile.scores",
+      "via": "the general desk's reading bag, key `scores` = `dp.scores` in generalDeskProse"
+    },
+    "readings.structuralSuggestions": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "structuralSuggestions",
+      "via": "the general desk's reading bag, key `structuralSuggestions` = `r.structuralSuggestions` in generalDeskProse"
+    },
+    "readings.structuralSuggestions.length": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "structuralSuggestions.length",
+      "via": "the general desk's reading bag, key `structuralSuggestions` = `r.structuralSuggestions` in generalDeskProse"
+    },
+    "readings.structuralViolations": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "structuralViolations",
+      "via": "the general desk's reading bag, key `structuralViolations` = `r.structuralViolations` in generalDeskProse"
+    },
+    "readings.structuralViolations.length": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "structuralViolations.length",
+      "via": "the general desk's reading bag, key `structuralViolations` = `r.structuralViolations` in generalDeskProse"
+    },
+    "readings.tier": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "tier",
+      "via": "the general desk's reading bag, key `tier` = `r.tier` in generalDeskProse"
+    },
+    "readings.tradeRouteAccess": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "config.tradeRouteAccess",
+      "via": "the general desk's reading bag, key `tradeRouteAccess` = `r.config?.tradeRouteAccess` in generalDeskProse"
+    },
+    "readings.viable": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "economicViability.viable",
+      "via": "the general desk's reading bag, key `viable` = `via.viable` in generalDeskProse"
+    },
+    "readings.war.mobilization.covert": {
+      "expr": "world && world.war ? world.war : null.mobilization.covert",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.mobilization.ticksToDeploy": {
+      "expr": "world && world.war ? world.war : null.mobilization.ticksToDeploy",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.occupation": {
+      "expr": "world && world.war ? world.war : null.occupation",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.occupierPosition": {
+      "expr": "world && world.war ? world.war : null.occupierPosition",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.occupierPosition.stretchedThin": {
+      "expr": "world && world.war ? world.war : null.occupierPosition.stretchedThin",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.postureState": {
+      "expr": "world && world.war ? world.war : null.postureState",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.status": {
+      "expr": "world && world.war ? world.war : null.status",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.status.besiegedBy": {
+      "expr": "world && world.war ? world.war : null.status.besiegedBy",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.status.besiegingTargets": {
+      "expr": "world && world.war ? world.war : null.status.besiegingTargets",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.status.besiegingTargets.length": {
+      "expr": "world && world.war ? world.war : null.status.besiegingTargets.length",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.war.warBeat": {
+      "expr": "world && world.war ? world.war : null.warBeat",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the warFaith desk's reading bag, key `war` = `war` in renderWar"
+    },
+    "readings.worldStressor ?? null.lifecycleStage": {
+      "expr": "world && world.stressor ? world.stressor : null.lifecycleStage",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the stressors desk's reading bag, key `worldStressor` = `world && world.stressor ? world.stressor : null` in stressorsOf"
+    },
+    "readings.worldStressor ?? null.originContext.variant": {
+      "expr": "world && world.stressor ? world.stressor : null.originContext.variant",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "the stressors desk's reading bag, key `worldStressor` = `world && world.stressor ? world.stressor : null` in stressorsOf"
+    },
+    "resourceAnalysis.economicStrengths": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "resourceAnalysis.economicStrengths",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "resourceAnalysis.strategicValue": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "resourceAnalysis.strategicValue",
+      "via": "the census recorded a settlement path and the card reads it as one"
+    },
+    "row": {
+      "expr": "row",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable over the steading or engagement rows the tab passes in; on a town with no campaign the list is empty and the pool does not fire"
+    },
+    "row.type": {
+      "expr": "row.type",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "the loop variable over the steading or engagement rows the tab passes in; on a town with no campaign the list is empty and the pool does not fire"
+    },
+    "significantEvent(events).yearsAgo": {
+      "expr": "significantEvent(events).yearsAgo",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "standingDefenseForces(settlement)": {
+      "expr": "standingDefenseForces(settlement)",
+      "inputs": [],
+      "kind": "derived",
+      "path": "",
+      "via": "a reader the desk calls on the settlement; the engine computes this reading rather than storing it, so the inputs are what the card can state"
+    },
+    "stress": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "stress",
+      "via": "the desk binds `stress = settlement?.stress` in defenseMilitaryStatusProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "structureKey": {
+      "expr": "structureKey",
+      "inputs": [],
+      "kind": "unresolved",
+      "path": "",
+      "via": "a CALLER'S ARGUMENT and not a settlement field — `defenseCriminalProse(settlement, structureKey, options)` takes it from `deriveCriminalStructure(settlement).key`, which the page prints beside the pool as the criminal-structure badge"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({})": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy.breakdown",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy.breakdown.prosperity",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy.breakdown.safety",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy.govMultiplier",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
+    },
+    "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured": {
+      "expr": "",
+      "inputs": [],
+      "kind": "path",
+      "path": "powerStructure.publicLegitimacy.governanceFractured",
+      "via": "the desk binds `power = settlement?.powerStructure || {}` in defenseCriminalProse (src/domain/display/stateProse/defenseStateProse.js), the census recorded a settlement path and the card reads it as one"
     }
   },
   "pools": {

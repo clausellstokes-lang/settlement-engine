@@ -21,6 +21,13 @@
  *   (iii) THE WIRING STATUS per pool — RESOLVED or WIRING-UNRESOLVED, the key function, the
  *        rung, the reads and their normalised engine fields, read from the COMMITTED census
  *        (`docs/content/wiring-census.json`) and never re-derived here.
+ *   (iv) ⭐ (W3c) THE RESOLUTION of every one of those field names — what the DESK'S LOCAL NAME
+ *        denotes on a settlement, read out of the desk-read recipe that binds it
+ *        (`lib/scribe-read-resolution.mjs`). It is a property of the codebase for the same reason
+ *        the other three are: the binding lives in the source and is the same for every town.
+ *        Without it the town card resolved 42 of 42 valueless field rows on the pinned town to
+ *        `unreadable` — not because the engine had decided nothing, but because `readings.scores`
+ *        is a name the DESK gave a bag and no settlement has a `readings` key.
  *
  * ⛔ IT DOES NOT CHANGE `wiring-census.json` AND IT DOES NOT RE-MEASURE IT. The census is the
  * upstream fact; this file is a JOIN of the census with the pulse tree, key-sorted, and a
@@ -47,6 +54,7 @@ import path from 'node:path';
 import {
   ROOT, parseFile, normaliseRead, clockOf, parsePulseTree, frozenFieldCensus,
 } from './lib/prose-mark-fields.mjs';
+import { readResolution } from './lib/scribe-read-resolution.mjs';
 import { DESK_FILE_OF } from './prose-mark-card.mjs';
 
 /** Where the card is committed. */
@@ -193,13 +201,27 @@ export function buildStaticCard() {
   const census = JSON.parse(readFileSync(CENSUS_JSON, 'utf8'));
   const { fields, byPool, unresolved } = fieldTable(census);
   const pools = poolTable(census, byPool);
+  // ⭐⭐ (W3c) WHAT EACH OF THOSE NAMES DENOTES ON A SETTLEMENT. See
+  // `lib/scribe-read-resolution.mjs`: the `fields` column above is the DESK'S OWN SPELLING, and 88
+  // of its 125 names are desk locals a settlement has no key for, so the town card resolved 42 of
+  // 42 valueless rows to `unreadable`. This column answers each name FROM THE RECIPE THAT BINDS IT
+  // — the reading bag every desk but DEFENSE is handed — so the card can read the value.
+  const resolution = readResolution(Object.keys(fields), Object.values(DESK_FILE_OF));
+  const kinds = Object.fromEntries(
+    ['path', 'derived', 'unresolved'].map(
+      (kind) => [kind, Object.values(resolution).filter((r) => r.kind === kind).length],
+    ),
+  );
   const clocks = Object.fromEntries(
     ['CONFIG', 'LIVE-ROSTER', 'PULSE', 'SNAPSHOT'].map(
       (name) => [name, Object.values(fields).filter((f) => f.clock === name).length],
     ),
   );
   return Object.fromEntries([
-    ['schema', 'scribe-static-card/1'],
+    // /2 (W3c, 2026-09-14): `resolution` added — one row per `fields` name saying what it denotes
+    // on a settlement (`path` / `derived` with its inputs / `unresolved` with the reason). A shape
+    // change takes the next number and says why.
+    ['schema', 'scribe-static-card/2'],
     // ⛔ THE STAMP IS THE CENSUS'S SHAS AND ITS CANDIDATE LEAVES, AND DELIBERATELY NOT ITS
     // WHOLE `stamp`. The census also stamps `producerIndexFiles` — a COUNT of the files its
     // producer walk scanned — which moves whenever ANY `.js` file is added anywhere under
@@ -221,8 +243,10 @@ export function buildStaticCard() {
       ['live', Object.values(fields).filter((f) => f.status === 'LIVE').length],
       ['clocks', clocks],
       ['unresolvedReads', unresolved.length],
+      ['resolution', kinds],
     ])],
     ['fields', fields],
+    ['resolution', resolution],
     ['pools', pools],
     ['unresolvedReads', unresolved],
   ]);
@@ -273,14 +297,18 @@ async function main() {
     const verdict = staticCardCheck(committed, data);
     if (!verdict.ok) throw new Error(verdict.detail);
     console.log(`[scribe-static-card] verified ${data.totals.pools} pools / ${data.totals.fields} fields`
-      + ` (${data.totals.frozen} frozen, ${data.totals.live} live)`);
+      + ` (${data.totals.frozen} frozen, ${data.totals.live} live;`
+      + ` resolution ${data.totals.resolution.path} path / ${data.totals.resolution.derived} derived`
+      + ` / ${data.totals.resolution.unresolved} unresolved)`);
     return;
   }
   writeFileSync(STATIC_CARD_JSON, text);
   console.log(`[scribe-static-card] wrote docs/content/scribe-static-card.json —`
     + ` ${data.totals.pools} pools, ${data.totals.fields} fields,`
     + ` ${data.totals.frozen} frozen / ${data.totals.live} live,`
-    + ` ${data.totals.unresolvedReads} unresolved reads`);
+    + ` ${data.totals.unresolvedReads} unresolved reads,`
+    + ` resolution ${data.totals.resolution.path} path / ${data.totals.resolution.derived} derived`
+    + ` / ${data.totals.resolution.unresolved} unresolved`);
 }
 
 if (process.argv[1] && process.argv[1].endsWith('scribe-static-card.mjs')) {
