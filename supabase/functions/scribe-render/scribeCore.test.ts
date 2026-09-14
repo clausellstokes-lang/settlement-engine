@@ -116,6 +116,45 @@ Deno.test('the volatile turn carries the page, the ground and the corpus line', 
   assert(turn.includes('faces to write: 2'));
 });
 
+Deno.test('⭐⭐ THE WRITER SEES THE PAGE, AND NEVER THE COMPOSED ROWS (W3d car 1)', () => {
+  // ⛔ RUN 3 MEASURED 28 CONTRADICTIONS OVER ~1,400 LINES AND 24 OF THEM WERE OF A MACHINE LINE
+  // THE WRITER NEVER SAW: "nothing here is urgent" beside the crisis summary "caravans are
+  // disappearing", "no soldier in it" beside `guardEffectivenessDesc`. The page rows reached only
+  // the second reader, which refuses on them, so the writer was refused for a page it was never
+  // shown. That is ruling 26's defect class pointed at the page instead of at an arm.
+  const withPage = {
+    ...card,
+    page: [
+      { kind: 'badge', label: 'crisis.label', text: 'Acute' },
+      { kind: 'machine', label: 'crisis.summary', text: 'Caravans are disappearing on the road.' },
+      { kind: 'machine', label: 'guardEffectivenessDesc', text: 'A mercenary company provides enforcement.' },
+      { kind: 'row', label: 'Internal Security', text: 'Internal Security — WEAK' },
+      { kind: 'composed', label: '', text: 'a composed line, which is the corpus prose and NOT the page' },
+      { kind: 'town', label: '', text: 'a town header row' },
+    ],
+  };
+  const turn = buildScribeUserTurn({ card: withPage });
+  assert(turn.includes('THE PAGE AS THE READER MEETS IT'));
+  assert(turn.includes('These lines are printed on the same page as yours.'));
+  assert(turn.includes('badge word differs is not (the two ladders).'));
+  assert(turn.includes('[machine] crisis.summary: Caravans are disappearing on the road.'));
+  assert(turn.includes('[machine] guardEffectivenessDesc: A mercenary company provides enforcement.'));
+  assert(turn.includes('[badge] crisis.label: Acute'));
+  assert(turn.includes('[row] Internal Security: Internal Security — WEAK'));
+  // ⛔ AND THE COMPOSED ROWS ARE ABSENT FROM THAT SECTION. They are the hand corpus's own prose,
+  // which is what this writer is replacing and what a refusal falls back TO.
+  assert(!turn.includes('which is the corpus prose and NOT the page'));
+  assert(!turn.includes('a town header row'));
+  // THE PAGE SITS BETWEEN THE STATE AND THE LINES, so the writer meets it before its own seats.
+  assert(turn.indexOf('THE STATE THIS PAGE READS') < turn.indexOf('THE PAGE AS THE READER MEETS IT'));
+  assert(turn.indexOf('THE PAGE AS THE READER MEETS IT') < turn.indexOf('THE LINES TO WRITE'));
+  // A card with no page rows prints no heading rather than an empty section.
+  assert(!buildScribeUserTurn({ card }).includes('THE PAGE AS THE READER MEETS IT'));
+  // ⛔ AND THE PAGE IS STILL NOT IN THE CACHED TOWN BLOCK: it is a TAB's fact, not a TOWN's, and a
+  // per-tab byte in the second breakpoint is a cache miss on every tab after the first.
+  assert(!buildTownBlock(withPage).includes('crisis.summary'));
+});
+
 Deno.test('⭐⭐ THE STANDARD IS NON-CONTRADICTION, NOT NON-INVENTION (ruling 36)', () => {
   const text = brief();
   assert(text.includes('THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT'));

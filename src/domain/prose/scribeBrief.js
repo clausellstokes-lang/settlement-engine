@@ -22,8 +22,9 @@
  *   2. THE TOWN BLOCK — `buildTownBlock`. The card's `town` section, which is the same bytes on
  *      all thirteen tabs of one settlement (W0 measured ~7 KB a tab, 42 KB of repeats over six
  *      tabs). A SECOND cache breakpoint, shared by a settlement's tabs.
- *   3. THE VOLATILE TURN — `buildScribeUserTurn`. The epoch, the record, the pools, and LAST the
- *      game master's instructions. Everything that differs between two tabs is here.
+ *   3. THE VOLATILE TURN — `buildScribeUserTurn`. The epoch, the record, THE PAGE AS THE READER
+ *      MEETS IT, the pools, and LAST the game master's instructions. Everything that differs
+ *      between two tabs is here, the page rows included: they are a tab's own and not a town's.
  *
  * ── THE CONTRACT OUT (§3.2) ────────────────────────────────────────────────────────
  * `SCRIBE_OUTPUT_SCHEMA`, closed at every level, carrying ONLY words: the annex `vid` the unit
@@ -496,9 +497,28 @@ function poolBrief(pool) {
 }
 
 /**
- * ⭐ THE VOLATILE TURN (design §3.1 parts 2-4). The epoch, the record, the pools, and — LAST and
- * clearly ranked below the law — the game master's instructions. The TOWN is not here: it is in
- * the second cached block above.
+ * ⭐⭐ THE PAGE THE WRITER IS WRITING INTO (W3d car 1). The sentence the chair wrote, kept whole.
+ *
+ * ⛔⛔ THE MEASUREMENT THAT PUT IT IN THE WRITER'S TURN. RUN 3 read ~1,400 lines by a second reader
+ * and found 28 contradictions, of which TWENTY FOUR were contradictions of a MACHINE LINE THE
+ * WRITER NEVER SAW: "nothing here is urgent" beside the page's own crisis summary "caravans are
+ * disappearing"; "no soldier in it" beside `guardEffectivenessDesc`'s mercenary company; "nothing
+ * organised behind the wrongdoing" beside `Internal Security: Dangerous`. W3a hoisted the town into
+ * its own cached block and, in doing so, left the card's `page` rows reaching only the SECOND
+ * reader, which refuses on them. A reader refusing a line for a fact the writer was never given is
+ * ruling 26's own defect class, pointed at the page instead of at an arm.
+ */
+const PAGE_NOTE = [
+  'THE PAGE AS THE READER MEETS IT',
+  'These lines are printed on the same page as yours.',
+  'A line of yours that denies one of them is refused; a line that agrees with the band where the',
+  'badge word differs is not (the two ladders).',
+].join('\n');
+
+/**
+ * ⭐ THE VOLATILE TURN (design §3.1 parts 2-4). The epoch, the record, the page, the pools, and —
+ * LAST and clearly ranked below the law — the game master's instructions. The TOWN is not here: it
+ * is in the second cached block above.
  *
  * ⛔ THE INSTRUCTIONS ARE FLAVOUR, NEVER FACT (§5c rule 3, ruling 18). They may choose emphasis,
  * tone within the archiver's hand, which sources to hear more from and what to dwell on. They may
@@ -529,6 +549,18 @@ export function buildScribeUserTurn(input) {
     parts.push('say that a value has changed ONLY where this record names it; you have not been given');
     parts.push('the prior prose and you are not continuing it.');
     parts.push(JSON.stringify(input.record, null, 1));
+  }
+
+  // ⭐⭐ THE PAGE, IMMEDIATELY BEFORE THE LINES IT SITS BESIDE (W3d car 1). Only the machine
+  // lines, the badges and the threat rows: the COMPOSED rows are the corpus prose this writer is
+  // replacing, and printing them here would hand it its own predecessor's words as a page fact.
+  // `pageLinesOf` is the same reader the second seat's checklist uses, so the two seats are shown
+  // the same page in the same words.
+  const page = pageLinesOf(card);
+  if (page.length) {
+    parts.push('');
+    parts.push(PAGE_NOTE);
+    for (const row of page) parts.push(row);
   }
 
   parts.push('');
@@ -850,7 +882,15 @@ export function tier1Lines(units, card) {
   return rows;
 }
 
-/** The card's own machine lines, which question 7 is asked against. */
+/**
+ * ⭐ THE CARD'S OWN MACHINE LINES — the PAGE question's subject, and since W3d car 1 the writer's
+ * page too. ONE reader for both seats: a writer shown a softer page than the reader judges it
+ * against is exactly how RUN 3's twenty four page contradictions were written.
+ *
+ * ⛔ THE COMPOSED ROWS ARE NEVER IN IT. They are the hand corpus's own prose — the very lines the
+ * Scribe is replacing and the lines a refusal falls back to — so printing them as page FACTS would
+ * tell a writer that its predecessor's sentences are machine truths it may not deny.
+ */
 function pageLinesOf(card) {
   return (Array.isArray(card?.page) ? card.page : [])
     .filter((row) => ['machine', 'badge', 'row'].includes(String(row?.kind)))

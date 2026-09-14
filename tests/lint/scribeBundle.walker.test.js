@@ -324,6 +324,63 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     expect(buildTier1Checklist([unit], CARD)).toContain('1. (spine) The walls are kept.');
   });
 
+  it('⭐⭐ THE WRITER SEES THE PAGE OF A REAL TOWN, and never its composed rows (W3d car 1)', () => {
+    // ⛔ THE TWO LINES RUN 3 NAMED, ON THE TWO REAL CARDS THEY WERE MEASURED ON. Twenty four of
+    // the run's twenty eight contradictions denied a machine line the writer never saw: the hamlet
+    // Warmholz's crisis summary, and the guard assessment beside it on a defense page. Both are
+    // now in the writer's own turn, and the arm is driven over the real render rather than a
+    // fixture so a page row that stops being emitted reds here.
+    const pinned = generateSettlementPipeline(
+      {
+        settType: 'town', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+      },
+      null,
+      { seed: 'render-town', customContent: {} },
+    );
+    const hamlet = generateSettlementPipeline(
+      {
+        settType: 'hamlet', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+      },
+      null,
+      { seed: 'sim-hamlet', customContent: {} },
+    );
+    const defense = townCard(pinned, { tab: 'defense', audience: 'dm', staticCard: STATIC_CARD });
+    const overview = townCard(hamlet, { tab: 'overview', audience: 'dm', staticCard: STATIC_CARD });
+    const defenseTurn = buildScribeUserTurn({ card: defense });
+    const overviewTurn = buildScribeUserTurn({ card: overview });
+
+    // THE GUARD ASSESSMENT, on the tab whose writer denied it.
+    const guard = defense.page.find((r) => r.label === 'guardEffectivenessDesc');
+    expect(guard, 'the pinned town prints no guard assessment').toBeTruthy();
+    expect(defenseTurn).toContain(`[machine] guardEffectivenessDesc: ${guard.text}`);
+    // THE CRISIS SUMMARY, on the town whose writer wrote "nothing here is urgent" beside it.
+    const crisis = overview.page.find((r) => r.label === 'crisis.summary');
+    expect(crisis, 'Warmholz prints no crisis summary').toBeTruthy();
+    expect(overviewTurn).toContain(`[machine] crisis.summary: ${crisis.text}`);
+
+    // EVERY badge, machine and row line of the card is in the turn, and NO composed row is.
+    for (const card of [defense, overview]) {
+      const turn = buildScribeUserTurn({ card });
+      const section = turn.slice(turn.indexOf('THE PAGE AS THE READER MEETS IT'), turn.indexOf('THE LINES TO WRITE:'));
+      expect(section.length, 'the page section is empty').toBeGreaterThan(200);
+      let machine = 0;
+      let composed = 0;
+      for (const row of card.page) {
+        if (['badge', 'machine', 'row'].includes(row.kind)) {
+          expect(section, `${row.kind} ${row.label} is missing from the page section`)
+            .toContain(`[${row.kind}] ${row.label}: ${row.text}`);
+          machine += 1;
+        }
+        if (row.kind === 'composed' && row.text) {
+          expect(section.includes(row.text), `a composed row reached the page section: ${row.text.slice(0, 50)}`).toBe(false);
+          composed += 1;
+        }
+      }
+      expect(machine, 'the page carries no machine line: the arm is vacuous').toBeGreaterThan(5);
+      expect(composed, 'the page carries no composed row: the exclusion is vacuous').toBeGreaterThan(0);
+    }
+  }, 120_000);
+
   it('cardDelta agrees across the seam on a real pair of cards', async () => {
     const mod = await import(pathToFileURL(outFile).href);
     const other = townCard(SETTLEMENT, { tab: 'power', audience: 'dm', staticCard: STATIC_CARD });
