@@ -1,0 +1,21 @@
+{
+  "seed": "render-town",
+  "tab": "defense",
+  "epoch": 0,
+  "dry": true,
+  "counted": false,
+  "blocks": [
+    "DS-DEF-1",
+    "DS-DEF-11",
+    "DS-DEF-2",
+    "DS-DEF-3",
+    "DS-DEF-4",
+    "DS-DEF-5",
+    "DS-DEF-6"
+  ],
+  "pools": 15,
+  "briefBytes": 112932,
+  "turnBytes": 33609,
+  "cardBytes": 40302,
+  "approxTokens": 36635
+}

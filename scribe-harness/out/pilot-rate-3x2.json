@@ -1,0 +1,646 @@
+[
+  {
+    "seed": "rate-0-0",
+    "name": "Langgate",
+    "tier": "thorp",
+    "epochs": [
+      {
+        "epoch": 0,
+        "tick": 0,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 18,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6",
+              "DS-DEF-8"
+            ],
+            "briefBytes": 106049,
+            "turnBytes": 35850,
+            "cardBytes": 37490,
+            "townBytes": 1700,
+            "approxTokens": 35475,
+            "deltaFields": null
+          },
+          {
+            "tab": "overview",
+            "pools": 26,
+            "blocks": [
+              "DS-CND-1",
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-2",
+              "DS-GEN-3",
+              "DS-GEN-6",
+              "DS-GEN-7",
+              "DS-REL-2",
+              "DS-STR-1"
+            ],
+            "briefBytes": 106390,
+            "turnBytes": 38945,
+            "cardBytes": 40584,
+            "townBytes": 1700,
+            "approxTokens": 36334,
+            "deltaFields": null
+          },
+          {
+            "tab": "power",
+            "pools": 10,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-6",
+              "DS-POW-7"
+            ],
+            "briefBytes": 101240,
+            "turnBytes": 17058,
+            "cardBytes": 18700,
+            "townBytes": 1700,
+            "approxTokens": 29575,
+            "deltaFields": null
+          },
+          {
+            "tab": "economics",
+            "pools": 5,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-6"
+            ],
+            "briefBytes": 96902,
+            "turnBytes": 9849,
+            "cardBytes": 11487,
+            "townBytes": 1700,
+            "approxTokens": 26688,
+            "deltaFields": null
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93383,
+            "turnBytes": 823,
+            "cardBytes": 2467,
+            "townBytes": 1700,
+            "approxTokens": 23552,
+            "deltaFields": null
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 93921,
+            "turnBytes": 2109,
+            "cardBytes": 3746,
+            "townBytes": 1700,
+            "approxTokens": 24008,
+            "deltaFields": null
+          }
+        ]
+      },
+      {
+        "epoch": 1,
+        "tick": 1,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 18,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6",
+              "DS-DEF-8"
+            ],
+            "briefBytes": 106049,
+            "turnBytes": 37802,
+            "cardBytes": 37788,
+            "townBytes": 1700,
+            "approxTokens": 35963,
+            "deltaFields": 5
+          },
+          {
+            "tab": "overview",
+            "pools": 26,
+            "blocks": [
+              "DS-CND-1",
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-2",
+              "DS-GEN-3",
+              "DS-GEN-6",
+              "DS-GEN-7",
+              "DS-REL-2",
+              "DS-STR-1"
+            ],
+            "briefBytes": 106390,
+            "turnBytes": 41195,
+            "cardBytes": 41046,
+            "townBytes": 1700,
+            "approxTokens": 36896,
+            "deltaFields": 5
+          },
+          {
+            "tab": "power",
+            "pools": 10,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-6",
+              "DS-POW-7"
+            ],
+            "briefBytes": 101240,
+            "turnBytes": 19010,
+            "cardBytes": 18998,
+            "townBytes": 1700,
+            "approxTokens": 30063,
+            "deltaFields": 5
+          },
+          {
+            "tab": "economics",
+            "pools": 5,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-6"
+            ],
+            "briefBytes": 96902,
+            "turnBytes": 11801,
+            "cardBytes": 11785,
+            "townBytes": 1700,
+            "approxTokens": 27176,
+            "deltaFields": 5
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93383,
+            "turnBytes": 2773,
+            "cardBytes": 2765,
+            "townBytes": 1700,
+            "approxTokens": 24039,
+            "deltaFields": 5
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 93921,
+            "turnBytes": 4059,
+            "cardBytes": 4044,
+            "townBytes": 1700,
+            "approxTokens": 24495,
+            "deltaFields": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": "rate-0-1",
+    "name": "Cerrocivitas",
+    "tier": "thorp",
+    "epochs": [
+      {
+        "epoch": 0,
+        "tick": 0,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 16,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6"
+            ],
+            "briefBytes": 105943,
+            "turnBytes": 33896,
+            "cardBytes": 35766,
+            "townBytes": 1934,
+            "approxTokens": 34960,
+            "deltaFields": null
+          },
+          {
+            "tab": "overview",
+            "pools": 17,
+            "blocks": [
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-3",
+              "DS-GEN-5",
+              "DS-GEN-6",
+              "DS-REL-2"
+            ],
+            "briefBytes": 101959,
+            "turnBytes": 25688,
+            "cardBytes": 27557,
+            "townBytes": 1934,
+            "approxTokens": 31912,
+            "deltaFields": null
+          },
+          {
+            "tab": "power",
+            "pools": 9,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-7"
+            ],
+            "briefBytes": 100023,
+            "turnBytes": 14353,
+            "cardBytes": 16225,
+            "townBytes": 1934,
+            "approxTokens": 28594,
+            "deltaFields": null
+          },
+          {
+            "tab": "economics",
+            "pools": 5,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-9"
+            ],
+            "briefBytes": 97669,
+            "turnBytes": 9738,
+            "cardBytes": 11606,
+            "townBytes": 1934,
+            "approxTokens": 26852,
+            "deltaFields": null
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93740,
+            "turnBytes": 826,
+            "cardBytes": 2700,
+            "townBytes": 1934,
+            "approxTokens": 23642,
+            "deltaFields": null
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 94278,
+            "turnBytes": 1969,
+            "cardBytes": 3836,
+            "townBytes": 1934,
+            "approxTokens": 24062,
+            "deltaFields": null
+          }
+        ]
+      },
+      {
+        "epoch": 1,
+        "tick": 1,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 16,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6"
+            ],
+            "briefBytes": 105943,
+            "turnBytes": 35848,
+            "cardBytes": 36064,
+            "townBytes": 1934,
+            "approxTokens": 35448,
+            "deltaFields": 5
+          },
+          {
+            "tab": "overview",
+            "pools": 19,
+            "blocks": [
+              "DS-CND-1",
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-3",
+              "DS-GEN-5",
+              "DS-GEN-6",
+              "DS-REL-2"
+            ],
+            "briefBytes": 103732,
+            "turnBytes": 30285,
+            "cardBytes": 30268,
+            "townBytes": 1934,
+            "approxTokens": 33504,
+            "deltaFields": 5
+          },
+          {
+            "tab": "power",
+            "pools": 9,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-7"
+            ],
+            "briefBytes": 100023,
+            "turnBytes": 16305,
+            "cardBytes": 16523,
+            "townBytes": 1934,
+            "approxTokens": 29082,
+            "deltaFields": 5
+          },
+          {
+            "tab": "economics",
+            "pools": 5,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-9"
+            ],
+            "briefBytes": 97669,
+            "turnBytes": 11690,
+            "cardBytes": 11904,
+            "townBytes": 1934,
+            "approxTokens": 27340,
+            "deltaFields": 5
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93740,
+            "turnBytes": 2776,
+            "cardBytes": 2998,
+            "townBytes": 1934,
+            "approxTokens": 24129,
+            "deltaFields": 5
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 94278,
+            "turnBytes": 3919,
+            "cardBytes": 4134,
+            "townBytes": 1934,
+            "approxTokens": 24549,
+            "deltaFields": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": "rate-0-2",
+    "name": "Llandale",
+    "tier": "thorp",
+    "epochs": [
+      {
+        "epoch": 0,
+        "tick": 0,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 16,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6"
+            ],
+            "briefBytes": 105409,
+            "turnBytes": 32996,
+            "cardBytes": 34501,
+            "townBytes": 1565,
+            "approxTokens": 34601,
+            "deltaFields": null
+          },
+          {
+            "tab": "overview",
+            "pools": 20,
+            "blocks": [
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-2",
+              "DS-GEN-3",
+              "DS-GEN-5",
+              "DS-GEN-6",
+              "DS-GEN-7",
+              "DS-REL-2"
+            ],
+            "briefBytes": 103102,
+            "turnBytes": 30643,
+            "cardBytes": 32147,
+            "townBytes": 1565,
+            "approxTokens": 33436,
+            "deltaFields": null
+          },
+          {
+            "tab": "power",
+            "pools": 9,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-7"
+            ],
+            "briefBytes": 99489,
+            "turnBytes": 14830,
+            "cardBytes": 16337,
+            "townBytes": 1565,
+            "approxTokens": 28580,
+            "deltaFields": null
+          },
+          {
+            "tab": "economics",
+            "pools": 6,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-9",
+              "DS-GEN-18"
+            ],
+            "briefBytes": 97779,
+            "turnBytes": 11867,
+            "cardBytes": 13370,
+            "townBytes": 1565,
+            "approxTokens": 27412,
+            "deltaFields": null
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93206,
+            "turnBytes": 826,
+            "cardBytes": 2335,
+            "townBytes": 1565,
+            "approxTokens": 23508,
+            "deltaFields": null
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 93744,
+            "turnBytes": 2045,
+            "cardBytes": 3547,
+            "townBytes": 1565,
+            "approxTokens": 23947,
+            "deltaFields": null
+          }
+        ]
+      },
+      {
+        "epoch": 1,
+        "tick": 1,
+        "tabs": [
+          {
+            "tab": "defense",
+            "pools": 16,
+            "blocks": [
+              "DS-DEF-1",
+              "DS-DEF-11",
+              "DS-DEF-2",
+              "DS-DEF-3",
+              "DS-DEF-4",
+              "DS-DEF-5",
+              "DS-DEF-6"
+            ],
+            "briefBytes": 105409,
+            "turnBytes": 34948,
+            "cardBytes": 34799,
+            "townBytes": 1565,
+            "approxTokens": 35089,
+            "deltaFields": 5
+          },
+          {
+            "tab": "overview",
+            "pools": 20,
+            "blocks": [
+              "DS-GEN-12",
+              "DS-GEN-13",
+              "DS-GEN-17",
+              "DS-GEN-2",
+              "DS-GEN-3",
+              "DS-GEN-5",
+              "DS-GEN-6",
+              "DS-GEN-7",
+              "DS-REL-2"
+            ],
+            "briefBytes": 103102,
+            "turnBytes": 32595,
+            "cardBytes": 32445,
+            "townBytes": 1565,
+            "approxTokens": 33924,
+            "deltaFields": 5
+          },
+          {
+            "tab": "power",
+            "pools": 9,
+            "blocks": [
+              "DS-POW-1",
+              "DS-POW-2",
+              "DS-POW-4",
+              "DS-POW-5",
+              "DS-POW-7"
+            ],
+            "briefBytes": 99489,
+            "turnBytes": 16782,
+            "cardBytes": 16635,
+            "townBytes": 1565,
+            "approxTokens": 29068,
+            "deltaFields": 5
+          },
+          {
+            "tab": "economics",
+            "pools": 6,
+            "blocks": [
+              "DS-ECO-1",
+              "DS-ECO-10",
+              "DS-ECO-12",
+              "DS-ECO-9",
+              "DS-GEN-18"
+            ],
+            "briefBytes": 97779,
+            "turnBytes": 13819,
+            "cardBytes": 13668,
+            "townBytes": 1565,
+            "approxTokens": 27900,
+            "deltaFields": 5
+          },
+          {
+            "tab": "war",
+            "pools": 0,
+            "blocks": [],
+            "briefBytes": 93206,
+            "turnBytes": 2776,
+            "cardBytes": 2633,
+            "townBytes": 1565,
+            "approxTokens": 23996,
+            "deltaFields": 5
+          },
+          {
+            "tab": "daily_life",
+            "pools": 1,
+            "blocks": [
+              "DS-ECO-8"
+            ],
+            "briefBytes": 93744,
+            "turnBytes": 3995,
+            "cardBytes": 3845,
+            "townBytes": 1565,
+            "approxTokens": 24435,
+            "deltaFields": 5
+          }
+        ]
+      }
+    ]
+  }
+]
