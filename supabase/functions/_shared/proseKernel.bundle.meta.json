@@ -1,0 +1,31 @@
+{
+  "entry": [
+    "src/domain/prose/refuteUnit.js",
+    "src/domain/prose/epochRecord.js"
+  ],
+  "sourceHash": "390dc0fff98dfd6b",
+  "inputs": [
+    "src/data/powerData.js",
+    "src/domain/arcaneIdentity.js",
+    "src/domain/density/densityBands.js",
+    "src/domain/density/densityLaw.js",
+    "src/domain/deterministicSort.js",
+    "src/domain/factionArchetypes.js",
+    "src/domain/institutionFounding.js",
+    "src/domain/institutions/institutionRoster.js",
+    "src/domain/institutions/institutionTable.js",
+    "src/domain/magicAssertionText.js",
+    "src/domain/prose/composedWalker.js",
+    "src/domain/prose/entryLexicons.js",
+    "src/domain/prose/entryWalker.js",
+    "src/domain/prose/epochRecord.js",
+    "src/domain/prose/grammarWalker.js",
+    "src/domain/prose/holderTable.js",
+    "src/domain/prose/moveGrammar.js",
+    "src/domain/prose/presenceMeasure.js",
+    "src/domain/prose/proseFingerprint.js",
+    "src/domain/prose/refuteUnit.js",
+    "src/domain/rulingPower.js",
+    "src/kernel/detMath.js"
+  ]
+}
