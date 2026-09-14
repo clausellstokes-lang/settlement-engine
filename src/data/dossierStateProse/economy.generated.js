@@ -18,7 +18,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C1: a high rung on a working approach": [
         {
           "angle": "visitor",
-          "text": "A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.",
+          "text": "A stranger reads {settlement}'s standing off its {access} before anyone tells him. The traffic is steady. The {complexity} keeps more hands busy than the town strictly needs. None of it looks improvised.",
           "slots": [
             "settlement",
             "access",
@@ -38,7 +38,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.",
+          "text": "Nobody here talks about the price of bread. The town is well off and the {access} keeps it that way. The talk is about what to build next.",
           "slots": [
             "access"
           ],
@@ -48,7 +48,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)": [
         {
           "angle": "visitor",
-          "text": "{settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.",
+          "text": "{settlement} is richer than its road suggests. Nothing reaches it easily. The stores are deep and the halls are finished anyway.",
           "slots": [
             "settlement"
           ],
@@ -56,7 +56,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.",
+          "text": "The books here are strong on a thin channel. There is one way in and one way out, and a {complexity} that has learned to earn on it.",
           "slots": [
             "complexity"
           ],
@@ -64,7 +64,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.",
+          "text": "A narrow way in has not kept {settlement} poor. The approach would ordinarily decide a town's condition here. This town's condition is comfortable regardless of it.",
           "slots": [
             "settlement"
           ],
@@ -83,13 +83,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.",
+          "text": "The accounts here balance on a thin margin. Nothing in them is failing. Nothing in them is spare either.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.",
+          "text": "There is nothing striking about {settlement}'s condition in either direction. There is a working {access}, a working market, and a town neither building nor selling off.",
           "slots": [
             "settlement",
             "access"
@@ -100,7 +100,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C4: a low rung on a working approach": [
         {
           "angle": "ledger",
-          "text": "{settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.",
+          "text": "{settlement} sits on a working {access} and still counts short. The traffic is real. The share of it that stays here is not.",
           "slots": [
             "settlement",
             "access"
@@ -109,7 +109,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.",
+          "text": "The roads into this town are busy and the town is poor. That is the complaint a visitor hears first and hears most.",
           "slots": [],
           "vid": 2
         },
@@ -126,7 +126,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C5: a low rung on a narrow approach": [
         {
           "angle": "visitor",
-          "text": "{settlement} is poor and hard to reach, and the two read as one fact: what the road does not carry, the town does without.",
+          "text": "{settlement} is poor and hard to reach, and the two read as one fact. What the road does not carry, the town does without.",
           "slots": [
             "settlement"
           ],
@@ -134,7 +134,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The books are short in the ordinary way: a {complexity} sized to the town and no further, and no approach wide enough to change the arithmetic.",
+          "text": "The books are short in the ordinary way. The {complexity} is sized to the town and no further. No approach is wide enough to change the arithmetic.",
           "slots": [
             "complexity"
           ],
@@ -142,7 +142,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is poor and hard to reach, and the two hold each other in place: nothing about the approach would change the arithmetic, and nothing in the arithmetic would pay to widen the approach.",
+          "text": "{settlement} is poor and hard to reach, and the two hold each other in place. Nothing about the approach would change the arithmetic. Nothing in the arithmetic would pay to widen the approach.",
           "slots": [
             "settlement"
           ],
@@ -243,7 +243,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "FOOD: deficit": [
         {
           "angle": "ledger",
-          "text": "{settlement} does not grow what it eats. The daily count comes up short and the shortfall is made good off the road, week on week, as a standing line in the accounts.",
+          "text": "{settlement} does not grow what it eats. The daily count comes up short. The shortfall is made good off the road, week on week, as a standing line in the accounts.",
           "slots": [
             "settlement"
           ],
@@ -251,13 +251,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Bread here is bought, not simply had. The fields do not cover the town and everyone knows which day the carts come.",
+          "text": "Bread here is bought, not simply had. The fields do not cover the town. Everyone knows which day the carts come.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "The granary doors open more often than they shut, and what comes out is not what the fields put in.",
+          "text": "The doors of the town's grain store open more often than they shut, and what comes out is not what the fields put in.",
           "slots": [],
           "vid": 3
         }
@@ -273,7 +273,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The talk about food here is about price, not about enough. The fields have been good to the town and the stores show it.",
+          "text": "The talk about food here is about price, not about enough. The fields have been good to the town. The stores show it.",
           "slots": [],
           "vid": 2
         },
@@ -303,7 +303,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} sits level on food. The fields answer the town and no further, so a single failure would be felt at once and a good season would not be noticed.",
+          "text": "{settlement} sits level on food. The fields answer the town and no further. So a single failure would be felt at once and a good season would not be noticed.",
           "slots": [
             "settlement"
           ],
@@ -321,7 +321,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody is counting sacks in {settlement} this {season}. The granary is full and the argument is about the overflow.",
+          "text": "Nobody is counting sacks in {settlement} this {season}. The granary is full. The argument is about the overflow.",
           "slots": [
             "settlement",
             "season"
@@ -330,7 +330,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The stores here are the reassuring kind: a granary standing deep in {season}, and a town that plainly expects to stay that way.",
+          "text": "The stores here are the reassuring kind. The granary stands deep in {season}, and the town plainly expects to stay that way.",
           "slots": [
             "season"
           ],
@@ -340,7 +340,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "GRANARY: stocked": [
         {
           "angle": "ledger",
-          "text": "The granary holds a working reserve into {season}: enough to carry the town through, not enough to lend.",
+          "text": "The granary holds a working reserve into {season}. It is enough to carry the town through and not enough to lend.",
           "slots": [
             "season"
           ],
@@ -348,7 +348,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The stores will do. That is the whole of what {settlement} says about its granary this {season}.",
+          "text": "The stores are enough. That is the whole of what {settlement} says about its granary this {season}.",
           "slots": [
             "settlement",
             "season"
@@ -367,7 +367,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "GRANARY: thin": [
         {
           "angle": "ledger",
-          "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.",
+          "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.",
           "slots": [
             "season"
           ],
@@ -375,7 +375,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People in {settlement} have begun asking when the granary was last this low, which is the question that comes before the harder ones.",
+          "text": "People in {settlement} have begun asking when the granary was last this low. That is the question that comes before the harder ones.",
           "slots": [
             "settlement"
           ],
@@ -383,7 +383,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.",
+          "text": "The stores are drawing down faster than {season} is going to replace them. That gap is the town's whole immediate problem.",
           "slots": [
             "season"
           ],

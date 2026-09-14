@@ -842,29 +842,29 @@ the access.
 **SLOTS.** `{settlement}` `{access}` `{complexity}`
 
 **COMBINATION C1: a high rung on a working approach**
-1. `[visitor]` A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.
+1. `[visitor]` A stranger reads {settlement}'s standing off its {access} before anyone tells him. The traffic is steady. The {complexity} keeps more hands busy than the town strictly needs. None of it looks improvised.
 2. `[ledger]` {settlement}'s books close with a margin, and the margin is broad rather than lucky. The {complexity} earns from several directions at once and the {access} carries all of it.
-3. `[street]` Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.
+3. `[street]` Nobody here talks about the price of bread. The town is well off and the {access} keeps it that way. The talk is about what to build next.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
-1. `[visitor]` {settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
-2. `[ledger]` The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.
-3. `[counterforce]` A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.
+1. `[visitor]` {settlement} is richer than its road suggests. Nothing reaches it easily. The stores are deep and the halls are finished anyway.
+2. `[ledger]` The books here are strong on a thin channel. There is one way in and one way out, and a {complexity} that has learned to earn on it.
+3. `[counterforce]` A narrow way in has not kept {settlement} poor. The approach would ordinarily decide a town's condition here. This town's condition is comfortable regardless of it.
 
 **COMBINATION C3: the middle rungs**
 1. `[street]` {settlement} manages. The {complexity} covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
-2. `[ledger]` The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
-3. `[visitor]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
+2. `[ledger]` The accounts here balance on a thin margin. Nothing in them is failing. Nothing in them is spare either.
+3. `[visitor]` There is nothing striking about {settlement}'s condition in either direction. There is a working {access}, a working market, and a town neither building nor selling off.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger]` {settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.
-2. `[street]` The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.
+1. `[ledger]` {settlement} sits on a working {access} and still counts short. The traffic is real. The share of it that stays here is not.
+2. `[street]` The roads into this town are busy and the town is poor. That is the complaint a visitor hears first and hears most.
 3. `[visitor]` A stranger arriving by the {access} finds more moving through {settlement} than settling in it. The market turns, and the town does not thicken on the turning.
 
 **COMBINATION C5: a low rung on a narrow approach**
-1. `[visitor]` {settlement} is poor and hard to reach, and the two read as one fact: what the road does not carry, the town does without.
-2. `[ledger]` The books are short in the ordinary way: a {complexity} sized to the town and no further, and no approach wide enough to change the arithmetic.
-3. `[threshold]` {settlement} is poor and hard to reach, and the two hold each other in place: nothing about the approach would change the arithmetic, and nothing in the arithmetic would pay to widen the approach.
+1. `[visitor]` {settlement} is poor and hard to reach, and the two read as one fact. What the road does not carry, the town does without.
+2. `[ledger]` The books are short in the ordinary way. The {complexity} is sized to the town and no further. No approach is wide enough to change the arithmetic.
+3. `[threshold]` {settlement} is poor and hard to reach, and the two hold each other in place. Nothing about the approach would change the arithmetic. Nothing in the arithmetic would pay to widen the approach.
 
 ---
 
@@ -890,34 +890,34 @@ wants a sentence.
 **SLOTS.** `{settlement}` `{season}`
 
 **FOOD: deficit**
-1. `[ledger]` {settlement} does not grow what it eats. The daily count comes up short and the shortfall is made good off the road, week on week, as a standing line in the accounts.
-2. `[street]` Bread here is bought, not simply had. The fields do not cover the town and everyone knows which day the carts come.
-3. `[visitor]` The granary doors open more often than they shut, and what comes out is not what the fields put in.
+1. `[ledger]` {settlement} does not grow what it eats. The daily count comes up short. The shortfall is made good off the road, week on week, as a standing line in the accounts.
+2. `[street]` Bread here is bought, not simply had. The fields do not cover the town. Everyone knows which day the carts come.
+3. `[visitor]` The doors of the town's grain store open more often than they shut, and what comes out is not what the fields put in.
 
 **FOOD: surplus**
 1. `[ledger]` {settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed.
-2. `[street]` The talk about food here is about price, not about enough. The fields have been good to the town and the stores show it.
+2. `[street]` The talk about food here is about price, not about enough. The fields have been good to the town. The stores show it.
 3. `[visitor]` A stranger notices the loaded carts leaving {settlement} rather than arriving. What the town grows, the town cannot finish.
 
 **FOOD: balanced**
 1. `[ledger]` What {settlement} raises and what {settlement} eats come out level. There is no shortfall to cover and nothing spare to sell.
 2. `[street]` Food is not a subject here. The town feeds itself, and it feeds itself exactly.
-3. `[threshold]` {settlement} sits level on food. The fields answer the town and no further, so a single failure would be felt at once and a good season would not be noticed.
+3. `[threshold]` {settlement} sits level on food. The fields answer the town and no further. So a single failure would be felt at once and a good season would not be noticed.
 
 **GRANARY: well stocked**
 1. `[ledger]` The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.
-2. `[street]` Nobody is counting sacks in {settlement} this {season}. The granary is full and the argument is about the overflow.
-3. `[visitor]` The stores here are the reassuring kind: a granary standing deep in {season}, and a town that plainly expects to stay that way.
+2. `[street]` Nobody is counting sacks in {settlement} this {season}. The granary is full. The argument is about the overflow.
+3. `[visitor]` The stores here are the reassuring kind. The granary stands deep in {season}, and the town plainly expects to stay that way.
 
 **GRANARY: stocked**
-1. `[ledger]` The granary holds a working reserve into {season}: enough to carry the town through, not enough to lend.
-2. `[street]` The stores will do. That is the whole of what {settlement} says about its granary this {season}.
+1. `[ledger]` The granary holds a working reserve into {season}. It is enough to carry the town through and not enough to lend.
+2. `[street]` The stores are enough. That is the whole of what {settlement} says about its granary this {season}.
 3. `[threshold]` The granary is stocked and not deep. It answers {season} as things stand and would not answer {season} plus a failure.
 
 **GRANARY: thin**
-1. `[ledger]` The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.
-2. `[street]` People in {settlement} have begun asking when the granary was last this low, which is the question that comes before the harder ones.
-3. `[unfolding]` The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.
+1. `[ledger]` The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons. The measuring is being done.
+2. `[street]` People in {settlement} have begun asking when the granary was last this low. That is the question that comes before the harder ones.
+3. `[unfolding]` The stores are drawing down faster than {season} is going to replace them. That gap is the town's whole immediate problem.
 
 **GRANARY: nearly empty**
 1. `[ledger]` The granary is very nearly out. What remains is counted daily and issued against a list.
