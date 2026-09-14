@@ -1,0 +1,124 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 1,
+   "spine": "On market day the squares open to whoever brings something worth selling. The custom comes in by road, and the stalls are set out for what the road brings.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Soldiers of the town are kept here and the watch draws a wage. The garrison is a trade a man follows rather than a turn that comes round to a household.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "The arguments in the taverns here run on who takes the higher seat rather than on the price of bread.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 3,
+   "spine": "The trades here take on apprentices and the roofs are mended before they leak.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "The walls are kept, the gates hang true, and nothing on either was built for the eye.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 1,
+   "spine": "The town can man the wall and the towers together, and the ones who go up have gone up before.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 3,
+   "spine": "Children here learn the rules about the dark before they learn their letters, and the rules have held.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 2,
+   "spine": "The watch answers what is reported to it and does not go looking for the rest.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "spine": "A price named here in the morning is the price named at dusk, whoever is doing the asking.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: ADEQUATE",
+   "vid": 1,
+   "spine": "Somebody in the alchemists' quarter can do the work usually wanted, and the work past that is refused at the door.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "The grain stores here are opened for trade and never for want.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 2,
+   "spine": "The place stands on the way to somewhere else, and a plain living is made out of being where the carts stop.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "spine": "What the town cannot grow comes up the road. A road that stops bringing it leaves the town on its own stores.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: city",
+   "vid": 3,
+   "spine": "Rundgate is large enough that a man raised in one quarter walks into the next as a stranger.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 4,
+   "spine": "The ties this town keeps with its neighbours run on trade and on nearness, and not one of them was forced on it by a grievance.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

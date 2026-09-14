@@ -1,0 +1,76 @@
+{
+  "units": [
+    {
+      "blockId": "DS-POW-1",
+      "poolKey": "Approved",
+      "vid": 2,
+      "spine": "The City Council governs with a modest edge, and what it asks of the town is given more often than it is refused.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-1",
+      "poolKey": "breakdown dominated by PROSPERITY, favourable",
+      "vid": 2,
+      "spine": "The City Council is credited with the good years whether or not it made them, and the case in its favour is the trade and nothing else.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-2",
+      "poolKey": "stable matched",
+      "vid": 4,
+      "spine": "What is settled here is who answers, and not what the answer is.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-2",
+      "poolKey": "recentConflict present",
+      "vid": 3,
+      "spine": "Nobody here needs the trouble explained, and it is recent enough that the town names it and moves on. The City Council and the merchant guilds are each acting as though the other has already lost.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-6",
+      "poolKey": "operation role criminal revenue stream (unclassified)",
+      "vid": 1,
+      "spine": "Something organised here takes its share of a street or of a trade, and it has no clearer name than that.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-5",
+      "poolKey": "council",
+      "vid": 3,
+      "spine": "The City Council's trouble is the town's own temper, and never a rival.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-5",
+      "poolKey": "governing body name: a SLOT, never a baked noun",
+      "vid": 2,
+      "spine": "A stranger who calls the City Council by any other name is corrected at once, and politely.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-4",
+      "poolKey": "riskLabel: Holding",
+      "vid": 1,
+      "spine": "Nobody who wants the City Council's place at Rundgate is within reach of it, and not one of them is quiet about wanting it.",
+      "faces": [],
+      "notebook": []
+    },
+    {
+      "blockId": "DS-POW-4",
+      "poolKey": "legitimacyHold: public backing hardens the hold",
+      "vid": 2,
+      "spine": "The City Council's hold is hardened by the town's own backing. That backing turns what would be a contest in another town into an inconvenience.",
+      "faces": [],
+      "notebook": []
+    }
+  ]
+}

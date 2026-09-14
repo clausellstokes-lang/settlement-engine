@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 19:03:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 19:09:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 92dac1c04 Plan: the collection at 09-14 ~19:3x — the long tail enumerated from every record into o
 
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_00f13b26-496** (mtime 09-14 19:03): agent calls 22 (22 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
+- **wf_00f13b26-496** (mtime 09-14 19:08): agent calls 27 (27 distinct) · DONE 21 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
     - `a9265e93e` ? · DONE · transcript 09-14 18:49 524 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["DS-ECO-6: the corpus fallback's own second sentence ('nothing organised behind it') is the exact line the brief lists as a refusa
@@ -130,12 +130,17 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a1d345bae` ? · DONE · transcript 09-14 19:01 599 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 18, "notes": ["Pool DS-GEN-3 foodSecurity.label used stance \"threshold\", which is not one of the three canonical stances the brief defines (l
     - `ac4ec7bcd` ? · DONE · transcript 09-14 18:59 519 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Stance 'counterforce' (pool 'Tolerated') is not one of the three stances the brief documents for a spine tag (ledger / street / v
     - `a97796282` ? · DONE · transcript 09-14 19:03 536 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Two of the 9 pools the turn lists (DS-POW-2 'governing faction holds a NARROW plurality', DS-POW-7 'layer DORMANT') were explicit
-    - `a4f552a8c` ? · IN FLIGHT · transcript 09-14 18:59 456 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a4f552a8c` ? · DONE · transcript 09-14 19:08 692 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 16, "notes": ["Two face seats name a source the town block does not seat: DS-DEF-2 'Beasts & Monsters' face 10 asks for `elders` and DS-DEF-2 '
     - `af2f8dec9` ? · IN FLIGHT · transcript 09-14 19:00 467 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `ae3b6de99` ? · IN FLIGHT · transcript 09-14 19:00 431 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a36899a6a` ? · IN FLIGHT · transcript 09-14 19:00 445 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a31af5676` ? · IN FLIGHT · transcript 09-14 19:01 442 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `acf2b69ed` ? · IN FLIGHT · transcript 09-14 19:03 441 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ae3b6de99` ? · DONE · transcript 09-14 19:05 565 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Attribution frames contradict themselves inside the brief: the VOICE paragraph strikes 'has it that' as a mannered frame (ruling 
+    - `a36899a6a` ? · DONE · transcript 09-14 19:06 621 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["The INCOME MIX pool key (DS-ECO-12 vid 2) says \"two or three sources between them\" but the only field it hands the model is eco
+    - `a31af5676` ? · DONE · transcript 09-14 19:06 563 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 15, "notes": ["Pool \"economicViability.viable: true\" declares the same slot twice with different fills: {settlement} is \"Rundgate\" AND {set
+    - `acf2b69ed` ? · IN FLIGHT · transcript 09-14 19:09 614 KB · 7 tool calls · files: response-sonnet.json · last: Bash python3 -c " import json p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e1
+    - `a485161d4` ? · DONE · transcript 09-14 19:08 521 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 9, "notes": ["ORDER V5 (INSTITUTION then PRESENT) is set on four pools whose institution fill is the same string, which forces the same opening
+    - `aa219c6e8` ? · IN FLIGHT · transcript 09-14 19:06 445 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a6422e02a` ? · IN FLIGHT · transcript 09-14 19:07 437 KB · 5 tool calls · last: Bash wc -l "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
+    - `a1012e907` ? · IN FLIGHT · transcript 09-14 19:09 448 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `a72aaea7e` ? · IN FLIGHT · transcript 09-14 19:09 414 KB · 5 tool calls · last: Bash cat -A /dev/null; cat /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571
 - **wf_43403a50-66b** (mtime 09-14 17:39): agent calls 30 (30 distinct) · DONE 30 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_43403a50-66b/`
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
@@ -411,4 +416,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.47 2.39 2.46
+load: 1.91 2.10 2.29

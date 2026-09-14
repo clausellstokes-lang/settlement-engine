@@ -1,0 +1,124 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 1,
+   "spine": "Market day is Rundgate at its plainest. The stalls fill because the road brings the trade to them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "Armed order is part of Rundgate's furniture, and the town pays professionals for its safety rather than trusting to luck.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here can afford to argue about things other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 3,
+   "spine": "The town expects to carry on much as it has.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "Rundgate is defended properly rather than impressively, and none of its works are for show.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 1,
+   "spine": "The town can put a real body of armed men on its walls, and they look as if they have done this before.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 3,
+   "spine": "Children here are taught the rules about the dark early, and the rules work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 2,
+   "spine": "The watch answers what is reported to it and does not go looking for more.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "spine": "Prices stay steady here, in a way that suggests the town is not living on the last thing it sold.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: ADEQUATE",
+   "vid": 1,
+   "spine": "The town has somebody who can do what is usually needed and knows what lies beyond that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "Nobody here thinks about food, and that is the best any town's food can hope for.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 2,
+   "spine": "The town sits on the way to somewhere else, and has made a modest living from being passed through.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "spine": "The road brings in what the town cannot grow for itself.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: city",
+   "vid": 3,
+   "spine": "The city is large enough to have quarters that scarcely know each other.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 4,
+   "spine": "The town has had pressure enough to bend its relationships, and they have not bent. They stand no different than they would anywhere else.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
