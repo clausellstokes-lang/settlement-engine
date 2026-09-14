@@ -317,7 +317,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -325,7 +327,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -333,7 +337,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -390,7 +396,8 @@
     "rendered": "Market day is Rundgate at its truest: the roads bring the custom, and the custom is the argument for the stalls.",
     "spine": "Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -405,7 +412,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.inst",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -462,7 +471,8 @@
     "rendered": "Armed order is part of Rundgate's furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.",
     "spine": "Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -477,7 +487,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Rundgate",
      "writers": 201
     }
@@ -534,7 +546,8 @@
     "rendered": "People in Rundgate can afford to argue about things other than money.",
     "spine": "People in {settlement} can afford to argue about things other than money."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -549,7 +562,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.viable",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -610,7 +625,8 @@
     "rendered": "Rundgate expects to go on being Rundgate.",
     "spine": "{settlement} expects to go on being {settlement}."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -625,7 +641,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Rundgate",
      "writers": 201
     }
@@ -682,7 +700,8 @@
     "rendered": "Rundgate is defended properly rather than impressively: the works are sound and none of them are for show.",
     "spine": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -697,7 +716,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -705,7 +726,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -763,7 +786,8 @@
     "rendered": "Rundgate can put a real body of armed men on its walls, and the men look like they have done it before.",
     "spine": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -778,7 +802,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -786,7 +812,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -844,7 +872,8 @@
     "rendered": "Children in Rundgate are taught the rules about the dark early, and the rules work.",
     "spine": "Children in {settlement} are taught the rules about the dark early, and the rules work."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -859,7 +888,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -867,7 +898,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -923,7 +956,8 @@
     "rendered": "The watch at Rundgate answers what is reported to it and does not seek out what is not.",
     "spine": "The watch at {settlement} answers what is reported to it and does not seek out what is not."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -938,7 +972,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -946,7 +982,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1004,7 +1042,8 @@
     "rendered": "Prices in Rundgate are steady in a way that suggests the town is not living on the last thing that sold.",
     "spine": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1019,7 +1058,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1027,7 +1068,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1085,7 +1128,8 @@
     "rendered": "Rundgate has somebody who can do what is usually needed and knows what is beyond them.",
     "spine": "{settlement} has somebody who can do what is usually needed and knows what is beyond them."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1100,7 +1144,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Rundgate",
      "writers": 201
     }
@@ -1157,7 +1203,8 @@
     "rendered": "Nobody in Rundgate thinks about food, which is the most that can be said for a town's food.",
     "spine": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1220,7 +1267,8 @@
     "rendered": "Rundgate is on the way to somewhere and has made a modest living out of being on the way.",
     "spine": "{settlement} is on the way to somewhere and has made a modest living out of being on the way."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1235,7 +1283,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1294,7 +1344,8 @@
     "rendered": "What Rundgate cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
     "spine": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1309,7 +1360,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Rundgate",
      "writers": 201
     }
@@ -1366,7 +1419,8 @@
     "rendered": "Rundgate is big enough to have quarters that do not know each other.",
     "spine": "{settlement} is big enough to have quarters that do not know each other."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -1381,7 +1435,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1389,7 +1445,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1447,10 +1505,11 @@
     "rendered": "Rundgate has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.",
     "spine": "{settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-city",
  "staticCardJoined": true,
  "tab": "overview",

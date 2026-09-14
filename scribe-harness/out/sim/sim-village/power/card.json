@@ -252,7 +252,8 @@
     "rendered": "The Elected Reeve at Hochhausen has neither the town's backing nor its hostility, so it can rule but it cannot spend. A hard decision here would have to be paid for out of an empty purse.",
     "spine": "The {seat} at {settlement} has neither the town's backing nor its hostility, so it can rule but it cannot spend. A hard decision here would have to be paid for out of an empty purse."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -319,7 +320,8 @@
     "rendered": "The Elected Reeve at Hochhausen is well thought of and the reason is in the accounts: the town is doing well, and a town doing well rarely looks hard at who is arranging it.",
     "spine": "The {seat} at {settlement} is well thought of and the reason is in the accounts: the town is doing well, and a town doing well rarely looks hard at who is arranging it."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -389,7 +391,8 @@
     "rendered": "The hall at Hochhausen is settled. Elected Reeve holds it, the town expects Elected Reeve to go on holding it, and business is conducted on that expectation.",
     "spine": "The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and business is conducted on that expectation."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -456,7 +459,8 @@
     "rendered": "Elected Reeve holds the hall at Hochhausen because it is first and not because it is large; the town treats the arrangement as current rather than settled.",
     "spine": "{faction} holds the hall at {settlement} because it is first and not because it is large; the town treats the arrangement as current rather than settled."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -471,7 +475,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -526,7 +532,8 @@
     "rendered": "There are interests at Hochhausen and there are no camps; a question is answered by whoever cares about that question.",
     "spine": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "ledger",
@@ -590,7 +597,8 @@
     "rendered": "Nothing at Hochhausen governs cleanly. The Elected Reeve is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing.",
     "spine": "Nothing at {settlement} governs cleanly. The {seat} is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -657,7 +665,8 @@
     "rendered": "What governs Hochhausen calls itself the Elected Reeve, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake.",
     "spine": "What governs {settlement} calls itself the {seat}, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -720,7 +729,8 @@
     "rendered": "Hochhausen has people who would take the hall if they could, and they cannot, and everybody involved understands the arrangement precisely.",
     "spine": "{settlement} has people who would take the hall if they could, and they cannot, and everybody involved understands the arrangement precisely."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -735,7 +745,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -799,10 +811,11 @@
     "rendered": "Hochhausen neither backs the Elected Reeve nor moves against it, and the Elected Reeve governs on its own strength alone.",
     "spine": "{settlement} neither backs the {seat} nor moves against it, and the {seat} governs on its own strength alone."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "power",

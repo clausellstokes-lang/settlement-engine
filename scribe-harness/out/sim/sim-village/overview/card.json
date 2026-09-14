@@ -353,7 +353,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -361,7 +363,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -369,7 +373,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -428,7 +434,8 @@
     "rendered": "A stranger finds Hochhausen's market without directions, because the busiest way through town leads there on its own.",
     "spine": "A stranger finds {settlement}'s market without directions, because the busiest way through town leads there on its own."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -443,7 +450,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.inst",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -500,7 +509,8 @@
     "rendered": "Armed order is part of Hochhausen's furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.",
     "spine": "Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -515,7 +525,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Hochhausen",
      "writers": 201
     }
@@ -572,7 +584,8 @@
     "rendered": "People in Hochhausen can afford to argue about things other than money.",
     "spine": "People in {settlement} can afford to argue about things other than money."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -587,7 +600,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.viable",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -644,7 +659,8 @@
     "rendered": "Hochhausen is a town that works: what it needs, it can get, and what it makes, it can move.",
     "spine": "{settlement} is a town that works: what it needs, it can get, and what it makes, it can move."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -659,7 +675,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Hochhausen",
      "writers": 201
     }
@@ -716,7 +734,8 @@
     "rendered": "What Hochhausen could hold, it could hold briefly.",
     "spine": "What {settlement} could hold, it could hold briefly."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -731,7 +750,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -739,7 +760,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -797,7 +820,8 @@
     "rendered": "Hochhausen would hold against what it expects, and it knows it is not proof against what it does not.",
     "spine": "{settlement} would hold against what it expects, and it knows it is not proof against what it does not."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -812,7 +836,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -820,7 +846,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -878,7 +906,8 @@
     "rendered": "Nothing at Hochhausen is organised against what lives outside the fields; each household answers for its own fences.",
     "spine": "Nothing at {settlement} is organised against what lives outside the fields; each household answers for its own fences."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -893,7 +922,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -901,7 +932,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -959,7 +992,8 @@
     "rendered": "Hochhausen's complaint book has more entries opened in it than closed.",
     "spine": "{settlement}'s complaint book has more entries opened in it than closed."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -974,7 +1008,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -982,7 +1018,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1040,7 +1078,8 @@
     "rendered": "There is nothing spare in Hochhausen, and the absence of spare is what a careful eye notices first.",
     "spine": "There is nothing spare in {settlement}, and the absence of spare is what a careful eye notices first."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1055,7 +1094,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1063,7 +1104,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1121,7 +1164,8 @@
     "rendered": "Hochhausen keeps no practitioner, no arrangement, and no expectation of either.",
     "spine": "{settlement} keeps no practitioner, no arrangement, and no expectation of either."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -1136,7 +1180,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Hochhausen",
      "writers": 201
     }
@@ -1193,7 +1239,8 @@
     "rendered": "Hochhausen's security is its own harvest, which means it is proof against a closed road and not against a bad year.",
     "spine": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1208,7 +1255,9 @@
      "clock": "SNAPSHOT",
      "field": "conflict.intensity",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1273,7 +1322,8 @@
     "rendered": "You would not learn from a day in Hochhausen that The Commercial Circle and The Administrative Circle are at odds. It comes up on the second day.",
     "spine": "You would not learn from a day in {settlement} that {faction} and {faction2} are at odds. It comes up on the second day."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1336,7 +1386,8 @@
     "rendered": "Goods come into Hochhausen and goods go out of it, and neither the coming nor the going is remarkable.",
     "spine": "Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1351,7 +1402,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1410,7 +1463,8 @@
     "rendered": "Hochhausen is on a road and lives off the road: goods in, goods out, people through.",
     "spine": "{settlement} is on a road and lives off the road: goods in, goods out, people through."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1425,7 +1479,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1482,7 +1538,8 @@
     "rendered": "Hochhausen is the size that a place of this kind settles at, and it has settled there.",
     "spine": "{settlement} is the size that a place of this kind settles at, and it has settled there."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1497,7 +1554,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.prominentRelationship",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1554,7 +1613,8 @@
     "rendered": "One of Hochhausen's ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
     "spine": "One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1569,7 +1629,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1577,7 +1639,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1636,7 +1700,8 @@
     "rendered": "The people of Hochhausen are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
     "spine": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1651,7 +1716,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.structuralSuggestions",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1659,7 +1726,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.structuralSuggestions.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1717,10 +1786,11 @@
     "rendered": "A careful reader of Hochhausen finds one loose end, and it is the kind that a single institution would tie off.",
     "spine": "A careful reader of {settlement} finds one loose end, and it is the kind that a single institution would tie off."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "overview",

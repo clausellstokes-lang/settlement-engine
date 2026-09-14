@@ -265,7 +265,8 @@
     "rendered": "The City Council at Rundgate governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them.",
     "spine": "The {seat} at {settlement} governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -336,7 +337,8 @@
     "rendered": "Rundgate credits the City Council with the good years whether or not the City Council earned them; the prosperity is the whole of the argument in its favour.",
     "spine": "{settlement} credits the {seat} with the good years whether or not the {seat} earned them; the prosperity is the whole of the argument in its favour."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -399,7 +401,8 @@
     "rendered": "What is settled at Rundgate is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
     "spine": "What is settled at {settlement} is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -414,7 +417,9 @@
      "clock": "PULSE",
      "field": "powerStructure.factions",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[7 rows]",
      "writers": 13
     },
@@ -422,7 +427,9 @@
      "clock": "SNAPSHOT",
      "field": "powerStructure.recentConflict",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.",
      "writers": 0
     }
@@ -480,7 +487,8 @@
     "rendered": "Nobody at Rundgate needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
     "spine": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -543,7 +551,8 @@
     "rendered": "There is criminal infrastructure at Rundgate with local weight, territorial or economic, and no clearer description of it than that.",
     "spine": "There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -558,7 +567,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -615,7 +626,8 @@
     "rendered": "The hall at Rundgate is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
     "spine": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": false
   },
   {
    "angle": "unfolding",
@@ -682,7 +694,8 @@
     "rendered": "What the City Council at Rundgate watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it.",
     "spine": "What the {seat} at {settlement} watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -746,7 +759,8 @@
     "rendered": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately.",
     "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -817,7 +831,8 @@
     "rendered": "City Council outweighs everyone who wants the City Council at Rundgate, and the wanting is on the record. The hold is real and it is not comfortable.",
     "spine": "{faction} outweighs everyone who wants the {seat} at {settlement}, and the wanting is on the record. The hold is real and it is not comfortable."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -832,7 +847,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -895,10 +912,11 @@
     "rendered": "Public backing at Rundgate is hardening the City Council's grip; what would be a contest elsewhere is an inconvenience here.",
     "spine": "Public backing at {settlement} is hardening the {seat}'s grip; what would be a contest elsewhere is an inconvenience here."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-city",
  "staticCardJoined": true,
  "tab": "power",

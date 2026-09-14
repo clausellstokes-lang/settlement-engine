@@ -343,7 +343,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -351,7 +353,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -359,7 +363,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -416,7 +422,8 @@
     "rendered": "The market was where the carts already stopped; the stalls came to the stopping, and Spitzplatz grew around the habit.",
     "spine": "The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -431,7 +438,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.inst",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -488,7 +497,8 @@
     "rendered": "Spitzplatz is administered, visibly: rules here have rooms, and the rooms have officers.",
     "spine": "{settlement} is administered, visibly: rules here have rooms, and the rooms have officers."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -503,7 +513,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Spitzplatz",
      "writers": 201
     }
@@ -560,7 +572,8 @@
     "rendered": "People in Spitzplatz can afford to argue about things other than money.",
     "spine": "People in {settlement} can afford to argue about things other than money."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -575,7 +588,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.viable",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -630,7 +645,8 @@
     "rendered": "There is no obvious reason Spitzplatz should not be here, which is a plainer compliment than it sounds.",
     "spine": "There is no obvious reason {settlement} should not be here, which is a plainer compliment than it sounds."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -645,7 +661,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Spitzplatz",
      "writers": 201
     }
@@ -702,7 +720,8 @@
     "rendered": "Spitzplatz is defended properly rather than impressively: the works are sound and none of them are for show.",
     "spine": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -717,7 +736,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -725,7 +746,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -783,7 +806,8 @@
     "rendered": "Nobody in Spitzplatz expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
     "spine": "Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -798,7 +822,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -806,7 +832,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -864,7 +892,8 @@
     "rendered": "Spitzplatz keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
     "spine": "{settlement} keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -879,7 +908,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -887,7 +918,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -945,7 +978,8 @@
     "rendered": "Spitzplatz is orderly on the main streets and less particular about the others.",
     "spine": "{settlement} is orderly on the main streets and less particular about the others."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -960,7 +994,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -968,7 +1004,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1026,7 +1064,8 @@
     "rendered": "Prices in Spitzplatz are steady in a way that suggests the town is not living on the last thing that sold.",
     "spine": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1041,7 +1080,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1049,7 +1090,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1107,7 +1150,8 @@
     "rendered": "Spitzplatz keeps no arrangement for the Art; when it is wanted, it is wanted from outside.",
     "spine": "{settlement} keeps no arrangement for the Art; when it is wanted, it is wanted from outside."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1122,7 +1166,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Spitzplatz",
      "writers": 201
     }
@@ -1179,7 +1225,8 @@
     "rendered": "The price of bread in Spitzplatz is watched, which it is not in a comfortable town.",
     "spine": "The price of bread in {settlement} is watched, which it is not in a comfortable town."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "unfolding",
@@ -1194,7 +1241,9 @@
      "clock": "SNAPSHOT",
      "field": "conflict.intensity",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1264,7 +1313,8 @@
     "rendered": "political influence is what stands to change hands in Spitzplatz, and The Governing Council and The Order of the Watch both understand that well enough to be careful with each other.",
     "spine": "{stakes} is what stands to change hands in {settlement}, and {faction} and {faction2} both understand that well enough to be careful with each other."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -1331,7 +1381,8 @@
     "rendered": "The road runs past Spitzplatz and Spitzplatz takes very little from it; the traffic is real and the town has stayed outside it.",
     "spine": "The road runs past {settlement} and {settlement} takes very little from it; the traffic is real and the town has stayed outside it."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1346,7 +1397,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1405,7 +1458,8 @@
     "rendered": "What Spitzplatz cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
     "spine": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1420,7 +1474,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1477,7 +1533,8 @@
     "rendered": "Spitzplatz is a town, in the ordinary sense, and the ordinariness is accurate.",
     "spine": "{settlement} is a town, in the ordinary sense, and the ordinariness is accurate."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1492,7 +1549,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.prominentRelationship",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1549,7 +1608,8 @@
     "rendered": "One of Spitzplatz's ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
     "spine": "One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1564,7 +1624,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1572,7 +1634,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1630,10 +1694,11 @@
     "rendered": "Everyone in Spitzplatz is tied to everyone else for the ordinary reasons: work, family, proximity, and time.",
     "spine": "Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "overview",

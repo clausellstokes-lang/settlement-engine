@@ -305,7 +305,9 @@
      "clock": "SNAPSHOT",
      "field": "prosperityRank(settlement.economicState.prosperity)",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -367,7 +369,8 @@
     "rendered": "There is nothing striking about Spitzplatz's condition in either direction: a working road, a working market, a town neither building nor selling off.",
     "spine": "There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -382,7 +385,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[10 rows]",
      "writers": 0
     },
@@ -390,7 +395,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.length",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 10,
      "writers": 0
     },
@@ -398,7 +405,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.reduce",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "{}",
      "writers": 0
     }
@@ -450,7 +459,8 @@
     "rendered": "Ask what this town lives on and you will be given a short list rather than an answer.",
     "spine": "Ask what this town lives on and you will be given a short list rather than an answer."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -465,7 +475,9 @@
      "clock": "PULSE",
      "field": "economicState",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
      "writers": 19
     },
@@ -473,7 +485,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.isEntrepot",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -481,7 +495,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.localProduction",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[33 rows]",
      "writers": 0
     },
@@ -489,7 +505,9 @@
      "clock": "PULSE",
      "field": "economicState.primaryExports",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[12 rows]",
      "writers": 1
     },
@@ -497,7 +515,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.primaryImports",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[6 rows]",
      "writers": 0
     }
@@ -558,7 +578,8 @@
     "rendered": "The market at Spitzplatz carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
     "spine": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -573,7 +594,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exportPosture.status",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -623,7 +646,8 @@
     "rendered": "There is always something going out. If one trade is quiet, another is not.",
     "spine": "There is always something going out. If one trade is quiet, another is not."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -684,7 +708,8 @@
     "rendered": "Spitzplatz is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season.",
     "spine": "{settlement} is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -699,7 +724,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -707,7 +734,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.activeChains",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -715,7 +744,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exploitation",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -723,7 +754,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -731,7 +764,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.primaryImports",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -798,7 +833,8 @@
     "rendered": "Spitzplatz keeps Caravaneer's post on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
     "spine": "{settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -813,7 +849,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.blackMarketCapture",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 8,
      "writers": 0
     }
@@ -865,10 +903,11 @@
     "rendered": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
     "spine": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "economics",

@@ -265,7 +265,8 @@
     "rendered": "Almost nothing the Free Elder Council asks of Warmholz arrives. The rolls are still kept, out of form rather than expectation, and the clerks who keep them have stopped chasing what is missing.",
     "spine": "Almost nothing the {seat} asks of {settlement} arrives. The rolls are still kept, out of form rather than expectation, and the clerks who keep them have stopped chasing what is missing."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -280,7 +281,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({})",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -288,7 +291,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -349,7 +354,8 @@
     "rendered": "A stranger at Warmholz is sent to the Free Elder Council and gets nothing done, then sent to somebody with no title at all and has it settled the same afternoon.",
     "spine": "A stranger at {settlement} is sent to the {seat} and gets nothing done, then sent to somebody with no title at all and has it settled the same afternoon."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -413,7 +419,8 @@
     "rendered": "Free Elder Council holds the hall at Warmholz and the town's affairs run through it.",
     "spine": "{faction} holds the hall at {settlement} and the town's affairs run through it."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -480,7 +487,8 @@
     "rendered": "Free Elder Council does not merely govern Warmholz, it outweighs everything else in the town put together; the other houses are consulted as a courtesy and know it.",
     "spine": "{faction} does not merely govern {settlement}, it outweighs everything else in the town put together; the other houses are consulted as a courtesy and know it."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": false
   },
   {
    "angle": "unfolding",
@@ -495,7 +503,9 @@
      "clock": "PULSE",
      "field": "powerStructure.criminalCaptureState",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "none",
      "writers": 1
     },
@@ -503,7 +513,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -511,7 +523,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -519,7 +533,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -581,7 +597,8 @@
     "rendered": "The criminal interest at Warmholz is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both.",
     "spine": "The criminal interest at {settlement} is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -596,7 +613,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -651,7 +670,8 @@
     "rendered": "There are interests at Warmholz and there are no camps; a question is answered by whoever cares about that question.",
     "spine": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "ledger",
@@ -715,7 +735,8 @@
     "rendered": "Decisions at Warmholz are averaged before they are made and stick once they are; the Free Elder Council moves slowly and does not readily move back.",
     "spine": "Decisions at {settlement} are averaged before they are made and stick once they are; the {seat} moves slowly and does not readily move back."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -779,7 +800,8 @@
     "rendered": "A stranger who addresses the Free Elder Council at Warmholz by any other title is corrected, politely and immediately.",
     "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -849,7 +871,8 @@
     "rendered": "Warmholz is no longer certain the hall belongs to Free Elder Council, and neither, from the way it governs, is Free Elder Council.",
     "spine": "{settlement} is no longer certain the hall belongs to {faction}, and neither, from the way it governs, is {faction}."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -864,7 +887,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -927,10 +952,11 @@
     "rendered": "What the Free Elder Council has lost at Warmholz it has lost to the town rather than to a rival, and no rival was required.",
     "spine": "What the {seat} has lost at {settlement} it has lost to the town rather than to a rival, and no rival was required."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "power",

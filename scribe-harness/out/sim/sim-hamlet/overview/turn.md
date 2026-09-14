@@ -22,9 +22,9 @@ POOL "NO-MARKET" in block DS-GEN-13
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings = null (LIVE)
-    readings.isEntrepot = null (FROZEN)
-    readings.tradeRouteAccess = null (FROZEN)
+    readings = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.isEntrepot = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.tradeRouteAccess = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -39,7 +39,7 @@ POOL "BARE" in block DS-GEN-17
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.inst = null (FROZEN)
+    readings.inst = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -76,7 +76,7 @@ POOL "SEVERITY: critical" in block DS-CND-1
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    Array.isArray(readings.conditions) ? readings.conditions :  = null (FROZEN)
+    Array.isArray(readings.conditions) ? readings.conditions :  = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -89,7 +89,7 @@ POOL "DIRECTION: worsening" in block DS-CND-1
   THE ORDER: the corpus spine realises the move order `V2` — `PRESENT then CONSEQUENCE` (state key + a STRUCTURAL-consequence field); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    Array.isArray(readings.conditions) ? readings.conditions :  = null (FROZEN)
+    Array.isArray(readings.conditions) ? readings.conditions :  = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -131,7 +131,7 @@ POOL "economicViability.viable: true" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.viable = null (FROZEN)
+    readings.viable = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -161,8 +161,8 @@ POOL "scores.military: CRITICAL" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = null (LIVE)
-    readings.scores = null (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -177,8 +177,8 @@ POOL "scores.monster: CRITICAL" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = null (LIVE)
-    readings.scores = null (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -193,8 +193,8 @@ POOL "scores.internal: WEAK" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = null (LIVE)
-    readings.scores = null (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -209,8 +209,8 @@ POOL "scores.economic: WEAK" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = null (LIVE)
-    readings.scores = null (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -225,8 +225,8 @@ POOL "scores.magical: CRITICAL" in block DS-GEN-3
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    axis = null (LIVE)
-    readings.scores = null (FROZEN)
+    axis = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -256,7 +256,7 @@ POOL "road" in block DS-GEN-6
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.tradeRouteAccess = null (FROZEN)
+    readings.tradeRouteAccess = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -286,8 +286,8 @@ POOL "flagDriven count zero" in block DS-REL-2
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.relationships = null (FROZEN)
-    readings.relationships.length = null (FROZEN)
+    readings.relationships = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.relationships.length = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -302,8 +302,8 @@ POOL "structuralSuggestions[]" in block DS-GEN-7
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.structuralSuggestions = null (FROZEN)
-    readings.structuralSuggestions.length = null (FROZEN)
+    readings.structuralSuggestions = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
+    readings.structuralSuggestions.length = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

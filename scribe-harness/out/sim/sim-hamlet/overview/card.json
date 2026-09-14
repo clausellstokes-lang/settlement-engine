@@ -385,7 +385,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -393,7 +395,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -401,7 +405,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -460,7 +466,8 @@
     "rendered": "Nothing in Warmholz is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.",
     "spine": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -475,7 +482,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.inst",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -532,7 +541,8 @@
     "rendered": "Nothing in Warmholz is official that could instead be somebody's job on the side.",
     "spine": "Nothing in {settlement} is official that could instead be somebody's job on the side."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -595,7 +605,8 @@
     "rendered": "Warmholz has pulled its stock and its people inward, and the ground it has given up is on the rolls as abandoned.",
     "spine": "{settlement} has pulled its stock and its people inward, and the ground it has given up is on the rolls as abandoned."
    },
-   "vid": 5
+   "vid": 5,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -647,7 +658,8 @@
     "rendered": "Nothing here is urgent. The town's difficulties are chronic rather than acute, and it has the room to work on them.",
     "spine": "Nothing here is urgent. The town's difficulties are chronic rather than acute, and it has the room to work on them."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -662,7 +674,9 @@
      "clock": "SNAPSHOT",
      "field": "Array.isArray(readings.conditions) ? readings.conditions : ",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -719,7 +733,8 @@
     "rendered": "This is as far as Warmholz bends. Past this it is not the same settlement, and it is very near past this.",
     "spine": "This is as far as {settlement} bends. Past this it is not the same settlement, and it is very near past this."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "unfolding",
@@ -734,7 +749,9 @@
      "clock": "SNAPSHOT",
      "field": "Array.isArray(readings.conditions) ? readings.conditions : ",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -786,7 +803,8 @@
     "rendered": "It is getting worse, steadily rather than suddenly; each season costs a little more than the one before.",
     "spine": "It is getting worse, steadily rather than suddenly; each season costs a little more than the one before."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -801,7 +819,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Warmholz",
      "writers": 201
     }
@@ -858,7 +878,8 @@
     "rendered": "Warmholz's year closes near enough to level that the closing is watched.",
     "spine": "{settlement}'s year closes near enough to level that the closing is watched."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -921,7 +942,8 @@
     "rendered": "What the watch at Warmholz records is a fraction of what happens, and the fraction is not chosen by the watch.",
     "spine": "What the watch at {settlement} records is a fraction of what happens, and the fraction is not chosen by the watch."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -936,7 +958,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.viable",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -993,7 +1017,8 @@
     "rendered": "Warmholz works on the terms it currently has, and the judgment is about those terms rather than about the town.",
     "spine": "{settlement} works on the terms it currently has, and the judgment is about those terms rather than about the town."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1008,7 +1033,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Warmholz",
      "writers": 201
     }
@@ -1065,7 +1092,8 @@
     "rendered": "Warmholz has less between itself and trouble than a town this size ought to.",
     "spine": "{settlement} has less between itself and trouble than a town this size ought to."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1080,7 +1108,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1088,7 +1118,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1144,7 +1176,8 @@
     "rendered": "What protects Warmholz is that nobody has wanted it, and everyone here understands the arrangement.",
     "spine": "What protects {settlement} is that nobody has wanted it, and everyone here understands the arrangement."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1159,7 +1192,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1167,7 +1202,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1225,7 +1262,8 @@
     "rendered": "Warmholz has no answer to what lives beyond its fields and nobody whose work it would be.",
     "spine": "{settlement} has no answer to what lives beyond its fields and nobody whose work it would be."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1240,7 +1278,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1248,7 +1288,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1306,7 +1348,8 @@
     "rendered": "There is more going on in Warmholz than the watch troubles itself with, and it is not hidden particularly well.",
     "spine": "There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1321,7 +1364,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1329,7 +1374,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1387,7 +1434,8 @@
     "rendered": "There is nothing spare in Warmholz, and the absence of spare is what a careful eye notices first.",
     "spine": "There is nothing spare in {settlement}, and the absence of spare is what a careful eye notices first."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1402,7 +1450,9 @@
      "clock": "PULSE",
      "field": "axis",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 1
     },
@@ -1410,7 +1460,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.scores",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1468,7 +1520,8 @@
     "rendered": "Warmholz keeps no practitioner, no arrangement, and no expectation of either.",
     "spine": "{settlement} keeps no practitioner, no arrangement, and no expectation of either."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1483,7 +1536,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Warmholz",
      "writers": 201
     }
@@ -1540,7 +1595,8 @@
     "rendered": "Nobody in Warmholz thinks about food, which is the most that can be said for a town's food.",
     "spine": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1555,7 +1611,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.tradeRouteAccess",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1614,7 +1672,8 @@
     "rendered": "Warmholz is here because somebody, once, found this a reasonable distance from the last place.",
     "spine": "{settlement} is here because somebody, once, found this a reasonable distance from the last place."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1629,7 +1688,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Warmholz",
      "writers": 201
     }
@@ -1686,7 +1747,8 @@
     "rendered": "Warmholz is a handful of roofs with a reason, and the reason is usually the ground.",
     "spine": "{settlement} is a handful of roofs with a reason, and the reason is usually the ground."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1701,7 +1763,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1709,7 +1773,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.relationships.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1768,7 +1834,8 @@
     "rendered": "The people of Warmholz are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
     "spine": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1783,7 +1850,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.structuralSuggestions",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -1791,7 +1860,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.structuralSuggestions.length",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1849,10 +1920,11 @@
     "rendered": "A careful reader of Warmholz finds one loose end, and it is the kind that a single institution would tie off.",
     "spine": "A careful reader of {settlement} finds one loose end, and it is the kind that a single institution would tie off."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "overview",

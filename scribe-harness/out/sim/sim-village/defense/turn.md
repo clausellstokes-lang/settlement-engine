@@ -212,7 +212,7 @@ POOL "structure null (nothing organized recognized)" in block DS-DEF-4
     {settlement} is "Hochhausen" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    structureKey = null (FROZEN)
+    structureKey = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -222,6 +222,9 @@ POOL "structure null (nothing organized recognized)" in block DS-DEF-4
 POOL "capture none" in block DS-DEF-4
   vid: 3
   stance: street
+  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
+  value here, so there is nothing to stand a sentence on but the pool key itself.
+  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Hochhausen" on this town
@@ -258,7 +261,7 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[29 rows]" (LIVE)
-    standingDefenseForces(settlement) = null (FROZEN)
+    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -271,7 +274,7 @@ POOL "arcane defense ABSENT" in block DS-DEF-5
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
-    magicWorksAt({ settlement }) = null (FROZEN)
+    magicWorksAt({ settlement }) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

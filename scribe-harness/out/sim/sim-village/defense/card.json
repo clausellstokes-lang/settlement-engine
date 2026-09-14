@@ -343,7 +343,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.readiness.score",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 28,
      "writers": 0
     }
@@ -400,7 +402,8 @@
     "rendered": "The defensive arrangements at Hochhausen are thin. Something is in place against most pressures and nothing is in place in depth.",
     "spine": "The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -439,7 +442,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[29 rows]",
      "writers": 38
     }
@@ -528,7 +533,8 @@
     "rendered": "At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.",
     "spine": "Everyone here has seen the place go about its week with no line around it and no soldier in it, and the town counts that an answer."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -571,7 +577,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasCourtSystem",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -579,7 +587,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPrison",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -648,7 +658,8 @@
     "rendered": "Whoever digs the ground holds that it takes a stranger on the same terms as anyone, whatever was or was not agreed about him.",
     "spine": "A traveller wronged here finds there is nowhere to take it, and nobody local expected there to be."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -703,7 +714,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.scores.economic",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 32,
      "writers": 0
     }
@@ -775,7 +788,8 @@
     "rendered": "At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.",
     "spine": "Everyone here has seen who turns out when something is wanted, and takes it that the same people would turn out for anything worse."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -830,7 +844,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasChurch",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -838,7 +854,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -846,7 +864,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasHospital",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -910,7 +930,8 @@
     "rendered": "By a carter's reckoning the sacks that leave a house for the stone are counted going and not counted coming back.",
     "spine": "A stranger who asks here for the store is shown a field, and one who asks for the house for the sick is shown a door."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -925,7 +946,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -982,7 +1005,8 @@
     "rendered": "Enforcement and criminal presence at Hochhausen sit close enough that the town's condition is a matter of which way the next few seasons go.",
     "spine": "Enforcement and criminal presence at {settlement} sit close enough that the town's condition is a matter of which way the next few seasons go."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -997,7 +1021,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -1054,7 +1080,8 @@
     "rendered": "The safety reading for Hochhausen is an initial one. It is honest about what has been seen and says nothing about what has not.",
     "spine": "The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1069,7 +1096,9 @@
      "clock": "SNAPSHOT",
      "field": "structureKey",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1124,7 +1153,8 @@
     "rendered": "A stranger asking after the arrangements at Hochhausen is met with genuine incomprehension, which is either the truth or an unusually good performance of it.",
     "spine": "A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1139,7 +1169,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Hochhausen",
      "writers": 201
     }
@@ -1196,7 +1228,8 @@
     "rendered": "Whatever is being run at Hochhausen is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
     "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -1211,7 +1244,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[29 rows]",
      "writers": 38
     }
@@ -1268,7 +1303,8 @@
     "rendered": "The town has an edge rather than a boundary at Hochhausen, and the edge is wherever the last building happens to be.",
     "spine": "The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1283,7 +1319,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[29 rows]",
      "writers": 38
     },
@@ -1291,7 +1329,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1349,7 +1389,8 @@
     "rendered": "A stranger at Hochhausen finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
     "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1364,7 +1405,9 @@
      "clock": "SNAPSHOT",
      "field": "magicWorksAt({ settlement })",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1414,7 +1457,8 @@
     "rendered": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.",
     "spine": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1429,7 +1473,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[29 rows]",
      "writers": 38
     }
@@ -1487,7 +1533,8 @@
     "rendered": "No wall marks where Hochhausen ends; at this size the country and the town simply agree to differ.",
     "spine": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1502,7 +1549,9 @@
      "clock": "CONFIG",
      "field": "config.tradeRouteAccess",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "road",
      "writers": 0
     },
@@ -1510,7 +1559,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -1518,7 +1569,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPort",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -1568,10 +1621,11 @@
     "rendered": "The town eats what arrives, and has nothing put by against a season when nothing does.",
     "spine": "The town eats what arrives, and has nothing put by against a season when nothing does."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "defense",

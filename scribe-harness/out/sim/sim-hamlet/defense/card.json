@@ -391,7 +391,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.readiness.score",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 13,
      "writers": 0
     }
@@ -441,7 +443,8 @@
     "rendered": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.",
     "spine": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -456,7 +459,9 @@
      "clock": "SNAPSHOT",
      "field": "stress",
      "grain": "root",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
      "writers": 0
     }
@@ -513,7 +518,8 @@
     "rendered": "What Warmholz's defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis.",
     "spine": "What {settlement}'s defenses are ordinarily worth does not describe the town at present; there is a crisis on it, and the arrangements have been rebuilt around the crisis."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -528,7 +534,9 @@
      "clock": "SNAPSHOT",
      "field": "economicViability.viable",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -536,7 +544,9 @@
      "clock": "SNAPSHOT",
      "field": "stress",
      "grain": "root",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
      "writers": 0
     }
@@ -594,7 +604,8 @@
     "rendered": "The crisis at Warmholz has changed the posture and not the prospects, and the town has been careful to keep the two separate.",
     "spine": "The crisis at {settlement} has changed the posture and not the prospects, and the town has been careful to keep the two separate."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -609,7 +620,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[14 rows]",
      "writers": 38
     }
@@ -694,7 +707,8 @@
     "rendered": "The houses here stand with nothing about them, a drover has it, and at the first door he was asked the state of the road behind him.",
     "spine": "The houses here stand with nothing about them, a drover has it, and at the first door he was asked the state of the road behind him."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -709,7 +723,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasCourtSystem",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -717,7 +733,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPrison",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -785,7 +803,8 @@
     "rendered": "By the households' own account a matter is settled among them, and it stays settled for as long as everyone who was there goes on agreeing that it was.",
     "spine": "By the households' own account a matter is settled among them, and it stays settled for as long as everyone who was there goes on agreeing that it was."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "unfolding",
@@ -800,7 +819,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.scores.economic",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 21,
      "writers": 0
     }
@@ -883,7 +904,8 @@
     "rendered": "What the arrangement here would cost, and whose the cost would be, has never been settled between the households.",
     "spine": "What the arrangement here would cost, and whose the cost would be, has never been settled between the households."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -898,7 +920,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasChurch",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -906,7 +930,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -914,7 +940,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasHospital",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -988,7 +1016,8 @@
     "rendered": "It is common knowledge here that there is no grain store to go to and no house for the sick to be carried to, and the town does not count either as a lack.",
     "spine": "It is common knowledge here that there is no grain store to go to and no house for the sick to be carried to, and the town does not count either as a lack."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1003,7 +1032,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Dangerous — Monster Threat",
      "writers": 0
     }
@@ -1060,7 +1091,8 @@
     "rendered": "The ordinary safety of Warmholz has stopped applying. Whatever the town was, the crisis on it now is what governs the streets.",
     "spine": "The ordinary safety of {settlement} has stopped applying. Whatever the town was, the crisis on it now is what governs the streets."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1075,7 +1107,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Dangerous — Monster Threat",
      "writers": 0
     }
@@ -1132,7 +1166,8 @@
     "rendered": "The safety reading for Warmholz is an initial one. It is honest about what has been seen and says nothing about what has not.",
     "spine": "The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1147,7 +1182,9 @@
      "clock": "SNAPSHOT",
      "field": "structureKey",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1204,7 +1241,8 @@
     "rendered": "No criminal infrastructure has been identified at Warmholz. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
     "spine": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1219,7 +1257,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Warmholz",
      "writers": 201
     }
@@ -1282,7 +1322,8 @@
     "rendered": "Nothing criminal has reached the Free Elder Council at Warmholz. Whatever operates in the town operates outside the hall, and the hall's decisions are the hall's.",
     "spine": "Nothing criminal has reached the {seat} at {settlement}. Whatever operates in the town operates outside the hall, and the hall's decisions are the hall's."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": false
   },
   {
    "angle": "visitor",
@@ -1297,7 +1338,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[14 rows]",
      "writers": 38
     }
@@ -1352,7 +1395,8 @@
     "rendered": "A stranger arrives at Warmholz from whichever direction suits him and is not obliged to pass anybody on the way in.",
     "spine": "A stranger arrives at {settlement} from whichever direction suits him and is not obliged to pass anybody on the way in."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1367,7 +1411,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[14 rows]",
      "writers": 38
     },
@@ -1375,7 +1421,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1435,7 +1483,8 @@
     "rendered": "A stranger at Warmholz can find nobody whose responsibility the town's defense is, because it is not anybody's.",
     "spine": "A stranger at {settlement} can find nobody whose responsibility the town's defense is, because it is not anybody's."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1450,7 +1499,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[14 rows]",
      "writers": 38
     },
@@ -1458,7 +1509,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1517,7 +1570,8 @@
     "rendered": "The town sends soldiers to things soldiers are wrong for at Warmholz, and pays for the wrongness each time.",
     "spine": "The town sends soldiers to things soldiers are wrong for at {settlement}, and pays for the wrongness each time."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -1532,7 +1586,9 @@
      "clock": "SNAPSHOT",
      "field": "magicWorksAt({ settlement })",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1587,7 +1643,8 @@
     "rendered": "Nothing unseen has come at Warmholz, and nothing here would know if it had; the record of safety and the capacity to detect are two different things.",
     "spine": "Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1602,7 +1659,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[14 rows]",
      "writers": 38
     }
@@ -1660,7 +1719,8 @@
     "rendered": "Warmholz is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.",
     "spine": "{settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1675,7 +1735,9 @@
      "clock": "CONFIG",
      "field": "config.tradeRouteAccess",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "road",
      "writers": 0
     },
@@ -1683,7 +1745,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -1691,7 +1755,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPort",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -1748,10 +1814,11 @@
     "rendered": "Warmholz holds no food buffer at all. Any interruption to supply becomes a survival question within days rather than seasons.",
     "spine": "{settlement} holds no food buffer at all. Any interruption to supply becomes a survival question within days rather than seasons."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "defense",

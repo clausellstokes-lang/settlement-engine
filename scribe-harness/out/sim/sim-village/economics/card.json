@@ -223,7 +223,9 @@
      "clock": "SNAPSHOT",
      "field": "prosperityRank(settlement.economicState.prosperity)",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -285,7 +287,8 @@
     "rendered": "There is nothing striking about Hochhausen's condition in either direction: a working road, a working market, a town neither building nor selling off.",
     "spine": "There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -300,7 +303,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[4 rows]",
      "writers": 0
     },
@@ -308,7 +313,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.length",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 4,
      "writers": 0
     },
@@ -316,7 +323,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.reduce",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "{}",
      "writers": 0
     }
@@ -375,7 +384,8 @@
     "rendered": "Well past half of what Hochhausen earns comes from a single trade, and the accounts have no second column worth the name.",
     "spine": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -390,7 +400,9 @@
      "clock": "PULSE",
      "field": "economicState",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
      "writers": 19
     },
@@ -398,7 +410,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.isEntrepot",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -406,7 +420,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.localProduction",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[2 rows]",
      "writers": 0
     },
@@ -414,7 +430,9 @@
      "clock": "PULSE",
      "field": "economicState.primaryExports",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[2 rows]",
      "writers": 1
     },
@@ -422,7 +440,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.primaryImports",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[4 rows]",
      "writers": 0
     }
@@ -483,7 +503,8 @@
     "rendered": "The market at Hochhausen carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
     "spine": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -498,7 +519,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exportPosture.status",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -548,7 +571,8 @@
     "rendered": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells.",
     "spine": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -602,7 +626,8 @@
     "rendered": "The town eats. It is not a subject anyone raises unprompted.",
     "spine": "The town eats. It is not a subject anyone raises unprompted."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -617,7 +642,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -625,7 +652,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.activeChains",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -633,7 +662,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exploitation",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -641,7 +672,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -649,7 +682,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.primaryImports",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -716,10 +751,11 @@
     "rendered": "Hochhausen keeps Cartographer's guild on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
     "spine": "{settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-village",
  "staticCardJoined": true,
  "tab": "economics",

@@ -241,7 +241,9 @@
      "clock": "SNAPSHOT",
      "field": "prosperityRank(settlement.economicState.prosperity)",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -291,7 +293,8 @@
     "rendered": "The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.",
     "spine": "The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -306,7 +309,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[3 rows]",
      "writers": 0
     },
@@ -314,7 +319,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.length",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 3,
      "writers": 0
     },
@@ -322,7 +329,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.incomeSources.reduce",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "{}",
      "writers": 0
     }
@@ -374,7 +383,8 @@
     "rendered": "There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.",
     "spine": "There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -389,7 +399,9 @@
      "clock": "PULSE",
      "field": "economicState",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
      "writers": 19
     },
@@ -397,7 +409,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.isEntrepot",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     },
@@ -405,7 +419,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.localProduction",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[7 rows]",
      "writers": 0
     },
@@ -413,7 +429,9 @@
      "clock": "PULSE",
      "field": "economicState.primaryExports",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[7 rows]",
      "writers": 1
     },
@@ -421,7 +439,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.primaryImports",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "[2 rows]",
      "writers": 0
     }
@@ -475,7 +495,8 @@
     "rendered": "Everybody here knows what leaves and what arrives, because the same carts do both.",
     "spine": "Everybody here knows what leaves and what arrives, because the same carts do both."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -490,7 +511,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exportPosture.status",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -547,7 +570,8 @@
     "rendered": "Warmholz sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.",
     "spine": "{settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -608,7 +632,8 @@
     "rendered": "Warmholz feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
     "spine": "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -623,7 +648,9 @@
      "clock": "PULSE",
      "field": "readings",
      "grain": "root",
+     "state": "unreadable",
      "status": "LIVE",
+     "unknown": true,
      "value": null,
      "writers": 5
     },
@@ -631,7 +658,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.activeChains",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -639,7 +668,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.exploitation",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -647,7 +678,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.isEntrepot",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     },
@@ -655,7 +688,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.primaryImports",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -722,10 +757,11 @@
     "rendered": "Warmholz works salt it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft.",
     "spine": "{settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "economics",

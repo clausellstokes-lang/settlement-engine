@@ -38,10 +38,10 @@ POOL "governanceFractured true" in block DS-POW-1
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}) = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).governanceFractured = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -64,6 +64,9 @@ POOL "no token matched: unclassified (the plain-description floor)" in block DS-
 POOL "governing faction holds a DOMINANT share" in block DS-POW-2
   vid: 1
   stance: ledger
+  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
+  value here, so there is nothing to stand a sentence on but the pool key itself.
+  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: faction, settlement
     {faction} is "Free Elder Council" on this town
@@ -85,13 +88,13 @@ POOL "capture pressure ADVANCING (weak security, poor prosperity)" in block DS-P
     powerStructure.criminalCaptureState = "none" (LIVE)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown.prosperity = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).breakdown.safety = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -101,12 +104,15 @@ POOL "capture pressure ADVANCING (weak security, poor prosperity)" in block DS-P
 POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
   vid: 2
   stance: street
+  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
+  value here, so there is nothing to stand a sentence on but the pool key itself.
+  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = null (FROZEN)
+    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0
@@ -164,7 +170,7 @@ POOL "legitimacyHold: public rejection is breaking the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = null (FROZEN)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 0

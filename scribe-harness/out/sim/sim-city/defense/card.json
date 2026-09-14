@@ -439,7 +439,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.readiness.score",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 66,
      "writers": 0
     }
@@ -496,7 +498,8 @@
     "rendered": "Nothing presses Rundgate at present, and the absence is not luck: a town this well set is not worth the price of trying.",
     "spine": "Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -543,7 +546,9 @@
      "clock": "CONFIG",
      "field": "config.monsterThreat",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "frontier",
      "writers": 0
     },
@@ -551,7 +556,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     }
@@ -652,7 +659,8 @@
     "rendered": "At the tavern the talk is of who stands the nights, and the country itself does not come up.",
     "spine": "Everyone here knows what is in the country and nobody here talks about it. The town calls that the arrangement working."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -725,7 +733,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     }
@@ -814,7 +824,8 @@
     "rendered": "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time, and yet a clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
     "spine": "A traveller is stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -889,7 +900,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasCourtSystem",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -897,7 +910,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPrison",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -992,7 +1007,8 @@
     "rendered": "At the market a stallholder says a short weight goes before a magistrate and comes back as a sum. The scales it was weighed on stay on his stall.",
     "spine": "{settlement} keeps a court and no room to hold anybody in. What the law here can take from a man is his money or his place in the town."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1051,7 +1067,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.scores.economic",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 73,
      "writers": 0
     }
@@ -1146,7 +1164,8 @@
     "rendered": "A local priest holds that the town keeps its word to the dead before it keeps its word to the living.",
     "spine": "Everyone in the town has seen the store kept stocked, and takes it that a crisis would find the place ready."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1193,7 +1212,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasChurch",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -1201,7 +1222,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -1209,7 +1232,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasHospital",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -1276,7 +1301,8 @@
     "rendered": "At the tavern they say strangers walk up to look at the store, and nobody here does.",
     "spine": "A drover says the town looks provided for from outside, and whoever tends a sick house here comes out of the church."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1291,7 +1317,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -1348,7 +1376,8 @@
     "rendered": "Rundgate runs on a working balance: the law is present, crime exists, and neither has the run of the town.",
     "spine": "{settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1363,7 +1392,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -1420,7 +1451,8 @@
     "rendered": "The safety reading for Rundgate is an initial one. It is honest about what has been seen and says nothing about what has not.",
     "spine": "The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1483,7 +1515,8 @@
     "rendered": "A stranger at Rundgate is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.",
     "spine": "A stranger at {settlement} is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1498,7 +1531,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Rundgate",
      "writers": 201
     }
@@ -1555,7 +1590,8 @@
     "rendered": "The hall at Rundgate moves against the operators and the operators move back, and the town is where the two of them meet.",
     "spine": "The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "ledger",
@@ -1570,7 +1606,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     }
@@ -1627,7 +1665,8 @@
     "rendered": "Rundgate controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
     "spine": "{settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1642,7 +1681,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     },
@@ -1650,7 +1691,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1708,7 +1751,8 @@
     "rendered": "Rundgate keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.",
     "spine": "{settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1723,7 +1767,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     },
@@ -1731,7 +1777,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1780,7 +1828,8 @@
     "rendered": "The town pays for some of its soldiers and knows which ones, and treats them accordingly.",
     "spine": "The town pays for some of its soldiers and knows which ones, and treats them accordingly."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1795,7 +1844,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     },
@@ -1803,7 +1854,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1861,7 +1914,8 @@
     "rendered": "A stranger at Rundgate finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
     "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1876,7 +1930,9 @@
      "clock": "SNAPSHOT",
      "field": "magicWorksAt({ settlement })",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1933,7 +1989,8 @@
     "rendered": "A stranger at Rundgate is measured at the gate in a way he cannot quite identify, and is not told about it.",
     "spine": "A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1948,7 +2005,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.economicGates.military",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 0.98,
      "writers": 0
     },
@@ -1956,7 +2015,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[47 rows]",
      "writers": 38
     }
@@ -2019,7 +2080,8 @@
     "rendered": "Rundgate's city walls and gates stands better than the watch that should man it; stone keeps itself, and wages do not.",
     "spine": "{settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -2034,7 +2096,9 @@
      "clock": "CONFIG",
      "field": "config.tradeRouteAccess",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "road",
      "writers": 0
     },
@@ -2042,7 +2106,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -2050,7 +2116,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPort",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -2107,10 +2175,11 @@
     "rendered": "Rundgate keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.",
     "spine": "{settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "sim-city",
  "staticCardJoined": true,
  "tab": "defense",

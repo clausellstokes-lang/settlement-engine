@@ -41,17 +41,53 @@ A POOL YOU CANNOT WRITE LAWFULLY IS OMITTED. An omitted pool draws the hand corp
 always there; a unit that breaks a bar above is dropped by the instruments and draws it too.
 Do not explain, apologise, or write anything outside the schema.
 
-THE PLAUSIBLE-ADDITION BAR. Add no mechanism, practice, cause, procedure, custom, price or
-arrangement the card does not name. If the card says a court and a prison, you may not say a
-fine, a debt, a backlog or a bribe. A line that explains HOW a thing works where the card only
-says THAT it stands is refused by the second reader and falls to the corpus.
+WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS. Write the CORPUS FACE VERBATIM
+at that seat. A copied corpus row is never refused: it already ships, and it is the line that
+would have shipped anyway. A pool with nothing lawful to say in its SPINE is omitted, and the
+hand corpus draws the whole of it. Neither is a failure; both are the dossier reading as it
+always did.
+
+THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT. THE STANDARD IS NON-CONTRADICTION. A line is
+refused for CONTRADICTING the settlement and never for ADDING to it. What the card does not hold,
+the card does not forbid: silence is permission.
+
+REFUSED, AND ONLY FOR THESE:
+- A VALUE A CARD FIELD DENIES. A wall on a town whose walls field says there is none; "no goods
+  come in" where the page says trade proceeds at an ordinary pace; "nothing organised behind it"
+  where the town's own rows list a street gang and front businesses.
+- A PAGE LINE OR A BADGE CONTRADICTED. The machine lines on this page are what the reader sees
+  beside your words. The posture badge and the readiness band are TWO LADDERS over one score and
+  both are true; a funding note and a backing word are TWO FIELDS and both are true. Neither pair
+  is a contradiction, and writing to the pool key is not a breach of either.
+- A ROLE THE TOWN DOES NOT SEAT, OR A RECORD NO BODY HERE KEEPS. Every speaker is one the town
+  block seats and every record cited is one a body here keeps.
+- THE ENGINE'S OWN MODEL DENIED. Do not explain a state by a cause the engine does not run it on:
+  a readiness band by how hard people work, a stress by the weather.
+- AN EVENT, A DATE OR A NUMBER STATED AS RECORD. No founding, no battle, no year, no count, no
+  rate and no price that the card does not hold. This is the floor with no exception, and it is
+  why an ORIGIN is refused: "carts stopped on this spot before any stall did" is a founding stated
+  as record. It is refused for that and never for being invented.
+- A FORECAST. The dossier reports what stands, never what is going to happen.
+
+NOT REFUSED, BECAUSE SILENCE IS PERMISSION:
+A practice, a custom, a motive, a belief, an interpretation, a feeling attributed to a source,
+and an absence or a smallness asserted on a field the card leaves UNKNOWN, all SHIP, provided no
+row and no page line denies them. Servants at the inn nursing a sick guest on a town with no
+hospital ships. A store filled by the trades ships. The court's business waiting on the parish
+ships. "Nothing here is being built" on an unknown ranking of prosperity ships, unless a row says
+otherwise. This is the flavour a game master opens the dossier for, and it is yours to write.
+
+AN UNKNOWN FIELD IS ONE YOU MAY WRITE AROUND BUT MAY NOT GIVE A VALUE, A COUNT OR A DATE.
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
 WEAK, CRITICAL) are TWO ladders over ONE score and both are the engine's. Write to the pool
-key's band; never name the badge word and never reconcile the two. A funding note reading
-`Upkeep underfunded ... at 97%` beside `Economic Backing: Well-funded` is likewise two true
-readings of two fields; write to the pool key and neither number.
+key's band; never name the badge word and never reconcile the two. A line that agrees with the
+band is NOT a contradiction of the badge, and neither reading refutes the other.
+
+THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE. A note reading `Upkeep underfunded ... at 97%`
+beside `Economic Backing: Well-funded` is two true readings of two fields and not a
+contradiction; write to the pool key and to neither number.
 
 THE CORPUS LINE'S STANDING. The corpus line given with a pool is the CLAIM you must keep and
 the line that ships if yours is refused. It is not a model of the law: where it breaks a bar
