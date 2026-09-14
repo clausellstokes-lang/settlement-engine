@@ -1,0 +1,4 @@
+{"type":"launched"}
+{"type":"started","key":"v2:a96b02ac1fd2a9237e3d1532f5337165db4ea69762665f45f68a65c270de56c4","agentId":"a4e6a289af9f9b432","label":"DS-DEF-2:mark:ds-def-2--economic-survival-adequate","phase":"Mark"}
+{"type":"started","key":"v2:f7126594d19fd1bdc91d870ac4ea8ffbd26d1becd766be1327d380250aecf33f","agentId":"a5592c2e9f9df94ab","label":"DS-DEF-2:mark:ds-def-2--economic-survival-critical","phase":"Mark"}
+{"type":"started","key":"v2:8ae137a47c2b7c7ed2723e44b1fbba98cde6d0e3cb2a2c4de770a66068765eea","agentId":"a33cc95ba329571ed","label":"DS-DEF-2:mark:ds-def-2--disasters-famine-no-reserves-hospital-present","phase":"Mark"}
