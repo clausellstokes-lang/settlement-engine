@@ -1276,7 +1276,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMPLETE LINE, output exported": [
         {
           "angle": "ledger",
-          "text": "The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.",
+          "text": "The line from {resource} to {good} is unbroken. The workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.",
           "slots": [
             "resource",
             "good",
@@ -1318,7 +1318,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger looking for {institution} here will not find one. What the town takes out of the ground, it sends on for somebody else to finish.",
+          "text": "A stranger looking for {institution} here does not find one. What the town takes out of the ground, it sends on for somebody else to finish.",
           "slots": [
             "institution"
           ],
@@ -1347,7 +1347,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {chain} is whole on the town's side and borrowed on the far side; {institution} has everything it needs except the beginning of the line.",
+          "text": "The {chain} is whole on the town's side and borrowed on the far side. {institution} has everything it needs except the beginning of the line.",
           "slots": [
             "chain",
             "institution"
@@ -1356,7 +1356,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What goes into the {chain} comes from elsewhere. The work is local; the material is not.",
+          "text": "What goes into the {chain} comes from elsewhere. The work is local. The material is not.",
           "slots": [
             "chain"
           ],
@@ -1375,7 +1375,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town has not found another. The workings are still there; what was in them is not.",
+          "text": "‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town has not found another. The workings are still there. What was in them is not.",
           "slots": [
             "settlement",
             "resource",
@@ -1404,7 +1404,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger tracing {good} through {settlement} finds no workshop in the line at all: only a yard, a clerk, and the next road.",
+          "text": "A stranger tracing {good} through {settlement} finds no workshop in the line at all. Only a yard, a clerk, and the next road.",
           "slots": [
             "good",
             "settlement"
@@ -1429,7 +1429,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The workings above {settlement} sit idle. It is not that there is nothing in them; it is that nothing can be got away from them.",
+          "text": "The workings above {settlement} sit idle. It is not that there is nothing in them. It is that nothing can be got away from them.",
           "slots": [
             "settlement"
           ],
@@ -2447,7 +2447,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing about {settlement}'s {chain} draws attention, which, in a line of supply, means all of it is arriving.",
+          "text": "Nothing about {settlement}'s {chain} draws attention. In a line of supply, that means all of it is arriving.",
           "slots": [
             "settlement",
             "chain"
@@ -2522,7 +2522,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger will find {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.",
+          "text": "A stranger finds {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.",
           "slots": [
             "institution"
           ],
@@ -2535,7 +2535,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass, and the cut is an arrangement rather than a theft.",
+          "text": "The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass. The cut is an arrangement rather than a theft.",
           "slots": [
             "chain",
             "faction"
@@ -2547,7 +2547,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Everything on the {chain} goes through the same hands now, and those hands are paid before anyone else is.",
+          "text": "Everything on the {chain} goes through the same hands now. Those hands are paid before anyone else is.",
           "slots": [
             "chain"
           ],
@@ -2569,7 +2569,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SUBSTITUTED": [
         {
           "angle": "ledger",
-          "text": "The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.",
+          "text": "The {chain} runs on something other than its own supply. The output is real. The line beneath it is not the line that should be there.",
           "slots": [
             "chain"
           ],
@@ -4324,7 +4324,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ONE EXPECTED CATEGORY MISSING": [
         {
           "angle": "ledger",
-          "text": "There is one thing a place of {settlement}'s size ought to provide and does not, and the absence is the same one every year.",
+          "text": "There is one thing a place of {settlement}'s size ought to provide and does not. What is absent is the same one every year.",
           "slots": [
             "settlement"
           ],
@@ -4332,7 +4332,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger will find everything he expects at {settlement} except one, and will be told, cheerfully, where the nearest one is.",
+          "text": "A stranger finds everything he expects at {settlement} except one. He is told, cheerfully, where the nearest one is.",
           "slots": [
             "settlement"
           ],
@@ -4340,7 +4340,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is one house short of being a complete town of its rung, and the missing one is the sort a single arrival would supply.",
+          "text": "{settlement} is one house short of being a complete town of its rung. What is missing is the sort a single arrival would supply.",
           "slots": [
             "settlement"
           ],
@@ -4350,7 +4350,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SEVERAL EXPECTED CATEGORIES MISSING": [
         {
           "angle": "ledger",
-          "text": "{settlement} falls short of its own rung in more than one direction; what the town offers is a smaller list than a place this size is assumed to keep.",
+          "text": "{settlement} falls short of its own rung in more than one direction. What the town offers is a smaller list than a place this size is assumed to keep.",
           "slots": [
             "settlement"
           ],
@@ -4358,7 +4358,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "This town is bigger than the things it can do for you, and the people here are used to going elsewhere for several of them.",
+          "text": "This town is bigger than the things it can do for you. The people here are used to going elsewhere for several of them.",
           "slots": [],
           "vid": 2
         },
@@ -4374,7 +4374,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "THE HEALING GAP": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps no house of healing at a size where one is assumed; what is done for the badly hurt here is done by whoever is nearest.",
+          "text": "{settlement} keeps no house of healing at a size where one is assumed. What is done for the badly hurt here is done by whoever is nearest.",
           "slots": [
             "settlement"
           ],
@@ -4382,13 +4382,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The sick in this town are tended at home, and everybody knows how far the nearest better answer is.",
+          "text": "The sick in this town are tended at home. Everybody knows how far the nearest better answer is.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "The town manages ordinary hurts and has nothing at all for the extraordinary one, and the line between the two is where the arrangement fails.",
+          "text": "The town manages ordinary hurts and has nothing at all for the extraordinary one. The line between the two is where the arrangement fails.",
           "slots": [],
           "vid": 3
         }
@@ -4396,7 +4396,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "THE FOOD GAP": [
         {
           "angle": "ledger",
-          "text": "There is nowhere in {settlement} that sells a meal, which is unusual at any size and worth a stranger knowing before dark.",
+          "text": "There is nowhere in {settlement} that sells a meal. That is unusual at any size and worth a stranger knowing before dark.",
           "slots": [
             "settlement"
           ],
@@ -4404,7 +4404,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} eats what he brought or what somebody offers him, and the offering is a favour rather than a trade.",
+          "text": "A stranger at {settlement} eats what he brought or what somebody offers him. The offering is a favour rather than a trade.",
           "slots": [
             "settlement"
           ],
@@ -4420,7 +4420,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED": [
         {
           "angle": "ledger",
-          "text": "{institution} at {settlement} is open and short of what it works with; the service stands and what it can actually do has narrowed.",
+          "text": "{institution} at {settlement} is open and short of what it works with. The service stands and what it can actually do has narrowed.",
           "slots": [
             "institution",
             "settlement"
@@ -4429,13 +4429,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The house is still there and cannot do half of what it is known for, and the town has adjusted its expectations quietly.",
+          "text": "The house is still there and cannot do half of what it is known for. The town has adjusted its expectations quietly.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "unfolding",
-          "text": "What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short, and nothing in hand is turning that round.",
+          "text": "What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short. Nothing in hand is turning that round.",
           "slots": [
             "institution",
             "settlement"
@@ -4446,7 +4446,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "A METROPOLIS-TIER CATALOG, COMPLETE": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps every category a settlement can keep (including the ones a town has no business having), and the completeness is itself a fact about the place.",
+          "text": "{settlement} keeps every category a settlement can keep (including the ones a town has no business having). The completeness is itself a fact about the place.",
           "slots": [
             "settlement"
           ],
@@ -4454,7 +4454,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Whatever a stranger wants at {settlement}, the answer is that somebody here does it, and the only question is which quarter.",
+          "text": "Whatever a stranger wants at {settlement}, the answer is that somebody here does it. The only question is which quarter.",
           "slots": [
             "settlement"
           ],
@@ -4462,7 +4462,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is nothing this town has to send away for, which the people here mention to visitors more often than they realise.",
+          "text": "There is nothing this town has to send away for. The people here mention that to visitors more often than they realise.",
           "slots": [],
           "vid": 3
         }

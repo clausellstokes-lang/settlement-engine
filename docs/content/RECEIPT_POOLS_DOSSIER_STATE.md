@@ -1091,33 +1091,33 @@ clause is licensed, and a variant that needs a dated depletion is marked
 **SLOTS.** `{settlement}` `{chain}` `{institution}` `{resource}` `{good}` `{timeband_since}`
 
 **COMPLETE LINE, output exported**
-1. `[ledger]` The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
+1. `[ledger]` The line from {resource} to {good} is unbroken. The workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
 2. `[visitor]` Follow {resource} through {settlement} and it does not stop anywhere. It goes into {institution} raw and comes out of the gates as {good}.
 3. `[street]` This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.
 
 **A PROCESSING HOUSE MISSING FROM THE ROSTER**
 1. `[ledger]` {settlement} has the {resource} and not the {institution}. The line ends where the working should begin, and the raw goods go out raw or not at all.
-2. `[visitor]` A stranger looking for {institution} here will not find one. What the town takes out of the ground, it sends on for somebody else to finish.
+2. `[visitor]` A stranger looking for {institution} here does not find one. What the town takes out of the ground, it sends on for somebody else to finish.
 3. `[street]` The step that would make {resource} into {good} is not here. It has to be sent for, or done without.
 
 **UPSTREAM LINK COVERED BY AN IMPORT**
 1. `[ledger]` {settlement} does not raise the {resource} its {chain} runs on. It buys it, and the line works exactly as long as the buying does.
-2. `[threshold]` The {chain} is whole on the town's side and borrowed on the far side; {institution} has everything it needs except the beginning of the line.
-3. `[street]` What goes into the {chain} comes from elsewhere. The work is local; the material is not.
+2. `[threshold]` The {chain} is whole on the town's side and borrowed on the far side. {institution} has everything it needs except the beginning of the line.
+3. `[street]` What goes into the {chain} comes from elsewhere. The work is local. The material is not.
 
 **RESOURCE DEPLETED**
 1. `[ledger]` The {resource} is worked out. The line above {institution} is still drawn on the rolls and there is nothing coming down it.
-2. `[elder]` ‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town has not found another. The workings are still there; what was in them is not.
+2. `[elder]` ‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town has not found another. The workings are still there. What was in them is not.
 3. `[unfolding]` What {institution} still works, it works on what is left. The {resource} is exhausted and the line is running down the last of it.
 
 **ENTREPÔT PASS-THROUGH (no workshop in the line)**
 1. `[ledger]` Nothing in this {chain} begins or ends here. Goods arrive finished, are counted, and go on, and the town's return is on the counting.
-2. `[visitor]` A stranger tracing {good} through {settlement} finds no workshop in the line at all: only a yard, a clerk, and the next road.
+2. `[visitor]` A stranger tracing {good} through {settlement} finds no workshop in the line at all. Only a yard, a clerk, and the next road.
 3. `[street]` The town does not make it and does not use it. The town moves it.
 
 **BLOCKED: nothing can be got away**
 1. `[ledger]` The {chain} is on the rolls and off the road. There is no way to move what it makes, so it is not being made.
-2. `[visitor]` The workings above {settlement} sit idle. It is not that there is nothing in them; it is that nothing can be got away from them.
+2. `[visitor]` The workings above {settlement} sit idle. It is not that there is nothing in them. It is that nothing can be got away from them.
 3. `[street]` The town has the {resource} and no use for it. Without a road out, the ground might as well be empty.
 
 ---
@@ -1350,7 +1350,7 @@ block reads the canonical status and supplies clauses any surface can attach.
 **STABLE** — *runs normally, all inputs available* · **note fields must be empty**
 1. `[ledger]` The line holds. Every input the {chain} needs is present, and nothing in it is being covered for.
 2. `[street]` The {chain} works. There is no story in it this season.
-3. `[visitor]` Nothing about {settlement}'s {chain} draws attention, which, in a line of supply, means all of it is arriving.
+3. `[visitor]` Nothing about {settlement}'s {chain} draws attention. In a line of supply, that means all of it is arriving.
 
 **STRAINED** — *runs under stress; a shock would bite*
 1. `[ledger]` The {chain} is meeting its needs and meeting them exactly. There is no slack anywhere in the line.
@@ -1365,15 +1365,15 @@ block reads the canonical status and supplies clauses any surface can attach.
 **BLOCKED** — *offline after a hard upstream failure*
 1. `[ledger]` The {chain} is off. Something above it failed hard enough that nothing reaches the line at all.
 2. `[street]` The {chain} is not running. Not slowly. Not at all.
-3. `[visitor]` A stranger will find {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.
+3. `[visitor]` A stranger finds {institution} shut and the yard behind it empty. Whatever fed this place stopped feeding it.
 
 **CAPTURED** — *one faction takes rents* · **NO PRODUCER — do not wire a selector until one exists (R-DST-H)** · **dm-only where the capture is covert**
-1. `[ledger · dm-only]` The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass, and the cut is an arrangement rather than a theft.
-2. `[street · dm-only]` Everything on the {chain} goes through the same hands now, and those hands are paid before anyone else is.
+1. `[ledger · dm-only]` The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass. The cut is an arrangement rather than a theft.
+2. `[street · dm-only]` Everything on the {chain} goes through the same hands now. Those hands are paid before anyone else is.
 3. `[visitor · dm-only]` The {chain} looks ordinary from outside {settlement}. Inside it, one name sits on every stage.
 
 **SUBSTITUTED** — *running on a prop, not on its own health*
-1. `[ledger]` The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.
+1. `[ledger]` The {chain} runs on something other than its own supply. The output is real. The line beneath it is not the line that should be there.
 2. `[threshold]` What holds the {chain} up is a working, not a road. Take the working away and the line is what it actually is.
 3. `[street]` The {chain} keeps producing and nobody local mistakes that for health.
 
@@ -1751,34 +1751,34 @@ reading of the catalog itself.
 3. `[street]` The town can answer what a town this size ought to answer, and does not think about it further.
 
 **ONE EXPECTED CATEGORY MISSING**
-1. `[ledger]` There is one thing a place of {settlement}'s size ought to provide and does not, and the absence is the same one every year.
-2. `[visitor]` A stranger will find everything he expects at {settlement} except one, and will be told, cheerfully, where the nearest one is.
-3. `[threshold]` {settlement} is one house short of being a complete town of its rung, and the missing one is the sort a single arrival would supply.
+1. `[ledger]` There is one thing a place of {settlement}'s size ought to provide and does not. What is absent is the same one every year.
+2. `[visitor]` A stranger finds everything he expects at {settlement} except one. He is told, cheerfully, where the nearest one is.
+3. `[threshold]` {settlement} is one house short of being a complete town of its rung. What is missing is the sort a single arrival would supply.
 
 **SEVERAL EXPECTED CATEGORIES MISSING**
-1. `[ledger]` {settlement} falls short of its own rung in more than one direction; what the town offers is a smaller list than a place this size is assumed to keep.
-2. `[street]` This town is bigger than the things it can do for you, and the people here are used to going elsewhere for several of them.
+1. `[ledger]` {settlement} falls short of its own rung in more than one direction. What the town offers is a smaller list than a place this size is assumed to keep.
+2. `[street]` This town is bigger than the things it can do for you. The people here are used to going elsewhere for several of them.
 3. `[visitor]` A stranger provisions carefully before leaving {settlement}, because a town this size is normally the last place it is necessary to.
 
 **THE HEALING GAP** *(the absence that reads as a real deficiency rather than an inconvenience)*
-1. `[ledger]` {settlement} keeps no house of healing at a size where one is assumed; what is done for the badly hurt here is done by whoever is nearest.
-2. `[street]` The sick in this town are tended at home, and everybody knows how far the nearest better answer is.
-3. `[threshold]` The town manages ordinary hurts and has nothing at all for the extraordinary one, and the line between the two is where the arrangement fails.
+1. `[ledger]` {settlement} keeps no house of healing at a size where one is assumed. What is done for the badly hurt here is done by whoever is nearest.
+2. `[street]` The sick in this town are tended at home. Everybody knows how far the nearest better answer is.
+3. `[threshold]` The town manages ordinary hurts and has nothing at all for the extraordinary one. The line between the two is where the arrangement fails.
 
 **THE FOOD GAP** *(the one absence every tier expects filled)*
-1. `[ledger]` There is nowhere in {settlement} that sells a meal, which is unusual at any size and worth a stranger knowing before dark.
-2. `[visitor]` A stranger at {settlement} eats what he brought or what somebody offers him, and the offering is a favour rather than a trade.
+1. `[ledger]` There is nowhere in {settlement} that sells a meal. That is unusual at any size and worth a stranger knowing before dark.
+2. `[visitor]` A stranger at {settlement} eats what he brought or what somebody offers him. The offering is a favour rather than a trade.
 3. `[street]` Nobody here sells food to a stranger, because nobody here has ever had enough strangers to make it a living.
 
 **A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED**
-1. `[ledger]` {institution} at {settlement} is open and short of what it works with; the service stands and what it can actually do has narrowed.
-2. `[street]` The house is still there and cannot do half of what it is known for, and the town has adjusted its expectations quietly.
-3. `[unfolding]` What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short, and nothing in hand is turning that round.
+1. `[ledger]` {institution} at {settlement} is open and short of what it works with. The service stands and what it can actually do has narrowed.
+2. `[street]` The house is still there and cannot do half of what it is known for. The town has adjusted its expectations quietly.
+3. `[unfolding]` What {institution} can offer {settlement} shrinks with each turn the supply behind it stays short. Nothing in hand is turning that round.
 
 **A METROPOLIS-TIER CATALOG, COMPLETE**
-1. `[ledger]` {settlement} keeps every category a settlement can keep (including the ones a town has no business having), and the completeness is itself a fact about the place.
-2. `[visitor]` Whatever a stranger wants at {settlement}, the answer is that somebody here does it, and the only question is which quarter.
-3. `[street]` There is nothing this town has to send away for, which the people here mention to visitors more often than they realise.
+1. `[ledger]` {settlement} keeps every category a settlement can keep (including the ones a town has no business having). The completeness is itself a fact about the place.
+2. `[visitor]` Whatever a stranger wants at {settlement}, the answer is that somebody here does it. The only question is which quarter.
+3. `[street]` There is nothing this town has to send away for. The people here mention that to visitors more often than they realise.
 
 ---
 
