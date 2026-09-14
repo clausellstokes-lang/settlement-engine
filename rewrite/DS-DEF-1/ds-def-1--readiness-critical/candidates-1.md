@@ -42,7 +42,7 @@ elders where the consensus is genuinely the household heads speaking. Flagged fo
 
 ## VARIANT 1
 
-1. `[ledger]` The town's answer to anything that comes at it is its own people, and they answer on top of their own work.
+1. `[ledger]` The town's answer to anything that comes at it is its own people, and they turn out on top of their own work.
    - `[face]` `[elders]` The elders say a household that can lend a spade can lend a pair of hands, and they ask for both in the same breath.
    - `[face]` `[register]` Whoever buries the dead says the ground is opened by hand, and that the only question ever put is about the weather.
    - `[face]` `[stranger]` A traveller says the rope at the water is spliced where it parted and spliced again beside that, and nobody here thinks it worth remarking on.
@@ -65,7 +65,7 @@ elders where the consensus is genuinely the household heads speaking. Flagged fo
    - `[face]` `[register]` The fence at the ground is against animals and nothing else, whoever buries the dead says, and mending it falls to whoever sees it down.
    - `[face]` `[stranger]` A traveller says the dogs here know a stranger before the houses do, and the houses take their word for it.
    - `[face]` `[elders · pair 3 · view]` The elders say nobody here is in charge of anything, and that the households settle between themselves what needs settling. <!-- joinable -->
-   - `[face]` `[stranger · pair 3 · view]` A traveller says he asked who was in charge here and was pointed at a house. <!-- joinable -->
+   - `[face]` `[stranger · pair 3 · view]` Travellers say the answer to who is in charge here is always a house. <!-- joinable -->
 
 ---
 
@@ -75,28 +75,28 @@ elders where the consensus is genuinely the household heads speaking. Flagged fo
 *What everyone SAW binds under floor 1 in full; what everyone MAKES OF IT is the town's shared
 perception and may be mistaken. Plural roles only, no power's stake.*
 
-- V1 — `[public]` Anyone in the town can name who comes out when something happens, and the town counts on the same people coming out the next time.
-- V2 — `[public]` It is common knowledge here that a household asked for a day gives the day, and the town takes that for an arrangement.
-- V3 — `[public]` Everyone here has heard a shout carry the length of the place, and the town counts that a warning.
+- V1 · `[public]` Anyone in the town can name who comes out when something happens, and the town counts on the same people coming out the next time.
+- V2 · `[public]` It is common knowledge here that a household asked for a day gives the day, and the town takes that for an arrangement.
+- V3 · `[public]` Everyone here has heard a shout carry the length of the place, and the town counts that a warning.
 
 ### `[archiver · observed]` — ruling 27, at most one per variant (car 18n not landed)
 *A bare passive, no observer named, no number on the elapsed course. ⚠ NOT ONE OF THESE TOUCHES A
 FORCE, A WALL OR A GATE: every one of those rosters is OPEN on this pool, so `no soldier has been
 seen` — lawful on a key that fixes no garrison and no militia — is F1-25 here, in both directions.*
 
-- V1 — `[archiver · observed]` The same tools are carried out to the fields in the morning and stand inside the doors at night.
-- V2 — `[archiver · observed]` Word of a stranger reaches the far side of the place before the stranger does.
-- V3 — `[archiver · observed]` A shout from one end of the place is answered from the other.
+- V1 · `[archiver · observed]` The same tools are carried out to the fields in the morning and stand inside the doors at night.
+- V2 · `[archiver · observed]` Word of a stranger reaches the far side of the place before the stranger does.
+- V3 · `[archiver · observed]` A shout from one end of the place is answered from the other.
 
 ### `[archiver · pair N · weigh]` — ruling 22, offered, not placed (car 18i not landed)
 *One sentence, opens and never closes; the reason for any lean drawn from the other source's stake.*
 
-- pair 1 (disagree) — It may be that both are right, and the turn goes round the households while the same ones are always nearest.
-- pair 2 (reinforce) — On this the two agree, and it may be that the arrangement holds precisely because nobody has written it down.
-- pair 3 (view) — It may be that both answers are the same answer, and that a house is what nobody being in charge looks like here.
+- pair 1 (disagree) · It may be that both are right, and the turn goes round the households while the same ones are always nearest.
+- pair 2 (reinforce) · On this the two agree, and it may be that the arrangement holds precisely because nobody has written it down.
+- pair 3 (view) · It may be that both answers are the same answer, and that a house is what nobody being in charge looks like here.
 
 ### The alternate spine carrying `{settlement}` (ruling 12: at most one unit in the pool)
-- V1 alternate — `[ledger]` What {settlement} answers with is its own people, and they answer on top of their own work.
+- V1 alternate · `[ledger]` What {settlement} answers with is its own people, and they turn out on top of their own work.
 
 ### One notebook candidate, offered only if the selector wants a `dm-only` row
 *The pool carries none today, and §2c marks NO covert field on this block, so nothing here is
@@ -123,7 +123,7 @@ settled and the note conjectures without concluding. Shade: conjecture. Feeling:
   before he is questioned (T1), the thing leaning behind every door (T5), the last house's latch
   (T4), the late drinker seen home (T14) and the different name from everybody asked (T3). An axe
   inside the door and a traveller fed before being asked were both drafted here and both cut for
-  landing on T5 and T1. V3's stranger reaches past T3: the answer he gets is single and it is a
+  landing on T5 and T1. V3's paired stranger reaches past T3: the answer is single and it is a
   household, not a scatter of names.
 - **No elapsed course over a body.** `institutions[*]` carries 38 writers and is LIVE, so no face
   says the wall has stood or the watch has gone thin. The duratives kept here run over the burial
