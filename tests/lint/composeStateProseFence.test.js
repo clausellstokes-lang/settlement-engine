@@ -86,6 +86,65 @@ const ROUTED_COMPOSERS = Object.freeze(ROUTED_DESKS
 const ROUTED_LEAVES = Object.freeze(ROUTED_DESKS
   .map(({ desk }) => `src/domain/display/stateProse/${desk}StateProseCandidates.js`).sort());
 
+/**
+ * ⭐⭐ THE HEADLESS READERS OF THE COMPOSED PAGE — THE THIRD CLASS (SCRIBE ruling 22; the
+ * Scribe's W0 deliverables 1 and 3).
+ *
+ * WHY A CLASS AND NOT TWO MORE ROWS ON THE ROSTERS ABOVE. `ROUTED_COMPOSERS` are the desks
+ * that COMPOSE — each calls `composeStateProse`, each was admitted by the one wiring car that
+ * routed it, and the roster's whole value is that a manifest drift is diagnosable against one
+ * desk's diff. `PAGE_CALLERS` is the TAB that mints a page's no-repeat state once and hands it
+ * down. These two modules are neither. They live on the prose island under `src/domain/prose/`,
+ * they render nothing and mount nothing, and they exist to READ what the shipped pipeline
+ * already drew for ONE town: `scribePage.js` renders the dossier's pages to a flat `PageLine[]`
+ * without a browser, and `townCard.js` harvests that render into the hand corpus's marker card.
+ * Neither draws a second time — the card's own header states the principle in terms ("it never
+ * re-derives a draw", because a re-derivation is a second opinion about which variant fired),
+ * and that principle is exactly WHY they must reach the product's readers rather than restate
+ * them. Admitting them as a desk would make "one desk per car" false; admitting them as a page
+ * would make `PAGE_CALLERS`' sentence about tabs false. So they are named for what they are.
+ *
+ * ⛔ THE ROW NAMES WHAT EACH MAY TAKE, AND THE ARMS ASSERT IT IN BOTH DIRECTIONS — a licence
+ * for a binding nobody imports reds exactly as loudly as a binding nobody licensed, which is
+ * the discipline `LICENSED_LEAF_IMPORTS` already holds this file to. Registering a reader is
+ * NOT a licence to compose: `townCard.js` reaches the composer for `COMPROMISED_SYMPTOM_POOLS`
+ * — the frozen table of which pool answers which symptom, read so the card can say which row a
+ * compromised source would have spoken from — and for the composing function NEVER. That is
+ * asserted by name below, so "only a DESK composes" survives this roster as a machine-checked
+ * fact rather than a sentence the roster quietly retired.
+ *
+ * ⛔ AND NEITHER MAY BE PULLED INTO THE EAGER GRAPH. §1 above prices an eager reach at the
+ * whole prose corpus re-filed into the first-paint chunk against 5,878 B of margin. The
+ * island's two product entries (`src/lib/scribeGround.js`, `src/store/scribeTransport.js`)
+ * reach these modules by DYNAMIC `import(…)` only; the arm below holds that on a source scan,
+ * so a static importer reds on every gate instead of waiting for a build.
+ * @type {ReadonlyArray<{module: string, composer: ReadonlyArray<string>, roster: ReadonlyArray<string>}>}
+ */
+const HEADLESS_READERS = Object.freeze([
+  {
+    module: 'src/domain/prose/scribePage.js',
+    // The page render takes the PAGE's entry point and nothing else — the same single binding
+    // the tab takes, for the same reason: one read minted once for all of a page's desk entries.
+    composer: [],
+    roster: ['pageProse'],
+  },
+  {
+    module: 'src/domain/prose/townCard.js',
+    // A frozen TABLE, never the composing function.
+    composer: ['COMPROMISED_SYMPTOM_POOLS'],
+    // The card states, per source, which powers speak, in which roles, which of them is
+    // compromised and on what year the roll turns — the four readers that answer exactly that.
+    roster: ['sourcesOf', 'rolesOf', 'compromisedSourcesOf', 'renderYearOf'],
+  },
+]);
+
+/** The headless readers that reach the composer at all, repo-relative. */
+const COMPOSER_READERS = Object.freeze(HEADLESS_READERS
+  .filter(({ composer }) => composer.length > 0).map(({ module }) => module).sort());
+/** The headless readers that reach the roster reader, repo-relative. */
+const ROSTER_READERS = Object.freeze(HEADLESS_READERS
+  .filter(({ roster }) => roster.length > 0).map(({ module }) => module).sort());
+
 /** Static `from '…'` specifiers only, the coupling walker's own reader. */
 const IMPORT_RE = /(?:^|\n)\s*(?:import|export)\b[^;'"]*?from\s*['"]([^'"]+)['"]/g;
 /** A dynamic `import('…')`, which a static reader would otherwise miss entirely. */
@@ -132,15 +191,38 @@ function codeOnly(source) {
 
 /**
  * Every module specifier a file imports, static and dynamic, in source order.
+ *
+ * ⭐ `staticOnly` DROPS THE DYNAMIC HALF, and it is an option on this function rather than a
+ * second reader because of the header's own rule: every arm runs through the SAME scanner, so
+ * a scanner that stopped resolving paths cannot pass one mode while failing the other. The
+ * mode exists for the EAGER question §1 prices — a lazily reached module costs the first-paint
+ * chunk nothing, and only a static edge re-files it — and both modes are plant-convicted below
+ * against one pair of planted files.
  * @param {string} source
+ * @param {{staticOnly?: boolean}} [opts]
  * @returns {string[]}
  */
-function specifiersIn(source) {
+function specifiersIn(source, { staticOnly = false } = {}) {
   const code = codeOnly(source);
   return [
     ...[...code.matchAll(IMPORT_RE)].map((m) => m[1]),
-    ...[...code.matchAll(DYNAMIC_IMPORT_RE)].map((m) => m[1]),
+    ...(staticOnly ? [] : [...code.matchAll(DYNAMIC_IMPORT_RE)].map((m) => m[1])),
   ];
+}
+
+/**
+ * The named bindings a file takes from the module whose specifier ends in `basename`, across
+ * every `import { … } from '…basename'` in it, sorted. The estate's ONE existing spelling of
+ * this question is the page caller's inline regex at the foot of this file; a roster that
+ * names what each reader may take needs it per row, so it is a function.
+ * @param {string} source
+ * @param {string} basename e.g. `faceSources.js`
+ * @returns {string[]}
+ */
+function namedImportsFrom(source, basename) {
+  const re = new RegExp(`import\\s*\\{([^}]*)\\}\\s*from\\s*['"][^'"]*${basename.replace('.', '\\.')}['"]`, 'g');
+  return [...codeOnly(source).matchAll(re)]
+    .flatMap((m) => m[1].split(',').map((s) => s.trim()).filter(Boolean)).sort();
 }
 
 /**
@@ -150,14 +232,15 @@ function specifiersIn(source) {
  * through this exact function without writing a file into the tree.
  * @param {string} target repo-relative path of the imported module
  * @param {ReadonlyArray<{rel: string, src: string}>} files
+ * @param {{staticOnly?: boolean}} [opts] `staticOnly` asks the EAGER question only
  * @returns {string[]} the importers, sorted
  */
-function importersOf(target, files) {
+function importersOf(target, files, { staticOnly = false } = {}) {
   const found = [];
   for (const file of files) {
     if (file.rel === target) continue;
     const from = dirname(join(ROOT, file.rel));
-    for (const specifier of specifiersIn(file.src)) {
+    for (const specifier of specifiersIn(file.src, { staticOnly })) {
       if (!specifier.startsWith('.')) continue;
       if (relative(ROOT, resolve(from, specifier)).replace(/\\/g, '/') === target) {
         found.push(file.rel);
@@ -213,12 +296,19 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
   test('⭐ EXACTLY THE ROUTED DESKS IMPORT THE COMPOSER — one desk per car, and no other reach', () => {
     expect(importersOf(COMPOSER, LIVE_FILES), 'car 3a landed the seam unwired; 3b–3g wire ONE'
       + ' DESK EACH, so a manifest drift is diagnosable against one desk\'s diff')
-      .toEqual([...ROUTED_COMPOSERS]);
+      .toEqual([...COMPOSER_READERS, ...ROUTED_COMPOSERS].sort());
     // AND NOBODY ELSE AT ALL: a component, a hook or a second desk reaching the composer
     // directly would compose outside a desk's one law, and the roster above would not say so
     // on its own — this is the same answer read as a whole-tree fact.
-    expect(importersOf(COMPOSER, LIVE_FILES).filter((rel) => !/StateProse\.js$/.test(rel)),
-      'only a DESK composes').toEqual([]);
+    //
+    // ⭐ THE HEADLESS READERS ARE SUBTRACTED HERE BY NAME AND NOT BY SHAPE, and the sentence
+    // this arm asserts is UNCHANGED. "Only a DESK composes" is still literally true: the arm
+    // below reads what each reader actually takes from the composer and holds it to a roster
+    // in which the composing function does not appear, so the subtraction cannot be used to
+    // smuggle a seventh composer in under a reader's name.
+    expect(importersOf(COMPOSER, LIVE_FILES)
+      .filter((rel) => !/StateProse\.js$/.test(rel) && !COMPOSER_READERS.includes(rel)),
+    'only a DESK composes').toEqual([]);
   });
 
   test('⭐ EXACTLY THE ROUTED DESKS IMPORT A CANDIDATES LEAF, AND ONLY THEIR OWN', () => {
@@ -421,6 +511,13 @@ describe('the six candidates leaves are PURE HEADLESS LEAVES (ARCH §4.1, M-F7)'
  * `src/domain/prose/` — the prose island (the holder table it mirrors) is byte-fenced off the
  * product. And the six desks reach it, since every desk entry point puts the roster on its
  * read; the composer does NOT (its own fence above holds its list at the kernel plus leaves).
+ *
+ * ⭐ THE BYTE-FENCE IS DIRECTIONAL, AND SAYING SO IS WHAT ADMITS THE SCRIBE'S READERS (SCRIBE
+ * ruling 22). What the fence forbids is the PRODUCT depending on the island: a `src/domain/prose/`
+ * import inside `faceSources.js` would put the holder table's bytes on the product's graph, and
+ * the arm below asserts that separately for exactly that reason. The island depending on the
+ * PRODUCT is the other direction and costs the product nothing — `HEADLESS_READERS` above names
+ * the two modules that do it, what each may take, and the eager arm that keeps the cost at zero.
  */
 describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
   const FACE_SOURCES_MODULE = 'src/domain/display/stateProse/faceSources.js';
@@ -472,7 +569,7 @@ describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
 
   test('⭐ every routed desk imports the roster reader; the composer and the kernel do not', () => {
     expect(importersOf(FACE_SOURCES_MODULE, LIVE_FILES))
-      .toEqual([...PAGE_CALLERS, ...ROUTED_COMPOSERS].sort());
+      .toEqual([...PAGE_CALLERS, ...ROSTER_READERS, ...ROUTED_COMPOSERS].sort());
     // And the page caller takes ONLY the page's own entry point — not `sourcesOf`, not
     // `rolesOf`, not the covert reader. A tab that read a roster itself would be a second
     // answer to "which powers speak here" living outside the one module that answers it.
@@ -488,6 +585,88 @@ describe('the roster reader\'s import fence (car 8b-W-18c)', () => {
       const wrapped = [...code.matchAll(/options = withFaceSources\(settlement, options\);/g)].length;
       expect(entries, `${rel} exports at least one composing entry`).toBeGreaterThan(0);
       expect(wrapped, `${rel}: every exported entry puts the roster on its read`).toBe(entries);
+    }
+  });
+});
+
+/**
+ * ── THE HEADLESS READERS' OWN ARMS (SCRIBE ruling 22, the chair's car) ─────────────────
+ *
+ * The two rosters above now each carry a row that is not a desk and not a tab, and a roster row
+ * that nothing checks is a permission rather than a fence. These arms are what make it the
+ * second thing: each reader takes EXACTLY the bindings its row names from each module it is
+ * admitted to, the composing function appears on no row, and neither module is reachable from
+ * the product's EAGER graph.
+ *
+ * ⛔ WHY THE SUITE WAS RED AND WHAT THAT COST. The Scribe's W0 landed both modules against a
+ * gate list that never named this file, so the fence has been red since `1bd614ec9` — through
+ * five further W2 commits, on an arm whose whole job is to notice a new importer of the
+ * composer. That is the fence working: it saw them. What was missing was the roster row saying
+ * what they are, which is added here rather than the arm being loosened to stop noticing.
+ */
+describe('the headless readers of the composed page (SCRIBE ruling 22)', () => {
+  test('⭐ each reader takes EXACTLY what its row names, from the composer and the roster reader', () => {
+    for (const { module, composer, roster } of HEADLESS_READERS) {
+      const src = read(module);
+      expect(namedImportsFrom(src, 'composeStateProse.js'),
+        `${module}: its bindings from the composer are exactly its row's`)
+        .toEqual([...composer].sort());
+      expect(namedImportsFrom(src, 'faceSources.js'),
+        `${module}: its bindings from the roster reader are exactly its row's`)
+        .toEqual([...roster].sort());
+      // ⭐⭐ AND NO READER MAY TAKE THE COMPOSING FUNCTION, asserted against the ROW as well as
+      // the source: the row is the thing a future lane edits, so a lane that tried to license
+      // `composeStateProse` here reds on the licence before it reds on the import.
+      expect(composer, `${module} may not be licensed to compose`).not.toContain('composeStateProse');
+      expect(src.includes('composeStateProse('), `${module} calls the composer`).toBe(false);
+    }
+    // THE SCANNER IS LIVE, not simply answering [] to everything. The witness is a ROUTED DESK,
+    // which reaches BOTH modules this arm reads and whose bindings this file already knows: a
+    // desk composes and a desk puts the roster on its read, so one file convicts both spellings.
+    const witness = read('src/domain/display/stateProse/defenseStateProse.js');
+    expect(namedImportsFrom(witness, 'composeStateProse.js'),
+      'a routed desk really does take the composing function').toEqual(['composeStateProse']);
+    expect(namedImportsFrom(witness, 'faceSources.js'),
+      'and really does take the roster wrapper').toEqual(['withFaceSources']);
+  });
+
+  test('⛔ NEITHER READER IS REACHED EAGERLY — the island stays off the first-paint chunk', () => {
+    for (const { module } of HEADLESS_READERS) {
+      const outside = (rels) => rels.filter((rel) => !rel.startsWith('src/domain/prose/'));
+      expect(outside(importersOf(module, LIVE_FILES, { staticOnly: true })),
+        `${module} is reached by a STATIC import from outside the island, which re-files the`
+        + ' prose corpus into the first-paint chunk (§1)').toEqual([]);
+      // THE ANTI-VACUITY FLOOR, the same discipline as the `legibilityRung` witness above: the
+      // product really does reach these modules, lazily, or the empty answer is free.
+      expect(outside(importersOf(module, LIVE_FILES)).length,
+        `${module} is reached by the product at all`).toBeGreaterThan(0);
+    }
+  });
+
+  test('⛔ BOTH SCAN MODES ARE PLANT-CONVICTED, through the live scanner', () => {
+    const planted = [
+      { rel: 'src/store/__probe.js', src: "import { townCard } from '../domain/prose/townCard.js';" },
+      { rel: 'src/lib/__probe.js', src: "const m = await import('../domain/prose/townCard.js');" },
+    ];
+    expect(importersOf('src/domain/prose/townCard.js', planted, { staticOnly: true }),
+      'the eager scan sees the static reach and ONLY it').toEqual(['src/store/__probe.js']);
+    expect(importersOf('src/domain/prose/townCard.js', planted),
+      'and the full scan sees both, so `staticOnly` narrows rather than blinds')
+      .toEqual(['src/lib/__probe.js', 'src/store/__probe.js']);
+    // AND THE NAMED-BINDING READER, in the shapes that actually occur: one line, several lines,
+    // and a comment that is not an import.
+    expect(namedImportsFrom("import { a, b } from './x/faceSources.js';", 'faceSources.js'))
+      .toEqual(['a', 'b']);
+    expect(namedImportsFrom("import {\n  c, d,\n} from '../faceSources.js';", 'faceSources.js'))
+      .toEqual(['c', 'd']);
+    expect(namedImportsFrom("// import { e } from './faceSources.js';\nexport const z = 1;", 'faceSources.js'))
+      .toEqual([]);
+    // A NAMESPACE import is not a named one, and must not be read as an empty licence: the
+    // roster's exactness would be satisfied by `import * as everything` if it were.
+    expect(namedImportsFrom("import * as all from './faceSources.js';", 'faceSources.js')).toEqual([]);
+    for (const { module } of HEADLESS_READERS) {
+      expect(codeOnly(read(module)), `${module} takes no namespace import of the roster reader`)
+        .not.toMatch(/import\s+\*\s+as\s+\w+\s+from\s*['"][^'"]*(?:faceSources|composeStateProse)\.js['"]/);
     }
   });
 });
