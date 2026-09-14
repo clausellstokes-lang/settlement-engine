@@ -2481,54 +2481,54 @@ cell in this shape.
 3. `[visitor]` A stranger who wants something from the combination at {settlement} is not asked what he believes, only what he is offering.
 
 **end `doctrine`**
-1. `[ledger]` The combination at {settlement} is organized around a belief and will spend office to serve it, which its rivals consistently fail to price correctly.
-2. `[street]` The combination at {settlement} will not trade the thing it is about, which its rivals keep discovering after they have made the offer.
-3. `[counterforce]` There are seats the combination at {settlement} could take and will not, because taking them would mean conceding the point the combination exists to hold.
+1. `[ledger]` The combination at {settlement} is organized around a belief and spends office to serve it. Its rivals keep expecting it to spend less.
+2. `[street]` The combination at {settlement} does not trade the thing it is about. Its rivals keep discovering that after they have made the offer.
+3. `[counterforce]` There are seats the combination at {settlement} could take and does not take. Taking them would mean conceding the point the combination exists to hold.
 
 **end `survival`**
-1. `[ledger]` The combination at {settlement} has one purpose and it is getting the town through; anything not bearing on that is being deferred and openly so.
+1. `[ledger]` The combination at {settlement} has one purpose, and it is getting the town through. Anything that does not bear on it is being put off, and openly.
 2. `[street]` Everything the combination at {settlement} is doing is aimed at the town still being here afterwards, and it says so plainly.
-3. `[unfolding]` The combination at {settlement} is spending its own future to buy the town a present one, and every member of it knows the bill is coming.
+3. `[unfolding]` The combination at {settlement} is spending its own future to buy the town a present one. Every member of it knows the bill is coming.
 
 **end `patron`**
-1. `[ledger · dm-only]` What the combination at {settlement} serves is somebody's interest rather than the town's, and the somebody is not always in the town.
-2. `[street · dm-only]` The combination at {settlement} serves an interest, and the interest is not a faction of this town and is not always in it.
-3. `[unfolding · dm-only]` What the combination at {settlement} pursues answers to somebody who never appears in the hall, and the answering is the whole of its consistency.
+1. `[ledger · dm-only]` What the combination at {settlement} serves is somebody's interest rather than the town's. That person is not always in the town.
+2. `[street · dm-only]` At {settlement} the combination serves an interest. The interest is not a faction of this town, and it is not always in the town.
+3. `[unfolding · dm-only]` What the combination at {settlement} pursues answers to somebody who never appears in the hall. Nothing else explains what it does from one question to the next.
 
 **receipt `formed`**
 1. `[ledger]` Houses at {settlement} that had no arrangement now have one, and the hall's arithmetic changed the day they announced it.
 2. `[street]` Two interests at {settlement} started voting together and have not stopped, and the town worked out what that meant before the hall admitted it.
-3. `[visitor]` A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one, and finds nobody willing to explain when that started.
+3. `[visitor]` A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one. Nobody is willing to explain when that started.
 
 **receipt `realigned`**
-1. `[ledger]` The combination at {settlement} is not the combination it was; a seat left and another took its place, and what the majority wants moved with it.
-2. `[unfolding]` The alignment at {settlement} has shifted rather than broken, and what it will now agree to is a different list from last season's.
+1. `[ledger]` The combination at {settlement} is not the combination it was. A seat left and another took its place, and what the majority wants moved with it.
+2. `[unfolding]` The alignment at {settlement} has shifted rather than broken. What it now agrees to is a different list from last season's.
 3. `[street]` The combination at {settlement} kept its name and changed its mind, and the town noticed the second before it noticed the first.
 
 **receipt `fractured`**
 1. `[ledger]` The combination at {settlement} has come apart. It lost its members and dissolved, and the hall is back to assembling each decision separately.
-2. `[street]` The arrangement in the hall at {settlement} ended, and it ended over a burden that fell on one house and not the others. That house is the aggrieved party now, and says so.
-3. `[unfolding]` A leader who bound the combination at {settlement} left the seat and the personal loyalty went with them; nothing seat-held remained to hold the rest together.
+2. `[street]` The arrangement in the hall at {settlement} ended over a burden that fell on one house and not the others. That house is the injured one now, and says so.
+3. `[unfolding]` A leader who bound the combination at {settlement} left the seat, and the personal loyalty went with them. Nothing held by the seats remained to hold the rest together.
 
 **receipt `exposed`** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` The leash was dragged into the light at {settlement} and the combination shattered in scandal; what had been the hall's most durable arrangement was its most brittle.
+1. `[ledger · dm-only]` The leash was dragged into the light at {settlement} and the combination shattered in scandal. The hall's most durable arrangement turned out to be its most brittle.
 2. `[street · dm-only]` Something was uncovered at {settlement} and the hall reorganized itself within the week, and the town has a fairly accurate idea of what.
-3. `[unfolding · dm-only]` What came out at {settlement} is still working through the hall; the combination is gone and the people who were in it are not, and the arrangements they still hold are the next problem.
+3. `[unfolding · dm-only]` What came out at {settlement} is still working through the hall. The combination is gone, the people who were in it are not, and the arrangements they still hold are the next problem.
 
 **receipt `deferred` (the alignment exists and has not happened)**
-1. `[threshold]` The alignment is there at {settlement} and the moment has not come; two houses need each other and something keeps them apart, and the keeping-apart is entered every time the question is raised.
-2. `[counterforce]` {settlement} already holds three combinations, and a fourth alignment is being held at the cap rather than refused. The houses concerned are aligned in everything but form.
+1. `[threshold]` The alignment is there at {settlement} and the moment has not come. Two houses need each other, and the same thing keeps them apart every time the question is raised.
+2. `[counterforce]` {settlement} already holds three combinations, and a fourth is waiting rather than refused. The houses concerned are aligned in everything but form.
 3. `[ledger]` {faction} outbid the combination for {counterpart}'s seat at {settlement}, and the alignment that would have formed did not.
 
 **hostile leader tie HARD-BLOCKS an otherwise natural alignment**
-1. `[counterforce]` Two houses at {settlement} want the same things and will not sit together; what is between the people at the head of them is bitter enough that the interests do not get a hearing.
+1. `[counterforce]` Two houses at {settlement} want the same things and do not sit together. What is between the people at the head of them is bitter enough that the interests do not get a hearing.
 2. `[street]` The obvious alliance at {settlement} does not happen, and the town knows exactly whose quarrel is preventing it.
-3. `[ledger]` The interests of {faction} and {counterpart} at {settlement} coincide almost exactly and the two do not sit together; the block is personal, and it holds harder than any policy would.
+3. `[ledger]` The interests of {faction} and {counterpart} at {settlement} coincide almost exactly, and the two do not sit together. The block is personal, and it holds harder than any policy would.
 
 **an opposition bloc forms COVERT under an autarchy** *(every variant `dm-only`)*
 1. `[ledger · dm-only]` There is an alignment against the {seat} at {settlement} and it is not a bloc, it is a conspiracy. Under this kind of rule there is no other form it could take.
-2. `[unfolding · dm-only]` Seats at {settlement} are coordinating where they cannot be seen to, which is slower, smaller and a great deal more dangerous than coordinating openly.
-3. `[street · dm-only]` There are meetings at {settlement} that are not meetings, held by people who have no reason to be in the same room and are anyway.
+2. `[unfolding · dm-only]` Seats at {settlement} are coordinating where they cannot be seen to. That is slower, smaller and a great deal more dangerous than coordinating openly.
+3. `[street · dm-only]` There are meetings at {settlement} that are not meetings. The people in them have no reason to be in the same room and are there anyway.
 
 ---
 

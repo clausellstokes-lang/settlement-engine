@@ -3211,7 +3211,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "end doctrine": [
         {
           "angle": "ledger",
-          "text": "The combination at {settlement} is organized around a belief and will spend office to serve it, which its rivals consistently fail to price correctly.",
+          "text": "The combination at {settlement} is organized around a belief and spends office to serve it. Its rivals keep expecting it to spend less.",
           "slots": [
             "settlement"
           ],
@@ -3219,7 +3219,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The combination at {settlement} will not trade the thing it is about, which its rivals keep discovering after they have made the offer.",
+          "text": "The combination at {settlement} does not trade the thing it is about. Its rivals keep discovering that after they have made the offer.",
           "slots": [
             "settlement"
           ],
@@ -3227,7 +3227,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "There are seats the combination at {settlement} could take and will not, because taking them would mean conceding the point the combination exists to hold.",
+          "text": "There are seats the combination at {settlement} could take and does not take. Taking them would mean conceding the point the combination exists to hold.",
           "slots": [
             "settlement"
           ],
@@ -3237,7 +3237,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "end survival": [
         {
           "angle": "ledger",
-          "text": "The combination at {settlement} has one purpose and it is getting the town through; anything not bearing on that is being deferred and openly so.",
+          "text": "The combination at {settlement} has one purpose, and it is getting the town through. Anything that does not bear on it is being put off, and openly.",
           "slots": [
             "settlement"
           ],
@@ -3253,7 +3253,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The combination at {settlement} is spending its own future to buy the town a present one, and every member of it knows the bill is coming.",
+          "text": "The combination at {settlement} is spending its own future to buy the town a present one. Every member of it knows the bill is coming.",
           "slots": [
             "settlement"
           ],
@@ -3266,7 +3266,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What the combination at {settlement} serves is somebody's interest rather than the town's, and the somebody is not always in the town.",
+          "text": "What the combination at {settlement} serves is somebody's interest rather than the town's. That person is not always in the town.",
           "slots": [
             "settlement"
           ],
@@ -3277,7 +3277,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The combination at {settlement} serves an interest, and the interest is not a faction of this town and is not always in it.",
+          "text": "At {settlement} the combination serves an interest. The interest is not a faction of this town, and it is not always in the town.",
           "slots": [
             "settlement"
           ],
@@ -3288,7 +3288,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What the combination at {settlement} pursues answers to somebody who never appears in the hall, and the answering is the whole of its consistency.",
+          "text": "What the combination at {settlement} pursues answers to somebody who never appears in the hall. Nothing else explains what it does from one question to the next.",
           "slots": [
             "settlement"
           ],
@@ -3314,7 +3314,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one, and finds nobody willing to explain when that started.",
+          "text": "A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one. Nobody is willing to explain when that started.",
           "slots": [
             "settlement"
           ],
@@ -3324,7 +3324,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "receipt realigned": [
         {
           "angle": "ledger",
-          "text": "The combination at {settlement} is not the combination it was; a seat left and another took its place, and what the majority wants moved with it.",
+          "text": "The combination at {settlement} is not the combination it was. A seat left and another took its place, and what the majority wants moved with it.",
           "slots": [
             "settlement"
           ],
@@ -3332,7 +3332,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The alignment at {settlement} has shifted rather than broken, and what it will now agree to is a different list from last season's.",
+          "text": "The alignment at {settlement} has shifted rather than broken. What it now agrees to is a different list from last season's.",
           "slots": [
             "settlement"
           ],
@@ -3358,7 +3358,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The arrangement in the hall at {settlement} ended, and it ended over a burden that fell on one house and not the others. That house is the aggrieved party now, and says so.",
+          "text": "The arrangement in the hall at {settlement} ended over a burden that fell on one house and not the others. That house is the injured one now, and says so.",
           "slots": [
             "settlement"
           ],
@@ -3366,7 +3366,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "A leader who bound the combination at {settlement} left the seat and the personal loyalty went with them; nothing seat-held remained to hold the rest together.",
+          "text": "A leader who bound the combination at {settlement} left the seat, and the personal loyalty went with them. Nothing held by the seats remained to hold the rest together.",
           "slots": [
             "settlement"
           ],
@@ -3379,7 +3379,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The leash was dragged into the light at {settlement} and the combination shattered in scandal; what had been the hall's most durable arrangement was its most brittle.",
+          "text": "The leash was dragged into the light at {settlement} and the combination shattered in scandal. The hall's most durable arrangement turned out to be its most brittle.",
           "slots": [
             "settlement"
           ],
@@ -3401,7 +3401,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "What came out at {settlement} is still working through the hall; the combination is gone and the people who were in it are not, and the arrangements they still hold are the next problem.",
+          "text": "What came out at {settlement} is still working through the hall. The combination is gone, the people who were in it are not, and the arrangements they still hold are the next problem.",
           "slots": [
             "settlement"
           ],
@@ -3411,7 +3411,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "receipt deferred (the alignment exists and has not happened)": [
         {
           "angle": "threshold",
-          "text": "The alignment is there at {settlement} and the moment has not come; two houses need each other and something keeps them apart, and the keeping-apart is entered every time the question is raised.",
+          "text": "The alignment is there at {settlement} and the moment has not come. Two houses need each other, and the same thing keeps them apart every time the question is raised.",
           "slots": [
             "settlement"
           ],
@@ -3419,7 +3419,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} already holds three combinations, and a fourth alignment is being held at the cap rather than refused. The houses concerned are aligned in everything but form.",
+          "text": "{settlement} already holds three combinations, and a fourth is waiting rather than refused. The houses concerned are aligned in everything but form.",
           "slots": [
             "settlement"
           ],
@@ -3439,7 +3439,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "hostile leader tie HARD-BLOCKS an otherwise natural alignment": [
         {
           "angle": "counterforce",
-          "text": "Two houses at {settlement} want the same things and will not sit together; what is between the people at the head of them is bitter enough that the interests do not get a hearing.",
+          "text": "Two houses at {settlement} want the same things and do not sit together. What is between the people at the head of them is bitter enough that the interests do not get a hearing.",
           "slots": [
             "settlement"
           ],
@@ -3455,7 +3455,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The interests of {faction} and {counterpart} at {settlement} coincide almost exactly and the two do not sit together; the block is personal, and it holds harder than any policy would.",
+          "text": "The interests of {faction} and {counterpart} at {settlement} coincide almost exactly, and the two do not sit together. The block is personal, and it holds harder than any policy would.",
           "slots": [
             "faction",
             "counterpart",
@@ -3482,7 +3482,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Seats at {settlement} are coordinating where they cannot be seen to, which is slower, smaller and a great deal more dangerous than coordinating openly.",
+          "text": "Seats at {settlement} are coordinating where they cannot be seen to. That is slower, smaller and a great deal more dangerous than coordinating openly.",
           "slots": [
             "settlement"
           ],
@@ -3493,7 +3493,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "There are meetings at {settlement} that are not meetings, held by people who have no reason to be in the same room and are anyway.",
+          "text": "There are meetings at {settlement} that are not meetings. The people in them have no reason to be in the same room and are there anyway.",
           "slots": [
             "settlement"
           ],
