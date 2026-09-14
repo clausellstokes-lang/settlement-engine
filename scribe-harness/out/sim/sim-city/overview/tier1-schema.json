@@ -12,40 +12,46 @@
     "additionalProperties": false,
     "required": [
      "n",
-     "certainty",
-     "quantifier",
-     "scope",
-     "actor",
-     "forecast",
-     "mechanism",
-     "samePage"
+     "fieldDenied",
+     "page",
+     "roster",
+     "model",
+     "record",
+     "forecast"
     ],
     "properties": {
      "n": {
       "type": "integer"
      },
-     "certainty": {
+     "fieldDenied": {
       "type": "string",
       "enum": [
        "yes",
        "no"
       ]
      },
-     "quantifier": {
+     "page": {
       "type": "string",
       "enum": [
        "yes",
        "no"
       ]
      },
-     "scope": {
+     "roster": {
       "type": "string",
       "enum": [
        "yes",
        "no"
       ]
      },
-     "actor": {
+     "model": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "record": {
       "type": "string",
       "enum": [
        "yes",
@@ -53,20 +59,6 @@
       ]
      },
      "forecast": {
-      "type": "string",
-      "enum": [
-       "yes",
-       "no"
-      ]
-     },
-     "mechanism": {
-      "type": "string",
-      "enum": [
-       "yes",
-       "no"
-      ]
-     },
-     "samePage": {
       "type": "string",
       "enum": [
        "yes",
