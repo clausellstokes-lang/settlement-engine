@@ -17,16 +17,32 @@ THE LINES TO WRITE:
 POOL "readiness ADEQUATE" in block DS-DEF-1
   vid: 4
   stance: threshold
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    defenseProfile.readiness.score = 57 (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
+    notebook: none. Return an empty list.
 POOL "Invasion & War: walls with NO force" in block DS-DEF-2
   vid: 3
   stance: street
+  THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: (none)
+    {court} is "A woman who brought a matter to the court" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    institutions = "[52 rows]" (LIVE)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 4
     face 0 speaks through: court
+      and may be any one of these people and no other: a bailiff (sg) · a clerk of the court (sg) · a woman who brought a matter to the court (sg) · one who waits on the court (sg) · one who waits on the court day (sg) · the officers of the court (pl)
     face 1 speaks through: (the bare fact)
     face 2 speaks through: (the bare fact)
     face 3 speaks through: (the bare fact)
@@ -36,12 +52,20 @@ POOL "Invasion & War: walls with NO force" in block DS-DEF-2
     face 1: {watch} {v:say} the hall's record has the walls in it and not the walk along them, and {v:walk} it after dark regardless.
     face 2: {court} {v:hear} what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.
     face 3: {public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming.
+    notebook: none. Return an empty list.
 POOL "Internal Security: full legal chain (court AND prison)" in block DS-DEF-2
   vid: 3
   stance: visitor
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
+  THE FIELDS this pool reads, with their values here:
+    economicState.compound.inst.hasCourtSystem = true (FROZEN)
+    economicState.compound.inst.hasPrison = true (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 9
     face 0 speaks through: tavern
+      and may be any one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
     face 1 speaks through: (the bare fact)
     face 2 speaks through: (the bare fact)
     face 3 speaks through: (the bare fact)
@@ -61,12 +85,19 @@ POOL "Internal Security: full legal chain (court AND prison)" in block DS-DEF-2
     face 6: A guild member says the trades pay for the waiting twice, in the man who waits and in the work that waits with him.
     face 7: The stallholders say a stranger cheated at the market is told where to bring it. A stallholder cheated by a stranger is told the same, after the stranger has gone.
     face 8: Those who keep the gate say a stranger with a complaint against him waits at the gate until somebody comes for him.
+    notebook: none. Return an empty list.
 POOL "Economic Survival: STRONG" in block DS-DEF-2
   vid: 3
   stance: counterforce
+  THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: (none)
+  THE FIELDS this pool reads, with their values here:
+    defenseProfile.scores.economic = 76 (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 8
     face 0 speaks through: guild
+      and may be any one of these people and no other: a guild factor (sg) · a journeyman (sg) · a master of one of the crafts (sg) · the dyers' warden (sg) · the guild master (sg) · the guilds of the town (pl)
     face 1 speaks through: (the bare fact)
     face 2 speaks through: (the bare fact)
     face 3 speaks through: (the bare fact)
@@ -84,12 +115,21 @@ POOL "Economic Survival: STRONG" in block DS-DEF-2
     face 5: A local priest reports that the parish asks for nothing the town has not already promised it, and does not say what it has been given.
     face 6: Asked about the purse, the hall talks about the grain store, and asked again, talks about the grain store again.
     face 7: The court says nobody has brought it the question of the watch's wage. It does not expect the hall to.
+    notebook: none. Return an empty list.
 POOL "Disasters & Famine: granary AND parish care only" in block DS-DEF-2
   vid: 3
   stance: visitor
+  THE ORDER: the corpus spine realises the move order `V2` — `PRESENT then CONSEQUENCE` (state key + a STRUCTURAL-consequence field); keep that order in your spine.
   slots you may use: (none)
+  THE FIELDS this pool reads, with their values here:
+    economicState.compound.inst.hasChurch = true (FROZEN)
+    economicState.compound.inst.hasGranary = true (FROZEN)
+    economicState.compound.inst.hasHospital = false (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 6
     face 0 speaks through: tavern
+      and may be any one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
     face 1 speaks through: (the bare fact)
     face 2 speaks through: (the bare fact)
     face 3 speaks through: (the bare fact)
@@ -103,73 +143,157 @@ POOL "Disasters & Famine: granary AND parish care only" in block DS-DEF-2
     face 3: Strangers ask the watch where the grain is kept, the watch says, and nobody has ever asked it where the sick are.
     face 4: A guild member reckons what a stranger takes for provision is a store the trades filled and cannot open.
     face 5: Those who hear disputes say a stranger's questions about the store are ordinary and the ones about the sick are new to them.
+    notebook: none. Return an empty list.
 POOL "Moderate" in block DS-DEF-3
   vid: 4
   stance: threshold
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
+    notebook: none. Return an empty list.
 POOL "First-Survey qualification (the reading is a first look)" in block DS-DEF-3
   vid: 3
   stance: street
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account.
+    notebook: none. Return an empty list.
 POOL "structure organized" in block DS-DEF-4
   vid: 4
   stance: counterforce
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.
+    notebook: none. Return an empty list.
 POOL "capture none" in block DS-DEF-4
   vid: 3
   stance: street
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    name = "Spitzplatz" (LIVE)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.
+    notebook: none. Return an empty list.
 POOL "walls PRESENT" in block DS-DEF-5
   vid: 2
   stance: ledger
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    institutions = "[52 rows]" (LIVE)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.
+    notebook: none. Return an empty list.
 POOL "watch PRESENT" in block DS-DEF-5
   vid: 2
   stance: street
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    institutions = "[52 rows]" (LIVE)
+    standingDefenseForces(settlement) = null (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
+    notebook: none. Return an empty list.
 POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
   vid: 3
   stance: visitor
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    institutions = "[52 rows]" (LIVE)
+    standingDefenseForces(settlement) = null (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
+    notebook: none. Return an empty list.
 POOL "arcane defense PRESENT" in block DS-DEF-5
   vid: 1
   stance: ledger
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    magicWorksAt({ settlement }) = null (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
+    notebook: none. Return an empty list.
 POOL "WALLED-STRAINED" in block DS-DEF-11
   vid: 2
   stance: unfolding
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: defwork, settlement
+    {defwork} is "town walls" on this town
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    defenseProfile.economicGates.military = 0.98 (FROZEN)
+    institutions = "[52 rows]" (LIVE)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+    notebook: none. Return an empty list.
 POOL "Logistics & Supply: Granary with road supply" in block DS-DEF-6
   vid: 3
   stance: counterforce
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
+    {settlement} is "Spitzplatz" on this town
+    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
+  THE FIELDS this pool reads, with their values here:
+    config.tradeRouteAccess = "road" (FROZEN)
+    economicState.compound.inst.hasGranary = true (FROZEN)
+    economicState.compound.inst.hasPort = false (FROZEN)
+    The second sentence of a unit, if there is one, must rest on one of these fields
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.
+    notebook: none. Return an empty list.

@@ -19,6 +19,24 @@ THE SHAPE OF WHAT YOU RETURN, per pool the card lists:
   and the compromised roll are already decided and you are writing the words for them.
 - `notebook` replaces the DM-only rows, in their order, or is empty where the card has none.
 - `{slot}` tokens: use only the ones the card declares for that pool, or none at all.
+
+STANCE. `spine` is always the pool's stated fact in the archiver's own hand, bare, on the
+document's own authority. A `face` speaks THROUGH the source named at its position, and says so.
+Where the card lists no face for a pool, `faces` is the empty list and the spine is the whole
+unit.
+
+THE DM REGISTER. On audience `dm`, `notebook` carries the archiver's private rows, one per
+dm-only face the card lists, in the notebook register the VOICE describes. On audience
+`player`, `notebook` is the empty list and nothing private appears anywhere on the page. The
+card says per pool how many such rows it holds, and on the shipped corpus that number is zero.
+
+SLOT FILL. Write the RENDERED WORDS, with the card's fills applied: where the card says
+`{settlement}` is "Spitzplatz" here, write Spitzplatz. Name the town at most once in a unit,
+and never as the first word of two units on one page.
+
+THE CORPUS LINE. It is the CLAIM you must keep and the line that ships if yours is refused. It
+is not a model of the law: where it breaks a bar above, do not imitate the breach.
+
 A POOL YOU CANNOT WRITE LAWFULLY IS OMITTED. An omitted pool draws the hand corpus, which is
 always there; a unit that breaks a bar above is dropped by the instruments and draws it too.
 Do not explain, apologise, or write anything outside the schema.

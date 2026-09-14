@@ -459,6 +459,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "Spitzplatz is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.",
     "spine": "{settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered."
@@ -571,6 +578,11 @@
      "{court} {v:hear} what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.",
      "{public} {v:have} seen the wall kept and no soldiers on it, and {v:take} it that nobody is coming."
     ],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
     "pairs": [],
     "rendered": "A woman who brought a matter to the court hears what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.",
     "spine": "There are no soldiers of the town's own here, and the walls are kept up all the same."
@@ -716,6 +728,13 @@
      "The stallholders say a stranger cheated at the market is told where to bring it. A stallholder cheated by a stranger is told the same, after the stranger has gone.",
      "Those who keep the gate say a stranger with a complaint against him waits at the gate until somebody comes for him."
     ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [
      null,
      {
@@ -843,6 +862,14 @@
      "Asked about the purse, the hall talks about the grain store, and asked again, talks about the grain store again.",
      "The court says nobody has brought it the question of the watch's wage. It does not expect the hall to."
     ],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
     "pairs": [
      null,
      {
@@ -1005,6 +1032,14 @@
      "A guild member reckons what a stranger takes for provision is a store the trades filled and cannot open.",
      "Those who hear disputes say a stranger's questions about the store are ordinary and the ones about the sick are new to them."
     ],
+    "order": {
+     "id": "V2",
+     "licences": "state key + a STRUCTURAL-consequence field",
+     "moves": [
+      "PRESENT",
+      "CONSEQUENCE"
+     ]
+    },
     "pairs": [],
     "rendered": "At the tavern they say strangers walk up to look at the store, and nobody here does.",
     "spine": "A drover says the town looks provided for from outside, and whoever tends a sick house here comes out of the church."
@@ -1070,6 +1105,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "The balance at Spitzplatz sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.",
     "spine": "The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change."
@@ -1135,6 +1177,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "What the town says about its own safety at Spitzplatz is what the town says on a first acquaintance, and a longer one would be a different account.",
     "spine": "What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account."
@@ -1191,6 +1240,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "There is very little street violence at Spitzplatz and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.",
     "spine": "There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could."
@@ -1256,6 +1312,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "Whatever is being run at Spitzplatz is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
     "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
@@ -1321,6 +1384,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "Spitzplatz controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
     "spine": "{settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens."
@@ -1397,6 +1467,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "There are people walking the town at Spitzplatz at night, and the town's sense of itself rests more on that than on anything at the gate.",
     "spine": "There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate."
@@ -1471,6 +1548,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "A stranger at Spitzplatz finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
     "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
@@ -1536,6 +1620,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "Spitzplatz keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.",
     "spine": "{settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming."
@@ -1615,6 +1706,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "The town walls around Spitzplatz is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
     "spine": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late."
@@ -1696,6 +1794,13 @@
    "unit": {
     "faceSourceTags": [],
     "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
     "pairs": [],
     "rendered": "An interruption on the roads to Spitzplatz does not reach the table, and the granary is the reason rather than the roads.",
     "spine": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads."
@@ -1703,7 +1808,7 @@
    "vid": 3
   }
  ],
- "schema": "scribe-town-card/2",
+ "schema": "scribe-town-card/3",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "defense",
