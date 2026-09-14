@@ -413,7 +413,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.readiness.score",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 57,
      "writers": 0
     }
@@ -470,7 +472,8 @@
     "rendered": "Spitzplatz is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.",
     "spine": "{settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -517,7 +520,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[52 rows]",
      "writers": 38
     }
@@ -587,7 +592,8 @@
     "rendered": "A woman who brought a matter to the court hears what is disputed about the walls, and it is always who owes the work. Nothing that comes there is about who would hold them.",
     "spine": "There are no soldiers of the town's own here, and the walls are kept up all the same."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -658,7 +664,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasCourtSystem",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -666,7 +674,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPrison",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     }
@@ -756,7 +766,8 @@
     "rendered": "At the tavern they say a man is called in for who he knows and let out for what he can pay.",
     "spine": "A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -803,7 +814,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.scores.economic",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 76,
      "writers": 0
     }
@@ -890,7 +903,8 @@
     "rendered": "The guilds say the trades made the provision and the hall made the shortfall.",
     "spine": "The hall holds that the town could be fed and supplied through a crisis, and at the tavern they say the people who would be paid through one are paid short already."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -961,7 +975,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasChurch",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -969,7 +985,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -977,7 +995,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasHospital",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -1044,7 +1064,8 @@
     "rendered": "At the tavern they say strangers walk up to look at the store, and nobody here does.",
     "spine": "A drover says the town looks provided for from outside, and whoever tends a sick house here comes out of the church."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "threshold",
@@ -1059,7 +1080,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -1116,7 +1139,8 @@
     "rendered": "The balance at Spitzplatz sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.",
     "spine": "The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1131,7 +1155,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.safetyProfile.safetyLabel",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Moderate",
      "writers": 0
     }
@@ -1188,7 +1214,8 @@
     "rendered": "What the town says about its own safety at Spitzplatz is what the town says on a first acquaintance, and a longer one would be a different account.",
     "spine": "What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -1251,7 +1278,8 @@
     "rendered": "There is very little street violence at Spitzplatz and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.",
     "spine": "There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -1266,7 +1294,9 @@
      "clock": "PULSE",
      "field": "name",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "Spitzplatz",
      "writers": 201
     }
@@ -1323,7 +1353,8 @@
     "rendered": "Whatever is being run at Spitzplatz is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
     "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "ledger",
@@ -1338,7 +1369,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[52 rows]",
      "writers": 38
     }
@@ -1395,7 +1428,8 @@
     "rendered": "Spitzplatz controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
     "spine": "{settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1410,7 +1444,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[52 rows]",
      "writers": 38
     },
@@ -1418,7 +1454,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1478,7 +1516,8 @@
     "rendered": "There are people walking the town at Spitzplatz at night, and the town's sense of itself rests more on that than on anything at the gate.",
     "spine": "There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -1493,7 +1532,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[52 rows]",
      "writers": 38
     },
@@ -1501,7 +1542,9 @@
      "clock": "LIVE-ROSTER",
      "field": "standingDefenseForces(settlement)",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1559,7 +1602,8 @@
     "rendered": "A stranger at Spitzplatz finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
     "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "ledger",
@@ -1574,7 +1618,9 @@
      "clock": "SNAPSHOT",
      "field": "magicWorksAt({ settlement })",
      "grain": "root",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -1631,7 +1677,8 @@
     "rendered": "Spitzplatz keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.",
     "spine": "{settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming."
    },
-   "vid": 1
+   "vid": 1,
+   "writeable": false
   },
   {
    "angle": "unfolding",
@@ -1646,7 +1693,9 @@
      "clock": "SNAPSHOT",
      "field": "defenseProfile.economicGates.military",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": 0.98,
      "writers": 0
     },
@@ -1654,7 +1703,9 @@
      "clock": "LIVE-ROSTER",
      "field": "institutions",
      "grain": "root",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[52 rows]",
      "writers": 38
     }
@@ -1717,7 +1768,8 @@
     "rendered": "The town walls around Spitzplatz is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
     "spine": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -1732,7 +1784,9 @@
      "clock": "CONFIG",
      "field": "config.tradeRouteAccess",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "road",
      "writers": 0
     },
@@ -1740,7 +1794,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasGranary",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": true,
      "writers": 0
     },
@@ -1748,7 +1804,9 @@
      "clock": "SNAPSHOT",
      "field": "economicState.compound.inst.hasPort",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": false,
      "writers": 0
     }
@@ -1805,10 +1863,11 @@
     "rendered": "An interruption on the roads to Spitzplatz does not reach the table, and the granary is the reason rather than the roads.",
     "spine": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "defense",

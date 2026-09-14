@@ -205,29 +205,41 @@ export async function callTier1(client, built, units) {
  */
 export function judgeAll(units, card, tier1Answers) {
   const judged = judgeUnits(units, card, refuteUnit);
+  judged.tier1Dropped = 0;
+  judged.tier1Patched = 0;
   if (Array.isArray(tier1Answers) && tier1Answers.length) {
-    const second = applyTier1(judged.kept, tier1Answers);
+    // ⛔ THE CARD IS PASSED: without it a refused FACE has no corpus twin to fall to and the whole
+    // unit drops, which is the OLD rule and would silently un-do W3b car 3 in the pilot alone.
+    const second = applyTier1(judged.kept, tier1Answers, card);
     judged.kept = second.kept;
     judged.verdicts = [...judged.verdicts, ...second.verdicts];
     judged.dropped += second.dropped;
+    judged.patched += second.patched;
     judged.tier1Dropped = second.dropped;
+    judged.tier1Patched = second.patched;
   }
   // ⛔ A UNIT CAN NOW CARRY TWO VERDICT ROWS, one per reader, so the printer takes the WORST and
   // keeps both sets of findings. Reading only the first would hide every tier-1 refusal behind
-  // tier 0's PASS on the same pool.
-  const rank = { PASS: 0, WITHHELD: 1, FAIL: 2 };
+  // tier 0's PASS on the same pool. PATCHED ranks above WITHHELD and below FAIL: it is a unit that
+  // shipped, with a row replaced by the hand corpus.
+  const rank = { PASS: 0, WITHHELD: 1, PATCHED: 2, FAIL: 3 };
+  const shipped = new Map(judged.kept.map((u) => [`${u.blockId}::${u.poolKey}::${u.vid}`, u]));
   const rows = units.map((unit) => {
     const mine = judged.verdicts.filter(
       (v) => v.blockId === unit.blockId && v.poolKey === unit.poolKey && v.vid === unit.vid,
     );
-    if (!mine.length) return { unit, verdict: null, verdicts: [] };
+    const ships = shipped.get(`${unit.blockId}::${unit.poolKey}::${unit.vid}`) ?? null;
+    if (!mine.length) return { unit, shipped: ships, verdict: null, verdicts: [] };
     const worst = mine.reduce((a, b) => ((rank[b.verdict] ?? 0) > (rank[a.verdict] ?? 0) ? b : a));
     return {
       unit,
+      // ⭐ WHAT ACTUALLY REACHES THE PAGE, which is not the model's own answer on a patched unit.
+      shipped: ships,
       verdicts: mine,
       verdict: {
         ...worst,
         arms: [...new Set(mine.flatMap((v) => v.arms))].sort(),
+        patched: [...new Set(mine.flatMap((v) => v.patched || []))],
         findings: mine.flatMap((v) => v.findings || []),
       },
     };
@@ -333,9 +345,10 @@ async function main() {
   }
   const judged = judgeAll(result.units, built.card, tier1.answers);
   for (const row of judged.rows) {
-    const arm = row.verdict?.findings?.find((f) => f.channel === 'FAIL')
-      || row.verdict?.findings?.find((f) => f.channel === 'WITHHELD');
-    console.log(`${String(row.verdict?.verdict ?? '?').padEnd(8)} ${(arm ? arm.arm : '(clean)').padEnd(18)} ${row.unit.spine}`);
+    // ⭐ EVERY ARM, NOT THE FIRST. RUN 2 finding 4: the judge printed one finding a unit, so every
+    // tier-1 drop read as `T1-CERTAINTY` whatever the reader had actually answered.
+    console.log(`${String(row.verdict?.verdict ?? '?').padEnd(8)} ${(row.verdict?.arms?.join(' ') || '(clean)').padEnd(24)} ${row.unit.spine}`);
+    for (const seat of (row.verdict?.patched || [])) console.log(`         PATCHED at ${seat}: the hand corpus stands there and the rest of the unit ships`);
   }
   writeOut(seed, tab, epoch, {
     seed,
@@ -343,11 +356,15 @@ async function main() {
     epoch,
     model: result.model,
     counted,
-    units: judged.rows.map((r) => ({ unit: r.unit, verdict: r.verdict, verdicts: r.verdicts })),
+    units: judged.rows.map((r) => ({
+      unit: r.unit, shipped: r.shipped, verdict: r.verdict, verdicts: r.verdicts,
+    })),
     dropped: judged.dropped,
+    patched: judged.patched,
     kept: judged.kept.length,
     tier1: tier1.state,
     tier1Dropped: judged.tier1Dropped ?? 0,
+    tier1Patched: judged.tier1Patched ?? 0,
     tier1Answers: tier1.answers,
     page: judged.page,
     usage: result.usage,

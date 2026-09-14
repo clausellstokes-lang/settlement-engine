@@ -57,7 +57,15 @@ if (mode === 'build') {
   const chars = built.brief.length + built.townBlock.length + built.turn.length;
   console.log(`${built.card.town.name} (${built.card.town.tier}) :: ${tab} :: ${built.card.pools.length} pools over ${built.blocks.join(' + ')}`);
   console.log(`brief ${built.brief.length} chars (cached) · town ${built.townBlock.length} chars (cached) · turn ${built.turn.length} chars (volatile) · ~${Math.round(chars / 4)} tokens`);
-  for (const p of built.card.pools) console.log(`  - ${p.blockId} :: ${p.poolKey} · order ${p.unit?.order?.id || '(none)'} · sources ${(p.faceSources || []).join('/') || '(none)'} · spine: ${p.unit?.spine?.slice(0, 80) || ''}`);
+  // ⭐ W3b car 2: what the card CANNOT license is the figure the cure is measured by, so it is
+  // printed here rather than read out of the turn by hand. `[OMIT]` is a pool the card tells the
+  // model to skip; the field tally behind it is why.
+  const fields = built.card.pools.flatMap((p) => p.fields || []);
+  const tally = {};
+  for (const f of fields) tally[f.state ?? 'decided'] = (tally[f.state ?? 'decided'] || 0) + 1;
+  const writeable = built.card.pools.filter((p) => p.writeable !== false).length;
+  console.log(`writeable ${writeable} of ${built.card.pools.length} pools · field rows ${JSON.stringify(tally)}`);
+  for (const p of built.card.pools) console.log(`  - ${p.writeable === false ? '[OMIT] ' : '        '}${p.blockId} :: ${p.poolKey} · order ${p.unit?.order?.id || '(none)'} · fields ${(p.fields || []).filter((f) => f.unknown !== true).length}/${(p.fields || []).length} · sources ${(p.faceSources || []).join('/') || '(none)'} · spine: ${p.unit?.spine?.slice(0, 60) || ''}`);
   console.log(`wrote ${dir}/{brief.md,town.md,turn.md,card.json,schema.json}`);
 } else if (mode === 'tier1') {
   // ⭐ THE SECOND READER'S PROMPT, AS A FILE. The seat is handed tier 0's survivors and the same
@@ -94,18 +102,41 @@ if (mode === 'build') {
   for (const row of judged.rows) {
     const verdict = row.verdict?.verdict ?? '?';
     tally[verdict] = (tally[verdict] || 0) + 1;
-    const arm = row.verdict?.findings?.find((f) => f.channel === 'FAIL')
-      || row.verdict?.findings?.find((f) => f.channel === 'WITHHELD');
-    console.log(`${String(verdict).padEnd(9)} ${(arm ? arm.arm : '(clean)').padEnd(22)} [${row.unit.poolKey}] ${row.unit.spine}`);
-    if (arm) console.log(`           ↳ ${arm.subject}: ${arm.value} — ${arm.description}`);
+    console.log(`${String(verdict).padEnd(9)} ${(row.verdict?.arms?.join(' ') || '(clean)').padEnd(28)} [${row.unit.poolKey}] ${row.unit.spine}`);
+    // ⭐ EVERY FAIL AND WITHHELD ARM, WITH THE SEAT IT CAME FROM (W3b car 3). RUN 2 finding 4: the
+    // judge printed only the FIRST finding of a unit, so every tier-1 drop read as `T1-CERTAINTY`
+    // whatever the reader had answered, and the per-question counts had to be recovered by hand.
+    for (const f of (row.verdict?.findings || [])) {
+      if (f.channel !== 'FAIL' && f.channel !== 'WITHHELD') continue;
+      console.log(`           ↳ ${String(f.channel).padEnd(8)} ${String(f.arm).padEnd(16)} (${f.seat || 'unit'}) ${f.subject}: ${f.value} — ${f.description}`);
+    }
+    // ⭐ AND WHAT ACTUALLY SHIPS AT A PATCHED SEAT, which is the hand corpus and not the model.
+    for (const seat of (row.verdict?.patched || [])) {
+      const at = /^face (\d+)$/.exec(seat);
+      const line = at && row.shipped ? row.shipped.faces[Number(at[1])] : '(the row was dropped alone)';
+      console.log(`           ⇢ PATCHED at ${seat}: ${String(line).slice(0, 120)}`);
+    }
   }
   const missing = built.card.pools.filter((p) => !parsed.units.some((u) => u.poolKey === p.poolKey)).map((p) => p.poolKey);
   const unknown = parsed.units.filter((u) => !built.card.pools.some((p) => p.poolKey === u.poolKey)).map((u) => u.poolKey);
-  console.log(`\nverdicts ${JSON.stringify(tally)} · kept ${judged.kept.length} · dropped ${judged.dropped} (tier 1 took ${judged.tier1Dropped ?? 0}) · pools on card ${built.card.pools.length} · units returned ${parsed.units.length} · missing ${JSON.stringify(missing)} · unknown ${JSON.stringify(unknown)}`);
+  console.log(`\nverdicts ${JSON.stringify(tally)} · kept ${judged.kept.length} · patched ${judged.patched} (tier 1 patched ${judged.tier1Patched ?? 0}) · dropped ${judged.dropped} (tier 1 took ${judged.tier1Dropped ?? 0}) · pools on card ${built.card.pools.length} · writeable ${built.card.pools.filter((p) => p.writeable !== false).length} · units returned ${parsed.units.length} · missing ${JSON.stringify(missing)} · unknown ${JSON.stringify(unknown)}`);
   console.log(`page arms: ${JSON.stringify(judged.page).slice(0, 600)}`);
   writeFileSync(`${dir}/judged${tag}.json`, JSON.stringify({
-    verdicts: judged.verdicts, kept: judged.kept, dropped: judged.dropped, page: judged.page, missing, unknown,
+    verdicts: judged.verdicts,
+    kept: judged.kept,
+    dropped: judged.dropped,
+    patched: judged.patched,
+    tier1Dropped: judged.tier1Dropped ?? 0,
+    tier1Patched: judged.tier1Patched ?? 0,
+    page: judged.page,
+    missing,
+    unknown,
   }, null, 1));
-  writeFileSync(`${dir}/page${tag}.md`, judged.rows.map((r) => `[${r.verdict?.verdict ?? '?'}] ${[r.unit.spine, ...r.unit.faces].join(' ')}`).join('\n\n'));
+  // ⛔ THE PAGE IS WHAT SHIPS, not what the model answered: on a PATCHED unit the two differ at
+  // exactly the seat that fell, and a page written from the model's own rows would show a reader
+  // a line the dossier does not carry.
+  writeFileSync(`${dir}/page${tag}.md`, judged.rows
+    .map((r) => `[${r.verdict?.verdict ?? '?'}] ${[(r.shipped ?? r.unit).spine, ...(r.shipped ?? r.unit).faces].join(' ')}`)
+    .join('\n\n'));
   console.log(`wrote ${dir}/judged${tag}.json and page${tag}.md`);
 }
