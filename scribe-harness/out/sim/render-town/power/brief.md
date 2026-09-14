@@ -41,10 +41,50 @@ A POOL YOU CANNOT WRITE LAWFULLY IS OMITTED. An omitted pool draws the hand corp
 always there; a unit that breaks a bar above is dropped by the instruments and draws it too.
 Do not explain, apologise, or write anything outside the schema.
 
-THE PLAUSIBLE-ADDITION BAR. Add no mechanism, practice, cause, procedure, custom, price or
-arrangement the card does not name. If the card says a court and a prison, you may not say a
-fine, a debt, a backlog or a bribe. A line that explains HOW a thing works where the card only
-says THAT it stands is refused by the second reader and falls to the corpus.
+WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS. Write the CORPUS FACE VERBATIM
+at that seat. A copied corpus row is never refused: it already ships, and it is the line that
+would have shipped anyway. A pool with nothing lawful to say in its SPINE is omitted, and the
+hand corpus draws the whole of it. Neither is a failure; both are the dossier reading as it
+always did.
+
+THE SIX WAYS A LINE INVENTS, AND IS REFUSED. Each was measured on rendered pages by a second
+reader holding this same card.
+
+A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT. Where a field on the card shows no value, you
+have not been told what it holds. You may not say the thing is absent, small, quiet or
+unchanged, and you may not write a sentence that would be false if that field were later
+filled either way. A pool whose fields all show no value is OMITTED.
+  REFUSED: "nothing here is being built and nothing sold off", on a page where the ranking of
+  the town's prosperity had no value at all.
+
+NO ORIGIN. Nothing on the card has a beginning you were told. No body, market, road, custom or
+arrangement came before another, grew out of another, took root, was founded, was sited or was
+chosen. The record holds what stands.
+  REFUSED: "the market took root where the carts already stopped".
+
+NO CONTEST THE CARD DOES NOT NAME. Two bodies are at odds only where a relation row on the card
+says so. A rank, a share, a standing or a seat is not a quarrel.
+  REFUSED: the governing council set against the order of the watch, on a card whose conflict
+  reading had no value and which carried no relation row between them.
+
+A BOOLEAN IS A FACT, NOT A PRACTICE. Where a field says that a thing stands, a granary, a
+church, a court, a wall, you may say that it stands and what a person meets at it. You may not
+say how it is run, who fills it, who is let in, what is owed, what waits on what, or what is
+done for the sick, the poor or the accused, unless a field on the card says that too. Add no
+mechanism, practice, cause, procedure, custom, price or arrangement the card does not name: if
+the card says a court and a prison, you may not say a fine, a debt, a backlog or a bribe.
+  REFUSED: "grain they would rather have sold", written from a granary that only stands; "the
+  court's business waits on the parish"; the sick "nursed by the inn servants".
+
+NO VERDICT THE CARD'S OWN ROWS DENY. Before you write that a town lacks a thing, read the
+institutions and the holders on the town block. If a row names it, the town has it.
+  REFUSED: "no through traffic", written beside a caravaneer's post, a carriers' guild, a
+  customs house and a post relay station.
+
+NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE CARD. Where the town block's `hasWorld` reads false,
+no other settlement exists for this page: nobody speaks of neighbours, of what is said
+elsewhere, or of what comes down the road from anywhere named.
+  REFUSED: what they are saying in the next valley about this town.
 
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
