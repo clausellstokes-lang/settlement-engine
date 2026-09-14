@@ -48,3 +48,13 @@ else:
 io.open(p,'w',encoding='utf-8').write(s)
 PY
 
+./autosave-handoff.sh: line 52: 11217 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
