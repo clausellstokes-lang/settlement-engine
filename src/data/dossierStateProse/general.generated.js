@@ -5332,7 +5332,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement}'s market carries {counterpart}'s goods without marking them out, which is the surest sign of a working partnership.",
+          "text": "{settlement}'s market carries {counterpart}'s goods without marking them out. That is the surest sign of a working partnership.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5401,7 +5401,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "client": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s decisions are made with {counterpart} in the room, whether or not anyone from {counterpart} is present.",
+          "text": "{settlement}'s decisions are made with {counterpart} in the room. Nobody from {counterpart} has to be present for that.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5418,7 +5418,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Ask in {settlement} who decides a thing and you will be given a name in {counterpart} more often than a name here.",
+          "text": "Ask in {settlement} who decides a thing and you are given a name in {counterpart} more often than a name here.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5429,7 +5429,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "rival": [
         {
           "angle": "ledger",
-          "text": "{settlement} and {counterpart} want the same things and will not have them together, and both towns price accordingly.",
+          "text": "{settlement} and {counterpart} want the same things and do not have them together. Both towns price accordingly.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5447,7 +5447,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Praise {counterpart} in {settlement} and you will get a correction rather than an argument.",
+          "text": "Praise {counterpart} in {settlement} and you get a correction rather than an argument.",
           "slots": [
             "counterpart",
             "settlement"
@@ -5476,7 +5476,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} and {counterpart} are as hostile as two towns can be without anyone raising a hand, and the restraint is the whole shape of the thing.",
+          "text": "{settlement} and {counterpart} are as hostile as two towns can be without a hand raised, and the restraint is the whole shape of it.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5585,7 +5585,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The trouble {settlement} has with {counterpart} is not the whole town's trouble; it belongs to a few people on each side who have not let it go.",
+          "text": "The trouble {settlement} has with {counterpart} is not the whole town's trouble. It belongs to a few people on each side who have not let it go.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5594,7 +5594,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} and {counterpart} have a quarrel running between named parties and no quarrel between the towns, and both halls are working to keep those two facts apart.",
+          "text": "{settlement} and {counterpart} have a quarrel running between named parties and no quarrel between the towns. Both halls are working to keep those two facts apart.",
           "slots": [
             "settlement",
             "counterpart"
@@ -5782,7 +5782,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
+          "text": "One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town is and is not willing to do.",
           "slots": [
             "settlement"
           ],
@@ -5790,7 +5790,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Ask {settlement} about its neighbours and you will get one name before you get a list.",
+          "text": "Ask {settlement} about its neighbours and you get one name before you get a list.",
           "slots": [
             "settlement"
           ],
@@ -5808,7 +5808,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "flagDriven count > 0": [
         {
           "angle": "street",
-          "text": "{band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together; a town with the same neighbours and different pressures would not have them.",
+          "text": "{band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together. A town with the same neighbours and different pressures would not have them.",
           "slots": [
             "band",
             "settlement"
@@ -5834,7 +5834,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{band} of {settlement}'s relationships rest on conditions rather than on choices, which makes them exactly as durable as the conditions.",
+          "text": "{band} of {settlement}'s relationships rest on conditions rather than on choices. They are exactly as durable as the conditions.",
           "slots": [
             "band",
             "settlement"
@@ -5861,7 +5861,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
+          "text": "The people of {settlement} are connected the way the people of any settled place are connected. There is no more to say about it than that.",
           "slots": [
             "settlement"
           ],
@@ -5869,7 +5869,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.",
+          "text": "{settlement} has had pressures enough to bend its relationships and they have not bent. The ties here are what they would be anywhere.",
           "slots": [
             "settlement"
           ],

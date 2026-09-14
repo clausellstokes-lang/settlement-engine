@@ -6155,12 +6155,12 @@ unchanged.
 **R-DST-W4-e CURE:** the synthesized fallback *"Generated with {X} as neighbour (trade partner)."* names the generator inside the fiction. Every `neutral` and every type-only variant below is a lawful replacement for it, and the replacement is the whole reason this shape is in the corpus.
 **THE TWO CAPTIONS** (*"Links are removed when neighbours are delinked"*, *"Removed when the link is broken"*) are **tool voice about the tool** and are correct where they are — they explain the editor, not the world. They stay, and no world-voice variant is written to compete with them.
 
-**`trade_partner`** — 1. `[ledger]` {settlement} and {counterpart} do steady business, and enough of it that both towns' prices move together. · 2. `[street]` Half of what a {settlement} household owns came up the road from {counterpart}, and nobody thinks of that as foreign. · 3. `[visitor]` {settlement}'s market carries {counterpart}'s goods without marking them out, which is the surest sign of a working partnership.
+**`trade_partner`** — 1. `[ledger]` {settlement} and {counterpart} do steady business, and enough of it that both towns' prices move together. · 2. `[street]` Half of what a {settlement} household owns came up the road from {counterpart}, and nobody thinks of that as foreign. · 3. `[visitor]` {settlement}'s market carries {counterpart}'s goods without marking them out. That is the surest sign of a working partnership.
 **`allied`** — 1. `[ledger]` {settlement} and {counterpart} answer for each other, and the answering is understood on both sides without being renegotiated. · 2. `[street]` Trouble for {counterpart} is trouble in {settlement}, and the town would say so out loud. · 3. `[visitor]` A stranger arriving in {settlement} from {counterpart} is treated as arriving from nearby rather than from elsewhere.
 **`patron`** *(arm: {settlement} is the patron)* — 1. `[ledger]` {counterpart} looks to {settlement}, and {settlement}'s decisions are made with that looking taken for granted. · 2. `[street]` {settlement} does not think of {counterpart} as a neighbour so much as a responsibility. · 3. `[visitor]` What {settlement} decides tends to be what {counterpart} does, and neither town finds that worth remarking on.
-**`client`** *(arm: {settlement} is the client)* — 1. `[ledger]` {settlement}'s decisions are made with {counterpart} in the room, whether or not anyone from {counterpart} is present. · 2. `[street]` {settlement} manages its own affairs up to a point, and everyone here knows roughly where the point is. · 3. `[visitor]` Ask in {settlement} who decides a thing and you will be given a name in {counterpart} more often than a name here.
-**`rival`** — 1. `[ledger]` {settlement} and {counterpart} want the same things and will not have them together, and both towns price accordingly. · 2. `[street]` {settlement} measures itself against {counterpart} in a way that is not always flattering to {settlement}. · 3. `[visitor]` Praise {counterpart} in {settlement} and you will get a correction rather than an argument.
-**`cold_war`** — 1. `[ledger]` {settlement} and {counterpart} have no dealings that either would call dealings, and the absence is maintained rather than accidental. · 2. `[street]` Nothing passes between {settlement} and {counterpart} except people who have to, and they do not linger. · 3. `[counterforce]` {settlement} and {counterpart} are as hostile as two towns can be without anyone raising a hand, and the restraint is the whole shape of the thing.
+**`client`** *(arm: {settlement} is the client)* — 1. `[ledger]` {settlement}'s decisions are made with {counterpart} in the room. Nobody from {counterpart} has to be present for that. · 2. `[street]` {settlement} manages its own affairs up to a point, and everyone here knows roughly where the point is. · 3. `[visitor]` Ask in {settlement} who decides a thing and you are given a name in {counterpart} more often than a name here.
+**`rival`** — 1. `[ledger]` {settlement} and {counterpart} want the same things and do not have them together. Both towns price accordingly. · 2. `[street]` {settlement} measures itself against {counterpart} in a way that is not always flattering to {settlement}. · 3. `[visitor]` Praise {counterpart} in {settlement} and you get a correction rather than an argument.
+**`cold_war`** — 1. `[ledger]` {settlement} and {counterpart} have no dealings that either would call dealings, and the absence is maintained rather than accidental. · 2. `[street]` Nothing passes between {settlement} and {counterpart} except people who have to, and they do not linger. · 3. `[counterforce]` {settlement} and {counterpart} are as hostile as two towns can be without a hand raised, and the restraint is the whole shape of it.
 **`hostile`** — 1. `[ledger]` {settlement} treats {counterpart} as an adversary in every arrangement it makes, and makes no arrangements with it. · 2. `[street]` There is nobody in {settlement} with a good word for {counterpart} and few here who would trouble to explain why. · 3. `[visitor]` Coming into {settlement} from {counterpart} is a thing to be careful about mentioning.
 **`neutral`** — 1. `[ledger]` {settlement} and {counterpart} are known to each other and owe each other nothing. · 2. `[street]` {counterpart} is a place people from {settlement} go to when they have a reason, and they usually do not. · 3. `[visitor]` {settlement} has an opinion of {counterpart} and it is not a strong one.
 
@@ -6171,8 +6171,8 @@ unchanged.
 
 **cross-settlement engagements** *(`type === 'conflict'` / `'faction_engagement'`)*
 1. `[ledger]` {faction} of {settlement} is contending with its counterpart in {counterpart}, and the contention is between the two houses rather than between the two towns.
-2. `[street]` The trouble {settlement} has with {counterpart} is not the whole town's trouble; it belongs to a few people on each side who have not let it go.
-3. `[counterforce]` {settlement} and {counterpart} have a quarrel running between named parties and no quarrel between the towns, and both halls are working to keep those two facts apart.
+2. `[street]` The trouble {settlement} has with {counterpart} is not the whole town's trouble. It belongs to a few people on each side who have not let it go.
+3. `[counterforce]` {settlement} and {counterpart} have a quarrel running between named parties and no quarrel between the towns. Both halls are working to keep those two facts apart.
 
 ---
 
@@ -6187,21 +6187,21 @@ unchanged.
 
 **`prominentRelationship` present**
 1. `[street]` Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself.
-2. `[ledger]` One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do.
-3. `[visitor]` Ask {settlement} about its neighbours and you will get one name before you get a list.
+2. `[ledger]` One of {settlement}'s ties carries more weight than the rest. The weight shows in what the town is and is not willing to do.
+3. `[visitor]` Ask {settlement} about its neighbours and you get one name before you get a list.
 4. `[counterforce]` {settlement} has one tie that matters more than the others and has not let it become the only one.
 
 **`flagDriven` count > 0**
-1. `[street]` {band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together; a town with the same neighbours and different pressures would not have them.
+1. `[street]` {band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together. A town with the same neighbours and different pressures would not have them.
 2. `[ledger]` {band} of the ties on {settlement}'s roll are the town's own circumstances made into arrangements between people.
 3. `[visitor]` Some of what binds people together in {settlement} would make no sense in a settlement without {settlement}'s particular difficulties.
-4. `[unfolding]` {band} of {settlement}'s relationships rest on conditions rather than on choices, which makes them exactly as durable as the conditions.
+4. `[unfolding]` {band} of {settlement}'s relationships rest on conditions rather than on choices. They are exactly as durable as the conditions.
 
 **`flagDriven` count zero** *(the good state deserves its sentence)*
 1. `[street]` Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time.
 2. `[ledger]` Nothing on {settlement}'s relationship roll requires the town's circumstances to explain it.
-3. `[visitor]` The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that.
-4. `[counterforce]` {settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.
+3. `[visitor]` The people of {settlement} are connected the way the people of any settled place are connected. There is no more to say about it than that.
+4. `[counterforce]` {settlement} has had pressures enough to bend its relationships and they have not bent. The ties here are what they would be anywhere.
 
 ---
 
