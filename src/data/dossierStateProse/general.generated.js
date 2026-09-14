@@ -3773,7 +3773,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "market (route crossroads)": [
         {
           "angle": "visitor",
-          "text": "The roads into {settlement} arrive from more directions than the town has business for, and all of them end in the same square.",
+          "text": "The roads into {settlement} arrive from more directions than the town has business for. All of them end in the same square.",
           "slots": [
             "settlement"
           ],
@@ -3797,7 +3797,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} sits where the roads meet and has stayed small about it; the traffic goes through, and the town has never tried to hold it.",
+          "text": "{settlement} sits where the roads meet and has stayed small about it. The traffic goes through, and the town has never tried to hold it.",
           "slots": [
             "settlement"
           ],
@@ -3823,7 +3823,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s wharves are the town's real ground; what happens on the land is arranged around what happens at the quay.",
+          "text": "{settlement}'s wharves are the town's real ground. What happens on the land is arranged around what happens at the quay.",
           "slots": [
             "settlement"
           ],
@@ -3849,7 +3849,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Everything in {settlement} is upstream or downstream of something else, and the town gives directions that way.",
+          "text": "Everything in {settlement} is upstream or downstream of something else. The town gives directions that way.",
           "slots": [
             "settlement"
           ],
@@ -3857,7 +3857,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The barge traffic sets {settlement}'s calendar; what the river cannot carry in season, {settlement} does without.",
+          "text": "The barge traffic sets {settlement}'s calendar. What the river cannot carry in season, {settlement} does without.",
           "slots": [
             "settlement"
           ],
@@ -3865,7 +3865,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} sits on navigable water and ships almost nothing on it; the river here is a boundary the town lives beside rather than a road it uses.",
+          "text": "{settlement} sits on navigable water and ships almost nothing on it. The river here is a boundary the town lives beside rather than a road it uses.",
           "slots": [
             "settlement"
           ],
@@ -3891,7 +3891,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What reaches {settlement} reaches it deliberately; nothing arrives here by passing through.",
+          "text": "What reaches {settlement} reaches it deliberately. Nothing arrives here by passing through.",
           "slots": [
             "settlement"
           ],
@@ -3909,7 +3909,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ordinary (route road and the default)": [
         {
           "angle": "visitor",
-          "text": "{settlement} announces itself the way a working town does, which is barely.",
+          "text": "{settlement} announces itself barely, the way a working town does.",
           "slots": [
             "settlement"
           ],
@@ -3925,7 +3925,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable.",
+          "text": "Goods come into {settlement} and goods go out of it. Neither the coming nor the going is remarkable.",
           "slots": [
             "settlement"
           ],
@@ -3933,7 +3933,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The road runs past {settlement} and {settlement} takes very little from it; the traffic is real and the town has stayed outside it.",
+          "text": "The road runs past {settlement} and {settlement} takes very little from it. The traffic is real, and the town has stayed outside it.",
           "slots": [
             "settlement"
           ],
@@ -4050,7 +4050,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no deficit"
           ],
-          "text": "{settlement} is here because the roads are here; the town is what grew in the place where stopping made sense.",
+          "text": "{settlement} is here because the roads are here. The town is what grew in the place where stopping made sense.",
           "slots": [
             "settlement"
           ],
@@ -4072,7 +4072,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
+          "text": "{settlement} sits where the roads meet and eats what the roads bring. The ground under the town was never the reason for the town.",
           "slots": [
             "settlement"
           ],
@@ -4107,7 +4107,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no deficit"
           ],
-          "text": "{settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without.",
+          "text": "{settlement}'s living comes off the quay. The fields behind it are a convenience the town could manage without.",
           "slots": [
             "settlement"
           ],
@@ -4118,7 +4118,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "What {settlement} eats arrives by the same water that gives the town its trade, which makes the harbour the whole of the argument for the place.",
+          "text": "What {settlement} eats arrives by the same water that gives the town its trade. That makes the harbour the whole of the argument for the place.",
           "slots": [
             "settlement"
           ],
@@ -4164,7 +4164,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "{settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground.",
+          "text": "{settlement}'s ground gives less than the town needs and the river makes up the rest. That is why the town is on the river and not on better ground.",
           "slots": [
             "settlement"
           ],
@@ -4188,7 +4188,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no deficit"
           ],
-          "text": "{settlement} is out of reach of the trade roads, and self-sufficiency here is a constraint rather than an aspiration.",
+          "text": "{settlement} is out of reach of the trade roads. Self-sufficiency here is a constraint rather than an aspiration.",
           "slots": [
             "settlement"
           ],
@@ -4210,7 +4210,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "{settlement} is out of reach of the trade roads and cannot fully feed itself; what the land does not give arrives dearly (by sanctioned caravan, by seasonal access, by patronage, by ration), or it does not arrive.",
+          "text": "{settlement} is out of reach of the trade roads and cannot fully feed itself. What the land does not give arrives at a high price, by sanctioned caravan or seasonal access or patronage or ration. It arrives that way or it does not arrive.",
           "slots": [
             "settlement"
           ],
@@ -4221,7 +4221,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "The gap between what {settlement} grows and what {settlement} eats is closed at a price, and the price is visible in the market before anyone explains it.",
+          "text": "The gap between what {settlement} grows and what {settlement} eats is closed at a price. The price is visible in the market before anyone explains it.",
           "slots": [
             "settlement"
           ],
@@ -4256,7 +4256,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+          "text": "What {settlement} cannot grow, the road brings. The road is therefore not a convenience for this town but a condition of it.",
           "slots": [
             "settlement"
           ],
@@ -4304,7 +4304,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no deficit"
           ],
-          "text": "{settlement} produces what it consumes and consumes what it produces; trade widens the margin rather than supplying it.",
+          "text": "{settlement} produces what it consumes and consumes what it produces. Trade widens the margin rather than supplying it.",
           "slots": [
             "settlement"
           ],
@@ -4315,7 +4315,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "deficit"
           ],
-          "text": "{settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow.",
+          "text": "{settlement} is large enough that its appetites outrun its fields. What the city eats, the city cannot fully grow.",
           "slots": [
             "settlement"
           ],
@@ -4333,7 +4333,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "tier overlay: thorp / hamlet": [
         {
           "angle": "street",
-          "text": "{settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest.",
+          "text": "{settlement} is small enough that every household knows its purpose. Surplus, where there is any, is modest.",
           "slots": [
             "settlement"
           ],
@@ -4367,7 +4367,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is neither small enough to be simple nor large enough to be complicated, and it manages both ways.",
+          "text": "{settlement} is neither small enough to be simple nor large enough to be complicated. It manages both ways.",
           "slots": [
             "settlement"
           ],
