@@ -6331,70 +6331,70 @@ unchanged.
 **R-DST-W4-h BINDS EVERY VARIANT.** These sentences explain **the condition that makes hooks live**. No variant may: restate a hook's own line · name or paraphrase an escalation stage · resolve or foreshadow a named person's fate · imply that a hook will fire. The clock's stages are the DM's to run; the framing sentence's whole job is to say why the clock is on the table. **DM-edited hooks are never machine-dropped**, and a framing sentence is never substituted for a hook.
 
 **category `npc`: the people are the opening**
-1. `[street]` What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes.
-2. `[ledger]` {settlement}'s open questions sit with particular people rather than with offices, which is what makes them approachable.
-3. `[visitor]` A stranger with business in {settlement} will be pointed at a person, not at an institution.
-4. `[counterforce]` {settlement}'s people are individually consequential and collectively agreed; there is a great deal here to get involved with and very little of it is a crisis.
+1. `[street]` What is worth doing in {settlement} is worth doing because of who is in it. The town's difficulties have names attached before they have causes.
+2. `[ledger]` {settlement}'s open questions sit with particular people rather than with offices. That is what makes them approachable.
+3. `[visitor]` A stranger with business in {settlement} is pointed at a person, not at an institution.
+4. `[counterforce]` {settlement}'s people are individually consequential and collectively agreed. There is a great deal here to get involved with and very little of it is a crisis.
 
 **category `faction`: the blocs are the opening**
-1. `[ledger]` {settlement}'s live questions are questions between groups, and each group would rather have a third party settle it than concede.
-2. `[street]` Nothing in {settlement} gets decided by one person, which means everything in {settlement} can be influenced.
-3. `[visitor]` {settlement} has more than one authority and no arbiter, and that gap is where anyone from outside would be useful.
+1. `[ledger]` {settlement}'s live questions are questions between groups. Each group would rather have a third party settle it than concede.
+2. `[street]` Nothing in {settlement} gets decided by one person. That means everything in {settlement} can be influenced.
+3. `[visitor]` {settlement} has more than one authority and no arbiter. That gap is where anyone from outside would be useful.
 4. `[unfolding]` The blocs in {settlement} are close enough in strength that a small weight put on either side would be felt.
 
 **category `tension`: the standing quarrels are the opening**
-1. `[street]` {settlement} runs on arrangements that everyone here has agreed not to test, and the untested places are where the town is soft.
-2. `[ledger]` {settlement}'s difficulties are recorded, chronic and unresolved, which is a different opportunity from a crisis.
+1. `[street]` {settlement} runs on arrangements that everyone here has agreed not to test. The untested places are where the town is soft.
+2. `[ledger]` {settlement}'s difficulties are recorded, chronic and unresolved. That is a different opportunity from a crisis.
 3. `[visitor]` What is wrong in {settlement} is not hidden. It is simply nobody's job.
-4. `[counterforce]` {settlement} carries its quarrels well and carries them all the time; nothing here is about to break, and nothing here is about to be fixed either.
+4. `[counterforce]` {settlement} carries its quarrels well and carries them all the time. Nothing here is about to break, and nothing here is about to be fixed either.
 
 **category `economics`: the books are the opening**
-1. `[ledger]` What {settlement} needs and what {settlement} can get do not line up, and the gap is a standing invitation to anyone who can close it.
-2. `[street]` The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders.
-3. `[visitor]` {settlement} is short of something specific, and being short of something specific is the most tractable kind of difficulty a town can have.
+1. `[ledger]` What {settlement} needs and what {settlement} can get do not line up. The gap is a standing invitation to anyone who can close it.
+2. `[street]` The trouble in {settlement} is a supply question before it is anything else. Supply questions are answerable by outsiders.
+3. `[visitor]` {settlement} is short of something specific. Being short of something specific is the most tractable kind of difficulty a town can have.
 4. `[unfolding]` {settlement}'s margin is thin enough that a change in what arrives would change what the town does.
 
 **category `safety`: the streets are the opening**
-1. `[street]` {settlement} has more trouble than it has people to answer it, and the shortfall is where the work is.
+1. `[street]` {settlement} has more trouble than it has people to answer it. The shortfall is where the work is.
 2. `[ledger]` What {settlement} reports and what {settlement} suffers differ by enough that the difference is itself the opening.
-3. `[visitor]` {settlement} is a town where being competent and armed makes you immediately useful, and the town knows it.
-4. `[counterforce]` {settlement} is safer than its country, and what threatens it comes from outside the walls rather than inside them.
+3. `[visitor]` {settlement} is a town where being competent and armed makes you immediately useful. The town knows it.
+4. `[counterforce]` {settlement} is safer than its country. What threatens it comes from outside the walls rather than inside them.
 
 **category `history`: the past is the opening**
-1. `[unfolding]` {settlement} has business with its own past that has not finished, and the unfinished parts are on the record rather than in dispute.
+1. `[unfolding]` {settlement} has business with its own past that has not finished. The unfinished parts are on the record rather than in dispute.
 2. `[ledger]` Things that happened at {settlement} still have consequences with nobody assigned to them.
-3. `[street]` {settlement} would rather not revisit certain things, which is a reliable sign that revisiting them would produce something.
-4. `[visitor]` The reason {settlement} is the way it is lies further back than anyone here will volunteer.
+3. `[street]` {settlement} would rather not revisit certain things. That is a reliable sign that revisiting them would produce something.
+4. `[visitor]` The reason {settlement} is the way it is lies further back than anyone here is willing to volunteer.
 
 **category `relationship`: the ties are the opening**
-1. `[street]` What binds people in {settlement} also obliges them, and the obligations do not all point the same way.
-2. `[ledger]` {settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three.
-3. `[visitor]` Getting anything done in {settlement} means going through somebody, and going through somebody has a price that is rarely money.
-4. `[unfolding]` Two of {settlement}'s ties are pulling against each other, and the people caught between them have not yet chosen.
+1. `[street]` What binds people in {settlement} also obliges them. The obligations do not all point the same way.
+2. `[ledger]` {settlement}'s ties are dense enough that a favour asked of one person reaches three. Everyone here knows which three.
+3. `[visitor]` Getting anything done in {settlement} means going through somebody. Going through somebody has a price that is rarely money.
+4. `[unfolding]` Two of {settlement}'s ties are pulling against each other. The people caught between them have not yet chosen.
 
 **clock `bread_riot`** — *trigger: food supply chain is strained or worse*
-1. `[ledger]` {settlement}'s food comes through a chain that is under strain, and a chain under strain has a shape to how it fails.
-2. `[street]` The price of bread in {settlement} is the number this town watches, and it is going the wrong way.
-3. `[unfolding]` {settlement} can absorb what is happening to its food for a while, and the while is what everyone here is quietly estimating.
-4. `[counterforce]` {settlement}'s food chain is strained and its granary is not; what would be a crisis in a town without stores is, here, an expensive season.
+1. `[ledger]` {settlement}'s food comes through a chain that is under strain. A chain under strain has a shape to how it fails.
+2. `[street]` The price of bread in {settlement} is the number this town watches. It is going the wrong way.
+3. `[unfolding]` {settlement} can absorb what is happening to its food for a while. The while is what everyone here is quietly estimating.
+4. `[counterforce]` {settlement}'s food chain is strained and its grain store is not. What would be a crisis in a town without stores is, here, an expensive season.
 
 **clock `smuggling_rise`** — *trigger: trade chain is strained or worse*
-1. `[ledger]` {settlement}'s lawful trade is under strain, and where lawful trade thins, something else has room.
-2. `[street]` What is not coming into {settlement} through the gate is a gap, and gaps in a town like this get filled.
-3. `[unfolding]` {settlement}'s revenue depends on trade passing where it can be counted, and less of it is passing there.
-4. `[counterforce]` {settlement}'s trade is strained and its watch is not distracted; the gap is real and nobody has yet been able to work it.
+1. `[ledger]` {settlement}'s lawful trade is under strain. Where lawful trade thins, something else has room.
+2. `[street]` What is not coming into {settlement} through the gate is a gap. Gaps in a town like this get filled.
+3. `[unfolding]` {settlement}'s revenue depends on trade passing where it can be counted. Less of it is passing there.
+4. `[counterforce]` {settlement}'s trade is strained and its watch is not distracted. The gap is real and nobody has yet been able to work it.
 
 **clock `legitimacy_crisis`** — *trigger: the governing faction holds Contested or worse public legitimacy*
-1. `[street]` {governing} governs {settlement} and does not command it, and the difference is audible in the market.
-2. `[ledger]` Instructions from {settlement}'s hall are being complied with slowly, which is how a town says no without saying it.
+1. `[street]` {governing} governs {settlement} and does not command it. The difference is audible in the market.
+2. `[ledger]` Instructions from {settlement}'s hall are being complied with slowly. That is how a town says no without saying it.
 3. `[unfolding]` {governing}'s standing in {settlement} rests on nobody yet having a better claim.
-4. `[counterforce]` {governing} is contested in {settlement} and unopposed; the town's complaint is real and has nowhere to go.
+4. `[counterforce]` {governing} is contested in {settlement} and unopposed. The town's complaint is real and has nowhere to go.
 
 **clock `faction_split`** — *trigger: two factions with overlapping power and conflicting wants*
 1. `[ledger]` {faction} and {faction2} hold overlapping ground in {settlement} and want incompatible things with it.
-2. `[street]` Two powers in {settlement} need the same rooms, and the rooms are not getting larger.
-3. `[unfolding]` The people of {settlement} who deal with both {faction} and {faction2} are the ones who will have to choose first.
-4. `[counterforce]` {faction} and {faction2} overlap in {settlement} and have divided the overlap; the arrangement holds, and it holds on one person's word.
+2. `[street]` Two powers in {settlement} need the same rooms. The rooms are not getting larger.
+3. `[unfolding]` The people of {settlement} who deal with both {faction} and {faction2} are the ones who are to choose first.
+4. `[counterforce]` {faction} and {faction2} overlap in {settlement} and have divided the overlap. The arrangement holds, and it holds on one person's word.
 
 ---
 
@@ -6817,24 +6817,24 @@ no compass word, no real-world place, no named analogy.*
 **PROVENANCE:** The composition mechanism: what a town keeps at all is the town explaining what it is for. Spoken strictly through the boolean composition facts, and through no count, no siting and no adjacency. `R-DST-B` is satisfied without strain, because the roster booleans are STANDING CONFIGURATION and every variant below is a structural clause; not one reaches for how the roster came to be the way it is, and there is no cause pool in this block. **Non-redundancy (`R-DST-A`):** `DS-DEF-6` reads the same booleans and reads them as defense CAPABILITY, keyed against `scores.economic/magical`, `tradeAccess` and `blockade`; this block reads them as civic CHARACTER, keyed against nothing but themselves and tier, and the two compose on different pages (`overview`/`power` against `defense`). Two blocks may read one row where they assert DIFFERENT FACTS about it, which is the case `DS-GEN-15` and `DS-GEN-16` established for the stones and the record and which this block inherits rather than re-argues.
 
 **`ADMINISTERED`**
-1. `[ledger]` {settlement} keeps a court and keeps a place for those the court is finished with, which means the town has decided its quarrels are its own business to settle.
+1. `[ledger]` {settlement} keeps a court and keeps a place for those the court is finished with. That means the town has decided its quarrels are its own business to settle.
 2. `[visitor]` {settlement} is administered, visibly: rules here have rooms, and the rooms have officers.
-3. `[street]` In {settlement} the law is a building you can point to, and the pointing settles a certain number of arguments on its own.
+3. `[street]` In {settlement} the law is a building you can point to. The pointing settles a certain number of arguments on its own.
 
 **`GARRISONED`**
-1. `[visitor]` Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.
+1. `[visitor]` Armed order is part of {settlement}'s furniture. The town keeps professionals for its safety rather than trusting to luck and neighbours.
 2. `[ledger]` {settlement} pays for its own defense in wages, not only in stone, and the paying is a standing decision renewed every season.
 
 **`LETTERED`**
-1. `[visitor]` {settlement} supports work that only towns of a certain seriousness support, and the seriousness rubs off on the rest of the place.
-2. `[street]` There are people in {settlement} whose whole trade is knowing things, and the town has decided it can afford them.
+1. `[visitor]` {settlement} supports work that only towns of a certain seriousness support. The seriousness rubs off on the rest of the place.
+2. `[street]` There are people in {settlement} whose whole trade is knowing things. The town has decided it can afford them.
 
 **`PROVISIONED`**
-1. `[ledger]` {settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.
-2. `[elder]` A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.
+1. `[ledger]` {settlement} keeps stores against the bad season and care for the bad year. The town has met scarcity before and built its answer into the roster.
+2. `[elder]` A town does not keep a grain store out of optimism. {settlement}'s provision is the polite form of its memory.
 
 **`BARE`**
-1. `[counterforce]` {settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.
+1. `[counterforce]` {settlement} keeps few institutions because it needs few. What a larger town does with buildings, this one does with acquaintance.
 2. `[street]` Nothing in {settlement} is official that could instead be somebody's job on the side.
 
 ---
@@ -6852,22 +6852,22 @@ no compass word, no real-world place, no named analogy.*
 ⚠ **`{institution}` IS DELIBERATELY NOT OFFERED IN `UNWORKED`.** That key means no processing institution exists for the resource in question, so a variant offering the slot there would be a GUARANTEED FILL FAILURE. Both `UNWORKED` variants name the absence in common words and use `{settlement}` and `{resource}` only. This is the `{defwork}` discipline (never offered to a settlement whose list is empty) applied to an established slot rather than a minted one.
 
 **`STALLED`**
-1. `[unfolding]` {institution} at {settlement} outlived its feed; the {resource} stopped arriving and the craft is living on stores, habit, and hope in that order.
-2. `[ledger]` {settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait.
+1. `[unfolding]` {institution} at {settlement} outlived its feed. The {resource} stopped arriving. The craft is living on stores, habit, and hope in that order.
+2. `[ledger]` {settlement} keeps {institution} on a supply that has failed upstream. The building stands, the skill remains, and the books wait.
 
 **`HOME-FED`**
-1. `[ledger]` {settlement}'s workshops stand at the end of short arguments: the {resource} is here, so {institution} is here, and the one explains the other.
-2. `[visitor]` The crafts of {settlement} are the country around it, worked up: what the ground gives, the town finishes.
-3. `[street]` Nobody asks why {settlement} keeps {institution}; the {resource} answers before the question is done.
+1. `[ledger]` {settlement}'s workshops stand at the end of short arguments. The {resource} is here, so {institution} is here, and the one explains the other.
+2. `[visitor]` The crafts of {settlement} are the country around it, worked up. What the ground gives, the town finishes.
+3. `[street]` Nobody asks why {settlement} keeps {institution}. The {resource} answers before the question is done.
 
 **`BOUGHT-IN`**
-1. `[ledger]` {settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft.
-2. `[visitor]` What {settlement} cannot make, it has learned to deal in, and the dealing employs as many hands as the making would.
-3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
+1. `[ledger]` {settlement} works {good} it cannot raise. The town buys its feedstock the way other towns grow it. The buying is a settled part of the craft.
+2. `[visitor]` What {settlement} cannot make, it has learned to deal in. The dealing employs as many hands as the making would.
+3. `[street]` {institution} at {settlement} eats what the carts bring. The town's crafts begin at the weighbeam, not the field.
 
 **`UNWORKED`**
-1. `[counterforce]` The ground at {settlement} offers {resource} the town does not yet take; the absence of any house to work it is a decision, or a shortage of hands, or a matter of time.
-2. `[visitor]` There is more in {settlement}'s country than {settlement} works, and a stranger with capital notices it quickly.
+1. `[counterforce]` The ground at {settlement} offers {resource} the town does not yet take. The absence of any house to work it is a decision, or a shortage of hands, or a matter of time.
+2. `[visitor]` There is more in {settlement}'s country than {settlement} works. A stranger with capital notices it quickly.
 
 ---
 
