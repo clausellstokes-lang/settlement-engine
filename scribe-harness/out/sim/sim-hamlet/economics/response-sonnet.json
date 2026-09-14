@@ -1,0 +1,52 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C4: a low rung on a working approach",
+   "vid": 2,
+   "spine": "Prosperity here sits on a low rung, though the town's trade still keeps its ordinary pace.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 2,
+   "spine": "One thing the town does for its money outweighs the rest. Most of what anyone earns here traces back to that trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 2,
+   "spine": "The town both exports and imports, and the two are not simply the same trade in each direction. Most of what leaves here was raised or made in the town first.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 1,
+   "spine": "Warmholz sells more than one thing beyond its own borders, and no single one of them carries the trade alone.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "What is grown here feeds the town, with a little to spare, season after season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "BOUGHT-IN",
+   "vid": 1,
+   "spine": "Salt is worked here that the town cannot raise for itself, and buying it in is as settled a part of the craft as the working.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

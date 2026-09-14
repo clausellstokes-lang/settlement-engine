@@ -1,4 +1,4 @@
-# wf_43403a50-66b — per-agent progress, 2026-09-14 17:16:31
+# wf_43403a50-66b — per-agent progress, 2026-09-14 17:21:52
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
     - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
@@ -10,9 +10,15 @@
     - `ae2575922` ? · DONE · transcript 09-14 17:09 975 KB · 22 tool calls · result: {"stateSummary": "This source is part 8 of `docs/OWNER_DECISION_QUEUE.md` \u2014 not a decision list but the program's running LEDGER, one bullet per \u00a7-num
     - `ad0a131ab` ? · DONE · transcript 09-14 17:11 985 KB · 22 tool calls · result: {"items": [{"title": "The owner's WALK (and the ONE regen that rides with it)", "what": "The owner must personally walk the product before the review and the te
     - `a280bd0ae` ? · DONE · transcript 09-14 17:09 704 KB · 16 tool calls · result: {"items": [{"title": "Run the REWRITE WAVE register by register (8b onward)", "what": "Only car 8a (the kernel, instruments and gate) has landed. The wave itsel
-    - `ac897d892` ? · IN FLIGHT · transcript 09-14 17:13 761 KB · 29 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `a9dd9bf28` ? · IN FLIGHT · transcript 09-14 17:13 711 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `aa540bb70` ? · IN FLIGHT · transcript 09-14 17:14 756 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `aba8e7d22` ? · IN FLIGHT · transcript 09-14 17:13 799 KB · 17 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `a4c2d6159` ? · IN FLIGHT · transcript 09-14 17:14 857 KB · 41 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `a2e753739` ? · IN FLIGHT · transcript 09-14 17:13 476 KB · 9 tool calls · last: Bash sed -n '460,505p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b
+    - `ac897d892` ? · DONE · transcript 09-14 17:17 946 KB · 30 tool calls · result: {"items": [{"title": "Fire THE LIGHTING BATCH (four directive flags + demographicsEnabled)", "what": "A single ONE-REGEN-style commit that flips npcConsequences
+    - `a9dd9bf28` ? · DONE · transcript 09-14 17:18 932 KB · 9 tool calls · result: {"items": [{"title": "The WR-9 acceptance verdict remains unanswered by the owner", "what": "The war-convergence instrument was built, repaired, forced and wire
+    - `aa540bb70` ? · DONE · transcript 09-14 17:20 1025 KB · 24 tool calls · result: {"items": [{"title": "Clear the 38 unvalidated Opus-era rows in the Fable validation queue", "what": "Below the 2026-08-10 ~21:00 FABLE-EXHAUSTION BOUNDARY the 
+    - `aba8e7d22` ? · DONE · transcript 09-14 17:19 1045 KB · 18 tool calls · result: {"stateSummary": "docs/FABLE_RETROVALIDATION_QUEUE.md (part 1 of 2, 2,250 lines) is the ledger-branch register of every judgment an Opus seat made that a Fable 
+    - `a4c2d6159` ? · DONE · transcript 09-14 17:18 1005 KB · 42 tool calls · result: {"items": [{"title": "Rule the 32 Opus-authored rows of the \u00a7893\u2013\u00a7895 span (R1\u2013R32)", "what": "Every row from \u00a7893 through \u00a7895 wa
+    - `a2e753739` ? · DONE · transcript 09-14 17:17 624 KB · 10 tool calls · result: {"items": [{"title": "Track K(a) \u2014 standardize ONE action-result envelope over existing store actions", "what": "The typed-command layer is missing (only s
+    - `a9be6da5a` ? · IN FLIGHT · transcript 09-14 17:20 508 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a98192fc9` ? · IN FLIGHT · transcript 09-14 17:18 403 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a28a11ab0` ? · IN FLIGHT · transcript 09-14 17:19 436 KB · 14 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a9384c3aa` ? · IN FLIGHT · transcript 09-14 17:19 505 KB · 21 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `a03669471` ? · IN FLIGHT · transcript 09-14 17:20 574 KB · 16 tool calls · last: Bash sed -n '201,215p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b
+    - `a73a1d32e` ? · IN FLIGHT · transcript 09-14 17:21 445 KB · 12 tool calls · last: Bash sed -n '197,215p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4
