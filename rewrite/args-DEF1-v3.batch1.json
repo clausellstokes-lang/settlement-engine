@@ -1,0 +1,44 @@
+{
+ "block": "DS-DEF-1",
+ "dock": "laneRW-DEF1",
+ "pools": [
+  {
+   "pool": "readiness STRONG",
+   "dir": "ds-def-1--readiness-strong",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  },
+  {
+   "pool": "readiness ADEQUATE",
+   "dir": "ds-def-1--readiness-adequate",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  },
+  {
+   "pool": "readiness WEAK",
+   "dir": "ds-def-1--readiness-weak",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "readiness CRITICAL",
+   "dir": "ds-def-1--readiness-critical",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  }
+ ],
+ "rulings": "WHAT WOULD BE FALSE ON DS-DEF-1 (the defensive posture header: readiness STRONG/ADEQUATE/WEAK/CRITICAL, terrain FAVOURABLE/EXPOSED, strategic value HIGH/LOW; 8 pools, 26 variants). NOTE FOR ANY SEAT WHO READ THE EARLIER RULINGS FOR THIS BLOCK: they rested on the LAYER BAR (W20), which the owner's re-cut STRUCK. A body word is no longer forbidden here because the read is an aggregate. What does the work now is the PREIMAGE, and it is sharper. THE PREIMAGE IS THE WHOLE OF THIS BLOCK'S DIFFICULTY: the readiness pools key on a BAND of the overall score and NOT on the roster, so one face prints across every town whose score lands in that band - walled and unwalled, garrisoned and empty, town and city, quiet country and active siege. A face that names a wall, a gate, a perimeter, a watch, a garrison, a muster or a granary therefore asserts a body the key does not guarantee, and on the towns in the band that lack it the face is FALSE against a CLOSED ROSTER (floor 1). That is a contradiction, not a matter of taste, and it is the single fault this block will produce most. The same reasoning frees what it does not bar: a face may speak freely about what the BAND itself means, about the approach, the ground, the weather over the site, the ordinary day, what a stranger forms an impression of, what the town does not trouble itself about - none of which the roster can deny. THE LADDER IS THE VOCABULARY, and it is exact: STRONG is at or above 65, well covered; ADEQUATE at or above 40, covered but with little margin; WEAK at or above 20, thinly covered and a real threat would strain it; CRITICAL below 20, effectively uncovered. The overall reading runs from well defended down to undefended. A face states the rung its pool keys on and never a fifth gradation between them. THE FENCE THE ANNEX STATES ITSELF: the readiness word is a SUMMARY of five arms and asserts nothing about any one of them, so a STRONG header over a CRITICAL food arm is a real and common state - no face may imply which arm is strong, name a particular pressure, or say what the town has standing against anything. And the band MOVES ON TIER AND COUNTRY while no works move (the mean of the arms plus a tier bonus minus a threat penalty), so no face explains a band by the condition of what the town has built: that is floor 4, a denial of the engine's own model. FLOOR 2 BINDS HARD HERE because a band invites a trend: no comparative against an earlier state (thinner than it was, has been narrowing), no elapsed course, no prediction of what would happen if tested, no count and no rate. The habitual present is your instrument. THE TERRAIN LENS: 'terrain FAVOURABLE' fires on Mountain, Hills AND Forest together, so the only reading true of all three is the one the engine computes - the ground carries part of the defence and the same works are worth more here than on flat ground. Relief is FALSE of Forest and cover is FALSE of Mountain, so neither is licensed; and the APPROACH is a different field (tradeRouteAccess), so narrows, the long way round and in the open are contradictions of that field, not descriptions of this one. 'terrain EXPOSED' fires on Plains and Desert/Arid: open ground that carries nothing of the defence. 'No hill' holds; 'no narrows' does not. COASTAL AND RIVERSIDE FIRE NEITHER TERRAIN POOL ON PURPOSE (a water flank is neither narrows nor nothing), so no face of either pool mentions water. Terrain and strategic value are STANDING facts of the site with no recorded history: no face says the town was sited, chosen or founded anywhere for any reason. THE PRIZE LENS: 'strategic value HIGH' fires on Coastal and Mountain, so the shared reading is the engine's own - the town holds something worth taking; a face names neither sea nor mountain nor what the thing is. 'strategic value LOW' fires on Forest only: not a prize. Medium and Medium-High fire neither pool. strategicValue is an engine-authored string the page already prints beside the prose, so the prose FRAMES it and never restates or paraphrases it - restating it is a same-page collision under floor 1. THE SLOTS: only {settlement} is filled at this block's call sites; {band}, {route} and {counterpart} are declared and NOT filled at this tip, and a variant naming any of them drops. THE SHIPPED CLAUSES THAT ARE STILL FALSE: 'the approaches are watched, the works are kept up' (bodies the key does not guarantee); 'enough on the walls to be serious' (a body and a manning); 'how much of the perimeter has nobody on it' (the same, and the annex's own fence denies it); 'a stranger reaches the centre without being stopped, challenged or counted by anybody at all' (bodies, and a totality); 'the margin has been narrowing' (floor 2); 'takes the time it takes to walk in' and 'not worth the price of trying' (predictions); 'tested twice at once' (a prediction); 'the approach is narrow ... the long way and in the open' (the approach field); 'has paid for and must keep paying for' (no gate read is on this block). EVERYTHING ELSE THE SHIPPED ROWS SAY IS AVAILABLE TO YOU AGAIN, including the standpoints and the second facts the old law struck: 'the town does not spend much time thinking about being attacked, and the reason is not complacency' is lawful and is the kind of line this block should be reaching for. \u2b50 ADDED FOR THE v3 RUN (2026-09-14, the Fable chair; everything above was VERIFIED against the dock's code at dd79991f5 \u2014 defenseScoreBands.js 65/40/20; defenseStateProse.js terrain FAVOURABLE on Mountain, Hills, Forest and EXPOSED on Plains and Desert/Arid; strategic value HIGH on Coastal and Mountain, LOW on Forest). RULING 41 BINDS HARDEST ON THIS BLOCK: a face is UNFALSIFIABLE or COUPLED, and the ONLY thing a readiness face can be coupled to is THE BAND ITSELF (and a terrain or prize face to its own key), never to a body the key does not guarantee. A line any town in any band could carry is refused as unfalsifiable; a line that couples by naming a wall, a watch or a muster is refused as false on the roster. Between those two refusals is the whole of the craft here: what the band MEANS for the people under it, seen by a source with a stake (42d) \u2014 the clerk who files the arms, the stranger forming an impression, the household that has stopped worrying or has not. THE EARLIER ATTEMPTS ON THIS BLOCK (attempts 1\u20133, and DS-DEF-11 attempt 3) FAILED IN EXACTLY THIS WAY: struck the bodies and left INVENTORY LINES, licensed and empty. Emptiness is not the cure; the band's own meaning through a speaker is. THE COMPOSITION FENCE (annex \u00a70h V1-g): this block's ADEQUATE cell and DS-DEF-10's ADEQUATE per-arm badge cell rhyme on purpose and a composed Defense tab draws ONE of them, never both \u2014 so an ADEQUATE face here speaks of the TOWN covered with no margin and never of an arm. R-2 OF THE CONTRADICTION TABLE: DS-DEF-1 bands a FROZEN first-survey readiness.score while the substrate tab renders the LIVE band; the desk measured a village at frozen CRITICAL and live 'strained'. Two measurements, two vocabularies, NOT a contradiction; no refuter fails a face for disagreeing with the live band, and no face mentions the live one. THE CLARITY RULINGS 42\u201342d and 42d's failure mode are in THE VOICE and bind every face from the first draft: clear before crafted; one claim a reader can act on; plain modern words; the speaker's viewpoint as clear as the fact; and where 42d's cure would turn the band's HABITUAL state into one past episode, the habitual wins \u2014 a band is a standing reading, not an event. THE SLOTS AT THIS TIP (re-verified): only {settlement} is filled at the call site; {band}, {route} and {counterpart} are declared by the annex header and NOT filled \u2014 a variant naming any of them drops. THE CHAIR RULES: nothing yet on this block; the first batch is the readiness family alone (STRONG \u00b7 ADEQUATE \u00b7 WEAK \u00b7 CRITICAL) so that the four faces of one ladder are drafted, selected and refuted together and a rung never drifts into its neighbour's wording.",
+ "markModel": "opus",
+ "selectModel": "fable",
+ "refuteModel": "opus",
+ "cureModel": "opus",
+ "overrides": [],
+ "writerModels": [
+  "opus",
+  "fable"
+ ]
+}

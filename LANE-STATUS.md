@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 11:26:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 11:32:15 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -25,7 +25,26 @@ product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collecti
       | 
       | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
       | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
-- DS-DEF-1 (waits): dock laneRW-DEF1 ABSENT
+- **DS-DEF-1 (waits)** dock `laneRW-DEF1` HEAD dd79991f5 · 60 cars over f2da5a3ee · porcelain 0 · last commits:
+    dd79991f5 REWRITE 8b DS-DEF-2, THE 42b CUT: two sharpenings that minted a body the key does not seat put back to the card's own agentless form, and one hedge restored
+    7992713d0 REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 4 of 4: the four Economic and five Disaster pools — the dead lane's cut recovered, audited by sixteen seats, its twenty moved claims put back, and the block's whole re-cut now landed under the freeze
+    b5738c2ac REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 3 of 4: the open town, the three legal-chain pools and Economic STRONG, cut under all five rulings at once — and a second move-grammar trap caught before it landed
+    8d9a51d9c REWRITE 8b DS-DEF-2: BATCH 1 RE-OPENED UNDER RULING 42d — sixteen speakers put back into their own sentences, two named as unfixable rather than forced, and the verb the first cut over-spent
+    receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
+      | # RECEIPT — the REWRITE train
+      | 
+      | Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
+      | 
+      | ---
+      | 
+      | ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
+      | 
+      | **STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+      | Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
+      | porcelain 0 at open, runners 0 at open — both executed, exit 0).
+      | 
+      | Every figure below comes from a command that ran in this dock with its exit code captured. A figure
+      | without a command is not in this file. ZERO reader-facing bytes is the car's own fence: the manifest
 - DS-DEF-5 (waits): dock laneRW-DEF5 ABSENT
 - DS-DEF-3 (waits): dock laneRW-DEF3 ABSENT
 - DS-DEF-4 (waits): dock laneRW-DEF4 ABSENT
@@ -129,4 +148,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 1.63 1.84 2.11
+load: 6.69 3.68 2.80
