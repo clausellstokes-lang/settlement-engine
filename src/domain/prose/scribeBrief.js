@@ -134,87 +134,80 @@ const UNIT_RULES = [
 ].join('\n');
 
 /**
- * ⭐⭐ THE SIX WAYS A LINE INVENTS (chair ruling 29 as amended by W3b car 1; RUN 2's own
- * measurement). It REPLACES the single PLAUSIBLE-ADDITION paragraph W3a carried, and carries that
- * paragraph's own sentence inside the fourth bar rather than losing it.
+ * ⭐⭐ THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT (chair ruling 36, THE OWNER 2026-09-14
+ * ~14:4x: "the goal is that it doesn't contradict the settlement not that it invents when it comes
+ * to prose"). It REPLACES W3b car 1's six invention bars, which ruling 36 supersedes, and it is
+ * the owner's 09-12 corpus law applied to the Scribe: SILENCE IS PERMISSION, and "unlicensed" is
+ * not a finding.
  *
- * ⛔ THE MEASUREMENT THAT WROTE EACH BAR. RUN 2 put sixteen cells through two writer seats and an
- * Opus second reader per pair: three hundred and seventy seven units, tier 0 keeping ninety one to
- * ninety five percent of what was written, and the SECOND READER refusing about seven in ten. The
- * reader's own notes name six classes, and every one of them is an addition the card does not
- * hold — an absence asserted where a field had no value, an origin, a contest no relation row
- * names, a practice behind a boolean, a verdict the town's own institution rows deny, and a
- * neighbour on a card that carries no world. Actor and forecast drew almost nothing (twenty six
- * and twelve lines), so the roster rule and the no-future bar were already holding. The disease
- * was GAP-FILLING ON A THIN CARD, and a bar the writer can read is the only instrument that
- * reaches it: none of the six is visible to any tier-0 arm.
+ * ⛔ WHY THE MEASUREMENT DID NOT SETTLE IT. RUN 2 put sixteen cells through two writer seats and an
+ * Opus second reader per pair, and the reader refused about seven in ten units — but it was reading
+ * against NON-INVENTION, and the owner's standard is NON-CONTRADICTION. Most of what it refused is
+ * exactly what a game master opens a dossier for: servants at the inn nursing a sick guest, a store
+ * filled by the trades, the court's business waiting on the parish. These are plot hooks, not
+ * falsehoods, and nothing on the card denies one of them. RUN 2's seventy per cent is therefore NOT
+ * the product's number; a re-read under this standard is RUN 3's first act.
  *
- * ⭐ AND THE POSITIVE RULE IS FIRST, BECAUSE A WRITER TOLD ONLY WHAT NOT TO DO STILL HAS A SEAT TO
- * FILL. The corpus face at the same seat is always lawful and always ships, so copying it is the
- * answer to a face with nothing under it, and omitting the pool is the answer to a spine with
- * nothing under it.
+ * ⛔ THE ONE FLOOR THAT KEPT ITS TEETH is the record floor: an EVENT, a DATE or a NUMBER stated as
+ * record where the card holds none. That is the owner's surviving "no invented history or numbers",
+ * and it is why an ORIGIN is still refused — a founding is an event, not a flavour.
+ *
+ * ⭐ THE POSITIVE RULE IS STILL FIRST, BECAUSE A WRITER TOLD ONLY WHAT NOT TO DO STILL HAS A SEAT
+ * TO FILL. The corpus face at the same seat is always lawful and always ships.
  */
-const INVENTION_BARS = [
+const CONTRADICTION_BARS = [
   'WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS. Write the CORPUS FACE VERBATIM',
   'at that seat. A copied corpus row is never refused: it already ships, and it is the line that',
   'would have shipped anyway. A pool with nothing lawful to say in its SPINE is omitted, and the',
   'hand corpus draws the whole of it. Neither is a failure; both are the dossier reading as it',
   'always did.',
   '',
-  'THE SIX WAYS A LINE INVENTS, AND IS REFUSED. Each was measured on rendered pages by a second',
-  'reader holding this same card.',
+  'THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT. THE STANDARD IS NON-CONTRADICTION. A line is',
+  'refused for CONTRADICTING the settlement and never for ADDING to it. What the card does not hold,',
+  'the card does not forbid: silence is permission.',
   '',
-  'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT. Where a field on the card shows no value, you',
-  'have not been told what it holds. You may not say the thing is absent, small, quiet or',
-  'unchanged, and you may not write a sentence that would be false if that field were later',
-  'filled either way. A pool whose fields all show no value is OMITTED.',
-  '  REFUSED: "nothing here is being built and nothing sold off", on a page where the ranking of',
-  '  the town\'s prosperity had no value at all.',
+  'REFUSED, AND ONLY FOR THESE:',
+  '- A VALUE A CARD FIELD DENIES. A wall on a town whose walls field says there is none; "no goods',
+  '  come in" where the page says trade proceeds at an ordinary pace; "nothing organised behind it"',
+  '  where the town\'s own rows list a street gang and front businesses.',
+  '- A PAGE LINE OR A BADGE CONTRADICTED. The machine lines on this page are what the reader sees',
+  '  beside your words. The posture badge and the readiness band are TWO LADDERS over one score and',
+  '  both are true; a funding note and a backing word are TWO FIELDS and both are true. Neither pair',
+  '  is a contradiction, and writing to the pool key is not a breach of either.',
+  '- A ROLE THE TOWN DOES NOT SEAT, OR A RECORD NO BODY HERE KEEPS. Every speaker is one the town',
+  '  block seats and every record cited is one a body here keeps.',
+  '- THE ENGINE\'S OWN MODEL DENIED. Do not explain a state by a cause the engine does not run it on:',
+  '  a readiness band by how hard people work, a stress by the weather.',
+  '- AN EVENT, A DATE OR A NUMBER STATED AS RECORD. No founding, no battle, no year, no count, no',
+  '  rate and no price that the card does not hold. This is the floor with no exception, and it is',
+  '  why an ORIGIN is refused: "carts stopped on this spot before any stall did" is a founding stated',
+  '  as record. It is refused for that and never for being invented.',
+  '- A FORECAST. The dossier reports what stands, never what is going to happen.',
   '',
-  'NO ORIGIN. Nothing on the card has a beginning you were told. No body, market, road, custom or',
-  'arrangement came before another, grew out of another, took root, was founded, was sited or was',
-  'chosen. The record holds what stands.',
-  '  REFUSED: "the market took root where the carts already stopped".',
+  'NOT REFUSED, BECAUSE SILENCE IS PERMISSION:',
+  'A practice, a custom, a motive, a belief, an interpretation, a feeling attributed to a source,',
+  'and an absence or a smallness asserted on a field the card leaves UNKNOWN, all SHIP, provided no',
+  'row and no page line denies them. Servants at the inn nursing a sick guest on a town with no',
+  'hospital ships. A store filled by the trades ships. The court\'s business waiting on the parish',
+  'ships. "Nothing here is being built" on an unknown ranking of prosperity ships, unless a row says',
+  'otherwise. This is the flavour a game master opens the dossier for, and it is yours to write.',
   '',
-  'NO CONTEST THE CARD DOES NOT NAME. Two bodies are at odds only where a relation row on the card',
-  'says so. A rank, a share, a standing or a seat is not a quarrel.',
-  '  REFUSED: the governing council set against the order of the watch, on a card whose conflict',
-  '  reading had no value and which carried no relation row between them.',
-  '',
-  'A BOOLEAN IS A FACT, NOT A PRACTICE. Where a field says that a thing stands, a granary, a',
-  'church, a court, a wall, you may say that it stands and what a person meets at it. You may not',
-  'say how it is run, who fills it, who is let in, what is owed, what waits on what, or what is',
-  'done for the sick, the poor or the accused, unless a field on the card says that too. Add no',
-  'mechanism, practice, cause, procedure, custom, price or arrangement the card does not name: if',
-  'the card says a court and a prison, you may not say a fine, a debt, a backlog or a bribe.',
-  '  REFUSED: "grain they would rather have sold", written from a granary that only stands; "the',
-  '  court\'s business waits on the parish"; the sick "nursed by the inn servants".',
-  '',
-  'NO VERDICT THE CARD\'S OWN ROWS DENY. Before you write that a town lacks a thing, read the',
-  'institutions and the holders on the town block. If a row names it, the town has it.',
-  '  REFUSED: "no through traffic", written beside a caravaneer\'s post, a carriers\' guild, a',
-  '  customs house and a post relay station.',
-  '',
-  'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE CARD. Where the town block\'s `hasWorld` reads false,',
-  'no other settlement exists for this page: nobody speaks of neighbours, of what is said',
-  'elsewhere, or of what comes down the road from anywhere named.',
-  '  REFUSED: what they are saying in the next valley about this town.',
+  'AN UNKNOWN FIELD IS ONE YOU MAY WRITE AROUND BUT MAY NOT GIVE A VALUE, A COUNT OR A DATE.',
 ].join('\n');
 
 /**
- * ⭐ THE SIX BARS AS ONE LINE EACH, for the SECOND READER's preface (W3b car 1). The writer and
- * the reader must hold ONE law: RUN 2 measured a page where the writer wrote to the band because
- * the brief told it to and the reader answered SAME PAGE `yes` because the reader had never been
+ * ⭐ THE STANDARD IN A BREATH, for the SECOND READER's preface (W3b car 5, ruling 36). The writer
+ * and the reader must hold ONE law: RUN 2 measured a page where the writer wrote to the band
+ * because the brief told it to and the reader answered `yes` because the reader had never been
  * given the same note. A checklist asked against a different law from the one the writer was given
  * refuses lines the writer was licensed to write, which is ruling 26's own defect class.
  */
 export const READERS_EYE = Object.freeze([
-  'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT: an absence, a smallness or a quiet asserted where a field shows no value is an invention.',
-  'NO ORIGIN: nothing here came before, grew from, took root, was founded, was sited or was chosen.',
-  'NO CONTEST THE CARD DOES NOT NAME: a rank, a share, a standing or a seat is not a quarrel.',
-  'A BOOLEAN IS A FACT, NOT A PRACTICE: that a thing stands licenses no account of how it is run, who fills it, who is let in or what is owed.',
-  'NO VERDICT THE FACTS\' OWN ROWS DENY: if an institution or holder row names a thing, the town has it.',
-  'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS: where `hasWorld` reads false, no other settlement exists for this page.',
+  'THE STANDARD: a line is refused for CONTRADICTING the settlement, and NEVER for adding to it.',
+  'SILENCE IS PERMISSION: a practice, a custom, a motive, a belief, an interpretation, or an absence asserted on a field with no value is FLAVOUR, and it ships unless a row or a page line denies it.',
+  'THE TWO LADDERS are two true readings of one score and the funding note and the backing word are two true fields; neither pair is a contradiction.',
+  'THE ONE FLOOR WITH NO EXCEPTION: an event, a date or a number stated as record where the facts hold none.',
+  'A ROLE OR A RECORD the town does not seat or keep is a contradiction; so is a cause the engine\'s own model denies, and so is a forecast.',
 ]);
 
 /**
@@ -306,7 +299,7 @@ export function buildScribeBrief(input) {
     '',
     UNIT_RULES,
     '',
-    INVENTION_BARS,
+    CONTRADICTION_BARS,
     '',
     TWO_LADDERS,
     '',
@@ -739,62 +732,60 @@ export function judgeUnits(units, card, refute) {
 }
 
 /**
- * ⭐⭐ THE SEVEN QUESTIONS (design §4; chair ruling 29). Five are W1's measured classes — the
- * certainty, quantifier, scope, actor and forecast faults that 27 of 50 moved claims fall into
- * and that NO tier-0 arm can reach. Two are the simulation's own findings:
+ * ⭐⭐ THE SIX CONTRADICTION TESTS (chair ruling 36, THE OWNER 2026-09-14 ~14:4x). They REPLACE the
+ * seven questions of W3a car 4 and W3b car 4, which ruling 35 set and ruling 36 supersedes.
  *
- *   MECHANISM — both seats, an Opus and a Sonnet, added a practice the card does not hold on the
- *     same pool (a fine and a debtor's cell; a court backlog) from a card carrying only `court`
- *     and `prison`. Neither contradicts a field, so C4, C3, X and the referent scan are silent.
- *   SAME PAGE — the page carries machine lines the composed prose sits beside, and a rendered
- *     line that contradicts one is wrong to a reader who can see both at once. No unit-level arm
- *     can see the page.
+ * ⛔ WHAT WAS STRUCK, AND WHY IT HAD TO BE. CERTAINTY, QUANTIFIER (except a number stated as
+ * record), SCOPE and MECHANISM are gone. Every one of them asked whether the line ADDED something,
+ * and the owner's standard is whether it CONTRADICTS something: "the goal is that it doesn't
+ * contradict the settlement not that it invents when it comes to prose". Measured, those four were
+ * most of the refusals: RUN 2's second reader answered `yes` on certainty 177 times, mechanism 205,
+ * scope 106 and quantifier 76, against same-page 63, actor 26 and forecast 12. So RUN 2's seventy
+ * per cent refusal rate is not this product's number, and a re-read under these six is RUN 3's
+ * first act.
+ *
+ * ⭐ WHAT SURVIVED, AND WHERE EACH CAME FROM. FIELD and PAGE are the contradiction the tier-0 arms
+ * cannot see (they read one row at a time and never the page beside it). ROSTER is floor 1 asked
+ * again at the second seat. MODEL is floor 4. RECORD is floor 2, the owner's surviving "no invented
+ * history or numbers", and it is the one that keeps QUANTIFIER's teeth where they belonged.
+ * FORECAST is the no-future bar.
  *
  * The `key` is the schema field the model answers in; the `arm` is what a refusal is recorded as.
  * @type {ReadonlyArray<{key: string, arm: string, ask: string}>}
  */
 export const TIER1_QUESTIONS = Object.freeze([
-  // ⭐ RE-WORDED TO THE MEASURED CLASSES (W3b car 4). W1's wording asked about degree of surety,
-  // which is a question about tone; RUN 2's reader answered `yes` 177 times on this arm and its
-  // own notes name what it was actually catching, which is a question about what the facts leave
-  // open. The list below is the six bars the writer holds, asked as one question.
   Object.freeze({
-    key: 'certainty',
-    arm: 'T1-CERTAINTY',
-    ask: 'CERTAINTY: does the line state as DECIDED something the facts below leave UNDECIDED — an absence read out of a field with no value, an origin, a contest no relation row names, a practice behind a fact that only stands, or a verdict the town\'s own institution and holder rows deny?',
+    key: 'fieldDenied',
+    arm: 'T1-FIELD',
+    ask: 'FIELD: does the line assert a value a field below DENIES? Not a value the facts are silent about, and not a value a field leaves UNKNOWN: a value a field below states otherwise.',
+  }),
+  // ⭐ THE LADDERS ARE IN THE QUESTION. RUN 2 finding 5: the writer wrote to the readiness BAND
+  // because its brief told it to, and this reader, shown the page's `Well-Defended` badge and
+  // never shown that note, answered `yes` on it. Sixty three lines fell to that.
+  Object.freeze({
+    key: 'page',
+    arm: 'T1-PAGE',
+    ask: 'PAGE: does it contradict a machine line or a badge on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine\'s, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.',
   }),
   Object.freeze({
-    key: 'quantifier',
-    arm: 'T1-QUANTIFIER',
-    ask: 'QUANTIFIER: does it say how many, how much or how often, where the facts give no number?',
+    key: 'roster',
+    arm: 'T1-ROSTER',
+    ask: 'ROSTER: does someone act in it, or is a record cited in it, that the facts below do not seat or keep?',
   }),
   Object.freeze({
-    key: 'scope',
-    arm: 'T1-SCOPE',
-    ask: 'SCOPE: does it apply to more of the town, or more of the time, than the facts cover?',
+    key: 'model',
+    arm: 'T1-MODEL',
+    ask: 'MODEL: does it explain a state by a cause the engine\'s own model denies, such as a readiness band explained by how hard people work, or a stress explained by the weather?',
   }),
   Object.freeze({
-    key: 'actor',
-    arm: 'T1-ACTOR',
-    ask: 'ACTOR: does someone act in it who is not a body or role these facts seat?',
+    key: 'record',
+    arm: 'T1-RECORD',
+    ask: 'RECORD: does it state an EVENT, a DATE or a NUMBER as record where the facts hold none? A founding, a battle, a year, a count, a rate or a price that the facts do not carry. This is the one floor with no exception.',
   }),
   Object.freeze({
     key: 'forecast',
     arm: 'T1-FORECAST',
     ask: 'FORECAST: does it say what is going to happen rather than what stands?',
-  }),
-  Object.freeze({
-    key: 'mechanism',
-    arm: 'T1-MECHANISM',
-    ask: 'MECHANISM: does it describe how a thing works — a practice, a procedure, a cause, a custom, a price, a debt, a fine, a backlog — where the facts only say that the thing stands?',
-  }),
-  // ⭐ THE LADDERS ARE IN THE QUESTION (W3b car 4). RUN 2 finding 5: the writer wrote to the
-  // readiness BAND because its brief told it to, and this reader, shown the page's `Well-Defended`
-  // badge and never shown that note, answered `yes` on it. Sixty three lines fell to that.
-  Object.freeze({
-    key: 'samePage',
-    arm: 'T1-SAMEPAGE',
-    ask: 'SAME PAGE: does it contradict a machine line on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine\'s, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.',
   }),
 ]);
 
@@ -880,12 +871,13 @@ function fieldsFor(card, unit) {
 }
 
 /**
- * ⭐ THE TIER-1 CHECKLIST (design §4). W1 MEASURED that 27 of 50 moved claims are reachable by NO
- * tier-0 arm — the certainty, quantifier and scope classes — which is the whole case for a second
- * pass. It is a CHECKLIST and not a critic: a closed list of yes/no questions about ONE line, on
- * the same model as the writer (ruling 10's conflicted-witness rule applies to BYOK), inside the
- * repair-loop budget. A `yes` on any question is a finding; the unit falls to the corpus like any
- * other FAIL.
+ * ⭐ THE TIER-1 CHECKLIST (design §4; re-cut to ruling 36). The case for a second pass is the
+ * CONTRADICTION no tier-0 arm can see: tier 0 reads ONE ROW AT A TIME and never the page beside
+ * it, so a line that denies a field, a badge or the engine's own model passes every arm there is.
+ * It is a CHECKLIST and not a critic: a closed list of yes/no questions about ONE line, on the same
+ * model as the writer (ruling 10's conflicted-witness rule applies to BYOK), inside the repair-loop
+ * budget. A `yes` is a finding; the row falls to the corpus at its own seat, and a `yes` on the
+ * spine takes the unit.
  *
  * ⛔ THE FACTS ARE THE CARD'S OWN AND NOT A SUMMARY OF THEM. The town, the epoch, the page's
  * machine lines, and — per unit — the FIELD PATHS AND VALUES that unit's pool reads. A checklist
@@ -899,20 +891,29 @@ function fieldsFor(card, unit) {
 export function buildTier1Checklist(units, card) {
   const lines = [
     'Below are lines written for one settlement dossier, and the facts they were written from.',
-    `For EACH numbered line answer the ${TIER1_QUESTIONS.length} questions with \`yes\` or \`no\` and nothing else.`,
+    // ⭐⭐ THE STANDARD, BEFORE THE QUESTIONS (ruling 36). A reader told only what to look for
+    // finds it: RUN 2's seven questions asked whether a line ADDED anything and the reader
+    // answered yes on seven units in ten. These six ask whether it CONTRADICTS anything, and the
+    // sentence below is what keeps them read that way.
+    'THE STANDARD: a line is refused for CONTRADICTING the settlement, and NEVER for adding to it.',
+    'What the facts do not hold, they do not forbid. A practice, a custom, a motive, a belief, an',
+    'interpretation or an absence asserted on a field with no value is FLAVOUR, and it ships unless',
+    'a row or a page line below denies it. You are not asked whether the line was invented.',
+    '',
+    `For EACH numbered line answer these ${TIER1_QUESTIONS.length} CONTRADICTION TESTS with \`yes\` or \`no\` and nothing else.`,
   ];
   TIER1_QUESTIONS.forEach((q, i) => lines.push(`  ${i + 1}. ${q.ask}`));
   lines.push('A `yes` to any question means the line is refused and the hand-written line ships instead.');
   lines.push('Answer for every numbered line, in order, and write nothing outside the schema.');
   lines.push('');
-  // ⭐ THE READER'S EYE — the writer's six bars, one line each, so the two seats hold ONE law.
-  lines.push('THE READER\'S EYE. These are the bars the writer was given, and they are the bars you');
-  lines.push('are reading against. A line that keeps all six is not refused for keeping them.');
+  // ⭐ THE READER'S EYE — the standard the WRITER holds, so the two seats hold ONE law.
+  lines.push('THE READER\'S EYE. This is the law the writer was given, and it is the law you are');
+  lines.push('reading against. A line that keeps it is not refused for keeping it.');
   for (const bar of READERS_EYE) lines.push(`  - ${bar}`);
   lines.push('');
-  // ⭐ AND THE TWO TRUTHS THAT ARE NOT CONTRADICTIONS (W3b car 4). They ride in the town block the
-  // writer and this reader are both given, and they are repeated here because question 7 is the
-  // one they bear on and RUN 2 measured sixty three lines lost for want of them.
+  // ⭐ AND THE TWO TRUTHS THAT ARE NOT CONTRADICTIONS. They ride in the town block the writer and
+  // this reader are both given, and they are repeated here because the PAGE question is the one
+  // they bear on and RUN 2 measured sixty three lines lost for want of them.
   lines.push(TWO_LADDERS);
   lines.push('');
   lines.push(FUNDING_NOTE);

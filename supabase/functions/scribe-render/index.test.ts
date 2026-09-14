@@ -132,9 +132,9 @@ function providerReturning(
   };
 }
 
-/** One tier-1 answer row with every question answered `no`. */
+/** One tier-1 answer row with every CONTRADICTION TEST answered `no` (ruling 36's six). */
 const clean = (n: number) => ({
-  n, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no',
+  n, fieldDenied: 'no', page: 'no', roster: 'no', model: 'no', record: 'no', forecast: 'no',
 });
 
 const lawfulUnit = { blockId: 'DS-DEF-2', poolKey: 'k', vid: 3, spine: 'The watch keeps a short roll.', faces: ['A clerk in the hall says the purse is short.'], notebook: [] };
@@ -341,24 +341,25 @@ scopedEnv.test('⭐ TIER 1 RUNS ON THE SAME TWO CACHED BLOCKS, and only the turn
   assertEquals(sent[1].system[1].cache_control.ttl, '1h');
   // And the volatile halves are NOT: the second turn is the checklist.
   assert(sent[0].messages[0].content !== sent[1].messages[0].content);
-  assert(String(sent[1].messages[0].content).includes('MECHANISM'));
+  assert(String(sent[1].messages[0].content).includes('CONTRADICTION TESTS'));
   assertEquals(sent[1].max_tokens, 4000);
   assertEquals(
     Object.keys(sent[1].output_config.format.schema.properties.answers.items.properties).sort(),
-    ['actor', 'certainty', 'forecast', 'mechanism', 'n', 'quantifier', 'samePage', 'scope'],
+    ['fieldDenied', 'forecast', 'model', 'n', 'page', 'record', 'roster'],
   );
 });
 
-scopedEnv.test('⭐ A YES ON THE MECHANISM QUESTION DROPS THE UNIT TO THE CORPUS', async () => {
+scopedEnv.test('⭐ A YES ON THE RECORD QUESTION, ON THE SPINE, DROPS THE UNIT TO THE CORPUS', async () => {
   const u: Array<{ fn: string; args: unknown }> = [];
   const a: Array<{ fn: string; args: unknown }> = [];
   const res = await handleScribeRender(request(), {
     userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
     adminClient: makeAdminClient({}, a),
-    // Line 1 is the spine; a `yes` on question 6 there drops the whole unit, because a unit ships
-    // whole. Nothing lawful is left, so the render landed nothing and the spend comes back.
+    // Line 1 is the SPINE; a `yes` on the RECORD test there takes the whole unit, because the
+    // spine is the fact. Nothing lawful is left, so the render landed nothing and the spend comes
+    // back. (A `yes` on a FACE would patch that seat instead — see W3b car 3's arm above.)
     anthropicFetch: providerReturning([lawfulUnit], {
-      tier1: [{ ...clean(1), mechanism: 'yes' }, clean(2)],
+      tier1: [{ ...clean(1), record: 'yes' }, clean(2)],
     }),
   });
   assertEquals(res.status, 502);

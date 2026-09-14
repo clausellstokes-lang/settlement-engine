@@ -83,7 +83,7 @@ const SCRIBE_SPEND_ESTIMATE_USD = 0.08;
 /** A tab's card is tens of kilobytes; thirteen tabs of one town run to 261 KB, and this is one. */
 const MAX_BODY_BYTES = 512 * 1024;
 const MAX_OUTPUT_TOKENS = 16_000;
-/** The second reader answers yes or no seven times a line, so its ceiling is a fraction of that. */
+/** The second reader answers yes or no six times a line, so its ceiling is a fraction of that. */
 const TIER1_MAX_OUTPUT_TOKENS = 4_000;
 
 function getCorsHeaders(req?: Request) { return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' }); }
@@ -356,10 +356,11 @@ export async function handleScribeRender(
 
           // ⭐⭐ TIER 1 — THE SECOND READER (design §4; chair ruling 29). It runs only where tier 0
           // kept something, on the SAME two cached system blocks, so its input is almost entirely
-          // a cache read and its output is seven words a line.
+          // a cache read and its output is six words a line.
           //
-          // ⭐ AND IT READS UNDER THE SAME LAW AS THE WRITER (W3b car 4). The checklist opens with
-          // THE READER'S EYE — the writer's own six invention bars — and carries the two-ladders
+          // ⭐ AND IT READS UNDER THE SAME LAW AS THE WRITER (W3b cars 4 and 5). The checklist opens
+          // with THE STANDARD (ruling 36: refused for CONTRADICTING the settlement, never for
+          // adding to it), then THE READER'S EYE and the two-ladders
           // and funding notes that the town block above already gives both seats, because RUN 2
           // measured 63 lines lost to a reader that had been shown the page's badge and never the
           // note saying the badge and the band are two true readings of one score. A row BYTE-EQUAL

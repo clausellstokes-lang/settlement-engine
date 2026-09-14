@@ -146,7 +146,7 @@ export const judgeUnits = (
 export const buildTier1Checklist = (units: ScribeUnit[], card: any): string =>
   buildTier1ChecklistJs(units, card);
 
-/** The seven questions, so a caller can count them without re-spelling them. */
+/** The six contradiction tests (ruling 36), so a caller can count them without re-spelling them. */
 export const TIER1_QUESTIONS = TIER1_QUESTIONS_JS as ReadonlyArray<
   { key: string; arm: string; ask: string }
 >;

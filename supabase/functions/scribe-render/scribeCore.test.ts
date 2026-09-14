@@ -116,13 +116,32 @@ Deno.test('the volatile turn carries the page, the ground and the corpus line', 
   assert(turn.includes('faces to write: 2'));
 });
 
-Deno.test('⭐ THE FOUR GUESSES THE SIMULATION FOUND ARE ANSWERED IN THE BRIEF', () => {
-  // Each of these is a thing an Opus seat had to guess on the W2 prompt, measured 2026-09-14.
+Deno.test('⭐⭐ THE STANDARD IS NON-CONTRADICTION, NOT NON-INVENTION (ruling 36)', () => {
   const text = brief();
-  assert(text.includes('THE SIX WAYS A LINE INVENTS'), 'RUN 2\'s six measured invention classes');
-  assert(text.includes('A BOOLEAN IS A FACT, NOT A PRACTICE'), 'the mechanism class no tier-0 arm can see');
-  assert(text.includes('you may not say a fine, a debt, a backlog or a bribe'),
-    'W3a\'s plausible-addition sentence survives inside the fourth bar');
+  assert(text.includes('THE LINE THAT IS REFUSED, AND THE LINE THAT IS NOT'));
+  assert(text.includes('THE STANDARD IS NON-CONTRADICTION'));
+  assert(text.includes('refused for CONTRADICTING the settlement and never for ADDING to it'));
+  assert(text.includes('silence is permission'));
+  // ⭐ THE SIX THINGS THAT ARE REFUSED, each a contradiction of something the card holds.
+  for (const bar of [
+    'A VALUE A CARD FIELD DENIES',
+    'A PAGE LINE OR A BADGE CONTRADICTED',
+    'A ROLE THE TOWN DOES NOT SEAT, OR A RECORD NO BODY HERE KEEPS',
+    'THE ENGINE\'S OWN MODEL DENIED',
+    'AN EVENT, A DATE OR A NUMBER STATED AS RECORD',
+    'A FORECAST',
+  ]) assert(text.includes(bar), `${bar} is missing from the writer's brief`);
+  // ⛔ AND THE THINGS THAT SHIP. W3b car 1's six invention bars refused every one of these, and
+  // ruling 36 supersedes them: they are the flavour a game master opens the dossier for.
+  assert(text.includes('NOT REFUSED, BECAUSE SILENCE IS PERMISSION'));
+  assert(text.includes('Servants at the inn nursing a sick guest on a town with no'));
+  assert(text.includes('The court\'s business waiting on the parish'));
+  assert(!text.includes('THE SIX WAYS A LINE INVENTS'), 'ruling 35\'s bars are gone');
+  assert(!text.includes('you may not say a fine, a debt, a backlog or a bribe'),
+    'the plausible-addition sentence went with them: a practice is not a contradiction');
+  // ⭐ THE UNKNOWN WORDING, RE-CUT: write around it, but give it no value, count or date.
+  assert(text.includes('AN UNKNOWN FIELD IS ONE YOU MAY WRITE AROUND BUT MAY NOT GIVE A VALUE, A COUNT OR A DATE'));
+  // AND THE REST OF W3a's ANSWERS TO THE FOUR GUESSES STAND.
   assert(text.includes('WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS'),
     'the positive rule is first: a writer told only what not to do still has a seat to fill');
   assert(text.includes('THE TWO LADDERS'), 'the badge word against the band word');
@@ -259,13 +278,21 @@ Deno.test('a clean unit ships with its verdict recorded', () => {
   assertStrictEquals(out.kept[0].spine, 'A line.');
 });
 
-Deno.test('⭐ the tier-1 checklist asks SEVEN questions, not five', () => {
+Deno.test('⭐⭐ the tier-1 checklist asks SIX CONTRADICTION TESTS, and says the standard first', () => {
   const text = buildTier1Checklist([unit()], card);
-  assertEquals(TIER1_QUESTIONS.length, 7);
-  for (const klass of ['CERTAINTY', 'QUANTIFIER', 'SCOPE', 'ACTOR', 'FORECAST', 'MECHANISM', 'SAME PAGE']) {
-    assert(text.includes(klass), `${klass} is missing from the checklist`);
+  assertEquals(TIER1_QUESTIONS.length, 6);
+  for (const klass of ['FIELD', 'PAGE', 'ROSTER', 'MODEL', 'RECORD', 'FORECAST']) {
+    assert(text.includes(`${klass}:`), `${klass} is missing from the checklist`);
   }
-  assert(text.includes('7 questions'), 'the count in the instruction follows the list');
+  assert(text.includes('6 CONTRADICTION TESTS'), 'the count in the instruction follows the list');
+  // ⛔ THE STRUCK FOUR. Ruling 36: every one of them asked whether the line ADDED something, and
+  // the owner's standard is whether it CONTRADICTS something. They drew most of RUN 2's refusals.
+  for (const gone of ['CERTAINTY:', 'QUANTIFIER:', 'SCOPE:', 'MECHANISM:', 'ACTOR:']) {
+    assert(!text.includes(gone), `${gone} was struck by ruling 36 and is still in the checklist`);
+  }
+  assert(text.includes('a line is refused for CONTRADICTING the settlement, and NEVER for adding to it'),
+    'the standard is stated before the questions, or a reader told what to look for finds it');
+  assert(text.includes('You are not asked whether the line was invented.'));
   // The lines are numbered per (unit, row) so an answer maps back to a unit, and the row is named.
   assert(text.includes('1. (spine) A line.'));
   assert(text.includes('2. (face 0) a'));
@@ -275,24 +302,24 @@ Deno.test('⭐ the tier-1 checklist asks SEVEN questions, not five', () => {
   assert(text.includes('FAMILY: acute crisis'), 'the pool the line was written for');
 });
 
-Deno.test('⭐ THE TWO SEATS HOLD ONE LAW: the checklist carries the writer\'s six bars', () => {
+Deno.test('⭐ THE TWO SEATS HOLD ONE LAW: the checklist carries the writer\'s standard', () => {
   // ⛔ RUN 2 MEASURED THE GAP. The writer wrote to the readiness BAND because the brief told it
   // to, and the second reader — shown the page's `Well-Defended` badge and never shown that note
   // — answered SAME PAGE `yes` on it. A checklist asked against a different law from the one the
   // writer was given refuses lines the writer was licensed to write, which is ruling 26's own
   // defect class pointed at the second reader instead of the first.
   const text = buildTier1Checklist([unit()], card);
-  assert(text.includes('THE READER\'S EYE'), 'the preface is the writer\'s own bars');
+  assert(text.includes('THE READER\'S EYE'), 'the preface is the writer\'s own law');
   for (const bar of [
-    'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT',
-    'NO ORIGIN',
-    'NO CONTEST THE CARD DOES NOT NAME',
-    'A BOOLEAN IS A FACT, NOT A PRACTICE',
-    'NO VERDICT THE FACTS\' OWN ROWS DENY',
-    'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS',
+    'a line is refused for CONTRADICTING the settlement, and NEVER for adding to it',
+    'SILENCE IS PERMISSION',
+    'THE TWO LADDERS are two true readings of one score',
+    'THE ONE FLOOR WITH NO EXCEPTION: an event, a date or a number stated as record',
   ]) assert(text.includes(bar), `${bar} is missing from the reader's preface`);
-  // AND THE SAME SIX ARE IN THE WRITER'S BRIEF, so this is one law and not two.
-  for (const bar of ['NO ORIGIN', 'A BOOLEAN IS A FACT, NOT A PRACTICE']) assert(brief().includes(bar));
+  // AND THE SAME LAW IS IN THE WRITER'S BRIEF, so this is one law and not two.
+  for (const bar of ['THE STANDARD IS NON-CONTRADICTION', 'AN EVENT, A DATE OR A NUMBER STATED AS RECORD']) {
+    assert(brief().includes(bar));
+  }
 });
 
 Deno.test('the checklist prints the page\'s machine lines, which question 7 is about', () => {
@@ -310,29 +337,27 @@ Deno.test('the checklist prints the page\'s machine lines, which question 7 is a
   assert(!text.includes('which is NOT a machine line'), 'a composed row is the prose, not the page');
 });
 
-Deno.test('⭐ THE CHECKLIST RIDES UNDER THE SAME LAW: the ladders, the funding note, and the seven', () => {
+Deno.test('⭐ THE CHECKLIST RIDES UNDER THE SAME LAW: the ladders, the funding note, and the six', () => {
   // ⛔ RUN 2 finding 5 in one arm. The writer wrote to the readiness BAND because its brief told
   // it to; this reader, shown the page's `Well-Defended` badge and never shown that note, answered
-  // SAME PAGE `yes` on it, and 63 lines fell that way. The note now rides in the town block BOTH
-  // seats are given and in the question it bears on.
+  // `yes` on it, and 63 lines fell that way. The note now rides in the town block BOTH seats are
+  // given and in the PAGE question it bears on.
   const text = buildTier1Checklist([unit()], card);
   assert(text.includes('THE TWO LADDERS'), 'the ladders note is in the reader\'s turn');
   assert(text.includes('THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE'));
   assert(text.includes('a line that agrees with the band is NOT a contradiction of the badge'),
-    'and question 7 says so in terms');
+    'and the PAGE question says so in terms');
   assert(text.includes('ninety seven percent'), 'the funding pair is named in the question too');
-  // ⭐ QUESTION 1 ASKS THE MEASURED CLASSES, not a question about tone. It drew 177 `yes` lines in
-  // RUN 2 and the reader's own notes name what it was catching.
-  assert(text.includes('does the line state as DECIDED something the facts below leave UNDECIDED'));
-  for (const klass of ['an absence read out of a field with no value', 'an origin',
-    'a contest no relation row names', 'a practice behind a fact that only stands']) {
-    assert(text.includes(klass), `question 1 does not name ${klass}`);
-  }
-  // ⭐ QUESTION 6 KEEPS ITS WORDING and the seven arms stay seven (ruling 29).
-  assert(text.includes('MECHANISM: does it describe how a thing works'));
-  assertEquals(TIER1_QUESTIONS.length, 7);
+  // ⭐ THE FIELD QUESTION ASKS FOR A DENIAL, not for a silence: ruling 36's whole point.
+  assert(text.includes('does the line assert a value a field below DENIES'));
+  assert(text.includes('not a value a field leaves UNKNOWN'));
+  // ⭐ THE RECORD FLOOR IS THE ONE WITH NO EXCEPTION (floor 2, the owner's surviving bar).
+  assert(text.includes('RECORD: does it state an EVENT, a DATE or a NUMBER as record'));
+  assert(text.includes('This is the one floor with no exception.'));
+  // ⭐ AND THE SIX ARMS ARE THE SIX (ruling 36 supersedes ruling 35 and ruling 29's seven).
+  assertEquals(TIER1_QUESTIONS.length, 6);
   assertEquals(TIER1_QUESTIONS.map((q) => q.arm), [
-    'T1-CERTAINTY', 'T1-QUANTIFIER', 'T1-SCOPE', 'T1-ACTOR', 'T1-FORECAST', 'T1-MECHANISM', 'T1-SAMEPAGE',
+    'T1-FIELD', 'T1-PAGE', 'T1-ROSTER', 'T1-MODEL', 'T1-RECORD', 'T1-FORECAST',
   ]);
 });
 
@@ -359,27 +384,27 @@ Deno.test('⛔ THE READER IS SHOWN A VALUELESS FIELD IN THE WRITER\'S OWN WORDS,
 
 Deno.test('⭐ A YES ON A FACE PATCHES THAT SEAT; a yes on the SPINE drops the unit', () => {
   const kept = [unit()];
-  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
+  const no = { fieldDenied: 'no', page: 'no', roster: 'no', model: 'no', record: 'no', forecast: 'no' };
   // Row 1 is the spine, rows 2 and 3 the two faces. A `yes` on the MECHANISM question of row 3.
-  const patch = applyTier1(kept, [{ n: 1, ...no }, { n: 3, ...no, mechanism: 'yes' }], card);
+  const patch = applyTier1(kept, [{ n: 1, ...no }, { n: 3, ...no, record: 'yes' }], card);
   assertEquals(patch.kept.length, 1, 'the unit ships with the corpus at that seat');
   assertEquals(patch.kept[0].faces, ['a', 'face one']);
   assertEquals(patch.dropped, 0);
   assertEquals(patch.patched, 1);
   assertEquals(patch.verdicts[0].verdict, 'PATCHED');
   assertEquals(patch.verdicts[0].patched, ['face 1']);
-  assertEquals(patch.verdicts[0].arms, ['T1-MECHANISM']);
+  assertEquals(patch.verdicts[0].arms, ['T1-RECORD']);
   assertEquals(patch.verdicts[0].poolKey, 'FAMILY: acute crisis');
 
   // THE SPINE IS THE FACT: a yes there takes the whole unit, as it always did.
-  const drop = applyTier1(kept, [{ n: 1, ...no, mechanism: 'yes' }], card);
+  const drop = applyTier1(kept, [{ n: 1, ...no, record: 'yes' }], card);
   assertEquals(drop.kept.length, 0);
   assertEquals(drop.dropped, 1);
   assertEquals(drop.verdicts[0].verdict, 'FAIL');
 
   // ⛔ WITHOUT A CARD THERE IS NO CORPUS FACE TO PATCH WITH, so the unit falls whole. Every caller
   // in the product and the pilot passes one; this is the safe answer for one that cannot.
-  const blind = applyTier1(kept, [{ n: 3, ...no, mechanism: 'yes' }]);
+  const blind = applyTier1(kept, [{ n: 3, ...no, record: 'yes' }]);
   assertEquals(blind.kept.length, 0);
   assertEquals(blind.dropped, 1);
 });
@@ -394,20 +419,20 @@ Deno.test('⭐⭐ A ROW BYTE-EQUAL TO THE CORPUS IS NOT SENT TO THE SECOND READE
   assert(!text.includes('(face 1) face one'), 'the corpus face is exempt');
   assert(text.includes('2. (face 0) a'), 'the model\'s own row is asked, under its own number');
   // AND A `yes` ON AN EXEMPT NUMBER IS IGNORED, because nobody was asked it.
-  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
-  assertEquals(applyTier1([copied], [{ n: 1, ...no, certainty: 'yes' }], card).kept.length, 1);
-  assertEquals(applyTier1([copied], [{ n: 3, ...no, certainty: 'yes' }], card).kept.length, 1);
+  const no = { fieldDenied: 'no', page: 'no', roster: 'no', model: 'no', record: 'no', forecast: 'no' };
+  assertEquals(applyTier1([copied], [{ n: 1, ...no, record: 'yes' }], card).kept.length, 1);
+  assertEquals(applyTier1([copied], [{ n: 3, ...no, record: 'yes' }], card).kept.length, 1);
   // NEGATIVE CONTROL — the row that is NOT the corpus is still refusable.
-  assertEquals(applyTier1([copied], [{ n: 2, ...no, certainty: 'yes' }], card).patched, 1);
+  assertEquals(applyTier1([copied], [{ n: 2, ...no, record: 'yes' }], card).patched, 1);
 });
 
 Deno.test('a clean sheet keeps every unit, and an answer for a line that does not exist is ignored', () => {
   const kept = [unit()];
-  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
+  const no = { fieldDenied: 'no', page: 'no', roster: 'no', model: 'no', record: 'no', forecast: 'no' };
   assertEquals(applyTier1(kept, [{ n: 1, ...no }, { n: 2, ...no }, { n: 3, ...no }], card).kept.length, 1);
   // ⛔ A ROW OUTSIDE THE ENUMERATION IS A REPLY THAT DID NOT FOLLOW THE LIST, and dropping a unit
   // on it would refuse a line nobody read.
-  assertEquals(applyTier1(kept, [{ n: 99, ...no, mechanism: 'yes' }], card).kept.length, 1);
+  assertEquals(applyTier1(kept, [{ n: 99, ...no, record: 'yes' }], card).kept.length, 1);
   assertEquals(applyTier1(kept, [], card).dropped, 0);
 });
 
@@ -416,7 +441,7 @@ Deno.test('the tier-1 answer schema is CLOSED at every level and admits only yes
   assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.additionalProperties, false);
   assertEquals(
     Object.keys(TIER1_ANSWER_SCHEMA.properties.answers.items.properties).sort(),
-    ['actor', 'certainty', 'forecast', 'mechanism', 'n', 'quantifier', 'samePage', 'scope'],
+    ['fieldDenied', 'forecast', 'model', 'n', 'page', 'record', 'roster'],
   );
-  assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.properties.mechanism.enum, ['yes', 'no']);
+  assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.properties.record.enum, ['yes', 'no']);
 });

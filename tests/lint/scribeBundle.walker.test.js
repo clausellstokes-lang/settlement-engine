@@ -288,7 +288,7 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
       faces: pool.unit.faces.map((_, i) => `A clerk in the hall says the keeping is paid out of the common purse, line ${i}.`),
       notebook: [],
     };
-    const faceSheet = [{ n: 2, ...no, mechanism: 'yes' }];
+    const faceSheet = [{ n: 2, ...no, record: 'yes' }];
     const patched = applyTier1([real], faceSheet, CARD);
     expect(patched.kept.length, 'the unit must ship with the corpus at that seat').toBe(1);
     expect(patched.patched).toBe(1);
