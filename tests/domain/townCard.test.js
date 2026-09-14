@@ -26,7 +26,7 @@ import {
 } from '../../src/generators/generateSettlementPipeline.js';
 import {
   townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, WORLD_ONLY_READINGS,
-  UNNAMEABLE_BODIES,
+  UNNAMEABLE_BODIES, DEPARTURE_KEY_WORDS, RECORDED_UPHEAVAL,
 } from '../../src/domain/prose/townCard.js';
 import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
 import {
@@ -475,6 +475,109 @@ describe('townCard — the bodies this page names (W3d car 2)', () => {
   }, 60_000);
 });
 
+describe('townCard — the card\'s own defects, pinned as REPORTS (W3d car 4)', () => {
+  const GRID = Object.freeze([
+    ['render-town', 'town'], ['sim-hamlet', 'hamlet'], ['sim-village', 'village'], ['sim-city', 'city'],
+  ]);
+  const gridTown = (seed, settType) => townOf({
+    settType, culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+  }, seed);
+  /** Every caveat over the four generated towns of the RUN 3 grid and all thirteen tabs. */
+  const sweep = () => {
+    const rows = [];
+    for (const [seed, settType] of GRID) {
+      const s = gridTown(seed, settType);
+      for (const tab of SCRIBE_TABS) {
+        for (const pool of cardOf(s, tab).pools) {
+          for (const caveat of pool.caveats) rows.push({ ...caveat, seed, tab, poolKey: pool.poolKey });
+        }
+      }
+    }
+    return rows;
+  };
+
+  it('⭐⭐ every caveat is a REPORT, and the three fire on the cells RUN 3 found them in', () => {
+    // ⛔ NONE OF THE THREE IS THE SCRIBE'S FAULT and none of them refuses anything: they are the
+    // three places the CARD hands the writer a pool key that says one thing and a page line or a
+    // record that says another, with no field between them. RUN 3's reader flagged all three while
+    // reading lines that were themselves lawful.
+    const rows = sweep();
+    expect(rows.every((r) => r.channel === 'REPORT')).toBe(true);
+    const tally = {};
+    for (const r of rows) tally[r.key] = (tally[r.key] || 0) + 1;
+    expect(tally).toEqual({
+      'a flag count of zero on a town with a recorded upheaval': 2,
+      'departure key with no reading under it': 17,
+      'structure null beside a dangerous page': 1,
+    });
+    const at = (key) => rows.filter((r) => r.key === key).map((r) => `${r.seed}/${r.tab} :: ${r.poolKey}`).sort();
+    // (i) THE `STALLED trade` CASE THE CHAIR NAMED, by name and on its own cell.
+    expect(at('departure key with no reading under it')).toContain('render-town/economics :: STALLED');
+    // (ii) `structure null` BESIDE A PAGE THAT READS DANGEROUS, on the one town of four where the
+    // page actually says it.
+    expect(at('structure null beside a dangerous page'))
+      .toEqual(['sim-hamlet/defense :: structure null (nothing organized recognized)']);
+    // (iii) A FLAG COUNT OF ZERO ON A TOWN WHOSE historicalCharacter NAMES AN OCCUPATION.
+    expect(at('a flag count of zero on a town with a recorded upheaval')).toEqual([
+      'render-town/overview :: flagDriven count zero',
+      'sim-city/overview :: flagDriven count zero',
+    ]);
+  }, 600_000);
+
+  it('⭐ the three NEGATIVE CONTROLS: the same key on a town the caveat is not true of', () => {
+    // (i) A VALUELESS POOL WHOSE KEY NAMES NO DEPARTURE IS NOT CAVEATED. `POSTURE: established` and
+    // `COMBINATION C3: the middle rungs` read nothing this card can resolve either, and nothing
+    // about them asks a writer to explain a departure it was never told the shape of.
+    const town = gridTown('render-town', 'town');
+    const economics = cardOf(town, 'economics').pools;
+    const posture = economics.find((p) => p.poolKey.startsWith('POSTURE'));
+    expect(posture.fields.every((f) => f.unknown === true)).toBe(true);
+    expect(posture.caveats).toEqual([]);
+    // AND A POOL WITH REAL VALUES IS NOT CAVEATED EITHER, whatever its key says.
+    const trade = economics.find((p) => p.poolKey.startsWith('TRADE PROFILE'));
+    expect(trade.fields.some((f) => f.unknown !== true)).toBe(true);
+    expect(trade.caveats).toEqual([]);
+
+    // (ii) THE VILLAGE FIRES `structure null` TOO, and its internal security line reads Moderate,
+    // so the contradiction is not there and neither is the caveat.
+    const village = gridTown('sim-village', 'village');
+    const defense = cardOf(village, 'defense');
+    const structure = defense.pools.find((p) => p.poolKey.startsWith('structure null'));
+    expect(structure, 'the village no longer fires the structure-null pool').toBeTruthy();
+    expect(structure.caveats.map((c) => c.key)).not.toContain('structure null beside a dangerous page');
+    expect(defense.page.some((r) => /^Internal Security/.test(String(r.label ?? '')) && /Dangerous/.test(String(r.text ?? '')))).toBe(false);
+
+    // (iii) THE HAMLET FIRES `flagDriven count zero` TOO, and its historical character names no
+    // occupation and no conquest, so the caveat does not fire.
+    const hamlet = gridTown('sim-hamlet', 'hamlet');
+    const flags = cardOf(hamlet, 'overview').pools.find((p) => p.poolKey.startsWith('flagDriven count zero'));
+    expect(flags, 'the hamlet no longer fires the flag-count pool').toBeTruthy();
+    expect(flags.caveats).toEqual([]);
+    expect(RECORDED_UPHEAVAL.test(hamlet.history.historicalCharacter)).toBe(false);
+    expect(RECORDED_UPHEAVAL.test(town.history.historicalCharacter)).toBe(true);
+    // A SIEGE IS NOT AN OCCUPATION OR A CONQUEST, which is the village's own character line and the
+    // reason the table is these words and not "any upheaval".
+    expect(village.history.historicalCharacter).toContain('Siege');
+    expect(RECORDED_UPHEAVAL.test(village.history.historicalCharacter)).toBe(false);
+  }, 600_000);
+
+  it('the tables are narrow, lower-cased and named, and the rows are key-sorted and stable', () => {
+    expect(DEPARTURE_KEY_WORDS.every((w) => w === w.toLowerCase())).toBe(true);
+    expect(DEPARTURE_KEY_WORDS.length).toBe(10);
+    // ⛔ 17 of the 53 all-valueless pools over the grid, and not the other 36: the table is a
+    // catch and not a blanket.
+    const s = gridTown('render-town', 'town');
+    for (const tab of SCRIBE_TABS) {
+      const card = cardOf(s, tab);
+      for (const pool of card.pools) {
+        expect(pool.caveats.map((c) => c.key)).toEqual([...pool.caveats.map((c) => c.key)].sort());
+        for (const caveat of pool.caveats) expect(Object.keys(caveat)).toEqual(['channel', 'key', 'note']);
+      }
+      expect(townCardJson(card)).toBe(townCardJson(cardOf(s, tab)));
+    }
+  }, 300_000);
+});
+
 describe('townCard — determinism of the trace', () => {
   it('the drawn variant, the roles and the compromised flag are the render\'s own', () => {
     const bad = [];
@@ -808,6 +911,16 @@ describe('townCard — the golden', () => {
    *   listed none of them. NOTHING ELSE MOVED: the only new bytes on any tab are `town.bodies` and
    *   the schema string, the section is identical on all thirteen tabs (it is cache breakpoint
    *   two), and the derivation is re-run by the arms above rather than frozen here.
+   *
+   * 2026-09-14 — RE-RECORDED (W3d car 4), card schema /5 → /6. CAUSE: `pools[].caveats` was added —
+   *   the three defects RUN 3's second reader found in the CARD rather than in the writer, each a
+   *   REPORT and never a refusal: a departure key with no reading under it (the `STALLED` case), a
+   *   `structure null` key beside a page whose internal security line reads Dangerous, and a flag
+   *   count of zero on a town whose historical character names an occupation or a conquest. In each
+   *   the card hands the writer a pool key that says one thing and a page line or a record that says
+   *   another with no field between them, and the writer has to pick; a caveat tells it not to pick.
+   *   NOTHING ELSE MOVED: the only new bytes on any tab are `pools[].caveats` and the schema string,
+   *   and the derivation is re-run by the arms above rather than frozen here.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

@@ -455,6 +455,15 @@ function poolBrief(pool) {
     rows.push('  Return no unit for this pool. The hand corpus draws it, which is the right answer.');
   }
 
+  // ⭐⭐ THE CARD'S OWN DEFECTS AT THIS POOL (W3d car 4). A CAVEAT IS A REPORT AND NEVER A REFUSAL:
+  // RUN 3's reader found three places where the card hands the writer a pool key that says one
+  // thing and a page line or a record that says another, with no field between them, and the writer
+  // had to pick. Told not to pick, it writes the key and asserts nothing behind it. Refusing here
+  // would punish the writer for the card's fault, which is ruling 26's defect class a third time.
+  for (const caveat of (Array.isArray(pool?.caveats) ? pool.caveats : [])) {
+    rows.push(`  CAVEAT: ${String(caveat?.note ?? '')}`);
+  }
+
   if (order && String(order.id ?? '') !== '') {
     rows.push(`  THE ORDER: the corpus spine realises the move order \`${String(order.id)}\` — \`${(Array.isArray(order.moves) ? order.moves : []).join(' then ')}\` (${String(order.licences ?? '')}); keep that order in your spine.`);
   } else {

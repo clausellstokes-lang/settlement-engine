@@ -225,6 +225,33 @@ Deno.test('⭐⭐ THE STANDARD IS NON-CONTRADICTION, NOT NON-INVENTION (ruling 3
   assert(text.includes('THE EXEMPLAR PACK'), 'the pack rides in the cached half');
 });
 
+Deno.test('⭐⭐ A CAVEAT IS PRINTED AT ITS POOL AND REFUSES NOTHING (W3d car 4)', () => {
+  // ⛔ THE THREE DEFECTS RUN 3's READER FOUND IN THE CARD, not in the writer: a departure key with
+  // no reading under it, a `structure null` key beside a page that reads Dangerous, a flag count of
+  // zero on a town whose record names an occupation. In each the card says one thing in the pool
+  // key and another on the page, with no field between them, and the writer has to pick. Told not
+  // to pick, it writes the key and asserts nothing behind it.
+  const withCaveat = {
+    ...card,
+    pools: [{
+      ...card.pools[0],
+      caveats: [
+        { channel: 'REPORT', key: 'departure key with no reading under it', note: 'write the key and assert nothing about what departed' },
+      ],
+    }],
+  };
+  const turn = buildScribeUserTurn({ card: withCaveat });
+  assert(turn.includes('  CAVEAT: write the key and assert nothing about what departed'));
+  // IT SITS INSIDE ITS OWN POOL'S ROW and not in a list of its own, so it cannot be read against
+  // the wrong pool.
+  const at = turn.indexOf('POOL "FAMILY: acute crisis"');
+  assert(at > -1);
+  assert(turn.indexOf('  CAVEAT:') > at);
+  assert(turn.indexOf('  CAVEAT:') < turn.indexOf('THE CORPUS LINE, as the claim and the fallback'));
+  // A POOL WITH NO CAVEAT PRINTS NONE, and a card older than schema /6 carries no key at all.
+  assert(!buildScribeUserTurn({ card }).includes('CAVEAT:'));
+});
+
 Deno.test('the epoch record is carried only when one is given', () => {
   assert(!buildScribeUserTurn({ card }).includes('WHAT HAS MOVED'));
   assert(buildScribeUserTurn({ card, record: { advanceSeq: 2, delta: {} } }).includes('WHAT HAS MOVED'));

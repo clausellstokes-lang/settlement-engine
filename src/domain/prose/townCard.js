@@ -135,8 +135,13 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * of the Watch", "the Commercial Circle and the Administrative Circle") which the town block's
  * roster does not list, so the second reader called a body the engine seated unseated. See
  * `bodiesOf`. The golden was re-recorded for this cause and no other.
+ *
+ * /6 (W3d car 4, 2026-09-14): `pools[].caveats` added — the three defects RUN 3's second reader
+ * found in the CARD rather than in the writer, each a REPORT and never a refusal, so the writer
+ * writes the pool key without asserting the reading the page denies. See `caveatsOf`. The golden
+ * was re-recorded for this cause and no other.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/5';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/6';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -444,6 +449,99 @@ function writeableOf(staticRow, hasWorld) {
   const reads = Array.isArray(staticRow.reads) ? staticRow.reads.map((r) => String(r).toLowerCase()) : [];
   return !(!hasWorld && reads.length > 0
     && reads.every((r) => WORLD_ONLY_READINGS.some((w) => r.includes(w))));
+}
+
+/**
+ * ⭐ THE DEPARTURE WORDS — a pool key that names a state the engine REACHED rather than the ordinary
+ * case. A NAMED TABLE and not a heuristic, in `WORLD_ONLY_READINGS`' own discipline, matched on word
+ * boundaries against the lower-cased key.
+ *
+ * ⛔ IT IS NARROW ON PURPOSE AND ITS CATCH IS MEASURED. Over four generated towns (hamlet, village,
+ * town, city) and all thirteen tabs, 53 fired pools carry field rows of which NOT ONE has a value;
+ * these ten words take 17 of those 53 and leave the rest alone. `POSTURE: established` and
+ * `COMBINATION C3: the middle rungs` are valueless too and are NOT caveated: nothing about them
+ * asks a writer to explain a departure it has not been told the shape of.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEPARTURE_KEY_WORDS = Object.freeze([
+  'stalled', 'dormant', 'absent', 'fractured', 'critical', 'worsening', 'breaking', 'missing',
+  'failed', 'broken',
+]);
+
+/**
+ * ⭐ THE UPHEAVAL WORDS a `historicalCharacter` can name, for the third caveat. Also narrow and also
+ * the brief's own words: an OCCUPATION or a CONQUEST. A siege is deliberately NOT here — the village
+ * of the grid says "The Siege is where that line falls" and a siege is an episode, not a change of
+ * who holds the place, which is what a relationship count could plausibly be read against.
+ * @type {RegExp}
+ */
+export const RECORDED_UPHEAVAL = /\b(?:occupation|occupations|occupied|conquest|conquests|conquered|annexation|annexed)\b/i;
+
+/**
+ * ⭐⭐ THE THREE DEFECTS THE SECOND READER FOUND IN THE CARD (W3d car 4), AS REPORTS.
+ *
+ * ⛔⛔ EACH IS A CORPUS OR ENGINE FINDING AND NONE IS THE SCRIBE'S, which is exactly why none of
+ * them refuses anything. RUN 3's reader flagged all three while reading lines that were themselves
+ * lawful; the writer had been handed a pool key that says one thing and a page or a record that says
+ * another, with no field between them, and it had to pick. A caveat tells it not to pick: WRITE THE
+ * KEY, and assert nothing behind it. A refusal here would punish the writer for the card's fault,
+ * which is ruling 26's defect class a third time.
+ *
+ *   (i)   A DEPARTURE KEY WITH NOTHING UNDER IT. `DS-GEN-18 :: STALLED` fires on the pinned town's
+ *         economics tab and every one of its five readings (`readings`, `readings.activeChains`,
+ *         `readings.exploitation`, `readings.isEntrepot`, `readings.primaryImports`) is UNREADABLE
+ *         BY THIS CARD. The key says a chain has stalled; nothing on the card says which, or since
+ *         when, or what it carried. The reader's own note: it "puts an economic stall onto the
+ *         Garrison ... what no question on the checklist tests is whether a military institution is
+ *         a legitimate SUBJECT for a chain-stall key at all".
+ *   (ii)  `structure null` BESIDE A DANGEROUS PAGE. `DS-DEF-4 :: structure null (nothing organized
+ *         recognized)` fires on the hamlet, whose own `Internal Security.assess` machine line reads
+ *         "Internal security: Dangerous ... Active violence and organized crime make internal order
+ *         the primary threat." Both are the engine's; the key is about what is RECOGNISED and the
+ *         line is about what is HAPPENING, and a writer asked to reconcile them will invent the
+ *         reconciliation (ruling 30's two-ladders class, on a new pair).
+ *   (iii) A FLAG COUNT OF ZERO ON A TOWN WITH A RECORDED UPHEAVAL. `DS-REL-2 :: flagDriven count
+ *         zero` fires on the pinned town whose `historicalCharacter` opens "The Occupation did not
+ *         just change what happened next". RUN 3's reader refused a line here on PAGE: the spine
+ *         read a narrow engine fact (no relationship is flag-driven) as a broad denial (nothing
+ *         particular binds one household to another). The count is of the engine's own flags and
+ *         not of the town's past.
+ *
+ * @param {object} s the settlement
+ * @param {string} poolKey @param {ReadonlyArray<object>} fields the pool's own field rows
+ * @param {ReadonlyArray<object>} page the rendered page rows of this tab
+ * @returns {Array<{channel: string, key: string, note: string}>} sorted by key, byte-stable
+ */
+function caveatsOf(s, poolKey, fields, page) {
+  /** @type {Array<object>} */
+  const out = [];
+  const add = (key, note) => out.push(rec([['channel', 'REPORT'], ['key', key], ['note', note]]));
+  const low = String(poolKey ?? '').toLowerCase();
+
+  const valueless = fields.length > 0 && fields.every((f) => f?.unknown === true);
+  const departure = DEPARTURE_KEY_WORDS.find((w) => new RegExp(`\\b${w}\\b`).test(low));
+  if (valueless && departure) {
+    add('departure key with no reading under it',
+      `this pool's key names a departure (the word \`${departure}\`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried`);
+  }
+
+  if (/structure null/.test(low)) {
+    const dangerous = (Array.isArray(page) ? page : []).find(
+      (row) => /^internal security/i.test(String(row?.label ?? '')) && /\bdangerous\b/i.test(String(row?.text ?? '')),
+    );
+    if (dangerous) {
+      add('structure null beside a dangerous page',
+        'the page\'s own internal security line reads Dangerous beside this key, which says nothing organised is RECOGNISED; both are the engine\'s and both stand, because one is about what is recognised and the other about what is happening; write the key and do not reconcile the two');
+    }
+  }
+
+  if (/flagdriven\s+count\s+zero/.test(low)
+    && RECORDED_UPHEAVAL.test(String(s?.history?.historicalCharacter ?? ''))) {
+    add('a flag count of zero on a town with a recorded upheaval',
+      'this town\'s historical character names an occupation or a conquest while this key counts no tie the engine drove off a flag; the count is of the engine\'s own flags and not of the town\'s past, so write the key as the narrow count it is and read no wider denial out of it');
+  }
+
+  return out.sort((a, b) => compareCodepoint(String(a.key), String(b.key)));
 }
 
 /** The roles a source can speak through here, as a plain sorted list. */
@@ -791,6 +889,10 @@ function poolRow(s, line, ctx) {
       ['variants', staticRow.variants], ['rateBp', staticRow.rateBp],
     ]) : null],
     ['fields', fields],
+    // ⭐ (W3d car 4) THE CARD'S OWN DEFECTS, NAMED WHERE THEY FIRE. Every row is a REPORT: it tells
+    // the writer to keep the pool key and assert nothing behind it, and it refuses nothing. See
+    // `caveatsOf` for the three and for the measurement behind each.
+    ['caveats', caveatsOf(s, poolKey, fields, ctx.pageRows)],
     // ⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL. See `writeableOf`: since car 6 the only
     // answer of false is a WORLD-ONLY reading on a headless town, where the pool key is the
     // default rather than a decision. A pool whose every reading this card cannot resolve stays
@@ -830,6 +932,11 @@ export function townCard(settlement, options) {
     // The one town-level fact a POOL row needs: `writeableOf`'s world-only limb is about a town
     // that belongs to no campaign, and the pool row has no other way to see it.
     ['hasWorld', Boolean(world)],
+    // ⭐ (W3d car 4) THE RENDERED PAGE, so a pool row can see the machine lines printed beside it.
+    // The second caveat is a contradiction BETWEEN a pool key and a page line, which is a fact
+    // neither the pool nor the page carries on its own. It is the same array `page` below is built
+    // from, never a second render.
+    ['pageRows', page],
   ]);
   return sorted([
     ['schema', TOWN_CARD_SCHEMA],
