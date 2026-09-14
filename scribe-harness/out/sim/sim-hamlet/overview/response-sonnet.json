@@ -1,0 +1,164 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "spine": "Nothing here is arranged for buying and selling in quantity. The road passes close enough all the same.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "spine": "Whoever keeps this place running does it on the side. No trade or craft here answers to a formal office.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "spine": "The town has drawn in from its edges, and the ground beyond them now stands empty.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "spine": "These are slow troubles, not sudden ones, and the town has room to work at them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "spine": "Past a certain point the town would no longer be the same place, and it is close to that point now.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "spine": "The town's trouble does not arrive all at once. The town gives up a little more each season than the one before, and gets nothing back.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "spine": "Breaking even, more or less, is how the town's year closes, and that gets watched closely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "spine": "What gets written down about trouble here is a small part of what actually happens, and no one here chooses which part it is.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "spine": "On the terms it currently has, the town gets by, and the judgment falls on the terms, not on the town.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "spine": "Less stands between the town and trouble than its size would suggest.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "spine": "Nothing armed stands ready in the town beyond whoever picks up a tool when trouble comes.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "spine": "What comes out of the wilds finds no one in the town whose job it is to answer it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "spine": "More goes on in the town than its watch keeps track of, and little of it stays hidden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "A careful eye notices first that the town keeps nothing spare.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "No one in the town works magic, keeps an arrangement for it, or expects to need one.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "Food is not something anybody in the town spares a thought for.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "spine": "The road passes close enough to the town that the distance has never needed arguing about.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "spine": "Warmholz amounts to a handful of roofs, and the ground beneath them is the reason there are any at all.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "Ties to the places nearby run the same ordinary course they would anywhere settled, and none of them stands out as anything more.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "One loose thread turns up on a close look at the town, the kind a single institution would be enough to tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

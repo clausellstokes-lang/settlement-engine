@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 19:19:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 19:25:20 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 92dac1c04 Plan: the collection at 09-14 ~19:3x — the long tail enumerated from every record into o
 
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_00f13b26-496** (mtime 09-14 19:19): agent calls 37 (37 distinct) · DONE 31 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
+- **wf_00f13b26-496** (mtime 09-14 19:25): agent calls 47 (47 distinct) · DONE 41 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
     - `a9265e93e` ? · DONE · transcript 09-14 18:49 524 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["DS-ECO-6: the corpus fallback's own second sentence ('nothing organised behind it') is the exact line the brief lists as a refusa
@@ -143,14 +143,24 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a72aaea7e` ? · DONE · transcript 09-14 19:11 481 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 6, "notes": ["The second-sentence rule collides with the fields on three pools: POSTURE reads only a DERIVED exportPosture and COMBINATION C4 o
     - `a4e8398ca` ? · DONE · transcript 09-14 19:15 615 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 6, "notes": ["The card seats only three sources on this hamlet (elders, public, stranger) and every pool in this turn set 'faces to write: 0', 
     - `aceca8482` ? · DONE · transcript 09-14 19:17 567 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 20, "notes": ["Two corpus lines cite 'the watch' (safetyLabel pool, scores.internal pool) but the town block seats no watch \u2014 forceBuckets
-    - `a04bc5064` ? · IN FLIGHT · transcript 09-14 19:12 460 KB · 10 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a04bc5064` ? · DONE · transcript 09-14 19:22 739 KB · 14 tool calls · files: response-sonnet.json · result: {"unitsWritten": 20, "notes": ["DS-STR-1's own 'Overview's own section framing' pool (corpus: troubles are chronic, not urgent) sits in real tension with that s
     - `a32139303` ? · DONE · transcript 09-14 19:15 508 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 8, "notes": ["The pool 'riskLabel: Contested' (DS-POW-4, vid 2) declares {faction} twice with conflicting fills, 'Free Elder Council' and 'F'. 
-    - `a448ba99a` ? · IN FLIGHT · transcript 09-14 19:15 421 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a448ba99a` ? · DONE · transcript 09-14 19:21 608 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 8, "notes": ["DS-POW-4 riskLabel: Contested (vid 2) gives the {faction} slot two different fills for the same pool - \"Free Elder Council\" and
     - `a6732c04e` SECOND · DONE · transcript 09-14 19:18 565 KB · 18 tool calls · files: b2.txt, b3.txt, answers-opus.json · result: {"arms": ["ORDER", "Q", "ORDER", "Q"], "fail": 0, "finalKept": 7, "judgeLine": "verdicts {\"PASS\":5,\"WITHHELD\":2} \u00b7 kept 7 \u00b7 patched 0 (tier 1 patc
-    - `a1a9aa63e` SECOND · IN FLIGHT · transcript 09-14 19:19 553 KB · 9 tool calls · files: answers-opus.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `af45b6ed2` SECOND · IN FLIGHT · transcript 09-14 19:19 550 KB · 13 tool calls · files: answers-sonnet.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `ad54d20f6` SECOND · IN FLIGHT · transcript 09-14 19:19 492 KB · 9 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `acdedec26` SECOND · IN FLIGHT · transcript 09-14 19:19 131 KB · 1 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a1a9aa63e` SECOND · DONE · transcript 09-14 19:20 596 KB · 12 tool calls · files: answers-opus.json · result: {"poolsOnCard": 17, "unitsReturned": 17, "tier0Kept": 17, "tier0Dropped": 0, "tier1Dropped": 0, "finalKept": 17, "pass": 13, "withheld": 4, "fail": 0, "arms": [
+    - `af45b6ed2` SECOND · DONE · transcript 09-14 19:20 572 KB · 14 tool calls · files: answers-sonnet.json · result: {"poolsOnCard": 7, "unitsReturned": 7, "tier0Kept": 5, "tier0Dropped": 2, "tier1Dropped": 1, "finalKept": 4, "pass": 1, "withheld": 3, "fail": 3, "arms": ["Q", 
+    - `ad54d20f6` SECOND · DONE · transcript 09-14 19:22 597 KB · 12 tool calls · files: answers-opus.json · result: {"poolsOnCard": 15, "unitsReturned": 14, "tier0Kept": 13, "tier0Dropped": 1, "tier1Dropped": 0, "finalKept": 13, "pass": 6, "withheld": 7, "fail": 1, "arms": ["
+    - `acdedec26` SECOND · DONE · transcript 09-14 19:22 552 KB · 14 tool calls · files: answers-opus.json · result: {"arms": ["Q"], "fail": 0, "finalKept": 9, "judgeLine": "verdicts {\"PASS\":8,\"WITHHELD\":1} \u00b7 kept 9 \u00b7 patched 0 (tier 1 patched 0) \u00b7 dropped 0
+    - `a94b15d8f` SECOND · DONE · transcript 09-14 19:24 603 KB · 12 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "Q", "WALL-5", "ORDER", "Q", "Q", "T1-FIELD", "T1-PAGE", "X", "Q"], "fail": 2, "finalKept": 15, "judgeLine": "verdicts {\"WITHHELD\":7,\"PASS\":8
+    - `a564144a7` SECOND · DONE · transcript 09-14 19:23 563 KB · 16 tool calls · files: answers-sonnet.json, jl.txt · result: {"arms": ["NON-MOVE", "Q", "ORDER"], "fail": 1, "finalKept": 8, "judgeLine": "verdicts {\"PASS\":7,\"FAIL\":1,\"WITHHELD\":1} \u00b7 kept 8 \u00b7 patched 0 (ti
+    - `a59a7204c` SECOND · IN FLIGHT · transcript 09-14 19:22 500 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a64965034` SECOND · DONE · transcript 09-14 19:24 543 KB · 16 tool calls · files: answers-opus.json · result: {"arms": ["Q", "Q", "C3", "ORDER", "Q"], "fail": 0, "finalKept": 6, "judgeLine": "verdicts {\"WITHHELD\":3,\"PASS\":3} \u00b7 kept 6 \u00b7 patched 0 (tier 1 pa
+    - `a46bc7b0d` SECOND · IN FLIGHT · transcript 09-14 19:23 484 KB · 11 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a5e9faabc` SECOND · IN FLIGHT · transcript 09-14 19:22 469 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a3a2058bb` SECOND · DONE · transcript 09-14 19:25 506 KB · 10 tool calls · files: answers-sonnet.json · result: {"arms": ["Q", "WALL-5", "C3"], "fail": 0, "finalKept": 6, "judgeLine": "verdicts {\"PASS\":3,\"WITHHELD\":3} \u00b7 kept 6 \u00b7 patched 0 (tier 1 patched 0) 
+    - `adfaa6168` SECOND · IN FLIGHT · transcript 09-14 19:25 463 KB · 9 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a7e97d8d6` SECOND · IN FLIGHT · transcript 09-14 19:25 430 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a3a9e496a` SECOND · IN FLIGHT · transcript 09-14 19:25 311 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_43403a50-66b** (mtime 09-14 17:39): agent calls 30 (30 distinct) · DONE 30 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_43403a50-66b/`
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
@@ -426,4 +436,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.10 2.08 2.20
+load: 2.58 2.43 2.33
