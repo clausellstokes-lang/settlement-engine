@@ -6530,11 +6530,11 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`MARKET-NARROW`**
 1. `[ledger]` {settlement}'s market serves the town itself. Little passes through that was not always coming here.
-2. `[street]` What {settlement} makes, {settlement} mostly buys from itself, and the market is the room where that happens.
+2. `[street]` What {settlement} makes, {settlement} mostly buys from itself. Where that happens is the market.
 3. `[counterforce]` No great road feeds {settlement}'s market, and the market has made its peace with that. It is a town's exchange, not a region's.
 
 **`ENTREPOT`**
-1. `[ledger]` {settlement}'s market handles more than the town could ever use, and the difference is the town's living.
+1. `[ledger]` {settlement}'s market handles more than the town could ever use. The town lives on the difference.
 2. `[visitor]` Half of what changes hands in {settlement} is only pausing here. The town has built itself around the pause.
 3. `[street]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 

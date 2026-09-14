@@ -8147,7 +8147,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What {settlement} makes, {settlement} mostly buys from itself, and the market is the room where that happens.",
+          "text": "What {settlement} makes, {settlement} mostly buys from itself. Where that happens is the market.",
           "slots": [
             "settlement"
           ],
@@ -8165,7 +8165,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ENTREPOT": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s market handles more than the town could ever use, and the difference is the town's living.",
+          "text": "{settlement}'s market handles more than the town could ever use. The town lives on the difference.",
           "slots": [
             "settlement"
           ],
