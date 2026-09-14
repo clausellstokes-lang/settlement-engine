@@ -1,15 +1,15 @@
-# LANE-STATUS — written 2026-09-14 06:27:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 06:32:48 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 78941b538 Plan: the Scribe design gains §5c, the owner's four product rules — a REDO that redraws
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 7992713d0 · 59 cars over f2da5a3ee · porcelain 0 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD dd79991f5 · 60 cars over f2da5a3ee · porcelain 0 · last commits:
+    dd79991f5 REWRITE 8b DS-DEF-2, THE 42b CUT: two sharpenings that minted a body the key does not seat put back to the card's own agentless form, and one hedge restored
     7992713d0 REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 4 of 4: the four Economic and five Disaster pools — the dead lane's cut recovered, audited by sixteen seats, its twenty moved claims put back, and the block's whole re-cut now landed under the freeze
     b5738c2ac REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 3 of 4: the open town, the three legal-chain pools and Economic STRONG, cut under all five rulings at once — and a second move-grammar trap caught before it landed
     8d9a51d9c REWRITE 8b DS-DEF-2: BATCH 1 RE-OPENED UNDER RULING 42d — sixteen speakers put back into their own sentences, two named as unfixable rather than forced, and the verb the first cut over-spent
-    a9b460eac REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 2 of 4: the settled pool and the six Invasion pools, THE FIRST CUT UNDER RULING 42d — every speaker's stake made legible, and a page-register hazard found by execution
     receipt `receipt-rewrite.md` (mtime 09-12 20:49) head:
       | # RECEIPT — the REWRITE train
       | 
@@ -129,4 +129,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 3.34 2.89 2.85
+load: 1.96 2.87 2.90
