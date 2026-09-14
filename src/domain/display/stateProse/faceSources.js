@@ -66,8 +66,34 @@ import {
   INSTITUTION_ROLES, PUBLIC_ROLES_BY_TIER, ROSTER_OFFICE_TITLES, SOURCE_FALLBACK_ROLES,
 } from '../../../data/institutionRoles.js';
 import {
-  COMPROMISABLE_SOURCES, FACE_SOURCES, PUBLIC_SOURCE, UNIVERSAL_SOURCES,
+  COMPROMISABLE_SOURCES, FACE_SOURCES, PUBLIC_SOURCE, UNIVERSAL_SOURCES, scribeBlocksFrom,
 } from './stateProseKernel.js';
+
+/**
+ * The settlement's Scribe artefact, or null. Typed as an unknown member read rather than cast,
+ * because the artefact's own shape is the kernel's to validate and this file only has to hand it
+ * over. `src/domain/display/` is the one subtree the FINITE-SEMANTICS pin exempts, and drawing the
+ * prose is exactly why.
+ * @param {{[key: string]: unknown}|null|undefined} settlement @returns {unknown}
+ */
+function proseOf(settlement) {
+  return settlement && typeof settlement === 'object' ? settlement.prose : null;
+}
+
+/**
+ * The engine fingerprint a rendered artefact must match before its words may be drawn (design §7).
+ * It is the WORLD'S own two versions, read off the settlement, rather than this build's constants:
+ * a settlement stamps `generatorVersion` and `simulationVersion` at generation and a migration is
+ * what moves either one, so this is exactly "the world's pinned version" the design names, and it
+ * needs no import to read.
+ * @param {{[key: string]: unknown}|null|undefined} settlement
+ * @returns {string}
+ */
+function engineVersionOf(settlement) {
+  const gen = settlement ? settlement.generatorVersion : undefined;
+  const sim = settlement ? settlement.simulationVersion : undefined;
+  return `gen-${String(gen ?? '')}/sim-${String(sim ?? '')}`;
+}
 
 /**
  * The sources that resolve on every town, whatever it holds: the STRANGER, who has the roads,
@@ -412,6 +438,24 @@ export function withFaceSources(settlement, options) {
       settlementId: settlement && typeof settlement === 'object'
         ? String(settlement.id ?? settlement._seed ?? '') : '',
       year: renderYearOf(settlement),
+      // ⭐ THE SCRIBE'S CANDIDATE WORDS (design §5 READ; the kernel's `scribeBlocksFrom`). The ONE
+      // thing the Scribe changes about drawing a page: where the composer would read a corpus
+      // variant's text it reads the RENDERED text, for the variant the render was made for and no
+      // other, so the drawn vid is identical and every downstream function runs unchanged. It
+      // rides here for the same reason the roster and the covert half do: the composer may not
+      // read a settlement, and this is the one place on the path that may. Null on every page
+      // today, because the draw is OFF by default and the app pushes the flag in.
+      //
+      // ⭐ THE ENGINE GATE IS THE WORLD'S OWN VERSIONS, not this build's constants (design §7:
+      // the display reads the artefact while its engine matches THE WORLD'S pinned version). A
+      // settlement carries `generatorVersion` and `simulationVersion` as its own top-level facts,
+      // so a migration that moves either one invalidates prose written under the old engine, and
+      // an imported town whose artefact was rendered under different versions draws the corpus.
+      // Reading the world's numbers also keeps this file's fenced six-import list untouched.
+      scribe: scribeBlocksFrom(proseOf(settlement), {
+        seed: typeof given.seed === 'string' ? given.seed : '',
+        engineVersion: engineVersionOf(settlement),
+      }),
     })
   );
 }

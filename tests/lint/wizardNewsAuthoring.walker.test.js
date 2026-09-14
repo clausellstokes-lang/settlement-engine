@@ -144,12 +144,20 @@ describe('Wizard News authoring presence — static census wall', () => {
   // lines above this site when it threaded the campaign's pending epoch into the preview
   // literal; the excluded object literal's own bytes never changed, which is what the
   // identical `f4ac01180f8aaf35` proves. Re-anchored at measured truth, not widened.
+  // EXACT RE-PIN 2026-09-14, THE SAME SHAPE A THIRD TIME: `line` moved 859 -> 940, SIGNATURE
+  // UNCHANGED (`f4ac01180f8aaf35`). The cause is SCRIBE W2 commit 2 (the undone epoch is saved),
+  // which added eighty-one lines ABOVE this site: the artefact writer's import, the
+  // `withMovedProse` helper, the chokepoint's new parameter and its doc block, the per-saveId
+  // moved-prose map, and the two callers' restore-depth blocks. The excluded object literal's own
+  // bytes never changed, which is exactly what the identical signature proves. Re-anchored at
+  // measured truth, not widened: the ceiling is still 19, no row was added, and the exclusion is
+  // still the one store-side proposal-undo snapshot it has always been.
   test('the store-side proposal undo snapshot is the one exact non-authoring exclusion', () => {
     expect(census.candidateSites.length).toBe(census.sites.length + 1);
     expect(census.excludedSites).toEqual([
       expect.objectContaining({
         path: 'src/store/campaignWorldPulseDeferred.js',
-        line: 859,
+        line: 940,
         column: 23,
         signature: 'f4ac01180f8aaf35',
         routeField: 'kind',

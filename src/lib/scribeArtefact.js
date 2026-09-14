@@ -67,6 +67,42 @@ export const SCRIBE_PAST_EPOCH_LIMIT = 12;
 /** The states a past-lane epoch can be in. `lived` is an epoch the world moved past. */
 export const SCRIBE_EPOCH_STATES = Object.freeze(['lived', 'undone', 'redone']);
 
+/**
+ * ⭐ THE SHAPE, TYPED ONCE. Spelled here so `isArtefact` can be a TYPE PREDICATE: every reader
+ * below narrows `unknown` through it and none of them needs a cast, which is what keeps this
+ * module clean under `tsconfig.full.json` (an un-baselined file must be typecheck-clean).
+ *
+ * @typedef {object} ScribeUnit
+ * @property {number} [vid] the ANNEX row the render was made for, never the pool index
+ * @property {string} [spine]
+ * @property {string[]} [faces]
+ * @property {string[]} [notebook]
+ * @property {string[]} [verdicts]
+ * @property {object} [report]
+ */
+
+/** @typedef {Record<string, Record<string, ScribeUnit[]>>} ScribeBlocks */
+
+/**
+ * @typedef {object} ScribeEpoch
+ * @property {number} advanceSeq
+ * @property {string} [nonce]
+ * @property {string} [renderedAt]
+ * @property {string} [state]
+ * @property {string} [undoneAt]
+ * @property {string} [redoneAt]
+ * @property {ScribeBlocks} [blocks]
+ */
+
+/**
+ * @typedef {object} ScribeArtefact
+ * @property {number} schema
+ * @property {{scribe?: string, engine?: string, refuter?: string, model?: string}|null} version
+ * @property {string} renderedFor
+ * @property {{advanceSeq: number, renderedAt: string, blocks: ScribeBlocks}|null} current
+ * @property {ScribeEpoch[]} epochs
+ */
+
 const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const str = (v) => (v === null || v === undefined ? '' : String(v));
 
@@ -80,7 +116,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
  * The empty artefact. A settlement that has never been scribed has NO `prose` key at all
  * (absent, not empty) so the 525-town generator golden master is byte-identical either way.
  * @param {{renderedFor?: string, version?: object}} [init]
- * @returns {object}
+ * @returns {ScribeArtefact}
  */
 export function emptyArtefact(init = {}) {
   return {
@@ -97,10 +133,11 @@ export function emptyArtefact(init = {}) {
  * reader below rather than half-read, which is the estate's fail-closed posture for a shape it
  * cannot promise to understand.
  * @param {unknown} prose
- * @returns {boolean}
+ * @returns {prose is ScribeArtefact}
  */
 export function isArtefact(prose) {
-  return isObj(prose) && prose.schema === SCRIBE_ARTEFACT_SCHEMA;
+  return isObj(prose)
+    && /** @type {{schema?: unknown}} */ (prose).schema === SCRIBE_ARTEFACT_SCHEMA;
 }
 
 /**
@@ -371,31 +408,36 @@ function rotate(lane, limit) {
  * settlement whose live blob still holds the prose, so stripping loses nothing: a restore
  * re-attaches from the live object, and a bought dossier renders on its first save.
  *
- * @template {object} S @param {S|null|undefined} settlement @returns {S|null|undefined}
+ * @template {{[key: string]: unknown}} S
+ * @param {S|null|undefined} settlement @returns {S|null|undefined}
  */
 export function stripProse(settlement) {
   if (!isObj(settlement)) return settlement;
   if (!(SCRIBE_SETTLEMENT_KEY in settlement)) return settlement;
   const next = { ...settlement };
   delete next[SCRIBE_SETTLEMENT_KEY];
-  return /** @type {any} */ (next);
+  return next;
 }
 
 /**
  * Attach an artefact to a settlement, or remove it when the artefact is empty. THE ONLY write
  * of the key in the estate; every other module goes through here.
- * @template {object} S @param {S} settlement @param {object|null} prose @returns {S}
+ * @template {{[key: string]: unknown}} S
+ * @param {S} settlement @param {unknown} prose @returns {S}
  */
 export function attachProse(settlement, prose) {
   if (!isObj(settlement)) return settlement;
-  if (!isArtefact(prose)) return /** @type {any} */ (stripProse(settlement));
-  return /** @type {any} */ ({ ...settlement, [SCRIBE_SETTLEMENT_KEY]: prose });
+  if (!isArtefact(prose)) return /** @type {S} */ (stripProse(settlement));
+  return { ...settlement, [SCRIBE_SETTLEMENT_KEY]: prose };
 }
 
-/** Read the artefact off a settlement, or null. @param {unknown} settlement */
+/**
+ * Read the artefact off a settlement, or null.
+ * @param {unknown} settlement @returns {ScribeArtefact|null}
+ */
 export function proseOf(settlement) {
   if (!isObj(settlement)) return null;
-  const prose = /** @type {any} */ (settlement)[SCRIBE_SETTLEMENT_KEY];
+  const prose = /** @type {{[key: string]: unknown}} */ (settlement)[SCRIBE_SETTLEMENT_KEY];
   return isArtefact(prose) ? prose : null;
 }
 

@@ -150,7 +150,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `200_deity_authored_character.sql`** (this
+**Current migration head: `201_scribe_prose_dm_full_strip.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -164,6 +164,14 @@ migrations are additive and need no separate reading; these are the pending ones
 posture an operator has to know, and they stay listed here after they are applied
 because the fact does not expire:
 
+- `201_scribe_prose_dm_full_strip.sql` — **inert privacy hardening, safe to apply whenever the
+  train is applied, and it does not switch anything on.** It recreates `_gallery_dm_full_json`
+  from 129 VERBATIM with one more key on the drop chain, `- 'prose'`, so the Scribe's rendered
+  dossier prose (`settlement.prose`) is not published by a `gallery_share_dm` opt-in. The PUBLIC
+  gallery projection already drops it by fail-closed omission from migration 050's top-level
+  allowlist and is not touched. Its client twin is the same one-line drop in
+  `toPublicSafe({full:true})`, landed in the same commit. Nothing renders and nothing is billed
+  until `FLAGS.scribe` is lit, which is a separate owner act.
 - `188_reviewed_supply_chain_persistence.sql` — the one migration in the train that acts
   **at push time**: its `DO $$` block runs during `db push` itself and quarantines every
   legacy `custom_content_definitions` row with `category = 'supplyChains'`, deleting, per

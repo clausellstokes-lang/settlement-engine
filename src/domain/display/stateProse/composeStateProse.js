@@ -88,6 +88,11 @@ import {
   joinPairFaces,
   pairJoint,
   variantIsAudible,
+  // ⭐ THE SCRIBE'S CANDIDATE-SET SWITCH (design §5 READ; W2 commit 4). It lives in the KERNEL
+  // because the composer's import list is fenced to exactly two specifiers and a fence is not
+  // moved to make room for a feature — and because substituting words into variants is what this
+  // kernel already is: pure, import-free, about words rather than about a town.
+  scribeVariantPool,
   openerClassOf,
   faceSentenceCount,
   UNIT_SENTENCE_CAP,
@@ -100,6 +105,13 @@ import {
 // so the edge costs ONE file and 2,046 bytes, against the four files and 150,231 bytes a
 // lexicon import was priced at and refused at car 8a-4. The leaf imports nothing itself.
 import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.js';
+
+/**
+ * The Scribe's rendered words, by block and pool key, as `faceSources.js` puts them on the read.
+ * Each entry is one pool's rendered units; the kernel's `scribeVariantPool` decides, per variant,
+ * whether a unit fits the variant it claims to be for.
+ * @typedef {Record<string, Record<string, ReadonlyArray<object>>>} ScribeBlocks
+ */
 
 /**
  * One piece of a composed unit — the provenance row a manifest cell carries.
@@ -695,13 +707,23 @@ function commitRoles(read, claimed) {
  * @param {string} poolKey
  * @param {'spine'|'modifier'|'turn'} role
  * @param {{slots: Record<string, unknown>, seed: string, audience: string,
- *   dimensions: Record<string, string>, sources: ReadonlySet<string>|ReadonlyArray<string>|null}} read
+ *   dimensions: Record<string, string>, sources: ReadonlySet<string>|ReadonlyArray<string>|null,
+ *   scribe?: ScribeBlocks|null}} read
  * @param {{relation?: string, seat?: string}} [typing]
  * @returns {{variant: import('./stateProseKernel.js').StateProseVariant, raw: string,
  *   text: string, source: string|null, pieces: ComposedPiece[]}|null}
  */
 function drawPiece(block, blockId, poolKey, role, read, typing = {}) {
-  const pool = block.pools ? block.pools[poolKey] : undefined;
+  // ⭐ THE SCRIBE'S ONE CHANGE TO THE CHAIN (design §5 READ). The overlay returns the SAME ARRAY
+  // REFERENCE unless this town has rendered words for this pool AND they fit the variant they
+  // claim, so the corpus path is byte-identical and identity-identical. When they do apply, only
+  // the WORDS move: `eligibleVariants` and `drawVariant` below run over the same variants in the
+  // same order and return the same vid, which is why the corpus and the Scribe agree on what a
+  // seed shows and why every step after this one is untouched.
+  const pool = scribeVariantPool(
+    block.pools ? block.pools[poolKey] : undefined,
+    read.scribe ? read.scribe[blockId]?.[poolKey] : undefined,
+  );
   if (!Array.isArray(pool) || pool.length === 0) return null;
   const eligible = eligibleVariants(pool, read);
   const variant = drawVariant(eligible, blockId, poolKey, read.seed);
@@ -1166,7 +1188,7 @@ function arrange(spineText, modifier) {
  * @param {{spineKey?: string|null, candidates?: ReadonlyArray<StateProseCandidate>,
  *   turns?: ReadonlyArray<{key: string}>, slots?: Record<string, unknown>,
  *   seed?: string|null, audience?: string, dimensions?: Record<string, string>,
- *   sources?: ReadonlySet<string>|ReadonlyArray<string>|null,
+ *   sources?: ReadonlySet<string>|ReadonlyArray<string>|null, scribe?: ScribeBlocks|null,
  *   leaves?: ProseLeaves}} [options] `leaves` defaults to the three floors above; `sources`
  *   is the town's roster of powers (`faceSources.js` `sourcesOf`, put on by the desk's
  *   `withFaceSources`) — absent reads as the stranger alone (kernel `eligibleFaces`)
@@ -1206,6 +1228,11 @@ export function composeStateProse(corpus, blockId, options = {}) {
     // preference reads only the LAST entry; the whole trail is kept because ruling 36's "veto
     // on a RUN of three" needs it and because the block measure can count it.
     drawnOpeners: Array.isArray(options.drawnOpeners) ? options.drawnOpeners : [],
+    // ⭐ THE SCRIBE'S CANDIDATE WORDS (design §5 READ). Built by `withFaceSources`, carried here
+    // because THE READ IS A CLOSED OBJECT and a key added there and not here is silently dropped
+    // — the trap the comment above records, which once silenced every face of a re-cut pool.
+    // Null on every page today: the draw is off by default and no settlement carries an artefact.
+    scribe: options.scribe && typeof options.scribe === 'object' ? options.scribe : null,
   };
 
   const turn = seatedTurn(block, spineKey, options.turns, read);
@@ -1304,7 +1331,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
  *   turns?: ReadonlyArray<{key: string}>}>} rungs in the desk's own order, which is preserved
  * @param {{slots?: Record<string, unknown>, seed?: string|null, audience?: string,
  *   dimensions?: Record<string, string>, sources?: ReadonlySet<string>|ReadonlyArray<string>|null,
- *   limit?: number, leaves?: ProseLeaves}} [options]
+ *   scribe?: ScribeBlocks|null, limit?: number, leaves?: ProseLeaves}} [options]
  *   `limit` defaults to `COMPOSITION_BOUNDS.modifierBearingRungs`
  * @returns {Array<ComposedUnit|null>} one entry per rung, in the rungs' own order
  */
@@ -1342,6 +1369,11 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
     // preference reads only the LAST entry; the whole trail is kept because ruling 36's "veto
     // on a RUN of three" needs it and because the block measure can count it.
     drawnOpeners: Array.isArray(options.drawnOpeners) ? options.drawnOpeners : [],
+    // ⭐ THE SCRIBE'S CANDIDATE WORDS (design §5 READ). Built by `withFaceSources`, carried here
+    // because THE READ IS A CLOSED OBJECT and a key added there and not here is silently dropped
+    // — the trap the comment above records, which once silenced every face of a re-cut pool.
+    // Null on every page today: the draw is off by default and no settlement carries an artefact.
+    scribe: options.scribe && typeof options.scribe === 'object' ? options.scribe : null,
   };
 
   const ranked = rows.map((rung, at) => {

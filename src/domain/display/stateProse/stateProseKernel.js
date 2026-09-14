@@ -1591,3 +1591,175 @@ export const PAIR_HALF_SENTENCE_CAP = 2;
 export const WEIGHED_PAIR_HALVES_TOTAL = 2;
 /** A `simple` pool's per-face ceiling (ruling 37: two, not one). */
 export const SIMPLE_POOL_SENTENCE_CAP = 2;
+
+// ── THE SCRIBE'S CANDIDATE WORDS (design §5 READ; W2 commit 4) ───────────────────────────────
+//
+// ⭐ THE WHOLE SWITCH, in one sentence: where the composer would read a corpus variant's TEXT, it
+// reads the RENDERED text instead, for the variant the render was made for and for nothing else.
+// `eligibleVariants` and `drawVariant` then run over the SAME array of the SAME variants in the
+// same order, so THE DRAWN VID IS IDENTICAL — the corpus and the Scribe agree on which variant a
+// seed shows, and every downstream step (face seating, pairs, the compromised roll, roles, the
+// connective, the arrangement, `legibilityRung`, the mounts) runs unchanged because nothing about
+// the variant except its words has moved.
+//
+// ⛔ WHY THIS LIVES IN THE KERNEL AND NOT IN A NEW LEAF. The composer's import list is fenced to
+// exactly two specifiers and `faceSources.js` to exactly six (`tests/lint/composeStateProseFence.test.js`),
+// and a fence is not moved to make room for a feature. Both functions below are what this kernel
+// already is — pure, import-free, and about WORDS rather than about a town — so they belong here
+// on their merits and the seam does not widen by one edge.
+//
+// ⛔ WHY THE ARTEFACT STORES WORDS AND NOT WHOLE VARIANTS. It would have been shorter to persist
+// annex variants and swap the pool. Three things make that wrong, and the third is a wall:
+//   1. A CORPUS RE-CUT WOULD NOT REACH THE PROSE. The clarity programme moves sources, pairs,
+//      marks and slots; an artefact holding its own copy would drift out of the annex silently.
+//      Holding only WORDS means every structural re-cut re-seats the rendered text for free.
+//   2. THE BLOB WOULD CARRY THE GRAMMAR TWICE, for every pool of every scribed town.
+//   3. ⛔ A STORED VARIANT IS AN INJECTION SURFACE. Marks decide audience; `sources` decide which
+//      power speaks; `pairs` decide who is quoted against whom; `slots` decide what is filled. A
+//      blob that could carry those could mint a DM-only line onto a player page or seat a power
+//      the town does not hold. Persisting WORDS alone means the artefact cannot say any of that:
+//      the grammar is always the corpus's.
+
+/** The artefact shape this kernel understands. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`. */
+export const SCRIBE_DRAW_SCHEMA = 1;
+
+/**
+ * One rendered unit as the artefact stores it: the ANNEX row it was written for, and the words.
+ * Nothing else, which is the wall the header above describes.
+ * @typedef {{vid?: unknown, spine?: unknown, faces?: unknown}} ScribeDrawUnit
+ */
+
+/**
+ * A corpus variant as this overlay reads it. Spelled structurally rather than as
+ * `StateProseVariant` because only four of its fields matter here and the overlay must stay
+ * strict-clean.
+ * @typedef {{vid?: unknown, text?: unknown, slots?: unknown, wordings?: unknown}} ScribeDrawVariant
+ */
+
+/** @typedef {Record<string, Record<string, ReadonlyArray<ScribeDrawUnit>>>} ScribeDrawBlocks */
+
+/** @type {boolean} */
+let scribeDraw = false;
+
+/**
+ * ⛔ THE DRAW SWITCH IS PUSHED IN, NEVER READ. Nothing under `src/domain/` imports `lib/flags.js`
+ * anywhere in this estate (measured: zero importers), and this keeps that true by TAKING the
+ * answer instead of asking for it. The default is OFF, so a build with the flag dark draws the
+ * hand corpus even for a town carrying an artefact from a session when the flag was lit.
+ * @param {boolean} on
+ */
+export function setScribeDraw(on) {
+  scribeDraw = on === true;
+}
+
+/** Is the Scribe's text drawn at all in this process. @returns {boolean} */
+export function scribeDrawEnabled() {
+  return scribeDraw;
+}
+
+/**
+ * ⭐ THE BLOCKS A PAGE MAY DRAW FROM, or null — read off the ARTEFACT, never off a settlement, so
+ * this kernel still names the words and never the town.
+ *
+ * Null is the answer for: the draw being off; no artefact; a shape this build does not know; a
+ * render made for a DIFFERENT SEED (an import, a reroll, a restored clone); and a render whose
+ * engine does not match the world's. Each of those falls back to the hand corpus WHOLE, never to
+ * a mix within a pool.
+ *
+ * @typedef {{schema?: unknown, renderedFor?: unknown, version?: {engine?: unknown},
+ *   current?: {blocks?: ScribeDrawBlocks}|null}} ScribeArtefactRead
+ *
+ * @param {unknown} prose the settlement's artefact
+ * @param {{seed?: string, engineVersion?: string}} [q]
+ * @returns {ScribeDrawBlocks|null}
+ */
+export function scribeBlocksFrom(prose, q = {}) {
+  if (!scribeDraw) return null;
+  if (!prose || typeof prose !== 'object' || Array.isArray(prose)) return null;
+  const artefact = /** @type {ScribeArtefactRead} */ (prose);
+  if (artefact.schema !== SCRIBE_DRAW_SCHEMA) return null;
+  const current = artefact.current;
+  if (!current || typeof current !== 'object') return null;
+  const blocks = current.blocks;
+  if (!blocks || typeof blocks !== 'object') return null;
+  const seed = typeof q.seed === 'string' ? q.seed : '';
+  if (seed && String(artefact.renderedFor ?? '') !== seed) return null;
+  const engine = typeof q.engineVersion === 'string' ? q.engineVersion : '';
+  if (engine && String(artefact.version?.engine ?? '') !== engine) return null;
+  return blocks;
+}
+
+/**
+ * The `{slot}` names a piece of text names. Its own tiny scan rather than a shared one, because
+ * `fillSlots` above consumes what it finds and this only has to list it.
+ * @param {string} text @returns {string[]}
+ */
+function slotNamesIn(text) {
+  return [...String(text).matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]);
+}
+
+/**
+ * Does one rendered unit fit the variant it claims to be for. Every clause below is a way the
+ * words and the grammar could have come apart, and each drops the unit rather than half-applying
+ * it. The FACE COUNT matters most: `wordings[i]` is aligned by INDEX with `sources[i]` and
+ * `pairs[i]`, so a unit one face short would put the wrong power's name on the wrong sentence.
+ * A `{slot}` the variant never declared is refused too, because `fillSlots` would return null on
+ * it and silence the face — a fail-closed path is the right answer but a silent page is not.
+ * @param {ScribeDrawVariant} variant @param {ScribeDrawUnit} unit @returns {boolean}
+ */
+function scribeUnitFits(variant, unit) {
+  const spine = typeof unit.spine === 'string' ? unit.spine.trim() : '';
+  if (spine === '') return false;
+  const declared = Array.isArray(variant.slots) ? variant.slots.map(String) : [];
+  if (slotNamesIn(spine).some((name) => !declared.includes(name))) return false;
+  const wordings = Array.isArray(variant.wordings) ? variant.wordings : null;
+  const faces = Array.isArray(unit.faces) ? unit.faces : null;
+  if (wordings === null) return faces === null || faces.length === 0;
+  if (faces === null || faces.length !== wordings.length) return false;
+  for (const face of faces) {
+    const row = typeof face === 'string' ? face.trim() : '';
+    if (row === '') return false;
+    if (slotNamesIn(row).some((name) => !declared.includes(name))) return false;
+  }
+  return true;
+}
+
+/**
+ * ⭐ THE OVERLAY. Returns the SAME ARRAY REFERENCE whenever nothing applies, so the ordinary page
+ * — every page at this tip — allocates nothing and every identity the composer relies on is
+ * untouched.
+ *
+ * @param {ReadonlyArray<ScribeDrawVariant>|undefined} pool the corpus pool for this block and key
+ * @param {ReadonlyArray<ScribeDrawUnit>|undefined} units the artefact's rendered units for it
+ * @returns {ReadonlyArray<ScribeDrawVariant>|undefined}
+ */
+export function scribeVariantPool(pool, units) {
+  if (!scribeDraw) return pool;
+  if (!Array.isArray(pool) || pool.length === 0) return pool;
+  if (!Array.isArray(units) || units.length === 0) return pool;
+
+  /** @type {Map<unknown, ScribeDrawUnit>} */
+  const byVid = new Map();
+  for (const unit of units) {
+    if (unit && typeof unit === 'object' && unit.vid !== undefined && unit.vid !== null) {
+      byVid.set(unit.vid, unit);
+    }
+  }
+  if (byVid.size === 0) return pool;
+
+  let touched = false;
+  const out = pool.map((variant) => {
+    const unit = variant && typeof variant === 'object' ? byVid.get(variant.vid) : undefined;
+    if (!unit || !scribeUnitFits(variant, unit)) return variant;
+    touched = true;
+    const text = String(unit.spine).trim();
+    // Built as ONE literal per branch rather than mutated after the spread, so the returned
+    // variant is a plain frozen-shaped clone and nothing reads a half-written object.
+    const faces = Array.isArray(unit.faces) ? unit.faces.map((face) => String(face).trim()) : null;
+    if (Array.isArray(variant.wordings) && faces !== null) {
+      return { ...variant, text, wordings: faces };
+    }
+    return { ...variant, text };
+  });
+  return touched ? out : pool;
+}

@@ -21,6 +21,7 @@
 import { useEffect } from 'react';
 import { useStore } from '../store/index.js';
 import { flag } from '../lib/flags.js';
+import { setScribeDraw } from '../domain/display/stateProse/stateProseKernel.js';
 
 /**
  * @param {{enabled?: boolean, saveId?: string|null}} options
@@ -29,6 +30,13 @@ import { flag } from '../lib/flags.js';
  *   it, and never cause a render or a charge themselves.
  */
 export function useScribeOpenTrigger({ enabled = true, saveId = null } = {}) {
+  // ⛔ THE DRAW SWITCH IS PUSHED IN, SYNCHRONOUSLY, BEFORE THE TABS COMPOSE. Nothing under
+  // `src/domain/` reads a feature flag anywhere in this estate, and the composer's switch keeps
+  // that true by taking the answer instead of asking for it. It is set here rather than in the
+  // effect because an effect runs AFTER the first paint: the tabs would compose the hand corpus
+  // once, the switch would flip, and nothing would re-render. The kernel imports NOTHING (pinned
+  // by the composer's fence), so this static import adds one dependency-free file and no closure.
+  setScribeDraw(flag('scribe'));
   const settlementSeed = useStore(s => String(s.settlement?._seed ?? s.settlement?.id ?? ''));
   const campaignId = useStore(s => {
     if (saveId == null || typeof s.getCampaignForSettlement !== 'function') return '';

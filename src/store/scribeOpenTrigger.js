@@ -70,7 +70,8 @@ export function resetScribeAttempts() {
  *
  * @param {{settlement?: object|null, activeSaveId?: string|null, campaignId?: string|null,
  *   advanceSeqByCampaign?: Record<string, number>}} state
- * @param {{saveId?: string|null, flagOn?: boolean, hasRenderer?: boolean}} [ctx]
+ * @param {{saveId?: string|null, campaignId?: string|null, flagOn?: boolean,
+ *   hasRenderer?: boolean}} [ctx]
  * @returns {{render: boolean, reason: string, saveId: string, advanceSeq: number,
  *   renderedFor: string, engineVersion: string, survey: 'none'|'prior'|'current'}}
  */

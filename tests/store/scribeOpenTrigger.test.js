@@ -246,7 +246,16 @@ describe('THE MOUNT — the dossier is where the open is observed, and it costs 
     // dynamic import inside the effect; a static import added here is how that budget breaks, so
     // the set is pinned rather than reviewed.
     const statics = [...hook.matchAll(/^import\s.*?from\s+'([^']+)'/gm)].map(m => m[1]).sort();
-    expect(statics).toEqual(['../lib/flags.js', '../store/index.js', 'react']);
+    // The fourth entry landed with W2 commit 4 and is deliberate: the composer's draw switch is
+    // PUSHED IN synchronously before the tabs compose (nothing under src/domain reads a flag), and
+    // the kernel it lives in imports NOTHING — a fact the composer's own fence pins — so this edge
+    // adds one dependency-free file and no closure.
+    expect(statics).toEqual([
+      '../domain/display/stateProse/stateProseKernel.js',
+      '../lib/flags.js',
+      '../store/index.js',
+      'react',
+    ]);
     expect(hook).toMatch(/await import\('\.\.\/store\/scribeOpenTrigger\.js'\)/);
   });
 

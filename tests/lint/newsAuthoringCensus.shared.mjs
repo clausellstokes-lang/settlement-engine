@@ -34,10 +34,17 @@ const REQUIRED_FIELDS = Object.freeze(['id', 'settlementIds', 'severity']);
 // site explaining why the preview inherits and never mints; the excluded object
 // literal's own bytes were not touched, which is exactly what the unchanged hash
 // proves. Re-anchored at measured truth, not widened.
+// EXACT RE-PIN 2026-09-14, the same shape a THIRD time: the snapshot moved 859 -> 940 with its
+// SIGNATURE STILL `f4ac01180f8aaf35`. CAUSE, named and measured — SCRIBE W2 commit 2 ("the undone
+// epoch is saved") added eighty-one lines ABOVE this site in this file: the artefact writer's
+// import, the `withMovedProse` helper for the live view, the shared restore chokepoint's new
+// `proseRestore` parameter and its doc block, the per-saveId moved-artefact map, and the two undo
+// verbs' restore-depth blocks. The excluded object literal's own bytes were not touched, which is
+// exactly what the unchanged hash proves. Re-anchored at measured truth, not widened.
 const NON_AUTHORING_SITE_EXCLUSIONS = Object.freeze([
   Object.freeze({
     path: 'src/store/campaignWorldPulseDeferred.js',
-    line: 859,
+    line: 940,
     column: 23,
     signature: 'f4ac01180f8aaf35',
     reason: 'proposal-undo-snapshot',

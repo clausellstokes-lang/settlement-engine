@@ -400,10 +400,19 @@ export function holdersFromCard(kind, card) {
 }
 
 /**
+ * The fields one pool of the card declares it reads. Typed at its own boundary so both A13
+ * branches can share it, which is also what keeps the two from drifting.
+ * @param {{static?: {reads?: unknown}}|null|undefined} pool @returns {string[]}
+ */
+function readsOfPool(pool) {
+  return Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
+}
+
+/**
  * The card's holder rows (card schema /2), or null on a card that predates them. Null is the
  * shape a caller must be able to tell apart from "no holder for this kind", which is why an
  * empty array is NOT used for the absent case.
- * @param {object} card
+ * @param {{town?: {holders?: unknown}}|null|undefined} card
  * @returns {Map<string, {holders: string[], standing: string, interested: boolean}>|null}
  */
 export function holderRowsOfCard(card) {
@@ -902,10 +911,11 @@ export function refuteUnit(unit, card, extra = {}) {
   // and it says so rather than reading LICENSED by default.
   /** @type {object} */
   const walkOptions = { ...opts };
+  // ONE spelling of "which fields does this pool declare it reads", shared by both branches so
+  // the settlement-grounded reader and the card-grounded one can never drift apart.
+  const poolReads = () => readsOfPool(poolOfCard(card, row.blockId, row.poolKey));
   if (opts.settlement) {
-    const pool = poolOfCard(card, row.blockId, row.poolKey);
-    const reads = Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
-    walkOptions.sourceOf = () => sourceOfForTown({ reads }, opts.settlement, opts.world || {});
+    walkOptions.sourceOf = () => sourceOfForTown({ reads: poolReads() }, opts.settlement, opts.world || {});
   } else if (cited.length) {
     // ⭐ THE CARD ANSWERS IT NOW (card schema /2, W2). `town.holders` carries each record kind's
     // holders and whether any of them is INTERESTED, resolved once where the settlement was in
@@ -918,9 +928,7 @@ export function refuteUnit(unit, card, extra = {}) {
       emit(out, finding(id, 'A13', 'NOT-EXECUTABLE', '(the holder standing)', cited.map((c) => c.kind).join(', '),
         'this card carries no holder rows, so whether the body that keeps the cited record is INTERESTED in the fact it holds cannot be read here'));
     } else {
-      const pool = poolOfCard(card, row.blockId, row.poolKey);
-      const reads = Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
-      walkOptions.sourceOf = () => sourceOfCardForReads(reads, holderRows);
+      walkOptions.sourceOf = () => sourceOfCardForReads(poolReads(), holderRows);
     }
   }
 
