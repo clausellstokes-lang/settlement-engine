@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 13:20:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 13:25:27 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_0c7e8fcf-e4a** (mtime 09-14 13:19): agent calls 22 (22 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
+- **wf_0c7e8fcf-e4a** (mtime 09-14 13:24): agent calls 27 (27 distinct) · DONE 21 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
     - `a64dc9d07` ? · DONE · transcript 09-14 13:09 616 KB · 11 tool calls · files: response-opus.json · result: {"unitsWritten": 12, "notes": ["Three pools were omitted as unwritable, not skipped: DS-DEF-2 'Invasion & War: walls with NO force' seats face 0 through `elders
     - `a0141863e` ? · DONE · transcript 09-14 13:11 695 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 12, "notes": ["Omitted 3 of 15 pools (DS-DEF-2: 'Invasion & War: walls with NO force' vid 3, 'Internal Security: full legal chain (court AND pr
     - `af7353a3e` ? · DONE · transcript 09-14 13:06 521 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Two of the turn's stance tags, `threshold` (PRESSURED) and `counterforce` (DS-ECO-6), are not defined anywhere in the brief, whic
@@ -130,12 +130,17 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a354c0867` ? · DONE · transcript 09-14 13:18 622 KB · 14 tool calls · files: response-sonnet.json · result: {"unitsWritten": 18, "notes": ["Pool foodSecurity.label:Secure (vid 4) is tagged stance \"threshold\", which is not one of the three stance families brief.md do
     - `a8d94bd84` ? · DONE · transcript 09-14 13:19 560 KB · 7 tool calls · files: response-opus.json · result: {"unitsWritten": 9, "notes": ["The {seat} fill is literally \"Elected Reeve\", but ruling 42c names \"the reeve\" as an archaism that may not be written. The fi
     - `aad97cb8a` ? · DONE · transcript 09-14 13:19 586 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 9, "notes": ["Three corpus fallback lines used the pool's generic body word \"the hall\", but Hochhausen's card seats no hall row (its holders 
-    - `a65f2a103` ? · IN FLIGHT · transcript 09-14 13:16 444 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a53654827` ? · IN FLIGHT · transcript 09-14 13:18 452 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
-    - `a2475df99` ? · IN FLIGHT · transcript 09-14 13:18 424 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a65f2a103` ? · DONE · transcript 09-14 13:24 665 KB · 10 tool calls · files: response-opus.json · result: {"unitsWritten": 16, "notes": ["Pool \"Beasts & Monsters: frontier, credible deterrence\" (DS-DEF-2, vid 2) was OMITTED: face 10 must speak through `elders`, bu
+    - `a53654827` ? · DONE · transcript 09-14 13:24 675 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 17, "notes": ["Turn's DS-DEF-2 'Beasts & Monsters' pool asks face 10 to speak through source 'elders', but town.md's roles/sources list has no 
+    - `a2475df99` ? · DONE · transcript 09-14 13:21 511 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["POOL KEY VS FIELD CONTRADICTION: the key reads 'INCOME MIX: two or three sources between them' while the field it reads is income
     - `a4a013c8e` ? · IN FLIGHT · transcript 09-14 13:18 436 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `ab141e21e` ? · IN FLIGHT · transcript 09-14 13:19 431 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a74154564` ? · IN FLIGHT · transcript 09-14 13:19 428 KB · 5 tool calls · last: Bash sed -n '425,655p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
+    - `ab141e21e` ? · DONE · transcript 09-14 13:24 546 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 15, "notes": ["The pool 'economicViability.viable: true' declares the settlement slot twice with two different fills ('Rundgate' and 'R'), so w
+    - `a74154564` ? · DONE · transcript 09-14 13:24 567 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 15, "notes": ["Every one of the 15 pools listed \"faces to write: 0\" and \"notebook: none\" despite audience being dm, so no face-attribution 
+    - `a1e51d70a` ? · IN FLIGHT · transcript 09-14 13:21 427 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `afec30a64` ? · IN FLIGHT · transcript 09-14 13:24 433 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a069ef8ed` ? · IN FLIGHT · transcript 09-14 13:24 429 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ad843eb4b` ? · IN FLIGHT · transcript 09-14 13:25 436 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `aed41140d` ? · IN FLIGHT · transcript 09-14 13:25 408 KB · 5 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
 - **wf_eca79448-a67** (mtime 09-14 11:54): agent calls 12 (12 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_eca79448-a67/`
     - `a5035890d` MARKER readiness STRONG · DONE · transcript 09-14 11:42 897 KB · 50 tool calls · files: card-mech.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
     - `a2f99685d` MARKER readiness ADEQUATE · DONE · transcript 09-14 11:38 717 KB · 38 tool calls · files: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-adequate/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
@@ -185,4 +190,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 1.52 2.00 2.43
+load: 1.75 2.01 2.31
