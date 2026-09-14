@@ -1976,7 +1976,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.military: STRONG": [
         {
           "angle": "visitor",
-          "text": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before.",
+          "text": "{settlement} can put a real body of armed men on its walls. The men look like they have done it before.",
           "slots": [
             "settlement"
           ],
@@ -1992,7 +1992,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
+          "text": "Nobody in {settlement} expects the town to lose a straight fight. The expectation shapes how the town speaks to its neighbours.",
           "slots": [
             "settlement"
           ],
@@ -2018,7 +2018,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} would hold against what it expects, and it knows it is not proof against what it does not.",
+          "text": "{settlement} would hold against what it expects. It knows it is not proof against what it does not expect.",
           "slots": [
             "settlement"
           ],
@@ -2044,7 +2044,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} does not think of itself as a place that fights, and it is right not to.",
+          "text": "{settlement} does not think of itself as a place that fights. It is right not to.",
           "slots": [
             "settlement"
           ],
@@ -2062,7 +2062,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it.",
+          "text": "{settlement} keeps no muster worth the name. The gate is shut at night by whoever is nearest to it.",
           "slots": [
             "settlement"
           ],
@@ -2070,7 +2070,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What protects {settlement} is that nobody has wanted it, and everyone here understands the arrangement.",
+          "text": "What protects {settlement} is that nobody has wanted it. Everyone here understands the arrangement.",
           "slots": [
             "settlement"
           ],
@@ -2088,7 +2088,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
+          "text": "{settlement} keeps a standing answer to the beasts of its own ground. The answer is men who know the work, and the tools kept for it.",
           "slots": [
             "settlement"
           ],
@@ -2114,7 +2114,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The bounty book at {settlement} is used and modest: the town answers what troubles it and does not go looking.",
+          "text": "The bounty book at {settlement} is used and modest. The town answers what troubles it and does not go looking.",
           "slots": [
             "settlement"
           ],
@@ -2140,7 +2140,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Nothing at {settlement} is organised against what lives outside the fields; each household answers for its own fences.",
+          "text": "Nothing at {settlement} is organised against what lives outside the fields. Each household answers for its own fences.",
           "slots": [
             "settlement"
           ],
@@ -2158,7 +2158,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.monster: CRITICAL": [
         {
           "angle": "visitor",
-          "text": "The country around {settlement} is not held at all, and the town's edge is wherever the last house happens to stand.",
+          "text": "The country around {settlement} is not held at all. The town's edge is wherever the last house happens to stand.",
           "slots": [
             "settlement"
           ],
@@ -2174,7 +2174,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People in {settlement} do not go far out after dark, and they do not need to be told why.",
+          "text": "People in {settlement} do not go far out after dark. They do not need to be told why.",
           "slots": [
             "settlement"
           ],
@@ -2184,7 +2184,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: STRONG": [
         {
           "angle": "visitor",
-          "text": "Order in {settlement} is kept quietly, which is the expensive kind: a stranger sees very little enforcement and very little disorder.",
+          "text": "Order in {settlement} is kept quietly. That is the expensive kind. A stranger sees very little enforcement and very little disorder.",
           "slots": [
             "settlement"
           ],
@@ -2200,7 +2200,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "A quarrel in {settlement} goes to somebody who will settle it, and everybody knows who that is.",
+          "text": "A quarrel in {settlement} goes to somebody who settles it, and everybody knows who that is.",
           "slots": [
             "settlement"
           ],
@@ -2236,7 +2236,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: WEAK": [
         {
           "angle": "visitor",
-          "text": "There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well.",
+          "text": "There is more going on in {settlement} than the watch troubles itself with. It is not hidden particularly well.",
           "slots": [
             "settlement"
           ],
@@ -2252,7 +2252,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Getting a thing settled in {settlement} depends on who you are, and the town is arranged accordingly.",
+          "text": "Getting a thing settled in {settlement} depends on who you are. The town is arranged accordingly.",
           "slots": [
             "settlement"
           ],
@@ -2288,7 +2288,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.economic: STRONG": [
         {
           "angle": "ledger",
-          "text": "{settlement} could lose a season's trade and go on paying its people; there is enough behind the market to absorb it.",
+          "text": "{settlement} could lose a season's trade and go on paying its people. There is enough behind the market to absorb it.",
           "slots": [
             "settlement"
           ],
@@ -2314,7 +2314,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.economic: ADEQUATE": [
         {
           "angle": "ledger",
-          "text": "{settlement} has some depth behind it and not a great deal; a season's disruption would be felt and survived.",
+          "text": "{settlement} has some depth behind it and not a great deal. A season's disruption would be felt and survived.",
           "slots": [
             "settlement"
           ],
@@ -2340,7 +2340,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.economic: WEAK": [
         {
           "angle": "ledger",
-          "text": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season.",
+          "text": "{settlement} runs close to what it takes in. One interruption would reach the households inside the season.",
           "slots": [
             "settlement"
           ],
@@ -2348,7 +2348,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "There is nothing spare in {settlement}, and the absence of spare is what a careful eye notices first.",
+          "text": "There is nothing spare in {settlement}. The absence of spare is what a careful eye notices first.",
           "slots": [
             "settlement"
           ],
@@ -2366,7 +2366,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.economic: CRITICAL": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds no reserve at all; what comes in is spent before it is counted.",
+          "text": "{settlement} holds no reserve at all. What comes in is spent before it is counted.",
           "slots": [
             "settlement"
           ],
@@ -2392,7 +2392,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.magical: STRONG": [
         {
           "angle": "visitor",
-          "text": "The Art is worked openly in {settlement} and worked well; what it does here is infrastructure rather than spectacle.",
+          "text": "The Art is worked openly in {settlement} and worked well. What it does here is infrastructure rather than spectacle.",
           "slots": [
             "settlement"
           ],
@@ -2452,7 +2452,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} keeps no arrangement for the Art; when it is wanted, it is wanted from outside.",
+          "text": "{settlement} keeps no arrangement for the Art. When it is wanted, it is wanted from outside.",
           "slots": [
             "settlement"
           ],
@@ -2470,7 +2470,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.magical: CRITICAL": [
         {
           "angle": "visitor",
-          "text": "Nothing in {settlement} is held up by the Art, and nothing here would know what to do with it.",
+          "text": "Nothing in {settlement} is held up by the Art. Nothing here would know what to do with it.",
           "slots": [
             "settlement"
           ],
