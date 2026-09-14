@@ -4677,72 +4677,72 @@ draws at most one of each.
 
 **UNDER SIEGE** · `under_siege`
 1. `[visitor]` Nothing moves through the gates. {settlement} lives on what is already inside the walls, and counts it daily.
-2. `[ledger]` The walls are held from outside; the fields beyond them have not been worked since the lines closed.
+2. `[ledger]` The walls are held from outside. The fields beyond them have not been worked since the lines closed.
 3. `[street]` Trade stops at the gate rather than the market now. The siege decides what the town eats.
-4. `[street]` {settlement} is shut, and the shutting is not the town's decision; every arrangement inside the walls has been rebuilt around the gates staying closed.
-5. `[ledger]` {settlement}'s stores are being counted daily and issued against a list, and the list is shorter than the town.
-6. `[visitor]` Nobody goes in or out of {settlement}, and the walls have people on them at hours walls do not normally have people on them.
+4. `[street]` {settlement} is shut, and the shutting is not the town's decision. Every arrangement inside the walls has been rebuilt around the gates staying closed.
+5. `[ledger]` {settlement}'s stores are being counted daily and issued against a list. The list is shorter than the town.
+6. `[visitor]` Nobody goes in or out of {settlement}. The walls have people on them at hours walls do not normally have people on them.
 
 **FAMINE** · `famine`
-1. `[street]` There is not enough to eat, and the shortfall is public now rather than private. The granary answers fewer hands each week.
-2. `[unfolding]` Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.
-3. `[ledger]` The market has grain, and the price of it has become a kind of politics; families are eating stores meant for {season}.
+1. `[street]` There is not enough to eat. The shortfall is public now rather than private. The granary answers fewer hands each week.
+2. `[unfolding]` Hunger has moved from the poorest streets into the ordinary ones. What the fields returned does not reach the table.
+3. `[ledger]` The market has grain. The price of it has become a kind of politics. Families are eating stores meant for {season}.
 4. `[street]` There is not enough food in {settlement} and there is no longer a polite way to discuss it.
-5. `[ledger]` What {settlement}'s granary holds is being issued by rule rather than by price, and the rule is being tested.
+5. `[ledger]` What {settlement}'s granary holds is being issued by rule rather than by price. The rule is being tested.
 6. `[visitor]` {settlement}'s market is open and thin, and the thinness is not seasonal.
 
 **UNDER OCCUPATION** · `occupied`
-1. `[visitor]` Another power's writ runs here. The offices are the same offices; the authority behind them is not.
-2. `[ledger]` Revenue leaves before it is spent: {settlement} is administered, and the administration is not its own.
-3. `[street]` The garrison is quartered inside the walls, and the town's business is conducted around it.
-4. `[street]` {settlement} is held by somebody it did not choose, and the town's own hall now advises rather than decides.
+1. `[visitor]` Another power's writ runs here. The offices are the same offices. The authority behind them is not.
+2. `[ledger]` Revenue leaves before it is spent. {settlement} is administered. The administration is not its own.
+3. `[street]` The garrison is quartered inside the walls. The town's business is conducted around it.
+4. `[street]` {settlement} is held by somebody it did not choose. The town's own hall now advises rather than decides.
 5. `[ledger]` Every licence, levy and permission in {settlement} passes a hand that is not the town's before it takes effect.
-6. `[visitor]` {settlement} functions and it functions under supervision, and the supervision is not disguised.
+6. `[visitor]` {settlement} functions and it functions under supervision. The supervision is not disguised.
 
 **POLITICALLY FRACTURED** · `politically_fractured`
-1. `[ledger]` Nothing is decided. The factions each hold enough to block and none hold enough to rule, so the work of governing sits unattended.
+1. `[ledger]` Nothing is decided. The factions each hold enough to block and none hold enough to rule. So the work of governing sits unattended.
 2. `[unfolding]` Authority here is divided past the point of use. Repairs, judgments and appointments all wait on a consensus that does not arrive.
-3. `[street]` The town is governed in pieces, and the pieces do not agree; deferral has become the only policy anyone can pass.
+3. `[street]` The town is governed in pieces. The pieces do not agree. Deferral has become the only policy anyone can pass.
 4. `[street]` {settlement} has no single answer to anything, because there is no longer anyone entitled to give one.
 5. `[ledger]` Two sets of instructions circulate in {settlement} and the clerks have quietly decided which to obey.
 6. `[visitor]` Asking {settlement} a simple question gets a careful one back, because the answer depends on who is asking for whom.
 
 **INDEBTED TO AN OUTSIDE POWER** · `indebted`
-1. `[ledger]` A share of everything {settlement} earns leaves for a creditor beyond the walls, and the share is not small.
+1. `[ledger]` A share of everything {settlement} earns leaves for a creditor beyond the walls. The share is not small.
 2. `[counterforce]` The books balance only because nothing is being built. The debt is served first and the town second.
-3. `[visitor]` The obligation is outside and the payment is here; coin that would have gone to the works goes to the collector.
-4. `[ledger]` {settlement}'s obligations exceed what its year produces, and the shortfall is being met by promising against the next one.
+3. `[visitor]` The obligation is outside and the payment is here. Coin that would have gone to the works goes to the collector.
+4. `[ledger]` {settlement}'s obligations exceed what its year produces. The shortfall is being met by promising against the next one.
 5. `[street]` What {settlement} owes is the first thing paid and the last thing discussed.
-6. `[visitor]` {settlement} looks like it is working hard for somebody, and the somebody is not in the town.
+6. `[visitor]` {settlement} looks like it is working hard for somebody. The somebody is not in the town.
 
 **RECENTLY BETRAYED** · `recently_betrayed`
-1. `[street]` Trust here is a shorter commodity than it was. Institutions run at partial strength because too few people will vouch for one another.
+1. `[street]` Trust here is a shorter commodity than it was. Institutions run at partial strength because too few people are willing to vouch for one another.
 2. `[unfolding]` The betrayal is over and its consequences are not. Offices that once shared information now keep it.
-3. `[visitor]` {settlement} works, but it works suspiciously; the arrangements that depended on good faith have quietly lapsed.
-4. `[street]` {settlement} was let down by somebody it had reason to trust, and the town has grown careful in a way that reaches past the person responsible.
+3. `[visitor]` {settlement} works, but it works suspiciously. The arrangements that depended on good faith have quietly lapsed.
+4. `[street]` {settlement} was let down by somebody it had reason to trust. The town has grown careful in a way that reaches past the person responsible.
 5. `[ledger]` Agreements at {settlement} are being written longer than they used to be written, and the length is the town's answer.
-6. `[visitor]` {settlement} deals fairly with a stranger and slowly, and the slowness is deliberate.
+6. `[visitor]` {settlement} deals fairly with a stranger and slowly. The slowness is deliberate.
 
 **INFILTRATED** · `infiltrated`
-1. `[visitor]` Nothing here looks wrong. Decisions land slightly askew, and information reaches the wrong hands slightly too often.
+1. `[visitor]` Nothing here looks wrong. Decisions land slightly askew. Information reaches the wrong hands slightly too often.
 2. `[ledger]` The economy is untouched and the intelligence is not. Someone else's interest is being served inside the town's own rooms.
 3. `[threshold]` There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.
-4. `[street]` Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.
+4. `[street]` Somebody in {settlement} answers elsewhere. The town knows it without knowing who.
 5. `[ledger · dm-only]` What {settlement}'s hall discusses and what {settlement}'s hall records have come apart.
 6. `[visitor]` Conversation in {settlement} stops when it should not and resumes carefully.
 
 **DISEASE OUTBREAK** · `plague_onset`
-1. `[street]` Illness is loose in the town. The market thins as people keep to their own doors, and travel is discouraged rather than forbidden.
-2. `[counterforce]` The sick outnumber the hands that can tend them, and the quarantine is observed unevenly, street by street.
-3. `[visitor]` {settlement} has stopped moving at its ordinary speed: supply arrives late, work goes undone, and the healers are the busiest people here.
-4. `[street]` Sickness has come into {settlement}, and the town has begun organising itself around containment rather than around work.
-5. `[ledger]` {settlement} is keeping two lists now (the sick and the exposed), and neither list is shrinking.
-6. `[visitor]` Doors in {settlement} are marked, and the marking is recent enough that people still look at it.
+1. `[street]` Illness is loose in the town. The market thins as people keep to their own doors. Travel is discouraged rather than forbidden.
+2. `[counterforce]` The sick outnumber the hands that can tend them. The quarantine is observed unevenly, street by street.
+3. `[visitor]` {settlement} has stopped moving at its ordinary speed. Supply arrives late, work goes undone, and the healers are the busiest people here.
+4. `[street]` Sickness has come into {settlement}. The town has begun organising itself around containment rather than around work.
+5. `[ledger]` {settlement} is keeping two lists now (the sick and the exposed). Neither list is shrinking.
+6. `[visitor]` Doors in {settlement} are marked. The marking is recent enough that people still look at it.
 
 **SUCCESSION VOID** · `succession_void`
-1. `[ledger]` The seat is empty and no claim has settled. Major decisions are deferred; the institutions carry on under their own momentum.
+1. `[ledger]` The seat is empty and no claim has settled. Major decisions are deferred. The institutions carry on under their own momentum.
 2. `[street]` There is no one to sign, so nothing is signed. Several offices have simply begun deciding for themselves.
-3. `[unfolding]` Authority here has no undisputed heir, and the vacancy is being filled unofficially by whoever stands nearest the work.
+3. `[unfolding]` Authority here has no undisputed heir. The vacancy is being filled unofficially by whoever stands nearest the work.
 4. `[street]` The seat at {settlement} is empty and nobody has been able to say for certain who should fill it.
 5. `[ledger]` Instructions from {settlement}'s hall have stopped being signed, because there is nobody with the standing to sign them.
 6. `[visitor]` {settlement} answers questions about its own governance in the past tense.

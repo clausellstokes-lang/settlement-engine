@@ -23,7 +23,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The walls are held from outside; the fields beyond them have not been worked since the lines closed.",
+          "text": "The walls are held from outside. The fields beyond them have not been worked since the lines closed.",
           "slots": [],
           "vid": 2
         },
@@ -35,7 +35,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is shut, and the shutting is not the town's decision; every arrangement inside the walls has been rebuilt around the gates staying closed.",
+          "text": "{settlement} is shut, and the shutting is not the town's decision. Every arrangement inside the walls has been rebuilt around the gates staying closed.",
           "slots": [
             "settlement"
           ],
@@ -43,7 +43,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s stores are being counted daily and issued against a list, and the list is shorter than the town.",
+          "text": "{settlement}'s stores are being counted daily and issued against a list. The list is shorter than the town.",
           "slots": [
             "settlement"
           ],
@@ -51,7 +51,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nobody goes in or out of {settlement}, and the walls have people on them at hours walls do not normally have people on them.",
+          "text": "Nobody goes in or out of {settlement}. The walls have people on them at hours walls do not normally have people on them.",
           "slots": [
             "settlement"
           ],
@@ -61,19 +61,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "FAMINE": [
         {
           "angle": "street",
-          "text": "There is not enough to eat, and the shortfall is public now rather than private. The granary answers fewer hands each week.",
+          "text": "There is not enough to eat. The shortfall is public now rather than private. The granary answers fewer hands each week.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "unfolding",
-          "text": "Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.",
+          "text": "Hunger has moved from the poorest streets into the ordinary ones. What the fields returned does not reach the table.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "ledger",
-          "text": "The market has grain, and the price of it has become a kind of politics; families are eating stores meant for {season}.",
+          "text": "The market has grain. The price of it has become a kind of politics. Families are eating stores meant for {season}.",
           "slots": [
             "season"
           ],
@@ -89,7 +89,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What {settlement}'s granary holds is being issued by rule rather than by price, and the rule is being tested.",
+          "text": "What {settlement}'s granary holds is being issued by rule rather than by price. The rule is being tested.",
           "slots": [
             "settlement"
           ],
@@ -107,13 +107,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "UNDER OCCUPATION": [
         {
           "angle": "visitor",
-          "text": "Another power's writ runs here. The offices are the same offices; the authority behind them is not.",
+          "text": "Another power's writ runs here. The offices are the same offices. The authority behind them is not.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "ledger",
-          "text": "Revenue leaves before it is spent: {settlement} is administered, and the administration is not its own.",
+          "text": "Revenue leaves before it is spent. {settlement} is administered. The administration is not its own.",
           "slots": [
             "settlement"
           ],
@@ -121,13 +121,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The garrison is quartered inside the walls, and the town's business is conducted around it.",
+          "text": "The garrison is quartered inside the walls. The town's business is conducted around it.",
           "slots": [],
           "vid": 3
         },
         {
           "angle": "street",
-          "text": "{settlement} is held by somebody it did not choose, and the town's own hall now advises rather than decides.",
+          "text": "{settlement} is held by somebody it did not choose. The town's own hall now advises rather than decides.",
           "slots": [
             "settlement"
           ],
@@ -143,7 +143,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} functions and it functions under supervision, and the supervision is not disguised.",
+          "text": "{settlement} functions and it functions under supervision. The supervision is not disguised.",
           "slots": [
             "settlement"
           ],
@@ -153,7 +153,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "POLITICALLY FRACTURED": [
         {
           "angle": "ledger",
-          "text": "Nothing is decided. The factions each hold enough to block and none hold enough to rule, so the work of governing sits unattended.",
+          "text": "Nothing is decided. The factions each hold enough to block and none hold enough to rule. So the work of governing sits unattended.",
           "slots": [],
           "vid": 1
         },
@@ -165,7 +165,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town is governed in pieces, and the pieces do not agree; deferral has become the only policy anyone can pass.",
+          "text": "The town is governed in pieces. The pieces do not agree. Deferral has become the only policy anyone can pass.",
           "slots": [],
           "vid": 3
         },
@@ -197,7 +197,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "INDEBTED TO AN OUTSIDE POWER": [
         {
           "angle": "ledger",
-          "text": "A share of everything {settlement} earns leaves for a creditor beyond the walls, and the share is not small.",
+          "text": "A share of everything {settlement} earns leaves for a creditor beyond the walls. The share is not small.",
           "slots": [
             "settlement"
           ],
@@ -211,13 +211,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The obligation is outside and the payment is here; coin that would have gone to the works goes to the collector.",
+          "text": "The obligation is outside and the payment is here. Coin that would have gone to the works goes to the collector.",
           "slots": [],
           "vid": 3
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s obligations exceed what its year produces, and the shortfall is being met by promising against the next one.",
+          "text": "{settlement}'s obligations exceed what its year produces. The shortfall is being met by promising against the next one.",
           "slots": [
             "settlement"
           ],
@@ -233,7 +233,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} looks like it is working hard for somebody, and the somebody is not in the town.",
+          "text": "{settlement} looks like it is working hard for somebody. The somebody is not in the town.",
           "slots": [
             "settlement"
           ],
@@ -243,7 +243,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "RECENTLY BETRAYED": [
         {
           "angle": "street",
-          "text": "Trust here is a shorter commodity than it was. Institutions run at partial strength because too few people will vouch for one another.",
+          "text": "Trust here is a shorter commodity than it was. Institutions run at partial strength because too few people are willing to vouch for one another.",
           "slots": [],
           "vid": 1
         },
@@ -255,7 +255,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} works, but it works suspiciously; the arrangements that depended on good faith have quietly lapsed.",
+          "text": "{settlement} works, but it works suspiciously. The arrangements that depended on good faith have quietly lapsed.",
           "slots": [
             "settlement"
           ],
@@ -263,7 +263,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} was let down by somebody it had reason to trust, and the town has grown careful in a way that reaches past the person responsible.",
+          "text": "{settlement} was let down by somebody it had reason to trust. The town has grown careful in a way that reaches past the person responsible.",
           "slots": [
             "settlement"
           ],
@@ -279,7 +279,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} deals fairly with a stranger and slowly, and the slowness is deliberate.",
+          "text": "{settlement} deals fairly with a stranger and slowly. The slowness is deliberate.",
           "slots": [
             "settlement"
           ],
@@ -289,7 +289,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "INFILTRATED": [
         {
           "angle": "visitor",
-          "text": "Nothing here looks wrong. Decisions land slightly askew, and information reaches the wrong hands slightly too often.",
+          "text": "Nothing here looks wrong. Decisions land slightly askew. Information reaches the wrong hands slightly too often.",
           "slots": [],
           "vid": 1
         },
@@ -307,7 +307,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.",
+          "text": "Somebody in {settlement} answers elsewhere. The town knows it without knowing who.",
           "slots": [
             "settlement"
           ],
@@ -336,19 +336,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DISEASE OUTBREAK": [
         {
           "angle": "street",
-          "text": "Illness is loose in the town. The market thins as people keep to their own doors, and travel is discouraged rather than forbidden.",
+          "text": "Illness is loose in the town. The market thins as people keep to their own doors. Travel is discouraged rather than forbidden.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "counterforce",
-          "text": "The sick outnumber the hands that can tend them, and the quarantine is observed unevenly, street by street.",
+          "text": "The sick outnumber the hands that can tend them. The quarantine is observed unevenly, street by street.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "{settlement} has stopped moving at its ordinary speed: supply arrives late, work goes undone, and the healers are the busiest people here.",
+          "text": "{settlement} has stopped moving at its ordinary speed. Supply arrives late, work goes undone, and the healers are the busiest people here.",
           "slots": [
             "settlement"
           ],
@@ -356,7 +356,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Sickness has come into {settlement}, and the town has begun organising itself around containment rather than around work.",
+          "text": "Sickness has come into {settlement}. The town has begun organising itself around containment rather than around work.",
           "slots": [
             "settlement"
           ],
@@ -364,7 +364,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} is keeping two lists now (the sick and the exposed), and neither list is shrinking.",
+          "text": "{settlement} is keeping two lists now (the sick and the exposed). Neither list is shrinking.",
           "slots": [
             "settlement"
           ],
@@ -372,7 +372,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Doors in {settlement} are marked, and the marking is recent enough that people still look at it.",
+          "text": "Doors in {settlement} are marked. The marking is recent enough that people still look at it.",
           "slots": [
             "settlement"
           ],
@@ -382,7 +382,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "SUCCESSION VOID": [
         {
           "angle": "ledger",
-          "text": "The seat is empty and no claim has settled. Major decisions are deferred; the institutions carry on under their own momentum.",
+          "text": "The seat is empty and no claim has settled. Major decisions are deferred. The institutions carry on under their own momentum.",
           "slots": [],
           "vid": 1
         },
@@ -394,7 +394,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Authority here has no undisputed heir, and the vacancy is being filled unofficially by whoever stands nearest the work.",
+          "text": "Authority here has no undisputed heir. The vacancy is being filled unofficially by whoever stands nearest the work.",
           "slots": [],
           "vid": 3
         },
