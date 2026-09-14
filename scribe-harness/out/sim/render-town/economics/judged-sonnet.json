@@ -1,0 +1,225 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "The road holds up, the market keeps its stalls, and the town is neither building nor selli",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [prosperityRank(settlement.economicState.prosperity)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a second sentence naming no second field",
+     "value": "Let one trade go quiet, and another is still moving.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.exportPosture.status]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a route claim on a goods sentence",
+     "value": "The Caravaneer's post in Spitzplatz stands on a supply that failed somewhere upstream.",
+     "description": "\"upstream\" asserts a route fact; a flow word is licensed by the field, a route step by a chain row (unresolved)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-ROSTER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-ROSTER",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The Caravaneer's post in Spitzplatz stands on a supply that failed somewhere upstream. The building holds, the skill rem (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-FIELD"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-FIELD",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Whatever black market exists here has never grown past its own small name… there is unlicensed trade, and nothing behind (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "Nothing about Spitzplatz marks it out in either direction. The road holds up, the market keeps its stalls, and the town is neither building nor selling off what it has.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "Ask what the town lives on, and the answer comes back as a list, not a single trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "Goods off the road and goods made in Spitzplatz share the same market stalls, and nothing there marks one from the other.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "spine": "Something is always going out of the town. Let one trade go quiet, and another is still moving.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "spine": "Spitzplatz is not hungry, and it has nothing set aside against a bad turn.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 2,
+ "patched": 0,
+ "tier1Dropped": 2,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 7,
+   "openers": [
+    {
+     "opener": "ask what the",
+     "n": 1
+    },
+    {
+     "opener": "goods off the",
+     "n": 1
+    },
+    {
+     "opener": "nothing about spitzplatz",
+     "n": 1
+    },
+    {
+     "opener": "something is always",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz is not",
+     "n": 1
+    },
+    {
+     "opener": "the caravaneer's post",
+     "n": 1
+    },
+    {
+     "opener": "whatever black market",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}

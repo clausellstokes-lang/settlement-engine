@@ -1,0 +1,164 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "spine": "Nothing in Warmholz is arranged for buying and selling in quantity.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "spine": "What gets done in Warmholz is never anybody's official post, only ever somebody's job on the side.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "spine": "The stock and the people of Warmholz have been pulled inward, and the ground that was given up stands abandoned.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "spine": "Nothing here is urgent, and the town's troubles are chronic rather than acute.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "spine": "This is as far as Warmholz can go before it is no longer the same settlement, and that limit is close now.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "spine": "It is getting worse, steadily rather than suddenly, and each season costs a little more than the one before.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "spine": "The year in Warmholz ends close enough to level that it draws notice.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "spine": "Only a part of what happens in Warmholz is ever known, and no one here decides which part.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "spine": "Under the terms it currently has, Warmholz works, and the judgment falls on those terms, not the town.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "spine": "Between Warmholz and trouble lies less room than a town this size ought to have.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "spine": "What protects Warmholz is that nobody has wanted it, and the town understands the arrangement.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "spine": "No answer exists in Warmholz for what lives beyond its fields, and the task of finding one falls to nobody.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "spine": "More goes on in Warmholz than is kept track of, and little of it stays hidden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Little is spare in Warmholz, and that is the first thing a careful eye notices.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "Neither a practitioner nor any arrangement is kept in Warmholz, and no one expects either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "Nobody in Warmholz worries about food, and nothing here threatens the supply.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "spine": "Where Warmholz stands is close enough to the road to matter, and no closer.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "spine": "A handful of roofs with a reason behind them make up Warmholz, and the reason is usually the ground.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "No marked relationship, friendly or hostile, ties Warmholz to anywhere else, and none is on record.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "A careful reader of Warmholz finds one loose end, and it is the kind a single institution could tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

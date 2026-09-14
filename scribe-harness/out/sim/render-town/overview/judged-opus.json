@@ -1,0 +1,427 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "capacity claim on a state-only field",
+     "value": "Nobody here doubts the town could hold its own ground in a straight fight.",
+     "description": "\"could hold\" is a capacity claim; the block carries no event-provenance field (R-DST-B) (state-only)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then INSTITUTION",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "seat": "spine",
+     "subject": "a route claim on a goods sentence",
+     "value": "What the town cannot grow comes in by road",
+     "description": "\"by road\" asserts a route fact; a flow word is licensed by the field, a route step by a chain row (unresolved)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "patched": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-ROSTER"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-ROSTER",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The Governing Council and The Order of the Watch are set against each other over political influence in Spitzplatz, each (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-PAGE"
+   ],
+   "patched": [],
+   "findings": [
+    {
+     "arm": "T1-PAGE",
+     "channel": "FAIL",
+     "seat": "spine",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The ties here are the ordinary ones, work and family and living close, and nothing more particular binds one household t (the second reader answered yes on this question, so the unit falls to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "spine": "The market is open to anyone who brings goods to set down.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "spine": "Spitzplatz is administered in the open, in rooms, by officers.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here can afford to argue about things other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 2,
+   "spine": "The town supports itself, and what it takes in covers what it spends.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "The walls are kept, the watch walks them, and none of it is for show.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "spine": "Against the beasts of its own ground the town keeps people who know that work and the tools it takes.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "spine": "Order is kept on the main streets, though the ones behind them are another matter.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "spine": "Trade here is steady, and the warehouses hold more than the next sale needs.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "spine": "Beyond the alchemist's shop the town keeps no arrangement for the Art, so anything of that sort comes in from outside.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "spine": "The price of bread is watched here, and what the granary holds is everybody's business.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "spine": "Traffic on the road past the town is real enough, though little of it stops here.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "spine": "What the town cannot grow comes in by road, and the road is a condition of the town's living.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "spine": "The place is a town of the ordinary sort, with a hall, a court and a market in it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One of the town's ties counts for more than the others, and it shows in what is agreed to here and what is refused.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 3,
+ "patched": 0,
+ "tier1Dropped": 2,
+ "tier1Patched": 0,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 17,
+   "openers": [
+    {
+     "opener": "against the beasts",
+     "n": 1
+    },
+    {
+     "opener": "beyond the alchemist's",
+     "n": 1
+    },
+    {
+     "opener": "nobody here doubts",
+     "n": 1
+    },
+    {
+     "opener": "one of the",
+     "n": 1
+    },
+    {
+     "opener": "order is kept",
+     "n": 1
+    },
+    {
+     "opener": "people here can",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz is administered",
+     "n": 1
+    },
+    {
+     "opener": "the governing council",
+     "n": 1
+    },
+    {
+     "opener": "the market is",
+     "n": 1
+    },
+    {
+     "opener": "the place is",
+     "n": 1
+    },
+    {
+     "opener": "the price of",
+     "n": 1
+    },
+    {
+     "opener": "the ties here",
+     "n": 1
+    },
+    {
+     "opener": "the town supports",
+     "n": 1
+    },
+    {
+     "opener": "the walls are",
+     "n": 1
+    },
+    {
+     "opener": "trade here is",
+     "n": 1
+    },
+    {
+     "opener": "traffic on the",
+     "n": 1
+    },
+    {
+     "opener": "what the town",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
