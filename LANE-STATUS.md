@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 17:05:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 17:11:07 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 67fa50f40 Plan: the collection at 09-14 ~16:5x — under the owner's non-contradiction standard the 
 
@@ -113,7 +113,25 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_ce8d34f2-917** (mtime 09-14 17:05): agent calls 21 (21 distinct) · DONE 15 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_ce8d34f2-917/`
+- **wf_43403a50-66b** (mtime 09-14 17:11): agent calls 17 (17 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_43403a50-66b/`
+    - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
+    - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
+    - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
+    - `a2ed350f3` ? · DONE · transcript 09-14 16:59 945 KB · 15 tool calls · result: {"items": [{"title": "Rule the DM-pen vs machine-sentence fork (INV-EVS)", "what": "The DM's authored economicViability.summary is displaced on both the PDF and
+    - `a7990b653` ? · DONE · transcript 09-14 16:58 914 KB · 11 tool calls · result: {"items": [{"title": "Light MP-1's property-line layer (`townCartographyEnabled`)", "what": "MP-1 (the parcel op, the yard subtraction, the hover/pin halo) is b
+    - `a0777074f` ? · DONE · transcript 09-14 17:02 1039 KB · 14 tool calls · result: {"items": [{"title": "Owner ruling on the DRESS-1b gestalt gate (two disagreeing rounds)", "what": "The partition dress failed its whole-leaf gestalt read twice
+    - `a473a7f6e` ? · DONE · transcript 09-14 17:09 981 KB · 13 tool calls · result: {"items": [{"title": "The framing trade \u2014 the fitted page versus the hinterland", "what": "DRESS-FRAME fitted the plate to the settlement's bound; that rep
+    - `a78aa38f0` ? · DONE · transcript 09-14 17:09 985 KB · 21 tool calls · result: {"items": [{"title": "The TERMINAL SOAK", "what": "The final certification soak on a cured tip. It is the hard stop line of the whole arc: the chair is ordered 
+    - `ae2575922` ? · DONE · transcript 09-14 17:09 975 KB · 22 tool calls · result: {"stateSummary": "This source is part 8 of `docs/OWNER_DECISION_QUEUE.md` \u2014 not a decision list but the program's running LEDGER, one bullet per \u00a7-num
+    - `ad0a131ab` ? · DONE · transcript 09-14 17:11 985 KB · 22 tool calls · result: {"items": [{"title": "The owner's WALK (and the ONE regen that rides with it)", "what": "The owner must personally walk the product before the review and the te
+    - `a280bd0ae` ? · DONE · transcript 09-14 17:09 704 KB · 16 tool calls · result: {"items": [{"title": "Run the REWRITE WAVE register by register (8b onward)", "what": "Only car 8a (the kernel, instruments and gate) has landed. The wave itsel
+    - `ac897d892` ? · IN FLIGHT · transcript 09-14 17:10 693 KB · 28 tool calls · last: Bash tail -c 600 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4
+    - `a9dd9bf28` ? · IN FLIGHT · transcript 09-14 17:09 638 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `aa540bb70` ? · IN FLIGHT · transcript 09-14 17:11 665 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `aba8e7d22` ? · IN FLIGHT · transcript 09-14 17:11 730 KB · 16 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a4c2d6159` ? · IN FLIGHT · transcript 09-14 17:11 499 KB · 14 tool calls · last: Bash sed -n '571,610p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b
+    - `a2e753739` ? · IN FLIGHT · transcript 09-14 17:11 286 KB · 1 tool calls · last: Bash wc -l /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/sc
+- **wf_ce8d34f2-917** (mtime 09-14 17:10): agent calls 26 (26 distinct) · DONE 20 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_ce8d34f2-917/`
     - `a38b65557` ? · DONE · transcript 09-14 16:54 601 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Seats with no roster: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and the two DS-DEF-2 faces seated on `garrison` hav
     - `aef1b837d` ? · DONE · transcript 09-14 16:57 723 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["Two faces were assigned to sources the town card does not seat: DS-DEF-2 'Invasion & War: walls with NO force' face 0 is specifi
     - `a986300e6` ? · DONE · transcript 09-14 16:51 516 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The `stance` label on each pool (visitor / street / ledger / threshold / counterforce) is given but the brief only says the three
@@ -127,26 +145,19 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a77d3ec4a` ? · DONE · transcript 09-14 16:59 499 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 6, "notes": ["Pool STALLED declares {institution} as \"Cartographer's guild\", but the town block's institution rows list \"Cartographer's work
     - `ab494850e` ? · DONE · transcript 09-14 17:01 587 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 6, "notes": ["The STALLED pool's slot fill names the institution \"Cartographer's guild,\" but the town block's own institutions list only carr
     - `a7bb960f3` ? · DONE · transcript 09-14 17:04 630 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 18, "notes": ["Audience is 'dm', but all 18 pools say 'notebook: none. Return an empty list.' The DM register the brief spends PART V on is unr
-    - `a05aa9bb3` ? · IN FLIGHT · transcript 09-14 16:59 434 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a05aa9bb3` ? · DONE · transcript 09-14 17:06 634 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 18, "notes": ["The 'threshold' stance on the foodSecurity pool is never defined anywhere in brief.md; only ledger/street/visitor are given as t
     - `a34da70cd` ? · DONE · transcript 09-14 17:03 527 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Audience is dm, and the brief spends a whole part (PART V) on the notebook register, but every one of the nine pools says noteboo
     - `a85a5ddd4` ? · DONE · transcript 09-14 17:05 562 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Two of the nine listed pools (block DS-POW-2 'governing faction holds a NARROW plurality' vid 2, and block DS-POW-7 'layer DORMAN
-    - `ac273b651` ? · IN FLIGHT · transcript 09-14 17:02 455 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ac273b651` ? · DONE · transcript 09-14 17:08 629 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 16, "notes": ["Two seats had no role to stand on: DS-DEF-2 'Beasts & Monsters' face 10 asks for `elders` and DS-DEF-2 'Economic Survival' face 
     - `a8229145d` ? · IN FLIGHT · transcript 09-14 17:03 471 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a3bef303a` ? · IN FLIGHT · transcript 09-14 17:03 432 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `abc44f4d7` ? · IN FLIGHT · transcript 09-14 17:04 452 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
-    - `a2c7ca878` ? · IN FLIGHT · transcript 09-14 17:05 382 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-- **wf_43403a50-66b** (mtime 09-14 17:02): agent calls 11 (11 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_43403a50-66b/`
-    - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
-    - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
-    - `acaa3e2a0` ? · IN FLIGHT · transcript 09-14 17:02 832 KB · 17 tool calls · last: StructuredOutput {"__unparsedToolInput": {"raw": "{\"items\": [{\"title\":\"Owner tuning signature on the three P4 population c
-    - `a2ed350f3` ? · DONE · transcript 09-14 16:59 945 KB · 15 tool calls · result: {"items": [{"title": "Rule the DM-pen vs machine-sentence fork (INV-EVS)", "what": "The DM's authored economicViability.summary is displaced on both the PDF and
-    - `a7990b653` ? · DONE · transcript 09-14 16:58 914 KB · 11 tool calls · result: {"items": [{"title": "Light MP-1's property-line layer (`townCartographyEnabled`)", "what": "MP-1 (the parcel op, the yard subtraction, the hover/pin halo) is b
-    - `a0777074f` ? · DONE · transcript 09-14 17:02 1039 KB · 14 tool calls · result: {"items": [{"title": "Owner ruling on the DRESS-1b gestalt gate (two disagreeing rounds)", "what": "The partition dress failed its whole-leaf gestalt read twice
-    - `a473a7f6e` ? · IN FLIGHT · transcript 09-14 17:04 739 KB · 12 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a78aa38f0` ? · IN FLIGHT · transcript 09-14 17:03 755 KB · 20 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `ae2575922` ? · IN FLIGHT · transcript 09-14 17:04 790 KB · 21 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `ad0a131ab` ? · IN FLIGHT · transcript 09-14 17:04 727 KB · 21 tool calls · last: Bash cat /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scra
-    - `a280bd0ae` ? · IN FLIGHT · transcript 09-14 17:05 519 KB · 15 tool calls · last: Bash F=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratc
+    - `a3bef303a` ? · DONE · transcript 09-14 17:08 551 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The town's role roster seats 'a pedlar' and 'a guild factor', both of which the brief's ruling 42c strikes as archaisms ('a trave
+    - `abc44f4d7` ? · DONE · transcript 09-14 17:10 614 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Turn.md's header line says 'THE LINES TO WRITE' but lists seven pools, not the six the task instructions implied \u2014 I wrote o
+    - `a2c7ca878` ? · DONE · transcript 09-14 17:09 543 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 15, "notes": ["Every pool lists its read fields as UNREADABLE BY THIS CARD while also saying a second sentence must rest on one of those fields
+    - `a6715937f` ? · IN FLIGHT · transcript 09-14 17:06 438 KB · 5 tool calls · last: Bash sed -n '435,691p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
+    - `acc1d575b` ? · IN FLIGHT · transcript 09-14 17:09 438 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a4233eacd` ? · IN FLIGHT · transcript 09-14 17:09 443 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `a3c4e9ae7` ? · IN FLIGHT · transcript 09-14 17:10 435 KB · 5 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
+    - `a8caa0c24` ? · IN FLIGHT · transcript 09-14 17:10 443 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
 - **wf_59ec807d-940** (mtime 09-14 16:02): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_59ec807d-940/`
     - `aa0a85931` ? · DONE · transcript 09-14 15:10 606 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats have no roster on this town: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and DS-DEF-2 'Internal Security' f
     - `a1a27c60a` ? · DONE · transcript 09-14 15:35 1366 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["Two pools call for faces attributed to roles Spitzplatz's own roster does not seat: `elders` in DS-DEF-2 Invasion & War (the tow
@@ -326,4 +337,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.41 2.25 2.38
+load: 2.70 2.48 2.43

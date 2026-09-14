@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C1: a high rung on a working approach",
+   "vid": 1,
+   "spine": "A traveller off the road reads Rundgate's standing before a word is spoken to him. The spread of trades keeps more hands at work than the town strictly needs, and the traffic itself keeps an easy pace.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "Ask what the town lives on, and the answer comes back as a short list rather than a single trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "The market here carries Rundgate's own goods beside other towns' goods, unsorted for any stranger who cannot tell the difference.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "The yards stand full of goods bound outward, and no two loads are alike. This is a place built on selling.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 1,
+   "spine": "Here the count comes out ahead by a little, season after season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The town keeps its Garrison fed by a supply that failed somewhere upstream. The building stands, the skill remains, and the accounts wait.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "spine": "A little of the trade here slips by unrecorded... small enough that the clerks shrug at it and turn their attention elsewhere.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

@@ -1,0 +1,148 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 3,
+   "spine": "A stranger arriving in Hochhausen finds the market without asking the way, because the town's own road leads there on its own.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "GARRISONED",
+   "vid": 1,
+   "spine": "A traveller passing through Hochhausen finds armed order already in place, professionals kept on for the town's safety rather than left to chance.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "In Hochhausen, people find plenty to argue about besides money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 1,
+   "spine": "Hochhausen is a town that works: it gets what it needs and moves what it makes.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Lightly Defended",
+   "vid": 2,
+   "spine": "What Hochhausen could hold, it could not hold for long.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: ADEQUATE",
+   "vid": 3,
+   "spine": "The town could hold against what it expects, and everyone here knows it could not against what it does not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: WEAK",
+   "vid": 2,
+   "spine": "Nothing in Hochhausen stands organised against what lives beyond the fields, and each household answers for its own fences.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 2,
+   "spine": "More disagreements stay open in Hochhausen than get closed.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "A careful eye passing through Hochhausen notices first that there is nothing spare in it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "No practitioner of magic is kept in Hochhausen, no arrangement for one, and no expectation of either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 4,
+   "spine": "Food security in Hochhausen rests on its own harvest, safe from a closed road and not from a bad year.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: low",
+   "vid": 3,
+   "spine": "A day spent in Hochhausen would not be enough to learn that The Commercial Circle and The Administrative Circle are at odds. It shows itself only on a longer stay.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 3,
+   "spine": "Goods move into Hochhausen and out of it, and neither direction draws a second look.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 1,
+   "spine": "Set on a road, Hochhausen lives by it: goods in, goods out, people passing through.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 1,
+   "spine": "Settled at the size a place of its kind settles at, the town has not grown past that mark.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie in Hochhausen outweighs the rest, and it shows in what the town does and does not do.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "The people of Hochhausen are connected the way people in any settled place are, with no single tie among them that stands out from the rest.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "One loose end shows itself on a close look at Hochhausen, the kind a single institution would tie off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
