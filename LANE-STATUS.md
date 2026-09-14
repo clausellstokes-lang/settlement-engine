@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-13 20:20:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-13 20:26:04 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = c2b72466a Plan: wave 3 has begun — batch 2 of DS-DEF-2 (three pools) through draft 065b9ded6 and c
 
@@ -145,7 +145,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a5897fa30` CURER Beasts & Monsters: settled, nothing organized · DONE · transcript 09-13 20:18 648 KB · 24 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a922cf8ee` CURER Invasion & War: militia only · DONE · transcript 09-13 20:18 779 KB · 35 tool calls · files: cure.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
     - `aeb9e9c73` CURER Invasion & War: neither walls nor force · DONE · transcript 09-13 20:19 753 KB · 20 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
-    - `aa4216c6c` GATE r1 · IN FLIGHT · transcript 09-13 20:20 405 KB · 7 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aa4216c6c` GATE r1 · IN FLIGHT · transcript 09-13 20:25 676 KB · 29 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_9121cfb9-53a** (mtime 09-13 16:08): agent calls 61 (61 distinct) · DONE 49 · FAILED (not retried) 12 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_9121cfb9-53a/`
     - `adcc690c6` MARKER Beasts & Monsters: plagued, perimeter but NO force to hold it · DONE · transcript 09-13 13:57 851 KB · 46 tool calls · files: card-raw.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `ac770553e` MARKER Invasion & War: walls with citizen militia · DONE · transcript 09-13 14:02 992 KB · 61 tool calls · files: mark-out.txt, mark-err.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
@@ -282,4 +282,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 1.99 2.25 2.37
+load: 1.88 2.09 2.25
