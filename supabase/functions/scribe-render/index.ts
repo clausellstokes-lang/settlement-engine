@@ -248,6 +248,13 @@ export async function handleScribeRender(
     let verdicts: ScribeVerdict[] = [];
     let dropped = 0;
     let tier1Dropped = 0;
+    /**
+     * ⭐ HOW MANY UNITS SHIPPED WITH A ROW REPLACED BY THE HAND CORPUS (W3b car 3), over BOTH
+     * readers. RUN 2 measured a seven-line unit lost to one invented face; a patched unit is that
+     * unit shipping with the one face the corpus would have supplied anyway, and the pilot needs
+     * the figure apart from `dropped` to tell the two outcomes apart.
+     */
+    let patched = 0;
     /** `none` where tier 0 kept nothing to read, `ok` where the second reader ran, `skipped` on any failure of it. */
     let tier1: 'none' | 'ok' | 'skipped' = 'none';
     let calls = 0;
@@ -345,6 +352,7 @@ export async function handleScribeRender(
           units = judged.kept;
           verdicts = judged.verdicts;
           dropped = judged.dropped;
+          patched = judged.patched;
 
           // ⭐⭐ TIER 1 — THE SECOND READER (design §4; chair ruling 29). It runs only where tier 0
           // kept something, on the SAME two cached system blocks, so its input is almost entirely
@@ -379,11 +387,12 @@ export async function handleScribeRender(
               if (secondData?.stop_reason === 'refusal') throw new Error('tier1 refused');
               const answers = parseTier1Answers(answerTextOf(secondData));
               if (!answers.ok) throw new Error('tier1 unparseable');
-              const second0 = applyTier1(units, answers.answers);
+              const second0 = applyTier1(units, answers.answers, card);
               units = second0.kept;
               verdicts = [...verdicts, ...second0.verdicts];
               tier1Dropped = second0.dropped;
               dropped += second0.dropped;
+              patched += second0.patched;
               tier1 = 'ok';
             } catch (e) {
               logError('scribe-render', user.id, e, { stage: 'tier1' });
@@ -471,6 +480,11 @@ export async function handleScribeRender(
       // figure the pilot needs to tell a page the checklist passed from a page it never saw.
       tier1,
       tier1Dropped,
+      // ⭐ A PATCHED UNIT IS A KEPT UNIT, so it is already in `blocks` above with the corpus row at
+      // the seat that fell: `landBlock` carries it like any other, because the shape is unchanged
+      // and the composer renders a copied corpus wording exactly as it renders the corpus's own.
+      // This figure is how a reader tells "shipped whole" from "shipped with a row replaced".
+      patched,
       calls,
       balance: outcome.balance,
       free: usedFree,

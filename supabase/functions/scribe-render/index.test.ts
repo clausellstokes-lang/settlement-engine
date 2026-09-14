@@ -263,6 +263,40 @@ scopedEnv.test('⭐ A UNIT THE INSTRUMENTS FAIL IS DROPPED, AND ITS POOL IS ABSE
   assert(names(a).includes('refund_credits'), 'a render that lands nothing is refunded');
 });
 
+scopedEnv.test('⭐⭐ A FACE FALLS ALONE: the unit LANDS with the corpus at the refused seat', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  // An em dash is a HARD BAR the tier-0 refuter convicts on sight, so this drives the REAL
+  // instruments from the REAL bundle. It is in the FACE and not the spine, so under W3b car 3 the
+  // face falls to the corpus and the unit still ships — where W3a lost the whole unit, and with
+  // it every lawful line beside the one bad row (RUN 2 finding 3).
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1', balance: 7 }, u),
+    adminClient: makeAdminClient({}, a),
+    anthropicFetch: providerReturning([{ ...lawfulUnit, faces: ['A clerk says the purse is short — and getting shorter.'] }]),
+  });
+  assertEquals(res.status, 200, 'the render landed');
+  const body = await res.json();
+  assertEquals(body.ok, true);
+  assertEquals(body.patched, 1);
+  assertEquals(body.dropped, 0);
+  // ⭐ `landBlock` CARRIES A PATCHED UNIT LIKE ANY OTHER: the shape is unchanged, so the artefact
+  // and the composer need no new case. The words at the refused seat are the CORPUS's.
+  assertEquals(body.blocks['DS-DEF-2'].k[0].spine, 'The watch keeps a short roll.');
+  assertEquals(body.blocks['DS-DEF-2'].k[0].faces, ['a face']);
+  const patchedRow = body.verdicts.find((v: { verdict: string }) => v.verdict === 'PATCHED');
+  assert(patchedRow, 'the artefact carries a PATCHED verdict row');
+  assertEquals(patchedRow.patched, ['face 0'], 'and it names the seat');
+  // ⭐ EVERY FINDING NAMES ITS OWN ROW, which is RUN 2 finding 4's cure: the spine's own WITHHELD
+  // rides beside the face's FAIL and a reader can tell which row earned which arm.
+  const seats = patchedRow.findings.map((f: { seat: string }) => f.seat);
+  assert(seats.includes('face 0'), `the refused face is named among ${JSON.stringify(seats)}`);
+  const failed = patchedRow.findings.filter((f: { channel: string }) => f.channel === 'FAIL');
+  assertEquals([...new Set(failed.map((f: { seat: string }) => f.seat))], ['face 0'],
+    'and only the face FAILED: the spine and the notebook stand');
+  assert(!names(a).includes('refund_credits'), 'a render that landed is not refunded');
+});
+
 scopedEnv.test('a lawful unit lands BLOCK-SHAPED with its verdict', async () => {
   const u: Array<{ fn: string; args: unknown }> = [];
   const a: Array<{ fn: string; args: unknown }> = [];
@@ -286,6 +320,7 @@ scopedEnv.test('a lawful unit lands BLOCK-SHAPED with its verdict', async () => 
   assertEquals(body.usage.cacheRead, 57_000);
   assertEquals(body.tier1, 'ok');
   assertEquals(body.tier1Dropped, 0);
+  assertEquals(body.patched, 0, 'a clean unit ships whole and nothing is patched');
 });
 
 scopedEnv.test('⭐ TIER 1 RUNS ON THE SAME TWO CACHED BLOCKS, and only the turn and the schema differ', async () => {

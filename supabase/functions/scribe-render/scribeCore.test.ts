@@ -197,14 +197,52 @@ Deno.test('⭐ FAIL IS DROPPED, WITHHELD SHIPS — the corpus\'s own rule, not a
   assertEquals(withheld.verdicts[0].verdict, 'WITHHELD');
 });
 
-Deno.test('the worst verdict any ROW earns is the unit\'s, because a unit ships whole', () => {
+Deno.test('every row is refuted on its own: spine, then every face, then every note', () => {
   const seen: string[] = [];
-  const out = judgeUnits([unit({ notebook: ['a note'] })], card, (u: { text: string }) => {
+  judgeUnits([unit({ notebook: ['a note'] })], card, (u: { text: string }) => {
     seen.push(u.text);
-    return u.text === 'b' ? { verdict: 'FAIL', findings: [] } : passes();
+    return passes();
   });
   assertEquals(seen, ['A line.', 'a', 'b', 'a note'], 'spine, then every face, then every note');
+});
+
+Deno.test('⭐⭐ A FACE FALLS ALONE: the refused face becomes the CORPUS face and the unit ships', () => {
+  // ⛔ RUN 2 FINDING 3. A seven-line unit died on face one with its spine and face nought answered
+  // all-no, and the pool then drew the hand corpus for all seven — which is the line face one
+  // would have got anyway. Ruling 5/6's "a unit ships whole" is amended: whole OR patched.
+  const out = judgeUnits([unit({ notebook: [] })], card, (u: { text: string }) => (
+    u.text === 'b' ? { verdict: 'FAIL', findings: [{ arm: 'WALL-6', channel: 'FAIL' }] } : passes()
+  ));
+  assertEquals(out.kept.length, 1, 'the unit ships');
+  assertEquals(out.dropped, 0);
+  assertEquals(out.patched, 1);
+  // Face 1 is the CORPUS face at that seat; face 0 is still the model's own.
+  assertEquals(out.kept[0].faces, ['a', 'face one']);
+  assertEquals(out.kept[0].spine, 'A line.', 'the spine is untouched');
+  assertEquals(out.verdicts[0].verdict, 'PATCHED');
+  assertEquals(out.verdicts[0].patched, ['face 1']);
+  assertEquals(out.verdicts[0].arms, ['WALL-6']);
+  assertEquals(out.verdicts[0].findings[0].seat, 'face 1', 'every finding names its seat');
+});
+
+Deno.test('⛔ A REFUSED SPINE STILL DROPS THE UNIT WHOLE, because the spine is the fact', () => {
+  const out = judgeUnits([unit()], card, (u: { text: string }) => (
+    u.text === 'A line.' ? { verdict: 'FAIL', findings: [{ arm: 'C4', channel: 'FAIL' }] } : passes()
+  ));
   assertEquals(out.kept.length, 0);
+  assertEquals(out.dropped, 1);
+  assertEquals(out.patched, 0);
+  assertEquals(out.verdicts[0].verdict, 'FAIL');
+});
+
+Deno.test('a refused NOTEBOOK row is dropped alone: the notebook has no corpus twin', () => {
+  const out = judgeUnits([unit({ notebook: ['a note', 'another note'] })], card, (u: { text: string }) => (
+    u.text === 'a note' ? { verdict: 'FAIL', findings: [{ arm: 'X', channel: 'FAIL' }] } : passes()
+  ));
+  assertEquals(out.kept.length, 1);
+  assertEquals(out.kept[0].notebook, ['another note']);
+  assertEquals(out.kept[0].faces, ['a', 'b'], 'no face moved');
+  assertEquals(out.verdicts[0].patched, ['notebook 0']);
 });
 
 Deno.test('a refuter that THROWS convicts the unit rather than crashing the render', () => {
@@ -272,28 +310,58 @@ Deno.test('the checklist prints the page\'s machine lines, which question 7 is a
   assert(!text.includes('which is NOT a machine line'), 'a composed row is the prose, not the page');
 });
 
-Deno.test('⭐ A YES ON ANY ROW DROPS THE UNIT, and its arm names the question', () => {
+Deno.test('⭐ A YES ON A FACE PATCHES THAT SEAT; a yes on the SPINE drops the unit', () => {
   const kept = [unit()];
+  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
   // Row 1 is the spine, rows 2 and 3 the two faces. A `yes` on the MECHANISM question of row 3.
-  const out = applyTier1(kept, [
-    { n: 1, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' },
-    { n: 3, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'yes', samePage: 'no' },
-  ]);
-  assertEquals(out.kept.length, 0);
-  assertEquals(out.dropped, 1);
-  assertEquals(out.verdicts[0].arms, ['T1-MECHANISM']);
-  assertEquals(out.verdicts[0].verdict, 'FAIL');
-  assertEquals(out.verdicts[0].poolKey, 'FAMILY: acute crisis');
+  const patch = applyTier1(kept, [{ n: 1, ...no }, { n: 3, ...no, mechanism: 'yes' }], card);
+  assertEquals(patch.kept.length, 1, 'the unit ships with the corpus at that seat');
+  assertEquals(patch.kept[0].faces, ['a', 'face one']);
+  assertEquals(patch.dropped, 0);
+  assertEquals(patch.patched, 1);
+  assertEquals(patch.verdicts[0].verdict, 'PATCHED');
+  assertEquals(patch.verdicts[0].patched, ['face 1']);
+  assertEquals(patch.verdicts[0].arms, ['T1-MECHANISM']);
+  assertEquals(patch.verdicts[0].poolKey, 'FAMILY: acute crisis');
+
+  // THE SPINE IS THE FACT: a yes there takes the whole unit, as it always did.
+  const drop = applyTier1(kept, [{ n: 1, ...no, mechanism: 'yes' }], card);
+  assertEquals(drop.kept.length, 0);
+  assertEquals(drop.dropped, 1);
+  assertEquals(drop.verdicts[0].verdict, 'FAIL');
+
+  // ⛔ WITHOUT A CARD THERE IS NO CORPUS FACE TO PATCH WITH, so the unit falls whole. Every caller
+  // in the product and the pilot passes one; this is the safe answer for one that cannot.
+  const blind = applyTier1(kept, [{ n: 3, ...no, mechanism: 'yes' }]);
+  assertEquals(blind.kept.length, 0);
+  assertEquals(blind.dropped, 1);
+});
+
+Deno.test('⭐⭐ A ROW BYTE-EQUAL TO THE CORPUS IS NOT SENT TO THE SECOND READER', () => {
+  // ⛔ IT IS THE LINE EVERY REFUSAL FALLS BACK TO. Sending the hand-written row to a model that can
+  // answer `yes` would let the second reader refuse the corpus itself, and the numbering must not
+  // close up behind it or every answer after it would map to the wrong line.
+  const copied = unit({ spine: 'The corpus spine stands.', faces: ['a', 'face one'] });
+  const text = buildTier1Checklist([copied], card);
+  assert(!text.includes('The corpus spine stands.'), 'the corpus spine is exempt');
+  assert(!text.includes('(face 1) face one'), 'the corpus face is exempt');
+  assert(text.includes('2. (face 0) a'), 'the model\'s own row is asked, under its own number');
+  // AND A `yes` ON AN EXEMPT NUMBER IS IGNORED, because nobody was asked it.
+  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
+  assertEquals(applyTier1([copied], [{ n: 1, ...no, certainty: 'yes' }], card).kept.length, 1);
+  assertEquals(applyTier1([copied], [{ n: 3, ...no, certainty: 'yes' }], card).kept.length, 1);
+  // NEGATIVE CONTROL — the row that is NOT the corpus is still refusable.
+  assertEquals(applyTier1([copied], [{ n: 2, ...no, certainty: 'yes' }], card).patched, 1);
 });
 
 Deno.test('a clean sheet keeps every unit, and an answer for a line that does not exist is ignored', () => {
   const kept = [unit()];
   const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
-  assertEquals(applyTier1(kept, [{ n: 1, ...no }, { n: 2, ...no }, { n: 3, ...no }]).kept.length, 1);
+  assertEquals(applyTier1(kept, [{ n: 1, ...no }, { n: 2, ...no }, { n: 3, ...no }], card).kept.length, 1);
   // ⛔ A ROW OUTSIDE THE ENUMERATION IS A REPLY THAT DID NOT FOLLOW THE LIST, and dropping a unit
   // on it would refuse a line nobody read.
-  assertEquals(applyTier1(kept, [{ n: 99, ...no, mechanism: 'yes' }]).kept.length, 1);
-  assertEquals(applyTier1(kept, []).dropped, 0);
+  assertEquals(applyTier1(kept, [{ n: 99, ...no, mechanism: 'yes' }], card).kept.length, 1);
+  assertEquals(applyTier1(kept, [], card).dropped, 0);
 });
 
 Deno.test('the tier-1 answer schema is CLOSED at every level and admits only yes or no', () => {

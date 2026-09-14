@@ -594,36 +594,44 @@ function cardPool(card, blockId, poolKey) {
 }
 
 /**
- * ⭐⭐ THE GATE EVERY RENDERED LINE PASSES (design §4; chair rulings 5 and 6).
+ * ⭐⭐ A FACE FALLS ALONE (W3b car 3; ruling 5/6's "a unit ships whole" AMENDED by the chair to
+ * "a unit ships whole OR PATCHED, never with a refused row").
  *
- * The tier-0 instruments run over every unit, from the SAME bundle the corpus programme is
- * audited by, so the Scribe is held to the corpus's own standard rather than to a second one
- * written for it. The rule is the corpus's rule:
- *   FAIL      → the unit is DROPPED and that pool draws the hand corpus. Silently, on the player
- *               page: the dossier is one archiver, and telling the reader which line a model wrote
- *               would break the frame (ruling 6).
- *   WITHHELD  → SHIPS. The corpus ships its own WITHHELDs; a rendered line is held to the same bar
- *               and not to a stricter one invented here.
- *   PASS      → ships.
- * A unit whose FACE COUNT does not match the corpus unit's is dropped BEFORE the instruments see
- * it, because the words would be mis-seated rather than merely wrong.
+ * ⛔ THE MEASUREMENT. RUN 2 finding 3: a SEVEN-LINE unit died on face one with its spine and its
+ * face nought answered all-no. The ships-whole rule turns ONE invented face into six lost lawful
+ * lines, and the pool then draws the hand corpus for all seven — which is the line face one would
+ * have got anyway. So the fallback is taken at the grain the refusal was found at:
  *
- * ⭐ THE VERDICT ROW CARRIES ITS FAIL AND WITHHELD FINDINGS, and only those. Ruling 6 makes the
- * per-unit verdicts readable on the DM page as a REPORT, and a bare arm name ("Q") is not a
- * report a reader can act on; the arm's own subject, value and description are. The REPORT and
- * NOT-EXECUTABLE rows are deliberately NOT carried: the MEASURE limb alone emits six rows per
- * line, which would multiply the artefact's size for figures the pilot reads from its own run.
+ *   A REFUSED FACE  → that face is replaced by THE CORPUS FACE AT THE SAME SEAT and the unit ships
+ *                     PATCHED. The corpus face is the raw wording the composer already renders for
+ *                     this pool (`scribeVariantPool` overlays `spine`/`faces` onto the variant's
+ *                     `text`/`wordings`, so a copied wording is filled and seated exactly as the
+ *                     corpus's own is), which is why the patch is a line and not a hole.
+ *   A REFUSED SPINE → the unit is DROPPED whole. The spine is the FACT; a pool whose fact is
+ *                     refused has no seat left to stand the faces on.
+ *   A REFUSED NOTE  → that notebook row is dropped ALONE. The notebook has no corpus twin to
+ *                     copy (measured: zero of the corpus's 83 dm-only variants carry a wording),
+ *                     and on the shipped corpus `notebook` is `[]` on every pool.
+ *
+ * The rest of the gate is unchanged: the tier-0 instruments are the corpus programme's own, from
+ * the same bundle; WITHHELD still SHIPS, because the corpus ships its own WITHHELDs; a unit whose
+ * FACE COUNT does not match is dropped before the instruments see it, since the words would be
+ * mis-seated rather than merely wrong.
+ *
+ * ⭐ EVERY FINDING NAMES ITS SEAT. RUN 2 finding 4 was that the judge under-reports: a reader of
+ * a verdict could not tell which row of a unit earned the arm. The seat is now on the finding.
  *
  * @param {ReadonlyArray<object>} units
  * @param {object} card
  * @param {(unit: object, card: object, extra?: object) => object} refute the bundle's `refuteUnit`,
  *   injected so this module has no import of its own
- * @returns {{kept: object[], verdicts: object[], dropped: number}}
+ * @returns {{kept: object[], verdicts: object[], dropped: number, patched: number}}
  */
 export function judgeUnits(units, card, refute) {
   const kept = [];
   const verdicts = [];
   let dropped = 0;
+  let patched = 0;
 
   for (const unit of (Array.isArray(units) ? units : [])) {
     const pool = cardPool(card, unit.blockId, unit.poolKey);
@@ -634,6 +642,7 @@ export function judgeUnits(units, card, refute) {
       vid: unit.vid,
       verdict: 'FAIL',
       arms: [],
+      patched: [],
       findings: [],
     };
     if (!pool) {
@@ -650,11 +659,19 @@ export function judgeUnits(units, card, refute) {
     }
 
     // Every row of the unit is refuted on its own: the spine, then each face, then each notebook
-    // line. The worst verdict any of them earns is the unit's, because a unit ships whole.
-    const texts = [unit.spine, ...unit.faces, ...unit.notebook].filter((t) => t !== '');
+    // line — and each row's answer is acted on at ITS OWN GRAIN.
+    const rows = [
+      { seat: 'spine', kind: 'spine', at: -1, text: String(unit.spine ?? '') },
+      ...unit.faces.map((text, i) => ({ seat: `face ${i}`, kind: 'face', at: i, text: String(text ?? '') })),
+      ...unit.notebook.map((text, i) => ({ seat: `notebook ${i}`, kind: 'notebook', at: i, text: String(text ?? '') })),
+    ].filter((r) => r.text !== '');
+
     let worst = 'PASS';
+    let spineFailed = false;
     const arms = new Set();
-    for (const text of texts) {
+    const badFaces = new Set();
+    const badNotes = new Set();
+    for (const line of rows) {
       let out;
       try {
         // ⛔ ONE ROW AT A TIME, AND THE UNIT'S OWN FACES ARE NOT PASSED. A5 and A6 are SIBLING
@@ -662,7 +679,7 @@ export function judgeUnits(units, card, refute) {
         // report the same overlap four times. The row is judged as the string it is, exactly as
         // it was before this module took the function over, so no verdict moves with the move.
         out = refute(
-          { text, blockId: unit.blockId, poolKey: unit.poolKey },
+          { text: line.text, blockId: unit.blockId, poolKey: unit.poolKey },
           card,
           { corpusUnit: pool.unit || null },
         );
@@ -670,28 +687,55 @@ export function judgeUnits(units, card, refute) {
         out = { verdict: 'FAIL', findings: [{ arm: 'REFUTER-THREW', channel: 'FAIL' }] };
       }
       const verdict = String(out?.verdict || 'FAIL');
-      if (verdict === 'FAIL') worst = 'FAIL';
-      else if (verdict === 'WITHHELD' && worst !== 'FAIL') worst = 'WITHHELD';
+      if (verdict === 'FAIL') {
+        if (line.kind === 'spine') spineFailed = true;
+        else if (line.kind === 'face') badFaces.add(line.at);
+        else badNotes.add(line.at);
+      } else if (verdict === 'WITHHELD' && worst === 'PASS') worst = 'WITHHELD';
       for (const finding of Array.isArray(out?.findings) ? out.findings : []) {
         if (!finding || (finding.channel !== 'FAIL' && finding.channel !== 'WITHHELD')) continue;
         arms.add(String(finding.arm));
         row.findings.push({
           arm: String(finding.arm ?? ''),
           channel: String(finding.channel ?? ''),
+          seat: line.seat,
           subject: String(finding.subject ?? ''),
           value: String(finding.value ?? ''),
           description: String(finding.description ?? ''),
         });
       }
     }
-    row.verdict = worst;
     row.arms = [...arms].sort();
+
+    if (spineFailed) {
+      row.verdict = 'FAIL';
+      verdicts.push(row);
+      dropped += 1;
+      continue;
+    }
+    if (badFaces.size === 0 && badNotes.size === 0) {
+      row.verdict = worst;
+      verdicts.push(row);
+      kept.push(unit);
+      continue;
+    }
+    // ⭐ THE PATCH. A NEW unit is built rather than the caller's mutated: the harness and the
+    // handler both keep the model's own answer beside the judged one.
+    row.verdict = 'PATCHED';
+    row.patched = [
+      ...[...badFaces].sort((a, b) => a - b).map((i) => `face ${i}`),
+      ...[...badNotes].sort((a, b) => a - b).map((i) => `notebook ${i}`),
+    ];
     verdicts.push(row);
-    if (worst === 'FAIL') { dropped += 1; continue; }
-    kept.push(unit);
+    patched += 1;
+    kept.push({
+      ...unit,
+      faces: unit.faces.map((text, i) => (badFaces.has(i) ? String(corpusFaces[i] ?? '') : text)),
+      notebook: unit.notebook.filter((_, i) => !badNotes.has(i)),
+    });
   }
 
-  return { kept, verdicts, dropped };
+  return { kept, verdicts, dropped, patched };
 }
 
 /**
@@ -751,10 +795,22 @@ export const TIER1_QUESTIONS = Object.freeze([
  * ⭐ THE NUMBERED LINES, DERIVED ONCE. The checklist prints them and `applyTier1` maps an answer
  * back to its unit, so both must enumerate identically or a `yes` would drop the wrong line. One
  * function, two callers.
+ *
+ * ⭐⭐ A ROW BYTE-EQUAL TO THE CORPUS AT ITS OWN SEAT IS MARKED `corpus` AND IS NOT SENT TO THE
+ * SECOND READER (W3b car 3). It is the hand-written line: it already ships on this page, it was
+ * written by the corpus programme and audited by the corpus programme's own instruments, and
+ * paying a model to re-judge it would let the second reader refuse the very thing every refusal
+ * falls back TO. Tier 0 still runs on it, as it runs on the corpus's own rows. The NUMBERING is
+ * over EVERY row either way, so `n` does not move when a patch turns a face into the corpus and a
+ * stray answer for an exempt line maps to the row it names rather than to the wrong one.
+ *
  * @param {ReadonlyArray<object>} units
- * @returns {Array<{n: number, unit: number, row: string, text: string}>}
+ * @param {object} [card] the town card, for the corpus row at each seat; without it nothing is
+ *   exempt, which is the safe answer for a caller that has no card to compare against
+ * @returns {Array<{n: number, unit: number, row: string, kind: string, at: number,
+ *   text: string, corpus: boolean}>}
  */
-export function tier1Lines(units) {
+export function tier1Lines(units, card) {
   const rows = [];
   let n = 0;
   const all = Array.isArray(units) ? units : [];
@@ -762,15 +818,31 @@ export function tier1Lines(units) {
     const unit = all[u] || {};
     const faces = Array.isArray(unit.faces) ? unit.faces : [];
     const notebook = Array.isArray(unit.notebook) ? unit.notebook : [];
+    const pool = card ? cardPool(card, String(unit.blockId ?? ''), String(unit.poolKey ?? '')) : null;
+    const corpusSpine = String(pool?.unit?.spine ?? '');
+    const corpusFaces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
     const labelled = [
-      { row: 'spine', text: String(unit.spine ?? '') },
-      ...faces.map((text, i) => ({ row: `face ${i}`, text: String(text ?? '') })),
-      ...notebook.map((text, i) => ({ row: `notebook ${i}`, text: String(text ?? '') })),
+      {
+        row: 'spine', kind: 'spine', at: -1, text: String(unit.spine ?? ''),
+        corpus: Boolean(pool) && corpusSpine !== '' && String(unit.spine ?? '') === corpusSpine,
+      },
+      ...faces.map((text, i) => ({
+        row: `face ${i}`,
+        kind: 'face',
+        at: i,
+        text: String(text ?? ''),
+        corpus: Boolean(pool) && String(corpusFaces[i] ?? '') !== '' && String(text ?? '') === String(corpusFaces[i] ?? ''),
+      })),
+      // ⛔ A NOTEBOOK ROW HAS NO CORPUS TWIN, so it is never exempt. Measured over all six shipped
+      // leaves: 83 dm-only variants and not one of them carries a `wordings` row.
+      ...notebook.map((text, i) => ({
+        row: `notebook ${i}`, kind: 'notebook', at: i, text: String(text ?? ''), corpus: false,
+      })),
     ];
     for (const line of labelled) {
       if (!line.text) continue;
       n += 1;
-      rows.push({ n, unit: u, row: line.row, text: line.text });
+      rows.push({ n, unit: u, ...line });
     }
   }
   return rows;
@@ -833,8 +905,13 @@ export function buildTier1Checklist(units, card) {
     for (const row of page) lines.push(row);
   }
   lines.push('');
-  lines.push('THE LINES:');
-  const rows = tier1Lines(units);
+  lines.push('THE LINES. The numbering skips the hand-written lines, which are not yours to judge;');
+  lines.push('answer for the numbers that appear and for no others.');
+  // ⛔ THE EXEMPT ROWS ARE NOT PRINTED, AND THE NUMBERS DO NOT CLOSE UP BEHIND THEM. A row
+  // byte-equal to the corpus at its seat already ships on this page; sending it here would let the
+  // second reader refuse the line every refusal falls back TO, and re-numbering would move every
+  // answer after it onto the wrong line.
+  const rows = tier1Lines(units, card).filter((row) => row.corpus !== true);
   const all = Array.isArray(units) ? units : [];
   let at = -1;
   for (const row of rows) {
@@ -878,64 +955,99 @@ export const TIER1_ANSWER_SCHEMA = Object.freeze({
 });
 
 /**
- * ⭐⭐ THE SECOND READER'S VERDICT, APPLIED (chair ruling 29).
+ * ⭐⭐ THE SECOND READER'S VERDICT, APPLIED (chair ruling 29; W3b car 3).
  *
- * Any `yes` on any ROW of a unit drops the whole unit, because a unit ships whole — the same rule
- * `judgeUnits` applies at tier 0. The return is `judgeUnits`'s own shape so the two verdict lists
- * concatenate, and a verdict row is emitted ONLY for a unit tier 1 REFUSES: tier 0 has already
- * written a row for every unit, and a second PASS row per unit would double the artefact's
- * verdict list to say nothing.
+ * A `yes` falls at THE GRAIN IT WAS FOUND AT, exactly as tier 0's does and for the same measured
+ * reason (RUN 2 finding 3: a seven-line unit died on face one with its spine answered all-no):
+ *   a `yes` on the SPINE   → the unit is dropped whole, because the spine is the fact;
+ *   a `yes` on a FACE      → that face becomes THE CORPUS FACE at the same seat and the unit ships
+ *                            PATCHED;
+ *   a `yes` on a NOTEBOOK  → that row is dropped alone (it has no corpus twin to copy).
  *
- * ⛔ AN ANSWER FOR A LINE NUMBER THAT DOES NOT EXIST IS IGNORED, NOT GUESSED AT. The enumeration
- * is `tier1Lines`'s and the model is told the numbers; a row outside it is a reply that did not
- * follow the list, and dropping a unit on it would refuse a line nobody read.
+ * The return is `judgeUnits`'s own shape so the two verdict lists concatenate, and a verdict row is
+ * emitted ONLY for a unit tier 1 acts on: tier 0 has already written a row for every unit, and a
+ * second PASS row per unit would double the artefact's verdict list to say nothing.
+ *
+ * ⛔ AN ANSWER FOR A LINE NUMBER THAT DOES NOT EXIST IS IGNORED, NOT GUESSED AT, and so is an
+ * answer for an EXEMPT line: `tier1Lines` marks a row byte-equal to the corpus at its seat and the
+ * checklist never prints it, so a `yes` there is an answer to a question nobody asked.
+ *
+ * ⛔ WITHOUT A CARD THERE IS NO CORPUS FACE TO PATCH WITH, so a refused face drops the unit whole,
+ * which is W3a's rule and the safe answer. Every caller in the product and the pilot passes one.
  *
  * @param {ReadonlyArray<object>} units the units tier 0 kept
  * @param {ReadonlyArray<object>} answers the model's rows
- * @returns {{kept: object[], verdicts: object[], dropped: number}}
+ * @param {object} [card] the town card, for the corpus row at each seat
+ * @returns {{kept: object[], verdicts: object[], dropped: number, patched: number}}
  */
-export function applyTier1(units, answers) {
+export function applyTier1(units, answers, card) {
   const all = Array.isArray(units) ? units : [];
-  const rows = tier1Lines(all);
+  const rows = tier1Lines(all, card);
   const byNumber = new Map(rows.map((row) => [row.n, row]));
-  /** @type {Map<number, Array<{arm: string, row: string, text: string}>>} */
+  /** @type {Map<number, Array<{arm: string, row: string, kind: string, at: number, text: string}>>} */
   const refused = new Map();
 
   for (const answer of (Array.isArray(answers) ? answers : [])) {
     if (!answer || typeof answer !== 'object') continue;
     const line = byNumber.get(Number(answer.n));
-    if (!line) continue;
+    if (!line || line.corpus === true) continue;
     for (const question of TIER1_QUESTIONS) {
       if (String(answer[question.key] ?? '').toLowerCase() !== 'yes') continue;
       const held = refused.get(line.unit) || [];
-      held.push({ arm: question.arm, row: line.row, text: line.text });
+      held.push({
+        arm: question.arm, row: line.row, kind: line.kind, at: line.at, text: line.text,
+      });
       refused.set(line.unit, held);
     }
   }
 
   const kept = [];
   const verdicts = [];
+  let dropped = 0;
+  let patched = 0;
   for (let u = 0; u < all.length; u += 1) {
     const hits = refused.get(u);
     if (!hits) { kept.push(all[u]); continue; }
     const unit = all[u];
+    const pool = card ? cardPool(card, String(unit.blockId ?? ''), String(unit.poolKey ?? '')) : null;
+    const corpusFaces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
+    const faces = Array.isArray(unit.faces) ? unit.faces : [];
+    const notebook = Array.isArray(unit.notebook) ? unit.notebook : [];
+    const badFaces = new Set(hits.filter((h) => h.kind === 'face').map((h) => h.at));
+    const badNotes = new Set(hits.filter((h) => h.kind === 'notebook').map((h) => h.at));
+    // A refused face with no corpus twin to put in its place cannot be patched, so the unit falls.
+    const canPatch = [...badFaces].every((i) => String(corpusFaces[i] ?? '') !== '');
+    const dropWhole = hits.some((h) => h.kind === 'spine') || !canPatch;
+    const seats = [
+      ...[...badFaces].sort((a, b) => a - b).map((i) => `face ${i}`),
+      ...[...badNotes].sort((a, b) => a - b).map((i) => `notebook ${i}`),
+    ];
     verdicts.push({
       blockId: unit.blockId,
       poolKey: unit.poolKey,
       vid: unit.vid,
-      verdict: 'FAIL',
+      verdict: dropWhole ? 'FAIL' : 'PATCHED',
       arms: [...new Set(hits.map((h) => h.arm))].sort(),
+      patched: dropWhole ? [] : seats,
       findings: hits.map((h) => ({
         arm: h.arm,
         channel: 'FAIL',
+        seat: h.row,
         subject: 'the second reader refused this row',
         value: h.row,
         // ⛔ NO EM DASH IN A STRING THAT CAN REACH A READER. The DM page prints the per-unit
         // verdicts as a REPORT (ruling 6) and the E2 ratchet holds every rendered face at hard
         // zero on the mark, so a finding's own prose keeps the same bar the prose it judges does.
-        description: `${h.text.slice(0, 120)} (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)`,
+        description: `${h.text.slice(0, 120)} (the second reader answered yes on this question, so ${dropWhole ? 'the unit falls to the hand-written line' : 'this row falls to the hand-written line and the rest of the unit stands'})`,
       })),
     });
+    if (dropWhole) { dropped += 1; continue; }
+    patched += 1;
+    kept.push({
+      ...unit,
+      faces: faces.map((text, i) => (badFaces.has(i) ? String(corpusFaces[i] ?? '') : text)),
+      notebook: notebook.filter((_, i) => !badNotes.has(i)),
+    });
   }
-  return { kept, verdicts, dropped: verdicts.length };
+  return { kept, verdicts, dropped, patched };
 }

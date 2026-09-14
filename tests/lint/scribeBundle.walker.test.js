@@ -234,7 +234,7 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     const b = mod.judgeUnits(fromBundle.units, CARD, mod.refuteUnit);
     expect(JSON.stringify(b)).toBe(JSON.stringify(a));
     expect(a.verdicts.length).toBe(1);
-    expect(['PASS', 'WITHHELD', 'FAIL']).toContain(a.verdicts[0].verdict);
+    expect(['PASS', 'WITHHELD', 'PATCHED', 'FAIL']).toContain(a.verdicts[0].verdict);
   });
 
   it('⭐ THE SECOND READER: applyTier1 drops on a yes and keeps on a clean sheet, both sides of the seam', async () => {
@@ -265,14 +265,59 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     expect(applyTier1([unit], clean).dropped).toBe(0);
     expect(JSON.stringify(mod.applyTier1([unit], clean))).toBe(JSON.stringify(applyTier1([unit], clean)));
 
-    // NEGATIVE CONTROL — one `yes`, on ANY row, drops the whole unit, because a unit ships whole.
+    // ⭐ NEGATIVE CONTROL — one `yes` on the SPINE takes the unit whole, because the spine is the
+    // fact. W3b car 3 amends ruling 5/6: a unit ships whole OR PATCHED, never with a refused row.
     for (const question of TIER1_QUESTIONS) {
-      const sheet = [{ n: 2, ...no, [question.key]: 'yes' }];
+      const sheet = [{ n: 1, ...no, [question.key]: 'yes' }];
       const out = applyTier1([unit], sheet);
       expect(out.kept.length, `${question.key} did not drop the unit`).toBe(0);
       expect(out.verdicts[0].arms).toEqual([question.arm]);
+      expect(out.verdicts[0].verdict).toBe('FAIL');
       expect(JSON.stringify(mod.applyTier1([unit], sheet))).toBe(JSON.stringify(out));
     }
+
+    // ⭐⭐ AND ONE `yes` ON A FACE PATCHES THAT SEAT AND SHIPS THE REST, on a REAL card, so the
+    // corpus face it falls to is the one the composer would have rendered for this pool anyway.
+    const pool = CARD.pools.find((p) => Array.isArray(p.unit.faces) && p.unit.faces.length > 0);
+    expect(pool, 'the pinned town fires no pool with a face on the defense tab').toBeTruthy();
+    const real = {
+      blockId: pool.blockId,
+      poolKey: pool.poolKey,
+      vid: pool.vid,
+      spine: 'The walls are kept and no soldiers of the town stand behind them.',
+      faces: pool.unit.faces.map((_, i) => `A clerk in the hall says the keeping is paid out of the common purse, line ${i}.`),
+      notebook: [],
+    };
+    const faceSheet = [{ n: 2, ...no, mechanism: 'yes' }];
+    const patched = applyTier1([real], faceSheet, CARD);
+    expect(patched.kept.length, 'the unit must ship with the corpus at that seat').toBe(1);
+    expect(patched.patched).toBe(1);
+    expect(patched.dropped).toBe(0);
+    expect(patched.verdicts[0].verdict).toBe('PATCHED');
+    expect(patched.verdicts[0].patched).toEqual(['face 0']);
+    expect(patched.kept[0].faces[0]).toBe(pool.unit.faces[0]);
+    expect(JSON.stringify(mod.applyTier1([real], faceSheet, CARD))).toBe(JSON.stringify(patched));
+
+    // ⛔ WITHOUT A CARD THERE IS NO CORPUS FACE TO PATCH WITH, so the unit falls whole. Both sides
+    // of the seam agree on that too.
+    expect(applyTier1([real], faceSheet).kept.length).toBe(0);
+    expect(JSON.stringify(mod.applyTier1([real], faceSheet))).toBe(JSON.stringify(applyTier1([real], faceSheet)));
+
+    // ⭐ A ROW BYTE-EQUAL TO THE CORPUS IS EXEMPT, on both sides, and the numbering does not move.
+    const copied = { ...real, faces: [...pool.unit.faces] };
+    expect(tier1Lines([copied], CARD).filter((r) => r.corpus).map((r) => r.row))
+      .toEqual(pool.unit.faces.map((_, i) => `face ${i}`));
+    expect(tier1Lines([copied], CARD).map((r) => r.n)).toEqual(tier1Lines([copied]).map((r) => r.n));
+    expect(applyTier1([copied], faceSheet, CARD).kept.length, 'a yes on an exempt row is ignored').toBe(1);
+    expect(mod.buildTier1Checklist([copied], CARD)).toBe(buildTier1Checklist([copied], CARD));
+    expect(buildTier1Checklist([copied], CARD)).not.toContain(pool.unit.faces[0]);
+
+    // THE TIER-0 JUDGE TAKES THE SAME FALLBACK AT THE SAME GRAIN, both sides of the seam.
+    const emdash = { ...real, faces: real.faces.map((t, i) => (i === 0 ? 'A clerk says the purse is short — and getting shorter.' : t)) };
+    const judged = judgeUnits([emdash], CARD, refuteUnit);
+    expect(judged.patched).toBe(1);
+    expect(judged.kept[0].faces[0]).toBe(pool.unit.faces[0]);
+    expect(JSON.stringify(mod.judgeUnits([emdash], CARD, mod.refuteUnit))).toBe(JSON.stringify(judged));
 
     // AND THE CHECKLIST THE ANSWERS ARE ABOUT IS THE SAME BYTES ON BOTH SIDES.
     expect(mod.buildTier1Checklist([unit], CARD)).toBe(buildTier1Checklist([unit], CARD));

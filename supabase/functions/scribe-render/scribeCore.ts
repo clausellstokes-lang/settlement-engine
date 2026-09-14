@@ -95,11 +95,16 @@ export interface ScribeVerdict {
   blockId: string;
   poolKey: string;
   vid: number;
+  /** `PASS` · `WITHHELD` · `PATCHED` (a row fell to the corpus and the rest stands) · `FAIL`. */
   verdict: string;
   arms: string[];
+  /** The seats a fallback was taken at, e.g. `face 1`. Empty on every other verdict. */
+  patched: string[];
   findings: Array<{
     arm: string;
     channel: string;
+    /** Which row of the unit earned this finding: `spine`, `face i`, `notebook i`. */
+    seat: string;
     subject: string;
     value: string;
     description: string;
@@ -126,12 +131,15 @@ export const parseScribeUnits = (
   answerText: string,
 ): { ok: boolean; units: ScribeUnit[]; reason: string } => parseScribeUnitsJs(answerText);
 
-/** ⭐⭐ THE GATE EVERY RENDERED LINE PASSES (design §4; chair rulings 5 and 6). */
+/**
+ * ⭐⭐ THE GATE EVERY RENDERED LINE PASSES (design §4; chair rulings 5 and 6 as amended by W3b
+ * car 3: a unit ships whole OR PATCHED, never with a refused row).
+ */
 export const judgeUnits = (
   units: ScribeUnit[],
   card: any,
   refute: (unit: any, card: any, extra?: any) => any,
-): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number } =>
+): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number; patched: number } =>
   judgeUnitsJs(units, card, refute);
 
 /** ⭐ THE TIER-1 CHECKLIST (design §4). The seven classes no tier-0 arm can reach. */
@@ -146,12 +154,17 @@ export const TIER1_QUESTIONS = TIER1_QUESTIONS_JS as ReadonlyArray<
 /** ⭐ THE TIER-1 ANSWER SCHEMA, closed at every level like the writer's. */
 export const TIER1_ANSWER_SCHEMA = TIER1_ANSWER_SCHEMA_JS as Record<string, any>;
 
-/** ⭐⭐ THE SECOND READER'S VERDICT, APPLIED. Returns `judgeUnits`'s shape so the rows merge. */
+/**
+ * ⭐⭐ THE SECOND READER'S VERDICT, APPLIED. Returns `judgeUnits`'s shape so the rows merge.
+ * ⛔ THE CARD IS NOT OPTIONAL AT THIS CALL SITE: without it a refused FACE has no corpus twin to
+ * fall to and the whole unit drops, which is W3a's rule and not this one.
+ */
 export const applyTier1 = (
   units: ScribeUnit[],
   answers: unknown[],
-): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number } =>
-  applyTier1Js(units, answers);
+  card: any,
+): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number; patched: number } =>
+  applyTier1Js(units, answers, card);
 
 /** The tier-1 answer rows, as the provider returns them under `TIER1_ANSWER_SCHEMA`. */
 export function parseTier1Answers(answerText: string): { ok: boolean; answers: unknown[] } {
