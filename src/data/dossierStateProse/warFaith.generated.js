@@ -2850,7 +2850,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} sees a town under somebody else's soldiers going about its business, and has to be told that is not normal.",
+          "text": "A stranger at {settlement} sees a town under somebody else's soldiers going about its business. He has to be told that is not normal.",
           "slots": [
             "settlement"
           ],
@@ -2860,7 +2860,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "resistance restive": [
         {
           "angle": "ledger",
-          "text": "{settlement} is restive: sabotage and noncompliance harry the garrison steadily without ever amounting to a rising.",
+          "text": "{settlement} is restive. Sabotage and refusals wear at the garrison steadily and never amount to a rising.",
           "slots": [
             "settlement"
           ],
@@ -2868,7 +2868,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Nothing large is happening at {settlement} and a great many small things are, and the small things are getting less deniable.",
+          "text": "Nothing large is happening at {settlement} and a great many small things are. The small things are getting less deniable.",
           "slots": [
             "settlement"
           ],
@@ -2876,7 +2876,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is at the point where the small refusals have become a habit rather than a mood, and a habit is what a rising is assembled out of.",
+          "text": "{settlement} is at the point where the small refusals have become a habit rather than a mood. A habit is what a rising is assembled out of.",
           "slots": [
             "settlement"
           ],
@@ -2886,7 +2886,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "resistance simmering": [
         {
           "angle": "ledger",
-          "text": "{settlement} simmers. The resistance is organized enough to be called that, and has not yet chosen the moment it is waiting for.",
+          "text": "{settlement} simmers. The resistance is organized enough to be called that. It has not yet chosen the moment it is waiting for.",
           "slots": [
             "settlement"
           ],
@@ -2894,13 +2894,13 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town is not quiet and is not in revolt, and everybody in it can feel which way that is trending.",
+          "text": "The town is not quiet and is not in revolt. Everybody in it can feel which way that is going.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "unfolding",
-          "text": "What is organized at {settlement} is waiting rather than idle, and waiting is a decision that can be reversed in an afternoon.",
+          "text": "What is organized at {settlement} is waiting rather than idle. Waiting is a decision that can be reversed in an afternoon.",
           "slots": [
             "settlement"
           ],
@@ -2919,7 +2919,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What is happening at {settlement} will decide whether {counterpart} keeps it, and it will be decided within the season.",
+          "text": "What is happening at {settlement} decides whether {counterpart} keeps it. It is decided within the season.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2928,7 +2928,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.",
+          "text": "The town at {settlement} is fighting the people holding it, in daylight. It has stopped calculating whether it can win.",
           "slots": [
             "settlement"
           ],
@@ -2938,7 +2938,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "blockade stamped (recorded cause)": [
         {
           "angle": "ledger",
-          "text": "The transport into {settlement} is impaired and the impairment has a name on it: {counterpart}'s blockade, and nothing about the roads or the harbour themselves.",
+          "text": "The transport into {settlement} is impaired, and the impairment has a name on it. The name is {counterpart}'s blockade, and nothing about the roads or the harbour themselves.",
           "slots": [
             "settlement",
             "counterpart"
@@ -2955,7 +2955,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town at {settlement} can name what is stopping its supply, and points at the water when it does.",
+          "text": "The town at {settlement} can name what is stopping its supply. It points at the water when it does.",
           "slots": [
             "settlement"
           ],
@@ -2965,7 +2965,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "blockade LIFTED (the impairment is cleared)": [
         {
           "angle": "ledger",
-          "text": "The blockade on {settlement} has ended and what it impaired is running again; the town's supply has resumed, and what it lost while it was closed has not.",
+          "text": "The blockade on {settlement} has ended and what it impaired is running again. The town's supply has resumed. What it lost while it was closed has not.",
           "slots": [
             "settlement"
           ],
@@ -2973,7 +2973,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The road is open at {settlement} and the prices have not come back down, and the town is learning which of those was actually the blockade's doing.",
+          "text": "The road is open at {settlement} and the prices have not come back down. The town is learning which of those was actually the blockade's doing.",
           "slots": [
             "settlement"
           ],
@@ -2981,7 +2981,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The blockade on {settlement} is gone and the town's condition has not returned with it, which tells the town something about what the blockade actually cost.",
+          "text": "The blockade on {settlement} is gone and the town's condition has not returned with it. That tells the town something about what the blockade actually cost.",
           "slots": [
             "settlement"
           ],
@@ -2991,7 +2991,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "a stream: true treaty term (the installment shape)": [
         {
           "angle": "ledger",
-          "text": "{settlement} pays {counterpart} by the season under {term}, and the paying executes itself. Nobody has to decide to do it, and stopping would be a decision.",
+          "text": "{settlement} pays {counterpart} by the season under {term}, and the paying runs itself. Nobody has to decide to do it, and stopping would be a decision.",
           "slots": [
             "settlement",
             "counterpart",
@@ -3001,7 +3001,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What the town owes goes out on a schedule, {timeband_span} of schedule remaining, and it is the bill of the war, still being paid.",
+          "text": "What the town owes goes out on a schedule, with {timeband_span} of schedule remaining. It is the bill of the war, still being paid.",
           "slots": [
             "timeband_span"
           ],
@@ -3009,7 +3009,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The obligation at {settlement} executes itself each season, and stopping it would take a decision nobody in the hall has been willing to be the one to make.",
+          "text": "The obligation at {settlement} runs itself each season. Stopping it would take a decision nobody in the hall has been willing to be the one to make.",
           "slots": [
             "settlement"
           ],
@@ -3019,7 +3019,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "a HIGH-burden term": [
         {
           "angle": "ledger",
-          "text": "What {term} takes from {settlement} is a real share of what the town has, and the taking is the largest single fact in its accounts.",
+          "text": "What {term} takes from {settlement} is a real share of what the town has, and the largest single fact in its accounts.",
           "slots": [
             "term",
             "settlement"
@@ -3047,7 +3047,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath siege_lifted": [
         {
           "angle": "street",
-          "text": "The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.",
+          "text": "The army outside {settlement} has gone. The gates are open and the town is counting. The counting is taking longer than anybody expected.",
           "slots": [
             "settlement"
           ],
@@ -3055,7 +3055,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.",
+          "text": "The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact. Stores, walls and people are all where the siege left them.",
           "slots": [
             "settlement"
           ],
@@ -3063,7 +3063,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.",
+          "text": "{settlement} is open again and is not yet what it was. The counting has started, and nobody has said aloud how long the making-good takes.",
           "slots": [
             "settlement"
           ],
@@ -3073,7 +3073,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath occupation_lifted": [
         {
           "angle": "ledger",
-          "text": "{counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged, and the town is now responsible for arrangements it did not choose.",
+          "text": "{counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged. The town is now responsible for arrangements it did not choose.",
           "slots": [
             "counterpart",
             "settlement"
@@ -3082,7 +3082,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.",
+          "text": "The soldiers are gone from {settlement}. The questions the town avoided while they were here have all arrived at once.",
           "slots": [
             "settlement"
           ],
@@ -3090,7 +3090,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence, and the town now has to decide which of them to keep.",
+          "text": "The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence. The town now has to decide which of them to keep.",
           "slots": [
             "counterpart",
             "settlement"
@@ -3109,13 +3109,13 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town has not recovered and has stopped talking about recovering, which is a stage rather than a mood.",
+          "text": "The town has not recovered and has stopped talking about recovering. That is a stage rather than a mood.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is not recovering so much as levelling off, and the level is below where the town started.",
+          "text": "{settlement} is not recovering so much as levelling off. The level is below where the town started.",
           "slots": [
             "settlement"
           ],
@@ -3125,7 +3125,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath war_drain": [
         {
           "angle": "ledger",
-          "text": "The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did, and the town is meeting them out of ordinary revenue.",
+          "text": "The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did. The town is meeting them out of ordinary revenue.",
           "slots": [
             "settlement"
           ],
@@ -3133,7 +3133,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {settlement} spends on a war that is over is spending it cannot spend on anything else, and the list of anything else is getting longer.",
+          "text": "What {settlement} spends on a war that is over is spending it cannot spend on anything else. The list of anything else is getting longer.",
           "slots": [
             "settlement"
           ],
@@ -3141,7 +3141,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town is still paying for a war that is over at {settlement}, and has begun to resent the paying in a way it never resented the fighting.",
+          "text": "The town is still paying for a war that is over at {settlement}. It has begun to resent the paying in a way it never resented the fighting.",
           "slots": [
             "settlement"
           ],
@@ -3151,7 +3151,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath war_spoils": [
         {
           "angle": "ledger",
-          "text": "{settlement} came out of the fighting with more than it went in with, and the more is in the town: visible, unevenly distributed, and generating its own quarrels.",
+          "text": "{settlement} came out of the fighting with more than it went in with. The more is in the town, visible and unevenly distributed. It is making quarrels of its own.",
           "slots": [
             "settlement"
           ],
@@ -3165,7 +3165,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {settlement} took is being turned into something permanent by the people who hold it, and the town's shape after that will not be the shape it had.",
+          "text": "What {settlement} took is being turned into something permanent by the people who hold it. The town's shape after that is not the shape it had.",
           "slots": [
             "settlement"
           ],
@@ -3175,7 +3175,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath relief_burden": [
         {
           "angle": "ledger",
-          "text": "{settlement} is carrying people it did not have before; the relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.",
+          "text": "{settlement} is carrying people it did not have before. The relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.",
           "slots": [
             "settlement"
           ],
@@ -3191,7 +3191,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The people {settlement} took in are still here, and the town's generosity has become a standing item that somebody has to fund.",
+          "text": "The people {settlement} took in are still here. The town's generosity has become a standing item that somebody has to fund.",
           "slots": [
             "settlement"
           ],
@@ -3201,7 +3201,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath trade_realignment": [
         {
           "angle": "ledger",
-          "text": "The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.",
+          "text": "The routes out of {settlement} are not the routes that were. The war moved where things go. Where things go has not moved back.",
           "slots": [
             "settlement"
           ],
@@ -3209,7 +3209,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.",
+          "text": "The stalls at {settlement} are quieter than the town remembers them being. The carters who used to fill them have somewhere else to be now.",
           "slots": [
             "settlement"
           ],

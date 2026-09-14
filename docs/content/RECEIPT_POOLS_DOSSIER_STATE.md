@@ -4459,77 +4459,77 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **resistance `largely quiescent`**
 1. `[ledger]` {settlement} is not resisting. The occupation meets no organized opposition, and what opposition exists is individual and unconnected.
 2. `[street]` The town has decided, for now, that enduring costs less than the alternative.
-3. `[visitor]` A stranger at {settlement} sees a town under somebody else's soldiers going about its business, and has to be told that is not normal.
+3. `[visitor]` A stranger at {settlement} sees a town under somebody else's soldiers going about its business. He has to be told that is not normal.
 
 **resistance `restive`**
-1. `[ledger]` {settlement} is restive: sabotage and noncompliance harry the garrison steadily without ever amounting to a rising.
-2. `[unfolding]` Nothing large is happening at {settlement} and a great many small things are, and the small things are getting less deniable.
-3. `[threshold]` {settlement} is at the point where the small refusals have become a habit rather than a mood, and a habit is what a rising is assembled out of.
+1. `[ledger]` {settlement} is restive. Sabotage and refusals wear at the garrison steadily and never amount to a rising.
+2. `[unfolding]` Nothing large is happening at {settlement} and a great many small things are. The small things are getting less deniable.
+3. `[threshold]` {settlement} is at the point where the small refusals have become a habit rather than a mood. A habit is what a rising is assembled out of.
 
 **resistance `simmering`**
-1. `[ledger]` {settlement} simmers. The resistance is organized enough to be called that, and has not yet chosen the moment it is waiting for.
-2. `[street]` The town is not quiet and is not in revolt, and everybody in it can feel which way that is trending.
-3. `[unfolding]` What is organized at {settlement} is waiting rather than idle, and waiting is a decision that can be reversed in an afternoon.
+1. `[ledger]` {settlement} simmers. The resistance is organized enough to be called that. It has not yet chosen the moment it is waiting for.
+2. `[street]` The town is not quiet and is not in revolt. Everybody in it can feel which way that is going.
+3. `[unfolding]` What is organized at {settlement} is waiting rather than idle. Waiting is a decision that can be reversed in an afternoon.
 
 **resistance `in open revolt`**
 1. `[ledger]` {settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.
-2. `[unfolding]` What is happening at {settlement} will decide whether {counterpart} keeps it, and it will be decided within the season.
-3. `[street]` The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.
+2. `[unfolding]` What is happening at {settlement} decides whether {counterpart} keeps it. It is decided within the season.
+3. `[street]` The town at {settlement} is fighting the people holding it, in daylight. It has stopped calculating whether it can win.
 
 **blockade stamped (recorded cause)**
-1. `[ledger]` The transport into {settlement} is impaired and the impairment has a name on it: {counterpart}'s blockade, and nothing about the roads or the harbour themselves.
+1. `[ledger]` The transport into {settlement} is impaired, and the impairment has a name on it. The name is {counterpart}'s blockade, and nothing about the roads or the harbour themselves.
 2. `[unfolding]` What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.
-3. `[street]` The town at {settlement} can name what is stopping its supply, and points at the water when it does.
+3. `[street]` The town at {settlement} can name what is stopping its supply. It points at the water when it does.
 
 **blockade LIFTED (the impairment is cleared)**
-1. `[ledger]` The blockade on {settlement} has ended and what it impaired is running again; the town's supply has resumed, and what it lost while it was closed has not.
-2. `[street]` The road is open at {settlement} and the prices have not come back down, and the town is learning which of those was actually the blockade's doing.
-3. `[counterforce]` The blockade on {settlement} is gone and the town's condition has not returned with it, which tells the town something about what the blockade actually cost.
+1. `[ledger]` The blockade on {settlement} has ended and what it impaired is running again. The town's supply has resumed. What it lost while it was closed has not.
+2. `[street]` The road is open at {settlement} and the prices have not come back down. The town is learning which of those was actually the blockade's doing.
+3. `[counterforce]` The blockade on {settlement} is gone and the town's condition has not returned with it. That tells the town something about what the blockade actually cost.
 
 **a `stream: true` treaty term (the installment shape)**
-1. `[ledger]` {settlement} pays {counterpart} by the season under {term}, and the paying executes itself. Nobody has to decide to do it, and stopping would be a decision.
-2. `[street]` What the town owes goes out on a schedule, {timeband_span} of schedule remaining, and it is the bill of the war, still being paid.
-3. `[unfolding]` The obligation at {settlement} executes itself each season, and stopping it would take a decision nobody in the hall has been willing to be the one to make.
+1. `[ledger]` {settlement} pays {counterpart} by the season under {term}, and the paying runs itself. Nobody has to decide to do it, and stopping would be a decision.
+2. `[street]` What the town owes goes out on a schedule, with {timeband_span} of schedule remaining. It is the bill of the war, still being paid.
+3. `[unfolding]` The obligation at {settlement} runs itself each season. Stopping it would take a decision nobody in the hall has been willing to be the one to make.
 
 **a HIGH-burden term**
-1. `[ledger]` What {term} takes from {settlement} is a real share of what the town has, and the taking is the largest single fact in its accounts.
+1. `[ledger]` What {term} takes from {settlement} is a real share of what the town has, and the largest single fact in its accounts.
 2. `[unfolding]` The burden {settlement} carries under {term} is heavy enough to be shaping what the town becomes rather than merely what it can afford.
 3. `[street]` What the town sends away at {settlement} is enough that people plan their year around what is left, rather than around what they earn.
 
 **aftermath `siege_lifted`**
-1. `[street]` The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.
-2. `[ledger]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.
-3. `[unfolding]` {settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.
+1. `[street]` The army outside {settlement} has gone. The gates are open and the town is counting. The counting is taking longer than anybody expected.
+2. `[ledger]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact. Stores, walls and people are all where the siege left them.
+3. `[unfolding]` {settlement} is open again and is not yet what it was. The counting has started, and nobody has said aloud how long the making-good takes.
 
 **aftermath `occupation_lifted`**
-1. `[ledger]` {counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged, and the town is now responsible for arrangements it did not choose.
-2. `[street]` The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.
-3. `[unfolding]` The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence, and the town now has to decide which of them to keep.
+1. `[ledger]` {counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged. The town is now responsible for arrangements it did not choose.
+2. `[street]` The soldiers are gone from {settlement}. The questions the town avoided while they were here have all arrived at once.
+3. `[unfolding]` The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence. The town now has to decide which of them to keep.
 
 
 **aftermath `war_exhaustion`**
 1. `[ledger]` {settlement} is carrying the mark of the fighting it did. Nothing here is broken, and nothing here has the strength it had.
-2. `[street]` The town has not recovered and has stopped talking about recovering, which is a stage rather than a mood.
-3. `[unfolding]` {settlement} is not recovering so much as levelling off, and the level is below where the town started.
+2. `[street]` The town has not recovered and has stopped talking about recovering. That is a stage rather than a mood.
+3. `[unfolding]` {settlement} is not recovering so much as levelling off. The level is below where the town started.
 
 **aftermath `war_drain`**
-1. `[ledger]` The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did, and the town is meeting them out of ordinary revenue.
-2. `[unfolding]` What {settlement} spends on a war that is over is spending it cannot spend on anything else, and the list of anything else is getting longer.
-3. `[street]` The town is still paying for a war that is over at {settlement}, and has begun to resent the paying in a way it never resented the fighting.
+1. `[ledger]` The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did. The town is meeting them out of ordinary revenue.
+2. `[unfolding]` What {settlement} spends on a war that is over is spending it cannot spend on anything else. The list of anything else is getting longer.
+3. `[street]` The town is still paying for a war that is over at {settlement}. It has begun to resent the paying in a way it never resented the fighting.
 
 **aftermath `war_spoils`**
-1. `[ledger]` {settlement} came out of the fighting with more than it went in with, and the more is in the town: visible, unevenly distributed, and generating its own quarrels.
+1. `[ledger]` {settlement} came out of the fighting with more than it went in with. The more is in the town, visible and unevenly distributed. It is making quarrels of its own.
 2. `[street]` The town profited, and the profit is not shared in the proportions anybody expected before the fighting started.
-3. `[unfolding]` What {settlement} took is being turned into something permanent by the people who hold it, and the town's shape after that will not be the shape it had.
+3. `[unfolding]` What {settlement} took is being turned into something permanent by the people who hold it. The town's shape after that is not the shape it had.
 
 **aftermath `relief_burden`**
-1. `[ledger]` {settlement} is carrying people it did not have before; the relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.
+1. `[ledger]` {settlement} is carrying people it did not have before. The relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.
 2. `[unfolding]` What was generosity at {settlement} has become arithmetic, and the town has begun to say so out loud.
-3. `[street]` The people {settlement} took in are still here, and the town's generosity has become a standing item that somebody has to fund.
+3. `[street]` The people {settlement} took in are still here. The town's generosity has become a standing item that somebody has to fund.
 
 **aftermath `trade_realignment`**
-1. `[ledger]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
-2. `[street]` The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
+1. `[ledger]` The routes out of {settlement} are not the routes that were. The war moved where things go. Where things go has not moved back.
+2. `[street]` The stalls at {settlement} are quieter than the town remembers them being. The carters who used to fill them have somewhere else to be now.
 3. `[elder]` {settlement} trades with different towns than it did {timeband_since}, and the change was not chosen by anybody here.
 
 ---
