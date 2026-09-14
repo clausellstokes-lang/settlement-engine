@@ -39,3 +39,14 @@ unit's OPENING WORDS in a blind-roster pool — bisect, never re-record while a 
 gate `--section <leaf> --out <own path>` diffed against HEAD's run (new `C3 · is this clause historical?` and
 new `A13` rows are the tell; owned FAIL/WITHHELD must stay 0) · `measure-block.py` per block (verb
 concentration under 0.786 where the block has attributed rows; opener trigrams 0).
+
+## ⛔⛔ THE READER AUDIT IS PART OF THE GATE (learned twice: DS-DEF-2 batch 4 and the power leaf, 2026-09-14)
+The instruments see moves, orders, provenance, the proxy. They CANNOT see CERTAINTY (a hedge made absolute: "very hard to divide" → "nothing
+divides"; "generally" dropped; "meaningfully" dropped; "not X so much as Y" → "Y and not X"; "on the evidence" dropped; a capability → an
+occurrence), a QUANTIFIER moved ("every quarter" → "the town"; a universal → three items; "immediately below" → "below"), a SCOPE BOUND dropped
+("in the reckoning", "the first person he asks", "in the way a stranger expects"), VOLITIONAL `will not` made `does not` (a refusal → a
+non-occurrence; write "refuses to"), a GENERIC made a claim about this town, or a SIMILE struck for 42c that resolves to one reading (a 42b
+sharpening — declare it). The power lane, with the instruments all green, moved 32 claims in 189 lines; batch 4 moved ~20 in 93. Both were found
+only by a reader. THEREFORE: no leaf is called done until an independent Opus reader has read EVERY changed unit against the shipped line and
+returned the moved-claim list with exact text and a fix, and the chair has cured it as its own commit. The audit prompt and the ruling format are
+in `$SC/kit/rewrite/clarity-audit-POW.md`. A lane is TOLD these classes before it starts (the warFaith brief carries them).
