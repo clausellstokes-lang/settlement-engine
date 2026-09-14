@@ -1292,7 +1292,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "COUNTERFORCE: weak or absent": [
         {
           "angle": "street",
-          "text": "The town has little to bring against this. It ends when it ends, and not because of anything {settlement} does.",
+          "text": "The town has little to bring against this. It is going to end when it ends, and not because of anything {settlement} does.",
           "slots": [
             "settlement"
           ],

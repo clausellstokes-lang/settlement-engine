@@ -2891,7 +2891,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger wanting {good} in {settlement} is going to find it and pay for the finding.",
+          "text": "A stranger wanting {good} in {settlement} finds it, paying for the finding.",
           "slots": [
             "good",
             "settlement"

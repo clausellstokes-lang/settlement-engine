@@ -1490,7 +1490,7 @@ note that carries it on the six wired surfaces.
 **SCARCITY: `shortage`**
 1. `[ledger]` The stores of {good} are well under what the market keeps. The reckoning has climbed accordingly.
 2. `[street]` There is little {good} to be had here. It costs what little things cost.
-3. `[visitor]` A stranger wanting {good} in {settlement} is going to find it and pay for the finding.
+3. `[visitor]` A stranger wanting {good} in {settlement} finds it, paying for the finding.
 
 **SCARCITY: `adequate`**
 1. `[ledger]` {good} sits at its accustomed level in the stores. Its price sits with it.
@@ -4874,7 +4874,7 @@ the mechanism behind it.
 3. `[threshold]` {reason} is why this has not been worse. Take it out and the arithmetic is a different arithmetic.
 
 **COUNTERFORCE: weak or absent**
-1. `[street]` The town has little to bring against this. It ends when it ends, and not because of anything {settlement} does.
+1. `[street]` The town has little to bring against this. It is going to end when it ends, and not because of anything {settlement} does.
 2. `[counterforce]` There is no lever here. The strengths that would shorten this crisis are the strengths the town does not have.
 3. `[elder]` {settlement} is enduring rather than resisting. The trouble decays at its own pace. The town waits it out.
 
