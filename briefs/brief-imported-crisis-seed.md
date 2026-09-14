@@ -1,3 +1,13 @@
+# ⛔⛔ THIS BRIEF'S PREMISE WAS REFUTED BY EXECUTION — WITHDRAWN 2026-09-15, NOT AMENDED
+
+The chair chartered this as "a PROMISE violation on imported dossiers" and told the owner so. **It is not one.** An imported town does NOT reach the desks seedless: `deskSeed` is `String(r?._seed ?? r?.id ?? '')`, and while the importer nulls `_seed`, the `id` SURVIVES (`publicSafe.js:55` allowlists it; `normalizeSettlement.js:191` mints one when absent). Executed end to end on a real generated-then-imported town: today's seed is `s_e07960f5cb437fd6::under_siege` and the cured seed is byte-identical. **An imported dossier's crisis line is drawn from a content-stable id. THE PROMISE was never being broken there.**
+
+⚠ **HOW THE CHAIR GOT IT WRONG, named because it is this programme's own worst failure mode:** the finding was inferred from a KERNEL DOCBLOCK rather than executed — FLOOR 1 BY INFERENCE, the exact fault the sitting identified as the re-cut's chief risk, committed by the chair in a charter and repeated to the owner as fact. THE LESSON, for every future charter: a defect asserted from a comment is a hypothesis; only an executed probe makes it a finding.
+
+WHAT WAS REAL AND WHAT THE CAR DID IS BELOW; the mechanism (a join makes a falsy seed truthy, so canonical-at-zero never runs) is genuine and is cured at both call sites, with ZERO production paths moved.
+
+---
+
 # ⛔ A PROMISE VIOLATION ON IMPORTED DOSSIERS — the crisis line is drawn pseudo-randomly where the law says it must not be
 
 Found by the dark-pool defect car while curing the RATE instrument, reported and NOT fixed because it changes drawn prose. It is chartered on its own because of WHAT it breaks.
