@@ -1,0 +1,124 @@
+{
+ "answers": [
+  {
+   "n": 1,
+   "certainty": "yes",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "yes",
+   "samePage": "no"
+  },
+  {
+   "n": 2,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 3,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 4,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 5,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "yes"
+  },
+  {
+   "n": 6,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "yes",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 7,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 8,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 9,
+   "certainty": "yes",
+   "quantifier": "yes",
+   "scope": "yes",
+   "actor": "yes",
+   "forecast": "no",
+   "mechanism": "yes",
+   "samePage": "yes"
+  },
+  {
+   "n": 10,
+   "certainty": "yes",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 11,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  },
+  {
+   "n": 12,
+   "certainty": "no",
+   "quantifier": "no",
+   "scope": "no",
+   "actor": "no",
+   "forecast": "no",
+   "mechanism": "no",
+   "samePage": "no"
+  }
+ ]
+}

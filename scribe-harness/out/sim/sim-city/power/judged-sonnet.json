@@ -1,0 +1,441 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Approved",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "C3"
+   ],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "FAIL",
+     "subject": "actor claim on a state-only field",
+     "value": "its requests granted more often than not",
+     "description": "\"granted\" is a actor claim; the block carries no event-provenance field (R-DST-B) (state-only)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "stable matched",
+   "vid": 4,
+   "verdict": "FAIL",
+   "arms": [
+    "BAR-future",
+    "C4",
+    "NON-MOVE",
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "BAR-future",
+     "channel": "FAIL",
+     "subject": "a mechanical bar",
+     "value": "will",
+     "description": "a bare future indicative: no field says what comes next, and a forecast is a FATE breach anywhere"
+    },
+    {
+     "arm": "NON-MOVE",
+     "channel": "FAIL",
+     "subject": "FORECAST",
+     "value": "will",
+     "description": "no field says what comes next; a bare future indicative is a FATE breach anywhere"
+    },
+    {
+     "arm": "C4",
+     "channel": "FAIL",
+     "subject": "a bare future indicative",
+     "value": "not about what the answers will be.",
+     "description": "a bare future indicative forecasts; the record states, and an edge is subjunctive (STATE never FATE) (future)"
+    },
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": ", not about what the answers will be.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "The factions sit as factions, and nothing binds any two of them into anything larger.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.politics ?? null.blocs]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "and not comfortable.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rundgate credits the City Council with the good years whether or not it earned them, and the prosperity is the whole of  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rundgate credits the City Council with the good years whether or not it earned them, and the prosperity is the whole of  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rundgate credits the City Council with the good years whether or not it earned them, and the prosperity is the whole of  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Rundgate credits the City Council with the good years whether or not it earned them, and the prosperity is the whole of  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "recentConflict present",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nobody at Rundgate needs the trouble explained to them, since it is recent enough that the town simply refers to it and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nobody at Rundgate needs the trouble explained to them, since it is recent enough that the town simply refers to it and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nobody at Rundgate needs the trouble explained to them, since it is recent enough that the town simply refers to it and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Nobody at Rundgate needs the trouble explained to them, since it is recent enough that the town simply refers to it and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The hall at Rundgate is not organised into sides. The factions sit as factions, and nothing binds any two of them into a (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The City Council at Rundgate watches for the town's own temper, knowing that a council falls to unrest rather than to a  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The City Council at Rundgate watches for the town's own temper, knowing that a council falls to unrest rather than to a  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The City Council at Rundgate watches for the town's own temper, knowing that a council falls to unrest rather than to a  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Public backing at Rundgate is hardening the City Council's grip, and what would be a contest elsewhere is an inconvenien (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Public backing at Rundgate is hardening the City Council's grip, and what would be a contest elsewhere is an inconvenien (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Public backing at Rundgate is hardening the City Council's grip, and what would be a contest elsewhere is an inconvenien (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "vid": 1,
+   "spine": "A criminal operation at Rundgate carries local weight, territorial or economic, and no clearer description of it exists than that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Holding",
+   "vid": 1,
+   "spine": "The City Council outweighs everyone at Rundgate who wants its seat, and though the wanting is on the record, the hold is real and not comfortable.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 8,
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "the city council: 3",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 10,
+   "openers": [
+    {
+     "opener": "a criminal operation",
+     "n": 1
+    },
+    {
+     "opener": "a stranger who",
+     "n": 1
+    },
+    {
+     "opener": "nobody at rundgate",
+     "n": 1
+    },
+    {
+     "opener": "public backing at",
+     "n": 1
+    },
+    {
+     "opener": "rundgate credits the",
+     "n": 1
+    },
+    {
+     "opener": "the city council",
+     "n": 3
+    },
+    {
+     "opener": "the hall at",
+     "n": 1
+    },
+    {
+     "opener": "what is settled",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
