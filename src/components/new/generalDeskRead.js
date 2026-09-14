@@ -77,6 +77,34 @@ const STEADINGS_MOUNT = 'overview.steadings';
  */
 const NETWORK_MOUNT = 'relationships.network';
 
+/**
+ * ⭐ THE POSITIONS, AS DATA — the SAME constants above, named once more so a reader outside
+ * this module can ask where a rung draws without re-spelling an id (W0, the Scribe's page
+ * renderer). It is built from the constants rather than beside them, so the reachability arm
+ * still counts each literal exactly once and a position cannot drift between the two lists.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const GENERAL_DESK_MOUNTS = Object.freeze({
+  conflicts: CONFLICTS_MOUNT,
+  warnings: WARNINGS_MOUNT,
+  situation: SITUATION_MOUNT,
+  origin: ORIGIN_MOUNT,
+  systemsHealth: HEALTH_MOUNT,
+  ground: GROUND_MOUNT,
+  market: MARKET_MOUNT,
+  institutions: INSTITUTIONS_MOUNT,
+  notableConnection: CONNECTION_MOUNT,
+  populationDirection: POPULATION_MOUNT,
+  identity: IDENTITY_MOUNT,
+  founded: FOUNDED_MOUNT,
+  record: RECORD_MOUNT,
+  verdict: VERDICT_MOUNT,
+  framing: FRAMING_MOUNT,
+  craftReason: CRAFT_REASON_MOUNT,
+  steadings: STEADINGS_MOUNT,
+  network: NETWORK_MOUNT,
+});
+
 /** The shape every consumer gets, silent. Frozen so a caller cannot fill it in. */
 const SILENT_OVERVIEW = Object.freeze({
   healthLines: Object.freeze([]),
@@ -140,31 +168,24 @@ function line(mount, rung) {
 }
 
 /**
- * THE READ. One desk call per render, gated, with every position's lines drawn.
+ * ⭐⭐ THE DESK CALL ITSELF — the reading bag, built ONCE, and the RUNGS it comes back with.
  *
- * @param {object|null|undefined} settlement the record the tab already holds
- * @param {{publicDossier?: boolean, playerView?: boolean,
- *   stresses?: ReadonlyArray<{type?: unknown}|null>,
- *   hookCategories?: ReadonlyArray<unknown>|null,
- *   clockIds?: ReadonlyArray<unknown>|null,
- *   steadings?: ReadonlyArray<unknown>|null,
- *   lifecycleStatus?: unknown,
- *   ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
- *   neighbours?: ReadonlyArray<unknown>|null,
- *   crossEngagements?: ReadonlyArray<unknown>|null,
- *   populationTrend?: {band?: unknown, window?: unknown}|null}} [options]
- *   `stresses` is the caller's OWN normalized stress list — DS-GEN-5 suppresses itself where
- *   a primary stress resolves, and it must key on the SAME ladder the arrival scene above it
- *   keys on or the page prints an ordinary market day underneath a siege banner.
- *   ⛔ `hookCategories` and `clockIds` ARE PASSED IN RATHER THAN REACHED FOR, and the reason
- *   is bytes, not taste: `collectPlotHooks` and `deriveEscalationClocks` drag the supply
- *   chain, faction-profile and hook-retention leaves behind them, and this module is
- *   imported by EVERY tab that draws this desk. PlotHooksTab already pays for the first and
- *   is the one page the second is about, so the derivation stays there and only the two
- *   closed token lists cross this boundary.
- * @returns {typeof GENERAL_DESK_SILENT}
+ * ⛔ WHY THIS IS ITS OWN EXPORT (W0, the Scribe's page renderer). `generalDeskLines` below
+ * applies `drawnAtMount` and hands back SENTENCE STRINGS, which is exactly right for the seven
+ * tabs that render them — and it throws the provenance away, so a reader that needs to say
+ * WHICH POOL a line came from cannot use it. The alternative was a SECOND SPELLING of the
+ * thirty-five-key reading bag, which is the hazard `prose-rate-corpus.mjs`'s own header
+ * records in terms ("a second copy of a twenty-argument bag is exactly how one instrument
+ * comes to measure a different world than its sibling while both report green"). One home.
+ *
+ * ⛔ NOTHING RENDERED MOVES BY THIS SPLIT. `generalDeskLines` is the same function with its
+ * first statement replaced by a call to this one; the bag, the gate, the seed and the audience
+ * are the bytes that were here before, moved and not edited.
+ * @param {object|null|undefined} settlement
+ * @param {object} [options] exactly `generalDeskLines`' options
+ * @returns {typeof GENERAL_STATE_PROSE_SILENT} the desk's rungs, provenance and all
  */
-export function generalDeskLines(settlement, options = {}) {
+export function generalDeskProse(settlement, options = {}) {
   const r = settlement || {};
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};
@@ -173,7 +194,7 @@ export function generalDeskLines(settlement, options = {}) {
   const publicDossier = options.publicDossier === true;
   // The audience follows kernel law 2's fail-closed default: an unstated audience reads as
   // the player's, so it is stated.
-  const prose = publicDossier ? GENERAL_STATE_PROSE_SILENT : generalStateProse(
+  return publicDossier ? GENERAL_STATE_PROSE_SILENT : generalStateProse(
     r,
     {
       scores: dp.scores,
@@ -256,6 +277,35 @@ export function generalDeskLines(settlement, options = {}) {
     },
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
+}
+
+/**
+ * THE READ. One desk call per render, gated, with every position's lines drawn.
+ *
+ * @param {object|null|undefined} settlement the record the tab already holds
+ * @param {{publicDossier?: boolean, playerView?: boolean,
+ *   stresses?: ReadonlyArray<{type?: unknown}|null>,
+ *   hookCategories?: ReadonlyArray<unknown>|null,
+ *   clockIds?: ReadonlyArray<unknown>|null,
+ *   steadings?: ReadonlyArray<unknown>|null,
+ *   lifecycleStatus?: unknown,
+ *   ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
+ *   neighbours?: ReadonlyArray<unknown>|null,
+ *   crossEngagements?: ReadonlyArray<unknown>|null,
+ *   populationTrend?: {band?: unknown, window?: unknown}|null}} [options]
+ *   `stresses` is the caller's OWN normalized stress list — DS-GEN-5 suppresses itself where
+ *   a primary stress resolves, and it must key on the SAME ladder the arrival scene above it
+ *   keys on or the page prints an ordinary market day underneath a siege banner.
+ *   ⛔ `hookCategories` and `clockIds` ARE PASSED IN RATHER THAN REACHED FOR, and the reason
+ *   is bytes, not taste: `collectPlotHooks` and `deriveEscalationClocks` drag the supply
+ *   chain, faction-profile and hook-retention leaves behind them, and this module is
+ *   imported by EVERY tab that draws this desk. PlotHooksTab already pays for the first and
+ *   is the one page the second is about, so the derivation stays there and only the two
+ *   closed token lists cross this boundary.
+ * @returns {typeof GENERAL_DESK_SILENT}
+ */
+export function generalDeskLines(settlement, options = {}) {
+  const prose = generalDeskProse(settlement, options);
 
   // ⚠ THE HISTORY GROUP IS DESTRUCTURED RATHER THAN CHAINED, and the reason is a measured
   // FALSE POSITIVE rather than style. `check-observed-shape-readers.mjs` grounds an
