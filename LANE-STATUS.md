@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 18:53:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 18:58:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 92dac1c04 Plan: the collection at 09-14 ~19:3x — the long tail enumerated from every record into o
 
@@ -113,18 +113,22 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_00f13b26-496** (mtime 09-14 18:52): agent calls 11 (11 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
+- **wf_00f13b26-496** (mtime 09-14 18:56): agent calls 15 (15 distinct) · DONE 9 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
-    - `aff4d541f` ? · IN FLIGHT · transcript 09-14 18:45 448 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
     - `a9265e93e` ? · DONE · transcript 09-14 18:49 524 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["DS-ECO-6: the corpus fallback's own second sentence ('nothing organised behind it') is the exact line the brief lists as a refusa
     - `a3ca72aef` ? · DONE · transcript 09-14 18:49 554 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 17, "notes": ["The MARKET-OPEN corpus line is itself an ORIGIN ('the market was where the carts already stopped ... grew around the habit'), wh
     - `a7b3b52e3` ? · DONE · transcript 09-14 18:50 587 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Two pools (DS-ECO-12 INCOME MIX and DS-GEN-18 STALLED) give their corpus-fallback spine with a hard-bar violation baked in (INCOM
-    - `ae63488d5` ? · IN FLIGHT · transcript 09-14 18:45 457 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ae63488d5` ? · DONE · transcript 09-14 18:53 683 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 17, "notes": ["Several of this page's fallback CORPUS LINEs break the brief's own bars, so they cannot be reused verbatim as the model's answer
     - `a37b653f0` ? · DONE · transcript 09-14 18:52 504 KB · 7 tool calls · files: response-opus.json · result: {"unitsWritten": 9, "notes": ["Audience is dm, yet every one of the ten pools says 'notebook: none. Return an empty list.' and 'faces to write: 0'. So the whole
-    - `aa362431e` ? · IN FLIGHT · transcript 09-14 18:50 493 KB · 9 tool calls · last: Bash grep -n -i "stance" "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-
+    - `aa362431e` ? · DONE · transcript 09-14 18:55 637 KB · 14 tool calls · files: response-sonnet.json · result: {"unitsWritten": 9, "notes": ["turn.md gives four distinct 'stance' values (unfolding, visitor, street, counterforce) but brief.md only ever names three stances
     - `a7b23743a` ? · IN FLIGHT · transcript 09-14 18:51 456 KB · 9 tool calls · last: Bash tail -c 500 "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339c
     - `a8b87fbe0` ? · IN FLIGHT · transcript 09-14 18:52 449 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a625c5f1a` ? · IN FLIGHT · transcript 09-14 18:52 424 KB · 6 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
+    - `a625c5f1a` ? · DONE · transcript 09-14 18:56 522 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 6, "notes": ["The STALLED pool's slot fill says {institution} is \"Cartographer's guild\", but the town block's institutions list holds \"Carto
+    - `af87cc20f` ? · IN FLIGHT · transcript 09-14 18:53 435 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ab0de421c` ? · IN FLIGHT · transcript 09-14 18:55 436 KB · 5 tool calls · last: Bash cat -n "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/
+    - `a1d345bae` ? · IN FLIGHT · transcript 09-14 18:56 434 KB · 5 tool calls · last: Bash sed -n '435,691p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
+    - `ac4ec7bcd` ? · IN FLIGHT · transcript 09-14 18:56 421 KB · 5 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
 - **wf_43403a50-66b** (mtime 09-14 17:39): agent calls 30 (30 distinct) · DONE 30 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_43403a50-66b/`
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
@@ -400,4 +404,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.22 2.39 2.53
+load: 2.72 2.52 2.53

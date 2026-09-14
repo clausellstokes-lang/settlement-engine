@@ -1,0 +1,52 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "The road in is kept up and the market has its buyers. Nothing here is being built and nothing is being sold off.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 1,
+   "spine": "Most of what the town earns comes in from one trade. The rest of the income is small enough to be spent without argument.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "Goods made here and goods carted in are sold from the same stalls. A buyer off the road who wants to know which is which asks a stallholder.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "spine": "The yards here are full of goods bound out, and no two loads carry the same thing.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 2,
+   "spine": "The town eats, and nobody here raises the question of food.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The Cartographer's guild in Hochhausen keeps its doors open, and the supply it works from has failed upstream. The building is sound, the skill is here, and the work waits on goods that do not reach the town.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
