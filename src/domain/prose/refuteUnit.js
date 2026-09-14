@@ -62,9 +62,10 @@ import {
   armA5, armA6, armC7, composedVerdictOf, emptyResult, mergeResults, provenanceCount,
   walkComposed,
 } from './composedWalker.js';
-import { classifyMoves, NON_MOVES, orderIdOf } from './moveGrammar.js';
+import { classifyMoves, LEVEL1_ORDERS, NON_MOVES, orderIdOf } from './moveGrammar.js';
 import { sentencesOf, walkPair, closeKindOf } from './entryWalker.js';
 import { CONTRAST_SHAPES, OFFICE_NOUN_CANDIDATES } from './entryLexicons.js';
+import { fieldSynonymsFor } from './fieldSynonyms.js';
 import {
   HOLDER_RECORDS, INTERESTED, sourceOfForTown, sourceOfRow,
 } from './holderTable.js';
@@ -279,6 +280,17 @@ function finding(id, arm, channel, subject, value, description) {
   };
 }
 
+/**
+ * ⛔ THE ENTRY ROW'S OWN `value` COLUMN IS CARRIED INTO THE DESCRIPTION, and losing it was a real
+ * loss rather than a tidiness. The entry walker's finding has SEVEN fields and this module's has
+ * six, and the field that had no home was `value` — which on arm Q is exactly the audit trail the
+ * arm exists to leave: `reads [<the field paths>]; none claimed`. Without it a reader of a Q
+ * WITHHELD cannot tell whether the arm was short of a column or the line was short of a fact,
+ * which is the distinction `armQualify`'s own comment says the row is there to preserve.
+ * @param {{description: string, value?: unknown}} f @returns {string}
+ */
+const entryWhy = (f) => (str(f.value) ? `${str(f.description)} (${str(f.value)})` : str(f.description));
+
 /** @param {object} out @param {RefuteFinding} rowValue */
 function emit(out, rowValue) {
   if (rowValue.channel === 'FAIL') out.fails.push(rowValue);
@@ -406,6 +418,70 @@ export function holdersFromCard(kind, card) {
  */
 function readsOfPool(pool) {
   return Array.isArray(pool?.static?.reads) ? pool.static.reads.map(str) : [];
+}
+
+/**
+ * ⭐⭐ THE FIELD PATHS ONE POOL READS — arm Q's OWN COLUMN, and the one it never had here
+ * (chair ruling 28, W3a car 3).
+ *
+ * ⛔ THE ARM WAS ASKING THE CORPUS'S QUESTION WITH NONE OF THE CORPUS'S INPUTS. R-DA-03 licenses
+ * a second sentence by a SECOND TYPED FIELD, and `armQualify` settles that through `claimsField`
+ * over `entry.reads` with the census's ratified synonyms as `entry.vocabulary`. Both columns are
+ * OPTIONAL by construction — "a caller that brings no census reader gets the arm it had before
+ * this car" — and this module brought neither, so `reads` was `[]` on every unit and EVERY second
+ * sentence was withheld as "naming no second field". The simulation measured the consequence: six
+ * of fifteen units on one page, nearly half the page, withheld by a blanket the tier-1 checklist
+ * then inherits and cannot tell from a real second-field problem.
+ *
+ * ⛔ THE FIELD PATHS, NOT THE WIRING STRINGS. `pool.static.reads` is the census's WIRING column
+ * and on many pools it is a sentence about code — `scoreBand(readinessScore) (via
+ * READINESS_ROW_POOL in defenseStateProse.js)` — which `claimsField` can never match to a word of
+ * prose. `pool.fields[].field` is the engine's own dotted path with its value beside it, which is
+ * exactly what the corpus's own Q cure reads (`proseEntryContradiction.walker.test.js`'s cure arm
+ * and `scripts/prose-wave-gate.mjs` both pass `reads: row.reads` with `vocabulary:
+ * fieldSynonymsFor(row)`). The wiring strings are NOT removed from anywhere: A13 still reads them
+ * through `readsOfPool` and C3's `eventProvenance` still derives from them in `groundOfCard`.
+ *
+ * @param {object|null|undefined} pool @returns {string[]}
+ */
+export function fieldPathsOfPool(pool) {
+  return (Array.isArray(pool?.fields) ? pool.fields : [])
+    .map((row) => str(row?.field)).filter((field) => field !== '');
+}
+
+/**
+ * The ratified synonym vocabulary for one pool's field paths, in `claimsField`'s own shape.
+ * The holder KIND comes from the pool's wiring reads through `sourceOfRow`, which is where the
+ * census gets it too, so a `roll` or a `books` licenses the record noun of the kind that actually
+ * keeps this row and of no other.
+ * @param {object|null|undefined} pool @returns {Record<string, string[]>}
+ */
+export function vocabularyOfPool(pool) {
+  const fields = fieldPathsOfPool(pool);
+  if (!fields.length) return {};
+  const wiring = readsOfPool(pool);
+  const kind = wiring.length ? str(sourceOfRow({ reads: wiring }).kind) : '';
+  // ⛔ BOTH SPELLINGS OF THE FIELD ARE ASKED, AND THE REASON IS A MEASURED MISS. The census spells
+  // a field with its `settlement.` root and the static card strips it (`townCard.js`'s `valueAt`
+  // walks the stripped path off the settlement object), while `FIELD_SYNONYM_ROWS` is keyed on the
+  // CENSUS spelling. So a lookup on the card's spelling matches no ratified row at all: MEASURED
+  // on the pinned town, the one ratified row in the estate — the military economic gate, whose
+  // nouns are wages, wage, pay and purse — sits on the `WALLED-THREATENED` pool's fields and
+  // resolved to an empty vocabulary. Both spellings go in and the answer is keyed on the CARD's,
+  // which is the spelling arm Q is handed. The holder-kind nouns are per ROW and unaffected.
+  const table = fieldSynonymsFor({
+    reads: fields.flatMap((field) => [field, `settlement.${field}`]),
+    source: { kind },
+  });
+  /** @type {Record<string, string[]>} */
+  const out = {};
+  for (const field of fields) {
+    const nouns = [...new Set([
+      ...(table[field] || []), ...(table[`settlement.${field}`] || []),
+    ])].sort(compareCodepoint);
+    if (nouns.length) out[field] = nouns;
+  }
+  return out;
 }
 
 /**
@@ -814,8 +890,16 @@ function armCorpusDiff(id, unitRow, corpusText, stance, ground, out) {
     const had = orderIdOf(was);
     const has = orderIdOf(now);
     if (had !== '' && has === '') {
+      // ⭐ THE VERDICT SAYS WHAT WAS ASKED (chair ruling 27, W3a car 3). The channel STAYS FAIL:
+      // with the order and its licence now printed on the card (`unit.order`), the arm is fair,
+      // and ruling 27 re-measures it on the unified prompt before any demotion. What was NOT fair
+      // was a reader of the verdict being told only that an order was lost, with no way to see
+      // which order or what it licenses. Both are named here now.
+      const spec = LEVEL1_ORDERS[had.split('|')[0]] || null;
+      const realised = spec ? [...spec.order].join(' then ') : '';
+      const licences = had.split('|').map((m) => LEVEL1_ORDERS[m]?.licences).filter(Boolean).join(' | ');
       emit(out, finding(id, 'CORPUS-DIFF', 'FAIL', 'a level-1 order lost on a spine', `${had} then none`,
-        'the corpus spine realises a closed order and this one realises none, so the grammar the pool ships under is gone'));
+        `the corpus spine realises the closed order ${had}, which is ${realised} (${licences}), and this one realises none, so the grammar the pool ships under is gone; the order and its licence are on the card at unit.order and are the thing to keep`));
     }
   }
   const pair = walkPair(
@@ -914,6 +998,15 @@ export function refuteUnit(unit, card, extra = {}) {
   // ONE spelling of "which fields does this pool declare it reads", shared by both branches so
   // the settlement-grounded reader and the card-grounded one can never drift apart.
   const poolReads = () => readsOfPool(poolOfCard(card, row.blockId, row.poolKey));
+
+  // ⭐⭐ ARM Q'S TWO COLUMNS (chair ruling 28). See `fieldPathsOfPool`: the arm asked the corpus's
+  // own question and this module brought it none of the corpus's own inputs, so it withheld every
+  // second sentence on the page. A caller's own readers still win — `opts.readsOf` is honoured
+  // where one is given, because the pilot and the wave gate may ground the arm on a census row
+  // rather than on a card.
+  const qPool = poolOfCard(card, row.blockId, row.poolKey);
+  if (!walkOptions.readsOf) walkOptions.readsOf = () => fieldPathsOfPool(qPool);
+  if (!walkOptions.vocabularyOf) walkOptions.vocabularyOf = () => vocabularyOfPool(qPool);
   if (opts.settlement) {
     walkOptions.sourceOf = () => sourceOfForTown({ reads: poolReads() }, opts.settlement, opts.world || {});
   } else if (cited.length) {
@@ -934,8 +1027,8 @@ export function refuteUnit(unit, card, extra = {}) {
 
   const walk = walkComposed(row, ground, walkOptions);
   mergeResults(out, walk.composed);
-  for (const f of walk.entry.fails) emit(out, finding(id, f.klass, 'FAIL', f.arm, str(f.clause).slice(0, 90), f.description));
-  for (const f of walk.entry.withheld) emit(out, finding(id, f.klass, 'WITHHELD', f.arm, str(f.clause).slice(0, 90), f.description));
+  for (const f of walk.entry.fails) emit(out, finding(id, f.klass, 'FAIL', f.arm, str(f.clause).slice(0, 90), entryWhy(f)));
+  for (const f of walk.entry.withheld) emit(out, finding(id, f.klass, 'WITHHELD', f.arm, str(f.clause).slice(0, 90), entryWhy(f)));
   for (const f of walk.entry.notExecutable) emit(out, finding(id, f.klass, 'NOT-EXECUTABLE', f.arm, str(f.column), f.description));
   for (const f of walk.entry.notes) emit(out, finding(id, f.klass, 'REPORT', f.arm, str(f.value), f.description));
 

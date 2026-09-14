@@ -24,9 +24,10 @@ import { fileURLToPath } from 'node:url';
 
 import {
   AGNOSTIC_TELLS, ELAPSED_COURSE, LEAK_CLASSES, PROVENANCE_CLAUSE, REFUTE_ARMS,
-  ROLE_SLOT_WORDS, VOICE_BARS, groundOfCard, holdersFromCard, poolOfCard, refuteTab,
-  institutionsOfCard, refuteUnit, seatedRolesOf, unitRowOf,
+  ROLE_SLOT_WORDS, VOICE_BARS, fieldPathsOfPool, groundOfCard, holdersFromCard, poolOfCard,
+  refuteTab, institutionsOfCard, refuteUnit, seatedRolesOf, unitRowOf, vocabularyOfPool,
 } from '../../src/domain/prose/refuteUnit.js';
+import { FIELD_SYNONYM_ROWS } from '../../src/domain/prose/fieldSynonyms.js';
 import { OFFICE_NOUN_CANDIDATES } from '../../src/domain/prose/entryLexicons.js';
 import { walkComposed, composedVerdictOf } from '../../src/domain/prose/composedWalker.js';
 import { ROLE_SLOTS } from '../../src/domain/display/stateProse/stateProseKernel.js';
@@ -320,6 +321,77 @@ describe('refuteUnit — the card is the ground', () => {
     expect(unitRowOf({
       text: 'x', blockId: 'B', poolKey: 'P', pieces: [{ role: 'spine', key: 'P', text: 'a' }, { role: 'modifier', key: 'Q', text: 'b' }],
     }).pieces.map((p) => p.role)).toEqual(['spine', 'modifier']);
+  });
+});
+
+describe('refuteUnit — arm Q reads the pool\'s field paths (W3a car 3, chair ruling 28)', () => {
+  /** A unit judged AT a real pool, so the arm gets that pool's own columns. */
+  const judgeAt = (text, pool) => refuteUnit(
+    { text, stance: 'spine', blockId: pool.blockId, poolKey: pool.poolKey },
+    BASE_CARD,
+    {},
+  );
+  const qRows = (r) => r.findings.filter((f) => f.arm === 'Q');
+
+  const security = BASE_CARD.pools.find((p) => p.poolKey.startsWith('Internal Security'));
+  const gated = BASE_CARD.pools.find(
+    (p) => fieldPathsOfPool(p).includes('defenseProfile.economicGates.military'),
+  );
+
+  it('the card carries field paths, and they are what the arm is handed', () => {
+    expect(security, 'the pinned town fires no Internal Security pool').toBeTruthy();
+    expect(fieldPathsOfPool(security)).toEqual([
+      'economicState.compound.inst.hasCourtSystem',
+      'economicState.compound.inst.hasPrison',
+    ]);
+    // ⛔ AND THE WIRING STRINGS ARE NOT THE FIELD PATHS. This is the whole of ruling 28: the arm
+    // was being handed a column `claimsField` can never match to a word of prose, or nothing.
+    expect(security.static.reads).not.toEqual(fieldPathsOfPool(security));
+  });
+
+  it('⭐ NEGATIVE CONTROL — a second sentence naming nothing is withheld, and says which fields it read', () => {
+    const rows = qRows(judgeAt('The walls are kept. Nothing else about it is settled.', security));
+    expect(rows.length, 'arm Q did not fire on an unlicensed second sentence').toBe(1);
+    expect(rows[0].channel).toBe('WITHHELD');
+    expect(rows[0].description).toContain(
+      'reads [economicState.compound.inst.hasCourtSystem, economicState.compound.inst.hasPrison]; none claimed',
+    );
+  });
+
+  it('⭐ POSITIVE CONTROL — a second sentence naming the field in its own word is licensed', () => {
+    // `economicState.compound.inst.hasCourtSystem` yields the claim token `court` through
+    // `claimTokensOf`'s camel split, so this second sentence names a SECOND TYPED FIELD and
+    // R-DA-03 licenses it. Before this car the same sentence was withheld with the others.
+    expect(qRows(judgeAt('The walls are kept. The court sits where it has always sat.', security)))
+      .toEqual([]);
+  });
+
+  it('⭐ THE RATIFIED SYNONYMS ARE READ, and the `settlement.` spelling no longer hides them', () => {
+    // ⛔ THE MEASURED MISS. `FIELD_SYNONYM_ROWS` is keyed on the CENSUS spelling
+    // (`settlement.defenseProfile.economicGates.military`) and the card strips that root, so a
+    // lookup on the card's spelling matched no ratified row at all. The estate has exactly one
+    // such row today and it sits on this town's own walls pool.
+    expect(FIELD_SYNONYM_ROWS.map((r) => r.field))
+      .toContain('settlement.defenseProfile.economicGates.military');
+    expect(gated, 'the pinned town fires no pool reading the military economic gate').toBeTruthy();
+    expect(vocabularyOfPool(gated)['defenseProfile.economicGates.military'])
+      .toEqual(['pay', 'purse', 'wage', 'wages']);
+    // And the arm actually uses them: `wages` is not a word of the field's own path.
+    expect(qRows(judgeAt('The walls are kept. The wages come out of one purse.', gated))).toEqual([]);
+    // NEGATIVE CONTROL — a second sentence naming neither the path nor a synonym still withholds,
+    // so the vocabulary widened what the arm can SEE and did not switch the arm off.
+    const still = qRows(judgeAt('The walls are kept. The reason for it goes unsaid.', gated));
+    expect(still.length).toBe(1);
+    expect(still[0].description).toContain('defenseProfile.economicGates.military');
+  });
+
+  it('a pool the card does not carry leaves the arm where it was: no reads, and it says so', () => {
+    // The fixture-driven arms above call `judge`, which carries no pool identity at all. That
+    // caller must keep the arm it had, or the catch table would be measuring a different arm.
+    const bare = judge('The walls are kept. Nothing else about it is settled.');
+    const row = bare.findings.filter((f) => f.arm === 'Q');
+    expect(row.length).toBe(1);
+    expect(row[0].description).not.toContain('none claimed');
   });
 });
 
