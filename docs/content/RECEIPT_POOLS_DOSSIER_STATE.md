@@ -6053,50 +6053,50 @@ unchanged.
 **TWO DEFECTS CURED (R-DST-W4-e):** the existing notes leak percentage **digits** (`holds {N}% of power`) and refer to the **page layout** (*"Trade income **above** reflects pre-siege operations"*). The register's forms replace the digit with `{band}` and the layout reference with a statement about the world. Wiring these is a disclosed same-seed prose shift.
 
 **`power_economic`: criminal faction in a transit hub**
-1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, and {settlement} is a place goods pass through; a share of what passes is moving outside the official channels, and the trade figures are therefore a floor rather than a count.
-2. `[street · dm-only]` What is written down about {settlement}'s trade and what actually moves through it are two different quantities, and the difference has an owner.
-3. `[visitor]` {settlement} handles more goods than its records account for, which is normal for a transit town and unusually pronounced here.
-4. `[counterforce]` {faction} is strong in {settlement} and the transit trade is clean; whatever the faction takes, it does not take it off the road.
+1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, and {settlement} is a place goods pass through. A share of what passes is moving outside the official channels. The trade figures are therefore a floor rather than a count.
+2. `[street · dm-only]` What is written down about {settlement}'s trade and what actually moves through it are two different quantities. The difference has an owner.
+3. `[visitor]` {settlement} handles more goods than its records account for. That is normal for a transit town and unusually pronounced here.
+4. `[counterforce]` {faction} is strong in {settlement} and the transit trade is clean. Whatever the faction takes, it does not take it off the road.
 
 **`power_economic`: powerful criminal faction in a prosperous settlement**
-1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, and the town's stated prosperity is gross: a meaningful share of it never reaches the tax rolls.
+1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, and the town's stated prosperity is gross. A meaningful share of it never reaches the tax rolls.
 2. `[street]` {settlement} is doing well, and doing well here includes arrangements the hall would rather not itemise.
-3. `[visitor]` {settlement} is visibly wealthy and its public accounts are modest, and both of those things are true.
-4. `[counterforce · dm-only]` {faction} is powerful in a prosperous {settlement} and takes its share in kind rather than in coin; the rolls are accurate and incomplete in different places than a stranger would guess.
+3. `[visitor]` {settlement} is visibly wealthy and its public accounts are modest. Both of those things are true.
+4. `[counterforce · dm-only]` {faction} is powerful in a prosperous {settlement} and takes its share in kind rather than in coin. The rolls are accurate and incomplete in different places than a stranger would guess.
 
 **`stress_economic`: siege against trade income**
-1. `[ledger]` {settlement} is under siege, and the trade income on its books is what the town earned before the gates shut; what it earns now is close to nothing.
+1. `[ledger]` {settlement} is under siege, and the trade income on its books is what the town earned before the gates shut. What it earns now is close to nothing.
 2. `[street]` {settlement}'s market still keeps its hours and has almost nothing to sell, because nothing has come in since the siege began.
-3. `[visitor]` The trade {settlement} is known for is not happening, and the town's accounts have not caught up with that.
-4. `[unfolding]` What {settlement} was worth in trade is being spent down rather than earned, and the stores are the only figure that matters while the gates hold.
+3. `[visitor]` The trade {settlement} is known for is not happening. The town's accounts have not caught up with that.
+4. `[unfolding]` What {settlement} was worth in trade is being spent down rather than earned. The stores are the only figure that matters while the gates hold.
 
 **`power_stress`: occupation against stated stability**
-1. `[ledger]` {settlement} is under occupation, and the stability recorded for it describes the surface: the town is quiet because it is held, which is a different fact from the town being settled.
-2. `[street]` {settlement} is orderly and the order is not the town's own, and everybody here can tell the two apart.
+1. `[ledger]` {settlement} is under occupation, and the stability recorded for it describes the surface. The town is quiet because it is held. That is a different fact from the town being settled.
+2. `[street]` {settlement} is orderly and the order is not the town's own. Everybody here can tell the two apart.
 3. `[visitor]` Nothing in {settlement} is disturbed, and nothing in {settlement} is voluntary.
 4. `[counterforce]` {settlement} is occupied and its own hall still governs. The occupier collects and does not administer, and legitimacy here has survived the arrangement.
 
 **`power_economic`: temple economy under a secular seat**
-1. `[ledger]` Economic activity in {settlement} runs through the religious houses while formal governance rests with {govFaction}; whoever holds the trade and the tithes holds more practical power than whoever holds the seat.
+1. `[ledger]` Economic activity in {settlement} runs through the religious houses while formal governance rests with {govFaction}. Whoever holds the trade and the tithes holds more practical power than whoever holds the seat.
 2. `[street]` The seat in {settlement} decides, and the temple is what the deciding has to be arranged around.
 3. `[visitor]` {settlement} has an official authority and an actual one, and they meet in the market rather than in the hall.
-4. `[counterforce]` {settlement}'s temple carries the economy and does not reach for the seat, and {govFaction} governs without contesting the arrangement.
+4. `[counterforce]` {settlement}'s temple carries the economy and does not reach for the seat. {govFaction} governs without contesting the arrangement.
 
 **`historical_economic`: the recovery narrative** *(CAUSAL-LICENSED, and the year renders as a band)*
-1. `[elder]` {settlement}'s prosperity was rebuilt and not inherited: the town went down a generation and more ago, and came back inside the memory of people still working.
-2. `[ledger]` {settlement}'s books show a hard collapse older than its living memory and a recovery a good deal newer, and the town manages risk like a place that remembers the first.
-3. `[street]` {settlement} is comfortable and does not behave comfortably; the caution here is older than the money.
-4. `[unfolding]` The generation running {settlement} did the rebuilding, and what they decide about surplus is still being decided against the collapse rather than against the present.
+1. `[elder]` {settlement}'s prosperity was rebuilt and not inherited, and the town went down a generation and more ago. It came back inside the memory of people still working.
+2. `[ledger]` {settlement}'s books show a hard collapse older than its living memory and a recovery a good deal newer. The town manages risk like a place that remembers the first.
+3. `[street]` {settlement} is comfortable and does not behave comfortably. The caution here is older than the money.
+4. `[unfolding]` The generation running {settlement} did the rebuilding. What they decide about surplus is still being decided against the collapse rather than against the present.
 
 **`structuralViolations[]`** *(institution or group present without its supporting structure)*
-1. `[ledger]` {settlement} carries an institution its structure does not support, and the mismatch is on the record rather than in dispute.
-2. `[visitor]` There is something in {settlement} that a town of this shape should not be able to keep, and keeping it is costing somebody.
+1. `[ledger]` {settlement} carries an institution its structure does not support. The mismatch is on the record rather than in dispute.
+2. `[visitor]` There is something in {settlement} that a town of this shape should not be able to keep. Keeping it is costing somebody.
 3. `[counterforce]` {settlement}'s establishment is out of proportion to the town and holds anyway, because it is not the town paying for it.
 
 **`structuralSuggestions[]`** *(what would make the record cohere)*
-1. `[ledger]` What {settlement}'s record shows and what {settlement} would need to work as described do not quite meet, and the gap has a short list of names on it.
+1. `[ledger]` What {settlement}'s record shows and what {settlement} would need to work as described do not quite meet. The gap has a short list of names on it.
 2. `[street]` {settlement} functions in a way its own description does not fully account for.
-3. `[visitor]` A careful reader of {settlement} finds one loose end, and it is the kind that a single institution would tie off.
+3. `[visitor]` A careful reader of {settlement} finds one loose end. It is the kind that a single institution would tie off.
 
 ---
 
@@ -6110,22 +6110,22 @@ unchanged.
 **PRESERVE VERBATIM:** *fates unresolved* · *the interior is yours*. Neither is decoration; the first is the never-resolve-a-fate law rendered as prose and the second is the DM's invitation. No variant drops either.
 
 **`lifecycleStatus: relic_ruin`**
-1. `[visitor]` {settlement} has died, and its stones stand as a relic ruin; the last residents left with the wagons, their fates unresolved. The interior is yours.
+1. `[visitor]` {settlement} has died, and its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved. The interior is yours.
 2. `[ledger]` Nothing is recorded at {settlement} any more. The rolls close on a departure and not on a disaster, and where the people went is not written. The interior is yours.
-3. `[elder]` What stands at {settlement} is worth walking into and no longer worth living in; those who left, left together, and their fates are unresolved. The interior is yours.
+3. `[elder]` What stands at {settlement} is worth walking into and no longer worth living in. Those who left, left together, and their fates are unresolved. The interior is yours.
 4. `[street]` The country around {settlement} still uses the name, and uses it for the place rather than for the people.
 
 **`lifecycleStatus: abandoned_site`**
-1. `[visitor]` {settlement} has died, and a quiet site marks where it stood; the last residents left with the wagons, their fates unresolved.
+1. `[visitor]` {settlement} has died, and a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.
 2. `[ledger]` {settlement} is off the rolls. What remains is ground with a name on it and nothing standing worth the name.
-3. `[elder]` There is less at {settlement} than a ruin: a shape in the ground, and the memory of a shape; those who left it, left it whole, and their fates are unresolved.
-4. `[street]` People still give directions past {settlement}, which is more than the place itself still offers.
+3. `[elder]` There is less at {settlement} than a ruin: a shape in the ground, and the memory of a shape. Those who left it, left it whole, and their fates are unresolved.
+4. `[street]` People still give directions past {settlement}. That is more than the place itself still offers.
 
 **`history.ancientRuin` present**
-1. `[visitor]` The relic ruin of {ruin} stands near {settlement}, a city that fell {timeband_since} and has been drawing superstition ever since. Its interior is yours.
-2. `[elder]` {ruin} fell {timeband_since} and {settlement} has grown up in its shadow; what the older place was is not remembered here, only that it was larger. Its interior is yours.
-3. `[street]` {settlement} does not go into {ruin}, and the not-going is a rule nobody has ever had to write down.
-4. `[ledger]` {ruin} is {timeband_age} and appears on no roll of {settlement}'s; the ground it stands on is claimed by nobody and worked by nobody.
+1. `[visitor]` The relic ruin of {ruin} stands near {settlement}. It is a city that fell {timeband_since}, and it has been drawing superstition ever since. Its interior is yours.
+2. `[elder]` {ruin} fell {timeband_since} and {settlement} has grown up in its shadow. What the older place was is not remembered here, only that it was larger. Its interior is yours.
+3. `[street]` {settlement} does not go into {ruin}. The not-going is a rule nobody has ever had to write down.
+4. `[ledger]` {ruin} is {timeband_age} and appears on no roll of {settlement}'s. The ground it stands on is claimed by nobody and worked by nobody.
 
 **steading row: organic**
 1. `[ledger]` {steading} holds {band} and works {resource} for {settlement}.
@@ -6133,14 +6133,14 @@ unchanged.
 3. `[street]` {steading} is close enough to {settlement} to be counted and far enough to be its own place.
 
 **steading row: `provenance: 'forced'`** *(CAUSAL-LICENSED: a decree happened)*
-1. `[ledger]` {steading} holds {band} and was founded by decree rather than by settlement; {settlement}'s hall put it where it is and put people in it.
-2. `[elder]` {steading} exists because {settlement} decided it should, which is a different origin from every other place on this list and shows in how it is run.
+1. `[ledger]` {steading} holds {band} and was founded by decree rather than by settlement. {settlement}'s hall put it where it is and put people in it.
+2. `[elder]` {steading} exists because {settlement} decided it should. That is a different origin from every other place on this list, and it shows in how it is run.
 3. `[street]` Nobody moved to {steading}. They were sent, and {band} of them are still there.
 
 **steading row: `charterPending`**
-1. `[ledger]` {steading} holds {band} and has no charter yet; what it is entitled to is being decided at {settlement}.
+1. `[ledger]` {steading} holds {band} and has no charter yet. What it is entitled to is being decided at {settlement}.
 2. `[unfolding]` {steading} is a place before it is a settlement. The people are there, the charter is not, and the gap is where the arguments are.
-3. `[street]` {steading} does not know yet what it will be allowed to become.
+3. `[street]` {steading} does not know yet what it is going to be allowed to become.
 
 ---
 
