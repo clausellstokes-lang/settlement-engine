@@ -2938,12 +2938,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 1,
           "wordings": [
-            "A traveller says a price here is made at the moment somebody wants a thing.",
-            "At the market they say what a thing is worth is settled between the two people holding it.",
-            "The elders hold that a want here is met by naming the house that can meet it. The house named is not asked first.",
+            "A traveller says a man here names a price only after he learns what the thing is for.",
+            "At the market they say the two holding a thing work out what it is worth between them.",
+            "The elders hold that they answer a want by naming the house that can meet it. They name it before they ask it.",
             "Those who keep the ground say the same words go over the house that gives everything and the house that gives nothing.",
-            "The drinkers have it that what a house is good for is settled at the tables here, and settled before anybody goes to the house.",
-            "Whoever holds the way through says a cart is asked what it carries and then waved on.",
+            "The drinkers have it that what a house is good for is settled at the tables before anybody walks to its door.",
+            "Whoever holds the way through says they wave a cart on as soon as they know what it carries.",
             "The muster says the fields have the first claim on the hands it would call out."
           ],
           "sources": [
@@ -2975,16 +2975,16 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Those the place listens to hold that what it cannot pay for still gets done, and that the doing is charged to the households that can carry it.",
+          "text": "Those the place listens to hold that what it cannot pay for gets done anyway, and that the doing is charged to the households that can carry it.",
           "slots": [],
           "vid": 2,
           "wordings": [
-            "A drover says a thing is lent here for the asking. What comes back is a different thing of about the same use.",
-            "Those who keep the ground say a place for somebody in the ground is found before anything else about a burying is settled. The rest of it is got the way everything here is got, one house at a time.",
+            "A drover says a house here lends a thing for the asking. What comes back is a different thing of about the same use.",
+            "Those who keep the ground say they find a place for somebody before they settle anything else about a burying. The neighbours bring the rest one house at a time.",
             "Asked at the way through, they have it that a stranger's pack is worth more at the bar than a stranger's purse.",
-            "At the drinking house they say the deciding gets done in one house and the doing gets done in another.",
-            "The muster holds that what it would bring costs the place nothing to keep.",
-            "The mill takes its share of what a house grew, the stallholders say, and nothing at the board is settled in coin."
+            "At the drinking house they say one house gives the word and another takes the work.",
+            "The muster holds that a man comes out with the same tool he broke.",
+            "The mill takes its share of what a house grew, the stallholders say."
           ],
           "sources": [
             null,
@@ -3006,9 +3006,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The heads of the households hold that what is given here is given outright.",
             "At the drinking house they say what is given here is remembered by the giver longer than by the taker.",
             "Those who keep the ground have it that a house owing the place something comes early to a burying, and nobody there says why.",
-            "Whoever holds the way through says what stops at the bar is asked for news before it is asked for anything else.",
+            "Whoever holds the way through says they ask a stranger for news before anything else.",
             "The muster's account is that what reaches it first is the shouting, and that the shouting is enough to go on.",
-            "At the market they say more is agreed at a board here than is bought at one. What is agreed is not written and does not need to be."
+            "At the market they say more is agreed at a board here than is bought at one. What is agreed is not written down."
           ],
           "sources": [
             null,
