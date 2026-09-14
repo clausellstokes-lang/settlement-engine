@@ -30,6 +30,7 @@ import {
   drawVariant, eligibleVariants, compromisedSpeaks, variantIsAudible,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { rolesOf, sourcesOf, renderYearOf } from '../../src/domain/display/stateProse/faceSources.js';
+import { classifyMoves, orderIdOf, LEVEL1_ORDERS } from '../../src/domain/prose/moveGrammar.js';
 import { astTokens } from '../../scripts/wiring-census.mjs';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
@@ -387,6 +388,63 @@ describe('townCard — determinism of the trace', () => {
   }, 300_000);
 });
 
+describe('townCard — the spine\'s level-1 order (W3a car 2, chair ruling 26)', () => {
+  it('every pool\'s unit.order is orderIdOf(classifyMoves(unit.spine)) and its licence', () => {
+    // ⛔ THE ARM THIS KEY EXISTS FOR. `CORPUS-DIFF` FAILS a spine that loses the corpus spine's
+    // closed level-1 order, and on the first simulated page four of the five fallbacks were that
+    // arm alone. The card carried the spine and not its order, so the model was refused for a
+    // rule it had never been given. This pin is the derivation, re-run: the card may not carry a
+    // SECOND opinion about a spine's order, only the walker's own.
+    const drift = [];
+    let withOrder = 0;
+    let withoutOrder = 0;
+    for (const row of sample(12)) {
+      let s;
+      try { s = settlementOf(row); } catch { continue; }
+      for (const tab of SCRIBE_TABS) {
+        for (const pool of cardOf(s, tab).pools) {
+          const spine = pool.unit.spine;
+          const want = spine ? orderIdOf(classifyMoves(spine)) : '';
+          if (pool.unit.order.id !== want) {
+            drift.push(`${tab} :: ${pool.poolKey}: card ${pool.unit.order.id} vs walker ${want}`);
+          }
+          const members = want ? want.split('|').filter((m) => LEVEL1_ORDERS[m]) : [];
+          const moves = members.length ? [...LEVEL1_ORDERS[members[0]].order] : [];
+          if (JSON.stringify(pool.unit.order.moves) !== JSON.stringify(moves)) {
+            drift.push(`${tab} :: ${pool.poolKey}: moves ${JSON.stringify(pool.unit.order.moves)} vs ${JSON.stringify(moves)}`);
+          }
+          const licences = members.map((m) => LEVEL1_ORDERS[m].licences).join(' | ');
+          if (pool.unit.order.licences !== licences) {
+            drift.push(`${tab} :: ${pool.poolKey}: licence drift`);
+          }
+          if (pool.unit.order.id === '') withoutOrder += 1; else withOrder += 1;
+        }
+      }
+    }
+    expect(drift, `\n${drift.slice(0, 20).join('\n')}\n`).toEqual([]);
+    // BOTH ANSWERS ARE REACHED, so the pin is not standing over one branch. The shipped corpus
+    // runs about five spines in six inside the closed set, which is the measurement `armOrder`'s
+    // own WITHHELD channel was chosen on.
+    expect(withOrder, 'no pool realised a closed order: the arm is vacuous').toBeGreaterThan(0);
+    expect(withoutOrder, 'every pool realised one: the empty branch is untested').toBeGreaterThan(0);
+  }, 300_000);
+
+  it('the order key is byte-stable across two builds and carries the walker\'s ambiguity whole', () => {
+    const s = townOf({
+      settType: 'city', culture: 'germanic', terrainOverride: 'plains',
+      tradeRouteAccess: 'road', monsterThreat: 'frontier',
+    }, 'order-stable');
+    expect(townCardJson(cardOf(s, 'defense'))).toBe(townCardJson(cardOf(s, 'defense')));
+    // ⛔ THE AMBIGUOUS ID IS KEPT AS AN AMBIGUITY. `V3` and `V8` share a move list and differ only
+    // in the ABSENCE CLASS, which no lexical read settles, so `orderIdOf` answers `V3|V8`; the
+    // card must carry both licences and one move list rather than picking for the walker.
+    expect(orderIdOf(['PRESENT', 'ABSENCE'])).toBe('V3|V8');
+    expect(LEVEL1_ORDERS.V3.order).toEqual(LEVEL1_ORDERS.V8.order);
+    // NEGATIVE CONTROL — a sequence outside the closed set answers the empty id, never a guess.
+    expect(orderIdOf(['FEELING', 'FIGURE'])).toBe('');
+  }, 60_000);
+});
+
 describe('townCard — the audience', () => {
   it('a player card carries no dm-only unit; a dm card may', () => {
     const offending = [];
@@ -500,6 +558,15 @@ describe('townCard — the golden', () => {
    *   field of every tab is byte-identical to the genesis record, and the two absences the
    *   headless card cannot read (captured, controlled) are PRINTED in each row's `absent`
    *   rather than defaulted to false.
+   *
+   * 2026-09-14 — RE-RECORDED (W3a car 2), card schema /2 → /3. CAUSE: `pools[].unit.order` was
+   *   added under chair ruling 26 — the LEVEL-1 move order the corpus spine realises, its move
+   *   list, and the licence that names it. The simulation MEASURED four of five fallbacks on one
+   *   rendered page as `CORPUS-DIFF · a level-1 order lost on a spine`, which is a corpus-register
+   *   property the card carried no trace of, so a model was being refused for a rule it had never
+   *   been given. NOTHING ELSE MOVED: the only new bytes on any tab are the three keys of that
+   *   record inside each pool's `unit`, plus the schema string itself, and the derivation is
+   *   re-run against `orderIdOf(classifyMoves(spine))` by the arm above rather than frozen here.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

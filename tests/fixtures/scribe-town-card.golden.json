@@ -100,6 +100,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.",
             "spine": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works."
@@ -107,7 +114,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "daily_life",
@@ -799,6 +806,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.",
             "spine": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke."
@@ -864,6 +878,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "The site gives Schwarzwalde nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.",
             "spine": "The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for."
@@ -929,6 +948,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town's usual posture has been set aside at Schwarzwalde. Everything is arranged for the one thing now, and the rest is waiting.",
             "spine": "The town's usual posture has been set aside at {settlement}. Everything is arranged for the one thing now, and the rest is waiting."
@@ -1003,6 +1029,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The crisis at Schwarzwalde has changed the posture and not the prospects, and the town has been careful to keep the two separate.",
             "spine": "The crisis at {settlement} has changed the posture and not the prospects, and the town has been careful to keep the two separate."
@@ -1125,6 +1158,13 @@
               "A clerk in the hall has it that the purse that would have kept a wall up keeps the nights.",
               "One of the watch says the wage he draws is the whole of what the town pays against an army."
             ],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [
               null,
               null,
@@ -1251,6 +1291,13 @@
               "The muster tells a stranger who complains that there is nowhere to lock up the man he names. There is nowhere for the stranger either.",
               "The stallholders say a stranger cheated here has no board to go to, and would do better to come back to the stall."
             ],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The elders say they hear a stranger's wrong as they hear anyone's, and a stranger who does not stay for the answer was not much wronged.",
             "spine": "A traveller wronged here finds there is nowhere to take it, and nobody local expected there to be."
@@ -1357,6 +1404,13 @@
               "The ask falls on whoever sets out a stall, the stallholders say, and everybody else comes in with a basket.",
               "Those who hear disputes say the quarrel that reaches them is over who owed a turn, and the turn itself was taken by a neighbour."
             ],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [
               null,
               null,
@@ -1462,6 +1516,11 @@
               "At the market they say a house with somebody ill in it comes for vinegar and roots, and whoever has them names the price.",
               "Those who bury the dead reckon they are the one trade here that is sent for in a bad year and not thanked for coming."
             ],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [
               null,
               {
@@ -1540,6 +1599,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The balance at Schwarzwalde sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.",
             "spine": "The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change."
@@ -1605,6 +1671,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "What the town says about its own safety at Schwarzwalde is what the town says on a first acquaintance, and a longer one would be a different account.",
             "spine": "What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account."
@@ -1670,6 +1743,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "No criminal infrastructure has been identified at Schwarzwalde. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
             "spine": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization."
@@ -1735,6 +1815,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Whatever is being run at Schwarzwalde is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
             "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
@@ -1800,6 +1887,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "A stranger arrives at Schwarzwalde from whichever direction suits him and is not obliged to pass anybody on the way in.",
             "spine": "A stranger arrives at {settlement} from whichever direction suits him and is not obliged to pass anybody on the way in."
@@ -1869,6 +1961,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.",
             "spine": "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once."
@@ -1934,6 +2033,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "Nothing unseen has come at Schwarzwalde, and nothing here would know if it had; the record of safety and the capacity to detect are two different things.",
             "spine": "Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things."
@@ -2000,6 +2104,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "No wall marks where Schwarzwalde ends; at this size the country and the town simply agree to differ.",
             "spine": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ."
@@ -2074,6 +2185,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town eats what arrives, and has nothing put by against a season when nothing does.",
             "spine": "The town eats what arrives, and has nothing put by against a season when nothing does."
@@ -2081,7 +2199,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "defense",
@@ -2599,6 +2717,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V3|V8",
+              "licences": "state key + a `none-exists` field (the LACK) | state key + a `not-held` field with provenance (the GAP)",
+              "moves": [
+                "PRESENT",
+                "ABSENCE"
+              ]
+            },
             "pairs": [],
             "rendered": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.",
             "spine": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either."
@@ -2682,6 +2808,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Well past half of what Schwarzwalde earns comes from a single trade, and the accounts have no second column worth the name.",
             "spine": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name."
@@ -2776,6 +2909,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Everybody here knows what leaves and what arrives, because the same carts do both.",
             "spine": "Everybody here knows what leaves and what arrives, because the same carts do both."
@@ -2834,6 +2974,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "There is always something going out. If one trade is quiet, another is not.",
             "spine": "There is always something going out. If one trade is quiet, another is not."
@@ -2881,6 +3028,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town eats. It is not a subject anyone raises unprompted.",
             "spine": "The town eats. It is not a subject anyone raises unprompted."
@@ -2987,6 +3141,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V4",
+              "licences": "a named object + the state key",
+              "moves": [
+                "OBJECT",
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde works salt it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft.",
             "spine": "{settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft."
@@ -2994,7 +3156,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "economics",
@@ -3364,6 +3526,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "No faith holds the town. The observances are real, and they are nobody's in particular.",
             "spine": "No faith holds the town. The observances are real, and they are nobody's in particular."
@@ -3371,7 +3538,7 @@
           "vid": 4
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "faith",
@@ -3810,6 +3977,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town's first reason is on record and its present shape is the record of everything since; Schwarzwalde is the argument and all its revisions at once.",
             "spine": "The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once."
@@ -3875,6 +4049,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde has been knocked down and has answered more than once, and the answering shows; this is a town with practice.",
             "spine": "{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice."
@@ -3929,6 +4110,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it.",
             "spine": "{settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it."
@@ -3983,6 +4171,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde has a character it would recognise a description of, and it did not choose it.",
             "spine": "{settlement} has a character it would recognise a description of, and it did not choose it."
@@ -4044,6 +4239,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "Schwarzwalde was held a generation on and the arrangements made then are the arrangements the town still runs on.",
             "spine": "{settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on."
@@ -4109,6 +4309,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde's records carry it plainly and nobody now working here can add to them.",
             "spine": "{settlement}'s records carry it plainly and nobody now working here can add to them."
@@ -4116,7 +4323,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "history",
@@ -4815,6 +5022,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The fields begin where Schwarzwalde loses interest, and not before.",
             "spine": "The fields begin where {settlement} loses interest, and not before."
@@ -4898,6 +5112,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Nothing in Schwarzwalde is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.",
             "spine": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place."
@@ -4963,6 +5184,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.",
             "spine": "{settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance."
@@ -5012,6 +5240,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.",
             "spine": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences."
@@ -5059,6 +5292,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.",
             "spine": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold."
@@ -5124,6 +5362,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The strain is severe. Schwarzwalde is meeting it by giving up things it would rather keep.",
             "spine": "The strain is severe. {settlement} is meeting it by giving up things it would rather keep."
@@ -5183,6 +5428,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The condition is deepening. The town's response has not caught up with the rate.",
             "spine": "The condition is deepening. The town's response has not caught up with the rate."
@@ -5248,6 +5500,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it.",
             "spine": "{settlement} is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it."
@@ -5317,6 +5576,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde expects to go on being Schwarzwalde.",
             "spine": "{settlement} expects to go on being {settlement}."
@@ -5382,6 +5648,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde's defences are a gesture, and it is not a gesture anyone is fooled by.",
             "spine": "{settlement}'s defences are a gesture, and it is not a gesture anyone is fooled by."
@@ -5456,6 +5729,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde keeps no muster worth the name; the gate is shut at night by whoever is nearest to it.",
             "spine": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it."
@@ -5530,6 +5810,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde has no answer to what lives beyond its fields and nobody whose work it would be.",
             "spine": "{settlement} has no answer to what lives beyond its fields and nobody whose work it would be."
@@ -5604,6 +5891,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Little is reported at Schwarzwalde, because reporting produces no outcome.",
             "spine": "Little is reported at {settlement}, because reporting produces no outcome."
@@ -5678,6 +5972,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde runs close to what it takes in: one interruption would reach the households inside the season.",
             "spine": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season."
@@ -5752,6 +6053,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde keeps no practitioner, no arrangement, and no expectation of either.",
             "spine": "{settlement} keeps no practitioner, no arrangement, and no expectation of either."
@@ -5817,6 +6125,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde's security is its own harvest, which means it is proof against a closed road and not against a bad year.",
             "spine": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year."
@@ -5884,6 +6199,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde is a road town that has outgrown its fields, and it is buying the difference.",
             "spine": "{settlement} is a road town that has outgrown its fields, and it is buying the difference."
@@ -5949,6 +6271,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde is a handful of roofs with a reason, and the reason is usually the ground.",
             "spine": "{settlement} is a handful of roofs with a reason, and the reason is usually the ground."
@@ -6014,6 +6343,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Of everything Schwarzwalde is tied into, one connection comes up first whenever the town explains itself.",
             "spine": "Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself."
@@ -6088,6 +6424,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V3|V8",
+              "licences": "state key + a `none-exists` field (the LACK) | state key + a `not-held` field with provenance (the GAP)",
+              "moves": [
+                "PRESENT",
+                "ABSENCE"
+              ]
+            },
             "pairs": [],
             "rendered": "The people of Schwarzwalde are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
             "spine": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that."
@@ -6095,7 +6439,7 @@
           "vid": 3
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "overview",
@@ -6555,6 +6899,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The trouble in Schwarzwalde is a supply question before it is anything else, and supply questions are answerable by outsiders.",
             "spine": "The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders."
@@ -6609,6 +6960,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The reason Schwarzwalde is the way it is lies further back than anyone here will volunteer.",
             "spine": "The reason {settlement} is the way it is lies further back than anyone here will volunteer."
@@ -6663,6 +7021,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "What is wrong in Schwarzwalde is not hidden. It is simply nobody's job.",
             "spine": "What is wrong in {settlement} is not hidden. It is simply nobody's job."
@@ -6717,6 +7082,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde's ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three.",
             "spine": "{settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three."
@@ -6771,6 +7143,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "What is worth doing in Schwarzwalde is worth doing because of who is in it; the town's difficulties have names attached before they have causes.",
             "spine": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes."
@@ -6778,7 +7157,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "plot_hooks",
@@ -7283,6 +7662,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V5",
+              "licences": "an institution row + the state key",
+              "moves": [
+                "INSTITUTION",
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The Elder Council holds Schwarzwalde on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer.",
             "spine": "The {seat} holds {settlement} on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer."
@@ -7342,6 +7729,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "Schwarzwalde keeps one plain accusation against the Elder Council (that it has left the town open) and brings it out again whenever anything else goes wrong.",
             "spine": "{settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong."
@@ -7398,6 +7790,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "A stranger doing business at Schwarzwalde needs one name and gets one answer, and can plan a season ahead on the strength of it.",
             "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
@@ -7460,6 +7859,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "No rival at Schwarzwalde moves against Elder Council, and it is not restraint. The arithmetic of the thing is plain to everybody who has done it.",
             "spine": "No rival at {settlement} moves against {faction}, and it is not restraint. The arithmetic of the thing is plain to everybody who has done it."
@@ -7525,6 +7929,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The hall at Schwarzwalde is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
             "spine": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger."
@@ -7572,6 +7983,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes.",
             "spine": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes."
@@ -7631,6 +8049,11 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "",
+              "licences": "",
+              "moves": []
+            },
             "pairs": [],
             "rendered": "A stranger who addresses the Elder Council at Schwarzwalde by any other title is corrected, politely and immediately.",
             "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
@@ -7697,6 +8120,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V5",
+              "licences": "an institution row + the state key",
+              "moves": [
+                "INSTITUTION",
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The Elder Council at Schwarzwalde holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
             "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
@@ -7767,6 +8198,14 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V5",
+              "licences": "an institution row + the state key",
+              "moves": [
+                "INSTITUTION",
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The Elder Council at Schwarzwalde is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip.",
             "spine": "The {seat} at {settlement} is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip."
@@ -7774,7 +8213,7 @@
           "vid": 3
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "power",
@@ -8064,7 +8503,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "relationships",
@@ -8455,6 +8894,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.",
             "spine": "{settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact."
@@ -8513,6 +8959,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Ask what this town does well and you get two or three answers, all of them the same two or three answers.",
             "spine": "Ask what this town does well and you get two or three answers, all of them the same two or three answers."
@@ -8571,6 +9024,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "A stranger with an eye for such things works out what this town is worth holding well before anybody explains it.",
             "spine": "A stranger with an eye for such things works out what this town is worth holding well before anybody explains it."
@@ -8578,7 +9038,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "resources",
@@ -8946,6 +9406,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.",
             "spine": "{settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction."
@@ -8953,7 +9420,7 @@
           "vid": 1
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "services",
@@ -9353,6 +9820,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "The town works, and works for the reasons a town of this kind usually works.",
             "spine": "The town works, and works for the reasons a town of this kind usually works."
@@ -9418,6 +9892,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "Schwarzwalde carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.",
             "spine": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless."
@@ -9472,6 +9953,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "This reading of Schwarzwalde is the first survey's, and the first survey's alone; what the world has done since is not in it.",
             "spine": "This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it."
@@ -9546,6 +10034,13 @@
           "unit": {
             "faceSourceTags": [],
             "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
             "pairs": [],
             "rendered": "There is magic at Schwarzwalde and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
             "spine": "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse."
@@ -9553,7 +10048,7 @@
           "vid": 2
         }
       ],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "viability",
@@ -9855,7 +10350,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/2",
+      "schema": "scribe-town-card/3",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "war",

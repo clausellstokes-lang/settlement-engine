@@ -89,7 +89,18 @@ const MECHANICAL_BARS = [
   '- at most three sentences in a unit, and at most two in any one face.',
 ].join('\n');
 
-/** The shape rules of a unit, which are the artefact's own and not the voice's. */
+/**
+ * The shape rules of a unit, which are the artefact's own and not the voice's.
+ *
+ * ⭐ THE FOUR GUESSES, ANSWERED (chair ruling 26, W3a car 2). The 2026-09-14 Opus seat recorded
+ * four things the W2 brief left it to work out, and every one of them is a thing an instrument
+ * can convict on: whether a returned row is a spine or a face (every `pieces[].role` on the card
+ * reads `spine` while four DEF-2 pools carry sources and an attributed rendering); whether the DM
+ * audience wants the notebook register; whether a `{slot}` should be written as a token or as its
+ * fill; and whether the corpus line beside the pool is a model of the law (two of the defense
+ * tab's own units break it). Each is one sentence here and costs the prefix nothing, because the
+ * prefix is cached.
+ */
 const UNIT_RULES = [
   'THE SHAPE OF WHAT YOU RETURN, per pool the card lists:',
   '- `vid` is the ANNEX ROW the card gives for that pool. Copy it exactly. It is not a position.',
@@ -99,6 +110,24 @@ const UNIT_RULES = [
   '  and the compromised roll are already decided and you are writing the words for them.',
   '- `notebook` replaces the DM-only rows, in their order, or is empty where the card has none.',
   '- `{slot}` tokens: use only the ones the card declares for that pool, or none at all.',
+  '',
+  'STANCE. `spine` is always the pool\'s stated fact in the archiver\'s own hand, bare, on the',
+  'document\'s own authority. A `face` speaks THROUGH the source named at its position, and says so.',
+  'Where the card lists no face for a pool, `faces` is the empty list and the spine is the whole',
+  'unit.',
+  '',
+  'THE DM REGISTER. On audience `dm`, `notebook` carries the archiver\'s private rows, one per',
+  'dm-only face the card lists, in the notebook register the VOICE describes. On audience',
+  '`player`, `notebook` is the empty list and nothing private appears anywhere on the page. The',
+  'card says per pool how many such rows it holds, and on the shipped corpus that number is zero.',
+  '',
+  'SLOT FILL. Write the RENDERED WORDS, with the card\'s fills applied: where the card says',
+  '`{settlement}` is "Spitzplatz" here, write Spitzplatz. Name the town at most once in a unit,',
+  'and never as the first word of two units on one page.',
+  '',
+  'THE CORPUS LINE. It is the CLAIM you must keep and the line that ships if yours is refused. It',
+  'is not a model of the law: where it breaks a bar above, do not imitate the breach.',
+  '',
   'A POOL YOU CANNOT WRITE LAWFULLY IS OMITTED. An omitted pool draws the hand corpus, which is',
   'always there; a unit that breaks a bar above is dropped by the instruments and draws it too.',
   'Do not explain, apologise, or write anything outside the schema.',
@@ -237,19 +266,106 @@ export function buildTownBlock(card) {
   ].join('\n');
 }
 
-/** A pool as the volatile turn presents it: the ground, and the corpus line as the exemplar. */
+/**
+ * ⭐ THE SOURCE FACE i SPEAKS THROUGH, AND THE OFF-BY-ONE THAT SAID OTHERWISE.
+ *
+ * ⛔ MEASURED, W3a car 2. The W2 brief read `pool.faceSources[i]` for face i. That list is the
+ * DEDUPLICATED, SORTED set of sources the DRAWN pieces spoke through — on a real DEF-2 pool it
+ * holds ONE entry while the unit has nine faces — so the model was told face 0 spoke through the
+ * one drawn source and faces 1 to 8 spoke as the bare fact, when the annex seats a different
+ * source on every one of them. The per-face list is `unit.faceSourceTags`, which is the leaf's
+ * own `sources` array and is indexed with the SPINE AT 0 (`faceRawOf` uses the same convention:
+ * face 0 is the spine, face i is `wordings[i - 1]`). Measured on the pinned town's defense tab:
+ * every pool with faces carries exactly one more tag than it has faces, which is that spine slot.
+ * So face i's tag is `faceSourceTags[i + 1]`, and the old reading was wrong on every face but one.
+ *
+ * @param {object} pool @param {number} i the index into `pool.unit.faces`
+ * @returns {string|null} the source tag, or null for a face the annex leaves bare
+ */
+function sourceOfFace(pool, i) {
+  const tags = Array.isArray(pool?.unit?.faceSourceTags) ? pool.unit.faceSourceTags : null;
+  const faces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
+  if (tags && tags.length === faces.length + 1) {
+    const tag = tags[i + 1];
+    return tag === null || tag === undefined || tag === '' ? null : String(tag);
+  }
+  // A card whose tag list does not carry the spine slot is a shape this function has not seen.
+  // It answers from the drawn set rather than guessing an offset, and a bare answer is honest.
+  const drawn = Array.isArray(pool?.faceSources) ? pool.faceSources : [];
+  const fallback = drawn[i];
+  return fallback === undefined || fallback === null || fallback === '' ? null : String(fallback);
+}
+
+/** The roster one source may draw a person from, as one line. */
+function rosterLine(pool, source) {
+  const seat = (Array.isArray(pool?.faceRoles) ? pool.faceRoles : [])
+    .find((r) => String(r?.source) === String(source));
+  const roster = Array.isArray(seat?.roster) ? seat.roster : [];
+  if (!roster.length) return '';
+  return roster.map((r) => `${String(r?.role ?? '')} (${String(r?.n ?? '')})`).join(' · ');
+}
+
+/**
+ * ⭐⭐ ONE POOL AS THE VOLATILE TURN PRESENTS IT — the ground, and the corpus line as the claim.
+ *
+ * ⛔ EVERY ROW BELOW ANSWERS A QUESTION AN ARM CONVICTS ON (chair ruling 26). A refusal for a rule
+ * the model was never given is an instrument defect, not a model failure, and the simulation
+ * produced four of those on one page. So: THE ORDER answers `CORPUS-DIFF`'s level-1 arm; THE
+ * FIELDS answer arm `Q`, which withholds a second sentence that names no second typed field and
+ * withheld six of fifteen units for want of the field paths; THE FILLS answer arm `D` and ruling
+ * 12's slot-opener tell at once, because a model writing `{settlement}` where the page prints
+ * `Spitzplatz` has written a token and not a word; THE ROSTER answers `REFERENT-role`, which
+ * refuses any office the town does not seat.
+ */
 function poolBrief(pool) {
   const faces = Array.isArray(pool?.unit?.faces) ? pool.unit.faces : [];
-  const sources = Array.isArray(pool?.faceSources) ? pool.faceSources : [];
+
+  const declared = Array.isArray(pool?.slots?.declared) ? pool.slots.declared : [];
+  const fills = Array.isArray(pool?.slots?.fills) ? pool.slots.fills : [];
+  const fields = Array.isArray(pool?.fields) ? pool.fields : [];
+  const order = pool?.unit?.order || null;
+  const marks = Array.isArray(pool?.marks) ? pool.marks : [];
   const rows = [
     `POOL ${JSON.stringify(String(pool?.poolKey ?? ''))} in block ${String(pool?.blockId ?? '')}`,
     `  vid: ${String(pool?.vid ?? '')}`,
-    `  stance: ${String(pool?.angle ?? '')}${Array.isArray(pool?.marks) && pool.marks.length ? ` · marks ${pool.marks.join(' ')}` : ''}`,
-    `  slots you may use: ${(Array.isArray(pool?.slots?.declared) ? pool.slots.declared : []).join(', ') || '(none)'}`,
-    `  faces to write: ${faces.length}`,
+    `  stance: ${String(pool?.angle ?? '')}${marks.length ? ` · marks ${marks.join(' ')}` : ''}`,
   ];
+
+  if (order && String(order.id ?? '') !== '') {
+    rows.push(`  THE ORDER: the corpus spine realises the move order \`${String(order.id)}\` — \`${(Array.isArray(order.moves) ? order.moves : []).join(' then ')}\` (${String(order.licences ?? '')}); keep that order in your spine.`);
+  } else {
+    rows.push('  THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.');
+  }
+
+  rows.push(`  slots you may use: ${declared.join(', ') || '(none)'}`);
+  for (const fill of fills) {
+    rows.push(`    {${String(fill?.slot ?? '')}} is ${JSON.stringify(String(fill?.value ?? ''))} on this town`);
+  }
+  if (fills.length) {
+    rows.push('    WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.');
+  }
+
+  if (fields.length) {
+    rows.push('  THE FIELDS this pool reads, with their values here:');
+    for (const field of fields) {
+      rows.push(`    ${String(field?.field ?? '')} = ${JSON.stringify(field?.value ?? null)}${field?.status ? ` (${String(field.status)})` : ''}`);
+    }
+    rows.push('    The second sentence of a unit, if there is one, must rest on one of these fields');
+    rows.push('    and name it in its own word, or the instruments withhold it.');
+  } else {
+    rows.push('  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.');
+  }
+
+  rows.push(`  faces to write: ${faces.length}`);
   for (let i = 0; i < faces.length; i += 1) {
-    rows.push(`    face ${i} speaks through: ${String(sources[i] ?? '(the bare fact)')}`);
+    const source = sourceOfFace(pool, i);
+    const roster = source ? rosterLine(pool, source) : '';
+    rows.push(`    face ${i} speaks through: ${String(source ?? '(the bare fact)')}`);
+    if (source && roster) {
+      rows.push(`      and is one of these people and no other: ${roster}`);
+    } else if (source) {
+      rows.push(`      and is one of the roles the town block lists for \`${String(source)}\` under \`roles\`, and no other.`);
+    }
   }
   if (pool?.compromised && pool.compromised.speaks === true) {
     rows.push(`  THE COMPROMISED SOURCE SPEAKS THIS YEAR: ${String(pool.compromised.source)} — it conceals on the symptom of its own secret and denies nothing else.`);
@@ -257,6 +373,16 @@ function poolBrief(pool) {
   rows.push('  THE CORPUS LINE, as the claim and the fallback:');
   rows.push(`    spine: ${String(pool?.unit?.spine ?? '')}`);
   for (let i = 0; i < faces.length; i += 1) rows.push(`    face ${i}: ${String(faces[i] ?? '')}`);
+  // ⛔ THE NOTEBOOK HAS NO CORPUS ROW TO REPLACE, MEASURED. Over all six shipped leaves: 2,266
+  // variants, 83 marked `dm-only`, and ZERO of those 83 carry a single `wordings` row; no variant
+  // anywhere carries a per-face mark of any kind. So `dm-only` is a WHOLE-VARIANT property and
+  // there is no such thing as a dm-only FACE for a notebook row to stand against. The list is
+  // therefore empty on every pool the corpus ships today, and the card says so rather than
+  // leaving the model to invent a private register nothing asked for. What the mark DOES change
+  // is the register the unit is written in, which is the instruction below.
+  rows.push(marks.includes('dm-only')
+    ? '    notebook: none. This pool is marked `dm-only`: the unit itself is the archiver\'s private working note and is written in the notebook register the VOICE describes, and it still rides in `spine`.'
+    : '    notebook: none. Return an empty list.');
   return rows.join('\n');
 }
 

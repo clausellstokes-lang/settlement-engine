@@ -81,6 +81,7 @@
  * @enforced-by tests/domain/townCard.test.js
  */
 import { renderTabPage, SCRIBE_TABS, seedOf } from './scribePage.js';
+import { classifyMoves, orderIdOf, LEVEL1_ORDERS } from './moveGrammar.js';
 import {
   sourcesOf, rolesOf, compromisedSourcesOf, renderYearOf,
 } from '../display/stateProse/faceSources.js';
@@ -114,8 +115,15 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * state, which are settlement facts the card did not carry), and the server-side refuter has
  * only the card. Resolving the standing once, where the settlement is in hand, turns that arm
  * on. The golden was re-recorded for this cause and no other.
+ *
+ * /3 (W3a car 2, 2026-09-14): `pools[].unit.order` added — the LEVEL-1 move order the corpus
+ * spine realises, its move list, and the licence that names it. Chair ruling 26: every rule the
+ * tier-0 refuter can convict on is TOLD to the model. The simulation MEASURED four of five
+ * fallbacks on one page as `CORPUS-DIFF · a level-1 order lost on a spine`, a corpus-register
+ * property the card carried no trace of, so the model was refused for a rule it was never given.
+ * The golden was re-recorded for this cause and no other.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/2';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/3';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -241,6 +249,36 @@ export function recoverFills(raw, rendered) {
 
 /** A recovered row that is a VERB agreement rather than a slot value. */
 const isVerbRow = (r) => String(r.slot).startsWith('v:');
+
+/**
+ * ⭐⭐ THE SPINE'S LEVEL-1 MOVE ORDER, AND THE LICENCE THAT NAMES IT (chair ruling 26, W3a car 2).
+ *
+ * ⛔ THE MEASUREMENT THAT PUT THIS ON THE CARD. On the first simulated page, FOUR of the five
+ * units that fell back to the corpus fell for `CORPUS-DIFF · a level-1 order lost on a spine` —
+ * the AI spine did not realise the closed move order the corpus spine realises. The card carried
+ * the spine and not its ORDER, so the model was refused for a rule it was never given, which is
+ * an instrument defect and not a model failure. It is also why the CONSERVATIVE writer scored
+ * better than the freer one on that arm: the arm was measuring distance from the corpus, which
+ * is a silent tax on the better rewrite rather than a truth rule.
+ *
+ * ⛔ AN AMBIGUOUS ID KEEPS BOTH LICENCES AND ONE MOVE LIST. `orderIdOf` answers `V3|V8` where two
+ * orders share a move list and differ only in the ABSENCE CLASS (a world LACK against a record
+ * GAP), which no lexical read settles. Both members have the SAME `order`, so the move list is
+ * unambiguous; the licences are joined so the model is told what either reading would need, and
+ * the card never picks one on the walker's behalf.
+ *
+ * @param {string} spine the variant's raw spine text
+ * @returns {{id: string, moves: string[], licences: string}}
+ */
+function orderOf(spine) {
+  const id = spine ? orderIdOf(classifyMoves(spine)) : '';
+  const members = id ? id.split('|').filter((m) => LEVEL1_ORDERS[m]) : [];
+  return rec([
+    ['id', id],
+    ['moves', members.length ? [...LEVEL1_ORDERS[members[0]].order] : []],
+    ['licences', members.map((m) => LEVEL1_ORDERS[m].licences).join(' | ')],
+  ]);
+}
 
 /**
  * Which compromised source of this town, if any, this pool's SYMPTOM marks — read off the
@@ -509,10 +547,12 @@ function poolRow(s, line, ctx) {
     ])],
     // ⭐ THE CORPUS UNIT AS DRAWN — the exemplar and the fallback (§9). The spine and every face
     // the leaf holds, so the model sees the shape it is writing into and the line that ships if
-    // it is refused.
+    // it is refused — and, since W3a, the LEVEL-1 ORDER that spine realises, which is the one
+    // rule the corpus-diff arm refuses on and the card did not carry. See `orderOf`.
     ['unit', sorted([
       ['rendered', String(line.text ?? '')],
       ['spine', String(variant?.text ?? '')],
+      ['order', orderOf(String(variant?.text ?? ''))],
       ['faces', [...(variant?.wordings || [])].map(String)],
       ['faceSourceTags', [...(variant?.sources || [])].map((x) => (x === null ? null : String(x)))],
       ['pairs', [...(variant?.pairs || [])].map((p) => (p ? sorted(Object.entries(p)) : null))],
