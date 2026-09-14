@@ -31,6 +31,7 @@ import {
 import { FIELD_SYNONYM_ROWS } from '../../src/domain/prose/fieldSynonyms.js';
 import { OFFICE_NOUN_CANDIDATES } from '../../src/domain/prose/entryLexicons.js';
 import { walkComposed, composedVerdictOf } from '../../src/domain/prose/composedWalker.js';
+import { claimTokensOf } from '../../src/domain/prose/entryWalker.js';
 import { ROLE_SLOTS } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { CLAUSE_DETECTORS } from '../../src/domain/prose/moveGrammar.js';
 import { townCard } from '../../src/domain/prose/townCard.js';
@@ -458,6 +459,80 @@ describe('refuteUnit — arm Q reads the pool\'s field paths (W3a car 3, chair r
     expect(row.length).toBe(1);
     expect(row[0].description).not.toContain('none claimed');
   });
+});
+
+describe('refuteUnit — arm Q reads the RESOLVED path too (W3c car 4)', () => {
+  /**
+   * ⛔⛔ WHAT THE RESOLUTION ACTUALLY BUYS THIS ARM, MEASURED RATHER THAN ASSUMED. `claimTokensOf`
+   * takes a field's words from its LAST SEGMENT, and a reading bag's key is usually that same
+   * leaf (`readings.scores` and `defenseProfile.scores` both end in `scores`), so the arm was NOT
+   * blind on a desk-local name and the resolution does not switch it on. What it widens is the
+   * two cases where the leaf is not the word a writer would use: a census spelling that is a
+   * TRUNCATED GUARD, and a DERIVED reading whose real antecedents are settlement fields with names
+   * of their own. Measured over the four-town RUN-3 grid and all thirteen tabs: 17 of 191 pools
+   * that carry field rows gain at least one claim token, and the words gained are `prosperity`,
+   * `services`, `tier`, `chains`, `historical events` and `publicLegitimacy`.
+   */
+  const services = cardOf(BASE, 'services');
+  const pool = services.pools.find((p) => p.blockId === 'DS-SUP-3');
+  const qAt = (text, card, at) => refuteUnit(
+    { text, stance: 'spine', blockId: at.blockId, poolKey: at.poolKey }, card, {},
+  ).findings.filter((f) => f.arm === 'Q');
+
+  it('the census spelling leads and the engine\'s own path rides beside it', () => {
+    expect(pool, 'the base town fires no DS-SUP-3 pool on the services tab').toBeTruthy();
+    // `readings.notableAbsences` is the DESK's name for a reading the engine computes as
+    // `deriveNotableAbsences(settlement.tier, settlement.availableServices)`, so those two fields
+    // are what the pool actually rests on and they ride with it.
+    expect(fieldPathsOfPool(pool)).toEqual([
+      'readings.notableAbsences', 'availableServices', 'tier', 'readings.notableAbsences.map',
+    ]);
+    // A ROW WHOSE CENSUS SPELLING IS ALREADY A SETTLEMENT PATH GAINS NOTHING AND LOSES NOTHING:
+    // `readFrom` is empty there, so the list is the census's own and the older behaviour stands.
+    const security = BASE_CARD.pools.find((p) => p.poolKey.startsWith('Internal Security'));
+    expect(fieldPathsOfPool(security)).toEqual([
+      'economicState.compound.inst.hasCourtSystem',
+      'economicState.compound.inst.hasPrison',
+    ]);
+    expect(security.fields.every((f) => f.readFrom === '')).toBe(true);
+  }, 60_000);
+
+  it('⭐ POSITIVE CONTROL — a second sentence naming the DERIVED reading\'s own input is licensed', () => {
+    // `services` is not a word of `readings.notableAbsences` (whose tokens are `notableAbsences`,
+    // `notable`, `absences`, `absence`); it is a word of `availableServices`, which is what the
+    // engine computes that reading FROM. Before this car the same sentence was withheld.
+    expect(qAt(
+      'The catalogue is complete for a town of this size. The services it keeps are the ones its tier expects.',
+      services, pool,
+    )).toEqual([]);
+  }, 60_000);
+
+  it('⭐ NEGATIVE CONTROL — a second sentence naming neither still withholds, and says so', () => {
+    const rows = qAt(
+      'The catalogue is complete for a town of this size. Nothing else about it is settled.',
+      services, pool,
+    );
+    expect(rows.length, 'arm Q did not fire on an unlicensed second sentence').toBe(1);
+    expect(rows[0].channel).toBe('WITHHELD');
+    // AND THE RESOLVED PATHS ARE NAMED IN THE VERDICT, so a reader of a withhold can see what the
+    // arm consulted rather than a desk's private letter alone.
+    expect(rows[0].description).toContain('availableServices');
+    expect(rows[0].description).toContain('tier');
+    expect(rows[0].description).toContain('none claimed');
+  }, 60_000);
+
+  it('⭐ AND A TRUNCATED CENSUS SPELLING GAINS THE WORD THE WRITER WOULD USE', () => {
+    // `Array.isArray(hist.historicalEvents) ? hist.historicalEvents : ` is what the census spells
+    // for DS-GEN-16; the resolution says it denotes `history.historicalEvents`, and the compound
+    // word is now a claim token where the truncated guard only yielded its two halves.
+    const history = cardOf(BASE, 'history');
+    const record = history.pools.find((p) => p.blockId === 'DS-GEN-16');
+    expect(record, 'the base town fires no DS-GEN-16 pool on the history tab').toBeTruthy();
+    expect(fieldPathsOfPool(record)).toContain('history.historicalEvents');
+    expect(claimTokensOf('history.historicalEvents')).toContain('historicalevents');
+    expect(claimTokensOf('Array.isArray(hist.historicalEvents) ? hist.historicalEvents : '))
+      .not.toContain('historicalevents');
+  }, 60_000);
 });
 
 describe('refuteUnit — the walker equality pin', () => {

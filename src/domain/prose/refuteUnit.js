@@ -465,8 +465,31 @@ function readsOfPool(pool) {
  * @param {object|null|undefined} pool @returns {string[]}
  */
 export function fieldPathsOfPool(pool) {
-  return (Array.isArray(pool?.fields) ? pool.fields : [])
-    .map((row) => str(row?.field)).filter((field) => field !== '');
+  /** @type {string[]} */
+  const out = [];
+  const add = (field) => {
+    const held = str(field);
+    if (held !== '' && !out.includes(held)) out.push(held);
+  };
+  for (const row of (Array.isArray(pool?.fields) ? pool.fields : [])) {
+    // THE CENSUS'S OWN SPELLING FIRST, because it is the name the withhold finding prints and the
+    // name a reader of the verdict can look up in the static table.
+    add(row?.field);
+    // ⭐⭐ (W3c car 4) AND THE ENGINE'S OWN PATH BESIDE IT. The census spells a read with the DESK'S
+    // LOCAL NAME, and `claimTokensOf` takes a field's words from its LAST SEGMENT — so the desk's
+    // letter usually carried the same leaf and the arm was not blind, but where the census's
+    // spelling is a truncated guard (`Array.isArray(hist.historicalEvents) ? … : `) or a bag key
+    // whose engine path is deeper, the resolved path is the word a writer would actually use.
+    // ⛔ IT IS ALSO THE ONLY SPELLING `FIELD_SYNONYM_ROWS` CAN BE KEYED ON: a ratified synonym
+    // cites a CENSUS path, and a desk-local name matches no ratified row by construction.
+    add(row?.readFrom);
+    // ⭐ AND A DERIVED READING'S NAMED INPUTS, which are the settlement fields the reading actually
+    // rests on. `readings.notableAbsences` is `deriveNotableAbsences(settlement.tier,
+    // settlement.availableServices)`, so a second sentence naming the town's SERVICES names a
+    // second typed field this pool reads, and R-DA-03 licenses it.
+    for (const input of (Array.isArray(row?.inputs) ? row.inputs : [])) add(input?.field);
+  }
+  return out;
 }
 
 /**
