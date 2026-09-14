@@ -24,8 +24,7 @@ POOL "readiness ADEQUATE" in block DS-DEF-1
   THE FIELDS this pool reads, with their values here:
     defenseProfile.readiness.score = 57 (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
@@ -40,8 +39,7 @@ POOL "Invasion & War: walls with NO force" in block DS-DEF-2
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 4
     face 0 speaks through: elders
       and is one of the roles the town block lists for `elders` under `roles`, and no other.
@@ -67,8 +65,7 @@ POOL "Internal Security: full legal chain (court AND prison)" in block DS-DEF-2
     economicState.compound.inst.hasCourtSystem = true (FROZEN)
     economicState.compound.inst.hasPrison = true (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 9
     face 0 speaks through: hall
       and is one of the roles the town block lists for `hall` under `roles`, and no other.
@@ -108,8 +105,7 @@ POOL "Economic Survival: STRONG" in block DS-DEF-2
   THE FIELDS this pool reads, with their values here:
     defenseProfile.scores.economic = 76 (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 8
     face 0 speaks through: watch
       and is one of the roles the town block lists for `watch` under `roles`, and no other.
@@ -148,8 +144,7 @@ POOL "Disasters & Famine: granary AND parish care only" in block DS-DEF-2
     economicState.compound.inst.hasGranary = true (FROZEN)
     economicState.compound.inst.hasHospital = false (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 6
     face 0 speaks through: register
       and is one of the roles the town block lists for `register` under `roles`, and no other.
@@ -182,8 +177,7 @@ POOL "Moderate" in block DS-DEF-3
   THE FIELDS this pool reads, with their values here:
     economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.
@@ -198,8 +192,7 @@ POOL "First-Survey qualification (the reading is a first look)" in block DS-DEF-
   THE FIELDS this pool reads, with their values here:
     economicState.safetyProfile.safetyLabel = "Moderate" (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account.
@@ -207,9 +200,6 @@ POOL "First-Survey qualification (the reading is a first look)" in block DS-DEF-
 POOL "structure organized" in block DS-DEF-4
   vid: 4
   stance: counterforce
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town
@@ -232,8 +222,7 @@ POOL "capture none" in block DS-DEF-4
   THE FIELDS this pool reads, with their values here:
     name = "Spitzplatz" (LIVE)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.
@@ -248,8 +237,7 @@ POOL "walls PRESENT" in block DS-DEF-5
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.
@@ -263,10 +251,9 @@ POOL "watch PRESENT" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
-    standingDefenseForces(settlement) = UNKNOWN (this card cannot resolve this reading; assert nothing that depends on it)
+    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
@@ -280,10 +267,9 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
     institutions = "[52 rows]" (LIVE)
-    standingDefenseForces(settlement) = UNKNOWN (this card cannot resolve this reading; assert nothing that depends on it)
+    standingDefenseForces(settlement) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
@@ -291,18 +277,14 @@ POOL "charter hall PRESENT (specialist monster response)" in block DS-DEF-5
 POOL "arcane defense PRESENT" in block DS-DEF-5
   vid: 1
   stance: ledger
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    magicWorksAt({ settlement }) = UNKNOWN (this card cannot resolve this reading; assert nothing that depends on it)
+    magicWorksAt({ settlement }) = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
@@ -319,8 +301,7 @@ POOL "WALLED-STRAINED" in block DS-DEF-11
     defenseProfile.economicGates.military = 0.98 (FROZEN)
     institutions = "[52 rows]" (LIVE)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
@@ -337,8 +318,7 @@ POOL "Logistics & Supply: Granary with road supply" in block DS-DEF-6
     economicState.compound.inst.hasGranary = true (FROZEN)
     economicState.compound.inst.hasPort = false (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.

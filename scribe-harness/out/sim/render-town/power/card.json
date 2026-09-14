@@ -266,7 +266,7 @@
     "spine": "The {seat}'s standing at {settlement} is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
    },
    "vid": 4,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "unfolding",
@@ -334,7 +334,7 @@
     "spine": "The {seat}'s standing at {settlement} rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "visitor",
@@ -398,7 +398,7 @@
     "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "street",
@@ -546,7 +546,7 @@
     "spine": "The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "street",
@@ -674,7 +674,7 @@
     "spine": "The town cannot say in one word what kind of place it is governed as, and neither can the hall."
    },
    "vid": 2,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "street",
@@ -736,7 +736,7 @@
     "spine": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "unfolding",
@@ -811,7 +811,7 @@
     "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -889,7 +889,7 @@
     "spine": "There are people at {settlement} who would move on the {seat} and do not, because moving on a ruler the town is behind costs more than the seat is worth."
    },
    "vid": 3,
-   "writeable": false
+   "writeable": true
   }
  ],
  "schema": "scribe-town-card/4",

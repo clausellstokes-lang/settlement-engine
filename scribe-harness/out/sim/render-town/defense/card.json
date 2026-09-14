@@ -1279,7 +1279,7 @@
     "spine": "There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could."
    },
    "vid": 4,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "street",
@@ -1678,7 +1678,7 @@
     "spine": "{settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming."
    },
    "vid": 1,
-   "writeable": false
+   "writeable": true
   },
   {
    "angle": "unfolding",

@@ -17,9 +17,6 @@ THE LINES TO WRITE:
 POOL "Approved" in block DS-POW-1
   vid: 4
   stance: unfolding
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: seat, settlement
     {seat} is "Guild Council" on this town
@@ -33,9 +30,6 @@ POOL "Approved" in block DS-POW-1
 POOL "breakdown dominated by PROSPERITY, favourable" in block DS-POW-1
   vid: 3
   stance: unfolding
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: seat, settlement
     {seat} is "Guild Council" on this town
@@ -49,9 +43,6 @@ POOL "breakdown dominated by PROSPERITY, favourable" in block DS-POW-1
 POOL "stable matched" in block DS-POW-2
   vid: 3
   stance: visitor
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town
@@ -72,8 +63,7 @@ POOL "recentConflict present" in block DS-POW-2
     powerStructure.factions = "[5 rows]" (LIVE)
     powerStructure.recentConflict = "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost." (FROZEN)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.
@@ -81,9 +71,6 @@ POOL "recentConflict present" in block DS-POW-2
 POOL "operation role money laundering" in block DS-POW-6
   vid: 3
   stance: counterforce
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town
@@ -104,10 +91,9 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
     {settlement} is "Spitzplatz" on this town
     WRITE THE FILL, NOT THE TOKEN: the words above are what the page prints.
   THE FIELDS this pool reads, with their values here:
-    readings.politics ?? null.blocs = UNKNOWN (this card cannot resolve this reading; assert nothing that depends on it)
+    readings.politics ?? null.blocs = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
@@ -115,9 +101,6 @@ POOL "layer DORMANT (no ledger materialized)" in block DS-POW-7
 POOL "mixed" in block DS-POW-5
   vid: 2
   stance: street
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.
@@ -128,9 +111,6 @@ POOL "mixed" in block DS-POW-5
 POOL "governing body name: a SLOT, never a baked noun" in block DS-POW-5
   vid: 3
   stance: street
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town
@@ -143,9 +123,6 @@ POOL "governing body name: a SLOT, never a baked noun" in block DS-POW-5
 POOL "riskLabel: Holding" in block DS-POW-4
   vid: 3
   stance: unfolding
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises the move order `V5` — `INSTITUTION then PRESENT` (an institution row + the state key); keep that order in your spine.
   slots you may use: faction, seat, settlement
     {seat} is "Guild Council" on this town
@@ -160,9 +137,6 @@ POOL "riskLabel: Holding" in block DS-POW-4
 POOL "legitimacyHold: public backing hardens the hold" in block DS-POW-4
   vid: 3
   stance: counterforce
-  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a
-  value here, so there is nothing to stand a sentence on but the pool key itself.
-  Return no unit for this pool. The hand corpus draws it, which is the right answer.
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: seat, settlement
     {settlement} is "Spitzplatz" on this town
@@ -171,10 +145,9 @@ POOL "legitimacyHold: public backing hardens the hold" in block DS-POW-4
   THE FIELDS this pool reads, with their values here:
     typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
     ? power.publicLegitimacy
-    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNKNOWN (this card cannot resolve this reading; assert nothing that depends on it)
+    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)
     The second sentence of a unit, if there is one, must rest on one of these fields
-    and name it in its own word, or the instruments withhold it. A field reading
-    UNKNOWN cannot carry a sentence, and no absence may be read out of it.
+    and name it in its own word, or the instruments withhold it.
   faces to write: 0
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are people at {settlement} who would move on the {seat} and do not, because moving on a ruler the town is behind costs more than the seat is worth.
