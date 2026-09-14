@@ -4748,56 +4748,56 @@ draws at most one of each.
 6. `[visitor]` {settlement} answers questions about its own governance in the past tense.
 
 **BEAST & RAIDER THREAT** · `monster_pressure`
-1. `[visitor]` The roads outside are not safe. Trade arrives thinner and later, and what the town does not spend on defense it does not have.
-2. `[unfolding]` Attacks on the outlying holdings have become regular enough to plan around, and the plans cost coin the town was spending elsewhere.
-3. `[counterforce]` {settlement} keeps more watch than it can afford; the country beyond the walls has stopped being ordinary country.
-4. `[street]` Something in the country around {settlement} has made the outlying work dangerous, and the outlying work is not optional.
-5. `[ledger]` {settlement} has pulled its stock and its people inward, and the ground it has given up is on the rolls as abandoned.
-6. `[visitor]` The fields furthest from {settlement} are standing untended, and nothing about the season explains it.
+1. `[visitor]` The roads outside are not safe. Trade arrives thinner and later. What the town does not spend on defense it does not have.
+2. `[unfolding]` Attacks on the outlying holdings have become regular enough to plan around. The plans cost coin the town was spending elsewhere.
+3. `[counterforce]` {settlement} keeps more watch than it can afford. The country beyond the walls has stopped being ordinary country.
+4. `[street]` Something in the country around {settlement} has made the outlying work dangerous. The outlying work is not optional.
+5. `[ledger]` {settlement} has pulled its stock and its people inward. The ground it has given up is on the rolls as abandoned.
+6. `[visitor]` The fields furthest from {settlement} are standing untended. Nothing about the season explains it.
 
 **INSURGENCY** · `insurgency`
-1. `[street]` An armed movement operates inside the town's own population, and the town cannot tell it from the town.
+1. `[street]` An armed movement operates inside the town's own population. The town cannot tell it from the town.
 2. `[counterforce]` Order here is enforced rather than kept. The authority that answers force with force is losing the argument that matters.
-3. `[visitor]` Parts of {settlement} are governed by the consent of people who hold no office; the rest is governed nervously.
+3. `[visitor]` Parts of {settlement} are governed by the consent of people who hold no office. The rest is governed nervously.
 4. `[street]` Part of {settlement} is fighting the rest of it and neither part wears a badge.
-5. `[ledger]` The watch's patrols at {settlement} have been rewritten, and the routes now avoid places rather than cover them.
-6. `[visitor]` {settlement} is calm in a way that a stranger will not be able to trust for long.
+5. `[ledger]` The watch's patrols at {settlement} have been rewritten. The routes now avoid places rather than cover them.
+6. `[visitor]` {settlement} is calm in a way that a stranger is not going to be able to trust for long.
 
 **RELIGIOUS CRISIS** · `religious_conversion`
 1. `[street]` The town's creed is contested from within. Congregations that once shared a calendar now keep separate ones.
 2. `[unfolding]` A rival observance has taken root deep enough to divide households. The old rite still holds the buildings and no longer holds the street.
-3. `[unfolding]` Faith here has become a question of allegiance rather than habit, and the question is being asked out loud.
-4. `[street]` What {settlement} keeps has changed, and the households have not all changed at the same rate.
-5. `[ledger]` {settlement}'s observances are being kept twice (in the new form publicly, in the old form otherwise), and the clerks record only one of them.
-6. `[visitor]` The altars in {settlement} are tended and the tending is new, which is visible in the stonework.
+3. `[unfolding]` Faith here has become a question of allegiance rather than habit. The question is being asked out loud.
+4. `[street]` What {settlement} keeps has changed. The households have not all changed at the same rate.
+5. `[ledger]` {settlement}'s observances are being kept twice (in the new form publicly, in the old form otherwise). The clerks record only one of them.
+6. `[visitor]` The altars in {settlement} are tended and the tending is new. That is visible in the stonework.
 
 **SLAVE REVOLT** · `slave_revolt`
-1. `[ledger]` The bound labour of {settlement} has stopped being reliable, and the settlement was built on its reliability.
+1. `[ledger]` The bound labour of {settlement} has stopped being reliable. The settlement was built on its reliability.
 2. `[unfolding]` The work is not being done and the refusal is organized. What held the arrangement together was never consent.
-3. `[street]` The overseers keep order in the daylight hours; what happens after them is no longer theirs to decide.
-4. `[street]` The people {settlement} held have stopped being held, and the town has no arrangement for what follows.
-5. `[ledger]` {settlement}'s rolls are wrong in a way the clerks cannot correct: the names are there and the people are not where the names say.
+3. `[street]` The overseers keep order in the daylight hours. What happens after them is no longer theirs to decide.
+4. `[street]` The people {settlement} held have stopped being held. The town has no arrangement for what follows.
+5. `[ledger]` {settlement}'s rolls are wrong in a way the clerks cannot correct. The names are there and the people are not where the names say.
 6. `[visitor]` {settlement} is a town with two populations and one of them has stopped pretending.
 
 **WARTIME** · `wartime`
 1. `[ledger]` The town is on a war footing. Grain, iron and men are counted against a campaign rather than a season.
 2. `[street]` {settlement} lives at the rhythm of a war it is part of. Everything ordinary is scheduled around the levy.
-3. `[visitor]` The trades that matter here now are the ones that supply an army; the rest have been asked to wait.
-4. `[street]` {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
-5. `[ledger]` {settlement}'s levies and requisitions have become the largest single line in the year, and they are not negotiable.
+3. `[visitor]` The trades that matter here now are the ones that supply an army. The rest have been asked to wait.
+4. `[street]` {settlement} is at war. The war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
+5. `[ledger]` {settlement}'s levies and requisitions have become the largest single line in the year. They are not negotiable.
 6. `[visitor]` {settlement} is short of the kind of people a town this size should be full of.
 
 **MASS MIGRATION** · `mass_migration`
 1. `[visitor]` People are arriving faster than the town can house them. The camps outside the wall are becoming a second settlement.
-2. `[ledger]` {settlement} has more mouths than arrangements. The administration is improvising, and the improvisation is visible.
-3. `[street]` The newcomers came from somewhere worse, and their arrival is reshaping what the town can afford.
-4. `[street]` People have come into {settlement} in numbers the town did not plan for, and the planning is happening after the fact.
+2. `[ledger]` {settlement} has more mouths than arrangements. The administration is improvising. The improvisation is visible.
+3. `[street]` The newcomers came from somewhere worse. Their arrival is reshaping what the town can afford.
+4. `[street]` People have come into {settlement} in numbers the town did not plan for. The planning is happening after the fact.
 5. `[ledger]` {settlement}'s rolls have grown by {band} and its housing has not grown at all.
-6. `[visitor]` There are more people in {settlement} than there is {settlement}, and the overflow is visible at the edges.
+6. `[visitor]` There are more people in {settlement} than there is {settlement}. The overflow is visible at the edges.
 
 **ARITY: several banners standing at once**
 1. `[counterforce]` {settlement} is carrying more than one crisis at once, and they are not independent. Each makes the others harder to end.
-2. `[ledger]` No single emergency explains the state of the town; the troubles here compound, and the compounding is the real condition.
+2. `[ledger]` No single emergency explains the state of the town. The troubles here compound. That is the real condition.
 3. `[threshold]` The town has run out of the slack it would need to solve any one of its problems, because it is solving several.
 
 **ARITY — no banner** · **R-DST-K GATED. NOT DRAWN AT THE BANNER.**
@@ -4806,8 +4806,8 @@ absent surface is exactly what R-DST-K forbids. This pool exists for the
 **Overview's own section framing**, where a surface genuinely renders, and a
 composer may draw it **only** there. It is authored rather than omitted because
 R-DST-G requires the good state to be a subject.
-1. `[visitor]` {settlement} carries no emergency. What troubles it are the ordinary troubles, and they are being handled at the ordinary pace.
-2. `[street]` Nothing here is urgent. The town's difficulties are chronic rather than acute, and it has the room to work on them.
+1. `[visitor]` {settlement} carries no emergency. What troubles it are the ordinary troubles. They are being handled at the ordinary pace.
+2. `[street]` Nothing here is urgent. The town's difficulties are chronic rather than acute. It has the room to work on them.
 3. `[ledger]` There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.
 
 ---
