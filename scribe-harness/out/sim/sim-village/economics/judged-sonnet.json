@@ -1,0 +1,262 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "This is a town that sells.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.exportPosture.status]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3",
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "subject": "a route claim on a goods sentence",
+     "value": "Hochhausen keeps the Cartographer's guild on a supply that has failed upstream.",
+     "description": "\"upstream\" asserts a route fact; a flow word is licensed by the field, a route step by a chain row (unresolved)"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "The building stands, the skill remains, and the accounts wait.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings, readings.activeChains, readings.exploitation, readings.isEntrepot, readings.primaryImports]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: one source carries the town",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-QUANTIFIER"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Well past half of what Hochhausen earns comes from a single trade, and the accounts have no second column worth the name (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Well past half of what Hochhausen earns comes from a single trade, and the accounts have no second column worth the name (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The market at Hochhausen carries the town's own goods and other towns' goods on the same stalls, and does not distinguis (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The market at Hochhausen carries the town's own goods and other towns' goods on the same stalls, and does not distinguis (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-QUANTIFIER",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-ACTOR",
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Hochhausen keeps the Cartographer's guild on a supply that has failed upstream. The building stands, the skill remains,  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Hochhausen keeps the Cartographer's guild on a supply that has failed upstream. The building stands, the skill remains,  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-ACTOR",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Hochhausen keeps the Cartographer's guild on a supply that has failed upstream. The building stands, the skill remains,  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Hochhausen keeps the Cartographer's guild on a supply that has failed upstream. The building stands, the skill remains,  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "There is nothing striking about Hochhausen's condition in either direction, a working road, a working market, and a town neither building nor selling off.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "SECURE",
+   "vid": 2,
+   "spine": "The town eats, and it is not a subject anyone raises unprompted.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 4,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 6,
+   "openers": [
+    {
+     "opener": "hochhausen keeps the",
+     "n": 1
+    },
+    {
+     "opener": "the market at",
+     "n": 1
+    },
+    {
+     "opener": "the town eats,",
+     "n": 1
+    },
+    {
+     "opener": "the yards here",
+     "n": 1
+    },
+    {
+     "opener": "there is nothing",
+     "n": 1
+    },
+    {
+     "opener": "well past half",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
