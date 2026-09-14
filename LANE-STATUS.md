@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 15:13:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 15:18:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 99474b62b Plan: the collection at 09-14 ~14:2x — the owner re-framed the two programmes (the Scrib
 
@@ -113,20 +113,23 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_59ec807d-940** (mtime 09-14 15:12): agent calls 13 (13 distinct) · DONE 7 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_59ec807d-940/`
+- **wf_59ec807d-940** (mtime 09-14 15:16): agent calls 16 (16 distinct) · DONE 10 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_59ec807d-940/`
     - `aa0a85931` ? · DONE · transcript 09-14 15:10 606 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats have no roster on this town: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and DS-DEF-2 'Internal Security' f
-    - `a1a27c60a` ? · IN FLIGHT · transcript 09-14 15:04 449 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a1a27c60a` ? · IN FLIGHT · transcript 09-14 15:16 825 KB · 9 tool calls · last: Bash grep -n -i "elder\|garrison\|docks\|doc\b" /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e
     - `a735f2aca` ? · DONE · transcript 09-14 15:06 503 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The DS-ECO-6 corpus line ('nothing organised behind it') is the exact phrasing the brief lists as REFUSED on a town whose rows se
     - `ae964d597` ? · DONE · transcript 09-14 15:08 569 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 17, "notes": ["The MARKET-OPEN corpus line (DS-GEN-13) is itself an ORIGIN \u2014 carts stopping before stalls, the town growing around the hab
     - `a4df6251c` ? · DONE · transcript 09-14 15:08 576 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Two stance tags in turn.md (\"threshold\" for PRESSURED, \"counterforce\" for TIER: minor shadow activity) are not among the thre
     - `adebec97d` ? · DONE · transcript 09-14 15:09 590 KB · 8 tool calls · files: response-sonnet.json · result: {"unitsWritten": 17, "notes": ["Several stance tags on these pools (elder, unfolding, counterforce, \"ledger \u00b7 marks deficit\") are not among the three sta
     - `ab8b69166` ? · DONE · transcript 09-14 15:10 522 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 9, "notes": ["The turn lists ten pools; DS-POW-7 \"layer DORMANT\" is marked not writeable and was omitted, so nine units are returned in the t
-    - `a7139d055` ? · IN FLIGHT · transcript 09-14 15:08 438 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
-    - `abc6e7278` ? · IN FLIGHT · transcript 09-14 15:09 434 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a41184375` ? · IN FLIGHT · transcript 09-14 15:09 443 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `a7139d055` ? · DONE · transcript 09-14 15:13 599 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 9, "notes": ["DS-POW-4 riskLabel Holding: card fills both {seat} and {faction} with the identical value Guild Council, so the corpus claim (hol
+    - `abc6e7278` ? · DONE · transcript 09-14 15:14 590 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 13, "notes": ["ROLE ROSTER vs SEATED SOURCES: the turn asks for faces through watch, court, guild, hall, gate, muster and garrison, but the tow
+    - `a41184375` ? · IN FLIGHT · transcript 09-14 15:18 710 KB · 8 tool calls · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17
     - `aa67e2c18` ? · DONE · transcript 09-14 15:12 482 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 6, "notes": ["The {institution} fill is \"Cartographer's guild\", but the town block carries no guild row and no guild source at all (its neare
-    - `aa455e645` ? · IN FLIGHT · transcript 09-14 15:10 416 KB · 5 tool calls · last: Bash sed -n '435,691p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
+    - `aa455e645` ? · DONE · transcript 09-14 15:16 587 KB · 7 tool calls · result: {"unitsWritten": 6, "notes": ["turn.md's fill for {institution} in DS-GEN-18 is \"Cartographer's guild\", but town.md's institution roster lists \"Cartographer'
     - `a6cd2c0c1` ? · IN FLIGHT · transcript 09-14 15:12 436 KB · 6 tool calls · last: Bash wc -l /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/sc
+    - `ab86ea759` ? · IN FLIGHT · transcript 09-14 15:14 449 KB · 7 tool calls · files: town.md, turn.md · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a50ae5409` ? · IN FLIGHT · transcript 09-14 15:18 506 KB · 8 tool calls · files: response-opus.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a30215f41` ? · IN FLIGHT · transcript 09-14 15:17 462 KB · 7 tool calls · last: Bash grep -n -i "counterforce\|stance" /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f4
 - **wf_0c7e8fcf-e4a** (mtime 09-14 13:57): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_0c7e8fcf-e4a/`
     - `a64dc9d07` ? · DONE · transcript 09-14 13:09 616 KB · 11 tool calls · files: response-opus.json · result: {"unitsWritten": 12, "notes": ["Three pools were omitted as unwritable, not skipped: DS-DEF-2 'Invasion & War: walls with NO force' seats face 0 through `elders
     - `a0141863e` ? · DONE · transcript 09-14 13:11 695 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 12, "notes": ["Omitted 3 of 15 pools (DS-DEF-2: 'Invasion & War: walls with NO force' vid 3, 'Internal Security: full legal chain (court AND pr
@@ -241,4 +244,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 6.72 3.88 3.66
+load: 2.90 3.27 3.43

@@ -1,0 +1,142 @@
+{
+ "units": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness WEAK",
+   "vid": 1,
+   "spine": "The defensive arrangements at Hochhausen are thin, standing up to ordinary pressure and giving out against anything sustained.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Invasion & War: neither walls nor force",
+   "vid": 3,
+   "spine": "Everyone here has watched the town go about its week with no line around it and no soldier in it, and takes that as answer enough.",
+   "faces": [
+    "A traveller says he asked what the town would do if an army came, and was told about the price of salt instead.",
+    "The older heads here say whoever asks about a wall is already leaving by morning.",
+    "The stallholders say the square fills with the morning light and empties with it, and nothing else sets the pace.",
+    "The potboy says he could name every house that would turn out if trouble came, and naming is where the talk has always stopped.",
+    "One of the watch says the round is walked by people who keep a bench by day.",
+    "Those who sit to hear a matter hold that the place has no line of its own, and the boundaries before them run between one plot and the next.",
+    "The chapel's warden holds that the people here are easier about the place than anyone who passes through, and does not say which of them has it right.",
+    "A guild member says the trades have priced their goods to a place that stands open.",
+    "The hall has never had anybody come in asking for a wall, a clerk there says."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Internal Security: no legal infrastructure",
+   "vid": 3,
+   "spine": "A stranger wronged here finds there is nowhere to take it, and nobody here expected there to be.",
+   "faces": [
+    "A traveller says a stranger who is wronged here has nowhere to take it but the door of whoever did it.",
+    "A woman at the long table says a stranger owed money here is paid in goods and told not to wait on coin.",
+    "One of the elders says a stranger's complaint is heard the same as anyone's, and one who does not stay to hear the answer was not wronged much.",
+    "A local priest holds that the ground takes a stranger on the same terms as anyone else here, whatever was agreed or not agreed beforehand.",
+    "At the gate they say a stranger is looked over on the way in, and nothing is kept of the looking.",
+    "The muster tells a stranger who complains that there is nowhere to lock up the man he names. There is nowhere for the stranger either.",
+    "The stallholders say a stranger who is cheated here has no board to complain to, and does best to come back to the stall himself."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Economic Survival: WEAK",
+   "vid": 2,
+   "spine": "Everyone here has seen who turns out when something is needed, and takes it that the same few would turn out for anything worse.",
+   "faces": [
+    "A traveller says what is handed over here is goods, not coin, and nothing more comes with it.",
+    "The older heads here say a request is made out loud, in front of the neighbours, and a refusal is heard by the same ears that heard the asking.",
+    "The potboy says the loudest at the table is always the household asked last, and the ones asked first sit quietly over their cups.",
+    "A local priest says a household gives toward a burial whatever it has, and what is given is remembered by the neighbours better than any count kept of it.",
+    "Those who hold the way through say the bar coming down is heard at the far doors. Not one of the doors opens.",
+    "The muster reckons what comes up from a door is a body or a tool, and the tool is remembered as well as the body.",
+    "At the market they say the town draws from whoever can be found, and nothing is easier to find than a stall.",
+    "One of the watch says the same corners get stood in whether the purse is settled or not. The round ends where it starts, at the water.",
+    "Nobody here asks the soldiers their business, the soldiers say, and everybody here asks them for a hand."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "poolKey": "Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 3,
+   "spine": "A stranger who asks here for a grain store is shown a field, and one who asks for a house for the sick is shown an ordinary door.",
+   "faces": [
+    "A carter reckons the sacks that leave a house for the mill are counted going out and never counted coming back.",
+    "A woman at the long table says a stranger who asks for a house for the sick is taken to be sick himself, and served right there at the door.",
+    "The older heads here hold that what a stranger calls a lack is only how the place has always been arranged, and they do not say who arranged it.",
+    "The people who keep the register say part of the ground digs easily and part does not, and everyone here already knows which is which.",
+    "At the market they say a buyer can get grain on a market day and nowhere at all to store it afterward."
+   ],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "Moderate",
+   "vid": 2,
+   "spine": "Enforcement and criminal presence at Hochhausen sit close enough that which way the next few seasons go is still an open question.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "spine": "The safety reading for Hochhausen is an initial one. It says plainly what has been seen so far and nothing about what has not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure null (nothing organized recognized)",
+   "vid": 3,
+   "spine": "A stranger asking after the arrangements at Hochhausen is met with genuine incomprehension, and there is no telling whether that is the truth or a very good performance of it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls ABSENT",
+   "vid": 3,
+   "spine": "The town has no boundary at Hochhausen, only an edge that sits wherever the last building happens to stand.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "vid": 3,
+   "spine": "A stranger at Hochhausen finds a hall whose business is the kind of trouble a garrison is the wrong tool for, and finds it a busy place.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense ABSENT",
+   "vid": 2,
+   "spine": "Nothing here answers a threat it cannot see, and that is exactly where the town stands exposed.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "UNWALLED-SMALL",
+   "vid": 2,
+   "spine": "No wall marks where Hochhausen ends, and at this size the country and the town simply agree to differ.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: No reserves, landlocked",
+   "vid": 2,
+   "spine": "The town eats what arrives and keeps nothing put by for a season when nothing does.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
