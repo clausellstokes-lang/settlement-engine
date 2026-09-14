@@ -278,6 +278,7 @@ POOL "prominentRelationship present" in block DS-REL-2
 POOL "flagDriven count zero" in block DS-REL-2
   vid: 1
   stance: street
+  CAVEAT: this town's historical character names an occupation or a conquest while this key counts no tie the engine drove off a flag; the count is of the engine's own flags and not of the town's past, so write the key as the narrow count it is and read no wider denial out of it
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Spitzplatz" on this town

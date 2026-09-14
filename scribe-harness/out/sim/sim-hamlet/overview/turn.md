@@ -86,6 +86,7 @@ POOL "Overview's own section framing" in block DS-STR-1
 POOL "SEVERITY: critical" in block DS-CND-1
   vid: 2
   stance: threshold
+  CAVEAT: this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
@@ -101,6 +102,7 @@ POOL "SEVERITY: critical" in block DS-CND-1
 POOL "DIRECTION: worsening" in block DS-CND-1
   vid: 1
   stance: unfolding
+  CAVEAT: this pool's key names a departure (the word `worsening`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V2` — `PRESENT then CONSEQUENCE` (state key + a STRUCTURAL-consequence field); keep that order in your spine.
   slots you may use: (none)
   THE FIELDS this pool reads, with their values here:
@@ -171,6 +173,7 @@ POOL "defenseProfile.readiness.label: Vulnerable" in block DS-GEN-3
 POOL "scores.military: CRITICAL" in block DS-GEN-3
   vid: 3
   stance: street
+  CAVEAT: this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises none of the eight closed level-1 orders, so this pool sets no order for you to keep.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
@@ -187,6 +190,7 @@ POOL "scores.military: CRITICAL" in block DS-GEN-3
 POOL "scores.monster: CRITICAL" in block DS-GEN-3
   vid: 2
   stance: ledger
+  CAVEAT: this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town
@@ -235,6 +239,7 @@ POOL "scores.economic: WEAK" in block DS-GEN-3
 POOL "scores.magical: CRITICAL" in block DS-GEN-3
   vid: 2
   stance: ledger
+  CAVEAT: this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried
   THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
   slots you may use: settlement
     {settlement} is "Warmholz" on this town

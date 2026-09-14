@@ -376,6 +376,7 @@
    "angle": "visitor",
    "authoredIndex": 1,
    "blockId": "DS-GEN-13",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -473,6 +474,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-GEN-17",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -548,6 +550,7 @@
    "angle": "ledger",
    "authoredIndex": 4,
    "blockId": "DS-STR-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -612,6 +615,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-STR-1",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -665,6 +669,13 @@
    "angle": "threshold",
    "authoredIndex": 1,
    "blockId": "DS-CND-1",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -740,6 +751,13 @@
    "angle": "unfolding",
    "authoredIndex": 0,
    "blockId": "DS-CND-1",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `worsening`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -810,6 +828,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -885,6 +904,7 @@
    "angle": "ledger",
    "authoredIndex": 2,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -949,6 +969,7 @@
    "angle": "threshold",
    "authoredIndex": 3,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1024,6 +1045,7 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1099,6 +1121,13 @@
    "angle": "street",
    "authoredIndex": 2,
    "blockId": "DS-GEN-3",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1183,6 +1212,13 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1269,6 +1305,7 @@
    "angle": "visitor",
    "authoredIndex": 0,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1355,6 +1392,7 @@
    "angle": "visitor",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1441,6 +1479,13 @@
    "angle": "ledger",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [
+    {
+     "channel": "REPORT",
+     "key": "departure key with no reading under it",
+     "note": "this pool's key names a departure (the word `critical`) and not one of the readings behind it has a value on this card; write the key as the engine states it and assert nothing about what departed, when, or what it carried"
+    }
+   ],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1527,6 +1572,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-GEN-3",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1602,6 +1648,7 @@
    "angle": "street",
    "authoredIndex": 1,
    "blockId": "DS-GEN-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1679,6 +1726,7 @@
    "angle": "visitor",
    "authoredIndex": 1,
    "blockId": "DS-GEN-6",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1754,6 +1802,7 @@
    "angle": "visitor",
    "authoredIndex": 2,
    "blockId": "DS-REL-2",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1841,6 +1890,7 @@
    "angle": "visitor",
    "authoredIndex": 2,
    "blockId": "DS-GEN-7",
+   "caveats": [],
    "compromised": null,
    "face": 0,
    "faceRoles": [],
@@ -1924,7 +1974,7 @@
    "writeable": true
   }
  ],
- "schema": "scribe-town-card/5",
+ "schema": "scribe-town-card/6",
  "seed": "sim-hamlet",
  "staticCardJoined": true,
  "tab": "overview",
