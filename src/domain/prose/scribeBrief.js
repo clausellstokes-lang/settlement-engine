@@ -754,10 +754,14 @@ export function judgeUnits(units, card, refute) {
  * @type {ReadonlyArray<{key: string, arm: string, ask: string}>}
  */
 export const TIER1_QUESTIONS = Object.freeze([
+  // ⭐ RE-WORDED TO THE MEASURED CLASSES (W3b car 4). W1's wording asked about degree of surety,
+  // which is a question about tone; RUN 2's reader answered `yes` 177 times on this arm and its
+  // own notes name what it was actually catching, which is a question about what the facts leave
+  // open. The list below is the six bars the writer holds, asked as one question.
   Object.freeze({
     key: 'certainty',
     arm: 'T1-CERTAINTY',
-    ask: 'CERTAINTY: does the line claim to know something more surely than the facts below support?',
+    ask: 'CERTAINTY: does the line state as DECIDED something the facts below leave UNDECIDED — an absence read out of a field with no value, an origin, a contest no relation row names, a practice behind a fact that only stands, or a verdict the town\'s own institution and holder rows deny?',
   }),
   Object.freeze({
     key: 'quantifier',
@@ -784,10 +788,13 @@ export const TIER1_QUESTIONS = Object.freeze([
     arm: 'T1-MECHANISM',
     ask: 'MECHANISM: does it describe how a thing works — a practice, a procedure, a cause, a custom, a price, a debt, a fine, a backlog — where the facts only say that the thing stands?',
   }),
+  // ⭐ THE LADDERS ARE IN THE QUESTION (W3b car 4). RUN 2 finding 5: the writer wrote to the
+  // readiness BAND because its brief told it to, and this reader, shown the page's `Well-Defended`
+  // badge and never shown that note, answered `yes` on it. Sixty three lines fell to that.
   Object.freeze({
     key: 'samePage',
     arm: 'T1-SAMEPAGE',
-    ask: 'SAME PAGE: does it contradict a machine line on this page?',
+    ask: 'SAME PAGE: does it contradict a machine line on this page? The posture badge word and the readiness band are TWO LADDERS over one score and BOTH are the engine\'s, so a line that agrees with the band is NOT a contradiction of the badge; a funding note reading underfunded at ninety seven percent beside `Economic Backing: Well-funded` is likewise two fields and both are true. Neither pair is an answer of yes.',
   }),
 ]);
 
@@ -855,11 +862,21 @@ function pageLinesOf(card) {
     .map((row) => `  [${String(row?.kind)}] ${String(row?.label ?? '')}: ${String(row?.text ?? '')}`);
 }
 
-/** The pool row a unit was written for, for its field list. */
+/**
+ * The pool row a unit was written for, for its field list.
+ *
+ * ⛔ THE READER IS SHOWN WHAT THE WRITER WAS SHOWN, IN THE SAME WORDS (W3b car 4). A field with no
+ * value prints as UNKNOWN here exactly as it does in the writer's turn: a bare `= null` reads to a
+ * model as "the answer is nothing", which is the very reading question 1 now asks about, and a
+ * reader given a harsher rendering of the same fact than the writer was refuses lines the writer
+ * was licensed to write (ruling 26's defect class, pointed at the second seat).
+ */
 function fieldsFor(card, unit) {
   const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
   return (Array.isArray(pool?.fields) ? pool.fields : [])
-    .map((f) => `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`);
+    .map((f) => (f?.unknown === true
+      ? `    ${String(f?.field ?? '')} = UNKNOWN (${String(f?.state) === 'unreadable' ? 'this card cannot resolve this reading' : 'the engine has not decided this'}; nothing may be asserted from it either way)`
+      : `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`));
 }
 
 /**
@@ -892,6 +909,13 @@ export function buildTier1Checklist(units, card) {
   lines.push('THE READER\'S EYE. These are the bars the writer was given, and they are the bars you');
   lines.push('are reading against. A line that keeps all six is not refused for keeping them.');
   for (const bar of READERS_EYE) lines.push(`  - ${bar}`);
+  lines.push('');
+  // ⭐ AND THE TWO TRUTHS THAT ARE NOT CONTRADICTIONS (W3b car 4). They ride in the town block the
+  // writer and this reader are both given, and they are repeated here because question 7 is the
+  // one they bear on and RUN 2 measured sixty three lines lost for want of them.
+  lines.push(TWO_LADDERS);
+  lines.push('');
+  lines.push(FUNDING_NOTE);
   lines.push('');
   lines.push('THE TOWN:');
   lines.push(JSON.stringify(card?.town ?? {}, null, 1));

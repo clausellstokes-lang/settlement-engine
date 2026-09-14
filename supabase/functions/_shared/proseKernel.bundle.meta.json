@@ -4,7 +4,7 @@
     "src/domain/prose/epochRecord.js",
     "src/domain/prose/scribeBrief.js"
   ],
-  "sourceHash": "01cd8f346cec6954",
+  "sourceHash": "f6f4a084b3f072d1",
   "inputs": [
     "src/data/powerData.js",
     "src/domain/arcaneIdentity.js",

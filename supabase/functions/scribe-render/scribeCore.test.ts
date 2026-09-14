@@ -310,6 +310,53 @@ Deno.test('the checklist prints the page\'s machine lines, which question 7 is a
   assert(!text.includes('which is NOT a machine line'), 'a composed row is the prose, not the page');
 });
 
+Deno.test('⭐ THE CHECKLIST RIDES UNDER THE SAME LAW: the ladders, the funding note, and the seven', () => {
+  // ⛔ RUN 2 finding 5 in one arm. The writer wrote to the readiness BAND because its brief told
+  // it to; this reader, shown the page's `Well-Defended` badge and never shown that note, answered
+  // SAME PAGE `yes` on it, and 63 lines fell that way. The note now rides in the town block BOTH
+  // seats are given and in the question it bears on.
+  const text = buildTier1Checklist([unit()], card);
+  assert(text.includes('THE TWO LADDERS'), 'the ladders note is in the reader\'s turn');
+  assert(text.includes('THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE'));
+  assert(text.includes('a line that agrees with the band is NOT a contradiction of the badge'),
+    'and question 7 says so in terms');
+  assert(text.includes('ninety seven percent'), 'the funding pair is named in the question too');
+  // ⭐ QUESTION 1 ASKS THE MEASURED CLASSES, not a question about tone. It drew 177 `yes` lines in
+  // RUN 2 and the reader's own notes name what it was catching.
+  assert(text.includes('does the line state as DECIDED something the facts below leave UNDECIDED'));
+  for (const klass of ['an absence read out of a field with no value', 'an origin',
+    'a contest no relation row names', 'a practice behind a fact that only stands']) {
+    assert(text.includes(klass), `question 1 does not name ${klass}`);
+  }
+  // ⭐ QUESTION 6 KEEPS ITS WORDING and the seven arms stay seven (ruling 29).
+  assert(text.includes('MECHANISM: does it describe how a thing works'));
+  assertEquals(TIER1_QUESTIONS.length, 7);
+  assertEquals(TIER1_QUESTIONS.map((q) => q.arm), [
+    'T1-CERTAINTY', 'T1-QUANTIFIER', 'T1-SCOPE', 'T1-ACTOR', 'T1-FORECAST', 'T1-MECHANISM', 'T1-SAMEPAGE',
+  ]);
+});
+
+Deno.test('⛔ THE READER IS SHOWN A VALUELESS FIELD IN THE WRITER\'S OWN WORDS, never as `null`', () => {
+  // A reader given a harsher rendering of the same fact than the writer was refuses lines the
+  // writer was licensed to write, which is ruling 26's defect class pointed at the second seat.
+  const withFields = {
+    ...card,
+    pools: [{
+      ...card.pools[0],
+      fields: [
+        { field: 'forces.walls.present', value: true, unknown: false, state: 'decided' },
+        { field: 'readings.scores', value: null, unknown: true, state: 'unreadable' },
+        { field: 'powerStructure.recentConflict', value: null, unknown: true, state: 'not-decided' },
+      ],
+    }],
+  };
+  const text = buildTier1Checklist([unit()], withFields);
+  assert(text.includes('forces.walls.present = true'));
+  assert(text.includes('readings.scores = UNKNOWN (this card cannot resolve this reading'));
+  assert(text.includes('powerStructure.recentConflict = UNKNOWN (the engine has not decided this'));
+  assert(!text.includes('= null'), 'a bare null reads as "the answer is nothing", which it is not');
+});
+
 Deno.test('⭐ A YES ON A FACE PATCHES THAT SEAT; a yes on the SPINE drops the unit', () => {
   const kept = [unit()];
   const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };

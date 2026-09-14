@@ -358,6 +358,13 @@ export async function handleScribeRender(
           // kept something, on the SAME two cached system blocks, so its input is almost entirely
           // a cache read and its output is seven words a line.
           //
+          // ⭐ AND IT READS UNDER THE SAME LAW AS THE WRITER (W3b car 4). The checklist opens with
+          // THE READER'S EYE — the writer's own six invention bars — and carries the two-ladders
+          // and funding notes that the town block above already gives both seats, because RUN 2
+          // measured 63 lines lost to a reader that had been shown the page's badge and never the
+          // note saying the badge and the band are two true readings of one score. A row BYTE-EQUAL
+          // to the corpus is never sent here at all: it is the line a refusal falls back to.
+          //
           // ⛔ A TIER-1 FAILURE IS NOT A RENDER FAILURE. The design says tier 0 is the FLOOR and
           // tier 1 the second reader; a dossier is not blanked because the second reader was
           // unavailable. Any provider error, refusal, unparseable answer or abort here is logged,
