@@ -27,6 +27,8 @@ The target is UNFALSIFIABLE, not simple. Aiming at simplicity produced a version
 
 Two checks survive on an unfalsifiable face: it must not sit badly beside what else the page can print, and its speaker must exist on that town.
 
+**MEASURED, AND IT CUTS AGAINST THE CHAIR'S ENDORSEMENT (2026-09-15, all 506 landed faces of this block):** only 6.5% of faces are unfalsifiable in claim, not the half the chair guessed; the pools judged best carry FEWER of them, not more (3.4% at PASS, 14.3% at twice-DULL); the bank would save 8 faces of 506; and two-thirds of what it would hold needs a stress-state check anyway. So the ruling is a cost measure and a small one on THIS block — which is the most densely-typed tab in the product, where almost every sentence must touch a field. The bank is HELD until one non-defense block is counted the same way.
+
 ## 3. The one test: it must not contradict
 
 The old test was "is every claim licensed by the data". It produced prose that was lawful and flat. The owner re-cut it on 2026-09-12: **a sentence is lawful if it does not contradict the settlement.** Silence in the data is permission, not prohibition. "Unlicensed" is no longer a finding. The author research is a set of guideposts for taste, not a rulebook.
