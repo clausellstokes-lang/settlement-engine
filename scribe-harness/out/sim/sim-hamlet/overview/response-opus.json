@@ -1,0 +1,164 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "spine": "Goods here change hands one at a time, and nothing in the place is arranged for more than that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "spine": "Every job here is somebody's second job.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "spine": "Stock and people are kept close in, and the ground further out counts as abandoned.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "spine": "The trouble here is the slow kind rather than the sudden kind, and the place has the room to work at it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "spine": "Warmholz bends this far and not much further.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "spine": "The worsening is steady rather than sudden, and each season costs a little more than the one before.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "spine": "The year closes near enough to level that the closing is watched.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "spine": "Only a part of what happens here is ever spoken of, and nothing decides which part.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "spine": "The place works on the terms it has, and what falls short is the terms and not the working.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "spine": "A place this size ought to have more between its houses and whatever comes than this one has.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "spine": "What protects Warmholz is that nobody has wanted it, and everybody here understands the arrangement.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "spine": "Beyond the fields the place has no answer to what lives there, and nobody whose work it would be.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "spine": "More goes on here than anybody looks into, though little of it is hidden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the hamlet is spare, and that is what a careful eye takes in first.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "spine": "No practitioner lives here, no arrangement stands to bring one, and nobody expects either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "Food is not thought about here, and that is the most that can be said for anybody's food.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "spine": "The houses stand a reasonable distance from the last place, and that is the whole of the reason for them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "spine": "A handful of roofs is the whole of Warmholz, and what keeps them here is the ground under them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "The people here are bound to one another the way any settled place is bound, and no further than that.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "spine": "One loose end runs through the place, and one standing arrangement would tie it off.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

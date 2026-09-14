@@ -1,0 +1,84 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "Almost nothing the Free Elder Council asks of Warmholz arrives.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A stranger who brings a complaint to the Free Elder Council at Warmholz gets nowhere with it, then brings the same complaint to somebody with no title at all and has it settled the same day.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "The Free Elder Council holds Warmholz, and the town's affairs run through it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "governing faction holds a DOMINANT share",
+   "vid": 1,
+   "spine": "The Free Elder Council does not merely govern Warmholz, and it outweighs everything else in the town put together.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "spine": "The criminal interest at Warmholz is gaining ground from within rather than from outside: a town this poorly paid and this poorly watched is cheap to buy into, and this one is both.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-7",
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "vid": 2,
+   "spine": "Warmholz has its interests, but it has no camps: a question here is answered by whoever cares about it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "Decisions at Warmholz are averaged before they are made and stick once they are, and the Free Elder Council is slow to move and slower to move back.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "A stranger who addresses the Free Elder Council at Warmholz by any other title is corrected, politely and immediately.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "spine": "Warmholz is no longer certain the Free Elder Council speaks for it, and from the way it governs, neither is the Free Elder Council.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "What the Free Elder Council has lost at Warmholz, it has lost to the town itself and not to any rival, and no rival was needed.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

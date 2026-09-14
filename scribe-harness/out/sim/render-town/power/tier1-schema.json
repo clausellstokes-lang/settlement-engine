@@ -1,0 +1,80 @@
+{
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "answers"
+ ],
+ "properties": {
+  "answers": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "n",
+     "certainty",
+     "quantifier",
+     "scope",
+     "actor",
+     "forecast",
+     "mechanism",
+     "samePage"
+    ],
+    "properties": {
+     "n": {
+      "type": "integer"
+     },
+     "certainty": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "quantifier": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "scope": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "actor": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "forecast": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "mechanism": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     },
+     "samePage": {
+      "type": "string",
+      "enum": [
+       "yes",
+       "no"
+      ]
+     }
+    }
+   }
+  }
+ }
+}

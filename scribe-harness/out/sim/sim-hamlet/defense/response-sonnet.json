@@ -1,0 +1,108 @@
+{
+ "units": [
+  {
+   "blockId": "DS-DEF-1",
+   "poolKey": "readiness CRITICAL",
+   "vid": 2,
+   "spine": "The town knows precisely what it could not survive, and shapes what it dares and does not dare around that knowledge.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "poolKey": "override active (generic framing)",
+   "vid": 1,
+   "spine": "What Warmholz's defenses are ordinarily worth does not describe the town at present. A crisis is on it, and the defenses have been rebuilt around that crisis.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "poolKey": "override active, viability intact",
+   "vid": 3,
+   "spine": "A crisis has changed how Warmholz defends itself and not whether it can support itself, and the two have been kept apart.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "COMPOUND override (a crisis stress has rewritten the label)",
+   "vid": 1,
+   "spine": "The ordinary safety of Warmholz has stopped applying. Whatever the town was before, a monster threat is what governs its streets now.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-3",
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "vid": 2,
+   "spine": "Only a first look has been taken of Warmholz's safety. It says plainly what has been seen and nothing about what has not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "structure null (nothing organized recognized)",
+   "vid": 1,
+   "spine": "No organized crime has been identified at Warmholz. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "poolKey": "capture none",
+   "vid": 1,
+   "spine": "The Free Elder Council at Warmholz has had nothing criminal reach it. Whatever operates in the town runs outside the council, and its decisions remain its own.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "walls ABSENT",
+   "vid": 2,
+   "spine": "A stranger walks into Warmholz from whatever side he chooses, and is not made to pass anybody on the way in.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "NO organized force at all",
+   "vid": 3,
+   "spine": "A stranger at Warmholz can find nobody whose task the town's defense is, because it is nobody's task at all.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "charter hall ABSENT where the country warrants one",
+   "vid": 3,
+   "spine": "Warmholz has no charter hall to answer for its defense, so soldiers wrong for the work are sent instead, and the town pays for that wrongness every time.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "poolKey": "arcane defense ABSENT",
+   "vid": 3,
+   "spine": "Nothing unseen has come at Warmholz, and nothing here would know if it had. What counts as safe and what could be caught are two different things.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "poolKey": "UNWALLED-SMALL",
+   "vid": 1,
+   "spine": "Too small to need a wall, and the town knows it well enough. Its safety is its neighbours, its distance, and its own unimportance.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "poolKey": "Logistics & Supply: No reserves, landlocked",
+   "vid": 1,
+   "spine": "The town holds no food store of its own. Any break in its road access cuts off supply within days, not seasons.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

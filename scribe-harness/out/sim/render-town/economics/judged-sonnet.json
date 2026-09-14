@@ -1,0 +1,338 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "The road holds, the market holds, and the town is neither building nor selling off.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [prosperityRank(settlement.economicState.prosperity)]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "What keeps it fed comes from a short list of trades.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState.incomeSources, economicState.incomeSources.length, economicState.incomeSources.reduce]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q",
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": ", not goods passed straight through.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "Both sit on the same stalls, and what goes back out on the road is the town's own work, no",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [economicState, economicState.isEntrepot, economicState.localProduction, economicState.primaryExports, economicState.primaryImports]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "Q"
+   ],
+   "findings": [
+    {
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "When one trade goes quiet, another carries the load.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call (reads [readings.exportPosture.status]; none claimed)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "not hungry, but",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "C3"
+   ],
+   "findings": [
+    {
+     "arm": "C3",
+     "channel": "WITHHELD",
+     "subject": "a route claim on a goods sentence",
+     "value": "The Caravaneer's post at Spitzplatz sits on a supply that failed upstream.",
+     "description": "\"upstream\" asserts a route fact; a flow word is licensed by the field, a route step by a chain row (unresolved)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Something is always going out of the town. When one trade goes quiet, another carries the load. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Something is always going out of the town. When one trade goes quiet, another carries the load. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Something is always going out of the town. When one trade goes quiet, another carries the load. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Something is always going out of the town. When one trade goes quiet, another carries the load. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Spitzplatz is not hungry, but it keeps nothing back for a bad season. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Spitzplatz is not hungry, but it keeps nothing back for a bad season. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Spitzplatz is not hungry, but it keeps nothing back for a bad season. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The Caravaneer's post at Spitzplatz sits on a supply that failed upstream. The building is kept, the skill remains, and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The Caravaneer's post at Spitzplatz sits on a supply that failed upstream. The building is kept, the skill remains, and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The Caravaneer's post at Spitzplatz sits on a supply that failed upstream. The building is kept, the skill remains, and  (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What passes for a shadow trade here has never grown into one… some unlicensed dealing goes on, and nothing organised sit (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What passes for a shadow trade here has never grown into one… some unlicensed dealing goes on, and nothing organised sit (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What passes for a shadow trade here has never grown into one… some unlicensed dealing goes on, and nothing organised sit (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "Nothing about Spitzplatz's condition marks it as rising or falling. The road holds, the market holds, and the town is neither building nor selling off.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "No single trade carries the town's living. What keeps it fed comes from a short list of trades.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "A stranger at the market cannot tell Spitzplatz's own goods from what came in from elsewhere. Both sit on the same stalls, and what goes back out on the road is the town's own work, not goods passed straight through.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 4,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 7,
+   "openers": [
+    {
+     "opener": "a stranger at",
+     "n": 1
+    },
+    {
+     "opener": "no single trade",
+     "n": 1
+    },
+    {
+     "opener": "nothing about spitzplatz's",
+     "n": 1
+    },
+    {
+     "opener": "something is always",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz is not",
+     "n": 1
+    },
+    {
+     "opener": "the caravaneer's post",
+     "n": 1
+    },
+    {
+     "opener": "what passes for",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
