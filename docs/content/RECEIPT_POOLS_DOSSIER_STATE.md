@@ -5794,73 +5794,73 @@ shared letter would collide.*
 **TRIPLE-RENDER NOTE (R-DST-W4-d):** HistoryTab, PowerTab and OverviewTab all render this record. Suggested default angles per surface — HistoryTab `[ledger]`/`[street]`, PowerTab `[ledger]`/`[unfolding]` (the faction-named arms), OverviewTab `[visitor]`/`[street]`. Display-side selection; no state.
 
 **`crime_wave`**
-1. `[street · minor]` Theft in {settlement} has stopped being remarkable, which is its own kind of report; the watch takes the complaint, and the complainant does not expect much of it.
-2. `[ledger · major]` The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.
-3. `[visitor · major]` A stranger in {settlement} is told twice before nightfall which streets to leave alone, and both people who tell him are careful about who hears them.
-4. `[unfolding · catastrophic]` Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.
-5. `[counterforce · minor]` The thieving in {settlement} is real and it is also contained: it takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.
+1. `[street · minor]` Theft in {settlement} has stopped being remarkable. That is its own kind of report. The watch takes the complaint, and whoever brought it does not expect much of it.
+2. `[ledger · major]` The watch's book at {settlement} is thick with the same few crimes written many times over. The names in it are almost never the same twice.
+3. `[visitor · major]` A stranger in {settlement} is told twice before nightfall which streets to leave alone. Both of the people who tell him are careful about who hears them.
+4. `[unfolding · catastrophic]` Whatever holds {settlement}'s streets after dark, it is not the watch. Shopkeepers here have begun buying their quiet directly, and the price of it is going up.
+5. `[counterforce · minor]` The thieving in {settlement} is real and it is contained. It takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.
 
 **`economic_disparity`**
-1. `[street · minor]` Two towns share {settlement}'s walls (one counts its year in surplus and the other in what it did without), and the two do not often eat in the same rooms.
-2. `[visitor · major]` The distance between {settlement}'s best street and its worst is a short walk and a great deal else, and nobody who lives here needs it pointed out.
-3. `[ledger · major]` {faction} holds the greater part of what {settlement} earns, and the rolls show the rest of the town living on the remainder without much room in it.
-4. `[unfolding · catastrophic]` The gap in {settlement} has stopped being a fact people live around and started being a thing they say out loud, which is a different stage of the same condition.
-5. `[counterforce · minor]` {settlement} is unequally off and orderly about it: the poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.
+1. `[street · minor]` Two towns share {settlement}'s walls. One counts its year in surplus and the other in what it did without. The two do not often eat in the same rooms.
+2. `[visitor · major]` The distance between {settlement}'s best street and its worst is a short walk and a great deal else. Nobody who lives here needs it pointed out.
+3. `[ledger · major]` {faction} holds the greater part of what {settlement} earns. The rolls show the rest of the town living on the remainder without much room in it.
+4. `[unfolding · catastrophic]` The gap in {settlement} has stopped being a fact people live around. It has started being a thing they say out loud. That is a different stage of the same condition.
+5. `[counterforce · minor]` {settlement} is unequally off and orderly about it. The poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.
 
 **`guild_conflict`**
-1. `[ledger · minor]` Two trades in {settlement} claim the same work, and every contract written in this town has to say which of them is doing it.
-2. `[street · major]` {faction} and {faction2} are not fighting in {settlement} so much as refusing each other: a job one takes, the other will not touch, and the town works around the hole.
+1. `[ledger · minor]` Two trades in {settlement} claim the same work. Every contract written here has to say which of them is doing it.
+2. `[street · major]` {faction} and {faction2} are not fighting in {settlement} so much as refusing each other. A job one takes, the other refuses to touch, and the town works around the hole.
 3. `[visitor · major]` Ask in {settlement} who does a given piece of work and you get two answers and a warning about the second one.
-4. `[unfolding · catastrophic]` The quarrel between {settlement}'s trades has reached the point where work goes undone rather than go to the wrong hands, and the town is beginning to pay for the principle.
-5. `[counterforce · minor]` The trades in {settlement} disagree loudly and deliver anyway; the shouting is the arrangement, not a threat to it.
+4. `[unfolding · catastrophic]` The quarrel between {settlement}'s trades has reached the point where work goes undone rather than go to the wrong hands. The town is beginning to pay for the principle.
+5. `[counterforce · minor]` The trades in {settlement} disagree loudly and deliver anyway, and the shouting is the arrangement rather than a threat to it.
 
 **`infiltration_fear`**
-1. `[street · minor]` {settlement} has grown careful about strangers in a way it cannot quite account for, and the carefulness has begun to be about neighbours too.
+1. `[street · minor]` {settlement} has grown careful about strangers in a way it cannot quite account for. The carefulness has begun to be about neighbours too.
 2. `[visitor · major]` A newcomer to {settlement} is asked more questions than the business warrants, politely, by more than one person.
-3. `[ledger · major · dm-only]` {faction} keeps a list in {settlement} of who is thought to answer elsewhere, and the list is longer than anything anyone will say aloud.
-4. `[unfolding · catastrophic]` Suspicion in {settlement} has outrun whatever it started from: an accusation costs nothing to make here and a great deal to survive.
+3. `[ledger · major · dm-only]` {faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone says aloud.
+4. `[unfolding · catastrophic]` Suspicion in {settlement} has outrun whatever it started from. An accusation costs nothing to make here and a great deal to survive.
 5. `[counterforce · minor]` {settlement} watches its strangers and lets them stay. The suspicion is a habit of the gate, not a policy of the hall.
 
 **`leadership_vacuum`**
 1. `[ledger · minor]` Decisions at {settlement} that want one signature take a season to collect it, because there is no longer an obvious hand to take them.
 2. `[street · major]` Nobody in {settlement} is certain who to bring a grievance to, so grievances get brought to several people and settled by none of them.
 3. `[visitor · major]` {settlement} has a hall and a seat in it, and asking who fills the seat produces a pause before it produces an answer.
-4. `[unfolding · catastrophic]` The absence at the top of {settlement} is no longer being waited out; {faction} has begun behaving as though the question is already answered.
-5. `[counterforce · minor]` {settlement} runs without a clear hand and runs well enough: the clerks know their work, and the work does not require a decision every day.
+4. `[unfolding · catastrophic]` The absence at the top of {settlement} is no longer being waited out. {faction} has begun behaving as though the question is already answered.
+5. `[counterforce · minor]` {settlement} runs without a clear hand and runs well enough. The clerks know their work, and the work does not require a decision every day.
 
 **`magical_controversy`**
-1. `[street · minor]` What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without anyone expecting it to finish.
-2. `[visitor · major]` A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the position is not unanimous.
-3. `[ledger · major]` {faction} wants the Art in {settlement} licensed and counted; the rest of the town wants it left alone; neither holds enough of the hall to end the argument.
-4. `[unfolding · catastrophic]` The quarrel over the Art in {settlement} has moved out of the hall and into the street, and both sides have begun naming individuals rather than practices.
-5. `[counterforce · minor]` {settlement} argues about the Art constantly and licenses it anyway; the argument is how the licence gets its conditions.
+1. `[street · minor]` What may be done with the Art in {settlement} gets argued in the same tone as grazing rights. The arguing is endless, and nobody expects it to finish.
+2. `[visitor · major]` A practitioner arriving in {settlement} learns quickly that the town has a position on the subject. He learns as quickly that the position is not unanimous.
+3. `[ledger · major]` {faction} wants the Art in {settlement} licensed and counted. The rest of the town wants it left alone. Neither holds enough of the hall to end the argument.
+4. `[unfolding · catastrophic]` The quarrel over the Art in {settlement} has moved out of the hall and into the street. Both sides have begun naming individuals rather than practices.
+5. `[counterforce · minor]` {settlement} argues about the Art constantly and licenses it anyway. The argument is how the licence gets its conditions.
 
 **`occupation_legacy`** — *CAUSAL-LICENSED: the vocabulary word entails an occupation that happened and ended. Nothing beyond that — no occupier is named, no duration asserted, no year given.*
-1. `[elder · minor]` {settlement} kept its own hall through the occupation and has not entirely got its own manners back; there are still things said only indoors.
-2. `[street · major]` The occupiers are gone from {settlement} and their arrangements are not: who holds which licence here was decided by somebody else, and nobody has undone it.
-3. `[ledger · major]` {settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades exempt), and no one now living wrote either rule.
-4. `[unfolding · catastrophic]` {settlement} is settling accounts left from the occupation, and the settling has begun to reach people who were only doing what they were told.
-5. `[counterforce · minor]` {settlement} was held and released and has chosen not to pursue it; who did what is known here, and is deliberately not spoken.
+1. `[elder · minor]` {settlement} kept its own hall through the occupation and has not entirely got its own manners back. There are still things said only indoors.
+2. `[street · major]` The occupiers are gone from {settlement} and their arrangements are not. Who holds which licence here was decided by somebody else, and nobody has undone it.
+3. `[ledger · major]` {settlement}'s rolls still carry the shape the occupation put on them: the same quarters taxed hardest, the same trades exempt. No one now living wrote either rule.
+4. `[unfolding · catastrophic]` {settlement} is settling accounts left from the occupation. The settling has begun to reach people who were only doing what they were told.
+5. `[counterforce · minor]` {settlement} was held and released and has chosen not to pursue it. Who did what is known here, and is deliberately not spoken.
 
 **`outside_debt`** — *CAUSAL-LICENSED: the vocabulary word entails an obligation taken on and owed outward. The creditor is a slot where the record names one and is otherwise unnamed; the sum is never spoken.*
-1. `[elder · minor]` {settlement} owes outside its walls, and the owing is written into the shape of the year: the quarter's payment leaves before anything else is decided.
-2. `[street · major]` What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.
-3. `[visitor · major]` {settlement} looks poorer than its trade suggests, and the reason is not in the town: the difference leaves for a creditor beyond the walls.
-4. `[unfolding · catastrophic]` The debt on {settlement} has stopped being serviceable, and what is argued in the hall now is not how to pay it but what happens when the town stops.
-5. `[counterforce · minor]` {settlement} carries an outside debt comfortably: the payments go out on time, and the creditor has never had a reason to look closely at the town.
+1. `[elder · minor]` {settlement} owes outside its walls, and the owing is written into the shape of the year. The quarter's payment leaves before anything else is decided.
+2. `[street · major]` What {settlement} sends away each quarter is more than the town would like to send. Anyone here can tell you roughly what it costs them without being shown a book.
+3. `[visitor · major]` {settlement} looks poorer than its trade suggests, and the reason is not in the town. The difference leaves for a creditor beyond the walls.
+4. `[unfolding · catastrophic]` The debt on {settlement} has stopped being serviceable. What is argued in the hall now is not how to pay it but what happens when the town stops.
+5. `[counterforce · minor]` {settlement} carries an outside debt comfortably. The payments go out on time, and the creditor has never had a reason to look closely at the town.
 
 **`resource_scarcity`**
 1. `[ledger · minor]` What {settlement} needs and what {settlement} has do not meet, and the gap is managed by ration rather than closed.
-2. `[street · major]` There is not enough of what {settlement} runs on, and the not-enough gets distributed by who asks first and who asks loudest.
-3. `[visitor · major]` {settlement} is careful with something a town this size should have in plenty, and the care is visible before anyone explains it.
-4. `[unfolding · catastrophic]` {settlement} has begun taking from tomorrow to cover today, and the arithmetic of that has an end in it that nobody is discussing.
-5. `[counterforce · minor]` {settlement} is short and orderly about being short: the queue is respected, the ration is honoured, and the shortness has not become a quarrel.
+2. `[street · major]` There is not enough of what {settlement} runs on. What there is goes to whoever asks first and whoever asks loudest.
+3. `[visitor · major]` {settlement} is careful with something a town this size should have in plenty. The care is visible before anyone explains it.
+4. `[unfolding · catastrophic]` {settlement} has begun taking from tomorrow to cover today. The arithmetic of that has an end in it that nobody is discussing.
+5. `[counterforce · minor]` {settlement} is short and orderly about being short. The queue is respected, the ration is honoured, and the shortness has not become a quarrel.
 
 **`succession_crisis`**
 1. `[ledger · minor]` Who follows at {settlement} is not written anywhere the clerks can point to, and the clerks have begun to mind.
-2. `[street · major]` {settlement} has more than one candidate and no procedure, and the town has quietly sorted itself along the line between them.
-3. `[visitor · major]` Ask in {settlement} who will hold the seat next and the room reorganises itself before anyone answers.
-4. `[unfolding · catastrophic]` The succession at {settlement} has stopped being a question and become a contest; {faction} and {faction2} are both acting as though waiting is the losing move.
+2. `[street · major]` {settlement} has more than one candidate and no procedure. The town has quietly sorted itself along the line between them.
+3. `[visitor · major]` Ask in {settlement} who is to hold the seat next and the room reorganises itself before anyone answers.
+4. `[unfolding · catastrophic]` The succession at {settlement} has stopped being a question and become a contest. {faction} and {faction2} are both acting as though waiting is the losing move.
 5. `[counterforce · minor]` {settlement} has no settled succession and has not needed one. The seat is held firmly enough that the question stays theoretical.
 
 ---
@@ -5879,22 +5879,22 @@ shared letter would collide.*
 1. `[street]` {faction} and {faction2} disagree in {settlement} about {issue}, and both of them can live with disagreeing.
 2. `[ledger]` The quarrel between {faction} and {faction2} shows up in {settlement}'s records mostly as delay: nothing refused, nothing granted quickly.
 3. `[visitor]` You would not learn from a day in {settlement} that {faction} and {faction2} are at odds. It comes up on the second day.
-4. `[unfolding]` What {faction} and {faction2} are actually contesting in {settlement} is {stakes}, and neither has decided yet that it is worth pressing for.
-5. `[counterforce]` {faction} and {faction2} hold opposite positions on {issue} and neither will move first; in {settlement} that is a stalemate, and a stalemate is a kind of peace.
+4. `[unfolding]` What {faction} and {faction2} are actually contesting in {settlement} is {stakes}. Neither has decided yet that it is worth pressing for.
+5. `[counterforce]` {faction} and {faction2} hold opposite positions on {issue} and neither is willing to move first. In {settlement} that is a stalemate, and a stalemate is a kind of peace.
 
 **`intensity: moderate`**
-1. `[street]` {faction} and {faction2} are openly on opposite sides of {issue} in {settlement}, and the town has learned which rooms not to raise it in.
+1. `[street]` {faction} and {faction2} are openly on opposite sides of {issue} in {settlement}. The town has learned which rooms not to raise it in.
 2. `[ledger]` Business in {settlement} that touches {issue} takes two signatures rather than one, because {faction} and {faction2} do not accept each other's.
 3. `[visitor]` {settlement} works, and there is a seam in it: {faction} on one side, {faction2} on the other, {issue} lying between them.
-4. `[unfolding]` {stakes} is what stands to change hands in {settlement}, and {faction} and {faction2} both understand that well enough to be careful with each other.
-5. `[counterforce]` {faction} and {faction2} contest {issue} hard and stop short of the thing that would break it; in {settlement} the restraint is deliberate, and both sides are relying on it.
+4. `[unfolding]` {stakes} is what stands to change hands in {settlement}. {faction} and {faction2} both understand that well enough to be careful with each other.
+5. `[counterforce]` {faction} and {faction2} contest {issue} hard and stop short of the thing that would break it. In {settlement} the restraint is deliberate, and both sides are relying on it.
 
 **`intensity: high`**
 1. `[street]` {faction} and {faction2} are past arguing in {settlement}. {issue} is the thing each of them is preparing for now, not the thing they are debating.
-2. `[ledger]` {settlement}'s clerks have stopped filing anything that touches {issue}: whichever way it were filed, one of {faction} or {faction2} would read it as a decision.
+2. `[ledger]` {settlement}'s clerks have stopped filing anything that touches {issue}. Filed either way, one of {faction} or {faction2} would read it as a decision.
 3. `[visitor]` The trouble between {faction} and {faction2} does not need explaining to a stranger in {settlement}. It is in how the room goes quiet.
-4. `[unfolding]` {stakes} is what {faction} and {faction2} are contesting in {settlement}, and the contest has reached the stage where losing it costs more than winning it does.
-5. `[counterforce]` {faction} and {faction2} are at the edge of it in {settlement} and neither has crossed; what holds is that both would rather have the town than have the argument.
+4. `[unfolding]` {stakes} is what {faction} and {faction2} are contesting in {settlement}. The contest has reached the stage where losing it costs more than winning it does.
+5. `[counterforce]` {faction} and {faction2} are at the edge of it in {settlement} and neither has crossed. What holds is that both would rather have the town than have the argument.
 
 ---
 

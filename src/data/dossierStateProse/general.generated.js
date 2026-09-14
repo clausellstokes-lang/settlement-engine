@@ -949,7 +949,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "Theft in {settlement} has stopped being remarkable, which is its own kind of report; the watch takes the complaint, and the complainant does not expect much of it.",
+          "text": "Theft in {settlement} has stopped being remarkable. That is its own kind of report. The watch takes the complaint, and whoever brought it does not expect much of it.",
           "slots": [
             "settlement"
           ],
@@ -960,7 +960,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.",
+          "text": "The watch's book at {settlement} is thick with the same few crimes written many times over. The names in it are almost never the same twice.",
           "slots": [
             "settlement"
           ],
@@ -971,7 +971,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "A stranger in {settlement} is told twice before nightfall which streets to leave alone, and both people who tell him are careful about who hears them.",
+          "text": "A stranger in {settlement} is told twice before nightfall which streets to leave alone. Both of the people who tell him are careful about who hears them.",
           "slots": [
             "settlement"
           ],
@@ -982,7 +982,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.",
+          "text": "Whatever holds {settlement}'s streets after dark, it is not the watch. Shopkeepers here have begun buying their quiet directly, and the price of it is going up.",
           "slots": [
             "settlement"
           ],
@@ -993,7 +993,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "The thieving in {settlement} is real and it is also contained: it takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.",
+          "text": "The thieving in {settlement} is real and it is contained. It takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.",
           "slots": [
             "settlement"
           ],
@@ -1006,7 +1006,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "Two towns share {settlement}'s walls (one counts its year in surplus and the other in what it did without), and the two do not often eat in the same rooms.",
+          "text": "Two towns share {settlement}'s walls. One counts its year in surplus and the other in what it did without. The two do not often eat in the same rooms.",
           "slots": [
             "settlement"
           ],
@@ -1017,7 +1017,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "The distance between {settlement}'s best street and its worst is a short walk and a great deal else, and nobody who lives here needs it pointed out.",
+          "text": "The distance between {settlement}'s best street and its worst is a short walk and a great deal else. Nobody who lives here needs it pointed out.",
           "slots": [
             "settlement"
           ],
@@ -1028,7 +1028,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{faction} holds the greater part of what {settlement} earns, and the rolls show the rest of the town living on the remainder without much room in it.",
+          "text": "{faction} holds the greater part of what {settlement} earns. The rolls show the rest of the town living on the remainder without much room in it.",
           "slots": [
             "faction",
             "settlement"
@@ -1040,7 +1040,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The gap in {settlement} has stopped being a fact people live around and started being a thing they say out loud, which is a different stage of the same condition.",
+          "text": "The gap in {settlement} has stopped being a fact people live around. It has started being a thing they say out loud. That is a different stage of the same condition.",
           "slots": [
             "settlement"
           ],
@@ -1051,7 +1051,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} is unequally off and orderly about it: the poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.",
+          "text": "{settlement} is unequally off and orderly about it. The poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.",
           "slots": [
             "settlement"
           ],
@@ -1064,7 +1064,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "Two trades in {settlement} claim the same work, and every contract written in this town has to say which of them is doing it.",
+          "text": "Two trades in {settlement} claim the same work. Every contract written here has to say which of them is doing it.",
           "slots": [
             "settlement"
           ],
@@ -1075,7 +1075,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{faction} and {faction2} are not fighting in {settlement} so much as refusing each other: a job one takes, the other will not touch, and the town works around the hole.",
+          "text": "{faction} and {faction2} are not fighting in {settlement} so much as refusing each other. A job one takes, the other refuses to touch, and the town works around the hole.",
           "slots": [
             "faction",
             "faction2",
@@ -1099,7 +1099,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The quarrel between {settlement}'s trades has reached the point where work goes undone rather than go to the wrong hands, and the town is beginning to pay for the principle.",
+          "text": "The quarrel between {settlement}'s trades has reached the point where work goes undone rather than go to the wrong hands. The town is beginning to pay for the principle.",
           "slots": [
             "settlement"
           ],
@@ -1110,7 +1110,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "The trades in {settlement} disagree loudly and deliver anyway; the shouting is the arrangement, not a threat to it.",
+          "text": "The trades in {settlement} disagree loudly and deliver anyway, and the shouting is the arrangement rather than a threat to it.",
           "slots": [
             "settlement"
           ],
@@ -1123,7 +1123,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} has grown careful about strangers in a way it cannot quite account for, and the carefulness has begun to be about neighbours too.",
+          "text": "{settlement} has grown careful about strangers in a way it cannot quite account for. The carefulness has begun to be about neighbours too.",
           "slots": [
             "settlement"
           ],
@@ -1146,7 +1146,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "major",
             "dm-only"
           ],
-          "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere, and the list is longer than anything anyone will say aloud.",
+          "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere. The list is longer than anything anyone says aloud.",
           "slots": [
             "faction",
             "settlement"
@@ -1158,7 +1158,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "Suspicion in {settlement} has outrun whatever it started from: an accusation costs nothing to make here and a great deal to survive.",
+          "text": "Suspicion in {settlement} has outrun whatever it started from. An accusation costs nothing to make here and a great deal to survive.",
           "slots": [
             "settlement"
           ],
@@ -1215,7 +1215,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The absence at the top of {settlement} is no longer being waited out; {faction} has begun behaving as though the question is already answered.",
+          "text": "The absence at the top of {settlement} is no longer being waited out. {faction} has begun behaving as though the question is already answered.",
           "slots": [
             "settlement",
             "faction"
@@ -1227,7 +1227,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} runs without a clear hand and runs well enough: the clerks know their work, and the work does not require a decision every day.",
+          "text": "{settlement} runs without a clear hand and runs well enough. The clerks know their work, and the work does not require a decision every day.",
           "slots": [
             "settlement"
           ],
@@ -1240,7 +1240,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without anyone expecting it to finish.",
+          "text": "What may be done with the Art in {settlement} gets argued in the same tone as grazing rights. The arguing is endless, and nobody expects it to finish.",
           "slots": [
             "settlement"
           ],
@@ -1251,7 +1251,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the position is not unanimous.",
+          "text": "A practitioner arriving in {settlement} learns quickly that the town has a position on the subject. He learns as quickly that the position is not unanimous.",
           "slots": [
             "settlement"
           ],
@@ -1262,7 +1262,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{faction} wants the Art in {settlement} licensed and counted; the rest of the town wants it left alone; neither holds enough of the hall to end the argument.",
+          "text": "{faction} wants the Art in {settlement} licensed and counted. The rest of the town wants it left alone. Neither holds enough of the hall to end the argument.",
           "slots": [
             "faction",
             "settlement"
@@ -1274,7 +1274,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The quarrel over the Art in {settlement} has moved out of the hall and into the street, and both sides have begun naming individuals rather than practices.",
+          "text": "The quarrel over the Art in {settlement} has moved out of the hall and into the street. Both sides have begun naming individuals rather than practices.",
           "slots": [
             "settlement"
           ],
@@ -1285,7 +1285,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} argues about the Art constantly and licenses it anyway; the argument is how the licence gets its conditions.",
+          "text": "{settlement} argues about the Art constantly and licenses it anyway. The argument is how the licence gets its conditions.",
           "slots": [
             "settlement"
           ],
@@ -1298,7 +1298,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} kept its own hall through the occupation and has not entirely got its own manners back; there are still things said only indoors.",
+          "text": "{settlement} kept its own hall through the occupation and has not entirely got its own manners back. There are still things said only indoors.",
           "slots": [
             "settlement"
           ],
@@ -1309,7 +1309,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "The occupiers are gone from {settlement} and their arrangements are not: who holds which licence here was decided by somebody else, and nobody has undone it.",
+          "text": "The occupiers are gone from {settlement} and their arrangements are not. Who holds which licence here was decided by somebody else, and nobody has undone it.",
           "slots": [
             "settlement"
           ],
@@ -1320,7 +1320,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades exempt), and no one now living wrote either rule.",
+          "text": "{settlement}'s rolls still carry the shape the occupation put on them: the same quarters taxed hardest, the same trades exempt. No one now living wrote either rule.",
           "slots": [
             "settlement"
           ],
@@ -1331,7 +1331,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "{settlement} is settling accounts left from the occupation, and the settling has begun to reach people who were only doing what they were told.",
+          "text": "{settlement} is settling accounts left from the occupation. The settling has begun to reach people who were only doing what they were told.",
           "slots": [
             "settlement"
           ],
@@ -1342,7 +1342,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} was held and released and has chosen not to pursue it; who did what is known here, and is deliberately not spoken.",
+          "text": "{settlement} was held and released and has chosen not to pursue it. Who did what is known here, and is deliberately not spoken.",
           "slots": [
             "settlement"
           ],
@@ -1355,7 +1355,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} owes outside its walls, and the owing is written into the shape of the year: the quarter's payment leaves before anything else is decided.",
+          "text": "{settlement} owes outside its walls, and the owing is written into the shape of the year. The quarter's payment leaves before anything else is decided.",
           "slots": [
             "settlement"
           ],
@@ -1366,7 +1366,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.",
+          "text": "What {settlement} sends away each quarter is more than the town would like to send. Anyone here can tell you roughly what it costs them without being shown a book.",
           "slots": [
             "settlement"
           ],
@@ -1377,7 +1377,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{settlement} looks poorer than its trade suggests, and the reason is not in the town: the difference leaves for a creditor beyond the walls.",
+          "text": "{settlement} looks poorer than its trade suggests, and the reason is not in the town. The difference leaves for a creditor beyond the walls.",
           "slots": [
             "settlement"
           ],
@@ -1388,7 +1388,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The debt on {settlement} has stopped being serviceable, and what is argued in the hall now is not how to pay it but what happens when the town stops.",
+          "text": "The debt on {settlement} has stopped being serviceable. What is argued in the hall now is not how to pay it but what happens when the town stops.",
           "slots": [
             "settlement"
           ],
@@ -1399,7 +1399,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} carries an outside debt comfortably: the payments go out on time, and the creditor has never had a reason to look closely at the town.",
+          "text": "{settlement} carries an outside debt comfortably. The payments go out on time, and the creditor has never had a reason to look closely at the town.",
           "slots": [
             "settlement"
           ],
@@ -1423,7 +1423,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "There is not enough of what {settlement} runs on, and the not-enough gets distributed by who asks first and who asks loudest.",
+          "text": "There is not enough of what {settlement} runs on. What there is goes to whoever asks first and whoever asks loudest.",
           "slots": [
             "settlement"
           ],
@@ -1434,7 +1434,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{settlement} is careful with something a town this size should have in plenty, and the care is visible before anyone explains it.",
+          "text": "{settlement} is careful with something a town this size should have in plenty. The care is visible before anyone explains it.",
           "slots": [
             "settlement"
           ],
@@ -1445,7 +1445,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "{settlement} has begun taking from tomorrow to cover today, and the arithmetic of that has an end in it that nobody is discussing.",
+          "text": "{settlement} has begun taking from tomorrow to cover today. The arithmetic of that has an end in it that nobody is discussing.",
           "slots": [
             "settlement"
           ],
@@ -1456,7 +1456,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "minor"
           ],
-          "text": "{settlement} is short and orderly about being short: the queue is respected, the ration is honoured, and the shortness has not become a quarrel.",
+          "text": "{settlement} is short and orderly about being short. The queue is respected, the ration is honoured, and the shortness has not become a quarrel.",
           "slots": [
             "settlement"
           ],
@@ -1480,7 +1480,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "{settlement} has more than one candidate and no procedure, and the town has quietly sorted itself along the line between them.",
+          "text": "{settlement} has more than one candidate and no procedure. The town has quietly sorted itself along the line between them.",
           "slots": [
             "settlement"
           ],
@@ -1491,7 +1491,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "major"
           ],
-          "text": "Ask in {settlement} who will hold the seat next and the room reorganises itself before anyone answers.",
+          "text": "Ask in {settlement} who is to hold the seat next and the room reorganises itself before anyone answers.",
           "slots": [
             "settlement"
           ],
@@ -1502,7 +1502,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic"
           ],
-          "text": "The succession at {settlement} has stopped being a question and become a contest; {faction} and {faction2} are both acting as though waiting is the losing move.",
+          "text": "The succession at {settlement} has stopped being a question and become a contest. {faction} and {faction2} are both acting as though waiting is the losing move.",
           "slots": [
             "settlement",
             "faction",
@@ -1764,7 +1764,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {faction} and {faction2} are actually contesting in {settlement} is {stakes}, and neither has decided yet that it is worth pressing for.",
+          "text": "What {faction} and {faction2} are actually contesting in {settlement} is {stakes}. Neither has decided yet that it is worth pressing for.",
           "slots": [
             "faction",
             "faction2",
@@ -1775,7 +1775,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{faction} and {faction2} hold opposite positions on {issue} and neither will move first; in {settlement} that is a stalemate, and a stalemate is a kind of peace.",
+          "text": "{faction} and {faction2} hold opposite positions on {issue} and neither is willing to move first. In {settlement} that is a stalemate, and a stalemate is a kind of peace.",
           "slots": [
             "faction",
             "faction2",
@@ -1788,7 +1788,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "intensity: moderate": [
         {
           "angle": "street",
-          "text": "{faction} and {faction2} are openly on opposite sides of {issue} in {settlement}, and the town has learned which rooms not to raise it in.",
+          "text": "{faction} and {faction2} are openly on opposite sides of {issue} in {settlement}. The town has learned which rooms not to raise it in.",
           "slots": [
             "faction",
             "faction2",
@@ -1821,7 +1821,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{stakes} is what stands to change hands in {settlement}, and {faction} and {faction2} both understand that well enough to be careful with each other.",
+          "text": "{stakes} is what stands to change hands in {settlement}. {faction} and {faction2} both understand that well enough to be careful with each other.",
           "slots": [
             "stakes",
             "settlement",
@@ -1832,7 +1832,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{faction} and {faction2} contest {issue} hard and stop short of the thing that would break it; in {settlement} the restraint is deliberate, and both sides are relying on it.",
+          "text": "{faction} and {faction2} contest {issue} hard and stop short of the thing that would break it. In {settlement} the restraint is deliberate, and both sides are relying on it.",
           "slots": [
             "faction",
             "faction2",
@@ -1856,7 +1856,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s clerks have stopped filing anything that touches {issue}: whichever way it were filed, one of {faction} or {faction2} would read it as a decision.",
+          "text": "{settlement}'s clerks have stopped filing anything that touches {issue}. Filed either way, one of {faction} or {faction2} would read it as a decision.",
           "slots": [
             "settlement",
             "issue",
@@ -1877,7 +1877,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{stakes} is what {faction} and {faction2} are contesting in {settlement}, and the contest has reached the stage where losing it costs more than winning it does.",
+          "text": "{stakes} is what {faction} and {faction2} are contesting in {settlement}. The contest has reached the stage where losing it costs more than winning it does.",
           "slots": [
             "stakes",
             "faction",
@@ -1888,7 +1888,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{faction} and {faction2} are at the edge of it in {settlement} and neither has crossed; what holds is that both would rather have the town than have the argument.",
+          "text": "{faction} and {faction2} are at the edge of it in {settlement} and neither has crossed. What holds is that both would rather have the town than have the argument.",
           "slots": [
             "faction",
             "faction2",
