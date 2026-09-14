@@ -2271,6 +2271,45 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
       sources: [null, 'stranger', 'elders', 'market', 'tavern', 'watch', 'court', 'register', 'guild', 'hall'],
       pairs: [null, null, null, null, null, null, null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }],
     },
+    // ⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 5), which landed TWO MORE POOLS of
+    // this same block: `Economic Survival: ADEQUATE` and `Disasters & Famine: NO reserves,
+    // hospital present`. Forty-six wording rows and four marked pairs behind six re-cut spines.
+    // No `archiver`, no `public` and no `observed` mark in either, so the `observed` arm below is
+    // again UNCHANGED.
+    // ⛔ A THIRD PACKET WAS REFUSED AT THAT GATE and is deliberately NOT here: `Economic
+    // Survival: CRITICAL` keeps its shipped spine rows, its variant 2 spine carrying a
+    // PROVENANCE move (`The elders hold that …`) that would take the shrink-only citation
+    // ratchet in `tests/lint/proseComposed.walker.test.js` from 7 to 8.
+    // ⚠ AND THE CLAIM THE SEVENTH GROW WROTE INTO THE SHIFT REGISTER — "WITH THIS COMMIT
+    // DS-DEF-2 IS WHOLE: all twenty-six of its pools carry wording faces" — WAS FALSE WHEN IT
+    // WAS WRITTEN. Five pools stood on their shipped spine rows alone at that commit; two of
+    // them land here, and THREE ARE STILL UNFACED at 1,1,1: `Economic Survival: CRITICAL`,
+    // `Internal Security: detention without process` and `Disasters & Famine: granary, NO
+    // medical provision`.
+    'DS-DEF-2 :: Economic Survival: ADEQUATE #0': {
+      sources: [null, 'stranger', 'register', 'market', 'hall', 'guild', 'tavern', 'watch', 'gate', 'garrison', 'court', 'muster'],
+      pairs: [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: ADEQUATE #1': {
+      sources: [null, 'register', 'market', 'hall', 'tavern', 'guild', 'watch', 'gate', 'garrison', 'court', 'muster'],
+      pairs: [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null, null, null],
+    },
+    'DS-DEF-2 :: Economic Survival: ADEQUATE #2': {
+      sources: [null, 'stranger', 'register', 'market', 'hall', 'tavern', 'guild', 'watch', 'garrison', 'court', 'muster'],
+      pairs: undefined,
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #0': {
+      sources: [null, 'elders', 'stranger', 'register', 'tavern', 'market'],
+      pairs: [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #1': {
+      sources: [null, 'register', 'elders', 'stranger', 'tavern', 'market'],
+      pairs: [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null],
+    },
+    'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #2': {
+      sources: [null, 'elders', 'register', 'stranger', 'tavern', 'market'],
+      pairs: undefined,
+    },
   });
 
   it('⭐ exactly ONE pool ships `sources`/`pairs` — DS-DEF-2, named face by face; every other block is still the zero-shift ground of car 8b-W-18c', () => {
@@ -2308,7 +2347,17 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     // renumbered the variant's pairs: +2 pair rows against a face count that did not move.
     const sourced = rows.reduce((n, r) => n + (r.v.sources || []).filter((x) => x !== null).length, 0);
     const paired = rows.reduce((n, r) => n + (r.v.pairs || []).filter((x) => x !== null).length, 0);
-    expect([rows.length, sourced, paired]).toEqual([63, 506, 122]);
+    // ⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 5), from [63, 506, 122]. TWO
+    // pools took their seats here for the first time — `Economic Survival: ADEQUATE` and
+    // `Disasters & Famine: NO reserves, hospital present` — so the triple moves +6 variants,
+    // +46 sourced faces and +8 pair rows (4 pairs of halves, no archiver `weigh` among them).
+    // The gate's third packet, `Economic Survival: CRITICAL`, was REFUSED on the citation
+    // ratchet and contributes nothing here. A GROW ONLY: no pool of the sixty-three already
+    // pinned lost a face or a pair, and nothing outside DS-DEF-2 carries a face. The block is
+    // STILL NOT WHOLE: `Economic Survival: CRITICAL`, `Internal Security: detention without
+    // process` and `Disasters & Famine: granary, NO medical provision` stand on their shipped
+    // spine rows alone at 1,1,1.
+    expect([rows.length, sourced, paired]).toEqual([69, 552, 130]);
     // ⭐ AND THE OBSERVED LIST IS EMITTED ON EXACTLY ONE VARIANT, which is the mark's own
     // zero-shift ground: a variant with no observed face carries no `observed` key at all.
     const observed = allStateBlocks.flatMap(([id, b]) => Object.entries(b.pools)

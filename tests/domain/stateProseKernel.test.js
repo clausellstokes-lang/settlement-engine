@@ -598,12 +598,18 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #0',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #1',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #2',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #2',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #2',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #0',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #1',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -685,7 +691,12 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
       // shift register's `face-count-per-variant` row, not this line.
       // ⭐⭐ RE-PINNED AGAIN AT THE DRAFT GATE'S THIRD SITTING: forty-two, not twenty-seven — five
       // more of the block's pools landed faces in one commit, three variants each. A GROW.
-      expect(hashedRows, 'and exactly sixty-three variants ship more than one face').toBe(63);
+      // ⭐⭐⭐ RE-PINNED AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 5): sixty-nine, not
+      // sixty-three — two more of the block's pools landed faces in one commit, three variants
+      // each, and the gate's third packet was REFUSED on the citation ratchet. A GROW. THREE
+      // POOLS OF THE BLOCK ARE STILL UNFACED: `Economic Survival: CRITICAL`, `Internal Security:
+      // detention without process` and `Disasters & Famine: granary, NO medical provision`.
+      expect(hashedRows, 'and exactly sixty-nine variants ship more than one face').toBe(69);
     } finally {
       spy.mockRestore();
     }
@@ -1504,12 +1515,18 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #0',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #1',
       'DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision #2',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #0',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #1',
+      'DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present #2',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND hospital #2',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #0',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #1',
       'DS-DEF-2 :: Disasters & Famine: granary AND parish care only #2',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #0',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #1',
+      'DS-DEF-2 :: Economic Survival: ADEQUATE #2',
       'DS-DEF-2 :: Economic Survival: STRONG #0',
       'DS-DEF-2 :: Economic Survival: STRONG #1',
       'DS-DEF-2 :: Economic Survival: STRONG #2',
@@ -1629,6 +1646,14 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'watch', 'archiver', 'register', 'tavern', 'guild', 'stranger', 'garrison', 'archiver', 'market', 'hall'], 
       [null, 'hall', 'guild', 'archiver', 'watch', 'gate', 'stranger', 'tavern', 'garrison', 'market', 'register'], 
       [null, 'watch', 'garrison', 'hall', 'guild', 'stranger', 'register', 'hall', 'court'], 
+      // ⭐⭐⭐ RE-FROZEN AT THE 8b DS-DEF-2 DRAFT GATE (v3, sitting 5) — `Economic Survival:
+      // ADEQUATE`, in corpus order. Neither pool this gate landed carries the archiver or the
+      // public: those two forms still stand only where cars 18n/18o seated them, so the
+      // `observed` arm is untouched. The gate's third packet, `Economic Survival: CRITICAL`, was
+      // REFUSED on the shrink-only citation ratchet and is absent by design.
+      [null, 'stranger', 'register', 'market', 'hall', 'guild', 'tavern', 'watch', 'gate', 'garrison', 'court', 'muster'],
+      [null, 'register', 'market', 'hall', 'tavern', 'guild', 'watch', 'gate', 'garrison', 'court', 'muster'],
+      [null, 'stranger', 'register', 'market', 'hall', 'tavern', 'guild', 'watch', 'garrison', 'court', 'muster'],
       [null, 'gate', 'register', 'stranger', 'muster', 'elders', 'tavern', 'garrison', 'watch', 'market', 'court'], 
       [null, 'stranger', 'elders', 'tavern', 'register', 'gate', 'muster', 'market', 'watch', 'garrison'], 
       [null, 'stranger', 'register', 'elders', 'tavern', 'muster', 'gate', 'market', 'garrison'], 
@@ -1644,6 +1669,10 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, 'hall', 'market', 'watch', 'register', 'guild', 'tavern', 'gate', 'garrison'], 
       [null, 'register', 'hall', 'tavern', 'market', 'guild', 'watch', 'stranger', 'court'], 
       [null, 'register', 'market', 'tavern', 'watch', 'guild', 'court'], 
+      // `Disasters & Famine: NO reserves, hospital present` (sitting 5).
+      [null, 'elders', 'stranger', 'register', 'tavern', 'market'],
+      [null, 'register', 'elders', 'stranger', 'tavern', 'market'],
+      [null, 'elders', 'register', 'stranger', 'tavern', 'market'],
       [null, 'elders', 'stranger', 'market', 'register', 'tavern'], 
       [null, 'elders', 'tavern', 'stranger', 'market', 'register'], 
       [null, 'stranger', 'tavern', 'elders', 'register', 'market'], 
@@ -1711,6 +1740,11 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, { id: 1, kind: 'weigh' }, null, null, null, null, null, null, null, null], 
       [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, { id: 2, kind: 'weigh' }, null, null, null, null, null, null, null], 
       [null, { id: 2, kind: 'reinforce' }, { id: 2, kind: 'reinforce' }, null, null, null, null, null, null], 
+      // ⭐⭐⭐ SITTING 5: `Economic Survival: ADEQUATE` — one `disagree` pair on each of
+      // variants 1 and 2, none on variant 3. (`Economic Survival: CRITICAL` was refused.)
+      [null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null],
+      [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null, null, null, null, null, null],
+      undefined,
       [null, null, null, null, null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null], 
       undefined, 
       [null, null, { id: 3, kind: 'reinforce' }, { id: 3, kind: 'reinforce' }, null, null, null, null, null], 
@@ -1726,6 +1760,11 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
       [null, { id: 1, kind: 'reinforce' }, { id: 1, kind: 'reinforce' }, null, null, null, null, null, null], 
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null, null, null, null], 
       undefined, 
+      // `Disasters & Famine: NO reserves, hospital present` (sitting 5): one `disagree` pair on
+      // each of variants 1 and 2, none on variant 3.
+      [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null],
+      [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null],
+      undefined,
       [null, { id: 1, kind: 'disagree' }, { id: 1, kind: 'disagree' }, null, null, null], 
       [null, { id: 2, kind: 'disagree' }, { id: 2, kind: 'disagree' }, null, null, null], 
       undefined, 
@@ -1764,7 +1803,7 @@ describe('the state-prose reader — ONE FACE PER POWER: the source filter and t
         expect(eligibleFaces(v, new Set(FACE_SOURCES))).toEqual([0]);
       }
     }
-    expect(sourcedChecked, 'the sixty-three sourced variants were reached').toBe(63);
+    expect(sourcedChecked, 'the sixty-nine sourced variants were reached').toBe(69);
     expect(checked).toBeGreaterThanOrEqual(2266);
   });
 });

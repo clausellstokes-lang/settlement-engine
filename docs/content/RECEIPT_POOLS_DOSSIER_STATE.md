@@ -3133,9 +3133,41 @@ supplies the ancestry.
    - `[face]` `[court]` The court says nobody has brought it the question of the watch's wage. It does not expect the hall to.
 
 **`Economic Survival`: `ADEQUATE`**
-1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
-2. `[unfolding]` The town's capacity to pay for its own emergencies is real and finite, and every season of pressure moves the finite part closer.
-3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; the edge of what it can fund lies a few months past the beginning of one, and the town has not been asked to find out where.
+
+1. `[ledger]` The place meets what it is asked for, and meets it short.
+   - `[face]` `[stranger]` A pedlar says the place has the look of somewhere that has never been asked for more than it has.
+   - `[face]` `[register]` The sexton's account is that nothing at the ground waits on the purse. The boards laid over a new plot are the boards laid over the last one.
+   - `[face]` `[market]` At the market they say the complaint comes to the stall because the stall is the thing that stands still.
+   - `[face]` `[hall · pair 1 · disagree]` A clerk in the hall says the town keeps ready what the ordinary asks of it.
+   - `[face]` `[guild · pair 1 · disagree]` A guild factor says the ordinary is what the trades make up when the town comes short.
+   - `[face]` `[tavern]` At the tavern they say the people who do the place's mending pay for their own cups.
+   - `[face]` `[watch]` One of the watch has it that the rounds are kept whole and the pay for them is not.
+   - `[face]` `[gate]` Whoever holds the way through says the bar is worked by hands that have other work to be at.
+   - `[face]` `[garrison]` The soldiers' account is that the town gives what it has and says nothing about the rest.
+   - `[face]` `[court]` The quarrels brought before those who hear them are about who pays, they say, and never about whether there is anything to pay with.
+   - `[face]` `[muster]` The muster says what it carries is its own and what it is owed is nothing.
+2. `[unfolding]` Everyone here has seen what the town provides and where the provision runs thin, and nobody here calls the thin part a fault.
+   - `[face]` `[register · pair 2 · disagree]` The sexton says the ground is the one charge here never asked to wait.
+   - `[face]` `[market · pair 2 · disagree]` Those who set out a stall say everything here waits its turn and the ground waits with the rest.
+   - `[face]` `[hall]` One of the aldermen has it that the money is counted where anyone may stand and watch it counted.
+   - `[face]` `[tavern]` A carter at the tavern says the roof over the long table leaks at the far corner, and that nobody has mended it because nobody sits there.
+   - `[face]` `[guild]` A guild factor says what the town cannot cover comes to the trades as a favour and is remembered by the trades as a cost.
+   - `[face]` `[watch]` The watch's account is that the round is walked whole and walked dark where the oil runs out.
+   - `[face]` `[gate]` Asked at the way through, they say the bar gets seen to first and counted last.
+   - `[face]` `[garrison]` The soldiers' account is that the grain they eat comes out of the same sacks as everybody's and is measured with the same scoop.
+   - `[face]` `[court]` Nothing about the town's own paying has ever been brought as a quarrel, those who hear disputes say.
+   - `[face]` `[muster]` The muster says nobody argues about its pay because there is none to argue about.
+3. `[threshold]` What the place can carry has an edge. No one here has been asked where it falls.
+   - `[face]` `[stranger]` A drover says nobody here seems to know where the town's money stops, and nobody here seems troubled by that.
+   - `[face]` `[register]` Whoever keeps the ground says no burying here has been turned away, and that nobody has asked what it would take to turn one away.
+   - `[face]` `[market]` The stallholders' account is that the boards go out in the same order whatever has happened. Nobody here has seen the order break.
+   - `[face]` `[hall]` One of the aldermen has it that the store has been opened for the ordinary and for nothing else.
+   - `[face]` `[tavern]` At the tavern they say nothing has come here yet that the place could not pay for, and that nobody takes that for a promise.
+   - `[face]` `[guild]` A guild factor says the trades could tell the town where the line falls, and that the town has not asked.
+   - `[face]` `[watch]` Those who walk the round say the round has never been shortened, and that nobody knows what would be dropped first if it had to be.
+   - `[face]` `[garrison]` The soldiers say they have never been asked for more than they are kept for. What they are kept for is plain enough.
+   - `[face]` `[court]` Those who hear disputes say the question of what the town can carry has never come to them, and they would not know where to look for the answer.
+   - `[face]` `[muster]` The muster says it has never been called out for anything worse than it knows, and that it would come out anyway.
 
 **`Economic Survival`: `WEAK`**
 1. `[ledger]` The means here come short of what trouble takes. The households make up the difference.
@@ -3239,9 +3271,24 @@ supplies the ancestry.
 3. `[street]` The town can outlast a hungry year at {settlement} and has no answer at all to a sick one, and knows which of the two it fears.
 
 **`Disasters & Famine`: NO reserves, hospital present**
-1. `[ledger]` {settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.
-2. `[street]` The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.
-3. `[unfolding]` {settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.
+1. `[ledger]` Nothing is laid by here against a bad harvest. A body that goes down is treated, and the treating is paid for.
+   - `[face]` `[elders · pair 1 · disagree]` One of the elders says the answer to a hungry year here is the next house along.
+   - `[face]` `[stranger · pair 1 · disagree]` A pedlar says the next house along has the same fields and the same year as the first.
+   - `[face]` `[register]` A person of the parish holds that the ones who come to sit up and the ones who come to dig are the same hands, and does not say what that costs them.
+   - `[face]` `[tavern]` At the tavern they say a house sends for the parish when it cannot settle with the healers, and that everybody here knows which house is which.
+   - `[face]` `[market]` Those who sell at the market say the same sacks that come off the wheel go out of the town. The households that sold them buy meal back later at the day's price.
+2. `[street]` Everyone here knows who is sent for when a body goes down. Why nothing was ever laid in against a bad harvest is a question the town does not answer.
+   - `[face]` `[register · pair 2 · disagree]` A person of the parish says the tending is the parish's to do and nobody's to pay for.
+   - `[face]` `[elders · pair 2 · disagree]` The older households hold that the tending falls to the neighbours first and the parish last, and that saying so is no complaint against the parish.
+   - `[face]` `[stranger]` Asked here what is done when the harvest comes in short, a pedlar was given the name of a household and no other answer.
+   - `[face]` `[tavern]` The tavern's own account is that the water is fetched from whichever source runs clean, and that what is not clean can be made so for a price.
+   - `[face]` `[market]` A stallholder says a house that has paid to have a wound closed buys differently after, and that the stalls know it before the neighbours do.
+3. `[unfolding]` The grain at {settlement} is grown, ground and eaten, and none of it stops anywhere in between. What the town keeps ready instead is a person.
+   - `[face]` `[elders]` Among the elders the account is that the strips are laid out so that no house is favoured, and that a short year is therefore short for every house.
+   - `[face]` `[register]` At the parish they say the tithe is weighed after the wheel has taken its share and not before.
+   - `[face]` `[stranger]` Coming in, a traveller finds the church, the wheel and the open fields, and nothing anywhere that is kept for a worse year.
+   - `[face]` `[tavern]` A carter at the tavern says the price for closing a wound is the same price in a bad year. The households that send for it in a bad year are the ones with least to settle with.
+   - `[face]` `[market]` On market day the talk is that nobody here buys against a year that has not come.
 
 **`Disasters & Famine`: NO reserves, NO medical provision**
 1. `[ledger]` No granary stands here and no house is kept for the sick. The grain is ground on somebody else's stone.

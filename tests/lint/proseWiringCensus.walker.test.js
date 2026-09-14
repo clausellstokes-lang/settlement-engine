@@ -719,8 +719,18 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // grammars 1 → 3, and it lands COVERED. MEASURED by the census's own writer
     // (`node scripts/wiring-census.mjs`, rebuilt in this commit), not asserted. MISSING does not
     // move (34), and no held fact gained or lost a pool.
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(477);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(231);
+    // ⭐⭐⭐⭐⭐⭐ THIN 477 → 476 AND COVERED 231 → 232 AT THE 8b DS-DEF-2 DRAFT GATE (v3,
+    // sitting 5), BY ONE POOL OF THE TWO IT LANDED, and for the same reason the last three
+    // sittings crossed one each. `Economic Survival: ADEQUATE` crosses: the selector's three
+    // spines carry NO slot at all, so its census count moves `slots {settlement}` → `slots
+    // {none}` and it lands COVERED. `Disasters & Famine: NO reserves, hospital present` does
+    // NOT cross and stays THIN on the SLOT clause — its spine 3 keeps `{settlement}` — however
+    // many grammars its faces give it. The gate's third packet, `Economic Survival: CRITICAL`,
+    // was REFUSED on the shrink-only citation ratchet and crosses nothing. MEASURED LIVE
+    // (`wiringCensus` at the head of this file, not the committed JSON): MISSING 34 · THIN 476 ·
+    // COVERED 232. MISSING does not move, and no held fact gained or lost a pool.
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(476);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(232);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

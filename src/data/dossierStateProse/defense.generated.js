@@ -2673,25 +2673,137 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: ADEQUATE": [
         {
           "angle": "ledger",
-          "text": "{settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.",
-          "slots": [
-            "settlement"
+          "text": "The place meets what it is asked for, and meets it short.",
+          "slots": [],
+          "vid": 1,
+          "wordings": [
+            "A pedlar says the place has the look of somewhere that has never been asked for more than it has.",
+            "The sexton's account is that nothing at the ground waits on the purse. The boards laid over a new plot are the boards laid over the last one.",
+            "At the market they say the complaint comes to the stall because the stall is the thing that stands still.",
+            "A clerk in the hall says the town keeps ready what the ordinary asks of it.",
+            "A guild factor says the ordinary is what the trades make up when the town comes short.",
+            "At the tavern they say the people who do the place's mending pay for their own cups.",
+            "One of the watch has it that the rounds are kept whole and the pay for them is not.",
+            "Whoever holds the way through says the bar is worked by hands that have other work to be at.",
+            "The soldiers' account is that the town gives what it has and says nothing about the rest.",
+            "The quarrels brought before those who hear them are about who pays, they say, and never about whether there is anything to pay with.",
+            "The muster says what it carries is its own and what it is owed is nothing."
           ],
-          "vid": 1
+          "sources": [
+            null,
+            "stranger",
+            "register",
+            "market",
+            "hall",
+            "guild",
+            "tavern",
+            "watch",
+            "gate",
+            "garrison",
+            "court",
+            "muster"
+          ],
+          "pairs": [
+            null,
+            null,
+            null,
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "The town's capacity to pay for its own emergencies is real and finite, and every season of pressure moves the finite part closer.",
+          "text": "Everyone here has seen what the town provides and where the provision runs thin, and nobody here calls the thin part a fault.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The sexton says the ground is the one charge here never asked to wait.",
+            "Those who set out a stall say everything here waits its turn and the ground waits with the rest.",
+            "One of the aldermen has it that the money is counted where anyone may stand and watch it counted.",
+            "A carter at the tavern says the roof over the long table leaks at the far corner, and that nobody has mended it because nobody sits there.",
+            "A guild factor says what the town cannot cover comes to the trades as a favour and is remembered by the trades as a cost.",
+            "The watch's account is that the round is walked whole and walked dark where the oil runs out.",
+            "Asked at the way through, they say the bar gets seen to first and counted last.",
+            "The soldiers' account is that the grain they eat comes out of the same sacks as everybody's and is measured with the same scoop.",
+            "Nothing about the town's own paying has ever been brought as a quarrel, those who hear disputes say.",
+            "The muster says nobody argues about its pay because there is none to argue about."
+          ],
+          "sources": [
+            null,
+            "register",
+            "market",
+            "hall",
+            "tavern",
+            "guild",
+            "watch",
+            "gate",
+            "garrison",
+            "court",
+            "muster"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "threshold",
-          "text": "{settlement} can pay for a crisis of the ordinary length; the edge of what it can fund lies a few months past the beginning of one, and the town has not been asked to find out where.",
-          "slots": [
-            "settlement"
+          "text": "What the place can carry has an edge. No one here has been asked where it falls.",
+          "slots": [],
+          "vid": 3,
+          "wordings": [
+            "A drover says nobody here seems to know where the town's money stops, and nobody here seems troubled by that.",
+            "Whoever keeps the ground says no burying here has been turned away, and that nobody has asked what it would take to turn one away.",
+            "The stallholders' account is that the boards go out in the same order whatever has happened. Nobody here has seen the order break.",
+            "One of the aldermen has it that the store has been opened for the ordinary and for nothing else.",
+            "At the tavern they say nothing has come here yet that the place could not pay for, and that nobody takes that for a promise.",
+            "A guild factor says the trades could tell the town where the line falls, and that the town has not asked.",
+            "Those who walk the round say the round has never been shortened, and that nobody knows what would be dropped first if it had to be.",
+            "The soldiers say they have never been asked for more than they are kept for. What they are kept for is plain enough.",
+            "Those who hear disputes say the question of what the town can carry has never come to them, and they would not know where to look for the answer.",
+            "The muster says it has never been called out for anything worse than it knows, and that it would come out anyway."
           ],
-          "vid": 3
+          "sources": [
+            null,
+            "stranger",
+            "register",
+            "market",
+            "hall",
+            "tavern",
+            "guild",
+            "watch",
+            "garrison",
+            "court",
+            "muster"
+          ]
         }
       ],
       "Economic Survival: WEAK": [
@@ -3140,25 +3252,96 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: NO reserves, hospital present": [
         {
           "angle": "ledger",
-          "text": "{settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.",
-          "slots": [
-            "settlement"
+          "text": "Nothing is laid by here against a bad harvest. A body that goes down is treated, and the treating is paid for.",
+          "slots": [],
+          "vid": 1,
+          "wordings": [
+            "One of the elders says the answer to a hungry year here is the next house along.",
+            "A pedlar says the next house along has the same fields and the same year as the first.",
+            "A person of the parish holds that the ones who come to sit up and the ones who come to dig are the same hands, and does not say what that costs them.",
+            "At the tavern they say a house sends for the parish when it cannot settle with the healers, and that everybody here knows which house is which.",
+            "Those who sell at the market say the same sacks that come off the wheel go out of the town. The households that sold them buy meal back later at the day's price."
           ],
-          "vid": 1
+          "sources": [
+            null,
+            "elders",
+            "stranger",
+            "register",
+            "tavern",
+            "market"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            {
+              "id": 1,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "street",
-          "text": "The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.",
+          "text": "Everyone here knows who is sent for when a body goes down. Why nothing was ever laid in against a bad harvest is a question the town does not answer.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A person of the parish says the tending is the parish's to do and nobody's to pay for.",
+            "The older households hold that the tending falls to the neighbours first and the parish last, and that saying so is no complaint against the parish.",
+            "Asked here what is done when the harvest comes in short, a pedlar was given the name of a household and no other answer.",
+            "The tavern's own account is that the water is fetched from whichever source runs clean, and that what is not clean can be made so for a price.",
+            "A stallholder says a house that has paid to have a wound closed buys differently after, and that the stalls know it before the neighbours do."
+          ],
+          "sources": [
+            null,
+            "register",
+            "elders",
+            "stranger",
+            "tavern",
+            "market"
+          ],
+          "pairs": [
+            null,
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            {
+              "id": 2,
+              "kind": "disagree"
+            },
+            null,
+            null,
+            null
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.",
+          "text": "The grain at {settlement} is grown, ground and eaten, and none of it stops anywhere in between. What the town keeps ready instead is a person.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Among the elders the account is that the strips are laid out so that no house is favoured, and that a short year is therefore short for every house.",
+            "At the parish they say the tithe is weighed after the wheel has taken its share and not before.",
+            "Coming in, a traveller finds the church, the wheel and the open fields, and nothing anywhere that is kept for a worse year.",
+            "A carter at the tavern says the price for closing a wound is the same price in a bad year. The households that send for it in a bad year are the ones with least to settle with.",
+            "On market day the talk is that nobody here buys against a year that has not come."
+          ],
+          "sources": [
+            null,
+            "elders",
+            "register",
+            "stranger",
+            "tavern",
+            "market"
+          ]
         }
       ],
       "Disasters & Famine: NO reserves, NO medical provision": [
@@ -3548,9 +3731,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          12,
+          11,
+          11
         ],
         "vids": [
           1,
@@ -3644,9 +3827,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          6,
+          6,
+          6
         ],
         "vids": [
           1,
