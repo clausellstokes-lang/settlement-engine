@@ -658,3 +658,228 @@ THE CARD (mechanical sections) — block DS-DEF-1 · pool `readiness CRITICAL` �
   hamlet: the hall: — · the tavern: — · the guilds: — · the register (parish): Access to parish church, Burial ground · the elders: —
   village: the hall: — · the tavern: — · the guilds: — · the register (parish): Parish church, Priest (resident), Graveyard · the elders: —
   the key on the force buckets and the gates: watch: OPEN · garrison: OPEN · militia: OPEN · mercenary: OPEN · charter: OPEN · gates: OPEN
+
+═══════════════════════════════════════════════════════════════════════════════
+THE MARKER'S SECTIONS (opus, 2026-09-14) — everything above this line is the
+instrument's output, pasted verbatim. The instrument's stub (7) is the SEATING
+TABLE; the roster below is the reader's section 7.
+═══════════════════════════════════════════════════════════════════════════════
+
+(7) THE SPEAKER ROSTER
+
+⛔⛔ READ THIS FIRST. THE PREIMAGE IS BELOW TOWN ON EVERY TOWN IT DRAWS ON — thorp
+64/128 · hamlet 50/128 · village 26/128, and town, city and metropolis are silent
+(section 1). The three sources the brief calls safe "at town and above" — THE
+HALL, THE TAVERN, THE GUILDS — ARE SEATED NOWHERE ON THIS POOL. Section 2 prints
+no Town hall, no tavern and no guild row required at any preimage tier, and the
+instrument's seating table prints "—" for all three at all three tiers. F1-20
+makes the hall a floor-1 body below town in so many words: at thorp and hamlet
+the governing institution is `Head-of-household consensus` / `Informal elder
+consensus` — A CONSENSUS, NOT A ROOM (`institutionServices.js:1448-1453`;
+`rulingStructure.js:162-163`). F1-16 makes a guild a floor-1 body with no guild
+row. SO `a clerk in the hall says` — THE COMMONEST ATTRIBUTION IN THIS PROGRAMME,
+the one the standard's own verbatim examples use twice — IS A FLOOR-1 FINDING ON
+EVERY FACE OF THIS POOL. That is the single most important line on this card.
+
+UNIVERSAL — exists on every one of the 140 towns this pool can draw:
+
+  1. THE GOVERNING CONSENSUS. The engine's own word, and it is keyed on exactly
+     this preimage: `governanceNarrative.js:15` SMALL_SETTLEMENT_TIERS =
+     {thorp, hamlet, village}; `:101-105` `deriveCouncilLabel` returns
+     'the household heads' at thorp and 'the village elders' at hamlet and
+     village. Write it as people who agree — never as a hall, a chamber, a seat,
+     a long table or a record-keeper.
+     INTEREST: it is the only thing between the town and whatever comes, it has
+     nothing to spend, and the readiness reading is a reading of its own work.
+     ⚠ FLOOR 3 BITES HERE. `Elder` is the tier's MANDATORY SINGULAR NPC at thorp
+     and at hamlet (`npcGenerator.js:1512-1513`), so 'an elder says', 'the
+     elder', 'the headman' is the person on the next tab and is REFUSED. The
+     plural label the engine itself prints is what may speak. F1-22 is the same
+     rule from the other side: the elders as a BODY is a finding except where the
+     engine emits the small-tier label, which is precisely `:101-105`.
+
+  2. WHOEVER BURIES THE DEAD. A `Burial ground` is required at thorp and hamlet
+     and a `Graveyard` at village, and `Burial` is a p 1 service at all three
+     (section 2b) — the one record-adjacent office that survives the whole
+     preimage.
+     INTEREST: they see what the town loses and what it will not discuss; at
+     hamlet the catalogue's own row says the plot is kept "by the households in
+     turn", so the buriers and the governing consensus are the same people.
+     ⚠ AT THORP THERE IS NO CHURCH AND NO PRIEST ROW and the `church` roster is
+     OPEN there (section 5). Write the ground and its keeping. NEVER the parish,
+     the register, the priest, the sexton, or a churchyard. F1-11.
+
+  3. A STRANGER. Always, on every pool.
+     INTEREST: what is visible on arrival, and what nobody here remarks on.
+     ⚠ THIS IS THE POOL'S MOST-BAITED SPEAKER. The shipped row 3 has a stranger
+     reach the centre "without being stopped, challenged or counted by anybody at
+     all" — a gates claim on an OPEN gates roster, and F1-08 binds IN BOTH
+     DIRECTIONS (a gate, or the denial of one).
+
+  4. THE HOUSEHOLDS. Dwellings are required at every preimage tier. The engine's
+     own small-tier words for them are all gated on the same SMALL_SETTLEMENT
+     set, so every one of them is lawful on every town here — USE THESE WORDS:
+       'the able-bodied'          `governanceNarrative.js:98` (no force row)
+       'the neighbours'           `:147` (the watch label with no force row)
+       'the wealthiest household' `:117` (the merchant label with no market row)
+       'the local herbalist'      `:131` (the healer label with no church row)
+     INTEREST: whatever is done is done by them, unpaid, on top of their own work.
+
+  5. THE PUBLIC (ruling 28) and THE ARCHIVER OBSERVED (ruling 27) — one candidate
+     each per variant, kept under NOTES until cars 18n / 18m land. Section 2b′ is
+     the observer's list of what neither may claim not to have seen; on this
+     preimage that list is burials and the mill's grain, and nothing military.
+
+CONDITIONAL — the key fixes ONE field and nothing else, so EVERY force bucket,
+the walls, the gates, the market, the hall, the court, the prison, the granary,
+the hospital and the charter are OPEN across the preimage (section 5). A face
+drawn on all 140 towns may name NONE of them:
+  · the watch · the muster · the garrison · the mercenary company · the charter
+    hall — seated only by `standingDefenseForces` / the institution buckets on
+    the individual town, never by this key. F1-01 · F1-02 · F1-03 · F1-05 ·
+    F1-06 · F4-18.
+  · whoever holds the way through — `inst.hasGates` only. F1-08.
+  · THE PARISH — required at hamlet as `Access to parish church`, and THAT ROW IS
+    A WALK OF 2-5 km TO A VILLAGE CHURCH (`institutionalCatalog.js:50-54`), so
+    the building is NOT in the settlement (F1-11); required at village as
+    `Parish church` + `Priest (resident)`, in the settlement. OPEN at thorp.
+    ⇒ the parish is a speaker AT VILLAGE and nowhere else in this preimage.
+  · the mill — `Access to external mill` at thorp/hamlet is a TRAVEL row (F1-15,
+    "must travel to the manor mill"); a resident `Mill` is required only at
+    village.
+  · the market · the guilds · the hall · the court · the prison — no required row
+    anywhere in the preimage. F1-10 · F1-16 · F1-20 · F1-12 · F1-13.
+  · the crown's assessor — NOWHERE. The engine has no typed crown collector.
+
+THE NAMED OFFICES A SPEAKER MUST NEVER BE (`npcGenerator.js:1511-1514`, floor 3,
+with §V.0 floor 3's rider):
+  thorp:   Elder · the derived second role (`npc/thorpSecondRole.js` — Fisherman,
+           Woodcutter, Shepherd or Miller, chosen from the town's own facts)
+  hamlet:  Elder · Parish Priest
+  village: Mayor · Guard Captain
+⛔ A VILLAGE MANDATES A **GUARD CAPTAIN** WHILE THE WATCH ROSTER IS OPEN. He is a
+person on the next tab, not a body on this one: a face may neither speak as him
+nor infer a watch from his existence.
+⛔ A VILLAGE MANDATES A **MAYOR** WHILE THE HALL ROSTER IS OPEN. Same rule.
+And where the stress fires (`stress` is in the read set and OPEN), add Garrison
+Commander · Healer · Guild Master · Moneylender · Chief Magistrate · Council
+Member · Retired Adventurer (`npcGenerator.js:1521-1537`).
+
+
+(8) WHAT WOULD BE FALSE
+
+⛔ THE BADGE IN THE SAME BOX IS THE TRAP THIS POOL IS BUILT ON. The key bands
+`defenseProfile.readiness.score` through `scoreBand` (CRITICAL < 20), and THE
+SAME NUMBER is printed as a large h1 word inside the SAME BORDERED BOX the face
+mounts in (`DefenseTab.jsx:257-278`; the mount's own docblock at `:38-41` says
+the badge and the sentence "cannot disagree") — on a DIFFERENT LADDER:
+`defenseGenerator.js:516-521` gives 'Lightly Defended' from 24, 'Vulnerable' from
+12, and 'Undefended' only below 12. So across the upper part of this pool's own
+[0,19] range the headline word beside the face reads **Vulnerable**, not
+undefended — and "undefended", "defenceless", "nothing at all", "no arrangement
+whatever" contradicts the badge in one glance. That is floor 1, and it is the
+shipped row 1's exact fault ("{settlement} is effectively undefended").
+⛔ THE INFORMAL ORDER IS POSITIVELY MODELLED AND IT SITS IN THE SAME BOX.
+`safetyProfile.js:378-381` fires on precisely this preimage — `['thorp',
+'hamlet', 'village'].includes(tier)` with no military institution and no court —
+and prints, as the Guard Assessment paragraph BESIDE the face, an order
+maintained "through community social pressure, the authority of established
+families, and the implicit threat of collective action". "Nobody is set up to
+respond", "nothing answers", "no one would come", "there is no answer to
+anything here" is a floor-1 denial of that sentence: the sitting's own named
+failure mode in its below-town form. AND WHERE A WALLS ROW ALONE SETS
+`hasMilitaryInst` (`priorityHelpers.js:45` counts 'walls'), the branch at `:344`
+prints instead "The local guard exists on paper. Chronically underpaid and poorly
+equipped… Susceptible to bribery" — which ASSERTS PAY, so "nobody is paid"
+contradicts it there.
+⛔ F4-06, AND IT IS THIS POOL'S OWN FIELD. `readiness = avg(five scores) +
+tierBonus − threatPenalty` (`defenseGenerator.js:487-510`), with +12 thorp / +8
+hamlet / +4 village FOR BEING CHEAP TO DEFEND and −15 plagued / −7 frontier. The
+band moves while every wall, gate and roster row is unchanged. A face that
+explains the reading by the works, or reads it as a statement about a perimeter,
+is floor 4. F4-08 is the same trap at the other end: `scores.magical` is one of
+the five averaged and it reads a WORLD (`magicWorksAt.js:49-53`), so a magical
+shortfall is never the town's own failing.
+⛔ THE OPEN ROSTERS. Every body word is conditional here: F1-01 a watch · F1-02 a
+garrison · F1-03 a militia or a muster ROLL · F1-04 "the guard" · F1-05 a
+mercenary company · F1-06 a charter hall · F1-07 walls, a circuit, a perimeter ·
+F1-08 a gate, checkpoint or toll-bar AND the denial of one · F1-09 a granary ·
+F1-10 a market · F1-12 a trial or a courthouse · F1-13 a prison · F1-14 a
+hospital · F1-16 a guild · F1-17 wards or detection · F1-19 a warehouse · F1-20 a
+hall, chamber or council room below town · F1-22 the elders as a body outside the
+engine's own small-tier label · F1-23 the clergy as a body without a church row ·
+F1-24 a record cited to a keeper the card leaves unresolved.
+⛔ F1-25 — THE NEGATION DIRECTION — IS THE SHARPEST BAR ON THIS POOL, because a
+CRITICAL reading invites denial and THIS KEY DENIES NOTHING. Every "no X here" is
+a claim about an OPEN roster: on the towns of this preimage that do carry a
+palisade, a gate or a household levy, the denial is the finding.
+⛔ NEVER SPEND A CITATION THE POOL DID NOT ALREADY CARRY. The shipped rows of
+`readiness CRITICAL` cite no record at all, so a named record ('the muster roll',
+'the toll books', 'from the road') is a NEW provenance shape and the gate refuses
+the whole packet for it — measured on batch 3. Name the SOURCE through a role.
+⛔ FLOOR 2. The key's own read `defenseProfile.readiness.score` is FROZEN (writers
+0) and it is the key's own read twice over, so THE PERFECT AND THE DURATIVE ARE
+LICENSED over the reading itself and over the frozen fields section 6 names —
+`config.monsterThreat`, `stress`, `safetyLabel`, `guardEffectivenessDesc`,
+`economicGates.military`, `scores.{military,monster,internal,economic,magical}`,
+every `compound.inst.*` flag, `structureKey`, `standingDefenseForces`. BUT
+`institutions[*]` carries 38 writers at every bucket and is LIVE, so no elapsed
+course over a BODY: "the wall has stood", "the watch has gone thin", "nobody has
+been on the gate since" are refused. No digit, no date, no rate, no count, no
+share anywhere; "a handful" and "most nights" are magnitudes. V-04: a thinning
+muster is a STANDING STATE, never a course, and never on a no-force key.
+⛔ FLOOR 3. No named character's fate; nothing predicated of a deity; eleven
+culture profiles ship, so no thatch, no churchyard and no market green. The
+tier's singular offices above are next-tab people. F1-31: `{r.tier}` prints
+verbatim beside the name (`OverviewTab.jsx:247`) — never name a tier the strip
+does not print, and "a place this size" is the way round it.
+⛔ FLOOR 4 BESIDES F4-06. F4-01 no decay clock AND no permanence. F4-02 / F4-03
+ONE military purse — never the wall kept and the muster not, never the directions
+split. F4-04 no total collapse of pay: every gate has a floor and
+`communityMilBase` is exempt, so short, late and thin are licensed and "nothing
+has been paid in a year" is not. F4-05 `plagued` is MONSTERS, never disease.
+F4-07 the river and the coast DO help the defence. F4-13 no covert fact on a
+player face — and section 2c marks NO covert field on this block, so NO FACE OF
+THIS POOL MAY CARRY THE `compromised` TAG AT ALL.
+⛔ RULING 12: {settlement} appears in at most one unit of the pool and never in a
+`[face]` sub-row. The shipped rows put it in all three.
+⛔ AND THE PAGE ALREADY DELIVERS THE VERDICT. The block's own docblock
+(`defenseStateProse.js:2081-2084`) records the C3 collision by name: this pool's
+CRITICAL line opened "{settlement} is effectively undefended" against DS-DEF-10's
+"has no serious answer to any of the five pressures on it" — one town, one
+verdict, twice — while DS-DEF-2 speaks one sentence per arm at
+`defense.threatAssessment` beside the badges. A face here that restates the
+whole-town verdict is the machine improvising in front of the reader. The faces
+that survive are the ones that put a PERSON in front of a game master, not a
+second summary.
+
+
+(9) WHERE THE FLAVOUR IS
+
+WHAT IS IN USE: the ordinary tools of a small place doing defensive work because
+nothing else will. The engine's own vocabulary for this exact preimage IS the
+flavour and it is all lawful everywhere — the able-bodied, the neighbours, the
+wealthiest household, the local herbalist, the household heads, the village
+elders. And the burial ground is the one enclosure the town certainly keeps: the
+hamlet row describes a walled plot, gated against livestock, kept by the
+households in turn. That is a wall, a gate, a rota and a body of people, all
+lawful on every town of this preimage, and not one of them a defensive
+institution.
+
+WHAT IS IN DISPUTE: the informal order is real, and it is also the whole
+argument. "The authority of established families" is a power that answers to
+nobody, sits on no roster and is printed on the same page — who it protects, who
+it does not, and what it is worth when the pressure is not a thief. The
+households who keep the ground in turn are the same households who would have to
+turn out, and they are not the households with the authority. The stranger sees
+an order that plainly works and cannot see what holds it up; the town cannot
+explain it either, because there is nothing to point at.
+
+WHAT THE ABSENCE LOOKS LIKE ON THE GROUND: not emptiness — the machine sentence
+beside the face forbids emptiness. It looks like an arrangement with one point of
+failure and no name for it. The reading is an average of five arms, one of which
+measures the world rather than the town, plus a bonus for being small enough to
+be simple; so this is not a town failing at defence, it is a town that has never
+been a defended place and has no vocabulary for becoming one. The session a game
+master can run out of that is between the people for whom it has always been fine
+and therefore is fine, and the people who have started counting.

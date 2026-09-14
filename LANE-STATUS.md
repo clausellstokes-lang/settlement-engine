@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 11:37:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 11:43:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -113,11 +113,17 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_eca79448-a67** (mtime 09-14 11:32): agent calls 4 (4 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_eca79448-a67/`
-    - `a5035890d` MARKER readiness STRONG · IN FLIGHT · transcript 09-14 11:37 730 KB · 41 tool calls · files: card-mech.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a2f99685d` MARKER readiness ADEQUATE · IN FLIGHT · transcript 09-14 11:37 660 KB · 35 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `ae9c70829` MARKER readiness WEAK · IN FLIGHT · transcript 09-14 11:36 665 KB · 25 tool calls · files: card.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a42ce04f1` MARKER readiness CRITICAL · IN FLIGHT · transcript 09-14 11:37 689 KB · 42 tool calls · files: card.md · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+- **wf_eca79448-a67** (mtime 09-14 11:42): agent calls 10 (10 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_eca79448-a67/`
+    - `a5035890d` MARKER readiness STRONG · DONE · transcript 09-14 11:42 897 KB · 50 tool calls · files: card-mech.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
+    - `a2f99685d` MARKER readiness ADEQUATE · DONE · transcript 09-14 11:38 717 KB · 38 tool calls · files: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-adequate/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
+    - `ae9c70829` MARKER readiness WEAK · DONE · transcript 09-14 11:38 721 KB · 28 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
+    - `a42ce04f1` MARKER readiness CRITICAL · DONE · transcript 09-14 11:40 782 KB · 45 tool calls · files: card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
+    - `ae097f38d` WRITER readiness STRONG · IN FLIGHT · transcript 09-14 11:43 426 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a41b4c33f` WRITER readiness STRONG · IN FLIGHT · transcript 09-14 11:43 312 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
+    - `a573e4b1f` WRITER readiness ADEQUATE · IN FLIGHT · transcript 09-14 11:43 381 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ac0ee6728` WRITER readiness WEAK · IN FLIGHT · transcript 09-14 11:43 381 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `ac168c759` WRITER readiness ADEQUATE · IN FLIGHT · transcript 09-14 11:43 311 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
+    - `a652ab7ad` WRITER readiness WEAK · IN FLIGHT · transcript 09-14 11:43 313 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/s
 - **wf_874f9ad9-605** (mtime 09-14 03:16): agent calls 16 (16 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_874f9ad9-605/`
     - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
     - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
@@ -154,4 +160,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.85 2.99 2.73
+load: 1.19 1.87 2.27
