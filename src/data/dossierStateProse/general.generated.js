@@ -6778,7 +6778,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "PRINT-NATIVE CHAPTER OPENERS: overview": [
         {
           "angle": "ledger",
-          "text": "What follows is {settlement} as it was surveyed, and where a thing has been re-judged since, the page says so.",
+          "text": "What follows is {settlement} as it was surveyed. Where a thing has been re-judged since, the page says so.",
           "slots": [
             "settlement"
           ],
@@ -7583,7 +7583,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "viable: true: the arithmetic closes": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.",
+          "text": "{settlement} holds together as a settlement. What it needs it can get, and what it makes it can move. The pieces of it explain each other.",
           "slots": [
             "settlement"
           ],
@@ -7591,7 +7591,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} does not have to be told why the town is where it is; the reason is legible from the road, and nothing about the place argues with it.",
+          "text": "A stranger at {settlement} does not have to be told why the town is where it is. The reason is legible from the road, and nothing about the place argues with it.",
           "slots": [
             "settlement"
           ],
@@ -7605,7 +7605,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} carries real difficulties and none of them undermines the case for the place; the town's problems are problems inside a working arrangement.",
+          "text": "{settlement} carries real difficulties and none of them undermines the case for the place. The town's problems are problems inside a working arrangement.",
           "slots": [
             "settlement"
           ],
@@ -7623,7 +7623,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} sits at the edge of coherence: the arrangement is defensible and it is not comfortable, and what separates those is a short list.",
+          "text": "{settlement} sits at the edge of coherence. The arrangement is defensible and it is not comfortable. What separates those is a short list.",
           "slots": [
             "settlement"
           ],
@@ -7631,7 +7631,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A careful stranger at {settlement} finds one or two things that do not quite add up, and finds the town no more troubled by them than by the weather.",
+          "text": "A careful stranger at {settlement} finds one or two things that do not quite add up. The same stranger finds the town no more troubled by them than by the weather.",
           "slots": [
             "settlement"
           ],
@@ -7647,7 +7647,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "viable: false: the arithmetic does not close": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s outgoings stand above everything its land and its custom bring in, and nothing on the record accounts for the difference.",
+          "text": "{settlement}'s outgoings stand above everything its land and its custom bring in. Nothing on the record accounts for the difference.",
           "slots": [
             "settlement"
           ],
@@ -7655,7 +7655,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet, and a careful eye goes looking for a patron before it goes looking for an error in the sums.",
+          "text": "A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet. A careful eye goes looking for a patron before it goes looking for an error in the sums.",
           "slots": [
             "settlement"
           ],
@@ -7663,7 +7663,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody in {settlement} treats the gap as a mystery and nobody in {settlement} can close it either; the town's own account of how it manages is that it manages.",
+          "text": "Nobody in {settlement} treats the gap as a mystery, and nobody in {settlement} can close it either. The town's own account of how it manages is that it manages.",
           "slots": [
             "settlement"
           ],
@@ -7671,7 +7671,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} sits on the wrong side of its own accounting and is a settlement regardless, so the question the record leaves open is not whether the town is being carried but by whom.",
+          "text": "{settlement} sits on the wrong side of its own accounting and is a settlement regardless. So the question the record leaves open is not whether the town is being carried but by whom.",
           "slots": [
             "settlement"
           ],
@@ -7681,7 +7681,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "criticalIssueCount: critical contradictions on the record": [
         {
           "angle": "ledger",
-          "text": "{band} of the contradictions in {settlement}'s record are the serious kind: not a rough edge, a thing that cannot be true alongside the thing beside it.",
+          "text": "{band} of the contradictions in {settlement}'s record are the serious kind. They are not a rough edge but a thing that cannot be true alongside the thing beside it.",
           "slots": [
             "band",
             "settlement"
@@ -7699,7 +7699,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There are a handful of things about this town that cannot all be true, and everybody here has a preferred explanation.",
+          "text": "There are a handful of things about this town that cannot all be true. Everybody here has a preferred explanation.",
           "slots": [],
           "vid": 3
         }
@@ -7715,7 +7715,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who reads {settlement} closely finds no seam in it, which is rarer than the absence of trouble.",
+          "text": "A stranger who reads {settlement} closely finds no seam in it. That is rarer than the absence of trouble.",
           "slots": [
             "settlement"
           ],
@@ -7723,7 +7723,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.",
+          "text": "{settlement} carries pressures that would show up as contradictions in a less coherent place. The record holds together regardless.",
           "slots": [
             "settlement"
           ],
@@ -7733,7 +7733,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "THE FIRST-SURVEY QUALIFICATION": [
         {
           "angle": "ledger",
-          "text": "This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it.",
+          "text": "This reading of {settlement} is the first survey's, and the first survey's alone. What the world has done since is not in it.",
           "slots": [
             "settlement"
           ],
@@ -7741,7 +7741,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "What follows is {settlement} as it was judged when it was described, which is not the same as {settlement} as it stands.",
+          "text": "What follows is {settlement} as it was judged when it was described. That is not the same as {settlement} as it stands.",
           "slots": [
             "settlement"
           ],
@@ -7872,7 +7872,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "WATER-EDGE": [
         {
           "angle": "visitor",
-          "text": "The water is the first thing a stranger understands about {settlement}; everything the town does for a living happens within reach of it.",
+          "text": "The water is the first thing a stranger understands about {settlement}. Everything the town does for a living happens within reach of it.",
           "slots": [
             "settlement"
           ],
@@ -7880,7 +7880,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} keeps its working life at the water and its sleeping life behind it, and the books are written at the working end.",
+          "text": "{settlement} keeps its working life at the water and its sleeping life behind it. The books are written at the working end.",
           "slots": [
             "settlement"
           ],
@@ -7896,7 +7896,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The water was here before the town, and {settlement} has arranged itself around that seniority ever since.",
+          "text": "The water was here before the town. {settlement} has arranged itself around that seniority ever since.",
           "slots": [
             "settlement"
           ],
@@ -7914,7 +7914,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.",
+          "text": "Nothing in {settlement} is level for long. The town takes the slope as a condition of living here.",
           "slots": [
             "settlement"
           ],
@@ -7932,7 +7932,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "WOODLAND": [
         {
           "angle": "visitor",
-          "text": "{settlement} is a clearing that learned to stay open; the wood stands close enough to be a neighbour and near enough to be a livelihood.",
+          "text": "{settlement} is a clearing that learned to stay open. The wood stands close enough to be a neighbour and near enough to be a livelihood.",
           "slots": [
             "settlement"
           ],
@@ -7946,7 +7946,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "In {settlement} the wood is where things come from, and the town is where they are made into something.",
+          "text": "In {settlement} the wood is where things come from. The town is where they are made into something.",
           "slots": [
             "settlement"
           ],
@@ -7956,7 +7956,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "OPEN-GROUND": [
         {
           "angle": "ledger",
-          "text": "{settlement} sits in country that offers no argument against it, so the town's shape is its own habit rather than the land's instruction.",
+          "text": "{settlement} sits in country that offers no argument against it. So the town's shape is its own habit rather than the land's instruction.",
           "slots": [
             "settlement"
           ],
@@ -7964,7 +7964,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing hems {settlement} in; where the town stops, it stops by custom, not necessity.",
+          "text": "Nothing hems {settlement} in. Where the town stops, it stops by custom, not necessity.",
           "slots": [
             "settlement"
           ],
@@ -7982,7 +7982,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "DRY-GROUND": [
         {
           "angle": "ledger",
-          "text": "{settlement} is arranged around what little the ground concedes; the town's shape is the shape of its water.",
+          "text": "{settlement} is arranged around what little the ground concedes, and the town's shape is the shape of its water.",
           "slots": [
             "settlement"
           ],
@@ -7990,7 +7990,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Everything green in {settlement} is deliberate, and the deliberateness says more about the place than any wall could.",
+          "text": "Everything green in {settlement} is deliberate. The deliberateness says more about the place than any wall could.",
           "slots": [
             "settlement"
           ],
@@ -7998,7 +7998,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The dry country keeps the town honest: {settlement} holds exactly the ground it can water and not a yard more.",
+          "text": "The dry country keeps the town honest. {settlement} holds exactly the ground it can water and not a yard more.",
           "slots": [
             "settlement"
           ],

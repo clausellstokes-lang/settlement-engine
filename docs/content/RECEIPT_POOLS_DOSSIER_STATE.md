@@ -6313,7 +6313,7 @@ unchanged.
 | 13 Hooks framing | every chapter with hooks | **PARITY** | `hookPriorityBand` is print-side vocabulary and the framing sentence is what gives it a subject |
 
 **PRINT-NATIVE CHAPTER OPENERS** *(the one place print legitimately says something the screen does not: a chapter has to begin, and a tab does not)*
-- overview — 1. `[ledger]` What follows is {settlement} as it was surveyed, and where a thing has been re-judged since, the page says so. · 2. `[visitor]` {settlement}, described from the outside in. · 3. `[street]` This is the town as {settlement} would describe itself to somebody staying.
+- overview — 1. `[ledger]` What follows is {settlement} as it was surveyed. Where a thing has been re-judged since, the page says so. · 2. `[visitor]` {settlement}, described from the outside in. · 3. `[street]` This is the town as {settlement} would describe itself to somebody staying.
 - economics — 1. `[ledger]` What {settlement} earns, what it eats, and what it owes, in that order. · 2. `[street]` {settlement}'s year, as the books have it. · 3. `[visitor]` The market at {settlement} and what stands behind it.
 - defense — 1. `[ledger]` What {settlement} can field, hold, and survive. · 2. `[visitor]` {settlement}'s walls and what they are actually for. · 3. `[street]` What {settlement} does when something comes.
 - viability — 1. `[ledger]` Whether {settlement} works, and on what terms. · 2. `[unfolding]` What {settlement} depends on, and what would happen without it. · 3. `[visitor]` The arithmetic underneath {settlement}.
@@ -6411,36 +6411,36 @@ unchanged.
 **RECORDED NON-AUTHORING (§0h V1-c):** the **generation receipt** — *Generation receipt: coherent* / *coherent, with authored tensions* / *needs review*, the checks-passed count, the deterministic repairs and the formal judgments — is **TOOL VOICE ABOUT THE GENERATOR**, in the same class as `RelationshipsTab`'s two editor captions (`DS-REL-1`). It reports on the product's own coherence machinery, not on the world, and it gets **no world-voice prose, ever**. A variant narrating it in the town's voice would be the town describing its own generator, which is the deepest form of the leak R-DST-W4-e catalogues.
 
 **`viable: true`: the arithmetic closes**
-1. `[ledger]` {settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.
-2. `[visitor]` A stranger at {settlement} does not have to be told why the town is where it is; the reason is legible from the road, and nothing about the place argues with it.
+1. `[ledger]` {settlement} holds together as a settlement. What it needs it can get, and what it makes it can move. The pieces of it explain each other.
+2. `[visitor]` A stranger at {settlement} does not have to be told why the town is where it is. The reason is legible from the road, and nothing about the place argues with it.
 3. `[street]` The town works, and works for the reasons a town of this kind usually works.
-4. `[counterforce]` {settlement} carries real difficulties and none of them undermines the case for the place; the town's problems are problems inside a working arrangement.
+4. `[counterforce]` {settlement} carries real difficulties and none of them undermines the case for the place. The town's problems are problems inside a working arrangement.
 
 **the MARGINAL arm: neither verdict returned**
 1. `[ledger]` Whether {settlement} holds together is not a settled question. The pieces mostly fit, and the places where they do not are the places worth reading.
-2. `[threshold]` {settlement} sits at the edge of coherence: the arrangement is defensible and it is not comfortable, and what separates those is a short list.
-3. `[visitor]` A careful stranger at {settlement} finds one or two things that do not quite add up, and finds the town no more troubled by them than by the weather.
+2. `[threshold]` {settlement} sits at the edge of coherence. The arrangement is defensible and it is not comfortable. What separates those is a short list.
+3. `[visitor]` A careful stranger at {settlement} finds one or two things that do not quite add up. The same stranger finds the town no more troubled by them than by the weather.
 4. `[street]` The town makes sense in most respects. The respects in which it does not are the ones people here decline to discuss with outsiders.
 
 **`viable: false`: the arithmetic does not close**
-1. `[ledger]` {settlement}'s outgoings stand above everything its land and its custom bring in, and nothing on the record accounts for the difference.
-2. `[visitor]` A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet, and a careful eye goes looking for a patron before it goes looking for an error in the sums.
-3. `[street]` Nobody in {settlement} treats the gap as a mystery and nobody in {settlement} can close it either; the town's own account of how it manages is that it manages.
-4. `[threshold]` {settlement} sits on the wrong side of its own accounting and is a settlement regardless, so the question the record leaves open is not whether the town is being carried but by whom.
+1. `[ledger]` {settlement}'s outgoings stand above everything its land and its custom bring in. Nothing on the record accounts for the difference.
+2. `[visitor]` A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet. A careful eye goes looking for a patron before it goes looking for an error in the sums.
+3. `[street]` Nobody in {settlement} treats the gap as a mystery, and nobody in {settlement} can close it either. The town's own account of how it manages is that it manages.
+4. `[threshold]` {settlement} sits on the wrong side of its own accounting and is a settlement regardless. So the question the record leaves open is not whether the town is being carried but by whom.
 
 **`criticalIssueCount`: critical contradictions on the record**
-1. `[ledger]` {band} of the contradictions in {settlement}'s record are the serious kind: not a rough edge, a thing that cannot be true alongside the thing beside it.
+1. `[ledger]` {band} of the contradictions in {settlement}'s record are the serious kind. They are not a rough edge but a thing that cannot be true alongside the thing beside it.
 2. `[visitor]` A careful reader of {settlement} finds {band} of places where the town's own account of itself contradicts the rest of it.
-3. `[street]` There are a handful of things about this town that cannot all be true, and everybody here has a preferred explanation.
+3. `[street]` There are a handful of things about this town that cannot all be true. Everybody here has a preferred explanation.
 
 **`criticalIssueCount` zero** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` Nothing in {settlement}'s record contradicts anything else in it. The town is what it says it is, throughout.
-2. `[visitor]` A stranger who reads {settlement} closely finds no seam in it, which is rarer than the absence of trouble.
-3. `[counterforce]` {settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.
+2. `[visitor]` A stranger who reads {settlement} closely finds no seam in it. That is rarer than the absence of trouble.
+3. `[counterforce]` {settlement} carries pressures that would show up as contradictions in a less coherent place. The record holds together regardless.
 
 **THE FIRST-SURVEY QUALIFICATION** *(standing; composed with the verdict, never instead of it)*
-1. `[ledger]` This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it.
-2. `[visitor]` What follows is {settlement} as it was judged when it was described, which is not the same as {settlement} as it stands.
+1. `[ledger]` This reading of {settlement} is the first survey's, and the first survey's alone. What the world has done since is not in it.
+2. `[visitor]` What follows is {settlement} as it was judged when it was described. That is not the same as {settlement} as it stands.
 3. `[street]` The town was read once, carefully, and the reading has not been repeated.
 
 ---
@@ -6487,30 +6487,30 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** Non-redundancy (R-DST-A): `DS-GEN-6` answers why the town EXISTS (route × deficit × tier) and `DS-ECO-11` answers what the ground is WORTH. This block answers how the ground DISPOSES the town: the working edge, the constraint, the approach. Structural cause only, spoken strictly through the terrain field the engine holds. No compass words, no named geography, no street-level geometry — the map engine owns geometry and the dossier owns disposition. The partition is TOTAL over the live enum, so no settlement falls through it.
 
 **`WATER-EDGE`**
-1. `[visitor]` The water is the first thing a stranger understands about {settlement}; everything the town does for a living happens within reach of it.
-2. `[ledger]` {settlement} keeps its working life at the water and its sleeping life behind it, and the books are written at the working end.
+1. `[visitor]` The water is the first thing a stranger understands about {settlement}. Everything the town does for a living happens within reach of it.
+2. `[ledger]` {settlement} keeps its working life at the water and its sleeping life behind it. The books are written at the working end.
 3. `[street]` In {settlement} the way to anywhere important runs along the water or down to it.
-4. `[elder]` The water was here before the town, and {settlement} has arranged itself around that seniority ever since.
+4. `[elder]` The water was here before the town. {settlement} has arranged itself around that seniority ever since.
 
 **`HIGH-GROUND`**
 1. `[visitor]` {settlement} sits where the ground made standing possible rather than easy, and the town's shape is the ground's ruling on the matter.
-2. `[street]` Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.
+2. `[street]` Nothing in {settlement} is level for long. The town takes the slope as a condition of living here.
 3. `[ledger]` What {settlement} spends on carrying things up, it recovers in what the high ground spares it.
 
 **`WOODLAND`**
-1. `[visitor]` {settlement} is a clearing that learned to stay open; the wood stands close enough to be a neighbour and near enough to be a livelihood.
+1. `[visitor]` {settlement} is a clearing that learned to stay open. The wood stands close enough to be a neighbour and near enough to be a livelihood.
 2. `[elder]` The town's edge against the trees has been argued over for as long as anyone has kept the argument.
-3. `[street]` In {settlement} the wood is where things come from, and the town is where they are made into something.
+3. `[street]` In {settlement} the wood is where things come from. The town is where they are made into something.
 
 **`OPEN-GROUND`**
-1. `[ledger]` {settlement} sits in country that offers no argument against it, so the town's shape is its own habit rather than the land's instruction.
-2. `[visitor]` Nothing hems {settlement} in; where the town stops, it stops by custom, not necessity.
+1. `[ledger]` {settlement} sits in country that offers no argument against it. So the town's shape is its own habit rather than the land's instruction.
+2. `[visitor]` Nothing hems {settlement} in. Where the town stops, it stops by custom, not necessity.
 3. `[street]` The fields begin where {settlement} loses interest, and not before.
 
 **`DRY-GROUND`**
-1. `[ledger]` {settlement} is arranged around what little the ground concedes; the town's shape is the shape of its water.
-2. `[visitor]` Everything green in {settlement} is deliberate, and the deliberateness says more about the place than any wall could.
-3. `[elder]` The dry country keeps the town honest: {settlement} holds exactly the ground it can water and not a yard more.
+1. `[ledger]` {settlement} is arranged around what little the ground concedes, and the town's shape is the shape of its water.
+2. `[visitor]` Everything green in {settlement} is deliberate. The deliberateness says more about the place than any wall could.
+3. `[elder]` The dry country keeps the town honest. {settlement} holds exactly the ground it can water and not a yard more.
 
 ---
 
