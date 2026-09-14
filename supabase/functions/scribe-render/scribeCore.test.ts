@@ -364,6 +364,9 @@ Deno.test('⭐ THE CHECKLIST RIDES UNDER THE SAME LAW: the ladders, the funding 
 Deno.test('⛔ THE READER IS SHOWN A VALUELESS FIELD IN THE WRITER\'S OWN WORDS, never as `null`', () => {
   // A reader given a harsher rendering of the same fact than the writer was refuses lines the
   // writer was licensed to write, which is ruling 26's defect class pointed at the second seat.
+  // ⭐ AND THE TWO KINDS ARE KEPT APART (car 6): a reading THIS CARD cannot resolve was decided by
+  // the engine and is stated by the pool key; only a real settlement path whose leaf is absent is
+  // UNKNOWN. Measured, 42 of 42 valueless rows on the pinned town are the first kind.
   const withFields = {
     ...card,
     pools: [{
@@ -377,8 +380,9 @@ Deno.test('⛔ THE READER IS SHOWN A VALUELESS FIELD IN THE WRITER\'S OWN WORDS,
   };
   const text = buildTier1Checklist([unit()], withFields);
   assert(text.includes('forces.walls.present = true'));
-  assert(text.includes('readings.scores = UNKNOWN (this card cannot resolve this reading'));
+  assert(text.includes('readings.scores = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it'));
   assert(text.includes('powerStructure.recentConflict = UNKNOWN (the engine has not decided this'));
+  assert(!text.includes('readings.scores = UNKNOWN'), 'an unreadable row is not an undecided one');
   assert(!text.includes('= null'), 'a bare null reads as "the answer is nothing", which it is not');
 });
 

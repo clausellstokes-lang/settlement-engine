@@ -440,23 +440,27 @@ function poolBrief(pool) {
   if (fields.length) {
     rows.push('  THE FIELDS this pool reads, with their values here:');
     for (const field of fields) {
-      // ⛔ A READING WITH NO VALUE IS PRINTED AS UNKNOWN AND NEVER AS A VALUE. RUN 2 measured that
-      // the writer's commonest invention is an ABSENCE asserted where a reading has no value, and
-      // a bare `= null` reads to a model as "the answer is nothing" rather than "you have not been
-      // told". The card also says WHICH of the two kinds of unknown it is (`townCard.fieldState`),
-      // because "the engine has not decided this" would be FALSE on a reading the card simply
-      // cannot resolve, and a false fact on the card is the one thing this boundary is for.
+      // ⛔⛔ THE TWO VALUELESS READINGS ARE NOT THE SAME FACT, AND SAYING SO IS CAR 6's WHOLE
+      // POINT. `unreadable` means THIS CARD cannot resolve the reading (a desk-local spelling, an
+      // expression) while the engine decided it and the POOL KEY STATES IT; `not-decided` means a
+      // real settlement path whose leaf is absent. Printing the first as "the engine has not
+      // decided this" would be a false fact on the card, and printing it as a bare `null` would
+      // invite the absence RUN 2 measured. Measured: 42 of 42 valueless rows on the pinned town
+      // are the FIRST kind.
       if (field?.unknown === true) {
-        rows.push(`    ${String(field?.field ?? '')} = UNKNOWN (${String(field?.state) === 'unreadable'
-          ? 'this card cannot resolve this reading'
-          : 'the engine has not decided this'}; assert nothing that depends on it)`);
+        rows.push(String(field?.state) === 'unreadable'
+          ? `    ${String(field?.field ?? '')} = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)`
+          : `    ${String(field?.field ?? '')} = UNKNOWN (the engine has not decided this; assert nothing that depends on it)`);
         continue;
       }
       rows.push(`    ${String(field?.field ?? '')} = ${JSON.stringify(field?.value ?? null)}${field?.status ? ` (${String(field.status)})` : ''}`);
     }
     rows.push('    The second sentence of a unit, if there is one, must rest on one of these fields');
-    rows.push('    and name it in its own word, or the instruments withhold it. A field reading');
-    rows.push('    UNKNOWN cannot carry a sentence, and no absence may be read out of it.');
+    rows.push('    and name it in its own word, or the instruments withhold it.');
+    if (fields.some((f) => f?.unknown === true && String(f?.state) !== 'unreadable')) {
+      rows.push('    A field reading UNKNOWN cannot carry a sentence, and no absence may be read');
+      rows.push('    out of it.');
+    }
   } else {
     rows.push('  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.');
   }
@@ -856,18 +860,23 @@ function pageLinesOf(card) {
 /**
  * The pool row a unit was written for, for its field list.
  *
- * ⛔ THE READER IS SHOWN WHAT THE WRITER WAS SHOWN, IN THE SAME WORDS (W3b car 4). A field with no
- * value prints as UNKNOWN here exactly as it does in the writer's turn: a bare `= null` reads to a
- * model as "the answer is nothing", which is the very reading question 1 now asks about, and a
- * reader given a harsher rendering of the same fact than the writer was refuses lines the writer
- * was licensed to write (ruling 26's defect class, pointed at the second seat).
+ * ⛔ THE READER IS SHOWN WHAT THE WRITER WAS SHOWN, IN THE SAME WORDS (W3b cars 4 and 6). A field
+ * with no value prints here exactly as it prints in the writer's turn, and the two KINDS of
+ * valueless reading are kept apart: `UNREADABLE BY THIS CARD` (the engine decided it and the pool
+ * key states it) against `UNKNOWN` (the engine has not decided it). A bare `= null` reads to a
+ * model as "the answer is nothing", and a reader given a harsher rendering of the same fact than
+ * the writer was refuses lines the writer was licensed to write (ruling 26's defect class, pointed
+ * at the second seat).
  */
 function fieldsFor(card, unit) {
   const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
   return (Array.isArray(pool?.fields) ? pool.fields : [])
-    .map((f) => (f?.unknown === true
-      ? `    ${String(f?.field ?? '')} = UNKNOWN (${String(f?.state) === 'unreadable' ? 'this card cannot resolve this reading' : 'the engine has not decided this'}; nothing may be asserted from it either way)`
-      : `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`));
+    .map((f) => {
+      if (f?.unknown !== true) return `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`;
+      return String(f?.state) === 'unreadable'
+        ? `    ${String(f?.field ?? '')} = UNREADABLE BY THIS CARD (the engine decided it; the pool key states it; assert no value for this field beyond what the key says)`
+        : `    ${String(f?.field ?? '')} = UNKNOWN (the engine has not decided this; assert nothing that depends on it)`;
+    });
 }
 
 /**

@@ -399,40 +399,44 @@ export const WORLD_ONLY_READINGS = Object.freeze([
 ]);
 
 /**
- * ⭐⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL (W3b car 2)?
+ * ⭐⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL (W3b car 2, RE-CUT at car 6)?
  *
- * ⛔ THE MEASUREMENT. RUN 2 shipped 51 of 198 units from one seat and 60 of 198 from the other,
- * and the shipped share tracked the CARD'S THINNESS exactly: defense 35 per cent, overview 33,
- * economics 21, power 13. The chair's reading is that the disease is GAP-FILLING ON A THIN CARD,
- * so a pool the card cannot license is better OMITTED than written and refused — the two land the
- * same line (the hand corpus draws the pool either way), and only one of them spends a model's
- * invention on it.
+ * ⛔⛔ THE LIMB THAT WAS STRUCK, AND THE MEASUREMENT THAT STRUCK IT. Car 2 answered false on two
+ * counts, and the first was (a) NO DECIDED FIELD: every field row unknown, so nothing to stand a
+ * sentence on. Car 2's own measurement then settled against it. Over the pinned town's thirteen
+ * tabs, 42 of 42 valueless field rows are `unreadable` and NOT ONE is a true null: they are
+ * expressions `valueAt` refuses by construction and DESK-LOCAL SPELLINGS the census recorded
+ * verbatim (`readings.scores`, `axis`, `conflict.intensity`), which no settlement has a key for.
  *
- * FALSE on either count:
- *   (a) NO DECIDED FIELD. Every field row is unknown and no read resolved to a value here. With
- *       the static table's `fields` being the resolution of its `reads`, "no read resolves" and
- *       "no field is decided" are the same statement, and both are spelled so the rule reads like
- *       the rule. A pool with NO field rows at all is included: it has nothing either.
- *   (b) WORLD-ONLY ON A HEADLESS TOWN. Every read is a `WORLD_ONLY_READINGS` word and the card
- *       carries no world, so the pool key is the default and not a decision.
+ * So limb (a) was not measuring the ENGINE's silence. It was measuring THIS CARD'S BLINDNESS, and
+ * it turned off nine of ten power pools and fourteen of seventeen overview pools whose keys the
+ * engine had decided in terms — `scores.military: STRONG` was omitted for want of a value while
+ * its own key said STRONG.
+ *
+ * ⭐ THE PRINCIPLE THE CHAIR DREW FROM IT: THE POOL KEY IS ITSELF A DECIDED FACT. A pool fired
+ * because the engine reached a state and the key names that state; a card that cannot resolve a
+ * desk-local reading knows nothing about the engine and may not turn the pool off on that ground.
+ * The card's blindness is the CENSUS'S SPELLING, and curing it is W3c's (normalising those 65
+ * desk-local paths to settlement paths).
+ *
+ * FALSE ON ONE COUNT ONLY:
+ *   WORLD-ONLY ON A HEADLESS TOWN. Every read is a `WORLD_ONLY_READINGS` word and the card carries
+ *   no world, so the pool KEY ITSELF is the default rather than a decision — which is the one case
+ *   where the key proves nothing. Measured: exactly three pools on the pinned town.
  *
  * ⛔ A POOL WITH NO STATIC ROW IS WRITEABLE, and that is not a loophole. Where the static table
  * was not joined the card carries no `fields` for ANY pool and says so in `staticCardJoined`;
  * answering "not writeable" for all of them would be a claim the card has no basis for, and would
  * silently turn the whole feature off on a client that forgot one input.
  *
- * @param {ReadonlyArray<object>} fields the pool's own field rows, already classified
  * @param {object|null} staticRow @param {boolean} hasWorld
  * @returns {boolean}
  */
-function writeableOf(fields, staticRow, hasWorld) {
+function writeableOf(staticRow, hasWorld) {
   if (!staticRow) return true;
   const reads = Array.isArray(staticRow.reads) ? staticRow.reads.map((r) => String(r).toLowerCase()) : [];
-  const decided = fields.filter((f) => f.unknown !== true);
-  if (decided.length === 0 && (reads.length === 0 || decided.length === 0)) return false;
-  if (!hasWorld && reads.length > 0
-    && reads.every((r) => WORLD_ONLY_READINGS.some((w) => r.includes(w)))) return false;
-  return true;
+  return !(!hasWorld && reads.length > 0
+    && reads.every((r) => WORLD_ONLY_READINGS.some((w) => r.includes(w))));
 }
 
 /** The roles a source can speak through here, as a plain sorted list. */
@@ -691,10 +695,11 @@ function poolRow(s, line, ctx) {
       ['variants', staticRow.variants], ['rateBp', staticRow.rateBp],
     ]) : null],
     ['fields', fields],
-    // ⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL. See `writeableOf`: a pool the card cannot
-    // license is OMITTED rather than written and refused, because both land the same hand-corpus
-    // line and only one of them spends a model's invention on getting there.
-    ['writeable', writeableOf(fields, staticRow, ctx.hasWorld === true)],
+    // ⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL. See `writeableOf`: since car 6 the only
+    // answer of false is a WORLD-ONLY reading on a headless town, where the pool key is the
+    // default rather than a decision. A pool whose every reading this card cannot resolve stays
+    // WRITEABLE, because its key is a decided fact and the card's blindness is the census's.
+    ['writeable', writeableOf(staticRow, ctx.hasWorld === true)],
   ]);
 }
 

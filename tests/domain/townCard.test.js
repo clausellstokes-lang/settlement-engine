@@ -315,39 +315,48 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
     expect(fieldState(town, '', null)).toBe('unreadable');
   }, 300_000);
 
-  it('⭐ counts the pools this town cannot license, per tab, and lets no writeable pool be empty', () => {
-    // ⛔ THE SHAPE OF THE CURE, AS A NUMBER. RUN 2's shipped share tracked the card's thinness
-    // exactly (defense 35 per cent, overview 33, economics 21, power 13); the counts below are the
-    // same fact measured on the card rather than on the page. A pool the card cannot license is
-    // OMITTED, and the hand corpus draws it — the same line a refusal would have landed.
+  it('⭐⭐ THE POOL KEY IS THE DECIDED FACT: only a world-only pool on a headless town is refused', () => {
+    // ⛔⛔ THE LIMB CAR 6 STRUCK, AND WHY. Car 2 also answered false where NO FIELD CARRIED A
+    // VALUE. Its own measurement settled against it: 42 of 42 valueless rows on this town are
+    // `unreadable` and NOT ONE is a true null, so that limb was measuring THIS CARD'S BLINDNESS
+    // (desk-local spellings the census recorded verbatim) and not the engine's silence. It turned
+    // off nine of ten power pools and fourteen of seventeen overview pools whose keys the engine
+    // had decided in terms: `scores.military: STRONG` was omitted for want of a value while its
+    // own key said STRONG. A pool key that fired IS a decided fact, and the card's blindness is
+    // the census's spelling, which is W3c's to cure and not this gate's.
     const s = townOf(PINNED, 'render-town');
     const unwriteable = {};
     const total = {};
-    const empty = [];
+    const named = [];
+    let allUnreadableAndWriteable = 0;
     for (const tab of SCRIBE_TABS) {
       const card = cardOf(s, tab);
       total[tab] = card.pools.length;
       unwriteable[tab] = card.pools.filter((p) => p.writeable === false).length;
       for (const pool of card.pools) {
-        // THE INVARIANT: a pool the card says is writeable has something to stand on.
-        if (pool.writeable !== true || pool.static === null) continue;
-        if (pool.fields.length === 0 || pool.fields.every((f) => f.unknown === true)) {
-          empty.push(`${tab} :: ${pool.poolKey}`);
-        }
+        if (pool.writeable === false) named.push(`${tab} :: ${pool.blockId} :: ${pool.poolKey}`);
+        // ⭐ THE CONTROL THE STRIKE EXISTS FOR: a pool whose every reading this card cannot
+        // resolve stays WRITEABLE, because its key is the decided fact.
+        if (pool.writeable === true && pool.fields.length > 0
+          && pool.fields.every((f) => f.state === 'unreadable')) allUnreadableAndWriteable += 1;
       }
     }
-    expect(empty, `\n${empty.join('\n')}\n`).toEqual([]);
     expect(total).toEqual({
       daily_life: 1, defense: 15, economics: 7, faith: 1, history: 6, overview: 17,
       plot_hooks: 7, power: 10, relationships: 0, resources: 0, services: 1, viability: 4, war: 0,
     });
     expect(unwriteable).toEqual({
-      daily_life: 1, defense: 3, economics: 4, faith: 1, history: 6, overview: 14,
-      plot_hooks: 7, power: 9, relationships: 0, resources: 0, services: 1, viability: 3, war: 0,
+      daily_life: 0, defense: 1, economics: 0, faith: 1, history: 0, overview: 0,
+      plot_hooks: 0, power: 1, relationships: 0, resources: 0, services: 0, viability: 0, war: 0,
     });
-    // BOTH ANSWERS ARE REACHED, so neither branch is vacuous.
-    expect(Object.values(unwriteable).some((n) => n > 0)).toBe(true);
-    expect(SCRIBE_TABS.some((tab) => total[tab] > unwriteable[tab])).toBe(true);
+    // AND THEY ARE THE THREE WORLD-ONLY POOLS, BY NAME, and no others.
+    expect(named.sort()).toEqual([
+      'defense :: DS-DEF-4 :: capture none',
+      'faith :: DS-FTH-2 :: PRIVATE DOSSIER',
+      'power :: DS-POW-7 :: layer DORMANT (no ledger materialized)',
+    ]);
+    expect(allUnreadableAndWriteable, 'the control is vacuous: no pool reads only unreadable fields')
+      .toBe(24);
   }, 300_000);
 
   it('the world-only table is NARROW, and catches the pool the chair named', () => {
@@ -695,6 +704,15 @@ describe('townCard — the golden', () => {
    *   gains `writeable`. NOTHING ELSE MOVED: the only new bytes on any tab are `fields[].state`,
    *   `fields[].unknown`, `pools[].writeable` and the schema string, and both derivations are
    *   re-run by the arms above rather than frozen here.
+   *
+   * 2026-09-14 — RE-RECORDED (W3b car 6), card schema UNCHANGED at /4. CAUSE: `writeableOf` lost
+   *   its NO-DECIDED-FIELD limb. Car 2's own measurement struck it: 42 of 42 valueless field rows
+   *   on the pinned town are `unreadable` (desk-local spellings the census recorded verbatim, which
+   *   no settlement has a key for) and not one is a true null, so the limb was measuring the CARD'S
+   *   BLINDNESS rather than the engine's silence, and it was turning off pools whose keys the
+   *   engine had decided in terms. A pool key that fired is a decided fact. NOTHING ELSE MOVED:
+   *   `pools[].writeable` is the only key that changed value on any tab, it changed only from
+   *   false to true, and no key was added or removed.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

@@ -112,7 +112,7 @@
             "spine": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -1796,7 +1796,7 @@
             "spine": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -2098,7 +2098,7 @@
             "spine": "Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -2798,7 +2798,7 @@
             "spine": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -3075,7 +3075,7 @@
             "spine": "There is always something going out. If one trade is quiet, another is not."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -3130,7 +3130,7 @@
             "spine": "The town eats. It is not a subject anyone raises unprompted."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -3255,7 +3255,7 @@
             "spine": "{settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -4096,7 +4096,7 @@
             "spine": "The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -4171,7 +4171,7 @@
             "spine": "{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -4233,7 +4233,7 @@
             "spine": "{settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -4295,7 +4295,7 @@
             "spine": "{settlement} has a character it would recognise a description of, and it did not choose it."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "elder",
@@ -4362,7 +4362,7 @@
             "spine": "{settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -4437,7 +4437,7 @@
             "spine": "{settlement}'s records carry it plainly and nobody now working here can add to them."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -5250,7 +5250,7 @@
             "spine": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -5325,7 +5325,7 @@
             "spine": "{settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "threshold",
@@ -5380,7 +5380,7 @@
             "spine": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -5433,7 +5433,7 @@
             "spine": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -5508,7 +5508,7 @@
             "spine": "The strain is severe. {settlement} is meeting it by giving up things it would rather keep."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -5577,7 +5577,7 @@
             "spine": "The condition is deepening. The town's response has not caught up with the rate."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -5731,7 +5731,7 @@
             "spine": "{settlement} expects to go on being {settlement}."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -5892,7 +5892,7 @@
             "spine": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -5978,7 +5978,7 @@
             "spine": "{settlement} has no answer to what lives beyond its fields and nobody whose work it would be."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -6064,7 +6064,7 @@
             "spine": "Little is reported at {settlement}, because reporting produces no outcome."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -6150,7 +6150,7 @@
             "spine": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -6236,7 +6236,7 @@
             "spine": "{settlement} keeps no practitioner, no arrangement, and no expectation of either."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "threshold",
@@ -6388,7 +6388,7 @@
             "spine": "{settlement} is a road town that has outgrown its fields, and it is buying the difference."
           },
           "vid": 4,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -6538,7 +6538,7 @@
             "spine": "Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -6625,7 +6625,7 @@
             "spine": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -7100,7 +7100,7 @@
             "spine": "The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -7162,7 +7162,7 @@
             "spine": "The reason {settlement} is the way it is lies further back than anyone here will volunteer."
           },
           "vid": 4,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -7224,7 +7224,7 @@
             "spine": "What is wrong in {settlement} is not hidden. It is simply nobody's job."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -7286,7 +7286,7 @@
             "spine": "{settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -7348,7 +7348,7 @@
             "spine": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -7869,7 +7869,7 @@
             "spine": "The {seat} holds {settlement} on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "street",
@@ -7934,7 +7934,7 @@
             "spine": "{settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -7998,7 +7998,7 @@
             "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -8196,7 +8196,7 @@
             "spine": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -8261,7 +8261,7 @@
             "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
           },
           "vid": 2,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "unfolding",
@@ -8336,7 +8336,7 @@
             "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "threshold",
@@ -8417,7 +8417,7 @@
             "spine": "The {seat} at {settlement} is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -9638,7 +9638,7 @@
             "spine": "{settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         }
       ],
       "schema": "scribe-town-card/4",
@@ -10055,7 +10055,7 @@
             "spine": "The town works, and works for the reasons a town of this kind usually works."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -10130,7 +10130,7 @@
             "spine": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless."
           },
           "vid": 3,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -10192,7 +10192,7 @@
             "spine": "This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it."
           },
           "vid": 1,
-          "writeable": false
+          "writeable": true
         },
         {
           "angle": "counterforce",
