@@ -1969,10 +1969,10 @@ common state.
 1. `[street]` The {seat} at {settlement} is obeyed without much thought. A thing is done because the {seat} said so, and the town would find the question of why a strange one.
 2. `[ledger]` {settlement}'s rolls come back filled and its levies come back paid. The {seat} governs at full strength here, and the clerks have almost nothing to chase.
 3. `[visitor]` A stranger at {settlement} learns who rules inside an hour and never once hears the {seat}'s writ disputed.
-4. `[counterforce]` There is little crime at {settlement}, and the watch is not the reason.
+4. `[counterforce]` An operator finds few doors to lean on at {settlement}, and the watch is not the reason.
 
 **`Approved`**
-1. `[street]` {settlement} thinks well of the {seat} without warmth. What it decides carries in most quarters, and the town does not argue with it first.
+1. `[street]` {settlement} thinks well enough of the {seat} without warmth. What it decides carries in most quarters, and carries there without an argument first.
 2. `[ledger]` The {seat} at {settlement} governs with a modest edge in its favour. Where it asks it is generally given, and the clerks can name the few exceptions.
 3. `[visitor]` There is grumbling at {settlement} and it stays grumbling. Nobody a stranger falls in with suggests the {seat} ought to be somebody else.
 4. `[unfolding]` The {seat}'s standing at {settlement} is good. The margin lets it spend goodwill on decisions the town would otherwise refuse it.
@@ -1981,12 +1981,12 @@ common state.
 1. `[street]` {settlement} accepts the {seat} without approving of it. The town and the hall both know the difference.
 2. `[ledger]` The {seat} holds {settlement} because the town puts up with it. Nothing it asks is refused outright, and nothing it asks arrives quickly.
 3. `[visitor]` Ask at {settlement} who governs and the answer comes with a shrug. The {seat} is a fact of the place and not a loyalty of it.
-4. `[counterforce]` The {seat} at {settlement} has neither the town's backing nor its hostility. It can rule, and a hard decision here would be paid for out of an empty purse.
+4. `[counterforce]` The {seat} at {settlement} has neither the town's backing nor its hostility. It can rule and it cannot spend, and a hard decision here would have to be paid for out of an empty purse.
 5. `[threshold]` The {seat} at {settlement} sits where the town's acceptance has stopped being an asset and has not yet become a liability. A good season would be felt here, and a bad one would be felt harder.
 
 **`Contested`**
 1. `[street]` Acceptance of the {seat} is fraying at {settlement}. Instructions are argued with before they are followed, and increasingly they are argued with instead.
-2. `[ledger]` The {seat}'s writ runs shorter at {settlement} each season. What the rolls show is delay and not defiance, and delay comes to the same figure at collection.
+2. `[ledger]` The {seat}'s writ runs shorter at {settlement} each season. What the rolls show is more delay than defiance, and delay comes to the same figure at collection.
 3. `[unfolding]` {settlement} is still governed by the {seat}, and the governing gets harder. The town's quieter interests find more room as the acceptance weakens.
 4. `[visitor]` A stranger at {settlement} hears two accounts of who really decides before the day is out. Neither of the two is the {seat}'s own account.
 5. `[threshold]` What the {seat} still holds at {settlement} is the part of the town with no reason yet to reconsider. A hard season supplies reasons.
@@ -2004,17 +2004,17 @@ common state.
 
 **`breakdown` dominated by PROSPERITY, adverse**
 1. `[ledger]` The {seat}'s standing at {settlement} is being eaten by the accounts. The town is poorer than it was and has settled on the {seat} as the reason.
-2. `[street]` Nobody at {settlement} argues that the {seat} caused the lean years, and everybody blames it for them.
+2. `[street]` Nobody at {settlement} argues that the {seat} caused the lean years, and nobody refuses to blame it for them.
 3. `[visitor]` A stranger at {settlement} notices that every complaint against the {seat} is a complaint about money.
 
 **`breakdown` dominated by SAFETY, adverse**
 1. `[street]` The {seat} at {settlement} is judged on the streets after dark, and the streets after dark are not safe.
-2. `[ledger]` What the {seat} has lost at {settlement} it has lost to the crime returns. The town does not feel safe, and it has stopped crediting whoever is meant to keep it so.
+2. `[ledger]` What the {seat} has lost at {settlement} it has lost to the crime returns. The town has stopped crediting whoever is meant to keep it safe.
 3. `[unfolding]` Every season {settlement} goes badly policed costs the {seat} a little more standing. The standing it loses is what it would need to fix the policing.
 
 **`breakdown` dominated by DEFENSE, adverse**
 1. `[visitor]` What a stranger hears against the {seat} at {settlement} is not corruption but exposure. The town does not believe it could be held, and holds the {seat} answerable.
-2. `[ledger]` The {seat}'s standing at {settlement} carries the weight of an undefended town. Nothing else pulls against it half as hard.
+2. `[ledger]` The {seat}'s standing at {settlement} carries the weight of an undefended town. Nothing else in the reckoning pulls against it half as hard.
 3. `[street]` {settlement} has one accusation against the {seat}: the {seat} has left the town open. The town brings it against the {seat} whenever anything else goes wrong.
 
 **`breakdown` dominated by FOOD, adverse**
@@ -2051,7 +2051,7 @@ causal clause; the stability string alone does not.
 **PDF PARITY:** parity.
 
 **`stable` matched**
-1. `[street]` The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and the town does business on that expectation.
+1. `[street]` The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and business at {settlement} is done on that expectation.
 2. `[ledger]` Nothing at {settlement} is presently pulling against the {seat}. Petitions go to one place and are answered from one place.
 3. `[visitor]` A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it.
 4. `[threshold]` What is settled at {settlement} is the hall and only the hall. The town's steadiness says who answers and not what the answer is.
@@ -2060,13 +2060,13 @@ causal clause; the stability string alone does not.
 1. `[street]` The hall at {settlement} does not hold steady. {faction} governs, and how long {faction} governs is an open question the town asks out loud.
 2. `[ledger]` Decisions at {settlement} are taken and then have to be taken again. The {seat}'s instructions carry, but they do not stay carried.
 3. `[visitor]` A stranger at {settlement} is told to finish his business quickly and not to count on any arrangement outlasting the season.
-4. `[unfolding]` What {faction} holds at {settlement} it holds without margin. Nothing has toppled, and the town is making its arrangements for when something does.
+4. `[unfolding]` What {faction} holds at {settlement} it holds without margin. Nothing has toppled, and every quarter of the town is making its arrangements in case something does.
 
 **`critical` matched**
 1. `[street]` Authority at {settlement} is at the point of failing. {faction} still holds the hall and holds very little else.
 2. `[ledger]` The {seat} at {settlement} can no longer be relied on to do what it decides. What it instructs and what happens are now different things.
 3. `[unfolding]` {settlement} is being governed hand to mouth. Each decision buys the {seat} the time to make the next one, and nothing further out than that is being planned.
-4. `[visitor]` A stranger arriving at {settlement} asks the first person he meets who is in charge. He is told plainly that nobody is in charge in the way he means it.
+4. `[visitor]` A stranger arriving at {settlement} asks who is in charge. The first person he asks tells him plainly that nobody is, in the way he means it.
 
 **`siege` matched**
 1. `[street]` Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the walls have settled the argument.
@@ -2126,7 +2126,7 @@ life.
 3. `[visitor]` A stranger dealing with {faction} at {settlement} is passed upward exactly once to reach {npc}, and there is nobody in between.
 
 **crowded top rung, low instability**
-1. `[ledger]` The top of {faction} at {settlement} is crowded. {npc} leads by very little, and the names below are close enough that the order could be read either way.
+1. `[ledger]` The top of {faction} at {settlement} is crowded. {npc} leads by very little, and the names immediately below are close enough that the order could be read either way.
 2. `[street]` At {settlement} {faction} has a first among several rather than a head. The town asks which of them it is dealing with today.
 3. `[unfolding]` Nothing at the top of {faction} has changed at {settlement}. The standings sit so close that the order could change without anything else changing.
 
@@ -2138,7 +2138,7 @@ life.
 
 **low instability, long-held order**
 1. `[ledger]` The order inside {faction} at {settlement} is settled rather than contested. The standings sit far enough apart that the rungs read as places and not as positions being fought for.
-2. `[elder]` Nobody has moved on the top rung of {faction} at {settlement} in a long while. The faction's weight in the hall holds steady with it.
+2. `[elder]` Nobody has moved on the top rung of {faction} at {settlement} in a long while. The faction's weight in the hall reflects the steadiness.
 3. `[counterforce]` There are people below {npc} in {faction} at {settlement} with the standing to try, and none of them tries. The settled order is worth more to them than the rung would be.
 
 **shallow ladder (few rungs recorded)**
@@ -2244,8 +2244,8 @@ and never an assertion that the feared thing is happening.
 
 **`autocrat`**
 1. `[ledger]` One person decides at {settlement}, and decides quickly. What comes out of the {seat} arrives whole and can change entirely between one season and the next.
-2. `[street]` The town does not wait long for an answer and does not always like the answer it gets. It has no way of getting a different one.
-3. `[unfolding]` What the {seat} at {settlement} fears is not the town but the people closest to it. Those people are the ones who could replace it.
+2. `[street]` The town does not wait long for an answer and does not always like the answer it gets. It has no procedure for getting a different one.
+3. `[unfolding]` What the {seat} at {settlement} fears is not the town but the people closest to it. One person holds it, and one person can be replaced.
 4. `[visitor]` A stranger at {settlement} needs one audience and gets a decision in it.
 
 **`council`**
@@ -2257,12 +2257,12 @@ and never an assertion that the feared thing is happening.
 **`theocracy`**
 1. `[ledger]` The {seat} at {settlement} governs from a creed. What it decides it decides against doctrine first and circumstance second.
 2. `[street]` The town takes its civic questions to the same place it takes its spiritual ones, and does not treat the two as separate.
-3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed challenges the right to govern here.
+3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed challenges the right to govern here, and everybody involved understands it that way.
 4. `[visitor]` A stranger at {settlement} finds that the hall and the {institution} are the same body keeping different hours.
 
 **`merchant_league`**
 1. `[ledger]` The {seat} at {settlement} is held by the houses with the books. It governs by interest, by leverage, and by what it can afford.
-2. `[street]` The town is run by people who are also its creditors, and the two roles are not kept apart.
+2. `[street]` The town is run by people who are also its creditors, and the two roles are not kept meaningfully apart.
 3. `[unfolding]` What the {seat} at {settlement} fears is not being overthrown but being unable to pay. Its politics are shaped around never reaching that point.
 4. `[counterforce]` The {seat} at {settlement} has not pressed a quarrel it could easily have pressed. The quarrel would cost more than the grievance is worth, and the hall keeps that sum.
 
@@ -2277,7 +2277,7 @@ and never an assertion that the feared thing is happening.
 3. `[unfolding]` What holds the {seat} at {settlement} together is that no part of it can rule alone. The arrangement is stable until one part can.
 
 **`economicBase: extraction`**
-1. `[ledger]` {settlement} lives on what it takes out of the ground. The town's rhythm, its politics and its fear all follow the yield.
+1. `[ledger]` {settlement} lives on what it takes out of the ground. Everything about the town follows the yield: its rhythm, its politics, its fear.
 2. `[street]` The town's whole fear at {settlement} is the day the workings run out. The town talks about it openly and often.
 3. `[counterforce]` When it fights, {settlement} digs in at the chokepoints. It does not campaign, and it holds the two or three places that matter and lets the rest go.
 
@@ -2292,7 +2292,7 @@ and never an assertion that the feared thing is happening.
 3. `[counterforce]` {settlement} fights route wars and folds to embargoes. A closed road presses the town harder than an army does, and its neighbours know it.
 
 **`economicBase: craft`**
-1. `[ledger]` {settlement} makes things and must first get the makings. Everything the town produces depends on what reaches it first.
+1. `[ledger]` {settlement} makes things and must first get the makings. The whole of the town's exposure sits upstream of what it makes.
 2. `[street]` The fear here is not a bad harvest and not a raid. It is the season the {good} stops arriving.
 3. `[counterforce]` {settlement} fights in a limited way and guards its supply above everything else. The town concedes a great deal before it concedes the road its workshops depend on.
 
@@ -2334,11 +2334,11 @@ own entailment and licenses nothing about who runs it.
 **`present: false` (no legitimacy reading)**
 1. `[ledger]` There is no reading of how {settlement} regards its rulers. The question has not been put here in any form the rolls would record.
 2. `[street]` Nobody at {settlement} has had cause to establish whether the town backs the {seat}.
-3. `[visitor]` A stranger at {settlement} cannot tell whether the hall is loved or endured. The hall cannot tell either.
+3. `[visitor]` A stranger at {settlement} cannot tell whether the hall is loved or endured. On the evidence, the hall cannot tell either.
 
 **neutral baseline (nothing pulling either way)**
 1. `[ledger]` Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the walls. The {seat} stands on the bare fact of being the {seat}.
-2. `[street]` The town has no particular opinion of the hall, and the hall does not notice.
+2. `[street]` The town has no particular opinion of the hall, and the hall generally does not notice.
 3. `[threshold]` Nothing is currently deciding how {settlement} regards the {seat}. The first thing that does would decide a great deal.
 
 **capture pressure ADVANCING (weak security, poor prosperity)** *(every variant `dm-only`)*
@@ -2369,7 +2369,7 @@ own entailment and licenses nothing about who runs it.
 **operation role `duty evasion`**
 1. `[ledger]` Goods reach {settlement} around the customs rather than through them. The manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.
 2. `[street]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
-3. `[counterforce]` The customs at {settlement} are properly kept and thoroughly bypassed. The two facts do not contradict each other here.
+3. `[counterforce]` The customs at {settlement} are properly kept and thoroughly bypassed. A stranger expects the two facts to contradict each other, and here they do not.
 
 **operation role `unlicensed revenue`**
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.
@@ -2382,7 +2382,7 @@ own entailment and licenses nothing about who runs it.
 3. `[counterforce]` The books of several houses at {settlement} are perfect, and the perfection is the service being bought.
 
 **operation role `stolen goods market`**
-1. `[ledger]` What is taken at {settlement} is moved back into lawful trade through one house that handles it. Without that house the taking would not be worth doing.
+1. `[ledger]` What is taken at {settlement} is moved back into lawful trade through a clearing house. Without it the taking would not be worth doing.
 2. `[counterforce]` Theft at {settlement} would not pay without somewhere to sell, and the place to sell is the part the watch has never reached.
 3. `[street]` Things taken at {settlement} reappear in the market a season later with nothing wrong about them. The town has stopped asking about the season in between.
 
@@ -2392,7 +2392,7 @@ own entailment and licenses nothing about who runs it.
 3. `[unfolding]` Each year what is asked of the traders at {settlement} rises a little. No single rise is worth the trouble of refusing.
 
 **operation role `criminal revenue stream` (unclassified)**
-1. `[ledger]` There is a criminal concern at {settlement} with local weight, territorial or economic, and no clearer description of it than that.
+1. `[ledger]` There is criminal business at {settlement} with local weight, territorial or economic, and no clearer description of it than that.
 2. `[street]` There is somebody at {settlement} who does well out of arrangements the town does not ask about. The doing well is the only part anybody sees.
 3. `[visitor]` A stranger at {settlement} is told there is money in the town that does not come from the market. He is told no more than that.
 
@@ -2446,7 +2446,7 @@ cell in this shape.
 3. `[counterforce]` There are interests at {settlement} outside the governing combination with real weight, and they do not move. Outbidding a settled majority costs more than any single question is worth.
 
 **glue `concession` (seats and revenue traded)**
-1. `[ledger]` What holds the combination at {settlement} together is a trade: seats and revenue for a working majority. The trade belongs to the seats and not to the people, and a better offer takes it.
+1. `[ledger]` What holds the combination at {settlement} together is a trade: seats and revenue for a working majority. The trade belongs to the seats and not to the people, and anybody who arrives with more can outbid it.
 2. `[street]` The arrangement in the hall at {settlement} is a business one and is treated as one by everybody in it.
 3. `[unfolding]` The majority at {settlement} survives every leader it has and would not survive a better offer. There is no secret about which risk it is running.
 
@@ -2457,8 +2457,8 @@ cell in this shape.
 
 **glue `doctrine` (a shared creed)**
 1. `[ledger]` The seats that hold together at {settlement} hold together on a shared creed. It is the most durable binding in the hall and the least negotiable.
-2. `[street]` The houses that agree at {settlement} agree about something larger than the town. Nothing smaller divides them.
-3. `[counterforce]` The combination at {settlement} has been offered better terms than it holds and declined them. A better offer does not move it.
+2. `[street]` The houses that agree at {settlement} agree about something larger than the town. They are very hard to divide over anything smaller.
+3. `[counterforce]` The combination at {settlement} has been offered better terms than it holds and declined them. Coin does not outbid belief.
 
 **glue `threat` (a common danger at the walls)**
 1. `[ledger]` The houses that quarrel have closed ranks at {settlement} because of what is at the walls. The combination is real, it works, and it lasts as long as the danger does.
@@ -2482,8 +2482,8 @@ cell in this shape.
 
 **end `doctrine`**
 1. `[ledger]` The combination at {settlement} is organized around a belief and spends office to serve it. Its rivals keep expecting it to spend less.
-2. `[street]` The combination at {settlement} does not trade the thing it is about. Its rivals keep discovering that after they have made the offer.
-3. `[counterforce]` There are seats the combination at {settlement} could take and does not take. Taking them would mean conceding the point the combination exists to hold.
+2. `[street]` The combination at {settlement} refuses to trade the thing it is about. Its rivals keep discovering that after they have made the offer.
+3. `[counterforce]` There are seats the combination at {settlement} could take and refuses to. Taking them would mean conceding the point the combination exists to hold.
 
 **end `survival`**
 1. `[ledger]` The combination at {settlement} has one purpose, and it is getting the town through. Anything that does not bear on it is being put off, and openly.
@@ -2498,7 +2498,7 @@ cell in this shape.
 **receipt `formed`**
 1. `[ledger]` Houses at {settlement} that had no arrangement now have one, and the hall's arithmetic changed the day they announced it.
 2. `[street]` Two interests at {settlement} started voting together and have not stopped, and the town worked out what that meant before the hall admitted it.
-3. `[visitor]` A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one. Nobody is willing to explain when that started.
+3. `[visitor]` A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one. He finds nobody willing to explain when that started.
 
 **receipt `realigned`**
 1. `[ledger]` The combination at {settlement} is not the combination it was. A seat left and another took its place, and what the majority wants moved with it.
@@ -2516,12 +2516,12 @@ cell in this shape.
 3. `[unfolding · dm-only]` What came out at {settlement} is still working through the hall. The combination is gone, the people who were in it are not, and the arrangements they still hold are the next problem.
 
 **receipt `deferred` (the alignment exists and has not happened)**
-1. `[threshold]` The alignment is there at {settlement} and the moment has not come. Two houses need each other, and the same thing keeps them apart every time the question is raised.
+1. `[threshold]` The alignment is there at {settlement} and the moment has not come. Two houses need each other, and something keeps them apart every time the question is raised.
 2. `[counterforce]` {settlement} already holds three combinations, and a fourth is waiting rather than refused. The houses concerned are aligned in everything but form.
 3. `[ledger]` {faction} outbid the combination for {counterpart}'s seat at {settlement}, and the alignment that would have formed did not.
 
 **hostile leader tie HARD-BLOCKS an otherwise natural alignment**
-1. `[counterforce]` Two houses at {settlement} want the same things and do not sit together. What is between the people at the head of them is bitter enough that the interests do not get a hearing.
+1. `[counterforce]` Two houses at {settlement} want the same things and refuse to sit together. What is between the people at the head of them is bitter enough that the interests do not get a hearing.
 2. `[street]` The obvious alliance at {settlement} does not happen, and the town knows exactly whose quarrel is preventing it.
 3. `[ledger]` The interests of {faction} and {counterpart} at {settlement} coincide almost exactly, and the two do not sit together. The block is personal, and it holds harder than any policy would.
 
