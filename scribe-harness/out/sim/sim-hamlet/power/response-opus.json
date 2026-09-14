@@ -1,0 +1,68 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "The Free Elder Council sits as it has always sat, and almost nothing it asks of the households arrives.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A traveller who brings a question to the Free Elder Council is sent away with it, and has it settled the same afternoon by somebody here who holds no title.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "Warmholz is governed by the Free Elder Council, and every matter of the place runs through it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "spine": "Nothing here is policed and nothing here is spare, and a place in that state gets cheaper to buy into, not dearer. Nobody has bought it yet… it would be worth knowing who would come for the open mine first.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "Business before the Free Elder Council is settled slowly and by agreement, and once settled it is not readily opened again.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "People passing through who name the Free Elder Council anything else are put right at once, and politely.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "spine": "The people of the place are no longer sure the Free Elder Council is theirs, and the Council governs as though it were not sure either.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "The hold the Free Elder Council had here has gone to the households, and no rival was needed to take it.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
