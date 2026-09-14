@@ -1,0 +1,68 @@
+{
+ "units": [
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "Legitimacy Crisis",
+   "vid": 2,
+   "spine": "Governing here is the elders coming to a common mind, and what the Free Elder Council asks of the hamlet is heard and not done.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-1",
+   "poolKey": "governanceFractured true",
+   "vid": 2,
+   "spine": "A pedlar says a question put to the Free Elder Council comes back unanswered, and the same question put to somebody here with no title at all is settled by evening.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-2",
+   "poolKey": "no token matched: unclassified (the plain-description floor)",
+   "vid": 1,
+   "spine": "The Free Elder Council governs at Warmholz, and anything that is not one household's own business is put to it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-6",
+   "poolKey": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "spine": "Nothing here has been bought yet, and nothing here would cost much to buy: safety is the sorest thing the people hold against their governing, and prosperity the next. Whoever offered to pay for the safety here would be owed something for it, and it would be worth knowing whether anyone has offered.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "council",
+   "vid": 1,
+   "spine": "A decision here is talked flat before it is taken, and what the Free Elder Council has once settled it does not readily unsettle.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-5",
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "vid": 2,
+   "spine": "A drover says the body here is called the Free Elder Council and nothing else, and a stranger who tries another name for it is put right before the sentence is out.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "riskLabel: Contested",
+   "vid": 2,
+   "spine": "Every household here has seen a matter put to the Free Elder Council and come back the way it went in, and the hamlet takes it that the Council is not where anything gets decided.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-POW-4",
+   "poolKey": "legitimacyHold: public rejection is breaking the hold",
+   "vid": 3,
+   "spine": "The common grazing is shared out among the households by agreement, and the Free Elder Council has lost its say in that to the households themselves rather than to any rival.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
