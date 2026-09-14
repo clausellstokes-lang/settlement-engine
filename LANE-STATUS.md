@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 13:03:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 13:09:20 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -113,13 +113,16 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_0c7e8fcf-e4a** (mtime 09-14 13:02): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
-    - `a64dc9d07` ? · IN FLIGHT · transcript 09-14 13:03 448 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a0141863e` ? · IN FLIGHT · transcript 09-14 13:02 438 KB · 5 tool calls · last: Bash sed -n '425,655p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
-    - `af7353a3e` ? · IN FLIGHT · transcript 09-14 13:03 424 KB · 5 tool calls · last: Bash cat -n "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/
-    - `a6e0f0bf8` ? · IN FLIGHT · transcript 09-14 13:03 434 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a2cfd1926` ? · IN FLIGHT · transcript 09-14 13:03 440 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a5bdfc51a` ? · IN FLIGHT · transcript 09-14 13:03 446 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+- **wf_0c7e8fcf-e4a** (mtime 09-14 13:09): agent calls 9 (9 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_0c7e8fcf-e4a/`
+    - `a64dc9d07` ? · IN FLIGHT · transcript 09-14 13:09 600 KB · 9 tool calls · files: response-opus.json · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a0141863e` ? · IN FLIGHT · transcript 09-14 13:09 615 KB · 6 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `af7353a3e` ? · DONE · transcript 09-14 13:06 521 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Two of the turn's stance tags, `threshold` (PRESSURED) and `counterforce` (DS-ECO-6), are not defined anywhere in the brief, whic
+    - `a6e0f0bf8` ? · IN FLIGHT · transcript 09-14 13:09 564 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a2cfd1926` ? · DONE · transcript 09-14 13:09 619 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["The 'second sentence must rest on one of the FIELDS and name it in its own word' instruction is ambiguous about whether the field
+    - `a5bdfc51a` ? · DONE · transcript 09-14 13:09 633 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 17, "notes": ["Every pool's listed FIELDS value was null (LIVE or FROZEN alike), so there was never a legitimate value to hang a second sentenc
+    - `a8d790c8b` ? · IN FLIGHT · transcript 09-14 13:09 476 KB · 5 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
+    - `a2f498700` ? · IN FLIGHT · transcript 09-14 13:09 424 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a73c14178` ? · IN FLIGHT · transcript 09-14 13:09 127 KB · 0 tool calls
 - **wf_eca79448-a67** (mtime 09-14 11:54): agent calls 12 (12 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_eca79448-a67/`
     - `a5035890d` MARKER readiness STRONG · DONE · transcript 09-14 11:42 897 KB · 50 tool calls · files: card-mech.txt, "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
     - `a2f99685d` MARKER readiness ADEQUATE · DONE · transcript 09-14 11:38 717 KB · 38 tool calls · files: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-adequate/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
@@ -169,4 +172,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 3.52 3.58 3.43
+load: 1.86 2.45 2.94
