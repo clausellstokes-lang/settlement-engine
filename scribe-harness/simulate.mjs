@@ -9,7 +9,7 @@
  *   node simulate.mjs tier1 --seed <seed> --tab <tab> --response <units.json>
  *       → runs tier 0, then writes the SECOND READER'S prompt for its survivors
  *         (tier1.md, tier1-schema.json) so a seat can answer it as the checklist model.
- *   node simulate.mjs judge --seed <seed> --tab <tab> --response <units.json> [--tier1 <answers.json>]
+ *   node simulate.mjs judge --seed <seed> --tab <tab> --response <units.json> [--tier1 <answers.json>] [--tag <seat>]
  *       → parses the response under SCRIBE_OUTPUT_SCHEMA's own parser, runs the ONE judge
  *         (`judgeUnits` + the dock's `refuteUnit`), applies the second reader's sheet where one is
  *         given (`applyTier1`), runs `refuteTab` (the page arms), prints a verdict line per unit,
@@ -38,6 +38,8 @@ const mode = String(args._[0] || 'build');
 const seed = String(args.seed || 'render-town');
 const tab = String(args.tab || 'defense');
 const dir = resolve(`out/sim/${seed}/${tab}`);
+// --tag <seat>: per-seat output names, so two seats judged concurrently in one cell never overwrite each other.
+const tag = typeof args.tag === 'string' && args.tag ? `-${args.tag}` : '';
 mkdirSync(dir, { recursive: true });
 
 const settlement = generateSettlementPipeline(
@@ -69,11 +71,11 @@ if (mode === 'build') {
   }
   const tier0 = judgeAll(parsed.units, built.card);
   const checklist = buildTier1Checklist(tier0.kept, built.card);
-  writeFileSync(`${dir}/tier1.md`, checklist);
+  writeFileSync(`${dir}/tier1${tag}.md`, checklist);
   writeFileSync(`${dir}/tier1-schema.json`, JSON.stringify(TIER1_ANSWER_SCHEMA, null, 1));
   console.log(`tier 0 kept ${tier0.kept.length} of ${parsed.units.length} units and dropped ${tier0.dropped}`);
   console.log(`checklist ${checklist.length} chars · ~${Math.round(checklist.length / 4)} tokens over ${(checklist.match(/^\d+\. \(/gm) || []).length} lines`);
-  console.log(`wrote ${dir}/{tier1.md,tier1-schema.json}`);
+  console.log(`wrote ${dir}/{tier1${tag}.md,tier1-schema.json}`);
 } else if (mode === 'judge') {
   const raw = readFileSync(resolve(String(args.response)), 'utf8');
   const parsed = parseScribeUnits(raw);
@@ -101,9 +103,9 @@ if (mode === 'build') {
   const unknown = parsed.units.filter((u) => !built.card.pools.some((p) => p.poolKey === u.poolKey)).map((u) => u.poolKey);
   console.log(`\nverdicts ${JSON.stringify(tally)} · kept ${judged.kept.length} · dropped ${judged.dropped} (tier 1 took ${judged.tier1Dropped ?? 0}) · pools on card ${built.card.pools.length} · units returned ${parsed.units.length} · missing ${JSON.stringify(missing)} · unknown ${JSON.stringify(unknown)}`);
   console.log(`page arms: ${JSON.stringify(judged.page).slice(0, 600)}`);
-  writeFileSync(`${dir}/judged.json`, JSON.stringify({
+  writeFileSync(`${dir}/judged${tag}.json`, JSON.stringify({
     verdicts: judged.verdicts, kept: judged.kept, dropped: judged.dropped, page: judged.page, missing, unknown,
   }, null, 1));
-  writeFileSync(`${dir}/page.md`, judged.rows.map((r) => `[${r.verdict?.verdict ?? '?'}] ${[r.unit.spine, ...r.unit.faces].join(' ')}`).join('\n\n'));
-  console.log(`wrote ${dir}/judged.json and page.md`);
+  writeFileSync(`${dir}/page${tag}.md`, judged.rows.map((r) => `[${r.verdict?.verdict ?? '?'}] ${[r.unit.spine, ...r.unit.faces].join(' ')}`).join('\n\n'));
+  console.log(`wrote ${dir}/judged${tag}.json and page${tag}.md`);
 }

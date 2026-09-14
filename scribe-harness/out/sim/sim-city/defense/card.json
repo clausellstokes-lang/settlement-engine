@@ -1,0 +1,2893 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 471,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-DEF-3",
+   "desk": "defense",
+   "mount": "defense.publicOrder",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "desk": "defense",
+   "mount": "defense.threatAssessment",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "desk": "defense",
+   "mount": "defense.armedForces",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-1",
+   "desk": "defense",
+   "mount": "defense.postureHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "desk": "defense",
+   "mount": "defense.militaryStatus",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "desk": "defense",
+   "mount": "defense.wallRationale",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "desk": "defense",
+   "mount": "defense.criminalStructure",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "desk": "defense",
+   "mount": "defense.supportingCapabilities",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Rundgate · city · germanic · threat frontier · route road · terrain river · seed sim-city"
+  },
+  {
+   "kind": "badge",
+   "label": "readiness",
+   "section": "posture",
+   "text": "Well-Defended"
+  },
+  {
+   "kind": "machine",
+   "label": "guardEffectivenessDesc",
+   "section": "posture",
+   "text": "The garrison and city watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes. A court exists, though the prison system is limited. Walls control entry points and give the guard a chokehold on smuggling routes."
+  },
+  {
+   "block": "DS-DEF-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.postureHeader",
+   "pool": "readiness STRONG",
+   "section": "posture",
+   "text": "Nothing presses Rundgate at present, and the absence is not luck: a town this well set is not worth the price of trying.",
+   "vid": 3
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 6,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Beasts & Monsters: frontier, credible deterrence",
+   "section": "threat",
+   "text": "At the tavern the talk is of who stands the nights, and the country itself does not come up.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 1,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Invasion & War: walls AND professional garrison",
+   "section": "threat",
+   "text": "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time, and yet a clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 4,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Internal Security: court without detention",
+   "section": "threat",
+   "text": "At the market a stallholder says a short weight goes before a magistrate and comes back as a sum. The scales it was weighed on stay on his stall.",
+   "vid": 0
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 10,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Economic Survival: STRONG",
+   "section": "threat",
+   "text": "A local priest holds that the town keeps its word to the dead before it keeps its word to the living.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 3,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Disasters & Famine: granary AND parish care only",
+   "section": "threat",
+   "text": "At the tavern they say strangers walk up to look at the store, and nobody here does.",
+   "vid": 2
+  },
+  {
+   "kind": "row",
+   "label": "Beasts & Monsters",
+   "section": "threat",
+   "text": "Beasts & Monsters — STRONG"
+  },
+  {
+   "kind": "machine",
+   "label": "Beasts & Monsters.assess",
+   "section": "threat",
+   "text": "Active frontier. Walls and garrison provide credible deterrence: most creature threats will not press a defended perimeter. Charter hall handles anything above the garrison usual remit. Adequate for the threat level."
+  },
+  {
+   "kind": "machine",
+   "label": "Beasts & Monsters.fundingNote",
+   "section": "threat",
+   "text": "Upkeep underfunded: patrol provisioning at 98%"
+  },
+  {
+   "kind": "row",
+   "label": "Invasion & War",
+   "section": "threat",
+   "text": "Invasion & War — STRONG"
+  },
+  {
+   "kind": "machine",
+   "label": "Invasion & War.assess",
+   "section": "threat",
+   "text": "Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles."
+  },
+  {
+   "kind": "machine",
+   "label": "Invasion & War.fundingNote",
+   "section": "threat",
+   "text": "Upkeep underfunded: garrison pay at 98%"
+  },
+  {
+   "kind": "row",
+   "label": "Internal Security",
+   "section": "threat",
+   "text": "Internal Security — ADEQUATE"
+  },
+  {
+   "kind": "machine",
+   "label": "Internal Security.assess",
+   "section": "threat",
+   "text": "Internal security: Moderate. Courts prosecute but limited detention."
+  },
+  {
+   "kind": "machine",
+   "label": "Internal Security.fundingNote",
+   "section": "threat",
+   "text": "Upkeep underfunded: watch and court funding at 98%"
+  },
+  {
+   "kind": "row",
+   "label": "Economic Survival",
+   "section": "threat",
+   "text": "Economic Survival — STRONG"
+  },
+  {
+   "kind": "machine",
+   "label": "Economic Survival.assess",
+   "section": "threat",
+   "text": "Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement."
+  },
+  {
+   "kind": "machine",
+   "label": "Economic Survival.fundingNote",
+   "section": "threat",
+   "text": "Upkeep underfunded: crisis logistics at 97%"
+  },
+  {
+   "kind": "row",
+   "label": "Disasters & Famine",
+   "section": "threat",
+   "text": "Disasters & Famine — STRONG"
+  },
+  {
+   "kind": "machine",
+   "label": "Disasters & Famine.assess",
+   "section": "threat",
+   "text": "Granary provides food buffer. The community can absorb a bad harvest without immediate hardship. Parish clergy provide basic wound care: better than nothing, worse than a hospital."
+  },
+  {
+   "kind": "machine",
+   "label": "Disasters & Famine.fundingNote",
+   "section": "threat",
+   "text": "Upkeep underfunded: relief funding at 97%"
+  },
+  {
+   "kind": "badge",
+   "label": "safetyLabel",
+   "section": "order",
+   "text": "Moderate"
+  },
+  {
+   "kind": "machine",
+   "label": "safetyDesc",
+   "section": "order",
+   "text": "A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls contain the problem somewhat: crime is concentrated inside rather than spilling into the surrounding territory."
+  },
+  {
+   "block": "DS-DEF-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.publicOrder",
+   "pool": "Moderate",
+   "section": "order",
+   "text": "Rundgate runs on a working balance: the law is present, crime exists, and neither has the run of the town.",
+   "vid": 0
+  },
+  {
+   "block": "DS-DEF-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.publicOrder",
+   "pool": "First-Survey qualification (the reading is a first look)",
+   "section": "order",
+   "text": "The safety reading for Rundgate is an initial one. It is honest about what has been seen and says nothing about what has not.",
+   "vid": 1
+  },
+  {
+   "kind": "badge",
+   "label": "criminalStructure",
+   "section": "order",
+   "text": "Organized Syndicate"
+  },
+  {
+   "kind": "machine",
+   "label": "criminalStructure.note",
+   "section": "order",
+   "text": "A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials."
+  },
+  {
+   "block": "DS-DEF-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.criminalStructure",
+   "pool": "structure organized",
+   "section": "order",
+   "text": "A stranger at Rundgate is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.criminalStructure",
+   "pool": "capture adversarial",
+   "section": "order",
+   "text": "The hall at Rundgate moves against the operators and the operators move back, and the town is where the two of them meet.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "walls PRESENT",
+   "section": "forces",
+   "text": "Rundgate controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "garrison PRESENT",
+   "section": "forces",
+   "text": "Rundgate keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.",
+   "vid": 0
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "mercenary / contracted forces PRESENT",
+   "section": "forces",
+   "text": "The town pays for some of its soldiers and knows which ones, and treats them accordingly.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "charter hall PRESENT (specialist monster response)",
+   "section": "forces",
+   "text": "A stranger at Rundgate finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "arcane defense PRESENT",
+   "section": "forces",
+   "text": "A stranger at Rundgate is measured at the gate in a way he cannot quite identify, and is not told about it.",
+   "vid": 1
+  },
+  {
+   "kind": "roster",
+   "label": "walls",
+   "section": "forces",
+   "text": "fortifications: City walls and gates, Citadel"
+  },
+  {
+   "block": "DS-DEF-11",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.wallRationale",
+   "pool": "WALLED-STRAINED",
+   "section": "forces",
+   "text": "Rundgate's city walls and gates stands better than the watch that should man it; stone keeps itself, and wages do not.",
+   "vid": 0
+  },
+  {
+   "kind": "roster",
+   "label": "standing",
+   "section": "forces",
+   "text": "standing forces: Professional city watch, Garrison"
+  },
+  {
+   "kind": "roster",
+   "label": "mercenary",
+   "section": "forces",
+   "text": "contracted: Mercenary quarter"
+  },
+  {
+   "kind": "roster",
+   "label": "charter",
+   "section": "forces",
+   "text": "charter: Multiple adventurers' guilds"
+  },
+  {
+   "kind": "roster",
+   "label": "magicDef",
+   "section": "forces",
+   "text": "arcane: Mages' guild, Alchemist quarter"
+  },
+  {
+   "block": "DS-DEF-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.supportingCapabilities",
+   "pool": "Logistics & Supply: Granary with road supply",
+   "section": "supporting",
+   "text": "Rundgate keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.",
+   "vid": 0
+  },
+  {
+   "kind": "machine",
+   "label": "Economic Backing",
+   "section": "supporting",
+   "text": "Economic Backing: Well-funded — Full pay, maintained equipment, reserve capacity."
+  },
+  {
+   "kind": "machine",
+   "label": "Magical Capability",
+   "section": "supporting",
+   "text": "Magical Capability: Arcane support — Mages' guild, Alchemist quarter. Detection, wards, counterspell."
+  },
+  {
+   "kind": "machine",
+   "label": "Legal Infrastructure",
+   "section": "supporting",
+   "text": "Legal Infrastructure: Court only — Courts without detention. Fines and exile only."
+  },
+  {
+   "kind": "machine",
+   "label": "Medical Readiness",
+   "section": "supporting",
+   "text": "Medical Readiness: Clergy care — Parish care. Basic wound and disease management."
+  },
+  {
+   "kind": "machine",
+   "label": "Logistics & Supply",
+   "section": "supporting",
+   "text": "Logistics & Supply: Granary present — Granary with road supply. Cut the roads, cut the supply."
+  }
+ ],
+ "pools": [
+  {
+   "angle": "counterforce",
+   "authoredIndex": 3,
+   "blockId": "DS-DEF-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "defenseProfile.readiness.score",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 66,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.postureHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "readiness STRONG",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "readiness STRONG",
+   "section": "posture",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "READINESS_ROW_POOL",
+    "rateBp": 2513,
+    "reads": [
+     "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Nothing presses Rundgate at present, and the absence is not luck: a town this well set is not worth the price of trying.",
+    "spine": "Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 6,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a carter at one of the taverns"
+      },
+      {
+       "n": "sg",
+       "role": "a man who drinks where the carters drink"
+      },
+      {
+       "n": "sg",
+       "role": "a potboy of the district"
+      },
+      {
+       "n": "sg",
+       "role": "a woman at the long table"
+      },
+      {
+       "n": "sg",
+       "role": "an innkeeper"
+      },
+      {
+       "n": "pl",
+       "role": "the drinkers of the district"
+      }
+     ],
+     "source": "tavern"
+    }
+   ],
+   "faceSources": [
+    "tavern"
+   ],
+   "fields": [
+    {
+     "clock": "CONFIG",
+     "field": "config.monsterThreat",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "frontier",
+     "writers": 0
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 6,
+     "index": 1,
+     "key": "Beasts & Monsters: frontier, credible deterrence",
+     "role": "spine",
+     "source": "tavern",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Beasts & Monsters: frontier, credible deterrence",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "BEASTS_ROW_POOL",
+    "rateBp": 1563,
+    "reads": [
+     "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "stranger",
+     "gate",
+     "register",
+     "hall",
+     "watch",
+     "tavern",
+     "garrison",
+     "guild",
+     "market",
+     "court",
+     "elders"
+    ],
+    "faces": [
+     "A travelling trader says nobody here asked him what he had seen on the road, and he had an answer ready.",
+     "Those who hold the way through drop the bar at dusk, and the hour is never argued over.",
+     "A local priest prays for the men on the line in the same breath as the roads.",
+     "The hall holds that nothing about the nights has come to it as a complaint.",
+     "The watch says the complaints are made to it at the way through and go no further.",
+     "At the tavern the talk is of who stands the nights, and the country itself does not come up.",
+     "The garrison says nobody comes out of the town to watch a drill.",
+     "A guild member reckons the trades pay the toll at the way through. The line it keeps is counted as everyone's.",
+     "At the market they say the stalls go up whatever the country is doing.",
+     "The court says a dispute over the toll is settled on the day it is brought, and the country brings it none.",
+     "The elders say the young stand the nights and the old say how they are stood."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [
+     null,
+     null,
+     {
+      "id": 5,
+      "kind": "aside"
+     },
+     {
+      "id": 5,
+      "kind": "aside"
+     },
+     {
+      "id": 2,
+      "kind": "disagree"
+     },
+     {
+      "id": 2,
+      "kind": "disagree"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "rendered": "At the tavern the talk is of who stands the nights, and the country itself does not come up.",
+    "spine": "Everyone here knows what is in the country and nobody here talks about it. The town calls that the arrangement working."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 1,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a gatekeeper"
+      },
+      {
+       "n": "sg",
+       "role": "a man on one of the gates"
+      },
+      {
+       "n": "sg",
+       "role": "a serjeant on the wall"
+      },
+      {
+       "n": "pl",
+       "role": "the men who hold the ways in"
+      },
+      {
+       "n": "sg",
+       "role": "whoever keeps the toll book"
+      }
+     ],
+     "source": "gate"
+    },
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a clerk in the hall"
+      },
+      {
+       "n": "sg",
+       "role": "a secretary of the city's offices"
+      },
+      {
+       "n": "sg",
+       "role": "a woman who keeps the hall books"
+      },
+      {
+       "n": "sg",
+       "role": "one of the aldermen"
+      },
+      {
+       "n": "sg",
+       "role": "the mayor"
+      },
+      {
+       "n": "pl",
+       "role": "the under-clerks of the hall"
+      }
+     ],
+     "source": "hall"
+    }
+   ],
+   "faceSources": [
+    "gate",
+    "hall"
+   ],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [
+    "disagree"
+   ],
+   "pieces": [
+    {
+     "face": 1,
+     "index": 1,
+     "key": "Invasion & War: walls AND professional garrison",
+     "pairKind": "disagree",
+     "pairOf": 2,
+     "role": "spine",
+     "source": "gate",
+     "vid": 1
+    },
+    {
+     "face": 2,
+     "index": 1,
+     "key": "Invasion & War: walls AND professional garrison",
+     "role": "spine",
+     "source": "hall",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Invasion & War: walls AND professional garrison",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "INVASION_ROW_POOL",
+    "rateBp": 4036,
+    "reads": [
+     "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "gate",
+     "hall",
+     "court",
+     "stranger",
+     "tavern"
+    ],
+    "faces": [
+     "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time.",
+     "A clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
+     "The court holds that anyone who paid the toll may argue it there, a stranger as much as a carter.",
+     "A travelling trader says his pack was opened at the gate and nothing taken from it but the toll.",
+     "At the tavern they say the town has never been asked whether it wants soldiers, only what they cost."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [
+     null,
+     {
+      "id": 1,
+      "kind": "disagree"
+     },
+     {
+      "id": 1,
+      "kind": "disagree"
+     },
+     null,
+     null,
+     null
+    ],
+    "rendered": "The men on the gate say a stranger pays the gate, and the gate settles with the hall in its own time, and yet a clerk in the hall says a stranger who pays at the gate has paid the town, whatever the men at the gate tell him.",
+    "spine": "A traveller is stopped at the gate and counted before he is let through. What he is let into is a place that pays soldiers of its own."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 4,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a buyer who came after dark"
+      },
+      {
+       "n": "sg",
+       "role": "a clerk of one of the markets"
+      },
+      {
+       "n": "sg",
+       "role": "a clerk of the fair"
+      },
+      {
+       "n": "sg",
+       "role": "a market clerk"
+      },
+      {
+       "n": "sg",
+       "role": "a porter in the square"
+      },
+      {
+       "n": "sg",
+       "role": "a seller who does not give a name"
+      },
+      {
+       "n": "sg",
+       "role": "a stallholder"
+      },
+      {
+       "n": "sg",
+       "role": "a trader come in for the fair"
+      },
+      {
+       "n": "sg",
+       "role": "the fair clerk"
+      },
+      {
+       "n": "pl",
+       "role": "the people who deal there"
+      },
+      {
+       "n": "pl",
+       "role": "the stallholders"
+      },
+      {
+       "n": "pl",
+       "role": "the traders at the fair"
+      },
+      {
+       "n": "pl",
+       "role": "the traders at the fairs"
+      }
+     ],
+     "source": "market"
+    }
+   ],
+   "faceSources": [
+    "market"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasCourtSystem",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": true,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasPrison",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 4,
+     "index": 0,
+     "key": "Internal Security: court without detention",
+     "role": "spine",
+     "source": "market",
+     "vid": 0
+    }
+   ],
+   "poolKey": "Internal Security: court without detention",
+   "section": "threat",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "internalRowPoolKey",
+    "rateBp": 1042,
+    "reads": [
+     "court",
+     "prison"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "watch",
+     "court",
+     "hall",
+     "market",
+     "register",
+     "guild",
+     "tavern",
+     "stranger",
+     "gate",
+     "garrison"
+    ],
+    "faces": [
+     "The watch says what it comes across after dark is dealt with after dark, there being nowhere to leave a man until morning.",
+     "The court says it hears in the daylight what the watch settled in the dark, and nobody asks it first.",
+     "A clerk in the hall reckons the purse does not run to a room and never has. He does not say who asked for one.",
+     "At the market a stallholder says a short weight goes before a magistrate and comes back as a sum. The scales it was weighed on stay on his stall.",
+     "A local priest holds that the parish has a place for a man once he is dead and the town has none for him while he is alive.",
+     "A guild member says a sum is paid out of a man's takings and forgotten. The mark taken off his work is not.",
+     "At the tavern they say a man with a house here pays and stays. A man without one goes, and the table loses him.",
+     "A travelling trader says there is nothing here to take from a man who owns nothing in the town. The town has only the one thing left to do with him.",
+     "At the gate they say they are given a man and a direction and no reason for either.",
+     "A soldier says what comes at the town is the garrison's business and the people walked out of it are not."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [
+     null,
+     {
+      "id": 1,
+      "kind": "disagree"
+     },
+     {
+      "id": 1,
+      "kind": "disagree"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "rendered": "At the market a stallholder says a short weight goes before a magistrate and comes back as a sum. The scales it was weighed on stay on his stall.",
+    "spine": "{settlement} keeps a court and no room to hold anybody in. What the law here can take from a man is his money or his place in the town."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 10,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a canon"
+      },
+      {
+       "n": "sg",
+       "role": "a cathedral clerk"
+      },
+      {
+       "n": "sg",
+       "role": "a parish warden"
+      },
+      {
+       "n": "sg",
+       "role": "a priest of one of the parishes"
+      },
+      {
+       "n": "sg",
+       "role": "one of the congregation"
+      },
+      {
+       "n": "sg",
+       "role": "one of the vergers"
+      },
+      {
+       "n": "pl",
+       "role": "the cathedral chapter"
+      },
+      {
+       "n": "sg",
+       "role": "the high priest"
+      },
+      {
+       "n": "pl",
+       "role": "the parish clerks"
+      }
+     ],
+     "source": "register"
+    }
+   ],
+   "faceSources": [
+    "register"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "defenseProfile.scores.economic",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 73,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 10,
+     "index": 1,
+     "key": "Economic Survival: STRONG",
+     "role": "spine",
+     "source": "register",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Economic Survival: STRONG",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "ECONOMIC_ROW_POOL",
+    "rateBp": 4388,
+    "reads": [
+     "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "hall",
+     "guild",
+     "archiver",
+     "watch",
+     "gate",
+     "stranger",
+     "tavern",
+     "garrison",
+     "market",
+     "register"
+    ],
+    "faces": [
+     "The hall says it asks the trades for no more than the trades can carry.",
+     "The guilds say the carrying is theirs and the asking is not.",
+     "The guilds' account is the likelier, the hall having a purse to defend and the guilds only a bill.",
+     "The watch holds that the rounds are kept by people who are owed for keeping them.",
+     "At the gate they say a cart bound for the grain store is not kept waiting, whatever else is.",
+     "A stranger who sits at the tavern hears the grain store praised and the wage complained of, by the same people.",
+     "At the tavern they say the watch is a trade that drinks on what it is owed.",
+     "The soldiers hold that a town which can be fed through a crisis and does not meet their wage in full has decided something. It has not said what.",
+     "At the market they say the stallholders settle what the hall is owed before they settle anything of their own.",
+     "A local priest holds that the town keeps its word to the dead before it keeps its word to the living."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [
+     null,
+     {
+      "id": 2,
+      "kind": "disagree"
+     },
+     {
+      "id": 2,
+      "kind": "disagree"
+     },
+     {
+      "id": 2,
+      "kind": "weigh"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "rendered": "A local priest holds that the town keeps its word to the dead before it keeps its word to the living.",
+    "spine": "Everyone in the town has seen the store kept stocked, and takes it that a crisis would find the place ready."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 3,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a carter at one of the taverns"
+      },
+      {
+       "n": "sg",
+       "role": "a man who drinks where the carters drink"
+      },
+      {
+       "n": "sg",
+       "role": "a potboy of the district"
+      },
+      {
+       "n": "sg",
+       "role": "a woman at the long table"
+      },
+      {
+       "n": "sg",
+       "role": "an innkeeper"
+      },
+      {
+       "n": "pl",
+       "role": "the drinkers of the district"
+      }
+     ],
+     "source": "tavern"
+    }
+   ],
+   "faceSources": [
+    "tavern"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasChurch",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": true,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasGranary",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": true,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasHospital",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 3,
+     "index": 2,
+     "key": "Disasters & Famine: granary AND parish care only",
+     "role": "spine",
+     "source": "tavern",
+     "vid": 2
+    }
+   ],
+   "poolKey": "Disasters & Famine: granary AND parish care only",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "DISASTER_ROW_POOL",
+    "rateBp": 1419,
+    "reads": [
+     "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "register",
+     "market",
+     "tavern",
+     "watch",
+     "guild",
+     "court"
+    ],
+    "faces": [
+     "A local priest says a stranger asks for a house and is given a person, and nobody born here asks for the house.",
+     "Grain is hard to keep here, those who sell at the market say, for anybody without a door of their own in the town.",
+     "At the tavern they say strangers walk up to look at the store, and nobody here does.",
+     "Strangers ask the watch where the grain is kept, the watch says, and nobody has ever asked it where the sick are.",
+     "A guild member reckons what a stranger takes for provision is a store the trades filled and cannot open.",
+     "Those who hear disputes say a stranger's questions about the store are ordinary and the ones about the sick are new to them."
+    ],
+    "order": {
+     "id": "V2",
+     "licences": "state key + a STRUCTURAL-consequence field",
+     "moves": [
+      "PRESENT",
+      "CONSEQUENCE"
+     ]
+    },
+    "pairs": [],
+    "rendered": "At the tavern they say strangers walk up to look at the store, and nobody here does.",
+    "spine": "A drover says the town looks provided for from outside, and whoever tends a sick house here comes out of the church."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.safetyProfile.safetyLabel",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "Moderate",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.publicOrder",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "Moderate",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "Moderate",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+    "rateBp": 6602,
+    "reads": [
+     "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate runs on a working balance: the law is present, crime exists, and neither has the run of the town.",
+    "spine": "{settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.safetyProfile.safetyLabel",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "Moderate",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.publicOrder",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "First-Survey qualification (the reading is a first look)",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "FIRST_SURVEY_ROW_POOL",
+    "rateBp": 9935,
+    "reads": [
+     "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The safety reading for Rundgate is an initial one. It is honest about what has been seen and says nothing about what has not.",
+    "spine": "The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "defense.criminalStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "structure organized",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "structure organized",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "CRIMINAL_STRUCTURE_POOL",
+    "rateBp": null,
+    "reads": [
+     "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "A stranger at Rundgate is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.",
+    "spine": "A stranger at {settlement} is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Rundgate",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "defense.criminalStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "capture adversarial",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "capture adversarial",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "CRIMINAL_CAPTURE_POOL",
+    "rateBp": null,
+    "reads": [
+     "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The hall at Rundgate moves against the operators and the operators move back, and the town is where the two of them meet.",
+    "spine": "The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "walls PRESENT",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "walls PRESENT",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "fortificationPoolKey",
+    "rateBp": 6654,
+    "reads": [
+     "forces.walls.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
+    "spine": "{settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "standingDefenseForces(settlement)",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "garrison PRESENT",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "garrison PRESENT",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "forceCorePoolKey",
+    "rateBp": 4154,
+    "reads": [
+     "forces",
+     "forces.garrison.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.",
+    "spine": "{settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "standingDefenseForces(settlement)",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "mercenary / contracted forces PRESENT",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "mercenary / contracted forces PRESENT",
+   "section": "forces",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "contractedForcePoolKey",
+    "rateBp": 2083,
+    "reads": [
+     "forces",
+     "forces.mercenary.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "The town pays for some of its soldiers and knows which ones, and treats them accordingly.",
+    "spine": "The town pays for some of its soldiers and knows which ones, and treats them accordingly."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "standingDefenseForces(settlement)",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "charter hall PRESENT (specialist monster response)",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "charterPoolKey",
+    "rateBp": 5169,
+    "reads": [
+     "forces",
+     "forces.charter.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "A stranger at Rundgate finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+    "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "magicWorksAt({ settlement })",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "arcane defense PRESENT",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "arcane defense PRESENT",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "arcaneDefensePoolKey",
+    "rateBp": 3945,
+    "reads": [
+     "magicWorks"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "A stranger at Rundgate is measured at the gate in a way he cannot quite identify, and is not told about it.",
+    "spine": "A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-11",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "defenseProfile.economicGates.military",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 0.98,
+     "writers": 0
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[47 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.wallRationale",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "WALLED-STRAINED",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "WALLED-STRAINED",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "defwork",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     },
+     {
+      "slot": "defwork",
+      "value": "city walls and gates"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "wallRationalePoolKey",
+    "rateBp": 5938,
+    "reads": [
+     "forces.walls.present",
+     "settlement.defenseProfile.economicGates.military"
+    ],
+    "rung": "literal",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate's city walls and gates stands better than the watch that should man it; stone keeps itself, and wages do not.",
+    "spine": "{settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "CONFIG",
+     "field": "config.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "road",
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasGranary",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": true,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasPort",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.supportingCapabilities",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "Logistics & Supply: Granary with road supply",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "Logistics & Supply: Granary with road supply",
+   "section": "supporting",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+    "rateBp": 2969,
+    "reads": [
+     "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.",
+    "spine": "{settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them."
+   },
+   "vid": 1
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "sim-city",
+ "staticCardJoined": true,
+ "tab": "defense",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist quarter",
+    "Mages' guild"
+   ],
+   "charter": [
+    "Multiple adventurers' guilds"
+   ],
+   "contracted": [
+    "Mercenary quarter"
+   ],
+   "fortifications": [
+    "Citadel",
+    "City walls and gates"
+   ],
+   "standing": [
+    "Garrison",
+    "Professional city watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": true,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Professional city watch"
+    ],
+    "interested": true,
+    "kind": "watch",
+    "marks": [
+     "Professional city watch: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Multiple courthouses"
+    ],
+    "interested": true,
+    "kind": "court",
+    "marks": [
+     "Multiple courthouses: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_ea3b06f441896e3b",
+  "institutions": [
+   {
+    "category": "magic",
+    "name": "Alchemist quarter",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Almshouse",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Apothecary district",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Aqueduct or water system",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Banking houses",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Bardic college",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Black market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Brothel (red light district)",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Burial grounds and charnel house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Cartographer's guild",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Cathedral (10,000+ only)",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Citadel",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "City granaries",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "City hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "City walls and gates",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (30-80)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Daily markets",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Dungeon delving supply district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Fighting pits",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Furrier's district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Gambling halls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Garrison",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (1000-5000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inns and taverns (district)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Luxury goods quarter",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Mages' guild",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Major annual fairs",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Mayor and council",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Mercenary quarter",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (15-40)",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Multiple adventurers' guilds",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple courthouses",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Multiple criminal factions",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Multiple market squares",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Multiple monasteries",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (10-30)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Professional city watch",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Sage's quarter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Smelter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Specialized metalworkers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Warehouse district",
+    "services": []
+   }
+  ],
+  "name": "Rundgate",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the courts"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the courts"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who draws the wage"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "a soldier of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "pl",
+      "role": "the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "garrison"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a gatekeeper"
+     },
+     {
+      "n": "sg",
+      "role": "a man on one of the gates"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant on the wall"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the ways in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the guilds"
+     },
+     {
+      "n": "sg",
+      "role": "an apprentice out of his time"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a secretary of the city's offices"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who keeps the hall books"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     },
+     {
+      "n": "pl",
+      "role": "the under-clerks of the hall"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer who came after dark"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the markets"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a market clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a seller who does not give a name"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the people who deal there"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fairs"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a canon"
+     },
+     {
+      "n": "sg",
+      "role": "a cathedral clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a parish warden"
+     },
+     {
+      "n": "sg",
+      "role": "a priest of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "one of the vergers"
+     },
+     {
+      "n": "pl",
+      "role": "the cathedral chapter"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at one of the taverns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a potboy of the district"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers of the district"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "garrison",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "city"
+ }
+}

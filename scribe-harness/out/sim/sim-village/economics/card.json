@@ -1,0 +1,1179 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 111,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-ECO-1",
+   "desk": "economy",
+   "mount": "economics.prosperityHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-8",
+   "desk": "economy",
+   "mount": "economics.economyTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-2",
+   "desk": "economy",
+   "mount": "economics.foodTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-2",
+   "desk": "economy",
+   "mount": "economics.seasonTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "desk": "economy",
+   "mount": "economics.foodSecurity",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "desk": "economy",
+   "mount": "economics.commercialProfile",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "desk": "economy",
+   "mount": "economics.shadowEconomy",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-3",
+   "desk": "economy",
+   "mount": "economics.tradeFlow",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "desk": "economy",
+   "mount": "economics.exportPosture",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "desk": "general",
+   "mount": "economics.craftReason",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Hochhausen · village · germanic · threat frontier · route road · terrain river · seed sim-village"
+  },
+  {
+   "kind": "badge",
+   "label": "prosperity",
+   "section": "glance",
+   "text": "Comfortable"
+  },
+  {
+   "kind": "machine",
+   "label": "situationDesc",
+   "section": "glance",
+   "text": "Trade proceeds at an ordinary pace for a settlement of this size."
+  },
+  {
+   "block": "DS-ECO-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.prosperityHeader",
+   "pool": "COMBINATION C3: the middle rungs",
+   "section": "glance",
+   "text": "There is nothing striking about Hochhausen's condition in either direction: a working road, a working market, a town neither building nor selling off.",
+   "vid": 2
+  },
+  {
+   "kind": "glance",
+   "label": "economyTile",
+   "mount": "economics.economyTile",
+   "section": "glance",
+   "text": "Comfortable"
+  },
+  {
+   "kind": "glance",
+   "label": "foodTile",
+   "mount": "economics.foodTile",
+   "section": "glance",
+   "text": "Deficit −18 (2% of need)"
+  },
+  {
+   "block": "DS-ECO-12",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.commercialProfile",
+   "pool": "INCOME MIX: one source carries the town",
+   "section": "commercial",
+   "text": "Well past half of what Hochhausen earns comes from a single trade, and the accounts have no second column worth the name.",
+   "vid": 0
+  },
+  {
+   "block": "DS-ECO-12",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.commercialProfile",
+   "pool": "TRADE PROFILE: exports and imports both present",
+   "section": "commercial",
+   "text": "The market at Hochhausen carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+   "vid": 2
+  },
+  {
+   "block": "DS-ECO-10",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.exportPosture",
+   "pool": "POSTURE: established",
+   "section": "trade",
+   "text": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells.",
+   "vid": 1
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Toll revenue"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Pass transit trade"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Salt"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Route maps and intelligence"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Incense and votive candles"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Quality iron tools and fittings"
+  },
+  {
+   "block": "DS-ECO-9",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.foodSecurity",
+   "pool": "SECURE",
+   "section": "food",
+   "text": "The town eats. It is not a subject anyone raises unprompted.",
+   "vid": 1
+  },
+  {
+   "kind": "badge",
+   "label": "foodSecurity.label",
+   "section": "food",
+   "text": "Secure"
+  },
+  {
+   "block": "DS-GEN-18",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.craftReason",
+   "pool": "STALLED",
+   "section": "craft",
+   "text": "Hochhausen keeps Cartographer's guild on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
+   "vid": 1
+  }
+ ],
+ "pools": [
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "prosperityRank(settlement.economicState.prosperity)",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.prosperityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "COMBINATION C3: the middle rungs",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "section": "glance",
+   "slots": {
+    "declared": [
+     "access",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     },
+     {
+      "slot": "access",
+      "value": "road"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "prosperityHeaderPoolKey",
+    "rateBp": 4180,
+    "reads": [
+     "rank"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "There is nothing striking about Hochhausen's condition in either direction: a working road, a working market, a town neither building nor selling off.",
+    "spine": "There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-ECO-12",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[4 rows]",
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources.length",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 4,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources.reduce",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "{}",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.commercialProfile",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "INCOME MIX: one source carries the town",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "INCOME MIX: one source carries the town",
+   "section": "commercial",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "incomeMixPoolKey",
+    "rateBp": 4753,
+    "reads": [
+     "eco.incomeSources",
+     "eco.incomeSources.length",
+     "eco.incomeSources.reduce"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Well past half of what Hochhausen earns comes from a single trade, and the accounts have no second column worth the name.",
+    "spine": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-12",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "economicState",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
+     "writers": 19
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.localProduction",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[2 rows]",
+     "writers": 0
+    },
+    {
+     "clock": "PULSE",
+     "field": "economicState.primaryExports",
+     "grain": "field",
+     "status": "LIVE",
+     "value": "[2 rows]",
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.primaryImports",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[4 rows]",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.commercialProfile",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "TRADE PROFILE: exports and imports both present",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "section": "commercial",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "tradeProfilePoolKey",
+    "rateBp": 6888,
+    "reads": [
+     "eco",
+     "eco.isEntrepot",
+     "eco.localProduction",
+     "eco.primaryExports",
+     "eco.primaryImports"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The market at Hochhausen carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+    "spine": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-ECO-10",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.exportPosture.status",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.exportPosture",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "POSTURE: established",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "POSTURE: established",
+   "section": "trade",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "exportPosturePoolKey",
+    "rateBp": 5195,
+    "reads": [
+     "readings.exportPosture.status"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells.",
+    "spine": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-ECO-9",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "economics.foodSecurity",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "SECURE",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "SECURE",
+   "section": "food",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 1706,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town eats. It is not a subject anyone raises unprompted.",
+    "spine": "The town eats. It is not a subject anyone raises unprompted."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-18",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "readings",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 5
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.activeChains",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.exploitation",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.primaryImports",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.craftReason",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "STALLED",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "STALLED",
+   "section": "craft",
+   "slots": {
+    "declared": [
+     "institution",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     },
+     {
+      "slot": "institution",
+      "value": "Cartographer's guild"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "craftReasonPoolKey",
+    "rateBp": 4219,
+    "reads": [
+     "readings",
+     "readings.activeChains",
+     "readings.exploitation",
+     "readings.isEntrepot",
+     "readings.primaryImports"
+    ],
+    "rung": "literal",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Hochhausen keeps Cartographer's guild on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
+    "spine": "{settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait."
+   },
+   "vid": 2
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "sim-village",
+ "staticCardJoined": true,
+ "tab": "economics",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [],
+   "charter": [
+    "Adventurers' charter hall"
+   ],
+   "contracted": [],
+   "fortifications": [],
+   "standing": []
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": false,
+   "militia": false,
+   "watch": false
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "watch",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "court",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_b4150f0588a0f37a",
+  "institutions": [
+   {
+    "category": "military",
+    "name": "Adventurers' charter hall",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Alehouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmith",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bowyer & fletcher",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Brickmaker",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Carpenter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cartographer's workshop",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Common grazing land",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cooper",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Dwellings (80-180)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Farmland",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Fish market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Fuller",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Graveyard",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Maltster",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Mill",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple water sources",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish church",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Potter",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Priest (resident)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Sawmill",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Stone quarry",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tailor",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Thatcher",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Underground network",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Veteran's lodge",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Village reeve",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Weekly market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Woodcarver",
+    "services": []
+   }
+  ],
+  "name": "Hochhausen",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a woman old enough to remember the custom"
+     },
+     {
+      "n": "sg",
+      "role": "one of the elders"
+     },
+     {
+      "n": "pl",
+      "role": "the households that keep the custom"
+     },
+     {
+      "n": "pl",
+      "role": "the older heads here"
+     }
+    ],
+    "source": "elders"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer at the fish market"
+     },
+     {
+      "n": "sg",
+      "role": "a buyer off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a fish seller"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sells at the market"
+     },
+     {
+      "n": "sg",
+      "role": "the market clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the women who gut the catch"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the village"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the village"
+     },
+     {
+      "n": "pl",
+      "role": "the whole village"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a local priest"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sings in the choir"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "the chapel's warden"
+     },
+     {
+      "n": "pl",
+      "role": "the people who keep the register"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at the alehouse"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers at the alehouse"
+     },
+     {
+      "n": "sg",
+      "role": "the potboy"
+     }
+    ],
+    "source": "tavern"
+   }
+  ],
+  "sources": [
+   "elders",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern"
+  ],
+  "tier": "village"
+ }
+}

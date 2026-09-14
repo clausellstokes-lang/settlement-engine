@@ -1,0 +1,50 @@
+{
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "units"
+ ],
+ "properties": {
+  "units": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "blockId",
+     "poolKey",
+     "vid",
+     "spine",
+     "faces",
+     "notebook"
+    ],
+    "properties": {
+     "blockId": {
+      "type": "string"
+     },
+     "poolKey": {
+      "type": "string"
+     },
+     "vid": {
+      "type": "integer"
+     },
+     "spine": {
+      "type": "string"
+     },
+     "faces": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "notebook": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

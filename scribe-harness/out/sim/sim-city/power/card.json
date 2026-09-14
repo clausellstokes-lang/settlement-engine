@@ -1,0 +1,1681 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 471,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-POW-1",
+   "desk": "power",
+   "mount": "power.legitimacyBanner",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-2",
+   "desk": "power",
+   "mount": "power.stabilityHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-6",
+   "desk": "power",
+   "mount": "power.criminalUnderside",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-4",
+   "desk": "power",
+   "mount": "power.succession",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-3",
+   "desk": "power",
+   "mount": "power.factionLadder",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-5",
+   "desk": "power",
+   "mount": "power.rulingStructure",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-7",
+   "desk": "power",
+   "mount": "power.blocs",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Rundgate · city · germanic · threat frontier · route road · terrain river · seed sim-city"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.power",
+   "section": "chain",
+   "text": "the power: City Council"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.faction",
+   "section": "chain",
+   "text": "the faction: City Council"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.npc",
+   "section": "chain",
+   "text": "the seat: Theodor Lenz · Mayor"
+  },
+  {
+   "block": "DS-POW-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.legitimacyBanner",
+   "pool": "Approved",
+   "section": "legitimacy",
+   "text": "The City Council at Rundgate governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them.",
+   "vid": 1
+  },
+  {
+   "block": "DS-POW-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.legitimacyBanner",
+   "pool": "breakdown dominated by PROSPERITY, favourable",
+   "section": "legitimacy",
+   "text": "Rundgate credits the City Council with the good years whether or not the City Council earned them; the prosperity is the whole of the argument in its favour.",
+   "vid": 1
+  },
+  {
+   "kind": "badge",
+   "label": "powerStructure.stability",
+   "section": "stability",
+   "text": "Stable"
+  },
+  {
+   "kind": "roster",
+   "label": "governingName",
+   "section": "stability",
+   "text": "City Council"
+  },
+  {
+   "kind": "machine",
+   "label": "recentConflict",
+   "section": "stability",
+   "text": "City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost."
+  },
+  {
+   "block": "DS-POW-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.stabilityHeader",
+   "pool": "stable matched",
+   "section": "stability",
+   "text": "What is settled at Rundgate is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
+   "vid": 3
+  },
+  {
+   "block": "DS-POW-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.stabilityHeader",
+   "pool": "recentConflict present",
+   "section": "stability",
+   "text": "Nobody at Rundgate needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.criminalUnderside",
+   "pool": "operation role criminal revenue stream (unclassified)",
+   "section": "underside",
+   "text": "There is criminal infrastructure at Rundgate with local weight, territorial or economic, and no clearer description of it than that.",
+   "vid": 0
+  },
+  {
+   "block": "DS-POW-7",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.blocs",
+   "pool": "layer DORMANT (no ledger materialized)",
+   "section": "blocs",
+   "text": "The hall at Rundgate is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
+   "vid": 0
+  },
+  {
+   "block": "DS-POW-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.rulingStructure",
+   "pool": "council",
+   "section": "structure",
+   "text": "What the City Council at Rundgate watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.rulingStructure",
+   "pool": "governing body name: a SLOT, never a baked noun",
+   "section": "structure",
+   "text": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately.",
+   "vid": 1
+  },
+  {
+   "block": "DS-POW-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.succession",
+   "pool": "riskLabel: Holding",
+   "section": "succession",
+   "text": "City Council outweighs everyone who wants the City Council at Rundgate, and the wanting is on the record. The hold is real and it is not comfortable.",
+   "vid": 0
+  },
+  {
+   "block": "DS-POW-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.succession",
+   "pool": "legitimacyHold: public backing hardens the hold",
+   "section": "succession",
+   "text": "Public backing at Rundgate is hardening the City Council's grip; what would be a contest elsewhere is an inconvenience here.",
+   "vid": 1
+  }
+ ],
+ "pools": [
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.legitimacyBanner",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "Approved",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Approved",
+   "section": "legitimacy",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "City Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 2422,
+    "reads": [],
+    "rung": "none",
+    "variants": 4,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The City Council at Rundgate governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them.",
+    "spine": "The {seat} at {settlement} governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.legitimacyBanner",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "breakdown dominated by PROSPERITY, favourable",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "section": "legitimacy",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     },
+     {
+      "slot": "seat",
+      "value": "City Council"
+     },
+     {
+      "slot": "seat",
+      "value": "City Council"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 3242,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate credits the City Council with the good years whether or not the City Council earned them; the prosperity is the whole of the argument in its favour.",
+    "spine": "{settlement} credits the {seat} with the good years whether or not the {seat} earned them; the prosperity is the whole of the argument in its favour."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "threshold",
+   "authoredIndex": 3,
+   "blockId": "DS-POW-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.stabilityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "stable matched",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "stable matched",
+   "section": "stability",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "STABILITY_LADDER",
+    "rateBp": 5612,
+    "reads": [
+     "first (via STABILITY_LADDER in powerStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "What is settled at Rundgate is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
+    "spine": "What is settled at {settlement} is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "powerStructure.factions",
+     "grain": "field",
+     "status": "LIVE",
+     "value": "[7 rows]",
+     "writers": 13
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "powerStructure.recentConflict",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.stabilityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "recentConflict present",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "recentConflict present",
+   "section": "stability",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "stabilityLensPoolKey",
+    "rateBp": 6719,
+    "reads": [
+     "power.factions",
+     "power.recentConflict"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Nobody at Rundgate needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+    "spine": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-POW-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.criminalUnderside",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "operation role criminal revenue stream (unclassified)",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "operation role criminal revenue stream (unclassified)",
+   "section": "underside",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "operationRolePoolKey",
+    "rateBp": 1315,
+    "reads": [
+     "name"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "There is criminal infrastructure at Rundgate with local weight, territorial or economic, and no clearer description of it than that.",
+    "spine": "There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-POW-7",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.politics ?? null.blocs",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.blocs",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "layer DORMANT (no ledger materialized)",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "section": "blocs",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "politicsPresencePoolKey",
+    "rateBp": 9935,
+    "reads": [
+     "politics.blocs"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The hall at Rundgate is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
+    "spine": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "unfolding",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.rulingStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "council",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "council",
+   "section": "structure",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "City Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 4362,
+    "reads": [],
+    "rung": "none",
+    "variants": 4,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "What the City Council at Rundgate watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it.",
+    "spine": "What the {seat} at {settlement} watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.rulingStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "governing body name: a SLOT, never a baked noun",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "section": "structure",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "City Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 9935,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "A stranger who addresses the City Council at Rundgate by any other title is corrected, politely and immediately.",
+    "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-POW-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.succession",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "riskLabel: Holding",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "riskLabel: Holding",
+   "section": "succession",
+   "slots": {
+    "declared": [
+     "faction",
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "faction",
+      "value": "City Council"
+     },
+     {
+      "slot": "seat",
+      "value": "City Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "RISK_POOL_OF",
+    "rateBp": 4036,
+    "reads": [
+     "label (via RISK_POOL_OF in powerStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "City Council outweighs everyone who wants the City Council at Rundgate, and the wanting is on the record. The hold is real and it is not comfortable.",
+    "spine": "{faction} outweighs everyone who wants the {seat} at {settlement}, and the wanting is on the record. The hold is real and it is not comfortable."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.succession",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "legitimacyHold: public backing hardens the hold",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "section": "succession",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     },
+     {
+      "slot": "seat",
+      "value": "City Council"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "legitimacyHoldPoolKey",
+    "rateBp": 2617,
+    "reads": [
+     "legitimacy.govMultiplier"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Public backing at Rundgate is hardening the City Council's grip; what would be a contest elsewhere is an inconvenience here.",
+    "spine": "Public backing at {settlement} is hardening the {seat}'s grip; what would be a contest elsewhere is an inconvenience here."
+   },
+   "vid": 2
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "sim-city",
+ "staticCardJoined": true,
+ "tab": "power",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist quarter",
+    "Mages' guild"
+   ],
+   "charter": [
+    "Multiple adventurers' guilds"
+   ],
+   "contracted": [
+    "Mercenary quarter"
+   ],
+   "fortifications": [
+    "Citadel",
+    "City walls and gates"
+   ],
+   "standing": [
+    "Garrison",
+    "Professional city watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": true,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Professional city watch"
+    ],
+    "interested": true,
+    "kind": "watch",
+    "marks": [
+     "Professional city watch: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Multiple courthouses"
+    ],
+    "interested": true,
+    "kind": "court",
+    "marks": [
+     "Multiple courthouses: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_ea3b06f441896e3b",
+  "institutions": [
+   {
+    "category": "magic",
+    "name": "Alchemist quarter",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Almshouse",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Apothecary district",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Aqueduct or water system",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Banking houses",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Bardic college",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Black market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Brothel (red light district)",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Burial grounds and charnel house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Cartographer's guild",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Cathedral (10,000+ only)",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Citadel",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "City granaries",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "City hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "City walls and gates",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (30-80)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Daily markets",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Dungeon delving supply district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Fighting pits",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Furrier's district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Gambling halls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Garrison",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (1000-5000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inns and taverns (district)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Luxury goods quarter",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Mages' guild",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Major annual fairs",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Mayor and council",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Mercenary quarter",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (15-40)",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Multiple adventurers' guilds",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple courthouses",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Multiple criminal factions",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Multiple market squares",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Multiple monasteries",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (10-30)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Professional city watch",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Sage's quarter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Smelter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Specialized metalworkers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Warehouse district",
+    "services": []
+   }
+  ],
+  "name": "Rundgate",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the courts"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the courts"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who draws the wage"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "a soldier of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "pl",
+      "role": "the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "garrison"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a gatekeeper"
+     },
+     {
+      "n": "sg",
+      "role": "a man on one of the gates"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant on the wall"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the ways in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the guilds"
+     },
+     {
+      "n": "sg",
+      "role": "an apprentice out of his time"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a secretary of the city's offices"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who keeps the hall books"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     },
+     {
+      "n": "pl",
+      "role": "the under-clerks of the hall"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer who came after dark"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the markets"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a market clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a seller who does not give a name"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the people who deal there"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fairs"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a canon"
+     },
+     {
+      "n": "sg",
+      "role": "a cathedral clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a parish warden"
+     },
+     {
+      "n": "sg",
+      "role": "a priest of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "one of the vergers"
+     },
+     {
+      "n": "pl",
+      "role": "the cathedral chapter"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at one of the taverns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a potboy of the district"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers of the district"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "garrison",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "city"
+ }
+}

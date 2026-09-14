@@ -1,0 +1,2233 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 471,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-STR-1",
+   "desk": "stressors",
+   "mount": "overview.crisisBanners",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-CND-1",
+   "desk": "stressors",
+   "mount": "overview.activeConditions",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-STR-2",
+   "desk": "stressors",
+   "mount": "overview.stressorLifecycle",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "desk": "general",
+   "mount": "overview.conflicts",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "desk": "general",
+   "mount": "overview.situation",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "desk": "general",
+   "mount": "overview.origin",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "desk": "general",
+   "mount": "overview.systemsHealth",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "desk": "general",
+   "mount": "overview.warnings",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-12",
+   "desk": "general",
+   "mount": "overview.ground",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-13",
+   "desk": "general",
+   "mount": "overview.market",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "desk": "general",
+   "mount": "overview.institutions",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-REL-2",
+   "desk": "general",
+   "mount": "overview.notableConnection",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-8",
+   "desk": "general",
+   "mount": "overview.steadings",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POP-3",
+   "desk": "general",
+   "mount": "overview.populationDirection",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Rundgate · city · germanic · threat frontier · route road · terrain river · seed sim-city"
+  },
+  {
+   "kind": "machine",
+   "label": "historicalCharacter",
+   "section": "identity",
+   "text": "Everything before the Occupation is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble"
+  },
+  {
+   "block": "DS-GEN-13",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.market",
+   "pool": "MARKET-OPEN",
+   "section": "site",
+   "text": "Market day is Rundgate at its truest: the roads bring the custom, and the custom is the argument for the stalls.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-17",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.institutions",
+   "pool": "GARRISONED",
+   "section": "site",
+   "text": "Armed order is part of Rundgate's furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.",
+   "vid": 0
+  },
+  {
+   "kind": "badge",
+   "label": "prosperity",
+   "section": "health",
+   "text": "Prosperous"
+  },
+  {
+   "kind": "badge",
+   "label": "safetyLabel",
+   "section": "health",
+   "text": "Moderate"
+  },
+  {
+   "kind": "badge",
+   "label": "readiness",
+   "section": "health",
+   "text": "Well-Defended"
+  },
+  {
+   "kind": "badge",
+   "label": "foodSecurity",
+   "section": "health",
+   "text": "Secure"
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "prosperity: Comfortable / Prosperous",
+   "section": "health",
+   "text": "People in Rundgate can afford to argue about things other than money.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "economicViability.viable: true",
+   "section": "health",
+   "text": "Rundgate expects to go on being Rundgate.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "defenseProfile.readiness.label: Well-Defended",
+   "section": "health",
+   "text": "Rundgate is defended properly rather than impressively: the works are sound and none of them are for show.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.military: STRONG",
+   "section": "health",
+   "text": "Rundgate can put a real body of armed men on its walls, and the men look like they have done it before.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.monster: STRONG",
+   "section": "health",
+   "text": "Children in Rundgate are taught the rules about the dark early, and the rules work.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.internal: ADEQUATE",
+   "section": "health",
+   "text": "The watch at Rundgate answers what is reported to it and does not seek out what is not.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.economic: STRONG",
+   "section": "health",
+   "text": "Prices in Rundgate are steady in a way that suggests the town is not living on the last thing that sold.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.magical: ADEQUATE",
+   "section": "health",
+   "text": "Rundgate has somebody who can do what is usually needed and knows what is beyond them.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "foodSecurity.label: Secure",
+   "section": "health",
+   "text": "Nobody in Rundgate thinks about food, which is the most that can be said for a town's food.",
+   "vid": 1
+  },
+  {
+   "kind": "machine",
+   "label": "arrivalScene",
+   "section": "situation",
+   "text": "Rundgate is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things. A city, properly speaking: dense, layered, too large to take in at once. Steep roofs, enclosed craft yards, and carved lintels mark the older wards. A magelight lamp post marks the main gate. The cathedral bell tower is the first thing visible from this direction. Rundgate appears around a bend in the road, its walls and towers coming into view all at once."
+  },
+  {
+   "kind": "machine",
+   "label": "pressureSentence",
+   "section": "situation",
+   "text": "Nora Jäger's relationship with Tangmar Werner is more complicated than their public roles suggest. A document each believed only they possessed has surfaced in a third set of hands."
+  },
+  {
+   "block": "DS-GEN-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.situation",
+   "pool": "ordinary (route road and the default)",
+   "section": "situation",
+   "text": "Rundgate is on the way to somewhere and has made a modest living out of being on the way.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.origin",
+   "pool": "road",
+   "section": "origin",
+   "text": "What Rundgate cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.origin",
+   "pool": "tier overlay: city",
+   "section": "origin",
+   "text": "Rundgate is big enough to have quarters that do not know each other.",
+   "vid": 2
+  },
+  {
+   "block": "DS-REL-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.notableConnection",
+   "pool": "flagDriven count zero",
+   "section": "connection",
+   "text": "Rundgate has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.",
+   "vid": 3
+  },
+  {
+   "kind": "roster",
+   "label": "institutions",
+   "section": "institutions",
+   "text": "institutions: City granaries, Multiple market squares, Daily markets, Inns and taverns (district), Major annual fairs, Banking houses, Merchant guilds (15-40), Craft guilds (30-80), Warehouse district, Cartographer's guild, Apothecary district, Furrier's district, Listening post, Specialized metalworkers, Luxury goods quarter, Cathedral (10,000+ only), Multiple monasteries, Parish churches (10-30), Burial grounds and charnel house, Mayor and council, City walls and gates, Professional city watch, Garrison, Citadel, Mages' guild, Alchemist quarter, Multiple criminal factions, Black market, Gambling halls, Brothel (red light district), Fighting pits, Multiple adventurers' guilds, Mercenary quarter, Dungeon delving supply district, Sage's quarter, City hall, Multiple courthouses, Housing (1000-5000 structures), Aqueduct or water system, Annual fair, Public bathhouse, Post relay station, Blacksmiths (3-10), Smelter, Ropemaker, Almshouse, Bardic college"
+  }
+ ],
+ "pools": [
+  {
+   "angle": "street",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-13",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "readings",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 5
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.market",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "MARKET-OPEN",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "MARKET-OPEN",
+   "section": "site",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "marketPoolKey",
+    "rateBp": 3607,
+    "reads": [
+     "readings",
+     "readings.isEntrepot",
+     "readings.tradeRouteAccess"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "Market day is Rundgate at its truest: the roads bring the custom, and the custom is the argument for the stalls.",
+    "spine": "Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-17",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.inst",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.institutions",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "GARRISONED",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "GARRISONED",
+   "section": "site",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "institutionsPoolKey",
+    "rateBp": 2591,
+    "reads": [
+     "readings.inst"
+    ],
+    "rung": "literal",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Armed order is part of Rundgate's furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.",
+    "spine": "Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Rundgate",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "prosperity: Comfortable / Prosperous",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "PROSPERITY_POOL_OF",
+    "rateBp": 4089,
+    "reads": [
+     "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "People in Rundgate can afford to argue about things other than money.",
+    "spine": "People in {settlement} can afford to argue about things other than money."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.viable",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "economicViability.viable: true",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "economicViability.viable: true",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     },
+     {
+      "slot": "settlement",
+      "value": "R"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "viabilityPoolKey",
+    "rateBp": 7878,
+    "reads": [
+     "readings.viable"
+    ],
+    "rung": "template",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate expects to go on being Rundgate.",
+    "spine": "{settlement} expects to go on being {settlement}."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Rundgate",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "defenseProfile.readiness.label: Well-Defended",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "READINESS_POOL_OF",
+    "rateBp": 3216,
+    "reads": [
+     "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate is defended properly rather than impressively: the works are sound and none of them are for show.",
+    "spine": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "scores.military: STRONG",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "scores.military: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 5469,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate can put a real body of armed men on its walls, and the men look like they have done it before.",
+    "spine": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "scores.monster: STRONG",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "scores.monster: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 4518,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Children in Rundgate are taught the rules about the dark early, and the rules work.",
+    "spine": "Children in {settlement} are taught the rules about the dark early, and the rules work."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "scores.internal: ADEQUATE",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "scores.internal: ADEQUATE",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 3177,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "The watch at Rundgate answers what is reported to it and does not seek out what is not.",
+    "spine": "The watch at {settlement} answers what is reported to it and does not seek out what is not."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "scores.economic: STRONG",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "scores.economic: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 4336,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Prices in Rundgate are steady in a way that suggests the town is not living on the last thing that sold.",
+    "spine": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "scores.magical: ADEQUATE",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "scores.magical: ADEQUATE",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 3047,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate has somebody who can do what is usually needed and knows what is beyond them.",
+    "spine": "{settlement} has somebody who can do what is usually needed and knows what is beyond them."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Rundgate",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "foodSecurity.label: Secure",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "foodSecurity.label: Secure",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "FOOD_POOL_OF",
+    "rateBp": 1706,
+    "reads": [
+     "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Nobody in Rundgate thinks about food, which is the most that can be said for a town's food.",
+    "spine": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "overview.situation",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "ordinary (route road and the default)",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "ordinary (route road and the default)",
+   "section": "situation",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "SITUATION_POOL_OF_SCENE",
+    "rateBp": 3047,
+    "reads": [
+     "scene (via SITUATION_POOL_OF_SCENE in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate is on the way to somewhere and has made a modest living out of being on the way.",
+    "spine": "{settlement} is on the way to somewhere and has made a modest living out of being on the way."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [
+    "deficit"
+   ],
+   "mount": "overview.origin",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "road",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "road",
+   "section": "origin",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "originRoutePoolKey",
+    "rateBp": 4284,
+    "reads": [
+     "readings.tradeRouteAccess"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "What Rundgate cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+    "spine": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Rundgate",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.origin",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "tier overlay: city",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "tier overlay: city",
+   "section": "origin",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "TIER_OVERLAY_OF",
+    "rateBp": 1641,
+    "reads": [
+     "text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate is big enough to have quarters that do not know each other.",
+    "spine": "{settlement} is big enough to have quarters that do not know each other."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "counterforce",
+   "authoredIndex": 3,
+   "blockId": "DS-REL-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.relationships",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.relationships.length",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.notableConnection",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "flagDriven count zero",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "flagDriven count zero",
+   "section": "connection",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Rundgate"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "flagDrivenPoolKey",
+    "rateBp": 9935,
+    "reads": [
+     "readings.relationships",
+     "readings.relationships.length"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Rundgate has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.",
+    "spine": "{settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere."
+   },
+   "vid": 4
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "sim-city",
+ "staticCardJoined": true,
+ "tab": "overview",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist quarter",
+    "Mages' guild"
+   ],
+   "charter": [
+    "Multiple adventurers' guilds"
+   ],
+   "contracted": [
+    "Mercenary quarter"
+   ],
+   "fortifications": [
+    "Citadel",
+    "City walls and gates"
+   ],
+   "standing": [
+    "Garrison",
+    "Professional city watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": true,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Professional city watch"
+    ],
+    "interested": true,
+    "kind": "watch",
+    "marks": [
+     "Professional city watch: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Multiple courthouses"
+    ],
+    "interested": true,
+    "kind": "court",
+    "marks": [
+     "Multiple courthouses: captured-at-birth (criminalCaptureState adversarial)"
+    ],
+    "rosterBacked": true,
+    "standing": "INTERESTED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_ea3b06f441896e3b",
+  "institutions": [
+   {
+    "category": "magic",
+    "name": "Alchemist quarter",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Almshouse",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Apothecary district",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Aqueduct or water system",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Banking houses",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Bardic college",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Black market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Brothel (red light district)",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Burial grounds and charnel house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Cartographer's guild",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Cathedral (10,000+ only)",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Citadel",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "City granaries",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "City hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "City walls and gates",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (30-80)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Daily markets",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Dungeon delving supply district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Fighting pits",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Furrier's district",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Gambling halls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Garrison",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (1000-5000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inns and taverns (district)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Luxury goods quarter",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Mages' guild",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Major annual fairs",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Mayor and council",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Mercenary quarter",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (15-40)",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Multiple adventurers' guilds",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple courthouses",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Multiple criminal factions",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Multiple market squares",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Multiple monasteries",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (10-30)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Professional city watch",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "adventuring",
+    "name": "Sage's quarter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Smelter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Specialized metalworkers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Warehouse district",
+    "services": []
+   }
+  ],
+  "name": "Rundgate",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the courts"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the courts"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who draws the wage"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "a soldier of the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "pl",
+      "role": "the garrison"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "garrison"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a gatekeeper"
+     },
+     {
+      "n": "sg",
+      "role": "a man on one of the gates"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant on the wall"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the ways in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the guilds"
+     },
+     {
+      "n": "sg",
+      "role": "an apprentice out of his time"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a secretary of the city's offices"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who keeps the hall books"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     },
+     {
+      "n": "pl",
+      "role": "the under-clerks of the hall"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer who came after dark"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of one of the markets"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a market clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a seller who does not give a name"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the people who deal there"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fairs"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a canon"
+     },
+     {
+      "n": "sg",
+      "role": "a cathedral clerk"
+     },
+     {
+      "n": "sg",
+      "role": "a parish warden"
+     },
+     {
+      "n": "sg",
+      "role": "a priest of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "one of the vergers"
+     },
+     {
+      "n": "pl",
+      "role": "the cathedral chapter"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at one of the taverns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a potboy of the district"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers of the district"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "a serjeant of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "garrison",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "city"
+ }
+}

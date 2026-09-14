@@ -1,0 +1,2031 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 111,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-DEF-3",
+   "desk": "defense",
+   "mount": "defense.publicOrder",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-2",
+   "desk": "defense",
+   "mount": "defense.threatAssessment",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-5",
+   "desk": "defense",
+   "mount": "defense.armedForces",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-1",
+   "desk": "defense",
+   "mount": "defense.postureHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-8",
+   "desk": "defense",
+   "mount": "defense.militaryStatus",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-11",
+   "desk": "defense",
+   "mount": "defense.wallRationale",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-4",
+   "desk": "defense",
+   "mount": "defense.criminalStructure",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-DEF-6",
+   "desk": "defense",
+   "mount": "defense.supportingCapabilities",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Hochhausen · village · germanic · threat frontier · route road · terrain river · seed sim-village"
+  },
+  {
+   "kind": "badge",
+   "label": "readiness",
+   "section": "posture",
+   "text": "Lightly Defended"
+  },
+  {
+   "kind": "machine",
+   "label": "guardEffectivenessDesc",
+   "section": "posture",
+   "text": "A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community. When the coin stops, so does the protection. Without courts or prison, enforcement relies entirely on fines, exile, or summary violence."
+  },
+  {
+   "block": "DS-DEF-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.postureHeader",
+   "pool": "readiness WEAK",
+   "section": "posture",
+   "text": "The defensive arrangements at Hochhausen are thin. Something is in place against most pressures and nothing is in place in depth.",
+   "vid": 0
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 4,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Invasion & War: neither walls nor force",
+   "section": "threat",
+   "text": "At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 4,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Internal Security: no legal infrastructure",
+   "section": "threat",
+   "text": "Whoever digs the ground holds that it takes a stranger on the same terms as anyone, whatever was or was not agreed about him.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 7,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Economic Survival: WEAK",
+   "section": "threat",
+   "text": "At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-2",
+   "face": 1,
+   "kind": "composed",
+   "mount": "defense.threatAssessment",
+   "pool": "Disasters & Famine: NO reserves, NO medical provision",
+   "section": "threat",
+   "text": "By a carter's reckoning the sacks that leave a house for the stone are counted going and not counted coming back.",
+   "vid": 2
+  },
+  {
+   "kind": "row",
+   "label": "Beasts & Monsters",
+   "section": "threat",
+   "text": "Beasts & Monsters — WEAK"
+  },
+  {
+   "kind": "machine",
+   "label": "Beasts & Monsters.assess",
+   "section": "threat",
+   "text": "Active frontier with no organized defense. Vulnerable to any monster of moderate capability."
+  },
+  {
+   "kind": "row",
+   "label": "Invasion & War",
+   "section": "threat",
+   "text": "Invasion & War — ADEQUATE"
+  },
+  {
+   "kind": "machine",
+   "label": "Invasion & War.assess",
+   "section": "threat",
+   "text": "No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker."
+  },
+  {
+   "kind": "row",
+   "label": "Internal Security",
+   "section": "threat",
+   "text": "Internal Security — WEAK"
+  },
+  {
+   "kind": "machine",
+   "label": "Internal Security.assess",
+   "section": "threat",
+   "text": "Internal security: Moderate. No legal infrastructure: order relies on force alone."
+  },
+  {
+   "kind": "row",
+   "label": "Economic Survival",
+   "section": "threat",
+   "text": "Economic Survival — WEAK"
+  },
+  {
+   "kind": "machine",
+   "label": "Economic Survival.assess",
+   "section": "threat",
+   "text": "Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale."
+  },
+  {
+   "kind": "row",
+   "label": "Disasters & Famine",
+   "section": "threat",
+   "text": "Disasters & Famine — STRONG"
+  },
+  {
+   "kind": "machine",
+   "label": "Disasters & Famine.assess",
+   "section": "threat",
+   "text": "No food reserves. A crop failure or supply disruption causes immediate hardship. Parish clergy provide basic wound care: better than nothing, worse than a hospital."
+  },
+  {
+   "kind": "badge",
+   "label": "safetyLabel",
+   "section": "order",
+   "text": "Moderate"
+  },
+  {
+   "kind": "machine",
+   "label": "safetyDesc",
+   "section": "order",
+   "text": "A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid."
+  },
+  {
+   "block": "DS-DEF-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.publicOrder",
+   "pool": "Moderate",
+   "section": "order",
+   "text": "Enforcement and criminal presence at Hochhausen sit close enough that the town's condition is a matter of which way the next few seasons go.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.publicOrder",
+   "pool": "First-Survey qualification (the reading is a first look)",
+   "section": "order",
+   "text": "The safety reading for Hochhausen is an initial one. It is honest about what has been seen and says nothing about what has not.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.criminalStructure",
+   "pool": "structure null (nothing organized recognized)",
+   "section": "order",
+   "text": "A stranger asking after the arrangements at Hochhausen is met with genuine incomprehension, which is either the truth or an unusually good performance of it.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.criminalStructure",
+   "pool": "capture none",
+   "section": "order",
+   "text": "Whatever is being run at Hochhausen is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "walls ABSENT",
+   "section": "forces",
+   "text": "The town has an edge rather than a boundary at Hochhausen, and the edge is wherever the last building happens to be.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "charter hall PRESENT (specialist monster response)",
+   "section": "forces",
+   "text": "A stranger at Hochhausen finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+   "vid": 2
+  },
+  {
+   "block": "DS-DEF-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.armedForces",
+   "pool": "arcane defense ABSENT",
+   "section": "forces",
+   "text": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.",
+   "vid": 1
+  },
+  {
+   "block": "DS-DEF-11",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.wallRationale",
+   "pool": "UNWALLED-SMALL",
+   "section": "forces",
+   "text": "No wall marks where Hochhausen ends; at this size the country and the town simply agree to differ.",
+   "vid": 1
+  },
+  {
+   "kind": "roster",
+   "label": "charter",
+   "section": "forces",
+   "text": "charter: Adventurers' charter hall"
+  },
+  {
+   "block": "DS-DEF-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "defense.supportingCapabilities",
+   "pool": "Logistics & Supply: No reserves, landlocked",
+   "section": "supporting",
+   "text": "The town eats what arrives, and has nothing put by against a season when nothing does.",
+   "vid": 1
+  },
+  {
+   "kind": "machine",
+   "label": "Economic Backing",
+   "section": "supporting",
+   "text": "Economic Backing: Underfunded — Irregular pay, worn equipment, morale risk."
+  },
+  {
+   "kind": "machine",
+   "label": "Magical Capability",
+   "section": "supporting",
+   "text": "Magical Capability: None — Conventional defense only. Invisible threats go undetected and unanswered."
+  },
+  {
+   "kind": "machine",
+   "label": "Legal Infrastructure",
+   "section": "supporting",
+   "text": "Legal Infrastructure: None — No deterrence beyond force."
+  },
+  {
+   "kind": "machine",
+   "label": "Medical Readiness",
+   "section": "supporting",
+   "text": "Medical Readiness: Clergy care — Parish care. Basic wound and disease management."
+  },
+  {
+   "kind": "machine",
+   "label": "Logistics & Supply",
+   "section": "supporting",
+   "text": "Logistics & Supply: No reserves — No food buffer. Any supply disruption becomes a survival crisis within days."
+  }
+ ],
+ "pools": [
+  {
+   "angle": "ledger",
+   "authoredIndex": 0,
+   "blockId": "DS-DEF-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "defenseProfile.readiness.score",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 28,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.postureHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "readiness WEAK",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "readiness WEAK",
+   "section": "posture",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "READINESS_ROW_POOL",
+    "rateBp": 3086,
+    "reads": [
+     "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The defensive arrangements at Hochhausen are thin. Something is in place against most pressures and nothing is in place in depth.",
+    "spine": "The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 4,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a carter at the alehouse"
+      },
+      {
+       "n": "sg",
+       "role": "a woman at the long table"
+      },
+      {
+       "n": "pl",
+       "role": "the drinkers at the alehouse"
+      },
+      {
+       "n": "sg",
+       "role": "the potboy"
+      }
+     ],
+     "source": "tavern"
+    }
+   ],
+   "faceSources": [
+    "tavern"
+   ],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[29 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 4,
+     "index": 2,
+     "key": "Invasion & War: neither walls nor force",
+     "role": "spine",
+     "source": "tavern",
+     "vid": 2
+    }
+   ],
+   "poolKey": "Invasion & War: neither walls nor force",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "INVASION_ROW_POOL",
+    "rateBp": 2839,
+    "reads": [
+     "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "stranger",
+     "elders",
+     "market",
+     "tavern",
+     "watch",
+     "court",
+     "register",
+     "guild",
+     "hall"
+    ],
+    "faces": [
+     "A traveller says he asked at a door here what the place would do if an army came, and was answered about the price of salt.",
+     "Whoever asks the older households about a wall here is leaving in the morning, they say.",
+     "The stallholders say the square fills when the light comes and empties when it goes, and the light is what they work to.",
+     "At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.",
+     "One of the watch says the round is walked by people who keep a bench by day.",
+     "Those who sit to hear a matter hold that the place has no line of its own, and the boundaries before them run between one plot and the next.",
+     "Whoever buries the dead holds that the people here are easier about the place than anybody who comes through. He does not say which is right.",
+     "A guild member says the trades have priced their goods to a place that stands open.",
+     "The hall has never had anybody come in asking for a wall, a clerk there says."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "id": 3,
+      "kind": "reinforce"
+     },
+     {
+      "id": 3,
+      "kind": "reinforce"
+     }
+    ],
+    "rendered": "At the tavern anybody can name the houses that would come out if anything happened, the naming being where it has always stopped.",
+    "spine": "Everyone here has seen the place go about its week with no line around it and no soldier in it, and the town counts that an answer."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 4,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a local priest"
+      },
+      {
+       "n": "sg",
+       "role": "a woman who sings in the choir"
+      },
+      {
+       "n": "sg",
+       "role": "one of the congregation"
+      },
+      {
+       "n": "sg",
+       "role": "the chapel's warden"
+      },
+      {
+       "n": "pl",
+       "role": "the people who keep the register"
+      }
+     ],
+     "source": "register"
+    }
+   ],
+   "faceSources": [
+    "register"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasCourtSystem",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasPrison",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 4,
+     "index": 2,
+     "key": "Internal Security: no legal infrastructure",
+     "role": "spine",
+     "source": "register",
+     "vid": 2
+    }
+   ],
+   "poolKey": "Internal Security: no legal infrastructure",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "internalRowPoolKey",
+    "rateBp": 5000,
+    "reads": [
+     "court",
+     "prison"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "stranger",
+     "tavern",
+     "elders",
+     "register",
+     "gate",
+     "muster",
+     "market"
+    ],
+    "faces": [
+     "A stranger wronged here asks where to take it, a travelling trader says, and is pointed at the door of the house that did it.",
+     "At the tavern they say a stranger owed money here should take it in goods and not wait on coin.",
+     "The elders say they hear a stranger's wrong as they hear anyone's, and a stranger who does not stay for the answer was not much wronged.",
+     "Whoever digs the ground holds that it takes a stranger on the same terms as anyone, whatever was or was not agreed about him.",
+     "At the gate they say a stranger is looked over on the way in, and nothing is kept of the looking.",
+     "The muster tells a stranger who complains that there is nowhere to lock up the man he names. There is nowhere for the stranger either.",
+     "The stallholders say a stranger cheated here has no board to go to, and would do better to come back to the stall."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Whoever digs the ground holds that it takes a stranger on the same terms as anyone, whatever was or was not agreed about him.",
+    "spine": "A traveller wronged here finds there is nowhere to take it, and nobody local expected there to be."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 7,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a buyer at the fish market"
+      },
+      {
+       "n": "sg",
+       "role": "a buyer off the road"
+      },
+      {
+       "n": "sg",
+       "role": "a fish seller"
+      },
+      {
+       "n": "sg",
+       "role": "a stallholder"
+      },
+      {
+       "n": "sg",
+       "role": "a woman who sells at the market"
+      },
+      {
+       "n": "sg",
+       "role": "the market clerk"
+      },
+      {
+       "n": "pl",
+       "role": "the stallholders"
+      },
+      {
+       "n": "pl",
+       "role": "the women who gut the catch"
+      }
+     ],
+     "source": "market"
+    }
+   ],
+   "faceSources": [
+    "market"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "defenseProfile.scores.economic",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 32,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 7,
+     "index": 1,
+     "key": "Economic Survival: WEAK",
+     "role": "spine",
+     "source": "market",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Economic Survival: WEAK",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "ECONOMIC_ROW_POOL",
+    "rateBp": 3385,
+    "reads": [
+     "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "stranger",
+     "elders",
+     "tavern",
+     "register",
+     "gate",
+     "muster",
+     "market",
+     "watch",
+     "garrison"
+    ],
+    "faces": [
+     "What is put into a hand here is goods and not coin, a stranger says, and no apology comes with the sack.",
+     "The elders hold that an ask is made out loud here and in front of the neighbours. A refusal is heard by the same ears.",
+     "The loudest at the table is the household that would be asked last, they say at the tavern. The ones asked first sit quiet over their cups.",
+     "Those who keep the ground say a household gives toward a burying whatever it has. What is put in is remembered by the neighbours better than any count.",
+     "Those who hold the way through say the bar coming down is heard at the far doors. Not one of the doors opens.",
+     "The muster reckons what comes up from a door is a body or a tool, and the tool is remembered as well as the body.",
+     "At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.",
+     "One of the watch says the same corners get stood in whether the purse is settled or not. The round ends where it starts, at the water.",
+     "Nobody here asks the soldiers their business, the soldiers say, and everybody here asks them for a hand."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "At the market they say the place takes from whoever can be found, and there is nothing easier to find than a stall.",
+    "spine": "Everyone here has seen who turns out when something is wanted, and takes it that the same people would turn out for anything worse."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-2",
+   "compromised": null,
+   "face": 1,
+   "faceRoles": [
+    {
+     "roster": [
+      {
+       "n": "sg",
+       "role": "a carter"
+      },
+      {
+       "n": "sg",
+       "role": "a drover"
+      },
+      {
+       "n": "sg",
+       "role": "a messenger off the road"
+      },
+      {
+       "n": "sg",
+       "role": "a pedlar"
+      },
+      {
+       "n": "sg",
+       "role": "a pilgrim"
+      },
+      {
+       "n": "sg",
+       "role": "a rider who stopped a night"
+      },
+      {
+       "n": "sg",
+       "role": "a traveller"
+      },
+      {
+       "n": "pl",
+       "role": "people passing through"
+      }
+     ],
+     "source": "stranger"
+    }
+   ],
+   "faceSources": [
+    "stranger"
+   ],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasChurch",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": true,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasGranary",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasHospital",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.threatAssessment",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 1,
+     "index": 2,
+     "key": "Disasters & Famine: NO reserves, NO medical provision",
+     "role": "spine",
+     "source": "stranger",
+     "vid": 2
+    }
+   ],
+   "poolKey": "Disasters & Famine: NO reserves, NO medical provision",
+   "section": "threat",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "DISASTER_ROW_POOL",
+    "rateBp": 4596,
+    "reads": [
+     "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [
+     null,
+     "stranger",
+     "tavern",
+     "elders",
+     "register",
+     "market"
+    ],
+    "faces": [
+     "By a carter's reckoning the sacks that leave a house for the stone are counted going and not counted coming back.",
+     "At the tavern they say a stranger who asks for a house for the sick is taken for sick himself and served at the door.",
+     "What a stranger calls a want is only how the place is arranged, in the older households' account, and they do not say who arranged it.",
+     "Those who bury the dead say part of the plot digs easily and part does not, and everybody here knows which is which.",
+     "Those who sell at the market say a buyer can have grain here on a market day and no place to keep it."
+    ],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "By a carter's reckoning the sacks that leave a house for the stone are counted going and not counted coming back.",
+    "spine": "A stranger who asks here for the store is shown a field, and one who asks for the house for the sick is shown a door."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.safetyProfile.safetyLabel",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "Moderate",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.publicOrder",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "Moderate",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Moderate",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+    "rateBp": 6602,
+    "reads": [
+     "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Enforcement and criminal presence at Hochhausen sit close enough that the town's condition is a matter of which way the next few seasons go.",
+    "spine": "Enforcement and criminal presence at {settlement} sit close enough that the town's condition is a matter of which way the next few seasons go."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.safetyProfile.safetyLabel",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "Moderate",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.publicOrder",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "First-Survey qualification (the reading is a first look)",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "First-Survey qualification (the reading is a first look)",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "FIRST_SURVEY_ROW_POOL",
+    "rateBp": 9935,
+    "reads": [
+     "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The safety reading for Hochhausen is an initial one. It is honest about what has been seen and says nothing about what has not.",
+    "spine": "The safety reading for {settlement} is an initial one. It is honest about what has been seen and says nothing about what has not."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "structureKey",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.criminalStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "structure null (nothing organized recognized)",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "structure null (nothing organized recognized)",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "criminalStructurePoolKey",
+    "rateBp": null,
+    "reads": [
+     "structureKey"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "A stranger asking after the arrangements at Hochhausen is met with genuine incomprehension, which is either the truth or an unusually good performance of it.",
+    "spine": "A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Hochhausen",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "defense.criminalStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "capture none",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "capture none",
+   "section": "order",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "CRIMINAL_CAPTURE_POOL",
+    "rateBp": null,
+    "reads": [
+     "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Whatever is being run at Hochhausen is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
+    "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[29 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "walls ABSENT",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "walls ABSENT",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "fortificationPoolKey",
+    "rateBp": 3346,
+    "reads": [
+     "forces.walls.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town has an edge rather than a boundary at Hochhausen, and the edge is wherever the last building happens to be.",
+    "spine": "The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[29 rows]",
+     "writers": 38
+    },
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "standingDefenseForces(settlement)",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "charter hall PRESENT (specialist monster response)",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "charter hall PRESENT (specialist monster response)",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "charterPoolKey",
+    "rateBp": 5169,
+    "reads": [
+     "forces",
+     "forces.charter.present"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "A stranger at Hochhausen finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+    "spine": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "magicWorksAt({ settlement })",
+     "grain": "root",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.armedForces",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "arcane defense ABSENT",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "arcane defense ABSENT",
+   "section": "forces",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "arcaneDefensePoolKey",
+    "rateBp": 6003,
+    "reads": [
+     "magicWorks"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect.",
+    "spine": "The town has no answer to anything it cannot see, and is unprepared rather than protected in that respect."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-11",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "LIVE-ROSTER",
+     "field": "institutions",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "[29 rows]",
+     "writers": 38
+    }
+   ],
+   "marks": [],
+   "mount": "defense.wallRationale",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "UNWALLED-SMALL",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "UNWALLED-SMALL",
+   "section": "forces",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Hochhausen"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "wallRationalePoolKey",
+    "rateBp": 3008,
+    "reads": [
+     "forces.walls.present",
+     "settlement.tier"
+    ],
+    "rung": "literal",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "No wall marks where Hochhausen ends; at this size the country and the town simply agree to differ.",
+    "spine": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-DEF-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "CONFIG",
+     "field": "config.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "road",
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasGranary",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.compound.inst.hasPort",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "defense.supportingCapabilities",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "Logistics & Supply: No reserves, landlocked",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "Logistics & Supply: No reserves, landlocked",
+   "section": "supporting",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+    "rateBp": 4219,
+    "reads": [
+     "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town eats what arrives, and has nothing put by against a season when nothing does.",
+    "spine": "The town eats what arrives, and has nothing put by against a season when nothing does."
+   },
+   "vid": 2
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "sim-village",
+ "staticCardJoined": true,
+ "tab": "defense",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [],
+   "charter": [
+    "Adventurers' charter hall"
+   ],
+   "contracted": [],
+   "fortifications": [],
+   "standing": []
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": false,
+   "militia": false,
+   "watch": false
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "watch",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "court",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_b4150f0588a0f37a",
+  "institutions": [
+   {
+    "category": "military",
+    "name": "Adventurers' charter hall",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Alehouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmith",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bowyer & fletcher",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Brickmaker",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Carpenter",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cartographer's workshop",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Common grazing land",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cooper",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Dwellings (80-180)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Farmland",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Fish market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Fuller",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Graveyard",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Maltster",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Mill",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple water sources",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish church",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Potter",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Priest (resident)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Sawmill",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Stone quarry",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tailor",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Thatcher",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Underground network",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Veteran's lodge",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Village reeve",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Weekly market",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Woodcarver",
+    "services": []
+   }
+  ],
+  "name": "Hochhausen",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a woman old enough to remember the custom"
+     },
+     {
+      "n": "sg",
+      "role": "one of the elders"
+     },
+     {
+      "n": "pl",
+      "role": "the households that keep the custom"
+     },
+     {
+      "n": "pl",
+      "role": "the older heads here"
+     }
+    ],
+    "source": "elders"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer at the fish market"
+     },
+     {
+      "n": "sg",
+      "role": "a buyer off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a fish seller"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sells at the market"
+     },
+     {
+      "n": "sg",
+      "role": "the market clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the women who gut the catch"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the village"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the village"
+     },
+     {
+      "n": "pl",
+      "role": "the whole village"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a local priest"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sings in the choir"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "the chapel's warden"
+     },
+     {
+      "n": "pl",
+      "role": "the people who keep the register"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at the alehouse"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers at the alehouse"
+     },
+     {
+      "n": "sg",
+      "role": "the potboy"
+     }
+    ],
+    "source": "tavern"
+   }
+  ],
+  "sources": [
+   "elders",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern"
+  ],
+  "tier": "village"
+ }
+}

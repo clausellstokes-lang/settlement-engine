@@ -1,0 +1,2393 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 184,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-STR-1",
+   "desk": "stressors",
+   "mount": "overview.crisisBanners",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-CND-1",
+   "desk": "stressors",
+   "mount": "overview.activeConditions",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-STR-2",
+   "desk": "stressors",
+   "mount": "overview.stressorLifecycle",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "desk": "general",
+   "mount": "overview.conflicts",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "desk": "general",
+   "mount": "overview.situation",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "desk": "general",
+   "mount": "overview.origin",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "desk": "general",
+   "mount": "overview.systemsHealth",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "desk": "general",
+   "mount": "overview.warnings",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-12",
+   "desk": "general",
+   "mount": "overview.ground",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-13",
+   "desk": "general",
+   "mount": "overview.market",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "desk": "general",
+   "mount": "overview.institutions",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-REL-2",
+   "desk": "general",
+   "mount": "overview.notableConnection",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-8",
+   "desk": "general",
+   "mount": "overview.steadings",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POP-3",
+   "desk": "general",
+   "mount": "overview.populationDirection",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Spitzplatz · town · germanic · threat frontier · route road · terrain river · seed render-town"
+  },
+  {
+   "kind": "machine",
+   "label": "historicalCharacter",
+   "section": "identity",
+   "text": "The Occupation did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild"
+  },
+  {
+   "block": "DS-GEN-13",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.market",
+   "pool": "MARKET-OPEN",
+   "section": "site",
+   "text": "The market was where the carts already stopped; the stalls came to the stopping, and Spitzplatz grew around the habit.",
+   "vid": 3
+  },
+  {
+   "block": "DS-GEN-17",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.institutions",
+   "pool": "ADMINISTERED",
+   "section": "site",
+   "text": "Spitzplatz is administered, visibly: rules here have rooms, and the rooms have officers.",
+   "vid": 1
+  },
+  {
+   "kind": "badge",
+   "label": "prosperity",
+   "section": "health",
+   "text": "Comfortable"
+  },
+  {
+   "kind": "badge",
+   "label": "safetyLabel",
+   "section": "health",
+   "text": "Moderate"
+  },
+  {
+   "kind": "badge",
+   "label": "readiness",
+   "section": "health",
+   "text": "Well-Defended"
+  },
+  {
+   "kind": "badge",
+   "label": "foodSecurity",
+   "section": "health",
+   "text": "Pressured"
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "prosperity: Comfortable / Prosperous",
+   "section": "health",
+   "text": "People in Spitzplatz can afford to argue about things other than money.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "economicViability.viable: true",
+   "section": "health",
+   "text": "There is no obvious reason Spitzplatz should not be here, which is a plainer compliment than it sounds.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "defenseProfile.readiness.label: Well-Defended",
+   "section": "health",
+   "text": "Spitzplatz is defended properly rather than impressively: the works are sound and none of them are for show.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.military: STRONG",
+   "section": "health",
+   "text": "Nobody in Spitzplatz expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.monster: STRONG",
+   "section": "health",
+   "text": "Spitzplatz keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.internal: ADEQUATE",
+   "section": "health",
+   "text": "Spitzplatz is orderly on the main streets and less particular about the others.",
+   "vid": 0
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.economic: STRONG",
+   "section": "health",
+   "text": "Prices in Spitzplatz are steady in a way that suggests the town is not living on the last thing that sold.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "scores.magical: WEAK",
+   "section": "health",
+   "text": "Spitzplatz keeps no arrangement for the Art; when it is wanted, it is wanted from outside.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-3",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.systemsHealth",
+   "pool": "foodSecurity.label: Pressured",
+   "section": "health",
+   "text": "The price of bread in Spitzplatz is watched, which it is not in a comfortable town.",
+   "vid": 1
+  },
+  {
+   "block": "DS-GEN-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.conflicts",
+   "pool": "intensity: moderate",
+   "section": "tensions",
+   "text": "political influence is what stands to change hands in Spitzplatz, and The Governing Council and The Order of the Watch both understand that well enough to be careful with each other.",
+   "vid": 3
+  },
+  {
+   "kind": "machine",
+   "label": "arrivalScene",
+   "section": "situation",
+   "text": "Spitzplatz smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A market town of substance: multiple streets, a visible guild quarter, a hall-and-market axis organizes the settlement center. A magelight lamp post marks the main gate. The gatehouse arch frames the main road. Spitzplatz is announced by the smoke of its cookfires and the sound of its market before its buildings are visible."
+  },
+  {
+   "kind": "machine",
+   "label": "pressureSentence",
+   "section": "situation",
+   "text": "Mechthild Wolf's relationship with Berchta Schmidt is more complicated than their public roles suggest. Berchta Schmidt is about to call it in."
+  },
+  {
+   "block": "DS-GEN-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.situation",
+   "pool": "ordinary (route road and the default)",
+   "section": "situation",
+   "text": "The road runs past Spitzplatz and Spitzplatz takes very little from it; the traffic is real and the town has stayed outside it.",
+   "vid": 3
+  },
+  {
+   "block": "DS-GEN-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.origin",
+   "pool": "road",
+   "section": "origin",
+   "text": "What Spitzplatz cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+   "vid": 2
+  },
+  {
+   "block": "DS-GEN-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.origin",
+   "pool": "tier overlay: other tiers",
+   "section": "origin",
+   "text": "Spitzplatz is a town, in the ordinary sense, and the ordinariness is accurate.",
+   "vid": 2
+  },
+  {
+   "block": "DS-REL-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.notableConnection",
+   "pool": "prominentRelationship present",
+   "section": "connection",
+   "text": "One of Spitzplatz's ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
+   "vid": 1
+  },
+  {
+   "block": "DS-REL-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "overview.notableConnection",
+   "pool": "flagDriven count zero",
+   "section": "connection",
+   "text": "Everyone in Spitzplatz is tied to everyone else for the ordinary reasons: work, family, proximity, and time.",
+   "vid": 0
+  },
+  {
+   "kind": "machine",
+   "label": "prominentRelationship",
+   "section": "connection",
+   "text": "The relationship between Berchta Schmidt and Karl Berger is best understood as outstanding debt. Karl Berger is about to call it in."
+  },
+  {
+   "kind": "roster",
+   "label": "institutions",
+   "section": "institutions",
+   "text": "institutions: Town granary, Market square, Weekly market, Annual fair, Merchant guilds (3-8), Craft guilds (5-15), Inn (multiple), Taverns (5-20), Carriers' guild, Coaching inn, Public bathhouse, Cartographer's workshop, Customs house, Post relay station, Jeweller, Listening post, Mills (2-5), Blacksmiths (3-10), Carpenters (5-15), Weavers/Textile workers, Tanners, Butchers (3-8), Bakers (5-15), Apothecary (established), Bowyers & fletchers (guild), Cobbler's guild, Tailor's guild, Town crier, Ropemaker, Parish churches (2-5), Parish burial grounds, Guild governance, Town walls, Town watch, Alchemist shop, Merchant warehouses, Adventurers' charter hall, Front businesses, Traveling performers, Town hall, Small prison/stocks, Housing (180-1000 structures), Multiple water sources, Mill, Cooper, Dairy farmer, Tannery, Potter, Caravaneer's post, Chandler, Courthouse, Street gang"
+  }
+ ],
+ "pools": [
+  {
+   "angle": "elder",
+   "authoredIndex": 3,
+   "blockId": "DS-GEN-13",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "readings",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 5
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.market",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "MARKET-OPEN",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "MARKET-OPEN",
+   "section": "site",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "marketPoolKey",
+    "rateBp": 3607,
+    "reads": [
+     "readings",
+     "readings.isEntrepot",
+     "readings.tradeRouteAccess"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "The market was where the carts already stopped; the stalls came to the stopping, and Spitzplatz grew around the habit.",
+    "spine": "The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-17",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.inst",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.institutions",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "ADMINISTERED",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "ADMINISTERED",
+   "section": "site",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "institutionsPoolKey",
+    "rateBp": 3932,
+    "reads": [
+     "readings.inst"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz is administered, visibly: rules here have rooms, and the rooms have officers.",
+    "spine": "{settlement} is administered, visibly: rules here have rooms, and the rooms have officers."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Spitzplatz",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "prosperity: Comfortable / Prosperous",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "PROSPERITY_POOL_OF",
+    "rateBp": 4089,
+    "reads": [
+     "text(label) (via PROSPERITY_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "People in Spitzplatz can afford to argue about things other than money.",
+    "spine": "People in {settlement} can afford to argue about things other than money."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.viable",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "economicViability.viable: true",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "economicViability.viable: true",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "viabilityPoolKey",
+    "rateBp": 7878,
+    "reads": [
+     "readings.viable"
+    ],
+    "rung": "template",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "There is no obvious reason Spitzplatz should not be here, which is a plainer compliment than it sounds.",
+    "spine": "There is no obvious reason {settlement} should not be here, which is a plainer compliment than it sounds."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Spitzplatz",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "defenseProfile.readiness.label: Well-Defended",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "READINESS_POOL_OF",
+    "rateBp": 3216,
+    "reads": [
+     "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz is defended properly rather than impressively: the works are sound and none of them are for show.",
+    "spine": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "scores.military: STRONG",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "scores.military: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 5469,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Nobody in Spitzplatz expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
+    "spine": "Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "scores.monster: STRONG",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "scores.monster: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 4518,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
+    "spine": "{settlement} keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 0,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "scores.internal: ADEQUATE",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "scores.internal: ADEQUATE",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 3177,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz is orderly on the main streets and less particular about the others.",
+    "spine": "{settlement} is orderly on the main streets and less particular about the others."
+   },
+   "vid": 1
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "scores.economic: STRONG",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "scores.economic: STRONG",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 4336,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Prices in Spitzplatz are steady in a way that suggests the town is not living on the last thing that sold.",
+    "spine": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "axis",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.scores",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "scores.magical: WEAK",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "scores.magical: WEAK",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "systemsHealthScorePoolKey",
+    "rateBp": 1953,
+    "reads": [
+     "axis",
+     "score"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz keeps no arrangement for the Art; when it is wanted, it is wanted from outside.",
+    "spine": "{settlement} keeps no arrangement for the Art; when it is wanted, it is wanted from outside."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-3",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "name",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "Spitzplatz",
+     "writers": 201
+    }
+   ],
+   "marks": [],
+   "mount": "overview.systemsHealth",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "foodSecurity.label: Pressured",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "foodSecurity.label: Pressured",
+   "section": "health",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "FOOD_POOL_OF",
+    "rateBp": 2383,
+    "reads": [
+     "text(label) (via FOOD_POOL_OF in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The price of bread in Spitzplatz is watched, which it is not in a comfortable town.",
+    "spine": "The price of bread in {settlement} is watched, which it is not in a comfortable town."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "unfolding",
+   "authoredIndex": 3,
+   "blockId": "DS-GEN-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "conflict.intensity",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.conflicts",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "intensity: moderate",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "intensity: moderate",
+   "section": "tensions",
+   "slots": {
+    "declared": [
+     "faction",
+     "faction2",
+     "settlement",
+     "stakes"
+    ],
+    "fills": [
+     {
+      "slot": "stakes",
+      "value": "political influence"
+     },
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "faction",
+      "value": "The Governing Council"
+     },
+     {
+      "slot": "faction2",
+      "value": "The Order of the Watch"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "conflictIntensityPoolKey",
+    "rateBp": 2721,
+    "reads": [
+     "conflict.intensity"
+    ],
+    "rung": "template",
+    "variants": 5,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "political influence is what stands to change hands in Spitzplatz, and The Governing Council and The Order of the Watch both understand that well enough to be careful with each other.",
+    "spine": "{stakes} is what stands to change hands in {settlement}, and {faction} and {faction2} both understand that well enough to be careful with each other."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "counterforce",
+   "authoredIndex": 3,
+   "blockId": "DS-GEN-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "overview.situation",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "ordinary (route road and the default)",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "ordinary (route road and the default)",
+   "section": "situation",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "SITUATION_POOL_OF_SCENE",
+    "rateBp": 3047,
+    "reads": [
+     "scene (via SITUATION_POOL_OF_SCENE in generalStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The road runs past Spitzplatz and Spitzplatz takes very little from it; the traffic is real and the town has stayed outside it.",
+    "spine": "The road runs past {settlement} and {settlement} takes very little from it; the traffic is real and the town has stayed outside it."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.tradeRouteAccess",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [
+    "deficit"
+   ],
+   "mount": "overview.origin",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "road",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "road",
+   "section": "origin",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "originRoutePoolKey",
+    "rateBp": 4284,
+    "reads": [
+     "readings.tradeRouteAccess"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "What Spitzplatz cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it.",
+    "spine": "What {settlement} cannot grow, the road brings, and the road is therefore not a convenience for this town but a condition of it."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-GEN-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.tier",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.origin",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "tier overlay: other tiers",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "tier overlay: other tiers",
+   "section": "origin",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "originTierPoolKey",
+    "rateBp": 3320,
+    "reads": [
+     "readings.tier"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz is a town, in the ordinary sense, and the ordinariness is accurate.",
+    "spine": "{settlement} is a town, in the ordinary sense, and the ordinariness is accurate."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-REL-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.prominentRelationship",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.notableConnection",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "prominentRelationship present",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "prominentRelationship present",
+   "section": "connection",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "notableConnectionPoolKey",
+    "rateBp": 6003,
+    "reads": [
+     "readings.prominentRelationship"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "One of Spitzplatz's ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
+    "spine": "One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 0,
+   "blockId": "DS-REL-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.relationships",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.relationships.length",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "overview.notableConnection",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 0,
+     "key": "flagDriven count zero",
+     "role": "spine",
+     "vid": 0
+    }
+   ],
+   "poolKey": "flagDriven count zero",
+   "section": "connection",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "flagDrivenPoolKey",
+    "rateBp": 9935,
+    "reads": [
+     "readings.relationships",
+     "readings.relationships.length"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Everyone in Spitzplatz is tied to everyone else for the ordinary reasons: work, family, proximity, and time.",
+    "spine": "Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time."
+   },
+   "vid": 1
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "render-town",
+ "staticCardJoined": true,
+ "tab": "overview",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist shop"
+   ],
+   "charter": [
+    "Adventurers' charter hall"
+   ],
+   "contracted": [],
+   "fortifications": [
+    "Town walls"
+   ],
+   "standing": [
+    "Town watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": false,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Town hall",
+     "Weekly market"
+    ],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (market is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Market square"
+    ],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "watch",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Courthouse"
+    ],
+    "interested": false,
+    "kind": "court",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_014aefbc38036f89",
+  "institutions": [
+   {
+    "category": "military",
+    "name": "Adventurers' charter hall",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Alchemist shop",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Apothecary (established)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bakers (5-15)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bowyers & fletchers (guild)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Butchers (3-8)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Caravaneer's post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Carpenters (5-15)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Carriers' guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cartographer's workshop",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Chandler",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Coaching inn",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cobbler's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cooper",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Courthouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (5-15)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Customs house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Dairy farmer",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Front businesses",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Guild governance",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (180-1000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inn (multiple)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Jeweller",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Market square",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (3-8)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant warehouses",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Mill",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Mills (2-5)",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple water sources",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish burial grounds",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (2-5)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Potter",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Small prison/stocks",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Street gang",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tailor's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tanners",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tannery",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Taverns (5-20)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Town crier",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Town granary",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Town hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town walls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town watch",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Traveling performers",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Weavers/Textile workers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Weekly market",
+    "services": []
+   }
+  ],
+  "name": "Spitzplatz",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who brought a matter to the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court day"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man on the gate"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sweeps the gatehouse"
+     },
+     {
+      "n": "sg",
+      "role": "the gatekeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the way in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a master of one of the crafts"
+     },
+     {
+      "n": "sg",
+      "role": "the dyers' warden"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a man who sits on the council"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "pl",
+      "role": "the clerks who keep the hall"
+     },
+     {
+      "n": "sg",
+      "role": "the hall's doorkeeper"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sells at the market"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "sg",
+      "role": "the market clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a local priest"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at the tavern"
+     },
+     {
+      "n": "sg",
+      "role": "a driver off the coach"
+     },
+     {
+      "n": "sg",
+      "role": "a guest at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a tavern keeper"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers at the tavern"
+     },
+     {
+      "n": "pl",
+      "role": "the inn servants"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "the potboy"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who walks the circuit"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "town"
+ }
+}

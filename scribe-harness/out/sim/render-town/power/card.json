@@ -1,0 +1,1634 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 184,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-POW-1",
+   "desk": "power",
+   "mount": "power.legitimacyBanner",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-2",
+   "desk": "power",
+   "mount": "power.stabilityHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-6",
+   "desk": "power",
+   "mount": "power.criminalUnderside",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-4",
+   "desk": "power",
+   "mount": "power.succession",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-3",
+   "desk": "power",
+   "mount": "power.factionLadder",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-5",
+   "desk": "power",
+   "mount": "power.rulingStructure",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-POW-7",
+   "desk": "power",
+   "mount": "power.blocs",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Spitzplatz · town · germanic · threat frontier · route road · terrain river · seed render-town"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.power",
+   "section": "chain",
+   "text": "the power: Guild Council"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.faction",
+   "section": "chain",
+   "text": "the faction: Guild Council"
+  },
+  {
+   "kind": "roster",
+   "label": "chain.npc",
+   "section": "chain",
+   "text": "the seat: Liutbirg Krüger · Mayor"
+  },
+  {
+   "block": "DS-POW-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.legitimacyBanner",
+   "pool": "Approved",
+   "section": "legitimacy",
+   "text": "The Guild Council's standing at Spitzplatz is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it.",
+   "vid": 3
+  },
+  {
+   "block": "DS-POW-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.legitimacyBanner",
+   "pool": "breakdown dominated by PROSPERITY, favourable",
+   "section": "legitimacy",
+   "text": "The Guild Council's standing at Spitzplatz rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more.",
+   "vid": 2
+  },
+  {
+   "kind": "badge",
+   "label": "powerStructure.stability",
+   "section": "stability",
+   "text": "Stable"
+  },
+  {
+   "kind": "roster",
+   "label": "governingName",
+   "section": "stability",
+   "text": "Guild Council"
+  },
+  {
+   "kind": "machine",
+   "label": "recentConflict",
+   "section": "stability",
+   "text": "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost."
+  },
+  {
+   "block": "DS-POW-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.stabilityHeader",
+   "pool": "stable matched",
+   "section": "stability",
+   "text": "A stranger doing business at Spitzplatz needs one name and gets one answer, and can plan a season ahead on the strength of it.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-2",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.stabilityHeader",
+   "pool": "recentConflict present",
+   "section": "stability",
+   "text": "Nobody at Spitzplatz needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.criminalUnderside",
+   "pool": "operation role money laundering",
+   "section": "underside",
+   "text": "The books of several houses at Spitzplatz are impeccable, and the impeccability is the service being purchased.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-7",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.blocs",
+   "pool": "layer DORMANT (no ledger materialized)",
+   "section": "blocs",
+   "text": "There are interests at Spitzplatz and there are no camps; a question is answered by whoever cares about that question.",
+   "vid": 1
+  },
+  {
+   "block": "DS-POW-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.rulingStructure",
+   "pool": "mixed",
+   "section": "structure",
+   "text": "The town cannot say in one word what kind of place it is governed as, and neither can the hall.",
+   "vid": 1
+  },
+  {
+   "block": "DS-POW-5",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.rulingStructure",
+   "pool": "governing body name: a SLOT, never a baked noun",
+   "section": "structure",
+   "text": "The town at Spitzplatz calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.succession",
+   "pool": "riskLabel: Holding",
+   "section": "succession",
+   "text": "The Guild Council at Spitzplatz holds because Guild Council is still the heavier of the two, and the weighing is done again every season.",
+   "vid": 2
+  },
+  {
+   "block": "DS-POW-4",
+   "face": 0,
+   "kind": "composed",
+   "mount": "power.succession",
+   "pool": "legitimacyHold: public backing hardens the hold",
+   "section": "succession",
+   "text": "There are people at Spitzplatz who would move on the Guild Council and do not, because moving on a ruler the town is behind costs more than the seat is worth.",
+   "vid": 2
+  }
+ ],
+ "pools": [
+  {
+   "angle": "unfolding",
+   "authoredIndex": 3,
+   "blockId": "DS-POW-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.legitimacyBanner",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "Approved",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "Approved",
+   "section": "legitimacy",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "Guild Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 2422,
+    "reads": [],
+    "rung": "none",
+    "variants": 4,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The Guild Council's standing at Spitzplatz is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it.",
+    "spine": "The {seat}'s standing at {settlement} is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
+   },
+   "vid": 4
+  },
+  {
+   "angle": "unfolding",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.legitimacyBanner",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "breakdown dominated by PROSPERITY, favourable",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "breakdown dominated by PROSPERITY, favourable",
+   "section": "legitimacy",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "Guild Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 3242,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The Guild Council's standing at Spitzplatz rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more.",
+    "spine": "The {seat}'s standing at {settlement} rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.stabilityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "stable matched",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "stable matched",
+   "section": "stability",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "STABILITY_LADDER",
+    "rateBp": 5612,
+    "reads": [
+     "first (via STABILITY_LADDER in powerStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "A stranger doing business at Spitzplatz needs one name and gets one answer, and can plan a season ahead on the strength of it.",
+    "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-2",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "powerStructure.factions",
+     "grain": "field",
+     "status": "LIVE",
+     "value": "[5 rows]",
+     "writers": 13
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "powerStructure.recentConflict",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.stabilityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "recentConflict present",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "recentConflict present",
+   "section": "stability",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "stabilityLensPoolKey",
+    "rateBp": 6719,
+    "reads": [
+     "power.factions",
+     "power.recentConflict"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Nobody at Spitzplatz needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+    "spine": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "counterforce",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.criminalUnderside",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "operation role money laundering",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "operation role money laundering",
+   "section": "underside",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 247,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The books of several houses at Spitzplatz are impeccable, and the impeccability is the service being purchased.",
+    "spine": "The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-7",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.politics ?? null.blocs",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.blocs",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "layer DORMANT (no ledger materialized)",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "layer DORMANT (no ledger materialized)",
+   "section": "blocs",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "politicsPresencePoolKey",
+    "rateBp": 9935,
+    "reads": [
+     "politics.blocs"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "There are interests at Spitzplatz and there are no camps; a question is answered by whoever cares about that question.",
+    "spine": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-POW-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.rulingStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "mixed",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "mixed",
+   "section": "structure",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 3125,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town cannot say in one word what kind of place it is governed as, and neither can the hall.",
+    "spine": "The town cannot say in one word what kind of place it is governed as, and neither can the hall."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-5",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.rulingStructure",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "governing body name: a SLOT, never a baked noun",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "governing body name: a SLOT, never a baked noun",
+   "section": "structure",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 9935,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The town at Spitzplatz calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
+    "spine": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "unfolding",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "power.succession",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "riskLabel: Holding",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "riskLabel: Holding",
+   "section": "succession",
+   "slots": {
+    "declared": [
+     "faction",
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "seat",
+      "value": "Guild Council"
+     },
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "faction",
+      "value": "Guild Council"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "RISK_POOL_OF",
+    "rateBp": 4036,
+    "reads": [
+     "label (via RISK_POOL_OF in powerStateProse.js)"
+    ],
+    "rung": "table",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The Guild Council at Spitzplatz holds because Guild Council is still the heavier of the two, and the weighing is done again every season.",
+    "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "counterforce",
+   "authoredIndex": 2,
+   "blockId": "DS-POW-4",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "power.succession",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "legitimacyHold: public backing hardens the hold",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "legitimacyHold: public backing hardens the hold",
+   "section": "succession",
+   "slots": {
+    "declared": [
+     "seat",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "seat",
+      "value": "Guild Council"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "legitimacyHoldPoolKey",
+    "rateBp": 2617,
+    "reads": [
+     "legitimacy.govMultiplier"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "",
+     "licences": "",
+     "moves": []
+    },
+    "pairs": [],
+    "rendered": "There are people at Spitzplatz who would move on the Guild Council and do not, because moving on a ruler the town is behind costs more than the seat is worth.",
+    "spine": "There are people at {settlement} who would move on the {seat} and do not, because moving on a ruler the town is behind costs more than the seat is worth."
+   },
+   "vid": 3
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "render-town",
+ "staticCardJoined": true,
+ "tab": "power",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist shop"
+   ],
+   "charter": [
+    "Adventurers' charter hall"
+   ],
+   "contracted": [],
+   "fortifications": [
+    "Town walls"
+   ],
+   "standing": [
+    "Town watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": false,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Town hall",
+     "Weekly market"
+    ],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (market is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Market square"
+    ],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "watch",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Courthouse"
+    ],
+    "interested": false,
+    "kind": "court",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_014aefbc38036f89",
+  "institutions": [
+   {
+    "category": "military",
+    "name": "Adventurers' charter hall",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Alchemist shop",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Apothecary (established)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bakers (5-15)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bowyers & fletchers (guild)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Butchers (3-8)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Caravaneer's post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Carpenters (5-15)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Carriers' guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cartographer's workshop",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Chandler",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Coaching inn",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cobbler's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cooper",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Courthouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (5-15)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Customs house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Dairy farmer",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Front businesses",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Guild governance",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (180-1000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inn (multiple)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Jeweller",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Market square",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (3-8)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant warehouses",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Mill",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Mills (2-5)",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple water sources",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish burial grounds",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (2-5)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Potter",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Small prison/stocks",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Street gang",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tailor's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tanners",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tannery",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Taverns (5-20)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Town crier",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Town granary",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Town hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town walls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town watch",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Traveling performers",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Weavers/Textile workers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Weekly market",
+    "services": []
+   }
+  ],
+  "name": "Spitzplatz",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who brought a matter to the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court day"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man on the gate"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sweeps the gatehouse"
+     },
+     {
+      "n": "sg",
+      "role": "the gatekeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the way in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a master of one of the crafts"
+     },
+     {
+      "n": "sg",
+      "role": "the dyers' warden"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a man who sits on the council"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "pl",
+      "role": "the clerks who keep the hall"
+     },
+     {
+      "n": "sg",
+      "role": "the hall's doorkeeper"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sells at the market"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "sg",
+      "role": "the market clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a local priest"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at the tavern"
+     },
+     {
+      "n": "sg",
+      "role": "a driver off the coach"
+     },
+     {
+      "n": "sg",
+      "role": "a guest at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a tavern keeper"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers at the tavern"
+     },
+     {
+      "n": "pl",
+      "role": "the inn servants"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "the potboy"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who walks the circuit"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "town"
+ }
+}

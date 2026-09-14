@@ -1,0 +1,1628 @@
+{
+ "audience": "dm",
+ "engineVersion": "gen-0.9.0/sim-1",
+ "epoch": {
+  "advanced": false,
+  "calendar": null,
+  "campaignEraEvents": 0,
+  "foodStockpileLastTick": null,
+  "renderYear": 184,
+  "renderYearIsFrozen": true,
+  "tick": null
+ },
+ "lastAdvance": null,
+ "mounts": [
+  {
+   "blockId": "DS-ECO-1",
+   "desk": "economy",
+   "mount": "economics.prosperityHeader",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-8",
+   "desk": "economy",
+   "mount": "economics.economyTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-2",
+   "desk": "economy",
+   "mount": "economics.foodTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-2",
+   "desk": "economy",
+   "mount": "economics.seasonTile",
+   "rung": "glance"
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "desk": "economy",
+   "mount": "economics.foodSecurity",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "desk": "economy",
+   "mount": "economics.commercialProfile",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "desk": "economy",
+   "mount": "economics.shadowEconomy",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-3",
+   "desk": "economy",
+   "mount": "economics.tradeFlow",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "desk": "economy",
+   "mount": "economics.exportPosture",
+   "rung": "sentence"
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "desk": "general",
+   "mount": "economics.craftReason",
+   "rung": "sentence"
+  }
+ ],
+ "page": [
+  {
+   "kind": "town",
+   "label": "town",
+   "section": "header",
+   "text": "Spitzplatz · town · germanic · threat frontier · route road · terrain river · seed render-town"
+  },
+  {
+   "kind": "badge",
+   "label": "prosperity",
+   "section": "glance",
+   "text": "Comfortable"
+  },
+  {
+   "kind": "machine",
+   "label": "situationDesc",
+   "section": "glance",
+   "text": "Trade proceeds at an ordinary pace for a settlement of this size."
+  },
+  {
+   "block": "DS-ECO-1",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.prosperityHeader",
+   "pool": "COMBINATION C3: the middle rungs",
+   "section": "glance",
+   "text": "There is nothing striking about Spitzplatz's condition in either direction: a working road, a working market, a town neither building nor selling off.",
+   "vid": 2
+  },
+  {
+   "kind": "glance",
+   "label": "economyTile",
+   "mount": "economics.economyTile",
+   "section": "glance",
+   "text": "Comfortable"
+  },
+  {
+   "kind": "glance",
+   "label": "foodTile",
+   "mount": "economics.foodTile",
+   "section": "glance",
+   "text": "Deficit −410 (8% of need)"
+  },
+  {
+   "block": "DS-ECO-12",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.commercialProfile",
+   "pool": "INCOME MIX: two or three sources between them",
+   "section": "commercial",
+   "text": "Ask what this town lives on and you will be given a short list rather than an answer.",
+   "vid": 1
+  },
+  {
+   "block": "DS-ECO-12",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.commercialProfile",
+   "pool": "TRADE PROFILE: exports and imports both present",
+   "section": "commercial",
+   "text": "The market at Spitzplatz carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+   "vid": 2
+  },
+  {
+   "block": "DS-ECO-10",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.exportPosture",
+   "pool": "POSTURE: established",
+   "section": "trade",
+   "text": "There is always something going out. If one trade is quiet, another is not.",
+   "vid": 2
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Sacred wood"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Ritual components"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Raw wool"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Livestock"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Leather goods"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Grain surplus"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Milled flour"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Toll revenue"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Pass transit trade"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Wild honey"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Legal services (contracts, notarial)"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryExport",
+   "section": "trade",
+   "text": "Alchemical trade (potions, reagents)"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Iron"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Salt"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Cut stone and masonry"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Warehousing and logistics services"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Quality iron tools and fittings"
+  },
+  {
+   "kind": "roster",
+   "label": "primaryImport",
+   "section": "trade",
+   "text": "Barrel-staves and cooperage"
+  },
+  {
+   "block": "DS-ECO-9",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.foodSecurity",
+   "pool": "PRESSURED",
+   "section": "food",
+   "text": "Spitzplatz is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season.",
+   "vid": 2
+  },
+  {
+   "kind": "badge",
+   "label": "foodSecurity.label",
+   "section": "food",
+   "text": "Pressured"
+  },
+  {
+   "block": "DS-GEN-18",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.craftReason",
+   "pool": "STALLED",
+   "section": "craft",
+   "text": "Spitzplatz keeps Caravaneer's post on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
+   "vid": 1
+  },
+  {
+   "block": "DS-ECO-6",
+   "face": 0,
+   "kind": "composed",
+   "mount": "economics.shadowEconomy",
+   "pool": "TIER: minor shadow activity (≥3)",
+   "section": "shadow",
+   "text": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+   "vid": 3
+  }
+ ],
+ "pools": [
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-1",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "prosperityRank(settlement.economicState.prosperity)",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.prosperityHeader",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "COMBINATION C3: the middle rungs",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "section": "glance",
+   "slots": {
+    "declared": [
+     "access",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "access",
+      "value": "road"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "prosperityHeaderPoolKey",
+    "rateBp": 4180,
+    "reads": [
+     "rank"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "There is nothing striking about Spitzplatz's condition in either direction: a working road, a working market, a town neither building nor selling off.",
+    "spine": "There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 1,
+   "blockId": "DS-ECO-12",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[10 rows]",
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources.length",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 10,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.incomeSources.reduce",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "{}",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.commercialProfile",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "INCOME MIX: two or three sources between them",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "section": "commercial",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "incomeMixPoolKey",
+    "rateBp": 4727,
+    "reads": [
+     "eco.incomeSources",
+     "eco.incomeSources.length",
+     "eco.incomeSources.reduce"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Ask what this town lives on and you will be given a short list rather than an answer.",
+    "spine": "Ask what this town lives on and you will be given a short list rather than an answer."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "visitor",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-12",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "economicState",
+     "grain": "root",
+     "status": "LIVE",
+     "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
+     "writers": 19
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": false,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.localProduction",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[33 rows]",
+     "writers": 0
+    },
+    {
+     "clock": "PULSE",
+     "field": "economicState.primaryExports",
+     "grain": "field",
+     "status": "LIVE",
+     "value": "[12 rows]",
+     "writers": 1
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.primaryImports",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": "[6 rows]",
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.commercialProfile",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "TRADE PROFILE: exports and imports both present",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "section": "commercial",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "tradeProfilePoolKey",
+    "rateBp": 6888,
+    "reads": [
+     "eco",
+     "eco.isEntrepot",
+     "eco.localProduction",
+     "eco.primaryExports",
+     "eco.primaryImports"
+    ],
+    "rung": "literal",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The market at Spitzplatz carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+    "spine": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "street",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-10",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.exportPosture.status",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.exportPosture",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "POSTURE: established",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "POSTURE: established",
+   "section": "trade",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "exportPosturePoolKey",
+    "rateBp": 5195,
+    "reads": [
+     "readings.exportPosture.status"
+    ],
+    "rung": "template",
+    "variants": 3,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "There is always something going out. If one trade is quiet, another is not.",
+    "spine": "There is always something going out. If one trade is quiet, another is not."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "threshold",
+   "authoredIndex": 2,
+   "blockId": "DS-ECO-9",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "economics.foodSecurity",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 2,
+     "key": "PRESSURED",
+     "role": "spine",
+     "vid": 2
+    }
+   ],
+   "poolKey": "PRESSURED",
+   "section": "food",
+   "slots": {
+    "declared": [
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "",
+    "rateBp": 2409,
+    "reads": [],
+    "rung": "none",
+    "variants": 3,
+    "wiring": "WIRING-UNRESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season.",
+    "spine": "{settlement} is not hungry and has no cushion. A shock to the fields or the road would be felt inside a season."
+   },
+   "vid": 3
+  },
+  {
+   "angle": "ledger",
+   "authoredIndex": 1,
+   "blockId": "DS-GEN-18",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "PULSE",
+     "field": "readings",
+     "grain": "root",
+     "status": "LIVE",
+     "value": null,
+     "writers": 5
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.activeChains",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.exploitation",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.isEntrepot",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    },
+    {
+     "clock": "SNAPSHOT",
+     "field": "readings.primaryImports",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": null,
+     "writers": 0
+    }
+   ],
+   "marks": [],
+   "mount": "economics.craftReason",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 1,
+     "key": "STALLED",
+     "role": "spine",
+     "vid": 1
+    }
+   ],
+   "poolKey": "STALLED",
+   "section": "craft",
+   "slots": {
+    "declared": [
+     "institution",
+     "settlement"
+    ],
+    "fills": [
+     {
+      "slot": "settlement",
+      "value": "Spitzplatz"
+     },
+     {
+      "slot": "institution",
+      "value": "Caravaneer's post"
+     }
+    ],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "craftReasonPoolKey",
+    "rateBp": 4219,
+    "reads": [
+     "readings",
+     "readings.activeChains",
+     "readings.exploitation",
+     "readings.isEntrepot",
+     "readings.primaryImports"
+    ],
+    "rung": "literal",
+    "variants": 2,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V5",
+     "licences": "an institution row + the state key",
+     "moves": [
+      "INSTITUTION",
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Spitzplatz keeps Caravaneer's post on a supply that has failed upstream; the building stands, the skill remains, and the books wait.",
+    "spine": "{settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait."
+   },
+   "vid": 2
+  },
+  {
+   "angle": "counterforce",
+   "authoredIndex": 3,
+   "blockId": "DS-ECO-6",
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [
+    {
+     "clock": "SNAPSHOT",
+     "field": "economicState.safetyProfile.blackMarketCapture",
+     "grain": "field",
+     "status": "FROZEN",
+     "value": 8,
+     "writers": 0
+    }
+   ],
+   "marks": [
+    "dm-only"
+   ],
+   "mount": "economics.shadowEconomy",
+   "pairKinds": [],
+   "pieces": [
+    {
+     "face": 0,
+     "index": 3,
+     "key": "TIER: minor shadow activity (≥3)",
+     "role": "spine",
+     "vid": 3
+    }
+   ],
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "section": "shadow",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": {
+    "covert": false,
+    "keyFunction": "shadowEconomyPoolKey",
+    "rateBp": 5169,
+    "reads": [
+     "eco.safetyProfile.blackMarketCapture"
+    ],
+    "rung": "literal",
+    "variants": 4,
+    "wiring": "RESOLVED"
+   },
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+    "spine": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it."
+   },
+   "vid": 3
+  }
+ ],
+ "schema": "scribe-town-card/3",
+ "seed": "render-town",
+ "staticCardJoined": true,
+ "tab": "economics",
+ "tabIsKnown": true,
+ "town": {
+  "armedForces": {
+   "arcane": [
+    "Alchemist shop"
+   ],
+   "charter": [
+    "Adventurers' charter hall"
+   ],
+   "contracted": [],
+   "fortifications": [
+    "Town walls"
+   ],
+   "standing": [
+    "Town watch"
+   ]
+  },
+  "compromised": [],
+  "compromisedRate": 0.7,
+  "culture": "germanic",
+  "forceBuckets": {
+   "garrison": false,
+   "militia": false,
+   "watch": true
+  },
+  "hasWorld": false,
+  "holders": [
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Town hall",
+     "Weekly market"
+    ],
+    "interested": false,
+    "kind": "treasury",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "muster",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "census",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "parish",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "toll-bar",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (market is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Market square"
+    ],
+    "interested": false,
+    "kind": "market",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "watch",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)"
+    ],
+    "holders": [
+     "Courthouse"
+    ],
+    "interested": false,
+    "kind": "court",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "elders",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "tradition",
+    "marks": [],
+    "rosterBacked": false,
+    "standing": "SOURCE-UNRESOLVED"
+   },
+   {
+    "absent": [
+     "captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)",
+     "controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)",
+     "captured-at-birth (road is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)"
+    ],
+    "holders": [
+     "Listening post"
+    ],
+    "interested": false,
+    "kind": "road",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "LICENSED"
+   },
+   {
+    "absent": [],
+    "holders": [],
+    "interested": false,
+    "kind": "office",
+    "marks": [],
+    "rosterBacked": true,
+    "standing": "SOURCE-UNRESOLVED"
+   }
+  ],
+  "id": "s_014aefbc38036f89",
+  "institutions": [
+   {
+    "category": "military",
+    "name": "Adventurers' charter hall",
+    "services": []
+   },
+   {
+    "category": "magic",
+    "name": "Alchemist shop",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Annual fair",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Apothecary (established)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bakers (5-15)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Blacksmiths (3-10)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Bowyers & fletchers (guild)",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Butchers (3-8)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Caravaneer's post",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Carpenters (5-15)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Carriers' guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cartographer's workshop",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Chandler",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Coaching inn",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cobbler's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Cooper",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Courthouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Craft guilds (5-15)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Customs house",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Dairy farmer",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Front businesses",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Guild governance",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Housing (180-1000 structures)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Inn (multiple)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Jeweller",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Listening post",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Market square",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant guilds (3-8)",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Merchant warehouses",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Mill",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Mills (2-5)",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Multiple water sources",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish burial grounds",
+    "services": []
+   },
+   {
+    "category": "religion",
+    "name": "Parish churches (2-5)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Post relay station",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Potter",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Public bathhouse",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Ropemaker",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Small prison/stocks",
+    "services": []
+   },
+   {
+    "category": "criminal",
+    "name": "Street gang",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tailor's guild",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tanners",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Tannery",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Taverns (5-20)",
+    "services": []
+   },
+   {
+    "category": "government",
+    "name": "Town crier",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Town granary",
+    "services": []
+   },
+   {
+    "category": "infrastructure",
+    "name": "Town hall",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town walls",
+    "services": []
+   },
+   {
+    "category": "military",
+    "name": "Town watch",
+    "services": []
+   },
+   {
+    "category": "entertainment",
+    "name": "Traveling performers",
+    "services": []
+   },
+   {
+    "category": "crafts",
+    "name": "Weavers/Textile workers",
+    "services": []
+   },
+   {
+    "category": "economy",
+    "name": "Weekly market",
+    "services": []
+   }
+  ],
+  "name": "Spitzplatz",
+  "roles": [
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a bailiff"
+     },
+     {
+      "n": "sg",
+      "role": "a clerk of the court"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who brought a matter to the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court"
+     },
+     {
+      "n": "sg",
+      "role": "one who waits on the court day"
+     },
+     {
+      "n": "pl",
+      "role": "the officers of the court"
+     }
+    ],
+    "source": "court"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man on the gate"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sweeps the gatehouse"
+     },
+     {
+      "n": "sg",
+      "role": "the gatekeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the men who hold the way in"
+     },
+     {
+      "n": "sg",
+      "role": "whoever keeps the toll book"
+     }
+    ],
+    "source": "gate"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a guild factor"
+     },
+     {
+      "n": "sg",
+      "role": "a journeyman"
+     },
+     {
+      "n": "sg",
+      "role": "a master of one of the crafts"
+     },
+     {
+      "n": "sg",
+      "role": "the dyers' warden"
+     },
+     {
+      "n": "sg",
+      "role": "the guild master"
+     },
+     {
+      "n": "pl",
+      "role": "the guilds of the town"
+     }
+    ],
+    "source": "guild"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a clerk in the hall"
+     },
+     {
+      "n": "sg",
+      "role": "a man who sits on the council"
+     },
+     {
+      "n": "sg",
+      "role": "one of the aldermen"
+     },
+     {
+      "n": "pl",
+      "role": "the clerks who keep the hall"
+     },
+     {
+      "n": "sg",
+      "role": "the hall's doorkeeper"
+     },
+     {
+      "n": "sg",
+      "role": "the mayor"
+     }
+    ],
+    "source": "hall"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a buyer off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a porter in the square"
+     },
+     {
+      "n": "sg",
+      "role": "a stallholder"
+     },
+     {
+      "n": "sg",
+      "role": "a trader come in for the fair"
+     },
+     {
+      "n": "sg",
+      "role": "a woman who sells at the market"
+     },
+     {
+      "n": "sg",
+      "role": "the fair clerk"
+     },
+     {
+      "n": "sg",
+      "role": "the market clerk"
+     },
+     {
+      "n": "pl",
+      "role": "the stallholders"
+     },
+     {
+      "n": "pl",
+      "role": "the traders at the fair"
+     }
+    ],
+    "source": "market"
+   },
+   {
+    "roster": [
+     {
+      "n": "pl",
+      "role": "anyone in the town"
+     },
+     {
+      "n": "pl",
+      "role": "every household here"
+     },
+     {
+      "n": "pl",
+      "role": "the people of the town"
+     },
+     {
+      "n": "pl",
+      "role": "the townsfolk"
+     }
+    ],
+    "source": "public"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a local priest"
+     },
+     {
+      "n": "sg",
+      "role": "a warden of one of the parishes"
+     },
+     {
+      "n": "sg",
+      "role": "one of the congregation"
+     },
+     {
+      "n": "sg",
+      "role": "the high priest"
+     },
+     {
+      "n": "pl",
+      "role": "the parish clerks"
+     }
+    ],
+    "source": "register"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter"
+     },
+     {
+      "n": "sg",
+      "role": "a drover"
+     },
+     {
+      "n": "sg",
+      "role": "a messenger off the road"
+     },
+     {
+      "n": "sg",
+      "role": "a pedlar"
+     },
+     {
+      "n": "sg",
+      "role": "a pilgrim"
+     },
+     {
+      "n": "sg",
+      "role": "a rider who stopped a night"
+     },
+     {
+      "n": "sg",
+      "role": "a traveller"
+     },
+     {
+      "n": "pl",
+      "role": "people passing through"
+     }
+    ],
+    "source": "stranger"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a carter at the tavern"
+     },
+     {
+      "n": "sg",
+      "role": "a driver off the coach"
+     },
+     {
+      "n": "sg",
+      "role": "a guest at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "a man who drinks where the carters drink"
+     },
+     {
+      "n": "sg",
+      "role": "a tavern keeper"
+     },
+     {
+      "n": "sg",
+      "role": "a woman at the long table"
+     },
+     {
+      "n": "sg",
+      "role": "an innkeeper"
+     },
+     {
+      "n": "pl",
+      "role": "the drinkers at the tavern"
+     },
+     {
+      "n": "pl",
+      "role": "the inn servants"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler"
+     },
+     {
+      "n": "sg",
+      "role": "the ostler at one of the inns"
+     },
+     {
+      "n": "sg",
+      "role": "the potboy"
+     }
+    ],
+    "source": "tavern"
+   },
+   {
+    "roster": [
+     {
+      "n": "sg",
+      "role": "a man who walks the circuit"
+     },
+     {
+      "n": "sg",
+      "role": "a night patrolman"
+     },
+     {
+      "n": "sg",
+      "role": "one of the watch"
+     },
+     {
+      "n": "sg",
+      "role": "the guard captain"
+     },
+     {
+      "n": "pl",
+      "role": "the watch"
+     }
+    ],
+    "source": "watch"
+   }
+  ],
+  "sources": [
+   "court",
+   "gate",
+   "guild",
+   "hall",
+   "market",
+   "public",
+   "register",
+   "stranger",
+   "tavern",
+   "watch"
+  ],
+  "tier": "town"
+ }
+}
