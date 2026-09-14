@@ -1,7 +1,12 @@
-# wf_00f13b26-496 — per-agent progress, 2026-09-14 18:47:44
-    - `a4fbfbedf` ? · IN FLIGHT · transcript 09-14 18:45 450 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+# wf_00f13b26-496 — per-agent progress, 2026-09-14 18:53:07
+    - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · IN FLIGHT · transcript 09-14 18:45 448 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a9265e93e` ? · IN FLIGHT · transcript 09-14 18:45 431 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a3ca72aef` ? · IN FLIGHT · transcript 09-14 18:45 443 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a7b3b52e3` ? · IN FLIGHT · transcript 09-14 18:45 438 KB · 7 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/
+    - `a9265e93e` ? · DONE · transcript 09-14 18:49 524 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["DS-ECO-6: the corpus fallback's own second sentence ('nothing organised behind it') is the exact line the brief lists as a refusa
+    - `a3ca72aef` ? · DONE · transcript 09-14 18:49 554 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 17, "notes": ["The MARKET-OPEN corpus line is itself an ORIGIN ('the market was where the carts already stopped ... grew around the habit'), wh
+    - `a7b3b52e3` ? · DONE · transcript 09-14 18:50 587 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["Two pools (DS-ECO-12 INCOME MIX and DS-GEN-18 STALLED) give their corpus-fallback spine with a hard-bar violation baked in (INCOM
     - `ae63488d5` ? · IN FLIGHT · transcript 09-14 18:45 457 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a37b653f0` ? · DONE · transcript 09-14 18:52 504 KB · 7 tool calls · files: response-opus.json · result: {"unitsWritten": 9, "notes": ["Audience is dm, yet every one of the ten pools says 'notebook: none. Return an empty list.' and 'faces to write: 0'. So the whole
+    - `aa362431e` ? · IN FLIGHT · transcript 09-14 18:50 493 KB · 9 tool calls · last: Bash grep -n -i "stance" "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-
+    - `a7b23743a` ? · IN FLIGHT · transcript 09-14 18:51 456 KB · 9 tool calls · last: Bash tail -c 500 "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339c
+    - `a8b87fbe0` ? · IN FLIGHT · transcript 09-14 18:52 449 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a625c5f1a` ? · IN FLIGHT · transcript 09-14 18:52 424 KB · 6 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr

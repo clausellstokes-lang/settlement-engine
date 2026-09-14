@@ -1,0 +1,140 @@
+{
+ "units": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "MARKET-OPEN",
+   "vid": 4,
+   "spine": "Anyone with goods to sell can take a place in the market here, and the stalls sit where the carts come off the road.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "ADMINISTERED",
+   "vid": 2,
+   "spine": "Rules here have rooms. A matter goes to the hall, the courthouse or the customs house before it goes to a person, and each of the three keeps its own hours.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Comfortable / Prosperous",
+   "vid": 3,
+   "spine": "People here can afford to argue about something other than money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 2,
+   "spine": "The town pays for itself, and no part of its keeping rests on luck.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Well-Defended",
+   "vid": 1,
+   "spine": "The walls are sound, the watch is kept, and nothing in either was built for show.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: STRONG",
+   "vid": 3,
+   "spine": "Nobody here expects the town to lose a straight fight, and the town speaks to its neighbours on that footing.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: STRONG",
+   "vid": 2,
+   "spine": "Beasts on this ground are an ordinary matter, and the town answers them with a charter hall, bowyers and a watch that knows the work.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: ADEQUATE",
+   "vid": 1,
+   "spine": "Order here keeps to the main streets, and what happens in the lanes behind them is the lanes' own business.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: STRONG",
+   "vid": 2,
+   "spine": "Prices here hold from one market day to the next, and no trade in the town is living on its last sale.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: WEAK",
+   "vid": 2,
+   "spine": "The town's own magic runs to an alchemist's shop and a lamp at the gate, and anything past that is sent for from outside.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Pressured",
+   "vid": 2,
+   "spine": "The price of bread is watched here, and the households that watch it are not short of money.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-2",
+   "poolKey": "intensity: moderate",
+   "vid": 4,
+   "spine": "The Governing Council and the Order of the Watch are careful with each other, and what they are careful about is political influence.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-5",
+   "poolKey": "ordinary (route road and the default)",
+   "vid": 4,
+   "spine": "The traffic on the road is real, and the town takes very little of its living from it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 3,
+   "spine": "The road brings what the town cannot grow, and the town has no second way to be fed.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: other tiers",
+   "vid": 3,
+   "spine": "Spitzplatz is a town in the ordinary sense of the word, and the word covers it.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "prominentRelationship present",
+   "vid": 2,
+   "spine": "One tie here carries more weight than the rest, and it is an unpaid debt that the town takes care not to disturb.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 1,
+   "spine": "Ties between people here run on the ordinary things, work and family and living a long time on the same street.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}

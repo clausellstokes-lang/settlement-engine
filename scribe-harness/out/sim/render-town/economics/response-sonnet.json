@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "Nothing about Spitzplatz stands out in either direction. The road carries its usual trade, the market keeps to its ordinary business, and the town is neither building up nor selling off.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "Ask what the town lives on, and the answer comes back as a short list, never a single trade.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "Spitzplatz's market carries the town's own goods and goods brought in from elsewhere on the same stalls, and gives a stranger no way to tell which is which. The town trades for itself, and is not a stop where other places' goods merely pass through.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "spine": "Something is always going out of this town. When one trade goes quiet, another does not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "spine": "Spitzplatz is not hungry, but it has no cushion behind that, and a shock to the fields or the road would be felt within a season.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "Caravaneer's post is kept in Spitzplatz on a supply the road no longer delivers, and the building stands, the skill remains, and the books wait.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "spine": "What passes for a shadow trade here has never grown into anything organised… there is unlicensed dealing at the edges, and nothing more to it than that, for now.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
