@@ -4133,118 +4133,118 @@ the same term reads differently from the payer's page and the receiver's, and
 each cell below is authored from the page-owner's side.
 
 **`economic` · `honored`**
-1. `[ledger]` The tribute out of {settlement} goes out on time and in full; the wagons are loaded on the day, and the clerks who load them have stopped remarking on it.
-2. `[street]` What the town owes {counterpart} it pays, and pays without incident, and the paying has become one of the ordinary burdens of the year.
-3. `[elder]` The obligation is {timeband_span} old at {settlement} and has never once been missed, which is a kind of achievement nobody here wants credit for.
+1. `[ledger]` The tribute out of {settlement} goes out on time and in full. The wagons are loaded on the day. The clerks who load them have stopped remarking on it.
+2. `[street]` What the town owes {counterpart} it pays, and pays without incident. The paying has become one of the ordinary burdens of the year.
+3. `[elder]` The obligation is {timeband_span} old at {settlement} and has never once been missed. Nobody here wants credit for that.
 
 **`economic` · `strained`**
-1. `[ledger]` The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
-2. `[street]` The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
-3. `[unfolding]` What {settlement} sends {counterpart} is still going and is going more slowly each season, and the slowing is being noticed at the other end.
+1. `[ledger]` The tribute out of {settlement} is paid, and paid grudgingly. The stores complain and the wagons run late. Every season somebody proposes that this be the last one.
+2. `[street]` The town's grain store stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
+3. `[unfolding]` What {settlement} sends {counterpart} is still going, and going more slowly each season. The slowing is being noticed at the other end.
 
 **`economic` · `defaulted`**
-1. `[ledger]` The wagons out of {settlement} have stopped. What was promised to {counterpart} is no longer being sent, and the oath that promised it is broken here.
-2. `[street]` The town has stopped paying and has not said so formally, which everyone involved understands to be the same as saying so.
+1. `[ledger]` The wagons out of {settlement} have stopped. What was promised to {counterpart} is no longer being sent. The oath that promised it is broken here.
+2. `[street]` The town has stopped paying and has not said so formally. Everyone involved understands that to be the same as saying so.
 3. `[unfolding]` {settlement} has defaulted on what it owed {counterpart}, and what happens next is entirely {counterpart}'s decision.
 
 **`relational` · `honored`**
-1. `[ledger]` {settlement} answers {counterpart}'s muster as the terms require, without enthusiasm and without delay; the banner goes because it must and it goes on time.
-2. `[street]` The town sends its people when it is called and does not pretend to be glad about it, and the not-pretending is permitted.
+1. `[ledger]` {settlement} answers {counterpart}'s muster as the terms require, without enthusiasm and without delay. The banner goes because it must, and it goes on time.
+2. `[street]` The town sends its people when it is called and does not pretend to be glad about it. Not pretending is permitted.
 3. `[visitor]` A stranger at {settlement} watches the muster go out to a war the town has no interest in, on time and in silence.
 
 **`relational` · `strained`**
-1. `[ledger]` {settlement}'s banner answers {counterpart} slowly now, and the ranks that answer it talk about not answering next time where they can be overheard.
-2. `[unfolding]` The compelled alliance is holding at {settlement} by less each season, and the muster that arrives is smaller and later than the one before it.
+1. `[ledger]` {settlement}'s banner answers {counterpart} slowly now. The ranks that answer it talk about not answering next time where they can be overheard.
+2. `[unfolding]` The forced alliance is holding at {settlement} by less each season. The muster that arrives is smaller and later than the one before it.
 3. `[street]` Fewer go each time from {settlement}, and fewer of those who go come back to the same houses.
 
 **`relational` · `defaulted`**
-1. `[ledger]` {settlement} has turned away from {counterpart}'s muster. The forced allyship is renounced, and the renunciation was public.
-2. `[street]` The town will not send its people to {counterpart} again, and has said so where it cannot be taken back.
-3. `[unfolding]` {settlement} has refused the muster and the refusal cannot be walked back; what happens next is {counterpart}'s to decide.
+1. `[ledger]` {settlement} has turned away from {counterpart}'s muster. The forced alliance is renounced, and it was renounced in public.
+2. `[street]` The town refuses to send its people to {counterpart} again. It has said so where it cannot be taken back.
+3. `[unfolding]` {settlement} has refused the muster, and the refusal cannot be walked back. What happens next is {counterpart}'s to decide.
 
 **`security` · `honored`**
-1. `[ledger]` The cap on arms holds at {settlement}; no muster gathers where the terms forbid one, and the town has arranged its defense around what remains permitted.
-2. `[counterforce]` {settlement} could raise more than it does and does not; the terms with {counterpart} are being kept where nobody is watching, which is the only place keeping them means anything.
+1. `[ledger]` The cap on arms holds at {settlement}. No muster gathers where the terms forbid one. The town has arranged its defense around what remains permitted.
+2. `[counterforce]` {settlement} could raise more than it does and does not. The terms with {counterpart} are being kept where nobody is watching. That is the only place where keeping them means anything.
 3. `[street]` The town keeps within what it agreed at {settlement}, including in the seasons when keeping to it was plainly against its interest.
 
 **`security` · `strained`**
-1. `[ledger]` The cap on arms at {settlement} is fraying. Drills are held quietly and just inside the letter of what was agreed, and the letter is being read generously.
+1. `[ledger]` The cap on arms at {settlement} is fraying. Drills are held quietly and just inside the letter of what was agreed. The letter is being read generously.
 2. `[street]` The town trains without calling it training, and everybody involved knows exactly which word is doing the work.
-3. `[counterforce]` The muster at {settlement} has not gathered and everything short of gathering has been done, which is the term being tested rather than broken.
+3. `[counterforce]` The muster at {settlement} has not gathered, and everything short of gathering has been done. The term is being tested rather than broken.
 
 **`security` · `defaulted`**
-1. `[ledger]` {settlement} has thrown off the cap on arms; the forbidden muster gathers in the open and has stopped being disguised as anything else.
-2. `[unfolding]` The town is arming past what it agreed to and is not hiding it, which means the next move belongs to {counterpart}.
+1. `[ledger]` {settlement} has thrown off the cap on arms. The forbidden muster gathers in the open, and has stopped being disguised as anything else.
+2. `[unfolding]` The town is arming past what it agreed to and is not hiding it. The next move belongs to {counterpart}.
 3. `[street]` The town is arming at {settlement} in daylight, and has stopped offering any account of it.
 
 **`territorial` · `honored`**
-1. `[ledger]` {counterpart}'s garrison keeps the walls of {settlement} without incident: resented thoroughly, and unremoved.
-2. `[street]` The soldiers who hold the town are not the town's and there is no trouble about it, which is not the same as there being no feeling about it.
-3. `[unfolding]` The garrison at {settlement} keeps the walls without incident and has kept them long enough that the absence of incident is beginning to look like the arrangement rather than the truce.
+1. `[ledger]` {counterpart}'s garrison keeps the walls of {settlement} without incident. It is thoroughly resented, and it has not been removed.
+2. `[street]` The soldiers who hold the town are not the town's, and there is no trouble about it. That is not the same as there being no feeling about it.
+3. `[unfolding]` The garrison at {settlement} keeps the walls without incident and has kept them long enough. The absence of incident is beginning to look like the arrangement rather than the truce.
 
 **`territorial` · `strained`**
-1. `[street]` The garrison keeps {settlement}'s walls uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.
-2. `[unfolding]` What was a quiet occupation at {settlement} is becoming a contested one, incident by incident, and no single incident has been large enough to name.
-3. `[ledger]` The garrison at {settlement} is spending more of its strength on the town than on the walls, and the proportion is moving the wrong way.
+1. `[street]` The garrison keeps {settlement}'s walls uneasily now. The townspeople chafe and stones are thrown. The throwing has stopped being the work of children.
+2. `[unfolding]` What was a quiet occupation at {settlement} is becoming a contested one, incident by incident. No single incident has been large enough to name.
+3. `[ledger]` The garrison at {settlement} is spending more of its strength on the town than on the walls. The proportion is moving the wrong way.
 
 **`territorial` · `defaulted`**
-1. `[ledger]` The garrison at {settlement} is besieged inside the very town it holds; the occupation is repudiated and the repudiation is armed.
+1. `[ledger]` The garrison at {settlement} is besieged inside the very town it holds. The occupation is refused, and the refusal is armed.
 2. `[street]` The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.
 3. `[unfolding]` What holds {settlement}'s walls is now under attack from inside them, and the occupation has become a siege in reverse.
 
 **`political` · `honored`**
-1. `[ledger]` The installed seat at {settlement} still sits, propped exactly as precariously as it was on the day it was set, and propped effectively.
-2. `[visitor]` A stranger at {settlement} deals with a hall that plainly answers elsewhere, and finds it functions perfectly well on that basis.
-3. `[street]` The town at {settlement} deals with the installed seat because it must, and deals with it competently, which is not the same as accepting it.
+1. `[ledger]` The installed seat at {settlement} still sits. It is propped exactly as precariously as it was on the day it was set. It is propped effectively.
+2. `[visitor]` A stranger at {settlement} deals with a hall that plainly answers elsewhere. He finds it works perfectly well on that basis.
+3. `[street]` The town at {settlement} deals with the installed seat because it must, and deals with it competently. That is not the same as accepting it.
 
 **`political` · `strained`**
-1. `[ledger]` The installed seat at {settlement} wavers; its writ runs thinly beyond the hall itself, and the parts of the town that ignore it are growing.
-2. `[unfolding]` What was set up at {settlement} to govern is governing less each season, and nothing has been sent to shore it up.
-3. `[street]` The installed seat at {settlement} is obeyed inside the hall and increasingly nowhere else, and the boundary moves inward each season.
+1. `[ledger]` The installed seat at {settlement} wavers. What it decides carries little weight beyond the hall itself. The parts of the town that ignore it are growing.
+2. `[unfolding]` What was set up at {settlement} to govern is governing less each season. Nothing has been sent to shore it up.
+3. `[street]` The installed seat at {settlement} is obeyed inside the hall and increasingly nowhere else. The boundary moves inward each season.
 
 **`political` · `defaulted`**
-1. `[ledger]` The installed seat at {settlement} is cast down and the strings that held it are cut; whatever governs here now, it is not {counterpart}'s arrangement.
+1. `[ledger]` The installed seat at {settlement} is cast down, and the strings that held it are cut. Whatever governs here now, it is not {counterpart}'s arrangement.
 2. `[street]` The town took its hall back, and the taking was not gentle and was not disputed by anybody who lives here.
-3. `[unfolding]` The seat {counterpart} set at {settlement} is gone, and what stands in its place has not yet had to say what it will do about the rest of the terms.
+3. `[unfolding]` The seat {counterpart} set at {settlement} is gone. What stands in its place has not yet had to declare its intentions about the rest of the terms.
 
 **`informational` · `honored`**
-1. `[ledger]` The court at {settlement} stays open to {counterpart}'s watching eyes exactly as the clause requires, and the watchers see what they were promised.
-2. `[street]` There are people at the hall who are not the town's and everybody knows which, and the arrangement is tolerated as the price of the peace.
+1. `[ledger]` The court at {settlement} stays open to {counterpart}'s watching eyes exactly as the clause requires. The watchers see what they were promised.
+2. `[street]` There are people at the hall who are not the town's, and everybody knows which. The arrangement is tolerated as the price of the peace.
 3. `[visitor]` A stranger at {settlement}'s hall finds people present who are plainly not the town's and are plainly entitled to be there.
 
 **`informational` · `strained`**
-1. `[ledger]` The openness of {settlement}'s court is narrowing; the observers are seeing less than they are owed, and are not yet in a position to insist.
-2. `[unfolding]` Doors at {settlement} that were meant to stay open are closing one at a time, and none of the closings alone is worth an incident.
-3. `[street]` The observers at {settlement} are still in the room and are being told less in it, and neither side has said so aloud.
+1. `[ledger]` The openness of {settlement}'s court is narrowing. The observers are seeing less than they are owed. They are not yet in a position to insist.
+2. `[unfolding]` Doors at {settlement} that were meant to stay open are closing one at a time. None of the closings alone is worth an incident.
+3. `[street]` The observers at {settlement} are still in the room and are being told less in it. Neither side has said so aloud.
 
 **`informational` · `defaulted`**
 1. `[ledger]` {settlement}'s court has closed its doors. The disclosure clause is dead, and {counterpart}'s eyes are outside the building.
 2. `[street]` The observers have been put out of the hall at {settlement}, politely and without any pretence about what it means.
-3. `[unfolding]` The hall at {settlement} has closed and {counterpart} now knows only what it can find out, which is a different relationship entirely.
+3. `[unfolding]` The hall at {settlement} has closed and {counterpart} now knows only what it can find out. That is a different relationship entirely.
 
 **`sovereignty` · `honored`**
-1. `[ledger]` No foreign banner marches on {counterpart}'s succession and none marches on {settlement}'s; the pledge of non-intervention holds on both sides of it.
-2. `[counterforce]` There has been a contest at {counterpart} that {settlement} could have reached into and did not, and the restraint is entered as such.
-3. `[street]` Neither town interferes in the other's quarrels, and at {settlement} that restraint is discussed as a point of pride rather than of policy.
+1. `[ledger]` No foreign banner marches on {counterpart}'s succession, and none marches on {settlement}'s. The pledge not to interfere holds on both sides of it.
+2. `[counterforce]` There has been a contest at {counterpart} that {settlement} could have reached into and did not. The holding back counts as restraint.
+3. `[street]` Neither town interferes in the other's quarrels. At {settlement} that restraint is discussed as a point of pride rather than of policy.
 
 **`sovereignty` · `strained`**
-1. `[ledger · dm-only]` Foreign coin stirs beneath {settlement}'s internal contests again, and the pledge of non-intervention frays at the edges where the coin lands.
+1. `[ledger · dm-only]` Foreign coin stirs beneath {settlement}'s internal contests again. The pledge not to interfere frays at the edges where the coin lands.
 2. `[unfolding · dm-only]` Somebody outside is beginning to have opinions about who governs {settlement}, and the opinions are arriving with money attached.
-3. `[street · dm-only]` Somebody at {settlement} is being funded from outside, and the funding is careful enough that nothing can yet be said about it in the hall.
+3. `[street · dm-only]` Somebody at {settlement} is being funded from outside. The funding is careful enough that nothing can yet be said about it in the hall.
 
 **`sovereignty` · `defaulted`**
-1. `[ledger]` An army has crossed into {settlement}'s internal quarrel; the pledge of non-intervention lies broken, and openly.
-2. `[street]` The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.
+1. `[ledger]` An army has crossed into {settlement}'s internal quarrel. The pledge not to interfere is broken, and it is broken in the open.
+2. `[street]` The town's own dispute is no longer the town's own. The people who made it somebody else's are visible from the gate.
 3. `[unfolding]` {settlement}'s internal quarrel now has a foreign army in it, and whatever it was about before, it is about that now.
 
 **generic floor · `honored`** *(unnamed family)*
 1. `[ledger]` The term is kept at {settlement} as it was written, and the peace holds along this seam of it.
-2. `[street]` Whatever was agreed is being done, and the town has stopped watching to see whether it will be.
-3. `[visitor]` A stranger at {settlement} would not know from the town's conduct that there was a term here at all, which is what keeping one looks like.
+2. `[street]` Whatever was agreed is being done. The town has stopped watching to see whether it is being done.
+3. `[visitor]` A stranger at {settlement} would not know from the town's conduct that there was a term here at all. That is what keeping one looks like.
 
 **generic floor · `strained`**
-1. `[ledger]` The term is kept at {settlement} only barely; the strain of keeping it shows, and the showing is getting worse rather than better.
-2. `[unfolding]` What was agreed is still being done at {settlement}, later and more grudgingly each season, and nobody has yet decided to stop.
+1. `[ledger]` The term is kept at {settlement} only barely. The strain of keeping it shows, and the showing is getting worse rather than better.
+2. `[unfolding]` What was agreed is still being done at {settlement}, later and more grudgingly each season. Nobody has yet decided to stop.
 3. `[street]` The town keeps what it agreed at {settlement} and has begun to talk openly about the cost of keeping it.
 
 **generic floor · `defaulted`**
@@ -4253,23 +4253,23 @@ each cell below is authored from the page-owner's side.
 3. `[unfolding]` This part of the agreement has failed at {settlement}, and the parts still standing are now carrying the weight of it.
 
 **`fraying` set on a term with time still to run**
-1. `[unfolding]` This part of the peace at {settlement} has {timeband_span} left on it and will not reach the end of it in the shape it started.
-2. `[ledger]` The term still has its years to run and is failing inside them, which is a different problem from a term expiring.
-3. `[street]` Everybody at {settlement} expects this term to fail before it expires, and expects it openly enough that the expecting is helping it along.
+1. `[unfolding]` This part of the peace at {settlement} has {timeband_span} left on it. It does not reach the end of that time in the shape it started.
+2. `[ledger]` The term still has its years to run and is failing inside them. That is a different problem from a term expiring.
+3. `[street]` Everybody at {settlement} expects this term to fail before it expires. They expect it openly enough that the expecting is helping it along.
 
 **document-level: the treaty runs out within the year**
-1. `[ledger]` What binds {settlement} to {counterpart} expires within the year, and both towns have started arranging for what follows rather than for what remains.
+1. `[ledger]` What binds {settlement} to {counterpart} expires within the year. Both towns have started arranging for what follows rather than for what remains.
 2. `[street]` The peace has a short time left in it, and the town has begun to talk about afterwards as a real place.
-3. `[threshold]` The peace at {settlement} has a short time left in it, and what replaces it is a decision nobody has made, which is itself the most dangerous fact about the coming season.
+3. `[threshold]` The peace at {settlement} has a short time left in it. What replaces it is a decision nobody has made. That is itself the most dangerous fact about the coming season.
 
 **document-level: the town is the LOSER side**
-1. `[ledger]` {settlement} signed this peace from beneath and the terms show it throughout; nothing in the document was negotiated so much as accepted.
+1. `[ledger]` {settlement} signed this peace from beneath, and the terms show it throughout. Nothing in the document was negotiated so much as accepted.
 2. `[elder]` The town has carried these terms {timeband_since} and has stopped describing them as recent.
 3. `[street]` The town at {settlement} calls the document by its proper name and has never once called it an agreement.
 
 **document-level: the town is the VICTOR side**
-1. `[ledger]` {settlement} wrote these terms and {counterpart} keeps them, and what the town is owed arrives because the town won rather than because it asked.
-2. `[unfolding]` What {settlement} took at the table is still arriving, and the arriving is what the victory actually consists of now.
+1. `[ledger]` {settlement} wrote these terms and {counterpart} keeps them. What the town is owed arrives because the town won rather than because it asked.
+2. `[unfolding]` What {settlement} took at the table is still arriving. The arriving is what the victory actually consists of now.
 
 ---
 
