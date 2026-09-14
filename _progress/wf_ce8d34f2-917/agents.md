@@ -1,7 +1,11 @@
-# wf_ce8d34f2-917 — per-agent progress, 2026-09-14 16:49:41
-    - `a38b65557` ? · IN FLIGHT · transcript 09-14 16:48 448 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+# wf_ce8d34f2-917 — per-agent progress, 2026-09-14 16:55:02
+    - `a38b65557` ? · DONE · transcript 09-14 16:54 601 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Seats with no roster: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and the two DS-DEF-2 faces seated on `garrison` hav
     - `aef1b837d` ? · IN FLIGHT · transcript 09-14 16:48 459 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a986300e6` ? · IN FLIGHT · transcript 09-14 16:48 434 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a22d3524e` ? · IN FLIGHT · transcript 09-14 16:48 446 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
-    - `a928cc714` ? · IN FLIGHT · transcript 09-14 16:48 444 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `a986300e6` ? · DONE · transcript 09-14 16:51 516 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The `stance` label on each pool (visitor / street / ledger / threshold / counterforce) is given but the brief only says the three
+    - `a22d3524e` ? · DONE · transcript 09-14 16:52 552 KB · 9 tool calls · files: response-opus.json · result: {"unitsWritten": 17, "notes": ["Page is audience dm, but every one of the 17 pools says 'faces to write: 0' and 'notebook: none'. So the whole DM register (PART
+    - `a928cc714` ? · DONE · transcript 09-14 16:51 538 KB · 10 tool calls · files: response-sonnet.json · result: {"unitsWritten": 7, "notes": ["DS-GEN-18 STALLED's own corpus fallback line contains a semicolon, which breaches the mechanical bar the brief itself enforces (n
     - `a055d73a7` ? · IN FLIGHT · transcript 09-14 16:48 458 KB · 8 tool calls · last: Bash wc -c /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/sc
+    - `af2bc1e0f` ? · IN FLIGHT · transcript 09-14 16:51 432 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `afc4895da` ? · IN FLIGHT · transcript 09-14 16:52 432 KB · 5 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
+    - `aa0588578` ? · IN FLIGHT · transcript 09-14 16:52 436 KB · 5 tool calls · last: Bash sed -n '435,691p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
+    - `acbd07571` ? · IN FLIGHT · transcript 09-14 16:54 452 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp

@@ -1,0 +1,60 @@
+{
+ "units": [
+  {
+   "blockId": "DS-ECO-1",
+   "poolKey": "COMBINATION C3: the middle rungs",
+   "vid": 3,
+   "spine": "The road is open and nothing here is being built or sold off.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "INCOME MIX: two or three sources between them",
+   "vid": 2,
+   "spine": "The town lives on a short list of trades and not on any one of them.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-12",
+   "poolKey": "TRADE PROFILE: exports and imports both present",
+   "vid": 3,
+   "spine": "The market at Spitzplatz carries the town's own goods and other towns' goods on the same stalls. What is made here and what is brought in are not sorted out for a stranger.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-10",
+   "poolKey": "POSTURE: established",
+   "vid": 3,
+   "spine": "Something is always going out of here, and when one trade is quiet another is not.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-9",
+   "poolKey": "PRESSURED",
+   "vid": 3,
+   "spine": "Nobody here goes hungry, and the grain in store is the grain the town eats.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-18",
+   "poolKey": "STALLED",
+   "vid": 2,
+   "spine": "The Caravaneer's post stands open and its business has stalled.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-ECO-6",
+   "poolKey": "TIER: minor shadow activity (≥3)",
+   "vid": 3,
+   "spine": "The unlicensed trade here is small, and small is not the same as unowned: the town has front businesses, and somebody keeps them. Nobody has counted what goes through them, and whoever counted would learn who they answer to.",
+   "faces": [],
+   "notebook": []
+  }
+ ]
+}
