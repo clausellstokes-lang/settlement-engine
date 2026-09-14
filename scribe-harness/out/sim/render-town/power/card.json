@@ -265,7 +265,8 @@
     "rendered": "The Guild Council's standing at Spitzplatz is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it.",
     "spine": "The {seat}'s standing at {settlement} is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
    },
-   "vid": 4
+   "vid": 4,
+   "writeable": false
   },
   {
    "angle": "unfolding",
@@ -332,7 +333,8 @@
     "rendered": "The Guild Council's standing at Spitzplatz rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more.",
     "spine": "The {seat}'s standing at {settlement} rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "visitor",
@@ -395,7 +397,8 @@
     "rendered": "A stranger doing business at Spitzplatz needs one name and gets one answer, and can plan a season ahead on the strength of it.",
     "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -410,7 +413,9 @@
      "clock": "PULSE",
      "field": "powerStructure.factions",
      "grain": "field",
+     "state": "decided",
      "status": "LIVE",
+     "unknown": false,
      "value": "[5 rows]",
      "writers": 13
     },
@@ -418,7 +423,9 @@
      "clock": "SNAPSHOT",
      "field": "powerStructure.recentConflict",
      "grain": "field",
+     "state": "decided",
      "status": "FROZEN",
+     "unknown": false,
      "value": "Guild Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.",
      "writers": 0
     }
@@ -476,7 +483,8 @@
     "rendered": "Nobody at Spitzplatz needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
     "spine": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": true
   },
   {
    "angle": "counterforce",
@@ -537,7 +545,8 @@
     "rendered": "The books of several houses at Spitzplatz are impeccable, and the impeccability is the service being purchased.",
     "spine": "The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -552,7 +561,9 @@
      "clock": "SNAPSHOT",
      "field": "readings.politics ?? null.blocs",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -607,7 +618,8 @@
     "rendered": "There are interests at Spitzplatz and there are no camps; a question is answered by whoever cares about that question.",
     "spine": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -661,7 +673,8 @@
     "rendered": "The town cannot say in one word what kind of place it is governed as, and neither can the hall.",
     "spine": "The town cannot say in one word what kind of place it is governed as, and neither can the hall."
    },
-   "vid": 2
+   "vid": 2,
+   "writeable": false
   },
   {
    "angle": "street",
@@ -722,7 +735,8 @@
     "rendered": "The town at Spitzplatz calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
     "spine": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "unfolding",
@@ -796,7 +810,8 @@
     "rendered": "The Guild Council at Spitzplatz holds because Guild Council is still the heavier of the two, and the weighing is done again every season.",
     "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   },
   {
    "angle": "counterforce",
@@ -811,7 +826,9 @@
      "clock": "SNAPSHOT",
      "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
      "grain": "field",
+     "state": "unreadable",
      "status": "FROZEN",
+     "unknown": true,
      "value": null,
      "writers": 0
     }
@@ -871,10 +888,11 @@
     "rendered": "There are people at Spitzplatz who would move on the Guild Council and do not, because moving on a ruler the town is behind costs more than the seat is worth.",
     "spine": "There are people at {settlement} who would move on the {seat} and do not, because moving on a ruler the town is behind costs more than the seat is worth."
    },
-   "vid": 3
+   "vid": 3,
+   "writeable": false
   }
  ],
- "schema": "scribe-town-card/3",
+ "schema": "scribe-town-card/4",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "power",

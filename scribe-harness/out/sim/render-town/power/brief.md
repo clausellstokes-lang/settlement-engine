@@ -89,9 +89,12 @@ elsewhere, or of what comes down the road from anywhere named.
 THE TWO LADDERS, WHICH ARE BOTH THE ENGINE'S. The posture badge word (Fortress, Well-Defended,
 Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,
 WEAK, CRITICAL) are TWO ladders over ONE score and both are the engine's. Write to the pool
-key's band; never name the badge word and never reconcile the two. A funding note reading
-`Upkeep underfunded ... at 97%` beside `Economic Backing: Well-funded` is likewise two true
-readings of two fields; write to the pool key and neither number.
+key's band; never name the badge word and never reconcile the two. A line that agrees with the
+band is NOT a contradiction of the badge, and neither reading refutes the other.
+
+THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE. A note reading `Upkeep underfunded ... at 97%`
+beside `Economic Backing: Well-funded` is two true readings of two fields and not a
+contradiction; write to the pool key and to neither number.
 
 THE CORPUS LINE'S STANDING. The corpus line given with a pool is the CLAIM you must keep and
 the line that ships if yours is refused. It is not a model of the law: where it breaks a bar
