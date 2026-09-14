@@ -394,9 +394,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "A guild member says the trades fill the purse before anybody in the hall decides how it is spent.",
             "At the tavern a carter says the ones who come in off the walk stand by the door. The talk in the room goes on around them.",
             "Whoever buries the dead says the ground fills from the outlying work, where people work alone.",
-            "One of the garrison says the purse is decided by people who do not stand the nights.",
+            "One of the garrison says the purse that pays him is decided by people who do not stand the nights.",
             "What reaches the court from the line is a debt between households, by the court's own account.",
-            "Stallholders say goods from outside are looked over at the way through before the stalls go up, and priced after.",
+            "Stallholders reckon goods from outside are looked over at the way through before the stalls go up, and priced after.",
             "The elders have it that the turn goes round the households and is settled between them. A day stood on the line is a day the field does not get back."
           ],
           "sources": [
@@ -440,11 +440,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "Those who hold the way through say the trouble at the bar is a matter of late carts and the people driving them.",
+            "Those who hold the way through report the trouble at the bar as a matter of late carts and the people driving them.",
             "At the tavern they say what comes to the bar late is not always a cart.",
             "A traveller says the people at the way through looked him over and went on with their talk.",
             "The burials the country causes are done in the same hours as any other, whoever buries the dead says.",
-            "The muster says whoever goes up is whoever the household could spare that day.",
+            "The muster says whoever goes up is whoever his own household could spare that day.",
             "One of the watch walks his round under the gate. The walk above it belongs to whoever stands it.",
             "A guild member says the apprentices learn the hours of the way through before they learn much of the trade.",
             "A clerk in the hall says the works are a standing charge on the hall, the same as the water.",
@@ -492,14 +492,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "A traveller says people here name what is in the country as readily as they name their own work.",
             "The muster says it can be on the line or at its own work, and the town asks for both on the same day.",
-            "A guild member says the trades carry what the line costs them and talk of it among themselves.",
+            "A guild member reports that the trades carry what the line costs them and talk of it among themselves.",
             "A clerk in the hall says the purse carries the line and the people on it alike, and the town has never been asked to choose between them.",
-            "One of the garrison says the choosing is done on the walk, on any night two things come at once.",
+            "One of the garrison says he does the choosing himself, on the walk, on any night two things come at once.",
             "Stallholders say the goods that come in late come in by leave, and the leave is somebody's to give.",
             "The round leaves parts of the town out, one of the watch says, and the people who live on them know which.",
-            "Whoever buries the dead says the ones the country takes are brought in by the people standing nearest. Those people go back out after.",
+            "Whoever buries the dead says the ones the country takes are carried to him by the people standing nearest. Those people go back out after.",
             "At the tavern they say the town is one bad night from finding out, and nobody there says what it would find out.",
-            "The court says the matters that reach it from the line arrive in daylight, after the people who were standing have gone home.",
+            "The court holds that the matters reaching it from the line arrive in daylight, after the people who were standing have gone home.",
             "The elders have it that the households find somebody to send, and what the finding costs a household is its own business."
           ],
           "sources": [
@@ -552,9 +552,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "One of the watch says what the hall sends does not reach the far side of the line.",
             "The guilds say the work on the line is let out when the trades have hands to spare, and the households that send the hands are paid nothing.",
             "A traveller found the line better kept than the place looks able to keep it, and could get nobody to name who pays.",
-            "Whoever buries the dead says the works have made no difference to the ones the country takes.",
+            "Whoever buries the dead says the works have made no difference to what he has to bury.",
             "Nothing reaches the court from the line but a dispute between neighbours over work owed, by its own account.",
-            "At the tavern they say the ones who hold the way through live nearest to it.",
+            "At the tavern they reckon the ones who hold the way through live nearest to it.",
             "The stallholders take the stalls in the square down while there is light left.",
             "The elders say the households behind the line have always kept it, and which of them keeps which part is settled among themselves."
           ],
@@ -599,13 +599,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Those who hold the way through say the road is theirs as far as they can see down it, and what comes off the country comes without notice.",
             "A clerk in the hall tells a stranger the works are the town's own and he may walk them by asking at the hall first.",
-            "One of the watch says a traveller is stopped here by somebody wanted back at a trade, and is through quicker than in a town with soldiers.",
-            "A guild member says a stranger haggles over every price in the town and never over the bed inside the line.",
+            "One of the watch says he stops a traveller with his own trade waiting, and gets him through quicker than a town with soldiers would.",
+            "A guild member says a stranger haggles over every price the trades set and never over the bed inside the line.",
             "At the tavern a stranger is asked about the road before he is asked his business.",
             "Whoever buries the dead says the ones the country takes on the road are carried in by whoever came upon them.",
             "A stranger's goods are looked over at the bar and priced again at the stalls, the stallholders say.",
             "The court says a stranger stopped on his way in may bring the matter before it. Nobody owes him a reason for the stopping.",
-            "The elders say a stranger who comes in after dark is let through unasked, and the asking keeps until morning."
+            "The elders say a stranger who comes in after dark is let through unasked, and they put the question to him in the morning."
           ],
           "sources": [
             null,
@@ -630,11 +630,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "Whoever holds the way through says the bar goes down at dusk. Nobody has told him what is done if something is already inside it.",
             "The hall has been told what the nights cost, one of the watch says, and told plainly.",
             "A clerk in the hall says nothing about the line has reached the hall in a form it can act on.",
-            "At the tavern they say the ones who go out to the line are owed by everyone who stays behind.",
+            "At the tavern the ones who go out to the line say they are owed by everyone who stays behind.",
             "The court says a household that sends nobody can be brought before it. The bringing is where the matter ends.",
             "A guild member says the trades would pay for a company of their own if the paying stopped there, and it never does.",
             "Whoever buries the dead says what the country takes is buried with everyone else, and nobody asks for the ground to be kept apart.",
-            "The elders say the grain leaves the line to be ground and comes back through the same gap. Nobody has put up another way of doing it."
+            "The elders have it that the grain leaves the line to be ground and comes back through the same gap. Nobody has put up another way of doing it."
           ],
           "sources": [
             null,
@@ -722,12 +722,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "Stallholders say the people who trade here from outside come early and leave while the market is still full.",
-            "A clerk in the hall says the purse pays the mill, the water and the burying first, and the households who fill it set that order.",
+            "A clerk in the hall reckons the purse pays the mill, the water and the burying first, and the households who fill it set that order.",
             "The court says a household can be brought before it for help it did not give, and the giving stays the household's own.",
             "At the tavern the last of the company sees the late drinker to his door.",
             "The door of the last house stays on the latch until everyone is in, one of the elders says. The one who comes in last drops the latch.",
             "A lamp is left burning for him at the far end of the road, one of the watch says. The house there pays for the light.",
-            "A guild member says the country takes its share of the trades on the road, and the town asks for its own at the market.",
+            "A guild member holds that the country takes its share of the trades on the road, and the town asks for its own at the market.",
             "By a traveller's account he is fed before he is asked his business, and the same house shows him the road out."
           ],
           "sources": [
@@ -749,10 +749,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "The stallholders say a load brought in off the country is priced for the carrying before it is priced for the goods.",
-            "A guild member says the trades pay that carrying at both ends of the road and count it a charge the town lays on them.",
+            "A guild member reckons the trades pay that carrying at both ends of the road and count it a charge the town lays on them.",
             "The houses at the edge send him word of a stranger, one of the watch says, and he carries it to the hall.",
             "At the tavern they say the talk stops when a stranger sits down and starts again when he asks about the country.",
-            "One of the elders says the dogs are put out when the light goes. Nobody here calls that a watch.",
+            "One of the elders says the households put their own dogs out when the light goes. Nobody here calls that a watch.",
             "A local priest says a stranger who dies on the road is buried at the town's cost, in the ground the town keeps for its own.",
             "The court says what it is asked to settle after a bad night is who took in whom, and at whose cost.",
             "The first thing a traveller is asked here, by his own account, is whether he came by the road or off it."
@@ -807,12 +807,12 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The elders hold that a household behind the line owes work on it. The work is owed whether the household has somebody to send or not.",
             "A clerk in the hall says the line is kept out of the common purse.",
             "The guilds say it is kept out of the toll the trades pay at the way through.",
-            "At the tavern they say the men on the line and the line itself come out of one purse, and which is paid first is the evening's argument.",
+            "At the tavern they reckon the men on the line and the line itself come out of one purse, and which is paid first is the evening's argument.",
             "Whoever buries the dead says the ground is filled by the ordinary causes, and the country outside is not much among them.",
             "The muster says it would hold the line against whatever the country sends. Nobody asks it what the holding takes.",
             "The court says what reaches it from the frontier is a dispute over what was counted at the way through, and no other kind.",
             "One of the garrison says the same purse keeps the line and feeds the men on it, and asks which the hall would sooner see short.",
-            "Stallholders say what comes from outside comes in through the way through and is counted there."
+            "Stallholders say what comes from outside is counted at the way through before it reaches their boards."
           ],
           "sources": [
             null,
@@ -858,11 +858,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "A travelling trader says nobody here asked him what he had seen on the road, and he had an answer ready.",
             "Those who hold the way through drop the bar at dusk, and the hour is never argued over.",
             "A local priest prays for the men on the line in the same breath as the roads.",
-            "The hall says nothing about the nights has come to it as a complaint.",
-            "The watch says the complaints are made at the way through and go no further.",
+            "The hall holds that nothing about the nights has come to it as a complaint.",
+            "The watch says the complaints are made to it at the way through and go no further.",
             "At the tavern the talk is of who stands the nights, and the country itself does not come up.",
             "The garrison says nobody comes out of the town to watch a drill.",
-            "A guild member says the trades pay the toll at the way through. The line it keeps is counted as everyone's.",
+            "A guild member reckons the trades pay the toll at the way through. The line it keeps is counted as everyone's.",
             "At the market they say the stalls go up whatever the country is doing.",
             "The court says a dispute over the toll is settled on the day it is brought, and the country brings it none.",
             "The elders say the young stand the nights and the old say how they are stood."
@@ -914,11 +914,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 3,
           "wordings": [
-            "Stallholders say the trade comes in through the bar by daylight and does not say what it saw on the road.",
-            "Whoever buries the dead says the ones the country takes are taken on the road.",
+            "Stallholders report that the trade comes in through the bar by daylight and does not say what it saw on the road.",
+            "Whoever buries the dead says the ones he is called out for are taken on the road.",
             "Those who hold the way through keep a light at the bar after dark and say it is there to be seen from the country.",
             "The court says leaving the way through open is a matter it hears, and hears quickly.",
-            "The muster says being on the line in daylight is as much of the work as being on it after dark.",
+            "The muster holds that being on the line in daylight is as much of the work as being on it after dark.",
             "At the tavern a carter says the road in is walked in company. The company is paid for by whoever is carrying the most.",
             "The garrison says the country is walked so that it does not have to be fought.",
             "The guilds say the trade pays at the bar and works the road beyond it.",
@@ -1013,10 +1013,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "By the guilds' reckoning the road begins where the houses stop, and what the trade loses to it is lost within sight of the last house.",
             "The muster says a stranger is another pair of hands if he is still here when the word comes. Nobody tells him so beforehand.",
             "The watch holds that it is told about a stranger before anybody else in the town is.",
-            "At the tavern they say the watch is told about a stranger last of anybody in the town, and then told by everybody.",
+            "At the tavern they say the watch hears about a stranger last of anybody in the town, and then hears it from the tables.",
             "A clerk in the hall says a stranger is nothing to the hall until he asks something of it.",
             "Stallholders say nobody has told them who a stranger is before he reaches the stall, and he is a customer until somebody does.",
-            "A local priest says a stranger is owed a roof and a hearing, and the town gives the roof.",
+            "A local priest says the church owes a stranger a roof and a hearing, and the town gives the roof.",
             "The garrison says nobody has ever given it the task of knowing who is in the place.",
             "The court says a stranger may bring a complaint and be heard. Hearing it out means staying in a place where nothing stopped him coming in and nothing would keep him."
           ],
@@ -1070,7 +1070,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The muster holds that the obligation runs to whoever turns out and not to any ground.",
             "One of the elders puts the obligation on the ground a household holds.",
             "The going out is a duty the households owe each other, a local priest says, and not one he can excuse them from.",
-            "A stranger says that when the talk here turns to trouble, what gets named is fields and tracks and never anything built.",
+            "A stranger says that when the talk here turns to trouble he hears fields and tracks named and never anything built.",
             "At the tavern an account is kept of who goes out and who is seen turning back, and nobody writes it down.",
             "A clerk in the hall says what the town goes out for is decided when it happens and not before.",
             "The guilds say a mill is worth going out for and a field is not. Nobody has asked them to put that to the hall.",
@@ -1183,9 +1183,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "A clerk in the hall says the mending is met in its turn like every other charge the town carries.",
             "At the tavern a carter says the works are the last thing the purse comes round to and the first thing it is asked about.",
             "A traveller says he was told what the works cost the town before he was told the town's name.",
-            "The court says a household that lets its part of the mending go answers for it to the households either side.",
+            "The court holds that a household that lets its part of the mending go answers for it to the households either side.",
             "A guild member says the purse takes from the trades first and answers to them last.",
-            "Stallholders say the mending is the first call on the stalls, and what it leaves is spoken for before they see it.",
+            "Stallholders reckon the mending is the first call on the stalls, and what it leaves is spoken for before they see it.",
             "The watch says the purse reaches the round late. The people who walk it make the difference up out of their own time.",
             "Whoever keeps the burial ground says the works come with their money found for them, and the ground comes with a letter to write.",
             "The town speaks well of its works, by the garrison's account. The town says little about the soldiers' wage.",
