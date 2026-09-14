@@ -2713,7 +2713,7 @@ supplies the ancestry.
    - `[face]` `[elders]` The door of the last house stays on the latch until everyone is in, one of the elders says. The one who comes in last drops the latch.
    - `[face]` `[watch]` A lamp is left burning for him at the far end of the road, one of the watch says. It is the house there that pays for the light.
    - `[face]` `[guild]` A guild factor says the country takes its share of the trades on the road, and the town asks for its own at the market.
-   - `[face]` `[stranger]` A traveller is fed before he is asked his business, and the same house shows him the road out.
+   - `[face]` `[stranger]` By a traveller's account he is fed before he is asked his business, and the same house shows him the road out.
 3. `[visitor]` The road runs into the place without changing under a stranger's feet, and he is among the houses before he knows he has arrived.
    - `[face]` `[market · pair 5 · reinforce]` The stallholders say a load brought in off the country is priced for the carrying before it is priced for the goods.
    - `[face]` `[guild · pair 5 · reinforce]` A guild factor says the trades pay that carrying at both ends of the road and count it the town's own charge on the trade.
@@ -2722,7 +2722,7 @@ supplies the ancestry.
    - `[face]` `[elders]` One of the elders says the dogs are put out when the light goes. Nobody here calls that a watch.
    - `[face]` `[register · pair 6 · aside]` A stranger who dies on the road is buried at the town's cost, by a local priest's account, and in the ground the town keeps for its own.
    - `[face]` `[court · pair 6 · aside]` The court says what it is asked to settle after a bad night is who took in whom, and at whose cost.
-   - `[face]` `[stranger]` The first thing a traveller is asked here is whether he came by the road or off it.
+   - `[face]` `[stranger]` The first thing a traveller is asked here, by his own account, is whether he came by the road or off it.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence**
 1. `[ledger]` {settlement} sits on an active frontier with a line around it and a force behind the line. Most of what comes out of the country does not press a kept perimeter.

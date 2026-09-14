@@ -728,7 +728,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "The door of the last house stays on the latch until everyone is in, one of the elders says. The one who comes in last drops the latch.",
             "A lamp is left burning for him at the far end of the road, one of the watch says. It is the house there that pays for the light.",
             "A guild factor says the country takes its share of the trades on the road, and the town asks for its own at the market.",
-            "A traveller is fed before he is asked his business, and the same house shows him the road out."
+            "By a traveller's account he is fed before he is asked his business, and the same house shows him the road out."
           ],
           "sources": [
             null,
@@ -755,7 +755,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "One of the elders says the dogs are put out when the light goes. Nobody here calls that a watch.",
             "A stranger who dies on the road is buried at the town's cost, by a local priest's account, and in the ground the town keeps for its own.",
             "The court says what it is asked to settle after a bad night is who took in whom, and at whose cost.",
-            "The first thing a traveller is asked here is whether he came by the road or off it."
+            "The first thing a traveller is asked here, by his own account, is whether he came by the road or off it."
           ],
           "sources": [
             null,
