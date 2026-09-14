@@ -1,4 +1,4 @@
-# wf_4e9a99ae-6c1 — per-agent progress, 2026-09-14 02:13:36
+# wf_4e9a99ae-6c1 — per-agent progress, 2026-09-14 02:19:01
     - `a35500bf1` MARKER Beasts & Monsters: plagued, perimeter AND organized force · DONE · transcript 09-13 17:37 845 KB · 38 tool calls · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `aeadaf802` MARKER Beasts & Monsters: plagued, NO perimeter and NO force · DONE · transcript 09-13 17:37 788 KB · 40 tool calls · files: "$D/card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
     - `a256461d3` MARKER Beasts & Monsters: settled, defenses beyond the need · DONE · transcript 09-13 17:39 1010 KB · 62 tool calls · files: .card-mech.txt, .card-marker.txt, card.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--beasts-
