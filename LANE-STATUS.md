@@ -1,15 +1,15 @@
-# LANE-STATUS — written 2026-09-14 01:26:07 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 01:31:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
 - REWRITE 8b-W (the wiring car, landed in its dock = the consist lineage): dock laneRW-DEFW ABSENT
-- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD a9b460eac · 56 cars over f2da5a3ee · porcelain 2 · last commits:
+- **DS-DEF-2 (waits for the tables)** dock `laneRW-DEF2` HEAD 8d9a51d9c · 57 cars over f2da5a3ee · porcelain 2 · last commits:
+    8d9a51d9c REWRITE 8b DS-DEF-2: BATCH 1 RE-OPENED UNDER RULING 42d — sixteen speakers put back into their own sentences, two named as unfixable rather than forced, and the verb the first cut over-spent
     a9b460eac REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 2 of 4: the settled pool and the six Invasion pools, THE FIRST CUT UNDER RULING 42d — every speaker's stake made legible, and a page-register hazard found by execution
     8e608dd1f REWRITE 8b DS-DEF-2 clarity re-cut, BATCH 1 of 4: the six Beasts pools cut to the owner's standard — 119 lines, not one claim moved, three 42b sharpenings collected for refutation
     72262a69c REWRITE 8b DS-DEF-2 cut 8: the agentless passive given nine agents the roster already seats, and the block's last DULL pool cut to the owner's own length
-    d610e371d REWRITE 8b DS-DEF-2 cure (v3): 2/2 pools
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
        M docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
        M src/data/dossierStateProse/defense.generated.js
@@ -312,4 +312,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab8783d22` WRITER Invasion & War: walls with NO force · DONE · transcript 09-13 02:30 725 KB · 17 tool calls · files: candidates-2.md, facetext.txt, ft2.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-2/ds-def-2--invasio
 
 ## PROCESSES: 
-load: 2.11 2.29 2.28
+load: 2.88 2.25 2.22
