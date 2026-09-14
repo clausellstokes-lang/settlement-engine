@@ -122,8 +122,14 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * fallbacks on one page as `CORPUS-DIFF · a level-1 order lost on a spine`, a corpus-register
  * property the card carried no trace of, so the model was refused for a rule it was never given.
  * The golden was re-recorded for this cause and no other.
+ *
+ * /4 (W3b car 2, 2026-09-14): `pools[].fields[].unknown` + `.state` and `pools[].writeable`
+ * added. RUN 2 measured that the writer's commonest invention is an ABSENCE asserted where a
+ * reading has no value, and the card printed `= null` for those readings without saying that a
+ * null is not a fact. See `fieldState` and `writeableOf`. The golden was re-recorded for this
+ * cause and no other: the only new bytes on any tab are those three keys and the schema string.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/3';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/4';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -326,6 +332,109 @@ export function fieldValue(value) {
   return `{${Object.keys(value).sort(compareCodepoint).join(', ')}}`;
 }
 
+/**
+ * ⭐⭐ WHY A READING HAS NO VALUE — AND WHY THE CARD MAY NOT SAY "THE ENGINE HAS NOT DECIDED IT"
+ * (W3b car 2).
+ *
+ * ⛔⛔ MEASURED, AND IT IS A FINDING ABOUT THE CARD RATHER THAN ABOUT THE ENGINE. RUN 2's second
+ * reader named "an ABSENCE asserted on a NULL read" as the writer's commonest invention, citing
+ * `prosperityRank = null` and a pool whose every read printed null. So the readings were counted.
+ * Over the pinned town's THIRTEEN TABS, 34 field rows carry a value and 42 print `null` — and NOT
+ * ONE of the 42 is a settlement path that resolves to nothing. Eight are EXPRESSIONS `valueAt`
+ * refuses by construction (`magicWorksAt({ settlement })`, `prosperityRank(...)`,
+ * `standingDefenseForces(settlement)`); the other 34 are not settlement paths at all — they are
+ * the DESK'S OWN LOCAL NAMES as the census recorded them (`readings.scores`, `axis`,
+ * `conflict.intensity`, `link.npcConnections`, `!hasPatron`), and a settlement has no `readings`
+ * key to walk into. Over the whole static table: 125 field paths, 23 expressions and 65 whose root
+ * is not a settlement key, so 88 of 125 can NEVER resolve here.
+ *
+ * ⛔ THAT MAKES THE OBVIOUS WORDING A FALSE FACT ON THE CARD. `overview :: scores.military:
+ * STRONG` prints `readings.scores = null` beside a pool key that says STRONG in terms: the engine
+ * decided it and the CARD cannot read it. Telling a model "the engine has not decided this" there
+ * would hand it a falsehood, which is the one thing this whole boundary exists to prevent (see the
+ * header on `recoverFills` answering null rather than guessing). So the card names the two cases
+ * apart and asserts only what it knows:
+ *   `decided`     — a value, printed.
+ *   `not-decided` — a real settlement path whose leaf is absent here. The engine has not decided it.
+ *   `unreadable`  — an expression, or a path whose ROOT is not a key of a settlement. The card
+ *                   cannot resolve this reading; nothing follows about the engine.
+ * Both of the last two set `unknown: true`, because from the WRITER's seat they are one fact: you
+ * have not been told a value, so you may assert nothing that depends on one.
+ *
+ * REPORTED, NOT FIXED HERE: normalising the census's 65 desk-local field spellings to settlement
+ * paths would give the model real values on about half the corpus's pools, and it is a census
+ * change (`scripts/scribe-static-card.mjs` and the wiring census's `reads` column) rather than a
+ * card change. It is the single largest lever left on the Scribe's coverage.
+ *
+ * @param {object} s the settlement @param {string} field the static table's field path
+ * @param {string|number|boolean|null} value the card's own `fieldValue` reading
+ * @returns {'decided'|'not-decided'|'unreadable'}
+ */
+export function fieldState(s, field, value) {
+  if (value !== null) return 'decided';
+  const path = String(field ?? '');
+  // `valueAt` refuses a path carrying a call or an index by construction; so does this.
+  if (path === '' || /[[(]/.test(path)) return 'unreadable';
+  const root = path.split('.')[0];
+  if (!s || typeof s !== 'object') return 'unreadable';
+  return Object.prototype.hasOwnProperty.call(s, root) ? 'not-decided' : 'unreadable';
+}
+
+/**
+ * ⭐ THE READINGS ONLY A CAMPAIGN WORLD DECIDES (W3b car 2). A pool every one of whose reads is
+ * one of these is answering a question about a world the settlement does not belong to, and on a
+ * headless town its key is the DEFAULT rather than a decision.
+ *
+ * ⛔ IT IS A NAMED TABLE AND NOT A SCATTERED HEURISTIC, and it is deliberately NARROW. Measured
+ * over the pinned town's thirteen tabs it catches exactly three pools — `DS-DEF-4 :: capture none`
+ * (the one the chair named; its only decided field is the town's own `name`, which licenses
+ * nothing about capture), `DS-FTH-2 :: PRIVATE DOSSIER` and `DS-POW-7 :: layer DORMANT` — and the
+ * last two carry no decided field either way. `capture` alone is NOT in the table: it would have
+ * taken `DS-ECO-6`'s `eco.safetyProfile.blackMarketCapture`, which is this town's own economy and
+ * a real decided value. The count is pinned in `tests/domain/townCard.test.js`.
+ * @type {ReadonlyArray<string>}
+ */
+export const WORLD_ONLY_READINGS = Object.freeze([
+  'capturestate', 'faction', 'blocs', 'politics', 'patron', 'realm', 'neighbour', 'neighbor', 'treaty',
+]);
+
+/**
+ * ⭐⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL (W3b car 2)?
+ *
+ * ⛔ THE MEASUREMENT. RUN 2 shipped 51 of 198 units from one seat and 60 of 198 from the other,
+ * and the shipped share tracked the CARD'S THINNESS exactly: defense 35 per cent, overview 33,
+ * economics 21, power 13. The chair's reading is that the disease is GAP-FILLING ON A THIN CARD,
+ * so a pool the card cannot license is better OMITTED than written and refused — the two land the
+ * same line (the hand corpus draws the pool either way), and only one of them spends a model's
+ * invention on it.
+ *
+ * FALSE on either count:
+ *   (a) NO DECIDED FIELD. Every field row is unknown and no read resolved to a value here. With
+ *       the static table's `fields` being the resolution of its `reads`, "no read resolves" and
+ *       "no field is decided" are the same statement, and both are spelled so the rule reads like
+ *       the rule. A pool with NO field rows at all is included: it has nothing either.
+ *   (b) WORLD-ONLY ON A HEADLESS TOWN. Every read is a `WORLD_ONLY_READINGS` word and the card
+ *       carries no world, so the pool key is the default and not a decision.
+ *
+ * ⛔ A POOL WITH NO STATIC ROW IS WRITEABLE, and that is not a loophole. Where the static table
+ * was not joined the card carries no `fields` for ANY pool and says so in `staticCardJoined`;
+ * answering "not writeable" for all of them would be a claim the card has no basis for, and would
+ * silently turn the whole feature off on a client that forgot one input.
+ *
+ * @param {ReadonlyArray<object>} fields the pool's own field rows, already classified
+ * @param {object|null} staticRow @param {boolean} hasWorld
+ * @returns {boolean}
+ */
+function writeableOf(fields, staticRow, hasWorld) {
+  if (!staticRow) return true;
+  const reads = Array.isArray(staticRow.reads) ? staticRow.reads.map((r) => String(r).toLowerCase()) : [];
+  const decided = fields.filter((f) => f.unknown !== true);
+  if (decided.length === 0 && (reads.length === 0 || decided.length === 0)) return false;
+  if (!hasWorld && reads.length > 0
+    && reads.every((r) => WORLD_ONLY_READINGS.some((w) => r.includes(w)))) return false;
+  return true;
+}
+
 /** The roles a source can speak through here, as a plain sorted list. */
 function rosterRows(roles, source) {
   const held = roles.get(source);
@@ -506,6 +615,25 @@ function poolRow(s, line, ctx) {
   const forced = symptomSourceOf(blockId, poolKey, ctx.compromised);
   const faceSources = [...new Set(pieces.map((p) => p?.source).filter(Boolean))].sort(compareCodepoint);
   const staticRow = ctx.staticCard?.pools?.[`${blockId}::${poolKey}`] || null;
+  // (d) THE FROZEN FIELDS' ACTUAL VALUES, with the classification from the static table — and,
+  // since W3b, WHETHER THERE IS A VALUE AT ALL and why not. See `fieldState`.
+  const fields = staticRow
+    ? (staticRow.fields || []).map((field) => {
+      const meta = ctx.staticCard?.fields?.[field] || null;
+      const value = fieldValue(valueAt(s, field));
+      const state = fieldState(s, field, value);
+      return sorted([
+        ['field', field],
+        ['value', value],
+        ['state', state],
+        ['unknown', state !== 'decided'],
+        ['clock', meta?.clock ?? null],
+        ['writers', meta?.writers ?? null],
+        ['status', meta?.status ?? null],
+        ['grain', meta?.grain ?? null],
+      ]);
+    })
+    : [];
   return sorted([
     ['blockId', blockId],
     ['poolKey', poolKey],
@@ -562,20 +690,11 @@ function poolRow(s, line, ctx) {
       ['rung', staticRow.rung], ['reads', staticRow.reads], ['covert', staticRow.covert],
       ['variants', staticRow.variants], ['rateBp', staticRow.rateBp],
     ]) : null],
-    // (d) THE FROZEN FIELDS' ACTUAL VALUES, with the classification from the static table.
-    ['fields', staticRow
-      ? (staticRow.fields || []).map((field) => {
-        const meta = ctx.staticCard?.fields?.[field] || null;
-        return sorted([
-          ['field', field],
-          ['value', fieldValue(valueAt(s, field))],
-          ['clock', meta?.clock ?? null],
-          ['writers', meta?.writers ?? null],
-          ['status', meta?.status ?? null],
-          ['grain', meta?.grain ?? null],
-        ]);
-      })
-      : []],
+    ['fields', fields],
+    // ⭐ CAN THIS POOL BE WRITTEN ON THIS TOWN AT ALL. See `writeableOf`: a pool the card cannot
+    // license is OMITTED rather than written and refused, because both land the same hand-corpus
+    // line and only one of them spends a model's invention on getting there.
+    ['writeable', writeableOf(fields, staticRow, ctx.hasWorld === true)],
   ]);
 }
 
@@ -607,6 +726,9 @@ export function townCard(settlement, options) {
     ['sources', [...sourcesOf(s)].sort(compareCodepoint)],
     ['year', renderYearOf(s)],
     ['staticCard', staticCard],
+    // The one town-level fact a POOL row needs: `writeableOf`'s world-only limb is about a town
+    // that belongs to no campaign, and the pool row has no other way to see it.
+    ['hasWorld', Boolean(world)],
   ]);
   return sorted([
     ['schema', TOWN_CARD_SCHEMA],

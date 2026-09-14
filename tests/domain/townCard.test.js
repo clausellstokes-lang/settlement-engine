@@ -24,7 +24,9 @@ import { fileURLToPath } from 'node:url';
 import {
   generateSettlementPipeline, regenNPCsPipeline, regenHistoryPipeline,
 } from '../../src/generators/generateSettlementPipeline.js';
-import { townCard, townCardJson, variantAt, recoverFills, faceRawOf } from '../../src/domain/prose/townCard.js';
+import {
+  townCard, townCardJson, variantAt, recoverFills, faceRawOf, fieldState, WORLD_ONLY_READINGS,
+} from '../../src/domain/prose/townCard.js';
 import { renderTabPage, SCRIBE_TABS } from '../../src/domain/prose/scribePage.js';
 import {
   drawVariant, eligibleVariants, compromisedSpeaks, variantIsAudible,
@@ -261,8 +263,123 @@ describe('townCard — the join with the static card and the corpus', () => {
     const card = townCard(s, { tab: 'defense', audience: 'dm' });
     expect(card.staticCardJoined).toBe(false);
     expect(card.pools.every((p) => p.static === null && p.fields.length === 0)).toBe(true);
+    // ⛔ AND EVERY POOL IS STILL WRITEABLE, which is not a loophole. With no static table the card
+    // has NO BASIS to call a pool unwriteable; answering false for all of them would silently turn
+    // the whole feature off on a client that forgot one input, and would be a claim about the
+    // engine made out of a missing file. `staticCardJoined` is what says the card is half-blind.
+    expect(card.pools.every((p) => p.writeable === true)).toBe(true);
     expect(cardOf(s, 'defense').staticCardJoined).toBe(true);
   }, 60_000);
+});
+
+describe('townCard — what has no value, and what cannot be written (W3b car 2)', () => {
+  /** The harness's own pinned town, so the card's figures and the pilot's are one measurement. */
+  const PINNED = {
+    settType: 'town', culture: 'germanic', terrainOverride: 'river', roadOverride: 'road', civOverride: 'civilized',
+  };
+
+  it('⭐ classifies a reading with no value, and NEVER calls an unreadable one undecided', () => {
+    // ⛔⛔ THE FINDING THIS ARM STANDS OVER. RUN 2's second reader named "an ABSENCE asserted on a
+    // NULL read" as the writer's commonest invention. Counted here over the pinned town's thirteen
+    // tabs: 34 field rows carry a value, 42 do not, and NOT ONE of the 42 is a settlement path
+    // that resolves to nothing. They are expressions `valueAt` refuses by construction, and desk-
+    // local names the census recorded verbatim (`readings.scores`, `axis`, `conflict.intensity`),
+    // which no settlement has a key for. So "the engine has not decided this" would be FALSE on
+    // every one of them, and the card must not say it.
+    const s = townOf(PINNED, 'render-town');
+    const seen = {};
+    for (const tab of SCRIBE_TABS) {
+      for (const pool of cardOf(s, tab).pools) {
+        for (const field of pool.fields) {
+          seen[field.state] = (seen[field.state] || 0) + 1;
+          expect(field.unknown, `${tab} :: ${field.field}`).toBe(field.state !== 'decided');
+          if (field.state === 'decided') expect(field.value).not.toBe(null);
+          else expect(field.value).toBe(null);
+        }
+      }
+    }
+    expect(seen).toEqual({ decided: 34, unreadable: 42 });
+
+    // DRIVEN BY HAND, because the pinned town reaches only two of the three answers and a branch
+    // no arm reaches is a branch nothing stands over.
+    const town = { name: 'Ashford', powerStructure: { recentConflict: null } };
+    expect(fieldState(town, 'name', 'Ashford')).toBe('decided');
+    // A REAL SETTLEMENT PATH WHOSE LEAF IS ABSENT: the engine has not decided it.
+    expect(fieldState(town, 'powerStructure.recentConflict', null)).toBe('not-decided');
+    expect(fieldState(town, 'powerStructure.nothingHere', null)).toBe('not-decided');
+    // NEGATIVE CONTROLS — an expression and a root no settlement carries are UNREADABLE, never
+    // undecided, because nothing about the engine follows from a card that cannot read.
+    expect(fieldState(town, 'magicWorksAt({ settlement })', null)).toBe('unreadable');
+    expect(fieldState(town, 'readings.scores', null)).toBe('unreadable');
+    expect(fieldState(town, 'axis', null)).toBe('unreadable');
+    expect(fieldState(town, '', null)).toBe('unreadable');
+  }, 300_000);
+
+  it('⭐ counts the pools this town cannot license, per tab, and lets no writeable pool be empty', () => {
+    // ⛔ THE SHAPE OF THE CURE, AS A NUMBER. RUN 2's shipped share tracked the card's thinness
+    // exactly (defense 35 per cent, overview 33, economics 21, power 13); the counts below are the
+    // same fact measured on the card rather than on the page. A pool the card cannot license is
+    // OMITTED, and the hand corpus draws it — the same line a refusal would have landed.
+    const s = townOf(PINNED, 'render-town');
+    const unwriteable = {};
+    const total = {};
+    const empty = [];
+    for (const tab of SCRIBE_TABS) {
+      const card = cardOf(s, tab);
+      total[tab] = card.pools.length;
+      unwriteable[tab] = card.pools.filter((p) => p.writeable === false).length;
+      for (const pool of card.pools) {
+        // THE INVARIANT: a pool the card says is writeable has something to stand on.
+        if (pool.writeable !== true || pool.static === null) continue;
+        if (pool.fields.length === 0 || pool.fields.every((f) => f.unknown === true)) {
+          empty.push(`${tab} :: ${pool.poolKey}`);
+        }
+      }
+    }
+    expect(empty, `\n${empty.join('\n')}\n`).toEqual([]);
+    expect(total).toEqual({
+      daily_life: 1, defense: 15, economics: 7, faith: 1, history: 6, overview: 17,
+      plot_hooks: 7, power: 10, relationships: 0, resources: 0, services: 1, viability: 4, war: 0,
+    });
+    expect(unwriteable).toEqual({
+      daily_life: 1, defense: 3, economics: 4, faith: 1, history: 6, overview: 14,
+      plot_hooks: 7, power: 9, relationships: 0, resources: 0, services: 1, viability: 3, war: 0,
+    });
+    // BOTH ANSWERS ARE REACHED, so neither branch is vacuous.
+    expect(Object.values(unwriteable).some((n) => n > 0)).toBe(true);
+    expect(SCRIBE_TABS.some((tab) => total[tab] > unwriteable[tab])).toBe(true);
+  }, 300_000);
+
+  it('the world-only table is NARROW, and catches the pool the chair named', () => {
+    // ⛔ A NAMED TABLE, NOT A SCATTERED HEURISTIC, AND ITS CATCH IS PINNED. `DS-DEF-4 :: capture
+    // none` is the one the chair named: its only DECIDED field is the town's own `name`, which
+    // licenses nothing about capture, so clause (a) would let it through. `capture` alone is NOT
+    // in the table because it would have taken `DS-ECO-6`'s `blackMarketCapture`, a real decided
+    // value about this town's own economy.
+    const s = townOf(PINNED, 'render-town');
+    const caught = [];
+    for (const tab of SCRIBE_TABS) {
+      for (const pool of cardOf(s, tab).pools) {
+        const reads = (pool.static?.reads || []).map((r) => String(r).toLowerCase());
+        if (!reads.length) continue;
+        if (reads.every((r) => WORLD_ONLY_READINGS.some((w) => r.includes(w)))) {
+          caught.push(`${tab} :: ${pool.blockId} :: ${pool.poolKey}`);
+        }
+      }
+    }
+    expect(caught.sort()).toEqual([
+      'defense :: DS-DEF-4 :: capture none',
+      'faith :: DS-FTH-2 :: PRIVATE DOSSIER',
+      'power :: DS-POW-7 :: layer DORMANT (no ledger materialized)',
+    ]);
+    // And the one the table must NOT take is still writeable.
+    const eco = cardOf(s, 'economics').pools.find((p) => p.poolKey.startsWith('TIER: minor shadow activity'));
+    expect(eco, 'the economics tab no longer fires the shadow-activity pool').toBeTruthy();
+    expect(eco.writeable).toBe(true);
+    // NEGATIVE CONTROL — the table is lower-case and matched against lower-cased reads.
+    expect(WORLD_ONLY_READINGS.includes('capture')).toBe(false);
+    expect(WORLD_ONLY_READINGS.every((w) => w === w.toLowerCase())).toBe(true);
+  }, 300_000);
 });
 
 describe('townCard — determinism of the trace', () => {
@@ -567,6 +684,17 @@ describe('townCard — the golden', () => {
    *   been given. NOTHING ELSE MOVED: the only new bytes on any tab are the three keys of that
    *   record inside each pool's `unit`, plus the schema string itself, and the derivation is
    *   re-run against `orderIdOf(classifyMoves(spine))` by the arm above rather than frozen here.
+   *
+   * 2026-09-14 — RE-RECORDED (W3b car 2), card schema /3 → /4. CAUSE: three keys that say what
+   *   the card does NOT know. RUN 2 measured the writer's commonest invention as an ABSENCE
+   *   asserted where a reading has no value, and the card printed `= null` for such readings
+   *   without saying that a null is not a fact. So every field row gains `unknown` and `state`
+   *   (`decided` / `not-decided` / `unreadable` — the last because 42 of 42 valueless rows on the
+   *   pinned town are readings this card CANNOT RESOLVE rather than readings the engine has not
+   *   decided, and calling those undecided would put a false fact on the card), and every pool
+   *   gains `writeable`. NOTHING ELSE MOVED: the only new bytes on any tab are `fields[].state`,
+   *   `fields[].unknown`, `pools[].writeable` and the schema string, and both derivations are
+   *   re-run by the arms above rather than frozen here.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

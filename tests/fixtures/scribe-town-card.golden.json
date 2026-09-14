@@ -111,10 +111,11 @@
             "rendered": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.",
             "spine": "The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "daily_life",
@@ -767,7 +768,9 @@
               "clock": "SNAPSHOT",
               "field": "defenseProfile.readiness.score",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": 18,
               "writers": 0
             }
@@ -817,7 +820,8 @@
             "rendered": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.",
             "spine": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -832,7 +836,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -887,7 +893,8 @@
             "rendered": "The site gives Schwarzwalde nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.",
             "spine": "The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -902,7 +909,9 @@
               "clock": "SNAPSHOT",
               "field": "stress",
               "grain": "root",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
               "writers": 0
             }
@@ -959,7 +968,8 @@
             "rendered": "The town's usual posture has been set aside at Schwarzwalde. Everything is arranged for the one thing now, and the rest is waiting.",
             "spine": "The town's usual posture has been set aside at {settlement}. Everything is arranged for the one thing now, and the rest is waiting."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -974,7 +984,9 @@
               "clock": "SNAPSHOT",
               "field": "economicViability.viable",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": true,
               "writers": 0
             },
@@ -982,7 +994,9 @@
               "clock": "SNAPSHOT",
               "field": "stress",
               "grain": "root",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "{colour, crisisHook, historyColour, icon, label, summary, type, viabilityNote}",
               "writers": 0
             }
@@ -1040,7 +1054,8 @@
             "rendered": "The crisis at Schwarzwalde has changed the posture and not the prospects, and the town has been careful to keep the two separate.",
             "spine": "The crisis at {settlement} has changed the posture and not the prospects, and the town has been careful to keep the two separate."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -1095,7 +1110,9 @@
               "clock": "LIVE-ROSTER",
               "field": "institutions",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "[7 rows]",
               "writers": 38
             }
@@ -1186,7 +1203,8 @@
             "rendered": "A travelling trader says he is asked to step round the thing leaning behind every door he calls at.",
             "spine": "{settlement} has no line around it and no soldiers of its own. What keeping there is falls to the people who live here, out of their own hours."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -1225,7 +1243,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasCourtSystem",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -1233,7 +1253,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasPrison",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             }
@@ -1302,7 +1324,8 @@
             "rendered": "The elders say they hear a stranger's wrong as they hear anyone's, and a stranger who does not stay for the answer was not much wronged.",
             "spine": "A traveller wronged here finds there is nowhere to take it, and nobody local expected there to be."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -1341,7 +1364,9 @@
               "clock": "SNAPSHOT",
               "field": "defenseProfile.scores.economic",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": 21,
               "writers": 0
             }
@@ -1433,7 +1458,8 @@
             "rendered": "The elders say the turn comes round to everyone who can spare a back.",
             "spine": "The means here come short of what trouble takes. The households make up the difference."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -1448,7 +1474,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasChurch",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -1456,7 +1484,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasGranary",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -1464,7 +1494,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasHospital",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             }
@@ -1538,7 +1570,8 @@
             "rendered": "It is common knowledge here that there is no grain store to go to and no house for the sick to be carried to, and the town does not count either as a lack.",
             "spine": "It is common knowledge here that there is no grain store to go to and no house for the sick to be carried to, and the town does not count either as a lack."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "threshold",
@@ -1553,7 +1586,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.safetyProfile.safetyLabel",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "Moderate",
               "writers": 0
             }
@@ -1610,7 +1645,8 @@
             "rendered": "The balance at Schwarzwalde sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change.",
             "spine": "The balance at {settlement} sits where either side could take it. A thinner watch or a bolder operator would show up in the returns within the season, and nothing else would need to change."
           },
-          "vid": 4
+          "vid": 4,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -1625,7 +1661,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.safetyProfile.safetyLabel",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "Moderate",
               "writers": 0
             }
@@ -1682,7 +1720,8 @@
             "rendered": "What the town says about its own safety at Schwarzwalde is what the town says on a first acquaintance, and a longer one would be a different account.",
             "spine": "What the town says about its own safety at {settlement} is what the town says on a first acquaintance, and a longer one would be a different account."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -1697,7 +1736,9 @@
               "clock": "SNAPSHOT",
               "field": "structureKey",
               "grain": "root",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -1754,7 +1795,8 @@
             "rendered": "No criminal infrastructure has been identified at Schwarzwalde. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
             "spine": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -1769,7 +1811,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -1826,7 +1870,8 @@
             "rendered": "Whatever is being run at Schwarzwalde is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.",
             "spine": "Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -1841,7 +1886,9 @@
               "clock": "LIVE-ROSTER",
               "field": "institutions",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "[7 rows]",
               "writers": 38
             }
@@ -1896,7 +1943,8 @@
             "rendered": "A stranger arrives at Schwarzwalde from whichever direction suits him and is not obliged to pass anybody on the way in.",
             "spine": "A stranger arrives at {settlement} from whichever direction suits him and is not obliged to pass anybody on the way in."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -1911,7 +1959,9 @@
               "clock": "LIVE-ROSTER",
               "field": "institutions",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "[7 rows]",
               "writers": 38
             },
@@ -1919,7 +1969,9 @@
               "clock": "LIVE-ROSTER",
               "field": "standingDefenseForces(settlement)",
               "grain": "root",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -1972,7 +2024,8 @@
             "rendered": "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.",
             "spine": "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "counterforce",
@@ -1987,7 +2040,9 @@
               "clock": "SNAPSHOT",
               "field": "magicWorksAt({ settlement })",
               "grain": "root",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -2042,7 +2097,8 @@
             "rendered": "Nothing unseen has come at Schwarzwalde, and nothing here would know if it had; the record of safety and the capacity to detect are two different things.",
             "spine": "Nothing unseen has come at {settlement}, and nothing here would know if it had; the record of safety and the capacity to detect are two different things."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -2057,7 +2113,9 @@
               "clock": "LIVE-ROSTER",
               "field": "institutions",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "[7 rows]",
               "writers": 38
             }
@@ -2115,7 +2173,8 @@
             "rendered": "No wall marks where Schwarzwalde ends; at this size the country and the town simply agree to differ.",
             "spine": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -2130,7 +2189,9 @@
               "clock": "CONFIG",
               "field": "config.tradeRouteAccess",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "road",
               "writers": 0
             },
@@ -2138,7 +2199,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasGranary",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -2146,7 +2209,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.compound.inst.hasPort",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             }
@@ -2196,10 +2261,11 @@
             "rendered": "The town eats what arrives, and has nothing put by against a season when nothing does.",
             "spine": "The town eats what arrives, and has nothing put by against a season when nothing does."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "defense",
@@ -2678,7 +2744,9 @@
               "clock": "SNAPSHOT",
               "field": "prosperityRank(settlement.economicState.prosperity)",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -2729,7 +2797,8 @@
             "rendered": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.",
             "spine": "The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -2744,7 +2813,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.incomeSources",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "[2 rows]",
               "writers": 0
             },
@@ -2752,7 +2823,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.incomeSources.length",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": 2,
               "writers": 0
             },
@@ -2760,7 +2833,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.incomeSources.reduce",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "{}",
               "writers": 0
             }
@@ -2819,7 +2894,8 @@
             "rendered": "Well past half of what Schwarzwalde earns comes from a single trade, and the accounts have no second column worth the name.",
             "spine": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -2834,7 +2910,9 @@
               "clock": "PULSE",
               "field": "economicState",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "{activeChains, compound, economicComplexity, foodSecurity, incomeSources, institutionalServices, isEntrepot, localProduction, necessityImports, primaryExports, primaryImports, priorities, prosperity, safetyProfile, situationDesc, tier, tradeAccess, tradeDependencies, transit}",
               "writers": 19
             },
@@ -2842,7 +2920,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.isEntrepot",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -2850,7 +2930,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.localProduction",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "[6 rows]",
               "writers": 0
             },
@@ -2858,7 +2940,9 @@
               "clock": "PULSE",
               "field": "economicState.primaryExports",
               "grain": "field",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "[4 rows]",
               "writers": 1
             },
@@ -2866,7 +2950,9 @@
               "clock": "SNAPSHOT",
               "field": "economicState.primaryImports",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "[1 rows]",
               "writers": 0
             }
@@ -2920,7 +3006,8 @@
             "rendered": "Everybody here knows what leaves and what arrives, because the same carts do both.",
             "spine": "Everybody here knows what leaves and what arrives, because the same carts do both."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -2935,7 +3022,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.exportPosture.status",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -2985,7 +3074,8 @@
             "rendered": "There is always something going out. If one trade is quiet, another is not.",
             "spine": "There is always something going out. If one trade is quiet, another is not."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -3039,7 +3129,8 @@
             "rendered": "The town eats. It is not a subject anyone raises unprompted.",
             "spine": "The town eats. It is not a subject anyone raises unprompted."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -3054,7 +3145,9 @@
               "clock": "PULSE",
               "field": "readings",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 5
             },
@@ -3062,7 +3155,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.activeChains",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -3070,7 +3165,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.exploitation",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -3078,7 +3175,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.isEntrepot",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -3086,7 +3185,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.primaryImports",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -3153,10 +3254,11 @@
             "rendered": "Schwarzwalde works salt it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft.",
             "spine": "{settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "economics",
@@ -3487,7 +3589,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.hasPatron === true",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -3535,10 +3639,11 @@
             "rendered": "No faith holds the town. The observances are real, and they are nobody's in particular.",
             "spine": "No faith holds the town. The observances are real, and they are nobody's in particular."
           },
-          "vid": 4
+          "vid": 4,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "faith",
@@ -3931,7 +4036,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.history && typeof readings.history === 'object' ? readings.history : {}",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -3988,7 +4095,8 @@
             "rendered": "The town's first reason is on record and its present shape is the record of everything since; Schwarzwalde is the argument and all its revisions at once.",
             "spine": "The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -4003,7 +4111,9 @@
               "clock": "SNAPSHOT",
               "field": "Array.isArray(hist.historicalEvents) ? hist.historicalEvents : ",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -4060,7 +4170,8 @@
             "rendered": "Schwarzwalde has been knocked down and has answered more than once, and the answering shows; this is a town with practice.",
             "spine": "{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -4121,7 +4232,8 @@
             "rendered": "Schwarzwalde tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it.",
             "spine": "{settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -4182,7 +4294,8 @@
             "rendered": "Schwarzwalde has a character it would recognise a description of, and it did not choose it.",
             "spine": "{settlement} has a character it would recognise a description of, and it did not choose it."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "elder",
@@ -4248,7 +4361,8 @@
             "rendered": "Schwarzwalde was held a generation on and the arrangements made then are the arrangements the town still runs on.",
             "spine": "{settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -4263,7 +4377,9 @@
               "clock": "SNAPSHOT",
               "field": "significantEvent(events).yearsAgo",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -4320,10 +4436,11 @@
             "rendered": "Schwarzwalde's records carry it plainly and nobody now working here can add to them.",
             "spine": "{settlement}'s records carry it plainly and nobody now working here can add to them."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "history",
@@ -4976,7 +5093,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -5033,7 +5152,8 @@
             "rendered": "The fields begin where Schwarzwalde loses interest, and not before.",
             "spine": "The fields begin where {settlement} loses interest, and not before."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -5048,7 +5168,9 @@
               "clock": "PULSE",
               "field": "readings",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 5
             },
@@ -5056,7 +5178,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.isEntrepot",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -5064,7 +5188,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.tradeRouteAccess",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5123,7 +5249,8 @@
             "rendered": "Nothing in Schwarzwalde is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.",
             "spine": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -5138,7 +5265,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.inst",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5195,7 +5324,8 @@
             "rendered": "Schwarzwalde keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.",
             "spine": "{settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "threshold",
@@ -5249,7 +5379,8 @@
             "rendered": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.",
             "spine": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -5301,7 +5432,8 @@
             "rendered": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.",
             "spine": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -5316,7 +5448,9 @@
               "clock": "SNAPSHOT",
               "field": "Array.isArray(readings.conditions) ? readings.conditions : ",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5373,7 +5507,8 @@
             "rendered": "The strain is severe. Schwarzwalde is meeting it by giving up things it would rather keep.",
             "spine": "The strain is severe. {settlement} is meeting it by giving up things it would rather keep."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -5388,7 +5523,9 @@
               "clock": "SNAPSHOT",
               "field": "Array.isArray(readings.conditions) ? readings.conditions : ",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5439,7 +5576,8 @@
             "rendered": "The condition is deepening. The town's response has not caught up with the rate.",
             "spine": "The condition is deepening. The town's response has not caught up with the rate."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -5454,7 +5592,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -5511,7 +5651,8 @@
             "rendered": "Schwarzwalde is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it.",
             "spine": "{settlement} is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -5526,7 +5667,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.viable",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5587,7 +5730,8 @@
             "rendered": "Schwarzwalde expects to go on being Schwarzwalde.",
             "spine": "{settlement} expects to go on being {settlement}."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -5602,7 +5746,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -5659,7 +5805,8 @@
             "rendered": "Schwarzwalde's defences are a gesture, and it is not a gesture anyone is fooled by.",
             "spine": "{settlement}'s defences are a gesture, and it is not a gesture anyone is fooled by."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "ledger",
@@ -5674,7 +5821,9 @@
               "clock": "PULSE",
               "field": "axis",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 1
             },
@@ -5682,7 +5831,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.scores",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5740,7 +5891,8 @@
             "rendered": "Schwarzwalde keeps no muster worth the name; the gate is shut at night by whoever is nearest to it.",
             "spine": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -5755,7 +5907,9 @@
               "clock": "PULSE",
               "field": "axis",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 1
             },
@@ -5763,7 +5917,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.scores",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5821,7 +5977,8 @@
             "rendered": "Schwarzwalde has no answer to what lives beyond its fields and nobody whose work it would be.",
             "spine": "{settlement} has no answer to what lives beyond its fields and nobody whose work it would be."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -5836,7 +5993,9 @@
               "clock": "PULSE",
               "field": "axis",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 1
             },
@@ -5844,7 +6003,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.scores",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5902,7 +6063,8 @@
             "rendered": "Little is reported at Schwarzwalde, because reporting produces no outcome.",
             "spine": "Little is reported at {settlement}, because reporting produces no outcome."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -5917,7 +6079,9 @@
               "clock": "PULSE",
               "field": "axis",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 1
             },
@@ -5925,7 +6089,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.scores",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -5983,7 +6149,8 @@
             "rendered": "Schwarzwalde runs close to what it takes in: one interruption would reach the households inside the season.",
             "spine": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -5998,7 +6165,9 @@
               "clock": "PULSE",
               "field": "axis",
               "grain": "root",
+              "state": "unreadable",
               "status": "LIVE",
+              "unknown": true,
               "value": null,
               "writers": 1
             },
@@ -6006,7 +6175,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.scores",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -6064,7 +6235,8 @@
             "rendered": "Schwarzwalde keeps no practitioner, no arrangement, and no expectation of either.",
             "spine": "{settlement} keeps no practitioner, no arrangement, and no expectation of either."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "threshold",
@@ -6079,7 +6251,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -6136,7 +6310,8 @@
             "rendered": "Schwarzwalde's security is its own harvest, which means it is proof against a closed road and not against a bad year.",
             "spine": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year."
           },
-          "vid": 4
+          "vid": 4,
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -6151,7 +6326,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.tradeRouteAccess",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -6210,7 +6387,8 @@
             "rendered": "Schwarzwalde is a road town that has outgrown its fields, and it is buying the difference.",
             "spine": "{settlement} is a road town that has outgrown its fields, and it is buying the difference."
           },
-          "vid": 4
+          "vid": 4,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -6225,7 +6403,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -6282,7 +6462,8 @@
             "rendered": "Schwarzwalde is a handful of roofs with a reason, and the reason is usually the ground.",
             "spine": "{settlement} is a handful of roofs with a reason, and the reason is usually the ground."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -6297,7 +6478,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.prominentRelationship",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -6354,7 +6537,8 @@
             "rendered": "Of everything Schwarzwalde is tied into, one connection comes up first whenever the town explains itself.",
             "spine": "Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -6369,7 +6553,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.relationships",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -6377,7 +6563,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.relationships.length",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -6436,10 +6624,11 @@
             "rendered": "The people of Schwarzwalde are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
             "spine": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "overview",
@@ -6910,7 +7099,8 @@
             "rendered": "The trouble in Schwarzwalde is a supply question before it is anything else, and supply questions are answerable by outsiders.",
             "spine": "The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -6971,7 +7161,8 @@
             "rendered": "The reason Schwarzwalde is the way it is lies further back than anyone here will volunteer.",
             "spine": "The reason {settlement} is the way it is lies further back than anyone here will volunteer."
           },
-          "vid": 4
+          "vid": 4,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -7032,7 +7223,8 @@
             "rendered": "What is wrong in Schwarzwalde is not hidden. It is simply nobody's job.",
             "spine": "What is wrong in {settlement} is not hidden. It is simply nobody's job."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -7093,7 +7285,8 @@
             "rendered": "Schwarzwalde's ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three.",
             "spine": "{settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -7154,10 +7347,11 @@
             "rendered": "What is worth doing in Schwarzwalde is worth doing because of who is in it; the town's difficulties have names attached before they have causes.",
             "spine": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "plot_hooks",
@@ -7674,7 +7868,8 @@
             "rendered": "The Elder Council holds Schwarzwalde on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer.",
             "spine": "The {seat} holds {settlement} on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -7738,7 +7933,8 @@
             "rendered": "Schwarzwalde keeps one plain accusation against the Elder Council (that it has left the town open) and brings it out again whenever anything else goes wrong.",
             "spine": "{settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -7801,7 +7997,8 @@
             "rendered": "A stranger doing business at Schwarzwalde needs one name and gets one answer, and can plan a season ahead on the strength of it.",
             "spine": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -7868,7 +8065,8 @@
             "rendered": "No rival at Schwarzwalde moves against Elder Council, and it is not restraint. The arithmetic of the thing is plain to everybody who has done it.",
             "spine": "No rival at {settlement} moves against {faction}, and it is not restraint. The arithmetic of the thing is plain to everybody who has done it."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -7883,7 +8081,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.politics ?? null.blocs",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -7940,7 +8140,8 @@
             "rendered": "The hall at Schwarzwalde is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
             "spine": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "street",
@@ -7994,7 +8195,8 @@
             "rendered": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes.",
             "spine": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "visitor",
@@ -8058,7 +8260,8 @@
             "rendered": "A stranger who addresses the Elder Council at Schwarzwalde by any other title is corrected, politely and immediately.",
             "spine": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": false
         },
         {
           "angle": "unfolding",
@@ -8132,7 +8335,8 @@
             "rendered": "The Elder Council at Schwarzwalde holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
             "spine": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "threshold",
@@ -8147,7 +8351,9 @@
               "clock": "SNAPSHOT",
               "field": "typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null\n    ? power.publicLegitimacy\n    : /** @type {PublicLegitimacyView} */ ({}).govMultiplier",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -8210,10 +8416,11 @@
             "rendered": "The Elder Council at Schwarzwalde is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip.",
             "spine": "The {seat} at {settlement} is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "power",
@@ -8503,7 +8710,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "relationships",
@@ -8848,7 +9055,9 @@
               "clock": "PULSE",
               "field": "name",
               "grain": "root",
+              "state": "decided",
               "status": "LIVE",
+              "unknown": false,
               "value": "Schwarzwalde",
               "writers": 201
             }
@@ -8905,7 +9114,8 @@
             "rendered": "Schwarzwalde sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.",
             "spine": "{settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": true
         },
         {
           "angle": "street",
@@ -8920,7 +9130,9 @@
               "clock": "SNAPSHOT",
               "field": "resourceAnalysis.economicStrengths",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "[4 rows]",
               "writers": 0
             }
@@ -8970,7 +9182,8 @@
             "rendered": "Ask what this town does well and you get two or three answers, all of them the same two or three answers.",
             "spine": "Ask what this town does well and you get two or three answers, all of them the same two or three answers."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         },
         {
           "angle": "visitor",
@@ -8985,7 +9198,9 @@
               "clock": "SNAPSHOT",
               "field": "resourceAnalysis.strategicValue",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": "Medium - agricultural heartland, but exposed to raids",
               "writers": 0
             }
@@ -9035,10 +9250,11 @@
             "rendered": "A stranger with an eye for such things works out what this town is worth holding well before anybody explains it.",
             "spine": "A stranger with an eye for such things works out what this town is worth holding well before anybody explains it."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "resources",
@@ -9351,7 +9567,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.notableAbsences",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             },
@@ -9359,7 +9577,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.notableAbsences.map",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -9417,10 +9637,11 @@
             "rendered": "Schwarzwalde offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.",
             "spine": "{settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "services",
@@ -9781,7 +10002,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.viable",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -9831,7 +10054,8 @@
             "rendered": "The town works, and works for the reasons a town of this kind usually works.",
             "spine": "The town works, and works for the reasons a town of this kind usually works."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -9846,7 +10070,9 @@
               "clock": "SNAPSHOT",
               "field": "readings.criticalIssueCount",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -9903,7 +10129,8 @@
             "rendered": "Schwarzwalde carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.",
             "spine": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless."
           },
-          "vid": 3
+          "vid": 3,
+          "writeable": false
         },
         {
           "angle": "ledger",
@@ -9964,7 +10191,8 @@
             "rendered": "This reading of Schwarzwalde is the first survey's, and the first survey's alone; what the world has done since is not in it.",
             "spine": "This reading of {settlement} is the first survey's, and the first survey's alone; what the world has done since is not in it."
           },
-          "vid": 1
+          "vid": 1,
+          "writeable": false
         },
         {
           "angle": "counterforce",
@@ -9979,7 +10207,9 @@
               "clock": "SNAPSHOT",
               "field": "defenseProfile.magicDependency",
               "grain": "field",
+              "state": "decided",
               "status": "FROZEN",
+              "unknown": false,
               "value": false,
               "writers": 0
             },
@@ -9987,7 +10217,9 @@
               "clock": "SNAPSHOT",
               "field": "hasNamedMagicChain(settlement.economicState.activeChains)",
               "grain": "field",
+              "state": "unreadable",
               "status": "FROZEN",
+              "unknown": true,
               "value": null,
               "writers": 0
             }
@@ -10045,10 +10277,11 @@
             "rendered": "There is magic at Schwarzwalde and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
             "spine": "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse."
           },
-          "vid": 2
+          "vid": 2,
+          "writeable": true
         }
       ],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "viability",
@@ -10350,7 +10583,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/3",
+      "schema": "scribe-town-card/4",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "war",

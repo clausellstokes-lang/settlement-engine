@@ -232,9 +232,19 @@ const TWO_LADDERS = [
   'THE TWO LADDERS, WHICH ARE BOTH THE ENGINE\'S. The posture badge word (Fortress, Well-Defended,',
   'Defensible, Lightly Defended, Vulnerable, Undefended) and the readiness band (STRONG, ADEQUATE,',
   'WEAK, CRITICAL) are TWO ladders over ONE score and both are the engine\'s. Write to the pool',
-  'key\'s band; never name the badge word and never reconcile the two. A funding note reading',
-  '`Upkeep underfunded ... at 97%` beside `Economic Backing: Well-funded` is likewise two true',
-  'readings of two fields; write to the pool key and neither number.',
+  'key\'s band; never name the badge word and never reconcile the two. A line that agrees with the',
+  'band is NOT a contradiction of the badge, and neither reading refutes the other.',
+].join('\n');
+
+/**
+ * ⭐ THE FUNDING NOTE, SPLIT OUT OF THE LADDERS NOTE (W3b car 2) so the town block and the tier-1
+ * checklist can carry it under its own name. It is the same class as the ladders: two fields, two
+ * true readings, and a model asked to reconcile them will invent the reconciliation.
+ */
+const FUNDING_NOTE = [
+  'THE FUNDING NOTE IS TWO FIELDS, BOTH TRUE. A note reading `Upkeep underfunded ... at 97%`',
+  'beside `Economic Backing: Well-funded` is two true readings of two fields and not a',
+  'contradiction; write to the pool key and to neither number.',
 ].join('\n');
 
 /**
@@ -300,6 +310,8 @@ export function buildScribeBrief(input) {
     '',
     TWO_LADDERS,
     '',
+    FUNDING_NOTE,
+    '',
     CORPUS_LINE_STANDING,
     '',
     THE_FACTS,
@@ -330,6 +342,15 @@ export function buildTownBlock(card) {
     'and a record no body here keeps are both refused outright by the instruments and never reach',
     'the page. A source speaks through one of the roles its own roster lists and through no other.',
     JSON.stringify(town ?? {}, null, 1),
+    '',
+    // ⭐ THE LADDERS RIDE HERE TOO (W3b car 2). They are facts of the PAGE, and every seat that
+    // reads this block reads them: the writer, and the second reader whose checklist rides on the
+    // same two cached blocks. RUN 2 measured the cost of their living only in the writer's half —
+    // the writer wrote to the band as instructed and the reader answered SAME PAGE `yes` on the
+    // badge beside it. One law, in the block both seats are given.
+    TWO_LADDERS,
+    '',
+    FUNDING_NOTE,
   ].join('\n');
 }
 
@@ -398,6 +419,17 @@ function poolBrief(pool) {
     `  stance: ${String(pool?.angle ?? '')}${marks.length ? ` · marks ${marks.join(' ')}` : ''}`,
   ];
 
+  // ⭐⭐ THE POOL THE CARD CANNOT LICENSE IS NAMED AS ONE, AT THE TOP OF ITS OWN ROW (W3b car 2).
+  // RUN 2's shipped share tracked the card's thinness exactly — defense thirty five per cent,
+  // overview thirty three, economics twenty one, power thirteen — because a writer handed a pool
+  // with no value under it fills the gap. Omitting it lands the SAME line the refusal would have
+  // landed, and spends nothing to get there.
+  if (pool?.writeable === false) {
+    rows.push('  THIS POOL IS NOT WRITEABLE ON THIS TOWN: OMIT IT. No reading it rests on has a');
+    rows.push('  value here, so there is nothing to stand a sentence on but the pool key itself.');
+    rows.push('  Return no unit for this pool. The hand corpus draws it, which is the right answer.');
+  }
+
   if (order && String(order.id ?? '') !== '') {
     rows.push(`  THE ORDER: the corpus spine realises the move order \`${String(order.id)}\` — \`${(Array.isArray(order.moves) ? order.moves : []).join(' then ')}\` (${String(order.licences ?? '')}); keep that order in your spine.`);
   } else {
@@ -415,10 +447,23 @@ function poolBrief(pool) {
   if (fields.length) {
     rows.push('  THE FIELDS this pool reads, with their values here:');
     for (const field of fields) {
+      // ⛔ A READING WITH NO VALUE IS PRINTED AS UNKNOWN AND NEVER AS A VALUE. RUN 2 measured that
+      // the writer's commonest invention is an ABSENCE asserted where a reading has no value, and
+      // a bare `= null` reads to a model as "the answer is nothing" rather than "you have not been
+      // told". The card also says WHICH of the two kinds of unknown it is (`townCard.fieldState`),
+      // because "the engine has not decided this" would be FALSE on a reading the card simply
+      // cannot resolve, and a false fact on the card is the one thing this boundary is for.
+      if (field?.unknown === true) {
+        rows.push(`    ${String(field?.field ?? '')} = UNKNOWN (${String(field?.state) === 'unreadable'
+          ? 'this card cannot resolve this reading'
+          : 'the engine has not decided this'}; assert nothing that depends on it)`);
+        continue;
+      }
       rows.push(`    ${String(field?.field ?? '')} = ${JSON.stringify(field?.value ?? null)}${field?.status ? ` (${String(field.status)})` : ''}`);
     }
     rows.push('    The second sentence of a unit, if there is one, must rest on one of these fields');
-    rows.push('    and name it in its own word, or the instruments withhold it.');
+    rows.push('    and name it in its own word, or the instruments withhold it. A field reading');
+    rows.push('    UNKNOWN cannot carry a sentence, and no absence may be read out of it.');
   } else {
     rows.push('  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.');
   }
