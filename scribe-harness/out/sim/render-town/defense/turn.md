@@ -41,11 +41,14 @@ POOL "Invasion & War: walls with NO force" in block DS-DEF-2
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 4
-    face 0 speaks through: court
-      and may be any one of these people and no other: a bailiff (sg) · a clerk of the court (sg) · a woman who brought a matter to the court (sg) · one who waits on the court (sg) · one who waits on the court day (sg) · the officers of the court (pl)
-    face 1 speaks through: (the bare fact)
-    face 2 speaks through: (the bare fact)
-    face 3 speaks through: (the bare fact)
+    face 0 speaks through: elders
+      and is one of the roles the town block lists for `elders` under `roles`, and no other.
+    face 1 speaks through: watch
+      and is one of the roles the town block lists for `watch` under `roles`, and no other.
+    face 2 speaks through: court
+      and is one of these people and no other: a bailiff (sg) · a clerk of the court (sg) · a woman who brought a matter to the court (sg) · one who waits on the court (sg) · one who waits on the court day (sg) · the officers of the court (pl)
+    face 3 speaks through: public
+      and is one of the roles the town block lists for `public` under `roles`, and no other.
   THE CORPUS LINE, as the claim and the fallback:
     spine: There are no soldiers of the town's own here, and the walls are kept up all the same.
     face 0: {elders} {v:take} the walls for their own boundary before anything else, and where the line runs is the older argument.
@@ -64,16 +67,24 @@ POOL "Internal Security: full legal chain (court AND prison)" in block DS-DEF-2
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 9
-    face 0 speaks through: tavern
-      and may be any one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
-    face 1 speaks through: (the bare fact)
-    face 2 speaks through: (the bare fact)
-    face 3 speaks through: (the bare fact)
-    face 4 speaks through: (the bare fact)
-    face 5 speaks through: (the bare fact)
-    face 6 speaks through: (the bare fact)
-    face 7 speaks through: (the bare fact)
-    face 8 speaks through: (the bare fact)
+    face 0 speaks through: hall
+      and is one of the roles the town block lists for `hall` under `roles`, and no other.
+    face 1 speaks through: stranger
+      and is one of the roles the town block lists for `stranger` under `roles`, and no other.
+    face 2 speaks through: court
+      and is one of the roles the town block lists for `court` under `roles`, and no other.
+    face 3 speaks through: tavern
+      and is one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
+    face 4 speaks through: watch
+      and is one of the roles the town block lists for `watch` under `roles`, and no other.
+    face 5 speaks through: garrison
+      and is one of the roles the town block lists for `garrison` under `roles`, and no other.
+    face 6 speaks through: guild
+      and is one of the roles the town block lists for `guild` under `roles`, and no other.
+    face 7 speaks through: market
+      and is one of the roles the town block lists for `market` under `roles`, and no other.
+    face 8 speaks through: gate
+      and is one of the roles the town block lists for `gate` under `roles`, and no other.
   THE CORPUS LINE, as the claim and the fallback:
     spine: A traveller who brings a complaint here is shown where it is heard and where the person he names would be kept.
     face 0: A clerk in the hall says a man waits because the matter before his is being heard properly.
@@ -96,15 +107,22 @@ POOL "Economic Survival: STRONG" in block DS-DEF-2
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 8
-    face 0 speaks through: guild
-      and may be any one of these people and no other: a guild factor (sg) · a journeyman (sg) · a master of one of the crafts (sg) · the dyers' warden (sg) · the guild master (sg) · the guilds of the town (pl)
-    face 1 speaks through: (the bare fact)
-    face 2 speaks through: (the bare fact)
-    face 3 speaks through: (the bare fact)
-    face 4 speaks through: (the bare fact)
-    face 5 speaks through: (the bare fact)
-    face 6 speaks through: (the bare fact)
-    face 7 speaks through: (the bare fact)
+    face 0 speaks through: watch
+      and is one of the roles the town block lists for `watch` under `roles`, and no other.
+    face 1 speaks through: garrison
+      and is one of the roles the town block lists for `garrison` under `roles`, and no other.
+    face 2 speaks through: hall
+      and is one of the roles the town block lists for `hall` under `roles`, and no other.
+    face 3 speaks through: guild
+      and is one of these people and no other: a guild factor (sg) · a journeyman (sg) · a master of one of the crafts (sg) · the dyers' warden (sg) · the guild master (sg) · the guilds of the town (pl)
+    face 4 speaks through: stranger
+      and is one of the roles the town block lists for `stranger` under `roles`, and no other.
+    face 5 speaks through: register
+      and is one of the roles the town block lists for `register` under `roles`, and no other.
+    face 6 speaks through: hall
+      and is one of the roles the town block lists for `hall` under `roles`, and no other.
+    face 7 speaks through: court
+      and is one of the roles the town block lists for `court` under `roles`, and no other.
   THE CORPUS LINE, as the claim and the fallback:
     spine: The hall holds that the town could be fed and supplied through a crisis, and at the tavern they say the people who would be paid through one are paid short already.
     face 0: The watch says the purse that pays it is opened last.
@@ -128,13 +146,18 @@ POOL "Disasters & Famine: granary AND parish care only" in block DS-DEF-2
     The second sentence of a unit, if there is one, must rest on one of these fields
     and name it in its own word, or the instruments withhold it.
   faces to write: 6
-    face 0 speaks through: tavern
-      and may be any one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
-    face 1 speaks through: (the bare fact)
-    face 2 speaks through: (the bare fact)
-    face 3 speaks through: (the bare fact)
-    face 4 speaks through: (the bare fact)
-    face 5 speaks through: (the bare fact)
+    face 0 speaks through: register
+      and is one of the roles the town block lists for `register` under `roles`, and no other.
+    face 1 speaks through: market
+      and is one of the roles the town block lists for `market` under `roles`, and no other.
+    face 2 speaks through: tavern
+      and is one of these people and no other: a carter at the tavern (sg) · a driver off the coach (sg) · a guest at one of the inns (sg) · a man who drinks where the carters drink (sg) · a tavern keeper (sg) · a woman at the long table (sg) · an innkeeper (sg) · the drinkers at the tavern (pl) · the inn servants (pl) · the ostler (sg) · the ostler at one of the inns (sg) · the potboy (sg)
+    face 3 speaks through: watch
+      and is one of the roles the town block lists for `watch` under `roles`, and no other.
+    face 4 speaks through: guild
+      and is one of the roles the town block lists for `guild` under `roles`, and no other.
+    face 5 speaks through: court
+      and is one of the roles the town block lists for `court` under `roles`, and no other.
   THE CORPUS LINE, as the claim and the fallback:
     spine: A drover says the town looks provided for from outside, and whoever tends a sick house here comes out of the church.
     face 0: A local priest says a stranger asks for a house and is given a person, and nobody born here asks for the house.
