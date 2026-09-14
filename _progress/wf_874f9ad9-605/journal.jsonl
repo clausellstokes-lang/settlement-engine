@@ -1,0 +1,7 @@
+{"type":"launched"}
+{"type":"started","key":"v2:c8c2f5da71651afa832f78fb6f4054c3bce9f487c481e0fb680d3fe1e3e25bc6","agentId":"aa875a08fe745cb24","label":"repair:Economic Survival: ADEQUATE","phase":"Repair"}
+{"type":"started","key":"v2:e373e39784cea0ac6a9ecfac446c8aa2a8e36d2a2ad8e7369b84b66c4ad86b2c","agentId":"a10c72533bb994ee0","label":"repair:Economic Survival: WEAK","phase":"Repair"}
+{"type":"started","key":"v2:01bd8ee9fa316e370fb892abceff6a2eefdd19d165785d16cbd5a087071b66ce","agentId":"a6cbf322f2018acc0","label":"repair:Economic Survival: CRITICAL","phase":"Repair"}
+{"type":"started","key":"v2:fffc5eeb577a491bcf0d8a794c2d9f40b5816a2e10afcff2536f87d801e0b84a","agentId":"abd1736c781921571","label":"repair:Disasters & Famine: granary AND hospital","phase":"Repair"}
+{"type":"started","key":"v2:c5cf404462461656aa5e6ac28571fc7bd3920de08f171f5e801563cb679b9fdd","agentId":"a8d39a4b49d6fb6aa","label":"repair:Disasters & Famine: granary AND parish care only","phase":"Repair"}
+{"type":"started","key":"v2:fc20f8028e7080e2a1d00d1b61bf441ba674ffdfcf95d3fd07fa05203f69e577","agentId":"a37ffe902bf46bdbb","label":"repair:Disasters & Famine: granary, NO medical provision","phase":"Repair"}

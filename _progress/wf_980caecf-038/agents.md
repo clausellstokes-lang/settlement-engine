@@ -1,4 +1,4 @@
-# wf_980caecf-038 — per-agent progress, 2026-09-14 03:01:13
+# wf_980caecf-038 — per-agent progress, 2026-09-14 03:06:29
     - `a58382150` ? · DONE · transcript 09-14 02:48 453 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "claimFreezeHeld": false, "facesChanged": 22, "facesUnchanged": 9, "lineTotal": 31, "ownerTestBefore": 13, "ownerT
     - `af201562a` ? · DONE · transcript 09-14 02:49 495 KB · 6 tool calls · result: {"pool": "Economic Survival / WEAK", "claimFreezeHeld": false, "facesChanged": 9, "facesUnchanged": 18, "lineTotal": 30, "ownerTestBefore": 19, "ownerTestAfter"
     - `a6c164d77` ? · DONE · transcript 09-14 02:46 430 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 CRITICAL (3 variants, 3 spines, 20 faces, 23 lines)", "claimFreezeHeld": false, "facesChanged": 7, "facesUnchanged": 13, "lin
@@ -14,4 +14,4 @@
     - `ab59e15b2` ADVERSARY · DONE · transcript 09-14 02:56 473 KB · 5 tool calls · files: live.txt · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 3, "faceOrSpine": "FACE 5 [tavern]"
     - `af888a267` ADVERSARY · DONE · transcript 09-14 02:59 501 KB · 7 tool calls · result: {"pool": "Disasters & Famine: NO reserves, hospital present", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED_HABITUAL_TO_EPISODE", "variant":
     - `a8a877fd1` ADVERSARY · DONE · transcript 09-14 02:59 456 KB · 4 tool calls · result: {"pool": "Economic Survival / WEAK", "auditorWasWrong": true, "verdict": "AUDIT_INCOMPLETE", "summary": "The mechanical sweep re-runs clean under my own greps a
-    - `afbaa2e6b` ADVERSARY · IN FLIGHT · transcript 09-14 03:01 434 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
