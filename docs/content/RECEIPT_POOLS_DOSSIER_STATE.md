@@ -2243,68 +2243,68 @@ and never an assertion that the feared thing is happening.
 **PDF PARITY:** parity (`viewModel.js` power slice).
 
 **`autocrat`**
-1. `[ledger]` One person decides at {settlement} and decides quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.
-2. `[street]` The town does not wait long for an answer and does not always like the answer it gets, and has no procedure for getting a different one.
-3. `[unfolding]` What the {seat} at {settlement} fears is not the town but the people closest to it; a seat held by one person is lost the way one person can be replaced.
-4. `[visitor]` A stranger at {settlement} needs one audience and gets a decision in it, which is either the best or the worst arrangement he will encounter, depending on the decision.
+1. `[ledger]` One person decides at {settlement}, and decides quickly. What comes out of the {seat} arrives whole and can change entirely between one season and the next.
+2. `[street]` The town does not wait long for an answer and does not always like the answer it gets. It has no way of getting a different one.
+3. `[unfolding]` What the {seat} at {settlement} fears is not the town but the people closest to it. Those people are the ones who could replace it.
+4. `[visitor]` A stranger at {settlement} needs one audience and gets a decision in it.
 
 **`council`**
-1. `[ledger]` Decisions at {settlement} are averaged before they are made and stick once they are; the {seat} moves slowly and does not readily move back.
+1. `[ledger]` Decisions at {settlement} are averaged before they are made and stick once they are. The {seat} moves slowly and does not readily move back.
 2. `[street]` The town's business goes to a body rather than a person, and everybody has learned how long a body takes.
-3. `[unfolding]` What the {seat} at {settlement} watches for is the town's own temper. A council falls to unrest rather than to a rival, and it knows it.
-4. `[counterforce]` There are decisions the {seat} at {settlement} plainly ought to have taken and has not, and the reason is that a body cannot decide a thing it is divided on.
+3. `[unfolding]` What the {seat} at {settlement} watches for is the town's own temper. Unrest would take it where a rival could not, and it knows that.
+4. `[counterforce]` There are decisions the {seat} at {settlement} plainly ought to have taken and has not. The body is divided on them and cannot decide.
 
 **`theocracy`**
-1. `[ledger]` The {seat} at {settlement} governs from a creed. What it decides it decides against doctrine first and circumstance second, and the order matters more than any single ruling.
-2. `[street]` The town takes its civic questions to the same place it takes its spiritual ones, and does not experience the two as separate.
-3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed is a challenge to the right to govern, and everybody involved understands it that way.
-4. `[visitor]` A stranger at {settlement} finds the hall and the {institution} to be the same institution wearing different hours.
+1. `[ledger]` The {seat} at {settlement} governs from a creed. What it decides it decides against doctrine first and circumstance second.
+2. `[street]` The town takes its civic questions to the same place it takes its spiritual ones, and does not treat the two as separate.
+3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed challenges the right to govern here.
+4. `[visitor]` A stranger at {settlement} finds that the hall and the {institution} are the same body keeping different hours.
 
 **`merchant_league`**
-1. `[ledger]` The {seat} at {settlement} is held by the houses with the books, and what governs here governs the way a partnership governs: by interest, by leverage, and by what can be afforded.
-2. `[street]` The town is run by people who are also its creditors, and the two roles are not kept meaningfully apart.
-3. `[unfolding]` What the {seat} at {settlement} fears is not being overthrown but being unable to pay; a merchant hall falls to insolvency, and its politics are shaped around never reaching it.
-4. `[counterforce]` The {seat} at {settlement} has not pressed a quarrel it could easily have pressed, because the quarrel would cost more than the grievance is worth and the hall keeps that sum.
+1. `[ledger]` The {seat} at {settlement} is held by the houses with the books. It governs by interest, by leverage, and by what it can afford.
+2. `[street]` The town is run by people who are also its creditors, and the two roles are not kept apart.
+3. `[unfolding]` What the {seat} at {settlement} fears is not being overthrown but being unable to pay. Its politics are shaped around never reaching that point.
+4. `[counterforce]` The {seat} at {settlement} has not pressed a quarrel it could easily have pressed. The quarrel would cost more than the grievance is worth, and the hall keeps that sum.
 
 **`criminal`**
-1. `[ledger · dm-only]` What governs {settlement} is an illegal interest that has stopped needing to be illegal here; the forms are kept and the substance is somebody's business.
-2. `[street · dm-only]` The town knows who decides and does not use the word for it, and the not-using is itself part of the arrangement.
-3. `[unfolding · dm-only]` The {seat} at {settlement} is held by leverage rather than by consent, which makes betrayal the only real threat to it, and betrayal is a thing that comes from inside.
+1. `[ledger · dm-only]` What governs {settlement} is an illegal interest that has stopped needing to be illegal here. The forms are kept and the substance is somebody's business.
+2. `[street · dm-only]` The town knows who decides and does not use the word for it, and the silence is part of the arrangement.
+3. `[unfolding · dm-only]` The {seat} at {settlement} is held by leverage rather than by consent. Betrayal is the only real threat to it, and betrayal comes from inside.
 
 **`mixed`**
 1. `[ledger]` Nothing at {settlement} governs cleanly. The {seat} is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing.
 2. `[street]` The town cannot say in one word what kind of place it is governed as, and neither can the hall.
-3. `[unfolding]` What holds the {seat} at {settlement} together is that no part of it can rule alone, and that is a stable arrangement exactly until one part can.
+3. `[unfolding]` What holds the {seat} at {settlement} together is that no part of it can rule alone. The arrangement is stable until one part can.
 
 **`economicBase: extraction`**
-1. `[ledger]` {settlement} lives on what it takes out of the ground, and everything about the town (its rhythm, its politics, its fear) follows the yield.
-2. `[street]` The town's whole nightmare is the day the workings run out, and it is discussed at {settlement} the way weather is discussed elsewhere.
-3. `[counterforce]` {settlement} turtles the chokepoints when it fights. It does not campaign; it holds the two or three places that matter and lets everything else go.
+1. `[ledger]` {settlement} lives on what it takes out of the ground. The town's rhythm, its politics and its fear all follow the yield.
+2. `[street]` The town's whole fear at {settlement} is the day the workings run out. The town talks about it openly and often.
+3. `[counterforce]` When it fights, {settlement} digs in at the chokepoints. It does not campaign, and it holds the two or three places that matter and lets the rest go.
 
 **`economicBase: agrarian`**
-1. `[ledger]` {settlement} lives off its own ground and is governed by the calendar of it; nothing here can be decided against the harvest without being decided twice.
+1. `[ledger]` {settlement} lives off its own ground and is governed by its calendar. Nothing here can be decided against the harvest without being decided twice.
 2. `[street]` The town's fear is the season that fails, and the fear is old and specific and shared by everybody in it.
-3. `[counterforce]` {settlement} fights seasonally or not at all. The harvest imperative bites, and an army raised past it is an army raised against the town's own bread.
+3. `[counterforce]` {settlement} fights seasonally or not at all. An army raised past the harvest is an army raised against the town's own bread.
 
 **`economicBase: trade_hub`**
-1. `[ledger]` {settlement} lives on what passes through it, which makes the roads rather than the fields the thing the town is actually built on.
-2. `[street]` What frightens the town is a route turning elsewhere, and {settlement} watches the {route} the way a farming town watches the sky.
-3. `[counterforce]` {settlement} fights route wars and folds to embargoes; the town can be pressed harder by a closed road than by an army, and its neighbours know it.
+1. `[ledger]` {settlement} lives on what passes through it. The town is built on its roads and not on its fields.
+2. `[street]` What frightens the town is a route turning elsewhere. {settlement} watches the {route} closely and constantly.
+3. `[counterforce]` {settlement} fights route wars and folds to embargoes. A closed road presses the town harder than an army does, and its neighbours know it.
 
 **`economicBase: craft`**
-1. `[ledger]` {settlement} makes things, which means it must first be able to get the makings; the town's whole exposure sits upstream of anything it produces.
-2. `[street]` The fear here is input starvation: not a bad harvest and not a raid, but the season the {good} stops arriving.
-3. `[counterforce]` {settlement} fights in a limited way and guards its supply above everything else; the town will concede a great deal before it concedes the road its workshops eat from.
+1. `[ledger]` {settlement} makes things and must first get the makings. Everything the town produces depends on what reaches it first.
+2. `[street]` The fear here is not a bad harvest and not a raid. It is the season the {good} stops arriving.
+3. `[counterforce]` {settlement} fights in a limited way and guards its supply above everything else. The town concedes a great deal before it concedes the road its workshops depend on.
 
 **`economicBase: mixed`**
-1. `[ledger]` {settlement} lives on several things at once, none of them dominant, which spreads the town's risk and denies it any single thing to protect.
-2. `[street]` The fear at {settlement} is a compound one: not one failure but two arriving together, which is the only kind this town cannot absorb.
-3. `[counterforce]` {settlement} fights in a balanced way because it has to; no single interest here is large enough to make the town's war its own.
+1. `[ledger]` {settlement} lives on several things together and none of them is dominant. That spreads the town's risk and leaves it no single thing to protect.
+2. `[street]` At {settlement} the fear is not one failure but two arriving together. That is the only kind this town cannot absorb.
+3. `[counterforce]` {settlement} fights in a balanced way because it has to. No single interest here is large enough to make the town's war its own.
 
 **governing body name: a SLOT, never a baked noun**
-1. `[ledger]` What governs {settlement} calls itself the {seat}, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake.
+1. `[ledger]` What governs {settlement} calls itself the {seat}. The name is precise about the town's size and its pretensions, and outsiders routinely mistake it.
 2. `[visitor]` A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately.
-3. `[street]` The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.
+3. `[street]` In public the town at {settlement} calls the hall by its proper title, and something shorter everywhere else. Both names are exact.
 
 ---
 
