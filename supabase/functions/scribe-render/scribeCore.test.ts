@@ -119,7 +119,12 @@ Deno.test('the volatile turn carries the page, the ground and the corpus line', 
 Deno.test('⭐ THE FOUR GUESSES THE SIMULATION FOUND ARE ANSWERED IN THE BRIEF', () => {
   // Each of these is a thing an Opus seat had to guess on the W2 prompt, measured 2026-09-14.
   const text = brief();
-  assert(text.includes('THE PLAUSIBLE-ADDITION BAR'), 'the mechanism class no tier-0 arm can see');
+  assert(text.includes('THE SIX WAYS A LINE INVENTS'), 'RUN 2\'s six measured invention classes');
+  assert(text.includes('A BOOLEAN IS A FACT, NOT A PRACTICE'), 'the mechanism class no tier-0 arm can see');
+  assert(text.includes('you may not say a fine, a debt, a backlog or a bribe'),
+    'W3a\'s plausible-addition sentence survives inside the fourth bar');
+  assert(text.includes('WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS'),
+    'the positive rule is first: a writer told only what not to do still has a seat to fill');
   assert(text.includes('THE TWO LADDERS'), 'the badge word against the band word');
   assert(text.includes('THE CORPUS LINE\'S STANDING'), 'the exemplar that breaks its own law');
   assert(text.includes('do not imitate the breach'));
@@ -230,6 +235,26 @@ Deno.test('⭐ the tier-1 checklist asks SEVEN questions, not five', () => {
   // would refuse lines the writer was licensed to write, which is ruling 26's own defect class.
   assert(text.includes('Ashford'), 'the town');
   assert(text.includes('FAMILY: acute crisis'), 'the pool the line was written for');
+});
+
+Deno.test('⭐ THE TWO SEATS HOLD ONE LAW: the checklist carries the writer\'s six bars', () => {
+  // ⛔ RUN 2 MEASURED THE GAP. The writer wrote to the readiness BAND because the brief told it
+  // to, and the second reader — shown the page's `Well-Defended` badge and never shown that note
+  // — answered SAME PAGE `yes` on it. A checklist asked against a different law from the one the
+  // writer was given refuses lines the writer was licensed to write, which is ruling 26's own
+  // defect class pointed at the second reader instead of the first.
+  const text = buildTier1Checklist([unit()], card);
+  assert(text.includes('THE READER\'S EYE'), 'the preface is the writer\'s own bars');
+  for (const bar of [
+    'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT',
+    'NO ORIGIN',
+    'NO CONTEST THE CARD DOES NOT NAME',
+    'A BOOLEAN IS A FACT, NOT A PRACTICE',
+    'NO VERDICT THE FACTS\' OWN ROWS DENY',
+    'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS',
+  ]) assert(text.includes(bar), `${bar} is missing from the reader's preface`);
+  // AND THE SAME SIX ARE IN THE WRITER'S BRIEF, so this is one law and not two.
+  for (const bar of ['NO ORIGIN', 'A BOOLEAN IS A FACT, NOT A PRACTICE']) assert(brief().includes(bar));
 });
 
 Deno.test('the checklist prints the page\'s machine lines, which question 7 is about', () => {

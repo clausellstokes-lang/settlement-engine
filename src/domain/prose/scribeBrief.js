@@ -134,21 +134,88 @@ const UNIT_RULES = [
 ].join('\n');
 
 /**
- * ⭐ THE PLAUSIBLE-ADDITION BAR (chair ruling 29; the simulation's own finding).
+ * ⭐⭐ THE SIX WAYS A LINE INVENTS (chair ruling 29 as amended by W3b car 1; RUN 2's own
+ * measurement). It REPLACES the single PLAUSIBLE-ADDITION paragraph W3a carried, and carries that
+ * paragraph's own sentence inside the fourth bar rather than losing it.
  *
- * ⛔ IT IS IN THE BRIEF BECAUSE NO TIER-0 ARM CAN SEE IT. Both seats of the 2026-09-14
- * simulation, an Opus and a Sonnet, reached for a MECHANISM the card does not hold on the same
- * pool — a fine and a debtor's cell, a court backlog — on a card carrying `court` and `prison`
- * and neither a fine nor a debt nor a queue. Two of thirty lines across the two seats. Neither
- * contradicts a field, so C4, C3, X and the referent scan are all silent; the tier-1 checklist's
- * question 6 is what catches it AFTER the fact, and this bar is what stops it before.
+ * ⛔ THE MEASUREMENT THAT WROTE EACH BAR. RUN 2 put sixteen cells through two writer seats and an
+ * Opus second reader per pair: three hundred and seventy seven units, tier 0 keeping ninety one to
+ * ninety five percent of what was written, and the SECOND READER refusing about seven in ten. The
+ * reader's own notes name six classes, and every one of them is an addition the card does not
+ * hold — an absence asserted where a field had no value, an origin, a contest no relation row
+ * names, a practice behind a boolean, a verdict the town's own institution rows deny, and a
+ * neighbour on a card that carries no world. Actor and forecast drew almost nothing (twenty six
+ * and twelve lines), so the roster rule and the no-future bar were already holding. The disease
+ * was GAP-FILLING ON A THIN CARD, and a bar the writer can read is the only instrument that
+ * reaches it: none of the six is visible to any tier-0 arm.
+ *
+ * ⭐ AND THE POSITIVE RULE IS FIRST, BECAUSE A WRITER TOLD ONLY WHAT NOT TO DO STILL HAS A SEAT TO
+ * FILL. The corpus face at the same seat is always lawful and always ships, so copying it is the
+ * answer to a face with nothing under it, and omitting the pool is the answer to a spine with
+ * nothing under it.
  */
-const PLAUSIBLE_ADDITION = [
-  'THE PLAUSIBLE-ADDITION BAR. Add no mechanism, practice, cause, procedure, custom, price or',
-  'arrangement the card does not name. If the card says a court and a prison, you may not say a',
-  'fine, a debt, a backlog or a bribe. A line that explains HOW a thing works where the card only',
-  'says THAT it stands is refused by the second reader and falls to the corpus.',
+const INVENTION_BARS = [
+  'WHEN THE CARD GIVES A FACE NOTHING TO STAND ON, COPY THE CORPUS. Write the CORPUS FACE VERBATIM',
+  'at that seat. A copied corpus row is never refused: it already ships, and it is the line that',
+  'would have shipped anyway. A pool with nothing lawful to say in its SPINE is omitted, and the',
+  'hand corpus draws the whole of it. Neither is a failure; both are the dossier reading as it',
+  'always did.',
+  '',
+  'THE SIX WAYS A LINE INVENTS, AND IS REFUSED. Each was measured on rendered pages by a second',
+  'reader holding this same card.',
+  '',
+  'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT. Where a field on the card shows no value, you',
+  'have not been told what it holds. You may not say the thing is absent, small, quiet or',
+  'unchanged, and you may not write a sentence that would be false if that field were later',
+  'filled either way. A pool whose fields all show no value is OMITTED.',
+  '  REFUSED: "nothing here is being built and nothing sold off", on a page where the ranking of',
+  '  the town\'s prosperity had no value at all.',
+  '',
+  'NO ORIGIN. Nothing on the card has a beginning you were told. No body, market, road, custom or',
+  'arrangement came before another, grew out of another, took root, was founded, was sited or was',
+  'chosen. The record holds what stands.',
+  '  REFUSED: "the market took root where the carts already stopped".',
+  '',
+  'NO CONTEST THE CARD DOES NOT NAME. Two bodies are at odds only where a relation row on the card',
+  'says so. A rank, a share, a standing or a seat is not a quarrel.',
+  '  REFUSED: the governing council set against the order of the watch, on a card whose conflict',
+  '  reading had no value and which carried no relation row between them.',
+  '',
+  'A BOOLEAN IS A FACT, NOT A PRACTICE. Where a field says that a thing stands, a granary, a',
+  'church, a court, a wall, you may say that it stands and what a person meets at it. You may not',
+  'say how it is run, who fills it, who is let in, what is owed, what waits on what, or what is',
+  'done for the sick, the poor or the accused, unless a field on the card says that too. Add no',
+  'mechanism, practice, cause, procedure, custom, price or arrangement the card does not name: if',
+  'the card says a court and a prison, you may not say a fine, a debt, a backlog or a bribe.',
+  '  REFUSED: "grain they would rather have sold", written from a granary that only stands; "the',
+  '  court\'s business waits on the parish"; the sick "nursed by the inn servants".',
+  '',
+  'NO VERDICT THE CARD\'S OWN ROWS DENY. Before you write that a town lacks a thing, read the',
+  'institutions and the holders on the town block. If a row names it, the town has it.',
+  '  REFUSED: "no through traffic", written beside a caravaneer\'s post, a carriers\' guild, a',
+  '  customs house and a post relay station.',
+  '',
+  'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE CARD. Where the town block\'s `hasWorld` reads false,',
+  'no other settlement exists for this page: nobody speaks of neighbours, of what is said',
+  'elsewhere, or of what comes down the road from anywhere named.',
+  '  REFUSED: what they are saying in the next valley about this town.',
 ].join('\n');
+
+/**
+ * ⭐ THE SIX BARS AS ONE LINE EACH, for the SECOND READER's preface (W3b car 1). The writer and
+ * the reader must hold ONE law: RUN 2 measured a page where the writer wrote to the band because
+ * the brief told it to and the reader answered SAME PAGE `yes` because the reader had never been
+ * given the same note. A checklist asked against a different law from the one the writer was given
+ * refuses lines the writer was licensed to write, which is ruling 26's own defect class.
+ */
+export const READERS_EYE = Object.freeze([
+  'A FIELD WITH NO VALUE IS UNKNOWN, NOT ABSENT: an absence, a smallness or a quiet asserted where a field shows no value is an invention.',
+  'NO ORIGIN: nothing here came before, grew from, took root, was founded, was sited or was chosen.',
+  'NO CONTEST THE CARD DOES NOT NAME: a rank, a share, a standing or a seat is not a quarrel.',
+  'A BOOLEAN IS A FACT, NOT A PRACTICE: that a thing stands licenses no account of how it is run, who fills it, who is let in or what is owed.',
+  'NO VERDICT THE FACTS\' OWN ROWS DENY: if an institution or holder row names a thing, the town has it.',
+  'NO NEIGHBOUR, NO REALM, NO ROAD BEYOND THE FACTS: where `hasWorld` reads false, no other settlement exists for this page.',
+]);
 
 /**
  * ⭐ THE TWO LADDERS (chair ruling 30). A STATIC TRUTH about the shipped engine, so it rides in
@@ -229,7 +296,7 @@ export function buildScribeBrief(input) {
     '',
     UNIT_RULES,
     '',
-    PLAUSIBLE_ADDITION,
+    INVENTION_BARS,
     '',
     TWO_LADDERS,
     '',
@@ -703,6 +770,11 @@ export function buildTier1Checklist(units, card) {
   TIER1_QUESTIONS.forEach((q, i) => lines.push(`  ${i + 1}. ${q.ask}`));
   lines.push('A `yes` to any question means the line is refused and the hand-written line ships instead.');
   lines.push('Answer for every numbered line, in order, and write nothing outside the schema.');
+  lines.push('');
+  // ⭐ THE READER'S EYE — the writer's six bars, one line each, so the two seats hold ONE law.
+  lines.push('THE READER\'S EYE. These are the bars the writer was given, and they are the bars you');
+  lines.push('are reading against. A line that keeps all six is not refused for keeping them.');
+  for (const bar of READERS_EYE) lines.push(`  - ${bar}`);
   lines.push('');
   lines.push('THE TOWN:');
   lines.push(JSON.stringify(card?.town ?? {}, null, 1));

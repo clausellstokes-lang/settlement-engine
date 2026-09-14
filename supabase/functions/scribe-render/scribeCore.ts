@@ -18,8 +18,8 @@
  * ── THE CONTRACT IN (design §3.1, ruling 31) ───────────────────────────────────────
  * THREE parts now, and the split is the whole economics of the feature:
  *   1. THE BRIEF — byte-stable, `cache_control: ephemeral` with a one-hour TTL: the VOICE, the
- *      mechanical bars, the unit rules, the plausible-addition bar, the two-ladders note and the
- *      exemplar pack. Written once per hour per model and read at a fraction of the price on
+ *      mechanical bars, the unit rules, the SIX INVENTION BARS (W3b car 1), the two-ladders
+ *      note and the exemplar pack. Written once per hour per model and read at a fraction of the price on
  *      every tab of every settlement after that.
  *   2. THE TOWN BLOCK — a SECOND cached breakpoint, one per settlement rather than one per tab.
  *   3. THE VOLATILE TURN — the epoch, the record, the pools and the game master's instructions.
