@@ -94,3 +94,25 @@ Tokens by the API's own count, cache-hit rate, dollars, wall-clock, and whether 
 - ON MODEL CHOICE: on this one tab the cheaper model was not worse under the instruments and its
   prose is clean, if flatter and nearer the corpus. That is one page; the per-tab model choice
   stays an open item to measure over the pilot's twenty towns, not a decision.
+
+## RUN 2 — the unified prompt, the whole grid (workflow `wf_0c7e8fcf-e4a`, 13:1x–14:1x; 64 seats, 7.3 M tokens)
+16 cells (hamlet Warmholz · village Hochhausen · town Spitzplatz · city Rundgate × defense · economics · overview · power) × {Opus, Sonnet} writers, an Opus second reader per pair, the product's one judge. Rows: `scribe-harness/out/sim/RUN-wf_0c7e8fcf-e4a.json`; per cell `response-/answers-/judged-/page-<seat>` files.
+
+| | pools | returned | tier 0 kept | tier 1 dropped | FINAL shipped |
+|---|---|---|---|---|---|
+| Opus | 198 | 186 (94%) | 177 (95% of returned) | 126 | **51 (26%)** |
+| Sonnet | 198 | 191 (96%) | 173 (91%) | 113 | **60 (30%)** |
+
+By tab (both seats): defense 44/126 (35%) · overview 46/140 (33%) · economics 11/52 (21%) · power 10/78 (13%).
+Second-reader `yes` LINES by question: certainty 177 · mechanism 205 · scope 106 · quantifier 76 · same page 63 · actor 26 · forecast 12.
+
+**What it settles**
+1. **RULING 27 IS MEASURED: THE ORDER ARM NEVER FIRED.** `CORPUS-DIFF` is absent from every arm list over 377 units. With the order on the card the arm is fair; it stays FAIL. Tier 0 as a whole is now a 5–9 % gate (ORDER, WALL-5, Q, C3, NON-MOVE, C2, X, EPOCH, C4, REFERENT).
+2. **THE WRITER INVENTS, AND THE SECOND READER IS RIGHT.** The readers' notes name the classes, and each is a real addition the card does not hold: an ABSENCE asserted on a null read ("nothing here is being built and nothing sold off" on `prosperityRank = null`; "no goods come in" on all-null reads); an ORIGIN ("carts stopped on this spot before any stall did"); a named CONTEST between two bodies with `conflict.intensity` null and no relation row; a PRACTICE behind a boolean (`hasGranary`, `hasChurch`, `hasHospital=false` → "inn servants nurse the sick", "the court's business waits on the parish"); a VERDICT the card's own institutions cut against ("no through-traffic" beside a Caravaneer's post, a Carriers' guild, a Customs house). Actor and forecast drew almost nothing: the roster and the no-future bar hold. **The disease is gap-filling on thin cards** — worst on power (13 %) and economics (21 %), where the pools read few or null fields; best on defense (35 %).
+3. **ONE WEAK FACE KILLS A WHOLE UNIT.** A seven-line unit died on face 1 with its spine and face 0 answered all-no. The unit-ships-whole rule turns one invented face into six lost lawful lines.
+4. **THE JUDGE UNDER-REPORTS TIER 1:** it prints only the FIRST yes per unit (every drop shows as `T1-CERTAINTY`); the per-question counts are the honest picture. An instrument defect, not a finding about certainty.
+5. **THE TWO LADDERS BIT THE SECOND READER TOO:** the writer wrote to the band (as told) and the reader, shown the page's `Well-Defended` badge and three STRONG rows, answered SAME PAGE yes. The ladders note lives in the writer's brief; the checklist did not carry it. (In the product the checklist rides under the same cached brief; in this run the simulated reader was not given the brief — a fidelity gap in the workflow, now fixed.)
+6. **A CORPUS FINDING:** `WALLED-STRAINED` fires at `economicGates.military = 0.98` — a 2 % shortfall reads as "strained" beside "Well-funded — Full pay". The key's threshold is the corpus lane's question (the STRAINED key was already a proposal on a wage-less roster).
+7. **MODEL CHOICE CANNOT BE DECIDED YET:** Sonnet 30 % vs Opus 26 % is noise inside a 70 % invention rate; the question re-opens when the writer stops inventing.
+
+**Before the cure, the honest state of the product:** on a cold card the Scribe would ship one line in four and the corpus the rest — lawful, never false, but not the product. The cure is in the writer's brief and the unit rule, not in the readers.
