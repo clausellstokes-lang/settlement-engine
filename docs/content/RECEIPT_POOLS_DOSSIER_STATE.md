@@ -948,9 +948,9 @@ already in register and stand as index 0 of their pools, quoted below.
 
 **SHORTAGE × trade-dependent**
 0. *(canonical)* The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
-1. `[ledger]` The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.
+1. `[ledger]` The gate returns are thin in both columns. What arrives is short of what the town has contracted for. The shortfall is in goods the town does not make.
 2. `[street]` Market days are quiet and short. The stalls that depend on the roads are the ones standing empty.
-3. `[unfolding]` Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
+3. `[unfolding]` Traffic into {settlement} has fallen below what the town runs on. The stores are covering the difference for now.
 
 **SHORTAGE × not trade-dependent**
 1. `[ledger]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own walls.
@@ -961,16 +961,16 @@ already in register and stand as index 0 of their pools, quoted below.
 0. *(canonical)* Caravans keep to their rounds. Trade moves at its accustomed pace.
 1. `[ledger]` The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
 2. `[street]` The carts come when the carts come. Nobody is watching the road for them.
-3. `[visitor]` Trade here reads as unremarkable, which on a road is the good reading.
+3. `[visitor]` Trade here reads as unremarkable. On a road, that is the good reading.
 
 **SURPLUS × trade-dependent**
 0. *(canonical)* The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
 1. `[ledger]` More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
-2. `[street]` The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
-3. `[visitor]` A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.
+2. `[street]` The yard is full most mornings. The market is fat on it. What the town cannot make, the town can simply buy.
+3. `[visitor]` A stranger waits behind carts to get in. The roads are working harder than the town requires of them.
 
 **SURPLUS × not trade-dependent**
-1. `[ledger]` Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.
+1. `[ledger]` Heavy traffic runs through {settlement} without much of it belonging to the town. The roads are busy and the books are local.
 2. `[street]` Plenty passes here. Not much of it stops.
 3. `[visitor]` The traffic on these roads outruns the market. What arrives is mostly going somewhere else.
 
@@ -993,28 +993,28 @@ the market's shape as a whole.
 **SLOTS.** `{settlement}` `{good}`
 
 **HIGHLIGHT: dear**
-1. `[ledger]` {good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.
-2. `[street]` What this market talks about is the cost of {good}. It is dear, it has been dear, and the crier says so before he says anything else.
-3. `[visitor]` A stranger's coin goes furthest on everything in {settlement} except {good}, which is scarce enough that the market prices it out loud.
-4. `[threshold]` The market is ordinary but for {good}: stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.
+1. `[ledger]` {good} is the price everyone here quotes first, and it quotes high. The stores are short of it. The crier's reckoning follows the shortage rather than any rate.
+2. `[street]` What this market talks about is the cost of {good}. It is dear, it has been dear. The crier says so before he says anything else.
+3. `[visitor]` A stranger's coin goes furthest on everything in {settlement} except {good}. It is scarce enough that the market prices it out loud.
+4. `[threshold]` The market is ordinary but for {good}. Stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.
 
 **HIGHLIGHT: cheap**
-1. `[ledger]` {good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.
+1. `[ledger]` {good} sells for little here. The stores are heavy with it. The reckoning has come down to meet the pile.
 2. `[street]` Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the price says so.
 3. `[visitor]` A stranger buying {good} does well in this market. Nothing else is priced kindly.
-4. `[unfolding]` {good} keeps arriving faster than it leaves, and the price has been giving way to it.
+4. `[unfolding]` {good} keeps arriving faster than it leaves. The price has been giving way to it.
 
 **NO HIGHLIGHT: everything steady**
 1. `[ledger]` Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades sits within its accustomed reckoning.
 2. `[street]` The crier has nothing to make a noise about. Prices here are what prices here usually are.
-3. `[visitor]` A stranger will find no bargains and no robberies. The market is level across the board.
-4. `[threshold]` No good is scarce enough or heavy enough to move its price, so every stall sits inside its ordinary reckoning, and it would take a real movement in the stores to put any of them outside it.
+3. `[visitor]` A stranger finds no bargains and no robberies. The market is level across the board.
+4. `[threshold]` No good is scarce enough or heavy enough to move its price. So every stall sits inside its ordinary reckoning. It would take a real movement in the stores to put any of them outside it.
 
 **MIXED: exports dear, imports cheap**
-1. `[ledger]` The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.
-2. `[street]` Sellers here are doing well and so are buyers, which is not the ordinary shape of a market and is the first thing a trader will remark on.
-3. `[visitor]` A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.
-4. `[unfolding]` The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.
+1. `[ledger]` The two halves of this market disagree. What the town sells is dear and what the town buys is cheap. Both readings come off the same week's stocks.
+2. `[street]` Sellers here are doing well and so are buyers. That is not the ordinary shape of a market, and it is the first thing a trader remarks on.
+3. `[visitor]` A trader arriving at {settlement} pays dear for what the town makes. He gets little for what he brought.
+4. `[unfolding]` The town's own goods are running short while what it imports keeps piling up. The crier prices both movements in the same breath.
 
 ---
 
@@ -1037,9 +1037,9 @@ vocabulary and the attachable cause-clause library; this block authors the
 **SLOTS.** `{settlement}` `{chain}` `{institution}` `{resource}` `{good}`
 
 **IMPAIRED (canonical `scarce`), with a named dependency**
-1. `[ledger]` The {chain} is running below what it should. It wants {resource} the town cannot supply, and the shortfall reaches the services that draw on it.
-2. `[street]` {institution} is still open and still short. What it needs has not been coming, and the work it cannot do is felt further down.
-3. `[unfolding]` {settlement}'s {chain} produces less with every turn it goes without {resource}, and the trades below it are shortening their own work to match.
+1. `[ledger]` The {chain} is running below what it should. It wants {resource} the town cannot supply. The shortfall reaches the services that draw on it.
+2. `[street]` {institution} is still open and still short. What it needs has not been coming. The work it cannot do is felt further down.
+3. `[unfolding]` {settlement}'s {chain} produces less with every turn it goes without {resource}. The trades below it are shortening their own work to match.
 
 **VULNERABLE (canonical `strained`)**
 1. `[ledger]` The {chain} runs, and it runs on no margin. Every input it needs is arriving and none of it is arriving spare.
@@ -1047,19 +1047,19 @@ vocabulary and the attachable cause-clause library; this block authors the
 3. `[street]` The people working the {chain} are not idle and are not comfortable. One bad month upstream would put them down.
 
 **RUNNING (canonical `stable`): draw only with the note fields empty (R-DST-F)**
-1. `[ledger]` The {chain} runs whole. {institution} has what it needs, the outputs come off as expected, and nothing in the line is being covered for.
-2. `[visitor]` A stranger watching {settlement}'s {chain} sees the ordinary version of it: {resource} in at one end, {good} out at the other, and no gap between.
+1. `[ledger]` The {chain} runs whole. {institution} has what it needs and the outputs come off as expected. Nothing in the line is being covered for.
+2. `[visitor]` A stranger watching {settlement}'s {chain} sees the ordinary version of it. There is {resource} in at one end, {good} out at the other, and no gap between.
 3. `[street]` Nobody talks about the {chain}. It works, it has worked, and the town's attention is elsewhere.
 
 **ENTREPÔT**
-1. `[ledger]` {settlement} does not make {good}; it handles it. The goods enter, change hands and leave, and the town's earnings are in the handling.
+1. `[ledger]` {settlement} does not make {good}. It handles it. The goods enter, change hands and leave. The town's earnings are in the handling.
 2. `[visitor]` What passes through here does not stay long enough to be made into anything. The warehouses are full and the workshops are not.
 3. `[street]` The trade belongs to other places. {settlement}'s part of it is the road, the yard and the cut.
 
 **MAGICALLY SUSTAINED: a small prop (low `magicRecovery`)**
-1. `[ledger]` The {chain} is held up by a working rather than by its own supply, and the working covers a corner of what the line needs.
+1. `[ledger]` The {chain} is held up by a working rather than by its own supply. The working covers a corner of what the line needs.
 2. `[threshold]` The {chain} is standing on a prop. The prop is real and it is small. Most of what the line lacks, it still lacks.
-3. `[street]` The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It buys time; it does not buy supply.
+3. `[street]` The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It buys time. It does not buy supply.
 
 **MAGICALLY SUSTAINED: a large prop (high `magicRecovery`)**
 1. `[ledger]` The {chain} runs almost whole on a working. The books show the output nearly where it belongs and the line beneath it replaced rather than repaired.

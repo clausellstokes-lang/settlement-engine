@@ -543,7 +543,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.",
+          "text": "The gate returns are thin in both columns. What arrives is short of what the town has contracted for. The shortfall is in goods the town does not make.",
           "slots": [],
           "vid": 1
         },
@@ -555,7 +555,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.",
+          "text": "Traffic into {settlement} has fallen below what the town runs on. The stores are covering the difference for now.",
           "slots": [
             "settlement"
           ],
@@ -607,7 +607,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Trade here reads as unremarkable, which on a road is the good reading.",
+          "text": "Trade here reads as unremarkable. On a road, that is the good reading.",
           "slots": [],
           "vid": 3
         }
@@ -629,13 +629,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.",
+          "text": "The yard is full most mornings. The market is fat on it. What the town cannot make, the town can simply buy.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.",
+          "text": "A stranger waits behind carts to get in. The roads are working harder than the town requires of them.",
           "slots": [],
           "vid": 3
         }
@@ -643,7 +643,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SURPLUS × not trade-dependent": [
         {
           "angle": "ledger",
-          "text": "Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.",
+          "text": "Heavy traffic runs through {settlement} without much of it belonging to the town. The roads are busy and the books are local.",
           "slots": [
             "settlement"
           ],
@@ -758,7 +758,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "HIGHLIGHT: dear": [
         {
           "angle": "ledger",
-          "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.",
+          "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short of it. The crier's reckoning follows the shortage rather than any rate.",
           "slots": [
             "good"
           ],
@@ -766,7 +766,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "What this market talks about is the cost of {good}. It is dear, it has been dear, and the crier says so before he says anything else.",
+          "text": "What this market talks about is the cost of {good}. It is dear, it has been dear. The crier says so before he says anything else.",
           "slots": [
             "good"
           ],
@@ -774,7 +774,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger's coin goes furthest on everything in {settlement} except {good}, which is scarce enough that the market prices it out loud.",
+          "text": "A stranger's coin goes furthest on everything in {settlement} except {good}. It is scarce enough that the market prices it out loud.",
           "slots": [
             "settlement",
             "good"
@@ -783,7 +783,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The market is ordinary but for {good}: stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.",
+          "text": "The market is ordinary but for {good}. Stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.",
           "slots": [
             "good"
           ],
@@ -793,7 +793,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "HIGHLIGHT: cheap": [
         {
           "angle": "ledger",
-          "text": "{good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.",
+          "text": "{good} sells for little here. The stores are heavy with it. The reckoning has come down to meet the pile.",
           "slots": [
             "good"
           ],
@@ -818,7 +818,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{good} keeps arriving faster than it leaves, and the price has been giving way to it.",
+          "text": "{good} keeps arriving faster than it leaves. The price has been giving way to it.",
           "slots": [
             "good"
           ],
@@ -842,13 +842,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger will find no bargains and no robberies. The market is level across the board.",
+          "text": "A stranger finds no bargains and no robberies. The market is level across the board.",
           "slots": [],
           "vid": 3
         },
         {
           "angle": "threshold",
-          "text": "No good is scarce enough or heavy enough to move its price, so every stall sits inside its ordinary reckoning, and it would take a real movement in the stores to put any of them outside it.",
+          "text": "No good is scarce enough or heavy enough to move its price. So every stall sits inside its ordinary reckoning. It would take a real movement in the stores to put any of them outside it.",
           "slots": [],
           "vid": 4
         }
@@ -856,19 +856,19 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "MIXED: exports dear, imports cheap": [
         {
           "angle": "ledger",
-          "text": "The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.",
+          "text": "The two halves of this market disagree. What the town sells is dear and what the town buys is cheap. Both readings come off the same week's stocks.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "Sellers here are doing well and so are buyers, which is not the ordinary shape of a market and is the first thing a trader will remark on.",
+          "text": "Sellers here are doing well and so are buyers. That is not the ordinary shape of a market, and it is the first thing a trader remarks on.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.",
+          "text": "A trader arriving at {settlement} pays dear for what the town makes. He gets little for what he brought.",
           "slots": [
             "settlement"
           ],
@@ -876,7 +876,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.",
+          "text": "The town's own goods are running short while what it imports keeps piling up. The crier prices both movements in the same breath.",
           "slots": [],
           "vid": 4
         }
@@ -966,7 +966,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "IMPAIRED (canonical scarce), with a named dependency": [
         {
           "angle": "ledger",
-          "text": "The {chain} is running below what it should. It wants {resource} the town cannot supply, and the shortfall reaches the services that draw on it.",
+          "text": "The {chain} is running below what it should. It wants {resource} the town cannot supply. The shortfall reaches the services that draw on it.",
           "slots": [
             "chain",
             "resource"
@@ -975,7 +975,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{institution} is still open and still short. What it needs has not been coming, and the work it cannot do is felt further down.",
+          "text": "{institution} is still open and still short. What it needs has not been coming. The work it cannot do is felt further down.",
           "slots": [
             "institution"
           ],
@@ -983,7 +983,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s {chain} produces less with every turn it goes without {resource}, and the trades below it are shortening their own work to match.",
+          "text": "{settlement}'s {chain} produces less with every turn it goes without {resource}. The trades below it are shortening their own work to match.",
           "slots": [
             "settlement",
             "chain",
@@ -1021,7 +1021,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)": [
         {
           "angle": "ledger",
-          "text": "The {chain} runs whole. {institution} has what it needs, the outputs come off as expected, and nothing in the line is being covered for.",
+          "text": "The {chain} runs whole. {institution} has what it needs and the outputs come off as expected. Nothing in the line is being covered for.",
           "slots": [
             "chain",
             "institution"
@@ -1030,7 +1030,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger watching {settlement}'s {chain} sees the ordinary version of it: {resource} in at one end, {good} out at the other, and no gap between.",
+          "text": "A stranger watching {settlement}'s {chain} sees the ordinary version of it. There is {resource} in at one end, {good} out at the other, and no gap between.",
           "slots": [
             "settlement",
             "chain",
@@ -1051,7 +1051,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ENTREPÔT": [
         {
           "angle": "ledger",
-          "text": "{settlement} does not make {good}; it handles it. The goods enter, change hands and leave, and the town's earnings are in the handling.",
+          "text": "{settlement} does not make {good}. It handles it. The goods enter, change hands and leave. The town's earnings are in the handling.",
           "slots": [
             "settlement",
             "good"
@@ -1076,7 +1076,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "MAGICALLY SUSTAINED: a small prop (low magicRecovery)": [
         {
           "angle": "ledger",
-          "text": "The {chain} is held up by a working rather than by its own supply, and the working covers a corner of what the line needs.",
+          "text": "The {chain} is held up by a working rather than by its own supply. The working covers a corner of what the line needs.",
           "slots": [
             "chain"
           ],
@@ -1092,7 +1092,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It buys time; it does not buy supply.",
+          "text": "The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It buys time. It does not buy supply.",
           "slots": [
             "chain",
             "institution"
