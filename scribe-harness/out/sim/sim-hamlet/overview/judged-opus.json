@@ -1,0 +1,718 @@
+{
+ "verdicts": [
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5",
+    "X"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "subject": "exhaustivity over an open column",
+     "value": "The trouble here is the slow kind rather than the sudden kind, and the place has the room ",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "and not much further.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "rather than",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "verdict": "WITHHELD",
+   "arms": [
+    "WALL-5",
+    "X"
+   ],
+   "findings": [
+    {
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "and not the working.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "subject": "exhaustivity over an open column",
+     "value": "The place works on the terms it has, and what falls short is the terms and not the working",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER"
+   ],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "subject": "a move sequence outside the closed set",
+     "value": "PRESENT then ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "verdict": "WITHHELD",
+   "arms": [
+    "ORDER",
+    "X"
+   ],
+   "findings": [
+    {
+     "arm": "ORDER",
+     "channel": "WITHHELD",
+     "subject": "a move sequence outside the closed set",
+     "value": "ABSENCE then PRESENT",
+     "description": "the spine realises none of the eight level-1 orders; 83.7 per cent of the shipped defense leaf does, so this is a question for the refuter and not a mechanical refusal"
+    },
+    {
+     "arm": "X",
+     "channel": "WITHHELD",
+     "subject": "exhaustivity over an open column",
+     "value": "Nothing in the hamlet is spare, and that is what a careful eye takes in first.",
+     "description": "the copula entails the subject is the column's only value; the column is not closed (open)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "verdict": "PASS",
+   "arms": [],
+   "findings": []
+  },
+  {
+   "blockId": "DS-GEN-13",
+   "poolKey": "NO-MARKET",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Goods here change hands one at a time, and nothing in the place is arranged for more than that. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-17",
+   "poolKey": "BARE",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Every job here is somebody's second job. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "Overview's own section framing",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The trouble here is the slow kind rather than the sudden kind, and the place has the room to work at it. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "DIRECTION: worsening",
+   "vid": 1,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER",
+    "T1-SCOPE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The worsening is steady rather than sudden, and each season costs a little more than the one before. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The worsening is steady rather than sudden, and each season costs a little more than the one before. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SCOPE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The worsening is steady rather than sudden, and each season costs a little more than the one before. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The worsening is steady rather than sudden, and each season costs a little more than the one before. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "prosperity: Struggling / Poor",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The year closes near enough to level that the closing is watched. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The year closes near enough to level that the closing is watched. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The year closes near enough to level that the closing is watched. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Only a part of what happens here is ever spoken of, and nothing decides which part. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Only a part of what happens here is ever spoken of, and nothing decides which part. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.military: CRITICAL",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What protects Warmholz is that nobody has wanted it, and everybody here understands the arrangement. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What protects Warmholz is that nobody has wanted it, and everybody here understands the arrangement. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "What protects Warmholz is that nobody has wanted it, and everybody here understands the arrangement. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.monster: CRITICAL",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "Beyond the fields the place has no answer to what lives there, and nobody whose work it would be. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.magical: CRITICAL",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "No practitioner lives here, no arrangement stands to bring one, and nobody expects either. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "road",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The houses stand a reasonable distance from the last place, and that is the whole of the reason for them. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "The houses stand a reasonable distance from the last place, and that is the whole of the reason for them. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-6",
+   "poolKey": "tier overlay: thorp / hamlet",
+   "vid": 2,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-MECHANISM",
+    "T1-SAMEPAGE"
+   ],
+   "findings": [
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A handful of roofs is the whole of Warmholz, and what keeps them here is the ground under them. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-SAMEPAGE",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "A handful of roofs is the whole of Warmholz, and what keeps them here is the ground under them. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  },
+  {
+   "blockId": "DS-GEN-7",
+   "poolKey": "structuralSuggestions[]",
+   "vid": 3,
+   "verdict": "FAIL",
+   "arms": [
+    "T1-CERTAINTY",
+    "T1-MECHANISM",
+    "T1-QUANTIFIER"
+   ],
+   "findings": [
+    {
+     "arm": "T1-CERTAINTY",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One loose end runs through the place, and one standing arrangement would tie it off. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-QUANTIFIER",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One loose end runs through the place, and one standing arrangement would tie it off. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    },
+    {
+     "arm": "T1-MECHANISM",
+     "channel": "FAIL",
+     "subject": "the second reader refused this row",
+     "value": "spine",
+     "description": "One loose end runs through the place, and one standing arrangement would tie it off. (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)"
+    }
+   ]
+  }
+ ],
+ "kept": [
+  {
+   "blockId": "DS-STR-1",
+   "poolKey": "BEAST & RAIDER THREAT",
+   "vid": 5,
+   "spine": "Stock and people are kept close in, and the ground further out counts as abandoned.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-CND-1",
+   "poolKey": "SEVERITY: critical",
+   "vid": 2,
+   "spine": "Warmholz bends this far and not much further.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "economicViability.viable: true",
+   "vid": 4,
+   "spine": "The place works on the terms it has, and what falls short is the terms and not the working.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "defenseProfile.readiness.label: Vulnerable",
+   "vid": 2,
+   "spine": "A place this size ought to have more between its houses and whatever comes than this one has.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.internal: WEAK",
+   "vid": 1,
+   "spine": "More goes on here than anybody looks into, though little of it is hidden.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "scores.economic: WEAK",
+   "vid": 2,
+   "spine": "Nothing in the hamlet is spare, and that is what a careful eye takes in first.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-GEN-3",
+   "poolKey": "foodSecurity.label: Secure",
+   "vid": 2,
+   "spine": "Food is not thought about here, and that is the most that can be said for anybody's food.",
+   "faces": [],
+   "notebook": []
+  },
+  {
+   "blockId": "DS-REL-2",
+   "poolKey": "flagDriven count zero",
+   "vid": 3,
+   "spine": "The people here are bound to one another the way any settled place is bound, and no further than that.",
+   "faces": [],
+   "notebook": []
+  }
+ ],
+ "dropped": 12,
+ "page": {
+  "verdict": "PASS",
+  "findings": [],
+  "report": {
+   "units": 20,
+   "openers": [
+    {
+     "opener": "a handful of",
+     "n": 1
+    },
+    {
+     "opener": "a place this",
+     "n": 1
+    },
+    {
+     "opener": "beyond the fields",
+     "n": 1
+    },
+    {
+     "opener": "every job here",
+     "n": 1
+    },
+    {
+     "opener": "food is not",
+     "n": 1
+    },
+    {
+     "opener": "goods here change",
+     "n": 1
+    },
+    {
+     "opener": "more goes on",
+     "n": 1
+    },
+    {
+     "opener": "no practitioner lives",
+     "n": 1
+    },
+    {
+     "opener": "nothing in the",
+     "n": 1
+    },
+    {
+     "opener": "one loose end",
+     "n": 1
+    },
+    {
+     "opener": "only a part",
+     "n": 1
+    },
+    {
+     "opener": "stock and people",
+     "n": 1
+    },
+    {
+     "opener": "the houses stand",
+     "n": 1
+    },
+    {
+     "opener": "the people here",
+     "n": 1
+    },
+    {
+     "opener": "the place works",
+     "n": 1
+    },
+    {
+     "opener": "the trouble here",
+     "n": 1
+    },
+    {
+     "opener": "the worsening is",
+     "n": 1
+    },
+    {
+     "opener": "the year closes",
+     "n": 1
+    },
+    {
+     "opener": "warmholz bends this",
+     "n": 1
+    },
+    {
+     "opener": "what protects warmholz",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}
