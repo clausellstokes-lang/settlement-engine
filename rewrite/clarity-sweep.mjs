@@ -12,6 +12,10 @@ function parse(text){ const out=[]; let blk=null, pool=null, v=0;
   for (const l of text.split('\n')) { let m;
     if ((m=l.match(/^### (DS-[A-Z]+-\d+)/))) { blk = l.startsWith(prefix) ? m[1] : null; pool=null; continue; }
     if (!blk) continue;
+    // the INLINE pool form (DS-REL-1 and others): `**key** — 1. `[tag]` text · 2. `[tag]` text …` on one line — invisible until 2026-09-14
+    if ((m=l.trim().match(/^\*\*(.+?)\*\* — (\d+\. `\[.+)$/))) { pool=m[1]; v=0;
+      for (const part of m[2].split(/ · (?=\d+\. `\[)/)) { const mm=part.match(/^(\d+)\. `\[([^\]]+)\]` (.+)$/); if (mm) { v=+mm[1]; out.push({blk,pool,where:`v${v} SPINE`,text:mm[3].replace(/<!--.*?-->/g,'').trim()}); } }
+      continue; }
     if ((m=l.trim().match(/^\*\*(.+)\*\*$/))) { pool=m[1]; v=0; continue; }
     if ((m=l.match(/^(\d+)\. `\[([^\]]+)\]` (.+)/))) { v=+m[1]; out.push({blk,pool,where:`v${v} SPINE`,text:m[3].replace(/<!--.*?-->/g,'').trim()}); continue; }
     if ((m=l.match(/^\s*- `\[face\]` (?:`\[(.+?)\]` )?(.+)/))) { out.push({blk,pool,where:`v${v} face [${m[1]||''}]`,text:m[2].replace(/<!--.*?-->/g,'').trim()}); }
