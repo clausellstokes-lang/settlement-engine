@@ -55,11 +55,15 @@ import {
   SCRIBE_FALLBACK_BETA,
   SCRIBE_MODEL,
   SCRIBE_OUTPUT_SCHEMA,
+  TIER1_ANSWER_SCHEMA,
+  applyTier1,
   buildScribeBrief,
   buildScribeUserTurn,
+  buildTier1Checklist,
   buildTownBlock,
   judgeUnits,
   parseScribeUnits,
+  parseTier1Answers,
 } from './scribeCore.ts';
 import type { ScribeUnit, ScribeVerdict } from './scribeCore.ts';
 
@@ -68,11 +72,19 @@ const ANTHROPIC_VERSION = '2023-06-01';
 const SCRIBE_PROVIDER = 'anthropic';
 /** The ONE render SKU (chair ruling 1 as amended by ruling 19: one price for the whole render). */
 const SCRIBE_FEATURE = 'dossierProse';
+/**
+ * ⛔ THE BUDGET WRAPS BOTH READERS. `generate-narrative` bounds one invocation at 55 s and the
+ * Scribe is one invocation per tab; the tier-1 pass is a SECOND provider call inside that same
+ * invocation, so the timer is armed once, before the first call, and cleared after the second.
+ * Two timers would let a slow writer plus a slow reader spend 110 s between them.
+ */
 const SCRIBE_TIMEOUT_MS = 55_000;
 const SCRIBE_SPEND_ESTIMATE_USD = 0.08;
 /** A tab's card is tens of kilobytes; thirteen tabs of one town run to 261 KB, and this is one. */
 const MAX_BODY_BYTES = 512 * 1024;
 const MAX_OUTPUT_TOKENS = 16_000;
+/** The second reader answers yes or no seven times a line, so its ceiling is a fraction of that. */
+const TIER1_MAX_OUTPUT_TOKENS = 4_000;
 
 function getCorsHeaders(req?: Request) { return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' }); }
 function json(body: unknown, status = 200, headers: Record<string, string> = {}) {
@@ -98,9 +110,14 @@ function defaultAdminClient() { return createClient(Deno.env.get('SUPABASE_URL')
  *     parameter (the deprecated top-level `output_format` is not used);
  *   • server-side `fallbacks: 'default'` under its beta, so a refusal category re-routes inside the
  *     same call instead of blanking a tab.
+ *
+ * ⭐ THE SAME FUNCTION SERVES BOTH READERS (the writer and the tier-1 checklist), and it must:
+ * the second call re-sends the SAME TWO cached system blocks, which is the whole reason the second
+ * reader is nearly free. Only the user turn, the output schema and `max_tokens` differ.
  */
 async function callAnthropic(args: {
   apiKey: string; brief: string; townBlock: string; turn: string;
+  schema: Record<string, unknown>; maxTokens: number;
   providerFetch: typeof fetch; signal: AbortSignal;
 }): Promise<Response> {
   return args.providerFetch('https://api.anthropic.com/v1/messages', {
@@ -114,12 +131,12 @@ async function callAnthropic(args: {
     },
     body: JSON.stringify({
       model: SCRIBE_MODEL,
-      max_tokens: MAX_OUTPUT_TOKENS,
+      max_tokens: args.maxTokens,
       thinking: { type: 'adaptive' },
       fallbacks: 'default',
       output_config: {
         effort: 'high',
-        format: { type: 'json_schema', schema: SCRIBE_OUTPUT_SCHEMA },
+        format: { type: 'json_schema', schema: args.schema },
       },
       system: [
         { type: 'text', text: args.brief, cache_control: { type: 'ephemeral', ttl: '1h' } },
@@ -230,9 +247,34 @@ export async function handleScribeRender(
     let units: ScribeUnit[] = [];
     let verdicts: ScribeVerdict[] = [];
     let dropped = 0;
+    let tier1Dropped = 0;
+    /** `none` where tier 0 kept nothing to read, `ok` where the second reader ran, `skipped` on any failure of it. */
+    let tier1: 'none' | 'ok' | 'skipped' = 'none';
+    let calls = 0;
     let refused = false;
     let fellBack = false;
     const estTokens = (s: string) => Math.max(1, Math.ceil(String(s || '').length / 4));
+
+    /**
+     * ⭐ BOTH CALLS ARE ONE EVENT FOR MONEY. The render is one credited act (ruling 19's one
+     * render SKU), so the writer's usage and the second reader's are SUMMED into one set of
+     * totals and one `ai_usage_events` row, with `calls` on the response saying how many provider
+     * turns produced them. A null stays null only while NOTHING has been counted: once a figure
+     * arrives, a later absent one adds zero rather than erasing what was measured.
+     */
+    const addUsage = (data: unknown) => {
+      const row = (data as { usage?: Record<string, unknown> } | null)?.usage ?? {};
+      const add = (held: number | null, next: unknown) => {
+        if (typeof next !== 'number' || !Number.isFinite(next)) return held;
+        return (held ?? 0) + next;
+      };
+      usage = {
+        input: add(usage.input, row.input_tokens),
+        output: add(usage.output, row.output_tokens),
+        cacheRead: add(usage.cacheRead, row.cache_read_input_tokens),
+        cacheWrite: add(usage.cacheWrite, row.cache_creation_input_tokens),
+      };
+    };
 
     const outcome = await runCreditedCall({
       async reserve() {
@@ -263,45 +305,96 @@ export async function handleScribeRender(
         const townBlock = buildTownBlock(card);
         const turn = buildScribeUserTurn({ card, record, guidance });
         promptChars = brief.length + townBlock.length + turn.length;
+        // ⛔ ONE TIMER OVER BOTH READERS. See SCRIBE_TIMEOUT_MS: the tier-1 pass is a second call
+        // inside the SAME invocation and the same budget, so the controller is armed once here
+        // and cleared once at the end, whichever path the function leaves by.
         const ac = new AbortController();
         const timer = setTimeout(() => ac.abort(), SCRIBE_TIMEOUT_MS);
-        let resp: Response;
         try {
-          resp = await callAnthropic({
-            apiKey: providerKey.key, brief, townBlock, turn, providerFetch, signal: ac.signal,
+          const resp = await callAnthropic({
+            apiKey: providerKey.key,
+            brief,
+            townBlock,
+            turn,
+            schema: SCRIBE_OUTPUT_SCHEMA,
+            maxTokens: MAX_OUTPUT_TOKENS,
+            providerFetch,
+            signal: ac.signal,
           });
+          if (!resp.ok) {
+            const text = await resp.text().catch(() => '');
+            logError('scribe-render', user.id, `anthropic ${resp.status}: ${text.slice(0, 500)}`, { stage: 'provider' });
+            throw new Error(`Anthropic ${resp.status}`);
+          }
+          const data = await resp.json();
+          addUsage(data);
+          calls = 1;
+          // A fallback block names the model that declined and the one that continued; a sticky
+          // turn carries none, so the iteration list is read too. Receipts, never control flow.
+          fellBack = (Array.isArray(data?.content) ? data.content : []).some((b: any) => b?.type === 'fallback')
+            || (Array.isArray(data?.usage?.iterations) ? data.usage.iterations : []).some((i: any) => i?.type === 'fallback_message');
+          // THE WHOLE CHAIN REFUSED. Not an error and not a line: the tab keeps the hand corpus.
+          if (data?.stop_reason === 'refusal') { refused = true; return { ok: false, answerText: '' }; }
+
+          const answer = answerTextOf(data);
+          answerChars = answer.length;
+          const parsed = parseScribeUnits(answer);
+          if (!parsed.ok) return { ok: false, answerText: '' };
+
+          const judged = judgeUnits(parsed.units, card, refuteUnit);
+          units = judged.kept;
+          verdicts = judged.verdicts;
+          dropped = judged.dropped;
+
+          // ⭐⭐ TIER 1 — THE SECOND READER (design §4; chair ruling 29). It runs only where tier 0
+          // kept something, on the SAME two cached system blocks, so its input is almost entirely
+          // a cache read and its output is seven words a line.
+          //
+          // ⛔ A TIER-1 FAILURE IS NOT A RENDER FAILURE. The design says tier 0 is the FLOOR and
+          // tier 1 the second reader; a dossier is not blanked because the second reader was
+          // unavailable. Any provider error, refusal, unparseable answer or abort here is logged,
+          // tier 0's kept units ship, and the response says `tier1: 'skipped'` so the pilot can
+          // tell a page the second reader passed from a page it never saw.
+          if (units.length > 0) {
+            try {
+              const checklist = buildTier1Checklist(units, card);
+              promptChars += checklist.length;
+              const second = await callAnthropic({
+                apiKey: providerKey.key,
+                brief,
+                townBlock,
+                turn: checklist,
+                schema: TIER1_ANSWER_SCHEMA,
+                maxTokens: TIER1_MAX_OUTPUT_TOKENS,
+                providerFetch,
+                signal: ac.signal,
+              });
+              if (!second.ok) {
+                const text = await second.text().catch(() => '');
+                throw new Error(`Anthropic ${second.status}: ${text.slice(0, 200)}`);
+              }
+              const secondData = await second.json();
+              addUsage(secondData);
+              calls = 2;
+              if (secondData?.stop_reason === 'refusal') throw new Error('tier1 refused');
+              const answers = parseTier1Answers(answerTextOf(secondData));
+              if (!answers.ok) throw new Error('tier1 unparseable');
+              const second0 = applyTier1(units, answers.answers);
+              units = second0.kept;
+              verdicts = [...verdicts, ...second0.verdicts];
+              tier1Dropped = second0.dropped;
+              dropped += second0.dropped;
+              tier1 = 'ok';
+            } catch (e) {
+              logError('scribe-render', user.id, e, { stage: 'tier1' });
+              tier1 = 'skipped';
+            }
+          }
+
+          // EVERY unit refused is not a model failure: it is a render that landed nothing, and the
+          // reader keeps the corpus. It is still a failed call for money, so the spend is refunded.
+          return { ok: units.length > 0, answerText: answer };
         } finally { clearTimeout(timer); }
-        if (!resp.ok) {
-          const text = await resp.text().catch(() => '');
-          logError('scribe-render', user.id, `anthropic ${resp.status}: ${text.slice(0, 500)}`, { stage: 'provider' });
-          throw new Error(`Anthropic ${resp.status}`);
-        }
-        const data = await resp.json();
-        usage = {
-          input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
-          output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null,
-          cacheRead: typeof data?.usage?.cache_read_input_tokens === 'number' ? data.usage.cache_read_input_tokens : null,
-          cacheWrite: typeof data?.usage?.cache_creation_input_tokens === 'number' ? data.usage.cache_creation_input_tokens : null,
-        };
-        // A fallback block names the model that declined and the one that continued; a sticky turn
-        // carries none, so the iteration list is read too. Both are receipts, never control flow.
-        fellBack = (Array.isArray(data?.content) ? data.content : []).some((b: any) => b?.type === 'fallback')
-          || (Array.isArray(data?.usage?.iterations) ? data.usage.iterations : []).some((i: any) => i?.type === 'fallback_message');
-        // THE WHOLE CHAIN REFUSED. Not an error and not a line: the tab keeps the hand corpus.
-        if (data?.stop_reason === 'refusal') { refused = true; return { ok: false, answerText: '' }; }
-
-        const answer = answerTextOf(data);
-        answerChars = answer.length;
-        const parsed = parseScribeUnits(answer);
-        if (!parsed.ok) return { ok: false, answerText: '' };
-
-        const judged = judgeUnits(parsed.units, card, refuteUnit);
-        units = judged.kept;
-        verdicts = judged.verdicts;
-        dropped = judged.dropped;
-        // EVERY unit refused is not a model failure: it is a render that landed nothing, and the
-        // reader keeps the corpus. It is still a failed call for money, so the spend is refunded.
-        return { ok: units.length > 0, answerText: answer };
       },
       async refund(id, reason, elevated) {
         if (!id || elevated) return;
@@ -373,6 +466,12 @@ export async function handleScribeRender(
       blocks,
       verdicts,
       dropped,
+      // ⭐ THE TWO READERS ARE REPORTED APART. `dropped` is every unit that fell, `tier1Dropped`
+      // the share the SECOND reader took, and `tier1` says whether it ran at all — which is the
+      // figure the pilot needs to tell a page the checklist passed from a page it never saw.
+      tier1,
+      tier1Dropped,
+      calls,
       balance: outcome.balance,
       free: usedFree,
       usage: {

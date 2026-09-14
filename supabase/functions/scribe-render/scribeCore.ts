@@ -36,6 +36,7 @@
 // @ts-ignore — the bundle is generated JavaScript with JSDoc types, checked by `deno check` in
 // tests/lint/scribeBundle.walker.test.js and byte-derived from src/domain/prose/scribeBrief.js.
 import {
+  applyTier1 as applyTier1Js,
   buildScribeBrief as buildScribeBriefJs,
   buildScribeUserTurn as buildScribeUserTurnJs,
   buildTier1Checklist as buildTier1ChecklistJs,
@@ -43,6 +44,8 @@ import {
   judgeUnits as judgeUnitsJs,
   parseScribeUnits as parseScribeUnitsJs,
   SCRIBE_OUTPUT_SCHEMA as SCRIBE_OUTPUT_SCHEMA_JS,
+  TIER1_ANSWER_SCHEMA as TIER1_ANSWER_SCHEMA_JS,
+  TIER1_QUESTIONS as TIER1_QUESTIONS_JS,
 } from '../_shared/proseKernel.bundle.js';
 
 /** The artefact shape this renderer writes. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`. */
@@ -131,6 +134,32 @@ export const judgeUnits = (
 ): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number } =>
   judgeUnitsJs(units, card, refute);
 
-/** ⭐ THE TIER-1 CHECKLIST (design §4). The classes no tier-0 arm can reach. */
+/** ⭐ THE TIER-1 CHECKLIST (design §4). The seven classes no tier-0 arm can reach. */
 export const buildTier1Checklist = (units: ScribeUnit[], card: any): string =>
   buildTier1ChecklistJs(units, card);
+
+/** The seven questions, so a caller can count them without re-spelling them. */
+export const TIER1_QUESTIONS = TIER1_QUESTIONS_JS as ReadonlyArray<
+  { key: string; arm: string; ask: string }
+>;
+
+/** ⭐ THE TIER-1 ANSWER SCHEMA, closed at every level like the writer's. */
+export const TIER1_ANSWER_SCHEMA = TIER1_ANSWER_SCHEMA_JS as Record<string, any>;
+
+/** ⭐⭐ THE SECOND READER'S VERDICT, APPLIED. Returns `judgeUnits`'s shape so the rows merge. */
+export const applyTier1 = (
+  units: ScribeUnit[],
+  answers: unknown[],
+): { kept: ScribeUnit[]; verdicts: ScribeVerdict[]; dropped: number } =>
+  applyTier1Js(units, answers);
+
+/** The tier-1 answer rows, as the provider returns them under `TIER1_ANSWER_SCHEMA`. */
+export function parseTier1Answers(answerText: string): { ok: boolean; answers: unknown[] } {
+  try {
+    const parsed = JSON.parse(String(answerText || ''));
+    const rows = Array.isArray(parsed?.answers) ? parsed.answers : null;
+    return rows ? { ok: true, answers: rows } : { ok: false, answers: [] };
+  } catch {
+    return { ok: false, answers: [] };
+  }
+}

@@ -75,7 +75,8 @@ function makeUserClient(spendResult: Record<string, unknown>, rpc: Array<{ fn: s
 }
 
 function makeAdminClient(
-  opts: { active?: boolean | null; freeClaim?: boolean } ,
+  // deno-lint-ignore no-explicit-any
+  opts: { active?: boolean | null; freeClaim?: boolean; events?: any[] },
   // deno-lint-ignore no-explicit-any
   rpc: Array<{ fn: string; args: any }>,
 ) {
@@ -94,19 +95,47 @@ function makeAdminClient(
     if (fn === 'surveyor_byok_get') return Promise.resolve({ data: null, error: null });
     return Promise.resolve({ data: null, error: null });
   },
-  from: () => ({ insert: () => Promise.resolve({ error: null }) }),
+  // deno-lint-ignore no-explicit-any
+  from: () => ({ insert: (row: any) => { opts.events?.push(row); return Promise.resolve({ error: null }); } }),
   };
   return () => client;
 }
 
-/** A provider stub that returns whatever `units` it is given, under the real answer shape. */
-function providerReturning(units: unknown[], extra: Record<string, unknown> = {}) {
-  return () => Promise.resolve(new Response(JSON.stringify({
-  content: [{ type: 'text', text: JSON.stringify({ units }) }],
-  usage: { input_tokens: 1000, output_tokens: 200, cache_read_input_tokens: 28_500 },
-  ...extra,
-  }), { status: 200 }));
+/**
+ * A provider stub for BOTH READERS. The first call is the writer and gets `units`; every call
+ * after it is the tier-1 checklist and gets `tier1`, which defaults to a clean sheet over the one
+ * lawful unit's two rows. `calls` records what the handler actually sent, so an arm can prove the
+ * second turn carried the same two cached system blocks.
+ */
+function providerReturning(
+  units: unknown[],
+  opts: { tier1?: unknown[] | 'error'; extra?: Record<string, unknown>; calls?: unknown[] } = {},
+) {
+  let n = 0;
+  return (_url: string | URL | Request, init?: RequestInit) => {
+    n += 1;
+    opts.calls?.push(JSON.parse(String(init?.body ?? '{}')));
+    const usage = { input_tokens: 1000, output_tokens: 200, cache_read_input_tokens: 28_500 };
+    if (n === 1) {
+      return Promise.resolve(new Response(JSON.stringify({
+        content: [{ type: 'text', text: JSON.stringify({ units }) }],
+        usage,
+        ...(opts.extra ?? {}),
+      }), { status: 200 }));
+    }
+    if (opts.tier1 === 'error') return Promise.resolve(new Response('down', { status: 500 }));
+    const answers = opts.tier1 ?? [clean(1), clean(2)];
+    return Promise.resolve(new Response(JSON.stringify({
+      content: [{ type: 'text', text: JSON.stringify({ answers }) }],
+      usage,
+    }), { status: 200 }));
+  };
 }
+
+/** One tier-1 answer row with every question answered `no`. */
+const clean = (n: number) => ({
+  n, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no',
+});
 
 const lawfulUnit = { blockId: 'DS-DEF-2', poolKey: 'k', vid: 3, spine: 'The watch keeps a short roll.', faces: ['A clerk in the hall says the purse is short.'], notebook: [] };
 
@@ -250,8 +279,90 @@ scopedEnv.test('a lawful unit lands BLOCK-SHAPED with its verdict', async () => 
   assertEquals(body.verdicts.length, 1);
   assert(!names(a).includes('refund_credits'), 'a successful paid call is NEVER refunded');
   assert(names(a).includes('release_ai_spend_reservation'));
-  // ⭐ THE CACHE READ IS RETURNED, which is the receipt the design says no test can prove.
-  assertEquals(body.usage.cacheRead, 28_500);
+  // ⭐ THE CACHE READ IS RETURNED, which is the receipt the design says no test can prove, and it
+  // is the SUM OF BOTH READERS: the stub answers 28,500 on each of the two calls and the response
+  // carries 57,000, because the render is ONE credited act and its usage is one set of totals.
+  assertEquals(body.calls, 2);
+  assertEquals(body.usage.cacheRead, 57_000);
+  assertEquals(body.tier1, 'ok');
+  assertEquals(body.tier1Dropped, 0);
+});
+
+scopedEnv.test('⭐ TIER 1 RUNS ON THE SAME TWO CACHED BLOCKS, and only the turn and the schema differ', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const sent: any[] = [];
+  await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({}, a),
+    anthropicFetch: providerReturning([lawfulUnit], { calls: sent }),
+  });
+  assertEquals(sent.length, 2, 'the second reader is a second provider call');
+  // The cached halves are byte-identical, which is the whole reason the second reader is cheap.
+  assertEquals(sent[0].system[0].text, sent[1].system[0].text);
+  assertEquals(sent[0].system[1].text, sent[1].system[1].text);
+  assertEquals(sent[0].system[0].cache_control.ttl, '1h');
+  assertEquals(sent[1].system[1].cache_control.ttl, '1h');
+  // And the volatile halves are NOT: the second turn is the checklist.
+  assert(sent[0].messages[0].content !== sent[1].messages[0].content);
+  assert(String(sent[1].messages[0].content).includes('MECHANISM'));
+  assertEquals(sent[1].max_tokens, 4000);
+  assertEquals(
+    Object.keys(sent[1].output_config.format.schema.properties.answers.items.properties).sort(),
+    ['actor', 'certainty', 'forecast', 'mechanism', 'n', 'quantifier', 'samePage', 'scope'],
+  );
+});
+
+scopedEnv.test('⭐ A YES ON THE MECHANISM QUESTION DROPS THE UNIT TO THE CORPUS', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({}, a),
+    // Line 1 is the spine; a `yes` on question 6 there drops the whole unit, because a unit ships
+    // whole. Nothing lawful is left, so the render landed nothing and the spend comes back.
+    anthropicFetch: providerReturning([lawfulUnit], {
+      tier1: [{ ...clean(1), mechanism: 'yes' }, clean(2)],
+    }),
+  });
+  assertEquals(res.status, 502);
+  assert(names(a).includes('refund_credits'), 'a render that lands nothing is refunded');
+});
+
+scopedEnv.test('⛔ A TIER-1 PROVIDER FAILURE IS NOT A RENDER FAILURE: tier 0 is the floor', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1', balance: 12 }, u),
+    adminClient: makeAdminClient({}, a),
+    anthropicFetch: providerReturning([lawfulUnit], { tier1: 'error' }),
+  });
+  assertEquals(res.status, 200, 'the dossier is not blanked because the second reader was away');
+  const body = await res.json();
+  assertEquals(body.ok, true);
+  assertEquals(body.tier1, 'skipped');
+  assertEquals(body.tier1Dropped, 0);
+  assertEquals(body.blocks['DS-DEF-2'].k[0].spine, 'The watch keeps a short roll.');
+  assert(!names(a).includes('refund_credits'), 'the render landed, so the spend stands');
+});
+
+scopedEnv.test('⭐ THE METER SUMS BOTH CALLS INTO ONE EVENT', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const events: any[] = [];
+  await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ events }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(events.length, 1, 'one render is ONE credited act and ONE usage row');
+  // 2 x (1000 input + 28,500 cache read + 0 cache write), folded at full input price exactly as
+  // `generate-narrative` folds them, and 2 x 200 output.
+  assertEquals(events[0].input_tokens, 59_000);
+  assertEquals(events[0].output_tokens, 400);
+  assertEquals(events[0].tokens_estimated, false);
 });
 
 scopedEnv.test('a WHOLE-CHAIN REFUSAL is not an error and not a line', async () => {

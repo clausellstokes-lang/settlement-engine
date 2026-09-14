@@ -583,12 +583,114 @@ export function judgeUnits(units, card, refute) {
 }
 
 /**
+ * ⭐⭐ THE SEVEN QUESTIONS (design §4; chair ruling 29). Five are W1's measured classes — the
+ * certainty, quantifier, scope, actor and forecast faults that 27 of 50 moved claims fall into
+ * and that NO tier-0 arm can reach. Two are the simulation's own findings:
+ *
+ *   MECHANISM — both seats, an Opus and a Sonnet, added a practice the card does not hold on the
+ *     same pool (a fine and a debtor's cell; a court backlog) from a card carrying only `court`
+ *     and `prison`. Neither contradicts a field, so C4, C3, X and the referent scan are silent.
+ *   SAME PAGE — the page carries machine lines the composed prose sits beside, and a rendered
+ *     line that contradicts one is wrong to a reader who can see both at once. No unit-level arm
+ *     can see the page.
+ *
+ * The `key` is the schema field the model answers in; the `arm` is what a refusal is recorded as.
+ * @type {ReadonlyArray<{key: string, arm: string, ask: string}>}
+ */
+export const TIER1_QUESTIONS = Object.freeze([
+  Object.freeze({
+    key: 'certainty',
+    arm: 'T1-CERTAINTY',
+    ask: 'CERTAINTY: does the line claim to know something more surely than the facts below support?',
+  }),
+  Object.freeze({
+    key: 'quantifier',
+    arm: 'T1-QUANTIFIER',
+    ask: 'QUANTIFIER: does it say how many, how much or how often, where the facts give no number?',
+  }),
+  Object.freeze({
+    key: 'scope',
+    arm: 'T1-SCOPE',
+    ask: 'SCOPE: does it apply to more of the town, or more of the time, than the facts cover?',
+  }),
+  Object.freeze({
+    key: 'actor',
+    arm: 'T1-ACTOR',
+    ask: 'ACTOR: does someone act in it who is not a body or role these facts seat?',
+  }),
+  Object.freeze({
+    key: 'forecast',
+    arm: 'T1-FORECAST',
+    ask: 'FORECAST: does it say what is going to happen rather than what stands?',
+  }),
+  Object.freeze({
+    key: 'mechanism',
+    arm: 'T1-MECHANISM',
+    ask: 'MECHANISM: does it describe how a thing works — a practice, a procedure, a cause, a custom, a price, a debt, a fine, a backlog — where the facts only say that the thing stands?',
+  }),
+  Object.freeze({
+    key: 'samePage',
+    arm: 'T1-SAMEPAGE',
+    ask: 'SAME PAGE: does it contradict a machine line on this page?',
+  }),
+]);
+
+/**
+ * ⭐ THE NUMBERED LINES, DERIVED ONCE. The checklist prints them and `applyTier1` maps an answer
+ * back to its unit, so both must enumerate identically or a `yes` would drop the wrong line. One
+ * function, two callers.
+ * @param {ReadonlyArray<object>} units
+ * @returns {Array<{n: number, unit: number, row: string, text: string}>}
+ */
+export function tier1Lines(units) {
+  const rows = [];
+  let n = 0;
+  const all = Array.isArray(units) ? units : [];
+  for (let u = 0; u < all.length; u += 1) {
+    const unit = all[u] || {};
+    const faces = Array.isArray(unit.faces) ? unit.faces : [];
+    const notebook = Array.isArray(unit.notebook) ? unit.notebook : [];
+    const labelled = [
+      { row: 'spine', text: String(unit.spine ?? '') },
+      ...faces.map((text, i) => ({ row: `face ${i}`, text: String(text ?? '') })),
+      ...notebook.map((text, i) => ({ row: `notebook ${i}`, text: String(text ?? '') })),
+    ];
+    for (const line of labelled) {
+      if (!line.text) continue;
+      n += 1;
+      rows.push({ n, unit: u, row: line.row, text: line.text });
+    }
+  }
+  return rows;
+}
+
+/** The card's own machine lines, which question 7 is asked against. */
+function pageLinesOf(card) {
+  return (Array.isArray(card?.page) ? card.page : [])
+    .filter((row) => ['machine', 'badge', 'row'].includes(String(row?.kind)))
+    .map((row) => `  [${String(row?.kind)}] ${String(row?.label ?? '')}: ${String(row?.text ?? '')}`);
+}
+
+/** The pool row a unit was written for, for its field list. */
+function fieldsFor(card, unit) {
+  const pool = cardPool(card, String(unit?.blockId ?? ''), String(unit?.poolKey ?? ''));
+  return (Array.isArray(pool?.fields) ? pool.fields : [])
+    .map((f) => `    ${String(f?.field ?? '')} = ${JSON.stringify(f?.value ?? null)}`);
+}
+
+/**
  * ⭐ THE TIER-1 CHECKLIST (design §4). W1 MEASURED that 27 of 50 moved claims are reachable by NO
  * tier-0 arm — the certainty, quantifier and scope classes — which is the whole case for a second
  * pass. It is a CHECKLIST and not a critic: a closed list of yes/no questions about ONE line, on
  * the same model as the writer (ruling 10's conflicted-witness rule applies to BYOK), inside the
  * repair-loop budget. A `yes` on any question is a finding; the unit falls to the corpus like any
  * other FAIL.
+ *
+ * ⛔ THE FACTS ARE THE CARD'S OWN AND NOT A SUMMARY OF THEM. The town, the epoch, the page's
+ * machine lines, and — per unit — the FIELD PATHS AND VALUES that unit's pool reads. A checklist
+ * asked against less than the writer was given would refuse lines the writer was licensed to
+ * write, which is the instrument defect ruling 26 exists to stop.
+ *
  * @param {ReadonlyArray<object>} units
  * @param {object} card
  * @returns {string}
@@ -596,27 +698,127 @@ export function judgeUnits(units, card, refute) {
 export function buildTier1Checklist(units, card) {
   const lines = [
     'Below are lines written for one settlement dossier, and the facts they were written from.',
-    'For EACH line answer the five questions with `yes` or `no` and nothing else.',
-    '  1. CERTAINTY: does the line claim to know something more surely than the facts below support?',
-    '  2. QUANTIFIER: does it say how many, how much or how often, where the facts give no number?',
-    '  3. SCOPE: does it apply to more of the town, or more of the time, than the facts cover?',
-    '  4. ACTOR: does someone act in it who is not a body or role these facts seat?',
-    '  5. FORECAST: does it say what is going to happen rather than what stands?',
-    'A `yes` to any question means the line is refused.',
-    '',
-    'THE FACTS:',
-    JSON.stringify(card?.town ?? {}, null, 1),
-    JSON.stringify(card?.epoch ?? {}, null, 1),
-    '',
-    'THE LINES:',
+    `For EACH numbered line answer the ${TIER1_QUESTIONS.length} questions with \`yes\` or \`no\` and nothing else.`,
   ];
-  let n = 0;
-  for (const unit of (Array.isArray(units) ? units : [])) {
-    for (const text of [unit.spine, ...unit.faces, ...unit.notebook]) {
-      if (!text) continue;
-      n += 1;
-      lines.push(`${n}. ${text}`);
+  TIER1_QUESTIONS.forEach((q, i) => lines.push(`  ${i + 1}. ${q.ask}`));
+  lines.push('A `yes` to any question means the line is refused and the hand-written line ships instead.');
+  lines.push('Answer for every numbered line, in order, and write nothing outside the schema.');
+  lines.push('');
+  lines.push('THE TOWN:');
+  lines.push(JSON.stringify(card?.town ?? {}, null, 1));
+  lines.push('');
+  lines.push('THE STATE THIS PAGE READS:');
+  lines.push(JSON.stringify(card?.epoch ?? {}, null, 1));
+  const page = pageLinesOf(card);
+  if (page.length) {
+    lines.push('');
+    lines.push('THE PAGE, as the reader meets it. Question 7 is about these lines and no others:');
+    for (const row of page) lines.push(row);
+  }
+  lines.push('');
+  lines.push('THE LINES:');
+  const rows = tier1Lines(units);
+  const all = Array.isArray(units) ? units : [];
+  let at = -1;
+  for (const row of rows) {
+    if (row.unit !== at) {
+      at = row.unit;
+      const unit = all[at] || {};
+      lines.push(`  POOL ${JSON.stringify(String(unit.poolKey ?? ''))} in block ${String(unit.blockId ?? '')}, which reads:`);
+      const fields = fieldsFor(card, unit);
+      if (fields.length) for (const field of fields) lines.push(field);
+      else lines.push('    (this pool declares no typed field)');
     }
+    lines.push(`${row.n}. (${row.row}) ${row.text}`);
   }
   return lines.join('\n');
+}
+
+/**
+ * ⭐ THE TIER-1 ANSWER SCHEMA. Closed at every level, like the writer's, so a reply naming a key
+ * this contract does not hold is refused by the provider rather than half-trusted here. The two
+ * allowed values are spelled as an enum rather than a boolean because the model is answering a
+ * question in words and a boolean invites it to reason about truthiness instead.
+ */
+export const TIER1_ANSWER_SCHEMA = Object.freeze({
+  type: 'object',
+  additionalProperties: false,
+  required: ['answers'],
+  properties: {
+    answers: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['n', ...TIER1_QUESTIONS.map((q) => q.key)],
+        properties: Object.fromEntries([
+          ['n', { type: 'integer' }],
+          ...TIER1_QUESTIONS.map((q) => [q.key, { type: 'string', enum: ['yes', 'no'] }]),
+        ]),
+      },
+    },
+  },
+});
+
+/**
+ * ⭐⭐ THE SECOND READER'S VERDICT, APPLIED (chair ruling 29).
+ *
+ * Any `yes` on any ROW of a unit drops the whole unit, because a unit ships whole — the same rule
+ * `judgeUnits` applies at tier 0. The return is `judgeUnits`'s own shape so the two verdict lists
+ * concatenate, and a verdict row is emitted ONLY for a unit tier 1 REFUSES: tier 0 has already
+ * written a row for every unit, and a second PASS row per unit would double the artefact's
+ * verdict list to say nothing.
+ *
+ * ⛔ AN ANSWER FOR A LINE NUMBER THAT DOES NOT EXIST IS IGNORED, NOT GUESSED AT. The enumeration
+ * is `tier1Lines`'s and the model is told the numbers; a row outside it is a reply that did not
+ * follow the list, and dropping a unit on it would refuse a line nobody read.
+ *
+ * @param {ReadonlyArray<object>} units the units tier 0 kept
+ * @param {ReadonlyArray<object>} answers the model's rows
+ * @returns {{kept: object[], verdicts: object[], dropped: number}}
+ */
+export function applyTier1(units, answers) {
+  const all = Array.isArray(units) ? units : [];
+  const rows = tier1Lines(all);
+  const byNumber = new Map(rows.map((row) => [row.n, row]));
+  /** @type {Map<number, Array<{arm: string, row: string, text: string}>>} */
+  const refused = new Map();
+
+  for (const answer of (Array.isArray(answers) ? answers : [])) {
+    if (!answer || typeof answer !== 'object') continue;
+    const line = byNumber.get(Number(answer.n));
+    if (!line) continue;
+    for (const question of TIER1_QUESTIONS) {
+      if (String(answer[question.key] ?? '').toLowerCase() !== 'yes') continue;
+      const held = refused.get(line.unit) || [];
+      held.push({ arm: question.arm, row: line.row, text: line.text });
+      refused.set(line.unit, held);
+    }
+  }
+
+  const kept = [];
+  const verdicts = [];
+  for (let u = 0; u < all.length; u += 1) {
+    const hits = refused.get(u);
+    if (!hits) { kept.push(all[u]); continue; }
+    const unit = all[u];
+    verdicts.push({
+      blockId: unit.blockId,
+      poolKey: unit.poolKey,
+      vid: unit.vid,
+      verdict: 'FAIL',
+      arms: [...new Set(hits.map((h) => h.arm))].sort(),
+      findings: hits.map((h) => ({
+        arm: h.arm,
+        channel: 'FAIL',
+        subject: 'the second reader refused this row',
+        value: h.row,
+        // ⛔ NO EM DASH IN A STRING THAT CAN REACH A READER. The DM page prints the per-unit
+        // verdicts as a REPORT (ruling 6) and the E2 ratchet holds every rendered face at hard
+        // zero on the mark, so a finding's own prose keeps the same bar the prose it judges does.
+        description: `${h.text.slice(0, 120)} (the second reader answered yes on this question, and a yes on any row drops the unit to the hand-written line)`,
+      })),
+    });
+  }
+  return { kept, verdicts, dropped: verdicts.length };
 }

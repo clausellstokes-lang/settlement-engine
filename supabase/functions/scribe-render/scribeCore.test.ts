@@ -10,6 +10,9 @@
 import { assert, assertEquals, assertStrictEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import {
   CACHE_MIN_PREFIX_TOKENS,
+  TIER1_ANSWER_SCHEMA,
+  TIER1_QUESTIONS,
+  applyTier1,
   buildScribeBrief,
   buildScribeUserTurn,
   buildTier1Checklist,
@@ -213,10 +216,67 @@ Deno.test('a clean unit ships with its verdict recorded', () => {
   assertStrictEquals(out.kept[0].spine, 'A line.');
 });
 
-Deno.test('the tier-1 checklist asks the five classes tier 0 cannot reach', () => {
+Deno.test('⭐ the tier-1 checklist asks SEVEN questions, not five', () => {
   const text = buildTier1Checklist([unit()], card);
-  for (const klass of ['CERTAINTY', 'QUANTIFIER', 'SCOPE', 'ACTOR', 'FORECAST']) {
-    assert(text.includes(klass), `${klass} is one of the 27 tier-0 cannot reach`);
+  assertEquals(TIER1_QUESTIONS.length, 7);
+  for (const klass of ['CERTAINTY', 'QUANTIFIER', 'SCOPE', 'ACTOR', 'FORECAST', 'MECHANISM', 'SAME PAGE']) {
+    assert(text.includes(klass), `${klass} is missing from the checklist`);
   }
-  assert(text.includes('1. A line.'));
+  assert(text.includes('7 questions'), 'the count in the instruction follows the list');
+  // The lines are numbered per (unit, row) so an answer maps back to a unit, and the row is named.
+  assert(text.includes('1. (spine) A line.'));
+  assert(text.includes('2. (face 0) a'));
+  // ⛔ AND THE FACTS ARE THE CARD'S OWN. A checklist asked against less than the writer was given
+  // would refuse lines the writer was licensed to write, which is ruling 26's own defect class.
+  assert(text.includes('Ashford'), 'the town');
+  assert(text.includes('FAMILY: acute crisis'), 'the pool the line was written for');
+});
+
+Deno.test('the checklist prints the page\'s machine lines, which question 7 is about', () => {
+  const withPage = {
+    ...card,
+    page: [
+      { kind: 'badge', label: 'readiness', text: 'Well-Defended' },
+      { kind: 'machine', label: 'guard', text: 'The town watch maintains standard patrol coverage.' },
+      { kind: 'composed', label: '', text: 'a composed line, which is NOT a machine line' },
+    ],
+  };
+  const text = buildTier1Checklist([unit()], withPage);
+  assert(text.includes('[badge] readiness: Well-Defended'));
+  assert(text.includes('[machine] guard: The town watch maintains standard patrol coverage.'));
+  assert(!text.includes('which is NOT a machine line'), 'a composed row is the prose, not the page');
+});
+
+Deno.test('⭐ A YES ON ANY ROW DROPS THE UNIT, and its arm names the question', () => {
+  const kept = [unit()];
+  // Row 1 is the spine, rows 2 and 3 the two faces. A `yes` on the MECHANISM question of row 3.
+  const out = applyTier1(kept, [
+    { n: 1, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' },
+    { n: 3, certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'yes', samePage: 'no' },
+  ]);
+  assertEquals(out.kept.length, 0);
+  assertEquals(out.dropped, 1);
+  assertEquals(out.verdicts[0].arms, ['T1-MECHANISM']);
+  assertEquals(out.verdicts[0].verdict, 'FAIL');
+  assertEquals(out.verdicts[0].poolKey, 'FAMILY: acute crisis');
+});
+
+Deno.test('a clean sheet keeps every unit, and an answer for a line that does not exist is ignored', () => {
+  const kept = [unit()];
+  const no = { certainty: 'no', quantifier: 'no', scope: 'no', actor: 'no', forecast: 'no', mechanism: 'no', samePage: 'no' };
+  assertEquals(applyTier1(kept, [{ n: 1, ...no }, { n: 2, ...no }, { n: 3, ...no }]).kept.length, 1);
+  // ⛔ A ROW OUTSIDE THE ENUMERATION IS A REPLY THAT DID NOT FOLLOW THE LIST, and dropping a unit
+  // on it would refuse a line nobody read.
+  assertEquals(applyTier1(kept, [{ n: 99, ...no, mechanism: 'yes' }]).kept.length, 1);
+  assertEquals(applyTier1(kept, []).dropped, 0);
+});
+
+Deno.test('the tier-1 answer schema is CLOSED at every level and admits only yes or no', () => {
+  assertEquals(TIER1_ANSWER_SCHEMA.additionalProperties, false);
+  assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.additionalProperties, false);
+  assertEquals(
+    Object.keys(TIER1_ANSWER_SCHEMA.properties.answers.items.properties).sort(),
+    ['actor', 'certainty', 'forecast', 'mechanism', 'n', 'quantifier', 'samePage', 'scope'],
+  );
+  assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.properties.mechanism.enum, ['yes', 'no']);
 });

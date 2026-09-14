@@ -26,8 +26,8 @@ import {
 import { refuteUnit, REFUTE_ARMS } from '../../src/domain/prose/refuteUnit.js';
 import { cardDelta } from '../../src/domain/prose/epochRecord.js';
 import {
-  SCRIBE_OUTPUT_SCHEMA, buildScribeBrief, buildScribeUserTurn, buildTownBlock, judgeUnits,
-  parseScribeUnits,
+  SCRIBE_OUTPUT_SCHEMA, TIER1_QUESTIONS, applyTier1, buildScribeBrief, buildScribeUserTurn,
+  buildTier1Checklist, buildTownBlock, judgeUnits, parseScribeUnits, tier1Lines,
 } from '../../src/domain/prose/scribeBrief.js';
 import { townCard } from '../../src/domain/prose/townCard.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -235,6 +235,48 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     expect(JSON.stringify(b)).toBe(JSON.stringify(a));
     expect(a.verdicts.length).toBe(1);
     expect(['PASS', 'WITHHELD', 'FAIL']).toContain(a.verdicts[0].verdict);
+  });
+
+  it('⭐ THE SECOND READER: applyTier1 drops on a yes and keeps on a clean sheet, both sides of the seam', async () => {
+    // ⛔ THE CONTROLS LIVE HERE RATHER THAN IN THEIR OWN FILE ON PURPOSE. This suite is the one
+    // the gate runs that imports the prompt leaf, and driving each control through BOTH the source
+    // and the bundle makes it a stronger arm than a source-only one would be: the edge function
+    // runs the BUNDLE's `applyTier1`, so a control that only ever exercised the source would prove
+    // nothing about what ships.
+    const mod = await import(pathToFileURL(outFile).href);
+    const unit = {
+      blockId: 'DS-DEF-2',
+      poolKey: 'k',
+      vid: 3,
+      spine: 'The walls are kept.',
+      faces: ['A clerk in the hall says the purse is short.'],
+      notebook: [],
+    };
+    const no = Object.fromEntries(TIER1_QUESTIONS.map((q) => [q.key, 'no']));
+
+    // The enumeration both the checklist and the application read: one row per non-empty line.
+    expect(tier1Lines([unit]).map((r) => r.n)).toEqual([1, 2]);
+    expect(tier1Lines([unit]).map((r) => r.row)).toEqual(['spine', 'face 0']);
+    expect(mod.tier1Lines([unit]).map((r) => r.row)).toEqual(['spine', 'face 0']);
+
+    // POSITIVE CONTROL — a clean sheet keeps the unit.
+    const clean = [{ n: 1, ...no }, { n: 2, ...no }];
+    expect(applyTier1([unit], clean).kept.length).toBe(1);
+    expect(applyTier1([unit], clean).dropped).toBe(0);
+    expect(JSON.stringify(mod.applyTier1([unit], clean))).toBe(JSON.stringify(applyTier1([unit], clean)));
+
+    // NEGATIVE CONTROL — one `yes`, on ANY row, drops the whole unit, because a unit ships whole.
+    for (const question of TIER1_QUESTIONS) {
+      const sheet = [{ n: 2, ...no, [question.key]: 'yes' }];
+      const out = applyTier1([unit], sheet);
+      expect(out.kept.length, `${question.key} did not drop the unit`).toBe(0);
+      expect(out.verdicts[0].arms).toEqual([question.arm]);
+      expect(JSON.stringify(mod.applyTier1([unit], sheet))).toBe(JSON.stringify(out));
+    }
+
+    // AND THE CHECKLIST THE ANSWERS ARE ABOUT IS THE SAME BYTES ON BOTH SIDES.
+    expect(mod.buildTier1Checklist([unit], CARD)).toBe(buildTier1Checklist([unit], CARD));
+    expect(buildTier1Checklist([unit], CARD)).toContain('1. (spine) The walls are kept.');
   });
 
   it('cardDelta agrees across the seam on a real pair of cards', async () => {
