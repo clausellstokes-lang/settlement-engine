@@ -1,0 +1,2225 @@
+{
+ "judged": [
+  {
+   "unit": {
+    "blockId": "DS-DEF-1",
+    "poolKey": "readiness ADEQUATE",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "Spitzplatz keeps its arrangements at the point where they are enough and nothing more. One further demand on them would mean choosing which one goes short."
+   },
+   "pool": "readiness ADEQUATE",
+   "verdict": "WITHHELD",
+   "findings": [
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "One further demand on them would mean choosing which one goes short.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "Thread",
+     "channel": "REPORT",
+     "subject": "turn-outward at sentence 2",
+     "value": "One further demand on them would mean choosing w",
+     "description": "the passage turns outward once, in the last position, which the thread rule licenses"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "spitzplatz keeps",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "2",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "26",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-1 :: readiness ADEQUATE",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 1,
+    "reports": 7,
+    "notExecutable": 7,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-2",
+    "poolKey": "Invasion & War: walls with NO force",
+    "stance": "face",
+    "source": "court",
+    "pair": "",
+    "text": "A clerk of the court says every dispute that reaches it about the walls is over who owes the keeping, and none of it is over who would hold them."
+   },
+   "pool": "Invasion & War: walls with NO force",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "C4",
+     "channel": "REPORT",
+     "subject": "a quantifier over an unnamed column",
+     "value": "every",
+     "description": "\"every\" quantifies something the walker cannot resolve to a column; reported, not failed"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "C4",
+     "channel": "REPORT",
+     "subject": "a quantifier over an unnamed column",
+     "value": "none",
+     "description": "\"none\" quantifies something the walker cannot resolve to a column; reported, not failed"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "CORPUS-DIFF",
+     "channel": "REPORT",
+     "subject": "a move the corpus unit does not make",
+     "value": "PRESENT",
+     "description": "the unit makes a move the corpus line does not; reported, because a different move is what a rewrite is for"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "CORPUS-DIFF",
+     "channel": "REPORT",
+     "subject": "a move the corpus unit does not make",
+     "value": "PRESENT",
+     "description": "the unit makes a move the corpus line does not; reported, because a different move is what a rewrite is for"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "a clerk",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "pronoun",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "30",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "ORDER",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(stance)",
+     "value": "face",
+     "description": "the LEVEL1 closed set is the grammar of a SPINE; a face or a modifier realises part of one"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-2 :: Invasion & War: walls with NO force",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 9,
+    "notExecutable": 7,
+    "order": "",
+    "moves": [
+     "PRESENT",
+     "OBJECT",
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-2",
+    "poolKey": "Internal Security: full legal chain (court AND prison)",
+    "stance": "face",
+    "source": "tavern",
+    "pair": "",
+    "text": "At the tavern they say a man who cannot pay his fine sits in the cell until somebody else does."
+   },
+   "pool": "Internal Security: full legal chain (court AND prison)",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "at the",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "20",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "ORDER",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(stance)",
+     "value": "face",
+     "description": "the LEVEL1 closed set is the grammar of a SPINE; a face or a modifier realises part of one"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "C3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "pronoun vs gender (no gender given)",
+     "value": "gender",
+     "description": "the line carries a gendered pronoun and the ground supplies no bearer gender"
+    },
+    {
+     "id": "DS-DEF-2 :: Internal Security: full legal chain (court AND prison)",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 5,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-2",
+    "poolKey": "Economic Survival: STRONG",
+    "stance": "face",
+    "source": "guild",
+    "pair": "",
+    "text": "A guild factor says the trades filled the store against a bad season, and the hall's share of it stopped short."
+   },
+   "pool": "Economic Survival: STRONG",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "CLARITY",
+     "channel": "REPORT",
+     "subject": "an archaic noun",
+     "value": "factor",
+     "description": "the clarity sweep counts the period vocabulary a scanning reader stops on"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "a guild",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "22",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "ORDER",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(stance)",
+     "value": "face",
+     "description": "the LEVEL1 closed set is the grammar of a SPINE; a face or a modifier realises part of one"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-2 :: Economic Survival: STRONG",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 6,
+    "notExecutable": 7,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-2",
+    "poolKey": "Disasters & Famine: granary AND parish care only",
+    "stance": "face",
+    "source": "tavern",
+    "pair": "",
+    "text": "At the tavern they say a stranger who falls sick here is taken to the parish, because there is nowhere else to take him."
+   },
+   "pool": "Disasters & Famine: granary AND parish care only",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "at the",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "24",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "ORDER",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(stance)",
+     "value": "face",
+     "description": "the LEVEL1 closed set is the grammar of a SPINE; a face or a modifier realises part of one"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "C3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "pronoun vs gender (no gender given)",
+     "value": "gender",
+     "description": "the line carries a gendered pronoun and the ground supplies no bearer gender"
+    },
+    {
+     "id": "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 5,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-3",
+    "poolKey": "Moderate",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "At Spitzplatz the peace holds by a narrow margin. A weaker watch or a bolder criminal would tip it, and little else would need to change."
+   },
+   "pool": "Moderate",
+   "verdict": "WITHHELD",
+   "findings": [
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "A weaker watch or a bolder criminal would tip it, and little else would need to change.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "Thread",
+     "channel": "REPORT",
+     "subject": "turn-outward at sentence 2",
+     "value": "A weaker watch or a bolder criminal would tip it",
+     "description": "the passage turns outward once, in the last position, which the thread rule licenses"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "at spitzplatz",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "2",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "26",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-3 :: Moderate",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 1,
+    "reports": 7,
+    "notExecutable": 7,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-3",
+    "poolKey": "First-Survey qualification (the reading is a first look)",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "What Spitzplatz says of its own safety is a first look only, and a longer stay here would tell a different account."
+   },
+   "pool": "First-Survey qualification (the reading is a first look)",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "C4",
+     "channel": "REPORT",
+     "subject": "a quantifier over an unnamed column",
+     "value": "only",
+     "description": "\"only\" quantifies something the walker cannot resolve to a column; reported, not failed"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "what spitzplatz",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "22",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-3 :: First-Survey qualification (the reading is a first look)",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 7,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-4",
+    "poolKey": "structure organized",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "Street violence at Spitzplatz is rare, and the watch is not why. A structured hand keeps down whatever would draw enforcement, more thoroughly than the watch manages."
+   },
+   "pool": "structure organized",
+   "verdict": "WITHHELD",
+   "findings": [
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "A structured hand keeps down whatever would draw enforcement, more thoroughly than the wat",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "Thread",
+     "channel": "REPORT",
+     "subject": "carried at sentence 2",
+     "value": "watch",
+     "description": "the sentence carries a noun forward from the one before it, which is the thread holding"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "street violence",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "2",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "27",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-4 :: structure organized",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 1,
+    "reports": 7,
+    "notExecutable": 7,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-4",
+    "poolKey": "capture none",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "Whatever is run here is run outside the hall, and the hall's own business with the town stays untouched by it."
+   },
+   "pool": "capture none",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "whatever is",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "pronoun",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "22",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-4 :: capture none",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 6,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-5",
+    "poolKey": "walls PRESENT",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "Spitzplatz holds its own entry points. A perimeter buys not safety but the choice of where trouble happens."
+   },
+   "pool": "walls PRESENT",
+   "verdict": "WITHHELD",
+   "findings": [
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": "not safety but",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "Q",
+     "channel": "WITHHELD",
+     "subject": "a second sentence naming no second field",
+     "value": "A perimeter buys not safety but the choice of where trouble happens.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "Thread",
+     "channel": "REPORT",
+     "subject": "turn-outward at sentence 2",
+     "value": "A perimeter buys not safety but the choice of wh",
+     "description": "the passage turns outward once, in the last position, which the thread rule licenses"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "spitzplatz holds",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "2",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "18",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(sibling keys)",
+     "value": "not safety but",
+     "description": "the caller supplied no sibling set at all, so wall 5 has nothing to read against; an EMPTY set is a different answer and fails below"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-5 :: walls PRESENT",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 2,
+    "reports": 7,
+    "notExecutable": 7,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-5",
+    "poolKey": "watch PRESENT",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "People walk the town at Spitzplatz at night, and the town rests its own sense of safety more on that than on anything at the gate."
+   },
+   "pool": "watch PRESENT",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "people walk",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "civicNoun",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "26",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-5 :: watch PRESENT",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 6,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-5",
+    "poolKey": "charter hall PRESENT (specialist monster response)",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "A stranger here finds a hall built for the trouble a garrison is the wrong tool for, and finds it kept busy."
+   },
+   "pool": "charter hall PRESENT (specialist monster response)",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "a stranger",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "22",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-5 :: charter hall PRESENT (specialist monster response)",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 6,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-5",
+    "poolKey": "arcane defense PRESENT",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "Spitzplatz folds arcane means into its defenses, detection and wards among them, for what conventional force never sees coming."
+   },
+   "pool": "arcane defense PRESENT",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "Aspect",
+     "channel": "REPORT",
+     "subject": "a forecast on a standing fact",
+     "value": "never",
+     "description": "the record states what IS; a standing fact carries no future for a forecast to reach"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "spitzplatz folds",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "19",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-5 :: arcane defense PRESENT",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 7,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-11",
+    "poolKey": "WALLED-STRAINED",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "The town walls around Spitzplatz hold sound, and the muster meant to stand behind them is thinning, an arithmetic the town notices only late."
+   },
+   "pool": "WALLED-STRAINED",
+   "verdict": "PASS",
+   "findings": [
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "C2",
+     "channel": "REPORT",
+     "subject": "a duty stem used as a noun",
+     "value": "muster",
+     "description": "\"muster\" is a duty lemma in its bare form; whether it names a duty or an event is not mechanisable"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "C4",
+     "channel": "REPORT",
+     "subject": "a quantifier over an unnamed column",
+     "value": "only",
+     "description": "\"only\" quantifies something the walker cannot resolve to a column; reported, not failed"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "the town",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "24",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(contrast shape)",
+     "value": "none",
+     "description": "the unit carries no contrast shape, so wall 5 has nothing to license"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-11 :: WALLED-STRAINED",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 0,
+    "reports": 8,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  },
+  {
+   "unit": {
+    "blockId": "DS-DEF-6",
+    "poolKey": "Logistics & Supply: Granary with road supply",
+    "stance": "spine",
+    "source": "",
+    "pair": "",
+    "text": "A break on the roads into Spitzplatz never reaches the table, and the granary is why, not the roads themselves."
+   },
+   "pool": "Logistics & Supply: Granary with road supply",
+   "verdict": "WITHHELD",
+   "findings": [
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "WALL-5",
+     "channel": "WITHHELD",
+     "subject": "a contrast",
+     "value": ", not the roads themselves.",
+     "description": "no sibling pool key on this page names the rejected alternative, so the contrast may reject something the town never had"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "ORDER",
+     "channel": "REPORT",
+     "subject": "the level-1 order",
+     "value": "V1",
+     "description": "the spine realises a closed level-1 order"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "Aspect",
+     "channel": "REPORT",
+     "subject": "a forecast on a standing fact",
+     "value": "never",
+     "description": "the record states what IS; a standing fact carries no future for a forecast to reach"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "CLARITY",
+     "channel": "REPORT",
+     "subject": "an archaic noun",
+     "value": "granary",
+     "description": "the clarity sweep counts the period vocabulary a scanning reader stops on"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "opener class",
+     "value": "a break",
+     "description": "the opener the fingerprint counts"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sentences",
+     "value": "1",
+     "description": "the two-sentence share is read off this"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "close kind",
+     "value": "other",
+     "description": "the close variety the selector spends"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "sensory nouns",
+     "value": "0",
+     "description": "the presence lexicon, counted not judged"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "MEASURE",
+     "channel": "REPORT",
+     "subject": "words",
+     "value": "20",
+     "description": "the denominator every rate above is per"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "LEAK",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "flagKey",
+     "value": "absent",
+     "description": "this caller brought no simulation-rule key set, so a leaked flag name cannot be recognised here"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "WALL-10",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(the pool faces)",
+     "value": "1",
+     "description": "the adjacency wall needs two rows of one pool; the card carries fewer for this key"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "A1",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(pieces)",
+     "value": "1",
+     "description": "a cross-piece comparison needs two pieces; this unit is a bare spine"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "A2",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(joints)",
+     "value": "0",
+     "description": "no seated modifier declares a `consequence` or a `tension`, so there is no licence to ask for"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "A3",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(sibling keys)",
+     "value": ", not the roads themselves.",
+     "description": "the caller supplied no sibling set at all, so wall 5 has nothing to read against; an EMPTY set is a different answer and fails below"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "Thread",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(adjacent pairs)",
+     "value": "1",
+     "description": "a unit of fewer than two sentences has no adjacent pair, so there is no thread to read"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "C5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "sibling coherence (no siblings given)",
+     "value": "(pool cell)",
+     "description": "the ground supplied no sibling variants for this pool cell"
+    },
+    {
+     "id": "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+     "arm": "A5",
+     "channel": "NOT-EXECUTABLE",
+     "subject": "(wording set)",
+     "value": "0",
+     "description": "a sibling distance needs two faces; this variant carries one, which is every shipped variant at this tip"
+    }
+   ],
+   "report": {
+    "arms": 42,
+    "fails": 0,
+    "withheld": 1,
+    "reports": 8,
+    "notExecutable": 8,
+    "order": "V1",
+    "moves": [
+     "PRESENT"
+    ]
+   }
+  }
+ ],
+ "page": {
+  "verdict": "PASS",
+  "findings": [
+   {
+    "id": "(tab)",
+    "arm": "C7-opener",
+    "channel": "REPORT",
+    "subject": "an opener trigram repeated on one page",
+    "value": "at the tavern: 2",
+    "description": "two units of one page open on the same three words, which is the measure the block fingerprint bands"
+   }
+  ],
+  "report": {
+   "units": 15,
+   "openers": [
+    {
+     "opener": "a break on",
+     "n": 1
+    },
+    {
+     "opener": "a clerk of",
+     "n": 1
+    },
+    {
+     "opener": "a guild factor",
+     "n": 1
+    },
+    {
+     "opener": "a stranger here",
+     "n": 1
+    },
+    {
+     "opener": "at spitzplatz the",
+     "n": 1
+    },
+    {
+     "opener": "at the tavern",
+     "n": 2
+    },
+    {
+     "opener": "people walk the",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz folds arcane",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz holds its",
+     "n": 1
+    },
+    {
+     "opener": "spitzplatz keeps its",
+     "n": 1
+    },
+    {
+     "opener": "street violence at",
+     "n": 1
+    },
+    {
+     "opener": "the town walls",
+     "n": 1
+    },
+    {
+     "opener": "what spitzplatz says",
+     "n": 1
+    },
+    {
+     "opener": "whatever is run",
+     "n": 1
+    }
+   ]
+  }
+ },
+ "missing": [],
+ "unknown": []
+}

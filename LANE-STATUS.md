@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 11:59:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 12:04:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 1e584a9ca Plan: the collection at 09-14 ~10:4x — the clarity line-edit is complete on all five lea
 
@@ -124,8 +124,8 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ac0ee6728` WRITER readiness WEAK · DONE · transcript 09-14 11:53 815 KB · 17 tool calls · files: candidates-1.md, rows.txt · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
     - `ac168c759` WRITER readiness ADEQUATE · DONE · transcript 09-14 11:54 834 KB · 22 tool calls · files: candidates-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
     - `a652ab7ad` WRITER readiness WEAK · DONE · transcript 09-14 11:55 984 KB · 18 tool calls · files: candidates-2.md · result: {"dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readine
-    - `a9d32e6f0` WRITER readiness CRITICAL · IN FLIGHT · transcript 09-14 11:54 527 KB · 11 tool calls · files: shipped_rpds.md · last: Bash F="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a95e2dea8` WRITER readiness CRITICAL · IN FLIGHT · transcript 09-14 11:55 578 KB · 14 tool calls · files: shipped-state.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a9d32e6f0` WRITER readiness CRITICAL · IN FLIGHT · transcript 09-14 12:03 754 KB · 14 tool calls · files: shipped_rpds.md, "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/rewrite/DS-DEF-1/ds-def-1--readiness-critical/candidates-1.md · last: Bash sed -n '201,285p' "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
+    - `a95e2dea8` WRITER readiness CRITICAL · IN FLIGHT · transcript 09-14 12:04 781 KB · 17 tool calls · files: shipped-state.md, candidates-2.md · last: Edit /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchp
 - **wf_874f9ad9-605** (mtime 09-14 03:16): agent calls 16 (16 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_874f9ad9-605/`
     - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
     - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
@@ -162,4 +162,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.44 2.54 2.41
+load: 1.78 2.17 2.29
