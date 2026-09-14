@@ -4909,89 +4909,89 @@ the mechanism behind it.
 3. `[unfolding]` The panic made the debts unpayable. The debts are making the panic worse. Neither settles in isolation.
 
 **ORIGIN: `foreign_sponsored`**
-1. `[ledger]` The trouble here has a foreign hand behind it: coin that traces back across a border, and someone local living better than their station explains.
+1. `[ledger]` The trouble here has a foreign hand behind it. There is coin that traces back across a border, and someone local living better than their station explains.
 2. `[street]` This was paid for elsewhere. {settlement} is the place it happens, not the place it was decided.
-3. `[threshold]` The conspiracy is domestic in its faces and foreign in its funding; naming the sponsor aloud would be an act of war.
+3. `[threshold]` The conspiracy is domestic in its faces and foreign in its funding. Naming the sponsor aloud would be an act of war.
 
 **ORIGIN: `abandoned_agent`**
 1. `[unfolding]` Whoever set this in motion has stopped paying for it. The work continues out of habit and desperation rather than instruction.
 2. `[ledger]` The handler is gone and the asset remains. What was an operation is now a person with dangerous knowledge and no protection.
-3. `[threshold]` The arrangement outlived its purpose. Nobody is directing this any more, which makes it less predictable rather than less dangerous.
+3. `[threshold]` The arrangement outlived its purpose. Nobody is directing this any more. That makes it less predictable rather than less dangerous.
 
 **ORIGIN: `internal_conspiracy`**
-1. `[counterforce]` No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.
+1. `[counterforce]` No border explains this. The knife came from inside {settlement}. The loyalty tests spreading through the council say so more clearly than any evidence.
 2. `[ledger]` There is no foreign sponsor and no recent feud. Whatever is being planned here was planned by people who already had a seat at the table.
 3. `[visitor]` The plot is entirely local. That is why it is difficult to find. Nothing about it looks out of place.
 
 **ORIGIN: `declared_war`**
-1. `[visitor]` The hostility here is open. {counterpart}'s banners are shown, its intentions stated, and its supply lines are the only part not on display.
+1. `[visitor]` The hostility here is open. {counterpart}'s banners are shown, its intentions stated. Its supply lines are the only part not on display.
 2. `[street]` This is a declared quarrel rather than a shadow one. The town knows exactly who is pressing it and why.
-3. `[ledger]` The pressure on {settlement} comes from a named and openly hostile neighbour; there is nothing to uncover, only something to answer.
+3. `[ledger]` The pressure on {settlement} comes from a named and openly hostile neighbour. There is nothing to uncover, only something to answer.
 
 **ORIGIN: `unattributed`** · **E-1 GOVERNS: NAME NOBODY**
 1. `[street]` No banner has been raised. The town knows it is under pressure and does not know from whom.
-2. `[threshold]` Whoever is doing this has not troubled to identify themselves, and knew precisely where the walls are weakest.
-3. `[ledger]` The attacker is unnamed. Scouts could put a name to it; nobody has yet, and the not-knowing is its own kind of weight.
+2. `[threshold]` Whoever is doing this has not troubled to identify themselves. They knew precisely where the walls are weakest.
+3. `[ledger]` The attacker is unnamed. Scouts could put a name to it. Nobody has yet, and the not-knowing is its own kind of weight.
 
 **ORIGIN: `resistance`**
-1. `[unfolding]` This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier rather than the seat.
-2. `[street]` The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.
-3. `[visitor]` {settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.
+1. `[unfolding]` This is a resistance rather than a revolt. It was born under an occupation. It defines itself against the occupier rather than the seat.
+2. `[street]` The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables. Everyone knows which is which.
+3. `[visitor]` {settlement} is occupied and it is fighting back. What runs in the alleys is organized, patient, and not interested in reform.
 
 **ORIGIN: `palace_coup`**
 1. `[visitor]` The conspiracy is a courtly one. Invitations to private dinners are circulating, and the guest list is the plot.
-2. `[ledger]` The plotting here happens at the top of the building: seals that do not match the hands that signed them, and no crowd involved at all.
+2. `[ledger]` The plotting here happens at the top of the building. There are seals that do not match the hands that signed them, and no crowd involved at all.
 3. `[threshold]` What threatens the seat is not the street. It is the people who already stand nearest it.
 
 **ORIGIN: `barracks_coup`**
-1. `[unfolding]` The garrison is the danger. It drilled at midnight without orders, or with orders nobody will admit to giving.
-2. `[counterforce]` The soldiers here have stopped being the seat's instrument and started being its rival; officers loyal to the ruler are posted to the walls one by one.
+1. `[unfolding]` The garrison is the danger. It drilled at midnight without orders, or with orders nobody is willing to admit to giving.
+2. `[counterforce]` The soldiers here have stopped being the seat's instrument and started being its rival. Officers loyal to the ruler are posted to the walls one by one.
 3. `[threshold]` What moves against the government is armed, disciplined, and already inside the walls by right.
 
 **ORIGIN: `merchant_cabal`**
-1. `[ledger]` The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power, and no house will say why.
-2. `[street]` The plot here is commercial: a warehouse that never opens has started taking deliveries at night, and several ledgers stopped balancing in the same season.
-3. `[threshold]` What threatens the government is not force but liquidity; the houses that finance {settlement} have decided to finance something else.
+1. `[ledger]` The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power. No house is willing to say why.
+2. `[street]` The plot here is commercial. A warehouse that never opens has started taking deliveries at night. Several ledgers stopped balancing in the same season.
+3. `[threshold]` What threatens the government is not force but liquidity. The houses that finance {settlement} have decided to finance something else.
 
 **ORIGIN: `temple_putsch`**
-1. `[street]` The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.
-2. `[unfolding]` The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience, and conscience has been defined helpfully.
+1. `[street]` The sermons have changed. Obedience to unworthy rulers is suddenly a live question. It is being asked from a pulpit.
+2. `[unfolding]` The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience. Conscience has been defined helpfully.
 3. `[counterforce]` Religious authority here has stopped propping the government and started replacing it.
 
 **ORIGIN: `arcane_ascendancy`**
-1. `[visitor]` The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.
-2. `[street]` Someone is scrying the seat of power and wants that known. The threat here is arcane, and it is not being hidden.
-3. `[threshold]` What challenges the government in {settlement} needs neither a crowd nor a garrison; it needs a workroom, and it has several.
+1. `[visitor]` The casters are moving on the seat. Wards around the council hall have failed more than once this season. The mages responsible shrug.
+2. `[street]` Someone is scrying the seat of power and wants that known. The threat here is arcane. It is not being hidden.
+3. `[threshold]` What challenges the government in {settlement} needs neither a crowd nor a garrison. It needs a workroom, and it has several.
 
 **ORIGIN: `council_schism`**
 1. `[ledger]` The government has split against itself. A rump session voted itself emergency powers while the chamber stood half empty.
 2. `[street]` Two officials claim the same seal, the same office and the same tax. The town pays whichever collector reaches it first.
-3. `[visitor]` The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same name.
+3. `[visitor]` The seat is contested from within its own institution. There is no rebellion here, only two governments wearing the same name.
 
 **ORIGIN: `popular_revolt`**
-1. `[street]` The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.
-2. `[visitor]` The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.
+1. `[street]` The streets rose on their own. No faction owns this yet. That is what makes it dangerous to everyone.
+2. `[visitor]` The market square empties at the same hour every evening. Somewhere people are meeting, and nobody organized them from above.
 3. `[unfolding]` A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.
 
 **ORIGIN: `servile_uprising`**
-1. `[street]` The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.
+1. `[street]` The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first. The overseers did not understand the new words.
 2. `[unfolding]` This is the rising of people who were never asked. Manumission papers, real and forged, change hands at night.
 3. `[elder]` What broke here was not a policy but an arrangement. The town's prosperity rested on labour that has stopped consenting to be labour.
 
 **ORIGIN: `tax_revolt`**
 1. `[ledger]` The levies of a drowning treasury finally broke the commons. Collectors travel in pairs, then in fours, and lately not at all.
 2. `[street]` The revolt here is about coin and only coin. The tally of every levy taken is being read aloud in the taverns.
-3. `[threshold]` {settlement} did not rise against its government. It rose against its bill, which the government has not yet noticed is a different thing.
+3. `[threshold]` {settlement} did not rise against its government. It rose against its bill. The government has not yet noticed that this is a different thing.
 
 **ORIGIN: `arcane_burnout`**
 1. `[visitor]` The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.
 2. `[elder]` The ground is exhausted. What ran wild through {settlement} ran itself out and left the deadness behind.
-3. `[street]` The mages who fled the instability have not come back; they say the ground itself is finished, and so far nothing contradicts them.
+3. `[street]` The mages who fled the instability have not come back. They say the ground itself is finished. So far nothing contradicts them.
 
 **ORIGIN: `leyline_silence`**
 1. `[unfolding]` The magic simply stopped answering. No omen, no surge, no warning: only the silence, and nobody yet knows why.
-2. `[threshold]` Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet, which is worse than a disaster because it cannot be pointed at.
-3. `[street]` Hedge wizards are leaving {settlement} quietly; the ones who stay have started learning herbcraft.
+2. `[threshold]` Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet. That is worse than a disaster because it cannot be pointed at.
+3. `[street]` Hedge wizards are leaving {settlement} quietly. The ones who stay have started learning herbcraft.
 
 ---
 

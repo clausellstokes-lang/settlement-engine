@@ -1444,7 +1444,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: foreign_sponsored": [
         {
           "angle": "ledger",
-          "text": "The trouble here has a foreign hand behind it: coin that traces back across a border, and someone local living better than their station explains.",
+          "text": "The trouble here has a foreign hand behind it. There is coin that traces back across a border, and someone local living better than their station explains.",
           "slots": [],
           "vid": 1
         },
@@ -1458,7 +1458,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The conspiracy is domestic in its faces and foreign in its funding; naming the sponsor aloud would be an act of war.",
+          "text": "The conspiracy is domestic in its faces and foreign in its funding. Naming the sponsor aloud would be an act of war.",
           "slots": [],
           "vid": 3
         }
@@ -1478,7 +1478,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The arrangement outlived its purpose. Nobody is directing this any more, which makes it less predictable rather than less dangerous.",
+          "text": "The arrangement outlived its purpose. Nobody is directing this any more. That makes it less predictable rather than less dangerous.",
           "slots": [],
           "vid": 3
         }
@@ -1486,7 +1486,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: internal_conspiracy": [
         {
           "angle": "counterforce",
-          "text": "No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.",
+          "text": "No border explains this. The knife came from inside {settlement}. The loyalty tests spreading through the council say so more clearly than any evidence.",
           "slots": [
             "settlement"
           ],
@@ -1508,7 +1508,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: declared_war": [
         {
           "angle": "visitor",
-          "text": "The hostility here is open. {counterpart}'s banners are shown, its intentions stated, and its supply lines are the only part not on display.",
+          "text": "The hostility here is open. {counterpart}'s banners are shown, its intentions stated. Its supply lines are the only part not on display.",
           "slots": [
             "counterpart"
           ],
@@ -1522,7 +1522,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The pressure on {settlement} comes from a named and openly hostile neighbour; there is nothing to uncover, only something to answer.",
+          "text": "The pressure on {settlement} comes from a named and openly hostile neighbour. There is nothing to uncover, only something to answer.",
           "slots": [
             "settlement"
           ],
@@ -1538,13 +1538,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "Whoever is doing this has not troubled to identify themselves, and knew precisely where the walls are weakest.",
+          "text": "Whoever is doing this has not troubled to identify themselves. They knew precisely where the walls are weakest.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "ledger",
-          "text": "The attacker is unnamed. Scouts could put a name to it; nobody has yet, and the not-knowing is its own kind of weight.",
+          "text": "The attacker is unnamed. Scouts could put a name to it. Nobody has yet, and the not-knowing is its own kind of weight.",
           "slots": [],
           "vid": 3
         }
@@ -1552,19 +1552,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: resistance": [
         {
           "angle": "unfolding",
-          "text": "This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier rather than the seat.",
+          "text": "This is a resistance rather than a revolt. It was born under an occupation. It defines itself against the occupier rather than the seat.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.",
+          "text": "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables. Everyone knows which is which.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.",
+          "text": "{settlement} is occupied and it is fighting back. What runs in the alleys is organized, patient, and not interested in reform.",
           "slots": [
             "settlement"
           ],
@@ -1580,7 +1580,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The plotting here happens at the top of the building: seals that do not match the hands that signed them, and no crowd involved at all.",
+          "text": "The plotting here happens at the top of the building. There are seals that do not match the hands that signed them, and no crowd involved at all.",
           "slots": [],
           "vid": 2
         },
@@ -1594,13 +1594,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: barracks_coup": [
         {
           "angle": "unfolding",
-          "text": "The garrison is the danger. It drilled at midnight without orders, or with orders nobody will admit to giving.",
+          "text": "The garrison is the danger. It drilled at midnight without orders, or with orders nobody is willing to admit to giving.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "counterforce",
-          "text": "The soldiers here have stopped being the seat's instrument and started being its rival; officers loyal to the ruler are posted to the walls one by one.",
+          "text": "The soldiers here have stopped being the seat's instrument and started being its rival. Officers loyal to the ruler are posted to the walls one by one.",
           "slots": [],
           "vid": 2
         },
@@ -1614,19 +1614,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: merchant_cabal": [
         {
           "angle": "ledger",
-          "text": "The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power, and no house will say why.",
+          "text": "The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power. No house is willing to say why.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "The plot here is commercial: a warehouse that never opens has started taking deliveries at night, and several ledgers stopped balancing in the same season.",
+          "text": "The plot here is commercial. A warehouse that never opens has started taking deliveries at night. Several ledgers stopped balancing in the same season.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "What threatens the government is not force but liquidity; the houses that finance {settlement} have decided to finance something else.",
+          "text": "What threatens the government is not force but liquidity. The houses that finance {settlement} have decided to finance something else.",
           "slots": [
             "settlement"
           ],
@@ -1636,13 +1636,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: temple_putsch": [
         {
           "angle": "street",
-          "text": "The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.",
+          "text": "The sermons have changed. Obedience to unworthy rulers is suddenly a live question. It is being asked from a pulpit.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "unfolding",
-          "text": "The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience, and conscience has been defined helpfully.",
+          "text": "The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience. Conscience has been defined helpfully.",
           "slots": [],
           "vid": 2
         },
@@ -1656,19 +1656,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: arcane_ascendancy": [
         {
           "angle": "visitor",
-          "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.",
+          "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season. The mages responsible shrug.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "Someone is scrying the seat of power and wants that known. The threat here is arcane, and it is not being hidden.",
+          "text": "Someone is scrying the seat of power and wants that known. The threat here is arcane. It is not being hidden.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
-          "text": "What challenges the government in {settlement} needs neither a crowd nor a garrison; it needs a workroom, and it has several.",
+          "text": "What challenges the government in {settlement} needs neither a crowd nor a garrison. It needs a workroom, and it has several.",
           "slots": [
             "settlement"
           ],
@@ -1690,7 +1690,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same name.",
+          "text": "The seat is contested from within its own institution. There is no rebellion here, only two governments wearing the same name.",
           "slots": [],
           "vid": 3
         }
@@ -1698,13 +1698,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: popular_revolt": [
         {
           "angle": "street",
-          "text": "The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.",
+          "text": "The streets rose on their own. No faction owns this yet. That is what makes it dangerous to everyone.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "visitor",
-          "text": "The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.",
+          "text": "The market square empties at the same hour every evening. Somewhere people are meeting, and nobody organized them from above.",
           "slots": [],
           "vid": 2
         },
@@ -1718,7 +1718,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: servile_uprising": [
         {
           "angle": "street",
-          "text": "The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.",
+          "text": "The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first. The overseers did not understand the new words.",
           "slots": [
             "settlement"
           ],
@@ -1752,7 +1752,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} did not rise against its government. It rose against its bill, which the government has not yet noticed is a different thing.",
+          "text": "{settlement} did not rise against its government. It rose against its bill. The government has not yet noticed that this is a different thing.",
           "slots": [
             "settlement"
           ],
@@ -1776,7 +1776,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The mages who fled the instability have not come back; they say the ground itself is finished, and so far nothing contradicts them.",
+          "text": "The mages who fled the instability have not come back. They say the ground itself is finished. So far nothing contradicts them.",
           "slots": [],
           "vid": 3
         }
@@ -1790,13 +1790,13 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet, which is worse than a disaster because it cannot be pointed at.",
+          "text": "Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet. That is worse than a disaster because it cannot be pointed at.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
-          "text": "Hedge wizards are leaving {settlement} quietly; the ones who stay have started learning herbcraft.",
+          "text": "Hedge wizards are leaving {settlement} quietly. The ones who stay have started learning herbcraft.",
           "slots": [
             "settlement"
           ],
