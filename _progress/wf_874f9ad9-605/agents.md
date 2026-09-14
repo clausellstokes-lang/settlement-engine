@@ -1,7 +1,12 @@
-# wf_874f9ad9-605 — per-agent progress, 2026-09-14 03:06:29
-    - `aa875a08f` ? · IN FLIGHT · transcript 09-14 03:05 326 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a10c72533` ? · IN FLIGHT · transcript 09-14 03:05 322 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a6cbf322f` ? · IN FLIGHT · transcript 09-14 03:05 322 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
-    - `abd1736c7` ? · IN FLIGHT · transcript 09-14 03:05 333 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a8d39a4b4` ? · IN FLIGHT · transcript 09-14 03:05 329 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
-    - `a37ffe902` ? · IN FLIGHT · transcript 09-14 03:05 309 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
+# wf_874f9ad9-605 — per-agent progress, 2026-09-14 03:11:45
+    - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
+    - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
+    - `a6cbf322f` ? · DONE · transcript 09-14 03:09 440 KB · 7 tool calls · result: {"pool": "Economic Survival: CRITICAL", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 4 [register]", "headText": "Those who keep the ground say
+    - `abd1736c7` ? · IN FLIGHT · transcript 09-14 03:11 479 KB · 12 tool calls · files: reps.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a8d39a4b4` ? · DONE · transcript 09-14 03:10 453 KB · 5 tool calls · result: {"pool": "Disasters & Famine: granary AND parish care only", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 1 [hall \u00b7 pair 1 \u00b7 reinfor
+    - `a37ffe902` ? · DONE · transcript 09-14 03:09 410 KB · 7 tool calls · files: rep.txt · result: {"pool": "Disasters & Famine: granary, NO medical provision", "replacements": [{"variant": 2, "faceOrSpine": "SPINE variant 2 [unfolding]", "headText": "The sto
+    - `a96ef350d` ? · IN FLIGHT · transcript 09-14 03:09 328 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `abd87e8db` ? · IN FLIGHT · transcript 09-14 03:09 323 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
+    - `ad1d64daa` ADVERSARY · IN FLIGHT · transcript 09-14 03:10 316 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `aa92482ee` ADVERSARY · IN FLIGHT · transcript 09-14 03:11 326 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a79cd7191` ADVERSARY · IN FLIGHT · transcript 09-14 03:11 143 KB · 0 tool calls

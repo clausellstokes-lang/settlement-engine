@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 03:06:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 03:11:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 82eb84237 Plan: ruling 41 — a face is UNFALSIFIABLE or COUPLED (the owner's, and the largest simpl
 
@@ -96,13 +96,18 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_874f9ad9-605** (mtime 09-14 03:05): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_874f9ad9-605/`
-    - `aa875a08f` ? · IN FLIGHT · transcript 09-14 03:05 326 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a10c72533` ? · IN FLIGHT · transcript 09-14 03:05 322 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a6cbf322f` ? · IN FLIGHT · transcript 09-14 03:05 322 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
-    - `abd1736c7` ? · IN FLIGHT · transcript 09-14 03:05 333 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a8d39a4b4` ? · IN FLIGHT · transcript 09-14 03:05 329 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
-    - `a37ffe902` ? · IN FLIGHT · transcript 09-14 03:05 309 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
+- **wf_874f9ad9-605** (mtime 09-14 03:11): agent calls 11 (11 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_874f9ad9-605/`
+    - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
+    - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
+    - `a6cbf322f` ? · DONE · transcript 09-14 03:09 440 KB · 7 tool calls · result: {"pool": "Economic Survival: CRITICAL", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 4 [register]", "headText": "Those who keep the ground say
+    - `abd1736c7` ? · IN FLIGHT · transcript 09-14 03:11 479 KB · 12 tool calls · files: reps.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a8d39a4b4` ? · DONE · transcript 09-14 03:10 453 KB · 5 tool calls · result: {"pool": "Disasters & Famine: granary AND parish care only", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 1 [hall \u00b7 pair 1 \u00b7 reinfor
+    - `a37ffe902` ? · DONE · transcript 09-14 03:09 410 KB · 7 tool calls · files: rep.txt · result: {"pool": "Disasters & Famine: granary, NO medical provision", "replacements": [{"variant": 2, "faceOrSpine": "SPINE variant 2 [unfolding]", "headText": "The sto
+    - `a96ef350d` ? · IN FLIGHT · transcript 09-14 03:09 328 KB · 3 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `abd87e8db` ? · IN FLIGHT · transcript 09-14 03:09 323 KB · 3 tool calls · last: Bash cat "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scr
+    - `ad1d64daa` ADVERSARY · IN FLIGHT · transcript 09-14 03:10 316 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `aa92482ee` ADVERSARY · IN FLIGHT · transcript 09-14 03:11 326 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `a79cd7191` ADVERSARY · IN FLIGHT · transcript 09-14 03:11 143 KB · 0 tool calls
 - **wf_980caecf-038** (mtime 09-14 02:54): agent calls 16 (16 distinct) · DONE 16 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_980caecf-038/`
     - `a58382150` ? · DONE · transcript 09-14 02:48 453 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "claimFreezeHeld": false, "facesChanged": 22, "facesUnchanged": 9, "lineTotal": 31, "ownerTestBefore": 13, "ownerT
     - `af201562a` ? · DONE · transcript 09-14 02:49 495 KB · 6 tool calls · result: {"pool": "Economic Survival / WEAK", "claimFreezeHeld": false, "facesChanged": 9, "facesUnchanged": 18, "lineTotal": 30, "ownerTestBefore": 19, "ownerTestAfter"
@@ -122,4 +127,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.30 2.08 2.13
+load: 2.68 2.33 2.19
