@@ -13,6 +13,8 @@ import {
   buildScribeBrief,
   buildScribeUserTurn,
   buildTier1Checklist,
+  buildTownBlock,
+  cachePadding,
   estimateTokens,
   judgeUnits,
   parseScribeUnits,
@@ -20,6 +22,10 @@ import {
   SCRIBE_OUTPUT_SCHEMA,
 } from './scribeCore.ts';
 import { SCRIBE_VOICE, SCRIBE_VOICE_CHARS } from './voice.ts';
+import { SCRIBE_EXEMPLARS, SCRIBE_EXEMPLARS_CHARS } from './exemplars.ts';
+
+/** The brief as the function actually builds it, so no arm can drift from the shipped inputs. */
+const brief = () => buildScribeBrief({ voice: SCRIBE_VOICE, exemplars: SCRIBE_EXEMPLARS });
 
 const card = {
   tab: 'defense',
@@ -47,33 +53,74 @@ Deno.test('the model is the one the chair ruled', () => {
   assertEquals(SCRIBE_MODEL, 'claude-opus-5');
 });
 
+Deno.test('the exemplar pack is carried whole', () => {
+  assertEquals(SCRIBE_EXEMPLARS.length, SCRIBE_EXEMPLARS_CHARS);
+  assert(SCRIBE_EXEMPLARS.includes('THE EXEMPLAR PACK'));
+  assert(SCRIBE_EXEMPLARS.includes('Nothing above is a refuter\'s finding'),
+    'the pack ends on its own standing, so a truncation at the tail is visible');
+});
+
 Deno.test('⭐ THE BRIEF IS BYTE-STABLE, which is the whole economics of the feature', () => {
   // Two calls in the same process must be identical, and so must two calls that differ in every
-  // way a caller could differ: the brief closes over nothing but module constants.
-  assertEquals(buildScribeBrief(SCRIBE_VOICE), buildScribeBrief(SCRIBE_VOICE));
-  assert(estimateTokens(buildScribeBrief(SCRIBE_VOICE)) >= CACHE_MIN_PREFIX_TOKENS,
+  // way a caller could differ: the brief closes over nothing but its two inputs, and both are
+  // module constants at every call site.
+  assertEquals(brief(), brief());
+  assert(estimateTokens(brief()) >= CACHE_MIN_PREFIX_TOKENS,
     'the brief must clear the cache floor or it silently does not cache at all');
+});
+
+Deno.test('⭐ THE PACK CLEARS THE CACHE FLOOR BY ITSELF, so no padding is added', () => {
+  // W2 padded the brief because it was the VOICE alone. With the exemplar pack in it the prefix
+  // is an order of magnitude above the floor, and `cachePadding` returns the empty string for it
+  // — asserted rather than assumed, because a silently-padded prefix is still byte-stable and
+  // would hide the fact that the pack had gone missing.
+  assertEquals(cachePadding(brief()), '');
+  assert(!brief().includes('CACHE-STABILIZER'));
+  // And the function still works, so keeping it is not keeping dead code.
+  assert(cachePadding('a short prefix').includes('CACHE-STABILIZER'));
 });
 
 Deno.test('⛔ THE GAME MASTER\'S INSTRUCTIONS ARE IN THE VOLATILE TURN AND NEVER THE BRIEF', () => {
   // A per-user instruction in the cached prefix would be one user's words in every other user's
   // prompt AND a cache miss on every request. Both halves are asserted.
   const secret = 'dwell on the smuggling at the north gate';
-  const brief = buildScribeBrief(SCRIBE_VOICE);
   const turn = buildScribeUserTurn({ card, guidance: secret });
-  assert(!brief.includes(secret));
+  assert(!brief().includes(secret));
+  assert(!buildTownBlock(card).includes(secret));
   assert(turn.includes(secret));
   // And the brief is the same bytes whether a guidance was given or not.
-  assertEquals(brief, buildScribeBrief(SCRIBE_VOICE));
+  assertEquals(brief(), brief());
 });
 
-Deno.test('the volatile turn carries the card, the ground and the corpus exemplar', () => {
+Deno.test('⭐ THE TOWN IS THE SECOND CACHED BLOCK AND IS NOT IN THE VOLATILE TURN', () => {
+  // The whole point of the second breakpoint: the town section is the same bytes on every tab of
+  // one settlement, so a tab call must not repeat it. A turn that still carried it would be
+  // paying full price for ~7 KB on every tab.
+  const block = buildTownBlock(card);
   const turn = buildScribeUserTurn({ card });
-  assert(turn.includes('Ashford'));
+  assert(block.includes('Ashford'));
+  assert(block.includes('THE TOWN, WHICH DOES NOT CHANGE BETWEEN TABS'));
+  assert(!turn.includes('Ashford'), 'the town block is cached; the turn must not repeat it');
+  assertEquals(block, buildTownBlock(card));
+});
+
+Deno.test('the volatile turn carries the page, the ground and the corpus line', () => {
+  const turn = buildScribeUserTurn({ card });
+  assert(turn.includes('tab defense'));
   assert(turn.includes('FAMILY: acute crisis'));
-  assert(turn.includes('The corpus spine stands.'), 'the corpus line is the exemplar and the fallback');
+  assert(turn.includes('The corpus spine stands.'), 'the corpus line is the claim and the fallback');
   assert(turn.includes('face 1 speaks through: hall'), 'the seating is told, never chosen');
   assert(turn.includes('faces to write: 2'));
+});
+
+Deno.test('⭐ THE FOUR GUESSES THE SIMULATION FOUND ARE ANSWERED IN THE BRIEF', () => {
+  // Each of these is a thing an Opus seat had to guess on the W2 prompt, measured 2026-09-14.
+  const text = brief();
+  assert(text.includes('THE PLAUSIBLE-ADDITION BAR'), 'the mechanism class no tier-0 arm can see');
+  assert(text.includes('THE TWO LADDERS'), 'the badge word against the band word');
+  assert(text.includes('THE CORPUS LINE\'S STANDING'), 'the exemplar that breaks its own law');
+  assert(text.includes('do not imitate the breach'));
+  assert(text.includes('THE EXEMPLAR PACK'), 'the pack rides in the cached half');
 });
 
 Deno.test('the epoch record is carried only when one is given', () => {

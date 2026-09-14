@@ -1,9 +1,10 @@
 {
   "entry": [
     "src/domain/prose/refuteUnit.js",
-    "src/domain/prose/epochRecord.js"
+    "src/domain/prose/epochRecord.js",
+    "src/domain/prose/scribeBrief.js"
   ],
-  "sourceHash": "aa46590c7ac6a802",
+  "sourceHash": "3fe9bdadcd902101",
   "inputs": [
     "src/data/powerData.js",
     "src/domain/arcaneIdentity.js",
@@ -25,6 +26,7 @@
     "src/domain/prose/presenceMeasure.js",
     "src/domain/prose/proseFingerprint.js",
     "src/domain/prose/refuteUnit.js",
+    "src/domain/prose/scribeBrief.js",
     "src/domain/rulingPower.js",
     "src/kernel/detMath.js"
   ]

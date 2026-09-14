@@ -25,6 +25,10 @@ import {
 } from '../../scripts/scribe-bundle.mjs';
 import { refuteUnit, REFUTE_ARMS } from '../../src/domain/prose/refuteUnit.js';
 import { cardDelta } from '../../src/domain/prose/epochRecord.js';
+import {
+  SCRIBE_OUTPUT_SCHEMA, buildScribeBrief, buildScribeUserTurn, buildTownBlock, judgeUnits,
+  parseScribeUnits,
+} from '../../src/domain/prose/scribeBrief.js';
 import { townCard } from '../../src/domain/prose/townCard.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
@@ -119,9 +123,15 @@ describe('the Scribe bundle — freshness', () => {
 });
 
 describe('the Scribe bundle — it loads and it runs', () => {
-  it('it imports as an ESM module and exports both leaves whole', async () => {
+  it('it imports as an ESM module and exports every leaf whole', async () => {
     const mod = await import(pathToFileURL(outFile).href);
-    for (const name of ['refuteUnit', 'refuteTab', 'REFUTE_ARMS', 'cardDelta', 'epochRecord']) {
+    for (const name of [
+      'refuteUnit', 'refuteTab', 'REFUTE_ARMS', 'cardDelta', 'epochRecord',
+      // ⭐ THE PROMPT LEAF (W3a car 1, chair ruling 25). `scribeCore.ts` re-exports exactly these
+      // names, so a bundle missing one is an edge function that will not boot.
+      'SCRIBE_OUTPUT_SCHEMA', 'buildScribeBrief', 'buildTownBlock', 'buildScribeUserTurn',
+      'buildTier1Checklist', 'parseScribeUnits', 'judgeUnits',
+    ]) {
       expect(typeof mod[name], `${name} is missing from the bundle`).not.toBe('undefined');
     }
     expect(mod.REFUTE_ARMS.length).toBe(REFUTE_ARMS.length);
@@ -181,6 +191,50 @@ describe('the Scribe bundle — it agrees with the source, which freshness alone
     const verdicts = BATTERY.map((t) => refuteUnit(unitOf(t), CARD, {}).verdict);
     expect(verdicts).toContain('FAIL');
     expect(verdicts).toContain('WITHHELD');
+  });
+
+  it('⭐ THE PROMPT IS THE SAME BYTES THROUGH THE BUNDLE AND THROUGH THE SOURCE', async () => {
+    // ⛔ THE ARM THIS BUNDLE MOST NEEDS, because the fork it cures was invisible for exactly this
+    // reason: two builders producing two prompts, both green, both measured, neither the other.
+    // The pilot imports the SOURCE leaf from the dock and the edge function imports the BUNDLE;
+    // if those two ever disagree by a byte the pilot is measuring a prompt nobody ships.
+    const mod = await import(pathToFileURL(outFile).href);
+    const voice = 'THE VOICE, as a fixture: plain words, no first person.';
+    const exemplars = '# THE EXEMPLAR PACK\nA fixture pack, three lines long.\n';
+    expect(mod.buildScribeBrief({ voice, exemplars })).toBe(buildScribeBrief({ voice, exemplars }));
+    expect(mod.buildTownBlock(CARD)).toBe(buildTownBlock(CARD));
+    expect(mod.buildScribeUserTurn({ card: CARD, guidance: 'dwell on the gate' }))
+      .toBe(buildScribeUserTurn({ card: CARD, guidance: 'dwell on the gate' }));
+    expect(JSON.stringify(mod.SCRIBE_OUTPUT_SCHEMA)).toBe(JSON.stringify(SCRIBE_OUTPUT_SCHEMA));
+    // And the brief really does carry the whole town-free prompt: an empty answer here would make
+    // every equality above vacuous.
+    expect(buildScribeBrief({ voice, exemplars }).includes(voice)).toBe(true);
+    expect(buildScribeUserTurn({ card: CARD }).length).toBeGreaterThan(200);
+  });
+
+  it('⭐ ONE JUDGE: the bundle and the source return the same verdicts on one real pool', async () => {
+    const mod = await import(pathToFileURL(outFile).href);
+    const pool = CARD.pools[0];
+    expect(pool, 'the pinned town fires no pool on the defense tab').toBeTruthy();
+    const answer = JSON.stringify({
+      units: [{
+        blockId: pool.blockId,
+        poolKey: pool.poolKey,
+        vid: pool.vid,
+        spine: 'The walls are kept and no soldiers of the town stand behind them.',
+        faces: pool.unit.faces.map(() => 'A clerk in the hall says the keeping is paid out of the common purse.'),
+        notebook: [],
+      }],
+    });
+    const fromSource = parseScribeUnits(answer);
+    const fromBundle = mod.parseScribeUnits(answer);
+    expect(JSON.stringify(fromBundle)).toBe(JSON.stringify(fromSource));
+    expect(fromSource.ok).toBe(true);
+    const a = judgeUnits(fromSource.units, CARD, refuteUnit);
+    const b = mod.judgeUnits(fromBundle.units, CARD, mod.refuteUnit);
+    expect(JSON.stringify(b)).toBe(JSON.stringify(a));
+    expect(a.verdicts.length).toBe(1);
+    expect(['PASS', 'WITHHELD', 'FAIL']).toContain(a.verdicts[0].verdict);
   });
 
   it('cardDelta agrees across the seam on a real pair of cards', async () => {

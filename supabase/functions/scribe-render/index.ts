@@ -50,12 +50,14 @@ import { resolveProviderKey, isVaultUnavailable } from '../ai-analyst/byok.ts';
 // tests/lint/scribeBundle.walker.test.js and byte-derived from src/domain/prose/refuteUnit.js.
 import { refuteUnit } from '../_shared/proseKernel.bundle.js';
 import { SCRIBE_VOICE } from './voice.ts';
+import { SCRIBE_EXEMPLARS } from './exemplars.ts';
 import {
   SCRIBE_FALLBACK_BETA,
   SCRIBE_MODEL,
   SCRIBE_OUTPUT_SCHEMA,
   buildScribeBrief,
   buildScribeUserTurn,
+  buildTownBlock,
   judgeUnits,
   parseScribeUnits,
 } from './scribeCore.ts';
@@ -84,8 +86,13 @@ function defaultAdminClient() { return createClient(Deno.env.get('SUPABASE_URL')
 
 /**
  * THE PROVIDER CALL, per the API skill's current contract for `claude-opus-5`:
- *   • the BRIEF as a cached `system` block — `cache_control: {type:'ephemeral', ttl:'1h'}` — and
- *     the card as the volatile user turn, so the prefix is byte-identical across every settlement;
+ *   • TWO CACHED `system` BLOCKS, each `cache_control: {type:'ephemeral', ttl:'1h'}` (chair ruling
+ *     31). The API allows four breakpoints and this uses two, because the two halves have
+ *     DIFFERENT LIFETIMES: the brief is byte-identical for every user, every world and every tab,
+ *     so it is written once an hour and read by everybody after that; the town block is identical
+ *     across one settlement's six or seven tab calls and different for the next settlement. One
+ *     breakpoint over both would re-write the whole prefix, exemplar pack included, on every town.
+ *     The card's volatile half is the user turn, so no per-tab byte sits inside a cached block.
  *   • ADAPTIVE THINKING (`{type:'adaptive'}`), which is the only on-mode on this model family;
  *   • `output_config.effort: 'high'` and `output_config.format`, the CURRENT structured-output
  *     parameter (the deprecated top-level `output_format` is not used);
@@ -93,7 +100,8 @@ function defaultAdminClient() { return createClient(Deno.env.get('SUPABASE_URL')
  *     same call instead of blanking a tab.
  */
 async function callAnthropic(args: {
-  apiKey: string; brief: string; turn: string; providerFetch: typeof fetch; signal: AbortSignal;
+  apiKey: string; brief: string; townBlock: string; turn: string;
+  providerFetch: typeof fetch; signal: AbortSignal;
 }): Promise<Response> {
   return args.providerFetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -113,7 +121,10 @@ async function callAnthropic(args: {
         effort: 'high',
         format: { type: 'json_schema', schema: SCRIBE_OUTPUT_SCHEMA },
       },
-      system: [{ type: 'text', text: args.brief, cache_control: { type: 'ephemeral', ttl: '1h' } }],
+      system: [
+        { type: 'text', text: args.brief, cache_control: { type: 'ephemeral', ttl: '1h' } },
+        { type: 'text', text: args.townBlock, cache_control: { type: 'ephemeral', ttl: '1h' } },
+      ],
       messages: [{ role: 'user', content: args.turn }],
     }),
   });
@@ -248,14 +259,17 @@ export async function handleScribeRender(
         return { ok: !!res?.ok, spendId, elevated: !!res?.elevated, balance: res?.balance ?? null, reason: res?.reason ?? null };
       },
       async callModel() {
-        const brief = buildScribeBrief(SCRIBE_VOICE);
+        const brief = buildScribeBrief({ voice: SCRIBE_VOICE, exemplars: SCRIBE_EXEMPLARS });
+        const townBlock = buildTownBlock(card);
         const turn = buildScribeUserTurn({ card, record, guidance });
-        promptChars = brief.length + turn.length;
+        promptChars = brief.length + townBlock.length + turn.length;
         const ac = new AbortController();
         const timer = setTimeout(() => ac.abort(), SCRIBE_TIMEOUT_MS);
         let resp: Response;
         try {
-          resp = await callAnthropic({ apiKey: providerKey.key, brief, turn, providerFetch, signal: ac.signal });
+          resp = await callAnthropic({
+            apiKey: providerKey.key, brief, townBlock, turn, providerFetch, signal: ac.signal,
+          });
         } finally { clearTimeout(timer); }
         if (!resp.ok) {
           const text = await resp.text().catch(() => '');

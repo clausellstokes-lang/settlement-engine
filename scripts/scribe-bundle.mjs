@@ -47,10 +47,18 @@ const OUT_DIR = join(ROOT, 'supabase', 'functions', '_shared');
 const OUT = 'proseKernel.bundle.js';
 const META = 'proseKernel.bundle.meta.json';
 
-/** The two leaves the Scribe needs on the server, in the order the virtual entry re-exports them. */
+/**
+ * The leaves the Scribe needs on the server, in the order the virtual entry re-exports them.
+ *
+ * ⭐ `scribeBrief.js` JOINED AT W3a (chair ruling 25). The prompt builders and the judge are a
+ * pure leaf rather than edge TypeScript precisely so that the pilot harness and the edge function
+ * can run the SAME ones: the harness imports the leaf from the dock, the function imports it from
+ * this bundle, and `scribeCore.ts` re-exports it so `index.ts`'s import list does not change.
+ */
 export const SCRIBE_ENTRIES = Object.freeze([
   'src/domain/prose/refuteUnit.js',
   'src/domain/prose/epochRecord.js',
+  'src/domain/prose/scribeBrief.js',
 ]);
 
 /** The virtual entry module. It exists only inside esbuild and is never written to disk. */
