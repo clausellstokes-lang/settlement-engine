@@ -2671,7 +2671,7 @@ supplies the ancestry.
    - `[face]` `[watch · pair 1 · disagree]` One of the watch says what the hall sends does not reach the far side of the line.
    - `[face]` `[guild]` The guilds say the work on the line is let out when the trades have hands to spare, and the households that send the hands are paid nothing.
    - `[face]` `[stranger]` A traveller found the line better kept than the place looks able to keep it, and could get nobody to name who pays.
-   - `[face]` `[register]` Whoever buries the dead says the works have made no difference to what he has to bury.
+   - `[face]` `[register]` Whoever buries the dead says the works have made no difference anybody can point to.
    - `[face]` `[court]` Nothing reaches the court from the line but a dispute between neighbours over work owed, by its own account.
    - `[face]` `[tavern]` At the tavern they reckon the ones who hold the way through live nearest to it.
    - `[face]` `[market]` The stallholders take the stalls in the square down while there is light left.
@@ -3161,7 +3161,7 @@ supplies the ancestry.
    - `[face]` `[stranger]` A drover says the town found him a bed and his beasts shelter without anyone going out of their way. Nothing he was given was more than he needed.
    - `[face]` `[register]` Whoever keeps the ground says the digging has never waited on the purse, and there has been room for everyone brought to it.
    - `[face]` `[market]` The stallholders say the boards go out in the same order they always have. The order is the first thing a new seller is told.
-   - `[face]` `[hall]` A clerk in the hall says the hall has opened the store for the ordinary and for nothing else.
+   - `[face]` `[hall]` A clerk in the hall says the store has been opened for the ordinary and for nothing else.
    - `[face]` `[tavern]` At the tavern the men who would be wanted first if trouble came say they already have work enough.
    - `[face]` `[guild]` The guilds reckon nobody from the hall has come to the trades for a figure, and the trades have one ready.
    - `[face]` `[watch]` The watch holds that the round is walked as it stands, and the word to shorten it would have to come from the hall.
@@ -3308,7 +3308,7 @@ supplies the ancestry.
    - `[face]` `[register]` At the parish they hold that the tithe is weighed after the wheel has taken its share and not before.
    - `[face]` `[stranger]` Coming in, a traveller finds the church, the wheel and the open fields, and nothing anywhere that is kept for a worse year.
    - `[face]` `[tavern]` A carter at the tavern says the price for closing a wound is the same price in a bad year. The households that send for it in a bad year are the ones with least to settle with.
-   - `[face]` `[market]` On market day the stallholders say nobody here buys against a year that has not come.
+   - `[face]` `[market]` On market day, they say, nobody here buys against a year that has not come.
 
 **`Disasters & Famine`: NO reserves, NO medical provision**
 1. `[ledger]` No grain store stands here and no house is kept for the sick. The grain is ground on somebody else's stone.
