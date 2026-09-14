@@ -163,6 +163,38 @@ export function isStale(prose, q) {
 }
 
 /**
+ * ⭐ WHICH SURVEY THE PAGE IS SHOWING (design §5b, rule 14: "generation happens only once a
+ * settlement's dossier is opened and frozen until next advance time").
+ *
+ * Three answers, and the middle one is the whole point. An advance makes every artefact stale
+ * WITHOUT rendering anything, so between the advance and the next open a town has last epoch's
+ * prose and no new prose. The page does not blank and does not mix: it shows what it has, marked
+ * as THE PRIOR SURVEY, until the render lands and the blocks swap.
+ *
+ *   'none'    — nothing to draw; every pool takes the hand corpus.
+ *   'prior'   — a render exists but belongs to an earlier epoch (or a superseded engine).
+ *   'current' — the render is the current epoch's.
+ *
+ * A render made for a DIFFERENT SEED is 'none', not 'prior': another town's prose is not this
+ * town's older prose, and there is no honest way to caption it.
+ *
+ * @param {unknown} prose
+ * @param {{advanceSeq?: number, renderedFor?: string, engineVersion?: string}} q
+ * @returns {'none'|'prior'|'current'}
+ */
+export function surveyStateOf(prose, q) {
+  if (!isArtefact(prose)) return 'none';
+  const wantSeed = str(q?.renderedFor);
+  if (wantSeed && str(prose.renderedFor) !== wantSeed) return 'none';
+  const seq = currentAdvanceSeq(prose);
+  if (seq === null) return 'none';
+  const wantEngine = str(q?.engineVersion);
+  if (wantEngine && str(prose.version?.engine) !== wantEngine) return 'prior';
+  const want = typeof q?.advanceSeq === 'number' ? q.advanceSeq : 0;
+  return seq === want ? 'current' : 'prior';
+}
+
+/**
  * ⭐ LAND ONE BLOCK. The outbox delivers a tab at a time, so the artefact grows a block at a
  * time and a tab swaps from corpus to Scribe the moment ITS block is present. A block that
  * lands for a DIFFERENT epoch than the one already current starts a new current epoch and

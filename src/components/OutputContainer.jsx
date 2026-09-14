@@ -18,9 +18,13 @@ import { flag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
+import { useScribeOpenTrigger } from '../hooks/useScribeOpenTrigger.js';
+// Re-exported from its own module (W2 commit 3): the feed builder moved out verbatim to make the
+// two lines the Scribe's open trigger needs, without touching the 600-line layer ceiling. The
+// public-chronicle suite imports it from HERE, so the name stays on this surface.
+export { collectChronicle };
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
-import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
-import { settlementWorldPulseEntries } from '../domain/dossier/settlementWorldChronicle.js';
+import { collectChronicle } from './dossier/collectChronicle.js';
 import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
@@ -149,55 +153,6 @@ function dwellMsBand(ms) {
   return 'gt_30m';
 }
 
-function chronicleReferenceFor(saveEntry) {
-  const cs = saveEntry?.campaignState;
-  return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
-}
-
-export function collectChronicle(saveEntry, settlement, publicChronicle = null, campaignWorldState = null, savedSettlements = []) {
-  // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
-  // world-pulse, merged + normalized + sorted newest-first and timed relative to
-  // canonization by the shared domain helper, so screen + any future surface
-  // read one source of truth.
-  //
-  // WORLD-PULSE SEAM (owner bug 2026-07-22): the world source used to read the
-  // per-save campaignState.worldPulse.events / worldState.eventLog paths, which the
-  // advance NEVER writes — so advancing time showed nothing here. The events live on
-  // the owning campaign's worldState.pulseHistory; settlementWorldPulseEntries
-  // projects that already-persisted history into per-settlement rows (a pure read).
-  // The legacy per-save paths are kept as a fallback for any save that happens to
-  // carry them.
-  //
-  // A PUBLIC gallery dossier has no saved campaignState — the gallery RPC
-  // projects an allowlisted copy of the eventLog into its own `chronicle`
-  // column (migration 032; re-filtered client-side in gallery.js), threaded
-  // here as publicChronicle and fed through the same manual-source
-  // normalization. It is consulted ONLY when there is no save entry at all;
-  // owner surfaces (live editor, saved view) never pass it, so the owner feed
-  // is byte-for-byte what it was before.
-  const worldEntries = campaignWorldState
-    ? settlementWorldPulseEntries(campaignWorldState, saveEntry?.id ?? settlement?.id, { savedSettlements })
-    : [];
-  const feed = buildChronicleFeed({
-    manual:     saveEntry ? saveEntry.campaignState?.eventLog : publicChronicle,
-    worldPulse: worldEntries.length ? worldEntries : saveEntry?.campaignState?.worldPulse?.events,
-    worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
-    // H9 (2026-08-11): the `recent` slot is GONE, here and at the sibling read in
-    // store/aiChronicleContext.js. `settlement.recentEvents` has NO writer anywhere
-    // in this repo — no generator, no import, no migration, no normalizer produces
-    // it — so the slot could only ever hand buildChronicleFeed `undefined`. Deleted
-    // at BOTH sites together, because curing one leaves the class alive at the other.
-  }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
-  // Re-attach THE NEWS ADDRESS LAW block to the world rows. buildChronicleFeed's
-  // normalizer keeps the byte-minimal common shape (no address passthrough — that
-  // module is first-paint-eager via the store, so it stays untouched); the address
-  // rides back on here, in the lazy dossier path, keyed by the row id.
-  if (worldEntries.length) {
-    const addressById = new Map(worldEntries.map(e => [e.id, e.address]));
-    return feed.map(e => (e.source === 'world' && addressById.has(e.id)) ? { ...e, address: addressById.get(e.id) } : e);
-  }
-  return feed;
-}
 
 export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapCanEdit = false, canAuthorNpc = false }) {
   const storeSettlement = useStore(s => s.settlement);
@@ -444,6 +399,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // is stripped from the payload unless the owner opted into shareDm, so this can
   // never reveal more than is already shared.
   const publicDossier = readOnly && !saveId;
+  // ⭐ THE SCRIBE'S OPEN TRIGGER (design §5, the owner's rule 14: "generation happens only once a
+  // settlement's dossier is opened and frozen until next advance time"). This is the one place the
+  // product learns that a dossier is ON SCREEN. It is a no-op on every path but the owner's own
+  // editable dossier, and the hook itself does nothing at all unless FLAGS.scribe is lit — the
+  // trigger, the artefact and the transport are all behind dynamic imports, so a dark build pulls
+  // none of them into this chunk.
+  useScribeOpenTrigger({ enabled: !readOnly && !playerView && !publicDossier, saveId });
   // NPC authoring is an explicit owner capability supplied by SettlementDetail,
   // not an inference from the process-wide editMode flag. Intersect it again
   // with this surface's identity so a stale flag or an accidentally permissive
