@@ -1,12 +1,12 @@
 # LANE: THE SCRIBE — W1, THE REFUTER AS A LIBRARY · THE EPOCH RECORD · THE DENO BUNDLE · THE PILOT HARNESS
-(DRAFT written 2026-09-14 06:2x before W0 reported; §A is filled from W0's report before dispatch — do not dispatch with ⟦…⟧ tokens unfilled)
+(filled from W0's report 2026-09-14 08:0x; ready to dispatch)
 
-DOCK: `$SC/kit/lane-scribe` at W0's tip ⟦W0 TIP SHA⟧. Same laws as W0's brief (read it): pure code, zero product-facing bytes, no annex/census/leaf
+DOCK: `$SC/kit/lane-scribe` at W0's tip `f4827c247` (W0's four commits: `1bd614ec9` scribePage · `3acf8cab8` the static card · `fa71589a3` townCard · `f4827c247` the tests + golden). Same laws as W0's brief (read it): pure code, zero product-facing bytes, no annex/census/leaf
 change, the golden master and the recorder-blind pin (2756) byte-identical, new files only, no em dash/`!`, never push, never stash/checkout/reset,
 `/usr/bin/grep`, vitest via `gate-mutex.sh`, the checkpoint line above `**+ 09-14 05:3x — THE OWNER OPENED A SECOND PROGRAMME` after every commit,
 trailer `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`.
 READ FIRST: the design at the ledger `1e2a413af` (`git -C /Users/cstokes/Desktop/settlement-engine show 1e2a413af:docs/DESIGN_SCRIBE_GENERATION_TIME_PROSE.md`)
-§3, §4, §5b, §7, §10, §11 · `$SC/kit/briefs/SCRIBE-RULINGS.md` · W0's report ⟦path⟧ · `src/domain/prose/townCard.js` and its test · then the arms:
+§3, §4, §5b, §7, §10, §11 · `$SC/kit/briefs/SCRIBE-RULINGS.md` · W0's report (the shape is restated in §A below) · `src/domain/prose/townCard.js` and its test · then the arms:
 `src/domain/prose/moveGrammar.js` (MOVES :38 · NON_MOVES :67 · LEVEL1_ORDERS :98 · WALLS :130 · classifyMoves :268 · orderIdOf :310),
 `src/domain/prose/composedWalker.js` (COMPOSED_ARMS :102 · walkComposed :1155 · composedVerdictOf :1190 · A1 :333 · A5 :598 · A6 :646 · A13 :1052 ·
 Tail :901 · Aspect :935 · Restatement :967 · Ambiguity :1002 · Thread :821 · provenanceCount :1025), `src/domain/prose/entryWalker.js` (C3 :536 · C4 :614 ·
@@ -15,7 +15,33 @@ C5 :696 · Q :893 · X :948 · F25 :981 · the klass vocabulary :144), `src/doma
 quarantine), `tests/copy/proseLeak.test.js` (:5-22 the six leak classes), `$SC/kit/rewrite/clarity-sweep.mjs` (the proxy limbs), `$SC/kit/rewrite/measure-block.py`
 (the four measures), `src/domain/display/stateProse/stateProseKernel.js` (variantIsAudible :211, hashKey :467).
 
-## §A. THE CARD ADAPTER (from W0's report) — ⟦the card's shape; which key holds the fired pools, the seated roles, the machine lines, the frozen values, the epoch identity, `lastAdvance` if W0 carried it⟧
+## §A. THE CARD ADAPTER — W0's card, as landed
+`townCard(settlement, { tab, audience, staticCard, world? })` (`src/domain/prose/townCard.js`) returns key-sorted plain data:
+`{ schema, tab, tabIsKnown, audience, seed, engineVersion, staticCardJoined, epoch:{advanced, tick, calendar, renderYear, renderYearIsFrozen,
+campaignEraEvents, foodStockpileLastTick}, lastAdvance: null|{id, tick, interval, committed, calendar, summary[], outcomes[{id,type,ruleId,headline,
+summary}], corruption[], factionCapture[]}, town:{id, name, tier, culture, sources[], roles[{source, roster[{role,n}]}], compromised[], compromisedRate,
+institutions[{name, category, services[]}], armedForces{bucket:[names]}, forceBuckets{militia,watch,garrison}, hasWorld}, pools:[ {blockId, poolKey, mount,
+section, vid (the ANNEX row), authoredIndex, face, angle, marks[], pieces[{role,key,vid,index,face,source,pairOf,pairKind}], pairKinds[], faceSources[],
+faceRoles[{source, roster[]}], slots:{declared[], fills[], verbs[], recovered}, compromised:null|{source,speaks,rate,year}, unit:{rendered, spine, faces[],
+faceSourceTags[], pairs[]}, static:{wiring, keyFunction, rung, reads[], covert, variants, rateBp}, fields:[{field,value,clock,writers,status,grain}] } ]
+(PAGE ORDER, unsorted on purpose), page:[PageLine{section, kind, text, block?, pool?, vid?, face?, mount?, label?, pieces?}], mounts:[{mount,blockId,rung,desk}] }`.
+The static card is an INPUT (`options.staticCard`, from `docs/content/scribe-static-card.json`, 413 KB: 708 pools / 125 fields, 116 FROZEN / 9 LIVE);
+absent is lawful and the card says `staticCardJoined:false`. `renderTabPage(settlement, tab, {audience})` in `src/domain/prose/scribePage.js` covers
+all 13 tabs; the defense render is byte-identical to the script's over 168 towns × 2 audiences. Sizes: a whole 13-tab card is 145–261 KB; defense
+~11.7k tokens, overview ~9k, power ~5.5k, the rest 2–5k; ~7 KB of every tab is the repeated `town` block — the harness HOISTS `town` once per
+settlement into the cached prefix's tail and sends per-tab `pools`+`page` as the volatile turn.
+⚠ W0's findings you inherit: (i) `history.age` is FROZEN at generation (measured 215→215 over 30 one-year advances while `calendar.year` went 2→31),
+so `renderYearOf` is a constant and ruling 26's "seven years in ten, seeded on the year" roll never re-rolls — the card carries
+`renderYearIsFrozen:true`; for the Scribe the EPOCH is `epoch.tick` (campaign-side, `worldState.tick`), and `epochRecord` keys on it; do NOT change the
+kernel's roll (that moves rendered text; W2 declares it); (ii) no epoch field lives on a settlement — `lastAdvance` is `worldState.pulseHistory.at(-1)`
+filtered to the town, reachable only through `world`; headless towns have `lastAdvance:null` and `hasWorld:false` (DS-REL-1 and `war.*` are dark
+headless — the pilot needs campaign worlds for those tabs); (iii) only the HEAD face's roles are recovered per piece — a paired unit's partner and
+weighing rows are not aligned (you align them, or surface `claimed` from the composer's `read` at BOTH duplicated sites); (iv) `opener`/`unitSentences`/
+`overCap` are computed by the composer and dropped by the page line — surface them for the REPORT rows; (v) the same-page MACHINE read set exists for
+Defense only (`prose-mark-card.mjs` TAB_PRODUCERS) — the page-level arms use `card.page` for every tab and say NOT-EXECUTABLE for the read-set limb
+elsewhere; (vi) `symptomSourceOf` is DS-DEF-2-only, so `pools[].compromised` is null elsewhere by construction; (vii) ⚠ adding any `.js` under
+`src/domain/**` moves `wiring-census.json`'s `stamp.producerIndexFiles` — declare the one-pair diff per commit, as W0 did; (viii) `voiceMechanics.test.js`
+E2 is red at 7992713d0 on `labelBands.js`/`generalStateProse.js` (pre-existing, proven in a throwaway worktree) — report, never re-record.
 
 ## §B. DELIVERABLE 1 — `src/domain/prose/refuteUnit.js`: `refuteUnit(unit, card, { corpusUnit?, options? }) → { verdict, findings[], report{} }`
 ONE function, pure, headless, deterministic, that runs EVERY tier-0 arm the design names (§4) over one unit `{stance?, source?, pair?, text}`:
