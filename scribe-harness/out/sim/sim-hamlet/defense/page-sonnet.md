@@ -1,0 +1,31 @@
+[PASS] The town knows well enough what it could not survive, and that knowledge shapes what it does and does not provoke.
+
+[FAIL] What Warmholz's defenses are ordinarily worth does not describe the town at present. There is a crisis on it, and its arrangements have been rebuilt around the crisis.
+
+[PASS] The crisis at Warmholz has changed the posture and not the prospects, and the town has been careful to keep the two separate.
+
+[WITHHELD] A drover finds nothing standing around the houses here, and at the first door he is asked where the road behind him leads. A guard on the night round says he was given it street by street and left to guess at the rest. At the tavern they give the reason there is no wall freely, and it comes out different at every table. A clerk in the hall puts the want of a wall down to a want of money. He does not say what the money there is goes on. The stallholders reckon the town's money here runs to the scales and the sweeping of the square. A guild member says the trades could price a wall down to the carting. What they are asked for is money and never men. Those who sit to hear a matter say nobody can put before them whether a line goes round the place, and they leave the question there. One of the elders says there is no wall here to keep, and nobody in the hamlet is asked to stand behind one. Whoever buries the dead says the ground for the dead is marked off and the rest of the place is not.
+
+[FAIL] Every household here says a matter is settled among them, and it stays settled for as long as everyone who was there goes on agreeing that it was. A pedlar says a short payment here is argued out on the doorstep where it happened, and the matter stays there once it is settled. One of the elders says the households settle most matters among themselves, and what reaches the elders is settled the elders' own way. At the tavern they say the households which do the settling are the ones with the most fields, and the drinkers can name them. The older heads here say a boundary is walked and talked over until both households agree, and the walking falls to whichever two are in dispute. The muster says it is expected to stand behind whatever the households decide and is not asked first. A quarrel that starts inside is none of the gate's, whoever keeps the gate says, and a quarrel that starts at the gate is settled at the gate. Whoever digs the ground says they are told when to dig and not what was decided, and they do not ask.
+
+[WITHHELD] What the town could raise against a real threat, and whose purse it would come from, has never been settled between the households. A traveller says a household's store is kept in its own cellar, under its own floor, and the neighbours know well enough which floor covers what. Those who keep the ground say a burying is the one thing here that waits for no purse. One of the elders holds that a household with nothing else to spare still finds enough to put its own into the ground. It is the same backs that come out, they say at the tavern. Everyone at the table can name the ones who stay behind their own door. The muster says the ground it would gather on is somebody's own field, and that somebody would bear the trampling of the crop. Those who hold the way through reckon nobody set the hour the bar comes down, and the hour follows the light. The shortfall comes off the stalls, they say at the market, and the argument comes from behind every stall. The soldiers say the place says plainly what it wants of them. The people here ask them straight out to put a shoulder to a load.
+
+[WITHHELD] It is common knowledge here that there is no grain store and no house for the sick to be carried to, and the town does not reckon either one a lack. The older heads here say a sick house is never left to see to itself. At the tavern they say the houses that are sat up with are the houses that sit up with others. A traveller reports that a house with sickness in it is known from the lane by the food left on its step. At the market they say a house with somebody ill in it comes for vinegar and roots, and whoever has them names the price. Those who bury the dead reckon they are the one trade here that is sent for in a bad year and not thanked for coming.
+
+[WITHHELD] The ordinary safety of Warmholz has stopped applying. Whatever the town was before, the danger on it now is what governs the streets.
+
+[WITHHELD] What is dangerous at Warmholz has been seen. What else there might be has not.
+
+[WITHHELD] No criminal infrastructure has been identified at Warmholz. Whatever wrongdoing the town has does not run through anything that could be called an organization.
+
+[WITHHELD] A stranger comes into Warmholz from whichever direction suits him, and passes nobody on the way in who might have stopped him.
+
+[PASS] A stranger at Warmholz can find nobody whose responsibility the town's defense is, because defending it falls to nobody in particular.
+
+[WITHHELD] Warmholz has no charter hall to answer for its defense, though the country round it expects one. What there is instead falls to whoever the elders can call on at the time.
+
+[WITHHELD] Nothing unseen has come at Warmholz. Nothing here would know if it had.
+
+[PASS] Warmholz is too small to wall, and knows it well enough to trust instead in its neighbours, its distance, and how little anyone passing takes note of it.
+
+[WITHHELD] Warmholz keeps no food buffer of its own. A break in what comes up the road turns to hardship in days, not seasons.

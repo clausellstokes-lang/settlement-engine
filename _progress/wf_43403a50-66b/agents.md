@@ -1,4 +1,4 @@
-# wf_43403a50-66b — per-agent progress, 2026-09-14 17:32:36
+# wf_43403a50-66b — per-agent progress, 2026-09-14 17:37:59
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
     - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
@@ -24,7 +24,7 @@
     - `a73a1d32e` ? · DONE · transcript 09-14 17:30 730 KB · 19 tool calls · result: {"items": [{"title": "Car 8b-W-18e \u2014 powers gated on institutions, grazing an owner-gated surface", "what": "Ruling 16 (a power exists only where an instit
     - `a9738386f` ? · DONE · transcript 09-14 17:29 579 KB · 6 tool calls · result: {"items": [{"title": "Push and the WALK (and money, production migrations) stay the owner's", "what": "The chair's standing carve-out: it will not push, will no
     - `a82cbc263` ? · DONE · transcript 09-14 17:32 646 KB · 18 tool calls · result: {"items": [{"title": "Run the \u00a7904 landing chain (L-UI-MAT)", "what": "The whole \u00a7904 compose\u2192proof\u2192registers\u2192ratchet\u2192gate\u2192CA
-    - `aec1fdcca` ? · IN FLIGHT · transcript 09-14 17:30 548 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a74c791c6` ? · IN FLIGHT · transcript 09-14 17:32 523 KB · 6 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `a65cc7eae` ? · IN FLIGHT · transcript 09-14 17:28 421 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
-    - `ac5c2a91e` ? · IN FLIGHT · transcript 09-14 17:31 363 KB · 2 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `aec1fdcca` ? · DONE · transcript 09-14 17:36 799 KB · 9 tool calls · result: {"items": [{"title": "Resume the paused corpus rewrite (DEF-1 batch 1, mid-draft)", "what": "The whole hand-corpus rewrite was paused by the owner at 12:05 on 2
+    - `a74c791c6` ? · DONE · transcript 09-14 17:37 718 KB · 7 tool calls · result: {"items": [{"title": "Migration 195 landed past the rehearsal manifest head, with no rollback", "what": "`195_civility_guard_and_public_identity.sql` landed pas
+    - `a65cc7eae` ? · IN FLIGHT · transcript 09-14 17:32 516 KB · 4 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratchp
+    - `ac5c2a91e` ? · DONE · transcript 09-14 17:33 440 KB · 3 tool calls · result: {"items": [{"title": "Deploy the refunds webhook (partial refunds blocked until then)", "what": "The endgame row records that until the webhook deploys, a parti
