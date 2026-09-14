@@ -111,6 +111,9 @@ import { faithPanelModel } from '../../components/settlement/faithPanelModel.js'
  * @property {number} [vid] composed only — the drawn variant's AUTHORED position in its pool
  * @property {number} [face] composed only — the drawn face index
  * @property {string} [mount] composed and glance — the registry position it drew at
+ * @property {ReadonlyArray<object>} [pieces] composed only — the composer's OWN provenance
+ *   rows for this unit (role, key, vid, index, face, source, pairOf, pairKind), one per
+ *   rendered face, so a paired unit's partner and weighing rows are nameable
  * @property {string} [label] machine, badge and roster — which field or row it is
  */
 
@@ -181,6 +184,11 @@ export function composedAt(mount, rung) {
   return Object.fromEntries([
     ['text', drawn.sentence], ['block', p.blockId], ['pool', p.poolKey],
     ['vid', piece?.vid], ['face', piece?.face], ['mount', mount],
+    // ⭐ THE WHOLE PROVENANCE RIDES ALONG (W0 deliverable 1). `vid` and `face` are the HEAD
+    // piece's; a paired unit has two or three pieces and the card must carry the pair's kind
+    // and the partner's source. It is emitted only where the rung carries it, so `pageText`,
+    // `defensePoolsFired` and every DEF-2 packet read exactly the bytes they read before.
+    ['pieces', Array.isArray(p.pieces) ? p.pieces : undefined],
   ]);
 }
 
@@ -198,6 +206,7 @@ function besideAt(mount, entry) {
   return Object.fromEntries([
     ['text', entry.beside || drawn.sentence], ['block', p.blockId], ['pool', p.poolKey],
     ['vid', piece?.vid], ['face', piece?.face], ['mount', mount],
+    ['pieces', Array.isArray(p.pieces) ? p.pieces : undefined],
   ]);
 }
 
@@ -220,7 +229,7 @@ function sheet() {
       out.push(/** @type {never} */ (row([
         ['section', section], ['kind', 'composed'], ['text', c.text],
         ['block', c.block], ['pool', c.pool], ['vid', c.vid], ['face', c.face],
-        ['mount', c.mount],
+        ['mount', c.mount], ['pieces', c.pieces],
       ])));
     }],
     ['glance', (section, mount, rung, label) => {
@@ -284,11 +293,15 @@ function economyOf(s, options, world) {
  */
 export function impairedInstitutionOf(s) {
   const services = s?.availableServices || {};
-  const { impaired } = computeChainSets(s);
+  // ⛔ A PROPERTY READ AND NOT A DESTRUCTURE. `const { impaired } = …` is an ObjectPattern, and
+  // the census's `astTokens` counts a Property key as a WRITE whether it is building an object or
+  // taking one apart — so the destructure minted a producer for `impaired` under `src/domain/**`.
+  // Convicted by this lane's own zero-writes arm, which is the arm doing its job.
+  const chains = computeChainSets(s);
   const catOrder = Object.keys(services).filter((k) => services[k]?.length).sort(compareCodepoint);
   return catOrder
     .flatMap((cat) => (services[cat] || []).map((svc) => (typeof svc === 'object' ? svc?.institution || '' : '')))
-    .filter((inst) => inst && impaired.has(inst))
+    .filter((inst) => inst && chains.impaired.has(inst))
     .sort(compareCodepoint)[0] || null;
 }
 
