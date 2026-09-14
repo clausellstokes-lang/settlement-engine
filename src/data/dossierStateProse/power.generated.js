@@ -21,7 +21,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "Endorsed": [
         {
           "angle": "street",
-          "text": "The {seat} at {settlement} is obeyed without much thought given to it; a thing is done because the {seat} said so, and the town would find the question of why a strange one.",
+          "text": "The {seat} at {settlement} is obeyed without much thought. A thing is done because the {seat} said so, and the town would find the question of why a strange one.",
           "slots": [
             "seat",
             "settlement"
@@ -30,7 +30,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s rolls come back filled and its levies come back paid. The {seat} governs at full strength here, and the clerks record almost nothing they have had to chase.",
+          "text": "{settlement}'s rolls come back filled and its levies come back paid. The {seat} governs at full strength here, and the clerks have almost nothing to chase.",
           "slots": [
             "settlement",
             "seat"
@@ -39,7 +39,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} learns who rules inside an hour and never once hears it disputed; the {seat}'s writ is the plainest fact in the town.",
+          "text": "A stranger at {settlement} learns who rules inside an hour and never once hears the {seat}'s writ disputed.",
           "slots": [
             "settlement",
             "seat"
@@ -48,7 +48,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Crime finds little room at {settlement}, and the watch is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
+          "text": "There is little crime at {settlement}, and the watch is not the reason.",
           "slots": [
             "settlement"
           ],
@@ -58,7 +58,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "Approved": [
         {
           "angle": "street",
-          "text": "{settlement} thinks well enough of the {seat}, not warmly, but well enough that what it decides carries in most quarters without an argument first.",
+          "text": "{settlement} thinks well of the {seat} without warmth. What it decides carries in most quarters, and the town does not argue with it first.",
           "slots": [
             "settlement",
             "seat"
@@ -67,7 +67,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them.",
+          "text": "The {seat} at {settlement} governs with a modest edge in its favour. Where it asks it is generally given, and the clerks can name the few exceptions.",
           "slots": [
             "seat",
             "settlement"
@@ -76,7 +76,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "There is grumbling at {settlement} and it stays grumbling; nobody a stranger falls in with suggests the {seat} ought to be somebody else.",
+          "text": "There is grumbling at {settlement} and it stays grumbling. Nobody a stranger falls in with suggests the {seat} ought to be somebody else.",
           "slots": [
             "settlement",
             "seat"
@@ -85,7 +85,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat}'s standing at {settlement} is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it.",
+          "text": "The {seat}'s standing at {settlement} is good. The margin lets it spend goodwill on decisions the town would otherwise refuse it.",
           "slots": [
             "seat",
             "settlement"
@@ -96,7 +96,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "Tolerated": [
         {
           "angle": "street",
-          "text": "{settlement} accepts the {seat} without approving of it. The town's obedience is a habit rather than a verdict, and both sides understand the difference perfectly.",
+          "text": "{settlement} accepts the {seat} without approving of it. The town and the hall both know the difference.",
           "slots": [
             "settlement",
             "seat"
@@ -105,7 +105,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} holds {settlement} on sufferance: nothing it asks is refused outright and nothing it asks arrives quickly, which is its own kind of answer.",
+          "text": "The {seat} holds {settlement} because the town puts up with it. Nothing it asks is refused outright, and nothing it asks arrives quickly.",
           "slots": [
             "seat",
             "settlement"
@@ -114,7 +114,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Ask at {settlement} who governs and the answer comes with a shrug attached; the {seat} is a fact of the place rather than a loyalty of it.",
+          "text": "Ask at {settlement} who governs and the answer comes with a shrug. The {seat} is a fact of the place and not a loyalty of it.",
           "slots": [
             "settlement",
             "seat"
@@ -123,7 +123,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The {seat} at {settlement} has neither the town's backing nor its hostility, so it can rule but it cannot spend. A hard decision here would have to be paid for out of an empty purse.",
+          "text": "The {seat} at {settlement} has neither the town's backing nor its hostility. It can rule, and a hard decision here would be paid for out of an empty purse.",
           "slots": [
             "seat",
             "settlement"
@@ -132,7 +132,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {seat} at {settlement} sits at the point where acceptance stops being an asset and has not yet become a liability; a good season would be felt and a bad one would be felt harder.",
+          "text": "The {seat} at {settlement} sits where the town's acceptance has stopped being an asset and has not yet become a liability. A good season would be felt here, and a bad one would be felt harder.",
           "slots": [
             "seat",
             "settlement"
@@ -152,7 +152,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat}'s writ runs shorter at {settlement} each season, and what the rolls show is not defiance so much as delay, which comes to the same figure at collection.",
+          "text": "The {seat}'s writ runs shorter at {settlement} each season. What the rolls show is delay and not defiance, and delay comes to the same figure at collection.",
           "slots": [
             "seat",
             "settlement"
@@ -161,7 +161,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is still governed by the {seat} and the governing gets harder; the weaker the acceptance, the more room the town's quieter interests find to work in.",
+          "text": "{settlement} is still governed by the {seat}, and the governing gets harder. The town's quieter interests find more room as the acceptance weakens.",
           "slots": [
             "settlement",
             "seat"
@@ -170,7 +170,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} hears two accounts of who really decides things before the day is out, and neither of the two is the {seat}'s own account.",
+          "text": "A stranger at {settlement} hears two accounts of who really decides before the day is out. Neither of the two is the {seat}'s own account.",
           "slots": [
             "settlement",
             "seat"
@@ -179,7 +179,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "What the {seat} still holds at {settlement} is the part of the town that has not yet had a reason to reconsider, and reasons are the one thing a hard season supplies.",
+          "text": "What the {seat} still holds at {settlement} is the part of the town with no reason yet to reconsider. A hard season supplies reasons.",
           "slots": [
             "seat",
             "settlement"
@@ -199,7 +199,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Almost nothing the {seat} asks of {settlement} arrives. The rolls are still kept, out of form rather than expectation, and the clerks who keep them have stopped chasing what is missing.",
+          "text": "Almost nothing the {seat} asks of {settlement} arrives. The rolls are still kept out of form, and the clerks have stopped chasing what is missing.",
           "slots": [
             "seat",
             "settlement"
@@ -208,7 +208,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Governance at {settlement} is coming apart rather than being overthrown. The {seat} still sits, and the space its authority does not occupy is filling with whoever will fill it.",
+          "text": "Governance at {settlement} is coming apart rather than being overthrown. The {seat} still sits, and the space its authority does not occupy is filling with whoever takes it.",
           "slots": [
             "settlement",
             "seat"
@@ -217,7 +217,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} can find nobody who speaks for the town with any confidence, and several who will speak for a part of it.",
+          "text": "A stranger at {settlement} can find nobody who speaks for the town with any confidence. He can find several who speak for a part of it.",
           "slots": [
             "settlement"
           ],
@@ -227,7 +227,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by PROSPERITY, favourable": [
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} is well thought of and the reason is in the accounts: the town is doing well, and a town doing well rarely looks hard at who is arranging it.",
+          "text": "The {seat} at {settlement} is well thought of, and the reason is in the accounts. The town is doing well.",
           "slots": [
             "seat",
             "settlement"
@@ -236,7 +236,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} credits the {seat} with the good years whether or not the {seat} earned them; the prosperity is the whole of the argument in its favour.",
+          "text": "{settlement} credits the {seat} with the good years, whether or not the {seat} earned them. The prosperity is the whole of the town's argument for it.",
           "slots": [
             "settlement",
             "seat"
@@ -245,7 +245,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat}'s standing at {settlement} rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more.",
+          "text": "The {seat}'s standing at {settlement} rests on the town's prosperity. It lasts as long as the prosperity lasts.",
           "slots": [
             "seat",
             "settlement"
@@ -256,7 +256,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by PROSPERITY, adverse": [
         {
           "angle": "ledger",
-          "text": "The {seat}'s standing at {settlement} is being eaten by the accounts; the town is poorer than it was and has settled on the {seat} as the explanation for it.",
+          "text": "The {seat}'s standing at {settlement} is being eaten by the accounts. The town is poorer than it was and has settled on the {seat} as the reason.",
           "slots": [
             "seat",
             "settlement"
@@ -265,7 +265,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody at {settlement} argues that the {seat} caused the lean years, and nobody at {settlement} declines to blame it for them either.",
+          "text": "Nobody at {settlement} argues that the {seat} caused the lean years, and everybody blames it for them.",
           "slots": [
             "settlement",
             "seat"
@@ -274,7 +274,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger notices at {settlement} that every complaint against the {seat} is a complaint about money wearing a different coat.",
+          "text": "A stranger at {settlement} notices that every complaint against the {seat} is a complaint about money.",
           "slots": [
             "settlement",
             "seat"
@@ -285,7 +285,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by SAFETY, adverse": [
         {
           "angle": "street",
-          "text": "The {seat} at {settlement} is judged on the streets after dark, and the streets after dark are not making its case for it.",
+          "text": "The {seat} at {settlement} is judged on the streets after dark, and the streets after dark are not safe.",
           "slots": [
             "seat",
             "settlement"
@@ -294,7 +294,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What the {seat} has lost at {settlement} it has lost to the crime returns. A town that does not feel safe stops crediting whoever is meant to keep it so.",
+          "text": "What the {seat} has lost at {settlement} it has lost to the crime returns. The town does not feel safe, and it has stopped crediting whoever is meant to keep it so.",
           "slots": [
             "seat",
             "settlement"
@@ -303,7 +303,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Every season {settlement} goes badly policed costs the {seat} a little more standing, and the standing it loses is precisely what it would need to fix the policing.",
+          "text": "Every season {settlement} goes badly policed costs the {seat} a little more standing. The standing it loses is what it would need to fix the policing.",
           "slots": [
             "settlement",
             "seat"
@@ -314,7 +314,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by DEFENSE, adverse": [
         {
           "angle": "visitor",
-          "text": "What a stranger hears against the {seat} at {settlement} is not corruption but exposure: the town does not believe it could be held, and holds the {seat} answerable for that.",
+          "text": "What a stranger hears against the {seat} at {settlement} is not corruption but exposure. The town does not believe it could be held, and holds the {seat} answerable.",
           "slots": [
             "seat",
             "settlement"
@@ -323,7 +323,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat}'s standing at {settlement} carries the weight of an undefended town, and nothing else in the reckoning pulls half so hard against it.",
+          "text": "The {seat}'s standing at {settlement} carries the weight of an undefended town. Nothing else pulls against it half as hard.",
           "slots": [
             "seat",
             "settlement"
@@ -332,7 +332,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong.",
+          "text": "{settlement} has one accusation against the {seat}: the {seat} has left the town open. The town brings it against the {seat} whenever anything else goes wrong.",
           "slots": [
             "settlement",
             "seat"
@@ -343,7 +343,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by FOOD, adverse": [
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} is being judged at the granary door, and the granary is not helping it.",
+          "text": "The {seat} at {settlement} is being judged at the store door, and the store is short.",
           "slots": [
             "seat",
             "settlement"
@@ -352,7 +352,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Hunger at {settlement} has turned into a question about the {seat} rather than about the harvest; the town has decided that somebody could have arranged this better.",
+          "text": "Hunger at {settlement} is now a question about the {seat} and not about the harvest. The town has decided that somebody could have arranged this better.",
           "slots": [
             "settlement",
             "seat"
@@ -361,7 +361,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat}'s standing falls with the food at {settlement} and will not climb back with it. A town remembers being hungry a great deal longer than it remembers being fed.",
+          "text": "The {seat}'s standing falls with the food at {settlement}, and it does not climb back when the food does.",
           "slots": [
             "seat",
             "settlement"
@@ -372,7 +372,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "governanceFractured true": [
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} is what the records show and not what the town obeys; the real decisions are made elsewhere and informally, and the two arrangements have stopped pretending to be one.",
+          "text": "The {seat} at {settlement} is what the records show and not what the town obeys. The real decisions are made elsewhere and informally, and the two arrangements have stopped pretending to be one.",
           "slots": [
             "seat",
             "settlement"
@@ -381,7 +381,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is sent to the {seat} and gets nothing done, then sent to somebody with no title at all and has it settled the same afternoon.",
+          "text": "A stranger at {settlement} is sent to the {seat} and gets nothing done. He is then sent to somebody with no title at all, and has it settled the same afternoon.",
           "slots": [
             "settlement",
             "seat"
@@ -401,7 +401,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat} at {settlement} still convenes and still announces, and each announcement sits a little further from what was actually decided; nothing has broken, and the gap widens.",
+          "text": "The {seat} at {settlement} still convenes and still announces. Nothing has broken, and each announcement sits further from what was actually decided.",
           "slots": [
             "seat",
             "settlement"
@@ -613,7 +613,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "stable matched": [
         {
           "angle": "street",
-          "text": "The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and business is conducted on that expectation.",
+          "text": "The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and the town does business on that expectation.",
           "slots": [
             "settlement",
             "faction"
@@ -622,7 +622,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Nothing at {settlement} is presently pulling against the {seat}; petitions go to one place and are answered from one place, which is the whole of what a settled hall means.",
+          "text": "Nothing at {settlement} is presently pulling against the {seat}. Petitions go to one place and are answered from one place.",
           "slots": [
             "settlement",
             "seat"
@@ -639,7 +639,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "What is settled at {settlement} is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
+          "text": "What is settled at {settlement} is the hall and only the hall. The town's steadiness says who answers and not what the answer is.",
           "slots": [
             "settlement"
           ],
@@ -658,7 +658,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Decisions at {settlement} are taken and then have to be taken again; the {seat}'s instructions carry, but they do not stay carried.",
+          "text": "Decisions at {settlement} are taken and then have to be taken again. The {seat}'s instructions carry, but they do not stay carried.",
           "slots": [
             "settlement",
             "seat"
@@ -667,7 +667,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is advised to conclude business quickly and not to rely on any arrangement outlasting the season.",
+          "text": "A stranger at {settlement} is told to finish his business quickly and not to count on any arrangement outlasting the season.",
           "slots": [
             "settlement"
           ],
@@ -675,7 +675,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What {faction} holds at {settlement} it holds without margin. Nothing has toppled, and every quarter of the town is behaving as though something might.",
+          "text": "What {faction} holds at {settlement} it holds without margin. Nothing has toppled, and the town is making its arrangements for when something does.",
           "slots": [
             "faction",
             "settlement"
@@ -695,7 +695,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} can no longer be relied on to execute what it decides; the gap between the instruction and the outcome is now the town's central fact.",
+          "text": "The {seat} at {settlement} can no longer be relied on to do what it decides. What it instructs and what happens are now different things.",
           "slots": [
             "seat",
             "settlement"
@@ -713,7 +713,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger arriving at {settlement} is told plainly by the first person he asks that nobody is in charge in the way he means it.",
+          "text": "A stranger arriving at {settlement} asks the first person he meets who is in charge. He is told plainly that nobody is in charge in the way he means it.",
           "slots": [
             "settlement"
           ],
@@ -731,7 +731,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and defers the rest.",
+          "text": "The {seat} at {settlement} governs a besieged town. It governs rationing, the gates and the watch rota, and defers the rest.",
           "slots": [
             "seat",
             "settlement"
@@ -740,7 +740,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger cannot get into {settlement} and would not want to; the town is closed around itself and the ordinary business of the place has stopped.",
+          "text": "A stranger cannot get into {settlement} and would not want to. The town is closed around itself, and its ordinary business has stopped.",
           "slots": [
             "settlement"
           ],
@@ -767,7 +767,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The {seat} at {settlement} keeps the forms and has stopped keeping the substance; what is recorded and what is happening no longer resemble each other.",
+          "text": "The {seat} at {settlement} keeps the forms and has stopped keeping the substance. What is recorded and what is happening no longer match.",
           "slots": [
             "seat",
             "settlement"
@@ -806,7 +806,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is directed to {faction} for anything official, and that is all a stranger is told.",
+          "text": "A stranger at {settlement} is directed to {faction} for anything official. Nobody tells him more than that.",
           "slots": [
             "settlement",
             "faction"
@@ -817,7 +817,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "governing faction holds a DOMINANT share": [
         {
           "angle": "ledger",
-          "text": "{faction} does not merely govern {settlement}, it outweighs everything else in the town put together; the other houses are consulted as a courtesy and know it.",
+          "text": "{faction} does not merely govern {settlement}: it outweighs everything else in the town put together. The other houses are consulted as a courtesy, and they know it.",
           "slots": [
             "faction",
             "settlement"
@@ -835,7 +835,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "No rival at {settlement} moves against {faction}, and it is not restraint. The arithmetic of the thing is plain to everybody who has done it.",
+          "text": "No rival at {settlement} moves against {faction}, and it is not restraint. The sums are plain to everybody who has done them.",
           "slots": [
             "settlement",
             "faction"
@@ -855,7 +855,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{faction} holds the hall at {settlement} because it is first and not because it is large; the town treats the arrangement as current rather than settled.",
+          "text": "{faction} holds the hall at {settlement} because it is first and not because it is large. The town treats the arrangement as current and not as settled.",
           "slots": [
             "faction",
             "settlement"
@@ -864,10 +864,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What keeps {faction} in the hall at {settlement} is that nobody else has assembled enough to take it, and the assembling is what the other houses are doing.",
+          "text": "Nobody else at {settlement} has assembled enough to take the hall from {faction}. The other houses are assembling.",
           "slots": [
-            "faction",
-            "settlement"
+            "settlement",
+            "faction"
           ],
           "vid": 3
         }
@@ -893,7 +893,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
+          "text": "Nobody at {settlement} needs the trouble explained. The town refers to it and moves on.",
           "slots": [
             "settlement"
           ],
