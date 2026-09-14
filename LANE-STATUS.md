@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 10:23:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 10:28:56 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 3106dc393 Plan: the collection at 09-14 ~10:1x — the Scribe is in the product dark (W0–W2, migra
 
@@ -129,4 +129,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.70 3.27 3.93
+load: 3.72 3.51 3.82
