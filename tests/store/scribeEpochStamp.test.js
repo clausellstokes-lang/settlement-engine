@@ -324,8 +324,12 @@ describe('THE TRANSPORT SENDS IT, AND SENDS IT AS THE EDGE READS IT', () => {
   it('⛔ AND IT IS STILL A CARD THAT CROSSES, never a settlement blob', async () => {
     const { tabRequestBody } = await import('../../src/store/scribeTransport.js');
     const body = tabRequestBody({ saveId: 's' }, 'defense', { tab: 'defense' }, null);
+    // `tabsExpected` joined the set at W5b (one render, one charge). It is a RECEIPT, not a key:
+    // the render's identity is still (saveId, advanceSeq, renderedFor), which the server already
+    // had, so no session token, nonce or id crosses this boundary in either direction.
     expect(Object.keys(body).sort()).toEqual([
       'advanceSeq', 'card', 'engineVersion', 'guidance', 'record', 'renderedFor', 'saveId', 'tab',
+      'tabsExpected',
     ]);
   });
 });

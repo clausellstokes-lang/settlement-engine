@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import {
-  firingTabs, landTabAnswer, postTabRender, registerScribeTransport, retireForRedraw,
+  firingTabs, landTabAnswer, postTabRender, registerScribeTransport, retireForRedraw, tabRequestBody,
 } from '../../src/store/scribeTransport.js';
 import { getScribeRenderer, setScribeRenderer } from '../../src/lib/scribeRenderer.js';
 import { proseOf, surveyNotesOf, unitsFor } from '../../src/lib/scribeArtefact.js';
@@ -104,6 +104,40 @@ describe('THE POST', () => {
     expect(notOk.ok).toBe(false);
     const threw = await postTabRender({}, 't', () => Promise.reject(new Error('offline')));
     expect(threw).toEqual({ ok: false, status: 0, data: null });
+  });
+});
+
+describe('⭐⭐ ONE RENDER, ONE CHARGE — the body the server keys the session from (W5b)', () => {
+  it('carries the render IDENTITY and the tab count, and no token of any kind', () => {
+    const body = tabRequestBody(
+      { saveId: 's1', advanceSeq: 4, renderedFor: 'seed-a', engineVersion: 'gen-1/sim-1', guidance: 'g' },
+      'defense', { pools: [] }, null, 7,
+    );
+    // The identity is the tuple the OPEN TRIGGER already keys on, which is why no protocol change
+    // was needed: a render is (save, epoch, seed) and the server derives the session from it.
+    expect(body).toMatchObject({ saveId: 's1', advanceSeq: 4, renderedFor: 'seed-a' });
+    expect(body.tabsExpected).toBe(7);
+    // ⛔ NEGATIVE CONTROL: there is NO session id, token or nonce in the body. A client-supplied
+    // one would let a forged value buy a render or charge for one twice.
+    for (const forbidden of ['sessionId', 'session_id', 'renderToken', 'nonce']) {
+      expect(Object.keys(body), `the body must not carry ${forbidden}`).not.toContain(forbidden);
+    }
+  });
+
+  it('a missing or nonsense tab count is 0, never NaN on the wire', () => {
+    const req = { saveId: 's', advanceSeq: 0, renderedFor: 'x', engineVersion: 'e' };
+    expect(tabRequestBody(req, 't', {}, null).tabsExpected).toBe(0);
+    expect(tabRequestBody(req, 't', {}, null, 'seven').tabsExpected).toBe(0);
+  });
+
+  it('⛔ AND THE TRANSPORT COUNTS WHAT THE SERVER SAID IT BILLED, never what it asked for', () => {
+    // `renderScribe` needs the store and the card builder, so the loop is pinned at the source:
+    // `charged` moves ONLY on the server's own `charged: true`, and it is what the result reports.
+    const source = readFileSync(join(ROOT, 'src/store/scribeTransport.js'), 'utf8');
+    expect(source).toMatch(/if \(sent\.data\.charged === true\) charged \+= 1;/);
+    expect(source).toMatch(/return \{ ok: true, tabs: tabs\.length, landed, charged \};/);
+    // The client holds no opinion about the price of a render: it sends a card and reads a receipt.
+    expect(source).not.toMatch(/charged\s*=\s*[1-9]/);
   });
 });
 

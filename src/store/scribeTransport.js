@@ -7,9 +7,17 @@
  *
  * ⭐ ONE INVOCATION PER TAB (design §6). A settlement is ~57-68 firing pools across its tabs, and
  * one invocation is bounded by the edge's 55 s budget, so the render is split the way the reader
- * consumes it: each tab is its own call, its own credited spend decision on the server, and its
- * own landing. A tab that lands swaps its blocks immediately; a tab that fails leaves the hand
- * corpus standing and costs the reader nothing but a retry on the next open.
+ * consumes it: each tab is its own call and its own landing. A tab that lands swaps its blocks
+ * immediately; a tab that fails leaves the hand corpus standing and costs the reader nothing but a
+ * retry on the next open.
+ *
+ * ⭐⭐ BUT ONE RENDER IS ONE CHARGE (W5b; migration 203). Splitting the render across tabs is a
+ * TRANSPORT decision and it used to be a PRICING one by accident: every invocation ran its own
+ * `spend_credits`, so the seven-to-ten tabs of one town charged 35 to 50 credits where migration
+ * 202's header and the redraw button both said five. The server now mints a RENDER SESSION on the
+ * first tab it sees for this (save, epoch, seed) and every later tab of the same render skips the
+ * spend and the free claim entirely. Nothing about the shape of this module changed for it: the
+ * identity the server keys on is the tuple it was already being sent.
  *
  * ⛔ NO PROVIDER CALL FROM THE CLIENT, EVER. This module POSTs a card to `scribe-render` and reads
  * a structured answer back. It holds no key, names no model and knows no prompt: the brief, the
@@ -139,18 +147,25 @@ export function landTabAnswer(settlement, answer, keys) {
  * function names in its own reader (`scribe-render/index.ts`), and nothing else is here: no
  * settlement blob, no seed beyond the one the artefact is keyed to, no token.
  *
+ * ⭐ `tabsExpected` IS THE ONE FIELD W5b ADDED, and it buys nothing at the door: the render's
+ * IDENTITY is still the tuple the server already had (save, epoch, seed), never a client token, so
+ * a forged or dropped value can neither buy a render nor charge for one twice. It is a RECEIPT —
+ * the session row records how many tabs the render owed, so an operator reading a session can tell
+ * a render that finished from one that was abandoned half-drawn.
+ *
  * @param {{saveId: string, advanceSeq: number, renderedFor: string, engineVersion: string,
  *   guidance?: string}} request
- * @param {string} tab @param {object} card @param {object|null} record
+ * @param {string} tab @param {object} card @param {object|null} record @param {number} [tabsExpected]
  * @returns {object}
  */
-export function tabRequestBody(request, tab, card, record) {
+export function tabRequestBody(request, tab, card, record, tabsExpected = 0) {
   return {
     saveId: request.saveId,
     advanceSeq: request.advanceSeq,
     renderedFor: request.renderedFor,
     engineVersion: request.engineVersion,
     tab,
+    tabsExpected: Number(tabsExpected) || 0,
     card,
     // ⭐ FILLED AT W4 car 2 (ruling 21). W2 sent `null` here and said in terms why: the past lane
     // is compact, so a prior card cannot be rebuilt once the settlement has moved. The cure was
@@ -201,7 +216,9 @@ export function retireForRedraw(settlement, how) {
  *
  * @param {{saveId: string, advanceSeq: number, renderedFor: string, engineVersion: string,
  *   settlement: object, guidance: string, reason?: 'open'|'redo'}} request
- * @returns {Promise<{ok: boolean, reason?: string, tabs?: number, landed?: number}>}
+ * @returns {Promise<{ok: boolean, reason?: string, tabs?: number, landed?: number,
+ *   charged?: number}>} `charged` is how many of the tabs the SERVER said it billed for, and on a
+ *   render of any size it is 1 (or 0 when the account's free first render paid for it).
  */
 export async function renderScribe(request) {
   if (!isConfigured) return { ok: false, reason: 'offline' };
@@ -244,12 +261,19 @@ export async function renderScribe(request) {
   // null, in which case the turn says nothing moved — which is W2's behaviour and is never false.
   // Reading it here, before the first tab goes out, is why the first landing may clear it.
   const record = pendingRecordFor(proseOf(settlement), request.advanceSeq);
+  // ⭐⭐ HOW MANY OF THESE TABS WERE CHARGED FOR (W5b). One render is ONE credited act: the server
+  // mints a render session on the first tab it sees for this (save, epoch, seed) and every later
+  // tab of the same render skips the spend entirely, so this counter is the client-side receipt
+  // for the fix — a seven-tab render reports `charged: 1`. It is counted from what the SERVER
+  // answered, never from what the client believes it asked for.
+  let charged = 0;
   for (const tab of tabs) {
     let card;
     try { card = townCard(settlement, { tab, audience: 'dm' }); } catch { card = null; }
     if (!card || !Array.isArray(card.pools) || card.pools.length === 0) continue;
-    const sent = await postTabRender(tabRequestBody(request, tab, card, record), token);
+    const sent = await postTabRender(tabRequestBody(request, tab, card, record, tabs.length), token);
     if (!sent.ok || !sent.data) continue;
+    if (sent.data.charged === true) charged += 1;
     // The version the SERVER reports is the one recorded, never the client's guess.
     next = landTabAnswer(next, sent.data, {
       ...keys,
@@ -258,7 +282,7 @@ export async function renderScribe(request) {
     landed += 1;
   }
 
-  if (landed === 0) return { ok: false, reason: 'nothing-landed', tabs: tabs.length, landed: 0 };
+  if (landed === 0) return { ok: false, reason: 'nothing-landed', tabs: tabs.length, landed: 0, charged };
 
   try {
     store.useStore.setState((state) => {
@@ -275,10 +299,10 @@ export async function renderScribe(request) {
     });
     await persistSaveUpdate(request.saveId, { settlement: next });
   } catch (error) {
-    return { ok: false, reason: String(error?.message || error), tabs: tabs.length, landed };
+    return { ok: false, reason: String(error?.message || error), tabs: tabs.length, landed, charged };
   }
 
-  return { ok: true, tabs: tabs.length, landed };
+  return { ok: true, tabs: tabs.length, landed, charged };
 }
 
 /** Install the transport. Idempotent; called by the dossier's open-trigger hook. */

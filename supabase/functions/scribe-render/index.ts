@@ -29,6 +29,23 @@
  * on migration 118's pattern — `claim_free_scribe` before the spend, `release_free_scribe` on any
  * failure — so it is unfarmable by construction and returned when the render does not land.
  *
+ * ⭐⭐ ONE RENDER, ONE CHARGE (W5b; migration 203). A render is one invocation PER TAB, and until
+ * W5b every one of them ran its own `spend_credits`, so a seven-to-ten-tab render charged 35 to 50
+ * credits where migration 202's header and the redraw button both said five. The cure is a
+ * SERVER-MINTED RENDER SESSION: `open_scribe_render` keys on the tuple the open trigger already
+ * keys on — (account, saveId, advanceSeq, renderedFor) — and tells exactly ONE invocation per
+ * render `first: true`. Only that one claims the free render and only that one spends. Every other
+ * tab runs the model under the same reservation and rate-limit arms (a paid render is not a licence
+ * to be unbounded) and is metered like any call, because COST is per call and the SPEND is per
+ * render. THE TOKEN IS NEVER CLIENT-SUPPLIED: the body is the same body W2 sent, and the server
+ * derives the identity from it.
+ *
+ * ⛔ WHICH FAILURE REFUNDS. A FIRST tab that lands nothing aborts the session and is refunded and
+ * released exactly as before — the reader's next open is a fresh, chargeable render. A LATER tab's
+ * failure refunds NOTHING, because it never spent and because the render has already landed
+ * something: that tab's pools simply draw the hand corpus, which is the floor the whole design
+ * rests on.
+ *
  * ⛔ EVERY RENDERED LINE PASSES THE TIER-0 INSTRUMENTS BEFORE IT IS RETURNED, from
  * `_shared/proseKernel.bundle.js` — the byte-derived copy of the same `refuteUnit` the corpus
  * programme is audited by. A FAIL is dropped and that pool draws the hand corpus. The refuter runs
@@ -174,6 +191,16 @@ export async function handleScribeRender(
   const guard = botGuard(req, 'scribe-render');
   if (guard.reject) return guard.reject;
 
+  /**
+   * ⛔ THE TWO UNDO ARMS LIVE OUTSIDE THE TRY, and that is the W5b fix to the free-claim race.
+   * Both were closures INSIDE the body, so anything that threw between the claim and the response
+   * — a metering insert, `scheduleAutoReload`, a JSON stringify on a huge answer — consumed the
+   * account's one free render and left it consumed. They are declared here, assigned once the user
+   * is known, and run by the outer catch as well as by every typed refusal.
+   */
+  let releaseFreeClaim: () => Promise<void> = () => Promise.resolve();
+  let abortRenderSession: () => Promise<boolean> = () => Promise.resolve(false);
+
   try {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) return json({ error: 'Missing authorization' }, 401, cors);
@@ -222,9 +249,56 @@ export async function handleScribeRender(
       return json({ error: providerKey.message, code: providerKey.code, retryable: providerKey.retryable }, providerKey.status, cors);
     }
 
+    // ⭐⭐ THE RENDER SESSION (W5b; migration 203). Minted AFTER the vault check on purpose: a
+    // session that exists but never called the model would tell the reader's retry `first: false`
+    // and hand them an unpaid render, so nothing mints until every refusal that costs nothing has
+    // already been made. FAIL CLOSED on an error here — the estate's posture for a gate it cannot
+    // read, and the only direction that cannot over-charge. The hand corpus is on the page either
+    // way, so a refused render is a dossier that reads exactly as it did.
+    let sessionId: string | null = null;
+    let sessionFirst = false;
+    let sessionFree = false;
+    try {
+      const { data: opened, error: openErr } = await supabaseAdmin.rpc('open_scribe_render', {
+        p_user: user.id,
+        p_save: saveId,
+        p_seq: advanceSeq,
+        p_rendered_for: renderedFor,
+        p_engine: engineVersion,
+        p_tabs: typeof body?.tabsExpected === 'number' && Number.isFinite(body.tabsExpected) ? body.tabsExpected : 0,
+      });
+      if (openErr) throw new Error(openErr.message);
+      const row = opened as { session_id?: string | null; first?: boolean; free?: boolean | null } | null;
+      sessionId = row?.session_id ?? null;
+      sessionFirst = row?.first === true;
+      sessionFree = row?.free === true;
+      if (!sessionId) throw new Error('open_scribe_render returned no session');
+    } catch (e) {
+      logError('scribe-render', user.id, e, { stage: 'render-session' });
+      return json({ error: 'The dossier survey is temporarily unavailable. Nothing was charged.' }, 503, cors);
+    }
+    abortRenderSession = async () => {
+      if (!sessionId || !sessionFirst) return false;
+      try {
+        const { data, error } = await supabaseAdmin.rpc('abort_scribe_render', { p_session: sessionId });
+        if (error) { logError('scribe-render', user.id, error.message, { stage: 'render-session-abort' }); return true; }
+        return data !== false;
+      } catch (e) {
+        logError('scribe-render', user.id, e, { stage: 'render-session-abort' });
+        // An abort that could not be reached is treated as HAVING released: the user-favourable
+        // direction, because the alternative is silently keeping a free claim they did not get.
+        return true;
+      }
+    };
+
     // ⭐ THE FREE FIRST RENDER (chair ruling 2), on migration 118's atomic pattern: claimed BEFORE
     // the spend, released on EVERY path that does not land a render, so it is unfarmable and never
     // silently consumed by a failure.
+    //
+    // ⭐⭐ AND IT IS CLAIMED ONLY BY THE FIRST TAB OF A RENDER (W5b). Before the session existed,
+    // the claim was taken by the first TAB and the other six of the same render were charged, so
+    // "your first render is free" was true of one seventh of one render. The free claim now rides
+    // the same `first` bit the spend does, which is what makes it a free RENDER.
     let usedFree = false;
     let freeReleased = false;
     const releaseFree = async () => {
@@ -233,11 +307,14 @@ export async function handleScribeRender(
       try { await supabaseAdmin.rpc('release_free_scribe', { p_user: user.id }); }
       catch (e) { logError('scribe-render', user.id, e, { stage: 'free-release' }); }
     };
-    try {
-      const { data: claimed, error: claimErr } = await supabaseAdmin.rpc('claim_free_scribe', { p_user: user.id });
-      if (claimErr) logError('scribe-render', user.id, `claim_free_scribe errored: ${claimErr.message}`, { stage: 'free-claim' });
-      usedFree = claimed === true;
-    } catch (e) { logError('scribe-render', user.id, e, { stage: 'free-claim' }); }
+    releaseFreeClaim = releaseFree;
+    if (sessionFirst) {
+      try {
+        const { data: claimed, error: claimErr } = await supabaseAdmin.rpc('claim_free_scribe', { p_user: user.id });
+        if (claimErr) logError('scribe-render', user.id, `claim_free_scribe errored: ${claimErr.message}`, { stage: 'free-claim' });
+        usedFree = claimed === true;
+      } catch (e) { logError('scribe-render', user.id, e, { stage: 'free-claim' }); }
+    }
 
     let spendId: string | null = null;
     let promptChars = 0;
@@ -298,6 +375,11 @@ export async function handleScribeRender(
         return { allowed: (data as { allowed?: boolean } | null)?.allowed !== false };
       },
       async spend() {
+        // ⭐⭐ ONE RENDER, ONE CHARGE (W5b). A tab that did NOT mint the session is already paid
+        // for: it reports an ok spend with no id, so the orchestrator's refund arm has nothing to
+        // refund, the release arm still runs, and `spend_credits` is never reached. This is the
+        // whole defect, closed in three lines, and the session is what makes them safe.
+        if (!sessionFirst) return { ok: true, spendId: null, elevated: false, balance: null };
         // The free first render skips the charge entirely and reports an ok spend with no id, so
         // the orchestrator's refund arm has nothing to refund and the release arm still runs.
         if (usedFree) return { ok: true, spendId: null, elevated: false, balance: null };
@@ -448,7 +530,13 @@ export async function handleScribeRender(
     }, 'scribe render failed');
 
     if (outcome.outcome !== 'ok') {
-      await releaseFree();
+      // ⭐ THE SESSION IS RELEASED ONLY WHEN THE FIRST TAB LANDED NOTHING, and the free claim
+      // follows it rather than the other way round. `abort_scribe_render` refuses when any tab of
+      // this session has landed, so in the one interleaving where a sibling tab landed while this
+      // first tab failed, the render DID land, the free claim stays spent on it, and the reader's
+      // next open reads the render they have rather than paying for it twice.
+      const released = await abortRenderSession();
+      if (released || !sessionFirst) await releaseFree();
       const status = outcome.status;
       const message = outcome.outcome === 'cap'
         ? 'The dossier survey is temporarily unavailable. Nothing was charged.'
@@ -469,6 +557,17 @@ export async function handleScribeRender(
       pool.push({ vid: unit.vid, spine: unit.spine, faces: unit.faces, notebook: unit.notebook });
       blocks[unit.blockId][unit.poolKey] = pool;
     }
+
+    // ⭐ THE TAB IS COUNTED AGAINST THE RENDER, and the render's ONE spend is stamped on the
+    // session the first time it is known. `close_scribe_render_tab` coalesces, so a later tab
+    // passing nulls can never erase the receipt the first tab wrote.
+    try {
+      await supabaseAdmin.rpc('close_scribe_render_tab', {
+        p_session: sessionId,
+        p_spend: sessionFirst ? spendId : null,
+        p_free: sessionFirst ? usedFree : null,
+      });
+    } catch (e) { logError('scribe-render', user.id, e, { stage: 'render-session-close' }); }
 
     // The reader is coming back for more tabs of this same dossier, so the session's own reload
     // window is extended here exactly as every other credited surface extends it.
@@ -495,7 +594,13 @@ export async function handleScribeRender(
       patched,
       calls,
       balance: outcome.balance,
-      free: usedFree,
+      free: sessionFirst ? usedFree : sessionFree,
+      // ⭐⭐ WHICH TAB PAID FOR THIS RENDER. `charged` is true on EXACTLY ONE invocation of a
+      // render and false on every other, which is the figure a pilot reads to prove the whole
+      // defect closed: seven tabs, one `charged: true`. `first` is the same bit named for what it
+      // is about the SESSION rather than about the money.
+      first: sessionFirst,
+      charged: sessionFirst && !usedFree,
       usage: {
         input: usage.input, output: usage.output,
         cacheRead: usage.cacheRead, cacheWrite: usage.cacheWrite,
@@ -505,6 +610,12 @@ export async function handleScribeRender(
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     logError('scribe-render', null, message, { stage: 'outer' });
+    // ⛔ THE UNDO ARMS RUN HERE TOO (W5b). Anything that threw after the claim — the metering
+    // insert, the reload scheduler, a stringify — used to leave the account's one free render
+    // consumed by a render the reader never received, and the session holding the epoch's slot so
+    // the retry read as already paid. Both are now released on this path as well.
+    try { await abortRenderSession(); } catch { /* the log above is the record */ }
+    try { await releaseFreeClaim(); } catch { /* idempotent by construction (202) */ }
     return json({ error: 'The survey could not be written this time.' }, 500, getCorsHeaders(req));
   }
 }

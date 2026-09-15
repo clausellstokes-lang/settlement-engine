@@ -518,6 +518,79 @@ describe('THE SCRIBE — the render SKU is one number in two places', () => {
   });
 });
 
+/**
+ * ⭐⭐ ONE RENDER, ONE CHARGE (W5b; migration 203). A render of a dossier is seven to ten edge
+ * invocations, one per firing tab, and until W5b every one of them ran its own
+ * `spend_credits('dossierProse')` — so the five-credit price migration 202's header and the redraw
+ * button both quoted was false by a factor of the tab count, and the once-per-account free render
+ * was consumed by the first tab.
+ *
+ * THE SERIALISER IS THE DATABASE, and these arms pin it AS SQL, because the Deno suite models the
+ * rule with a Map and a model of a rule cannot prove the rule. What must hold is exactly three
+ * things: one live session per tuple (a partial unique index), a mint that cannot double-mint
+ * under a race (`insert ... on conflict do nothing` plus a re-select), and a slot that is released
+ * by superseding rather than by deleting, so the day's history survives for the governor to count.
+ */
+describe('THE SCRIBE — the render session is the whole-render identity (migration 203)', () => {
+  const sql203 = () => readFileSync(join(ROOT, 'supabase', 'migrations', '203_scribe_render_session.sql'), 'utf8');
+
+  it('holds ONE LIVE SESSION per (user, save, advance_seq, rendered_for)', () => {
+    const sql = sql203();
+    expect(sql).toMatch(/create unique index if not exists scribe_render_sessions_live_key/);
+    expect(sql).toMatch(/on public\.scribe_render_sessions \(user_id, save_id, advance_seq, rendered_for\)/);
+    // PARTIAL on the live rows: a superseded session releases the slot without losing the record.
+    expect(sql).toMatch(/where superseded_at is null;/);
+  });
+
+  it('mints with insert-on-conflict-do-nothing and RE-SELECTS, so a race cannot double-mint', () => {
+    const sql = sql203();
+    const open = sql.slice(sql.indexOf('function public.open_scribe_render'));
+    expect(open).toMatch(/insert into public\.scribe_render_sessions/);
+    expect(open).toMatch(/on conflict \(user_id, save_id, advance_seq, rendered_for\) where superseded_at is null/);
+    expect(open).toMatch(/do nothing/);
+    // The loser of the race READS the winner's row rather than inventing one.
+    expect(open).toMatch(/select s\.id, s\.free, s\.tabs_landed/);
+    expect(open).toMatch(/v_first := false;/);
+  });
+
+  it('NOTHING IS DELETED: an expired or aborted session is superseded, never dropped', () => {
+    const sql = sql203();
+    expect(sql).not.toMatch(/delete from public\.scribe_render_sessions/);
+    expect(sql).toMatch(/set superseded_at = now\(\)/);
+    // The abort refuses once any tab has landed — the render landed, so the charge stands.
+    const abort = sql.slice(sql.indexOf('function public.abort_scribe_render'));
+    expect(abort).toMatch(/and tabs_landed = 0;/);
+  });
+
+  it('every function is SECURITY DEFINER, pg_temp-pinned and service-role only', () => {
+    const sql = sql203();
+    for (const fn of ['open_scribe_render', 'close_scribe_render_tab', 'abort_scribe_render']) {
+      expect(sql, `${fn} must be created here`).toMatch(new RegExp(`^create or replace function public\\.${fn}\\(`, 'm'));
+      expect(sql).toMatch(new RegExp(`grant execute on function public\\.${fn}\\([^)]*\\) to service_role;`));
+      expect(sql).not.toMatch(new RegExp(`grant execute on function public\\.${fn}\\([^)]*\\) to authenticated`));
+    }
+    // One pin per function plus the governor's (car 4), all pg_temp LAST.
+    expect(sql.match(/set search_path = public, pg_temp/g).length).toBeGreaterThanOrEqual(3);
+    expect(sql).not.toMatch(/set search_path = public;/);
+    // The table itself is deny-all with no policy at all.
+    expect(sql).toMatch(/alter table public\.scribe_render_sessions enable row level security;/);
+    expect(sql).not.toMatch(/create policy .* on public\.scribe_render_sessions/);
+  });
+
+  it('the edge opens the session before it claims or spends, and only the first tab does either', () => {
+    const src = readFunction('scribe-render');
+    const openAt = src.indexOf("rpc('open_scribe_render'");
+    const claimAt = src.indexOf("rpc('claim_free_scribe'");
+    const spendAt = src.indexOf("rpc('spend_credits'");
+    expect(openAt).toBeGreaterThan(0);
+    expect(claimAt).toBeGreaterThan(openAt);
+    expect(spendAt).toBeGreaterThan(openAt);
+    // The two money acts are both behind the same `first` bit.
+    expect(src).toMatch(/if \(sessionFirst\) \{/);
+    expect(src).toMatch(/if \(!sessionFirst\) return \{ ok: true, spendId: null/);
+  });
+});
+
 describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
   let src;
   let pricing;

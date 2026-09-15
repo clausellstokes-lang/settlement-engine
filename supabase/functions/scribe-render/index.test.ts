@@ -16,6 +16,13 @@
  *   - a whole-chain REFUSAL is not an error and not a line;
  *   - the cache-read receipt is returned, because it is the one economic claim the design says
  *     no test can prove and this is as close as a stub can get: the figure is passed through.
+ *
+ * ⭐⭐ W5b ADDS THE ARM THE WHOLE WAVE EXISTS FOR: ONE RENDER, ONE CHARGE. A render is many tab
+ * invocations, and the fake below is a MODEL OF MIGRATION 203'S SERIALISER — one live session per
+ * (user, save, advance_seq, rendered_for), minted by whichever caller wins and joined by the rest.
+ * The arms drive three and seven tabs of one render through the REAL handler and count what
+ * actually reached `spend_credits` and `claim_free_scribe`. The SQL those arms model is pinned
+ * separately, as SQL, in tests/edgeFunctions/contracts.test.js.
  */
 import { assert, assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
@@ -74,12 +81,58 @@ function makeUserClient(spendResult: Record<string, unknown>, rpc: Array<{ fn: s
   return () => client;
 }
 
+/**
+ * ⭐⭐ A MODEL OF MIGRATION 203'S SERIALISER, and the only stateful stub in this file. The SQL
+ * holds ONE live session per (user, save, advance_seq, rendered_for) with a partial unique index
+ * and mints it with `insert ... on conflict do nothing`; this Map is that index. `first` is true
+ * for the caller that minted and false for every caller that joined, `expire()` is the TTL running
+ * out, and `abort` refuses once any tab has landed — each of which is one line of the SQL.
+ */
+function renderSessions() {
+  const live = new Map<string, { id: string; free: boolean | null; landed: number }>();
+  const all = new Map<string, { id: string; free: boolean | null; landed: number }>();
+  let minted = 0;
+  const keyOf = (a: Record<string, unknown>) => [a.p_user, a.p_save, a.p_seq, a.p_rendered_for].join('::');
+  return {
+    open(args: Record<string, unknown>) {
+      const key = keyOf(args);
+      const held = live.get(key);
+      if (held) return { session_id: held.id, first: false, free: held.free, tabs_landed: held.landed };
+      minted += 1;
+      const row = { id: `sess_${minted}`, free: null as boolean | null, landed: 0 };
+      live.set(key, row);
+      all.set(row.id, row);
+      return { session_id: row.id, first: true, free: null, tabs_landed: 0 };
+    },
+    close(args: Record<string, unknown>) {
+      const row = all.get(String(args.p_session));
+      if (!row) return null;
+      row.landed += 1;
+      if (row.free === null && typeof args.p_free === 'boolean') row.free = args.p_free;
+      return null;
+    },
+    abort(args: Record<string, unknown>) {
+      const row = all.get(String(args.p_session));
+      if (!row || row.landed > 0) return false;
+      for (const [k, v] of live) if (v.id === row.id) live.delete(k);
+      return true;
+    },
+    /** The TTL running out: the row survives, its hold on the live key does not. */
+    expire() { live.clear(); },
+    minted: () => minted,
+  };
+}
+
 function makeAdminClient(
-  // deno-lint-ignore no-explicit-any
-  opts: { active?: boolean | null; freeClaim?: boolean; events?: any[] },
+  opts: {
+    active?: boolean | null; freeClaim?: boolean;
+    // deno-lint-ignore no-explicit-any
+    events?: any[]; sessions?: ReturnType<typeof renderSessions>; openError?: boolean;
+  },
   // deno-lint-ignore no-explicit-any
   rpc: Array<{ fn: string; args: any }>,
 ) {
+  const sessions = opts.sessions ?? renderSessions();
   // deno-lint-ignore no-explicit-any
   const client: any = {
   // deno-lint-ignore no-explicit-any
@@ -89,6 +142,12 @@ function makeAdminClient(
       const v = opts.active === undefined ? true : opts.active;
       return Promise.resolve({ data: v, error: v === null ? { message: 'blew up' } : null });
     }
+    if (fn === 'open_scribe_render') {
+      if (opts.openError) return Promise.resolve({ data: null, error: { message: 'session table unreachable' } });
+      return Promise.resolve({ data: sessions.open(args), error: null });
+    }
+    if (fn === 'close_scribe_render_tab') return Promise.resolve({ data: sessions.close(args), error: null });
+    if (fn === 'abort_scribe_render') return Promise.resolve({ data: sessions.abort(args), error: null });
     if (fn === 'reserve_ai_spend') return Promise.resolve({ data: { allowed: true, reservation_id: 'res_1' }, error: null });
     if (fn === 'consume_ai_generate_rate_limit') return Promise.resolve({ data: { allowed: true }, error: null });
     if (fn === 'claim_free_scribe') return Promise.resolve({ data: opts.freeClaim === true, error: null });
@@ -436,4 +495,160 @@ scopedEnv.test('a missing Authorization header is 401 and touches nothing', asyn
     method: 'POST', body: '{}', headers: { 'Content-Type': 'application/json' },
   }), {});
   assertEquals(res.status, 401);
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ W5b — ONE RENDER, ONE CHARGE (migration 203)
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// The defect: a render is one invocation PER TAB and every one of them ran its own
+// `spend_credits`, so a seven-tab render charged seven times what migration 202's header and the
+// redraw button both said. Every arm below drives the REAL handler over a whole render.
+
+/** One tab of a render. Same save, same epoch, same seed: that tuple IS the render's identity. */
+const tabBody = (tab: string) => ({ ...BODY, tab, card: { ...CARD, tab }, tabsExpected: 3 });
+
+scopedEnv.test('⭐⭐ A THREE-TAB RENDER SPENDS ONCE, CLAIMS THE FREE RENDER ONCE, AND SAYS SO', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  const flags: boolean[] = [];
+  for (const tab of ['defense', 'power', 'daily_life']) {
+    const res = await handleScribeRender(request(tabBody(tab)), {
+      userClient: makeUserClient({ ok: true, spend_id: 's1', balance: 30 }, u),
+      adminClient: makeAdminClient({ sessions }, a),
+      anthropicFetch: providerReturning([lawfulUnit]),
+    });
+    assertEquals(res.status, 200, `${tab} landed`);
+    const body = await res.json();
+    flags.push(body.charged === true);
+    assertEquals(body.first, flags.length === 1, `${tab} knows whether it minted the render`);
+  }
+  assertEquals(count(u, 'spend_credits'), 1, 'ONE render, ONE charge — this is the whole wave');
+  assertEquals(count(a, 'claim_free_scribe'), 1, 'and the free claim is asked for exactly once');
+  assertEquals(flags, [true, false, false], 'exactly one tab reports that it was charged');
+  assertEquals(sessions.minted(), 1, 'three tabs of one render are one session');
+  assertEquals(count(a, 'close_scribe_render_tab'), 3, 'every landed tab is counted against it');
+});
+
+scopedEnv.test('⭐ THE FREE FIRST RENDER COVERS THE WHOLE RENDER, not its first tab', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  const frees: boolean[] = [];
+  for (const tab of ['defense', 'power', 'war']) {
+    const res = await handleScribeRender(request(tabBody(tab)), {
+      userClient: makeUserClient({ ok: true, spend_id: 'never' }, u),
+      // The claim is atomic in the real thing; here it answers true whenever it is ASKED, which is
+      // the harder stub: if a later tab asked, this arm would see a second `free: true`.
+      adminClient: makeAdminClient({ sessions, freeClaim: true }, a),
+      anthropicFetch: providerReturning([lawfulUnit]),
+    });
+    frees.push((await res.json()).free === true);
+  }
+  assertEquals(count(u, 'spend_credits'), 0, 'a free render charges nothing at all');
+  assertEquals(count(a, 'claim_free_scribe'), 1, 'the free claim is taken once, by the render');
+  assertEquals(frees, [true, true, true], 'and every tab of it reads as free');
+  assertEquals(count(a, 'release_free_scribe'), 0, 'nothing failed, so nothing came back');
+});
+
+scopedEnv.test('⭐ A LATER TAB THAT FAILS REFUNDS NOTHING: the render already landed', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  const res = await handleScribeRender(request(tabBody('power')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: () => Promise.resolve(new Response('down', { status: 503 })),
+  });
+  assertEquals(res.status, 502, 'that tab drew nothing, so its pools keep the hand corpus');
+  assertEquals(count(u, 'spend_credits'), 1, 'it never spent, so there is nothing to double-count');
+  assertEquals(count(a, 'refund_credits'), 0, 'and nothing to refund: the render landed');
+});
+
+scopedEnv.test('⭐ A FIRST TAB THAT FAILS ABORTS THE SESSION, so the retry is a fresh render', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  const failed = await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 'spend_a' }, u),
+    adminClient: makeAdminClient({ sessions, freeClaim: true }, a),
+    anthropicFetch: () => Promise.resolve(new Response('down', { status: 503 })),
+  });
+  assertEquals(failed.status, 502);
+  assertEquals(count(a, 'abort_scribe_render'), 1);
+  assertEquals(count(a, 'release_free_scribe'), 1, 'the free claim comes back with the session');
+  // The slot is free again, so the reader's next open MINTS rather than joins.
+  const again = await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 'spend_b' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(again.status, 200);
+  assertEquals((await again.json()).first, true, 'a render that landed nothing was never a render');
+  assertEquals(sessions.minted(), 2);
+});
+
+scopedEnv.test('⭐ AN EXPIRED SESSION RE-CHARGES: the TTL is what makes a later render a render', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(count(u, 'spend_credits'), 1);
+  // NEGATIVE CONTROL first: inside the TTL a second tab of the same tuple joins and never spends.
+  await handleScribeRender(request(tabBody('power')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(count(u, 'spend_credits'), 1);
+  sessions.expire();
+  const later = await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's2' }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals((await later.json()).charged, true);
+  assertEquals(count(u, 'spend_credits'), 2, 'a render after the TTL is a new render and is paid for');
+});
+
+scopedEnv.test('⭐ TWO CONCURRENT FIRST TABS CHARGE ONCE: the database is the serialiser', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  const deps = () => ({
+    userClient: makeUserClient({ ok: true, spend_id: 's1', balance: 20 }, u),
+    adminClient: makeAdminClient({ sessions }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  const [one, two] = await Promise.all([
+    handleScribeRender(request(tabBody('defense')), deps()),
+    handleScribeRender(request(tabBody('power')), deps()),
+  ]);
+  const charged = [(await one.json()).charged, (await two.json()).charged];
+  assertEquals(charged.filter(Boolean).length, 1, 'exactly one of the two paid');
+  assertEquals(count(u, 'spend_credits'), 1);
+  assertEquals(sessions.minted(), 1);
+});
+
+scopedEnv.test('⛔ AN UNREADABLE SESSION FAILS CLOSED, and nothing is charged or claimed', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: makeAdminClient({ openError: true, freeClaim: true }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(res.status, 503);
+  assertEquals(count(u, 'spend_credits'), 0);
+  assertEquals(count(a, 'claim_free_scribe'), 0, 'the free render is not spent on a gate we cannot read');
+  assert(!names(a).includes('reserve_ai_spend'), 'and no reservation is taken either');
 });
