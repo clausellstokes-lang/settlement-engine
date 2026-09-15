@@ -279,7 +279,9 @@ export function legitimacyLensPoolKey(legitimacy) {
  * reds instead of quietly disagreeing about a settlement.
  *
  * ⛔ MATCHED ON THE LABEL'S FIRST WORD, NEVER ON A SUBSTRING, AND THIS IS A BUG FIX RATHER
- * THAN A STYLE CHOICE. The producer emits `Fractured — no stable governing authority`.
+ * THAN A STYLE CHOICE. The producer emits `Fractured (no stable governing authority)`
+ * (and, on every save written before LT41b RULING 3, `Fractured — no stable governing
+ * authority`; this reader takes the first word and is indifferent to which arrives).
  * A substring test for `stable` MATCHES IT, and would print "The hall is settled" about a
  * settlement that has no governing authority at all — a false statement about the world,
  * which is the one outcome this subsystem exists to refuse. Every label the producer can
@@ -293,7 +295,9 @@ export function legitimacyLensPoolKey(legitimacy) {
  * existing worlds), and it is raised for the chair rather than patched here.
  *
  * ⚠ `siege matched` IS CHECKED BEFORE THE FIRST WORD, and it costs a pool. The only label
- * carrying either token is `Critical (active siege — survival priority)`, so exactly one of
+ * carrying either token is `Critical (active siege, survival priority)` (spelled
+ * `Critical (active siege — survival priority)` on saves older than LT41b RULING 3 — the
+ * `\bsiege\b` test reads both), so exactly one of
  * `siege matched` / `critical matched` can ever fire. The siege prose ("the walls have
  * settled it") is written for precisely that state and the critical prose is the general
  * case, so most-specific-wins takes siege — the same rule DS-POW-1's lens uses.

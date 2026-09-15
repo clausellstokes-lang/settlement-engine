@@ -2,6 +2,19 @@
  * domain/display/labelBands.js — THE ONE band-word recovery for generated
  * display labels (`"<Band> — <gloss>"`, `"<Band> (<gloss>)"`, `"<Band>; <note>"`).
  *
+ * ⭐ THE STABILITY PRODUCER NOW EMITS ONE OF THOSE THREE, AND THIS READER STILL
+ * ACCEPTS ALL THREE, FOREVER. LT41b RULING 3 (the chair, 2026-09-15) collapsed
+ * `governanceNarrative.js` onto `"<Band> (<gloss>)"` — the form seven of its
+ * siblings already used, the only one of the three carrying no em dash. THE
+ * RETIRED SPELLINGS ARE NOT A LEGACY TO CLEAN UP: the label is PERSISTED in
+ * every save ever written, there is NO migration and NO save rewrite (every
+ * existing world is test data, the owner's law), so a ` — ` or `; ` label will
+ * keep arriving here for as long as the product exists. `bandOf` never read the
+ * separator in the first place — that is the whole cure below — so tolerance
+ * costs nothing and is pinned by a test that feeds the nine retired spellings
+ * through this recovery and demands the same band as their live twins.
+ * ⛔ Do not "tidy" that tolerance away, and do not narrow this header to one form.
+ *
  * ════════════════════════════════════════════════════════════════════════════
  * THE DEFECT THIS EXISTS TO MAKE IMPOSSIBLE
  * ════════════════════════════════════════════════════════════════════════════
@@ -26,10 +39,13 @@
  *     authored the six missing band words — see COMPLEXITY_BAND_BY_LABEL. The
  *     same census now reports 0 of 360.
  *
- *  2. ⚠ AND IT BREAKS ON ANY RE-WORDING. `powerStructure.stability` alone uses
+ *  2. ⚠ AND IT BREAKS ON ANY RE-WORDING. `powerStructure.stability` alone used
  *     THREE separator conventions in one producer (` — `, ` (…)`, `; `), which is
- *     why the SummaryTab expression is a three-delimiter cascade. Every prose pass
- *     over a gloss is a silent break in a file nobody edited.
+ *     why the SummaryTab expression was a three-delimiter cascade. Every prose pass
+ *     over a gloss is a silent break in a file nobody edited. The producer has
+ *     since been collapsed onto ONE convention (LT41b RULING 3), which removes the
+ *     HABITAT; it does not remove the need for this file, because the two retired
+ *     spellings are persisted on every existing save and arrive here still.
  *
  * ════════════════════════════════════════════════════════════════════════════
  * THE CURE: A CLOSED VOCABULARY, NOT A DELIMITER
@@ -77,8 +93,11 @@ export const SAFETY_BANDS = Object.freeze([
 /**
  * STABILITY — every label `governanceNarrative.js` can return, by its band word.
  * `deriveBaselineStability` supplies the first eight; `applyStressStability`
- * supplies the rest and may append `'; monster threat active'`
- * (`annotateMonsterThreat`). Three separator conventions, one vocabulary.
+ * supplies the rest and `annotateMonsterThreat` may fold `'monster threat active'`
+ * INTO the gloss (it appended `'; monster threat active'` before LT41b RULING 3).
+ * ONE separator convention live, THREE still arriving off saves, one vocabulary —
+ * and the vocabulary is what this file matches on, which is why the collapse moved
+ * not one word below.
  * @type {ReadonlyArray<string>}
  */
 export const STABILITY_BANDS = Object.freeze([

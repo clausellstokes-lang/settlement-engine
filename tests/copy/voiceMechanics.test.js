@@ -81,6 +81,15 @@
  *      strings pass by the named allowlist, leaving 39 over 8 files as Tier 5's first
  *      freeze. Re-measure by running this file — every number above is one it computes.
  *
+ *   ⭐ AND THE ALLOWLIST'S OWN FIRST SHRINK, LT41b car 6 (2026-09-15): 21 distinct
+ *      label-band strings over 5 generator files → 12 over 4, and 23 declared
+ *      occurrences → 14. `governanceNarrative.js`'s nine went when RULING 3 collapsed
+ *      that producer onto `<Band> (<gloss>)`. ⚠ THE PER-FILE BASELINE DOES NOT MOVE FOR
+ *      THAT FILE AND NEVER COULD: an allowlisted literal counts as em 0, so
+ *      governanceNarrative.js was never IN the baseline. The win is in this list, not
+ *      in that JSON, and saying so is the difference between a banked win and a
+ *      number nobody can reproduce.
+ *
  *   ⭐ AND THE FIRST SHRINK, LT41b car 4 (2026-09-15): 39 over 8 files → 28 over 7. The
  *      ELEVEN prose dashes in `src/generators/crossSettlementConflicts.js` were RECAST
  *      without the dash by the chair's own authored sentences, on the owner's delegated
@@ -301,18 +310,20 @@ function walkJs(dir, out = []) {
 // em dash in that file, which is the one place a by-name allowlist is genuinely
 // loose. With it, a copy that appears and a copy that disappears both red, and
 // the arm's message says which direction moved.
+// ⭐ NINE ENTRIES RETIRED HERE AT LT41b RULING 3 (the chair, 2026-09-15), AND THE
+// FILE THEY EXEMPTED IS GONE FROM THIS LIST ENTIRELY.
+// `src/generators/power/governanceNarrative.js` used to declare nine `Word — gloss`
+// public-order bands. The ruling collapsed that producer's THREE separator
+// conventions (` — `, ` (…)`, `; `) onto the ONE seven of its own siblings already
+// used — `<Band> (<gloss>)`, the only one of the three carrying no em dash — so
+// there is nothing left in that file to exempt. An exemption is a debt, not a
+// right: when the string it covers stops existing the entry goes, and the `EXACT`
+// arm below would have reported `measured 0 (GONE — strike the entry and bank the
+// win)` if it had been left behind. THE BAND WORDS DID NOT CHANGE, which is why
+// tests/lint/vocabularyTotality.walker.test.js stays green with NO entry added or
+// removed. The remaining twelve generator strings are genuine `Word — gloss`
+// vocabularies whose producers were not in this ruling's scope.
 const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
-  'src/generators/power/governanceNarrative.js': Object.freeze({
-    'Unstable — criminal governance': { count: 1, why: 'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").' },
-    'Critical (active siege — survival priority)': { count: 1, why: 'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.' },
-    'Fractured — no stable governing authority': { count: 1, why: 'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.' },
-    'Shaken — institutional trust collapsed': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
-    'Desperate — hunger is eroding order': { count: 1, why: 'public-order band, applyStressStability :301 — the `famine` stressor override.' },
-    'Anxious — disease is overriding normal authority': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
-    'Volatile — power is available to whoever moves first': { count: 1, why: 'public-order band, applyStressStability :307 — the `succession_void` stressor override.' },
-    'Strained — debt obligations constrain every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
-    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.' },
-  }),
   'src/generators/economy/prosperity.js': Object.freeze({
     'Highly diversified — multiple major revenue streams': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.' },
     'Diversified — broad institutional economic base': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :298 — labelBands.js COMPLEXITY_LABEL.DIVERSIFIED transcribes it.' },

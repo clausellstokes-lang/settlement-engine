@@ -3,7 +3,7 @@
   "stamp": {
     "files": {
       "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-      "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
+      "src/domain/display/stateProse/powerStateProse.js": "f24843cc2099f43055e89855d2b3d264f8be4ae1ab02b7c5a8e87d47bfa4ecee",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
       "src/domain/display/stateProse/defenseStateProse.js": "8aeeba2e1fc32113aefaa6900056902d41feeec481ee87ac3d4d06d4c62855a2",
       "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",

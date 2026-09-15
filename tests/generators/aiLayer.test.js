@@ -96,6 +96,13 @@ describe('stability label handling (no more "Tense (external threat)/100")', () 
     expect(isOrderedStability('Enforced Order (authoritarian)')).toBe(true);
     expect(isOrderedStability('Rigid (militant theocracy)')).toBe(true);
     expect(isOrderedStability('Tense (external threat)')).toBe(false);
+    expect(isOrderedStability('Unstable (criminal governance)')).toBe(false);
+    expect(isOrderedStability('Fractured (no stable governing authority)')).toBe(false);
+    // ⛔ THE RETIRED SPELLINGS ARE KEPT, NOT REPLACED. LT41b RULING 3 collapsed the
+    // producer onto `<Band> (<gloss>)`, but the label is PERSISTED: every save written
+    // before that ruling still carries ` — ` and reaches this reader. `ORDERED_STABILITY_RE`
+    // anchors on the BAND WORD and never read the separator, so both spellings answer the
+    // same — which is the property, and it has to stay pinned on both sides of the change.
     expect(isOrderedStability('Unstable — criminal governance')).toBe(false);
     expect(isOrderedStability('Fractured — no stable governing authority')).toBe(false);
     expect(isOrderedStability(null)).toBe(false);

@@ -389,24 +389,78 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
  */
 const POW2 = 'DS-POW-2';
 
-/** Every stability label `governanceNarrative.js` can emit, and the pool each must reach. */
+const FLOOR = 'no token matched: unclassified (the plain-description floor)';
+
+/**
+ * Every stability label `governanceNarrative.js` can emit TODAY, and the pool each must
+ * reach. ⭐ RE-SYNCED AT LT41b RULING 3 (the chair, 2026-09-15), which collapsed the
+ * producer's three separator conventions onto ONE, `<Band> (<gloss>)`. This table's
+ * contract is PRODUCER FIDELITY — "what the producer actually emits, not the pool keys
+ * alone" — so it moves when the producer moves, and RETIRED_STABILITY below carries the
+ * spellings it used to hold.
+ * ⚠ ONE ROW WAS ALREADY UNFAITHFUL BEFORE THIS RE-SYNC, and it is corrected here rather
+ * than carried: the Suppressed row read `(under occupation — resistance simmers)` while
+ * the producer has written a COLON since the label was authored. Nothing depended on it
+ * (both spellings floor-match), which is exactly how a fidelity table rots.
+ */
 const REAL_STABILITY = Object.freeze([
   ['Stable', 'stable matched'],
   ['Stable (theocratic governance)', 'stable matched'],
   ['Unstable (pervasive organized crime)', 'unstable matched'],
+  ['Unstable (criminal governance)', 'unstable matched'],
+  // ⚠ SIX ROWS THE TABLE NEVER HAD, ADDED HERE SO ITS OWN SENTENCE IS TRUE. The header
+  // has always said "every stability label governanceNarrative.js can emit"; MEASURED by
+  // extracting the literals the three stability functions return, the producer emits 21
+  // and this table held 15 of them. Every one of the six lands on the floor, which is why
+  // nothing noticed — and a fidelity table that is quietly missing a quarter of its
+  // producer cannot red when a NEW label arrives that the ladder should have caught.
+  // It is now 21 of 21, plus one composed monster-threat fold.
+  ['Enforced Order (authoritarian)', FLOOR],
+  ['Rigid (militant theocracy)', FLOOR],
+  ['Fragile (private security, no public law)', FLOOR],
+  ['Tense (militarised, chronically underfunded)', FLOOR],
+  ['Strained (debt obligations constrain every decision)', FLOOR],
+  ['Tense (monster pressure from surrounding region)', FLOOR],
+  ['Volatile (power is available to whoever moves first)', 'unstable matched'],
+  ['Critical (active siege, survival priority)', 'siege matched'],
+  ['Desperate (hunger is eroding order)', 'Desperate matched'],
+  // ⛔ THE REGRESSION PIN. A substring test for `stable` MATCHES "no stable governing
+  // authority" and would print "The hall is settled" about a settlement that has none.
+  ['Fractured (no stable governing authority)', FLOOR],
+  ['Shaken (institutional trust collapsed)', FLOOR],
+  ['Tense (external threat)', FLOOR],
+  ['Anxious (disease is overriding normal authority)', FLOOR],
+  ['Suppressed (under occupation: resistance simmers)', FLOOR],
+  ['Ordered (strong military presence)', FLOOR],
+  ['Vulnerable (prosperous but underdefended)', FLOOR],
+  // The monster-threat note folds into the gloss rather than hanging off a semicolon.
+  ['Unstable (criminal governance, monster threat active)', 'unstable matched'],
+  ['Tense (regional monster threat)', FLOOR],
+]);
+
+/**
+ * ⛔ THE RETIRED SPELLINGS, AND WHY THEY ARE A PIN RATHER THAN HISTORY. The stability
+ * label is PERSISTED on `powerStructure.stability`, there is NO migration and NO save
+ * rewrite (every existing world is test data — the owner's law), so EVERY save written
+ * before LT41b RULING 3 still carries one of these and still arrives at this reader.
+ * `stabilityPoolKey` takes the label's FIRST WORD and pre-tests `\bsiege\b`, so it never
+ * read the separator — but "never read it" is a property, and a property that is not
+ * pinned is a property that gets optimised away. Each row must reach THE SAME POOL as its
+ * live twin above.
+ */
+const RETIRED_STABILITY = Object.freeze([
   ['Unstable — criminal governance', 'unstable matched'],
   ['Volatile — power is available to whoever moves first', 'unstable matched'],
   ['Critical (active siege — survival priority)', 'siege matched'],
   ['Desperate — hunger is eroding order', 'Desperate matched'],
-  // ⛔ THE REGRESSION PIN. A substring test for `stable` MATCHES "no stable governing
-  // authority" and would print "The hall is settled" about a settlement that has none.
-  ['Fractured — no stable governing authority', 'no token matched: unclassified (the plain-description floor)'],
-  ['Shaken — institutional trust collapsed', 'no token matched: unclassified (the plain-description floor)'],
-  ['Tense (external threat)', 'no token matched: unclassified (the plain-description floor)'],
-  ['Anxious — disease is overriding normal authority', 'no token matched: unclassified (the plain-description floor)'],
-  ['Suppressed (under occupation — resistance simmers)', 'no token matched: unclassified (the plain-description floor)'],
-  ['Ordered (strong military presence)', 'no token matched: unclassified (the plain-description floor)'],
-  ['Vulnerable (prosperous but underdefended)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Fractured — no stable governing authority', FLOOR],
+  ['Shaken — institutional trust collapsed', FLOOR],
+  ['Anxious — disease is overriding normal authority', FLOOR],
+  ['Strained — debt obligations constrain every decision', FLOOR],
+  ['Tense — regional monster threat', FLOOR],
+  // The retired `<Band>; <note>` annotation form, on both of its own spellings.
+  ['Unstable — criminal governance; monster threat active', 'unstable matched'],
+  ['Unstable (pervasive organized crime); monster threat active', 'unstable matched'],
 ]);
 
 /** A settlement carrying the DS-POW-2 slice. */
@@ -437,6 +491,16 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
       expect(stabilityPoolKey(label), `label ${label}`).toBe(key);
       expect(POWER_POOLS2[key], `no such pool: ${key}`).toBeTruthy();
     }
+    // And every RETIRED spelling still on a persisted save reaches the SAME pool as its
+    // live twin. The separator changed; the reading must not have.
+    for (const [label, key] of RETIRED_STABILITY) {
+      expect(stabilityPoolKey(label), `retired label ${label}`).toBe(key);
+    }
+    // The pin is not vacuous in the direction that matters: the two tables must actually
+    // differ, or a copy-paste would make the tolerance arm assert nothing new.
+    const live = new Set(REAL_STABILITY.map(([l]) => l));
+    expect(RETIRED_STABILITY.filter(([l]) => live.has(l)), 'a retired spelling is still live')
+      .toEqual([]);
   });
 
   it('⛔ REGRESSION: a negated token never matches — "no stable governing authority"', () => {
@@ -462,11 +526,18 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
     const arcOf = (label) => likelyFutureFacts({ powerStructure: { stability: label } }).arc;
     expect(arcOf('Stable')).toBe('continuity');
     expect(arcOf('Unstable (pervasive organized crime)')).toBe('test');
+    expect(arcOf('Volatile (power is available to whoever moves first)')).toBe('test');
+    expect(arcOf('Critical (active siege, survival priority)')).toBe('crisis');
+    expect(arcOf('Desperate (hunger is eroding order)')).toBe('crisis');
+    // A monster-threat annotation must not move the classification, in EITHER spelling:
+    // the live one folds the note into the gloss, and every save written before LT41b
+    // RULING 3 carries the retired semicolon form and still arrives here.
+    expect(arcOf('Unstable (criminal governance, monster threat active)')).toBe('test');
+    expect(arcOf('Unstable — criminal governance; monster threat active')).toBe('test');
+    // And the retired ` — ` spellings classify exactly as their live twins do.
     expect(arcOf('Volatile — power is available to whoever moves first')).toBe('test');
     expect(arcOf('Critical (active siege — survival priority)')).toBe('crisis');
     expect(arcOf('Desperate — hunger is eroding order')).toBe('crisis');
-    // A monster-threat annotation appends a suffix and must not move the classification.
-    expect(arcOf('Unstable — criminal governance; monster threat active')).toBe('test');
   });
 
   it('the desk REFINES the canonical arc rather than forking it', () => {
@@ -546,11 +617,13 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
   it('every one of the nine pools renders a real sentence over a state the generator builds', () => {
     const CASES = [
       ['stable matched', ruled('Stable', { factions: DOMINANT_FACTIONS })],
-      ['unstable matched', ruled('Unstable — criminal governance', { factions: DOMINANT_FACTIONS })],
-      ['siege matched', ruled('Critical (active siege — survival priority)', { factions: DOMINANT_FACTIONS })],
-      ['Desperate matched', ruled('Desperate — hunger is eroding order', { factions: DOMINANT_FACTIONS })],
+      ['unstable matched', ruled('Unstable (criminal governance)', { factions: DOMINANT_FACTIONS })],
+      ['siege matched', ruled('Critical (active siege, survival priority)', { factions: DOMINANT_FACTIONS })],
+      ['Desperate matched', ruled('Desperate (hunger is eroding order)', { factions: DOMINANT_FACTIONS })],
       ['no token matched: unclassified (the plain-description floor)', ruled('Tense (external threat)', { factions: DOMINANT_FACTIONS })],
-      ['critical matched', ruled('Critical — the seat is failing', { factions: DOMINANT_FACTIONS })],
+      // `critical matched` has no producer; this label is the SHAPE a future one would
+      // take, so it is spelled in the live convention rather than the retired one.
+      ['critical matched', ruled('Critical (the seat is failing)', { factions: DOMINANT_FACTIONS })],
     ];
     for (const [key, settlement] of CASES) {
       const drawn = powerStateProse(settlement, {}, { seed: `p2-${key}` });
