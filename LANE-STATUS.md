@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 21:25:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 21:30:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 4542feb27 Plan: the Scribe tier proposal for the owner's signature (design §12 item 16, never writt
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 0
+- HOLD-VITEST absent · runner count 3
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -117,11 +117,11 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a0745eb26` ? · DONE · transcript 09-14 21:15 982 KB · 58 tool calls · result: {"summary": "All paths in `where` are RELATIVE TO THE WORKTREE ROOT `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
     - `a534045ec` ? · DONE · transcript 09-14 21:14 882 KB · 28 tool calls · result: {"summary": "The record holds ONE owner sentence that opens a Scribe subscription tier \u2014 2026-09-14 ~13:2x, \"Because I'm thinking that this could actually
     - `afc802268` ? · DONE · transcript 09-14 21:21 517 KB · 6 tool calls · files: SCRIBE_TIER_PROPOSAL.md · result: {"markdown": "# THE SCRIBE TIER PROPOSAL\n\n*File written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4
-- **wf_a788be93-699** (mtime 09-14 21:11): agent calls 4 (4 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 3 — mirror `_progress/wf_a788be93-699/`
-    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:25 1034 KB · 85 tool calls · files: t2.txt, t4.txt, tall.txt, tip_arm1.txt · last: Bash SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+- **wf_a788be93-699** (mtime 09-14 21:11): agent calls 4 (4 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_a788be93-699/`
+    - `a4549bf93` ? · DONE · transcript 09-14 21:28 1126 KB · 87 tool calls · files: t2.txt, t4.txt, tall.txt, tip_arm1.txt · result: {"n": 15, "title": "Document the ten consumed secrets, including the one that breaks the first sale", "stateOfRecord": "THE RECORDS NAME FOUR MEMBERS, AND A LAT
     - `ac66e2c65` ? · DONE · transcript 09-14 21:22 903 KB · 66 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · result: {"n": 42, "title": "The record's own housekeeping \u2014 the deferral sweep's unrun half, the queue-copy trap, three ledger holes, and the 245-section span", "s
-    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:22 1057 KB · 80 tool calls · files: WEBSITE-PLAN-2.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:25 1148 KB · 97 tool calls · files: pm.json, ch2b.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ab7391315` ? · DONE · transcript 09-14 21:26 1167 KB · 81 tool calls · files: WEBSITE-PLAN-2.md · result: {"n": 16, "title": "The money path, and the webhook before any refund", "stateOfRecord": "THE CHARTER IS RULED AND STILL BINDS. ODQ \u00a7470 (docs/OWNER_DECISI
+    - `aee0bf3d5` ? · DONE · transcript 09-14 21:30 1310 KB · 101 tool calls · files: pm.json, ch2b.md · result: {"cars": [{"n": 1, "title": "RE-DERIVE MF-CH2B AT THE LIVE SLOT (read-only; no src bytes)", "files": ["docs/implementation/packets/catalog-hygiene/MF-CH2B.md", 
 - **wf_00f13b26-496** (mtime 09-14 19:35): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
@@ -462,4 +462,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.17 3.39 7.24
+load: 3.74 2.95 5.74
