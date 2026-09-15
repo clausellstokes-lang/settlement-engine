@@ -91,7 +91,7 @@ const FLOOR_MS = 60_000;
  * catches the common miss (a hook that also execs directly), but a pure
  * `await newHelper()` with no in-hook exec is invisible until listed.
  */
-const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb)\s*\(/;
+const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb|boot)\s*\(/;
 
 /** A hook whose callback touches the db at all — the lazy-boot payment surface. */
 const EXEC_RE = /\.exec\s*\(|\.query\s*\(/;
