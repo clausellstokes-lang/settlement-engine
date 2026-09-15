@@ -1,4 +1,4 @@
-# wf_57faeea3-385 — per-agent progress, 2026-09-15 11:20:38
+# wf_57faeea3-385 — per-agent progress, 2026-09-15 11:26:11
     - `ab9ce8924` ? · DONE · transcript 09-14 23:39 1436 KB · 116 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · result: {"n": 28, "title": "The gate cannot go green", "stateOfRecord": "THE RECORD SAYS FIVE THINGS, AND FOUR OF THE FIVE HAVE NO REFERENT LEFT. THE FIFTH IS TRUE ON A
     - `afde2b45d` ? · DONE · transcript 09-14 22:09 1452 KB · 124 tool calls · result: {"n": 29, "title": "The instrument estate's own debt", "stateOfRecord": "SIX CLAIMS, AND THE RECORD ITSELF ALREADY WITHDRAWS ONE OF THEM.\n\n(1) THE 10/10 CENSU
     - `aa21f7b4f` ? · DONE · transcript 09-14 22:05 1182 KB · 90 tool calls · result: {"n": 30, "title": "The reader-without-writer repairs and the blocked whole-tree scan", "stateOfRecord": "THE CARD'S THREE CLAIMS AND WHERE EACH COMES FROM. The
