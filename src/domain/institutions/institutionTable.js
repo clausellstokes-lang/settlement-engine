@@ -138,7 +138,7 @@ export const COLUMN_SOURCES = Object.freeze({
   ]),
   whatItCounts: Object.freeze([
     Object.freeze({ source: 'the settlement\'s INSTANTIATED service rows, on a LIVE institution', cite: 'institutionServices.js:23, :41, :45, …', read: true }),
-    Object.freeze({ source: 'the fired economy income rows', cite: 'economicState.js:215-233 ("Church Tithes", gated on religionInfluence > 55 && hasReligiousInst)', read: true }),
+    Object.freeze({ source: 'the fired economy income rows', cite: 'economicState.js:226-244 ("Church Tithes", gated on religionInfluence > 55 && hasReligiousInst)', read: true }),
     Object.freeze({
       source: 'economicState.treasury.coinFlows.taxed',
       cite: 'settlement.schema.js:628-635 (the ledger is a member of SimEconomicState); '
@@ -355,7 +355,7 @@ export function instantiatedServices(settlement) {
  * THE FIRED ECONOMY INCOME ROWS whose source names a duty kind — CLERK-LAWS §1.2's second
  * named filler for `whatItCounts`, and the one the first cut left unread.
  *
- * ⭐ FIRED, NEVER OFFERED. `economicState.js:215-233` builds "Church Tithes" only behind
+ * ⭐ FIRED, NEVER OFFERED. `economicState.js:226-244` builds "Church Tithes" only behind
  * `religionInfluence > 55 && hasReligiousInst`, so a row present on the settlement is a duty
  * the world HELD this generation — the same standard as an instantiated service row and the
  * opposite of the catalog menu's probability. Measured at this tip: a town carries `Market

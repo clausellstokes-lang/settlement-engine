@@ -163,17 +163,17 @@ export function capturedRulingStructure(settlement) {
  */
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
-  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:862', read: true }),
+  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:873', read: true }),
   viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:565', read: true }),
   criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:585', read: true }),
   economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:100', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
-  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:801', read: true }),
-  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:801', read: true }),
-  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:811', read: true }),
-  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:867', read: true }),
-  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:810', read: true }),
+  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:812', read: true }),
+  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:812', read: true }),
+  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:822', read: true }),
+  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
+  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:544', read: true }),
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:499', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
@@ -209,7 +209,7 @@ export const HOLDER_SOURCES = Object.freeze({
   }),
   blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:684', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
-  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:873', read: true }),
+  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:884', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
   govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:127', read: true }),
