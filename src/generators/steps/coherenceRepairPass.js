@@ -190,6 +190,39 @@ function reconcileAddedRepairReceipts(ctx) {
   ));
 }
 
+/**
+ * ⭐ D-CH-1 IS CLOSED HERE, AND THE ANSWER IS NO: THIS PASS DOES RECEIPT ITS DELETIONS.
+ *
+ * ODQ §503.4 docketed D-CH-1 on the premise that `coherenceRepairPass` "silently deletes
+ * 21/21 institutions the roster asked for as `unsupported_institution` — a repair pass that
+ * deletes without a receipt is a quiet-lie candidate". HALF THAT PREMISE IS FALSE, and it
+ * was false before the docket was written: the splice below is followed IMMEDIATELY by
+ * `recordRepair`, which freezes `{id, type, action:'removed', subject, reason}` onto
+ * `ctx.generationRepairs` AND writes a coherence trace (`targetType:'institution'`,
+ * `step:'coherenceRepairPass'`, `result:'removed'`, with the cause and the reason).
+ * `git log -S "unsupported_institution"` on this file dates that receipt to c1ea091f7
+ * (2026-07-26), a month BEFORE §503.4.
+ *
+ * CONFIRMED BY EXECUTION, not by reading: over the estate's own thirty-settlement scan
+ * (seeds `estate-<tier>-0..4` across six tiers) the pass performed 11 repairs, of which 2
+ * were removals, and BOTH carry the full receipt — e.g. `unsupported_institution ·
+ * Multiple monasteries · "Multiple monasteries had no compatible, non-excluded dependency
+ * at this tier."` Not one removal was anonymous.
+ *
+ * ⚠ WHAT REMAINS TRUE IS NARROWER, AND IT IS A READER PROBLEM, NOT A GENERATOR ONE. The
+ * detail this function records reaches no reader. Both surfaces are AGGREGATE COUNTS:
+ * `generationContracts.js` (`repairCount`) rendered by `IdentityDailyLife.jsx` as "N
+ * repair(s) recorded", and `ViabilityTab.jsx` as "N deterministic repair(s) recorded". So a
+ * reader is told HOW MANY repairs happened and never WHICH institution left. The itemised
+ * surface is priced and deliberately not built here: docs/ENGINE_DEFECT_DISPOSITIONS.md §6.
+ *
+ * ⛔ AND THE UNRECEIPTED DELETION D-CH-1 IMAGINED DOES EXIST — IN A SIBLING, AND AS A
+ * DIFFERENT ACT. `assembleInstitutions.js`'s exclusive-group displacement splices the
+ * DISPLACED row and traces only the INCOMING one, so the row that left is named nowhere.
+ * That is a replacement inside a declared exclusive group rather than a deletion of
+ * something the roster asked for, which is why it is recorded and priced in §6 rather than
+ * cured here. Do not "fix" it in this file: this is not where it happens.
+ */
 function removeUnprotected(ctx, name, type, reason) {
   const index = ctx.institutions.findIndex(institution => (
     normalizedName(institution.name) === normalizedName(name)
