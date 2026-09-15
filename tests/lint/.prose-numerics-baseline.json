@@ -577,7 +577,7 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 494,
+    "line": 506,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
