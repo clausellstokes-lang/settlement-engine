@@ -1,0 +1,9 @@
+    tests/edgeFunctions/aiCharterBundle.freshness.test.js :: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/aiGroundingBundle.freshness.test.js :: Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js :: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals 
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equal
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash eq
+    tests/property/dossierProseManifest.test.js :: the composed-prose manifest — the DRIFT corpus, both audiences ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE
+    tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PR
+    tests/security/pgliteHookTimeoutRatchet.test.js :: pglite hook-timeout ratchet (F4 class habitat removal) helper-name law: hooks may only call constructors the marker can see no hook in the corpus

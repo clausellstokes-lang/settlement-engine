@@ -1,0 +1,33 @@
+Register (§931 doors): the lighting census re-frozen on the composed tree — the union of ten docks' own refreezes, measured once at the tip
+
+Taken at the consist tip bf7a7a2f3 (63 cars over f73bdbf16) after every content car, under the gate mutex, by
+run-registers-930.sh in its recorded order. THE ONE REGISTER THAT MOVES IS THE LIGHTING CENSUS: ten docks re-froze
+it on their own tips (the consist carried LT41b's copy after the last compose), so the composed tree is re-measured
+as one union, by the instrument's own ritual (the refreeze arm exits non-zero BY DESIGN; the plain re-run is the proof):
+  files       2563 -> 2572   (nine new source-phase test files across LT36, LT39, LT42)
+  parked       375 ->  377
+  credited    2188 -> 2195
+  titles     24169 -> 24309
+  suiteTitles 6452 -> 6483
+  measuredAtSha bf7a7a2f34dcb7e57edb0aa3f610132ab3f255d7
+  LIGHTING_CENSUS_REFREEZE='§931 long-tail landing at the composed consist (Fable 5.1 — validated)' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+    Error: census REFROZEN at bf7a7a2f3… · Tests 1 failed | 33 passed (34)   — by design
+  npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js        — THE PROOF
+    Test Files  1 passed (1)
+         Tests  34 passed (34)
+
+EVERY OTHER DOOR READ AND UNMOVED, each under the mutex at the same tip:
+  1b OSR read-only:      observed-shape readers: 1972 finding(s), exactly matching the frozen inventory (exit 0)
+  2  mounts door:        UPDATE_MOUNT_BASELINE=1 … dossierMountRegistry.walker  Tests 29 passed (29) — no file change
+  3  mutation manifest:  plain  Tests 10 passed (10)   (the LT42 + LT36 union merged clean)
+  4  writer-reach dry:   exit 0 — nothing to write (LT39 re-froze the cohort 1322 -> 1321 through the governed door in its own dock)
+  5  tuning walker:      plain  Tests 75 passed (75)
+  6  prose-numerics:     plain  Tests 29 passed (29)
+  7  test ratchet:       plain  Tests 94 passed (94)   (the --update is the totals car that follows)
+  8  wiring census:      --dry: sections that would move (none) · stamped shas that would move (none) · ROWS 0 — CURRENT
+                         (three lanes regenerated the stamp; their three-way merges compose to the current register)
+                         proseWiringCensus.walker  Tests 78 passed (78)
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

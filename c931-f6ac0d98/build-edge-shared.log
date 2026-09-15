@@ -1,0 +1,25 @@
+
+  supabase/functions/_shared/aiGroundingBundle.js  408.1kb
+
+⚡ Done in 31ms
+✓ aiGrounding: aiGroundingBundle.js  (inputs: 74, 408.0 KB, hash 7f6db544ccb813f0)
+
+  supabase/functions/_shared/analyticsEventsBundle.js  19.6kb
+
+⚡ Done in 4ms
+✓ analyticsEvents: analyticsEventsBundle.js  (inputs: 2, 19.7 KB, hash 0a6ba64ce0b8d5e2)
+
+  supabase/functions/_shared/aiCharterBundle.js  534.2kb
+
+⚡ Done in 29ms
+✓ aiCharter: aiCharterBundle.js  (inputs: 114, 534.1 KB, hash 2f29592eb9c538ed)
+
+  supabase/functions/_shared/intentAtlasBundle.js  26.2kb
+
+⚡ Done in 4ms
+✓ intentAtlas: intentAtlasBundle.js  (inputs: 2, 26.3 KB, hash 9136e063f280d77f)
+
+  supabase/functions/_shared/aiOutputSchemaBundle.js  530.6kb
+
+⚡ Done in 28ms
+✓ aiOutputSchema: aiOutputSchemaBundle.js  (inputs: 115, 530.5 KB, hash 75d50c7544fc9a1f)

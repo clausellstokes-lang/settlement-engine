@@ -1,0 +1,28 @@
+  probe: load=3.16 workers=0 streak=1 waited=0s
+  probe: load=2.64 workers=0 streak=2 waited=60s
+  probe: load=2.58 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=89661385a38e7e9e9649fbd0e869b3034607a6eb
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED: totalFiles 2509 -> 2518 (nine new source-phase test files, zero deleted) · entries 1 (the owner-gated golden master alone) · totalTests REFUSED in advance (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)
+RATCHET_START=2026-09-15T18:02:41Z load=2.58 5.01 28.17
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 71654 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] --update REFUSED: these failing tests are not in the census, and
+  `--update` NEVER BANKS A NEW REGRESSION:
+    tests/edgeFunctions/aiCharterBundle.freshness.test.js :: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/aiGroundingBundle.freshness.test.js :: Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js :: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+    tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+    tests/property/dossierProseManifest.test.js :: the composed-prose manifest — the DRIFT corpus, both audiences ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE
+    tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+    tests/security/pgliteHookTimeoutRatchet.test.js :: pglite hook-timeout ratchet (F4 class habitat removal) helper-name law: hooks may only call constructors the marker can see no hook in the corpus calls an unlisted constructor
+
+Fix them. If one is genuinely deferred debt, add it BY HAND with its full attribution
+(subsystem, cause, introducedAt, class) — that hand edit is the point: an unattributed
+entry is a defect being laundered into debt.
+TRUE_EXIT=1
+RATCHET_END=2026-09-15T18:23:11Z load=31.78 35.87 32.87
+MEASURED: totalTests=32590 totalFiles=2509 entries=1 measuredAtSha=021f05231
+RATCHET_PORCELAIN_POST=[0]
