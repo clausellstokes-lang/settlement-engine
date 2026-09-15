@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 20:19:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 20:24:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 5cfc417ea Plan: RUN 5 closes the Scribe's keyless measurement — 87 % / 84 % / 12 contradicting lin
 
@@ -453,4 +453,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 5.39 6.90 9.27
+load: 54.31 20.26 13.34
