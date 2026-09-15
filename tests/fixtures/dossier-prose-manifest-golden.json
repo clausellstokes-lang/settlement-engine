@@ -8,7 +8,7 @@
     "recorder": {
       "tests/helpers/dossierManifest.js": "5ee87f0b0bf90aae4e1f9968a71f3dedafb4596642012774291d1348ba75b2bc",
       "tests/helpers/goldenMasterCorpus.js": "7f09210e8723c77f3a93020ea2be524e2129a0933da6e53ed5b9cc0ecf926d5d",
-      "scripts/prose-rate-corpus.mjs": "9ff59802397568d55c53078b1f2226fc62307ef8fc677fdf21ba7227f4a29f19"
+      "scripts/prose-rate-corpus.mjs": "0f0efb35cc4357cd01f0c7d4f7be48efdb6069546746d3575b6430b54dc62864"
     },
     "rows": 1050,
     "rowsSha": "cc0316ee57b43f71829c8a9e3f178b30e7c6c4c2c3270b7a8f6d764477ab34bf"
