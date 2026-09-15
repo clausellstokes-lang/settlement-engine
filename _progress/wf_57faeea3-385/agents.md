@@ -1,5 +1,5 @@
-# wf_57faeea3-385 — per-agent progress, 2026-09-14 23:36:35
-    - `ab9ce8924` ? · IN FLIGHT · transcript 09-14 23:34 1290 KB · 115 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+# wf_57faeea3-385 — per-agent progress, 2026-09-14 23:42:26
+    - `ab9ce8924` ? · DONE · transcript 09-14 23:39 1436 KB · 116 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · result: {"n": 28, "title": "The gate cannot go green", "stateOfRecord": "THE RECORD SAYS FIVE THINGS, AND FOUR OF THE FIVE HAVE NO REFERENT LEFT. THE FIFTH IS TRUE ON A
     - `afde2b45d` ? · DONE · transcript 09-14 22:09 1452 KB · 124 tool calls · result: {"n": 29, "title": "The instrument estate's own debt", "stateOfRecord": "SIX CLAIMS, AND THE RECORD ITSELF ALREADY WITHDRAWS ONE OF THEM.\n\n(1) THE 10/10 CENSU
     - `aa21f7b4f` ? · DONE · transcript 09-14 22:05 1182 KB · 90 tool calls · result: {"n": 30, "title": "The reader-without-writer repairs and the blocked whole-tree scan", "stateOfRecord": "THE CARD'S THREE CLAIMS AND WHERE EACH COMES FROM. The
     - `a0e735d51` ? · DONE · transcript 09-14 22:07 1018 KB · 74 tool calls · files: rf.json, rf.md, rf.json · result: {"n": 36, "title": "The security work that is written down but not executed", "stateOfRecord": "The records are STALE IN BOTH DIRECTIONS and contradict themselv

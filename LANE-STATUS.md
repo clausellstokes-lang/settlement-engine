@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 23:36:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 23:42:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 86d7d8258 Manual §6.8a: the ledger commit goes through the temporary index, never the pathspec form
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 9
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -113,8 +113,8 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_57faeea3-385** (mtime 09-14 21:35): agent calls 4 (4 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_57faeea3-385/`
-    - `ab9ce8924` ? · IN FLIGHT · transcript 09-14 23:34 1290 KB · 115 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+- **wf_57faeea3-385** (mtime 09-14 21:35): agent calls 4 (4 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_57faeea3-385/`
+    - `ab9ce8924` ? · DONE · transcript 09-14 23:39 1436 KB · 116 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · result: {"n": 28, "title": "The gate cannot go green", "stateOfRecord": "THE RECORD SAYS FIVE THINGS, AND FOUR OF THE FIVE HAVE NO REFERENT LEFT. THE FIFTH IS TRUE ON A
     - `afde2b45d` ? · DONE · transcript 09-14 22:09 1452 KB · 124 tool calls · result: {"n": 29, "title": "The instrument estate's own debt", "stateOfRecord": "SIX CLAIMS, AND THE RECORD ITSELF ALREADY WITHDRAWS ONE OF THEM.\n\n(1) THE 10/10 CENSU
     - `aa21f7b4f` ? · DONE · transcript 09-14 22:05 1182 KB · 90 tool calls · result: {"n": 30, "title": "The reader-without-writer repairs and the blocked whole-tree scan", "stateOfRecord": "THE CARD'S THREE CLAIMS AND WHERE EACH COMES FROM. The
     - `a0e735d51` ? · DONE · transcript 09-14 22:07 1018 KB · 74 tool calls · files: rf.json, rf.md, rf.json · result: {"n": 36, "title": "The security work that is written down but not executed", "stateOfRecord": "The records are STALE IN BOTH DIRECTIONS and contradict themselv
@@ -467,4 +467,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 7.29 23.81 42.57
+load: 3.75 11.20 30.24
