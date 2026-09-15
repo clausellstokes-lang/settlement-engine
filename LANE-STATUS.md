@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 15:16:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 15:21:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 0
+- HOLD-VITEST absent · runner count 23
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -133,5 +133,6 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a369780bb` ? · DONE · transcript 09-15 13:02 845 KB · 30 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
-## PROCESSES: 
-load: 4.79 16.12 22.17
+## PROCESSES: 84006 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;echo "=== lighting refreeze on this tree ===" && sh scripts/gate-mutex;P=$(git status --porcelain -uall); if [ -z "$P" ]; then echo "lighting;Register (§931 doors, third measurement): the lighting census re-froz;;The second register car measured the tree with LT17 car 2 (held at the;bundle 205 B over its frozen ceiling — 1,404,698 vs 1,404,493 — fo;script; the ceiling never moves; the car lands with a worker-headroom ;addition leaves with it, so the title layer moves. By the instrument'";DESIGN; the plain re-run is the proof):;  $FIG;  measuredAtSha $(git rev-parse HEAD);  npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js;    $(cat $MY/c931/lighting-plain-3.txt | tr '"'"'
+'"'"' '"'"' '"'"' ;Every other door was read at the first register pass (§931.5): OSR ex;writer-reach dry exit 0 · tuning plain green · prose-numerics plain ;;Seat: Fable 5.1 — validated;;Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>;EOF;echo "REGISTER CAR 3 $(git rev-parse --short HEAD)"; fi;echo "CONSIST_TIP=$(git rev-parse --short HEAD) cars=$(git rev-list --;(PREDICTED='"'"'totalFiles 2509 -> 2518 (nine new source-phase test fi;
+load: 2.82 7.24 15.97
