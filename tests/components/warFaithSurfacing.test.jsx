@@ -564,4 +564,48 @@ describe('§906 — War & Resolve is READ inside the real War door, not merely m
       'warEconomySurfacing OFF ⇒ the siege badge is dark in the real War door',
     );
   });
+
+  // ── LT39 car 4 — the War door now carries BOTH halves of one desk ──────────
+  //
+  // PerspectiveStandings says what a settlement's standings ARE; the relationship
+  // chronicle says what they SURVIVED. The pin is that the SAME door paints both
+  // in the same render, because the whole point of mounting inside the existing
+  // door rather than minting a tenth was that the two read as one desk.
+  test('the War door surfaces BOTH the standings desk and the chronicle beneath it', () => {
+    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
+    const withHistory = {
+      ...siegeCampaign,
+      worldState: {
+        ...siegeCampaign.worldState,
+        tick: 40,
+        relationshipStates: {
+          'rel.s1.s2': {
+            relationshipType: 'hostile',
+            relationshipMemory: { posture: 'open_hostility', postureLabel: 'open hostility posture' },
+            turningPoints: [{ tick: 12, type: 'label_proposal_applied', fromType: 'neutral', toType: 'hostile' }],
+          },
+        },
+      },
+      regionalGraph: { ...siegeCampaign.regionalGraph, edges: [{ from: 's1', to: 's2' }] },
+    };
+    render(<HeraldBody {...doorProps} campaign={withHistory} />);
+    const standings = screen.getByTestId('perspective-standings');
+    const chronicle = screen.getByTestId('relationship-chronicle');
+    expect(standings).toBeTruthy();
+    expect(chronicle).toBeTruthy();
+    // Same door, and the chronicle sits BENEATH the standings it completes.
+    expect(standings.compareDocumentPosition(chronicle) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(chronicle.textContent).toContain('What Ravager has survived');
+    expect(chronicle.textContent).toContain('The standing between them changed');
+  });
+
+  test('⛔ and the SAME door with no recorded history paints the standings ALONE', () => {
+    // The empty-state discipline, proved inside the real door: the section is
+    // absent, not an empty heading. siegeCampaign carries no relationshipStates.
+    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
+    render(<HeraldBody {...doorProps} />);
+    // anchored: the standings desk is asserted present in the same render, so the door is live and the chronicle's absence is the empty-state rule rather than a dead door.
+    expect(screen.getByTestId('perspective-standings')).toBeTruthy();
+    expect(screen.queryByTestId('relationship-chronicle')).toBeNull();
+  });
 });
