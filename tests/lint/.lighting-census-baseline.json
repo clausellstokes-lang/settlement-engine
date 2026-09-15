@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "52cfa319f63f27419b0de6651e6a52788ed8160c",
+  "measuredAtSha": "00e601c9a36c2c19ecfe8662837cc27ea924f5b2",
   "measuredBy": "LT38 lane (Opus 5, 1M context)",
   "date": "2026-09-15",
-  "note": "LT38 car 3 (LD-10) adds ONE new describe with four titles to the EXISTING tests/components/privacyPolicyParity.test.js (the biconditional binding the consent settings copy to getConsent()`s live default). No test file was added or removed; tests/ui/privacySettings.test.jsx changed assertions only, at an unchanged title count.",
-  "files": 2564,
+  "note": "LT38 car 5 (LD-11) adds ONE test file, tests/components/navResetOnSelfClick.test.jsx — the nav reset-on-self-click suite (12 titles under 3 describes). No test file was removed; eight existing suites gained mock lines only, at an unchanged title count.",
+  "files": 2565,
   "parked": 375,
-  "credited": 2189,
-  "titles": 24189,
-  "suiteTitles": 6456
+  "credited": 2190,
+  "titles": 24201,
+  "suiteTitles": 6459
 }
