@@ -159,6 +159,61 @@ describe('the column census, measured across the estate', () => {
     expect(DUTY_SERVICE_KINDS.test('Ale production')).toBe(false);
   });
 
+  it('PINS `settlement.services` PERMANENTLY ABSENT — the key is never written, on any tier', () => {
+    // ⛔ LT40 car 2 — ENFORCEMENT, NOT DISCOVERY. ODQ §912.7(7) recorded "`settlement.services`
+    // is EMPTY on every generated town (the duty column reads `availableServices`)", and this
+    // module's own header already carries the named-seed measurement. What did not exist was a
+    // gate: the arm above asserts a LENGTH, and `services: []` has length zero too — so a
+    // writer that regrew the field as an empty array, or a reader that started keying on it,
+    // would pass. This arm asserts the KEY IS NOT ON THE RECORD, over the same thirty
+    // settlements the estate scan walks, so the field cannot quietly come back to life.
+    //
+    // ⛔ WHAT THIS PIN DOES NOT LICENSE. Populating the field, or retiring it from
+    // `settlement.schema.js`, is a persistence/schema-shape change and is owner-gated; it also
+    // MOVES OUTPUT in either direction, because `src/lib/structuralFingerprint.js:261` reads
+    // `arr(settlement.services).length` as a constant 0 INSIDE a fingerprint. The other two
+    // readers of the always-empty field — `src/store/settlementGenerateAction.js:384` and
+    // `src/domain/worldPulse/factionCompetition.js:156`/`:186` — are named, not changed.
+    /** @type {string[]} */
+    const carriers = [];
+    let scanned = 0;
+    let serviceRows = 0;
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      for (let i = 0; i < 5; i += 1) {
+        const settlement = town(tier, `estate-${tier}-${i}`);
+        scanned += 1;
+        if (Object.prototype.hasOwnProperty.call(settlement, 'services')) carriers.push(`${tier}-${i}`);
+        serviceRows += instantiatedServices(settlement).length;
+      }
+    }
+    console.log(`\nINSTITUTION TABLE · the services field over ${scanned} settlements`
+      + `\n  rows on \`availableServices\`: ${serviceRows}`
+      + `\n  settlements carrying a \`services\` key: ${carriers.length}\n`);
+    expect(scanned).toBe(30);
+    // THE LIVENESS ANCHOR, and it is the header's own figure re-taken rather than quoted: the
+    // duty source the table really reads is populated on this very walk, so "no `services`"
+    // cannot be an empty scan of settlements that carry no services at all.
+    expect(serviceRows, 'the header claims 1,678 instantiated service rows over these thirty')
+      .toBe(1678);
+    expect(
+      carriers,
+      'a generation step began writing `settlement.services`. The schema declares the field and'
+      + ' nothing has ever written it; three readers count it and get a constant 0, one of them'
+      + ' inside a FINGERPRINT. Populating it is owner-gated and output-moving — see'
+      + ' settlement.schema.js\'s `services` typedef before changing this.',
+    ).toEqual([]);
+    // THE PLANTED CONTROL — the predicate convicts, and it convicts the spelling the LENGTH
+    // arm above cannot see. Without this the refusal could be a predicate that never fires.
+    const planted = { ...town('town', 'services-control'), services: [] };
+    expect(Object.prototype.hasOwnProperty.call(planted, 'services')).toBe(true);
+    expect(Array.isArray(planted.services) ? planted.services.length : 0).toBe(0);
+    const plantedCarriers = [planted].filter(
+      (s) => Object.prototype.hasOwnProperty.call(s, 'services'),
+    );
+    expect(plantedCarriers.length, 'the same predicate the refusal uses must catch a planted key')
+      .toBe(1);
+  });
+
   it('reads offices off the roster AND the governing seat', () => {
     const settlement = town('city', 'offices');
     const offices = officesOf(settlement);

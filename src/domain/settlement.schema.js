@@ -270,7 +270,33 @@ export const FIELD_ALIASES = Object.freeze({
  *   conditions.
  *
  * @property {Institution[]} [institutions]
+ *
  * @property {Service[]} [services]
+ *   ⛔ DECLARED, NEVER WRITTEN — and that is a MEASUREMENT, not a suspicion. No step in
+ *   the generation pipeline writes this key: `assembleSettlement.js:130` writes
+ *   `availableServices` and the assembled record carries no `services` at all. Re-taken
+ *   over the thirty settlements the estate scan walks (seeds `estate-<tier>-0` …
+ *   `estate-<tier>-4` across six tiers, culture `germanic`, terrain `grassland`, road
+ *   access): 1,678 instantiated service rows on `availableServices`, 32 of them
+ *   duty-kind, and `settlement.services` present on ZERO of the thirty. The ENFORCEMENT
+ *   is the tests/lint arm titled "PINS `settlement.services` PERMANENTLY ABSENT"
+ *   (grep that phrase), which asserts the KEY IS ABSENT rather than that its length is
+ *   zero — `services: []` has length zero too.
+ *   ⚠ THE FULL MEASUREMENT IS NOT CITED BY MODULE NAME HERE, DELIBERATELY. It lives in
+ *   the derived institution-table module under `src/domain/institutions/`, which is a
+ *   FENCED ISLAND: `tests/lint/proseWiringCensus.walker.test.js`'s "(e) THE FENCE" arm
+ *   refuses any `src/` file outside the island that so much as NAMES one of its fifteen
+ *   modules — the scan is `text.includes(<module>)` over raw bytes, so a comment counts.
+ *   Cite it by phrase, never by name, from anywhere in `src/` outside that island.
+ *   ⚠ THREE LIVE READERS READ THE ALWAYS-EMPTY FIELD and are deliberately unchanged:
+ *   `src/lib/structuralFingerprint.js:261` (`service_count` — a constant 0 INSIDE a
+ *   fingerprint), `src/store/settlementGenerateAction.js:384` (an analytics prop), and
+ *   `src/domain/worldPulse/factionCompetition.js:156`/`:186` (which fall through to
+ *   `institutions`). Populating the field, or retiring it from this typedef, is a
+ *   persistence/schema-shape change AND an output-moving one — giving
+ *   `service_count` a real count moves the fingerprint — so it is owner-gated and is
+ *   NOT what the pin above licenses. Read `availableServices`.
+ *
  * @property {SupplyChain[]} [supplyChains]
  *
  * @property {Object} [economy]
