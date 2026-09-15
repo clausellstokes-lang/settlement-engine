@@ -10,7 +10,7 @@ The chair works the twenty non-gated items of `LONG-TAIL-2026-09-14.md`; each la
 5. **The Scribe tier** — the fifteen decisions of `docs/DESIGN_SCRIBE_TIER_PROPOSAL.md` (Option C recommended). ______
 
 ## B. The Scribe's five acts (in order)
-6. The Anthropic API key for the pilot. ______  7. `supabase db push` of migrations 201, 202 and (when W5b lands) 203. ______  8. The price and shape (item 5). ______  9. Item 13, past epochs into the chronicle (chair's default: compact rotation). ______  10. Light `FLAGS.scribe`, last. ______
+6. The Anthropic API key for the pilot. ______  7. `supabase db push` of migrations 201, 202 and 203 (W5b landed 09-15 05:1x: one render, one charge; the redraw cap; the fair-use floor). ______  8. The price and shape (item 5). ______  9. Item 13, past epochs into the chronicle (chair's default: compact rotation). ______  10. Light `FLAGS.scribe`, last. ______
 
 ## C. The heavier ones (each has its own record)
 11. The stale main checkout reconciled against HEAD, and the ledger branch's fossil src/ reconciled with the build slot. ______
