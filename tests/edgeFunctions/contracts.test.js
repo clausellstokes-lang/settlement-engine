@@ -1503,6 +1503,80 @@ describe('Tier 3.3 — product catalog drift between checkout + webhook', () => 
   });
 });
 
+// ─────────────────────────────────────────────────────────────────────────
+// The Surveyor SKU asymmetry — DELIBERATE-PENDING-RULING (ODQ §839 FLAG 1)
+//
+// `surveyor` is an ACTIVE checkout SKU server-side and a fully wired webhook
+// lifecycle, while src/lib/stripe.js's client product map has no row for it —
+// so startCheckout('surveyor') throws. Whether that is a WALL (owner standing
+// ruling #3: "never a lookalike subscription — task-priced + BYOK") or a GAP
+// (WEB-9a's client arm, re-scoped) is a PAID-SURFACE call sitting on the
+// owner's desk since 2026-09-01, unruled.
+//
+// ⛔ A RED HERE IS NOT CURED BY DELETING THIS TEST. If the client map gained a
+// surveyor row, a paid surface was activated — check that the owner ruled GAP,
+// and retire this suite together with the docblock it guards, in that commit.
+// If the server rows vanished, the WALL was implemented by demolition instead
+// of by ruling, which is also a thing to look at rather than to re-point.
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('the Surveyor SKU asymmetry is deliberate, and documented where it bites', () => {
+  let checkoutSrc;
+  let webhookSrc;
+  let clientSrc;
+  beforeAll(() => {
+    checkoutSrc = readFunction('create-checkout');
+    webhookSrc = readFunction('stripe-webhook');
+    clientSrc = readFileSync(join(ROOT, 'src', 'lib', 'stripe.js'), 'utf8');
+  });
+
+  /**
+   * The BODY of buildProductsMap only. Sliced from the function keyword so the
+   * docblock above it — which necessarily says "surveyor" many times — cannot
+   * satisfy the absence assertion below. The end anchor is the PRODUCTS proxy
+   * that immediately follows.
+   */
+  function clientProductsMapBody() {
+    const start = clientSrc.indexOf('function buildProductsMap');
+    const end = clientSrc.indexOf('const PRODUCTS = new Proxy', start);
+    expect(start, 'src/lib/stripe.js lost buildProductsMap').toBeGreaterThan(-1);
+    expect(end, 'src/lib/stripe.js lost the PRODUCTS proxy end anchor').toBeGreaterThan(start);
+    return clientSrc.slice(start, end);
+  }
+
+  it('the SERVER sells surveyor: an active price row, a subscription product, and a full webhook lifecycle', () => {
+    expect(checkoutSrc).toMatch(/surveyor:\s*Deno\.env\.get\(['"]STRIPE_PRICE_SURVEYOR['"]\)/);
+    expect(checkoutSrc).toMatch(/SUBSCRIPTION_PRODUCTS[\s\S]{0,120}['"]surveyor['"]/);
+    expect(webhookSrc).toMatch(/product\s*===\s*['"]surveyor['"]/);
+    expect(webhookSrc).toMatch(/grant_surveyor_entitlement/);
+    expect(webhookSrc).toMatch(/['"]surveyor_renewal['"]/);
+    expect(webhookSrc).toMatch(/revoke_surveyor_entitlement_by_subscription/);
+  });
+
+  it('the CLIENT product map still carries no surveyor row (so startCheckout throws)', () => {
+    const body = clientProductsMapBody();
+    // Liveness anchors produced by the SAME slice: the map is real, populated,
+    // and keyed the way this assertion assumes, so the absence below measures
+    // exclusion rather than a slicer that drifted onto nothing.
+    expect(body).toMatch(/premium:\s*\{/);
+    expect(body).toMatch(/founder_lifetime:\s*\{/);
+    // anchored: the two positive matches above read the same slice of the same source
+    expect(body).not.toMatch(/\bsurveyor\b/);
+    // …and the throw the absence produces is still the live guard.
+    expect(clientSrc).toMatch(/throw new Error\(`Unknown product: \$\{product\}`\)/);
+  });
+
+  it('the omission is DOCUMENTED at the site, naming the ruling that owns it', () => {
+    const start = clientSrc.indexOf('function buildProductsMap');
+    const docblock = clientSrc.slice(0, start);
+    expect(docblock).toMatch(/DELIBERATE-PENDING-RULING/);
+    expect(docblock).toMatch(/§839/);
+    expect(docblock).toMatch(/standing ruling #3/);
+    expect(docblock).toMatch(/WALL/);
+    expect(docblock).toMatch(/GAP/);
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────
 // Tier 0.5 — Webhook trust-boundary lock-in
 //

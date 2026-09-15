@@ -21,6 +21,45 @@ import { track, EVENTS, Funnel } from './analytics.js';
 // so existing imports (PurchaseModal, AccountPage) keep working. The
 // premium row is added in here since pricing.js stores it in TIERS,
 // not in the packs catalog.
+//
+// ⛔⭐ THE SURVEYOR SKU IS ABSENT HERE ON PURPOSE — DELIBERATE-PENDING-RULING,
+// NOT AN OVERSIGHT. Read this before "fixing" it.
+//
+// THE ASYMMETRY, as it stands today:
+//   • SERVER — `surveyor` is a fully ACTIVE checkout SKU. It is in the derived
+//     ACTIVE_CHECKOUT_SKUS list (src/config/pricing.js, via SURVEYOR_PLAN), it
+//     has a row in create-checkout's ACTIVE PRICE_MAP block
+//     (`surveyor: Deno.env.get('STRIPE_PRICE_SURVEYOR')`), and it is a member of
+//     that function's SUBSCRIPTION_PRODUCTS set. stripe-webhook carries the whole
+//     lifecycle: the `product === 'surveyor'` checkout branch calls
+//     `grant_surveyor_entitlement`, the money mirror records `surveyor_start`,
+//     renewals are discriminated by line price id into `surveyor_renewal`, and a
+//     cancelled subscription hits `revoke_surveyor_entitlement_by_subscription`.
+//   • CLIENT — this map has NO `surveyor` row, so `startCheckout('surveyor')`
+//     throws `Unknown product: surveyor` at the guard below. There is no client
+//     purchase arm and no reconcile arm (src/lib/checkoutReconcile.js's
+//     `isPremiumProduct` knows only premium and founder_lifetime).
+//
+// WHY IT IS LEFT STANDING. The owner's standing ruling #3 is "never a lookalike
+// subscription — task-priced + BYOK", and a client Buy button for a $14.99/mo
+// Surveyor plan is exactly the shape that ruling forbids. So the missing row may
+// be a WALL (correct, and the server SKU exists only to carry BYOK entitlement
+// grants for a seat sold some other way) or a GAP (the client arm of WEB-9a,
+// re-scoped). That is a paid-surface call: ODQ §839 raised it as FLAG 1 and
+// routed it to THE OWNER'S DESK on 2026-09-01, where the handoff cards still
+// list it, and it has not been ruled. The chair's own §839 recommendation was
+// KEEP ruling #3, RE-SCOPE WEB-9a, and COMMENT this omission — this comment is
+// that half, and the only half that needs no ruling.
+//
+// ⛔ DO NOT ADD A `surveyor` ROW HERE AS A DRIVE-BY. Adding it activates a paid
+// surface the owner has not ruled on. If the owner rules GAP, the row lands with
+// the reconcile arm, the entitlement read and the pricing surface in one
+// deliberate car — and this comment, plus the pin that guards it in
+// tests/edgeFunctions/contracts.test.js, comes out in that same commit.
+//
+// (`premium_annual` is absent for a different and simpler reason: its dial,
+// ANNUAL_FACTOR, is 0, so the SKU does not exist on either side yet. Its client
+// row is WEB-11, owner-gated behind the annual cadence ruling.)
 function buildProductsMap() {
   const packs = getActivePacks();
   return {
