@@ -19,11 +19,16 @@
     "",
     "TO CURE an entry: route the line through logSafe()/redact() in",
     "supabase/functions/_shared/log.ts, masking any IP with maskIp(), then delete the entry",
-    "and lower `ceiling` in the same commit."
+    "and lower `ceiling` in the same commit.",
+    "",
+    "⭐ THE BASELINE IS EMPTY, AND THAT IS THE POINT. It was born at 2 (LT36 car 2:",
+    "_shared/requestMeta.ts logging `ip=${meta.ip} ua=${meta.ua.slice(0, 200)}`, and",
+    "send-email/index.ts logging `rate-limited ip=${ip}` — A+ backend.6's named defect and a",
+    "SECOND instance of its class that the record does not mention, found by this guard rather",
+    "than by the register). LT36 car 3 cured both and banked the win here. At ceiling 0 the",
+    "rule is absolute: ANY console.* call under supabase/functions/ that carries a PII value",
+    "reds the edge gate, with no grandfathered noise for it to hide inside."
   ],
-  "ceiling": 2,
-  "files": {
-    "_shared/requestMeta.ts": "rejectObviousBot() logs `ip=${meta.ip} ua=${meta.ua.slice(0, 200)}` through a bare console.warn — this is A+ backend.6's named defect, cured by LT36 car 3.",
-    "send-email/index.ts": "the cap_warning limiter logs `rate-limited ip=${ip}` through a bare console.warn — a SECOND instance of backend.6's class, found by this guard rather than by the record, cured by LT36 car 3."
-  }
+  "ceiling": 0,
+  "files": {}
 }

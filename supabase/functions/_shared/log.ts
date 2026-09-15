@@ -14,6 +14,8 @@
  *                              so its `error` and `extra` fields are scrubbed by policy.
  *   - `redactFields(fields)` — redact the string leaves of a flat log-fields object.
  *   - `logSafe(level, fn, fields)` — emit one structured, redacted JSON log line.
+ *   - `maskIp(ip)`           — /24 (IPv4) or /48 (IPv6) mask for the ONE case where the
+ *                              network is the signal and the host is the PII (A+ backend.6).
  *
  * Import-free by design (pure string ops) so it is safe in the Deno edge runtime AND
  * unit-testable from the node/vitest suite (tests/security/edgeLogRedaction.test.js).
@@ -53,6 +55,42 @@ export function redact(value: unknown): string {
     .replace(JWT_RE, "[token]")
     .replace(IPV6_RE, "[ip]")
     .replace(IPV4_RE, "[ip]");
+}
+
+/**
+ * Mask a client IP to its /24 (IPv4) or /48 (IPv6) — A+ backend.6.
+ *
+ * `redact()` replaces a whole address with `[ip]`, which is right for an incidental IP inside
+ * a free-text message but destroys the ONE thing an abuse-spike line is for: telling a single
+ * noisy source from a distributed one. `maskIp` keeps the network and drops the host, so a
+ * rejection burst is still legible as "one neighbourhood" without the log drain ever holding
+ * an address that identifies a person.
+ *
+ * WHY /24 AND NOT A PEPPERED HASH. backend.6 offers both. The hash variant would bind this
+ * module — the shared logging chokepoint every edge function reaches — to a new
+ * ANALYTICS_HASH_PEPPER secret, which is a wider change than the item names and a new secret
+ * surface in a security chokepoint. Owner-gated; not taken here.
+ *
+ * The output is deliberately STABLE UNDER redact(): `203.0.113.x` has only three numeric
+ * groups, so IPV4_RE cannot re-match it, and `2001:db8:85a3:x` ends in a non-hex character,
+ * so IPV6_RE cannot either. A masked address therefore survives a trip through
+ * redactFields() instead of collapsing to `[ip]` and losing the signal twice over.
+ */
+export function maskIp(ip: unknown): string {
+  if (typeof ip !== "string" || ip.trim() === "") return "[ip]";
+  const value = ip.trim();
+  const v4 = value.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.\d{1,3}$/);
+  if (v4) return `${v4[1]}.${v4[2]}.${v4[3]}.x`;
+  if (value.includes(":")) {
+    const groups = value.split(":").filter((g) => g !== "");
+    if (groups.length >= 3 && groups.every((g) => /^[A-Fa-f0-9]{1,4}$/.test(g))) {
+      return `${groups.slice(0, 3).join(":")}:x`;
+    }
+  }
+  // Not an address shape we recognise (the '0.0.0.0' fallback aside, this is a header a
+  // client controlled). Never echo it: an unrecognised value is the one most likely to be
+  // an injection or an unexpected identifier.
+  return "[ip]";
 }
 
 /** Redact the string leaves of a flat log-fields object (values only; keys untouched). */
