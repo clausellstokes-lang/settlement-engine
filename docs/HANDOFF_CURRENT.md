@@ -4,7 +4,7 @@
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
-program's decisions; SPEC fold labels §§277–§286 are design sections, not missing ODQ entries).
+program's decisions. ⭐ THE LEDGER'S NUMBERING, MEASURED AT §920: 906 of the 920 numbers §0–§919 carry an opener. SPEC fold labels §§277–§286 are design sections and §246 lives inside §245's combined header (ODQ:8824–8825) — neither is a missing ODQ entry. THE ONLY GENUINE HOLES ARE §178, §183 AND §683: §178's home is ODQ §170 + charter §15 (docs/DESIGN_FP_ARCH_MF.md:470; "§178" at ODQ:6651 is a misnumber), §183.1's home is §182.1 (28,442 − 28,406 = the cited +36), §183.3's home is UNKNOWN and recorded as unknown, and §683's is the PANEL AMENDMENT at docs/DESIGN_SPINE_COMPLETION.md:207 (§685.5(vi)). ⛔ In the main checkout a docs search MUST carry an explicit revision — `git grep <pat> HEAD -- 'docs/**.md'` — because the index holds only 312 of HEAD's 884 doc *.md files (§920.6)).
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
