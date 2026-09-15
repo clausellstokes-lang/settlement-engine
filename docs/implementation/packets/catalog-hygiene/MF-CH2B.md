@@ -1,6 +1,6 @@
 # Catalog hygiene / MF-CH2B — THE MAGIC LICENCE, LIVE: all five shelf-reading gates stop deciding a catalog row by its display bucket, a magic-free world gets its alchemist and its library back, and the goods vocabulary leaves the institution gate
 
-- **Status:** DRAFT
+- **Status:** BLOCKED
 - **Packet version:** 2
 - **Verified base:** `claude/composite-r4` at `f73bdbf16d3f7a57c18d7fd57b0478b953043a73`
   ⚠ RE-DERIVED at this slot on 2026-09-14 (LT17 car 1). Version 1's base was
@@ -8,6 +8,13 @@
   and every figure in §0, §1.0, §2 and §2.1 below is re-run, not carried forward.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+  ⚠ **THE STATUS MOVED ON 2026-09-14 (LT17 car 8), AND THE REASON MOVED WITH IT.** Version 1's
+  own §0.0 said the header read `DRAFT` *because* one ruling about the arcane ladder was
+  unresolved. That ruling has no subject any more — §0.0 now records the discharge by execution.
+  What holds this packet is no longer a question about the mechanism; it is the owner's word on
+  a declared same-seed shift of 1,182 rosters and on ODQ §764.3's sentence naming TE-TRANS-1 the
+  LAST same-seed-moving wave. That is a hold from outside the packet, so the token that names it
+  is the one above.
 - **Provenance:** implemented by lane **TE-CH-2**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`**
   (owner directive **ODQ §484**). Third car of the catalog-hygiene train and the second half of
   a **serial pair** — it is built ON TOP of `MF-CH2A` and cannot be landed before it.
@@ -261,9 +268,19 @@ still stands as the one that does. Stated rather than papered over.
 | name × shelf pairs | — | **282** |
 | rows declaring a `magicLicense` | — | **25** |
 | distinct names licensed `none` | 7 | **8** |
-| name × shelf pairs the dead-magic world law strikes | 28 | **29** |
-| … after the cure | — | **21** |
+| name × shelf pairs `allowsInstitution` refuses in a dead world | — | **30** |
+| … of those, refused FOR MAGIC | 28 | **25** |
+| … refused for the content profile or maritime support (nothing to do with magic) | 5 | **5** |
+| magic refusals AFTER the cure | — | **17** (total refusals 22) |
 | name × shelf pairs whose verdict the cure CHANGES | — | **8**, every one licensed `none` |
+
+⚠ **28 → 25 IS A REAL DRIFT AND IT IS RECORDED, NOT ABSORBED.** `MF-CH2A`'s index cell states
+the world law *"strikes all **28**"* (Magic 21 + Exotic 7). At this slot the Magic shelf carries
+**18** magic-refused rows and Exotic **7**, so the figure is **25**. The five non-magic refusals
+are `Human trafficking network`, `Kidnapping ring`, `Slave market`, `Slave market district`
+(content-profile denials) and `Shipyard` (maritime), unchanged on both sides of the cure and
+correctly NOT this car's business — which is `MF-CH2A`'s own finding about the five
+disagreements, re-confirmed here by execution.
 
 ⚠ **311 WAS QUOTED IN §3 AND IN ARMS B1 AND B4, AND IS CORRECTED THERE IN THIS VERSION.** The
 catalog holds **280** distinct names at this slot. Any arm written as "all N rows" must DERIVE
@@ -439,3 +456,75 @@ The pair's nine judgments and five deferrals are recorded once, in **MF-CH2A §7
 were taken for the car as a whole. The three that decide THIS packet are J-TECH2-4 (the P2 arm
 is split out and carried to the chair), J-TECH2-5 (Design A ships, Design B priced at 545 of
 2,520) and J-TECH2-8 (`filterServicesForMagic` stays on the keyword vocabulary).
+
+---
+
+## §8 · THE CATALOG-HYGIENE TRAIN'S RECORD, CLOSED AT `f73bdbf16` (LT17 car 8)
+
+**WHY THIS PACKET IS STILL OUTSIDE `PACKET_MANIFEST.json` AND OUTSIDE `INDEX.md`'s TABLE, AND
+WHY THAT IS THE HONEST ACT RATHER THAN THE UNFINISHED ONE.** ODQ §520.5 put it outside both, and
+`MF-CH2A`'s index cell says so in its own text. LT17's charter expected car 8 to mint it once
+cars 2–4 had all gone in. Cars 3 and 4 were HELD by the chair — they move same-seed output and
+ODQ §764.3's sentence is the owner's to amend — so the mint is not available, and the two files
+are COUPLED: `parseIndexPacketStatuses` plus the validator's own reverse check make *"index
+packet path is absent from manifest"* a hard error, so an index row without a manifest entry
+reds the gate, and a manifest entry for an unbuilt packet would have to assert `CREATE`/`MODIFY`
+rows and symbol presences that are not true of the tree. Recording the state here instead is the
+only form of this act that is not a false record.
+
+### §8.1 · The train, member by member, with its landing
+
+| member | where it stands at this slot |
+|---|---|
+| `MF-CH1` | landed (chair CAS, `00e7af612` build base) |
+| `MF-CH2A` | landed at `5055990a` (TE-STACK-1 car 1); its arm **A7** is the arm this packet flips |
+| **`MF-CH2B`** | **the one member never minted.** Re-derived here; §0.0's STOP discharged; the build HELD on the owner's word |
+| `MF-CH3` | landed |
+| `MF-CH4` | landed at the TE-CH-4 tip |
+| `MF-CH5` | landed at `ed96f0eba` + `18dc99d1c` — and it is what discharged this packet's own STOP, by moving `alchemy` out of `ARCANE_INST_TAGS` |
+| `MF-CH6` | landed at the TE-CH-6 tip (`e4ed27f48` as the 64th car, ODQ §597.1) — the deity-doctrine car |
+| `MF-CH7` | landed at the TE-CH-7 tip |
+| `CH-6b` | **DROPPED AS DISCHARGED-BY-`MF-CH2B`** (ODQ §879.11 R3). Its **car 1** — J-TECH2-10, the sixth surface — has now been paid on its own at **`72545d322`**, measured output-free. Its **car 2** is P5's licence-first world law and rides §1's table above |
+
+### §8.2 · The residue items this train was carrying, confirmed closed by code reading at this slot
+
+| item | state |
+|---|---|
+| §708.5 the graveyard gap | **closed.** The burial ladder is complete at every tier — `Burial ground` thorp `:57` / hamlet `:308`, `Graveyard` village `:785`, `Parish burial grounds` town `:1289`, `Burial grounds and charnel house` city `:1835`, `Cemetery network` metropolis `:2392`. Landed `e6516885e`, CASed `39e39c835` |
+| §708.6 DEITY-LIVE-CHECK | **closed** at `38ca69e7e`. `arcaneInstitutionVocabulary.js`'s header carries the doctrine in full and the written refusal to add `divine` to `ARCANE_INST_TAGS`, with its measured blast radius |
+| §708.7 / OB-5, the CRAFTS half | **closed** at `64c344615` (T8 car 3) — thirty rows enumerated by name, nineteen to crafts, eight to economy, three kept |
+| §708.7 / OB-5, the COMMERCE half | ⛔ **NOT PAID.** Thirteen commerce rows are still keyed `priorityCategory: 'government'` — `Pawnbroker` `:421`, `Fish market` `:517`, `Toll bridge` `:524`, `Public bathhouse` `:1010`, `Assay office` `:1047`, `Customs house` `:1054`, `Post relay station` `:1061`, `Stable district` `:1068`, `Caravaneer's post` `:1075`, `Jeweller` `:1083`, `Vintner` `:1090`, `Gladiatorial school` `:1527`, `Hired blades` `:1534` — plus `Druid Circle` keyed `'magic'` and `Elder Grove Council` keyed `'military'`. HELD: measured at **659 of 2,520** whole records moved under a proposed nine-move disposition, with **0 of 2,520** rosters moved, so it is a label-and-backing-faction shift exactly as T8 car 3 was |
+| §594.2 J2, the CULTURAL divine healer | ⛔ **NOT PAID, and the words are the owner's.** Drafted and measured, never written to `src/` — see §8.3 |
+| CH-3a, the `Priest (resident)` faith facet | ⛔ **NOT PAID.** The row at `:778-784` still carries no `facets` key; R-INST-6-1's half did land (`Black market bazaar` `:2449`, `Underground city` `:2457`). HELD: measured at **420 of 2,520** records moved — every village settlement at every magic case, and **0** rosters, since the row is `required: true` |
+
+### §8.3 · The cultural divine healer, drafted as a proposal and NOT written to `src/`
+
+The gap is real and it is narrower than the charter implies: measured at this slot, the faith
+shelf already carries `Small hospital` and `Almshouse` at town, `Major hospital` at city and
+`Hospital network` at metropolis, all unlicensed and all surviving a magic-free world. The tiers
+with NO faith-authorised healer are **thorp, hamlet and village**, where the only one the catalog
+offers is `Healer (divine, 1st level)` — the first-level SPELLCASTER on the Magic shelf that
+`institutionalCatalog.js:848-863` correctly refuses to re-license. So the honest ladder is three
+rungs, not six, and each hangs off the faith institution its tier already has (no clergy → wayside
+shrine → parish church). The draft rows, their voice and their measurement are carried to the
+owner in the lane report; the measurement is **731 of 2,520** records and **695** rosters moved,
+concentrated at thorp 55, hamlet 316 and village 360 of 420 each.
+
+⭐ **AND THE ROW DOES NOT NEED THIS PACKET.** Authored `tags: ['religious', 'healing']`,
+`priorityCategory: 'religion'`, `magicLicense: 'none'` and filed on the **Religious** shelf, it
+is already admitted by the world law as it stands today — no shelf to convict it, no keyword in
+its name, no arcane tag. The content car and the gate car are independent, and either may go
+first.
+
+### §8.4 · Observations recorded so they are not re-found
+
+* **Five catalog rows carry a DOUBLED tag** and no record names them: `Slave market` `:1033` and
+  `:1684`, `Merchant warehouses` `:1429`, `Slave market district` `:1691` all `tags:
+  ['trade','trade']`; `Great library` `:2417` `tags: ['education','education']`. Tags are consumed
+  by `.includes()` so the duplicates are inert. They belong to whichever car next opens those rows.
+* **The village `Smuggling network` still declares `minTier: 'city'`** inside the village block
+  (`:897-903`). NOT open work — `MF-CH3`'s panel recommended deleting the row and the chair RULED
+  NEITHER, refusing the data-move class on measurement. A recorded deferral, not a bug to re-find.
+* **`priorityHelpers.js:147` is a sixth production reader of the display shelf** and
+  `INST_WEIGHTS.folk` still keys magic on the faith string `"healer (divine"`. Both are recorded
+  with their measurements in §1.0 above.
