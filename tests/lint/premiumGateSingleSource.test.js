@@ -154,6 +154,26 @@ const EXEMPTIONS = {
   // model). Same spelling, same reason class, same non-convergence rationale as
   // that row above.
   'src/components/map/PerspectiveStandings.jsx': 'content-visibility',
+  // LT39 car 4: the relationship chronicle's covert half. The comparison is
+  // PerspectiveStandings' line VERBATIM, in the file mounted directly beneath it
+  // in the same War door, and it asks that file's question exactly: may this
+  // viewer be shown DM knowledge — here the quiet business (spies, sabotage,
+  // bought men) the engine records against a relationship with no visibility
+  // field of its own. Routing it through viewerCanAuthor would admit the founder
+  // tier to a surface premium-or-elevated currently defines, i.e. a paid-surface
+  // behaviour change, which this walker's header records as owner-gated.
+  // ⚠ AND NOTE WHERE THE GATE ACTUALLY LIVES: this comparison only chooses what
+  // to ASK FOR. The withholding is done inside domain/display/relationshipChronicle.js,
+  // which drops every line that is not explicitly `public` — an unclassified type
+  // included — so a bug in this one line cannot open the secrets seam by itself.
+  'src/components/map/RelationshipChronicleSection.jsx': 'content-visibility',
+  // LT39 car 5: the NPC trail — the ladder's dated contests and seat changes.
+  // Same line, same door, same question as the two rows above: may this viewer be
+  // shown DM knowledge. A contest the loser never learned of is the loser's
+  // secret, so there is no player-facing form of that page at all, and the
+  // withholding is done inside domain/display/npcInteriorityRead.js, whose
+  // groundTruth block is fail-closed by its own constitution.
+  'src/components/map/NpcTrailSection.jsx': 'content-visibility',
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
   // §805 split: the WarFaithTab row became two. WarTab spells the RumorsTab
