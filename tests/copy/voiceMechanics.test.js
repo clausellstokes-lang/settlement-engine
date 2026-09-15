@@ -478,8 +478,41 @@ if (UPDATE) {
 //     dedupes a persisted row against a live one on `description.slice(0, 40)`.
 //     Declared same-seed text shift under §764.3; that file's row is gone from
 //     the baseline.
-//   • THE FIVE in narrative/settlementOriginProse.js STAY, and they are no
-//     longer "debt" — see the RULED-LAWFUL note on that file's baseline row.
+//   • THE FIVE in narrative/settlementOriginProse.js STAY. RULING 2 of
+//     `kit/briefs/brief-LT41b-the-rulings.md` (the chair, 2026-09-15, on the
+//     owner's delegated word) REFUSES the cut, and the five are RULED, DECLARED
+//     debt rather than an open question. ⛔ DO NOT RE-OPEN THIS; the four grounds
+//     are each checkable in this tree:
+//       (a) A RATIFIED ANNEX RULING ALREADY COVERS THEM. R-DST-W4-f,
+//           docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:5141-5150, quotes the
+//           :136 sentence itself and rules: "an em dash is lawful as apposition
+//           inside a woven sentence and unlawful as the hinge of a two-beat
+//           headline. The existing line is apposition and stands." It is
+//           restated on the block at :5418. These are apposition, not hinges.
+//       (b) THE SURFACE IS NOT UNLANED, WHICH THE 2026-09-14 CLASSIFICATION
+//           SUPPOSED IT WAS. DS-GEN-6's own RECEIPT (:5414) names "the authored
+//           per-arm origin pools `src/generators/narrative/settlementOriginProse.js`",
+//           so the corpus programme holds a card over this file and has already
+//           ruled its dash. The eleven in crossSettlementConflicts.js were the
+//           genuinely unowned half, and they are the half that was cut.
+//       (c) THE DASH IS MECHANICALLY LOAD-BEARING, AND THE FILE SAYS SO IN
+//           SOURCE AT :139-143: `${CHANNELS_TOKEN}` interpolates a LIST, so a
+//           comma after it reads as a fifth channel ("…caravans, seasonal
+//           access, or patronage, at a price the settlement feels"). A bare
+//           comma cannot close that list; the dash can. The one variant that
+//           does close on a comma (:147) earns it by not continuing past the
+//           token at all.
+//       (d) TWO OF THE FIVE SIT INSIDE A DECLARED LAW. :136 carries two dashes
+//           and is index 0 of `isolated.deficit`, transcribed INDEPENDENTLY into
+//           tests/generators/settlementOriginProse.test.js:62 and asserted byte
+//           for byte by "RR law 1 — canonical-at-zero: no seedless caller
+//           moved". Cutting :136 means editing that independent pin in the same
+//           act, which is precisely what the pin's own docblock exists to
+//           forbid. Re-cutting RR law 1 or R-DST-W4-f is a sitting's act, not a
+//           lane's and not a chair's.
+//     So the five stay in this baseline as RULED debt: the tier still freezes
+//     them (no sixth can appear), and "shrink-only" here means the ratchet, not
+//     an expectation that these will ever fall.
 const GENERATORS_BASELINE_PATH = join(ROOT, 'tests/copy/.voice-mechanics-generators-baseline.json');
 
 const GENERATOR_FILES = walkJs(join(ROOT, 'src/generators'))
