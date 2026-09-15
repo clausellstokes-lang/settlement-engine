@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
+  "measuredAtSha": "a7955b6c0e50f9f8af8d3144d48f86bbda52612b",
+  "measuredBy": "LT28-gate (Opus 5 — Fable-unvalidated)",
+  "date": "2026-09-15",
+  "note": "LT28 car 6: two detector controls added to tests/docs/enforcement-claims.test.js pin the `\\b0 problems` precision fix in both directions (+2 titles). The four controls added to tests/copy/voiceMechanics.test.js for the authored-vocabulary exemption class contribute ZERO titles — that file is parked — which was measured, not assumed: with enforcement-claims alone reverted to HEAD the walker was 34 passed. No file changed park or credit status.",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24169,
+  "titles": 24171,
   "suiteTitles": 6452
 }
