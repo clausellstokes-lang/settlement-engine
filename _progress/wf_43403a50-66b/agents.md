@@ -1,4 +1,4 @@
-# wf_43403a50-66b — per-agent progress, 2026-09-15 03:08:33
+# wf_43403a50-66b — per-agent progress, 2026-09-15 03:14:26
     - `a83c8f525` ? · DONE · transcript 09-14 17:00 1007 KB · 22 tool calls · result: {"items": [{"title": "T1 \u2014 move the ~460MB marketing masters off the ledger branch", "what": "The ledger branch carries ~460MB of marketing masters; they m
     - `a2cb5e5a8` ? · DONE · transcript 09-14 17:01 1044 KB · 12 tool calls · result: {"stateSummary": "This source is a slice (part 2 of 11) of docs/OWNER_DECISION_QUEUE.md \u2014 the estate's running chair ledger, numbered \u00a7125 through \u0
     - `acaa3e2a0` ? · DONE · transcript 09-14 17:08 1083 KB · 18 tool calls · result: {"stateSummary": "This source is part 3 of 11 of docs/OWNER_DECISION_QUEUE.md: the append-only chair ledger covering \u00a7270\u2013\u00a7379 (2026-08-17 to 202
