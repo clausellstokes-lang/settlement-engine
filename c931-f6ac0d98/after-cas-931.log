@@ -1,0 +1,10 @@
+gate green · tests=32771
+PASS a Fable-validated car is a CHAIR act — carries no Lane: trailer — []
+PASS tests/lint/.lighting-census-baseline.json measuredAtSha measured INSIDE this consist — da18fccb0
+PASS scripts/.test-ratchet-baseline.json measuredAtSha measured INSIDE this consist — a06c46b56
+FAIL scripts/.writer-reach-baseline.json frozenAtSha measured INSIDE this consist — 23caf37ee
+SKIP tests/lint/.tuning-inventory.json measuredAtSha — untouched by this consist; cites 21fe864fa
+INFO ratchet register totalTests=32771 totalFiles=2518 entries=1
+PASS ratchet register totalTests == the gate line — (32771, '32771')
+CHAIR-VERIFY RED: scripts/.writer-reach-baseline.json frozenAtSha measured INSIDE this consist
+⛔ chair-verify RED — stop
