@@ -191,7 +191,7 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - ✅ Widen determinism eslint guard to src/domain/** — done in P1.2
 - ✅ Pin undo true-inverse with a whole-object round-trip across the full EVENT_REGISTRY — domain.5 (bae1285); FOUND + fixed 4 real undo gaps (ASSIGN_NPC_TO_ROLE, RESTORE_INSTITUTION, RESTORE_FACTION, REMOVED_THREAT not snapshot-backed)
 - ✅ Close the preview≡apply gap on projected nextSettlement with now-threading — domain.6 (40eb1a9); apply path now pure of (settlement, event, now), store threads the wall-clock
-- ✅ Turn on tsc strictness for the domain — domain.7 (5881cb8); shipped as a per-file regression-blocking RATCHET (4649-error baseline, gate-wired) — full burn-down to zero is the tracked worklist (XL, ~133 files)
+- ✅ Turn on tsc strictness for the domain — domain.7 (5881cb8); shipped as a per-file regression-blocking RATCHET (4,649-error baseline **at shipping**, gate-wired) — full burn-down to zero is the tracked worklist (XL). ⭐ **MEASURED 2026-09-15 at `f73bdbf16`: 1,113 errors over 75 files** — a 76 % burn already banked. 4,649 is the figure AT `5881cb8` and was never a claim about today; quoting it as current debt overstates it by 4.2x. See THE GATE'S MEASURED STATE below.
 
 ### Track B — Generators data-flow integrity (owner: generators) — ✅ COMPLETE
 - ✅ Declare step reads/mutates/scratch contracts + enforce in runPipeline — P1.7 (writes) + generators.3 (reads); strict mode asserts declared reads are produced before each step; getStepMeta surfaces reads/mutates/scratch
@@ -949,6 +949,49 @@ concrete change, rationale, and acceptance criterion.
 - **Change:** tsconfig.json:24-25 sets `strict: false` and `noImplicitAny: false`, inherited by both the domain-only typecheck (tsconfig.json) and the full gate (tsconfig.full.json extends it). With these off, every un-annotated parameter is `any` and tsc cannot catch shape drift, mis-typed event payloads, or a JSDoc @param that lies — the 'JSDoc-type gaps tsc can't see' the brief names. Create a domain-scoped strict config: add tsconfig.domain-strict.json that extends the base, overrides strict:true + noImplicitAny:true, and narrows include to src/domain/**; wire a `typecheck:domain:strict` script and add it to `check`. Burn the resulting errors to zero (mostly missing @param annotations and a few genuine nullability bugs).
 - **Why:** The domain is the layer where type correctness matters most (it's the kernel every other layer trusts) and the layer best positioned to be strict (pure data-in/data-out, no React/JSX/DOM noise). Strict-on is what makes the hundreds of existing JSDoc annotations load-bearing instead of decorative; today a wrong @param shape compiles clean. This is the genuine last-mile for the type-safety dimension of A+.
 - **Done when:** `tsc --noEmit -p tsconfig.domain-strict.json` exits 0 with strict:true + noImplicitAny:true over src/domain/**. The script is in `npm run check` so a future implicit-any or JSDoc shape lie in domain reds the gate. All 2332 tests still green (type-only change).
+
+---
+
+### THE GATE'S MEASURED STATE — a dated correction (2026-09-15, at `f73bdbf16`)
+
+⚠ **READ THIS BEFORE QUOTING ANY GATE FIGURE ABOVE OR IN `docs/START_HERE.md` §3k.** §3k is dated
+2026-08-07 and says of itself *"git wins over every figure here"*. It is the origin of five figures
+that a September synthesis re-derived as current; four of the five no longer have a referent, and the
+fifth belongs to a different branch. Every figure below was executed at `f73bdbf16` (the build slot,
+`claude/composite-r4`), porcelain 0, on an 8-core box, with the load average recorded beside it.
+
+| §3k / synthesis said (2026-08-07) | Measured 2026-09-15 at `f73bdbf16` |
+|---|---|
+| "roughly 350 type errors" (351) | **167** raw over 36 files under `tsconfig.full.json`; `typecheck:ratchet` green AT its floor |
+| "fifteen lint-family tests fail" (49 attributed) | **1** census entry, and it is the owner-gated golden master; none lint-family |
+| "three lint errors in files nobody owns" | **0 errors.** `npm run lint` exits 0 at `✖ 29 problems (0 errors, 29 warnings)` |
+| "the distribution check is over two size ceilings" | `verify:dist` is **green at the product tip**; the red belongs to the unlanded Scribe lane |
+| "several ratchets frozen at today's debt" | **True, and the only one of the five still true.** The burn-down is live, not stalled |
+
+**The two typecheckers disagree and their counts are not comparable** (CONTRIBUTING.md's receipt law):
+`envoyInterceptionStage.js` carries 22 under `tsconfig.full.json` and 115 under
+`tsconfig.domain-strict.json`. Quote a figure only with its config named.
+
+**The ceilings, moved DOWN on 2026-09-15 (never widened):** full typecheck **173 → 167** (38 → 36
+files) · domain-strict **1,120 → 1,113** (75 files) · the known-failure census **3 → 1** · the Tier-2
+voice baseline **311 → 306 em** (55 → 52 files).
+
+⭐ **THE HEADLINE RED OF LONG-TAIL #28 WAS THE WEATHER, AND IT IS PROVED IN BOTH DIRECTIONS.**
+`tests/simulation/centuryLegSoak.test.js` collapsing out of the census is a COST failure, not a
+correctness one — measured the same day, same bytes, three loads: standalone at 1-min load 2.38 it is
+`9 passed` in 261.42 s; inside a full `npm run test:ratchet` whose own parallelism sat at load
+26.30/31.44/23.82 it was green; inside a second run ending at load 146.89/160.11/127.79 it collapsed
+with a byte-identical SCOPE SENTINEL. The estate had already ruled this class twice (`d1a6c773e`,
+`90702c3e9`). The structural half is now cured: the legs are memoised per test rather than run in one
+`beforeAll`, so a slow leg fails the rows that asked for it instead of taking all nine out of the
+census, and the unbankable sentinel is no longer reachable by slowness.
+
+⛔ **ZERO HEADROOM IS THE REAL STATE OF THIS GATE, and it is in no other record.** At the product tip
+the generation worker measures **1,404,493 B against a ceiling of 1,404,493** — ONE byte reds
+`verify:dist` — and render-blocking CSS **19,795 B against 19,800**. All eight size-baseline files sit
+at EXACTLY their frozen line count, and that ratchet reds in BOTH directions. Any change touching
+`src/domain/worldPulse/` or `src/domain/display/` must budget for all three.
+
 
 ---
 

@@ -217,9 +217,66 @@ function walkJs(dir, out = []) {
 }
 
 /** @param {string} abs @returns {{ em: number, bang: number }} */
-function countFile(abs) {
+/**
+ * ── THE DECLARED AUTHORED-VOCABULARY EXEMPTION (§901; LT28 car 6, 2026-09-15) ──────────
+ *
+ * THE BAN GOVERNS TEXT THE READER SEES. Two shapes carry a U+2014 that no reader will ever
+ * read as punctuation, and both were reddening the per-file arm while the Tier-2 TOTAL sat
+ * comfortably inside its budget:
+ *
+ *   DELIMITER   the bare literal '—' handed to `String.prototype.split` as a separator.
+ *               One character, no words: it cannot be a sentence, so it is exempt wherever
+ *               it appears and needs no per-file declaration.
+ *   PRODUCER    a string that reproduces ANOTHER module’s authored label verbatim so this
+ *   LABEL       file can map or match it. The em dash belongs to the producer’s vocabulary,
+ *               not to this file’s prose, and editing it here would break the lookup while
+ *               changing nothing a reader sees. Declared per file, literal by literal.
+ *
+ * ⛔ THIS IS AN EXEMPTION, NOT A BUDGET. It is keyed on the EXACT LITERAL, so a new
+ * reader-facing em dash in an exempted file still reds the per-file arm — the control
+ * `an em dash outside the declared vocabulary still reds` pins exactly that. And every
+ * declared literal must still be PRESENT: a literal that no longer exists reds too, so a
+ * burned-down exemption gets banked instead of rotting.
+ */
+const VOICE_EM = '\u2014';
+
+/** @type {Record<string, { why: string, literals: readonly string[] }>} */
+const AUTHORED_VOCABULARY_EXEMPTIONS = Object.freeze({
+  'src/domain/display/labelBands.js': Object.freeze({
+    why: 'COMPLEXITY_BAND_BY_LABEL is a TOTAL map over deriveEconomicComplexity\u2019s closed '
+      + 'vocabulary; each key is that producer\u2019s own authored label, carried verbatim so the '
+      + 'band word can be recovered from it.',
+    literals: Object.freeze([
+      'Highly diversified \u2014 multiple major revenue streams',
+      'Diversified \u2014 broad institutional economic base',
+      'Concentrated \u2014 fewer revenue streams than scale suggests',
+      'Limited \u2014 narrow economic base for this scale',
+      'Subsistence \u2014 survival economy',
+    ]),
+  }),
+  'src/domain/display/stateProse/generalStateProse.js': Object.freeze({
+    why: 'foodGenerator.js:342 writes the label `Deficit \u2014 Active Famine`; this desk carries '
+      + 'it verbatim as a POOL KEY so the famine block can be keyed on it.',
+    literals: Object.freeze([
+      'Deficit \u2014 Active Famine',
+    ]),
+  }),
+});
+
+/**
+ * Is this literal exempt in this file? Bare delimiters always; declared producer labels
+ * only in the file that declared them.
+ */
+function isExemptLiteral(rel, text) {
+  if (text === VOICE_EM) return true;
+  return (AUTHORED_VOCABULARY_EXEMPTIONS[rel]?.literals || []).includes(text);
+}
+
+/** @param {string} abs @param {string} rel */
+function countFile(abs, rel = '') {
   let em = 0, bang = 0;
   for (const text of stringLiteralContents(readFileSync(abs, 'utf8'))) {
+    if (isExemptLiteral(rel, text)) continue;
     em += (text.match(/—/g) || []).length;
     bang += (text.match(/!/g) || []).length;
   }
@@ -234,7 +291,7 @@ const SCANNED_FILES = [
 /** @type {Record<string, { em: number, bang: number }>} */
 const current = {};
 for (const rel of SCANNED_FILES) {
-  const c = countFile(join(ROOT, rel));
+  const c = countFile(join(ROOT, rel), rel);
   if (c.em > 0 || c.bang > 0) current[rel] = c;
 }
 
@@ -306,6 +363,39 @@ describe('E2 voiceMechanics — src/data + src/domain string-literal ratchet (sh
       }
     }
     expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+  });
+
+  // ── THE EXEMPTION’S OWN CONTROLS (§901; LT28 car 6) ──────────────────────────────
+  //    A declared exemption without controls is a widened budget wearing a reason. These
+  //    four pin that it exempts exactly what it says and nothing else.
+  it('an em dash outside the declared vocabulary still reds, even in an exempted file', () => {
+    const exempted = 'src/domain/display/labelBands.js';
+    expect(isExemptLiteral(exempted, 'A sentence \u2014 with an authored dash')).toBe(false);
+    expect(isExemptLiteral(exempted, 'Highly diversified \u2014 multiple major revenue streams')).toBe(true);
+  });
+
+  it('a declared literal is exempt ONLY in the file that declared it', () => {
+    const label = 'Deficit \u2014 Active Famine';
+    expect(isExemptLiteral('src/domain/display/stateProse/generalStateProse.js', label)).toBe(true);
+    expect(isExemptLiteral('src/domain/display/labelBands.js', label)).toBe(false);
+    expect(isExemptLiteral('src/domain/somewhereElse.js', label)).toBe(false);
+  });
+
+  it('the bare delimiter is exempt anywhere, and only when it is bare', () => {
+    expect(isExemptLiteral('src/domain/anything.js', '\u2014')).toBe(true);
+    expect(isExemptLiteral('src/domain/anything.js', ' \u2014 ')).toBe(false);
+    expect(isExemptLiteral('src/domain/anything.js', '\u2014 and then words')).toBe(false);
+  });
+
+  it('every declared exemption literal is still PRESENT in its file (a burned one gets banked)', () => {
+    const missing = [];
+    for (const [rel, entry] of Object.entries(AUTHORED_VOCABULARY_EXEMPTIONS)) {
+      const src = readFileSync(join(ROOT, rel), 'utf8');
+      const seen = new Set(stringLiteralContents(src));
+      for (const lit of entry.literals) if (!seen.has(lit)) missing.push(`${rel}: ${lit}`);
+    }
+    expect(missing, `\nDeclared voice exemptions whose literal no longer exists \u2014 remove the`
+      + ` row to bank the win:\n${missing.join('\n')}\n`).toEqual([]);
   });
 
   it('total debt never grows past its committed budget', () => {

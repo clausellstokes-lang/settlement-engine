@@ -37,7 +37,16 @@ const rel = (p) => path.join(REPO, p);
 // "fails the build" joined in fix wave 3: VOICE_AND_TONE.md §7 claimed a
 // voiceMechanics guard "fails the build" for months before the guard existed —
 // the phantom-claim shape this pin exists to kill.
-const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|fails the build|zero violations/;
+// ⚠ `0 problems` CARRIES A WORD BOUNDARY, AND THAT IS A BUG FIX, NOT A NARROWING
+// (LT28 car 6, 2026-09-15). Without `\b` the alternative also matches the TAIL of
+// "30 problems", so three lines in FABLE_VALIDATION_QUEUE.md that REPORT a lint run
+// ("`npm run lint` 30 problems / 3 errors") were being read as completeness CLAIMS of
+// zero. They claim nothing, so neither cure the pin offers fits them: there is no
+// enforcer that proves "30 problems", and deleting an accurate measurement to green a
+// guard is the guard corrupting the record it audits. A claim genuinely asserting zero
+// is always preceded by whitespace or start-of-line, so recall is unchanged — the
+// controls below pin both directions.
+const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|\b0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|fails the build|zero violations/;
 
 // Standing-claim corpus (SS4: generalized from a fixed 3-doc list). The old
 // corpus was enumerated by hand, so a NEW doc making a completeness claim was
@@ -507,12 +516,16 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
   // lock-the-win idiom the sizeBaseline and kill-list ratchets use. And the shrink arm
   // is this pin's anti-vacuity control too: if the claim regex or the corpus walk ever
   // broke and `claims` came back empty, all four rows would red rather than pass.
-  const FROZEN_NAKED = Object.freeze({
-    'docs/FABLE_VALIDATION_QUEUE.md :: machine-enforced': 1,
-    'docs/FABLE_VALIDATION_QUEUE.md :: 0 problems': 3,
-    'docs/GOLDEN_SHIFT_LEDGER.md :: machine-enforced': 1,
-    'docs/implementation/packets/foreign-policy/IN-0C.md :: machine-enforced': 1,
-  });
+  // ⭐ EMPTY SINCE 2026-09-15 (LT28 car 6). The six were burned, not banked, and they went
+  // two different ways because they were two different things:
+  //   · THREE were never claims. `docs/FABLE_VALIDATION_QUEUE.md :: 0 problems` x3 matched
+  //     the tail of "30 problems" on three lines REPORTING a lint run. The detector's
+  //     `\b` above is the cure; the lines are accurate and stay as written.
+  //   · THREE were real claims that already named their enforcer IN PROSE and simply
+  //     carried no tag. Each now carries `@enforced-by` pointing at that same enforcer.
+  // The shrink arm below is what made this legible: it refuses a burn that is not banked,
+  // so emptying this table is part of the same act, not a later tidy-up.
+  const FROZEN_NAKED = Object.freeze({});
 
   it('the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it', () => {
     const naked = claims.filter((c) => !c.tagged || c.targets.length === 0);
@@ -569,6 +582,18 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
     });
     it('rejects an unknown eslint rule id', () => {
       expect(resolveTarget('made-up/never-registered').ok).toBe(false);
+    });
+    // ── LT28 car 6: the `\b0 problems` precision fix, pinned in both directions so a
+    //    later reader cannot "simplify" the boundary away and silently re-mint three
+    //    false claims out of three accurate lint measurements.
+    it('does NOT read the tail of "30 problems" as a zero claim', () => {
+      expect(CLAIM_RE.test('`npm run lint` 30 problems / 3 errors')).toBe(false);
+      expect(CLAIM_RE.test('(3 errors / 30 problems), none in a touched file')).toBe(false);
+      expect(CLAIM_RE.test('10 problems')).toBe(false);
+    });
+    it('still reads a genuine zero claim (the boundary cost no recall)', () => {
+      expect(CLAIM_RE.test('the sweep landed and lint reports 0 problems')).toBe(true);
+      expect(CLAIM_RE.test('0 problems')).toBe(true);
     });
     it('accepts a real error-severity rule', () => {
       expect(resolveTarget('visual-budget/no-raw-color').ok).toBe(true);

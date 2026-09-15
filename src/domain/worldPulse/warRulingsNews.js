@@ -104,7 +104,7 @@ function text(value) {
 /** Reader words cannot carry scalars, raw ids, JSON, or engine-token syntax. */
 function readerText(value) {
   const valueText = text(value);
-  if (!valueText || /[\d%\u00d7_{}\[\]]/u.test(valueText)) return '';
+  if (!valueText || /[\d%\u00d7_{}[\]]/u.test(valueText)) return '';
   if (/\b(?:rng|roll|score|ratio|tick|chance)\b/i.test(valueText)) return '';
   return valueText;
 }

@@ -51,6 +51,13 @@ export const HALL_CHAIR_COUNT = FOUNDER_SEAT_CAP;
 
 // ── Numerals ────────────────────────────────────────────────────────────────
 
+/**
+ * ⚠ THE `@type` IS LOAD-BEARING. Without it tsc infers each row as `(number|string)[]`, so
+ * the destructured `value` below is `string|number` and both `rest >= value` (TS2365) and
+ * `rest -= value` (TS2363) red. The pair annotation states what the table has always been.
+ *
+ * @type {ReadonlyArray<readonly [number, string]>}
+ */
 const ROMAN_STEPS = Object.freeze([
   [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
   [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
@@ -122,7 +129,11 @@ export const CHAIR_RING_ROLES = Object.freeze(['developer', 'admin']);
  * @returns {'developer'|'admin'|null} null for a founder who is not staff
  */
 export function chairRingRole(role) {
-  return CHAIR_RING_ROLES.includes(role) ? role : null;
+  // ⚠ `Array.prototype.includes` is not a type guard, so tsc cannot narrow `role` from
+  // `string` to the ring union on the true arm and the return reds (TS2322). The cast is
+  // the guard written down; it is a PRECISE literal union, never `any`, so no debt moves
+  // sideways into the any-cast ratchet.
+  return CHAIR_RING_ROLES.includes(role) ? /** @type {'developer'|'admin'} */ (role) : null;
 }
 
 // ── The public projection (fail-closed) ─────────────────────────────────────

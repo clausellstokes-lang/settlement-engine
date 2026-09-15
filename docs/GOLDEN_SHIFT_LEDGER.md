@@ -2126,7 +2126,7 @@ its own splice.
 ("…or patronage, **and the arrangement is renegotiated every season**") and is
 CORRECT: an independent clause cannot be misread as a list item, a noun phrase
 can. The rule is PHRASE vs CLAUSE, and it is now machine-enforced by
-`pin:channels-close` in tests/generators/settlementOriginProse.test.js — an
+`pin:channels-close` in tests/generators/settlementOriginProse.test.js — an <!-- @enforced-by tests/generators/settlementOriginProse.test.js -->
 allowlist of em-dash, terminator, or clause-opening conjunction — carrying a
 negative control that asserts the exact shipped sentence FAILS it, and a
 specificity control that variant #4's form still passes. Variant #4 is

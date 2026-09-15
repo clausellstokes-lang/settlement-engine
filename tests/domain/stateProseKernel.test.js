@@ -886,7 +886,24 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     // Non-vacuity on both axes: the sweep found the corpus, and it reached every slot.
     expect(pools.length, 'three-variant pools swept').toBeGreaterThanOrEqual(500);
     expect(tally.filter((seen) => seen === 0), 'an unreachable slot').toEqual([]);
-  });
+    // ⭐ AN EXPLICIT PER-TEST BUDGET CARRYING THE MEASURED FIGURE (LT28 car 2, 2026-09-15),
+    // which is the cure `scripts/check-test-ratchet.mjs` names in its own words when a row
+    // expires: "Cut the row's per-run work or give it an explicit per-test budget carrying
+    // the measured figure — never bank one in the census, and never raise the suite-wide
+    // testTimeout (that hides the next one)."
+    //
+    // MEASURED, 8 cores: this row costs 7,483 ms ALONE at 1-min load 3.14 (the whole file is
+    // 38 tests in 12.50 s). Inside a full `npm run test:ratchet`, whose own parallelism sits
+    // at load 26-31, the SAME row was killed at 61,996 ms against the suite-wide 20,000 ms —
+    // an 8.3x contention multiple on identical bytes. 120_000 is ~2x that worst observed
+    // cost and 16x the standalone figure, and it is the estate's most-used explicit budget
+    // (112 sites in tests/).
+    //
+    // ⛔ THE READ COUNT IS NOT THE THING TO CUT. 5,470,000 reads is what gives the
+    // chi-square its power, and the figure is written into this row's TITLE — which is the
+    // census's identity key (`<file> :: <full test name>`), so trimming the sweep would
+    // silently re-key banked debt as well as weaken the instrument.
+  }, 120_000);
 
   it('⭐ APPEND-SAFE: a fourth wording moves about a QUARTER, and every mover moves TO it', () => {
     // THE ROW'S GROUND, and the reason the modulus is measured in the same loop. On the
@@ -950,7 +967,11 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     expect(modulusShare).toBeLessThan(80);
     expect(modulusToNewShare).toBeLessThan(40);
     expect(reads, 'the reads measured').toBeGreaterThanOrEqual(500 * APPEND_SEEDS.length);
-  });
+    // An explicit per-test budget on the same ground as the row above, scaled to this row's
+    // own measurement: 3,899 ms alone at load 3.14, so the 8.3x contention multiple measured
+    // on this file puts its worst case near 32 s — already past the suite-wide 20,000 ms.
+    // 60_000 is ~2x that, and the estate's second most-used explicit budget (98 sites).
+  }, 60_000);
 
   it('⭐ A4 — the same call twice is the same variant, and the audience filter cannot move it', () => {
     // THE PROMISE at the level this function owns. The second half is the point of keying

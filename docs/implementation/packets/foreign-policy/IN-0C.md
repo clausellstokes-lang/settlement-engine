@@ -481,7 +481,7 @@ registration, ≤250 production lines, ≤8 cases):
 | Existing logic files | **3** | 2 | **OVERRIDE — CR-IN0C-ENVELOPE**, `treatyLifecycleVoice.js` named |
 | Registration files | **5** | 3 | **OVERRIDE — CR-IN0C-2-R1**, *"the 6-file registration footprint is accepted"* (5 registration + the voice file) |
 | Production effective lines | `<=212` | 250 | ✓ |
-| Acceptance cases | **8** | 8 | ✓ — and the cap is **machine-enforced**, not advisory: `implementation-packets.mjs:425` reds at 9. See the note above §8's table |
+| Acceptance cases | **8** | 8 | ✓ — and the cap is **machine-enforced**, not advisory: `implementation-packets.mjs:425` reds at 9. See the note above §8's table <!-- @enforced-by scripts/implementation-packets.mjs --> |
 
 **Overrides approved before dispatch: TWO, each named above with its ruling. No
 others** — and note that neither is a *validator* override: `validate:packets` caps
