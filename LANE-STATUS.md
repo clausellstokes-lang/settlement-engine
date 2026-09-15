@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 14:10:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 14:16:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -113,6 +113,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
+- **wf_f25453d7-4bd** (mtime 09-15 14:14): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_f25453d7-4bd/`
+    - `a57017065` ? · IN FLIGHT · transcript 09-15 14:14 330 KB · 3 tool calls · last: Bash grep -n "^#\|^##\|^###" /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88
+    - `ac78c868b` ? · IN FLIGHT · transcript 09-15 14:14 158 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
+    - `abdbfba1a` ? · IN FLIGHT · transcript 09-15 14:14 338 KB · 2 tool calls · last: Bash grep -n "^#\|^##\|^###" /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88
+    - `af1132c61` ? · IN FLIGHT · transcript 09-15 14:14 324 KB · 2 tool calls · last: Bash wc -l /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/sc
+    - `a4727d876` ? · IN FLIGHT · transcript 09-15 14:14 158 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
+    - `aedb593e7` ? · IN FLIGHT · transcript 09-15 14:14 322 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
 - **wf_406e67e7-fa9** (mtime 09-15 13:22): agent calls 11 (11 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_406e67e7-fa9/`
     - `a7e604d4d` ? · DONE · transcript 09-15 12:37 819 KB · 51 tool calls · result: ## The sequencing read — #18, #32, #33, #34, #20, #21  Read at the ledger `a803dee7a` (branch `review-fixes-2026-07-08`) and verified against the build slot `cl
     - `a3ba4fb58` ? · DONE · transcript 09-15 12:41 1079 KB · 56 tool calls · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 declared waves across the FP programs)", "summary": "Item #32 is the FP (Foreign Poli
@@ -127,4 +134,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 71387 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 27.12 21.70 27.13
+load: 28.20 23.40 25.97
