@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 21:08:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 21:14:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = f70dfee96 Plan: the collection at 09-14 ~22:1x — the Scribe is built through W4, dark and unverifi
 
@@ -113,9 +113,14 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_00542089-397** (mtime 09-14 21:05): agent calls 2 (2 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_00542089-397/`
-    - `a0745eb26` ? · IN FLIGHT · transcript 09-14 21:08 695 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a534045ec` ? · IN FLIGHT · transcript 09-14 21:08 693 KB · 24 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+- **wf_a788be93-699** (mtime 09-14 21:11): agent calls 4 (4 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_a788be93-699/`
+    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:14 523 KB · 27 tool calls · files: x_deno.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ac66e2c65` ? · IN FLIGHT · transcript 09-14 21:14 555 KB · 33 tool calls · files: sh_head.txt, odqsecs.txt · last: Bash W=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:14 549 KB · 29 tool calls · last: Bash OUT=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scra
+    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:14 525 KB · 27 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+- **wf_00542089-397** (mtime 09-14 21:05): agent calls 2 (2 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_00542089-397/`
+    - `a0745eb26` ? · IN FLIGHT · transcript 09-14 21:12 865 KB · 57 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a534045ec` ? · DONE · transcript 09-14 21:14 882 KB · 28 tool calls · result: {"summary": "The record holds ONE owner sentence that opens a Scribe subscription tier \u2014 2026-09-14 ~13:2x, \"Because I'm thinking that this could actually
 - **wf_00f13b26-496** (mtime 09-14 19:35): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
@@ -456,4 +461,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 3.03 15.21 16.50
+load: 2.34 6.52 11.91
