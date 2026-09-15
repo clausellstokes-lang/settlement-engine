@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
+  "measuredAtSha": "2d841ad5360d8094ced47fcb42b4ff313813c64f",
+  "measuredBy": "lane-LT40-engine (LONG TAIL #40, car 2)",
+  "date": "2026-09-15",
+  "note": "car 2 added one test title to tests/lint/institutionTable.walker.test.js — the arm that pins settlement.services permanently absent",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24169,
+  "titles": 24170,
   "suiteTitles": 6452
 }
