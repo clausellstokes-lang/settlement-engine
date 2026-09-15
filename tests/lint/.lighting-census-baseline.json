@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4612ced3ed19c1190e80cb9f2590922a577fb38f",
+  "measuredAtSha": "32eefe9cfbfc88f43f6c318b55d435c75a0a6ba0",
   "measuredBy": "LT37 (lane-LT37-quality, Opus 5 — Fable-unvalidated)",
   "date": "2026-09-15",
-  "note": "LT37 car 3 lands ONE new test file, tests/domain/aiOverlayEvalFixtures.test.js (Track J part 1, the AI overlay output-eval corpus), carrying 5 live titles under 2 describes. tests/fixtures/ai-overlay-eval-corpus.json is data, not a test file, and is uncredited by construction. The file takes no `each` call, so the each-family park debt is unmoved.",
+  "note": "LT37 car 5 adds FOUR live titles to an EXISTING test file, tests/pdf/screenParitySource.test.js (the characterizing block for the third food-deficit surface), under one new describe. No new test FILE, so files/parked/credited are unmoved; the block takes no `each` call, so the each-family park debt is unmoved too. docs/implementation/LT37-dailylife-food-deficit-cure.md is a record document, not a test file, and is uncredited by construction.",
   "files": 2564,
   "parked": 375,
   "credited": 2189,
-  "titles": 24174,
-  "suiteTitles": 6454
+  "titles": 24178,
+  "suiteTitles": 6455
 }
