@@ -1,4 +1,4 @@
-# wf_57faeea3-385 — per-agent progress, 2026-09-14 22:52:48
+# wf_57faeea3-385 — per-agent progress, 2026-09-14 22:58:26
     - `ab9ce8924` ? · IN FLIGHT · transcript 09-14 22:49 1114 KB · 99 tool calls · files: $G/checkquick.txt, $G/check.txt, $G/century.txt, >$G/century.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
     - `afde2b45d` ? · DONE · transcript 09-14 22:09 1452 KB · 124 tool calls · result: {"n": 29, "title": "The instrument estate's own debt", "stateOfRecord": "SIX CLAIMS, AND THE RECORD ITSELF ALREADY WITHDRAWS ONE OF THEM.\n\n(1) THE 10/10 CENSU
     - `aa21f7b4f` ? · DONE · transcript 09-14 22:05 1182 KB · 90 tool calls · result: {"n": 30, "title": "The reader-without-writer repairs and the blocked whole-tree scan", "stateOfRecord": "THE CARD'S THREE CLAIMS AND WHERE EACH COMES FROM. The
