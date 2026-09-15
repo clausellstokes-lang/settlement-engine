@@ -1,4 +1,4 @@
-# wf_d358b43d-411 — per-agent progress, 2026-09-15 10:20:41
+# wf_d358b43d-411 — per-agent progress, 2026-09-15 10:26:08
     - `ae3631118` ? · DONE · transcript 09-15 01:16 1216 KB · 78 tool calls · files: baseline_keys.txt, noncomment_em.txt, nc_files.txt, gen_strings.txt · result: {"n": 41, "title": "The voice guard's blind spot and the shipped prose debts", "stateOfRecord": "FOUR CLAIMS IN THE SYNTHESIS; TWO HOLD EXACTLY, ONE IS A GARBLE
     - `a83d85364` ? · DONE · transcript 09-15 01:15 1238 KB · 104 tool calls · result: {"n": 40, "title": "Engine defects recorded and deliberately not fixed \u2014 the non-output-moving ones", "stateOfRecord": "THE ITEM AS SYNTHESISED. `kit/brief
     - `a8d7f3fa2` ? · DONE · transcript 09-15 01:14 1200 KB · 77 tool calls · result: {"n": 38, "title": "The landing page and first-contact ladder (LD-1..LD-11 + the first-contact backlog)", "stateOfRecord": "THE RECORDS (read whole, LEDGER work
