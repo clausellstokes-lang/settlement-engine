@@ -14,7 +14,11 @@
 > per-tick disaster writeback (the readiness row finally moves), plus grounding-honesty fold-ins from Wave 6 #1
 > (food self-sufficiency, stability-label, surplus-%, crimeTypes joins). Partially advances Wave 5 #3/#4 and
 > Wave 6 #1; the world-pulse power-transfer write-back grazes Wave 7's owner-gated dossier write-back item.
-> Waves 5–6 remainder next; Wave 7 awaits owner sign-off; Wave 8 (structural prevention —
+> **LONG TAIL #39 (2026-09-15)** — the world-pulse roadmap's last open row, Phase 4d, closed: the
+relationship chronicle read model + its War-door surface, the NPC trail over the ladder's own
+`contests`/`seatTransitions`, a total incident-type lexicon bound to its writers by a walker, and
+the R4 chore above (the stale roadmap statuses) paid in the same lane. Read-only throughout — no
+persisted field, no store-shape change, no engine byte. Waves 5–6 remainder next; Wave 7 awaits owner sign-off; Wave 8 (structural prevention —
 > entity ids, frozen/live + producer/consumer manifests, crisis-triple sync) proposed below
 > under the same sign-off gate. **Regional waves R1–R4** (2026-06-11, from
 > `docs/REGIONAL_ENGINE_AUDIT.md` — the paid inter-settlement layer, owner-prioritized) joined the
@@ -282,7 +286,11 @@ embedding projections nobody reads (the five dead `deriveRegionalState` fields g
 thread `now` through graph/news helpers (replay byte-identical for real); per-settlement rng
 forks for candidate rolls; calendar season fix; flows proposal gate made reachable; uncreatable
 channel types get discovery rules or leave the enum; memory double-count + write-only
-posture fields; factionState pruning; refresh the stale `world-pulse-roadmap.md` statuses; new
+posture fields; factionState pruning; refresh the stale `world-pulse-roadmap.md` statuses
+(**PAID 2026-09-15 by LONG TAIL #39** — the ten stale `[next]` markers are flipped in that
+file's bodies, each against a MEASURED address at the build slot, and a 2026-09-15 status block
+records what 4d actually shipped plus the two traps at that seam; the only item left on that
+roadmap is 4a's `generate-chronicle` deploy, which is the owner's Supabase act); new
 invariants — every channel type creatable, clock-sync pin, same-tick delay pin, impact-visibility
 pin, mediums triage from the audit.
 
