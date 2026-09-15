@@ -74,6 +74,12 @@ vi.mock('../../src/components/generate/ExportDraftButton.jsx', () => ({ default:
 vi.mock('../../src/store/index.js', () => {
   const useStore = (selector) => selector(H.state);
   useStore.getState = () => H.state;
+  // LD-11: GenerateWizard subscribes to `navResetRequest` through the house store
+  // API (the useOwnerScopedSaves / PlacementsLayer idiom). A mock without
+  // `subscribe` makes the component throw on mount, so the stub returns a no-op
+  // unsubscribe — this suite drives no reset request, and the wizard's answer to
+  // one is pinned next door in navResetOnSelfClick.test.jsx.
+  useStore.subscribe = () => () => {};
   return { useStore };
 });
 

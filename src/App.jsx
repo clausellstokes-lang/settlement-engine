@@ -26,7 +26,7 @@ import useIsMobile from './hooks/useIsMobile';
 import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
-import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { useRoute, navigate, replacePath, navigateSelfClick } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
@@ -457,11 +457,14 @@ export default function App() {
   }, []);
 
   const handleNavClick = (id) => {
-    // Contextual re-click: clicking the ALREADY-ACTIVE Library tab closes any open
-    // detail by re-navigating to the base path. (The Create-page first-screen
-    // reset needs a store nonce that has not landed yet — a 4a follow-up — so a
-    // Create re-click falls through to a normal re-nav for now.)
-    if (id === view && id === 'settlements') { setView('settlements'); return; }
+    // LD-11 — SELF-CLICK RESET, dispatched from the ROUTE REGISTRY rather than from
+    // here. This line replaces the inline `settlements` hack that used to stand in
+    // its place (and the in-code note beside it promising "a store nonce that has
+    // not landed yet"): the nonce is uiSlice.navResetRequest, the map is each nav
+    // block's `reset` in lib/routes.js, and the dispatch is navigateSelfClick in
+    // hooks/useRoute.js. It returns false for any section that declares nothing, so
+    // an undeclared tab still navigates exactly as it does today.
+    if (id === view && navigateSelfClick(id, useStore.getState().requestNavReset)) return;
     setView(id);
     // Free wanderers clicking Realm see a Cartographer-upgrade pitch (cooldown 24h
     // via the moments library; premium auto-skipped; anon is handled richer on the

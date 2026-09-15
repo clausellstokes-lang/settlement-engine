@@ -28,19 +28,46 @@ import {
 const SITE_NAME = 'SettlementForge';
 const DEFAULT_VIEW = 'generate';
 
+// ── THE RESET-ON-SELF-CLICK KINDS (LD-11, owner-ordered 2026-08-02) ─────────
+// Clicking a ribbon cell while ALREADY on its page returns that section to its
+// registered default. The order's binding rule is that the map is DATA ON THE
+// ROUTE REGISTRY — "no scattered per-page hacks" — so the kind lives on the same
+// `nav` block NAV itself is derived from, and a section cannot join the ribbon
+// without declaring how it resets.
+//
+// TWO KINDS, and the split is a question about WHERE A SECTION'S NAVIGATION STATE
+// LIVES, not about how complicated the section is:
+/** THE URL IS THE WHOLE OF IT. Re-navigating to the bare route is the reset,
+ *  because that one act drops a drill-in (`/settlements/:id`,
+ *  `/compendium/:entry`, `/gallery/:slug`), a facet hub, AND every query param
+ *  (`?tab=`, `?mode=custom`, `?cat=`) — navigate() rebuilds the path from the
+ *  view id alone. Nothing in the section has to know it was reset. */
+export const RESET_ROUTE = 'route';
+/** THE SECTION HOLDS STATE THE URL CANNOT EXPRESS, so it is ASKED rather than
+ *  told: a request is published and the section performs its own reset. This is
+ *  what keeps the dirty-state guard where it belongs — the wizard's unsaved-draft
+ *  confirm is LOCAL to GenerateWizard (`pendingExit`), and a reset dispatched
+ *  from App could not have fired it without hoisting a dialog into the shell.
+ *  App.jsx:459-462's in-code note called this "a store nonce that has not landed
+ *  yet — a 4a follow-up"; it is `uiSlice.navResetRequest`, and this is that. */
+export const RESET_SECTION = 'section';
+
 // ── The canonical table ─────────────────────────────────────────────────────
 // `view`  — internal id used by App's render switch + nav arrays.
 // `path`  — public URL.
 // `title` — document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 // `feedback` — false when route chrome must suppress the floating support widget.
-// `nav`   — top-nav metadata `{ label, order }` for the views that appear in the
-//           primary navigation. The single source of truth for the nav bar:
+// `nav`   — top-nav metadata `{ label, order, reset }` for the views that appear
+//           in the primary navigation. The single source of truth for the nav bar:
 //           App derives its NAV array from these (see the NAV export below), so
 //           adding/relabelling/reordering a nav tab is a one-place edit here
-//           instead of a parallel array that can silently drift.
+//           instead of a parallel array that can silently drift. `reset` is
+//           LD-11's map (RESET_ROUTE / RESET_SECTION above); NAV_RESETS is derived
+//           from it, and tests/components/navResetOnSelfClick.test.jsx holds the
+//           two sets equal in both directions so a new tab cannot arrive mute.
 export const ROUTES = Object.freeze([
-  { view: 'generate',              path: '/create',                title: 'Create a Settlement',           nav: { label: 'Create',     order: 20 } },
+  { view: 'generate',              path: '/create',                title: 'Create a Settlement',           nav: { label: 'Create',     order: 20, reset: RESET_SECTION } },
   // The Welcome front door: a hero over the same generation flow as /create.
   // A bare root visit ('/') canonicalizes here for logged-out visitors (the
   // marketing CTAs); signed-in members are sent to /create — via App's front-door
@@ -61,14 +88,14 @@ export const ROUTES = Object.freeze([
   { view: 'home',                  path: '/home',                  title: 'Welcome' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (via the nav.label below).
-  { view: 'settlements',           path: '/settlements',           title: 'Your Library',                  nav: { label: 'Library',    order: 30 } },
+  { view: 'settlements',           path: '/settlements',           title: 'Your Library',                  nav: { label: 'Library',    order: 30, reset: RESET_ROUTE } },
   // UX Phase 4 — the Realm hub: the simulation's new IA home (World Map + Pulse +
   // Chronicle + Pantheon as one destination). The old World Map lives here as the
   // Map sub-tab. `/map` (and `?view=map`) redirect into `/realm` — see
   // LEGACY_VIEW_ALIASES + App's redirect effect.
-  { view: 'realm',                 path: '/realm',                 title: 'Realm',                         nav: { label: 'Realm',      order: 40 } },
+  { view: 'realm',                 path: '/realm',                 title: 'Realm',                         nav: { label: 'Realm',      order: 40, reset: RESET_ROUTE } },
   { view: 'map',                   path: '/map',                   title: 'World Map' },
-  { view: 'compendium',            path: '/compendium',            title: 'Compendium',                    nav: { label: 'Compendium', order: 50 } },
+  { view: 'compendium',            path: '/compendium',            title: 'Compendium',                    nav: { label: 'Compendium', order: 50, reset: RESET_ROUTE } },
   // ── THE ABOUT FAMILY (docs/DESIGN_ABOUT_PAGES.md) ─────────────────────────
   // The old single About page (`howto` at /how-to, an accordion of two
   // collapsibles) SPLIT into the two pages its dropdown always named. The
@@ -77,7 +104,7 @@ export const ROUTES = Object.freeze([
   // below, reading lib/aboutMapping.js — the one mapping writer), so no link
   // already in the world 404s or lands on the wrong half.
   { view: 'about',                 path: '/about',                 title: 'About' },
-  { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70 } },
+  { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70, reset: RESET_ROUTE } },
   { view: 'about-guide',           path: '/about/guide',           title: 'Practical Guide' },
   // Retired: the pre-split About page. Kept so old links resolve; the redirect
   // effect forwards it (with its ?tab= deep link translated to an anchor).
@@ -86,7 +113,7 @@ export const ROUTES = Object.freeze([
   { view: 'account',               path: '/account',               title: 'Account',                       guard: 'auth' },
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
-  { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
+  { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60, reset: RESET_ROUTE } },
   // THE FOUNDERS' HALL — thirty numbered chairs, all by invitation, none ever
   // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, footer-linked (no
   // top-nav block), no guard. Lazy route; its chair read is fail-closed
@@ -204,6 +231,30 @@ export const NAV = Object.freeze(
     .map(r => ({ id: r.view, label: r.nav.label, order: r.nav.order }))
     .sort((a, b) => a.order - b.order),
 );
+
+/**
+ * LD-11's reset map — view id → RESET_ROUTE | RESET_SECTION, derived from the
+ * SAME `nav` blocks NAV is derived from, so the two can never disagree about
+ * which sections exist. A tab added to the ribbon without a `reset` lands here
+ * as `undefined`, which the self-click dispatch treats as "no declaration, do
+ * nothing" (fail-closed: a mute section navigates exactly as it does today
+ * rather than resetting in some guessed way) and which the totality arm of
+ * tests/components/navResetOnSelfClick.test.jsx reds on.
+ * @type {Readonly<Record<string, string|undefined>>}
+ */
+export const NAV_RESETS = Object.freeze(
+  ROUTES.filter(r => r.nav).reduce((acc, r) => { acc[r.view] = r.nav.reset; return acc; }, {}),
+);
+
+/**
+ * The declared reset kind for a nav section, or undefined when `view` is not a
+ * nav section at all (every non-ribbon route) or declares none.
+ * @param {string} view
+ * @returns {string|undefined}
+ */
+export function resetKindFor(view) {
+  return Object.prototype.hasOwnProperty.call(NAV_RESETS, view) ? NAV_RESETS[view] : undefined;
+}
 
 /**
  * THE CREATE FLOW — which destination each nav tab FEEDS. Create feeds the

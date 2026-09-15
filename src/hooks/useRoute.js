@@ -21,7 +21,9 @@
  */
 
 import { useSyncExternalStore } from 'react';
-import { resolveLocation, viewToPath, isSafeNextPath } from '../lib/routes.js';
+import {
+  resolveLocation, viewToPath, isSafeNextPath, resetKindFor, RESET_ROUTE, RESET_SECTION,
+} from '../lib/routes.js';
 
 const NAV_EVENT = 'sf:navigate';
 
@@ -67,6 +69,60 @@ export function navigate(view, opts = {}) {
   else window.history.pushState(null, '', url);
   emit();
   if (scroll) window.scrollTo(0, 0);
+}
+
+/**
+ * LD-11 — THE SELF-CLICK RESET. Call this ONLY when the clicked nav id is the
+ * ACTIVE view; it returns true when it handled the click (so the caller returns)
+ * and false when the caller should navigate normally.
+ *
+ * WHY IT LIVES HERE. Self-click reset is a NAVIGATION semantic — "go here, and
+ * if we are already here, come back to the front of here" — so it belongs at the
+ * same chokepoint `navigate` does, reading the same declaration table. Putting it
+ * in App would have re-created the scattered per-page hack LD-11 exists to delete
+ * (there is exactly one such hack at the tree today, App.jsx's inline
+ * `settlements` case, and this replaces it).
+ *
+ * ⛔ THE STORE IS NOT IMPORTED. `requestSectionReset` is passed IN — the caller
+ * hands over `useStore.getState().requestNavReset`. This module's whole discipline
+ * is that it depends on the pure route table and the History API and nothing else;
+ * importing the store here would put the app's state graph underneath its router.
+ *
+ * THE THREE OUTCOMES:
+ *   RESET_SECTION  publish the request and let the section answer (it owns its
+ *                  dirty guard). Handled.
+ *   RESET_ROUTE    already at the bare route ⇒ scroll to top, which is the
+ *                  order's "already-at-default self-click" clause and is NOT
+ *                  what navigate() would do: it returns early on an identical
+ *                  URL, so the click would otherwise be silently swallowed.
+ *                  Otherwise re-navigate to the bare route, which drops the
+ *                  drill-in, the facet hub and every query param in one act
+ *                  (navigate() rebuilds the path from the view id alone) and
+ *                  scrolls to top on the way.
+ *   undeclared     NOT HANDLED, fail-closed: the caller navigates exactly as it
+ *                  does today. A section that never declared a reset must not be
+ *                  reset in some guessed way.
+ *
+ * @param {string} view  the active view id, which the caller has just confirmed
+ *   is also the clicked nav id
+ * @param {(view: string) => void} [requestSectionReset]
+ * @returns {boolean} true when the click was handled here
+ */
+export function navigateSelfClick(view, requestSectionReset) {
+  const kind = resetKindFor(view);
+  if (kind === RESET_SECTION) {
+    if (typeof requestSectionReset !== 'function') return false;
+    requestSectionReset(view);
+    return true;
+  }
+  if (kind !== RESET_ROUTE) return false;
+  if (typeof window === 'undefined') return false;
+  if (currentHref() === viewToPath(view)) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return true;
+  }
+  navigate(view);
+  return true;
 }
 
 /**

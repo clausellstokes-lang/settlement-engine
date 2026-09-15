@@ -59,6 +59,12 @@ vi.mock('../../src/store/index.js', () => {
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
   useStore.__set = (next) => Object.assign(data, next);
+  // LD-11: GenerateWizard subscribes to `navResetRequest` through the house store
+  // API (the useOwnerScopedSaves / PlacementsLayer idiom). A mock without
+  // `subscribe` makes the component throw on mount, so the stub returns a no-op
+  // unsubscribe — this suite drives no reset request, and the wizard's answer to
+  // one is pinned next door in navResetOnSelfClick.test.jsx.
+  useStore.subscribe = () => () => {};
   return { useStore };
 });
 

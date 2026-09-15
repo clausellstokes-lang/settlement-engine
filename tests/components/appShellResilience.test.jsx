@@ -42,6 +42,9 @@ vi.mock('../../src/hooks/useRoute.js', () => ({
   useRoute: () => H.route,
   navigate,
   replacePath,
+  // LD-11: App.jsx imports the self-click reset dispatch from this module, so the
+  // mock must carry it or a nav click on the ACTIVE cell reaches a missing export.
+  navigateSelfClick: vi.fn(),
 }));
 
 // ── Auth-token stub (drives the front-door wait) ───────────────────────────

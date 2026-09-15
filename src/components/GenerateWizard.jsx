@@ -271,6 +271,52 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
+  // ── LD-11 — THIS SECTION'S ANSWER TO A SELF-CLICK RESET REQUEST ───────────
+  // Create is the one ribbon section declared RESET_SECTION in lib/routes.js,
+  // because the state a reset must return — `wizardMode`, `wizardStep` and a
+  // generated-but-unsaved draft — is store state the URL cannot express, and
+  // because THE DIRTY GUARD LIVES HERE. `pendingExit` is component-local, so a
+  // reset dispatched from App could not have raised the leave-confirm at all;
+  // routing the request through the EXISTING `requestExit('new')` means clicking
+  // CREATE from deep in Advanced Config fires exactly the dialog that Back and
+  // New already fire, and the order's binding safety law — reset NEVER silently
+  // discards work — is satisfied by reusing the machinery rather than by a second
+  // copy of it that could drift.
+  //
+  // The request is CONSUMED FIRST, before acting. If the confirm is then
+  // cancelled the section is deliberately NOT reset: the user refused, and a
+  // request that survived a refusal would re-fire on the next unrelated render.
+  //
+  // PERSISTED PREFERENCES ARE UNTOUCHED BY CONSTRUCTION: `doExit` clears only the
+  // draft settlement, the wizard mode and the step. The config the user dialled
+  // in is kept on purpose (it is what "your configuration is kept so you can
+  // regenerate" promises), and nothing here reaches the persist partialize.
+  //
+  // ⚠ A SUBSCRIPTION, NOT A RENDER-VALUE EFFECT, and the house idiom either way
+  // (useOwnerScopedSaves.js:102, map/PlacementsLayer.jsx:23). A request is an
+  // EVENT; subscribing reacts to the event itself rather than to a rendered
+  // mirror of it, so the branch reads `wizardMode` / `settlement` LIVE out of
+  // getState() at the moment of the click instead of through a closure that a
+  // stale dep array could pin. It also keeps the dispatch out of an effect body,
+  // which react-hooks/set-state-in-effect warns on with cause.
+  useEffect(() => useStore.subscribe(
+    (s) => s.navResetRequest,
+    (request) => {
+      if (request?.view !== 'generate') return;
+      const live = useStore.getState();
+      live.clearNavReset();
+      // ALREADY AT THE REGISTERED DEFAULT (the mode picker, nothing generated).
+      // The order's already-at-default clause is a scroll to top, not a no-op —
+      // and a no-op is what this would otherwise be, which reads to the user as a
+      // dead button.
+      if (!live.wizardMode && !live.settlement) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      requestExit('new');
+    },
+  ), [requestExit]);
+
   // ── Scroll-padding so the pinned chrome never hides a dossier control ──
   // While the dossier is on screen, two stacked sticky bars pin to the top of
   // the window scroller: the app header and the WizardOutputToolbar (pinned at

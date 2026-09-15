@@ -48,6 +48,23 @@ export const createUiSlice = (set, get) => ({
   // with no modal open), the same class as purchaseModalOpen.
   authModalOpen: false,
 
+  // LD-11's SELF-CLICK RESET REQUEST — `{ view, ts } | null`. THIS IS THE STORE
+  // NONCE App.jsx:459-462 said "has not landed yet"; the `ts` is what makes it a
+  // nonce rather than a flag, so a second self-click on a section that is ALREADY
+  // at its default still publishes a fresh request and the section can answer it
+  // (with a scroll to top) instead of the write being swallowed as a no-op.
+  //
+  // ⛔ A REQUEST, NOT A COMMAND, and that is the whole reason it exists. The
+  // sections whose navigation state is the URL never see this — `RESET_ROUTE` is
+  // performed by the router itself. Only a section holding state the URL cannot
+  // express is asked, and it answers on its own terms: GenerateWizard routes the
+  // request through its EXISTING `requestExit('new')`, so an unsaved random draft
+  // raises the same leave-confirm a Back or a New raises, and an accidental
+  // self-click can never cost twenty dials of Advanced Config. A reset dispatched
+  // FROM App could not have done that without hoisting the wizard's dialog into
+  // the shell. Transient (out of the persist partialize) like every key above.
+  navResetRequest: null,
+
   // ── Actions ──────────────────────────────────────────────────────────────
 
   /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
@@ -73,6 +90,22 @@ export const createUiSlice = (set, get) => ({
   /** Open or close the sign-in modal (transient; not persisted). */
   setAuthModalOpen: (open) =>
     set(state => { state.authModalOpen = !!open; }),
+
+  /**
+   * Publish an LD-11 self-click reset request for `view`. Called only when the
+   * clicked ribbon cell is the ACTIVE one and that section declares
+   * `RESET_SECTION` in routes.js. Always stamps a fresh `ts`.
+   * @param {string} view
+   */
+  requestNavReset: (view) =>
+    set(state => {
+      if (!view) return;
+      state.navResetRequest = { view, ts: Date.now() };
+    }),
+
+  /** Consume the request. The answering section calls this once it has acted. */
+  clearNavReset: () =>
+    set(state => { state.navResetRequest = null; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>
