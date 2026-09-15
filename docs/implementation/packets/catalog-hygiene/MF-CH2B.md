@@ -1,8 +1,11 @@
 # Catalog hygiene / MF-CH2B — THE MAGIC LICENCE, LIVE: all five shelf-reading gates stop deciding a catalog row by its display bucket, a magic-free world gets its alchemist and its library back, and the goods vocabulary leaves the institution gate
 
 - **Status:** DRAFT
-- **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
+- **Packet version:** 2
+- **Verified base:** `claude/composite-r4` at `f73bdbf16d3f7a57c18d7fd57b0478b953043a73`
+  ⚠ RE-DERIVED at this slot on 2026-09-14 (LT17 car 1). Version 1's base was
+  `b2852ccc3cc4753499996da6582dd672e90499d0`; three catalog-moving landings intervened
+  and every figure in §0, §1.0, §2 and §2.1 below is re-run, not carried forward.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Provenance:** implemented by lane **TE-CH-2**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`**
@@ -14,130 +17,100 @@
 
 ---
 
-## §0.0 · ⛔ STOP — THIS CAR IS BUILT AND HELD, NOT READY. ONE RULING DECIDES IT.
+## §0.0 · ⛔ THE STOP IS DISCHARGED BY EXECUTION — RE-DERIVED AT `f73bdbf16`, 2026-09-14
 
-Everything below is built, measured and green on its own acceptance (nine arms, nine mutants),
-and the pair's whole-suite sweep at this tip is **13 failed of 22,344 tests over 1,725 files**
-(1,704 files passed, 8 skipped).
+**THE ONE RULING THIS CAR WAITED ON NO LONGER HAS A SUBJECT.** Version 1's §0.0 held the
+packet because `tests/domain/magicForms.test.js` failed under the cure: `classifyMagicForm`
+opens with an ARCANE GATE on the authored TAG, and three `none`-licensed rows —
+`Alchemist shop`, `Alchemist quarter`, `Warden's Lodge` — were tagged `arcane` or `alchemy`,
+so the licence and the tag disagreed in production the moment the licence let them into a
+magic-free world.
 
-**THE THIRTEEN, CLASSIFIED BY EXECUTION AT THE CLEAN BASE — not by lookup.** Seven are the
-banked set (ODQ §507.3 / §509.1, cited rather than re-derived per the chair's throttle §511.2);
-one is this pair's own DEFERRED census row, which rides the packet to the landing act (§417);
-**three more are PRE-EXISTING**, proved by running them in a detached worktree at the clean base
-`b2852ccc3` where they fail identically —
+Two landings since have removed all three disagreements, and neither was taken for this car:
 
-| pre-existing red | why it is not this car's |
-|---|---|
-| `tests/docs/enforcement-claims.test.js` | six naked claims, every one in `docs/FABLE_VALIDATION_QUEUE.md`, `docs/GOLDEN_SHIFT_LEDGER.md` or `packets/foreign-policy/IN-0C.md` — files this lane never opened |
-| `tests/domain/metronomeCooldownLint.test.js` | `razingExecution.js` stamps a condition with no cooldown; a worldPulse file, untouched here |
-| `tests/lint/clampPrimitiveBaseline.test.js` | the baseline names 75 files and the tree has 62; the missing rows are cartography and conquest files |
-
-**AND FOUR ARE THIS CAR'S OWN**, all green at that same clean base. Three are re-record or
-coverage classes the chair can price; **the fourth cannot be cured inside this car's files at
-all, and it is why the status above says DRAFT:**
-
-| this car's red | what it is |
-|---|---|
-| `tests/generators/powerEconomyFreshness.test.js` | one pinned scenario's faction power moves — `Arcane Orders` 5 → 6, `Merchant City Council` 19 → 18. A pinned-scenario re-record, downstream of the roster |
-| `tests/domain/intentAtlasSoakDistiller.test.js` | the committed soak distillate no longer reproduces byte for byte. A committed-artifact re-record, same cause |
-| `tests/generators/effectReachability.coverage.test.js` | **a COVERAGE LOSS, and the one of the three that is not just a number.** 2 of 12 authored effects stop firing in the pinned corpus: `chain.magicSubstitution.substituted` and `repair.isolation_support`. The roster reshuffle stops exercising two authored strata; that wants a corpus widening or a stated reason, not a re-record |
-| `tests/domain/magicForms.test.js` | **the STOP** — below |
-
-⚠ Every one of these four is downstream of a single true fact: **a magic-free world now contains
-institutions, and a number of surfaces in this estate were written when it did not.**
-
-> `tests/domain/magicForms.test.js` — *a `none`-magic world holds NO magic form anywhere in the
-> corpus* — now fails. A `magicLevel: 'none'` settlement holds `forms: ['practitioner']`.
-
-**THE MECHANISM, traced.** `classifyMagicForm` (`src/domain/worldPulse/magicForms.js:319-331`)
-opens with an **ARCANE GATE**: *"A row that does not read arcane is not on this ladder at any
-rung."* That gate reads the authored **TAG**, and this car deliberately left the tag reader
-alone (J-TECH2-3) so `customContent.js`'s user-authored-name surface would not move. So the
-licence and the tag now disagree in production, and different consumers give different answers —
-**which is the exact bug class this train exists to end.**
-
-**THE CONFLICT IS EXACTLY THREE ROWS**, censused over all seven `none`-licensed rows:
-
-| row | licence | tags | on the arcane ladder? |
+| row | tags at `b2852ccc3` | tags at `f73bdbf16` | still on the arcane ladder? |
 |---|---|---|---|
-| `Alchemist shop` | `none` | `arcane`, **`alchemy`** | yes |
-| `Alchemist quarter` | `none` | `arcane`, **`alchemy`** | yes |
-| `Warden's Lodge` | `none` | `arcane` | yes |
-| the two `Adventurers' charter hall` rows | `none` | `military`, `adventuring` | no |
-| `Dragon resident` | `none` | *(none)* | no |
-| `Great library` | `none` | `education` | no |
+| `Alchemist shop` | `arcane`, `alchemy` | `alchemy` | **no** — TE-CH-5 moved `alchemy` off `ARCANE_INST_TAGS` into `TRADE_INST_TAGS` |
+| `Alchemist quarter` | `arcane`, `alchemy` | `alchemy` | **no** — same landing |
+| `Warden's Lodge` | `arcane` | `military` | **no** — the tag is gone |
 
-**AND THE OBVIOUS DATA FIX DOES NOT WORK — measured, not assumed.** Deleting the `arcane` tag
-from those three rows leaves `Alchemist shop` and `Alchemist quarter` still reading ARCANE,
-because **`alchemy` is itself a member of `ARCANE_INST_TAGS`** (`['arcane', 'planar', 'alchemy',
-'enchanting']`). That list is a **TRADE vocabulary being used as a MAGIC-DEPENDENCE
-vocabulary** — and stating that is the deepest thing this lane found. `alchemy` describes what
-the shop *does*; it cannot also decide whether the shop needs magic to exist, and the licence is
-the field that was invented to answer the second question.
+`ARCANE_INST_TAGS` is `['arcane', 'planar', 'enchanting']` at this slot. **No row that
+declares `magicLicense: 'none'` carries any member of it.** The deepest thing version 1
+found — *"a TRADE vocabulary being used as a MAGIC-DEPENDENCE vocabulary"* — was ruled and
+paid at TE-CH-5, and the three lawful shapes offered to the chair in version 1 are moot:
+shape 2 is landed and shapes 1 and 3 are no longer needed.
 
-**THE THREE LAWFUL SHAPES, for the chair.**
+**EXECUTED, not argued.** With P5 and the UI half applied to a clean export of `f73bdbf16`:
 
-1. **Route the arcane gate through the licence** — `classifyMagicForm` asks
-   `institutionCatalogMagicLicence` first and the tag only where no licence is declared, exactly
-   as the five gates do. One production file (`src/domain/worldPulse/magicForms.js`), in the
-   worldPulse layer, and it changes what magic forms a settlement holds — content, so it is the
-   chair's and not this lane's. **Recommended**, because it is the same sentence the car already
-   makes, applied to the surface that still disagrees.
-2. **Split `ARCANE_INST_TAGS` into a trade vocabulary and a magic-dependence vocabulary.** The
-   honest root fix, and much larger: `alchemy` and `enchanting` leave the arcane list, which
-   moves `isArcaneInstitution`, `magicFilter`, the world law and `customContent` together. A car
-   of its own.
-3. **Do not let the three arcane-tagged rows into a magic-free world** — i.e. the licence is
-   authoritative except where the tag disagrees. **Refused as a recommendation**: it reinstates
-   the divergence by rule instead of removing it, and it is the reading R-INST-5 explicitly
-   rejected for the alchemist.
+```
+npx vitest run tests/domain/magicForms.test.js tests/domain/magicFormsPractitioner.test.js
+  tests/domain/instantWorldMagicKnob.test.js
+    -> 3 files passed, 83 tests passed
+npx vitest run tests/lint/magicLicenceCensus.walker.test.js
+    -> 2 failed of 61: A7 and A10 ONLY
+```
 
-⛔ Until one of those is ruled, **this packet is not mintable and must not be landed.**
-`MF-CH2A` is unaffected by any of it: it is complete, green, READY and independently landable —
-its own arm A7 is written for the pre-CH2B world and the re-pointed version below only applies
-once this car lands.
+A7 and A10 are the two arms this car is DESIGNED to flip (§5 item 1) — A7 asserts *the world
+law still strikes all 28*, A10 asserts *the declaration is read by ONE gate of four and the
+shelf still decides*. Both are re-pointed by this car, not broken by it. **No other suite in
+that set reds.** ⛔ The STOP is therefore lifted on the MECHANISM. What holds this packet now
+is NOT a ruling about the arcane ladder; it is the owner's word on the declared shift below
+and on ODQ §764.3's sentence naming TE-TRANS-1 the LAST same-seed-moving wave.
 
 ---
 
-## §0 · ⛔ READ THIS FIRST — THE DECLARED SHIFT IS THE LARGEST IN THE CH TRAIN
+## §0 · ⛔ READ THIS FIRST — THE DECLARED SHIFT, RE-DERIVED AT THE LIVE SLOT
 
-**1,025 of 2,520 same-seed settlements change their institution roster.** That is not a
-surprise met at a battery; it is the point of the car, priced before the first edit, and the
-chair should rule on the number before this lands.
+⚠⚠ **VERSION 1'S 1,025 WAS MEASURED AT `b2852ccc3` AND IS STALE BY CONSTRUCTION.** Three
+catalog-moving landings intervened (T8 car 3's thirty relabels `64c344615`; the burial
+ladder's five rows `e6516885e`; TE-CH-6's two de-taggings and licence moves). The estate's own
+law — ODQ §550.1, §541.1 — is that a stale figure in a law file is the thing that bites, so
+the table below was **re-run**, not carried forward: 2,520 generations at the base and 2,520
+with the cure, on the same 504 configurations (the golden corpus's leading tier × culture ×
+terrain grid) crossed with `{magicExists:false, priorityMagic:0, 20, 50, 80}`.
 
-| magic case | settlements | rosters changed | of those, confined to licensed rows | with collateral |
+**1,182 of 2,520 same-seed institution ROSTERS change; 1,372 of 2,520 whole settlement
+RECORDS change.** Version 1 reported one number where there are two, and the wider one is the
+honest one — a probability change that moves no roster still moves the record downstream of it.
+
+| magic case | settlements | rosters changed | whole records changed | rosters confined to licensed rows |
 |---|---:|---:|---:|---:|
-| `magicExists:false` | 504 | **356** | 1 | 355 |
-| `priorityMagic:0` | 504 | **356** | 1 | 355 |
-| `priorityMagic:20` | 504 | **168** | **157** | 11 |
-| `priorityMagic:50` (the default) | 504 | **3** | 0 | 3 |
-| `priorityMagic:80` | 504 | **142** | 103 | 39 |
-| **total** | **2,520** | **1,025** | 262 | 763 |
+| `magicExists:false` | 504 | **356** | **356** | 0 |
+| `priorityMagic:0` | 504 | **356** | **356** | 0 |
+| `priorityMagic:20` | 504 | **228** | **228** | 199 |
+| `priorityMagic:50` (the default) | 504 | **40** | **132** | 36 |
+| `priorityMagic:80` | 504 | **202** | **300** | 115 |
+| **total** | **2,520** | **1,182** | **1,372** | **350** |
 
-**Three things make that number readable.**
+**AND THE CAR SPLITS CLEANLY IN TWO, WHICH VERSION 1 COULD NOT SAY.** Measured separately,
+the two halves are **exactly disjoint by magic case** — 660 + 712 = 1,372 with no overlap:
+
+| half | files | cases it moves | records moved |
+|---|---|---|---:|
+| **P1 / P2 / P3** (the probability gates) | `institutionProbability.js` | `pm20`, `pm50`, `pm80` ONLY | **660** of 2,520 (470 rosters) |
+| **P5 + the UI half** (the world law) | `generationContext.js`, `magicFilter.js` | `magicExists:false`, `pm0` ONLY | **712** of 2,520 (712 rosters) |
+
+That is a landing plan the chair did not have: the two halves can be priced, ruled and landed
+as separate acts, and neither hides inside the other's figures.
+
+**Three things make the number readable.**
 
 *First, the default world barely moves.* At `priorityMagic:50` — what an unconfigured
-settlement gets — **3 of 504** rosters change. The shift is concentrated in exactly the worlds
-where the bug lived: magic-free ones, and the low and high extremes of the dial.
+settlement gets — **40 of 504** rosters change. The shift is concentrated exactly where the
+bug lived: magic-free worlds, and the low and high extremes of the dial.
 
 *Second, the collateral has one mechanism and it is structural, not a defect.* At
-`assembleInstitutions.js:268` the world law returns **before** the `rng.chance` draw at `:342`.
-A row the world law newly ALLOWS therefore consumes a draw it used to skip, and every later
-draw in that step shifts. Five rows returning to a magic-free world is what re-sequences 355 of
-them. This is the same mechanism the chair already ruled on for `religiousCenter` at ODQ
-§503.4; the rng-preserving cure available there is **not** available here, because there the
-fix was to un-suppress ONE named group and here the whole point is that the world law's ANSWER
-changes for a measured set of rows. Hard-coding which rows may draw from a side stream would be
-the "probe, not a shippable design" the chair rejected, applied to a much larger set.
+`assembleInstitutions.js` the world law returns **before** the `rng.chance` draw. A row the
+law newly ALLOWS therefore consumes a draw it used to skip, and every later draw in that step
+shifts. The rng-preserving cure the chair used for `religiousCenter` at ODQ §503.4 is **not**
+available here, because there the fix was to un-suppress ONE named group and here the whole
+point is that the world law's ANSWER changes for a measured set of rows.
 
-*Third, the alternative is priced.* **Design B** — keep the unanchored `ARCANE_INST_KW`
-substring veto inside the world law, so only the keyword-free rows return — costs **545 of
-2,520** instead of 1,025, executed and measured, not estimated. It is a one-hunk change and
-`J-TECH2-5` records it as the reversal lever. This car does not take it, because it leaves the
-world law deciding by an unanchored substring — the exact residual
-`docs/DESIGN_REALM_MAGIC_TOGGLE.md:514-519` recorded as "Chair to schedule" — and leaves an
-alchemist's shop banned from a world with no magic in it, which is R-INST-5's central finding
-turned down.
+*Third, the shelf door is real and it is measured.* At the base, **0 of 1,008** magic-free
+settlements hold any Magic- or Exotic-shelf row. With the cure, **432 of 1,008** do —
+`Alchemist quarter` 184, `Great library` 168, `Alchemist shop` 114, `Warden's Lodge` 54,
+`Druid Circle` 48, `Elder Grove Council` 24. Two of those are the faith institutions the
+deity doctrine is about.
 
 ---
 
@@ -147,57 +120,70 @@ Three production files. Nothing else in `src/` is touched.
 
 | file | gate | before | after |
 |---|---|---|---|
-| `src/generators/institutionProbability.js` | **P1** the magic multiplier | `cat.includes('magic') \|\| inst.includes('wizard') \|\| … 8 substrings` | `declaredLicence !== null ? licensedForMagic : (the old test)` |
-| ″ | **P2** `hiMagicInsts` | 11 keywords incl. `magical banking`, `enchanting quarter`, `magic item consignment` | **8** — G7's literal cure; the list stays a NAME list (§3) |
-| ″ | **P3** the exotic scaler | `(cat.includes('magic') \|\| cat === 'exotic') && !NON_MAGIC_EXOTICS.some(…)` | `declaredLicence !== null ? licensedForMagic : (cat.includes('magic') \|\| cat === 'exotic')`; `NON_MAGIC_EXOTICS` deleted |
-| `src/domain/arcaneInstitutionIdentity.js` | **P4** the direct world-fact gate | — | **NOT EDITED HERE.** MF-CH2A routed `isArcaneInstitution` through the licence, and `institutionProbability.js:302` reads it unchanged. That is the "one read" the charter asked for, and it means P4 costs this car zero lines |
-| `src/generators/generationContext.js` | **P5** THE WORLD LAW | `carriesExplicitMagicMetadata(entity) \|\| ARCANE_INST_KW.some(kw => name.includes(kw))` | the declared licence first; the old two tests survive as the non-catalog fallback |
-| `src/domain/magicFilter.js` | **UI** the institutional grid | `c === 'magic' \|\| c === 'exotic'` first | `def.magicLicense` first — read straight off the row `filterCatalogForMagic` already holds, so **no new import of the catalog** and no chunk edge |
+| `src/generators/institutionProbability.js` | **P1** the magic multiplier (`:88`) | `cat.includes('magic') \|\| inst.includes('wizard') \|\| … 8 substrings` | `declaredLicence !== null ? licensedForMagic : (the old test)` |
+| ″ | **P2** `hiMagicInsts` (`:176-180`) | 11 keywords incl. `magical banking`, `enchanting quarter`, `magic item consignment` | **8** — G7's literal cure; the list stays a NAME list (§3) |
+| ″ | **P3** the exotic scaler (`:187-189`) | `(cat.includes('magic') \|\| cat === 'exotic') && !NON_MAGIC_EXOTICS.some(…)` | `declaredLicence !== null ? licensedForMagic : (cat.includes('magic') \|\| cat === 'exotic')`; `NON_MAGIC_EXOTICS` deleted |
+| `src/domain/arcaneInstitutionIdentity.js` | **P4** the direct world-fact gate (`:229`) | — | **NOT EDITED HERE.** MF-CH2A routed `isArcaneInstitution` through the licence and `institutionProbability.js:302` reads it unchanged. P4 costs this car zero lines |
+| `src/generators/generationContext.js` | **P5** THE WORLD LAW (`:89`, `:97`) | `carriesExplicitMagicMetadata(entity) \|\| ARCANE_INST_KW.some(kw => name.includes(kw))` | the declared licence first; the old two tests survive as the non-catalog fallback |
+| `src/domain/magicFilter.js` | **UI** the institutional grid (`:37`) | `c === 'magic' \|\| c === 'exotic'` first | `def.magicLicense` first — read straight off the row `filterCatalogForMagic` already holds, so **no new import of the catalog** and no chunk edge |
 
-⭐⭐ **AND A SIXTH SURFACE, FOUND BY EXECUTION AT THIS BUILD AND NOT BY THE CHARTER.**
-`generationCoherence.js` walks EVERY string in a finished settlement — including its TAXONOMY
-fields, `category`, `priorityCategory` and `tags[]` — and asks `worldLaw.allowsMagicClaim`
-about each one. `textAssertsFunctionalMagic` is a PROSE detector, so it answers *yes* to the
-bare strings `'Magic'`, `'arcane'` and `'magic'`. The consequence is the whole car's thesis
-turned back on it: **the moment a magic-free world lawfully keeps a Magic-shelf row, the
-settlement's own `world_law_magic` certification convicts it — for the NAME OF THE SHELF it is
-filed on.** Measured before the cure, 2 of the 5 mundane-realm members failed:
+⭐ **THE SIXTH SURFACE IS ALREADY LANDED AND IS NO LONGER THIS PACKET'S TO PAY.** Version 1
+found by execution that `generationCoherence.js` asks `worldLaw.allowsMagicClaim` about every
+generated string INCLUDING the taxonomy fields, so a magic-free world keeping a Magic-shelf row
+is convicted by its own `world_law_magic` receipt for the name of the shelf. That cure —
+J-TECH2-10, chartered as CH-6b car 1 and discharged into this packet by ODQ §879.11 R3 — landed
+on its own at **`72545d322`**, measured output-free by execution (**0 of 2,520** grid records,
+**0 of 525** golden rows code-to-code) and held by arm **B7b** in
+`tests/generators/generationWorldLaw.test.js`. It is the guard that lets P5 land without the
+certification turning on the rows P5 admits, and it is now a PRECONDITION already met rather
+than work owed.
+
+### §1.0 · THE GATE ROSTER FOR ARM B2, RE-DERIVED BY SOURCE CENSUS AT `f73bdbf16`
+
+Every line in `src/` that decides magic by reading a BUCKET, swept estate-wide rather than
+taken from the charter. **The per-file counts version 1 recorded still hold exactly**:
+
+| file | line | the read | arm B2 marker owed |
+|---|---|---|---|
+| `src/generators/institutionProbability.js` | `:88` | `cat.includes('magic')` (P1) | yes |
+| ″ | `:189` | `cat.includes('magic') \|\| cat === 'exotic'` (P3) | yes |
+| `src/domain/arcaneInstitutionIdentity.js` | `:229` | `bucket === 'magic'` (P4) | **already carries `@non-catalog-fallback MF-CH2`** |
+| `src/generators/generationContext.js` | `:89` | `String(category)… === 'magic'` (P5) | yes |
+| ″ | `:97` | `semanticCategory === 'magic'` (P5) | yes |
+| `src/domain/magicFilter.js` | `:37` | `c === 'magic' \|\| c === 'exotic'` (UI) | yes |
+
+⇒ `institutionProbability` **2** · `arcaneInstitutionIdentity` **1** · `generationContext` **2**
+· `magicFilter` **1**. Version 1's pinned counts are CONFIRMED at this slot.
+
+⭐⭐ **AND THE SWEEP FOUND A SIXTH PRODUCTION READER THE CHARTER'S CENSUS OF FIVE MISSED.**
+`src/generators/priorityHelpers.js:147` — `computeEffectiveMagicPresence`, the self-described
+*"single source of truth for magic level across Daily Life, Defense, and Power"* — reads
+`instCategories.some(c => c === 'magic' || c === 'exotic')` and adds folk weight to a
+settlement's magic score for any roster row on those shelves. It is a live generation consumer
+(`defenseGenerator.js`, `components/new/dailyLifeLogic.js`).
+
+⛔ **It is INERT in exactly the worlds this car changes, and that is measured, not assumed.**
+The function early-returns `{ score: 0, band: 'none' }` whenever `magicExists === false` or
+`priorityMagic === 0`, so the hard world fact dominates before the shelf is ever read:
 
 ```
-Castelporta  town     institutions[31].category        "Magic"
-                      institutions[31].tags[0]         "arcane"
-                      institutions[31].priorityCategory "magic"
-                      defenseProfile.institutions.magicDef[0].{category,tags[0],priorityCategory}
-Lidopolis    village  institutions[20].category        "Magic"
-                      defenseProfile.institutions.charter[0].category "Magic"
+magicExists:false  none=0/none  Druid Circle=0/none  Great library=0/none  bare Magic shelf=0/none
+priorityMagic:0    none=0/none  Druid Circle=0/none  Great library=0/none  bare Magic shelf=0/none
+priorityMagic:20   none=11/low  Druid Circle=13/low  Great library=22/low  bare Magic shelf=13/low
+priorityMagic:50   none=28/mod  Druid Circle=30/mod  Great library=39/mod  bare Magic shelf=30/mod
 ```
 
-⚠ **Design B does not avoid this.** The `Adventurers' charter hall` is licensed `none` and
-carries no arcane keyword, so it enters a magic-free village under B as well — and it enters
-carrying `category: 'Magic'`. The collision is a property of letting ANY Magic-shelf row into a
-magic-free world, not of how far the licence reaches.
+So it is NOT a sixth doctrine door, and it is NOT chartered here. It IS live at `pm20` and
+above, where P1/P3's roster changes move it — which means its movement is already inside the
+660 recorded above and must not be attributed to anything else. **Recorded so it is not
+re-found as an omission.**
 
-**THE CURE, and it is inside a file this car already owns.** `allowsMagicClaim` no longer
-convicts a candidate whose ENTIRE text is one token of the estate's closed classification
-vocabulary (`['magic', 'magical', ...ARCANE_INST_TAGS]`, derived and never re-typed). A bucket
-name is not a sentence; anything longer is prose and is read exactly as before. `allowsMagicClaim`
-has **exactly one consumer** in `src/` — `generationCoherence.js:369` — so this narrows that
-certification and nothing else, and the golden does not move by it at all (measured: 0 of 525,
-because the golden grid contains no magic-free world). Arm **B7b** pins it with a four-sentence
-positive control. It is recorded as a vetoable judgment because a certification is a surface the
-owner reads: **J-TECH2-10**.
-
-**Five shelf-reading gates, and `hiMagicInsts` is not one of them.** The charter numbers P1–P5
-with `magicFilter` described separately as "the UI half". Re-derived here by source census, the
-gates that actually read a BUCKET are P1, P3, P4, P5 and `magicFilter`'s `isArcaneInst` —
-**five** — and `hiMagicInsts` reads NAMES. That renumbering is why the walker's grep arm can be
-stated as an exact per-file roster (§4 arm B2).
-
-**⚠ P5 reads the shelf at its LIVE call shape, which the charter's H21 understates.** Every
-`allowsInstitution` call site spreads `category` onto the record it hands over, so
-`carriesExplicitMagicMetadata` reads `entity.category === 'magic'`. The charter's "26 rows by
-unanchored substring" is the keyword arm alone; measured with the real record shape the world
-law strikes all **28**.
+⚠ **A DOCTRINE RESIDUE IN THE SAME FUNCTION, NAMED RATHER THAN SMUGGLED INTO A CAR.**
+`INST_WEIGHTS.folk` still carries the literal keyword `"healer (divine"` — the same faith
+string TE-CH-6 removed from `ARCANE_INST_KW` — so a settlement whose only "magical" institution
+is a divine healer still scores 13/low at `pm20` and 30/moderate at `pm50` where it would
+otherwise score 11 and 28. This is a SECOND vocabulary keying magic on a faith word, in a file
+no car of this train opens. It belongs to whichever car next opens `priorityHelpers.js`.
 
 ### §1.1 · Where the licence does NOT go, and why
 
@@ -211,48 +197,109 @@ scripts/boot-smoke.mjs stage 1`). This car creates **no new module edge at all**
   **zero-import** data leaf. It never reaches for the catalog index, because
   `filterCatalogForMagic` is handed the row and can read `def.magicLicense` directly.
 
-`filterServicesForMagic` keeps the keyword vocabulary, deliberately. It is handed service
-names rather than catalog rows, so it has nothing to read a declaration off, and it has **zero
-production callers in `src/`** (measured) — inventing a name lookup there would put 2,500 lines
-of catalog into this module's chunk to change the behaviour of a function nothing calls. Its
-docstring now says so, and says what the next caller should do instead.
+⚠ `filterCatalogForMagic` and `filterServicesForMagic` have **no caller in the generation
+pipeline** at this slot — measured: their only `src/` consumers are `components/InstitutionalGrid.jsx`
+and `store/selectors.js`. The UI half therefore moves the panel and **not one byte of same-seed
+output**, which is why every figure in §0 is attributable to P1/P2/P3 and P5 alone.
+
+`filterServicesForMagic` keeps the keyword vocabulary, deliberately. It is handed service names
+rather than catalog rows, so it has nothing to read a declaration off, and it has **zero
+production callers in `src/`** (measured).
 
 ---
 
-## §2 · THE CURE, ROW BY ROW — what changes and where
+## §2 · THE CURE, ROW BY ROW — RE-MEASURED AT `f73bdbf16`
 
-Measured over the same 2,520-settlement grid, MF-CH2A → MF-CH2B, licensed rows only:
+Settlements (of 504 per case) whose roster holds the row, base → cure, over the same grid.
+`—` means the row is absent on both sides; `=` means present and unmoved.
 
 | row | licence | dead | pm0 | pm20 | pm50 | pm80 |
 |---|---|---|---|---|---|---|
-| `Alchemist quarter` | `none` | 0 → **92** | 0 → **92** | 0 → **96** | — | 72 → 36 |
-| `Great library` | `none` | 0 → **84** | 0 → **84** | 19 → **72** | — | 84 → 72 |
-| `Warden's Lodge` | `none` | 0 → **66** | 0 → **66** | 0 → 3 | 2 → 5 | 39 → 12 |
-| `Alchemist shop` | `none` | 0 → **9** | 0 → **9** | 0 → **72** | — | — |
-| `Adventurers' charter hall` | `none` | 23 → **32** | 23 → **32** | — | — | — |
+| `Alchemist quarter` | `none` | 0 → **92** | 0 → **92** | 0 → **96** | 42 = | 72 → 36 |
+| `Great library` | `none` | 0 → **84** | 0 → **84** | 19 → **72** | 72 = | 84 → 72 |
+| `Alchemist shop` | `none` | 0 → **57** | 0 → **57** | 0 → **72** | 72 = | 72 = |
+| `Warden's Lodge` | `none` | 0 → **27** | 0 → **27** | 0 → 5 | 2 → 5 | 39 → 5 |
+| `Druid Circle` | `none` | 0 → **24** | 0 → **24** | 0 → 48 | 12 → 48 | 60 → 48 |
+| `Elder Grove Council` | `none` | 0 → **12** | 0 → **12** | 0 → 18 | 17 → 18 | 66 → 18 |
+| `Adventurers' charter hall` | `none` | 23 = | 23 = | — | — | — |
+| `Dragon resident` | `none` | — | — | — | — | — |
 | `Undead labor` | `high` | — | — | — | — | 23 → 83 |
 | `Message network (high magic)` | `high` | — | — | — | — | 52 → 84 |
-| `Dream parlors (high magic)` | `high` | — | — | — | — | 60 → 72 |
 | `Golem workforce` | `high` | — | — | — | — | 133 → 144 |
-| `Dragon resident` | `none` | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 |
+| `Dream parlors (high magic)` | `high` | — | — | — | — | 60 → 72 |
+| `Hedge wizard` | `low` | — | — | — | 24 = | 48 = |
+| `Enchanter's shop` | `high` | — | — | 24 = | 88 = | 144 = |
+| `Academy of magic` | `high` | — | — | — | 60 = | 84 = |
+| `Mages' district` | `high` | — | — | — | 78 = | 84 = |
+| `Healer (divine, 1st level)` | `low` | — | — | — | — | 48 = |
 
 Read plainly: **a world with no magic in it gets back its alchemists, its great library, its
-warden's lodges and its charter halls** — and `Dragon resident` moves nowhere at all, which is
-G6's refutation confirmed a second way (there was no divergence to cure, so curing the shelf
-does not move it).
+warden's lodges — and its druids.** `Druid Circle` and `Elder Grove Council` are the deity
+doctrine's own rows, authored `tags: ['religious']` and licensed `none`, deleted today by the
+name of the shelf they are filed on; they return in 24 and 12 magic-free settlements.
 
-⚠ `Dragon resident` is 0 at every magic case on THIS grid, including `priorityMagic:80`, so
-this grid supplies no positive control for that row. The panel's control stands (11 instances
-at pm50 on its own 5-seed grid, ODQ §503.1); this lane's single-seed grid simply never draws
-it. Stated rather than papered over.
+⛔⛔ **TWO OF VERSION 1'S ROW CLAIMS ARE REFUTED BY EXECUTION AND MUST NOT BE RE-QUOTED.**
 
----
+1. **`Adventurers' charter hall` does not move at all.** Version 1 recorded `23 → 32`. At this
+   slot the row sits on **two shelves** — `Magic` and `Adventuring` — and the world law already
+   admits it on the second, so 23 magic-free settlements hold it BEFORE the cure and 23 hold it
+   after. The row was never excluded; only its Magic-shelf copy was, and the Adventuring copy
+   was always reachable. Version 1's figure came from a grid where that was not yet true.
+2. **The licensed-row counts are not version 1's.** `Alchemist shop` 9 → **57**, `Warden's
+   Lodge` 66 → **27**, `Great library`'s `pm20` 72 → **53** added. Every cell above is executed
+   at this slot.
+
+`Dragon resident` is 0 at every magic case on this grid, exactly as version 1 recorded — so this
+grid supplies no positive control for that row, and the panel's own 5-seed control (ODQ §503.1)
+still stands as the one that does. Stated rather than papered over.
+
+### §2.1 · THE CATALOG CENSUS THIS CAR ACTS ON, RE-COUNTED
+
+| figure | version 1 (`b2852ccc3`) | **re-derived (`f73bdbf16`)** |
+|---|---:|---:|
+| distinct catalog institution NAMES | 311 | **280** |
+| name × shelf pairs | — | **282** |
+| rows declaring a `magicLicense` | — | **25** |
+| distinct names licensed `none` | 7 | **8** |
+| name × shelf pairs the dead-magic world law strikes | 28 | **29** |
+| … after the cure | — | **21** |
+| name × shelf pairs whose verdict the cure CHANGES | — | **8**, every one licensed `none` |
+
+⚠ **311 WAS QUOTED IN §3 AND IN ARMS B1 AND B4, AND IS CORRECTED THERE IN THIS VERSION.** The
+catalog holds **280** distinct names at this slot. Any arm written as "all N rows" must DERIVE
+its denominator from the catalog rather than re-type it, or the next landing that adds or
+removes a row leaves the arm pinning a denominator that no longer exists — which is exactly how
+this figure came to be wrong.
+
+The eight name × shelf pairs the cure newly admits, executed:
+
+```
+ADMITTED  Adventurers' charter hall  (shelf Magic,  licence none, tags [military,adventuring])
+ADMITTED  Alchemist quarter          (shelf Magic,  licence none, tags [alchemy])
+ADMITTED  Alchemist shop             (shelf Magic,  licence none, tags [alchemy])
+ADMITTED  Dragon resident            (shelf Exotic, licence none, tags [])
+ADMITTED  Druid Circle               (shelf Magic,  licence none, tags [religious])
+ADMITTED  Elder Grove Council        (shelf Magic,  licence none, tags [religious])
+ADMITTED  Great library              (shelf Magic,  licence none, tags [education,education])
+ADMITTED  Warden's Lodge             (shelf Magic,  licence none, tags [military])
+```
+
+⚠ **AND THE INSTRUMENT THIS CAR WILL BE JUDGED ON IS ALREADY RED AT ITS OWN BASE.**
+`tests/property/generatorGoldenMaster.test.js` fails **525 of 525** at `f73bdbf16` with a clean
+tree — the committed manifest has not been re-recorded since `e4aebd28a` (2026-09-01) and the
+code moved after it. Bisected here to **`e3f6029b2`** (2026-09-05, the em-dash wave). The red is
+pre-existing and banked by the chair since ODQ §901 — `GOLDEN_SHIFT_LEDGER.md`'s closing block
+says so in its own words — but it means **no figure in this packet may be stated as "N of 525
+moved" against the committed manifest.** Every golden claim here is measured CODE TO CODE
+against a clean export of the same base, which is the only comparison that carries information
+while the manifest is stale.
 
 ## §3 · G7 — the literal cure, and the arm that is NOT in this car
 
-`hiMagicInsts` loses exactly three members, each measured against all 311 catalog names before
-removal: `magical banking` **0 matches**, `enchanting quarter` **0**, `magic item consignment`
-**0**. The third is a member of `magicFilter`'s `ARCANE_GOODS` — a GOODS vocabulary living
+`hiMagicInsts` loses exactly three members, each RE-MEASURED at `f73bdbf16` against all **280**
+catalog names (version 1 said 311 — see §2.1): `magical banking` **0 matches**, `enchanting
+quarter` **0**, `magic item consignment` **0**, and `filterGoodsForMagic` still strips
+`Magic item consignment` at magic-0, executed. The third is a member of `magicFilter`'s `ARCANE_GOODS` — a GOODS vocabulary living
 inside an INSTITUTION gate — and `filterGoodsForMagic` keeps it, which arm B6 pins on both
 sides. No row's hard-zero verdict changes.
 
@@ -271,10 +318,10 @@ identifies magic. `J-TECH2-4` carries it to the chair with its own measurement.
 
 | arm | what it holds |
 |---|---|
-| **B1** | **SHELF-INDEPENDENCE, executed.** All 311 rows answer identically on their own shelf and on a neutral one, across all four observable gates (P4, P5, the UI, and a normalised `getBaseChance` vector across five magic dials that cancels every shelf-CONSTANT factor). Carries its own non-vacuity floor: a synthetic licence-free, tag-free, keyword-free row IS shelf-decided, and all four probes report it |
+| **B1** | **SHELF-INDEPENDENCE, executed.** All **280** rows (re-derived from the catalog, never re-typed) answer identically on their own shelf and on a neutral one, across all four observable gates (P4, P5, the UI, and a normalised `getBaseChance` vector across five magic dials that cancels every shelf-CONSTANT factor). Carries its own non-vacuity floor: a synthetic licence-free, tag-free, keyword-free row IS shelf-decided, and all four probes report it |
 | **B2** | **THE GREP ARM.** Every surviving shelf comparison in the four gate files carries the exact marker `@non-catalog-fallback MF-CH2`; the per-file counts are pinned (`institutionProbability` 2 · `arcaneInstitutionIdentity` 1 · `generationContext` 2 · `magicFilter` 1). The scanner distinguishes a BUCKET comparison from a TAG comparison — `tag === 'magic'` is an authored tag read R-BLD-5 rules legitimate — and a positive control proves it sees an unmarked bucket read and does not see the tag read |
 | **B3** | **G3 by execution.** `Alchemist shop` and `Alchemist quarter` are reachable at `priorityMagic:20` where they were zero, and their chance no longer moves with the dial at any tier. Non-vacuity: `Enchanter's shop` still rides it |
-| **B4** | **G4 — one read, two surfaces.** Row by row over all 311, `filterCatalogForMagic` and `worldLaw.allowsInstitution` still agree in a dead-magic world, and the five survivors are named as the content-profile denials they are. Both surfaces moved by 9 rows and the disagreement count did not move |
+| **B4** | **G4 — one read, two surfaces.** Row by row over all **280** (re-derived from the catalog, never re-typed), `filterCatalogForMagic` and `worldLaw.allowsInstitution` still agree in a dead-magic world, and the five survivors are named as the content-profile denials they are. Both surfaces moved by 9 rows and the disagreement count did not move |
 | **B5** | **G5.** `Great library`'s chance is invariant across the whole dial, it is no longer arcane, and it survives a dead-magic world on both surfaces |
 | **B6** | **G7.** The `hiMagicInsts` list is pinned at its eight members; each of the three removed keywords is re-proved to match no catalog row; `filterGoodsForMagic` still strips `Magic item consignment` |
 | **B7** | **The non-catalog fallback is LIVE at every gate** — a custom `Magic`-shelf entity, a keyword-named entity on a silent shelf, and a plainly mundane invented row, each answered exactly as before |
