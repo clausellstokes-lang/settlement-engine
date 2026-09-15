@@ -1,7 +1,7 @@
-# wf_3a9ccb34-395 — per-agent progress, 2026-09-15 16:59:27
-    - `a1e5703e2` ? · IN FLIGHT · transcript 09-15 16:59 508 KB · 20 tool calls · last: Bash cat > /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/sc
-    - `ad22f595d` ? · IN FLIGHT · transcript 09-15 16:59 509 KB · 21 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a2e3a5e6f` ? · IN FLIGHT · transcript 09-15 16:59 471 KB · 18 tool calls · files: $OUT/slot-test-titles.txt, $OUT/consist-test-titles.txt, "$OUT/slot-test-titles.txt, "$OUT/consist-test-titles.txt · last: Bash SLOT=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
-    - `af5f6a155` ? · IN FLIGHT · transcript 09-15 16:59 539 KB · 19 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a2b4913e8` ? · IN FLIGHT · transcript 09-15 16:59 532 KB · 26 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a35c7da45` ? · IN FLIGHT · transcript 09-15 16:59 440 KB · 17 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+# wf_3a9ccb34-395 — per-agent progress, 2026-09-15 17:07:15
+    - `a1e5703e2` ? · IN FLIGHT · transcript 09-15 17:07 746 KB · 46 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ad22f595d` ? · IN FLIGHT · transcript 09-15 17:07 716 KB · 47 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a2e3a5e6f` ? · IN FLIGHT · transcript 09-15 17:06 799 KB · 52 tool calls · files: "$OUT/slot-test-titles.txt, "$OUT/consist-test-titles.txt, "$OUT/slot-files.txt, "$OUT/consist-files.txt · last: Bash SLOT=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
+    - `af5f6a155` ? · IN FLIGHT · transcript 09-15 17:06 906 KB · 54 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a2b4913e8` ? · IN FLIGHT · transcript 09-15 17:07 871 KB · 71 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a35c7da45` ? · IN FLIGHT · transcript 09-15 17:07 875 KB · 62 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
