@@ -1,4 +1,4 @@
-# wf_a788be93-699 — per-agent progress, 2026-09-15 06:21:56
+# wf_a788be93-699 — per-agent progress, 2026-09-15 06:27:10
     - `a4549bf93` ? · DONE · transcript 09-14 21:28 1126 KB · 87 tool calls · files: t2.txt, t4.txt, tall.txt, tip_arm1.txt · result: {"n": 15, "title": "Document the ten consumed secrets, including the one that breaks the first sale", "stateOfRecord": "THE RECORDS NAME FOUR MEMBERS, AND A LAT
     - `ac66e2c65` ? · DONE · transcript 09-14 21:22 903 KB · 66 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · result: {"n": 42, "title": "The record's own housekeeping \u2014 the deferral sweep's unrun half, the queue-copy trap, three ledger holes, and the 245-section span", "s
     - `ab7391315` ? · DONE · transcript 09-14 21:26 1167 KB · 81 tool calls · files: WEBSITE-PLAN-2.md · result: {"n": 16, "title": "The money path, and the webhook before any refund", "stateOfRecord": "THE CHARTER IS RULED AND STILL BINDS. ODQ \u00a7470 (docs/OWNER_DECISI
