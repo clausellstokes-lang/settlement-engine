@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da18fccb05881666e32ed90c5e3788f5ba518135",
-  "measuredBy": "§931 long-tail landing at the composed consist, third measurement after LT41b car 6 and LT17 car 2 were held out (Fable 5.1 — validated)",
+  "measuredAtSha": "4612ced3ed19c1190e80cb9f2590922a577fb38f",
+  "measuredBy": "LT37 (lane-LT37-quality, Opus 5 — Fable-unvalidated)",
   "date": "2026-09-15",
-  "note": "car 6 held for the chartered window; car 2 held for the worker-bundle headroom car; the chair register cars add no title",
-  "files": 2572,
-  "parked": 377,
-  "credited": 2195,
-  "titles": 24308,
-  "suiteTitles": 6483
+  "note": "LT37 car 3 lands ONE new test file, tests/domain/aiOverlayEvalFixtures.test.js (Track J part 1, the AI overlay output-eval corpus), carrying 5 live titles under 2 describes. tests/fixtures/ai-overlay-eval-corpus.json is data, not a test file, and is uncredited by construction. The file takes no `each` call, so the each-family park debt is unmoved.",
+  "files": 2564,
+  "parked": 375,
+  "credited": 2189,
+  "titles": 24174,
+  "suiteTitles": 6454
 }
