@@ -1,4 +1,4 @@
-# wf_406e67e7-fa9 — per-agent progress, 2026-09-15 12:59:15
+# wf_406e67e7-fa9 — per-agent progress, 2026-09-15 13:05:58
     - `a7e604d4d` ? · DONE · transcript 09-15 12:37 819 KB · 51 tool calls · result: ## The sequencing read — #18, #32, #33, #34, #20, #21  Read at the ledger `a803dee7a` (branch `review-fixes-2026-07-08`) and verified against the build slot `cl
     - `a3ba4fb58` ? · DONE · transcript 09-15 12:41 1079 KB · 56 tool calls · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 declared waves across the FP programs)", "summary": "Item #32 is the FP (Foreign Poli
     - `a5a2edd52` ? · DONE · transcript 09-15 12:49 1174 KB · 48 tool calls · files: flags.txt, waves.md · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 waves across 13 families)", "summary": "Item #32 is the FP programme: 13 volumes (SP 
@@ -7,5 +7,5 @@
     - `a88f44407` ? · DONE · transcript 09-15 12:38 1024 KB · 55 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
     - `a59ead83d` ? · DONE · transcript 09-15 12:49 864 KB · 40 tool calls · result: {"item": "Long-tail #34 \u2014 the political, economic and heraldic programmes (W-COIN, W-SEAT, W-DESK, the two operations cars, the WEAVE, the chance-encounter
     - `a8ca1cea6` ? · DONE · transcript 09-15 12:53 947 KB · 43 tool calls · result: {"item": "Long-tail #33 \u2014 the logistics and vessel family (LG): teleportation circles with relays, airships, a unified vessel pool with fleet bounds and re
-    - `ac2ac2537` r3 · IN FLIGHT · transcript 09-15 12:57 577 KB · 17 tool calls · files: $SC/src-files.txt, $SC/test-files.txt, $SC/src-imports.txt · last: Bash bash /tmp/flags.sh mediationGeneralizedEnabled infoLureEnabled counterIntelEnabled reputationRaceEnabled merch
-    - `a369780bb` ? · IN FLIGHT · transcript 09-15 12:58 714 KB · 29 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ac2ac2537` r3 · IN FLIGHT · transcript 09-15 13:05 688 KB · 27 tool calls · files: $SC/src-files.txt, $SC/test-files.txt, $SC/src-imports.txt · last: Bash SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `a369780bb` ? · DONE · transcript 09-15 13:02 845 KB · 30 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
