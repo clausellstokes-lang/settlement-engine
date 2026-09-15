@@ -64,8 +64,21 @@
  * this model without going through that lexicon is putting an engine token in
  * front of a reader.
  *
+ * ── ⛔ THE SECRETS SEAM, WHICH THE DATA DOES NOT MARK ──────────────────────────
+ * An incident row carries NO visibility field, and among the 24 writers are
+ * corruptionWeb, espionageGauntlet and informationStatecraft. So the chronicle
+ * classifies by TYPE, through humanizeEngineTokens' `incidentDisclosure`, and
+ * drops every line that is not explicitly `public` unless the caller passes
+ * `includeCovert`. FAIL-CLOSED MEANS THE UNKNOWN IS HIDDEN, NOT SHOWN: a type no
+ * table has classified reads `unclassified` and is withheld exactly like a covert
+ * one, so a new engine writer cannot leak DM truth onto a share or gallery path
+ * by arriving before the lexicon does. Adding a per-incident visibility marker
+ * would be a persistence-shape change and is the owner's call, not this leaf's.
+ *
  * @enforced-by tests/domain/display/relationshipChronicle.test.js
  */
+
+import { incidentDisclosure } from './humanizeEngineTokens.js';
 
 /** Codepoint-stable string compare (never locale-sensitive). */
 const byStr = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -100,6 +113,7 @@ const textOrNull = (v) => (typeof v === 'string' && v.trim() !== '' ? v.trim() :
  * @property {number|null} severity
  * @property {string|null} outcomeId
  * @property {string|null} counterpartyId  the other party a row names, when it names one
+ * @property {'public'|'covert'|'unclassified'} disclosure  who may be told
  */
 
 /**
@@ -197,6 +211,7 @@ function lineFromArchiveRow(raw, source, fallbackType = '') {
     severity: Number.isFinite(r.severity) ? Number(r.severity) : null,
     outcomeId,
     counterpartyId: textOrNull(r.thirdPartyId),
+    disclosure: incidentDisclosure(type),
   };
 }
 
@@ -237,9 +252,12 @@ const joinId = (tick, type) => (tick != null && type ? `join:${tick}:${type}` : 
  * @param {Record<string, unknown>} args.worldState
  * @param {string} args.relationshipKey
  * @param {Record<string, unknown>} args.relState
+ * @param {boolean} [args.includeCovert]  DM view ⇒ true. FAIL-CLOSED: omitted
+ *   means only explicitly-`public` lines survive, so an unclassified type is
+ *   withheld rather than leaked.
  * @returns {ChronicleLine[]}
  */
-export function relationshipLines({ worldState, relationshipKey, relState }) {
+export function relationshipLines({ worldState, relationshipKey, relState, includeCovert = false }) {
   const ledger = new LineLedger();
   const applied = appliedMarkersFor(worldState, relState);
 
@@ -268,6 +286,7 @@ export function relationshipLines({ worldState, relationshipKey, relState }) {
         severity: Number.isFinite(o.severity) ? Number(o.severity) : null,
         outcomeId: id,
         counterpartyId: null,
+        disclosure: incidentDisclosure(type),
       }, [
         id ? `outcome:${id}` : null,
         joinId(tick, incidentType),
@@ -313,6 +332,7 @@ export function relationshipLines({ worldState, relationshipKey, relState }) {
       severity: null,
       outcomeId: null,
       counterpartyId: textOrNull(r.enemyId),
+      disclosure: incidentDisclosure(`alliance_call_${decision}`),
     }, [`call:${callId}`]);
   }
 
@@ -335,13 +355,17 @@ export function relationshipLines({ worldState, relationshipKey, relState }) {
       severity: null,
       outcomeId: null,
       counterpartyId: textOrNull(r.toId),
+      disclosure: incidentDisclosure(`coalition_${action}_${status}`),
     }, [`settlement:${actionId}`]);
   }
 
   // NEWEST FIRST. An undated row sorts oldest (it cannot claim a place in time),
   // and the row id is the total-order tie-break so the result is byte-stable
   // whatever order the stores arrived in.
-  return ledger.lines.sort((a, b) => (b.tick ?? -1) - (a.tick ?? -1) || byStr(a.id, b.id));
+  const visible = includeCovert === true
+    ? ledger.lines
+    : ledger.lines.filter((l) => l.disclosure === 'public');
+  return visible.sort((a, b) => (b.tick ?? -1) - (a.tick ?? -1) || byStr(a.id, b.id));
 }
 
 /**
@@ -353,9 +377,10 @@ export function relationshipLines({ worldState, relationshipKey, relState }) {
  * @param {unknown} [args.worldState]
  * @param {unknown} [args.regionalGraph]  the edges; `worldState.regionalGraph` is
  *   used when this is absent, matching every other map surface's resolution
+ * @param {boolean} [args.includeCovert]  DM view ⇒ true; fail-closed when omitted
  * @returns {RelationshipChronicleRow[]}
  */
-export function relationshipChronicle({ worldState, regionalGraph } = {}) {
+export function relationshipChronicle({ worldState, regionalGraph, includeCovert = false } = {}) {
   const ws = obj(worldState);
   const states = obj(ws.relationshipStates);
   const graph = obj(regionalGraph ?? ws.regionalGraph);
@@ -372,7 +397,7 @@ export function relationshipChronicle({ worldState, regionalGraph } = {}) {
     const to = textOrNull(edge.to ?? edge.target ?? edge.b);
     if (!from || !to) continue;
     const relState = obj(states[relationshipKey]);
-    const lines = relationshipLines({ worldState: ws, relationshipKey, relState });
+    const lines = relationshipLines({ worldState: ws, relationshipKey, relState, includeCovert });
     if (lines.length === 0) continue;
     const memory = obj(relState.relationshipMemory);
     const ticks = lines.map((l) => l.tick).filter((t) => t != null).map(Number);
@@ -400,8 +425,9 @@ export function relationshipChronicle({ worldState, regionalGraph } = {}) {
 /**
  * Whether any relationship in this world has a recorded history — the surface's
  * populated gate, so a young realm renders NOTHING rather than an empty heading.
- * @param {unknown} [worldState] @param {unknown} [regionalGraph] @returns {boolean}
+ * @param {unknown} [worldState] @param {unknown} [regionalGraph]
+ * @param {boolean} [includeCovert] @returns {boolean}
  */
-export function hasRelationshipChronicle(worldState, regionalGraph) {
-  return relationshipChronicle({ worldState, regionalGraph }).length > 0;
+export function hasRelationshipChronicle(worldState, regionalGraph, includeCovert = false) {
+  return relationshipChronicle({ worldState, regionalGraph, includeCovert }).length > 0;
 }

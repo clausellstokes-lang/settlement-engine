@@ -34,9 +34,9 @@
  * but a brand-new leading token upstream is caught only once it is curated here.
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative, sep } from 'node:path';
 import { MONSTER_THREAT_TIERS } from '../../src/data/monsterThreat.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
@@ -47,6 +47,14 @@ import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import {
   COMPLEXITY_BAND_BY_LABEL, SAFETY_BANDS, STABILITY_BANDS, bandOf, complexityBandOf,
 } from '../../src/domain/display/labelBands.js';
+// LT39 car 3 — the incident vocabulary's consumer, its producers, and the surface
+// that composes the last ten tokens. Imported, never re-spelled here (car 0e's rule).
+import {
+  DISPLAY_LEXICON, INCIDENT_DISCLOSURE, INCIDENT_FAMILIES, incidentDisclosure, incidentPhrase,
+} from '../../src/domain/display/humanizeEngineTokens.js';
+import { relationshipChronicle } from '../../src/domain/display/relationshipChronicle.js';
+import { MEMORY_WEAVE_INCIDENT_TYPES } from '../../src/domain/worldPulse/relationshipEvolution.js';
+import { RELIEF_INCIDENT_KINDS } from '../../src/domain/spatial/generosityReactions.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -502,5 +510,222 @@ describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
       }
     }
     expect(composites, 'no appended segment was ever examined').toBeGreaterThan(10);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LT39 car 3 — THE INCIDENT VOCABULARY, PRODUCER ↔ CONSUMER, EXACT BOTH WAYS.
+//
+// THE CLASS, and it is this file's own: the relationship chronicle
+// (src/domain/display/relationshipChronicle.js) is the first surface ever to put
+// a relationship incident TYPE in front of a reader, and the only humanizer that
+// existed for it was relationshipMemory's `titleForType`, which swaps underscores
+// for spaces — so `coalition_betrayal` reached a reader as "coalition betrayal"
+// and `label_proposal_applied` as "label proposal applied", which is an engine
+// token wearing a space. DISPLAY_LEXICON.incidentType is the cure; THIS is what
+// stops it rotting on the next emitter, which is the exact objection the lexicon's
+// own header raised against giving news `kind` a bucket.
+//
+// FOUR ARMS, deliberately different in kind:
+//   A. SCANNED PRODUCERS — every `incidentType: '…'` / `incident: '…'` literal in
+//      src/domain, exact-set-both-ways against the lexicon. A new writer with no
+//      row REDS; a row whose producer left REDS.
+//   B. IMPORTED PRODUCERS — MEMORY_WEAVE_INCIDENT_TYPES and RELIEF_INCIDENT_KINDS,
+//      read from the modules themselves, never transcribed.
+//   C. CURATED PRODUCERS — the literals the two regexes structurally cannot see
+//      (a positional argument, a ternary, a template tail), each BOUND BY SOURCE
+//      PRESENCE in its named producer file exactly as this file's safety-token
+//      contract is, so a rename or a removal reds even though the scan is blind
+//      to the call shape. Plus the chronicle's OWN composed tokens, which are not
+//      transcribed at all — they are obtained by DRIVING the producer.
+//   D. FAMILIES — the three shapes that compose their token at write time and can
+//      never have rows. Each declares its producer and the walker checks it is
+//      still there.
+//
+// ⛔ CANNOT-CATCH, STATED HERE RATHER THAN DISCOVERED LATER: a NEW writer that
+// passes an incident type as a positional argument or builds one in a ternary is
+// invisible to arm A, exactly like the four coalition literals arm C carries. What
+// closes the reader-facing half of that gap is not this walker but
+// `incidentPhrase`'s fallback, pinned below: an unknown token still reaches the
+// reader as a sentence, and `incidentDisclosure` withholds it from a non-DM
+// reader, so the failure mode of a missed producer is thin words, never a leaked
+// token and never a leaked secret.
+// ═══════════════════════════════════════════════════════════════════════════
+describe('LT39 — the incident lexicon is TOTAL over its writers (exact set, both ways)', () => {
+  const SRC_DOMAIN = join(ROOT, 'src/domain');
+
+  /** Every .js under src/domain, repo-relative. */
+  const domainFiles = (dir = SRC_DOMAIN, acc = []) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const abs = join(dir, e.name);
+      if (e.isDirectory()) domainFiles(abs, acc);
+      else if (/\.js$/.test(e.name)) acc.push(relative(ROOT, abs).split(sep).join('/'));
+    }
+    return acc;
+  };
+
+  const FILES = domainFiles();
+
+  /**
+   * ARM A — the mechanically scannable producer literals.
+   *
+   * COMMENTS ARE STRIPPED FIRST, and that is not tidiness: without it a
+   * commented-out literal would "produce" a lexicon row, and the exact-set arm
+   * would then be satisfiable by prose. It also makes the negative control mean
+   * something — a planted producer has to be real code to red this.
+   */
+  const stripComments = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
+  const scannedProducers = () => {
+    const out = new Set();
+    for (const f of FILES) {
+      const src = stripComments(readFileSync(join(ROOT, f), 'utf8'));
+      for (const m of src.matchAll(/incidentType:\s*['"]([a-z0-9_]+)['"]/g)) out.add(m[1]);
+      for (const m of src.matchAll(/\bincident:\s*['"]([a-z0-9_]+)['"]/g)) out.add(m[1]);
+    }
+    return out;
+  };
+
+  /**
+   * ARM C — the literals the regexes structurally cannot see, each with the file
+   * that writes it and the CALL SHAPE that hides it from the scan.
+   */
+  const CURATED = Object.freeze({
+    coalition_settlement_paid: ['src/domain/worldPulse/warCoalitionSettlement.js', 'a POSITIONAL argument to archiveSettlementAction'],
+    coalition_settlement_unpaid: ['src/domain/worldPulse/warCoalitionSettlement.js', 'a POSITIONAL argument to archiveSettlementAction'],
+    coalition_reimbursement_paid: ['src/domain/worldPulse/warCoalitionSettlement.js', 'a TERNARY on the payment status'],
+    coalition_reimbursement_unpaid: ['src/domain/worldPulse/warCoalitionSettlement.js', 'a TERNARY on the payment status'],
+    label_proposal_applied: ['src/domain/worldPulse/relationshipEvolution.js', 'a history-row `type:` write, not an incidentType key'],
+    hierarchy_resolution: ['src/domain/worldPulse/relationshipHierarchy.js', 'a history-row `type:` write, not an incidentType key'],
+    party_broker_relationship: ['src/domain/worldPulse/partyImpact.js', 'the `party_${kind}` template tail'],
+    party_inflame_relationship: ['src/domain/worldPulse/partyImpact.js', 'the `party_${kind}` template tail'],
+  });
+
+  /** The tail each curated template row must be found by (the template hides the whole token). */
+  const CURATED_SOURCE_TOKEN = Object.freeze({
+    party_broker_relationship: 'broker_relationship',
+    party_inflame_relationship: 'inflame_relationship',
+  });
+
+  /**
+   * ARM C (second half) — the chronicle's OWN composed tokens, obtained by DRIVING
+   * relationshipChronicle rather than transcribing its template. A transcription
+   * would agree with itself forever; this cannot.
+   */
+  const COALITION_STATUSES = Object.freeze({
+    settlement_transfer: ['paid', 'partial', 'unpaid'],
+    reimbursement: ['paid', 'partial', 'unpaid'],
+    forgiveness: ['forgiven'],
+    separate_peace: ['recorded'],
+  });
+
+  const composedProducers = () => {
+    const coalitionSettlements = [];
+    for (const [action, statuses] of Object.entries(COALITION_STATUSES)) {
+      for (const status of statuses) {
+        coalitionSettlements.push({ actionId: `${action}.${status}`, tick: 1, action, status, toId: 'b' });
+      }
+    }
+    const allianceCalls = ['joined', 'refused'].map((decision) => ({
+      callId: `call.${decision}`, tick: 1, decision, enemyId: 'c',
+    }));
+    const rows = relationshipChronicle({
+      worldState: { relationshipStates: { 'rel.a.b': { relationshipType: 'allied', coalitionSettlements, allianceCalls } } },
+      regionalGraph: { edges: [{ from: 'a', to: 'b' }] },
+      includeCovert: true,
+    });
+    return new Set((rows[0]?.lines || []).map((l) => l.type));
+  };
+
+  it('the extractors are not vacuous — each finds real members', () => {
+    const scanned = scannedProducers();
+    expect(FILES.length, 'src/domain emptied').toBeGreaterThan(200);
+    expect(scanned.size, 'the incident-literal scan found nothing').toBeGreaterThan(40);
+    expect(scanned.has('raid'), 'the scan missed a literal it can see').toBe(true);
+    expect(composedProducers().size, 'driving the chronicle composed no types').toBe(10);
+    expect(Object.keys(MEMORY_WEAVE_INCIDENT_TYPES).length).toBeGreaterThan(0);
+    expect(RELIEF_INCIDENT_KINDS.length).toBeGreaterThan(0);
+  });
+
+  it('every CURATED row is still literally written by the file that claims it', () => {
+    // The safety-token precedent: the regex cannot see these call shapes, so the
+    // binding is source presence. A rename or a removal reds here.
+    for (const [token, [file, shape]] of Object.entries(CURATED)) {
+      const needle = CURATED_SOURCE_TOKEN[token] || token;
+      expect(readFileSync(join(ROOT, file), 'utf8').includes(`'${needle}'`)
+        || readFileSync(join(ROOT, file), 'utf8').includes(`"${needle}"`),
+      `${token} is declared as ${shape} in ${file}, and that file no longer contains it`).toBe(true);
+    }
+  });
+
+  it('DISPLAY_LEXICON.incidentType === the producer set, EXACTLY, in both directions', () => {
+    const producers = [...new Set([
+      ...scannedProducers(),
+      ...Object.values(MEMORY_WEAVE_INCIDENT_TYPES),
+      ...RELIEF_INCIDENT_KINDS,
+      ...Object.keys(CURATED),
+      ...composedProducers(),
+    ])].sort();
+    const consumers = Object.keys(DISPLAY_LEXICON.incidentType).sort();
+    expect(
+      setDiff(producers, consumers),
+      'a writer emits an incident type with NO lexicon row — it would reach a reader as an '
+      + 'engine token. Author its clause in DISPLAY_LEXICON.incidentType (and its row in '
+      + 'INCIDENT_DISCLOSURE) rather than widening this walker.',
+    ).toEqual([]);
+    expect(
+      setDiff(consumers, producers),
+      'a lexicon row has no producer left — delete it in the same commit that removed its '
+      + 'writer, so the table cannot rot into a list of words nothing can say.',
+    ).toEqual([]);
+  });
+
+  it('INCIDENT_DISCLOSURE covers the lexicon EXACTLY, in both directions', () => {
+    // A row with words but no disclosure class would be withheld from every reader
+    // (fail-closed, so not a leak) and would silently never render — a hole that
+    // looks like a quiet relationship.
+    const words = Object.keys(DISPLAY_LEXICON.incidentType).sort();
+    const classes = Object.keys(INCIDENT_DISCLOSURE).sort();
+    expect(setDiff(words, classes), 'these types have a clause but no disclosure class').toEqual([]);
+    expect(setDiff(classes, words), 'these types have a disclosure class but no clause').toEqual([]);
+    for (const [k, v] of Object.entries(INCIDENT_DISCLOSURE)) {
+      expect(['public', 'covert'], `${k} has an unknown disclosure class`).toContain(v);
+    }
+    // Non-vacuity of the secrets seam: BOTH classes must actually occur, or the
+    // gate is either "show everything" or "show nothing" wearing a table.
+    const values = new Set(Object.values(INCIDENT_DISCLOSURE));
+    expect([...values].sort()).toEqual(['covert', 'public']);
+  });
+
+  it('ARM D — every open family still has the producer it names', () => {
+    expect(INCIDENT_FAMILIES.length, 'the family register emptied').toBeGreaterThan(0);
+    for (const family of INCIDENT_FAMILIES) {
+      expect(readFileSync(join(ROOT, family.producer), 'utf8').includes(family.prefix),
+        `the ${family.id} family declares ${family.producer} as its writer, and that file no `
+        + 'longer contains the prefix').toBe(true);
+      expect(family.prefix.length, `${family.id} has an empty prefix`).toBeGreaterThan(2);
+    }
+  });
+
+  it('NO CLAUSE IS A TOKEN — not an authored row, not a family, not the fallback', () => {
+    expect(Object.keys(DISPLAY_LEXICON.incidentType).length, 'the lexicon emptied').toBeGreaterThan(50);
+    for (const [token, clause] of Object.entries(DISPLAY_LEXICON.incidentType)) {
+      // anchored: the bucket is asserted non-empty one line above and each clause's word count one line below, so an emptied table cannot make this absence pass.
+      expect(clause, `${token} kept an underscore`).not.toMatch(/_/);
+      expect(clause.split(' ').length, `${token} is too terse to be a clause`).toBeGreaterThanOrEqual(3);
+      expect(clause[0], `${token} does not open like a sentence`).toBe(clause[0].toUpperCase());
+    }
+    // The three answers incidentPhrase can give, each proved to be English.
+    expect(incidentPhrase('raid')).toBe('A raid crossed the border');
+    expect(incidentPhrase('stressor_resolved:under_siege')).toMatch(/^The pressure they shared ended/);
+    const unknown = incidentPhrase('brand_new_engine_token');
+    // anchored: the two assertions below sit on the value just computed from a live call, not on an absent one.
+    expect(unknown).toMatch(/^Something the record types only as/);
+    // anchored: the toMatch one line above proves `unknown` is the live fallback sentence, so this absence cannot be satisfied by an empty string.
+    expect(unknown, 'the fallback leaked the raw token').not.toMatch(/brand_new/);
+    // And an unknown token is withheld from a non-DM reader rather than guessed public.
+    expect(incidentDisclosure('brand_new_engine_token')).toBe('unclassified');
+    expect(incidentDisclosure('raid')).toBe('public');
+    expect(incidentDisclosure('espionage')).toBe('covert');
   });
 });
