@@ -90,7 +90,7 @@ const STRESSOR_CLASS = Object.freeze({
  * @property {{ id?: string, type?: string, label?: string, severity?: number, affectedSettlementIds?: ReadonlyArray<string> }} [stressor]
  * @property {Record<string, number>} [populationDeltas]
  * @property {{ from?: unknown, to?: unknown, settlementId?: string }} [tierChange]
- * @property {{ kind?: string, settlementId?: string, relationshipKey?: string, targetId?: string, toType?: string, reason?: string }} [proposalPayload]
+ * @property {{ kind?: string, settlementId?: string, relationshipKey?: string, targetId?: string, fromType?: string, toType?: string, reason?: string }} [proposalPayload]
  * @property {unknown} [relationshipPatch]
  * @property {unknown} [powerTransfer]
  * @property {unknown} [metadata]
@@ -123,6 +123,9 @@ const STRESSOR_CLASS = Object.freeze({
  * @property {string} summary
  * @property {ReadonlyArray<unknown>} reasons
  * @property {string[]} settlementIds
+ * @property {string[]} namedSettlementIds  LT39: ONLY the ids a writer put in a
+ *   settlement-id field — `settlementIds` is the key UNION and launders a
+ *   relationship key into pseudo-ids, so a NAMING surface must read this one
  * @property {PulseOutcome} raw
  */
 
@@ -187,7 +190,6 @@ export function entityKeysOf(o) {
   /** @type {Set<string>} */
   const keys = new Set();
   const add = (/** @type {unknown} */ v) => { if (v != null && v !== '') keys.add(String(v)); };
-  add(o?.targetSaveId);
   add(o?.npcId);
   add(o?.factionId);
   // A relationship key names two endpoints (a::b) — split so a war and its peace
@@ -197,14 +199,49 @@ export function entityKeysOf(o) {
     for (const part of String(o.relationshipKey).split(/[:|>-]+/)) add(part);
   }
   // A stressor's id is the STRONGEST spine: one stressor's whole lifecycle is one
-  // thread. Its affected settlements are secondary linkage.
-  if (o?.stressor) { add(o.stressor.id); for (const id of o.stressor.affectedSettlementIds || []) add(id); }
+  // thread. Its affected settlements are secondary linkage, added with the rest of
+  // the ids below.
+  if (o?.stressor) add(o.stressor.id);
+  // A queued/applied decree's payload names the relationship it addresses.
+  const pay = o?.proposalPayload;
+  if (pay && typeof pay === 'object') add(pay.relationshipKey);
+  // Every settlement id the record actually names, through the ONE reader below
+  // (targetSaveId / settlementIds / affectedSettlementIds / the stressor's
+  // affected set / the payload's settlementId+targetId — the same six fields this
+  // function read inline before the reader was extracted, so the key set is
+  // unchanged).
+  for (const id of settlementIdsOf(o)) add(id);
+  return [...keys].sort(byStr);
+}
+
+/**
+ * THE SETTLEMENT IDS A RECORD ACTUALLY NAMES — the one reader of the id-bearing
+ * fields, so nothing in the estate re-derives "which of these values is a place".
+ *
+ * ⛔ IT IS DELIBERATELY NOT `entityKeysOf`, AND THE DIFFERENCE IS THE WHOLE POINT.
+ * entityKeysOf SPLITS the relationship key on /[:|>-]+/ to widen the graph's
+ * INFERRED linkage — right there, and catastrophic anywhere a name is PRINTED,
+ * because `relationshipKeyFromEdge` (worldPulse/relationshipState.js) returns
+ * `edge.id` whenever the edge carries one, so the key `edge-77` launders into the
+ * tokens `edge` and `77`. A surface naming parties from the key set would print
+ * two settlements that do not exist. This reader touches no key at all: it returns
+ * only what a writer put in a settlement-id FIELD, and an EMPTY result is the
+ * honest answer "this record named nobody". Deterministic (sorted, deduped);
+ * total on garbage.
+ * @param {PulseOutcome} o
+ * @returns {string[]}
+ */
+export function settlementIdsOf(o) {
+  /** @type {Set<string>} */
+  const ids = new Set();
+  const add = (/** @type {unknown} */ v) => { if (v != null && v !== '') ids.add(String(v)); };
+  add(o?.targetSaveId);
+  if (o?.stressor) { for (const id of o.stressor.affectedSettlementIds || []) add(id); }
   for (const id of o?.settlementIds || []) add(id);
   for (const id of o?.affectedSettlementIds || []) add(id);
-  // A queued/applied decree's payload names its target too.
   const pay = o?.proposalPayload;
-  if (pay && typeof pay === 'object') { add(pay.settlementId); add(pay.relationshipKey); add(pay.targetId); }
-  return [...keys].sort(byStr);
+  if (pay && typeof pay === 'object') { add(pay.settlementId); add(pay.targetId); }
+  return [...ids].sort(byStr);
 }
 
 /**
@@ -272,6 +309,7 @@ export function nodesFromRecord(record) {
       summary: o?.summary || '',
       reasons: Array.isArray(o?.reasons) ? o.reasons : [],
       settlementIds: entityKeysOf(o),
+      namedSettlementIds: settlementIdsOf(o),
       raw: o,
     });
   });
@@ -287,6 +325,7 @@ export function nodesFromRecord(record) {
       summary: d?.summary || '',
       reasons: Array.isArray(d?.reasons) ? d.reasons : [],
       settlementIds: entityKeysOf(d),
+      namedSettlementIds: settlementIdsOf(d),
       raw: d,
     });
   });
