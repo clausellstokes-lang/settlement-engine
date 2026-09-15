@@ -381,9 +381,25 @@ export function globalTestTimeoutOf(root = ROOT) {
  * a 120,000 ms budget) is invisible to a text scan and stays invisible. Resolving it needs
  * const-folding, which is a different instrument; it is docketed, not silently accepted.
  *
- * ⛔ NOTHING THIS FUNCTION RETURNS CAN CHANGE A VERDICT. Its output reaches only
- * `evidenceFor`, which appends PRINTED lines to failure arrays that are already non-empty,
- * and feeds `classifyFailure`'s budget. No threshold, exit code or census row moves.
+ * ⛔ WHAT THIS FUNCTION CAN AND CANNOT MOVE — CORRECTED 2026-09-14 (LT29 car 2). The old
+ * wording here read "No threshold, exit code or census row moves", and the THRESHOLD half of
+ * that was FALSE. Its output reaches `evidenceFor`, which resolves `max(global, ...literals)`
+ * and hands THAT to `classifyFailure`, so a file-declared literal at or above the suite-wide
+ * clock RAISES arm 3's threshold ("duration at or past its whole budget") for every row of
+ * that file. MEASURED on tests/lint/writerReach.walker.test.js (literals [120000, 300000]): a
+ * 21,758 ms kill carrying no message classifies UNCLASSIFIED at 300,000 and TIMEOUT at 20,000.
+ * ⚠ THE DIRECTION IS DELIBERATE AND IT IS THE SAFE ONE. The narrow direction — ignoring the
+ * literal and classing every row against the suite-wide clock — is the only one able to INVENT
+ * a TIMEOUT label on a genuine assertion failure; that is TE-BUDGET-1, measured 2026-08-31,
+ * and it is the reason this scan learned to read `60_000` in the first place. An
+ * under-classification degrades to "open the full report", which is true; an
+ * over-classification prints the cost-failure advisory over a real verdict, which misdirects.
+ * So the literal governs — and `failureEvidenceOf` NAMES that rather than hiding it: the
+ * parenthesis attributes the printed number to the FILE, and a row that ran past the
+ * suite-wide clock while inside the file's budget is told so on its own line.
+ * ⛔ THE EXIT CODE AND THE CENSUS ROW STILL CANNOT MOVE. Nothing here reaches a pass/fail
+ * decision, a ceiling or the baseline; the classifier's output is printed evidence and the one
+ * advisory paragraph that keys off a cost class.
  */
 export function timeoutLiteralsOf(src) {
   const found = new Set();
@@ -446,10 +462,19 @@ export function classifyFailure({ duration, message, budget }) {
 }
 
 /**
- * The two evidence lines printed UNDER a failing row's identity. Exported so the
- * meta-test drives the exact bytes the gate emits rather than a re-implementation.
+ * The evidence lines printed UNDER a failing row's identity — TWO of them, and a THIRD when
+ * the row ran past the suite-wide clock while being classed against a wider budget its own
+ * file declared. Exported so the meta-test drives the exact bytes the gate emits rather than
+ * a re-implementation.
+ *
+ * ⚠ `globalBudget` IS THE SUITE-WIDE CLOCK and `budget` is what actually governed the row
+ * (`max(global, ...literals)`). A caller that resolved no literals may omit `globalBudget`:
+ * it defaults to `budget`, which is the same number, the same source and the same bytes as
+ * before this cure.
  */
-export function failureEvidenceOf(row, { budget, budgetSource, literals = [] } = {}) {
+export function failureEvidenceOf(row, {
+  budget, budgetSource, globalBudget, literals = [],
+} = {}) {
   const raw = Number.isFinite(row?.duration) ? row.duration : null;
   // A sub-millisecond row rounds to `0ms`, which reads as "no measurement" — the
   // one thing this line exists to stop being ambiguous about.
@@ -457,12 +482,40 @@ export function failureEvidenceOf(row, { budget, budgetSource, literals = [] } =
   const message = (row?.failureMessages || [])[0] || '';
   const firstLine = message.split('\n', 1)[0].trim();
   const verdict = classifyFailure({ duration: row?.duration, message, budget });
-  const declared = literals.length ? `; the file also declares ${literals.join('ms, ')}ms` : '';
-  return [
+  // ⛔ THE PARENTHESIS NAMES THE SOURCE OF THE NUMBER PRINTED (LT29 car 2). It used to name
+  // `budgetSource` unconditionally, so a budget that came from the FILE's own literal was
+  // attributed to the vite config: §885 read `300000ms budget (vite.config.js testTimeout)`
+  // against a config that sets 20,000 and called it "a real expiry presented as though it had
+  // FOURTEEN TIMES the headroom it had, which is precisely what sent the first diagnosis
+  // hunting a mystery kill". The source now rides with the number through the `Math.max`.
+  const suiteClock = Number.isFinite(globalBudget) ? globalBudget : budget;
+  const fileGoverns = Number.isFinite(budget) && budget > suiteClock;
+  const declaredClause = literals.length ? ` — it declares ${literals.join('ms, ')}ms` : '';
+  const attribution = fileGoverns
+    ? `the file's own declared budget${declaredClause}; ${budgetSource} sets ${suiteClock}ms`
+    : `${budgetSource}${literals.length ? `; the file also declares ${literals.join('ms, ')}ms` : ''}`;
+  const lines = [
     `      ${verdict.class} · ran ${ms === null ? 'an unrecorded duration' : ms}`
-    + ` against a ${budget}ms budget (${budgetSource}${declared}) — ${verdict.why}`,
-    `      msg: ${firstLine || '(the report carried no failure message)'}`,
+    + ` against a ${budget}ms budget (${attribution}) — ${verdict.why}`,
   ];
+  // ⛔ AND THE ARM THE LITERAL DISABLES IS NAMED RATHER THAN LEFT SILENT. A file-declared
+  // literal raises `classifyFailure`'s arm 3 for EVERY row of that file, because the scan is
+  // file-scoped and cannot tie a literal to one test — the scan's own header says it cannot
+  // tell a per-test override from a `beforeAll` argument or a Testing Library query budget.
+  // Erring wide is the safe direction (only the narrow one can invent a TIMEOUT on a genuine
+  // assertion — TE-BUDGET-1), but it is not a free one: a row that ran past the suite-wide
+  // clock and inside the file's budget gets no TIMEOUT from arm 3. When that is exactly what
+  // happened, this line says so, so the number never governs silently.
+  if (fileGoverns && raw !== null && raw >= suiteClock && raw < budget
+    && verdict.class !== 'TIMEOUT' && verdict.class !== 'QUERY-BUDGET') {
+    lines.push(
+      `      ⚠ it also ran PAST the suite-wide ${suiteClock}ms clock; the class above is taken`
+      + ` against the FILE's ${budget}ms budget, which this row may not own`
+      + ' — if it does not, this row is a TIMEOUT.',
+    );
+  }
+  lines.push(`      msg: ${firstLine || '(the report carried no failure message)'}`);
+  return lines;
 }
 
 /**
@@ -1029,7 +1082,11 @@ export async function run(argv = []) {
     const { budget: globalBudget, source: budgetSource } = globalBudgetLazy();
     const budget = Math.max(globalBudget, ...literals);
     return {
-      lines: failureEvidenceOf(row, { budget, budgetSource, literals }),
+      // ⚠ `globalBudget` rides beside `budget` so the printed parenthesis can attribute the
+      // number it actually prints (LT29 car 2); the classifier's threshold is unchanged.
+      lines: failureEvidenceOf(row, {
+        budget, budgetSource, globalBudget, literals,
+      }),
       class: classifyFailure({
         duration: row?.duration,
         message: (row?.failureMessages || [])[0] || '',
@@ -1520,8 +1577,12 @@ export async function run(argv = []) {
       //
       // ⚠ Cure 1b: the per-file budget resolution that used to live inline here is
       // now `evidenceFor`, hoisted so STRICT DIST and SCOPE SENTINEL answer the same
-      // question with the SAME arithmetic. The bytes this block prints are unchanged
-      // — same budget (`max(global, ...literals)`), same source, same literals.
+      // question with the SAME arithmetic — same budget (`max(global, ...literals)`),
+      // same literals.
+      // ⚠ LT29 car 2 CHANGED THE ATTRIBUTION, NOT THE ARITHMETIC. Where a file's own
+      // literal supplies the budget, the parenthesis now names the FILE and prints the
+      // config's figure beside it, and a row that ran past the suite-wide clock inside
+      // that wider budget gets a third line saying so. No threshold moved.
       lines.push(`  ${regressions.length} failing test(s) NOT in the frozen census:`);
       for (const id of regressions) {
         lines.push(`    ${id}`);
