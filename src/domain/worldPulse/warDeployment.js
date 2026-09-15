@@ -760,6 +760,31 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       population: conqueredSettlement?.population,
       namedCastCount: (conqueredSettlement?.npcs || []).length,
       institutions: conqueredSettlement?.institutions || [],
+      // ⛔⛔ THIS READ RESOLVES TO 0 ON EVERY PATH, AND THAT IS MEASURED, NOT
+      // FEARED (ODQ §733.2; LT40 car 3). `economicState.wealthIndex` has exactly
+      // ONE reader in the estate — this line — and ZERO writers: a repo-wide
+      // scan of src/ finds the identifier on this line alone, and the
+      // observed-shape readers baseline records it as "wealthIndex on
+      // economicState": 1, a reader with nothing behind it. So `movableWealth`
+      // is 0 on every conquest that has ever resolved, `razingSpoils` takes its
+      // `nothingLeft` branch, and the receipt a burned town returns is literally
+      // "there is nothing in the ash". THE RAZING-SPOILS SUBSYSTEM IS PROVABLY
+      // INERT, and the estate's own prose already tells the truth about it —
+      // TE-HERALD-1 retired peaceTermsDrafting's "N% of the treasury" promise in
+      // favour of `TERM_SHARE_WORDS` (:95, used at :108), so no reader is being
+      // told a number this pipeline cannot produce.
+      //
+      // ⚠ THE CURE §733.2 NAMES IS NOT BUILT AND IS NOT THIS LINE'S TO BUILD.
+      // The writer is the treasury field, chartered as W-COIN — a new
+      // persistence shape, panel-gated at §733.1 — and `grep -rln treasury
+      // src/generators/` finds no such field today. So the buildable half is the
+      // GUARD, not the cure: `tests/domain/warDeployment.test.js`'s arm titled
+      // "THE RAZING SPOILS ARE PROVABLY INERT" holds this read at 0 over
+      // generated towns AND scans src/ for a writer, so the day W-COIN lands the
+      // pin reds and this line stops being dead in a way somebody has to notice.
+      // DO NOT "fix" the read by defaulting it to a population- or
+      // prosperity-derived number: that invents spoils the world never earned
+      // and moves every razing outcome.
       movableWealth: Number(conqueredSettlement?.economicState?.wealthIndex) || 0,
     });
     // R2's CLOSED LOOP, carried out of the layer. An `initiation` razing MINTS
