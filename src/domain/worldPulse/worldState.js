@@ -705,6 +705,14 @@ function weeksFromCalendar(calendar = {}) {
  * (weeks × 12/52 = weeks × 3/13; a full year lands exactly 12) so persisted
  * shapes and public snapshots keep the key — it is never read back for
  * advancement when elapsedWeeks is present.
+ *
+ * ⚠ THIS IS THE MOVING CLOCK, AND THE ESTATE RUNS TWO. A settlement's `history.age` is
+ * NOT derived here and is not derived anywhere else either: it is drawn once at
+ * generation (historyGenerator.js, whose `founding.age = age` is the only `.age =`
+ * write in src/) and no advance rewrites it. So `calendar.year` and `history.age`
+ * answer different questions and must never be compared or added. The freeze is
+ * deliberate and recorded, it is pinned by tests/domain/worldPulseTickClock.test.js,
+ * and its disposition is docs/ENGINE_DEFECT_DISPOSITIONS.md §5.
  * @param {number} elapsedWeeks
  */
 function calendarFromWeeks(elapsedWeeks) {
