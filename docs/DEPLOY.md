@@ -452,13 +452,23 @@ as an explicit allowlist row rather than a required secret. Deploying the functi
 is safe, but do not set that secret or activate its database dispatcher yet; the
 broadcast courier is deliberately shipping dormant as described below.
 
-⚠ **The pin runs in ONE direction only: every CONSUMED name must be documented.**
-The reverse — every documented name must still be consumed — is a **recorded
-deferral, not an oversight**. The worked example was this runbook's own: with the
-founder purchase path abolished (ODQ §118) but its price id still listed above,
-`STRIPE_PRICE_FOUNDER_LIFETIME` sat documented and unconsumed. WEB-8 struck that
-line, so the name is now neither documented nor consumed. A documented secret
-nobody reads is inert; an undocumented secret nobody sets breaks a cutover.
+⚠ **The pin now runs in BOTH directions:** every CONSUMED name must be
+documented here, and every DOCUMENTED name must still be consumed. The reverse
+arm was a **recorded deferral, not an oversight**, and it is now **discharged** —
+this paragraph records that it closed. The worked example was this runbook's
+own: with the founder purchase path abolished (ODQ §118, landed at §134.1) but
+its price id still listed above, `STRIPE_PRICE_FOUNDER_LIFETIME` sat documented
+and unconsumed and would have redded a bidirectional pin on that line alone.
+WEB-8 struck the line (ODQ §473, "52 → 51 secrets"), the name is now neither
+documented nor consumed, and the reverse direction measures zero.
+<!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
+
+An undocumented secret nobody sets breaks a cutover. A documented secret nobody
+reads is not merely inert: it is a standing instruction to set something that
+does nothing, and an operator who finds one stale row trusts the next one less.
+If a secret must ever be documented AHEAD of the code that will read it, add a
+row to `REVERSE_ALLOWLIST` in the pin **naming the car that will consume it**,
+and delete the row in the same commit that lands that code.
 
 ### Activate the durable account-deletion worker
 

@@ -267,6 +267,11 @@ describe('canonical deploy safety — durable work and Stripe cutover', () => {
 // ⚠ Arm 4's alias pattern MATCHES ARM 1'S OWN SPELLING by construction (`Deno`
 // is itself a valid identifier), so its non-redundancy control is written on set
 // DIFFERENCE, never on set size — a size comparison would pass vacuously.
+//
+// THE PIN RUNS IN BOTH DIRECTIONS. Every CONSUMED name must be documented, and
+// every DOCUMENTED name must still be consumed. The reverse arm was DOM-2's
+// RECORDED DEFERRAL and it is now DISCHARGED, not open — see the REVERSE_ALLOWLIST
+// block below for the sections that closed it (ODQ §118, §134.1, §473).
 describe('DEPLOY.md documents every environment name the functions consume', () => {
   const FUNCTIONS_DIR = resolve(repoRoot, 'supabase/functions');
 
@@ -348,6 +353,60 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       + ' independent gates and DEPLOY.md says so in prose; listing it as a required secret'
       + ' would tell an operator to arm the thing the release is choosing not to arm.',
   });
+
+  // ── THE REVERSE DIRECTION (a recorded deferral, now DISCHARGED) ─────────────
+  // DOM-2 shipped this pin in ONE direction — consumed ⊆ documented — and wrote
+  // the reason down rather than leaving a hole: DOM-3 had not yet landed, so the
+  // founder purchase path still existed with its price id listed in the runbook,
+  // and STRIPE_PRICE_FOUNDER_LIFETIME would have redded a bidirectional pin on
+  // that one line. The condition is CLOSED. DOM-3 landed (ODQ §118, §134.1 — the
+  // ABOLISHED_PRODUCTS set in create-checkout) and WEB-8 struck the orphaned name
+  // from the runbook (ODQ §473, "52 → 51 secrets"). The reverse direction measures
+  // zero at this base, so the arm below lands GREEN and the deferral is discharged
+  // rather than re-recorded.
+  //
+  // Why the reverse direction is worth a pin at all: a documented secret nobody
+  // reads is a standing instruction to an operator to set something that does
+  // nothing, and an operator who finds one stale row trusts the next one less —
+  // which is precisely the trust the forward arm exists to protect.
+  const REVERSE_ALLOWLIST = Object.freeze({
+    // EMPTY AT LANDING. The ONLY lawful row is a secret documented AHEAD of the
+    // code that will read it, and the row must NAME the car/packet that will
+    // consume it, e.g.
+    //   STRIPE_PRICE_SOMETHING:
+    //     'Documented ahead of the code that reads it: WEB-12 lands the SKU next
+    //      wave and the operator must have the price set before that deploy.',
+    // A row without a named consuming car is not a row — it is a stale
+    // instruction to an operator with an excuse attached. DELETE THE ROW IN THE
+    // SAME COMMIT that lands the consuming code.
+  });
+
+  /**
+   * Every way a reverse-allowlist row can be wrong, as sorted complaint strings.
+   * EXTRACTED ON PURPOSE: REVERSE_ALLOWLIST is empty at landing, and a loop over
+   * an empty object is an assertion that cannot fail. The rule is therefore also
+   * exercised against fabricated rows by the control below.
+   * @param {Record<string, string>} rows
+   * @param {Set<string>} documented
+   * @param {Set<string>} consumed
+   */
+  function reverseAllowlistComplaints(rows, documented, consumed) {
+    /** @type {string[]} */ const out = [];
+    for (const [name, reason] of Object.entries(rows)) {
+      if (!documented.has(name)) {
+        out.push(`${name}: reverse-allowlisted but DEPLOY.md does not document it — retire the row`);
+      }
+      if (consumed.has(name)) {
+        out.push(`${name}: IS consumed now — delete the row, the forward arm covers it`);
+      }
+      if (String(reason).trim().length <= 40) {
+        out.push(`${name}: states no reason`);
+      } else if (!/\b[A-Z]{2,}-\d+\b/.test(String(reason))) {
+        out.push(`${name}: names no consuming car — a row must name the car that will read it`);
+      }
+    }
+    return out.sort();
+  }
 
   it('CONTROL: the scanner finds a planted secret in all four spellings', () => {
     // A census that reports zero and a census that is broken look identical from
@@ -446,6 +505,60 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       + ' reads them as empty strings. Add each to the secrets section with its failure mode,'
       + ` or add an allowlist row stating why it is deliberately not required:\n  ${undocumented.join('\n  ')}\n`,
     ).toEqual([]);
+  });
+
+  it('every documented secret is still consumed — the reverse direction (ODQ §118 / §134.1 / §473)', () => {
+    const consumed = scanConsumedEnvNames(FUNCTIONS_DIR).all;
+    expect(consumed.size, 'the env scan found nothing — the scan broke').toBeGreaterThan(20);
+    // anchored: the assertion above proves `consumed` is a populated census
+    const documented = [...documentedSecretNames()].sort();
+    expect(documented.length, 'the secrets section parsed to no names').toBeGreaterThan(10);
+    const orphaned = documented.filter((n) => !consumed.has(n) && !(n in REVERSE_ALLOWLIST));
+    expect(
+      orphaned,
+      '\nThese names are listed as REQUIRED SECRETS in DEPLOY.md and are read by NO deployed'
+      + ' edge function. Each one tells an operator on a first cutover to go and set something'
+      + ' that does nothing — and a runbook with one stale row is trusted less on the next one.'
+      + ' Either the code that reads the name was deleted (strike the runbook line, as WEB-8'
+      + ' did for STRIPE_PRICE_FOUNDER_LIFETIME), or the name is documented AHEAD of the code'
+      + ' that will read it (add a REVERSE_ALLOWLIST row NAMING THE CAR that will consume it,'
+      + ` and delete that row in the same commit that lands it):\n  ${orphaned.join('\n  ')}\n`,
+    ).toEqual([]);
+  });
+
+  it('every reverse-allowlist row is documented, unconsumed, and names its consuming car', () => {
+    const consumed = scanConsumedEnvNames(FUNCTIONS_DIR).all;
+    const documented = documentedSecretNames();
+    expect(
+      reverseAllowlistComplaints(REVERSE_ALLOWLIST, documented, consumed),
+      'a reverse-allowlist row is not carrying its own weight',
+    ).toEqual([]);
+  });
+
+  it('CONTROL: the reverse-allowlist rule rejects every way a row can be wrong', () => {
+    // REVERSE_ALLOWLIST is EMPTY at landing, so the test above loops over nothing
+    // and would pass however broken the rule were. Exercise the rule itself.
+    const documented = new Set(['DOCUMENTED_PLANNED', 'DOCUMENTED_AND_READ', 'DOCUMENTED_NO_CAR']);
+    const consumed = new Set(['DOCUMENTED_AND_READ']);
+    const goodReason = 'Documented ahead of the code that reads it: WEB-12 lands the SKU next wave.';
+
+    // A lawful row raises nothing.
+    expect(reverseAllowlistComplaints(
+      { DOCUMENTED_PLANNED: goodReason }, documented, consumed,
+    )).toEqual([]);
+
+    // …and each unlawful shape raises exactly its own complaint.
+    expect(reverseAllowlistComplaints({
+      NEVER_DOCUMENTED: goodReason,
+      DOCUMENTED_AND_READ: goodReason,
+      DOCUMENTED_PLANNED: 'because.',
+      DOCUMENTED_NO_CAR: 'documented ahead of the code that will eventually read it, one day.',
+    }, documented, consumed)).toEqual([
+      'DOCUMENTED_AND_READ: IS consumed now — delete the row, the forward arm covers it',
+      'DOCUMENTED_NO_CAR: names no consuming car — a row must name the car that will read it',
+      'DOCUMENTED_PLANNED: states no reason',
+      'NEVER_DOCUMENTED: reverse-allowlisted but DEPLOY.md does not document it — retire the row',
+    ]);
   });
 
   it('every allowlist row names a real consumed secret and states a reason', () => {
