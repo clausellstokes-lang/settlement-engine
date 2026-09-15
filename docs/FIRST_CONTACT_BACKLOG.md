@@ -44,6 +44,29 @@ tests), so they need a *coordinated* rename rather than an inline swap:
 — were already converted in the follow-up friction pass, since they are component-local and the
 bible mandates the swap.)*
 
+> ⚠ **THREE CITATIONS IN THIS CLUSTER ARE STALE — RE-MEASURED 2026-09-15 (LT38 car 1).**
+> 1. **`src/copy/strings.js:74` NO LONGER EXISTS.** The key migrated to
+>    **`src/copy/en.js:545`** (`polishCta: 'Polish with AI'`), and en.js's own
+>    in-file note records the migration "from the retired copy/strings.js so
+>    there is one copy registry".
+> 2. **THE KEY NOW HAS TWO CONSUMERS, NOT ONE.** The parenthetical above says
+>    `AIInlineCard` was converted to an in-voice literal; at the slot it reads
+>    `t('ai.polishCta')` again (`AIInlineCard.jsx:76`), alongside
+>    `NextActionRail.jsx:185`. A rename of the shared key moves BOTH.
+>    A third, unlisted site ships the word too: `settlement/VersionsTab.jsx:122`
+>    (`'Exported (PDF / JSON / AI prompt)'`).
+> 3. **THE COUPLING THIS CLUSTER FEARED IS GONE.** No control anywhere in `src/`
+>    is named `Narrative AI Prompt` or `Map AI Prompt` any more — the live export
+>    surface is `settlement/ExportSheet.jsx` ("Export Dossier", PDF variants, JSON)
+>    plus the map toolbar's "Download map (PNG)". The two labels survive ONLY as
+>    GUIDE PROSE describing controls that no longer exist
+>    (`HowToUse.jsx:228`, `:249`, `:308`; `howto/HandbookVoiced.jsx:65`), so the
+>    first row's fix is a DESCRIPTION REPAIR, not the coordinated rename it was
+>    scoped as — there is no en.js key, no button label and no analytics event
+>    left to reconcile. ⛔ `howto/HandbookVoiced.jsx` is PUBLIC CHROME COPY whose
+>    wording ODQ §906 puts to the owner's signature: correcting it is not an
+>    implementer's edit.
+
 ---
 
 ## Remaining per-page proposals (wording + polish)
@@ -140,37 +163,46 @@ bible mandates the swap.)*
 
 ---
 
-## ⭐ LD LADDER — BUILD STATE, MEASURED 2026-08-03 (Lane F; CHECK-GIT-FIRST receipts)
-> Every row below was checked against the tree at `d6c5af8e`, not inferred from
-> this document. SOL_QUEUE §2 item 21 asks for exactly this and deliberately
-> claimed nothing; these are the receipts. **Read this block before dispatching
-> any LD item** — one lane was already dispatched greenfield against an
-> already-complete surface (operator messages), and the ladder now has three
-> different kinds of "open".
+## ⭐ LD LADDER — BUILD STATE, RE-MEASURED 2026-09-15 (LT38 car 1; CHECK-GIT-FIRST receipts)
+> Every row below was re-checked against the tree at THE BUILD SLOT
+> `claude/composite-r4` = `f73bdbf16`, not inferred from this document. It
+> SUPERSEDES the 2026-08-03 Lane F block measured at `d6c5af8e`: four items that
+> table called open the slot shows landed or superseded, and nearly every line
+> and token citation in it had drifted. **Read this block before dispatching any
+> LD item** — one lane was already dispatched greenfield against an
+> already-complete surface (operator messages), and the ladder now has four
+> different kinds of "open": open, open-and-blocked, owner-gated, and SUPERSEDED.
 >
-> | item | state | receipt |
+> | item | state | receipt (re-measured at `f73bdbf16`, 2026-09-15) |
 > |---|---|---|
-> | LD-1 | ⛔ **OPEN, BLOCKED** | no `landingSettlementFixture.js`, no `MiniatureFrame`; see the STOP note in LD-1 below |
-> | LD-2 | ✅ **BUILT** @ `cf7243ab` | `components/nav/NavDivider.jsx` + `NavRibbon.jsx`; `navDividers.test.jsx` 9/9 |
-> | LD-3 | ✅ **BUILT** @ `5a6d7aef` | `components/footer/LegalRibbonRow.jsx`, route-scoped suppression; `landingFooterMigration.test.jsx` 6/6 |
-> | LD-3b | 🔶 **OPEN** — LD-3's successor, not its duplicate | the row LD-3b reuses now exists and is eager; see the STOP note in LD-3b |
-> | LD-4 | ⛔ OPEN, blocked by LD-1 | shares LD-1's frame contract and its blocker |
-> | LD-5 | 🔶 OPEN (chrome only) | the Account deep-links (`?section=`) and all three About routes are LANDED by other lanes — LD-5's remaining work is the MENU LAYER, nothing else. ⚠️ the Messages amendment binds |
-> | LD-6 | ⛔ OPEN, **OWNER-GATED** | no `annual` anywhere in `config/pricing.js` or `services/stripe.js`; W-1's annual credit CADENCE is routed to the owner (`cca61099`) and item 7 says the toggle does not ship until it is ruled |
-> | LD-7 | 🔶 OPEN | no moment-scope registry exists; `PricingMomentCard` still mounts at App level (`App.jsx:74`) off a flag no route change clears — the reported bug is live |
-> | LD-8 | 🔶 OPEN | orders 1+2 are deletions (`GenerateWizard.jsx:518` top `PipelineRail`, `:484` `LockControls`); order 3 is the `scroll-padding-top`/`scroll-margin-top` cure from `CHROME` |
-> | LD-9 | ✅ BUILT (Lane C) | the About split landed; §4 (the dropdown) belongs to LD-5 |
-> | LD-10 | 🔶 OPEN | `PrivacySettings.jsx:187` still reads "Off by default." and the market toggle is still opt-IN |
-> | LD-11 | 🔶 OPEN | no reset map on the route registry; no `resetSection` anywhere in `src/` |
+> | LD-1 | ⛔ **OPEN, BLOCKED** | no `landingSettlementFixture.js`, no `MiniatureFrame`, no `demoMode` anywhere under `src/`; `home/landingFixture.js` is still 206 lines (excerpt-only) and `scripts/generate-landing-fixture.mjs:81` still has `function buildRegion(seed)` UNEXPORTED, which §6's parity pin requires. See the STOP note in LD-1 |
+> | LD-2 | ✅ **BUILT** @ `cf7243ab` — and REFITTED TWICE since | `components/nav/` now holds NavDivider + NavRibbon + FletchBand + ShaftWrap + ShaftNock; band membership is still DERIVED from routes.js NAV_FLOW (`NavRibbon.jsx:121-131`), never a list. ⚠ its one remaining ⚠️ TASTE CALL is **RETIRED** — `NavDivider.jsx:23-27` records that `dividerKind` and the in-band chevrons went with the fletch refit, so the predicate it was a one-line flip of no longer exists |
+> | LD-3 | ✅ **BUILT** @ `5a6d7aef` | `components/footer/LegalRibbonRow.jsx` is the one row module, mounted at `App.jsx:728` under the route-scoped `view !== 'home'` suppression (`:723`) and at `LandingBelowFold.jsx:326`; `landingFooterMigration.test.jsx` green |
+> | LD-3b | 🔶 **OPEN** — LD-3's successor, not its duplicate | the row LD-3b reuses exists and is eager (constraint 4 satisfied); still ABSENT: `ribbonLanding` in `CHROME`, any fixed bottom ribbon. `index.css:321-329` still carries `background-attachment: fixed` + `min-height: 86vh`, `:380-385` still `.sf-welcome-leg { height: 100vh }` / 70vh, and `useScrollJourney.js:40-42` still hardcodes the playhead at `scrollY + viewportH * 0.5`. See the STOP note |
+> | LD-4 | ⛔ OPEN, blocked by LD-1 | shares LD-1's frame contract and its blocker; `LandingArtifacts.jsx:355` still renders the facsimile "Chronicle half". ⚠ the Herald VOICE debt it exposes was materially paid down by TE-HERALD-1 (ODQ §774.1/§781.1: 181 census rows, 84 lines cured, census 408 → 227) — reduced, not closed |
+> | LD-5 | 🔶 OPEN — **THE MENU LAYER ONLY** | the ROUTE substrate LANDED elsewhere: `AccountPage.jsx:86-90` derives its allowlist from ACCOUNT_SECTIONS and syncs `?section=` (reply deep link `?section=support&message=` at `:400`), `CompendiumPanel.jsx:132` honours `?mode=custom`, all three About routes resolve. ABSENT at the slot: any `aria-haspopup` menu in `src/`; `AccountMenu.jsx:176-201` is still THREE rows; `NavRibbon.jsx:155-158` still renders `<button type="button">` per cell (ruling 1 open); `GalleryPage.jsx:53` still holds a local `useState('settlements')`. ⚠️ the Messages amendment binds |
+> | LD-6 | ⛔ OPEN, **OWNER-GATED** | ⚠ **THE 08-03 RECEIPT IS FALSE.** `config/pricing.js:356-372` ALREADY ships `CARTOGRAPHER_ANNUAL` **dark at `ANNUAL_FACTOR = 0`**, written as a derivation so the pins hold at both dial values, and `ACTIVE_CHECKOUT_SKUS` (`:388-394`) adds the SKU if and only if the dial is lit — the flip is WEB-10's one line. (`src/services/stripe.js` no longer exists at that path.) What is still open and still the owner's: W-1's annual credit CADENCE, W-2's unknown-product-key fail-closed guard, the checkout disclosure, and the Terms refund rewrite |
+> | LD-7 | 🔶 OPEN — **the reported bug is LIVE** | no moment-scope registry exists anywhere; `App.jsx:70` lazy-imports PricingMomentCard and `:939-943` mounts it app-wide with `view !== 'pricing'` as the ONLY suppression; `App.jsx:468-474` fires `map_clicked` on the realm nav click; `settlementSlice.js:201-207`'s `activePricingMoment` is cleared by exactly one caller — the card's own dismiss/auto-dismiss — so nothing clears it on navigation |
+> | LD-8 | ✅ **ORDERS 1 + 2 LANDED** @ `560ac7f88` (car `ae597ec3c`, collection ODQ §795.1); **order 3's cure LANDED STRUCTURALLY** | under the owner's own ODQ §767.2 + §777 rulings: ZERO `PipelineRail` in `GenerateWizard.jsx` (its only remaining door is `SimulationDrawer.jsx:30`'s dynamic import) and LockControls re-homed to `GenerateWizard.jsx:576` + `SettlementDetail.jsx:620` (the dual home, J-T10-A). Measured receipt: dossier head 1,916px → 118px desktop / 140px mobile. Order 3: `theme.js:1583-1597` CHROME + `:1620` `ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl` with 31 consumers, `GenerateWizard.jsx:274-291` setting `scrollPaddingTop` from CHROME, pinned at `tests/ui/wizardOutputToolbar.test.jsx:151-168`. ⚠ its remaining TWO-VIEWPORT DOM assertion is DEFERRED to `e2e/` for exactly LD-3b constraint 7's reason — jsdom has no layout engine |
+> | LD-9 | ✅ BUILT (Lane C) @ `d6c5af8e` | the About split landed and `tests/components/aboutSplit.test.jsx` pins it, including that every anchor reads the DERIVED ANCHOR_OFFSET; §4 (the dropdown) belongs to LD-5 |
+> | LD-10 | ⛔ **SUPERSEDED — stop reading this as open work** | ODQ §359.6 (the person-adjacent consent split) ruled the OPPOSITE of LD-10's order and SHIPPED at `547e4d58a`: `lib/consent.js:66-68` stamps `CONSENT_MODEL_VERSION = 3`, `:80` `MARKET_INSIGHTS_DEFAULT = false`, `:103` `defaults()` returns `research: false`, pinned by `tests/lib/consent.test.js:43-84`. LD-10's own DECIDED-STATE LAW is therefore ALREADY IMPLEMENTED (`consent.js:38-50` honours any record with `updatedAt > 0`, so a v2-era explicit opt-IN survives the v3 flip). What is left is the opposite defect — copy that still claims on-by-default — see the STOP note |
+> | LD-11 | 🔶 OPEN | zero `resetSection` in `src/`, no reset map on routes.js. ⚠ NOT a greenfield first case: `App.jsx:459-462` already carries ONE ad-hoc self-click hack (`settlements` only) with an in-code note that Create's reset "needs a store nonce that has not landed yet — a 4a follow-up". LD-11 REPLACES that hack rather than adding the first case |
 >
 > **⚠️ THE LADDER'S REAL GATE IS THE SIZE RATCHET, and it is not in any LD spec.**
 > `src/App.jsx` and `src/components/OutputContainer.jsx` both sit at a
-> TOLERANCE-0 ceiling (App.jsx at its frozen `scripts/.size-baseline.json`
-> number; OutputContainer at **exactly 600**, its layer ceiling, unbaselined).
-> Any LD item that adds a line to either file reds `sizeBaseline` AND eslint.
+> TOLERANCE-0 ceiling, RE-MEASURED 2026-09-15 with eslint's own Linter under the
+> enforcer's own rule: **App.jsx is at exactly 650 of its frozen 650**
+> (`scripts/.size-baseline.json` — the 08-03 block's 659 is stale; later lanes
+> ratcheted it further down) and **OutputContainer at exactly 600 of 600**, its
+> unbaselined layer ceiling (`eslint.config.js:665-668`; the 599 that circulates
+> in the ODQ's hot-file row is one effective line light).
+> `tests/lint/sizeBaseline.test.js` reds in BOTH directions, so a decomposition
+> that SHRINKS a file must LOWER its number in the same commit, and one added
+> effective line to OutputContainer makes it a NEW offender that reds the
+> exact-set arm as well as eslint's layer rule.
 > LD-2 and LD-3 each paid for themselves by extracting a leaf and ratcheting the
-> number DOWN (720 → 693 → 659), which is the pattern the remaining items must
-> follow — budget the extraction into the item, do not discover it at the gate.
+> number DOWN (720 → 693 → 659 → 650), which is the pattern the remaining items
+> must follow — budget the extraction into the item, do not discover it at the gate.
 
 ---
 
@@ -194,6 +226,23 @@ bible mandates the swap.)*
 > full-emission mode is not in `scripts/generate-landing-fixture.mjs`. Nothing
 > here is a fault in the design — the ceiling simply moved under it.)
 
+> ⛔ **RE-MEASURED 2026-09-15 (LT38 car 1) at the BUILD SLOT `f73bdbf16` — the
+> blocker STANDS and the seam citations below have DRIFTED.** OutputContainer
+> still measures **exactly 600 of 600** under eslint's own Linter (the ODQ
+> hot-file row's 599 is one effective line light), and `src/App.jsx` is at
+> **exactly 650 of its frozen 650**, not the 659 this document quotes. The
+> §1 seams all still exist but have moved: the props signature is
+> `OutputContainer.jsx:202` (not `:200`), `useLiveAiCostResolver` fires at
+> `:210` (not `:208`), and `const publicDossier = readOnly && !saveId` is at
+> `:446` (not `:444`); the file now carries 37 `useStore` occurrences where the
+> record says ~25 selectors. Substrate re-confirmed ABSENT by grep over `src/`
+> `scripts/` `tests/`: no `MiniatureFrame`, no `landingSettlementFixture`, no
+> `demoMode`; `scripts/generate-landing-fixture.mjs:81` is still
+> `function buildRegion(seed)` UNEXPORTED, which DESIGN_LIVING_MINIATURE §6's
+> promise-parity pin requires exported. `HomeLanding.jsx:31` still lazily
+> imports LandingBelowFold inside a bare `<Suspense>` at `:141` — no
+> IntersectionObserver exists under `home/`, exactly as §5's correction says.
+
 > **SUPERSEDED — docs/DESIGN_LIVING_MINIATURE.md is the binding spec** (fully
 > architected 2026-08-01; self-audit corrections folded 2026-08-02). The sketch
 > below is historical. Two of its claims are known FALSE and corrected there:
@@ -213,7 +262,7 @@ explicitly waives legibility at miniature scale; exactness is the goal.
   `scripts/generate-landing-fixture.mjs`). Only the PRESENTATION is a facsimile
   (`LandingArtifacts.jsx` re-renders excerpts through its own card markup — a second
   rendering of dossier look-and-feel that drifts as the real dossier evolves).
-- `OutputContainer.jsx:200` already accepts the exact demo mount:
+- `OutputContainer.jsx:202` (`:200` when this was written) already accepts the exact demo mount:
   `{ settlement: propSettlement, readOnly, playerView, hideHeader,
   suppressNarrativeCta }` — props-driven, no store seeding required.
 
@@ -270,10 +319,16 @@ explicitly waives legibility at miniature scale; exactness is the goal.
 > ribbon stopped mounting `NavFlowArrow`; the MOBILE bar keeps it, and
 > `navFlowArrows.test.jsx`'s desktop half became an absence pin WITH a positive
 > control so it can never pass on a ribbon that simply lost the mark. Three
-> negative controls executed. **STILL OPEN, unchanged:** the ⚠️ TASTE CALL on the
-> trio's OUTER boundaries (WELCOME|CREATE, REALM|COMPENDIUM) — the specced
-> default (plain lines) SHIPPED, and flipping it is still a one-line predicate
-> change in `dividerKind`, not a map edit. **DEFERRED, recorded:** the apex-
+> negative controls executed. ⛔ **THE ⚠️ TASTE CALL IS RETIRED (LT38 car 1,
+> re-measured 2026-09-15).** It read "STILL OPEN, unchanged: the trio's OUTER
+> boundaries (WELCOME|CREATE, REALM|COMPENDIUM) — flipping it is a one-line
+> predicate change in `dividerKind`". The owner's own war-arrow / fletch refit
+> has since REBUILT this ribbon twice and DELETED that predicate:
+> `nav/NavDivider.jsx:23-27` records that `dividerKind` and the in-band chevrons
+> went with it ("the laps ARE the seams"), and the leaf now draws only the groove
+> between two REFERENCE tabs. So the flip is no longer a default to reverse — it
+> would be a FRESH ORDER from the owner's eye against a band that no longer has
+> the seam it addressed. Recorded as retired, not as dropped. **DEFERRED, recorded:** the apex-
 > clearance measurement is geometry, so it was satisfied by construction (16px
 > label padding + a 7px mark in a gap-0 seam) rather than pinned — jsdom has no
 > layout engine, and a fake geometry pin is worse than a recorded deferral.
@@ -311,7 +366,8 @@ App.jsx:816); the placement map was a hardcoded second truth routes.js forbids;
   drift routes.js:163 exists to forbid. Today that derivation yields chevrons at
   CREATE|LIBRARY and LIBRARY|REALM and lines everywhere else — the owner's
   intent, derived not restated.
-  ⚠️ ONE TASTE CALL for the owner's eye at the walk: whether the trio's OUTER
+  ⚠️ ONE TASTE CALL for the owner's eye at the walk **[RETIRED 2026-09-15 — see
+  the LD-2 blockquote above: the fletch refit deleted `dividerKind`]**: whether the trio's OUTER
   boundaries (WELCOME|CREATE, REALM|COMPENDIUM) stay plain lines (specced
   default) or also become chevrons (journey entry/exit) — with derivation this
   is a one-line predicate change, not a map edit. Default ships; the eye rules.
@@ -483,12 +539,20 @@ the voice is fixed at the SOURCE, never faked on the landing.
 >    useScrollJourney.js:40`** with the playhead hardcoded at
 >    `scrollY + viewportH * 0.5` (constraint 2 names the function but not the
 >    path); its pin is `tests/components/scrollJourney.test.js`.
-> 2. `src/index.css:329`'s `.sf-landing-hero { min-height: 86vh }` and its
->    `background-attachment: fixed` are both still exactly as the 2026-08-02
->    self-audit described — the correction stands unamended.
-> 3. ⚠️ **App.jsx is again the gate.** It is at its frozen number (659 after
->    LD-3), TOLERANCE-0, so mounting the ribbon there must be net-zero or pay for
->    itself with another extraction. Budget it into the item.
+> 2. The hero rule now spans **`src/index.css:321-329`** (the `:329` single-line
+>    citation below is the block's LAST line, not the rule's address). Its
+>    `min-height: 86vh` and `background-attachment: fixed` are both still exactly
+>    as the 2026-08-02 self-audit described — the correction stands unamended —
+>    and `.sf-welcome-leg`'s `height: 100vh` / 70vh pair is at **`:380-385`**.
+> 3. ⚠️ **App.jsx is again the gate.** RE-MEASURED 2026-09-15: it is at its frozen
+>    number **650** (not the 659 that stood after LD-3 — later lanes ratcheted it
+>    down twice more), TOLERANCE-0, so mounting the ribbon there must be net-zero
+>    or pay for itself with another extraction. Budget it into the item.
+> 4. ⚠️ **RECORD CORRECTION, 2026-09-15: constraint 3 below cites
+>    `CHROME.headerDesktop` as 60. IT IS 38** (`theme.js:1585`), and
+>    `ANCHOR_OFFSET` (`theme.js:1620`) derives from it, so every hero calc must
+>    READ the token and never the number. The same stale 60 appears in LD-8's
+>    2026-08-02 correction block and is flagged there.
 >
 > Constraint 7's scrim-terminus pin ("the COMPUTED GRADIENT TERMINUS, not just
 > the element's bounding box", at two viewport heights) is a real-browser
@@ -554,7 +618,8 @@ tokens.js chrome tokens) and silently reached into global chrome]:**
    for painted chrome heights (its own header says so) — never a second
    tokens.js measurement of the same chrome. `CHROME` gains `ribbonLanding`
    (LANDING_RIBBON_H's real home, chair ruling); the header heights are the
-   existing `CHROME.headerMobile` (59) / `CHROME.headerDesktop` (60) — one
+   existing `CHROME.headerMobile` (59) / `CHROME.headerDesktop` (**38** at the
+   tree 2026-09-15; this line said 60) — one
    LANDING_HEADER_H constant cannot cover both breakpoints. The hero/scrim
    height becomes the breakpoint-aware
    `calc(100dvh - CHROME.header* - CHROME.ribbonLanding)`; the mobile arm
@@ -779,6 +844,21 @@ respecced against the tree]:**
 ## LD-6 — THE ANNUAL TOGGLE (owner-ordered 2026-08-01; paid surface — owner-authorized
 ## by the order itself; implementation = the external implementer)
 
+> ⛔ **RECEIPT CORRECTION, 2026-09-15 (LT38 car 1).** The 08-03 table's receipt
+> ("no `annual` anywhere in `config/pricing.js` or `services/stripe.js`") is
+> FALSE at the slot, in the direction that matters: `src/config/pricing.js:356-372`
+> ALREADY ships `CARTOGRAPHER_ANNUAL` **dark at `ANNUAL_FACTOR = 0`**, written as
+> a DERIVATION rather than literals precisely so the pins hold identically at both
+> dial values, and `ACTIVE_CHECKOUT_SKUS` (`:388-394`) adds the SKU **if and only
+> if** the dial is lit — so flipping the factor also adds it to `.env.example`'s
+> walker and to the two-way parity scan against create-checkout in one motion.
+> `src/services/stripe.js` no longer exists at that path. **NOTHING HERE IS
+> UNGATED BY THIS.** The flip is WEB-10's one line and it is the OWNER'S: W-1's
+> annual credit CADENCE is still unruled, W-2's unknown-product-key fail-closed
+> guard still stands, the checkout disclosure has no substrate, and the Terms
+> refund rewrite is a legal-surface edit. The correction is only so nobody builds
+> the price shape a second time.
+
 **The order:** the Cartographer card gains a monthly/annual toggle — $5.99/mo ↔
 $59.99/yr (owner explicitly accepts the ~$11.89 discount) — switching both the
 displayed price and the Stripe destination the Subscribe button targets. No new
@@ -922,6 +1002,18 @@ box; the toggle lives inside the existing card.
 follows the user OUT of the Realm page — it mounts at App level (App.jsx:70 lazy
 mount) off a store moment-flag that no route change clears.
 
+> 🔶 **RE-CONFIRMED LIVE 2026-09-15 (LT38 car 1) by reading the slot, with the
+> exact addresses:** `App.jsx:70` is the lazy import and `App.jsx:939-943` the
+> app-wide mount, whose ONLY suppression is `view !== 'pricing'`;
+> `App.jsx:468-474` fires `map_clicked` on the realm nav click; and
+> `store/settlementSlice.js:201-207`'s `activePricingMoment` is cleared by
+> exactly ONE caller — PricingMomentCard's own dismiss / auto-dismiss — so no
+> navigation clears it. No scope registry exists anywhere in `src/`.
+> ⚠ **THE DESIGN CONSTRAINT THAT MAKES THE CURE CHEAP:** put the route gate
+> INSIDE PricingMomentCard (it already mounts under `<Suspense>`) and leave
+> App.jsx byte-untouched — App.jsx is frozen at exactly 650 effective lines and
+> any added line reds both eslint and `tests/lint/sizeBaseline.test.js`.
+
 **THE LAW (owner, verbatim intent — applies to ALL popups):**
 1. A popup is PAGE-SCOPED BY DEFAULT: it never follows the user off the surface
    that spawned it (leaving the page unmounts it, immediately).
@@ -958,6 +1050,32 @@ mount) off a store moment-flag that no route change clears.
 ## LD-8 — THE CREATED SETTLEMENT'S FIRST IMPRESSION + THE RIBBON CLIP
 ## (owner-ordered 2026-08-01; implementation = the external implementer)
 
+> ✅ **ORDERS 1 AND 2 LANDED** @ `560ac7f88` (car `ae597ec3c`; collection receipt
+> ODQ §795.1), under the owner's own ODQ §767.2 ruling and its §777.1 amendment
+> (DELETE the above-dossier panel outright, do not relocate it). Receipts read at
+> the slot 2026-09-15: ZERO `PipelineRail` references in `GenerateWizard.jsx` —
+> the rail's only remaining door is `SimulationDrawer.jsx:30`'s dynamic import —
+> and the three Keep-locks re-homed, `LockControls` now mounting at
+> `GenerateWizard.jsx:576` (the controls region below the dossier, beside
+> Regenerate) and at `SettlementDetail.jsx:620` (the editor); that DUAL home is
+> the ratified ruling J-T10-A, not a duplicate mount of one surface. The measured
+> receipt: dossier head **1,916px → 118px desktop / 140px mobile**. The seat pin
+> was REWRITTEN, not deleted (`tests/components/createWorkflowRail.test.jsx`,
+> including a single-dynamic-importer arm so nobody re-seats the deleted panel).
+>
+> ✅ **ORDER 3's CURE LANDED STRUCTURALLY.** The chrome heights live in
+> `theme.js` `CHROME` (`:1583-1597`) and `ANCHOR_OFFSET = CHROME.headerDesktop +
+> SP.xxl` (`:1620`) with 31 consumers across `src/`; `GenerateWizard.jsx:274-291`
+> applies `scroll-padding-top` from CHROME while the dossier is visible, pinned
+> at `tests/ui/wizardOutputToolbar.test.jsx:151-168` — which asserts the
+> DERIVATION, never the literal. `theme.js:1611-1618` records that the three
+> second spellings (registrySlug's 84, CatalogTabs' 80, SummaryTab's four) were
+> folded onto the one token. ⚠ **DELIBERATELY DEFERRED — documented, not a bug to
+> re-find:** order 3's remaining "asserted at two viewport sizes" DOM assertion
+> belongs in `e2e/` for exactly LD-3b constraint 7's reason (jsdom has no layout
+> engine, so the jsdom spelling is the vacuous pass), and it is deferred there on
+> the same terms as LD-3's rect pin.
+
 **Order 1 — "How this was simulated" must not lead.** The simulation-record box
 (SimulationDrawer/PipelineRail) currently renders as the FIRST thing on a freshly
 created settlement. The settlement itself leads — its identity is the first
@@ -985,7 +1103,8 @@ mid-glyph. With LD-3b's two-ribbon model this generalizes: content is inset
 between BOTH chrome tokens. Pin: scroll any dossier anchor into view — its top
 edge lands below the ribbon, asserted at two viewport sizes.
 [CORRECTED 2026-08-02 (self-audit), two placement facts: (1) the chrome tokens
-live in theme.js `CHROME` — `headerMobile` (59) / `headerDesktop` (60), plus
+live in theme.js `CHROME` — `headerMobile` (59) / `headerDesktop` (**38** at
+the tree 2026-09-15; this line said 60), plus
 the existing `CHROME.scrollPadDesktop` (124) which exists for exactly this
 anchor-clearance job — never a tokens.js LANDING_HEADER_H (see LD-3b constraint
 3; one constant cannot cover both breakpoints). (2) The header is `position:
@@ -1007,6 +1126,34 @@ home). Mapping totality + anchor survival + header parity pinned. See the doc.
 ---
 
 ## LD-10 — CONSENT DEFAULTS: ALL THREE ON (owner-ordered 2026-08-02)
+
+> ⛔ **SUPERSEDED BY ODQ §359.6 — THIS ORDER MUST STOP READING AS OPEN WORK
+> (LT38 car 1, 2026-09-15).** A later owner ruling, the person-adjacent consent
+> split, ruled the OPPOSITE of "all three ON" for everything person-adjacent, and
+> it SHIPPED at `547e4d58a`: `src/lib/consent.js:66-68` stamps
+> `CONSENT_MODEL_VERSION = 3` ("the person-adjacent split (research back to
+> opt-IN)"), `:80` `MARKET_INSIGHTS_DEFAULT = false`, and `:103` `defaults()`
+> returns `research: false` — pinned by `tests/lib/consent.test.js:43-84`.
+> **RE-OPENING ANY CONSENT DEFAULT IS THE OWNER'S CALL ALONE.**
+>
+> What LD-10 asked for that IS built, in the other direction: **THE DECIDED-STATE
+> LAW.** `consent.js:38-50` keeps `CONSENT_KEY` deliberately un-bumped and honours
+> any stored record with `updatedAt > 0` verbatim, so a v2-era explicit opt-IN
+> survives the v3 flip; `tests/lib/consent.test.js:67-79` pins both directions.
+>
+> What is LEFT is the mirror-image truth defect the order's own grammar created:
+> three in-app statements in `src/components/PrivacySettings.jsx` (`:6-7`, `:163`,
+> `:181`) still tell a new user the research toggle is ON by default when it ships
+> OFF, and the row's title asserts a participation that is not happening by
+> default. That is copy, it is real, and it is car 3 of LT38. ⚠ **THE SAME
+> FALSEHOOD IS ON THE LEGAL SURFACE** (`src/components/legal/PrivacyPage.jsx:26`
+> and `:56`) and is **OWNER + COUNSEL GATED** — named here, not edited in-lane.
+> ⚠ `tests/components/privacyPolicyParity.test.js`'s own header declares this
+> class "CANNOT-CATCH: … consent BEHAVIOR changes (consent.js defaults)", which
+> is why the falsehood survived the flip.
+>
+> The LEGAL FLAG below still routes: counsel rules the regional variant. The
+> posture it ships as is now trust-first OFF, not default-on.
 - Product analytics, generator improvement, and anonymous market research all
   DEFAULT ON for new accounts. The third card's "Off by default." sentence
   dies; all three adopt the middle card's honest grammar ("It's on by
@@ -1024,6 +1171,18 @@ home). Mapping totality + anchor survival + header parity pinned. See the doc.
 ---
 
 ## LD-11 — NAV RESET-ON-SELF-CLICK (owner-ordered 2026-08-02)
+
+> 🔶 **OPEN, AND IT REPLACES A HACK RATHER THAN ADDING THE FIRST CASE (LT38 car 1,
+> read at the slot 2026-09-15).** There is zero `resetSection` in `src/` and no
+> reset map on `routes.js` — but `src/App.jsx:459-462` already special-cases
+> `settlements` inline in `handleNavClick`, with an in-code note that the Create
+> reset "needs a store nonce that has not landed yet — a 4a follow-up". That is
+> exactly the scattered per-page hack this order's DATA-on-the-registry rule
+> forbids, so building the registry DELETES it. ⚠ **App.jsx is frozen at exactly
+> 650 effective lines and `tests/lint/sizeBaseline.test.js` reds in BOTH
+> directions:** if the registry dispatch is SHORTER than the block it replaces,
+> the compliant fix is to LOWER the frozen number in the same commit and bank the
+> win — never to pad the file back up to 650.
 **The order:** clicking a ribbon button while ALREADY on its page resets that
 section to its default view — deep in Advanced Configuration, clicking CREATE
 returns to the mode-choice entry (Instant / Basic / Advanced); same grammar

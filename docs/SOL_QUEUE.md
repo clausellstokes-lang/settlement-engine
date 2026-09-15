@@ -457,6 +457,30 @@ volumes corrected @ 36862650 + fdf43790):
       Messages and, built verbatim, would delete it. Both `FIRST_CONTACT_BACKLOG.md`
       (LD-5) and `DESIGN_OPERATOR_MESSAGES.md` §2 now carry the binding
       amendment; read either before touching `AccountMenu.jsx`.
+    - ⭐ **THE LD LADDER'S BUILD STATE WAS RE-MEASURED 2026-09-15 (LT38 car 1) at
+      the BUILD SLOT `claude/composite-r4` = `f73bdbf16`, and the table in
+      `docs/FIRST_CONTACT_BACKLOG.md` is the receipt.** This row's own
+      CHECK-GIT-FIRST warning was right four more times: **LD-8 orders 1+2 are
+      LANDED** (`560ac7f88`, car `ae597ec3c`, ODQ §767.2 + §777.1, collection
+      §795.1) and order 3's cure landed structurally (`theme.js:1620`
+      ANCHOR_OFFSET + `GenerateWizard.jsx:274-291`); **LD-10 is SUPERSEDED** by
+      ODQ §359.6, which shipped the OPPOSITE default at `547e4d58a` and must
+      never be built as written; **LD-2's one open TASTE CALL is RETIRED** by the
+      owner's fletch refit, which deleted the `dividerKind` predicate it was a
+      flip of; and **LD-6's "no annual anywhere" receipt is FALSE** —
+      `config/pricing.js:356-372` ships it dark at `ANNUAL_FACTOR = 0` (the
+      OWNER GATE on the toggle is untouched by that correction). ⛔ Treat every
+      line, token and file citation quoted from the 2026-08-03 block as
+      UNVERIFIED: `src/services/stripe.js` is gone, `CHROME.headerDesktop` is 38
+      and not 60, `src/copy/strings.js` is retired, and App.jsx's frozen size is
+      650 and not 659.
+    - ⛔ **THE LADDER'S REAL GATE, RE-MEASURED: `src/App.jsx` 650/650 and
+      `src/components/OutputContainer.jsx` 600/600 effective lines**, both
+      TOLERANCE-0 under eslint's own Linter, with
+      `tests/lint/sizeBaseline.test.js` redding in BOTH directions. LD-1/LD-4
+      cannot land until OutputContainer is decomposed — budget the extraction
+      into the item, exactly as LD-2 and LD-3 did on App.jsx (720 → 693 → 659 →
+      650), and LOWER the frozen number in the same commit that shrinks a file.
     - ✅ **THE ABOUT SPLIT IS BUILT** (2026-08-03, Lane C) — §1/§2/§3/§5 landed;
       see the PROGRESS blockquote in `docs/DESIGN_ABOUT_PAGES.md` for the receipt
       set and the substrate corrections. **§4 (the About ▾ dropdown) is the ONLY
