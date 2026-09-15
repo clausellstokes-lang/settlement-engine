@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
-  "files": 2563,
+  "measuredAtSha": "646da630f06ce28c01d6830a2443692d98e39579",
+  "measuredBy": "LT38 lane (Opus 5, 1M context)",
+  "date": "2026-09-15",
+  "note": "LT38 car 2 (LD-7) adds ONE test file, tests/lint/momentScopeRegistry.walker.test.js — the popup-scope registry walker (11 titles under 2 describes). No other test file was added or removed; tests/ui/pricingMomentRouting.test.jsx gained five titles under one new describe inside an existing file.",
+  "files": 2564,
   "parked": 375,
-  "credited": 2188,
-  "titles": 24169,
-  "suiteTitles": 6452
+  "credited": 2189,
+  "titles": 24185,
+  "suiteTitles": 6455
 }
