@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 18:54:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 19:00:18 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -119,7 +119,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `af373d640` ? · DONE · transcript 09-15 18:39 898 KB · 42 tool calls · result: {"reader": "VOLUME-AND-DIARY READER (DESIGN_FP_ARCH_TR.md read whole; RESUME-NOTE.md grepped whole; ledger docs cross-read; every named module confirmed or refu
     - `a102eb4be` ? · DONE · transcript 09-15 18:42 1056 KB · 64 tool calls · result: {"reader": "The older-economy reader (history pass over the pre-FP economy programme: Phase 5.5 mover ladder M1\u2013M10, the T8 train, W-COIN, the numeric-pric
     - `ab422a124` ? · DONE · transcript 09-15 18:52 746 KB · 16 tool calls · result: {"reader": "HISTORY-PASS ADJUDICATOR \u2014 every LANDED-IN-CODE and UNKNOWN claim from the four readers re-opened at /private/tmp/claude-502/-Users-cstokes-Des
-    - `abd934a60` ? · IN FLIGHT · transcript 09-15 18:54 542 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `abd934a60` ? · IN FLIGHT · transcript 09-15 18:59 785 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_6a1dc505-cea** (mtime 09-15 18:25): agent calls 2 (2 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
@@ -189,4 +189,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.02 7.21 36.74
+load: 2.10 3.86 25.75
