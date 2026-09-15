@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 13:12:32 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 13:19:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 28
+- HOLD-VITEST absent · runner count 24
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -122,8 +122,8 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a88f44407` ? · DONE · transcript 09-15 12:38 1024 KB · 55 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
     - `a59ead83d` ? · DONE · transcript 09-15 12:49 864 KB · 40 tool calls · result: {"item": "Long-tail #34 \u2014 the political, economic and heraldic programmes (W-COIN, W-SEAT, W-DESK, the two operations cars, the WEAVE, the chance-encounter
     - `a8ca1cea6` ? · DONE · transcript 09-15 12:53 947 KB · 43 tool calls · result: {"item": "Long-tail #33 \u2014 the logistics and vessel family (LG): teleportation circles with relays, airships, a unified vessel pool with fleet bounds and re
-    - `ac2ac2537` r3 · IN FLIGHT · transcript 09-15 13:12 852 KB · 44 tool calls · files: $SC/src-files.txt, $SC/test-files.txt, $SC/src-imports.txt, s5.txt · last: Bash cat > /tmp/sem2.sh <<'SH' SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48
+    - `ac2ac2537` r3 · IN FLIGHT · transcript 09-15 13:17 958 KB · 53 tool calls · files: $SC/src-files.txt, $SC/test-files.txt, $SC/src-imports.txt, s5.txt · last: Bash ROOT=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scr
     - `a369780bb` ? · DONE · transcript 09-15 13:02 845 KB · 30 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
 
 ## PROCESSES: 
-load: 202.55 109.70 110.96
+load: 145.85 120.96 118.68
