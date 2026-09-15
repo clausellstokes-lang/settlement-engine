@@ -38,7 +38,9 @@ vi.mock('../../src/store/scribeTransport.js', () => ({
 }));
 
 import { setFlagOverride } from '../../src/lib/flags.js';
-import { landBlock } from '../../src/lib/scribeArtefact.js';
+import {
+  SCRIBE_REDRAW_LIMIT, currentAdvanceSeq, landBlock, retireCurrent,
+} from '../../src/lib/scribeArtefact.js';
 import ScribeRedrawButton from '../../src/components/dossier/ScribeRedrawButton.jsx';
 
 const SEED = 'seed-ashford';
@@ -128,6 +130,56 @@ describe('LIT — and still refused wherever a render could not be kept or shoul
     seat({ settlement: { id: 'ashford', _seed: SEED } });
     const { container } = render(<ScribeRedrawButton saveId="ashford" />);
     expect(container.querySelector('button')).toBe(null);
+  });
+});
+
+describe('⭐⭐ THE CAP (W5b car 3) — the control stays, goes dead, and says why', () => {
+  /** N redraws already spent on this epoch: N `redone` entries in the past lane. */
+  const redrawn = (n) => {
+    let prose = scribedTown().prose;
+    for (let i = 0; i < n; i += 1) {
+      const seq = currentAdvanceSeq(prose);
+      prose = landBlock(retireCurrent(prose, { state: 'redone', at: `t${i}`, nonce: `redo:${i}` }), {
+        advanceSeq: seq,
+        blockId: 'DS-DEF-2',
+        pools: { 'FAMILY: acute crisis': [{ vid: 3, spine: `Draw ${i}.`, faces: [], notebook: [] }] },
+        renderedFor: SEED,
+        renderedAt: `t${i}b`,
+        version: { engine: 'gen-1/sim-1' },
+      });
+    }
+    return { id: 'ashford', _seed: SEED, prose };
+  };
+
+  test('under the cap it says how many are left, and it still presses', async () => {
+    setFlagOverride('scribe', true);
+    seat({ settlement: redrawn(1) });
+    render(<ScribeRedrawButton saveId="ashford" />);
+    const button = screen.getByRole('button');
+    expect(button.getAttribute('title')).toContain(`${SCRIBE_REDRAW_LIMIT - 1} of ${SCRIBE_REDRAW_LIMIT} redraws left`);
+    expect(button.disabled).toBe(false);
+    fireEvent.click(button);
+    await waitFor(() => expect(redrawCalls).toHaveLength(1));
+  });
+
+  test('⛔ AT THE CAP IT IS PRESENT, DISABLED, AND PRESSING IT ASKS FOR NOTHING', async () => {
+    // Hiding it would be a control that vanishes for a reason the reader cannot see; leaving it
+    // live would be a press the trigger refuses in silence and the reader repeats.
+    setFlagOverride('scribe', true);
+    seat({ settlement: redrawn(SCRIBE_REDRAW_LIMIT) });
+    render(<ScribeRedrawButton saveId="ashford" />);
+    const button = screen.getByRole('button');
+    expect(button.textContent).toContain('Redrawn as often as this epoch allows');
+    expect(button.disabled).toBe(true);
+    expect(button.getAttribute('title')).toContain(`redrawn ${SCRIBE_REDRAW_LIMIT} times for this epoch`);
+    // It says what makes it possible again, and that nothing was lost.
+    expect(button.getAttribute('title')).toContain('Advance the world');
+    expect(button.getAttribute('title')).toContain('kept and stays readable');
+    // anchored: the three title assertions above prove the string is present and populated.
+    expect(button.getAttribute('title')).not.toContain('—');
+    fireEvent.click(button);
+    await new Promise((resolve) => { setTimeout(resolve, 0); });
+    expect(redrawCalls).toHaveLength(0);
   });
 });
 

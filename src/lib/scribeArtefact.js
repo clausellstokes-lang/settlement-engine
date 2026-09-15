@@ -84,6 +84,28 @@ export const SCRIBE_PAST_EPOCH_LIMIT = 12;
 export const SCRIBE_EPOCH_STATES = Object.freeze(['lived', 'undone', 'redone']);
 
 /**
+ * ⭐⭐ HOW MANY TIMES ONE EPOCH MAY BE REDRAWN (W5b car 3). The redraw was UNCAPPED: it is a
+ * button, it spends credits, and it is exactly the button a game master who does not like a
+ * paragraph presses again, and again. Three is the chair's number and the reasoning is the
+ * product's rather than the meter's: a redraw is a FRESH DRAW from the same facts (the model never
+ * sees its own prior prose, ruling 16), so the third attempt is drawing from the same well as the
+ * first, and a fourth is a reader hoping the dice change rather than a reader getting a better
+ * survey. The floor under it is the hand corpus, which never runs out and never charges.
+ *
+ * ⛔ IT IS COUNTED FROM THE ARTEFACT, NOT FROM SESSION STATE. Every redraw retires the prior render
+ * into the past lane marked `redone` with its own nonce (`retireForRedraw`), so the count IS the
+ * record: it survives a reload, a second pane and a sign-out, where a session counter would reset
+ * on each and cap nothing. `SCRIBE_PAST_EPOCH_LIMIT` rotation is the one way the count can fall
+ * back, and at twelve kept epochs against a cap of three that is a campaign's worth of advances
+ * away, which is a reader who has earned the reset.
+ *
+ * ⚠ THE NUMBER IS THE CHAIR'S DEFAULT AND NOT THE OWNER'S SIGNED ONE (design §12 / the tier
+ * proposal's decision 6 is where a fair-use number is signed). It is one constant, here, so a veto
+ * is one edit.
+ */
+export const SCRIBE_REDRAW_LIMIT = 3;
+
+/**
  * ⭐ THE SHAPE, TYPED ONCE. Spelled here so `isArtefact` can be a TYPE PREDICATE: every reader
  * below narrows `unknown` through it and none of them needs a cast, which is what keeps this
  * module clean under `tsconfig.full.json` (an un-baselined file must be typecheck-clean).
@@ -197,6 +219,25 @@ export function currentAdvanceSeq(prose) {
   if (!isArtefact(prose) || !isObj(prose.current)) return null;
   const seq = prose.current.advanceSeq;
   return typeof seq === 'number' && Number.isFinite(seq) ? seq : null;
+}
+
+/**
+ * ⭐ HOW MANY TIMES THIS EPOCH HAS ALREADY BEEN REDRAWN (W5b car 3). One `redone` entry in the past
+ * lane is one redraw that was paid for and replaced, so the lane IS the counter and no session
+ * state is needed. An `undone` entry at the same seq is NOT a redraw: it is an advance the world
+ * reverted (ruling 15), the reader never asked for it and it must never spend their allowance.
+ *
+ * @param {unknown} prose @param {number|null} advanceSeq
+ * @returns {number} 0 for an absent artefact, an unknown schema, or a seq nothing was redrawn at
+ */
+export function redrawsAt(prose, advanceSeq) {
+  if (!isArtefact(prose) || typeof advanceSeq !== 'number' || !Number.isFinite(advanceSeq)) return 0;
+  const epochs = Array.isArray(prose.epochs) ? prose.epochs : [];
+  let n = 0;
+  for (const epoch of epochs) {
+    if (isObj(epoch) && epoch.advanceSeq === advanceSeq && str(epoch.state) === 'redone') n += 1;
+  }
+  return n;
 }
 
 /**

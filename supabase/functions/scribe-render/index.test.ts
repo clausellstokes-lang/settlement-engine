@@ -639,6 +639,118 @@ scopedEnv.test('⭐ TWO CONCURRENT FIRST TABS CHARGE ONCE: the database is the s
   assertEquals(sessions.minted(), 1);
 });
 
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ W5b car 3 — THE FREE CLAIM COMES BACK ON EVERY PATH THAT DOES NOT LAND A RENDER
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// Migration 202's `claim_free_scribe` is atomic and unfarmable BY CONSTRUCTION; what was not
+// guaranteed was that the edge always asked for it back. The release closure lived INSIDE the
+// handler body, so anything that threw between the claim and the response consumed the account's
+// one free render for a render the reader never received. Car 1 hoisted both undo arms above the
+// try; these are the arms that prove it, one per shape of non-landing.
+
+/** The same admin stub with ONE rpc made to throw, which is what a network blip looks like here. */
+function adminThrowingOn(
+  fn: string,
+  opts: Parameters<typeof makeAdminClient>[0],
+  // deno-lint-ignore no-explicit-any
+  rpc: Array<{ fn: string; args: any }>,
+) {
+  const make = makeAdminClient(opts, rpc);
+  // deno-lint-ignore no-explicit-any
+  const client: any = make();
+  const inner = client.rpc.bind(client);
+  // deno-lint-ignore no-explicit-any
+  client.rpc = (name: string, args: any) => {
+    if (name === fn) { rpc.push({ fn: name, args }); throw new Error(`${name} blew up`); }
+    return inner(name, args);
+  };
+  return () => client;
+}
+
+scopedEnv.test('⛔ A THROW AFTER THE CLAIM STILL RETURNS THE FREE RENDER, and still releases the session', async () => {
+  // The window, precisely: `claim_free_scribe` has been taken, and then something OUTSIDE every
+  // inner catch throws. `reserve` awaits its RPC with no try of its own, so a blip there lands in
+  // the handler's outer catch — which before W5b could not see the release closure at all.
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: adminThrowingOn('reserve_ai_spend', { freeClaim: true }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(res.status, 500);
+  assertEquals(count(a, 'claim_free_scribe'), 1, 'the claim really was taken');
+  assertEquals(count(a, 'release_free_scribe'), 1, 'and it comes back exactly once');
+  assertEquals(count(a, 'abort_scribe_render'), 1, 'so does the epoch\'s render slot');
+  assertEquals(count(u, 'spend_credits'), 0);
+});
+
+scopedEnv.test('⛔ A THROW AT THE RATE LIMIT IS THE SAME STORY: nothing is kept for nothing', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: adminThrowingOn('consume_ai_generate_rate_limit', { freeClaim: true }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(res.status, 500);
+  assertEquals(count(a, 'release_free_scribe'), 1);
+  assertEquals(count(u, 'spend_credits'), 0);
+});
+
+scopedEnv.test('⛔ AND THE RELEASE IS LATCHED: a typed refusal releases ONCE, never twice', async () => {
+  // `releaseFree` latches on `freeReleased`, so the refusal arm and the outer catch cannot both
+  // ask. Two releases are harmless in the database (202's release is idempotent) and dishonest in
+  // the log, which is where an operator reads whether a free render was really returned.
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: makeAdminClient({ freeClaim: true }, a),
+    anthropicFetch: () => Promise.resolve(new Response('down', { status: 503 })),
+  });
+  assertEquals(res.status, 502);
+  assertEquals(count(a, 'release_free_scribe'), 1);
+});
+
+scopedEnv.test('⭐ NEGATIVE CONTROL — a render that LANDS releases nothing, on any tab', async () => {
+  // The arm above would pass just as happily if the handler released the claim unconditionally,
+  // which would make the free render unspendable. This is the other half of the pin.
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  for (const tab of ['defense', 'power']) {
+    await handleScribeRender(request(tabBody(tab)), {
+      userClient: makeUserClient({ ok: true }, u),
+      adminClient: makeAdminClient({ sessions, freeClaim: true }, a),
+      anthropicFetch: providerReturning([lawfulUnit]),
+    });
+  }
+  assertEquals(count(a, 'release_free_scribe'), 0);
+  assertEquals(count(a, 'abort_scribe_render'), 0);
+  assertEquals(count(a, 'claim_free_scribe'), 1, 'and it was only ever asked for once');
+});
+
+scopedEnv.test('⭐ A LATER TAB NEVER RELEASES THE CLAIM THE RENDER ALREADY SPENT', async () => {
+  // A second tab that fails must not hand back a free render the FIRST tab already landed with.
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: makeAdminClient({ sessions, freeClaim: true }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  const later = await handleScribeRender(request(tabBody('power')), {
+    userClient: makeUserClient({ ok: true }, u),
+    adminClient: makeAdminClient({ sessions, freeClaim: true }, a),
+    anthropicFetch: () => Promise.resolve(new Response('down', { status: 503 })),
+  });
+  assertEquals(later.status, 502);
+  assertEquals(count(a, 'release_free_scribe'), 0, 'the render landed; the free taste was used');
+  assertEquals(count(a, 'claim_free_scribe'), 1, 'and a later tab never claims one of its own');
+});
+
 scopedEnv.test('⛔ AN UNREADABLE SESSION FAILS CLOSED, and nothing is charged or claimed', async () => {
   const u: Array<{ fn: string; args: unknown }> = [];
   const a: Array<{ fn: string; args: unknown }> = [];

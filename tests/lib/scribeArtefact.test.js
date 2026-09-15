@@ -19,6 +19,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import {
   SCRIBE_ARTEFACT_SCHEMA,
   SCRIBE_PAST_EPOCH_LIMIT,
+  SCRIBE_REDRAW_LIMIT,
+  redrawsAt,
   attachProse,
   carryProseThroughGenerate,
   currentAdvanceSeq,
@@ -404,5 +406,57 @@ describe('the past lane (the shape commit 2 drives)', () => {
     const plain = { id: 'x' };
     expect(stripProse(plain)).toBe(plain);
     expect(stripProse(null)).toBe(null);
+  });
+});
+
+/**
+ * ⭐⭐ THE REDRAW COUNT (W5b car 3). The redraw was UNCAPPED, and the count that caps it is the
+ * past lane itself: one `redone` entry is one redraw that was paid for and replaced. Reading it off
+ * the artefact rather than off session state is what makes the cap survive a reload and a second
+ * pane — a session counter resets on both and caps nothing.
+ */
+describe('redrawsAt — how many times ONE epoch has been redrawn', () => {
+  const at = (seq, text) => landBlock(null, {
+    advanceSeq: seq, blockId: 'DS-DEF-2', pools: { p: [unit(text)] }, renderedFor: 'seed-a',
+  });
+  const redrawOnce = (prose, n) => landBlock(
+    retireCurrent(prose, { state: 'redone', at: `t${n}`, nonce: `redo:${n}` }),
+    { advanceSeq: currentAdvanceSeq(prose), blockId: 'DS-DEF-2', pools: { p: [unit(`draw ${n}`)] }, renderedFor: 'seed-a' },
+  );
+
+  it('counts the redone entries at THIS seq, and nothing else', () => {
+    let prose = at(4, 'first');
+    expect(redrawsAt(prose, 4)).toBe(0);
+    prose = redrawOnce(prose, 1);
+    expect(redrawsAt(prose, 4)).toBe(1);
+    prose = redrawOnce(prose, 2);
+    expect(redrawsAt(prose, 4)).toBe(2);
+    // NEGATIVE CONTROL — another epoch's number reads zero, so the count cannot leak across epochs.
+    expect(redrawsAt(prose, 5)).toBe(0);
+    expect(redrawsAt(prose, 3)).toBe(0);
+  });
+
+  it('⛔ AN UNDONE EPOCH IS NOT A REDRAW: the reader never asked for it', () => {
+    // Ruling 15 files a reverted advance in the SAME lane marked `undone`. Counting it would let an
+    // undo the reader did not ask for spend the allowance for redraws they did.
+    const undone = restoreToDepth(at(1, 'lived'), { advanceSeq: 0, at: 'u', nonce: 'u1' });
+    expect(undone.epochs.map((e) => e.state)).toContain('undone');
+    expect(redrawsAt(undone, 1)).toBe(0);
+    expect(redrawsAt(undone, 0)).toBe(0);
+  });
+
+  it('a LIVED epoch is not a redraw either, and an absent artefact is zero', () => {
+    const lived = retireCurrent(at(0, 'one'), { state: 'lived', at: 't' });
+    expect(lived.epochs[0].state).toBe('lived');
+    expect(redrawsAt(lived, 0)).toBe(0);
+    expect(redrawsAt(null, 0)).toBe(0);
+    expect(redrawsAt({ schema: 999, epochs: [{ advanceSeq: 0, state: 'redone' }] }, 0)).toBe(0);
+    expect(redrawsAt(at(0, 'one'), null)).toBe(0);
+  });
+
+  it('the LIMIT is one constant, so a veto is one edit', () => {
+    expect(SCRIBE_REDRAW_LIMIT).toBe(3);
+    // It must stay inside the lane it is counted from, or rotation would silently lift the cap.
+    expect(SCRIBE_REDRAW_LIMIT).toBeLessThan(SCRIBE_PAST_EPOCH_LIMIT);
   });
 });

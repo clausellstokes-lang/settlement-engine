@@ -31,7 +31,9 @@ import {
   scribeSeedOf,
 } from '../../src/store/scribeOpenTrigger.js';
 import { setScribeRenderer, getScribeRenderer, hasScribeRenderer } from '../../src/lib/scribeRenderer.js';
-import { landBlock, surveyStateOf } from '../../src/lib/scribeArtefact.js';
+import {
+  SCRIBE_REDRAW_LIMIT, landBlock, restoreToDepth, retireCurrent, surveyStateOf,
+} from '../../src/lib/scribeArtefact.js';
 import { CARD_ENGINE_VERSION } from '../../src/domain/prose/townCard.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -341,6 +343,96 @@ describe('⭐ THE REDRAW — the one verb allowed past the frozen test and the s
     setScribeRenderer(async () => { calls += 1; return { ok: true }; });
     expect(await runScribeRedraw(args)).toMatchObject({ sent: true });
     expect(calls).toBe(2);
+  });
+
+  test('⭐⭐ THE CAP (W5b car 3): the fourth redraw of one epoch is refused, and it names itself', () => {
+    // The redraw was UNBOUNDED: a billed button, on a render the model draws FRESH from the same
+    // facts every time, pressed by a reader who does not like a paragraph. The count is the past
+    // lane's own `redone` entries, so it survives a reload where a session counter would not.
+    let prose = renderedAt(0);
+    const ctx = { campaignId: 'camp-1', hasRenderer: true, why: 'redo' };
+    for (let n = 0; n < SCRIBE_REDRAW_LIMIT; n += 1) {
+      const d = scribeOpenDecision(stateWith({ prose, seq: 0 }), ctx);
+      expect(d, `redraw ${n + 1} of ${SCRIBE_REDRAW_LIMIT} is allowed`)
+        .toMatchObject({ render: true, reason: 'redo', redraws: n, redrawLimit: SCRIBE_REDRAW_LIMIT });
+      // What a redraw actually does to the artefact: retire the current render into the past lane
+      // marked `redone`, then land the fresh one (`retireForRedraw` + `landTabAnswer`).
+      prose = retireCurrent(prose, { state: 'redone', at: `2026-09-15T0${n}:00:00.000Z`, nonce: `redo:${n}` });
+      prose = landBlock(prose, {
+        advanceSeq: 0,
+        blockId: 'DS-DEF-2',
+        pools: { 'FAMILY: acute crisis': [unit(`Draw ${n + 1}.`)] },
+        renderedFor: SEED,
+        renderedAt: `2026-09-15T0${n}:00:01.000Z`,
+        version: { scribe: 'sc1', engine: SCRIBE_ENGINE_VERSION, refuter: 'rf1', model: 'claude-opus-5' },
+      });
+    }
+    const capped = scribeOpenDecision(stateWith({ prose, seq: 0 }), ctx);
+    expect(capped).toMatchObject({
+      render: false, reason: 'redraw-capped', redraws: SCRIBE_REDRAW_LIMIT,
+    });
+    // ⛔ AND THE OPEN IS NOT CAPPED WITH IT: the cap is on the reader asking again, never on the
+    // world moving on. The next advance is stale, the OPEN renders it, and THAT epoch's survey has
+    // its own fresh allowance. Until it lands, the survey on the page is still epoch 0's and the
+    // cap on it still stands, which is the honest answer: there is nothing else to redraw yet.
+    expect(scribeOpenDecision(stateWith({ prose, seq: 1 }), { campaignId: 'camp-1', hasRenderer: true }))
+      .toMatchObject({ render: true, reason: 'stale' });
+    expect(scribeOpenDecision(stateWith({ prose, seq: 1 }), ctx))
+      .toMatchObject({ render: false, reason: 'redraw-capped' });
+    const nextEpoch = landBlock(
+      retireCurrent(prose, { state: 'lived', at: '2026-09-16T00:00:00.000Z' }),
+      {
+        advanceSeq: 1,
+        blockId: 'DS-DEF-2',
+        pools: { 'FAMILY: acute crisis': [unit('A year on.')] },
+        renderedFor: SEED,
+        renderedAt: '2026-09-16T00:00:01.000Z',
+        version: { scribe: 'sc1', engine: SCRIBE_ENGINE_VERSION, refuter: 'rf1', model: 'claude-opus-5' },
+      },
+    );
+    expect(scribeOpenDecision(stateWith({ prose: nextEpoch, seq: 1 }), ctx))
+      .toMatchObject({ render: true, reason: 'redo', redraws: 0 });
+  });
+
+  test('⛔ AN UNDONE EPOCH IS NOT A REDRAW: an advance the world reverted never spends the allowance', async () => {
+    // Ruling 15 moves an undone epoch into the same past lane marked `undone`. The reader never
+    // asked for it, so it must not count against a cap on what the reader asks for.
+    const prose = restoreToDepth(renderedAt(1), { advanceSeq: 0, at: '2026-09-15T00:00:00.000Z', nonce: 'undo:1' });
+    const undoneStates = prose.epochs.map((e) => e.state);
+    expect(undoneStates, 'the lane really does hold an undone epoch').toContain('undone');
+    // Land a survey again so there is something to redraw, then ask.
+    const landed = landBlock(prose, {
+      advanceSeq: 0,
+      blockId: 'DS-DEF-2',
+      pools: { 'FAMILY: acute crisis': [unit('After the undo.')] },
+      renderedFor: SEED,
+      renderedAt: '2026-09-15T01:00:00.000Z',
+      version: { scribe: 'sc1', engine: SCRIBE_ENGINE_VERSION, refuter: 'rf1', model: 'claude-opus-5' },
+    });
+    expect(scribeOpenDecision(stateWith({ prose: landed, seq: 0 }), { campaignId: 'camp-1', hasRenderer: true, why: 'redo' }))
+      .toMatchObject({ render: true, reason: 'redo', redraws: 0 });
+  });
+
+  test('a capped redraw is never SENT, so a capped press cannot bill', async () => {
+    let calls = 0;
+    setScribeRenderer(async () => { calls += 1; return { ok: true }; });
+    let prose = renderedAt(0);
+    for (let n = 0; n < SCRIBE_REDRAW_LIMIT; n += 1) {
+      prose = retireCurrent(prose, { state: 'redone', at: `2026-09-15T0${n}:00:00.000Z`, nonce: `redo:${n}` });
+      prose = landBlock(prose, {
+        advanceSeq: 0,
+        blockId: 'DS-DEF-2',
+        pools: { 'FAMILY: acute crisis': [unit(`Draw ${n + 1}.`)] },
+        renderedFor: SEED,
+        renderedAt: `2026-09-15T0${n}:00:01.000Z`,
+        version: { scribe: 'sc1', engine: SCRIBE_ENGINE_VERSION, refuter: 'rf1', model: 'claude-opus-5' },
+      });
+    }
+    const out = await runScribeRedraw({
+      state: stateWith({ prose, seq: 0 }), saveId: 'ashford', campaignId: 'camp-1', flagOn: true,
+    });
+    expect(out).toMatchObject({ sent: false, reason: 'redraw-capped' });
+    expect(calls).toBe(0);
   });
 
   test('THE BUTTON IS ABSENT DARK, and the band only ever composes it as a node', () => {

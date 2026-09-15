@@ -15,6 +15,14 @@
  *   4. There IS a current render to redraw. A town whose dossier has never been scribed has
  *      nothing to retire and nothing to compare against; the OPEN renders it, not this.
  *
+ * ⛔ AND A FIFTH THAT DISABLES RATHER THAN HIDES (W5b car 3): this epoch has not already been
+ * redrawn `SCRIBE_REDRAW_LIMIT` times. The redraw was UNCAPPED, and it is exactly the button a
+ * reader who does not like a paragraph presses again. Where the other four conditions mean "this
+ * control does not belong on this page", the cap means "it belongs here and is spent", so the
+ * control STAYS and says so: a billed button that silently does nothing is a reader pressing it
+ * again. The count is read off the artefact's past lane by `redrawsAt`, the same function the
+ * trigger refuses with, so the page and the decision can never disagree.
+ *
  * ⛔ IT NAMES THE PRICE BEFORE IT SPENDS, AND IT NAMES WHAT THE PRICE BUYS.
  * `getCost('dossierProse')` is the live resolver every other credited control on this page reads,
  * so the number on the label is the number the server charges and not a second copy of the table.
@@ -30,7 +38,9 @@
 import { useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import { flag } from '../../lib/flags.js';
-import { currentAdvanceSeq, proseOf } from '../../lib/scribeArtefact.js';
+import {
+  SCRIBE_REDRAW_LIMIT, currentAdvanceSeq, proseOf, redrawsAt,
+} from '../../lib/scribeArtefact.js';
 import { useStore } from '../../store/index.js';
 import { useLiveAiCostResolver } from '../../hooks/useLivePricing.js';
 
@@ -46,6 +56,13 @@ export default function ScribeRedrawButton({
   // would re-render this button on every unrelated write to the settlement. The epoch number is
   // the only fact the button needs, and it moves exactly when a render lands or is retired.
   const surveySeq = useStore((s) => currentAdvanceSeq(proseOf(s.settlement)));
+  // ⭐ AND THE SECOND PRIMITIVE, for the same reason: how many times THIS epoch has already been
+  // redrawn. Counted off the artefact's past lane by the same function the trigger refuses with, so
+  // the button and the decision can never disagree about whether a press would be accepted.
+  const redraws = useStore((s) => {
+    const prose = proseOf(s.settlement);
+    return redrawsAt(prose, currentAdvanceSeq(prose));
+  });
   const campaignId = useStore((s) => {
     if (saveId == null || typeof s.getCampaignForSettlement !== 'function') return '';
     return String(s.getCampaignForSettlement(saveId)?.id || '');
@@ -61,9 +78,14 @@ export default function ScribeRedrawButton({
   if (surveySeq === null) return null;
 
   const cost = getCost('dossierProse');
+  // ⛔ THE CAP IS SHOWN, NOT DISCOVERED (W5b car 3). A billed button whose press is refused by the
+  // trigger with no word on the page is a reader pressing again; so the control stays visible,
+  // goes disabled, and says in plain words what happened and what makes it possible again.
+  const capped = redraws >= SCRIBE_REDRAW_LIMIT;
+  const left = Math.max(0, SCRIBE_REDRAW_LIMIT - redraws);
 
   async function redraw() {
-    if (busy) return;
+    if (busy || capped) return;
     setBusy(true);
     try {
       // THE TRANSPORT REGISTERS ITSELF, and it is imported HERE rather than by the trigger, so the
@@ -90,10 +112,15 @@ export default function ScribeRedrawButton({
       variant="ai"
       size="sm"
       busy={busy}
+      disabled={capped}
       onClick={redraw}
-      title={`Writes this dossier's prose again from the settlement as it stands now. One render covers every tab of the dossier, and it is charged once: ${cost} credits per render, whatever it draws. The survey it replaces is kept and stays readable.`}
+      title={capped
+        ? `This survey has been redrawn ${SCRIBE_REDRAW_LIMIT} times for this epoch, which is the limit. Every one of them is kept and stays readable. Advance the world and the next survey starts fresh.`
+        : `Writes this dossier's prose again from the settlement as it stands now. One render covers every tab of the dossier, and it is charged once: ${cost} credits per render, whatever it draws. The survey it replaces is kept and stays readable. ${left} of ${SCRIBE_REDRAW_LIMIT} redraws left for this epoch.`}
     >
-      {busy ? 'Redrawing the survey…' : `Redraw the survey (${cost} credits per render)`}
+      {capped
+        ? 'Redrawn as often as this epoch allows'
+        : (busy ? 'Redrawing the survey…' : `Redraw the survey (${cost} credits per render)`)}
     </Button>
   );
 }

@@ -32,10 +32,12 @@
  * two conditions the OPEN exists to enforce are exactly the two it must not enforce: the artefact
  * is FROZEN (that is what is being overridden) and the epoch has already been ASKED FOR (that is
  * what is being replaced). Everything else still holds — the flag, the settlement, the durable
- * home, the seed, the transport — and one more is added, because a redraw of nothing is not a
- * redraw: there must BE a current render to retire. The double-click guard moves from the session
- * ledger to its own in-flight set, so a second press while the first is in the air is refused
- * rather than billed.
+ * home, the seed, the transport — and two more are added, because a redraw of nothing is not a
+ * redraw and a redraw without end is not a product: there must BE a current render to retire, and
+ * this epoch must not already have been redrawn `SCRIBE_REDRAW_LIMIT` times. The double-click guard
+ * moves from the session ledger to its own in-flight set, so a second press while the first is in
+ * the air is refused rather than billed; the CAP is counted off the artefact's own past lane, so it
+ * survives a reload and a second pane where a session counter would reset and cap nothing.
  *
  * This module is reached by DYNAMIC import only (`settlementSlice.js` is size-baselined at
  * tolerance 0 and the first-paint closure is an exact byte budget), and it imports no transport:
@@ -44,7 +46,7 @@
 
 import { GENERATOR_VERSION, SIMULATION_VERSION } from '../domain/settlement.schema.js';
 import {
-  currentAdvanceSeq, isStale, proseOf, surveyStateOf,
+  SCRIBE_REDRAW_LIMIT, currentAdvanceSeq, isStale, proseOf, redrawsAt, surveyStateOf,
 } from '../lib/scribeArtefact.js';
 import { getScribeRenderer } from '../lib/scribeRenderer.js';
 import { advanceSeqOf } from './scribeEpochLane.js';
@@ -101,7 +103,10 @@ export function resetScribeAttempts() {
  *   whether there is a render to replace and whether one is already in the air.
  * @returns {{render: boolean, reason: string, why: 'open'|'redo', saveId: string,
  *   advanceSeq: number, renderedFor: string, engineVersion: string,
- *   survey: 'none'|'prior'|'current'}}
+ *   survey: 'none'|'prior'|'current', redraws: number, redrawLimit: number}}
+ *   `redraws` is how many times THIS epoch has already been redrawn, read off the artefact's past
+ *   lane, and `redrawLimit` the cap it is measured against, so a caller can say why without a
+ *   second read.
  */
 export function scribeOpenDecision(state, ctx = {}) {
   const settlement = state?.settlement || null;
@@ -113,9 +118,12 @@ export function scribeOpenDecision(state, ctx = {}) {
     advanceSeq, renderedFor, engineVersion: SCRIBE_ENGINE_VERSION,
   });
   const why = ctx.why === 'redo' ? 'redo' : 'open';
+  // How many times THIS epoch has already been redrawn, read off the past lane. It rides on every
+  // decision, open or redo, so the button can quote the remaining count without asking twice.
+  const redraws = redrawsAt(prose, currentAdvanceSeq(prose));
   const base = {
     render: false, reason: '', why, saveId, advanceSeq, renderedFor,
-    engineVersion: SCRIBE_ENGINE_VERSION, survey,
+    engineVersion: SCRIBE_ENGINE_VERSION, survey, redraws, redrawLimit: SCRIBE_REDRAW_LIMIT,
   };
 
   if (ctx.flagOn === false) return { ...base, reason: 'flag-off' };
@@ -128,13 +136,23 @@ export function scribeOpenDecision(state, ctx = {}) {
   if (!renderedFor) return { ...base, reason: 'no-seed' };
   if (ctx.hasRenderer === false) return { ...base, reason: 'no-transport' };
 
-  // ⭐ THE REDRAW'S OWN TWO CONDITIONS, IN PLACE OF THE OPEN'S TWO. It may not run on a town with
+  // ⭐ THE REDRAW'S OWN THREE CONDITIONS, IN PLACE OF THE OPEN'S TWO. It may not run on a town with
   // nothing rendered (there is no prior render to retire and the OPEN would have rendered it for
-  // nothing), and it may not run twice at once.
+  // nothing), it may not run twice at once, and it may not run without end.
   if (why === 'redo') {
     if (currentAdvanceSeq(prose) === null) return { ...base, reason: 'no-survey' };
     if (REDRAWING.has(attemptKeyOf(saveId, advanceSeq, renderedFor))) {
       return { ...base, reason: 'redraw-in-flight' };
+    }
+    // ⭐⭐ THE CAP (W5b car 3). The redraw was UNBOUNDED: a billed button, pressed by a reader who
+    // does not like a paragraph, on a render the model draws FRESH from the same facts every time
+    // (ruling 16: it never sees its own prior prose). So the fourth press is a reader hoping the
+    // dice change, not a reader getting a better survey, and the floor under all of it is the hand
+    // corpus, which never runs out and never charges. The number is `SCRIBE_REDRAW_LIMIT` and its
+    // reasoning is written there; the COUNT is the artefact's own past lane, so it survives a
+    // reload and a second pane where a session counter would reset and cap nothing.
+    if (redraws >= SCRIBE_REDRAW_LIMIT) {
+      return { ...base, reason: 'redraw-capped' };
     }
     return { ...base, render: true, reason: 'redo' };
   }
