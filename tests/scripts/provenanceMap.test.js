@@ -115,6 +115,7 @@ describe('provenance map — the gate', () => {
     const header = run.output.split('\n').filter((l) => l.startsWith('#'));
     const regen = header.find((l) => l.startsWith('# Regenerate:'));
     expect(regen).toContain('scripts/audit/provenance-map.mjs');
+    // anchored: the line above proves this exact string is non-empty and carries the generator path, so a drifted or missing header reds there first
     expect(regen).not.toContain('§687.4');
     expect(header.some((l) => l.startsWith('# Walked at:'))).toBe(true);
   });
