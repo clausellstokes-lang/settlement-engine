@@ -68,6 +68,14 @@ export default function PricingPage({ onNavigate }) {
   const isElevated = useStore(s => s.isElevated());
   const authTier   = useStore(s => s.auth.tier);
   const isFounder  = useStore(s => s.auth.isFounder);
+  // ⛔ THE HYDRATION GATE (LD-6 item 2, second half). Every subscribe-vs-manage
+  // decision on this page derives from the LOCAL store tier, which reads 'anon'
+  // /'free' until the session resolves. Without this, an already-paying
+  // Cartographer who lands here mid-hydration — or whose upgrade webhook has not
+  // landed yet — is shown the raw Subscribe CTA and can buy a SECOND
+  // subscription. The same selector App.jsx already uses; nothing about the
+  // hydrated state changes.
+  const authLoading = useStore(s => s.auth.loading);
   const [loading, setLoading] = useState(null); // product key in flight
   const [checkoutError, setCheckoutError] = useState(null);
   // Remember the last attempted checkout action so the error banner can offer a
@@ -356,6 +364,12 @@ export default function PricingPage({ onNavigate }) {
               // page's initial loading===null at rest, which left the free
               // tier's button permanently disabled showing 'Redirecting…'.
               loading={loading === (tier.key === 'cartographer' ? 'premium' : 'wanderer')}
+              // THE HYDRATION GATE, narrowed to the CHECKOUT action only: a
+              // 'navigate' or 'current' CTA is not a purchase and stays live, and
+              // a 'manage' CTA is never reachable while unhydrated (currentPaid
+              // is false), so the billing path is untouched — a subscriber must
+              // always be able to reach billing.
+              ctaDisabled={Boolean(authLoading) && cta.kind === 'purchase'}
               emphasised={tier.key === 'cartographer'}
               audienceLine={audienceLineFor(tier.key)}
               simulationVariant={simulationVariant}

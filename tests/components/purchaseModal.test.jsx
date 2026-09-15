@@ -61,4 +61,46 @@ describe('PurchaseModal', () => {
     render(<PurchaseModal onClose={() => {}} />);
     expect(screen.queryByRole('checkbox', { name: /save my card/i })).toBeNull();
   });
+
+  /**
+   * LD-6 item 2, second half — THE ANTI-DOUBLE-SUBSCRIBE HYDRATION GATE.
+   *
+   * `authTier` reads 'anon'/'free' until the session resolves, so the premium
+   * upsell below offered a SECOND subscription to an already-paying Cartographer
+   * who opened this modal mid-hydration. The upsell is blocked under its own
+   * label until the tier is known; the credit-pack tiles are deliberately NOT
+   * gated, because a pack is not a subscription.
+   */
+  describe('the hydration gate', () => {
+    afterEach(() => { mocks.storeState.auth.loading = false; });
+
+    test('HYDRATING: the premium upsell is blocked, under its own label', () => {
+      mocks.storeState.auth.loading = true;
+      render(<PurchaseModal onClose={() => {}} />);
+      const upsell = screen.getByRole('button', { name: /upgrade to/i });
+      expect(upsell.disabled, 'a tier-unknown buyer can still start a second subscription').toBe(true);
+      expect(screen.queryByText(/Redirecting/i)).toBeNull();
+    });
+
+    test('HYDRATING: the credit-pack tiles stay live — a pack is not a subscription', () => {
+      mocks.storeState.auth.loading = true;
+      render(<PurchaseModal onClose={() => {}} />);
+      const packs = Object.values(getActivePacks());
+      expect(packs.length, 'no active packs — the scan broke').toBeGreaterThan(0);
+      for (const pack of packs) {
+        const tile = screen.getByRole('button', { name: new RegExp(`Buy ${pack.credits} credits`, 'i') });
+        expect(tile.disabled).toBe(false);
+      }
+    });
+
+    test('NON-VACUITY: auth.loading is the ONLY difference between blocked and live', () => {
+      mocks.storeState.auth.loading = true;
+      const { unmount } = render(<PurchaseModal onClose={() => {}} />);
+      expect(screen.getByRole('button', { name: /upgrade to/i }).disabled).toBe(true);
+      unmount();
+      mocks.storeState.auth.loading = false;
+      render(<PurchaseModal onClose={() => {}} />);
+      expect(screen.getByRole('button', { name: /upgrade to/i }).disabled).toBe(false);
+    });
+  });
 });

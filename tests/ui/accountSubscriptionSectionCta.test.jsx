@@ -86,3 +86,95 @@ describe('AccountSubscriptionSection — the free-tier conversion CTA (#6)', () 
     expect(screen.queryByRole('button', { name: /See Cartographer/i })).toBeNull();
   });
 });
+
+/**
+ * LD-6 item 2, second half — THE ANTI-DOUBLE-SUBSCRIBE HYDRATION GATE.
+ *
+ * `auth.tier` reads 'anon'/'free' until the session resolves, so mid-hydration a
+ * paying Cartographer is shown this region's FREE-user surface. The conversion
+ * CTA is this region's entry to the purchase path, so it is blocked under its
+ * own label until the tier is known. Two things stay deliberately ungated and
+ * are pinned as such: the billing/manage path (a subscriber must always be able
+ * to reach billing) and the inline credit-pack tiles (a pack is not a
+ * subscription; buying one at any tier is correct).
+ */
+describe('AccountSubscriptionSection — the hydration gate', () => {
+  test('HYDRATING: the conversion CTA renders but is blocked, and clicking it navigates nowhere', () => {
+    const onNavigatePricing = vi.fn();
+    render(
+      <AccountSubscriptionSection
+        {...BASE_PROPS}
+        auth={{ tier: 'free', loading: true }}
+        isElevated={false}
+        onNavigatePricing={onNavigatePricing}
+      />,
+    );
+    const cta = screen.getByRole('button', { name: /See Cartographer/i });
+    expect(cta.disabled, 'a tier-unknown reader still has a live path into the purchase funnel').toBe(true);
+    fireEvent.click(cta);
+    expect(onNavigatePricing).not.toHaveBeenCalled();
+  });
+
+  test('HYDRATING: "Manage subscription" is not shown to a reader not yet known to be paid', () => {
+    render(
+      <AccountSubscriptionSection
+        {...BASE_PROPS}
+        auth={{ tier: 'free', loading: true }}
+        isElevated={false}
+        onNavigatePricing={vi.fn()}
+      />,
+    );
+    expect(screen.queryByRole('button', { name: /Manage subscription/i })).toBeNull();
+  });
+
+  test('the gate does NOT reach the credit-pack tiles — a pack is not a subscription', () => {
+    // ⚠ STATED AS AN INVARIANCE, NOT AS "enabled". This harness mocks no
+    // supabase module, so `isConfigured` is really false and the pack tiles are
+    // already disabled for an unrelated reason — an `expect(disabled).toBe(false)`
+    // here would be red for the wrong cause, and its mirror image (asserting
+    // `true`) would be a vacuous green that survives the gate spreading onto the
+    // packs. What must hold is that auth.loading changes NOTHING about them.
+    const packDisabledStates = (loading) => {
+      const view = render(
+        <AccountSubscriptionSection
+          {...BASE_PROPS}
+          auth={{ tier: 'free', loading }}
+          isElevated={false}
+          handlePurchase={vi.fn()}
+          onNavigatePricing={vi.fn()}
+        />,
+      );
+      const states = screen.getAllByText('credits')
+        .map((el) => el.closest('button'))
+        .map((button) => button.disabled);
+      view.unmount();
+      return states;
+    };
+    const hydrating = packDisabledStates(true);
+    const hydrated = packDisabledStates(false);
+    expect(hydrating.length, 'no credit-pack tile rendered — the scan broke').toBeGreaterThan(0);
+    expect(hydrating).toEqual(hydrated);
+  });
+
+  test('NON-VACUITY: auth.loading is the ONLY difference between blocked and live', () => {
+    const { unmount } = render(
+      <AccountSubscriptionSection
+        {...BASE_PROPS}
+        auth={{ tier: 'free', loading: true }}
+        isElevated={false}
+        onNavigatePricing={vi.fn()}
+      />,
+    );
+    expect(screen.getByRole('button', { name: /See Cartographer/i }).disabled).toBe(true);
+    unmount();
+    render(
+      <AccountSubscriptionSection
+        {...BASE_PROPS}
+        auth={{ tier: 'free', loading: false }}
+        isElevated={false}
+        onNavigatePricing={vi.fn()}
+      />,
+    );
+    expect(screen.getByRole('button', { name: /See Cartographer/i }).disabled).toBe(false);
+  });
+});

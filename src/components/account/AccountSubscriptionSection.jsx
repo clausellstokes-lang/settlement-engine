@@ -34,6 +34,16 @@ export default function AccountSubscriptionSection({
   onNavigatePricing,
 }) {
   const isFree = !isElevated && auth.tier !== 'premium';
+  // ⛔ THE HYDRATION GATE (LD-6 item 2, second half). `auth.tier` reads 'anon'/
+  // 'free' until the session resolves, so mid-hydration a paying Cartographer is
+  // shown the free-user surface. The conversion CTA below is this region's entry
+  // to the purchase path, so it is BLOCKED under its own label until the tier is
+  // known. Two things are deliberately NOT gated: the 'Manage subscription'
+  // button (a subscriber must always be able to reach billing, and it is already
+  // correct-by-default here — it renders only for a KNOWN premium tier, never
+  // for an unknown one), and the inline credit-pack tiles (a pack is not a
+  // subscription).
+  const authLoading = Boolean(auth?.loading);
   // P8 — one primary per region. When the audience-earned Founder tile is
   // eligible it renders its OWN solid-gold "Claim seat" primary lower in this
   // section; the generic upgrade CTA below then drops to secondary so exactly
@@ -148,6 +158,7 @@ export default function AccountSubscriptionSection({
             variant={founderTileShowing ? 'secondary' : 'primary'}
             size="lg"
             onClick={onNavigatePricing}
+            disabled={authLoading}
           >
             See Cartographer
           </Button>
