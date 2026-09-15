@@ -1,4 +1,4 @@
-# wf_ce8d34f2-917 — per-agent progress, 2026-09-15 05:01:37
+# wf_ce8d34f2-917 — per-agent progress, 2026-09-15 05:07:54
     - `a38b65557` ? · DONE · transcript 09-14 16:54 601 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Seats with no roster: DS-DEF-2 'Invasion & War' face 0 is seated on `elders` and the two DS-DEF-2 faces seated on `garrison` hav
     - `aef1b837d` ? · DONE · transcript 09-14 16:57 723 KB · 12 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["Two faces were assigned to sources the town card does not seat: DS-DEF-2 'Invasion & War: walls with NO force' face 0 is specifi
     - `a986300e6` ? · DONE · transcript 09-14 16:51 516 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["The `stance` label on each pool (visitor / street / ledger / threshold / counterforce) is given but the brief only says the three
