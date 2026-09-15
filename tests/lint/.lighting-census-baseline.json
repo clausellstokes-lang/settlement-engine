@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
-  "files": 2563,
+  "measuredAtSha": "4612ced3ed19c1190e80cb9f2590922a577fb38f",
+  "measuredBy": "LT37 (lane-LT37-quality, Opus 5 — Fable-unvalidated)",
+  "date": "2026-09-15",
+  "note": "LT37 car 3 lands ONE new test file, tests/domain/aiOverlayEvalFixtures.test.js (Track J part 1, the AI overlay output-eval corpus), carrying 5 live titles under 2 describes. tests/fixtures/ai-overlay-eval-corpus.json is data, not a test file, and is uncredited by construction. The file takes no `each` call, so the each-family park debt is unmoved.",
+  "files": 2564,
   "parked": 375,
-  "credited": 2188,
-  "titles": 24169,
-  "suiteTitles": 6452
+  "credited": 2189,
+  "titles": 24174,
+  "suiteTitles": 6454
 }
