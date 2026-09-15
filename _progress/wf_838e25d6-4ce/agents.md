@@ -1,4 +1,4 @@
-# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:54:15
+# wf_838e25d6-4ce — per-agent progress, 2026-09-15 18:00:50
     - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
     - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
     - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
@@ -21,4 +21,4 @@
     - `a6e66282d` ? · DONE · transcript 09-15 17:47 858 KB · 41 tool calls · result: {"family": "INT", "verdicts": [{"wave": "INT-1 \u2014 the books generalized (flag `seatBooksEnabled`)", "verdict": "TOO LOW", "correctedLow": 4, "correctedHigh"
     - `a375d8671` ? · DONE · transcript 09-15 17:48 971 KB · 49 tool calls · files: gr2.txt, cw1.txt, cw2.txt · result: {"family": "GR-CW", "verdicts": [{"wave": "GR-4 \u2014 the succession question (remainder)", "verdict": "TOO LOW", "correctedLow": 3, "correctedHigh": 5, "why":
     - `a45a7b6ed` ? · DONE · transcript 09-15 17:51 869 KB · 46 tool calls · result: {"family": "LG0 \u2014 LOGISTICS LG-0 and LG-1 (item #33, the family's first train)", "verdicts": [{"wave": "LG-0 \u2014 THE WILLINGNESS GATE (mints circleNetwo
-    - `a511c550b` r2 · IN FLIGHT · transcript 09-15 17:54 912 KB · 4 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `a511c550b` r2 · IN FLIGHT · transcript 09-15 17:59 1036 KB · 5 tool calls · files: PRICING-32-33.md · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
