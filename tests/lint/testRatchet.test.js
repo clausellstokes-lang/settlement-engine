@@ -818,6 +818,19 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
   // where the pin that used to refuse it now checks the cure is still in the tree.
   const WALKER_ROWS_OWED = Object.freeze({
+    // ⭐⭐ 2026-09-15, LT28 CAR 6 — THE VOICE ROW AND THE ENFORCEMENT-CLAIMS ROW ARE FREED, NOT FORGIVEN.
+    // The voice row's own named cure (§901) is built: a DECLARED authored-vocabulary exemption in the
+    // scanner, keyed on the EXACT LITERAL rather than a widened budget — bare `—` delimiters anywhere,
+    // plus per-file verbatim producer labels carrying their reason — with four controls, including a
+    // planted-and-executed proof that an undeclared em dash in an EXEMPTED file still reds. It also
+    // freed five more bare delimiters in three already-baselined files, banked through the shrink-only
+    // door: 311 → 306 em over 55 → 52 files. The enforcement-claims row went two ways because its six
+    // naked claims were two different things: THREE were never claims at all (`0 problems` was matching
+    // the tail of "30 problems" on three lines REPORTING a lint run — the detector now carries `\b`,
+    // pinned in both directions), and THREE were real claims that already named their enforcer in prose
+    // and simply carried no tag. FROZEN_NAKED is empty. A remove-only --update retired both census rows
+    // (`baseline updated: 1 failing test(s) remain, 2 removed`); these two ledger entries leave with them
+    // and OWED_CEILING drops by exactly two. The owner-gated golden master is the only row left.
     // ⭐⭐ 2026-09-06, THE OSR RUNG-18 LANDING (§902) — THE TWO WRITER-REACH ROWS ARE FREED, NOT FORGIVEN. They entered at §900 as
     // declared debt: the writer-reach register measured corpusMeta.simulationFlagsLit = 81 while the observed-shape register
     // carried 80, because its schema-17 migration receipt's subjectSha lay outside the product lineage after a cherry-pick replay
@@ -829,16 +842,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // files spell a producer's authored dashed vocabulary (a total map's keys and two parsed delimiters); the shrink-only door
     // refuses the 311 → 319 rise and the generator import is forbidden in writing. Structural cure: an authored-vocabulary
     // exemption class in the voice scanner (§901). Banking keeps the guard visible; OWED_CEILING moves 2 → 3 with it.
-    // ⭐⭐ 2026-09-15, LONG TAIL #41 — THE TIER-2 VOICE PER-FILE ROW IS FREED, NOT FORGIVEN, BY THE CURE ITS OWN CAUSE LINE
-    // NAMED. §901's "declared authored-vocabulary exemption class in the voice scanner" now exists: car 1 built a NAMED
-    // allowlist keyed file -> whole literal -> {count, why} and a FIFTH TIER that scans `src/generators`, the directory the
-    // eight banked dashes are TRANSCRIBED FROM and which no tier had ever read; car 2 declared those eight (five
-    // COMPLEXITY_LABEL values mirroring prosperity.js:296-314, the FOOD_POOL_OF key mirroring foodGenerator.js:342, and the
-    // bare `'—'` split delimiter matched to the separator safetyProfile.js:235 composes), each verified byte-identical with
-    // `grep -F`. The arm is GREEN by execution: `Tests 28 passed (28)`, and the previously-throwing documented refreeze
-    // `UPDATE_VOICE_BASELINE=1` now runs clean and rewrites all three baselines BYTE-IDENTICALLY. The exemption cannot rot:
-    // every entry is count-pinned and a seeded third `'—'` in generalStateProse.js reds it ("declared 2, measured 3"). The
-    // census row is removed in the SAME ACT as this entry, and OWED_CEILING drops by exactly the one row burned.
     // ⭐⭐ 2026-08-31, VOICE-1b (ODQ §854) — THE FOUR VOICE BLOCKERS WERE STALE IN BOTH
     // FIGURES AND PRESCRIPTION, AND THE PRESCRIPTION WAS THE FORBIDDEN CURE. Each of the
     // four lines below used to say the cure was "a re-freeze of the voice ratchet fixture
@@ -864,8 +867,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // 72 at DOCKET and 69 at the composed tip). A remove-only --update retired all three census rows; these three ledger
     // entries leave with them and OWED_CEILING drops by exactly three. enforcement-claims and the golden-master
     // (owner-gated, waiting for the freeze act) stay.
-    'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
-      'NOT FREED — SIX naked completeness claims, not one, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing: four in docs/FABLE_VALIDATION_QUEUE.md (179, 3017, 3886 and 5663), one in docs/GOLDEN_SHIFT_LEDGER.md (2128) and one in docs/implementation/packets/foreign-policy/IN-0C.md (484). The line named only the R-BLD-10 row at FABLE_VALIDATION_QUEUE.md:179 — true when it was written, kept here as history. For that one the cure is still a chair ruling about the row rather than a ratchet edit; the other five are ordinary prose repairs. ⭐ The growth from one to six was never invisible: the FROZEN_NAKED pin in the same test freezes all six PER CLAIM as file plus matched vocabulary, and it PASSES at this tip.',
     // ⭐⭐ 2026-08-30, TE-RESIDUE-1 — THE metronome ROW LEFT, AND IT LEFT THE RIGHT WAY.
     // Its blocker read "the right cure is to give it a mechanism, which is a worldPulse
     // change outside this lane". HK-4 is that change: `razingExecution.js` now carries
@@ -931,13 +932,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // 2 → 3 on 2026-09-05 (§900): the Tier-2 voice per-file row re-enters OWED (declared, attributed) — see WALKER_ROWS_OWED.
   // 5 → 3 on 2026-09-06 (§902): the two writer-reach rows FREED by the rung-18 re-anchoring (OSR-SCHEMA18); the voice
   // per-file row, enforcement-claims and the owner-gated golden-master stay.
-  // 3 → 2 on 2026-09-15 (LONG TAIL #41): the Tier-2 voice per-file row is FREED, not forgiven — §901's named
-  // authored-vocabulary exemption class was built and the arm is green by execution (see WALKER_ROWS_OWED above).
-  // Same arithmetic as every retirement before it: the census entry, this ledger entry and this ceiling move in ONE act,
-  // and the ceiling drops by exactly the one row burned. A ledger corpse silently lowers the effective ceiling and lets
-  // the next real walker row slip in under a cap nobody lowered — which is why this line moves with the deletion, not
-  // after it. enforcement-claims and the owner-gated golden-master remain.
-  const OWED_CEILING = 2; // 3 → 5 on 2026-09-05 (§900): the two writer-reach ↔ OSR one-flag rows enter OWED, declared (see WALKER_ROWS_OWED); both retire at OSR rung 18.
+  const OWED_CEILING = 1; // 3 → 1 on 2026-09-15 (LT28 car 6): the voice per-file row and enforcement-claims are FREED (see WALKER_ROWS_OWED); only the owner-gated golden master remains, and it retires at the owner-signed GENESIS.
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
@@ -3128,66 +3123,6 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         + ' — no timeout signal and no assertion signal — open the full report',
         '      msg: (the report carried no failure message)',
       ]);
-
-      // ── ⛔ THE ATTRIBUTION, AND THE ARM A FILE'S OWN LITERAL DISABLES (LT29 car 2) ──
-      // §885 QUOTED THE BUG: the gate printed `300000ms budget (vite.config.js testTimeout)`
-      // against a config that sets 20,000 — "a real expiry presented as though it had
-      // FOURTEEN TIMES the headroom it had". The parenthesis must name the source OF THE
-      // NUMBER PRINTED, so the source is carried through the `Math.max`. The two cases above
-      // pass NO `globalBudget` and are therefore also the proof of the documented fallback:
-      // a caller that resolved no literals gets byte-identical output to before the cure.
-      const fileBudget = 300000;
-      const rowBudgets = { budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [perTest, fileBudget] };
-      expect(failureEvidenceOf({ file: 'tests/lint/w.test.js', fullName: 'z', duration: 21758 }, {
-        budget: fileBudget, ...rowBudgets,
-      })).toEqual([
-        '      UNCLASSIFIED · ran 21758ms against a 300000ms budget'
-        + " (the file's own declared budget — it declares 60000ms, 300000ms;"
-        + ' vite.config.js testTimeout sets 20000ms)'
-        + ' — no timeout signal and no assertion signal — open the full report',
-        '      ⚠ it also ran PAST the suite-wide 20000ms clock; the class above is taken'
-        + " against the FILE's 300000ms budget, which this row may not own"
-        + ' — if it does not, this row is a TIMEOUT.',
-        '      msg: (the report carried no failure message)',
-      ]);
-
-      // ⚠ THE RULING THE THIRD LINE EXISTS FOR, STATED AS A NEGATIVE CONTROL. The scan is
-      // FILE-scoped and cannot tie a literal to one test — `timeoutLiteralsOf`'s own header
-      // says it cannot tell a per-test override from a `beforeAll` argument or a Testing
-      // Library query budget — so the same 21,758 ms row classifies two ways depending on
-      // which budget it is measured against. THE WIDE DIRECTION IS THE RULING: erring narrow
-      // is the only direction able to INVENT a TIMEOUT on a genuine assertion failure
-      // (TE-BUDGET-1, measured 2026-08-31), and an under-classification degrades to "open the
-      // full report", which is true. The cure is that the wide budget stops governing
-      // SILENTLY, which is what the line above is.
-      expect(classifyFailure({ duration: 21758, message: '', budget: fileBudget }).class).toBe('UNCLASSIFIED');
-      expect(classifyFailure({ duration: 21758, message: '', budget: 20000 }).class).toBe('TIMEOUT');
-
-      // …AND THE THIRD LINE IS NOT NOISE. It appears ONLY where arm 3 was actually disabled:
-      // never when the row is already a cost class by another arm, never past the file's own
-      // budget (arm 3 fired), and never inside the suite-wide clock (nothing was disabled).
-      const linesFor = (row, budget) => failureEvidenceOf(row, { budget, ...rowBudgets });
-      const past = linesFor({ duration: 300001 }, fileBudget);
-      expect(past).toHaveLength(2);
-      expect(past[0]).toContain('TIMEOUT · ran 300001ms against a 300000ms budget');
-      expect(past[0]).toContain("(the file's own declared budget");
-      const marked = linesFor({ duration: 21758, failureMessages: ['Error: STACK_TRACE_ERROR\n    at task (…)'] }, fileBudget);
-      expect(marked).toHaveLength(2);
-      expect(marked[0]).toContain('TIMEOUT ·');
-      const inside = linesFor({ duration: 19999, failureMessages: ['AssertionError: expected 1 to be 2'] }, fileBudget);
-      expect(inside).toHaveLength(2);
-      expect(inside[0]).toContain('ASSERTION · ran 19999ms against a 300000ms budget');
-      expect(inside[0]).toContain("(the file's own declared budget");
-
-      // …and where the file's literals are all SMALLER than the suite-wide clock the file
-      // does NOT govern, so the config keeps the attribution it has always had.
-      expect(failureEvidenceOf({ duration: 21758 }, {
-        budget: 20000, budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [queryBudget],
-      })[0]).toBe(
-        '      TIMEOUT · ran 21758ms against a 20000ms budget'
-        + ' (vite.config.js testTimeout; the file also declares 5000ms)'
-        + ' — the row ran at or past its whole budget',
-      );
     });
 
     test('uncollectedOf names every suite whose failure the PER-TEST census cannot see', () => {
