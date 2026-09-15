@@ -5,7 +5,7 @@
  * Three sites (docs/VOICE_AND_TONE.md §7, src/lib/seo.js, src/lib/seoCompendium.js)
  * referenced this guard before it existed; fix wave 3 makes the claim true.
  *
- * THREE ENFORCEMENT TIERS:
+ * FIVE ENFORCEMENT TIERS:
  *  1. THE COPY REGISTRIES — HARD ZERO. Every string VALUE reachable through the
  *     centralized copy objects (`en`, `landing`, `pricingPage`, `footer`,
  *     `deityAuthoring`) must carry no U+2014 and no `!`. The registries were
@@ -29,6 +29,13 @@
  *     tests/copy/.voice-mechanics-jsx-baseline.json. The initial baseline is a
  *     FINDING: 396 em dashes and 10 exclamation points already live,
  *     unenforced, in components (see enforcer-ee-voice-shipped.md).
+ *  4. THE SETTING-AGNOSTIC TELL BAN (TE-AGNOSTIC-1 / ODQ §857) — HARD ZERO over
+ *     the SAME `SCANNED_FILES` roots as Tier 2, with an exact-set quarantine.
+ *     Its full charter is at the tier itself, far below.
+ *  5. THE GENERATORS TIER (LONG TAIL #41) — SHRINK-ONLY RATCHET over
+ *     `src/generators/**\/*.js`, baselined in
+ *     tests/copy/.voice-mechanics-generators-baseline.json. See the tier's own
+ *     block for why this is a FIFTH TIER and not one more root on Tier 2.
  *
  * TO COMPLY when this reds:
  *   - a NEW em dash / `!` in a registry string → rewrite per VOICE_AND_TONE §6.
@@ -36,7 +43,7 @@
  *   - a file's count fell → lower (or delete) its baseline entry to bank the win.
  *   - APPROVED sweep landed → regenerate: UPDATE_VOICE_BASELINE=1 npx vitest run
  *     tests/copy/voiceMechanics.test.js  (shrink-only: totals may never grow;
- *     this regenerates BOTH the Tier-2 and Tier-3/JSX baselines).
+ *     this regenerates the Tier-2, Tier-3/JSX and Tier-5/generators baselines).
  *
  * ⭐ THE SHIFT RECORD (VOICE-1b, 2026-08-31; the full entry lives with this instrument's
  * banked rows in scripts/.test-ratchet-baseline.json). TWO trains landed the generated
@@ -216,11 +223,104 @@ function walkJs(dir, out = []) {
   return out;
 }
 
-/** @param {string} abs @returns {{ em: number, bang: number }} */
-function countFile(abs) {
+// ── THE DECLARED AUTHORED-VOCABULARY ALLOWLIST (ODQ §901's named cure) ───────
+//
+// ⛔ THIS IS A NAMED ALLOWLIST OF EXACT STRINGS, NEVER A PATH EXEMPTION. The key
+// is `<repo-relative file>` → `<the WHOLE string literal, byte for byte>`. A
+// substring never matches, so a NEW sentence in an allowlisted file — even one
+// that quotes a band verbatim inside it — is a DIFFERENT literal and still reds.
+// Exempting a path would switch the guard off over the exact directory Long
+// Tail #41 exists to cover.
+//
+// WHAT IT EXEMPTS, AND WHY. The em-dash bar is a PROSE rule: it governs the
+// archiver's sentences (docs/VOICE_AND_TONE.md §6, whose whole decision table is
+// about sentences). A `Word — gloss` LABEL BAND is not a sentence; it is a
+// glance-grain element under the LEGIBILITY law, a typed value whose dash is the
+// band/gloss separator, and its siblings in the same vocabulary spell the same
+// relation with parentheses. The chair's ruling of 2026-09-14 (provisional on a
+// full classification, which was then executed — see the tier block below) is
+// that these keep their dash.
+//
+// ⚠ THE ALLOWLIST EXEMPTS THE EM DASH ONLY. `!` is still counted inside an
+// allowlisted string: the exclamation ban has no authored-vocabulary reading and
+// no tier grants it one.
+//
+// Each entry names the PRODUCER LINE it is authored at, so a reader can go and
+// see the string rather than trust this list. Line numbers are as of the landing
+// commit and are given as orientation; the allowlist matches on TEXT, and the
+// exact-set arm below refuses any entry that stops being a live literal.
+const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
+  'src/generators/power/governanceNarrative.js': Object.freeze({
+    'Unstable — criminal governance':
+      'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").',
+    'Critical (active siege — survival priority)':
+      'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.',
+    'Fractured — no stable governing authority':
+      'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.',
+    'Shaken — institutional trust collapsed':
+      'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.',
+    'Desperate — hunger is eroding order':
+      'public-order band, applyStressStability :301 — the `famine` stressor override.',
+    'Anxious — disease is overriding normal authority':
+      'public-order band, applyStressStability :304 — the `plague_onset` stressor override.',
+    'Volatile — power is available to whoever moves first':
+      'public-order band, applyStressStability :307 — the `succession_void` stressor override.',
+    'Strained — debt obligations constrain every decision':
+      'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.',
+    'Tense — regional monster threat':
+      'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.',
+  }),
+  'src/generators/economy/prosperity.js': Object.freeze({
+    'Highly diversified — multiple major revenue streams':
+      'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.',
+    'Diversified — broad institutional economic base':
+      'economic-complexity band, deriveEconomicComplexity :298 — labelBands.js COMPLEXITY_LABEL.DIVERSIFIED transcribes it.',
+    'Concentrated — fewer revenue streams than scale suggests':
+      'economic-complexity band, deriveEconomicComplexity :299 — labelBands.js COMPLEXITY_LABEL.CONCENTRATED transcribes it.',
+    'Limited — narrow economic base for this scale':
+      'economic-complexity band, deriveEconomicComplexity :305 — labelBands.js COMPLEXITY_LABEL.LIMITED transcribes it.',
+    'Subsistence — survival economy':
+      'economic-complexity band, deriveEconomicComplexity :314 — labelBands.js COMPLEXITY_LABEL.SUBSISTENCE transcribes it.',
+  }),
+  'src/generators/safetyProfile.js': Object.freeze({
+    'Dangerous — Plague Unrest':
+      'safety strain band :135 — the two-em-dash plague strain the safetyStrains docblock names; the composite label is built from the TYPED entry, never parsed back out.',
+    'Controlled — Authoritarian':
+      'safety band :241, repeated as a comparison literal at :489 (isDangerous).',
+    'Dangerous — Criminal Governance':
+      'safety band :248, repeated as a comparison literal at :490 (isDangerous).',
+  }),
+  'src/generators/economy/economicState.js': Object.freeze({
+    'Military services — standing army leasing, siege engineering, garrison contracts':
+      'primary-export band :626 — `Export — what it is`, the same shape as every other primaryExports entry.',
+    'Mercenary services — trained companies available for hire':
+      'primary-export band :628 — the mercenary-institution arm of the same militaryExport ladder.',
+    'Military services — garrison contracts and armed escort':
+      'primary-export band :629 — the lower-effectiveness arm of the same militaryExport ladder.',
+  }),
+  'src/generators/foodGenerator.js': Object.freeze({
+    'Deficit — Active Famine':
+      'food-security band :342 — byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this producer and says so in its own docblock (:40, :255).',
+  }),
+});
+
+/**
+ * Is this exact literal, in this exact file, a declared authored-vocabulary string?
+ * @param {string} rel repo-relative path, forward slashes
+ * @param {string} text the WHOLE cooked literal
+ * @returns {boolean}
+ */
+function isAllowedVocabulary(rel, text) {
+  const forFile = AUTHORED_VOCABULARY_ALLOWLIST[rel];
+  return Boolean(forFile) && Object.prototype.hasOwnProperty.call(forFile, text);
+}
+
+/** @param {string} abs @param {string} rel @returns {{ em: number, bang: number }} */
+function countFile(abs, rel) {
   let em = 0, bang = 0;
   for (const text of stringLiteralContents(readFileSync(abs, 'utf8'))) {
-    em += (text.match(/—/g) || []).length;
+    // The allowlist suppresses the EM DASH only; `!` is counted regardless.
+    if (!isAllowedVocabulary(rel, text)) em += (text.match(/—/g) || []).length;
     bang += (text.match(/!/g) || []).length;
   }
   return { em, bang };
@@ -234,7 +334,7 @@ const SCANNED_FILES = [
 /** @type {Record<string, { em: number, bang: number }>} */
 const current = {};
 for (const rel of SCANNED_FILES) {
-  const c = countFile(join(ROOT, rel));
+  const c = countFile(join(ROOT, rel), rel);
   if (c.em > 0 || c.bang > 0) current[rel] = c;
 }
 
@@ -268,6 +368,83 @@ for (const { rel, strings } of JSX_SCAN) {
 
 if (UPDATE) {
   writeShrinkOnlyBaseline(JSX_BASELINE_PATH, currentJsx, 'the Tier-3 src/**/*.jsx voice baseline');
+}
+
+// ── Tier 5 (LONG TAIL #41): THE GENERATORS TIER ──────────────────────────────
+//
+// THE BLIND SPOT THIS CLOSES. Tiers 2 and 4 scan `src/data` + `src/domain`.
+// `src/generators` — where a large share of the reader-facing copy is AUTHORED
+// — was scanned by NOTHING. Measured here by espree at the landing tip: 114
+// non-test .js files, 0 of them unparseable, 62 em dashes over 51 string
+// literals in 12 files, and 0 exclamation points.
+//
+// ⛔ WHY THIS IS A FIFTH TIER AND NOT ONE MORE ROOT ON `SCANNED_FILES`. Adding
+// `src/generators` to the Tier-2 roots at the two-line array above is a
+// one-line change with three measured tripwires, and all three fire:
+//   (a) `SCANNED_FILES` ALSO DRIVES TIER 4's HARD-ZERO tell ban. It would red
+//       instantly on src/generators/services/serviceCategoryTables.js's
+//       `'Healer (divine, 1st level)'` institution key — a `spell-level scale`
+//       hit with no quarantine row, and the six rows for that same key are
+//       deferred to the keys car, not to this one.
+//   (b) THE SHRINK-ONLY DOOR WOULD THROW, NOT WRITE. Tier 2's committed total
+//       is em 311; the tree measures 319; folding the generators in takes it
+//       past 380, and tests/helpers/shrinkOnlyBaseline.js refuses any total
+//       that RISES. The documented refreeze would stop working.
+//   (c) TIER 2's BUDGET HEADROOM IS NOT THERE. `BANG_BUDGET = 15` against a
+//       measured 8 is the whole remaining allowance for every directory the
+//       guard has yet to reach; spending it on one extension leaves none.
+// A separate tier with its own baseline and its own budgets avoids all three
+// and keeps each tier's verdict readable on its own.
+//
+// ⭐ THE CLASSIFICATION, EXECUTED (2026-09-14, reproduced at this tip). The 51
+// literals are 23 LABEL BANDS, 12 code/delimiter/prompt strings, and 16 GENUINE
+// PROSE SENTENCES. The 23 label bands are the 21 distinct strings declared in
+// AUTHORED_VOCABULARY_ALLOWLIST above (two of them appear twice, as comparison
+// literals in the same file). Everything else — the 12 mechanical strings and
+// the 16 prose dashes — is FROZEN AS DECLARED DEBT in the baseline below: 39 em
+// dashes across 8 files. The tier does NOT cut them.
+//
+// ⛔ THE 16 PROSE DASHES ARE ENROLLED AS SHRINK-ONLY DEBT, NOT CURED. They are
+// 11 in crossSettlementConflicts.js and 5 in narrative/settlementOriginProse.js
+// (16 dashes over 15 sentences — :136 carries two). Cutting them is
+// OUTPUT-MOVING on a same-seed surface and is the owner's call, which is why
+// this tier enrols them instead: no NEW one can appear, and these can only
+// fall. Five of the sixteen are additionally ruled LAWFUL apposition by the
+// corpus annex's own ratified R-DST-W4-f, and two of those five are transcribed
+// byte-for-byte into the canonical-at-zero pin at
+// tests/generators/settlementOriginProse.test.js:62.
+const GENERATORS_BASELINE_PATH = join(ROOT, 'tests/copy/.voice-mechanics-generators-baseline.json');
+
+const GENERATOR_FILES = walkJs(join(ROOT, 'src/generators'))
+  .map((p) => relative(ROOT, p).replace(/\\/g, '/')).sort();
+
+/** @type {Record<string, { em: number, bang: number }>} */
+const currentGenerators = {};
+for (const rel of GENERATOR_FILES) {
+  const c = countFile(join(ROOT, rel), rel);
+  if (c.em > 0 || c.bang > 0) currentGenerators[rel] = c;
+}
+
+if (UPDATE) {
+  writeShrinkOnlyBaseline(GENERATORS_BASELINE_PATH, currentGenerators, 'the Tier-5 src/generators voice baseline');
+}
+
+/**
+ * Does espree parse this source, or does `stringLiteralContents` fall back?
+ * Tier 2 has NO control for this and Tier 3 does (its own arm, below); a tier
+ * over a directory nobody has scanned before needs it most, because the
+ * fallback is the char tokenizer this file's own docstring calls a FALSE
+ * INSTRUMENT IN BOTH DIRECTIONS. A silent fallback over src/generators would
+ * report a plausible number measured by the wrong instrument.
+ * @param {string} src @returns {boolean}
+ */
+function parsesWithEspree(src) {
+  try {
+    parse(src, { ecmaVersion: 'latest', sourceType: 'module', range: true });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 describe('E2 voiceMechanics — the copy registries carry no em dash and no exclamation point', () => {
@@ -415,6 +592,120 @@ describe('E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (s
 
   it('the JSX extractor returns null (not a throw) on unparseable source, so one bad file cannot crash the ratchet', () => {
     expect(extractJsxProseStrings('this is not { valid JS at all <<<')).toBeNull();
+  });
+});
+
+describe('E2/Tier-5 voiceMechanics — src/generators string-literal ratchet (shrink-only)', () => {
+  it('every src/generators .js file actually PARSED (none silently counted by the fallback tokenizer)', () => {
+    const fellBack = GENERATOR_FILES
+      .filter((rel) => !parsesWithEspree(readFileSync(join(ROOT, rel), 'utf8')));
+    expect(
+      fellBack,
+      '\nThese files did not parse, so their counts came from charScanStringContents —'
+      + ' a FALSE INSTRUMENT in both directions (see its docstring). Fix the parse,'
+      + ' or the number below this line means nothing:\n  ' + fellBack.join('\n  ') + '\n',
+    ).toEqual([]);
+  });
+
+  it('the committed generators baseline exists', () => {
+    expect(
+      existsSync(GENERATORS_BASELINE_PATH),
+      'baseline missing — for an APPROVED sweep run: UPDATE_VOICE_BASELINE=1 npx vitest run tests/copy/voiceMechanics.test.js',
+    ).toBe(true);
+  });
+
+  it('per-file generators debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)', () => {
+    /** @type {Record<string, { em: number, bang: number }>} */
+    const baseline = JSON.parse(readFileSync(GENERATORS_BASELINE_PATH, 'utf8'));
+    /** @type {string[]} */
+    const diffs = [];
+    const keys = new Set([...Object.keys(baseline), ...Object.keys(currentGenerators)]);
+    for (const k of [...keys].sort()) {
+      const b = baseline[k] || { em: 0, bang: 0 };
+      const c = currentGenerators[k] || { em: 0, bang: 0 };
+      if (b.em !== c.em || b.bang !== c.bang) {
+        diffs.push(`${k}: baseline em:${b.em} bang:${b.bang} → current em:${c.em} bang:${c.bang}`);
+      }
+    }
+    expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+  });
+
+  it('total generators debt never grows past its measured first freeze', () => {
+    // FIRST FREEZE, MEASURED (LONG TAIL #41): 39 em dashes across 8 files and
+    // ZERO exclamation points, after the 23 declared label-band literals pass by
+    // the named allowlist. The bang budget is a HARD ZERO because the directory
+    // measures zero today — the "~7 real bangs" a 2026-09-03 parser sweep
+    // reported over the unscanned directories are NOT in src/generators.
+    // MONOTONE DOWN. Raising either is an owner act, not a lane's.
+    const EM_BUDGET_GENERATORS = 39;
+    const BANG_BUDGET_GENERATORS = 0;
+    const totals = Object.values(currentGenerators).reduce(
+      (t, c) => ({ em: t.em + c.em, bang: t.bang + c.bang }),
+      { em: 0, bang: 0 },
+    );
+    expect(totals.em).toBeLessThanOrEqual(EM_BUDGET_GENERATORS);
+    expect(totals.bang).toBeLessThanOrEqual(BANG_BUDGET_GENERATORS);
+  });
+
+  it('the tier is not vacuous — it really is scanning the whole directory', () => {
+    // Without this, every arm above passes trivially if walkJs ever stops
+    // reaching src/generators (a rename, a moved root, a bad join).
+    expect(GENERATOR_FILES.length).toBeGreaterThan(100);
+    expect(GENERATOR_FILES).toContain('src/generators/crossSettlementConflicts.js');
+  });
+});
+
+describe('E2 voiceMechanics — the authored-vocabulary allowlist (ODQ §901)', () => {
+  it('EXACT — every allowlisted string is still a live literal in the file that declares it', () => {
+    // The Tier-4 quarantine idiom, applied to the allowlist: a string that has
+    // been rewritten or deleted must be STRUCK here, so the list cannot rot into
+    // a standing exemption for text nobody can find.
+    /** @type {string[]} */
+    const stale = [];
+    for (const [rel, entries] of Object.entries(AUTHORED_VOCABULARY_ALLOWLIST)) {
+      const live = new Set(stringLiteralContents(readFileSync(join(ROOT, rel), 'utf8')));
+      for (const text of Object.keys(entries)) {
+        if (!live.has(text)) stale.push(`${rel} :: ${JSON.stringify(text)}`);
+      }
+    }
+    expect(
+      stale,
+      `\nThese allowlist entries no longer match any literal. Delete them and bank the win:\n  ${stale.join('\n  ')}\n`,
+    ).toEqual([]);
+  });
+
+  it('EXACT — every allowlisted string actually carries an em dash (no entry earns its keep by accident)', () => {
+    const pointless = [];
+    for (const [rel, entries] of Object.entries(AUTHORED_VOCABULARY_ALLOWLIST)) {
+      for (const text of Object.keys(entries)) {
+        if (!text.includes('—')) pointless.push(`${rel} :: ${JSON.stringify(text)}`);
+      }
+    }
+    expect(pointless, 'an allowlist entry that exempts nothing is noise').toEqual([]);
+  });
+
+  it('every entry carries a REAL reason naming its producer line (a stub launders the exemption)', () => {
+    for (const [rel, entries] of Object.entries(AUTHORED_VOCABULARY_ALLOWLIST)) {
+      for (const [text, reason] of Object.entries(entries)) {
+        expect(
+          String(reason).length,
+          `${rel} :: ${JSON.stringify(text)} — exempted with a stub, not an argument`,
+        ).toBeGreaterThan(40);
+      }
+    }
+  });
+
+  it('the allowlist is EXACT-STRING, never a path or substring exemption (the whole point)', () => {
+    const rel = 'src/generators/economy/prosperity.js';
+    const band = 'Subsistence — survival economy';
+    // The declared band passes...
+    expect(isAllowedVocabulary(rel, band)).toBe(true);
+    // ...a sentence that merely CONTAINS it does not...
+    expect(isAllowedVocabulary(rel, `The town runs a ${band} and little else.`)).toBe(false);
+    // ...a NEW dashed string in the same file does not...
+    expect(isAllowedVocabulary(rel, 'Booming — a brand new band')).toBe(false);
+    // ...and the same string in a file that does not declare it does not.
+    expect(isAllowedVocabulary('src/generators/foodGenerator.js', band)).toBe(false);
   });
 });
 
