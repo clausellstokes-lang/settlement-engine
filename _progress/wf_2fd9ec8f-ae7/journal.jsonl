@@ -1,0 +1,7 @@
+{"type":"launched"}
+{"type":"started","key":"v2:17d04a34d0f097b92672c91d9f0598bbbf964bb251ee416ef51332983592fd0b","agentId":"a189db7321e01963d","label":"read:WC:gitlog","phase":"Read"}
+{"type":"started","key":"v2:a7dd2edb78f977328766a3ba5b061aeb0702d16c1cf49b5509d7b50ce9dc1194","agentId":"aacd4d7bbfb4d2414","label":"read:WC:ledger","phase":"Read"}
+{"type":"started","key":"v2:76191b1ed396765f1da047927b7a4bed10f0d174b0588f6eee54afe88956e59d","agentId":"a227fb69b9cfa3727","label":"read:WC:older","phase":"Read"}
+{"type":"started","key":"v2:bd841f8eb5be202cb853feb849aac24e275c7608a98fff620e63616988a7242a","agentId":"a812825937b3fed1b","label":"read:WF:gitlog","phase":"Read"}
+{"type":"started","key":"v2:fa79ae6609c35053ce76a30e5492d787b5414fec385798bc29d2099127b0be43","agentId":"aa84a5f3d2335d9ad","label":"read:WF:ledger","phase":"Read"}
+{"type":"started","key":"v2:9a9e6e89bb370a7b2060605d9594ac70eb143c1cd9bdf1c286f2c5d0c5964c25","agentId":"a8d403d8e62672acf","label":"read:WF:older","phase":"Read"}
