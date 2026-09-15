@@ -1,0 +1,2 @@
+  probe: load=3.07 workers=0 streak=1 waited=0s
+  probe: load=2.44 workers=0 streak=2 waited=60s

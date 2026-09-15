@@ -1,1 +1,968 @@
   probe: load=7.58 workers=0 streak=0 waited=0s
+  probe: load=4.47 workers=0 streak=0 waited=60s
+  probe: load=2.78 workers=0 streak=1 waited=120s
+  probe: load=2.35 workers=0 streak=2 waited=180s
+  probe: load=1.69 workers=0 streak=3 waited=240s
+QUIET CONFIRMED after 240s
+GATE_HEAD=6dcbcf2034a908bf2a89b62f187a4b7e21d4f842
+GATE_CARS=67
+GATE_PORCELAIN_PRE=[0]
+GATE_LOAD_PRE=1.69 11.14 20.69
+GATE_START=2026-09-15T18:56:04Z
+
+> settlementforge@1.0.0 check
+> npm run validate:hazard-registry && npm run validate:premortem && npm run validate:packets && npm run validate:data && npm run validate:custom-content-manifest && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run validate:tuning-bands && npm run validate:foundry-module && npm run validate:mcp-server && npm run typecheck:ratchet && npm run typecheck:domain:strict && npm run lint && npm run test:ratchet && npm run build && npm run verify:dist
+
+
+> settlementforge@1.0.0 validate:hazard-registry
+> node scripts/check-hazard-registry.mjs
+
+[hazard-registry] OK — 29 class(es): MACHINERY 13, PARTIAL 11, DOCUMENT 5, ACCEPTED 0. DOCUMENT 5/5, OWED 16/18 (shrink-only), MACHINERY 13/9 (grow-only), floor 27.
+
+> settlementforge@1.0.0 validate:premortem
+> node scripts/premortem.mjs --self-check
+
+[premortem] SELF-CHECK OK — 28 predicates (16 derived, 12 authored of which 3 hybrid), 23/29 registry classes routed to a trigger, 6 uncovered and each explicitly exempted with a reason.
+
+> settlementforge@1.0.0 validate:packets
+> node scripts/implementation-packets.mjs validate
+
+[implementation-packets] valid: 182 packets (0 READY)
+
+> settlementforge@1.0.0 validate:data
+> node scripts/find-duplicate-keys.js && node scripts/generate-institution-service-keys.mjs --check
+
+
+Summary: 0 exact duplicate(s), 0 casing collision(s)
+[institution-service-keys] verified 285 ordered keys
+
+> settlementforge@1.0.0 validate:custom-content-manifest
+> node scripts/generate-custom-content-manifest.mjs --check
+
+custom-content manifest artifacts are current
+
+> settlementforge@1.0.0 validate:migration-head
+> node scripts/check-migration-head.mjs
+
+[check-migration-head] repo migration head = 200 (200 files, contiguous)
+[check-migration-head] PENDING DEPLOY: prod applied head=121 (per supabase/applied-head.json, as of 2026-07-28) is behind repo head=200. 79 migration(s) not yet in prod: 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200. Run `supabase db push`, then bump appliedHead. (Visible, not fatal — this is the normal commit→deploy window.)
+
+> settlementforge@1.0.0 validate:edge
+> node scripts/validate-edge-functions.mjs
+
+Edge function syntax and guard contracts are valid (79 files; 43 test suites env-scope clean).
+
+> settlementforge@1.0.0 validate:map
+> node scripts/validate-map-fork.mjs
+
+Map fork JavaScript parses successfully; 135 vendored libs match the supply-chain manifest.
+
+> settlementforge@1.0.0 validate:tuning-bands
+> node scripts/check-tuning-bands.mjs
+
+[check-tuning-bands] manifest v2 OK: 9 ratified soak bands, all valid.
+
+> settlementforge@1.0.0 validate:foundry-module
+> node scripts/validate-foundry-module.mjs
+
+foundry-module OK — module.json valid, 3 script(s) parse, README present.
+
+> settlementforge@1.0.0 validate:mcp-server
+> node scripts/validate-mcp-server.mjs
+
+mcp-server OK — package.json valid + dependency-free, 3 module(s) parse, read-only tool manifest, no write/network path.
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+
+> settlementforge@1.0.0 typecheck:domain:strict
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+
+> settlementforge@1.0.0 lint
+> eslint src/ tests/ scripts/
+
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/MapOverlay.jsx
+  125:13  warning  Error: Cannot modify local variables after render completes
+
+This argument is a function which may reassign or mutate `transformOut` after render, which can cause inconsistent behavior on subsequent renders. Consider using state instead.
+
+  123 |   // ── Image-mode pan/zoom (self-owned; no FMG to mirror) ────────────────
+  124 |   const fittedRef = useRef(null); // imageUrl we've already fit, so we don't re-fit on every tick
+> 125 |   useEffect(() => {
+      |             ^^^^^^^
+> 126 |     if (!imageMode) return;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 127 |     const el = wrapperRef.current;
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 194 |     };
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 195 |   }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height]);
+      | ^^^^ This function may (indirectly) reassign or modify `transformOut` after render
+  196 |
+  197 |   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
+  198 |   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
+
+  134 |     const applyT = (t) => {
+  135 |       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
+> 136 |       if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      |           ^^^^^^^^^^^^ This modifies `transformOut`
+  137 |       const { tx, ty, scale } = transformRef.current;
+  138 |       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+  139 |       schedulePersist(tx, ty, scale, W, H);  react-hooks/immutability
+  136:11  warning  Error: This value cannot be modified
+
+Modifying component props or hook arguments is not allowed. Consider using a local variable instead.
+
+  134 |     const applyT = (t) => {
+  135 |       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
+> 136 |       if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      |           ^^^^^^^^^^^^ `transformOut` cannot be modified
+  137 |       const { tx, ty, scale } = transformRef.current;
+  138 |       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+  139 |       schedulePersist(tx, ty, scale, W, H);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/immutability
+  195:6   warning  React Hook useEffect has a missing dependency: 'transformOut'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/SingleDossierSuccessPage.jsx
+  208:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  206 |     if (verification.status !== 'verified') return;
+  207 |     autoDownloadedRef.current = true;
+> 208 |     handleDownload();
+      |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  209 |   }, [settlement, verification.status, handleDownload]);
+  210 |
+  211 |   function handleKeep() {  react-hooks/set-state-in-effect
+  363:45  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  361 |           disabled={downloading || verification.status !== 'verified'}
+  362 |         >
+> 363 |           {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
+      |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  364 |         </Button>
+  365 |
+  366 |         {downloadError && (                                                                                                                                                                                                                                                                                   react-hooks/refs
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/gallery/GalleryCampaigns.jsx
+   98:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   96 |   useEffect(() => {
+   97 |     let ignore = false;
+>  98 |     setLoading(true); setError(null);
+      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+   99 |     // The server RPC honors every facet + sort + search (normalizeMapFilters →
+  100 |     // p_filters, p_sort_key, p_search_query); kind is pinned to campaign shares
+  101 |     // over whatever the sidebar narrows  react-hooks/set-state-in-effect
+  132:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  130 |
+  131 |   useEffect(() => {
+> 132 |     if (!viewingSlug) { setDetail(null); return; }
+      |                         ^^^^^^^^^ Avoid calling setState() directly within an effect
+  133 |     let ignore = false;
+  134 |     setDetailLoading(true); setDetail(null);
+  135 |     fetchGalleryMap(viewingSlug)                                                                                              react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/gallery/GalleryMaps.jsx
+  68:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  66 |
+  67 |   useEffect(() => {
+> 68 |     if (!viewingSlug) { setDetail(null); return; }
+     |                         ^^^^^^^^^ Avoid calling setState() directly within an effect
+  69 |     let ignore = false;
+  70 |     setDetailLoading(true); setDetail(null);
+  71 |     fetchGalleryMap(viewingSlug)                                                                                                                           react-hooks/set-state-in-effect
+  80:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  78 |   useEffect(() => {
+  79 |     let ignore = false;
+> 80 |     setLoading(true); setError(null);
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  81 |     // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
+  82 |     // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
+  83 |     // honors every facet + sort + search (normalizeMapFilters → p_filters,  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/loadingJourney/ProgressJourneyOverlay.jsx
+   87:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  85 |   const videoRef = useRef(null);
+  86 |   const progressRef = useRef(progress);
+> 87 |   progressRef.current = progress;
+     |   ^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  88 |   const [videoReady, setVideoReady] = useState(false);
+  89 |
+  90 |   useEffect(() => {                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+  175:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  173 |   const [phase, setPhase] = useState('scrub'); // 'scrub' | 'fading' | 'gone'
+  174 |   const onDismissRef = useRef(onDismiss);
+> 175 |   onDismissRef.current = onDismiss;
+      |   ^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  176 |
+  177 |   const scrubbing = present === true && motionOk && !videoFailed;
+  178 |                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+  184:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  182 |     if (!scrubbing || holdAtEnd) return undefined;
+  183 |     if (progress >= 1 && phase === 'scrub') {
+> 184 |       setPhase('fading');
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  185 |       const t = setTimeout(() => {
+  186 |         setPhase('gone');
+  187 |         onDismissRef.current?.();  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/loadingJourney/useJourneyConductor.js
+  187:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  185 |   const finishedFiredRef = useRef(false);
+  186 |   const arrivedRef = useRef(arrived);
+> 187 |   arrivedRef.current = arrived;
+      |   ^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  188 |   const onFinishedRef = useRef(onFinished);
+  189 |   onFinishedRef.current = onFinished;
+  190 |                                                                                                                                                                                                                                                                                                                          react-hooks/refs
+  189:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  187 |   arrivedRef.current = arrived;
+  188 |   const onFinishedRef = useRef(onFinished);
+> 189 |   onFinishedRef.current = onFinished;
+      |   ^^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  190 |
+  191 |   useEffect(() => {
+  192 |     if (!active) {                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  193:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  191 |   useEffect(() => {
+  192 |     if (!active) {
+> 193 |       setFrame((f) => (f.phase === JOURNEY_PHASE.idle ? f : IDLE_FRAME));
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  194 |       return undefined;
+  195 |     }
+  196 |  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/loadingJourney/useRealmLoadProgress.js
+  76:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  74 |     bridgeAtRef.current = null;
+  75 |     maxRef.current = 0;
+> 76 |     setFrac(0);
+     |     ^^^^^^^ Avoid calling setState() directly within an effect
+  77 |   }, [runId]);
+  78 |
+  79 |   useEffect(() => {                                               react-hooks/set-state-in-effect
+  85:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  83 |       // Snap to the top; the overlay reads 1 and plays out its final fade.
+  84 |       maxRef.current = 1;
+> 85 |       setFrac(1);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  86 |       return undefined;
+  87 |     }
+  88 |  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/map/TerritoryLayer.jsx
+  72:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  70 |   const [pack, setPack] = useState(null);
+  71 |   useEffect(() => {
+> 72 |     setPack(null);
+     |     ^^^^^^^ Avoid calling setState() directly within an effect
+  73 |     if (!digest || imageMode) return undefined;
+  74 |     const bridge = getSpatialCaptureBridge();
+  75 |     if (!bridge || !bridge.isReady || typeof bridge.getSpatialPack !== 'function') return undefined;  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/map/WorldMapStage.jsx
+  300:54  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  298 |                   parent live-reads transformOut for the drop handler — master's
+  299 |                   onTransform CALLBACK spelling silently severed the threading. */}
+> 300 |               <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
+      |                                                      ^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  301 |             </Suspense>
+  302 |           )}
+  303 |           <Suspense fallback={null}>  react-hooks/refs
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/ai/personaSlicer.js
+  120:62  warning  'settlements' is assigned a value but never used. Allowed unused args must match /^_/u  no-unused-vars
+  121:3   warning  'tick' is assigned a value but never used. Allowed unused args must match /^_/u         no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/construct/intentComparator.js
+  25:7  warning  'HIGHER_IS_BETTER' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/content/customContentCharset.generated.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/corruptionLeash.js
+  120:35  warning  'settlement' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  120:47  warning  'worldState' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/display/stateProse/defenseStateProse.js
+  95:10  warning  'MONSTER_THREAT_TIERS' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/display/stateProse/stressorsStateProse.js
+  51:10  warning  'STRESS_TYPE_MAP' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/townCartography/cartographySkeleton.js
+  62:10  warning  'ordinal' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/pdf/sections/Cover.jsx
+  17:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 29 problems (0 errors, 29 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+
+> settlementforge@1.0.0 test:ratchet
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 38481 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] OK — no test regressions (1 known failure(s) of 32777 tests, ceiling 1).
+
+> settlementforge@1.0.0 prebuild
+> node scripts/generate-sitemap.mjs
+
+[sitemap] wrote 326 URLs to public/sitemap.xml
+
+> settlementforge@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 3897 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/domain/worldPulse/temperamentPresets.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/temperament/TemperamentPicker.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/temperament/TemperamentPicker.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/autoReloadClient.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/account/AccountAutoReloadPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/account/AccountAutoReloadPanel.jsx but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/account/AccountAutoReloadPanel.jsx, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/analytics.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/generate/SaveToLibraryButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/primitives/EditableInline.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/surveyor/InterpretApplyPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/sessionClient.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/authSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/canonEventCommandEntry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/index.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementGenerateAction.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementGenerateAction.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementLifecycleHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementPendingEditActions.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementPendingEdits.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementRenameHelpers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementSlice.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/GenerateWizard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/HomeHero.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/OutputContainer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/SettlementDetail.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/SettlementsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/SingleDossierSuccessPage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/WorldMap.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/account/ReferralRedeemBlocks.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/compendium/CompendiumGlobalSearch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/compendium/HelpPopover.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/dossier/DossierHeaderRow.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/dossier/PendingChangesBar.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/dossier/SimulationDrawer.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/dossier/WelcomeCreditCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/generate/ExportDraftButton.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/generate/LayeredConfigurationPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/generate/PipelineReveal.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/home/WelcomeBackCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/map/ModeSwitch.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/map/WizardNewsPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/map/WorldMapStage.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/pricing/FounderTile.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/pricing/PricingMomentCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/primitives/LockedDestination.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/settlement/VersionsTab.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/settlements/CampaignFolder.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/settlements/SettlementCard.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/settlements/libraryDeleteHandlers.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/components/surveyor/CorpusFactoryPanel.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/foundry/generateFoundryModule.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/hooks/useFunnelEvent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/hooks/useReferralIntent.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/hooks/useReturnVisit.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/aiAnalyst.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/gallery.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/generationTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/interview.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/landingFunnelAnalytics.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/researchCapture.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/stripe.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/main.jsx, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/accountImportBody.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/aiOverlayLifecycle.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignRegionalSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignSpatialCanonize.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignWorldPulseDeferred.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/galleryImportMap.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/galleryImportSettlement.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/mapSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/utils/generateSettlementPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/utils/generateWorldBook.js, dynamic import will not move module into another chunk.
+
+[plugin vite:reporter] 
+(!) /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/lib/researchCapture.js is dynamically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/canonLifecycleTelemetry.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/saveMoments.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/settlementRenameHelpers.js but also statically imported by /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/aiSlice.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/store/campaignAdvanceSession.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/utils/generateCampaignPDF.js, /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/laneCONSIST-930/src/utils/generateSettlementPDF.js, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/assets/livingContentRoster-CSPjScWX.js                         1.09 kB
+dist/index.html                                                     7.10 kB │ gzip:   2.84 kB
+dist/assets/livingContentRoster-BeFy-D0B.js                        55.47 kB
+dist/assets/generation.worker-C1LfnqTf.js                       1,404.70 kB
+dist/assets/customContentPreview.worker-D1CVImoA.js             1,628.15 kB
+dist/assets/pdfRender.worker-0X-9M_FS.js                        2,037.48 kB
+dist/assets/advanceInterval.worker-C23ez9o-.js                  2,660.24 kB
+dist/assets/FloatingAffordances-Cx4HzXZ_.css                        1.02 kB │ gzip:   0.42 kB
+dist/assets/index-CiMob2Ip.css                                     19.80 kB │ gzip:   5.03 kB
+dist/assets/dossierEntitlements-1Eht3dMl.js                         0.07 kB │ gzip:   0.09 kB
+dist/assets/adjudicationMark-BqEExeSV.js                            0.09 kB │ gzip:   0.10 kB
+dist/assets/rubrication-BeG2ToGk.js                                 0.13 kB │ gzip:   0.12 kB
+dist/assets/viewerAuthority-CGHWOfPP.js                             0.14 kB │ gzip:   0.14 kB
+dist/assets/magicWorksAt-FYESlcIC.js                                0.15 kB │ gzip:   0.16 kB
+dist/assets/RealmEntityContext-BKFrpAJR.js                          0.17 kB │ gzip:   0.16 kB
+dist/assets/livingContentLaw-Qr9vwnQ2.js                            0.17 kB │ gzip:   0.16 kB
+dist/assets/referralRedeem-SzIUcYJp.js                              0.18 kB │ gzip:   0.15 kB
+dist/assets/settlementConfigMigration-he6xJZCP.js                   0.19 kB │ gzip:   0.15 kB
+dist/assets/warConvergenceContract-DkRgetCT.js                      0.19 kB │ gzip:   0.15 kB
+dist/assets/support-Cvt7UAo_.js                                     0.20 kB │ gzip:   0.18 kB
+dist/assets/spatialCaptureRegistry-CzpsE_Wc.js                      0.20 kB │ gzip:   0.14 kB
+dist/assets/founderSeats-1_XhsFQD.js                                0.22 kB │ gzip:   0.18 kB
+dist/assets/text-DZjQ-OKY.js                                        0.23 kB │ gzip:   0.20 kB
+dist/assets/downloadBlob-C_JrcvrE.js                                0.24 kB │ gzip:   0.20 kB
+dist/assets/faithEventFilter-Bu_eHwP8.js                            0.24 kB │ gzip:   0.22 kB
+dist/assets/ink-Co0m7keZ.js                                         0.27 kB │ gzip:   0.22 kB
+dist/assets/lifecycleGlyphStyle-CsYTkNOY.js                         0.28 kB │ gzip:   0.19 kB
+dist/assets/roadSceneAi-DVIIdvb8.js                                 0.29 kB │ gzip:   0.22 kB
+dist/assets/accountTransferContract-C1LAP5Z4.js                     0.29 kB │ gzip:   0.23 kB
+dist/assets/defenseScoreBands-BKTSJlbR.js                           0.29 kB │ gzip:   0.25 kB
+dist/assets/numberWords-C_3apVZr.js                                 0.30 kB │ gzip:   0.19 kB
+dist/assets/lowDiscrepancy-qS9GY-8D.js                              0.31 kB │ gzip:   0.24 kB
+dist/assets/Page-ncdLHQSv.js                                        0.32 kB │ gzip:   0.25 kB
+dist/assets/roadsRescueInflame-CZ8Tpwmn.js                          0.33 kB │ gzip:   0.24 kB
+dist/assets/vendor-supabase-kHcLnhpD.js                             0.34 kB │ gzip:   0.25 kB
+dist/assets/format-number-CUT3IM7u.js                               0.34 kB │ gzip:   0.26 kB
+dist/assets/EconomyFreshnessNote-BTnEzA0f.js                        0.34 kB │ gzip:   0.27 kB
+dist/assets/founderChairRequest-C-rS9toS.js                         0.35 kB │ gzip:   0.25 kB
+dist/assets/settlementThreat-BOi34LdC.js                            0.37 kB │ gzip:   0.24 kB
+dist/assets/criminalOpRole-BApbL-8J.js                              0.37 kB │ gzip:   0.24 kB
+dist/assets/viabilityFilter-1giXQ9ar.js                             0.39 kB │ gzip:   0.23 kB
+dist/assets/DevEmailBanner-Ct6GeGs1.js                              0.40 kB │ gzip:   0.27 kB
+dist/assets/useAboutHashScroll-CcG5V8ww.js                          0.42 kB │ gzip:   0.30 kB
+dist/assets/ageBands-cotI5YTG.js                                    0.51 kB │ gzip:   0.29 kB
+dist/assets/npcBank-nnc9Rkp8.js                                     0.51 kB │ gzip:   0.29 kB
+dist/assets/docketLapse-DbDEnRo2.js                                 0.52 kB │ gzip:   0.35 kB
+dist/assets/spatialLedgerAccess-BjiEL5HR.js                         0.52 kB │ gzip:   0.28 kB
+dist/assets/useReferralIntent-Zgs9bJ99.js                           0.52 kB │ gzip:   0.33 kB
+dist/assets/aiChronicleContext-uqHyyNdM.js                          0.53 kB │ gzip:   0.33 kB
+dist/assets/entityRefTokenizer-O9QWRF1U.js                          0.53 kB │ gzip:   0.34 kB
+dist/assets/warFrontReads-Cu8lnYRq.js                               0.55 kB │ gzip:   0.32 kB
+dist/assets/relationshipColors-D5AY5ixs.js                          0.55 kB │ gzip:   0.33 kB
+dist/assets/customTradeLabelOwnership-MFpzu2XB.js                   0.56 kB │ gzip:   0.33 kB
+dist/assets/CaptchaGate-BO_Gx0Gq.js                                 0.58 kB │ gzip:   0.36 kB
+dist/assets/useLivePricing-CxuX9SLc.js                              0.60 kB │ gzip:   0.39 kB
+dist/assets/DevFlagPanel-jO9cuLjS.js                                0.61 kB │ gzip:   0.39 kB
+dist/assets/deityNames-BsuCtFPQ.js                                  0.67 kB │ gzip:   0.41 kB
+dist/assets/densityCreateBoundary-B16dnWK3.js                       0.69 kB │ gzip:   0.41 kB
+dist/assets/safetySeverity-Dp4bd7uI.js                              0.74 kB │ gzip:   0.38 kB
+dist/assets/det-pow-COyTktyy.js                                     0.74 kB │ gzip:   0.41 kB
+dist/assets/DeleteConfirmation-jw-sLhE6.js                          0.77 kB │ gzip:   0.46 kB
+dist/assets/servicesDisplay-C7S6ql7P.js                             0.80 kB │ gzip:   0.40 kB
+dist/assets/compose-BDi7k1Bj.js                                     0.80 kB │ gzip:   0.51 kB
+dist/assets/pendingEditCommitRuntime-d6seEW7n.js                    0.81 kB │ gzip:   0.47 kB
+dist/assets/EmptyState-BgsXZGxE.js                                  0.82 kB │ gzip:   0.51 kB
+dist/assets/det-math-decay-C2p8_4am.js                              0.83 kB │ gzip:   0.45 kB
+dist/assets/imFellFace-CB6BiQcX.js                                  0.83 kB │ gzip:   0.48 kB
+dist/assets/tierFacts-DO5c60ef.js                                   0.84 kB │ gzip:   0.40 kB
+dist/assets/importScrub-CHFRFy5E.js                                 0.85 kB │ gzip:   0.39 kB
+dist/assets/emailLifecycle-Bq_yFG87.js                              0.86 kB │ gzip:   0.41 kB
+dist/assets/RealmEntityLink-741xx50M.js                             0.89 kB │ gzip:   0.56 kB
+dist/assets/guidance-DK1aYUao.js                                    0.90 kB │ gzip:   0.44 kB
+dist/assets/pricingMoments-DfmnWukM.js                              0.90 kB │ gzip:   0.52 kB
+dist/assets/bandedStock-zp_PeO5r.js                                 0.91 kB │ gzip:   0.52 kB
+dist/assets/pseudo-CcLzsFHf.js                                      0.91 kB │ gzip:   0.60 kB
+dist/assets/ClerkNote-lylNPEM2.js                                   0.91 kB │ gzip:   0.49 kB
+dist/assets/ResetPasswordPage-P8YJoPul.js                           0.92 kB │ gzip:   0.55 kB
+dist/assets/consistency-Batx9waE.js                                 0.94 kB │ gzip:   0.54 kB
+dist/assets/PageHeader-B1Jxws2-.js                                  0.94 kB │ gzip:   0.52 kB
+dist/assets/campaignHydration-bpLeMrp_.js                           0.95 kB │ gzip:   0.53 kB
+dist/assets/Segmented-D2mJfnE8.js                                   0.96 kB │ gzip:   0.61 kB
+dist/assets/design-DnTI6yla.js                                      0.98 kB │ gzip:   0.55 kB
+dist/assets/importReconciliationCommandRuntime-B7bPGBkh.js          0.99 kB │ gzip:   0.53 kB
+dist/assets/det-math-BvTfuDJc.js                                    1.00 kB │ gzip:   0.52 kB
+dist/assets/FounderBadge-DPdpiwSS.js                                1.01 kB │ gzip:   0.64 kB
+dist/assets/AccountFAQ-MTMW7Qlj.js                                  1.01 kB │ gzip:   0.59 kB
+dist/assets/NarrativeNote-ChDgmmCX.js                               1.01 kB │ gzip:   0.62 kB
+dist/assets/SessionEvictedBanner-DlgGkKOp.js                        1.01 kB │ gzip:   0.65 kB
+dist/assets/campaignDeletionSession-cuqCXMoX.js                     1.02 kB │ gzip:   0.53 kB
+dist/assets/founderTransferClient-CXzYTLRX.js                       1.02 kB │ gzip:   0.45 kB
+dist/assets/PublicSimulationBand-Dk1L804N.js                        1.03 kB │ gzip:   0.52 kB
+dist/assets/dossierRetroClaim-BB5k_QPk.js                           1.05 kB │ gzip:   0.56 kB
+dist/assets/advanceWorkerClient-BJ1oYNzV.js                         1.11 kB │ gzip:   0.62 kB
+dist/assets/proseFieldLabels-w3GBSsvK.js                            1.14 kB │ gzip:   0.42 kB
+dist/assets/anonGenCounter-_MF8mMez.js                              1.15 kB │ gzip:   0.50 kB
+dist/assets/trendLens-DeNFZMnj.js                                   1.17 kB │ gzip:   0.65 kB
+dist/assets/useDialogFocusTrap-BCm-qAOE.js                          1.21 kB │ gzip:   0.62 kB
+dist/assets/StateBadge-D0AdxrEe.js                                  1.22 kB │ gzip:   0.75 kB
+dist/assets/Card-B8GgITXt.js                                        1.22 kB │ gzip:   0.66 kB
+dist/assets/activeCustomContentContext-BzGYq5bu.js                  1.22 kB │ gzip:   0.63 kB
+dist/assets/checkoutReconcile-fiyRlhux.js                           1.23 kB │ gzip:   0.65 kB
+dist/assets/campaignContentBindingCache-Sh4dLtH8.js                 1.23 kB │ gzip:   0.65 kB
+dist/assets/RegisterPage-C0ubMe4F.js                                1.23 kB │ gzip:   0.72 kB
+dist/assets/forecastFingerprint-DXGQZUlr.js                         1.29 kB │ gzip:   0.68 kB
+dist/assets/tableClerk-CN-ucDCO.js                                  1.30 kB │ gzip:   0.73 kB
+dist/assets/relationshipEdgeStyle-gF0gA26J.js                       1.31 kB │ gzip:   0.52 kB
+dist/assets/ConfirmEmailPage-CsmJfpkB.js                            1.33 kB │ gzip:   0.66 kB
+dist/assets/citations-DAaaWgMI.js                                   1.34 kB │ gzip:   0.67 kB
+dist/assets/VerifyEmailPage-CzaTU3wQ.js                             1.34 kB │ gzip:   0.69 kB
+dist/assets/realmMapExport-BBqx34xX.js                              1.39 kB │ gzip:   0.77 kB
+dist/assets/TurnstileGate-BZ5f2nPz.js                               1.40 kB │ gzip:   0.77 kB
+dist/assets/logo-qupQdHAe.js                                        1.41 kB │ gzip:   0.82 kB
+dist/assets/Badge-D5PvnTwU.js                                       1.43 kB │ gzip:   0.77 kB
+dist/assets/importReconciliationCommandPersistence-BprERBKM.js      1.43 kB │ gzip:   0.76 kB
+dist/assets/LegalPage-DabKIPIS.js                                   1.45 kB │ gzip:   0.72 kB
+dist/assets/CampaignEmptyState-CR0BQHsZ.js                          1.45 kB │ gzip:   0.76 kB
+dist/assets/authSecurity-D76bohL-.js                                1.46 kB │ gzip:   0.71 kB
+dist/assets/campaignContentBindingModel-DgNS30q4.js                 1.46 kB │ gzip:   0.57 kB
+dist/assets/SignInPage-P4rygkoA.js                                  1.46 kB │ gzip:   0.81 kB
+dist/assets/DesktopOnlyGate-By52PInY.js                             1.48 kB │ gzip:   0.76 kB
+dist/assets/entitlementLadder-9h2OziPM.js                           1.50 kB │ gzip:   0.54 kB
+dist/assets/generationRequest-VMSGHteD.js                           1.52 kB │ gzip:   0.85 kB
+dist/assets/canonLifecycleTelemetry-e384Pffu.js                     1.53 kB │ gzip:   0.69 kB
+dist/assets/mobilizationStatus-C1qoZwUX.js                          1.54 kB │ gzip:   0.74 kB
+dist/assets/customContentPreviewClient-CN6Mdwx2.js                  1.56 kB │ gzip:   0.77 kB
+dist/assets/dossierClaimStash-DRw-nRZ0.js                           1.58 kB │ gzip:   0.60 kB
+dist/assets/Disclosure-B1Jj0ouy.js                                  1.60 kB │ gzip:   0.86 kB
+dist/assets/consentSync-DzAHFHJi.js                                 1.61 kB │ gzip:   0.83 kB
+dist/assets/RealmUnfurlLoading-D7NHBl80.js                          1.62 kB │ gzip:   0.92 kB
+dist/assets/intentComparator-Hdw1cyMe.js                            1.63 kB │ gzip:   0.87 kB
+dist/assets/useOwnerScopedSaves-DAqxCHfs.js                         1.64 kB │ gzip:   0.81 kB
+dist/assets/authIntents-BiMovPIh.js                                 1.66 kB │ gzip:   0.82 kB
+dist/assets/useReaderAudience-x95JspUW.js                           1.66 kB │ gzip:   0.82 kB
+dist/assets/credibilityRead-BlOJnZVB.js                             1.67 kB │ gzip:   0.86 kB
+dist/assets/tonightAtTheTable-BywtHgeU.js                           1.72 kB │ gzip:   0.96 kB
+dist/assets/labelBands-BDv-706K.js                                  1.73 kB │ gzip:   0.84 kB
+dist/assets/realmArcSummary-DKltw5Rx.js                             1.74 kB │ gzip:   0.88 kB
+dist/assets/purchaseHistory-DANR5afs.js                             1.75 kB │ gzip:   0.84 kB
+dist/assets/errandMint-dbYH4mpn.js                                  1.75 kB │ gzip:   0.71 kB
+dist/assets/sessionClient-CgYUU8TH.js                               1.77 kB │ gzip:   0.87 kB
+dist/assets/CampaignSyncBanner-omMldud5.js                          1.77 kB │ gzip:   1.03 kB
+dist/assets/constructionUsage-ldRM8ce1.js                           1.79 kB │ gzip:   0.91 kB
+dist/assets/livingContentRoster-k7ArRSds.js                         1.79 kB │ gzip:   0.94 kB
+dist/assets/namedPersonTransit-ljFmluJc.js                          1.79 kB │ gzip:   0.76 kB
+dist/assets/AuthModal-CP__3xv2.js                                   1.80 kB │ gzip:   0.97 kB
+dist/assets/treatyOrientation-B4NtBDt-.js                           1.81 kB │ gzip:   0.68 kB
+dist/assets/interpretReview-DzKvdILz.js                             1.83 kB │ gzip:   0.80 kB
+dist/assets/mapThumb-TtkSzCf-.js                                    1.89 kB │ gzip:   0.83 kB
+dist/assets/AddressChain-DUSCWgoo.js                                1.89 kB │ gzip:   0.85 kB
+dist/assets/editFingerprint-Dr5RRdTk.js                             1.96 kB │ gzip:   0.84 kB
+dist/assets/politicsRead-4j8s3qsu.js                                1.99 kB │ gzip:   0.98 kB
+dist/assets/tabConstants-CQ2z1c7N.js                                1.99 kB │ gzip:   0.84 kB
+dist/assets/applyDispatch-DsGjBlHG.js                               2.01 kB │ gzip:   0.85 kB
+dist/assets/galleryImportSettlement-BkKKox-4.js                     2.02 kB │ gzip:   1.06 kB
+dist/assets/FirstDossierCallouts-D5PZIYxK.js                        2.03 kB │ gzip:   1.11 kB
+dist/assets/userRoutes-oRjsniH2.js                                  2.05 kB │ gzip:   0.92 kB
+dist/assets/pools-Njh_YDS9.js                                       2.05 kB │ gzip:   0.86 kB
+dist/assets/pantheonDepth-CaO2xtXb.js                               2.14 kB │ gzip:   1.01 kB
+dist/assets/regionalMapOverlay-Ch86xSBu.js                          2.15 kB │ gzip:   1.08 kB
+dist/assets/TravelRingsLayer-C9neEZS6.js                            2.22 kB │ gzip:   1.14 kB
+dist/assets/BottomSheet-DvKftKpc.js                                 2.22 kB │ gzip:   1.17 kB
+dist/assets/surveyorAutonomy-BEBc3-un.js                            2.24 kB │ gzip:   1.14 kB
+dist/assets/placementRaster-mMN-PfKu.js                             2.25 kB │ gzip:   1.01 kB
+dist/assets/chronicle-CW-ShS29.js                                   2.26 kB │ gzip:   1.07 kB
+dist/assets/tradePressure-bKP1gphU.js                               2.27 kB │ gzip:   1.04 kB
+dist/assets/BountyPage-CIB8DSb_.js                                  2.27 kB │ gzip:   1.14 kB
+dist/assets/PricingMomentCard-Dq1dK1ga.js                           2.27 kB │ gzip:   1.22 kB
+dist/assets/useJourneyConductor-NHhoqBZg.js                         2.29 kB │ gzip:   1.05 kB
+dist/assets/opVocabulary-CUNtO-y9.js                                2.31 kB │ gzip:   1.18 kB
+dist/assets/warEndingClassifier-BtctpEdl.js                         2.32 kB │ gzip:   1.09 kB
+dist/assets/CovenantPage-BA6Vtq6S.js                                2.34 kB │ gzip:   1.17 kB
+dist/assets/SetNewPasswordPage-kyU2X-hx.js                          2.34 kB │ gzip:   1.05 kB
+dist/assets/generationTelemetry-CsqR7dpj.js                         2.37 kB │ gzip:   1.17 kB
+dist/assets/variants-DylSHtSY.js                                    2.38 kB │ gzip:   0.80 kB
+dist/assets/DestroySettlementControl-BoSl7cEg.js                    2.39 kB │ gzip:   1.11 kB
+dist/assets/tradeFlow-D8EGbqvd.js                                   2.39 kB │ gzip:   1.29 kB
+dist/assets/importReconciliationShared-G8JDFbFt.js                  2.40 kB │ gzip:   1.11 kB
+dist/assets/MobileTabStrip-Dvr0OyCb.js                              2.42 kB │ gzip:   1.31 kB
+dist/assets/aiAnalyst-BzZsQ6pl.js                                   2.44 kB │ gzip:   1.23 kB
+dist/assets/settlementDeityHelpers-DM6EgS7m.js                      2.45 kB │ gzip:   1.06 kB
+dist/assets/AutoSaveChip-C8xW1BKp.js                                2.45 kB │ gzip:   1.38 kB
+dist/assets/occupationStatus-CnCqYrPy.js                            2.46 kB │ gzip:   0.99 kB
+dist/assets/accountContentReferenceInspection-C1rpZUXN.js           2.47 kB │ gzip:   1.09 kB
+dist/assets/ai-DZMVJ0h_.js                                          2.47 kB │ gzip:   1.30 kB
+dist/assets/stripe-DI50xELk.js                                      2.50 kB │ gzip:   1.22 kB
+dist/assets/JourneyFilm-Cud3Rh-2.js                                 2.52 kB │ gzip:   1.26 kB
+dist/assets/userRouteCharter-CS7yvmWY.js                            2.52 kB │ gzip:   1.20 kB
+dist/assets/routeNetworkConsumersTransit-CbZs152n.js                2.54 kB │ gzip:   1.07 kB
+dist/assets/imageUpload-CX3GEEXJ.js                                 2.54 kB │ gzip:   1.17 kB
+dist/assets/PlotHooksTab-D9zZx-dG.js                                2.56 kB │ gzip:   1.32 kB
+dist/assets/QuickInspector-DkLS3_Oz.js                              2.57 kB │ gzip:   1.29 kB
+dist/assets/saveMoments-D61cR0Ss.js                                 2.58 kB │ gzip:   1.02 kB
+dist/assets/armyStrength-C5OGysEO.js                                2.62 kB │ gzip:   1.20 kB
+dist/assets/RoadmapPage-CvFguZo3.js                                 2.65 kB │ gzip:   1.25 kB
+dist/assets/LockControls-B6DT7HeP.js                                2.71 kB │ gzip:   1.22 kB
+dist/assets/spatialSubstrateRead-TzyXAidz.js                        2.75 kB │ gzip:   1.35 kB
+dist/assets/TerrainToolbar-BoAX5C0n.js                              2.80 kB │ gzip:   1.30 kB
+dist/assets/heraldFilter-Dw9WUPAL.js                                2.80 kB │ gzip:   1.23 kB
+dist/assets/interview-CtNzJIxf.js                                   2.87 kB │ gzip:   1.43 kB
+dist/assets/WorkbenchFactionRename-Dbyppn8s.js                      2.91 kB │ gzip:   1.42 kB
+dist/assets/PlacementDetailCard-DzDTVjrc.js                         2.93 kB │ gzip:   1.37 kB
+dist/assets/SystemStateBar-DdqlfbmO.js                              2.94 kB │ gzip:   1.26 kB
+dist/assets/timelineTrack-B2Sy9i-8.js                               2.94 kB │ gzip:   1.24 kB
+dist/assets/pendingDossier-CYUkVBPQ.js                              2.96 kB │ gzip:   1.11 kB
+dist/assets/configVocabulary-K41awK_d.js                            3.00 kB │ gzip:   1.32 kB
+dist/assets/relationshipCompatibility-DREeWJJP.js                   3.00 kB │ gzip:   0.79 kB
+dist/assets/galleryUtils-BpHTyq5d.js                                3.01 kB │ gzip:   1.45 kB
+dist/assets/feasibilityGate-8feCpdn8.js                             3.07 kB │ gzip:   1.38 kB
+dist/assets/civility-DNYtUHRj.js                                    3.16 kB │ gzip:   1.55 kB
+dist/assets/settlement-normalize-BleiCyLV.js                        3.18 kB │ gzip:   1.50 kB
+dist/assets/pulseHelpers-Bq0b6HIU.js                                3.20 kB │ gzip:   1.35 kB
+dist/assets/PipelineReveal-LZHq34WK.js                              3.23 kB │ gzip:   1.71 kB
+dist/assets/contentEnvironment-D4FChsMA.js                          3.23 kB │ gzip:   1.22 kB
+dist/assets/NarrativeArchivePanel-wKhh3_MG.js                       3.24 kB │ gzip:   1.55 kB
+dist/assets/deityEffects-nusbW6Ue.js                                3.27 kB │ gzip:   1.11 kB
+dist/assets/NotesTab-CvrXkzmq.js                                    3.33 kB │ gzip:   1.56 kB
+dist/assets/foundersHall-BJBQNzU5.js                                3.39 kB │ gzip:   1.63 kB
+dist/assets/RoutesToolbar-SV0IrPqC.js                               3.39 kB │ gzip:   1.46 kB
+dist/assets/worldSnapshot-CCvDV9aD.js                               3.40 kB │ gzip:   1.71 kB
+dist/assets/importReconciliationCommandEntry-Bz-_H3q-.js            3.41 kB │ gzip:   1.55 kB
+dist/assets/publicSafe-ClHqX9kz.js                                  3.42 kB │ gzip:   1.55 kB
+dist/assets/WelcomeCreditCard-su1Lm-Ct.js                           3.42 kB │ gzip:   1.60 kB
+dist/assets/regionalFingerprint-D13FO1Lt.js                         3.42 kB │ gzip:   1.54 kB
+dist/assets/ChronicleTab-CGgd7PuS.js                                3.47 kB │ gzip:   1.37 kB
+dist/assets/stressorAftermath-DmWwfWG6.js                           3.49 kB │ gzip:   1.60 kB
+dist/assets/useRealmEntityNav-_S0UnHJp.js                           3.53 kB │ gzip:   1.46 kB
+dist/assets/treatySuccessionReaffirmedVoice-3vQ77VUp.js             3.53 kB │ gzip:   1.70 kB
+dist/assets/regenIdentityFold-CEqIX1m6.js                           3.56 kB │ gzip:   1.46 kB
+dist/assets/settlementWorldChronicle-B-1JXYFa.js                    3.57 kB │ gzip:   1.59 kB
+dist/assets/warSiegeVerdict-q5TUuKrZ.js                             3.62 kB │ gzip:   1.74 kB
+dist/assets/FirstHundredPage-BKmFgAaz.js                            3.64 kB │ gzip:   1.61 kB
+dist/assets/AssignDeityFromMap-DmGcBGWg.js                          3.68 kB │ gzip:   1.62 kB
+dist/assets/WhileYouWereAway-BPIBG8Kl.js                            3.68 kB │ gzip:   1.51 kB
+dist/assets/Primitives-CHQsEtvu.js                                  3.69 kB │ gzip:   1.35 kB
+dist/assets/ProgressJourneyOverlay-BJY2-mol.js                      3.69 kB │ gzip:   1.78 kB
+dist/assets/saveAdmission-DpBC8kok.js                               3.70 kB │ gzip:   1.49 kB
+dist/assets/MagicTab-D8Jrc5YU.js                                    3.73 kB │ gzip:   1.45 kB
+dist/assets/drainQueuedEvents-D2PfEGUS.js                           3.73 kB │ gzip:   1.70 kB
+dist/assets/SimulationDrawer-BdzuvqMJ.js                            3.74 kB │ gzip:   1.75 kB
+dist/assets/landingFixture-N5vvkeBd.js                              3.80 kB │ gzip:   1.76 kB
+dist/assets/treatySuccessionDecision-CdGlNDCD.js                    3.82 kB │ gzip:   1.75 kB
+dist/assets/instantWorldBody-CN_onCL6.js                            3.83 kB │ gzip:   1.93 kB
+dist/assets/pantheon-CmiNjOeX.js                                    3.84 kB │ gzip:   1.65 kB
+dist/assets/WorldPulsePrimitives-BxYFSH0M.js                        3.84 kB │ gzip:   1.54 kB
+dist/assets/KeyboardPlacementControl-D5cQ7Zzw.js                    3.90 kB │ gzip:   1.91 kB
+dist/assets/heraldRegister-BYcKaZkb.js                              3.91 kB │ gzip:   1.79 kB
+dist/assets/surveyorPanelKit-w3cP73H-.js                            3.92 kB │ gzip:   1.59 kB
+dist/assets/customSupplyChainPresentation-DAuaMIHb.js               3.94 kB │ gzip:   1.67 kB
+dist/assets/npcInteriorityRead-BBu_zIEF.js                          3.94 kB │ gzip:   1.86 kB
+dist/assets/spatialCost-DPo_oc88.js                                 3.98 kB │ gzip:   1.43 kB
+dist/assets/canonEventCommandPersistence-BawlzacQ.js                3.98 kB │ gzip:   1.18 kB
+dist/assets/SubstrateTab-8FvYrWw1.js                                4.02 kB │ gzip:   1.80 kB
+dist/assets/hegemony-CxnhOJa5.js                                    4.04 kB │ gzip:   1.85 kB
+dist/assets/FounderTile-Dtscux-a.js                                 4.04 kB │ gzip:   1.88 kB
+dist/assets/canonEventCommandRecovery-Cs6wyU6P.js                   4.05 kB │ gzip:   1.58 kB
+dist/assets/newsBody-mKGr-XU5.js                                    4.10 kB │ gzip:   1.78 kB
+dist/assets/commandEnvelope-DenhDA1_.js                             4.11 kB │ gzip:   1.66 kB
+dist/assets/PublicDossierView-BTxFvPTP.js                           4.13 kB │ gzip:   2.01 kB
+dist/assets/advanceCampaignWorld-dCPYblfa.js                        4.13 kB │ gzip:   1.89 kB
+dist/assets/npcCredibility-CWaCWbuZ.js                              4.15 kB │ gzip:   1.90 kB
+dist/assets/WorkbenchProseEditor-CfgTbLyQ.js                        4.18 kB │ gzip:   1.87 kB
+dist/assets/vendor-icons-BhnrOqvz.js                                4.23 kB │ gzip:   1.76 kB
+dist/assets/neighbourBackLink-BIJo2pBs.js                           4.23 kB │ gzip:   1.63 kB
+dist/assets/campaignSync-DDPqsuNW.js                                4.24 kB │ gzip:   1.84 kB
+dist/assets/embattlement-C13Z9rGo.js                                4.27 kB │ gzip:   1.96 kB
+dist/assets/interpretApply-DB497SVL.js                              4.27 kB │ gzip:   1.80 kB
+dist/assets/analyticsFlush-BSl_sO4Z.js                              4.31 kB │ gzip:   1.85 kB
+dist/assets/Dialog-B_YOY5C8.js                                      4.34 kB │ gzip:   1.66 kB
+dist/assets/rulingPowerCoup-CBJ0pgfi.js                             4.36 kB │ gzip:   1.97 kB
+dist/assets/customContentCutover-BzJhAOTT.js                        4.38 kB │ gzip:   1.69 kB
+dist/assets/index-r9W0pkpU.js                                       4.39 kB │ gzip:   2.00 kB
+dist/assets/CharterRoadCard-DK1htzOk.js                             4.41 kB │ gzip:   2.05 kB
+dist/assets/CommandPalette-C9L2kBPl.js                              4.43 kB │ gzip:   2.17 kB
+dist/assets/PostGenCoach-CUeF0ATe.js                                4.43 kB │ gzip:   2.03 kB
+dist/assets/UndoHistoryPanel-Dh2ghDUR.js                            4.57 kB │ gzip:   2.19 kB
+dist/assets/settlementQuickGuide-BeDVo_Sf.js                        4.68 kB │ gzip:   1.97 kB
+dist/assets/tableEvents-Cn0hnN2I.js                                 4.70 kB │ gzip:   2.05 kB
+dist/assets/TraditionsTab-CpVLOUPM.js                               4.70 kB │ gzip:   2.10 kB
+dist/assets/DMCompassTab-C2RNFrJo.js                                4.71 kB │ gzip:   1.61 kB
+dist/assets/GatheredAdjudication-BPMF8ryN.js                        4.74 kB │ gzip:   2.23 kB
+dist/assets/npcFacetContract-CwNEhTEK.js                            4.78 kB │ gzip:   1.35 kB
+dist/assets/auspice-C2Qy3wId.js                                     4.82 kB │ gzip:   2.26 kB
+dist/assets/AnnotateToolbar-BpFtateA.js                             4.82 kB │ gzip:   1.60 kB
+dist/assets/guidanceRegistry-DZjwRZwy.js                            4.83 kB │ gzip:   1.24 kB
+dist/assets/warRemembrance-D_9u4ChC.js                              4.90 kB │ gzip:   2.26 kB
+dist/assets/warStatus-B1tL7PCS.js                                   4.91 kB │ gzip:   1.87 kB
+dist/assets/deityAuthoring-BUr4QAbv.js                              4.96 kB │ gzip:   2.29 kB
+dist/assets/customContentApply-nj6tDH-b.js                          4.98 kB │ gzip:   2.03 kB
+dist/assets/ImageCropper-BFdg9Lv1.js                                5.13 kB │ gzip:   2.41 kB
+dist/assets/militaryStrength-CHEHzYl3.js                            5.24 kB │ gzip:   2.43 kB
+dist/assets/faithField-DEqTI3Vq.js                                  5.27 kB │ gzip:   2.43 kB
+dist/assets/RumorsTab-D3TYL6MO.js                                   5.27 kB │ gzip:   2.18 kB
+dist/assets/content-identity-CFIG6Vg0.js                            5.35 kB │ gzip:   2.61 kB
+dist/assets/warAndRoadNames-DGfTGicl.js                             5.42 kB │ gzip:   2.18 kB
+dist/assets/SummaryTabV2-D8MC3VGd.js                                5.44 kB │ gzip:   1.89 kB
+dist/assets/genesis-j-1tgqiR.js                                     5.44 kB │ gzip:   2.50 kB
+dist/assets/AiUsageDashboard-DRvaJCfy.js                            5.45 kB │ gzip:   2.28 kB
+dist/assets/TableView-D49Mntd1.js                                   5.47 kB │ gzip:   2.26 kB
+dist/assets/campaignContentBindingCas-w5uh80AL.js                   5.49 kB │ gzip:   1.65 kB
+dist/assets/campaignCanonRelationshipSession-BfMpOuCw.js            5.52 kB │ gzip:   2.33 kB
+dist/assets/ExportSheet-F4zwTC4N.js                                 5.55 kB │ gzip:   2.27 kB
+dist/assets/dossierViewModel-BtsgGCJM.js                            5.55 kB │ gzip:   2.39 kB
+dist/assets/piety-Do6AXlM_.js                                       5.59 kB │ gzip:   2.34 kB
+dist/assets/pipeline-metadata-Bpb8SnQ1.js                           5.66 kB │ gzip:   2.10 kB
+dist/assets/pulseFingerprint-CfgwXf8_.js                            5.89 kB │ gzip:   2.41 kB
+dist/assets/MapLegend-BWL29yKg.js                                   5.91 kB │ gzip:   1.99 kB
+dist/assets/npcVerbsBody-BhUmxwsm.js                                5.92 kB │ gzip:   2.31 kB
+dist/assets/tradeSalience-DOKcfThb.js                               5.93 kB │ gzip:   2.57 kB
+dist/assets/foodStockpile-DkJSQ2ov.js                               6.00 kB │ gzip:   2.55 kB
+dist/assets/warTerminationCauseTables-C00AB5OQ.js                   6.03 kB │ gzip:   2.47 kB
+dist/assets/HeraldWanderers-Movo75aH.js                             6.05 kB │ gzip:   2.55 kB
+dist/assets/autoplacement-LZzBxGjy.js                               6.07 kB │ gzip:   2.89 kB
+dist/assets/forecastRun-C1RTELM6.js                                 6.16 kB │ gzip:   2.81 kB
+dist/assets/pestilence-DHAY7Hum.js                                  6.17 kB │ gzip:   2.49 kB
+dist/assets/pendingEditsPreview-BV6kfxfh.js                         6.19 kB │ gzip:   2.21 kB
+dist/assets/CampaignContentBindingLifecycle-CSiIgPpY.js             6.24 kB │ gzip:   2.33 kB
+dist/assets/index-BG-MVzBw.js                                       6.28 kB │ gzip:   2.15 kB
+dist/assets/VersionDiffView-BIxj3Vqy.js                             6.34 kB │ gzip:   2.83 kB
+dist/assets/customContentCommands-blQPbD44.js                       6.54 kB │ gzip:   2.30 kB
+dist/assets/faithPanelModel-DRQ3Vokq.js                             6.57 kB │ gzip:   2.97 kB
+dist/assets/entityLinks-BrqQ90Mg.js                                 6.61 kB │ gzip:   2.58 kB
+dist/assets/campaignSpatialCanonize-DmQm4APO.js                     6.66 kB │ gzip:   2.82 kB
+dist/assets/brokerageServicesPlant-COA4hKu4.js                      6.68 kB │ gzip:   2.88 kB
+dist/assets/PrivacyPage-c6bJoTWp.js                                 6.68 kB │ gzip:   2.73 kB
+dist/assets/InstantWorldEntry-RDwhpNG8.js                           6.76 kB │ gzip:   2.81 kB
+dist/assets/worldPlan-B8ffu7EM.js                                   6.77 kB │ gzip:   2.88 kB
+dist/assets/galleryImportMap-BhO5LerZ.js                            6.86 kB │ gzip:   2.70 kB
+dist/assets/beliefAxes-CMN-dHAv.js                                  6.86 kB │ gzip:   2.88 kB
+dist/assets/authUI-cr7BRyIm.js                                      6.98 kB │ gzip:   2.88 kB
+dist/assets/heraldCausalGrammar-BZ7zJl16.js                         7.00 kB │ gzip:   2.28 kB
+dist/assets/generateSettlementPDF--AkBRjlB.js                       7.25 kB │ gzip:   3.47 kB
+dist/assets/HeraldRemembrance-0VnRQ8LJ.js                           7.29 kB │ gzip:   2.79 kB
+dist/assets/HeraldMobileCompanion-BEll5hTS.js                       7.38 kB │ gzip:   3.33 kB
+dist/assets/WorldPage-Ck68EJK2.js                                   7.39 kB │ gzip:   3.13 kB
+dist/assets/SettlementPalette-Dice6b3h.js                           7.43 kB │ gzip:   3.11 kB
+dist/assets/accountImport-DLFGz2ph.js                               7.56 kB │ gzip:   2.77 kB
+dist/assets/flags-B3DQnreH.js                                       7.58 kB │ gzip:   3.66 kB
+dist/assets/FaithSection-DLfyUjMp.js                                7.58 kB │ gzip:   2.48 kB
+dist/assets/magicProfile-BmBTi9Ex.js                                7.59 kB │ gzip:   2.54 kB
+dist/assets/useRealmInspector-DEF5ZIXf.js                           7.64 kB │ gzip:   3.00 kB
+dist/assets/FaithTab-Bxguw5ja.js                                    7.76 kB │ gzip:   2.82 kB
+dist/assets/PantheonPanel-Bjsr44_m.js                               7.79 kB │ gzip:   2.74 kB
+dist/assets/AuthPanel-gEpigVaC.js                                   7.87 kB │ gzip:   2.55 kB
+dist/assets/RealmMobileGate-DU4zR154.js                             7.90 kB │ gzip:   3.73 kB
+dist/assets/importReconciliationCommandTransaction-Dq6W9unc.js      7.93 kB │ gzip:   3.03 kB
+dist/assets/discoverDependencyCandidates-B2U00-km.js                7.96 kB │ gzip:   2.78 kB
+dist/assets/simulationProfile-BTzkUviJ.js                           7.96 kB │ gzip:   3.18 kB
+dist/assets/LayersPanel-CVQIzGC6.js                                 7.98 kB │ gzip:   2.88 kB
+dist/assets/PipelineRail-By_tEwCs.js                                8.08 kB │ gzip:   3.04 kB
+dist/assets/cross-settlement-conflicts-DOiFSQTs.js                  8.11 kB │ gzip:   2.98 kB
+dist/assets/DeityAssignmentPanel-CiT0CdLw.js                        8.21 kB │ gzip:   2.47 kB
+dist/assets/PurchaseModal-B6MsHOvi.js                               8.23 kB │ gzip:   3.10 kB
+dist/assets/treatyBreach-R4ON1aLB.js                                8.35 kB │ gzip:   3.23 kB
+dist/assets/simulationRules-DmDEacj2.js                             8.37 kB │ gzip:   2.81 kB
+dist/assets/distanceRead-GmHOzVIS.js                                8.56 kB │ gzip:   2.94 kB
+dist/assets/canonEventCommandTransaction-Bwj-68PA.js                8.61 kB │ gzip:   3.18 kB
+dist/assets/hookEscalation-DlrlkhqK.js                              8.61 kB │ gzip:   3.49 kB
+dist/assets/TermsPage-CaWwlHvr.js                                   8.69 kB │ gzip:   3.45 kB
+dist/assets/BuyThisDossier-BI6aULoY.js                              8.74 kB │ gzip:   3.35 kB
+dist/assets/LiveWarStatus-0FWr60uS.js                               8.75 kB │ gzip:   3.79 kB
+dist/assets/SupplyChainsPanel-CLoUi7I3.js                           8.78 kB │ gzip:   2.89 kB
+dist/assets/roadNetwork-B7YjtZ-v.js                                 8.82 kB │ gzip:   3.74 kB
+dist/assets/settlementGenerateAction-C1S7wOJH.js                    8.84 kB │ gzip:   3.80 kB
+dist/assets/peaceTermsDocument-f_NINsu7.js                          8.91 kB │ gzip:   3.27 kB
+dist/assets/districtProfile-FwLS-e7z.js                             9.05 kB │ gzip:   3.85 kB
+dist/assets/WarFaithDesk-BU-E9Lpz.js                                9.06 kB │ gzip:   3.53 kB
+dist/assets/WandererVerbControls-CZjjoikA.js                        9.18 kB │ gzip:   3.68 kB
+dist/assets/SingleDossierSuccessPage-CLCgurC8.js                    9.19 kB │ gzip:   3.28 kB
+dist/assets/humanizeEngineTokens-CJTLI8Hd.js                        9.24 kB │ gzip:   3.24 kB
+dist/assets/threatProfile-qIpSZVz0.js                               9.27 kB │ gzip:   3.23 kB
+dist/assets/dispositionLedger-DtbrGZyc.js                           9.37 kB │ gzip:   3.42 kB
+dist/assets/AutoplacementConsent-ChzTlZ5n.js                        9.38 kB │ gzip:   3.57 kB
+dist/assets/stopConditions-Cd3Zsn60.js                              9.66 kB │ gzip:   3.40 kB
+dist/assets/warReasonTaxonomy-BtpJbuqb.js                           9.73 kB │ gzip:   3.22 kB
+dist/assets/demographicsRates-BSWhJO22.js                           9.76 kB │ gzip:   3.97 kB
+dist/assets/CoverImageField-BudhG32S.js                             9.79 kB │ gzip:   3.81 kB
+dist/assets/NPCsTab-DY1cU1qz.js                                    10.01 kB │ gzip:   4.34 kB
+dist/assets/HomeLanding-DJddrj94.js                                10.04 kB │ gzip:   4.59 kB
+dist/assets/npcLedger-DcqjuwV6.js                                  10.15 kB │ gzip:   3.45 kB
+dist/assets/npcLedgerProjection-DoxafEaI.js                        10.33 kB │ gzip:   3.61 kB
+dist/assets/custom-schema-6V4zx370.js                              10.43 kB │ gzip:   4.02 kB
+dist/assets/kernel-CznyAwqE.js                                     10.46 kB │ gzip:   4.26 kB
+dist/assets/ContentSampleReceipt-BkXLJcWv.js                       10.61 kB │ gzip:   3.35 kB
+dist/assets/CorpusFactoryPanel-DGIwircZ.js                         10.67 kB │ gzip:   4.34 kB
+dist/assets/conquestDoctrineStage-D_qIT_Ro.js                      10.68 kB │ gzip:   4.08 kB
+dist/assets/composeInstantWorld-Bky8rzJG.js                        10.87 kB │ gzip:   4.55 kB
+dist/assets/treasury-6HwCboKv.js                                   10.95 kB │ gzip:   3.90 kB
+dist/assets/PendingChangesBar-7Z_Ns-X4.js                          11.04 kB │ gzip:   4.28 kB
+dist/assets/partyImpact-DLXFSmc6.js                                11.07 kB │ gzip:   4.36 kB
+dist/assets/paradigmAxisCatalog-CyiHqnyi.js                        11.11 kB │ gzip:   2.19 kB
+dist/assets/pactAmendment-CwAs13mt.js                              11.12 kB │ gzip:   4.40 kB
+dist/assets/disposition-CQda2WeA.js                                11.36 kB │ gzip:   4.71 kB
+dist/assets/vendor-icons-map-TfwNIEU8.js                           11.37 kB │ gzip:   4.07 kB
+dist/assets/ResourcesTab-CH442L53.js                               11.54 kB │ gzip:   2.96 kB
+dist/assets/treatyDocument-DMESWed9.js                             11.72 kB │ gzip:   4.67 kB
+dist/assets/custom-charset-CWI_jkK2.js                             11.76 kB │ gzip:   3.53 kB
+dist/assets/state-CG8uXP6V.js                                      11.77 kB │ gzip:   4.48 kB
+dist/assets/defenseStateProse-Brd0GyYs.js                          11.89 kB │ gzip:   3.93 kB
+dist/assets/pendingEditIntents-Bkk7OXpm.js                         11.98 kB │ gzip:   4.01 kB
+dist/assets/ChroniclersLetterPanel-BjbNRwWS.js                     12.10 kB │ gzip:   4.79 kB
+dist/assets/CampaignImportPanel-D_C1lbgR.js                        12.13 kB │ gzip:   4.43 kB
+dist/assets/custom-registry-2pzNmEeV.js                            12.16 kB │ gzip:   3.98 kB
+dist/assets/HeraldGazetteer-uUKrMY8b.js                            12.21 kB │ gzip:   4.81 kB
+dist/assets/economyDeskRead-C4Ah3mNH.js                            12.26 kB │ gzip:   4.71 kB
+dist/assets/VersionsTab-CjS4Xw3F.js                                12.38 kB │ gzip:   5.18 kB
+dist/assets/envoyErrandVocabulary-CpcUttmo.js                      12.39 kB │ gzip:   4.18 kB
+dist/assets/surveyorWrite-DfDORZVI.js                              12.42 kB │ gzip:   4.59 kB
+dist/assets/SessionMode-BcpJJXe-.js                                12.70 kB │ gzip:   4.49 kB
+dist/assets/pressureModel-BL7YQuoe.js                              12.72 kB │ gzip:   4.92 kB
+dist/assets/FoundersHallPage-D6XIY9AF.js                           12.77 kB │ gzip:   4.66 kB
+dist/assets/religionState-CNZFlQrM.js                              13.02 kB │ gzip:   4.86 kB
+dist/assets/ConstructionPanel-CsakozWQ.js                          13.34 kB │ gzip:   4.88 kB
+dist/assets/regenerationDelta-BiZ37hCO.js                          13.45 kB │ gzip:   4.92 kB
+dist/assets/wizardNews-CnRawj-Z.js                                 13.56 kB │ gzip:   5.23 kB
+dist/assets/WarResolveSection-DTKPMzoA.js                          13.71 kB │ gzip:   5.48 kB
+dist/assets/defenseDisplay-sXvTP3wW.js                             13.93 kB │ gzip:   5.70 kB
+dist/assets/SettlementWorkbench-D1q9tYZw.js                        14.08 kB │ gzip:   5.36 kB
+dist/assets/ViabilityTab-B4nqzB4B.js                               14.24 kB │ gzip:   4.27 kB
+dist/assets/capacityModel-Bs9MAFTG.js                              14.25 kB │ gzip:   4.77 kB
+dist/assets/contentPacks-DmDNW5hI.js                               14.34 kB │ gzip:   4.59 kB
+dist/assets/campaignContentBindingSession-B1N9hveD.js              14.39 kB │ gzip:   4.51 kB
+dist/assets/factionRename-CnSOC1vn.js                              14.42 kB │ gzip:   4.55 kB
+dist/assets/generateWorldBook-Mbzb9SHM.js                          14.50 kB │ gzip:   6.03 kB
+dist/assets/dossierMounts-B81YLuBX.js                              14.62 kB │ gzip:   4.57 kB
+dist/assets/HistoryTab-DlOzj0xJ.js                                 14.73 kB │ gzip:   4.61 kB
+dist/assets/ServicesTab-CpZVOjzV.js                                14.81 kB │ gzip:   5.15 kB
+dist/assets/relationshipMemory-CFUrK0tO.js                         15.00 kB │ gzip:   5.71 kB
+dist/assets/momentum-BeaaAGfV.js                                   15.11 kB │ gzip:   6.07 kB
+dist/assets/ai-layer-BVenJO64.js                                   15.23 kB │ gzip:   6.03 kB
+dist/assets/vendor-icons-lazy-Dj8SHWIb.js                          15.77 kB │ gzip:   5.23 kB
+dist/assets/WorldPulsePanel-DNRS9IUn.js                            16.05 kB │ gzip:   5.72 kB
+dist/assets/AutonomyPanel-cPkUz9RO.js                              16.13 kB │ gzip:   5.90 kB
+dist/assets/mapEdits-DySe1Yx0.js                                   16.28 kB │ gzip:   5.43 kB
+dist/assets/sessionCommandRuntime-DrJH_t7t.js                      16.78 kB │ gzip:   5.23 kB
+dist/assets/ShareToGallery-C-xsWpOm.js                             16.81 kB │ gzip:   5.31 kB
+dist/assets/DailyLifeTab-Ab1Rqwl6.js                               17.26 kB │ gzip:   7.81 kB
+dist/assets/vendor-state-CBu5u-4u.js                               17.31 kB │ gzip:   7.22 kB
+dist/assets/RealmVerbComposer-BKPjqm17.js                          17.74 kB │ gzip:   6.43 kB
+dist/assets/generateCampaignPDF-CNdeVyp6.js                        18.37 kB │ gzip:   7.52 kB
+dist/assets/campaignWorldPulseDeferred-pH66IGCJ.js                 18.65 kB │ gzip:   6.21 kB
+dist/assets/settlementPendingEdits-CfM0yEb7.js                     18.70 kB │ gzip:   6.07 kB
+dist/assets/index-BXxJ0nfH.js                                      19.44 kB │ gzip:   7.64 kB
+dist/assets/WarTab-BbWhnJe9.js                                     19.72 kB │ gzip:   7.14 kB
+dist/assets/affordanceManifest-ANWO45hV.js                         19.81 kB │ gzip:   6.27 kB
+dist/assets/CustomContentPanel-DNo4b1uf.js                         20.86 kB │ gzip:   7.50 kB
+dist/assets/SummaryTab-CqsENdIg.js                                 21.16 kB │ gzip:   6.61 kB
+dist/assets/WizardNewsPanel-BPA7Q4Uj.js                            21.20 kB │ gzip:   7.52 kB
+dist/assets/worldState-BoPwzmFJ.js                                 21.28 kB │ gzip:   7.43 kB
+dist/assets/generalDeskRead-8cvdhvnf.js                            21.33 kB │ gzip:   6.42 kB
+dist/assets/DefenseTab-CsWMpKM8.js                                 21.48 kB │ gzip:   5.67 kB
+dist/assets/campaignAdvanceSession-BqO810Gk.js                     22.34 kB │ gzip:   8.69 kB
+dist/assets/warCosts-CGdUb9g4.js                                   22.62 kB │ gzip:   8.80 kB
+dist/assets/MapShareEditorOverlay-Yq-2TBKR.js                      22.74 kB │ gzip:   8.23 kB
+dist/assets/generateFoundryModule-DiwmCPvu.js                      23.19 kB │ gzip:   9.09 kB
+dist/assets/occupation-D0xnN4H4.js                                 23.46 kB │ gzip:   8.31 kB
+dist/assets/SimulationRulesDialog-C-YCrjLk.js                      23.51 kB │ gzip:   7.81 kB
+dist/assets/RealmDashboard-BgnzV-Q-.js                             23.55 kB │ gzip:   8.70 kB
+dist/assets/engine-core-lazy-DisrPrZb.js                           23.85 kB │ gzip:   7.39 kB
+dist/assets/peaceReasons-BFDlfvcC.js                               24.75 kB │ gzip:   9.25 kB
+dist/assets/PricingPage-Vqq4Q-rJ.js                                24.88 kB │ gzip:   8.15 kB
+dist/assets/LandingBelowFold-D-_Vf1DL.js                           25.34 kB │ gzip:   6.63 kB
+dist/assets/accountImportBody-CrUx2q3E.js                          26.63 kB │ gzip:   8.04 kB
+dist/assets/supplyCompleteness-DIL_MRsB.js                         28.43 kB │ gzip:  10.47 kB
+dist/assets/customContentSliceRuntime-D7UOIKGr.js                  28.52 kB │ gzip:   8.18 kB
+dist/assets/AboutWhatThisIs-ivu6Q3RZ.js                            28.69 kB │ gzip:  10.14 kB
+dist/assets/customContentArchive-D6MM9WKn.js                       28.72 kB │ gzip:   8.19 kB
+dist/assets/DmScreen-oVMjADYd.js                                   29.36 kB │ gzip:  10.33 kB
+dist/assets/RelationshipsTab-CbpSKVbz.js                           30.00 kB │ gzip:   9.61 kB
+dist/assets/HowToUse-A3rouUlW.js                                   31.30 kB │ gzip:   9.85 kB
+dist/assets/stressors-BOoosXy_.js                                  31.82 kB │ gzip:  11.24 kB
+dist/assets/envoyErrandRecords-CjkSTjMF.js                         32.36 kB │ gzip:  10.75 kB
+dist/assets/gallery-CqXK134g.js                                    32.54 kB │ gzip:  12.21 kB
+dist/assets/FloatingAffordances-7oseN7jJ.js                        33.15 kB │ gzip:  10.20 kB
+dist/assets/OverviewTab-hgzaXXEg.js                                33.50 kB │ gzip:   9.37 kB
+dist/assets/EconomicsTab-CVRPSFBb.js                               35.30 kB │ gzip:   9.89 kB
+dist/assets/razingExecution-DVoAf83_.js                            35.87 kB │ gzip:  13.08 kB
+dist/assets/newsVoice-BsWwYB83.js                                  38.31 kB │ gzip:  12.94 kB
+dist/assets/PowerTab-_3QVh3aH.js                                   39.49 kB │ gzip:  12.03 kB
+dist/assets/RealmInspector-DO690AQg.js                             40.64 kB │ gzip:  13.64 kB
+dist/assets/InstitutionLink-DM96TJ92.js                            43.66 kB │ gzip:  17.65 kB
+dist/assets/headlines-Bug8eXNW.js                                  44.88 kB │ gzip:  14.74 kB
+dist/assets/MapOverlay-nZGEm4dw.js                                 47.05 kB │ gzip:  15.32 kB
+dist/assets/StructuredCampaignReconciliation-BzHPSTzy.js           47.10 kB │ gzip:  14.01 kB
+dist/assets/campaignRuntime-uHsIw2Ia.js                            48.31 kB │ gzip:  14.35 kB
+dist/assets/spatialSubstrateDerive-D3vFn4V_.js                     49.29 kB │ gzip:  18.10 kB
+dist/assets/contentVocabulary-kdKhpmXK.js                          50.11 kB │ gzip:   7.73 kB
+dist/assets/npcDmVerbs-DjEno83X.js                                 51.30 kB │ gzip:  16.02 kB
+dist/assets/customContentServiceRuntime-sG286xhA.js                52.17 kB │ gzip:  14.05 kB
+dist/assets/index-BzgJcchx.js                                      55.23 kB │ gzip:  19.50 kB
+dist/assets/OutputContainer-WNZ-Sgrp.js                            58.32 kB │ gzip:  19.92 kB
+dist/assets/envoyDiplomacy-JaxSS1GD.js                             64.34 kB │ gzip:  21.39 kB
+dist/assets/InterpretApplyPanel-ehJdsobK.js                        65.97 kB │ gzip:  15.08 kB
+dist/assets/settlementRumors-C3a-5aCp.js                           77.71 kB │ gzip:  25.57 kB
+dist/assets/WorldMap-uWVNa-14.js                                   82.13 kB │ gzip:  28.49 kB
+dist/assets/GalleryPage-BwrOYQmJ.js                                83.14 kB │ gzip:  23.49 kB
+dist/assets/compendiumData.generated-I_6xg8zG.js                   89.58 kB │ gzip:  23.31 kB
+dist/assets/beliefMap-GVILNzGP.js                                  91.23 kB │ gzip:  28.90 kB
+dist/assets/AdminPanel-DvrUt8mQ.js                                101.70 kB │ gzip:  27.38 kB
+dist/assets/GenerateWizard-D1BIWHYP.js                            103.57 kB │ gzip:  30.76 kB
+dist/assets/realmManifest-BfsWvO95.js                             104.38 kB │ gzip:  34.27 kB
+dist/assets/data-DuZw95wO.js                                      114.87 kB │ gzip:  34.07 kB
+dist/assets/npcLadderState-csmzfgri.js                            123.55 kB │ gzip:  39.36 kB
+dist/assets/AccountPage-B9IbDWlV.js                               124.22 kB │ gzip:  34.78 kB
+dist/assets/engine-core-D6LVYZP9.js                               126.46 kB │ gzip:  40.52 kB
+dist/assets/settlementLifecycleFirstClass-obvhs5O9.js             144.98 kB │ gzip:  49.49 kB
+dist/assets/CompendiumPanel-B0DrPUDQ.js                           155.98 kB │ gzip:  45.90 kB
+dist/assets/index.es-sW4gJR1r.js                                  159.03 kB │ gzip:  53.09 kB
+dist/assets/realmItemReadModel-Bp-YIMSx.js                        167.38 kB │ gzip:  51.40 kB
+dist/assets/SettlementPDF-C3BAY3Hk.js                             172.27 kB │ gzip:  40.36 kB
+dist/assets/vendor-react-BQxSgP9l.js                              193.16 kB │ gzip:  60.55 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/grammarNews-CMigPYek.js                               238.10 kB │ gzip:  80.64 kB
+dist/assets/applyWorldPulse-sfzeDJcj.js                           241.40 kB │ gzip:  81.89 kB
+dist/assets/SettlementsPanel-BIxWHAZN.js                          257.76 kB │ gzip:  77.45 kB
+dist/assets/npcComponents-CuX8I8Ip.js                             276.23 kB │ gzip:  73.23 kB
+dist/assets/advanceInterval-ByyAmuwA.js                           532.85 kB │ gzip: 175.81 kB
+dist/assets/index-DIYpVwZo.js                                     570.35 kB │ gzip: 180.36 kB
+dist/assets/engine-Dm1N_7Bj.js                                    675.30 kB │ gzip: 221.56 kB
+dist/assets/data-lazy-DqvfikX7.js                               1,030.53 kB │ gzip: 280.20 kB
+dist/assets/vendor-pdf-BWKEM_eX.js                              1,623.20 kB │ gzip: 578.99 kB
+✓ built in 18.12s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 311 static route documents (13 views + 15 gallery hubs + 283 compendium entries) under dist/
+
+> settlementforge@1.0.0 verify:dist
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 79993 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] STRICT DIST REFUSED: every discovered build test must run exactly once and pass.
+  runner exited NON-ZERO; strict dist never banks a runner failure.
+  report.success is not TRUE; strict dist requires an explicit successful report.
+  suite status was not PASSED:
+    tests/build/generationWorkerLazy.test.js [failed]
+  FAILED build-test row(s):
+    tests/build/generationWorkerLazy.test.js :: generation worker — production boundary the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+      ASSERTION · ran 8ms against a 20000ms budget (vite.config.js testTimeout) — a real verdict — read the message
+      msg: AssertionError: generation worker bundle generation.worker-C1LfnqTf.js is 1404698 B; the ceiling is 1404493 B (build-900-chair.log): expected 1404698 to be less than or equal to 1404493
+GATE_END=2026-09-15T19:15:32Z
+TRUE_EXIT=1
+GATE_LOAD_POST=9.20 19.17 23.61
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=6dcbcf2034a908bf2a89b62f187a4b7e21d4f842

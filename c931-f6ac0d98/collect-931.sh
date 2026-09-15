@@ -24,7 +24,7 @@ echo "  ledger and queue are PURE APPENDS"
 echo "  recut plan: $(git diff --no-index --numstat "$L/REWRITE_RECUT_PROGRAM_PLAN.md.head" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" | awk '{print "+"$1" -"$2}') (one row amended in place, append-only inside the row)"
 echo "  handoff: $(git diff --no-index --numstat "$L/HANDOFF_CURRENT.md.head" "$L/HANDOFF_CURRENT.md" | awk '{print "+"$1" -"$2}')"
 grep -q '^## §931 ' "$L/OWNER_DECISION_QUEUE.md" || { echo "ABORT: no §931 header in the ODQ copy"; exit 1; }
-grep -qE '__[A-Z0-9_]+__' "$L/OWNER_DECISION_QUEUE.md" "$L/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md" && { echo "ABORT: unfilled placeholder"; exit 1; }
+grep -hoE '__[A-Z0-9_]+__' "$L/OWNER_DECISION_QUEUE.md" "$L/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md" | grep -v '^__LANEROWS__$' | grep -q . && { echo "ABORT: unfilled placeholder: $(grep -hoE '__[A-Z0-9_]+__' "$L"/*.md | grep -v '^__LANEROWS__$' | sort -u | tr '\n' ' ') (__LANEROWS__ is a pre-existing §882 note in the handoff, not ours)"; exit 1; }
 # the ODQ must be the WORKING-TREE copy for chair-commit.sh (it always includes it from the working tree): place it, then commit
 cp "$L/OWNER_DECISION_QUEUE.md" docs/OWNER_DECISION_QUEUE.md
 git diff --cached --stat > $MY/c931/index-before.txt

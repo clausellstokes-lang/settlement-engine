@@ -1,0 +1,96 @@
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+Bisecting: 16 revisions left to test after this (roughly 4 steps)
+[b2f441203002d13eb5a8905838c5908c1b398248] LT29 car 6 (the instruments): the tuning register's NET-ZERO question, written beside the precedent it would extend — a PROPOSAL, priced at nine commits in 1,687, taking no ceiling
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+Bisecting: 7 revisions left to test after this (roughly 3 steps)
+[7047aa157cd993cf3d131ca3106b130f294c1f9e] LT16 car 3: the anti-double-subscribe hydration gate — a tier-unknown reader can no longer start a subscription checkout
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[6915d3ac70798aa12a8c8f34cf3d2bab3d2dce48] LT17 car 1: MF-CH2B is re-derived at the live slot, and its own STOP turns out to be discharged
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[74d3686fbc1e9e6a3ae8e5e3c14cd94e51c4de82] LT16 car 4 — WEB-10(a): the allowance TABLE and the W-2 fail-closed alarm, both dials OFF
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[b743a9cf2af0f9bec56aefc7fc8723856bd7fbe3] LT17 car 2 (CH-6b car 1 / J-TECH2-10): a magic-free world stops being convicted for the name of the shelf its rows are filed on
+running  'sh' '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/c931/worker-measure.sh'
+b743a9cf2af0f9bec56aefc7fc8723856bd7fbe3 is the first bad commit
+commit b743a9cf2af0f9bec56aefc7fc8723856bd7fbe3
+Author: Fixture <fixture@example.test>
+Date:   Mon Sep 14 22:35:38 2026 -0400
+
+    LT17 car 2 (CH-6b car 1 / J-TECH2-10): a magic-free world stops being convicted for the name of the shelf its rows are filed on
+    
+    generationCoherence.js walks every generated string in a finished settlement —
+    including the taxonomy fields `category`, `priorityCategory` and `tags[]` — and asks
+    `worldLaw.allowsMagicClaim` about each. `textAssertsFunctionalMagic` is a PROSE
+    detector, so it answered yes to the bare strings 'Magic', 'arcane' and 'magic'. The
+    moment a magic-free world lawfully keeps a Magic-shelf row, that settlement's own
+    `world_law_magic` certification convicts it for the NAME OF THE SHELF. This is the
+    sixth surface MF-CH2B found by execution, discharged into that packet by ODQ §879.11 R3.
+    
+    The cure: `allowsMagicClaim` no longer convicts a candidate whose ENTIRE text is one
+    token of the estate's closed classification vocabulary — ['magic', 'magical',
+    ...ARCANE_INST_TAGS], DERIVED from arcaneInstitutionVocabulary.js and never re-typed.
+    Anything longer stays prose and is read exactly as before, so this is a NARROWING of
+    the certification and not a hole in it. `allowsMagicClaim` has exactly one consumer in
+    src/ (generationCoherence.js:369), so nothing else can feel it.
+    
+    MEASURED OUTPUT-FREE, executed at this slot rather than quoted from the packet:
+    
+      - the 2,520-settlement grid (504 tier x culture x terrain configs x
+        {magicExists:false, pm0, pm20, pm50, pm80}): 0 of 2,520 same-seed settlement
+        records move. The mechanism is visible in the same run — those 2,520 settlements
+        carry ZERO world_law_magic findings of any kind at this slot, because no
+        Magic-shelf row reaches a magic-free roster until MF-CH2B's P5 lands, so the cure
+        has nothing to remove yet. It is the guard that lets P5 land without the
+        certification turning on the rows it admits.
+      - the golden master, CODE TO CODE against a clean export of this base: 0 of 525.
+        (The committed manifest is 525 of 525 red at this base, before and after this car
+        alike — pre-existing, banked by the chair since ODQ §901, bisected here to
+        e3f6029b2, the em-dash wave of 2026-09-05. Not this car's, and this car does not
+        move it by one row.)
+    
+    ARM B7b, in tests/generators/generationWorldLaw.test.js, holds it as a narrowing: the
+    ten cased classification tokens are no longer read as magic claims in a magic-free
+    world; the four sentences that claim magic works still are, in the same world; three
+    near-miss strings that merely CONTAIN a token are still convicted; a magical world is
+    unaffected in both directions; and a receipt-level arm certifies a magic-free
+    settlement carrying Magic-shelf taxonomy fields clean while the same record plus one
+    magic SENTENCE still fails. Driven against a clean export of the base with the cure
+    absent: exactly the two cure-bearing arms red there and the four control arms stay
+    green, so the pin binds on the change and not on the scenery.
+    
+    GATE, quoted:
+      npx vitest run tests/generators/generationWorldLaw.test.js
+        tests/generators/mundaneWorldLawGenerators.test.js tests/domain/coherence.test.js
+        tests/lint/negativeAssertionAnchor.walker.test.js
+        tests/lint/arcaneClassifierCensus.walker.test.js
+          -> Test Files  5 passed (5) / Tests  64 passed (64)
+      npx vitest run tests/lint/observedShapeReaders.walker.test.js
+        tests/lint/goldenFreeze.walker.test.js tests/lint/sizeBaseline.test.js
+        tests/lint/magicLicenceCensus.walker.test.js
+        tests/generators/generationReceiptJudgments.test.js
+        tests/generators/resourceConditionCoherence.test.js
+        tests/lib/instantWorld/mundaneRealmAcceptance.test.js
+          -> Test Files  7 passed (7) / Tests  188 passed (188)
+      npm run check:quick  -> EXIT 0
+        [implementation-packets] valid: 182 packets (0 READY)
+        [typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+        [domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+        lint-changed: exit 0
+    
+    No golden re-record, no .golden-freeze-register.json row and no GOLDEN_SHIFT_LEDGER row
+    are owed: nothing moved.
+    
+    Seat: Opus 5 — Fable-unvalidated
+    Lane: LT17
+    
+    Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+ src/generators/generationContext.js         |  45 +++++++++-
+ tests/generators/generationWorldLaw.test.js | 122 ++++++++++++++++++++++++++++
+ 2 files changed, 163 insertions(+), 4 deletions(-)
+bisect found first bad commitFIRST_BAD=first bad commit: [b743a9cf2af0f9bec56aefc7fc8723856bd7fbe3]
+RESET_HEAD=6dcbcf203 porcelain=0
+BISECT_DONE
