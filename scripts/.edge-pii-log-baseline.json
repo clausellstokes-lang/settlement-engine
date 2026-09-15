@@ -1,0 +1,29 @@
+{
+  "_doc": [
+    "THE EDGE PII-LOG BASELINE (A+ backend.3 / backend.6; LT36 car 2).",
+    "",
+    "scripts/edgeLogGuard.mjs arm 2 (consolePiiValueOffenders) fails the edge gate on any",
+    "console.* call under supabase/functions/ that carries a PII VALUE — an interpolated or",
+    "bare identifier whose name resolves to an email / IP / user-agent, or a direct",
+    "`.get('x-forwarded-for' | 'user-agent' | 'cf-connecting-ip' | 'x-real-ip')`.",
+    "",
+    "The files listed below are GRANDFATHERED so the rule can be an ERROR for new offenders",
+    "from the moment it lands (backend.3's own ordering warning: 'Step 3 depends on Steps 1-2",
+    "being done or it fails red immediately'). This list is SHRINK-ONLY and EXACT: a new",
+    "offending file reds the gate, and a stale entry whose file was cured reds",
+    "tests/security/edgeLogRedaction.test.js. Both directions are pinned there.",
+    "",
+    "`ceiling` is the total offending-call count across the listed files. It exists because a",
+    "file list alone is not occurrence-tight: a grandfathered file could grow a SECOND leak",
+    "without leaving the list. Lower it as sites are cured; never raise it.",
+    "",
+    "TO CURE an entry: route the line through logSafe()/redact() in",
+    "supabase/functions/_shared/log.ts, masking any IP with maskIp(), then delete the entry",
+    "and lower `ceiling` in the same commit."
+  ],
+  "ceiling": 2,
+  "files": {
+    "_shared/requestMeta.ts": "rejectObviousBot() logs `ip=${meta.ip} ua=${meta.ua.slice(0, 200)}` through a bare console.warn — this is A+ backend.6's named defect, cured by LT36 car 3.",
+    "send-email/index.ts": "the cap_warning limiter logs `rate-limited ip=${ip}` through a bare console.warn — a SECOND instance of backend.6's class, found by this guard rather than by the record, cured by LT36 car 3."
+  }
+}
