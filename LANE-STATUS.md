@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 18:49:19 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 18:54:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -113,12 +113,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_924cc284-8c3** (mtime 09-15 18:45): agent calls 5 (5 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_924cc284-8c3/`
+- **wf_924cc284-8c3** (mtime 09-15 18:52): agent calls 6 (6 distinct) · DONE 5 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_924cc284-8c3/`
     - `a1f64f5e5` ? · DONE · transcript 09-15 18:41 945 KB · 39 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · result: {"reader": "HOW TO READ THIS. The owner asked whether the past logs show the designed trade work already built in more depth, possibly under another name. Answe
     - `a88ec681b` ? · DONE · transcript 09-15 18:45 1216 KB · 77 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · result: {"reader": "LEDGER READER \u2014 every trade landing, decision and deferral recorded in docs/OWNER_DECISION_QUEUE.md (32,673 lines) and the queue docs, in ledge
     - `af373d640` ? · DONE · transcript 09-15 18:39 898 KB · 42 tool calls · result: {"reader": "VOLUME-AND-DIARY READER (DESIGN_FP_ARCH_TR.md read whole; RESUME-NOTE.md grepped whole; ledger docs cross-read; every named module confirmed or refu
     - `a102eb4be` ? · DONE · transcript 09-15 18:42 1056 KB · 64 tool calls · result: {"reader": "The older-economy reader (history pass over the pre-FP economy programme: Phase 5.5 mover ladder M1\u2013M10, the T8 train, W-COIN, the numeric-pric
-    - `ab422a124` ? · IN FLIGHT · transcript 09-15 18:47 591 KB · 14 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ab422a124` ? · DONE · transcript 09-15 18:52 746 KB · 16 tool calls · result: {"reader": "HISTORY-PASS ADJUDICATOR \u2014 every LANDED-IN-CODE and UNKNOWN claim from the four readers re-opened at /private/tmp/claude-502/-Users-cstokes-Des
+    - `abd934a60` ? · IN FLIGHT · transcript 09-15 18:54 542 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_6a1dc505-cea** (mtime 09-15 18:25): agent calls 2 (2 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
@@ -188,4 +189,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.39 17.61 53.19
+load: 2.02 7.21 36.74

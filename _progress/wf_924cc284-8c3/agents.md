@@ -1,6 +1,7 @@
-# wf_924cc284-8c3 — per-agent progress, 2026-09-15 18:49:20
+# wf_924cc284-8c3 — per-agent progress, 2026-09-15 18:54:50
     - `a1f64f5e5` ? · DONE · transcript 09-15 18:41 945 KB · 39 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · result: {"reader": "HOW TO READ THIS. The owner asked whether the past logs show the designed trade work already built in more depth, possibly under another name. Answe
     - `a88ec681b` ? · DONE · transcript 09-15 18:45 1216 KB · 77 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · result: {"reader": "LEDGER READER \u2014 every trade landing, decision and deferral recorded in docs/OWNER_DECISION_QUEUE.md (32,673 lines) and the queue docs, in ledge
     - `af373d640` ? · DONE · transcript 09-15 18:39 898 KB · 42 tool calls · result: {"reader": "VOLUME-AND-DIARY READER (DESIGN_FP_ARCH_TR.md read whole; RESUME-NOTE.md grepped whole; ledger docs cross-read; every named module confirmed or refu
     - `a102eb4be` ? · DONE · transcript 09-15 18:42 1056 KB · 64 tool calls · result: {"reader": "The older-economy reader (history pass over the pre-FP economy programme: Phase 5.5 mover ladder M1\u2013M10, the T8 train, W-COIN, the numeric-pric
-    - `ab422a124` ? · IN FLIGHT · transcript 09-15 18:47 591 KB · 14 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ab422a124` ? · DONE · transcript 09-15 18:52 746 KB · 16 tool calls · result: {"reader": "HISTORY-PASS ADJUDICATOR \u2014 every LANDED-IN-CODE and UNKNOWN claim from the four readers re-opened at /private/tmp/claude-502/-Users-cstokes-Des
+    - `abd934a60` ? · IN FLIGHT · transcript 09-15 18:54 542 KB · 15 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
