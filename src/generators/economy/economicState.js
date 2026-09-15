@@ -48,6 +48,17 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   } = resolveNativeEconomicInputs(config, institutions);
   const hasInst = (...keywords) => keywords.some((keyword) => instNames.some((name) => name.toLowerCase().includes(keyword))),
     ecoPriorities = getPriorities(config),
+    // ⛔⛔ RAW ROSTER, STAMPED ONCE (`compound:` at :883), NEVER RECOMPUTED ON ADVANCE.
+    // `getInstFlags` -> `getInstitutionNames` maps `nativeSemanticNames(institutions)`
+    // (priorityHelpers.js:42), NOT `liveInstitutions()` — so a ruined courthouse still
+    // sets `hasCourtSystem` and a ruined prison still sets `hasPrison`, forever.
+    // Measured (city seed `civic-probe`): ruin the 4 civic rows, live roster 46 -> 42, a
+    // recompute over `liveInstitutions()` gives false/false, the STAMP still reads
+    // true/true — and DS-DEF-2 row 3 keys on exactly that pair, so a town whose court is
+    // rubble asserts a full legal chain. ⛔ LT40 car 6 REPORTS AND CURES NOTHING: both
+    // cures (recompute at read, re-derive at advance) move output on every ruined town,
+    // are owner-gated, and these flags also feed prosperity, safety, services, NPCs and
+    // power. Trace, pricing, the §708.7 rule: docs/ENGINE_DEFECT_DISPOSITIONS.md §4.
     ecoInstFlags = getInstFlags(config, institutions),
     ecoStressFlags = getStressFlags(config, institutions),
     safetyProfile = generateSafetyProfile(config, tier, institutions),
