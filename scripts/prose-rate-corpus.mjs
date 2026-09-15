@@ -424,7 +424,14 @@ export function rateTable(run) {
     // modifier has no spine to draw, so its rate is its predicate's; see `modifierCandidates`
     // for why that is the reading the norm bit must be frozen from.
     const keys = [...town.fired, ...(town.modifiers || [])];
-    for (const key of new Set(keys.map((f) => `${f.block} ${f.pool}`))) {
+    // ⛔ `\0` IS WRITTEN AS THE ESCAPE, NEVER AS THE BYTE (LT29 car 8). This file carried four
+    // LITERAL NUL bytes as composite-key separators until 2026-09-15, and the cost was not
+    // runtime: `file` reported the path as `data` and plain `grep` answered "Binary file …
+    // matches" and printed NOTHING, so every grep-based census over `scripts/` silently skipped
+    // this instrument — the LT29 recon nearly recorded a false "crisisBannerRung is absent" on
+    // exactly that. The escape is the same character (`\0` === String.fromCharCode(0)) and the
+    // file is text to every tool. Keep it an escape.
+    for (const key of new Set(keys.map((f) => `${f.block}\0${f.pool}`))) {
       let seat = counts.get(key);
       if (!seat) { seat = { total: 0, tiers: new Map() }; counts.set(key, seat); }
       seat.total += 1;
@@ -433,7 +440,7 @@ export function rateTable(run) {
   }
   const n = run.towns.length;
   const rows = [...counts].map(([key, seat]) => {
-    const [block, pool] = key.split(' ');
+    const [block, pool] = key.split('\0');
     const interval = wilsonBp(seat.total, n);
     return {
       block,
@@ -695,9 +702,9 @@ async function main() {
       tiers: wizardTable.tiers,
       rows: wizardTable.rows.map((r) => ({ block: r.block, pool: r.pool, rateBp: r.rateBp, towns: r.towns })),
     };
-    const byKey = new Map(wizard.rows.map((r) => [`${r.block} ${r.pool}`, r]));
+    const byKey = new Map(wizard.rows.map((r) => [`${r.block}\0${r.pool}`, r]));
     for (const row of table.rows) {
-      const hit = byKey.get(`${row.block} ${row.pool}`);
+      const hit = byKey.get(`${row.block}\0${row.pool}`);
       row.wizardRateBp = hit ? hit.rateBp : 0;
     }
     console.log(`  WIZARD-DEFAULT REPORT COLUMN: ${wizardRun.towns.length} towns from DEFAULT_CONFIG in ${wizardRun.seconds} s`
