@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "09c789cdfeda12e03f8abf176547e3d493e921a2",
+  "measuredAtSha": "35e663c729a7b39641bd277f797fafece39a5403",
   "measuredBy": "lane LT39 (Opus 5 — the relationship chronicle surface)",
   "date": "2026-09-15",
-  "note": "LT39 car 2 lands ONE new test file (tests/domain/display/relationshipChronicle.test.js, 6 describes / 18 titles) and no production test-shaped file, so files and credited each take +1, parked holds, and the title and suite layers move by that file alone.",
+  "note": "LT39 car 3 adds titles to two EXISTING suites and no new test file: tests/domain/display/relationshipChronicle.test.js gains 2 describes / 6 titles for the fail-closed disclosure gate and the words, and tests/lint/vocabularyTotality.walker.test.js gains 1 describe / 6 titles for the producer-consumer totality arm. Files, parked and credited are therefore unchanged.",
   "files": 2564,
   "parked": 375,
   "credited": 2189,
-  "titles": 24193,
-  "suiteTitles": 6458
+  "titles": 24205,
+  "suiteTitles": 6461
 }
