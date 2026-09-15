@@ -2179,7 +2179,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // …and the parser door is not swallowing the estate: every real test file parses.
     const unparseable = TEST_FILES.filter(({ src }) => parkReasonsFor(src).some((r) => r.startsWith('PARSE:')));
     expect(unparseable.map(({ rel }) => rel), 'a real estate test file failed to parse').toEqual([]);
-  });
+    // ⏱ THE CLOCK IS DECLARED; THE WORK IS UNCHANGED (§885's own prescription, LT29 car 1).
+    // This row parses EVERY estate test file, so its cost tracks the estate's SIZE and its wall
+    // clock tracks the MACHINE'S LOAD — and under the five-walker batch it has been killed at the
+    // suite-wide 20,000 ms clock (21,552 ms measured at f73bdbf16; §892 logs 22–23 s and 39.9 s).
+    // MEASURED HERE 2026-09-14 on a quiet box: 3.43 s for the whole file alone, and 4,268 /
+    // 4,794 / 5,275 ms for THIS row across three runs of the same five-file batch. The budget
+    // below is ~3x the worst figure the record carries and ~23x the quiet-box maximum, and it is
+    // the house figure already declared at tests/lint/writerReach.walker.test.js:534.
+    // ⛔ IT IS A BUDGET, NEVER A BANK: no census entry is added (§885 — "an entry without
+    // attribution is a defect being laundered into debt"), and the suite-wide `testTimeout` stays
+    // at 20,000 ms because raising THAT hides the next row instead of declaring this one.
+    // ⚠ A BARE LITERAL, not a named constant: `timeoutLiteralsOf` (scripts/check-test-ratchet.mjs)
+    // is a TEXT scan that cannot fold a name, and its own header says so — a named budget would be
+    // invisible to the very instrument that prints this row's budget.
+  }, 120_000);
 
   test('DOOR 3 BINDINGS: a suite word bound to a name is opaque, and an ambiguous file parks', () => {
     // A BINDING IS WHERE THE SUITE WORD IS STILL VISIBLE, and the AST makes every spelling
