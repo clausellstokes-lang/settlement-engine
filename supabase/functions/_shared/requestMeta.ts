@@ -33,6 +33,7 @@
  */
 
 import { getCorsHeaders } from './cors.ts';
+import { logSafe, maskIp } from './log.ts';
 
 const OBVIOUS_BOT_PATTERNS = [
   // Generic bot indicators
@@ -85,6 +86,29 @@ export type RequestMeta = {
   isAllowedBot: boolean;
 };
 
+/** A pattern's readable name: `/\bpython-requests\b/i` -> `python-requests`. */
+function patternLabel(rx: RegExp): string {
+  return rx.source.replace(/\\b/g, '').replace(/^\^/, '').replace(/\\\//g, '');
+}
+
+/**
+ * Classify a User-Agent to the BOT PATTERN it matched, never echoing the string itself
+ * (A+ backend.6). A raw UA is a fingerprint; the pattern name is the fact the log line was
+ * actually written to carry. Exported so the rejection line's contents are unit-testable
+ * without driving a Request through the whole guard.
+ *
+ * Deny patterns are consulted first and independently of `isAllowedBot`, because the caller
+ * decides policy: a function may reject a UA this module would have allowed, and the label
+ * must describe the UA rather than re-state that decision.
+ */
+export function botUaClass(ua: string): string {
+  const value = typeof ua === 'string' ? ua : '';
+  if (value === '') return 'empty';
+  for (const rx of OBVIOUS_BOT_PATTERNS) if (rx.test(value)) return patternLabel(rx);
+  for (const rx of ALLOWED_BOT_PATTERNS) if (rx.test(value)) return `allowed:${patternLabel(rx)}`;
+  return 'unclassified';
+}
+
 /**
  * Extract IP + UA from a Request and classify the UA. Returns a
  * cheap-to-compute summary every edge function can include in
@@ -119,11 +143,27 @@ export function rejectObviousBot(
   functionName: string,
   corsHeaders: Record<string, string> = {},
 ): Response {
-  // Log a single warning line per rejection. The supabase function
-  // logs surface these without us needing a structured pipeline yet.
-  console.warn(
-    `[${functionName}] bot rejected ip=${meta.ip} ua=${meta.ua.slice(0, 200)}`,
-  );
+  // Log a single warning line per rejection, through the redacting logger.
+  //
+  // A+ backend.6. This line used to be
+  //     console.warn(`[${functionName}] bot rejected ip=${meta.ip} ua=${meta.ua.slice(0, 200)}`)
+  // — a RAW client IP and 200 characters of raw User-Agent, on a bare console call, reaching
+  // the Supabase function-log pipeline and any attached drain in the clear. Both halves are
+  // now masked, and the line goes through logSafe() so redactFields() governs it by policy
+  // rather than by the discipline of whoever edits this function next.
+  //
+  // WHAT SURVIVES THE MASK IS EXACTLY THE DIAGNOSTIC. The reason this line exists is to make
+  // an abuse spike legible in the logs, and neither the host octet nor the UA's version/
+  // platform tail carries that: `ip` keeps the /24, so one noisy neighbourhood still reads as
+  // one, and `ua_class` names WHICH bot pattern matched — strictly more useful for spotting a
+  // spike than a truncated raw string, and it cannot fingerprint a person. `ua_len` keeps the
+  // one remaining signal a class label drops: an absurdly long UA is itself suspicious.
+  logSafe('warn', functionName, {
+    event: 'bot_rejected',
+    ip: maskIp(meta.ip),
+    ua_class: botUaClass(meta.ua),
+    ua_len: meta.ua.length,
+  });
   return new Response(
     JSON.stringify({ error: 'Automated requests are not permitted on this endpoint.' }),
     {

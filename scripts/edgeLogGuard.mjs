@@ -241,6 +241,36 @@ export function valueExpressionText(argText) {
   return out;
 }
 
+/**
+ * The sanitisers whose RESULT is safe to log, so their arguments must not be read as raw PII.
+ *
+ * Without this the guard would refuse the very cure its own failure message prescribes:
+ * `console.warn(\`ip=${maskIp(meta.ip)}\`)` still contains the identifier `ip`, so a
+ * naive identifier scan flags a correctly-masked line forever, and the only way to satisfy
+ * the rule would be to stop logging the value at all. A guard that cannot be satisfied is a
+ * guard that gets disabled.
+ */
+const SANITISER_CALL_RE = /\b(?:maskIp|maskUa|redact|redactFields)\s*\(/;
+
+/**
+ * Remove every `maskIp(…)` / `redact(…)` / … call, arguments included, from an expression
+ * text. Balanced-paren aware, and applied repeatedly so nested and sibling calls all go.
+ * @param {string} exprText
+ * @returns {string}
+ */
+export function stripSanitiserCalls(exprText) {
+  let text = String(exprText);
+  for (;;) {
+    const m = text.match(SANITISER_CALL_RE);
+    if (!m) return text;
+    const open = m.index + m[0].length - 1;
+    const close = matchingParen(text, open);
+    text = close === -1
+      ? text.slice(0, m.index)
+      : text.slice(0, m.index) + ' ' + text.slice(close + 1);
+  }
+}
+
 /** Split an identifier into lowercased camelCase / underscore segments. */
 function segmentsOf(identifier) {
   return identifier
@@ -286,7 +316,7 @@ export function consolePiiValueOffenders(source, rel = '<source>') {
       const header = call.argText.match(PII_HEADER_FETCH_RE)[2];
       reasons.push(`the '${header}' header value`);
     }
-    for (const id of piiIdentifiersIn(valueExpressionText(call.argText))) {
+    for (const id of piiIdentifiersIn(stripSanitiserCalls(valueExpressionText(call.argText)))) {
       reasons.push(`\`${id}\``);
     }
     if (reasons.length) {

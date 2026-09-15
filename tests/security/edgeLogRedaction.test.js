@@ -10,8 +10,9 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, extname, join, relative } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { redact, redactFields, logSafe } from '../../supabase/functions/_shared/log.ts';
+import { redact, redactFields, logSafe, maskIp } from '../../supabase/functions/_shared/log.ts';
 import { logError } from '../../supabase/functions/_shared/logError.ts';
+import { botUaClass, rejectObviousBot } from '../../supabase/functions/_shared/requestMeta.ts';
 import { consolePiiLiteralOffenders, consolePiiValueOffenders } from '../../scripts/edgeLogGuard.mjs';
 
 afterEach(() => vi.restoreAllMocks());
@@ -62,6 +63,99 @@ describe('logError() — scrubs by policy', () => {
     expect(parsed.error).toContain('[email]');
     expect(parsed.hint).toContain('[ip]');
     expect(parsed.status).toBe(400); // non-string field untouched
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// A+ backend.6 (LT36 car 3) — the bot-rejection line stops logging a raw client IP.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('maskIp() — /24 for IPv4, /48 for IPv6', () => {
+  it('keeps the network and drops the host', () => {
+    expect(maskIp('203.0.113.42')).toBe('203.0.113.x');
+    expect(maskIp('10.0.0.1')).toBe('10.0.0.x');
+  });
+
+  it('masks IPv6 to its first three groups', () => {
+    expect(maskIp('2001:db8:85a3:0:0:8a2e:370:7334')).toBe('2001:db8:85a3:x');
+  });
+
+  it('refuses to echo anything it does not recognise as an address', () => {
+    // These arrive from client-controlled headers, so an unrecognised value is the one most
+    // likely to be an injection or an unexpected identifier. Never pass it through.
+    for (const junk of ['', '   ', 'not-an-ip', '<script>', null, undefined, 42, {}]) {
+      expect(maskIp(junk), String(junk)).toBe('[ip]');
+    }
+  });
+
+  it('survives a second trip through redact() — the mask is not re-collapsed to [ip]', () => {
+    // If redact() re-matched the masked form, routing a masked IP through logSafe would
+    // destroy the signal the mask exists to preserve, and nobody would notice.
+    expect(redact(maskIp('203.0.113.42'))).toBe('203.0.113.x');
+    expect(redact(maskIp('2001:db8:85a3:0:0:8a2e:370:7334'))).toBe('2001:db8:85a3:x');
+  });
+});
+
+describe('botUaClass() — the UA reaches the log as a CLASS, never as a string', () => {
+  it('names the deny pattern that matched', () => {
+    expect(botUaClass('python-requests/2.31.0')).toBe('python-requests');
+    expect(botUaClass('Mozilla/5.0 (compatible; Bot/2.1; +http://example.com)')).toBe('bot');
+    expect(botUaClass('curl/8.4.0')).toBe('curl');
+  });
+
+  it('REPORTED, NOT FIXED: the deny list\'s \\b anchors miss the commonest bot UAs', () => {
+    // Found while writing this car, and pinned here so it is visible rather than silent.
+    // OBVIOUS_BOT_PATTERNS spells `/\bbot\b/i`, and `Googlebot` / `bingbot` / `SomeBot` carry
+    // no word boundary before "bot", so none of them classifies. That is a BOT-DETECTION
+    // behaviour question (requestMeta's own header argues false negatives are cheaper than
+    // false positives, and a crawler may be one we want to admit anyway), not a logging one —
+    // LT36 car 3 is scoped to what the rejection line LOGS. Reported, not fixed; this pin
+    // records the current truth so a future change to the patterns has to come past it.
+    expect(botUaClass('Mozilla/5.0 (compatible; Googlebot/2.1)')).toBe('unclassified');
+    expect(botUaClass('Mozilla/5.0 (compatible; bingbot/2.0)')).toBe('unclassified');
+  });
+
+  it('marks an allowed infra bot as allowed', () => {
+    expect(botUaClass('Stripe/1.0 (+https://stripe.com/docs/webhooks)')).toBe('allowed:Stripe');
+  });
+
+  it('says so when it cannot classify, rather than falling back to the raw string', () => {
+    const exotic = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/141.0.0.0';
+    expect(botUaClass(exotic)).toBe('unclassified');
+    expect(botUaClass('')).toBe('empty');
+  });
+});
+
+describe('rejectObviousBot() — backend.6: neither the raw IP nor the raw UA reaches the log', () => {
+  const RAW_IP = '203.0.113.42';
+  const RAW_UA = 'python-requests/2.31.0 (secret-fingerprint-tail; build 88123)';
+
+  function emittedLine() {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const response = rejectObviousBot(
+      { ip: RAW_IP, ua: RAW_UA, isObviousBot: true, isAllowedBot: false },
+      'verify-single-dossier',
+    );
+    expect(response.status, 'the rejection is still a 403').toBe(403);
+    expect(spy).toHaveBeenCalledTimes(1);
+    return spy.mock.calls[0][0];
+  }
+
+  it('emits ONE structured line carrying the masked IP and the UA class', () => {
+    const parsed = JSON.parse(emittedLine());
+    expect(parsed.level).toBe('warn');
+    expect(parsed.fn).toBe('verify-single-dossier');
+    expect(parsed.event).toBe('bot_rejected');
+    expect(parsed.ip).toBe('203.0.113.x');
+    expect(parsed.ua_class).toBe('python-requests');
+    expect(parsed.ua_len).toBe(RAW_UA.length);
+  });
+
+  it('carries NEITHER the raw IP NOR the raw UA', () => {
+    const line = emittedLine();
+    // anchored: the same line is asserted above to carry '203.0.113.x' and 'python-requests', so it cannot be vacuously empty
+    expect(line).not.toContain(RAW_IP);
+    // anchored: same line, same assertions above — a drifted-away subject would fail those first
+    expect(line).not.toContain('secret-fingerprint-tail');
   });
 });
 
@@ -176,6 +270,23 @@ describe('consolePiiValueOffenders() — the PII-value arm (A+ backend.3, LT36 c
     expect(consolePiiValueOffenders(commented, 'fixture.ts')).toEqual([]);
   });
 
+  it('ACCEPTS the cure it prescribes — a value wrapped in maskIp()/redact() is clean', () => {
+    // A guard that cannot be satisfied is a guard that gets disabled. The failure message
+    // says "mask an IP with maskIp()", so a masked line must pass; the bare one must not.
+    expect(consolePiiValueOffenders('console.warn(`ip=${maskIp(meta.ip)}`);', 'f.ts')).toEqual([]);
+    expect(consolePiiValueOffenders('console.warn(`e=${redact(user.email)}`);', 'f.ts')).toEqual([]);
+    expect(consolePiiValueOffenders('console.warn("rl", redactFields({ ip }));', 'f.ts')).toEqual([]);
+    expect(consolePiiValueOffenders('console.warn(`ip=${meta.ip}`);', 'f.ts')).toHaveLength(1);
+  });
+
+  it('does not let a sanitiser launder an UNRELATED raw value in the same call', () => {
+    // Stripping the sanitiser call must remove ONLY its own arguments.
+    const half = 'console.warn(`ip=${maskIp(meta.ip)} ua=${meta.ua}`);';
+    const hits = consolePiiValueOffenders(half, 'f.ts');
+    expect(hits).toHaveLength(1);
+    expect(hits[0]).toContain('`ua`');
+  });
+
   it('exempts _shared/log.ts, whose console.* call emits the ALREADY-redacted line', () => {
     const redactor = 'console.warn(line); // `line` is the output of redactFields()\nconsole.error(user.email);';
     expect(consolePiiValueOffenders(redactor, '_shared/log.ts')).toEqual([]);
@@ -223,7 +334,12 @@ describe('the edge PII-log baseline (scripts/.edge-pii-log-baseline.json)', () =
     expect(Object.keys(baseline.files).sort()).toEqual(measuredFiles);
   });
 
-  it('every grandfathered entry carries a written reason', () => {
+  it('the register is shaped, and every grandfathered entry carries a written reason', () => {
+    // The loop below is EMPTY while the baseline is at zero — which is the goal state, not a
+    // broken test — so the register's own shape is asserted first and that assertion is what
+    // keeps this arm from being a green over nothing.
+    expect(Array.isArray(baseline._doc)).toBe(true);
+    expect(Number.isInteger(baseline.ceiling)).toBe(true);
     for (const [file, reason] of Object.entries(baseline.files)) {
       expect(typeof reason, file).toBe('string');
       expect(reason.length, file).toBeGreaterThan(40);
