@@ -21,11 +21,11 @@
               "DS-DEF-6",
               "DS-DEF-8"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 28267,
             "cardBytes": 44786,
             "townBytes": 3819,
-            "approxTokens": 31266,
+            "approxTokens": 31687,
             "deltaFields": null
           },
           {
@@ -43,11 +43,11 @@
               "DS-REL-2",
               "DS-STR-1"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 29709,
             "cardBytes": 52101,
             "townBytes": 3819,
-            "approxTokens": 31626,
+            "approxTokens": 32047,
             "deltaFields": null
           },
           {
@@ -61,11 +61,11 @@
               "DS-POW-6",
               "DS-POW-7"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 11905,
             "cardBytes": 23702,
             "townBytes": 3819,
-            "approxTokens": 27175,
+            "approxTokens": 27596,
             "deltaFields": null
           },
           {
@@ -77,35 +77,36 @@
               "DS-ECO-12",
               "DS-ECO-6"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 6400,
             "cardBytes": 15244,
             "townBytes": 3819,
-            "approxTokens": 25799,
+            "approxTokens": 26220,
             "deltaFields": null
           },
           {
             "tab": "war",
             "pools": 0,
             "blocks": [],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 389,
             "cardBytes": 4586,
             "townBytes": 3819,
-            "approxTokens": 24296,
+            "approxTokens": 24717,
             "deltaFields": null
           },
           {
             "tab": "daily_life",
-            "pools": 1,
+            "pools": 6,
             "blocks": [
+              "DS-DAILY",
               "DS-ECO-8"
             ],
-            "briefBytes": 96795,
-            "turnBytes": 1438,
-            "cardBytes": 5968,
+            "briefBytes": 98480,
+            "turnBytes": 5220,
+            "cardBytes": 11027,
             "townBytes": 3819,
-            "approxTokens": 24558,
+            "approxTokens": 25925,
             "deltaFields": null
           }
         ]
@@ -127,11 +128,11 @@
               "DS-DEF-6",
               "DS-DEF-8"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 30343,
             "cardBytes": 45084,
             "townBytes": 3819,
-            "approxTokens": 31785,
+            "approxTokens": 32206,
             "deltaFields": 5
           },
           {
@@ -149,11 +150,11 @@
               "DS-REL-2",
               "DS-STR-1"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 35843,
             "cardBytes": 52832,
             "townBytes": 3819,
-            "approxTokens": 33160,
+            "approxTokens": 33581,
             "deltaFields": 10
           },
           {
@@ -167,11 +168,11 @@
               "DS-POW-6",
               "DS-POW-7"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 13981,
             "cardBytes": 24000,
             "townBytes": 3819,
-            "approxTokens": 27694,
+            "approxTokens": 28115,
             "deltaFields": 5
           },
           {
@@ -183,35 +184,36 @@
               "DS-ECO-12",
               "DS-ECO-6"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 8476,
             "cardBytes": 15542,
             "townBytes": 3819,
-            "approxTokens": 26318,
+            "approxTokens": 26739,
             "deltaFields": 5
           },
           {
             "tab": "war",
             "pools": 0,
             "blocks": [],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 2463,
             "cardBytes": 4884,
             "townBytes": 3819,
-            "approxTokens": 24815,
+            "approxTokens": 25236,
             "deltaFields": 5
           },
           {
             "tab": "daily_life",
-            "pools": 1,
+            "pools": 6,
             "blocks": [
+              "DS-DAILY",
               "DS-ECO-8"
             ],
-            "briefBytes": 96795,
-            "turnBytes": 3512,
-            "cardBytes": 6266,
+            "briefBytes": 98480,
+            "turnBytes": 7294,
+            "cardBytes": 11325,
             "townBytes": 3819,
-            "approxTokens": 25077,
+            "approxTokens": 26444,
             "deltaFields": 5
           }
         ]
@@ -239,11 +241,11 @@
               "DS-DEF-5",
               "DS-DEF-6"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 27463,
             "cardBytes": 42027,
             "townBytes": 3796,
-            "approxTokens": 31065,
+            "approxTokens": 31486,
             "deltaFields": null
           },
           {
@@ -258,11 +260,11 @@
               "DS-GEN-6",
               "DS-REL-2"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 20014,
             "cardBytes": 36237,
             "townBytes": 3796,
-            "approxTokens": 29202,
+            "approxTokens": 29624,
             "deltaFields": null
           },
           {
@@ -275,11 +277,11 @@
               "DS-POW-5",
               "DS-POW-7"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 9123,
             "cardBytes": 19631,
             "townBytes": 3796,
-            "approxTokens": 26480,
+            "approxTokens": 26901,
             "deltaFields": null
           },
           {
@@ -291,35 +293,36 @@
               "DS-ECO-12",
               "DS-ECO-9"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 5753,
             "cardBytes": 15014,
             "townBytes": 3796,
-            "approxTokens": 25637,
+            "approxTokens": 26058,
             "deltaFields": null
           },
           {
             "tab": "war",
             "pools": 0,
             "blocks": [],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 389,
             "cardBytes": 4562,
             "townBytes": 3796,
-            "approxTokens": 24296,
+            "approxTokens": 24717,
             "deltaFields": null
           },
           {
             "tab": "daily_life",
-            "pools": 1,
+            "pools": 6,
             "blocks": [
+              "DS-DAILY",
               "DS-ECO-8"
             ],
-            "briefBytes": 96795,
-            "turnBytes": 1359,
-            "cardBytes": 5801,
+            "briefBytes": 98480,
+            "turnBytes": 5171,
+            "cardBytes": 10920,
             "townBytes": 3796,
-            "approxTokens": 24539,
+            "approxTokens": 25913,
             "deltaFields": null
           }
         ]
@@ -340,11 +343,11 @@
               "DS-DEF-5",
               "DS-DEF-6"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 29539,
             "cardBytes": 42325,
             "townBytes": 3796,
-            "approxTokens": 31584,
+            "approxTokens": 32005,
             "deltaFields": 5
           },
           {
@@ -360,11 +363,11 @@
               "DS-GEN-6",
               "DS-REL-2"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 24022,
             "cardBytes": 39313,
             "townBytes": 3796,
-            "approxTokens": 30204,
+            "approxTokens": 30626,
             "deltaFields": 5
           },
           {
@@ -377,11 +380,11 @@
               "DS-POW-5",
               "DS-POW-7"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 11199,
             "cardBytes": 19929,
             "townBytes": 3796,
-            "approxTokens": 26999,
+            "approxTokens": 27420,
             "deltaFields": 5
           },
           {
@@ -393,35 +396,36 @@
               "DS-ECO-12",
               "DS-ECO-9"
             ],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 7829,
             "cardBytes": 15312,
             "townBytes": 3796,
-            "approxTokens": 26156,
+            "approxTokens": 26577,
             "deltaFields": 5
           },
           {
             "tab": "war",
             "pools": 0,
             "blocks": [],
-            "briefBytes": 96795,
+            "briefBytes": 98480,
             "turnBytes": 2463,
             "cardBytes": 4860,
             "townBytes": 3796,
-            "approxTokens": 24815,
+            "approxTokens": 25236,
             "deltaFields": 5
           },
           {
             "tab": "daily_life",
-            "pools": 1,
+            "pools": 6,
             "blocks": [
+              "DS-DAILY",
               "DS-ECO-8"
             ],
-            "briefBytes": 96795,
-            "turnBytes": 3433,
-            "cardBytes": 6099,
+            "briefBytes": 98480,
+            "turnBytes": 7245,
+            "cardBytes": 11218,
             "townBytes": 3796,
-            "approxTokens": 25057,
+            "approxTokens": 26431,
             "deltaFields": 5
           }
         ]
