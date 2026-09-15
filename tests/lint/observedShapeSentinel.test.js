@@ -1000,7 +1000,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(writeShapesIn('const out = { ancientRuin: true };', 'ancientRuin')).toEqual(['property']);
     expect(writeShapesIn("const KEYS = ['ancientRuin'];", 'ancientRuin')).toEqual(['quoted']);
     // ⚠ BLINDNESS ONE — shorthand inside a CONDITIONAL SPREAD. This is the exact
-    // shape of src/generators/historyGenerator.js:888, where neither
+    // shape of src/generators/historyGenerator.js:905, where neither
     // `ancientRuin:` nor `'ancientRuin'` occurs anywhere in the estate.
     expect(writeShapesIn('return { ...base, ...(ancientRuin ? { ancientRuin } : {}) };', 'ancientRuin'))
       .toEqual(['shorthand']);
