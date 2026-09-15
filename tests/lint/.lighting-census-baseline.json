@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2d841ad5360d8094ced47fcb42b4ff313813c64f",
-  "measuredBy": "lane-LT40-engine (LONG TAIL #40, car 2)",
+  "measuredAtSha": "d33d95882be2eda35679a4853b72e22df5a544f1",
+  "measuredBy": "lane-LT40-engine (LONG TAIL #40, car 7)",
   "date": "2026-09-15",
-  "note": "car 2 added one test title to tests/lint/institutionTable.walker.test.js — the arm that pins settlement.services permanently absent",
+  "note": "car 7 added one test title to tests/domain/worldPulseTickClock.test.js — the arm that pins history.age as a generation-time constant across twelve advances",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24170,
-  "suiteTitles": 6452
+  "titles": 24171,
+  "suiteTitles": 6453
 }
