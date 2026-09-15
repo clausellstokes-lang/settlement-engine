@@ -124,6 +124,34 @@ function ReceiptRow({ node, resolveName, onHighlight, nodeId, canTrace, onTrace 
 
 // ── Delta-first lead (§3) ────────────────────────────────────────────────────
 
+/**
+ * ONE relationship delta chip, with the PARTIES NAMED (LT39 car 1).
+ *
+ * It used to render `humanizeToken(r.kind)` alone, so a GM read "war declared"
+ * with no way to learn who declared it on whom — the one place a relationship
+ * change reached a screen did it anonymously. The read model now carries the
+ * node's own settlement ids and the payload's from/to labels, so the chip reads
+ * "Ashford and Calder: allied → hostile".
+ *
+ * HONEST WHEN THE RECORD IS THIN: an outcome that recorded no settlement id
+ * names nobody (the kind alone, exactly as before) rather than inventing a party
+ * by parsing the relationship key, which is `edge.id` whenever the edge has one.
+ */
+function RelationshipChip({ row, resolveName }) {
+  const names = (row.settlementIds || []).map(resolveName).filter(Boolean);
+  const who = names.length >= 2
+    ? `${names.slice(0, 2).join(' and ')}${names.length > 2 ? ` +${names.length - 2}` : ''}`
+    : (names[0] || '');
+  const shift = row.fromType && row.toType
+    ? `${humanizeToken(row.fromType)} → ${humanizeToken(row.toType)}`
+    : humanizeToken(row.kind);
+  return (
+    <Chip tone={row.kind === 'war-declared' ? RED : row.kind === 'alliance-formed' ? GREEN : SECOND}>
+      {who ? `${who}: ${shift}` : shift}
+    </Chip>
+  );
+}
+
 function DeltaLead({ delta, resolveName }) {
   if (!delta?.hasContent) {
     return (
@@ -148,11 +176,7 @@ function DeltaLead({ delta, resolveName }) {
             {resolveName(t.id)}: Size {settlementSizeLabel(t.from, 'Unknown')} → {settlementSizeLabel(t.to, 'Unknown')}
           </Chip>
         ))}
-        {relationships.map((r, i) => (
-          <Chip key={`r${i}`} tone={r.kind === 'war-declared' ? RED : r.kind === 'alliance-formed' ? GREEN : SECOND}>
-            {humanizeToken(r.kind)}
-          </Chip>
-        ))}
+        {relationships.map((r, i) => <RelationshipChip key={`r${i}`} row={r} resolveName={resolveName} />)}
       </div>
     </div>
   );
