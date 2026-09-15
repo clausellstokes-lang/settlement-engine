@@ -4,8 +4,13 @@
  * essential — product telemetry (default on unless DNT/opt-out). Cookieless,
  *             pseudonymous; powers funnels that tune the app.
  * research  — contribute anonymous STRUCTURAL data (no names/prose/secrets) to
- *             improve the generator. Consent model v2: ON by default (opt-OUT),
- *             one click to turn off; DNT is a hard override.
+ *             improve the generator. ⚠️ CONSENT MODEL v3 (ODQ §359.6, the
+ *             person-adjacent split, shipped at 547e4d58a): OFF by default
+ *             (opt-IN), one click to turn on; DNT is a hard override. The v2
+ *             opt-OUT posture this header used to describe was reversed for
+ *             everything person-adjacent, and the copy below says so. Anyone who
+ *             explicitly chose under v2 KEEPS that choice — consent.js:38-50
+ *             honours any record with `updatedAt > 0` verbatim.
  * market    — opt-IN (default off): include usage in aggregate anonymous market
  *             research that may be shared/licensed. Disclosed in the privacy
  *             policy (privacyPolicyParity.test.js pins policy ↔ this roster).
@@ -23,10 +28,18 @@
  * under the toggles and NOTHING reverts. A toggle that silently sprang back would be a
  * worse answer than a stale mirror.
  *
- * The research opt-out is SILENT — there is no pop-up or first-run notice. This
- * section IS the disclosure surface: the owner's copy explains, in plain language,
- * that anonymous settlement structure is studied (never names/prose/secrets), it's
- * on by default, and it can be turned off here at any time.
+ * The research plane is SILENT — there is no pop-up or first-run notice, and under
+ * v3 there is nothing to interrupt anyone about: it ships OFF. This section IS the
+ * disclosure surface, and its job is now the mirror of what it was: the copy
+ * explains, in plain language, what would be studied if you turned it on
+ * (anonymous settlement structure, never names/prose/secrets), that it is off
+ * until you do, and that you can turn it back off here at any time.
+ *
+ * ⚠️ THE COPY AND THE DEFAULT ARE PINNED TOGETHER, in both directions, by
+ * tests/components/privacyPolicyParity.test.js — whose own header named this exact
+ * blind spot ("CANNOT-CATCH: … consent BEHAVIOR changes (consent.js defaults)")
+ * and then took the defect it predicted: the v3 flip shipped and these sentences
+ * went on promising the v2 posture for weeks.
  */
 import { useEffect, useRef, useState } from 'react';
 import { getConsent, setConsent, dntEnabled } from '../lib/consent.js';
@@ -160,8 +173,8 @@ export default function PrivacySettings({ bare = false }) {
       )}
       <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
         Usage and settlement <em>structure</em> help improve the generator. Your private campaign
-        text, NPC secrets, and notes are never collected. Research is on by default and anonymous;
-        you can change this anytime, and deleting your account erases your data.
+        text, NPC secrets, and notes are never collected. Research is off unless you turn it on, and
+        anonymous when you do; you can change this anytime, and deleting your account erases your data.
       </p>
 
       {dnt && (
@@ -177,8 +190,8 @@ export default function PrivacySettings({ bare = false }) {
         onToggle={update}
       />
       <Row
-        id="research" title="You're helping improve the generator"
-        desc="SettlementForge studies the anonymous structure of settlements (tiers, counts, conditions) to make generation better. Never your names, prose, or secrets. It's on by default; you can turn it off here at any time."
+        id="research" title="Help improve the generator"
+        desc="SettlementForge studies the anonymous structure of settlements (tiers, counts, conditions) to make generation better. Never your names, prose, or secrets. It's off by default; turn it on here, and you can turn it off again at any time."
         on={consent.research} disabled={dnt}
         onToggle={update}
       />

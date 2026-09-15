@@ -1154,6 +1154,29 @@ home). Mapping totality + anchor survival + header parity pinned. See the doc.
 >
 > The LEGAL FLAG below still routes: counsel rules the regional variant. The
 > posture it ships as is now trust-first OFF, not default-on.
+>
+> ✅ **THE IN-APP HALF IS CURED (LT38 car 3, 2026-09-15).** `PrivacySettings.jsx`'s
+> three on-by-default promises are restated to the shipped opt-IN posture, its
+> module header records the v2 → v3 reversal and the `updatedAt > 0` grandfather,
+> and the research row's TITLE stops asserting a participation that is not
+> happening ("You're helping improve the generator" → "Help improve the
+> generator": a statement of fact about the reader, false for every new account
+> under an opt-IN default, becomes an invitation that is true in both states).
+> ⭐ **AND THE CLASS IS CLOSED, NOT JUST THE INSTANCE:**
+> `tests/components/privacyPolicyParity.test.js` — whose own header named
+> "consent BEHAVIOR changes (consent.js defaults)" as a CANNOT-CATCH and then
+> took exactly that defect — gains a BICONDITIONAL arm binding the settings copy
+> to `getConsent()`'s live answer in BOTH directions, so a future flip back to
+> opt-OUT that left "off by default" standing reds too. ⛔ **STILL OPEN AND STILL
+> OWNER + COUNSEL GATED: `legal/PrivacyPage.jsx:26` and `:56`** say research is
+> "on by default (opt-out)" on the LEGAL surface. The new arm is deliberately
+> scoped to PrivacySettings and does not bind the policy page — the wording of a
+> legal surface is not an implementer's edit. THE PROPOSED MINIMAL TRUTH-RESTORING
+> EDIT, for the owner: at `:26` "This tier is on by default (opt-out) and
+> reversible at any time." → "This tier is off by default (opt-in) and reversible
+> at any time."; at `:56` "research contribution is on by default and the opt-out
+> is silent" → "research contribution is off by default and the opt-in is
+> silent". Nothing else on the page moves.
 - Product analytics, generator improvement, and anonymous market research all
   DEFAULT ON for new accounts. The third card's "Off by default." sentence
   dies; all three adopt the middle card's honest grammar ("It's on by

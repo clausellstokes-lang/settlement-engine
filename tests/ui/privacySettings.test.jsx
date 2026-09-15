@@ -6,7 +6,10 @@
  * The research default has no pop-up and no first-run notice anywhere, in either
  * direction. The one and only disclosure surface is the Privacy & data section, in
  * the owner's copy. This pins:
- *   - the owner's research-block heading ("You're helping improve the generator")
+ *   - the owner's research-block heading ("Help improve the generator" — RENAMED from
+ *     "You're helping improve the generator" by LT38 car 3: under consent model v3 the
+ *     research plane ships OFF, so a title asserting that participation is happening was
+ *     false for every new account. The invitation is true in both states.)
  *     and body render;
  *   - the research toggle defaults OFF (opt-IN) absent DNT / an explicit choice —
  *     consent model v3, the person-adjacent split (§359.6). ⚠ RE-POINTED: v2 had
@@ -72,10 +75,17 @@ afterEach(cleanup);
 describe('PrivacySettings — the silent research disclosure', () => {
   test('renders the owner research-block heading and body', () => {
     render(<PrivacySettings />);
-    expect(screen.getByText(/You're helping improve the generator/i)).toBeTruthy();
+    // EXACT-STRING form, not a regex: the intro paragraph above the rows now
+    // reads "…structure help improve the generator", so a case-insensitive
+    // /Help improve the generator/i matches two elements and getByText throws.
+    // An exact string matches an element whose WHOLE normalized text is that
+    // title, which is the row heading and only the row heading.
+    expect(screen.getByText('Help improve the generator')).toBeTruthy();
     expect(screen.getByText(/studies the anonymous structure of settlements/i)).toBeTruthy();
     expect(screen.getByText(/Never your names, prose, or secrets/i)).toBeTruthy();
-    expect(screen.getByText(/turn it off here at any time/i)).toBeTruthy();
+    // v3 (ODQ §359.6): the row invites the opt-IN and still promises the exit.
+    expect(screen.getByText(/It's off by default; turn it on here/i)).toBeTruthy();
+    expect(screen.getByText(/turn it off again at any time/i)).toBeTruthy();
   });
 
   // RE-POINTED for consent model v3 (§359.6): research is person-adjacent, so it
@@ -83,7 +93,7 @@ describe('PrivacySettings — the silent research disclosure', () => {
   // it renders whatever getConsent() returns, and what changed is the default.
   test('research toggle defaults OFF (opt-in) absent DNT and any stored choice', () => {
     render(<PrivacySettings />);
-    const research = screen.getByRole('switch', { name: /You're helping improve the generator/i });
+    const research = screen.getByRole('switch', { name: /Help improve the generator/i });
     expect(research.getAttribute('aria-checked')).toBe('false');
   });
 
@@ -100,7 +110,7 @@ describe('PrivacySettings — the silent research disclosure', () => {
 
   test('a toggle writes locally AND mirrors the whole record to the account', async () => {
     render(<PrivacySettings />);
-    fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
+    fireEvent.click(screen.getByRole('switch', { name: /Help improve the generator/i }));
 
     // Local first: the choice is in force whatever the network does.
     // RE-POINTED (v3): the toggle now starts OFF, so the first click is a GRANT.
@@ -117,13 +127,13 @@ describe('PrivacySettings — the silent research disclosure', () => {
   test('a failed mirror tells the user and never reverts the toggle', async () => {
     pushTelemetryConsent.mockResolvedValue({ ok: false, reason: 'rls denied' });
     render(<PrivacySettings />);
-    fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
+    fireEvent.click(screen.getByRole('switch', { name: /Help improve the generator/i }));
 
     const notice = await screen.findByRole('status');
     expect(notice.textContent).toMatch(/could not reach your account/i);
     // The toggle stays where the user put it, and so does the stored record.
     // RE-POINTED (v3): the first click is now a GRANT, so "where the user put it" is ON.
-    expect(screen.getByRole('switch', { name: /You're helping improve the generator/i })
+    expect(screen.getByRole('switch', { name: /Help improve the generator/i })
       .getAttribute('aria-checked')).toBe('true');
     expect(getConsent().research).toBe(true);
   });
@@ -141,7 +151,7 @@ describe('PrivacySettings — the silent research disclosure', () => {
       .mockImplementationOnce(() => new Promise(resolve => { releaseFirst = resolve; }))
       .mockResolvedValueOnce({ ok: true });
     render(<PrivacySettings />);
-    const research = screen.getByRole('switch', { name: /You're helping improve the generator/i });
+    const research = screen.getByRole('switch', { name: /Help improve the generator/i });
 
     // RE-POINTED (v3): the toggle starts OFF, so the click order inverts. The
     // property under test is unchanged and in fact reads more directly now — the
@@ -160,7 +170,7 @@ describe('PrivacySettings — the silent research disclosure', () => {
     let release;
     pushTelemetryConsent.mockImplementationOnce(() => new Promise(resolve => { release = resolve; }));
     const view = render(<PrivacySettings />);
-    fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
+    fireEvent.click(screen.getByRole('switch', { name: /Help improve the generator/i }));
     await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(1));
 
     storeState.auth = {
@@ -179,6 +189,6 @@ describe('PrivacySettings — the silent research disclosure', () => {
     expect(screen.queryByRole('heading', { name: /Privacy/i })).toBeNull();
     expect(screen.getByText(/Privacy & analytics/i)).toBeTruthy();
     // The toggle rows still render regardless of chrome.
-    expect(screen.getByRole('switch', { name: /You're helping improve the generator/i })).toBeTruthy();
+    expect(screen.getByRole('switch', { name: /Help improve the generator/i })).toBeTruthy();
   });
 });
