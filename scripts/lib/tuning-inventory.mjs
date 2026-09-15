@@ -759,6 +759,123 @@ const insideAny = (ranges, offset) => ranges.some(([a, b]) => offset >= a && off
  * P2 — module-top-level named numeric constants outside every table span. Aggregator leaves
  * are REMOVED: a const that a table references by name is that table's value written once,
  * not a second unregistered dial, and counting it twice would punish the tidier idiom.
+ *
+ * ──── ⚠ PROPOSAL, NOT A RULE — THE NET-ZERO QUESTION (§883.8 / §884, docketed §892; LT29 car 6)
+ * ⛔ NOTHING BELOW IS IMPLEMENTED. No counting rule changes, no ceiling moves, no tuning
+ * value, band or signature is touched. This is the ruling-ready statement of a question
+ * §884 declared OWNER-VISIBLE and §892 docketed for this register's author, written where the
+ * author will find it — beside the precedent it would extend.
+ *
+ * THE FINDING, UNCHANGED IN CODE. Naming a magic number is `+1 unregisteredNamed` HERE and
+ * `-1 bareDecimal` in `countBareDecimals` below, in the same file in the same commit. So the
+ * register charges a DEBT for the exact hygiene act it exists to promote: §883.8's words are
+ * "the tuning register scores the act it exists to encourage as a debt, and will do so every
+ * time anyone names a constant, until that name earns a register row", and it is a defect of
+ * the INSTRUMENT rather than of any consist. The live counterpart is carried in source at
+ * tests/lint/tuningRegister.walker.test.js:75-91: `UNREGISTERED_NAMED_CEILING` was RAISED
+ * 534 -> 535 for `POPULATION_SATURATION` (src/domain/relationships/canonicalRelationship.js,
+ * T13 Car P′ `754856b12`) while `BARE_DECIMAL_CEILING` ratcheted DOWN for the same act — and
+ * a ceiling raise is not a lane's act, so the tidier commit pays with a chair's signature.
+ *
+ * THE SHAPE A NET-ZERO RULE WOULD FOLLOW IS THIS FUNCTION'S OWN PRECEDENT, three lines up:
+ * "Aggregator leaves are REMOVED: a const that a table references by name is that table's
+ * value written once, not a second unregistered dial, and counting it twice would punish the
+ * tidier idiom." That exemption is already the argument, applied to a table's leaf: the SAME
+ * value written more legibly is not a SECOND dial. The proposal is to ask whether a named
+ * const that REPLACES a bare decimal in the same file in the same commit is the same case.
+ *
+ * ⚠ THE PRICE, MEASURED RATHER THAN ARGUED (2026-09-15, this tree, 1,687 commits touching
+ * `src/domain` + `src/generators` — the whole of the P2/P3 subject history). ⛔ THE BLOCK
+ * BELOW IS FLUSH-LEFT ON PURPOSE: it is ONE command, EXECUTED as written on 2026-09-15, and a
+ * ` * ` margin down its left edge would be a reproduction nobody can paste.
+
+git log -p --format='@@COMMIT %H' -- src/domain src/generators | python3 -c '
+import re, sys
+from collections import defaultdict
+N = re.compile(r"^(export\s+)?const\s+([A-Z][A-Z0-9_]+)\s*=\s*(-?\d+(?:\.\d+)?)\s*;")
+B = re.compile(r"(?<![\w.])\d+\.\d+(?![\w.])")
+def code(b):
+    t = b.strip()
+    if t[:2] in ("//", "/*") or t[:1] == "*": return ""
+    i = b.find("//")
+    return b[:i] if i >= 0 else b
+c = p = None
+a = defaultdict(lambda: [0, 0, 0])
+for raw in sys.stdin.buffer:
+    l = raw.decode("utf-8", "replace").rstrip("\n")
+    if l.startswith("@@COMMIT "): c, p = l.split(" ", 1)[1], None; continue
+    if l.startswith("+++"): p = l[6:] if l.startswith("+++ b/") else None; continue
+    if l.startswith("--- ") or l.startswith("diff --git") or l.startswith("index "): continue
+    if not p or not p.startswith(("src/domain/", "src/generators/")) or not p.endswith((".js", ".jsx")): continue
+    if l[:1] == "+":
+        if N.match(l[1:].strip()): a[(c, p)][0] += 1
+        else: a[(c, p)][2] += len(B.findall(code(l[1:])))
+    elif l[:1] == "-" and not N.match(l[1:].strip()): a[(c, p)][1] += len(B.findall(code(l[1:])))
+pr = [(k, v) for k, v in a.items() if v[0] >= 1 and v[1] - v[2] >= 1]
+print(len(pr), "pairs;", len({k[0] for k, _ in pr}), "commits;",
+      sum(v[0] for _, v in pr), "named added;", sum(v[1] - v[2] for _, v in pr), "bare net removed")
+for k, v in pr: print("   ", k[0][:9], k[1], "+%d/-%d" % (v[0], v[1] - v[2]))
+'
+
+ * IT PRINTED, VERBATIM: `9 pairs; 9 commits; 14 named added; 12 bare net removed`.
+ * THE FIGURES IT PRINTS: NINE (commit, file) pairs across NINE commits of 1,687 — 0.53% of
+ * the subject history — adding 14 named constants against 12 bare decimals net removed, five
+ * of the nine exactly net-zero. The nine, newest first:
+ *   23bd4aa67 generalStateProse.js  DEFICIT_FRACTION_FROM            +1 / -1
+ *   754856b12 canonicalRelationship.js  POPULATION_SATURATION        +1 / -1   ← §883.8's own case
+ *   1c984e1f4 stressors.js  ECHO_DECAY_FACTOR                        +1 / -1
+ *   adb5faf3f realmEvents.js  TWILIGHT_SCORE, TWILIGHT_SEVERITY      +2 / -1
+ *   018e4119f factionCompetition.js  INSTITUTION_SUPPRESSION_SEVERITY +1 / -1
+ *   c1ea091f7 foodGenerator.js  four CUSTOM_* capacity/need consts    +4 / -1
+ *   6ca73878e worldState.js  MONTHS_PER_YEAR                          +1 / -2
+ *   6bc0265b9 tierResourceDynamics.js  RESOURCE_CITY_FLOOR_PRESSURE   +1 / -2
+ *   ff3d108dc flows.js  MIGRATION_PROPOSAL_FRACTION, TRADE_PROPOSAL_SEVERITY  +2 / -2
+ * ⚠ STATED AGAINST INTEREST, TWICE. (i) The measurement is DIFF-level and approximates the
+ * real comment strip with "drop whole-line comments and everything after `//`"; run without
+ * that strip it finds FIVE pairs, not nine, and loses §883.8's own exemplar to a `0.8` that
+ * moved into a comment. The true figure is therefore of this order, not to this digit.
+ * (ii) `BARE_DECIMAL_RE` matches only a FRACTIONAL literal, so naming a bare INTEGER is `+1
+ * named / -0 bare` — pure debt under the current rule, and invisible to the pairing above.
+ * SO THE PATTERN IS RARE AND THE PRICE OF LEAVING IT IS SMALL: about one chair signature a
+ * year of programme time. That is an argument for RULING it cheaply, not for hurrying.
+ *
+ * ⛔ THE COUNTER-CASE, STATED HONESTLY, BECAUSE IT IS THE POPULATION'S WHOLE POINT. A named
+ * constant that NO register row covers IS an unregistered dial. `UNREGISTERED_NAMED` does not
+ * exist to punish naming; it exists to count the values a reader can move that the register
+ * cannot see, and `POPULATION_SATURATION` is exactly such a value — nothing stops the next
+ * hand from editing it, and after the rename the register still does not know it exists. A
+ * blanket net-zero would buy tidiness by blinding the count that pays for tuning honesty.
+ * THE PROPOSED DISCRIMINATOR, which keeps the count and drops the double charge:
+ *   • A REPLACEMENT is net-zero ONLY when the named const's VALUE equals a bare decimal the
+ *     same commit removed from the same file, and the const is referenced from the site that
+ *     lost it. The value identity is the evidence that no new dial was created; a name whose
+ *     value appears nowhere in the removed text is a NEW dial and stays +1.
+ *   • It is a CREDIT AGAINST THE DEBT, never an exemption from the population: the const is
+ *     still COUNTED and still nameable, so the ceiling stops moving but the reader still sees
+ *     it. Mechanically that is a third figure (`namedReplacingBare`) reported beside the two,
+ *     with the ceiling arm reading `unregisteredNamed - namedReplacingBare`.
+ *   • ⚠ It needs COMMIT CONTEXT, which no counter here has: every scan in this module reads
+ *     ONE TREE. A rule that needs a diff is a different instrument from a rule that needs a
+ *     file, and that cost belongs in the ruling.
+ *   • THE CHEAPER ALTERNATIVE, if the author prefers no new machinery: leave the counting
+ *     rule alone and let the register ROW be the discharge — a named const earns its row and
+ *     leaves the population, which is what §883.8's "until that name earns a register row"
+ *     already describes. Nine commits in 1,687 is a price that alternative can carry.
+ *
+ * ──── THE SECOND DOCKETED QUESTION, CARRIED BESIDE IT: SHOULD THE WALKER BE BASE-RELATIVE?
+ * `tests/lint/tuningRegister.walker.test.js`'s "the measured tree matches the committed
+ * inventory exactly" arm compares the live measurement to `tests/lint/.tuning-inventory.json`
+ * BOTH WAYS and exactly — spanDigest, keys, idiom, leaves, dependents. Its subject tree is
+ * `src/**` (TREES_P1 / TREES_P2P3 above), which the programme edits continuously, so ANY
+ * legitimate landing that moves a tuning span reds the arm and forces a de-facto per-landing
+ * refreeze. ⚠ AND THE ARM IS RIGHT TO BE EXACT: its own message says "a tuning value that
+ * moved without a refreeze is exactly the event this register exists to make visible", and
+ * THE PROMISE makes tuning owner-signed — a base-relative arm that only compared against the
+ * landing's merge-base would let a value drift one signed step at a time with no single
+ * commit ever showing the drift. The question for the author is therefore NOT "exact or
+ * relative" but "which HALF is exact": the digests must stay exact, while the derived
+ * populations (`keys`, `dependents`) might be allowed a direction. ⛔ THIS CAR RULES NEITHER
+ * AND CHANGES NEITHER.
  */
 export function countUnregisteredNamed(root, tables, trees = TREES_P2P3, sourceOf = makeSourceCache()) {
   const counts = {};
