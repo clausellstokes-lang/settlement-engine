@@ -1,0 +1,360 @@
+{
+  "_doc": [
+    "THE AI OVERLAY OUTPUT-EVAL CORPUS (Track J part 1, LT37 car 3).",
+    "",
+    "A FROZEN corpus of (original, refined) overlay pairs scored against the EXACT verdict",
+    "vector src/domain/aiOverlayVerifier.js must return. Built for the AI layer the way",
+    "tests/simulation/semanticFixtures.test.js (Track I) was built for the simulation: pinned",
+    "inputs as DATA, a stated reason per case, and assertions that survive refactors of the",
+    "code that produces them.",
+    "",
+    "WHY THIS IS NOT A DUPLICATE OF tests/domain/aiOverlayVerifier.test.js. That suite (63",
+    "tests) is thorough on RECALL: per case it asserts the ONE counter its mutation targets",
+    "(`expect(result.summary.invented).toBe(1)`). It says nothing about the OTHER six, so a",
+    "verifier that grew a FALSE POSITIVE on an unrelated class passes it. An eval scores both",
+    "directions, so every case here pins the WHOLE seven-counter vector plus `ok`. The clean",
+    "case is the two-sided control: a verifier stubbed always-clean fails every violation case,",
+    "and a verifier stubbed always-dirty fails the clean case.",
+    "",
+    "THE EDIT GRAMMAR. Cases are deltas against `base`, applied by a deterministic applier in",
+    "the test (no cloning helper in the data, no code in JSON):",
+    "  { op: 'set',    path: 'powerStructure.factions[0].faction', value: '…' }",
+    "  { op: 'push',   path: 'npcs',                            value: { … } }",
+    "  { op: 'remove', path: 'powerStructure.factions[1]' }",
+    "Paths are dot/bracket addresses into the settlement; `remove` names the ELEMENT (its trailing index is spliced out) while `push` names the ARRAY. The clean case carries prose-only `set` edits, never an empty list: an empty list would score zero by producing no document at all.",
+    "",
+    "THE EXPECTED VECTORS ARE MEASURED ACTUALS, never hand-composed. They were taken by",
+    "executing verifyAiOverlay over this corpus at f73bdbf16 and frozen. A moved figure means",
+    "the verifier's judgement moved: read the diff, do not re-freeze the number."
+  ],
+  "base": {
+    "id": "sett.eval.stonebridge",
+    "name": "Stonebridge",
+    "tier": "town",
+    "population": 1800,
+    "_seed": "lt37-eval-corpus",
+    "schemaVersion": 7,
+    "simulationVersion": 19,
+    "arrivalScene": "The ford is crowded at dawn and the toll-keeper is already arguing.",
+    "pressureSentence": "The guild squeezes the boatmen and the boatmen have started meeting.",
+    "institutions": [
+      {
+        "id": "inst.market",
+        "name": "Stonebridge Market",
+        "category": "Economy",
+        "source": "generated",
+        "locked": true
+      },
+      {
+        "id": "inst.guard",
+        "name": "Town Guard",
+        "category": "Defense",
+        "source": "generated"
+      },
+      {
+        "id": "inst.chapel",
+        "name": "The Ford Chapel",
+        "category": "Religious",
+        "source": "user",
+        "_authored": true
+      }
+    ],
+    "powerStructure": {
+      "factions": [
+        {
+          "id": "fac.silver",
+          "faction": "Silver Chain Guild",
+          "power": "high",
+          "isGoverning": true,
+          "source": "generated"
+        },
+        {
+          "id": "fac.boatmen",
+          "faction": "Boatmen's Compact",
+          "power": "low",
+          "source": "generated"
+        }
+      ]
+    },
+    "npcs": [
+      {
+        "id": "npc.toll",
+        "name": "Merrin Vall",
+        "role": "Toll-keeper",
+        "source": "generated"
+      },
+      {
+        "id": "npc.smith",
+        "name": "Hald Oren",
+        "role": "Smith",
+        "source": "generated",
+        "description": "Keeps the ford's chains and will not say who cut them.",
+        "_userEdits": {
+          "description": {
+            "value": "Keeps the ford's chains and will not say who cut them.",
+            "originalValue": "A smith.",
+            "editedAt": "2026-09-01T00:00:00.000Z"
+          }
+        }
+      }
+    ],
+    "activeConditions": [
+      {
+        "id": "cond.tolls",
+        "name": "Toll Dispute",
+        "severity": "moderate",
+        "source": "generated"
+      }
+    ],
+    "history": {
+      "age": 140,
+      "founding": {
+        "age": 140,
+        "reason": "The river ford was the only crossing for two days' ride.",
+        "foundedBy": "Ferry wardens"
+      },
+      "historicalEvents": [
+        {
+          "name": "The Flood Year",
+          "yearsAgo": 22,
+          "severity": "major",
+          "summary": "The spring flood took the lower quarter.",
+          "lastingEffects": [
+            "rebuilt levee"
+          ]
+        }
+      ],
+      "currentTensions": [
+        "The guild and the boatmen disagree about the toll."
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "clean-refine",
+      "why": "THE CONTROL, and the arm a blind verifier cannot fake. The model did exactly its job: it rewrote prose (arrival scene, pressure sentence, the founding reason, one event summary) and touched no entity, no root fact and no user-authored string. Everything must read zero, so a verifier that reports a violation here is over-reporting.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "arrivalScene",
+          "value": "Dawn on the ford: carts three deep, and the toll-keeper already out of patience."
+        },
+        {
+          "op": "set",
+          "path": "pressureSentence",
+          "value": "The guild leans on the boatmen, and the boatmen have begun to meet without it."
+        },
+        {
+          "op": "set",
+          "path": "history.founding.reason",
+          "value": "The ford was the only crossing within two days' ride, so the crossing became the town."
+        },
+        {
+          "op": "set",
+          "path": "history.historicalEvents[0].summary",
+          "value": "A spring flood carried off the lower quarter and the levee was rebuilt after it."
+        }
+      ],
+      "expect": {
+        "ok": true,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": []
+      }
+    },
+    {
+      "id": "invented-entity",
+      "why": "The commonest model failure: a colourful side character added to improve the prose. PRESERVATION_RULES forbids it, and the dossier must stay the settlement the simulation produced.",
+      "edits": [
+        {
+          "op": "push",
+          "path": "npcs",
+          "value": {
+            "id": "npc.lamplighter",
+            "name": "Old Tomas the Lamplighter",
+            "role": "Lamplighter",
+            "source": "generated"
+          }
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 1,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "invented_entity:npcs"
+        ]
+      }
+    },
+    {
+      "id": "removed-entity",
+      "why": "The inverse failure: the model drops an entity that did not fit the thesis it wrote. A faction that vanishes from the dossier is a fact the DM loses.",
+      "edits": [
+        {
+          "op": "remove",
+          "path": "powerStructure.factions[1]"
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 1,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "removed_entity:powerStructure.factions"
+        ]
+      }
+    },
+    {
+      "id": "renamed-entity",
+      "why": "The most common Haiku failure: the id survives so the merge applies it, but the proper noun is now wrong and the DM's notes no longer match the dossier.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "powerStructure.factions[0].faction",
+          "value": "The Silver Hand"
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 1,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "renamed_entity:powerStructure.factions"
+        ]
+      }
+    },
+    {
+      "id": "changed-fact",
+      "why": "A root-level simulated fact moved. Population is the engine's output, not the renderer's; a prose pass that rounds it has changed the settlement.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "population",
+          "value": 2400
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 1,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "changed_fact:population"
+        ]
+      }
+    },
+    {
+      "id": "changed-canon",
+      "why": "A canon-tag drift on a LOCKED entity. The market is locked; a refine that unlocks it silently re-opens DM-settled canon to the next overlay.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "institutions[0].locked",
+          "value": false
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 1,
+          "historyDropped": 0,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "changed_canon:institutions"
+        ]
+      }
+    },
+    {
+      "id": "removed-history-beat",
+      "why": "The model dropped the crisis because its thesis was rosier than the history. The beat is derived, so nothing in the entity arrays moves and only the beat check can see it.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "history.historicalEvents",
+          "value": []
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 2,
+          "userFieldChanged": 0
+        },
+        "violations": [
+          "removed_history_beat:history.definingCrisis",
+          "removed_history_beat:history.recentDisruption"
+        ]
+      }
+    },
+    {
+      "id": "changed-user-field",
+      "why": "Tier 6.6: a user-authored string is canon and must round-trip verbatim. A refine that 'improves' the DM's own sentence overwrites the one thing the model may never touch.",
+      "edits": [
+        {
+          "op": "set",
+          "path": "npcs[1].description",
+          "value": "A smith who keeps the chains and stays quiet about them."
+        }
+      ],
+      "expect": {
+        "ok": false,
+        "summary": {
+          "invented": 0,
+          "removed": 0,
+          "renamed": 0,
+          "contradicted": 0,
+          "canonChanged": 0,
+          "historyDropped": 0,
+          "userFieldChanged": 1
+        },
+        "violations": [
+          "changed_user_field:npc[1].description"
+        ]
+      }
+    }
+  ]
+}
