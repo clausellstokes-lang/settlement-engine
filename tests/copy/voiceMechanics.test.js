@@ -51,6 +51,36 @@
  *     tests/copy/voiceMechanics.test.js  (shrink-only: totals may never grow;
  *     this regenerates the Tier-2, Tier-3/JSX and Tier-5/generators baselines).
  *
+ * ⛔ THE FIGURES THIS GUARD IS DESCRIBED BY, RE-MEASURED (LONG TAIL #41, 2026-09-15).
+ * Written down rather than argued about, because two figures carried INTO this item do
+ * not reproduce at the build slot — and neither sentence is deleted, because a record
+ * that quietly loses its own wrong numbers cannot be audited.
+ *
+ *   ⛔ "A THIRD DIRECTORY HOLDS 496 INSTANCES" — DOES NOT REPRODUCE, AT ANY GRAIN.
+ *      `src/generators` measures 1031 RAW em-dash characters over 114 non-test .js
+ *      files; 81 on lines that do not open with a comment marker; and 62 inside actual
+ *      string literals by espree, the instrument this file counts with. The two figures
+ *      the record itself carried DO reproduce exactly (crossSettlementConflicts.js 11,
+ *      narrative/settlementOriginProse.js 5). The nearest real ~496 numbers at this tip
+ *      belong to other surfaces entirely: 506 non-comment em dashes across the two
+ *      ALREADY-SCANNED Tier-2 roots, and 505 in docs/content/RECEIPT_POOLS_DOSSIER_STATE.md.
+ *      An implementer who freezes 496 freezes nothing that exists.
+ *
+ *   ⛔ "27 FURTHER INSTANCES ARE BYTE-TWINS TO BE CURED ON BOTH SIDES IN ONE ACT" — the
+ *      byte-twin act was 28, not 27, and it LANDED: the src/ prose sweep
+ *      (`fd8b6df00` -> `5e28d5c83`, ODQ §890.4 and §898), which is an ancestor of this
+ *      tree. What is still live is a DIFFERENT, smaller set that this item DID pay:
+ *      9 em-dash strings authored in the then-unscanned `src/generators` are
+ *      byte-identical to strings elsewhere in `src/`, and 6 of those are exactly the
+ *      eight dashes the Tier-2 per-file arm was banked on. Both sides are now scanned
+ *      and both sides are declared in the allowlist below.
+ *
+ *   ✔ THE FIGURE THAT DOES REPRODUCE, AND HOW: 114 files, 0 unparseable, 62 em dashes
+ *      over 51 string literals in 12 files, 0 exclamation points; 51 = 23 label bands +
+ *      12 code/delimiter/prompt + 16 genuine prose dashes; 21 distinct label-band
+ *      strings pass by the named allowlist, leaving 39 over 8 files as Tier 5's first
+ *      freeze. Re-measure by running this file — every number above is one it computes.
+ *
  * ⭐ THE SHIFT RECORD (VOICE-1b, 2026-08-31; the full entry lives with this instrument's
  * banked rows in scripts/.test-ratchet-baseline.json). TWO trains landed the generated
  * dossier corpora on 2026-08-03, not one: P-1 `a277f53d3` (six state-prose desk leaves,
