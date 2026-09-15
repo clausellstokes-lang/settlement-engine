@@ -20,6 +20,7 @@ import {
 } from '../../../src/domain/display/relationshipChronicle.js';
 import { relationshipKeyFromEdge } from '../../../src/domain/worldPulse/relationshipState.js';
 import { RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS } from '../../../src/domain/worldPulse/relationshipMemory.js';
+import { incidentPhrase } from '../../../src/domain/display/humanizeEngineTokens.js';
 
 const edge = { from: 'ash', to: 'calder' };
 const KEY = 'rel.ash.calder';
@@ -117,6 +118,7 @@ describe('relationshipChronicle — the dedupe (one world event, up to three sto
     const lines = relationshipLines({
       worldState: {},
       relationshipKey: KEY,
+      includeCovert: true,
       relState: { recentIncidents: [{ tick: 7, type: 'raid' }, { tick: 7, type: 'espionage' }] },
     });
     expect(lines.map((l) => l.type).sort()).toEqual(['espionage', 'raid']);
@@ -128,7 +130,7 @@ describe('relationshipChronicle — honest memory (S3): a question is not an eve
     pulseHistory: [{
       tick: 40,
       selectedOutcomes: [{
-        id: 'o_pending', relationshipKey: KEY, applyMode: 'proposal', candidateType: 'relationship_shift',
+        id: 'o_pending', relationshipKey: KEY, applyMode: 'proposal', candidateType: 'peace_refused',
         proposalPayload: { kind: 'relationship_label_change', toType: 'hostile' },
       }],
     }],
@@ -142,7 +144,7 @@ describe('relationshipChronicle — honest memory (S3): a question is not an eve
     const applied = { ...pendingWorld, proposals: [{ status: 'applied', outcome: { id: 'o_pending' } }] };
     const lines = relationshipLines({ worldState: applied, relationshipKey: KEY, relState: {} });
     expect(lines).toHaveLength(1);
-    expect(lines[0]).toMatchObject({ tick: 40, type: 'relationship_shift', source: 'pulse' });
+    expect(lines[0]).toMatchObject({ tick: 40, type: 'peace_refused', source: 'pulse' });
   });
 
   it('an auto outcome needs no marker at all', () => {
@@ -209,9 +211,9 @@ describe('relationshipChronicle — determinism and totality', () => {
     // record, not a reason to delete the event.
     const lines = relationshipLines({
       worldState: {}, relationshipKey: KEY,
-      relState: { recentIncidents: [{ type: 'sabotage' }, { tick: 3, type: 'raid' }] },
+      relState: { recentIncidents: [{ type: 'mediation' }, { tick: 3, type: 'raid' }] },
     });
-    expect(lines.map((l) => [l.type, l.tick])).toEqual([['raid', 3], ['sabotage', null]]);
+    expect(lines.map((l) => [l.type, l.tick])).toEqual([['raid', 3], ['mediation', null]]);
   });
 });
 
@@ -245,5 +247,88 @@ describe('relationshipChronicle — the local copies agree with the engine they 
     };
     const lines = relationshipLines({ worldState: { pulseHistory: [record] }, relationshipKey: KEY, relState: {} });
     expect(lines.map((l) => l.outcomeId)).toEqual(['c1']);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LT39 car 3 — THE SECRETS SEAM AND THE WORDS.
+// ═══════════════════════════════════════════════════════════════════════════
+describe('relationshipChronicle — ⛔ the fail-closed disclosure gate', () => {
+  const covertWorld = world({
+    relationshipType: 'rival',
+    recentIncidents: [
+      { tick: 11, type: 'raid' },          // public
+      { tick: 12, type: 'espionage' },     // covert
+      { tick: 13, type: 'sabotage' },      // covert
+    ],
+  });
+
+  it('a covert row is ABSENT without ground truth', () => {
+    const rows = relationshipChronicle(covertWorld);
+    expect(rows[0].lines.map((l) => l.type)).toEqual(['raid']);
+    expect(rows[0].lineCount).toBe(1);
+  });
+
+  it('…and PRESENT with it (the arm is not simply dropping everything)', () => {
+    const rows = relationshipChronicle({ ...covertWorld, includeCovert: true });
+    expect(rows[0].lines.map((l) => l.type)).toEqual(['sabotage', 'espionage', 'raid']);
+    expect(rows[0].lines.map((l) => l.disclosure)).toEqual(['covert', 'covert', 'public']);
+  });
+
+  it('⛔ AN UNCLASSIFIED TYPE IS HIDDEN TOO — fail-closed means unknown is withheld', () => {
+    // The sharp edge: a future engine writer that mints an incident type before
+    // the lexicon knows it must not leak onto a share path by default. Only an
+    // explicit `public` survives.
+    const rows = relationshipChronicle(world({
+      relationshipType: 'neutral',
+      recentIncidents: [{ tick: 4, type: 'some_future_engine_thing' }],
+    }));
+    expect(rows).toEqual([]);
+    const dm = relationshipChronicle({
+      ...world({ relationshipType: 'neutral', recentIncidents: [{ tick: 4, type: 'some_future_engine_thing' }] }),
+      includeCovert: true,
+    });
+    expect(dm[0].lines[0]).toMatchObject({ type: 'some_future_engine_thing', disclosure: 'unclassified' });
+  });
+
+  it('hasRelationshipChronicle honours the same gate', () => {
+    expect(hasRelationshipChronicle(covertWorld.worldState, covertWorld.regionalGraph)).toBe(true);
+    const covertOnly = world({ relationshipType: 'rival', recentIncidents: [{ tick: 12, type: 'espionage' }] });
+    expect(hasRelationshipChronicle(covertOnly.worldState, covertOnly.regionalGraph)).toBe(false);
+    expect(hasRelationshipChronicle(covertOnly.worldState, covertOnly.regionalGraph, true)).toBe(true);
+  });
+});
+
+describe('relationshipChronicle — every line can be said in English', () => {
+  it('the authored clause, the family template, and the honest fallback are all SENTENCES', () => {
+    expect(incidentPhrase('coalition_betrayal')).toBe('A coalition partner turned on the rest');
+    expect(incidentPhrase('stressor_resolved:famine')).toBe('The pressure they shared ended — famine');
+    expect(incidentPhrase('canon_royal_wedding')).toBe('Something you wrote into the world touched them — royal wedding');
+    // The unmapped token: a sentence that owns the thinness, never a bare token.
+    const unknown = incidentPhrase('some_future_engine_thing');
+    expect(unknown).toBe('Something the record types only as “some future engine thing”');
+    // anchored: the exact string above is asserted, so these absences are measured against a real phrase rather than an empty one.
+    expect(unknown).not.toMatch(/_|[a-z][A-Z]/);
+    expect(incidentPhrase('')).toBe('Something happened that the record does not name');
+  });
+
+  it('every type this model can emit resolves to a clause with no engine token in it', () => {
+    const rows = relationshipChronicle({
+      ...world({
+        relationshipType: 'allied',
+        recentIncidents: [{ tick: 3, type: 'raid' }, { tick: 4, type: 'espionage' }],
+        turningPoints: [{ tick: 1, type: 'label_proposal_applied', toType: 'allied' }],
+        allianceCalls: [{ callId: 'coalition_call.ash.calder.gorm.2', tick: 2, decision: 'joined', enemyId: 'gorm' }],
+        coalitionSettlements: [{ actionId: 'a.b.forgiveness', tick: 5, action: 'forgiveness', status: 'forgiven', toId: 'calder' }],
+      }),
+      includeCovert: true,
+    });
+    expect(rows[0].lines).toHaveLength(5);
+    for (const line of rows[0].lines) {
+      const phrase = incidentPhrase(line.type);
+      // anchored: `phrase` is the live return of incidentPhrase for a type this very model just emitted, and the word-count assertion below proves it is non-empty, so the absence is measured against a real clause.
+      expect(phrase, line.type).not.toMatch(/_/);
+      expect(phrase.split(' ').length, line.type).toBeGreaterThanOrEqual(3);
+    }
   });
 });
