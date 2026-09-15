@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d33d95882be2eda35679a4853b72e22df5a544f1",
-  "measuredBy": "lane-LT40-engine (LONG TAIL #40, car 7)",
+  "measuredAtSha": "ae621381b528e809c2213d44b726dba51fa0cb3d",
+  "measuredBy": "§931 long-tail landing at the composed consist, second measurement after LT41b car 6 was held out (Fable 5.1 — validated)",
   "date": "2026-09-15",
-  "note": "car 7 added one test title to tests/domain/worldPulseTickClock.test.js — the arm that pins history.age as a generation-time constant across twelve advances",
-  "files": 2563,
-  "parked": 375,
-  "credited": 2188,
-  "titles": 24171,
-  "suiteTitles": 6453
+  "note": "car 6 held for the owner window; the marker fix, the bundle and provenance register cars add no title",
+  "files": 2572,
+  "parked": 377,
+  "credited": 2195,
+  "titles": 24308,
+  "suiteTitles": 6483
 }
