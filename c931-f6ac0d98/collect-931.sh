@@ -24,11 +24,13 @@ echo "  ledger and queue are PURE APPENDS"
 echo "  recut plan: $(git diff --no-index --numstat "$L/REWRITE_RECUT_PROGRAM_PLAN.md.head" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" | awk '{print "+"$1" -"$2}') (one row amended in place, append-only inside the row)"
 echo "  handoff: $(git diff --no-index --numstat "$L/HANDOFF_CURRENT.md.head" "$L/HANDOFF_CURRENT.md" | awk '{print "+"$1" -"$2}')"
 grep -q '^## §931 ' "$L/OWNER_DECISION_QUEUE.md" || { echo "ABORT: no §931 header in the ODQ copy"; exit 1; }
-grep -hoE '__[A-Z0-9_]+__' "$L/OWNER_DECISION_QUEUE.md" "$L/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md" | grep -v '^__LANEROWS__$' | grep -q . && { echo "ABORT: unfilled placeholder: $(grep -hoE '__[A-Z0-9_]+__' "$L"/*.md | grep -v '^__LANEROWS__$' | sort -u | tr '\n' ' ') (__LANEROWS__ is a pre-existing §882 note in the handoff, not ours)"; exit 1; }
+OURS='__(CAS|GATE|CHAIRVERIFY|STAMP|INFLIGHT|N2|NFINAL|TIP|TOTALS|CAPSULE|RUN4|RECUT_ROW|CONSIST_TIP|N|FIX_SHA|LT40|LT40_VERIFY|LT41B|LT41B_GOLDEN|LT41B_VERIFY|CHAIN|PROOF|NEG|PGLITE|LT41B_VERIFY)__'
+grep -hoE "$OURS" "$L/OWNER_DECISION_QUEUE.md" "$L/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md" | grep -q . && { echo "ABORT: unfilled placeholder of ours: $(grep -hoE "$OURS" "$L"/*.md | sort -u | tr '\n' ' ')"; exit 1; }
+echo "  (pre-existing tokens like __LANEROWS__ __ENC4_PROOFS__ __FILL__ in HEAD's docs are not ours and are left as they are)"
 # the ODQ must be the WORKING-TREE copy for chair-commit.sh (it always includes it from the working tree): place it, then commit
 cp "$L/OWNER_DECISION_QUEUE.md" docs/OWNER_DECISION_QUEUE.md
 git diff --cached --stat > $MY/c931/index-before.txt
-SP="$MY" sh "$SC/chair-tools/chair-commit.sh" --require-ref refs/preserve/landing-longtail-2026-09-15 "$(git rev-parse $CAS)" "$TIP" "$MY/c931/msg-931.txt" "$L/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md:docs/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md:docs/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md:docs/OWNER_SITTING_2026-09-15.md"
+SP="$MY" sh "$SC/chair-tools/chair-commit.sh" --require-ref landing-longtail-2026-09-15 "$(git rev-parse $CAS)" "$TIP" "$MY/c931/msg-931.txt" "$L/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md" "$L/FABLE_RETROVALIDATION_QUEUE.md:docs/FABLE_RETROVALIDATION_QUEUE.md" "$L/REWRITE_RECUT_PROGRAM_PLAN.md:docs/REWRITE_RECUT_PROGRAM_PLAN.md" "$L/OWNER_SITTING_2026-09-15.md:docs/OWNER_SITTING_2026-09-15.md"
 git diff --cached --stat > $MY/c931/index-after.txt
 cmp -s $MY/c931/index-before.txt $MY/c931/index-after.txt && echo "  real index UNCHANGED (proved)" || { echo "⛔ the real index changed — read index-before/after"; exit 1; }
 NEW=$(git rev-parse --short HEAD)

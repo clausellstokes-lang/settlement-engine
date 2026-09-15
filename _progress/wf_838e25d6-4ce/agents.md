@@ -1,7 +1,13 @@
-# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:07:15
-    - `ac77ce7a5` ? · IN FLIGHT · transcript 09-15 17:06 866 KB · 51 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-    - `ad4826378` ? · IN FLIGHT · transcript 09-15 17:06 808 KB · 56 tool calls · last: Bash sed -n '1005,1115p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c
-    - `a6f9c673d` ? · IN FLIGHT · transcript 09-15 17:03 735 KB · 44 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a174c368f` ? · IN FLIGHT · transcript 09-15 17:05 770 KB · 43 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aa82e67da` ? · IN FLIGHT · transcript 09-15 17:07 905 KB · 61 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a07425c37` ? · IN FLIGHT · transcript 09-15 17:07 1020 KB · 73 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:15:56
+    - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
+    - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
+    - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
+    - `a174c368f` ? · DONE · transcript 09-15 17:10 954 KB · 44 tool calls · result: {"family": "WY \u2014 wayfare (the inhabited roads, the physical flows, the mirror law)", "summary": "All 13 WY rows (12 waves + WY-8a) re-confirmed UNBUILT at 
+    - `aa82e67da` ? · DONE · transcript 09-15 17:13 1117 KB · 70 tool calls · result: {"family": "IN \u2014 INFORMATION (docs/DESIGN_FP_ARCH_IN.md, governing volume DESIGN_FP_INFORMATION.md; SOL_QUEUE A2 row 13)", "summary": "IN-0 is COMPLETE at 
+    - `a07425c37` ? · DONE · transcript 09-15 17:10 1132 KB · 78 tool calls · result: {"family": "ES \u2014 espionage (covert confirmation missions)", "summary": "Two waves remain: ES-6b (the vetting quality \u2014 the unbuilt slice of PART-BUILT
+    - `a7f3c891f` ? · IN FLIGHT · transcript 09-15 17:15 815 KB · 45 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a07029ba4` ? · IN FLIGHT · transcript 09-15 17:15 699 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a193b0425` ? · IN FLIGHT · transcript 09-15 17:15 705 KB · 34 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a8cdffdba` ? · IN FLIGHT · transcript 09-15 17:15 663 KB · 36 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a28674c8c` ? · IN FLIGHT · transcript 09-15 17:15 703 KB · 37 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `aeee29db4` ? · IN FLIGHT · transcript 09-15 17:15 552 KB · 28 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat

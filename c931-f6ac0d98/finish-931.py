@@ -15,7 +15,7 @@ tc=g(r'typecheck-ratchet\] OK — no type regressions \((\d+) error'); tcc=g(r'n
 ds=g(r'domain-strict\] ✓ no strict-type regressions \((\d+) errors'); dsc=g(r'no strict-type regressions \(\d+ errors, ceiling (\d+)\)')
 built=g(r'(✓ built in [0-9.]+s)'); sd='OK' if 'STRICT DIST OK' in gate else 'REFUSED'; sdd=g(r'STRICT DIST OK — (\d+ discovered/reported file\(s\), \d+ test\(s\))','')
 te=g(r'TRUE_EXIT=(\d+)'); pp=g(r'GATE_PORCELAIN_POST=\[(\d+)\]')
-gl=('quiet after %s s; GATE_CARS '+extra.get('NFINAL','?')+'; %s → %s; typecheck %s/%s · domain-strict %s/%s · the ratchet `%s known failure(s) of %s` (ceiling 1) · `%s` · STRICT DIST %s (%s) · TRUE_EXIT %s · porcelain post [%s] (`<f6ac0d98>/c931/gate-931.log`; the first gate\'s log kept as `gate-931.run1.log`)' % (quiet,gs,ge,tc,tcc,ds,dsc,known,tests,built,sd,sdd,te,pp))
+gl=(('quiet after %s s; GATE_CARS '+extra.get('NFINAL','?')+'; %s → %s; typecheck %s/%s · domain-strict %s/%s · the ratchet `%s known failure(s) of %s` (ceiling 1) · `%s` · STRICT DIST %s (%s) · TRUE_EXIT %s · porcelain post [%s] (`<f6ac0d98>/c931/gate-931.log`; the first gate\'s log kept as `gate-931.run1.log`)') % (quiet,gs,ge,tc,tcc,ds,dsc,known,tests,built,sd,sdd,te,pp))
 cv=open(MY+'/c931/chair-verify-931.out',encoding='utf-8',errors='replace').read().strip().split('\n')
 cvline=cv[-1]+' — %d PASS · %d SKIP · %d FAIL (`chair-verify-931.out`)' % (sum(1 for l in cv if l.startswith('PASS')),sum(1 for l in cv if l.startswith('SKIP')),sum(1 for l in cv if l.startswith('FAIL')))
 E=MY+'/c931/odq-931.entry.md'; s=open(E).read()
