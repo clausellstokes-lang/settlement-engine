@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import {
-  firingTabs, landTabAnswer, postTabRender, registerScribeTransport,
+  firingTabs, landTabAnswer, postTabRender, registerScribeTransport, retireForRedraw,
 } from '../../src/store/scribeTransport.js';
 import { getScribeRenderer, setScribeRenderer } from '../../src/lib/scribeRenderer.js';
 import { proseOf, unitsFor } from '../../src/lib/scribeArtefact.js';
@@ -135,5 +135,69 @@ describe('⛔ NO PROVIDER CALL FROM THE CLIENT, AND NO KEY', () => {
     expect(source).toMatch(/townCard\(settlement, \{ tab, audience: 'dm' \}\)/);
     expect(source).toMatch(/card,/);
     expect(source).not.toMatch(/body: JSON\.stringify\(\{[\s\S]{0,200}settlement,/);
+  });
+});
+
+describe('⭐ THE REDRAW RETIRES BEFORE IT LANDS (design §5c rule 1, ruling 16)', () => {
+  const keys = {
+    advanceSeq: 4, renderedFor: 'seed-a', renderedAt: '2026-09-14T00:00:00.000Z',
+    version: { engine: 'gen-1/sim-1' },
+  };
+  const scribed = () => landTabAnswer({ id: 't', name: 'Ashford' }, {
+    blocks: { 'DS-DEF-2': { 'FAMILY: acute crisis': [{ vid: 3, spine: 'The first survey.', faces: [], notebook: [] }] } },
+  }, keys);
+
+  it('the prior render moves WHOLE into the past lane marked redone, and nothing is deleted', () => {
+    const before = scribed();
+    const after = retireForRedraw(before, { at: '2026-09-15T00:00:00.000Z', nonce: 'redo:1' });
+    const prose = proseOf(after);
+    expect(prose.current).toBe(null);
+    expect(prose.epochs).toHaveLength(1);
+    expect(prose.epochs[0]).toMatchObject({
+      advanceSeq: 4, state: 'redone', redoneAt: '2026-09-15T00:00:00.000Z', nonce: 'redo:1',
+    });
+    // The words are still there: a redone epoch is readable, which is the whole of the owner's rule.
+    expect(prose.epochs[0].blocks['DS-DEF-2']['FAMILY: acute crisis'][0].spine).toBe('The first survey.');
+    // And the settlement it was read off is untouched — every writer here is pure.
+    expect(proseOf(before).current.advanceSeq).toBe(4);
+  });
+
+  it('the fresh draw lands on the emptied epoch, so one seq holds two renders and one is current', () => {
+    const retired = retireForRedraw(scribed(), { at: '2026-09-15T00:00:00.000Z', nonce: 'redo:1' });
+    const redrawn = landTabAnswer(retired, {
+      blocks: { 'DS-DEF-2': { 'FAMILY: acute crisis': [{ vid: 3, spine: 'The second survey.', faces: [], notebook: [] }] } },
+    }, { ...keys, renderedAt: '2026-09-15T00:00:00.000Z' });
+    const prose = proseOf(redrawn);
+    expect(prose.current.advanceSeq).toBe(4);
+    expect(unitsFor(prose, { blockId: 'DS-DEF-2', poolKey: 'FAMILY: acute crisis', renderedFor: 'seed-a' })[0].spine)
+      .toBe('The second survey.');
+    expect(prose.epochs.map((e) => e.state)).toEqual(['redone']);
+  });
+
+  it('a town with nothing rendered is the SAME settlement back: a redraw of nothing is a no-op', () => {
+    const plain = { id: 't' };
+    expect(retireForRedraw(plain, { at: 'x', nonce: 'y' })).toBe(plain);
+    expect(retireForRedraw(null, { at: 'x', nonce: 'y' })).toBe(null);
+  });
+
+  it('⛔ THE RETIREMENT RIDES WITH THE LANDING, so a failed redraw leaves the prior survey standing', () => {
+    // Retiring and persisting before the model answers would mean a redraw that failed had moved
+    // the survey into the past and put nothing in its place. The source pins the order: the retire
+    // is held in a local, and `nothing-landed` returns BEFORE the store write.
+    const source = readFileSync(join(ROOT, 'src/store/scribeTransport.js'), 'utf8');
+    const retireAt = source.indexOf('retireForRedraw(settlement,');
+    const guardAt = source.indexOf("return { ok: false, reason: 'nothing-landed'");
+    const writeAt = source.indexOf('store.useStore.setState');
+    expect(retireAt).toBeGreaterThan(0);
+    expect(guardAt).toBeGreaterThan(retireAt);
+    expect(writeAt).toBeGreaterThan(guardAt);
+  });
+
+  it('⛔ A REDRAW MOVES NO PRICING BYTE: it is a render, billed through the same one SKU', () => {
+    const source = readFileSync(join(ROOT, 'src/store/scribeTransport.js'), 'utf8');
+    const pricing = readFileSync(join(ROOT, 'src/config/pricing.js'), 'utf8');
+    expect(source).not.toMatch(/redraw['"]?\s*:\s*\d/);
+    expect(pricing).not.toContain('dossierRedraw');
+    expect(pricing).toContain('dossierProse');
   });
 });

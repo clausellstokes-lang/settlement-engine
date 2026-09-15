@@ -20,6 +20,11 @@ export default function DossierActionBand({
   settlement,
   saveId,
   liveSaveEntry,
+  // ⭐ THE SCRIBE'S ONE BUTTON (design §5c rule 1), arriving as a NODE for the same reason the
+  // narrative buttons do: every scrap of AI state stays in OutputContainer and this band stays
+  // presentational. It is null in every dark configuration — the caller does not even ask for its
+  // chunk while `FLAGS.scribe` is off — so the band's markup is byte-identical to today.
+  scribeRedraw = null,
   // When the first-save WelcomeCreditCard is showing it owns the single violet
   // Narrate pitch in this region; the band then collapses to its plain
   // owner-actions utility row so only one pitch competes for the focal point.
@@ -73,6 +78,7 @@ export default function DossierActionBand({
           primary's lead so it reads as subordinate. On narrow widths it reflows
           BELOW the narrative primary (last flex item with marginLeft:auto). */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, flexWrap: 'wrap', marginLeft: 'auto' }}>
+        {scribeRedraw}
         {!embedded && <BuyThisDossier settlement={settlement} saveId={saveId} />}
         <ShareToGallery
           saveId={saveId}

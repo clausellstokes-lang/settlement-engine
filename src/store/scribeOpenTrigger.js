@@ -26,13 +26,26 @@
  * no artefact has to be retryable by reopening the dossier, which is the only retry affordance the
  * design gives the reader.
  *
+ * ⭐⭐ AND THE ONE VERB THAT IS ALLOWED PAST ALL OF IT: THE REDRAW (design §5c rule 1, ruling 16;
+ * the owner, 2026-09-14 ~06:5x: "there should be an option to redo the AI narrative, to redraw
+ * based on the current settlement's facts"). A REDO is the DM asking for this epoch again, so the
+ * two conditions the OPEN exists to enforce are exactly the two it must not enforce: the artefact
+ * is FROZEN (that is what is being overridden) and the epoch has already been ASKED FOR (that is
+ * what is being replaced). Everything else still holds — the flag, the settlement, the durable
+ * home, the seed, the transport — and one more is added, because a redraw of nothing is not a
+ * redraw: there must BE a current render to retire. The double-click guard moves from the session
+ * ledger to its own in-flight set, so a second press while the first is in the air is refused
+ * rather than billed.
+ *
  * This module is reached by DYNAMIC import only (`settlementSlice.js` is size-baselined at
  * tolerance 0 and the first-paint closure is an exact byte budget), and it imports no transport:
  * the renderer arrives through the `lib/scribeRenderer.js` registry.
  */
 
 import { GENERATOR_VERSION, SIMULATION_VERSION } from '../domain/settlement.schema.js';
-import { isStale, proseOf, surveyStateOf } from '../lib/scribeArtefact.js';
+import {
+  currentAdvanceSeq, isStale, proseOf, surveyStateOf,
+} from '../lib/scribeArtefact.js';
 import { getScribeRenderer } from '../lib/scribeRenderer.js';
 import { advanceSeqOf } from './scribeEpochLane.js';
 
@@ -59,9 +72,20 @@ const ATTEMPTED = new Set();
 export const attemptKeyOf = (saveId, advanceSeq, renderedFor) =>
   `${String(saveId)}::${Number(advanceSeq) || 0}::${String(renderedFor)}`;
 
+/**
+ * ⭐ THE REDRAWS IN THE AIR, keyed exactly as `ATTEMPTED` is. A redo deliberately ignores the
+ * session ledger — the ledger's whole job is to refuse a second render of an epoch, and a second
+ * render of an epoch is what a redo IS — so the double-press guard has to live somewhere else.
+ * This is that somewhere: a key enters when the redraw is sent and leaves when it settles, so a
+ * DM who clicks twice pays once and the second press is refused with a reason rather than a spend.
+ * @type {Set<string>}
+ */
+const REDRAWING = new Set();
+
 /** Forget every attempt. Session-scoped teardown (sign-out, and every test). */
 export function resetScribeAttempts() {
   ATTEMPTED.clear();
+  REDRAWING.clear();
 }
 
 /**
@@ -71,9 +95,13 @@ export function resetScribeAttempts() {
  * @param {{settlement?: object|null, activeSaveId?: string|null, campaignId?: string|null,
  *   advanceSeqByCampaign?: Record<string, number>}} state
  * @param {{saveId?: string|null, campaignId?: string|null, flagOn?: boolean,
- *   hasRenderer?: boolean}} [ctx]
- * @returns {{render: boolean, reason: string, saveId: string, advanceSeq: number,
- *   renderedFor: string, engineVersion: string, survey: 'none'|'prior'|'current'}}
+ *   hasRenderer?: boolean, why?: 'open'|'redo'}} [ctx]
+ *   `why` is `open` unless stated. `redo` is the DM's own redraw of the CURRENT epoch (§5c rule
+ *   1): it passes the frozen test and the session ledger by design, and answers instead to
+ *   whether there is a render to replace and whether one is already in the air.
+ * @returns {{render: boolean, reason: string, why: 'open'|'redo', saveId: string,
+ *   advanceSeq: number, renderedFor: string, engineVersion: string,
+ *   survey: 'none'|'prior'|'current'}}
  */
 export function scribeOpenDecision(state, ctx = {}) {
   const settlement = state?.settlement || null;
@@ -84,8 +112,9 @@ export function scribeOpenDecision(state, ctx = {}) {
   const survey = surveyStateOf(prose, {
     advanceSeq, renderedFor, engineVersion: SCRIBE_ENGINE_VERSION,
   });
+  const why = ctx.why === 'redo' ? 'redo' : 'open';
   const base = {
-    render: false, reason: '', saveId, advanceSeq, renderedFor,
+    render: false, reason: '', why, saveId, advanceSeq, renderedFor,
     engineVersion: SCRIBE_ENGINE_VERSION, survey,
   };
 
@@ -93,9 +122,23 @@ export function scribeOpenDecision(state, ctx = {}) {
   if (!settlement) return { ...base, reason: 'no-settlement' };
   // Rule 14's durable-home condition. A freshly generated, unsaved town shows the corpus until it
   // is saved with its dossier open, which is the same moment; a discarded generation costs nothing.
+  // A REDRAW answers to it too: the redraw is billed, and nothing billed is spent on a settlement
+  // that cannot keep what it paid for.
   if (!saveId) return { ...base, reason: 'no-durable-home' };
   if (!renderedFor) return { ...base, reason: 'no-seed' };
   if (ctx.hasRenderer === false) return { ...base, reason: 'no-transport' };
+
+  // ⭐ THE REDRAW'S OWN TWO CONDITIONS, IN PLACE OF THE OPEN'S TWO. It may not run on a town with
+  // nothing rendered (there is no prior render to retire and the OPEN would have rendered it for
+  // nothing), and it may not run twice at once.
+  if (why === 'redo') {
+    if (currentAdvanceSeq(prose) === null) return { ...base, reason: 'no-survey' };
+    if (REDRAWING.has(attemptKeyOf(saveId, advanceSeq, renderedFor))) {
+      return { ...base, reason: 'redraw-in-flight' };
+    }
+    return { ...base, render: true, reason: 'redo' };
+  }
+
   if (!isStale(prose, { advanceSeq, renderedFor, engineVersion: SCRIBE_ENGINE_VERSION })) {
     return { ...base, reason: 'frozen' };
   }
@@ -115,21 +158,28 @@ export function scribeOpenDecision(state, ctx = {}) {
  * key is released, because a render that left no artefact has to be retryable by reopening.
  *
  * @param {{state: object, saveId?: string|null, campaignId?: string|null, flagOn?: boolean,
- *   guidance?: string}} args
+ *   guidance?: string, why?: 'open'|'redo'}} args
  * @returns {Promise<{render: boolean, reason: string, sent: boolean, result?: object}>}
  */
 export async function runScribeOpenTrigger(args) {
   const renderer = getScribeRenderer();
+  const why = args?.why === 'redo' ? 'redo' : 'open';
   const decision = scribeOpenDecision(args?.state, {
     saveId: args?.saveId,
     campaignId: args?.campaignId,
     flagOn: args?.flagOn,
     hasRenderer: renderer !== null,
+    why,
   });
   if (!decision.render || !renderer) return { ...decision, sent: false };
 
   const key = attemptKeyOf(decision.saveId, decision.advanceSeq, decision.renderedFor);
-  ATTEMPTED.add(key);
+  // ⭐ THE TWO VERBS HOLD TWO DIFFERENT SLOTS. The OPEN holds the epoch's one-render slot for the
+  // rest of the session; the REDO holds only the in-flight guard, because it is the DM asking for
+  // the epoch again and the epoch's slot is already spent. Both are taken BEFORE the await: two
+  // effects in one tick, or two clicks in one second, must not both pass and both bill.
+  if (why === 'redo') REDRAWING.add(key);
+  else ATTEMPTED.add(key);
   try {
     const result = await renderer({
       saveId: decision.saveId,
@@ -138,6 +188,7 @@ export async function runScribeOpenTrigger(args) {
       engineVersion: decision.engineVersion,
       settlement: args?.state?.settlement || null,
       guidance: typeof args?.guidance === 'string' ? args.guidance : '',
+      reason: why,
     });
     if (!result || result.ok !== true) ATTEMPTED.delete(key);
     return { ...decision, sent: true, result: result || { ok: false, reason: 'no-result' } };
@@ -147,5 +198,26 @@ export async function runScribeOpenTrigger(args) {
     // the slot and says so.
     ATTEMPTED.delete(key);
     return { ...decision, sent: true, result: { ok: false, reason: String(error?.message || error) } };
+  } finally {
+    REDRAWING.delete(key);
   }
+}
+
+/**
+ * ⭐⭐ THE REDRAW (design §5c rule 1, ruling 16). One line, because a redraw IS the open trigger
+ * with one word changed, and writing it as a second function with its own copy of the decision is
+ * how the two would come to disagree about what a render costs and who may ask for one.
+ *
+ * ⛔ THE RETIREMENT IS NOT HERE. `retireCurrent(prose, {state: 'redone'})` moves the prior render
+ * whole into the past lane, and that is a write to the store and to the save row — the transport's
+ * job and no other module's (there is exactly one writer of the artefact). This decides and asks;
+ * the transport retires, renders and persists as ONE act, so a redraw that never lands leaves the
+ * prior survey standing rather than a blank page and a lost epoch.
+ *
+ * @param {{state: object, saveId?: string|null, campaignId?: string|null, flagOn?: boolean,
+ *   guidance?: string}} args
+ * @returns {Promise<{render: boolean, reason: string, sent: boolean, result?: object}>}
+ */
+export function runScribeRedraw(args) {
+  return runScribeOpenTrigger({ ...(args || {}), why: 'redo' });
 }

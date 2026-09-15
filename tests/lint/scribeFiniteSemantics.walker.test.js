@@ -65,6 +65,7 @@ const DECLARED_IMPORTERS = Object.freeze({
   'src/store/campaignWorldPulseDeferred.js': 'The shared restore chokepoint re-attaches the moved artefact to the restored settlement and to the live view.',
   'src/store/scribeOpenTrigger.js': 'THE OPEN. Reads staleness to decide whether a render is owed; writes nothing.',
   'src/store/scribeTransport.js': 'THE TRANSPORT. Lands each tab answer through the writer and persists the settlement through the ordinary save outbox.',
+  'src/components/dossier/ScribeRedrawButton.jsx': 'THE REDRAW BUTTON (design §5c rule 1). Reads the CURRENT epoch number to decide whether there is a survey to redraw at all; writes nothing and constructs nothing. A component is a lawful reader by construction — the FINITE-SEMANTICS fence is about `src/domain` and `src/generators`, where a read would make text an input to the world.',
 });
 
 /** Every .js/.jsx file under a tree. */

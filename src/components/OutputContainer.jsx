@@ -50,6 +50,11 @@ const TableView = lazy(() => import('./TableView.jsx'));
 // §807(b) — the READ-ONLY shared dossier KEEPS "How this was simulated"
 // (§777's survivor). The band is a sibling leaf; the drawer stays lazy inside.
 const PublicSimulationBand = lazy(() => import('./dossier/PublicSimulationBand.jsx'));
+// ⭐ THE SCRIBE'S REDRAW (design §5c rule 1). LAZY AND GATED AT THE ELEMENT, not inside the
+// component: with `FLAGS.scribe` dark the element is never created, so this chunk is never even
+// requested and not one Scribe byte reaches the dossier's closure. The component self-gates on
+// the same flag as well, because a button that bills is not a thing to gate in one place.
+const ScribeRedrawButton = lazy(() => import('./dossier/ScribeRedrawButton.jsx'));
 // STRIP-1 (owner ruling, ODQ §725): the legacy settlement-map tab is GONE from the
 // product. The dossier's tab set is Summary / Systems / World / Notes — there is no
 // fifth Map tab, no MapTabShell specifier, and no map body to keep off first paint.
@@ -848,6 +853,15 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             saveId={saveId}
             liveSaveEntry={liveSaveEntry}
             embedded={hideHeader}
+            scribeRedraw={flag('scribe') && !playerView && !publicDossier && saveId ? (
+              <Suspense fallback={null}>
+                <ScribeRedrawButton
+                  saveId={saveId}
+                  playerView={playerView}
+                  publicDossier={publicDossier}
+                />
+              </Suspense>
+            ) : null}
           />
         )}
         {/* P104 — Welcome credit gift card. Self-gates inside; shown to

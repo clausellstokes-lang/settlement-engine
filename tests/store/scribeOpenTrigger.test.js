@@ -26,6 +26,7 @@ import {
   attemptKeyOf,
   resetScribeAttempts,
   runScribeOpenTrigger,
+  runScribeRedraw,
   scribeOpenDecision,
   scribeSeedOf,
 } from '../../src/store/scribeOpenTrigger.js';
@@ -270,5 +271,91 @@ describe('THE MOUNT — the dossier is where the open is observed, and it costs 
     expect(deps, 'the effect dependency array must be readable here').toBeTruthy();
     expect(deps[1]).not.toContain('guidance');
     expect(deps[1]).toContain('advanceSeq');
+  });
+});
+
+describe('⭐ THE REDRAW — the one verb allowed past the frozen test and the session ledger', () => {
+  // Design §5c rule 1 / ruling 16, the owner 2026-09-14 ~06:5x: "there should be an option to redo
+  // the AI narrative, to redraw based on the current settlement's facts." The two conditions the
+  // OPEN exists to enforce are exactly the two a REDO must not: the artefact is frozen (that is
+  // what is being overridden) and the epoch has been asked for (that is what is being replaced).
+
+  test('a redo of a CURRENT survey is owed a render, where an open is refused as frozen', () => {
+    const state = stateWith({ prose: renderedAt(0), seq: 0 });
+    const ctx = { campaignId: 'camp-1', hasRenderer: true };
+    expect(scribeOpenDecision(state, ctx)).toMatchObject({ render: false, reason: 'frozen' });
+    expect(scribeOpenDecision(state, { ...ctx, why: 'redo' }))
+      .toMatchObject({ render: true, reason: 'redo', why: 'redo', advanceSeq: 0 });
+  });
+
+  test('a redo passes the session ledger the open just spent', async () => {
+    const sent = [];
+    setScribeRenderer(async (request) => { sent.push(request.reason); return { ok: true }; });
+    const args = { state: stateWith(), saveId: 'ashford', campaignId: 'camp-1', flagOn: true };
+    await runScribeOpenTrigger(args);
+    // The open's slot is spent, so a second OPEN is refused …
+    expect(await runScribeOpenTrigger(args)).toMatchObject({ sent: false, reason: 'already-asked' });
+    // … and the redo goes through anyway, on a town that now has a current survey.
+    const after = { ...args, state: stateWith({ prose: renderedAt(0), seq: 0 }) };
+    expect(await runScribeRedraw(after)).toMatchObject({ sent: true });
+    expect(sent).toEqual(['open', 'redo']);
+  });
+
+  test('a redo on a town with NOTHING rendered is refused: there is no survey to redraw', () => {
+    expect(scribeOpenDecision(stateWith(), { campaignId: 'camp-1', hasRenderer: true, why: 'redo' }))
+      .toMatchObject({ render: false, reason: 'no-survey' });
+  });
+
+  test('a redo on an unsaved settlement is refused with the durable-home reason', () => {
+    const state = stateWith({ prose: renderedAt(0), seq: 0, saveId: null });
+    expect(scribeOpenDecision(state, { campaignId: 'camp-1', hasRenderer: true, why: 'redo' }))
+      .toMatchObject({ render: false, reason: 'no-durable-home' });
+  });
+
+  test('the flag and the transport still refuse a redo, and refuse it FIRST', () => {
+    const state = stateWith({ prose: renderedAt(0), seq: 0 });
+    expect(scribeOpenDecision(state, { flagOn: false, why: 'redo' }).reason).toBe('flag-off');
+    expect(scribeOpenDecision(state, { campaignId: 'camp-1', hasRenderer: false, why: 'redo' }).reason)
+      .toBe('no-transport');
+  });
+
+  test('two presses in one moment bill ONCE: the second is refused while the first is in the air', async () => {
+    let release = null;
+    let calls = 0;
+    setScribeRenderer(() => {
+      calls += 1;
+      return new Promise((resolve) => { release = () => resolve({ ok: true }); });
+    });
+    const args = {
+      state: stateWith({ prose: renderedAt(0), seq: 0 }),
+      saveId: 'ashford',
+      campaignId: 'camp-1',
+      flagOn: true,
+    };
+    const first = runScribeRedraw(args);
+    expect(await runScribeRedraw(args)).toMatchObject({ sent: false, reason: 'redraw-in-flight' });
+    release();
+    await first;
+    expect(calls).toBe(1);
+    // And the guard RELEASES, so the DM may redraw again once the first has settled.
+    setScribeRenderer(async () => { calls += 1; return { ok: true }; });
+    expect(await runScribeRedraw(args)).toMatchObject({ sent: true });
+    expect(calls).toBe(2);
+  });
+
+  test('THE BUTTON IS ABSENT DARK, and the band only ever composes it as a node', () => {
+    const button = readFileSync(join(ROOT, 'src/components/dossier/ScribeRedrawButton.jsx'), 'utf8');
+    const band = readFileSync(join(ROOT, 'src/components/dossier/DossierActionBand.jsx'), 'utf8');
+    const container = readFileSync(join(ROOT, 'src/components/OutputContainer.jsx'), 'utf8');
+    expect(button).toMatch(/if \(!flag\('scribe'\)\) return null;/);
+    expect(button).toMatch(/if \(!saveId \|\| playerView \|\| publicDossier\) return null;/);
+    expect(button).toMatch(/if \(surveySeq === null\) return null;/);
+    expect(button).toMatch(/getCost\('dossierProse'\)/);
+    // The trigger and the transport are reached dynamically, never as a static edge of the band.
+    expect(button).toMatch(/import\('\.\.\/\.\.\/store\/scribeOpenTrigger\.js'\)/);
+    expect(button).toMatch(/import\('\.\.\/\.\.\/store\/scribeTransport\.js'\)/);
+    expect(band).not.toMatch(/ScribeRedrawButton/);
+    // With the flag dark the ELEMENT is never created, so the chunk is never even requested.
+    expect(container).toMatch(/scribeRedraw=\{flag\('scribe'\) && !playerView && !publicDossier && saveId \?/);
   });
 });

@@ -23,7 +23,9 @@
 
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { setScribeRenderer } from '../lib/scribeRenderer.js';
-import { attachProse, landBlock, proseOf } from '../lib/scribeArtefact.js';
+import {
+  attachProse, landBlock, proseOf, retireCurrent,
+} from '../lib/scribeArtefact.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -115,13 +117,45 @@ export function landTabAnswer(settlement, answer, keys) {
 }
 
 /**
+ * ⭐⭐ THE REDRAW'S OWN FIRST ACT (design §5c rule 1, ruling 16), as a PURE function over the
+ * settlement so the order it happens in is a fact a test can read rather than a comment.
+ *
+ * The prior render moves WHOLE into the past lane marked `redone` — units, seq and nonce — and
+ * `current` is emptied, so the fresh draw lands on a clean epoch and the DM can still read what
+ * was replaced. Nothing is deleted anywhere on this path, which is the owner's rule for the undone
+ * epoch (~06:4x) applied to the redone one.
+ *
+ * ⛔ AND IT IS HELD IN MEMORY UNTIL SOMETHING LANDS. Retiring and persisting BEFORE the model
+ * answers would mean a redraw that fails — no credits, a provider refusal, a dropped connection —
+ * left the dossier with its survey moved into the past and nothing in its place, which is a page
+ * that got WORSE for pressing a button. So the retirement rides with the landing into one write:
+ * on success the epoch is retired and the new one is current, and on failure the settlement is not
+ * touched at all and the prior survey still reads.
+ *
+ * @param {object} settlement @param {{at: string, nonce: string, limit?: number}} how
+ * @returns {object} a NEW settlement, or the same one when there is nothing to retire
+ */
+export function retireForRedraw(settlement, how) {
+  const prose = proseOf(settlement);
+  if (!prose || !prose.current) return settlement;
+  return attachProse(settlement, retireCurrent(prose, {
+    state: 'redone', at: how?.at, nonce: how?.nonce, limit: how?.limit,
+  }));
+}
+
+/**
  * ⭐ THE RENDERER the trigger calls. Builds a card per firing tab, sends each, lands what comes
  * back, and persists ONCE at the end through the ordinary save outbox — `saves.js` writes the
  * settlement wholesale into `data`, so the artefact needs no column, no migration and no new call
  * site. Returns `{ok}` so the trigger's session ledger knows whether to hold the slot.
  *
+ * ⭐ `reason` IS `open` OR `redo` AND IT CHANGES EXACTLY ONE THING: on `redo` the prior render is
+ * retired into the past lane before the answers land, so the two renders of one epoch are kept
+ * apart instead of the second overwriting the first. It changes NO pricing byte: a redraw is a
+ * render and is billed through the same SKU by the same server call (`pricing.js` untouched).
+ *
  * @param {{saveId: string, advanceSeq: number, renderedFor: string, engineVersion: string,
- *   settlement: object, guidance: string}} request
+ *   settlement: object, guidance: string, reason?: 'open'|'redo'}} request
  * @returns {Promise<{ok: boolean, reason?: string, tabs?: number, landed?: number}>}
  */
 export async function renderScribe(request) {
@@ -141,14 +175,21 @@ export async function renderScribe(request) {
   const tabs = firingTabs(settlement, renderTabPage, SCRIBE_TABS);
   if (tabs.length === 0) return { ok: false, reason: 'no-tabs' };
 
+  const renderedAt = new Date().toISOString();
   const keys = {
     advanceSeq: request.advanceSeq,
     renderedFor: request.renderedFor,
-    renderedAt: new Date().toISOString(),
+    renderedAt,
     version: { scribe: null, engine: request.engineVersion, refuter: null, model: null },
   };
 
-  let next = settlement;
+  // ⭐ THE REDRAW RETIRES FIRST (see `retireForRedraw`). The nonce keeps two renders of the SAME
+  // advanceSeq apart, which is exactly the pair the past lane is keyed on: a redone epoch and the
+  // epoch that replaced it carry one seq and two nonces.
+  const redo = request?.reason === 'redo';
+  let next = redo
+    ? retireForRedraw(settlement, { at: renderedAt, nonce: `redo:${renderedAt}` })
+    : settlement;
   let landed = 0;
   for (const tab of tabs) {
     let card;
