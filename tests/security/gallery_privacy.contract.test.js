@@ -4,6 +4,25 @@
  * These assertions guard the contract without requiring a live Supabase
  * database in every CI lane. The database migration still needs to be
  * applied and exercised against Postgres before deploy.
+ *
+ * ── THE CHRONICLE ARMS ARE DEMOTED TO THE SECONDARY GUARD (A+ enforcement.6; LT36 car 5) ──
+ * The chronicle field allowlist is NOW EXECUTED:
+ * tests/security/galleryChronicleProjection.pglite.test.js loads the NET-CURRENT
+ * `_gallery_chronicle_entry` / `_gallery_chronicle_json` plus migrations 146 and 147
+ * wholesale into in-process Postgres, seeds a campaign eventLog carrying every private field
+ * migration 032's header names, switches to the `anon` role, selects the dossier, and
+ * asserts on the RETURNED JSON: the key set at any depth equals the allowlist exactly, the
+ * nested event object likewise, the newest-50 cap keeps the NEWEST, a malformed entry is
+ * dropped rather than passed through, and a mutation arm proves that re-adding `payload` to
+ * the projection makes the leak visible.
+ *
+ * ⛔ THE GREPS BELOW ARE KEPT, DELIBERATELY. They guard migration 032's SOURCE — that the
+ * allowlist is still spelled there, that the helper bodies still name no private field, that
+ * the sanitizer denylists were not weakened — which is a claim about the file a reviewer
+ * reads, not about what the function returns. The executed suite is the primary; deleting
+ * these would hollow the cheap guard and nobody would notice, which is what
+ * tests/security/moneySecurityExecutionFloor.test.js exists to refuse. Superseded arms carry
+ * an inline pointer instead.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -91,6 +110,8 @@ describe('gallery public chronicle contract (migration 032)', () => {
     expect(s).toMatch(/grant execute on function public\.get_gallery_dossier\(text\) to authenticated, anon/);
   });
 
+  // SECONDARY GUARD (source) — EXECUTED in galleryChronicleProjection.pglite.test.js, which
+  // compares the key set of the RETURNED chronicle, at any depth, against the allowlist.
   it('projects entries through an explicit allowlist — exactly these keys, nothing else', () => {
     const body = sqlFunctionBody(sql(), 'public._gallery_chronicle_entry');
     expect(body).toBeTruthy();
@@ -103,6 +124,9 @@ describe('gallery public chronicle contract (migration 032)', () => {
     );
   });
 
+  // SECONDARY GUARD (source) — EXECUTED in galleryChronicleProjection.pglite.test.js as SET
+  // EQUALITY rather than a roster of absences, so a private field nobody has invented yet
+  // still reds. This arm keeps the source roster honest for a reviewer reading 032.
   it('never references the private EventLogEntry fields in the chronicle projection', () => {
     // Raw log entries carry full system-state snapshots, per-system diffs,
     // faction reactions with adventure seeds, type-specific event extras, the
@@ -122,6 +146,8 @@ describe('gallery public chronicle contract (migration 032)', () => {
     }
   });
 
+  // SECONDARY GUARD (source) — EXECUTED in galleryChronicleProjection.pglite.test.js over 60
+  // seeded entries, which also asserts the surviving 50 are the NEWEST and not the oldest.
   it('caps the public chronicle at the newest 50 entries', () => {
     const body = sqlFunctionBody(sql(), 'public._gallery_chronicle_json');
     expect(body).toMatch(/jsonb_array_length\(entries\) - 50/);
