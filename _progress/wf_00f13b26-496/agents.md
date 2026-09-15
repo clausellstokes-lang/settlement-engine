@@ -1,4 +1,4 @@
-# wf_00f13b26-496 — per-agent progress, 2026-09-15 07:21:18
+# wf_00f13b26-496 — per-agent progress, 2026-09-15 07:26:41
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
     - `a9265e93e` ? · DONE · transcript 09-14 18:49 524 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["DS-ECO-6: the corpus fallback's own second sentence ('nothing organised behind it') is the exact line the brief lists as a refusa
