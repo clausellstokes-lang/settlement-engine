@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "646da630f06ce28c01d6830a2443692d98e39579",
+  "measuredAtSha": "52cfa319f63f27419b0de6651e6a52788ed8160c",
   "measuredBy": "LT38 lane (Opus 5, 1M context)",
   "date": "2026-09-15",
-  "note": "LT38 car 2 (LD-7) adds ONE test file, tests/lint/momentScopeRegistry.walker.test.js — the popup-scope registry walker (11 titles under 2 describes). No other test file was added or removed; tests/ui/pricingMomentRouting.test.jsx gained five titles under one new describe inside an existing file.",
+  "note": "LT38 car 3 (LD-10) adds ONE new describe with four titles to the EXISTING tests/components/privacyPolicyParity.test.js (the biconditional binding the consent settings copy to getConsent()`s live default). No test file was added or removed; tests/ui/privacySettings.test.jsx changed assertions only, at an unchanged title count.",
   "files": 2564,
   "parked": 375,
   "credited": 2189,
-  "titles": 24185,
-  "suiteTitles": 6455
+  "titles": 24189,
+  "suiteTitles": 6456
 }
