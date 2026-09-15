@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
+  "measuredAtSha": "a76fe8cdf1e828734ad7996db8b7a71bf1bd18ac",
+  "measuredBy": "LT41b car 6b (Opus 5 — Fable-unvalidated)",
+  "date": "2026-09-15",
+  "note": "LT41b car 6 (RULING 3) added ONE test to the already-credited tests/lint/vocabularyTotality.walker.test.js: the retired-spelling band-recovery arm the ruling owes, because powerStructure.stability is persisted and never migrated. Literal title inside an existing describe, its table walked by a for-of INSIDE the named test, so parked does not move and the file stays credited; no new test file, so files and credited do not move either. Deltas: titles +1, everything else 0.",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24169,
+  "titles": 24170,
   "suiteTitles": 6452
 }
