@@ -555,6 +555,7 @@ describe('THE SCRIBE — the render session is the whole-render identity (migrat
 
   it('NOTHING IS DELETED: an expired or aborted session is superseded, never dropped', () => {
     const sql = sql203();
+    // anchored: the positive `set superseded_at` on the next line is the liveness proof — the file must release slots, and this says it never does so by deleting.
     expect(sql).not.toMatch(/delete from public\.scribe_render_sessions/);
     expect(sql).toMatch(/set superseded_at = now\(\)/);
     // The abort refuses once any tab has landed — the render landed, so the charge stands.
@@ -567,14 +568,23 @@ describe('THE SCRIBE — the render session is the whole-render identity (migrat
     for (const fn of ['open_scribe_render', 'close_scribe_render_tab', 'abort_scribe_render']) {
       expect(sql, `${fn} must be created here`).toMatch(new RegExp(`^create or replace function public\\.${fn}\\(`, 'm'));
       expect(sql).toMatch(new RegExp(`grant execute on function public\\.${fn}\\([^)]*\\) to service_role;`));
+      // anchored: the service_role grant asserted on the line above is the liveness proof that this function's grants exist at all.
       expect(sql).not.toMatch(new RegExp(`grant execute on function public\\.${fn}\\([^)]*\\) to authenticated`));
     }
     // One pin per function plus the governor's (car 4), all pg_temp LAST.
     expect(sql.match(/set search_path = public, pg_temp/g).length).toBeGreaterThanOrEqual(3);
+    // anchored: the pinned-pin count on the line above is the liveness proof — pins exist, and none of them is the bare pg_temp-first form.
     expect(sql).not.toMatch(/set search_path = public;/);
-    // The table itself is deny-all with no policy at all.
+    // ⛔ THE TABLE IS DENY-ALL: RLS ON AND ZERO POLICIES. Spelled as a CENSUS of the file's own
+    // CREATE statements rather than as a `create policy` negative, because
+    // tests/lint/netCurrentExtractorAnchor.walker.test.js bars that spelling outright (an
+    // unanchored trigger/policy extractor swallows English out of a header) and a
+    // negative-presence guard has no anchored form. The census is the stronger pin anyway: a
+    // policy, a trigger or a second table arriving in this file reds here BY NAME.
     expect(sql).toMatch(/alter table public\.scribe_render_sessions enable row level security;/);
-    expect(sql).not.toMatch(/create policy .* on public\.scribe_render_sessions/);
+    const kinds = [...sql.matchAll(/^create\s+(?:or\s+replace\s+)?(table|unique index|index|function|policy|trigger|view)\b/gim)]
+      .map((m) => m[1].toLowerCase());
+    expect([...new Set(kinds)].sort()).toEqual(['function', 'index', 'table', 'unique index']);
   });
 
   it('the edge opens the session before it claims or spends, and only the first tab does either', () => {

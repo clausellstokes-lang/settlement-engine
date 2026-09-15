@@ -15,9 +15,13 @@
  *   4. There IS a current render to redraw. A town whose dossier has never been scribed has
  *      nothing to retire and nothing to compare against; the OPEN renders it, not this.
  *
- * ⛔ IT NAMES THE PRICE BEFORE IT SPENDS. `getCost('dossierProse')` is the live resolver every
- * other credited control on this page reads, so the number on the label is the number the server
- * charges and not a second copy of the table.
+ * ⛔ IT NAMES THE PRICE BEFORE IT SPENDS, AND IT NAMES WHAT THE PRICE BUYS.
+ * `getCost('dossierProse')` is the live resolver every other credited control on this page reads,
+ * so the number on the label is the number the server charges and not a second copy of the table.
+ * The words PER RENDER are load-bearing (W5b): a render is one call per dossier tab, and until the
+ * render session of migration 203 every one of those calls charged, so this label said five and
+ * the bill said thirty-five. The number is now true and the label says what it covers, because a
+ * price with no unit is the shape the defect hid in.
  *
  * ⛔ IT IMPORTS NO SCRIBE MODULE STATICALLY. The trigger and the transport arrive through
  * `await import(...)` inside the click handler, exactly as the open trigger's hook reaches them,
@@ -87,9 +91,9 @@ export default function ScribeRedrawButton({
       size="sm"
       busy={busy}
       onClick={redraw}
-      title={`Writes this dossier's prose again from the settlement as it stands now. The survey it replaces is kept and stays readable. Spends ${cost} credits.`}
+      title={`Writes this dossier's prose again from the settlement as it stands now. One render covers every tab of the dossier, and it is charged once: ${cost} credits per render, whatever it draws. The survey it replaces is kept and stays readable.`}
     >
-      {busy ? 'Redrawing the survey…' : `Redraw the survey (${cost} credits)`}
+      {busy ? 'Redrawing the survey…' : `Redraw the survey (${cost} credits per render)`}
     </Button>
   );
 }

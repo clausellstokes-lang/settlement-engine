@@ -89,7 +89,23 @@ describe('LIT — and still refused wherever a render could not be kept or shoul
     setFlagOverride('scribe', true);
     seat();
     render(<ScribeRedrawButton saveId="ashford" />);
-    expect(screen.getByRole('button').textContent).toMatch(/Redraw the survey \(5 credits\)/);
+    expect(screen.getByRole('button').textContent).toMatch(/Redraw the survey \(5 credits per render\)/);
+  });
+
+  test('⭐⭐ THE PRICE NAMES ITS UNIT (W5b): per RENDER, not per tab and not per anything', () => {
+    // A render is one call per dossier tab, and until migration 203's render session every one of
+    // them charged — so this label said five credits and the bill said thirty-five. The number is
+    // true now, and the unit is on the label because a price with no unit is where that hid.
+    setFlagOverride('scribe', true);
+    seat();
+    render(<ScribeRedrawButton saveId="ashford" />);
+    const button = screen.getByRole('button');
+    expect(button.textContent).toContain('per render');
+    expect(button.getAttribute('title')).toMatch(/One render covers every tab of the dossier/);
+    expect(button.getAttribute('title')).toMatch(/charged once/);
+    // ⛔ THE E2 RATCHET: no em dash in anything this control renders.
+    // anchored: the two title assertions above prove the string is present and populated.
+    expect(`${button.textContent} ${button.getAttribute('title')}`).not.toContain('—');
   });
 
   test('no durable home, no button: a redraw is billed and an unsaved town cannot keep it', () => {

@@ -25,9 +25,20 @@
 -- is byte-identical to 192; the CASE block is reached only when the config table holds no cost
 -- for the feature, which it does not.
 --
--- ⭐ ONE PRICE FOR THE WHOLE RENDER. The daily-life beats are the seventh tab call of the same
--- epoch render (§5c rule 4), so there is no second SKU and no per-tab charge: one render of a
--- settlement's dossier costs five credits whatever it draws.
+-- ⭐ ONE RENDER, ONE SPEND, HOWEVER MANY TABS IT DRAWS (the render session of migration 203 makes
+-- it so). The daily-life beats are the seventh tab call of the same epoch render (§5c rule 4), so
+-- there is no second SKU. There was, however, a per-tab CHARGE until 203: a render is one edge
+-- invocation per firing tab and each one ran its own `spend_credits`, so the five credits named
+-- here were five credits a TAB and thirty-five to fifty a render, and the free claim below was
+-- taken by the first tab rather than by the render.
+--
+-- ⚠ THIS PARAGRAPH IS A CORRECTION IN PLACE, AND THE CHAIR RULED IT LAWFUL BECAUSE THIS FILE HAS
+-- NEVER BEEN APPLIED ANYWHERE. The estate's rule is that a SHIPPED migration is never edited (a
+-- correction arrives as a new migration that re-seeds, never as a contradiction of a seed already
+-- executed somewhere). 202 is written-not-applied, like 201 and 203: no `supabase db push` has
+-- ever been taken for it, so there is no executed statement for this edit to contradict, and the
+-- alternative — shipping a header that is FALSE about the price of a render and a second file
+-- saying so — is worse for every reader who arrives at this one first. Recorded, vetoable.
 --
 -- Guarded by: tests/config/pricing.test.js (the client mirror), tests/edgeFunctions/contracts.test.js
 -- (the client/server drift pin), and the pglite money suites which execute this function.
@@ -179,6 +190,8 @@ begin
       -- THE SCRIBE'S ONE RENDER SKU (202; chair ruling 1 as amended by ruling 19): one price
       -- for the whole render of a settlement's dossier prose, dossier and daily life together.
       -- Placed at the retired narrative's own number, 5, and INERT until FLAGS.scribe is lit.
+      -- THE RENDER SESSION OF MIGRATION 203 IS WHAT MAKES THIS ONE CHARGE: it is reached by
+      -- exactly one of a render's tab invocations, and the rest never call this function.
       when 'dossierProse' then 5
       when 'progression' then 6
       when 'narrative_fast' then 2
@@ -292,4 +305,4 @@ revoke all on function public.spend_credits(text, text, text) from public;
 grant execute on function public.spend_credits(text, text, text) to authenticated;
 
 comment on function public.spend_credits(text, text, text) is
-  'Atomic credit spend (202 — adds the dossierProse arm at 5 to the 192 body). Config-first cost resolution (114), the 057 CASE block as the fallback, and the tier multiplier (192, still inert). THE SCRIBE''S SKU IS ONE PRICE FOR A WHOLE RENDER: dossier and daily life together, per epoch, and inert until FLAGS.scribe is lit.';
+  'Atomic credit spend (202 — adds the dossierProse arm at 5 to the 192 body). Config-first cost resolution (114), the 057 CASE block as the fallback, and the tier multiplier (192, still inert). THE SCRIBE''S SKU IS ONE PRICE PER RENDER: one render, one spend, however many tabs it draws (migration 203''s render session is what makes it so); dossier and daily life together, per epoch, and inert until FLAGS.scribe is lit.';

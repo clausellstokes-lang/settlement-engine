@@ -120,6 +120,7 @@ describe('⭐⭐ ONE RENDER, ONE CHARGE — the body the server keys the session
     // ⛔ NEGATIVE CONTROL: there is NO session id, token or nonce in the body. A client-supplied
     // one would let a forged value buy a render or charge for one twice.
     for (const forbidden of ['sessionId', 'session_id', 'renderToken', 'nonce']) {
+      // anchored: the `saveId`/`advanceSeq`/`renderedFor` assertions above prove the body is populated, so an empty one cannot pass this.
       expect(Object.keys(body), `the body must not carry ${forbidden}`).not.toContain(forbidden);
     }
   });
@@ -136,7 +137,7 @@ describe('⭐⭐ ONE RENDER, ONE CHARGE — the body the server keys the session
     const source = readFileSync(join(ROOT, 'src/store/scribeTransport.js'), 'utf8');
     expect(source).toMatch(/if \(sent\.data\.charged === true\) charged \+= 1;/);
     expect(source).toMatch(/return \{ ok: true, tabs: tabs\.length, landed, charged \};/);
-    // The client holds no opinion about the price of a render: it sends a card and reads a receipt.
+    // anchored: the two positive source pins above prove the counter exists and is returned, so a vanished module cannot pass this.
     expect(source).not.toMatch(/charged\s*=\s*[1-9]/);
   });
 });

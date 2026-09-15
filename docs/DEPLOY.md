@@ -150,7 +150,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `202_scribe_claim.sql`** (this
+**Current migration head: `203_scribe_render_session.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -164,6 +164,16 @@ migrations are additive and need no separate reading; these are the pending ones
 posture an operator has to know, and they stay listed here after they are applied
 because the fact does not expire:
 
+- `203_scribe_render_session.sql` — **inert, and it is what makes the Scribe's quoted price true.**
+  A render of a dossier is one edge invocation per firing tab, and until this file every one of them
+  ran its own `spend_credits('dossierProse')`, so the five credits 202 names were five credits a TAB
+  and thirty-five to fifty a render. It adds `scribe_render_sessions` (RLS on, ZERO policies,
+  service-role grants only) plus `open_scribe_render` / `close_scribe_render_tab` /
+  `abort_scribe_render` / `scribe_usage_precheck`: the first tab of a render mints a session and is
+  the only one that spends or claims the free render. It also seeds a `scribe_daily_render_cap`
+  operator setting in `system_config` (default five renders a day, the CHAIR's number and not the
+  owner's signed one). Nothing calls any of it until `FLAGS.scribe` is lit, which is a separate
+  owner act. Read it beside 202.
 - `202_scribe_claim.sql` — **inert, and it touches the MONEY function.** Two things THE SCRIBE
   needs before it can charge: the once-per-account free-render claim (`claim_free_scribe` /
   `release_free_scribe` / `free_scribe_available`, migration 118's pattern verbatim), and a
