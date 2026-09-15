@@ -1,28 +1,11 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "3b32472d6f2f8e41e7a5ff091b6f1c99b0ff73df",
-  "totalTests": 32584,
+  "measuredAtSha": "021f0523191b21bae95a9b98b944e610481fb292",
+  "totalTests": 32590,
   "totalFiles": 2509,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
-    "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
-      "file": "tests/docs/enforcement-claims.test.js",
-      "test": "enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target",
-      "subsystem": "docs / enforcement-claim meta-pin",
-      "cause": "SIX completeness claims carry no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds. MEASURED 2026-09-01 AT THE INSTRUMENTS CONSIST TIP bf902c59f by lane INSTR-land, BY SUITE, from the arm's own failureMessages[0]: docs/FABLE_VALIDATION_QUEUE.md at 179 (the R-BLD-10 chair ruling row; matched vocabulary machine-enforced) and at 3017, 3886 and 5663 (matched: 0 problems), docs/GOLDEN_SHIFT_LEDGER.md at 2128 (matched: machine-enforced), and docs/implementation/packets/foreign-policy/IN-0C.md at 484 (matched: machine-enforced). The single site this row named until now is one of the six; it is CORRECTED IN PLACE with the measuring sha rather than appended to. THE GROWTH FROM ONE TO SIX WAS NEVER INVISIBLE AND THIS ROW IS NOT THE INSTRUMENT: the FROZEN_NAKED pin in tests/docs/enforcement-claims.test.js, minted 2026-08-12, freezes all six PER CLAIM as file plus matched vocabulary with exact counts, and its arm - the banked naked-claim debt is frozen PER CLAIM, a seventh cannot hide inside it - PASSES GREEN at this tip, measured in the very run that produced the six above. Only this cause prose lagged the cure. Line numbers are given as of bf902c59f only; the pin is keyed on file and vocabulary precisely because these documents move under edit.",
-      "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "claims",
-          "kind": "count",
-          "pattern": "^\\S+\\.md:\\d+\\s",
-          "ceiling": 6,
-          "unit": "documentation completeness claims with no resolvable @enforced-by target"
-        }
-      ]
-    },
     "tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master": {
       "file": "tests/property/generatorGoldenMaster.test.js",
       "test": "generator golden master (cross-build output stability) every config produces byte-identical output to the golden master",
