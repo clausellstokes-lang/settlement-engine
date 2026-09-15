@@ -52,8 +52,9 @@ import {
  *  (`src/lib/scribeArtefact.js`), which an edge function may not import. /2 at W4 car 2, when the
  *  artefact gained `pendingRecord` — the record this function already reads off the request body
  *  as `record`, now parked on the artefact between the advance that made it and the open that
- *  spends it. */
-export const SCRIBE_ARTEFACT_SCHEMA = 2;
+ *  spends it. /3 at W4 car 4, when it gained `current.receipts` — the `verdicts` list this
+ *  function already returns, now kept per epoch so the DM can read which pools fell and why. */
+export const SCRIBE_ARTEFACT_SCHEMA = 3;
 
 /** The writer and the tier-1 refuter (chair ruling 8; the API skill's current default). */
 export const SCRIBE_MODEL = 'claude-opus-5';

@@ -1623,10 +1623,11 @@ export const SIMPLE_POOL_SENTENCE_CAP = 2;
 /**
  * The artefact shape this kernel understands. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`, which the
  * kernel may not import (it imports nothing, and the composer's fence is why). /2 at W4 car 2,
- * when the artefact gained `pendingRecord`: the shape this overlay reads did not move one byte,
- * but a build that drew a shape it did not fully know would be reading it on trust.
+ * when the artefact gained `pendingRecord`, and /3 at W4 car 4, when it gained
+ * `current.receipts`: the shape this overlay reads did not move one byte at either bump, but a
+ * build that drew a shape it did not fully know would be reading it on trust.
  */
-export const SCRIBE_DRAW_SCHEMA = 2;
+export const SCRIBE_DRAW_SCHEMA = 3;
 
 /**
  * One rendered unit as the artefact stores it: the ANNEX row it was written for, and the words.

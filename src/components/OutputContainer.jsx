@@ -55,6 +55,11 @@ const PublicSimulationBand = lazy(() => import('./dossier/PublicSimulationBand.j
 // requested and not one Scribe byte reaches the dossier's closure. The component self-gates on
 // the same flag as well, because a button that bills is not a thing to gate in one place.
 const ScribeRedrawButton = lazy(() => import('./dossier/ScribeRedrawButton.jsx'));
+// ⭐ THE DM'S SURVEY NOTES (ruling 6). Lazy and gated at the element for the same reason as the
+// redraw above: dark, the chunk is never requested. It self-gates on the flag, on the player view
+// and on the public projection too, because a report about which instrument refused which pool is
+// the game master's working and nobody else's.
+const ScribeSurveyNotes = lazy(() => import('./dossier/ScribeSurveyNotes.jsx'));
 // STRIP-1 (owner ruling, ODQ §725): the legacy settlement-map tab is GONE from the
 // product. The dossier's tab set is Summary / Systems / World / Notes — there is no
 // fifth Map tab, no MapTabShell specifier, and no map body to keep off first paint.
@@ -940,6 +945,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             regenDelta={storeLastRegenerationDelta}
             onDismissRegenDelta={clearLastRegenerationDelta}
           />
+          {flag('scribe') && !playerView && !publicDossier && (
+            <Suspense fallback={null}>
+              <ScribeSurveyNotes playerView={playerView} publicDossier={publicDossier} />
+            </Suspense>
+          )}
           {/* Regenerate overlay — floats progress above the dimmed existing content */}
           {aiRegenerating && (
             <div

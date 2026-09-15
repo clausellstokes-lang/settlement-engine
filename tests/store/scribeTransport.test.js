@@ -15,7 +15,7 @@ import {
   firingTabs, landTabAnswer, postTabRender, registerScribeTransport, retireForRedraw,
 } from '../../src/store/scribeTransport.js';
 import { getScribeRenderer, setScribeRenderer } from '../../src/lib/scribeRenderer.js';
-import { proseOf, unitsFor } from '../../src/lib/scribeArtefact.js';
+import { proseOf, surveyNotesOf, unitsFor } from '../../src/lib/scribeArtefact.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -234,5 +234,60 @@ describe('⭐ THE DAILY-LIFE BLOCK LANDS LIKE ANY OTHER (W4 car 3, design §5c r
     // always been sent. The beats ride the render that tab was already getting.
     const render = (unused, tab) => (tab === 'daily_life' ? [{ kind: 'composed' }] : []);
     expect(firingTabs({}, render, ['daily_life', 'war'])).toEqual(['daily_life']);
+  });
+});
+
+describe('⭐ THE VERDICT ROWS LAND WITH THEIR BLOCK (W4 car 4, ruling 6)', () => {
+  const keys = {
+    advanceSeq: 0, renderedFor: 'seed-a', renderedAt: '2026-09-14T00:00:00.000Z',
+    version: { engine: 'gen-1/sim-1' },
+  };
+
+  it('each block takes its own share, and a pool that landed NOTHING still files a row', () => {
+    const out = landTabAnswer({ id: 't' }, {
+      tab: 'defense',
+      blocks: {
+        'DS-DEF-2': { crisis: [{ vid: 3, spine: 'A line.', faces: [], notebook: [] }] },
+        'DS-DEF-5': { militia: [{ vid: 1, spine: 'Another.', faces: [], notebook: [] }] },
+      },
+      verdicts: [
+        { blockId: 'DS-DEF-2', poolKey: 'crisis', vid: 3, verdict: 'PATCHED', arms: ['T1-FIELD'], patched: ['face 0'] },
+        { blockId: 'DS-DEF-5', poolKey: 'militia', vid: 1, verdict: 'WITHHELD', arms: ['Q'], patched: [] },
+        // ⛔ THE ONE THAT MATTERS: refused whole, so it has no unit in `blocks` at all.
+        { blockId: 'DS-DEF-9', poolKey: 'wall', vid: 7, verdict: 'FAIL', arms: ['A6'], patched: [] },
+      ],
+    }, keys);
+    const notes = surveyNotesOf(proseOf(out));
+    expect(notes.total).toBe(3);
+    expect(notes.counts).toEqual({ failed: 1, patched: 1, withheld: 1 });
+    expect(notes.tabs[0].tab).toBe('defense');
+    expect(notes.tabs[0].rows.map((r) => r.blockId)).toEqual(['DS-DEF-2', 'DS-DEF-5', 'DS-DEF-9']);
+    // The rendered prose is untouched by any of it: a receipt is a report, never a change.
+    expect(unitsFor(proseOf(out), { blockId: 'DS-DEF-2', poolKey: 'crisis', renderedFor: 'seed-a' })[0].spine)
+      .toBe('A line.');
+  });
+
+  it('an answer carrying no verdicts lands exactly as it did before receipts existed', () => {
+    const out = landTabAnswer({ id: 't' }, {
+      tab: 'defense',
+      blocks: { 'DS-DEF-2': { crisis: [{ vid: 3, spine: 'A line.', faces: [], notebook: [] }] } },
+    }, keys);
+    expect(surveyNotesOf(proseOf(out)).total).toBe(0);
+    expect(proseOf(out).current.receipts).toEqual([]);
+  });
+
+  it('two tabs each file their own rows under their own name', () => {
+    const first = landTabAnswer({ id: 't' }, {
+      tab: 'defense',
+      blocks: { 'DS-DEF-2': { crisis: [{ vid: 3, spine: 'A.', faces: [], notebook: [] }] } },
+      verdicts: [{ blockId: 'DS-DEF-2', poolKey: 'crisis', vid: 3, verdict: 'FAIL', arms: ['D'], patched: [] }],
+    }, keys);
+    const second = landTabAnswer(first, {
+      tab: 'power',
+      blocks: { 'DS-POW-1': { seat: [{ vid: 2, spine: 'B.', faces: [], notebook: [] }] } },
+      verdicts: [{ blockId: 'DS-POW-1', poolKey: 'seat', vid: 2, verdict: 'WITHHELD', arms: ['Q'], patched: [] }],
+    }, keys);
+    const notes = surveyNotesOf(proseOf(second));
+    expect(notes.tabs.map((t) => t.tab)).toEqual(['defense', 'power']);
   });
 });

@@ -24,7 +24,7 @@
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { setScribeRenderer } from '../lib/scribeRenderer.js';
 import {
-  attachProse, landBlock, pendingRecordFor, proseOf, retireCurrent,
+  attachProse, landBlock, landReceipts, pendingRecordFor, proseOf, retireCurrent,
 } from '../lib/scribeArtefact.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -101,6 +101,12 @@ export async function postTabRender(body, token, fetchImpl = fetch) {
 export function landTabAnswer(settlement, answer, keys) {
   const blocks = answer && typeof answer.blocks === 'object' ? answer.blocks : null;
   if (!blocks) return settlement;
+  // ⭐ THE VERDICT ROWS RIDE WITH THE BLOCK THEY BELONG TO (W4 car 4, ruling 6). The response
+  // carries them as ONE list for the whole tab, so each block takes its own share: a row whose
+  // block is not landing here has no business in this landing, and splitting the list at the
+  // source is what lets the artefact merge them without knowing about tabs.
+  const verdicts = Array.isArray(answer?.verdicts) ? answer.verdicts : [];
+  const tab = typeof answer?.tab === 'string' ? answer.tab : '';
   let prose = proseOf(settlement);
   for (const blockId of Object.keys(blocks).sort()) {
     prose = landBlock(prose, {
@@ -111,7 +117,18 @@ export function landTabAnswer(settlement, answer, keys) {
       renderedAt: keys.renderedAt,
       version: keys.version,
       limit: keys.limit,
+      tab,
+      receipts: verdicts.filter((row) => String(row?.blockId) === blockId),
     });
+  }
+  // ⛔ AND THE ROWS FOR POOLS THAT LANDED NO BLOCK AT ALL ARE THE ONES THAT MATTER MOST. A pool
+  // the readers FAILED has no unit in `blocks` — it fell to the hand corpus, which is the whole
+  // point of the gate — so the loop above would drop exactly the rows a DM opens the notes for.
+  // `landReceipts` files them with no prose of their own.
+  const landedBlocks = new Set(Object.keys(blocks));
+  const orphans = verdicts.filter((row) => !landedBlocks.has(String(row?.blockId)));
+  if (orphans.length > 0 && prose) {
+    prose = landReceipts(prose, { advanceSeq: keys.advanceSeq, tab, receipts: orphans });
   }
   return prose ? attachProse(settlement, prose) : settlement;
 }

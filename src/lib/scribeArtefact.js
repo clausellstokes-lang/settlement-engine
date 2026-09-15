@@ -5,10 +5,12 @@
  * the result on ONE top-level key of the settlement blob:
  *
  *   settlement.prose = {
- *     schema: 2,
+ *     schema: 3,
  *     version:     { scribe, engine, refuter, model },
  *     renderedFor: '<the settlement seed the render was keyed to>',
- *     current:     null | { advanceSeq, renderedAt, blocks: { [blockId]: { [poolKey]: Unit } } },
+ *     current:     null | { advanceSeq, renderedAt,
+ *                           blocks:   { [blockId]: { [poolKey]: Unit } },
+ *                           receipts: [ { tab, blockId, poolKey, vid, verdict, arms, patched } ] },
  *     epochs:      [ { advanceSeq, nonce, renderedAt, state, blocks } ],  // the PAST LANE
  *     pendingRecord: null | <an epochRecord, computed at ADVANCE time>    // schema /2
  *   }
@@ -58,8 +60,13 @@ export const SCRIBE_SETTLEMENT_KEY = 'prose';
  * with the next render at open. W2 shipped the transport sending `record: null` on every render
  * and said so in terms; this is that gap closed. Absent is lawful everywhere: an artefact with no
  * pending record renders exactly as W2's did, and the writer's turn then says nothing moved.
+ *
+ * /3 (W4 car 4, 2026-09-14): `current.receipts` added — one row per pool the two readers acted on,
+ * so the DM can read WHICH pools fell to the hand corpus and on which arms (ruling 6: refused units
+ * are silently the corpus on the player page, and readable as a REPORT on the DM page). Absent is
+ * lawful: an artefact landed before this shape reads as a survey with no notes.
  */
-export const SCRIBE_ARTEFACT_SCHEMA = 2;
+export const SCRIBE_ARTEFACT_SCHEMA = 3;
 
 /**
  * How many COMPACT past epochs the blob keeps, and the HARD CEILING no tier may exceed.
@@ -108,7 +115,8 @@ export const SCRIBE_EPOCH_STATES = Object.freeze(['lived', 'undone', 'redone']);
  * @property {number} schema
  * @property {{scribe?: string, engine?: string, refuter?: string, model?: string}|null} version
  * @property {string} renderedFor
- * @property {{advanceSeq: number, renderedAt: string, blocks: ScribeBlocks}|null} current
+ * @property {{advanceSeq: number, renderedAt: string, blocks: ScribeBlocks,
+ *   receipts?: ScribeReceipt[]}|null} current  `receipts` is schema /3 and absent on an older one
  * @property {ScribeEpoch[]} epochs
  * @property {{advanceSeq?: number}|null} [pendingRecord] schema /2; ABSENT on an artefact that has
  *   not been through an advance, which is why every reader below tolerates its absence rather than
@@ -189,6 +197,128 @@ export function currentAdvanceSeq(prose) {
   if (!isArtefact(prose) || !isObj(prose.current)) return null;
   const seq = prose.current.advanceSeq;
   return typeof seq === 'number' && Number.isFinite(seq) ? seq : null;
+}
+
+/**
+ * ⭐⭐ THE SURVEY'S RECEIPTS (schema /3; chair ruling 6; W4 car 4).
+ *
+ * ⛔ WHY THEY ARE A LIST ON THE EPOCH AND NOT A KEY ON EACH UNIT. The brief's letter is
+ * `blocks[*][*].verdicts`, and two measured facts make that the wrong home. First, the rows that
+ * matter MOST are the ones with no unit to hang on: a pool the readers FAILED has nothing in
+ * `blocks`, because it fell to the hand corpus, and it is exactly the row a DM wants to see.
+ * Second, the unit's own `verdicts` field is already typed `string[]` on the shipped shape and in
+ * every fixture, and overloading it with records would make one key mean two things. So the whole
+ * receipt list rides on `current`, beside the blocks rather than inside them, and a reader gets
+ * PATCHED, WITHHELD and FAIL from one place.
+ *
+ * ⛔ THE FINDINGS' PROSE IS NOT STORED. A row keeps the verdict, the ARMS as the refuter names
+ * them, and the SEATS a patch replaced. The findings' descriptions are the render's working: they
+ * run to a hundred characters apiece and would multiply the list by ten to say, in words, what the
+ * arm name already says.
+ *
+ * ⛔ ONE ROW PER POOL, WORST VERDICT WINS, ARMS UNIONED. A unit can earn TWO rows, one per reader
+ * (tier 0 keeps it, the second reader patches it). Two rows for one pool would read as two
+ * problems; the reader wants one row that says what happened to that pool in the end.
+ *
+ * @typedef {{tab: string, blockId: string, poolKey: string, vid: number|null, verdict: string,
+ *   arms: string[], patched: string[]}} ScribeReceipt
+ */
+
+/** How the four verdicts rank when two rows land on one pool. FAIL is the worst and wins. */
+const RECEIPT_RANK = Object.freeze({
+  PASS: 0, WITHHELD: 1, PATCHED: 2, FAIL: 3,
+});
+
+/**
+ * How many receipt rows one epoch keeps. A settlement is ~57-68 firing pools across its tabs plus
+ * the five daily-life beats, so this holds every pool of a whole render with room over; the cap is
+ * here because the list comes off a server response and nothing that comes off a response is
+ * unbounded on the blob.
+ */
+export const SCRIBE_RECEIPT_LIMIT = 120;
+
+/** The row key: one per pool per epoch. */
+const receiptKeyOf = (row) => `${str(row?.tab)}::${str(row?.blockId)}::${str(row?.poolKey)}::${str(row?.vid)}`;
+
+/**
+ * One verdict row as the artefact keeps it: the pool, what happened to it, and on which arms.
+ * @param {object} row a verdict row from the render response @param {string} tab
+ * @returns {ScribeReceipt}
+ */
+function receiptOf(row, tab) {
+  return {
+    tab: str(tab),
+    blockId: str(row?.blockId),
+    poolKey: str(row?.poolKey),
+    vid: typeof row?.vid === 'number' ? row.vid : null,
+    verdict: str(row?.verdict) || 'FAIL',
+    arms: (Array.isArray(row?.arms) ? row.arms : []).map(str).filter(Boolean),
+    patched: (Array.isArray(row?.patched) ? row.patched : []).map(str).filter(Boolean),
+  };
+}
+
+/**
+ * Fold new rows into the ones this epoch already holds. Worst verdict wins, arms and seats union,
+ * order is the order the tabs landed in.
+ * @param {ScribeReceipt[]} held @param {ScribeReceipt[]} incoming @returns {ScribeReceipt[]}
+ */
+function mergeReceipts(held, incoming) {
+  const out = [];
+  /** @type {Map<string, ScribeReceipt>} */
+  const byKey = new Map();
+  for (const row of [...(Array.isArray(held) ? held : []), ...incoming]) {
+    const key = receiptKeyOf(row);
+    const prior = byKey.get(key);
+    if (!prior) {
+      byKey.set(key, row);
+      out.push(row);
+      continue;
+    }
+    const worse = (RECEIPT_RANK[row.verdict] ?? 0) > (RECEIPT_RANK[prior.verdict] ?? 0);
+    prior.verdict = worse ? row.verdict : prior.verdict;
+    prior.arms = [...new Set([...prior.arms, ...row.arms])].sort();
+    prior.patched = [...new Set([...prior.patched, ...row.patched])];
+  }
+  return out.length <= SCRIBE_RECEIPT_LIMIT ? out : out.slice(0, SCRIBE_RECEIPT_LIMIT);
+}
+
+/**
+ * ⭐ THE ROWS A DM READS (ruling 6). Only the pools something HAPPENED to: a PASS is the ordinary
+ * case and a page of them would bury the three rows that matter. Grouped by tab, sorted, and with
+ * a count per verdict so the panel can say how the survey went in one line.
+ *
+ * @param {unknown} prose
+ * @returns {{tabs: Array<{tab: string, rows: ScribeReceipt[]}>,
+ *   counts: {failed: number, patched: number, withheld: number}, total: number}}
+ */
+export function surveyNotesOf(prose) {
+  const empty = { tabs: [], counts: { failed: 0, patched: 0, withheld: 0 }, total: 0 };
+  if (!isArtefact(prose) || !isObj(prose.current)) return empty;
+  const rows = Array.isArray(/** @type {any} */ (prose.current).receipts)
+    ? /** @type {ScribeReceipt[]} */ (/** @type {any} */ (prose.current).receipts) : [];
+  const kept = rows.filter((row) => row && row.verdict !== 'PASS');
+  if (kept.length === 0) return empty;
+  /** @type {Map<string, ScribeReceipt[]>} */
+  const byTab = new Map();
+  const counts = { failed: 0, patched: 0, withheld: 0 };
+  for (const row of kept) {
+    if (row.verdict === 'FAIL') counts.failed += 1;
+    else if (row.verdict === 'PATCHED') counts.patched += 1;
+    else if (row.verdict === 'WITHHELD') counts.withheld += 1;
+    const tab = str(row.tab);
+    if (!byTab.has(tab)) byTab.set(tab, []);
+    /** @type {ScribeReceipt[]} */ (byTab.get(tab)).push(row);
+  }
+  const tabs = [...byTab.entries()]
+    .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+    .map(([tab, list]) => ({
+      tab,
+      rows: list.slice().sort((a, b) => {
+        const byBlock = a.blockId < b.blockId ? -1 : a.blockId > b.blockId ? 1 : 0;
+        return byBlock || (a.poolKey < b.poolKey ? -1 : a.poolKey > b.poolKey ? 1 : 0);
+      }),
+    }));
+  return { tabs, counts, total: kept.length };
 }
 
 /**
@@ -300,7 +430,7 @@ export function surveyStateOf(prose, q) {
  * @param {unknown} prose the artefact so far (null/absent starts one)
  * @param {{advanceSeq: number, blockId: string, pools: Record<string, object[]>,
  *   renderedFor: string, renderedAt?: string, version?: object, nonce?: string,
- *   limit?: number}} landing
+ *   limit?: number, tab?: string, receipts?: object[]}} landing
  * @returns {object} a NEW artefact
  */
 export function landBlock(prose, landing) {
@@ -326,11 +456,22 @@ export function landBlock(prose, landing) {
     });
   }
   if (!isObj(next.current)) {
-    next.current = { advanceSeq: seq, renderedAt: str(landing.renderedAt), blocks: {} };
+    next.current = {
+      advanceSeq: seq, renderedAt: str(landing.renderedAt), blocks: {}, receipts: [],
+    };
   }
+  if (!Array.isArray(next.current.receipts)) next.current.receipts = [];
   next.current.advanceSeq = seq;
   if (landing.renderedAt) next.current.renderedAt = str(landing.renderedAt);
   next.current.blocks[blockId] = clone(pools);
+
+  // ⭐ THE RECEIPTS FOR THIS BLOCK (schema /3). They ride with the landing rather than in a second
+  // write, so a block and the account of what happened to it can never be out of step. See
+  // `surveyNotesOf` for why they live on the epoch and not on the units.
+  if (Array.isArray(landing.receipts) && landing.receipts.length > 0) {
+    const incoming = landing.receipts.map((row) => receiptOf(row, landing.tab));
+    next.current.receipts = mergeReceipts(next.current.receipts, incoming);
+  }
 
   // ⭐ THE LANDING CLEARS THE RECORD IT WAS OWED (schema /2). A pending record exists to tell ONE
   // render what moved; once that epoch's prose is landing there is nothing left for it to licence,
@@ -341,6 +482,31 @@ export function landBlock(prose, landing) {
   if (pending && typeof pending.advanceSeq === 'number' && seq >= pending.advanceSeq) {
     delete next.pendingRecord;
   }
+  return next;
+}
+
+/**
+ * ⭐ LAND RECEIPTS ALONE, for the rows whose pool landed NO BLOCK (W4 car 4).
+ *
+ * ⛔ THOSE ARE THE ROWS THAT MATTER MOST. A pool the two readers FAILED has no unit in `blocks` —
+ * it fell to the hand corpus, which is the whole point of the gate — so a receipt reader that only
+ * saw rows beside landed blocks would show the DM everything except the refusals. This is the one
+ * write that carries no prose, and it is a no-op on an artefact with no current epoch: receipts
+ * belong to a render, and a render that landed nothing has none.
+ *
+ * @param {unknown} prose @param {{advanceSeq: number, tab?: string, receipts: object[]}} landing
+ * @returns {object} a NEW artefact, or a clone when there is nothing to file
+ */
+export function landReceipts(prose, landing) {
+  if (!isArtefact(prose)) return isObj(prose) ? clone(prose) : emptyArtefact();
+  const rows = Array.isArray(landing?.receipts) ? landing.receipts : [];
+  const next = clone(prose);
+  const current = next.current;
+  if (!isObj(current) || rows.length === 0) return next;
+  const seq = typeof landing?.advanceSeq === 'number' ? landing.advanceSeq : 0;
+  if (current.advanceSeq !== seq) return next;
+  if (!Array.isArray(current.receipts)) current.receipts = [];
+  current.receipts = mergeReceipts(current.receipts, rows.map((row) => receiptOf(row, landing.tab)));
   return next;
 }
 
