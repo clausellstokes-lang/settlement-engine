@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-14 21:19:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 21:25:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = f70dfee96 Plan: the collection at 09-14 ~22:1x — the Scribe is built through W4, dark and unverifi
+product claude/composite-r4 = f73bdbf16 · ledger = 4542feb27 Plan: the Scribe tier proposal for the owner's signature (design §12 item 16, never writt
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
@@ -113,15 +113,15 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_00542089-397** (mtime 09-14 21:15): agent calls 3 (3 distinct) · DONE 2 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_00542089-397/`
+- **wf_00542089-397** (mtime 09-14 21:15): agent calls 3 (3 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00542089-397/`
     - `a0745eb26` ? · DONE · transcript 09-14 21:15 982 KB · 58 tool calls · result: {"summary": "All paths in `where` are RELATIVE TO THE WORKTREE ROOT `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
     - `a534045ec` ? · DONE · transcript 09-14 21:14 882 KB · 28 tool calls · result: {"summary": "The record holds ONE owner sentence that opens a Scribe subscription tier \u2014 2026-09-14 ~13:2x, \"Because I'm thinking that this could actually
-    - `afc802268` ? · IN FLIGHT · transcript 09-14 21:18 407 KB · 3 tool calls · last: Bash pkill -f "find / -name" 2>/dev/null; echo done
-- **wf_a788be93-699** (mtime 09-14 21:11): agent calls 4 (4 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_a788be93-699/`
-    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:19 765 KB · 58 tool calls · files: t_arm1.txt, t_arm3.txt, t_arm2.txt, t_all.txt · last: Bash SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `ac66e2c65` ? · IN FLIGHT · transcript 09-14 21:19 798 KB · 64 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · last: Bash W=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:19 951 KB · 70 tool calls · files: WEBSITE-PLAN-2.md · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratc
-    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:19 825 KB · 59 tool calls · files: pm.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `afc802268` ? · DONE · transcript 09-14 21:21 517 KB · 6 tool calls · files: SCRIBE_TIER_PROPOSAL.md · result: {"markdown": "# THE SCRIBE TIER PROPOSAL\n\n*File written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4
+- **wf_a788be93-699** (mtime 09-14 21:11): agent calls 4 (4 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 3 — mirror `_progress/wf_a788be93-699/`
+    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:25 1034 KB · 85 tool calls · files: t2.txt, t4.txt, tall.txt, tip_arm1.txt · last: Bash SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `ac66e2c65` ? · DONE · transcript 09-14 21:22 903 KB · 66 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · result: {"n": 42, "title": "The record's own housekeeping \u2014 the deferral sweep's unrun half, the queue-copy trap, three ledger holes, and the 245-section span", "s
+    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:22 1057 KB · 80 tool calls · files: WEBSITE-PLAN-2.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:25 1148 KB · 97 tool calls · files: pm.json, ch2b.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_00f13b26-496** (mtime 09-14 19:35): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
@@ -462,4 +462,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 4.38 4.83 9.34
+load: 2.17 3.39 7.24

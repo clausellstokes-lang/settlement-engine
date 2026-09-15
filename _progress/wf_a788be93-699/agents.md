@@ -1,5 +1,5 @@
-# wf_a788be93-699 — per-agent progress, 2026-09-14 21:19:54
-    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:19 765 KB · 58 tool calls · files: t_arm1.txt, t_arm3.txt, t_arm2.txt, t_all.txt · last: Bash SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
-    - `ac66e2c65` ? · IN FLIGHT · transcript 09-14 21:19 798 KB · 64 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · last: Bash W=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:19 951 KB · 70 tool calls · files: WEBSITE-PLAN-2.md · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratc
-    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:19 825 KB · 59 tool calls · files: pm.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+# wf_a788be93-699 — per-agent progress, 2026-09-14 21:25:25
+    - `a4549bf93` ? · IN FLIGHT · transcript 09-14 21:25 1034 KB · 85 tool calls · files: t2.txt, t4.txt, tall.txt, tip_arm1.txt · last: Bash SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scrat
+    - `ac66e2c65` ? · DONE · transcript 09-14 21:22 903 KB · 66 tool calls · files: sh_head.txt, odqsecs.txt, all_secs.txt, prov_secs.txt · result: {"n": 42, "title": "The record's own housekeeping \u2014 the deferral sweep's unrun half, the queue-copy trap, three ledger holes, and the 245-section span", "s
+    - `ab7391315` ? · IN FLIGHT · transcript 09-14 21:22 1057 KB · 80 tool calls · files: WEBSITE-PLAN-2.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aee0bf3d5` ? · IN FLIGHT · transcript 09-14 21:25 1148 KB · 97 tool calls · files: pm.json, ch2b.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
