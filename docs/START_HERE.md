@@ -3,9 +3,37 @@
 ### reading this, the owner's prior session ended (usage limit / model switch).
 ### This file assumes you know NOTHING. Read it fully before touching anything.
 
+> ## ⭐⭐⭐⭐⭐ CURRENT POINTER — 2026-09-14 (ODQ §924). READ THIS BLOCK FIRST; EVERYTHING BELOW IT IS HISTORICAL BOOTSTRAP CONTEXT.
+>
+> **1. `docs/HANDOFF_CURRENT.md` — FIRST, WHOLE.** It is model-agnostic and is refreshed at EVERY
+> collection (ODQ §233); a stale handoff is a failed handoff. **2. THIS FILE** — for what the project
+> IS, the owner's doctrine, and the laws that cost the most to relearn. **3. THE TAIL OF
+> `docs/OWNER_DECISION_QUEUE.md`** — the ledger, now past §920.
+>
+> ⛔ **`docs/RESUME_STATE.md` IS NOT THE ENTRY POINT.** Section 0 below still says to read it FIRST;
+> that instruction is **SUPERSEDED**. It is an automatically generated snapshot, stale in its paths,
+> refs and figures, and it is not refreshed at collections. Regenerate it before relying on any
+> figure in it, or do not use it.
+>
+> ⛔ **THE LEDGER'S NUMBERING HAS THREE GENUINE HOLES AND TWO FALSE ALARMS** (measured at ODQ §920,
+> ratcheted at §921): 906 of the 920 numbers §0–§919 carry an opener. §§277–§286 are GENERATION-SPEC
+> fold labels and §246 lives inside §245's combined header — **neither is missing**. The genuine holes
+> are **§178** (home: ODQ §170 + charter §15 at docs/DESIGN_FP_ARCH_MF.md:470 — "§178" is a misnumber),
+> **§183** (§183.1's home is §182.1; §183.3's home is **UNKNOWN**) and **§683** (home: the PANEL AMENDMENT
+> at docs/DESIGN_SPINE_COMPLETION.md:207).
+>
+> ⛔⛔ **THE MAIN CHECKOUT IS A STALE SNAPSHOT AND ITS INDEX IS PRE-STAGED WITH THE OWNER'S DELETIONS.**
+> Read committed content with `git show HEAD:<path>`, or from a worktree cut at HEAD — never from the
+> checkout's files. A docs search there MUST carry an explicit revision (`git grep <pat> HEAD --
+> 'docs/**.md'`), because `git grep` with no revision reads the INDEX, which holds **312 of HEAD's 884**
+> docs `*.md` and returns a silent subset with exit 0 (ODQ §920.6). **NEVER** run a bare `git commit`,
+> `git add -A/-u/.` or `git commit -a` in that tree: the index carries ~29,663 staged ledger deletions.
+> Ledger documents are committed ONLY by `chair-tools/chair-commit.sh`, which since ODQ §923 refuses any
+> append-only file that does not contain its parent as a byte prefix.
+
 ## ⭐⭐⭐ 0. BEFORE ANYTHING ELSE — THIS FILE IS DATED 2026-07-18 AND IS THREE WEEKS STALE
 
-**Read `docs/RESUME_STATE.md` FIRST.** Its top section is a zero-context HANDOFF written
+**⛔ SUPERSEDED BY THE CURRENT POINTER ABOVE — kept verbatim as the historical instruction:** *Read `docs/RESUME_STATE.md` FIRST.* Its top section is a zero-context HANDOFF written
 2026-08-11 for a new account, and it supersedes this file wherever they disagree. It
 carries: the two-tree topology; the **private-index commit method that is now MANDATORY**
 (the main worktree's files match no branch, so `git status` there is not a safety check);
