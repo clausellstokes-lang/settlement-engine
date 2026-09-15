@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 07:42:53 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 07:48:20 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -473,4 +473,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.28 2.32 2.40
+load: 1.73 2.02 2.23
