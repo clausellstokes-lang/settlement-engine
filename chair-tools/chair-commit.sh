@@ -102,6 +102,76 @@ if ! grep -q '^Enrols: none — ' "$MSGFILE"; then
   fi
 fi
 
+# --- THE APPEND-ONLY PREFIX GATE (§883.5(c), RATIFIED §892) -------------------
+# THE HAZARD, FOUND BY THE CHAIR WHILE APPENDING §883.5 AND STILL OPEN UNTIL NOW:
+# three copies of docs/FABLE_RETROVALIDATION_QUEUE.md existed on disk and TWO WERE
+# STALE, and this tool maps by whichever path it is handed, "silently and without
+# comparison". Appending to the stale one would have landed a commit that DELETED
+# four strata while passing every gate this program owns — because both existing
+# arms (§688.7's and §882.14's) only ask whether the blob DIFFERS from the parent's,
+# and a regression differs. §892 ratified the cure and recorded that it was still
+# not installed in any copy of this script: `grep -ci prefix` returned 0 in all five
+# preserved toolkits and in the live copy.
+#
+# THE CURE: an append-only file's new version must EXTEND its parent. Refuse any
+# source whose first N bytes are not byte-identical to the parent blob's N bytes.
+# A truncation, a stale copy, a mid-file edit and a reordering all fail; a genuine
+# append passes. Proved by `git hash-object`, so the comparison is the same one git
+# itself would make.
+#
+# ⛔ IT COVERS BOTH APPEND-ONLY FILES, NOT ONLY THE ONE THE RECORD FOUND. The ODQ is
+# read UNCONDITIONALLY from the main checkout's working tree further down
+# (`H=$(git hash-object -w docs/OWNER_DECISION_QUEUE.md)`) and had NO gate of any
+# kind — and that checkout is a stale snapshot whose index carries ~29,663 staged
+# ODQ deletions. It is the arm the record never had.
+#
+# ⚠ docs/PROVENANCE_MAP.tsv is DELIBERATELY NOT in this list. Its ROWS are additive
+# but its documentation header is corrected in place (§922.7), so it is not
+# byte-prefix append-only. Its additivity is gated by
+# tests/scripts/provenanceMap.test.js arm 3 instead. Adding it here would be a
+# false red; leaving it ungated here is a deliberate, recorded choice.
+APPEND_ONLY_PATHS="docs/OWNER_DECISION_QUEUE.md docs/FABLE_RETROVALIDATION_QUEUE.md"
+
+prefix_gate() {
+  PG_SRC="$1"; PG_DST="$2"
+  PG_OLD=$(git -C "$REPO" rev-parse "refs/heads/review-fixes-2026-07-08:$PG_DST" 2>/dev/null || echo none)
+  if [ "$PG_OLD" = none ]; then return 0; fi   # a new file has no parent to extend
+  PG_PSIZE=$(git -C "$REPO" cat-file -s "$PG_OLD")
+  PG_SSIZE=$(wc -c < "$PG_SRC" | tr -d ' ')
+  if [ "$PG_SSIZE" -lt "$PG_PSIZE" ]; then
+    echo "ABORT: $PG_DST SHRANK — $PG_SSIZE B against the parent's $PG_PSIZE B (§883.5(c))."
+    echo "  Source: $PG_SRC"
+    echo "  An append-only file must EXTEND its parent. You are almost certainly holding a"
+    echo "  STALE COPY: build it from 'git show HEAD:$PG_DST', verify by md5, THEN append."
+    exit 1
+  fi
+  PG_PREFIX=$(head -c "$PG_PSIZE" "$PG_SRC" | git -C "$REPO" hash-object --stdin)
+  if [ "$PG_PREFIX" != "$PG_OLD" ]; then
+    echo "ABORT: $PG_DST does not CONTAIN its parent as a byte prefix (§883.5(c), §892)."
+    echo "  Source: $PG_SRC"
+    echo "  parent blob      : $PG_OLD ($PG_PSIZE B)"
+    echo "  source's first ${PG_PSIZE}B: $PG_PREFIX"
+    echo "  The first $PG_PSIZE bytes differ, so this is a REWRITE, not an append — a stale copy,"
+    echo "  a mid-file edit or a reordering. Every other gate here passes it, because a"
+    echo "  regression DIFFERS. Rebuild from 'git show HEAD:$PG_DST' and append."
+    exit 1
+  fi
+}
+
+# the ODQ, which this tool always takes from the working tree
+for PG_P in $APPEND_ONLY_PATHS; do
+  case "$PG_P" in
+    docs/OWNER_DECISION_QUEUE.md) prefix_gate "$REPO/docs/OWNER_DECISION_QUEUE.md" "$PG_P" ;;
+  esac
+done
+# every mapped path that is append-only
+for PAIR in "$@"; do
+  PG_D="${PAIR#*:}"
+  for PG_P in $APPEND_ONLY_PATHS; do
+    if [ "$PG_D" = "$PG_P" ]; then prefix_gate "${PAIR%%:*}" "$PG_D"; fi
+  done
+done
+
 # --- THE SUBJECT-ANCHOR GATE (§687.9) ---
 # The §678 class, now bitten a THIRD time: a writer script aborts, the committer runs
 # anyway (no `&&`), and a ledger message announces a section the ledger does not contain.

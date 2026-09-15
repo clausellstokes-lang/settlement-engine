@@ -1,4 +1,4 @@
-# wf_980caecf-038 — per-agent progress, 2026-09-14 22:33:42
+# wf_980caecf-038 — per-agent progress, 2026-09-14 22:40:01
     - `a58382150` ? · DONE · transcript 09-14 02:48 453 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 ADEQUATE", "claimFreezeHeld": false, "facesChanged": 22, "facesUnchanged": 9, "lineTotal": 31, "ownerTestBefore": 13, "ownerT
     - `af201562a` ? · DONE · transcript 09-14 02:49 495 KB · 6 tool calls · result: {"pool": "Economic Survival / WEAK", "claimFreezeHeld": false, "facesChanged": 9, "facesUnchanged": 18, "lineTotal": 30, "ownerTestBefore": 19, "ownerTestAfter"
     - `a6c164d77` ? · DONE · transcript 09-14 02:46 430 KB · 4 tool calls · result: {"pool": "Economic Survival \u00b7 CRITICAL (3 variants, 3 spines, 20 faces, 23 lines)", "claimFreezeHeld": false, "facesChanged": 7, "facesUnchanged": 13, "lin
