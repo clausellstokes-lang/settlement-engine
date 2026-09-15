@@ -1,0 +1,35 @@
+{
+  "_law": "ONLY SHRINKS. This file lists the ledger numbers KNOWN to be cited but never written — the \u00a7683 class (ODQ \u00a7685.5(vi), measured at \u00a7920, instrumented at \u00a7921). A NEW number fails tests/lint/ledgerCitationIntegrity.test.js; a number whose citations have all gone also fails, with 'delete its entry'. The set can only fall. It holds the SET, never the counts: a count assertion would red every time a chair legitimately writes '\u00a7683' again, and a gate that reds on correct behaviour gets turned off. A number is NEVER silenced by editing this file - a false alarm is silenced by adding a PROVED alias to ALIASES in scripts/audit/ledger-citations.mjs, whose proof string is checked against the live corpus on every run.",
+  "frozenAt": {
+    "date": "2026-09-14",
+    "ledgerRef": "refs/heads/review-fixes-2026-07-08",
+    "tip": "30dfab6d54f411dd42b53a9b6fc44e4d6f2dadd7",
+    "ledgerSection": "ODQ \u00a7921",
+    "corpusFiles": 884,
+    "openers": 907,
+    "highWater": 920
+  },
+  "holes": {
+    "178": {
+      "occurrencesAtFreeze": 18,
+      "occurrencesBeforeThisItem": 1,
+      "firstSite": "docs/OWNER_DECISION_QUEUE.md:6651",
+      "home": "ODQ \u00a7170 (the peer-review fold ORDER) + charter \u00a715 (docs/DESIGN_FP_ARCH_MF.md:470); '\u00a7178' is a MISNUMBER - the MF crosswalk at :69/:74/:112 names \u00a7170 and \u00a7181 and never \u00a7178",
+      "ruling": "ODQ \u00a7920.3"
+    },
+    "183": {
+      "occurrencesAtFreeze": 19,
+      "occurrencesBeforeThisItem": 2,
+      "firstSite": "docs/OWNER_DECISION_QUEUE.md:6813",
+      "home": "\u00a7183.1 -> \u00a7182.1, CONFIRMED by arithmetic (28,442 - 28,406 = the cited +36). \u00a7183.3 -> HOME UNKNOWN, recorded as unknown",
+      "ruling": "ODQ \u00a7920.3"
+    },
+    "683": {
+      "occurrencesAtFreeze": 21,
+      "occurrencesBeforeThisItem": 11,
+      "firstSite": "docs/DESIGN_SPINE_COMPLETION.md:207",
+      "home": "the PANEL AMENDMENT (\u00a7683) at docs/DESIGN_SPINE_COMPLETION.md:207; commit bc907c3ad touched four documents and not the ledger",
+      "ruling": "ODQ \u00a7685.5(vi)"
+    }
+  }
+}
