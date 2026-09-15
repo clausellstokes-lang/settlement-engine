@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-14 21:48:04 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 21:54:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = 30dfab6d5 §920 · the ledger's own numbering measured — 906 of 920 openers; three genuine holes (
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 11
+- HOLD-VITEST absent · runner count 10
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -115,9 +115,9 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_57faeea3-385** (mtime 09-14 21:35): agent calls 4 (4 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_57faeea3-385/`
     - `ab9ce8924` ? · IN FLIGHT · transcript 09-14 21:46 960 KB · 80 tool calls · files: $G/build.txt, $G/verifydist.txt, $G/checkquick.txt, $G/check.txt · last: Bash G=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/scratc
-    - `afde2b45d` ? · IN FLIGHT · transcript 09-14 21:46 988 KB · 86 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aa21f7b4f` ? · IN FLIGHT · transcript 09-14 21:48 881 KB · 64 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a0e735d51` ? · IN FLIGHT · transcript 09-14 21:43 705 KB · 50 tool calls · files: rf.json, rf.md, rf.json · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `afde2b45d` ? · IN FLIGHT · transcript 09-14 21:53 1256 KB · 118 tool calls · last: Bash for i in $(seq 1 55); do if /usr/bin/grep -q "EXIT=" /tmp/claude-502/ratchet-slot.log 2>/dev/null && /usr/bin/
+    - `aa21f7b4f` ? · IN FLIGHT · transcript 09-14 21:51 894 KB · 67 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a0e735d51` ? · IN FLIGHT · transcript 09-14 21:54 756 KB · 57 tool calls · files: rf.json, rf.md, rf.json · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f86a239c-ba8e-464d-a904-e4b70a0c4b2e/t
 - **wf_00542089-397** (mtime 09-14 21:15): agent calls 3 (3 distinct) · DONE 3 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00542089-397/`
     - `a0745eb26` ? · DONE · transcript 09-14 21:15 982 KB · 58 tool calls · result: {"summary": "All paths in `where` are RELATIVE TO THE WORKTREE ROOT `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-51
     - `a534045ec` ? · DONE · transcript 09-14 21:14 882 KB · 28 tool calls · result: {"summary": "The record holds ONE owner sentence that opens a Scribe subscription tier \u2014 2026-09-14 ~13:2x, \"Because I'm thinking that this could actually
@@ -467,4 +467,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 187.21 137.34 73.87
+load: 51.24 90.46 77.35
