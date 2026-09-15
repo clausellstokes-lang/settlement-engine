@@ -22,19 +22,41 @@ scopedEnv.release();
 
 type Dispatched = { to: string; from: string; subject: string; text: string };
 
-/** Deps stub: rate limiter allows (or not); dispatcher records instead of posting to Resend. */
-function makeDeps(opts: { allow?: boolean } = {}) {
+/**
+ * Deps stub: rate limiter allows (or not); dispatcher records instead of posting to Resend.
+ *
+ * `limiter` selects which of the limiter's THREE outcomes to model, because the handler
+ * branches on them differently and only one was ever covered (A+ backend.4 case (d); LT36
+ * car 6):
+ *   'allow'       — under both limits.
+ *   'rate_limited'— the caller is over their limit            -> 429.
+ *   'unavailable' — the LIMITER ITSELF is down (missing service key, RPC error). This is the
+ *                   FAIL-CLOSED arm: consumeAnonRateLimit's own contract is "if the limiter
+ *                   is unreachable or misconfigured we do NOT send", because the safe failure
+ *                   for a spam-relay control is to drop a non-critical email rather than
+ *                   relay it unthrottled -> 503.
+ *   'throws'      — the limiter raises instead of reporting. Not a shape consumeAnonRateLimit
+ *                   produces today (it catches its own RPC errors), but an injected or future
+ *                   limiter could, and the property that matters is that NO EMAIL LEAVES.
+ */
+function makeDeps(
+  opts: { allow?: boolean; limiter?: 'allow' | 'rate_limited' | 'unavailable' | 'throws' } = {},
+) {
   const sent: Dispatched[] = [];
   const limited: Array<{ ip: string; recipient: string }> = [];
+  const mode = opts.limiter ?? (opts.allow === false ? 'rate_limited' : 'allow');
   return {
     sent,
     limited,
     deps: {
       consumeRateLimit: (ip: string, recipient: string) => {
         limited.push({ ip, recipient });
+        if (mode === 'throws') return Promise.reject(new Error('limiter exploded'));
         return Promise.resolve(
-          opts.allow === false
+          mode === 'rate_limited'
             ? ({ ok: false as const, reason: 'rate_limited' })
+            : mode === 'unavailable'
+            ? ({ ok: false as const, reason: 'rate_limit_unavailable' })
             : ({ ok: true as const }),
         );
       },
@@ -146,6 +168,52 @@ scopedEnv.test('an over-limit caller gets 429 and no email leaves', async () => 
   assertEquals(res.status, 429);
   assertEquals((await res.json()).reason, 'rate_limited');
   assertEquals(sent.length, 0);
+});
+
+// ── A+ backend.4 case (d), the OTHER half (LT36 car 6) ───────────────────────
+// index.ts branches `limit.reason === "rate_limited" ? 429 : 503`. Only the 429 side had a
+// test, so the fail-closed side — the one that decides what happens when the spam-relay
+// control is DOWN — was the single uncovered case of an otherwise-complete item. A
+// regression that turned the 503 into a 200-and-send would have shipped green.
+scopedEnv.test('a DOWN limiter fails CLOSED: 503, and no email leaves', async () => {
+  const { deps, sent, limited } = makeDeps({ limiter: 'unavailable' });
+  const res = await handleSendEmail(post(capBody({ capUsed: '3', capTotal: '3' })), deps);
+  assertEquals(res.status, 503);
+  const body = await res.json();
+  assertEquals(body.ok, false);
+  assertEquals(body.reason, 'rate_limit_unavailable');
+  assertEquals(sent.length, 0);
+  // The limiter WAS consulted — this is a fail-closed decision, not a path that skipped the
+  // check. Without this the assertion above would also pass if the request had been
+  // rejected earlier for an unrelated reason.
+  assertEquals(limited.length, 1);
+});
+
+scopedEnv.test('503 and 429 are DIFFERENT outcomes — the branch is real, not a constant', async () => {
+  // A single-arm test cannot tell "the code returns 503 when the limiter is down" from
+  // "the code returns 503 for every rejection". Both arms, same request, same fixture.
+  const down = makeDeps({ limiter: 'unavailable' });
+  const over = makeDeps({ limiter: 'rate_limited' });
+  const body = capBody({ capUsed: '3', capTotal: '3' });
+  assertEquals((await handleSendEmail(post(body), down.deps)).status, 503);
+  assertEquals((await handleSendEmail(post(body), over.deps)).status, 429);
+  assertEquals(down.sent.length, 0);
+  assertEquals(over.sent.length, 0);
+});
+
+scopedEnv.test('a limiter that THROWS still fails closed — no email leaves (500, not 503)', async () => {
+  // PINNED AS THE CURRENT TRUTH, and the status is deliberately stated. A limiter that
+  // RAISES does not reach the 429/503 branch at all: it unwinds to the handler's outer
+  // catch, which answers 500 internal_error. The property backend.4 actually names — the
+  // fail-closed one — holds either way: the dispatch seam is never called. The status
+  // difference is recorded here rather than "fixed", because changing a public endpoint's
+  // response code is a contract change and this car is scoped to coverage.
+  const { deps, sent, limited } = makeDeps({ limiter: 'throws' });
+  const res = await handleSendEmail(post(capBody({ capUsed: '3', capTotal: '3' })), deps);
+  assertEquals(res.status, 500);
+  assertEquals((await res.json()).reason, 'internal_error');
+  assertEquals(sent.length, 0);
+  assertEquals(limited.length, 1);
 });
 
 scopedEnv.test('an obvious bot UA is rejected and never dispatches', async () => {
