@@ -3114,6 +3114,66 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         + ' — no timeout signal and no assertion signal — open the full report',
         '      msg: (the report carried no failure message)',
       ]);
+
+      // ── ⛔ THE ATTRIBUTION, AND THE ARM A FILE'S OWN LITERAL DISABLES (LT29 car 2) ──
+      // §885 QUOTED THE BUG: the gate printed `300000ms budget (vite.config.js testTimeout)`
+      // against a config that sets 20,000 — "a real expiry presented as though it had
+      // FOURTEEN TIMES the headroom it had". The parenthesis must name the source OF THE
+      // NUMBER PRINTED, so the source is carried through the `Math.max`. The two cases above
+      // pass NO `globalBudget` and are therefore also the proof of the documented fallback:
+      // a caller that resolved no literals gets byte-identical output to before the cure.
+      const fileBudget = 300000;
+      const rowBudgets = { budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [perTest, fileBudget] };
+      expect(failureEvidenceOf({ file: 'tests/lint/w.test.js', fullName: 'z', duration: 21758 }, {
+        budget: fileBudget, ...rowBudgets,
+      })).toEqual([
+        '      UNCLASSIFIED · ran 21758ms against a 300000ms budget'
+        + " (the file's own declared budget — it declares 60000ms, 300000ms;"
+        + ' vite.config.js testTimeout sets 20000ms)'
+        + ' — no timeout signal and no assertion signal — open the full report',
+        '      ⚠ it also ran PAST the suite-wide 20000ms clock; the class above is taken'
+        + " against the FILE's 300000ms budget, which this row may not own"
+        + ' — if it does not, this row is a TIMEOUT.',
+        '      msg: (the report carried no failure message)',
+      ]);
+
+      // ⚠ THE RULING THE THIRD LINE EXISTS FOR, STATED AS A NEGATIVE CONTROL. The scan is
+      // FILE-scoped and cannot tie a literal to one test — `timeoutLiteralsOf`'s own header
+      // says it cannot tell a per-test override from a `beforeAll` argument or a Testing
+      // Library query budget — so the same 21,758 ms row classifies two ways depending on
+      // which budget it is measured against. THE WIDE DIRECTION IS THE RULING: erring narrow
+      // is the only direction able to INVENT a TIMEOUT on a genuine assertion failure
+      // (TE-BUDGET-1, measured 2026-08-31), and an under-classification degrades to "open the
+      // full report", which is true. The cure is that the wide budget stops governing
+      // SILENTLY, which is what the line above is.
+      expect(classifyFailure({ duration: 21758, message: '', budget: fileBudget }).class).toBe('UNCLASSIFIED');
+      expect(classifyFailure({ duration: 21758, message: '', budget: 20000 }).class).toBe('TIMEOUT');
+
+      // …AND THE THIRD LINE IS NOT NOISE. It appears ONLY where arm 3 was actually disabled:
+      // never when the row is already a cost class by another arm, never past the file's own
+      // budget (arm 3 fired), and never inside the suite-wide clock (nothing was disabled).
+      const linesFor = (row, budget) => failureEvidenceOf(row, { budget, ...rowBudgets });
+      const past = linesFor({ duration: 300001 }, fileBudget);
+      expect(past).toHaveLength(2);
+      expect(past[0]).toContain('TIMEOUT · ran 300001ms against a 300000ms budget');
+      expect(past[0]).toContain("(the file's own declared budget");
+      const marked = linesFor({ duration: 21758, failureMessages: ['Error: STACK_TRACE_ERROR\n    at task (…)'] }, fileBudget);
+      expect(marked).toHaveLength(2);
+      expect(marked[0]).toContain('TIMEOUT ·');
+      const inside = linesFor({ duration: 19999, failureMessages: ['AssertionError: expected 1 to be 2'] }, fileBudget);
+      expect(inside).toHaveLength(2);
+      expect(inside[0]).toContain('ASSERTION · ran 19999ms against a 300000ms budget');
+      expect(inside[0]).toContain("(the file's own declared budget");
+
+      // …and where the file's literals are all SMALLER than the suite-wide clock the file
+      // does NOT govern, so the config keeps the attribution it has always had.
+      expect(failureEvidenceOf({ duration: 21758 }, {
+        budget: 20000, budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [queryBudget],
+      })[0]).toBe(
+        '      TIMEOUT · ran 21758ms against a 20000ms budget'
+        + ' (vite.config.js testTimeout; the file also declares 5000ms)'
+        + ' — the row ran at or past its whole budget',
+      );
     });
 
     test('uncollectedOf names every suite whose failure the PER-TEST census cannot see', () => {
