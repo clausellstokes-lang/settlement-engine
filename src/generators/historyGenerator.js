@@ -809,6 +809,23 @@ export const generateHistory = (
   generationContext = null,
 ) => {
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
+  // ⛔⛔ THE SETTLEMENT'S AGE IS DRAWN ONCE, HERE, AND NEVER AGAIN. It is a
+  // GENERATION-TIME CONSTANT, not a clock: `founding.age = age` below is the ONLY
+  // `.age =` assignment in the whole of src/ (measured repo-wide at this tip), and
+  // nothing on the advance path rewrites it. MEASURED over twelve `one_year` advances:
+  // the campaign calendar runs year 2 -> 13 while `history.age` holds 215, and it holds
+  // it THROUGH the record being re-emitted on every one of those ticks (population,
+  // powerStructure, populationHistory and activeConditions all move).
+  // THE OTHER CLOCK is worldState.js's `calendarFromWeeks`, which re-derives the year
+  // from canonical elapsed weeks every tick. Two clocks over one world, one moving and
+  // one frozen: `calendar.year` and `history.age` answer different questions and must
+  // never be compared or added.
+  // ⇒ THE FREEZE IS DELIBERATE AND RECORDED, not an oversight. Advancing the age moves
+  // rendered text on every advance, so the diary ruled it REPORTED NOT FIXED
+  // (kit/RESUME-NOTE, 2026-09-14). LT40 car 7 PINS the freeze without lifting it:
+  // tests/domain/worldPulseTickClock.test.js, "the second clock". The disposition and
+  // the price of both cures are docs/ENGINE_DEFECT_DISPOSITIONS.md §5; curing it is
+  // owner-gated under §764.3.
   const age = resolveSettlementAge(tier, config);
   const context = buildHistoryContext(
     config,

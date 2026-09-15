@@ -217,3 +217,79 @@ the start of this car the file counted **886**, so the 28-line docblock the trac
 the ceiling**: `expected [ [ 'economicState.js', 914 ] ] to deeply equal []`. The note was
 **compressed to 11 lines**, never the ceiling raised. **In that file a comment is a budget
 item** — it now counts 897, i.e. **2 lines of headroom left**.
+
+---
+
+## §5 — PINNED, NOT LIFTED: `history.age` is a generation-time constant (2026-09-15, lane-LT40-engine)
+
+**Status: the freeze is DELIBERATE, RECORDED, and now ASSERTED by a test. The cure stays
+owner-gated.**
+
+### Two clocks over one world
+
+| clock | where | behaviour |
+|---|---|---|
+| the campaign year | `src/domain/worldPulse/worldState.js:718` `calendarFromWeeks` | RE-DERIVED from canonical elapsed weeks on every tick |
+| `history.age` | `src/generators/historyGenerator.js:829` `resolveSettlementAge`, written at `:843` | DRAWN ONCE at generation, never rewritten |
+
+`grep -rnE "\.age\s*=[^=]" src` at this tip returns **exactly one line** — `historyGenerator.js:843
+founding.age = age;`. There is no second writer anywhere in `src/`.
+
+### CONFIRMED by execution, twelve `one_year` advances of `advanceCampaignWorld`
+
+```
+calendar.year : 2,3,4,5,6,7,8,9,10,11,12,13
+history.age   : 215,215,215,215,215,215,215,215,215,215,215,215
+identical-object-reference ticks: 0 of 12
+settlement keys that moved over the run: population, powerStructure, populationHistory, activeConditions
+```
+
+The record is genuinely re-emitted on every tick and four of its fields move; `history` is
+carried through each rewrite untouched. **The age is not stale data, it is a different fact**:
+the year the settlement was founded ago, drawn once.
+
+### Why it is not cured here
+
+The diary ruled it on 2026-09-14: **REPORTED NOT FIXED, because curing it moves rendered
+text.** Every prose surface that speaks of a settlement's age would move on every advanced
+world, and the roll that ruling 26 (h) turns on is a generation-time constant today. Its named
+consumer (`renderYearOf` in `faceSources.js`) does not exist at this slot at all: it rides the
+banked rewrite kernel, so a cure here could not even be measured end to end. **Owner-gated
+under §764.3.**
+
+### What car 7 built instead
+
+`tests/domain/worldPulseTickClock.test.js` gains ONE arm, in the suite that already owns the
+authoritative tick clock: twelve real advances, the campaign year asserted to increment and
+`history.age` asserted invariant, with the live population asserted as the anti-vacuity anchor.
+
+**NEGATIVE CONTROL, EXECUTED.** A one-line plant in `populationDynamics.js`'s settlement
+rewrite (`history: { ...settlement.history, age: age + 1 }`) reds the arm:
+`expected [ 216, 217, 218, …(6) ] to deeply equal [ 215 ]`. Reverted by file copy, byte-verified
+with `cmp`. ⚠ TWO EARLIER PLANTS — in `advanceInterval.js`'s `foldUpdatesOntoSaves` and in
+`demographicsKernel.js`'s natural-step rewrite — left the arm GREEN: neither is on the path
+this fixture exercises. Recorded because it is the useful half: an arm can be green against a
+plant in a file that merely looks like the writer, and only a control names the writer that
+actually feeds it.
+
+### ⚠ A budget note for the next lane, and ONE CITE THAT MAY NOT BE CORRECTED
+
+The docblock this car adds to `historyGenerator.js` moved every line below it by 17, which
+restaled two prose cites to `historyGenerator.js:888`. One was followed; **the other may not
+be, and that is the finding worth carrying**.
+
+- `tests/lint/observedShapeSentinel.test.js` — FOLLOWED to `:905`. Ordinary comment, 33 of 33
+  green alone.
+- `scripts/check-observed-shape-readers.mjs` — **DELIBERATELY LEFT STALE AT `:888`.** That file
+  is a HASH-PINNED DETECTOR SOURCE. Changing three digits inside one of its comments reds
+  `tests/lint/observedShapeReaders.walker.test.js` with: *"a DETECTOR SOURCE drifted since the
+  mint — that needs a governed migration, not a re-freeze: expected [ 'scripts/check-observed-shape-readers.mjs' ] to deeply equal []"*.
+  Proved in both directions: RED with the three-digit comment edit, and 44 of 44 GREEN the
+  moment the file was restored from HEAD. **Correcting a comment there costs a governed
+  migration, which a docblock car may not spend**, so the cite stays at `:888` and this
+  paragraph is its correction. A reader who follows it lands 17 lines above the conditional
+  spread it names; the shape it describes is unchanged.
+
+⇒ TWO RULES FOR THE NEXT LANE. A line-keyed citation in this estate is a budget item exactly
+as §4's comment was; and **before following one, check whether its file is a detector source**,
+because there the cheapest correct act is to leave the number wrong and say why.

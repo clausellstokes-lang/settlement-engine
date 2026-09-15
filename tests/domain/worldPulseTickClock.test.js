@@ -208,3 +208,100 @@ describe('H9 — pulses age the queue before queueing newborns', () => {
     expect(second.newsEntries.some(e => e.kind === 'ready' && e.impactIds.includes(newborn.id))).toBe(true);
   });
 });
+
+/**
+ * LT40 car 7 — THE SECOND CLOCK, PINNED AS THE CONSTANT IT IS.
+ *
+ * This estate runs TWO clocks over one world and they are different facts by
+ * construction:
+ *   • THE CAMPAIGN CLOCK MOVES. `calendarFromWeeks` (worldState.js) re-derives
+ *     `year` from canonical elapsed weeks on every tick, so an advance always
+ *     changes it.
+ *   • `history.age` DOES NOT. It is drawn ONCE by `resolveSettlementAge` at
+ *     generation and written at `historyGenerator.js`'s `founding.age = age`,
+ *     which a repo-wide scan measures as the ONLY `.age =` assignment in `src/`.
+ *     Nothing on the advance path rewrites it.
+ *
+ * ⛔ THE FREEZE IS DELIBERATE AND RECORDED, NOT A BUG THIS ARM FORGOT TO FIX.
+ * The diary measured it on 2026-09-14 (kit/RESUME-NOTE 06:3x: over 30 `one_year`
+ * advances `calendar.year` went 2 to 31 while `history.age` stayed 215) and ruled
+ * it REPORTED NOT FIXED, because advancing the age moves rendered text on every
+ * advance. The disposition, both cure options and their prices are
+ * docs/ENGINE_DEFECT_DISPOSITIONS.md §5.
+ *
+ * ⇒ IF THIS ARM REDS, something has begun aging a settlement on the advance path.
+ * That is an output-moving change under §764.3 and it is owner-gated. Read §5
+ * before altering this arm: the arm is the record, and deleting it deletes the
+ * only place the freeze is asserted rather than assumed.
+ */
+describe('LT40 car 7 — the second clock: history.age is a generation-time constant', () => {
+  test('the campaign year advances every tick while history.age never moves, over a run of real advances', () => {
+    const FROZEN_AGE = 215;
+    const madeSettlement = {
+      name: 'Ashford',
+      tier: 'town',
+      population: 1800,
+      config: { tradeRouteAccess: 'road' },
+      institutions: [],
+      economicState: { primaryExports: [], primaryImports: [] },
+      powerStructure: { factions: [], conflicts: [] },
+      npcs: [],
+      activeConditions: [],
+      // The generation-time draw, exactly as generateHistory stamps it.
+      history: { age: FROZEN_AGE, founding: { age: FROZEN_AGE } },
+    };
+    let campaign = {
+      id: 'camp-age',
+      name: 'Age Realm',
+      settlementIds: ['a'],
+      regionalGraph: ensureRegionalGraph(),
+      wizardNews: { currentTick: 0, entries: [] },
+      worldState: { rngSeed: 'age-pin', tick: 0, canonizedAt: NOW, ...bareWorldState() },
+    };
+    let saves = [{
+      id: 'a',
+      name: 'Ashford',
+      phase: 'canon',
+      settlement: madeSettlement,
+      campaignState: { phase: 'canon', eventLog: [], locks: {} },
+    }];
+
+    /** @type {number[]} */ const years = [];
+    /** @type {Array<number|undefined>} */ const ages = [];
+    let updatesSeen = 0;
+    for (let i = 0; i < 12; i += 1) {
+      const result = advanceCampaignWorld({ campaign, saves, interval: 'one_year', now: NOW });
+      campaign = {
+        ...campaign,
+        worldState: result.worldState,
+        regionalGraph: result.regionalGraph,
+        wizardNews: result.wizardNews,
+      };
+      const update = (result.settlementUpdates || []).find(item => String(item.saveId) === 'a');
+      if (update) {
+        updatesSeen += 1;
+        saves = [{ ...saves[0], settlement: update.settlement }];
+      }
+      years.push(result.worldState?.calendar?.year);
+      ages.push(saves[0].settlement?.history?.age);
+    }
+
+    // ⛔ ANTI-VACUITY FIRST: the settlement record must actually be REWRITTEN on every
+    // tick, or "the age did not change" would be true merely because nothing happened.
+    // MEASURED while writing this arm: none of the twelve ticks returns the same object,
+    // and population, powerStructure, populationHistory and activeConditions all move
+    // across the run. Population is asserted as the live anchor because it is written by
+    // populationDynamics.js on the very record `history` rides on: that is the writer the
+    // negative control planted an age bump into, and the arm caught it (215 became 216
+    // through 227). Movement is asserted, never the figure, so a tuning change cannot
+    // red this pin.
+    expect(updatesSeen, 'every tick re-emitted the settlement record').toBe(12);
+    expect(saves[0].settlement?.population, 'the record really is live: population moved').toBeGreaterThan(1800);
+    // The moving clock moves, and strictly: twelve advances, twelve distinct years.
+    expect(years, 'the campaign year increments once per one_year advance').toEqual([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+    // The frozen clock does not move, through all twelve of those record rewrites.
+    expect([...new Set(ages)], 'history.age is invariant across the whole run').toEqual([FROZEN_AGE]);
+    // And the founding record carries the same untouched draw it was stamped with.
+    expect(saves[0].settlement?.history?.founding?.age, 'founding.age is the same generation-time draw').toBe(FROZEN_AGE);
+  });
+});
