@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
-  "files": 2563,
+  "measuredAtSha": "62bf2da7d1ffdddc503a11a221d7fb758c7cf344",
+  "measuredBy": "LT42 cars 2+3 (Opus 5 — Fable-unvalidated)",
+  "date": "2026-09-15",
+  "note": "LONG TAIL #42 lands two new TEST files and no helper: tests/lint/ledgerCitationIntegrity.test.js (10 titles under 2 describes) and tests/scripts/provenanceMap.test.js (7 titles under 2 describes). Both are CREDITED, not parked — every test registers straight-line at module scope with no conditional wrapper. No existing file gained or lost a title.",
+  "files": 2565,
   "parked": 375,
-  "credited": 2188,
-  "titles": 24169,
-  "suiteTitles": 6452
+  "credited": 2190,
+  "titles": 24186,
+  "suiteTitles": 6456
 }
