@@ -46,6 +46,14 @@
  * something: that tab's pools simply draw the hand corpus, which is the floor the whole design
  * rests on.
  *
+ * ⭐ AND A FAIR-USE FLOOR EXISTS AT LAST (W5b car 4; `scribe_usage_precheck`, migration 203). A
+ * per-account daily cap was in no design, no ruling and no line of code; the estate's own usage
+ * governor (migration 144) cannot express one, because it meters TOKENS and DOLLARS against caps
+ * the user sets on their own wallet and a render is one unit of use spread over seven to ten of
+ * those rows. The new door is asked on the FIRST tab of a render only, refuses before the claim and
+ * before the spend with the session released, and fails OPEN when it cannot be read. The number is
+ * an operator setting with the chair's default of five, NOT the owner's signed number.
+ *
  * ⛔ EVERY RENDERED LINE PASSES THE TIER-0 INSTRUMENTS BEFORE IT IS RETURNED, from
  * `_shared/proseKernel.bundle.js` — the byte-derived copy of the same `refuteUnit` the corpus
  * programme is audited by. A FAIL is dropped and that pool draws the hand corpus. The refuter runs
@@ -102,6 +110,18 @@ const MAX_BODY_BYTES = 512 * 1024;
 const MAX_OUTPUT_TOKENS = 16_000;
 /** The second reader answers yes or no six times a line, so its ceiling is a fraction of that. */
 const TIER1_MAX_OUTPUT_TOKENS = 4_000;
+
+/**
+ * ⭐ THE FAIR-USE REFUSAL, IN THE HOUSE'S OWN VOICE (W5b car 4). Small numbers are spelled because
+ * the estate's refusals read as sentences a game master would say, and NO EM DASH anywhere: the E2
+ * ratchet holds every rendered line at hard zero on that mark and a refusal is a rendered line.
+ */
+const SPELLED = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+function dailyCapMessage(cap: number): string {
+  const word = Number.isInteger(cap) && cap >= 0 && cap < SPELLED.length ? SPELLED[cap] : String(cap);
+  const towns = cap === 1 ? 'town' : 'towns';
+  return `The survey has written ${word} ${towns} today; it writes again tomorrow.`;
+}
 
 function getCorsHeaders(req?: Request) { return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' }); }
 function json(body: unknown, status = 200, headers: Record<string, string> = {}) {
@@ -290,6 +310,45 @@ export async function handleScribeRender(
         return true;
       }
     };
+
+    // ⭐⭐ THE FAIR-USE GOVERNOR (W5b car 4; migration 203's `scribe_usage_precheck`). A per-account
+    // daily cap existed NOWHERE before this: not in the design, not in the rulings, not in the
+    // code, and the estate's own usage governor (`surveyor_usage_precheck`, migration 144) cannot
+    // express it, because it sums TOKENS and DOLLARS out of `ai_usage_events` against caps the USER
+    // sets on their own wallet, and a render is one unit of use that produces seven to ten rows in
+    // that table. So this is a second, narrower door, and it answers a different question: the
+    // house's floor rather than the user's own.
+    //
+    // ⛔ IT IS ASKED ON THE FIRST TAB OF A RENDER AND NOWHERE ELSE, because a render is ONE unit of
+    // use. Refusing a later tab would leave a reader with half a dossier rendered and half not,
+    // having been told they were over a limit they were under when the render began.
+    //
+    // ⛔ AND IT REFUSES BEFORE THE CLAIM AND BEFORE THE SPEND, with the session released, so a
+    // capped reader is charged nothing, keeps their free render, and reads the hand corpus exactly
+    // as they did. The number is an OPERATOR SETTING (chair default five, not owner-signed).
+    if (sessionFirst) {
+      let capped: { used: number; cap: number } | null = null;
+      try {
+        const { data, error } = await supabaseAdmin.rpc('scribe_usage_precheck', { p_user: user.id });
+        if (error) throw new Error(error.message);
+        const row = data as { allowed?: boolean; used?: number; cap?: number } | null;
+        // FAIL OPEN on an unreadable governor, exactly as the SQL fails open on an unreadable
+        // setting: a fair-use floor is the house's protection, and a house protection that cannot
+        // be read must not become an outage on a paid surface. The global USD cap still bounds it.
+        if (row && row.allowed === false) {
+          capped = { used: Number(row.used ?? 0), cap: Number(row.cap ?? 0) };
+        }
+      } catch (e) {
+        logError('scribe-render', user.id, e, { stage: 'usage-governor' });
+      }
+      if (capped) {
+        await abortRenderSession();
+        return json({
+          ok: false, outcome: 'daily_cap', used: capped.used, cap: capped.cap,
+          error: dailyCapMessage(capped.cap),
+        }, 429, cors);
+      }
+    }
 
     // ⭐ THE FREE FIRST RENDER (chair ruling 2), on migration 118's atomic pattern: claimed BEFORE
     // the spend, released on EVERY path that does not land a render, so it is unfarmable and never

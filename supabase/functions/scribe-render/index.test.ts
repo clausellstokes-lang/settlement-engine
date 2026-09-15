@@ -120,6 +120,12 @@ function renderSessions() {
     /** The TTL running out: the row survives, its hold on the live key does not. */
     expire() { live.clear(); },
     minted: () => minted,
+    /** What `scribe_usage_precheck` counts: renders that LANDED something, never sessions opened. */
+    landedToday() {
+      let n = 0;
+      for (const row of all.values()) if (row.landed > 0) n += 1;
+      return n;
+    },
   };
 }
 
@@ -128,6 +134,8 @@ function makeAdminClient(
     active?: boolean | null; freeClaim?: boolean;
     // deno-lint-ignore no-explicit-any
     events?: any[]; sessions?: ReturnType<typeof renderSessions>; openError?: boolean;
+    /** The operator's `scribe_daily_render_cap` setting. `undefined` = the key is absent. */
+    dailyCap?: number; governorError?: boolean;
   },
   // deno-lint-ignore no-explicit-any
   rpc: Array<{ fn: string; args: any }>,
@@ -145,6 +153,20 @@ function makeAdminClient(
     if (fn === 'open_scribe_render') {
       if (opts.openError) return Promise.resolve({ data: null, error: { message: 'session table unreachable' } });
       return Promise.resolve({ data: sessions.open(args), error: null });
+    }
+    if (fn === 'scribe_usage_precheck') {
+      if (opts.governorError) return Promise.resolve({ data: null, error: { message: 'system_config unreachable' } });
+      // The SQL's own shape: absent or out-of-band setting means UNCAPPED, and the count is of
+      // sessions that LANDED, which is why opening one does not spend its own allowance.
+      const cap = opts.dailyCap;
+      if (cap === undefined || cap < 1 || cap > 500) {
+        return Promise.resolve({ data: { allowed: true, used: 0, cap: null, reason_class: 'none' }, error: null });
+      }
+      const used = sessions.landedToday();
+      return Promise.resolve({
+        data: { allowed: used < cap, used, cap, reason_class: used < cap ? 'none' : 'daily_cap' },
+        error: null,
+      });
     }
     if (fn === 'close_scribe_render_tab') return Promise.resolve({ data: sessions.close(args), error: null });
     if (fn === 'abort_scribe_render') return Promise.resolve({ data: sessions.abort(args), error: null });
@@ -749,6 +771,129 @@ scopedEnv.test('⭐ A LATER TAB NEVER RELEASES THE CLAIM THE RENDER ALREADY SPEN
   assertEquals(later.status, 502);
   assertEquals(count(a, 'release_free_scribe'), 0, 'the render landed; the free taste was used');
   assertEquals(count(a, 'claim_free_scribe'), 1, 'and a later tab never claims one of its own');
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ W5b car 4 — THE FAIR-USE GOVERNOR (migration 203's `scribe_usage_precheck`)
+// ════════════════════════════════════════════════════════════════════════════════════════════
+// A per-account daily cap existed in no design, no ruling and no line of code. It is asked on the
+// FIRST tab of a render only (a render is one unit of use), it refuses before the claim and before
+// the spend, and it fails OPEN.
+
+/** A render of `tabs` tabs at the given operator cap. Returns the last response. */
+async function renderDay(
+  sessions: ReturnType<typeof renderSessions>,
+  save: string,
+  dailyCap: number | undefined,
+  // deno-lint-ignore no-explicit-any
+  u: Array<{ fn: string; args: any }>,
+  // deno-lint-ignore no-explicit-any
+  a: Array<{ fn: string; args: any }>,
+  tabs: string[] = ['defense', 'power'],
+) {
+  let last!: Response;
+  for (const tab of tabs) {
+    last = await handleScribeRender(request({ ...tabBody(tab), saveId: save }), {
+      userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+      adminClient: makeAdminClient({ sessions, dailyCap }, a),
+      anthropicFetch: providerReturning([lawfulUnit]),
+    });
+    if (last.status !== 200) break;
+  }
+  return last;
+}
+
+scopedEnv.test('⭐⭐ THE SIXTH RENDER OF A DAY IS REFUSED ON ITS FIRST TAB, in the house voice', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  for (let town = 1; town <= 5; town += 1) {
+    const res = await renderDay(sessions, `save-${town}`, 5, u, a);
+    assertEquals(res.status, 200, `town ${town} of five renders`);
+  }
+  assertEquals(u.filter((r) => r.fn === 'spend_credits').length, 5, 'five towns, five charges');
+  // The sixth render gets its OWN rpc ledgers, so what is asserted below is what THAT render did
+  // rather than what the day did.
+  const u6: Array<{ fn: string; args: unknown }> = [];
+  const a6: Array<{ fn: string; args: unknown }> = [];
+  const sixth = await renderDay(sessions, 'save-6', 5, u6, a6);
+  assertEquals(sixth.status, 429);
+  const body = await sixth.json();
+  assertEquals(body.error, 'The survey has written five towns today; it writes again tomorrow.');
+  assertEquals(body.outcome, 'daily_cap');
+  assertEquals(body.used, 5);
+  assertEquals(body.cap, 5);
+  // ⛔ NOTHING WAS TAKEN FOR IT: no charge, no free claim, no reservation, and the session it
+  // opened to be asked the question at all is released again.
+  assertEquals(u6.filter((r) => r.fn === 'spend_credits').length, 0, 'a capped render charges nothing');
+  assertEquals(count(a6, 'claim_free_scribe'), 0, 'and it does not spend the free render either');
+  assert(!names(a6).includes('reserve_ai_spend'), 'no reservation is taken on a capped render');
+  assertEquals(count(a6, 'abort_scribe_render'), 1, 'the capped render holds no slot');
+  assertEquals(sessions.landedToday(), 5, 'and the day is still five towns, not six');
+});
+
+scopedEnv.test('⛔ A NON-FIRST TAB IS NEVER REFUSED BY THE CAP: a render is one unit of use', async () => {
+  // The reader would otherwise get half a dossier written and half not, having been told they were
+  // over a limit they were under when the render began.
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const sessions = renderSessions();
+  // A cap of ONE, and the render's first tab lands, which immediately puts the account AT the cap.
+  const first = await handleScribeRender(request(tabBody('defense')), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions, dailyCap: 1 }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(first.status, 200);
+  assertEquals(sessions.landedToday(), 1, 'the account is now at a cap of one');
+  // The SAME render's later tabs still go through, because the governor is asked on the first only.
+  for (const tab of ['power', 'war', 'daily_life']) {
+    const later = await handleScribeRender(request(tabBody(tab)), {
+      userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+      adminClient: makeAdminClient({ sessions, dailyCap: 1 }, a),
+      anthropicFetch: providerReturning([lawfulUnit]),
+    });
+    assertEquals(later.status, 200, `${tab} of the render in progress is not refused`);
+  }
+  assertEquals(count(a, 'scribe_usage_precheck'), 1, 'the governor was asked exactly once');
+  // …and the NEXT render, a different town, is the one that meets the cap.
+  const nextTown = await handleScribeRender(request({ ...tabBody('defense'), saveId: 'save-2' }), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ sessions, dailyCap: 1 }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(nextTown.status, 429);
+  assertEquals((await nextTown.json()).error, 'The survey has written one town today; it writes again tomorrow.');
+});
+
+scopedEnv.test('⭐ THE CAP IS READ FROM THE SETTING, and an absent one is UNCAPPED', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  // A cap of two: the third town is refused and the copy names TWO, not the chair's five.
+  const two = renderSessions();
+  for (const save of ['save-1', 'save-2']) assertEquals((await renderDay(two, save, 2, u, a)).status, 200);
+  const third = await renderDay(two, 'save-3', 2, u, a);
+  assertEquals(third.status, 429);
+  assertEquals((await third.json()).error, 'The survey has written two towns today; it writes again tomorrow.');
+
+  // NEGATIVE CONTROL — the same six renders with the setting ABSENT are all allowed, so the arms
+  // above are measuring the setting and not some other refusal.
+  const none = renderSessions();
+  for (let town = 1; town <= 6; town += 1) {
+    assertEquals((await renderDay(none, `save-${town}`, undefined, u, a)).status, 200, `uncapped town ${town}`);
+  }
+});
+
+scopedEnv.test('⛔ AN UNREADABLE GOVERNOR FAILS OPEN: a house protection is never an outage', async () => {
+  const u: Array<{ fn: string; args: unknown }> = [];
+  const a: Array<{ fn: string; args: unknown }> = [];
+  const res = await handleScribeRender(request(), {
+    userClient: makeUserClient({ ok: true, spend_id: 's1' }, u),
+    adminClient: makeAdminClient({ governorError: true }, a),
+    anthropicFetch: providerReturning([lawfulUnit]),
+  });
+  assertEquals(res.status, 200, 'the render goes through; the global USD cap still bounds it');
+  assertEquals(count(a, 'scribe_usage_precheck'), 1);
 });
 
 scopedEnv.test('⛔ AN UNREADABLE SESSION FAILS CLOSED, and nothing is charged or claimed', async () => {

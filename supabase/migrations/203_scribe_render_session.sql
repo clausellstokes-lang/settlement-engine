@@ -242,3 +242,91 @@ grant execute on function public.abort_scribe_render(uuid) to service_role;
 
 comment on function public.abort_scribe_render(uuid) is
   'Release a render session whose first tab landed nothing (203), so the reader''s next attempt is a fresh render. Refuses when any tab has landed. Returns true only when this call released it. Service-role only.';
+
+-- ── 5. THE FAIR-USE GOVERNOR (dark, operator-tunable) ───────────────────────────────────────
+-- ⚠ THE NUMBER IS THE CHAIR'S DEFAULT AND NOT THE OWNER'S SIGNED ONE. A daily render cap was
+-- PROPOSED by the owner in chat on 2026-09-14 ("they can only generate and/or regenerate a
+-- settlement once per day. Because of the new increased costs.") as a question, never signed and
+-- never built; docs/DESIGN_SCRIBE_TIER_PROPOSAL.md decision 6 is where it is signed, and its
+-- default is five rather than one. Five is what is seeded here. It is one operator setting, so a
+-- change is a config row and not a deploy.
+--
+-- ⭐ WHY NOT `surveyor_usage_precheck` (144), WHICH IS THE ESTATE'S USAGE GOVERNOR. Its shape
+-- CANNOT express "renders per day". It sums TOKENS and estimated DOLLARS out of `ai_usage_events`
+-- against caps the USER sets on their own wallet, and returns allowed with no settings row. A
+-- render is ONE UNIT OF USE that produces seven to ten `ai_usage_events` rows, so counting that
+-- table counts calls, never renders; and a fair-use cap is the OPERATOR's protection, which 144
+-- has no notion of. The two live side by side and neither replaces the other: 144 is the user's
+-- own wallet, this is the house's floor, and the global USD cap of 086 still bounds everything.
+--
+-- ⭐ IT COUNTS RENDERS THAT LANDED, not sessions that opened. A render the reader never received
+-- (the model refused, the provider was down, the session was aborted) must not spend their day's
+-- allowance, and `tabs_landed > 0` is exactly "something reached the page". The cost of that
+-- choice is stated plainly: renders in flight are uncounted, so a reader with several dossiers
+-- open at once can start more than the cap before any of them lands. The open trigger already
+-- allows one render per town per epoch, the global cap still bounds the spend, and over-counting
+-- a reader for renders they did not get is the worse error.
+
+insert into public.system_config (key, value)
+values (
+  'scribe_daily_render_cap',
+  '{
+     "renders_per_day": 5,
+     "_note": "Fair-use floor for the Scribe: how many dossier renders one account may LAND per UTC day. Chair default, not owner-signed (see docs/DESIGN_SCRIBE_TIER_PROPOSAL.md decision 6). Remove the key, or set it outside 1..500, to run uncapped."
+   }'::jsonb
+)
+on conflict (key) do nothing;
+
+create or replace function public.scribe_usage_precheck(p_user uuid)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $fn$
+declare
+  v_cap  integer;
+  v_used integer;
+begin
+  if p_user is null then
+    return jsonb_build_object('allowed', true, 'used', 0, 'cap', null, 'reason_class', 'none');
+  end if;
+  set local time zone 'UTC';
+
+  -- FAIL OPEN on a missing or malformed setting, exactly as 144 fails open with no settings row:
+  -- an operator config that cannot be read must never be the thing that blanks a paid surface.
+  begin
+    select nullif(v.value ->> 'renders_per_day', '')::integer
+      into v_cap
+      from public.system_config v
+     where v.key = 'scribe_daily_render_cap';
+  exception when others then
+    v_cap := null;
+  end;
+  -- The sane band: operator-writable config may not set a cap of zero (which would dark the
+  -- feature by config rather than by the flag) nor a number so large it is not a cap.
+  if v_cap is not null and (v_cap < 1 or v_cap > 500) then v_cap := null; end if;
+  if v_cap is null then
+    return jsonb_build_object('allowed', true, 'used', 0, 'cap', null, 'reason_class', 'none');
+  end if;
+
+  select count(*)::integer
+    into v_used
+    from public.scribe_render_sessions s
+   where s.user_id = p_user
+     and s.created_at >= date_trunc('day', now())
+     and s.tabs_landed > 0;
+
+  return jsonb_build_object(
+    'allowed', v_used < v_cap,
+    'used', v_used,
+    'cap', v_cap,
+    'reason_class', case when v_used < v_cap then 'none' else 'daily_cap' end
+  );
+end;
+$fn$;
+
+revoke all on function public.scribe_usage_precheck(uuid) from public, anon, authenticated;
+grant execute on function public.scribe_usage_precheck(uuid) to service_role;
+
+comment on function public.scribe_usage_precheck(uuid) is
+  'SERVICE-ROLE ONLY: the Scribe''s fair-use floor (203). Counts the account''s LANDED render sessions for the UTC day against the operator''s scribe_daily_render_cap setting and returns {allowed, used, cap}. Evaluated on the FIRST tab of a render only, because a render is one unit of use. Fails OPEN on a missing or out-of-band setting. Chair default of five, not owner-signed.';

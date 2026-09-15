@@ -587,6 +587,39 @@ describe('THE SCRIBE — the render session is the whole-render identity (migrat
     expect([...new Set(kinds)].sort()).toEqual(['function', 'index', 'table', 'unique index']);
   });
 
+  it('⭐ THE FAIR-USE FLOOR IS ITS OWN DOOR, and it counts RENDERS rather than tokens', () => {
+    const sql = sql203();
+    const fn = sql.slice(sql.indexOf('function public.scribe_usage_precheck'));
+    // It counts LANDED sessions for the UTC day, which is what "a render the reader received" is.
+    expect(fn).toMatch(/from public\.scribe_render_sessions s/);
+    expect(fn).toMatch(/and s\.tabs_landed > 0;/);
+    expect(fn).toMatch(/s\.created_at >= date_trunc\('day', now\(\)\)/);
+    expect(fn).toMatch(/set local time zone 'UTC';/);
+    // The number is an OPERATOR SETTING, read from the same system_config surface 144 reads.
+    expect(sql).toMatch(/'scribe_daily_render_cap'/);
+    expect(sql).toMatch(/"renders_per_day": 5/);
+    expect(sql).toMatch(/on conflict \(key\) do nothing;/);
+    // FAIL OPEN: an absent or out-of-band setting is uncapped, never a blanked paid surface.
+    expect(fn).toMatch(/if v_cap is not null and \(v_cap < 1 or v_cap > 500\) then v_cap := null; end if;/);
+    expect(fn).toMatch(/'allowed', true, 'used', 0, 'cap', null/);
+  });
+
+  it('the governor is asked on the FIRST tab only, before the claim and before the spend', () => {
+    const src = readFunction('scribe-render');
+    const governorAt = src.indexOf("rpc('scribe_usage_precheck'");
+    const claimAt = src.indexOf("rpc('claim_free_scribe'");
+    const spendAt = src.indexOf("rpc('spend_credits'");
+    expect(governorAt).toBeGreaterThan(0);
+    expect(claimAt).toBeGreaterThan(governorAt);
+    expect(spendAt).toBeGreaterThan(governorAt);
+    // The refusal copy is the house's, with the number spelled and no em dash (the E2 ratchet).
+    expect(src).toMatch(/The survey has written \$\{word\} \$\{towns\} today; it writes again tomorrow\./);
+    const message = src.slice(src.indexOf('function dailyCapMessage'), src.indexOf('function getCorsHeaders'));
+    expect(message.length, 'the slice must really hold the builder').toBeGreaterThan(100);
+    // anchored: the length assertion on the line above proves the slice is populated, so an empty one cannot pass this.
+    expect(message).not.toContain('—');
+  });
+
   it('the edge opens the session before it claims or spends, and only the first tab does either', () => {
     const src = readFunction('scribe-render');
     const openAt = src.indexOf("rpc('open_scribe_render'");
