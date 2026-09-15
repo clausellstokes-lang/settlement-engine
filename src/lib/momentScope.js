@@ -92,7 +92,28 @@ const REALM_VIEWS = Object.freeze(['realm', 'map']);
  * "wire this up and discover a refusal". Their `firedFrom` is empty, which is the
  * honest record; wiring one up moves the census and forces the scope to be
  * re-read at the same moment, which is the point.
+ *
+ * ⛔ THE TYPE IS DECLARED, NOT INFERRED, AND THAT IS THE SAME LAW AS THE SCOPE
+ * ITSELF. No row is GLOBAL at this tree (car 2 recorded that as a finding: every
+ * pricing moment is one surface pitching one system), so inference read the
+ * registry's value type off today's census and concluded `scope` is ALWAYS a view
+ * array — which made `r.scope === GLOBAL` below a comparison "between types with no
+ * overlap" and reddened tsconfig.full.json. Deleting the comparison to satisfy the
+ * checker would delete law 3's cross-page branch because nobody has used it YET;
+ * declaring the row type restores the law's own sentence — a scope MAY be GLOBAL —
+ * and the day a moment legitimately travels, nothing about these consumers changes.
+ * The literal key union is deliberately not preserved: every consumer reads the
+ * registry through `Object.keys` / `Object.entries` / `hasOwnProperty`, and the
+ * key set's authority is the walker's two-way equality with the copy registry,
+ * never the type.
+ *
+ * @typedef {Object} MomentScopeRow
+ * @property {readonly string[] | typeof GLOBAL} scope
+ * @property {readonly string[]} firedFrom
+ * @property {string} why
  */
+
+/** @type {Readonly<Record<string, Readonly<MomentScopeRow>>>} */
 export const MOMENT_SCOPES = Object.freeze({
   first_canonize: Object.freeze({
     scope: LIBRARY_VIEWS,
