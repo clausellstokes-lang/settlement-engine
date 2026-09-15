@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da18fccb05881666e32ed90c5e3788f5ba518135",
-  "measuredBy": "§931 long-tail landing at the composed consist, third measurement after LT41b car 6 and LT17 car 2 were held out (Fable 5.1 — validated)",
+  "measuredAtSha": "f0d4d34a09d724887cade9f10a6b1df0dc94ae66",
+  "measuredBy": "lane 932-D (Q10 band-walker prefix), Seat: Opus 5 — Fable-unvalidated",
   "date": "2026-09-15",
-  "note": "car 6 held for the chartered window; car 2 held for the worker-bundle headroom car; the chair register cars add no title",
-  "files": 2572,
+  "note": "car 1 added tests/lint/bandWalkerPrefix.walker.test.js, the Q10 band-prefix roster (ODQ §99.3); one credited file with fourteen test titles and two suite titles",
+  "files": 2573,
   "parked": 377,
-  "credited": 2195,
-  "titles": 24308,
-  "suiteTitles": 6483
+  "credited": 2196,
+  "titles": 24322,
+  "suiteTitles": 6485
 }
