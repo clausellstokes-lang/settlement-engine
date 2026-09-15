@@ -1,7 +1,16 @@
-# wf_2fd9ec8f-ae7 — per-agent progress, 2026-09-15 19:22:15
-    - `a189db732` ? · IN FLIGHT · transcript 09-15 19:22 778 KB · 33 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aacd4d7bb` ? · IN FLIGHT · transcript 09-15 19:22 741 KB · 43 tool calls · files: odq-sections.txt, tail-bullets.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-    - `a227fb69b` ? · IN FLIGHT · transcript 09-15 19:22 774 KB · 41 tool calls · last: Bash K=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a81282593` ? · IN FLIGHT · transcript 09-15 19:21 755 KB · 32 tool calls · files: wf_all_subjects.txt, $W/_all_subjects.txt, $W/_faith_subjects.txt · last: Bash R=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `aa84a5f3d` ? · IN FLIGHT · transcript 09-15 19:22 859 KB · 45 tool calls · files: odq-headers.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a8d403d8e` ? · IN FLIGHT · transcript 09-15 19:22 755 KB · 33 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+# wf_2fd9ec8f-ae7 — per-agent progress, 2026-09-15 19:27:54
+    - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
+    - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
+    - `a227fb69b` ? · FAILED · transcript 09-15 19:23 867 KB · 52 tool calls
+    - `a81282593` ? · FAILED · transcript 09-15 19:23 768 KB · 33 tool calls · files: wf_all_subjects.txt, $W/_all_subjects.txt, $W/_faith_subjects.txt
+    - `aa84a5f3d` ? · FAILED · transcript 09-15 19:23 929 KB · 55 tool calls · files: odq-headers.txt
+    - `a8d403d8e` ? · FAILED · transcript 09-15 19:23 822 KB · 41 tool calls
+    - `af7b4871f` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `ac80adb3a` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a9aafc802` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a73a0cbd8` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a0beddde4` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a4e19fe01` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a5a2cee34` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `aea6b0737` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a5fe2ebc4` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls

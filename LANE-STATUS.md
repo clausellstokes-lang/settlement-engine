@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 19:22:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 19:27:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -113,17 +113,38 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_6a1dc505-cea** (mtime 09-15 19:16): agent calls 3 (3 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_6a1dc505-cea/`
+- **wf_6a1dc505-cea** (mtime 09-15 19:25): agent calls 15 (15 distinct) · DONE 1 · FAILED (not retried) 13 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a4ae62b63` ? · IN FLIGHT · transcript 09-15 19:22 1153 KB · 44 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
-- **wf_2fd9ec8f-ae7** (mtime 09-15 19:16): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_2fd9ec8f-ae7/`
-    - `a189db732` ? · IN FLIGHT · transcript 09-15 19:22 778 KB · 33 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aacd4d7bb` ? · IN FLIGHT · transcript 09-15 19:22 741 KB · 43 tool calls · files: odq-sections.txt, tail-bullets.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-    - `a227fb69b` ? · IN FLIGHT · transcript 09-15 19:22 774 KB · 41 tool calls · last: Bash K=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a81282593` ? · IN FLIGHT · transcript 09-15 19:21 755 KB · 32 tool calls · files: wf_all_subjects.txt, $W/_all_subjects.txt, $W/_faith_subjects.txt · last: Bash R=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `aa84a5f3d` ? · IN FLIGHT · transcript 09-15 19:22 859 KB · 45 tool calls · files: odq-headers.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a8d403d8e` ? · IN FLIGHT · transcript 09-15 19:22 755 KB · 33 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a4ae62b63` ? · FAILED · transcript 09-15 19:25 1391 KB · 60 tool calls
+    - `a9f72d3c1` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a87ab5437` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a4dfed6f7` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a2b63a504` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `afe140c74` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a2a926de1` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a8f4535b6` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a5efa7bc6` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `af0f3e426` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a82a93cae` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a7f6bde78` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
+    - `a1d041898` ? · FAILED · transcript 09-15 19:25 161 KB · 0 tool calls
+- **wf_2fd9ec8f-ae7** (mtime 09-15 19:23): agent calls 15 (15 distinct) · DONE 0 · FAILED (not retried) 15 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_2fd9ec8f-ae7/`
+    - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
+    - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
+    - `a227fb69b` ? · FAILED · transcript 09-15 19:23 867 KB · 52 tool calls
+    - `a81282593` ? · FAILED · transcript 09-15 19:23 768 KB · 33 tool calls · files: wf_all_subjects.txt, $W/_all_subjects.txt, $W/_faith_subjects.txt
+    - `aa84a5f3d` ? · FAILED · transcript 09-15 19:23 929 KB · 55 tool calls · files: odq-headers.txt
+    - `a8d403d8e` ? · FAILED · transcript 09-15 19:23 822 KB · 41 tool calls
+    - `af7b4871f` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `ac80adb3a` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a9aafc802` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a73a0cbd8` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a0beddde4` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a4e19fe01` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
+    - `a5a2cee34` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `aea6b0737` ? · FAILED · transcript 09-15 19:23 160 KB · 0 tool calls
+    - `a5fe2ebc4` ? · FAILED · transcript 09-15 19:23 161 KB · 0 tool calls
 - **wf_924cc284-8c3** (mtime 09-15 19:03): agent calls 7 (7 distinct) · DONE 7 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_924cc284-8c3/`
     - `a1f64f5e5` ? · DONE · transcript 09-15 18:41 945 KB · 39 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · result: {"reader": "HOW TO READ THIS. The owner asked whether the past logs show the designed trade work already built in more depth, possibly under another name. Answe
     - `a88ec681b` ? · DONE · transcript 09-15 18:45 1216 KB · 77 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · result: {"reader": "LEDGER READER \u2014 every trade landing, decision and deferral recorded in docs/OWNER_DECISION_QUEUE.md (32,673 lines) and the queue docs, in ledge
@@ -198,4 +219,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.79 2.63 7.53
+load: 2.90 2.47 5.84
