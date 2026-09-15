@@ -22,9 +22,23 @@
  * relevant store handlers (canonize, applyEvent on first AI use,
  * markExported with phase==='canon', etc.). The opener is injected so
  * the lib stays decoupled from any specific modal implementation.
+ *
+ * ── LD-7: SCOPE IS A CONDITION OF FIRING ─────────────────────────────────────
+ * THE POPUP SCOPE LAW (lib/momentScope.js) says a popup that travels must say so
+ * in its registration, never by accident of mount point. That is only true if an
+ * UNDECLARED moment cannot reach a surface at all, so this function refuses one
+ * exactly the way it already refuses an unknown reason: warn, return false, fire
+ * nothing. The render gate in PricingMomentCard is the second door, kept because a
+ * store rehydrated from an older build could still be holding a moment this build
+ * no longer declares.
+ *
+ * ⚠️ THE REFUSAL COMES BEFORE `markTriggered`. A moment refused for want of a
+ * declaration must not burn its 24h cooldown — the cure for the refusal is to add
+ * the declaration, and a burnt cooldown would hide the fix for a day.
  */
 
 import { tx } from '../copy/index.js';
+import { momentIsDeclared } from './momentScope.js';
 
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;   // 24 hours
 const STORAGE_PREFIX = 'sf:pricing_moment:';
@@ -36,6 +50,8 @@ const STORAGE_PREFIX = 'sf:pricing_moment:';
  *   - the user is already premium
  *   - the same moment fired within the cooldown window
  *   - localStorage is unavailable (older browsers, private mode)
+ *
+ * ...or the reason carries no `scope` declaration in lib/momentScope.js.
  *
  * @param {MomentReason} reason
  * @param {(content: { headline:string, body:string, reason:MomentReason }) => void} openModal
@@ -50,6 +66,14 @@ export function triggerPricingMoment(reason, openModal, opts = {}) {
   const content = tx(`moments.${reason}`);
   if (!content) {
     console.warn(`[pricingMoments] unknown reason: ${reason}`);
+    return false;
+  }
+
+  // LD-7 law 3, enforced rather than reviewed. A moment with no row in
+  // MOMENT_SCOPES has not said where it lives, so it does not open.
+  if (!momentIsDeclared(reason)) {
+    console.warn(`[pricingMoments] refusing '${reason}': no scope declared in lib/momentScope.js.`
+      + ' Every moment declares the surface it belongs to (LD-7, the popup scope law).');
     return false;
   }
 

@@ -18,10 +18,33 @@
  *
  * Renders fixed-position bottom-right so it doesn't fight the dossier
  * for vertical space. On mobile, full-width above the bottom nav.
+ *
+ * ── LD-7 — THE POPUP SCOPE GATE LIVES HERE, AND ON PURPOSE ───────────────────
+ * The reported bug: a Cartographer Realm upsell followed the visitor to every
+ * page but /pricing, because this card mounts at App level off a store flag that
+ * no route change clears. The cure is a RENDER gate rather than a clear-on-
+ * navigate, and it is installed in this component rather than at the App mount
+ * for two reasons that both matter:
+ *
+ *   1. LAW 2 FALLS OUT OF IT. "Leaving is not dismissing" — an undismissed moment
+ *      must re-appear when the user returns. A gate that renders nothing writes no
+ *      dismissal state, so the flag survives the trip and the moment comes back by
+ *      itself. A clear-on-navigate would have needed a second mechanism to undo.
+ *   2. App.jsx IS FROZEN at exactly its 650 effective lines (scripts/.size-baseline.json;
+ *      tests/lint/sizeBaseline.test.js reds in both directions). The gate costs App.jsx
+ *      nothing here, and the lazy-chunk economics are unchanged: the host still mounts
+ *      under <Suspense> exactly as before.
+ *
+ * ⚠️ THE AUTO-DISMISS TIMER IS GATED WITH THE RENDER, not separately. The 30s
+ * auto-dismiss calls handleDismiss, which WRITES the permanent suppression — so
+ * letting it run while the card is out of scope would make walking away for half a
+ * minute equivalent to pressing "Not now", which is law 2 inverted.
  */
 
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
+import { useRoute } from '../../hooks/useRoute.js';
+import { momentAllowedOnView } from '../../lib/momentScope.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -53,6 +76,10 @@ const SLATE_REASONS = new Set([
 
 export default function PricingMomentCard() {
   const isMobile = useIsMobile();
+  // The ACTIVE ROUTE, read from window.location through the app's own resolver —
+  // never from the store, because `view` is not store state (App.jsx derives it
+  // from useRoute too, so the host and this gate can never disagree).
+  const { view } = useRoute();
   const activeMoment = useStore(s => s.activePricingMoment);
   const clearMoment = useStore(s => s.clearActivePricingMoment);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -93,15 +120,23 @@ export default function PricingMomentCard() {
     handleExit();
   }, [reason, isUpgrade, setPurchaseModalOpen, setAuthModalOpen, handleExit]);
 
+  // LD-7 — the scope gate. An undeclared reason fails CLOSED (see momentScope.js):
+  // "no popup renders without a declared scope" is a property of the mechanism, not
+  // a review note.
+  const inScope = momentAllowedOnView(reason, view);
+  const visible = !!activeMoment && inScope;
+
   // Auto-dismiss after 30s if the user doesn't interact. Critique X-2:
-  // moments are doors, not walls — they don't hold the screen.
+  // moments are doors, not walls — they don't hold the screen. Keyed on `visible`
+  // rather than on `activeMoment` so the clock only runs on the surface that owns
+  // the moment: a moment the user never SAW cannot time out as if they had.
   useEffect(() => {
-    if (!activeMoment) return undefined;
+    if (!visible) return undefined;
     const t = setTimeout(() => handleDismiss(), 30_000);
     return () => clearTimeout(t);
-  }, [activeMoment, handleDismiss]);
+  }, [visible, handleDismiss]);
 
-  if (!activeMoment) return null;
+  if (!visible) return null;
 
   const { headline, body } = activeMoment;
   const accent = isUpgrade ? SLATE : GOLD;
