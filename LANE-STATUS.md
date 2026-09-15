@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 18:28:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 18:36:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 100
+- HOLD-VITEST absent · runner count 24
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -114,13 +114,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_924cc284-8c3** (mtime 09-15 18:26): agent calls 4 (4 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 4 — mirror `_progress/wf_924cc284-8c3/`
-    - `a1f64f5e5` ? · IN FLIGHT · transcript 09-15 18:28 526 KB · 14 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a88ec681b` ? · IN FLIGHT · transcript 09-15 18:28 523 KB · 15 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
-    - `af373d640` ? · IN FLIGHT · transcript 09-15 18:28 523 KB · 17 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a102eb4be` ? · IN FLIGHT · transcript 09-15 18:28 479 KB · 16 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a1f64f5e5` ? · IN FLIGHT · transcript 09-15 18:36 791 KB · 36 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a88ec681b` ? · IN FLIGHT · transcript 09-15 18:36 901 KB · 54 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `af373d640` ? · IN FLIGHT · transcript 09-15 18:36 800 KB · 40 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a102eb4be` ? · IN FLIGHT · transcript 09-15 18:36 845 KB · 54 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_6a1dc505-cea** (mtime 09-15 18:25): agent calls 2 (2 distinct) · DONE 1 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
-    - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:28 739 KB · 22 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:36 1188 KB · 44 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_a95227c9-cf1** (mtime 09-15 18:02): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_a95227c9-cf1/`
     - `a5d08fa55` ? · IN FLIGHT · transcript 09-15 18:03 423 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
     - `a2e931bc4` ? · IN FLIGHT · transcript 09-15 18:03 490 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
@@ -187,4 +187,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 28.16 43.94 90.05
+load: 206.33 123.41 104.71
