@@ -18,6 +18,7 @@ import { buildGenerationCoherenceReceipt } from '../../src/generators/generation
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { ARCANE_INST_TAGS } from '../../src/domain/magicFilter.js';
 
 const TIERS = [
   'thorp',
@@ -679,5 +680,126 @@ describe('final coherence receipt coverage', () => {
       status: 'pass',
       findings: [],
     });
+  });
+});
+
+
+// ── ARM B7b — THE SIXTH SURFACE (CH-6b car 1 / J-TECH2-10) ───────────────────────────────
+// `generationCoherence.js` asks `allowsMagicClaim` about EVERY generated string in a
+// finished settlement, including its taxonomy fields. `textAssertsFunctionalMagic` is a
+// PROSE detector, so before this cure a magic-free world that lawfully kept a Magic-shelf
+// row had its own `world_law_magic` certification convict it for the NAME OF THE SHELF.
+// The cure spares a candidate whose ENTIRE text is one classification token and nothing
+// else, so these arms hold it as a NARROWING and not as a hole: the bucket names pass, the
+// sentences that contain them still fail, the near-misses still fail, and a magical world
+// is unaffected in both directions.
+describe('world law: a bucket name is not a magic claim (B7b)', () => {
+  // DERIVED from the same list the cure derives from, never re-typed here — a tag added to
+  // ARCANE_INST_TAGS must be honoured by both sides with no second edit.
+  const BARE_TOKENS = ['magic', 'magical', ...ARCANE_INST_TAGS];
+  const CASED_TOKENS = BARE_TOKENS.flatMap(token => [
+    token,
+    token.charAt(0).toUpperCase() + token.slice(1),
+  ]);
+
+  const SENTENCES = [
+    'The wizard sells scrolls of teleportation to anyone with coin.',
+    'Arcane wards hold the tower together.',
+    'A planar rift opened beneath the market square.',
+    'Enchanting is taught at the academy of magic.',
+  ];
+
+  // The cure is keyed on the WHOLE text. These carry a classification token and more, so
+  // they are prose and must still be convicted — this is the arm that proves the narrowing
+  // did not become a hole.
+  const NEAR_MISSES = [
+    'magic shop',
+    'magical services',
+    'Magic item consignment',
+    'The magic works here.',
+  ];
+
+  const deadLaw = () => createGenerationWorldLaw({ magicExists: false, priorityMagic: 0 });
+  const liveLaw = () => createGenerationWorldLaw({ magicExists: true, priorityMagic: 50 });
+
+  it('holds the classification vocabulary at its derived membership', () => {
+    // The pin follows the data. If ARCANE_INST_TAGS moves, this figure is meant to move
+    // with it and the shift is meant to be seen, not silently absorbed.
+    expect(BARE_TOKENS).toEqual(['magic', 'magical', 'arcane', 'planar', 'enchanting']);
+    expect(CASED_TOKENS).toHaveLength(10);
+  });
+
+  it('stops convicting a bare classification token in a magic-free world', () => {
+    const law = deadLaw();
+    const convicted = CASED_TOKENS.filter(token => !law.allowsMagicClaim(token));
+    expect(convicted).toEqual([]);
+  });
+
+  it('still convicts a SENTENCE that claims magic works, in the same world', () => {
+    const law = deadLaw();
+    const acquitted = SENTENCES.filter(sentence => law.allowsMagicClaim(sentence));
+    expect(acquitted).toEqual([]);
+  });
+
+  it('still convicts a string that merely CONTAINS a classification token', () => {
+    const law = deadLaw();
+    const acquitted = NEAR_MISSES.filter(text => law.allowsMagicClaim(text));
+    expect(acquitted).toEqual([]);
+  });
+
+  it('leaves a magical world unaffected in both directions', () => {
+    const law = liveLaw();
+    const denied = [...CASED_TOKENS, ...SENTENCES, ...NEAR_MISSES]
+      .filter(text => !law.allowsMagicClaim(text));
+    expect(denied).toEqual([]);
+  });
+
+  it('certifies a magic-free settlement that carries taxonomy fields, and still catches prose', () => {
+    const shelfOnly = buildGenerationCoherenceReceipt({
+      tier: 'town',
+      config: {
+        tradeRouteAccess: 'road',
+        terrainType: 'plains',
+        magicExists: false,
+        priorityMagic: 0,
+      },
+      institutions: [{
+        name: "Adventurers' charter hall",
+        category: 'Magic',
+        priorityCategory: 'magic',
+        tags: ['arcane'],
+      }],
+      npcs: [],
+      history: {},
+      structuralViolations: [],
+    });
+    expect(
+      shelfOnly.checks.find(check => check.id === 'world_law_magic'),
+    ).toMatchObject({ status: 'pass', findings: [] });
+
+    // The same record with one SENTENCE added is still convicted — the negative control
+    // that keeps the arm above from passing vacuously.
+    const withProse = buildGenerationCoherenceReceipt({
+      tier: 'town',
+      config: {
+        tradeRouteAccess: 'road',
+        terrainType: 'plains',
+        magicExists: false,
+        priorityMagic: 0,
+      },
+      institutions: [{
+        name: "Adventurers' charter hall",
+        category: 'Magic',
+        priorityCategory: 'magic',
+        tags: ['arcane'],
+        desc: 'A wizard keeps the roster and renews the wards each spring.',
+      }],
+      npcs: [],
+      history: {},
+      structuralViolations: [],
+    });
+    expect(
+      withProse.checks.find(check => check.id === 'world_law_magic'),
+    ).toMatchObject({ status: 'fail' });
   });
 });

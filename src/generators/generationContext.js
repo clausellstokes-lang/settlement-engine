@@ -103,6 +103,40 @@ function carriesExplicitMagicMetadata(entity, category = '') {
   );
 }
 
+/**
+ * ⭐ THE SIXTH SURFACE (CH-6b car 1 / J-TECH2-10). `generationCoherence.js` walks EVERY
+ * generated string in a finished settlement — INCLUDING its TAXONOMY fields `category`,
+ * `priorityCategory` and `tags[]` — and asks `allowsMagicClaim` about each.
+ * `textAssertsFunctionalMagic` is a PROSE detector, so it answers *yes* to the bare strings
+ * `'Magic'`, `'arcane'` and `'magic'`. The moment a magic-free world lawfully keeps a
+ * Magic-shelf row, that settlement's own `world_law_magic` certification convicts it FOR THE
+ * NAME OF THE SHELF IT IS FILED ON — the engine's own filing system read as a claim about
+ * the world.
+ *
+ * A BUCKET NAME IS NOT A SENTENCE. This is the estate's closed classification vocabulary,
+ * DERIVED from `ARCANE_INST_TAGS` and never re-typed, so a tag added there is honoured here
+ * with no second edit. Only a candidate whose ENTIRE text is one of these tokens is spared;
+ * anything longer is prose and is read exactly as before, which makes this a NARROWING of the
+ * certification rather than a hole in it.
+ *
+ * ⚠ `allowsMagicClaim` has exactly ONE consumer in `src/` (`generationCoherence.js:369`), so
+ * nothing else in the estate can feel this.
+ */
+const CLASSIFICATION_TOKENS = new Set(
+  ['magic', 'magical', ...ARCANE_INST_TAGS].map(tag => String(tag).trim().toLowerCase()),
+);
+
+/**
+ * True when the whole candidate text is one token of the classification vocabulary above.
+ * Trimmed, because a taxonomy value reaches the walker as whatever the record holds.
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+function isBareClassificationToken(value) {
+  const text = String(value ?? '').trim().toLowerCase();
+  return text !== '' && CLASSIFICATION_TOKENS.has(text);
+}
+
 export function textAssertsMaritimeCapability(value) {
   let text = String(value || '');
   for (const pattern of CONDITIONAL_MARITIME_PATTERNS) {
@@ -332,10 +366,13 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
     allowsSecret,
     allowsHistoryEvent,
     allowsGeneratedContent,
-    allowsMagicClaim: candidate => (
-      magicEnabled
-      || !textAssertsFunctionalMagic(generatedCandidateText(candidate))
-    ),
+    allowsMagicClaim: candidate => {
+      if (magicEnabled) return true;
+      const text = generatedCandidateText(candidate);
+      // A shelf name is not a claim about the world. See CLASSIFICATION_TOKENS above.
+      if (isBareClassificationToken(text)) return true;
+      return !textAssertsFunctionalMagic(text);
+    },
     allowsMaritimeClaim: candidate => (
       maritimeSupported
       || !textAssertsMaritimeCapability(generatedCandidateText(candidate))
