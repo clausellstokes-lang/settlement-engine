@@ -6,23 +6,6 @@
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
-    "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
-      "file": "tests/copy/voiceMechanics.test.js",
-      "test": "E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
-      "subsystem": "voice — Tier-2 src/data + src/domain string-literal ratchet (per-file arm)",
-      "cause": "NOT FREED — labelBands.js carries 5 em dashes as the KEYS of a total map over the producer's authored complexity labels and generalStateProse.js carries 3 as parsed \"<Band> — <Condition>\" delimiters (DOCKET-2/3, DESK-900-TAIL measured: the scanner reads cooked values so an escape counts the same; the generator import is forbidden in writing by three files); the Tier-2 TOTAL is 319 against a budget of 670 (green) but the per-file arm is exact and the shrink-only door refuses a 311 → 319 refreeze. BANKED at §900 by the Fable chair with OWED_CEILING +1; the structural cure is a declared authored-vocabulary exemption class in the voice scanner (§901).",
-      "introducedAt": "e3d240911db68dde4fcc2df8ec33d9676408058d",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "files-over-baseline",
-          "kind": "count",
-          "pattern": "^src/domain/\\S+: baseline em:\\d+ bang:\\d+ .* current em:\\d+ bang:\\d+$",
-          "ceiling": 2,
-          "unit": "src/domain files whose Tier-2 em-dash count sits ABOVE the frozen per-file baseline (labelBands.js +5, generalStateProse.js +3 — a producer's authored dashed vocabulary as map keys and parsed delimiters); the shrink-only door cannot raise the baseline and the generator import is forbidden in writing — PATTERN RE-DERIVED 2026-09-05 (§900 gate run 2) against the JSON reporter's failureMessages[0], which carries the arm's custom message lines and NOT the terminal diff block the first pattern was cut against; ceiling unchanged at 2"
-        }
-      ]
-    },
     "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
       "file": "tests/docs/enforcement-claims.test.js",
       "test": "enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target",
