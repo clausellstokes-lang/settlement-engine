@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 13:26:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 13:33:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 18
+- HOLD-VITEST absent · runner count 24
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_406e67e7-fa9** (mtime 09-15 13:22): agent calls 11 (11 distinct) · DONE 10 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_406e67e7-fa9/`
+- **wf_406e67e7-fa9** (mtime 09-15 13:22): agent calls 11 (11 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_406e67e7-fa9/`
     - `a7e604d4d` ? · DONE · transcript 09-15 12:37 819 KB · 51 tool calls · result: ## The sequencing read — #18, #32, #33, #34, #20, #21  Read at the ledger `a803dee7a` (branch `review-fixes-2026-07-08`) and verified against the build slot `cl
     - `a3ba4fb58` ? · DONE · transcript 09-15 12:41 1079 KB · 56 tool calls · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 declared waves across the FP programs)", "summary": "Item #32 is the FP (Foreign Poli
     - `a5a2edd52` ? · DONE · transcript 09-15 12:49 1174 KB · 48 tool calls · files: flags.txt, waves.md · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 waves across 13 families)", "summary": "Item #32 is the FP programme: 13 volumes (SP 
@@ -124,7 +124,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a8ca1cea6` ? · DONE · transcript 09-15 12:53 947 KB · 43 tool calls · result: {"item": "Long-tail #33 \u2014 the logistics and vessel family (LG): teleportation circles with relays, airships, a unified vessel pool with fleet bounds and re
     - `ac2ac2537` r3 · DONE · transcript 09-15 13:22 1126 KB · 55 tool calls · files: $SC/src-files.txt, $SC/test-files.txt, $SC/src-imports.txt, s5.txt · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (the FP compiled wave programme; brief says \"~113 waves across 13 families\")", "verdicts"
     - `a369780bb` ? · DONE · transcript 09-15 13:02 845 KB · 30 tool calls · result: {"item": "LONG TAIL #34 \u2014 the political, economic and heraldic programmes (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 the two operations cars \u00b7 the WEA
-    - `a223c88f9` ? · IN FLIGHT · transcript 09-15 13:24 574 KB · 0 tool calls
+    - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 165.42 153.85 136.70
+load: 112.33 121.66 126.46

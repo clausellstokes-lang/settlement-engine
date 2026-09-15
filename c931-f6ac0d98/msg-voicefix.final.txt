@@ -1,0 +1,42 @@
+Voice fix (chair car): LT39's two new War-door surfaces and their two domain readers landed seven em dashes in reader-facing strings — every one rewritten by the playbook, the pins moved with them, no baseline raised
+
+THE RED. At the consist tip the JSX voice ratchet (E-E) reds on the two components LT39 cars 4+5 created —
+  src/components/map/NpcTrailSection.jsx: baseline em:0 bang:0 → current em:1 bang:0
+  src/components/map/RelationshipChronicleSection.jsx: baseline em:0 bang:0 → current em:3 bang:0
+— and the scanner's own method (espree, string literals + template quasis) counts two more in the domain
+files the same cars and car 3 wrote: `npcInteriorityRead.js:198` composes "Took the governing seat from
+Mira — faction challenge." for the DM's trail, and `humanizeEngineTokens.js:454/:461` are the two
+INCIDENT_FAMILIES phrase templates ("The pressure they shared ended — …", "Something you wrote into the
+world touched them — …"). LT39's gate never ran `tests/copy/` (its dispatch listed tests/components and
+tests/lint), and the chair's own dock verification ran the lane's focused files, not the voice suite —
+the class is closed for the four running lanes by a gate addendum (tests/copy WHOLE in every car).
+
+THE CURE, by docs/VOICE_AND_TONE.md §6 (the playbook; the claim of every sentence unchanged):
+  · the date separator `{' — '}` in both components → `{': '}` (a label separator → colon)
+  · 'Quiet business — spies, sabotage, bought men.' → 'Quiet business: spies, sabotage, bought men.' (a definition follows → colon)
+  · 'quiet business — yours to know, and not shown…' → 'quiet business: yours to know, …' (a clarification follows → colon)
+  · `${counterpart} — ${cause}.` → `${counterpart} (${cause}).` (an appositive aside → parentheses; "Took the governing seat from Mira (faction challenge).")
+  · the two family templates `… ended — ${tail}` / `… touched them — ${tail}` → `… ended: ${tail}` / `… touched them: ${tail}` (what follows names the thing → colon)
+The pins that quoted the dashed sentences move WITH them in this commit (tests/components/npcTrailSection.test.jsx ×2,
+tests/domain/npcInteriorityRead.test.js ×4, tests/domain/display/relationshipChronicle.test.js ×2); the vocabularyTotality
+walker's `/^The pressure they shared ended/` pin needs no move. These surfaces are NEW in this landing (never shipped),
+so no same-seed output moves and no golden is touched. NO baseline is raised; both voice baselines are byte-identical.
+
+PROOF (this working tree, under the gate mutex):
+  npx vitest run tests/copy tests/domain/npcInteriorityRead.test.js tests/domain/display/relationshipChronicle.test.js tests/components/npcTrailSection.test.jsx tests/components/relationshipChronicleSection.test.jsx tests/components/warFaithSurfacing.test.jsx tests/components/advanceReport.test.jsx tests/lint/vocabularyTotality.walker.test.js tests/lint/negativeAssertionAnchor.walker.test.js
+    Test Files  18 passed (18)
+         Tests  250 passed (250)
+    (12:13 EDT, load averages 15.21 83.47 77.96 — four lanes on the box; a scanner suite, no timeout class)
+  npx eslint <the four source files> → clean
+
+NEGATIVE CONTROL (the same voice suite at the committed tip, no fix, in a throwaway worktree):
+  npx vitest run tests/copy/voiceMechanics.test.js   (at 79f213959, throwaway worktree)
+    src/domain/display/humanizeEngineTokens.js: baseline em:0 bang:0 → current em:2 bang:0
+    src/domain/display/npcInteriorityRead.js: baseline em:0 bang:0 → current em:1 bang:0
+    src/components/map/NpcTrailSection.jsx: baseline em:0 bang:0 → current em:1 bang:0
+    src/components/map/RelationshipChronicleSection.jsx: baseline em:0 bang:0 → current em:3 bang:0
+    Test Files  1 failed (1) · Tests  2 failed | 26 passed (28)   — E2 (src/domain) and E-E (JSX), the fix is the difference
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
