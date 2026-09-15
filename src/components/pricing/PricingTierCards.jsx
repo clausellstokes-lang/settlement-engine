@@ -32,7 +32,14 @@ function FeatureRow({ children }) {
   );
 }
 
-export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
+/**
+ * `ctaDisabled` (LD-6 item 2, the hydration gate): a caller-supplied hard block
+ * on the CTA that is NOT an in-flight checkout. It exists because `loading`
+ * swaps the label to "Redirecting…", which would be a lie while the auth store
+ * is merely hydrating — the button must stay disabled UNDER ITS OWN LABEL.
+ * Defaults false, so every existing caller is byte-identical in behaviour.
+ */
+export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, ctaDisabled = false, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
   // P9 / decision 4 — when the simulation-led A/B variant is on, source the
   // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
   // the current copy. The variant DELIBERATELY names no size as premium (size
@@ -184,7 +191,7 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
           <Button
             type="button"
             onClick={onCta}
-            disabled={loading || notConfigured}
+            disabled={loading || notConfigured || ctaDisabled}
             // P8 — button emphasis follows the ACTION's importance, not the card's
             // position. Only a real purchase action gets the solid-gold primary
             // (decided by the parent so the region has exactly one). A billing/

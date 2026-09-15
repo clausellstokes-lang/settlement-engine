@@ -30,6 +30,12 @@ export default function PurchaseModal({ onClose }) {
   const authTier      = useStore(s => s.auth.tier);
   const isElevated    = useStore(s => s.isElevated());
   const isSignedIn    = useStore(s => Boolean(s.auth?.user?.id));
+  // ⛔ THE HYDRATION GATE (LD-6 item 2, second half). `authTier` reads 'anon'/
+  // 'free' until the session resolves, so the premium upsell below would offer a
+  // SECOND subscription to an already-paying Cartographer who opened this modal
+  // mid-hydration. The credit-pack tiles are deliberately NOT gated: a pack is
+  // not a subscription and buying one at any tier is correct.
+  const authLoading   = useStore(s => Boolean(s.auth?.loading));
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
   // Auto-reload consent (§4.2): OFF by default. Drives savePaymentMethod on the
@@ -293,7 +299,10 @@ export default function PurchaseModal({ onClose }) {
               <button
                 type="button"
                 onClick={() => handlePurchase('premium')}
-                disabled={loading || !isConfigured}
+                // THE HYDRATION GATE: blocked while the tier is still unknown,
+                // under its OWN label — the 'Redirecting…' swap belongs to a real
+                // in-flight checkout and would be a lie here.
+                disabled={loading || !isConfigured || authLoading}
                 style={{
                   background: 'none', border: 'none', padding: 0,
                   color: GOLD, fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
