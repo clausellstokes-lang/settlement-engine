@@ -293,3 +293,80 @@ be, and that is the finding worth carrying**.
 ⇒ TWO RULES FOR THE NEXT LANE. A line-keyed citation in this estate is a budget item exactly
 as §4's comment was; and **before following one, check whether its file is a detector source**,
 because there the cheapest correct act is to leave the number wrong and say why.
+
+---
+
+## §6 — CLOSED ON THE CODE: D-CH-1, the repair pass that was said to delete without a receipt (2026-09-15, lane-LT40-engine)
+
+**Status: the docket's premise is REFUTED. A narrower residual is recorded and priced, and a
+second, genuinely unreceipted site is located in a sibling file. Nothing is cured.**
+
+### The docket
+
+ODQ §503.4 opened D-CH-1: *"`coherenceRepairPass` silently deletes 21/21 institutions the
+roster asked for as `unsupported_institution` — a repair pass that deletes without a receipt is
+a quiet-lie candidate"*, chartered **for its own look**. The look is done.
+
+### REFUTED, at this tip, two ways
+
+| the claim | the finding |
+|---|---|
+| the pass deletes | TRUE. `removeUnprotected` (`coherenceRepairPass.js:226`) splices at `:232` |
+| ...without a receipt | **FALSE.** `:233` calls `recordRepair`, which at `:133` freezes `{id, type, action:'removed', subject, reason}` onto `ctx.generationRepairs` AND writes a coherence trace |
+| the three deleting classes | `:339` `access_compatibility`, `:360` `unsupported_institution` (§503.4's own class), `:370` `mutual_exclusion` — all three route through the same receipted function |
+| and it is recent damage | **FALSE.** `git log -S "unsupported_institution"` on the file names `c1ea091f7` (2026-07-26), a month BEFORE §503.4 was written |
+
+**CONFIRMED BY EXECUTION**, over the estate's own thirty-settlement scan (`estate-<tier>-0..4`,
+six tiers):
+
+```
+scanned 30
+by action: {"added":9,"removed":2}
+by type  : {"hard_dependency":8,"threat_defense":1,"unsupported_institution":2}
+city-1      : unsupported_institution · Multiple monasteries · "…had no compatible, non-excluded dependency at this tier."
+metropolis-2: unsupported_institution · Multiple monasteries · "…had no compatible, non-excluded dependency at this tier."
+```
+
+Two removals, two full receipts. **Not one anonymous deletion.**
+
+### What remains true: the reader is told the COUNT, never the NAME
+
+The detail exists and reaches no reader. Both surfaces are aggregates:
+
+- `src/pdf/lib/generationContracts.js:132` `repairCount` → `src/pdf/sections/IdentityDailyLife.jsx:337-338`, "N repair(s) recorded"
+- `src/components/new/tabs/ViabilityTab.jsx:195`, "N deterministic repair(s) recorded"
+
+⚠ The recon brief named only the first. **There are two.**
+
+**PRICED, NOT BUILT — the itemised surface.** Rendering which institution left (and why) is a
+new reader-facing surface on two panels plus the PDF, it changes rendered text on every
+settlement that carries a repair, and it needs its own voice pass under
+docs/VOICE_AND_TONE.md. That is a car of its own and it is output-moving under §764.3.
+
+### ⛔ AND THE UNRECEIPTED DELETION THE DOCKET IMAGINED DOES EXIST — IN A SIBLING FILE
+
+Closing D-CH-1 on `coherenceRepairPass` alone would have closed it falsely, so every other
+roster splice was read. `src/generators/steps/assembleInstitutions.js` holds six, and they do
+not behave alike:
+
+| site | act | receipt |
+|---|---|---|
+| `:204` | the lesser of a pair is removed | returns the removed names "for trace emission by callers that trace" — caller-dependent by design |
+| `:290`, `:453`, `:529` | EXCLUSIVE-GROUP DISPLACEMENT: an incoming required/forced row evicts the group's sitting row | **the displaced row is named NOWHERE.** The `recordTrace` that follows describes the INCOMING institution ("required"/"forced"); the eviction has no receipt of its own |
+| `:626` | custom-content absorption | RECEIPTED, and its own comment states the rule: every sibling absorption site emits one |
+| `:653` | toggle exclusion | the user turned the category off, so nothing was "asked for" |
+
+**This is a different act from D-CH-1's** — a replacement inside a declared exclusive group,
+not the deletion of something the roster asked for — which is why it is recorded here rather
+than cured. **PRICED, NOT BUILT:** adding the eviction receipt appends rows to the coherence
+trace stream, a generated payload, so it must be measured as output-moving before it lands and
+it is not a docblock car's to take.
+
+### Coverage, read rather than claimed
+
+`tests/generators/coherenceRepairPass.test.js` carries five arms. The one that comes closest is
+*"records repairs without consuming a random branch or changing replay output"* — it pins that
+repairs are recorded and that recording them does not move the draw. **No arm asserts that a
+REMOVAL specifically carries subject and reason**, and this car deliberately adds none: the
+brief holds car 8 to a reading, and a new arm here would bill the censuses for a fact §6 now
+states with an executed receipt. Recorded as owed, not as covered.
