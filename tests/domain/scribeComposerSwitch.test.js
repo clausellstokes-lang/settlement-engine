@@ -76,7 +76,7 @@ describe('THE DRAW IS OFF UNTIL IT IS PUSHED ON', () => {
     const pool = block().pools[firstPoolKey()];
     const units = [unitFor(pool[0], 'A rendered spine.')];
     expect(scribeVariantPool(pool, units)).toBe(pool);
-    expect(scribeBlocksFrom({ schema: 1, current: { blocks: { x: {} } } })).toBe(null);
+    expect(scribeBlocksFrom({ schema: SCRIBE_ARTEFACT_SCHEMA, current: { blocks: { x: {} } } })).toBe(null);
   });
 
   it('nothing under src/domain reads a feature flag, which is why the switch is pushed', () => {
@@ -243,7 +243,7 @@ describe('⛔ THE INJECTION WALL — an artefact stores WORDS and cannot say any
 
 describe('THE ARTEFACT IS ONLY READ FOR THE TOWN, THE SEED AND THE ENGINE IT WAS MADE FOR', () => {
   const artefact = (over = {}) => ({
-    schema: 1,
+    schema: SCRIBE_ARTEFACT_SCHEMA,
     renderedFor: 'seed-a',
     version: { engine: 'gen-1/sim-1' },
     current: { advanceSeq: 0, blocks: { [BLOCK]: { p: [] } } },

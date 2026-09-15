@@ -198,6 +198,61 @@ function withUndoMemberBirths(snapshot, births) {
 }
 
 /**
+ * ⭐⭐ THE EPOCH RECORD IS COMPUTED AT ADVANCE TIME (chair ruling 21; design §5b; the owner,
+ * 2026-09-14 ~06:1x: "when advance time happens, the program reads the new town card, the history
+ * of town cards, and what happened last").
+ *
+ * ⛔ WHY IT CAN ONLY HAPPEN HERE. The Scribe renders epoch k from the new card, the typed deltas
+ * of the cards before it and the record of advance k — and it renders at the OPEN (rule 14), which
+ * may be a week and a reload after the advance. By then the town has MOVED and the past lane is
+ * compact by design (units only, no card), so the prior card cannot be rebuilt. W2 shipped the
+ * transport sending `record: null` and said so in terms. This is the one moment at which both
+ * sides of the delta exist: `simSaves` holds the settlements as they stood before the pulse and
+ * `result.settlementUpdates` holds the ones it produced.
+ *
+ * ⛔ EVERY GUARD IS HERE AND NOT IN THE HELPER. The flag is read here so a dark build does not
+ * even import the module; the settlements with no rendered survey are filtered inside the helper
+ * so nothing is carded for a town that has nothing to be told what moved since. It is AWAITED
+ * outside the producer — a `set()` cannot await, and the card builder pulls the six generated
+ * prose leaves — and it mutates the plain `settlementUpdates` rows the pure compute returned, so
+ * the record rides into the Phase-2 commit and the SAME atomic persist as the advance itself.
+ *
+ * @param {{result: any, simSaves: any, simCampaign: any, campaignId: string, get: Function}} args
+ */
+async function stampAdvanceEpochRecords({ result, simSaves, simCampaign, campaignId, get }) {
+  if (!flag('scribe')) return;
+  const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
+  if (updates.length === 0) return;
+  const saves = Array.isArray(simSaves) ? simSaves : [];
+  /** @type {Map<string, any>} */
+  const before = new Map();
+  /** @type {Map<string, any>} */
+  const eventLogBySaveId = new Map();
+  for (const save of saves) {
+    const id = String(save?.id ?? '');
+    if (!id) continue;
+    before.set(id, save?.settlement || null);
+    eventLogBySaveId.set(id, Array.isArray(save?.campaignState?.eventLog) ? save.campaignState.eventLog : []);
+  }
+  try {
+    const { stampScribeEpochRecords } = await import('../lib/scribeEpochStamp.js');
+    await stampScribeEpochRecords(updates, {
+      before,
+      worldBefore: simCampaign?.worldState || null,
+      worldAfter: result?.worldState || null,
+      eventLogBySaveId,
+      // The epoch the advance is ABOUT TO create. The counter is raised inside the Phase-2
+      // producer below, which cannot be awaited in, so the seq is read here and one is added.
+      advanceSeq: (Number(get().advanceSeqByCampaign?.[String(campaignId)]) || 0) + 1,
+    });
+  } catch (error) {
+    // An advance is the campaign's own state moving and it lands whether or not a convenience for
+    // a dark feature could be computed.
+    console.warn('[scribe] the advance epoch records were not stamped', error);
+  }
+}
+
+/**
  * Deposit-and-consume reconcile (fix wave 2 #2). applyWorldPulseResultToState commits
  * `result.wizardNews` WHOLESALE, and that feed was derived from the pre-advance clone
  * lifted BEFORE the advance's in-flight yield. A wizardNews write that landed on the
@@ -528,6 +583,16 @@ export async function runAdvanceCampaignWorld({
 
     preSnapshot = withUndoMemberBirths(preSnapshot, result?.memberBirths || []);
 
+    // ⭐⭐ THE SCRIBE'S ONE ACT AT ADVANCE TIME (chair ruling 21, design §5b). See
+    // `stampAdvanceEpochRecords`: the pre-advance settlements and the post-advance ones are both
+    // in hand exactly here and nowhere else, so this is where the typed record of what moved is
+    // computed. Dark, awaited outside the producer, and a no-op on every settlement that carries
+    // no rendered survey.
+    await stampAdvanceEpochRecords({
+      result, simSaves, simCampaign, campaignId, get,
+    });
+    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+
     // ── Phase 2: commit the pure result back onto the draft.
     if (simCampaign && result) {
       set(state => {
@@ -839,6 +904,22 @@ export async function runResolveIntervalMajors({
   if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
   parkedUndo = withUndoMemberBirths(parkedUndo, result?.memberBirths || []);
+
+  // ⭐ THE SAME ACT ON THE RESUME PATH, because a resumed segment is the OTHER way an advance
+  // lands on a saved settlement. The resume re-derives the whole interval from the cursor's
+  // pre-interval inputs while `simSaves` holds the PAUSED state the first segment committed, so
+  // the record computed here spans paused → complete and composes with the one the paused commit
+  // already parked (`mergeEpochRecords` keeps the older before and the newer after).
+  // ⚠ ONE CAVEAT, STATED RATHER THAN HIDDEN: the seq is read as the counter stands now, which is
+  // right in the ordinary case (the paused commit already raised it) and one behind in the
+  // post-reload adoption branch below, which raises it inside its own set(). A record whose seq
+  // does not match the epoch being rendered is simply NOT SENT (`pendingRecordFor` answers by
+  // epoch), so that corner degrades to W2's behaviour — a card-grounded render with no diff — and
+  // never to a false one.
+  await stampAdvanceEpochRecords({
+    result, simSaves, simCampaign, campaignId, get,
+  });
+  if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
   if (result && result.status) {
     // Deposit-and-consume reconcile (fix wave 2 #2): re-append only wizardNews

@@ -164,31 +164,117 @@ export function cardDelta(prev, next) {
   out.moved.sort((a, b) => compareCodepoint(String(a.path), String(b.path)));
   out.added.sort(compareCodepoint);
   out.removed.sort(compareCodepoint);
-  const named = (list, prefix) => list.filter((p) => p.startsWith(prefix))
-    .map((p) => p.slice(prefix.length + 1, -1));
-  const fields = rec(out.moved.map((row) => [
-    String(row.path),
-    rec([['before', row.before], ['after', row.after]]),
-  ]));
   const pageOf = (card) => (Array.isArray(card?.page) ? card.page.length : 0);
+  // ⭐ ONE SUMMARISER, shared with `mergeEpochRecords`. The keyed-by-path `fields` map, the pool
+  // and roster names and the counts are all DERIVED from the three primary lists, and a second
+  // copy of that derivation is how a merged delta would come to disagree with a fresh one about
+  // what moved. See `summarise`.
+  return summarise(out.moved, out.added, out.removed, rec([
+    ['before', pageOf(prev)], ['after', pageOf(next)],
+  ]));
+}
+
+/** The keyed names out of an added/removed path list, e.g. `pools[DS-DEF-2 :: x]` -> the key. */
+const namedUnder = (list, prefix) => (Array.isArray(list) ? list : [])
+  .filter((p) => String(p).startsWith(prefix))
+  .map((p) => String(p).slice(prefix.length + 1, -1));
+
+/** Re-derive every summary of one delta from its three primary lists, so a merge cannot drift. */
+function summarise(moved, added, removed, pageLines) {
   return rec([
     ['schema', EPOCH_RECORD_SCHEMA],
-    ['moved', out.moved],
-    // ⭐ THE SAME ROWS KEYED BY PATH, because that is the shape the refuter's EPOCH arm reads and
-    // a consumer that had to scan an array to answer "did this field move" would scan it once per
-    // clause of every face on the page.
-    ['fields', fields],
-    ['added', out.added],
-    ['removed', out.removed],
-    ['poolsStarted', named(out.added, 'pools')],
-    ['poolsStopped', named(out.removed, 'pools')],
-    ['rosterAdded', named(out.added, 'town.institutions')],
-    ['rosterRemoved', named(out.removed, 'town.institutions')],
-    ['pageLines', rec([['before', pageOf(prev)], ['after', pageOf(next)]])],
+    ['moved', moved],
+    ['fields', rec(moved.map((row) => [
+      String(row.path), rec([['before', row.before], ['after', row.after]]),
+    ]))],
+    ['added', added],
+    ['removed', removed],
+    ['poolsStarted', namedUnder(added, 'pools')],
+    ['poolsStopped', namedUnder(removed, 'pools')],
+    ['rosterAdded', namedUnder(added, 'town.institutions')],
+    ['rosterRemoved', namedUnder(removed, 'town.institutions')],
+    ['pageLines', pageLines],
     ['counts', rec([
-      ['moved', out.moved.length], ['added', out.added.length], ['removed', out.removed.length],
+      ['moved', moved.length], ['added', added.length], ['removed', removed.length],
     ])],
-    ['empty', out.moved.length === 0 && out.added.length === 0 && out.removed.length === 0],
+    ['empty', moved.length === 0 && added.length === 0 && removed.length === 0],
+  ]);
+}
+
+/**
+ * ⭐⭐ TWO DELTAS SPANNING ONE UNBROKEN STRETCH, COMPOSED INTO THE DELTA OF THE WHOLE STRETCH.
+ *
+ * ⛔ THE CASE THIS EXISTS FOR IS THE COMMON ONE, NOT THE CORNER. An advance makes every settlement
+ * of a realm stale, and rule 14 says a town is rendered only when its dossier is OPENED — so a
+ * game master who advances a thirty-town realm twice before opening Ashford has two advances and
+ * one survey. The record parked by the second advance alone would say what moved in the second
+ * advance, and the prose it licences would be written as if the first had never happened: "since
+ * the last survey" over a field that moved twice would name the wrong before. Composing keeps the
+ * OLDER `before` and the NEWER `after`, which is exactly what "since the last survey" means.
+ *
+ * ⛔ A FIELD THAT MOVED AND MOVED BACK IS NOT A MOVE, and drops out — it would licence a sentence
+ * about a change the reader cannot see. So does a row ADDED then REMOVED, and one REMOVED then
+ * ADDED: the roster ends where it started and the page says nothing about it.
+ *
+ * @param {object} older the record parked first (its `from` is the epoch the survey belongs to)
+ * @param {object} newer the record just computed
+ * @returns {object} a record spanning `older.from` to `newer.to`
+ */
+export function mergeEpochRecords(older, newer) {
+  if (!isRecord(older)) return newer;
+  if (!isRecord(newer)) return older;
+  const a = isRecord(older.delta) ? older.delta : {};
+  const b = isRecord(newer.delta) ? newer.delta : {};
+
+  /** @type {Map<string, {before: unknown, after: unknown}>} */
+  const byPath = new Map();
+  for (const row of Array.isArray(a.moved) ? a.moved : []) {
+    byPath.set(String(row?.path), { before: row?.before, after: row?.after });
+  }
+  for (const row of Array.isArray(b.moved) ? b.moved : []) {
+    const path = String(row?.path);
+    const held = byPath.get(path);
+    byPath.set(path, { before: held ? held.before : row?.before, after: row?.after });
+  }
+  const moved = [...byPath.entries()]
+    .filter(([, v]) => v.before !== v.after)
+    .sort((x, y) => compareCodepoint(x[0], y[0]))
+    .map(([path, v]) => rec([['path', path], ['before', v.before], ['after', v.after]]));
+
+  const aAdded = new Set((Array.isArray(a.added) ? a.added : []).map(String));
+  const aRemoved = new Set((Array.isArray(a.removed) ? a.removed : []).map(String));
+  const bAdded = new Set((Array.isArray(b.added) ? b.added : []).map(String));
+  const bRemoved = new Set((Array.isArray(b.removed) ? b.removed : []).map(String));
+  const added = [...new Set([...aAdded, ...bAdded])]
+    .filter((p) => !(bRemoved.has(p) && aAdded.has(p)) && !(aRemoved.has(p) && bAdded.has(p)))
+    .sort(compareCodepoint);
+  const removed = [...new Set([...aRemoved, ...bRemoved])]
+    .filter((p) => !(aAdded.has(p) && bRemoved.has(p)) && !(aRemoved.has(p) && bAdded.has(p)))
+    .sort(compareCodepoint);
+
+  const pageLines = rec([
+    ['before', a.pageLines?.before ?? b.pageLines?.before ?? 0],
+    ['after', b.pageLines?.after ?? a.pageLines?.after ?? 0],
+  ]);
+
+  // The events of both stretches, in order, deduplicated by the log's own id.
+  /** @type {Map<string, object>} */
+  const events = new Map();
+  for (const row of [...(Array.isArray(older.events) ? older.events : []),
+    ...(Array.isArray(newer.events) ? newer.events : [])]) {
+    events.set(String(row?.id ?? `${events.size}`), row);
+  }
+
+  return rec([
+    ['schema', EPOCH_RECORD_SCHEMA],
+    ['advanceSeq', newer.advanceSeq ?? older.advanceSeq ?? null],
+    ['from', older.from ?? null],
+    ['to', newer.to ?? null],
+    ['delta', summarise(moved, added, removed, pageLines)],
+    ['events', [...events.values()]],
+    // THE PULSE IS THE LAST ADVANCE'S, because that is what `pulse` means: the most recent one.
+    ['pulse', newer.pulse ?? null],
+    ['isFirstEpoch', older.isFirstEpoch === true],
   ]);
 }
 

@@ -48,8 +48,12 @@ import {
   TIER1_QUESTIONS as TIER1_QUESTIONS_JS,
 } from '../_shared/proseKernel.bundle.js';
 
-/** The artefact shape this renderer writes. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`. */
-export const SCRIBE_ARTEFACT_SCHEMA = 1;
+/** The artefact shape this renderer writes. Pinned equal to the client's `SCRIBE_ARTEFACT_SCHEMA`
+ *  (`src/lib/scribeArtefact.js`), which an edge function may not import. /2 at W4 car 2, when the
+ *  artefact gained `pendingRecord` — the record this function already reads off the request body
+ *  as `record`, now parked on the artefact between the advance that made it and the open that
+ *  spends it. */
+export const SCRIBE_ARTEFACT_SCHEMA = 2;
 
 /** The writer and the tier-1 refuter (chair ruling 8; the API skill's current default). */
 export const SCRIBE_MODEL = 'claude-opus-5';

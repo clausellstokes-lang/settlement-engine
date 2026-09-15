@@ -1620,8 +1620,13 @@ export const SIMPLE_POOL_SENTENCE_CAP = 2;
 //      the town does not hold. Persisting WORDS alone means the artefact cannot say any of that:
 //      the grammar is always the corpus's.
 
-/** The artefact shape this kernel understands. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`. */
-export const SCRIBE_DRAW_SCHEMA = 1;
+/**
+ * The artefact shape this kernel understands. Pinned equal to `SCRIBE_ARTEFACT_SCHEMA`, which the
+ * kernel may not import (it imports nothing, and the composer's fence is why). /2 at W4 car 2,
+ * when the artefact gained `pendingRecord`: the shape this overlay reads did not move one byte,
+ * but a build that drew a shape it did not fully know would be reading it on trust.
+ */
+export const SCRIBE_DRAW_SCHEMA = 2;
 
 /**
  * One rendered unit as the artefact stores it: the ANNEX row it was written for, and the words.

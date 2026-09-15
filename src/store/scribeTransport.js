@@ -24,7 +24,7 @@
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { setScribeRenderer } from '../lib/scribeRenderer.js';
 import {
-  attachProse, landBlock, proseOf, retireCurrent,
+  attachProse, landBlock, pendingRecordFor, proseOf, retireCurrent,
 } from '../lib/scribeArtefact.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -117,6 +117,34 @@ export function landTabAnswer(settlement, answer, keys) {
 }
 
 /**
+ * ⭐ THE BYTES THAT CROSS THE BOUNDARY FOR ONE TAB, built by a pure function so what is sent is a
+ * thing a test can read rather than a shape buried in an async loop. Every field is one the edge
+ * function names in its own reader (`scribe-render/index.ts`), and nothing else is here: no
+ * settlement blob, no seed beyond the one the artefact is keyed to, no token.
+ *
+ * @param {{saveId: string, advanceSeq: number, renderedFor: string, engineVersion: string,
+ *   guidance?: string}} request
+ * @param {string} tab @param {object} card @param {object|null} record
+ * @returns {object}
+ */
+export function tabRequestBody(request, tab, card, record) {
+  return {
+    saveId: request.saveId,
+    advanceSeq: request.advanceSeq,
+    renderedFor: request.renderedFor,
+    engineVersion: request.engineVersion,
+    tab,
+    card,
+    // ⭐ FILLED AT W4 car 2 (ruling 21). W2 sent `null` here and said in terms why: the past lane
+    // is compact, so a prior card cannot be rebuilt once the settlement has moved. The cure was
+    // the second half of that sentence — render the delta AT ADVANCE TIME, while both cards
+    // exist — and it is what `record` now carries.
+    record: record || null,
+    guidance: request.guidance || '',
+  };
+}
+
+/**
  * ⭐⭐ THE REDRAW'S OWN FIRST ACT (design §5c rule 1, ruling 16), as a PURE function over the
  * settlement so the order it happens in is a fact a test can read rather than a comment.
  *
@@ -191,27 +219,19 @@ export async function renderScribe(request) {
     ? retireForRedraw(settlement, { at: renderedAt, nonce: `redo:${renderedAt}` })
     : settlement;
   let landed = 0;
+
+  // ⭐⭐ THE EPOCH RECORD, READ ONCE AND SENT WITH EVERY TAB (chair ruling 21; design §5b). It was
+  // computed at ADVANCE TIME, while the card the prior survey was written from still existed
+  // (`lib/scribeEpochStamp.js`), and parked on the artefact until the render that is owed it asks.
+  // It is read BY EPOCH: a record stamped for another advance is not this render's and answers
+  // null, in which case the turn says nothing moved — which is W2's behaviour and is never false.
+  // Reading it here, before the first tab goes out, is why the first landing may clear it.
+  const record = pendingRecordFor(proseOf(settlement), request.advanceSeq);
   for (const tab of tabs) {
     let card;
     try { card = townCard(settlement, { tab, audience: 'dm' }); } catch { card = null; }
     if (!card || !Array.isArray(card.pools) || card.pools.length === 0) continue;
-    const sent = await postTabRender({
-      saveId: request.saveId,
-      advanceSeq: request.advanceSeq,
-      renderedFor: request.renderedFor,
-      engineVersion: request.engineVersion,
-      tab,
-      card,
-      // ⛔ THE EPOCH RECORD IS NOT SENT IN W2, AND THAT IS A KNOWN GAP RATHER THAN AN OVERSIGHT.
-      // §5b wants epoch k rendered from the prior cards as typed deltas; the past lane is COMPACT
-      // by the same design (units only, no card), so a prior card cannot be rebuilt from the
-      // artefact once the settlement has moved. The field is here, the edge reads it, and filling
-      // it is W3's first measurement — either by keeping a card digest per epoch or by rendering
-      // the delta at advance time. Until then an epoch render is card-grounded and not diff-aware,
-      // which is lawful (nothing false is written) and less coherent than the design intends.
-      record: null,
-      guidance: request.guidance || '',
-    }, token);
+    const sent = await postTabRender(tabRequestBody(request, tab, card, record), token);
     if (!sent.ok || !sent.data) continue;
     // The version the SERVER reports is the one recorded, never the client's guess.
     next = landTabAnswer(next, sent.data, {

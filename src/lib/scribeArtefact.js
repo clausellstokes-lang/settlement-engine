@@ -5,11 +5,12 @@
  * the result on ONE top-level key of the settlement blob:
  *
  *   settlement.prose = {
- *     schema: 1,
+ *     schema: 2,
  *     version:     { scribe, engine, refuter, model },
  *     renderedFor: '<the settlement seed the render was keyed to>',
  *     current:     null | { advanceSeq, renderedAt, blocks: { [blockId]: { [poolKey]: Unit } } },
- *     epochs:      [ { advanceSeq, nonce, renderedAt, state, blocks } ]   // the PAST LANE
+ *     epochs:      [ { advanceSeq, nonce, renderedAt, state, blocks } ],  // the PAST LANE
+ *     pendingRecord: null | <an epochRecord, computed at ADVANCE time>    // schema /2
  *   }
  *
  *   Unit = { vid, spine, faces[], notebook[], verdicts[], report{} }
@@ -49,8 +50,16 @@
 /** The settlement key the artefact lives on. One spelling, read by the pin. */
 export const SCRIBE_SETTLEMENT_KEY = 'prose';
 
-/** The artefact's own shape version. Bumped only when the shape below changes. */
-export const SCRIBE_ARTEFACT_SCHEMA = 1;
+/**
+ * The artefact's own shape version. Bumped only when the shape below changes, with the cause.
+ *
+ * /2 (W4 car 2, 2026-09-14): `pendingRecord` added — the typed record of the advance that made
+ * this artefact stale, computed AT ADVANCE TIME while both cards still exist (ruling 21) and sent
+ * with the next render at open. W2 shipped the transport sending `record: null` on every render
+ * and said so in terms; this is that gap closed. Absent is lawful everywhere: an artefact with no
+ * pending record renders exactly as W2's did, and the writer's turn then says nothing moved.
+ */
+export const SCRIBE_ARTEFACT_SCHEMA = 2;
 
 /**
  * How many COMPACT past epochs the blob keeps, and the HARD CEILING no tier may exceed.
@@ -101,6 +110,9 @@ export const SCRIBE_EPOCH_STATES = Object.freeze(['lived', 'undone', 'redone']);
  * @property {string} renderedFor
  * @property {{advanceSeq: number, renderedAt: string, blocks: ScribeBlocks}|null} current
  * @property {ScribeEpoch[]} epochs
+ * @property {{advanceSeq?: number}|null} [pendingRecord] schema /2; ABSENT on an artefact that has
+ *   not been through an advance, which is why every reader below tolerates its absence rather than
+ *   defaulting it: `null` and "not there" are the same answer and neither is a record.
  */
 
 const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -177,6 +189,54 @@ export function currentAdvanceSeq(prose) {
   if (!isArtefact(prose) || !isObj(prose.current)) return null;
   const seq = prose.current.advanceSeq;
   return typeof seq === 'number' && Number.isFinite(seq) ? seq : null;
+}
+
+/**
+ * ⭐⭐ THE PENDING EPOCH RECORD (schema /2; chair ruling 21; design §5b).
+ *
+ * ⛔ WHY IT IS STORED AT ALL, AND STORED HERE. §5b renders epoch k from (card_k, the history as
+ * typed deltas, the typed record of advance k) and never from its own prior prose — coherence has
+ * to come from the ENGINE'S history, because a model re-reading its own words compounds drift and
+ * a typed delta cannot. But the render happens at the OPEN (rule 14), which may be a week and a
+ * reload after the advance, and by then the town has MOVED: the card the prose was written from is
+ * gone and the past lane is compact by design (units only, no card). So the record is computed
+ * AT ADVANCE TIME, while both sides of the delta still exist, and parked here until the render
+ * that is owed it asks for it.
+ *
+ * ⛔ IT IS READ BY EPOCH, NEVER BLIND. A record belongs to exactly one epoch — the one the advance
+ * created — and handing it to a render of a different epoch would licence "since the last survey"
+ * over fields that moved in some other advance. So `pendingRecordFor` answers null unless the seq
+ * it is asked about is the seq the record was stamped with.
+ *
+ * @param {unknown} prose @returns {object|null}
+ */
+export function pendingRecordOf(prose) {
+  if (!isArtefact(prose)) return null;
+  const record = /** @type {{pendingRecord?: unknown}} */ (prose).pendingRecord;
+  return isObj(record) ? /** @type {object} */ (record) : null;
+}
+
+/**
+ * The pending record IF it belongs to this epoch, else null.
+ * @param {unknown} prose @param {number} advanceSeq @returns {object|null}
+ */
+export function pendingRecordFor(prose, advanceSeq) {
+  const record = pendingRecordOf(prose);
+  if (!record) return null;
+  const seq = /** @type {{advanceSeq?: unknown}} */ (record).advanceSeq;
+  return typeof seq === 'number' && seq === Number(advanceSeq) ? record : null;
+}
+
+/**
+ * Park a record on the artefact, or clear it with null. Pure, like everything here.
+ * @param {unknown} prose @param {object|null} record @returns {object} a NEW artefact
+ */
+export function setPendingRecord(prose, record) {
+  if (!isArtefact(prose)) return isObj(prose) ? clone(prose) : emptyArtefact();
+  const next = clone(prose);
+  if (isObj(record)) next.pendingRecord = clone(record);
+  else delete next.pendingRecord;
+  return next;
 }
 
 /**
@@ -271,6 +331,16 @@ export function landBlock(prose, landing) {
   next.current.advanceSeq = seq;
   if (landing.renderedAt) next.current.renderedAt = str(landing.renderedAt);
   next.current.blocks[blockId] = clone(pools);
+
+  // ⭐ THE LANDING CLEARS THE RECORD IT WAS OWED (schema /2). A pending record exists to tell ONE
+  // render what moved; once that epoch's prose is landing there is nothing left for it to licence,
+  // and leaving it on the blob would hand it to the NEXT render as well, which would say "since
+  // the last survey" over an advance two epochs old. The transport reads it once before the first
+  // tab goes out, so clearing on the first block that lands loses nothing.
+  const pending = pendingRecordOf(next);
+  if (pending && typeof pending.advanceSeq === 'number' && seq >= pending.advanceSeq) {
+    delete next.pendingRecord;
+  }
   return next;
 }
 
@@ -317,6 +387,15 @@ export function restoreToDepth(prose, restore) {
   const nonce = str(restore?.nonce);
   const at = str(restore?.at);
   let next = clone(prose);
+
+  // ⭐ THE PENDING RECORD GOES BACK WITH THE EPOCH IT BELONGS TO (§5b UNDO, schema /2). It is the
+  // typed record of an advance that has just been reverted: the world never took that step, so
+  // there is nothing for it to licence and keeping it would tell the next render that fields moved
+  // in an epoch the campaign no longer has. A record at or below the restored depth is untouched.
+  const pending = pendingRecordOf(next);
+  if (pending && typeof pending.advanceSeq === 'number' && pending.advanceSeq > depth) {
+    delete next.pendingRecord;
+  }
 
   const openSeq = currentAdvanceSeq(next);
   if (openSeq !== null && openSeq > depth) {
