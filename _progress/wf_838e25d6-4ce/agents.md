@@ -1,4 +1,4 @@
-# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:23:25
+# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:29:58
     - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
     - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
     - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
@@ -8,6 +8,12 @@
     - `a7f3c891f` ? · DONE · transcript 09-15 17:20 991 KB · 46 tool calls · result: {"family": "WC \u2014 war circulation (DESIGN_FP_ARCH_WC.md, 431 KB, 17 waves in four arcs)", "summary": "WC-0 is PART-BUILT and effectively COMPLETE on the slo
     - `a07029ba4` ? · DONE · transcript 09-15 17:21 895 KB · 42 tool calls · result: {"family": "HB", "summary": "HB \u2014 habit conditioning, priced against the volume at /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d9
     - `a193b0425` ? · DONE · transcript 09-15 17:20 860 KB · 36 tool calls · result: {"family": "EP", "summary": "EP-0 through EP-3 are BUILT and the first pass's \"code wins\" verdict holds for BOTH of EP-3's slices, which the first pass's evid
-    - `a8cdffdba` ? · IN FLIGHT · transcript 09-15 17:19 815 KB · 50 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a28674c8c` ? · IN FLIGHT · transcript 09-15 17:21 924 KB · 56 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `aeee29db4` ? · IN FLIGHT · transcript 09-15 17:23 848 KB · 67 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a8cdffdba` ? · DONE · transcript 09-15 17:23 955 KB · 51 tool calls · result: {"family": "INT", "summary": "INT \u2014 the interior program, 8 waves, 7 of them unlanded. The compiled volume is /private/tmp/claude-502/-Users-cstokes-Deskto
+    - `a28674c8c` ? · DONE · transcript 09-15 17:24 1040 KB · 57 tool calls · result: {"family": "GR-CW", "summary": "Seven waves to price: GR-4 and GR-5 part-built, GR-6/GR-7/CW-1/CW-2x/CW-3 unbuilt, with CW-3 the terminus of the nine-wave criti
+    - `aeee29db4` ? · DONE · transcript 09-15 17:26 934 KB · 69 tool calls · result: {"family": "LG0 \u2014 LOGISTICS LG-0 and LG-1 (item #33, the family's first train)", "summary": "The re-price against code changes LG-0's bill substantially, i
+    - `a9cb1d825` ? · IN FLIGHT · transcript 09-15 17:29 600 KB · 25 tool calls · files: worker-graph.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a21425ce4` ? · IN FLIGHT · transcript 09-15 17:29 599 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a01fded51` ? · IN FLIGHT · transcript 09-15 17:29 582 KB · 24 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aa34b3f70` ? · IN FLIGHT · transcript 09-15 17:29 614 KB · 26 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a166442fb` ? · IN FLIGHT · transcript 09-15 17:29 568 KB · 19 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a1d56aa9d` r2 · IN FLIGHT · transcript 09-15 17:29 624 KB · 24 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
