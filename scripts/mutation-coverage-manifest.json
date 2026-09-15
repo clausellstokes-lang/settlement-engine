@@ -208,6 +208,11 @@
       "kind": "rationale",
       "ref": "sp-band-family-census-executed-2026-08-04"
     },
+    "tests/lint/bandWalkerPrefix.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "The Q10 band-prefix roster (ODQ §99.3). It DERIVES its whole subject from disk at run time — the band population out of every docs/DESIGN_*.md, each band's owning wave out of the block above it, the prefixes out of those wave ids, and each reconciler's visible-wave set out of that walker's own block regex — and holds no band phrase, no wave list and no per-prefix count of its own, so a planted regression in production source has nothing here to disagree with. ITS CONTROLS ARE INTERNAL, PLANTED AND EXECUTED, which is exactly what a sweep mutation would buy: four of its fourteen arms drive the shipped `stopsFor` predicate against mutated documents — an LG band in LG's own bullet block shape, a band under an unrostered prefix, a letter-suffixed block spliced into the live HB volume that HB's reconciler cannot see (CR-HB0B-BANDGAP), and a Bands line with no wave above it — each proving the plant landed before asserting the refusal, and the LG arm additionally proving the refusal DISCRIMINATES by re-running the same plant under a reconciled prefix and getting no stop. The guard-the-guard arm asserts a live denominator before any absence is claimed. MEASURED at the landing commit: 79 design volumes, 87 band declarations, 12 band-bearing prefixes, 11 letter-suffixed wave ids already bearing bands, zero orphans, and zero waves invisible to their reconciler.",
+      "kindNote": "rationale rather than a planted sweep mutation for the reason its HB sibling (tests/lint/habitBandsReconciliation.walker.test.js) records: the guard-the-guard is already INSIDE the file and executes on every run, and a sweep plant is a two-file edit — a label in scripts/mutation-sweep.sh plus a row in that script's MUTATED_FILES dirty guard — which this one-car change manifest reserves neither path for. Enumerated under the tests/lint enforcer-directory arm of tests/lint/mutationCoverage.shared.mjs and under the NAME_PATTERN basename arm on `walker`, so this row is mandatory and a rename could not escape it."
+    },
     "tests/lint/postureNameCollision.walker.test.js": {
       "kind": "rationale",
       "ref": "sp-c-posture-controls-executed-2026-08-06"
