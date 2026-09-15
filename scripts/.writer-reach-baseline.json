@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "cc22f1d722c55cd4154891b3497cae7bcc6be0f0",
+ "frozenAtSha": "a8e6517e26b65c45a4c12723d966ec65259c4373",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "44fc73f1b012b60c5aaf7b290fe4917edd89a2493f35016b849d7136752077a8",
  "detectorDigest": "705d2de1fbe73ce23d669a2e4733babcad8fe189075a59b168a157c4dca5c34b",
- "verdictDigest": "77df6a58785fd638c2f1961d5d9209f7a7da5e1e25bee66766d3b436f3067d67",
+ "verdictDigest": "05278a5b81637e76398bb229072a0aeb867e60ac2726d056e3a2685920a84ab8",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -92,13 +92,13 @@
  },
  "scanStats": {
   "files": 1602,
-  "sites": 38663,
-  "propRead": 36612,
+  "sites": 38673,
+  "propRead": 36622,
   "elemRead": 0,
   "destructure": 2040,
   "inOp": 11,
   "rGrades": 5913,
-  "nGrades": 882106,
+  "nGrades": 882149,
   "resolvedReceivers": 6681
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
@@ -8140,7 +8140,7 @@
   "goalProgress on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
   "headline on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "id on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "incidentType on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
+  "incidentType on autoApplied": "dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "influenceBasis on autoApplied": "dossier-pdf=N foundry=N web-transitive=N",
   "key on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "kind on autoApplied": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
@@ -9399,7 +9399,7 @@
   "health on metadata": "web-display=N web-transitive=N",
   "id on metadata": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "impairment on metadata": "web-transitive=N",
-  "incidentType on metadata": "dossier-pdf=R foundry=R web-transitive=R",
+  "incidentType on metadata": "dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "influenceBasis on metadata": "dossier-pdf=N foundry=N web-transitive=N",
   "interpretedAtTick on metadata": "web-transitive=N",
   "key on metadata": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -14108,7 +14108,7 @@
   "governmentPreference on selected": "web-display=N web-transitive=N",
   "headline on selected": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "id on selected": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "incidentType on selected": "dossier-pdf=N foundry=N web-transitive=N",
+  "incidentType on selected": "dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "influenceBasis on selected": "dossier-pdf=N foundry=N web-transitive=N",
   "key on selected": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "kind on selected": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",

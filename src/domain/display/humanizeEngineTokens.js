@@ -169,6 +169,31 @@ export function humanizeFlagKey(key) {
  *   · supply-chain `chainId` — DERIVED (`snakeCase(chain.chainId || chain.label)`
  *     over node uids), so it has no enumerable domain at all.
  *
+ * ⭐ A THIRD VOCABULARY WAS ADMITTED IN 2026-09 (LT39 car 3), AND IT IS WORTH
+ * SAYING WHY IT IS NOT THE `news kind` CASE ABOVE WEARING A DIFFERENT HAT.
+ * `incidentType` — the type token on a relationship's durable incident/archive
+ * rows — reaches a reader for the first time through the relationship chronicle
+ * (display/relationshipChronicle.js), and the only humanizer that existed for it
+ * was relationshipMemory's `titleForType`, which swaps underscores for spaces and
+ * therefore hands a reader `coalition betrayal` and `label proposal applied` as if
+ * they were English. The news-kind refusal's actual objection was not SIZE, it was
+ * ROT: "a hand-kept list that rots on the next emitter". So this bucket is not
+ * hand-kept. Its key set is bound EXACT-SET-BOTH-WAYS to the producers by
+ * tests/lint/vocabularyTotality.walker.test.js, which rescans src/domain on every
+ * gate run: a writer that mints a new incident literal REDS until it has a row
+ * here, and a row whose producer left REDS until it is deleted. That is the
+ * difference between a table nobody can keep complete and one nobody can leave
+ * incomplete.
+ *
+ * ⚠ AND THE HALF THAT IS NOT CLOSED IS SAID OUT LOUD, not papered over.
+ * Three producer shapes are OPEN BY CONSTRUCTION and can never have rows:
+ * `stressor_resolved:<stressor type>` and `canon_<event type>` compose their token
+ * from another vocabulary at write time, and `relationshipMemory` falls back to the
+ * outcome's `candidateType`, which is the ~200-token drama-candidate vocabulary the
+ * news-kind refusal already measured. Those take INCIDENT_FAMILIES and the honest
+ * unknown-token fallback below, and the walker asserts each family's producer is
+ * still where it is declared to be. A reader never meets a raw token either way.
+ *
  * The two that DID enumerate:
  *   · `tradeRouteAccess` — exactly five values, read off the generator's own
  *     `TERRAIN_ROUTE_POOLS` and its coastal pools (`generators/steps/resolveConfig.js`).
@@ -201,7 +226,244 @@ const DISPLAY_LEXICON = Object.freeze({
     vulnerable: 'Vulnerable',
     impaired: 'Impaired',
   }),
+  /**
+   * ⭐ THE INCIDENT VOCABULARY (LT39 car 3). One clause per type, in the past
+   * tense, because every one of these is read in a DATED list: "week 3 of spring,
+   * year 2 — A raid crossed the border." No engine noun, no schema word, no
+   * number a reader would have to translate.
+   *
+   * GROUPED BY PRODUCER so the walker's exact-set arms and a human reader are
+   * looking at the same thing. Every key is proved to be live by a rescan of
+   * src/domain on each gate run; nothing here is a guess about what the engine
+   * might emit one day.
+   */
+  incidentType: Object.freeze({
+    // — the relationship rule families (relationshipRulesCore / -Adversarial) —
+    alliance_overture: 'An alliance was sounded out',
+    appeal_for_protection: 'Protection was asked for',
+    arms_race: 'Each side armed against the other',
+    border_incident: 'Blood was spilled at the border',
+    cold_war_support: 'Quiet help went to a rival’s enemy',
+    conflict_obligation: 'An ally was pressed to take a side',
+    debt_spiral: 'Debts ran past what could be repaid',
+    espionage: 'Spies were set on the other side',
+    forced_alignment: 'A side was chosen under pressure',
+    forced_tribute: 'Tribute was taken by force',
+    negotiation: 'They sat down to talk',
+    overlord_weakness_memory: 'The overlord was seen to falter',
+    patron_intervention: 'The patron stepped in',
+    protection_racket: 'Protection was sold under threat',
+    proxy_conflict: 'They fought each other through others',
+    raid: 'A raid crossed the border',
+    rebellion_quashed: 'A revolt was put down',
+    route_disruption: 'A trade road was cut',
+    sabotage: 'Something was wrecked in the dark',
+    smuggling_expansion: 'The smuggling trade widened',
+    smuggling_pressure: 'Smugglers pressed on the border',
+    stable_vassalage: 'The vassalage held quietly',
+    supply_sanctions: 'Supplies were cut off as a punishment',
+    trade_coercion: 'Trade was used as a threat',
+    trade_embargo: 'An embargo closed the trade',
+    tribute_extraction: 'Tribute was taken',
+    vassal_cold_war_support: 'A vassal quietly backed the other side',
+    vassal_extraction: 'The overlord took more from its vassal',
+    vassal_protection: 'The overlord shielded its vassal',
+    // — war, coalitions and the peace table —
+    coalition_betrayal: 'A coalition partner turned on the rest',
+    coalition_joined: 'The war coalition was joined',
+    coalition_joined_war_edge: 'A neighbour was drawn into the war',
+    coalition_refused: 'A call to the coalition was refused',
+    coalition_reimbursement_forgiven: 'A war debt was forgiven',
+    coalition_reimbursement_paid: 'A war reimbursement was paid',
+    coalition_reimbursement_partial: 'A war reimbursement was only part paid',
+    coalition_reimbursement_unpaid: 'A war reimbursement went unpaid',
+    coalition_separate_peace: 'A partner made its own peace',
+    coalition_separate_peace_recorded: 'A partner made its own peace',
+    coalition_settlement_paid: 'A coalition debt was settled',
+    coalition_settlement_unpaid: 'A coalition debt went unpaid',
+    coalition_settlement_transfer_paid: 'What was owed was handed over as agreed',
+    coalition_settlement_transfer_partial: 'Only part of what was owed was handed over',
+    coalition_settlement_transfer_unpaid: 'What was owed was never handed over',
+    coalition_forgiveness_forgiven: 'A war debt was written off',
+    compelled_alliance: 'An alliance was imposed by treaty',
+    mediation: 'A third party brokered between them',
+    peace_refused: 'An offer of peace was refused',
+    razing_witnessed: 'A town was put to the torch, and they saw it',
+    tribute_strain: 'The tribute told on the side paying it',
+    // — the chronicle's own alliance-call rows (relationshipChronicle.js) —
+    alliance_call_joined: 'The summons was answered',
+    alliance_call_refused: 'The summons was refused',
+    // — statecraft, intrigue and the covert families —
+    approach_exposed: 'A quiet approach was found out',
+    deception_betrayal: 'A lie was exposed, and it had been believed',
+    foreign_corruption_exposed: 'Foreign hands in the court were exposed',
+    sovereignty_sale: 'A claim of rule was sold',
+    spy_exposed: 'A spy was caught',
+    // — the settlement-strategy levers (settlementStrategy.js) —
+    credit_extended: 'Credit was extended',
+    embargo: 'An embargo was declared',
+    legitimacy_consolidation: 'They shored up each other’s standing',
+    missionary_outreach: 'Missionaries were sent',
+    opportunity_marking: 'A weakness was marked for later',
+    prestige_display: 'Strength was paraded',
+    trade_reroute: 'The trade was routed around them',
+    // — the memory weave (MEMORY_WEAVE_INCIDENT_TYPES) —
+    elite_amity: 'Their leading families drew closer',
+    elite_feud: 'Their leading families fell out',
+    rite_imposed: 'A rite was imposed on them',
+    route_seized: 'A trade route was seized',
+    // — relief and credit between neighbours (RELIEF_INCIDENT_KINDS) —
+    credit_defaulted: 'A grain debt fell into default',
+    credit_repaid: 'A grain debt was repaid',
+    refuge_granted: 'Refuge was opened to the displaced',
+    relief_given: 'Grain was sent in the lean season',
+    relief_received: 'Relief arrived when the granaries ran low',
+    relief_refused: 'The ask for relief was turned away',
+    trade_warmth: 'A trade was struck, and it warmed them',
+    // — the standing itself changing (the two archive-row types) —
+    hierarchy_resolution: 'Who answered to whom was settled',
+    label_proposal_applied: 'The standing between them changed',
+    // — a party at the table (partyImpact.js) —
+    party_broker_relationship: 'The party brokered between them',
+    party_inflame_relationship: 'The party inflamed things between them',
+  }),
 });
+
+/**
+ * ⛔ WHO MAY BE TOLD. The engine records NO visibility field on an incident, and
+ * among the writers are corruptionWeb, espionageGauntlet and informationStatecraft
+ * — so a surface that rendered every row would put DM truth on a share or gallery
+ * path. Adding a per-incident visibility marker is a persistence-shape change and
+ * therefore owner-gated; this table is the display-side answer that needs no
+ * engine byte.
+ *
+ * THREE VALUES, AND THE THIRD IS THE POINT. `public` is a fact the world can see
+ * and may be shown to anyone. `covert` is DM knowledge. Anything with NO row is
+ * `unclassified`, and a non-DM reader is shown ONLY `public` — so an incident type
+ * nobody has classified is hidden rather than leaked. That is what fail-closed
+ * means on a seam the data does not mark.
+ *
+ * Keyed identically to DISPLAY_LEXICON.incidentType, both ways, by the walker.
+ * @type {Readonly<Record<string, 'public'|'covert'>>}
+ */
+const INCIDENT_DISCLOSURE = Object.freeze({
+  alliance_call_joined: 'public',
+  alliance_call_refused: 'public',
+  alliance_overture: 'public',
+  appeal_for_protection: 'public',
+  approach_exposed: 'covert',
+  arms_race: 'public',
+  border_incident: 'public',
+  coalition_betrayal: 'public',
+  coalition_forgiveness_forgiven: 'public',
+  coalition_joined: 'public',
+  coalition_joined_war_edge: 'public',
+  coalition_refused: 'public',
+  coalition_reimbursement_forgiven: 'public',
+  coalition_reimbursement_paid: 'public',
+  coalition_reimbursement_partial: 'public',
+  coalition_reimbursement_unpaid: 'public',
+  coalition_separate_peace: 'public',
+  coalition_separate_peace_recorded: 'public',
+  coalition_settlement_paid: 'public',
+  coalition_settlement_transfer_paid: 'public',
+  coalition_settlement_transfer_partial: 'public',
+  coalition_settlement_transfer_unpaid: 'public',
+  coalition_settlement_unpaid: 'public',
+  // The support is QUIET by its own name: the point of cold-war backing is that
+  // the backed party's enemy does not know who is paying for it.
+  cold_war_support: 'covert',
+  compelled_alliance: 'public',
+  conflict_obligation: 'public',
+  credit_defaulted: 'public',
+  credit_extended: 'public',
+  credit_repaid: 'public',
+  debt_spiral: 'public',
+  deception_betrayal: 'covert',
+  elite_amity: 'public',
+  elite_feud: 'public',
+  embargo: 'public',
+  espionage: 'covert',
+  forced_alignment: 'public',
+  forced_tribute: 'public',
+  foreign_corruption_exposed: 'covert',
+  hierarchy_resolution: 'public',
+  label_proposal_applied: 'public',
+  legitimacy_consolidation: 'public',
+  mediation: 'public',
+  missionary_outreach: 'public',
+  negotiation: 'public',
+  // A weakness someone has privately marked for later is the marker's secret.
+  opportunity_marking: 'covert',
+  overlord_weakness_memory: 'public',
+  party_broker_relationship: 'public',
+  party_inflame_relationship: 'public',
+  patron_intervention: 'public',
+  peace_refused: 'public',
+  prestige_display: 'public',
+  protection_racket: 'covert',
+  proxy_conflict: 'covert',
+  raid: 'public',
+  razing_witnessed: 'public',
+  rebellion_quashed: 'public',
+  refuge_granted: 'public',
+  relief_given: 'public',
+  relief_received: 'public',
+  relief_refused: 'public',
+  rite_imposed: 'public',
+  route_disruption: 'public',
+  route_seized: 'public',
+  sabotage: 'covert',
+  smuggling_expansion: 'covert',
+  smuggling_pressure: 'covert',
+  sovereignty_sale: 'public',
+  // The exposure is public; that a spy was THERE is the secret it reveals, and
+  // the pair it names is exactly the pair that would rather it stayed quiet.
+  spy_exposed: 'covert',
+  stable_vassalage: 'public',
+  supply_sanctions: 'public',
+  trade_coercion: 'public',
+  trade_embargo: 'public',
+  trade_reroute: 'public',
+  trade_warmth: 'public',
+  tribute_extraction: 'public',
+  tribute_strain: 'public',
+  vassal_cold_war_support: 'covert',
+  vassal_extraction: 'public',
+  vassal_protection: 'public',
+});
+
+/**
+ * THE OPEN PRODUCER SHAPES — the ones that compose their token at write time from
+ * another vocabulary and therefore CANNOT have a row. Each declares the file that
+ * writes it (the walker asserts the producer is still there, the curated
+ * safety-token precedent) and a phrase template that folds the composed tail back
+ * into English.
+ *
+ * `test` is deliberately anchored: a family must match a PREFIX, never a
+ * substring, or a future literal containing `canon_` in the middle would silently
+ * inherit a family's words.
+ * @type {ReadonlyArray<Readonly<{ id: string, prefix: string, producer: string, disclosure: 'public'|'covert', phrase: (tail: string) => string }>>}
+ */
+const INCIDENT_FAMILIES = Object.freeze([
+  Object.freeze({
+    id: 'stressor-resolved',
+    prefix: 'stressor_resolved:',
+    producer: 'src/domain/worldPulse/stressorDynamics.js',
+    disclosure: /** @type {'public'} */ ('public'),
+    phrase: (/** @type {string} */ tail) => `The pressure they shared ended — ${tail}`,
+  }),
+  Object.freeze({
+    id: 'canon-event',
+    prefix: 'canon_',
+    producer: 'src/domain/worldPulse/canonRelationshipImpact.js',
+    disclosure: /** @type {'public'} */ ('public'),
+    phrase: (/** @type {string} */ tail) => `Something you wrote into the world touched them — ${tail}`,
+  }),
+]);
+
+/** The families, exported so a walker can ENUMERATE them rather than restate them. */
+export { INCIDENT_DISCLOSURE, INCIDENT_FAMILIES };
 
 /** The lexicon, exported so a walker can ENUMERATE it rather than restate it. */
 export { DISPLAY_LEXICON };
@@ -226,6 +488,58 @@ export function displayLabel(bucket, value, fallback = '') {
   if (authored) return authored;
   const words = humanizeToken(value);
   return words ? `${words.charAt(0).toUpperCase()}${words.slice(1)}` : fallback;
+}
+
+/** The family whose PREFIX an incident type carries, or null. @param {string} key */
+function incidentFamilyOf(key) {
+  return INCIDENT_FAMILIES.find((f) => key.startsWith(f.prefix)) || null;
+}
+
+/**
+ * ONE INCIDENT TYPE AS A CLAUSE A READER CAN LIVE INSIDE.
+ *
+ * Three answers in strict order: the authored row, the open family's template,
+ * and — for a token neither knows — AN HONEST SENTENCE that says the record kept
+ * only a shorthand, rather than a bare `coalition_betrayal` or a de-underscored
+ * `label proposal applied` pretending to be English. The fallback is deliberately
+ * NOT silence: an event the record holds is a fact, and dropping it would be a
+ * worse lie than admitting the words are thin.
+ *
+ * Total on garbage (empty ⇒ the fallback sentence's own empty form).
+ * @param {unknown} type
+ * @returns {string}
+ */
+export function incidentPhrase(type) {
+  const key = String(type ?? '').trim();
+  if (!key) return 'Something happened that the record does not name';
+  const authored = DISPLAY_LEXICON.incidentType[key.toLowerCase()];
+  if (authored) return authored;
+  const family = incidentFamilyOf(key.toLowerCase());
+  if (family) {
+    const tail = humanizeToken(key.slice(family.prefix.length));
+    if (tail) return family.phrase(tail);
+  }
+  return `Something the record types only as “${humanizeToken(key)}”`;
+}
+
+/**
+ * WHO MAY BE TOLD about one incident type — `public`, `covert`, or `unclassified`
+ * for a token no table knows.
+ *
+ * ⛔ FAIL-CLOSED IS THE CALLER'S JOB AND THIS IS THE FUNCTION THAT MAKES IT
+ * POSSIBLE: it never guesses `public`. A surface shows a row to a non-DM reader
+ * only on an explicit `public`, so an unclassified type is hidden by default
+ * rather than leaked by default.
+ * @param {unknown} type
+ * @returns {'public'|'covert'|'unclassified'}
+ */
+export function incidentDisclosure(type) {
+  const key = String(type ?? '').trim().toLowerCase();
+  if (!key) return 'unclassified';
+  const declared = INCIDENT_DISCLOSURE[key];
+  if (declared) return declared;
+  const family = incidentFamilyOf(key);
+  return family ? family.disclosure : 'unclassified';
 }
 
 /**
