@@ -1,5 +1,5 @@
-# wf_924cc284-8c3 — per-agent progress, 2026-09-15 18:36:52
-    - `a1f64f5e5` ? · IN FLIGHT · transcript 09-15 18:36 791 KB · 36 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a88ec681b` ? · IN FLIGHT · transcript 09-15 18:36 901 KB · 54 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `af373d640` ? · IN FLIGHT · transcript 09-15 18:36 800 KB · 40 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a102eb4be` ? · IN FLIGHT · transcript 09-15 18:36 845 KB · 54 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+# wf_924cc284-8c3 — per-agent progress, 2026-09-15 18:43:52
+    - `a1f64f5e5` ? · DONE · transcript 09-15 18:41 945 KB · 39 tool calls · files: tradelog-raw.txt, "$G/subject-hits.txt · result: {"reader": "HOW TO READ THIS. The owner asked whether the past logs show the designed trade work already built in more depth, possibly under another name. Answe
+    - `a88ec681b` ? · IN FLIGHT · transcript 09-15 18:42 1098 KB · 76 tool calls · files: odq-headings.txt, $O/odq-trade-hits.txt, $O/odq-heads2.txt · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `af373d640` ? · DONE · transcript 09-15 18:39 898 KB · 42 tool calls · result: {"reader": "VOLUME-AND-DIARY READER (DESIGN_FP_ARCH_TR.md read whole; RESUME-NOTE.md grepped whole; ledger docs cross-read; every named module confirmed or refu
+    - `a102eb4be` ? · DONE · transcript 09-15 18:42 1056 KB · 64 tool calls · result: {"reader": "The older-economy reader (history pass over the pre-FP economy programme: Phase 5.5 mover ladder M1\u2013M10, the T8 train, W-COIN, the numeric-pric
