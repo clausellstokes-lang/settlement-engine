@@ -1,4 +1,4 @@
-# wf_874f9ad9-605 — per-agent progress, 2026-09-15 02:56:12
+# wf_874f9ad9-605 — per-agent progress, 2026-09-15 03:02:08
     - `aa875a08f` ? · DONE · transcript 09-14 03:11 484 KB · 9 tool calls · result: {"pool": "Economic Survival: ADEQUATE", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [market]", "headText": "Those who set out a stall say the share i
     - `a10c72533` ? · DONE · transcript 09-14 03:11 471 KB · 8 tool calls · result: {"pool": "Economic Survival: WEAK", "replacements": [{"variant": 1, "faceOrSpine": "FACE 3 [stranger]", "headText": "The pails at the water each carry a househo
     - `a6cbf322f` ? · DONE · transcript 09-14 03:09 440 KB · 7 tool calls · result: {"pool": "Economic Survival: CRITICAL", "replacements": [{"variant": 1, "faceOrSpine": "VARIANT 1 FACE 4 [register]", "headText": "Those who keep the ground say
