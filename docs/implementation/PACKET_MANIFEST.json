@@ -10919,11 +10919,11 @@
         },
         {
           "path": "tests/docs/deployRunbookFreshness.test.js",
-          "symbol": "CONTROL: the scanner finds a planted secret in all three spellings"
+          "symbol": "CONTROL: the scanner finds a planted secret in all four spellings"
         },
         {
           "path": "tests/docs/deployRunbookFreshness.test.js",
-          "symbol": "CONTROL: arms 2 and 3 are not redundant"
+          "symbol": "CONTROL: arms 2, 3 and 4 are not redundant"
         },
         {
           "path": "tests/docs/deployRunbookFreshness.test.js",
