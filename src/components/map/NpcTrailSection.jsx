@@ -72,7 +72,7 @@ function TrailCard({ name, rows }) {
             <span style={{ color: MUTED, fontWeight: 800 }}>
               {row.week == null ? 'at a time the record does not fix' : tickCalendarDetailLabel(row.week)}
             </span>
-            {' — '}
+            {': '}
             {row.text}
           </span>
         </div>

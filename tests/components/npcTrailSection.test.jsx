@@ -70,10 +70,10 @@ describe('NpcTrailSection — ⛔ the fail-closed gate', () => {
     expect(block.textContent).toContain('Who contested whom');
     expect(block.textContent).toContain('Aldis: 2 recorded turnings');
     expect(block.textContent).toContain('Contested Mira, and lost.');
-    expect(block.textContent).toContain('Took the governing seat from Mira — faction challenge.');
+    expect(block.textContent).toContain('Took the governing seat from Mira (faction challenge).');
     // Mira's own side of the same two rows, from her standpoint.
     expect(block.textContent).toContain('Contested Aldis, and did not lose.');
-    expect(block.textContent).toContain('Left the governing seat to Aldis — faction challenge.');
+    expect(block.textContent).toContain('Left the governing seat to Aldis (faction challenge).');
     expect(screen.getAllByTestId('npc-trail-row')).toHaveLength(2);
   });
 

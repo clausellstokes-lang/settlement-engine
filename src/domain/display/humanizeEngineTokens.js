@@ -451,14 +451,14 @@ const INCIDENT_FAMILIES = Object.freeze([
     prefix: 'stressor_resolved:',
     producer: 'src/domain/worldPulse/stressorDynamics.js',
     disclosure: /** @type {'public'} */ ('public'),
-    phrase: (/** @type {string} */ tail) => `The pressure they shared ended — ${tail}`,
+    phrase: (/** @type {string} */ tail) => `The pressure they shared ended: ${tail}`,
   }),
   Object.freeze({
     id: 'canon-event',
     prefix: 'canon_',
     producer: 'src/domain/worldPulse/canonRelationshipImpact.js',
     disclosure: /** @type {'public'} */ ('public'),
-    phrase: (/** @type {string} */ tail) => `Something you wrote into the world touched them — ${tail}`,
+    phrase: (/** @type {string} */ tail) => `Something you wrote into the world touched them: ${tail}`,
   }),
 ]);
 
