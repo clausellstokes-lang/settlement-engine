@@ -2,8 +2,9 @@
 # status: OPUS-TEXT/FABLE-TEXT = the section's own header names a seat · TRAILER-* = recovered from the
 # introducing commit's Co-Authored-By (the §685.5(ii) route, validated 26/28 at the §238–§274 boundary)
 # UNKNOWN = neither channel names a seat — these are what the owner's rule leaves genuinely owed.
+#   reproduces every committed row byte-for-byte — see tests/scripts/provenanceMap.test.js arm 1)
 # Regenerate: node scripts/audit/provenance-map.mjs --map docs/PROVENANCE_MAP.tsv --write docs/PROVENANCE_MAP.tsv
-# Walked at: refs/heads/review-fixes-2026-07-08 = a57d3621ae05ff5bf3a9d24e406df42e6f976862 (rows are ADDITIVE; the generator REFUSES to write unless it first
+# Walked at: refs/heads/review-fixes-2026-07-08 = d6828148df837d5dc0ccc7ed742197dd13b65a9c (rows are ADDITIVE; the generator REFUSES to write unless it first
 #   reproduces every committed row byte-for-byte — see tests/scripts/provenanceMap.test.js arm 1)
 section	odq_line	status	trailer	intro_commit	discharge	header
 §0	21	TRAILER-FABLE	Fable 5	158624de5		§0 · 2026-07-28 DELEGATED DISPOSITION — current truth
@@ -1609,3 +1610,66 @@ section	odq_line	status	trailer	intro_commit	discharge	header
 §921.7	32565	TRAILER-OPUS	Opus 5	a57d3621a		§921.7 GATES.** `npm run check:quick` in the dock: **validate-packets exit 0 (182 packets, 0 READY) · typechec
 §921.8	32566	TRAILER-OPUS	Opus 5	a57d3621a		§921.8 ⛔ THE CENSUS STAMP MOVES, DECLARED IN ADVANCE AND STILL OWED.** Predicted **before any run** and record
 §921.9	32567	TRAILER-OPUS	Opus 5	a57d3621a		§921.9 WHAT THIS CAR DOES NOT DO.** It rules nothing, discharges nothing, and changes no status word or P-rank
+§922	32569	OPUS-TEXT	Opus 5	c6cfc8210		§922 · THE PROVENANCE MAP GETS THE WALK IT ALWAYS CLAIMED — 910 ROWS APPENDED TO §921, THE 693 HAND-DERIVED RO
+§922.1	32571	TRAILER-OPUS	Opus 5	c6cfc8210		§922.1 THE INSTRUMENT THAT COULD NOT BE REGENERATED.** §687.2 landed `docs/PROVENANCE_MAP.tsv` as the instrume
+§922.2	32572	TRAILER-OPUS	Opus 5	c6cfc8210		§922.2 WHAT LANDED.** `scripts/audit/provenance-map.mjs` and `tests/scripts/provenanceMap.test.js` on the BUIL
+§922.3	32573	TRAILER-OPUS	Opus 5	c6cfc8210		§922.3 BOTH CHANNELS, AS §685.5(ii) DESCRIBES THEM.** (1) the section's own header names a seat; (2) the `Co-A
+§922.4	32574	OPUS-TEXT	Opus 5	c6cfc8210		§922.4 ⭐ RULE EPOCHS — WHY THERE ARE TWO, AND WHY IT IS NOT A HACK.** The marking convention changed under the
+§922.5	32575	TRAILER-OPUS	Opus 5	c6cfc8210		§922.5 ARM 1 IS THE WHOLE STANDING, AND IT WAS PROVED BY MUTATION.** A generator asserting 910 new rows has no
+§922.6	32576	TRAILER-OPUS	Opus 5	c6cfc8210		§922.6 DETERMINISM AND ADDITIVITY, MEASURED.** Generated twice and compared: **byte-identical, md5 `e7c3ed7edc
+§922.7	32577	TRAILER-OPUS	Opus 5	c6cfc8210		§922.7 THE MAP'S OWN CITATION REPAIRED.** Header line 5 now reads `# Regenerate: node scripts/audit/provenance
+§922.8	32578	TRAILER-OPUS	Opus 5	c6cfc8210		§922.8 A CORRECTION TO §920.4, RECORDED RATHER THAN EDITED** (append-only, §685.5(vi)). §920.4 says *"docs/PRO
+§922.9	32579	TRAILER-OPUS	Opus 5	c6cfc8210		§922.9 GATES.** `npx vitest run tests/scripts/provenanceMap.test.js` → **7 passed (7)**. `npm run check:quick`
+§922.10	32580	TRAILER-OPUS	Opus 5	c6cfc8210		§922.10 WHAT THIS CAR DOES NOT DO.** §685.3 makes producing provenance rows **P4-mechanical** ("executed evide
+§923	32582	OPUS-TEXT	Opus 5	c1a696a6b		§923 · THE PREFIX GATE IS INSTALLED — §883.5(c)'s HIGH CURE, RATIFIED AT §892 AND OPEN SINCE 2026-09-02, WITH 
+§923.1	32584	TRAILER-OPUS	Opus 5	c1a696a6b		§923.1 THE GAP IS CLOSED.** §883.5(c) found three copies of `docs/FABLE_RETROVALIDATION_QUEUE.md` on disk, two
+§923.2	32585	TRAILER-OPUS	Opus 5	c1a696a6b		§923.2 WHY EVERY EXISTING GATE WAS BLIND, IN ONE SENTENCE.** Both existing arms — §688.7's "presence is not a 
+§923.3	32586	TRAILER-OPUS	Opus 5	c1a696a6b		§923.3 ⭐ IT COVERS BOTH APPEND-ONLY FILES, NOT ONLY THE ONE THE RECORD FOUND.** `docs/OWNER_DECISION_QUEUE.md`
+§923.4	32587	TRAILER-OPUS	Opus 5	c1a696a6b		§923.4 ⚠ ONE PATH DELIBERATELY EXCLUDED, RECORDED SO IT IS NOT MISTAKEN FOR AN OVERSIGHT.** `docs/PROVENANCE_M
+§923.5	32588	TRAILER-OPUS	Opus 5	c1a696a6b		§923.5 THE FIVE PLANTED CONTROLS, EXECUTED, EACH EXIT QUOTED — the §685.4 idiom.** Tip verified **unmoved at `
+§923.6	32594	TRAILER-OPUS	Opus 5	c1a696a6b		§923.6 ⛔⛔ THE SEAL WAS NOT A SEAL — A FINDING OF THIS CAR, AND IT UNDERCUTS AN ASSUMPTION THE RECORD HAS BEEN 
+§923.7	32595	TRAILER-OPUS	Opus 5	c1a696a6b		§923.7 ⚠ THE CURE STILL LIVES IN AN UNTRACKED SCRATCHPAD FILE, AND A REBOOT HAS ALREADY DESTROYED THAT DIRECTO
+§923.8	32596	TRAILER-OPUS	Opus 5	c1a696a6b		§923.8 WHAT THIS CAR DOES NOT DO.** It moves **no repo byte** — the tool is untracked — and rules nothing. It 
+§924	32598	OPUS-TEXT	Opus 5	c58465728		§924 · START_HERE BROUGHT FORWARD AT HEAD — THE COMMITTED ENTRY POINT NEVER NAMED THE HANDOFF; AND THE LIVE CO
+§924.1	32600	TRAILER-OPUS	Opus 5	c58465728		§924.1 THE ENTRY POINT POINTED AT THE WRONG FILE, AND HAD SINCE 2026-07-18.** The memory index and §233 make `
+§924.2	32601	TRAILER-OPUS	Opus 5	c58465728		§924.2 WHAT LANDED.** One **CURRENT POINTER** block at the top of the committed file (63,186 → 65,507 B): read
+§924.3	32602	TRAILER-OPUS	Opus 5	c58465728		§924.3 THE THREE-COPY STATE, MEASURED AT THIS COMMIT'S PARENT** (`git status --porcelain`, sizes and md5s of d
+§924.4	32613	TRAILER-OPUS	Opus 5	c58465728		§924.4 ⛔⛔ A PART OF THAT DIVERGENCE IS THIS ITEM'S OWN DOING, AND IT IS RECORDED RATHER THAN QUIETLY LEFT.** B
+§924.5	32614	TRAILER-OPUS	Opus 5	c58465728		§924.5 WHAT THIS CAR DOES NOT DO.** It edits **only HEAD's copy on the ledger branch**. It does not touch the 
+§925	32616	OPUS-TEXT	Opus 5	2de257a71		§925 · THE DEFERRAL SWEEP'S UNRUN HALF IS RUN — 93 MARKED `docs/**` DEFERRALS CLASSIFIED, 13 EMERGENT, 27 TO T
+§925.1	32618	TRAILER-OPUS	Opus 5	2de257a71		§925.1 THE HALF THAT WAS NEVER RUN.** §764.4 ordered that *"the deferral ledgers get swept for launch-path mem
+§925.2	32619	TRAILER-OPUS	Opus 5	2de257a71		§925.2 ⛔ THE ARTIFACT LOSS, RE-CONFIRMED INDEPENDENTLY AND NOT INHERITED.** `$SP/M1A-DEFERRAL-SWEEP.md` and `$
+§925.3	32620	TRAILER-OPUS	Opus 5	2de257a71		§925.3 THE DENOMINATOR AND ITS BOUNDARY, MEASURED AT HEAD.** 884 `docs/**.md`, minus 511 `archive/`, minus 40 
+§925.4	32621	TRAILER-OPUS	Opus 5	2de257a71		§925.4 THE VERDICT — EVERY ONE OF THE 93 CARRIES A CITE AND A DISPOSITION.** **13 EMERGENT** (1 constitutional
+§925.5	32622	TRAILER-OPUS	Opus 5	2de257a71		§925.5 ⛔⛔ THE FIVE THAT ARE MORE THAN A POSTPONEMENT.** **(1)** `SETTLEMENT_CAPABILITY_ATLAS.md:8225` — **a KN
+§925.6	32623	TRAILER-OPUS	Opus 5	2de257a71		§925.6 §877.2's PARKED WIRING CAR — THE TEST IS RUN AND CANNOT BE COMPLETED; THE ROW IS `EVIDENCE-THIN` AND GO
+§925.7	32624	TRAILER-OPUS	Opus 5	2de257a71		§925.7 ⚠ A NAMING TRAP, FLAGGED BEFORE IT BITES.** `docs/DESIGN_FP_INTERIOR.md` is the **CHARACTER**-interior 
+§925.8	32625	TRAILER-OPUS	Opus 5	2de257a71		§925.8 WHAT THIS CAR DOES NOT DO.** It **presents; it does not decide** (§764.4's own second disposition). It 
+§926	32627	OPUS-TEXT	Opus 5	ce2b8a48c		§926 · THE §440–§684 SPAN IS READ — 10,794 LINES END TO END, 244 SECTIONS EACH WITH A DISPOSITION; SIXTEEN TEX
+§926.1	32629	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.1 THE SURFACE §693.9 NAMED IS NO LONGER UNREAD.** *"§440–§684 as a body — 245 sections, the single larges
+§926.2	32630	OPUS-TEXT	Opus 5	ce2b8a48c		§926.2 ⛔⛔ CHANNEL 3 IS THE SHARP RESULT — SIXTEEN SECTIONS WHOSE OWN TEXT CONTRADICTS THE REGISTER'S READING O
+§926.3	32631	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.3 A MEASURED CORRECTION TO §685.5(i).** §685.5(i) records that §484's convention *"ran 16 headers and sto
+§926.4	32632	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.4 ⭐⭐ CHANNEL 1 — THE SILENT-RE-DERIVATION FEAR IS ANSWERED, AND THE ANSWER IS THE FINDING.** **76 of the 
+§926.5	32633	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.5 CHANNEL 2 — THE RATIFICATIONS CARRY THEMSELVES BY CONSTRUCTION, WITH ONE EXCEPTION.** 40 sections carry
+§926.6	32634	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.6 THE TWO UNSWEPT NAMESPACES — MEASURED, AND SMALLER THAN FEARED.** `refs/trains/*` **31** · `refs/preser
+§926.7	32635	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.7 ⭐⭐ THE §683 CLASS WAS CAUGHT ONCE INSIDE THIS SPAN AND REPAIRED — WHICH IS WHY THE THREE THAT ESCAPED M
+§926.8	32636	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.8 ⛔ THE GRANT-READING CLASS HAS MORE MEMBERS THAN THE DOCKET'S THREE — PRESENTED, NOT RULED.** `docs/OWNE
+§926.9	32637	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.9 ⭐⭐ THE SPAN INDEPENDENTLY FOUND HALF OF THIS ITEM'S OWN §920.6.** §521.1 records *"`git grep` IS BLIND 
+§926.10	32638	TRAILER-OPUS	Opus 5	ce2b8a48c		§926.10 WHAT THIS CAR DOES NOT DO.** It convenes no sitting, rules nothing, and marks **no section discharged,
+§927	32640	OPUS-TEXT	Opus 5	a57bd0fbe		§927 · THE CENSUS BILLS ARE PAID — AND §921.8's "RE-FREEZE OWED" WAS RIGHT ABOUT THE LIGHTING CENSUS AND WRONG
+§927.1	32642	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.1 ⛔ THE DOCK COMMIT DID NOT PAY THE BILLS ITS OWN LAW NAMES, AND RUNNING THE WALKERS FOUND THEM.** `625c7
+§927.2	32643	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.2 THE THREE, EACH PAID IN ITS OWN PRESCRIBED FORM.** **(i) `mutationCoverageManifest` TOTALITY** — `tests
+§927.3	32644	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.3 ⭐ THE CENSUS RE-FROZEN, AND THE DELTA IS THE ONE DECLARED BEFORE ANY RUN.** **files 2563 → 2565 · parke
+§927.4	32645	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.4 ⛔ AND THE CORRECTION THAT MATTERS MOST — §921.8/§922.9's "the test-ratchet re-freeze is OWED" IS WRONG,
+§927.5	32646	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.5 ⚠ ONE HONEST NOTE ON THE GREEN, RECORDED RATHER THAN SMOOTHED.** `DOOR 3 PARSER DOOR` measures **~22.5 
+§927.6	32647	TRAILER-OPUS	Opus 5	a57bd0fbe		§927.6 A MANIFEST NEAR-MISS, DECLARED.** The first attempt at §927.2(i) rewrote `scripts/mutation-coverage-man
+§928	32649	FABLE-TEXT	Fable 5.1	feba86751		§928 · THE LONG TAIL'S FIRST FOUR ITEMS, CORRECTED BY THE CODE — TWO WERE ALREADY LANDED ON THE BUILD SLOT, TH
+§928.1	32651	TRAILER-FABLE	Fable 5.1	feba86751		§928.1 THE BUILD SLOT, MEASURED BY FOUR SEATS INDEPENDENTLY.** Product code lives on `claude/composite-r4` (`f
+§928.2	32652	TRAILER-FABLE	Fable 5.1	feba86751		§928.2 LONG TAIL #15 STRUCK: the ten consumed secrets LANDED at §134 on 2026-08-16 and HOLD at the slot** (rul
+§928.3	32653	TRAILER-FABLE	Fable 5.1	feba86751		§928.3 LONG TAIL #16, THE NON-GATED HALF LANDED** in `lane-LT16-money` (`f73bdbf16` → `517f8c950`, sealed `ref
+§928.4	32654	TRAILER-FABLE	Fable 5.1	feba86751		§928.4 LONG TAIL #17 TO THE BOUNDARY, AND §764.3 IS ASKED BY NAME.** The headline (divine healers keyed as mag
+§928.5	32655	TRAILER-FABLE	Fable 5.1	feba86751		§928.5 THE SCRIBE'S BILLING DEFECT, FOUND BY THE TIER-PROPOSAL RECON.** `renderScribe` POSTs one `scribe-rende
+§928.6	32656	TRAILER-FABLE	Fable 5.1	feba86751		§928.6 THE OWNER'S SITTING OPENS** — `docs/OWNER_SITTING_2026-09-15.md`: every decision the long tail's lanes 
+§929	32658	FABLE-TEXT	Fable 5.1	09faa89f8		§929 · SCRIBE W5b — ONE RENDER, ONE CHARGE, LANDED DARK (2026-09-15 ~05:1x; SEAT: Fable 5.1, the chair)
+§929.1	32660	TRAILER-FABLE	Fable 5.1	09faa89f8		§929.1** `lane-scribe` `9a8ff7280` → `600771812`, sealed `refs/preserve/scribe-w5b-2026-09-15`; four cars: the
+§929.2	32661	TRAILER-FABLE	Fable 5.1	09faa89f8		§929.2** THE SCRIBE'S OWED APPLY IS NOW 201 + 202 + 203 (`docs/OWNER_SITTING_2026-09-15.md` item 7). No live r
