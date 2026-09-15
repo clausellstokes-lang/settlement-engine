@@ -2,11 +2,22 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
-import { consolePiiLiteralOffenders } from './edgeLogGuard.mjs';
+import { consolePiiLiteralOffenders, consolePiiValueOffenders } from './edgeLogGuard.mjs';
 import { moduleTopEnvMutationOffenders } from './edgeEnvScopeGuard.mjs';
 
 const root = fileURLToPath(new URL('../supabase/functions/', import.meta.url));
 const failures = [];
+
+// ── THE PII-VALUE BASELINE (LT36 car 2) ──────────────────────────────────────
+// scripts/edgeLogGuard.mjs arm 2 is an ERROR for any NEW file that logs a PII value; the
+// files already doing so are grandfathered here so the rule could land without redding the
+// gate on arrival (backend.3's own ordering warning). The list is SHRINK-ONLY and its
+// exactness — no new violator hiding inside it, no stale entry lingering after a cure — is
+// pinned in tests/security/edgeLogRedaction.test.js, which reads THIS file.
+const piiBaseline = JSON.parse(
+  await readFile(fileURLToPath(new URL('./.edge-pii-log-baseline.json', import.meta.url)), 'utf8'),
+);
+const piiGrandfathered = new Set(Object.keys(piiBaseline.files || {}));
 
 /**
  * Recursively collect every non-test .ts file under supabase/functions/.
@@ -75,6 +86,30 @@ for (const file of files) {
   // security-2: no console.* call may embed a literal email (PII must flow through
   // redact() in _shared/log.ts, never be baked into a raw log line).
   failures.push(...consolePiiLiteralOffenders(source, rel));
+
+  // backend.3 arm 2: no console.* call may carry a PII VALUE either — the interpolated
+  // shape (`email=${session.customer_email}`, `ip=${meta.ip}`) that the literal rule above
+  // returns [] for, which is the exact shape of the leak backend.1 fixed. Grandfathered
+  // files are skipped; everything else is an error on arrival.
+  if (!piiGrandfathered.has(rel)) failures.push(...consolePiiValueOffenders(source, rel));
+}
+
+// A grandfathered file that no longer offends must LEAVE the baseline — a stale entry is a
+// hole the next leak can land in silently. (The occurrence ceiling is pinned in
+// tests/security/edgeLogRedaction.test.js, which measures the same corpus.)
+for (const rel of [...piiGrandfathered].sort()) {
+  const file = join(root, rel);
+  if (!files.includes(file)) {
+    failures.push(
+      `scripts/.edge-pii-log-baseline.json: grandfathers '${rel}', which is not an edge-function source — remove the entry.`,
+    );
+    continue;
+  }
+  if (consolePiiValueOffenders(await readFile(file, 'utf8'), rel).length === 0) {
+    failures.push(
+      `scripts/.edge-pii-log-baseline.json: '${rel}' no longer logs a PII value — remove the entry and lower 'ceiling' to bank the win.`,
+    );
+  }
 }
 
 // ── THE MODULE-TOP ENV MUTATION GUARD (TE34 member 4) ────────────────────────
