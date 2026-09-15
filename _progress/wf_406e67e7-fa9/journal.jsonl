@@ -1,0 +1,7 @@
+{"type":"launched"}
+{"type":"started","key":"v2:52320b3848597977d53fb8695de05ea463d08513ea4168e3d6fe6e005f72d34c","agentId":"a7e604d4ddc8b3005","label":"read:sequencing","phase":"Read"}
+{"type":"started","key":"v2:1ec1d9194b99755ae615fbc91b67c2bad5d6324a5960526bd56aa3e5b90ede3b","agentId":"a3ba4fb58e6a03875","label":"read:record:32","phase":"Read"}
+{"type":"started","key":"v2:731d88487dc01111986fc10a0d4b00b01d5f674f987f3dd50fe73f9d93fe6ec3","agentId":"a5a2edd52975aa6fe","label":"read:code:32","phase":"Read"}
+{"type":"started","key":"v2:ee0a6e51609495038d6fc1ef29ce6c2a7440487a265a7fe9207d0fa8fed8a4ce","agentId":"a059583573b6c41b8","label":"read:record:33","phase":"Read"}
+{"type":"started","key":"v2:60ef95edff45fc37fe9f07e789c59f378c477c92b08fcde3b48591af0918566b","agentId":"aa9c5b1ccdade73a6","label":"read:code:33","phase":"Read"}
+{"type":"started","key":"v2:f8bd4261f39444610fc6c0a33d7067188106555cf7dc71841c31d3d08f1ca8ad","agentId":"a88f44407b20cb5ba","label":"read:record:34","phase":"Read"}
