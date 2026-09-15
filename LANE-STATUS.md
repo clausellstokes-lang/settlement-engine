@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 17:35:48 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 17:41:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 0
+- HOLD-VITEST absent · runner count 4
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -113,7 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_838e25d6-4ce** (mtime 09-15 17:26): agent calls 18 (18 distinct) · DONE 12 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_838e25d6-4ce/`
+- **wf_838e25d6-4ce** (mtime 09-15 17:41): agent calls 22 (22 distinct) · DONE 17 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 5 — mirror `_progress/wf_838e25d6-4ce/`
     - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
     - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
     - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
@@ -126,13 +126,17 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a8cdffdba` ? · DONE · transcript 09-15 17:23 955 KB · 51 tool calls · result: {"family": "INT", "summary": "INT \u2014 the interior program, 8 waves, 7 of them unlanded. The compiled volume is /private/tmp/claude-502/-Users-cstokes-Deskto
     - `a28674c8c` ? · DONE · transcript 09-15 17:24 1040 KB · 57 tool calls · result: {"family": "GR-CW", "summary": "Seven waves to price: GR-4 and GR-5 part-built, GR-6/GR-7/CW-1/CW-2x/CW-3 unbuilt, with CW-3 the terminus of the nine-wave criti
     - `aeee29db4` ? · DONE · transcript 09-15 17:26 934 KB · 69 tool calls · result: {"family": "LG0 \u2014 LOGISTICS LG-0 and LG-1 (item #33, the family's first train)", "summary": "The re-price against code changes LG-0's bill substantially, i
-    - `a9cb1d825` ? · IN FLIGHT · transcript 09-15 17:35 858 KB · 52 tool calls · files: worker-graph.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a21425ce4` ? · IN FLIGHT · transcript 09-15 17:35 885 KB · 62 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a01fded51` ? · IN FLIGHT · transcript 09-15 17:34 740 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aa34b3f70` ? · IN FLIGHT · transcript 09-15 17:34 764 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a166442fb` ? · IN FLIGHT · transcript 09-15 17:35 843 KB · 45 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a1d56aa9d` r2 · IN FLIGHT · transcript 09-15 17:35 847 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-- **wf_3a9ccb34-395** (mtime 09-15 17:20): agent calls 12 (12 distinct) · DONE 11 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_3a9ccb34-395/`
+    - `a9cb1d825` ? · DONE · transcript 09-15 17:41 1037 KB · 60 tool calls · files: worker-graph.txt · result: {"family": "TR", "verdicts": [{"wave": "TR-2 \u2014 THE HOUSE (merchantHousesEnabled; TR-2b the syndicate variant rides dark)", "verdict": "WRONG DEPENDENCY", "
+    - `a21425ce4` ? · IN FLIGHT · transcript 09-15 17:40 1079 KB · 84 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a01fded51` ? · DONE · transcript 09-15 17:36 819 KB · 38 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT \u2014 re-confirmed independently at `a5876c0ea` (all six flags zero hits across src and tests; none of the 
+    - `aa34b3f70` ? · DONE · transcript 09-15 17:36 847 KB · 40 tool calls · result: {"family": "WY \u2014 wayfare (the inhabited roads, the physical flows, the mirror law)", "summary": "SKEPTIC PASS, family WY, re-derived from docs/DESIGN_FP_AR
+    - `a166442fb` ? · DONE · transcript 09-15 17:37 916 KB · 46 tool calls · result: {"family": "IN \u2014 INFORMATION (docs/DESIGN_FP_ARCH_IN.md, governing volume DESIGN_FP_INFORMATION.md; SOL_QUEUE A2 row 13)", "summary": "THE READER IS AN UNU
+    - `a1d56aa9d` r2 · DONE · transcript 09-15 17:41 1025 KB · 44 tool calls · result: {"family": "WC \u2014 war circulation (DESIGN_FP_ARCH_WC.md, 431 KB, 17 waves in four arcs)", "verdicts": [{"wave": "WC-0 REGISTRATION (the vocabulary wave)", "
+    - `a2e32bfaa` ? · IN FLIGHT · transcript 09-15 17:41 692 KB · 34 tool calls · files: genlist.txt · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a6e66282d` ? · IN FLIGHT · transcript 09-15 17:41 622 KB · 24 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a375d8671` ? · IN FLIGHT · transcript 09-15 17:41 697 KB · 30 tool calls · files: gr2.txt, cw1.txt, cw2.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a45a7b6ed` ? · IN FLIGHT · transcript 09-15 17:41 363 KB · 3 tool calls · last: Bash cat /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scra
+- **wf_3a9ccb34-395** (mtime 09-15 17:36): agent calls 13 (13 distinct) · DONE 12 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_3a9ccb34-395/`
     - `a1e5703e2` ? · DONE · transcript 09-15 17:20 1241 KB · 83 tool calls · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
     - `ad22f595d` ? · DONE · transcript 09-15 17:16 1002 KB · 64 tool calls · files: c.txt, s.txt, ANGLE-DATA-32-NOTES.txt · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
     - `a2e3a5e6f` ? · DONE · transcript 09-15 17:10 941 KB · 53 tool calls · files: "$OUT/slot-test-titles.txt, "$OUT/consist-test-titles.txt, "$OUT/slot-files.txt, "$OUT/consist-files.txt · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
@@ -144,7 +148,8 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a99306d87` ? · DONE · transcript 09-15 17:32 1060 KB · 67 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (W-COIN, W-SEAT, W-DESK, W-OPS, the WEAVE, encounters, W-ARMS): the 25 rows of \u00a7B.3 marked UNBUILT or PAR
     - `a0681fe2a` ? · DONE · transcript 09-15 17:35 1010 KB · 76 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (B.3, 73 build units)", "angle": "DATA: the persisted and derived shapes \u2014 src/domain/settlement.schema.j
     - `a04d8689f` ? · DONE · transcript 09-15 17:33 1067 KB · 49 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 W-OPS \u00b7 WEAVE \u00b7 encounters \u00b7 W-ARMS)", "angle": "TES
-    - `ad1ff51b8` ? · IN FLIGHT · transcript 09-15 17:33 988 KB · 87 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ad1ff51b8` ? · DONE · transcript 09-15 17:36 1092 KB · 88 tool calls · result: {"item": "#34", "angle": "ui \u2014 surfaces in src/components/ and src/pdf/ that render the concept, traced back to what feeds them", "rows": [{"target": "W-CO
+    - `ac5e596a2` ? · IN FLIGHT · transcript 09-15 17:39 838 KB · 10 tool calls · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
 - **wf_f25453d7-4bd** (mtime 09-15 14:14): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_f25453d7-4bd/`
     - `a57017065` ? · IN FLIGHT · transcript 09-15 14:14 330 KB · 3 tool calls · last: Bash grep -n "^#\|^##\|^###" /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88
     - `ac78c868b` ? · IN FLIGHT · transcript 09-15 14:14 158 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
@@ -166,4 +171,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 4.05 5.79 11.57
+load: 5.79 6.36 9.94

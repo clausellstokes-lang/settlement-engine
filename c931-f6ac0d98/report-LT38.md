@@ -4,7 +4,7 @@
 limit at ~06:02 EDT with car 3 staged but uncommitted.
 **Dock:** `.../4e3d2f70-.../scratchpad/kit/lane-LT38-ladder`, detached, cut at `f73bdbf16`
 (`claude/composite-r4`, THE BUILD SLOT). Never rebased, never merged; the chair cherry-picks.
-**Tip at last update:** `8ff904dbd`. Porcelain 0.
+**Tip:** `edd7361cf`. **Porcelain 0.** LANE CLOSED at the chair's order of 16:5x EDT.
 
 ## THE CARS, IN ORDER
 
@@ -16,7 +16,10 @@ limit at ~06:02 EDT with car 3 staged but uncommitted.
 | **2 follow-up** | **`be28f2011`** | **LANDED (this seat) — a typecheck regression car 2 left behind** |
 | **3** | **`52cfa319f`** | **LANDED (this seat)** |
 | **3 census** | **`8ff904dbd`** | **LANDED (this seat)** |
-| 4–16 | — | in progress |
+| **4** | **`4b3a6c1c0`** | **LANDED (this seat)** |
+| **5** | **`00e601c9a`** | **LANDED (this seat)** |
+| **5 census** | **`edd7361cf`** | **LANDED (this seat)** |
+| 6–16 | — | **NOT DONE — lane yielded; deferred and recorded below** |
 
 ---
 
@@ -181,3 +184,153 @@ re-run: `Test Files 1 passed (1) · Tests 34 passed (34) · Duration 3.22s`.
    privacy policy, and in `privacyPolicyParity`'s roster arm, so renaming its user-facing label
    is a consent/legal-surface coordination, not a copy edit. **Deliberately deferred —
    documented, not a bug to re-find.**
+
+
+---
+
+## CAR 4 — `4b3a6c1c0` — the residual "AI" language
+
+*Files:* `src/copy/en.js`, `src/components/settlement/AIInlineCard.jsx`,
+`src/components/settlement/VersionsTab.jsx`, `src/components/HowToUse.jsx`,
+`src/components/SettlementDetail.jsx` (+39 / −17).
+
+Two of the backlog's three premises had moved, and reading the tree first is what found it.
+The shared CTA is ONE line (`polishCta: 'Polish with AI'` → `'Refine narrative'`, the house
+term already at en.js:160/:923/:1244 and the pair of `regenerateCta: 'Regenerate narrative'`)
+and it moves BOTH consumers without either file being touched. **The export labels were never
+a rename**: no control in `src/` is called "Narrative AI Prompt" or "Map AI Prompt", so the
+guide was describing controls that do not exist and the fix is a DESCRIPTION REPAIR against the
+real surface (ExportSheet's cuts and formats, the Foundry module, Export Image, the map
+toolbar's own Download map (PNG)). "The purple button" now names the action.
+
+**One site the record did not list was FALSE, not merely off-voice.** `VersionsTab.jsx:122`
+said "Exported (PDF / JSON / AI prompt)"; the product exports neither JSON nor a prompt, and
+the label omitted the two exports that DO stamp the timestamp. `markExported` has exactly
+three callers (SettlementDetail.jsx:431 and :464, generate/ExportDraftButton.jsx:77).
+
+### ⭐⭐ THE GATE CAUGHT A BUG I PUT IN — the best receipt in this lane so far
+`tests/lint/observedShapeReaders.walker` (the reader-with-no-writer ratchet) reddened in three
+arms: stale 1, reads 1971 vs a frozen 1972, cohort counts 191 vs 192. The governed checker
+named it in one line — `"lastExportAt on campaignState" is 1 against a frozen count of 2` —
+and the cause was that rewriting the label had **silently dropped `ts: cs.lastExportAt`** from
+the entry object, so the export milestone would have rendered with no timestamp *in a timeline
+sorted by time*. The component's own suite could not have seen it. Restored; the scan now reads
+`1972 finding(s), exactly matching the frozen inventory`, and NO baseline was re-frozen because
+the correct count never moved.
+
+*Gate:* `tests/components/ tests/ui/ tests/lib/ tests/copy/ tests/lint/` →
+`3 failed | 746 passed (749)` / `5 failed | 7175 passed (7180)`; all three red files resolved —
+observedShapeReaders cured and re-proved (`8 passed (8)` / `113 passed (113)`),
+observedShapeSentinel a 20 s timeout at load 129 re-measured ALONE (`1 passed` / `33 passed`,
+16.18 s), voiceMechanics the inherited banked §900 row. `tests/copy/` re-run at the final tree:
+`1 failed | 9 passed (10)`, byte-identical failure list. lint 0 errors; check:quick all exit 0.
+No test file changed, so no census re-freeze owed.
+
+---
+
+## CAR 5 — `00e601c9a` (+ census `edd7361cf`) — LD-11, nav reset-on-self-click
+
+*Files:* `src/lib/routes.js` (the declaration + `NAV_RESETS`/`resetKindFor`),
+`src/hooks/useRoute.js` (`navigateSelfClick`), `src/store/uiSlice.js` (`navResetRequest` +
+`requestNavReset`/`clearNavReset`), `src/components/GenerateWizard.jsx` (the Create answer),
+`src/App.jsx` (one line), five sibling suites' `useRoute` mocks kept valid, and a new
+`tests/components/navResetOnSelfClick.test.jsx`.
+
+Two declared kinds — `RESET_ROUTE` (the URL is the whole of it; five sections) and
+`RESET_SECTION` (Create alone, because its dirty guard `pendingExit` is component-local and a
+reset dispatched from App could not have raised that dialog). The nonce App.jsx's own note
+promised is `uiSlice.navResetRequest`. **App.jsx is NET ZERO, measured with eslint's own Linter:
+650 before, 650 after** — no baseline moved.
+
+⭐ Four planted mutations, each restored by file copy and cmp-verified byte-identical, with a
+restored-baseline control: BASELINE 12 passed · M1 strip one `reset` declaration → 3 failed
+(TOTALITY + both route arms, because they drive the REAL router) · M2 dispatch stops failing
+closed → 1 failed · M3 wizard bypasses its dirty guard → 1 failed · M4 wizard answers any
+section's request → 1 failed · RESTORED 12 passed.
+
+
+**It lands LIT** (owner, 16:5x): the car has no dial to light — no flag, no flagRegistry
+entry — and it adds **no user-facing string at all**, so the em-dash rule has nothing to
+bite on (every em dash in the diff is in a `//` comment or a test title; the only `!` are
+operators, verified by parsing each added line).
+
+*Gate (verbatim):*
+
+    uptime at gate start:  17:14  up 2 days, 21:06, 1 user, load averages: 7.52 20.95 25.81
+
+    $ ... npx vitest run --maxWorkers=2 tests/components/ tests/ui/ tests/lib/ tests/copy/ tests/lint/
+     Test Files  5 failed | 745 passed (750)
+          Tests  12 failed | 7180 passed (7192)
+      (a) createWorkflowRail + generateWizardFocus — THE REAL BREAK, cured in the commit
+      (b) entropyRootCensus.walker — two 20 s timeouts under contention
+      (c) sovereigntyLightingContract — this car's one new test file
+      (d) voiceMechanics — the inherited banked §900 row
+
+    $ ... npx vitest run --maxWorkers=2 tests/lint/entropyRootCensus.walker.test.js   (ALONE)
+     Test Files  1 passed (1) · Tests 31 passed (31) · Duration 7.64s
+
+    $ ... npx vitest run --maxWorkers=2 <the 11 suites this car can reach>
+     Test Files  11 passed (11) · Tests 174 passed (174)
+
+    $ npm run lint        -> 31 problems (0 errors, 31 warnings); the count did not move
+    $ npm run check:quick -> validate-packets 0 · typecheck-full 0 · typecheck-domain 0 · lint-changed 0
+
+    SIZE (eslint's own Linter, the enforcer's rule):
+      src/App.jsx                        650 -> 650   ⭐ NET ZERO on a file frozen at 650
+      src/components/GenerateWizard.jsx  414 -> 427   (600 ceiling, unbaselined)
+      src/lib/routes.js                  168 -> 176   (800)
+      src/hooks/useRoute.js               47 ->  65   (800)
+      src/store/uiSlice.js                25 ->  33   (800)
+    No ceiling crossed, no baseline number moved.
+
+    uptime at gate end: 17:38  up 2 days, 21:29, 1 user, load averages: 8.20 6.55 10.94
+
+**Census `edd7361cf`:** files 2564 → 2565, credited 2189 → 2190, titles 24189 → 24201,
+suiteTitles 6456 → 6459, parked unchanged. Refrozen at `00e601c9a`; the plain re-run is the
+receipt — `Test Files 1 passed (1) · Tests 34 passed (34) · Duration 5.11s`.
+
+---
+
+# ⛔ CARS NOT DONE — DEFERRED AND RECORDED, NOT DROPPED
+
+The lane yielded its slot at the chair's order of 16:5x EDT (the simulation is prioritised).
+**Cars 6 through 16 of the brief were not started.** What the next implementer needs:
+
+- **CAR 6 — the per-page polish tranche.** I re-verified the backlog's sites at the tree.
+  Live and editable: `PREMIUM_PITCH` (SaveQuotaMeter.jsx:26, centralized and test-asserted),
+  the war-weary pip's raw-decimal `title=` (LivingWorldSignalRow.jsx:133 —
+  `` `War-weariness: ${band} (${value.toFixed(2)})` ``, exactly the row the backlog flags),
+  `Basic Generate` (generate/ModeSelector.jsx), `inactive retained`
+  (account/AccountSubscriptionSection.jsx), `Revert to Raw` (SettlementDetail.jsx).
+  ⚠ **TWO BACKLOG ROWS ARE STALE:** "Viability Score" and "AI prose pass" resolve NOWHERE in
+  `src/`. Do not go looking for them.
+- **CARS 7–10 — LD-5a–d** (nav cells as real anchors, the Compendium/About/Account/Gallery
+  menus). Un-started. LD-5's spec is at `docs/FIRST_CONTACT_BACKLOG.md:668-843` and the brief
+  summarises it correctly; the ribbon is `src/components/nav/NavRibbon.jsx:153-220`.
+  ⭐ **Car 5 helps car 7 directly:** `viewToPath` is now joined by `resetKindFor`/`NAV_RESETS`
+  on the same `nav` block, so the anchor conversion and the self-click reset read one table.
+- **CAR 11 — THE GATE CAR** (decompose `OutputContainer.jsx`). Un-started and still the
+  blocker for 12–15. RE-MEASURED at this dock: it is at **exactly 600 of its 600 layer
+  ceiling** with zero headroom and no baseline entry, so one added effective line makes it a
+  NEW offender. The brief's two extraction hazards are real and I confirmed both by reading:
+  `tests/ui/dossierTabGroups.walker.test.js:25-38` reads the file BY PATH and regex-matches
+  `TAB_GROUPS` plus ≥15 tab objects IN THAT FILE, and `collectChronicle` (:157-200) is
+  imported across the boundary by `tests/components/publicChronicleTab.test.jsx:41`. The
+  cleanest leaf I found is the **dossier-reading-analytics block at :607-675** (three effects
+  plus `dwellMsBand`/`readSessionRef`) — self-contained, touches no TAB_GROUPS text and no
+  exported symbol.
+- **CARS 12–15 — LM-1/2/3 and LD-4.** Un-started, and BLOCKED ON CAR 11 by construction (the
+  `demoMode` prop cannot thread through a file at 600/600). `docs/DESIGN_LIVING_MINIATURE.md`
+  is the binding spec and its §11 conditional escalation still stands: if LM-2's build-time
+  tab-set enumeration shows the demo mount's tabs differ from the /create draft view's, that
+  delta is a chair ruling BEFORE LM-2 lands.
+- **CAR 16 — LD-3b, the two ribbons.** Un-started. ⚠ App.jsx is at exactly 650 and car 5 spent
+  its margin to stay net-zero, so the ribbon mount must pay for itself with an extraction.
+
+## THE WEATHER, because it will shape the next lane's estimate
+Four lanes plus the chair's landing chain shared 8 cores all afternoon. One-minute load ran
+between 2 and **300**; a `tests/components/ + tests/lint/` run took **624 s** at load 40 and
+produced a cascade of false reds at load 200. Two rules earned their keep and should be
+treated as binding, not advisory: **every targeted run takes the SHARED tier at a hard
+worker cap of 2**, and **every timeout red is re-measured ALONE before it is believed** —
+four separate walkers reddened on 20 s timeouts today and every one of them passed alone.

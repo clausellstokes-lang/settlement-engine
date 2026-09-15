@@ -1,4 +1,4 @@
-# wf_3a9ccb34-395 — per-agent progress, 2026-09-15 17:35:50
+# wf_3a9ccb34-395 — per-agent progress, 2026-09-15 17:41:33
     - `a1e5703e2` ? · DONE · transcript 09-15 17:20 1241 KB · 83 tool calls · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
     - `ad22f595d` ? · DONE · transcript 09-15 17:16 1002 KB · 64 tool calls · files: c.txt, s.txt, ANGLE-DATA-32-NOTES.txt · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
     - `a2e3a5e6f` ? · DONE · transcript 09-15 17:10 941 KB · 53 tool calls · files: "$OUT/slot-test-titles.txt, "$OUT/consist-test-titles.txt, "$OUT/slot-files.txt, "$OUT/consist-files.txt · result: {"item": "#32 \u2014 the engine family waves (populations, wayfare/travel, interiors, trade, war circulation, faith, information, couplings, espionage terminus)
@@ -10,4 +10,5 @@
     - `a99306d87` ? · DONE · transcript 09-15 17:32 1060 KB · 67 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (W-COIN, W-SEAT, W-DESK, W-OPS, the WEAVE, encounters, W-ARMS): the 25 rows of \u00a7B.3 marked UNBUILT or PAR
     - `a0681fe2a` ? · DONE · transcript 09-15 17:35 1010 KB · 76 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (B.3, 73 build units)", "angle": "DATA: the persisted and derived shapes \u2014 src/domain/settlement.schema.j
     - `a04d8689f` ? · DONE · transcript 09-15 17:33 1067 KB · 49 tool calls · result: {"item": "#34 \u2014 politics, money and heraldry (W-COIN \u00b7 W-SEAT \u00b7 W-DESK \u00b7 W-OPS \u00b7 WEAVE \u00b7 encounters \u00b7 W-ARMS)", "angle": "TES
-    - `ad1ff51b8` ? · IN FLIGHT · transcript 09-15 17:33 988 KB · 87 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ad1ff51b8` ? · DONE · transcript 09-15 17:36 1092 KB · 88 tool calls · result: {"item": "#34", "angle": "ui \u2014 surfaces in src/components/ and src/pdf/ that render the concept, traced back to what feeds them", "rows": [{"target": "W-CO
+    - `ac5e596a2` ? · IN FLIGHT · transcript 09-15 17:39 838 KB · 10 tool calls · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
