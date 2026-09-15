@@ -1640,6 +1640,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/profileRpcs.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/profileModerationColumnLock.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

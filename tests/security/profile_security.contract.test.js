@@ -19,6 +19,26 @@
  * That's why the SQL file MUST also be run periodically via
  * `supabase test db` — typically pre-deploy. Once a Postgres test job
  * lands in CI, this contract test stays in place as the cheap guard.
+ *
+ * ── DEMOTED TO THE SECONDARY GUARD (A+ enforcement.6; LT36 car 4) ────────────
+ * The three profile RPCs are NOW EXECUTED, in the ordinary `npm run test` and with no
+ * Docker: tests/security/profileRpcs.pglite.test.js loads the NET-CURRENT DDL for
+ * `update_display_name` (migration 195, not 009 — the redefinition that adds the civility
+ * guard), `admin_set_role`, `admin_grant_credits`, `current_user_is_privileged` and
+ * `_audit_action` into in-process Postgres and calls them, asserting the trim, both sides
+ * of the 64-char cap, the privilege rejections, the audit and ledger writes, and — as a
+ * standing suite member rather than a one-off — the MUTATION control that a loosened
+ * privilege gate makes those rejections vanish.
+ *
+ * ⛔ THE GREPS BELOW ARE KEPT, DELIBERATELY, AND THIS IS NOT AN OVERSIGHT. They and the
+ * pglite suite guard DIFFERENT ARTIFACTS: pglite guards the MIGRATION DDL (what production
+ * runs), while these greps guard supabase/tests/profile_security.sql (the pgTAP superset a
+ * pre-deploy `supabase test db` executes, which also covers spend_credits). Deleting them
+ * because "it's executed now" would leave the pgTAP file with no guard at all and nobody
+ * would notice it hollowing — which is the exact regression
+ * tests/security/moneySecurityExecutionFloor.test.js exists to refuse. Each superseded
+ * assertion therefore carries an inline pointer instead: it is the cheap secondary guard,
+ * and the executed suite is the primary.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -89,10 +109,15 @@ describe('Tier 0.6 — safe-path RPCs work for end users', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
+  // SECONDARY GUARD — executed in profileRpcs.pglite.test.js ('trims the value it returns
+  // AND the value it persists'). This arm keeps the pgTAP superset from being hollowed.
   it('asserts update_display_name returns the trimmed value', () => {
     expect(sql).toMatch(/update_display_name\(['"][^'"]+['"]\)[\s\S]{0,200}'Renamed Test User'/);
   });
 
+  // SECONDARY GUARD — executed in profileRpcs.pglite.test.js, which asserts BOTH sides of
+  // the boundary (64 accepted, 65 and 100 rejected); a cap checked only from above can be
+  // off by one forever.
   it('asserts update_display_name enforces the 64-char length cap', () => {
     expect(sql).toMatch(/repeat\(['"]x['"],\s*100\)/);
   });
@@ -122,15 +147,21 @@ describe('Tier 0.6 — admin RPCs require privilege', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
+  // SECONDARY GUARD — executed in profileRpcs.pglite.test.js, with the mutation control
+  // proving the rejection comes from current_user_is_privileged() and not from a broken fixture.
   it('asserts admin_set_role rejects calls from regular users', () => {
     // Pattern: throws_ok wrapping a call to admin_set_role.
     expect(sql).toMatch(/throws_ok\([\s\S]{0,300}admin_set_role\(/);
   });
 
+  // SECONDARY GUARD — executed in profileRpcs.pglite.test.js, which also asserts that the
+  // rejected call mints NO credit_ledger, credit_transactions or admin_actions row.
   it('asserts admin_grant_credits rejects calls from regular users', () => {
     expect(sql).toMatch(/throws_ok\([\s\S]{0,300}admin_grant_credits\(/);
   });
 
+  // SECONDARY GUARD — executed in profileRpcs.pglite.test.js, which additionally asserts the
+  // applied role and the exactly-one audit row with its before/after values.
   it('asserts admin_set_role accepts a developer caller (lives_ok)', () => {
     expect(sql).toMatch(/lives_ok\([\s\S]{0,300}admin_set_role\(/);
   });
