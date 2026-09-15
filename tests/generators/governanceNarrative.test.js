@@ -55,8 +55,13 @@ describe('governance narrative precedence', () => {
       stressTypes: ['occupied', 'under_siege'],
     });
 
+    // ⭐ LT41b RULING 3: ONE label convention, `<Band> (<gloss>)`. The monster-threat
+    // note now FOLDS INTO the gloss instead of hanging off a semicolon, so this label
+    // is one parenthetical rather than two clauses in two punctuation styles. The
+    // PRECEDENCE this arm exists to pin is unchanged: the siege stressor still beats
+    // the stateCrime synthesis, and the threat still annotates the winner.
     expect(result.stability).toBe(
-      'Critical (active siege — survival priority); monster threat active',
+      'Critical (active siege, survival priority, monster threat active)',
     );
     expect(result.recentConflict).toBe(
       'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
@@ -69,7 +74,7 @@ describe('governance narrative precedence', () => {
       instNames: ['council hall'],
     });
 
-    expect(result.stability).toBe('Desperate — hunger is eroding order');
+    expect(result.stability).toBe('Desperate (hunger is eroding order)');
     expect(result.recentConflict).toBe(
       'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.',
     );

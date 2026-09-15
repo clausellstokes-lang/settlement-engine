@@ -56,7 +56,7 @@ export function normalizePlotHook(h) {
 
 /**
  * powerStructure.stability is a LABEL ('Stable', 'Ordered (strong military
- * presence)', 'Tense (external threat)', 'Unstable — criminal governance', …;
+ * presence)', 'Tense (external threat)', 'Unstable (criminal governance)', …;
  * powerGenerator's vocabulary), not a 0-100 score. Rendering it as
  * `${label}/100` produced 'Tense (external threat)/100', and `>= 60` against
  * a string is always false — every settlement's power note claimed contested

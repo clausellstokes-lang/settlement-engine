@@ -435,13 +435,57 @@ describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
     const gov = read('src/generators/power/governanceNarrative.js');
     const absent = STABILITY_BANDS.filter((b) => !gov.includes(`'${b}`));
     expect(absent, 'stability band(s) no longer present in governanceNarrative.js').toEqual([]);
-    // The producer uses ' — ', ' (…)' and '; …' — one vocabulary must cover all three.
+    // ⭐ THE PRODUCER NOW EMITS ONE CONVENTION, `<Band> (<gloss>)`, SINCE LT41b RULING 3
+    // (the chair, 2026-09-15). THE VOCABULARY DID NOT MOVE BY ONE WORD — that is the
+    // point of binding on the BAND rather than on the separator, and this arm is the
+    // proof: not a single entry above was added, removed or re-spelled to land it.
+    // The three assertions below are KEPT AS THEY WERE, because all three spellings are
+    // PERSISTED on saves and keep arriving here; they are now tolerance rather than a
+    // description of the producer. The live twins are pinned in the arm beneath.
     expect(bandOf('Fractured — no stable governing authority', STABILITY_BANDS)).toBe('Fractured');
     expect(bandOf('Critical (active siege — survival priority)', STABILITY_BANDS)).toBe('Critical');
     expect(bandOf('Stable; monster threat active', STABILITY_BANDS)).toBe('Stable');
     // Longest-first: 'Unstable' must not resolve to 'Stable', nor 'Enforced Order' to 'Ordered'.
     expect(bandOf('Unstable — criminal governance', STABILITY_BANDS)).toBe('Unstable');
     expect(bandOf('Enforced Order (authoritarian)', STABILITY_BANDS)).toBe('Enforced Order');
+  });
+
+  it('the NINE RETIRED stability spellings recover the same band as their live twins (persisted saves)', () => {
+    // ⛔ THE LIFECYCLE ARM LT41b RULING 3 OWES. `powerStructure.stability` is PERSISTED in
+    // every save ever written; the ruling collapsed the producer's three separator
+    // conventions onto `<Band> (<gloss>)` with NO migration and NO save rewrite, because
+    // every existing world is test data (the owner's law). So the retired spellings are
+    // not history — they are live input to this recovery for as long as the product
+    // exists, and the recovery must answer them IDENTICALLY, forever.
+    //
+    // Each row is [retired spelling, live spelling]. The arm asserts the band is the same
+    // on both AND that the band is non-null, so a recovery that started returning null
+    // for everything could not pass by making the two sides equally wrong.
+    const gov = read('src/generators/power/governanceNarrative.js');
+    const RETIRED_TO_LIVE = [
+      ['Unstable — criminal governance', 'Unstable (criminal governance)'],
+      ['Critical (active siege — survival priority)', 'Critical (active siege, survival priority)'],
+      ['Fractured — no stable governing authority', 'Fractured (no stable governing authority)'],
+      ['Shaken — institutional trust collapsed', 'Shaken (institutional trust collapsed)'],
+      ['Desperate — hunger is eroding order', 'Desperate (hunger is eroding order)'],
+      ['Anxious — disease is overriding normal authority', 'Anxious (disease is overriding normal authority)'],
+      ['Volatile — power is available to whoever moves first', 'Volatile (power is available to whoever moves first)'],
+      ['Strained — debt obligations constrain every decision', 'Strained (debt obligations constrain every decision)'],
+      ['Tense — regional monster threat', 'Tense (regional monster threat)'],
+    ];
+    expect(RETIRED_TO_LIVE.length, 'the ruling retired exactly nine spellings').toBe(9);
+    for (const [retired, live] of RETIRED_TO_LIVE) {
+      const band = bandOf(live, STABILITY_BANDS);
+      expect(band, `no band for the LIVE label ${live}`).not.toBeNull();
+      expect(bandOf(retired, STABILITY_BANDS), `retired ${retired}`).toBe(band);
+      // The two really are different strings, or this arm asserts nothing.
+      expect(retired).not.toBe(live);
+      // And the LIVE spelling is the one the producer actually ships today.
+      expect(gov.includes(`'${live}'`), `producer no longer emits ${live}`).toBe(true);
+    }
+    // The retired `<Band>; <note>` annotation form, which the fold replaced, recovers too.
+    expect(bandOf('Unstable (pervasive organized crime); monster threat active', STABILITY_BANDS))
+      .toBe(bandOf('Unstable (pervasive organized crime, monster threat active)', STABILITY_BANDS));
   });
 
   // ── THE INVERSE OF THE ARMS ABOVE, and the reason it belongs beside them ──────

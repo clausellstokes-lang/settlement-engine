@@ -247,7 +247,7 @@ const deriveBaselineStability = ({
   neighbourRelationship,
 }) => {
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
-  if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
+  if (stressFlags.crimeIsGovt) return 'Unstable (criminal governance)';
   if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
   if (stressFlags.merchantArmy) return 'Fragile (private security, no public law)';
 
@@ -286,31 +286,31 @@ const deriveBaselineStability = ({
  */
 const applyStressStability = (baselineStability, hasStress) => {
   if (hasStress('under_siege')) {
-    return 'Critical (active siege — survival priority)';
+    return 'Critical (active siege, survival priority)';
   }
   if (hasStress('occupied')) {
     return 'Suppressed (under occupation: resistance simmers)';
   }
   if (hasStress('politically_fractured')) {
-    return 'Fractured — no stable governing authority';
+    return 'Fractured (no stable governing authority)';
   }
   if (hasStress('recently_betrayed')) {
-    return 'Shaken — institutional trust collapsed';
+    return 'Shaken (institutional trust collapsed)';
   }
   if (hasStress('famine')) {
-    return 'Desperate — hunger is eroding order';
+    return 'Desperate (hunger is eroding order)';
   }
   if (hasStress('plague_onset')) {
-    return 'Anxious — disease is overriding normal authority';
+    return 'Anxious (disease is overriding normal authority)';
   }
   if (hasStress('succession_void')) {
-    return 'Volatile — power is available to whoever moves first';
+    return 'Volatile (power is available to whoever moves first)';
   }
   if (hasStress('infiltrated')) return baselineStability;
   if (hasStress('indebted')) {
     return baselineStability.includes('Unstable')
       ? baselineStability
-      : 'Strained — debt obligations constrain every decision';
+      : 'Strained (debt obligations constrain every decision)';
   }
   if (
     hasStress('monster_pressure') &&
@@ -320,6 +320,12 @@ const applyStressStability = (baselineStability, hasStress) => {
   }
   return baselineStability;
 };
+
+// ONE convention, `<Band> (<gloss>)`: a note folds INTO the gloss, never a second
+// parenthetical and never the retired `; ` (LT41b RULING 3). labelBands.js's header
+// holds the argument and the reader-tolerance law for the two retired spellings.
+const withGloss = (label, note) => (label.endsWith(')')
+  ? `${label.slice(0, -1)}, ${note})` : `${label} (${note})`);
 
 /**
  * "Plagued" is the canonical high-monster-threat token. Threat annotates an
@@ -333,8 +339,8 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
     marker => normalizedStability.includes(marker),
   );
   return alreadyExpressesPressure
-    ? `${stability}; monster threat active`
-    : 'Tense — regional monster threat';
+    ? withGloss(stability, 'monster threat active')
+    : 'Tense (regional monster threat)';
 };
 
 const deriveInstitutionSignals = (institutionNames) => ({

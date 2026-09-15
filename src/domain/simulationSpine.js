@@ -631,7 +631,8 @@ function tensionName(tension) {
  * FIRST WORD.
  *
  * ⛔ IT WAS A SUBSTRING TEST, AND THE SUBSTRING WAS A FALSE-STATEMENT BUG.
- * `governanceNarrative.js` emits `Fractured - no stable governing authority`.
+ * `governanceNarrative.js` emits `Fractured (no stable governing authority)`, and
+ * emitted `Fractured - no stable governing authority` when this defect was found.
  * A substring test for `stable` MATCHES IT, so this deriver reported the
  * trajectory `continuity` for a settlement that has NO GOVERNING AUTHORITY AT
  * ALL — the reader saying the opposite of the truth, and every consumer of it
