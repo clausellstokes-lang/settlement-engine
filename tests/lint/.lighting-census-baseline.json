@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a8cd9deb3ee1a5494a8bc02e1763b2b902295d8c",
+  "measuredAtSha": "09c789cdfeda12e03f8abf176547e3d493e921a2",
   "measuredBy": "lane LT39 (Opus 5 — the relationship chronicle surface)",
   "date": "2026-09-15",
-  "note": "LT39 car 1 adds six titles to two existing suites (tests/domain/chronicleReadModel.test.js +4, tests/components/advanceReport.test.jsx +2) and no new test FILE, so files/parked/credited are unchanged and only the title count moves: 24169 -> 24175. No suite title was added, so suiteTitles holds at 6452.",
-  "files": 2563,
+  "note": "LT39 car 2 lands ONE new test file (tests/domain/display/relationshipChronicle.test.js, 6 describes / 18 titles) and no production test-shaped file, so files and credited each take +1, parked holds, and the title and suite layers move by that file alone.",
+  "files": 2564,
   "parked": 375,
-  "credited": 2188,
-  "titles": 24175,
-  "suiteTitles": 6452
+  "credited": 2189,
+  "titles": 24193,
+  "suiteTitles": 6458
 }
