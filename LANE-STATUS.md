@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 12:26:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 12:34:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = a803dee7a Plan §930: wave 2 of the long tail landed and chair-verified in three sealed docks (#29 t
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 25
+- HOLD-VITEST absent · runner count 21
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -114,12 +114,12 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_406e67e7-fa9** (mtime 09-15 12:26): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_406e67e7-fa9/`
-    - `a7e604d4d` ? · IN FLIGHT · transcript 09-15 12:26 333 KB · 2 tool calls · last: Bash sed -n '370,410p' /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514
-    - `a3ba4fb58` ? · IN FLIGHT · transcript 09-15 12:26 339 KB · 3 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-    - `a5a2edd52` ? · IN FLIGHT · transcript 09-15 12:26 335 KB · 3 tool calls · last: Bash ls /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a05958357` ? · IN FLIGHT · transcript 09-15 12:26 329 KB · 2 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
-    - `aa9c5b1cc` ? · IN FLIGHT · transcript 09-15 12:26 330 KB · 2 tool calls · last: Bash ls /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a88f44407` ? · IN FLIGHT · transcript 09-15 12:26 333 KB · 2 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `a7e604d4d` ? · IN FLIGHT · transcript 09-15 12:34 755 KB · 47 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a3ba4fb58` ? · IN FLIGHT · transcript 09-15 12:34 817 KB · 55 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `a5a2edd52` ? · IN FLIGHT · transcript 09-15 12:34 693 KB · 34 tool calls · files: flags.txt, waves.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a05958357` ? · IN FLIGHT · transcript 09-15 12:32 665 KB · 43 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `aa9c5b1cc` ? · IN FLIGHT · transcript 09-15 12:34 674 KB · 35 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a88f44407` ? · IN FLIGHT · transcript 09-15 12:33 881 KB · 54 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
 
 ## PROCESSES: 
-load: 190.23 109.95 79.36
+load: 325.50 168.20 115.23
