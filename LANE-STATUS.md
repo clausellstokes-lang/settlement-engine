@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 01:02:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 01:07:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d6828148d SOL_QUEUE §4 corrected on the ledger copy to match LONG TAIL #30 car 1 on the build slot 
 
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 3
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -114,11 +114,11 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_d358b43d-411** (mtime 09-15 00:58): agent calls 5 (5 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 5 — mirror `_progress/wf_d358b43d-411/`
-    - `ae3631118` ? · IN FLIGHT · transcript 09-15 01:02 628 KB · 35 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a83d85364` ? · IN FLIGHT · transcript 09-15 01:02 606 KB · 43 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a8d7f3fa2` ? · IN FLIGHT · transcript 09-15 01:02 640 KB · 32 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `ac0be6b72` ? · IN FLIGHT · transcript 09-15 01:02 658 KB · 49 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a259df976` ? · IN FLIGHT · transcript 09-15 01:02 782 KB · 42 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `ae3631118` ? · IN FLIGHT · transcript 09-15 01:07 910 KB · 62 tool calls · files: em_candidates.txt, baseline_keys.txt, noncomment_em.txt, nc_files.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a83d85364` ? · IN FLIGHT · transcript 09-15 01:07 988 KB · 93 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a8d7f3fa2` ? · IN FLIGHT · transcript 09-15 01:07 982 KB · 73 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `ac0be6b72` ? · IN FLIGHT · transcript 09-15 01:07 978 KB · 94 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a259df976` ? · IN FLIGHT · transcript 09-15 01:07 1073 KB · 72 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_57faeea3-385** (mtime 09-14 21:35): agent calls 4 (4 distinct) · DONE 4 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_57faeea3-385/`
     - `ab9ce8924` ? · DONE · transcript 09-14 23:39 1436 KB · 116 tool calls · files: $G/century.txt, >$G/century.txt, $G/testratchet.txt, >$G/testratchet.txt · result: {"n": 28, "title": "The gate cannot go green", "stateOfRecord": "THE RECORD SAYS FIVE THINGS, AND FOUR OF THE FIVE HAVE NO REFERENT LEFT. THE FIFTH IS TRUE ON A
     - `afde2b45d` ? · DONE · transcript 09-14 22:09 1452 KB · 124 tool calls · result: {"n": 29, "title": "The instrument estate's own debt", "stateOfRecord": "SIX CLAIMS, AND THE RECORD ITSELF ALREADY WITHDRAWS ONE OF THEM.\n\n(1) THE 10/10 CENSU
@@ -473,4 +473,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 2.44 3.84 5.89
+load: 3.13 3.48 5.07
