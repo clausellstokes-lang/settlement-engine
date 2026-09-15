@@ -21,7 +21,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 import { DOCK } from './lib/brief.mjs';
 import {
-  buildRender, callModel, countTokens, parseArgs, refuteAll,
+  buildRender, callModel, callTier1, countTokens, judgeAll, parseArgs,
 } from './render-town.mjs';
 
 const { rateGrid } = await import(`${DOCK}/scripts/prose-rate-corpus.mjs`);
@@ -92,15 +92,28 @@ async function renderEpoch(client, settlement, world, prevCards, campaignState, 
         row.refused = true;
         row.category = result.category;
       } else {
-        const { judged, page } = refuteAll(result.units, built.card);
-        row.verdicts = judged.reduce((acc, r) => {
-          acc[r.verdict] = (acc[r.verdict] || 0) + 1;
+        // ⭐ THE TWO READERS, IN THE PRODUCT'S OWN ORDER AND THROUGH THE PRODUCT'S OWN JUDGE
+        // (ruling 25 / W3a car 1, W3b car 3): tier 0 keeps or patches, then the SECOND reader's
+        // checklist runs on what tier 0 kept and falls at the same grain. `refuteAll` was this
+        // call before W3a moved the judge into `scribeBrief.js`; the name went with it.
+        const second = await callTier1(client, built, result.units);
+        const judged = judgeAll(result.units, built.card, second?.answers || []);
+        row.verdicts = judged.rows.reduce((acc, r) => {
+          const v = r.verdict ? r.verdict.verdict : 'NONE';
+          acc[v] = (acc[v] || 0) + 1;
           return acc;
         }, {});
-        row.units = judged.map((r) => ({
-          pool: r.pool, text: r.unit.text, verdict: r.verdict, findings: r.findings,
+        row.dropped = judged.dropped;
+        row.patched = judged.patched;
+        row.tier1Dropped = judged.tier1Dropped;
+        row.units = judged.rows.map((r) => ({
+          pool: `${r.unit.blockId} :: ${r.unit.poolKey}`,
+          spine: r.unit.spine,
+          verdict: r.verdict ? r.verdict.verdict : null,
+          arms: r.verdict ? r.verdict.arms : [],
+          findings: r.verdict ? r.verdict.findings : [],
         }));
-        row.page = page;
+        row.page = judged.page;
         row.usage = result.usage;
         row.cacheReadInputTokens = result.usage?.cache_read_input_tokens ?? null;
         row.wallMs = result.wallMs;
