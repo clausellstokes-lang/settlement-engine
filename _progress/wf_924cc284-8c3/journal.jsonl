@@ -1,0 +1,5 @@
+{"type":"launched"}
+{"type":"started","key":"v2:413786b0a2a4ad7278efdb8a0510e66ae762544a8af40126ab201d031fb5bdeb","agentId":"a1f64f5e5097524e3","label":"read:gitlog","phase":"Read"}
+{"type":"started","key":"v2:f25edd7683592454433996ecbeeb2228eb118ce47a74ec7dc5ac3c3510d2c066","agentId":"a88ec681b9cf3036f","label":"read:ledger","phase":"Read"}
+{"type":"started","key":"v2:4a8a5a0852e62812b28527089ec5681a3a0a13d26abe72182e29825fe1d084dc","agentId":"af373d640fddf51a4","label":"read:volume-diary","phase":"Read"}
+{"type":"started","key":"v2:3233b66dbf1c66a1ce1ed8a6f1414d7a4dc9a255c377c66af4b0b51e814839c7","agentId":"a102eb4be6b7fc991","label":"read:older-economy","phase":"Read"}
