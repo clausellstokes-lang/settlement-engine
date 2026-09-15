@@ -424,9 +424,34 @@ function serverActiveSkus(src = readRepo(CREATE_CHECKOUT)) {
 
 describe('ACTIVE_CHECKOUT_SKUS ↔ .env.example (the deployer-facing document)', () => {
   it('the derived list is the active packs plus the standing products, dial-aware', () => {
-    expect([...ACTIVE_CHECKOUT_SKUS]).toEqual([
+    // ⚠⭐ THIS ARM ASSERTS THE DIAL-INVARIANT SPINE, NEVER THE DIAL'S VALUE.
+    //
+    // It used to be an EXACT six-element literal, which made it the ONE place the
+    // owner's one-line `ANNUAL_FACTOR = 0 → 10` flip would have gone red — against
+    // the promise the landed packet makes in its own words (the derivation note at
+    // src/config/pricing.js, and docs/implementation/packets/website/WEB-8.md
+    // "green at 0 and at 10"), and against the correction R-PINS-SWEEP had already
+    // landed on this defect's manifest sibling (PACKET_MANIFEST's WEB-8
+    // requiredSymbols row, now symbol-only). A latent red named by no record until
+    // the long-tail money-path recon found it.
+    //
+    // The cure KEEPS the exactness the pin was for — no SKU may join the sellable
+    // list without a deliberate edit right here — and removes only the dial
+    // coupling, by filtering out the single member the dial governs. Its presence
+    // is then asserted below as the dial's CONSEQUENCE, which is the one place in
+    // this file the dial's value is read.
+    const dialInvariantSpine = ACTIVE_CHECKOUT_SKUS.filter((sku) => sku !== CARTOGRAPHER_ANNUAL.key);
+    expect(dialInvariantSpine).toEqual([
       'credits_25', 'credits_60', 'credits_150', 'premium', 'single_dossier', 'surveyor',
     ]);
+    // A chair is given, never sold (ABOLISHED_PRODUCTS, ODQ §118). The anchor is
+    // `premium` — a sibling produced by the same derivation — so an emptied or
+    // re-shaped list reds on the anchor rather than reporting a comfortable
+    // absence from nothing.
+    expectAbsentWithAnchor(
+      ACTIVE_CHECKOUT_SKUS, 'founder_lifetime', 'premium',
+      'the abolished SKU is never sellable',
+    );
     // THE DIAL'S CONSEQUENCE, not the dial's value: this holds at ANNUAL_FACTOR 0
     // and at 10, so WEB-10's flip needs no edit here.
     expect(ACTIVE_CHECKOUT_SKUS.includes('premium_annual')).toBe(ANNUAL_FACTOR > 0);
