@@ -1,4 +1,4 @@
-# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:29:58
+# wf_838e25d6-4ce — per-agent progress, 2026-09-15 17:35:50
     - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
     - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
     - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
@@ -11,9 +11,9 @@
     - `a8cdffdba` ? · DONE · transcript 09-15 17:23 955 KB · 51 tool calls · result: {"family": "INT", "summary": "INT \u2014 the interior program, 8 waves, 7 of them unlanded. The compiled volume is /private/tmp/claude-502/-Users-cstokes-Deskto
     - `a28674c8c` ? · DONE · transcript 09-15 17:24 1040 KB · 57 tool calls · result: {"family": "GR-CW", "summary": "Seven waves to price: GR-4 and GR-5 part-built, GR-6/GR-7/CW-1/CW-2x/CW-3 unbuilt, with CW-3 the terminus of the nine-wave criti
     - `aeee29db4` ? · DONE · transcript 09-15 17:26 934 KB · 69 tool calls · result: {"family": "LG0 \u2014 LOGISTICS LG-0 and LG-1 (item #33, the family's first train)", "summary": "The re-price against code changes LG-0's bill substantially, i
-    - `a9cb1d825` ? · IN FLIGHT · transcript 09-15 17:29 600 KB · 25 tool calls · files: worker-graph.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a21425ce4` ? · IN FLIGHT · transcript 09-15 17:29 599 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a01fded51` ? · IN FLIGHT · transcript 09-15 17:29 582 KB · 24 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `aa34b3f70` ? · IN FLIGHT · transcript 09-15 17:29 614 KB · 26 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a166442fb` ? · IN FLIGHT · transcript 09-15 17:29 568 KB · 19 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a1d56aa9d` r2 · IN FLIGHT · transcript 09-15 17:29 624 KB · 24 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a9cb1d825` ? · IN FLIGHT · transcript 09-15 17:35 858 KB · 52 tool calls · files: worker-graph.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a21425ce4` ? · IN FLIGHT · transcript 09-15 17:35 885 KB · 62 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a01fded51` ? · IN FLIGHT · transcript 09-15 17:34 740 KB · 37 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `aa34b3f70` ? · IN FLIGHT · transcript 09-15 17:34 764 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a166442fb` ? · IN FLIGHT · transcript 09-15 17:35 843 KB · 45 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a1d56aa9d` r2 · IN FLIGHT · transcript 09-15 17:35 847 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
