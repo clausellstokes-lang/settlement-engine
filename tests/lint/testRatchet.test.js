@@ -829,8 +829,16 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // files spell a producer's authored dashed vocabulary (a total map's keys and two parsed delimiters); the shrink-only door
     // refuses the 311 → 319 rise and the generator import is forbidden in writing. Structural cure: an authored-vocabulary
     // exemption class in the voice scanner (§901). Banking keeps the guard visible; OWED_CEILING moves 2 → 3 with it.
-    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
-      'NOT FREED — banked at §900 with attribution in the census entry; the scanner exemption class is the cure (§901).',
+    // ⭐⭐ 2026-09-15, LONG TAIL #41 — THE TIER-2 VOICE PER-FILE ROW IS FREED, NOT FORGIVEN, BY THE CURE ITS OWN CAUSE LINE
+    // NAMED. §901's "declared authored-vocabulary exemption class in the voice scanner" now exists: car 1 built a NAMED
+    // allowlist keyed file -> whole literal -> {count, why} and a FIFTH TIER that scans `src/generators`, the directory the
+    // eight banked dashes are TRANSCRIBED FROM and which no tier had ever read; car 2 declared those eight (five
+    // COMPLEXITY_LABEL values mirroring prosperity.js:296-314, the FOOD_POOL_OF key mirroring foodGenerator.js:342, and the
+    // bare `'—'` split delimiter matched to the separator safetyProfile.js:235 composes), each verified byte-identical with
+    // `grep -F`. The arm is GREEN by execution: `Tests 28 passed (28)`, and the previously-throwing documented refreeze
+    // `UPDATE_VOICE_BASELINE=1` now runs clean and rewrites all three baselines BYTE-IDENTICALLY. The exemption cannot rot:
+    // every entry is count-pinned and a seeded third `'—'` in generalStateProse.js reds it ("declared 2, measured 3"). The
+    // census row is removed in the SAME ACT as this entry, and OWED_CEILING drops by exactly the one row burned.
     // ⭐⭐ 2026-08-31, VOICE-1b (ODQ §854) — THE FOUR VOICE BLOCKERS WERE STALE IN BOTH
     // FIGURES AND PRESCRIPTION, AND THE PRESCRIPTION WAS THE FORBIDDEN CURE. Each of the
     // four lines below used to say the cure was "a re-freeze of the voice ratchet fixture
@@ -923,7 +931,13 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // 2 → 3 on 2026-09-05 (§900): the Tier-2 voice per-file row re-enters OWED (declared, attributed) — see WALKER_ROWS_OWED.
   // 5 → 3 on 2026-09-06 (§902): the two writer-reach rows FREED by the rung-18 re-anchoring (OSR-SCHEMA18); the voice
   // per-file row, enforcement-claims and the owner-gated golden-master stay.
-  const OWED_CEILING = 3; // 3 → 5 on 2026-09-05 (§900): the two writer-reach ↔ OSR one-flag rows enter OWED, declared (see WALKER_ROWS_OWED); both retire at OSR rung 18.
+  // 3 → 2 on 2026-09-15 (LONG TAIL #41): the Tier-2 voice per-file row is FREED, not forgiven — §901's named
+  // authored-vocabulary exemption class was built and the arm is green by execution (see WALKER_ROWS_OWED above).
+  // Same arithmetic as every retirement before it: the census entry, this ledger entry and this ceiling move in ONE act,
+  // and the ceiling drops by exactly the one row burned. A ledger corpse silently lowers the effective ceiling and lets
+  // the next real walker row slip in under a cap nobody lowered — which is why this line moves with the deletion, not
+  // after it. enforcement-claims and the owner-gated golden-master remain.
+  const OWED_CEILING = 2; // 3 → 5 on 2026-09-05 (§900): the two writer-reach ↔ OSR one-flag rows enter OWED, declared (see WALKER_ROWS_OWED); both retire at OSR rung 18.
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
